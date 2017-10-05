@@ -1,0 +1,58 @@
+@import '../custom';
+
+.ez-field-edit-ezauthor {
+    .form-row {
+        background-color: $ez-ground-base;
+        padding: 1rem;
+    }
+
+    .ez-sub-field-text-zone {
+        .form-control-label {
+            margin-bottom: 0;
+        }
+    }
+
+    .ez-author-tools {
+        display: flex;
+        align-items: center;
+        padding-top: 1.5rem;
+
+        button {
+            margin: 0 .5rem;
+        }
+    }
+
+    &.is-invalid {
+        .ez-sub-field {
+            &.is-invalid {
+                color: $ez-color-danger;
+            }
+        }
+
+        .ez-field-edit-ui {
+            &:before {
+                display: none;
+            }
+        }
+
+        .ez-author-row {
+            position: relative;
+
+            &.is-invalid {
+                &:before {
+                    content : '!';
+                    position: absolute;
+                    top: 0;
+                    left: -20px;
+                    width: 20px;
+                    background: red;
+                    color: white;
+                    text-align: center;
+                    font-size: 1.5rem;
+                    border-top-left-radius: 5px;
+                    border-bottom-left-radius: 5px;
+                }
+            }
+        }
+    }
+}
