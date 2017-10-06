@@ -1,0 +1,56 @@
+{% trans_default_domain 'locationview' %}
+{% import _self as tab %}
+{% form_theme form_content_location_add 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+{% form_theme form_content_location_remove 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+
+<section>
+    {{ form(form_content_location_add) }}
+    {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.locations.content_locations'|trans()|desc('Content locations'), tools: tab.table_header_tools(form_content_location_add.data, form_content_location_remove.data) } %}
+    {{ form_start(form_content_location_remove) }}
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>{{ 'tab.locations.path'|trans()|desc('Path') }}</th>
+            <th>{{ 'tab.locations.subitems'|trans()|desc('Sub-items') }}</th>
+            <th colspan="2">{{ 'tab.locations.visibility'|trans()|desc('Visibility') }}</th>
+            <th>{{ 'tab.locations.main'|trans()|desc('Main') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if locations is not empty %}
+            {% for location in locations %}
+                <tr>
+                    <td>{{ form_widget(form_content_location_remove.data.locations[location.id], {'attr': {'disabled': not location.canDelete}}) }}</td>
+                    <td>
+                        {% include 'EzPlatformAdminUiBundle:parts:path.html.twig' with {'locations': location.pathLocations} %}
+                    </td>
+                    <td>{{ location.childCount }}</td>
+                    <td>
+                        {% if location.hidden %}
+                            {{ 'tab.locations.hidden'|trans()|desc('Hidden') }}
+                        {% else %}
+                            {% if location.invisible %}
+                                {{ 'tab.locations.hidden_by_superior'|trans()|desc('Hidden by superior') }}
+                            {% else %}
+                                {{ 'tab.locations.visible'|trans()|desc('Visible') }}
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td></td>
+                    <td>{% if location.main %}Yes{% else %}No{% endif %}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+    {{ form_end(form_content_location_remove) }}
+</section>
+
+{% include 'EzPlatformAdminUiBundle:content/tab/locations:panel_swap.html.twig' with {'form': form_content_location_swap} %}
+
+{% macro table_header_tools(form_add, form_remove) %}
+    <button class="btn btn-secondary btn--udw-add">{{ form_add.add.vars.label|trans({}, form_add.add.vars.translation_domain) }}</button>
+    <button class="btn btn-danger btn--trigger"
+            data-click="#{{ form_remove.remove.vars.id }}">{{ form_remove.remove.vars.label|trans({}, form_remove.remove.vars.translation_domain) }}</button>
+{% endmacro %}

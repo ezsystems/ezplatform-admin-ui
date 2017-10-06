@@ -1,0 +1,14 @@
+{% trans_default_domain "systeminfo" %}
+
+<h1>{{ 'hardware'|trans }}</h1>
+<dl>
+    <dt>{{ 'cpu'|trans }}</dt>
+    <dd>
+        {{ info.cpuType }}
+        {% if info.cpuSpeed %}
+            ({{ info.cpuCount }}x{{ info.cpuSpeed }}&nbsp;{{ 'mhz'|trans }})
+        {% endif %}
+    </dd>
+    <dt>{{ 'memory'|trans }}</dt>
+    <dd>{{ info.memorySize|ez_file_size( 1 ) }}</dd>
+</dl>

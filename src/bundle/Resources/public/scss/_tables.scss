@@ -1,0 +1,40 @@
+@import 'custom';
+
+.ez-table-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: $ez-ground-primary;
+    align-items: center;
+    padding: .5rem 1rem;
+
+    h5 {
+        margin-bottom: 0;
+        font-weight: bold;
+    }
+
+    .ez-icon {
+        width: 1rem;
+        height: 1rem;
+        fill: $white;
+        margin-right: .5rem;
+    }
+}
+
+.ez-dashboard {
+    .table {
+        thead {
+            background-color: $ez-ground-primary-inverted-light;
+            color: $white;
+
+            th {
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+.ez-content-view {
+    .table {
+        margin-bottom: 3rem;
+    }
+}

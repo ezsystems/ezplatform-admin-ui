@@ -1,0 +1,204 @@
+# Desc: Copy
+copy: Copy
+
+# Desc: Move
+move: Move
+
+send:
+    to:
+        # Desc: Send to Trash
+        trash: 'Send to Trash'
+
+tab:
+    details:
+        # Desc: Content details
+        content_details: 'Content details'
+
+        # Desc: Content ID
+        content_id: 'Content ID'
+
+        # Desc: Content remote ID
+        content_remote_id: 'Content remote ID'
+
+        # Desc: Creator
+        creator: Creator
+
+        # Desc: Last contributor
+        last_contributor: 'Last contributor'
+
+        # Desc: Location ID
+        location_id: 'Location ID'
+
+        # Desc: Location remote ID
+        location_remote_id: 'Location remote ID'
+
+        # Desc: Published version
+        published_version: 'Published version'
+
+        # Desc: Section details
+        section_details: 'Section details'
+
+        # Desc: Section ID
+        section_id: 'Section ID'
+
+        # Desc: Section identifier
+        section_identifier: 'Section identifier'
+
+        # Desc: Section name
+        section_name: 'Section name'
+
+        # Desc: Technical details
+        technical_details: 'Technical details'
+
+        # Desc: Translations
+        translations: Translations
+
+    locations:
+        # Desc: Content locations
+        content_locations: 'Content locations'
+
+        # Desc: Hidden
+        hidden: Hidden
+
+        # Desc: Hidden by superior
+        hidden_by_superior: 'Hidden by superior'
+
+        # Desc: Main
+        main: Main
+
+        # Desc: Path
+        path: Path
+
+        # Desc: Sub-items
+        subitems: Sub-items
+
+        # Desc: Visibility
+        visibility: Visibility
+
+        # Desc: Visible
+        visible: Visible
+
+    name:
+        # Desc: Content
+        content: Content   # FIXME
+
+        # Desc: Details
+        details: Details   # FIXME
+
+        # Desc: Locations
+        locations: Locations   # FIXME
+
+        # Desc: Relations
+        relations: Relations   # FIXME
+
+        # Desc: Translations
+        translations: Translations   # FIXME
+
+        # Desc: URL
+        urls: URL   # FIXME
+
+        # Desc: Versions
+        versions: Versions   # FIXME
+
+    relations:
+        # Desc: This content item has no related content.
+        no_relations: 'This content item has no related content.'
+
+        # Desc: This content item has no reverse relations.
+        no_reverse_relations: 'This content item has no reverse relations.'
+
+        # Desc: Related content (content items used by %contentName%)
+        related_content: 'Related content (content items used by %contentName%)'
+
+        # Desc: Reverse relations (content items using %contentName%)
+        reverse_relations: 'Reverse relations (content items using %contentName%)'
+
+        table:
+            # Desc: Content type
+            content_type: 'Content type'
+
+            # Desc: Name
+            name: Name
+
+            # Desc: Relation type
+            relation_type: 'Relation type'
+
+            # Desc: Content level relation
+            relation_type.content_level_relation: 'Content level relation'
+
+            # Desc: Embed
+            relation_type.embed: Embed
+
+            # Desc: Field
+            relation_type.field: Field
+
+            # Desc: Link
+            relation_type.link: Link
+
+    translations:
+        # Desc: Language code
+        language_code: 'Language code'
+
+        # Desc: Language name
+        language_name: 'Language name'
+
+        # Desc: Translation manager
+        translation_manger: 'Translation manager'
+
+    urls:
+        # Desc: Custom URL aliases for %contentName%
+        custom_url_aliases: 'Custom URL aliases for %contentName%'
+
+        # Desc: Language
+        language: Language
+
+        # Desc: This content item has no custom url aliases.
+        no_custom_urls: 'This content item has no custom url aliases.'
+
+        # Desc: This content item has no system urls.
+        no_system_urls: 'This content item has no system urls.'
+
+        system:
+            # Desc: System URL
+            title: 'System URL'
+
+        # Desc: Type
+        type: Type
+
+        # Desc: Direct
+        type.direct: Direct
+
+        # Desc: Redirect
+        type.redirect: Redirect
+
+        # Desc: URL
+        url: URL
+
+    versions:
+        # Desc: Archived versions
+        archived_versions: 'Archived versions'
+
+        # Desc: Draft under edit
+        draft_under_edit: 'Draft under edit'
+
+        # Desc: You don't have access to view the content item's versions
+        no_permission: 'You don''t have access to view the content item''s versions'
+
+        # Desc: Published version
+        published_version: 'Published version'
+
+        table:
+            # Desc: Contributor
+            contributor: Contributor
+
+            # Desc: Created
+            created: Created
+
+            # Desc: Last saved
+            last_saved: 'Last saved'
+
+            # Desc: Modified language
+            modified_language: 'Modified language'
+
+            # Desc: Version
+            version: Version

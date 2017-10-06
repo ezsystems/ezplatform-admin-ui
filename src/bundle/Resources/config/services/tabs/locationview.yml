@@ -1,0 +1,7 @@
+services:
+    EzPlatformAdminUi\Tab\LocationView\:
+        resource: "../../../lib/Tab/LocationView/*"
+        parent: EzPlatformAdminUi\Tab\AbstractTab
+        public: true
+        tags:
+            - { name: ezplatform.tab, group: location-view }

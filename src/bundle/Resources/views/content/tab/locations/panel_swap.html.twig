@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+<div class="ez-list-toolbar">
+    <h2 class="ez-list-toolbar-label">{{ 'tab.locations.location_content_swap'|trans()|desc('Location Content Swap') }}</h2>
+</div>
+<p>
+    {{ 'tab.locations.swap_with_another'|trans()|desc('Swap the content item at this location with another') }}
+    {{ form_widget(form.data.swap, {'attr': {'class': 'btn btn-outline-secondary btn--udw-swap', 'data-root-location': '2'}}) }}
+    {{ form_widget(form.data.current_location) }}
+    {{ form_widget(form.data.new_location) }}
+</p>
+{{ form_end(form) }}

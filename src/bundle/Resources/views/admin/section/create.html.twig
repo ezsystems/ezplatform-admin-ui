@@ -1,0 +1,29 @@
+{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+{% trans_default_domain 'section' %}
+
+{% block breadcrumbs %}
+    {% include 'EzPlatformAdminUiBundle:parts:breadcrumbs.html.twig' with {
+    'items': [
+    { value: 'breadcrumb.admin'|trans([], 'messages') },
+    { url: path('ezplatform.section.list'), value: 'section.list'|trans },
+    { value: 'section.new'|trans }
+    ]
+    } %}
+{% endblock %}
+
+{% block pageTitle %}
+    {{ 'section.new'|trans }}
+{% endblock %}
+
+{% block content %}
+    <section class="container">
+        {{ form_start(form_section_create) }}
+        {{ form_row(form_section_create.data.identifier) }}
+        {{ form_row(form_section_create.data.name) }}
+
+        <a href="{{ path("ezplatform.section.list") }}" class="btn btn-default">{{ "section.form.cancel"|trans }}</a>
+        {{ form_widget(form_section_create.data.create, {"attr": {"class": "btn btn-primary"}}) }}
+        {{ form_end(form_section_create) }}
+    </section>
+{% endblock %}
+

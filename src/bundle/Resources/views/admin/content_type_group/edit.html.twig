@@ -1,0 +1,40 @@
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+
+{% trans_default_domain 'content_type' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans([], 'messages') },
+        { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans },
+        { value: 'content_type_group.breadcrumb.edit'|trans({ '%identifier%': content_type_group.identifier }) }
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'content_type_group.view.edit.title'|trans({'%identifier%': content_type_group.identifier}),
+        iconName: 'content-types'
+    } %}
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+
+    <section class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                {{ form_widget(form) }}
+            </div>
+        </div>
+    </section>
+
+    <section class="container mt-4 mb-4">
+        <div class="btn-toolbar justify-content-end" role="toolbar" >
+            <button class="btn btn-primary">
+                {{ 'content_type_group.view.edit.action.save'|trans }}
+            </button>
+        </div>
+    </section>
+
+    {{ form_end(form) }}
+{% endblock %}

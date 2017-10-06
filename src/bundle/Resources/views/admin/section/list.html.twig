@@ -1,0 +1,66 @@
+{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+{% trans_default_domain 'section' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans([], 'messages') },
+        { value: 'section.list'|trans }
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'section.list'|trans,
+        iconName: 'sections'
+    } %}
+{% endblock %}
+
+{% block content %}
+    <div id="react-udw"></div>
+    <section class="container mt-5">
+        <div class="ez-table-header">
+            <h5>{{ 'section.list'|trans }}</h5>
+            <div>
+                <a href="{{ path('ezplatform.section.create') }}" class="btn btn-primary"
+                   data-icon="&#xe616;"{% if not can_edit %} data-disabled{% endif %}>{{ 'section.new'|trans }}</a>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'section.name'|trans }}</th>
+                    <th>{{ 'section.identifier'|trans }}</th>
+                    <th>{{ 'section.id'|trans }}</th>
+                    <th>{{ 'section.assigned.content'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for section in sections %}
+                {% form_theme form_section_content_assign[section.id] 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+                {% form_theme form_section_delete[section.id] 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+                <tr>
+                    <td><a href="{{ path( 'ezplatform.section.view', {'sectionId': section.id} ) }}">{{ section.name }}</a></td>
+                    <td>{{ section.identifier }}</td>
+                    <td>{{ section.id }}</td>
+                    <td>{{ content_count[section.id] }}</td>
+                    <td class="text-right">
+
+                        {{ form(form_section_content_assign[section.id], {'attr': {'class': 'd-inline-block'}}) }}
+
+                        <a href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
+                           class="btn btn-secondary"{% if not can_edit %} data-disabled{% endif %}>{{ 'section.edit'|trans }}</a>
+                        {{ form_start(form_section_delete[section.id], {'attr': {'class': 'd-inline-block'}}) }}
+                        {{ form_widget(form_section_delete[section.id].data.delete, { 'attr': {'class': 'btn btn-danger', 'disabled': not deletable[section.id] }}) }}
+                        {{ form_end(form_section_delete[section.id]) }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    <script src="{{ asset('bundles/ezplatformadminui/js/scripts/admin.section.list.js')}}"></script>
+{% endblock %}
+
+{% block title %}{{ 'section.list'|trans }}{% endblock %}

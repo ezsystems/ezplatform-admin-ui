@@ -1,0 +1,21 @@
+@import 'custom';
+
+.ez-icon {
+	width: 2rem;
+	height: 2rem;
+}
+
+.btn-icon {
+	.ez-icon {
+		width: 1.5rem;
+		height: 1.5rem;
+		fill: $ez-color-primary;
+	}
+}
+
+.ez-main-nav {
+	.ez-icon {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+}

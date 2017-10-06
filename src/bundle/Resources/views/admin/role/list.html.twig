@@ -1,0 +1,58 @@
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+
+{% trans_default_domain 'role' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans([], 'messages') },
+        { value: 'role.breadcrumb.list'|trans }
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'role.breadcrumb.list'|trans,
+        iconName: 'roles'
+    } %}
+{% endblock %}
+
+{% block content %}
+    <section class="container mt-5">
+        <div class="ez-table-header">
+            <h5>{{ 'role.view.list.title'|trans }}</h5>
+            <div>
+                <a href="{{ path('ezplatform.role.create') }}" class="btn btn-primary">{{ 'role.view.list.action.add'|trans }}</a>
+            </div>
+        </div>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>{{ 'role.view.list.column.identifier'|trans }}</th>
+                    <th>{{ 'role.view.list.column.id'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for role in roles %}
+                <tr>
+                    <td>
+                        <a href="{{ path('ezplatform.role.view', { roleId: role.id }) }}">
+                            {{ role.identifier }}
+                        </a>
+                    </td>
+                    <td>{{ role.id }}</td>
+                    <td class="text-right">
+                        <a href="{{ path('ezplatform.role.update', { roleId: role.id }) }}" class="btn btn-secondary">
+                            {{ 'role.view.list.action.edit'|trans }}
+                        </a>
+                        <a href="{{ path('ezplatform.role_assignment.create', { roleId: role.id }) }}" class="btn btn-secondary">
+                            {{ 'role.view.list.action.assign_to_users_or_groups'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

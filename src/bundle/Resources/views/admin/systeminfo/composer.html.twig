@@ -1,0 +1,26 @@
+{% trans_default_domain "systeminfo" %}
+
+<h1>{{ 'composer'|trans }}</h1>
+<dl>
+    <dt>{{ 'composer.minimum_stability'|trans }}</dt>
+    <dd>{{ info.minimumStability }}</dd>
+
+    {% if info.packages is empty %}
+        <dt>{{ 'packages'|trans }}</dt>
+        <dd>{{ 'packages.empty'|trans }}</dd>
+    {% endif %}
+</dl>
+
+{% if info.packages is not empty %}
+    <h2>{{ 'packages'|trans }}</h2>
+    <dl>
+        {% for package in info.packages %}
+            {% if package.homepage is empty %}
+                <dt>{{ package.name }}</dt>
+            {% else %}
+                <dt><a href="{{ package.homepage }}" target="_blank">{{ package.name }}</a></dt>
+            {% endif %}
+            <dd>{{ package.version }} {{ package.stability }} <span>({{ package.dateTime|localizeddate( 'short', 'short', app.request.locale )}}, {{ package.reference | slice(0, 5) }})</span></dd>
+        {% endfor %}
+    </dl>
+{% endif %}

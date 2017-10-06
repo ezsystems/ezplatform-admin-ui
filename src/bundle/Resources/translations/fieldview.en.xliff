@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-09-22T10:56:03Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="977cb55c24b1708d46ccbd753c2cea745976ae21" resname="fieldview.field.empty">
+        <source>This field is empty</source>
+        <target state="new">This field is empty</target>
+        <note>key: fieldview.field.empty</note>
+        <jms:reference-file line="9">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/content/tab/content.html.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

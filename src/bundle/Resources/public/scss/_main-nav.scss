@@ -1,0 +1,51 @@
+@import 'custom';
+
+.ez-main-nav {
+    padding: 0;
+    background-color: $ez-ground-base-light;
+
+    .nav-tabs {
+        background-color: $ez-ground-base-light;
+        border: none;
+        margin-bottom: 0;
+
+        .nav-link {
+            padding: 1rem 2rem;
+            color: $ez-color-base-dark;
+            display: flex;
+
+            .ez-icon {
+                margin-right: .5rem;
+            }
+
+            &:hover {
+                background-color: $ez-ground-base-light;
+                border-color: $ez-ground-base-light;
+            }
+
+            &.active {
+                background-color: $white;
+                border-color: $white;
+                color: $ez-color-base-dark;
+            }
+        }
+    }
+}
+
+.ez-main-sub-nav {
+    background-color: $white;
+    padding: 0;
+    padding-left: 100px;
+
+    .navbar-nav {
+        .nav-link {
+            padding: .8rem 1rem;
+            color: $ez-color-base-dark;
+
+            &.active {
+                border-bottom: 2px solid $ez-color-primary;
+                font-weight: bold;
+            }
+        }
+    }
+}

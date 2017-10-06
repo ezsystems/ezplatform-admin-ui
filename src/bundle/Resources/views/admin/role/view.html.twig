@@ -1,0 +1,57 @@
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+
+{% trans_default_domain 'role' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans([], 'messages') },
+        { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans },
+        { value: 'role.breadcrumb.view'|trans({'%identifier%': role.identifier }) }
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'role.view.view.title'|trans({'%identifier%': role.identifier}),
+        iconName: 'roles'
+    } %}
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="nav-item">
+            <a href="#policies" class="nav-link active" role="tab" data-toggle="tab">
+                {{ 'policy.view.list.title'|trans }}
+            </a>
+        </li>
+        <li role="presentation" class="nav-item">
+            <a href="#users-and-groups" class="nav-link" role="tab" data-toggle="tab">
+                {{ 'role_assignment.view.list.title'|trans }}
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade show active" id="policies">
+            {{ render(controller('EzPlatformAdminUiBundle:Policy:list', {
+                roleId: role.id
+            })) }}
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="users-and-groups">
+            {{ render(controller('EzPlatformAdminUiBundle:RoleAssignment:list', {
+                roleId: role.id
+            })) }}
+        </div>
+    </div>
+
+    <section class="container">
+        <div class="mb-4 mt-4">
+            <a href="{{ path('ezplatform.role.update', {roleId: role.id}) }}" class="btn btn-info">
+                {{ 'role.view.view.actions.edit'|trans }}
+            </a>
+            {{ form_start(delete_form, { action: path('ezplatform.role.delete', {roleId: role.id}) }) }}
+            {{ form_widget(delete_form.delete, { 'attr': { 'class': 'btn btn-danger' } }) }}
+            {{ form_end(delete_form) }}
+        </div>
+    </section>
+{% endblock %}

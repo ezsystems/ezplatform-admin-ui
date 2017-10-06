@@ -1,0 +1,128 @@
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+
+{% trans_default_domain 'content_type' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        {
+            value: 'breadcrumb.admin'|trans([], 'messages') ,
+        },
+        {
+            url: path('ezplatform.content_type_group.list'),
+            value: 'content_type_group.breadcrumb.list'|trans
+        },
+        {
+            url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }),
+            value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })
+        },
+        {
+            value: 'content_type.breadcrumb.view'|trans({ '%identifier%': content_type.name })
+        }
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'content_type.view.view.title'|trans({ '%name%': content_type.name }),
+        iconName: 'content-types'
+    } %}
+{% endblock %}
+
+{# FIXME: Hardcoded language code #}
+{% set language_code = 'eng-GB' %}
+
+{% block content %}
+    <section class="container mt-4">
+        <header class="ez-table-header">
+            <h4>Global properties</h4>
+        </header>
+
+        <table class="table table-striped table-hover">
+            <colgroup>
+                <col width="30%"/>
+                <col />
+            </colgroup>
+
+            <tbody>
+            <tr>
+                <th>{{ "content_type.name"|trans|desc("Name") }}</th>
+                <td>{{ content_type.name }}</td>
+            </tr>
+            <tr>
+                <th>{{ "content_type.identifier"|trans|desc("Identifier") }}</th>
+                <td>{{ content_type.identifier }}</td>
+            </tr>
+            <tr>
+                <th>{{ "content_type.description"|trans|desc("Description") }}</th>
+                <td>{{ content_type.descriptions[language_code]|default('') }}</td>
+            </tr>
+            <tr>
+                <th>{{ "content_type.name_schema"|trans|desc("Content name schema") }}</th>
+                <td>{{ content_type.nameSchema }}</td>
+            </tr>
+            <tr>
+                <th>{{ "content_type.url_alias_schema"|trans|desc("URL alias name pattern") }}</th>
+                <td>{{ content_type.urlAliasSchema }}</td>
+            </tr>
+            <tr>
+                <th>{{ "content_type.container"|trans|desc("Container") }}</th>
+                <td>{{ 'yes_no'|transchoice(content_type.isContainer) }}</td>
+            </tr>
+            <tr>
+                <th>{{ "content_type.default_children_sorting"|trans|desc("Default property for sorting chilren") }}</th>
+                <td>
+                    {{ ("content_type.sort_field." ~ content_type.defaultSortField)|trans(domain="ezrepoforms_content_type") }} / {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="ezrepoforms_content_type") }}
+                </td>
+            </tr>
+            <tr>
+                <th>{{ "content_type.default_sort"|trans|desc("Default sort order") }}</th>
+                <td>{{ content_type.defaultSortOrder }}</td>
+            </tr>
+            <tr>
+                <th>
+                    {{ "content_type.default_availability"|trans|desc('Default availability') }}
+                    <p class="text-secondary small">
+                        {{ "content_type.default_availability.help"|trans|desc("Default availability in primary language, if translation is absent") }}
+                    </p>
+                </th>
+                <td>{{ 'content_type.default_availability.value'|transchoice(content_type.defaultAlwaysAvailable)|desc("{0} Not available|{1} Available") }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+<section class="container mt-4">
+    <header class="ez-table-header">
+        <h4>Field definitions</h4>
+    </header>
+
+    {% for group, field_definitions in field_definitions_by_group %}
+        <header class="ez-table-header">
+            <h5>{{ group }}</h5>
+        </header>
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Identifier</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for field_definition in field_definitions %}
+                <tr>
+                    <th>{{ field_definition.name }}</th>
+                    <td>{{ field_definition.identifier }}</td>
+                    <td>{{ field_definition.fieldTypeIdentifier }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+</section>
+
+<br />
+
+{% endblock %}

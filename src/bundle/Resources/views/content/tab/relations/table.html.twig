@@ -1,0 +1,47 @@
+{% trans_default_domain 'locationview' %}
+
+{% import _self as macros %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ 'tab.relations.table.name'|trans()|desc('Name') }}</th>
+        <th>{{ 'tab.relations.table.content_type'|trans()|desc('Content type') }}</th>
+        <th>{{ 'tab.relations.table.relation_type'|trans()|desc('Relation type') }}</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for relation in relations %}
+        <tr>
+            <td><a href="{{ path(relation.relationLocation) }}">{{ relation.relationName }}</a></td>
+            <td>{{ relation.relationContentTypeName }}</td>
+            <td>
+                {{ macros.relation_type(relation) }}
+                {% if (relation.relationFieldDefinitionName) %}
+                    ({{ relation.relationFieldDefinitionName }})
+                {% endif %}
+            </td>
+            <td>
+                <a href="#" class="btn btn-icon disabled">
+                    <svg class="ez-icon ez-icon-edit">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                    </svg>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% macro relation_type(relation) %}
+    {% if relation.type == constant('\eZ\Publish\API\Repository\Values\Content\Relation::COMMON') %}
+        {{ 'tab.relations.table.relation_type.content_level_relation'|trans()|desc('Content level relation') }}
+    {% elseif relation.type == constant('\eZ\Publish\API\Repository\Values\Content\Relation::EMBED') %}
+        {{ 'tab.relations.table.relation_type.embed'|trans()|desc('Embed') }}
+    {% elseif relation.type == constant('\eZ\Publish\API\Repository\Values\Content\Relation::LINK') %}
+        {{ 'tab.relations.table.relation_type.link'|trans()|desc('Link') }}
+    {% else %}
+        {{ 'tab.relations.table.relation_type.field'|trans()|desc('Field') }}
+    {% endif %}
+{% endmacro %}

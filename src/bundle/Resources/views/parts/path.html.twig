@@ -1,0 +1,9 @@
+{% for location in locations %}
+    {% if loop.last and (link_last_element is not defined or not link_last_element) %}
+        {{ ez_content_name(location.contentInfo) }}
+    {% else %}
+        <a
+        href="{{ path(location) }}">{{ ez_content_name(location.contentInfo) }}</a>{% if loop.last is same as(false) %} /{% endif %}
+    {% endif %}
+{% endfor %}
+

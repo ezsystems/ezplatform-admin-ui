@@ -1,0 +1,37 @@
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+
+{% trans_default_domain 'role' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans([], 'messages') },
+        { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans },
+        { url: path('ezplatform.role.view', {roleId: role.id}), value: 'role.breadcrumb.view'|trans({ '%identifier%': role.identifier }) },
+        { value: 'role.breadcrumb.edit'|trans({'%identifier%': role.identifier }) }
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'role.view.edit.title'|trans({'%identifier%': role.identifier}),
+        iconName: 'roles'
+    } %}
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    <section class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                {{ form_row(form.identifier) }}
+            </div>
+        </div>
+    </section>
+
+    <section class="container mt-4 mb-4">
+        <div class="btn-toolbar justify-content-end" role="toolbar" >
+            {{ form_widget(form.save, { 'attr': { 'class': 'btn btn-primary' } }) }}
+        </div>
+    </section>
+    {{ form_end(form) }}
+{% endblock %}

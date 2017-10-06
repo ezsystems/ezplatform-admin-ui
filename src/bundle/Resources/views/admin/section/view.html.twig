@@ -1,0 +1,50 @@
+{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+{% trans_default_domain 'section' %}
+{% form_theme form_section_content_assign 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+{% form_theme form_section_delete 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans([], 'messages') },
+        { url: path('ezplatform.section.list'), value: 'section.list'|trans },
+        { value: section.name }
+    ]} %}
+{% endblock %}
+
+{% block content %}
+    <div id="react-udw"></div>
+    <section class="container">
+        <div>
+            <dl>
+                <dt>{{ 'section.name.label'|trans }}</dt>
+                <dd>{{ section.name }}</dd>
+                <dt>{{ 'section.identifier.label'|trans }}</dt>
+                <dd>{{ section.identifier }}</dd>
+                <dt>{{ 'section.id.label'|trans }}</dt>
+                <dd>{{ section.id }}</dd>
+            </dl>
+
+            <p>{{ 'section.assigned.contentcount'|transchoice(content_count, {'%contentCount%': content_count} ) }}</p>
+
+            <a href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
+               {% if not can_edit %}data-disabled{% endif %}
+               class="btn btn-info" data-icon="&#xe606;">
+                {{ 'section.edit'|trans }}
+            </a>
+            {{ form(form_section_content_assign, {'attr': {'class': 'd-inline-block'}}) }}
+
+            {% if deletable %}
+                <button type="button" class="btn btn-danger" data-toggle="modal"
+                        data-target="#delete-section-modal">{{ 'section.form.delete'|trans|desc('Delete') }}</button>
+                {% include 'EzPlatformAdminUiBundle:admin/section:delete_confirmation_modal.html.twig' with {'form': form_section_delete} %}
+            {% else %}
+                <button type="button"
+                        class="btn btn-danger disabled">{{ 'section.form.delete'|trans|desc('Delete') }}</button>
+            {% endif %}
+
+        </div>
+    </section>
+    <script src="{{ asset('bundles/ezplatformadminui/js/scripts/admin.section.list.js')}}"></script>
+{% endblock %}
+
+{% block title %}{{ 'section.view.title'|trans({'%sectionName%': section.name}) }}{% endblock %}

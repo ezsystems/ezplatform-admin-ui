@@ -1,0 +1,10 @@
+@import 'custom';
+
+.ez-header {
+    background-color: $ez-ground-base;
+
+    .breadcrumb {
+    	margin-bottom: 0;
+    	padding-left: 0;
+    }
+}

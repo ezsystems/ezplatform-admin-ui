@@ -1,0 +1,106 @@
+/* eZ colors */
+$ez-color-primary: #f15a10;
+$ez-color-primary-hover: #cf4c0c;
+$ez-color-secondary: #0f6d95;
+$ez-color-secondary-hover: #0c5472;
+$ez-color-hyperlink: #0645ad;
+$ez-color-hyperlink-hover: #032863;
+$ez-color-positive: #00825c;
+$ez-color-warning: #f7d000;
+$ez-color-danger: #cb2540;
+$ez-color-danger-hover: #b32032;
+
+$ez-white: #fff;
+$ez-ground-base-pale: #fafafa;
+$ez-ground-base-light: #f3f3f3;
+$ez-ground-base: #e5e3e3;
+$ez-ground-base-medium: #ced4da; // color is not in guidelines (currently never used)
+$ez-ground-base-dark: #bbbbbb;
+$ez-color-base-pale: #878787;
+$ez-color-base-light: #6b6b6b;
+$ez-color-base-medium: #4b4b4b;
+$ez-color-base-dark: #333333;
+$ez-black: #000;
+
+$ez-ground-primary: #a8c8d5;
+$ez-ground-primary-inverted-light: #62828F;
+$ez-ground-primary-inverted: #445A64;
+
+/* boostrap variables*/
+$white:  $ez-white;
+$gray-100: $ez-ground-base-pale;
+$gray-200: $ez-ground-base-light;
+$gray-300: $ez-ground-base;
+$gray-400: $ez-ground-base-medium;
+$gray-500: $ez-ground-base-dark;
+$gray-600: $ez-color-base-pale;
+$gray-700: $ez-color-base-light;
+$gray-800: $ez-color-base-medium;
+$gray-900: $ez-color-base-dark;
+$black:  $ez-black;
+
+$grays: (
+    100: $ez-ground-base-pale,
+    200: $ez-ground-base-light,
+    300: $ez-ground-base,
+    400: $ez-ground-base-medium,
+    500: $ez-ground-base-dark,
+    600: $ez-color-base-pale,
+    700: $ez-color-base-light,
+    800: $ez-color-base-medium,
+    900: $ez-color-base-dark
+);
+
+$blue:    $ez-color-secondary;
+$red:     $ez-color-danger;
+$orange:  $ez-color-primary;
+$yellow:  $ez-color-warning;
+$green:   $ez-color-positive;
+$teal:    $ez-ground-primary;
+$pink:    #e83e8c !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$cyan:    #17a2b8 !default;
+
+$colors: (
+    blue: $ez-color-secondary,
+    red: $ez-color-danger,
+    orange: $ez-color-primary,
+    yellow: $ez-color-warning,
+    green: $ez-color-positive,
+    teal: $ez-ground-primary,
+    white: $white,
+    gray: $ez-color-base-pale,
+    gray-dark: $ez-color-base-medium,
+    indigo: $indigo,
+    purple: $purple,
+    pink: $pink,
+    cyan: $cyan
+);
+
+$theme-colors: (
+    primary: $ez-color-primary,
+    secondary: $ez-color-secondary,
+    success: $ez-color-positive,
+    warning: $ez-color-warning,
+    danger: $ez-color-danger,
+    light: $ez-ground-base-pale,
+    dark: $ez-color-base-medium,
+    info: $cyan
+);
+
+// Fonts
+$font-family-sans-serif: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+
+// Tables
+$table-bg: $ez-ground-base-light;
+$table-border-color: $ez-ground-primary;
+
+// Breadcrumbs
+$breadcrumb-bg: $ez-ground-base;
+
+// Links
+$link-color: $ez-color-hyperlink;
+
+// Body
+$body-bg: $ez-ground-base-pale;

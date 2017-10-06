@@ -1,0 +1,145 @@
+{% extends '@KnpMenu/menu.html.twig' %}
+
+{% macro attributes(attributes) %}
+    {% for name, value in attributes %}
+        {%- if value is not none and value is not same as(false) -%}
+            {{- ' %s="%s"'|format(name, value is same as(true) ? name|e : value|e)|raw -}}
+        {%- endif -%}
+    {%- endfor -%}
+{% endmacro %}
+
+{% block root %}
+    {% set listAttributes = item.childrenAttributes %}
+    {{ block('mainMenu') -}}
+    {{ block('subMenu') -}}
+{% endblock %}
+
+{% block mainMenu %}
+    {% set currentItem = item %}
+    <nav class="navbar navbar-expand-lg navbar-light ez-main-nav" style="flex-wrap:wrap;">
+        <div class="container-fluid">
+            <a href="{{ url('ezplatform.dashboard') }}" class="navbar-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" viewBox="0 0 822.59995 309.89998">
+                    <path d="M794.7 30.1v-20h8.9c1.8 0 3.2.2 4 .6 1 .4 1.6 1 2.2 2 .6 1 .8 2 .8 3 0 1.4-.4 2.6-1.4 3.6-1 1-2.4 1.6-4.2 1.8.8.4 1.2.6 1.6 1 .8.8 1.6 1.6 2.2 2.6l3.6 5.3H809l-2.6-4.2c-.8-1.2-1.4-2.2-2-2.8l-1.4-1.4-1.2-.6h-4.4v8.9h-2.8v.2zm2.5-11.1h5.7c1.2 0 2.2-.2 2.8-.4.6-.2 1.2-.6 1.6-1.2.4-.6.6-1.2.6-1.8 0-1-.4-1.8-1-2.4-.6-.6-1.8-1-3.2-1h-6.3v6.7h-.2z"/>
+                    <path d="M802 41c-11.3 0-20.6-9.3-20.6-20.6S790.5 0 802 0c11.3 0 20.6 9.3 20.6 20.6S813.3 41 802 41zm0-38.5c-9.9 0-18 8.1-18 18s8.1 18 18 18 18-8.1 18-18c0-9.8-8.1-18-18-18z"/>
+                    <g>
+                        <path d="M0 22.2h242.3v242.3H0z"/>
+                        <path fill="#fff" d="M23.5 45.7h195.4v195.4H23.5z"/>
+                        <path d="M100.4 121.8h186.4v186.4H100.4z"/>
+                        <path fill="#f05a22" d="M122.6 144h141.7v141.7H122.6z"/>
+                        <g>
+                            <path d="M495.5 252.4c-1.8 4.6-4.6 8.5-7.9 12.3-3.6 3.6-7.7 6.7-12.3 9.3-4.6 2.6-9.7 4.6-14.9 6.1-5.3 1.6-10.7 2.2-16.2 2.2-7.7 0-15.3-1.6-22.2-4.6-6.9-3-13.3-7.1-18.8-12.5-5.5-5.3-10.1-11.7-13.5-19-3.2-6.7-5.2-14.3-6.1-22.6h153.9l.4-1.6c.2-1.4.4-3 .6-5.3.2-2.2.2-4.6.2-7.3 0-12.5-2.2-24.8-6.7-36.5-4.6-11.7-10.9-22.2-19.2-30.9-8.3-8.9-18.4-16-30.1-21.4-11.7-5.3-25-7.9-39.2-7.9-14.2 0-27.5 2.6-39.2 7.9-11.9 5.2-22.2 12.3-30.7 21.4-8.5 8.9-15.3 19.4-20 31.3-4.8 11.9-7.1 24.6-7.1 37.8 0 13.3 2.4 26 7.1 38 4.8 11.9 11.3 22.6 19.8 31.5 8.5 8.9 18.8 16 30.5 21.4 11.9 5.2 25.2 7.9 39.2 7.9 9.3 0 18.6-1.2 27.3-3.6 8.7-2.4 16.6-5.7 23.8-10.1 7.1-4.2 13.5-9.3 19-15.1 5.5-5.7 9.9-12.3 13.1-19.4l1-2.2-31.1-8.5-.7 1.4zm-51.9-112c7.9 0 15.7 1.4 22.8 4.4 7.1 2.8 13.5 6.9 18.8 11.9 5.3 5 9.9 11.3 13.5 18.4 3.2 6.5 5.3 13.9 6.1 21.6H382.9c.8-7.7 2.8-14.9 5.9-21.4 3.4-7.1 7.7-13.3 13.1-18.4 5.4-5.1 11.7-9.1 18.8-12.1 7-3 14.7-4.4 22.9-4.4zM712.6 82.2L530.8 307.9h228.4v-33.7H601.3L783 48.5H556.9v33.7z"/>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+            <div class="collapse navbar-collapse">
+                <ul class="nav nav-tabs" role="tablist">
+                    {% for item in currentItem.children %}
+                        {{ block('item') }}
+                    {% endfor %}
+                </ul>
+                <ul class="nav navbar-nav ml-md-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('logout') }}">
+                            {{ 'authentication.logout'|trans|desc('Logout') }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block subMenu %}
+    {% set currentItem = item %}
+    <nav class="navbar navbar-expand-lg navbar-light ez-main-sub-nav" style="flex-wrap:wrap;">
+        <div class="tab-content">
+            {% for child in currentItem.children %}
+                <div role="tabpanel" class="tab-pane fade{{ matcher.isAncestor(child, options.matchingDepth) ? ' show active' }}" id="{{ child.name }}">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                {% for item in child.children %}
+                                    {{ block('item') }}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </nav>
+{% endblock %}
+
+{% block item %}
+    {% if item.displayed %}
+        {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+        {%- set classes = classes|merge(['nav-item']) %}
+        {%- if item.actsLikeFirst %}
+            {%- set classes = classes|merge([options.firstClass]) %}
+        {%- endif %}
+        {%- if item.actsLikeLast %}
+            {%- set classes = classes|merge([options.lastClass]) %}
+        {%- endif %}
+
+        {% if item.hasChildren and options.depth is not same as(0) %}
+            {% if options.branch_class is not empty and item.displayChildren %}
+                {%- set classes = classes|merge([options.branch_class]) %}
+            {% endif %}
+        {% elseif options.leaf_class is not empty %}
+            {%- set classes = classes|merge([options.leaf_class]) %}
+        {%- endif %}
+
+        {%- set attributes = item.attributes %}
+        {%- if classes is not empty %}
+            {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+        {%- endif %}
+        {# displaying the item #}
+        {% import _self as knp_menu %}
+        <li{{ knp_menu.attributes(attributes) }}>
+            {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
+                {{ block('linkElement') }}
+            {%- else %}
+                {{ block('spanElement') }}
+            {%- endif %}
+            {# render the list of children#}
+            {%- set childrenClasses = item.childrenAttribute('class') is not empty ? [item.childrenAttribute('class')] : [] %}
+            {%- set childrenClasses = childrenClasses|merge(['menu_level_' ~ item.level]) %}
+            {%- set listAttributes = item.childrenAttributes|merge({'class': childrenClasses|join(' ') }) %}
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block linkElement %}
+    <a href="{{ item.uri }}" id="{{ item.name }}-tab" aria-controls="{{ item.name }}" class="nav-link{{ matcher.isCurrent(item) ? ' ' ~ options.currentClass }}">
+        {{ block('label') }}
+    </a>
+{% endblock %}
+
+{% block spanElement %}
+    <a href="#{{ item.name }}"
+       id="{{ item.name }}-tab"
+       aria-controls="{{ item.name }}"
+       class="nav-link{{ matcher.isAncestor(item, options.matchingDepth) ? ' ' ~ options.currentClass }}"
+       aria-controls="{{ item.name }}"
+       role="tab"
+       data-toggle="tab"
+       {% if matcher.isAncestor(item, options.matchingDepth) %}aria-expanded="true"{% endif %}
+    >
+        {{ block('label') }}
+    </a>
+{% endblock %}
+
+{% block label %}
+    {% if item.extras.icon is defined and item.extras.icon != '' %}
+        <svg class="ez-icon ez-icon-{{ item.extras.icon  }}">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#{{ item.extras.icon  }}"></use>
+        </svg>
+    {% endif %}
+    {% if options.allow_safe_labels and item.getExtra('safe_label', false) %}
+        {{ item.label|raw }}
+    {% else %}
+        {{ item.label }}
+    {% endif %}
+{% endblock %}

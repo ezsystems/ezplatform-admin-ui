@@ -1,0 +1,8 @@
+system:
+    admin:
+        content_view:
+            full:
+                default:
+                    controller: 'EzPlatformAdminUiBundle\Controller\ContentViewController:locationViewAction'
+                    template: "@EzPlatformAdminUi/content/locationview.html.twig"
+                    match: true

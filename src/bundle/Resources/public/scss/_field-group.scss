@@ -1,0 +1,29 @@
+@import 'custom';
+
+.ez-fieldgroup {
+	.ez-fieldgroup-name {
+		color: $ez-color-secondary;
+		border-bottom: 2px solid $ez-color-secondary;
+		padding-bottom: .5rem;
+	}
+
+	.ez-content-field {
+		padding-left: 2rem;
+		margin-bottom: 1.5rem;
+
+		.ez-content-field-name {
+			background-color: $ez-ground-base;
+			margin-bottom: 0;
+			padding: .5rem 1.5rem;
+			border-top-right-radius: 5px;
+			border-top-left-radius: 5px;
+		}
+
+		.ez-content-field-value {
+			background-color: $white;
+			padding: 1rem 1.5rem;
+			border-bottom-right-radius: 5px;
+			border-bottom-left-radius: 5px;
+		}
+	}
+}

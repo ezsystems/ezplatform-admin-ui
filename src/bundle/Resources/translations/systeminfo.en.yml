@@ -1,0 +1,95 @@
+# Desc: bundles
+bundles: bundles
+
+# Desc: Composer
+composer: Composer
+
+# Desc: Minimum stability
+composer.minimum_stability: 'Minimum stability'
+
+# Desc: CPU
+cpu: CPU
+
+# Desc: Database
+database: Database
+
+# Desc: Host
+database.host: Host
+
+# Desc: Name
+database.name: Name
+
+# Desc: Type
+database.type: Type
+
+# Desc: Username
+database.username: Username
+
+# Desc: Disabled
+disabled: Disabled
+
+# Desc: Hardware
+hardware: Hardware
+
+# Desc: Memory
+memory: Memory
+
+# Desc: Mhz
+mhz: Mhz
+
+# Desc: Packages
+packages: Packages
+
+# Desc: Could not find any packages, composer.lock file missing?
+packages.empty: 'Could not find any packages, composer.lock file missing?'
+
+# Desc: PHP
+php: PHP
+
+# Desc: PHP Accelerator
+php.accelerator: 'PHP Accelerator'
+
+# Desc: PHP info
+php.info: 'PHP info'
+
+# Desc: Symfony kernel
+symfony_kernel: 'Symfony kernel'
+
+# Desc: Could not find any bundles
+symfony_kernel.bundles.empty: 'Could not find any bundles'
+
+# Desc: Cache directory
+symfony_kernel.cacheDir: 'Cache directory'
+
+# Desc: Character set
+symfony_kernel.charset: 'Character set'
+
+# Desc: Debug mode
+symfony_kernel.debugMode: 'Debug mode'
+
+# Desc: Disabled
+symfony_kernel.debugMode.disabled: Disabled
+
+# Desc: Enabled
+symfony_kernel.debugMode.enabled: Enabled
+
+# Desc: Environment
+symfony_kernel.environment: Environment
+
+# Desc: Log directory
+symfony_kernel.logDir: 'Log directory'
+
+# Desc: Name
+symfony_kernel.name: Name
+
+# Desc: Root directory
+symfony_kernel.rootDir: 'Root directory'
+
+# Desc: Version
+symfony_kernel.version: Version
+
+# Desc: System Info
+systeminfo: 'System Info'
+
+# Desc: System information
+systeminfo.title: 'System information'

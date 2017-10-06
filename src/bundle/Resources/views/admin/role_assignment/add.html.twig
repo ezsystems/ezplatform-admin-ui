@@ -1,0 +1,57 @@
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+
+{% trans_default_domain 'role' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans([], 'messages') },
+        { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans },
+        { url: path('ezplatform.role.view', {roleId: role.id}), value: 'role.breadcrumb.view'|trans({ '%identifier%': role.identifier }) },
+        { value: 'role_assignment.view.add.title'|trans }
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'role_assignment.view.add.title'|trans,
+        iconName: 'roles'
+    } %}
+{% endblock %}
+
+{% block content %}
+    <div id="react-udw"></div>
+
+    {{ form_start(form) }}
+        <section class="container mt-4">
+            <div class="card">
+                <div class="card-header">
+                    {{ 'role_assignment.view.add.panel.users_and_groups.title'|trans }}
+                </div>
+                <div class="card-body">
+                    {{ form_row(form.users) }}
+                    {{ form_row(form.groups) }}
+                </div>
+            </div>
+        </section>
+
+        <section class="container mt-4">
+            <div class="card">
+                <div class="card-header">
+                    {{ 'role_assignment.view.add.panel.limitations.title'|trans }}
+                </div>
+                <div class="card-body">
+                    {{ form_row(form.sections) }}
+                    {{ form_row(form.locations) }}
+                </div>
+            </div>
+        </section>
+
+        <section class="container mt-4 mb-4">
+            <div class="btn-toolbar justify-content-end" role="toolbar">
+                {{ form_widget(form.save, { 'attr': { 'class': 'btn btn-primary' } }) }}
+            </div>
+        </section>
+    {{ form_end(form) }}
+
+    <script src="{{ asset('bundles/ezplatformadminui/js/scripts/admin.role_assignment.add.js') }}"></script>
+{% endblock %}

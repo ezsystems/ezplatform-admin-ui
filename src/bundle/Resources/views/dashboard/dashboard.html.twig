@@ -1,0 +1,98 @@
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+
+{% trans_default_domain 'dashboard' %}
+
+{% block bodyClass %}ez-dashboard{% endblock %}
+
+{% block content %}
+    <div class="row align-items-stretch ez-main-row ez-dashboard-row">
+        <div class="col-sm-1 bg-dark pt-4 ez-side-menu">
+            <button class="btn btn-dark btn-block" disabled>
+                <svg class="ez-icon ez-icon-search">
+                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
+                </svg>
+                Search
+            </button>
+            <button class="btn btn-dark btn-block btn--udw-browse" data-starting-location-id="2">
+                <svg class="ez-icon ez-icon-browse">
+                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#browse"></use>
+                </svg>
+                Browse
+            </button>
+            <a class="btn btn-dark btn-block" href="{{ path('ezplatform.trash.list') }}">
+                <svg class="ez-icon ez-icon-trash">
+                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                </svg>
+                {{ 'navigation.admin.trash'|trans|desc('Trash') }}
+            </a>
+        </div>
+        <div class="col-sm-11">
+            <div class="container">
+
+                {# @todo: make panels injectable (create extensibility point here) #}
+
+                <div class="card border-light my-4">
+                    <div class="card-body">
+                        <h3 class="mb-3">Me</h3>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a href="#my-drafts" class="active nav-link" aria-controls="my-drafts" role="tab" data-toggle="tab">
+                                    My Drafts
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#my-content" class="nav-link" aria-controls="my-content" role="tab" data-toggle="tab">
+                                    My Content
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#my-media" class="nav-link" aria-controls="my-media" role="tab" data-toggle="tab">
+                                    My Media
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane show active" id="my-drafts">
+                                {{ render(controller('EzPlatformAdminUiBundle:Dashboard:myDrafts')) }}
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="my-content">
+                                {{ render(controller('EzPlatformAdminUiBundle:Dashboard:myContent')) }}
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="my-media">
+                                {{ render(controller('EzPlatformAdminUiBundle:Dashboard:myMedia')) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-light mb-4">
+                    <div class="card-body">
+                        <h3 class="mb-3">Everyone</h3>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a href="#all-content" class="nav-link active" aria-controls="all-content" role="tab" data-toggle="tab">
+                                    Content
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#all-media" class="nav-link" aria-controls="all-media" role="tab" data-toggle="tab">
+                                    Media
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane show active" id="all-content">
+                                {{ render(controller('EzPlatformAdminUiBundle:Dashboard:allContent')) }}
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="all-media">
+                                {{ render(controller('EzPlatformAdminUiBundle:Dashboard:allMedia')) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="react-udw"></div>
+    <script src="{{ asset('bundles/ezplatformadminui/js/scripts/udw/browse.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{
+  "name": "PlatformAdminUIBundle",
+  "version": "1.0.0",
+  "description": "Platform Admin UI Bundle",
+  "repository": "https://github.com/ezsystems/ezplatform-admin-ui.git",
+  "devDependencies": {
+    "node-sass": "^4.5.0"
+  },
+  "scripts": {
+    "sass-bootstrap": "node-sass --output-style compressed src/bundle/Resources/public/scss/ezplatform-bootstrap.scss src/bundle/Resources/public/css/ezplatform-bootstrap.min.css",
+    "sass-platform": "node-sass --output-style compressed src/bundle/Resources/public/scss/ezplatform.scss src/bundle/Resources/public/css/ezplatform.min.css"
+  }
+}
