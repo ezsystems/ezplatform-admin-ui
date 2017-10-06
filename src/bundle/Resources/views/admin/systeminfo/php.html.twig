@@ -1,0 +1,17 @@
+{% trans_default_domain "systeminfo" %}
+
+<h1>{{ 'php'|trans }}</h1>
+<dl>
+    <dt>{{ 'php'|trans }}</dt>
+    <dd>
+        {{ info.version }}
+        (<a href="{{ path( 'ezplatform.systeminfo.php' ) }}" target="_blank">{{ 'php.info'|trans }}</a>)
+    </dd>
+    <dt>{{ 'php.accelerator'|trans }}</dt>
+    <dd>
+        {% if not info.acceleratorEnabled %}
+            <strong>{{ 'disabled'|trans }}</strong>
+        {% endif %}
+        <a href="{{ info.acceleratorURL }}" target="_blank">{{ info.acceleratorName }} ({{ info.acceleratorVersion }})</a>
+    </dd>
+</dl>

@@ -1,0 +1,50 @@
+@import 'custom';
+
+.nav-tabs {
+    border-bottom: 2px solid $ez-ground-base-pale;
+    background-color: $ez-ground-base;
+
+    .nav-item {
+        margin-bottom: 0;
+    }
+
+    .nav-link {
+        color: $ez-color-base-pale;
+
+        &:hover {
+            background-color: $ez-ground-base-dark;
+            border-color: $ez-ground-base-dark;
+        }
+
+        &.active {
+            background-color: $ez-ground-base-pale;
+            border-color: $ez-ground-base-pale;
+        }
+    }
+}
+
+.ez-dashboard {
+    .nav-tabs {
+        border-bottom: 2px solid $ez-ground-primary-inverted;
+        background-color: $white;
+        margin-bottom: 1rem;
+
+        .nav-link {
+            &.active {
+                background-color: $ez-ground-primary-inverted;
+                border-color: $ez-ground-primary-inverted;
+                color: $white;
+            }
+        }
+    }
+}
+
+.ez-content-view {
+    .nav-tabs {
+        border-bottom: 2px solid $ez-ground-base;
+
+        .nav-item {
+            margin-bottom: -2px;
+        }
+    }
+}

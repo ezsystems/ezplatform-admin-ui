@@ -1,0 +1,104 @@
+{% extends "EzPlatformAdminUiBundle::layout.html.twig" %}
+
+{% trans_default_domain 'trash' %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block content %}
+    <div id="react-udw"></div>
+    <div class="row align-items-stretch ez-main-row">
+        <div class="col-sm-1 bg-dark pt-4 ez-side-menu"> {# @todo sidebars should be moved to layout.html.twig !! #}
+            <button class="btn btn-dark btn-block" disabled>
+                <svg class="ez-icon ez-icon-search">
+                    <use xlink:href="{{ asset('bundles/ezplatform/img/ez-icons.svg') }}#search"></use>
+                </svg>
+                Search
+            </button>
+            <button class="btn btn-dark btn-block btn--udw-browse" data-starting-location-id="2">
+                <svg class="ez-icon ez-icon-browse">
+                    <use xlink:href="{{ asset('bundles/ezplatform/img/ez-icons.svg') }}#browse"></use>
+                </svg>
+                Browse
+            </button>
+            <a class="btn btn-dark btn-block" href="{{ path('ezplatform.trash.list') }}">
+                <svg class="ez-icon ez-icon-trash">
+                    <use xlink:href="{{ asset('bundles/ezplatform/img/ez-icons.svg') }}#trash"></use>
+                </svg>
+                Trash
+            </a>
+        </div>
+        <div class="col-sm-10 px-0">
+            <section class="container mt-5">
+                {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with { title: 'trash.headline'|trans|desc('Trash'), iconName: 'trash' } %}
+                {{ form_start(form_trash_item_restore) }}
+                <div class="ez-table-header mt-3">
+                    <h5>{{ 'trash.table.header'|trans|desc('Trash') }}</h5>
+                    <div>
+                        {% if can_restore and form_trash_item_restore.data.trash_items is not empty %}
+                            {% set restore_under_new_parent_button_attr = form_trash_item_restore.data.location.select_content.vars.attr|merge({'attr': {'class': (form_trash_item_restore.data.location.select_content.vars.attr.class|default('') ~ ' d-inline-block')|trim, 'disabled': true}}) %}
+                            {{ form_widget(form_trash_item_restore.data.location.select_content, restore_under_new_parent_button_attr) }}
+                            {{ form_widget(form_trash_item_restore.data.location.location) }}
+                            {% do form_trash_item_restore.data.location.setRendered %}
+                            {{ form_widget(form_trash_item_restore.data.restore, {'attr': {'class': 'btn btn-primary', 'disabled': true}}) }}
+                        {% else %}
+                            {% do form_trash_item_restore.data.location.setRendered %}
+                            {% do form_trash_item_restore.data.restore.setRendered %}
+                        {% endif %}
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>{{ 'trash.name'|trans|desc('Name') }}</th>
+                            <th>{{ 'trash.type'|trans|desc('Type') }}</th>
+                            <th>{{ 'trash.original_location'|trans|desc('Original location') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if trash_items is empty %}
+                        <tr>
+                            <td colspan="4">
+                                <span>{{ 'trash.empty'|trans|desc('Trash is empty. Any content item you send to trash will end up here.') }}</span>
+                            </td>
+                        </tr>
+                    {% else %}
+                        {% for key, form in form_trash_item_restore.data.trash_items %}
+                            {% set trash_item = trash_items[key] %}
+                            <tr>
+                                <td>{{ form_row(form) }}</td>
+                                <td>{{ ez_content_name(trash_item.location.contentInfo) }}</td>
+                                <td>{{ trash_item.contentType.name }}</td>
+                                <td>
+                                    {% if not trash_item.parentInTrash %}
+                                        {% include 'EzPlatformAdminUiBundle:parts:path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
+                                    {% else %}
+                                        <em>{{ 'trash.item.ancesor_in_trash'|trans|desc('Ancestor is in the Trash') }}</em>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+                {{ form_end(form_trash_item_restore) }}
+                {% include 'EzPlatformAdminUiBundle:admin/trash:empty_trash_confirmation_modal.html.twig' with {'form': form_trash_empty, 'trash_items_count': trash_items|length} %}
+            </section>
+        </div>
+        <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
+            {% if can_delete %}
+                <button type="button"
+                        class="btn btn-secondary btn-block{% if trash_items|length == 0 %} disabled{% endif %}"{% if trash_items|length > 0 %} data-toggle="modal" data-target="#confirmEmptyTrash"{% endif %}>
+                    <svg class="ez-icon ez-icon-trash-empty">
+                        <use xlink:href="{{ asset('bundles/ezplatform/img/ez-icons.svg') }}#trash-empty"></use>
+                    </svg>
+                    {{ 'trash.empty_trash'|trans|desc('Empty Trash') }}
+                </button>
+            {% endif %}
+        </div>
+    </div>
+    <script src="{{ asset('bundles/ezplatform/js/scripts/admin.trash.list.js') }}"></script>
+    <script src="{{ asset('bundles/ezplatform/js/scripts/udw/browse.js')}}"></script>
+{% endblock %}
+
+{% block title %}{{ 'trash.list'|trans }}{% endblock %}

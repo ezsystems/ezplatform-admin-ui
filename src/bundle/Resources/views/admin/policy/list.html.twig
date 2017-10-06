@@ -1,0 +1,53 @@
+{% trans_default_domain 'role' %}
+
+<section class="container mt-4">
+    <div class="ez-table-header">
+        <h5>{{ 'policy.view.list.title'|trans }}</h5>
+
+        <a href="{{ path('ezplatform.policy.create', {roleId: role.id}) }}" class="btn btn-primary">
+            {{ 'policy.view.list.action.add'|trans }}
+        </a>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>{{ 'policy.view.list.panel.policies.column.module'|trans }}</th>
+            <th>{{ 'policy.view.list.panel.policies.column.function'|trans }}</th>
+            <th>{{ 'role_assignment.view.list.panel.assignments.column.limitation'|trans }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for policy in role.policies %}
+            <tr>
+                <td>{{ policy.module }}</td>
+                <td>{{ policy.function }}</td>
+                <td>
+                    {% for limitation in policy.limitations %}
+                        {{ limitation.identifier }}
+
+                        ({{ limitation.limitationValues | join(',') }})
+                    {% else %}
+                        No limitations
+                    {% endfor %}
+                </td>
+                <td class="text-right">
+                    <a href="{{ path('ezplatform.policy.update', { roleId: role.id, policyId: policy.id }) }}" class="btn btn-info">
+                        {{ 'policy.view.list.panel.policies.action.edit'|trans }}
+                    </a>
+                    {% set deleteForm = deleteFormsByPolicyId[policy.id] %}
+                    {{ form_start(deleteForm, {
+                        "action": path('ezplatform.policy.delete', {
+                            "roleId": role.id,
+                            "policyId": policy.id
+                        })
+                    }) }}
+                    {{ form_widget(deleteForm.policy) }}
+                    {{ form_end(deleteForm) }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>

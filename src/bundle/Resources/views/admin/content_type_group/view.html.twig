@@ -1,0 +1,24 @@
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+
+{% trans_default_domain 'content_type' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans([], 'messages') },
+        { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans },
+        { value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier }) }
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'content_type_group.view.view.title'|trans({ '%identifier%': content_type_group.identifier }),
+        iconName: 'content-types'
+    } %}
+{% endblock %}
+
+{% block content %}
+    {{ render(controller('EzPlatformAdminUiBundle:ContentType:list', {
+        contentTypeGroupId: content_type_group.id
+    })) }}
+{% endblock %}

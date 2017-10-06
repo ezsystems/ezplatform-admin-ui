@@ -1,0 +1,58 @@
+{% trans_default_domain 'locationview' %}
+{% set is_draft = is_draft is defined and is_draft %}
+
+<table class="table">
+    <thead>
+    <tr>
+        {% if form is defined %}
+            <th></th>
+        {% endif %}
+        <th>{{ 'tab.versions.table.version'|trans()|desc('Version') }}</th>
+        <th>{{ 'tab.versions.table.modified_language'|trans()|desc('Modified language') }}</th>
+        <th>{{ 'tab.versions.table.contributor'|trans()|desc('Contributor') }}</th>
+        <th>{{ 'tab.versions.table.created'|trans()|desc('Created') }}</th>
+        <th>{{ 'tab.versions.table.last_saved'|trans()|desc('Last saved') }}</th>
+        {% if is_draft %}
+            <th></th>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for version in versions %}
+        <tr>
+            {% if form is defined %}
+                <td>{{ form_widget(form.versions[version.versionNo]) }}</td>
+            {% endif %}
+            <td>
+                {{ version.versionNo }}
+            </td>
+            <td>
+                {% for translation in version.translations %}
+                    {{ translation.name }}<br>
+                {% endfor %}
+            </td>
+            <td>
+                {% if version.author is not empty %}
+                    {{ ez_content_name(version.author) }}
+                {% endif %}
+            </td>
+            <td>
+                {{ version.creationDate|localizeddate('medium', 'short', app.request.locale) }}
+            </td>
+            <td>
+                {{ version.modificationDate|localizeddate('medium', 'short', app.request.locale) }}
+            </td>
+            {% if is_draft %}
+                <td>
+                    <a href="{{ path('ez_content_draft_edit', { 'contentId': version.contentInfo.id, 'versionNo': version.versionNo, 'language': version.translations[0].languageCode }) }}"
+                       class="btn btn-icon">
+                        <svg class="ez-icon ez-icon-edit">
+                            <use xlink:href="{{ asset('bundles/ezplatform/img/ez-icons.svg') }}#edit"></use>
+                        </svg>
+                    </a>
+                </td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

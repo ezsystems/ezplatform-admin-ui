@@ -1,0 +1,13 @@
+{% trans_default_domain "systeminfo" %}
+
+<h1>{{ 'database'|trans }}</h1>
+<dl>
+    <dt>{{ 'database.type'|trans }}</dt>
+    <dd>{{ info.type }}</dd>
+    <dt>{{ 'database.name'|trans }}</dt>
+    <dd>{{ info.name }}</dd>
+    <dt>{{ 'database.host'|trans }}</dt>
+    <dd>{{ info.host }}</dd>
+    <dt>{{ 'database.username'|trans }}</dt>
+    <dd>{{ info.username }}</dd>
+</dl>

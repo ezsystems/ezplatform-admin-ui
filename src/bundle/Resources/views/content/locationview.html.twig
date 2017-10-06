@@ -1,0 +1,112 @@
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+
+{% trans_default_domain 'locationview' %}
+{% form_theme form_location_copy '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
+{% form_theme form_location_move '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
+{% form_theme form_location_trash '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
+
+{% block bodyClass %}ez-content-view{% endblock %}
+
+{% block content %}
+    <div class="row align-items-stretch ez-main-row">
+        <div class="col-sm-1 bg-dark pt-4 ez-side-menu">
+            <button class="btn btn-dark btn-block" disabled>
+                <svg class="ez-icon ez-icon-search">
+                    <use xlink:href="{{ asset('bundles/ezplatform/img/ez-icons.svg') }}#search"></use>
+                </svg>
+                Search
+            </button>
+            <button class="btn btn-dark btn-block btn--udw-browse" data-starting-location-id="2">
+                <svg class="ez-icon ez-icon-browse">
+                    <use xlink:href="{{ asset('bundles/ezplatform/img/ez-icons.svg') }}#browse"></use>
+                </svg>
+                Browse
+            </button>
+            <a class="btn btn-dark btn-block" href="{{ path('ezplatform.trash.list') }}">
+                <svg class="ez-icon ez-icon-trash">
+                    <use xlink:href="{{ asset('bundles/ezplatform/img/ez-icons.svg') }}#trash"></use>
+                </svg>
+                Trash
+            </a>
+        </div>
+        <div class="col-sm-10 px-0">
+            <div class="ez-header pt-4">
+                <div class="container">
+                    {% set items = [] %}
+                    {% for pathLocation in pathLocations %}
+                        {% set items = items|merge([{
+                            'value': pathLocation.contentInfo.name,
+                            'url': path('_ez_content_view', {'contentId': pathLocation.contentInfo.id, 'locationId': pathLocation.id, 'viewType': 'full'})
+                        }]) %}
+                    {% endfor %}
+                    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: items} %}
+
+                    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+                        title: ez_content_name(content),
+                        iconName: contentType.identifier,
+                        contentTypeName: contentType.name
+                    } %}
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    {{ ez_platform_tabs('location-view', {'content': content, 'location': location,  'contentType': contentType }) }}
+
+                    {% if contentType.isContainer %}
+                    <div class="container">
+                        <section class="ez-fieldgroup">
+                            <h5 class="ez-fieldgroup-name">Sub-items</h5>
+                            <div class="ez-sil" data-location="{{ location.id }}"></div>
+                        </section>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
+            <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#trash-location-modal" {% if location.depth == 1 %}disabled{% endif %}>
+                <svg class="ez-icon ez-icon-trash-send">
+                    <use xlink:href="{{ asset('bundles/ezplatform/img/ez-icons.svg') }}#trash-send"></use>
+                </svg>
+                {{ 'send.to.trash'|trans|desc('Send to Trash') }}</button>
+            <button class="btn btn-secondary btn-block btn--udw-copy" data-root-location="1">
+                <svg class="ez-icon ez-icon-copy">
+                    <use xlink:href="{{ asset('bundles/ezplatform/img/ez-icons.svg') }}#copy"></use>
+                </svg>
+                {{ 'copy'|trans|desc('Copy') }}
+            </button>
+            <button class="btn btn-secondary btn-block btn--udw-move" data-root-location="1" {% if location.depth == 1 %}disabled{% endif %}>
+                <svg class="ez-icon ez-icon-move">
+                    <use xlink:href="{{ asset('bundles/ezplatform/img/ez-icons.svg') }}#move"></use>
+                </svg>
+                {{ 'move'|trans|desc('Move') }}
+            </button>
+
+            {# TODO: location trash should be rendered as a form, confirmation dialog should be impl. as a type #}
+            {% include 'EzPlatformAdminUiBundle:content:modal_location_trash.html.twig' with {'form': form_location_trash} %}
+            {{ form(form_location_copy) }}
+            {{ form(form_location_move) }}
+        </div>
+    </div>
+
+    <div id="react-udw"></div>
+    <script src="{{ asset('bundles/ezplatform/js/scripts/admin.location.view.js')}}"></script>
+    <script src="{{ asset('bundles/ezplatform/js/scripts/udw/browse.js')}}"></script>
+    <script src="{{ asset('bundles/ezplatform/js/scripts/udw/move.js')}}"></script>
+    <script src="{{ asset('bundles/ezplatform/js/scripts/udw/copy.js')}}"></script>
+    <script src="{{ asset('bundles/ezplatform/js/scripts/udw/swap.js')}}"></script>
+    <script src="{{ asset('bundles/ezplatform/js/scripts/udw/locations.tab.js') }}"></script>
+    <script type="text/javascript">
+        // @TODO: replace with something nice
+        // Javascript to enable link to tab
+        var url = document.location.toString();
+        if (url.match('#')) {
+            $('.ez-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+        }
+
+        // Change hash for page-reload
+        $('.ez-tabs a').on('shown.bs.tab', function (e) {
+            window.location.hash = e.target.hash;
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% trans_default_domain 'locationview' %}
+{% import _self as tab %}
+<section>
+    {{ form_start(form_translation_remove) }}
+    {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.translations.translation_manger'|trans|desc('Translation manager'), tools: tab.table_header_tools(form_translation_remove) } %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>{{ 'tab.translations.language_name'|trans|desc('Language name') }}</th>
+            <th>{{ 'tab.translations.language_code'|trans|desc('Language code') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for translation in translations %}
+            <tr>
+                <td>{{ form_widget(form_translation_remove.data.language_codes[translation.languageCode], {'attr': {'disabled': not translation.canDelete}}) }}</td>
+                <td>{{ translation.name }}</td>
+                <td>{{ translation.languageCode }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ form_end(form_translation_remove) }}
+</section>
+
+{% macro table_header_tools(form_translation_remove) %}
+    <button class="btn btn-danger btn--trigger"
+            data-click="#{{ form_translation_remove.data.remove.vars.id }}">{{ form_translation_remove.data.remove.vars.label|trans({}, form_translation_remove.data.remove.vars.translation_domain) }}</button>
+{% endmacro %}

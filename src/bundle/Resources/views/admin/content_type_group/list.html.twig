@@ -1,0 +1,75 @@
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+
+{% trans_default_domain 'content_type' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans([], 'messages') },
+        { value: 'content_type_group.breadcrumb.list'|trans }
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'content_type_group.breadcrumb.list'|trans,
+        iconName: 'content-types'
+    } %}
+{% endblock %}
+
+{% block content %}
+    <section class="container mt-5">
+        <div class="ez-table-header">
+            <h5>{{ 'content_type_group.view.list.title'|trans }}</h5>
+            <div>
+                <a href="{{ path('ezplatform.content_type_group.add') }}" class="btn btn-primary">
+                    {{ 'content_type_group.view.list.action.add'|trans }}
+                </a>
+            </div>
+        </div>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>{{ 'content_type_group.view.list.column.identifier'|trans }}</th>
+                    <th>{{ 'content_type_group.view.list.column.id'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for content_type_group in content_type_groups %}
+                <tr>
+                    <td>
+                        {% set view_url = path('ezplatform.content_type_group.view', {
+                            contentTypeGroupId: content_type_group.id
+                        }) %}
+
+                        <a href="{{ view_url }}">{{ content_type_group.identifier }}</a>
+                    </td>
+                    <td>{{ content_type_group.id }}</td>
+                    <td class="text-right">
+                        {% set edit_url = path('ezplatform.content_type_group.edit', {
+                            contentTypeGroupId: content_type_group.id
+                        }) %}
+
+                        {% set delete_url = path('ezplatform.content_type_group.delete', {
+                            contentTypeGroupId: content_type_group.id
+                        }) %}
+
+                        <form action="{{ delete_url }}" method="POST">
+                            <input name="_method" type="hidden" value="DELETE" />
+                            <input name="form[_token]" type="hidden" value="{{ csrf_token('form') }}" />
+
+                            <a href="{{ edit_url }}" class="btn btn-secondary">
+                                {{ 'content_type_group.view.list.action.edit'|trans }}
+                            </a>
+                            <button class="btn btn-danger">
+                                {{ 'content_type_group.view.list.action.delete'|trans }}
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

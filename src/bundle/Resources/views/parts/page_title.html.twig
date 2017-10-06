@@ -1,0 +1,15 @@
+{% if title is defined %}
+    <div class="ez-page-title pt-3">
+        <h2>
+        {% if iconName is defined%}
+            <svg class="ez-icon ez-icon-{{ iconName }}">
+                <use xlink:href="{{ asset('bundles/ezplatform/img/ez-icons.svg') }}#{{ iconName }}"></use>
+            </svg>
+        {% endif %}
+        {{ title }}
+        </h2>
+        {% if contentTypeName is defined %}
+            <h5>{{ contentTypeName }}</h5>
+        {% endif %}
+    </div>
+{% endif %}

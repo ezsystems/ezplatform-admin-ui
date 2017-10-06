@@ -1,0 +1,59 @@
+{% trans_default_domain 'role' %}
+
+<section class="container mt-4">
+    <div class="ez-table-header">
+        <h5>{{ 'role_assignment.view.list.title'|trans }}</h5>
+
+        <a href="{{ path('ezplatform.role_assignment.create', {roleId: role.id}) }}" class="btn btn-primary">
+            {{ 'role_assignment.view.list.action.add'|trans }}
+        </a>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>{{ 'role_assignment.view.list.panel.assignments.column.user_group'|trans }}</th>
+            <th>{{ 'role_assignment.view.list.panel.assignments.column.limitation'|trans }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for role_assignment in assignments %}
+            <tr>
+                <td>
+                    {%- if role_assignment.usergroup is defined -%}
+                        {{ ez_content_name( role_assignment.usergroup ) }}
+                    {%- else -%}
+                        {{ ez_content_name( role_assignment.user ) }}
+                    {%- endif -%}
+                </td>
+                <td>
+                    {%- if role_assignment.rolelimitation -%}
+                        {{- role_assignment.rolelimitation.identifier -}}
+                        {%- for limitationValue in role_assignment.rolelimitation.limitationValues -%}
+                            {%- if loop.first -%}( {% endif -%}
+                            {# TODO: https://jira.ez.no/browse/EZP-24699 Enrich Role limitations view with links and human readable names #}
+                            {{- limitationValue -}}
+                            {%- if not loop.last -%}, {% endif -%}
+                            {%- if loop.last %} ){%- endif -%}
+                        {%- endfor -%}
+                    {%- else -%}
+                        -
+                    {%- endif -%}
+                </td>
+                <td class="text-right">
+                    {% set deleteForm = deleteFormsByAssignmentId[role_assignment.id] %}
+                    {{ form_start(deleteForm, {
+                        "action": path('ezplatform.role_assignment.delete', {
+                            "roleId": role.id,
+                            "assignmentId": role_assignment.id
+                        })
+                    }) }}
+                    {{ form_widget(deleteForm.delete) }}
+                    {{ form_end(deleteForm) }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>

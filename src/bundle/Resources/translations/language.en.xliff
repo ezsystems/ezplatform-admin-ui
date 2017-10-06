@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-09-22T10:56:03Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="afee1c14dce2b30b230a0de49867c19712c3685f" resname="language.code">
+        <source>Code</source>
+        <target>Code</target>
+        <note>key: language.code</note>
+        <jms:reference-file line="32">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="670884ed109bd22b18847ccb016a0faf72470640" resname="language.code.label">
+        <source>Language code:</source>
+        <target>Language code:</target>
+        <note>key: language.code.label</note>
+        <jms:reference-file line="20">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0c028c20c9b353fbd7b71bfef8b4ae3dcbd0d7e4" resname="language.disabled">
+        <source>Disabled</source>
+        <target>Disabled</target>
+        <note>key: language.disabled</note>
+        <jms:reference-file line="47">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+        <jms:reference-file line="28">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="67f5b766ec64104c9936dc826adf45bdf55f38f9" resname="language.edit">
+        <source>Edit</source>
+        <target>Edit</target>
+        <note>key: language.edit</note>
+        <jms:reference-file line="11">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="54">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+        <jms:reference-file line="56">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+        <jms:reference-file line="34">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+        <jms:reference-file line="36">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="065fdff561c25266ec49bbdaf8c5d0bdd6e9dd7f" resname="language.enabled">
+        <source>Enabled</source>
+        <target>Enabled</target>
+        <note>key: language.enabled</note>
+        <jms:reference-file line="34">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+        <jms:reference-file line="46">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+        <jms:reference-file line="28">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="11f29ad3c27254c1fea1d685b1961546d4949553" resname="language.enabled.label">
+        <source>Enabled:</source>
+        <target>Enabled:</target>
+        <note>key: language.enabled.label</note>
+        <jms:reference-file line="26">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0367aa925124b3d8db3ea8b85ae45ffecdafbf7c" resname="language.form.cancel">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>key: language.form.cancel</note>
+        <jms:reference-file line="50">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="55">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="06869c8162f8a2914b5a5b10af189b8b0a532e7d" resname="language.form.delete">
+        <source>Delete</source>
+        <target>Delete</target>
+        <note>key: language.form.delete</note>
+        <jms:reference-file line="40">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="acf6ff41e3b9acb2cbbcd4a8e908cf52c08b86af" resname="language.id">
+        <source>Id</source>
+        <target>Id</target>
+        <note>key: language.id</note>
+        <jms:reference-file line="33">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="60c35c78d83e0e32173bc6eda1bd696d223b49bd" resname="language.id.label">
+        <source>Language id:</source>
+        <target>Language id:</target>
+        <note>key: language.id.label</note>
+        <jms:reference-file line="23">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ec0418b84a04e7ba4b75a65cbd8a395144e8d8e8" resname="language.list">
+        <source>Languages</source>
+        <target>Languages</target>
+        <note>key: language.list</note>
+        <jms:reference-file line="16">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="14">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+        <jms:reference-file line="22">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+        <jms:reference-file line="72">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2a52961302ce7dfa4a21c5e0bcc239f5a9a36cfe" resname="language.modal.message">
+        <source>Do you want to delete language?</source>
+        <target>Do you want to delete language?</target>
+        <note>key: language.modal.message</note>
+        <jms:reference-file line="51">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5194109109a1b0a7ac056729d9369fb757e8d9cf" resname="language.modal.title">
+        <source>Please confirm</source>
+        <target>Please confirm</target>
+        <note>key: language.modal.title</note>
+        <jms:reference-file line="45">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c0ccfb7e7bc6d434ca93e998637fe775ba4a2de0" resname="language.name">
+        <source>Name</source>
+        <target>Name</target>
+        <note>key: language.name</note>
+        <jms:reference-file line="31">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e033c3bb99a4c1b19b1aaa80c637751afe1f474d" resname="language.name.label">
+        <source>Language name:</source>
+        <target>Language name:</target>
+        <note>key: language.name.label</note>
+        <jms:reference-file line="17">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8e4642a0c879921e8bf31752abc577c4bf8d098b" resname="language.new">
+        <source>New Language</source>
+        <target>New Language</target>
+        <note>key: language.new</note>
+        <jms:reference-file line="7">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="24">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8df2798a2851c0d43893e3862f8a2e6e4290b141" resname="language.view.title">
+        <source>Language: %languageName%</source>
+        <target>Language: %languageName%</target>
+        <note>key: language.view.title</note>
+        <jms:reference-file line="65">/../vendor/ezsystems/ezplatform-v2-bundle/src/bundle/Resources/views/admin/language/view.html.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

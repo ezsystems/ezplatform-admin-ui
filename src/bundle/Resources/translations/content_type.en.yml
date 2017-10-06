@@ -1,0 +1,129 @@
+content_type:
+    breadcrumb:
+        # Desc: %identifier%
+        view: '%identifier%'
+
+    # Desc: Container
+    container: Container
+
+    # Desc: Default availability
+    default_availability: 'Default availability'
+
+    # Desc: Default availability in primary language, if translation is absent
+    default_availability.help: 'Default availability in primary language, if translation is absent'
+
+    # Desc: {0} Not available|{1} Available
+    default_availability.value: '{0} Not available|{1} Available'
+
+    # Desc: Default property for sorting chilren
+    default_children_sorting: 'Default property for sorting chilren'
+
+    # Desc: Default sort order
+    default_sort: 'Default sort order'
+
+    # Desc: Description
+    description: Description
+
+    # Desc: Identifier
+    identifier: Identifier
+
+    # Desc: Name
+    name: Name
+
+    # Desc: Content name schema
+    name_schema: 'Content name schema'
+
+    # Desc: URL alias name pattern
+    url_alias_schema: 'URL alias name pattern'
+
+    view:
+        edit:
+            # Desc: Edit "%name%"
+            title: 'Edit "%name%"'
+
+        list:
+            action:
+                # Desc: Create a content type
+                add: 'Create a content type'
+
+                # Desc: Delete
+                delete: Delete
+
+                # Desc: Edit
+                edit: Edit
+
+            column:
+                # Desc: ID
+                id: ID
+
+                # Desc: Identifier
+                identifier: Identifier
+
+                # Desc: Modification date
+                modification_date: 'Modification date'
+
+                # Desc: Name
+                name: Name
+
+        view:
+            # Desc: %name%
+            title: '%name%'
+
+content_type_group:
+    breadcrumb:
+        # Desc: Creating a new Content type group
+        add: 'Creating a new Content type group'
+
+        # Desc: Editing Content type group "%identifier%"
+        edit: 'Editing Content type group "%identifier%"'
+
+        # Desc: Content Types
+        list: 'Content Types'
+
+        # Desc: %identifier%
+        view: '%identifier%'
+
+    view:
+        add:
+            action:
+                # Desc: Save
+                save: Save
+
+            # Desc: Creating a new Content Type Group
+            title: 'Creating a new Content Type Group'
+
+        edit:
+            action:
+                # Desc: Save
+                save: Save
+
+            # Desc: Editing Content Type Group "%identifier%"
+            title: 'Editing Content Type Group "%identifier%"'
+
+        list:
+            action:
+                # Desc: Create a Content Type Group
+                add: 'Create a Content Type Group'
+
+                # Desc: Delete
+                delete: Delete
+
+                # Desc: Edit
+                edit: Edit
+
+            column:
+                # Desc: ID
+                id: ID
+
+                # Desc: Name
+                identifier: Name
+
+            # Desc: Content Type Groups
+            title: 'Content Type Groups'
+
+        view:
+            # Desc: "%identifier%" type group
+            title: '"%identifier%" type group'
+
+# Desc: yes_no
+yes_no: yes_no

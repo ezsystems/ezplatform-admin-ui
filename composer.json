@@ -1,0 +1,22 @@
+{
+    "name": "ezsystems/ezplatform-admin-ui",
+    "license": "GPL-2.0",
+    "type": "project",
+    "description": "eZ Platform Admin v2",
+    "autoload": {
+        "psr-4": {
+          "EzPlatformAdminUiBundle\\": "src/bundle/",
+          "EzPlatformAdminUi\\": "src/lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { "Tests\\": "tests/" }
+    },
+    "require": {
+        "php": ">=7.1",
+        "jms/translation-bundle": "^1.3.2",
+        "ezsystems/ezpublish-kernel": "^7.0@dev",
+        "ezsystems/repository-forms": "dev-master as 1.9.x-dev"
+    }
+}
+

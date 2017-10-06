@@ -1,0 +1,47 @@
+trash:
+    delete:
+        # Desc: Empty trash
+        all: 'Empty trash'
+
+        # Desc: Are you sure you want to permanently delete %trashItemsCount% item(s)?
+        all.confirm: 'Are you sure you want to permanently delete %trashItemsCount% item(s)?'
+
+        # Desc: This action cannot be reversed
+        all.info: 'This action cannot be reversed'
+
+        button:
+            # Desc: Cancel
+            cancel: Cancel
+
+            # Desc: Delete permanently
+            confirm: 'Delete permanently'
+
+    is:
+        # Desc: Trash is empty
+        empty: 'Trash is empty'
+
+        # Desc: Any content item you send to trash will end up here
+        empty.description: 'Any content item you send to trash will end up here'
+
+    item:
+        ancesor:
+            in:
+                # Desc: Item's ancestors are in Trash
+                trash: 'Item''s ancestors are in Trash'
+
+    # Desc: Trash
+    list: Trash
+
+    # Desc: Name
+    name: Name
+
+    original:
+        # Desc: Original location
+        location: 'Original location'
+
+    restore:
+        # Desc: Restore selected
+        selected: 'Restore selected'
+
+    # Desc: Type
+    type: Type

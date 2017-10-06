@@ -1,0 +1,40 @@
+@import 'custom';
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+.ez-main-row {
+    min-height: calc(100vh - 60px);
+}
+
+.ez-dashboard .ez-main-row {
+    background-color: $ez-ground-base-dark;
+}
+
+.ez-side-menu,
+.ez-context-menu {
+    .ez-icon {
+        display: block;
+        margin: 0 auto;
+        fill: $white;
+    }
+}
+
+.ezimage-field img {
+    display: inline-block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+
+button {
+    &.btn {
+        white-space: normal;
+    }
+}

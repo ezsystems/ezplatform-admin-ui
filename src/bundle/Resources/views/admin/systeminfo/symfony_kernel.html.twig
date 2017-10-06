@@ -1,0 +1,36 @@
+{% trans_default_domain "systeminfo" %}
+
+<h1>{{ 'symfony_kernel'|trans }}</h1>
+<dl>
+    <dt>{{ 'symfony_kernel.environment'|trans }}</dt>
+    <dd>{{ info.environment }}</dd>
+    <dt>{{ 'symfony_kernel.debugMode'|trans }}</dt>
+    <dd>{% if info.debugMode %}{{ 'symfony_kernel.debugMode.enabled'|trans }}{% else %}{{ 'symfony_kernel.debugMode.disabled'|trans }}{% endif %}</dd>
+    <dt>{{ 'symfony_kernel.version'|trans }}</dt>
+    <dd>{{ info.version }}</dd>
+    <dt>{{ 'symfony_kernel.name'|trans }}</dt>
+    <dd>{{ info.name }}</dd>
+    <dt>{{ 'symfony_kernel.rootDir'|trans }}</dt>
+    <dd>{{ info.rootDir }}</dd>
+    <dt>{{ 'symfony_kernel.cacheDir'|trans }}</dt>
+    <dd>{{ info.cacheDir }}</dd>
+    <dt>{{ 'symfony_kernel.logDir'|trans }}</dt>
+    <dd>{{ info.logDir }}</dd>
+    <dt>{{ 'symfony_kernel.charset'|trans }}</dt>
+    <dd>{{ info.charset }}</dd>
+
+    {% if info.bundles is empty %}
+        <dt>{{ 'bundles'|trans }}</dt>
+        <dd>{{ 'symfony_kernel.bundles.empty'|trans }}</dd>
+    {% endif %}
+</dl>
+
+{% if info.bundles is not empty %}
+    <h2>{{ 'bundles'|trans }}</h2>
+    <dl>
+        {% for bundle, namespace in info.bundles %}
+            <dt>{{ bundle }}</dt>
+            <dd>{{ namespace }}</dd>
+        {% endfor %}
+    </dl>
+{% endif %}

@@ -1,0 +1,72 @@
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+
+{% trans_default_domain 'language' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans([], 'messages') },
+        { value: 'language.list'|trans }
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'language.list'|trans,
+        iconName: 'languages'
+    } %}
+{% endblock %}
+
+{% block content %}
+    <section class="container mt-5">
+        <div class="ez-table-header">
+            <h5>{{ 'language.list'|trans }}</h5>
+            <div>
+                <a href="{{ path('ezplatform.language.create') }}" class="btn btn-primary" {% if not canEdit %} disabled="disabled"{% endif %}>{{ 'language.new'|trans }}</a>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>{{ 'language.name'|trans }}</th>
+                <th>{{ 'language.code'|trans }}</th>
+                <th>{{ 'language.id'|trans }}</th>
+                <th>{{ 'language.enabled'|trans }}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for language in languageList %}
+                <tr>
+                    <td><a href="{{ path( 'ezplatform.language.view', {'languageId': language.id} ) }}">{{ language.name }}</a></td>
+                    <td>{{ language.languageCode }}</td>
+                    <td>{{ language.id }}</td>
+                    <td>
+                        <input type="checkbox" disabled {% if language.enabled %}checked
+                            title="{{ 'language.enabled'|trans }}"
+                            {% else %}title="{{ 'language.disabled'|trans }}"{% endif %}>
+                    </td>
+                    <td class="text-right">
+                        {% set deleteForm = deleteFormsByLanguageId[language.id] %}
+                        {{ form_start(deleteForm, {"action": path("ezplatform.language.delete", {"languageId": language.id})}) }}
+
+                            {% if canEdit %}
+                                <a href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}" class="btn btn-secondary">{{ 'language.edit'|trans }}</a>
+                            {% else %}
+                                <span class="btn btn-secondary" disabled="disabled">{{ 'language.edit'|trans }}</span>
+                            {% endif %}
+                            {{ form_widget(deleteForm.language) }}
+                            {{ form_widget(deleteForm.delete, {
+                                "disabled": not canEdit,
+                                "attr": {"class": "btn btn-danger"}
+                            }) }}
+                        {{ form_end(deleteForm) }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}
+
+{% block title %}{{ 'language.list'|trans }}{% endblock %}

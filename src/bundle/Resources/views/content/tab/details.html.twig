@@ -1,0 +1,72 @@
+{% trans_default_domain 'locationview' %}
+
+{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.content_details'|trans()|desc('Content details') } %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ 'tab.details.creator'|trans()|desc('Creator') }}</th>
+        <th>{{ 'tab.details.last_contributor'|trans()|desc('Last contributor') }}</th>
+        <th>{{ 'tab.details.published_version'|trans()|desc('Published version') }}</th>
+        <th>{{ 'tab.details.translations'|trans()|desc('Translations') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            {% if creator is not empty  %} {{ ez_content_name(creator) }} {% endif %}
+            ({{ contentInfo.publishedDate|localizeddate('medium', 'short', app.request.locale) }})
+        </td>
+        <td>
+            {% if lastContributor is not empty  %}{{ ez_content_name(lastContributor) }} {% endif %}
+            ({{ versionInfo.modificationDate|localizeddate('medium', 'short', app.request.locale) }})
+        </td>
+        <td>{{ versionInfo.versionNo }}</td>
+        <td>{{ translations|length }}
+            {% for translation in translations %}
+                {{ translation.name }}<br>
+            {% endfor %}
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.technical_details'|trans()|desc('Technical details') } %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ 'tab.details.content_id'|trans()|desc('Content ID') }}</th>
+        <th>{{ 'tab.details.location_id'|trans()|desc('Location ID') }}</th>
+        <th>{{ 'tab.details.content_remote_id'|trans()|desc('Content remote ID') }}</th>
+        <th>{{ 'tab.details.location_remote_id'|trans()|desc('Location remote ID') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ contentInfo.id }}</td>
+        <td>{{ location.id  }}</td>
+        <td>{{ contentInfo.remoteId }}</td>
+        <td>{{ location.remoteId }}</td>
+    </tr>
+    </tbody>
+</table>
+
+{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.section_details'|trans()|desc('Section details') } %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ 'tab.details.section_name'|trans()|desc('Section name') }}</th>
+        <th>{{ 'tab.details.section_identifier'|trans()|desc('Section identifier') }}</th>
+        <th>{{ 'tab.details.section_id'|trans()|desc('Section ID') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ section.name }}</td>
+        <td>{{ section.identifier }}</td>
+        <td>{{ section.id }}</td>
+    </tr>
+    </tbody>
+</table>

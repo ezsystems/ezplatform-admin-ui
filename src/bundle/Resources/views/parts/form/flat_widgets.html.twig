@@ -1,0 +1,5 @@
+{% block form_widget %}
+    {% for child in form %}
+        {{ form_widget(child) }}
+    {% endfor %}
+{% endblock %}

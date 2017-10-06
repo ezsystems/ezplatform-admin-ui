@@ -1,0 +1,65 @@
+{% trans_default_domain 'content_type' %}
+
+<section class="container mt-4">
+    <div class="ez-table-header">
+        <h4>{{ 'content_type_group.view.list.title'|trans }}</h4>
+
+        <a href="{{ path('ezplatform.content_type.add', {contentTypeGroupId: content_type_group.id}) }}" class="btn btn-primary">
+            {{ 'content_type.view.list.action.add'|trans }}
+        </a>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>{{ 'content_type.view.list.column.name'|trans }}</th>
+                <th>{{ 'content_type.view.list.column.identifier'|trans }}</th>
+                <th>{{ 'content_type.view.list.column.id'|trans }}</th>
+                <th>{{ 'content_type.view.list.column.modification_date'|trans }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for content_type in content_types %}
+            <tr>
+                <td>
+                {% set view_url = path('ezplatform.content_type.view', {
+                        'contentTypeGroupId': content_type_group.id,
+                        'contentTypeId': content_type.id
+                    }) %}
+
+                    <a href="{{ view_url }}">{{ content_type.name }}</a>
+                </td>
+                <td>{{ content_type.identifier }}</td>
+                <td>{{ content_type.id }}</td>
+                <td>{{ content_type.modificationDate | date }}</td>
+                <td class="text-right">
+                    {% set delete_url = path('ezplatform.content_type.delete', {
+                        'contentTypeGroupId': content_type_group.id,
+                        'contentTypeId': content_type.id
+                    }) %}
+
+                    {% set edit_url = path('ezplatform.content_type.edit', {
+                        'contentTypeGroupId': content_type_group.id,
+                        'contentTypeId': content_type.id
+                    }) %}
+
+                    <form action="{{ delete_url }}" method="POST">
+                        <input name="_method" type="hidden" value="DELETE" />
+                        <input name="form[_token]" type="hidden" value="{{ csrf_token('form') }}" />
+
+                        <a href="{{ edit_url }}" class="btn btn-info">
+                            {{ 'content_type.view.list.action.edit'|trans }}
+                        </a>
+
+                        <button class="btn btn-danger">
+                            {{ 'content_type.view.list.action.delete'|trans }}
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+

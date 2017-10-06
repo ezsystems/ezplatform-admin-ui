@@ -1,0 +1,17 @@
+{% for group in fieldDefinitionsByGroup if group.fieldDefinitions|length > 0 %}
+    <section class="ez-fieldgroup">
+        <h5 class="ez-fieldgroup-name">{{ group.name }}</h5>
+        {% for fieldDefinition in group.fieldDefinitions %}
+            <div class="ez-content-field">
+                <p class="ez-content-field-name">{{ ez_field_name(content, fieldDefinition.identifier) }}:</p>
+                <div class="ez-content-field-value">
+                    {% if ez_is_field_empty(content, fieldDefinition.identifier) %}
+                        <em>{{'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty')}}</em>
+                    {% else %}
+                        {{ ez_render_field(content, fieldDefinition.identifier) }}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+{% endfor %}

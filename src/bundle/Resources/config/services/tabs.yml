@@ -1,0 +1,36 @@
+imports:
+    - { resource: tabs/locationview.yml }
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    EzPlatformAdminUiBundle\Templating\Twig\TabExtension: ~
+    EzPlatformAdminUi\Tab\TabRegistry: ~
+
+    EzPlatformAdminUi\Tab\Event\Subscriber\:
+        resource: "../../../lib/Tab/Event/Subscriber/*"
+        public: true
+        tags: ['kernel.event_subscriber']
+
+    EzPlatformAdminUi\Tab\AbstractTab:
+        abstract: true
+        lazy: true
+
+    EzPlatformAdminUi\Tab\AbstractRouteBasedTab:
+        parent: EzPlatformAdminUi\Tab\AbstractTab
+        abstract: true
+        autowire: true
+        autoconfigure: false
+        public: false
+        lazy: true
+
+    EzPlatformAdminUi\Tab\AbstractControllerBasedTab:
+        parent: EzPlatformAdminUi\Tab\AbstractTab
+        abstract: true
+        autowire: true
+        autoconfigure: false
+        public: false
+        lazy: true

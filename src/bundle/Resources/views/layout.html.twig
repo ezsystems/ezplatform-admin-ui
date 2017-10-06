@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="CSRF-Token" content="{{ app.session.get('_csrf/authenticate') }}" />
+        <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
+        <title>{% block title %}eZ Platform{% endblock %}</title>
+        {% block stylesheets %}
+            {% stylesheets
+                'bundles/ezplatform/css/ezplatform-bootstrap.min.css'
+                'bundles/ezplatform/css/ezplatform.min.css'
+            %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatform/images/favicon.ico') }}" />
+        <script src="{{ asset('assets/vendor/react/react.min.js')}}"></script>
+        <script src="{{ asset('assets/vendor/react/react-dom.min.js')}}"></script>
+        <script src="{{ asset('bundles/ezplatform/js/modules/universal.discovery.module.js')}}"></script>
+        <script src="{{ asset('bundles/ezplatform/js/modules/sub.items.module.js')}}"></script>
+        <script src="{{ asset('bundles/ezplatform/js/scripts/button.trigger.js') }}"></script>
+        <script type="application/javascript" src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+        <script type="application/javascript" src="{{ asset('assets/vendor/popper.js/dist/umd/popper.js') }}"></script>
+        <script type="application/javascript" src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </head>
+    <body class="{% block bodyClass %}{% endblock %}">
+        {% block navigation %}
+            {{ knp_menu_render('main', {
+                'template': '@EzPlatformAdminUi/parts/menu.html.twig',
+                'currentClass': 'active',
+                'ancestorClass': 'active'
+            }) }}
+        {% endblock %}
+        <div class="container-fluid ez-header">
+            <div class="container">
+                {% block breadcrumbs %}{% endblock %}
+                {% block pageTitle %}{% endblock %}
+            </div>
+        </div>
+        <div class="container-fluid ez-main-container">
+            {% block content %}{% endblock %}
+        </div>
+        <div class="ez-notifications-container">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message|trans }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </body>
+</html>
