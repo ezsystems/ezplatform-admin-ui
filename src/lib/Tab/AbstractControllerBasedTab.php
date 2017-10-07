@@ -7,7 +7,6 @@ namespace EzPlatformAdminUi\Tab;
 
 use Symfony\Bridge\Twig\Extension\HttpKernelRuntime;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
@@ -17,18 +16,16 @@ use Twig\Environment;
 abstract class AbstractControllerBasedTab extends AbstractTab
 {
     /** @var HttpKernelRuntime */
-    private $httpKernelRuntime;
+    protected $httpKernelRuntime;
 
     /**
      * @param Environment $twig
      * @param TranslatorInterface $translator
-     * @param UrlGeneratorInterface $urlGenerator
      * @param HttpKernelRuntime $httpKernelRuntime
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
-        UrlGeneratorInterface $urlGenerator,
         HttpKernelRuntime $httpKernelRuntime
     ) {
         parent::__construct($twig, $translator);

@@ -1,7 +1,8 @@
 ezplatform.dashboard:
     path: /dashboard
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:Dashboard:dashboard'
+        _controller: 'FrameworkBundle:Template:template'
+        template: 'EzPlatformBundle:dashboard:dashboard.html.twig'
 
 ezplatform.content.edit:
     path: /todo/content/edit

@@ -56,6 +56,14 @@ class TabRegistry
     }
 
     /**
+     * @param TabGroup $group
+     */
+    public function addTabGroup(TabGroup $group)
+    {
+        $this->tabGroups[$group->getIdentifier()] = $group;
+    }
+
+    /**
      * @param TabInterface $tab
      * @param string $group
      */

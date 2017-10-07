@@ -50,7 +50,7 @@
             </div>
             <div class="panel panel-primary">
                 <div class="panel-body">
-                    {{ ez_platform_tabs('location-view', {'content': content, 'location': location,  'contentType': contentType }) }}
+                    {{ ez_platform_tabs('location-view', {'content': content, 'location': location,  'contentType': contentType }, 'EzPlatformBundle:parts/tab:locationview.html.twig') }}
 
                     {% if contentType.isContainer %}
                     <div class="container">

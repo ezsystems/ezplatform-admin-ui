@@ -3,11 +3,12 @@
 namespace EzPlatformAdminUiBundle;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
-use EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
 use EzPlatformAdminUi\SiteAccess\AdminFilter;
-use EzPlatformAdminUiBundle\DependencyInjection\Compiler\RepositoryFormsViewPass;
 use EzPlatformAdminUiBundle\DependencyInjection\Compiler\MenuPass;
+use EzPlatformAdminUiBundle\DependencyInjection\Compiler\RepositoryFormsViewPass;
+use EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
 use EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
+use EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -29,11 +30,15 @@ class EzPlatformAdminUiBundle extends Bundle
         $this->addCompilerPasses($container);
     }
 
+    /**
+     * @param ContainerBuilder $container
+     */
     private function addCompilerPasses(ContainerBuilder $container)
     {
         $container->addCompilerPass(new TabPass());
         $container->addCompilerPass(new MenuPass());
         $container->addCompilerPass(new RepositoryFormsViewPass());
         $container->addCompilerPass(new UiConfigProviderPass());
+        $container->addCompilerPass(new SystemInfoTabGroupPass());
     }
 }

@@ -26,19 +26,25 @@ class TabExtension extends Twig_Extension
     /** @var EventDispatcherInterface */
     protected $eventDispatcher;
 
+    /** @var string */
+    protected $defaultTemplate;
+
     /**
      * @param Environment $twig
      * @param TabService $tabService
      * @param EventDispatcherInterface $eventDispatcher
+     * @param string $defaultTemplate
      */
     public function __construct(
         Environment $twig,
         TabService $tabService,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        string $defaultTemplate
     ) {
         $this->twig = $twig;
         $this->tabService = $tabService;
         $this->eventDispatcher = $eventDispatcher;
+        $this->defaultTemplate = $defaultTemplate;
     }
 
     public function getFunctions()
@@ -55,11 +61,14 @@ class TabExtension extends Twig_Extension
     /**
      * @param string $groupIdentifier
      * @param array $parameters
+     * @param string|null $template
      *
      * @return string
      */
-    public function renderTabGroup(string $groupIdentifier, array $parameters): string
+    public function renderTabGroup(string $groupIdentifier, array $parameters = [], ?string $template = null): string
     {
+        $template = $template ?? $this->defaultTemplate;
+
         $tabGroup = $this->tabService->getTabGroup($groupIdentifier);
         $tabGroupEvent = $this->dispatchTabGroupPreRenderEvent($tabGroup);
 
@@ -70,7 +79,7 @@ class TabExtension extends Twig_Extension
         }
 
         return $this->twig->render(
-            'EzPlatformAdminUiBundle:parts/tab:tabs.html.twig',
+            $template,
             array_merge(['tabs' => $tabs, 'group' => $groupIdentifier], $parameters)
         );
     }

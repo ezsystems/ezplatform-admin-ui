@@ -16,7 +16,7 @@ class TabGroup
      * @param string $name
      * @param array $tabs
      */
-    public function __construct(string $name, array $tabs)
+    public function __construct(string $name, array $tabs = [])
     {
         $this->identifier = $name;
         $this->tabs = $tabs;
