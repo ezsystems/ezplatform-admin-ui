@@ -8,7 +8,9 @@
                     {% if ez_is_field_empty(content, fieldDefinition.identifier) %}
                         <em>{{'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty')}}</em>
                     {% else %}
-                        {{ ez_render_field(content, fieldDefinition.identifier) }}
+                        {{ ez_render_field(content, fieldDefinition.identifier, {
+                            template: '@EzPlatformAdminUi/content_fields.html.twig'
+                        }) }}
                     {% endif %}
                 </div>
             </div>

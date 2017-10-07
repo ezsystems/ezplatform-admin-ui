@@ -13,11 +13,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class EzPlatformAdminUiBundle extends Bundle
 {
-    public function getParent()
-    {
-        return 'EzPublishCoreBundle';
-    }
-
     public function build(ContainerBuilder $container)
     {
         /** @var EzPublishCoreExtension $core */
