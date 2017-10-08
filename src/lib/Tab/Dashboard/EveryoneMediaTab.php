@@ -71,7 +71,7 @@ class EveryoneMediaTab extends AbstractTab implements OrderedTabInterface
         $pager->setMaxPerPage($limit);
         $pager->setCurrentPage($page);
 
-        return $this->twig->render('EzPlatformBundle:dashboard/tab:all_media.html.twig', [
+        return $this->twig->render('EzPlatformAdminUiBundle:dashboard/tab:all_media.html.twig', [
             'data' => $this->pagerContentToDataMapper->map($pager),
         ]);
     }

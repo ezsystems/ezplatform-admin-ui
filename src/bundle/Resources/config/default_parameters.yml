@@ -22,4 +22,4 @@ parameters:
                 match:
                     SystemInfo\Identifier: 'symfony_kernel'
 
-    ezplatform.content_view.tabs.default_template: 'EzPlatformBundle:parts/tab:default.html.twig'
+    ezplatform.content_view.tabs.default_template: 'EzPlatformAdminUiBundle:parts/tab:default.html.twig'

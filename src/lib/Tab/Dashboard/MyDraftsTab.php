@@ -87,7 +87,7 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface
             ];
         }
 
-        return $this->twig->render('EzPlatformBundle:dashboard/tab:my_drafts.html.twig', [
+        return $this->twig->render('EzPlatformAdminUiBundle:dashboard/tab:my_drafts.html.twig', [
             'data' => $data,
         ]);
     }
