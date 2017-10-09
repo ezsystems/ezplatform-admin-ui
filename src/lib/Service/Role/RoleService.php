@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Service\Role;
+namespace EzSystems\EzPlatformAdminUi\Service\Role;
 
 use eZ\Publish\API\Repository as Repository;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
@@ -13,9 +13,9 @@ use eZ\Publish\API\Repository\Values\User\Limitation\SubtreeLimitation;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\Role;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
-use EzPlatformAdminUi\Form\Data\PolicyData;
-use EzPlatformAdminUi\Form\Data\RoleAssignmentData;
-use EzPlatformAdminUi\Form\Data\RoleData;
+use EzSystems\EzPlatformAdminUi\Form\Data\PolicyData;
+use EzSystems\EzPlatformAdminUi\Form\Data\RoleAssignmentData;
+use EzSystems\EzPlatformAdminUi\Form\Data\RoleData;
 
 class RoleService
 {

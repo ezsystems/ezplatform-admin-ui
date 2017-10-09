@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Data;
+namespace EzSystems\EzPlatformAdminUi\Form\Data;
 
 use Symfony\Component\Validator\Constraints as Assert;
 

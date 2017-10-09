@@ -1,9 +1,9 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget;
 
-use EzPlatformAdminUi\Form\Type\Content\LocationType;
-use EzPlatformAdminUi\Form\Type\Content\SectionType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\SectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\DataTransformerInterface;

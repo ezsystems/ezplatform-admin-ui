@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Type\Section;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Section;
 
 use eZ\Publish\API\Repository\SectionService;
 use Symfony\Component\Form\AbstractType;

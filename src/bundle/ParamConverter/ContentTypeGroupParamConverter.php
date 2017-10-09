@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUiBundle\ParamConverter;
+namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
-use EzPlatformAdminUi\Service\ContentTypeGroup\ContentTypeGroupService;
+use EzSystems\EzPlatformAdminUi\Service\ContentTypeGroup\ContentTypeGroupService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;

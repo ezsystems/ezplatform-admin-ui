@@ -1,22 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab\LocationView;
+namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
-use EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
-use EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
-use EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
-use EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
-use EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
-use EzPlatformAdminUi\Tab\AbstractTab;
-use EzPlatformAdminUi\Tab\OrderedTabInterface;
-use EzPlatformAdminUi\UI\Dataset\DatasetFactory;
-use EzPlatformAdminUi\UI\Value as UIValue;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
+use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;

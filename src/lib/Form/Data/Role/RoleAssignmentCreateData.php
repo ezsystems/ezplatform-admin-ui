@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Data\Role;
+namespace EzSystems\EzPlatformAdminUi\Form\Data\Role;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Section;

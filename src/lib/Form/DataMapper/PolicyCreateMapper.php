@@ -1,10 +1,10 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\DataMapper;
+namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\Core\Repository\Values\User\PolicyCreateStruct;
-use EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
 
 class PolicyCreateMapper implements DataMapperInterface
 {

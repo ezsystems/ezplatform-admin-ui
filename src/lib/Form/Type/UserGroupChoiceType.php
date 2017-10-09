@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Type;
+namespace EzSystems\EzPlatformAdminUi\Form\Type;
 
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;

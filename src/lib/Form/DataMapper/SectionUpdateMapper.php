@@ -1,10 +1,10 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\DataMapper;
+namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
-use EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 
 class SectionUpdateMapper implements DataMapperInterface
 {

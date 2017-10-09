@@ -1,10 +1,10 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\DataMapper;
+namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\User\RoleUpdateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
-use EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
 
 class RoleUpdateMapper implements DataMapperInterface
 {

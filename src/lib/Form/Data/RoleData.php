@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Data;
+namespace EzSystems\EzPlatformAdminUi\Form\Data;
 
 use eZ\Publish\API\Repository\Values\User\Role;
 

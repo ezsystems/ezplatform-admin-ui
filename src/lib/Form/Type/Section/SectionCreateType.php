@@ -1,8 +1,8 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\Type\Section;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Section;
 
-use EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

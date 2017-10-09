@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab\Dashboard;
+namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
-use EzPlatformAdminUi\Tab\AbstractTab;
-use EzPlatformAdminUi\Tab\OrderedTabInterface;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Translation\TranslatorInterface;

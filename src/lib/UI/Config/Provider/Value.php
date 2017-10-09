@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\UI\Config\Provider;
+namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
 
-use EzPlatformAdminUi\UI\Config\ProviderInterface;
+use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 
 /**
  * Simple value provider that passes on the value it is given in the constructor.

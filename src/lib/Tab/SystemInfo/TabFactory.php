@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab\SystemInfo;
+namespace EzSystems\EzPlatformAdminUi\Tab\SystemInfo;
 
 
 use Symfony\Bridge\Twig\Extension\HttpKernelRuntime;

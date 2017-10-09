@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab\Event;
+namespace EzSystems\EzPlatformAdminUi\Tab\Event;
 
 
-use EzPlatformAdminUi\Tab\TabGroup;
+use EzSystems\EzPlatformAdminUi\Tab\TabGroup;
 use Symfony\Component\EventDispatcher\Event;
 
 class TabGroupEvent extends Event

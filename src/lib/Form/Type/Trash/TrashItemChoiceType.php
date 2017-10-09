@@ -1,9 +1,9 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\Type\Trash;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Trash;
 
-use EzPlatformAdminUi\Form\Data\TrashItemData;
-use EzPlatformAdminUi\Service\TrashService;
+use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
+use EzSystems\EzPlatformAdminUi\Service\TrashService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -1,10 +1,10 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\DependencyInjection\Compiler;
+namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
 
 
-use EzPlatformAdminUi\Menu\Item;
-use EzPlatformAdminUi\Menu\Registry;
+use EzSystems\EzPlatformAdminUi\Menu\Item;
+use EzSystems\EzPlatformAdminUi\Menu\Registry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;

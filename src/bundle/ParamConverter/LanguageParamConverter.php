@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUiBundle\ParamConverter;
+namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;

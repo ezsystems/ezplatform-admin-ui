@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Type\Content;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Content;
 
 use eZ\Publish\API\Repository\ContentService;
-use EzPlatformAdminUi\Form\DataTransformer\ContentInfoTransformer;
+use EzSystems\EzPlatformAdminUi\Form\DataTransformer\ContentInfoTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Type\Content\Location;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Location;
 
 
-use EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
-use EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
-use EzPlatformAdminUi\Form\Type\Content\LocationType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

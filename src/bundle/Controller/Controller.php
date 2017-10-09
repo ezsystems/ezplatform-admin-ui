@@ -1,6 +1,6 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab\Event;
+namespace EzSystems\EzPlatformAdminUi\Tab\Event;
 
 
 class TabEvents

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use EzPlatformAdminUi\Form\Data\ContentTypeGroupData;
-use EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
-use EzPlatformAdminUi\Service\ContentTypeGroup\ContentTypeGroupService;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroupData;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
+use EzSystems\EzPlatformAdminUi\Service\ContentTypeGroup\ContentTypeGroupService;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

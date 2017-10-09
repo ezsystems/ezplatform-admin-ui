@@ -1,6 +1,6 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\Data;
+namespace EzSystems\EzPlatformAdminUi\Form\Data;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\TrashItem as APITrashItem;

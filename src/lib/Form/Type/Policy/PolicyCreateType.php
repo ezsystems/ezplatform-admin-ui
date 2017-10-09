@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Type\Policy;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
 
-use EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

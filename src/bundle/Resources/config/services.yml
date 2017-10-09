@@ -13,56 +13,55 @@ services:
         autoconfigure: true
         public: false
 
-    EzPlatformAdminUi\Service\TrashService\TrashService: '@EzPlatformAdminUi\Service\TrashService'
+    EzSystems\EzPlatformAdminUi\Service\TrashService\TrashService: '@EzSystems\EzPlatformAdminUi\Service\TrashService'
 
-    EzPlatformAdminUi\Service\Role\RoleServiceInterface: '@EzPlatformAdminUi\Service\Role\RoleService'
+    EzSystems\EzPlatformAdminUi\Service\Role\RoleServiceInterface: '@EzSystems\EzPlatformAdminUi\Service\Role\RoleService'
 
-    EzPlatformAdminUiBundle\ParamConverter\:
+    EzSystems\EzPlatformAdminUiBundle\ParamConverter\:
         resource: "../../ParamConverter/*"
         public: true
         tags:
             - { name: 'request.param_converter' }
 
-    EzPlatformAdminUi\EventListener\:
+    EzSystems\EzPlatformAdminUi\EventListener\:
         resource: "../../../lib/EventListener/*"
         public: true
         tags:
             - { name: kernel.event_subscriber }
 
-    EzPlatformAdminUi\EventListener\RequestListener:
+    EzSystems\EzPlatformAdminUi\EventListener\RequestListener:
         calls:
             - [setContainer, ["@service_container"]]
         tags:
             - { name: kernel.event_subscriber }
 
-    EzPlatformAdminUi\Service\:
+    EzSystems\EzPlatformAdminUi\Service\:
         resource: '../../../lib/Service/*'
         public: true
 
-    EzPlatformAdminUi\Service\CacheService:
-        class: EzPlatformAdminUi\Service\CacheService
+    EzSystems\EzPlatformAdminUi\Service\CacheService:
         arguments:
             - '@ezpublish.spi.persistence.legacy'
             - '@ezpublish.cache_pool'
 
-    EzPlatformAdminUi\Service\ContentTypeService:
+    EzSystems\EzPlatformAdminUi\Service\ContentTypeService:
         arguments:
             $prioritizedLanguages: '$languages$'
 
-    EzPlatformAdminUi\Form\Type\:
+    EzSystems\EzPlatformAdminUi\Form\Type\:
         resource: '../../../lib/Form/Type'
 
-    EzPlatformAdminUi\Form\DataMapper\:
+    EzSystems\EzPlatformAdminUi\Form\DataMapper\:
         resource: '../../../lib/Form/DataMapper'
 
-    EzPlatformAdminUi\Form\Type\Policy\PolicyChoiceType:
+    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyChoiceType:
         arguments:
             $policyMap: "%ezpublish.api.role.policy_map%"
 
-    EzPlatformAdminUi\UI\Dataset\Factory: ~
-    EzPlatformAdminUi\UI\Value\ValueFactory:
+    EzSystems\EzPlatformAdminUi\UI\Dataset\Factory: ~
+    EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory:
         lazy: true
         tags:
             - { name: form.type }
 
-    EzPlatformAdminUi\Form\Factory\FormFactory: ~
+    EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory: ~

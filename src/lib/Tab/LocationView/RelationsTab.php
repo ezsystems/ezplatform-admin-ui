@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab\LocationView;
+namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use EzPlatformAdminUi\Tab\AbstractTab;
-use EzPlatformAdminUi\Tab\OrderedTabInterface;
-use EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
+use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 

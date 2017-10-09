@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Data\Trash;
+namespace EzSystems\EzPlatformAdminUi\Form\Data\Trash;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzPlatformAdminUi\Form\Data\TrashItemData;
+use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

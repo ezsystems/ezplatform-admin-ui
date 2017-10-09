@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\SearchService;
@@ -10,10 +10,10 @@ use eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\SubtreeLimitation;
 use eZ\Publish\API\Repository\Values\User\Role;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
-use EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
-use EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
-use EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType;
-use EzPlatformAdminUi\Form\Type\Role\RoleAssignmentDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentDeleteType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

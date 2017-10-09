@@ -1,11 +1,11 @@
 <?php
 
-namespace EzPlatformAdminUi\EventListener;
+namespace EzSystems\EzPlatformAdminUi\EventListener;
 
-use EzPlatformAdminUi\Tab\Event\TabEvents;
-use EzPlatformAdminUi\Tab\Event\TabGroupEvent;
-use EzPlatformAdminUi\Tab\SystemInfo\TabFactory;
-use EzPlatformAdminUi\Tab\TabRegistry;
+use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
+use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;
+use EzSystems\EzPlatformAdminUi\Tab\SystemInfo\TabFactory;
+use EzSystems\EzPlatformAdminUi\Tab\TabRegistry;
 use EzSystems\EzSupportToolsBundle\SystemInfo\SystemInfoCollectorRegistry;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

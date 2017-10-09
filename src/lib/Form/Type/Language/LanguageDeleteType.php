@@ -1,8 +1,8 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\Type\Language;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
 
-use EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

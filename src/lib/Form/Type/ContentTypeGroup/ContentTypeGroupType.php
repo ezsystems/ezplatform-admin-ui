@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Type\ContentTypeGroup;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup;
 
-use EzPlatformAdminUi\Form\Data\ContentTypeGroupData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroupData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;

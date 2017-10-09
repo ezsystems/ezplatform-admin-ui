@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\UI\Config;
+namespace EzSystems\EzPlatformAdminUi\UI\Config;
 
 /**
  * Provides parameters as a serializable value.

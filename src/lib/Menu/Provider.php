@@ -1,6 +1,6 @@
 <?php
 
-namespace EzPlatformAdminUi\Menu;
+namespace EzSystems\EzPlatformAdminUi\Menu;
 
 class Provider
 {

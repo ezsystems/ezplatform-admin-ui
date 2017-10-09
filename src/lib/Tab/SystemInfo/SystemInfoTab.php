@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab\SystemInfo;
+namespace EzSystems\EzPlatformAdminUi\Tab\SystemInfo;
 
 
-use EzPlatformAdminUi\Tab\AbstractControllerBasedTab;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractControllerBasedTab;
 use Symfony\Bridge\Twig\Extension\HttpKernelRuntime;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
 use Symfony\Component\Translation\TranslatorInterface;

@@ -1,20 +1,20 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
-use EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
-use EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
-use EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
-use EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
-use EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
-use EzPlatformAdminUi\Form\Data\UiFormData;
-use EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
+use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

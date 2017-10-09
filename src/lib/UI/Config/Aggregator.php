@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\UI\Config;
+namespace EzSystems\EzPlatformAdminUi\UI\Config;
 
-use EzPlatformAdminUi\Exception\InvalidArgumentException;
+use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 /**
  * Aggregates a set of ApplicationConfig Providers.

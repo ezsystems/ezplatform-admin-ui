@@ -1,14 +1,14 @@
 <?php
 
-namespace EzPlatformAdminUiBundle;
+namespace EzSystems\EzPlatformAdminUiBundle;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
-use EzPlatformAdminUi\SiteAccess\AdminFilter;
-use EzPlatformAdminUiBundle\DependencyInjection\Compiler\MenuPass;
-use EzPlatformAdminUiBundle\DependencyInjection\Compiler\RepositoryFormsViewPass;
-use EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
-use EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
-use EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
+use EzSystems\EzPlatformAdminUi\SiteAccess\AdminFilter;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\MenuPass;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\RepositoryFormsViewPass;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

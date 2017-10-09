@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab\Dashboard;
+namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
-use EzPlatformAdminUi\Tab\AbstractTab;
-use EzPlatformAdminUi\Tab\OrderedTabInterface;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;

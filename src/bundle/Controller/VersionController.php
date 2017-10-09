@@ -1,12 +1,12 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
-use EzPlatformAdminUi\Form\Data\UiFormData;
-use EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
-use EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzPlatformAdminUi\Tab\LocationView\VersionsTab;
+use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Tab\LocationView\VersionsTab;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 

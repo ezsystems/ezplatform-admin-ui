@@ -1,6 +1,6 @@
 <?php
 
-namespace EzPlatformAdminUi\Exception;
+namespace EzSystems\EzPlatformAdminUi\Exception;
 
 use Exception;
 

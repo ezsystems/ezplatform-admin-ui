@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\UI\Dataset;
+namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
-use EzPlatformAdminUi\UI\Value\ValueFactory;
+use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 
 class DatasetFactory
 {

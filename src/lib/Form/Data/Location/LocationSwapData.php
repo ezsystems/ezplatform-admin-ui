@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Data\Location;
+namespace EzSystems\EzPlatformAdminUi\Form\Data\Location;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\UI\Dataset;
+namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzPlatformAdminUi\UI\Value as UIValue;
-use EzPlatformAdminUi\UI\Value\ValueFactory;
+use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
+use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 
 class LocationsDataset
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\DependencyInjection;
+namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Resource\FileResource;

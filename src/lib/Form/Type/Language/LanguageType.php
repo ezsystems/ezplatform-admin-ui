@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Type\Language;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
 
 use eZ\Publish\API\Repository\LanguageService;
-use EzPlatformAdminUi\Form\DataTransformer\LanguageTransformer;
+use EzSystems\EzPlatformAdminUi\Form\DataTransformer\LanguageTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;

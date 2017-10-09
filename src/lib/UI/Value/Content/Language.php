@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\UI\Value\Content;
+namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
 
 use eZ\Publish\API\Repository\Values\Content\Language as APILanguage;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\Type\Trash;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Trash;
 
-use EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
-use EzPlatformAdminUi\Form\Data\TrashItemData;
-use EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
+use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
+use EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

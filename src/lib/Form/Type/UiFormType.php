@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Type;
+namespace EzSystems\EzPlatformAdminUi\Form\Type;
 
 
-use EzPlatformAdminUi\Form\Data\UiFormData;
+use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\Role;
-use EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
-use EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
-use EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
-use EzPlatformAdminUi\Form\DataMapper\PolicyCreateMapper;
-use EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper;
-use EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType;
-use EzPlatformAdminUi\Form\Type\Policy\PolicyDeleteType;
-use EzPlatformAdminUi\Form\Type\Policy\PolicyUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyCreateMapper;
+use EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper;
+use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyUpdateType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

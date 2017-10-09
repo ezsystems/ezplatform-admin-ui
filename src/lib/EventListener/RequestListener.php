@@ -1,6 +1,6 @@
 <?php
 
-namespace EzPlatformAdminUi\EventListener;
+namespace EzSystems\EzPlatformAdminUi\EventListener;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;

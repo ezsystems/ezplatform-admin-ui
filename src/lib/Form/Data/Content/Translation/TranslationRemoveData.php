@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Data\Content\Translation;
+namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab\Dashboard;
+namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
 
 use eZ\Publish\API\Repository\ContentService;

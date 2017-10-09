@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Type\Embedded;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Embedded;
 
 use eZ\Publish\API\Repository\SectionService;
-use EzPlatformAdminUi\Form\DataTransformer\SectionsTransformer;
-use EzPlatformAdminUi\Form\DataTransformer\SectionTransformer;
+use EzSystems\EzPlatformAdminUi\Form\DataTransformer\SectionsTransformer;
+use EzSystems\EzPlatformAdminUi\Form\DataTransformer\SectionTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;

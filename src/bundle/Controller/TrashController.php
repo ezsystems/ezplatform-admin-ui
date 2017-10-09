@@ -1,16 +1,16 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
-use EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
-use EzPlatformAdminUi\Form\Data\UiFormData;
-use EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzPlatformAdminUi\Service\TrashService as UiTrashService;
+use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
+use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Service\TrashService as UiTrashService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

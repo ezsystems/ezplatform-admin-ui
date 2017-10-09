@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Type\Content\Location;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Location;
 
 
-use EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
-use EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
 use Symfony\Component\Form\{
     AbstractType, FormBuilderInterface
 };

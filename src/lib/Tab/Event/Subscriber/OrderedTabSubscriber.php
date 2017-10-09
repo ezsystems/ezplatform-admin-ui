@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab\Event\Subscriber;
+namespace EzSystems\EzPlatformAdminUi\Tab\Event\Subscriber;
 
 
-use EzPlatformAdminUi\Tab\Event\TabEvents;
-use EzPlatformAdminUi\Tab\Event\TabGroupEvent;
-use EzPlatformAdminUi\Tab\OrderedTabInterface;
-use EzPlatformAdminUi\Tab\TabInterface;
+use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
+use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;
+use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
+use EzSystems\EzPlatformAdminUi\Tab\TabInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

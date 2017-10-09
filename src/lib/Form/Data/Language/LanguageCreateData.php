@@ -1,6 +1,6 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\Data\Language;
+namespace EzSystems\EzPlatformAdminUi\Form\Data\Language;
 
 class LanguageCreateData
 {

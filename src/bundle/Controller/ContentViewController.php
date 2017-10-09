@@ -1,14 +1,14 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
-use EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
-use EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
-use EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
-use EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzPlatformAdminUi\Service\PathService;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Service\PathService;
 
 class ContentViewController extends Controller
 {

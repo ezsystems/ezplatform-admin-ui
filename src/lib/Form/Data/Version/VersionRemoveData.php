@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Data\Version;
+namespace EzSystems\EzPlatformAdminUi\Form\Data\Version;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 

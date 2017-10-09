@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Service;
+namespace EzSystems\EzPlatformAdminUi\Service;
 
 use eZ\Publish\API\Repository as Repository;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;

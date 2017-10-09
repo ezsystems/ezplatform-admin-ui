@@ -4,24 +4,24 @@ services:
         autoconfigure: true
         public: false
 
-    EzPlatformAdminUi\Tab\Dashboard\MyDraftsTab:
+    EzSystems\EzPlatformAdminUi\Tab\Dashboard\MyDraftsTab:
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 
-    EzPlatformAdminUi\Tab\Dashboard\MyContentTab:
+    EzSystems\EzPlatformAdminUi\Tab\Dashboard\MyContentTab:
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 
-    EzPlatformAdminUi\Tab\Dashboard\MyMediaTab:
+    EzSystems\EzPlatformAdminUi\Tab\Dashboard\MyMediaTab:
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 
-    EzPlatformAdminUi\Tab\Dashboard\EveryoneMediaTab:
+    EzSystems\EzPlatformAdminUi\Tab\Dashboard\EveryoneMediaTab:
         tags:
             - { name: ezplatform.tab, group: dashboard-everyone }
 
-    EzPlatformAdminUi\Tab\Dashboard\EveryoneContentTab:
+    EzSystems\EzPlatformAdminUi\Tab\Dashboard\EveryoneContentTab:
         tags:
             - { name: ezplatform.tab, group: dashboard-everyone }
 
-    EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper: ~
+    EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper: ~

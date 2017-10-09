@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Data\Section;
+namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
 
 use eZ\Publish\API\Repository\Values\Content\Section;
 

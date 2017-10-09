@@ -4,5 +4,5 @@ services:
         autoconfigure: true
         public: true
 
-    EzPlatformAdminUiBundle\Templating\Twig\UiConfigExtension: ~
-    EzPlatformAdminUi\UI\Config\Aggregator: ~
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UiConfigExtension: ~
+    EzSystems\EzPlatformAdminUi\UI\Config\Aggregator: ~

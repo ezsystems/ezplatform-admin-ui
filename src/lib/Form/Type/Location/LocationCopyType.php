@@ -1,9 +1,9 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\Type\Location;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Location;
 
-use EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
-use EzPlatformAdminUi\Form\Type\Content\LocationType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

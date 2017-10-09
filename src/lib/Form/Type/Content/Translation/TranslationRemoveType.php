@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Type\Content\Translation;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation;
 
 
-use EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
-use EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

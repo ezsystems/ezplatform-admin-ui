@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Service\ContentTypeGroup;
+namespace EzSystems\EzPlatformAdminUi\Service\ContentTypeGroup;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
-use EzPlatformAdminUi\Form\Data\ContentTypeGroupData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroupData;
 
 class ContentTypeGroupService
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Data\Trash;
+namespace EzSystems\EzPlatformAdminUi\Form\Data\Trash;
 
 use Symfony\Component\Validator\Constraints as Assert;
 

@@ -5,8 +5,8 @@
     "description": "eZ Platform Admin v2",
     "autoload": {
         "psr-4": {
-          "EzPlatformAdminUiBundle\\": "src/bundle/",
-          "EzPlatformAdminUi\\": "src/lib/"
+          "EzSystems\\EzPlatformAdminUiBundle\\": "src/bundle/",
+          "EzSystems\\EzPlatformAdminUi\\": "src/lib/"
         }
     },
     "autoload-dev": {

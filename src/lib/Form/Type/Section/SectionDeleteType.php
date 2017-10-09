@@ -1,9 +1,9 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\Type\Section;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Section;
 
-use EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
-use EzPlatformAdminUi\Form\Type\Embedded\SectionType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Embedded\SectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

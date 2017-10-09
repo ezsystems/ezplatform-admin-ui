@@ -1,19 +1,19 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\Values\Content\Section;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\Repository\SearchService;
-use EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
-use EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
-use EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
-use EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
-use EzPlatformAdminUi\Form\Data\UiFormData;
-use EzPlatformAdminUi\Form\DataMapper\SectionCreateMapper;
-use EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper;
-use EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
+use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionCreateMapper;
+use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

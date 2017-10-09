@@ -1,9 +1,9 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\ParamConverter;
+namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
-use EzPlatformAdminUi\Service\Role\RoleService;
+use EzSystems\EzPlatformAdminUi\Service\Role\RoleService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;

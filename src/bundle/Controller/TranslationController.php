@@ -1,11 +1,11 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
-use EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
-use EzPlatformAdminUi\Form\Data\UiFormData;
-use EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

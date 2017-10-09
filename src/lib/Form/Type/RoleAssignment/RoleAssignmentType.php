@@ -1,12 +1,12 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\Type\RoleAssignment;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\RoleAssignment;
 
-use EzPlatformAdminUi\Form\Data\RoleAssignmentData;
-use EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
-use EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
-use EzPlatformAdminUi\Form\Type\UserChoiceType;
-use EzPlatformAdminUi\Form\Type\UserGroupChoiceType;
+use EzSystems\EzPlatformAdminUi\Form\Data\RoleAssignmentData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
+use EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
+use EzSystems\EzPlatformAdminUi\Form\Type\UserChoiceType;
+use EzSystems\EzPlatformAdminUi\Form\Type\UserGroupChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

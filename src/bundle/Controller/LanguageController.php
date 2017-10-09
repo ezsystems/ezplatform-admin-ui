@@ -1,18 +1,18 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
-use EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
-use EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
-use EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper;
-use EzPlatformAdminUi\Form\Type\Language\LanguageCreateType;
-use EzPlatformAdminUi\Form\Type\Language\LanguageDeleteType;
-use EzPlatformAdminUi\Form\Type\Language\LanguageUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageUpdateType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

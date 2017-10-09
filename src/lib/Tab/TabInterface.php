@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab;
+namespace EzSystems\EzPlatformAdminUi\Tab;
 
 /**
  * Tab interface representing UI tabs. Tabs are assigned to groups which are rendered in the UI.

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
-use EzPlatformAdminUi\Service\CacheService;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use EzPlatformAdminUi\Service\ContentTypeService;
+use EzSystems\EzPlatformAdminUi\Service\CacheService;
+use EzSystems\EzPlatformAdminUi\Service\ContentTypeService;
 use EzSystems\RepositoryForms\Data\Mapper\ContentTypeDraftMapper;
 use EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface;
 use EzSystems\RepositoryForms\Form\Type\ContentType\ContentTypeUpdateType;

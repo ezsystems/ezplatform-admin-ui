@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Data\Section;
+namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
 
 /**
  * @todo add validation

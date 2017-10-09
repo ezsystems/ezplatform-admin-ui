@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Role;
-use EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
-use EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
-use EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
-use EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper;
-use EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper;
-use EzPlatformAdminUi\Form\Type\Role\RoleCreateType;
-use EzPlatformAdminUi\Form\Type\Role\RoleDeleteType;
-use EzPlatformAdminUi\Form\Type\Role\RoleUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper;
+use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleUpdateType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

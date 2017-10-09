@@ -1,10 +1,10 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\DataMapper;
+namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\Content\LanguageCreateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
-use EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
 
 class LanguageCreateMapper implements DataMapperInterface
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\UI\Value;
+namespace EzSystems\EzPlatformAdminUi\UI\Value;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
@@ -15,9 +15,9 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Relation;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
-use EzPlatformAdminUi\Service\PathService;
-use EzPlatformAdminUi\UI\Dataset\DatasetFactory;
-use EzPlatformAdminUi\UI\Value as UIValue;
+use EzSystems\EzPlatformAdminUi\Service\PathService;
+use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
 
 class ValueFactory
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace EzPlatformAdminUi\Service;
+namespace EzSystems\EzPlatformAdminUi\Service;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\TrashService as APITrashService;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\TrashItem as APITrashItem;
-use EzPlatformAdminUi\Form\Data\TrashItemData;
+use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
 
 /**
  * @todo Loading all trash items should be handled by API service with our custom Query, this service will be removed.

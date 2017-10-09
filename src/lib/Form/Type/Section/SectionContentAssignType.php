@@ -1,10 +1,10 @@
 <?php
 
-namespace EzPlatformAdminUi\Form\Type\Section;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Section;
 
-use EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
-use EzPlatformAdminUi\Form\Type\Embedded\SectionType as SectionType;
-use EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Embedded\SectionType as SectionType;
+use EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

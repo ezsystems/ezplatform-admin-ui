@@ -1,6 +1,6 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\Menu;
+namespace EzSystems\EzPlatformAdminUiBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;

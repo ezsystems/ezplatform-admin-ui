@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUiBundle\Templating\Twig;
+namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
 
-use EzPlatformAdminUi\Service\TabService;
-use EzPlatformAdminUi\Tab\Event\TabEvent;
-use EzPlatformAdminUi\Tab\Event\TabEvents;
-use EzPlatformAdminUi\Tab\Event\TabGroupEvent;
-use EzPlatformAdminUi\Tab\TabGroup;
-use EzPlatformAdminUi\Tab\TabInterface;
+use EzSystems\EzPlatformAdminUi\Service\TabService;
+use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvent;
+use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
+use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;
+use EzSystems\EzPlatformAdminUi\Tab\TabGroup;
+use EzSystems\EzPlatformAdminUi\Tab\TabInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;
 use Twig_Extension;

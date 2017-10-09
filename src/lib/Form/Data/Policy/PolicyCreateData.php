@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Data\Policy;
+namespace EzSystems\EzPlatformAdminUi\Form\Data\Policy;
 
 class PolicyCreateData
 {

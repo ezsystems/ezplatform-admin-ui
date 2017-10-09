@@ -1,6 +1,6 @@
 <?php
 
-namespace EzPlatformAdminUi\SiteAccess;
+namespace EzSystems\EzPlatformAdminUi\SiteAccess;
 
 use eZ\Bundle\EzPublishCoreBundle\SiteAccess\SiteAccessConfigurationFilter;
 

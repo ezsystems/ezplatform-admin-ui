@@ -1,6 +1,6 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\DependencyInjection\Compiler;
+namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
 
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

@@ -4,7 +4,7 @@ services:
         autoconfigure: true
         public: false
 
-    EzPlatformAdminUiBundle\Controller\:
+    EzSystems\EzPlatformAdminUiBundle\Controller\:
         resource: "../../Controller/*"
         exclude: "../../Controller/{Controller}"
         public: true
@@ -13,7 +13,7 @@ services:
             - [setContainer, ["@service_container"]]
             - [performAccessCheck, []]
 
-    EzPlatformAdminUiBundle\Controller\ContentTypeController:
+    EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController:
         public: true
         arguments:
             $contentTypeActionDispatcher: '@ezrepoforms.action_dispatcher.content_type'

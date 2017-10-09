@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Service;
+namespace EzSystems\EzPlatformAdminUi\Service;
 
 
-use EzPlatformAdminUi\Tab\TabGroup;
-use EzPlatformAdminUi\Tab\TabInterface;
-use EzPlatformAdminUi\Tab\TabRegistry;
+use EzSystems\EzPlatformAdminUi\Tab\TabGroup;
+use EzSystems\EzPlatformAdminUi\Tab\TabInterface;
+use EzSystems\EzPlatformAdminUi\Tab\TabRegistry;
 
 class TabService
 {

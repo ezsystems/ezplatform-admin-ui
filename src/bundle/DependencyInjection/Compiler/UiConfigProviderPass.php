@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUiBundle\DependencyInjection\Compiler;
+namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
 
-use EzPlatformAdminUi\UI\Config\Aggregator;
+use EzSystems\EzPlatformAdminUi\UI\Config\Aggregator;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab;
+namespace EzSystems\EzPlatformAdminUi\Tab;
 
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\Controller;
+namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use EzSystems\EzSupportToolsBundle\SystemInfo\SystemInfoCollectorRegistry;
 use Symfony\Component\HttpFoundation\Response;

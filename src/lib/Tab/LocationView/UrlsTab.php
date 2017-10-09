@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Tab\LocationView;
+namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
 
 use eZ\Publish\API\Repository\URLAliasService;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzPlatformAdminUi\Tab\AbstractTab;
-use EzPlatformAdminUi\Tab\OrderedTabInterface;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 

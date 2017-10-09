@@ -5,7 +5,7 @@
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 
-namespace EzPlatformAdminUi\Service;
+namespace EzSystems\EzPlatformAdminUi\Service;
 
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;

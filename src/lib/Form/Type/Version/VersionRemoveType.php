@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUi\Form\Type\Version;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\Version;
 
 
 use eZ\Publish\API\Repository\ContentService;
-use EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
-use EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

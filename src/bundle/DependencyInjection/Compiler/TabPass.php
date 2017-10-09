@@ -1,9 +1,9 @@
 <?php
 
-namespace EzPlatformAdminUiBundle\DependencyInjection\Compiler;
+namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
 
 
-use EzPlatformAdminUi\Tab\TabRegistry;
+use EzSystems\EzPlatformAdminUi\Tab\TabRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;

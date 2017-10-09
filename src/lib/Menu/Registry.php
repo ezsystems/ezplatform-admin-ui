@@ -1,9 +1,9 @@
 <?php
 
-namespace EzPlatformAdminUi\Menu;
+namespace EzSystems\EzPlatformAdminUi\Menu;
 
-use EzPlatformAdminUi\Exception\MenuItemExists;
-use EzPlatformAdminUi\Exception\MenuItemNotExists;
+use EzSystems\EzPlatformAdminUi\Exception\MenuItemExists;
+use EzSystems\EzPlatformAdminUi\Exception\MenuItemNotExists;
 
 class Registry
 {

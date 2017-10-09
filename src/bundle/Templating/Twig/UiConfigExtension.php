@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace EzPlatformAdminUiBundle\Templating\Twig;
+namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
 
-use EzPlatformAdminUi\UI\Config\Aggregator;
+use EzSystems\EzPlatformAdminUi\UI\Config\Aggregator;
 use Twig\Environment;
 use Twig_Extension;
 use Twig_Extension_GlobalsInterface;
