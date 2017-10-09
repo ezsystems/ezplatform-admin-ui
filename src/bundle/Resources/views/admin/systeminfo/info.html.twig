@@ -20,27 +20,7 @@
     <section class="container mt-5">
         <div class="card border-light mb-3">
             <div class="card-body">
-                <h3>{{ 'systeminfo.title'|trans }}</h3>
-                <ul class="nav nav-tabs" role="tablist">
-                    {% for collector_identifier in collector_identifiers %}
-                        <li role="presentation" class="nav-item">
-                            <a href="#{{ collector_identifier }}" class="nav-link{% if loop.first %} active{% endif %}" role="tab" data-toggle="tab">
-                                {{ collector_identifier|trans }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-                <div class="tab-content">
-                    {% for collector_identifier in collector_identifiers %}
-                        <div role="tabpanel" class="tab-pane fade{% if loop.first %} show active{% endif %}" id="{{ collector_identifier }}">
-                            {{ render( controller(
-                            'support_tools.view.controller:viewInfoAction', {
-                                'systemInfoIdentifier': collector_identifier,
-                                'viewType': 'pjax_tab'
-                            } ) ) }}
-                        </div>
-                    {% endfor %}
-                </div>
+                {{ ez_platform_tabs('systeminfo') }}
             </div>
         </div>
     </section>

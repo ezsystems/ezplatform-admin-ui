@@ -23,6 +23,12 @@ services:
         tags:
             - { name: 'request.param_converter' }
 
+    EzPlatformAdminUi\EventListener\:
+        resource: "../../../lib/EventListener/*"
+        public: true
+        tags:
+            - { name: kernel.event_subscriber }
+
     EzPlatformAdminUi\EventListener\RequestListener:
         calls:
             - [setContainer, ["@service_container"]]

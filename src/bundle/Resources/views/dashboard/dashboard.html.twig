@@ -1,4 +1,4 @@
-{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
 
 {% trans_default_domain 'dashboard' %}
 
@@ -28,66 +28,17 @@
         </div>
         <div class="col-sm-11">
             <div class="container">
-
-                {# @todo: make panels injectable (create extensibility point here) #}
-
                 <div class="card border-light my-4">
                     <div class="card-body">
-                        <h3 class="mb-3">Me</h3>
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a href="#my-drafts" class="active nav-link" aria-controls="my-drafts" role="tab" data-toggle="tab">
-                                    My Drafts
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#my-content" class="nav-link" aria-controls="my-content" role="tab" data-toggle="tab">
-                                    My Content
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#my-media" class="nav-link" aria-controls="my-media" role="tab" data-toggle="tab">
-                                    My Media
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane show active" id="my-drafts">
-                                {{ render(controller('EzPlatformAdminUiBundle:Dashboard:myDrafts')) }}
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="my-content">
-                                {{ render(controller('EzPlatformAdminUiBundle:Dashboard:myContent')) }}
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="my-media">
-                                {{ render(controller('EzPlatformAdminUiBundle:Dashboard:myMedia')) }}
-                            </div>
-                        </div>
+                        <h3 class="mb-3">{{ 'me'|trans|desc('Me') }}</h3>
+                        {{ ez_platform_tabs('dashboard-my', []) }}
                     </div>
                 </div>
 
                 <div class="card border-light mb-4">
                     <div class="card-body">
-                        <h3 class="mb-3">Everyone</h3>
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a href="#all-content" class="nav-link active" aria-controls="all-content" role="tab" data-toggle="tab">
-                                    Content
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#all-media" class="nav-link" aria-controls="all-media" role="tab" data-toggle="tab">
-                                    Media
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane show active" id="all-content">
-                                {{ render(controller('EzPlatformAdminUiBundle:Dashboard:allContent')) }}
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="all-media">
-                                {{ render(controller('EzPlatformAdminUiBundle:Dashboard:allMedia')) }}
-                            </div>
-                        </div>
+                        <h3 class="mb-3">{{ 'everyone'|trans|desc('Everyone') }}</h3>
+                        {{ ez_platform_tabs('dashboard-everyone', []) }}
                     </div>
                 </div>
             </div>

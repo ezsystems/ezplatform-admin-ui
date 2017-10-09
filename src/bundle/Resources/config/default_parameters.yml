@@ -21,3 +21,5 @@ parameters:
                 template: 'EzPlatformAdminUiBundle:admin/systeminfo:symfony_kernel.html.twig'
                 match:
                     SystemInfo\Identifier: 'symfony_kernel'
+
+    ezplatform.content_view.tabs.default_template: 'EzPlatformAdminUiBundle:parts/tab:default.html.twig'

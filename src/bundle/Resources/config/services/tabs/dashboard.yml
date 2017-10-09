@@ -1,0 +1,27 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    EzPlatformAdminUi\Tab\Dashboard\MyDraftsTab:
+        tags:
+            - { name: ezplatform.tab, group: dashboard-my }
+
+    EzPlatformAdminUi\Tab\Dashboard\MyContentTab:
+        tags:
+            - { name: ezplatform.tab, group: dashboard-my }
+
+    EzPlatformAdminUi\Tab\Dashboard\MyMediaTab:
+        tags:
+            - { name: ezplatform.tab, group: dashboard-my }
+
+    EzPlatformAdminUi\Tab\Dashboard\EveryoneMediaTab:
+        tags:
+            - { name: ezplatform.tab, group: dashboard-everyone }
+
+    EzPlatformAdminUi\Tab\Dashboard\EveryoneContentTab:
+        tags:
+            - { name: ezplatform.tab, group: dashboard-everyone }
+
+    EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper: ~

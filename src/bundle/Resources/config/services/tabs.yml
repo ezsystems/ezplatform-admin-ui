@@ -1,5 +1,6 @@
 imports:
     - { resource: tabs/locationview.yml }
+    - { resource: tabs/dashboard.yml }
 
 services:
     _defaults:
@@ -7,8 +8,12 @@ services:
         autoconfigure: true
         public: false
 
-    EzPlatformAdminUiBundle\Templating\Twig\TabExtension: ~
+    EzPlatformAdminUiBundle\Templating\Twig\TabExtension:
+        arguments:
+            $defaultTemplate: '%ezplatform.content_view.tabs.default_template%'
+
     EzPlatformAdminUi\Tab\TabRegistry: ~
+    EzPlatformAdminUi\Tab\SystemInfo\TabFactory: ~
 
     EzPlatformAdminUi\Tab\Event\Subscriber\:
         resource: "../../../lib/Tab/Event/Subscriber/*"

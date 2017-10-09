@@ -13,14 +13,6 @@ services:
             - [setContainer, ["@service_container"]]
             - [performAccessCheck, []]
 
-    EzPlatformAdminUiBundle\Controller\DashboardController:
-        public: true
-        arguments:
-            $permissionResolver: '@=service("ezpublish.api.repository").getPermissionResolver()'
-            $searchService: '@ezpublish.api.service.search'
-            $contentService: '@ezpublish.api.service.content'
-            $contentTypeService: '@ezpublish.api.service.content_type'
-
     EzPlatformAdminUiBundle\Controller\ContentTypeController:
         public: true
         arguments:
