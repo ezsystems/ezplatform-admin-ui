@@ -1,2 +1,2 @@
-# ezplatform-v2-bundle
-(Prototype) eZ Platform v2 Bundle
+# platform-admin-ui
+ +Repository dedicated to the Platform Admin UI Bundle
