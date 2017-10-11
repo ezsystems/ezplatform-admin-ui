@@ -24,13 +24,20 @@
                 <td>{{ policy.module }}</td>
                 <td>{{ policy.function }}</td>
                 <td>
-                    {% for limitation in policy.limitations %}
-                        {{ limitation.identifier }}
-
-                        ({{ limitation.limitationValues | join(',') }})
-                    {% else %}
-                        No limitations
-                    {% endfor %}
+                    {%- if policy.limitations is not empty -%}
+                        <ul class="list-unstyled">
+                            {%- for limitation in policy.limitations -%}
+                                <li>
+                                    <span class="font-weight-bold" title="{{ 'policy.limitation.identifier_tooltip' | trans({'%identifier%': limitation.identifier}) }}">
+                                        {{ ('policy.limitation.identifier.' ~ limitation.identifier | lower) | trans({}, 'ezrepoforms_policies') }}:
+                                    </span>
+                                    {{ ez_render_limitation_value(limitation) }}
+                                </li>
+                            {%- endfor -%}
+                        </ul>
+                    {%- else -%}
+                        {{- 'policy.limitation.none'|trans -}}
+                    {%- endif -%}
                 </td>
                 <td class="text-right">
                     <a href="{{ path('ezplatform.policy.update', { roleId: role.id, policyId: policy.id }) }}" class="btn btn-info">

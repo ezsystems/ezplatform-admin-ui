@@ -28,17 +28,18 @@
                     {%- endif -%}
                 </td>
                 <td>
-                    {%- if role_assignment.rolelimitation -%}
-                        {{- role_assignment.rolelimitation.identifier -}}
-                        {%- for limitationValue in role_assignment.rolelimitation.limitationValues -%}
-                            {%- if loop.first -%}( {% endif -%}
-                            {# TODO: https://jira.ez.no/browse/EZP-24699 Enrich Role limitations view with links and human readable names #}
-                            {{- limitationValue -}}
-                            {%- if not loop.last -%}, {% endif -%}
-                            {%- if loop.last %} ){%- endif -%}
-                        {%- endfor -%}
+                    {%- set limitation = role_assignment.rolelimitation -%}
+                    {%- if limitation -%}
+                        <ul class="list-unstyled">
+                            <li>
+                                <span class="font-weight-bold" title="{{ 'policy.limitation.identifier_tooltip' | trans({'%identifier%': limitation.identifier}) }}">
+                                    {{ ('policy.limitation.identifier.' ~ limitation.identifier | lower) | trans({}, 'ezrepoforms_policies') }}:
+                                </span>
+                                {{ ez_render_limitation_value(limitation) }}
+                            </li>
+                        </ul>
                     {%- else -%}
-                        -
+                        {{- 'policy.limitation.none'|trans -}}
                     {%- endif -%}
                 </td>
                 <td class="text-right">
