@@ -1,8 +1,12 @@
 <?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
-
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -10,16 +14,11 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddDat
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;

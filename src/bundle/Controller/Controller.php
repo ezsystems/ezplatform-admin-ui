@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
@@ -30,11 +34,9 @@ abstract class Controller extends BaseController
         $this->flashMessage(self::MSG_DANGER, $message, $parameters, $domain, $locale);
     }
 
-    protected function flashMessage( $type, string $message, array $parameters = [], $domain = null, $locale = null)
+    protected function flashMessage($type, string $message, array $parameters = [], $domain = null, $locale = null)
     {
         $this->addFlash($type, /** @Ignore */
             $this->get('translator')->trans($message, $parameters, $domain, $locale));
     }
-
-
 }

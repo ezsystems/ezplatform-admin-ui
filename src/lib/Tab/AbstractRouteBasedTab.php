@@ -1,9 +1,12 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab;
-
 
 use Symfony\Bridge\Twig\Extension\HttpKernelRuntime;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -56,7 +59,7 @@ abstract class AbstractRouteBasedTab extends AbstractTab
      *
      * @return string
      */
-    abstract function getRouteName(array $parameters): string;
+    abstract public function getRouteName(array $parameters): string;
 
     /**
      * Returns parameters array required to generate path using the router.
@@ -65,5 +68,5 @@ abstract class AbstractRouteBasedTab extends AbstractTab
      *
      * @return array
      */
-    abstract function getRouteParameters(array $parameters): array;
+    abstract public function getRouteParameters(array $parameters): array;
 }

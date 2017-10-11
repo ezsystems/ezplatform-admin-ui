@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type;
@@ -30,7 +34,7 @@ class UserChoiceType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -39,12 +43,12 @@ class UserChoiceType extends AbstractType
                 return $this->getUsers();
             }),
             'choice_label' => 'name',
-            'choice_value' => 'id'
+            'choice_value' => 'id',
         ]);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getParent()
     {

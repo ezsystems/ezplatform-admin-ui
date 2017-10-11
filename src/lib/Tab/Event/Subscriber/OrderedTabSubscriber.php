@@ -1,9 +1,12 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\Event\Subscriber;
-
 
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;

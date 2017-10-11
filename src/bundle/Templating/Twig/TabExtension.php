@@ -1,8 +1,12 @@
 <?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
-
 
 use EzSystems\EzPlatformAdminUi\Service\TabService;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvent;
@@ -54,7 +58,7 @@ class TabExtension extends Twig_Extension
                 'ez_platform_tabs',
                 [$this, 'renderTabGroup'],
                 ['is_safe' => ['html']]
-            )
+            ),
         ];
     }
 

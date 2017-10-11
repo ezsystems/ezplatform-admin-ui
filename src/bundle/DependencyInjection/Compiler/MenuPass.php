@@ -1,7 +1,10 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
-
 
 use EzSystems\EzPlatformAdminUi\Menu\Item;
 use EzSystems\EzPlatformAdminUi\Menu\Registry;
@@ -17,7 +20,7 @@ class MenuPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition(Registry::class)) {
-             return;
+            return;
         }
 
         $menuRegistryDefinition = $container->getDefinition(Registry::class);

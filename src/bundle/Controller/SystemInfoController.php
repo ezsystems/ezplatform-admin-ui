@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use EzSystems\EzSupportToolsBundle\SystemInfo\SystemInfoCollectorRegistry;
@@ -23,7 +27,7 @@ class SystemInfoController extends Controller
      *
      * @return Response
      */
-    public function infoAction() : Response
+    public function infoAction(): Response
     {
         return $this->render('@EzPlatformAdminUi/admin/systeminfo/info.html.twig', [
             'collector_identifiers' => $this->collectorRegistry->getIdentifiers(),
@@ -35,7 +39,7 @@ class SystemInfoController extends Controller
      *
      * @return Response
      */
-    public function phpinfoAction() : Response
+    public function phpinfoAction(): Response
     {
         ob_start();
         phpinfo();

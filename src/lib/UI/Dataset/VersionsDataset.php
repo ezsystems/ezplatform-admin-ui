@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
@@ -25,7 +29,8 @@ class VersionsDataset
      * @param ContentService $contentService
      * @param ValueFactory $valueFactory
      */
-    public function __construct(ContentService $contentService, ValueFactory $valueFactory) {
+    public function __construct(ContentService $contentService, ValueFactory $valueFactory)
+    {
         $this->contentService = $contentService;
         $this->valueFactory = $valueFactory;
     }

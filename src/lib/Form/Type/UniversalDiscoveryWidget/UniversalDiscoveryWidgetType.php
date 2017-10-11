@@ -1,9 +1,12 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget;
 
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\SectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -42,7 +45,7 @@ class UniversalDiscoveryWidgetType extends AbstractType
         }
 
         if ($options['multiple']) {
-            $selectContentButtonView->vars['attr']['data-multiple'] = strval($options['multiple']);
+            $selectContentButtonView->vars['attr']['data-multiple'] = (string) ($options['multiple']);
         }
 
         if (!empty($options['active_tab'])) {
@@ -57,7 +60,7 @@ class UniversalDiscoveryWidgetType extends AbstractType
             $selectContentButtonView->vars['attr']['class'] = '';
         }
 
-        $selectContentButtonView->vars['attr']['class'] = trim($selectContentButtonView->vars['attr']['class'].' btn--open-udw');
+        $selectContentButtonView->vars['attr']['class'] = trim($selectContentButtonView->vars['attr']['class'] . ' btn--open-udw');
     }
 
     public function configureOptions(OptionsResolver $resolver)

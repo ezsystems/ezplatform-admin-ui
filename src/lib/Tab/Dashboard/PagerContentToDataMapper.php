@@ -1,8 +1,12 @@
 <?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
-
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -29,8 +33,7 @@ class PagerContentToDataMapper
         ContentService $contentService,
         ContentTypeService $contentTypeService,
         UserService $userService
-    )
-    {
+    ) {
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->userService = $userService;

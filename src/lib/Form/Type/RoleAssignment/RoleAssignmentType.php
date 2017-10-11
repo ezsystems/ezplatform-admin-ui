@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUi\Form\Type\RoleAssignment;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\RoleAssignmentData;
@@ -14,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class RoleAssignmentType extends AbstractType
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -30,21 +34,21 @@ class RoleAssignmentType extends AbstractType
 
         $builder->add('sections', SectionChoiceType::class, [
             'required' => false,
-            'multiple' => true
+            'multiple' => true,
         ]);
 
         $builder->add('locations', UniversalDiscoveryWidgetType::class, [
-            'required' => false
+            'required' => false,
         ]);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => RoleAssignmentData::class
+            'data_class' => RoleAssignmentData::class,
         ]);
     }
 }

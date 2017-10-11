@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
@@ -74,8 +78,7 @@ class RoleAssignmentController extends Controller
 
             if (empty($sections) && empty($locations)) {
                 $limitations[] = null;
-            }
-            else {
+            } else {
                 if (!empty($sections)) {
                     $limitation = new SectionLimitation();
 
@@ -104,7 +107,7 @@ class RoleAssignmentController extends Controller
                     }
                 }
 
-                if ($groups !== null) {
+                if (null !== $groups) {
                     foreach ($groups as $group) {
                         $this->roleService->assignRoleToUserGroup($role, $group, $limitation);
                     }
@@ -122,7 +125,7 @@ class RoleAssignmentController extends Controller
 
         return $this->render('@EzPlatformAdminUi/admin/role_assignment/add.html.twig', [
             'role' => $role,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -134,7 +137,7 @@ class RoleAssignmentController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->roleService->removeRoleAssignment($roleAssignment);
 
-            $this->addflash('success','role_assignment.deleted');
+            $this->addflash('success', 'role_assignment.deleted');
         }
 
         foreach ($form->getErrors(true, true) as $formError) {

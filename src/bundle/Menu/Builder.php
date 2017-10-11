@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUiBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -16,7 +20,7 @@ class Builder
     /**
      * @param FactoryInterface $factory
      */
-    public function __construct(FactoryInterface $factory,  $menuItems)
+    public function __construct(FactoryInterface $factory, $menuItems)
     {
         $this->factory = $factory;
         $this->menuItems = $this->sortItems($menuItems);

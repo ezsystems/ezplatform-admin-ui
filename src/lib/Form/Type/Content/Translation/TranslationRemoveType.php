@@ -1,8 +1,12 @@
 <?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation;
-
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
@@ -38,7 +42,7 @@ class TranslationRemoveType extends AbstractType
                 SubmitType::class,
                 [
                     'attr' => ['hidden' => true],
-                    'label' => /** @Desc("Remove translation") */ 'content_translation_remove_form.remove'
+                    'label' => /** @Desc("Remove translation") */ 'content_translation_remove_form.remove',
                 ]
             );
     }

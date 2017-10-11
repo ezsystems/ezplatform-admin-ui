@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
@@ -271,7 +275,6 @@ class LocationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @todo empty locations should be validated on form level */
-
             foreach ($contentLocationRemoveData->getLocations() as $locationId => $selected) {
                 $location = $this->locationService->loadLocation($locationId);
                 $this->locationService->deleteLocation($location);
@@ -279,7 +282,7 @@ class LocationController extends Controller
 
             $this->flashSuccess('location.remove.success', [
                 '%locationName%' => $contentLocationRemoveData->getContentInfo()->name,
-            ],'location');
+            ], 'location');
 
             return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
@@ -315,7 +318,6 @@ class LocationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @todo empty locations should be validated on form level */
-
             foreach ($contentLocationAddData->getNewLocations() as $newLocation) {
                 $locationCreateStruct = $this->locationService->newLocationCreateStruct($newLocation->id);
                 $this->locationService->createLocation($contentInfo, $locationCreateStruct);

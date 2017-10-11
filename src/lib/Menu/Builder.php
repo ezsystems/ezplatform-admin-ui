@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -21,7 +25,7 @@ class Builder
      * @param Provider $menuProvider
      * @param string $identifier
      */
-    public function __construct(FactoryInterface $factory,  Provider $menuProvider, string $identifier)
+    public function __construct(FactoryInterface $factory, Provider $menuProvider, string $identifier)
     {
         $this->factory = $factory;
         $this->menuProvider = $menuProvider;

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
@@ -49,7 +53,7 @@ class ContentTypeController extends Controller
 
         return $this->render('@EzPlatformAdminUi/admin/content_type/list.html.twig', [
             'content_type_group' => $group,
-            'content_types' => $types
+            'content_types' => $types,
         ]);
     }
 
@@ -59,7 +63,7 @@ class ContentTypeController extends Controller
 
         return $this->redirectToRoute('ezplatform.content_type.edit', [
             'contentTypeGroupId' => $group->id,
-            'contentTypeId' => $contentType->id
+            'contentTypeId' => $contentType->id,
         ]);
     }
 
@@ -70,7 +74,7 @@ class ContentTypeController extends Controller
         return $this->render('@EzPlatformAdminUi/admin/content_type/edit.html.twig', [
             'content_type_group' => $group,
             'content_type' => $contentType,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -97,20 +101,20 @@ class ContentTypeController extends Controller
 
             $this->flashSuccess('content_type.updated', [], 'content_type');
 
-            $routeName = $form->getClickedButton()->getName() === 'publishContentType'
+            $routeName = 'publishContentType' === $form->getClickedButton()->getName()
                 ? 'ezplatform.content_type.view'
                 : 'ezplatform.content_type.edit';
 
             return $this->redirectToRoute($routeName, [
                 'contentTypeGroupId' => $group->id,
-                'contentTypeId' => $contentType->id
+                'contentTypeId' => $contentType->id,
             ]);
         }
 
         return $this->render('@EzPlatformAdminUi/admin/content_type/edit.html.twig', [
             'content_type_group' => $group,
             'content_type' => $contentType,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -128,7 +132,7 @@ class ContentTypeController extends Controller
         }
 
         return $this->redirectToRoute('ezplatform.content_type_group.view', [
-            'contentTypeGroupId' => $group->id
+            'contentTypeGroupId' => $group->id,
         ]);
     }
 
@@ -142,7 +146,7 @@ class ContentTypeController extends Controller
         return $this->render('@EzPlatformAdminUi/admin/content_type/view.html.twig', [
             'content_type_group' => $group,
             'content_type' => $contentType,
-            'field_definitions_by_group' => $fieldDefinitionsByGroup
+            'field_definitions_by_group' => $fieldDefinitionsByGroup,
         ]);
     }
 
@@ -158,9 +162,9 @@ class ContentTypeController extends Controller
             'method' => Request::METHOD_POST,
             'action' => $this->generateUrl('ezplatform.content_type.update', [
                 'contentTypeGroupId' => $group->id,
-                'contentTypeId' => $contentTypeDraft->id
+                'contentTypeId' => $contentTypeDraft->id,
             ]),
-            'languageCode' => $languageCode
+            'languageCode' => $languageCode,
         ]);
     }
 
@@ -170,8 +174,8 @@ class ContentTypeController extends Controller
             'method' => Request::METHOD_DELETE,
             'action' => $this->generateUrl('ezplatform.content_type.delete', [
                 'contentTypeGroupId' => $group->id,
-                'contentTypeId' => $contentType->id
-            ])
+                'contentTypeId' => $contentType->id,
+            ]),
         ]);
 
         return $formBuilder->getForm();

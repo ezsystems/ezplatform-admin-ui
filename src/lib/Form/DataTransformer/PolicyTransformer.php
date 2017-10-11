@@ -1,9 +1,13 @@
 <?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
-use eZ\Publish\API\Repository\RoleService;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class PolicyTransformer implements DataTransformerInterface
@@ -19,6 +23,7 @@ class PolicyTransformer implements DataTransformerInterface
     {
         if (null !== $value) {
             $parts = explode(':', $value);
+
             return [
                 'id' => $parts[0],
                 'module' => $parts[1],

@@ -1,8 +1,12 @@
 <?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
-
 
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
@@ -31,8 +35,7 @@ class EveryoneMediaTab extends AbstractTab implements OrderedTabInterface
         TranslatorInterface $translator,
         PagerContentToDataMapper $pagerContentToDataMapper,
         SearchService $searchService
-    )
-    {
+    ) {
         parent::__construct($twig, $translator);
 
         $this->pagerContentToDataMapper = $pagerContentToDataMapper;

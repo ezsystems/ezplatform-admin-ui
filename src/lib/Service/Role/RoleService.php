@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Service\Role;
@@ -108,6 +112,7 @@ class RoleService
             if ($policyDraft->originalId == $policy->id) {
                 $this->roleService->removePolicyByRoleDraft($draft, $policyDraft);
                 $this->roleService->publishRoleDraft($draft);
+
                 return;
             }
         }
@@ -129,6 +134,7 @@ class RoleService
             if ($policyDraft->originalId == $policy->id) {
                 $this->roleService->updatePolicyByRoleDraft($roleDraft, $policyDraft, $policyUpdateStruct);
                 $this->roleService->publishRoleDraft($roleDraft);
+
                 return $roleDraft;
             }
         }
@@ -162,6 +168,7 @@ class RoleService
         if (empty($sections) && empty($locations)) {
             // Assign role to user/groups without limitations
             $this->doAssignLimitation($role, $users, $groups);
+
             return;
         }
 
@@ -185,7 +192,7 @@ class RoleService
 
             $result = $this->searchService->findLocations($query);
             foreach ($result->searchHits as $searchHit) {
-                /** @var Repository\Values\Content\Location $location*/
+                /** @var Repository\Values\Content\Location $location */
                 $limitation->limitationValues[] = $searchHit->valueObject->pathString;
             }
 
@@ -196,13 +203,13 @@ class RoleService
 
     private function doAssignLimitation(Role $role, array $users = null, array $groups = null, RoleLimitation $limitation = null)
     {
-        if ($users !== null) {
+        if (null !== $users) {
             foreach ($users as $user) {
                 $this->roleService->assignRoleToUser($role, $user, $limitation);
             }
         }
 
-        if ($groups !== null) {
+        if (null !== $groups) {
             foreach ($groups as $group) {
                 $this->roleService->assignRoleToUserGroup($role, $group, $limitation);
             }

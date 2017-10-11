@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\LanguageService;
@@ -38,7 +42,7 @@ class LanguageController extends Controller
      *
      * @return Response
      */
-    public function listAction() : Response
+    public function listAction(): Response
     {
         $languageList = $this->languageService->loadLanguages();
 
@@ -65,7 +69,7 @@ class LanguageController extends Controller
      *
      * @return Response
      */
-    public function viewAction(Language $language) : Response
+    public function viewAction(Language $language): Response
     {
         $deleteForm = $this->createForm(LanguageDeleteType::class, new LanguageDeleteData($language));
 
@@ -118,7 +122,7 @@ class LanguageController extends Controller
             $languageCreateStruct = $this->languageCreateMapper->reverseMap($data);
             $language = $this->languageService->createLanguage($languageCreateStruct);
 
-            $this->addFlash('success','language.create.success');
+            $this->addFlash('success', 'language.create.success');
 
             return $this->redirect($this->generateUrl('ezplatform.language.view', ['languageId' => $language->id]));
         }
@@ -148,7 +152,7 @@ class LanguageController extends Controller
                 ? $this->languageService->enableLanguage($language)
                 : $this->languageService->disableLanguage($language);
 
-            $this->addFlash('success','language.update.success');
+            $this->addFlash('success', 'language.update.success');
 
             return $this->redirect($this->generateUrl('ezplatform.language.view', ['languageId' => $language->id]));
         }

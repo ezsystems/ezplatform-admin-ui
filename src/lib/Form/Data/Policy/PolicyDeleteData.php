@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Policy;
@@ -7,7 +12,7 @@ use eZ\Publish\API\Repository\Values\User\Policy;
 
 class PolicyDeleteData
 {
-    /** @var integer */
+    /** @var int */
     private $id;
 
     /** @var string */
@@ -60,6 +65,7 @@ class PolicyDeleteData
     {
         $this->function = $function;
     }
+
     /**
      * @return array
      */

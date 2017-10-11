@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
@@ -33,7 +37,7 @@ class ContentTypeGroupController extends Controller
         $groups = $this->contentTypeGroupService->getContentTypeGroups();
 
         return $this->render('@EzPlatformAdminUi/admin/content_type_group/list.html.twig', [
-            'content_type_groups' => $groups
+            'content_type_groups' => $groups,
         ]);
     }
 
@@ -42,7 +46,7 @@ class ContentTypeGroupController extends Controller
         $form = $this->createCreateForm();
 
         return $this->render('@EzPlatformAdminUi/admin/content_type_group/add.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -56,12 +60,12 @@ class ContentTypeGroupController extends Controller
             $this->flashSuccess('content_type_group.created', [], 'content_type');
 
             return $this->redirectToRoute('ezplatform.content_type_group.view', [
-                'contentTypeGroupId' => $group->id
+                'contentTypeGroupId' => $group->id,
             ]);
         }
 
         return $this->render('@EzPlatformAdminUi/admin/content_type_group/add.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -71,7 +75,7 @@ class ContentTypeGroupController extends Controller
 
         return $this->render('@EzPlatformAdminUi/admin/content_type_group/edit.html.twig', [
             'content_type_group' => $group,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -85,13 +89,13 @@ class ContentTypeGroupController extends Controller
             $this->flashSuccess('content_type_group.updated', [], 'content_type');
 
             return $this->redirectToRoute('ezplatform.content_type_group.view', [
-                'contentTypeGroupId' => $group->id
+                'contentTypeGroupId' => $group->id,
             ]);
         }
 
         return $this->render('@EzPlatformAdminUi/admin/content_type_group/edit.html.twig', [
             'content_type_group' => $group,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -114,7 +118,7 @@ class ContentTypeGroupController extends Controller
     public function viewAction(ContentTypeGroup $group): Response
     {
         return $this->render('@EzPlatformAdminUi/admin/content_type_group/view.html.twig', [
-            'content_type_group' => $group
+            'content_type_group' => $group,
         ]);
     }
 
@@ -122,21 +126,21 @@ class ContentTypeGroupController extends Controller
     {
         return $this->createForm(ContentTypeGroupType::class, $data, [
             'method' => Request::METHOD_POST,
-            'action' => $this->generateUrl('ezplatform.content_type_group.create')
+            'action' => $this->generateUrl('ezplatform.content_type_group.create'),
         ]);
     }
 
     protected function createUpdateForm(ContentTypeGroup $group, ContentTypeGroupData $data = null): Form
     {
-        if ($data === null) {
+        if (null === $data) {
             $data = ContentTypeGroupData::factory($group);
         }
 
         return $this->createForm(ContentTypeGroupType::class, $data, [
             'method' => Request::METHOD_PUT,
             'action' => $this->generateUrl('ezplatform.content_type_group.update', [
-                'contentTypeGroupId' => $group->id
-            ])
+                'contentTypeGroupId' => $group->id,
+            ]),
         ]);
     }
 
@@ -145,8 +149,8 @@ class ContentTypeGroupController extends Controller
         $formBuilder = $this->createFormBuilder(null, [
             'method' => Request::METHOD_DELETE,
             'action' => $this->generateUrl('ezplatform.content_type_group.delete', [
-                'contentTypeGroupId' => $group->id
-            ])
+                'contentTypeGroupId' => $group->id,
+            ]),
         ]);
 
         return $formBuilder->getForm();

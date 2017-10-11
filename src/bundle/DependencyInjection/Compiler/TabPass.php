@@ -1,7 +1,10 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
-
 
 use EzSystems\EzPlatformAdminUi\Tab\TabRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -9,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * {@inheritDoc}
+ * {@inheritdoc}
  */
 class TabPass implements CompilerPassInterface
 {
@@ -18,7 +21,7 @@ class TabPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition(TabRegistry::class)) {
-             return;
+            return;
         }
 
         $tabRegistryDefinition = $container->getDefinition(TabRegistry::class);
@@ -28,7 +31,7 @@ class TabPass implements CompilerPassInterface
             $tabDefinition = $container->getDefinition($id);
             $tag = $tabDefinition->getTag(static::TAG_TAB);
 
-            foreach (array_column($tag,'group') as $group) {
+            foreach (array_column($tag, 'group') as $group) {
                 $tabRegistryDefinition->addMethodCall('addTab', [new Reference($id), $group]);
             }
         }

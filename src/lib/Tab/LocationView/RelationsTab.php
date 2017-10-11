@@ -1,8 +1,12 @@
 <?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
-
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -64,7 +68,7 @@ class RelationsTab extends AbstractTab implements OrderedTabInterface
 
         $viewParameters = ['relations' => $relationsDataset->getRelations()];
 
-        if ($this->permissionResolver->hasAccess('module', 'reverserelatedlist') === true) {
+        if (true === $this->permissionResolver->hasAccess('module', 'reverserelatedlist')) {
             $viewParameters['reverse_relations'] = $relationsDataset->getReverseRelations();
         }
 

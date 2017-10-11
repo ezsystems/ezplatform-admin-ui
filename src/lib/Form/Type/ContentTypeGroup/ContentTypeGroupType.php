@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup;
@@ -13,23 +17,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ContentTypeGroupType extends AbstractType
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('identifier', TextType::class, [
-            'label' => 'content_type.group.identifier'
+            'label' => 'content_type.group.identifier',
         ]);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => ContentTypeGroupData::class,
-            'translation_domain' => 'ezrepoforms_content_type'
+            'translation_domain' => 'ezrepoforms_content_type',
         ]);
     }
 }

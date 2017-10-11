@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
@@ -30,12 +34,11 @@ class PolicyChoiceType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addModelTransformer(new class implements DataTransformerInterface
-        {
+        $builder->addModelTransformer(new class() implements DataTransformerInterface {
             public function transform($value)
             {
                 if ($value) {
@@ -56,25 +59,25 @@ class PolicyChoiceType extends AbstractType
 
                 return [
                     'module' => $module,
-                    'function' => $function
+                    'function' => $function,
                 ];
             }
         });
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'choices' => $this->policyChoices,
-            'choices_as_values' => true
+            'choices_as_values' => true,
         ]);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getParent()
     {
@@ -94,8 +97,8 @@ class PolicyChoiceType extends AbstractType
     {
         $policyChoices = [
             'role.policy.all_modules' => [
-                'role.policy.all_modules_all_functions' => '*|*'
-            ]
+                'role.policy.all_modules_all_functions' => '*|*',
+            ],
         ];
 
         foreach ($policyMap as $module => $functionList) {

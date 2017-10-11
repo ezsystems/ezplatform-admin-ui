@@ -1,8 +1,12 @@
 <?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\SystemInfo;
-
 
 use Symfony\Bridge\Twig\Extension\HttpKernelRuntime;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -28,8 +32,7 @@ class TabFactory
         Environment $twig,
         TranslatorInterface $translator,
         HttpKernelRuntime $httpKernelRuntime
-    )
-    {
+    ) {
         $this->twig = $twig;
         $this->translator = $translator;
         $this->httpKernelRuntime = $httpKernelRuntime;

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUi\Service;
 
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -62,6 +66,7 @@ class TrashService
 
             $trashItemsList[] = new TrashItemData($apiTrashItem, $contentType, $ancestors);
         }
+
         return $trashItemsList;
     }
 }

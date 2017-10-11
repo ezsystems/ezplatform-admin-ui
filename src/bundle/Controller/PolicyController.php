@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
@@ -57,9 +61,10 @@ class PolicyController extends Controller
                 new PolicyDeleteData($policy)
             )->createView();
         }
+
         return $this->render('@EzPlatformAdminUi/admin/policy/list.html.twig', [
             'deleteFormsByPolicyId' => $deleteFormsByPolicyId,
-            'role' => $role
+            'role' => $role,
         ]);
     }
 
@@ -88,9 +93,10 @@ class PolicyController extends Controller
 
         return $this->render('@EzPlatformAdminUi/admin/policy/add.html.twig', [
             'role' => $role,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
+
     public function updateAction(Request $request, Role $role, Policy $policy): Response
     {
         $form = $this->createForm(PolicyUpdateType::class, new PolicyUpdateData($policy));
@@ -121,7 +127,7 @@ class PolicyController extends Controller
 
         return $this->render('@EzPlatformAdminUi/admin/policy/edit.html.twig', [
             'role' => $role,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 

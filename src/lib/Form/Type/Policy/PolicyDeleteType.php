@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
@@ -13,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PolicyDeleteType extends AbstractType
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -31,13 +35,13 @@ class PolicyDeleteType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'translation_domain' => 'ezrepoforms_role',
-            'data_class' => PolicyDeleteData::class
+            'data_class' => PolicyDeleteData::class,
         ]);
     }
 }

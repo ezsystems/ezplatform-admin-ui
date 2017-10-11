@@ -1,8 +1,12 @@
 <?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
-
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
@@ -37,8 +41,7 @@ class MyMediaTab extends AbstractTab implements OrderedTabInterface
         PagerContentToDataMapper $pagerContentToDataMapper,
         SearchService $searchService,
         PermissionResolver $permissionResolver
-    )
-    {
+    ) {
         parent::__construct($twig, $translator);
 
         $this->pagerContentToDataMapper = $pagerContentToDataMapper;

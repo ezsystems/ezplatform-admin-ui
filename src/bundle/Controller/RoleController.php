@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
@@ -50,7 +54,7 @@ class RoleController extends Controller
         $roles = $this->roleService->loadRoles();
 
         return $this->render('@EzPlatformAdminUi/admin/role/list.html.twig', [
-            'roles' => $roles
+            'roles' => $roles,
         ]);
     }
 
@@ -63,7 +67,6 @@ class RoleController extends Controller
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     public function createAction(Request $request): Response
     {
@@ -109,7 +112,7 @@ class RoleController extends Controller
             $this->flashSuccess('role.updated', [], 'role');
 
             return $this->redirect($this->generateUrl('ezplatform.role.view', [
-                'roleId' => $role->id
+                'roleId' => $role->id,
             ]));
         }
 
@@ -119,7 +122,7 @@ class RoleController extends Controller
 
         return $this->render('@EzPlatformAdminUi/admin/role/edit.html.twig', [
             'role' => $role,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
