@@ -2,6 +2,14 @@
     const SELECTOR_FIELD = '.ez-field-edit-ezinteger';
 
     class EzIntegerValidator extends global.eZ.BaseFieldValidator {
+        /**
+         * Validates the input
+         *
+         * @method validateInteger
+         * @param {Event} event
+         * @returns {Object}
+         * @memberof EzIntegerValidator
+         */
         validateInteger(event) {
             const isRequired = event.target.required;
             const value = +event.target.value;
