@@ -9,3 +9,9 @@
 @import 'field-group';
 @import 'main-nav';
 @import 'notifications';
+@import 'fieldType/base-field';
+@import 'fieldType/ezauthor';
+@import 'fieldType/ezstring';
+@import 'fieldType/ezemail';
+@import 'fieldType/ezinteger';
+@import 'fieldType/ezfloat';

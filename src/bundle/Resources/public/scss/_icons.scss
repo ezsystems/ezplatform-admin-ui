@@ -1,21 +1,31 @@
 @import 'custom';
 
 .ez-icon {
-	width: 2rem;
-	height: 2rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 .btn-icon {
-	.ez-icon {
-		width: 1.5rem;
-		height: 1.5rem;
-		fill: $ez-color-primary;
-	}
+    .ez-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: $ez-color-primary;
+    }
+}
+
+.ez-field-edit-ezauthor {
+    .btn-icon {
+        .ez-icon {
+            fill: $ez-white;
+            width: 1rem;
+            height: 1rem;
+        }
+    }
 }
 
 .ez-main-nav {
-	.ez-icon {
-		width: 1.5rem;
-		height: 1.5rem;
-	}
+    .ez-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
 }
