@@ -4,6 +4,11 @@
         <meta charset="UTF-8" />
         <meta name="CSRF-Token" content="{{ app.session.get('_csrf/authenticate') }}" />
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
+        <script>
+            window.eZ = {
+                adminUiConfig: {{ admin_ui_config|json_encode|raw }}
+            };
+        </script>
         <title>{% block title %}eZ Platform{% endblock %}</title>
         {% block stylesheets %}
             {% stylesheets
@@ -18,6 +23,7 @@
         <script src="{{ asset('assets/vendor/react/react-dom.min.js')}}"></script>
         <script src="{{ asset('bundles/ezplatformadminui/js/modules/universal.discovery.module.js')}}"></script>
         <script src="{{ asset('bundles/ezplatformadminui/js/modules/sub.items.module.js')}}"></script>
+        <script src="{{ asset('bundles/ezplatformadminui/js/modules/multi.file.upload.module.js')}}"></script>
         <script src="{{ asset('bundles/ezplatformadminui/js/scripts/button.trigger.js') }}"></script>
         <script type="application/javascript" src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
         <script type="application/javascript" src="{{ asset('assets/vendor/popper.js/dist/umd/popper.js') }}"></script>

@@ -65,3 +65,12 @@ services:
             - { name: form.type }
 
     EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory: ~
+
+    EzSystems\EzPlatformAdminUi\ApplicationConfig\Providers\ContentTypeMappings:
+        arguments:
+            $locationMappings: "%ezplatform.multifile_upload.location.mappings%"
+            $defaultMappings: "%ezplatform.multifile_upload.location.default_mappings%"
+            $fallbackContentType: "%ezplatform.multifile_upload.fallback_content_type%"
+            $maxFileSize: "%ez_systems.multifile_upload.max_file_size%"
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'multiFileUpload' }
