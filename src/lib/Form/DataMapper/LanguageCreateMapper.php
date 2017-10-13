@@ -8,17 +8,22 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\Content\LanguageCreateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
+use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
 
 class LanguageCreateMapper implements DataMapperInterface
 {
     /**
-     * @param LanguageCreateStruct $value
-     *
+     * @param LanguageCreateStruct|ValueObject $value
      * @return LanguageCreateData
+     * @throws InvalidArgumentException
      */
     public function map(ValueObject $value): LanguageCreateData
     {
+        if(!$value instanceof LanguageCreateStruct){
+            throw new InvalidArgumentException('value', 'must be instance of ' . LanguageCreateStruct::class);
+        }
+
         $data = new LanguageCreateData();
 
         $data->setName($value->name);

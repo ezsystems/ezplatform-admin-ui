@@ -9,9 +9,6 @@
           "EzSystems\\EzPlatformAdminUi\\": "src/lib/"
         }
     },
-    "autoload-dev": {
-        "psr-4": { "Tests\\": "tests/" }
-    },
     "require": {
         "php": ">=7.1",
         "jms/translation-bundle": "^1.3.2",
@@ -19,10 +16,12 @@
         "ezsystems/repository-forms": "^2.0@dev",
         "ezsystems/ezplatform-admin-ui-modules": "^1.0@dev"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4"
+    },
     "extra": {
-      "branch-alias": {
-        "dev-master": "1.0.x-dev"
-      }
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     }
 }
-

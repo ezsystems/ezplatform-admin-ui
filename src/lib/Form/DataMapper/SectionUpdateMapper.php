@@ -9,26 +9,35 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 use eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
+use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class SectionUpdateMapper implements DataMapperInterface
 {
     /**
      * @param SectionUpdateStruct|ValueObject $value
-     *
      * @return SectionUpdateData
+     * @throws InvalidArgumentException
      */
     public function map(ValueObject $value): SectionUpdateData
     {
+        if(!$value instanceof SectionUpdateStruct){
+            throw new InvalidArgumentException('value', 'must be instance of ' . SectionUpdateStruct::class);
+        }
+
         return new SectionUpdateData($value->identifier, $value->name);
     }
 
     /**
      * @param SectionUpdateData $data
-     *
      * @return SectionUpdateStruct
+     * @throws InvalidArgumentException
      */
     public function reverseMap($data): SectionUpdateStruct
     {
+        if(!$data instanceof SectionUpdateData){
+            throw new InvalidArgumentException('data', 'must be instance of ' . SectionUpdateData::class);
+        }
+
         return new SectionUpdateStruct([
             'name' => $data->getName(),
             'identifier' => $data->getIdentifier(),

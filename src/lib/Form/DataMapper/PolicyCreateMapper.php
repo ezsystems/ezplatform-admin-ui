@@ -9,16 +9,21 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\Core\Repository\Values\User\PolicyCreateStruct;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
+use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class PolicyCreateMapper implements DataMapperInterface
 {
     /**
-     * @param PolicyCreateStruct $value
-     *
+     * @param ValueObject|PolicyCreateStruct $value
      * @return PolicyCreateData
+     * @throws InvalidArgumentException
      */
     public function map(ValueObject $value): PolicyCreateData
     {
+        if(!$value instanceof PolicyCreateStruct){
+            throw new InvalidArgumentException('value', 'must be instance of ' . PolicyCreateStruct::class);
+        }
+
         $data = new PolicyCreateData();
 
         $data->setModule($value->module);

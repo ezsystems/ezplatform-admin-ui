@@ -9,16 +9,21 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 use eZ\Publish\API\Repository\Values\User\RoleUpdateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
+use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class RoleUpdateMapper implements DataMapperInterface
 {
     /**
-     * @param RoleUpdateStruct $value
-     *
+     * @param RoleUpdateStruct|ValueObject $value
      * @return RoleUpdateData
+     * @throws InvalidArgumentException
      */
     public function map(ValueObject $value): RoleUpdateData
     {
+        if(!$value instanceof RoleUpdateStruct){
+            throw new InvalidArgumentException('value', 'must be instance of ' . RoleUpdateStruct::class);
+        }
+
         $data = new RoleUpdateData();
 
         $data->setIdentifier($value->identifier);
@@ -28,11 +33,15 @@ class RoleUpdateMapper implements DataMapperInterface
 
     /**
      * @param RoleUpdateData $data
-     *
      * @return RoleUpdateStruct
+     * @throws InvalidArgumentException
      */
     public function reverseMap($data): RoleUpdateStruct
     {
+        if(!$data instanceof RoleUpdateData){
+            throw new InvalidArgumentException('data', 'must be instance of ' . RoleUpdateData::class);
+        }
+
         return new RoleUpdateStruct([
             'identifier' => $data->getIdentifier(),
         ]);

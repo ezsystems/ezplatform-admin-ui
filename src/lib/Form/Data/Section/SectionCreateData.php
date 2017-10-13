@@ -39,10 +39,13 @@ class SectionCreateData
 
     /**
      * @param null|string $identifier
+     * @return $this
      */
     public function setIdentifier(?string $identifier)
     {
         $this->identifier = $identifier;
+
+        return $this;
     }
 
     /**
@@ -55,9 +58,12 @@ class SectionCreateData
 
     /**
      * @param null|string $name
+     * @return $this
      */
     public function setName(?string $name)
     {
         $this->name = $name;
+
+        return $this;
     }
 }

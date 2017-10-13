@@ -23,9 +23,11 @@ class PolicyUpdateData
 
     public function __construct(?Policy $policy = null)
     {
-        $this->module = $policy->module;
-        $this->function = $policy->function;
-        $this->limitations = $policy->limitations;
+        if($policy instanceof Policy){
+            $this->module = $policy->module;
+            $this->function = $policy->function;
+            $this->limitations = $policy->limitations;
+        }
     }
 
     /**
