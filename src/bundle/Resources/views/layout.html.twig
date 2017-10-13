@@ -6,7 +6,19 @@
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
         <script>
             window.eZ = {
-                adminUiConfig: {{ admin_ui_config|json_encode|raw }}
+                adminUiConfig: {{ admin_ui_config|json_encode|raw }},
+                // needs translations
+                errors: {
+                    emailRegexp: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    emptyField: '{fieldName} field is required',
+                    invalidEmail: 'A valid email address is required',
+                    tooLong: '{fieldName} value should be less than or equal to {maxLength} characters',
+                    tooShort: '{fieldName} value should be greater than or equal to {minLength} characters',
+                    isNotInteger: '{fieldName} value should be an integer',
+                    isNotFloat: '{fieldName} value should be a float number',
+                    isLess: '{fieldName} value should be greater than or equal to {minValue}',
+                    isGreater: '{fieldName} value should be less than or equal to {maxValue}',
+                },
             };
         </script>
         <title>{% block title %}eZ Platform{% endblock %}</title>
@@ -28,22 +40,6 @@
         <script type="application/javascript" src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
         <script type="application/javascript" src="{{ asset('assets/vendor/popper.js/dist/umd/popper.js') }}"></script>
         <script type="application/javascript" src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-        <script>
-            // needs translations
-            window.eZ = {
-                errors: {
-                    emailRegexp: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    emptyField: '{fieldName} field is required',
-                    invalidEmail: 'A valid email address is required',
-                    tooLong: '{fieldName} value should be less than or equal to {maxLength} characters',
-                    tooShort: '{fieldName} value should be greater than or equal to {minLength} characters',
-                    isNotInteger: '{fieldName} value should be an integer',
-                    isNotFloat: '{fieldName} value should be a float number',
-                    isLess: '{fieldName} value should be greater than or equal to {minValue}',
-                    isGreater: '{fieldName} value should be less than or equal to {maxValue}',
-                }
-            };
-        </script>
     </head>
     <body class="{% block bodyClass %}{% endblock %}">
         {% block navigation %}
