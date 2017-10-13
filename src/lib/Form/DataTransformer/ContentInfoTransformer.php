@@ -10,6 +10,8 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\ContentService;
 use Symfony\Component\Form\DataTransformerInterface;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * Translates Content's ID to domain specific ContentInfo object.
@@ -27,17 +29,37 @@ class ContentInfoTransformer implements DataTransformerInterface
         $this->contentService = $contentService;
     }
 
+    /**
+     * @param null|ContentInfo $value
+     * @return mixed|null
+     */
     public function transform($value)
     {
-        return null !== $value
-            ? $value->id
-            : null;
+        if (null === $value) {
+            return null;
+        }
+
+        if (!$value instanceof ContentInfo) {
+            throw new TransformationFailedException('Expected an ' . ContentInfo::class . ' object.');
+        }
+
+        return $value->id;
     }
 
+    /**
+     * @param mixed $value
+     * @return ContentInfo|null
+     */
     public function reverseTransform($value)
     {
-        return null !== $value && !empty($value)
-            ? $this->contentService->loadContentInfo($value)
-            : null;
+        if (null === $value || empty($value)) {
+            return null;
+        }
+
+        if (!is_int($value)) {
+            throw new TransformationFailedException('Expected an integer.');
+        }
+
+        return $this->contentService->loadContentInfo($value);
     }
 }

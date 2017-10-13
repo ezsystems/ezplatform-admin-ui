@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataMapper;
 use eZ\Publish\Core\Repository\Values\User\PolicyCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyCreateMapper;
 use PHPUnit\Framework\TestCase;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
