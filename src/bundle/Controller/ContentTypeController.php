@@ -12,7 +12,6 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use EzSystems\EzPlatformAdminUi\Service\CacheService;
 use EzSystems\EzPlatformAdminUi\Service\ContentTypeService;
 use EzSystems\RepositoryForms\Data\Mapper\ContentTypeDraftMapper;
 use EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface;
@@ -78,7 +77,7 @@ class ContentTypeController extends Controller
         ]);
     }
 
-    public function updateAction(CacheService $cacheService, Request $request, ContentTypeGroup $group, ContentTypeDraft $contentType): Response
+    public function updateAction(Request $request, ContentTypeGroup $group, ContentTypeDraft $contentType): Response
     {
         $form = $this->createUpdateForm($group, $contentType);
         $form->handleRequest($request);
@@ -92,8 +91,6 @@ class ContentTypeController extends Controller
                 $form->getClickedButton() ? $form->getClickedButton()->getName() : null,
                 ['languageCode' => $languageCode]
             );
-
-            $cacheService->clearContentTypesCache();
 
             if ($response = $this->contentTypeActionDispatcher->getResponse()) {
                 return $response;
