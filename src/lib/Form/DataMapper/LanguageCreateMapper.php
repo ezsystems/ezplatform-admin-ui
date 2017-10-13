@@ -35,11 +35,15 @@ class LanguageCreateMapper implements DataMapperInterface
 
     /**
      * @param LanguageCreateData $data
-     *
      * @return LanguageCreateStruct
+     * @throws InvalidArgumentException
      */
     public function reverseMap($data): LanguageCreateStruct
     {
+        if(!$data instanceof LanguageCreateData){
+            throw new InvalidArgumentException('data', 'must be instance of ' . LanguageCreateData::class);
+        }
+
         return new LanguageCreateStruct([
             'languageCode' => $data->getLanguageCode(),
             'name' => $data->getName(),

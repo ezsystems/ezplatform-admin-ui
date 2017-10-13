@@ -34,11 +34,15 @@ class PolicyCreateMapper implements DataMapperInterface
 
     /**
      * @param PolicyCreateData $data
-     *
      * @return PolicyCreateStruct
+     * @throws InvalidArgumentException
      */
     public function reverseMap($data): PolicyCreateStruct
     {
+        if(!$data instanceof PolicyCreateData){
+            throw new InvalidArgumentException('data', 'must be instance of ' . PolicyCreateData::class);
+        }
+
         return new PolicyCreateStruct([
             'module' => $data->getModule(),
             'function' => $data->getFunction(),

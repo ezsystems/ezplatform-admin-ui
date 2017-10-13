@@ -60,6 +60,13 @@ class PolicyCreateMapperTest extends TestCase
         $this->mapper->map(new LocationCreateStruct());
     }
 
+    public function testReverseMapWithWrongInstance()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Argument \'data\' is invalid: must be instance of ' . PolicyCreateData::class);
+        $this->mapper->reverseMap(new PolicyUpdateData());
+    }
+
     public function dataProvider()
     {
         return [

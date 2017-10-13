@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataMapper;
 use eZ\Publish\API\Repository\Values\Content\LanguageCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper;
 use PHPUnit\Framework\TestCase;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
@@ -57,6 +58,13 @@ class LanguageCreateMapperTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Argument \'value\' is invalid: must be instance of ' . LanguageCreateStruct::class);
         $this->mapper->map(new LocationCreateStruct());
+    }
+
+    public function testReverseMapWithWrongInstance()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Argument \'data\' is invalid: must be instance of ' . LanguageCreateData::class);
+        $this->mapper->reverseMap(new LanguageDeleteData());
     }
 
     public function dataProvider()
