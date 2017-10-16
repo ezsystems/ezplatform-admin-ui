@@ -4,7 +4,6 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
@@ -65,7 +64,7 @@ class PolicyUpdateMapperTest extends TestCase
     public function dataProvider()
     {
         return [
-            'simple' => [['limitation' =>  new ContentTypeLimitation()]]
+            'simple' => [['limitation' => new ContentTypeLimitation()]],
         ];
     }
 
@@ -87,6 +86,6 @@ class PolicyUpdateMapperTest extends TestCase
      */
     private function createData(array $properties): PolicyUpdateData
     {
-        return new PolicyUpdateData(['module'=>$properties['module'], 'function' => $properties['function']]);
+        return new PolicyUpdateData(['module' => $properties['module'], 'function' => $properties['function']]);
     }
 }

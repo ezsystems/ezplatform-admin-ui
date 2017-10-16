@@ -4,7 +4,6 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct;
@@ -15,7 +14,7 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper;
 use PHPUnit\Framework\TestCase;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
-class SectionUpdateMapperTest extends TestCase
+class SelectionUpdateMapperTest extends TestCase
 {
     /**
      * @var SectionUpdateMapper
@@ -74,7 +73,7 @@ class SectionUpdateMapperTest extends TestCase
             'simple' => [['identifier' => 'hash', 'name' => 'Lorem']],
             'without_name' => [['identifier' => 'hash', 'name' => null]],
             'without_identifier' => [['identifier' => null, 'name' => 'Lorem']],
-            'with_null' => [['identifier' => null, 'name' => null]]
+            'with_null' => [['identifier' => null, 'name' => null]],
         ];
     }
 

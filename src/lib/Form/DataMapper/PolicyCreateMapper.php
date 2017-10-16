@@ -20,7 +20,7 @@ class PolicyCreateMapper implements DataMapperInterface
      */
     public function map(ValueObject $value): PolicyCreateData
     {
-        if(!$value instanceof PolicyCreateStruct){
+        if (!$value instanceof PolicyCreateStruct) {
             throw new InvalidArgumentException('value', 'must be instance of ' . PolicyCreateStruct::class);
         }
 
@@ -39,7 +39,7 @@ class PolicyCreateMapper implements DataMapperInterface
      */
     public function reverseMap($data): PolicyCreateStruct
     {
-        if(!$data instanceof PolicyCreateData){
+        if (!$data instanceof PolicyCreateData) {
             throw new InvalidArgumentException('data', 'must be instance of ' . PolicyCreateData::class);
         }
 

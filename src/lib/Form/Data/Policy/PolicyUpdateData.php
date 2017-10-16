@@ -23,7 +23,7 @@ class PolicyUpdateData
 
     public function __construct(?Policy $policy = null)
     {
-        if($policy instanceof Policy){
+        if ($policy instanceof Policy) {
             $this->module = $policy->module;
             $this->function = $policy->function;
             $this->limitations = $policy->limitations;

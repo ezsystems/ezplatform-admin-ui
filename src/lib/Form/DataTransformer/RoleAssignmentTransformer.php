@@ -10,9 +10,12 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\RoleService;
 use Symfony\Component\Form\DataTransformerInterface;
+use eZ\Publish\Core\Repository\Values\User\UserRoleAssignment as RoleAssignment;
+use Symfony\Component\Form\Exception\TransformationFailedException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 /**
- * Translates RoleAssignment's ID to domain specific Role object.
+ * Transforms between a RoleAssignment's ID and a domain specific object.
  */
 class RoleAssignmentTransformer implements DataTransformerInterface
 {
@@ -27,17 +30,39 @@ class RoleAssignmentTransformer implements DataTransformerInterface
         $this->roleService = $roleService;
     }
 
+    /**
+     * Transforms a domain specific RoleAssignment object into a RoleAssignment string.
+     * @param mixed $value
+     * @return mixed|null
+     */
     public function transform($value)
     {
-        return null !== $value
-            ? $value->id
-            : null;
+        if (null === $value) {
+            return null;
+        }
+
+        if (!$value instanceof RoleAssignment) {
+            throw new TransformationFailedException('Expected a ' . RoleAssignment::class . ' object.');
+        }
+
+        return $value->id;
     }
 
+    /**
+     * Transforms a RoleAssignment's ID into a domain specific RoleAssignment object.
+     * @param mixed $value
+     * @return \eZ\Publish\API\Repository\Values\User\RoleAssignment|null
+     */
     public function reverseTransform($value)
     {
-        return null !== $value
-            ? $this->roleService->loadRoleAssignment($value)
-            : null;
+        if (empty($value)) {
+            return null;
+        }
+
+        try {
+            return $this->roleService->loadRoleAssignment($value);
+        } catch (NotFoundException $e) {
+            throw new TransformationFailedException('Transformation failed. ' . $e->getMessage(), $e->getCode(), $e);
+        }
     }
 }

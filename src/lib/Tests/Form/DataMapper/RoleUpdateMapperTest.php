@@ -4,7 +4,6 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\User\RoleUpdateStruct;
@@ -71,7 +70,7 @@ class RoleUpdateMapperTest extends TestCase
     public function dataProvider()
     {
         return [
-            'simple' => [['identifier' => 'hash']]
+            'simple' => [['identifier' => 'hash']],
         ];
     }
 

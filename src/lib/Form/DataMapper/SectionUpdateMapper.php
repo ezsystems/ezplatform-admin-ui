@@ -20,7 +20,7 @@ class SectionUpdateMapper implements DataMapperInterface
      */
     public function map(ValueObject $value): SectionUpdateData
     {
-        if(!$value instanceof SectionUpdateStruct){
+        if (!$value instanceof SectionUpdateStruct) {
             throw new InvalidArgumentException('value', 'must be instance of ' . SectionUpdateStruct::class);
         }
 
@@ -34,7 +34,7 @@ class SectionUpdateMapper implements DataMapperInterface
      */
     public function reverseMap($data): SectionUpdateStruct
     {
-        if(!$data instanceof SectionUpdateData){
+        if (!$data instanceof SectionUpdateData) {
             throw new InvalidArgumentException('data', 'must be instance of ' . SectionUpdateData::class);
         }
 

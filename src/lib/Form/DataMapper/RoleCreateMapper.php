@@ -20,7 +20,7 @@ class RoleCreateMapper implements DataMapperInterface
      */
     public function map(ValueObject $value): RoleCreateData
     {
-        if(!$value instanceof RoleCreateStruct){
+        if (!$value instanceof RoleCreateStruct) {
             throw new InvalidArgumentException('value', 'must be instance of ' . RoleCreateStruct::class);
         }
 
@@ -38,7 +38,7 @@ class RoleCreateMapper implements DataMapperInterface
      */
     public function reverseMap($data): RoleCreateStruct
     {
-        if(!$data instanceof RoleCreateData){
+        if (!$data instanceof RoleCreateData) {
             throw new InvalidArgumentException('data', 'must be instance of ' . RoleCreateData::class);
         }
 

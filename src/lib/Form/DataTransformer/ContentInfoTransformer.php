@@ -14,7 +14,7 @@ use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
- * Translates Content's ID to domain specific ContentInfo object.
+ * Transforms between a Content's ID and a domain specific ContentInfo object.
  */
 class ContentInfoTransformer implements DataTransformerInterface
 {
@@ -30,8 +30,11 @@ class ContentInfoTransformer implements DataTransformerInterface
     }
 
     /**
+     * Transforms a domain specific ContentInfo object into a Content's ID.
+     *
      * @param null|ContentInfo $value
      * @return mixed|null
+     * @throws TransformationFailedException if the given value is not a ContentInfo object
      */
     public function transform($value)
     {
@@ -40,19 +43,23 @@ class ContentInfoTransformer implements DataTransformerInterface
         }
 
         if (!$value instanceof ContentInfo) {
-            throw new TransformationFailedException('Expected an ' . ContentInfo::class . ' object.');
+            throw new TransformationFailedException('Expected a ' . ContentInfo::class . ' object.');
         }
 
         return $value->id;
     }
 
     /**
+     * Transforms a Content's ID integer into a domain specific ContentInfo object.
+     *
      * @param mixed $value
      * @return ContentInfo|null
+     * @throws TransformationFailedException if the given value is not an integer
+     *                                       or if the value can not be transformed
      */
     public function reverseTransform($value)
     {
-        if (null === $value || empty($value)) {
+        if (empty($value)) {
             return null;
         }
 

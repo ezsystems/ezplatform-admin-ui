@@ -32,7 +32,7 @@ class LanguageCreateData
     public function setName(string $name)
     {
         $this->name = $name;
-        
+
         return $this;
     }
 

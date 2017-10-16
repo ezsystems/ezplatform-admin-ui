@@ -10,9 +10,12 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\LanguageService;
 use Symfony\Component\Form\DataTransformerInterface;
+use eZ\Publish\API\Repository\Values\Content\Language;
+use Symfony\Component\Form\Exception\TransformationFailedException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 /**
- * Translates Language's ID to domain specific Language object.
+ * Transforms between a Language's ID and a domain specific Language object.
  */
 class LanguageTransformer implements DataTransformerInterface
 {
@@ -27,17 +30,45 @@ class LanguageTransformer implements DataTransformerInterface
         $this->languageService = $languageService;
     }
 
+    /**
+     * Transforms a domain specific Language object into a Language's ID.
+     *
+     * @param null|Language $value
+     * @return mixed|null
+     *
+     * @throws TransformationFailedException if the given value is not a Language object
+     */
     public function transform($value)
     {
-        return null !== $value
-            ? $value->id
-            : null;
+        if (null === $value) {
+            return null;
+        }
+
+        if (!$value instanceof Language) {
+            throw new TransformationFailedException('Expected a ' . Language::class . ' object.');
+        }
+
+        return $value->id;
     }
 
+    /**
+     * Transforms a Content's ID integer into a domain specific ContentInfo object.
+     *
+     * @param mixed $value
+     * @return Language|mixed|null
+     *
+     * @throws TransformationFailedException if the value can not be found
+     */
     public function reverseTransform($value)
     {
-        return null !== $value
-            ? $this->languageService->loadLanguageById($value)
-            : null;
+        if (empty($value)) {
+            return null;
+        }
+
+        try {
+            return $this->languageService->loadLanguageById($value);
+        } catch (NotFoundException $e) {
+            throw new TransformationFailedException('Transformation failed. ' . $e->getMessage(), $e->getCode(), $e);
+        }
     }
 }

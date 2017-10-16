@@ -10,9 +10,10 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\LocationService;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
- * Translates Location's ID to domain specific object.
+ * Transforms between a Location's ID and a domain specific Location object.
  */
 class LocationsTransformer implements DataTransformerInterface
 {
@@ -27,19 +28,36 @@ class LocationsTransformer implements DataTransformerInterface
         $this->locationService = $locationService;
     }
 
+    /**
+     * Transforms a domain specific Location objects into a Location's ID comma separated string.
+     *
+     * @param mixed $value
+     * @return array|mixed|string
+     */
     public function transform($value)
     {
-        return is_array($value) && !empty($value)
-            ? implode(',', array_column($value, 'id'))
-            : [];
+        /** TODO add sanity check is array of Location object? */
+        if (!is_array($value) || empty($value)) {
+            return [];
+        }
+
+        return implode(',', array_column($value, 'id'));
     }
 
+    /**
+     * Transforms a Location's ID string into a domain specific Location objects.
+     *
+     * @param mixed $value
+     * @return array|null
+     */
     public function reverseTransform($value)
     {
+        if (!is_string($value)) {
+            throw new TransformationFailedException('Expected a string.');
+        }
+
         $value = explode(',', $value);
 
-        return !empty($value)
-            ? array_map([$this->locationService, 'loadLocation'], $value)
-            : null;
+        return array_map([$this->locationService, 'loadLocation'], $value);
     }
 }

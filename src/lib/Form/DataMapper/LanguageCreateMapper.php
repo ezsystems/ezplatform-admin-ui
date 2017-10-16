@@ -20,7 +20,7 @@ class LanguageCreateMapper implements DataMapperInterface
      */
     public function map(ValueObject $value): LanguageCreateData
     {
-        if(!$value instanceof LanguageCreateStruct){
+        if (!$value instanceof LanguageCreateStruct) {
             throw new InvalidArgumentException('value', 'must be instance of ' . LanguageCreateStruct::class);
         }
 
@@ -40,7 +40,7 @@ class LanguageCreateMapper implements DataMapperInterface
      */
     public function reverseMap($data): LanguageCreateStruct
     {
-        if(!$data instanceof LanguageCreateData){
+        if (!$data instanceof LanguageCreateData) {
             throw new InvalidArgumentException('data', 'must be instance of ' . LanguageCreateData::class);
         }
 

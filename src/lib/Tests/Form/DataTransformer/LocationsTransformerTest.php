@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
+declare(strict_types=1);
+
+namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataTransformer;
+
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Form\Exception\TransformationFailedException;
+use eZ\Publish\API\Repository\LocationService;
+use EzSystems\EzPlatformAdminUi\Form\DataTransformer\LocationsTransformer;
+use eZ\Publish\Core\Repository\Values\Content\Location;
+
+class LocationsTransformerTest extends TestCase
+{
+    /**
+     * @dataProvider transformDataProvider
+     * @param $value
+     * @param $expected
+     */
+    public function testTransform($value, $expected)
+    {
+        $service = $this->createMock(LocationService::class);
+        $transformer = new LocationsTransformer($service);
+
+        $result = $transformer->transform($value);
+
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testReverseTransformWithIds()
+    {
+        $service = $this->createMock(LocationService::class);
+        $service->expects(self::exactly(2))
+            ->method('loadLocation')
+            ->willReturnMap([
+                ["123456", new Location(['id' => 123456])],
+                ["456789", new Location(['id' => 456789])],
+            ]);
+
+        $transformer = new LocationsTransformer($service);
+        $result = $transformer->reverseTransform('123456,456789');
+
+        $this->assertEquals([new Location(['id' => 123456]), new Location(['id' => 456789])], $result);
+    }
+
+    /**
+     * @dataProvider wrongValueForReverseTransformDataProvider
+     * @param $value
+     */
+    public function testReverseTransformWithWrongValue($value)
+    {
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('Expected a string.');
+
+        $service = $this->createMock(LocationService::class);
+        $transformer = new LocationsTransformer($service);
+
+        $transformer->reverseTransform($value);
+    }
+
+    public function transformDataProvider()
+    {
+        $location_1 = new Location(['id' => 123456]);
+        $location_2 = new Location(['id' => 456789]);
+
+        return [
+            'with_array_of_ids' => [[$location_1, $location_2], '123456,456789'],
+            'with_array_of_id' => [[$location_1], '123456'],
+            'null' => [null, []],
+            'string' => ['string', []],
+            'empty_array' => [[], []],
+        ];
+    }
+
+    public function wrongValueForReverseTransformDataProvider()
+    {
+        return [
+            'integer' => [123456],
+            'bool' => [true],
+            'float' => [(float)12.34],
+            'array' => [[]],
+            'object' => [new \stdClass()],
+        ];
+    }
+}

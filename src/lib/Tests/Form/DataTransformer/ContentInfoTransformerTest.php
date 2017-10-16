@@ -24,12 +24,16 @@ class ContentInfoTransformerTest extends TestCase
     public function setUp()
     {
         $contentService = $this->createMock(ContentService::class);
+        $contentService->expects(self::any())
+            ->method('loadContentInfo')
+            ->with(123456)
+            ->willReturn(new ContentInfo(['id' => 123456]));
 
         $this->contentInfoTransformer = new ContentInfoTransformer($contentService);
     }
 
     /**
-     * @dataProvider dataProvider
+     * @dataProvider transformDataProvider
      * @param $value
      * @param $expected
      */
@@ -47,11 +51,34 @@ class ContentInfoTransformerTest extends TestCase
     public function testTransformWithWrongValue($value)
     {
         $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Expected an ' . ContentInfo::class . ' object.');
+        $this->expectExceptionMessage('Expected a ' . ContentInfo::class . ' object.');
         $this->contentInfoTransformer->transform($value);
     }
 
-    public function dataProvider()
+    /**
+     * @dataProvider reverseTransformDataProvider
+     * @param $value
+     * @param $expected
+     */
+    public function testReverseTransform($value, $expected)
+    {
+        $result = $this->contentInfoTransformer->reverseTransform($value);
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @dataProvider wrongValueForReverseTransformDataProvider
+     * @param $value
+     */
+    public function testReverseTransformWithWrongValue($value)
+    {
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('Expected an integer.');
+        $this->contentInfoTransformer->reverseTransform($value);
+    }
+
+    public function transformDataProvider()
     {
         $contentInfo = new ContentInfo(['id' => 123456]);
 
@@ -61,14 +88,37 @@ class ContentInfoTransformerTest extends TestCase
         ];
     }
 
+    public function reverseTransformDataProvider()
+    {
+        $contentInfo = new ContentInfo(['id' => 123456]);
+
+        return [
+            'integer' => [123456, $contentInfo],
+            'null' => [null, null],
+        ];
+    }
+
     public function wrongValueDataProvider()
+    {
+        return [
+            'string' => ['string'],
+            'integer' => [123456],
+            'bool' => [true],
+            'float' => [(float)12.34],
+            'array' => [[]],
+            'object' => [new \stdClass()],
+        ];
+    }
+
+    public function wrongValueForReverseTransformDataProvider()
     {
         return [
             'string' => ['string'],
             'bool' => [true],
             'float' => [(float)12.34],
-            'array' => [[]],
+            'array' => [['element']],
             'object' => [new \stdClass()],
+            'content_info' => [new ContentInfo()],
         ];
     }
 }
