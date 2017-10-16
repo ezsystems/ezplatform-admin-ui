@@ -1,8 +1,8 @@
 (function () {
     const btns = document.querySelectorAll('.btn--open-udw');
-    const udwContainer = document.getElementById('react-udw'); 
+    const udwContainer = document.getElementById('react-udw');
     const closeUDW = () => udwContainer.innerHTML = '';
-    const contentDiscoverHandler = (form, content) => {
+    const onConfirm = (form, content) => {
         console.log(form, form.getAttribute('name'));
         const field = form.querySelector('#' + form.getAttribute('name') + '_data_locations_location');
 
@@ -11,15 +11,15 @@
         closeUDW();
         form.submit();
     };
-    const cancelDiscoverHandler = () => closeUDW();
+    const onCancel = () => closeUDW();
     const openUDW = (event) => {
         event.preventDefault();
 
         const form = event.target.closest('form');
 
-        ReactDOM.render(React.createElement(UniversalDiscovery.default, {
-            contentDiscoverHandler: contentDiscoverHandler.bind(this, form),
-            cancelDiscoverHandler: cancelDiscoverHandler,
+        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
+            onConfirm: onConfirm.bind(this, form),
+            onCancel,
         }), udwContainer);
     };
 

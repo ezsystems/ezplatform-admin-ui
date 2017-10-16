@@ -2,7 +2,7 @@
     const btns = document.querySelectorAll('.btn--open-udw');
     const udwContainer = document.getElementById('react-udw');
     const closeUDW = () => udwContainer.innerHTML = '';
-    const contentDiscoverHandler = (form, content) => {
+    const onConfirm = (form, content) => {
         const field = form.querySelector('#trash_item_restore_data_location_location');
 
         field.value = content.map(item => item.id).join();
@@ -10,15 +10,15 @@
         closeUDW();
         form.submit();
     };
-    const cancelDiscoverHandler = () => closeUDW();
+    const onCancel = () => closeUDW();
     const openUDW = (event) => {
         event.preventDefault();
 
         const form = event.target.closest('form[name="trash_item_restore"]');
 
-        ReactDOM.render(React.createElement(UniversalDiscovery.default, {
-            contentDiscoverHandler: contentDiscoverHandler.bind(this, form),
-            cancelDiscoverHandler: cancelDiscoverHandler,
+        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
+            onConfirm: onConfirm.bind(this, form),
+            onCancel,
             confirmLabel: 'Restore',
             title: 'Select a location to restore you content item(s)'
         }), udwContainer);
