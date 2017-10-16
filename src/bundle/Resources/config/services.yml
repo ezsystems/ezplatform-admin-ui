@@ -39,11 +39,6 @@ services:
         resource: '../../../lib/Service/*'
         public: true
 
-    EzSystems\EzPlatformAdminUi\Service\CacheService:
-        arguments:
-            - '@ezpublish.spi.persistence.legacy'
-            - '@ezpublish.cache_pool'
-
     EzSystems\EzPlatformAdminUi\Service\ContentTypeService:
         arguments:
             $prioritizedLanguages: '$languages$'
