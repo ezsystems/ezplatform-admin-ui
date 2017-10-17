@@ -8,15 +8,15 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataTransformer;
 
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\LanguageTransformer;
+use EzSystems\EzPlatformAdminUi\Form\DataTransformer\SectionTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use eZ\Publish\API\Repository\LanguageService;
-use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use Throwable;
+use eZ\Publish\API\Repository\SectionService;
+use eZ\Publish\API\Repository\Values\Content\Section as APISection;
 
-class LanguageTransformerTest extends TestCase
+class SectionTransformerTest extends TestCase
 {
     /**
      * @dataProvider transformDataProvider
@@ -25,8 +25,8 @@ class LanguageTransformerTest extends TestCase
      */
     public function testTransform($value, $expected)
     {
-        $languageService = $this->createMock(LanguageService::class);
-        $transformer = new LanguageTransformer($languageService);
+        $service = $this->createMock(SectionService::class);
+        $transformer = new SectionTransformer($service);
 
         $result = $transformer->transform($value);
 
@@ -39,36 +39,36 @@ class LanguageTransformerTest extends TestCase
      */
     public function testTransformWithInvalidInput($value)
     {
-        $languageService = $this->createMock(LanguageService::class);
-        $transformer = new LanguageTransformer($languageService);
+        $languageService = $this->createMock(SectionService::class);
+        $transformer = new SectionTransformer($languageService);
 
         $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Expected a ' . Language::class . ' object.');
+        $this->expectExceptionMessage('Expected a ' . APISection::class . ' object.');
         $transformer->transform($value);
     }
 
     public function testReverseTransformWithId()
     {
-        $languageService = $this->createMock(LanguageService::class);
-        $languageService->expects(self::once())
-            ->method('loadLanguageById')
+        $service = $this->createMock(SectionService::class);
+        $service->expects(self::once())
+            ->method('loadSection')
             ->with(123456)
-            ->willReturn(new Language(['id' => 123456]));
+            ->willReturn(new APISection(['id' => 123456]));
 
-        $transformer = new LanguageTransformer($languageService);
+        $transformer = new SectionTransformer($service);
 
         $result = $transformer->reverseTransform(123456);
 
-        $this->assertEquals(new Language(['id' => 123456]), $result);
+        $this->assertEquals(new APISection(['id' => 123456]), $result);
     }
 
     public function testReverseTransformWithNull()
     {
-        $languageService = $this->createMock(LanguageService::class);
-        $languageService->expects(self::never())
-            ->method('loadLanguageById');
+        $service = $this->createMock(SectionService::class);
+        $service->expects(self::never())
+            ->method('loadSection');
 
-        $transformer = new LanguageTransformer($languageService);
+        $transformer = new SectionTransformer($service);
 
         $result = $transformer->reverseTransform(null);
 
@@ -78,28 +78,28 @@ class LanguageTransformerTest extends TestCase
     public function testReverseTransformWithNotFoundException()
     {
         $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Transformation failed. Language not found');
+        $this->expectExceptionMessage('Transformation failed. Location not found');
 
-        $languageService = $this->createMock(LanguageService::class);
-        $languageService->method('loadLanguageById')
+        $service = $this->createMock(SectionService::class);
+        $service->method('loadSection')
             ->will($this->throwException(new class() extends NotFoundException {
                 public function __construct($message = '', $code = 0, Throwable $previous = null)
                 {
-                    parent::__construct('Language not found', $code, $previous);
+                    parent::__construct('Location not found', $code, $previous);
                 }
             }));
 
-        $transformer = new LanguageTransformer($languageService);
+        $transformer = new SectionTransformer($service);
 
         $transformer->reverseTransform(654321);
     }
 
     public function transformDataProvider()
     {
-        $language = new Language(['id' => 123456]);
+        $transform = new APISection(['id' => 123456]);
 
         return [
-            'content_info_with_id' => [$language, 123456],
+            'with_id' => [$transform, 123456],
             'null' => [null, null],
         ];
     }

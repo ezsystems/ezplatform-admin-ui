@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataTransformer;
 
-use eZ\Publish\SPI\Persistence\User\Policy;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\PolicyTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -30,6 +29,20 @@ class PolicyTransformerTest extends TestCase
     }
 
     /**
+     * @dataProvider transformWithInvalidInputDataProvider
+     * @param $value
+     */
+    public function testTransformWithInvalidInput($value)
+    {
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('Expected a valid array of data.');
+
+        $transformer = new PolicyTransformer();
+
+        $transformer->transform($value);
+    }
+
+    /**
      * @dataProvider reverseTransformDataProvider
      * @param $value
      * @param $expected
@@ -43,11 +56,11 @@ class PolicyTransformerTest extends TestCase
     }
 
     /**
-     * @dataProvider wrongValueForReverseTransformDataProvider
+     * @dataProvider reverseTransformWithInvalidInputDataProvider
      * @param $value
      * @param $expectedMessage
      */
-    public function testReverseTransformWithWrongValue($value, $expectedMessage)
+    public function testReverseTransformWithInvalidInput($value, $expectedMessage)
     {
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage($expectedMessage);
@@ -60,7 +73,7 @@ class PolicyTransformerTest extends TestCase
     public function transformDataProvider()
     {
         return [
-//            'policy' => [new Policy(['id' => 123456, 'module' => 'module_name', 'function' => 'some_function' ]), '123456'],
+            'policy' => [['id' => 123456, 'module' => 'module_name', 'function' => 'some_function' ], '123456:module_name:some_function'],
             'null' => [null, null],
         ];
     }
@@ -73,7 +86,23 @@ class PolicyTransformerTest extends TestCase
         ];
     }
 
-    public function wrongValueForReverseTransformDataProvider()
+    public function transformWithInvalidInputDataProvider()
+    {
+        return [
+            'integer' => [123456],
+            'bool' => [true],
+            'float' => [12.34],
+            'empty_array' => [[]],
+            'object' => [new \stdClass()],
+            'string' => ['some string'],
+            'empty_string' => [''],
+            'missing_id' => [['module' => 'module_name', 'function' => 'some_function' ]],
+            'missing_module' => [['id' => 123456, 'function' => 'some_function' ]],
+            'missing_function' => [['id' => 123456, 'module' => 'module_name' ]],
+        ];
+    }
+
+    public function reverseTransformWithInvalidInputDataProvider()
     {
         $stringExpected = 'Expected a string.';
         $atLeast3Parts = 'Policy string must contain at least 3 parts.';
@@ -81,7 +110,7 @@ class PolicyTransformerTest extends TestCase
         return [
             'integer' => [123456, $stringExpected],
             'bool' => [true, $stringExpected],
-            'float' => [(float)12.34, $stringExpected],
+            'float' => [12.34, $stringExpected],
             'array' => [[], $stringExpected],
             'object' => [new \stdClass(), $stringExpected],
             '2_parts' => ['123456:module', $atLeast3Parts],

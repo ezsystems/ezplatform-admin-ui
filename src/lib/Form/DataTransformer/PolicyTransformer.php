@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
-use eZ\Publish\Core\Repository\Values\User\Policy;
+use eZ\Publish\API\Repository\Values\User\Policy as APIPolicy;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -21,6 +21,7 @@ class PolicyTransformer implements DataTransformerInterface
      * Transforms a domain specific Policy object into a Policy string.
      * @param mixed $value
      * @return mixed|null|string
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function transform($value)
     {
@@ -28,8 +29,8 @@ class PolicyTransformer implements DataTransformerInterface
             return null;
         }
 
-        if (!$value instanceof Policy) {
-            throw new TransformationFailedException('Expected a ' . Policy::class . ' object.');
+        if (!is_array($value) || array_diff(['id', 'module', 'function'], array_keys($value))) {
+            throw new TransformationFailedException('Expected a valid array of data.');
         }
 
         return implode(':', [$value['id'], $value['module'], $value['function']]);
@@ -37,6 +38,9 @@ class PolicyTransformer implements DataTransformerInterface
 
     /**
      * Transforms a Policy string into a domain specific Policy array.
+     * @param mixed $value
+     * @return array|mixed|null
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function reverseTransform($value)
     {

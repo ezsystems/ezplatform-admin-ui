@@ -12,8 +12,7 @@ use eZ\Publish\API\Repository\RoleService;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-//use eZ\Publish\Core\Repository\Values\User\Role;
-use eZ\Publish\API\Repository\Values\User\Role;
+use eZ\Publish\API\Repository\Values\User\Role as APIRole;
 
 /**
  * Transforms between a Role's ID and a domain specific object.
@@ -31,20 +30,35 @@ class RoleTransformer implements DataTransformerInterface
         $this->roleService = $roleService;
     }
 
+    /**
+     * Transforms a domain specific Role object into a Role identifier.
+     *
+     * @param mixed $value
+     * @return mixed|null
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
+     */
     public function transform($value)
     {
         if (null === $value) {
             return null;
         }
 
-        if (!$value instanceof Role) {
-            throw new TransformationFailedException('Expected a ' . Role::class . ' object.');
+        if (!$value instanceof APIRole) {
+            throw new TransformationFailedException('Expected a ' . APIRole::class . ' object.');
         }
 
         return $value->id;
     }
 
-    public function reverseTransform($value)
+    /**
+     * Transforms a Role identifier into a domain specific Role object.
+     *
+     * @param mixed $value
+     * @return APIRole|null
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
+     */
+    public function reverseTransform($value): ?APIRole
     {
         if (empty($value)) {
             return null;

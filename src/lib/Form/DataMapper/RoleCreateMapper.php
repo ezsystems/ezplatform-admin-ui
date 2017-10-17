@@ -11,9 +11,13 @@ use eZ\Publish\Core\Repository\Values\User\RoleCreateStruct;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
+/**
+ * Maps between RoleCreateStruct and RoleCreateData objects.
+ */
 class RoleCreateMapper implements DataMapperInterface
 {
     /**
+     * Maps given RoleCreateStruct object to a RoleCreateData object
      * @param ValueObject|RoleCreateStruct $value
      * @return RoleCreateData
      * @throws InvalidArgumentException
@@ -32,6 +36,7 @@ class RoleCreateMapper implements DataMapperInterface
     }
 
     /**
+     * Maps given RoleCreateData object to a RoleCreateStruct object
      * @param RoleCreateData $data
      * @return RoleCreateStruct
      * @throws InvalidArgumentException

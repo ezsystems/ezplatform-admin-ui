@@ -11,9 +11,13 @@ use eZ\Publish\API\Repository\Values\ValueObject;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
+/**
+ * Maps between SectionCreateStruct and SectionCreateData objects.
+ */
 class SectionCreateMapper implements DataMapperInterface
 {
     /**
+     * Maps given SectionCreateStruct object to a SectionCreateData object
      * @param SectionCreateStruct|ValueObject $value
      * @return SectionCreateData
      * @throws InvalidArgumentException
@@ -28,6 +32,7 @@ class SectionCreateMapper implements DataMapperInterface
     }
 
     /**
+     * Maps given SectionCreateData object to a SectionCreateStruct object
      * @param SectionCreateData $data
      * @return SectionCreateStruct
      * @throws InvalidArgumentException

@@ -12,6 +12,7 @@ use eZ\Publish\API\Repository\ContentService;
 use Symfony\Component\Form\DataTransformerInterface;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 /**
  * Transforms between a Content's ID and a domain specific ContentInfo object.
@@ -54,10 +55,12 @@ class ContentInfoTransformer implements DataTransformerInterface
      *
      * @param mixed $value
      * @return ContentInfo|null
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws TransformationFailedException if the given value is not an integer
      *                                       or if the value can not be transformed
      */
-    public function reverseTransform($value)
+    public function reverseTransform($value): ?ContentInfo
     {
         if (empty($value)) {
             return null;
@@ -67,6 +70,10 @@ class ContentInfoTransformer implements DataTransformerInterface
             throw new TransformationFailedException('Expected an integer.');
         }
 
-        return $this->contentService->loadContentInfo($value);
+        try {
+            return $this->contentService->loadContentInfo($value);
+        } catch (NotFoundException $e) {
+            throw new TransformationFailedException('Transformation failed. ' . $e->getMessage(), $e->getCode(), $e);
+        }
     }
 }

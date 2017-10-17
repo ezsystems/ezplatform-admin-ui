@@ -13,6 +13,8 @@ use PHPUnit\Framework\TestCase;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\ContentInfoTransformer;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use Throwable;
 
 class ContentInfoTransformerTest extends TestCase
 {
@@ -45,10 +47,10 @@ class ContentInfoTransformerTest extends TestCase
     }
 
     /**
-     * @dataProvider wrongValueDataProvider
+     * @dataProvider transformWithInvalidInputDataProvider
      * @param $value
      */
-    public function testTransformWithWrongValue($value)
+    public function testTransformWithInvalidInput($value)
     {
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('Expected a ' . ContentInfo::class . ' object.');
@@ -68,14 +70,33 @@ class ContentInfoTransformerTest extends TestCase
     }
 
     /**
-     * @dataProvider wrongValueForReverseTransformDataProvider
+     * @dataProvider reverseTransformWithInvalidInputDataProvider
      * @param $value
      */
-    public function testReverseTransformWithWrongValue($value)
+    public function testReverseTransformWithInvalidInput($value)
     {
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('Expected an integer.');
         $this->contentInfoTransformer->reverseTransform($value);
+    }
+
+    public function testReverseTransformWithNotFoundException()
+    {
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('Transformation failed. Language not found');
+
+        $service = $this->createMock(ContentService::class);
+        $service->method('loadContentInfo')
+            ->will($this->throwException(new class() extends NotFoundException {
+                public function __construct($message = '', $code = 0, Throwable $previous = null)
+                {
+                    parent::__construct('Language not found', $code, $previous);
+                }
+            }));
+
+        $transformer = new ContentInfoTransformer($service);
+
+        $transformer->reverseTransform(654321);
     }
 
     public function transformDataProvider()
@@ -98,24 +119,24 @@ class ContentInfoTransformerTest extends TestCase
         ];
     }
 
-    public function wrongValueDataProvider()
+    public function transformWithInvalidInputDataProvider()
     {
         return [
             'string' => ['string'],
             'integer' => [123456],
             'bool' => [true],
-            'float' => [(float)12.34],
+            'float' => [12.34],
             'array' => [[]],
             'object' => [new \stdClass()],
         ];
     }
 
-    public function wrongValueForReverseTransformDataProvider()
+    public function reverseTransformWithInvalidInputDataProvider()
     {
         return [
             'string' => ['string'],
             'bool' => [true],
-            'float' => [(float)12.34],
+            'float' => [12.34],
             'array' => [['element']],
             'object' => [new \stdClass()],
             'content_info' => [new ContentInfo()],

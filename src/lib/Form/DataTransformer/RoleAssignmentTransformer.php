@@ -10,12 +10,12 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\RoleService;
 use Symfony\Component\Form\DataTransformerInterface;
-use eZ\Publish\Core\Repository\Values\User\UserRoleAssignment as RoleAssignment;
+use eZ\Publish\API\Repository\Values\User\RoleAssignment as APIRoleAsignment;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 /**
- * Transforms between a RoleAssignment's ID and a domain specific object.
+ * Transforms between a Role Assignment's identifier and a domain specific object.
  */
 class RoleAssignmentTransformer implements DataTransformerInterface
 {
@@ -32,8 +32,10 @@ class RoleAssignmentTransformer implements DataTransformerInterface
 
     /**
      * Transforms a domain specific RoleAssignment object into a RoleAssignment string.
+     *
      * @param mixed $value
      * @return mixed|null
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function transform($value)
     {
@@ -41,8 +43,8 @@ class RoleAssignmentTransformer implements DataTransformerInterface
             return null;
         }
 
-        if (!$value instanceof RoleAssignment) {
-            throw new TransformationFailedException('Expected a ' . RoleAssignment::class . ' object.');
+        if (!$value instanceof APIRoleAsignment) {
+            throw new TransformationFailedException('Expected a ' . APIRoleAsignment::class . ' object.');
         }
 
         return $value->id;
@@ -51,9 +53,11 @@ class RoleAssignmentTransformer implements DataTransformerInterface
     /**
      * Transforms a RoleAssignment's ID into a domain specific RoleAssignment object.
      * @param mixed $value
-     * @return \eZ\Publish\API\Repository\Values\User\RoleAssignment|null
+     * @return APIRoleAsignment|null
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
-    public function reverseTransform($value)
+    public function reverseTransform($value): ?APIRoleAsignment
     {
         if (empty($value)) {
             return null;

@@ -44,6 +44,7 @@ class LanguageCreateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
+     * @param array $properties
      */
     public function testReverseMap(array $properties)
     {

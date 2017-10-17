@@ -8,9 +8,22 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\ValueObject;
 
+/**
+ * Data Mapper provide interface to bidirectional transfer of data between a Struct objects and a Data objects.
+ */
 interface DataMapperInterface
 {
+    /**
+     * Maps Struct object to Data object.
+     * @param ValueObject $value
+     * @return mixed
+     */
     public function map(ValueObject $value);
 
+    /**
+     * Maps Data  object to Struct object.
+     * @param $data
+     * @return mixed
+     */
     public function reverseMap($data);
 }

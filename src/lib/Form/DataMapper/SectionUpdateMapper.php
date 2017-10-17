@@ -11,9 +11,13 @@ use eZ\Publish\API\Repository\Values\ValueObject;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
+/**
+ * Maps between SectionUpdateStruct and SectionUpdateData objects.
+ */
 class SectionUpdateMapper implements DataMapperInterface
 {
     /**
+     * Maps given SectionUpdateStruct object to a SectionUpdateData object
      * @param SectionUpdateStruct|ValueObject $value
      * @return SectionUpdateData
      * @throws InvalidArgumentException
@@ -28,6 +32,7 @@ class SectionUpdateMapper implements DataMapperInterface
     }
 
     /**
+     * Maps given SectionUpdateData object to a SectionUpdateStruct object
      * @param SectionUpdateData $data
      * @return SectionUpdateStruct
      * @throws InvalidArgumentException

@@ -8,13 +8,13 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataTransformer;
 
+use EzSystems\EzPlatformAdminUi\Form\DataTransformer\SectionsTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use eZ\Publish\API\Repository\LocationService;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\LocationsTransformer;
-use eZ\Publish\Core\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\SectionService;
+use eZ\Publish\API\Repository\Values\Content\Section as APISection;
 
-class LocationsTransformerTest extends TestCase
+class SectionsTransformerTest extends TestCase
 {
     /**
      * @dataProvider transformDataProvider
@@ -23,8 +23,8 @@ class LocationsTransformerTest extends TestCase
      */
     public function testTransform($value, $expected)
     {
-        $service = $this->createMock(LocationService::class);
-        $transformer = new LocationsTransformer($service);
+        $service = $this->createMock(SectionService::class);
+        $transformer = new SectionsTransformer($service);
 
         $result = $transformer->transform($value);
 
@@ -33,18 +33,18 @@ class LocationsTransformerTest extends TestCase
 
     public function testReverseTransformWithIds()
     {
-        $service = $this->createMock(LocationService::class);
+        $service = $this->createMock(SectionService::class);
         $service->expects(self::exactly(2))
-            ->method('loadLocation')
+            ->method('loadSection')
             ->willReturnMap([
-                ['123456', new Location(['id' => 123456])],
-                ['456789', new Location(['id' => 456789])],
+                ['123456', new APISection(['id' => 123456])],
+                ['456789', new APISection(['id' => 456789])],
             ]);
 
-        $transformer = new LocationsTransformer($service);
+        $transformer = new SectionsTransformer($service);
         $result = $transformer->reverseTransform('123456,456789');
 
-        $this->assertEquals([new Location(['id' => 123456]), new Location(['id' => 456789])], $result);
+        $this->assertEquals([new APISection(['id' => 123456]), new APISection(['id' => 456789])], $result);
     }
 
     /**
@@ -53,11 +53,11 @@ class LocationsTransformerTest extends TestCase
      */
     public function testReverseTransformWithEmpty($value)
     {
-        $service = $this->createMock(LocationService::class);
+        $service = $this->createMock(SectionService::class);
         $service->expects(self::never())
-            ->method('loadLocation');
+            ->method('loadSection');
 
-        $transformer = new LocationsTransformer($service);
+        $transformer = new SectionsTransformer($service);
         $result = $transformer->reverseTransform($value);
 
         $this->assertEquals(null, $result);
@@ -72,16 +72,16 @@ class LocationsTransformerTest extends TestCase
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('Expected a string.');
 
-        $service = $this->createMock(LocationService::class);
-        $transformer = new LocationsTransformer($service);
+        $service = $this->createMock(SectionService::class);
+        $transformer = new SectionsTransformer($service);
 
         $transformer->reverseTransform($value);
     }
 
     public function transformDataProvider()
     {
-        $location_1 = new Location(['id' => 123456]);
-        $location_2 = new Location(['id' => 456789]);
+        $location_1 = new APISection(['id' => 123456]);
+        $location_2 = new APISection(['id' => 456789]);
 
         return [
             'with_array_of_ids' => [[$location_1, $location_2], '123456,456789'],

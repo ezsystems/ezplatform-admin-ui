@@ -49,9 +49,14 @@ class LocationsTransformer implements DataTransformerInterface
      *
      * @param mixed $value
      * @return array|null
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
-    public function reverseTransform($value)
+    public function reverseTransform($value): ?array
     {
+        if (empty($value)) {
+            return null;
+        }
+
         if (!is_string($value)) {
             throw new TransformationFailedException('Expected a string.');
         }

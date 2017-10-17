@@ -35,10 +35,10 @@ class RoleTransformerTest extends TestCase
     }
 
     /**
-     * @dataProvider wrongValueDataProvider
+     * @dataProvider transformWithInvalidInputDataProvider
      * @param $value
      */
-    public function testTransformWithWrongValue($value)
+    public function testTransformWithInvalidInput($value)
     {
         $languageService = $this->createMock(RoleService::class);
         $transformer = new RoleTransformer($languageService);
@@ -105,13 +105,13 @@ class RoleTransformerTest extends TestCase
         ];
     }
 
-    public function wrongValueDataProvider()
+    public function transformWithInvalidInputDataProvider()
     {
         return [
             'string' => ['string'],
             'integer' => [123456],
             'bool' => [true],
-            'float' => [(float)12.34],
+            'float' => [12.34],
             'array' => [[]],
             'object' => [new \stdClass()],
         ];

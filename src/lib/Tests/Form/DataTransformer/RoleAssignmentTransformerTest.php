@@ -15,6 +15,7 @@ use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use Throwable;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\Core\Repository\Values\User\UserRoleAssignment as RoleAssignment;
+use eZ\Publish\API\Repository\Values\User\RoleAssignment as APIRoleAsignment;
 
 class RoleAssignmentTransformerTest extends TestCase
 {
@@ -34,16 +35,16 @@ class RoleAssignmentTransformerTest extends TestCase
     }
 
     /**
-     * @dataProvider wrongValueDataProvider
+     * @dataProvider transformWithInvalidInputDataProvider
      * @param $value
      */
-    public function testTransformWithWrongValue($value)
+    public function testTransformWithInvalidInput($value)
     {
         $languageService = $this->createMock(RoleService::class);
         $transformer = new RoleAssignmentTransformer($languageService);
 
         $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Expected a ' . RoleAssignment::class . ' object.');
+        $this->expectExceptionMessage('Expected a ' . APIRoleAsignment::class . ' object.');
         $transformer->transform($value);
     }
 
@@ -104,13 +105,13 @@ class RoleAssignmentTransformerTest extends TestCase
         ];
     }
 
-    public function wrongValueDataProvider()
+    public function transformWithInvalidInputDataProvider()
     {
         return [
             'string' => ['string'],
             'integer' => [123456],
             'bool' => [true],
-            'float' => [(float)12.34],
+            'float' => [12.34],
             'array' => [[]],
             'object' => [new \stdClass()],
         ];

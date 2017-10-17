@@ -15,6 +15,7 @@ use Throwable;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\LocationTransformer;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\Core\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Values\Content\Location as APILocation;
 
 class LocationTransformerTest extends TestCase
 {
@@ -34,16 +35,16 @@ class LocationTransformerTest extends TestCase
     }
 
     /**
-     * @dataProvider wrongValueDataProvider
+     * @dataProvider transformWithInvalidInputDataProvider
      * @param $value
      */
-    public function testTransformWithWrongValue($value)
+    public function testTransformWithInvalidInput($value)
     {
         $languageService = $this->createMock(LocationService::class);
         $transformer = new LocationTransformer($languageService);
 
         $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Expected a ' . Location::class . ' object.');
+        $this->expectExceptionMessage('Expected a ' . APILocation::class . ' object.');
         $transformer->transform($value);
     }
 
@@ -104,13 +105,13 @@ class LocationTransformerTest extends TestCase
         ];
     }
 
-    public function wrongValueDataProvider()
+    public function transformWithInvalidInputDataProvider()
     {
         return [
             'string' => ['string'],
             'integer' => [123456],
             'bool' => [true],
-            'float' => [(float)12.34],
+            'float' => [12.34],
             'array' => [[]],
             'object' => [new \stdClass()],
         ];
