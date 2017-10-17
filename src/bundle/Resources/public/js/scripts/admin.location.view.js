@@ -4,13 +4,12 @@
     const token = document.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
     const mfuAttrs = {
-            adminUiConfig: {
-                ...window.eZ.adminUiConfig,
+        adminUiConfig: Object.assign({}, window.eZ.adminUiConfig, {
             token,
             siteaccess
-        },
+        }),
         parentInfo: {
-        contentTypeIdentifier: mfuContainer.dataset.parentContentTypeIdentifier,
+            contentTypeIdentifier: mfuContainer.dataset.parentContentTypeIdentifier,
             contentTypeId: mfuContainer.dataset.parentContentTypeId,
             locationPath: mfuContainer.dataset.parentLocationPath,
             language: mfuContainer.dataset.parentContentLanguage
@@ -18,11 +17,11 @@
     };
 
     listContainers.forEach(container => {
-        ReactDOM.render(React.createElement(SubItems.default, {
+        ReactDOM.render(React.createElement(eZ.modules.SubItems, {
             startingLocationId: container.dataset.location,
             restInfo: {token, siteaccess},
             extraActions: [{
-                component: MultiFileUpload.default,
+                component: eZ.modules.MultiFileUpload,
                 attrs: Object.assign({}, mfuAttrs, {
                     onPopupClose: (itemsUploaded) => {
                         if (itemsUploaded.length) {
