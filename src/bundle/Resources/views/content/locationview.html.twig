@@ -95,23 +95,27 @@
     </div>
 
     <div id="react-udw"></div>
-    <script src="{{ asset('bundles/ezplatformadminui/js/scripts/admin.location.view.js')}}"></script>
-    <script src="{{ asset('bundles/ezplatformadminui/js/scripts/udw/browse.js')}}"></script>
-    <script src="{{ asset('bundles/ezplatformadminui/js/scripts/udw/move.js')}}"></script>
-    <script src="{{ asset('bundles/ezplatformadminui/js/scripts/udw/copy.js')}}"></script>
-    <script src="{{ asset('bundles/ezplatformadminui/js/scripts/udw/swap.js')}}"></script>
-    <script src="{{ asset('bundles/ezplatformadminui/js/scripts/udw/locations.tab.js') }}"></script>
-    <script type="text/javascript">
-        // @TODO: replace with something nice
-        // Javascript to enable link to tab
-        var url = document.location.toString();
-        if (url.match('#')) {
-            $('.ez-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
-        }
+{% endblock %}
 
-        // Change hash for page-reload
-        $('.ez-tabs a').on('shown.bs.tab', function (e) {
-            window.location.hash = e.target.hash;
-        })
-    </script>
+{% block reactModules %}
+    {%  javascripts
+        'bundles/ezplatformadminuimodules/js/SubItems.module.js'
+        'bundles/ezplatformadminuimodules/js/MultiFileUpload.module.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block javascripts %}
+    {%  javascripts
+        'bundles/ezplatformadminui/js/scripts/admin.location.view.js'
+        'bundles/ezplatformadminui/js/scripts/admin.location.tab.js'
+        'bundles/ezplatformadminui/js/scripts/udw/browse.js'
+        'bundles/ezplatformadminui/js/scripts/udw/move.js'
+        'bundles/ezplatformadminui/js/scripts/udw/copy.js'
+        'bundles/ezplatformadminui/js/scripts/udw/swap.js'
+        'bundles/ezplatformadminui/js/scripts/udw/locations.tab.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
