@@ -17,7 +17,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
 class LanguageCreateMapper implements DataMapperInterface
 {
     /**
-     * Maps given LanguageCreateStruct object to a LanguageCreateData object
+     * Maps given LanguageCreateStruct object to a LanguageCreateData object.
      * @param LanguageCreateStruct|ValueObject $value
      * @return LanguageCreateData
      * @throws InvalidArgumentException
@@ -38,7 +38,7 @@ class LanguageCreateMapper implements DataMapperInterface
     }
 
     /**
-     * Maps given LanguageCreateData object to a LanguageCreateStruct object
+     * Maps given LanguageCreateData object to a LanguageCreateStruct object.
      *
      * @param LanguageCreateData $data
      * @return LanguageCreateStruct

@@ -17,7 +17,7 @@ use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 class RoleCreateMapper implements DataMapperInterface
 {
     /**
-     * Maps given RoleCreateStruct object to a RoleCreateData object
+     * Maps given RoleCreateStruct object to a RoleCreateData object.
      * @param ValueObject|RoleCreateStruct $value
      * @return RoleCreateData
      * @throws InvalidArgumentException
@@ -36,7 +36,7 @@ class RoleCreateMapper implements DataMapperInterface
     }
 
     /**
-     * Maps given RoleCreateData object to a RoleCreateStruct object
+     * Maps given RoleCreateData object to a RoleCreateStruct object.
      * @param RoleCreateData $data
      * @return RoleCreateStruct
      * @throws InvalidArgumentException

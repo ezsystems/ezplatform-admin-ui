@@ -16,7 +16,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
 class PolicyUpdateMapper implements DataMapperInterface
 {
     /**
-     * Maps given PolicyUpdateStruct object to a PolicyUpdateData object
+     * Maps given PolicyUpdateStruct object to a PolicyUpdateData object.
      * @param PolicyUpdateStruct $value
      * @return PolicyUpdateData
      */
@@ -32,7 +32,7 @@ class PolicyUpdateMapper implements DataMapperInterface
     }
 
     /**
-     * Maps given PolicyUpdateData object to a PolicyUpdateStruct object
+     * Maps given PolicyUpdateData object to a PolicyUpdateStruct object.
      * @param PolicyUpdateData $data
      * @return PolicyUpdateStruct
      */

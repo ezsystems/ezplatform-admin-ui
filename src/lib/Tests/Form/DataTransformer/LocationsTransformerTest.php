@@ -110,8 +110,8 @@ class LocationsTransformerTest extends TestCase
             '0_as_an_integer' => [0],
             '0_as_a_float' => [0.0],
             '0_as_a_string' => ['0'],
-            'null' => [NULL],
-            'false' => [FALSE],
+            'null' => [null],
+            'false' => [false],
             'an_empty_array' => [[]],
         ];
     }

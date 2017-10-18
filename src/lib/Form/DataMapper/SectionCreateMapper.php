@@ -17,7 +17,7 @@ use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 class SectionCreateMapper implements DataMapperInterface
 {
     /**
-     * Maps given SectionCreateStruct object to a SectionCreateData object
+     * Maps given SectionCreateStruct object to a SectionCreateData object.
      * @param SectionCreateStruct|ValueObject $value
      * @return SectionCreateData
      * @throws InvalidArgumentException
@@ -32,7 +32,7 @@ class SectionCreateMapper implements DataMapperInterface
     }
 
     /**
-     * Maps given SectionCreateData object to a SectionCreateStruct object
+     * Maps given SectionCreateData object to a SectionCreateStruct object.
      * @param SectionCreateData $data
      * @return SectionCreateStruct
      * @throws InvalidArgumentException

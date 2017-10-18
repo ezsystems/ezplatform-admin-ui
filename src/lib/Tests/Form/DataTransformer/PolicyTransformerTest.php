@@ -73,7 +73,7 @@ class PolicyTransformerTest extends TestCase
     public function transformDataProvider()
     {
         return [
-            'policy' => [['id' => 123456, 'module' => 'module_name', 'function' => 'some_function' ], '123456:module_name:some_function'],
+            'policy' => [['id' => 123456, 'module' => 'module_name', 'function' => 'some_function'], '123456:module_name:some_function'],
             'null' => [null, null],
         ];
     }
@@ -96,9 +96,9 @@ class PolicyTransformerTest extends TestCase
             'object' => [new \stdClass()],
             'string' => ['some string'],
             'empty_string' => [''],
-            'missing_id' => [['module' => 'module_name', 'function' => 'some_function' ]],
-            'missing_module' => [['id' => 123456, 'function' => 'some_function' ]],
-            'missing_function' => [['id' => 123456, 'module' => 'module_name' ]],
+            'missing_id' => [['module' => 'module_name', 'function' => 'some_function']],
+            'missing_module' => [['id' => 123456, 'function' => 'some_function']],
+            'missing_function' => [['id' => 123456, 'module' => 'module_name']],
         ];
     }
 

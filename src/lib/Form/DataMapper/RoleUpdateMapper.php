@@ -17,7 +17,7 @@ use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 class RoleUpdateMapper implements DataMapperInterface
 {
     /**
-     * Maps given RoleUpdateStruct object to a RoleUpdateData object
+     * Maps given RoleUpdateStruct object to a RoleUpdateData object.
      * @param RoleUpdateStruct|ValueObject $value
      * @return RoleUpdateData
      * @throws InvalidArgumentException
@@ -36,7 +36,7 @@ class RoleUpdateMapper implements DataMapperInterface
     }
 
     /**
-     * Maps given RoleUpdateData object to a RoleUpdateStruct object
+     * Maps given RoleUpdateData object to a RoleUpdateStruct object.
      * @param RoleUpdateData $data
      * @return RoleUpdateStruct
      * @throws InvalidArgumentException

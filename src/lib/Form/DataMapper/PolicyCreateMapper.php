@@ -4,7 +4,6 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-
 namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\ValueObject;
@@ -18,7 +17,7 @@ use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 class PolicyCreateMapper implements DataMapperInterface
 {
     /**
-     * Maps given PolicyCreateStruct object to a PolicyCreateData object
+     * Maps given PolicyCreateStruct object to a PolicyCreateData object.
      * @param ValueObject|PolicyCreateStruct $value
      * @return PolicyCreateData
      * @throws InvalidArgumentException
@@ -38,7 +37,7 @@ class PolicyCreateMapper implements DataMapperInterface
     }
 
     /**
-     * Maps given PolicyCreateData object to a PolicyCreateStruct object
+     * Maps given PolicyCreateData object to a PolicyCreateStruct object.
      * @param PolicyCreateData $data
      * @return PolicyCreateStruct
      * @throws InvalidArgumentException
