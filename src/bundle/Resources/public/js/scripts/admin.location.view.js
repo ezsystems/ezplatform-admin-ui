@@ -18,7 +18,7 @@
 
     listContainers.forEach(container => {
         ReactDOM.render(React.createElement(eZ.modules.SubItems, {
-            startingLocationId: container.dataset.location,
+            parentLocationId: container.dataset.location,
             restInfo: {token, siteaccess},
             extraActions: [{
                 component: eZ.modules.MultiFileUpload,
