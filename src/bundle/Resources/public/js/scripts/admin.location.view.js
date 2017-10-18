@@ -20,6 +20,9 @@
         ReactDOM.render(React.createElement(eZ.modules.SubItems, {
             parentLocationId: container.dataset.location,
             restInfo: {token, siteaccess},
+            // @TODO
+            // discover content location view URL from backend routes
+            locationViewLink: '/admin/content/location/{{locationId}}',
             extraActions: [{
                 component: eZ.modules.MultiFileUpload,
                 attrs: Object.assign({}, mfuAttrs, {
