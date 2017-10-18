@@ -52,6 +52,12 @@
             </div>
         </section>
     {{ form_end(form) }}
+{% endblock %}
 
-    <script src="{{ asset('bundles/ezplatformadminui/js/scripts/admin.role_assignment.add.js') }}"></script>
+{% block javascripts %}
+    {%  javascripts
+        'bundles/ezplatformadminui/js/scripts/admin.role_assignment.add.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

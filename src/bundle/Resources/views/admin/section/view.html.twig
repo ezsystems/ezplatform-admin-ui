@@ -44,7 +44,14 @@
 
         </div>
     </section>
-    <script src="{{ asset('bundles/ezplatformadminui/js/scripts/admin.section.list.js')}}"></script>
 {% endblock %}
 
 {% block title %}{{ 'section.view.title'|trans({'%sectionName%': section.name}) }}{% endblock %}
+
+{% block javascripts %}
+    {%  javascripts
+        'bundles/ezplatformadminui/js/scripts/admin.section.list.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

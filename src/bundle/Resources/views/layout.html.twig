@@ -22,24 +22,14 @@
             };
         </script>
         <title>{% block title %}eZ Platform{% endblock %}</title>
-        {% block stylesheets %}
-            {% stylesheets
-                'bundles/ezplatformadminui/css/ezplatform-bootstrap.min.css'
-                'bundles/ezplatformadminui/css/ezplatform.min.css'
-            %}
-                <link rel="stylesheet" href="{{ asset_url }}" />
-            {% endstylesheets %}
-        {% endblock %}
+        {% stylesheets
+            'bundles/ezplatformadminui/css/ezplatform-bootstrap.min.css'
+            'bundles/ezplatformadminui/css/ezplatform.min.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/images/favicon.ico') }}" />
-        <script src="{{ asset('assets/vendor/react/react.min.js')}}"></script>
-        <script src="{{ asset('assets/vendor/react/react-dom.min.js')}}"></script>
-        <script src="{{ asset('bundles/ezplatformadminui/js/modules/UniversalDiscovery.module.js')}}"></script>
-        <script src="{{ asset('bundles/ezplatformadminui/js/modules/SubItems.module.js')}}"></script>
-        <script src="{{ asset('bundles/ezplatformadminui/js/modules/MultiFileUpload.module.js')}}"></script>
-        <script src="{{ asset('bundles/ezplatformadminui/js/scripts/button.trigger.js') }}"></script>
-        <script type="application/javascript" src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
-        <script type="application/javascript" src="{{ asset('assets/vendor/popper.js/dist/umd/popper.js') }}"></script>
-        <script type="application/javascript" src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     </head>
     <body class="{% block bodyClass %}{% endblock %}">
         {% block navigation %}
@@ -70,6 +60,19 @@
                 {% endfor %}
             {% endfor %}
         </div>
+
+        {%  javascripts
+            'assets/vendor/react/react.min.js'
+            'assets/vendor/react/react-dom.min.js'
+            'assets/vendor/jquery/dist/jquery.min.js'
+            'assets/vendor/popper.js/dist/umd/popper.js'
+            'assets/vendor/bootstrap/dist/js/bootstrap.min.js'
+            'bundles/ezplatformadminuimodules/js/UniversalDiscovery.module.js'
+            'bundles/ezplatformadminui/js/scripts/button.trigger.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% block reactModules %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
