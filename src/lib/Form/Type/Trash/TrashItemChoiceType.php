@@ -14,9 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TrashItemChoiceType extends AbstractType
 {
-    /**
-     * @var TrashService
-     */
+    /** @var TrashService */
     private $trashService;
 
     /**

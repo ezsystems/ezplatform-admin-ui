@@ -17,9 +17,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class PolicyChoiceType extends AbstractType
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $policyChoices;
 
     /**
@@ -125,8 +123,9 @@ class PolicyChoiceType extends AbstractType
      *
      * @see \Symfony\Component\Form\FormRenderer::humanize()
      *
-     * @param string $text The text to humanize.
-     * @return string The humanized text.
+     * @param string $text the text to humanize
+     *
+     * @return string the humanized text
      */
     private function humanize(string $text): string
     {

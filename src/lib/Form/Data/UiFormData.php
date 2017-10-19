@@ -14,6 +14,7 @@ class UiFormData
 {
     /**
      * @Assert\Valid
+     *
      * @var mixed
      */
     protected $data;

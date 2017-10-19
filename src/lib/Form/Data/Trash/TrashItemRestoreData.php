@@ -19,13 +19,12 @@ class TrashItemRestoreData
 {
     /**
      * @Assert\NotBlank()
+     *
      * @var TrashItemData[]
      */
     public $trashItems;
 
-    /**
-     * @var Location|null
-     */
+    /** @var Location|null */
     public $location;
 
     /**

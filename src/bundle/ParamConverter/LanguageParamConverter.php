@@ -19,9 +19,7 @@ class LanguageParamConverter implements ParamConverterInterface
 {
     const PARAMETER_LANGUAGE_ID = 'languageId';
 
-    /**
-     * @var LanguageService
-     */
+    /** @var LanguageService */
     private $languageService;
 
     /**

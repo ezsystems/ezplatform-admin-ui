@@ -17,6 +17,7 @@ class TrashEmptyData
 {
     /**
      * @Assert\IsTrue()
+     *
      * @var bool
      */
     public $emptyTrash;
@@ -31,6 +32,7 @@ class TrashEmptyData
 
     /**
      * @Assert\IsTrue()
+     *
      * @return bool
      */
     public function getEmptyTrash(): bool

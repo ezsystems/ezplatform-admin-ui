@@ -19,9 +19,7 @@ class ContentTypeGroupParamConverter implements ParamConverterInterface
 {
     const PARAMETER_CONTENT_TYPE_GROUP_ID = 'contentTypeGroupId';
 
-    /**
-     * @var ContentTypeGroupService
-     */
+    /** @var ContentTypeGroupService */
     private $contentTypeGroupService;
 
     /**

@@ -19,9 +19,7 @@ use eZ\Publish\API\Repository\Values\Content\VersionInfo as APIVersionInfo;
  */
 class VersionInfo extends CoreVersionInfo
 {
-    /**
-     * @var User
-     */
+    /** @var User */
     protected $author;
 
     /**
