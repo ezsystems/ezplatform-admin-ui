@@ -1,0 +1,26 @@
+{% block ezplatform_fieldtype_ezauthor_row %}
+    {% if form.authors.vars.prototype is defined %}
+        {%- set wrapper_attr = attr|merge({'data-template': form_row(form.authors.vars.prototype) }) -%}
+    {% endif %}
+    {{ block('form_row_fieldtype') }}
+{% endblock %}
+
+{% block ezplatform_fieldtype_ezauthor_widget %}
+    {% for child in form.authors %}
+        {{ form_row(child) }}
+    {% endfor %}
+{% endblock %}
+
+{% block ezplatform_fieldtype_ezauthor_authors_entry_row -%}
+    <div class="ez-data-source__author form-row">
+        {{- form_widget(form.id) -}}
+        {{- form_row(form.name, {'wrapper_attr': {'class': 'col'}}) -}}
+        {{- form_row(form.email, {'wrapper_attr': {'class': 'col'}}) -}}
+        <div class="col ez-data-source__actions">
+            <button type="button" class="ez-data-source__action ez-btn ez-btn--secondary ez-btn--remove-author"
+                    disabled>{{ 'ezplatform.fieldtype.ezauthor.entry.tools.remove'|trans({}, 'ezplatform_fieldtypes')|desc('Remove') }}</button>
+            <button type="button"
+                    class="ez-data-source__action ez-btn ez-btn--secondary ez-btn--add-author">{{ 'ezplatform.fieldtype.ezauthor.entry.tools.add'|trans({}, 'ezplatform_fieldtypes')|desc('Add') }}</button>
+        </div>
+    </div>
+{%- endblock %}

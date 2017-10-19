@@ -1,0 +1,11 @@
+services:
+    ezrepoforms.view_templates_listener:
+        class: '%ezrepoforms.view_templates_listener.class%'
+        tags:
+            - { name: kernel.event_subscriber }
+        calls:
+            - [setViewTemplate, ['EzSystems\RepositoryForms\UserRegister\View\UserRegisterFormView', '$user_registration.templates.form$']]
+            - [setViewTemplate, ['EzSystems\RepositoryForms\UserRegister\View\UserRegisterConfirmView', '$user_registration.templates.confirmation$']]
+            - [setViewTemplate, ['EzSystems\RepositoryForms\Content\View\ContentEditView', '$content_edit.templates.edit$']]
+            - [setViewTemplate, ['EzSystems\RepositoryForms\Content\View\ContentCreateDraftView', '$content_edit.templates.create_draft$']]
+            - [setPagelayout, ['$pagelayout$']]

@@ -1,6 +1,6 @@
 parameters:
-    ezsettings.default.user_registration.templates.form: 'EzPlatformAdminUiBundle:content:content_edit.html.twig'
-    ezsettings.default.content_edit.templates.edit: 'EzPlatformAdminUiBundle:content:content_edit.html.twig'
+    ezsettings.admin.user_registration.templates.form: 'EzPlatformAdminUiBundle:content:content_edit.html.twig'
+    ezsettings.admin.content_edit.templates.edit: 'EzPlatformAdminUiBundle:content:content_edit.html.twig'
 
     ezsettings.global.system_info_view:
         pjax_tab:

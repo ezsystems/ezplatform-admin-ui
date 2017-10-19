@@ -1,0 +1,88 @@
+{% use "bootstrap_4_layout.html.twig" %}
+
+{# specific fieldtypes theming #}
+{% use 'EzPlatformAdminUiBundle:fieldtypes:ezauthor.html.twig' %}
+{% use 'EzPlatformAdminUiBundle:fieldtypes:ezboolean.html.twig' %}
+{% use 'EzPlatformAdminUiBundle:fieldtypes:ezdatetime.html.twig' %}
+
+{# general content editing theming #}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <em class="ez-field-edit__error">{{ error.message }}</em>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock -%}
+
+{% block form_row -%}
+    {% set is_fieldtype = form.parent.vars.value.fieldDefinition.fieldTypeIdentifier is defined %}
+
+    {% if is_fieldtype %}
+        {{ block('form_row_fieldtype') }}
+    {% else %}
+        {{ block('form_row_subfield') }}
+    {% endif %}
+{%- endblock %}
+
+{% block form_row_subfield -%}
+    {% set wrapper_class = 'ez-data-source__field ez-data-source__field--' ~ name %}
+    {% set wrapper_attr = wrapper_attr|default({})|merge({class: (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
+    {% set label_wrapper_class = 'ez-data-source__label-wrapper' %}
+    {% set label_class = 'ez-data-source__label' %}
+    {% set widget_wrapper_class = 'ez-data-source__input-wrapper' %}
+    {% set widget_class = 'ez-data-source__input' %}
+    {% set required_row_class = 'ez-data-source__field--required' %}
+    {% set wrapper_class = wrapper_class|replace({'___name___': name}) %}
+
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class)|trim}) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ widget_class)|trim}) %}
+    {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ required_row_class)|trim %}{% endif %}
+
+    <div{% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+        <div class="{{ label_wrapper_class }}">
+            {{- block('form_label') }}
+            {{- block('form_errors') -}}
+        </div>
+        <div class="{{ widget_wrapper_class }}">
+            {{- form_widget(form, {'attr': attr}) -}}
+        </div>
+    </div>
+{%- endblock %}
+
+{% block form_row_fieldtype %}
+    {% set fieldtype_identifier = form.parent.vars.value.fieldDefinition.fieldTypeIdentifier %}
+
+    {% set wrapper_class = 'ez-field-edit ez-field-edit--' ~ fieldtype_identifier %}
+    {% set wrapper_attr = wrapper_attr|default({})|merge({class: (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
+    {% set label_wrapper_class = 'ez-field-edit__label-wrapper' %}
+    {% set label_class = 'ez-field-edit__label' %}
+    {% set widget_wrapper_class = 'ez-field-edit__data' %}
+    {% set widget_class = 'ez-data-source__input' %}
+    {% set required_row_class = 'ez-field-edit--required' %}
+
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class)|trim}) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ widget_class)|trim}) %}
+    {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ required_row_class)|trim %}{% endif %}
+
+    <div{% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+        <div class="{{ label_wrapper_class }}">
+            {{ block('form_label') }}
+            {{ block('form_errors') }}
+        </div>
+        <div class="{{ widget_wrapper_class }}">
+            <div class="ez-data-source">
+                {{- form_widget(form, {'attr': attr}) -}}
+            </div>
+        </div>
+        {#<p class="ez-field-edit__description">Description of the field type</p>#}
+    </div>
+{% endblock %}
+
+{%- block form_widget_compound -%}
+    {%- if form.parent is empty -%}
+        {{ form_errors(form) }}
+    {%- endif -%}
+    {{- block('form_rows') -}}
+    {{- form_rest(form) -}}
+{%- endblock form_widget_compound -%}

@@ -1,11 +1,12 @@
 {% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+{% form_theme form with 'EzPlatformAdminUiBundle:content:form_fields.html.twig' %}
 
 {% block content %}
-    {% import "EzSystemsRepositoryFormsBundle:Content:content_form.html.twig" as contentForms %}
-
-    <section class="ez-content-edit container">
-        {{ contentForms.display_form(form) }}
-    </section>
+    {{ form_start(form) }}
+    {% for field in form.fieldsData %}
+        {{ form_row(field.value) }}
+    {% endfor %}
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block javascripts %}
