@@ -33,7 +33,6 @@ class PolicyCreateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
-     * @param array $properties
      */
     public function testMap(array $properties)
     {
@@ -44,7 +43,6 @@ class PolicyCreateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
-     * @param array $properties
      */
     public function testReverseMap(array $properties)
     {
@@ -74,19 +72,11 @@ class PolicyCreateMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $properties
-     * @return PolicyCreateStruct
-     */
     private function createStruct(array $properties): PolicyCreateStruct
     {
         return new PolicyCreateStruct($properties);
     }
 
-    /**
-     * @param $properties
-     * @return PolicyCreateData
-     */
     private function createData(array $properties): PolicyCreateData
     {
         return (new PolicyCreateData())

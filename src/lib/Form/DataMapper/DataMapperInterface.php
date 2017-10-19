@@ -21,8 +21,8 @@ interface DataMapperInterface
     public function map(ValueObject $value);
 
     /**
-     * Maps Data  object to Struct object.
-     * @param $data
+     * Maps Data object to Struct object.
+     * @param mixed $data
      * @return mixed
      */
     public function reverseMap($data);

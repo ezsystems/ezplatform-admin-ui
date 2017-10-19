@@ -38,11 +38,7 @@ class RoleUpdateData
         return $this->role;
     }
 
-    /**
-     * @param Role $role
-     * @return $this
-     */
-    public function setRole(Role $role)
+    public function setRole(Role $role): RoleUpdateData
     {
         $this->role = $role;
 
@@ -57,11 +53,7 @@ class RoleUpdateData
         return $this->identifier;
     }
 
-    /**
-     * @param string $identifier
-     * @return $this
-     */
-    public function setIdentifier(string $identifier)
+    public function setIdentifier(string $identifier): RoleUpdateData
     {
         $this->identifier = $identifier;
 

@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 use eZ\Publish\API\Repository\LocationService;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use eZ\Publish\API\Repository\Values\Content\Location;
 
 /**
  * Transforms between a Location's ID and a domain specific Location object.
@@ -48,7 +49,7 @@ class LocationsTransformer implements DataTransformerInterface
      * Transforms a Location's ID string into a domain specific Location objects.
      *
      * @param mixed $value
-     * @return array|null
+     * @return Location[]|null
      * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function reverseTransform($value): ?array

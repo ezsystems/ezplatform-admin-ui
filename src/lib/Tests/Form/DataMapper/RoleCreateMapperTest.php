@@ -33,7 +33,6 @@ class RoleCreateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
-     * @param array $properties
      */
     public function testMap(array $properties)
     {
@@ -44,7 +43,6 @@ class RoleCreateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
-     * @param array $properties
      */
     public function testReverseMap(array $properties)
     {
@@ -74,19 +72,11 @@ class RoleCreateMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $properties
-     * @return RoleCreateStruct
-     */
     private function createStruct(array $properties): RoleCreateStruct
     {
         return new RoleCreateStruct($properties);
     }
 
-    /**
-     * @param $properties
-     * @return RoleCreateData
-     */
     private function createData(array $properties): RoleCreateData
     {
         return (new RoleCreateData())

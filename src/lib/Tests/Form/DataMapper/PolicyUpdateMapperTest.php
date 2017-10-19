@@ -23,6 +23,7 @@ class PolicyUpdateMapperTest extends TestCase
 
     public function setUp()
     {
+        /* TODO - test skipped, because tested class need to be improved */
         $this->markTestSkipped();
         $this->mapper = new PolicyUpdateMapper();
     }
@@ -34,7 +35,6 @@ class PolicyUpdateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
-     * @param array $properties
      */
     public function testMap(array $properties)
     {
@@ -45,7 +45,6 @@ class PolicyUpdateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
-     * @param array $properties
      */
     public function testReverseMap(array $properties)
     {
@@ -68,10 +67,6 @@ class PolicyUpdateMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $properties
-     * @return PolicyUpdateStruct
-     */
     private function createStruct(array $properties): PolicyUpdateStruct
     {
         $struct = new PolicyUpdateStruct();
@@ -80,10 +75,6 @@ class PolicyUpdateMapperTest extends TestCase
         return $struct;
     }
 
-    /**
-     * @param $properties
-     * @return PolicyUpdateData
-     */
     private function createData(array $properties): PolicyUpdateData
     {
         return new PolicyUpdateData(['module' => $properties['module'], 'function' => $properties['function']]);

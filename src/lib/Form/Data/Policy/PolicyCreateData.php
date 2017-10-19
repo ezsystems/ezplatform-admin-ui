@@ -24,11 +24,7 @@ class PolicyCreateData
         return $this->module;
     }
 
-    /**
-     * @param string $module
-     * @return $this
-     */
-    public function setModule(string $module)
+    public function setModule(string $module): PolicyCreateData
     {
         $this->module = $module;
 
@@ -43,11 +39,7 @@ class PolicyCreateData
         return $this->function;
     }
 
-    /**
-     * @param string $function
-     * @return $this
-     */
-    public function setFunction(string $function)
+    public function setFunction(string $function): PolicyCreateData
     {
         $this->function = $function;
 

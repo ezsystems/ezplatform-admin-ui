@@ -33,7 +33,6 @@ class LanguageCreateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
-     * @param array $properties
      */
     public function testMap(array $properties)
     {
@@ -44,7 +43,6 @@ class LanguageCreateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
-     * @param array $properties
      */
     public function testReverseMap(array $properties)
     {
@@ -75,19 +73,11 @@ class LanguageCreateMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $properties
-     * @return LanguageCreateStruct
-     */
     private function createStruct(array $properties): LanguageCreateStruct
     {
         return new LanguageCreateStruct($properties);
     }
 
-    /**
-     * @param $properties
-     * @return LanguageCreateData
-     */
     private function createData(array $properties): LanguageCreateData
     {
         return (new LanguageCreateData())

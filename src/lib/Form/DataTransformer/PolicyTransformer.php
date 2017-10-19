@@ -37,11 +37,11 @@ class PolicyTransformer implements DataTransformerInterface
 
     /**
      * Transforms a Policy string into a domain specific Policy array.
-     * @param mixed $value
-     * @return array|mixed|null
+     * @param string|null $value
+     * @return array|null
      * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
-    public function reverseTransform($value)
+    public function reverseTransform($value): ?array
     {
         if (null === $value) {
             return null;

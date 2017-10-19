@@ -33,7 +33,6 @@ class SelectionUpdateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
-     * @param array $properties
      */
     public function testMap(array $properties)
     {
@@ -44,7 +43,6 @@ class SelectionUpdateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
-     * @param array $properties
      */
     public function testReverseMap(array $properties)
     {
@@ -77,19 +75,11 @@ class SelectionUpdateMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $properties
-     * @return SectionUpdateStruct
-     */
     private function createStruct(array $properties): SectionUpdateStruct
     {
         return new SectionUpdateStruct($properties);
     }
 
-    /**
-     * @param $properties
-     * @return SectionUpdateData
-     */
     private function createData(array $properties): SectionUpdateData
     {
         return new SectionUpdateData($properties['identifier'], $properties['name']);

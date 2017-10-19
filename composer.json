@@ -9,6 +9,9 @@
           "EzSystems\\EzPlatformAdminUi\\": "src/lib/"
         }
     },
+    "autoload-dev": {
+        "psr-4": { "EzSystems\\EzPlatformAdminUi\\Tests\\": "src/lib/Tests" }
+    },
     "require": {
         "php": ">=7.1",
         "jms/translation-bundle": "^1.3.2",

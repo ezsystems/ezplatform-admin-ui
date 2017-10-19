@@ -55,7 +55,6 @@ class ContentInfoTransformer implements DataTransformerInterface
      *
      * @param mixed $value
      * @return ContentInfo|null
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws TransformationFailedException if the given value is not an integer
      *                                       or if the value can not be transformed

@@ -21,11 +21,7 @@ class RoleCreateData
         return $this->identifier;
     }
 
-    /**
-     * @param string $identifier
-     * @return $this
-     */
-    public function setIdentifier(string $identifier)
+    public function setIdentifier(string $identifier): RoleCreateData
     {
         $this->identifier = $identifier;
 
