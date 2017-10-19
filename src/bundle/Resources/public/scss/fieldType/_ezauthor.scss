@@ -1,18 +1,18 @@
 @import '../custom';
 
-.ez-field-edit-ezauthor {
-    .form-row {
+.ez-field-edit--ezauthor {
+    .ez-data-source__author {
         background-color: $ez-ground-base;
         padding: 1rem;
     }
 
-    .ez-sub-field-text-zone {
-        .form-control-label {
+    .ez-data-source__label-wrapper {
+        .ez-data-source__label {
             margin-bottom: 0;
         }
     }
 
-    .ez-author-tools {
+    .ez-data-source__actions {
         display: flex;
         align-items: center;
         padding-top: 1.5rem;
@@ -23,19 +23,19 @@
     }
 
     &.is-invalid {
-        .ez-sub-field {
+        .ez-data-source__field {
             &.is-invalid {
                 color: $ez-color-danger;
             }
         }
 
-        .ez-field-edit-ui {
+        .ez-field-edit__data {
             &:before {
                 display: none;
             }
         }
 
-        .ez-author-row {
+        .ez-data-source__author {
             position: relative;
 
             &.is-invalid {

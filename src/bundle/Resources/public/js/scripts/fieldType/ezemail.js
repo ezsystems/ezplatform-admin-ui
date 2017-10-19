@@ -1,5 +1,5 @@
 (function (global) {
-    const SELECTOR_FIELD = '.ez-field-edit-ezemail';
+    const SELECTOR_FIELD = '.ez-field-edit--ezemail';
 
     class EzEmailValidator extends global.eZ.BaseFieldValidator {
         /**
@@ -19,7 +19,7 @@
             const result = {isError};
 
             if (isEmpty) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', fieldNode.querySelector('.form-control-label').innerHTML);
+                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', fieldNode.querySelector('.ez-field-edit__label').innerHTML);
             } else if (!isValid) {
                 result.errorMessage = global.eZ.errors.invalidEmail;
             }
@@ -33,11 +33,11 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-field-edit-ezemail input',
+                selector: '.ez-field-edit--ezemail input',
                 eventName: 'blur',
                 callback: 'validateInput',
-                invalidStateSelectors: ['.ez-field-edit-ezemail'],
-                errorNodeSelectors: ['.ez-field-edit-text-zone'],
+                invalidStateSelectors: [SELECTOR_FIELD],
+                errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
             },
         ],
     });

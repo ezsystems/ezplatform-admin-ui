@@ -1,5 +1,5 @@
 (function (global) {
-    const SELECTOR_FIELD = '.ez-field-edit-ezstring';
+    const SELECTOR_FIELD = '.ez-field-edit--ezstring';
 
     class EzStringValidator extends global.eZ.BaseFieldValidator {
         /**
@@ -16,7 +16,7 @@
             const isTooShort = event.target.value.length < parseInt(event.target.dataset.min, 10);
             const isTooLong = event.target.value.length > parseInt(event.target.dataset.max, 10);
             const isError = (isEmpty && isRequired) || isTooShort || isTooLong;
-            const label = event.target.closest(SELECTOR_FIELD).querySelector('.form-control-label').innerHTML;
+            const label = event.target.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
             const result = {isError};
 
             if (isEmpty) {
@@ -36,11 +36,11 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-field-edit-ezstring input',
+                selector: '.ez-field-edit--ezstring input',
                 eventName: 'blur',
                 callback: 'validateInput',
-                invalidStateSelectors: ['.ez-field-edit-ezstring'],
-                errorNodeSelectors: ['.ez-field-edit-text-zone'],
+                invalidStateSelectors: [SELECTOR_FIELD],
+                errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
             },
         ],
     });

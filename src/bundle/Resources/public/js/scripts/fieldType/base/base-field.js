@@ -79,7 +79,7 @@
         createErrorNode(message) {
             const errorNode = doc.createElement('em');
 
-            errorNode.classList.add('ez-field-error');
+            errorNode.classList.add('ez-field-edit__error');
             errorNode.innerHTML = message;
 
             return errorNode;
@@ -125,7 +125,7 @@
         toggleErrorMessage(validationResult, config, input) {
             const fieldNode = input.closest(this.fieldSelector);
             const nodes = this.findErrorContainers(fieldNode, input, config.errorNodeSelectors);
-            const existingErrorSelectors = config.errorNodeSelectors.map(selector => selector + ' .ez-field-error');
+            const existingErrorSelectors = config.errorNodeSelectors.map(selector => selector + ' .ez-field-edit__error');
             const existingErrorNodes = this.findExistingErrorNodes(fieldNode, input, existingErrorSelectors);
 
             existingErrorNodes.forEach(el => el.remove());

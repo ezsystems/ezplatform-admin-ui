@@ -1,13 +1,13 @@
 @import '../custom';
 
-.ez-field-edit-ezurl {
-    .ez-field-edit-ui {
+.ez-field-edit--ezurl {
+    .ez-field-edit__data {
         background-color:  $ez-ground-base;
         padding: 1rem;
     }
 
     &.is-invalid {
-        .ez-sub-field-link {
+        .ez-data-source__field--link {
             color: $ez-color-danger;
         }
     }

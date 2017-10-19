@@ -1,5 +1,5 @@
 (function (global) {
-    const SELECTOR_FIELD = '.ez-field-edit-ezinteger';
+    const SELECTOR_FIELD = '.ez-field-edit--ezinteger';
 
     class EzIntegerValidator extends global.eZ.BaseFieldValidator {
         /**
@@ -18,7 +18,7 @@
             const isLess = value < parseInt(event.target.getAttribute('min'), 10);
             const isGreater = value > parseInt(event.target.getAttribute('max'), 10);
             const isError = (isEmpty && isRequired) || !isInteger || isLess || isGreater;
-            const label = event.target.closest(SELECTOR_FIELD).querySelector('.form-control-label').innerHTML;
+            const label = event.target.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
             const result = {isError};
 
             if (isEmpty) {
@@ -44,11 +44,11 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-field-edit-ezinteger input',
+                selector: '.ez-field-edit--ezinteger input',
                 eventName: 'blur',
                 callback: 'validateInteger',
                 invalidStateSelectors: [SELECTOR_FIELD],
-                errorNodeSelectors: ['.ez-field-edit-text-zone'],
+                errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
             },
         ],
     });

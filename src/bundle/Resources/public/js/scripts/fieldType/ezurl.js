@@ -1,6 +1,6 @@
 (function (global) {
-    const SELECTOR_FIELD = '.ez-field-edit-ezurl';
-    const SELECTOR_FIELD_LINK = '.ez-sub-field-link';
+    const SELECTOR_FIELD = '.ez-field-edit--ezurl';
+    const SELECTOR_FIELD_LINK = '.ez-data-source__field--link';
 
     class EzUrlValidator extends global.eZ.BaseFieldValidator {
         validateUrl(event) {
@@ -8,7 +8,7 @@
             const isEmpty = !event.target.value.trim();
             const isValid = global.eZ.errors.urlRegexp.test(event.target.value);
             const isError = (isEmpty && isRequired) || !isValid;
-            const label = event.target.closest(SELECTOR_FIELD_LINK).querySelector('.form-control-label').innerHTML;
+            const label = event.target.closest(SELECTOR_FIELD_LINK).querySelector('.ez-data-source__label').innerHTML;
             const result = {isError};
 
             if (isEmpty) {
@@ -26,11 +26,11 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-field-edit-ezurl .ez-sub-field-link input',
+                selector: '.ez-field-edit--ezurl .ez-data-source__field--link input',
                 eventName: 'blur',
                 callback: 'validateUrl',
                 invalidStateSelectors: [SELECTOR_FIELD],
-                errorNodeSelectors: ['.ez-sub-field-link .ez-sub-field-text-zone'],
+                errorNodeSelectors: ['.ez-data-source__field--link .ez-data-source__label-wrapper'],
             },
         ],
     });

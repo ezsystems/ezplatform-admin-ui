@@ -1,7 +1,7 @@
 @import '../custom';
 
-.ez-field-edit-ezboolean {
-    .form-check-label {
+.ez-field-edit--ezboolean {
+    .ez-data-source__label {
         position: relative;
         width: 2rem;
         height: 2.25rem;
@@ -12,7 +12,7 @@
             display: none;
         }
 
-        .ez-boolean-checkbox {
+        .ez-data-source__indicator {
             width: 2rem;
             height: 2rem;
             display: block;
@@ -28,7 +28,7 @@
         &.is-checked {
             background-color: $ez-color-secondary;
 
-            .ez-boolean-checkbox {
+            .ez-data-source__indicator {
                 transform: translateX(50%);
             }
 

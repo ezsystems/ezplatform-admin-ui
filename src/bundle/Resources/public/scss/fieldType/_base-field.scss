@@ -1,12 +1,21 @@
 @import '../custom';
 
 .ez-field-edit {
+    .ez-field-edit__label,
+    .ez-data-source__label {
+        &.required {
+            &:after {
+                content: '*:';
+            }
+        }
+    }
+
     &.is-invalid {
-        .ez-field-edit-text-zone {
+        .ez-field-edit__label-wrapper {
             color: $ez-color-danger;
         }
 
-        .ez-field-edit-ui {
+        .ez-field-edit__data {
             position: relative;
 
             &:before {
