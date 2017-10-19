@@ -1,0 +1,14 @@
+@import '../custom';
+
+.ez-field-edit-ezurl {
+    .ez-field-edit-ui {
+        background-color:  $ez-ground-base;
+        padding: 1rem;
+    }
+
+    &.is-invalid {
+        .ez-sub-field-link {
+            color: $ez-color-danger;
+        }
+    }
+}
