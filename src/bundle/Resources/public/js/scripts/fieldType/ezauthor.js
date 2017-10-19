@@ -7,6 +7,14 @@
     const SELECTOR_FIELD_NAME = '.ez-sub-field-name';
 
     class EzAuthorValidator extends global.eZ.BaseFieldValidator {
+        /**
+         * Validates the 'name' input field value
+         *
+         * @method validateName
+         * @param {Event} event
+         * @returns {Object}
+         * @memberof EzAuthorValidator
+         */
         validateName(event) {
             const isError = !event.target.value.trim() && event.target.required;
             const fieldNode = event.target.closest(SELECTOR_FIELD_NAME);
@@ -18,6 +26,14 @@
             };
         }
 
+        /**
+         * Validates the 'email' input field value
+         *
+         * @method validateEmail
+         * @param {Event} event
+         * @returns {Object}
+         * @memberof EzAuthorValidator
+         */
         validateEmail(event) {
             const isEmpty =  !event.target.value.trim();
             const isValid = global.eZ.errors.emailRegexp.test(event.target.value);
@@ -34,10 +50,26 @@
             return result;
         }
 
+        /**
+         * Sets an index to template.
+         *
+         * @method setIndex
+         * @param {HTMLElement} parentNode
+         * @param {String} template
+         * @returns {String}
+         * @memberof EzAuthorValidator
+         */
         setIndex(parentNode, template) {
             return template.replace(/__index__/g, parentNode.querySelectorAll(SELECTOR_AUTHOR_ROW).length)
         }
 
+        /**
+         * Updates the disable state.
+         *
+         * @method updateDisabledState
+         * @param {HTMLElement} parentNode
+         * @memberof EzAuthorValidator
+         */
         updateDisabledState(parentNode) {
             const isEnabled = parentNode.querySelectorAll(SELECTOR_AUTHOR_ROW).length > 1;
 
@@ -50,6 +82,13 @@
             });
         }
 
+        /**
+         * Removes an item.
+         *
+         * @method removeItem
+         * @param {Event} event
+         * @memberof EzAuthorValidator
+         */
         removeItem(event) {
             const authorNode = event.target.closest(SELECTOR_FIELD);
 
@@ -58,6 +97,13 @@
             this.updateDisabledState(authorNode);
         }
 
+        /**
+         * Adds an item.
+         *
+         * @method addItem
+         * @param {Event} event
+         * @memberof EzAuthorValidator
+         */
         addItem(event) {
             const authorNode = event.target.closest(SELECTOR_FIELD);
             const template = authorNode.dataset.prototype;
@@ -69,6 +115,16 @@
             this.updateDisabledState(authorNode);
         }
 
+        /**
+         * Finds the nodes to add validation state
+         *
+         * @method findValidationStateNodes
+         * @param {HTMLElement} fieldNode
+         * @param {HTMLElement} input
+         * @param {Array} selectors
+         * @returns {Array}
+         * @memberof BaseFieldValidator
+         */
         findValidationStateNodes(fieldNode, input, selectors) {
             const authorRow = input.closest(SELECTOR_AUTHOR_ROW);
             const nodes = [
@@ -79,6 +135,16 @@
             return selectors.reduce((total, selector) => total.concat([...authorRow.querySelectorAll(selector)]), nodes);
         }
 
+        /**
+         * Finds the error containers
+         *
+         * @method findErrorContainers
+         * @param {HTMLElement} fieldNode
+         * @param {HTMLElement} input
+         * @param {Array} selectors
+         * @returns {Array}
+         * @memberof BaseFieldValidator
+         */
         findErrorContainers(fieldNode, input, selectors) {
             const authorRow = input.closest(SELECTOR_AUTHOR_ROW);
             const nodes = [
@@ -89,6 +155,16 @@
             return selectors.reduce((total, selector) => total.concat([...authorRow.querySelectorAll(selector)]), nodes);
         }
 
+        /**
+         * Finds the existing error nodes
+         *
+         * @method findExistingErrorNodes
+         * @param {HTMLElement} fieldNode
+         * @param {HTMLElement} input
+         * @param {Array} selectors
+         * @returns {Array}
+         * @memberof BaseFieldValidator
+         */
         findExistingErrorNodes(fieldNode, input, selectors) {
             return selectors.reduce((total, selector) => total.concat([...input.closest(SELECTOR_AUTHOR_ROW).querySelectorAll(selector)]), []);
         }

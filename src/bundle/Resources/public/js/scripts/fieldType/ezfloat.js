@@ -2,6 +2,14 @@
     const SELECTOR_FIELD = '.ez-field-edit-ezfloat';
 
     class EzFloatValidator extends global.eZ.BaseFieldValidator {
+        /**
+         * Validates the input
+         *
+         * @method validateFloat
+         * @param {Event} event
+         * @returns {Object}
+         * @memberof EzFloatValidator
+         */
         validateFloat(event) {
             const isRequired = event.target.required;
             const value = +event.target.value;

@@ -2,6 +2,14 @@
     const SELECTOR_FIELD = '.ez-field-edit-ezstring';
 
     class EzStringValidator extends global.eZ.BaseFieldValidator {
+        /**
+         * Validates the input
+         *
+         * @method validateInput
+         * @param {Event} event
+         * @returns {Object}
+         * @memberof EzStringValidator
+         */
         validateInput(event) {
             const isRequired = event.target.required;
             const isEmpty = !event.target.value;
