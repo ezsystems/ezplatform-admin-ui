@@ -65,6 +65,7 @@ class LocationController extends Controller
      * @param Request $request
      *
      * @return Response
+     *
      * @throws InvalidArgumentException
      */
     public function moveAction(Request $request): Response
@@ -114,6 +115,7 @@ class LocationController extends Controller
      * @param Request $request
      *
      * @return Response
+     *
      * @throws InvalidArgumentException
      */
     public function copyAction(Request $request): Response
