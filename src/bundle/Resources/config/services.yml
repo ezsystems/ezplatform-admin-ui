@@ -70,3 +70,9 @@ services:
             $maxFileSize: "%ez_systems.multifile_upload.max_file_size%"
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'multiFileUpload' }
+
+    EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler:
+        arguments:
+            $flashBag: "@=service('session').getFlashBag()"
+
+    EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler'

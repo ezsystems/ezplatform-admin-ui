@@ -12,23 +12,38 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroupData;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Service\ContentTypeGroup\ContentTypeGroupService;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ContentTypeGroupController extends Controller
 {
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
     /** @var ContentTypeGroupService */
     private $contentTypeGroupService;
 
     /**
      * ContentTypeGroupController constructor.
      *
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
      * @param ContentTypeGroupService $groupService
      */
-    public function __construct(ContentTypeGroupService $groupService)
-    {
+    public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
+        ContentTypeGroupService $groupService
+    ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
         $this->contentTypeGroupService = $groupService;
     }
 

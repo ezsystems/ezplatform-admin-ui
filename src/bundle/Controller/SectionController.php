@@ -18,6 +18,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionCreateMapper;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,12 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class SectionController extends Controller
 {
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
     /** @var SectionService */
     protected $sectionService;
 
@@ -44,6 +51,7 @@ class SectionController extends Controller
     private $sectionUpdateMapper;
 
     /**
+     * @param NotificationHandlerInterface $notificationHandler
      * @param SectionService $sectionService
      * @param SearchService $searchService
      * @param TranslatorInterface $translator
@@ -52,16 +60,18 @@ class SectionController extends Controller
      * @param SectionUpdateMapper $sectionUpdateMapper
      */
     public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
         SectionService $sectionService,
         SearchService $searchService,
-        TranslatorInterface $translator,
         FormFactory $formFactory,
         SectionCreateMapper $sectionCreateMapper,
         SectionUpdateMapper $sectionUpdateMapper
     ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
         $this->sectionService = $sectionService;
         $this->searchService = $searchService;
-        $this->translator = $translator;
         $this->formFactory = $formFactory;
         $this->sectionCreateMapper = $sectionCreateMapper;
         $this->sectionUpdateMapper = $sectionUpdateMapper;

@@ -18,11 +18,19 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleUpdateType;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class RoleController extends Controller
 {
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
     /** @var RoleService */
     private $roleService;
 
@@ -35,15 +43,21 @@ class RoleController extends Controller
     /**
      * RoleController constructor.
      *
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
      * @param RoleService $roleService
      * @param RoleCreateMapper $roleCreateMapper
      * @param RoleUpdateMapper $roleUpdateMapper
      */
     public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
         RoleService $roleService,
         RoleCreateMapper $roleCreateMapper,
         RoleUpdateMapper $roleUpdateMapper
     ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
         $this->roleService = $roleService;
         $this->roleCreateMapper = $roleCreateMapper;
         $this->roleUpdateMapper = $roleUpdateMapper;

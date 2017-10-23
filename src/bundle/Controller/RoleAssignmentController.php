@@ -18,11 +18,19 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentDeleteType;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class RoleAssignmentController extends Controller
 {
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
     /** @var RoleService */
     private $roleService;
 
@@ -32,10 +40,19 @@ class RoleAssignmentController extends Controller
     /**
      * PolicyController constructor.
      *
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
      * @param RoleService $roleService
+     * @param SearchService $searchService
      */
-    public function __construct(RoleService $roleService, SearchService $searchService)
-    {
+    public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
+        RoleService $roleService,
+        SearchService $searchService
+    ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
         $this->roleService = $roleService;
         $this->searchService = $searchService;
     }

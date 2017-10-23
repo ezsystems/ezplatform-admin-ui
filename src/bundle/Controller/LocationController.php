@@ -19,12 +19,20 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class LocationController extends Controller
 {
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
     /** @var ContentService */
     protected $contentService;
 
@@ -41,6 +49,8 @@ class LocationController extends Controller
     protected $formFactory;
 
     /**
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
      * @param LocationService $locationService
      * @param ContentTypeService $contentTypeService
      * @param ContentService $contentService
@@ -48,12 +58,16 @@ class LocationController extends Controller
      * @param FormFactory $formFactory
      */
     public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
         LocationService $locationService,
         ContentTypeService $contentTypeService,
         ContentService $contentService,
         TrashService $trashService,
         FormFactory $formFactory
     ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
         $this->locationService = $locationService;
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;

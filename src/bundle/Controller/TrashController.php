@@ -14,12 +14,20 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
 use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Service\TrashService as UiTrashService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class TrashController extends Controller
 {
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
     /** @var UiTrashService */
     protected $uiTrashService;
 
@@ -36,6 +44,8 @@ class TrashController extends Controller
     protected $formFactory;
 
     /**
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
      * @param UiTrashService $uiTrashService
      * @param TrashService $trashService
      * @param LocationService $locationService
@@ -43,12 +53,16 @@ class TrashController extends Controller
      * @param FormFactory $formFactory
      */
     public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
         UiTrashService $uiTrashService,
         TrashService $trashService,
         LocationService $locationService,
         ContentService $contentService,
         FormFactory $formFactory
     ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
         $this->uiTrashService = $uiTrashService;
         $this->trashService = $trashService;
         $this->locationService = $locationService;

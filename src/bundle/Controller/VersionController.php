@@ -10,12 +10,20 @@ use eZ\Publish\API\Repository\ContentService;
 use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\VersionsTab;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class VersionController extends Controller
 {
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
     /** @var ContentService */
     protected $contentService;
 
@@ -23,11 +31,19 @@ class VersionController extends Controller
     protected $formFactory;
 
     /**
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
      * @param ContentService $contentService
      * @param FormFactory $formFactory
      */
-    public function __construct(ContentService $contentService, FormFactory $formFactory)
-    {
+    public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
+        ContentService $contentService,
+        FormFactory $formFactory
+    ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
         $this->contentService = $contentService;
         $this->formFactory = $formFactory;
     }

@@ -17,11 +17,19 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageUpdateType;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class LanguageController extends Controller
 {
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
     /** @var LanguageService */
     protected $languageService;
 
@@ -29,10 +37,19 @@ class LanguageController extends Controller
     protected $languageCreateMapper;
 
     /**
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
      * @param LanguageService $languageService
+     * @param LanguageCreateMapper $languageCreateMapper
      */
-    public function __construct(LanguageService $languageService, LanguageCreateMapper $languageCreateMapper)
-    {
+    public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
+        LanguageService $languageService,
+        LanguageCreateMapper $languageCreateMapper
+    ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
         $this->languageService = $languageService;
         $this->languageCreateMapper = $languageCreateMapper;
     }

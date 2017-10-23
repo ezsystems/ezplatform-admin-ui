@@ -19,11 +19,19 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyUpdateType;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class PolicyController extends Controller
 {
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
     /** @var RoleService */
     private $roleService;
 
@@ -36,15 +44,21 @@ class PolicyController extends Controller
     /**
      * PolicyController constructor.
      *
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
      * @param RoleService $roleService
      * @param PolicyCreateMapper $policyCreateMapper
      * @param PolicyUpdateMapper $policyUpdateMapper
      */
     public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
         RoleService $roleService,
         PolicyCreateMapper $policyCreateMapper,
         PolicyUpdateMapper $policyUpdateMapper
     ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
         $this->roleService = $roleService;
         $this->policyCreateMapper = $policyCreateMapper;
         $this->policyUpdateMapper = $policyUpdateMapper;
