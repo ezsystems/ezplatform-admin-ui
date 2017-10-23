@@ -23,8 +23,8 @@
     <section class="container mt-4">
         <div class="card">
             <div class="card-body">
-                {{ form_row(form_section_update.data.identifier) }}
-                {{ form_row(form_section_update.data.name) }}
+                {{ form_row(form_section_update.identifier) }}
+                {{ form_row(form_section_update.name) }}
             </div>
         </div>
     </section>
@@ -34,7 +34,7 @@
             <a href="{{ path("ezplatform.section.list") }}" class="btn btn-default">
                 {{ "form.cancel"|trans|desc('Cancel') }}
             </a>
-            {{ form_widget(form_section_update.data.update, {"attr": {"class": "btn btn-primary"}}) }}
+            {{ form_widget(form_section_update.update, {"attr": {"class": "btn btn-primary"}}) }}
         </div>
     </section>
 

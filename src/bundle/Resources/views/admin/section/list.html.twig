@@ -38,22 +38,25 @@
             </thead>
             <tbody>
             {% for section in sections %}
+                {% set delete_form = form_section_delete[section.id] %}
                 {% form_theme form_section_content_assign[section.id] 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
-                {% form_theme form_section_delete[section.id] 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+                {% form_theme delete_form 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+
                 <tr>
                     <td><a href="{{ path( 'ezplatform.section.view', {'sectionId': section.id} ) }}">{{ section.name }}</a></td>
                     <td>{{ section.identifier }}</td>
                     <td>{{ section.id }}</td>
                     <td>{{ content_count[section.id] }}</td>
                     <td class="text-right">
-
                         {{ form(form_section_content_assign[section.id], {'attr': {'class': 'd-inline-block'}}) }}
-
                         <a href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
                            class="btn btn-secondary"{% if not can_edit %} data-disabled{% endif %}>{{ 'section.edit'|trans|desc('Edit') }}</a>
-                        {{ form_start(form_section_delete[section.id], {'attr': {'class': 'd-inline-block'}}) }}
-                        {{ form_widget(form_section_delete[section.id].data.delete, { 'attr': {'class': 'btn btn-danger', 'disabled': not deletable[section.id] }}) }}
-                        {{ form_end(form_section_delete[section.id]) }}
+                        {{ form_start(delete_form, {
+                            "action": path("ezplatform.section.delete", {"sectionId": section.id}),
+                            'attr': {'class': 'd-inline-block'}
+                        }) }}
+                        {{ form_widget(delete_form.delete, { 'attr': {'class': 'btn btn-danger', 'disabled': not deletable[section.id] }}) }}
+                        {{ form_end(delete_form) }}
                     </td>
                 </tr>
             {% endfor %}

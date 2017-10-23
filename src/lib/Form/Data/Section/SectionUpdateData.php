@@ -7,12 +7,23 @@
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
+use eZ\Publish\API\Repository\Values\Content\Section;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirectTrait;
 
 /**
  * @todo add validation
  */
-class SectionUpdateData
+class SectionUpdateData implements OnSuccessRedirect, OnFailureRedirect
 {
+    use OnSuccessRedirectTrait;
+    use OnFailureRedirectTrait;
+
+    /** @var Section|null */
+    protected $section;
+
     /** @var string|null */
     protected $identifier;
 
@@ -20,13 +31,16 @@ class SectionUpdateData
     protected $name;
 
     /**
-     * @param null|string $identifier
-     * @param null|string $name
+     * @param Section|null $section
      */
-    public function __construct(?string $identifier = null, ?string $name = null)
+    public function __construct(?Section $section = null)
     {
-        $this->identifier = $identifier;
-        $this->name = $name;
+        $this->section = $section;
+
+        if ($section !== null) {
+            $this->identifier = $section->identifier;
+            $this->name = $section->name;
+        }
     }
 
     /**
@@ -59,5 +73,21 @@ class SectionUpdateData
     public function setName(?string $name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSection(): ?Section
+    {
+        return $this->section;
+    }
+
+    /**
+     * @param mixed $section
+     */
+    public function setSection(?Section $section = null)
+    {
+        $this->section = $section;
     }
 }

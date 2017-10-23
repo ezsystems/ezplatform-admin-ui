@@ -329,144 +329,103 @@ class FormFactory
     }
 
     /**
-     * @param int $sectionId
      * @param SectionContentAssignData|null $data
      * @param string|null $successRedirectionUrl
      * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function assignContentSectionForm(
-        int $sectionId,
         SectionContentAssignData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new SectionContentAssignData();
-        $name = sprintf('section_content_assign_%s', $sectionId);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name,
-            SectionContentAssignType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.section.assign_content', ['sectionId' => $sectionId]),
-            []
+        /** @var SectionContentAssignData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+        $name = $name ?: sprintf('content-assign-section-%s', $data->getSection()->id);
+
+        return $this->formFactory->createNamed($name, SectionContentAssignType::class, $data);
     }
 
     /**
-     * @param int $sectionId
      * @param SectionDeleteData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function deleteSection(
-        int $sectionId,
         SectionDeleteData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new SectionDeleteData();
-        $name = sprintf('section_delete_%s', $sectionId);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name,
-            SectionDeleteType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.section.delete', ['sectionId' => $sectionId]),
-            []
+        /** @var SectionDeleteData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+        $name = $name ?: sprintf('delete-section-%d', $data->getSection()->id);
+
+        return $this->formFactory->createNamed($name, SectionDeleteType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param SectionCreateData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function createSection(
-        ?string $name = null,
-        SectionCreateData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?SectionCreateData $data = null,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new SectionCreateData();
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(SectionCreateType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name,
-            SectionCreateType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.section.create'),
-            []
+        /** @var SectionCreateData $data */
+        $data = $this->prepareRedirectableData(
+            $data ?? new SectionCreateData(),
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(SectionCreateType::class);
+
+        return $this->formFactory->createNamed($name, SectionCreateType::class, $data);
     }
 
     /**
-     * @param int $sectionId
      * @param SectionUpdateData|null $data
      * @param string|null $successRedirectionUrl
      * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function updateSection(
-        int $sectionId,
         SectionUpdateData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new SectionUpdateData();
-        $name = sprintf('section_update_%s', $sectionId);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name,
-            SectionUpdateType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.section.update', ['sectionId' => $sectionId]),
-            []
+        /** @var SectionUpdateData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
-    }
+        $name = $name ?: sprintf('update-section-%s', $data->getSection()->id);
 
-    /**
-     * @param string|null $name
-     * @param string $dataType
-     * @param UiFormData $uiFormData
-     * @param string $action
-     * @param array $options
-     *
-     * @return FormInterface
-     */
-    public function createUiForm(
-        ?string $name = null,
-        string $dataType,
-        UiFormData $uiFormData,
-        string $action,
-        array $options = []
-    ): FormInterface {
-        $defaultOptions = [
-            'method' => Request::METHOD_POST,
-            'action' => $action,
-        ];
-        $options = array_merge($defaultOptions, $options);
-
-        if (null !== $name) {
-            $formBuilder = $this->formFactory->createNamed($name, UiFormType::class, $uiFormData, $options);
-        } else {
-            $formBuilder = $this->formFactory->create(UiFormType::class, $uiFormData, $options);
-        }
-
-        $formBuilder->add('data', $dataType, ['label' => false]);
-
-        return $formBuilder;
+        return $this->formFactory->createNamed($name, SectionUpdateType::class, $data);
     }
 
     /**
@@ -544,6 +503,8 @@ class FormFactory
     }
 
     /**
+     * Fill redirection fields if fitting interface is implemented.
+     *
      * @param mixed $data
      * @param null|string $successRedirectionUrl
      * @param null|string $failureRedirectionUrl
