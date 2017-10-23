@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 use eZ\Publish\API\Repository\SectionService;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 /**
  * Transforms between a Sections ID and a domain specific object.
@@ -32,13 +33,14 @@ class SectionsTransformer implements DataTransformerInterface
      * Transforms a domain specific Section objects into a string with comma separated Sections identifiers.
      *
      * @param mixed $value
-     * @return array|string
+     *
+     * @return string|null
      */
-    public function transform($value)
+    public function transform($value): ?string
     {
         /** TODO add sanity check is array of Location object? */
         if (!is_array($value) || empty($value)) {
-            return [];
+            return null;
         }
 
         return implode(',', array_column($value, 'id'));
@@ -48,8 +50,10 @@ class SectionsTransformer implements DataTransformerInterface
      * Transforms a string with comma separated Sections identifiers into a domain specific Section objects.
      *
      * @param mixed $value
+     *
      * @return array|null
-     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
+     *
+     * @throws TransformationFailedException
      */
     public function reverseTransform($value): ?array
     {
@@ -63,6 +67,10 @@ class SectionsTransformer implements DataTransformerInterface
 
         $value = explode(',', $value);
 
-        return array_map([$this->sectionService, 'loadSection'], $value);
+        try {
+            return array_map([$this->sectionService, 'loadSection'], $value);
+        } catch (NotFoundException $e) {
+            throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }

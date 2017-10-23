@@ -16,9 +16,7 @@ use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class PolicyUpdateMapperTest extends TestCase
 {
-    /**
-     * @var PolicyUpdateMapper
-     */
+    /** @var PolicyUpdateMapper */
     private $mapper;
 
     public function setUp()
@@ -35,6 +33,8 @@ class PolicyUpdateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
+     *
+     * @param array $properties
      */
     public function testMap(array $properties)
     {
@@ -45,6 +45,8 @@ class PolicyUpdateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
+     *
+     * @param array $properties
      */
     public function testReverseMap(array $properties)
     {
@@ -56,17 +58,23 @@ class PolicyUpdateMapperTest extends TestCase
     public function testMapWithWrongInstance()
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument \'value\' is invalid: must be instance of ' . PolicyUpdateStruct::class);
+        $this->expectExceptionMessage('Argument \'value\' is invalid: must be an instance of ' . PolicyUpdateStruct::class);
+
         $this->mapper->map(new LocationCreateStruct());
     }
 
-    public function dataProvider()
+    public function dataProvider(): array
     {
         return [
             'simple' => [['limitation' => new ContentTypeLimitation()]],
         ];
     }
 
+    /**
+     * @param array $properties
+     *
+     * @return PolicyUpdateStruct
+     */
     private function createStruct(array $properties): PolicyUpdateStruct
     {
         $struct = new PolicyUpdateStruct();
@@ -75,6 +83,11 @@ class PolicyUpdateMapperTest extends TestCase
         return $struct;
     }
 
+    /**
+     * @param array $properties
+     *
+     * @return PolicyUpdateData
+     */
     private function createData(array $properties): PolicyUpdateData
     {
         return new PolicyUpdateData(['module' => $properties['module'], 'function' => $properties['function']]);

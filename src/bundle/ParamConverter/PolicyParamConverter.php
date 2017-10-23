@@ -20,9 +20,7 @@ class PolicyParamConverter implements ParamConverterInterface
     const PARAMETER_ROLE_ID = 'roleId';
     const PARAMETER_POLICY_ID = 'policyId';
 
-    /**
-     * @var RoleService
-     */
+    /** @var RoleService */
     private $roleService;
 
     /**

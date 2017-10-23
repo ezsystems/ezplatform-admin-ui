@@ -32,7 +32,7 @@ class ContentInfoType extends AbstractType
         $builder->addViewTransformer(new ContentInfoTransformer($this->contentService));
     }
 
-    public function getParent()
+    public function getParent(): ?string
     {
         return HiddenType::class;
     }

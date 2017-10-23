@@ -15,7 +15,7 @@ class AdminFilter implements SiteAccessConfigurationFilter
     /**
      * Receives the siteaccess configuration array and returns it.
      *
-     * @param array $siteAccessConfiguration
+     * @param array $configuration
      *        The SiteAccess configuration array before it gets normalized and processed.
      *        Keys: groups, list, default_siteaccess.
      *        Example:
@@ -30,7 +30,7 @@ class AdminFilter implements SiteAccessConfigurationFilter
      *
      * @return array The modified siteaccess configuration array
      */
-    public function filter(array $configuration)
+    public function filter(array $configuration): array
     {
         $isMultisite = count($configuration['groups']) > 1;
 

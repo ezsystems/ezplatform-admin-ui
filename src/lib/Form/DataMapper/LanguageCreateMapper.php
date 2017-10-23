@@ -18,14 +18,17 @@ class LanguageCreateMapper implements DataMapperInterface
 {
     /**
      * Maps given LanguageCreateStruct object to a LanguageCreateData object.
+     *
      * @param LanguageCreateStruct|ValueObject $value
+     *
      * @return LanguageCreateData
+     *
      * @throws InvalidArgumentException
      */
     public function map(ValueObject $value): LanguageCreateData
     {
         if (!$value instanceof LanguageCreateStruct) {
-            throw new InvalidArgumentException('value', 'must be instance of ' . LanguageCreateStruct::class);
+            throw new InvalidArgumentException('value', 'must be an instance of ' . LanguageCreateStruct::class);
         }
 
         $data = new LanguageCreateData();
@@ -41,13 +44,15 @@ class LanguageCreateMapper implements DataMapperInterface
      * Maps given LanguageCreateData object to a LanguageCreateStruct object.
      *
      * @param LanguageCreateData $data
+     *
      * @return LanguageCreateStruct
+     *
      * @throws InvalidArgumentException
      */
     public function reverseMap($data): LanguageCreateStruct
     {
         if (!$data instanceof LanguageCreateData) {
-            throw new InvalidArgumentException('data', 'must be instance of ' . LanguageCreateData::class);
+            throw new InvalidArgumentException('data', 'must be an instance of ' . LanguageCreateData::class);
         }
 
         return new LanguageCreateStruct([

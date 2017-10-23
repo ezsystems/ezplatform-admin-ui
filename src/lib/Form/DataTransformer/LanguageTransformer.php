@@ -33,7 +33,8 @@ class LanguageTransformer implements DataTransformerInterface
     /**
      * Transforms a domain specific Language object into a Language's ID.
      *
-     * @param null|Language $value
+     * @param Language|null $value
+     *
      * @return mixed|null
      *
      * @throws TransformationFailedException if the given value is not a Language object
@@ -55,6 +56,7 @@ class LanguageTransformer implements DataTransformerInterface
      * Transforms a Content's ID integer into a domain specific ContentInfo object.
      *
      * @param mixed $value
+     *
      * @return Language|mixed|null
      *
      * @throws TransformationFailedException if the value can not be found
@@ -68,7 +70,7 @@ class LanguageTransformer implements DataTransformerInterface
         try {
             return $this->languageService->loadLanguageById($value);
         } catch (NotFoundException $e) {
-            throw new TransformationFailedException('Transformation failed. ' . $e->getMessage(), $e->getCode(), $e);
+            throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

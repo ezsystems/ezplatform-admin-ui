@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\SectionService;
 use Symfony\Component\Form\DataTransformerInterface;
 use eZ\Publish\API\Repository\Values\Content\Section as APISection;
@@ -34,8 +35,10 @@ class SectionTransformer implements DataTransformerInterface
      * Transforms a domain specific Section object into a Section identifier.
      *
      * @param mixed $value
+     *
      * @return mixed|null
-     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
+     *
+     * @throws TransformationFailedException
      */
     public function transform($value)
     {
@@ -51,10 +54,14 @@ class SectionTransformer implements DataTransformerInterface
     }
 
     /**
+     * Transforms a Section identifier into a domain specific Section object.
+     *
      * @param mixed $value
+     *
      * @return APISection|null
-     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     *
+     * @throws TransformationFailedException
+     * @throws UnauthorizedException
      */
     public function reverseTransform($value): ?APISection
     {
@@ -65,7 +72,7 @@ class SectionTransformer implements DataTransformerInterface
         try {
             return $this->sectionService->loadSection($value);
         } catch (NotFoundException $e) {
-            throw new TransformationFailedException('Transformation failed. ' . $e->getMessage(), $e->getCode(), $e);
+            throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

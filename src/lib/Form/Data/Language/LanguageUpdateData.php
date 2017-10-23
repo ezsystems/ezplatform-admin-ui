@@ -66,7 +66,7 @@ class LanguageUpdateData
      */
     public function isEnabled(): bool
     {
-        return (bool)$this->enabled;
+        return $this->enabled;
     }
 
     /**

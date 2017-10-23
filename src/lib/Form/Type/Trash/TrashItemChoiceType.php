@@ -14,9 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TrashItemChoiceType extends AbstractType
 {
-    /**
-     * @var TrashService
-     */
+    /** @var TrashService */
     private $trashService;
 
     /**
@@ -45,7 +43,7 @@ class TrashItemChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): ?string
     {
         return ChoiceType::class;
     }

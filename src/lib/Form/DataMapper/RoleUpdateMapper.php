@@ -18,14 +18,17 @@ class RoleUpdateMapper implements DataMapperInterface
 {
     /**
      * Maps given RoleUpdateStruct object to a RoleUpdateData object.
+     *
      * @param RoleUpdateStruct|ValueObject $value
+     *
      * @return RoleUpdateData
+     *
      * @throws InvalidArgumentException
      */
     public function map(ValueObject $value): RoleUpdateData
     {
         if (!$value instanceof RoleUpdateStruct) {
-            throw new InvalidArgumentException('value', 'must be instance of ' . RoleUpdateStruct::class);
+            throw new InvalidArgumentException('value', 'must be an instance of ' . RoleUpdateStruct::class);
         }
 
         $data = new RoleUpdateData();
@@ -37,14 +40,17 @@ class RoleUpdateMapper implements DataMapperInterface
 
     /**
      * Maps given RoleUpdateData object to a RoleUpdateStruct object.
+     *
      * @param RoleUpdateData $data
+     *
      * @return RoleUpdateStruct
+     *
      * @throws InvalidArgumentException
      */
     public function reverseMap($data): RoleUpdateStruct
     {
         if (!$data instanceof RoleUpdateData) {
-            throw new InvalidArgumentException('data', 'must be instance of ' . RoleUpdateData::class);
+            throw new InvalidArgumentException('data', 'must be an instance of ' . RoleUpdateData::class);
         }
 
         return new RoleUpdateStruct([

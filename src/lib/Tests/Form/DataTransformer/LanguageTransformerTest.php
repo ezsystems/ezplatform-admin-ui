@@ -14,17 +14,19 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use Throwable;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 class LanguageTransformerTest extends TestCase
 {
     /**
      * @dataProvider transformDataProvider
+     *
      * @param $value
      * @param $expected
      */
     public function testTransform($value, $expected)
     {
+        /** @var LanguageService|MockObject $languageService */
         $languageService = $this->createMock(LanguageService::class);
         $transformer = new LanguageTransformer($languageService);
 
@@ -35,20 +37,24 @@ class LanguageTransformerTest extends TestCase
 
     /**
      * @dataProvider transformWithInvalidInputDataProvider
+     *
      * @param $value
      */
     public function testTransformWithInvalidInput($value)
     {
+        /** @var LanguageService|MockObject $languageService */
         $languageService = $this->createMock(LanguageService::class);
         $transformer = new LanguageTransformer($languageService);
 
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('Expected a ' . Language::class . ' object.');
+
         $transformer->transform($value);
     }
 
     public function testReverseTransformWithId()
     {
+        /** @var LanguageService|MockObject $languageService */
         $languageService = $this->createMock(LanguageService::class);
         $languageService->expects(self::once())
             ->method('loadLanguageById')
@@ -64,6 +70,7 @@ class LanguageTransformerTest extends TestCase
 
     public function testReverseTransformWithNull()
     {
+        /** @var LanguageService|MockObject $languageService */
         $languageService = $this->createMock(LanguageService::class);
         $languageService->expects(self::never())
             ->method('loadLanguageById');
@@ -78,15 +85,12 @@ class LanguageTransformerTest extends TestCase
     public function testReverseTransformWithNotFoundException()
     {
         $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Transformation failed. Language not found');
+        $this->expectExceptionMessage('Language not found');
 
+        /** @var LanguageService|MockObject $languageService */
         $languageService = $this->createMock(LanguageService::class);
         $languageService->method('loadLanguageById')
-            ->will($this->throwException(new class() extends NotFoundException {
-                public function __construct($message = '', $code = 0, Throwable $previous = null)
-                {
-                    parent::__construct('Language not found', $code, $previous);
-                }
+            ->will($this->throwException(new class('Language not found') extends NotFoundException {
             }));
 
         $transformer = new LanguageTransformer($languageService);
@@ -94,7 +98,10 @@ class LanguageTransformerTest extends TestCase
         $transformer->reverseTransform(654321);
     }
 
-    public function transformDataProvider()
+    /**
+     * @return array
+     */
+    public function transformDataProvider(): array
     {
         $language = new Language(['id' => 123456]);
 
@@ -104,7 +111,10 @@ class LanguageTransformerTest extends TestCase
         ];
     }
 
-    public function transformWithInvalidInputDataProvider()
+    /**
+     * @return array
+     */
+    public function transformWithInvalidInputDataProvider(): array
     {
         return [
             'string' => ['string'],

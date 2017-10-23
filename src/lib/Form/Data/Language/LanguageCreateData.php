@@ -25,6 +25,11 @@ class LanguageCreateData
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return LanguageCreateData
+     */
     public function setName(string $name): LanguageCreateData
     {
         $this->name = $name;
@@ -40,6 +45,11 @@ class LanguageCreateData
         return $this->languageCode;
     }
 
+    /**
+     * @param string $languageCode
+     *
+     * @return LanguageCreateData
+     */
     public function setLanguageCode(string $languageCode): LanguageCreateData
     {
         $this->languageCode = $languageCode;
@@ -52,9 +62,14 @@ class LanguageCreateData
      */
     public function isEnabled(): bool
     {
-        return (bool)$this->enabled;
+        return $this->enabled;
     }
 
+    /**
+     * @param bool $enabled
+     *
+     * @return LanguageCreateData
+     */
     public function setEnabled(bool $enabled): LanguageCreateData
     {
         $this->enabled = $enabled;

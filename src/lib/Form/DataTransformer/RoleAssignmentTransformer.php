@@ -8,9 +8,10 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
 use Symfony\Component\Form\DataTransformerInterface;
-use eZ\Publish\API\Repository\Values\User\RoleAssignment as APIRoleAsignment;
+use eZ\Publish\API\Repository\Values\User\RoleAssignment as APIRoleAssignment;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
@@ -34,8 +35,10 @@ class RoleAssignmentTransformer implements DataTransformerInterface
      * Transforms a domain specific RoleAssignment object into a RoleAssignment string.
      *
      * @param mixed $value
+     *
      * @return mixed|null
-     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
+     *
+     * @throws TransformationFailedException
      */
     public function transform($value)
     {
@@ -43,8 +46,8 @@ class RoleAssignmentTransformer implements DataTransformerInterface
             return null;
         }
 
-        if (!$value instanceof APIRoleAsignment) {
-            throw new TransformationFailedException('Expected a ' . APIRoleAsignment::class . ' object.');
+        if (!$value instanceof APIRoleAssignment) {
+            throw new TransformationFailedException('Expected a ' . APIRoleAssignment::class . ' object.');
         }
 
         return $value->id;
@@ -52,12 +55,15 @@ class RoleAssignmentTransformer implements DataTransformerInterface
 
     /**
      * Transforms a RoleAssignment's ID into a domain specific RoleAssignment object.
+     *
      * @param mixed $value
-     * @return APIRoleAsignment|null
-     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     *
+     * @return APIRoleAssignment|null
+     *
+     * @throws TransformationFailedException
+     * @throws UnauthorizedException
      */
-    public function reverseTransform($value): ?APIRoleAsignment
+    public function reverseTransform($value): ?APIRoleAssignment
     {
         if (empty($value)) {
             return null;
@@ -66,7 +72,7 @@ class RoleAssignmentTransformer implements DataTransformerInterface
         try {
             return $this->roleService->loadRoleAssignment($value);
         } catch (NotFoundException $e) {
-            throw new TransformationFailedException('Transformation failed. ' . $e->getMessage(), $e->getCode(), $e);
+            throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

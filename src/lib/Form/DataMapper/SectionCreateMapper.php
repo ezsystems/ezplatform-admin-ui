@@ -18,14 +18,17 @@ class SectionCreateMapper implements DataMapperInterface
 {
     /**
      * Maps given SectionCreateStruct object to a SectionCreateData object.
+     *
      * @param SectionCreateStruct|ValueObject $value
+     *
      * @return SectionCreateData
+     *
      * @throws InvalidArgumentException
      */
     public function map(ValueObject $value): SectionCreateData
     {
         if (!$value instanceof SectionCreateStruct) {
-            throw new InvalidArgumentException('value', 'must be instance of ' . SectionCreateStruct::class);
+            throw new InvalidArgumentException('value', 'must be an instance of ' . SectionCreateStruct::class);
         }
 
         return new SectionCreateData($value->identifier, $value->name);
@@ -33,14 +36,17 @@ class SectionCreateMapper implements DataMapperInterface
 
     /**
      * Maps given SectionCreateData object to a SectionCreateStruct object.
+     *
      * @param SectionCreateData $data
+     *
      * @return SectionCreateStruct
+     *
      * @throws InvalidArgumentException
      */
     public function reverseMap($data): SectionCreateStruct
     {
         if (!$data instanceof SectionCreateData) {
-            throw new InvalidArgumentException('data', 'must be instance of ' . SectionCreateData::class);
+            throw new InvalidArgumentException('data', 'must be an instance of ' . SectionCreateData::class);
         }
 
         return new SectionCreateStruct([

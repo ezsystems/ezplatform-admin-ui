@@ -16,9 +16,7 @@ use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class PolicyCreateMapperTest extends TestCase
 {
-    /**
-     * @var PolicyCreateMapper
-     */
+    /** @var PolicyCreateMapper */
     private $mapper;
 
     public function setUp()
@@ -33,6 +31,8 @@ class PolicyCreateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
+     *
+     * @param array $properties
      */
     public function testMap(array $properties)
     {
@@ -43,6 +43,8 @@ class PolicyCreateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
+     *
+     * @param array $properties
      */
     public function testReverseMap(array $properties)
     {
@@ -54,29 +56,41 @@ class PolicyCreateMapperTest extends TestCase
     public function testMapWithWrongInstance()
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument \'value\' is invalid: must be instance of ' . PolicyCreateStruct::class);
+        $this->expectExceptionMessage('Argument \'value\' is invalid: must be an instance of ' . PolicyCreateStruct::class);
+
         $this->mapper->map(new LocationCreateStruct());
     }
 
     public function testReverseMapWithWrongInstance()
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument \'data\' is invalid: must be instance of ' . PolicyCreateData::class);
+        $this->expectExceptionMessage('Argument \'data\' is invalid: must be an instance of ' . PolicyCreateData::class);
+
         $this->mapper->reverseMap(new PolicyUpdateData());
     }
 
-    public function dataProvider()
+    public function dataProvider(): array
     {
         return [
             'simple' => [['module' => 'module', 'function' => 'function']],
         ];
     }
 
+    /**
+     * @param array $properties
+     *
+     * @return PolicyCreateStruct
+     */
     private function createStruct(array $properties): PolicyCreateStruct
     {
         return new PolicyCreateStruct($properties);
     }
 
+    /**
+     * @param array $properties
+     *
+     * @return PolicyCreateData
+     */
     private function createData(array $properties): PolicyCreateData
     {
         return (new PolicyCreateData())

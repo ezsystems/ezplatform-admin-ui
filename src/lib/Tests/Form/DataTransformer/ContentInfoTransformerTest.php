@@ -14,17 +14,16 @@ use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\ContentInfoTransformer;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use Throwable;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 class ContentInfoTransformerTest extends TestCase
 {
-    /**
-     * @var ContentInfoTransformer
-     */
+    /** @var ContentInfoTransformer */
     private $contentInfoTransformer;
 
     public function setUp()
     {
+        /** @var ContentService|MockObject $contentService */
         $contentService = $this->createMock(ContentService::class);
         $contentService->expects(self::any())
             ->method('loadContentInfo')
@@ -36,6 +35,7 @@ class ContentInfoTransformerTest extends TestCase
 
     /**
      * @dataProvider transformDataProvider
+     *
      * @param $value
      * @param $expected
      */
@@ -48,17 +48,20 @@ class ContentInfoTransformerTest extends TestCase
 
     /**
      * @dataProvider transformWithInvalidInputDataProvider
+     *
      * @param $value
      */
     public function testTransformWithInvalidInput($value)
     {
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('Expected a ' . ContentInfo::class . ' object.');
+
         $this->contentInfoTransformer->transform($value);
     }
 
     /**
      * @dataProvider reverseTransformDataProvider
+     *
      * @param $value
      * @param $expected
      */
@@ -71,27 +74,26 @@ class ContentInfoTransformerTest extends TestCase
 
     /**
      * @dataProvider reverseTransformWithInvalidInputDataProvider
+     *
      * @param $value
      */
     public function testReverseTransformWithInvalidInput($value)
     {
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('Expected an integer.');
+
         $this->contentInfoTransformer->reverseTransform($value);
     }
 
     public function testReverseTransformWithNotFoundException()
     {
         $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Transformation failed. Language not found');
+        $this->expectExceptionMessage('Language not found');
 
+        /** @var ContentService|MockObject $service */
         $service = $this->createMock(ContentService::class);
         $service->method('loadContentInfo')
-            ->will($this->throwException(new class() extends NotFoundException {
-                public function __construct($message = '', $code = 0, Throwable $previous = null)
-                {
-                    parent::__construct('Language not found', $code, $previous);
-                }
+            ->will($this->throwException(new class('Language not found') extends NotFoundException {
             }));
 
         $transformer = new ContentInfoTransformer($service);
@@ -99,7 +101,10 @@ class ContentInfoTransformerTest extends TestCase
         $transformer->reverseTransform(654321);
     }
 
-    public function transformDataProvider()
+    /**
+     * @return array
+     */
+    public function transformDataProvider(): array
     {
         $contentInfo = new ContentInfo(['id' => 123456]);
 
@@ -109,7 +114,10 @@ class ContentInfoTransformerTest extends TestCase
         ];
     }
 
-    public function reverseTransformDataProvider()
+    /**
+     * @return array
+     */
+    public function reverseTransformDataProvider(): array
     {
         $contentInfo = new ContentInfo(['id' => 123456]);
 
@@ -119,7 +127,10 @@ class ContentInfoTransformerTest extends TestCase
         ];
     }
 
-    public function transformWithInvalidInputDataProvider()
+    /**
+     * @return array
+     */
+    public function transformWithInvalidInputDataProvider(): array
     {
         return [
             'string' => ['string'],
@@ -131,7 +142,10 @@ class ContentInfoTransformerTest extends TestCase
         ];
     }
 
-    public function reverseTransformWithInvalidInputDataProvider()
+    /**
+     * @return array
+     */
+    public function reverseTransformWithInvalidInputDataProvider(): array
     {
         return [
             'string' => ['string'],

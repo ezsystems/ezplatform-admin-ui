@@ -7,7 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Section;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Embedded\SectionType as SectionType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Embedded\SectionType;
 use EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

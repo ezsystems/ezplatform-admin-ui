@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -34,8 +35,10 @@ class RoleTransformer implements DataTransformerInterface
      * Transforms a domain specific Role object into a Role identifier.
      *
      * @param mixed $value
+     *
      * @return mixed|null
-     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
+     *
+     * @throws TransformationFailedException
      */
     public function transform($value)
     {
@@ -54,9 +57,11 @@ class RoleTransformer implements DataTransformerInterface
      * Transforms a Role identifier into a domain specific Role object.
      *
      * @param mixed $value
+     *
      * @return APIRole|null
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
+     *
+     * @throws UnauthorizedException
+     * @throws TransformationFailedException
      */
     public function reverseTransform($value): ?APIRole
     {
@@ -67,7 +72,7 @@ class RoleTransformer implements DataTransformerInterface
         try {
             return $this->roleService->loadRole($value);
         } catch (NotFoundException $e) {
-            throw new TransformationFailedException('Transformation failed. ' . $e->getMessage(), $e->getCode(), $e);
+            throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

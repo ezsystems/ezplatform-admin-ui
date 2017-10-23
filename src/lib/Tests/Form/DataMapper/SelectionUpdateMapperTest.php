@@ -16,9 +16,7 @@ use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class SelectionUpdateMapperTest extends TestCase
 {
-    /**
-     * @var SectionUpdateMapper
-     */
+    /** @var SectionUpdateMapper */
     private $mapper;
 
     public function setUp()
@@ -33,6 +31,8 @@ class SelectionUpdateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
+     *
+     * @param array $properties
      */
     public function testMap(array $properties)
     {
@@ -43,6 +43,8 @@ class SelectionUpdateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
+     *
+     * @param array $properties
      */
     public function testReverseMap(array $properties)
     {
@@ -54,18 +56,20 @@ class SelectionUpdateMapperTest extends TestCase
     public function testMapWithWrongInstance()
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument \'value\' is invalid: must be instance of ' . SectionUpdateStruct::class);
+        $this->expectExceptionMessage('Argument \'value\' is invalid: must be an instance of ' . SectionUpdateStruct::class);
+
         $this->mapper->map(new LocationCreateStruct());
     }
 
     public function testReverseMapWithWrongInstance()
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument \'data\' is invalid: must be instance of ' . SectionUpdateData::class);
+        $this->expectExceptionMessage('Argument \'data\' is invalid: must be an instance of ' . SectionUpdateData::class);
+
         $this->mapper->reverseMap(new LanguageCreateData());
     }
 
-    public function dataProvider()
+    public function dataProvider(): array
     {
         return [
             'simple' => [['identifier' => 'hash', 'name' => 'Lorem']],
@@ -75,11 +79,21 @@ class SelectionUpdateMapperTest extends TestCase
         ];
     }
 
+    /**
+     * @param array $properties
+     *
+     * @return SectionUpdateStruct
+     */
     private function createStruct(array $properties): SectionUpdateStruct
     {
         return new SectionUpdateStruct($properties);
     }
 
+    /**
+     * @param array $properties
+     *
+     * @return SectionUpdateData
+     */
     private function createData(array $properties): SectionUpdateData
     {
         return new SectionUpdateData($properties['identifier'], $properties['name']);

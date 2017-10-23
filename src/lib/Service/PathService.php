@@ -17,9 +17,7 @@ use eZ\Publish\API\Repository\Values\Content\Location;
  */
 class PathService
 {
-    /**
-     * @var SearchService
-     */
+    /** @var SearchService */
     private $searchService;
 
     public function __construct(SearchService $searchService)

@@ -16,9 +16,7 @@ use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class LanguageCreateMapperTest extends TestCase
 {
-    /**
-     * @var LanguageCreateMapper
-     */
+    /** @var LanguageCreateMapper */
     private $mapper;
 
     public function setUp()
@@ -33,6 +31,8 @@ class LanguageCreateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
+     *
+     * @param array $properties
      */
     public function testMap(array $properties)
     {
@@ -43,6 +43,8 @@ class LanguageCreateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
+     *
+     * @param array $properties
      */
     public function testReverseMap(array $properties)
     {
@@ -54,14 +56,16 @@ class LanguageCreateMapperTest extends TestCase
     public function testMapWithWrongInstance()
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument \'value\' is invalid: must be instance of ' . LanguageCreateStruct::class);
+        $this->expectExceptionMessage('Argument \'value\' is invalid: must be an instance of ' . LanguageCreateStruct::class);
+
         $this->mapper->map(new LocationCreateStruct());
     }
 
     public function testReverseMapWithWrongInstance()
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument \'data\' is invalid: must be instance of ' . LanguageCreateData::class);
+        $this->expectExceptionMessage('Argument \'data\' is invalid: must be an instance of ' . LanguageCreateData::class);
+
         $this->mapper->reverseMap(new LanguageDeleteData());
     }
 
@@ -73,11 +77,21 @@ class LanguageCreateMapperTest extends TestCase
         ];
     }
 
+    /**
+     * @param array $properties
+     *
+     * @return LanguageCreateStruct
+     */
     private function createStruct(array $properties): LanguageCreateStruct
     {
         return new LanguageCreateStruct($properties);
     }
 
+    /**
+     * @param array $properties
+     *
+     * @return LanguageCreateData
+     */
     private function createData(array $properties): LanguageCreateData
     {
         return (new LanguageCreateData())

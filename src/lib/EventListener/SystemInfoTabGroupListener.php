@@ -39,7 +39,10 @@ class SystemInfoTabGroupListener implements EventSubscriberInterface
         $this->systeminfoCollectorRegistry = $systeminfoCollectorRegistry;
     }
 
-    public static function getSubscribedEvents()
+    /**
+     * @return array
+     */
+    public static function getSubscribedEvents(): array
     {
         return [
             TabEvents::TAB_GROUP_PRE_RENDER => ['onTabGroupPreRender', 10],

@@ -43,9 +43,10 @@ class Aggregator
      * @param string $key
      *
      * @return ProviderInterface
+     *
      * @throws InvalidArgumentException
      */
-    public function removeProvider(string $key)
+    public function removeProvider(string $key): ProviderInterface
     {
         if (!isset($this->providers[$key])) {
             throw new InvalidArgumentException('key', sprintf('Provider under key "%s" not found', $key));

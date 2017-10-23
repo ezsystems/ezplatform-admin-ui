@@ -35,7 +35,10 @@ class PolicyData
         $this->limitations = $limitations;
     }
 
-    public function getModuleFunction()
+    /**
+     * @return array
+     */
+    public function getModuleFunction(): array
     {
         return [
             'module' => $this->getModule(),
@@ -59,12 +62,12 @@ class PolicyData
         $this->limitations = $limitations;
     }
 
-    public function getModule()
+    public function getModule(): ?string
     {
         return $this->module;
     }
 
-    public function getFunction()
+    public function getFunction(): ?string
     {
         return $this->function;
     }

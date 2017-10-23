@@ -12,7 +12,6 @@ use EzSystems\EzPlatformAdminUi\Form\DataTransformer\SectionTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use Throwable;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\Values\Content\Section as APISection;
 
@@ -20,6 +19,7 @@ class SectionTransformerTest extends TestCase
 {
     /**
      * @dataProvider transformDataProvider
+     *
      * @param $value
      * @param $expected
      */
@@ -35,6 +35,7 @@ class SectionTransformerTest extends TestCase
 
     /**
      * @dataProvider transformWithInvalidInputDataProvider
+     *
      * @param $value
      */
     public function testTransformWithInvalidInput($value)
@@ -44,6 +45,7 @@ class SectionTransformerTest extends TestCase
 
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('Expected a ' . APISection::class . ' object.');
+
         $transformer->transform($value);
     }
 
@@ -78,15 +80,11 @@ class SectionTransformerTest extends TestCase
     public function testReverseTransformWithNotFoundException()
     {
         $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Transformation failed. Location not found');
+        $this->expectExceptionMessage('Location not found');
 
         $service = $this->createMock(SectionService::class);
         $service->method('loadSection')
-            ->will($this->throwException(new class() extends NotFoundException {
-                public function __construct($message = '', $code = 0, Throwable $previous = null)
-                {
-                    parent::__construct('Location not found', $code, $previous);
-                }
+            ->will($this->throwException(new class('Location not found') extends NotFoundException {
             }));
 
         $transformer = new SectionTransformer($service);
@@ -94,7 +92,10 @@ class SectionTransformerTest extends TestCase
         $transformer->reverseTransform(654321);
     }
 
-    public function transformDataProvider()
+    /**
+     * @return array
+     */
+    public function transformDataProvider(): array
     {
         $transform = new APISection(['id' => 123456]);
 
@@ -104,7 +105,10 @@ class SectionTransformerTest extends TestCase
         ];
     }
 
-    public function transformWithInvalidInputDataProvider()
+    /**
+     * @return array
+     */
+    public function transformWithInvalidInputDataProvider(): array
     {
         return [
             'string' => ['string'],

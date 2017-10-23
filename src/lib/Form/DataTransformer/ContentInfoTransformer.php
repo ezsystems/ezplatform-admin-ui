@@ -33,9 +33,11 @@ class ContentInfoTransformer implements DataTransformerInterface
     /**
      * Transforms a domain specific ContentInfo object into a Content's ID.
      *
-     * @param null|ContentInfo $value
+     * @param ContentInfo|null $value
+     *
      * @return mixed|null
-     * @throws TransformationFailedException if the given value is not a ContentInfo object
+     *
+     * @throws TransformationFailedException
      */
     public function transform($value)
     {
@@ -54,8 +56,10 @@ class ContentInfoTransformer implements DataTransformerInterface
      * Transforms a Content's ID integer into a domain specific ContentInfo object.
      *
      * @param mixed $value
+     *
      * @return ContentInfo|null
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     *
+     * @throws NotFoundException
      * @throws TransformationFailedException if the given value is not an integer
      *                                       or if the value can not be transformed
      */
@@ -72,7 +76,7 @@ class ContentInfoTransformer implements DataTransformerInterface
         try {
             return $this->contentService->loadContentInfo($value);
         } catch (NotFoundException $e) {
-            throw new TransformationFailedException('Transformation failed. ' . $e->getMessage(), $e->getCode(), $e);
+            throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

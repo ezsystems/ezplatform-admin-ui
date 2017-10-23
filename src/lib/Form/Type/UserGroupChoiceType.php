@@ -11,7 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type;
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause as SortClause;
+use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\User\UserGroup;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
@@ -50,7 +50,7 @@ class UserGroupChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): ?string
     {
         return ChoiceType::class;
     }
@@ -60,7 +60,7 @@ class UserGroupChoiceType extends AbstractType
      *
      * @return UserGroup[]
      */
-    protected function getUserGroups()
+    protected function getUserGroups(): array
     {
         return $this->repository->sudo(function (Repository $repository) {
             $query = new LocationQuery();

@@ -16,6 +16,7 @@ class PolicyTransformerTest extends TestCase
 {
     /**
      * @dataProvider transformDataProvider
+     *
      * @param $value
      * @param $expected
      */
@@ -30,6 +31,7 @@ class PolicyTransformerTest extends TestCase
 
     /**
      * @dataProvider transformWithInvalidInputDataProvider
+     *
      * @param $value
      */
     public function testTransformWithInvalidInput($value)
@@ -44,6 +46,7 @@ class PolicyTransformerTest extends TestCase
 
     /**
      * @dataProvider reverseTransformDataProvider
+     *
      * @param $value
      * @param $expected
      */
@@ -57,6 +60,7 @@ class PolicyTransformerTest extends TestCase
 
     /**
      * @dataProvider reverseTransformWithInvalidInputDataProvider
+     *
      * @param $value
      * @param $expectedMessage
      */
@@ -70,7 +74,10 @@ class PolicyTransformerTest extends TestCase
         $transformer->reverseTransform($value);
     }
 
-    public function transformDataProvider()
+    /**
+     * @return array
+     */
+    public function transformDataProvider(): array
     {
         return [
             'policy' => [['id' => 123456, 'module' => 'module_name', 'function' => 'some_function'], '123456:module_name:some_function'],
@@ -78,7 +85,10 @@ class PolicyTransformerTest extends TestCase
         ];
     }
 
-    public function reverseTransformDataProvider()
+    /**
+     * @return array
+     */
+    public function reverseTransformDataProvider(): array
     {
         return [
             'string' => ['123456:module:function', ['id' => 123456, 'module' => 'module', 'function' => 'function']],
@@ -86,7 +96,10 @@ class PolicyTransformerTest extends TestCase
         ];
     }
 
-    public function transformWithInvalidInputDataProvider()
+    /**
+     * @return array
+     */
+    public function transformWithInvalidInputDataProvider(): array
     {
         return [
             'integer' => [123456],
@@ -102,7 +115,10 @@ class PolicyTransformerTest extends TestCase
         ];
     }
 
-    public function reverseTransformWithInvalidInputDataProvider()
+    /**
+     * @return array
+     */
+    public function reverseTransformWithInvalidInputDataProvider(): array
     {
         $stringExpected = 'Expected a string.';
         $atLeast3Parts = 'Policy string must contain at least 3 parts.';

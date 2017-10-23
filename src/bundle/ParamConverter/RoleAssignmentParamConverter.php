@@ -17,9 +17,7 @@ class RoleAssignmentParamConverter implements ParamConverterInterface
 {
     const PRAMETER_ROLE_ASSIGNMENT_ID = 'assignmentId';
 
-    /**
-     * @var RoleService
-     */
+    /** @var RoleService */
     private $roleService;
 
     /**

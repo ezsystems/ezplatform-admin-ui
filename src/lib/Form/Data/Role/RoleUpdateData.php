@@ -23,11 +23,12 @@ class RoleUpdateData
      */
     public function __construct(?Role $role = null)
     {
-        $this->role = $role;
-
-        if ($role instanceof Role) {
-            $this->identifier = $role->identifier;
+        if (null === $role) {
+            return;
         }
+
+        $this->role = $role;
+        $this->identifier = $role->identifier;
     }
 
     /**
@@ -38,6 +39,11 @@ class RoleUpdateData
         return $this->role;
     }
 
+    /**
+     * @param Role $role
+     *
+     * @return RoleUpdateData
+     */
     public function setRole(Role $role): RoleUpdateData
     {
         $this->role = $role;
@@ -53,6 +59,11 @@ class RoleUpdateData
         return $this->identifier;
     }
 
+    /**
+     * @param string $identifier
+     *
+     * @return RoleUpdateData
+     */
     public function setIdentifier(string $identifier): RoleUpdateData
     {
         $this->identifier = $identifier;

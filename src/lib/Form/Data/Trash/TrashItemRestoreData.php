@@ -19,6 +19,7 @@ class TrashItemRestoreData
 {
     /**
      * @Assert\NotBlank()
+     *
      * @var TrashItemData[]
      */
     public $trashItems;

@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use Symfony\Component\Form\DataTransformerInterface;
 use eZ\Publish\API\Repository\Values\Content\Location as APILocation;
@@ -34,7 +35,9 @@ class LocationTransformer implements DataTransformerInterface
      * Transforms a domain specific Location object into a Location's identifier.
      *
      * @param mixed $value
+     *
      * @return mixed|null
+     *
      * @throws TransformationFailedException
      */
     public function transform($value)
@@ -54,9 +57,11 @@ class LocationTransformer implements DataTransformerInterface
      * Transforms a Location's ID into a domain specific Location object.
      *
      * @param mixed $value
+     *
      * @return APILocation|null
+     *
      * @throws TransformationFailedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws UnauthorizedException
      */
     public function reverseTransform($value): ?APILocation
     {
@@ -67,7 +72,7 @@ class LocationTransformer implements DataTransformerInterface
         try {
             return $this->locationService->loadLocation($value);
         } catch (NotFoundException $e) {
-            throw new TransformationFailedException('Transformation failed. ' . $e->getMessage(), $e->getCode(), $e);
+            throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

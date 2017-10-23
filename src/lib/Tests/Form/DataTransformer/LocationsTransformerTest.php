@@ -18,6 +18,7 @@ class LocationsTransformerTest extends TestCase
 {
     /**
      * @dataProvider transformDataProvider
+     *
      * @param $value
      * @param $expected
      */
@@ -49,6 +50,7 @@ class LocationsTransformerTest extends TestCase
 
     /**
      * @dataProvider reverseTransformWithEmptyDataProvider
+     *
      * @param $value
      */
     public function testReverseTransformWithEmpty($value)
@@ -65,6 +67,7 @@ class LocationsTransformerTest extends TestCase
 
     /**
      * @dataProvider reverseTransformWithInvalidInputDataProvider
+     *
      * @param $value
      */
     public function testReverseTransformWithInvalidInput($value)
@@ -78,7 +81,10 @@ class LocationsTransformerTest extends TestCase
         $transformer->reverseTransform($value);
     }
 
-    public function transformDataProvider()
+    /**
+     * @return array
+     */
+    public function transformDataProvider(): array
     {
         $location_1 = new Location(['id' => 123456]);
         $location_2 = new Location(['id' => 456789]);
@@ -86,13 +92,16 @@ class LocationsTransformerTest extends TestCase
         return [
             'with_array_of_ids' => [[$location_1, $location_2], '123456,456789'],
             'with_array_of_id' => [[$location_1], '123456'],
-            'null' => [null, []],
-            'string' => ['string', []],
-            'empty_array' => [[], []],
+            'null' => [null, null],
+            'string' => ['string', null],
+            'empty_array' => [[], null],
         ];
     }
 
-    public function reverseTransformWithInvalidInputDataProvider()
+    /**
+     * @return array
+     */
+    public function reverseTransformWithInvalidInputDataProvider(): array
     {
         return [
             'integer' => [123456],
@@ -103,7 +112,10 @@ class LocationsTransformerTest extends TestCase
         ];
     }
 
-    public function reverseTransformWithEmptyDataProvider()
+    /**
+     * @return array
+     */
+    public function reverseTransformWithEmptyDataProvider(): array
     {
         return [
             'an_empty_string' => [''],

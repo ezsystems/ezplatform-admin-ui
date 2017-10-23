@@ -6,9 +6,6 @@
         convertNoticesToExceptions="true"
         convertWarningsToExceptions="true"
         colors="true">
-    <php>
-        <ini name="error_reporting" value="-1"/>
-    </php>
     <testsuites>
         <testsuite name="EzSystems\EzPlatformAdminUiBundle">
             <directory>src/bundle/Tests/</directory>

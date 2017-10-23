@@ -12,7 +12,6 @@ use EzSystems\EzPlatformAdminUi\Form\DataTransformer\RoleTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use Throwable;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\Core\Repository\Values\User\Role;
 use eZ\Publish\API\Repository\Values\User\Role as APIRole;
@@ -21,6 +20,7 @@ class RoleTransformerTest extends TestCase
 {
     /**
      * @dataProvider transformDataProvider
+     *
      * @param $value
      * @param $expected
      */
@@ -36,6 +36,7 @@ class RoleTransformerTest extends TestCase
 
     /**
      * @dataProvider transformWithInvalidInputDataProvider
+     *
      * @param $value
      */
     public function testTransformWithInvalidInput($value)
@@ -45,6 +46,7 @@ class RoleTransformerTest extends TestCase
 
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('Expected a ' . APIRole::class . ' object.');
+
         $transformer->transform($value);
     }
 
@@ -79,15 +81,11 @@ class RoleTransformerTest extends TestCase
     public function testReverseTransformWithNotFoundException()
     {
         $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Transformation failed. Location not found');
+        $this->expectExceptionMessage('Location not found');
 
         $service = $this->createMock(RoleService::class);
         $service->method('loadRole')
-            ->will($this->throwException(new class() extends NotFoundException {
-                public function __construct($message = '', $code = 0, Throwable $previous = null)
-                {
-                    parent::__construct('Location not found', $code, $previous);
-                }
+            ->will($this->throwException(new class('Location not found') extends NotFoundException {
             }));
 
         $transformer = new RoleTransformer($service);
@@ -95,7 +93,10 @@ class RoleTransformerTest extends TestCase
         $transformer->reverseTransform(654321);
     }
 
-    public function transformDataProvider()
+    /**
+     * @return array
+     */
+    public function transformDataProvider(): array
     {
         $transform = new Role(['id' => 123456]);
 
@@ -105,7 +106,10 @@ class RoleTransformerTest extends TestCase
         ];
     }
 
-    public function transformWithInvalidInputDataProvider()
+    /**
+     * @return array
+     */
+    public function transformWithInvalidInputDataProvider(): array
     {
         return [
             'string' => ['string'],

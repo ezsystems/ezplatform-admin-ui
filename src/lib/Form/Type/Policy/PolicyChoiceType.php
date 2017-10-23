@@ -17,9 +17,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class PolicyChoiceType extends AbstractType
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $policyChoices;
 
     /**
@@ -79,7 +77,7 @@ class PolicyChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): ?string
     {
         return ChoiceType::class;
     }
@@ -89,6 +87,7 @@ class PolicyChoiceType extends AbstractType
      * Key is the humanized "module" name.
      * Value is a hash with "<module>|<function"> as key and humanized "function" name as value.
      *
+     * @param TranslatorInterface $translator
      * @param array $policyMap
      *
      * @return array
@@ -125,8 +124,9 @@ class PolicyChoiceType extends AbstractType
      *
      * @see \Symfony\Component\Form\FormRenderer::humanize()
      *
-     * @param string $text The text to humanize.
-     * @return string The humanized text.
+     * @param string $text the text to humanize
+     *
+     * @return string the humanized text
      */
     private function humanize(string $text): string
     {

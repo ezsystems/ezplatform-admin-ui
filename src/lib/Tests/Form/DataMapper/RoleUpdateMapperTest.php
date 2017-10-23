@@ -16,9 +16,7 @@ use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class RoleUpdateMapperTest extends TestCase
 {
-    /**
-     * @var RoleUpdateMapper
-     */
+    /** @var RoleUpdateMapper */
     private $mapper;
 
     public function setUp()
@@ -33,6 +31,8 @@ class RoleUpdateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
+     *
+     * @param array $properties
      */
     public function testMap(array $properties)
     {
@@ -43,6 +43,8 @@ class RoleUpdateMapperTest extends TestCase
 
     /**
      * @dataProvider dataProvider
+     *
+     * @param array $properties
      */
     public function testReverseMap(array $properties)
     {
@@ -54,29 +56,41 @@ class RoleUpdateMapperTest extends TestCase
     public function testMapWithWrongInstance()
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument \'value\' is invalid: must be instance of ' . RoleUpdateStruct::class);
+        $this->expectExceptionMessage('Argument \'value\' is invalid: must be an instance of ' . RoleUpdateStruct::class);
+
         $this->mapper->map(new LocationCreateStruct());
     }
 
     public function testReverseMapWithWrongInstance()
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument \'data\' is invalid: must be instance of ' . RoleUpdateData::class);
+        $this->expectExceptionMessage('Argument \'data\' is invalid: must be an instance of ' . RoleUpdateData::class);
+
         $this->mapper->reverseMap(new LanguageCreateData());
     }
 
-    public function dataProvider()
+    public function dataProvider(): array
     {
         return [
             'simple' => [['identifier' => 'hash']],
         ];
     }
 
+    /**
+     * @param array $properties
+     *
+     * @return RoleUpdateStruct
+     */
     private function createStruct(array $properties): RoleUpdateStruct
     {
         return new RoleUpdateStruct($properties);
     }
 
+    /**
+     * @param array $properties
+     *
+     * @return RoleUpdateData
+     */
     private function createData(array $properties): RoleUpdateData
     {
         return (new RoleUpdateData())

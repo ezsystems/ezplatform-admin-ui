@@ -25,7 +25,7 @@ class ContentTypeGroupData
         $this->identifier = $identifier;
     }
 
-    public function getIdentifier()
+    public function getIdentifier(): string
     {
         return $this->identifier;
     }

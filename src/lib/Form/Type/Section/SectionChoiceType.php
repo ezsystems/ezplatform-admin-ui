@@ -15,9 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SectionChoiceType extends AbstractType
 {
-    /**
-     * @var SectionService
-     */
+    /** @var SectionService */
     private $sectionService;
 
     /**
@@ -45,7 +43,7 @@ class SectionChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): ?string
     {
         return ChoiceType::class;
     }
