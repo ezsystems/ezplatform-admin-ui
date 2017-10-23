@@ -110,7 +110,13 @@ class ContentTypeController extends Controller
                 return $response;
             }
 
-            $this->flashSuccess('content_type.updated', [], 'content_type');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Content type '%name%' updated.") */'content_type.update.success',
+                    ['%name%' => $contentType->getName()],
+                    'content_type'
+                )
+            );
 
             $routeName = 'publishContentType' === $form->getClickedButton()->getName()
                 ? 'ezplatform.content_type.view'
@@ -136,9 +142,15 @@ class ContentTypeController extends Controller
         if ($form->isValid()) {
             try {
                 $this->contentTypeService->deleteContentType($contentType);
-                $this->flashSuccess('content_type.deleted', [], 'content_type');
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Content type '%name%' deleted.") */'content_type.delete.success',
+                        ['%name%' => $contentType->getName()],
+                        'content_type'
+                    )
+                );
             } catch (InvalidArgumentException $e) {
-                $this->flashDanger($e->getMessage());
+                $this->notificationHandler->error($e->getMessage());
             }
         }
 

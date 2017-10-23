@@ -22,7 +22,7 @@ class ContentTypeGroupType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('identifier', TextType::class, [
-            'label' => 'content_type.group.identifier',
+            'label' => /** @Desc("Identifier") */'content_type.group.identifier',
         ]);
     }
 

@@ -72,7 +72,14 @@ class ContentTypeGroupController extends Controller
 
         if ($form->isValid()) {
             $group = $this->contentTypeGroupService->createContentTypeGroup($form->getData());
-            $this->flashSuccess('content_type_group.created', [], 'content_type');
+
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                /** @Desc("Content type group '%name%' created.") */ 'content_type_group.create.success',
+                    ['%name%' => $group->getName()],
+                    'content_type'
+                )
+            );
 
             return $this->redirectToRoute('ezplatform.content_type_group.view', [
                 'contentTypeGroupId' => $group->id,
@@ -101,7 +108,14 @@ class ContentTypeGroupController extends Controller
 
         if ($form->isValid()) {
             $this->contentTypeGroupService->updateContentTypeGroup($group, $form->getData());
-            $this->flashSuccess('content_type_group.updated', [], 'content_type');
+
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                /** @Desc("Content type group '%name%' updated.") */ 'content_type_group.update.success',
+                    ['%name%' => $group->getName()],
+                    'content_type'
+                )
+            );
 
             return $this->redirectToRoute('ezplatform.content_type_group.view', [
                 'contentTypeGroupId' => $group->id,
@@ -121,9 +135,16 @@ class ContentTypeGroupController extends Controller
         if ($form->isValid()) {
             try {
                 $this->contentTypeGroupService->deleteContentTypeGroup($group);
-                $this->flashSuccess('content_type_group.deleted', [], 'content_type');
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                    /** @Desc("Content type group '%name%' deleted.") */ 'content_type_group.delete.success',
+                        ['%name%' => $group->getName()],
+                        'content_type'
+                    )
+                );
             } catch (InvalidArgumentException $e) {
-                $this->flashDanger($e->getMessage());
+                $this->notificationHandler->error($e->getMessage());
             }
         }
 

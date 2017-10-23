@@ -4,26 +4,16 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        {
-            value: 'breadcrumb.admin'|trans([], 'messages') ,
-        },
-        {
-            url: path('ezplatform.content_type_group.list'),
-            value: 'content_type_group.breadcrumb.list'|trans
-        },
-        {
-            url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }),
-            value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })
-        },
-        {
-            value: 'content_type.breadcrumb.view'|trans({ '%identifier%': content_type.name })
-        }
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') , },
+        { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
+        { url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }), value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })|desc('%identifier%') },
+        { value: 'content_type.breadcrumb.view'|trans({ '%identifier%': content_type.name })|desc('%identifier%') }
     ]} %}
 {% endblock %}
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'content_type.view.view.title'|trans({ '%name%': content_type.name }),
+        title: 'content_type.view.view.title'|trans({ '%name%': content_type.name })|desc('"%name%" Content Type'),
         iconName: 'content-types'
     } %}
 {% endblock %}
@@ -69,7 +59,7 @@
                 <td>{{ 'yes_no'|transchoice(content_type.isContainer) }}</td>
             </tr>
             <tr>
-                <th>{{ "content_type.default_children_sorting"|trans|desc("Default property for sorting chilren") }}</th>
+                <th>{{ "content_type.default_children_sorting"|trans|desc("Default property for sorting children") }}</th>
                 <td>
                     {{ ("content_type.sort_field." ~ content_type.defaultSortField)|trans(domain="ezrepoforms_content_type") }} / {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="ezrepoforms_content_type") }}
                 </td>

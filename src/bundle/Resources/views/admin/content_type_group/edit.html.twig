@@ -4,15 +4,15 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.admin'|trans([], 'messages') },
-        { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans },
-        { value: 'content_type_group.breadcrumb.edit'|trans({ '%identifier%': content_type_group.identifier }) }
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
+        { value: 'content_type_group.breadcrumb.edit'|trans({ '%identifier%': content_type_group.identifier })|desc('Editing Content Type Group "%identifier%"') }
     ]} %}
 {% endblock %}
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'content_type_group.view.edit.title'|trans({'%identifier%': content_type_group.identifier}),
+        title: 'content_type_group.view.edit.title'|trans({'%identifier%': content_type_group.identifier})|desc('Editing Content Type Group "%identifier%"'),
         iconName: 'content-types'
     } %}
 {% endblock %}
@@ -31,7 +31,7 @@
     <section class="container mt-4 mb-4">
         <div class="btn-toolbar justify-content-end" role="toolbar" >
             <button class="btn btn-primary">
-                {{ 'content_type_group.view.edit.action.save'|trans }}
+                {{ 'content_type_group.view.edit.action.save'|trans|desc('Update') }}
             </button>
         </div>
     </section>

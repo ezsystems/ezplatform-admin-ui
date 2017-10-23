@@ -2,20 +2,20 @@
 
 <section class="container mt-4">
     <div class="ez-table-header">
-        <h4>{{ 'content_type_group.view.list.title'|trans }}</h4>
+        <h4>{{ 'content_type.view.list.title'|trans|desc('Content Types') }}</h4>
 
         <a href="{{ path('ezplatform.content_type.add', {contentTypeGroupId: content_type_group.id}) }}" class="btn btn-primary">
-            {{ 'content_type.view.list.action.add'|trans }}
+            {{ 'content_type.view.list.action.add'|trans|desc('Create a Content Type') }}
         </a>
     </div>
 
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>{{ 'content_type.view.list.column.name'|trans }}</th>
-                <th>{{ 'content_type.view.list.column.identifier'|trans }}</th>
-                <th>{{ 'content_type.view.list.column.id'|trans }}</th>
-                <th>{{ 'content_type.view.list.column.modification_date'|trans }}</th>
+                <th>{{ 'content_type.view.list.column.name'|trans|desc('Name') }}</th>
+                <th>{{ 'content_type.view.list.column.identifier'|trans|desc('Identifier') }}</th>
+                <th>{{ 'content_type.view.list.column.id'|trans|desc('ID') }}</th>
+                <th>{{ 'content_type.view.list.column.modification_date'|trans|desc('Modification date') }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -49,11 +49,11 @@
                         <input name="form[_token]" type="hidden" value="{{ csrf_token('form') }}" />
 
                         <a href="{{ edit_url }}" class="btn btn-info">
-                            {{ 'content_type.view.list.action.edit'|trans }}
+                            {{ 'content_type.view.list.action.edit'|trans|desc('Edit') }}
                         </a>
 
                         <button class="btn btn-danger">
-                            {{ 'content_type.view.list.action.delete'|trans }}
+                            {{ 'content_type.view.list.action.delete'|trans|desc('Delete') }}
                         </button>
                     </form>
                 </td>
