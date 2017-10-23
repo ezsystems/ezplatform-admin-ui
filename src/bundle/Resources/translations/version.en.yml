@@ -1,4 +1,0 @@
-version.remove.delete: Delete
-version.remove.success: Selected versions of content "%contentName%" removed.
-version.remove.empty_selection: Select at least one version to remove.
-version.remove.general_error: General error.

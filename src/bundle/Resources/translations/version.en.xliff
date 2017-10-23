@@ -6,11 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="977cb55c24b1708d46ccbd753c2cea745976ae21" resname="fieldview.field.empty">
-        <source>This field is empty</source>
-        <target state="new">This field is empty</target>
-        <note>key: fieldview.field.empty</note>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/content.html.twig</jms:reference-file>
+      <trans-unit id="885ec7aab950e05f729031321cddbb6d7f9c3246" resname="version.delete.success">
+        <source>Versions removed from `%name%` content.</source>
+        <target state="new">Versions removed from `%name%` content.</target>
+        <note>key: version.delete.success</note>
+        <jms:reference-file line="88">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/VersionController.php</jms:reference-file>
       </trans-unit>
     </body>
   </file>

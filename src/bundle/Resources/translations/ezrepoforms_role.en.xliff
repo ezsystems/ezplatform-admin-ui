@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-10-24T18:18:11Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="34ba9078fe178bd49df6ada9d8357455ee8ff7b3" resname="policy_create.save">
+        <source>Update</source>
+        <target state="new">Update</target>
+        <note>key: policy_create.save</note>
+        <jms:reference-file line="55">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyUpdateType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="05cc1fd4658faa760de6e98cb71e1054157e63a0" resname="policy_delete.delete">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note>key: policy_delete.delete</note>
+        <jms:reference-file line="34">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyDeleteType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="deab5c91a76488732d0405e72c36702ed2aea3d6" resname="role.policy.all_functions">
+        <source>All functions</source>
+        <target state="new">All functions</target>
+        <note>key: role.policy.all_functions</note>
+        <jms:reference-file line="99">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyChoiceType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d29c07272fff793138cbb6f7dbb41b08a16ff815" resname="role.policy.all_modules">
+        <source>All modules</source>
+        <target state="new">All modules</target>
+        <note>key: role.policy.all_modules</note>
+        <jms:reference-file line="98">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyChoiceType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d4690e1d0c7d2cf0468ab5aa04caa891e1b5efbd" resname="role.policy.all_modules_all_functions">
+        <source>All modules / All functions</source>
+        <target state="new">All modules / All functions</target>
+        <note>key: role.policy.all_modules_all_functions</note>
+        <jms:reference-file line="100">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyChoiceType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2a8bdc606cd0c96a53e2f661f0585029840af4b9" resname="role.policy.available_limitations">
+        <source>role.policy.available_limitations</source>
+        <target state="new">role.policy.available_limitations</target>
+        <note>key: role.policy.available_limitations</note>
+        <jms:reference-file line="69">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyUpdateType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d3c70d265ab037db5ade02a8b738b5981353c7ac" resname="role.policy.type">
+        <source>Type</source>
+        <target state="new">Type</target>
+        <note>key: role.policy.type</note>
+        <jms:reference-file line="47">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyUpdateType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ca6964415cb051927cf1d4092e4a6f49de0748c0" resname="role.policy.type.choose">
+        <source>Choose a type</source>
+        <target state="new">Choose a type</target>
+        <note>key: role.policy.type.choose</note>
+        <jms:reference-file line="48">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyUpdateType.php</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

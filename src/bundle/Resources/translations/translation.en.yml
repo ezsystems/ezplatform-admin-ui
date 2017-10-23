@@ -1,4 +1,0 @@
-translation.remove.delete: Delete
-translation.remove.empty_selection: Select at least one translation to remove.
-translation.remove.success: Translations %languageCodes% removed from content %contentName%.
-translation.remove.general_error: General error.
