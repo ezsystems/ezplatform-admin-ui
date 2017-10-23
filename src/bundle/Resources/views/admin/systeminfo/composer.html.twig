@@ -1,18 +1,20 @@
 {% trans_default_domain "systeminfo" %}
 
-<h1>{{ 'composer'|trans }}</h1>
+<!-- Tab name: {{ 'tab.name.composer'|trans|desc('Composer') }} -->
+
+<h1>{{ 'composer'|trans|desc('Composer') }}</h1>
 <dl>
-    <dt>{{ 'composer.minimum_stability'|trans }}</dt>
+    <dt>{{ 'composer.minimum_stability'|trans|desc('Minimum stability') }}</dt>
     <dd>{{ info.minimumStability }}</dd>
 
     {% if info.packages is empty %}
-        <dt>{{ 'packages'|trans }}</dt>
-        <dd>{{ 'packages.empty'|trans }}</dd>
+        <dt>{{ 'packages'|trans|desc('Packages') }}</dt>
+        <dd>{{ 'packages.empty'|trans|desc('No packages installed.') }}</dd>
     {% endif %}
 </dl>
 
 {% if info.packages is not empty %}
-    <h2>{{ 'packages'|trans }}</h2>
+    <h2>{{ 'packages'|trans|desc('Packages') }}</h2>
     <dl>
         {% for package in info.packages %}
             {% if package.homepage is empty %}

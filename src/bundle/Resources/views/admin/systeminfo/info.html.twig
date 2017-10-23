@@ -4,7 +4,7 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.admin'|trans([], 'messages') },
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { value: 'systeminfo'|trans|desc('System Info') }
     ]} %}
 {% endblock %}
@@ -25,5 +25,3 @@
         </div>
     </section>
 {% endblock %}
-
-{% block title %}{{ 'systeminfo.title'|trans }}{% endblock %}

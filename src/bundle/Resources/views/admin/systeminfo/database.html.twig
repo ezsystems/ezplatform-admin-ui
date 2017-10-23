@@ -1,13 +1,15 @@
 {% trans_default_domain "systeminfo" %}
 
-<h1>{{ 'database'|trans }}</h1>
+<!-- Tab name: {{ 'tab.name.database'|trans|desc('Database') }} -->
+
+<h1>{{ 'database'|trans|desc('Database') }}</h1>
 <dl>
-    <dt>{{ 'database.type'|trans }}</dt>
+    <dt>{{ 'database.type'|trans|desc('Type') }}</dt>
     <dd>{{ info.type }}</dd>
-    <dt>{{ 'database.name'|trans }}</dt>
+    <dt>{{ 'database.name'|trans|desc('Name') }}</dt>
     <dd>{{ info.name }}</dd>
-    <dt>{{ 'database.host'|trans }}</dt>
+    <dt>{{ 'database.host'|trans|desc('Host') }}</dt>
     <dd>{{ info.host }}</dd>
-    <dt>{{ 'database.username'|trans }}</dt>
+    <dt>{{ 'database.username'|trans|desc('Username') }}</dt>
     <dd>{{ info.username }}</dd>
 </dl>
