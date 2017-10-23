@@ -96,13 +96,19 @@ class PolicyController extends Controller
             $roleDraft = $this->roleService->addPolicyByRoleDraft($roleDraft, $policyCreateStruct);
             $this->roleService->publishRoleDraft($roleDraft);
 
-            $this->addFlash('sucess', 'policy.added');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("New policies in role '%role%' created.") */'policy.add.success',
+                    ['%role%' => $role->identifier],
+                    'role'
+                )
+            );
 
             return $this->redirect($this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]));
         }
 
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->render('@EzPlatformAdminUi/admin/policy/add.html.twig', [
@@ -130,17 +136,24 @@ class PolicyController extends Controller
                 }
             }
 
-            $this->addFlash('success', 'policy.updated');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Policies in role '%role%' updated.") */'policy.update.success',
+                    ['%role%' => $role->identifier],
+                    'role'
+                )
+            );
 
             return $this->redirect($this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]));
         }
 
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->render('@EzPlatformAdminUi/admin/policy/edit.html.twig', [
             'role' => $role,
+            'policy' => $policy,
             'form' => $form->createView(),
         ]);
     }
@@ -163,11 +176,17 @@ class PolicyController extends Controller
                 }
             }
 
-            $this->addFlash('success', 'policy.deleted');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Policies in role '%role%' removed.") */'policy.delete.success',
+                    ['%role%' => $role->identifier],
+                    'role'
+                )
+            );
         }
 
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirect($this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]));

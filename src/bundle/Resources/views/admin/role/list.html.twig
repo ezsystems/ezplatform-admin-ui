@@ -4,14 +4,14 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.admin'|trans([], 'messages') },
-        { value: 'role.breadcrumb.list'|trans }
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { value: 'role.breadcrumb.list'|trans|desc('Roles') }
     ]} %}
 {% endblock %}
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'role.breadcrumb.list'|trans,
+        title: 'role.breadcrumb.list'|trans|desc('Roles'),
         iconName: 'roles'
     } %}
 {% endblock %}
@@ -19,17 +19,17 @@
 {% block content %}
     <section class="container mt-5">
         <div class="ez-table-header">
-            <h5>{{ 'role.view.list.title'|trans }}</h5>
+            <h5>{{ 'role.view.list.title'|trans|desc('Roles') }}</h5>
             <div>
-                <a href="{{ path('ezplatform.role.create') }}" class="btn btn-primary">{{ 'role.view.list.action.add'|trans }}</a>
+                <a href="{{ path('ezplatform.role.create') }}" class="btn btn-primary">{{ 'role.view.list.action.add'|trans|desc('Create a Role') }}</a>
             </div>
         </div>
 
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>{{ 'role.view.list.column.identifier'|trans }}</th>
-                    <th>{{ 'role.view.list.column.id'|trans }}</th>
+                    <th>{{ 'role.view.list.column.identifier'|trans|desc('Identifier') }}</th>
+                    <th>{{ 'role.view.list.column.id'|trans|desc('ID') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -44,10 +44,10 @@
                     <td>{{ role.id }}</td>
                     <td class="text-right">
                         <a href="{{ path('ezplatform.role.update', { roleId: role.id }) }}" class="btn btn-secondary">
-                            {{ 'role.view.list.action.edit'|trans }}
+                            {{ 'role.view.list.action.edit'|trans|desc('Edit') }}
                         </a>
                         <a href="{{ path('ezplatform.role_assignment.create', { roleId: role.id }) }}" class="btn btn-secondary">
-                            {{ 'role.view.list.action.assign_to_users_or_groups'|trans }}
+                            {{ 'role.view.list.action.assign_to_users_or_groups'|trans|desc('Assign to Users/Groups') }}
                         </a>
                     </td>
                 </tr>

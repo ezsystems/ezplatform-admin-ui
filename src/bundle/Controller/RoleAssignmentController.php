@@ -131,13 +131,19 @@ class RoleAssignmentController extends Controller
                 }
             }
 
-            $this->addFlash('success', 'role_assignment.created');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Assignments on role '%role%' created.") */ 'role.assignment_create.success',
+                    ['%role%' => $role->identifier],
+                    'role'
+                )
+            );
 
             return $this->redirect($this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]));
         }
 
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->render('@EzPlatformAdminUi/admin/role_assignment/add.html.twig', [
@@ -154,11 +160,17 @@ class RoleAssignmentController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->roleService->removeRoleAssignment($roleAssignment);
 
-            $this->addflash('success', 'role_assignment.deleted');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Assignment on role '%role%' removed.") */ 'role.assignment_delete.success',
+                    ['%role%' => $role->identifier],
+                    'role'
+                )
+            );
         }
 
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirect($this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]));

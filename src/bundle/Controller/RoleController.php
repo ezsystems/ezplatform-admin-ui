@@ -95,13 +95,19 @@ class RoleController extends Controller
             $roleDraft = $this->roleService->createRole($roleCreateStruct);
             $this->roleService->publishRoleDraft($roleDraft);
 
-            $this->addFlash('success', 'role.created');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Role '%role%' created.") */ 'role.create.success',
+                    ['%role%' => $roleDraft->identifier],
+                    'role'
+                )
+            );
 
             return $this->redirect($this->generateUrl('ezplatform.role.view', ['roleId' => $roleDraft->id]));
         }
 
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->render('@EzPlatformAdminUi/admin/role/add.html.twig', [
@@ -123,7 +129,13 @@ class RoleController extends Controller
             $this->roleService->updateRoleDraft($roleDraft, $roleUpdateStruct);
             $this->roleService->publishRoleDraft($roleDraft);
 
-            $this->flashSuccess('role.updated', [], 'role');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Role '%role%' updated.") */ 'role.update.success',
+                    ['%role%' => $role->identifier],
+                    'role'
+                )
+            );
 
             return $this->redirect($this->generateUrl('ezplatform.role.view', [
                 'roleId' => $role->id,
@@ -131,7 +143,7 @@ class RoleController extends Controller
         }
 
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->render('@EzPlatformAdminUi/admin/role/edit.html.twig', [
@@ -148,13 +160,19 @@ class RoleController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->roleService->deleteRole($role);
 
-            $this->addFlash('success', 'role.deleted');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Role '%role%' removed.") */ 'role.delete.success',
+                    ['%role%' => $role->identifier],
+                    'role'
+                )
+            );
 
             return $this->redirect($this->generateUrl('ezplatform.role.list'));
         }
 
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirect($this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]));

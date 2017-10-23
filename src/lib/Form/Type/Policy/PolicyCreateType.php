@@ -23,7 +23,7 @@ class PolicyCreateType extends AbstractType
                 'policy',
                 PolicyChoiceType::class, [
                     'label' => /** @Desc("Type") */ 'role.policy.type',
-                    'placeholder' => 'role.policy.type.choose',
+                    'placeholder' => /** @Desc("Choose a type") */ 'role.policy.type.choose',
                 ]
             )
             ->add(

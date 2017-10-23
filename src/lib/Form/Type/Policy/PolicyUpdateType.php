@@ -44,14 +44,14 @@ class PolicyUpdateType extends AbstractType
                 'policy',
                 PolicyChoiceType::class, [
                     'label' => /** @Desc("Type") */ 'role.policy.type',
-                    'placeholder' => 'role.policy.type.choose',
+                    'placeholder' => /** @Desc("Choose a type") */ 'role.policy.type.choose',
                     'disabled' => true,
                 ]
             )
             ->add(
                 'save',
                 SubmitType::class,
-                ['label' => /** @Desc("Create") */ 'policy_create.save']
+                ['label' => /** @Desc("Update") */ 'policy_create.save']
             );
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
