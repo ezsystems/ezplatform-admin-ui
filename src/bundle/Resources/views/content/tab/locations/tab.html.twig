@@ -50,7 +50,10 @@
 {% include 'EzPlatformAdminUiBundle:content/tab/locations:panel_swap.html.twig' with {'form': form_content_location_swap} %}
 
 {% macro table_header_tools(form_add, form_remove) %}
-    <button class="btn btn-secondary btn--udw-add">{{ form_add.add.vars.label|trans({}, form_add.add.vars.translation_domain) }}</button>
-    <button class="btn btn-danger btn--trigger"
-            data-click="#{{ form_remove.remove.vars.id }}">{{ form_remove.remove.vars.label|trans({}, form_remove.remove.vars.translation_domain) }}</button>
+    <button class="btn btn-secondary btn--udw-add">
+        {{ form_add.add.vars.label|trans({}, form_add.add.vars.translation_domain) }}
+    </button>
+    <button class="btn btn-danger btn--trigger" data-click="#{{ form_remove.remove.vars.id }}">
+        {{ form_remove.remove.vars.label|trans({}, form_remove.remove.vars.translation_domain) }}
+    </button>
 {% endmacro %}
