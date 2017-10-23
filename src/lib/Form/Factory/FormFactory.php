@@ -68,26 +68,27 @@ class FormFactory
     }
 
     /**
-     * @param string|null $name
      * @param TranslationRemoveData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function removeTranslation(
-        ?string $name = null,
         TranslationRemoveData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new TranslationRemoveData();
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name, TranslationRemoveType::class, $uiFormData,
-            $this->urlGenerator->generate('ezplatform.translation.remove'), []
+        /** @var TranslationRemoveData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+
+        return $this->formFactory->createNamed($name, TranslationRemoveType::class, $data);
     }
 
     /**

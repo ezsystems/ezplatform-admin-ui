@@ -112,6 +112,6 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
             ['_fragment' => 'ez-tab-location-view-translations']
         );
 
-        return $this->formFactory->removeTranslation(null, $translationRemoveData, $locationViewUrl, $locationViewUrl);
+        return $this->formFactory->removeTranslation($translationRemoveData, $locationViewUrl, $locationViewUrl);
     }
 }
