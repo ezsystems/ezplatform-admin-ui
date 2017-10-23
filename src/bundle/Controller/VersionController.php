@@ -74,9 +74,13 @@ class VersionController extends Controller
                 $this->contentService->deleteVersion($versionInfo);
             }
 
-            $this->flashSuccess('version.remove.success', [
-                '%contentName%' => $contentInfo->name,
-            ], 'version');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Versions removed from `%name%` content.") */ 'version.delete.success',
+                    ['%name%' => $contentInfo->name],
+                    'version'
+                )
+            );
 
             return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
@@ -85,7 +89,7 @@ class VersionController extends Controller
          * @todo We should implement a service for converting form errors into notifications
          */
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirect($uiFormData->getOnFailureRedirectionUrl());

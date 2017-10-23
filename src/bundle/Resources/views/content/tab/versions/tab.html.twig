@@ -45,6 +45,7 @@
 {% endif %}
 
 {% macro table_header_tools(form) %}
-    <button class="btn btn-danger btn--trigger"
-            data-click="#{{ form.remove.vars.id }}">{{ form.remove.vars.label|trans({}, form.remove.vars.translation_domain) }}</button>
+    <button class="btn btn-danger btn--trigger" data-click="#{{ form.remove.vars.id }}">
+        {{ form.remove.vars.label|trans({}, form.remove.vars.translation_domain) }}
+    </button>
 {% endmacro %}
