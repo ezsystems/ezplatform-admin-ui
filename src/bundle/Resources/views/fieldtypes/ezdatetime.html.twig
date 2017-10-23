@@ -1,0 +1,6 @@
+{% block ezplatform_fieldtype_ezdatetime_widget %}
+    {% for child in form %}
+        {% set classes = 'ez-data-source__input ez-data-source__input--' ~ child.vars.name %}
+        {{ form_widget(child, {'attr': {'class': classes}}) }}
+    {% endfor %}
+{% endblock %}

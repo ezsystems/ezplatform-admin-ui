@@ -4,6 +4,7 @@ imports:
     - { resource: services/tabs.yml }
     - { resource: services/menu.yml }
     - { resource: services/application_config.yml }
+    - { resource: services/content_edit.yml }
 
 parameters:
 

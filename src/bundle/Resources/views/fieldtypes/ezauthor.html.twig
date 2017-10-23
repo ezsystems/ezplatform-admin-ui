@@ -1,0 +1,32 @@
+{% block ezplatform_fieldtype_ezauthor_row %}
+    {% if form.authors.vars.prototype is defined %}
+        {%- set wrapper_attr = attr|merge({'data-template': form_row(form.authors.vars.prototype) }) -%}
+    {% endif %}
+    {{ block('form_row_fieldtype') }}
+{% endblock %}
+
+{% block ezplatform_fieldtype_ezauthor_widget %}
+    {% for child in form.authors %}
+        {{ form_row(child) }}
+    {% endfor %}
+{% endblock %}
+
+{% block ezplatform_fieldtype_ezauthor_authors_entry_row -%}
+    <div class="ez-data-source__author form-row">
+        {{- form_widget(form.id) -}}
+        {{- form_row(form.name, {'wrapper_attr': {'class': 'col'}}) -}}
+        {{- form_row(form.email, {'wrapper_attr': {'class': 'col'}}) -}}
+        <div class="col ez-data-source__actions">
+            <button type="button" class="ez-data-source__action ez-btn btn btn-secondary btn-icon ez-btn--secondary ez-btn--remove-author" disabled>
+                <svg class="ez-icon ez-icon-trash">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
+                </svg>
+            </button>
+            <button type="button" class="ez-data-source__action ez-btn btn btn-secondary btn-icon ez-btn--secondary ez-btn--add-author">
+                <svg class="ez-icon ez-icon-create">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#create"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+{%- endblock %}

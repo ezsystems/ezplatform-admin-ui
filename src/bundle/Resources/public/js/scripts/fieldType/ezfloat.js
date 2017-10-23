@@ -1,5 +1,5 @@
 (function (global) {
-    const SELECTOR_FIELD = '.ez-field-edit-ezfloat';
+    const SELECTOR_FIELD = '.ez-field-edit--ezfloat';
 
     class EzFloatValidator extends global.eZ.BaseFieldValidator {
         /**
@@ -18,7 +18,7 @@
             const isLess = value < parseFloat(event.target.getAttribute('min'), 10);
             const isGreater = value > parseFloat(event.target.getAttribute('max'), 10);
             const isError = (isEmpty && isRequired) || !isFloat || isLess || isGreater;
-            const label = event.target.closest(SELECTOR_FIELD).querySelector('.form-control-label').innerHTML;
+            const label = event.target.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
             const result = {isError};
 
             if (isEmpty) {
@@ -44,11 +44,11 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-field-edit-ezfloat input',
+                selector: '.ez-field-edit--ezfloat input',
                 eventName: 'blur',
                 callback: 'validateFloat',
                 invalidStateSelectors: [SELECTOR_FIELD],
-                errorNodeSelectors: ['.ez-field-edit-text-zone'],
+                errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
             },
         ],
     });

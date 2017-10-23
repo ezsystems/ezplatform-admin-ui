@@ -1,0 +1,14 @@
+{% block ezplatform_fieldtype_ezboolean_label %}
+    {{ block('form_label') }}
+{% endblock %}
+
+{%- block ezplatform_fieldtype_ezboolean_widget -%}
+    <label class="ez-data-source__label">
+        <span class="ez-data-source__indicator"></span>
+        <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    </label>
+{%- endblock -%}
+
+{% block ezplatform_fieldtype_ezboolean_row %}
+    {{ block('form_row_fieldtype') }}
+{% endblock %}

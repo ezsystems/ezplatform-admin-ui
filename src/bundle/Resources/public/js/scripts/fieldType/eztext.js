@@ -1,5 +1,5 @@
 (function (global) {
-    const SELECTOR_FIELD = '.ez-field-edit-eztext';
+    const SELECTOR_FIELD = '.ez-field-edit--eztext';
 
     class EzTextValidator extends global.eZ.BaseFieldValidator {
         /**
@@ -12,7 +12,7 @@
          */
         validateInput(event) {
             const isError = event.target.required && !event.target.value.trim();
-            const label = event.target.closest(SELECTOR_FIELD).querySelector('.form-control-label').innerHTML;
+            const label = event.target.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
             const errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
 
             return {
@@ -27,11 +27,11 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-field-edit-eztext textarea',
+                selector: '.ez-field-edit--eztext textarea',
                 eventName: 'blur',
                 callback: 'validateInput',
-                invalidStateSelectors: ['.ez-field-edit-eztext'],
-                errorNodeSelectors: ['.ez-field-edit-text-zone'],
+                invalidStateSelectors: [SELECTOR_FIELD],
+                errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
             },
         ],
     });

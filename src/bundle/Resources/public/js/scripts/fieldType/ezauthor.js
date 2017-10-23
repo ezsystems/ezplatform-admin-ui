@@ -1,10 +1,10 @@
 (function (global, doc) {
-    const SELECTOR_REMOVE_AUTHOR = '.ez-js-remove-author';
-    const SELECTOR_AUTHOR_ROW = '.ez-author-row';
-    const SELECTOR_FIELD = '.ez-field-edit-ezauthor';
-    const SELECTOR_FORM_LABEL = '.form-control-label';
-    const SELECTOR_FIELD_EMAIL = '.ez-sub-field-email';
-    const SELECTOR_FIELD_NAME = '.ez-sub-field-name';
+    const SELECTOR_REMOVE_AUTHOR = '.ez-btn--remove-author';
+    const SELECTOR_AUTHOR = '.ez-data-source__author';
+    const SELECTOR_FIELD = '.ez-field-edit--ezauthor';
+    const SELECTOR_LABEL = '.ez-data-source__label';
+    const SELECTOR_FIELD_EMAIL = '.ez-data-source__field--email';
+    const SELECTOR_FIELD_NAME = '.ez-data-source__field--name';
 
     class EzAuthorValidator extends global.eZ.BaseFieldValidator {
         /**
@@ -18,7 +18,7 @@
         validateName(event) {
             const isError = !event.target.value.trim() && event.target.required;
             const fieldNode = event.target.closest(SELECTOR_FIELD_NAME);
-            const errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', fieldNode.querySelector(SELECTOR_FORM_LABEL).innerHTML);
+            const errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', fieldNode.querySelector(SELECTOR_LABEL).innerHTML);
 
             return {
                 isError: isError,
@@ -42,7 +42,7 @@
             const result = {isError};
 
             if (isEmpty) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', fieldNode.querySelector(SELECTOR_FORM_LABEL).innerHTML);
+                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', fieldNode.querySelector(SELECTOR_LABEL).innerHTML);
             } else if (!isValid) {
                 result.errorMessage = global.eZ.errors.invalidEmail;
             }
@@ -60,7 +60,7 @@
          * @memberof EzAuthorValidator
          */
         setIndex(parentNode, template) {
-            return template.replace(/__index__/g, parentNode.querySelectorAll(SELECTOR_AUTHOR_ROW).length)
+            return template.replace(/__index__/g, parentNode.querySelectorAll(SELECTOR_AUTHOR).length)
         }
 
         /**
@@ -71,7 +71,7 @@
          * @memberof EzAuthorValidator
          */
         updateDisabledState(parentNode) {
-            const isEnabled = parentNode.querySelectorAll(SELECTOR_AUTHOR_ROW).length > 1;
+            const isEnabled = parentNode.querySelectorAll(SELECTOR_AUTHOR).length > 1;
 
             [...parentNode.querySelectorAll(SELECTOR_REMOVE_AUTHOR)].forEach(btn => {
                 if (isEnabled) {
@@ -92,7 +92,7 @@
         removeItem(event) {
             const authorNode = event.target.closest(SELECTOR_FIELD);
 
-            event.target.closest(SELECTOR_AUTHOR_ROW).remove();
+            event.target.closest(SELECTOR_AUTHOR).remove();
 
             this.updateDisabledState(authorNode);
         }
@@ -106,8 +106,8 @@
          */
         addItem(event) {
             const authorNode = event.target.closest(SELECTOR_FIELD);
-            const template = authorNode.dataset.prototype;
-            const node = event.target.closest('.ez-field-edit-ui');
+            const template = authorNode.dataset.template;
+            const node = event.target.closest('.ez-field-edit__data');
 
             node.insertAdjacentHTML('beforeend', this.setIndex(authorNode, template));
 
@@ -126,7 +126,7 @@
          * @memberof BaseFieldValidator
          */
         findValidationStateNodes(fieldNode, input, selectors) {
-            const authorRow = input.closest(SELECTOR_AUTHOR_ROW);
+            const authorRow = input.closest(SELECTOR_AUTHOR);
             const nodes = [
                 fieldNode,
                 authorRow
@@ -146,7 +146,7 @@
          * @memberof BaseFieldValidator
          */
         findErrorContainers(fieldNode, input, selectors) {
-            const authorRow = input.closest(SELECTOR_AUTHOR_ROW);
+            const authorRow = input.closest(SELECTOR_AUTHOR);
             const nodes = [
                 fieldNode,
                 authorRow
@@ -166,7 +166,7 @@
          * @memberof BaseFieldValidator
          */
         findExistingErrorNodes(fieldNode, input, selectors) {
-            return selectors.reduce((total, selector) => total.concat([...input.closest(SELECTOR_AUTHOR_ROW).querySelectorAll(selector)]), []);
+            return selectors.reduce((total, selector) => total.concat([...input.closest(SELECTOR_AUTHOR).querySelectorAll(selector)]), []);
         }
     };
 
@@ -175,18 +175,18 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-author-row .ez-sub-field-name input',
+                selector: '.ez-data-source__author .ez-data-source__field--name input',
                 eventName: 'blur',
                 callback: 'validateName',
-                invalidStateSelectors: [SELECTOR_FIELD, SELECTOR_AUTHOR_ROW, SELECTOR_FIELD_NAME],
-                errorNodeSelectors: ['.ez-sub-field-name .ez-sub-field-text-zone'],
+                invalidStateSelectors: [SELECTOR_FIELD, SELECTOR_AUTHOR, SELECTOR_FIELD_NAME],
+                errorNodeSelectors: ['.ez-data-source__field--name .ez-data-source__label-wrapper'],
             },
             {
-                selector: '.ez-author-row .ez-sub-field-email input',
+                selector: '.ez-data-source__author .ez-data-source__field--email input',
                 eventName: 'blur',
                 callback: 'validateEmail',
-                invalidStateSelectors: [SELECTOR_FIELD, SELECTOR_AUTHOR_ROW, SELECTOR_FIELD_EMAIL],
-                errorNodeSelectors: ['.ez-sub-field-email .ez-sub-field-text-zone'],
+                invalidStateSelectors: [SELECTOR_FIELD, SELECTOR_AUTHOR, SELECTOR_FIELD_EMAIL],
+                errorNodeSelectors: ['.ez-data-source__field--email .ez-data-source__label-wrapper'],
             },
             {
                 selector: SELECTOR_REMOVE_AUTHOR,
@@ -194,7 +194,7 @@
                 callback: 'removeItem',
             },
             {
-                selector: '.ez-js-add-author',
+                selector: '.ez-btn--add-author',
                 eventName: 'click',
                 callback: 'addItem',
             },
