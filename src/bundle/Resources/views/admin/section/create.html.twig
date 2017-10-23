@@ -1,29 +1,45 @@
 {% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+
 {% trans_default_domain 'section' %}
 
 {% block breadcrumbs %}
     {% include 'EzPlatformAdminUiBundle:parts:breadcrumbs.html.twig' with {
     'items': [
-    { value: 'breadcrumb.admin'|trans([], 'messages') },
-    { url: path('ezplatform.section.list'), value: 'section.list'|trans },
-    { value: 'section.new'|trans }
+    { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+    { url: path('ezplatform.section.list'), value: 'section.list'|trans|desc('Sections') },
+    { value: 'section.new.title'|trans|desc('Creating a new Section') }
     ]
     } %}
 {% endblock %}
 
 {% block pageTitle %}
-    {{ 'section.new'|trans }}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'section.new.title'|trans|desc('Creating a new Section'),
+        iconName: 'sections'
+    } %}
 {% endblock %}
 
 {% block content %}
-    <section class="container">
-        {{ form_start(form_section_create) }}
-        {{ form_row(form_section_create.data.identifier) }}
-        {{ form_row(form_section_create.data.name) }}
+    {{ form_start(form_section_create) }}
 
-        <a href="{{ path("ezplatform.section.list") }}" class="btn btn-default">{{ "section.form.cancel"|trans }}</a>
-        {{ form_widget(form_section_create.data.create, {"attr": {"class": "btn btn-primary"}}) }}
-        {{ form_end(form_section_create) }}
+    <section class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                {{ form_row(form_section_create.data.identifier) }}
+                {{ form_row(form_section_create.data.name) }}
+            </div>
+        </div>
     </section>
+
+    <section class="container mt-4 mb-4">
+        <div class="btn-toolbar justify-content-end" role="toolbar" >
+            <a href="{{ path("ezplatform.section.list") }}" class="btn btn-default">
+                {{ "form.cancel"|trans|desc('Cancel') }}
+            </a>
+            {{ form_widget(form_section_create.data.create, {"attr": {"class": "btn btn-primary"}}) }}
+        </div>
+    </section>
+
+    {{ form_end(form_section_create) }}
 {% endblock %}
 

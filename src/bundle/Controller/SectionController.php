@@ -160,10 +160,13 @@ class SectionController extends Controller
             $section = $sectionDeleteData->getSection();
             $this->sectionService->deleteSection($section);
 
-            $this->flashSuccess(/** @Desc("Section \"%sectionName%\" removed.") */
-                'section.delete.success', [
-                '%sectionName%' => $section->name,
-            ], 'section');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Section '%name%' removed.") */ 'section.delete.success',
+                    ['%name%' => $section->name],
+                    'section'
+                )
+            );
 
             return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
@@ -172,7 +175,7 @@ class SectionController extends Controller
          * @todo We should implement a service for converting form errors into notifications
          */
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
@@ -203,11 +206,13 @@ class SectionController extends Controller
                 $this->sectionService->assignSection($contentInfo, $section);
             }
 
-            $this->flashSuccess(/** @Desc("%contentItemsCount% content items were assigned to \"%sectionName%\"") */
-                'section.assign_content.success', [
-                '%sectionName%' => $section->name,
-                '%contentItemsCount%' => count($contentInfos),
-            ], 'section');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("%contentItemsCount% content items were assigned to '%name%'") */ 'section.assign_content.success',
+                    ['%name%' => $section->name, '%contentItemsCount%' => count($contentInfos)],
+                    'section'
+                )
+            );
 
             return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
@@ -216,7 +221,7 @@ class SectionController extends Controller
          * @todo We should implement a service for converting form errors into notifications
          */
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
@@ -242,9 +247,13 @@ class SectionController extends Controller
             $sectionCreateStruct = $this->sectionCreateMapper->reverseMap($sectionCreateData);
             $section = $this->sectionService->createSection($sectionCreateStruct);
 
-            $this->flashSuccess('section.create.success', [
-                '%sectionName%' => $section->name,
-            ], 'section');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Section '%name%' created.") */ 'section.create.success',
+                    ['%name%' => $section->name],
+                    'section'
+                )
+            );
 
             return $this->redirectToRoute('ezplatform.section.view', ['sectionId' => $section->id]);
         }
@@ -281,9 +290,13 @@ class SectionController extends Controller
             $sectionUpdateStruct = $this->sectionUpdateMapper->reverseMap($sectionUpdateData);
             $section = $this->sectionService->updateSection($section, $sectionUpdateStruct);
 
-            $this->flashSuccess('section.update.success', [
-                '%sectionName%' => $section->name,
-            ], 'section');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Section '%name%' updated.") */ 'section.update.success',
+                    ['%name%' => $section->name],
+                    'section'
+                )
+            );
 
             return $this->redirectToRoute('ezplatform.section.view', ['sectionId' => $section->id]);
         }
