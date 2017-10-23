@@ -17,13 +17,13 @@ use EzSystems\EzPlatformAdminUi\Service\PathService;
 class ContentViewController extends Controller
 {
     /** @var ContentTypeService */
-    protected $contentTypeService;
+    private $contentTypeService;
 
     /** @var PathService */
-    protected $pathService;
+    private $pathService;
 
     /** @var FormFactory */
-    protected $formFactory;
+    private $formFactory;
 
     /**
      * @param ContentTypeService $contentTypeService

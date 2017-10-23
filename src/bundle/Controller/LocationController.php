@@ -34,19 +34,19 @@ class LocationController extends Controller
     private $translator;
 
     /** @var ContentService */
-    protected $contentService;
+    private $contentService;
 
     /** @var LocationService */
-    protected $locationService;
+    private $locationService;
 
     /** @var ContentTypeService */
-    protected $contentTypeService;
+    private $contentTypeService;
 
     /** @var TrashService */
-    protected $trashService;
+    private $trashService;
 
     /** @var FormFactory */
-    protected $formFactory;
+    private $formFactory;
 
     /**
      * @param NotificationHandlerInterface $notificationHandler

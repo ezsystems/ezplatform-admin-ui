@@ -24,10 +24,10 @@ class TranslationController extends Controller
     private $translator;
 
     /** @var ContentService */
-    protected $contentService;
+    private $contentService;
 
     /** @var FormFactory */
-    protected $formFactory;
+    private $formFactory;
 
     /**
      * @param NotificationHandlerInterface $notificationHandler

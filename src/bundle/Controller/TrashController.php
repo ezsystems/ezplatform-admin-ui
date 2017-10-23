@@ -29,19 +29,19 @@ class TrashController extends Controller
     private $translator;
 
     /** @var UiTrashService */
-    protected $uiTrashService;
+    private $uiTrashService;
 
     /** @var TrashService */
-    protected $trashService;
+    private $trashService;
 
     /** @var LocationService */
-    protected $locationService;
+    private $locationService;
 
     /** @var ContentService */
-    protected $contentService;
+    private $contentService;
 
     /** @var FormFactory */
-    protected $formFactory;
+    private $formFactory;
 
     /**
      * @param NotificationHandlerInterface $notificationHandler

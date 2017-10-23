@@ -33,13 +33,10 @@ class SectionController extends Controller
     private $translator;
 
     /** @var SectionService */
-    protected $sectionService;
+    private $sectionService;
 
     /** @var SearchService */
     private $searchService;
-
-    /** @var TranslatorInterface */
-    private $translator;
 
     /** @var FormFactory */
     private $formFactory;
