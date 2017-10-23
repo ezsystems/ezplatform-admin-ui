@@ -69,10 +69,14 @@ class ContentTypeController extends Controller
     public function addAction(ContentTypeGroup $group): Response
     {
         $contentType = $this->contentTypeService->createContentType($group);
+        $contentTypeDraft = $this->contentTypeService->getContentTypeDraft((int)$contentType->id);
 
-        return $this->redirectToRoute('ezplatform.content_type.edit', [
-            'contentTypeGroupId' => $group->id,
-            'contentTypeId' => $contentType->id,
+        $form = $this->createUpdateForm($group, $contentTypeDraft);
+
+        return $this->render('@EzPlatformAdminUi/admin/content_type/create.html.twig', [
+            'content_type_group' => $group,
+            'content_type' => $contentType,
+            'form' => $form->createView(),
         ]);
     }
 
