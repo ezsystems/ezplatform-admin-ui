@@ -21,7 +21,6 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
-use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
@@ -36,12 +35,10 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType;
-use EzSystems\EzPlatformAdminUi\Form\Type\UiFormType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Version\VersionRemoveType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FormFactory
