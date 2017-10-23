@@ -67,12 +67,15 @@ class TranslationController extends Controller
         if ($form->isValid() && $form->isSubmitted()) {
             foreach ($translationRemoveData->getLanguageCodes() as $languageCode => $selected) {
                 $this->contentService->removeTranslation($contentInfo, $languageCode);
-            }
 
-            $this->flashSuccess('translation.remove.success', [
-                '%languageCodes%' => implode(', ', array_keys($translationRemoveData->getLanguageCodes())),
-                '%contentName%' => $contentInfo->name,
-            ], 'translation');
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Translation '%languageCode%' removed from content `%name%`.") */ 'translation.remove.success',
+                        ['%languageCode%' => $languageCode, '%name%' => $contentInfo->name],
+                        'translation'
+                    )
+                );
+            }
 
             return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
@@ -81,7 +84,7 @@ class TranslationController extends Controller
          * @todo We should implement a service for converting form errors into notifications
          */
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirectToRoute($uiFormData->getOnFailureRedirectionUrl());

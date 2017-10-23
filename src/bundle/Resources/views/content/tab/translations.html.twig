@@ -26,6 +26,7 @@
 </section>
 
 {% macro table_header_tools(form_translation_remove) %}
-    <button class="btn btn-danger btn--trigger"
-            data-click="#{{ form_translation_remove.data.remove.vars.id }}">{{ form_translation_remove.data.remove.vars.label|trans({}, form_translation_remove.data.remove.vars.translation_domain) }}</button>
+    <button class="btn btn-danger btn--trigger" data-click="#{{ form_translation_remove.data.remove.vars.id }}">
+        {{ form_translation_remove.data.remove.vars.label|trans({}, form_translation_remove.data.remove.vars.translation_domain) }}
+    </button>
 {% endmacro %}
