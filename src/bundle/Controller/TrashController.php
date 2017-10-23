@@ -109,6 +109,14 @@ class TrashController extends Controller
             if ($emptyTrashForm->isValid() && $emptyTrashForm->isSubmitted()) {
                 $this->trashService->emptyTrash();
 
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Trash empty.") */ 'trash.empty.success',
+                        [],
+                        'trash'
+                    )
+                );
+
                 return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
             }
 
@@ -116,7 +124,7 @@ class TrashController extends Controller
              * @todo We should implement a service for converting form errors into notifications
              */
             foreach ($emptyTrashForm->getErrors(true, true) as $formError) {
-                $this->addFlash('danger', $formError->getMessage());
+                $this->notificationHandler->error($formError->getMessage());
             }
 
             return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
@@ -144,11 +152,21 @@ class TrashController extends Controller
                 }
 
                 if (null === $newParentLocation) {
-                    $this->flashSuccess('trash.restore.succcess.under_original_parent', [], 'trash');
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Items restored under their original location.") */ 'trash.restore_original_location.success',
+                            [],
+                            'trash'
+                        )
+                    );
                 } else {
-                    $this->flashSuccess('trash.restore.succcess.under_new_parent', [
-                        '%locationName%' => $newParentLocation->getContentInfo()->name,
-                    ], 'trash');
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Items restored under `%location%` location.") */ 'trash.restore_new_location.success',
+                            ['%location%' => $newParentLocation->getContentInfo()->name],
+                            'trash'
+                        )
+                    );
                 }
 
                 return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
@@ -158,7 +176,7 @@ class TrashController extends Controller
              * @todo We should implement a service for converting form errors into notifications
              */
             foreach ($restoreTrashItemForm->getErrors(true, true) as $formError) {
-                $this->addFlash('danger', $formError->getMessage());
+                $this->notificationHandler->error($formError->getMessage());
             }
 
             return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
