@@ -75,19 +75,16 @@ class ContentViewController extends Controller
         $locationViewUrl = $this->generateUrl($location);
 
         $locationCopyType = $this->formFactory->copyLocation(
-            null,
             new LocationCopyData($location),
             null /* action handles the redirection */,
             $locationViewUrl
         );
         $locationMoveType = $this->formFactory->moveLocation(
-            null,
             new LocationMoveData($location),
             null /* action handles the redirection */,
             $locationViewUrl
         );
         $locationTrashType = $this->formFactory->trashLocation(
-            null,
             new LocationTrashData($location),
             null /* action handles the redirection */,
             $locationViewUrl

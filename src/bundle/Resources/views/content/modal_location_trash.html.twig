@@ -11,8 +11,10 @@
                 <p>{{ 'trash.modal.message'|trans|desc('Are you sure you want to send this content item to trash?') }}</p>
             </div>
             <div class="modal-footer">
-                {{ form_start(form) }}
-                {{ form_widget(form.data.trash, {'attr': {'class': 'btn btn-danger'}}) }}
+                {{ form_start(form, {
+                    'action': path('ezplatform.location.trash')
+                }) }}
+                {{ form_widget(form.trash, {'attr': {'class': 'btn btn-danger'}}) }}
                 <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">
                     {{ 'trash.form.cancel'|trans|desc('Cancel') }}
                 </button>

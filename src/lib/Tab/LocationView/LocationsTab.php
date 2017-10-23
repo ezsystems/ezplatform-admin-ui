@@ -115,7 +115,6 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
     private function createLocationAddForm(Location $location, string $locationViewUrl): FormInterface
     {
         return $this->formFactory->addLocation(
-            null,
             new ContentLocationAddData($location->getContentInfo()),
             $locationViewUrl,
             $locationViewUrl
@@ -135,7 +134,6 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
         string $locationViewUrl
     ): FormInterface {
         return $this->formFactory->removeLocation(
-            null,
             new ContentLocationRemoveData($location->getContentInfo(), $this->getLocationChoices($contentLocations)),
             $locationViewUrl,
             $locationViewUrl
@@ -163,7 +161,6 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
     protected function createLocationSwapForm(Location $location, string $locationViewUrl): FormInterface
     {
         return $this->formFactory->swapLocation(
-            null,
             new LocationSwapData($location),
             $locationViewUrl,
             $locationViewUrl

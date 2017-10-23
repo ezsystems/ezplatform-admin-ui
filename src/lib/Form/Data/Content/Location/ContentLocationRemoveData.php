@@ -9,10 +9,17 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Location;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirectTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ContentLocationRemoveData
+class ContentLocationRemoveData implements OnSuccessRedirect, OnFailureRedirect
 {
+    use OnSuccessRedirectTrait;
+    use OnFailureRedirectTrait;
+
     /**
      * @Assert\NotBlank()
      *

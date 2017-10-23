@@ -117,165 +117,150 @@ class FormFactory
     }
 
     /**
-     * @param string|null $name
      * @param ContentLocationAddData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function addLocation(
-        ?string $name = null,
         ContentLocationAddData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new ContentLocationAddData();
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentLocationAddType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name,
-            ContentLocationAddType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.location.add'),
-            []
+        /** @var ContentLocationAddData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentLocationAddType::class);
+
+        return $this->formFactory->createNamed($name, ContentLocationAddType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param ContentLocationRemoveData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function removeLocation(
-        ?string $name = null,
         ContentLocationRemoveData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new ContentLocationRemoveData();
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentLocationRemoveType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name,
-            ContentLocationRemoveType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.location.remove'),
-            []
+        /** @var ContentLocationRemoveData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentLocationRemoveType::class);
+
+        return $this->formFactory->createNamed($name, ContentLocationRemoveType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param LocationSwapData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function swapLocation(
-        ?string $name = null,
         LocationSwapData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new LocationSwapData();
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationSwapType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name,
-            LocationSwapType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.location.swap'),
-            []
+        /** @var LocationSwapData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationSwapType::class);
+
+        return $this->formFactory->createNamed($name, LocationSwapType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param LocationTrashData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function trashLocation(
-        ?string $name = null,
         LocationTrashData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new LocationTrashData();
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationTrashType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name,
-            LocationTrashType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.location.trash'),
-            []
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationTrashType::class);
+
+        return $this->formFactory->createNamed($name, LocationTrashType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param LocationMoveData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function moveLocation(
-        ?string $name = null,
         LocationMoveData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new LocationMoveData();
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationMoveType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name,
-            LocationMoveType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.location.move'),
-            []
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationMoveType::class);
+
+        return $this->formFactory->createNamed($name, LocationMoveType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param LocationCopyData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function copyLocation(
-        ?string $name = null,
         LocationCopyData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new LocationCopyData();
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationCopyType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name,
-            LocationCopyType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.location.copy'),
-            []
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationCopyType::class);
+
+        return $this->formFactory->createNamed($name, LocationCopyType::class, $data);
     }
 
     /**
