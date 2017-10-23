@@ -275,57 +275,53 @@ class FormFactory
     }
 
     /**
-     * @param string|null $name
      * @param TrashItemRestoreData|null $data
      * @param string|null $successRedirectionUrl
      * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function restoreTrashItem(
-        ?string $name = null,
         TrashItemRestoreData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new TrashItemRestoreData();
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashItemRestoreType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name,
-            TrashItemRestoreType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.trash.restore'),
-            []
+        /** @var TrashItemRestoreData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashItemRestoreType::class);
+
+        return $this->formFactory->createNamed($name, TrashItemRestoreType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param TrashEmptyData|null $data
      * @param string|null $successRedirectionUrl
      * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function emptyTrash(
-        ?string $name = null,
         TrashEmptyData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new TrashEmptyData();
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashEmptyType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name,
-            TrashEmptyType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.trash.empty'),
-            []
+        /** @var TrashEmptyData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashEmptyType::class);
+
+        return $this->formFactory->createNamed($name, TrashEmptyType::class, $data);
     }
 
     /**

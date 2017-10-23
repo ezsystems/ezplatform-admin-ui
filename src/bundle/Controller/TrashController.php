@@ -12,8 +12,8 @@ use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
-use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Service\TrashService as UiTrashService;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,6 +43,9 @@ class TrashController extends Controller
     /** @var FormFactory */
     private $formFactory;
 
+    /** @var SubmitHandler */
+    private $submitHandler;
+
     /**
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
@@ -51,6 +54,7 @@ class TrashController extends Controller
      * @param LocationService $locationService
      * @param ContentService $contentService
      * @param FormFactory $formFactory
+     * @param SubmitHandler $submitHandler
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -59,7 +63,8 @@ class TrashController extends Controller
         TrashService $trashService,
         LocationService $locationService,
         ContentService $contentService,
-        FormFactory $formFactory
+        FormFactory $formFactory,
+        SubmitHandler $submitHandler
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -68,20 +73,23 @@ class TrashController extends Controller
         $this->locationService = $locationService;
         $this->contentService = $contentService;
         $this->formFactory = $formFactory;
+        $this->submitHandler = $submitHandler;
     }
 
+    /**
+     * @return Response
+     */
     public function listAction(): Response
     {
-        $trashItemsList = $this->uiTrashService->loadTrashItems();
-        $trashItemRestoreData = new TrashItemRestoreData($trashItemsList, null);
         $trashListUrl = $this->generateUrl('ezplatform.trash.list');
+        $trashItemsList = $this->uiTrashService->loadTrashItems();
+
         $trashItemRestoreForm = $this->formFactory->restoreTrashItem(
-            null,
-            $trashItemRestoreData,
+            new TrashItemRestoreData($trashItemsList, null),
+            $trashListUrl,
             $trashListUrl
         );
         $trashEmptyForm = $this->formFactory->emptyTrash(
-            null,
             new TrashEmptyData(true),
             $trashListUrl,
             $trashListUrl
@@ -96,92 +104,97 @@ class TrashController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function emptyAction(Request $request): Response
     {
-        /** @todo Can permissions be checked on form level? */
+        $trashListUrl = $this->generateUrl('ezplatform.trash.list');
+
         if ($this->isGranted(new Attribute('content', 'remove'))) {
-            $emptyTrashForm = $this->formFactory->emptyTrash();
-            $emptyTrashForm->handleRequest($request);
+            $form = $this->formFactory->emptyTrash(
+                new TrashEmptyData(true),
+                $trashListUrl,
+                $trashListUrl
+            );
+            $form->handleRequest($request);
 
-            /** @var UiFormData $uiFormData */
-            $uiFormData = $emptyTrashForm->getData();
+            if ($form->isSubmitted()) {
+                $result = $this->submitHandler->handle($form, function() {
+                    $this->trashService->emptyTrash();
 
-            if ($emptyTrashForm->isValid() && $emptyTrashForm->isSubmitted()) {
-                $this->trashService->emptyTrash();
-
-                $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Trash empty.") */ 'trash.empty.success',
-                        [],
-                        'trash'
-                    )
-                );
-
-                return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
-            }
-
-            /**
-             * @todo We should implement a service for converting form errors into notifications
-             */
-            foreach ($emptyTrashForm->getErrors(true, true) as $formError) {
-                $this->notificationHandler->error($formError->getMessage());
-            }
-
-            return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
-        }
-
-        return $this->redirectToRoute('ezplatform.trash.list');
-    }
-
-    public function restoreAction(Request $request): Response
-    {
-        /** @todo Can permissions be checked on form level? */
-        if ($this->isGranted(new Attribute('content', 'restore'))) {
-            $restoreTrashItemForm = $this->formFactory->restoreTrashItem();
-            $restoreTrashItemForm->handleRequest($request);
-
-            /** @var UiFormData $uiFormData */
-            $uiFormData = $restoreTrashItemForm->getData();
-            if ($restoreTrashItemForm->isValid() && $restoreTrashItemForm->isSubmitted()) {
-                /** @var TrashItemRestoreData $trashItemRestoreData */
-                $trashItemRestoreData = $uiFormData->getData();
-                $newParentLocation = $trashItemRestoreData->getLocation();
-
-                foreach ($trashItemRestoreData->getTrashItems() as $trashItem) {
-                    $this->trashService->recover($trashItem->getLocation(), $newParentLocation);
-                }
-
-                if (null === $newParentLocation) {
                     $this->notificationHandler->success(
                         $this->translator->trans(
-                            /** @Desc("Items restored under their original location.") */ 'trash.restore_original_location.success',
+                            /** @Desc("Trash empty.") */ 'trash.empty.success',
                             [],
                             'trash'
                         )
                     );
-                } else {
-                    $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Items restored under `%location%` location.") */ 'trash.restore_new_location.success',
-                            ['%location%' => $newParentLocation->getContentInfo()->name],
-                            'trash'
-                        )
-                    );
+                });
+
+                if ($result instanceof Response) {
+                    return $result;
                 }
-
-                return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
             }
-
-            /**
-             * @todo We should implement a service for converting form errors into notifications
-             */
-            foreach ($restoreTrashItemForm->getErrors(true, true) as $formError) {
-                $this->notificationHandler->error($formError->getMessage());
-            }
-
-            return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
         }
 
-        return $this->redirectToRoute('ezplatform.trash.list');
+        /* Fallback Redirect */
+        return $this->redirect($trashListUrl);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function restoreAction(Request $request): Response
+    {
+        $trashListUrl = $this->generateUrl('ezplatform.trash.list');
+
+        if ($this->isGranted(new Attribute('content', 'restore'))) {
+            $form = $this->formFactory->restoreTrashItem(
+                new TrashItemRestoreData(),
+                $trashListUrl,
+                $trashListUrl
+            );
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted()) {
+                $result = $this->submitHandler->handle($form, function(TrashItemRestoreData $data) {
+                    $newParentLocation = $data->getLocation();
+
+                    foreach ($data->getTrashItems() as $trashItem) {
+                        $this->trashService->recover($trashItem->getLocation(), $newParentLocation);
+                    }
+
+                    if (null === $newParentLocation) {
+                        $this->notificationHandler->success(
+                            $this->translator->trans(
+                                /** @Desc("Items restored under their original location.") */ 'trash.restore_original_location.success',
+                                [],
+                                'trash'
+                            )
+                        );
+                    } else {
+                        $this->notificationHandler->success(
+                            $this->translator->trans(
+                                /** @Desc("Items restored under `%location%` location.") */ 'trash.restore_new_location.success',
+                                ['%location%' => $newParentLocation->getContentInfo()->name],
+                                'trash'
+                            )
+                        );
+                    }
+                });
+
+                if ($result instanceof Response) {
+                    return $result;
+                }
+            }
+        }
+
+        /* Fallback Redirect */
+        return $this->redirect($trashListUrl);
     }
 }
