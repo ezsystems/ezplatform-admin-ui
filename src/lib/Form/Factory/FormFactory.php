@@ -92,25 +92,28 @@ class FormFactory
     }
 
     /**
-     * @param string|null $name
      * @param VersionRemoveData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function removeVersion(
-        ?string $name = null,
         VersionRemoveData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new VersionRemoveData();
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
-
-        return $this->createUiForm(
-            $name, VersionRemoveType::class, $uiFormData, $this->urlGenerator->generate('ezplatform.version.remove'), []
+        /** @var VersionRemoveData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
         );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(VersionRemoveType::class);
+
+        return $this->formFactory->createNamed($name, VersionRemoveType::class, $data);
     }
 
     /**

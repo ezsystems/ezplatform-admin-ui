@@ -137,6 +137,6 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
 
         $locationViewUrl = $this->urlGenerator->generate($location, ['_fragment' => 'ez-tab-location-view-versions']);
 
-        return $this->formFactory->removeVersion($name, $data, $locationViewUrl, $locationViewUrl);
+        return $this->formFactory->removeVersion($data, $locationViewUrl, $locationViewUrl);
     }
 }
