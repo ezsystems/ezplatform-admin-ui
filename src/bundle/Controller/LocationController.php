@@ -108,9 +108,13 @@ class LocationController extends Controller
             }
             $this->locationService->moveSubtree($location, $newParentLocation);
 
-            $this->flashSuccess('location.move.success', [
-                '%locationName%' => $location->getContentInfo()->name,
-            ], 'location');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Location '%name%' moved to location '%location%'") */'location.move.success',
+                    ['%name%' => $location->getContentInfo()->name, '%location%' => $newParentLocation->getContentInfo()->name],
+                    'location'
+                )
+            );
 
             return $this->redirectToRoute($location);
         }
@@ -119,7 +123,7 @@ class LocationController extends Controller
          * @todo We should implement a service for converting form errors into notifications
          */
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
@@ -141,9 +145,9 @@ class LocationController extends Controller
         $uiFormData = $form->getData();
         /** @var LocationCopyData $locationCopyData */
         $locationCopyData = $uiFormData->getData();
+        $location = $locationCopyData->getLocation();
 
         if ($form->isValid() && $form->isSubmitted()) {
-            $location = $locationCopyData->getLocation();
             $newParentLocation = $locationCopyData->getNewParentLocation();
 
             /** @todo move it into the service */
@@ -167,9 +171,13 @@ class LocationController extends Controller
 
             $newLocation = $this->locationService->loadLocation($copiedContent->contentInfo->mainLocationId);
 
-            $this->flashSuccess('location.copy.success', [
-                '%locationName%' => $copiedContent->getName(),
-            ], 'location');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                /** @Desc("Location '%name%' copied to location '%location%'") */'location.copy.success',
+                    ['%name%' => $location->getContentInfo()->name, '%location%' => $newParentLocation->getContentInfo()->name],
+                    'location'
+                )
+            );
 
             return $this->redirectToRoute($newLocation);
         }
@@ -178,7 +186,7 @@ class LocationController extends Controller
          * @todo We should implement a service for converting form errors into notifications
          */
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirectToRoute($location);
@@ -215,10 +223,13 @@ class LocationController extends Controller
             }
             $this->locationService->swapLocation($currentLocation, $newLocation);
 
-            $this->flashSuccess('location.swap.success', [
-                '%oldLocationName%' => $currentLocation->getContentInfo()->name,
-                '%newLocationName%' => $newLocation->getContentInfo()->name,
-            ], 'location');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Location '%name%' swaped with location '%location%'") */'location.swap.success',
+                    ['%name%' => $currentLocation->getContentInfo()->name, '%location%' => $newLocation->getContentInfo()->name],
+                    'location'
+                )
+            );
 
             return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
@@ -227,7 +238,7 @@ class LocationController extends Controller
          * @todo We should implement a service for converting form errors into notifications
          */
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
@@ -251,13 +262,16 @@ class LocationController extends Controller
         $location = $locationTrashData->getLocation();
 
         if ($form->isValid() && $form->isSubmitted()) {
-            $contentInfo = $location->getContentInfo();
             $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
             $this->trashService->trash($location);
 
-            $this->flashSuccess('location.trash.success', [
-                '%locationName%' => $contentInfo->name,
-            ], 'location');
+            $this->notificationHandler->success(
+                $this->translator->trans(
+                    /** @Desc("Location '%name%' moved to trash.") */'location.trash.success',
+                    ['%name%' => $location->getContentInfo()->name],
+                    'location'
+                )
+            );
 
             return $this->redirectToRoute($parentLocation);
         }
@@ -266,7 +280,7 @@ class LocationController extends Controller
          * @todo We should implement a service for converting form errors into notifications
          */
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
@@ -294,11 +308,15 @@ class LocationController extends Controller
             foreach ($contentLocationRemoveData->getLocations() as $locationId => $selected) {
                 $location = $this->locationService->loadLocation($locationId);
                 $this->locationService->deleteLocation($location);
-            }
 
-            $this->flashSuccess('location.remove.success', [
-                '%locationName%' => $contentLocationRemoveData->getContentInfo()->name,
-            ], 'location');
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                    /** @Desc("Location '%name%' removed.") */'location.delete.success',
+                        ['%name%' => $location->getContentInfo()->name],
+                        'location'
+                    )
+                );
+            }
 
             return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
@@ -307,7 +325,7 @@ class LocationController extends Controller
          * @todo We should implement a service for converting form errors into notifications
          */
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
@@ -337,13 +355,15 @@ class LocationController extends Controller
             foreach ($contentLocationAddData->getNewLocations() as $newLocation) {
                 $locationCreateStruct = $this->locationService->newLocationCreateStruct($newLocation->id);
                 $this->locationService->createLocation($contentInfo, $locationCreateStruct);
-            }
 
-            $this->flashSuccess(
-                'location.add.success',
-                ['%locationName%' => $contentInfo->name],
-                'location'
-            );
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                    /** @Desc("Location '%name%' created.") */'location.create.success',
+                        ['%name%' => $newLocation->getContentInfo()->name],
+                        'location'
+                    )
+                );
+            }
 
             return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
@@ -352,7 +372,7 @@ class LocationController extends Controller
          * @todo We should implement a service for converting form errors into notifications
          */
         foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
+            $this->notificationHandler->error($formError->getMessage());
         }
 
         return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
