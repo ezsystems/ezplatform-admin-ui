@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Type\RedirectableForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -22,24 +23,24 @@ class LanguageCreateType extends AbstractType
             ->add(
                 'name',
                 TextType::class,
-                ['label' => /** @Desc("Name") */ 'language_create.name']
+                ['label' => /** @Desc("Name") */ 'ezplatform.language.create.name']
             )
             ->add(
                 'languageCode',
                 TextType::class,
-                ['label' => /** @Desc("Language code") */ 'language_create.language_code']
+                ['label' => /** @Desc("Language code") */ 'ezplatform.language.create.language_code']
             )
             ->add('enabled',
                 CheckboxType::class,
                 [
-                    'label' => /** @Desc("Enabled") */ 'language_create.enabled',
+                    'label' => /** @Desc("Enabled") */ 'ezplatform.language.create.enabled',
                     'required' => false,
                 ]
             )
             ->add(
                 'save',
                 SubmitType::class,
-                ['label' => /** @Desc("Create") */ 'language_create.save']
+                ['label' => /** @Desc("Create") */ 'ezplatform.language.create.save']
             );
     }
 
@@ -49,5 +50,10 @@ class LanguageCreateType extends AbstractType
             'data_class' => LanguageCreateData::class,
             'translation_domain' => 'forms',
         ]);
+    }
+
+    public function getParent()
+    {
+        return RedirectableForm::class;
     }
 }

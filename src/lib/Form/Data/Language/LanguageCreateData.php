@@ -6,8 +6,16 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Language;
 
-class LanguageCreateData
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirectTrait;
+
+class LanguageCreateData implements OnSuccessRedirect, OnFailureRedirect
 {
+    use OnSuccessRedirectTrait;
+    use OnFailureRedirectTrait;
+
     /** @var string */
     private $name;
 

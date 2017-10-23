@@ -7,9 +7,16 @@
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Language;
 
 use eZ\Publish\API\Repository\Values\Content\Language;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirectTrait;
 
-class LanguageUpdateData
+class LanguageUpdateData implements OnSuccessRedirect, OnFailureRedirect
 {
+    use OnSuccessRedirectTrait;
+    use OnFailureRedirectTrait;
+
     /** @var Language */
     private $language;
 

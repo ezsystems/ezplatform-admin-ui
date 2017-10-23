@@ -11,10 +11,15 @@ namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
@@ -25,6 +30,9 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationRemoveType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
@@ -459,5 +467,102 @@ class FormFactory
         $formBuilder->add('data', $dataType, ['label' => false]);
 
         return $formBuilder;
+    }
+
+    /**
+     * @param LanguageCreateData|null $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function createLanguage(
+        ?LanguageCreateData $data = null,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
+    ): FormInterface {
+        $data = $this->prepareRedirectableData(
+            $data ?? new LanguageCreateData(),
+            $successRedirectionUrl,
+            $failureRedirectionUrl
+        );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(LanguageCreateType::class);
+
+        return $this->formFactory->createNamed($name, LanguageCreateType::class, $data);
+    }
+
+    /**
+     * @param LanguageUpdateData $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function updateLanguage(
+        LanguageUpdateData $data,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
+    ): FormInterface {
+        /** @var LanguageUpdateData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
+        );
+        $name = $name ?: sprintf('update-language-%d', $data->getLanguage()->id);
+
+        return $this->formFactory->createNamed($name, LanguageUpdateType::class, $data);
+    }
+
+    /**
+     * @param LanguageDeleteData $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function deleteLanguage(
+        LanguageDeleteData $data,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
+    ): FormInterface {
+        /** @var LanguageDeleteData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
+        );
+        $name = $name ?: sprintf('delete-language-%d', $data->getLanguage()->id);
+
+        return $this->formFactory->createNamed($name, LanguageDeleteType::class, $data);
+    }
+
+    /**
+     * @param mixed $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     *
+     * @return mixed
+     */
+    protected function prepareRedirectableData(
+        $data,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null
+    ) {
+        if ($data instanceof OnSuccessRedirect) {
+            $data->setOnSuccessRedirectionUrl($successRedirectionUrl);
+        }
+
+        if ($data instanceof OnFailureRedirect) {
+            $data->setOnFailureRedirectionUrl($failureRedirectionUrl);
+        }
+
+        return $data;
     }
 }
