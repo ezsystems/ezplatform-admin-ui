@@ -76,7 +76,7 @@ class VersionController extends Controller
         /** @var ContentInfo $contentInfo */
         $contentInfo = $form->getData()->getContentInfo();
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(VersionRemoveData $data) {
+            $result = $this->submitHandler->handle($form, function (VersionRemoveData $data) {
                 $contentInfo = $data->getContentInfo();
 
                 foreach ($data->getVersions() as $versionNo => $selected) {

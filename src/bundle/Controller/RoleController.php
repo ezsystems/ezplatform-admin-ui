@@ -108,7 +108,7 @@ class RoleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(RoleCreateData $data) {
+            $result = $this->submitHandler->handle($form, function (RoleCreateData $data) {
                 $roleCreateStruct = $this->roleCreateMapper->reverseMap($data);
                 $roleDraft = $this->roleService->createRole($roleCreateStruct);
                 $this->roleService->publishRoleDraft($roleDraft);
@@ -145,7 +145,7 @@ class RoleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(RoleUpdateData $data) {
+            $result = $this->submitHandler->handle($form, function (RoleUpdateData $data) {
                 $role = $data->getRole();
 
                 $roleUpdateStruct = $this->roleUpdateMapper->reverseMap($data);
@@ -191,7 +191,7 @@ class RoleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(RoleDeleteData $data) {
+            $result = $this->submitHandler->handle($form, function (RoleDeleteData $data) {
                 $role = $data->getRole();
                 $this->roleService->deleteRole($role);
 

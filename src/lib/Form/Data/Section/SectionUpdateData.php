@@ -7,6 +7,7 @@
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
+
 use eZ\Publish\API\Repository\Values\Content\Section;
 use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
 use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
@@ -37,7 +38,7 @@ class SectionUpdateData implements OnSuccessRedirect, OnFailureRedirect
     {
         $this->section = $section;
 
-        if ($section !== null) {
+        if (null !== $section) {
             $this->identifier = $section->identifier;
             $this->name = $section->name;
         }

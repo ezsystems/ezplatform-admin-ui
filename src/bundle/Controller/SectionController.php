@@ -167,7 +167,7 @@ class SectionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(SectionDeleteData $data) {
+            $result = $this->submitHandler->handle($form, function (SectionDeleteData $data) {
                 $section = $data->getSection();
 
                 $this->sectionService->deleteSection($section);
@@ -206,7 +206,7 @@ class SectionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(SectionContentAssignData $data) {
+            $result = $this->submitHandler->handle($form, function (SectionContentAssignData $data) {
                 $section = $data->getSection();
 
                 $contentInfos = array_column($data->getLocations(), 'contentInfo');
@@ -249,7 +249,7 @@ class SectionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(SectionCreateData $data) {
+            $result = $this->submitHandler->handle($form, function (SectionCreateData $data) {
                 $sectionCreateStruct = $this->sectionCreateMapper->reverseMap($data);
                 $section = $this->sectionService->createSection($sectionCreateStruct);
 
@@ -262,7 +262,7 @@ class SectionController extends Controller
                 );
 
                 return [
-                    'sectionId' => $section->id
+                    'sectionId' => $section->id,
                 ];
             });
 
@@ -293,7 +293,7 @@ class SectionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(SectionUpdateData $data) {
+            $result = $this->submitHandler->handle($form, function (SectionUpdateData $data) {
                 $sectionUpdateStruct = $this->sectionUpdateMapper->reverseMap($data);
                 $section = $this->sectionService->updateSection($data->getSection(), $sectionUpdateStruct);
 

@@ -93,7 +93,7 @@ class ContentTypeGroupController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(ContentTypeGroupCreateData $data) {
+            $result = $this->submitHandler->handle($form, function (ContentTypeGroupCreateData $data) {
                 $createStruct = $this->contentTypeService->newContentTypeGroupCreateStruct(
                     $data->getIdentifier()
                 );
@@ -131,7 +131,7 @@ class ContentTypeGroupController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(ContentTypeGroupUpdateData $data) {
+            $result = $this->submitHandler->handle($form, function (ContentTypeGroupUpdateData $data) {
                 $group = $data->getContentTypeGroup();
                 $updateStruct = $this->contentTypeService->newContentTypeGroupUpdateStruct();
                 $updateStruct->identifier = $data->getIdentifier();
@@ -173,7 +173,7 @@ class ContentTypeGroupController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(ContentTypeGroupDeleteData $data) {
+            $result = $this->submitHandler->handle($form, function (ContentTypeGroupDeleteData $data) {
                 $group = $data->getContentTypeGroup();
                 $this->contentTypeService->deleteContentTypeGroup($group);
 

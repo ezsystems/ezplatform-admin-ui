@@ -97,7 +97,7 @@ class LocationController extends Controller
         $location = $form->getData()->getLocation();
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(LocationMoveData $data) {
+            $result = $this->submitHandler->handle($form, function (LocationMoveData $data) {
                 $location = $data->getLocation();
                 $newParentLocation = $data->getNewParentLocation();
 
@@ -153,7 +153,7 @@ class LocationController extends Controller
         $location = $form->getData()->getLocation();
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(LocationCopyData $data) {
+            $result = $this->submitHandler->handle($form, function (LocationCopyData $data) {
                 $location = $data->getLocation();
                 $newParentLocation = $data->getNewParentLocation();
 
@@ -213,7 +213,7 @@ class LocationController extends Controller
         $location = $form->getData()->getCurrentLocation();
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(LocationSwapData $data) {
+            $result = $this->submitHandler->handle($form, function (LocationSwapData $data) {
                 $currentLocation = $data->getCurrentLocation();
                 $newLocation = $data->getNewLocation();
 
@@ -266,7 +266,7 @@ class LocationController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(LocationTrashData $data) {
+            $result = $this->submitHandler->handle($form, function (LocationTrashData $data) {
                 $location = $data->getLocation();
                 $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
                 $this->trashService->trash($location);
@@ -310,7 +310,7 @@ class LocationController extends Controller
         $contentInfo = $form->getData()->getContentInfo();
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(ContentLocationRemoveData $data) {
+            $result = $this->submitHandler->handle($form, function (ContentLocationRemoveData $data) {
                 $contentInfo = $data->getContentInfo();
 
                 foreach ($data->getLocations() as $locationId => $selected) {
@@ -357,7 +357,7 @@ class LocationController extends Controller
         $contentInfo = $form->getData()->getContentInfo();
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(ContentLocationAddData $data) {
+            $result = $this->submitHandler->handle($form, function (ContentLocationAddData $data) {
                 $contentInfo = $data->getContentInfo();
 
                 foreach ($data->getNewLocations() as $newLocation) {

@@ -84,7 +84,7 @@ class ContentTypeController extends Controller
 
         $createStruct = $this->contentTypeService->newContentTypeCreateStruct('__new__' . md5((string)microtime(true)));
         $createStruct->mainLanguageCode = $mainLanguageCode;
-        $createStruct->names = [ $mainLanguageCode => 'New Content Type' ];
+        $createStruct->names = [$mainLanguageCode => 'New Content Type'];
 
         $contentTypeDraft = $this->contentTypeService->createContentType($createStruct, [$group]);
 
@@ -113,7 +113,7 @@ class ContentTypeController extends Controller
         $form = $this->createUpdateForm($group, $contentType);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function() use ($form, $group, $contentType) {
+            $result = $this->submitHandler->handle($form, function () use ($form, $group, $contentType) {
                 $languageCode = reset($this->languages);
 
                 foreach ($this->languages as $prioritizedLanguage) {
@@ -136,7 +136,7 @@ class ContentTypeController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Content type '%name%' updated.") */'content_type.update.success',
+/** @Desc("Content type '%name%' updated.") */'content_type.update.success',
                         ['%name%' => $contentType->getName()],
                         'content_type'
                     )
@@ -170,12 +170,12 @@ class ContentTypeController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function() use ($contentType) {
+            $result = $this->submitHandler->handle($form, function () use ($contentType) {
                 $this->contentTypeService->deleteContentType($contentType);
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Content type '%name%' deleted.") */'content_type.delete.success',
+/** @Desc("Content type '%name%' deleted.") */'content_type.delete.success',
                         ['%name%' => $contentType->getName()],
                         'content_type'
                     )

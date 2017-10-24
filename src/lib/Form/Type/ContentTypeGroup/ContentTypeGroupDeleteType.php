@@ -25,7 +25,7 @@ class ContentTypeGroupDeleteType extends AbstractType
         $builder
             ->add('content_type_group', ContentTypeGroupType::class)
             ->add('delete', SubmitType::class, [
-                'label' => /** @Desc("Delete") */ 'content_type_group.delete.submit'
+                'label' => /** @Desc("Delete") */ 'content_type_group.delete.submit',
             ]);
     }
 

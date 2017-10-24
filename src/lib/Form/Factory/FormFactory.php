@@ -43,7 +43,6 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemove
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageDeleteType;
@@ -95,6 +94,7 @@ class FormFactory
      * @param null|string $successRedirectionUrl
      * @param null|string $failureRedirectionUrl
      * @param null|string $name
+     *
      * @return FormInterface
      */
     public function createContentTypeGroup(

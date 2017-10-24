@@ -108,7 +108,7 @@ class PolicyController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(PolicyCreateData $data) use ($role) {
+            $result = $this->submitHandler->handle($form, function (PolicyCreateData $data) use ($role) {
                 $policyCreateStruct = $this->policyCreateMapper->reverseMap($data);
 
                 $roleDraft = $this->roleService->createRoleDraft($role);
@@ -147,7 +147,7 @@ class PolicyController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(PolicyUpdateData $data) use ($role, $policy) {
+            $result = $this->submitHandler->handle($form, function (PolicyUpdateData $data) use ($role, $policy) {
                 $policyUpdateStruct = $this->policyUpdateMapper->reverseMap($data);
 
                 $roleDraft = $this->roleService->createRoleDraft($role);
@@ -192,7 +192,7 @@ class PolicyController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(PolicyDeleteData $data) use ($role) {
+            $result = $this->submitHandler->handle($form, function (PolicyDeleteData $data) use ($role) {
                 $roleDraft = $this->roleService->createRoleDraft($role);
                 foreach ($roleDraft->getPolicies() as $policyDraft) {
                     if ($policyDraft->originalId == $data->getId()) {

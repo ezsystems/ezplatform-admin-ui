@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Type\RedirectableForm;
 use Symfony\Component\Form\AbstractType;
@@ -26,10 +25,10 @@ class ContentTypeGroupUpdateType extends AbstractType
     {
         $builder
             ->add('identifier', TextType::class, [
-                'label' => /** @Desc("Identifier") */ 'content_type_group.update.identifier'
+                'label' => /** @Desc("Identifier") */ 'content_type_group.update.identifier',
             ])
             ->add('update', SubmitType::class, [
-                'label' => /** @Desc("Update") */ 'content_type_group.update.submit'
+                'label' => /** @Desc("Update") */ 'content_type_group.update.submit',
             ]);
     }
 

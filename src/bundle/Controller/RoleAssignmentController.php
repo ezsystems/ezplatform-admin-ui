@@ -103,7 +103,7 @@ class RoleAssignmentController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(RoleAssignmentCreateData $data) use ($role) {
+            $result = $this->submitHandler->handle($form, function (RoleAssignmentCreateData $data) use ($role) {
                 $users = $data->getUsers();
                 $groups = $data->getGroups();
                 $sections = $data->getSections();
@@ -181,7 +181,7 @@ class RoleAssignmentController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(RoleAssignmentDeleteData $data) use ($role) {
+            $result = $this->submitHandler->handle($form, function (RoleAssignmentDeleteData $data) use ($role) {
                 $roleAssignment = $data->getRoleAssignment();
                 $this->roleService->removeRoleAssignment($roleAssignment);
 

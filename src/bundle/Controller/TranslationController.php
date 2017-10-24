@@ -71,7 +71,7 @@ class TranslationController extends Controller
         $contentInfo = $form->getData()->getContentInfo();
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function(TranslationRemoveData $data) {
+            $result = $this->submitHandler->handle($form, function (TranslationRemoveData $data) {
                 $contentInfo = $data->getContentInfo();
 
                 foreach ($data->getLanguageCodes() as $languageCode => $selected) {

@@ -141,7 +141,7 @@ class TrashController extends Controller
             $form->handleRequest($request);
 
             if ($form->isSubmitted()) {
-                $result = $this->submitHandler->handle($form, function() {
+                $result = $this->submitHandler->handle($form, function () {
                     $this->trashService->emptyTrash();
 
                     $this->notificationHandler->success(
@@ -181,7 +181,7 @@ class TrashController extends Controller
             $form->handleRequest($request);
 
             if ($form->isSubmitted()) {
-                $result = $this->submitHandler->handle($form, function(TrashItemRestoreData $data) {
+                $result = $this->submitHandler->handle($form, function (TrashItemRestoreData $data) {
                     $newParentLocation = $data->getLocation();
 
                     foreach ($data->getTrashItems() as $trashItem) {
