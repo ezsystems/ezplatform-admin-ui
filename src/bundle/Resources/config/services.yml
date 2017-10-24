@@ -14,10 +14,6 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\Service\TrashService\TrashService: '@EzSystems\EzPlatformAdminUi\Service\TrashService'
-
-    EzSystems\EzPlatformAdminUi\Service\Role\RoleServiceInterface: '@EzSystems\EzPlatformAdminUi\Service\Role\RoleService'
-
     EzSystems\EzPlatformAdminUiBundle\ParamConverter\:
         resource: "../../ParamConverter/*"
         public: true
@@ -35,14 +31,6 @@ services:
             - '%ezpublish.siteaccess.groups_by_siteaccess%'
         tags:
             - { name: kernel.event_subscriber }
-
-    EzSystems\EzPlatformAdminUi\Service\:
-        resource: '../../../lib/Service/*'
-        public: true
-
-    EzSystems\EzPlatformAdminUi\Service\ContentTypeService:
-        arguments:
-            $prioritizedLanguages: '$languages$'
 
     EzSystems\EzPlatformAdminUi\Form\Type\:
         resource: '../../../lib/Form/Type'

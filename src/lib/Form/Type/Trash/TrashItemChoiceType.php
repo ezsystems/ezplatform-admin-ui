@@ -6,8 +6,9 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Trash;
 
+use eZ\Publish\API\Repository\TrashService;
+use eZ\Publish\API\Repository\Values\Content\Query;
 use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
-use EzSystems\EzPlatformAdminUi\Service\TrashService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,7 +32,9 @@ class TrashItemChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'choices' => $this->trashService->loadTrashItems(),
+            'choices' => $this->trashService->findTrashItems(new Query([
+                'sortClauses' => [new Query\SortClause\Location\Priority(Query::SORT_ASC)],
+            ])),
             'choice_attr' => function (TrashItemData $val) {
                 return [
                     'data-is-parent-in-trash' => (int)$val->isParentInTrash(),

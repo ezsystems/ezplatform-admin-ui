@@ -7,18 +7,21 @@
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\TrashService;
+use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
+use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\Service\TrashService as UiTrashService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
+use EzSystems\EzPlatformAdminUi\UI\Service\PathService as UiPathService;
 
 class TrashController extends Controller
 {
@@ -27,9 +30,6 @@ class TrashController extends Controller
 
     /** @var TranslatorInterface */
     private $translator;
-
-    /** @var UiTrashService */
-    private $uiTrashService;
 
     /** @var TrashService */
     private $trashService;
@@ -40,38 +40,47 @@ class TrashController extends Controller
     /** @var ContentService */
     private $contentService;
 
+    /** @var ContentTypeService */
+    private $contentTypeService;
+
     /** @var FormFactory */
     private $formFactory;
 
     /** @var SubmitHandler */
     private $submitHandler;
 
+    /** @var UiPathService */
+    private $uiPathService;
+
     /**
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
-     * @param UiTrashService $uiTrashService
      * @param TrashService $trashService
      * @param LocationService $locationService
      * @param ContentService $contentService
+     * @param ContentTypeService $contentTypeService
+     * @param UiPathService $uiPathService
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
-        UiTrashService $uiTrashService,
         TrashService $trashService,
         LocationService $locationService,
         ContentService $contentService,
+        ContentTypeService $contentTypeService,
+        UiPathService $uiPathService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
-        $this->uiTrashService = $uiTrashService;
         $this->trashService = $trashService;
         $this->locationService = $locationService;
         $this->contentService = $contentService;
+        $this->contentTypeService = $contentTypeService;
+        $this->uiPathService = $uiPathService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
     }
@@ -82,7 +91,17 @@ class TrashController extends Controller
     public function listAction(): Response
     {
         $trashListUrl = $this->generateUrl('ezplatform.trash.list');
-        $trashItemsList = $this->uiTrashService->loadTrashItems();
+
+        $trashItemsList = [];
+        $trashItems = $this->trashService->findTrashItems(new Query([
+            'sortClauses' => [new Query\SortClause\Location\Priority(Query::SORT_ASC)],
+        ]));
+        foreach ($trashItems->items as $item) {
+            $contentType = $this->contentTypeService->getContentType($item->contentInfo->contentTypeId);
+            $ancestors = $this->uiPathService->loadPathLocations($item);
+
+            $trashItemsList[] = new TrashItemData($item, $contentType, $ancestors);
+        }
 
         $trashItemRestoreForm = $this->formFactory->restoreTrashItem(
             new TrashItemRestoreData($trashItemsList, null),

@@ -6,8 +6,8 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
+use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
-use EzSystems\EzPlatformAdminUi\Service\ContentTypeService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +37,7 @@ class ContentTypeDraftParamConverter implements ParamConverterInterface
     {
         $id = (int)$request->get(self::PARAMETER_CONTENT_TYPE_ID);
 
-        $contentType = $this->contentTypeService->getContentTypeDraft($id);
+        $contentType = $this->contentTypeService->loadContentTypeDraft($id);
         if (!$contentType) {
             throw new NotFoundHttpException("ContentTypeGroup $id not found!");
         }
