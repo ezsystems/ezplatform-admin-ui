@@ -223,36 +223,48 @@ ezplatform.content_type.list:
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentType:list'
+    requirements:
+        contentTypeGroupId: \d+
 
 ezplatform.content_type.add:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/add
     methods: ['GET', 'POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentType:add'
+    requirements:
+        contentTypeGroupId: \d+
 
 ezplatform.content_type.edit:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/edit
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentType:edit'
+    requirements:
+        contentTypeGroupId: \d+
 
 ezplatform.content_type.update:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/edit
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentType:update'
+    requirements:
+        contentTypeGroupId: \d+
 
 ezplatform.content_type.delete:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}
     methods: ['DELETE']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentType:delete'
+    requirements:
+        contentTypeGroupId: \d+
 
 ezplatform.content_type.view:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentType:view'
+    requirements:
+        contentTypeGroupId: \d+
 
 ezplatform.location.move:
     path: /location/move
