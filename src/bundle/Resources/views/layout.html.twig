@@ -35,7 +35,7 @@
     </head>
     <body class="{% block bodyClass %}{% endblock %}">
         {% block navigation %}
-            {{ knp_menu_render('main', {
+            {{ knp_menu_render('ezplatform_admin_ui.menu.main', {
                 'template': '@EzPlatformAdminUi/parts/menu.html.twig',
                 'currentClass': 'active',
                 'ancestorClass': 'active'

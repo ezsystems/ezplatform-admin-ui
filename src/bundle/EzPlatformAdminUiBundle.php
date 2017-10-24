@@ -8,10 +8,10 @@ namespace EzSystems\EzPlatformAdminUiBundle;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
 use EzSystems\EzPlatformAdminUi\SiteAccess\AdminFilter;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\MenuPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\LocationIds;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -24,6 +24,9 @@ class EzPlatformAdminUiBundle extends Bundle
         $core->addSiteAccessConfigurationFilter(
             new AdminFilter()
         );
+
+        $core->addConfigParser(new LocationIds());
+        $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ezpublish_default_settings.yml']);
 
         $this->addCompilerPasses($container);
     }
