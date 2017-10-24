@@ -8,8 +8,16 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Policy;
 
-class PolicyCreateData
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirectTrait;
+
+class PolicyCreateData implements OnSuccessRedirect, OnFailureRedirect
 {
+    use OnSuccessRedirectTrait;
+    use OnFailureRedirectTrait;
+
     /** @var string */
     private $module;
 

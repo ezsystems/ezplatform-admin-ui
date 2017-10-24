@@ -20,6 +20,9 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
 use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
@@ -42,6 +45,9 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCreateType;
@@ -622,6 +628,81 @@ class FormFactory
 
         return $this->formFactory->createNamed($name, RoleAssignmentDeleteType::class, $data);
     }
+
+    /**
+     * @param PolicyCreateData|null $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function createPolicy(
+        ?PolicyCreateData $data = null,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
+    ): FormInterface {
+        $data = $this->prepareRedirectableData(
+            $data ?? new PolicyCreateData(),
+            $successRedirectionUrl,
+            $failureRedirectionUrl
+        );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(PolicyCreateType::class);
+
+        return $this->formFactory->createNamed($name, PolicyCreateType::class, $data);
+    }
+
+    /**
+     * @param PolicyUpdateData $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function updatePolicy(
+        PolicyUpdateData $data,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
+    ): FormInterface {
+        /** @var PolicyUpdateData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
+        );
+        $name = $name ?: sprintf('update-policy-%s-%s', $data->getModule(), $data->getFunction());
+
+        return $this->formFactory->createNamed($name, PolicyUpdateType::class, $data);
+    }
+
+    /**
+     * @param PolicyDeleteData $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function deletePolicy(
+        PolicyDeleteData $data,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
+    ): FormInterface {
+        /** @var PolicyDeleteData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
+        );
+        $name = $name ?: sprintf('delete-policy-%s-%s', $data->getModule(), $data->getFunction());
+
+        return $this->formFactory->createNamed($name, PolicyDeleteType::class, $data);
+    }
+
     /**
      * Fill redirection fields if fitting interface is implemented.
      *

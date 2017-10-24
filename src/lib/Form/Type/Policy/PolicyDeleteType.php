@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Type\RedirectableForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,5 +44,10 @@ class PolicyDeleteType extends AbstractType
             'translation_domain' => 'ezrepoforms_role',
             'data_class' => PolicyDeleteData::class,
         ]);
+    }
+
+    public function getParent()
+    {
+        return RedirectableForm::class;
     }
 }
