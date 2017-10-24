@@ -34,7 +34,6 @@ class EzPlatformAdminUiBundle extends Bundle
     private function addCompilerPasses(ContainerBuilder $container)
     {
         $container->addCompilerPass(new TabPass());
-        $container->addCompilerPass(new MenuPass());
         $container->addCompilerPass(new UiConfigProviderPass());
         $container->addCompilerPass(new SystemInfoTabGroupPass());
     }
