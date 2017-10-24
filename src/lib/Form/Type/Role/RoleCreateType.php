@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Role;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Type\RedirectableForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -38,5 +39,10 @@ class RoleCreateType extends AbstractType
             'data_class' => RoleCreateData::class,
             'translation_domain' => 'forms',
         ]);
+    }
+
+    public function getParent()
+    {
+        return RedirectableForm::class;
     }
 }

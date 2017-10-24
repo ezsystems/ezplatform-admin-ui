@@ -20,6 +20,9 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
 use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
@@ -37,6 +40,9 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionContentAssignType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionDeleteType;
@@ -487,6 +493,79 @@ class FormFactory
         return $this->formFactory->createNamed($name, LanguageDeleteType::class, $data);
     }
 
+    /**
+     * @param RoleCreateData|null $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function createRole(
+        ?RoleCreateData $data = null,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
+    ): FormInterface {
+        $data = $this->prepareRedirectableData(
+            $data ?? new RoleCreateData(),
+            $successRedirectionUrl,
+            $failureRedirectionUrl
+        );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(RoleCreateType::class);
+
+        return $this->formFactory->createNamed($name, RoleCreateType::class, $data);
+    }
+
+    /**
+     * @param RoleUpdateData $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function updateRole(
+        RoleUpdateData $data,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
+    ): FormInterface {
+        /** @var RoleUpdateData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
+        );
+        $name = $name ?: sprintf('update-role-%d', $data->getRole()->id);
+
+        return $this->formFactory->createNamed($name, RoleUpdateType::class, $data);
+    }
+
+    /**
+     * @param RoleDeleteData $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function deleteRole(
+        RoleDeleteData $data,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
+    ): FormInterface {
+        /** @var RoleDeleteData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
+        );
+        $name = $name ?: sprintf('delete-role-%d', $data->getRole()->id);
+
+        return $this->formFactory->createNamed($name, RoleDeleteType::class, $data);
+    }
     /**
      * Fill redirection fields if fitting interface is implemented.
      *

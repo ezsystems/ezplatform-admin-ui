@@ -15,9 +15,8 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper;
-use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCreateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,6 +39,12 @@ class RoleController extends Controller
     /** @var RoleUpdateMapper */
     private $roleUpdateMapper;
 
+    /** @var FormFactory */
+    private $formFactory;
+
+    /** @var SubmitHandler */
+    private $submitHandler;
+
     /**
      * RoleController constructor.
      *
@@ -48,19 +53,25 @@ class RoleController extends Controller
      * @param RoleService $roleService
      * @param RoleCreateMapper $roleCreateMapper
      * @param RoleUpdateMapper $roleUpdateMapper
+     * @param FormFactory $formFactory
+     * @param SubmitHandler $submitHandler
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
         RoleService $roleService,
         RoleCreateMapper $roleCreateMapper,
-        RoleUpdateMapper $roleUpdateMapper
+        RoleUpdateMapper $roleUpdateMapper,
+        FormFactory $formFactory,
+        SubmitHandler $submitHandler
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
         $this->roleService = $roleService;
         $this->roleCreateMapper = $roleCreateMapper;
         $this->roleUpdateMapper = $roleUpdateMapper;
+        $this->formFactory = $formFactory;
+        $this->submitHandler = $submitHandler;
     }
 
     public function listAction(): Response
@@ -74,7 +85,13 @@ class RoleController extends Controller
 
     public function viewAction(Role $role): Response
     {
-        $deleteForm = $this->createForm(RoleDeleteType::class, new RoleDeleteData($role));
+        $roleViewUrl = $this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]);
+
+        $deleteForm = $this->formFactory->deleteRole(
+            new RoleDeleteData($role),
+            'ezplatform.role.list',
+            $roleViewUrl
+        );
 
         return $this->render('@EzPlatformAdminUi/admin/role/view.html.twig', [
             'role' => $role,
@@ -84,30 +101,34 @@ class RoleController extends Controller
 
     public function createAction(Request $request): Response
     {
-        $form = $this->createForm(RoleCreateType::class);
+        $form = $this->formFactory->createRole(
+            new RoleCreateData(),
+            'ezplatform.role.view'
+        );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var RoleCreateData $data */
-            $data = $form->getData();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function(RoleCreateData $data) {
+                $roleCreateStruct = $this->roleCreateMapper->reverseMap($data);
+                $roleDraft = $this->roleService->createRole($roleCreateStruct);
+                $this->roleService->publishRoleDraft($roleDraft);
 
-            $roleCreateStruct = $this->roleCreateMapper->reverseMap($data);
-            $roleDraft = $this->roleService->createRole($roleCreateStruct);
-            $this->roleService->publishRoleDraft($roleDraft);
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Role '%role%' created.") */ 'role.create.success',
+                        ['%role%' => $roleDraft->identifier],
+                        'role'
+                    )
+                );
 
-            $this->notificationHandler->success(
-                $this->translator->trans(
-                    /** @Desc("Role '%role%' created.") */ 'role.create.success',
-                    ['%role%' => $roleDraft->identifier],
-                    'role'
-                )
-            );
+                return [
+                    'roleId' => $roleDraft->id,
+                ];
+            });
 
-            return $this->redirect($this->generateUrl('ezplatform.role.view', ['roleId' => $roleDraft->id]));
-        }
-
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->notificationHandler->error($formError->getMessage());
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
 
         return $this->render('@EzPlatformAdminUi/admin/role/add.html.twig', [
@@ -117,33 +138,38 @@ class RoleController extends Controller
 
     public function updateAction(Request $request, Role $role): Response
     {
-        $form = $this->createForm(RoleUpdateType::class, new RoleUpdateData($role));
+        $form = $this->formFactory->updateRole(
+            new RoleUpdateData($role),
+            'ezplatform.role.view'
+        );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var RoleUpdateData $data */
-            $data = $form->getData();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function(RoleUpdateData $data) {
+                $role = $data->getRole();
 
-            $roleUpdateStruct = $this->roleUpdateMapper->reverseMap($data);
-            $roleDraft = $this->roleService->createRoleDraft($role);
-            $this->roleService->updateRoleDraft($roleDraft, $roleUpdateStruct);
-            $this->roleService->publishRoleDraft($roleDraft);
+                $roleUpdateStruct = $this->roleUpdateMapper->reverseMap($data);
+                $roleDraft = $this->roleService->createRoleDraft($role);
 
-            $this->notificationHandler->success(
-                $this->translator->trans(
-                    /** @Desc("Role '%role%' updated.") */ 'role.update.success',
-                    ['%role%' => $role->identifier],
-                    'role'
-                )
-            );
+                $this->roleService->updateRoleDraft($roleDraft, $roleUpdateStruct);
+                $this->roleService->publishRoleDraft($roleDraft);
 
-            return $this->redirect($this->generateUrl('ezplatform.role.view', [
-                'roleId' => $role->id,
-            ]));
-        }
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Role '%role%' updated.") */ 'role.update.success',
+                        ['%role%' => $role->identifier],
+                        'role'
+                    )
+                );
 
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->notificationHandler->error($formError->getMessage());
+                return [
+                    'roleId' => $role->id,
+                ];
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
 
         return $this->render('@EzPlatformAdminUi/admin/role/edit.html.twig', [
@@ -154,27 +180,36 @@ class RoleController extends Controller
 
     public function deleteAction(Request $request, Role $role): Response
     {
-        $form = $this->createForm(RoleDeleteType::class, new RoleDeleteData($role));
+        $roleViewUrl = $this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]);
+
+        $form = $this->formFactory->deleteRole(
+            new RoleDeleteData($role),
+            'ezplatform.role.list',
+            $roleViewUrl
+        );
+
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->roleService->deleteRole($role);
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function(RoleDeleteData $data) {
+                $role = $data->getRole();
+                $this->roleService->deleteRole($role);
 
-            $this->notificationHandler->success(
-                $this->translator->trans(
-                    /** @Desc("Role '%role%' removed.") */ 'role.delete.success',
-                    ['%role%' => $role->identifier],
-                    'role'
-                )
-            );
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Role '%role%' removed.") */ 'role.delete.success',
+                        ['%role%' => $role->identifier],
+                        'role'
+                    )
+                );
+            });
 
-            return $this->redirect($this->generateUrl('ezplatform.role.list'));
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
 
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->notificationHandler->error($formError->getMessage());
-        }
-
-        return $this->redirect($this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]));
+        /* Fallback Redirect */
+        return $this->redirect($roleViewUrl);
     }
 }
