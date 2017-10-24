@@ -17,9 +17,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class PolicyChoiceType extends AbstractType
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $policyChoices;
 
     /**

@@ -24,9 +24,7 @@ class TrashItemRestoreData
      */
     public $trashItems;
 
-    /**
-     * @var Location|null
-     */
+    /** @var Location|null */
     public $location;
 
     /**

@@ -17,9 +17,7 @@ class ContentTypeDraftParamConverter implements ParamConverterInterface
 {
     const PARAMETER_CONTENT_TYPE_ID = 'contentTypeId';
 
-    /**
-     * @var ContentTypeService
-     */
+    /** @var ContentTypeService */
     private $contentTypeService;
 
     /**

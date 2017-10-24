@@ -24,10 +24,12 @@
     "require-dev": {
         "phpunit/phpunit": "^6.4"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }
     }
 }
-

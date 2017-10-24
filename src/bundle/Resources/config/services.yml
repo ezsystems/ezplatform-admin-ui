@@ -31,8 +31,8 @@ services:
             - { name: kernel.event_subscriber }
 
     EzSystems\EzPlatformAdminUi\EventListener\RequestListener:
-        calls:
-            - [setContainer, ["@service_container"]]
+        arguments:
+            - '%ezpublish.siteaccess.groups_by_siteaccess%'
         tags:
             - { name: kernel.event_subscriber }
 

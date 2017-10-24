@@ -18,9 +18,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class RoleParamConverter implements ParamConverterInterface
 {
     const PARAMETER_ROLE_ID = 'roleId';
-    /**
-     * @var RoleService
-     */
+
+    /** @var RoleService */
     private $roleService;
 
     /**
