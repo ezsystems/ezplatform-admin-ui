@@ -172,41 +172,35 @@ ezplatform.content_type_group.list:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentTypeGroup:list'
 
-ezplatform.content_type_group.add:
-    path: /contenttypegroup/add
-    methods: ['GET']
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:ContentTypeGroup:add'
-
-ezplatform.content_type_group.create:
-    path: /contenttypegroup
-    methods: ['POST']
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:ContentTypeGroup:create'
-
-ezplatform.content_type_group.edit:
-    path: /contenttypegroup/{contentTypeGroupId}/edit
-    methods: ['GET']
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:ContentTypeGroup:edit'
-
-ezplatform.content_type_group.update:
-    path: /contenttypegroup/{contentTypeGroupId}
-    methods: ['PUT']
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:ContentTypeGroup:update'
-
-ezplatform.content_type_group.delete:
-    path: /contenttypegroup/{contentTypeGroupId}
-    methods: ['DELETE']
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:ContentTypeGroup:delete'
-
 ezplatform.content_type_group.view:
     path: /contenttypegroup/{contentTypeGroupId}
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentTypeGroup:view'
+    requirements:
+        contentTypeGroupId: \d+
+
+ezplatform.content_type_group.create:
+    path: /contenttypegroup/create
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentTypeGroup:create'
+
+ezplatform.content_type_group.update:
+    path: /contenttypegroup/{contentTypeGroupId}/update
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentTypeGroup:update'
+    requirements:
+        contentTypeGroupId: \d+
+
+ezplatform.content_type_group.delete:
+    path: /contenttypegroup/{contentTypeGroupId}/delete
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentTypeGroup:delete'
+    requirements:
+        contentTypeGroupId: \d+
 
 ezplatform.trash.list:
     path: /trash/list

@@ -8,32 +8,32 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroupData;
+use eZ\Publish\API\Repository\ContentTypeService;
+use EzSystems\EzPlatformAdminUi\Form\DataTransformer\ContentTypeGroupTransformer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContentTypeGroupType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder->add('identifier', TextType::class, [
-            'label' => /** @Desc("Identifier") */'content_type.group.identifier',
-        ]);
-    }
+    /** @var ContentTypeService */
+    protected $contentTypeService;
 
     /**
-     * {@inheritdoc}
+     * @param ContentTypeService $contentTypeService
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function __construct(ContentTypeService $contentTypeService)
     {
-        $resolver->setDefaults([
-            'data_class' => ContentTypeGroupData::class,
-            'translation_domain' => 'ezrepoforms_content_type',
-        ]);
+        $this->contentTypeService = $contentTypeService;
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->addModelTransformer(new ContentTypeGroupTransformer($this->contentTypeService));
+    }
+
+    public function getParent()
+    {
+        return HiddenType::class;
     }
 }

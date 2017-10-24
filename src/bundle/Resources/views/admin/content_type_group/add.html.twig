@@ -23,16 +23,16 @@
     <section class="container mt-4">
         <div class="card">
             <div class="card-body">
-                {{ form_widget(form) }}
+                {{ form_row(form.identifier) }}
             </div>
         </div>
     </section>
 
     <section class="container mt-4 mb-4">
         <div class="btn-toolbar justify-content-end" role="toolbar" >
-            <button class="btn btn-primary">
-                {{ 'content_type_group.view.add.action.save'|trans|desc('Create') }}
-            </button>
+            {{ form_widget(form.create, {
+                'attr': { 'class': 'btn btn-primary' }
+            }) }}
         </div>
     </section>
 

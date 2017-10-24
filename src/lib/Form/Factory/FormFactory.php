@@ -11,6 +11,9 @@ namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
@@ -38,6 +41,10 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationRemoveType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageUpdateType;
@@ -81,6 +88,80 @@ class FormFactory
     {
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
+    }
+
+    /**
+     * @param ContentTypeGroupCreateData|null $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
+     * @return FormInterface
+     */
+    public function createContentTypeGroup(
+        ?ContentTypeGroupCreateData $data = null,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
+    ): FormInterface {
+        /** @var ContentTypeGroupCreateData $data */
+        $data = $this->prepareRedirectableData(
+            $data ?? new ContentTypeGroupCreateData(),
+            $successRedirectionUrl,
+            $failureRedirectionUrl
+        );
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentTypeGroupCreateType::class);
+
+        return $this->formFactory->createNamed($name, ContentTypeGroupCreateType::class, $data);
+    }
+
+    /**
+     * @param ContentTypeGroupUpdateData|null $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function updateContentTypeGroup(
+        ContentTypeGroupUpdateData $data = null,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
+    ): FormInterface {
+        /** @var ContentTypeGroupUpdateData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
+        );
+        $name = $name ?: sprintf('update-content-type-group-%s', $data->getContentTypeGroup()->id);
+
+        return $this->formFactory->createNamed($name, ContentTypeGroupUpdateType::class, $data);
+    }
+
+    /**
+     * @param ContentTypeGroupDeleteData|null $data
+     * @param null|string $successRedirectionUrl
+     * @param null|string $failureRedirectionUrl
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function deleteContentTypeGroup(
+        ContentTypeGroupDeleteData $data = null,
+        ?string $successRedirectionUrl = null,
+        ?string $failureRedirectionUrl = null,
+        ?string $name = null
+    ): FormInterface {
+        /** @var ContentTypeGroupDeleteData $data */
+        $data = $this->prepareRedirectableData(
+            $data,
+            $successRedirectionUrl,
+            $failureRedirectionUrl
+        );
+        $name = $name ?: sprintf('delete-content-type-group-%s', $data->getContentTypeGroup()->id);
+
+        return $this->formFactory->createNamed($name, ContentTypeGroupDeleteType::class, $data);
     }
 
     /**

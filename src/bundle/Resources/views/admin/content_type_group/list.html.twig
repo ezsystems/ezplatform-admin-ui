@@ -21,7 +21,7 @@
         <div class="ez-table-header">
             <h5>{{ 'content_type_group.view.list.title'|trans|desc('Content Type Groups') }}</h5>
             <div>
-                <a href="{{ path('ezplatform.content_type_group.add') }}" class="btn btn-primary">
+                <a href="{{ path('ezplatform.content_type_group.create') }}" class="btn btn-primary">
                     {{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type Group') }}
                 </a>
             </div>
@@ -47,25 +47,22 @@
                     </td>
                     <td>{{ content_type_group.id }}</td>
                     <td class="text-right">
-                        {% set edit_url = path('ezplatform.content_type_group.edit', {
+                        {% set edit_url = path('ezplatform.content_type_group.update', {
                             contentTypeGroupId: content_type_group.id
                         }) %}
 
-                        {% set delete_url = path('ezplatform.content_type_group.delete', {
-                            contentTypeGroupId: content_type_group.id
-                        }) %}
+                        {% set delete_form = delete_forms[content_type_group.id] %}
+                        {{ form_start(delete_form, {
+                            'action': path('ezplatform.content_type_group.delete', { contentTypeGroupId: content_type_group.id })
+                        }) }}
 
-                        <form action="{{ delete_url }}" method="POST">
-                            <input name="_method" type="hidden" value="DELETE" />
-                            <input name="form[_token]" type="hidden" value="{{ csrf_token('form') }}" />
-
-                            <a href="{{ edit_url }}" class="btn btn-secondary">
-                                {{ 'content_type_group.view.list.action.edit'|trans|desc('Edit') }}
-                            </a>
-                            <button class="btn btn-danger">
-                                {{ 'content_type_group.view.list.action.delete'|trans|desc('Delete') }}
-                            </button>
-                        </form>
+                        <a href="{{ edit_url }}" class="btn btn-secondary">
+                            {{ 'content_type_group.view.list.action.edit'|trans|desc('Edit') }}
+                        </a>
+                        {{ form_widget(delete_form.delete, {
+                            'attr': { 'class': 'btn btn-danger' }
+                        }) }}
+                        {{ form_end(delete_form) }}
                     </td>
                 </tr>
             {% endfor %}
