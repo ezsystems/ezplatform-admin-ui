@@ -35,11 +35,7 @@
     </head>
     <body class="{% block bodyClass %}{% endblock %}">
         {% block navigation %}
-            {{ knp_menu_render('main', {
-                'template': '@EzPlatformAdminUi/parts/menu.html.twig',
-                'currentClass': 'active',
-                'ancestorClass': 'active'
-            }) }}
+            {% include 'EzPlatformAdminUiBundle:parts:navigation.html.twig' %}
         {% endblock %}
         <div class="container-fluid ez-header">
             <div class="container">
