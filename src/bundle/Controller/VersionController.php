@@ -7,13 +7,14 @@
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
-use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\VersionsTab;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class VersionController extends Controller
@@ -30,68 +31,78 @@ class VersionController extends Controller
     /** @var FormFactory */
     private $formFactory;
 
+    /** @var SubmitHandler */
+    private $submitHandler;
+
     /**
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
      * @param ContentService $contentService
      * @param FormFactory $formFactory
+     * @param SubmitHandler $submitHandler
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
         ContentService $contentService,
-        FormFactory $formFactory
+        FormFactory $formFactory,
+        SubmitHandler $submitHandler
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
         $this->contentService = $contentService;
         $this->formFactory = $formFactory;
+        $this->submitHandler = $submitHandler;
     }
 
     /**
      * @param Request $request
      *
-     * @return RedirectResponse
+     * @return Response
      */
-    public function removeAction(Request $request): RedirectResponse
+    public function removeAction(Request $request): Response
     {
         $isDraftForm = null !== $request->get(VersionsTab::FORM_REMOVE_DRAFT);
-        $formName = $isDraftForm ? VersionsTab::FORM_REMOVE_DRAFT : VersionsTab::FORM_REMOVE_ARCHIVED;
+        $formName = sprintf('version-remove-%s', $isDraftForm ? VersionsTab::FORM_REMOVE_DRAFT : VersionsTab::FORM_REMOVE_ARCHIVED);
 
-        $form = $this->formFactory->removeVersion($formName, null, null, null);
+        $form = $this->formFactory->removeVersion(
+            new VersionRemoveData(),
+            '_ezpublishLocation',
+            null,
+            $formName
+        );
         $form->handleRequest($request);
 
-        /** @var UiFormData $uiFormData */
-        $uiFormData = $form->getData();
-        /** @var VersionRemoveData $versionRemoveData */
-        $versionRemoveData = $uiFormData->getData();
+        /** @var ContentInfo $contentInfo */
+        $contentInfo = $form->getData()->getContentInfo();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function(VersionRemoveData $data) {
+                $contentInfo = $data->getContentInfo();
 
-        if ($form->isValid() && $form->isSubmitted()) {
-            $contentInfo = $versionRemoveData->getContentInfo();
+                foreach ($data->getVersions() as $versionNo => $selected) {
+                    $versionInfo = $this->contentService->loadVersionInfo($contentInfo, $versionNo);
+                    $this->contentService->deleteVersion($versionInfo);
+                }
 
-            foreach ($versionRemoveData->getVersions() as $versionNo => $selected) {
-                $versionInfo = $this->contentService->loadVersionInfo($contentInfo, $versionNo);
-                $this->contentService->deleteVersion($versionInfo);
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Versions removed from `%name%` content.") */ 'version.delete.success',
+                        ['%name%' => $contentInfo->name],
+                        'version'
+                    )
+                );
+
+                return [
+                    'locationId' => $contentInfo->mainLocationId,
+                ];
+            });
+
+            if ($result instanceof Response) {
+                return $result;
             }
-
-            $this->notificationHandler->success(
-                $this->translator->trans(
-                    /** @Desc("Versions removed from `%name%` content.") */ 'version.delete.success',
-                    ['%name%' => $contentInfo->name],
-                    'version'
-                )
-            );
-
-            return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
 
-        /**
-         * @todo We should implement a service for converting form errors into notifications
-         */
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->notificationHandler->error($formError->getMessage());
-        }
-
-        return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
+        /* Fallback Redirect */
+        return $this->redirect($this->generateUrl('_ezpublishLocation', ['locationId' => $contentInfo->mainLocationId]));
     }
 }
