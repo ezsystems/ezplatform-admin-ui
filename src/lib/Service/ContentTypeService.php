@@ -92,6 +92,7 @@ class ContentTypeService
      * If there is no translation for a prioritized language, return $contentType's main language.
      *
      * @param ContentType $contentType Content type (or content type draft)
+     *
      * @return string Language code
      */
     public function getPrioritizedLanguage(ContentType $contentType)

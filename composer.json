@@ -10,19 +10,24 @@
         }
     },
     "autoload-dev": {
-        "psr-4": { "Tests\\": "tests/" }
+        "psr-4": { "EzSystems\\EzPlatformAdminUi\\Tests\\": "src/lib/Tests" }
     },
     "require": {
         "php": ">=7.1",
+        "symfony/symfony": "^3.4@beta",
         "jms/translation-bundle": "^1.3.2",
-        "ezsystems/ezpublish-kernel": "^7.0@dev",
+        "ezsystems/ezpublish-kernel": "7.0.x-dev as 6.99.x-dev",
         "ezsystems/repository-forms": "^2.0@dev",
-        "ezsystems/ezplatform-admin-ui-modules": "^1.0@dev"
+        "ezsystems/ezplatform-admin-ui-modules": "^1.0@dev",
+        "ezsystems/ez-support-tools": "^0.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4"
     },
     "extra": {
-      "branch-alias": {
-        "dev-master": "1.0.x-dev"
-      }
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     }
 }
 

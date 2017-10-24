@@ -15,6 +15,7 @@ class ContentLocationRemoveData
 {
     /**
      * @Assert\NotBlank()
+     *
      * @var ContentInfo|null
      */
     public $contentInfo;

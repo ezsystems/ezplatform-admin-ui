@@ -43,6 +43,7 @@ class Aggregator
      * @param string $key
      *
      * @return ProviderInterface
+     *
      * @throws InvalidArgumentException
      */
     public function removeProvider(string $key)
