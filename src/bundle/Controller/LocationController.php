@@ -116,7 +116,7 @@ class LocationController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Location '%name%' moved to location '%location%'") */'location.move.success',
+/** @Desc("Location '%name%' moved to location '%location%'") */'location.move.success',
                         ['%name%' => $location->getContentInfo()->name, '%location%' => $newParentLocation->getContentInfo()->name],
                         'location'
                     )
@@ -178,7 +178,7 @@ class LocationController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Location '%name%' copied to location '%location%'") */'location.copy.success',
+/** @Desc("Location '%name%' copied to location '%location%'") */'location.copy.success',
                         ['%name%' => $location->getContentInfo()->name, '%location%' => $newParentLocation->getContentInfo()->name],
                         'location'
                     )
@@ -229,7 +229,7 @@ class LocationController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Location '%name%' swaped with location '%location%'") */'location.swap.success',
+/** @Desc("Location '%name%' swaped with location '%location%'") */'location.swap.success',
                         ['%name%' => $currentLocation->getContentInfo()->name, '%location%' => $newLocation->getContentInfo()->name],
                         'location'
                     )
@@ -273,7 +273,7 @@ class LocationController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Location '%name%' moved to trash.") */'location.trash.success',
+/** @Desc("Location '%name%' moved to trash.") */'location.trash.success',
                         ['%name%' => $location->getContentInfo()->name],
                         'location'
                     )
@@ -319,7 +319,7 @@ class LocationController extends Controller
 
                     $this->notificationHandler->success(
                         $this->translator->trans(
-                            /** @Desc("Location '%name%' removed.") */'location.delete.success',
+/** @Desc("Location '%name%' removed.") */'location.delete.success',
                             ['%name%' => $location->getContentInfo()->name],
                             'location'
                         )
@@ -366,7 +366,7 @@ class LocationController extends Controller
 
                     $this->notificationHandler->success(
                         $this->translator->trans(
-                            /** @Desc("Location '%name%' created.") */'location.create.success',
+/** @Desc("Location '%name%' created.") */'location.create.success',
                             ['%name%' => $newLocation->getContentInfo()->name],
                             'location'
                         )

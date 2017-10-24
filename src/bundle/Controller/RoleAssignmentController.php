@@ -151,7 +151,7 @@ class RoleAssignmentController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Assignments on role '%role%' created.") */ 'role.assignment_create.success',
+/** @Desc("Assignments on role '%role%' created.") */ 'role.assignment_create.success',
                         ['%role%' => $role->identifier],
                         'role'
                     )
@@ -187,7 +187,7 @@ class RoleAssignmentController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Assignment on role '%role%' removed.") */ 'role.assignment_delete.success',
+/** @Desc("Assignment on role '%role%' removed.") */ 'role.assignment_delete.success',
                         ['%role%' => $role->identifier],
                         'role'
                     )

@@ -115,7 +115,7 @@ class RoleController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Role '%role%' created.") */ 'role.create.success',
+/** @Desc("Role '%role%' created.") */ 'role.create.success',
                         ['%role%' => $roleDraft->identifier],
                         'role'
                     )
@@ -156,7 +156,7 @@ class RoleController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Role '%role%' updated.") */ 'role.update.success',
+/** @Desc("Role '%role%' updated.") */ 'role.update.success',
                         ['%role%' => $role->identifier],
                         'role'
                     )
@@ -197,7 +197,7 @@ class RoleController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Role '%role%' removed.") */ 'role.delete.success',
+/** @Desc("Role '%role%' removed.") */ 'role.delete.success',
                         ['%role%' => $role->identifier],
                         'role'
                     )

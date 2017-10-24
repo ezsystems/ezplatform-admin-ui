@@ -86,7 +86,7 @@ class VersionController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Versions removed from `%name%` content.") */ 'version.delete.success',
+/** @Desc("Versions removed from `%name%` content.") */ 'version.delete.success',
                         ['%name%' => $contentInfo->name],
                         'version'
                     )

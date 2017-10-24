@@ -174,7 +174,7 @@ class SectionController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Section '%name%' removed.") */ 'section.delete.success',
+/** @Desc("Section '%name%' removed.") */ 'section.delete.success',
                         ['%name%' => $section->name],
                         'section'
                     )
@@ -217,7 +217,7 @@ class SectionController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("%contentItemsCount% content items were assigned to '%name%'") */ 'section.assign_content.success',
+/** @Desc("%contentItemsCount% content items were assigned to '%name%'") */ 'section.assign_content.success',
                         ['%name%' => $section->name, '%contentItemsCount%' => count($contentInfos)],
                         'section'
                     )
@@ -255,7 +255,7 @@ class SectionController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Section '%name%' created.") */ 'section.create.success',
+/** @Desc("Section '%name%' created.") */ 'section.create.success',
                         ['%name%' => $section->name],
                         'section'
                     )
@@ -299,7 +299,7 @@ class SectionController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Section '%name%' updated.") */ 'section.update.success',
+/** @Desc("Section '%name%' updated.") */ 'section.update.success',
                         ['%name%' => $section->name],
                         'section'
                     )
