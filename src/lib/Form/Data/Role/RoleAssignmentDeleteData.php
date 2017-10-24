@@ -9,9 +9,16 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Role;
 
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
+use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirectTrait;
 
-class RoleAssignmentDeleteData
+class RoleAssignmentDeleteData implements OnSuccessRedirect, OnFailureRedirect
 {
+    use OnSuccessRedirectTrait;
+    use OnFailureRedirectTrait;
+
     /** @var RoleAssignment */
     private $roleAssignment;
 
