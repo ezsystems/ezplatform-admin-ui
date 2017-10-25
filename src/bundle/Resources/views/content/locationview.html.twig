@@ -52,25 +52,9 @@
             </div>
         </div>
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
-            <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#trash-location-modal" {% if location.depth == 1 %}disabled{% endif %}>
-                <svg class="ez-icon ez-icon-trash-send">
-                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash-send"></use>
-                </svg>
-                {{ 'send.to.trash'|trans|desc('Send to Trash') }}</button>
-            <button class="btn btn-secondary btn-block btn--udw-copy" data-root-location="1">
-                <svg class="ez-icon ez-icon-copy">
-                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#copy"></use>
-                </svg>
-                {{ 'copy'|trans|desc('Copy') }}
-            </button>
-            <button class="btn btn-secondary btn-block btn--udw-move" data-root-location="1" {% if location.depth == 1 %}disabled{% endif %}>
-                <svg class="ez-icon ez-icon-move">
-                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#move"></use>
-                </svg>
-                {{ 'move'|trans|desc('Move') }}
-            </button>
+            {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location}) %}
+            {{ knp_menu_render(content_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 
-            {# TODO: location trash should be rendered as a form, confirmation dialog should be impl. as a type #}
             {% include 'EzPlatformAdminUiBundle:content:modal_location_trash.html.twig' with {'form': form_location_trash} %}
             {{ form(form_location_copy) }}
             {{ form(form_location_move) }}
