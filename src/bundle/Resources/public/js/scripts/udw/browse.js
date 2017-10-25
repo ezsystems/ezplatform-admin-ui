@@ -1,6 +1,8 @@
 (function () {
     const btns = document.querySelectorAll('.btn--udw-browse');
     const udwContainer = document.getElementById('react-udw');
+    const token = document.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => udwContainer.innerHTML = '';
     const onConfirm = (items) => {
         closeUDW();
@@ -18,7 +20,8 @@
             confirmLabel: 'View content',
             title: 'Browse content',
             multiple: false,
-            startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10)
+            startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
+            restInfo: {token, siteaccess}
         }), udwContainer);
     };
 
