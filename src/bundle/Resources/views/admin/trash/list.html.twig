@@ -69,15 +69,8 @@
             </section>
         </div>
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
-            {% if can_delete %}
-                <button type="button"
-                        class="btn btn-secondary btn-block{% if trash_items|length == 0 %} disabled{% endif %}"{% if trash_items|length > 0 %} data-toggle="modal" data-target="#confirmEmptyTrash"{% endif %}>
-                    <svg class="ez-icon ez-icon-trash-empty">
-                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash-empty"></use>
-                    </svg>
-                    {{ 'trash.empty_trash'|trans|desc('Empty Trash') }}
-                </button>
-            {% endif %}
+            {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
+            {{ knp_menu_render(sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
         </div>
     </div>
 {% endblock %}

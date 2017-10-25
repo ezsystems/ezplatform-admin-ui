@@ -22,3 +22,8 @@ services:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content.sidebar_right }
+
+    EzSystems\EzPlatformAdminUi\Menu\TrashRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.trash.sidebar_right }
