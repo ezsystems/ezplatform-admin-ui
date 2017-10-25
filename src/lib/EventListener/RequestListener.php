@@ -7,7 +7,6 @@
 namespace EzSystems\EzPlatformAdminUi\EventListener;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -16,7 +15,16 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class RequestListener implements EventSubscriberInterface
 {
-    use ContainerAwareTrait;
+    /** @var array */
+    private $groupsBySiteAccess;
+
+    /**
+     * @param $groupsBySiteAccess
+     */
+    public function __construct(array $groupsBySiteAccess)
+    {
+        $this->groupsBySiteAccess = $groupsBySiteAccess;
+    }
 
     /**
      * Returns an array of event names this subscriber wants to listen to.
@@ -58,12 +66,10 @@ class RequestListener implements EventSubscriberInterface
             return;
         }
 
-        $allowedGroups = is_array($allowedGroups) ?: [$allowedGroups];
+        $allowedGroups = (array)$allowedGroups;
 
-        $groups = $this->container->getParameter('ezpublish.siteaccess.groups_by_siteaccess');
-
-        foreach ($groups[$siteAccess->name] as $group) {
-            if (in_array($group, $allowedGroups)) {
+        foreach ($this->groupsBySiteAccess[$siteAccess->name] as $group) {
+            if (in_array($group, $allowedGroups, true)) {
                 return;
             }
         }
