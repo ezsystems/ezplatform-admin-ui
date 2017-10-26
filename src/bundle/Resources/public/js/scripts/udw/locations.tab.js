@@ -4,6 +4,8 @@
     const form = document.querySelector('form[name="content_location_add"]');
     const input = form.querySelector('#content_location_add_data_new_locations');
     const udwContainer = document.getElementById('react-udw');
+    const token = document.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => udwContainer.innerHTML = '';
     const onConfirm = (items) => {
         closeUDW();
@@ -21,7 +23,8 @@
             onCancel,
             confirmLabel: 'Add location',
             title: 'Select location',
-            multiple: false
+            multiple: false,
+            restInfo: {token, siteaccess}
         }), udwContainer);
     };
 

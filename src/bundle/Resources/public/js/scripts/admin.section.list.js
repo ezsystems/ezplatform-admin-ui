@@ -1,6 +1,8 @@
 (function () {
     const btns = document.querySelectorAll('.btn--open-udw');
     const udwContainer = document.getElementById('react-udw');
+    const token = document.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => udwContainer.innerHTML = '';
     const onConfirm = (form, content) => {
         console.log(form, form.getAttribute('name'));
@@ -20,6 +22,7 @@
         ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
             onConfirm: onConfirm.bind(this, form),
             onCancel,
+            restInfo: {token, siteaccess}
         }), udwContainer);
     };
 

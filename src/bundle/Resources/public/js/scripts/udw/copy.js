@@ -3,6 +3,8 @@
     const form = document.querySelector('form[name="location_copy"]');
     const input = form.querySelector('#location_copy_data_new_parent_location');
     const udwContainer = document.getElementById('react-udw');
+    const token = document.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => udwContainer.innerHTML = '';
     const onConfirm = (items) => {
         closeUDW();
@@ -20,7 +22,8 @@
             confirmLabel: 'Copy to location',
             title: 'Select location',
             multiple: false,
-            startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10)
+            startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
+            restInfo: {token, siteaccess}
         }), udwContainer);
     };
 
