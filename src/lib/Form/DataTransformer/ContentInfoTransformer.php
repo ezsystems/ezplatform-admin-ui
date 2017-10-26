@@ -10,9 +10,12 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\ContentService;
 use Symfony\Component\Form\DataTransformerInterface;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use Symfony\Component\Form\Exception\TransformationFailedException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 /**
- * Translates Content's ID to domain specific ContentInfo object.
+ * Transforms between a Content's ID and a domain specific ContentInfo object.
  */
 class ContentInfoTransformer implements DataTransformerInterface
 {
@@ -27,17 +30,53 @@ class ContentInfoTransformer implements DataTransformerInterface
         $this->contentService = $contentService;
     }
 
+    /**
+     * Transforms a domain specific ContentInfo object into a Content's ID.
+     *
+     * @param ContentInfo|null $value
+     *
+     * @return mixed|null
+     *
+     * @throws TransformationFailedException
+     */
     public function transform($value)
     {
-        return null !== $value
-            ? $value->id
-            : null;
+        if (null === $value) {
+            return null;
+        }
+
+        if (!$value instanceof ContentInfo) {
+            throw new TransformationFailedException('Expected a ' . ContentInfo::class . ' object.');
+        }
+
+        return $value->id;
     }
 
-    public function reverseTransform($value)
+    /**
+     * Transforms a Content's ID integer into a domain specific ContentInfo object.
+     *
+     * @param mixed $value
+     *
+     * @return ContentInfo|null
+     *
+     * @throws NotFoundException
+     * @throws TransformationFailedException if the given value is not an integer
+     *                                       or if the value can not be transformed
+     */
+    public function reverseTransform($value): ?ContentInfo
     {
-        return null !== $value && !empty($value)
-            ? $this->contentService->loadContentInfo($value)
-            : null;
+        if (empty($value)) {
+            return null;
+        }
+
+        if (!is_int($value)) {
+            throw new TransformationFailedException('Expected an integer.');
+        }
+
+        try {
+            return $this->contentService->loadContentInfo($value);
+        } catch (NotFoundException $e) {
+            throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }

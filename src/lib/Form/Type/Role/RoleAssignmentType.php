@@ -32,7 +32,7 @@ class RoleAssignmentType extends AbstractType
         $builder->addViewTransformer(new RoleAssignmentTransformer($this->roleService));
     }
 
-    public function getParent()
+    public function getParent(): ?string
     {
         return HiddenType::class;
     }

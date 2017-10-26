@@ -8,11 +8,15 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
 use Symfony\Component\Form\DataTransformerInterface;
+use eZ\Publish\API\Repository\Values\User\RoleAssignment as APIRoleAssignment;
+use Symfony\Component\Form\Exception\TransformationFailedException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 /**
- * Translates RoleAssignment's ID to domain specific Role object.
+ * Transforms between a Role Assignment's identifier and a domain specific object.
  */
 class RoleAssignmentTransformer implements DataTransformerInterface
 {
@@ -27,17 +31,48 @@ class RoleAssignmentTransformer implements DataTransformerInterface
         $this->roleService = $roleService;
     }
 
+    /**
+     * Transforms a domain specific RoleAssignment object into a RoleAssignment string.
+     *
+     * @param mixed $value
+     *
+     * @return mixed|null
+     *
+     * @throws TransformationFailedException
+     */
     public function transform($value)
     {
-        return null !== $value
-            ? $value->id
-            : null;
+        if (null === $value) {
+            return null;
+        }
+
+        if (!$value instanceof APIRoleAssignment) {
+            throw new TransformationFailedException('Expected a ' . APIRoleAssignment::class . ' object.');
+        }
+
+        return $value->id;
     }
 
-    public function reverseTransform($value)
+    /**
+     * Transforms a RoleAssignment's ID into a domain specific RoleAssignment object.
+     *
+     * @param mixed $value
+     *
+     * @return APIRoleAssignment|null
+     *
+     * @throws TransformationFailedException
+     * @throws UnauthorizedException
+     */
+    public function reverseTransform($value): ?APIRoleAssignment
     {
-        return null !== $value
-            ? $this->roleService->loadRoleAssignment($value)
-            : null;
+        if (empty($value)) {
+            return null;
+        }
+
+        try {
+            return $this->roleService->loadRoleAssignment($value);
+        } catch (NotFoundException $e) {
+            throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }

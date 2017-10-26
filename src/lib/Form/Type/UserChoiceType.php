@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type;
 
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause as SortClause;
+use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
 use Symfony\Component\Form\AbstractType;
@@ -50,7 +50,7 @@ class UserChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): ?string
     {
         return ChoiceType::class;
     }
@@ -60,7 +60,7 @@ class UserChoiceType extends AbstractType
      *
      * @return User[]
      */
-    protected function getUsers()
+    protected function getUsers(): array
     {
         return $this->repository->sudo(function (Repository $repository) {
             $query = new LocationQuery();

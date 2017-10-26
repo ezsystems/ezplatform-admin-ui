@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Service\Role;
 
-use eZ\Publish\API\Repository as Repository;
+use eZ\Publish\API\Repository;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentId;
 use eZ\Publish\API\Repository\Values\User\Limitation\RoleLimitation;

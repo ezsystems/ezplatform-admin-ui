@@ -10,9 +10,12 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\LocationService;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
+use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 /**
- * Translates Location's ID to domain specific object.
+ * Transforms between a Location's ID and a domain specific Location object.
  */
 class LocationsTransformer implements DataTransformerInterface
 {
@@ -27,19 +30,48 @@ class LocationsTransformer implements DataTransformerInterface
         $this->locationService = $locationService;
     }
 
-    public function transform($value)
+    /**
+     * Transforms a domain specific Location objects into a Location's ID comma separated string.
+     *
+     * @param mixed $value
+     *
+     * @return string|null
+     */
+    public function transform($value): ?string
     {
-        return is_array($value) && !empty($value)
-            ? implode(',', array_column($value, 'id'))
-            : [];
+        /** TODO add sanity check is array of Location object? */
+        if (!is_array($value) || empty($value)) {
+            return null;
+        }
+
+        return implode(',', array_column($value, 'id'));
     }
 
-    public function reverseTransform($value)
+    /**
+     * Transforms a Location's ID string into a domain specific Location objects.
+     *
+     * @param mixed $value
+     *
+     * @return Location[]|null
+     *
+     * @throws TransformationFailedException
+     */
+    public function reverseTransform($value): ?array
     {
+        if (empty($value)) {
+            return null;
+        }
+
+        if (!is_string($value)) {
+            throw new TransformationFailedException('Expected a string.');
+        }
+
         $value = explode(',', $value);
 
-        return !empty($value)
-            ? array_map([$this->locationService, 'loadLocation'], $value)
-            : null;
+        try {
+            return array_map([$this->locationService, 'loadLocation'], $value);
+        } catch (NotFoundException $e) {
+            throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }

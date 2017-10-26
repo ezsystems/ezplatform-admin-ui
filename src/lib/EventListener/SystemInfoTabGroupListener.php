@@ -39,6 +39,9 @@ class SystemInfoTabGroupListener implements EventSubscriberInterface
         $this->systeminfoCollectorRegistry = $systeminfoCollectorRegistry;
     }
 
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents(): array
     {
         return [

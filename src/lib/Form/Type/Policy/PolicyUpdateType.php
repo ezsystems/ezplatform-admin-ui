@@ -97,7 +97,7 @@ class PolicyUpdateType extends AbstractType
      *
      * @return array|\eZ\Publish\API\Repository\Values\User\Limitation[]
      */
-    private function generateLimitationList(array $existingLimitations, array $availableLimitationTypes)
+    private function generateLimitationList(array $existingLimitations, array $availableLimitationTypes): array
     {
         $limitations = [];
         foreach ($existingLimitations as $limitation) {

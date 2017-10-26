@@ -10,10 +10,15 @@ use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\Core\Repository\Values\User\PolicyUpdateStruct;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
 
+/**
+ * Maps between PolicyUpdateStruct and PolicyUpdateData objects.
+ */
 class PolicyUpdateMapper implements DataMapperInterface
 {
     /**
-     * @param PolicyUpdateStruct $value
+     * Maps given PolicyUpdateStruct object to a PolicyUpdateData object.
+     *
+     * @param PolicyUpdateStruct|ValueObject $value
      *
      * @return PolicyUpdateData
      */
@@ -29,6 +34,8 @@ class PolicyUpdateMapper implements DataMapperInterface
     }
 
     /**
+     * Maps given PolicyUpdateData object to a PolicyUpdateStruct object.
+     *
      * @param PolicyUpdateData $data
      *
      * @return PolicyUpdateStruct

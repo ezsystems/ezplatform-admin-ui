@@ -26,10 +26,14 @@ class PolicyCreateData
 
     /**
      * @param string $module
+     *
+     * @return PolicyCreateData
      */
-    public function setModule(string $module)
+    public function setModule(string $module): PolicyCreateData
     {
         $this->module = $module;
+
+        return $this;
     }
 
     /**
@@ -42,19 +46,27 @@ class PolicyCreateData
 
     /**
      * @param string $function
+     *
+     * @return PolicyCreateData
      */
-    public function setFunction(string $function)
+    public function setFunction(string $function): PolicyCreateData
     {
         $this->function = $function;
+
+        return $this;
     }
 
     /**
      * @param array $policy
+     *
+     * @return PolicyCreateData
      */
-    public function setPolicy(array $policy)
+    public function setPolicy(array $policy): PolicyCreateData
     {
         $this->setModule($policy['module']);
         $this->setFunction($policy['function']);
+
+        return $this;
     }
 
     /**
