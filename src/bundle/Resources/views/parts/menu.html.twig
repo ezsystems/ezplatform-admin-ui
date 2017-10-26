@@ -137,9 +137,5 @@
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#{{ item.extras.icon  }}"></use>
         </svg>
     {% endif %}
-    {% if options.allow_safe_labels and item.getExtra('safe_label', false) %}
-        {{ item.label|raw }}
-    {% else %}
-        {{ item.label }}
-    {% endif %}
+    {{ parent() }}
 {% endblock %}

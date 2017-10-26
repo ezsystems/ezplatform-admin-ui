@@ -4,126 +4,16 @@ services:
         autoconfigure: true
         public: true
 
-    EzSystems\EzPlatformAdminUi\Menu\Registry:
+    #
+    # Menu Builders
+    #
 
-#KNP Builders
-    EzSystems\EzPlatformAdminUi\Menu\Builder:
+    EzSystems\EzPlatformAdminUi\Menu\MainMenuBuilder:
         public: true
-        arguments:
-            $identifier: 'main'
         tags:
-            - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.main }
 
-#Menus
-    ezplatform.menu.main:
-        class: EzSystems\EzPlatformAdminUi\Menu\Menu
-        arguments:
-            $identifier: 'main'
+    EzSystems\EzPlatformAdminUi\Menu\LeftSidebarBuilder:
+        public: true
         tags:
-            - { name: ezplatform.menu, identifier: main }
-
-    ezplatform.menu.main.content:
-        class: EzSystems\EzPlatformAdminUi\Menu\Item
-        arguments:
-            $identifier: content
-            $icon: 'content-list'
-        tags:
-            - { name: ezplatform.menu.item, parent: ezplatform.menu.main, priority: 10 }
-
-    ezplatform.menu.main.content.structure:
-        class: EzSystems\EzPlatformAdminUi\Menu\Item
-        arguments:
-            $identifier: content_structure
-            $name: 'Content Structure'
-            $url: { route: _ezpublishLocation, routeParameters: { locationId: 2 } }
-        tags:
-            - { name: ezplatform.menu.item, parent: ezplatform.menu.main.content, priority: 10 }
-
-    ezplatform.menu.main.content.media:
-        class: EzSystems\EzPlatformAdminUi\Menu\Item
-        arguments:
-            $identifier: media
-            $url: { route: _ezpublishLocation, routeParameters: { locationId: 43 } }
-        tags:
-            - { name: ezplatform.menu.item, parent: ezplatform.menu.main.content, priority: 10 }
-
-    ezplatform.menu.main.admin:
-        class: EzSystems\EzPlatformAdminUi\Menu\Item
-        arguments:
-            $identifier: admin
-            $icon: 'panel'
-        tags:
-            - { name: ezplatform.menu.item, parent: ezplatform.menu.main, priority: 20 }
-
-    ezplatform.menu.main.admin.systeminfo:
-        class: EzSystems\EzPlatformAdminUi\Menu\Item
-        arguments:
-            $identifier: systeminfo
-            $name: 'System Info'
-            $url: { route: ezplatform.systeminfo }
-        tags:
-            - { name: ezplatform.menu.item, parent: ezplatform.menu.main.admin, priority: 10 }
-
-    ezplatform.menu.main.admin.sections:
-        class: EzSystems\EzPlatformAdminUi\Menu\Item
-        arguments:
-            $identifier: sections
-            $url: { route: ezplatform.section.list }
-        tags:
-            - { name: ezplatform.menu.item, parent: ezplatform.menu.main.admin, priority: 20 }
-
-    ezplatform.menu.main.admin.roles:
-        class: EzSystems\EzPlatformAdminUi\Menu\Item
-        arguments:
-            $identifier: roles
-            $url: { route: ezplatform.role.list }
-        tags:
-            - { name: ezplatform.menu.item, parent: ezplatform.menu.main.admin, priority: 30 }
-
-    ezplatform.menu.main.admin.languages:
-        class: EzSystems\EzPlatformAdminUi\Menu\Item
-        arguments:
-            $identifier: languages
-            $url: { route: ezplatform.language.list }
-        tags:
-            - { name: ezplatform.menu.item, parent: ezplatform.menu.main.admin, priority: 40 }
-
-    ezplatform.menu.main.admin.contenttypes:
-        class: EzSystems\EzPlatformAdminUi\Menu\Item
-        arguments:
-            $identifier: contenttypes
-            $name: 'Content Types'
-            $url: { route: ezplatform.content_type_group.list }
-        tags:
-            - { name: ezplatform.menu.item, parent: ezplatform.menu.main.admin, priority: 50 }
-
-
-    ezplatform.menu.sidebar:
-        class: EzSystems\EzPlatformAdminUi\Menu\Menu
-        arguments:
-            $identifier: 'sidebar'
-        tags:
-            - { name: ezplatform.menu, identifier: sidebar }
-
-    ezplatform.menu.sidebar.search:
-        class: EzSystems\EzPlatformAdminUi\Menu\Item
-        arguments:
-            $identifier: search
-            $enabled: false
-        tags:
-            - { name: ezplatform.menu.item, parent: ezplatform.menu.sidebar, priority: 10 }
-
-    ezplatform.menu.sidebar.browse:
-        class: EzSystems\EzPlatformAdminUi\Menu\Item
-        arguments:
-            $identifier: browse
-        tags:
-            - { name: ezplatform.menu.item, parent: ezplatform.menu.sidebar, priority: 20 }
-
-    ezplatform.menu.sidebar.trash:
-        class: EzSystems\EzPlatformAdminUi\Menu\Item
-        arguments:
-            $identifier: trash
-            $url: { route: ezplatform.trash.list }
-        tags:
-            - { name: ezplatform.menu.item, parent: ezplatform.menu.sidebar, priority: 30 }
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content.sidebar_left }

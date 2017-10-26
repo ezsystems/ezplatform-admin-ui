@@ -21,6 +21,7 @@ services:
         factory: 'eZ\Publish\API\Repository\Repository:getPermissionResolver'
 
     eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList: '@ezpublish.fields_groups.list'
+    eZ\Publish\Core\MVC\ConfigResolverInterface: '@ezpublish.config.resolver'
 
     # Repository Forms
     EzSystems\RepositoryForms\Form\Type\Role\LimitationType: '@ezrepoforms.policy.limitation.form'
