@@ -25,6 +25,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationContainerInterface
 {
     /* Menu items */
+    const ITEM__CREATE = 'content__sidebar_right__create';
     const ITEM__EDIT = 'content__sidebar_right__edit';
     const ITEM__SEND_TO_TRASH = 'content__sidebar_right__send_to_trash';
     const ITEM__COPY = 'content__sidebar_right__copy';
@@ -68,23 +69,36 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $location = $options['location'];
         /** @var ItemInterface|ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
+        $canCreate = $this->permissionResolver->hasAccess('content', 'create');
         $canEdit = $this->permissionResolver->canUser('content', 'edit', $location->getContentInfo());
 
-        $editButtonAttributes = [
+        $createAttributes = [
+            'class' => 'ez-btn--extra-actions ez-btn--create',
+            'data-actions' => 'create',
+            'data-focus-element' => '.ez-instant-filter__input',
+        ];
+        $editAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--edit',
             'data-actions' => 'edit',
         ];
 
-        if (!$canEdit) {
-            $editButtonAttributes['disabled'] = 'disabled';
-        }
-
         $menu->setChildren([
+            self::ITEM__CREATE => $this->createMenuItem(
+                self::ITEM__CREATE,
+                [
+                    'extras' => ['icon' => 'create'],
+                    'attributes' => $canCreate
+                        ? $createAttributes
+                        : array_merge($createAttributes, ['disabled' => 'disabled']),
+                ]
+            ),
             self::ITEM__EDIT => $this->createMenuItem(
                 self::ITEM__EDIT,
                 [
                     'extras' => ['icon' => 'edit'],
-                    'attributes' => $editButtonAttributes,
+                    'attributes' => $canEdit
+                        ? $editAttributes
+                        : array_merge($editAttributes, ['disabled' => 'disabled']),
                 ]
             ),
             self::ITEM__SEND_TO_TRASH => $this->createMenuItem(
@@ -133,6 +147,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     public static function getTranslationMessages(): array
     {
         return [
+            (new Message(self::ITEM__CREATE, 'menu'))->setDesc('Create'),
             (new Message(self::ITEM__EDIT, 'menu'))->setDesc('Edit'),
             (new Message(self::ITEM__SEND_TO_TRASH, 'menu'))->setDesc('Send to Trash'),
             (new Message(self::ITEM__COPY, 'menu'))->setDesc('Copy'),

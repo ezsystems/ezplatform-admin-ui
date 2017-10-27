@@ -328,3 +328,9 @@ ezplatform.content_draft.create:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Content:createDraft'
+
+ezplatform.content.create:
+    path: /content/create
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Content:create'

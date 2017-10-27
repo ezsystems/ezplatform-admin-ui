@@ -1,0 +1,17 @@
+.ez-instant-filter {
+    &__input {
+        display: block;
+        width: 100%;
+    }
+}
+
+.ez-extra-actions--create {
+    .ez-instant-filter {
+        max-height: 195px;
+
+        &__items {
+            max-height: 150px;
+            overflow: auto;
+        }
+    }
+}

@@ -2,3 +2,34 @@
     {{ form_widget(form.location) }}
     {{ form_widget(form.select_content) }}
 {% endblock ezsystems_ezplatform_type_udw_widget %}
+
+{% block _content_create_content_type_widget -%}
+    {%- if expanded -%}
+        {{- block('content_type_choice_widget_expanded') -}}
+    {%- else -%}
+        {{- block('choice_widget_collapsed') -}}
+    {%- endif -%}
+{%- endblock %}
+
+{%- block content_type_choice_widget_expanded -%}
+    <div>
+        {%- set options = choices -%}
+        {{- block('content_type_choice_widget_options') -}}
+    </div>
+{%- endblock -%}
+
+{%- block content_type_choice_widget_options -%}
+    {%- for group_label, choice in options -%}
+        {%- if choice is iterable -%}
+            <div class="ez-instant-filter__group">
+                <div class="ez-instant-filter__group-name">{{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }}</div>
+                {%- set options = choice -%}
+                {{- block('content_type_choice_widget_options') -}}
+            </div>
+        {%- else -%}
+            <div class="radio ez-instant-filter__group-item">
+                {{ form_widget(form[choice.value], {'parent_label_class': 'radio-inline'}) }}
+            </div>
+        {%- endif -%}
+    {%- endfor -%}
+{%- endblock -%}
