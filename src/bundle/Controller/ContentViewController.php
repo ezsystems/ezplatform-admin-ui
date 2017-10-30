@@ -12,18 +12,18 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Service\PathService;
+use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
 
 class ContentViewController extends Controller
 {
     /** @var ContentTypeService */
-    protected $contentTypeService;
+    private $contentTypeService;
 
     /** @var PathService */
-    protected $pathService;
+    private $pathService;
 
     /** @var FormFactory */
-    protected $formFactory;
+    private $formFactory;
 
     /**
      * @param ContentTypeService $contentTypeService
@@ -72,25 +72,15 @@ class ContentViewController extends Controller
     private function supplyContentActionForms(ContentView $view): void
     {
         $location = $view->getLocation();
-        $locationViewUrl = $this->generateUrl($location);
 
         $locationCopyType = $this->formFactory->copyLocation(
-            null,
-            new LocationCopyData($location),
-            null /* action handles the redirection */,
-            $locationViewUrl
+            new LocationCopyData($location)
         );
         $locationMoveType = $this->formFactory->moveLocation(
-            null,
-            new LocationMoveData($location),
-            null /* action handles the redirection */,
-            $locationViewUrl
+            new LocationMoveData($location)
         );
         $locationTrashType = $this->formFactory->trashLocation(
-            null,
-            new LocationTrashData($location),
-            null /* action handles the redirection */,
-            $locationViewUrl
+            new LocationTrashData($location)
         );
 
         $view->addParameters([

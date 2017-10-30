@@ -4,15 +4,15 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.admin'|trans([], 'messages') },
-        { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans },
-        { value: 'role.breadcrumb.add'|trans }
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans|desc('Roles') },
+        { value: 'role.breadcrumb.add'|trans|desc('Creating a new Role') }
     ]} %}
 {% endblock %}
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'role.view.add.title'|trans,
+        title: 'role.view.add.title'|trans|desc('Creating a new Role'),
         iconName: 'roles'
     } %}
 {% endblock %}
@@ -29,6 +29,9 @@
 
     <section class="container mt-4 mb-4">
         <div class="btn-toolbar justify-content-end" role="toolbar" >
+            <a href="{{ path("ezplatform.role.list") }}" class="btn btn-default">
+                {{ "form.cancel"|trans|desc('Cancel') }}
+            </a>
             {{ form_widget(form.save, { 'attr': { 'class': 'btn btn-primary' } }) }}
         </div>
     </section>

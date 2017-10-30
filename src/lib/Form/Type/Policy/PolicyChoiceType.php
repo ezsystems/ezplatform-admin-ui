@@ -94,17 +94,21 @@ class PolicyChoiceType extends AbstractType
      */
     private function buildPolicyChoicesFromMap(TranslatorInterface $translator, array $policyMap): array
     {
+        $allModules = $translator->trans(/** @Desc("All modules") */'role.policy.all_modules', [], 'ezrepoforms_role');
+        $allFunctions = $translator->trans(/** @Desc("All functions") */'role.policy.all_functions', [], 'ezrepoforms_role');
+        $allModulesAndFunctions = $translator->trans(/** @Desc("All modules / All functions") */'role.policy.all_modules_all_functions', [], 'ezrepoforms_role');
+
         $policyChoices = [
-            'role.policy.all_modules' => [
-                'role.policy.all_modules_all_functions' => '*|*',
-            ],
+             $allModules => [
+                 $allModulesAndFunctions => '*|*',
+             ],
         ];
 
         foreach ($policyMap as $module => $functionList) {
             $humanizedModule = $this->humanize($module);
             // For each module, add possibility to grant access to all functions.
             $policyChoices[$humanizedModule] = [
-                "$humanizedModule / " . $translator->trans('role.policy.all_functions', [], 'ezrepoforms_role') => "$module|*",
+                "$humanizedModule / " . $allFunctions => "$module|*",
             ];
 
             foreach ($functionList as $function => $limitationList) {

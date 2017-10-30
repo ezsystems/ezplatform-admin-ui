@@ -4,28 +4,40 @@
 {% block breadcrumbs %}
     {% include 'EzPlatformAdminUiBundle:parts:breadcrumbs.html.twig' with {
     'items': [
-    { 'value': 'breadcrumb.admin'|trans([], 'messages') },
-    { 'url': path('ezplatform.section.list'), 'value': 'section.list'|trans },
-    { 'url': path('ezplatform.section.view', { sectionId: section.id }), 'value': section.name },
-    { 'value': 'section.edit'|trans }
-    ]
-    } %}
+        { 'value': 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { 'url': path('ezplatform.section.list'), 'value': 'section.list'|trans|desc('Sections') },
+        { 'value': 'section.update.title'|trans({ '%identifier%': section.name })|desc('Editing Section "%identifier%"') }
+    ]} %}
 {% endblock %}
 
 {% block pageTitle %}
-    {{ 'section.update'|trans }}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'section.update.title'|trans({ '%identifier%': section.name })|desc('Editing Section "%identifier%"'),
+        iconName: 'sections'
+    } %}
 {% endblock %}
 
 {% block content %}
-    <section class="container">
-        {{ form_start(form_section_update) }}
-        {{ form_row(form_section_update.data.identifier) }}
-        {{ form_row(form_section_update.data.name) }}
+    {{ form_start(form_section_update) }}
 
-        <a href="{{ path('ezplatform.section.view', {'sectionId': section.id}) }}"
-           class="btn btn-default">{{ "section.form.cancel"|trans }}</a>
-        {{ form_widget(form_section_update.data.update, {"attr": {"class": "btn btn-primary"}}) }}
-        {{ form_end(form_section_update) }}
+    <section class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                {{ form_row(form_section_update.identifier) }}
+                {{ form_row(form_section_update.name) }}
+            </div>
+        </div>
     </section>
+
+    <section class="container mt-4 mb-4">
+        <div class="btn-toolbar justify-content-end" role="toolbar" >
+            <a href="{{ path("ezplatform.section.list") }}" class="btn btn-default">
+                {{ "form.cancel"|trans|desc('Cancel') }}
+            </a>
+            {{ form_widget(form_section_update.update, {"attr": {"class": "btn btn-primary"}}) }}
+        </div>
+    </section>
+
+    {{ form_end(form_section_update) }}
 {% endblock %}
 

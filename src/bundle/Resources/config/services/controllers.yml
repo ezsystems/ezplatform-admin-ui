@@ -17,3 +17,9 @@ services:
         public: true
         arguments:
             $contentTypeActionDispatcher: '@ezrepoforms.action_dispatcher.content_type'
+            $languages: '$languages$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeGroupController:
+        public: true
+        arguments:
+            $languages: '$languages$'

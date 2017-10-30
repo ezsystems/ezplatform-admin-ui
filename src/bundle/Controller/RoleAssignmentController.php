@@ -16,39 +16,67 @@ use eZ\Publish\API\Repository\Values\User\Role;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class RoleAssignmentController extends Controller
 {
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
     /** @var RoleService */
     private $roleService;
 
     /** @var SearchService */
     private $searchService;
 
+    /** @var FormFactory */
+    private $formFactory;
+
+    /** @var SubmitHandler */
+    private $submitHandler;
+
     /**
      * PolicyController constructor.
      *
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
      * @param RoleService $roleService
+     * @param SearchService $searchService
+     * @param FormFactory $formFactory
+     * @param SubmitHandler $submitHandler
      */
-    public function __construct(RoleService $roleService, SearchService $searchService)
-    {
+    public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
+        RoleService $roleService,
+        SearchService $searchService,
+        FormFactory $formFactory,
+        SubmitHandler $submitHandler
+    ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
         $this->roleService = $roleService;
         $this->searchService = $searchService;
+        $this->formFactory = $formFactory;
+        $this->submitHandler = $submitHandler;
     }
 
     public function listAction(Role $role): Response
     {
         $assignments = $this->roleService->getRoleAssignments($role);
-
         $deleteFormsByAssignmentId = [];
 
         foreach ($assignments as $assignment) {
-            $deleteFormsByAssignmentId[$assignment->id] = $this->createForm(
-                RoleAssignmentDeleteType::class,
+            $deleteFormsByAssignmentId[$assignment->id] = $this->formFactory->createRoleAssignment(
                 new RoleAssignmentDeleteData($assignment)
             )->createView();
         }
@@ -62,65 +90,75 @@ class RoleAssignmentController extends Controller
 
     public function createAction(Request $request, Role $role): Response
     {
-        $form = $this->createForm(RoleAssignmentCreateType::class);
+        $form = $this->formFactory->createRoleAssignment(
+            new RoleAssignmentCreateData()
+        );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var RoleAssignmentCreateData $data */
-            $data = $form->getData();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (RoleAssignmentCreateData $data) use ($role) {
+                $users = $data->getUsers();
+                $groups = $data->getGroups();
+                $sections = $data->getSections();
+                $locations = $data->getLocations();
 
-            $users = $data->getUsers();
-            $groups = $data->getGroups();
-            $sections = $data->getSections();
-            $locations = $data->getLocations();
+                $limitations = [];
 
-            $limitations = [];
+                if (empty($sections) && empty($locations)) {
+                    $limitations[] = null;
+                } else {
+                    if (!empty($sections)) {
+                        $limitation = new SectionLimitation();
 
-            if (empty($sections) && empty($locations)) {
-                $limitations[] = null;
-            } else {
-                if (!empty($sections)) {
-                    $limitation = new SectionLimitation();
+                        foreach ($sections as $section) {
+                            $limitation->limitationValues[] = $section->id;
+                        }
 
-                    foreach ($sections as $section) {
-                        $limitation->limitationValues[] = $section->id;
+                        $limitations[] = $limitation;
                     }
 
-                    $limitations[] = $limitation;
+                    if (!empty($locations)) {
+                        $limitation = new SubtreeLimitation();
+
+                        foreach ($locations as $location) {
+                            $limitation->limitationValues[] = $location->pathString;
+                        }
+
+                        $limitations[] = $limitation;
+                    }
                 }
 
-                if (!empty($locations)) {
-                    $limitation = new SubtreeLimitation();
-
-                    foreach ($locations as $location) {
-                        $limitation->limitationValues[] = $location->pathString;
+                foreach ($limitations as $limitation) {
+                    if (!empty($users)) {
+                        foreach ($users as $user) {
+                            $this->roleService->assignRoleToUser($role, $user, $limitation);
+                        }
                     }
 
-                    $limitations[] = $limitation;
+                    if (!empty($groups)) {
+                        foreach ($groups as $group) {
+                            $this->roleService->assignRoleToUserGroup($role, $group, $limitation);
+                        }
+                    }
                 }
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Assignments on role '%role%' created.") */
+                        'role.assignment_create.success',
+                        ['%role%' => $role->identifier],
+                        'role'
+                    )
+                );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
+                    'roleId' => $role->id,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
             }
-
-            foreach ($limitations as $limitation) {
-                if (!empty($users)) {
-                    foreach ($users as $user) {
-                        $this->roleService->assignRoleToUser($role, $user, $limitation);
-                    }
-                }
-
-                if (null !== $groups) {
-                    foreach ($groups as $group) {
-                        $this->roleService->assignRoleToUserGroup($role, $group, $limitation);
-                    }
-                }
-            }
-
-            $this->addFlash('success', 'role_assignment.created');
-
-            return $this->redirect($this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]));
-        }
-
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
         }
 
         return $this->render('@EzPlatformAdminUi/admin/role_assignment/add.html.twig', [
@@ -131,19 +169,37 @@ class RoleAssignmentController extends Controller
 
     public function deleteAction(Request $request, Role $role, RoleAssignment $roleAssignment): Response
     {
-        $form = $this->createForm(RoleAssignmentDeleteType::class, new RoleAssignmentDeleteData($roleAssignment));
+        $form = $this->formFactory->deleteRoleAssignment(
+            new RoleAssignmentDeleteData($roleAssignment)
+        );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->roleService->removeRoleAssignment($roleAssignment);
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (RoleAssignmentDeleteData $data) use ($role) {
+                $roleAssignment = $data->getRoleAssignment();
+                $this->roleService->removeRoleAssignment($roleAssignment);
 
-            $this->addflash('success', 'role_assignment.deleted');
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Assignment on role '%role%' removed.") */
+                        'role.assignment_delete.success',
+                        ['%role%' => $role->identifier],
+                        'role'
+                    )
+                );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
+                    'roleId' => $role->id,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
 
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
-        }
-
-        return $this->redirect($this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]));
+        return $this->redirect($this->generateUrl('ezplatform.role.view', [
+            'roleId' => $role->id,
+        ]));
     }
 }

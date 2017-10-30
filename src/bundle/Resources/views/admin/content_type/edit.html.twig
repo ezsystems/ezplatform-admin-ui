@@ -4,25 +4,16 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        {
-            value: 'breadcrumb.admin'|trans([], 'messages')
-        },
-        {
-            url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans
-        },
-        {
-            url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }),
-            value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })
-        },
-        {
-            value: 'content_type.breadcrumb.view'|trans({ '%identifier%': content_type.name })
-        }
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
+        { url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }), value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })|desc('%identifier%') },
+        { value: 'content_type.breadcrumb.edit'|trans({ '%identifier%': content_type.name })|desc('Editing Content Type "%identifier%"') }
     ]} %}
 {% endblock %}
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'content_type.view.edit.title'|trans({ '%name%': content_type.name }),
+        title: 'content_type.view.edit.title'|trans({ '%name%': content_type.name })|desc('Editing Content Type "%name%"'),
         iconName: 'content-types'
     } %}
 {% endblock %}
@@ -117,7 +108,9 @@
 
     <section class="container mt-4 mb-4">
         <div class="btn-toolbar justify-content-between" role="toolbar">
-            {{ form_widget(form.removeDraft, { attr: { class: 'btn btn-danger'}}) }}
+            <a href="{{ path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }) }}" class="btn btn-default">
+                {{ "form.cancel"|trans|desc('Cancel') }}
+            </a>
 
             <div class="btn-toolbar justify-content-between" role="toolbar">
                 <div class="btn-group" role="group">
@@ -128,5 +121,5 @@
         </div>
     </section>
 
-    {{ form_end(form) }}
+    {{ form_end(form, {'render_rest': false }) }}
 {% endblock %}

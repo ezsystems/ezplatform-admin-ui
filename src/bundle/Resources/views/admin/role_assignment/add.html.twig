@@ -4,16 +4,16 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.admin'|trans([], 'messages') },
-        { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans },
-        { url: path('ezplatform.role.view', {roleId: role.id}), value: 'role.breadcrumb.view'|trans({ '%identifier%': role.identifier }) },
-        { value: 'role_assignment.view.add.title'|trans }
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans|desc('Roles') },
+        { url: path('ezplatform.role.view', {roleId: role.id}), value: 'role.breadcrumb.view'|trans({ '%identifier%': role.identifier })|desc('%identifier%') },
+        { value: 'role_assignment.view.add.title'|trans|desc('Assigning to Users/Groups') }
     ]} %}
 {% endblock %}
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'role_assignment.view.add.title'|trans,
+        title: 'role_assignment.view.add.title'|trans|desc('Assigning to Users/Groups'),
         iconName: 'roles'
     } %}
 {% endblock %}
@@ -25,7 +25,7 @@
         <section class="container mt-4">
             <div class="card">
                 <div class="card-header">
-                    {{ 'role_assignment.view.add.panel.users_and_groups.title'|trans }}
+                    {{ 'role_assignment.view.add.panel.users_and_groups.title'|trans|desc('Users and Groups') }}
                 </div>
                 <div class="card-body">
                     {{ form_row(form.users) }}
@@ -37,7 +37,7 @@
         <section class="container mt-4">
             <div class="card">
                 <div class="card-header">
-                    {{ 'role_assignment.view.add.panel.limitations.title'|trans }}
+                    {{ 'role_assignment.view.add.panel.limitations.title'|trans|desc('Limitations') }}
                 </div>
                 <div class="card-body">
                     {{ form_row(form.sections) }}

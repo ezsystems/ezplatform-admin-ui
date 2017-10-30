@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
+use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Policy;
-use EzSystems\EzPlatformAdminUi\Service\Role\RoleService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,14 +40,21 @@ class PolicyParamConverter implements ParamConverterInterface
     {
         $roleId = (int)$request->get(self::PARAMETER_ROLE_ID);
 
-        $role = $this->roleService->getRole($roleId);
+        $role = $this->roleService->loadRole($roleId);
         if (!$role) {
             throw new NotFoundHttpException("Role $roleId not found!");
         }
 
         $policyId = (int)$request->get(self::PARAMETER_POLICY_ID);
 
-        $policy = $this->roleService->getPolicy($role, $policyId);
+        $policy = null;
+        foreach ($role->getPolicies() as $item) {
+            if ($item->id === $policyId) {
+                $policy = $item;
+                break;
+            }
+        }
+
         if (!$policy) {
             throw new NotFoundHttpException("Policy $policyId not found!");
         }

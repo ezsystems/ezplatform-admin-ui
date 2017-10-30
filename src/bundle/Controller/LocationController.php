@@ -10,6 +10,7 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\TrashService;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
@@ -17,48 +18,68 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
-use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class LocationController extends Controller
 {
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
     /** @var ContentService */
-    protected $contentService;
+    private $contentService;
 
     /** @var LocationService */
-    protected $locationService;
+    private $locationService;
 
     /** @var ContentTypeService */
-    protected $contentTypeService;
+    private $contentTypeService;
 
     /** @var TrashService */
-    protected $trashService;
+    private $trashService;
 
     /** @var FormFactory */
-    protected $formFactory;
+    private $formFactory;
+
+    /** @var SubmitHandler */
+    private $submitHandler;
 
     /**
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
      * @param LocationService $locationService
      * @param ContentTypeService $contentTypeService
      * @param ContentService $contentService
      * @param TrashService $trashService
      * @param FormFactory $formFactory
+     * @param SubmitHandler $submitHandler
      */
     public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
         LocationService $locationService,
         ContentTypeService $contentTypeService,
         ContentService $contentService,
         TrashService $trashService,
-        FormFactory $formFactory
+        FormFactory $formFactory,
+        SubmitHandler $submitHandler
     ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
         $this->locationService = $locationService;
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->trashService = $trashService;
         $this->formFactory = $formFactory;
+        $this->submitHandler = $submitHandler;
     }
 
     /**
@@ -70,45 +91,53 @@ class LocationController extends Controller
      */
     public function moveAction(Request $request): Response
     {
-        $form = $this->formFactory->moveLocation();
+        $form = $this->formFactory->moveLocation(
+            new LocationMoveData()
+        );
         $form->handleRequest($request);
 
-        /** @var UiFormData $uiFormData */
-        $uiFormData = $form->getData();
-        /** @var LocationMoveData $locationMoveData */
-        $locationMoveData = $uiFormData->getData();
+        $location = $form->getData()->getLocation();
 
-        if ($form->isValid() && $form->isSubmitted()) {
-            $location = $locationMoveData->getLocation();
-            $newParentLocation = $locationMoveData->getNewParentLocation();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (LocationMoveData $data) {
+                $location = $data->getLocation();
+                $newParentLocation = $data->getNewParentLocation();
 
-            /** @todo move it into the service */
-            $newParentContentType = $this->contentTypeService->loadContentType(
-                $newParentLocation->getContentInfo()->contentTypeId
-            );
-            if (!$newParentContentType->isContainer) {
-                throw new InvalidArgumentException(
-                    '$newParentLocation',
-                    'Cannot move location to a parent that is not a container'
+                $newParentContentType = $this->contentTypeService->loadContentType(
+                    $newParentLocation->getContentInfo()->contentTypeId
                 );
+
+                if (!$newParentContentType->isContainer) {
+                    throw new InvalidArgumentException(
+                        '$newParentLocation',
+                        'Cannot move location to a parent that is not a container'
+                    );
+                }
+
+                $this->locationService->moveSubtree($location, $newParentLocation);
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Location '%name%' moved to location '%location%'") */
+                        'location.move.success',
+                        ['%name%' => $location->getContentInfo()->name, '%location%' => $newParentLocation->getContentInfo()->name],
+                        'location'
+                    )
+                );
+
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                    'locationId' => $location->id,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
             }
-            $this->locationService->moveSubtree($location, $newParentLocation);
-
-            $this->flashSuccess('location.move.success', [
-                '%locationName%' => $location->getContentInfo()->name,
-            ], 'location');
-
-            return $this->redirectToRoute($location);
         }
 
-        /**
-         * @todo We should implement a service for converting form errors into notifications
-         */
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
-        }
-
-        return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $location->id,
+        ]));
     }
 
     /**
@@ -120,103 +149,112 @@ class LocationController extends Controller
      */
     public function copyAction(Request $request): Response
     {
-        $form = $this->formFactory->copyLocation();
+        $form = $this->formFactory->copyLocation(
+            new LocationCopyData()
+        );
         $form->handleRequest($request);
 
-        /** @var UiFormData $uiFormData */
-        $uiFormData = $form->getData();
-        /** @var LocationCopyData $locationCopyData */
-        $locationCopyData = $uiFormData->getData();
+        $location = $form->getData()->getLocation();
 
-        if ($form->isValid() && $form->isSubmitted()) {
-            $location = $locationCopyData->getLocation();
-            $newParentLocation = $locationCopyData->getNewParentLocation();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (LocationCopyData $data) {
+                $location = $data->getLocation();
+                $newParentLocation = $data->getNewParentLocation();
 
-            /** @todo move it into the service */
-            $newParentContentType = $this->contentTypeService->loadContentType(
-                $newParentLocation->getContentInfo()->contentTypeId
-            );
-
-            /** @todo this should be validated on form level */
-            if (!$newParentContentType->isContainer) {
-                throw new InvalidArgumentException(
-                    '$newParentLocation',
-                    'Cannot copy location to a parent that is not a container'
+                $newParentContentType = $this->contentTypeService->loadContentType(
+                    $newParentLocation->getContentInfo()->contentTypeId
                 );
+
+                if (!$newParentContentType->isContainer) {
+                    throw new InvalidArgumentException(
+                        '$newParentLocation',
+                        'Cannot copy location to a parent that is not a container'
+                    );
+                }
+
+                $locationCreateStruct = $this->locationService->newLocationCreateStruct($newParentLocation->id);
+                $copiedContent = $this->contentService->copyContent(
+                    $location->contentInfo,
+                    $locationCreateStruct
+                );
+
+                $newLocation = $this->locationService->loadLocation($copiedContent->contentInfo->mainLocationId);
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Location '%name%' copied to location '%location%'") */
+                        'location.copy.success',
+                        ['%name%' => $location->getContentInfo()->name, '%location%' => $newParentLocation->getContentInfo()->name],
+                        'location'
+                    )
+                );
+
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                    'locationId' => $newLocation->id,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
             }
-
-            $locationCreateStruct = $this->locationService->newLocationCreateStruct($newParentLocation->id);
-            $copiedContent = $this->contentService->copyContent(
-                $location->contentInfo,
-                $locationCreateStruct
-            );
-
-            $newLocation = $this->locationService->loadLocation($copiedContent->contentInfo->mainLocationId);
-
-            $this->flashSuccess('location.copy.success', [
-                '%locationName%' => $copiedContent->getName(),
-            ], 'location');
-
-            return $this->redirectToRoute($newLocation);
         }
 
-        /**
-         * @todo We should implement a service for converting form errors into notifications
-         */
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
-        }
-
-        return $this->redirectToRoute($location);
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $location->id,
+        ]));
     }
 
     /**
      * @param Request $request
      *
-     * @return RedirectResponse
+     * @return Response
      */
-    public function swapAction(Request $request): RedirectResponse
+    public function swapAction(Request $request): Response
     {
-        $form = $this->formFactory->swapLocation();
+        $form = $this->formFactory->swapLocation(
+            new LocationSwapData()
+        );
         $form->handleRequest($request);
 
-        /** @var UiFormData $uiFormData */
-        $uiFormData = $form->getData();
-        /** @var LocationSwapData $locationSwapData */
-        $locationSwapData = $uiFormData->getData();
+        $location = $form->getData()->getCurrentLocation();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @todo empty locations should be validated on form level */
-            /* @todo add validation to data class */
-            $currentLocation = $locationSwapData->getCurrentLocation();
-            $newLocation = $locationSwapData->getNewLocation();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (LocationSwapData $data) {
+                $currentLocation = $data->getCurrentLocation();
+                $newLocation = $data->getNewLocation();
 
-            $childCount = $this->locationService->getLocationChildCount($currentLocation);
-            $contentType = $this->contentTypeService->loadContentType($newLocation->getContentInfo()->contentTypeId);
+                $childCount = $this->locationService->getLocationChildCount($currentLocation);
+                $contentType = $this->contentTypeService->loadContentType($newLocation->getContentInfo()->contentTypeId);
 
-            if (!$contentType->isContainer && $childCount) {
-                throw new \InvalidArgumentException(
-                    'Cannot swap location that has sub items with a location that is not a container'
+                if (!$contentType->isContainer && $childCount) {
+                    throw new \InvalidArgumentException(
+                        'Cannot swap location that has sub items with a location that is not a container'
+                    );
+                }
+                $this->locationService->swapLocation($currentLocation, $newLocation);
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Location '%name%' swaped with location '%location%'") */
+                        'location.swap.success',
+                        ['%name%' => $currentLocation->getContentInfo()->name, '%location%' => $newLocation->getContentInfo()->name],
+                        'location'
+                    )
                 );
+
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                    'locationId' => $newLocation->id,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
             }
-            $this->locationService->swapLocation($currentLocation, $newLocation);
-
-            $this->flashSuccess('location.swap.success', [
-                '%oldLocationName%' => $currentLocation->getContentInfo()->name,
-                '%newLocationName%' => $newLocation->getContentInfo()->name,
-            ], 'location');
-
-            return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
 
-        /**
-         * @todo We should implement a service for converting form errors into notifications
-         */
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
-        }
-
-        return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $location->id,
+        ]));
     }
 
     /**
@@ -226,36 +264,37 @@ class LocationController extends Controller
      */
     public function trashAction(Request $request): Response
     {
-        $form = $this->formFactory->trashLocation();
+        $form = $this->formFactory->trashLocation(
+            new LocationTrashData()
+        );
         $form->handleRequest($request);
 
-        /** @var UiFormData $uiFormData */
-        $uiFormData = $form->getData();
-        /** @var LocationTrashData $locationTrashData */
-        $locationTrashData = $uiFormData->getData();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (LocationTrashData $data) {
+                $location = $data->getLocation();
+                $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
+                $this->trashService->trash($location);
 
-        $location = $locationTrashData->getLocation();
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Location '%name%' moved to trash.") */
+                        'location.trash.success',
+                        ['%name%' => $location->getContentInfo()->name],
+                        'location'
+                    )
+                );
 
-        if ($form->isValid() && $form->isSubmitted()) {
-            $contentInfo = $location->getContentInfo();
-            $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
-            $this->trashService->trash($location);
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                    'locationId' => $parentLocation->id,
+                ]));
+            });
 
-            $this->flashSuccess('location.trash.success', [
-                '%locationName%' => $contentInfo->name,
-            ], 'location');
-
-            return $this->redirectToRoute($parentLocation);
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
 
-        /**
-         * @todo We should implement a service for converting form errors into notifications
-         */
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
-        }
-
-        return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
+        return $this->redirect($this->generateUrl('ezplatform.trash.list'));
     }
 
     /**
@@ -267,36 +306,45 @@ class LocationController extends Controller
      */
     public function removeAction(Request $request): Response
     {
-        $form = $this->formFactory->removeLocation();
+        $form = $this->formFactory->removeLocation(
+            new ContentLocationRemoveData()
+        );
         $form->handleRequest($request);
 
-        /** @var UiFormData $uiFormData */
-        $uiFormData = $form->getData();
-        /** @var ContentLocationRemoveData $contentLocationRemoveData */
-        $contentLocationRemoveData = $uiFormData->getData();
+        /** @var ContentInfo $contentInfo */
+        $contentInfo = $form->getData()->getContentInfo();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @todo empty locations should be validated on form level */
-            foreach ($contentLocationRemoveData->getLocations() as $locationId => $selected) {
-                $location = $this->locationService->loadLocation($locationId);
-                $this->locationService->deleteLocation($location);
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (ContentLocationRemoveData $data) {
+                $contentInfo = $data->getContentInfo();
+
+                foreach ($data->getLocations() as $locationId => $selected) {
+                    $location = $this->locationService->loadLocation($locationId);
+                    $this->locationService->deleteLocation($location);
+
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Location '%name%' removed.") */
+                            'location.delete.success',
+                            ['%name%' => $location->getContentInfo()->name],
+                            'location'
+                        )
+                    );
+                }
+
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                    'locationId' => $contentInfo->mainLocationId,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
             }
-
-            $this->flashSuccess('location.remove.success', [
-                '%locationName%' => $contentLocationRemoveData->getContentInfo()->name,
-            ], 'location');
-
-            return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
 
-        /**
-         * @todo We should implement a service for converting form errors into notifications
-         */
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
-        }
-
-        return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $contentInfo->mainLocationId,
+        ]));
     }
 
     /**
@@ -308,39 +356,43 @@ class LocationController extends Controller
      */
     public function addAction(Request $request): Response
     {
-        $form = $this->formFactory->addLocation();
+        $form = $this->formFactory->addLocation(
+            new ContentLocationAddData()
+        );
         $form->handleRequest($request);
 
-        /** @var UiFormData $uiFormData */
-        $uiFormData = $form->getData();
-        /** @var ContentLocationAddData $contentLocationAddData */
-        $contentLocationAddData = $uiFormData->getData();
+        $contentInfo = $form->getData()->getContentInfo();
 
-        $contentInfo = $contentLocationAddData->getContentInfo();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (ContentLocationAddData $data) {
+                $contentInfo = $data->getContentInfo();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @todo empty locations should be validated on form level */
-            foreach ($contentLocationAddData->getNewLocations() as $newLocation) {
-                $locationCreateStruct = $this->locationService->newLocationCreateStruct($newLocation->id);
-                $this->locationService->createLocation($contentInfo, $locationCreateStruct);
+                foreach ($data->getNewLocations() as $newLocation) {
+                    $locationCreateStruct = $this->locationService->newLocationCreateStruct($newLocation->id);
+                    $this->locationService->createLocation($contentInfo, $locationCreateStruct);
+
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Location '%name%' created.") */
+                            'location.create.success',
+                            ['%name%' => $newLocation->getContentInfo()->name],
+                            'location'
+                        )
+                    );
+                }
+
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                    'locationId' => $contentInfo->mainLocationId,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
             }
-
-            $this->flashSuccess(
-                'location.add.success',
-                ['%locationName%' => $contentInfo->name],
-                'location'
-            );
-
-            return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
 
-        /**
-         * @todo We should implement a service for converting form errors into notifications
-         */
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
-        }
-
-        return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $contentInfo->mainLocationId,
+        ]));
     }
 }

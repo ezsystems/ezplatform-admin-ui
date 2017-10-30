@@ -4,16 +4,16 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.admin'|trans([], 'messages') },
-        { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans },
-        { url: path('ezplatform.role.view', {roleId: role.id}), value: 'role.breadcrumb.view'|trans({ '%identifier%': role.identifier }) },
-        { value: 'policy.breadcrumb.add'|trans }
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans|desc('Roles') },
+        { url: path('ezplatform.role.view', {roleId: role.id}), value: 'role.breadcrumb.view'|trans({ '%identifier%': role.identifier })|desc('%identifier%') },
+        { value: 'policy.breadcrumb.add'|trans|desc('Adding a new Policy') }
     ]} %}
 {% endblock %}
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'policy.view.add.title'|trans,
+        title: 'policy.view.add.title'|trans|trans|desc('Adding a new Policy'),
         iconName: 'roles'
     } %}
 {% endblock %}
@@ -23,16 +23,14 @@
     <section class="container mt-4">
         <div class="card">
             <div class="card-body">
-                {{ form_widget(form) }}
+                {{ form_widget(form.policy) }}
             </div>
         </div>
     </section>
 
     <section class="container mt-4 mb-4">
         <div class="btn-toolbar justify-content-end" role="toolbar" >
-            <button class="btn btn-primary">
-                {{ 'policy.view.add.action.save'|trans }}
-            </button>
+            {{ form_widget(form.save, {"attr": {"class": "btn btn-primary"}}) }}
         </div>
     </section>
     {{ form_end(form) }}

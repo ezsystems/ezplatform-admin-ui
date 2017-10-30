@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
-use EzSystems\EzPlatformAdminUi\Service\TabService;
+use EzSystems\EzPlatformAdminUi\UI\Service\TabService;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvent;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;

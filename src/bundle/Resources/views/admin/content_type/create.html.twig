@@ -1,0 +1,125 @@
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+
+{% trans_default_domain 'content_type' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
+        { url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }), value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })|desc('%identifier%') },
+        { value: 'content_type.breadcrumb.create'|trans|desc('Creating a new Content Type') }
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'content_type.view.create.title'|trans|desc('Creating a new Content Type'),
+        iconName: 'content-types'
+    } %}
+{% endblock %}
+
+{# FIXME: Hardcoded language code #}
+{% set language_code = 'eng-GB' %}
+
+{% block content %}
+    {{ form_start(form) }}
+
+    <section class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                {{ form_row(form.name) }}
+                {{ form_row(form.identifier) }}
+                {{ form_row(form.description) }}
+                {{ form_row(form.nameSchema) }}
+                {{ form_row(form.urlAliasSchema) }}
+                {{ form_row(form.isContainer) }}
+                {{ form_row(form.defaultSortField) }}
+                {{ form_row(form.defaultSortOrder) }}
+                {{ form_row(form.defaultAlwaysAvailable) }}
+            </div>
+        </div>
+    </section>
+
+    <section class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                Field definitions
+            </div>
+            <div class="card-body">
+                {% for field_definition in form.fieldDefinitionsData %}
+                    {% set value = field_definition.vars.value %}
+
+                    <h5 id="field-definition-{{ value.identifier }}">
+                        {{ form_widget(field_definition.selected, {
+                            label: '%s (%s)' | format(value.names[language_code], value.fieldTypeIdentifier)
+                        }) }}
+                    </h5>
+
+                    <div class="ml-4 mb-4">
+                        {{ form_row(field_definition.name) }}
+                        {{ form_row(field_definition.identifier) }}
+                        {{ form_row(field_definition.position) }}
+                        {{ form_row(field_definition.description) }}
+                        {{ form_row(field_definition.isRequired) }}
+                        {{ form_row(field_definition.isSearchable) }}
+                        {{ form_row(field_definition.isTranslatable) }}
+                        {{ form_row(field_definition.fieldGroup) }}
+
+                        {# Field type specific fields below #}
+                        {{ ez_render_fielddefinition_edit(value, {
+                            "languageCode": language_code,
+                            "form": field_definition,
+                            "group_class": value.group_class|default("")
+                        }) }}
+
+                        {# Default rendering #}
+                        {% for child in field_definition %}
+                            {# Iterable children means collections, they are handled in field_types.html.twig #}
+                            {% if not child.rendered and child is not iterable %}
+                                <div{% if group_class is not empty %} class="{{ group_class }}"{% endif %}>
+                                    {{- form_label(child) -}}
+                                    {{- form_errors(child) -}}
+                                    {{- form_widget(child) -}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.removeFieldDefinition, { attr: { class: 'btn btn-danger'}}) }}
+                    </div>
+                    <div class="col col-md-auto">
+                        <div class="form-inline">
+                            <div class="input-group">
+                                {{ form_widget(form.fieldTypeSelection) }}
+                                <span class="input-group-btn">
+                                    {{ form_widget(form.addFieldDefinition, { attr: { class: 'btn btn-primary'}}) }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container mt-4 mb-4">
+        <div class="btn-toolbar justify-content-between" role="toolbar">
+            <a href="{{ path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }) }}" class="btn btn-default">
+                {{ "form.cancel"|trans|desc('Cancel') }}
+            </a>
+
+            <div class="btn-toolbar justify-content-between" role="toolbar">
+                <div class="btn-group" role="group">
+                    {{ form_widget(form.saveContentType, { attr: { class: 'btn btn-secondary' }}) }}
+                    {{ form_widget(form.publishContentType, { attr: { class: 'btn btn-primary' }}) }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{ form_end(form, {'render_rest': false }) }}
+{% endblock %}

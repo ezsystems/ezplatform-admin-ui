@@ -88,13 +88,11 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
 
         $removeVersionDraftForm = $this->createVersionRemoveForm(
             $location,
-            $draftVersions,
-            self::FORM_REMOVE_DRAFT
+            $draftVersions
         );
         $removeVersionArchivedForm = $this->createVersionRemoveForm(
             $location,
-            $archivedVersions,
-            self::FORM_REMOVE_ARCHIVED
+            $archivedVersions
         );
 
         $viewParameters = [
@@ -126,17 +124,14 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
     /**
      * @param Location $location
      * @param VersionInfo[] $versions
-     * @param string $name
      *
      * @return FormInterface
      */
-    private function createVersionRemoveForm(Location $location, array $versions, string $name): FormInterface
+    private function createVersionRemoveForm(Location $location, array $versions): FormInterface
     {
         $contentInfo = $location->getContentInfo();
         $data = new VersionRemoveData($contentInfo, $this->getVersionNumbers($versions));
 
-        $locationViewUrl = $this->urlGenerator->generate($location, ['_fragment' => 'ez-tab-location-view-versions']);
-
-        return $this->formFactory->removeVersion($name, $data, $locationViewUrl, $locationViewUrl);
+        return $this->formFactory->removeVersion($data);
     }
 }

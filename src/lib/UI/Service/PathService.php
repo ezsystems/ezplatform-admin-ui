@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Service;
+namespace EzSystems\EzPlatformAdminUi\UI\Service;
 
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
@@ -14,6 +14,8 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 
 /**
  * Service for loading path information.
+ *
+ * @internal
  */
 class PathService
 {

@@ -25,7 +25,7 @@ class LanguageDeleteType extends AbstractType
             ->add(
                 'delete',
                 SubmitType::class,
-                ['label' => /** @Desc("Delete") */ 'language_delete.delete']
+                ['label' => /** @Desc("Delete") */ 'ezplatform.language.delete.delete']
             );
     }
 

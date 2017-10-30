@@ -22,24 +22,24 @@ class LanguageCreateType extends AbstractType
             ->add(
                 'name',
                 TextType::class,
-                ['label' => /** @Desc("Name") */ 'language_create.name']
+                ['label' => /** @Desc("Name") */ 'ezplatform.language.create.name']
             )
             ->add(
                 'languageCode',
                 TextType::class,
-                ['label' => /** @Desc("Language code") */ 'language_create.language_code']
+                ['label' => /** @Desc("Language code") */ 'ezplatform.language.create.language_code']
             )
             ->add('enabled',
                 CheckboxType::class,
                 [
-                    'label' => /** @Desc("Enabled") */ 'language_create.enabled',
+                    'label' => /** @Desc("Enabled") */ 'ezplatform.language.create.enabled',
                     'required' => false,
                 ]
             )
             ->add(
                 'save',
                 SubmitType::class,
-                ['label' => /** @Desc("Create") */ 'language_create.save']
+                ['label' => /** @Desc("Create") */ 'ezplatform.language.create.save']
             );
     }
 

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-10-24T18:18:11Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="8f2d000c044a9f04c457499e57f6fbbb8360e23f" resname="dashboard.tab.all_content.empty">
+        <source>No content items. Content items you create will appear here</source>
+        <target state="new">No content items. Content items you create will appear here</target>
+        <note>key: dashboard.tab.all_content.empty</note>
+        <jms:reference-file line="38">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/all_content.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="50e7fa5609748dabc694245d5a54a77e9d5c7c1f" resname="dashboard.tab.all_media.empty">
+        <source>No content items. Media items you create will appear here</source>
+        <target state="new">No content items. Media items you create will appear here</target>
+        <note>key: dashboard.tab.all_media.empty</note>
+        <jms:reference-file line="38">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/all_media.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9c6f10545440752bc7bc2e8142cbea5d265403cd" resname="dashboard.tab.my_content.empty">
+        <source>No content items. Content items you create will appear here</source>
+        <target state="new">No content items. Content items you create will appear here</target>
+        <note>key: dashboard.tab.my_content.empty</note>
+        <jms:reference-file line="33">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_content.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="cf10aced822b4dfb2cb519a82ed0adabaa4e480e" resname="dashboard.tab.my_drafts.empty">
+        <source>No content items. Draft items you create will appear here</source>
+        <target state="new">No content items. Draft items you create will appear here</target>
+        <note>key: dashboard.tab.my_drafts.empty</note>
+        <jms:reference-file line="37">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_drafts.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9ef83b3497fae569ba56b6a8ab96004f359ae918" resname="dashboard.tab.my_media.empty">
+        <source>No content items. Media items you create will appear here</source>
+        <target state="new">No content items. Media items you create will appear here</target>
+        <note>key: dashboard.tab.my_media.empty</note>
+        <jms:reference-file line="33">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_media.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e17a8999c9e44b7e8ea1ba0f5cff596ece264da5" resname="dashboard.table.content_type">
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
+        <note>key: dashboard.table.content_type</note>
+        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/all_content.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/all_media.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_content.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_drafts.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_media.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="841a1c1c491e1adec03ce7e9476879c4bb32edb7" resname="dashboard.table.contributor">
+        <source>Contributor</source>
+        <target state="new">Contributor</target>
+        <note>key: dashboard.table.contributor</note>
+        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/all_content.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/all_media.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3a857cc58c009830e22845ef1edbd43794206aed" resname="dashboard.table.last_saved">
+        <source>Last Saved</source>
+        <target state="new">Last Saved</target>
+        <note>key: dashboard.table.last_saved</note>
+        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/all_content.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/all_media.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_content.html.twig</jms:reference-file>
+        <jms:reference-file line="11">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_drafts.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_media.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0ccebfdea2e8be0bcae0f3cab3f3db5ef47d71c8" resname="dashboard.table.modified_language">
+        <source>Modified Language</source>
+        <target state="new">Modified Language</target>
+        <note>key: dashboard.table.modified_language</note>
+        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_drafts.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8ba6a26d5deb87771ede293eccde417dfafb8c67" resname="dashboard.table.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: dashboard.table.name</note>
+        <jms:reference-file line="7">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/all_content.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/all_media.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_content.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_drafts.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_media.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="783d5adc52cea6b0cc80c2083158297f31a8d59d" resname="dashboard.table.version">
+        <source>Version</source>
+        <target state="new">Version</target>
+        <note>key: dashboard.table.version</note>
+        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/tab/my_drafts.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a49a78f944bf1f73f3f7ff9672463bb1abd4a402" resname="everyone">
+        <source>Everyone</source>
+        <target state="new">Everyone</target>
+        <note>key: everyone</note>
+        <jms:reference-file line="40">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/dashboard.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b1c1d8736f20db3fb6c1c66bb1455ed43909f0d8" resname="me">
+        <source>Me</source>
+        <target state="new">Me</target>
+        <note>key: me</note>
+        <jms:reference-file line="33">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/dashboard.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="45ef074cf81add55079d52e8ff43d1947e7a4ebd" resname="navigation.admin.trash">
+        <source>Trash</source>
+        <target state="new">Trash</target>
+        <note>key: navigation.admin.trash</note>
+        <jms:reference-file line="26">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/dashboard/dashboard.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c4d3f17636317e532c589f3008d82c263ab5c39d" resname="tab.name.everyone_content">
+        <source>Content</source>
+        <target state="new">Content</target>
+        <note>key: tab.name.everyone_content</note>
+        <jms:reference-file line="53">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/Dashboard/EveryoneContentTab.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="73956c614b0e87aa1d4ae18abb82cdc6e2770bba" resname="tab.name.everyone_media">
+        <source>Media</source>
+        <target state="new">Media</target>
+        <note>key: tab.name.everyone_media</note>
+        <jms:reference-file line="53">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/Dashboard/EveryoneMediaTab.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fdd56e68fb3a108fce6f8ee4c5a191c0aa8f2996" resname="tab.name.my_content">
+        <source>Content</source>
+        <target state="new">Content</target>
+        <note>key: tab.name.my_content</note>
+        <jms:reference-file line="60">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/Dashboard/MyContentTab.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="30243b16511a7800e3b72f9cd60854548a2cfe1b" resname="tab.name.my_drafts">
+        <source>Drafts</source>
+        <target state="new">Drafts</target>
+        <note>key: tab.name.my_drafts</note>
+        <jms:reference-file line="55">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/Dashboard/MyDraftsTab.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3cd97096c4d5ea83d5591467ab43021b86c65f27" resname="tab.name.my_media">
+        <source>Media</source>
+        <target state="new">Media</target>
+        <note>key: tab.name.my_media</note>
+        <jms:reference-file line="60">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/Dashboard/MyMediaTab.php</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

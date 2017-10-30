@@ -4,36 +4,45 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.admin'|trans([], 'messages') },
-        { url: path('ezplatform.language.list'), value: 'language.list'|trans },
-        { value: language.name }
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.language.list'), value: 'language.list'|trans|desc('Languages') },
+        { value: 'language.view'|trans({ '%language%': language.name })|desc('%language%') }
     ]} %}
+{% endblock %}
+
+{% block title %}{{ 'language.view.title'|trans({ '%language%': language.name })|desc('"%language%" Language') }}{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'language.view.title'|trans({ '%language%': language.name })|desc('"%language%" Language'),
+        iconName: 'languages'
+    } %}
 {% endblock %}
 
 {% block content %}
     <section class="container">
         <div>
             <dl>
-                <dt>{{ 'language.name.label'|trans }}</dt>
+                <dt>{{ 'language.name.label'|trans|desc('Name') }}</dt>
                 <dd>{{ language.name }}</dd>
 
-                <dt>{{ 'language.code.label'|trans }}</dt>
+                <dt>{{ 'language.code.label'|trans|desc('Language code') }}</dt>
                 <dd>{{ language.languageCode }}</dd>
 
-                <dt>{{ 'language.id.label'|trans }}</dt>
+                <dt>{{ 'language.id.label'|trans|desc('ID') }}</dt>
                 <dd>{{ language.id }}</dd>
 
-                <dt>{{ 'language.enabled.label'|trans }}</dt>
+                <dt>{{ 'language.enabled.label'|trans|desc('Enabled') }}</dt>
                 <dd>
-                    <input type="checkbox" disabled {% if language.enabled %}checked title="{{ 'language.enabled'|trans }}"{% else %}title="{{ 'language.disabled'|trans }}"{% endif %}>
+                    <input type="checkbox" disabled {% if language.enabled %}checked title="{{ 'language.enabled'|trans|desc('Enabled') }}"{% else %}title="{{ 'language.disabled'|trans|desc('Disabled') }}"{% endif %}>
                 </dd>
             </dl>
 
             {{ form_start(deleteForm, {"action": path("ezplatform.language.delete", {"languageId": language.id, "redirectErrorsTo": "view"})}) }}
                 {% if canEdit %}
-                    <a href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}" class="btn btn-info">{{ 'language.edit'|trans }}</a>
+                    <a href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}" class="btn btn-info">{{ 'language.edit'|trans|desc('Edit') }}</a>
                 {% else %}
-                    <span class="btn btn-primary" disabled="disabled">{{ 'language.edit'|trans }}</span>
+                    <span class="btn btn-primary" disabled="disabled">{{ 'language.edit'|trans|desc('Edit') }}</span>
                 {% endif %}
 
                 {{ form_widget(deleteForm.language) }}
@@ -62,4 +71,3 @@
     </section>
 {% endblock %}
 
-{% block title %}{{ 'language.view.title'|trans({'%languageName%': language.name}) }}{% endblock %}

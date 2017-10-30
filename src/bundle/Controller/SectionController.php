@@ -14,25 +14,29 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionCreateMapper;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use Symfony\Component\Form\FormInterface;
+use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class SectionController extends Controller
 {
-    /** @var SectionService */
-    protected $sectionService;
-
-    /** @var SearchService */
-    private $searchService;
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
 
     /** @var TranslatorInterface */
     private $translator;
+
+    /** @var SectionService */
+    private $sectionService;
+
+    /** @var SearchService */
+    private $searchService;
 
     /** @var FormFactory */
     private $formFactory;
@@ -43,28 +47,37 @@ class SectionController extends Controller
     /** @var SectionUpdateMapper */
     private $sectionUpdateMapper;
 
+    /** @var SubmitHandler */
+    private $submitHandler;
+
     /**
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
      * @param SectionService $sectionService
      * @param SearchService $searchService
-     * @param TranslatorInterface $translator
      * @param FormFactory $formFactory
      * @param SectionCreateMapper $sectionCreateMapper
      * @param SectionUpdateMapper $sectionUpdateMapper
+     * @param SubmitHandler $submitHandler
      */
     public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
         SectionService $sectionService,
         SearchService $searchService,
-        TranslatorInterface $translator,
         FormFactory $formFactory,
         SectionCreateMapper $sectionCreateMapper,
-        SectionUpdateMapper $sectionUpdateMapper
+        SectionUpdateMapper $sectionUpdateMapper,
+        SubmitHandler $submitHandler
     ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
         $this->sectionService = $sectionService;
         $this->searchService = $searchService;
-        $this->translator = $translator;
         $this->formFactory = $formFactory;
         $this->sectionCreateMapper = $sectionCreateMapper;
         $this->sectionUpdateMapper = $sectionUpdateMapper;
+        $this->submitHandler = $submitHandler;
     }
 
     /**
@@ -74,7 +87,6 @@ class SectionController extends Controller
     {
         /** @var Section[] $sectionList */
         $sectionList = $this->sectionService->loadSections();
-        $sectionListUrl = $this->generateUrl('ezplatform.section.list');
 
         $contentCountBySectionId = [];
         $deletableSections = [];
@@ -84,17 +96,15 @@ class SectionController extends Controller
         foreach ($sectionList as $section) {
             $contentCountBySectionId[$section->id] = $this->sectionService->countAssignedContents($section);
             $deletableSections[$section->id] = !$this->sectionService->isSectionUsed($section);
-            $deleteFormsBySectionId[$section->id] = $this->getSectionDeleteForm(
-                $section,
-                $sectionListUrl
+
+            $deleteFormsBySectionId[$section->id] = $this->formFactory->deleteSection(
+                new SectionDeleteData($section)
             )->createView();
-            $assignContentFormsBySectionId[$section->id] = $this->getSectionContentAssignForm(
-                $section,
-                $sectionListUrl
+
+            $assignContentFormsBySectionId[$section->id] = $this->formFactory->assignContentSectionForm(
+                new SectionContentAssignData($section)
             )->createView();
         }
-
-        /** @todo: needs refactoring by introducing UI data classes */
 
         return $this->render('EzPlatformAdminUiBundle:admin/section:list.html.twig', [
             'can_edit' => $this->isGranted(new Attribute('section', 'edit')),
@@ -108,23 +118,24 @@ class SectionController extends Controller
     }
 
     /**
-     * @param int $sectionId
+     * @param Section $section
      *
      * @return Response
      */
-    public function viewAction(int $sectionId): Response
+    public function viewAction(Section $section): Response
     {
-        /** @todo should be replaced with ParamConverter */
-        $section = $this->sectionService->loadSection($sectionId);
+        $sectionDeleteForm = $this->formFactory->deleteSection(
+            new SectionDeleteData($section)
+        )->createView();
 
-        $sectionViewUrl = $this->generateUrl('ezplatform.section.view', ['sectionId' => $section->id]);
-        $sectionDeleteForm = $this->getSectionDeleteForm($section, $this->generateUrl('ezplatform.section.list'));
-        $sectionContentAssignForm = $this->getSectionContentAssignForm($section, $sectionViewUrl);
+        $sectionContentAssignForm = $this->formFactory->assignContentSectionForm(
+            new SectionContentAssignData($section)
+        )->createView();
 
         return $this->render('EzPlatformAdminUiBundle:admin/section:view.html.twig', [
             'section' => $section,
-            'form_section_delete' => $sectionDeleteForm->createView(),
-            'form_section_content_assign' => $sectionContentAssignForm->createView(),
+            'form_section_delete' => $sectionDeleteForm,
+            'form_section_content_assign' => $sectionContentAssignForm,
             'content_count' => $this->sectionService->countAssignedContents($section),
             'deletable' => !$this->sectionService->isSectionUsed($section),
             'can_edit' => $this->isGranted(new Attribute('section', 'edit')),
@@ -134,85 +145,88 @@ class SectionController extends Controller
 
     /**
      * @param Request $request
-     * @param int $sectionId
+     * @param Section $section
      *
      * @return Response
      */
-    public function deleteAction(Request $request, int $sectionId): Response
+    public function deleteAction(Request $request, Section $section): Response
     {
-        $form = $this->formFactory->deleteSection($sectionId);
+        $form = $this->formFactory->deleteSection(
+            new SectionDeleteData($section)
+        );
         $form->handleRequest($request);
 
-        /** @var UiFormData $uiFormData */
-        $uiFormData = $form->getData();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (SectionDeleteData $data) {
+                $section = $data->getSection();
 
-        if ($form->isValid() && $form->isSubmitted()) {
-            /** @var SectionDeleteData $sectionDeleteData */
-            $sectionDeleteData = $uiFormData->getData();
+                $this->sectionService->deleteSection($section);
 
-            $section = $sectionDeleteData->getSection();
-            $this->sectionService->deleteSection($section);
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Section '%name%' removed.") */
+                        'section.delete.success',
+                        ['%name%' => $section->name],
+                        'section'
+                    )
+                );
 
-            $this->flashSuccess(/** @Desc("Section \"%sectionName%\" removed.") */
-                'section.delete.success', [
-                '%sectionName%' => $section->name,
-            ], 'section');
+                return new RedirectResponse($this->generateUrl('ezplatform.section.list'));
+            });
 
-            return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
 
-        /**
-         * @todo We should implement a service for converting form errors into notifications
-         */
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
-        }
-
-        return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
+        return $this->redirect($this->generateUrl('ezplatform.section.list'));
     }
 
     /**
      * @param Request $request
-     * @param int $sectionId
+     * @param Section $section
      *
      * @return Response
      */
-    public function assignContentAction(Request $request, int $sectionId): Response
+    public function assignContentAction(Request $request, Section $section): Response
     {
-        $form = $this->formFactory->assignContentSectionForm($sectionId);
+        $form = $this->formFactory->assignContentSectionForm(
+            new SectionContentAssignData($section)
+        );
         $form->handleRequest($request);
 
-        /** @var UiFormData $uiFormData */
-        $uiFormData = $form->getData();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (SectionContentAssignData $data) {
+                $section = $data->getSection();
 
-        if ($form->isValid() && $form->isSubmitted()) {
-            /** @var SectionContentAssignData $sectionContentAssignData */
-            $sectionContentAssignData = $uiFormData->getData();
+                $contentInfos = array_column($data->getLocations(), 'contentInfo');
 
-            $section = $sectionContentAssignData->getSection();
-            $contentInfos = array_column($sectionContentAssignData->getLocations(), 'contentInfo');
+                foreach ($contentInfos as $contentInfo) {
+                    $this->sectionService->assignSection($contentInfo, $section);
+                }
 
-            foreach ($contentInfos as $contentInfo) {
-                $this->sectionService->assignSection($contentInfo, $section);
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("%contentItemsCount% content items were assigned to '%name%'") */
+                        'section.assign_content.success',
+                        ['%name%' => $section->name, '%contentItemsCount%' => count($contentInfos)],
+                        'section'
+                    )
+                );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.section.view', [
+                    'sectionId' => $section->id,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
             }
-
-            $this->flashSuccess(/** @Desc("%contentItemsCount% content items were assigned to \"%sectionName%\"") */
-                'section.assign_content.success', [
-                '%sectionName%' => $section->name,
-                '%contentItemsCount%' => count($contentInfos),
-            ], 'section');
-
-            return $this->redirect($uiFormData->getOnSuccessRedirectionUrl());
         }
 
-        /**
-         * @todo We should implement a service for converting form errors into notifications
-         */
-        foreach ($form->getErrors(true, true) as $formError) {
-            $this->addFlash('danger', $formError->getMessage());
-        }
-
-        return $this->redirect($uiFormData->getOnFailureRedirectionUrl());
+        return $this->redirect($this->generateUrl('ezplatform.section.view', [
+            'sectionId' => $section->id,
+        ]));
     }
 
     /**
@@ -222,24 +236,33 @@ class SectionController extends Controller
      */
     public function createAction(Request $request): Response
     {
-        $form = $this->formFactory->createSection();
+        $form = $this->formFactory->createSection(
+            new SectionCreateData()
+        );
         $form->handleRequest($request);
 
-        /** @var UiFormData $uiFormData */
-        $uiFormData = $form->getData();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (SectionCreateData $data) {
+                $sectionCreateStruct = $this->sectionCreateMapper->reverseMap($data);
+                $section = $this->sectionService->createSection($sectionCreateStruct);
 
-        if ($form->isValid() && $form->isSubmitted()) {
-            /** @var SectionCreateData $sectionCreateData */
-            $sectionCreateData = $uiFormData->getData();
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Section '%name%' created.") */
+                        'section.create.success',
+                        ['%name%' => $section->name],
+                        'section'
+                    )
+                );
 
-            $sectionCreateStruct = $this->sectionCreateMapper->reverseMap($sectionCreateData);
-            $section = $this->sectionService->createSection($sectionCreateStruct);
+                return new RedirectResponse($this->generateUrl('ezplatform.section.view', [
+                    'sectionId' => $section->id,
+                ]));
+            });
 
-            $this->flashSuccess('section.create.success', [
-                '%sectionName%' => $section->name,
-            ], 'section');
-
-            return $this->redirectToRoute('ezplatform.section.view', ['sectionId' => $section->id]);
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
 
         return $this->render('EzPlatformAdminUiBundle:admin/section:create.html.twig', [
@@ -249,73 +272,44 @@ class SectionController extends Controller
 
     /**
      * @param Request $request
-     * @param int|null $sectionId
+     * @param Section $section
      *
      * @return Response
      */
-    public function updateAction(Request $request, ?int $sectionId): Response
+    public function updateAction(Request $request, Section $section): Response
     {
-        /** @todo Add ParamConverter */
-        $section = $this->sectionService->loadSection($sectionId);
-
         $form = $this->formFactory->updateSection(
-            $section->id,
-            new SectionUpdateData($section->identifier, $section->name)
+            new SectionUpdateData($section)
         );
         $form->handleRequest($request);
 
-        /** @var UiFormData $uiFormData */
-        $uiFormData = $form->getData();
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (SectionUpdateData $data) {
+                $sectionUpdateStruct = $this->sectionUpdateMapper->reverseMap($data);
+                $section = $this->sectionService->updateSection($data->getSection(), $sectionUpdateStruct);
 
-        if ($form->isValid() && $form->isSubmitted()) {
-            /** @var SectionUpdateData $sectionUpdateData */
-            $sectionUpdateData = $uiFormData->getData();
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Section '%name%' updated.") */
+                        'section.update.success',
+                        ['%name%' => $section->name],
+                        'section'
+                    )
+                );
 
-            $sectionUpdateStruct = $this->sectionUpdateMapper->reverseMap($sectionUpdateData);
-            $section = $this->sectionService->updateSection($section, $sectionUpdateStruct);
+                return new RedirectResponse($this->generateUrl('ezplatform.section.view', [
+                    'sectionId' => $section->id,
+                ]));
+            });
 
-            $this->flashSuccess('section.update.success', [
-                '%sectionName%' => $section->name,
-            ], 'section');
-
-            return $this->redirectToRoute('ezplatform.section.view', ['sectionId' => $section->id]);
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
 
         return $this->render('EzPlatformAdminUiBundle:admin/section:update.html.twig', [
             'section' => $section,
             'form_section_update' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @param Section $section
-     * @param string $redirectionUrl
-     *
-     * @return FormInterface
-     */
-    private function getSectionDeleteForm(Section $section, string $redirectionUrl): FormInterface
-    {
-        return $this->formFactory->deleteSection(
-            $section->id,
-            new SectionDeleteData($section),
-            $redirectionUrl,
-            $redirectionUrl
-        );
-    }
-
-    /**
-     * @param Section $section
-     * @param string $redirectionUrl
-     *
-     * @return FormInterface
-     */
-    private function getSectionContentAssignForm(Section $section, string $redirectionUrl): FormInterface
-    {
-        return $this->formFactory->assignContentSectionForm(
-            $section->id,
-            new SectionContentAssignData($section, []),
-            $redirectionUrl,
-            $redirectionUrl
-        );
     }
 }

@@ -11,11 +11,15 @@
                 <p>{{ 'section.modal.message'|trans|desc('Do you want to delete section?') }}</p>
             </div>
             <div class="modal-footer">
-                {{ form_start(form, {'attr': {'class': 'd-inline-block'}}) }}
-                {{ form_widget(form.data.delete, {'attr': {'class': 'btn btn-danger', 'disabled': not deletable}}) }}
+                {{ form_start(form, {
+                    "action": path("ezplatform.section.delete", {"sectionId": section.id}),
+                    'attr': {'class': 'd-inline-block'}
+                }) }}
+                {{ form_widget(form.delete, {'attr': {'class': 'btn btn-danger', 'disabled': not deletable}}) }}
                 {{ form_end(form) }}
-                <button type="button" class="btn btn-secondary btn--no"
-                        data-dismiss="modal">{{ 'section.form.cancel'|trans|desc('Cancel') }}</button>
+                <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">
+                    {{ 'form.cancel'|trans|desc('Cancel') }}
+                </button>
             </div>
         </div>
     </div>

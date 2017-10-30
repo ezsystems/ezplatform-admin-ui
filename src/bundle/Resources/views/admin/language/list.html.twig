@@ -4,14 +4,16 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.admin'|trans([], 'messages') },
-        { value: 'language.list'|trans }
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { value: 'language.list'|trans|desc('Languages') }
     ]} %}
 {% endblock %}
 
+{% block title %}{{ 'language.list'|trans|desc('Languages') }}{% endblock %}
+
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'language.list'|trans,
+        title: 'language.list'|trans|desc('Languages'),
         iconName: 'languages'
     } %}
 {% endblock %}
@@ -19,19 +21,19 @@
 {% block content %}
     <section class="container mt-5">
         <div class="ez-table-header">
-            <h5>{{ 'language.list'|trans }}</h5>
+            <h5>{{ 'language.list'|trans|desc('Languages') }}</h5>
             <div>
-                <a href="{{ path('ezplatform.language.create') }}" class="btn btn-primary" {% if not canEdit %} disabled="disabled"{% endif %}>{{ 'language.new'|trans }}</a>
+                <a href="{{ path('ezplatform.language.create') }}" class="btn btn-primary" {% if not canEdit %} disabled="disabled"{% endif %}>{{ 'language.new'|trans|desc('Create a new Language') }}</a>
             </div>
         </div>
 
         <table class="table">
             <thead>
             <tr>
-                <th>{{ 'language.name'|trans }}</th>
-                <th>{{ 'language.code'|trans }}</th>
-                <th>{{ 'language.id'|trans }}</th>
-                <th>{{ 'language.enabled'|trans }}</th>
+                <th>{{ 'language.name'|trans|desc('Name') }}</th>
+                <th>{{ 'language.code'|trans|desc('Language code') }}</th>
+                <th>{{ 'language.id'|trans|desc('ID') }}</th>
+                <th>{{ 'language.enabled'|trans|desc('Enabled') }}</th>
                 <th></th>
             </tr>
             </thead>
@@ -43,17 +45,21 @@
                     <td>{{ language.id }}</td>
                     <td>
                         <input type="checkbox" disabled {% if language.enabled %}checked
-                            title="{{ 'language.enabled'|trans }}"
-                            {% else %}title="{{ 'language.disabled'|trans }}"{% endif %}>
+                            title="{{ 'language.enabled'|trans|desc('Enabled') }}"
+                            {% else %}title="{{ 'language.disabled'|trans|desc('Disabled') }}"{% endif %}>
                     </td>
                     <td class="text-right">
                         {% set deleteForm = deleteFormsByLanguageId[language.id] %}
                         {{ form_start(deleteForm, {"action": path("ezplatform.language.delete", {"languageId": language.id})}) }}
 
                             {% if canEdit %}
-                                <a href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}" class="btn btn-secondary">{{ 'language.edit'|trans }}</a>
+                                <a href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}" class="btn btn-secondary">
+                                    {{ 'language.edit'|trans|desc('Edit') }}
+                                </a>
                             {% else %}
-                                <span class="btn btn-secondary" disabled="disabled">{{ 'language.edit'|trans }}</span>
+                                <span class="btn btn-secondary" disabled="disabled">
+                                    {{ 'language.edit'|trans|desc('Edit') }}
+                                </span>
                             {% endif %}
                             {{ form_widget(deleteForm.language) }}
                             {{ form_widget(deleteForm.delete, {
@@ -69,4 +75,3 @@
     </section>
 {% endblock %}
 
-{% block title %}{{ 'language.list'|trans }}{% endblock %}

@@ -3,14 +3,14 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.admin'|trans([], 'messages') },
-        { value: 'section.list'|trans }
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { value: 'section.list.title'|trans|desc('Sections') }
     ]} %}
 {% endblock %}
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'section.list'|trans,
+        title: 'section.list.title'|trans|desc('Sections'),
         iconName: 'sections'
     } %}
 {% endblock %}
@@ -19,41 +19,44 @@
     <div id="react-udw"></div>
     <section class="container mt-5">
         <div class="ez-table-header">
-            <h5>{{ 'section.list'|trans }}</h5>
+            <h5>{{ 'section.list.title'|trans|desc('Sections') }}</h5>
             <div>
                 <a href="{{ path('ezplatform.section.create') }}" class="btn btn-primary"
-                   data-icon="&#xe616;"{% if not can_edit %} data-disabled{% endif %}>{{ 'section.new'|trans }}</a>
+                   data-icon="&#xe616;"{% if not can_edit %} data-disabled{% endif %}>{{ 'section.new'|trans|desc('Create a new Section') }}</a>
             </div>
         </div>
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>{{ 'section.name'|trans }}</th>
-                    <th>{{ 'section.identifier'|trans }}</th>
-                    <th>{{ 'section.id'|trans }}</th>
-                    <th>{{ 'section.assigned.content'|trans }}</th>
+                    <th>{{ 'section.name'|trans|desc('Name') }}</th>
+                    <th>{{ 'section.identifier'|trans|desc('Identifier') }}</th>
+                    <th>{{ 'section.id'|trans|desc('ID') }}</th>
+                    <th>{{ 'section.assigned.content'|trans|desc('Assignments count') }}</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
             {% for section in sections %}
+                {% set delete_form = form_section_delete[section.id] %}
                 {% form_theme form_section_content_assign[section.id] 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
-                {% form_theme form_section_delete[section.id] 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+                {% form_theme delete_form 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+
                 <tr>
                     <td><a href="{{ path( 'ezplatform.section.view', {'sectionId': section.id} ) }}">{{ section.name }}</a></td>
                     <td>{{ section.identifier }}</td>
                     <td>{{ section.id }}</td>
                     <td>{{ content_count[section.id] }}</td>
                     <td class="text-right">
-
                         {{ form(form_section_content_assign[section.id], {'attr': {'class': 'd-inline-block'}}) }}
-
                         <a href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
-                           class="btn btn-secondary"{% if not can_edit %} data-disabled{% endif %}>{{ 'section.edit'|trans }}</a>
-                        {{ form_start(form_section_delete[section.id], {'attr': {'class': 'd-inline-block'}}) }}
-                        {{ form_widget(form_section_delete[section.id].data.delete, { 'attr': {'class': 'btn btn-danger', 'disabled': not deletable[section.id] }}) }}
-                        {{ form_end(form_section_delete[section.id]) }}
+                           class="btn btn-secondary"{% if not can_edit %} data-disabled{% endif %}>{{ 'section.edit'|trans|desc('Edit') }}</a>
+                        {{ form_start(delete_form, {
+                            "action": path("ezplatform.section.delete", {"sectionId": section.id}),
+                            'attr': {'class': 'd-inline-block'}
+                        }) }}
+                        {{ form_widget(delete_form.delete, { 'attr': {'class': 'btn btn-danger', 'disabled': not deletable[section.id] }}) }}
+                        {{ form_end(delete_form) }}
                     </td>
                 </tr>
             {% endfor %}
@@ -61,8 +64,6 @@
         </table>
     </section>
 {% endblock %}
-
-{% block title %}{{ 'section.list'|trans }}{% endblock %}
 
 {% block javascripts %}
     {%  javascripts

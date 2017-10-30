@@ -1,14 +1,23 @@
 {% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+
 {% trans_default_domain 'section' %}
+
 {% form_theme form_section_content_assign 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
 {% form_theme form_section_delete 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.admin'|trans([], 'messages') },
-        { url: path('ezplatform.section.list'), value: 'section.list'|trans },
-        { value: section.name }
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.section.list'), value: 'section.list'|trans|desc('Sections') },
+        { value: 'section.view.title'|trans({ '%identifier%': section.name })|desc('"%identifier%" Section') }
     ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'section.view.title'|trans({ '%identifier%': section.name })|desc('"%identifier%" Section'),
+        iconName: 'sections'
+    } %}
 {% endblock %}
 
 {% block content %}
@@ -16,20 +25,25 @@
     <section class="container">
         <div>
             <dl>
-                <dt>{{ 'section.name.label'|trans }}</dt>
+                <dt>{{ 'section.name.label'|trans|desc('Name') }}</dt>
                 <dd>{{ section.name }}</dd>
-                <dt>{{ 'section.identifier.label'|trans }}</dt>
+                <dt>{{ 'section.identifier.label'|trans|desc('Identifier') }}</dt>
                 <dd>{{ section.identifier }}</dd>
-                <dt>{{ 'section.id.label'|trans }}</dt>
+                <dt>{{ 'section.id.label'|trans|desc('ID') }}</dt>
                 <dd>{{ section.id }}</dd>
             </dl>
 
-            <p>{{ 'section.assigned.contentcount'|transchoice(content_count, {'%contentCount%': content_count} ) }}</p>
+            <p>
+                {{ 'section.assigned.contentcount'|transchoice(
+                    content_count,
+                    {'%count%': content_count}
+                )|desc('{0} Section not assigned to any content item.|[1,+Inf[ This section is assigned to %count% content items.') }}
+            </p>
 
             <a href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
                {% if not can_edit %}data-disabled{% endif %}
                class="btn btn-info" data-icon="&#xe606;">
-                {{ 'section.edit'|trans }}
+                {{ 'section.edit'|trans|desc('Edit') }}
             </a>
             {{ form(form_section_content_assign, {'attr': {'class': 'd-inline-block'}}) }}
 
@@ -45,8 +59,6 @@
         </div>
     </section>
 {% endblock %}
-
-{% block title %}{{ 'section.view.title'|trans({'%sectionName%': section.name}) }}{% endblock %}
 
 {% block javascripts %}
     {%  javascripts

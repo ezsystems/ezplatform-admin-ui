@@ -8,60 +8,113 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroupData;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
-use EzSystems\EzPlatformAdminUi\Service\ContentTypeGroup\ContentTypeGroupService;
-use Symfony\Component\Form\Form;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ContentTypeGroupController extends Controller
 {
-    /** @var ContentTypeGroupService */
-    private $contentTypeGroupService;
+    /** @var NotificationHandlerInterface */
+    private $notificationHandler;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
+    /** @var ContentTypeService */
+    private $contentTypeService;
+
+    /** @var FormFactory */
+    private $formFactory;
+
+    /** @var SubmitHandler */
+    private $submitHandler;
+
+    /** @var array */
+    private $languages;
 
     /**
      * ContentTypeGroupController constructor.
      *
-     * @param ContentTypeGroupService $groupService
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
+     * @param ContentTypeService $contentTypeService
+     * @param FormFactory $formFactory
+     * @param SubmitHandler $submitHandler
+     * @param array $languages
      */
-    public function __construct(ContentTypeGroupService $groupService)
-    {
-        $this->contentTypeGroupService = $groupService;
+    public function __construct(
+        NotificationHandlerInterface $notificationHandler,
+        TranslatorInterface $translator,
+        ContentTypeService $contentTypeService,
+        FormFactory $formFactory,
+        SubmitHandler $submitHandler,
+        array $languages
+    ) {
+        $this->notificationHandler = $notificationHandler;
+        $this->translator = $translator;
+        $this->contentTypeService = $contentTypeService;
+        $this->formFactory = $formFactory;
+        $this->submitHandler = $submitHandler;
+        $this->languages = $languages;
     }
 
     public function listAction(): Response
     {
-        $groups = $this->contentTypeGroupService->getContentTypeGroups();
+        $contentTypeGroupList = $this->contentTypeService->loadContentTypeGroups();
+
+        $deleteFormsByContentTypeGroupId = [];
+        foreach ($contentTypeGroupList as $contentTypeGroup) {
+            $deleteFormsByContentTypeGroupId[$contentTypeGroup->id] = $this->formFactory->deleteContentTypeGroup(
+                new ContentTypeGroupDeleteData($contentTypeGroup)
+            )->createView();
+        }
 
         return $this->render('@EzPlatformAdminUi/admin/content_type_group/list.html.twig', [
-            'content_type_groups' => $groups,
-        ]);
-    }
-
-    public function addAction(): Response
-    {
-        $form = $this->createCreateForm();
-
-        return $this->render('@EzPlatformAdminUi/admin/content_type_group/add.html.twig', [
-            'form' => $form->createView(),
+            'content_type_groups' => $contentTypeGroupList,
+            'delete_forms' => $deleteFormsByContentTypeGroupId,
         ]);
     }
 
     public function createAction(Request $request): Response
     {
-        $form = $this->createCreateForm();
+        $form = $this->formFactory->createContentTypeGroup(
+            new ContentTypeGroupCreateData()
+        );
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $group = $this->contentTypeGroupService->createContentTypeGroup($form->getData());
-            $this->flashSuccess('content_type_group.created', [], 'content_type');
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (ContentTypeGroupCreateData $data) {
+                $createStruct = $this->contentTypeService->newContentTypeGroupCreateStruct(
+                    $data->getIdentifier()
+                );
+                $group = $this->contentTypeService->createContentTypeGroup($createStruct);
 
-            return $this->redirectToRoute('ezplatform.content_type_group.view', [
-                'contentTypeGroupId' => $group->id,
-            ]);
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Content type group '%name%' created.") */
+                        'content_type_group.create.success',
+                        ['%name%' => $data->getIdentifier()],
+                        'content_type'
+                    )
+                );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.content_type_group.view', [
+                    'contentTypeGroupId' => $group->id,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
 
         return $this->render('@EzPlatformAdminUi/admin/content_type_group/add.html.twig', [
@@ -69,28 +122,38 @@ class ContentTypeGroupController extends Controller
         ]);
     }
 
-    public function editAction(ContentTypeGroup $group): Response
-    {
-        $form = $this->createUpdateForm($group);
-
-        return $this->render('@EzPlatformAdminUi/admin/content_type_group/edit.html.twig', [
-            'content_type_group' => $group,
-            'form' => $form->createView(),
-        ]);
-    }
-
     public function updateAction(Request $request, ContentTypeGroup $group): Response
     {
-        $form = $this->createUpdateForm($group);
+        $form = $this->formFactory->updateContentTypeGroup(
+            new ContentTypeGroupUpdateData($group)
+        );
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $this->contentTypeGroupService->updateContentTypeGroup($group, $form->getData());
-            $this->flashSuccess('content_type_group.updated', [], 'content_type');
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (ContentTypeGroupUpdateData $data) {
+                $group = $data->getContentTypeGroup();
+                $updateStruct = $this->contentTypeService->newContentTypeGroupUpdateStruct();
+                $updateStruct->identifier = $data->getIdentifier();
 
-            return $this->redirectToRoute('ezplatform.content_type_group.view', [
-                'contentTypeGroupId' => $group->id,
-            ]);
+                $this->contentTypeService->updateContentTypeGroup($group, $updateStruct);
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Content type group '%name%' updated.") */
+                        'content_type_group.update.success',
+                        ['%name%' => $group->identifier],
+                        'content_type'
+                    )
+                );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.content_type_group.view', [
+                    'contentTypeGroupId' => $group->id,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
 
         return $this->render('@EzPlatformAdminUi/admin/content_type_group/edit.html.twig', [
@@ -101,18 +164,32 @@ class ContentTypeGroupController extends Controller
 
     public function deleteAction(Request $request, ContentTypeGroup $group): Response
     {
-        $form = $this->createDeleteForm($group);
+        $form = $this->formFactory->deleteContentTypeGroup(
+            new ContentTypeGroupDeleteData($group)
+        );
         $form->handleRequest($request);
-        if ($form->isValid()) {
-            try {
-                $this->contentTypeGroupService->deleteContentTypeGroup($group);
-                $this->flashSuccess('content_type_group.deleted', [], 'content_type');
-            } catch (InvalidArgumentException $e) {
-                $this->flashDanger($e->getMessage());
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (ContentTypeGroupDeleteData $data) {
+                $group = $data->getContentTypeGroup();
+                $this->contentTypeService->deleteContentTypeGroup($group);
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Content type group '%name%' deleted.") */
+                        'content_type_group.delete.success',
+                        ['%name%' => $group->identifier],
+                        'content_type'
+                    )
+                );
+            });
+
+            if ($result instanceof Response) {
+                return $result;
             }
         }
 
-        return $this->redirectToRoute('ezplatform.content_type_group.list');
+        return $this->redirect($this->generateUrl('ezplatform.content_type_group.list'));
     }
 
     public function viewAction(ContentTypeGroup $group): Response
@@ -120,39 +197,5 @@ class ContentTypeGroupController extends Controller
         return $this->render('@EzPlatformAdminUi/admin/content_type_group/view.html.twig', [
             'content_type_group' => $group,
         ]);
-    }
-
-    protected function createCreateForm(ContentTypeGroupData $data = null): Form
-    {
-        return $this->createForm(ContentTypeGroupType::class, $data, [
-            'method' => Request::METHOD_POST,
-            'action' => $this->generateUrl('ezplatform.content_type_group.create'),
-        ]);
-    }
-
-    protected function createUpdateForm(ContentTypeGroup $group, ContentTypeGroupData $data = null): Form
-    {
-        if (null === $data) {
-            $data = ContentTypeGroupData::factory($group);
-        }
-
-        return $this->createForm(ContentTypeGroupType::class, $data, [
-            'method' => Request::METHOD_PUT,
-            'action' => $this->generateUrl('ezplatform.content_type_group.update', [
-                'contentTypeGroupId' => $group->id,
-            ]),
-        ]);
-    }
-
-    protected function createDeleteForm(ContentTypeGroup $group): Form
-    {
-        $formBuilder = $this->createFormBuilder(null, [
-            'method' => Request::METHOD_DELETE,
-            'action' => $this->generateUrl('ezplatform.content_type_group.delete', [
-                'contentTypeGroupId' => $group->id,
-            ]),
-        ]);
-
-        return $formBuilder->getForm();
     }
 }

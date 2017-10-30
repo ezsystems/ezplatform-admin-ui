@@ -51,13 +51,13 @@ class RoleAssignmentCreateType extends AbstractType
                 UniversalDiscoveryWidgetType::class,
                 [
                     'required' => false,
-                    'label' => /** @Desc("Location") */ 'role_assignment.locations',
+                    'label' => /** @Desc("Choose Locations") */ 'role_assignment.locations',
                 ]
             )
             ->add(
                 'save',
                 SubmitType::class,
-                ['label' => /** @Desc("Create") */ 'role_assignment.save']
+                ['label' => /** @Desc("Assign") */ 'role_assignment.save']
             );
     }
 

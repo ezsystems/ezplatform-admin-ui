@@ -4,40 +4,41 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.admin'|trans([], 'messages') },
-        { url: path('ezplatform.language.list'), value: 'language.list'|trans },
-        { url: path('ezplatform.language.view', { languageId: language.id }), value: language.name },
-        { value: 'language.edit'|trans },
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.language.list'), value: 'language.list'|trans|desc('Languages') },
+        { value: 'language.edit.title'|trans({ '%language%': language.name })|desc('Editing Language "%language%"') },
     ]} %}
 {% endblock %}
 
-{% block title %}
-    {{ 'language.edit'|trans }}
+{% block title %}{{ 'language.edit.title'|trans({ '%language%': language.name })|desc('Editing Language "%language%"') }}{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'language.edit.title'|trans({ '%language%': language.name })|desc('Editing Language "%language%"'),
+        iconName: 'languages'
+    } %}
 {% endblock %}
 
 {% block content %}
-    <section class="container">
-        {{ form_start(form, {'action': actionUrl}) }}
-        {{ form_errors(form) }}
+    {{ form_start(form, {'action': actionUrl}) }}
 
-        <fieldset>
-            <div>
-                {{ form_label(form.name) }}
-                {{ form_errors(form.name) }}
-                {{ form_widget(form.name) }}
+    <section class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                {{ form_row(form.name) }}
+                {{ form_row(form.enabled) }}
             </div>
-
-            <div>
-                {{ form_label(form.enabled) }}
-                {{ form_errors(form.enabled) }}
-                {{ form_widget(form.enabled) }}
-            </div>
-        </fieldset>
-
-        <a href="{{ path("ezplatform.language.view", {"languageId": language.id}) }}"
-           class="btn btn-default">{{ "language.form.cancel"|trans }}</a>
-        {{ form_widget(form.save, {"attr": {"class": "btn btn-primary"}}) }}
-
-        {{ form_end(form) }}
+        </div>
     </section>
+
+    <section class="container mt-4 mb-4">
+        <div class="btn-toolbar justify-content-end" role="toolbar" >
+            <a href="{{ path("ezplatform.language.list") }}" class="btn btn-default">
+                {{ "form.cancel"|trans|desc('Cancel') }}
+            </a>
+            {{ form_widget(form.save, {"attr": {"class": "btn btn-primary"}}) }}
+        </div>
+    </section>
+
+    {{ form_end(form) }}
 {% endblock %}

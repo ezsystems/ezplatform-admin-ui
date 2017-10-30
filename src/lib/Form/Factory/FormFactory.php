@@ -11,37 +11,62 @@ namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
-use EzSystems\EzPlatformAdminUi\Form\Data\UiFormData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationRemoveType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionContentAssignType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType;
-use EzSystems\EzPlatformAdminUi\Form\Type\UiFormType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Version\VersionRemoveType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FormFactory
@@ -63,404 +88,441 @@ class FormFactory
     }
 
     /**
-     * @param string|null $name
+     * @param ContentTypeGroupCreateData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function createContentTypeGroup(
+        ?ContentTypeGroupCreateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentTypeGroupCreateType::class);
+
+        return $this->formFactory->createNamed(
+            $name,
+            ContentTypeGroupCreateType::class,
+            $data ?? new ContentTypeGroupCreateData()
+        );
+    }
+
+    /**
+     * @param ContentTypeGroupUpdateData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function updateContentTypeGroup(
+        ContentTypeGroupUpdateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('update-content-type-group-%d', $data->getContentTypeGroup()->id);
+
+        return $this->formFactory->createNamed($name, ContentTypeGroupUpdateType::class, $data);
+    }
+
+    /**
+     * @param ContentTypeGroupDeleteData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function deleteContentTypeGroup(
+        ContentTypeGroupDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('delete-content-type-group-%d', $data->getContentTypeGroup()->id);
+
+        return $this->formFactory->createNamed($name, ContentTypeGroupDeleteType::class, $data);
+    }
+
+    /**
      * @param TranslationRemoveData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function removeTranslation(
-        ?string $name = null,
         TranslationRemoveData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new TranslationRemoveData();
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
+        $name = $name ?: sprintf('delete-translation-%s', md5(implode('/', $data->getLanguageCodes())));
 
-        return $this->createUiForm(
-            $name, TranslationRemoveType::class, $uiFormData,
-            $this->urlGenerator->generate('ezplatform.translation.remove'), []
-        );
+        return $this->formFactory->createNamed($name, TranslationRemoveType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param VersionRemoveData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function removeVersion(
-        ?string $name = null,
         VersionRemoveData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new VersionRemoveData();
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(VersionRemoveType::class);
 
-        return $this->createUiForm(
-            $name, VersionRemoveType::class, $uiFormData, $this->urlGenerator->generate('ezplatform.version.remove'), []
-        );
+        return $this->formFactory->createNamed($name, VersionRemoveType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param ContentLocationAddData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function addLocation(
-        ?string $name = null,
         ContentLocationAddData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new ContentLocationAddData();
         $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentLocationAddType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
 
-        return $this->createUiForm(
-            $name,
-            ContentLocationAddType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.location.add'),
-            []
-        );
+        return $this->formFactory->createNamed($name, ContentLocationAddType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param ContentLocationRemoveData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function removeLocation(
-        ?string $name = null,
         ContentLocationRemoveData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new ContentLocationRemoveData();
         $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentLocationRemoveType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
 
-        return $this->createUiForm(
-            $name,
-            ContentLocationRemoveType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.location.remove'),
-            []
-        );
+        return $this->formFactory->createNamed($name, ContentLocationRemoveType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param LocationSwapData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function swapLocation(
-        ?string $name = null,
         LocationSwapData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new LocationSwapData();
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationSwapType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
 
-        return $this->createUiForm(
-            $name,
-            LocationSwapType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.location.swap'),
-            []
-        );
+        return $this->formFactory->createNamed($name, LocationSwapType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param LocationTrashData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function trashLocation(
-        ?string $name = null,
         LocationTrashData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new LocationTrashData();
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationTrashType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
 
-        return $this->createUiForm(
-            $name,
-            LocationTrashType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.location.trash'),
-            []
-        );
+        return $this->formFactory->createNamed($name, LocationTrashType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param LocationMoveData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function moveLocation(
-        ?string $name = null,
         LocationMoveData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new LocationMoveData();
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationMoveType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
 
-        return $this->createUiForm(
-            $name,
-            LocationMoveType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.location.move'),
-            []
-        );
+        return $this->formFactory->createNamed($name, LocationMoveType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param LocationCopyData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function copyLocation(
-        ?string $name = null,
         LocationCopyData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new LocationCopyData();
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationCopyType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
 
-        return $this->createUiForm(
-            $name,
-            LocationCopyType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.location.copy'),
-            []
-        );
+        return $this->formFactory->createNamed($name, LocationCopyType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param TrashItemRestoreData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function restoreTrashItem(
-        ?string $name = null,
         TrashItemRestoreData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new TrashItemRestoreData();
         $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashItemRestoreType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
 
-        return $this->createUiForm(
-            $name,
-            TrashItemRestoreType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.trash.restore'),
-            []
-        );
+        return $this->formFactory->createNamed($name, TrashItemRestoreType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param TrashEmptyData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function emptyTrash(
-        ?string $name = null,
         TrashEmptyData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new TrashEmptyData();
         $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashEmptyType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
 
-        return $this->createUiForm(
-            $name,
-            TrashEmptyType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.trash.empty'),
-            []
-        );
+        return $this->formFactory->createNamed($name, TrashEmptyType::class, $data);
     }
 
     /**
-     * @param int $sectionId
      * @param SectionContentAssignData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function assignContentSectionForm(
-        int $sectionId,
         SectionContentAssignData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new SectionContentAssignData();
-        $name = sprintf('section_content_assign_%s', $sectionId);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
+        $name = $name ?: sprintf('content-assign-section-%d', $data->getSection()->id);
 
-        return $this->createUiForm(
-            $name,
-            SectionContentAssignType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.section.assign_content', ['sectionId' => $sectionId]),
-            []
-        );
+        return $this->formFactory->createNamed($name, SectionContentAssignType::class, $data);
     }
 
     /**
-     * @param int $sectionId
      * @param SectionDeleteData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function deleteSection(
-        int $sectionId,
         SectionDeleteData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new SectionDeleteData();
-        $name = sprintf('section_delete_%s', $sectionId);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
+        $name = $name ?: sprintf('delete-section-%d', $data->getSection()->id);
 
-        return $this->createUiForm(
-            $name,
-            SectionDeleteType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.section.delete', ['sectionId' => $sectionId]),
-            []
-        );
+        return $this->formFactory->createNamed($name, SectionDeleteType::class, $data);
     }
 
     /**
-     * @param string|null $name
      * @param SectionCreateData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function createSection(
-        ?string $name = null,
-        SectionCreateData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?SectionCreateData $data = null,
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new SectionCreateData();
         $name = $name ?: StringUtil::fqcnToBlockPrefix(SectionCreateType::class);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
 
-        return $this->createUiForm(
+        return $this->formFactory->createNamed(
             $name,
             SectionCreateType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.section.create'),
-            []
+            $data ?? new SectionCreateData()
         );
     }
 
     /**
-     * @param int $sectionId
      * @param SectionUpdateData|null $data
-     * @param string|null $successRedirectionUrl
-     * @param string|null $failureRedirectionUrl
+     * @param null|string $name
      *
      * @return FormInterface
      */
     public function updateSection(
-        int $sectionId,
         SectionUpdateData $data = null,
-        string $successRedirectionUrl = null,
-        string $failureRedirectionUrl = null
+        ?string $name = null
     ): FormInterface {
-        $data = $data ?: new SectionUpdateData();
-        $name = sprintf('section_update_%s', $sectionId);
-        $uiFormData = new UiFormData($data, $successRedirectionUrl, $failureRedirectionUrl);
+        $name = $name ?: sprintf('update-section-%d', $data->getSection()->id);
 
-        return $this->createUiForm(
+        return $this->formFactory->createNamed($name, SectionUpdateType::class, $data);
+    }
+
+    /**
+     * @param LanguageCreateData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function createLanguage(
+        ?LanguageCreateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(LanguageCreateType::class);
+
+        return $this->formFactory->createNamed(
             $name,
-            SectionUpdateType::class,
-            $uiFormData,
-            $this->urlGenerator->generate('ezplatform.section.update', ['sectionId' => $sectionId]),
-            []
+            LanguageCreateType::class,
+            $data ?? new LanguageCreateData()
         );
     }
 
     /**
-     * @param string|null $name
-     * @param string $dataType
-     * @param UiFormData $uiFormData
-     * @param string $action
-     * @param array $options
+     * @param LanguageUpdateData $data
+     * @param null|string $name
      *
      * @return FormInterface
      */
-    public function createUiForm(
-        ?string $name = null,
-        string $dataType,
-        UiFormData $uiFormData,
-        string $action,
-        array $options = []
+    public function updateLanguage(
+        LanguageUpdateData $data,
+        ?string $name = null
     ): FormInterface {
-        $defaultOptions = [
-            'method' => Request::METHOD_POST,
-            'action' => $action,
-        ];
-        $options = array_merge($defaultOptions, $options);
+        $name = $name ?: sprintf('update-language-%d', $data->getLanguage()->id);
 
-        if (null !== $name) {
-            $formBuilder = $this->formFactory->createNamed($name, UiFormType::class, $uiFormData, $options);
-        } else {
-            $formBuilder = $this->formFactory->create(UiFormType::class, $uiFormData, $options);
-        }
+        return $this->formFactory->createNamed($name, LanguageUpdateType::class, $data);
+    }
 
-        $formBuilder->add('data', $dataType, ['label' => false]);
+    /**
+     * @param LanguageDeleteData $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function deleteLanguage(
+        LanguageDeleteData $data,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('delete-language-%d', $data->getLanguage()->id);
 
-        return $formBuilder;
+        return $this->formFactory->createNamed($name, LanguageDeleteType::class, $data);
+    }
+
+    /**
+     * @param RoleCreateData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function createRole(
+        ?RoleCreateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(RoleCreateType::class);
+
+        return $this->formFactory->createNamed($name, RoleCreateType::class, $data);
+    }
+
+    /**
+     * @param RoleUpdateData $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function updateRole(
+        RoleUpdateData $data,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('update-role-%d', $data->getRole()->id);
+
+        return $this->formFactory->createNamed($name, RoleUpdateType::class, $data);
+    }
+
+    /**
+     * @param RoleDeleteData $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function deleteRole(
+        RoleDeleteData $data,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('delete-role-%d', $data->getRole()->id);
+
+        return $this->formFactory->createNamed($name, RoleDeleteType::class, $data);
+    }
+
+    /**
+     * @param RoleAssignmentCreateData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function createRoleAssignment(
+        ?RoleAssignmentCreateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(RoleAssignmentCreateType::class);
+
+        return $this->formFactory->createNamed(
+            $name,
+            RoleAssignmentCreateType::class,
+            $data ?? new RoleAssignmentCreateData()
+        );
+    }
+
+    /**
+     * @param RoleAssignmentDeleteData $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function deleteRoleAssignment(
+        RoleAssignmentDeleteData $data,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('delete-role-assignment-%s', md5(implode('/', [
+            $data->getRoleAssignment()->getRole()->id,
+            $data->getRoleAssignment()->getRoleLimitation()->getIdentifier(),
+        ])));
+
+        return $this->formFactory->createNamed($name, RoleAssignmentDeleteType::class, $data);
+    }
+
+    /**
+     * @param PolicyCreateData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function createPolicy(
+        ?PolicyCreateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(PolicyCreateType::class);
+
+        return $this->formFactory->createNamed($name, PolicyCreateType::class, $data);
+    }
+
+    /**
+     * @param PolicyUpdateData $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function updatePolicy(
+        PolicyUpdateData $data,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('update-policy-%s', md5(implode('/', $data->getPolicy())));
+
+        return $this->formFactory->createNamed($name, PolicyUpdateType::class, $data);
+    }
+
+    /**
+     * @param PolicyDeleteData $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function deletePolicy(
+        PolicyDeleteData $data,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('delete-policy-%s', md5(implode('/', $data->getPolicy())));
+
+        return $this->formFactory->createNamed($name, PolicyDeleteType::class, $data);
     }
 }

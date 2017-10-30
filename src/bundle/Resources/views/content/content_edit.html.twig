@@ -5,7 +5,7 @@
     <section class="ez-content-edit container pb-4">
         {{ form_start(form) }}
         {% for field in form.fieldsData %}
-            {{ form_row(field.value) }}
+            {{ form_row(field) }}
         {% endfor %}
         {{ form_end(form) }}
     </section>

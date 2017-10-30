@@ -2,18 +2,18 @@
 
 <section class="container mt-4">
     <div class="ez-table-header">
-        <h5>{{ 'role_assignment.view.list.title'|trans }}</h5>
+        <h5>{{ 'role_assignment.view.list.title'|trans|desc('Assignments') }}</h5>
 
         <a href="{{ path('ezplatform.role_assignment.create', {roleId: role.id}) }}" class="btn btn-primary">
-            {{ 'role_assignment.view.list.action.add'|trans }}
+            {{ 'role_assignment.view.list.action.add'|trans|desc('Assign to Users/Groups') }}
         </a>
     </div>
 
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>{{ 'role_assignment.view.list.panel.assignments.column.user_group'|trans }}</th>
-            <th>{{ 'role_assignment.view.list.panel.assignments.column.limitation'|trans }}</th>
+            <th>{{ 'role_assignment.view.list.panel.assignments.column.user_group'|trans|desc('User/Group') }}</th>
+            <th>{{ 'role_assignment.view.list.panel.assignments.column.limitation'|trans|desc('Limitation') }}</th>
             <th></th>
         </tr>
         </thead>
@@ -32,14 +32,14 @@
                     {%- if limitation -%}
                         <ul class="list-unstyled">
                             <li>
-                                <span class="font-weight-bold" title="{{ 'policy.limitation.identifier_tooltip' | trans({'%identifier%': limitation.identifier}) }}">
-                                    {{ ('policy.limitation.identifier.' ~ limitation.identifier | lower) | trans({}, 'ezrepoforms_policies') }}:
+                                <span class="font-weight-bold" title="{{ 'policy.limitation.identifier_tooltip' | trans({'%identifier%': limitation.identifier})|desc('"%identifier%" Limitation') }}">
+                                    {{ ('policy.limitation.identifier.' ~ limitation.identifier|lower)|trans({'%identifier%': limitation.identifier}, 'ezrepoforms_policies')|desc('%identifier%') }}:
                                 </span>
                                 {{ ez_render_limitation_value(limitation) }}
                             </li>
                         </ul>
                     {%- else -%}
-                        {{- 'policy.limitation.none'|trans -}}
+                        {{- 'policy.limitation.none'|trans|desc('None') -}}
                     {%- endif -%}
                 </td>
                 <td class="text-right">
