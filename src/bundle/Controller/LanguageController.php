@@ -132,7 +132,8 @@ class LanguageController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-/** @Desc("Language '%name%' removed.") */'language.delete.success',
+                        /** @Desc("Language '%name%' removed.") */
+                        'language.delete.success',
                         ['%name%' => $language->name],
                         'language'
                     )
@@ -159,7 +160,8 @@ class LanguageController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-/** @Desc("Language '%name%' created.") */ 'language.create.success',
+                        /** @Desc("Language '%name%' created.") */
+                        'language.create.success',
                         ['%name%' => $language->name],
                         'language'
                     )
@@ -199,7 +201,8 @@ class LanguageController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-/** @Desc("Language '%name%' updated.") */ 'language.update.success',
+                        /** @Desc("Language '%name%' updated.") */
+                        'language.update.success',
                         ['%name%' => $language->name],
                         'language'
                     )

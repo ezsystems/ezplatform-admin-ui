@@ -100,7 +100,8 @@ class ContentTypeGroupController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-/** @Desc("Content type group '%name%' created.") */ 'content_type_group.create.success',
+                        /** @Desc("Content type group '%name%' created.") */
+                        'content_type_group.create.success',
                         ['%name%' => $data->getIdentifier()],
                         'content_type'
                     )
@@ -138,7 +139,8 @@ class ContentTypeGroupController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-/** @Desc("Content type group '%name%' updated.") */ 'content_type_group.update.success',
+                        /** @Desc("Content type group '%name%' updated.") */
+                        'content_type_group.update.success',
                         ['%name%' => $group->identifier],
                         'content_type'
                     )

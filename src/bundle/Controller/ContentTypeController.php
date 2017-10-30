@@ -136,7 +136,8 @@ class ContentTypeController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-/** @Desc("Content type '%name%' updated.") */'content_type.update.success',
+                        /** @Desc("Content type '%name%' updated.") */
+                        'content_type.update.success',
                         ['%name%' => $contentType->getName()],
                         'content_type'
                     )
@@ -175,7 +176,8 @@ class ContentTypeController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-/** @Desc("Content type '%name%' deleted.") */'content_type.delete.success',
+                        /** @Desc("Content type '%name%' deleted.") */
+                        'content_type.delete.success',
                         ['%name%' => $contentType->getName()],
                         'content_type'
                     )

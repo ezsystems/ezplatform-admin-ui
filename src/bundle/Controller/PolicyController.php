@@ -110,7 +110,8 @@ class PolicyController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-/** @Desc("New policies in role '%role%' created.") */'policy.add.success',
+                        /** @Desc("New policies in role '%role%' created.") */
+                        'policy.add.success',
                         ['%role%' => $role->identifier],
                         'role'
                     )
@@ -154,7 +155,8 @@ class PolicyController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-/** @Desc("Policies in role '%role%' updated.") */'policy.update.success',
+                        /** @Desc("Policies in role '%role%' updated.") */
+                        'policy.update.success',
                         ['%role%' => $role->identifier],
                         'role'
                     )
@@ -197,7 +199,8 @@ class PolicyController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-/** @Desc("Policies in role '%role%' removed.") */'policy.delete.success',
+                        /** @Desc("Policies in role '%role%' removed.") */
+                        'policy.delete.success',
                         ['%role%' => $role->identifier],
                         'role'
                     )
