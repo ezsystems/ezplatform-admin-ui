@@ -9,16 +9,9 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Role;
 
 use eZ\Publish\API\Repository\Values\User\Role;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirectTrait;
 
-class RoleDeleteData implements OnSuccessRedirect, OnFailureRedirect
+class RoleDeleteData
 {
-    use OnSuccessRedirectTrait;
-    use OnFailureRedirectTrait;
-
     /** @var Role */
     private $role;
 

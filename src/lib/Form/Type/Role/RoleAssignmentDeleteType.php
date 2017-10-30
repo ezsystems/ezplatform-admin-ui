@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Role;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Type\RedirectableForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,10 +37,5 @@ class RoleAssignmentDeleteType extends AbstractType
             'data_class' => RoleAssignmentDeleteData::class,
             'translation_domain' => 'forms',
         ]);
-    }
-
-    public function getParent()
-    {
-        return RedirectableForm::class;
     }
 }

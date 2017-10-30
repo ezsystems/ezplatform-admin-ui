@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\RedirectableForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,10 +39,5 @@ class PolicyCreateType extends AbstractType
             'data_class' => PolicyCreateData::class,
             'translation_domain' => 'forms',
         ]);
-    }
-
-    public function getParent()
-    {
-        return RedirectableForm::class;
     }
 }

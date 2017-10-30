@@ -18,6 +18,7 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -85,12 +86,8 @@ class RoleController extends Controller
 
     public function viewAction(Role $role): Response
     {
-        $roleViewUrl = $this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]);
-
         $deleteForm = $this->formFactory->deleteRole(
-            new RoleDeleteData($role),
-            'ezplatform.role.list',
-            $roleViewUrl
+            new RoleDeleteData($role)
         );
 
         return $this->render('@EzPlatformAdminUi/admin/role/view.html.twig', [
@@ -101,10 +98,7 @@ class RoleController extends Controller
 
     public function createAction(Request $request): Response
     {
-        $form = $this->formFactory->createRole(
-            new RoleCreateData(),
-            'ezplatform.role.view'
-        );
+        $form = $this->formFactory->createRole();
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -121,9 +115,9 @@ class RoleController extends Controller
                     )
                 );
 
-                return [
+                return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
                     'roleId' => $roleDraft->id,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -139,8 +133,7 @@ class RoleController extends Controller
     public function updateAction(Request $request, Role $role): Response
     {
         $form = $this->formFactory->updateRole(
-            new RoleUpdateData($role),
-            'ezplatform.role.view'
+            new RoleUpdateData($role)
         );
         $form->handleRequest($request);
 
@@ -162,9 +155,9 @@ class RoleController extends Controller
                     )
                 );
 
-                return [
+                return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
                     'roleId' => $role->id,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -180,14 +173,9 @@ class RoleController extends Controller
 
     public function deleteAction(Request $request, Role $role): Response
     {
-        $roleViewUrl = $this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]);
-
         $form = $this->formFactory->deleteRole(
-            new RoleDeleteData($role),
-            'ezplatform.role.list',
-            $roleViewUrl
+            new RoleDeleteData($role)
         );
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -202,6 +190,8 @@ class RoleController extends Controller
                         'role'
                     )
                 );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.role.list'));
             });
 
             if ($result instanceof Response) {
@@ -209,7 +199,8 @@ class RoleController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirect($roleViewUrl);
+        return $this->redirect($this->generateUrl('ezplatform.role.view', [
+            'roleId' => $role->id,
+        ]));
     }
 }

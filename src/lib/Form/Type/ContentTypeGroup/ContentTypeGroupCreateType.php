@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\RedirectableForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -41,10 +40,5 @@ class ContentTypeGroupCreateType extends AbstractType
             'data_class' => ContentTypeGroupCreateData::class,
             'translation_domain' => 'content_type',
         ]);
-    }
-
-    public function getParent()
-    {
-        return RedirectableForm::class;
     }
 }

@@ -10,6 +10,7 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\TrashService;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
@@ -20,6 +21,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -122,9 +124,9 @@ class LocationController extends Controller
                     )
                 );
 
-                return [
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $location->id,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -132,8 +134,9 @@ class LocationController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirectToRoute($location);
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $location->id,
+        ]));
     }
 
     /**
@@ -184,9 +187,9 @@ class LocationController extends Controller
                     )
                 );
 
-                return [
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $newLocation->id,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -194,8 +197,9 @@ class LocationController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirectToRoute($location);
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $location->id,
+        ]));
     }
 
     /**
@@ -235,9 +239,9 @@ class LocationController extends Controller
                     )
                 );
 
-                return [
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $newLocation->id,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -245,8 +249,9 @@ class LocationController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirectToRoute($location);
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $location->id,
+        ]));
     }
 
     /**
@@ -256,12 +261,8 @@ class LocationController extends Controller
      */
     public function trashAction(Request $request): Response
     {
-        $trashListUrl = $this->generateUrl('ezplatform.trash.list');
-
         $form = $this->formFactory->trashLocation(
-            new LocationTrashData(),
-            '_ezpublishLocation',
-            $trashListUrl
+            new LocationTrashData()
         );
         $form->handleRequest($request);
 
@@ -279,9 +280,9 @@ class LocationController extends Controller
                     )
                 );
 
-                return [
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $parentLocation->id,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -289,8 +290,7 @@ class LocationController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirect($trashListUrl);
+        return $this->redirect($this->generateUrl('ezplatform.trash.list'));
     }
 
     /**
@@ -307,6 +307,7 @@ class LocationController extends Controller
         );
         $form->handleRequest($request);
 
+        /** @var ContentInfo $contentInfo */
         $contentInfo = $form->getData()->getContentInfo();
 
         if ($form->isSubmitted()) {
@@ -326,9 +327,9 @@ class LocationController extends Controller
                     );
                 }
 
-                return [
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -336,8 +337,9 @@ class LocationController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirectToRoute($contentInfo);
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $contentInfo->mainLocationId,
+        ]));
     }
 
     /**
@@ -373,9 +375,9 @@ class LocationController extends Controller
                     );
                 }
 
-                return [
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -383,7 +385,8 @@ class LocationController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirectToRoute($contentInfo);
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $contentInfo->mainLocationId,
+        ]));
     }
 }

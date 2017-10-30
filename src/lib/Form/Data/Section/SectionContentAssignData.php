@@ -10,19 +10,12 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Section;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirectTrait;
 
 /**
  * @todo add validation
  */
-class SectionContentAssignData implements OnSuccessRedirect, OnFailureRedirect
+class SectionContentAssignData
 {
-    use OnSuccessRedirectTrait;
-    use OnFailureRedirectTrait;
-
     /** @var Section|null */
     protected $section;
 

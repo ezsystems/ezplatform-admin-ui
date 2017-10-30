@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Role;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\RedirectableForm;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
 use EzSystems\EzPlatformAdminUi\Form\Type\UserChoiceType;
@@ -68,10 +67,5 @@ class RoleAssignmentCreateType extends AbstractType
             'data_class' => RoleAssignmentCreateData::class,
             'translation_domain' => 'forms',
         ]);
-    }
-
-    public function getParent()
-    {
-        return RedirectableForm::class;
     }
 }

@@ -7,7 +7,6 @@
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Type\RedirectableForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,10 +35,5 @@ class LanguageDeleteType extends AbstractType
             'data_class' => LanguageDeleteData::class,
             'translation_domain' => 'forms',
         ]);
-    }
-
-    public function getParent()
-    {
-        return RedirectableForm::class;
     }
 }

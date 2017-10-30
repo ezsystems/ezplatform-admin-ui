@@ -19,6 +19,7 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -86,7 +87,6 @@ class SectionController extends Controller
     {
         /** @var Section[] $sectionList */
         $sectionList = $this->sectionService->loadSections();
-        $sectionListUrl = $this->generateUrl('ezplatform.section.list');
 
         $contentCountBySectionId = [];
         $deletableSections = [];
@@ -98,13 +98,11 @@ class SectionController extends Controller
             $deletableSections[$section->id] = !$this->sectionService->isSectionUsed($section);
 
             $deleteFormsBySectionId[$section->id] = $this->formFactory->deleteSection(
-                new SectionDeleteData($section),
-                $sectionListUrl
+                new SectionDeleteData($section)
             )->createView();
 
             $assignContentFormsBySectionId[$section->id] = $this->formFactory->assignContentSectionForm(
-                new SectionContentAssignData($section),
-                $sectionListUrl
+                new SectionContentAssignData($section)
             )->createView();
         }
 
@@ -126,17 +124,12 @@ class SectionController extends Controller
      */
     public function viewAction(Section $section): Response
     {
-        $sectionListUrl = $this->generateUrl('ezplatform.section.list');
-        $sectionViewUrl = $this->generateUrl('ezplatform.section.view', ['sectionId' => $section->id]);
-
         $sectionDeleteForm = $this->formFactory->deleteSection(
-            new SectionDeleteData($section),
-            $sectionListUrl
+            new SectionDeleteData($section)
         )->createView();
 
         $sectionContentAssignForm = $this->formFactory->assignContentSectionForm(
-            new SectionContentAssignData($section),
-            $sectionViewUrl
+            new SectionContentAssignData($section)
         )->createView();
 
         return $this->render('EzPlatformAdminUiBundle:admin/section:view.html.twig', [
@@ -158,11 +151,8 @@ class SectionController extends Controller
      */
     public function deleteAction(Request $request, Section $section): Response
     {
-        $sectionListUrl = $this->generateUrl('ezplatform.section.list');
-
         $form = $this->formFactory->deleteSection(
-            new SectionDeleteData($section),
-            $sectionListUrl
+            new SectionDeleteData($section)
         );
         $form->handleRequest($request);
 
@@ -179,6 +169,8 @@ class SectionController extends Controller
                         'section'
                     )
                 );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.section.list'));
             });
 
             if ($result instanceof Response) {
@@ -186,7 +178,7 @@ class SectionController extends Controller
             }
         }
 
-        return $this->redirect($sectionListUrl);
+        return $this->redirect($this->generateUrl('ezplatform.section.list'));
     }
 
     /**
@@ -197,11 +189,8 @@ class SectionController extends Controller
      */
     public function assignContentAction(Request $request, Section $section): Response
     {
-        $sectionViewUrl = $this->generateUrl('ezplatform.section.view', ['sectionId' => $section->id]);
-
         $form = $this->formFactory->assignContentSectionForm(
-            new SectionContentAssignData($section),
-            $sectionViewUrl
+            new SectionContentAssignData($section)
         );
         $form->handleRequest($request);
 
@@ -222,6 +211,10 @@ class SectionController extends Controller
                         'section'
                     )
                 );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.section.view', [
+                    'sectionId' => $section->id,
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -229,8 +222,9 @@ class SectionController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirect($sectionViewUrl);
+        return $this->redirect($this->generateUrl('ezplatform.section.view', [
+            'sectionId' => $section->id,
+        ]));
     }
 
     /**
@@ -240,11 +234,8 @@ class SectionController extends Controller
      */
     public function createAction(Request $request): Response
     {
-        $sectionViewRoute = 'ezplatform.section.view';
-
         $form = $this->formFactory->createSection(
-            new SectionCreateData(),
-            $sectionViewRoute
+            new SectionCreateData()
         );
         $form->handleRequest($request);
 
@@ -261,9 +252,9 @@ class SectionController extends Controller
                     )
                 );
 
-                return [
+                return new RedirectResponse($this->generateUrl('ezplatform.section.view', [
                     'sectionId' => $section->id,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -284,11 +275,8 @@ class SectionController extends Controller
      */
     public function updateAction(Request $request, Section $section): Response
     {
-        $sectionViewUrl = $this->generateUrl('ezplatform.section.view', ['sectionId' => $section->id]);
-
         $form = $this->formFactory->updateSection(
-            new SectionUpdateData($section),
-            $sectionViewUrl
+            new SectionUpdateData($section)
         );
         $form->handleRequest($request);
 
@@ -304,6 +292,10 @@ class SectionController extends Controller
                         'section'
                     )
                 );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.section.view', [
+                    'sectionId' => $section->id,
+                ]));
             });
 
             if ($result instanceof Response) {

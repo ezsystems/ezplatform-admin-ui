@@ -55,9 +55,4 @@ class SectionContentAssignType extends AbstractType
             'translation_domain' => 'forms',
         ]);
     }
-
-    public function getParent()
-    {
-        return RedirectableForm::class;
-    }
 }

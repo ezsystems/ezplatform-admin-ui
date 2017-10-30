@@ -9,19 +9,12 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Version;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirectTrait;
 
 /**
  * @todo Add validation
  */
-class VersionRemoveData implements OnSuccessRedirect, OnFailureRedirect
+class VersionRemoveData
 {
-    use OnSuccessRedirectTrait;
-    use OnFailureRedirectTrait;
-
     /** @var ContentInfo|null */
     protected $contentInfo;
 

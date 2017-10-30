@@ -16,6 +16,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupUpdat
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -73,8 +74,7 @@ class ContentTypeGroupController extends Controller
         $deleteFormsByContentTypeGroupId = [];
         foreach ($contentTypeGroupList as $contentTypeGroup) {
             $deleteFormsByContentTypeGroupId[$contentTypeGroup->id] = $this->formFactory->deleteContentTypeGroup(
-                new ContentTypeGroupDeleteData($contentTypeGroup),
-                'ezplatform.content_type_group.list'
+                new ContentTypeGroupDeleteData($contentTypeGroup)
             )->createView();
         }
 
@@ -87,8 +87,7 @@ class ContentTypeGroupController extends Controller
     public function createAction(Request $request): Response
     {
         $form = $this->formFactory->createContentTypeGroup(
-            new ContentTypeGroupCreateData(),
-            'ezplatform.content_type_group.view'
+            new ContentTypeGroupCreateData()
         );
         $form->handleRequest($request);
 
@@ -107,9 +106,9 @@ class ContentTypeGroupController extends Controller
                     )
                 );
 
-                return [
+                return new RedirectResponse($this->generateUrl('ezplatform.content_type_group.view', [
                     'contentTypeGroupId' => $group->id,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -125,8 +124,7 @@ class ContentTypeGroupController extends Controller
     public function updateAction(Request $request, ContentTypeGroup $group): Response
     {
         $form = $this->formFactory->updateContentTypeGroup(
-            new ContentTypeGroupUpdateData($group),
-            'ezplatform.content_type_group.view'
+            new ContentTypeGroupUpdateData($group)
         );
         $form->handleRequest($request);
 
@@ -146,9 +144,9 @@ class ContentTypeGroupController extends Controller
                     )
                 );
 
-                return [
+                return new RedirectResponse($this->generateUrl('ezplatform.content_type_group.view', [
                     'contentTypeGroupId' => $group->id,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -164,11 +162,8 @@ class ContentTypeGroupController extends Controller
 
     public function deleteAction(Request $request, ContentTypeGroup $group): Response
     {
-        $contentTypeGroupListUrl = $this->generateUrl('ezplatform.content_type_group.list');
-
         $form = $this->formFactory->deleteContentTypeGroup(
-            new ContentTypeGroupDeleteData($group),
-            $contentTypeGroupListUrl
+            new ContentTypeGroupDeleteData($group)
         );
         $form->handleRequest($request);
 
@@ -192,8 +187,7 @@ class ContentTypeGroupController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirectToRoute($contentTypeGroupListUrl);
+        return $this->redirect($this->generateUrl('ezplatform.content_type_group.list'));
     }
 
     public function viewAction(ContentTypeGroup $group): Response

@@ -11,6 +11,7 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\API\Repository\Values\Content\Query;
+use eZ\Publish\API\Repository\Values\Content\TrashItem;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
@@ -18,6 +19,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -90,28 +92,24 @@ class TrashController extends Controller
      */
     public function listAction(): Response
     {
-        $trashListUrl = $this->generateUrl('ezplatform.trash.list');
-
         $trashItemsList = [];
         $trashItems = $this->trashService->findTrashItems(new Query([
             'sortClauses' => [new Query\SortClause\Location\Priority(Query::SORT_ASC)],
         ]));
+
+        /** @var TrashItem $item */
         foreach ($trashItems->items as $item) {
-            $contentType = $this->contentTypeService->getContentType($item->contentInfo->contentTypeId);
+            $contentType = $this->contentTypeService->loadContentType($item->contentInfo->contentTypeId);
             $ancestors = $this->uiPathService->loadPathLocations($item);
 
             $trashItemsList[] = new TrashItemData($item, $contentType, $ancestors);
         }
 
         $trashItemRestoreForm = $this->formFactory->restoreTrashItem(
-            new TrashItemRestoreData($trashItemsList, null),
-            $trashListUrl,
-            $trashListUrl
+            new TrashItemRestoreData($trashItemsList, null)
         );
         $trashEmptyForm = $this->formFactory->emptyTrash(
-            new TrashEmptyData(true),
-            $trashListUrl,
-            $trashListUrl
+            new TrashEmptyData(true)
         );
 
         return $this->render('@EzPlatformAdminUi/admin/trash/list.html.twig', [
@@ -130,13 +128,9 @@ class TrashController extends Controller
      */
     public function emptyAction(Request $request): Response
     {
-        $trashListUrl = $this->generateUrl('ezplatform.trash.list');
-
         if ($this->isGranted(new Attribute('content', 'remove'))) {
             $form = $this->formFactory->emptyTrash(
-                new TrashEmptyData(true),
-                $trashListUrl,
-                $trashListUrl
+                new TrashEmptyData(true)
             );
             $form->handleRequest($request);
 
@@ -151,6 +145,8 @@ class TrashController extends Controller
                             'trash'
                         )
                     );
+
+                    return new RedirectResponse($this->generateUrl('ezplatform.trash.list'));
                 });
 
                 if ($result instanceof Response) {
@@ -159,8 +155,7 @@ class TrashController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirect($trashListUrl);
+        return $this->redirect($this->generateUrl('ezplatform.trash.list'));
     }
 
     /**
@@ -170,13 +165,9 @@ class TrashController extends Controller
      */
     public function restoreAction(Request $request): Response
     {
-        $trashListUrl = $this->generateUrl('ezplatform.trash.list');
-
         if ($this->isGranted(new Attribute('content', 'restore'))) {
             $form = $this->formFactory->restoreTrashItem(
-                new TrashItemRestoreData(),
-                $trashListUrl,
-                $trashListUrl
+                new TrashItemRestoreData()
             );
             $form->handleRequest($request);
 
@@ -205,6 +196,8 @@ class TrashController extends Controller
                             )
                         );
                     }
+
+                    return new RedirectResponse($this->generateUrl('ezplatform.trash.list'));
                 });
 
                 if ($result instanceof Response) {
@@ -213,7 +206,6 @@ class TrashController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirect($trashListUrl);
+        return $this->redirect($this->generateUrl('ezplatform.trash.list'));
     }
 }

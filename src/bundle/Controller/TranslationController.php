@@ -12,6 +12,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveD
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -61,10 +62,7 @@ class TranslationController extends Controller
      */
     public function removeAction(Request $request): Response
     {
-        $form = $this->formFactory->removeTranslation(
-            new TranslationRemoveData(),
-            '_ezpublishLocation'
-        );
+        $form = $this->formFactory->removeTranslation();
         $form->handleRequest($request);
 
         /** @var ContentInfo $contentInfo */
@@ -86,9 +84,9 @@ class TranslationController extends Controller
                     );
                 }
 
-                return [
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -96,7 +94,8 @@ class TranslationController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirect($this->generateUrl('_ezpublishLocation', ['locationId' => $contentInfo->mainLocationId]));
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $contentInfo->mainLocationId,
+        ]));
     }
 }

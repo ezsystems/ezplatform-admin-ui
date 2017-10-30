@@ -19,6 +19,7 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -77,16 +78,12 @@ class PolicyController extends Controller
 
     public function listAction(Role $role): Response
     {
-        $roleViewUrl = $this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]);
-
         $policies = $role->getPolicies();
 
         $deleteFormsByPolicyId = [];
         foreach ($policies as $policy) {
             $deleteFormsByPolicyId[$policy->id] = $this->formFactory->deletePolicy(
-                new PolicyDeleteData($policy),
-                $roleViewUrl,
-                $roleViewUrl
+                new PolicyDeleteData($policy)
             )->createView();
         }
 
@@ -98,12 +95,8 @@ class PolicyController extends Controller
 
     public function createAction(Request $request, Role $role): Response
     {
-        $roleViewUrl = $this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]);
-
         $form = $this->formFactory->createPolicy(
-            new PolicyCreateData(),
-            $roleViewUrl,
-            $roleViewUrl
+            new PolicyCreateData()
         );
         $form->handleRequest($request);
 
@@ -122,6 +115,10 @@ class PolicyController extends Controller
                         'role'
                     )
                 );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
+                    'roleId' => $role->id,
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -137,12 +134,8 @@ class PolicyController extends Controller
 
     public function updateAction(Request $request, Role $role, Policy $policy): Response
     {
-        $roleViewUrl = $this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]);
-
         $form = $this->formFactory->updatePolicy(
-            new PolicyUpdateData($policy),
-            $roleViewUrl,
-            $roleViewUrl
+            new PolicyUpdateData($policy)
         );
         $form->handleRequest($request);
 
@@ -166,6 +159,10 @@ class PolicyController extends Controller
                         'role'
                     )
                 );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
+                    'roleId' => $role->id,
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -182,12 +179,8 @@ class PolicyController extends Controller
 
     public function deleteAction(Request $request, Role $role, Policy $policy): Response
     {
-        $roleViewUrl = $this->generateUrl('ezplatform.role.view', ['roleId' => $role->id]);
-
         $form = $this->formFactory->deletePolicy(
-            new PolicyDeleteData($policy),
-            $roleViewUrl,
-            $roleViewUrl
+            new PolicyDeleteData($policy)
         );
         $form->handleRequest($request);
 
@@ -209,6 +202,10 @@ class PolicyController extends Controller
                         'role'
                     )
                 );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
+                    'roleId' => $role->id,
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -216,7 +213,8 @@ class PolicyController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirect($roleViewUrl);
+        return $this->redirect($this->generateUrl('ezplatform.role.view', [
+            'roleId' => $role->id,
+        ]));
     }
 }

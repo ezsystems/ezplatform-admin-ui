@@ -9,16 +9,9 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Policy;
 
 use eZ\Publish\API\Repository\Values\User\Policy;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirectTrait;
 
-class PolicyUpdateData implements OnSuccessRedirect, OnFailureRedirect
+class PolicyUpdateData
 {
-    use OnSuccessRedirectTrait;
-    use OnFailureRedirectTrait;
-
     /** @var string */
     private $module;
 

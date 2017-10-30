@@ -8,7 +8,6 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\Section;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Embedded\SectionType;
-use EzSystems\EzPlatformAdminUi\Form\Type\RedirectableForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,10 +39,5 @@ class SectionDeleteType extends AbstractType
             'data_class' => SectionDeleteData::class,
             'translation_domain' => 'forms',
         ]);
-    }
-
-    public function getParent()
-    {
-        return RedirectableForm::class;
     }
 }

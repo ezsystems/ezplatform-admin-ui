@@ -16,6 +16,7 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -76,8 +77,7 @@ class LanguageController extends Controller
         $deleteFormsByLanguageId = [];
         foreach ($languageList as $language) {
             $deleteFormsByLanguageId[$language->id] = $this->formFactory->deleteLanguage(
-                new LanguageDeleteData($language),
-                'ezplatform.language.list'
+                new LanguageDeleteData($language)
             )->createView();
         }
 
@@ -99,8 +99,7 @@ class LanguageController extends Controller
     public function viewAction(Language $language): Response
     {
         $deleteForm = $this->formFactory->deleteLanguage(
-            new LanguageDeleteData($language),
-            'ezplatform.language.list'
+            new LanguageDeleteData($language)
         );
 
         return $this->render('@EzPlatformAdminUi/admin/language/view.html.twig', [
@@ -122,8 +121,7 @@ class LanguageController extends Controller
     public function deleteAction(Request $request, Language $language): Response
     {
         $form = $this->formFactory->deleteLanguage(
-            new LanguageDeleteData($language),
-            'ezplatform.language.list'
+            new LanguageDeleteData($language)
         );
         $form->handleRequest($request);
 
@@ -146,16 +144,12 @@ class LanguageController extends Controller
             }
         }
 
-        /* Fallback Redirect */
         return $this->redirect($this->generateUrl('ezplatform.language.list'));
     }
 
     public function createAction(Request $request): Response
     {
-        $form = $this->formFactory->createLanguage(
-            null,
-            'ezplatform.language.view'
-        );
+        $form = $this->formFactory->createLanguage();
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -171,9 +165,9 @@ class LanguageController extends Controller
                     )
                 );
 
-                return [
+                return new RedirectResponse($this->generateUrl('ezplatform.language.view', [
                     'languageId' => $language->id,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -211,9 +205,9 @@ class LanguageController extends Controller
                     )
                 );
 
-                return [
+                return new RedirectResponse($this->generateUrl('ezplatform.language.view', [
                     'languageId' => $language->id,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {

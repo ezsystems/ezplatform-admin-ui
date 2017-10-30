@@ -9,16 +9,9 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirectTrait;
 
-class ContentTypeGroupDeleteData implements OnSuccessRedirect, OnFailureRedirect
+class ContentTypeGroupDeleteData
 {
-    use OnSuccessRedirectTrait;
-    use OnFailureRedirectTrait;
-
     /** @var ContentTypeGroup */
     private $contentTypeGroup;
 

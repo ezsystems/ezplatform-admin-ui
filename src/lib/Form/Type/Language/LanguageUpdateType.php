@@ -7,7 +7,6 @@
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\RedirectableForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -50,10 +49,5 @@ class LanguageUpdateType extends AbstractType
             'data_class' => LanguageUpdateData::class,
             'translation_domain' => 'forms',
         ]);
-    }
-
-    public function getParent()
-    {
-        return RedirectableForm::class;
     }
 }

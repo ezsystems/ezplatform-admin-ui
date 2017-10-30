@@ -13,6 +13,7 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\VersionsTab;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -63,12 +64,13 @@ class VersionController extends Controller
     public function removeAction(Request $request): Response
     {
         $isDraftForm = null !== $request->get(VersionsTab::FORM_REMOVE_DRAFT);
-        $formName = sprintf('version-remove-%s', $isDraftForm ? VersionsTab::FORM_REMOVE_DRAFT : VersionsTab::FORM_REMOVE_ARCHIVED);
+        $formName = sprintf('version-remove-%s', $isDraftForm
+            ? VersionsTab::FORM_REMOVE_DRAFT
+            : VersionsTab::FORM_REMOVE_ARCHIVED
+        );
 
         $form = $this->formFactory->removeVersion(
             new VersionRemoveData(),
-            '_ezpublishLocation',
-            null,
             $formName
         );
         $form->handleRequest($request);
@@ -92,9 +94,9 @@ class VersionController extends Controller
                     )
                 );
 
-                return [
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                ];
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -102,7 +104,8 @@ class VersionController extends Controller
             }
         }
 
-        /* Fallback Redirect */
-        return $this->redirect($this->generateUrl('_ezpublishLocation', ['locationId' => $contentInfo->mainLocationId]));
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $contentInfo->mainLocationId,
+        ]));
     }
 }

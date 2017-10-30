@@ -9,16 +9,9 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirect;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnFailureRedirectTrait;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirect;
-use EzSystems\EzPlatformAdminUi\Form\Data\OnSuccessRedirectTrait;
 
-class TranslationRemoveData implements OnSuccessRedirect, OnFailureRedirect
+class TranslationRemoveData
 {
-    use OnSuccessRedirectTrait;
-    use OnFailureRedirectTrait;
-
     /** @var ContentInfo|null */
     protected $contentInfo;
 

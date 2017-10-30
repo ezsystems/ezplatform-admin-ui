@@ -72,22 +72,15 @@ class ContentViewController extends Controller
     private function supplyContentActionForms(ContentView $view): void
     {
         $location = $view->getLocation();
-        $locationViewUrl = $this->generateUrl($location);
 
         $locationCopyType = $this->formFactory->copyLocation(
-            new LocationCopyData($location),
-            null /* action handles the redirection */,
-            $locationViewUrl
+            new LocationCopyData($location)
         );
         $locationMoveType = $this->formFactory->moveLocation(
-            new LocationMoveData($location),
-            null /* action handles the redirection */,
-            $locationViewUrl
+            new LocationMoveData($location)
         );
         $locationTrashType = $this->formFactory->trashLocation(
-            new LocationTrashData($location),
-            null /* action handles the redirection */,
-            $locationViewUrl
+            new LocationTrashData($location)
         );
 
         $view->addParameters([

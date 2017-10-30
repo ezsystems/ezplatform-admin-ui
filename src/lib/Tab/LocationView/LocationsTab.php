@@ -88,10 +88,9 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
             $locations = $locationsDataset->getLocations();
         }
 
-        $locationViewUrl = $this->urlGenerator->generate($location, ['_fragment' => 'ez-tab-location-view-locations']);
-        $formLocationAdd = $this->createLocationAddForm($location, $locationViewUrl);
-        $formLocationRemove = $this->createLocationRemoveForm($location, $locations, $locationViewUrl);
-        $formLocationSwap = $this->createLocationSwapForm($location, $locationViewUrl);
+        $formLocationAdd = $this->createLocationAddForm($location);
+        $formLocationRemove = $this->createLocationRemoveForm($location, $locations);
+        $formLocationSwap = $this->createLocationSwapForm($location);
 
         $viewParameters = [
             'locations' => $locations,
@@ -108,35 +107,25 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
 
     /**
      * @param Location $location
-     * @param string $locationViewUrl
      *
      * @return FormInterface
      */
-    private function createLocationAddForm(Location $location, string $locationViewUrl): FormInterface
+    private function createLocationAddForm(Location $location): FormInterface
     {
         return $this->formFactory->addLocation(
-            new ContentLocationAddData($location->getContentInfo()),
-            $locationViewUrl,
-            $locationViewUrl
+            new ContentLocationAddData($location->getContentInfo())
         );
     }
 
     /**
      * @param Location $location
      * @param UIValue\Content\Location[] $contentLocations
-     * @param string $locationViewUrl
      *
      * @return FormInterface
      */
-    private function createLocationRemoveForm(
-        Location $location,
-        array $contentLocations,
-        string $locationViewUrl
-    ): FormInterface {
+    private function createLocationRemoveForm(Location $location, array $contentLocations): FormInterface {
         return $this->formFactory->removeLocation(
-            new ContentLocationRemoveData($location->getContentInfo(), $this->getLocationChoices($contentLocations)),
-            $locationViewUrl,
-            $locationViewUrl
+            new ContentLocationRemoveData($location->getContentInfo(), $this->getLocationChoices($contentLocations))
         );
     }
 
@@ -154,16 +143,13 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
 
     /**
      * @param Location $location
-     * @param string $locationViewUrl
      *
      * @return FormInterface
      */
-    protected function createLocationSwapForm(Location $location, string $locationViewUrl): FormInterface
+    protected function createLocationSwapForm(Location $location): FormInterface
     {
         return $this->formFactory->swapLocation(
-            new LocationSwapData($location),
-            $locationViewUrl,
-            $locationViewUrl
+            new LocationSwapData($location)
         );
     }
 }
