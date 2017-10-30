@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-10-30T13:24:04Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="0ec8148d681b43e87a6d0751fff188517be1ea26" resname="search.header">
+        <source>Search results (%total%)</source>
+        <target state="new">Search results (%total%)</target>
+        <note>key: search.header</note>
+        <jms:reference-file line="22">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1d83218940b91b2cc81ae9d0a694682f6cb04813" resname="search.headline">
+        <source>Search</source>
+        <target state="new">Search</target>
+        <note>key: search.headline</note>
+        <jms:reference-file line="17">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+        <jms:reference-file line="17">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/search.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6ceaf9887c3974130781c3dadfcb129926496770" resname="search.list">
+        <source>search.list</source>
+        <target state="new">search.list</target>
+        <note>key: search.list</note>
+        <jms:reference-file line="72">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0ea91510ce49731de30d4d412dc62c83c91b359d" resname="search.modified">
+        <source>Modified</source>
+        <target state="new">Modified</target>
+        <note>key: search.modified</note>
+        <jms:reference-file line="47">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6fc6d2e87716ae8feb2ff4536efa8c9db0904509" resname="search.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: search.name</note>
+        <jms:reference-file line="46">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8c11cc36acf58db9ff898f3a4cf02fd0fc293f67" resname="search.no_result">
+        <source>Sorry, no results were found for "%query%".</source>
+        <target state="new">Sorry, no results were found for "%query%".</target>
+        <note>key: search.no_result</note>
+        <jms:reference-file line="29">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6fa93ef4dfbce97076a254427bb30bf7c5819c5d" resname="search.perform">
+        <source>search.perform</source>
+        <target state="new">search.perform</target>
+        <note>key: search.perform</note>
+        <jms:reference-file line="25">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/search.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="777cc1ef279096d5a978aa3553e9434d828f8248" resname="search.tips.check_spelling">
+        <source>Check spelling of keywords.</source>
+        <target state="new">Check spelling of keywords.</target>
+        <note>key: search.tips.check_spelling</note>
+        <jms:reference-file line="36">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d89a8ff5c4b03f1dd7bd1ce3e3306862e1855751" resname="search.tips.different_keywords">
+        <source>Try different keywords.</source>
+        <target state="new">Try different keywords.</target>
+        <note>key: search.tips.different_keywords</note>
+        <jms:reference-file line="37">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="013ced9a3284ecebf5a5356397dc9a79eaf76496" resname="search.tips.fewer_keywords">
+        <source>Try fewer keywords. Reducing keywords result in more matches.</source>
+        <target state="new">Try fewer keywords. Reducing keywords result in more matches.</target>
+        <note>key: search.tips.fewer_keywords</note>
+        <jms:reference-file line="39">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4af1e76946070e5f61320621d12a171f4206e06c" resname="search.tips.headline">
+        <source>Some helpful search tips:</source>
+        <target state="new">Some helpful search tips:</target>
+        <note>key: search.tips.headline</note>
+        <jms:reference-file line="34">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="dd61516edc919235a13e3cfadb5d961b8614b744" resname="search.tips.more_general_keywords">
+        <source>Try more general keywords.</source>
+        <target state="new">Try more general keywords.</target>
+        <note>key: search.tips.more_general_keywords</note>
+        <jms:reference-file line="38">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0c9866a19fd5d3074bdb05b339df05b7c05a5661" resname="search.type">
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
+        <note>key: search.type</note>
+        <jms:reference-file line="48">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fe647ff0e12d67501403559464217be468dba3d8" resname="search.viewing">
+        <source>Viewing %viewing% out of %total% sub-items</source>
+        <target state="new">Viewing %viewing% out of %total% sub-items</target>
+        <note>key: search.viewing</note>
+        <jms:reference-file line="59">/../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/search/list.html.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

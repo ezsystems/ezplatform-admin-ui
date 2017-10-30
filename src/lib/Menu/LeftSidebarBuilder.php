@@ -47,8 +47,8 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
             self::ITEM__SEARCH => $this->createMenuItem(
                 self::ITEM__SEARCH,
                 [
+                    'route' => 'ezplatform.search',
                     'extras' => ['icon' => 'search'],
-                    'attributes' => ['disabled' => 'disabled'],
                 ]
             ),
             self::ITEM__BROWSE => $this->createMenuItem(

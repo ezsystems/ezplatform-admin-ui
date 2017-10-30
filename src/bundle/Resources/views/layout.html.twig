@@ -44,7 +44,15 @@
             </div>
         </div>
         <div class="container-fluid ez-main-container">
-            {% block content %}{% endblock %}
+            {% block content %}
+
+                {% block left_sidebar %}
+                    <div class="col-sm-1 bg-dark pt-4 ez-side-menu"> {# @todo sidebars should be moved to layout.html.twig !! #}
+                        {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@EzPlatformAdminUi/parts/menu/sidebar_left.html.twig'}) }}
+                    </div>
+                {% endblock left_sidebar %}
+
+            {% endblock content %}
         </div>
         <div class="ez-notifications-container">
             {% for label, messages in app.flashes %}
@@ -67,6 +75,7 @@
             'assets/vendor/bootstrap/dist/js/bootstrap.min.js'
             'bundles/ezplatformadminuimodules/js/UniversalDiscovery.module.js'
             'bundles/ezplatformadminui/js/scripts/button.trigger.js'
+            'bundles/ezplatformadminui/js/scripts/udw/browse.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

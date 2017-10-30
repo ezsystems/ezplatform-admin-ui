@@ -31,6 +31,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
@@ -61,6 +62,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionContentAssignType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionDeleteType;
@@ -573,5 +575,22 @@ class FormFactory
         $name = $name ?: sprintf('delete-policy-%s', md5(implode('/', $data->getPolicy())));
 
         return $this->formFactory->createNamed($name, PolicyDeleteType::class, $data);
+    }
+
+    /**
+     * @param SearchData|null $data
+     * @param null|string $name
+     * @param array $options
+     *
+     * @return FormInterface
+     */
+    public function createSearchForm(
+        SearchData $data = null,
+        ?string $name = null,
+        array $options = []
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(SearchData::class);
+
+        return $this->formFactory->createNamed($name, SearchType::class, $data, $options);
     }
 }

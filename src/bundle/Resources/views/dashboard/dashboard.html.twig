@@ -6,9 +6,11 @@
 
 {% block content %}
     <div class="row align-items-stretch ez-main-row ez-dashboard-row">
-        <div class="col-sm-1 bg-dark pt-4 ez-side-menu">
-            {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@EzPlatformAdminUi/parts/menu/sidebar_left.html.twig'}) }}
-        </div>
+
+        {% block left_sidebar %}
+            {{ parent() }}
+        {% endblock left_sidebar %}
+
         <div class="col-sm-11">
             <div class="container">
                 <div class="card border-light my-4">

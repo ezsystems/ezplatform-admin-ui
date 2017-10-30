@@ -334,3 +334,11 @@ ezplatform.content.create:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Content:create'
+
+# Search
+
+ezplatform.search:
+    path: /search
+    methods: ['GET']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Search:search'
