@@ -56,7 +56,7 @@
             </tr>
             <tr>
                 <th>{{ "content_type.container"|trans|desc("Container") }}</th>
-                <td>{{ 'yes_no'|transchoice(content_type.isContainer) }}</td>
+                <td>{{ 'yes_no'|transchoice(content_type.isContainer)|desc("{0}No|{1}Yes") }}</td>
             </tr>
             <tr>
                 <th>{{ "content_type.default_children_sorting"|trans|desc("Default property for sorting children") }}</th>
