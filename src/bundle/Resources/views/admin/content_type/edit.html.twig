@@ -108,7 +108,9 @@
 
     <section class="container mt-4 mb-4">
         <div class="btn-toolbar justify-content-between" role="toolbar">
-            {{ form_widget(form.removeDraft, { attr: { class: 'btn btn-danger'}}) }}
+            <a href="{{ path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }) }}" class="btn btn-default">
+                {{ "form.cancel"|trans|desc('Cancel') }}
+            </a>
 
             <div class="btn-toolbar justify-content-between" role="toolbar">
                 <div class="btn-group" role="group">
@@ -119,5 +121,5 @@
         </div>
     </section>
 
-    {{ form_end(form) }}
+    {{ form_end(form, {'render_rest': false }) }}
 {% endblock %}
