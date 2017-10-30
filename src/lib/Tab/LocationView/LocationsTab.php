@@ -123,7 +123,8 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
      *
      * @return FormInterface
      */
-    private function createLocationRemoveForm(Location $location, array $contentLocations): FormInterface {
+    private function createLocationRemoveForm(Location $location, array $contentLocations): FormInterface
+    {
         return $this->formFactory->removeLocation(
             new ContentLocationRemoveData($location->getContentInfo(), $this->getLocationChoices($contentLocations))
         );

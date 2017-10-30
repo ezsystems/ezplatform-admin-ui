@@ -40,7 +40,7 @@ class ContentTypeDraftParamConverter implements ParamConverterInterface
 
         try {
             $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($id);
-        } catch(TypeNotFound $e) {
+        } catch (TypeNotFound $e) {
             $contentType = $this->contentTypeService->loadContentType($id);
             $contentTypeDraft = $this->contentTypeService->createContentTypeDraft($contentType);
         }

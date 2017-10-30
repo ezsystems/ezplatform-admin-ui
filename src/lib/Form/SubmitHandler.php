@@ -54,7 +54,6 @@ class SubmitHandler
                 if ($result instanceof Response) {
                     return $result;
                 }
-
             } catch (Exception $e) {
                 $this->notificationHandler->error($e->getMessage());
             }
