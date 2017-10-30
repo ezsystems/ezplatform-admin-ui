@@ -41,3 +41,28 @@
         pointer-events: none;
     }
 }
+
+.ez-btn-ae {
+    &:hover {
+        .ez-icon {
+            fill: $ez-alloyeditor-color-hover;
+        }
+    }
+    .ez-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: $ez-white;
+    }
+}
+
+.ez-field-edit--ezrichtext {
+    [data-ezelement="ezembed"] {
+        .ez-embed-content {
+            .ez-icon {
+                width: 1.5rem;
+                height: 1.5rem;
+                vertical-align: middle;
+            }
+        }
+    }
+}

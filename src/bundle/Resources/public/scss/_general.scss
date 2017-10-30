@@ -42,3 +42,20 @@ button {
 .ez-field-edit {
     margin: 1rem 0;
 }
+
+.ezrichtext-field {
+    display: inline-block;
+    width: 100%;
+
+    .align-left {
+        float: left
+    }
+
+    .align-center {
+        text-align: center;
+    }
+
+    .align-right {
+        float: right;
+    }
+}

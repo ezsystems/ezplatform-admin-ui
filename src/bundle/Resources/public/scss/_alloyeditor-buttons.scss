@@ -1,0 +1,55 @@
+.ae-ui {
+    .ae-toolbar-add {
+        opacity: 0;
+    }
+
+    .ae-toolbar {
+        .ae-button {
+            &.ez-btn-ae {
+                width: auto;
+                height: auto;
+                margin: .3rem .8rem;
+
+                .ez-btn-ae__label {
+                    font-size: .85rem;
+                    margin-bottom: 0;
+                    margin-top: .2rem;
+                }
+            }
+        }
+    }
+
+    .ae-container {
+        .ez-ae-edit-link {
+            .ez-btn-ae {
+                color: $ez-white;
+
+                &.ez-btn-ae--clear-link {
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    color: $ez-color-base-dark;
+                    height: 2.25rem;
+                    display: none;
+                }
+
+                &.ez-btn-ae--remove-link {
+                    margin-right: 1rem;
+                    background-color: $ez-ground-base-dark;
+                }
+
+                &.ez-btn-ae--udw {
+                    background-color: $ez-ground-base-dark;
+                }
+            }
+
+            &.is-linked {
+                .ez-btn-ae {
+                    &.ez-btn-ae--clear-link {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
