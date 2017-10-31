@@ -1,0 +1,4 @@
+parameters:
+    ezsettings.default.location_ids.content: 2
+    ezsettings.default.location_ids.media: 43
+    ezsettings.default.location_ids.users: 5

@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light ez-main-nav" style="flex-wrap:wrap;">
+    <div class="container-fluid">
+        <a href="{{ url('ezplatform.dashboard') }}" class="navbar-brand">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" xml:space="preserve" width="70" viewBox="0 0 822.59995 309.89998">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-logo.svg') }}#logo"></use>
+            </svg>
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="nav nav-tabs" role="tablist">
+                {{ knp_menu_render('ezplatform_admin_ui.menu.main', {
+                    'depth': 1,
+                    'template': '@EzPlatformAdminUi/parts/menu/top_menu.html.twig',
+                    'currentClass': 'active',
+                    'ancestorClass': 'active'
+                }) }}
+            </ul>
+            <ul class="nav navbar-nav ml-md-auto">
+                {# @todo use knp for user menu as well #}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('logout') }}">
+                        {{ 'authentication.logout'|trans|desc('Logout') }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light ez-main-sub-nav" style="flex-wrap:wrap;">
+    {{ knp_menu_render('ezplatform_admin_ui.menu.main', {
+        'depth': 2,
+        'template': '@EzPlatformAdminUi/parts/menu/top_menu_2nd_level.html.twig',
+        'currentClass': 'active',
+        'ancestorClass': 'active'
+    }) }}
+</nav>
