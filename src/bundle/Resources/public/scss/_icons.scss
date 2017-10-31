@@ -29,3 +29,9 @@
         height: 1.5rem;
     }
 }
+
+.ez-btn--extra-actions {
+    .ez-icon {
+        pointer-events: none;
+    }
+}
