@@ -1,5 +1,10 @@
-{% block form_widget %}
-    {% for child in form %}
-        {{ form_widget(child) }}
-    {% endfor %}
+{% block form_widget_compound %}
+    {{- block('form_rows') -}}
+    {{- form_rest(form) -}}
+{% endblock %}
+
+{% block form_row %}
+    {{- form_label(form) -}}
+    {{- form_errors(form) -}}
+    {{- form_widget(form) -}}
 {% endblock %}
