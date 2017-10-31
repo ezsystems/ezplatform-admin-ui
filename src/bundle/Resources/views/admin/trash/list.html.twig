@@ -8,24 +8,7 @@
     <div id="react-udw"></div>
     <div class="row align-items-stretch ez-main-row">
         <div class="col-sm-1 bg-dark pt-4 ez-side-menu"> {# @todo sidebars should be moved to layout.html.twig !! #}
-            <button class="btn btn-dark btn-block" disabled>
-                <svg class="ez-icon ez-icon-search">
-                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
-                </svg>
-                Search
-            </button>
-            <button class="btn btn-dark btn-block btn--udw-browse" data-starting-location-id="2">
-                <svg class="ez-icon ez-icon-browse">
-                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#browse"></use>
-                </svg>
-                Browse
-            </button>
-            <a class="btn btn-dark btn-block" href="{{ path('ezplatform.trash.list') }}">
-                <svg class="ez-icon ez-icon-trash">
-                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-                </svg>
-                Trash
-            </a>
+            {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@EzPlatformAdminUi/parts/menu/sidebar_left.html.twig'}) }}
         </div>
         <div class="col-sm-10 px-0">
             <section class="container mt-5">

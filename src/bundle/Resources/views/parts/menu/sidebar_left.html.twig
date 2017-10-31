@@ -1,0 +1,41 @@
+{% extends '@KnpMenu/menu.html.twig' %}
+
+{% block root %}
+    {% for item in item.children %}
+        {{ block('item') }}
+    {% endfor %}
+{% endblock %}
+
+{% block item -%}
+    {%- if item.displayed -%}
+        {%- set attributes = item.attributes|merge({'class': (item.attributes.class|default('') ~ ' btn btn-dark btn-block')|trim}) -%}
+        {%- set attributes = attributes|merge({'id': item.name ~ '-tab'}) -%}
+
+        {%- if item.uri is not empty %}
+            {% set attributes = attributes|merge({'href': item.uri}) %}
+            {% set element = 'a' %}
+            {{ block('element') }}
+        {%- else %}
+            {% set element = 'button' %}
+            {{ block('element') }}
+        {%- endif %}
+    {%- endif -%}
+{%- endblock %}
+
+{% block element %}
+    {% import 'knp_menu.html.twig' as macros %}
+    {% set element = element|default('a') %}
+    <{{ element }}{{ macros.attributes(attributes) }}>
+    {{ block('label') }}
+    </{{ element }}>
+{% endblock %}
+
+{% block label %}
+    {% if item.extras.icon is defined and item.extras.icon != '' %}
+        <svg class="ez-icon ez-icon-{{ item.extras.icon }}">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ item.extras.icon }}"></use>
+        </svg>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
