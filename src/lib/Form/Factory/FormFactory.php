@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentDraftCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
@@ -36,6 +37,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentDraftCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationRemoveType;
@@ -67,6 +69,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Version\VersionRemoveType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FormFactory
@@ -85,6 +88,32 @@ class FormFactory
     {
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
+    }
+
+    /**
+     * @param ContentDraftCreateData|null $data
+     * @param string|null $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function createContentDraft(
+        ?ContentDraftCreateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentDraftCreateType::class);
+        $data = $data ?? new ContentDraftCreateData();
+        $options = null !== $data->getVersionInfo()
+            ? ['language_codes' => $data->getVersionInfo()->languageCodes]
+            : [];
+
+        return $this->formFactory->createNamed(
+            $name,
+            ContentDraftCreateType::class,
+            $data,
+            $options
+        );
     }
 
     /**
