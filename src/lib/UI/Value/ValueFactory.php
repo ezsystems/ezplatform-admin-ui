@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Value;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\ObjectStateService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\UserService;
@@ -19,6 +20,7 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Relation;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
+use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
 use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
@@ -40,6 +42,9 @@ class ValueFactory
     /** @var SearchService */
     protected $searchService;
 
+    /** @var ObjectStateService */
+    protected $objectStateService;
+
     /** @var PermissionResolver */
     protected $permissionResolver;
 
@@ -55,6 +60,7 @@ class ValueFactory
      * @param LocationService $locationService
      * @param ContentTypeService $contentTypeService
      * @param SearchService $searchService
+     * @param ObjectStateService $objectStateService
      * @param PermissionResolver $permissionResolver
      * @param PathService $pathService
      * @param DatasetFactory $datasetFactory
@@ -65,6 +71,7 @@ class ValueFactory
         LocationService $locationService,
         ContentTypeService $contentTypeService,
         SearchService $searchService,
+        ObjectStateService $objectStateService,
         PermissionResolver $permissionResolver,
         PathService $pathService,
         DatasetFactory $datasetFactory
@@ -74,6 +81,7 @@ class ValueFactory
         $this->locationService = $locationService;
         $this->contentTypeService = $contentTypeService;
         $this->searchService = $searchService;
+        $this->objectStateService = $objectStateService;
         $this->permissionResolver = $permissionResolver;
         $this->pathService = $pathService;
         $this->datasetFactory = $datasetFactory;
@@ -145,6 +153,23 @@ class ValueFactory
                 'content', 'remove', $location->getContentInfo(), [$location]
             ),
             'main' => $location->getContentInfo()->mainLocationId === $location->id,
+        ]);
+    }
+
+    /**
+     * @param ContentInfo $contentInfo
+     * @param ObjectStateGroup $objectStateGroup
+     *
+     * @return UIValue\ObjectState\ObjectState
+     */
+    public function createObjectState(
+        ContentInfo $contentInfo,
+        ObjectStateGroup $objectStateGroup
+    ): UIValue\ObjectState\ObjectState {
+        $objectState = $this->objectStateService->getContentState($contentInfo, $objectStateGroup);
+
+        return new UIValue\ObjectState\ObjectState($objectState, [
+            'userCanAssign' => $this->permissionResolver->canUser('state', 'assign', $contentInfo),
         ]);
     }
 }

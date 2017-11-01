@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\ObjectStateService;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 
 class DatasetFactory
@@ -20,6 +21,9 @@ class DatasetFactory
 
     /** @var LanguageService */
     protected $languageService;
+
+    /** @var ObjectStateService */
+    protected $objectStateService;
 
     /** @var ValueFactory */
     protected $valueFactory;
@@ -31,17 +35,20 @@ class DatasetFactory
      * @param ContentService $contentService
      * @param LanguageService $languageService
      * @param LocationService $locationService
+     * @param ObjectStateService $objectStateService
      * @param ValueFactory $valueFactory
      */
     public function __construct(
         ContentService $contentService,
         LanguageService $languageService,
         LocationService $locationService,
+        ObjectStateService $objectStateService,
         ValueFactory $valueFactory
     ) {
         $this->contentService = $contentService;
         $this->languageService = $languageService;
         $this->locationService = $locationService;
+        $this->objectStateService = $objectStateService;
         $this->valueFactory = $valueFactory;
     }
 
@@ -75,5 +82,13 @@ class DatasetFactory
     public function locations(): LocationsDataset
     {
         return new LocationsDataset($this->locationService, $this->valueFactory);
+    }
+
+    /**
+     * @return ObjectStatesDataset
+     */
+    public function objectStates(): ObjectStatesDataset
+    {
+        return new ObjectStatesDataset($this->objectStateService, $this->valueFactory);
     }
 }

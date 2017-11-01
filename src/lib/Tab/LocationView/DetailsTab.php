@@ -92,6 +92,8 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
         $locationUpdateType = $this->formFactory->updateLocation(
             new LocationUpdateData($parameters['location'])
         );
+        $objectStatesDataset = $this->datasetFactory->objectStates();
+        $objectStatesDataset->load($contentInfo);
 
         $viewParameters = [
             'section' => $this->sectionService->loadSection($contentInfo->sectionId),
@@ -101,6 +103,7 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
             'lastContributor' => $this->userService->loadUser($versionInfo->creatorId),
             'translations' => $translationsDataset->getTranslations(),
             'form_location_update' => $locationUpdateType->createView(),
+            'objectStates' => $objectStatesDataset->getObjectStates(),
         ];
 
         return $this->twig->render(
