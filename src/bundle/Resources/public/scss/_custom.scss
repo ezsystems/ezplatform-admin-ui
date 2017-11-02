@@ -1,30 +1,37 @@
 /* eZ colors */
 $ez-color-primary: #f15a10;
-$ez-color-primary-hover: #cf4c0c;
-$ez-color-secondary: #0f6d95;
-$ez-color-secondary-hover: #0c5472;
+$ez-color-primary-hover: darken($ez-color-primary, 15%);
+$ez-color-secondary: #106d95;
+$ez-color-secondary-hover: darken($ez-color-secondary, 15%);
 $ez-color-hyperlink: #0645ad;
 $ez-color-hyperlink-hover: #032863;
 $ez-color-positive: #00825c;
 $ez-color-warning: #f7d000;
-$ez-color-danger: #cb2540;
-$ez-color-danger-hover: #b32032;
+$ez-color-danger: #d92d42;
+$ez-color-danger-hover: darken($ez-color-danger, 15%);
 
 $ez-white: #fff;
 $ez-ground-base-pale: #fafafa;
-$ez-ground-base-light: #f3f3f3;
-$ez-ground-base: #e5e3e3;
-$ez-ground-base-medium: #ced4da; // color is not in guidelines (currently never used)
-$ez-ground-base-dark: #bbbbbb;
-$ez-color-base-pale: #878787;
-$ez-color-base-light: #6b6b6b;
-$ez-color-base-medium: #4b4b4b;
-$ez-color-base-dark: #333333;
-$ez-black: #000;
+$ez-ground-base-light: #f5f5f5;
+$ez-ground-base: #f3f3f3;
+$ez-ground-base-medium: #ededed;
+$ez-ground-base-dark: #e5e3e3;
+$ez-color-base-pale: #dbdbdb;
+$ez-color-base-light: #878787;
+$ez-color-base-medium: #646464;
+$ez-color-base-dark: #555;
+$ez-black: #333;
 
-$ez-ground-primary: #a8c8d5;
-$ez-ground-primary-inverted-light: #62828F;
-$ez-ground-primary-inverted: #445A64;
+$ez-secondary-ground-pale: #e1f5ff;
+$ez-ground-primary: #a8c8d5; // Should be renamed
+$ez-secondary-ground: #2b84b1;
+$ez-secondary-ground-medium: #106d95;
+$ez-secondary-ground-dark: #0a5574;
+$ez-ground-primary-inverted-light: #445a64; // Should be renamed
+$ez-ground-primary-inverted: #565e63; // Should be renamed
+
+$ez-color-warning-pale: #fceaec;
+$ez-color-warning-dark: #aa0000;
 
 /* boostrap variables*/
 $white:  $ez-white;
@@ -70,8 +77,8 @@ $colors: (
     green: $ez-color-positive,
     teal: $ez-ground-primary,
     white: $white,
-    gray: $ez-color-base-pale,
-    gray-dark: $ez-color-base-medium,
+    gray: $ez-color-base-light,
+    gray-dark: $ez-color-base-dark,
     indigo: $indigo,
     purple: $purple,
     pink: $pink,
@@ -85,7 +92,7 @@ $theme-colors: (
     warning: $ez-color-warning,
     danger: $ez-color-danger,
     light: $ez-ground-base-pale,
-    dark: $ez-color-base-medium,
+    dark: $ez-color-base-dark,
     info: $cyan
 );
 
@@ -93,14 +100,14 @@ $theme-colors: (
 $font-family-sans-serif: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
 
 // Tables
-$table-bg: $ez-ground-base-light;
+$table-bg: $white;
 $table-border-color: $ez-ground-primary;
 
 // Breadcrumbs
-$breadcrumb-bg: $ez-ground-base;
+$breadcrumb-bg: $ez-color-base-medium;
 
 // Links
 $link-color: $ez-color-hyperlink;
 
 // Body
-$body-bg: $ez-ground-base-pale;
+$body-bg: $ez-ground-base-light;
