@@ -7,10 +7,22 @@
 
 .ez-extra-actions--create {
     .ez-instant-filter {
-        max-height: 195px;
+        &__group-name {
+            padding-left: .5rem;
+        }
+
+        &__input-wrapper {
+            padding: 1rem .5rem;
+        }
+
+        &__group-item {
+            label {
+                cursor: pointer;
+            }
+        }
 
         &__items {
-            max-height: 150px;
+            max-height: 200px;
             overflow: auto;
         }
     }

@@ -8,16 +8,24 @@
             const cssMethodName = actions.classList.contains(CLASS_HIDDEN) ? 'remove' : 'add';
             const clickOutsideMethodName = actions.classList.contains(CLASS_HIDDEN) ? 'addEventListener' : 'removeEventListener';
             const btnRect = btn.getBoundingClientRect();
+            const focusElement = actions.querySelector(btn.dataset.focusElement);
             const detectClickOutside = (event) => {
-                if (!event.target.classList.contains('ez-extra-actions') && !event.target.contains(actions) && !event.target.contains(btn)) {
+                const isNotButton = !event.target.contains(btn);
+                const isNotExtraActions = !event.target.closest('.ez-extra-actions');
+
+                if (isNotButton && isNotExtraActions) {
                     actions.classList.add(CLASS_HIDDEN);
                     document.body.removeEventListener('click', detectClickOutside, false);
                 }
             };
 
-            actions.style.top = btn.offsetTop + (btnRect.height / 2) + 'px';
+            actions.style.top = btn.offsetTop + 'px';
             actions.classList[cssMethodName](CLASS_HIDDEN);
             document.body[clickOutsideMethodName]('click', detectClickOutside, false);
+
+            if (focusElement) {
+                focusElement.focus();
+            }
         }, false);
     });
 })();

@@ -32,8 +32,9 @@
             element: item
         }], []);
 
-        filter.addEventListener('change', filterItems.bind(filter, itemsMap, groups), false);
-        filter.addEventListener('blur', filterItems.bind(filter, itemsMap, groups), false);
+        filterInput.addEventListener('change', filterItems.bind(filter, itemsMap, groups), false);
+        filterInput.addEventListener('blur', filterItems.bind(filter, itemsMap, groups), false);
+        filterInput.addEventListener('keyup', filterItems.bind(filter, itemsMap, groups), false);
     };
 
     filters.forEach(initFilter);
