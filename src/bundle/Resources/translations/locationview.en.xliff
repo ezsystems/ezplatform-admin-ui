@@ -1,29 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-10-24T18:18:11Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2017-11-02T09:44:31Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="f84e2e2dadd87384fb55f25886926b777e8378f1" resname="copy">
-        <source>Copy</source>
-        <target state="new">Copy</target>
-        <note>key: copy</note>
-        <jms:reference-file line="81">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/locationview.html.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="379d6ce99a8a95a7096ab579d454784c82a994d8" resname="move">
-        <source>Move</source>
-        <target state="new">Move</target>
-        <note>key: move</note>
-        <jms:reference-file line="87">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/locationview.html.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="4daad9c3d5aa0132dd751b6d2cdff8bada9f33b4" resname="send.to.trash">
-        <source>Send to Trash</source>
-        <target state="new">Send to Trash</target>
-        <note>key: send.to.trash</note>
-        <jms:reference-file line="76">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/locationview.html.twig</jms:reference-file>
-      </trans-unit>
       <trans-unit id="c0b36efcf0ebbe2ac0f9861cae35e12e668cbcc0" resname="tab.details.content_details">
         <source>Content details</source>
         <target state="new">Content details</target>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-10-24T18:18:11Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2017-11-02T09:44:31Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,7 +10,7 @@
         <source>Logout</source>
         <target state="new">Logout</target>
         <note>key: authentication.logout</note>
-        <jms:reference-file line="45">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/parts/menu.html.twig</jms:reference-file>
+        <jms:reference-file line="21">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/parts/navigation.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="da44d8915172b0c8a874e26956f44aa5501c7e6b" resname="authentication.password">
         <source>Password</source>

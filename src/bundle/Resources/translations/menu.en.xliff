@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-11-02T09:44:31Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="a0e5e0f0d39b0d4d58cb089d09414a0b8bcf7e2e" resname="content__sidebar_right__copy">
+        <source>Copy</source>
+        <target state="new">Copy</target>
+        <note>key: content__sidebar_right__copy</note>
+      </trans-unit>
+      <trans-unit id="522a7eb05659ac849a762954effc22db818b8323" resname="content__sidebar_right__move">
+        <source>Move</source>
+        <target state="new">Move</target>
+        <note>key: content__sidebar_right__move</note>
+      </trans-unit>
+      <trans-unit id="9445b360492505d3a8d7be4c316e2cc62f381e03" resname="content__sidebar_right__send_to_trash">
+        <source>Send to Trash</source>
+        <target state="new">Send to Trash</target>
+        <note>key: content__sidebar_right__send_to_trash</note>
+      </trans-unit>
+      <trans-unit id="f85206498106b1536c36c3231d870daa0d2805e2" resname="main__admin__content_types">
+        <source>Content Types</source>
+        <target state="new">Content Types</target>
+        <note>key: main__admin__content_types</note>
+      </trans-unit>
+      <trans-unit id="fd9a2e689e82242d49f0313d78aca7e30bf9f24f" resname="main__admin__languages">
+        <source>Languages</source>
+        <target state="new">Languages</target>
+        <note>key: main__admin__languages</note>
+      </trans-unit>
+      <trans-unit id="8a5845bd0e93b67b2ac54a06f2eae85f2cb3b13d" resname="main__admin__roles">
+        <source>Roles</source>
+        <target state="new">Roles</target>
+        <note>key: main__admin__roles</note>
+      </trans-unit>
+      <trans-unit id="e636e8e95f62409b29348795eef55b4450f65673" resname="main__admin__sections">
+        <source>Sections</source>
+        <target state="new">Sections</target>
+        <note>key: main__admin__sections</note>
+      </trans-unit>
+      <trans-unit id="2cc622305036d330c00683520df433ef82f60c9a" resname="main__admin__systeminfo">
+        <source>System Information</source>
+        <target state="new">System Information</target>
+        <note>key: main__admin__systeminfo</note>
+      </trans-unit>
+      <trans-unit id="975e43875a74d509e3e0cedd926de1223d09cdf4" resname="main__admin__users">
+        <source>Users</source>
+        <target state="new">Users</target>
+        <note>key: main__admin__users</note>
+      </trans-unit>
+      <trans-unit id="95e1979b41321209d200f2e75416fd47270954b4" resname="main__content">
+        <source>Content</source>
+        <target state="new">Content</target>
+        <note>key: main__content</note>
+      </trans-unit>
+      <trans-unit id="1dd8b693879304af831a7adaf4ca59c7d8cb31b9" resname="main__content__content_structure">
+        <source>Content structure</source>
+        <target state="new">Content structure</target>
+        <note>key: main__content__content_structure</note>
+      </trans-unit>
+      <trans-unit id="e8c5aefc86b31ee2bed9359787ddf0a2b1cad4a6" resname="main__content__media">
+        <source>Media</source>
+        <target state="new">Media</target>
+        <note>key: main__content__media</note>
+      </trans-unit>
+      <trans-unit id="1f5824f08c1b09cf6511dee2352e6f1681f94893" resname="main_admin">
+        <source>Admin</source>
+        <target state="new">Admin</target>
+        <note>key: main_admin</note>
+      </trans-unit>
+      <trans-unit id="951ac18ce3ab253f9de7fd9caef6636b18edd1c3" resname="sidebar_left__browse">
+        <source>Browse</source>
+        <target state="new">Browse</target>
+        <note>key: sidebar_left__browse</note>
+      </trans-unit>
+      <trans-unit id="e3401271f3c6a0f8c88b0fa500d2c97eb5e33ff0" resname="sidebar_left__search">
+        <source>Search</source>
+        <target state="new">Search</target>
+        <note>key: sidebar_left__search</note>
+      </trans-unit>
+      <trans-unit id="2f6558500ca2bb4d364fe81cf32f5c5f1b81746a" resname="sidebar_left__trash">
+        <source>Trash</source>
+        <target state="new">Trash</target>
+        <note>key: sidebar_left__trash</note>
+      </trans-unit>
+      <trans-unit id="ae876d2c3fdb4f08383aefae6106b69dfe124b38" resname="trash__sidebar_right__empty_trash">
+        <source>Empty Trash</source>
+        <target state="new">Empty Trash</target>
+        <note>key: trash__sidebar_right__empty_trash</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

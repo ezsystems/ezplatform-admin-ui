@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-10-24T18:18:11Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2017-11-02T09:44:31Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="5cf420af18fd4a8d856fd30bc13aea5039369f9b" resname="form.cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: form.cancel</note>
+        <jms:reference-file line="33">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/add.html.twig</jms:reference-file>
+        <jms:reference-file line="33">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/edit.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="d92993cb4cb3690f06c599b5f500a29fa23421c9" resname="policy.add.success">
         <source>New policies in role '%role%' created.</source>
         <target state="new">New policies in role '%role%' created.</target>
         <note>key: policy.add.success</note>
-        <jms:reference-file line="119">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/PolicyController.php</jms:reference-file>
+        <jms:reference-file line="112">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/PolicyController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="196c8d4eec96ca42ccdd3605621d51e2b34b6d85" resname="policy.breadcrumb.add">
         <source>Adding a new Policy</source>
@@ -28,7 +35,7 @@
         <source>Policies in role '%role%' removed.</source>
         <target state="new">Policies in role '%role%' removed.</target>
         <note>key: policy.delete.success</note>
-        <jms:reference-file line="206">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/PolicyController.php</jms:reference-file>
+        <jms:reference-file line="201">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/PolicyController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="41bcfef149f877e1abb0ce2cd2aa5afb713ea1de" resname="policy.limitation.identifier_tooltip">
         <source>"%identifier%" Limitation</source>
@@ -48,7 +55,7 @@
         <source>Policies in role '%role%' updated.</source>
         <target state="new">Policies in role '%role%' updated.</target>
         <note>key: policy.update.success</note>
-        <jms:reference-file line="163">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/PolicyController.php</jms:reference-file>
+        <jms:reference-file line="157">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/PolicyController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1ac24fa007363b4280663fba53f7a3b436ed4c8f" resname="policy.view.add.title">
         <source>policy.view.add.title</source>
@@ -103,13 +110,13 @@
         <source>Assignments on role '%role%' created.</source>
         <target state="new">Assignments on role '%role%' created.</target>
         <note>key: role.assignment_create.success</note>
-        <jms:reference-file line="153">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleAssignmentController.php</jms:reference-file>
+        <jms:reference-file line="146">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleAssignmentController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f684c343da285bc7273d4671a257d2731ccc83a2" resname="role.assignment_delete.success">
         <source>Assignment on role '%role%' removed.</source>
         <target state="new">Assignment on role '%role%' removed.</target>
         <note>key: role.assignment_delete.success</note>
-        <jms:reference-file line="189">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleAssignmentController.php</jms:reference-file>
+        <jms:reference-file line="183">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleAssignmentController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="43008c999ece1587436507732b3c1166c393f05c" resname="role.breadcrumb.add">
         <source>Creating a new Role</source>
@@ -149,19 +156,19 @@
         <source>Role '%role%' created.</source>
         <target state="new">Role '%role%' created.</target>
         <note>key: role.create.success</note>
-        <jms:reference-file line="117">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleController.php</jms:reference-file>
+        <jms:reference-file line="111">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="20c6318c88508393b9cb8413a6d7e61649f80ab3" resname="role.delete.success">
         <source>Role '%role%' removed.</source>
         <target state="new">Role '%role%' removed.</target>
         <note>key: role.delete.success</note>
-        <jms:reference-file line="199">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleController.php</jms:reference-file>
+        <jms:reference-file line="189">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="75637482fd2563256da5423615ecfb241fc03a57" resname="role.update.success">
         <source>Role '%role%' updated.</source>
         <target state="new">Role '%role%' updated.</target>
         <note>key: role.update.success</note>
-        <jms:reference-file line="158">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleController.php</jms:reference-file>
+        <jms:reference-file line="152">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="da907b734c3ae3df8e9c570dd8e9e7e6d0799105" resname="role.view.add.title">
         <source>Creating a new Role</source>

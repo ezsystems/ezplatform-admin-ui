@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-10-24T18:18:11Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2017-11-02T09:44:31Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -29,13 +29,13 @@
         <source>Language '%name%' created.</source>
         <target state="new">Language '%name%' created.</target>
         <note>key: language.create.success</note>
-        <jms:reference-file line="167">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LanguageController.php</jms:reference-file>
+        <jms:reference-file line="162">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LanguageController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7c8fcdc1c11d3c1cf2a4380f440ef3d157b68c12" resname="language.delete.success">
         <source>Language '%name%' removed.</source>
         <target state="new">Language '%name%' removed.</target>
         <note>key: language.delete.success</note>
-        <jms:reference-file line="136">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LanguageController.php</jms:reference-file>
+        <jms:reference-file line="134">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LanguageController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0c028c20c9b353fbd7b71bfef8b4ae3dcbd0d7e4" resname="language.disabled">
         <source>Disabled</source>
@@ -153,7 +153,7 @@
         <source>Language '%name%' updated.</source>
         <target state="new">Language '%name%' updated.</target>
         <note>key: language.update.success</note>
-        <jms:reference-file line="207">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LanguageController.php</jms:reference-file>
+        <jms:reference-file line="203">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LanguageController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1fd8d969dd2111149c482ad69e7af580cb718195" resname="language.view">
         <source>%language%</source>

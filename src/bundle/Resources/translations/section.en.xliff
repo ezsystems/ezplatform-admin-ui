@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-10-24T18:18:11Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2017-11-02T09:44:31Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -17,7 +17,7 @@
         <source>%contentItemsCount% content items were assigned to '%name%'</source>
         <target state="new">%contentItemsCount% content items were assigned to '%name%'</target>
         <note>key: section.assign_content.success</note>
-        <jms:reference-file line="219">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/SectionController.php</jms:reference-file>
+        <jms:reference-file line="209">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/SectionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="bbcee03105f9504c94923b141d067d28d1d7ec54" resname="section.assigned.content">
         <source>Assignments count</source>
@@ -35,13 +35,13 @@
         <source>Section '%name%' created.</source>
         <target state="new">Section '%name%' created.</target>
         <note>key: section.create.success</note>
-        <jms:reference-file line="257">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/SectionController.php</jms:reference-file>
+        <jms:reference-file line="250">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/SectionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="663e1bfb8478f95028221190755c01441b2a8fde" resname="section.delete.success">
         <source>Section '%name%' removed.</source>
         <target state="new">Section '%name%' removed.</target>
         <note>key: section.delete.success</note>
-        <jms:reference-file line="176">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/SectionController.php</jms:reference-file>
+        <jms:reference-file line="166">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/SectionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7c2d7a21eb806db794990d728749dde1592be63e" resname="section.edit">
         <source>Edit</source>
@@ -126,7 +126,7 @@
         <source>Section '%name%' updated.</source>
         <target state="new">Section '%name%' updated.</target>
         <note>key: section.update.success</note>
-        <jms:reference-file line="301">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/SectionController.php</jms:reference-file>
+        <jms:reference-file line="292">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/SectionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2bfeef4370b18e469fba6df1d4d2888f9252c764" resname="section.update.title">
         <source>Editing Section "%identifier%"</source>
