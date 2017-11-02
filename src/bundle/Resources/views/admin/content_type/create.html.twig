@@ -18,9 +18,6 @@
     } %}
 {% endblock %}
 
-{# FIXME: Hardcoded language code #}
-{% set language_code = 'eng-GB' %}
-
 {% block content %}
     {{ form_start(form) }}
 
@@ -46,6 +43,7 @@
                 Field definitions
             </div>
             <div class="card-body">
+                {% set language_code = content_type.mainLanguageCode %}
                 {% for field_definition in form.fieldDefinitionsData %}
                     {% set value = field_definition.vars.value %}
 

@@ -18,8 +18,7 @@
     } %}
 {% endblock %}
 
-{# FIXME: Hardcoded language code #}
-{% set language_code = 'eng-GB' %}
+{% set language_code = content_type.mainLanguageCode %}
 
 {% block content %}
     <section class="container mt-4">
