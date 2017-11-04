@@ -15,7 +15,7 @@ class LanguageCreateData
     private $languageCode;
 
     /** @var bool */
-    private $enabled;
+    private $enabled = true;
 
     /**
      * @return string
