@@ -23,3 +23,9 @@ services:
         public: true
         arguments:
             $languages: '$languages$'
+
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\SearchController:
+        public: true
+        arguments:
+            $defaultLimit: '$search_limit$'
