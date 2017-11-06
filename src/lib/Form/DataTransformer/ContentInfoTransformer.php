@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use Symfony\Component\Form\DataTransformerInterface;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -55,11 +56,11 @@ class ContentInfoTransformer implements DataTransformerInterface
     /**
      * Transforms a Content's ID integer into a domain specific ContentInfo object.
      *
-     * @param mixed $value
+     * @param mixed|null $value
      *
      * @return ContentInfo|null
      *
-     * @throws NotFoundException
+     * @throws UnauthorizedException
      * @throws TransformationFailedException if the given value is not an integer
      *                                       or if the value can not be transformed
      */
@@ -69,8 +70,8 @@ class ContentInfoTransformer implements DataTransformerInterface
             return null;
         }
 
-        if (!is_int($value)) {
-            throw new TransformationFailedException('Expected an integer.');
+        if (!is_numeric($value)) {
+            throw new TransformationFailedException('Expected a numeric string.');
         }
 
         try {
