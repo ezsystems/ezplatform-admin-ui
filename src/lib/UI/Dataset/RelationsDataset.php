@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
@@ -35,23 +36,28 @@ class RelationsDataset
     {
         $this->contentService = $contentService;
         $this->valueFactory = $valueFactory;
+        $this->relations = [];
+        $this->reverseRelations = [];
     }
 
     /**
      * @param VersionInfo $versionInfo
      *
      * @return RelationsDataset
+     *
+     * @throws UnauthorizedException
      */
     public function load(VersionInfo $versionInfo): self
     {
-        $this->relations = array_map(
-            [$this->valueFactory, 'createRelation'],
-            $this->contentService->loadRelations($versionInfo)
-        );
-        $this->reverseRelations = array_map(
-            [$this->valueFactory, 'createRelation'],
-            $this->contentService->loadReverseRelations($versionInfo->getContentInfo())
-        );
+        $contentInfo = $versionInfo->getContentInfo();
+
+        foreach ($this->contentService->loadRelations($versionInfo) as $relation) {
+            $this->relations[] = $this->valueFactory->createRelation($relation, $contentInfo);
+        }
+
+        foreach ($this->contentService->loadReverseRelations($versionInfo->getContentInfo()) as $reverseRelation) {
+            $this->reverseRelations[] = $this->valueFactory->createRelation($reverseRelation, $contentInfo);
+        }
 
         return $this;
     }
