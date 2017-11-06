@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
-use eZ\Publish\API\Repository\LanguageService;
-use Symfony\Component\Form\DataTransformerInterface;
-use eZ\Publish\API\Repository\Values\Content\Language;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\API\Repository\Values\Content\Language;
+use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * Transforms between a Language's ID and a domain specific Language object.
@@ -35,7 +35,7 @@ class LanguageTransformer implements DataTransformerInterface
      *
      * @param Language|null $value
      *
-     * @return mixed|null
+     * @return string|null
      *
      * @throws TransformationFailedException if the given value is not a Language object
      */
@@ -49,16 +49,17 @@ class LanguageTransformer implements DataTransformerInterface
             throw new TransformationFailedException('Expected a ' . Language::class . ' object.');
         }
 
-        return $value->id;
+        return $value->languageCode;
     }
 
     /**
      * Transforms a Content's ID integer into a domain specific ContentInfo object.
      *
-     * @param mixed $value
+     * @param string|null $value
      *
-     * @return Language|mixed|null
+     * @return Language|null
      *
+     * @throws NotFoundException
      * @throws TransformationFailedException if the value can not be found
      */
     public function reverseTransform($value)
@@ -67,8 +68,14 @@ class LanguageTransformer implements DataTransformerInterface
             return null;
         }
 
+        if (!is_string($value)) {
+            throw new TransformationFailedException(
+                'Invalid data, expected value type is string'
+            );
+        }
+
         try {
-            return $this->languageService->loadLanguageById($value);
+            return $this->languageService->loadLanguage($value);
         } catch (NotFoundException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }

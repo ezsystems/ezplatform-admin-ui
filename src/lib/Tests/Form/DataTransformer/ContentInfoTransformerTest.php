@@ -80,7 +80,7 @@ class ContentInfoTransformerTest extends TestCase
     public function testReverseTransformWithInvalidInput($value)
     {
         $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Expected an integer.');
+        $this->expectExceptionMessage('Expected a numeric string.');
 
         $this->contentInfoTransformer->reverseTransform($value);
     }
@@ -88,12 +88,12 @@ class ContentInfoTransformerTest extends TestCase
     public function testReverseTransformWithNotFoundException()
     {
         $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Language not found');
+        $this->expectExceptionMessage('ContentInfo not found');
 
         /** @var ContentService|MockObject $service */
         $service = $this->createMock(ContentService::class);
         $service->method('loadContentInfo')
-            ->will($this->throwException(new class('Language not found') extends NotFoundException {
+            ->will($this->throwException(new class('ContentInfo not found') extends NotFoundException {
             }));
 
         $transformer = new ContentInfoTransformer($service);
@@ -150,7 +150,6 @@ class ContentInfoTransformerTest extends TestCase
         return [
             'string' => ['string'],
             'bool' => [true],
-            'float' => [12.34],
             'array' => [['element']],
             'object' => [new \stdClass()],
             'content_info' => [new ContentInfo()],
