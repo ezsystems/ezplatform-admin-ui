@@ -4,11 +4,9 @@
 {% block content %}
     <section class="ez-content-edit container pb-4">
         {{ form_start(form) }}
-        {% for field in form.fieldsData -%}
-            {%- if field.value is defined %}
-                {{- form_row(field.value) -}}
-            {%- endif -%}
-        {%- endfor %}
+        {% for field in form.fieldsData %}
+            {{ form_row(field) }}
+        {% endfor %}
         {{ form_end(form) }}
     </section>
 {% endblock %}

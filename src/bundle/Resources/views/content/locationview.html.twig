@@ -4,7 +4,6 @@
 {% form_theme form_location_copy '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
 {% form_theme form_location_move '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
 {% form_theme form_location_trash '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
-{% form_theme form_content_draft_create '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
 
 {% block bodyClass %}ez-content-view{% endblock %}
 
@@ -56,8 +55,7 @@
             {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location}) %}
             {{ knp_menu_render(content_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 
-            {% include '@EzPlatformAdminUi/content/widget_content_edit.html.twig' with {'form': form_content_draft_create} %}
-            {% include '@EzPlatformAdminUi/content/modal_location_trash.html.twig' with {'form': form_location_trash} %}
+            {% include 'EzPlatformAdminUiBundle:content:modal_location_trash.html.twig' with {'form': form_location_trash} %}
             {{ form(form_location_copy) }}
             {{ form(form_location_move) }}
         </div>
