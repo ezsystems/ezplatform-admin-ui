@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\LanguageService;
-use eZ\Publish\API\Repository\Values\Content\Language;
 use Symfony\Component\Form\DataTransformerInterface;
+use eZ\Publish\API\Repository\Values\Content\Language;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 /**
  * Transforms between a Language's ID and a domain specific Language object.
@@ -35,7 +35,7 @@ class LanguageTransformer implements DataTransformerInterface
      *
      * @param Language|null $value
      *
-     * @return string|null
+     * @return mixed|null
      *
      * @throws TransformationFailedException if the given value is not a Language object
      */
@@ -49,17 +49,16 @@ class LanguageTransformer implements DataTransformerInterface
             throw new TransformationFailedException('Expected a ' . Language::class . ' object.');
         }
 
-        return $value->languageCode;
+        return $value->id;
     }
 
     /**
      * Transforms a Content's ID integer into a domain specific ContentInfo object.
      *
-     * @param string|null $value
+     * @param mixed $value
      *
-     * @return Language|null
+     * @return Language|mixed|null
      *
-     * @throws NotFoundException
      * @throws TransformationFailedException if the value can not be found
      */
     public function reverseTransform($value)
@@ -68,14 +67,8 @@ class LanguageTransformer implements DataTransformerInterface
             return null;
         }
 
-        if (!is_string($value)) {
-            throw new TransformationFailedException(
-                'Invalid data, expected value type is string'
-            );
-        }
-
         try {
-            return $this->languageService->loadLanguage($value);
+            return $this->languageService->loadLanguageById($value);
         } catch (NotFoundException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }

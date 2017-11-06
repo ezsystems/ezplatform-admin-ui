@@ -52,20 +52,20 @@ class LanguageTransformerTest extends TestCase
         $transformer->transform($value);
     }
 
-    public function testReverseTransformWithLanguageCode()
+    public function testReverseTransformWithId()
     {
         /** @var LanguageService|MockObject $languageService */
         $languageService = $this->createMock(LanguageService::class);
         $languageService->expects(self::once())
-            ->method('loadLanguage')
-            ->with('eng-GB')
-            ->willReturn(new Language(['languageCode' => 'eng-GB']));
+            ->method('loadLanguageById')
+            ->with(123456)
+            ->willReturn(new Language(['id' => 123456]));
 
         $transformer = new LanguageTransformer($languageService);
 
-        $result = $transformer->reverseTransform('eng-GB');
+        $result = $transformer->reverseTransform(123456);
 
-        $this->assertEquals(new Language(['languageCode' => 'eng-GB']), $result);
+        $this->assertEquals(new Language(['id' => 123456]), $result);
     }
 
     public function testReverseTransformWithNull()
@@ -89,13 +89,13 @@ class LanguageTransformerTest extends TestCase
 
         /** @var LanguageService|MockObject $languageService */
         $languageService = $this->createMock(LanguageService::class);
-        $languageService->method('loadLanguage')
+        $languageService->method('loadLanguageById')
             ->will($this->throwException(new class('Language not found') extends NotFoundException {
             }));
 
         $transformer = new LanguageTransformer($languageService);
 
-        $transformer->reverseTransform('pol-PL');
+        $transformer->reverseTransform(654321);
     }
 
     /**
@@ -103,10 +103,10 @@ class LanguageTransformerTest extends TestCase
      */
     public function transformDataProvider(): array
     {
-        $language = new Language(['languageCode' => 'eng-GB']);
+        $language = new Language(['id' => 123456]);
 
         return [
-            'content_info_with_language_code' => [$language, 'eng-GB'],
+            'content_info_with_id' => [$language, 123456],
             'null' => [null, null],
         ];
     }

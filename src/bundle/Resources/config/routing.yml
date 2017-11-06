@@ -320,11 +320,3 @@ ezplatform.location.swap:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location:swap'
-
-# Content Draft
-
-ezplatform.content_draft.create:
-    path: /content/draft/create # @todo change to /content/draft/create once route is removed from repository-forms
-    methods: ['POST']
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:Content:createDraft'
