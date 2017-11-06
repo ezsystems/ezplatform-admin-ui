@@ -7,7 +7,10 @@
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\Exceptions as ApiException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use eZ\Publish\API\Repository\LocationService;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentDraftCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
@@ -26,6 +29,9 @@ class ContentController extends Controller
     /** @var ContentService */
     private $contentService;
 
+    /** @var LocationService */
+    private $locationService;
+
     /** @var FormFactory */
     private $formFactory;
 
@@ -38,6 +44,7 @@ class ContentController extends Controller
     /**
      * @param NotificationHandlerInterface $notificationHandler
      * @param ContentService $contentService
+     * @param LocationService $locationService
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
      * @param TranslatorInterface $translator
@@ -45,15 +52,54 @@ class ContentController extends Controller
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
         ContentService $contentService,
+        LocationService $locationService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
         TranslatorInterface $translator
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->contentService = $contentService;
+        $this->locationService = $locationService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
         $this->translator = $translator;
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws InvalidArgumentException
+     * @throws ApiException\UnauthorizedException
+     * @throws ApiException\InvalidArgumentException
+     * @throws ApiException\ContentValidationException
+     * @throws ApiException\ContentFieldValidationException
+     */
+    public function createAction(Request $request): Response
+    {
+        $form = $this->formFactory->createContent();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $result = $this->submitHandler->handle($form, function (ContentCreateData $data) {
+                $contentType = $data->getContentType();
+                $language = $data->getLanguage();
+                $parentLocation = $data->getParentLocation();
+
+                return $this->redirectToRoute('ez_content_create_no_draft', [
+                    'contentTypeIdentifier' => $contentType->identifier,
+                    'language' => $language->languageCode,
+                    'parentLocationId' => $parentLocation->id,
+                ]);
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirect($this->generateUrl('ezplatform.dashboard'));
     }
 
     /**

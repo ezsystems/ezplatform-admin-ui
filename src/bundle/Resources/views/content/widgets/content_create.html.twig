@@ -1,0 +1,28 @@
+{% trans_default_domain 'locationview' %}
+
+<div class="ez-extra-actions ez-extra-actions--create ez-extra-actions--hidden bg-secondary" data-actions="create">
+    <div class="ez-extra-actions__header">{{ 'content.create.choose_content_type'|trans|desc('Choose content type') }}</div>
+    <div class="ez-extra-actions__content">
+        {{ form_start(form, { 'action': path('ezplatform.content.create') }) }}
+            {% if form.language.vars.choices|length == 1 %}
+                {{ form_widget(form.language, {'attr': {'hidden': true}}) }}
+            {% else %}
+                <div class="ez-extra-actions__section-header">{{ 'content.create.select_language'|trans|desc('Select language') }}</div>
+                <div class="ez-extra-actions__section-content">
+                    {{ form_widget(form.language) }}
+                </div>
+            {% endif %}
+            <div class="ez-extra-actions__section-header">{{ 'content.create.select_content_type'|trans|desc('Select Content Type') }}</div>
+            <div class="ez-extra-actions__section-content ez-extra-actions__section-content--content-type">
+                <div class="ez-instant-filter">
+                    <div class="ez-instant-filter__input-wrapper">
+                        <input type="text" class="ez-instant-filter__input form-control" placeholder="{{ ('Type to refine') }}" value="" />
+                    </div>
+                    <div class="ez-instant-filter__items">
+                        {{ form_widget(form.content_type) }}
+                    </div>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>

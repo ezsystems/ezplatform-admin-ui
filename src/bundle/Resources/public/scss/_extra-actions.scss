@@ -94,16 +94,15 @@
     }
 
     &__section-header {
-        line-height: 27px;
         background: $ez-ground-base-dark;
         color: $ez-color-base-dark;
-        padding: 4px;
+        padding-left: .5rem;
     }
 
     &__section-content {
         background: $ez-white;
         color: $ez-color-base-dark;
-        padding: 4px;
+        padding: 1rem .5rem;
 
         select {
             display: inline-block;
@@ -111,17 +110,55 @@
         }
     }
 
+    &--create {
+        #{$block}__content {
+            max-height: initial;
+        }
+
+        #{$block}__section-content--content-type {
+            padding: 0;
+        }
+
+        .radio {
+            cursor: pointer;
+            background: $ez-white;
+            transition: all .2s $ez-admin-transition;
+            padding-left: 1.5rem;
+
+            &:hover,
+            &:focus {
+                background: $ez-color-secondary;
+            }
+
+            label {
+                margin: 0;
+                display: block;
+
+                [type="radio"] {
+                    display: none;
+                }
+            }
+        }
+
+        button {
+            &[type="submit"] {
+                display: none;
+            }
+        }
+    }
+
     &::after {
         content: '';
         position: absolute;
         height: 40px;
-        width: 30px;
-        top: 50%;
+        width: 10px;
+        top: 30px;
         right: -6px;
         transform: translate(100%, -50%);
         z-index: 0;
         background: $ez-color-secondary;
     }
+
 }
 
 .ez-extra-actions-container {
@@ -130,13 +167,13 @@
         left: 0;
         z-index: 2;
         opacity: 1;
-        transform: translate(calc(-100% - 30px), -50%) scaleX(1);
+        transform: translate(calc(-100% - 10px), 0) scaleX(1);
         transform-origin: right center;
         transition: all .2s $ez-admin-transition;
 
         &--hidden {
             opacity: 0;
-            transform: translate(calc(-100% - 15px), -50%) scaleX(0);
+            transform: translate(calc(-100% - 15px), 0) scaleX(0);
         }
     }
 }

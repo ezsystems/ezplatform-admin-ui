@@ -1,0 +1,29 @@
+.ez-instant-filter {
+    &__input {
+        display: block;
+        width: 100%;
+    }
+}
+
+.ez-extra-actions--create {
+    .ez-instant-filter {
+        &__group-name {
+            padding-left: .5rem;
+        }
+
+        &__input-wrapper {
+            padding: 1rem .5rem;
+        }
+
+        &__group-item {
+            label {
+                cursor: pointer;
+            }
+        }
+
+        &__items {
+            max-height: 200px;
+            overflow: auto;
+        }
+    }
+}
