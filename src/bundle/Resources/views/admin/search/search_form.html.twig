@@ -1,7 +1,6 @@
 {{ form_start(form) }}
 <div class="input-group">
     {{ form_widget(form.query, {'attr': {'class': 'form-control'} }) }}
-    {{ form_widget(form.page, {'attr': {'value': 1 }}) }} {# @todo refactor the action to avoid doing that #}
 
     <span class="input-group-btn">
         <button type="submit" class="btn btn-primary">

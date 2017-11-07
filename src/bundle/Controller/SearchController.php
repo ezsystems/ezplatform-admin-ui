@@ -113,7 +113,7 @@ class SearchController extends Controller
                 );
 
                 $pagerfanta->setMaxPerPage($limit);
-                $pagerfanta->setCurrentPage($page);
+                $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
                 $routeGenerator = function ($page) use ($data) {
                     return $this->urlGenerator->generate('ezplatform.search', [
