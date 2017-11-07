@@ -52,6 +52,8 @@ class ContentViewController extends Controller
 
     public function locationViewAction(ContentView $view)
     {
+        $view->setCacheEnabled(false);
+
         $this->supplyPathLocations($view);
         $this->supplyContentType($view);
         $this->supplyContentActionForms($view);
