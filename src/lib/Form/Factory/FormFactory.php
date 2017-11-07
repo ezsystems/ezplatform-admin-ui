@@ -207,6 +207,8 @@ class FormFactory
      * @param null|string $name
      *
      * @return FormInterface
+     *
+     * @throws InvalidOptionsException
      */
     public function removeVersion(
         VersionRemoveData $data = null,

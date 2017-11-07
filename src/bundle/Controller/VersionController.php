@@ -7,6 +7,9 @@
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\Exceptions\BadStateException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -16,6 +19,8 @@ use EzSystems\EzPlatformAdminUi\Tab\LocationView\VersionsTab;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\Translation\Exception\InvalidArgumentException;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class VersionController extends Controller
@@ -60,14 +65,23 @@ class VersionController extends Controller
      * @param Request $request
      *
      * @return Response
+     *
+     * @throws \InvalidArgumentException
+     * @throws InvalidOptionsException
+     * @throws UnauthorizedException
+     * @throws NotFoundException
+     * @throws BadStateException
+     * @throws InvalidArgumentException
      */
     public function removeAction(Request $request): Response
     {
-        $isDraftForm = null !== $request->get(VersionsTab::FORM_REMOVE_DRAFT);
-        $formName = sprintf('version-remove-%s', $isDraftForm
-            ? VersionsTab::FORM_REMOVE_DRAFT
-            : VersionsTab::FORM_REMOVE_ARCHIVED
+        $isDraftForm = null !== $request->get(
+            sprintf('version-remove-%s', VersionsTab::FORM_REMOVE_DRAFT)
         );
+
+        $formName = $isDraftForm
+            ? sprintf('version-remove-%s', VersionsTab::FORM_REMOVE_DRAFT)
+            : sprintf('version-remove-%s', VersionsTab::FORM_REMOVE_ARCHIVED);
 
         $form = $this->formFactory->removeVersion(
             new VersionRemoveData(),
@@ -88,7 +102,7 @@ class VersionController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Versions removed from `%name%` content.") */
+                        /** @Desc("Versions removed from '%name%' content.") */
                         'version.delete.success',
                         ['%name%' => $contentInfo->name],
                         'version'
