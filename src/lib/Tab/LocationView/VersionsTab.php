@@ -17,6 +17,7 @@ use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -88,11 +89,13 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
 
         $removeVersionDraftForm = $this->createVersionRemoveForm(
             $location,
-            $draftVersions
+            $draftVersions,
+            true
         );
         $removeVersionArchivedForm = $this->createVersionRemoveForm(
             $location,
-            $archivedVersions
+            $archivedVersions,
+            false
         );
 
         $viewParameters = [
@@ -124,14 +127,22 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
     /**
      * @param Location $location
      * @param VersionInfo[] $versions
+     * @param bool $isDraftForm
      *
      * @return FormInterface
+     *
+     * @throws InvalidOptionsException
      */
-    private function createVersionRemoveForm(Location $location, array $versions): FormInterface
+    private function createVersionRemoveForm(Location $location, array $versions, bool $isDraftForm): FormInterface
     {
         $contentInfo = $location->getContentInfo();
         $data = new VersionRemoveData($contentInfo, $this->getVersionNumbers($versions));
 
-        return $this->formFactory->removeVersion($data);
+        $formName = sprintf('version-remove-%s', $isDraftForm
+            ? self::FORM_REMOVE_DRAFT
+            : self::FORM_REMOVE_ARCHIVED
+        );
+
+        return $this->formFactory->removeVersion($data, $formName);
     }
 }
