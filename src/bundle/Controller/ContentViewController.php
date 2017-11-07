@@ -52,6 +52,8 @@ class ContentViewController extends Controller
 
     public function locationViewAction(ContentView $view)
     {
+        // We should not cache ContentView because we use forms with CSRF tokens in template
+        // JIRA ref: https://jira.ez.no/browse/EZP-28190
         $view->setCacheEnabled(false);
 
         $this->supplyPathLocations($view);
