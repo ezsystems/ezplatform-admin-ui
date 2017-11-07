@@ -102,7 +102,7 @@ class ContentViewController extends Controller
             new ContentDraftCreateData($content->contentInfo, $versionInfo)
         );
         $contentCreateType = $this->formFactory->createContent(
-            $this->getConentCreateData($location)
+            $this->getContentCreateData($location)
         );
 
         $view->addParameters([
@@ -119,7 +119,7 @@ class ContentViewController extends Controller
      *
      * @return ContentCreateData
      */
-    private function getConentCreateData(?Location $location): ContentCreateData
+    private function getContentCreateData(?Location $location): ContentCreateData
     {
         $languages = $this->languageService->loadLanguages();
         $language = 1 === count($languages)
