@@ -76,7 +76,7 @@ class RoleAssignmentController extends Controller
         $deleteFormsByAssignmentId = [];
 
         foreach ($assignments as $assignment) {
-            $deleteFormsByAssignmentId[$assignment->id] = $this->formFactory->createRoleAssignment(
+            $deleteFormsByAssignmentId[$assignment->id] = $this->formFactory->deleteRoleAssignment(
                 new RoleAssignmentDeleteData($assignment)
             )->createView();
         }

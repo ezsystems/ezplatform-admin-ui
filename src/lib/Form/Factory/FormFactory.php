@@ -526,10 +526,14 @@ class FormFactory
         RoleAssignmentDeleteData $data,
         ?string $name = null
     ): FormInterface {
-        $name = $name ?: sprintf('delete-role-assignment-%s', md5(implode('/', [
-            $data->getRoleAssignment()->getRole()->id,
-            $data->getRoleAssignment()->getRoleLimitation()->getIdentifier(),
-        ])));
+        $role = $data->getRoleAssignment()->getRole()->id;
+        $limitation = !empty($data->getRoleAssignment()->getRoleLimitation())
+            ? $data->getRoleAssignment()->getRoleLimitation()->getIdentifier()
+            : 'none';
+
+        $name = $name ?: sprintf('delete-role-assignment-%s', md5(
+            implode('/', [$role, $limitation])
+        ));
 
         return $this->formFactory->createNamed($name, RoleAssignmentDeleteType::class, $data);
     }
