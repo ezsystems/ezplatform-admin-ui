@@ -50,7 +50,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory: ~
 
-    EzSystems\EzPlatformAdminUi\ApplicationConfig\Providers\ContentTypeMappings:
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings:
         arguments:
             $locationMappings: "%ezplatform.multifile_upload.location.mappings%"
             $defaultMappings: "%ezplatform.multifile_upload.location.default_mappings%"
@@ -58,6 +58,13 @@ services:
             $maxFileSize: "%ez_systems.multifile_upload.max_file_size%"
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'multiFileUpload' }
+
+    ezsystems.ezplatform_admin_ui.ui.config.provider.image_variations:
+        class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\Value
+        arguments:
+            $value: "$image_variations$"
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'imageVariations' }
 
     EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler:
         arguments:
