@@ -1,7 +1,7 @@
 (function () {
     const btns = document.querySelectorAll('.btn--udw-copy');
     const form = document.querySelector('form[name="location_copy"]');
-    const input = form.querySelector('#location_copy_data_new_parent_location');
+    const input = form.querySelector('#location_copy_new_parent_location');
     const udwContainer = document.getElementById('react-udw');
     const token = document.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;

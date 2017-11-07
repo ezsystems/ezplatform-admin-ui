@@ -3,7 +3,7 @@
 
 {% if draft_versions is not empty %}
     <section>
-        {{ form_start(form_version_remove_draft) }}
+        {{ form_start(form_version_remove_draft, {'action': path('ezplatform.version.remove')}) }}
         {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'), tools: tab.table_header_tools(form_version_remove_draft) } %}
         {% if draft_versions is not empty %}
             {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', { 'versions': draft_versions, 'is_draft': true, 'form': form_version_remove_draft }) }}
@@ -31,7 +31,7 @@
 
 {% if archived_versions is not empty %}
     <section>
-        {{ form_start(form_version_remove_archived) }}
+        {{ form_start(form_version_remove_archived, {'action': path('ezplatform.version.remove')}) }}
         {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.versions.archived_versions'|trans()|desc('Archived versions'), tools: tab.table_header_tools(form_version_remove_archived) } %}
         {% if archived_versions is not empty %}
             {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', { 'versions': archived_versions, 'form': form_version_remove_archived }) }}

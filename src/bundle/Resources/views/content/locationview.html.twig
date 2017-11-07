@@ -64,8 +64,8 @@
                 {% include '@EzPlatformAdminUi/content/widgets/content_edit.html.twig' with {'form': form_content_draft_create} %}
             </div>
             {% include '@EzPlatformAdminUi/content/modal_location_trash.html.twig' with {'form': form_location_trash} %}
-            {{ form(form_location_copy) }}
-            {{ form(form_location_move) }}
+            {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}
+            {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}
         </div>
     </div>
 

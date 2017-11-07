@@ -1,7 +1,7 @@
 {% trans_default_domain 'locationview' %}
 {% import _self as tab %}
 <section>
-    {{ form_start(form_translation_remove) }}
+    {{ form_start(form_translation_remove, {'action': path('ezplatform.translation.remove')}) }}
     {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.translations.translation_manger'|trans|desc('Translation manager'), tools: tab.table_header_tools(form_translation_remove) } %}
     <table class="table">
         <thead>
