@@ -1,0 +1,15 @@
+# This file is meant to be imported from ezplatform's behat.yml.dist.
+# All path are relative to the root ezplatform directory.
+default:
+  suites:
+    adminui:
+      paths:
+        - %paths.base%/vendor/ezsystems/ezplatform-admin-ui/src/features
+      filters:
+        tags: common
+      contexts:
+        - EzSystems\EzPlatformAdminUi\Behat\UtilityContext
+        - EzSystems\EzPlatformAdminUi\Behat\AuthenticationContext
+        - EzSystems\EzPlatformAdminUi\Behat\NavigationContext
+
+  
