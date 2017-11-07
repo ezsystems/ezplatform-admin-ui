@@ -4,9 +4,9 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Tests\Behat\PageObject;
+namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-use EzSystems\EzPlatformAdminUi\Tests\Behat\UtilityContext;
+use EzSystems\EzPlatformAdminUi\Behat\UtilityContext;
 
 class PageObjectFactory
 {

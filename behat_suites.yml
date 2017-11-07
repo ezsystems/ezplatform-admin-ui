@@ -4,12 +4,12 @@ default:
   suites:
     adminui:
       paths:
-        - %paths.base%/vendor/ezsystems/ezplatform-admin-ui/src/lib/Tests/Behat/Feature
+        - %paths.base%/vendor/ezsystems/ezplatform-admin-ui/src/features
       filters:
         tags: common
       contexts:
-        - EzSystems\EzPlatformAdminUi\Tests\Behat\UtilityContext
-        - EzSystems\EzPlatformAdminUi\Tests\Behat\AuthenticationContext
-        - EzSystems\EzPlatformAdminUi\Tests\Behat\NavigationContext
+        - EzSystems\EzPlatformAdminUi\Behat\UtilityContext
+        - EzSystems\EzPlatformAdminUi\Behat\AuthenticationContext
+        - EzSystems\EzPlatformAdminUi\Behat\NavigationContext
 
   

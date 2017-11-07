@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Tests\Behat\PageObject;
+namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
 class DashboardPage extends Page
 {
@@ -19,7 +19,7 @@ class DashboardPage extends Page
     /**
      * Verifies that the Dashboard has the "Me" section.
      */
-    public function verifyElements()
+    public function verifyElements(): void
     {
         $this->context->waitUntilElementIsVisible($this->fields['meSection']);
     }

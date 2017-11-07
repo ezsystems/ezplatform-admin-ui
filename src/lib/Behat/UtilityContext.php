@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Tests\Behat;
+namespace EzSystems\EzPlatformAdminUi\Behat;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\MinkExtension\Context\MinkContext;

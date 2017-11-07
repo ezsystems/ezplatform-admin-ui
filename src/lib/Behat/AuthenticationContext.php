@@ -4,10 +4,10 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Tests\Behat;
+namespace EzSystems\EzPlatformAdminUi\Behat;
 
-use EzSystems\EzPlatformAdminUi\Tests\Behat\PageObject\LoginPage;
-use EzSystems\EzPlatformAdminUi\Tests\Behat\PageObject\PageObjectFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\LoginPage;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 
 class AuthenticationContext extends BusinessContext
 {
@@ -17,7 +17,7 @@ class AuthenticationContext extends BusinessContext
      * @param string $username
      * @param string $password
      */
-    public function iLoginAs(string $username, string $password)
+    public function iLoginAs(string $username, string $password): void
     {
         $loginPage = PageObjectFactory::createPage($this->utilityContext, LoginPage::PAGE_NAME);
         $loginPage->login($username, $password);

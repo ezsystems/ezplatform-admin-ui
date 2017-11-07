@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Tests\Behat\PageObject;
+namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
 class LoginPage extends Page
 {
@@ -22,7 +22,7 @@ class LoginPage extends Page
      * @param string $username
      * @param string $password
      */
-    public function login(string $username, string $password)
+    public function login(string $username, string $password): void
     {
         $this->fillUsername($username);
         $this->fillPassword($password);
@@ -32,7 +32,7 @@ class LoginPage extends Page
     /**
      * Clicks login button.
      */
-    protected function clickLogin()
+    protected function clickLogin(): void
     {
         $this->context->getSession()->getPage()->findButton('Login')->click();
     }
@@ -42,7 +42,7 @@ class LoginPage extends Page
      *
      * @param string $username
      */
-    protected function fillUsername(string $username)
+    protected function fillUsername(string $username): void
     {
         $this->context->findElement($this->fields['username'], $this->defaultTimeout)->setValue($username);
     }
@@ -52,7 +52,7 @@ class LoginPage extends Page
      *
      * @param string $password
      */
-    protected function fillPassword(string $password)
+    protected function fillPassword(string $password): void
     {
         $this->context->findElement($this->fields['password'], $this->defaultTimeout)->setValue($password);
     }
@@ -60,7 +60,7 @@ class LoginPage extends Page
     /**
      * Verifies that username and password fields are available.
      */
-    public function verifyElements()
+    public function verifyElements(): void
     {
         $this->context->waitUntilElementIsVisible($this->fields['username']);
         $this->context->waitUntilElementIsVisible($this->fields['password']);

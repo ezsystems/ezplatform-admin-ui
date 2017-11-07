@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Tests\Behat;
+namespace EzSystems\EzPlatformAdminUi\Behat;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
@@ -16,9 +16,9 @@ abstract class BusinessContext implements Context
     /** @BeforeScenario
      * @param BeforeScenarioScope $scope Behat scope
      */
-    public function getUtilityContext(BeforeScenarioScope $scope)
+    public function getUtilityContext(BeforeScenarioScope $scope): void
     {
         $environment = $scope->getEnvironment();
-        $this->utilityContext = $environment->getContext('EzSystems\EzPlatformAdminUi\Tests\Behat\UtilityContext');
+        $this->utilityContext = $environment->getContext(UtilityContext::class);
     }
 }

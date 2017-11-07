@@ -4,9 +4,9 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Tests\Behat\PageObject;
+namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-use EzSystems\EzPlatformAdminUi\Tests\Behat\UtilityContext;
+use EzSystems\EzPlatformAdminUi\Behat\UtilityContext;
 
 abstract class Page
 {
@@ -26,7 +26,7 @@ abstract class Page
     /**
      * Makes sure that the page is loaded.
      */
-    public function verifyIsLoaded()
+    public function verifyIsLoaded(): void
     {
         $this->verifyRoute();
         $this->verifyElements();
@@ -37,7 +37,7 @@ abstract class Page
      *
      * @param bool $verifyIfLoaded Page content will be verified
      */
-    public function open(bool $verifyIfLoaded = true)
+    public function open(bool $verifyIfLoaded = true): void
     {
         $this->context->visit($this->route);
 
@@ -49,7 +49,7 @@ abstract class Page
     /**
      * Verifies that Page is available under correct route.
      */
-    public function verifyRoute()
+    public function verifyRoute(): void
     {
         $this->context->waitUntil($this->defaultTimeout, function () {
             return false !== strpos($this->context->getSession()->getCurrentUrl(), $this->route);
@@ -59,7 +59,7 @@ abstract class Page
     /**
      * Verifies that expected elements are present.
      */
-    public function verifyElements()
+    public function verifyElements(): void
     {
     }
 }
