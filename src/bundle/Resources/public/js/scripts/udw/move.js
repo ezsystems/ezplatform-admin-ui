@@ -1,7 +1,7 @@
 (function () {
     const btns = document.querySelectorAll('.btn--udw-move');
     const form = document.querySelector('form[name="location_move"]');
-    const input = form.querySelector('#location_move_data_new_parent_location');
+    const input = form.querySelector('#location_move_new_parent_location');
     const udwContainer = document.getElementById('react-udw');
     const token = document.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;

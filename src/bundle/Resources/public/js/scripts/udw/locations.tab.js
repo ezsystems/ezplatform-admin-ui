@@ -1,8 +1,8 @@
 (function () {
     const btns = document.querySelectorAll('.btn--udw-add');
-    const submitButton = document.querySelector('#content_location_add_data_add');
+    const submitButton = document.querySelector('#content_location_add_add');
     const form = document.querySelector('form[name="content_location_add"]');
-    const input = form.querySelector('#content_location_add_data_new_locations');
+    const input = form.querySelector('#content_location_add_new_locations');
     const udwContainer = document.getElementById('react-udw');
     const token = document.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;

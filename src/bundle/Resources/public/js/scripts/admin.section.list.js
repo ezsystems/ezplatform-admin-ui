@@ -5,8 +5,7 @@
     const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => udwContainer.innerHTML = '';
     const onConfirm = (form, content) => {
-        console.log(form, form.getAttribute('name'));
-        const field = form.querySelector('#' + form.getAttribute('name') + '_data_locations_location');
+        const field = form.querySelector('#' + form.getAttribute('name') + '_locations_location');
 
         field.value = content.map(item => item.id).join();
 

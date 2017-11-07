@@ -5,7 +5,7 @@
     const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => udwContainer.innerHTML = '';
     const onConfirm = (form, content) => {
-        const field = form.querySelector('#trash_item_restore_data_location_location');
+        const field = form.querySelector('#trash_item_restore_location_location');
 
         field.value = content.map(item => item.id).join();
 
@@ -31,8 +31,8 @@
 
     const checkboxes = [...document.querySelectorAll('form[name="trash_item_restore"] input[type="checkbox"]')]
     ;
-    const buttonRestore = document.querySelector('#trash_item_restore_data_restore');
-    const buttonRestoreUnderNewParent = document.querySelector('#trash_item_restore_data_location_select_content');
+    const buttonRestore = document.querySelector('#trash_item_restore_restore');
+    const buttonRestoreUnderNewParent = document.querySelector('#trash_item_restore_location_select_content');
 
     const enableButtons = (event) => {
         const isNonEmptySelection = checkboxes.some(el => el.checked);

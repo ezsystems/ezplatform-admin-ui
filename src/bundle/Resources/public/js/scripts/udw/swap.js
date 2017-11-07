@@ -1,7 +1,7 @@
 (function () {
     const btns = document.querySelectorAll('.btn--udw-swap');
     const form = document.querySelector('form[name="location_swap"]');
-    const input = form.querySelector('#location_swap_data_new_location');
+    const input = form.querySelector('#location_swap_new_location');
     const udwContainer = document.getElementById('react-udw');
     const token = document.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
