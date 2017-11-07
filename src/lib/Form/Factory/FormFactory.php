@@ -197,7 +197,7 @@ class FormFactory
         TranslationRemoveData $data = null,
         ?string $name = null
     ): FormInterface {
-        $name = $name ?: sprintf('delete-translation-%s', md5(implode('/', $data->getLanguageCodes())));
+        $name = $name ?: sprintf('delete-translations');
 
         return $this->formFactory->createNamed($name, TranslationRemoveType::class, $data);
     }
