@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-11-06T16:28:43Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2017-11-07T21:29:28Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,395 +10,395 @@
         <source>Choose content type</source>
         <target state="new">Choose content type</target>
         <note>key: content.create.choose_content_type</note>
-        <jms:reference-file line="4">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/widgets/content_create.html.twig</jms:reference-file>
+        <jms:reference-file line="4">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/widgets/content_create.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f599001c1ab9442f20e23d535e1dad8f3b75c337" resname="content.create.select_content_type">
         <source>Select Content Type</source>
         <target state="new">Select Content Type</target>
         <note>key: content.create.select_content_type</note>
-        <jms:reference-file line="15">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/widgets/content_create.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/widgets/content_create.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8b5180d90c79245ed3e491e6f682842daaa0bec5" resname="content.create.select_language">
         <source>Select language</source>
         <target state="new">Select language</target>
         <note>key: content.create.select_language</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/widgets/content_create.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/widgets/content_create.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5e8851497aae3ba774d163d5fd191fd69ac871c0" resname="content.edit.select_language">
         <source>Select language</source>
         <target state="new">Select language</target>
         <note>key: content.edit.select_language</note>
-        <jms:reference-file line="4">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/widgets/content_edit.html.twig</jms:reference-file>
+        <jms:reference-file line="4">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/widgets/content_edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c0b36efcf0ebbe2ac0f9861cae35e12e668cbcc0" resname="tab.details.content_details">
         <source>Content details</source>
         <target state="new">Content details</target>
         <note>key: tab.details.content_details</note>
-        <jms:reference-file line="3">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="3">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="6e1488d3bb54efc176d8766d3c22751b06890e2f" resname="tab.details.content_id">
         <source>Content ID</source>
         <target state="new">Content ID</target>
         <note>key: tab.details.content_id</note>
-        <jms:reference-file line="39">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="39">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d5236d13b41dc38ee965599754a05e3283b55ae2" resname="tab.details.content_remote_id">
         <source>Content remote ID</source>
         <target state="new">Content remote ID</target>
         <note>key: tab.details.content_remote_id</note>
-        <jms:reference-file line="41">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="41">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="dc195b32e812b751daa7a3321844c9712e1460ba" resname="tab.details.creator">
         <source>Creator</source>
         <target state="new">Creator</target>
         <note>key: tab.details.creator</note>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="acc17a8db8d00036233faa9948ad9a496cd621b3" resname="tab.details.last_contributor">
         <source>Last contributor</source>
         <target state="new">Last contributor</target>
         <note>key: tab.details.last_contributor</note>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="671c2d4e91244548b29e8f293cd8d4d97a3c23bd" resname="tab.details.location_id">
         <source>Location ID</source>
         <target state="new">Location ID</target>
         <note>key: tab.details.location_id</note>
-        <jms:reference-file line="40">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="40">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c391debe9105c6823145ca6c5ec76a252ba5538c" resname="tab.details.location_remote_id">
         <source>Location remote ID</source>
         <target state="new">Location remote ID</target>
         <note>key: tab.details.location_remote_id</note>
-        <jms:reference-file line="42">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="42">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="26bd81ee7b010fa5846859eb4c2464764effeb81" resname="tab.details.published_version">
         <source>Published version</source>
         <target state="new">Published version</target>
         <note>key: tab.details.published_version</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cd8ccac573601690d7e364174cf3fb8a931c805e" resname="tab.details.section_details">
         <source>Section details</source>
         <target state="new">Section details</target>
         <note>key: tab.details.section_details</note>
-        <jms:reference-file line="55">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="55">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="67ff5cca435b058142e77b820d5d72090fa26346" resname="tab.details.section_id">
         <source>Section ID</source>
         <target state="new">Section ID</target>
         <note>key: tab.details.section_id</note>
-        <jms:reference-file line="62">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="62">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0ab2029f0a194849d3f90531f03e37780491d1a6" resname="tab.details.section_identifier">
         <source>Section identifier</source>
         <target state="new">Section identifier</target>
         <note>key: tab.details.section_identifier</note>
-        <jms:reference-file line="61">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="61">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="30775f4a9e0512f181cf857fb0f0ea23fe79320d" resname="tab.details.section_name">
         <source>Section name</source>
         <target state="new">Section name</target>
         <note>key: tab.details.section_name</note>
-        <jms:reference-file line="60">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="60">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="09fcd5ad39b9c2b778be171f88559f6c117ff48b" resname="tab.details.technical_details">
         <source>Technical details</source>
         <target state="new">Technical details</target>
         <note>key: tab.details.technical_details</note>
-        <jms:reference-file line="34">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="34">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="69ca343732e6be688ff4606c3a9b15d83d531233" resname="tab.details.translations">
         <source>Translations</source>
         <target state="new">Translations</target>
         <note>key: tab.details.translations</note>
-        <jms:reference-file line="11">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
+        <jms:reference-file line="11">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/details.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7ac57e88d1f970747986392b6689075ba64cf270" resname="tab.locations.content_locations">
         <source>Content locations</source>
         <target state="new">Content locations</target>
         <note>key: tab.locations.content_locations</note>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2f3aa22262d10e0dcbc4ccfacbf060f9e98fcb05" resname="tab.locations.hidden">
         <source>Hidden</source>
         <target state="new">Hidden</target>
         <note>key: tab.locations.hidden</note>
-        <jms:reference-file line="31">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="31">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cd57f6ee339fa6c35e2a75cc760f391676fca490" resname="tab.locations.hidden_by_superior">
         <source>Hidden by superior</source>
         <target state="new">Hidden by superior</target>
         <note>key: tab.locations.hidden_by_superior</note>
-        <jms:reference-file line="34">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="34">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="64554d66c71f33e7d3ac52c75b17717c334ef9dd" resname="tab.locations.main">
         <source>Main</source>
         <target state="new">Main</target>
         <note>key: tab.locations.main</note>
-        <jms:reference-file line="17">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="17">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7514a2a1e82c82fa3a197dc3da8be56a9c68f136" resname="tab.locations.path">
         <source>Path</source>
         <target state="new">Path</target>
         <note>key: tab.locations.path</note>
-        <jms:reference-file line="14">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="14">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b5d6fe3a752b0c391bfa751acb7c4c3ac82e2c0c" resname="tab.locations.subitems">
         <source>Sub-items</source>
         <target state="new">Sub-items</target>
         <note>key: tab.locations.subitems</note>
-        <jms:reference-file line="15">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1932d409236634ffbe828e683f35db760ec25323" resname="tab.locations.visibility">
         <source>Visibility</source>
         <target state="new">Visibility</target>
         <note>key: tab.locations.visibility</note>
-        <jms:reference-file line="16">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="775b3ea314e2c1d999a586f85fab657c30deaac3" resname="tab.locations.visible">
         <source>Visible</source>
         <target state="new">Visible</target>
         <note>key: tab.locations.visible</note>
-        <jms:reference-file line="36">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="36">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/locations/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7ebde5bee4476cd8cded5625dab8aa4afedf2985" resname="tab.name.content">
         <source>Content</source>
         <target state="new">Content</target>
         <note>key: tab.name.content</note>
-        <jms:reference-file line="47">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/ContentTab.php</jms:reference-file>
+        <jms:reference-file line="47">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/ContentTab.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="5d92b84a6c78bd443010f172c47d01ce0dacacd7" resname="tab.name.details">
         <source>Details</source>
         <target state="new">Details</target>
         <note>key: tab.name.details</note>
-        <jms:reference-file line="68">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/DetailsTab.php</jms:reference-file>
+        <jms:reference-file line="68">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/DetailsTab.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="bc992b410ec56cce18c994806d7518fd47da2caa" resname="tab.name.locations">
         <source>Locations</source>
         <target state="new">Locations</target>
         <note>key: tab.name.locations</note>
-        <jms:reference-file line="66">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/LocationsTab.php</jms:reference-file>
+        <jms:reference-file line="66">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/LocationsTab.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="8954433abc5d011c00f81f317c7eebec41fbb1c0" resname="tab.name.relations">
         <source>Relations</source>
         <target state="new">Relations</target>
         <note>key: tab.name.relations</note>
-        <jms:reference-file line="53">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/RelationsTab.php</jms:reference-file>
+        <jms:reference-file line="53">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/RelationsTab.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0b83b391386f47130b2d3ac1869fe27aa8c45fb7" resname="tab.name.translations">
         <source>Translations</source>
         <target state="new">Translations</target>
         <note>key: tab.name.translations</note>
-        <jms:reference-file line="63">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/TranslationsTab.php</jms:reference-file>
+        <jms:reference-file line="63">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/TranslationsTab.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="50741647d206010a8c2ac911901f3c31d6bbfc6a" resname="tab.name.urls">
         <source>URL</source>
         <target state="new">URL</target>
         <note>key: tab.name.urls</note>
-        <jms:reference-file line="46">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/UrlsTab.php</jms:reference-file>
+        <jms:reference-file line="46">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/UrlsTab.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="337828c348b881920f84d17cc184f4c24e40c894" resname="tab.name.versions">
         <source>Versions</source>
         <target state="new">Versions</target>
         <note>key: tab.name.versions</note>
-        <jms:reference-file line="67">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/VersionsTab.php</jms:reference-file>
+        <jms:reference-file line="68">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Tab/LocationView/VersionsTab.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="373c6d223e1f346d71cf6cfd85f0fbc3d76ca1d5" resname="tab.relations.no_relations">
         <source>This content item has no related content.</source>
         <target state="new">This content item has no related content.</target>
         <note>key: tab.relations.no_relations</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1c95181a07cb4d7b83aa9b003eb4e8df95c8bfd9" resname="tab.relations.no_reverse_relations">
         <source>This content item has no reverse relations.</source>
         <target state="new">This content item has no reverse relations.</target>
         <note>key: tab.relations.no_reverse_relations</note>
-        <jms:reference-file line="20">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="20">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="853cb6f02ff64af4dc6016318eff1c30bd16cc70" resname="tab.relations.related_content">
         <source>Related content (content items used by %contentName%)</source>
         <target state="new">Related content (content items used by %contentName%)</target>
         <note>key: tab.relations.related_content</note>
-        <jms:reference-file line="4">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="4">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="797eb29381132df5a71378b71b3237cf9a063b5c" resname="tab.relations.reverse_relations">
         <source>Reverse relations (content items using %contentName%)</source>
         <target state="new">Reverse relations (content items using %contentName%)</target>
         <note>key: tab.relations.reverse_relations</note>
-        <jms:reference-file line="15">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d667f9ef2cf04ce8966bc908b8930be596925561" resname="tab.relations.table.content_type">
         <source>Content type</source>
         <target state="new">Content type</target>
         <note>key: tab.relations.table.content_type</note>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e649f067bcea898ef987cd5ebce6a9a6fca570f2" resname="tab.relations.table.name">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: tab.relations.table.name</note>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="06422c0c484b663ec929d1049a228a26b9d48476" resname="tab.relations.table.relation_type">
         <source>Relation type</source>
         <target state="new">Relation type</target>
         <note>key: tab.relations.table.relation_type</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d8360b13746f836dc7c28998696a69b24ea30b18" resname="tab.relations.table.relation_type.content_level_relation">
         <source>Content level relation</source>
         <target state="new">Content level relation</target>
         <note>key: tab.relations.table.relation_type.content_level_relation</note>
-        <jms:reference-file line="39">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
+        <jms:reference-file line="39">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="79779455bd3c932297c6b8cefdcd1251836525c5" resname="tab.relations.table.relation_type.embed">
         <source>Embed</source>
         <target state="new">Embed</target>
         <note>key: tab.relations.table.relation_type.embed</note>
-        <jms:reference-file line="41">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
+        <jms:reference-file line="41">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9a9a16a9516cdda3bc3213bbdf77a02ff04b8fc8" resname="tab.relations.table.relation_type.field">
         <source>Field</source>
         <target state="new">Field</target>
         <note>key: tab.relations.table.relation_type.field</note>
-        <jms:reference-file line="45">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
+        <jms:reference-file line="45">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cd43dc791bb87dda363d311d449b68d5876392d1" resname="tab.relations.table.relation_type.link">
         <source>Link</source>
         <target state="new">Link</target>
         <note>key: tab.relations.table.relation_type.link</note>
-        <jms:reference-file line="43">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
+        <jms:reference-file line="43">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/relations/table.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d494d753de03a08f7a10792b727ec88ca74d4913" resname="tab.translations.language_code">
         <source>Language code</source>
         <target state="new">Language code</target>
         <note>key: tab.translations.language_code</note>
-        <jms:reference-file line="11">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="11">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0becdca42cbaa039a6166b8aa778a86657bb362f" resname="tab.translations.language_name">
         <source>Language name</source>
         <target state="new">Language name</target>
         <note>key: tab.translations.language_name</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="852ca97b78e55e9b7734ff3e5a6c1b3fde6eca6f" resname="tab.translations.translation_manger">
         <source>Translation manager</source>
         <target state="new">Translation manager</target>
         <note>key: tab.translations.translation_manger</note>
-        <jms:reference-file line="5">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="5">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d244966cab8b41f92fd5553d8f33f0e1ca8bf85f" resname="tab.urls.custom_url_aliases">
         <source>Custom URL aliases for %contentName%</source>
         <target state="new">Custom URL aliases for %contentName%</target>
         <note>key: tab.urls.custom_url_aliases</note>
-        <jms:reference-file line="3">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
+        <jms:reference-file line="3">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5a1947624cf55689d80d38b7583bac538da641bb" resname="tab.urls.language">
         <source>Language</source>
         <target state="new">Language</target>
         <note>key: tab.urls.language</note>
-        <jms:reference-file line="11">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
-        <jms:reference-file line="47">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
+        <jms:reference-file line="11">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
+        <jms:reference-file line="47">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="56d218db883ed4cc59dbbca53364dc2e725013e4" resname="tab.urls.no_custom_urls">
         <source>This content item has no custom url aliases.</source>
         <target state="new">This content item has no custom url aliases.</target>
         <note>key: tab.urls.no_custom_urls</note>
-        <jms:reference-file line="36">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
+        <jms:reference-file line="36">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c9fdd1434b44a4592626e8fe493c19141aab24d5" resname="tab.urls.no_system_urls">
         <source>This content item has no system urls.</source>
         <target state="new">This content item has no system urls.</target>
         <note>key: tab.urls.no_system_urls</note>
-        <jms:reference-file line="63">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
+        <jms:reference-file line="63">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="902beb4ac170382cb95bd554cb1e763d8fdd413c" resname="tab.urls.system.title">
         <source>System URL</source>
         <target state="new">System URL</target>
         <note>key: tab.urls.system.title</note>
-        <jms:reference-file line="40">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
+        <jms:reference-file line="40">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0de66a25f1019287cf737f27622ca4d05f582764" resname="tab.urls.type">
         <source>Type</source>
         <target state="new">Type</target>
         <note>key: tab.urls.type</note>
-        <jms:reference-file line="12">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
+        <jms:reference-file line="12">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1d87d09bd23142580b88dfe4cf987cf0a6b2d993" resname="tab.urls.type.direct">
         <source>Direct</source>
         <target state="new">Direct</target>
         <note>key: tab.urls.type.direct</note>
-        <jms:reference-file line="27">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
+        <jms:reference-file line="27">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ea8af6bc33d14986b233c0acb340bd122ff0c2bd" resname="tab.urls.type.redirect">
         <source>Redirect</source>
         <target state="new">Redirect</target>
         <note>key: tab.urls.type.redirect</note>
-        <jms:reference-file line="25">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
+        <jms:reference-file line="25">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5028d3abfd74c419dc7a3daee4303b084c94d2e6" resname="tab.urls.url">
         <source>URL</source>
         <target state="new">URL</target>
         <note>key: tab.urls.url</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
-        <jms:reference-file line="46">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
+        <jms:reference-file line="46">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/urls.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="699b5bf627b908f8d270984ab9a4734a48b28abe" resname="tab.versions.archived_versions">
         <source>Archived versions</source>
         <target state="new">Archived versions</target>
         <note>key: tab.versions.archived_versions</note>
-        <jms:reference-file line="35">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="35">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b098881c168c540aaa9e23417fa38934a70300d6" resname="tab.versions.draft_under_edit">
         <source>Draft under edit</source>
         <target state="new">Draft under edit</target>
         <note>key: tab.versions.draft_under_edit</note>
-        <jms:reference-file line="7">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8cf65ae83fb935858286b91006ff05b9d6d15c4a" resname="tab.versions.no_permission">
         <source>You don't have access to view the content item's versions</source>
         <target state="new">You don't have access to view the content item's versions</target>
         <note>key: tab.versions.no_permission</note>
-        <jms:reference-file line="12">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/tab.html.twig</jms:reference-file>
-        <jms:reference-file line="26">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/tab.html.twig</jms:reference-file>
-        <jms:reference-file line="40">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="12">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="26">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="40">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f6c48627db1d026d9f3fbc3b5b1cb1b3c60af4b3" resname="tab.versions.published_version">
         <source>Published version</source>
         <target state="new">Published version</target>
         <note>key: tab.versions.published_version</note>
-        <jms:reference-file line="21">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/tab.html.twig</jms:reference-file>
+        <jms:reference-file line="21">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/tab.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4c27637d649c221e58c6a9629f14a2f75aeed151" resname="tab.versions.table.contributor">
         <source>Contributor</source>
         <target state="new">Contributor</target>
         <note>key: tab.versions.table.contributor</note>
-        <jms:reference-file line="12">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/table.html.twig</jms:reference-file>
+        <jms:reference-file line="12">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/table.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4c6353b63f5bc2031c8380c4007edf9c5f6be456" resname="tab.versions.table.created">
         <source>Created</source>
         <target state="new">Created</target>
         <note>key: tab.versions.table.created</note>
-        <jms:reference-file line="13">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/table.html.twig</jms:reference-file>
+        <jms:reference-file line="13">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/table.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="472157bdf440a9c6636057ac194d53029ac589dd" resname="tab.versions.table.last_saved">
         <source>Last saved</source>
         <target state="new">Last saved</target>
         <note>key: tab.versions.table.last_saved</note>
-        <jms:reference-file line="14">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/table.html.twig</jms:reference-file>
+        <jms:reference-file line="14">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/table.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cd780839249906bd141cccd8bc58c8043a50acfb" resname="tab.versions.table.modified_language">
         <source>Modified language</source>
         <target state="new">Modified language</target>
         <note>key: tab.versions.table.modified_language</note>
-        <jms:reference-file line="11">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/table.html.twig</jms:reference-file>
+        <jms:reference-file line="11">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/table.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ddc70b29ad8ac6544843566a146ed1ea4ddab817" resname="tab.versions.table.version">
         <source>Version</source>
         <target state="new">Version</target>
         <note>key: tab.versions.table.version</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/table.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/content/tab/versions/table.html.twig</jms:reference-file>
       </trans-unit>
     </body>
   </file>

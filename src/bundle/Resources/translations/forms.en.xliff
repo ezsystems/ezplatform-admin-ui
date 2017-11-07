@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-11-06T16:28:43Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2017-11-07T21:29:28Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,248 +10,248 @@
         <source>Create</source>
         <target state="new">Create</target>
         <note>key: content_draft_create_type.create</note>
-        <jms:reference-file line="66">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Content/Draft/ContentCreateType.php</jms:reference-file>
-        <jms:reference-file line="59">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Content/Draft/ContentDraftCreateType.php</jms:reference-file>
+        <jms:reference-file line="66">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Content/Draft/ContentCreateType.php</jms:reference-file>
+        <jms:reference-file line="59">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Content/Draft/ContentDraftCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c5edf119facebac72a105963da8db6be47549180" resname="content_location_add_type.add">
         <source>Add location</source>
         <target state="new">Add location</target>
         <note>key: content_location_add_type.add</note>
-        <jms:reference-file line="40">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Content/Location/ContentLocationAddType.php</jms:reference-file>
+        <jms:reference-file line="40">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Content/Location/ContentLocationAddType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9e3c743fb052b12d69896a30ee9a6e1bb0c41427" resname="content_location_remove_form.remove">
         <source>Delete</source>
         <target state="new">Delete</target>
         <note>key: content_location_remove_form.remove</note>
-        <jms:reference-file line="47">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Content/Location/ContentLocationRemoveType.php</jms:reference-file>
+        <jms:reference-file line="47">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Content/Location/ContentLocationRemoveType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0c3800a29144ab27e80a81e100212ccd5fd7e509" resname="content_translation_remove_form.remove">
         <source>Remove translation</source>
         <target state="new">Remove translation</target>
         <note>key: content_translation_remove_form.remove</note>
-        <jms:reference-file line="45">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Content/Translation/TranslationRemoveType.php</jms:reference-file>
+        <jms:reference-file line="45">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Content/Translation/TranslationRemoveType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0ad9197dcdbe88b1a05f099c564dc2b5634f8aa5" resname="ezplatform.language.create.enabled">
         <source>Enabled</source>
         <target state="new">Enabled</target>
         <note>key: ezplatform.language.create.enabled</note>
-        <jms:reference-file line="35">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageCreateType.php</jms:reference-file>
+        <jms:reference-file line="35">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="74b72ba5150cd449b231ca3441626aa46bd4622f" resname="ezplatform.language.create.language_code">
         <source>Language code</source>
         <target state="new">Language code</target>
         <note>key: ezplatform.language.create.language_code</note>
-        <jms:reference-file line="30">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageCreateType.php</jms:reference-file>
+        <jms:reference-file line="30">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7e920869e5863044fa54ffb855890d4e53f42c6b" resname="ezplatform.language.create.name">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: ezplatform.language.create.name</note>
-        <jms:reference-file line="25">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageCreateType.php</jms:reference-file>
+        <jms:reference-file line="25">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ffd97ca1026795d6942cdff21e76596229baa2dd" resname="ezplatform.language.create.save">
         <source>Create</source>
         <target state="new">Create</target>
         <note>key: ezplatform.language.create.save</note>
-        <jms:reference-file line="42">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageCreateType.php</jms:reference-file>
+        <jms:reference-file line="42">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="aaacfc049425d3dc086d5548dac0a2bb2eabe404" resname="ezplatform.language.delete.delete">
         <source>Delete</source>
         <target state="new">Delete</target>
         <note>key: ezplatform.language.delete.delete</note>
-        <jms:reference-file line="28">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageDeleteType.php</jms:reference-file>
+        <jms:reference-file line="28">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageDeleteType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="8812f90c2fc0831af508c0971285dc125a68efc7" resname="ezplatform.language.update.enabled">
         <source>Enabled</source>
         <target state="new">Enabled</target>
         <note>key: ezplatform.language.update.enabled</note>
-        <jms:reference-file line="35">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageUpdateType.php</jms:reference-file>
+        <jms:reference-file line="35">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageUpdateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2ec293c62175282c5a3ff7a75a56093446485dad" resname="ezplatform.language.update.name">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: ezplatform.language.update.name</note>
-        <jms:reference-file line="30">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageUpdateType.php</jms:reference-file>
+        <jms:reference-file line="30">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageUpdateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="87ed807e48a8c3fc19eba5338ddbaa91df68d19d" resname="ezplatform.language.update.save">
         <source>Save</source>
         <target state="new">Save</target>
         <note>key: ezplatform.language.update.save</note>
-        <jms:reference-file line="42">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageUpdateType.php</jms:reference-file>
+        <jms:reference-file line="42">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Language/LanguageUpdateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e1f039c692df803a42d90f2bcd4f763623241bb2" resname="location_copy.copy">
         <source>Copy</source>
         <target state="new">Copy</target>
         <note>key: location_copy.copy</note>
-        <jms:reference-file line="34">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Location/LocationCopyType.php</jms:reference-file>
+        <jms:reference-file line="34">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Location/LocationCopyType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9e312a8bdc3e0fbfab7bab370f59cb5e44a9af2f" resname="location_move.move">
         <source>Move</source>
         <target state="new">Move</target>
         <note>key: location_move.move</note>
-        <jms:reference-file line="34">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Location/LocationMoveType.php</jms:reference-file>
+        <jms:reference-file line="34">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Location/LocationMoveType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="796f8196b2bc086fe788e6689a6189c79b8e047e" resname="location_trash_form.trash">
         <source>Send to Trash</source>
         <target state="new">Send to Trash</target>
         <note>key: location_trash_form.trash</note>
-        <jms:reference-file line="31">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Location/LocationTrashType.php</jms:reference-file>
+        <jms:reference-file line="31">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Location/LocationTrashType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="34ba9078fe178bd49df6ada9d8357455ee8ff7b3" resname="policy_create.save">
         <source>Create</source>
         <target state="new">Create</target>
         <note>key: policy_create.save</note>
-        <jms:reference-file line="32">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyCreateType.php</jms:reference-file>
+        <jms:reference-file line="32">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d3c70d265ab037db5ade02a8b738b5981353c7ac" resname="role.policy.type">
         <source>Type</source>
         <target state="new">Type</target>
         <note>key: role.policy.type</note>
-        <jms:reference-file line="25">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyCreateType.php</jms:reference-file>
+        <jms:reference-file line="25">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ca6964415cb051927cf1d4092e4a6f49de0748c0" resname="role.policy.type.choose">
         <source>Choose a type</source>
         <target state="new">Choose a type</target>
         <note>key: role.policy.type.choose</note>
-        <jms:reference-file line="26">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyCreateType.php</jms:reference-file>
+        <jms:reference-file line="26">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Policy/PolicyCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f11a379ba38d1a4e5fb7de3bc3a2fb76b72fe9dd" resname="role_assignment.delete">
         <source>Delete</source>
         <target state="new">Delete</target>
         <note>key: role_assignment.delete</note>
-        <jms:reference-file line="30">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleAssignmentDeleteType.php</jms:reference-file>
+        <jms:reference-file line="30">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleAssignmentDeleteType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="cd67db3c5e3f56ce0c899e8858502933c1a5ed70" resname="role_assignment.groups">
         <source>Group</source>
         <target state="new">Group</target>
         <note>key: role_assignment.groups</note>
-        <jms:reference-file line="31">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleAssignmentCreateType.php</jms:reference-file>
+        <jms:reference-file line="31">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleAssignmentCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="710f8e6ab682db07141d71bc6df5246988a0560f" resname="role_assignment.locations">
         <source>Choose Locations</source>
         <target state="new">Choose Locations</target>
         <note>key: role_assignment.locations</note>
-        <jms:reference-file line="54">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleAssignmentCreateType.php</jms:reference-file>
+        <jms:reference-file line="54">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleAssignmentCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="90266f1e47b42712e761c7fea00fb8e8c949f37e" resname="role_assignment.save">
         <source>Assign</source>
         <target state="new">Assign</target>
         <note>key: role_assignment.save</note>
-        <jms:reference-file line="60">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleAssignmentCreateType.php</jms:reference-file>
+        <jms:reference-file line="60">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleAssignmentCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0bcd4dbd1300e2309dd541f817fef6bf5fc029d8" resname="role_assignment.sections">
         <source>Section</source>
         <target state="new">Section</target>
         <note>key: role_assignment.sections</note>
-        <jms:reference-file line="47">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleAssignmentCreateType.php</jms:reference-file>
+        <jms:reference-file line="47">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleAssignmentCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7ed8b44c2b610ecc43a5cc390335657ebf798ebc" resname="role_assignment.users">
         <source>User</source>
         <target state="new">User</target>
         <note>key: role_assignment.users</note>
-        <jms:reference-file line="39">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleAssignmentCreateType.php</jms:reference-file>
+        <jms:reference-file line="39">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleAssignmentCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e36e86d3568ccc02a097560444b35c69c469c531" resname="role_create.name">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: role_create.name</note>
-        <jms:reference-file line="26">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleCreateType.php</jms:reference-file>
+        <jms:reference-file line="26">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="776c77290a994aebb3c657ee11dd2c5cff117dca" resname="role_create.save">
         <source>Create</source>
         <target state="new">Create</target>
         <note>key: role_create.save</note>
-        <jms:reference-file line="31">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleCreateType.php</jms:reference-file>
+        <jms:reference-file line="31">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="870a0a274b0ddf96ef4b6ce633dacad31e23e311" resname="role_delete.delete">
         <source>Delete</source>
         <target state="new">Delete</target>
         <note>key: role_delete.delete</note>
-        <jms:reference-file line="30">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleDeleteType.php</jms:reference-file>
+        <jms:reference-file line="30">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleDeleteType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4c228e578ee76e86bf13d3f8daa8fffa45d6387a" resname="role_update.name">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: role_update.name</note>
-        <jms:reference-file line="26">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleUpdateType.php</jms:reference-file>
+        <jms:reference-file line="26">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleUpdateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="453d030fbc11c10c842807ff213039adfffbe051" resname="role_update.save">
         <source>Update</source>
         <target state="new">Update</target>
         <note>key: role_update.save</note>
-        <jms:reference-file line="31">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleUpdateType.php</jms:reference-file>
+        <jms:reference-file line="31">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Role/RoleUpdateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f3a2d2ec4f587435900fdec3f0fb973592b57147" resname="section_content_assign_form.assign">
         <source>Assign content</source>
         <target state="new">Assign content</target>
         <note>key: section_content_assign_form.assign</note>
-        <jms:reference-file line="45">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionContentAssignType.php</jms:reference-file>
+        <jms:reference-file line="45">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionContentAssignType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="72b286dbf7ede406ec805d27d4ee834b8a159670" resname="section_content_assign_form.locations">
         <source>Assign content</source>
         <target state="new">Assign content</target>
         <note>key: section_content_assign_form.locations</note>
-        <jms:reference-file line="35">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionContentAssignType.php</jms:reference-file>
+        <jms:reference-file line="35">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionContentAssignType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4d1b71ebb6b86d78f0902fa5a6ef329c070efdad" resname="section_create_form.create">
         <source>Create</source>
         <target state="new">Create</target>
         <note>key: section_create_form.create</note>
-        <jms:reference-file line="35">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionCreateType.php</jms:reference-file>
+        <jms:reference-file line="35">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="157171a054bf3089d55c971b318b95a26a1cbb92" resname="section_delete_form.delete">
         <source>Delete</source>
         <target state="new">Delete</target>
         <note>key: section_delete_form.delete</note>
-        <jms:reference-file line="31">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionDeleteType.php</jms:reference-file>
+        <jms:reference-file line="31">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionDeleteType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="54b875a849e645c86904a2c3663c02b2aab86bb4" resname="section_form.identifier">
         <source>Identifier</source>
         <target state="new">Identifier</target>
         <note>key: section_form.identifier</note>
-        <jms:reference-file line="21">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionType.php</jms:reference-file>
+        <jms:reference-file line="21">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a8e6cb63af5cccaf0b468435ce04fd304aa77e5c" resname="section_form.name">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: section_form.name</note>
-        <jms:reference-file line="25">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionType.php</jms:reference-file>
+        <jms:reference-file line="25">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ecaa9ee7b46159c99796726b8e14693d821e5500" resname="section_update_form.update">
         <source>Update</source>
         <target state="new">Update</target>
         <note>key: section_update_form.update</note>
-        <jms:reference-file line="35">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionUpdateType.php</jms:reference-file>
+        <jms:reference-file line="35">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Section/SectionUpdateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6880a88558bf821ff5ca3266f2f4f42b6d911283" resname="swap_location_form.swap">
         <source>Select content item</source>
         <target state="new">Select content item</target>
         <note>key: swap_location_form.swap</note>
-        <jms:reference-file line="36">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Location/LocationSwapType.php</jms:reference-file>
+        <jms:reference-file line="36">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Location/LocationSwapType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="30b0c3c3e5e096a078005be2cc34bca6227ae381" resname="trash_empty_form.empty">
         <source>Delete permanently</source>
         <target state="new">Delete permanently</target>
         <note>key: trash_empty_form.empty</note>
-        <jms:reference-file line="37">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Trash/TrashEmptyType.php</jms:reference-file>
+        <jms:reference-file line="37">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Trash/TrashEmptyType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1b05bfd460ef104fc79726b60f1b5872cb0cbc1d" resname="trash_item_restore_form.restore">
         <source>Restore selected</source>
         <target state="new">Restore selected</target>
         <note>key: trash_item_restore_form.restore</note>
-        <jms:reference-file line="49">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Trash/TrashItemRestoreType.php</jms:reference-file>
+        <jms:reference-file line="49">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Trash/TrashItemRestoreType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9842e86d98a92b6afb831334a75a562a239dd70a" resname="trash_item_restore_form.restore_under_new_parent">
         <source>Restore under new parent</source>
         <target state="new">Restore under new parent</target>
         <note>key: trash_item_restore_form.restore_under_new_parent</note>
-        <jms:reference-file line="40">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Trash/TrashItemRestoreType.php</jms:reference-file>
+        <jms:reference-file line="40">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Trash/TrashItemRestoreType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3b2ae7aa286887e2fbd2b6e77ca237f9f9109e9b" resname="version_remove_form.remove">
         <source>Remove version</source>
         <target state="new">Remove version</target>
         <note>key: version_remove_form.remove</note>
-        <jms:reference-file line="34">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Version/VersionRemoveType.php</jms:reference-file>
+        <jms:reference-file line="34">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/Version/VersionRemoveType.php</jms:reference-file>
       </trans-unit>
     </body>
   </file>

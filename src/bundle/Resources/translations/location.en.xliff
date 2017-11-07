@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-11-06T16:28:43Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2017-11-07T21:29:28Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,37 +10,37 @@
         <source>Location '%name%' copied to location '%location%'</source>
         <target state="new">Location '%name%' copied to location '%location%'</target>
         <note>key: location.copy.success</note>
-        <jms:reference-file line="184">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LocationController.php</jms:reference-file>
+        <jms:reference-file line="184">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LocationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a9e3a80cf0b00f8a6b7d4e6ba0fa3ace6fe3f1f3" resname="location.create.success">
         <source>Location '%name%' created.</source>
         <target state="new">Location '%name%' created.</target>
         <note>key: location.create.success</note>
-        <jms:reference-file line="375">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LocationController.php</jms:reference-file>
+        <jms:reference-file line="375">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LocationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="db5b9465108df897937beb4a6fc71ccf1d7a4948" resname="location.delete.success">
         <source>Location '%name%' removed.</source>
         <target state="new">Location '%name%' removed.</target>
         <note>key: location.delete.success</note>
-        <jms:reference-file line="326">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LocationController.php</jms:reference-file>
+        <jms:reference-file line="326">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LocationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9d5d2fb830ae5b1806bcb908c01f115c93de4eda" resname="location.move.success">
         <source>Location '%name%' moved to location '%location%'</source>
         <target state="new">Location '%name%' moved to location '%location%'</target>
         <note>key: location.move.success</note>
-        <jms:reference-file line="120">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LocationController.php</jms:reference-file>
+        <jms:reference-file line="120">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LocationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="20dae8cf8c7cf8972d802224728554706e2b4699" resname="location.swap.success">
         <source>Location '%name%' swaped with location '%location%'</source>
         <target state="new">Location '%name%' swaped with location '%location%'</target>
         <note>key: location.swap.success</note>
-        <jms:reference-file line="237">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LocationController.php</jms:reference-file>
+        <jms:reference-file line="237">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LocationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="48699e3e0320623a7ac78df3b808f6341dd7d4c3" resname="location.trash.success">
         <source>Location '%name%' moved to trash.</source>
         <target state="new">Location '%name%' moved to trash.</target>
         <note>key: location.trash.success</note>
-        <jms:reference-file line="279">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LocationController.php</jms:reference-file>
+        <jms:reference-file line="279">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/LocationController.php</jms:reference-file>
       </trans-unit>
     </body>
   </file>

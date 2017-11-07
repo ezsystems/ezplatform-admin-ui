@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-11-06T16:28:43Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2017-11-07T21:29:28Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,306 +10,306 @@
         <source>Creating a new Content Type</source>
         <target state="new">Creating a new Content Type</target>
         <note>key: content_type.breadcrumb.create</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/create.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/create.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7dd9e32add81dba08bfbaefaac9442a7e7dbb6ae" resname="content_type.breadcrumb.edit">
         <source>Editing Content Type "%identifier%"</source>
         <target state="new">Editing Content Type "%identifier%"</target>
         <note>key: content_type.breadcrumb.edit</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5626938e64bdad8be0c090d0018c868960859d0a" resname="content_type.breadcrumb.view">
         <source>%identifier%</source>
         <target state="new">%identifier%</target>
         <note>key: content_type.breadcrumb.view</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a9206d413d4ca7266dace54fde2e1f8d85a4d557" resname="content_type.container">
         <source>Container</source>
         <target state="new">Container</target>
         <note>key: content_type.container</note>
-        <jms:reference-file line="57">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="57">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="693f9ade0c2bb6a7c19b6f9b818d96aa23f1e013" resname="content_type.default_availability">
         <source>Default availability</source>
         <target state="new">Default availability</target>
         <note>key: content_type.default_availability</note>
-        <jms:reference-file line="72">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="72">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3b3fc626a669a5462ec9fa7c94280a3573d8b106" resname="content_type.default_availability.help">
         <source>Default availability in primary language, if translation is absent</source>
         <target state="new">Default availability in primary language, if translation is absent</target>
         <note>key: content_type.default_availability.help</note>
-        <jms:reference-file line="74">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="74">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d14799b2ac8854ab3f0bb9976258c3db39213d09" resname="content_type.default_availability.value">
         <source>{0} Not available|{1} Available</source>
         <target state="new">{0} Not available|{1} Available</target>
         <note>key: content_type.default_availability.value</note>
-        <jms:reference-file line="77">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="77">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5ebf6515da27060877064931a5ac1d5a8540e28d" resname="content_type.default_children_sorting">
         <source>Default property for sorting children</source>
         <target state="new">Default property for sorting children</target>
         <note>key: content_type.default_children_sorting</note>
-        <jms:reference-file line="61">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="61">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cefc13177fd81d4c9df6f8e86eb5278fccbe5a5a" resname="content_type.default_sort">
         <source>Default sort order</source>
         <target state="new">Default sort order</target>
         <note>key: content_type.default_sort</note>
-        <jms:reference-file line="67">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="67">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5ecc210ad42274409db7ec4e56ba286b487639c6" resname="content_type.delete.success">
         <source>Content type '%name%' deleted.</source>
         <target state="new">Content type '%name%' deleted.</target>
         <note>key: content_type.delete.success</note>
-        <jms:reference-file line="178">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/ContentTypeController.php</jms:reference-file>
+        <jms:reference-file line="178">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/ContentTypeController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f2a3cc77cdadcff8883b0022e006e24918307687" resname="content_type.description">
         <source>Description</source>
         <target state="new">Description</target>
         <note>key: content_type.description</note>
-        <jms:reference-file line="45">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="45">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="238db0c5dee8ec13199b073f7cc78728f53ffa36" resname="content_type.identifier">
         <source>Identifier</source>
         <target state="new">Identifier</target>
         <note>key: content_type.identifier</note>
-        <jms:reference-file line="41">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="41">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7fddd251857df821bd536dd680e1edbc921790a2" resname="content_type.name">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: content_type.name</note>
-        <jms:reference-file line="37">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="37">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9e9628fc59643f3167ebe81dfed3e40eecd281c9" resname="content_type.name_schema">
         <source>Content name schema</source>
         <target state="new">Content name schema</target>
         <note>key: content_type.name_schema</note>
-        <jms:reference-file line="49">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="49">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="48d3eb66c0f8928777189eab11eae254866852b2" resname="content_type.update.success">
         <source>Content type '%name%' updated.</source>
         <target state="new">Content type '%name%' updated.</target>
         <note>key: content_type.update.success</note>
-        <jms:reference-file line="138">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/ContentTypeController.php</jms:reference-file>
+        <jms:reference-file line="138">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/ContentTypeController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6ab7362c77b22ff8bc0d14eeaae8514b0a683473" resname="content_type.url_alias_schema">
         <source>URL alias name pattern</source>
         <target state="new">URL alias name pattern</target>
         <note>key: content_type.url_alias_schema</note>
-        <jms:reference-file line="53">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="53">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4f63ade40ae91a9ad39e4be7b9e4f51003f1f4b3" resname="content_type.view.create.title">
         <source>Creating a new Content Type</source>
         <target state="new">Creating a new Content Type</target>
         <note>key: content_type.view.create.title</note>
-        <jms:reference-file line="16">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/create.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/create.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7eee653a60490713df6bcf4b847853020b79a1ee" resname="content_type.view.edit.title">
         <source>Editing Content Type "%name%"</source>
         <target state="new">Editing Content Type "%name%"</target>
         <note>key: content_type.view.edit.title</note>
-        <jms:reference-file line="16">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="803a61fc8cf4e7bdfcf27432bb35e379a4971134" resname="content_type.view.list.action.add">
         <source>Create a Content Type</source>
         <target state="new">Create a Content Type</target>
         <note>key: content_type.view.list.action.add</note>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c3287b9fccc0b54216e50ba02e3d72e17cc1c92e" resname="content_type.view.list.action.delete">
         <source>Delete</source>
         <target state="new">Delete</target>
         <note>key: content_type.view.list.action.delete</note>
-        <jms:reference-file line="56">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
+        <jms:reference-file line="56">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1a2e4ef61d405d0628d8bacdb80d7bbaa11143d5" resname="content_type.view.list.action.edit">
         <source>Edit</source>
         <target state="new">Edit</target>
         <note>key: content_type.view.list.action.edit</note>
-        <jms:reference-file line="52">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
+        <jms:reference-file line="52">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="bef02fc3d41e74bf002af93b413a2a203a04db1a" resname="content_type.view.list.column.id">
         <source>ID</source>
         <target state="new">ID</target>
         <note>key: content_type.view.list.column.id</note>
-        <jms:reference-file line="17">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
+        <jms:reference-file line="17">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5a5fe831f20f47949b0a54d76cfa897898794b77" resname="content_type.view.list.column.identifier">
         <source>Identifier</source>
         <target state="new">Identifier</target>
         <note>key: content_type.view.list.column.identifier</note>
-        <jms:reference-file line="16">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="234d8921b4886a1d76feed234bec3123db55fed4" resname="content_type.view.list.column.modification_date">
         <source>Modification date</source>
         <target state="new">Modification date</target>
         <note>key: content_type.view.list.column.modification_date</note>
-        <jms:reference-file line="18">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
+        <jms:reference-file line="18">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="288545756241beae1bdb8aa600b829506bb7acaf" resname="content_type.view.list.column.name">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: content_type.view.list.column.name</note>
-        <jms:reference-file line="15">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7c8c43d61131312dbeeeac5dc536a4f95154f33d" resname="content_type.view.list.title">
         <source>Content Types</source>
         <target state="new">Content Types</target>
         <note>key: content_type.view.list.title</note>
-        <jms:reference-file line="5">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
+        <jms:reference-file line="5">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="dc7335e54d834bb6a342bf0bcb113850de4b69f9" resname="content_type.view.view.title">
         <source>"%name%" Content Type</source>
         <target state="new">"%name%" Content Type</target>
         <note>key: content_type.view.view.title</note>
-        <jms:reference-file line="16">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d74d01091280ceabfb457980ddd459dc841ad957" resname="content_type_group.breadcrumb.add">
         <source>Creating a new Content Type Group</source>
         <target state="new">Creating a new Content Type Group</target>
         <note>key: content_type_group.breadcrumb.add</note>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/add.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/add.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="20ee2fba1b6d560dd296bbe696975e92b78ce578" resname="content_type_group.breadcrumb.edit">
         <source>Editing Content Type Group "%identifier%"</source>
         <target state="new">Editing Content Type Group "%identifier%"</target>
         <note>key: content_type_group.breadcrumb.edit</note>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="83a16866c8ff14a4966553088657aafbb9db8edb" resname="content_type_group.breadcrumb.list">
         <source>Content Types</source>
         <target state="new">Content Types</target>
         <note>key: content_type_group.breadcrumb.list</note>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/create.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/edit.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/add.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/edit.html.twig</jms:reference-file>
-        <jms:reference-file line="14">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/view.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/create.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/add.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="14">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="541e02854f7e561d84637ce99ec6fd6e8404bce4" resname="content_type_group.breadcrumb.view">
         <source>%identifier%</source>
         <target state="new">%identifier%</target>
         <note>key: content_type_group.breadcrumb.view</note>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/create.html.twig</jms:reference-file>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/edit.html.twig</jms:reference-file>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/view.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/create.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="03339a9ed2c7a92f0168e1bfbb276e17dcf52794" resname="content_type_group.create.identifier">
         <source>Identifier</source>
         <target state="new">Identifier</target>
         <note>key: content_type_group.create.identifier</note>
-        <jms:reference-file line="27">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/ContentTypeGroup/ContentTypeGroupCreateType.php</jms:reference-file>
+        <jms:reference-file line="27">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/ContentTypeGroup/ContentTypeGroupCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b04a9c80f0219d1a12813a8aa4bc532e97653b28" resname="content_type_group.create.submit">
         <source>Create</source>
         <target state="new">Create</target>
         <note>key: content_type_group.create.submit</note>
-        <jms:reference-file line="30">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/ContentTypeGroup/ContentTypeGroupCreateType.php</jms:reference-file>
+        <jms:reference-file line="30">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/ContentTypeGroup/ContentTypeGroupCreateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="00f7021226b49438a6e4b36cfd212b9553deb762" resname="content_type_group.create.success">
         <source>Content type group '%name%' created.</source>
         <target state="new">Content type group '%name%' created.</target>
         <note>key: content_type_group.create.success</note>
-        <jms:reference-file line="102">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/ContentTypeGroupController.php</jms:reference-file>
+        <jms:reference-file line="102">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/ContentTypeGroupController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="eec79e4a9109f28892797768f085eab39eaedc31" resname="content_type_group.delete.submit">
         <source>Delete</source>
         <target state="new">Delete</target>
         <note>key: content_type_group.delete.submit</note>
-        <jms:reference-file line="27">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/ContentTypeGroup/ContentTypeGroupDeleteType.php</jms:reference-file>
+        <jms:reference-file line="27">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/ContentTypeGroup/ContentTypeGroupDeleteType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7d3672fcf2f0e1982152c4e6759bd03143f9f028" resname="content_type_group.delete.success">
         <source>Content type group '%name%' deleted.</source>
         <target state="new">Content type group '%name%' deleted.</target>
         <note>key: content_type_group.delete.success</note>
-        <jms:reference-file line="178">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/ContentTypeGroupController.php</jms:reference-file>
+        <jms:reference-file line="178">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/ContentTypeGroupController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2215ce796f8eb3bfc45224e4773b571e71429c3d" resname="content_type_group.update.identifier">
         <source>Identifier</source>
         <target state="new">Identifier</target>
         <note>key: content_type_group.update.identifier</note>
-        <jms:reference-file line="27">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/ContentTypeGroup/ContentTypeGroupUpdateType.php</jms:reference-file>
+        <jms:reference-file line="27">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/ContentTypeGroup/ContentTypeGroupUpdateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d44e2ddf0ee9d2e6fcb0b4f2c49a2b579d629588" resname="content_type_group.update.submit">
         <source>Update</source>
         <target state="new">Update</target>
         <note>key: content_type_group.update.submit</note>
-        <jms:reference-file line="30">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/ContentTypeGroup/ContentTypeGroupUpdateType.php</jms:reference-file>
+        <jms:reference-file line="30">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/lib/Form/Type/ContentTypeGroup/ContentTypeGroupUpdateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ff50d4b8d26d81f538b0ebabc392cbb05b6da162" resname="content_type_group.update.success">
         <source>Content type group '%name%' updated.</source>
         <target state="new">Content type group '%name%' updated.</target>
         <note>key: content_type_group.update.success</note>
-        <jms:reference-file line="141">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/ContentTypeGroupController.php</jms:reference-file>
+        <jms:reference-file line="141">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/ContentTypeGroupController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1bd4c745d76ae79ef7e95baea27281fff04e77f6" resname="content_type_group.view.add.title">
         <source>Creating a new Content Type Group</source>
         <target state="new">Creating a new Content Type Group</target>
         <note>key: content_type_group.view.add.title</note>
-        <jms:reference-file line="15">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/add.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/add.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1b6ebace1ed08d4e8de6a84a5523e19b53dfd443" resname="content_type_group.view.edit.title">
         <source>Editing Content Type Group "%identifier%"</source>
         <target state="new">Editing Content Type Group "%identifier%"</target>
         <note>key: content_type_group.view.edit.title</note>
-        <jms:reference-file line="15">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8eb8668549f90436db605805680144f4b87c7fc0" resname="content_type_group.view.list.action.add">
         <source>Create a Content Type Group</source>
         <target state="new">Create a Content Type Group</target>
         <note>key: content_type_group.view.list.action.add</note>
-        <jms:reference-file line="25">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
+        <jms:reference-file line="25">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e078a8733eac84a6f85ccb7883df2767d357528e" resname="content_type_group.view.list.action.edit">
         <source>Edit</source>
         <target state="new">Edit</target>
         <note>key: content_type_group.view.list.action.edit</note>
-        <jms:reference-file line="60">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
+        <jms:reference-file line="60">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cd462ce30cd4d0b21393e24ca2c9e974369c1f57" resname="content_type_group.view.list.column.id">
         <source>ID</source>
         <target state="new">ID</target>
         <note>key: content_type_group.view.list.column.id</note>
-        <jms:reference-file line="34">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
+        <jms:reference-file line="34">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="37d17dd014cd573541f83d4b5b0c4909b66ac7be" resname="content_type_group.view.list.column.identifier">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: content_type_group.view.list.column.identifier</note>
-        <jms:reference-file line="33">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
+        <jms:reference-file line="33">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9522e89ad894375dcf878ae282bdd793946fc375" resname="content_type_group.view.list.title">
         <source>Content Type Groups</source>
         <target state="new">Content Type Groups</target>
         <note>key: content_type_group.view.list.title</note>
-        <jms:reference-file line="22">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
+        <jms:reference-file line="22">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1769b5258d896d9ccb207c09e04534ce9a01c571" resname="content_type_group.view.view.title">
         <source>"%identifier%" Content Type Group</source>
         <target state="new">"%identifier%" Content Type Group</target>
         <note>key: content_type_group.view.view.title</note>
-        <jms:reference-file line="15">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/view.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type_group/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5cf420af18fd4a8d856fd30bc13aea5039369f9b" resname="form.cancel">
         <source>Cancel</source>
         <target state="new">Cancel</target>
         <note>key: form.cancel</note>
-        <jms:reference-file line="110">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/create.html.twig</jms:reference-file>
-        <jms:reference-file line="110">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="110">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/create.html.twig</jms:reference-file>
+        <jms:reference-file line="110">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3e9deeb426f08a404990a6926d70558955272593" resname="yes_no">
-        <source>yes_no</source>
-        <target state="new">yes_no</target>
+        <source>{0}No|{1}Yes</source>
+        <target state="new">{0}No|{1}Yes</target>
         <note>key: yes_no</note>
-        <jms:reference-file line="58">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
+        <jms:reference-file line="58">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/content_type/view.html.twig</jms:reference-file>
       </trans-unit>
     </body>
   </file>

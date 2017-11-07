@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-11-06T16:28:43Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2017-11-07T21:29:28Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,275 +10,275 @@
         <source>Cancel</source>
         <target state="new">Cancel</target>
         <note>key: form.cancel</note>
-        <jms:reference-file line="33">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/add.html.twig</jms:reference-file>
-        <jms:reference-file line="33">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="33">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/add.html.twig</jms:reference-file>
+        <jms:reference-file line="33">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d92993cb4cb3690f06c599b5f500a29fa23421c9" resname="policy.add.success">
         <source>New policies in role '%role%' created.</source>
         <target state="new">New policies in role '%role%' created.</target>
         <note>key: policy.add.success</note>
-        <jms:reference-file line="112">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/PolicyController.php</jms:reference-file>
+        <jms:reference-file line="112">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/PolicyController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="196c8d4eec96ca42ccdd3605621d51e2b34b6d85" resname="policy.breadcrumb.add">
         <source>Adding a new Policy</source>
         <target state="new">Adding a new Policy</target>
         <note>key: policy.breadcrumb.add</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/add.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/add.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8a7079c136f19a37dc42a6192fb94a11d19105ad" resname="policy.breadcrumb.edit">
         <source>Editing Policy "%module% / %function%"</source>
         <target state="new">Editing Policy "%module% / %function%"</target>
         <note>key: policy.breadcrumb.edit</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8a22274ebbfba3c96c4015fa64112db95d060525" resname="policy.delete.success">
         <source>Policies in role '%role%' removed.</source>
         <target state="new">Policies in role '%role%' removed.</target>
         <note>key: policy.delete.success</note>
-        <jms:reference-file line="201">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/PolicyController.php</jms:reference-file>
+        <jms:reference-file line="201">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/PolicyController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="41bcfef149f877e1abb0ce2cd2aa5afb713ea1de" resname="policy.limitation.identifier_tooltip">
         <source>"%identifier%" Limitation</source>
         <target state="new">"%identifier%" Limitation</target>
         <note>key: policy.limitation.identifier_tooltip</note>
-        <jms:reference-file line="31">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
-        <jms:reference-file line="35">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/list.html.twig</jms:reference-file>
+        <jms:reference-file line="31">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
+        <jms:reference-file line="35">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="77e814db3b3f1bd68101d274277bee08d164f0a2" resname="policy.limitation.none">
         <source>None</source>
         <target state="new">None</target>
         <note>key: policy.limitation.none</note>
-        <jms:reference-file line="39">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
-        <jms:reference-file line="42">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/list.html.twig</jms:reference-file>
+        <jms:reference-file line="39">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
+        <jms:reference-file line="42">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="bb8f2aa78c28aa25b5eade0c7f40c37110110ec5" resname="policy.update.success">
         <source>Policies in role '%role%' updated.</source>
         <target state="new">Policies in role '%role%' updated.</target>
         <note>key: policy.update.success</note>
-        <jms:reference-file line="157">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/PolicyController.php</jms:reference-file>
+        <jms:reference-file line="157">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/PolicyController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1ac24fa007363b4280663fba53f7a3b436ed4c8f" resname="policy.view.add.title">
         <source>policy.view.add.title</source>
         <target state="new">policy.view.add.title</target>
         <note>key: policy.view.add.title</note>
-        <jms:reference-file line="16">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/add.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/add.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="aefaf3a17b8493e63c82678611eb6eacbcc45d19" resname="policy.view.edit.title">
         <source>Editing Policy "%module% / %function%"</source>
         <target state="new">Editing Policy "%module% / %function%"</target>
         <note>key: policy.view.edit.title</note>
-        <jms:reference-file line="16">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e182986ba1f94484d60ea6b1db7cc2707478f2a1" resname="policy.view.limitations.title">
         <source>Limitations</source>
         <target state="new">Limitations</target>
         <note>key: policy.view.limitations.title</note>
-        <jms:reference-file line="32">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="32">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="84d0c2844a996fbfdc23872405533f92b6e6e2f6" resname="policy.view.list.action.add">
         <source>Add a new Policy</source>
         <target state="new">Add a new Policy</target>
         <note>key: policy.view.list.action.add</note>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="35aa96a30453aa7b604432885032fd961a7f508a" resname="policy.view.list.panel.policies.action.edit">
         <source>Edit</source>
         <target state="new">Edit</target>
         <note>key: policy.view.list.panel.policies.action.edit</note>
-        <jms:reference-file line="51">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
+        <jms:reference-file line="51">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3023517b9c9a8a05563021a9ac95092fd60dac13" resname="policy.view.list.panel.policies.column.function">
         <source>Function</source>
         <target state="new">Function</target>
         <note>key: policy.view.list.panel.policies.column.function</note>
-        <jms:reference-file line="16">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0bdf2edd15ae0c2e4f9faae4d9aef849c3258767" resname="policy.view.list.panel.policies.column.module">
         <source>Module</source>
         <target state="new">Module</target>
         <note>key: policy.view.list.panel.policies.column.module</note>
-        <jms:reference-file line="15">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0ac73c4c771df2f5214122aa058b8bc36f2a61a2" resname="policy.view.list.title">
         <source>Policies</source>
         <target state="new">Policies</target>
         <note>key: policy.view.list.title</note>
-        <jms:reference-file line="5">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
-        <jms:reference-file line="22">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/view.html.twig</jms:reference-file>
+        <jms:reference-file line="5">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
+        <jms:reference-file line="22">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e2b7ae0acb75f99dc7943574a63b36abbb6c42bf" resname="role.assignment_create.success">
         <source>Assignments on role '%role%' created.</source>
         <target state="new">Assignments on role '%role%' created.</target>
         <note>key: role.assignment_create.success</note>
-        <jms:reference-file line="146">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleAssignmentController.php</jms:reference-file>
+        <jms:reference-file line="146">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleAssignmentController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f684c343da285bc7273d4671a257d2731ccc83a2" resname="role.assignment_delete.success">
         <source>Assignment on role '%role%' removed.</source>
         <target state="new">Assignment on role '%role%' removed.</target>
         <note>key: role.assignment_delete.success</note>
-        <jms:reference-file line="183">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleAssignmentController.php</jms:reference-file>
+        <jms:reference-file line="183">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleAssignmentController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="43008c999ece1587436507732b3c1166c393f05c" resname="role.breadcrumb.add">
         <source>Creating a new Role</source>
         <target state="new">Creating a new Role</target>
         <note>key: role.breadcrumb.add</note>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/add.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/add.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9cdc3dd417b63308f19cadbe01f74c21565b9947" resname="role.breadcrumb.edit">
         <source>Editing Role "%identifier%"</source>
         <target state="new">Editing Role "%identifier%"</target>
         <note>key: role.breadcrumb.edit</note>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="03e72944d22126b885a65f885ebf8f1b8e2f8579" resname="role.breadcrumb.list">
         <source>Roles</source>
         <target state="new">Roles</target>
         <note>key: role.breadcrumb.list</note>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/add.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/edit.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/add.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/edit.html.twig</jms:reference-file>
-        <jms:reference-file line="14">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/view.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/add.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/add.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/add.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="14">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/view.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/add.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9756b39574125051ae4fcd1916f5ba8b065eceb9" resname="role.breadcrumb.view">
         <source>%identifier%</source>
         <target state="new">%identifier%</target>
         <note>key: role.breadcrumb.view</note>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/add.html.twig</jms:reference-file>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/edit.html.twig</jms:reference-file>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/view.html.twig</jms:reference-file>
-        <jms:reference-file line="9">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/add.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/add.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/view.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/add.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="59754dcca61db396ef9de8abd3aa63645bd50f65" resname="role.create.success">
         <source>Role '%role%' created.</source>
         <target state="new">Role '%role%' created.</target>
         <note>key: role.create.success</note>
-        <jms:reference-file line="111">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleController.php</jms:reference-file>
+        <jms:reference-file line="111">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="20c6318c88508393b9cb8413a6d7e61649f80ab3" resname="role.delete.success">
         <source>Role '%role%' removed.</source>
         <target state="new">Role '%role%' removed.</target>
         <note>key: role.delete.success</note>
-        <jms:reference-file line="189">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleController.php</jms:reference-file>
+        <jms:reference-file line="189">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="75637482fd2563256da5423615ecfb241fc03a57" resname="role.update.success">
         <source>Role '%role%' updated.</source>
         <target state="new">Role '%role%' updated.</target>
         <note>key: role.update.success</note>
-        <jms:reference-file line="152">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleController.php</jms:reference-file>
+        <jms:reference-file line="152">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/RoleController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="da907b734c3ae3df8e9c570dd8e9e7e6d0799105" resname="role.view.add.title">
         <source>Creating a new Role</source>
         <target state="new">Creating a new Role</target>
         <note>key: role.view.add.title</note>
-        <jms:reference-file line="15">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/add.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/add.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d3938c40d50b4d6e972248900f2d43cda1fe02a3" resname="role.view.edit.title">
         <source>Editing Role "%identifier%"</source>
         <target state="new">Editing Role "%identifier%"</target>
         <note>key: role.view.edit.title</note>
-        <jms:reference-file line="15">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="88d7426f344cc9d85b90903dad013d5806b82faa" resname="role.view.list.action.add">
         <source>Create a Role</source>
         <target state="new">Create a Role</target>
         <note>key: role.view.list.action.add</note>
-        <jms:reference-file line="24">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
+        <jms:reference-file line="24">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="18990f93cd60432ec47a75934185b7edbd3d17bf" resname="role.view.list.action.assign_to_users_or_groups">
         <source>Assign to Users/Groups</source>
         <target state="new">Assign to Users/Groups</target>
         <note>key: role.view.list.action.assign_to_users_or_groups</note>
-        <jms:reference-file line="50">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
+        <jms:reference-file line="50">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cb9d9934c021aa5f2b25bfa652279daa88c6086f" resname="role.view.list.action.edit">
         <source>Edit</source>
         <target state="new">Edit</target>
         <note>key: role.view.list.action.edit</note>
-        <jms:reference-file line="47">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
+        <jms:reference-file line="47">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4cb9b2e474c4584dd193e46214b68897ebc6350f" resname="role.view.list.column.id">
         <source>ID</source>
         <target state="new">ID</target>
         <note>key: role.view.list.column.id</note>
-        <jms:reference-file line="32">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
+        <jms:reference-file line="32">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="85577fbcec5644f2fd6eb88f26e1dc4343bb09d3" resname="role.view.list.column.identifier">
         <source>Identifier</source>
         <target state="new">Identifier</target>
         <note>key: role.view.list.column.identifier</note>
-        <jms:reference-file line="31">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
+        <jms:reference-file line="31">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a0c33e3728b23f13b825e36808834a6930551873" resname="role.view.list.title">
         <source>Roles</source>
         <target state="new">Roles</target>
         <note>key: role.view.list.title</note>
-        <jms:reference-file line="22">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
+        <jms:reference-file line="22">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2d60c07614620d12e34a9d0a0d3b36fc565fe610" resname="role.view.view.actions.edit">
         <source>Edit</source>
         <target state="new">Edit</target>
         <note>key: role.view.view.actions.edit</note>
-        <jms:reference-file line="51">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/view.html.twig</jms:reference-file>
+        <jms:reference-file line="51">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ed20cb1159498f2085d5df44b0d43c977abaa791" resname="role.view.view.title">
         <source>"%identifier%" Role</source>
         <target state="new">"%identifier%" Role</target>
         <note>key: role.view.view.title</note>
-        <jms:reference-file line="15">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/view.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e7ff6be9f5a7368f2493f29eacfa1ee321d9c383" resname="role_assignment.view.add.panel.limitations.title">
         <source>Limitations</source>
         <target state="new">Limitations</target>
         <note>key: role_assignment.view.add.panel.limitations.title</note>
-        <jms:reference-file line="40">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/add.html.twig</jms:reference-file>
+        <jms:reference-file line="40">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/add.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f9465b09774c22747e887ffe9e6300fd02420546" resname="role_assignment.view.add.panel.users_and_groups.title">
         <source>Users and Groups</source>
         <target state="new">Users and Groups</target>
         <note>key: role_assignment.view.add.panel.users_and_groups.title</note>
-        <jms:reference-file line="28">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/add.html.twig</jms:reference-file>
+        <jms:reference-file line="28">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/add.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="61a5ec154d3f0620ec619d196611b011996128ff" resname="role_assignment.view.add.title">
         <source>Assigning to Users/Groups</source>
         <target state="new">Assigning to Users/Groups</target>
         <note>key: role_assignment.view.add.title</note>
-        <jms:reference-file line="10">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/add.html.twig</jms:reference-file>
-        <jms:reference-file line="16">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/add.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/add.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/add.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a21a7a13956cadf2256095fbdd062f1b33dd05a8" resname="role_assignment.view.list.action.add">
         <source>Assign to Users/Groups</source>
         <target state="new">Assign to Users/Groups</target>
         <note>key: role_assignment.view.list.action.add</note>
-        <jms:reference-file line="8">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/list.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f7b9f2997c5eada07c20a0bde7e89cc0c688e1ea" resname="role_assignment.view.list.panel.assignments.column.limitation">
         <source>Limitation</source>
         <target state="new">Limitation</target>
         <note>key: role_assignment.view.list.panel.assignments.column.limitation</note>
-        <jms:reference-file line="16">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/list.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e978e250aa8284fa54c6f2a73cef9d3c8f0535c8" resname="role_assignment.view.list.panel.assignments.column.limitations">
         <source>Limitations</source>
         <target state="new">Limitations</target>
         <note>key: role_assignment.view.list.panel.assignments.column.limitations</note>
-        <jms:reference-file line="17">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
+        <jms:reference-file line="17">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/policy/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="bedf1e132292302ec09e4646d9a348a56e2c1ce8" resname="role_assignment.view.list.panel.assignments.column.user_group">
         <source>User/Group</source>
         <target state="new">User/Group</target>
         <note>key: role_assignment.view.list.panel.assignments.column.user_group</note>
-        <jms:reference-file line="15">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/list.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b152833aa8e0248096e41ded7c2f10bb778e363b" resname="role_assignment.view.list.title">
         <source>Assignments</source>
         <target state="new">Assignments</target>
         <note>key: role_assignment.view.list.title</note>
-        <jms:reference-file line="27">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/view.html.twig</jms:reference-file>
-        <jms:reference-file line="5">/../../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/list.html.twig</jms:reference-file>
+        <jms:reference-file line="27">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role/view.html.twig</jms:reference-file>
+        <jms:reference-file line="5">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/role_assignment/list.html.twig</jms:reference-file>
       </trans-unit>
     </body>
   </file>
