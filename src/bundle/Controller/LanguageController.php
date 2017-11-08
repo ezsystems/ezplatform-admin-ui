@@ -186,8 +186,7 @@ class LanguageController extends Controller
     public function editAction(Request $request, Language $language): Response
     {
         $form = $this->formFactory->updateLanguage(
-            new LanguageUpdateData($language),
-            'ezplatform.language.view'
+            new LanguageUpdateData($language)
         );
         $form->handleRequest($request);
 
