@@ -45,7 +45,10 @@
                class="btn btn-info" data-icon="&#xe606;">
                 {{ 'section.edit'|trans|desc('Edit') }}
             </a>
-            {{ form(form_section_content_assign, {'attr': {'class': 'd-inline-block'}}) }}
+            {{ form(form_section_content_assign, {
+                'action': path("ezplatform.section.assign_content", {"sectionId": section.id}),
+                'attr': {'class': 'd-inline-block'}
+            }) }}
 
             {% if deletable %}
                 <button type="button" class="btn btn-danger" data-toggle="modal"

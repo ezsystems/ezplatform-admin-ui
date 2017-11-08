@@ -48,7 +48,10 @@
                     <td>{{ section.id }}</td>
                     <td>{{ content_count[section.id] }}</td>
                     <td class="text-right">
-                        {{ form(form_section_content_assign[section.id], {'attr': {'class': 'd-inline-block'}}) }}
+                        {{ form(form_section_content_assign[section.id], {
+                            "action": path("ezplatform.section.assign_content", {"sectionId": section.id}),
+                            'attr': {'class': 'd-inline-block'}
+                        }) }}
                         <a href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
                            class="btn btn-secondary"{% if not can_edit %} data-disabled{% endif %}>{{ 'section.edit'|trans|desc('Edit') }}</a>
                         {{ form_start(delete_form, {
