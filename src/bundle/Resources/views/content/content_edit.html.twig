@@ -15,6 +15,7 @@
 {% block javascripts %}
     {%  javascripts
         '@EzPlatformAdminUiBundle/Resources/public/js/alloyeditor/dist/*.js'
+        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/fieldType/base/base-field.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/fieldType/*'
     %}
@@ -25,6 +26,7 @@
 {% block stylesheets %}
     {% stylesheets
         'bundles/ezplatformadminui/css/alloyeditor/alloyeditor-ez.css'
+        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.css'
     %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
