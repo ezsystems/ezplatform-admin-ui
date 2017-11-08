@@ -92,15 +92,19 @@ class ContentViewController extends Controller
         $locationCopyType = $this->formFactory->copyLocation(
             new LocationCopyData($location)
         );
+
         $locationMoveType = $this->formFactory->moveLocation(
             new LocationMoveData($location)
         );
+
         $locationTrashType = $this->formFactory->trashLocation(
             new LocationTrashData($location)
         );
+
         $contentDraftCreateType = $this->formFactory->createContentDraft(
             new ContentDraftCreateData($content->contentInfo, $versionInfo)
         );
+
         $contentCreateType = $this->formFactory->createContent(
             $this->getContentCreateData($location)
         );

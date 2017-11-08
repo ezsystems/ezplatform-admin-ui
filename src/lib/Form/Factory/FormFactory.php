@@ -23,6 +23,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
@@ -54,6 +55,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyUpdateType;
@@ -307,6 +309,21 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationCopyType::class);
 
         return $this->formFactory->createNamed($name, LocationCopyType::class, $data);
+    }
+
+    /**
+     * @param LocationUpdateData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function updateLocation(
+        LocationUpdateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationUpdateType::class);
+
+        return $this->formFactory->createNamed($name, LocationUpdateType::class, $data);
     }
 
     /**

@@ -284,6 +284,11 @@ ezplatform.location.trash:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location:trash'
 
+ezplatform.location.update:
+    path: /location/update
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Location:update'
 
 # LocationView / Translation tab
 
