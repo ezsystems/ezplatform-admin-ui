@@ -1,4 +1,4 @@
 {%- block ezplatform_fieldtype_ezrichtext_widget -%}
     {{- form_widget(form, {'attr': attr}) -}}
-    <div class="ez-data-source__richtext" id="ez-richtext__editable"></div>
+    <div class="ez-data-source__richtext" id="{{ form.vars.id }}__editable"></div>
 {%- endblock -%}
