@@ -6,7 +6,9 @@
         <div id="react-udw"></div>
         {{ form_start(form) }}
         {% for field in form.fieldsData -%}
-            {{- form_row(field) -}}
+            {% if field.vars.value is defined %}
+                {{- form_row(field.value) -}}
+            {% endif %}
         {%- endfor %}
         {{ form_end(form) }}
     </section>
