@@ -10,6 +10,7 @@ use eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use eZ\Publish\API\Repository\Values\Content\Section;
 
 /**
  * Maps between SectionUpdateStruct and SectionUpdateData objects.
@@ -31,7 +32,7 @@ class SectionUpdateMapper implements DataMapperInterface
             throw new InvalidArgumentException('value', 'must be an instance of ' . SectionUpdateStruct::class);
         }
 
-        return new SectionUpdateData($value->identifier, $value->name);
+        return new SectionUpdateData(new Section(['identifier' => $value->identifier, 'name' => $value->name]));
     }
 
     /**
