@@ -29,7 +29,7 @@ class PolicyCreateData
      *
      * @return PolicyCreateData
      */
-    public function setModule(string $module): PolicyCreateData
+    public function setModule(string $module): self
     {
         $this->module = $module;
 
@@ -49,7 +49,7 @@ class PolicyCreateData
      *
      * @return PolicyCreateData
      */
-    public function setFunction(string $function): PolicyCreateData
+    public function setFunction(string $function): self
     {
         $this->function = $function;
 
@@ -61,7 +61,7 @@ class PolicyCreateData
      *
      * @return PolicyCreateData
      */
-    public function setPolicy(array $policy): PolicyCreateData
+    public function setPolicy(array $policy): self
     {
         $this->setModule($policy['module']);
         $this->setFunction($policy['function']);

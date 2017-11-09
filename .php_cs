@@ -24,6 +24,8 @@ return PhpCsFixer\Config::create()
             'location' => 'after_open',
             'separate' => 'top',
         ],
+        'yoda_style' => false,
+        'no_break_comment' => false,
     ])
     ->setRiskyAllowed(true)
     ->setFinder(

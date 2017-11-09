@@ -72,7 +72,7 @@ class PolicyData
         return $this->function;
     }
 
-    public static function factory(Policy $policy): PolicyData
+    public static function factory(Policy $policy): self
     {
         $data = new self();
         $data->module = $policy->module;

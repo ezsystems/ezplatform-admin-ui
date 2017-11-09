@@ -35,7 +35,7 @@ class ContentTypeGroupData
         $this->identifier = $identifier;
     }
 
-    public static function factory(ContentTypeGroup $group): ContentTypeGroupData
+    public static function factory(ContentTypeGroup $group): self
     {
         $data = new self();
         $data->identifier = $group->identifier;

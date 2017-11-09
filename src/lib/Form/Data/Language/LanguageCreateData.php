@@ -30,7 +30,7 @@ class LanguageCreateData
      *
      * @return LanguageCreateData
      */
-    public function setName(string $name): LanguageCreateData
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -50,7 +50,7 @@ class LanguageCreateData
      *
      * @return LanguageCreateData
      */
-    public function setLanguageCode(string $languageCode): LanguageCreateData
+    public function setLanguageCode(string $languageCode): self
     {
         $this->languageCode = $languageCode;
 
@@ -70,7 +70,7 @@ class LanguageCreateData
      *
      * @return LanguageCreateData
      */
-    public function setEnabled(bool $enabled): LanguageCreateData
+    public function setEnabled(bool $enabled): self
     {
         $this->enabled = $enabled;
 

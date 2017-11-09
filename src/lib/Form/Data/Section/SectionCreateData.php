@@ -42,7 +42,7 @@ class SectionCreateData
      *
      * @return SectionCreateData
      */
-    public function setIdentifier(?string $identifier): SectionCreateData
+    public function setIdentifier(?string $identifier): self
     {
         $this->identifier = $identifier;
 
@@ -62,7 +62,7 @@ class SectionCreateData
      *
      * @return SectionCreateData
      */
-    public function setName(?string $name): SectionCreateData
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
