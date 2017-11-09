@@ -35,7 +35,7 @@ class RoleData
         $this->identifier = $identifier;
     }
 
-    public static function factory(Role $role): RoleData
+    public static function factory(Role $role): self
     {
         return new self($role->identifier);
     }
