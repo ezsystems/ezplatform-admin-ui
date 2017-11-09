@@ -13,6 +13,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper;
 use PHPUnit\Framework\TestCase;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use eZ\Publish\API\Repository\Values\Content\Section;
 
 class SelectionUpdateMapperTest extends TestCase
 {
@@ -96,6 +97,6 @@ class SelectionUpdateMapperTest extends TestCase
      */
     private function createData(array $properties): SectionUpdateData
     {
-        return new SectionUpdateData($properties['identifier'], $properties['name']);
+        return new SectionUpdateData(new Section($properties));
     }
 }
