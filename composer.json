@@ -26,6 +26,9 @@
         "friendsofphp/php-cs-fixer": "~2.7.1",
         "phpunit/phpunit": "^6.4"
     },
+    "scripts": {
+        "fix-cs": "@php ./vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
