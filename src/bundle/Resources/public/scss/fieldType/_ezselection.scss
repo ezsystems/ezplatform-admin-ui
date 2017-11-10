@@ -1,0 +1,112 @@
+.ez-field-edit--ezselection {
+    .ez-data-source {
+        position: relative;
+        color: $ez-color-base-dark;
+        font-weight: bold;
+        cursor: pointer;
+
+        &__selected {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+            width: 50%;
+            border: 1px solid $ez-ground-primary;
+            padding: .1rem 2rem .1rem .1rem;
+            border-radius: 5px;
+            position: relative;
+            min-height: 2.8rem;
+
+            &:after {
+                content: '';
+                width: 2rem;
+                height: 100%;
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+                background-color: $ez-ground-primary;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            &:before {
+                content: '';
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 10px 5px 0 5px;
+                border-color: $ez-white transparent transparent transparent;
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translate(50%, -50%);
+                z-index: 1;
+            }
+
+            .selected-item {
+                background: $ez-ground-primary;
+                width: auto;
+                display: inline-block;
+                padding: .3rem 1.5rem .3rem .3rem;
+                margin: .2rem;
+                border-radius: 5px;
+                position: relative;
+
+                .remove-selection {
+                    width: 1rem;
+                    height: 1rem;
+                    display: inherit;
+                    position: absolute;
+                    top: 50%;
+                    right: .5rem;
+                    transform: translateY(-50%);
+
+                    &:before,
+                    &:after {
+                        content: '';
+                        width: .1rem;
+                        height: 1rem;
+                        background-color: $ez-color-base-dark;
+                        content: '';
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                    }
+
+                    &:before {
+                        transform: translate(50%, -50%) rotate(-45deg);
+                    }
+
+                    &:after {
+                        transform: translate(50%, -50%) rotate(45deg);
+                    }
+                }
+            }
+        }
+
+        &__options {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+            position: absolute;
+            top: 100%;
+            transform: scaleY(1);
+            transform-origin: top center;
+            transition: all .2s $ez-admin-transition;
+            width: 50%;
+            border: 1px solid $ez-ground-primary;
+            background-color: $ez-white;
+
+            &--hidden {
+                transform: scaleY(0);
+            }
+
+            .option-item {
+                padding: .2rem .5rem;
+
+                &.option-selected {
+                    background-color: $ez-ground-primary;
+                }
+            }
+        }
+    }
+}
