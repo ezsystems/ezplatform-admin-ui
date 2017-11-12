@@ -6,10 +6,15 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\SectionService;
+use eZ\Publish\API\Repository\Values\Content\Query;
+use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\Content\Section;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use eZ\Publish\API\Repository\SearchService;
+use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
+use eZ\Publish\Core\Repository\SearchService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
@@ -19,6 +24,10 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
+use EzSystems\EzPlatformAdminUiBundle\View\EzView;
+use EzSystems\EzPlatformAdminUiBundle\View\Template\EzTemplate;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,6 +59,15 @@ class SectionController extends Controller
     /** @var SubmitHandler */
     private $submitHandler;
 
+    /** @var ContentTypeService */
+    private $contentTypeService;
+
+    /** @var LocationService */
+    private $locationService;
+
+    /** @var PathService */
+    private $pathService;
+
     /**
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
@@ -59,6 +77,9 @@ class SectionController extends Controller
      * @param SectionCreateMapper $sectionCreateMapper
      * @param SectionUpdateMapper $sectionUpdateMapper
      * @param SubmitHandler $submitHandler
+     * @param ContentTypeService $contentTypeService
+     * @param LocationService $locationService
+     * @param PathService $pathService
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -68,7 +89,10 @@ class SectionController extends Controller
         FormFactory $formFactory,
         SectionCreateMapper $sectionCreateMapper,
         SectionUpdateMapper $sectionUpdateMapper,
-        SubmitHandler $submitHandler
+        SubmitHandler $submitHandler,
+        ContentTypeService $contentTypeService,
+        LocationService $locationService,
+        PathService $pathService
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -78,6 +102,9 @@ class SectionController extends Controller
         $this->sectionCreateMapper = $sectionCreateMapper;
         $this->sectionUpdateMapper = $sectionUpdateMapper;
         $this->submitHandler = $submitHandler;
+        $this->contentTypeService = $contentTypeService;
+        $this->locationService = $locationService;
+        $this->pathService = $pathService;
     }
 
     /**
@@ -128,17 +155,66 @@ class SectionController extends Controller
             new SectionDeleteData($section)
         )->createView();
 
+        return $this->render('EzPlatformAdminUiBundle:admin/section:view.html.twig', [
+            'section' => $section,
+            'form_section_delete' => $sectionDeleteForm,
+            'deletable' => !$this->sectionService->isSectionUsed($section),
+            'can_edit' => $this->isGranted(new Attribute('section', 'edit')),
+        ]);
+    }
+
+    /**
+     * Fragment action which renders list of contents assigned to section.
+     *
+     * @param Section $section
+     * @param int $page Current page
+     * @param int $limit Number of items per page
+     *
+     * @return Response
+     */
+    public function viewSectionContentAction(Section $section, int $page = 1, int $limit = 10): Response
+    {
         $sectionContentAssignForm = $this->formFactory->assignContentSectionForm(
             new SectionContentAssignData($section)
         )->createView();
 
-        return $this->render('EzPlatformAdminUiBundle:admin/section:view.html.twig', [
+        $query = new Query();
+        $query->sortClauses[] = new SortClause\ContentName(Query::SORT_ASC);
+        $query->filter = new Query\Criterion\SectionId([
+            $section->id,
+        ]);
+
+        $pagerfanta = new Pagerfanta(new ContentSearchAdapter($query, $this->searchService));
+        $pagerfanta->setMaxPerPage($limit);
+        $pagerfanta->setCurrentPage($page);
+
+        $assignedContent = [];
+        foreach ($pagerfanta as $content) {
+            $assignedContent[] = [
+                'id' => $content->id,
+                'name' => $content->getName(),
+                'type' => $this->contentTypeService->loadContentType($content->contentInfo->contentTypeId)->getName(),
+                'path' => $this->pathService->loadPathLocations(
+                    $this->locationService->loadLocation($content->contentInfo->mainLocationId)
+                ),
+            ];
+        }
+
+        $routeGenerator = function ($page) use ($section) {
+            return $this->generateUrl('ezplatform.section.view', [
+                'sectionId' => $section->id,
+                'page' => $page,
+            ]);
+        };
+
+        $pagination = (new EzView(new EzTemplate($this->translator)))->render($pagerfanta, $routeGenerator);
+
+        return $this->render('EzPlatformAdminUiBundle:admin/section:assigned_content.html.twig', [
             'section' => $section,
-            'form_section_delete' => $sectionDeleteForm,
             'form_section_content_assign' => $sectionContentAssignForm,
-            'content_count' => $this->sectionService->countAssignedContents($section),
-            'deletable' => !$this->sectionService->isSectionUsed($section),
-            'can_edit' => $this->isGranted(new Attribute('section', 'edit')),
+            'assigned_content' => $assignedContent,
+            'pagerfanta' => $pagerfanta,
+            'pagination' => $pagination,
             'can_assign' => $this->isGranted(new Attribute('section', 'assign')),
         ]);
     }

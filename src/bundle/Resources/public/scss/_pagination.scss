@@ -1,0 +1,89 @@
+@import '../../../../../../ezplatform-admin-ui-assets/Resources/public/vendors/bootstrap/scss/mixins/border-radius';
+
+
+// Pagination
+
+$border-width: 						  1px !default;
+$border-radius: 					  0.3rem;
+$enable-rounded:            		  true !default;
+
+$pagination-padding-y:                .5rem !default;
+$pagination-padding-x:                .75rem !default;
+$pagination-padding-y-sm:             .25rem !default;
+$pagination-padding-x-sm:             .5rem !default;
+$pagination-padding-y-lg:             .75rem !default;
+$pagination-padding-x-lg:             1.5rem !default;
+$pagination-line-height:              1.25 !default;
+$pagination-margin: 				  0.25rem !default;
+$pagination-font-size: 				  0.9rem !default;
+
+$pagination-color:                     $black !default;
+$pagination-bg:                        transparent !default;
+$pagination-border-width:              $border-width !default;
+$pagination-border-color:              #ddd !default;
+
+$pagination-hover-color:               red !default;
+$pagination-hover-bg:                  $gray-200 !default;
+$pagination-hover-border-color:        #ddd !default;
+
+$pagination-active-color:              $black !default;
+$pagination-active-bg:                 $white !default;
+$pagination-active-border-color:       $white !default;
+
+$pagination-disabled-color:            $white !default;
+$pagination-disabled-bg:               $gray-400 !default;
+$pagination-disabled-border-color:     $gray-400 !default;
+
+.ez-pagination {
+	display: flex;
+	// 1-2: Disable browser default list styles
+	padding-left: 0; // 1
+	list-style: none; // 2
+	font-size: $pagination-font-size;
+	@include border-radius();
+}
+
+.page-item {
+	&:first-child {
+		.page-link {
+			margin-left: 0;
+			@include border-radius($border-radius);
+			background-color: $ez-color-secondary-hover;
+			color: $white;
+		}
+	}
+	&:last-child {
+		.page-link {
+			@include border-radius($border-radius);
+			background-color: $ez-color-secondary-hover;
+			color: $white;
+		}
+	}
+
+	&.active .page-link {
+		z-index: 2;
+		color: $pagination-active-color;
+		background-color: $pagination-active-bg;
+		border: 0 none;
+		font-weight: bold;
+	}
+
+	&.disabled .page-link {
+		color: $pagination-disabled-color;
+		pointer-events: none;
+		background-color: $pagination-disabled-bg;
+		border-color: $pagination-disabled-border-color;
+	}
+}
+
+.page-link {
+	position: relative;
+	display: block;
+	padding: $pagination-padding-y $pagination-padding-x;
+	margin: $pagination-margin;
+	line-height: $pagination-line-height;
+	color: $pagination-color;
+	background-color: $pagination-bg;
+	border: 0 none;
+	@include border-radius(20px);
+}
