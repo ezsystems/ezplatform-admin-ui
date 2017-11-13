@@ -326,6 +326,12 @@ ezplatform.location.swap:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location:swap'
 
+ezplatform.content.update_main_location:
+    path: /content/update-main-location
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Content:updateMainLocation'
+
 # Content Draft
 
 ezplatform.content_draft.create:

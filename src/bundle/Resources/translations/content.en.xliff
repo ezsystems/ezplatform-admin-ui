@@ -11,6 +11,11 @@
         <target state="new">New Version Draft for '%name%' created.</target>
         <note>key: content.create_draft.success</note>
       </trans-unit>
+      <trans-unit id="5f36fd5bb4e6938a731079f403467900e0396ed2" resname="content.main_location_update.success">
+        <source>Main location for '%name%' updated.</source>
+        <target state="new">Main location for '%name%' updated.</target>
+        <note>key: content.main_location_update.success</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

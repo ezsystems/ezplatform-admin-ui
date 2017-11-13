@@ -38,13 +38,16 @@
                         {% endif %}
                     </td>
                     <td></td>
-                    <td>{% if location.main %}Yes{% else %}No{% endif %}</td>
+                    <td>
+                        <input {{ location.main ? 'checked' }} type="radio" name="updateMainLocation" value="{{ location.id }}">
+                    </td>
                 </tr>
             {% endfor %}
         {% endif %}
         </tbody>
     </table>
     {{ form_end(form_content_location_remove) }}
+    {{ form(form_content_location_main_update, {'action': path('ezplatform.content.update_main_location')})}}
 </section>
 
 {% include 'EzPlatformAdminUiBundle:content/tab/locations:panel_swap.html.twig' with {'form': form_content_location_swap} %}
