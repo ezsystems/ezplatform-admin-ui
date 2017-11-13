@@ -122,3 +122,11 @@
     {{ form_widget(form._token) }}
     {{ form_end(form, {'render_rest': false }) }}
 {% endblock %}
+
+{% block javascripts %}
+    {%  javascripts
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.contenttype.selection.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
