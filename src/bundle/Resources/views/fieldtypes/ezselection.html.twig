@@ -1,0 +1,15 @@
+{%- block ezplatform_fieldtype_ezselection_widget -%}
+    {% set attr = attr|merge({'hidden': 'hidden'}) %}
+    {{ block('choice_widget') }}
+
+    <ul class="ez-data-source__selected">
+        {% for choice in choices if choice is selectedchoice(value) %}
+            <li data-value="{{ choice.value }}">{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}<span class="remove-selection"></span></li>
+        {% endfor %}
+    </ul>
+    <ul class="ez-data-source__options ez-data-source__options--hidden">
+        {% for choice in choices %}
+            <li data-value="{{ choice.value }}"{% if choice is selectedchoice(value) %} class="option-selected"{% endif %}>{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}</li>
+        {% endfor %}
+    </ul>
+{%- endblock -%}
