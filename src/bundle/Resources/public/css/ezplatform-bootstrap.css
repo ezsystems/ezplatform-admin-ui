@@ -1,0 +1,64 @@
+/*
+Error: File to import not found or unreadable: ../../../../../../../../web/assets/vendor/bootstrap/scss/bootstrap.scss.
+       Load path: /Users/UI-Designer/Desktop/Platform-admin-ui/ezplatform-admin-ui/src/bundle/Resources/public/scss
+        on line 5 of scss/ezplatform-bootstrap.scss
+
+1: 
+2: @import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i');
+3: @import 'custom';
+4: //I know, I know... Darek will handle this one
+5: @import '../../../../../../../../web/assets/vendor/bootstrap/scss/bootstrap.scss';
+6: 
+7: .form-group {
+8:     margin: 0;
+9: }
+
+Backtrace:
+scss/ezplatform-bootstrap.scss:5
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/import_node.rb:67:in `rescue in import'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/import_node.rb:45:in `import'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/import_node.rb:28:in `imported_file'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/import_node.rb:37:in `css_import?'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:314:in `visit_import'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `block in with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:135:in `with_frame'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:52:in `map'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:161:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:10:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/engine.rb:307:in `render_with_sourcemap'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:209:in `each'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:443:in `on_file_changed'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:320:in `block in watch'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/config.rb:23:in `call'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/config.rb:23:in `call'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:115:in `_process_changes'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:19:in `block in loop_for'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop_for'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:84:in `_wait_for_changes'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:42:in `block in setup'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/internals/thread_pool.rb:6:in `call'
+/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/internals/thread_pool.rb:6:in `block in add'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: ../../../../../../../../web/assets/vendor/bootstrap/scss/bootstrap.scss.\A        Load path: /Users/UI-Designer/Desktop/Platform-admin-ui/ezplatform-admin-ui/src/bundle/Resources/public/scss\A         on line 5 of scss/ezplatform-bootstrap.scss\A \A 1: \A 2: @import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i');\A 3: @import 'custom';\A 4: //I know, I know... Darek will handle this one\A 5: @import '../../../../../../../../web/assets/vendor/bootstrap/scss/bootstrap.scss';\A 6: \A 7: .form-group {\A 8:     margin: 0;\A 9: }"; }
