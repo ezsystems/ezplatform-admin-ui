@@ -1,0 +1,34 @@
+.ez-login {
+    height: 100%;
+
+    &__image {
+        background: url('/bundles/ezplatformadminui/img/login-background.jpg');
+        background-size: cover;
+    }
+
+    &__form {
+        background: linear-gradient(to bottom, rgba(247,138,83,1) 0%, rgba(247,138,83,1) 75%, rgba(241,91,16,1) 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: $ez-white;
+
+        &-label {
+            margin-bottom: 0;
+            margin-top: 1rem;
+        }
+
+        &-input {
+            border: none;
+        }
+
+        &-wrapper {
+            width: 18rem;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+}
