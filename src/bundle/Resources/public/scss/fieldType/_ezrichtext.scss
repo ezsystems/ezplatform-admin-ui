@@ -1,0 +1,56 @@
+@import '../custom';
+
+.ez-field-edit--ezrichtext {
+    .ez-data-source__input {
+        opacity: 0;
+        height: 1px;
+    }
+
+    .ez-data-source__richtext {
+        background-color: $ez-white;
+        min-height: 100px;
+        border: 1px solid rgba(0,0,0,0.15);
+        border-radius: .25rem;
+        display: inline-block;
+        width: 100%;
+        padding: .5rem;
+
+        .is-block-focused,
+        .cke_widget_wrapper.cke_widget_focused > .cke_widget_element {
+            outline: 2px dashed $ez-ground-base-dark;
+            outline-offset: 1px;
+        }
+    }
+
+    [data-ezalign="right"] {
+        float: right;
+    }
+
+    [data-ezalign="left"] {
+        float: left;
+    }
+
+    [data-ezalign="center"] {
+        text-align: center;
+    }
+
+    [data-ezelement="ezembed"] {
+        background: $ez-ground-base;
+        border: 1px solid $ez-ground-base-dark;
+        font-size: 1.1rem;
+        display: inline-block;
+        margin: 0.5rem 0.3rem;
+        padding: 0.3rem;
+        box-sizing: border-box;
+        line-height: 1;
+        min-height: auto;
+
+        [data-ezelement="ezconfig"] {
+            display: none;
+        }
+
+        .ez-embed-content {
+            margin-bottom: 0;
+        }
+    }
+}

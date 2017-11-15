@@ -1,0 +1,96 @@
+.ez-ae-edit-link {
+    display: flex;
+    flex-direction: column;
+    padding: .5rem;
+
+    &__row {
+        display: flex;
+        align-items: flex-end;
+
+        &:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+
+        &.ez-ae-edit-link__row--actions {
+            justify-content: flex-end;
+        }
+    }
+
+    .ez-ae-edit-link__block {
+        &.ez-ae-edit-link__block--url {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 25rem;
+        }
+
+        &.ez-ae-edit-link__block--title,
+        &.ez-ae-edit-link__block--target {
+            display: flex;
+            flex-direction: column;
+
+            .ez-ae-edit-link__text {
+                margin-bottom: 0.3rem;
+            }
+        }
+
+        &.ez-ae-edit-link__block--title {
+            width: 24rem;
+            margin-right: 1rem;
+        }
+
+        &.ez-ae-edit-link__block--target {
+            .ez-ae-edit-link__choice {
+                height: 2.25rem;
+
+                .ez-ae-edit-link__label {
+                    margin-bottom: 0;
+
+                    span {
+                        background-color: $ez-color-base-medium;
+                        height: 2.25rem;
+                        padding: .7rem .5rem;
+                        display: block;
+                        color: $ez-color-base-dark;
+                    }
+
+                    input:checked + span {
+                        background-color: $ez-ground-base-dark;
+                        color: $ez-white;
+                    }
+
+                    [type="radio"] {
+                        display: none;
+                    }
+
+                    &.ez-ae-edit-link__label--same-tab {
+                        span {
+                            border-top-left-radius: 5px;
+                            border-bottom-left-radius: 5px;
+                        }
+                    }
+
+                    &.ez-ae-edit-link__label--new-tab {
+                        span {
+                            border-top-right-radius: 5px;
+                            border-bottom-right-radius: 5px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.ez-ae-edit-link__block--separator {
+            line-height: 2.25rem;
+            padding: 0 .5rem;
+        }
+
+        .ez-ae-edit-link__label {
+            margin-bottom: .3rem;
+        }
+
+        .ez-ae-edit-link__input {
+            height: 2.25rem;
+        }
+    }
+}

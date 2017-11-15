@@ -4,3 +4,4 @@ yarn.lock
 yarn-error.log
 /vendor
 /.php_cs.cache
+package-lock.json
