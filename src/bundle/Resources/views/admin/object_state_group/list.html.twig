@@ -1,0 +1,65 @@
+{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+
+{% trans_default_domain 'object_state' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { value: 'object_state_group.breadcrumb.list'|trans|desc('State') },
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'object_state_group.view.list.title'|trans|desc('Object State Groups'),
+        iconName: 'object-states'
+    } %}
+{% endblock %}
+
+{% block content %}
+    <div id="react-udw"></div>
+    <section class="container mt-5">
+        <div class="ez-table-header">
+            <h5>{{ 'object_state_group.view.list.title'|trans|desc('Object State Groups') }}</h5>
+            <div>
+                <a href="{{ path('ezplatform.object_state.group.add') }}" class="btn btn-primary"
+                   data-icon="&#xe616;"{% if not can_administrate %} data-disabled{% endif %}>{{ 'object_state_group.new'|trans|desc('Create a new Object State Group') }}</a>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'object_state_group.name'|trans|desc('Name') }}</th>
+                    <th>{{ 'object_state_group.identifier'|trans|desc('Identifier') }}</th>
+                    <th>{{ 'object_state_group.id'|trans|desc('ID') }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for object_state_group in object_state_groups %}
+                {% set delete_form = form_object_state_group_delete[object_state_group.id] %}
+                {% form_theme delete_form 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+                {% set edit_url = path('ezplatform.object_state.group.update', {
+                    'objectStateGroupId': object_state_group.id
+                }) %}
+                <tr>
+                    <td><a href="{{ path( 'ezplatform.object_state.group.view', {'objectStateGroupId': object_state_group.id} ) }}">{{ object_state_group.name }}</a></td>
+                    <td>{{ object_state_group.identifier }}</td>
+                    <td>{{ object_state_group.id }}</td>
+                    <td class="text-right">
+                        <a href="{{ edit_url }}" class="btn btn-secondary"{% if not can_administrate %} data-disabled{% endif %}>
+                            {{ 'object_state_group.view.list.action.edit'|trans|desc('Edit') }}
+                        </a>
+                        {{ form_start(delete_form, {
+                            "action": path("ezplatform.object_state.group.delete", {"objectStateGroupId": object_state_group.id}),
+                            'attr': {'class': 'd-inline-block'}
+                        }) }}
+                        {{ form_widget(delete_form.delete, { 'attr': {'class': 'btn btn-danger', 'disabled': not can_administrate }}) }}
+                        {{ form_end(delete_form) }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

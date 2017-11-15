@@ -65,3 +65,13 @@ services:
         arguments:
             $defaultPaginationLimit: '$pagination.version_draft_limit$'
             $siteAccessLanguages: '$languages$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\ObjectStateController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $languages: '$languages$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\ObjectStateGroupController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $languages: '$languages$'

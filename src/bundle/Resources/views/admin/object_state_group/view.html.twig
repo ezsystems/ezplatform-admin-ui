@@ -1,0 +1,46 @@
+{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+
+{% trans_default_domain 'object_state' %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.object_state.groups.list'), value: 'object_state_group.breadcrumb.list'|trans|desc('State') },
+        { value: 'object_state_group.breadcrumb.view'|trans({ '%name%': object_state_group.name })|desc('"%name%" Object State Group') },
+    ]} %}
+{% endblock %}
+
+{% block pageTitle %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'object_state_group.view.view.title'|trans({ '%name%': object_state_group.name })|desc('"%name%" Object State Group'),
+        iconName: 'object-states'
+    } %}
+{% endblock %}
+
+{% block content %}
+    <section class="container">
+        <div>
+            <dl>
+                <dt>{{ 'object_state_group.name.label'|trans|desc('Name') }}</dt>
+                <dd>{{ object_state_group.name }}</dd>
+                <dt>{{ 'object_state_group.identifier.label'|trans|desc('Identifier') }}</dt>
+                <dd>{{ object_state_group.identifier }}</dd>
+                <dt>{{ 'object_state_group.id.label'|trans|desc('ID') }}</dt>
+                <dd>{{ object_state_group.id }}</dd>
+            </dl>
+            {% set edit_url = path('ezplatform.object_state.group.update', {
+                'objectStateGroupId': object_state_group.id
+            }) %}
+            <a href="{{ edit_url }}" class="btn btn-secondary">
+                {{ 'object_state_group.view.list.action.edit'|trans|desc('Edit') }}
+            </a>
+            {{ form_start(delete_form, {
+                "action": path("ezplatform.object_state.group.delete", {"objectStateGroupId": object_state_group.id}),
+                'attr': {'class': 'd-inline-block'}
+            }) }}
+            {{ form_widget(delete_form.delete, { 'attr': {'class': 'btn btn-danger' }}) }}
+            {{ form_end(delete_form) }}
+        </div>
+    </section>
+    {{ render( controller( "EzPlatformAdminUiBundle:ObjectState:list", { "objectStateGroupId": object_state_group.id } ) ) }}
+{% endblock %}

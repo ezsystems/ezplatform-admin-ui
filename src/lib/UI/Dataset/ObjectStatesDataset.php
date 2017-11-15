@@ -22,7 +22,7 @@ class ObjectStatesDataset
     /** @var ValueFactory */
     protected $valueFactory;
 
-    /** @var UIValue\Content\ObjectState[] */
+    /** @var UIValue\ObjectState\ObjectState[] */
     protected $data;
 
     /**
@@ -53,7 +53,7 @@ class ObjectStatesDataset
     }
 
     /**
-     * @return UIValue\ObjectSate\ObjectSate[]
+     * @return UIValue\ObjectState\ObjectState[]
      */
     public function getObjectStates(): array
     {

@@ -156,6 +156,11 @@
         <target state="new">Sections</target>
         <note>key: main__admin__sections</note>
       </trans-unit>
+      <trans-unit id="2e4658356556c8eeedf33794704895875839e598" resname="main__admin__state">
+        <source>State</source>
+        <target state="new">State</target>
+        <note>key: main__admin__state</note>
+      </trans-unit>
       <trans-unit id="2cc622305036d330c00683520df433ef82f60c9a" resname="main__admin__systeminfo">
         <source>System Information</source>
         <target state="new">System Information</target>

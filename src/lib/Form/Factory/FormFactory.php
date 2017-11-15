@@ -32,6 +32,13 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PoliciesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
@@ -80,6 +87,13 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordChangeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PoliciesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyDeleteType;
@@ -920,5 +934,119 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(CustomUrlRemoveType::class);
 
         return $this->formFactory->createNamed($name, CustomUrlRemoveType::class, $data ?? new CustomUrlRemoveData());
+    }
+
+    /**
+     * @param ObjectStateGroupCreateData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function createObjectStateGroup(
+        ?ObjectStateGroupCreateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ObjectStateGroupCreateType::class);
+
+        return $this->formFactory->createNamed(
+            $name,
+            ObjectStateGroupCreateType::class,
+            $data ?? new ObjectStateGroupCreateData()
+        );
+    }
+
+    /**
+     * @param ObjectStateGroupDeleteData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function deleteObjectStateGroup(
+        ObjectStateGroupDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('delete-object-state-group-%d', $data->getObjectStateGroup()->id);
+
+        return $this->formFactory->createNamed($name, ObjectStateGroupDeleteType::class, $data);
+    }
+
+    /**
+     * @param ObjectStateGroupUpdateData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function updateObjectStateGroup(
+        ObjectStateGroupUpdateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('update-object-state-group-%d', $data->getObjectStateGroup()->id);
+
+        return $this->formFactory->createNamed($name, ObjectStateGroupUpdateType::class, $data);
+    }
+
+    /**
+     * @param ObjectStateCreateData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function createObjectState(
+        ?ObjectStateCreateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ObjectStateCreateType::class);
+
+        return $this->formFactory->createNamed(
+            $name,
+            ObjectStateCreateType::class,
+            $data ?? new ObjectStateCreateData()
+        );
+    }
+
+    /**
+     * @param ObjectStateDeleteData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function deleteObjectState(
+        ObjectStateDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('delete-object-state-%d', $data->getObjectState()->id);
+
+        return $this->formFactory->createNamed($name, ObjectStateDeleteType::class, $data);
+    }
+
+    /**
+     * @param ObjectStateUpdateData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function updateObjectState(
+        ObjectStateUpdateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('update-object-state-%d', $data->getObjectState()->id);
+
+        return $this->formFactory->createNamed($name, ObjectStateUpdateType::class, $data);
+    }
+
+    /**
+     * @param ContentObjectStateUpdateData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     */
+    public function updateContentObjectState(
+        ContentObjectStateUpdateData $data,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('update-content-%d-object-state-group-%d', $data->getContentInfo()->id,
+            $data->getObjectStateGroup()->id);
+
+        return $this->formFactory->createNamed($name, ContentObjectStateUpdateType::class, $data);
     }
 }

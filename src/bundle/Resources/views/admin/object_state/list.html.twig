@@ -1,0 +1,49 @@
+{#{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}#}
+{% trans_default_domain 'object_state' %}
+
+{% block content %}
+    <section class="container mt-5">
+        <div class="ez-table-header">
+            <h5>{{ 'object_state.states.title'|trans|desc('Object States') }}</h5>
+            <div>
+                <a href="{{ path('ezplatform.object_state.state.add', {'objectStateGroupId': object_state_group.id} ) }}" class="btn btn-primary"
+                   data-icon="&#xe616;"{% if not can_administrate %} data-disabled{% endif %}>{{ 'object_state.new'|trans|desc('Create a new Object State') }}</a>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'object_state.name'|trans|desc('Name') }}</th>
+                    <th>{{ 'object_state.identifier'|trans|desc('Identifier') }}</th>
+                    <th>{{ 'object_state.id'|trans|desc('ID') }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for object_state in object_states %}
+                {% set delete_form = form_object_state_delete[object_state.id] %}
+                {% form_theme delete_form 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+                {% set edit_url = path('ezplatform.object_state.state.update', {
+                    'objectStateId': object_state.id
+                }) %}
+                <tr>
+                    <td><a href="{{ path( 'ezplatform.object_state.state.view', {'objectStateId': object_state.id} ) }}">{{ object_state.name }}</a></td>
+                    <td>{{ object_state.identifier }}</td>
+                    <td>{{ object_state.id }}</td>
+                    <td class="text-right">
+                        <a href="{{ edit_url }}" class="btn btn-secondary"{% if not can_administrate %} data-disabled{% endif %}>
+                            {{ 'object_state.view.action.edit'|trans|desc('Edit') }}
+                        </a>
+                        {{ form_start(delete_form, {
+                            "action": path("ezplatform.object_state.state.delete", {"objectStateId": object_state.id}),
+                            'attr': {'class': 'd-inline-block'}
+                        }) }}
+                        {{ form_widget(delete_form.delete, { 'attr': {'class': 'btn btn-danger', 'disabled': not can_administrate }}) }}
+                        {{ form_end(delete_form) }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

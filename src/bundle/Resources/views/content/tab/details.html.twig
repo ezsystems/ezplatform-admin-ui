@@ -92,6 +92,7 @@
         <th>{{ 'tab.details.state_name'|trans()|desc('Name') }}</th>
         <th>{{ 'tab.details.state_identifier'|trans()|desc('Identifier') }}</th>
         <th>{{ 'tab.details.state_id'|trans()|desc('State ID') }}</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -103,6 +104,25 @@
             <td>{{ objectState.name }}</td>
             <td>{{ objectState.identifier }}</td>
             <td>{{ objectState.id }}</td>
+            <td>
+                {{ form_start(form_state_update[objectState.objectStateGroup.id], {
+                    'method': 'POST',
+                    'action': path('ezplatform.object_state.contentstate.update', {
+                        'contentInfoId': contentInfo.id,
+                        'objectStateGroupId': objectState.objectStateGroup.id
+                    }),
+                    'attr': {'class': 'form-inline'}
+                }) }}
+                {{ form_row(form_state_update[objectState.objectStateGroup.id].contentInfo) }}
+                {{ form_row(form_state_update[objectState.objectStateGroup.id].objectStateGroup) }}
+                {{ form_row(form_state_update[objectState.objectStateGroup.id].objectState) }}
+
+                <button type="submit" class="btn btn-primary ml-1"{% if not state_update_disabled[objectState.objectStateGroup.id] %}data-disabled{% endif %}>
+                    {{ 'tab.details.sub_items_listing_by_set'|trans|desc('Set') }}
+                </button>
+
+                {{ form_end(form_state_update[objectState.objectStateGroup.id]) }}
+            </td>
         </tr>
     {% endfor %}
     </tbody>
