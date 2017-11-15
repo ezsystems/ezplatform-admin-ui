@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 20.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 72 72" style="enable-background:new 0 0 72 72;" xml:space="preserve">
-<g>
-	<path d="M67.9,4v64h-64V4H67.9 M71.9,0h-72v72h72V0L71.9,0z"/>
-</g>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+<title>square</title>
+<path fill="#333" d="M30.667 32h-29.333c-0.736 0-1.333-0.597-1.333-1.333v0-29.333c0-0.736 0.597-1.333 1.333-1.333v0h29.333c0.736 0 1.333 0.597 1.333 1.333v0 29.333c0 0.736-0.597 1.333-1.333 1.333v0zM2.667 29.333h26.667v-26.667h-26.667z"></path>
 </svg>
