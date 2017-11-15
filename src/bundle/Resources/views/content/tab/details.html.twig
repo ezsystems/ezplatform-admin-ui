@@ -2,6 +2,8 @@
 
 {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.content_details'|trans()|desc('Content details') } %}
 
+{% form_theme form_location_update '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
+
 <table class="table">
     <thead>
     <tr>
@@ -14,11 +16,11 @@
     <tbody>
     <tr>
         <td>
-            {% if creator is not empty  %} {{ ez_content_name(creator) }} {% endif %}
+            {% if creator is not empty %} {{ ez_content_name(creator) }} {% endif %}
             ({{ contentInfo.publishedDate|localizeddate('medium', 'short', app.request.locale) }})
         </td>
         <td>
-            {% if lastContributor is not empty  %}{{ ez_content_name(lastContributor) }} {% endif %}
+            {% if lastContributor is not empty %}{{ ez_content_name(lastContributor) }} {% endif %}
             ({{ versionInfo.modificationDate|localizeddate('medium', 'short', app.request.locale) }})
         </td>
         <td>{{ versionInfo.versionNo }}</td>
@@ -45,7 +47,7 @@
     <tbody>
     <tr>
         <td>{{ contentInfo.id }}</td>
-        <td>{{ location.id  }}</td>
+        <td>{{ location.id }}</td>
         <td>{{ contentInfo.remoteId }}</td>
         <td>{{ location.remoteId }}</td>
     </tr>
@@ -67,6 +69,36 @@
         <td>{{ section.name }}</td>
         <td>{{ section.identifier }}</td>
         <td>{{ section.id }}</td>
+    </tr>
+    </tbody>
+</table>
+
+{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with {
+    headerText: 'tab.details.sub_items_default_ordering'|trans|desc('Sub-items default ordering'),
+    ground: 'ground-base'
+} %}
+
+<table class="table">
+    <tbody>
+    <tr>
+        <td>
+            {{ 'tab.details.sub_items_listing_by'|trans|desc('Default listing of sub-items by') }}
+        </td>
+        <td>
+            {{ form_start(form_location_update, {
+                'method': 'POST',
+                'action': path('ezplatform.location.update'),
+                'attr': {'class': 'form-inline'}
+                }) }}
+
+                {{ form_widget(form_location_update) }}
+
+                <button type="submit" class="btn btn-primary ml-1">
+                    {{ 'search.perform'|trans|desc('Save') }}
+                </button>
+
+            {{ form_end(form_location_update) }}
+        </td>
     </tr>
     </tbody>
 </table>

@@ -13,11 +13,13 @@ use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 
 class DetailsTab extends AbstractTab implements OrderedTabInterface
 {
@@ -36,25 +38,31 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
     /** @var DatasetFactory */
     protected $datasetFactory;
 
+    /** @var FormFactory */
+    private $formFactory;
+
     /**
      * @param Environment $twig
      * @param TranslatorInterface $translator
      * @param SectionService $sectionService
      * @param UserService $userService
      * @param DatasetFactory $datasetFactory
+     * @param FormFactory $formFactory
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         SectionService $sectionService,
         UserService $userService,
-        DatasetFactory $datasetFactory
+        DatasetFactory $datasetFactory,
+        FormFactory $formFactory
     ) {
         parent::__construct($twig, $translator);
 
         $this->sectionService = $sectionService;
         $this->userService = $userService;
         $this->datasetFactory = $datasetFactory;
+        $this->formFactory = $formFactory;
     }
 
     public function getIdentifier(): string
@@ -81,6 +89,10 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
         $contentInfo = $versionInfo->getContentInfo();
         $translationsDataset = $this->datasetFactory->translations();
         $translationsDataset->load($versionInfo);
+        $locationUpdateType = $this->formFactory->updateLocation(
+            new LocationUpdateData($parameters['location'])
+        );
+
         $viewParameters = [
             'section' => $this->sectionService->loadSection($contentInfo->sectionId),
             'contentInfo' => $contentInfo,
@@ -88,6 +100,7 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
             'creator' => $this->userService->loadUser($contentInfo->ownerId),
             'lastContributor' => $this->userService->loadUser($versionInfo->creatorId),
             'translations' => $translationsDataset->getTranslations(),
+            'form_location_update' => $locationUpdateType->createView(),
         ];
 
         return $this->twig->render(

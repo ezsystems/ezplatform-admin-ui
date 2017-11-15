@@ -11,6 +11,7 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\LocationUpdateStruct;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
@@ -18,6 +19,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
@@ -393,6 +395,52 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $contentInfo->mainLocationId,
+        ]));
+    }
+
+    /**
+     * Handles update existing location.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function updateAction(Request $request): Response
+    {
+        $form = $this->formFactory->updateLocation();
+        $form->handleRequest($request);
+
+        $location = $form->getData()->getLocation();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $result = $this->submitHandler->handle($form, function (LocationUpdateData $data) {
+                $location = $data->getLocation();
+
+                $locationUpdateStruct = new LocationUpdateStruct(['sortField' => $data->getSortField(), 'sortOrder' => $data->getSortOrder()]);
+                $this->locationService->updateLocation($location, $locationUpdateStruct);
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Location '%name%' updated.") */
+                        'location.update.success',
+                        ['%name%' => $location->getContentInfo()->name],
+                        'location'
+                    )
+                );
+
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                        'locationId' => $location->getContentInfo()->mainLocationId,
+                        '_fragment' => 'ez-tab-location-view-details',
+                    ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $location->getContentInfo()->mainLocationId,
         ]));
     }
 }
