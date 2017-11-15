@@ -12,3 +12,16 @@
         width: 2rem;
     }
 }
+
+.ez-btn--login {
+    float: right;
+    border-color: $ez-white;
+    background-color: transparent;
+    margin-top: 1rem;
+
+    &:hover {
+        background-color: $ez-white;
+        border-color: $ez-color-primary;
+        color: $ez-color-primary;
+    }
+}
