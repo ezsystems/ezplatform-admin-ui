@@ -28,12 +28,12 @@
                     <td>{{ location.childCount }}</td>
                     <td>
                         {% if location.hidden %}
-                            {{ 'tab.locations.hidden'|trans()|desc('Hidden') }}
+                            <input {{ not location.hidden ? 'checked' }} type="checkbox" name="updateVisibility" value="{{ location.id }}">
                         {% else %}
                             {% if location.invisible %}
                                 {{ 'tab.locations.hidden_by_superior'|trans()|desc('Hidden by superior') }}
                             {% else %}
-                                {{ 'tab.locations.visible'|trans()|desc('Visible') }}
+                                <input {{ not location.hidden ? 'checked' }} type="checkbox" name="updateVisibility" value="{{ location.id }}">
                             {% endif %}
                         {% endif %}
                     </td>
@@ -47,6 +47,9 @@
         </tbody>
     </table>
     {{ form_end(form_content_location_remove) }}
+
+    {{ form(form_content_location_update_visibility, {'action': path('ezplatform.location.update_visibility')})}}
+
     {{ form(form_content_location_main_update, {'action': path('ezplatform.content.update_main_location')})}}
 </section>
 

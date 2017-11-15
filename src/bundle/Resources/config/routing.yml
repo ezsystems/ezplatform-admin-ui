@@ -326,6 +326,12 @@ ezplatform.location.swap:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location:swap'
 
+ezplatform.location.update_visibility:
+    path: /location/update-visibility
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Location:updateVisibility'
+
 ezplatform.content.update_main_location:
     path: /content/update-main-location
     methods: ['POST']

@@ -14,6 +14,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUp
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
@@ -93,6 +94,7 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
         $formLocationAdd = $this->createLocationAddForm($location);
         $formLocationRemove = $this->createLocationRemoveForm($location, $locations);
         $formLocationSwap = $this->createLocationSwapForm($location);
+        $formLocationUpdateVisibility = $this->createLocationUpdateVisibilityForm($location);
         $formLocationMainUpdate = $this->createLocationUpdateMainForm($contentInfo, $location);
 
         $viewParameters = [
@@ -100,6 +102,7 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
             'form_content_location_add' => $formLocationAdd->createView(),
             'form_content_location_remove' => $formLocationRemove->createView(),
             'form_content_location_swap' => $formLocationSwap->createView(),
+            'form_content_location_update_visibility' => $formLocationUpdateVisibility->createView(),
             'form_content_location_main_update' => $formLocationMainUpdate->createView(),
         ];
 
@@ -155,6 +158,20 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
     {
         return $this->formFactory->swapLocation(
             new LocationSwapData($location)
+        );
+    }
+
+    /**
+     * @param Location $location
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    protected function createLocationUpdateVisibilityForm(Location $location): FormInterface
+    {
+        return $this->formFactory->updateVisibilityLocation(
+            new LocationUpdateVisibilityData($location)
         );
     }
 

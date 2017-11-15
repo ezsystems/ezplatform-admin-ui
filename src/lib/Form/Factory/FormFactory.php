@@ -23,6 +23,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
@@ -56,6 +57,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType;
@@ -333,6 +335,23 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationCopyType::class);
 
         return $this->formFactory->createNamed($name, LocationCopyType::class, $data);
+    }
+
+    /**
+     * @param LocationUpdateVisibilityData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function updateVisibilityLocation(
+        LocationUpdateVisibilityData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationUpdateVisibilityData::class);
+
+        return $this->formFactory->createNamed($name, LocationUpdateVisibilityType::class, $data);
     }
 
     /**
