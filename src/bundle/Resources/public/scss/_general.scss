@@ -73,10 +73,22 @@ button {
 }
 
 .ez-checkbox-icon {
-    @include checkbox-switcher();
+    @include checkbox-icon();
 }
 
+.ez-visually-hidden,
 .ez-data-source__input--visually-hidden {
     height: 1px;
     opacity: 0;
+    position: relative;
+    z-index: 0;
+}
+
+.ez-spin {
+    animation: spin 1.75s linear infinite;
+}
+
+@keyframes spin {
+    0%      { transform: rotate(0deg); }
+    100%    { transform: rotate(360deg); }
 }

@@ -1,0 +1,110 @@
+.ez-field-edit--with-preview {
+    &,
+    *,
+    *:after,
+    *:before {
+        box-sizing: border-box;
+    }
+
+    .form-control-file {
+        opacity: 0;
+        height: 1px;
+    }
+
+    .ez-field-edit__data {
+        border-radius: .25rem;
+        border: 1px dashed $ez-color-primary;
+        padding: 1rem;
+        text-align: center;
+        position: relative;
+
+        .ez-data-source__btn-add {
+            display: inline-flex;
+            padding: .5rem 1.25rem;
+            border-radius: .25rem;
+            text-align: center;
+            cursor: pointer;
+            letter-spacing: .5px;
+            color: $ez-white;
+            font-size: .875rem;
+            font-weight: 700;
+            border: 1px solid $ez-color-primary;
+            background-color: $ez-color-primary;
+            transition: background .3s ease-in-out;
+            align-items: center;
+
+            .ez-icon {
+                margin-right: .5rem;
+            }
+        }
+
+        .ez-data-source__btn-add:hover,
+        .ez-data-source__btn-add:focus {
+            background: $ez-color-primary-hover;
+        }
+
+        .ez-data-source__message--main {
+            box-sizing: border-box;
+            cursor: auto;
+            line-height: 60px;
+            margin: 0;
+        }
+
+        .ez-data-source__message--filesize {
+            font-size: .75rem;
+            line-height: 60px;
+        }
+    }
+
+    .ez-field-edit-preview {
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 0 1.25rem;
+        background: $ez-ground-base;
+
+        &__visual {
+            flex: 1 1 auto;
+        }
+
+        &__actions {
+            flex: 0 0 64px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @mixin preview-action {
+            padding: 0;
+            border: 0 none;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            transition: background .3s $ez-admin-transition;
+            text-align: center;
+            display: block;
+        }
+
+        &__action--preview {
+            @include preview-action;
+            background: $ez-color-base-pale;
+            margin-top: 1.25rem;
+
+            &:hover,
+            &:focus {
+                background: $ez-color-base-light;
+            }
+        }
+
+        &__action--remove {
+            @include preview-action;
+            background: $ez-color-danger;
+
+            &:hover,
+            &:focus {
+                background: $ez-color-danger-hover;
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="9cadbe380acedd355a84784a1c98cc7aca8897c6" resname="content.field_type.ezimage.img_alt">
+        <source>Image stored in field '%label%'</source>
+        <target state="new">Image stored in field '%label%'</target>
+        <note>key: content.field_type.ezimage.img_alt</note>
+      </trans-unit>
+      <trans-unit id="093c498e82bd382a4732e4bb8356c7d88b671f25" resname="content.field_type.ezmedia.player_settings">
+        <source>Player settings</source>
+        <target state="new">Player settings</target>
+        <note>key: content.field_type.ezmedia.player_settings</note>
+      </trans-unit>
+      <trans-unit id="1a3bc0622c5d839ed1a8ef9f32bd5dd9e5cfb479" resname="fieldtype.binary_base.drag_drop">
+        <source>Drag and drop your files on browser window or upload them</source>
+        <target state="new">Drag and drop your files on browser window or upload them</target>
+        <note>key: fieldtype.binary_base.drag_drop</note>
+      </trans-unit>
+      <trans-unit id="858c986173f1ef87d7acda017535b86f01bca87d" resname="fieldtype.binary_base.max_file_size">
+        <source>Max file size: %size%</source>
+        <target state="new">Max file size: %size%</target>
+        <note>key: fieldtype.binary_base.max_file_size</note>
+      </trans-unit>
+      <trans-unit id="763e9b64f4f0024e90753727ccc212a3596bfccd" resname="fieldtype.binary_base.upload_file">
+        <source>Upload file</source>
+        <target state="new">Upload file</target>
+        <note>key: fieldtype.binary_base.upload_file</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

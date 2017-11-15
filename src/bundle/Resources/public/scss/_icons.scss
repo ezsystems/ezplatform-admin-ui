@@ -73,3 +73,25 @@
     display: block;
     margin: 0 auto;
 }
+
+.ez-field-edit--with-preview {
+    .ez-icon {
+        fill: $ez-white;
+        height: 1rem;
+        width: 1rem;
+    }
+}
+
+.ez-field-edit--ezbinaryfile {
+    &.ez-field-edit--with-preview {
+        .ez-field-edit-preview {
+            &__file-icon {
+                .ez-icon {
+                    fill: $ez-color-base-dark;
+                    height: 2rem;
+                    width: 2rem;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,70 @@
+{% trans_default_domain 'ezrepoforms_content' %}
+
+{% block binary_base_row %}
+    {% set fieldtype_identifier = form.parent.vars.value.fieldDefinition.fieldTypeIdentifier %}
+    {% set file_is_empty = form.parent.vars.value.value.fileName is null or form.parent.vars.value.value.fileSize is null %}
+    {% set wrapper_class = 'ez-field-edit ez-field-edit--with-preview ez-field-edit--' ~ fieldtype_identifier %}
+    {% set wrapper_attr = wrapper_attr|default({})|merge({class: (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
+    {% set label_wrapper_class = 'ez-field-edit__label-wrapper' %}
+    {% set label_class = 'ez-field-edit__label' %}
+    {% set widget_wrapper_class = 'ez-field-edit__data'%}
+    {% if not file_is_empty %}
+        {% set widget_wrapper_class = (widget_wrapper_class ~ ' ez-visually-hidden')|trim %}
+    {% endif %}
+    {% set widget_class = 'ez-data-source__input' %}
+    {% set required_row_class = 'ez-field-edit--required' %}
+
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class)|trim}) %}
+    {% set new_attributes = {'class': (attr.class|default('') ~ ' ' ~ widget_class)|trim, 'data-max-file-size': max_file_size} %}
+    {% set attr = attr|merge(new_attributes) %}
+    {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ required_row_class)|trim %}{% endif %}
+
+    <div{% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+        <div class="{{ label_wrapper_class }}">
+            {{ form_label(form) }}
+            {{ block('form_errors') }}
+        </div>
+        <div class="ez-field-edit__preview{% if file_is_empty %} ez-visually-hidden{% endif %}">
+            {{ block(preview_block_name) }}
+        </div>
+        <div class="{{ widget_wrapper_class }}">
+            <div class="ez-data-source">
+                <div class="ez-data-source__message--main">{{ 'fieldtype.binary_base.drag_drop'|trans|desc('Drag and drop your files on browser window or upload them') }}</div>
+                <div class="ez-data-source__btn-add">
+                    <svg class="ez-icon">
+                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#upload"></use>
+                    </svg>
+                    <span class="ez-data-source__btn-label">{{ 'fieldtype.binary_base.upload_file'|trans|desc('Upload file') }}</span>
+                </div>
+                {% if max_file_size is defined and max_file_size > 0 %}
+                    <div class="ez-data-source__message--filesize">{{ 'fieldtype.binary_base.max_file_size'|trans({'%size%': max_file_size|default(0)|ez_file_size(2)})|desc('Max file size: %size%') }}</div>
+                {% endif %}
+                {{- form_widget(form.file, {'attr': attr}) -}}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block binary_base_preview_info_checkbox_row %}
+    <div class="ez-field-edit-preview__info ez-field-edit-preview__info--{{ form.vars.name }}">
+        <div class="ez-field-edit-preview__input-wrapper">
+            <label class="ez-data-source__label">
+                <span class="ez-data-source__indicator"></span>
+                <input type="checkbox" {{ block('widget_attributes') }}{% if form.vars.value is defined %} value="{{ form.vars.value }}"{% endif %}{% if form.vars.checked %} checked="checked"{% endif %}>
+            </label>
+            <span class="ez-data-source__label-text">{{ form.vars.translation_domain is same as(false) ? form.vars.label : form.vars.label|trans({}, form.vars.translation_domain) }}</span>
+        </div>
+    </div>
+{% endblock %}
+
+{% block binary_base_preview_info_simple_row %}
+    <div class="ez-field-edit-preview__info ez-field-edit-preview__info--{{ form.vars.name }}">
+        <div class="ez-field-edit-preview__label-wrapper">
+            {{ form_label(form, null, {'label_attr': {'class': 'ez-field-edit-preview__label'}}) }}
+            {% with {'form': form} %}{{ block('form_errors') }}{% endwith %}
+        </div>
+        <div class="ez-field-edit-preview__input-wrapper">
+            {{ form_widget(form, {'attr': {'class': 'ez-field-edit-preview__input'}}) }}
+        </div>
+    </div>
+{% endblock %}

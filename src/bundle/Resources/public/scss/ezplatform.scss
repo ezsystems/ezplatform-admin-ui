@@ -12,7 +12,9 @@
 @import 'notifications';
 @import 'instant-filter';
 @import 'login';
+@import 'forms';
 @import 'fieldType/base-field';
+@import 'fieldType/base-preview';
 @import 'fieldType/ezauthor';
 @import 'fieldType/ezstring';
 @import 'fieldType/ezemail';
@@ -22,4 +24,7 @@
 @import 'fieldType/ezurl';
 @import 'fieldType/ezrichtext';
 @import 'fieldType/ezselection';
+@import 'fieldType/ezbinaryfile';
+@import 'fieldType/ezimage';
+@import 'fieldType/ezmedia';
 @import 'alloyeditor-link-edit';
