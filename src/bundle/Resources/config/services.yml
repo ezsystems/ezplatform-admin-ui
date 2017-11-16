@@ -32,6 +32,12 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    EzSystems\EzPlatformAdminUiBundle\EventListener\RequestAttributesListener:
+        arguments:
+            - '%ezpublish.siteaccess.groups%'
+        tags:
+            - {name: kernel.event_subscriber}
+
     EzSystems\EzPlatformAdminUi\Form\Type\:
         resource: '../../../lib/Form/Type'
 
