@@ -43,7 +43,6 @@ button {
     margin: 1rem 0;
 }
 
-
 .ezrichtext-field {
     display: inline-block;
     width: 100%;
@@ -65,6 +64,10 @@ button {
     .ez-main-container {
         height: 100%
     }
+}
+
+.ez-checkbox-icon {
+    @include checkbox-switcher();
 }
 
 .ez-data-source__input--visually-hidden {
