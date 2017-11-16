@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-11-07T21:29:28Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,221 +10,181 @@
         <source>Bundles</source>
         <target state="new">Bundles</target>
         <note>key: bundles</note>
-        <jms:reference-file line="25">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
-        <jms:reference-file line="31">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="874ad8df43111be5efde68a54160acf7badff6c9" resname="composer">
         <source>Composer</source>
         <target state="new">Composer</target>
         <note>key: composer</note>
-        <jms:reference-file line="5">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/composer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d46743c0b44b0022d9e5743ffe753b2452c381a4" resname="composer.minimum_stability">
         <source>Minimum stability</source>
         <target state="new">Minimum stability</target>
         <note>key: composer.minimum_stability</note>
-        <jms:reference-file line="7">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/composer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ca49ca4bb6732ef61577364cb33b115854e88f06" resname="cpu">
         <source>CPU</source>
         <target state="new">CPU</target>
         <note>key: cpu</note>
-        <jms:reference-file line="7">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/hardware.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="6d613a1ee01eec4c0f8ca66df0db71dca0c6e1cf" resname="database">
         <source>Database</source>
         <target state="new">Database</target>
         <note>key: database</note>
-        <jms:reference-file line="5">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/database.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5588036c51b3fff9557483e210bfd47187f54ac8" resname="database.host">
         <source>Host</source>
         <target state="new">Host</target>
         <note>key: database.host</note>
-        <jms:reference-file line="11">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/database.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cda1c2cdc0936c26cd9a325835b49a27d2ddfcc3" resname="database.name">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: database.name</note>
-        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/database.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3af131bd1d37e4242ca0c124312180ad31ee23e9" resname="database.type">
         <source>Type</source>
         <target state="new">Type</target>
         <note>key: database.type</note>
-        <jms:reference-file line="7">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/database.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="512e470f98391ba6e8140ef7a85e27c71af6e6bc" resname="database.username">
         <source>Username</source>
         <target state="new">Username</target>
         <note>key: database.username</note>
-        <jms:reference-file line="13">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/database.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="07596f183f5e91b1778d5e47b2752b8d42aa763d" resname="disabled">
         <source>Disabled</source>
         <target state="new">Disabled</target>
         <note>key: disabled</note>
-        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/php.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="608cb271bb7fb52c99a1a8e003e0f80f57fb41e1" resname="hardware">
         <source>Hardware</source>
         <target state="new">Hardware</target>
         <note>key: hardware</note>
-        <jms:reference-file line="5">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/hardware.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="81c5d49be9505089d8d248ea96f6d077fd0ab9bd" resname="memory">
         <source>Memory</source>
         <target state="new">Memory</target>
         <note>key: memory</note>
-        <jms:reference-file line="14">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/hardware.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a5a3d389f27a890d41a05f33c37b2f6133497c88" resname="mhz">
         <source>mhz</source>
         <target state="new">mhz</target>
         <note>key: mhz</note>
-        <jms:reference-file line="11">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/hardware.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d8ae088aee969371bf4ed994e9106b5d3e799c35" resname="packages">
         <source>Packages</source>
         <target state="new">Packages</target>
         <note>key: packages</note>
-        <jms:reference-file line="11">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/composer.html.twig</jms:reference-file>
-        <jms:reference-file line="17">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/composer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5bfa5c4492601632e405273e2f7ea28977f108c3" resname="packages.empty">
         <source>No packages installed.</source>
         <target state="new">No packages installed.</target>
         <note>key: packages.empty</note>
-        <jms:reference-file line="12">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/composer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="47425e4490d1548713efea3b8a6f5d778e4b1766" resname="php">
         <source>PHP</source>
         <target state="new">PHP</target>
         <note>key: php</note>
-        <jms:reference-file line="5">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/php.html.twig</jms:reference-file>
-        <jms:reference-file line="7">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/php.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="43ebf283d294d1a15b5d590815cd893e52164ed9" resname="php.accelerator">
         <source>Accelerator</source>
         <target state="new">Accelerator</target>
         <note>key: php.accelerator</note>
-        <jms:reference-file line="12">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/php.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ee982f9a979085f2f15b3ddc699bfada99429bb4" resname="php.info">
         <source>PHP Info</source>
         <target state="new">PHP Info</target>
         <note>key: php.info</note>
-        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/php.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="98c89e1daa8c0a7c472af26752752299ff44ee23" resname="symfony_kernel">
         <source>Symfony kernel</source>
         <target state="new">Symfony kernel</target>
         <note>key: symfony_kernel</note>
-        <jms:reference-file line="5">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="dbc3d622a5e78844eeb75f3e9477b90357984ad7" resname="symfony_kernel.bundles.empty">
         <source>No bundles installed.</source>
         <target state="new">No bundles installed.</target>
         <note>key: symfony_kernel.bundles.empty</note>
-        <jms:reference-file line="26">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8bce9f0cf5c9c698c1907808aa20cfa0b1ec9ecb" resname="symfony_kernel.cacheDir">
         <source>Cache directory</source>
         <target state="new">Cache directory</target>
         <note>key: symfony_kernel.cacheDir</note>
-        <jms:reference-file line="17">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="74d0f849585c3bfe67e3477d0773fd8f097bd54d" resname="symfony_kernel.charset">
         <source>Character set</source>
         <target state="new">Character set</target>
         <note>key: symfony_kernel.charset</note>
-        <jms:reference-file line="21">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8da408eada2e85ad98868421df6185d1c8e4bdb2" resname="symfony_kernel.debugMode">
         <source>Debug mode</source>
         <target state="new">Debug mode</target>
         <note>key: symfony_kernel.debugMode</note>
-        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b279d615747857a87b80e268ef4a8eefc631cd3c" resname="symfony_kernel.debugMode.disabled">
         <source>Disabled</source>
         <target state="new">Disabled</target>
         <note>key: symfony_kernel.debugMode.disabled</note>
-        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="edea137ff68106045aa74351ae612e2160700503" resname="symfony_kernel.debugMode.enabled">
         <source>Enabled</source>
         <target state="new">Enabled</target>
         <note>key: symfony_kernel.debugMode.enabled</note>
-        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ae50a8c234dbf0d24521f3aec3a5f430b79ccb4c" resname="symfony_kernel.environment">
         <source>Environment</source>
         <target state="new">Environment</target>
         <note>key: symfony_kernel.environment</note>
-        <jms:reference-file line="7">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b04c158895f34062a8748223da67059fe45b3a60" resname="symfony_kernel.logDir">
         <source>Log directory</source>
         <target state="new">Log directory</target>
         <note>key: symfony_kernel.logDir</note>
-        <jms:reference-file line="19">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ea20258358e7a0d4e8bc037d4e352ac2ad06b7fa" resname="symfony_kernel.name">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: symfony_kernel.name</note>
-        <jms:reference-file line="13">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="56014c7eba59799c182934e3a0eb97eff6fd8a97" resname="symfony_kernel.rootDir">
         <source>Root directory</source>
         <target state="new">Root directory</target>
         <note>key: symfony_kernel.rootDir</note>
-        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="74fd4792096e74360c7508e16bbe7c1e121d393e" resname="symfony_kernel.version">
         <source>Version</source>
         <target state="new">Version</target>
         <note>key: symfony_kernel.version</note>
-        <jms:reference-file line="11">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="21ef9f0a078dbc4e4c45be12f1cfaf8a3864dfa7" resname="systeminfo">
         <source>System Info</source>
         <target state="new">System Info</target>
         <note>key: systeminfo</note>
-        <jms:reference-file line="14">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/info.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/info.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a2a92e9d0e41ea4a14c99ab0f702d5df3ea017c3" resname="tab.name.composer">
         <source>Composer</source>
         <target state="new">Composer</target>
         <note>key: tab.name.composer</note>
-        <jms:reference-file line="3">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/composer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7a874a3b12fa965b16ed628878c5f6ce9c53b59f" resname="tab.name.database">
         <source>Database</source>
         <target state="new">Database</target>
         <note>key: tab.name.database</note>
-        <jms:reference-file line="3">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/database.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="951e3ad18b17f0b2aa96fcb84f6eb25f208e1127" resname="tab.name.hardware">
         <source>Hardware</source>
         <target state="new">Hardware</target>
         <note>key: tab.name.hardware</note>
-        <jms:reference-file line="3">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/hardware.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b71f0d567a424182b8c83a6b90a262b29819241b" resname="tab.name.php">
         <source>PHP</source>
         <target state="new">PHP</target>
         <note>key: tab.name.php</note>
-        <jms:reference-file line="3">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/php.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b7989598c01fcae061f7917e563a9c0d66790a84" resname="tab.name.symfony_kernel">
         <source>Symfony kernel</source>
         <target state="new">Symfony kernel</target>
         <note>key: tab.name.symfony_kernel</note>
-        <jms:reference-file line="3">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/systeminfo/symfony_kernel.html.twig</jms:reference-file>
       </trans-unit>
     </body>
   </file>
