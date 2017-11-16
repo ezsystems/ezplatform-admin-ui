@@ -79,10 +79,13 @@
             'bundles/ezplatformadminuimodules/js/UniversalDiscovery.module.js'
             'bundles/ezplatformadminui/js/scripts/button.trigger.js'
             'bundles/ezplatformadminui/js/scripts/udw/browse.js'
+            'bundles/fosjsrouting/js/router.js'
+
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
         {% block reactModules %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     </body>
 </html>
