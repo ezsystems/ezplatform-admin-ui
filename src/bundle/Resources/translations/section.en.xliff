@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-11-07T21:29:28Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,137 +10,106 @@
         <source>Cancel</source>
         <target state="new">Cancel</target>
         <note>key: form.cancel</note>
-        <jms:reference-file line="37">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/create.html.twig</jms:reference-file>
-        <jms:reference-file line="35">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/update.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2a6caa13cfd67503e2250af8e36f26a2f835a4a0" resname="section.assign_content.success">
         <source>%contentItemsCount% content items were assigned to '%name%'</source>
         <target state="new">%contentItemsCount% content items were assigned to '%name%'</target>
         <note>key: section.assign_content.success</note>
-        <jms:reference-file line="209">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/SectionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="bbcee03105f9504c94923b141d067d28d1d7ec54" resname="section.assigned.content">
         <source>Assignments count</source>
         <target state="new">Assignments count</target>
         <note>key: section.assigned.content</note>
-        <jms:reference-file line="35">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b3a79602ff55ce138d41cd00a9d93ff6a6324604" resname="section.assigned.contentcount">
         <source>{0} Section not assigned to any content item.|[1,+Inf[ This section is assigned to %count% content items.</source>
         <target state="new">{0} Section not assigned to any content item.|[1,+Inf[ This section is assigned to %count% content items.</target>
         <note>key: section.assigned.contentcount</note>
-        <jms:reference-file line="37">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0a6c7f3919b09caa9eee957a4949d3c9b6dce16e" resname="section.create.success">
         <source>Section '%name%' created.</source>
         <target state="new">Section '%name%' created.</target>
         <note>key: section.create.success</note>
-        <jms:reference-file line="250">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/SectionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="663e1bfb8478f95028221190755c01441b2a8fde" resname="section.delete.success">
         <source>Section '%name%' removed.</source>
         <target state="new">Section '%name%' removed.</target>
         <note>key: section.delete.success</note>
-        <jms:reference-file line="166">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/SectionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7c2d7a21eb806db794990d728749dde1592be63e" resname="section.edit">
         <source>Edit</source>
         <target state="new">Edit</target>
         <note>key: section.edit</note>
-        <jms:reference-file line="53">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/list.html.twig</jms:reference-file>
-        <jms:reference-file line="46">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="201c1849abe46fd6ea7013ec4bb1bc2630e46e0a" resname="section.form.delete">
         <source>Delete</source>
         <target state="new">Delete</target>
         <note>key: section.form.delete</note>
-        <jms:reference-file line="52">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/view.html.twig</jms:reference-file>
-        <jms:reference-file line="56">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="bcb0a8eedc29344eb4ad95a02dd684438aae1df6" resname="section.id">
         <source>ID</source>
         <target state="new">ID</target>
         <note>key: section.id</note>
-        <jms:reference-file line="34">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="63039a13119dd5a53e5eb66cd798b3c323b57a5b" resname="section.id.label">
         <source>ID</source>
         <target state="new">ID</target>
         <note>key: section.id.label</note>
-        <jms:reference-file line="32">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="54e249fceb2f506942f7f0ae30107a734b9b3fe5" resname="section.identifier">
         <source>Identifier</source>
         <target state="new">Identifier</target>
         <note>key: section.identifier</note>
-        <jms:reference-file line="33">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4a040adfce6771857aef17cf0dbb596f2dee2e70" resname="section.identifier.label">
         <source>Identifier</source>
         <target state="new">Identifier</target>
         <note>key: section.identifier.label</note>
-        <jms:reference-file line="30">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1f9b6e37416ff607de9d4fa280dce2f734ea622c" resname="section.list">
         <source>Sections</source>
         <target state="new">Sections</target>
         <note>key: section.list</note>
-        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/create.html.twig</jms:reference-file>
-        <jms:reference-file line="8">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/update.html.twig</jms:reference-file>
-        <jms:reference-file line="11">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d0db9c352babe46e30354a78d9b3eccd226d7602" resname="section.list.title">
         <source>Sections</source>
         <target state="new">Sections</target>
         <note>key: section.list.title</note>
-        <jms:reference-file line="13">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/list.html.twig</jms:reference-file>
-        <jms:reference-file line="22">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/list.html.twig</jms:reference-file>
-        <jms:reference-file line="7">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="376986256605f27a204911de172c7bca4bd8e3b6" resname="section.name">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: section.name</note>
-        <jms:reference-file line="32">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="801aa4a73e669a7f454798a3d5e44b40899e51f1" resname="section.name.label">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: section.name.label</note>
-        <jms:reference-file line="28">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/view.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="12023a25e9c04ceef708820416f14a5a1e188688" resname="section.new">
         <source>Create a new Section</source>
         <target state="new">Create a new Section</target>
         <note>key: section.new</note>
-        <jms:reference-file line="25">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e771bfe2e0091aad8731fd441667fba59cbf59c3" resname="section.new.title">
         <source>Creating a new Section</source>
         <target state="new">Creating a new Section</target>
         <note>key: section.new.title</note>
-        <jms:reference-file line="10">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/create.html.twig</jms:reference-file>
-        <jms:reference-file line="17">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/create.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b1bef1e1bf42cb3e7e7f9057fd710e5c91a15129" resname="section.update.success">
         <source>Section '%name%' updated.</source>
         <target state="new">Section '%name%' updated.</target>
         <note>key: section.update.success</note>
-        <jms:reference-file line="292">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/SectionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2bfeef4370b18e469fba6df1d4d2888f9252c764" resname="section.update.title">
         <source>Editing Section "%identifier%"</source>
         <target state="new">Editing Section "%identifier%"</target>
         <note>key: section.update.title</note>
-        <jms:reference-file line="15">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/update.html.twig</jms:reference-file>
-        <jms:reference-file line="9">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/update.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7ca9da842cdea433f0a9e05a8c6b135def0bc6e3" resname="section.view.title">
         <source>"%identifier%" Section</source>
         <target state="new">"%identifier%" Section</target>
         <note>key: section.view.title</note>
-        <jms:reference-file line="12">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/view.html.twig</jms:reference-file>
-        <jms:reference-file line="18">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/section/view.html.twig</jms:reference-file>
       </trans-unit>
     </body>
   </file>

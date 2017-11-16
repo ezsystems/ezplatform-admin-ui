@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-11-07T21:29:28Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,61 +10,51 @@
         <source>Trash is empty. Any content item you send to trash will end up here.</source>
         <target state="new">Trash is empty. Any content item you send to trash will end up here.</target>
         <note>key: trash.empty</note>
-        <jms:reference-file line="47">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/trash/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="17b503b33de4f7e60958b7824dd959dd0144ae13" resname="trash.empty.success">
         <source>Trash empty.</source>
         <target state="new">Trash empty.</target>
         <note>key: trash.empty.success</note>
-        <jms:reference-file line="142">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/TrashController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="eb7cd78bb919141f66cabfea95a60e0e6b02e9f4" resname="trash.headline">
         <source>Trash</source>
         <target state="new">Trash</target>
         <note>key: trash.headline</note>
-        <jms:reference-file line="17">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/trash/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5d4b7350cb3bfc77e9edd02190eb530d866c7565" resname="trash.item.ancesor_in_trash">
         <source>Ancestor is in the Trash</source>
         <target state="new">Ancestor is in the Trash</target>
         <note>key: trash.item.ancesor_in_trash</note>
-        <jms:reference-file line="61">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/trash/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="34525fc5da381111c2104d20a55021eb8b698c7c" resname="trash.name">
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: trash.name</note>
-        <jms:reference-file line="38">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/trash/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c28510c675be753842996980b0e5d175cec4a8d8" resname="trash.original_location">
         <source>Original location</source>
         <target state="new">Original location</target>
         <note>key: trash.original_location</note>
-        <jms:reference-file line="40">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/trash/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a8c2da925faa48def8e407037a6115f1340070c7" resname="trash.restore_new_location.success">
         <source>Items restored under `%location%` location.</source>
         <target state="new">Items restored under `%location%` location.</target>
         <note>key: trash.restore_new_location.success</note>
-        <jms:reference-file line="194">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/TrashController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d4e8ddb6a84d9ca3a3b39485e9b7c5ef2860d879" resname="trash.restore_original_location.success">
         <source>Items restored under their original location.</source>
         <target state="new">Items restored under their original location.</target>
         <note>key: trash.restore_original_location.success</note>
-        <jms:reference-file line="185">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Controller/TrashController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="06b530d8c8b3d7af7b3f2df9f5102927e7275de4" resname="trash.table.header">
         <source>Trash</source>
         <target state="new">Trash</target>
         <note>key: trash.table.header</note>
-        <jms:reference-file line="20">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/trash/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="04098b87c58e41ab39820db75eee1d13856f9616" resname="trash.type">
         <source>Type</source>
         <target state="new">Type</target>
         <note>key: trash.type</note>
-        <jms:reference-file line="39">/../../../../../../vendor/ezsystems/ezplatform-admin-ui/src/bundle/Resources/views/admin/trash/list.html.twig</jms:reference-file>
       </trans-unit>
     </body>
   </file>
