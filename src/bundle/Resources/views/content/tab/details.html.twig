@@ -73,6 +73,33 @@
     </tbody>
 </table>
 
+{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.state_details'|trans()|desc('State details') } %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ 'tab.details.state_group_name'|trans()|desc('Group name') }}</th>
+        <th>{{ 'tab.details.state_group_identifier'|trans()|desc('Group identifier') }}</th>
+        <th>{{ 'tab.details.state_group_id'|trans()|desc('Group ID') }}</th>
+        <th>{{ 'tab.details.state_name'|trans()|desc('Name') }}</th>
+        <th>{{ 'tab.details.state_identifier'|trans()|desc('Identifier') }}</th>
+        <th>{{ 'tab.details.state_id'|trans()|desc('State ID') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for objectState in objectStates %}
+        <tr>
+            <td>{{ objectState.objectStateGroup.name }}</td>
+            <td>{{ objectState.objectStateGroup.identifier }}</td>
+            <td>{{ objectState.objectStateGroup.id }}</td>
+            <td>{{ objectState.name }}</td>
+            <td>{{ objectState.identifier }}</td>
+            <td>{{ objectState.id }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
 {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with {
     headerText: 'tab.details.sub_items_default_ordering'|trans|desc('Sub-items default ordering'),
     ground: 'ground-base'
