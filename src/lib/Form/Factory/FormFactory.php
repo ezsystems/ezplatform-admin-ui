@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentDraftCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
@@ -44,6 +45,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentDraftCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentMainLocationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType;
@@ -264,6 +266,28 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationSwapType::class);
 
         return $this->formFactory->createNamed($name, LocationSwapType::class, $data);
+    }
+
+    /**
+     * @param ContentMainLocationUpdateData|null $data
+     * @param string|null $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function updateContentMainLocation(
+        ?ContentMainLocationUpdateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentMainLocationUpdateType::class);
+        $data = $data ?? new ContentMainLocationUpdateData();
+
+        return $this->formFactory->createNamed(
+            $name,
+            ContentMainLocationUpdateType::class,
+            $data
+        );
     }
 
     /**

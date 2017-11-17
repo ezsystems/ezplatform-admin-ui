@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
@@ -19,6 +20,7 @@ use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -91,12 +93,14 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
         $formLocationAdd = $this->createLocationAddForm($location);
         $formLocationRemove = $this->createLocationRemoveForm($location, $locations);
         $formLocationSwap = $this->createLocationSwapForm($location);
+        $formLocationMainUpdate = $this->createLocationUpdateMainForm($contentInfo, $location);
 
         $viewParameters = [
             'locations' => $locations,
             'form_content_location_add' => $formLocationAdd->createView(),
             'form_content_location_remove' => $formLocationRemove->createView(),
             'form_content_location_swap' => $formLocationSwap->createView(),
+            'form_content_location_main_update' => $formLocationMainUpdate->createView(),
         ];
 
         return $this->twig->render(
@@ -151,6 +155,21 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
     {
         return $this->formFactory->swapLocation(
             new LocationSwapData($location)
+        );
+    }
+
+    /**
+     * @param $contentInfo
+     * @param Location $location
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    protected function createLocationUpdateMainForm($contentInfo, Location $location): FormInterface
+    {
+        return $this->formFactory->updateContentMainLocation(
+            new ContentMainLocationUpdateData($contentInfo, $location)
         );
     }
 }
