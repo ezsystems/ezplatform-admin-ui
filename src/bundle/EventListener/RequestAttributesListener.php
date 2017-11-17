@@ -19,7 +19,7 @@ use eZ\Publish\API\Repository\Repository;
  */
 class RequestAttributesListener implements EventSubscriberInterface
 {
-    /** @var \eZ\Publish\API\Repository\Repository */
+    /** @var Repository */
     private $repository;
 
     /** @var array */
@@ -43,20 +43,21 @@ class RequestAttributesListener implements EventSubscriberInterface
     /**
      * Adds all the request attributes to the parameters.
      *
-     * @param \eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewBuilderParametersEvent $e
+     * @param FilterViewBuilderParametersEvent $event
      */
-    public function addRequestAttributes(FilterViewBuilderParametersEvent $e)
+    public function addRequestAttributes(FilterViewBuilderParametersEvent $event)
     {
-        if (!$this->isAdmin($e->getRequest())) {
+        $request = $event->getRequest();
+
+        if (!$this->isAdmin($request)) {
             return;
         }
 
-        $parameterBag = $e->getParameters();
+        $parameterBag = $event->getParameters();
 
-        if ($parameterBag->has('locationId')) {
+        if ($parameterBag->has('locationId') && $request->get('_route') === '_ezpublishLocation') {
             $location = $this->loadLocation($parameterBag->get('locationId'));
             $parameterBag->remove('locationId');
-
             $parameterBag->set('location', $location);
         }
     }
