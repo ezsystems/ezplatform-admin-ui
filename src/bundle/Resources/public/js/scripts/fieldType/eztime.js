@@ -55,7 +55,17 @@
         time_24hr: true
     };
     const updateInputValue = (sourceInput, date) => {
-        sourceInput.value = Math.floor((new Date(date)).getTime() / 1000);
+        date = new Date(date);
+
+        sourceInput.value = Math.floor(Date.UTC(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate(),
+            date.getHours(),
+            date.getMinutes(),
+            date.getSeconds()
+        ) / 1000);
+
         sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
     };
     const initFlatPickr = (field) => {
@@ -66,14 +76,9 @@
         sourceInput.classList.add('ez-data-source__input--visually-hidden');
 
         if (sourceInput.value) {
-            const date = new Date(sourceInput * 1000);
+            const date = new Date(parseInt(sourceInput.value, 10) * 1000);
 
-            if (isNaN(date.getTime())) {
-                sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
-                sourceInput.value = '';
-            } else {
-                defaultDate = date;
-            }
+            defaultDate = date;
         }
 
         flatpickr(field.querySelector('.flatpickr-input'), Object.assign({}, timeConfig, {
