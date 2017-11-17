@@ -41,6 +41,16 @@
         <target state="new">Location '%name%' updated.</target>
         <note>key: location.update.success</note>
       </trans-unit>
+      <trans-unit id="fd862d4fb8a866fe95bf0435080f9f1091f99551" resname="location.update_success.success.hidden">
+        <source>Location '%name%' hidden.</source>
+        <target state="new">Location '%name%' hidden.</target>
+        <note>key: location.update_success.success.hidden</note>
+      </trans-unit>
+      <trans-unit id="687bb78ae5d6531f6a5dbaaa91b90db7a0700f6e" resname="location.update_success.success.unhidden">
+        <source>Location '%name%' unhidden.</source>
+        <target state="new">Location '%name%' unhidden.</target>
+        <note>key: location.update_success.success.unhidden</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

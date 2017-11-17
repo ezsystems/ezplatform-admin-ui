@@ -1,0 +1,51 @@
+@mixin checkbox-switcher() {
+    border: 2px solid $ez-color-secondary;
+    padding: .2rem;
+    margin: 0;
+    line-height: 1;
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+
+    &:before {
+        content: "";
+        position: absolute;
+        width: 2.3rem;
+        height: 2.3rem;
+        top: 50%;
+        left: 0;
+        background-color: $ez-color-secondary;
+        z-index: -1;
+        border-radius: 5px;
+        transform: translate(calc(100% + .3rem), -50%);
+        transition: all .2s $ez-admin-transition;
+    }
+
+    .ez-icon {
+        fill: $ez-color-secondary;
+        margin: .1rem;
+    }
+
+    .ez-icon + .ez-icon {
+        fill: $ez-white;
+    }
+
+    &.is-checked {
+        &:before {
+            transform: translate(.15rem, -50%);
+        }
+
+        .ez-icon {
+            fill: $ez-white;
+        }
+
+        .ez-icon + .ez-icon {
+            fill: $ez-color-secondary;
+        }
+    }
+
+    .ez-checkbox-icon__checkbox {
+        display: none;
+    }
+}

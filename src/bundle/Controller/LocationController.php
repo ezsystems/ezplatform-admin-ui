@@ -18,6 +18,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemove
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -26,7 +27,10 @@ use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Translation\TranslatorInterface;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException as APIRepositoryUnauthorizedException;
+use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
 
 class LocationController extends Controller
 {
@@ -385,6 +389,68 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $contentInfo->mainLocationId,
+        ]));
+    }
+
+    /**
+     * Handles toggling visibility location of a content item based on submitted form.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws \InvalidArgumentException
+     * @throws TranslationInvalidArgumentException
+     * @throws APIRepositoryUnauthorizedException
+     * @throws InvalidOptionsException
+     */
+    public function updateVisibilityAction(Request $request): Response
+    {
+        $form = $this->formFactory->updateVisibilityLocation();
+        $form->handleRequest($request);
+
+        /** @var ContentInfo $contentInfo */
+        $contentInfo = $form->getData()->getLocation()->getContentInfo();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $result = $this->submitHandler->handle($form, function (LocationUpdateVisibilityData $data) use ($contentInfo) {
+                $location = $data->getLocation();
+                $hidden = $data->getHidden();
+
+                if ($hidden) {
+                    $this->locationService->hideLocation($location);
+
+                    $message = $this->translator->trans(
+                        /** @Desc("Location '%name%' hidden.") */
+                        'location.update_success.success.hidden',
+                        ['%name%' => $contentInfo->name],
+                        'location'
+                    );
+                } else {
+                    $this->locationService->unhideLocation($location);
+                    $message = $this->translator->trans(
+                        /** @Desc("Location '%name%' unhidden.") */
+                        'location.update_success.success.unhidden',
+                        ['%name%' => $contentInfo->name],
+                        'location'
+                    );
+                }
+
+                $this->notificationHandler->success($message);
+
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                    'locationId' => $contentInfo->mainLocationId,
+                    '_fragment' => 'ez-tab-location-view-locations',
                 ]));
             });
 

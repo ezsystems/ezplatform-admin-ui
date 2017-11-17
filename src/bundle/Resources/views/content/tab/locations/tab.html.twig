@@ -21,24 +21,28 @@
         {% if locations is not empty %}
             {% for location in locations %}
                 <tr>
-                    <td>{{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'disabled': not location.canDelete}}) }}</td>
-                    <td>
+                    <td class="align-middle">{{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'disabled': not location.canDelete}}) }}</td>
+                    <td class="align-middle">
                         {% include 'EzPlatformAdminUiBundle:parts:path.html.twig' with {'locations': location.pathLocations} %}
                     </td>
-                    <td>{{ location.childCount }}</td>
+                    <td class="align-middle">{{ location.childCount }}</td>
                     <td>
-                        {% if location.hidden %}
-                            {{ 'tab.locations.hidden'|trans()|desc('Hidden') }}
+                        {% if location.invisible and not location.hidden %}
+                            {{ 'tab.locations.hidden_by_superior'|trans()|desc('Hidden by superior') }}
                         {% else %}
-                            {% if location.invisible %}
-                                {{ 'tab.locations.hidden_by_superior'|trans()|desc('Hidden by superior') }}
-                            {% else %}
-                                {{ 'tab.locations.visible'|trans()|desc('Visible') }}
-                            {% endif %}
+                            <label class="ez-checkbox-icon {{ not location.hidden ? 'is-checked' }}">
+                                <svg class="ez-icon ez-icon-view">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#view"></use>
+                                </svg>
+                                <svg class="ez-icon ez-icon-view-hide">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#view-hide"></use>
+                                </svg>
+                                <input class="ez-checkbox-icon__checkbox" {{ not location.hidden ? 'checked' }} type="checkbox" name="updateVisibility" value="{{ location.id }}">
+                            </label>
                         {% endif %}
                     </td>
-                    <td></td>
-                    <td>
+                    <td class="align-middle"></td>
+                    <td class="align-middle">
                         <input {{ location.main ? 'checked' }} type="radio" name="updateMainLocation" value="{{ location.id }}">
                     </td>
                 </tr>
@@ -47,6 +51,9 @@
         </tbody>
     </table>
     {{ form_end(form_content_location_remove) }}
+
+    {{ form(form_content_location_update_visibility, {'action': path('ezplatform.location.update_visibility')})}}
+
     {{ form(form_content_location_main_update, {'action': path('ezplatform.content.update_main_location')})}}
 </section>
 

@@ -35,6 +35,7 @@ class AdminFilter implements SiteAccessConfigurationFilter
         $isMultisite = count($configuration['groups']) > 1;
 
         foreach (array_keys($configuration['groups']) as $groupName) {
+            /* TODO - implement better `_group` str_replace */
             $adminSiteAccessName = $isMultisite
                 ? str_replace('_group', '', $groupName) . '_admin'
                 : 'admin';
