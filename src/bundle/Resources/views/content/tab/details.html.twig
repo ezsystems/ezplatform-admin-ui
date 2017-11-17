@@ -108,7 +108,7 @@
 <table class="table">
     <tbody>
     <tr>
-        <td>
+        <td data-sort-field="{{ class(location.sortClauses|first) }}" data-sort-order="{{ (location.sortClauses|first).direction }}">
             {{ 'tab.details.sub_items_listing_by'|trans|desc('Default listing of sub-items by') }}
         </td>
         <td>

@@ -12,6 +12,8 @@ services:
         arguments:
             $defaultTemplate: '%ezplatform.content_view.tabs.default_template%'
 
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ClassTwigExtension: ~
+
     EzSystems\EzPlatformAdminUi\Tab\TabRegistry: ~
     EzSystems\EzPlatformAdminUi\Tab\SystemInfo\TabFactory: ~
 
