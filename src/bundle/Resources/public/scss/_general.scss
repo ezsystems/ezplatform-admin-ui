@@ -13,6 +13,12 @@ body {
     min-height: calc(100vh - 60px);
 }
 
+.ez-standalone-page {
+    .ez-main-row {
+        min-height: 100vh;
+    }
+}
+
 .ez-dashboard .ez-main-row {
     background-color: $ez-ground-base-dark;
 }

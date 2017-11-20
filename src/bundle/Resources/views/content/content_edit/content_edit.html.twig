@@ -1,0 +1,33 @@
+{% extends 'EzPlatformAdminUiBundle:content/content_edit:content_edit_base.html.twig' %}
+
+{% trans_default_domain 'content_edit' %}
+
+{% block details %}
+    <h4 class="text-muted">{{ 'editing'|trans({'%contentType%': contentType.name})|desc('Editing - %contentType%') }}</h4>
+    <h1>
+        <svg class="ez-icon ez-icon-{{ contentType.identifier }}">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ contentType.identifier }}"></use>
+        </svg>
+        {{ content.name }}
+    </h1>
+
+    <div class="small">
+        {{ contentType.name }} / {{ 'created_by'|trans({'%name%': 'Administrator'})|desc('Created by %name%') }} / {{ content.versionInfo.creationDate|localizeddate('medium', 'full', app.request.locale) }} / Content ID: {{ content.id }}, Main Location ID: {{ content.versionInfo.contentInfo.mainLocationId }}
+    </div>
+    {# @todo remove if statement once getDescription() bug is resolved in kernel #}
+    {% if contentType.descriptions is not empty %}
+        <div class="small text-muted">{{ contentType.description }}</div>
+    {% endif %}
+{% endblock %}
+
+{% block form_fields %}
+    {{ parent() }}
+    {{ form_widget(form.publish, {'attr': {'hidden': 'hidden'}}) }}
+    {{ form_widget(form.saveDraft, {'attr': {'hidden': 'hidden'}}) }}
+    {{ form_widget(form.cancel, {'attr': {'hidden': 'hidden'}}) }}
+{% endblock %}
+
+{% block right_sidebar %}
+    {% set content_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_edit.sidebar_right', [], {'content': content, 'content_type': contentType}) %}
+    {{ knp_menu_render(content_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+{% endblock %}
