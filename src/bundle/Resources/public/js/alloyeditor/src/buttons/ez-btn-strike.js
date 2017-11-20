@@ -24,7 +24,9 @@ export default class EzBtnStrike extends AlloyEditor.ButtonStrike {
                 onClick={this.execCommand} tabIndex={this.props.tabIndex}
                 title={AlloyEditor.Strings.strike}
             >
-                <span className="ae-icon-strike"></span>
+                <svg className="ez-icon ez-btn-ae__icon">
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#strikethrough"></use>
+                </svg>
             </button>
         );
     }

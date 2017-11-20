@@ -75,11 +75,11 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         $menu->setChildren([
             self::ITEM_CONTENT => $this->createMenuItem(
                 self::ITEM_CONTENT,
-                ['extras' => ['icon' => 'content-list']]
+                []
             ),
             self::ITEM_ADMIN => $this->createMenuItem(
                 self::ITEM_ADMIN,
-                ['extras' => ['icon' => 'panel']]
+                []
             ),
         ]);
 

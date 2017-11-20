@@ -24,7 +24,9 @@ export default class EzBtnSubscript extends AlloyEditor.ButtonSubscript {
                 onClick={this.execCommand} tabIndex={this.props.tabIndex}
                 title={AlloyEditor.Strings.subscript}
             >
-                <span className="ae-icon-subscript"></span>
+                <svg className="ez-icon ez-btn-ae__icon">
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#subscript"></use>
+                </svg>
             </button>
         );
     }

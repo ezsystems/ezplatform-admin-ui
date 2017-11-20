@@ -33,10 +33,5 @@
 {% endblock %}
 
 {% block label %}
-    {% if item.extras.icon is defined and item.extras.icon != '' %}
-        <svg class="ez-icon ez-icon-{{ item.extras.icon  }}">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#{{ item.extras.icon  }}"></use>
-        </svg>
-    {% endif %}
     {{ parent() }}
 {% endblock %}
