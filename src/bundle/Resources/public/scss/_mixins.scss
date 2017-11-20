@@ -1,4 +1,4 @@
-@mixin checkbox-switcher() {
+@mixin checkbox-icon() {
     border: 2px solid $ez-color-secondary;
     padding: .2rem;
     margin: 0;
@@ -47,5 +47,74 @@
 
     .ez-checkbox-icon__checkbox {
         display: none;
+    }
+}
+
+@mixin checkbox-switcher($size: 2rem) {
+    .ez-data-source__label {
+        position: relative;
+        width: $size;
+        height: calc(#{$size} + .25rem);
+        background-color: $ez-ground-base-dark;
+        margin-left: calc((#{$size} + .25rem) / 2);
+        cursor: pointer;
+
+        input {
+            opacity: 0;
+            height: 1px;
+        }
+
+        .ez-data-source__indicator {
+            width: $size;
+            height: $size;
+            display: block;
+            background-color: $ez-ground-base-pale;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 0;
+            transition: all .3s ease-in-out;
+            transform: translateX(-50%);
+            cursor: pointer;
+        }
+
+        &.is-checked {
+            background-color: $ez-color-secondary;
+
+            .ez-data-source__indicator {
+                transform: translateX(50%);
+            }
+
+            &:before {
+                background-color: $ez-color-secondary;
+            }
+
+            &:after {
+                background-color: $ez-color-secondary;
+            }
+        }
+
+        &:before,
+        &:after {
+            content: '';
+            height: calc(#{$size} + .25rem);
+            width: calc(#{$size} + .25rem);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            background-color: $ez-ground-base-dark;
+            z-index: -1;
+            cursor: pointer;
+        }
+
+        &:before {
+            left: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        &:after {
+            right: 0;
+            transform: translate(50%, -50%);
+        }
     }
 }

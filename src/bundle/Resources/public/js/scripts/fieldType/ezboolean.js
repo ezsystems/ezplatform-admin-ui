@@ -33,7 +33,7 @@
 
             event.target.closest('.ez-data-source__label').classList[methodName]('is-checked');
         }
-    };
+    }
 
     const validator = new EzBooleanValidator({
         classInvalid: 'is-invalid',

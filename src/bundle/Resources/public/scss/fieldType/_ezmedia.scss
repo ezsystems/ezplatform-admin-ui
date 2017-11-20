@@ -1,0 +1,89 @@
+.ez-field-edit--ezmedia {
+    .ez-field-edit-preview {
+        padding: 1.25rem 0 1.25rem 1.25rem;
+
+        &__media {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        &__spinner {
+            display: none;
+        }
+
+        &__media-wrapper--loading {
+            background: $ez-ground-base-dark;
+            padding: 1.25rem;
+            text-align: center;
+
+            .ez-field-edit-preview__spinner {
+                display: inline-block;
+                width: 2rem;
+                height: 2rem;
+            }
+
+            .ez-field-edit-preview__media {
+                display: none;
+            }
+        }
+
+        &__details {
+            color: $ez-color-base-light;
+            font-size: .75rem;
+            padding-top: 8px;
+        }
+
+        &__info {
+            & + .ez-field-edit-preview__info {
+                margin-top: 1.25rem;
+            }
+        }
+
+        &__dimensions {
+            display: flex;
+
+            .ez-field-edit-preview__info {
+                margin-right: 1.25rem;
+                margin-top: 0;
+
+                .ez-field-edit-preview__input {
+                    width: 10ch;
+                }
+            }
+        }
+
+        &__settings {
+            @include checkbox-switcher(1rem);
+
+            .ez-field-edit-preview__section-title {
+                margin-bottom: .625rem;
+            }
+
+            .ez-field-edit-preview__input-wrapper {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .ez-data-source__label {
+                margin-bottom: 0;
+
+                &:after,
+                &:before {
+                    z-index: 0;
+                }
+            }
+
+            .ez-data-source__indicator {
+                z-index: 1;
+            }
+
+            .ez-data-source__label-text {
+                margin-left: 1.25rem;
+                font-size: .875rem;
+            }
+        }
+    }
+}

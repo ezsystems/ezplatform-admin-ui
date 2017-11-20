@@ -6,6 +6,7 @@
             this.classInvalid = config.classInvalid;
             this.eventsMap = config.eventsMap;
             this.fieldSelector = config.fieldSelector;
+            this.fieldContainer = config.fieldContainer;
         }
 
         /**
@@ -58,7 +59,7 @@
          * @memberof BaseFieldValidator
          */
         toggleInvalidState(isError, config, input) {
-            const fieldNode = input.closest(this.fieldSelector);
+            const fieldNode = this.fieldContainer ? this.fieldContainer : input.closest(this.fieldSelector);
             const methodName = isError ? 'add' : 'remove';
             const nodes = this.findValidationStateNodes(fieldNode, input, config.invalidStateSelectors);
 
@@ -123,7 +124,7 @@
          * @memberof BaseFieldValidator
          */
         toggleErrorMessage(validationResult, config, input) {
-            const fieldNode = input.closest(this.fieldSelector);
+            const fieldNode = this.fieldContainer ? this.fieldContainer : input.closest(this.fieldSelector);
             const nodes = this.findErrorContainers(fieldNode, input, config.errorNodeSelectors);
             const existingErrorSelectors = config.errorNodeSelectors.map(selector => selector + ' .ez-field-edit__error');
             const existingErrorNodes = this.findExistingErrorNodes(fieldNode, input, existingErrorSelectors);

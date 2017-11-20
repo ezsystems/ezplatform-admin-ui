@@ -1,0 +1,56 @@
+{% trans_default_domain 'ezrepoforms_content' %}
+
+{% use '@EzPlatformAdminUi/fieldtypes/binary_base.html.twig' %}
+
+{%- block ezplatform_fieldtype_ezmedia_row -%}
+    {% set preview_block_name = 'ezmedia_preview' %}
+    {% set max_file_size = (form.parent.vars.value.fieldDefinition.validatorConfiguration.FileSizeValidator.maxFileSize * 1024 * 1024)|round %}
+    {% set attr = attr|merge({'accept': 'video/*'}) %}
+    {{ block('binary_base_row') }}
+{%- endblock -%}
+
+{% block ezmedia_preview %}
+    <div class="ez-field-edit-preview">
+        <div class="ez-field-edit-preview__visual">
+            <div class="ez-field-edit-preview__media-wrapper ez-field-edit-preview__media-wrapper--loading">
+                <svg class="ez-field-edit-preview__spinner ez-icon ez-spin">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#spinner"></use>
+                </svg>
+                <video
+                    class="ez-field-edit-preview__media"
+                    src="{{ form.parent.vars.value.value.uri }}"
+                    preload="metadata"
+                    controls>
+                </video>
+            </div>
+            <div class="ez-field-edit-preview__details">
+                <span class="ez-field-edit-preview__file-name">{{ form.parent.vars.value.value.fileName }}</span>
+                <span class="ez-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</span>
+            </div>
+            <div class="ez-field-edit-preview__settings">
+                <div class="ez-field-edit-preview__section-title form-control-label">{{ 'content.field_type.ezmedia.player_settings'|trans({}, 'ezrepoforms_content')|desc('Player settings') }}:</div>
+                <div class="ez-field-edit-preview__toggles">
+                    {% with {'form': form.hasController} %}{{ block('binary_base_preview_info_checkbox_row') }}{% endwith %}
+                    {% with {'form': form.autoplay} %}{{ block('binary_base_preview_info_checkbox_row') }}{% endwith %}
+                    {% with {'form': form.loop} %}{{ block('binary_base_preview_info_checkbox_row') }}{% endwith %}
+                </div>
+                <div class="ez-field-edit-preview__dimensions">
+                    {% with {'form': form.width} %}{{ block('binary_base_preview_info_simple_row') }}{% endwith %}
+                    {% with {'form': form.height} %}{{ block('binary_base_preview_info_simple_row') }}{% endwith %}
+                </div>
+            </div>
+        </div>
+        <div class="ez-field-edit-preview__actions">
+            <button class="ez-field-edit-preview__action--remove">
+                <svg class="ez-icon">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
+                </svg>
+            </button>
+            <a class="ez-field-edit-preview__action--preview" href="{{ form.parent.vars.value.value.uri }}" target="_blank">
+                <svg class="ez-icon">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab"></use>
+                </svg>
+            </a>
+        </div>
+    </div>
+{% endblock %}

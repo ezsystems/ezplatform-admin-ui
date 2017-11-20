@@ -1,0 +1,18 @@
+.ez-field-edit--ezimage {
+    .ez-field-edit-preview {
+        padding: 1.25rem 0 1.25rem 1.25rem;
+
+        &__media {
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+        }
+
+        &__details {
+            color: $ez-color-base-light;
+            font-size: .75rem;
+            padding-top: .5rem;
+        }
+    }
+}
