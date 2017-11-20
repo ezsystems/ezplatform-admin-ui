@@ -31,6 +31,21 @@
         <target state="new">Send to Trash</target>
         <note>key: content__sidebar_right__send_to_trash</note>
       </trans-unit>
+      <trans-unit id="af459eaf05dedc87eb0c462732e59da18bedb340" resname="content_edit__sidebar_right__cancel">
+        <source>Delete draft</source>
+        <target state="new">Delete draft</target>
+        <note>key: content_edit__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="3ca4deb7a0f072b3613df143969726ea2cf79487" resname="content_edit__sidebar_right__publish">
+        <source>Publish</source>
+        <target state="new">Publish</target>
+        <note>key: content_edit__sidebar_right__publish</note>
+      </trans-unit>
+      <trans-unit id="21ec910650ae078371f26d8e6a7964d13b5a5216" resname="content_edit__sidebar_right__save_draft">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: content_edit__sidebar_right__save_draft</note>
+      </trans-unit>
       <trans-unit id="f85206498106b1536c36c3231d870daa0d2805e2" resname="main__admin__content_types">
         <source>Content Types</source>
         <target state="new">Content Types</target>
