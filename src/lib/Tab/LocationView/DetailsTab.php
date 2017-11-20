@@ -104,11 +104,25 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
             'translations' => $translationsDataset->getTranslations(),
             'form_location_update' => $locationUpdateType->createView(),
             'objectStates' => $objectStatesDataset->getObjectStates(),
+            'sort_field_clause_map' => $this->getSortFieldClauseMap(),
         ];
 
         return $this->twig->render(
             'EzPlatformAdminUiBundle:content/tab:details.html.twig',
             array_merge($viewParameters, $parameters)
         );
+    }
+
+    /**
+     * @return array
+     */
+    private function getSortFieldClauseMap(): array
+    {
+        return [
+            Repository\Values\Content\Location::SORT_FIELD_PUBLISHED => 'DatePublished',
+            Repository\Values\Content\Location::SORT_FIELD_MODIFIED => 'DateModified',
+            Repository\Values\Content\Location::SORT_FIELD_PRIORITY => 'LocationPriority',
+            Repository\Values\Content\Location::SORT_FIELD_NAME => 'ContentName',
+        ];
     }
 }

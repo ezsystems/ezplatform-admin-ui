@@ -108,7 +108,7 @@
 <table class="table">
     <tbody>
     <tr>
-        <td>
+        <td data-sort-field="{{ sort_field_clause_map[location.sortField] }}" data-sort-order="{{ location.sortOrder ? "ascending" : "descending" }}">
             {{ 'tab.details.sub_items_listing_by'|trans|desc('Default listing of sub-items by') }}
         </td>
         <td>
