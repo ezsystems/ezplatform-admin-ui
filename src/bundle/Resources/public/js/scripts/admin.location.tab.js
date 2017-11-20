@@ -6,6 +6,6 @@
 
     // Change hash for page-reload
     $('.ez-tabs a').on('shown.bs.tab', function (e) {
-        window.location.hash = e.target.hash;
+        window.location.hash = e.target.hash + '#tab';
     })
 })();
