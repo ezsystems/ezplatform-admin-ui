@@ -55,7 +55,17 @@
         formatDate: (date) => (new Date(date)).toLocaleString()
     };
     const updateInputValue = (sourceInput, date) => {
-        sourceInput.value = Math.floor((new Date(date)).getTime() / 1000);
+        date = new Date(date);
+        date = new Date(Date.UTC(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate(),
+            date.getHours(),
+            date.getMinutes(),
+            date.getSeconds()
+        ));
+
+        sourceInput.value = Math.floor(date.getTime() / 1000);
         sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
     };
     const initFlatPickr = (field) => {
