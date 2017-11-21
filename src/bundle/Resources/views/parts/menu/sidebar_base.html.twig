@@ -1,9 +1,11 @@
 {% extends '@KnpMenu/menu.html.twig' %}
 
 {% block root %}
+    <div class="ez-button-container">
     {% for item in item.children %}
         {{ block('item') }}
     {% endfor %}
+    </div>
 {% endblock %}
 
 {% block item -%}
