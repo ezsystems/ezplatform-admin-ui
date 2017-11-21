@@ -81,10 +81,30 @@
         <target state="new">Ascending</target>
         <note>key: content_type.sort_field.ascending</note>
       </trans-unit>
+      <trans-unit id="c699d43b72ab990a33d92d85bc5c773078d8c62d" resname="content_type.sort_field.content_id">
+        <source>Content ID</source>
+        <target state="new">Content ID</target>
+        <note>key: content_type.sort_field.content_id</note>
+      </trans-unit>
+      <trans-unit id="5149e0146059487622a9f1ebf3c843b8a020db33" resname="content_type.sort_field.depth">
+        <source>Location depth</source>
+        <target state="new">Location depth</target>
+        <note>key: content_type.sort_field.depth</note>
+      </trans-unit>
       <trans-unit id="09b31f9371d7512e3c5663053b0dc5ce781f696c" resname="content_type.sort_field.descending">
         <source>Descending</source>
         <target state="new">Descending</target>
         <note>key: content_type.sort_field.descending</note>
+      </trans-unit>
+      <trans-unit id="afb48eb0ff69f32e95393be9247ac7ba40d61142" resname="content_type.sort_field.location_id">
+        <source>Location ID</source>
+        <target state="new">Location ID</target>
+        <note>key: content_type.sort_field.location_id</note>
+      </trans-unit>
+      <trans-unit id="187a5f274b61172d6e478830081210a75b9f916d" resname="content_type.sort_field.location_path">
+        <source>Location path</source>
+        <target state="new">Location path</target>
+        <note>key: content_type.sort_field.location_path</note>
       </trans-unit>
       <trans-unit id="8acac47605156b70e1d654c98b3b65b982e00db7" resname="content_type.sort_field.modified">
         <source>Modification date</source>
@@ -105,6 +125,11 @@
         <source>Publication date</source>
         <target state="new">Publication date</target>
         <note>key: content_type.sort_field.published</note>
+      </trans-unit>
+      <trans-unit id="3accf658d1f58879c2e2fce80130dd8a9f8bd2bd" resname="content_type.sort_field.section_identifier">
+        <source>Section identifier</source>
+        <target state="new">Section identifier</target>
+        <note>key: content_type.sort_field.section_identifier</note>
       </trans-unit>
       <trans-unit id="48d3eb66c0f8928777189eab11eae254866852b2" resname="content_type.update.success">
         <source>Content type '%name%' updated.</source>
