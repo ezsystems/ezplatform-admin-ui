@@ -1,24 +1,25 @@
 @import 'custom';
 
 .nav-tabs {
-    border-bottom: 2px solid $ez-ground-base-pale;
-    background-color: $ez-ground-base;
+    border-bottom: 2px solid $ez-ground-base-dark;
+    background-color: $ez-ground-base-dark;
 
     .nav-item {
         margin-bottom: 0;
     }
 
     .nav-link {
-        color: $ez-color-base-pale;
+        color: $ez-color-base-medium;
 
         &:hover {
-            background-color: $ez-ground-base-dark;
-            border-color: $ez-ground-base-dark;
+            background-color: $ez-color-base-pale;
+            border-color: $ez-color-base-pale;
         }
 
         &.active {
-            background-color: $ez-ground-base-pale;
-            border-color: $ez-ground-base-pale;
+            background-color: $ez-ground-base-light;
+            border-color: $ez-ground-base-light;
+            color: $ez-black;
         }
     }
 }
@@ -41,7 +42,7 @@
 
 .ez-content-view {
     .nav-tabs {
-        border-bottom: 2px solid $ez-ground-base;
+        border-bottom: 2px solid $ez-ground-base-dark;
 
         .nav-item {
             margin-bottom: -2px;

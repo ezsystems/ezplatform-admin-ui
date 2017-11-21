@@ -10,6 +10,7 @@
     h5 {
         margin-bottom: 0;
         font-weight: bold;
+        color: $ez-black;
     }
 
     .ez-icon {
@@ -21,7 +22,7 @@
 }
 
 .ez-table-header.ground-base {
-    background-color: $ez-ground-base;
+    background-color: $ez-color-base-pale;
 }
 
 .ez-dashboard {
@@ -41,4 +42,11 @@
     .table {
         margin-bottom: 3rem;
     }
+}
+
+.ez-relations-box-list-no-content {
+    margin-bottom: 3rem;
+    padding: 0.75rem 0.5rem;
+    background-color: $ez-white;
+    font-style: italic;
 }
