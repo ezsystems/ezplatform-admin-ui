@@ -32,6 +32,10 @@ a {
     padding-right: 0;
     padding-left: 0;
 
+    .ez-button-container {
+        position: fixed;
+    }
+
     .ez-icon {
         display: block;
         margin: 0 auto;
