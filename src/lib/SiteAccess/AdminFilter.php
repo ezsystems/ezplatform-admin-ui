@@ -32,6 +32,10 @@ class AdminFilter implements SiteAccessConfigurationFilter
      */
     public function filter(array $configuration): array
     {
+        if (!isset($configuration['groups'])) {
+            return $configuration;
+        }
+
         $isMultisite = count($configuration['groups']) > 1;
 
         foreach (array_keys($configuration['groups']) as $groupName) {
