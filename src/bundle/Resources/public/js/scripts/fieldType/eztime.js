@@ -57,14 +57,7 @@
     const updateInputValue = (sourceInput, date) => {
         date = new Date(date);
 
-        sourceInput.value = Math.floor(Date.UTC(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate(),
-            date.getHours(),
-            date.getMinutes(),
-            date.getSeconds()
-        ) / 1000);
+        sourceInput.value = (date.getHours() * 3600) + (date.getMinutes() * 60) + date.getSeconds();
 
         sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
     };
@@ -76,7 +69,12 @@
         sourceInput.classList.add('ez-data-source__input--visually-hidden');
 
         if (sourceInput.value) {
-            const date = new Date(parseInt(sourceInput.value, 10) * 1000);
+            const value = parseInt(sourceInput.value, 10);
+            const date = new Date();
+
+            date.setHours(Math.floor(value / 3600));
+            date.setMinutes(Math.floor(value % 3600 / 60));
+            date.setSeconds(Math.floor(value % 3600 % 60));
 
             defaultDate = date;
         }
