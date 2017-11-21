@@ -119,10 +119,15 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
     private function getSortFieldClauseMap(): array
     {
         return [
+            Repository\Values\Content\Location::SORT_FIELD_PATH => 'LocationPath',
             Repository\Values\Content\Location::SORT_FIELD_PUBLISHED => 'DatePublished',
             Repository\Values\Content\Location::SORT_FIELD_MODIFIED => 'DateModified',
+            Repository\Values\Content\Location::SORT_FIELD_SECTION => 'SectionIdentifier',
+            Repository\Values\Content\Location::SORT_FIELD_DEPTH => 'LocationDepth',
             Repository\Values\Content\Location::SORT_FIELD_PRIORITY => 'LocationPriority',
             Repository\Values\Content\Location::SORT_FIELD_NAME => 'ContentName',
+            Repository\Values\Content\Location::SORT_FIELD_NODE_ID => 'LocationId',
+            Repository\Values\Content\Location::SORT_FIELD_CONTENTOBJECT_ID => 'ContentId',
         ];
     }
 }
