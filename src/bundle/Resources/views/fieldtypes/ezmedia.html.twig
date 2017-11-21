@@ -10,6 +10,8 @@
 {%- endblock -%}
 
 {% block ezmedia_preview %}
+    {% form_theme form '@EzPlatformAdminUi/fieldtypes/binary_base_fields.html.twig' %}
+
     <div class="ez-field-edit-preview">
         <div class="ez-field-edit-preview__visual">
             <div class="ez-field-edit-preview__media-wrapper ez-field-edit-preview__media-wrapper--loading">
@@ -28,15 +30,15 @@
                 <span class="ez-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</span>
             </div>
             <div class="ez-field-edit-preview__settings">
-                <div class="ez-field-edit-preview__section-title form-control-label">{{ 'content.field_type.ezmedia.player_settings'|trans({}, 'ezrepoforms_content')|desc('Player settings') }}:</div>
+                <div class="ez-field-edit-preview__section-title form-control-label">{{ 'content.field_type.ezmedia.player_settings'|trans({}, 'ezrepoforms_content')|desc('Player settings') }}</div>
                 <div class="ez-field-edit-preview__toggles">
-                    {% with {'form': form.hasController} %}{{ block('binary_base_preview_info_checkbox_row') }}{% endwith %}
-                    {% with {'form': form.autoplay} %}{{ block('binary_base_preview_info_checkbox_row') }}{% endwith %}
-                    {% with {'form': form.loop} %}{{ block('binary_base_preview_info_checkbox_row') }}{% endwith %}
+                    {{ form_row(form.hasController) }}
+                    {{ form_row(form.autoplay) }}
+                    {{ form_row(form.loop) }}
                 </div>
                 <div class="ez-field-edit-preview__dimensions">
-                    {% with {'form': form.width} %}{{ block('binary_base_preview_info_simple_row') }}{% endwith %}
-                    {% with {'form': form.height} %}{{ block('binary_base_preview_info_simple_row') }}{% endwith %}
+                    {{ form_row(form.width) }}
+                    {{ form_row(form.height) }}
                 </div>
             </div>
         </div>

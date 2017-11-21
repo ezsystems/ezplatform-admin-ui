@@ -36,13 +36,16 @@
                 selector: '.ez-field-edit--ezselection .ez-data-source__input',
                 eventName: EVENT_VALUE_CHANGED,
                 callback: 'validateInput',
-                invalidStateSelectors: [SELECTOR_FIELD],
                 errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
             },
         ],
     });
 
     validator.init();
+
+    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
+        [...global.eZ.fieldTypeValidators, validator] :
+        [validator];
 
     [...doc.querySelectorAll(SELECTOR_FIELD)].forEach(container => {
         const createSelectedItem = (value, label) => `<li class="selected-item" data-value="${value}">${label}<span class="remove-selection"></span></li>`;

@@ -2,6 +2,8 @@
     const SELECTOR_FIELD = '.ez-field-edit--ezmedia';
     const SELECTOR_PREVIEW = '.ez-field-edit__preview';
     const SELECTOR_MEDIA = '.ez-field-edit-preview__media';
+    const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
+    const SELECTOR_INFO_WRAPPER = '.ez-field-edit-preview__info';
     const SELECTOR_MEDIA_WRAPPER = '.ez-field-edit-preview__media-wrapper';
     const CLASS_MEDIA_WRAPPER_LOADING = 'ez-field-edit-preview__media-wrapper--loading';
 
@@ -11,7 +13,7 @@
          *
          * @method updateState
          * @param {Event} event
-         * @memberof EzBooleanValidator
+         * @memberof EzMediaValidator
          */
         updateState(event) {
             const checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
@@ -25,6 +27,32 @@
 
             label.classList[methodName]('is-checked');
             checkbox.checked = !checkbox.checked;
+        }
+
+        /**
+         * Validates the dimensions inputs
+         *
+         * @method validateDimensions
+         * @param {Event} event
+         * @returns {Object}
+         * @memberof EzMediaValidator
+         */
+        validateDimensions(event) {
+            const isRequired = event.target.required;
+            const value = +event.target.value;
+            const isEmpty = !value;
+            const isInteger = Number.isInteger(value);
+            const isError = (isEmpty && isRequired) || !isInteger;
+            const label = event.target.closest(SELECTOR_INFO_WRAPPER).querySelector('.form-control-label').innerHTML;
+            const result = { isError };
+
+            if (isEmpty) {
+                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+            } else if (!isInteger) {
+                result.errorMessage = global.eZ.errors.isNotInteger.replace('{fieldName}', label);
+            }
+
+            return result;
         }
     }
 
@@ -121,22 +149,27 @@
             fieldContainer,
             eventsMap: [
                 {
-                    selector: '[type="file"]',
+                    selector: `${SELECTOR_FIELD} [type="file"]`,
                     eventName: 'change',
                     callback: 'validateInput',
-                    invalidStateSelectors: [SELECTOR_FIELD],
-                    errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 }, {
-                    selector: '.ez-field-edit-preview__info',
+                    isValueValidator: false,
+                    selector: `${SELECTOR_FIELD} ${SELECTOR_INFO_WRAPPER}`,
                     eventName: 'click',
                     callback: 'updateState',
                 }, {
-                    selector: '[type="file"]',
+                    isValueValidator: false,
+                    selector: `${SELECTOR_FIELD} [type="file"]`,
                     eventName: 'invalidFileSize',
-                    callback: 'showSizeError',
-                    invalidStateSelectors: [SELECTOR_FIELD],
-                    errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
-                },
+                    callback: 'showFileSizeError',
+                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                }, {
+                    selector: `${SELECTOR_FIELD} .ez-field-edit-preview__dimensions .form-control`,
+                    eventName: 'blur',
+                    callback: 'validateDimensions',
+                    errorNodeSelectors: [`${SELECTOR_INFO_WRAPPER} .ez-field-edit-preview__label-wrapper`],
+                }
             ],
         });
         const previewField = new EzMediaPreviewField({
@@ -146,5 +179,9 @@
         });
 
         previewField.init();
+
+        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
+            [...global.eZ.fieldTypeValidators, validator] :
+            [validator];
     })
 })(window);

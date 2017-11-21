@@ -47,11 +47,14 @@
                 selector: '.ez-field-edit--ezinteger input',
                 eventName: 'blur',
                 callback: 'validateInteger',
-                invalidStateSelectors: [SELECTOR_FIELD],
                 errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
             },
         ],
     });
 
     validator.init();
+
+    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
+        [...global.eZ.fieldTypeValidators, validator] :
+        [validator];
 })(window);

@@ -7,6 +7,8 @@
             this.eventsMap = config.eventsMap;
             this.fieldSelector = config.fieldSelector;
             this.fieldContainer = config.fieldContainer;
+            this.fieldsToValidate = [];
+            this.isValid = this.isValid.bind(this);
         }
 
         /**
@@ -15,11 +17,22 @@
          * @method attachEvent
          * @param {String} eventName
          * @param {String} selector
-         * @param {Function} callback
+         * @param {Function} validateField
          * @memberof BaseFieldValidator
          */
-        attachEvent(eventName, selector, callback) {
-            [...doc.querySelectorAll(selector)].forEach(item => item.addEventListener(eventName, callback, false));
+        attachEvent(config) {
+            [...doc.querySelectorAll(config.selector)].forEach(item => {
+                const isValueValidator = typeof config.isValueValidator !== 'undefined' ? config.isValueValidator : true;
+
+                this.fieldsToValidate.push({
+                    item,
+                    isValueValidator,
+                    callback: config.validateField
+                });
+
+                item.addEventListener(config.eventName, config.validateField, false);
+                item.addEventListener('checkIsValid', this.isValid, false);
+            });
         }
 
         /**
@@ -32,7 +45,10 @@
          * @memberof BaseFieldValidator
          */
         removeEvent(eventName, selector, callback) {
-            [...doc.querySelectorAll(selector)].forEach(item => item.removeEventListener(eventName, callback, false));
+            [...doc.querySelectorAll(selector)].forEach(item => {
+                item.removeEventListener('checkIsValid', this.isValid, false);
+                item.removeEventListener(eventName, callback, false);
+            });
         }
 
         /**
@@ -45,7 +61,7 @@
          * @returns {Array}
          * @memberof BaseFieldValidator
          */
-        findValidationStateNodes(fieldNode, input, selectors) {
+        findValidationStateNodes(fieldNode, input, selectors = []) {
             return selectors.reduce((total, selector) => total.concat([...fieldNode.querySelectorAll(selector)]), []);
         }
 
@@ -155,6 +171,8 @@
 
             this.toggleInvalidState(validationResult.isError, config, event.target);
             this.toggleErrorMessage(validationResult, config, event.target);
+
+            return validationResult;
         }
 
         /**
@@ -164,10 +182,11 @@
          * @memberof BaseFieldValidator
          */
         init() {
+            this.fieldsToValidate = [];
             this.eventsMap.forEach(eventConfig => {
                 eventConfig.validateField = this.validateField.bind(this, eventConfig);
 
-                this.attachEvent(eventConfig.eventName, eventConfig.selector, eventConfig.validateField);
+                this.attachEvent(eventConfig);
             });
         }
 
@@ -180,6 +199,31 @@
         reinit() {
             this.eventsMap.forEach(({eventName, selector, validateField}) => this.removeEvent(eventName, selector, validateField));
             this.init();
+        }
+
+        /**
+         * Checks whether field values are valid
+         *
+         * @method isValid
+         * @returns {Boolean}
+         */
+        isValid() {
+            if (!this.fieldsToValidate.length) {
+                return true;
+            }
+
+            const results = [];
+
+            this.fieldsToValidate.forEach(field => {
+                if (field.isValueValidator) {
+                    results.push(field.callback({
+                        target: field.item,
+                        currentTarget: field.item
+                    }));
+                }
+            });
+
+            return results.every(result => !result.isError);
         }
     };
 })(window, document);

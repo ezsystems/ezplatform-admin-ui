@@ -29,11 +29,14 @@
                 selector: '.ez-field-edit--ezurl .ez-data-source__field--link input',
                 eventName: 'blur',
                 callback: 'validateUrl',
-                invalidStateSelectors: [SELECTOR_FIELD],
                 errorNodeSelectors: ['.ez-data-source__field--link .ez-data-source__label-wrapper'],
             },
         ],
     });
 
     validator.init();
+
+    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
+        [...global.eZ.fieldTypeValidators, validator] :
+        [validator];
 })(window);

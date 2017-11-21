@@ -32,7 +32,6 @@
             selector: `${SELECTOR_FIELD} .ez-data-source__input`,
             eventName: 'blur',
             callback: 'validateSelection',
-            invalidStateSelectors: [SELECTOR_FIELD],
             errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
         }],
     });

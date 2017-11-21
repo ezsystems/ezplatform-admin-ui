@@ -3,11 +3,7 @@
 .ez-field-edit {
     .ez-field-edit__label,
     .ez-data-source__label {
-        &.required {
-            &:after {
-                content: '*:';
-            }
-        }
+        @include label-required();
     }
 
     &.is-invalid {
