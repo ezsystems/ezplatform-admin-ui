@@ -9,10 +9,23 @@
         {% block left_sidebar %}{% endblock left_sidebar %}
         <div class="col-sm-12">
             <div class="container">
-                {{ ezplatform_admin_ui_component_group('dashboard-blocks') }}
+                <div class="card border-light my-4">
+                    <div class="card-body">
+                        <h4 class="mb-3">{{ 'me'|trans|desc('Me') }}</h4>
+                        {{ ez_platform_tabs('dashboard-my', []) }}
+                    </div>
+                </div>
+
+                <div class="card border-light mb-4">
+                    <div class="card-body">
+                        <h4 class="mb-3">{{ 'everyone'|trans|desc('Everyone') }}</h4>
+                        {{ ez_platform_tabs('dashboard-everyone', []) }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <div id="react-udw"></div>
 {% endblock %}
 
 {% block javascripts %}
