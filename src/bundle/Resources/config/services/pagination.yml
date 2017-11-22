@@ -1,0 +1,12 @@
+services:
+    ez_pagination_template:
+        class: EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate
+        arguments:
+            - '@translator'
+
+    EzSystems\EzPlatformAdminUiBundle\View\EzPagerfantaView:
+        public: false
+        arguments:
+            - '@ez_pagination_template'
+        tags:
+            - { name: 'pagerfanta.view', alias: 'ez' }

@@ -3,3 +3,4 @@ parameters:
     ezsettings.default.location_ids.media: 43
     ezsettings.default.location_ids.users: 5
     ezsettings.default.search_limit: 10
+    ezsettings.default.trash_pagination_limit: 10

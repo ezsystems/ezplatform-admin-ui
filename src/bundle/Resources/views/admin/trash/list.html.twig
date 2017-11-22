@@ -4,6 +4,8 @@
 
 {% block pageTitle %}{% endblock %}
 
+{% form_theme form_trash_item_restore '@EzPlatformAdminUi/form_fields.html.twig' %}
+
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
 
@@ -50,7 +52,11 @@
                         {% for key, form in form_trash_item_restore.trash_items %}
                             {% set trash_item = trash_items[key] %}
                             <tr>
-                                <td>{{ form_row(form) }}</td>
+                                <td>
+                                    {{ form_widget(form, {attr: {
+                                        'data-is-parent-in-trash': trash_item.isParentInTrash() ? '1': '0'
+                                    }}) }}
+                                </td>
                                 <td>{{ ez_content_name(trash_item.location.contentInfo) }}</td>
                                 <td>{{ trash_item.contentType.name }}</td>
                                 <td>
@@ -65,7 +71,17 @@
                     {% endif %}
                     </tbody>
                 </table>
-                {{ form_end(form_trash_item_restore) }}
+                {{ form_widget(form_trash_item_restore._token) }}
+                {{ form_end(form_trash_item_restore, { 'render_rest': false }) }}
+
+                <div class="row justify-content-center align-items-center">
+                    <h6>{{ 'trash.viewing'|trans({'%viewing%': pager.currentPageResults|length, '%total%': pager.nbResults})|desc('Viewing %viewing% out of %total% items') }}</h6>
+                </div>
+                {% if pager.haveToPaginate %}
+                    <div class="row justify-content-center align-items-center">
+                        {{ pagerfanta(pager, 'ez') }}
+                    </div>
+                {% endif %}
                 {% include 'EzPlatformAdminUiBundle:admin/trash:empty_trash_confirmation_modal.html.twig' with {'form': form_trash_empty, 'trash_items_count': trash_items|length} %}
             </section>
         </div>
@@ -83,3 +99,5 @@
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
+
+{% block title %}{{ 'trash'|trans|desc('Trash') }}{% endblock %}

@@ -34,3 +34,8 @@ services:
         public: true
         arguments:
             $defaultSiteaccess: '%ezpublish.siteaccess.default%'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\TrashController:
+        public: true
+        arguments:
+            $defaultPaginationLimit: '$trash_pagination_limit$'

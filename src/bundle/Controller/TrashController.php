@@ -19,9 +19,12 @@ use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\TrashItemAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService as UiPathService;
 
@@ -54,6 +57,12 @@ class TrashController extends Controller
     /** @var UiPathService */
     private $uiPathService;
 
+    /** @var UrlGeneratorInterface */
+    private $urlGenerator;
+
+    /** @var int */
+    private $defaultPaginationLimit;
+
     /**
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
@@ -64,6 +73,8 @@ class TrashController extends Controller
      * @param UiPathService $uiPathService
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
+     * @param UrlGeneratorInterface $urlGenerator
+     * @param int $defaultPaginationLimit
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -74,7 +85,9 @@ class TrashController extends Controller
         ContentTypeService $contentTypeService,
         UiPathService $uiPathService,
         FormFactory $formFactory,
-        SubmitHandler $submitHandler
+        SubmitHandler $submitHandler,
+        UrlGeneratorInterface $urlGenerator,
+        int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -85,20 +98,34 @@ class TrashController extends Controller
         $this->uiPathService = $uiPathService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
+        $this->urlGenerator = $urlGenerator;
+        $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
     /**
+     * @param int $page Current page
+     * @param int $limit Number of items per page
+     *
      * @return Response
      */
-    public function listAction(): Response
+    public function listAction(Request $request): Response
     {
+        $page = $request->query->get('page') ?? 1;
         $trashItemsList = [];
-        $trashItems = $this->trashService->findTrashItems(new Query([
+
+        $query = new Query([
             'sortClauses' => [new Query\SortClause\Location\Priority(Query::SORT_ASC)],
-        ]));
+        ]);
+
+        $pagerfanta = new Pagerfanta(
+            new TrashItemAdapter($query, $this->trashService)
+        );
+
+        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
         /** @var TrashItem $item */
-        foreach ($trashItems->items as $item) {
+        foreach ($pagerfanta->getCurrentPageResults() as $item) {
             $contentType = $this->contentTypeService->loadContentType($item->contentInfo->contentTypeId);
             $ancestors = $this->uiPathService->loadPathLocations($item);
 
@@ -108,6 +135,7 @@ class TrashController extends Controller
         $trashItemRestoreForm = $this->formFactory->restoreTrashItem(
             new TrashItemRestoreData($trashItemsList, null)
         );
+
         $trashEmptyForm = $this->formFactory->emptyTrash(
             new TrashEmptyData(true)
         );
@@ -116,6 +144,7 @@ class TrashController extends Controller
             'can_delete' => $this->isGranted(new Attribute('content', 'remove')),
             'can_restore' => $this->isGranted(new Attribute('content', 'restore')),
             'trash_items' => $trashItemsList,
+            'pager' => $pagerfanta,
             'form_trash_item_restore' => $trashItemRestoreForm->createView(),
             'form_trash_empty' => $trashEmptyForm->createView(),
         ]);
