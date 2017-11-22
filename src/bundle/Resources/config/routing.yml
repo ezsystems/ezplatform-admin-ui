@@ -352,6 +352,13 @@ ezplatform.content.create:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Content:create'
 
+ezplatform.content.preview:
+    path: /content/{contentId}/preview/{versionNo}/{languageCode}
+    methods: ['GET']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Content:preview'
+        languageCode: ~
+
 # Search
 
 ezplatform.search:

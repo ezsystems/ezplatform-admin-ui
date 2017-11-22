@@ -1,0 +1,87 @@
+.ez-preview {
+    .ez-preview__nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $ez-ground-primary;
+        padding: .2rem 1rem;
+
+        .ez-preview__item {
+            flex-basis: 45%;
+
+            &--back {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                line-height: 0;
+            }
+
+            &--actions {
+                flex-basis: auto;
+                display: flex;
+                justify-content: center;
+                border: 1px solid $ez-color-base-medium;
+                border-radius: 5px;
+                padding: .1rem;
+                background: $ez-white;
+            }
+
+            &-text {
+                text-overflow: ellipsis;
+                width: 80%;
+                display: block;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+
+            .ez-preview__action {
+                line-height: 0;
+                display: block;
+                padding: .5rem;
+                border: none;
+                border-radius: initial;
+                cursor: pointer;
+                border-radius: 5px;
+
+                &.ez-preview__action--selected {
+                    background-color: $ez-color-base-medium;
+                }
+            }
+        }
+    }
+
+    .ez-preview__iframe {
+        iframe {
+            width: 100%;
+            height: calc(100vh - 45px);
+            display: block;
+            margin: 0 auto;
+            transition: all .2s $ez-admin-transition;
+        }
+
+        &--tablet {
+            background: url('/bundles/ezplatformadminui/img/preview-tablet.png') top center no-repeat;
+            height: 1250px;
+            margin-top: 1rem;
+
+            iframe {
+                width: 769px;
+                height: 1157px;
+                padding-top: 129px;
+            }
+        }
+
+        &--mobile {
+            background: url('/bundles/ezplatformadminui/img/preview-mobile.png') top center no-repeat;
+            height: 900px;
+            margin-top: 1rem;
+
+            iframe {
+                width: 375px;
+                height: 792px;
+                padding-top: 123px;
+            }
+        }
+    }
+}
+

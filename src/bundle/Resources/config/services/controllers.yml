@@ -29,3 +29,8 @@ services:
         public: true
         arguments:
             $defaultLimit: '$search_limit$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\ContentController:
+        public: true
+        arguments:
+            $defaultSiteaccess: '%ezpublish.siteaccess.default%'

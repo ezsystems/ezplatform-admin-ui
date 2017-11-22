@@ -23,6 +23,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
     /* Menu items */
     const ITEM__PUBLISH = 'content_create__sidebar_right__publish';
     const ITEM__SAVE_DRAFT = 'content_create__sidebar_right__save_draft';
+    const ITEM__PREVIEW = 'content_create__sidebar_right__preview';
     const ITEM__CANCEL = 'content_create__sidebar_right__cancel';
 
     /**
@@ -68,6 +69,16 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                     'extras' => ['icon' => 'save'],
                 ]
             ),
+            self::ITEM__PREVIEW => $this->createMenuItem(
+                self::ITEM__PREVIEW,
+                [
+                    'attributes' => [
+                        'class' => 'btn--trigger',
+                        'data-click' => '#ezrepoforms_content_edit_preview',
+                    ],
+                    'extras' => ['icon' => 'view-desktop'],
+                ]
+            ),
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
@@ -91,6 +102,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
         return [
             (new Message(self::ITEM__PUBLISH, 'menu'))->setDesc('Publish'),
             (new Message(self::ITEM__SAVE_DRAFT, 'menu'))->setDesc('Save'),
+            (new Message(self::ITEM__PREVIEW, 'menu'))->setDesc('Preview'),
             (new Message(self::ITEM__CANCEL, 'menu'))->setDesc('Cancel'),
         ];
     }
