@@ -58,11 +58,12 @@
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
             {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': contentType}) %}
             {{ knp_menu_render(content_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
-
+<button data-toggle="modal" data-target="#add-translation-modal" class="btn btn-secondary btn-block">Add translation</button>
             <div class="ez-extra-actions-container">
                 {% include '@EzPlatformAdminUi/content/widgets/content_create.html.twig' with {'form': form_content_create} %}
                 {% include '@EzPlatformAdminUi/content/widgets/content_edit.html.twig' with {'form': form_content_draft_create} %}
             </div>
+            {% include '@EzPlatformAdminUi/content/modal_add_translation.html.twig' %}
             {% include '@EzPlatformAdminUi/content/modal_location_trash.html.twig' with {'form': form_location_trash} %}
             {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}
             {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}
@@ -86,6 +87,7 @@
         'bundles/ezplatformadminui/js/scripts/admin.location.tab.js'
         'bundles/ezplatformadminui/js/scripts/admin.location.visibility.js'
         'bundles/ezplatformadminui/js/scripts/admin.location.update.js'
+        'bundles/ezplatformadminui/js/scripts/admin.location.add.translation.js'
         'bundles/ezplatformadminui/js/scripts/udw/move.js'
         'bundles/ezplatformadminui/js/scripts/udw/copy.js'
         'bundles/ezplatformadminui/js/scripts/udw/swap.js'

@@ -25,3 +25,13 @@
         color: $ez-color-primary;
     }
 }
+
+.ez-btn--wide {
+    padding: .5rem 3rem;
+}
+
+.ez-btn--add-translation {
+    .ez-icon {
+        margin-right: 0;
+    }
+}
