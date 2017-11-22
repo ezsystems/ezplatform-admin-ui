@@ -1,0 +1,8 @@
+{% trans_default_domain 'dashboard' %}
+
+<div class="card border-light mb-4">
+    <div class="card-body">
+        <h3 class="mb-3">{{ 'everyone'|trans|desc('Everyone') }}</h3>
+        {{ ez_platform_tabs('dashboard-everyone', []) }}
+    </div>
+</div>

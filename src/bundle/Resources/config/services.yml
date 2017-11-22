@@ -8,6 +8,7 @@ imports:
     - { resource: services/pagination.yml }
     - { resource: services/ui_config.yml }
     - { resource: services/components.yml }
+    - { resource: services/dashboard.yml }
 
 parameters:
 

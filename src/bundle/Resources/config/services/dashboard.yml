@@ -32,3 +32,17 @@ services:
     EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper:
         autowire: true
         public: false
+
+    ezplatform.adminui.dashboard.me:
+        parent: EzSystems\EzPlatformAdminUi\Component\TwigComponent
+        arguments:
+            $template: 'EzPlatformAdminUiBundle:dashboard/block:me.html.twig'
+        tags:
+            - { name: ezplatform.admin_ui.component, group: 'dashboard-blocks' }
+
+    ezplatform.adminui.dashboard.all:
+        parent: EzSystems\EzPlatformAdminUi\Component\TwigComponent
+        arguments:
+            $template: 'EzPlatformAdminUiBundle:dashboard/block:all.html.twig'
+        tags:
+            - { name: ezplatform.admin_ui.component, group: 'dashboard-blocks' }
