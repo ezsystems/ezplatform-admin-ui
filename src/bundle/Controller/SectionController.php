@@ -14,7 +14,7 @@ use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\Content\Section;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
-use eZ\Publish\Core\Repository\SearchService;
+use eZ\Publish\API\Repository\SearchService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
@@ -25,8 +25,8 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
-use EzSystems\EzPlatformAdminUiBundle\View\EzView;
-use EzSystems\EzPlatformAdminUiBundle\View\Template\EzTemplate;
+use EzSystems\EzPlatformAdminUiBundle\View\EzPagerfantaView;
+use EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -207,7 +207,7 @@ class SectionController extends Controller
             ]);
         };
 
-        $pagination = (new EzView(new EzTemplate($this->translator)))->render($pagerfanta, $routeGenerator);
+        $pagination = (new EzPagerfantaView(new EzPagerfantaTemplate($this->translator)))->render($pagerfanta, $routeGenerator);
 
         return $this->render('EzPlatformAdminUiBundle:admin/section:assigned_content.html.twig', [
             'section' => $section,

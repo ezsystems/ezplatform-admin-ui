@@ -6,18 +6,21 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\View;
 
-use EzSystems\EzPlatformAdminUiBundle\View\Template\EzTemplate;
+use EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate;
 use Pagerfanta\View\DefaultView;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class EzView extends DefaultView
+/**
+ * View to render Pagerfanta pagination.
+ */
+class EzPagerfantaView extends DefaultView
 {
     /** @var TranslatorInterface */
     private $translator;
 
     protected function createDefaultTemplate()
     {
-        return new EzTemplate($this->translator);
+        return new EzPagerfantaTemplate($this->translator);
     }
 
     protected function getDefaultProximity()

@@ -10,7 +10,10 @@ use Pagerfanta\View\Template\TwitterBootstrap4Template;
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class EzTemplate extends TwitterBootstrap4Template
+/**
+ * Template to customize Pagerfanta pagination.
+ */
+class EzPagerfantaTemplate extends TwitterBootstrap4Template
 {
     /**
      * @param TranslatorInterface $translator
@@ -35,6 +38,6 @@ class EzTemplate extends TwitterBootstrap4Template
             'pagination'
         );
 
-        $this->setOptions(['prev_message' => $prevMessage, 'next_message' => $nextMessage, 'css_container_class' => 'ez-pagination']);
+        $this->setOptions(['prev_message' => $prevMessage, 'next_message' => $nextMessage, 'css_container_class' => 'pagination ez-pagination']);
     }
 }
