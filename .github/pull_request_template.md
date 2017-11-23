@@ -13,5 +13,5 @@
 
 
 #### Checklist:
-- [ ] Coding standards (`$ php-cs-fixer fix .`)
+- [ ] Coding standards (`$ composer fix-cs`)
 - [ ] Ready for Code Review
