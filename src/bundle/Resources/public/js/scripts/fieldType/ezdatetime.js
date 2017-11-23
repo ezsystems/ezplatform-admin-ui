@@ -56,14 +56,6 @@
     };
     const updateInputValue = (sourceInput, date) => {
         date = new Date(date);
-        date = new Date(Date.UTC(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate(),
-            date.getHours(),
-            date.getMinutes(),
-            date.getSeconds()
-        ));
 
         sourceInput.value = Math.floor(date.getTime() / 1000);
         sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
