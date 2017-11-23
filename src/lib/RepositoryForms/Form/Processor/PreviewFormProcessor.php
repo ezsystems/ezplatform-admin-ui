@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Processor;
+namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor;
 
 use Exception;
 use eZ\Publish\API\Repository\ContentService;
@@ -20,8 +20,8 @@ use eZ\Publish\API\Repository\Values\Content\ContentStruct;
 use EzSystems\EzPlatformAdminUi\Form\Event\ContentEditEvents;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\RepositoryForms\Data\Content\ContentCreateData;
-use EzSystems\RepositoryForms\Data\Content\ContentData;
 use EzSystems\RepositoryForms\Data\Content\ContentUpdateData;
+use EzSystems\RepositoryForms\Data\NewnessChecker;
 use EzSystems\RepositoryForms\Event\FormActionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -34,7 +34,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * Listens for and processes RepositoryForm events.
  */
-class ContentFormProcessor implements EventSubscriberInterface
+class PreviewFormProcessor implements EventSubscriberInterface
 {
     /** @var ContentService */
     private $contentService;
@@ -129,7 +129,12 @@ class ContentFormProcessor implements EventSubscriberInterface
      */
     private function saveDraft(ContentStruct $data, string $languageCode): Content
     {
+        $mainLanguageCode = $this->resolveMainLanguageCode($data);
         foreach ($data->fieldsData as $fieldDefIdentifier => $fieldData) {
+            if ($mainLanguageCode != $languageCode && !$fieldData->fieldDefinition->isTranslatable) {
+                continue;
+            }
+
             $data->setField($fieldDefIdentifier, $fieldData->value, $languageCode);
         }
 
@@ -145,7 +150,7 @@ class ContentFormProcessor implements EventSubscriberInterface
     /**
      * Returns content create or edit URL depending on $data type.
      *
-     * @param ContentData|ContentCreateData|ContentUpdateData $data
+     * @param ContentCreateData|ContentUpdateData $data
      * @param string $languageCode
      *
      * @return string
@@ -154,7 +159,7 @@ class ContentFormProcessor implements EventSubscriberInterface
      * @throws MissingMandatoryParametersException
      * @throws InvalidParameterException
      */
-    private function getContentEditUrl(ContentData $data, string $languageCode): string
+    private function getContentEditUrl($data, string $languageCode): string
     {
         return $data->isNew()
             ? $this->urlGenerator->generate('ez_content_create_no_draft', [
@@ -167,5 +172,17 @@ class ContentFormProcessor implements EventSubscriberInterface
                 'versionNo' => $data->contentDraft->getVersionInfo()->versionNo,
                 'language' => $languageCode,
             ]);
+    }
+
+    /**
+     * @param ContentUpdateData|ContentCreateData|NewnessChecker $data
+     *
+     * @return string
+     */
+    private function resolveMainLanguageCode($data): string
+    {
+        return $data->isNew()
+            ? $data->mainLanguageCode
+            : $data->contentDraft->getVersionInfo()->getContentInfo()->mainLanguageCode;
     }
 }

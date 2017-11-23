@@ -3,7 +3,11 @@
 {% trans_default_domain 'content_edit' %}
 
 {% block details %}
-    <h2 class="text-muted">{{ 'editing'|trans({'%contentType%': contentType.name})|desc('Editing - %contentType%') }}</h2>
+    {% if baseLanguage is defined and baseLanguage is not null %}
+        <h2 class="text-muted">{{ 'editing_in_language_based_on'|trans({'%contentName%': content.name, '%languageName%': language.name, '%baseLanguageName%': baseLanguage.name})|desc('Editing - %contentName% in %languageName% based on %baseLanguageName%') }}</h2>
+    {% else %}
+        <h2 class="text-muted">{{ 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing - %contentName% in %languageName%') }}</h2>
+    {% endif %}
     <h1>
         <svg class="ez-icon ez-icon-{{ contentType.identifier }}">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ contentType.identifier }}"></use>

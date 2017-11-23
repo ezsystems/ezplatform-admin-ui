@@ -27,9 +27,11 @@ services:
     # Repository Forms
     EzSystems\RepositoryForms\Form\Type\Role\LimitationType: '@ezrepoforms.policy.limitation.form'
     EzSystems\RepositoryForms\EventListener\ViewTemplatesListener: '@ezrepoforms.view_templates_listener'
+    EzSystems\RepositoryForms\Form\ActionDispatcher\ContentDispatcher: '@ezrepoforms.action_dispatcher.content'
 
     # Support Tools
     EzSystems\EzSupportToolsBundle\SystemInfo\SystemInfoCollectorRegistry: '@support_tools.system_info.collector_registry'
 
     # Symfony
     Symfony\Component\Translation\TranslatorInterface: '@translator'
+

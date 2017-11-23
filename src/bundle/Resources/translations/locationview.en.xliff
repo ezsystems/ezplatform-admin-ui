@@ -266,6 +266,26 @@
         <target state="new">Link</target>
         <note>key: tab.relations.table.relation_type.link</note>
       </trans-unit>
+      <trans-unit id="5022ce879be6a69956541173bf658dccff5d7280" resname="tab.translations.add.base_language">
+        <source>Base this translation on an existing translation</source>
+        <target state="new">Base this translation on an existing translation</target>
+        <note>key: tab.translations.add.base_language</note>
+      </trans-unit>
+      <trans-unit id="c22e9f75640384f917cc76e6736b3a6e91d70f1d" resname="tab.translations.add.cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: tab.translations.add.cancel</note>
+      </trans-unit>
+      <trans-unit id="fe6c962e1d0766f59a66d3766c56edffdce6735d" resname="tab.translations.add.language">
+        <source>Select a language for your new translation</source>
+        <target state="new">Select a language for your new translation</target>
+        <note>key: tab.translations.add.language</note>
+      </trans-unit>
+      <trans-unit id="2d1ceec2bfb85db323e21e358b6be6aad547e1d0" resname="tab.translations.add.title">
+        <source>Create new translation</source>
+        <target state="new">Create new translation</target>
+        <note>key: tab.translations.add.title</note>
+      </trans-unit>
       <trans-unit id="d494d753de03a08f7a10792b727ec88ca74d4913" resname="tab.translations.language_code">
         <source>Language code</source>
         <target state="new">Language code</target>
@@ -370,6 +390,11 @@
         <source>Version</source>
         <target state="new">Version</target>
         <note>key: tab.versions.table.version</note>
+      </trans-unit>
+      <trans-unit id="cf6a7c9a98608dd58b428ce2187e3229b64b5701" resname="translation.modal_close">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note>key: translation.modal_close</note>
       </trans-unit>
     </body>
   </file>
