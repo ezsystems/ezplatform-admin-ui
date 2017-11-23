@@ -4,6 +4,7 @@ imports:
     - { resource: services/tabs.yml }
     - { resource: services/menu.yml }
     - { resource: services/application_config.yml }
+    - { resource: services/type_extensions.yml }
 
 parameters:
 
@@ -76,3 +77,13 @@ services:
             $flashBag: "@=service('session').getFlashBag()"
 
     EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler'
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\:
+        resource: "../../../lib/Form/Processor/*"
+        public: true
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: EzSystems\RepositoryForms\Form\Type\Content\ContentEditType }

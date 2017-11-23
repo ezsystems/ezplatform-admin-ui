@@ -95,3 +95,16 @@
         }
     }
 }
+
+.ez-preview__action {
+    .ez-icon {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    &.ez-preview__action--selected {
+        .ez-icon {
+            fill: $ez-white;
+        }
+    }
+}

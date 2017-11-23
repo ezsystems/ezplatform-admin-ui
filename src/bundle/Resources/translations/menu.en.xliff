@@ -36,6 +36,11 @@
         <target state="new">Cancel</target>
         <note>key: content_create__sidebar_right__cancel</note>
       </trans-unit>
+      <trans-unit id="3472403e4730d2027e9b32c2521f952ac29b39e5" resname="content_create__sidebar_right__preview">
+        <source>Preview</source>
+        <target state="new">Preview</target>
+        <note>key: content_create__sidebar_right__preview</note>
+      </trans-unit>
       <trans-unit id="ff56ff65983b48e2ec27b51c9a5a2d34e86b574d" resname="content_create__sidebar_right__publish">
         <source>Publish</source>
         <target state="new">Publish</target>
@@ -50,6 +55,11 @@
         <source>Delete draft</source>
         <target state="new">Delete draft</target>
         <note>key: content_edit__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="0698df9938e380422409df827952248fbfcaf02d" resname="content_edit__sidebar_right__preview">
+        <source>Preview</source>
+        <target state="new">Preview</target>
+        <note>key: content_edit__sidebar_right__preview</note>
       </trans-unit>
       <trans-unit id="3ca4deb7a0f072b3613df143969726ea2cf79487" resname="content_edit__sidebar_right__publish">
         <source>Publish</source>

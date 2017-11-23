@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions as ApiException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentDraftCreateData;
@@ -46,6 +47,9 @@ class ContentController extends Controller
     /** @var ContentMainLocationUpdateMapper */
     private $contentMainLocationUpdateMapper;
 
+    /** @var string */
+    private $defaultSiteaccess;
+
     /**
      * @param NotificationHandlerInterface $notificationHandler
      * @param ContentService $contentService
@@ -53,6 +57,7 @@ class ContentController extends Controller
      * @param SubmitHandler $submitHandler
      * @param TranslatorInterface $translator
      * @param ContentMainLocationUpdateMapper $contentMetadataUpdateMapper
+     * @param string $defaultSiteaccess
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -60,7 +65,8 @@ class ContentController extends Controller
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
         TranslatorInterface $translator,
-        ContentMainLocationUpdateMapper $contentMetadataUpdateMapper
+        ContentMainLocationUpdateMapper $contentMetadataUpdateMapper,
+        string $defaultSiteaccess
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->contentService = $contentService;
@@ -68,6 +74,7 @@ class ContentController extends Controller
         $this->submitHandler = $submitHandler;
         $this->translator = $translator;
         $this->contentMainLocationUpdateMapper = $contentMetadataUpdateMapper;
+        $this->defaultSiteaccess = $defaultSiteaccess;
     }
 
     /**
@@ -221,5 +228,24 @@ class ContentController extends Controller
         }
 
         return $this->redirectToRoute('ezplatform.dashboard');
+    }
+
+    /**
+     * @param Content $content
+     * @param string|null $languageCode
+     *
+     * @return Response
+     */
+    public function previewAction(Content $content, ?string $languageCode = null): Response
+    {
+        if (null === $languageCode) {
+            $languageCode = $content->contentInfo->mainLanguageCode;
+        }
+
+        return $this->render('@EzPlatformAdminUi/content/content_preview.html.twig', [
+            'content' => $content,
+            'language_code' => $languageCode,
+            'siteaccess' => $this->defaultSiteaccess,
+        ]);
     }
 }
