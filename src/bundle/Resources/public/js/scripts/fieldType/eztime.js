@@ -30,7 +30,7 @@
                 errorMessage
             };
         }
-    };
+    }
 
     const validator = new EzTimeValidator({
         classInvalid: 'is-invalid',
@@ -55,18 +55,26 @@
         time_24hr: true
     };
     const updateInputValue = (sourceInput, date) => {
-        date = new Date(date);
+        const event = new CustomEvent(EVENT_VALUE_CHANGED);
 
+        if (!date.length) {
+            sourceInput.value = '';
+            sourceInput.dispatchEvent(event);
+
+            return;
+        }
+
+        date = new Date(date[0]);
         sourceInput.value = (date.getHours() * 3600) + (date.getMinutes() * 60) + date.getSeconds();
 
-        sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
+        sourceInput.dispatchEvent(event);
     };
     const initFlatPickr = (field) => {
         const sourceInput = field.querySelector(SELECTOR_INPUT);
+        const flatPickrInput = field.querySelector('.flatpickr-input');
+        const btnClear = field.querySelector('.ez-data-source__btn--clear-input');
         const enableSeconds = sourceInput.dataset.seconds === '1';
         let defaultDate;
-
-        sourceInput.classList.add('ez-data-source__input--visually-hidden');
 
         if (sourceInput.value) {
             const value = parseInt(sourceInput.value, 10);
@@ -79,7 +87,14 @@
             defaultDate = date;
         }
 
-        flatpickr(field.querySelector('.flatpickr-input'), Object.assign({}, timeConfig, {
+        btnClear.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            flatPickrInput.value = '';
+            sourceInput.value = '';
+        }, false);
+
+        flatpickr(flatPickrInput, Object.assign({}, timeConfig, {
             enableSeconds,
             onChange: updateInputValue.bind(null, sourceInput),
             dateFormat: enableSeconds ? 'H:i:S' : 'H:i',

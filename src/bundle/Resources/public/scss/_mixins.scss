@@ -118,3 +118,40 @@
         }
     }
 }
+
+@mixin datetime-field() {
+    .ez-data-source__input-wrapper {
+        max-width: 25ch;
+        position: relative;
+    }
+
+    .ez-data-source__btn--clear-input {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        right: .25rem;
+        transform: translate(0, -50%);
+        background: none;
+        border: 0;
+        width: 1.5rem;
+        height: 1.5rem;
+        line-height: .5rem;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        outline: none;
+
+        .ez-icon {
+            fill: $ez-ground-base-dark;
+            transition: fill .3s $ez-admin-transition;
+        }
+
+        &:hover,
+        &:focus {
+            .ez-icon {
+                fill: $ez-color-base-pale;
+            }
+        }
+    }
+}

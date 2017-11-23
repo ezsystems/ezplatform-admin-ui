@@ -108,3 +108,14 @@
         }
     }
 }
+
+.ez-field-edit--ezdate,
+.ez-field-edit--ezdatetime,
+.ez-field-edit--eztime {
+    .ez-data-source__btn--clear-input {
+        .ez-icon {
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+}
