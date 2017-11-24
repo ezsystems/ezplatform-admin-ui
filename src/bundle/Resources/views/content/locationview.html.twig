@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
-            {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location}) %}
+            {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': contentType}) %}
             {{ knp_menu_render(content_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 
             <div class="ez-extra-actions-container">

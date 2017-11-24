@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Menu;
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
@@ -39,8 +40,11 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
      * @param FactoryInterface $factory
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher, PermissionResolver $permissionResolver)
-    {
+    public function __construct(
+        FactoryInterface $factory,
+        EventDispatcherInterface $eventDispatcher,
+        PermissionResolver $permissionResolver
+    ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
@@ -67,10 +71,17 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     {
         /** @var Location $location */
         $location = $options['location'];
+        /** @var ContentType $contentType */
+        $contentType = $options['content_type'];
         /** @var ItemInterface|ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
-        $canCreate = $this->permissionResolver->hasAccess('content', 'create');
-        $canEdit = $this->permissionResolver->canUser('content', 'edit', $location->getContentInfo());
+        $canCreate = $this->permissionResolver->hasAccess('content', 'create')
+            && $contentType->isContainer;
+        $canEdit = $this->permissionResolver->canUser(
+            'content',
+            'edit',
+            $location->getContentInfo()
+        );
 
         $createAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--create',
