@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Trash;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
+use eZ\Publish\API\Repository\Values\Content\TrashItem;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -20,7 +20,7 @@ class TrashItemRestoreData
     /**
      * @Assert\NotBlank()
      *
-     * @var TrashItemData[]
+     * @var TrashItem[]
      */
     public $trashItems;
 
@@ -28,7 +28,7 @@ class TrashItemRestoreData
     public $location;
 
     /**
-     * @param TrashItemData[] $trashItems
+     * @param TrashItem[] $trashItems
      * @param Location|null $location
      */
     public function __construct(array $trashItems = [], ?Location $location = null)
@@ -38,7 +38,7 @@ class TrashItemRestoreData
     }
 
     /**
-     * @return TrashItemData[]
+     * @return TrashItem[]
      */
     public function getTrashItems(): array
     {
@@ -46,7 +46,7 @@ class TrashItemRestoreData
     }
 
     /**
-     * @param TrashItemData[] $trashItems
+     * @param TrashItem[] $trashItems
      */
     public function setTrashItems(array $trashItems)
     {

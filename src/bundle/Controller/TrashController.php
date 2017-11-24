@@ -133,7 +133,7 @@ class TrashController extends Controller
         }
 
         $trashItemRestoreForm = $this->formFactory->restoreTrashItem(
-            new TrashItemRestoreData($trashItemsList, null)
+            new TrashItemRestoreData($pagerfanta->getCurrentPageResults(), null)
         );
 
         $trashEmptyForm = $this->formFactory->emptyTrash(
@@ -196,9 +196,7 @@ class TrashController extends Controller
     public function restoreAction(Request $request): Response
     {
         if ($this->isGranted(new Attribute('content', 'restore'))) {
-            $form = $this->formFactory->restoreTrashItem(
-                new TrashItemRestoreData()
-            );
+            $form = $this->formFactory->restoreTrashItem();
             $form->handleRequest($request);
 
             if ($form->isSubmitted()) {
@@ -206,7 +204,7 @@ class TrashController extends Controller
                     $newParentLocation = $data->getLocation();
 
                     foreach ($data->getTrashItems() as $trashItem) {
-                        $this->trashService->recover($trashItem->getLocation(), $newParentLocation);
+                        $this->trashService->recover($trashItem, $newParentLocation);
                     }
 
                     if (null === $newParentLocation) {
