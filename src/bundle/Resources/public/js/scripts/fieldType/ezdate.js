@@ -53,23 +53,39 @@
         formatDate: (date) => (new Date(date)).toLocaleDateString()
     };
     const updateInputValue = (sourceInput, date) => {
-        date = new Date(date);
+        const event = new CustomEvent(EVENT_VALUE_CHANGED);
+
+        if (!date.length) {
+            sourceInput.value = '';
+            sourceInput.dispatchEvent(event);
+
+            return;
+        }
+
+        date = new Date(date[0]);
         date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
 
         sourceInput.value = Math.floor(date.getTime() / 1000);
-        sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
+        sourceInput.dispatchEvent(event);
     };
     const initFlatPickr = (field) => {
         const sourceInput = field.querySelector(SELECTOR_INPUT);
+        const flatPickrInput = field.querySelector('.flatpickr-input');
+        const btnClear = field.querySelector('.ez-data-source__btn--clear-input');
         let defaultDate;
 
         if (sourceInput.value) {
             defaultDate = new Date(sourceInput.value * 1000);
         }
 
-        sourceInput.classList.add('ez-data-source__input--visually-hidden');
+        btnClear.addEventListener('click', (event) => {
+            event.preventDefault();
 
-        flatpickr(field.querySelector('.flatpickr-input'), Object.assign({}, dateConfig, {
+            flatPickrInput.value = '';
+            sourceInput.value = '';
+        }, false);
+
+        flatpickr(flatPickrInput, Object.assign({}, dateConfig, {
             onChange: updateInputValue.bind(null, sourceInput),
             defaultDate
         }));
