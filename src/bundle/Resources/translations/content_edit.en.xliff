@@ -11,6 +11,11 @@
         <target state="new">Field type is not editable</target>
         <note>key: content.field.non_editable</note>
       </trans-unit>
+      <trans-unit id="6a2083913f3647b44f205204e369f764e83233b1" resname="content_id">
+        <source>Content ID: %contentId%</source>
+        <target state="new">Content ID: %contentId%</target>
+        <note>key: content_id</note>
+      </trans-unit>
       <trans-unit id="71a8aeb31196db647608ffe1789be9400d61451d" resname="created_by">
         <source>Created by %name%</source>
         <target state="new">Created by %name%</target>
@@ -20,6 +25,11 @@
         <source>Editing - %contentType%</source>
         <target state="new">Editing - %contentType%</target>
         <note>key: editing</note>
+      </trans-unit>
+      <trans-unit id="876d7bdba03c72251ec4c2dc827fc54af7889091" resname="location_id">
+        <source>Location ID: %locationId%</source>
+        <target state="new">Location ID: %locationId%</target>
+        <note>key: location_id</note>
       </trans-unit>
     </body>
   </file>
