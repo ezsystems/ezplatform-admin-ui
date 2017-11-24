@@ -2,6 +2,7 @@
     const SELECTOR_FIELD = '.ez-field-edit--ezimage';
     const SELECTOR_INPUT_FILE = 'input[type="file"]';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
+    const SELECTOR_ALT_WRAPPER = '.ez-field-edit-preview__image-alt';
 
     class EzImageFilePreviewField extends global.eZ.BasePreviewField {
         /**
@@ -44,8 +45,32 @@
         }
     }
 
+    class EzImageFieldValidator extends global.eZ.BaseFileFieldValidator {
+        /**
+         * Validates the alternative text input
+         *
+         * @method validateAltInput
+         * @param {Event} event
+         * @returns {Object}
+         * @memberof EzStringValidator
+         */
+        validateAltInput(event) {
+            const isRequired = event.target.required;
+            const isEmpty = !event.target.value;
+            const isError = (isEmpty && isRequired);
+            const label = event.target.closest(SELECTOR_ALT_WRAPPER).querySelector('.ez-data-source__label').innerHTML;
+            const result = { isError };
+
+            if (isEmpty) {
+                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+            }
+
+            return result;
+        }
+    }
+
     [...document.querySelectorAll(SELECTOR_FIELD)].forEach(fieldContainer => {
-        const validator = new global.eZ.BaseFileFieldValidator({
+        const validator = new EzImageFieldValidator({
             classInvalid: 'is-invalid',
             fieldContainer,
             eventsMap: [
@@ -53,14 +78,20 @@
                     selector: `${SELECTOR_FIELD} ${SELECTOR_INPUT_FILE}`,
                     eventName: 'change',
                     callback: 'validateInput',
-                    invalidStateSelectors: [SELECTOR_FIELD],
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 },
                 {
+                    selector: `${SELECTOR_FIELD} ${SELECTOR_ALT_WRAPPER} .ez-data-source__input`,
+                    eventName: 'blur',
+                    callback: 'validateAltInput',
+                    invalidStateSelectors: ['.ez-data-source__field--alternativeText'],
+                    errorNodeSelectors: [`${SELECTOR_ALT_WRAPPER} .ez-data-source__label-wrapper`],
+                },
+                {
+                    isValueValidator: false,
                     selector: `${SELECTOR_FIELD} ${SELECTOR_INPUT_FILE}`,
                     eventName: 'invalidFileSize',
-                    callback: 'showSizeError',
-                    invalidStateSelectors: [SELECTOR_FIELD],
+                    callback: 'showFileSizeError',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 },
             ],
@@ -72,5 +103,9 @@
         });
 
         previewField.init();
+
+        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
+            [...global.eZ.fieldTypeValidators, validator] :
+            [validator];
     })
 })(window);

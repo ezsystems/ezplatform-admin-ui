@@ -168,7 +168,7 @@
         findExistingErrorNodes(fieldNode, input, selectors) {
             return selectors.reduce((total, selector) => total.concat([...input.closest(SELECTOR_AUTHOR).querySelectorAll(selector)]), []);
         }
-    };
+    }
 
     const validator = new EzAuthorValidator({
         classInvalid: 'is-invalid',
@@ -178,22 +178,24 @@
                 selector: '.ez-data-source__author .ez-data-source__field--name input',
                 eventName: 'blur',
                 callback: 'validateName',
-                invalidStateSelectors: [SELECTOR_FIELD, SELECTOR_AUTHOR, SELECTOR_FIELD_NAME],
+                invalidStateSelectors: [SELECTOR_AUTHOR, SELECTOR_FIELD_NAME],
                 errorNodeSelectors: ['.ez-data-source__field--name .ez-data-source__label-wrapper'],
             },
             {
                 selector: '.ez-data-source__author .ez-data-source__field--email input',
                 eventName: 'blur',
                 callback: 'validateEmail',
-                invalidStateSelectors: [SELECTOR_FIELD, SELECTOR_AUTHOR, SELECTOR_FIELD_EMAIL],
+                invalidStateSelectors: [SELECTOR_AUTHOR, SELECTOR_FIELD_EMAIL],
                 errorNodeSelectors: ['.ez-data-source__field--email .ez-data-source__label-wrapper'],
             },
             {
+                isValueValidator: false,
                 selector: SELECTOR_REMOVE_AUTHOR,
                 eventName: 'click',
                 callback: 'removeItem',
             },
             {
+                isValueValidator: false,
                 selector: '.ez-btn--add-author',
                 eventName: 'click',
                 callback: 'addItem',
@@ -202,4 +204,8 @@
     });
 
     validator.init();
+
+    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
+        [...global.eZ.fieldTypeValidators, validator] :
+        [validator];
 })(window, document);

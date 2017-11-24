@@ -12,11 +12,26 @@
          */
         validateInput(event) {
             const input = event.currentTarget;
+            const dataContainer = this.fieldContainer.querySelector('.ez-field-edit__data');
             const label = this.fieldContainer.querySelector(SELECTOR_FIELD_LABEL).innerHTML;
-            const result = { isError: false };
+            const isRequired = (input.required || this.fieldContainer.classList.contains('ez-field-edit--required'));
+            const dataMaxSize = +input.dataset.maxFileSize;
+            const maxFileSize = parseInt(dataMaxSize, 10);
+            const isEmpty = input.files &&
+                !input.files.length &&
+                dataContainer &&
+                !dataContainer.hasAttribute('hidden');
+            let result = { isError: false };
 
-            if (input.required && !input.files.length) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+            if (isRequired && isEmpty) {
+                result = {
+                    isError: true,
+                    errorMessage: global.eZ.errors.emptyField.replace('{fieldName}', label)
+                };
+            }
+
+            if (!isEmpty && maxFileSize > 0 && input.files[0].size > maxFileSize) {
+                result = this.showFileSizeError();
             }
 
             return result;
@@ -25,9 +40,10 @@
         /**
          * Displays an error message: file size exceeds maximum value
          *
-         * @method showSizeError
+         * @method showFileSizeError
+         * @returns {Object}
          */
-        showSizeError() {
+        showFileSizeError() {
             const label = this.fieldContainer.querySelector(SELECTOR_FIELD_LABEL).innerHTML;
             const result = {
                 isError: true,

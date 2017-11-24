@@ -33,18 +33,18 @@
 {%- endblock %}
 
 {% block form_row_subfield -%}
-    {% set wrapper_class = 'ez-data-source__field ez-data-source__field--' ~ name %}
-    {% set wrapper_attr = wrapper_attr|default({})|merge({class: (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
-    {% set label_wrapper_class = 'ez-data-source__label-wrapper' %}
-    {% set label_class = 'ez-data-source__label' %}
-    {% set widget_wrapper_class = 'ez-data-source__input-wrapper' %}
-    {% set widget_class = 'ez-data-source__input' %}
     {% set required_row_class = 'ez-data-source__field--required' %}
+    {% set label_class = 'ez-data-source__label' %}
+    {% set label_wrapper_class = 'ez-data-source__label-wrapper' %}
+    {% set widget_class = 'ez-data-source__input' %}
+    {% set widget_wrapper_class = 'ez-data-source__input-wrapper' %}
+    {% set wrapper_class = 'ez-data-source__field ez-data-source__field--' ~ name %}
     {% set wrapper_class = wrapper_class|replace({'___name___': name}) %}
+    {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ required_row_class)|trim %}{% endif %}
 
     {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class)|trim}) %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ widget_class)|trim}) %}
-    {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ required_row_class)|trim %}{% endif %}
+    {% set wrapper_attr = wrapper_attr|default({})|merge({class: (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
 
     <div{% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
         <div class="{{ label_wrapper_class }}">
@@ -60,17 +60,19 @@
 {% block form_row_fieldtype %}
     {% set fieldtype_identifier = form.parent.vars.value.fieldDefinition.fieldTypeIdentifier %}
 
-    {% set wrapper_class = 'ez-field-edit ez-field-edit--' ~ fieldtype_identifier %}
-    {% set wrapper_attr = wrapper_attr|default({})|merge({class: (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
-    {% set label_wrapper_class = 'ez-field-edit__label-wrapper' %}
-    {% set label_class = 'ez-field-edit__label' %}
-    {% set widget_wrapper_class = 'ez-field-edit__data' %}
-    {% set widget_class = 'ez-data-source__input' %}
     {% set required_row_class = 'ez-field-edit--required' %}
+    {% set invalid_row_class = 'is-invalid' %}
+    {% set label_class = 'ez-field-edit__label' %}
+    {% set label_wrapper_class = 'ez-field-edit__label-wrapper' %}
+    {% set widget_class = 'ez-data-source__input' %}
+    {% set widget_wrapper_class = 'ez-field-edit__data' %}
+    {% set wrapper_class = 'ez-field-edit ez-field-edit--' ~ fieldtype_identifier %}
+    {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ required_row_class)|trim %}{% endif %}
+    {% if errors|length > 0 %}{% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ invalid_row_class)|trim %}{% endif %}
 
     {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class)|trim}) %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ widget_class)|trim}) %}
-    {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ required_row_class)|trim %}{% endif %}
+    {% set wrapper_attr = wrapper_attr|default({})|merge({'class': (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
 
     <div{% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
         <div class="{{ label_wrapper_class }}">

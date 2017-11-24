@@ -43,9 +43,9 @@
                 selector: '.ez-field-edit--ezboolean input',
                 eventName: 'change',
                 callback: 'validateInput',
-                invalidStateSelectors: [SELECTOR_FIELD],
                 errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
             }, {
+                isValueValidator: false,
                 selector: '.ez-field-edit--ezboolean input',
                 eventName: 'change',
                 callback: 'updateState',
@@ -54,4 +54,8 @@
     });
 
     validator.init();
+
+    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
+        [...global.eZ.fieldTypeValidators, validator] :
+        [validator];
 })(window);

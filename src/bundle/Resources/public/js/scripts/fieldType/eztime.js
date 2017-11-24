@@ -40,13 +40,16 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_INPUT}`,
                 eventName: EVENT_VALUE_CHANGED,
                 callback: 'validateInput',
-                invalidStateSelectors: [SELECTOR_FIELD],
                 errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
             },
         ],
     });
 
     validator.init();
+
+    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
+        [...global.eZ.fieldTypeValidators, validator] :
+        [validator];
 
     const timeFields = [...document.querySelectorAll(SELECTOR_FIELD)];
     const timeConfig = {

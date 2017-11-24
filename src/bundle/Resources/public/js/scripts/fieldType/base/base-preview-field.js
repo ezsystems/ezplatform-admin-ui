@@ -16,8 +16,11 @@
             this.showPreview = this.showPreview.bind(this);
             this.handleRemoveFile = this.handleRemoveFile.bind(this);
             this.handleDropFile = this.handleDropFile.bind(this);
-            this.checkFileSize = this.checkFileSize.bind(this);
-            this.maxFileSize = parseInt(this.inputField.dataset.maxFileSize, 10);
+            this.handleInputChange = this.handleInputChange.bind(this);
+
+            const dataMaxSize = +this.inputField.dataset.maxFileSize;
+
+            this.maxFileSize = parseInt(dataMaxSize, 10);
         }
 
         /**
@@ -72,8 +75,14 @@
          * @param {Event} event
          */
         handleDropFile(event) {
-            if (!this.checkCanDrop(event.dataTransfer.files[0])) {
+            const file = event.dataTransfer.files[0];
+
+            if (!this.checkCanDrop(file)) {
                 return;
+            }
+
+            if (this.maxFileSize > 0 && file.size > this.maxFileSize) {
+                return this.showFileSizeError();
             }
 
             this.inputField.files = event.dataTransfer.files;
@@ -114,15 +123,15 @@
         /**
          * Checks if file size is an allowed limit
          *
-         * @method checkFileSize
+         * @method handleInputChange
          * @param {Event} event
          */
-        checkFileSize(event) {
-            const file = [...event.currentTarget.files][0];
-
-            if (this.maxFileSize !== 0 && file.size > this.maxFileSize) {
-                return this.showFileSizeError();
+        handleInputChange(event) {
+            if (this.maxFileSize > 0 && event.currentTarget.files[0].size > this.maxFileSize) {
+                return this.resetInputField();
             }
+
+            this.fieldContainer.querySelector('.ez-field-edit__option--remove-media').checked = false;
 
             this.showPreview(event);
         }
@@ -141,8 +150,8 @@
                 this.loadDroppedFilePreview(event);
             }
 
-            this.fieldContainer.querySelector(SELECTOR_PREVIEW).classList.remove('ez-visually-hidden');
-            dropZone.classList.add('ez-visually-hidden', true);
+            this.fieldContainer.querySelector(SELECTOR_PREVIEW).removeAttribute('hidden');
+            dropZone.setAttribute('hidden', true);
 
             btnRemove.addEventListener('click', this.handleRemoveFile, false);
             dropZone.removeEventListener('drop', this.handleDropFile);
@@ -167,12 +176,30 @@
         hidePreview() {
             const btnRemove = this.fieldContainer.querySelector(SELECTOR_BTN_REMOVE);
 
-            this.fieldContainer.querySelector(SELECTOR_DATA).classList.remove('ez-visually-hidden');
-            this.fieldContainer.querySelector(SELECTOR_PREVIEW).classList.add('ez-visually-hidden', true);
+            this.fieldContainer.querySelector(SELECTOR_DATA).removeAttribute('hidden');
+            this.fieldContainer.querySelector(SELECTOR_PREVIEW).setAttribute('hidden', true);
+            this.fieldContainer.classList.remove('is-invalid');
 
             btnRemove.removeEventListener('click', this.handleRemoveFile);
 
             this.initializeDropZone();
+        }
+
+        /**
+         * Resets input field state
+         *
+         * @method resetInputField
+         */
+        resetInputField() {
+            const clonedInput = this.clonedInputField.cloneNode(true);
+
+            // required to reset properly the input of file type properly
+            this.inputField.parentNode.replaceChild(clonedInput, this.inputField);
+            this.inputField = clonedInput;
+            this.inputField.addEventListener('change', this.handleInputChange, false);
+            this.fieldContainer.querySelector('.ez-field-edit__option--remove-media').checked = true;
+
+            this.validator.reinit();
         }
 
         /**
@@ -183,13 +210,7 @@
         handleRemoveFile(event) {
             event.preventDefault();
 
-            const clonedInput = this.clonedInputField.cloneNode(true);
-
-            // required to reset properly the input of file type properly
-            this.inputField.parentNode.replaceChild(clonedInput, this.inputField);
-            this.inputField = clonedInput;
-            this.inputField.addEventListener('change', this.showPreview, false);
-
+            this.resetInputField();
             this.hidePreview();
         }
 
@@ -210,7 +231,7 @@
          * @method initializeDropZone
          */
         initializeDropZone() {
-            const dropZone = this.fieldContainer.querySelector('.ez-field-edit__preview.ez-visually-hidden + .ez-field-edit__data');
+            const dropZone = this.fieldContainer.querySelector('.ez-field-edit__preview[hidden] + .ez-field-edit__data');
 
             if (dropZone) {
                 dropZone.addEventListener('drop', this.handleDropFile, false);
@@ -225,7 +246,7 @@
         initializePreview() {
             const preview = this.fieldContainer.querySelector('.ez-field-edit__preview');
 
-            if (!preview.classList.contains('ez-visually-hidden')) {
+            if (!preview.hasAttribute('hidden')) {
                 this.showPreview();
             }
         }
@@ -239,7 +260,7 @@
             this.btnAdd = this.fieldContainer.querySelector('.ez-data-source__btn-add');
 
             this.btnAdd.addEventListener('click', this.openFileSelector, false);
-            this.inputField.addEventListener('change', this.checkFileSize, false);
+            this.inputField.addEventListener('change', this.handleInputChange, false);
             window.addEventListener('drop', this.preventDefaultAction, false);
             window.addEventListener('dragover', this.preventDefaultAction, false);
 
