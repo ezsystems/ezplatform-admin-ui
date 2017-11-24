@@ -12,7 +12,7 @@
     </h1>
 
     <div class="small">
-        {{ contentType.name }} / {{ 'created_by'|trans({'%name%': 'Administrator'})|desc('Created by %name%') }} / {{ content.versionInfo.creationDate|localizeddate('medium', 'full', app.request.locale) }} / Content ID: {{ content.id }}, Main Location ID: {{ content.versionInfo.contentInfo.mainLocationId }}
+        {{ contentType.name }} / {{ 'created_by'|trans({'%name%': 'Administrator'})|desc('Created by %name%') }} / {{ content.versionInfo.creationDate|localizeddate('medium', 'medium', app.request.locale) }} / {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }}{% if content.versionInfo.contentInfo.mainLocationId %}, {{ 'location_id'|trans({'%locationId%': content.versionInfo.contentInfo.mainLocationId})|desc('Location ID: %locationId%') }}{% endif %}
     </div>
     {# @todo remove if statement once getDescription() bug is resolved in kernel #}
     {% if contentType.descriptions is not empty %}
