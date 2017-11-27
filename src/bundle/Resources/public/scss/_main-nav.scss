@@ -4,6 +4,10 @@
     padding: 0;
     background-color: $ez-ground-base-light;
 
+    > .container-fluid {
+        padding-right: 0;
+    }
+
     .nav-tabs {
         background-color: $ez-ground-base-light;
         border: none;

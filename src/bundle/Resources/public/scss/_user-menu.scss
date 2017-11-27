@@ -1,0 +1,59 @@
+.ez-user-menu {
+    position: relative;
+
+    &__name-wrapper {
+        padding: .5rem 2rem .5rem 0;
+
+        &:before,
+        &:after {
+            content: "";
+            height: 10px;
+            width: 2px;
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            background-color: $ez-black;
+        }
+
+        &:before {
+            transform: translate(3px, -50%)  rotate(-135deg);
+        }
+
+        &:after {
+            transform: translate(-3px, -50%)  rotate(135deg);
+        }
+    }
+
+    &__avatar {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+
+    &__items {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        min-width: 100%;
+        background-color: $ez-white;
+        border-radius: 5px;
+        box-shadow: 0 0 10px 0 rgba(0,0,0,.25);
+        z-index: 5;
+        transform: scaleY(1);
+        transform-origin: top center;
+        transition: all .2s $ez-admin-transition;
+
+        &--hidden {
+            transform: scaleY(0);
+        }
+    }
+
+    &__item {
+        width: 100%;
+        cursor: pointer;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid $ez-ground-base-dark;
+        }
+    }
+}
