@@ -1,0 +1,47 @@
+.ez-field-edit--ezkeyword {
+    .ez-data-source__taggify {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 0;
+    }
+
+    .taggify__wrapper {
+        flex: 1 1 auto;
+        order: 2;
+    }
+
+    .taggify__input {
+        border: 0 none;
+        width: 100%;
+        height: 100%;
+        display: block;
+        outline: none;
+        min-width: 100px;
+        padding-bottom: 8px;
+    }
+
+    .taggify__tags {
+        order: 1;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .taggify__tag {
+        background: $ez-color-secondary;
+        padding: 4px 0 4px 8px;
+        color: $ez-white;
+        margin: 0 8px 8px 0;
+    }
+
+    .taggify__btn--remove {
+        color: $ez-white;
+        background: none;
+        border: 0 none;
+    }
+
+    &.is-invalid {
+        .ez-data-source__taggify {
+            border: 1px solid $ez-color-danger;
+        }
+    }
+}
