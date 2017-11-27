@@ -16,7 +16,6 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper;
 use Pagerfanta\Pagerfanta;
-use Pagerfanta\View\TwitterBootstrap4View;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -39,7 +38,7 @@ class SearchController extends Controller
     private $submitHandler;
 
     /** @var int */
-    private $defaultLimit;
+    private $defaultPaginationLimit;
 
     /**
      * @param SearchService $searchService
@@ -47,7 +46,7 @@ class SearchController extends Controller
      * @param UrlGeneratorInterface $urlGenerator
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
-     * @param int $defaultLimit
+     * @param int $defaultPaginationLimit
      */
     public function __construct(
         SearchService $searchService,
@@ -55,14 +54,14 @@ class SearchController extends Controller
         UrlGeneratorInterface $urlGenerator,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        $defaultLimit
+        int $defaultPaginationLimit
     ) {
         $this->searchService = $searchService;
         $this->pagerContentToDataMapper = $pagerContentToDataMapper;
         $this->urlGenerator = $urlGenerator;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
-        $this->defaultLimit = $defaultLimit;
+        $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
     /**
@@ -77,7 +76,7 @@ class SearchController extends Controller
     public function searchAction(Request $request): Response
     {
         $search = $request->query->get('search');
-        $limit = $search['limit'] ?? $this->defaultLimit;
+        $limit = $search['limit'] ?? $this->defaultPaginationLimit;
         $page = $search['page'] ?? 1;
         $query = $search['query'];
 
@@ -115,23 +114,10 @@ class SearchController extends Controller
                 $pagerfanta->setMaxPerPage($limit);
                 $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
-                $routeGenerator = function ($page) use ($data) {
-                    return $this->urlGenerator->generate('ezplatform.search', [
-                        'search' => [
-                            'query' => $data->getQuery(),
-                            'page' => $page,
-                            'limit' => $data->getLimit(),
-                        ],
-                    ]);
-                };
-
-                $pagination = (new TwitterBootstrap4View())->render($pagerfanta, $routeGenerator);
-
                 return $this->render('@EzPlatformAdminUi/admin/search/search.html.twig', [
                     'results' => $this->pagerContentToDataMapper->map($pagerfanta),
                     'form' => $form->createView(),
-                    'pagination' => $pagination,
-                    'pagerfanta' => $pagerfanta,
+                    'pager' => $pagerfanta,
                 ]);
             });
 
