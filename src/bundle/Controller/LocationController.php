@@ -34,6 +34,8 @@ use Symfony\Component\Translation\Exception\InvalidArgumentException as Translat
 
 class LocationController extends Controller
 {
+    const LOCATION_TAB_URI_FRAGMENT = 'ez-tab-location-view-locations';
+
     /** @var NotificationHandlerInterface */
     private $notificationHandler;
 
@@ -250,7 +252,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $newLocation->id,
-                    '_fragment' => 'ez-tab-location-view-locations',
+                    '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
                 ]));
             });
 
@@ -261,7 +263,7 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $location->id,
-            '_fragment' => 'ez-tab-location-view-locations',
+            '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
         ]));
     }
 
@@ -342,7 +344,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                    '_fragment' => 'ez-tab-location-view-locations',
+                    '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
                 ]));
             });
 
@@ -353,6 +355,7 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $contentInfo->mainLocationId,
+            '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
         ]));
     }
 
@@ -392,7 +395,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                    '_fragment' => 'ez-tab-location-view-locations',
+                    '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
                 ]));
             });
 
@@ -403,6 +406,7 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $contentInfo->mainLocationId,
+            '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
         ]));
     }
 
@@ -454,7 +458,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                    '_fragment' => 'ez-tab-location-view-locations',
+                    '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
                 ]));
             });
 
@@ -465,6 +469,7 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $contentInfo->mainLocationId,
+            '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
         ]));
     }
 
@@ -500,7 +505,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                         'locationId' => $location->getContentInfo()->mainLocationId,
-                        '_fragment' => 'ez-tab-location-view-details',
+                        '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
                     ]));
             });
 
@@ -511,6 +516,7 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $location->getContentInfo()->mainLocationId,
+            '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
         ]));
     }
 }
