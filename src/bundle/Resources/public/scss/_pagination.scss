@@ -1,0 +1,35 @@
+.ez-pagination {
+    font-size: $ez-pagination-font-size;
+}
+
+.page-item {
+    &:first-child:not(.disabled), &:last-child:not(.disabled) {
+        .page-link {
+            background-color: $ez-color-secondary;
+        }
+    }
+
+    &:first-child, &:last-child {
+        .page-link {
+            border-radius: $ez-pagination-border-radius;
+            color: $ez-white;
+        }
+    }
+
+    &.active .page-link {
+        font-weight: bold;
+    }
+}
+
+.page-item.prev, .page-item.next {
+    &.disabled .page-link {
+        color: $ez-white;
+        background-color: $ez-ground-base-medium;
+        border: $ez-ground-base-medium;
+    }
+}
+
+.page-link {
+    margin: $ez-pagination-margin;
+    border-radius: $ez-pagination-page-link-radius;
+}

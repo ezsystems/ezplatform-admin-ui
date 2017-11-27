@@ -21,10 +21,35 @@
         <target state="new">Assignments count</target>
         <note>key: section.assigned.content</note>
       </trans-unit>
-      <trans-unit id="b3a79602ff55ce138d41cd00a9d93ff6a6324604" resname="section.assigned.contentcount">
-        <source>{0} Section not assigned to any content item.|[1,+Inf[ This section is assigned to %count% content items.</source>
-        <target state="new">{0} Section not assigned to any content item.|[1,+Inf[ This section is assigned to %count% content items.</target>
-        <note>key: section.assigned.contentcount</note>
+      <trans-unit id="e04ac63bba940de331146dac711b1633407e5ce9" resname="section.assigned_content.empty">
+        <source>No content items.</source>
+        <target state="new">No content items.</target>
+        <note>key: section.assigned_content.empty</note>
+      </trans-unit>
+      <trans-unit id="d40d7fd957935deb539c21b9b49f34d4016c69d0" resname="section.assigned_content.empty_desc">
+        <source>Content items you assign to this section will appear here.</source>
+        <target state="new">Content items you assign to this section will appear here.</target>
+        <note>key: section.assigned_content.empty_desc</note>
+      </trans-unit>
+      <trans-unit id="60771f4109f17ae27080b34e9322fd7cb02f45b3" resname="section.assigned_content.header">
+        <source>Content items in %name% (%count%)</source>
+        <target state="new">Content items in %name% (%count%)</target>
+        <note>key: section.assigned_content.header</note>
+      </trans-unit>
+      <trans-unit id="adcc2af264c7ae84e69396a8ff7ea5a259abd01e" resname="section.assigned_content.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: section.assigned_content.name</note>
+      </trans-unit>
+      <trans-unit id="2fe0fba3bd48001b4d8129930deec8cf683a5039" resname="section.assigned_content.path">
+        <source>Path</source>
+        <target state="new">Path</target>
+        <note>key: section.assigned_content.path</note>
+      </trans-unit>
+      <trans-unit id="741d668d8a98bbaa2195e996de4402f24ef7d60e" resname="section.assigned_content.type">
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
+        <note>key: section.assigned_content.type</note>
       </trans-unit>
       <trans-unit id="0a6c7f3919b09caa9eee957a4949d3c9b6dce16e" resname="section.create.success">
         <source>Section '%name%' created.</source>
@@ -65,6 +90,11 @@
         <source>Identifier</source>
         <target state="new">Identifier</target>
         <note>key: section.identifier.label</note>
+      </trans-unit>
+      <trans-unit id="105a971e4f7e75ad6066301cedc90bd4acf0ae12" resname="section.information.header">
+        <source>Section information</source>
+        <target state="new">Section information</target>
+        <note>key: section.information.header</note>
       </trans-unit>
       <trans-unit id="1f9b6e37416ff607de9d4fa280dce2f734ea622c" resname="section.list">
         <source>Sections</source>
@@ -107,8 +137,8 @@
         <note>key: section.update.title</note>
       </trans-unit>
       <trans-unit id="7ca9da842cdea433f0a9e05a8c6b135def0bc6e3" resname="section.view.title">
-        <source>"%identifier%" Section</source>
-        <target state="new">"%identifier%" Section</target>
+        <source>Section: %identifier%</source>
+        <target state="new">Section: %identifier%</target>
         <note>key: section.view.title</note>
       </trans-unit>
     </body>
