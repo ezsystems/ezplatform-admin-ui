@@ -13,6 +13,11 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.main }
 
+    EzSystems\EzPlatformAdminUi\Menu\UserMenuBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.user }
+
     EzSystems\EzPlatformAdminUi\Menu\LeftSidebarBuilder:
         public: true
         tags:

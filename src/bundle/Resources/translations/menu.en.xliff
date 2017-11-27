@@ -141,6 +141,11 @@
         <target state="new">Empty Trash</target>
         <note>key: trash__sidebar_right__empty_trash</note>
       </trans-unit>
+      <trans-unit id="06accb26fbb1b72012942af2b3e03f7c138e28c3" resname="user__content">
+        <source>Logout</source>
+        <target state="new">Logout</target>
+        <note>key: user__content</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

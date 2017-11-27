@@ -16,17 +16,20 @@
             </ul>
             <div class="ez-user-menu ml-md-auto">
                 <div class='ez-user-menu__name-wrapper'>
-                    <span class="ez-user-menu__name">Alexandria</span>
-                    <img class="ez-user-menu__avatar" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QTQxQjAyNkFEMTVGMTFFNUI4OUY5NjJDMzAzMzJGMDgiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QTQxQjAyNjlEMTVGMTFFNUI4OUY5NjJDMzAzMzJGMDgiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3Qzc2NkFFRkQxNUMxMUU1Qjc1MDgyN0Q0MkJBREMwOCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3Qzc2NkFGMEQxNUMxMUU1Qjc1MDgyN0Q0MkJBREMwOCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pia2oyUAAAHoSURBVHjaYvz//z/DYAZMDIMcjDpw1IGjDhx14Eh3IAuMsWbNGnLNEADifCAOBGJZqNgjIN4AxBOB+AM5hoaEhKA6kExgDvIbEMugiQsBsQEQp4DsAuKTAxHFpkB8AIvjkAFIbj8QGw2EAycAMQcR6jihaunqQB8gtiJBvS0Q+9LTgTZk6HGgpwM1yNAjT08HviNDzxd6OvAIGXqO0tOB24H4DQnqQWq30NOBz4G4nQT1TVA9dC0H+4C4l0h1kweqsVACxIZAPB0tyl8D8TSoXPFAtmZkoTl6JRDfQxK/BxV7j9SAoKw1QwJghjYA4qGFLyeORsRBKPs7tD5eBG1Y/KVlCIKqq1tAvAKIPXE4Dltd7AXVc5vUKo9YB3IB8Vog3gTEShTEmCLUDFBIclPLgSBDLwFxEBUbysFAfBFqNkUOVAbiY1Ca2gBk5nEgViHXgXxAvBGIJWjY5RCHJh1uchwIKtu06dAv0gPiWaQ6MByIo+jYeYuC2kmUA0HlXOUA9DAroXYTdCAot+oPgAP1obmboAOjB7CfHkXIgaBC2GkAHeiEXhEwodUW9kDMO4AO5IVWocLYHAjK7saDYDjGGOoWDAcaQVshAw00kGsX5OYWGxD/hzaPPg2AwxihtRfI7l8wQYAAAwDwG0iKoNe3wAAAAABJRU5ErkJggg==" alt="">
+                    {% set user = admin_ui_config.user.user%}
+                    <span class="ez-user-menu__name">{{ user.name }}</span>
+                    {% if admin_ui_config.user.profile_picture_field is not null and admin_ui_config.user.profile_picture_field.value.uri is not null %}
+                        {% set imageVariation = ez_image_alias(admin_ui_config.user.profile_picture_field, user.versionInfo, 'ezplatform_admin_ui_profile_picture_user_menu') %}
+                        {% set src = imageVariation ? asset(imageVariation.uri) : asset('bundles/ezplatformadminui/img/default-profile-picture.png') %}
+                        <img class="ez-user-menu__avatar" src="{{ src }}" alt="{{ user.name }}">
+                    {% else %}
+                        <img class="ez-user-menu__avatar" src="{{ asset('bundles/ezplatformadminui/img/default-profile-picture.png') }}" alt="{{ user.name }}">
+                    {% endif %}
                 </div>
-                <ul class="nav navbar-nav ez-user-menu__items ez-user-menu__items--hidden">
-                    {# @todo use knp for user menu as well #}
-                    <li class="nav-item ez-user-menu__item">
-                        <a class="nav-link" href="{{ url('logout') }}">
-                            {{ 'authentication.logout'|trans|desc('Logout') }}
-                        </a>
-                    </li>
-                </ul>
+                {{ knp_menu_render('ezplatform_admin_ui.menu.user', {
+                    'depth': 1,
+                    'template': '@EzPlatformAdminUi/parts/menu/user_menu.html.twig'
+                }) }}
             </div>
         </div>
     </div>

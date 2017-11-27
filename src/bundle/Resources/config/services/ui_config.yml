@@ -1,0 +1,25 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings:
+        arguments:
+            $locationMappings: '%ezplatform.multifile_upload.location.mappings%'
+            $defaultMappings: '%ezplatform.multifile_upload.location.default_mappings%'
+            $fallbackContentType: '%ezplatform.multifile_upload.fallback_content_type%'
+            $maxFileSize: '%ez_systems.multifile_upload.max_file_size%'
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'multiFileUpload' }
+
+    ezsystems.ezplatform_admin_ui.ui.config.provider.image_variations:
+        class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\Value
+        arguments:
+            $value: '$image_variations$'
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'imageVariations' }
+
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\User:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'user' }
