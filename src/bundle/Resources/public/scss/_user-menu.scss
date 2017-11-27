@@ -4,6 +4,11 @@
     &__name-wrapper {
         padding: .5rem 2rem .5rem 0;
 
+        .ez-user-menu__name {
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
         &:before,
         &:after {
             content: "";
