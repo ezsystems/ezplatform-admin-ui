@@ -1,0 +1,69 @@
+.ez-field-edit--ezgmaplocation {
+    .ez-field-edit__data {
+        padding: 16px;
+        background: $ez-ground-base;
+    }
+
+    .ez-data-source {
+        display: grid;
+        grid-template-columns: 1fr 16px 200px;
+        grid-template-rows: repeat(4, minmax(50, auto));
+        grid-template-areas:
+            "addr . ."
+            "map . side1"
+            "map . side2"
+            "map . side3";
+
+        &__map {
+            grid-area: map;
+        }
+
+        &__field--address {
+            grid-area: addr;
+
+            .ez-data-source__label {
+                margin-top: 0;
+            }
+
+            .ez-data-source__input-wrapper {
+                padding-bottom: 8px;
+                display: flex;
+            }
+
+            .ez-data-source__input {
+                border-radius: .25rem 0 0 .25rem;
+            }
+        }
+
+        &__locate-me {
+            grid-area: side1;
+        }
+
+        @mixin map-invalid-input() {
+            &.is-invalid {
+                .ez-data-source__label {
+                    color: $ez-color-danger;
+                }
+
+                .ez-data-source__input {
+                    border: 1px solid $ez-color-danger;
+                    background: #fceaec;
+                }
+            }
+        }
+
+        &__field--latitude {
+            grid-area: side2;
+            @include map-invalid-input();
+        }
+
+        &__field--longitude {
+            grid-area: side3;
+            @include map-invalid-input();
+        }
+    }
+
+    .btn--search-by-address {
+        border-radius: 0 .25rem .25rem 0;
+    }
+}
