@@ -15,7 +15,7 @@
             {% block form_before %}{% endblock %}
 
             {% block form %}
-                {{ form_start(form) }}
+                {{ form_start(form, {'attr': {'class': 'ez-form-validate'}}) }}
 
                 {% block form_fields %}
                     {% for field in form.fieldsData -%}

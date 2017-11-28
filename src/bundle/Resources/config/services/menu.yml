@@ -52,3 +52,14 @@ services:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.section_create.sidebar_right }
+
+    EzSystems\EzPlatformAdminUi\Menu\UserCreateRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.user_create.sidebar_right }
+
+    EzSystems\EzPlatformAdminUi\Menu\UserEditRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.user_edit.sidebar_right }
+

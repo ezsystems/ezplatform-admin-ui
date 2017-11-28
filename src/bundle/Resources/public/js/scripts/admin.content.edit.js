@@ -1,5 +1,5 @@
 (function (global, doc) {
-    const form = doc.querySelector('form[name="ezrepoforms_content_edit"]');
+    const form = doc.querySelector('.ez-form-validate');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
 
     form.setAttribute('novalidate', true);

@@ -161,6 +161,26 @@
         <target state="new">Empty Trash</target>
         <note>key: trash__sidebar_right__empty_trash</note>
       </trans-unit>
+      <trans-unit id="40679174821cfa2ce3d3a4dc046f0ef65df6f483" resname="user_create__sidebar_right__cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: user_create__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="e2f3f27b94662872c5f39dbf8b26b489deb14f8c" resname="user_create__sidebar_right__create">
+        <source>Create</source>
+        <target state="new">Create</target>
+        <note>key: user_create__sidebar_right__create</note>
+      </trans-unit>
+      <trans-unit id="5eac585c3d7a63e58780b7939ee2a8e70e290436" resname="user_edit__sidebar_right__cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: user_edit__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="5a09908619e3d8e6b30af8af8c14abd416b485fa" resname="user_edit__sidebar_right__update">
+        <source>Update</source>
+        <target state="new">Update</target>
+        <note>key: user_edit__sidebar_right__update</note>
+      </trans-unit>
       <trans-unit id="06accb26fbb1b72012942af2b3e03f7c138e28c3" resname="user__content">
         <source>Logout</source>
         <target state="new">Logout</target>
