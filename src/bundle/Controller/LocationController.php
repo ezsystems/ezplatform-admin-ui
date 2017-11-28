@@ -250,6 +250,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $newLocation->id,
+                    '_fragment' => 'ez-tab-location-view-locations',
                 ]));
             });
 
@@ -260,6 +261,7 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $location->id,
+            '_fragment' => 'ez-tab-location-view-locations',
         ]));
     }
 
@@ -340,6 +342,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
+                    '_fragment' => 'ez-tab-location-view-locations',
                 ]));
             });
 
@@ -389,6 +392,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
+                    '_fragment' => 'ez-tab-location-view-locations',
                 ]));
             });
 

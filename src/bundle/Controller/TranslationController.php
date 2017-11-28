@@ -87,6 +87,7 @@ class TranslationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
+                    '_fragment' => 'ez-tab-location-view-translations',
                 ]));
             });
 
