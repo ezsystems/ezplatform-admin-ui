@@ -18,7 +18,7 @@
 
                 {% if results is defined %}
                     <div class="ez-table-header mt-3">
-                        <h5>{{ 'search.header'|trans({'%total%': pagerfanta.nbResults})|desc('Search results (%total%)') }}</h5>
+                        <h5>{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</h5>
                     </div>
 
                     {% if results is empty %}
@@ -55,13 +55,13 @@
                             </tbody>
                         </table>
                         <div class="row justify-content-center align-items-center">
-                            <h6>{{ 'search.viewing'|trans({'%viewing%': pagerfanta.currentPageResults|length, '%total%': pagerfanta.nbResults})|desc('Viewing %viewing% out of %total% sub-items') }}</h6>
+                            <h6>{{ 'search.viewing'|trans({'%viewing%': pager.currentPageResults|length, '%total%': pager.nbResults})|desc('Viewing %viewing% out of %total% sub-items') }}</h6>
                         </div>
-                        <div class="row justify-content-center align-items-center">
-                            {% if pagerfanta.haveToPaginate %}
-                                {{ pagination|raw }}
-                            {% endif %}
-                        </div>
+                        {% if pager.haveToPaginate %}
+                            <div class="row justify-content-center align-items-center">
+                                {{ pagerfanta(pager, 'ez', {'pageParameter': '[search][page]'}) }}
+                            </div>
+                        {% endif %}
                     {% endif %}
 
                 {% endif %}

@@ -28,7 +28,7 @@ services:
     EzSystems\EzPlatformAdminUiBundle\Controller\SearchController:
         public: true
         arguments:
-            $defaultLimit: '$search_limit$'
+            $defaultPaginationLimit: '$search_pagination_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentController:
         public: true
