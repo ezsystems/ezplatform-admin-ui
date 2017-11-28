@@ -19,6 +19,8 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class TranslationController extends Controller
 {
+    const TRANSLATION_TAB_URI_FRAGMENT = 'ez-tab-location-view-translations';
+
     /** @var NotificationHandlerInterface */
     private $notificationHandler;
 
@@ -87,7 +89,7 @@ class TranslationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                    '_fragment' => 'ez-tab-location-view-translations',
+                    '_fragment' => self::TRANSLATION_TAB_URI_FRAGMENT,
                 ]));
             });
 
@@ -98,6 +100,7 @@ class TranslationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $contentInfo->mainLocationId,
+            '_fragment' => self::TRANSLATION_TAB_URI_FRAGMENT,
         ]));
     }
 }
