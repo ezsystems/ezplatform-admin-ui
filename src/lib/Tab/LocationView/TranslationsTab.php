@@ -22,6 +22,8 @@ use Twig\Environment;
 
 class TranslationsTab extends AbstractTab implements OrderedTabInterface
 {
+    const URI_FRAGMENT = 'ez-tab-location-view-translations';
+
     /** @var DatasetFactory */
     protected $datasetFactory;
 

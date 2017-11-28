@@ -28,6 +28,8 @@ use Twig\Environment;
 
 class LocationsTab extends AbstractTab implements OrderedTabInterface
 {
+    const URI_FRAGMENT = 'ez-tab-location-view-locations';
+
     /** @var DatasetFactory */
     protected $datasetFactory;
 
