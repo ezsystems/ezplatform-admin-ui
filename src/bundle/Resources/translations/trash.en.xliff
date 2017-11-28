@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="6aa460340bed42d0d1baf9d1ea542c83a3f00821" resname="trash">
+        <source>Trash</source>
+        <target state="new">Trash</target>
+        <note>key: trash</note>
+      </trans-unit>
       <trans-unit id="7883128cdfb813826271abe90b3a1f3190833ce6" resname="trash.empty">
         <source>Trash is empty. Any content item you send to trash will end up here.</source>
         <target state="new">Trash is empty. Any content item you send to trash will end up here.</target>
@@ -55,6 +60,11 @@
         <source>Type</source>
         <target state="new">Type</target>
         <note>key: trash.type</note>
+      </trans-unit>
+      <trans-unit id="9894fcfeef8935ecd3c257204fae8514b72961f1" resname="trash.viewing">
+        <source>Viewing %viewing% out of %total% items</source>
+        <target state="new">Viewing %viewing% out of %total% items</target>
+        <note>key: trash.viewing</note>
       </trans-unit>
     </body>
   </file>

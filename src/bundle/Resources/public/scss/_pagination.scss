@@ -17,6 +17,7 @@
     }
 
     &.active .page-link {
+        z-index: 0;
         font-weight: bold;
     }
 }

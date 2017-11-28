@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="3559d7accf00360971961ca18989adc0614089c0" resname="search">
+        <source>Search</source>
+        <target state="new">Search</target>
+        <note>key: search</note>
+      </trans-unit>
       <trans-unit id="0ec8148d681b43e87a6d0751fff188517be1ea26" resname="search.header">
         <source>Search results (%total%)</source>
         <target state="new">Search results (%total%)</target>
@@ -35,11 +40,6 @@
         <source>Sorry, no results were found for "%query%".</source>
         <target state="new">Sorry, no results were found for "%query%".</target>
         <note>key: search.no_result</note>
-      </trans-unit>
-      <trans-unit id="6fa93ef4dfbce97076a254427bb30bf7c5819c5d" resname="search.perform">
-        <source>search.perform</source>
-        <target state="new">search.perform</target>
-        <note>key: search.perform</note>
       </trans-unit>
       <trans-unit id="777cc1ef279096d5a978aa3553e9434d828f8248" resname="search.tips.check_spelling">
         <source>Check spelling of keywords.</source>

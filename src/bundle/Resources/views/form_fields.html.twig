@@ -33,3 +33,7 @@
         {%- endif -%}
     {%- endfor -%}
 {%- endblock -%}
+
+{%- block trash_item_checkbox_widget -%}
+    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+{%- endblock -%}

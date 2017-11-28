@@ -76,20 +76,10 @@
         <target state="new">ID</target>
         <note>key: section.id</note>
       </trans-unit>
-      <trans-unit id="63039a13119dd5a53e5eb66cd798b3c323b57a5b" resname="section.id.label">
-        <source>ID</source>
-        <target state="new">ID</target>
-        <note>key: section.id.label</note>
-      </trans-unit>
       <trans-unit id="54e249fceb2f506942f7f0ae30107a734b9b3fe5" resname="section.identifier">
         <source>Identifier</source>
         <target state="new">Identifier</target>
         <note>key: section.identifier</note>
-      </trans-unit>
-      <trans-unit id="4a040adfce6771857aef17cf0dbb596f2dee2e70" resname="section.identifier.label">
-        <source>Identifier</source>
-        <target state="new">Identifier</target>
-        <note>key: section.identifier.label</note>
       </trans-unit>
       <trans-unit id="105a971e4f7e75ad6066301cedc90bd4acf0ae12" resname="section.information.header">
         <source>Section information</source>
@@ -110,11 +100,6 @@
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: section.name</note>
-      </trans-unit>
-      <trans-unit id="801aa4a73e669a7f454798a3d5e44b40899e51f1" resname="section.name.label">
-        <source>Name</source>
-        <target state="new">Name</target>
-        <note>key: section.name.label</note>
       </trans-unit>
       <trans-unit id="12023a25e9c04ceef708820416f14a5a1e188688" resname="section.new">
         <source>Create a new Section</source>
