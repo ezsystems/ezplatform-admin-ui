@@ -5,12 +5,8 @@
 .breadcrumb-item {
     cursor: not-allowed;
     
-    + .breadcrumb-item::before {
-        color: $ez-color-base-medium;
-    }
-
+    + .breadcrumb-item::before,
     &.active {
         color: $ez-color-base-medium;
-        cursor: not-allowed;
     }
 }

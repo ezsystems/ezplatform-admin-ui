@@ -7,7 +7,7 @@ $ez-color-primary-hover: darken($ez-color-primary, 15%);
 $ez-color-secondary: #106d95;
 $ez-color-secondary-hover: darken($ez-color-secondary, 15%);
 $ez-color-hyperlink: #0645ad;
-$ez-color-hyperlink-hover: #032863;
+$ez-color-hyperlink-hover: darken($ez-color-hyperlink, 15%);
 $ez-color-positive: #00825c;
 $ez-color-warning: #f7d000;
 $ez-color-danger: #d92d42;
@@ -89,7 +89,7 @@ $colors: (
     teal: $ez-ground-primary,
     white: $white,
     gray: $ez-color-base-light,
-    gray-dark: $ez-color-base-dark,
+    gray-dark: #e83e8c,
     indigo: $indigo,
     purple: $purple,
     pink: $pink,
@@ -122,6 +122,7 @@ $link-color: $ez-color-hyperlink;
 
 // Body
 $body-bg: $ez-ground-base-pale;
+$body-color: $ez-black;
 
 // Pagination
 
