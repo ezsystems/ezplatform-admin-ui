@@ -1,0 +1,8 @@
+system:
+    default:
+        image_variations:
+            ezplatform_admin_ui_profile_picture_user_menu:
+                reference: reference
+                filters:
+                    - {name: geometry/scaledownonly, params: [30, 30]}
+                    - {name: geometry/crop, params: [30, 30, 0, 0]}

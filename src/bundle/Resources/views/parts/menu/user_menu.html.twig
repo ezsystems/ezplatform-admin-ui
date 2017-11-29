@@ -1,0 +1,17 @@
+{% extends '@KnpMenu/menu.html.twig' %}
+
+{% block root %}
+    {% do item.setChildrenAttribute('class', 'nav navbar-nav ez-user-menu__items ez-user-menu__items--hidden') %}
+    {{ parent() }}
+{% endblock %}
+
+{% block item %}
+    {% if item.name != 'root' %}
+        {% do item.setLinkAttribute('class', 'nav-link') %}
+        {% do item.setAttribute('class', 'nav-item ez-user-menu__item') %}
+    {% endif %}
+    {% if item.getExtra('template') is not null %}
+        {% include item.getExtra('template') ignore missing with options only %}
+    {% endif %}
+    {{ parent() }}
+{% endblock %}

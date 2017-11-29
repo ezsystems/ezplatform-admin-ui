@@ -42,9 +42,29 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
      */
     public function prepend(ContainerBuilder $container)
     {
+        $this->prependViews($container);
+        $this->prependImageVariations($container);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function prependViews(ContainerBuilder $container): void
+    {
         $configFile = __DIR__ . '/../Resources/config/views.yml';
         $config = Yaml::parse(file_get_contents($configFile));
         $container->prependExtensionConfig('ezpublish', $config);
         $container->addResource(new FileResource($configFile));
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function prependImageVariations(ContainerBuilder $container)
+    {
+        $imageConfigFile = __DIR__ . '/../Resources/config/image_variations.yml';
+        $config = Yaml::parse(file_get_contents($imageConfigFile));
+        $container->prependExtensionConfig('ezpublish', $config);
+        $container->addResource(new FileResource($imageConfigFile));
     }
 }
