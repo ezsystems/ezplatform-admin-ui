@@ -24,6 +24,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Tab\LocationView\LocationsTab;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,8 +35,6 @@ use Symfony\Component\Translation\Exception\InvalidArgumentException as Translat
 
 class LocationController extends Controller
 {
-    const LOCATION_TAB_URI_FRAGMENT = 'ez-tab-location-view-locations';
-
     /** @var NotificationHandlerInterface */
     private $notificationHandler;
 
@@ -252,7 +251,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $newLocation->id,
-                    '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
+                    '_fragment' => LocationsTab::URI_FRAGMENT,
                 ]));
             });
 
@@ -263,7 +262,7 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $location->id,
-            '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
+            '_fragment' => LocationsTab::URI_FRAGMENT,
         ]));
     }
 
@@ -344,7 +343,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                    '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
+                    '_fragment' => LocationsTab::URI_FRAGMENT,
                 ]));
             });
 
@@ -355,7 +354,7 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $contentInfo->mainLocationId,
-            '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
+            '_fragment' => LocationsTab::URI_FRAGMENT,
         ]));
     }
 
@@ -395,7 +394,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                    '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
+                    '_fragment' => LocationsTab::URI_FRAGMENT,
                 ]));
             });
 
@@ -406,7 +405,7 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $contentInfo->mainLocationId,
-            '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
+            '_fragment' => LocationsTab::URI_FRAGMENT,
         ]));
     }
 
@@ -458,7 +457,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                    '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
+                    '_fragment' => LocationsTab::URI_FRAGMENT,
                 ]));
             });
 
@@ -469,7 +468,7 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $contentInfo->mainLocationId,
-            '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
+            '_fragment' => LocationsTab::URI_FRAGMENT,
         ]));
     }
 
@@ -505,7 +504,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                         'locationId' => $location->getContentInfo()->mainLocationId,
-                        '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
+                        '_fragment' => LocationsTab::URI_FRAGMENT,
                     ]));
             });
 
@@ -516,7 +515,7 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $location->getContentInfo()->mainLocationId,
-            '_fragment' => self::LOCATION_TAB_URI_FRAGMENT,
+            '_fragment' => LocationsTab::URI_FRAGMENT,
         ]));
     }
 }

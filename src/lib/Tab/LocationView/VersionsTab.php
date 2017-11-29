@@ -26,6 +26,7 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
 {
     public const FORM_REMOVE_DRAFT = 'version_remove_draft';
     public const FORM_REMOVE_ARCHIVED = 'version_remove_archived';
+    const URI_FRAGMENT = 'ez-tab-location-view-versions';
 
     /** @var DatasetFactory */
     protected $datasetFactory;

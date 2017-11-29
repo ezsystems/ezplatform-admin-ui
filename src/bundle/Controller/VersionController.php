@@ -25,8 +25,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class VersionController extends Controller
 {
-    const VERSION_TAB_URI_FRAGMENT = 'ez-tab-location-view-versions';
-
     /** @var NotificationHandlerInterface */
     private $notificationHandler;
 
@@ -113,7 +111,7 @@ class VersionController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                    '_fragment' => self::VERSION_TAB_URI_FRAGMENT,
+                    '_fragment' => VersionsTab::URI_FRAGMENT,
                 ]));
             });
 
@@ -124,7 +122,7 @@ class VersionController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $contentInfo->mainLocationId,
-            '_fragment' => self::VERSION_TAB_URI_FRAGMENT,
+            '_fragment' => VersionsTab::URI_FRAGMENT,
         ]));
     }
 }

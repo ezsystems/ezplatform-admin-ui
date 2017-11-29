@@ -12,6 +12,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveD
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Tab\LocationView\TranslationsTab;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,8 +20,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class TranslationController extends Controller
 {
-    const TRANSLATION_TAB_URI_FRAGMENT = 'ez-tab-location-view-translations';
-
     /** @var NotificationHandlerInterface */
     private $notificationHandler;
 
@@ -89,7 +88,7 @@ class TranslationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                     'locationId' => $contentInfo->mainLocationId,
-                    '_fragment' => self::TRANSLATION_TAB_URI_FRAGMENT,
+                    '_fragment' => TranslationsTab::URI_FRAGMENT,
                 ]));
             });
 
@@ -100,7 +99,7 @@ class TranslationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $contentInfo->mainLocationId,
-            '_fragment' => self::TRANSLATION_TAB_URI_FRAGMENT,
+            '_fragment' => TranslationsTab::URI_FRAGMENT,
         ]));
     }
 }
