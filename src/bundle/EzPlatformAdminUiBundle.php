@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUiBundle;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
 use EzSystems\EzPlatformAdminUi\SiteAccess\AdminFilter;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ComponentPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
@@ -39,5 +40,6 @@ class EzPlatformAdminUiBundle extends Bundle
         $container->addCompilerPass(new TabPass());
         $container->addCompilerPass(new UiConfigProviderPass());
         $container->addCompilerPass(new SystemInfoTabGroupPass());
+        $container->addCompilerPass(new ComponentPass());
     }
 }

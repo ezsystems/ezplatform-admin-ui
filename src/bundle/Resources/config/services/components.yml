@@ -1,0 +1,27 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    EzSystems\EzPlatformAdminUi\Component\Registry:
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Component\TwigComponent:
+        abstract: true
+        lazy: true
+
+    EzSystems\EzPlatformAdminUi\Component\ScriptComponent:
+        abstract: true
+        lazy: true
+
+    EzSystems\EzPlatformAdminUi\Component\LinkComponent:
+        abstract: true
+        lazy: true
+
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ComponentExtension:
+        autowire: true
+        autoconfigure: true
+        public: false
+        tags:
+            - { name: twig.extension }
