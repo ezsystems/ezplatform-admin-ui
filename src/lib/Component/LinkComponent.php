@@ -49,6 +49,7 @@ class LinkComponent implements Renderable
         $this->twig = $twig;
         $this->href = $href;
         $this->type = $type;
+        $this->rel = $rel;
         $this->crossorigin = $crossorigin;
         $this->integrity = $integrity;
     }
