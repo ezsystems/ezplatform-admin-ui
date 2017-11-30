@@ -1,8 +1,8 @@
-<section class="ez-fieldgroup ">
-    <div class="ez-fieldgroup-name d-flex justify-content-between mb-3">
-        <h5>
+<section class="ez-view-rawcontentview">
+    <div class="ez-raw-content-title d-flex justify-content-between mb-3">
+        <h2>
             {{ 'tab.view.content'|trans()|desc('Content') }}
-        </h5>
+        </h2>
         {% if languages|length > 1  %}
         <form class="form-inline">
             <select class="form-control ez-location-language-change">
@@ -18,7 +18,7 @@
 
     {% for group in fieldDefinitionsByGroup if group.fieldDefinitions|length > 0 %}
         <section class="ez-fieldgroup container">
-            <h5 class="ez-fieldgroup-name">{{ group.name }}</h5>
+            <h3 class="ez-fieldgroup-name">{{ group.name }}</h3>
             {% for fieldDefinition in group.fieldDefinitions %}
                 <div class="ez-content-field">
                     <p class="ez-content-field-name">{{ ez_field_name(content, fieldDefinition.identifier) }}:</p>

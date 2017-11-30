@@ -22,7 +22,10 @@
     {{ form_start(form) }}
 
     <section class="container mt-4">
-        <div class="card">
+        <div class="card ez-adminsection-edit">
+            <div class="card-header">
+                <h2>Global Properties</h2>
+            </div>
             <div class="card-body">
                 {{ form_row(form.name) }}
                 {{ form_row(form.identifier) }}
@@ -38,20 +41,20 @@
     </section>
 
     <section class="container mt-4">
-        <div class="card">
+        <div class="card ez-adminsection-edit">
             <div class="card-header">
-                Field definitions
+                <h2>Field definitions</h2>
             </div>
             <div class="card-body">
                 {% set language_code = content_type.mainLanguageCode %}
                 {% for field_definition in form.fieldDefinitionsData %}
                     {% set value = field_definition.vars.value %}
 
-                    <h5 id="field-definition-{{ value.identifier }}">
+                    <h3 id="field-definition-{{ value.identifier }}">
                         {{ form_widget(field_definition.selected, {
                             label: '%s (%s)' | format(value.names[language_code], value.fieldTypeIdentifier)
                         }) }}
-                    </h5>
+                    </h3>
 
                     <div class="ml-4 mb-4">
                         {{ form_row(field_definition.name) }}

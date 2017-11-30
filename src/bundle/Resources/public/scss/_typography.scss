@@ -1,17 +1,39 @@
-.ez-dashboard .ez-main-row {
-    h4 {
-        font-weight: bold;
-    }
-}
-
-.ez-page-title {
+.ez-dashboard-row {
     h1 {
-        font-weight: bold;
+        margin-bottom: 0;
+        font-size: 1.5rem;
+        font-weight: 400;
+    }
+
+    h2 {
+        font-size: 1.25rem;
     }
 }
 
 .ez-content-edit {
-    h1 {
-        font-weight: bold;
+    h2 {
+        &.text-muted {
+            font-size: 1.125rem;
+            color: $ez-color-base-light;
+        }
+    }
+}
+
+.ez-adminsection-edit {
+    .card-header {
+        background-color: $ez-color-base-pale;
+
+        h2 {
+            margin-bottom: 0;
+            font-size: 1.125rem;
+            font-weight: 400;
+            color: $ez-color-secondary;
+        }
+    }
+
+    .card-body {
+        h3 {
+            font-size: 1.0625rem;
+        }
     }
 }

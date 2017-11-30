@@ -7,25 +7,31 @@
 {% block content %}
     <div class="row align-items-stretch ez-main-row ez-dashboard-row">
         {% block left_sidebar %}{% endblock left_sidebar %}
+        <div class="container-fluid ez-header">
+            <div class="col-sm-12">
+                <div class="container">
+                    <h1 class="py-3">My dashboard</h1>
+                </div>
+            </div>
+        </div>
         <div class="col-sm-12">
             <div class="container">
                 <div class="card border-light my-4">
                     <div class="card-body">
-                        <h4 class="mb-3">{{ 'me'|trans|desc('Me') }}</h4>
+                        <h2 class="mb-3">{{ 'me'|trans|desc('Me') }}</h2>
                         {{ ez_platform_tabs('dashboard-my', []) }}
                     </div>
                 </div>
 
                 <div class="card border-light mb-4">
                     <div class="card-body">
-                        <h4 class="mb-3">{{ 'everyone'|trans|desc('Everyone') }}</h4>
+                        <h2 class="mb-3">{{ 'everyone'|trans|desc('Everyone') }}</h2>
                         {{ ez_platform_tabs('dashboard-everyone', []) }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="react-udw"></div>
 {% endblock %}
 
 {% block javascripts %}

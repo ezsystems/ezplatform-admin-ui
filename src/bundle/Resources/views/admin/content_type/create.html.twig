@@ -22,7 +22,10 @@
     {{ form_start(form) }}
 
     <section class="container mt-4">
-        <div class="card">
+        <div class="card ez-adminsection-edit">
+            <div class="card-header">
+                <h2>Global properties</h2>
+            </div>
             <div class="card-body">
                 {{ form_row(form.name) }}
                 {{ form_row(form.identifier) }}
@@ -38,9 +41,9 @@
     </section>
 
     <section class="container mt-4">
-        <div class="card">
+        <div class="card ez-adminsection-edit">
             <div class="card-header">
-                Field definitions
+                <h2>Field definitions</h2>
             </div>
             <div class="card-body">
                 {% set language_code = content_type.mainLanguageCode %}
