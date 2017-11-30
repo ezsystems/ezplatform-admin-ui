@@ -12,8 +12,9 @@
             const detectClickOutside = (event) => {
                 const isNotButton = !event.target.contains(btn);
                 const isNotExtraActions = !event.target.closest('.ez-extra-actions');
+                const isNotCalendar = !event.target.closest('.flatpickr-calendar');
 
-                if (isNotButton && isNotExtraActions) {
+                if (isNotButton && isNotExtraActions && isNotCalendar) {
                     actions.classList.add(CLASS_HIDDEN);
                     document.body.removeEventListener('click', detectClickOutside, false);
                 }
