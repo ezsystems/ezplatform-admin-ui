@@ -176,11 +176,6 @@
         <target state="new">Visibility</target>
         <note>key: tab.locations.visibility</note>
       </trans-unit>
-      <trans-unit id="7ebde5bee4476cd8cded5625dab8aa4afedf2985" resname="tab.name.content">
-        <source>Content</source>
-        <target state="new">Content</target>
-        <note>key: tab.name.content</note>
-      </trans-unit>
       <trans-unit id="5d92b84a6c78bd443010f172c47d01ce0dacacd7" resname="tab.name.details">
         <source>Details</source>
         <target state="new">Details</target>
@@ -210,6 +205,11 @@
         <source>Versions</source>
         <target state="new">Versions</target>
         <note>key: tab.name.versions</note>
+      </trans-unit>
+      <trans-unit id="eb3b504a0281951f15692e888226579aa99bb512" resname="tab.name.view">
+        <source>View</source>
+        <target state="new">View</target>
+        <note>key: tab.name.view</note>
       </trans-unit>
       <trans-unit id="373c6d223e1f346d71cf6cfd85f0fbc3d76ca1d5" resname="tab.relations.no_relations">
         <source>This content item has no related content.</source>

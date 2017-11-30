@@ -1,19 +1,38 @@
-{% for group in fieldDefinitionsByGroup if group.fieldDefinitions|length > 0 %}
-    <section class="ez-fieldgroup">
-        <h5 class="ez-fieldgroup-name">{{ group.name }}</h5>
-        {% for fieldDefinition in group.fieldDefinitions %}
-            <div class="ez-content-field">
-                <p class="ez-content-field-name">{{ ez_field_name(content, fieldDefinition.identifier) }}:</p>
-                <div class="ez-content-field-value">
-                    {% if ez_is_field_empty(content, fieldDefinition.identifier) %}
-                        <em>{{'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty')}}</em>
-                    {% else %}
-                        {{ ez_render_field(content, fieldDefinition.identifier, {
-                            template: '@EzPlatformAdminUi/content_fields.html.twig'
-                        }) }}
-                    {% endif %}
+<section class="ez-fieldgroup ">
+    <div class="ez-fieldgroup-name d-flex justify-content-between mb-3">
+        <h5>
+            {{ 'tab.view.content'|trans()|desc('Content') }}
+        </h5>
+        {% if languages|length > 1  %}
+        <form class="form-inline">
+            <select class="form-control ez-location-language-change">
+                {% for language in languages %}
+                    <option value="{{ path('_ezpublishLocation', {'locationId': location.id, 'languageCode': language.languageCode}) }}"
+                            {% if app.request.get('languageCode') == language.languageCode %} selected="selected" {% endif %}
+                    >{{ language.name }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        {% endif %}
+    </div>
+
+    {% for group in fieldDefinitionsByGroup if group.fieldDefinitions|length > 0 %}
+        <section class="ez-fieldgroup container">
+            <h5 class="ez-fieldgroup-name">{{ group.name }}</h5>
+            {% for fieldDefinition in group.fieldDefinitions %}
+                <div class="ez-content-field">
+                    <p class="ez-content-field-name">{{ ez_field_name(content, fieldDefinition.identifier) }}:</p>
+                    <div class="ez-content-field-value">
+                        {% if ez_is_field_empty(content, fieldDefinition.identifier) %}
+                            <em>{{ 'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty') }}</em>
+                        {% else %}
+                            {{ ez_render_field(content, fieldDefinition.identifier, {
+                                template: '@EzPlatformAdminUi/content_fields.html.twig'
+                            }) }}
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-    </section>
-{% endfor %}
+            {% endfor %}
+        </section>
+    {% endfor %}
+</section>

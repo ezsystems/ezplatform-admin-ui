@@ -10,6 +10,8 @@ namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
@@ -21,19 +23,25 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
     /** @var FieldsGroupsList */
     private $fieldsGroupsListHelper;
 
+    /** @var LanguageService */
+    private $languageService;
+
     /**
      * @param Environment $twig
      * @param TranslatorInterface $translator
      * @param FieldsGroupsList $fieldsGroupsListHelper
+     * @param LanguageService $langaugeService
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
-        FieldsGroupsList $fieldsGroupsListHelper
+        FieldsGroupsList $fieldsGroupsListHelper,
+        LanguageService $langaugeService
     ) {
         parent::__construct($twig, $translator);
 
         $this->fieldsGroupsListHelper = $fieldsGroupsListHelper;
+        $this->languageService = $langaugeService;
     }
 
     public function getIdentifier(): string
@@ -43,8 +51,8 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
 
     public function getName(): string
     {
-        /** @Desc("Content") */
-        return $this->translator->trans('tab.name.content', [], 'locationview');
+        /** @Desc("View") */
+        return $this->translator->trans('tab.name.view', [], 'locationview');
     }
 
     public function getOrder(): int
@@ -61,11 +69,15 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
         $fieldDefinitions = $contentType->getFieldDefinitions();
         $fieldDefinitionsByGroup = $this->groupFieldDefinitions($fieldDefinitions);
 
+        $languages = $this->loadContentLanguages($content);
+
         return $this->twig->render(
             'EzPlatformAdminUiBundle:content/tab:content.html.twig',
             [
                 'content' => $content,
                 'fieldDefinitionsByGroup' => $fieldDefinitionsByGroup,
+                'languages' => $languages,
+                'location' => $parameters['location'],
             ]
         );
     }
@@ -95,5 +107,26 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
         }
 
         return $fieldDefinitionsByGroup;
+    }
+
+    /**
+     * Loads system languages with filtering applied.
+     *
+     * @param Content $content
+     *
+     * @return array
+     */
+    public function loadContentLanguages(Content $content): array
+    {
+        $contentLanguages = $content->versionInfo->languageCodes;
+
+        $filter = function (Language $language) use ($contentLanguages) {
+            return $language->enabled && in_array($language->languageCode, $contentLanguages, true);
+        };
+
+        return array_filter(
+             $this->languageService->loadLanguages(),
+             $filter
+         );
     }
 }
