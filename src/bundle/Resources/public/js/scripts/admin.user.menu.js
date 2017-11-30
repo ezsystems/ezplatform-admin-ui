@@ -2,6 +2,7 @@
     const CLASS_HIDDEN = 'ez-user-menu__items--hidden';
     const SELECTOR_MENU_ITEMS = '.ez-user-menu__items';
     const SELECTOR_NAME_WRAPPER = '.ez-user-menu__name-wrapper';
+    const userMenu = doc.querySelector(SELECTOR_NAME_WRAPPER);
     const clickOutsideHandler = (event) => {
         if (event.target.closest(SELECTOR_NAME_WRAPPER)) {
             return;
@@ -19,5 +20,7 @@
         doc.querySelector('body')[methodName]('click', clickOutsideHandler, false);
     };
 
-    doc.querySelector(SELECTOR_NAME_WRAPPER).addEventListener('click', toggleMenuItems, false);
+    if (userMenu) {
+        userMenu.addEventListener('click', toggleMenuItems, false);
+    }
 })(window, document);
