@@ -19,6 +19,9 @@
             {% set element = 'button' %}
             {{ block('element') }}
         {%- endif %}
+        {%- if item.extras.template is defined -%}
+            {% include(item.extras.template)  %}
+        {%- endif -%}
     {%- endif -%}
 {%- endblock %}
 
