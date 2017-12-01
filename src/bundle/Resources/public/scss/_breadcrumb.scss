@@ -1,0 +1,12 @@
+.breadcrumb {
+    background-color: $ez-ground-base-dark;
+}
+
+.breadcrumb-item {
+    cursor: not-allowed;
+    
+    + .breadcrumb-item::before,
+    &.active {
+        color: $ez-color-base-medium;
+    }
+}
