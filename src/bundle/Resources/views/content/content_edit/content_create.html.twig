@@ -3,7 +3,7 @@
 {% trans_default_domain 'content_create' %}
 
 {% block details %}
-    <h4 class="text-muted">{{ 'creating'|trans({'%contentType%': contentType.name})|desc('Creating - %contentType%') }}</h4>
+    <h2 class="text-muted">{{ 'creating'|trans({'%contentType%': contentType.name})|desc('Creating - %contentType%') }}</h2>
     <h1>
         <svg class="ez-icon ez-icon-{{ contentType.identifier }}">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ contentType.identifier }}"></use>

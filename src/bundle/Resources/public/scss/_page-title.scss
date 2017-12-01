@@ -1,12 +1,15 @@
 .ez-page-title {
-	padding-bottom: 1rem;
+    padding-bottom: 1rem;
 
-	h2 {
-		margin-bottom: 0;
-	}
+    h1 {
+        margin-bottom: 0;
+    }
 
-	h5 {
-		padding-left: 2.5rem;
-		color: $ez-color-base-light;
-	}
+    h4 {
+        padding-left: 2.5rem;
+        font-size: 1.125rem;
+        font-weight: 400;
+        color: $ez-color-base-light;
+    }
+
 }
