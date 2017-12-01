@@ -81,6 +81,16 @@
         <target state="new">No packages installed.</target>
         <note>key: packages.empty</note>
       </trans-unit>
+      <trans-unit id="93a035162ab0bf4e032b99d2909e0ac1274a3d0b" resname="packages.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: packages.name</note>
+      </trans-unit>
+      <trans-unit id="599b65ee1ef053092285a2240e1295e77d54d420" resname="packages.version">
+        <source>Version</source>
+        <target state="new">Version</target>
+        <note>key: packages.version</note>
+      </trans-unit>
       <trans-unit id="47425e4490d1548713efea3b8a6f5d778e4b1766" resname="php">
         <source>PHP</source>
         <target state="new">PHP</target>
@@ -97,8 +107,8 @@
         <note>key: php.info</note>
       </trans-unit>
       <trans-unit id="98c89e1daa8c0a7c472af26752752299ff44ee23" resname="symfony_kernel">
-        <source>Symfony kernel</source>
-        <target state="new">Symfony kernel</target>
+        <source>Symfony Kernel</source>
+        <target state="new">Symfony Kernel</target>
         <note>key: symfony_kernel</note>
       </trans-unit>
       <trans-unit id="dbc3d622a5e78844eeb75f3e9477b90357984ad7" resname="symfony_kernel.bundles.empty">
@@ -146,6 +156,11 @@
         <target state="new">Name</target>
         <note>key: symfony_kernel.name</note>
       </trans-unit>
+      <trans-unit id="7fb801946f46cdeab6bf08f53b72cc48c8c80720" resname="symfony_kernel.path">
+        <source>Path</source>
+        <target state="new">Path</target>
+        <note>key: symfony_kernel.path</note>
+      </trans-unit>
       <trans-unit id="56014c7eba59799c182934e3a0eb97eff6fd8a97" resname="symfony_kernel.rootDir">
         <source>Root directory</source>
         <target state="new">Root directory</target>
@@ -157,8 +172,8 @@
         <note>key: symfony_kernel.version</note>
       </trans-unit>
       <trans-unit id="21ef9f0a078dbc4e4c45be12f1cfaf8a3864dfa7" resname="systeminfo">
-        <source>System Info</source>
-        <target state="new">System Info</target>
+        <source>System Information</source>
+        <target state="new">System Information</target>
         <note>key: systeminfo</note>
       </trans-unit>
       <trans-unit id="a2a92e9d0e41ea4a14c99ab0f702d5df3ea017c3" resname="tab.name.composer">
@@ -182,8 +197,8 @@
         <note>key: tab.name.php</note>
       </trans-unit>
       <trans-unit id="b7989598c01fcae061f7917e563a9c0d66790a84" resname="tab.name.symfony_kernel">
-        <source>Symfony kernel</source>
-        <target state="new">Symfony kernel</target>
+        <source>Symfony Kernel</source>
+        <target state="new">Symfony Kernel</target>
         <note>key: tab.name.symfony_kernel</note>
       </trans-unit>
     </body>

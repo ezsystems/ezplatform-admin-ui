@@ -6,11 +6,6 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="20725f3f19d73fb04ee9e5b14e626dbc865c62f2" resname="authentication.logout">
-        <source>Logout</source>
-        <target state="new">Logout</target>
-        <note>key: authentication.logout</note>
-      </trans-unit>
       <trans-unit id="da44d8915172b0c8a874e26956f44aa5501c7e6b" resname="authentication.password">
         <source>Password</source>
         <target state="new">Password</target>

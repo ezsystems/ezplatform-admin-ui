@@ -2,27 +2,54 @@
 
 <!-- Tab name: {{ 'tab.name.composer'|trans|desc('Composer') }} -->
 
-<h1>{{ 'composer'|trans|desc('Composer') }}</h1>
-<dl>
-    <dt>{{ 'composer.minimum_stability'|trans|desc('Minimum stability') }}</dt>
-    <dd>{{ info.minimumStability }}</dd>
+<table class="table ez-table--list">
+    <thead>
+        <tr>
+            <th colspan="2">
+                {% if info.packages is empty %}
+                    {{ 'packages.empty'|trans|desc('No packages installed.') }}
+                {% else %}
+                   {{ 'composer'|trans|desc('Composer') }}
+                {% endif %}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ 'composer.minimum_stability'|trans|desc('Minimum stability') }}</td>
+            <td>{{ info.minimumStability }}</td>
+        </tr>
+    </tbody>
+</table>
 
-    {% if info.packages is empty %}
-        <dt>{{ 'packages'|trans|desc('Packages') }}</dt>
-        <dd>{{ 'packages.empty'|trans|desc('No packages installed.') }}</dd>
-    {% endif %}
-</dl>
-
-{% if info.packages is not empty %}
-    <h2>{{ 'packages'|trans|desc('Packages') }}</h2>
-    <dl>
-        {% for package in info.packages %}
-            {% if package.homepage is empty %}
-                <dt>{{ package.name }}</dt>
+<div class="ez-table-header round">
+    <h2 class="ez-table-header--label">{{ 'packages'|trans|desc('Packages') }}</h2>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            {% if info.packages is empty %}
+                {{ 'packages.empty'|trans|desc('No packages installed.') }}
             {% else %}
-                <dt><a href="{{ package.homepage }}" target="_blank">{{ package.name }}</a></dt>
+                <th>{{ 'packages.name'|trans|desc('Name') }}</th>
+                <th>{{ 'packages.version'|trans|desc('Version') }}</th>
             {% endif %}
-            <dd>{{ package.version }} {{ package.stability }} <span>({{ package.dateTime|localizeddate( 'short', 'short', app.request.locale )}}, {{ package.reference | slice(0, 5) }})</span></dd>
-        {% endfor %}
-    </dl>
-{% endif %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for package in info.packages %}
+        <tr>
+            {% if package.homepage is empty %}
+                <td>{{ package.name }}</td>
+            {% else %}
+                <td><a href="{{ package.homepage }}" target="_blank">{{ package.name }}</a></td>
+            {% endif %}
+            <td>{{ package.version }} {{ package.stability }}
+                <span>({{ package.dateTime|localizeddate( 'short', 'short', app.request.locale ) }}
+                    , {{ package.reference | slice(0, 5) }})
+                </span>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

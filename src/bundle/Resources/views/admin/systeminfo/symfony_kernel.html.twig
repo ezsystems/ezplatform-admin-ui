@@ -1,38 +1,75 @@
 {% trans_default_domain "systeminfo" %}
 
-<!-- Tab name: {{ 'tab.name.symfony_kernel'|trans|desc('Symfony kernel') }} -->
+<!-- Tab name: {{ 'tab.name.symfony_kernel'|trans|desc('Symfony Kernel') }} -->
 
-<h1>{{ 'symfony_kernel'|trans|desc('Symfony kernel') }}</h1>
-<dl>
-    <dt>{{ 'symfony_kernel.environment'|trans|desc('Environment') }}</dt>
-    <dd>{{ info.environment }}</dd>
-    <dt>{{ 'symfony_kernel.debugMode'|trans|desc('Debug mode') }}</dt>
-    <dd>{% if info.debugMode %}{{ 'symfony_kernel.debugMode.enabled'|trans|desc('Enabled') }}{% else %}{{ 'symfony_kernel.debugMode.disabled'|trans|desc('Disabled') }}{% endif %}</dd>
-    <dt>{{ 'symfony_kernel.version'|trans|desc('Version') }}</dt>
-    <dd>{{ info.version }}</dd>
-    <dt>{{ 'symfony_kernel.name'|trans|desc('Name') }}</dt>
-    <dd>{{ info.name }}</dd>
-    <dt>{{ 'symfony_kernel.rootDir'|trans|desc('Root directory') }}</dt>
-    <dd>{{ info.rootDir }}</dd>
-    <dt>{{ 'symfony_kernel.cacheDir'|trans|desc('Cache directory') }}</dt>
-    <dd>{{ info.cacheDir }}</dd>
-    <dt>{{ 'symfony_kernel.logDir'|trans|desc('Log directory') }}</dt>
-    <dd>{{ info.logDir }}</dd>
-    <dt>{{ 'symfony_kernel.charset'|trans|desc('Character set') }}</dt>
-    <dd>{{ info.charset }}</dd>
+<table class="table ez-table--list">
+    <thead>
+        <tr>
+            <th colspan="2">{{ 'symfony_kernel'|trans|desc('Symfony Kernel') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ 'symfony_kernel.environment'|trans|desc('Environment') }}</td>
+            <td>{{ info.environment }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'symfony_kernel.debugMode'|trans|desc('Debug mode') }}</td>
+            <td>
+                {% if info.debugMode %}
+                    {{ 'symfony_kernel.debugMode.enabled'|trans|desc('Enabled') }}
+                {% else %}
+                    {{ 'symfony_kernel.debugMode.disabled'|trans|desc('Disabled') }}
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ 'symfony_kernel.version'|trans|desc('Version') }}</td>
+            <td>{{ info.version }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'symfony_kernel.name'|trans|desc('Name') }}</td>
+            <td>{{ info.name }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'symfony_kernel.rootDir'|trans|desc('Root directory') }}</td>
+            <td>{{ info.rootDir }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'symfony_kernel.cacheDir'|trans|desc('Cache directory') }}</td>
+            <td>{{ info.cacheDir }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'symfony_kernel.logDir'|trans|desc('Log directory') }}</td>
+            <td>{{ info.logDir }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'symfony_kernel.charset'|trans|desc('Character set') }}</td>
+            <td>{{ info.charset }}</td>
+        </tr>
+    </tbody>
+</table>
 
-    {% if info.bundles is empty %}
-        <dt>{{ 'bundles'|trans|desc('Bundles') }}</dt>
-        <dd>{{ 'symfony_kernel.bundles.empty'|trans|desc('No bundles installed.') }}</dd>
-    {% endif %}
-</dl>
-
-{% if info.bundles is not empty %}
-    <h2>{{ 'bundles'|trans|desc('Bundles') }}</h2>
-    <dl>
-        {% for bundle, namespace in info.bundles %}
-            <dt>{{ bundle }}</dt>
-            <dd>{{ namespace }}</dd>
-        {% endfor %}
-    </dl>
-{% endif %}
+<div class="ez-table-header round">
+    <h2 class="ez-table-header--label">{{ 'bundles'|trans|desc('Bundles') }}</h2>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            {% if info.bundles is empty %}
+                {{ 'symfony_kernel.bundles.empty'|trans|desc('No bundles installed.') }}
+            {% else %}
+                <th>{{ 'symfony_kernel.name'|trans|desc('Name') }}</th>
+                <th>{{ 'symfony_kernel.path'|trans|desc('Path') }}</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for bundle, namespace in info.bundles %}
+        <tr>
+            <td>{{ bundle }}</td>
+            <td>{{ namespace }}</span></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

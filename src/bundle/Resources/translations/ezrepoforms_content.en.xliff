@@ -6,11 +6,6 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="79843ce578133501bb420c52cd410a113dcfaefb" resname="content.field_type.ezgmaplocation.address">
-        <source>Address</source>
-        <target state="new">Address</target>
-        <note>key: content.field_type.ezgmaplocation.address</note>
-      </trans-unit>
       <trans-unit id="64c5c95d125dba2fe988e587edf8586decebae5a" resname="content.field_type.ezgmaplocation.locate_me">
         <source>Locate me</source>
         <target state="new">Locate me</target>

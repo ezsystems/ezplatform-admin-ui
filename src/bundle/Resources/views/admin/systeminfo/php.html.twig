@@ -2,18 +2,30 @@
 
 <!-- Tab name: {{ 'tab.name.php'|trans|desc('PHP') }} -->
 
-<h1>{{ 'php'|trans|desc('PHP') }}</h1>
-<dl>
-    <dt>{{ 'php'|trans|desc('PHP') }}</dt>
-    <dd>
-        {{ info.version }}
-        (<a href="{{ path( 'ezplatform.systeminfo.php' ) }}" target="_blank">{{ 'php.info'|trans|desc('PHP Info') }}</a>)
-    </dd>
-    <dt>{{ 'php.accelerator'|trans|desc('Accelerator') }}</dt>
-    <dd>
-        {% if not info.acceleratorEnabled %}
-            <strong>{{ 'disabled'|trans|desc('Disabled') }}</strong>
-        {% endif %}
-        <a href="{{ info.acceleratorURL }}" target="_blank">{{ info.acceleratorName }} ({{ info.acceleratorVersion }})</a>
-    </dd>
-</dl>
+<table class="table ez-table--list">
+    <thead>
+        <tr>
+            <th colspan="2">{{ 'php'|trans|desc('PHP') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ 'php'|trans|desc('PHP') }}</td>
+            <td>
+                {{ info.version }}
+                (<a href="{{ path( 'ezplatform.systeminfo.php' ) }}"
+                    target="_blank">{{ 'php.info'|trans|desc('PHP Info') }}</a>)
+            </td>
+        </tr>
+        <tr>
+            <td>{{ 'php.accelerator'|trans|desc('Accelerator') }}</td>
+            <td>
+                {% if not info.acceleratorEnabled %}
+                    <strong>{{ 'disabled'|trans|desc('Disabled') }}</strong>
+                {% endif %}
+                <a href="{{ info.acceleratorURL }}" target="_blank">{{ info.acceleratorName }}
+                    ({{ info.acceleratorVersion }})</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

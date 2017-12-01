@@ -2,26 +2,22 @@
 
 {% trans_default_domain 'systeminfo' %}
 
+{% block bodyClass %}ez-info-view{% endblock %}
+
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
-        { value: 'systeminfo'|trans|desc('System Info') }
+        { value: 'systeminfo'|trans|desc('System Information') }
     ]} %}
 {% endblock %}
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'systeminfo'|trans|desc('System Info'),
+        title: 'systeminfo'|trans|desc('System Information'),
         iconName: 'information'
     } %}
 {% endblock %}
 
 {% block content %}
-    <section class="container mt-5">
-        <div class="card border-light mb-3">
-            <div class="card-body">
-                {{ ez_platform_tabs('systeminfo') }}
-            </div>
-        </div>
-    </section>
+    {{ ez_platform_tabs('systeminfo', {}, 'EzPlatformAdminUiBundle:parts/tab:system_info.html.twig') }}
 {% endblock %}

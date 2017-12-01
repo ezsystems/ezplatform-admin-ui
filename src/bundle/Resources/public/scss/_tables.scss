@@ -19,6 +19,19 @@
         fill: $white;
         margin-right: .5rem;
     }
+
+    &.round {
+        border-radius: 4px 4px 0 0;
+        padding: 0.5em 0;
+    }
+
+    &--label {
+        margin: 0;
+        padding: 0 1.4rem;
+        font-size: 1rem;
+        line-height: 2;
+        font-weight: bold;
+    }
 }
 
 .ez-table-header.ground-base {
@@ -49,4 +62,53 @@
     padding: 0.75rem 0.5rem;
     background-color: $ez-white;
     font-style: italic;
+}
+
+.ez-info-view {
+    .table {
+        th, td {
+            padding: .8rem 1.4rem;
+        }
+    }
+
+    .ez-table {
+        &--list {
+            background: none;
+            margin-bottom: 3rem;
+
+            th, td {
+                border: none;
+            }
+
+            th {
+                color: $ez-color-secondary-hover;
+                background: $ez-color-base-pale;
+                border-radius: .3rem .3rem 0 0;
+            }
+
+            td {
+                font-size: .9375rem;
+
+                &:first-child {
+                    font-weight: bold;
+                    background: $ez-ground-base-medium;
+                    width: 33.33%;
+                }
+
+                &:last-child {
+                    font-weight: normal;
+                    background: $ez-white;
+                    width: 66.67%;
+                }
+            }
+
+            tr:last-child td:first-child {
+                border-radius: 0 0 0 .3rem;
+            }
+
+            tr:last-child td:last-child {
+                border-radius: 0 0 .3rem 0;
+            }
+        }
+    }
 }
