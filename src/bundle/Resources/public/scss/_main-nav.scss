@@ -7,6 +7,10 @@
     > .container-fluid {
         padding-right: 0;
     }
+    
+    .navbar-brand {
+        margin-top: .3125rem;
+    }
 
     .nav-tabs {
         background-color: $ez-ground-base-light;
@@ -24,7 +28,7 @@
 
             &:hover {
                 background-color: $ez-ground-base-light;
-                border-color: $ez-ground-base-light;
+                border-color: transparent;
             }
 
             &.active {
@@ -39,16 +43,18 @@
 .ez-main-sub-nav {
     background-color: $white;
     padding: 0;
-    padding-left: 100px;
+    font-size: .875rem;
+    border-bottom: 1px solid $ez-ground-base-medium;
 
     .navbar-nav {
         .nav-link {
-            padding: .8rem 1rem;
+            padding: .625rem 1rem;
             color: $ez-color-base-dark;
 
             &.active {
-                border-bottom: 2px solid $ez-color-primary;
+                border-bottom: 3px solid $ez-color-primary;
                 font-weight: bold;
+                padding-bottom: 0.4375rem;
             }
         }
     }
