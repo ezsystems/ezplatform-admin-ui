@@ -1,0 +1,24 @@
+{% trans_default_domain 'ezrepoforms_content' %}
+
+{%- block ezplatform_fieldtype_ezgmaplocation_widget -%}
+    <div class="ez-data-source__map"></div>
+    <div class="ez-data-source__locate-me">
+        <div class="form-control-label">{{ 'content.field_type.ezgmaplocation.set_current_location'|trans|desc('Set current location') }}</div>
+        <button class="btn btn-secondary">{{ 'content.field_type.ezgmaplocation.locate_me'|trans|desc('Locate me') }}</button>
+    </div>
+    {{ form_row(form.latitude) }}
+    {{ form_row(form.longitude) }}
+    <div class="ez-data-source__field ez-data-source__field--address">
+        <div class="ez-data-source__label-wrapper">
+            {{ form_label(form.address) }}
+        </div>
+        <div class="ez-data-source__input-wrapper">
+            {{ form_widget(form.address, {'attr': {'class': 'ez-data-source__input'}}) }}
+            <button class="btn btn-secondary btn--search-by-address">
+                <svg class="ez-icon ez-icon-search">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+{%- endblock -%}

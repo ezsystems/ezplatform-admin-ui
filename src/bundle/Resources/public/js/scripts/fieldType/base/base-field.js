@@ -202,6 +202,16 @@
         }
 
         /**
+         * Cancels all errors
+         *
+         * @method cancelErrors
+         * @returns {Object}
+         */
+        cancelErrors() {
+            return { isError: false };
+        }
+
+        /**
          * Checks whether field values are valid
          *
          * @method isValid
