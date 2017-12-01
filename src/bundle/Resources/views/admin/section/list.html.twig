@@ -47,10 +47,13 @@
                     <td>{{ section.id }}</td>
                     <td>{{ content_count[section.id] }}</td>
                     <td class="text-right">
-                        {{ form(form_section_content_assign[section.id], {
+                        {{ form_start(form_section_content_assign[section.id], {
                             "action": path("ezplatform.section.assign_content", {"sectionId": section.id}),
                             'attr': {'class': 'd-inline-block'}
                         }) }}
+                        {{ form_widget(form_section_content_assign[section.id].locations.select_content, {'attr': {'class': 'btn--open-udw btn-secondary'}}) }}
+                        {{ form_widget(form_section_content_assign[section.id].locations.location, {'label': false}) }}
+                        {{ form_end(form_section_content_assign[section.id]) }}
                         <a href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
                            class="btn btn-secondary"{% if not can_edit %} data-disabled{% endif %}>{{ 'section.edit'|trans|desc('Edit') }}</a>
                         {{ form_start(delete_form, {
