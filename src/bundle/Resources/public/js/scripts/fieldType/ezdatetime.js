@@ -1,6 +1,8 @@
 (function (global) {
     const SELECTOR_FIELD = '.ez-field-edit--ezdatetime';
     const SELECTOR_INPUT = '.ez-data-source__input[data-seconds]';
+    const SELECTOR_FLATPICKR_INPUT = '.flatpickr-input';
+    const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const EVENT_VALUE_CHANGED = 'valueChanged';
 
     class EzDateTimeValidator extends global.eZ.BaseFieldValidator {
@@ -13,7 +15,7 @@
          * @memberof EzDateTimeValidator
          */
         validateInput(event) {
-            const target = event.target;
+            const target = event.currentTarget;
             const isRequired = target.required;
             const isEmpty = !target.value.trim().length;
             const label = event.target.closest(this.fieldSelector).querySelector('.ez-field-edit__label').innerHTML;
@@ -40,7 +42,13 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_INPUT}`,
                 eventName: EVENT_VALUE_CHANGED,
                 callback: 'validateInput',
-                errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+            },
+            {
+                selector: `${SELECTOR_FIELD} ${SELECTOR_FLATPICKR_INPUT}`,
+                eventName: 'blur',
+                callback: 'validateInput',
+                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
             },
         ],
     });
@@ -74,7 +82,7 @@
     };
     const initFlatPickr = (field) => {
         const sourceInput = field.querySelector(SELECTOR_INPUT);
-        const flatPickrInput = field.querySelector('.flatpickr-input');
+        const flatPickrInput = field.querySelector(SELECTOR_FLATPICKR_INPUT);
         const btnClear = field.querySelector('.ez-data-source__btn--clear-input');
         let defaultDate;
 
@@ -87,13 +95,19 @@
 
             flatPickrInput.value = '';
             sourceInput.value = '';
+
+            sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
         }, false);
 
-        flatpickr(flatPickrInput, Object.assign({}, datetimeConfig, {
+        window.flatpickr(flatPickrInput, Object.assign({}, datetimeConfig, {
             onChange: updateInputValue.bind(null, sourceInput),
             defaultDate,
             enableSeconds: !!parseInt(sourceInput.dataset.seconds, 10),
         }));
+
+        if (sourceInput.hasAttribute('required')) {
+            flatPickrInput.setAttribute('required', true);
+        }
     };
 
     datetimeFields.forEach(initFlatPickr);
