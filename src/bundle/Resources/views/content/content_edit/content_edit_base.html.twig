@@ -17,7 +17,7 @@
                 {% block form_fields %}
                     {% for field in form.fieldsData -%}
                         {% if field.value is defined %}
-                            {{- form_row(field.value) -}}
+                            {{- form_widget(field) -}}
                         {% else %}
                             <div>
                                 {{- form_label(field) -}}
