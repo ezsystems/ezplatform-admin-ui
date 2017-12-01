@@ -18,16 +18,22 @@ class TwigComponent implements Renderable
     /** @var Environment */
     protected $twig;
 
+    /** @var array */
+    protected $parameters;
+
     /**
      * @param Environment $twig
      * @param string $template
+     * @param array $parameters
      */
     public function __construct(
         Environment $twig,
-        string $template
+        string $template,
+        array $parameters = []
     ) {
         $this->twig = $twig;
         $this->template = $template;
+        $this->parameters = $parameters;
     }
 
     /**
@@ -37,6 +43,6 @@ class TwigComponent implements Renderable
      */
     public function render(array $parameters = []): string
     {
-        return $this->twig->render($this->template, $parameters);
+        return $this->twig->render($this->template, $parameters + $this->parameters);
     }
 }

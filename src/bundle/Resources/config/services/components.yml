@@ -10,6 +10,8 @@ services:
     EzSystems\EzPlatformAdminUi\Component\TwigComponent:
         abstract: true
         lazy: true
+        arguments:
+            $parameters: []
 
     EzSystems\EzPlatformAdminUi\Component\ScriptComponent:
         abstract: true
