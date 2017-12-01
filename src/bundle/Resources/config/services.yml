@@ -36,7 +36,7 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformAdminUiBundle\EventListener\RequestAttributesListener:
+    EzSystems\EzPlatformAdminUi\EventListener\RequestAttributesListener:
         arguments:
             - '%ezpublish.siteaccess.groups%'
         tags:

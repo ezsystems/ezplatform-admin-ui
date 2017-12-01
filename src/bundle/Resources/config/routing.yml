@@ -4,8 +4,17 @@ ezplatform.dashboard:
         _controller: 'FrameworkBundle:Template:template'
         template: 'EzPlatformAdminUiBundle:dashboard:dashboard.html.twig'
 
+_ezpublishLocation:
+    path: /content/location/{locationId}/{languageCode}/{viewType}/{layout}
+    defaults:
+        _controller: ez_content:viewLocation
+        viewType: full
+        layout: true
+        languageCode: null
+
 ezplatform.content.edit:
     path: /todo/content/edit
+
 ezplatform.content.view:
     path: /todo/content/view
 
