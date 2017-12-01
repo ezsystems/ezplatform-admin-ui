@@ -1,0 +1,37 @@
+.ez-content-edit-container {
+    position: relative;
+
+    &__close {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        font-size: 2rem;
+        color: $ez-black;
+        width: 2rem;
+        height: 2rem;
+
+        &:before,
+        &:after {
+            content: "";
+            width: 2rem;
+            height: 2px;
+            position: absolute;
+            background-color: $ez-black;
+            top: 50%;
+            left: 0;
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+
+        &:hover {
+            text-decoration: none;
+            color: $ez-black;
+        }
+    }
+}
