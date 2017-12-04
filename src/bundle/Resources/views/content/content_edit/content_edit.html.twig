@@ -31,3 +31,7 @@
     {% set content_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_edit.sidebar_right', [], {'content': content, 'content_type': contentType}) %}
     {{ knp_menu_render(content_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
+
+{% block closeButton %}
+    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': content.versionInfo.contentInfo.mainLocationId}) }}"></a>
+{% endblock %}

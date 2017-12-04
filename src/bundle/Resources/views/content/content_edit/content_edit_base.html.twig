@@ -8,7 +8,8 @@
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
         {% block left_sidebar %}{% endblock left_sidebar %}
-        <div class="container px-0 pb-4 mt-5">
+        <div class="container px-0 pb-4 mt-5 ez-content-edit-container">
+            {% block closeButton %}{% endblock %}
             {% block details %}{% endblock %}
 
             {% block form %}
