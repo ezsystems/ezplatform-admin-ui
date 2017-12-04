@@ -34,7 +34,7 @@ class TranslationRemoveType extends AbstractType
                     'label' => false,
                     'allow_add' => true,
                     'entry_type' => CheckboxType::class,
-                    'entry_options' => ['label' => false],
+                    'entry_options' => ['label' => false, 'required' => false],
                 ]
             )
             ->add(

@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Mapper\ContentTranslationMapper;
@@ -53,24 +54,26 @@ class ContentEditController extends Controller
 
     /**
      * @param Content $content
-     * @param string|null $fromLanguage
-     * @param string|null $toLanguage
+     * @param string|null $fromLanguageCode
+     * @param string|null $toLanguageCode
      * @param Request $request
      *
      * @return ContentEditView|Response|null
      *
+     * @throws UnauthorizedException
      * @throws NotFoundException
      */
     public function translateAction(
         Content $content,
-        ?string $fromLanguage,
-        ?string $toLanguage,
+        ?string $fromLanguageCode,
+        ?string $toLanguageCode,
         Request $request
     ) {
         /* @todo could be improved with ParamConverters */
-        $fromLanguage = null === $fromLanguage ? null : $this->languageService->loadLanguage($fromLanguage);
-        $toLanguage = $this->languageService->loadLanguage($toLanguage);
+        $fromLanguage = null === $fromLanguageCode ? null : $this->languageService->loadLanguage($fromLanguageCode);
+        $toLanguage = $this->languageService->loadLanguage($toLanguageCode);
         $contentType = $this->contentTypeService->loadContentType($content->contentInfo->contentTypeId);
+        $contentInfo = $content->contentInfo;
 
         $contentUpdate = (new ContentTranslationMapper())->mapToFormData(
             $content,
@@ -102,7 +105,7 @@ class ContentEditController extends Controller
             'form' => $form->createView(),
             'language' => $toLanguage,
             'baseLanguage' => $fromLanguage ?: null,
-            'content' => $content,
+            'content' => $this->contentService->loadContentByContentInfo($contentInfo, [$contentInfo->mainLanguageCode]),
             'contentType' => $contentType,
         ]);
     }
