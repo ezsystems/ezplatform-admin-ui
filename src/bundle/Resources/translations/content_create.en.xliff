@@ -6,10 +6,10 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="ad4e9a4e42b99d945f972bab5a2eff694d283793" resname="creating">
-        <source>Creating - %contentType%</source>
-        <target state="new">Creating - %contentType%</target>
-        <note>key: creating</note>
+      <trans-unit id="109ad031477c8e3c904a45089ea26883d00d264e" resname="creating_in_language">
+        <source>Creating - %contentTypeName% in %languageName%</source>
+        <target state="new">Creating - %contentTypeName% in %languageName%</target>
+        <note>key: creating_in_language</note>
       </trans-unit>
       <trans-unit id="32d50c07b2eacd6fa72742ff1c1f5963c26a251d" resname="new_content_item">
         <source>New %contentType%</source>

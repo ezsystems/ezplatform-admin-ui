@@ -1,0 +1,70 @@
+.ez-translation {
+    width: 100%;
+
+    &.modal {
+        .modal-dialog {
+            max-width: initial;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    .modal-header {
+        background: $ez-ground-base;
+    }
+
+    .modal-body {
+        padding: 2rem;
+    }
+
+    &__title {
+        font-weight: bold;
+    }
+
+    &__language-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 70vw;
+
+        &:not(:last-child) {
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__input-wrapper {
+        width: 15rem;
+        background: $ez-ground-primary;
+        margin: .5rem;
+        border-radius: 5px;
+        line-height: 1;
+        color: $ez-color-secondary;
+
+        input[type="radio"] {
+            display: none;
+        }
+    }
+
+    &__label {
+        line-height: 1.5;
+        margin-bottom: 0;
+        display: block;
+        padding: .5rem;
+        border-radius: 5px;
+
+        .ez-icon {
+            display: none;
+            width: 1rem;
+            height: 1rem;
+        }
+
+        &--selected {
+            background: $ez-color-secondary;
+            color: $ez-white;
+
+            .ez-icon {
+                display: inline;
+            }
+        }
+    }
+}

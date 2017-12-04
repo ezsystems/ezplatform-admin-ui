@@ -14,6 +14,8 @@
 {% use 'EzPlatformAdminUiBundle:fieldtypes:ezkeyword.html.twig' %}
 {% use 'EzPlatformAdminUiBundle:fieldtypes:ezgmaplocation.html.twig' %}
 
+{% trans_default_domain 'content_edit' %}
+
 {# general content editing theming #}
 
 {%- block form_errors -%}
@@ -60,10 +62,14 @@
 {%- endblock %}
 
 {% block form_row_fieldtype %}
-    {% set fieldtype_identifier = form.parent.vars.value.fieldDefinition.fieldTypeIdentifier %}
+    {% set fieldtype = form.parent %}
+    {% set fieldtype_identifier = fieldtype.vars.value.fieldDefinition.fieldTypeIdentifier %}
+    {% set translation_mode = fieldtype.vars.mainLanguageCode != fieldtype.vars.languageCode %}
+    {% set fieldtype_is_not_translatable = translation_mode and not fieldtype.vars.value.fieldDefinition.isTranslatable %}
 
     {% set required_row_class = 'ez-field-edit--required' %}
     {% set invalid_row_class = 'is-invalid' %}
+    {% set nontranslatable_row_class = 'ez-field-edit--nontranslatable' %}
     {% set label_class = 'ez-field-edit__label' %}
     {% set label_wrapper_class = 'ez-field-edit__label-wrapper' %}
     {% set widget_class = 'ez-data-source__input' %}
@@ -71,6 +77,10 @@
     {% set wrapper_class = 'ez-field-edit ez-field-edit--' ~ fieldtype_identifier %}
     {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ required_row_class)|trim %}{% endif %}
     {% if errors|length > 0 %}{% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ invalid_row_class)|trim %}{% endif %}
+    {% if fieldtype_is_not_translatable %}
+        {% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ nontranslatable_row_class)|trim %}
+        {% set attr = attr|merge({'readonly': 'readonly'}) %}
+    {% endif %}
 
     {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class)|trim}) %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ widget_class)|trim}) %}
@@ -86,7 +96,9 @@
                 {{- form_widget(form, {'attr': attr}) -}}
             </div>
         </div>
-        {#<p class="ez-field-edit__description">Description of the field type</p>#}
+        {% if fieldtype_is_not_translatable %}
+            <p class="ez-field-edit__nontranslatable text-secondary">{{ 'fieldtype.translation_is_disabled'|trans({'%fieldName%': label})|desc('Translation for %fieldName% is disabled') }}</p>
+        {% endif %}
     </div>
 {% endblock %}
 

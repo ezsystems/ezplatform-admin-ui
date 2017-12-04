@@ -6,6 +6,11 @@
         @include label-required();
     }
 
+    &--nontranslatable {
+        opacity: .4;
+        pointer-events: none;
+    }
+
     &.is-invalid {
         .ez-field-edit__label-wrapper {
             color: $ez-color-danger;
@@ -20,6 +25,7 @@
                 top: 0;
                 left: -20px;
                 width: 20px;
+
                 background: red;
                 color: white;
                 text-align: center;

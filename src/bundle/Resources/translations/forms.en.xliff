@@ -21,6 +21,11 @@
         <target state="new">Delete</target>
         <note>key: content_location_remove_form.remove</note>
       </trans-unit>
+      <trans-unit id="170014b0ac524520dfb1336f7a5ff2f50ddceba3" resname="content_translation_add_form.add">
+        <source>Create</source>
+        <target state="new">Create</target>
+        <note>key: content_translation_add_form.add</note>
+      </trans-unit>
       <trans-unit id="0c3800a29144ab27e80a81e100212ccd5fd7e509" resname="content_translation_remove_form.remove">
         <source>Remove translation</source>
         <target state="new">Remove translation</target>

@@ -67,8 +67,8 @@ services:
 
     EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler'
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\:
-        resource: "../../../lib/Form/Processor/*"
+    EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\:
+        resource: "../../../lib/RepositoryForms/Form/Processor/*"
         public: true
         tags:
             - { name: kernel.event_subscriber }

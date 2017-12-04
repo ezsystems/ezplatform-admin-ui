@@ -21,10 +21,20 @@
         <target state="new">Created by %name%</target>
         <note>key: created_by</note>
       </trans-unit>
-      <trans-unit id="f34946beab1da2af6535a8e4a88145e9557de0aa" resname="editing">
-        <source>Editing - %contentType%</source>
-        <target state="new">Editing - %contentType%</target>
-        <note>key: editing</note>
+      <trans-unit id="0474be007e2cbb859dcec4d70ced364af71ba119" resname="editing_in_language">
+        <source>Editing - %contentName% in %languageName%</source>
+        <target state="new">Editing - %contentName% in %languageName%</target>
+        <note>key: editing_in_language</note>
+      </trans-unit>
+      <trans-unit id="4e46e160f661315fed793049088d1426ae440b56" resname="editing_in_language_based_on">
+        <source>Editing - %contentName% in %languageName% based on %baseLanguageName%</source>
+        <target state="new">Editing - %contentName% in %languageName% based on %baseLanguageName%</target>
+        <note>key: editing_in_language_based_on</note>
+      </trans-unit>
+      <trans-unit id="009667fab56f0bec66634f009a75ffd9425f2987" resname="fieldtype.translation_is_disabled">
+        <source>Translation for %fieldName% is disabled</source>
+        <target state="new">Translation for %fieldName% is disabled</target>
+        <note>key: fieldtype.translation_is_disabled</note>
       </trans-unit>
       <trans-unit id="876d7bdba03c72251ec4c2dc827fc54af7889091" resname="location_id">
         <source>Location ID: %locationId%</source>

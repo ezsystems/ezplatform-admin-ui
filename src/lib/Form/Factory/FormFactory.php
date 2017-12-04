@@ -13,6 +13,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentDraftCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupDeleteData;
@@ -47,6 +48,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentDraftCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentMainLocationUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType;
@@ -194,10 +196,29 @@ class FormFactory
     }
 
     /**
+     * @param TranslationAddData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function addTranslation(
+        TranslationAddData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('add-translation');
+
+        return $this->formFactory->createNamed($name, TranslationAddType::class, $data ?? new TranslationAddData());
+    }
+
+    /**
      * @param TranslationRemoveData|null $data
      * @param null|string $name
      *
      * @return FormInterface
+     *
+     * @throws InvalidOptionsException
      */
     public function removeTranslation(
         TranslationRemoveData $data = null,

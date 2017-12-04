@@ -7,7 +7,11 @@
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\Language;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
@@ -29,6 +33,9 @@ class TranslationController extends Controller
     /** @var ContentService */
     private $contentService;
 
+    /** @var ContentTypeService */
+    private $contentTypeService;
+
     /** @var FormFactory */
     private $formFactory;
 
@@ -39,6 +46,7 @@ class TranslationController extends Controller
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
      * @param ContentService $contentService
+     * @param ContentTypeService $contentTypeService
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
      */
@@ -46,14 +54,56 @@ class TranslationController extends Controller
         NotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
         ContentService $contentService,
+        ContentTypeService $contentTypeService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
         $this->contentService = $contentService;
+        $this->contentTypeService = $contentTypeService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function addAction(Request $request): Response
+    {
+        $form = $this->formFactory->addTranslation();
+        $form->handleRequest($request);
+
+        /** @var TranslationAddData $data */
+        $data = $form->getData();
+        $location = $data->getLocation();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $result = $this->submitHandler->handle($form, function (TranslationAddData $data) {
+                $location = $data->getLocation();
+                $contentInfo = $location->getContentInfo();
+                $language = $data->getLanguage();
+                $baseLanguage = $data->getBaseLanguage();
+
+                return new RedirectResponse($this->generateUrl('ezplatform.content.translate', [
+                    'contentId' => $contentInfo->id,
+                    'fromLanguage' => null !== $baseLanguage ? $baseLanguage->languageCode : null,
+                    'toLanguage' => $language->languageCode,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        $redirectionUrl = null !== $location
+            ? $this->generateUrl('_ezpublishLocation', ['locationId' => $location->id])
+            : $this->generateUrl('ezplatform.dashboard');
+
+        return $this->redirect($redirectionUrl);
     }
 
     /**
@@ -101,5 +151,44 @@ class TranslationController extends Controller
             'locationId' => $contentInfo->mainLocationId,
             '_fragment' => TranslationsTab::URI_FRAGMENT,
         ]));
+    }
+
+    /**
+     * @param ContentInfo $contentInfo
+     * @param Language $language
+     * @param Language|null $baseLanguage
+     *
+     * @return Content
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\ContentValidationException
+     * @throws \eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    private function createTranslationDraft(
+        ContentInfo $contentInfo,
+        Language $language,
+        ?Language $baseLanguage = null
+    ): Content {
+        $contentDraft = $this->contentService->createContentDraft($contentInfo);
+        $contentUpdateStruct = $this->contentService->newContentUpdateStruct();
+        $contentUpdateStruct->initialLanguageCode = $language->languageCode;
+        $contentType = $this->contentTypeService->loadContentType($contentDraft->contentInfo->contentTypeId);
+
+        $fields = null !== $baseLanguage
+            ? $contentDraft->getFieldsByLanguage($baseLanguage->languageCode)
+            : $contentDraft->getFields();
+
+        foreach ($fields as $field) {
+            $fieldDef = $contentType->getFieldDefinition($field->fieldDefIdentifier);
+            $value = null !== $baseLanguage
+                ? $field->value
+                : $fieldDef->defaultValue;
+            $contentUpdateStruct->setField($field->fieldDefIdentifier, $value);
+        }
+
+        return $this->contentService->updateContent($contentDraft->getVersionInfo(), $contentUpdateStruct);
     }
 }

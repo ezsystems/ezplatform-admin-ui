@@ -60,10 +60,11 @@
             {{ knp_menu_render(content_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 
             <div class="ez-extra-actions-container">
-                {% include '@EzPlatformAdminUi/content/widgets/content_create.html.twig' with {'form': form_content_create} %}
-                {% include '@EzPlatformAdminUi/content/widgets/content_edit.html.twig' with {'form': form_content_draft_create} %}
+                {% include '@EzPlatformAdminUi/content/widgets/content_create.html.twig' with {'form': form_content_create} only %}
+                {% include '@EzPlatformAdminUi/content/widgets/content_edit.html.twig' with {'form': form_content_draft_create} only %}
             </div>
-            {% include '@EzPlatformAdminUi/content/modal_location_trash.html.twig' with {'form': form_location_trash} %}
+
+            {% include '@EzPlatformAdminUi/content/modal_location_trash.html.twig' with {'form': form_location_trash} only %}
             {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}
             {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}
         </div>
@@ -86,6 +87,7 @@
         'bundles/ezplatformadminui/js/scripts/admin.location.tab.js'
         'bundles/ezplatformadminui/js/scripts/admin.location.visibility.js'
         'bundles/ezplatformadminui/js/scripts/admin.location.update.js'
+        'bundles/ezplatformadminui/js/scripts/admin.location.add.translation.js'
         'bundles/ezplatformadminui/js/scripts/udw/move.js'
         'bundles/ezplatformadminui/js/scripts/udw/copy.js'
         'bundles/ezplatformadminui/js/scripts/udw/swap.js'

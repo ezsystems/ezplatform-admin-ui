@@ -1,8 +1,6 @@
-ezplatform.dashboard:
-    path: /dashboard
-    defaults:
-        _controller: 'FrameworkBundle:Template:template'
-        template: 'EzPlatformAdminUiBundle:dashboard:dashboard.html.twig'
+#
+# System routes
+#
 
 _ezpublishLocation:
     path: /content/location/{locationId}/{languageCode}/{viewType}/{layout}
@@ -12,11 +10,19 @@ _ezpublishLocation:
         layout: true
         languageCode: null
 
-ezplatform.content.edit:
-    path: /todo/content/edit
+#
+# Dashboard
+#
 
-ezplatform.content.view:
-    path: /todo/content/view
+ezplatform.dashboard:
+    path: /dashboard
+    defaults:
+        _controller: 'FrameworkBundle:Template:template'
+        template: 'EzPlatformAdminUiBundle:dashboard:dashboard.html.twig'
+
+#
+# System Information
+#
 
 ezplatform.systeminfo:
     path: /systeminfo
@@ -27,6 +33,10 @@ ezplatform.systeminfo.php:
     path: /systeminfo/phpinfo
     defaults:
         _controller: 'EzPlatformAdminUiBundle:SystemInfo:phpinfo'
+
+#
+# Section
+#
 
 ezplatform.section.list:
     path: /section/list
@@ -59,6 +69,10 @@ ezplatform.section.assign_content:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Section:assignContent'
 
+#
+# Language
+#
+
 ezplatform.language.list:
     path: /language/list
     defaults:
@@ -84,6 +98,10 @@ ezplatform.language.delete:
     path: /language/delete/{languageId}
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Language:delete'
+
+#
+# Role
+#
 
 ezplatform.role.list:
     path: /role/list
@@ -121,6 +139,10 @@ ezplatform.role.delete:
     requirements:
         roleId: \d+
 
+#
+# Policy
+#
+
 ezplatform.policy.list:
     path: /role/{roleId}/policy/list
     methods: ['GET']
@@ -155,6 +177,10 @@ ezplatform.policy.delete:
         roleId: \d+
         policyId: \d+
 
+#
+# Role Assignment
+#
+
 ezplatform.role_assignment.list:
     path: /role/{roleId}/assignment
     methods: ['GET']
@@ -174,6 +200,10 @@ ezplatform.role_assignment.delete:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:RoleAssignment:delete'
+
+#
+# Content Type Group
+#
 
 ezplatform.content_type_group.list:
     path: /contenttypegroup/list
@@ -211,6 +241,10 @@ ezplatform.content_type_group.delete:
     requirements:
         contentTypeGroupId: \d+
 
+#
+# Trash
+#
+
 ezplatform.trash.list:
     path: /trash/list
     defaults:
@@ -226,6 +260,10 @@ ezplatform.trash.restore:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Trash:restore'
+
+#
+# Content Type
+#
 
 ezplatform.content_type.list:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/list
@@ -275,6 +313,10 @@ ezplatform.content_type.view:
     requirements:
         contentTypeGroupId: \d+
 
+#
+# Location View
+#
+
 ezplatform.location.move:
     path: /location/move
     methods: ['POST']
@@ -300,6 +342,12 @@ ezplatform.location.update:
         _controller: 'EzPlatformAdminUiBundle:Location:update'
 
 # LocationView / Translation tab
+
+ezplatform.translation.add:
+    path: /translation/add
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Translation:add'
 
 ezplatform.translation.remove:
     path: /translation/remove
@@ -347,7 +395,9 @@ ezplatform.content.update_main_location:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Content:updateMainLocation'
 
-# Content Draft
+#
+# Content Edit
+#
 
 ezplatform.content_draft.create:
     path: /content/draft/create # @todo change to /content/draft/create once route is removed from repository-forms
@@ -368,7 +418,16 @@ ezplatform.content.preview:
         _controller: 'EzPlatformAdminUiBundle:Content:preview'
         languageCode: ~
 
+ezplatform.content.translate:
+    path: /content/{contentId}/translate/{toLanguage}/{fromLanguage}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentEdit:translate'
+        fromLanguage: ~
+
+#
 # Search
+#
 
 ezplatform.search:
     path: /search

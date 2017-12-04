@@ -1,4 +1,5 @@
 {%- block ezplatform_fieldtype_ezrichtext_widget -%}
+    {#{% set attr = attr|merge({'hidden': 'hidden'}) %}#}
     {{- form_widget(form, {'attr': attr}) -}}
     <div class="ez-data-source__richtext" id="{{ form.vars.id }}__editable"></div>
 {%- endblock -%}
