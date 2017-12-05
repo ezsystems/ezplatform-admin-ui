@@ -2,15 +2,27 @@
 
 <!-- Tab name: {{ 'tab.name.hardware'|trans|desc('Hardware') }} -->
 
-<h1>{{ 'hardware'|trans|desc('Hardware') }}</h1>
-<dl>
-    <dt>{{ 'cpu'|trans|desc('CPU') }}</dt>
-    <dd>
-        {{ info.cpuType }}
-        {% if info.cpuSpeed %}
-            ({{ info.cpuCount }}x{{ info.cpuSpeed }}&nbsp;{{ 'mhz'|trans|desc('mhz') }})
-        {% endif %}
-    </dd>
-    <dt>{{ 'memory'|trans|desc('Memory') }}</dt>
-    <dd>{{ info.memorySize|ez_file_size( 1 ) }}</dd>
-</dl>
+<table class="table ez-table--list">
+    <thead>
+        <tr>
+            <th colspan="2">
+                {{ 'hardware'|trans|desc('Hardware') }}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ 'cpu'|trans|desc('CPU') }}</td>
+            <td>
+                {{ info.cpuType }}
+                {% if info.cpuSpeed %}
+                    ({{ info.cpuCount }}x{{ info.cpuSpeed }}&nbsp;{{ 'mhz'|trans|desc('mhz') }})
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ 'memory'|trans|desc('Memory') }}</td>
+            <td>{{ info.memorySize|ez_file_size( 1 ) }}</td>
+        </tr>
+    </tbody>
+</table>

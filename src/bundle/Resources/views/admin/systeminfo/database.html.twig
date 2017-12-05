@@ -2,14 +2,28 @@
 
 <!-- Tab name: {{ 'tab.name.database'|trans|desc('Database') }} -->
 
-<h1>{{ 'database'|trans|desc('Database') }}</h1>
-<dl>
-    <dt>{{ 'database.type'|trans|desc('Type') }}</dt>
-    <dd>{{ info.type }}</dd>
-    <dt>{{ 'database.name'|trans|desc('Name') }}</dt>
-    <dd>{{ info.name }}</dd>
-    <dt>{{ 'database.host'|trans|desc('Host') }}</dt>
-    <dd>{{ info.host }}</dd>
-    <dt>{{ 'database.username'|trans|desc('Username') }}</dt>
-    <dd>{{ info.username }}</dd>
-</dl>
+<table class="table ez-table--list">
+    <thead>
+        <tr>
+            <th colspan="2">{{ 'database'|trans|desc('Database') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ 'database.type'|trans|desc('Type') }}</td>
+            <td>{{ info.type }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'database.name'|trans|desc('Name') }}</td>
+            <td>{{ info.name }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'database.host'|trans|desc('Host') }}</td>
+            <td>{{ info.host }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'database.username'|trans|desc('Username') }}</td>
+            <td>{{ info.username }}</td>
+        </tr>
+    </tbody>
+</table>
