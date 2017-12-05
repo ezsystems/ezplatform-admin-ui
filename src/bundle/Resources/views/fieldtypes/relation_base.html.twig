@@ -1,0 +1,64 @@
+{% trans_default_domain 'ezrepoforms_content' %}
+
+{% block ezobjectrelation_base_widget %}
+    {% set limit = limit|default(0) %}
+    {% set default_location = default_location|default(0) %}
+    {% set has_relations = relations|length > 0 %}
+    <div class="ez-relations__wrapper" {% if not has_relations %}hidden="true"{% endif %}>
+        <table class="table ez-relations__table">
+            <thead>
+            <tr class="ez-relations__table-header">
+                <th colspan="5">
+                    {{ 'ezobjectrelationlist.relations'|trans|desc('Relations') }}: <small>{{ 'ezobjectrelationlist.limit'|trans({'%limit%': limit})|desc('Limit %limit% max') }}</small>
+                </th>
+                <th class="ez-relations__table-actions">
+                    <button class="ez-relations__table-action--create btn btn-primary" disabled>
+                        <svg class="ez-icon">
+                            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#create"></use>
+                        </svg>
+                    </button>
+                    <button class="ez-relations__table-action--remove btn btn-primary">
+                        <svg class="ez-icon">
+                            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
+                        </svg>
+                    </button>
+                </th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>{{ 'ezobjectrelationlist.table.row.name'|trans|desc('Name') }}</th>
+                <th>{{ 'ezobjectrelationlist.table.row.content_type'|trans|desc('Content Type') }}</th>
+                <th>{{ 'ezobjectrelationlist.table.row.created'|trans|desc('Created') }}</th>
+                <th>{{ 'ezobjectrelationlist.table.row.order'|trans|desc('Order') }}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody class="ez-relations__list" data-limit="{{ limit }}" data-default-location="{{ default_location }}" data-allowed-content-types="{{ allowed_content_type_identifiers|join(',') }}">
+            {% for relation in relations %}
+                <tr class="ez-relations__item" data-content-id="{{ relation.contentInfo.id }}">
+                    <td><input type="checkbox" value="{{ relation.contentInfo.id }}" /></td>
+                    <td>{{ relation.contentInfo.name }}</td>
+                    <td>{{ relation.contentType.name }}</td>
+                    <td>{{ relation.contentInfo.publishedDate|localizeddate('short', 'medium') }}</td>
+                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="{{ loop.index }}" /></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="ez-relations__cta" {% if has_relations %}hidden="true"{% endif %}>
+        <p class="ez-relations__cta-text">
+            {{ 'ezobjectrelationlist.cta.limit'|trans({'%limit%': limit})|desc('Set up multiple relations with up to %limit% content items') }}
+        </p>
+        <button class="ez-relations__cta-btn btn btn-primary">
+            <svg class="ez-icon">
+                <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#relations"></use>
+            </svg>
+            <span class="ez-relations__cta-btn-label">
+                {{ 'ezobjectrelationlist.cta.select'|trans|desc('Select content') }}
+            </span>
+        </button>
+    </div>
+    {% set attr = attr|merge({'hidden': 'hidden'}) %}
+    {{ block('form_widget') }}
+{% endblock %}

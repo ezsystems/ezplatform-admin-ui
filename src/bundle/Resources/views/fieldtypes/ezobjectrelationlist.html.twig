@@ -1,0 +1,10 @@
+{% trans_default_domain 'ezrepoforms_content' %}
+
+{% use '@EzPlatformAdminUi/fieldtypes/relation_base.html.twig' %}
+
+{% block ezplatform_fieldtype_ezobjectrelationlist_widget %}
+    {% set limit = form.parent.vars.value.fieldDefinition.validatorConfiguration.RelationListValueValidator.selectionLimit %}
+    {% set default_location = form.parent.vars.value.fieldDefinition.fieldSettings.selectionDefaultLocation %}
+    {% set allowed_content_type_identifiers = form.parent.vars.value.fieldDefinition.fieldSettings.selectionContentTypes %}
+    {{ block('ezobjectrelation_base_widget') }}
+{% endblock %}
