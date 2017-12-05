@@ -7,10 +7,10 @@ export default class EzTableConfig {
             'ezmoveup',
             'ezmovedown',
             'tableHeading',
-            'tableRow',
-            'tableColumn',
-            'tableCell',
-            'tableRemove',
+            'eztablerow',
+            'eztablecolumn',
+            'eztablecell',
+            'eztableremove',
         ];
 
         this.getArrowBoxClasses = AlloyEditor.SelectionGetArrowBoxClasses.table;
