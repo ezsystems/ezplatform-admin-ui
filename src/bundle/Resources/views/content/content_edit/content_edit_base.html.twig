@@ -12,6 +12,8 @@
             {% block closeButton %}{% endblock %}
             {% block details %}{% endblock %}
 
+            {% block form_before %}{% endblock %}
+
             {% block form %}
                 {{ form_start(form) }}
 
@@ -33,6 +35,8 @@
 
                 {{ form_end(form) }}
             {% endblock %}
+
+            {% block form_after %}{% endblock %}
         </div>
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
             {% block right_sidebar %}{% endblock %}
@@ -51,6 +55,7 @@
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/fieldType/base/base-file-field.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/fieldType/base/base-preview-field.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/fieldType/*'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/extra.actions.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

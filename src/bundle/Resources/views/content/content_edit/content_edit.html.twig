@@ -39,3 +39,17 @@
 {% block closeButton %}
     <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': content.versionInfo.contentInfo.mainLocationId}) }}"></a>
 {% endblock %}
+
+{% block form_before %}
+    {{ ezplatform_admin_ui_component_group('content-edit-form-before', {
+        'content': content,
+        'contentType': contentType
+    }) }}
+{% endblock %}
+
+{% block form_after %}
+    {{ ezplatform_admin_ui_component_group('content-edit-form-after', {
+        'content': content,
+        'contentType': contentType
+    }) }}
+{% endblock %}
