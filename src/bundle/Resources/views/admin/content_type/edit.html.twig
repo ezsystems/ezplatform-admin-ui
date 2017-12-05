@@ -21,7 +21,7 @@
 {% block content %}
     {{ form_start(form) }}
 
-    <section class="container mt-4">
+    <section class="container mt-4 px-5">
         <div class="card ez-adminsection-edit">
             <div class="card-header">
                 <h2>Global Properties</h2>
@@ -40,7 +40,7 @@
         </div>
     </section>
 
-    <section class="container mt-4">
+    <section class="container mt-4 px-5">
         <div class="card ez-adminsection-edit">
             <div class="card-header">
                 <h2>Field definitions</h2>
@@ -107,7 +107,7 @@
         </div>
     </section>
 
-    <section class="container mt-4 mb-4">
+    <section class="container my-4 px-5">
         <div class="btn-toolbar justify-content-between" role="toolbar">
             <a href="{{ path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }) }}" class="btn btn-default">
                 {{ "form.cancel"|trans|desc('Cancel') }}
