@@ -40,6 +40,7 @@ class ContentTranslationMapper implements FormDataMapperInterface
 
         /** @var Language $baseLanguage */
         $baseLanguage = $params['baseLanguage'];
+        $baseLanguageCode = $baseLanguage ? $baseLanguage->languageCode : null;
 
         /** @var ContentType $contentType */
         $contentType = $params['contentType'];
@@ -47,13 +48,16 @@ class ContentTranslationMapper implements FormDataMapperInterface
         $data = new ContentTranslationData(['content' => $content]);
         $data->initialLanguageCode = $language->languageCode;
 
-        foreach ($content->getFields() as $field) {
+        foreach ($content->getFieldsByLanguage() as $field) {
             $fieldDef = $contentType->getFieldDefinition($field->fieldDefIdentifier);
+            $fieldValue = null !== $baseLanguageCode
+                ? $content->getFieldValue($fieldDef->identifier, $baseLanguageCode)
+                : $fieldDef->defaultValue;
             $data->addFieldData(new FieldData([
                 'fieldDefinition' => $fieldDef,
                 'field' => $field,
-                'value' => $baseLanguage === null && $fieldDef->isTranslatable
-                    ? $fieldDef->defaultValue
+                'value' => $fieldDef->isTranslatable
+                    ? $fieldValue
                     : $field->value,
             ]));
         }

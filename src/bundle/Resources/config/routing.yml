@@ -419,11 +419,11 @@ ezplatform.content.preview:
         languageCode: ~
 
 ezplatform.content.translate:
-    path: /content/{contentId}/translate/{toLanguage}/{fromLanguage}
+    path: /content/{contentId}/translate/{toLanguageCode}/{fromLanguageCode}
     methods: ['GET', 'POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentEdit:translate'
-        fromLanguage: ~
+        fromLanguageCode: ~
 
 #
 # Search
