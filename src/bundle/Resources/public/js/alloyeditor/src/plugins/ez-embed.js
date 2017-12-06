@@ -184,7 +184,7 @@
                     const content = hits.View.Result.searchHits.searchHit[0].value.Content;
 
                     if (isEmbedImage) {
-                        const fieldImage = content.CurrentVersion.Version.Fields.field.find(field => field.fieldDefinitionIdentifier === 'image');
+                        const fieldImage = content.CurrentVersion.Version.Fields.field.find(field => field.fieldTypeIdentifier === 'ezimage');
                         const size = this.getConfig('size');
                         const variationHref = fieldImage.fieldValue.variations[size].href;
 
@@ -219,7 +219,7 @@
                     fetch(request)
                         .then(response => response.json())
                         .then(data => {
-                            const fieldImage = data.Version.Fields.field.find(field => field.fieldDefinitionIdentifier === 'image');
+                            const fieldImage = data.Version.Fields.field.find(field => field.fieldTypeIdentifier === 'ezimage');
                             const size = this.getConfig('size');
                             const variationHref = fieldImage.fieldValue.variations[size].href;
 
