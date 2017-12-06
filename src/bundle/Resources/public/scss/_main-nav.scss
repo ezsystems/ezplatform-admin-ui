@@ -2,7 +2,7 @@
 
 .ez-main-nav {
     padding: 0;
-    background-color: $ez-ground-base-light;
+    background-color: $ez-ground-base-medium;
 
     > .container-fluid {
         padding-right: 0;
@@ -13,28 +13,29 @@
     }
 
     .nav-tabs {
-        background-color: $ez-ground-base-light;
+        background-color: $ez-ground-base-medium;
         border: none;
         margin-bottom: 0;
 
         .nav-link {
             padding: 1rem 2rem;
-            color: $ez-color-base-dark;
+            color: $ez-black;
             display: flex;
+            transition: all .3s $ez-admin-transition;
 
             .ez-icon {
                 margin-right: .5rem;
             }
 
             &:hover {
-                background-color: $ez-ground-base-light;
+                background-color: $ez-ground-base-pale;
                 border-color: transparent;
             }
 
             &.active {
                 background-color: $white;
                 border-color: $white;
-                color: $ez-color-base-dark;
+                color: $ez-black;
             }
         }
     }
@@ -44,12 +45,12 @@
     background-color: $white;
     padding: 0;
     font-size: .875rem;
-    border-bottom: 1px solid $ez-ground-base-medium;
+    border-bottom: 1px solid $ez-color-base-pale;
 
     .navbar-nav {
         .nav-link {
             padding: .625rem 1rem;
-            color: $ez-color-base-dark;
+            color: $ez-black;
 
             &.active {
                 border-bottom: 3px solid $ez-color-primary;

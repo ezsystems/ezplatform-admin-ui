@@ -20,7 +20,7 @@ body {
 }
 
 .ez-dashboard .ez-main-row {
-    background-color: $ez-ground-base-dark;
+    background-color: $ez-ground-base-light;
 }
 
 .ez-side-menu,
@@ -103,6 +103,17 @@ body {
     cursor: not-allowed;
 }
 
-.ez-info-view {
+.ez-info-view,
+.ez-content-view,
+.ez-content-type-view,
+.ez-content-type-group-list-view,
+.ez-language-view,
+.ez-language-list-view,
+.ez-role-view,
+.ez-role-list-view,
+.ez-search-view,
+.ez-section-view,
+.ez-section-list-view,
+.ez-trash-list-view {
     background-color: $ez-ground-base-light;
 }

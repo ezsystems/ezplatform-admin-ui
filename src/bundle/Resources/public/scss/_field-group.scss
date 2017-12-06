@@ -41,14 +41,15 @@
     }
 
     .ez-content-field {
-        padding-left: 2rem;
+        padding: 0 1rem;
         margin-bottom: 1.5rem;
 
         .ez-content-field-name {
-            background-color: $ez-ground-base;
+            background-color: $ez-color-base-pale;
             margin-bottom: 0;
             padding: .5rem 1.5rem;
             border-radius: 5px 5px 0 0;
+            font-weight: 700;
         }
 
         .ez-content-field-value {

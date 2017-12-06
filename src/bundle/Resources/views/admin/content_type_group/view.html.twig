@@ -2,6 +2,8 @@
 
 {% trans_default_domain 'content_type' %}
 
+{% block bodyClass %}ez-content-type-group-list-view{% endblock %}
+
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },

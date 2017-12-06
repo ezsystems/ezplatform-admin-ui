@@ -4,6 +4,8 @@
 
 {% form_theme form_roles_delete '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
 
+{% block bodyClass %}ez-role-list-view{% endblock %}
+
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },

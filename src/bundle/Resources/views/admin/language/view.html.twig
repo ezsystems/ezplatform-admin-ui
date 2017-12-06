@@ -2,6 +2,8 @@
 
 {% trans_default_domain 'language' %}
 
+{% block bodyClass %}ez-language-view{% endblock %}
+
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },

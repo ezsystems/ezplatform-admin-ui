@@ -1,6 +1,8 @@
 {% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
 {% trans_default_domain 'section' %}
 
+{% block bodyClass %}ez-section-list-view{% endblock %}
+
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },

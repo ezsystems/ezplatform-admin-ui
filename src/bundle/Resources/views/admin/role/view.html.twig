@@ -2,6 +2,8 @@
 
 {% trans_default_domain 'role' %}
 
+{% block bodyClass %}ez-role-view{% endblock %}    
+
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
@@ -16,7 +18,7 @@
         iconName: 'roles'
     } %}
 
-    <ul class="nav nav-tabs px-4" role="tablist">
+    <ul class="nav nav-tabs nav-tabs-systeminfo px-4" role="tablist">
         <li role="presentation" class="nav-item">
             <a href="#policies" class="nav-link active" role="tab" data-toggle="tab">
                 {{ 'policy.view.list.title'|trans|desc('Policies') }}
