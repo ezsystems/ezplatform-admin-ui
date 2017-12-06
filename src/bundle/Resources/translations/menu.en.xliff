@@ -121,6 +121,26 @@
         <target state="new">Admin</target>
         <note>key: main_admin</note>
       </trans-unit>
+      <trans-unit id="118456f08e78dac2945c59eb317427f1abb88c3b" resname="section_create__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: section_create__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="4d26537b666dbf7a810b8742ea50f5bc51f83a3e" resname="section_create__sidebar_right__create">
+        <source>Create</source>
+        <target state="new">Create</target>
+        <note>key: section_create__sidebar_right__create</note>
+      </trans-unit>
+      <trans-unit id="61044b3382030ab6a876b6d4270e8af4e5f04dc1" resname="section_edit__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: section_edit__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="e33deebc2c2c317aa44b31e5d8c4148fdfb1dc34" resname="section_edit__sidebar_right__save">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: section_edit__sidebar_right__save</note>
+      </trans-unit>
       <trans-unit id="951ac18ce3ab253f9de7fd9caef6636b18edd1c3" resname="sidebar_left__browse">
         <source>Browse</source>
         <target state="new">Browse</target>

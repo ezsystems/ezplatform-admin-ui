@@ -1,29 +1,27 @@
-{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+{% extends 'EzPlatformAdminUiBundle:admin/section:base.html.twig' %}
 
 {% trans_default_domain 'section' %}
 
-{% block breadcrumbs %}
-    {% include 'EzPlatformAdminUiBundle:parts:breadcrumbs.html.twig' with {
-    'items': [
-    { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
-    { url: path('ezplatform.section.list'), value: 'section.list'|trans|desc('Sections') },
-    { value: 'section.new.title'|trans|desc('Creating a new Section') }
-    ]
-    } %}
+{% block breadcrumbsAdmin %}
+    {% include 'EzPlatformAdminUiBundle:parts:breadcrumbs.html.twig' with { 'items': [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.section.list'), value: 'section.list'|trans|desc('Sections') },
+        { value: 'section.new.title'|trans|desc('Creating a new Section') }
+    ]} %}
 {% endblock %}
 
-{% block pageTitle %}
+{% block pageTitleAdmin %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
         title: 'section.new.title'|trans|desc('Creating a new Section'),
         iconName: 'sections'
     } %}
 {% endblock %}
 
-{% block content %}
+{% block form %}
     {{ form_start(form_section_create) }}
 
     <section class="container mt-4">
-        <div class="card">
+        <div class="card ez-card__form">
             <div class="card-body">
                 {{ form_row(form_section_create.identifier) }}
                 {{ form_row(form_section_create.name) }}
@@ -31,15 +29,12 @@
         </div>
     </section>
 
-    <section class="container mt-4 mb-4">
-        <div class="btn-toolbar justify-content-end" role="toolbar" >
-            <a href="{{ path("ezplatform.section.list") }}" class="btn btn-default">
-                {{ "form.cancel"|trans|desc('Cancel') }}
-            </a>
-            {{ form_widget(form_section_create.create, {"attr": {"class": "btn btn-primary"}}) }}
-        </div>
-    </section>
+    {{ form_widget(form_section_create.create, {'attr': {'hidden': 'hidden'}}) }}
 
     {{ form_end(form_section_create) }}
 {% endblock %}
 
+{% block right_sidebar %}
+    {% set section_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.section_create.sidebar_right') %}
+    {{ knp_menu_render(section_create_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+{% endblock %}

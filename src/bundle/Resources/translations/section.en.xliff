@@ -6,11 +6,6 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="5cf420af18fd4a8d856fd30bc13aea5039369f9b" resname="form.cancel">
-        <source>Cancel</source>
-        <target state="new">Cancel</target>
-        <note>key: form.cancel</note>
-      </trans-unit>
       <trans-unit id="2a6caa13cfd67503e2250af8e36f26a2f835a4a0" resname="section.assign_content.success">
         <source>%contentItemsCount% content items were assigned to '%name%'</source>
         <target state="new">%contentItemsCount% content items were assigned to '%name%'</target>
