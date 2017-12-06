@@ -6,11 +6,6 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="5cf420af18fd4a8d856fd30bc13aea5039369f9b" resname="form.cancel">
-        <source>Cancel</source>
-        <target state="new">Cancel</target>
-        <note>key: form.cancel</note>
-      </trans-unit>
       <trans-unit id="d92993cb4cb3690f06c599b5f500a29fa23421c9" resname="policy.add.success">
         <source>New policies in role '%role%' created.</source>
         <target state="new">New policies in role '%role%' created.</target>
@@ -102,8 +97,8 @@
         <note>key: role.breadcrumb.add</note>
       </trans-unit>
       <trans-unit id="9cdc3dd417b63308f19cadbe01f74c21565b9947" resname="role.breadcrumb.edit">
-        <source>Editing Role "%identifier%"</source>
-        <target state="new">Editing Role "%identifier%"</target>
+        <source>Editing Role: %identifier%</source>
+        <target state="new">Editing Role: %identifier%</target>
         <note>key: role.breadcrumb.edit</note>
       </trans-unit>
       <trans-unit id="03e72944d22126b885a65f885ebf8f1b8e2f8579" resname="role.breadcrumb.list">
@@ -137,8 +132,8 @@
         <note>key: role.view.add.title</note>
       </trans-unit>
       <trans-unit id="d3938c40d50b4d6e972248900f2d43cda1fe02a3" resname="role.view.edit.title">
-        <source>Editing Role "%identifier%"</source>
-        <target state="new">Editing Role "%identifier%"</target>
+        <source>Editing Role: %identifier%</source>
+        <target state="new">Editing Role: %identifier%</target>
         <note>key: role.view.edit.title</note>
       </trans-unit>
       <trans-unit id="88d7426f344cc9d85b90903dad013d5806b82faa" resname="role.view.list.action.add">

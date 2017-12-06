@@ -19,20 +19,3 @@
         @include label-required();
     }
 }
-
-.ez-card__form {
-    border: none;
-    background-color: $ez-ground-base-light;
-
-    .form-group {
-        width: 70%;
-
-        .control-label {
-            font-weight: 700;
-        }
-
-        .form-control {
-            margin-bottom: 10px;
-        }
-    }
-}

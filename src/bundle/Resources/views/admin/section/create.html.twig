@@ -2,7 +2,7 @@
 
 {% trans_default_domain 'section' %}
 
-{% block breadcrumbsAdmin %}
+{% block breadcrumbs_admin %}
     {% include 'EzPlatformAdminUiBundle:parts:breadcrumbs.html.twig' with { 'items': [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.section.list'), value: 'section.list'|trans|desc('Sections') },
@@ -10,7 +10,7 @@
     ]} %}
 {% endblock %}
 
-{% block pageTitleAdmin %}
+{% block page_title_admin %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
         title: 'section.new.title'|trans|desc('Creating a new Section'),
         iconName: 'sections'
@@ -21,7 +21,7 @@
     {{ form_start(form_section_create) }}
 
     <section class="container mt-4">
-        <div class="card ez-card__form">
+        <div class="card ez-card">
             <div class="card-body">
                 {{ form_row(form_section_create.identifier) }}
                 {{ form_row(form_section_create.name) }}
