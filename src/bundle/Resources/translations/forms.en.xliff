@@ -146,6 +146,11 @@
         <target state="new">Delete</target>
         <note>key: role_delete.delete</note>
       </trans-unit>
+      <trans-unit id="762d518e404e16c8089565cff024134dbed7c614" resname="role_remove_form.remove">
+        <source>Remove role</source>
+        <target state="new">Remove role</target>
+        <note>key: role_remove_form.remove</note>
+      </trans-unit>
       <trans-unit id="4c228e578ee76e86bf13d3f8daa8fffa45d6387a" resname="role_update.name">
         <source>Name</source>
         <target state="new">Name</target>

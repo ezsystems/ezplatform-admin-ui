@@ -139,6 +139,12 @@ ezplatform.role.delete:
     requirements:
         roleId: \d+
 
+ezplatform.role.bulk_delete:
+    path: /role/bulk-delete
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Role:bulkDelete'
+
 #
 # Policy
 #

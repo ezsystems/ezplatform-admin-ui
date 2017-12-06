@@ -157,14 +157,14 @@
         <note>key: role.view.list.action.edit</note>
       </trans-unit>
       <trans-unit id="4cb9b2e474c4584dd193e46214b68897ebc6350f" resname="role.view.list.column.id">
-        <source>ID</source>
-        <target state="new">ID</target>
+        <source>Role ID</source>
+        <target state="new">Role ID</target>
         <note>key: role.view.list.column.id</note>
       </trans-unit>
-      <trans-unit id="85577fbcec5644f2fd6eb88f26e1dc4343bb09d3" resname="role.view.list.column.identifier">
-        <source>Identifier</source>
-        <target state="new">Identifier</target>
-        <note>key: role.view.list.column.identifier</note>
+      <trans-unit id="26470561bbbd003c0ad30bf2cb29f7da50e7d690" resname="role.view.list.column.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: role.view.list.column.name</note>
       </trans-unit>
       <trans-unit id="a0c33e3728b23f13b825e36808834a6930551873" resname="role.view.list.title">
         <source>Roles</source>
