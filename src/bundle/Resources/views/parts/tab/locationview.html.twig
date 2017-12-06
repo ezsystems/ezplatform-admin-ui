@@ -1,5 +1,5 @@
 <div>
-    <div class="ez-header">
+    <div class="ez-header px-4">
         <div class="container">
             <ul class="nav nav-tabs ez-tabs" role="tablist" id="ez-tab-list-{{ group }}">
                 {% for tab in tabs %}
@@ -14,7 +14,7 @@
             </ul>
         </div>
     </div>
-    <div class="tab-content container mt-5" id="ez-tab-list-content-{{ group }}">
+    <div class="tab-content container mt-4 px-5" id="ez-tab-list-content-{{ group }}">
         {% for tab in tabs %}
             {% set id = group ~ '-' ~ tab.identifier %}
             {% set active = loop.first %}

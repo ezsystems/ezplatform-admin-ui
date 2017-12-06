@@ -20,7 +20,7 @@
 {% block content %}
     {{ form_start(form) }}
 
-    <section class="container mt-4">
+    <section class="container mt-4 px-5">
         <div class="card">
             <div class="card-body">
                 {{ form_row(form.identifier) }}
@@ -28,7 +28,7 @@
         </div>
     </section>
 
-    <section class="container mt-4 mb-4">
+    <section class="container my-4 px-5">
         <div class="btn-toolbar justify-content-end" role="toolbar" >
             {{ form_widget(form.create, {
                 'attr': { 'class': 'btn btn-primary' }

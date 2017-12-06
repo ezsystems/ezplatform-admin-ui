@@ -16,7 +16,7 @@
         iconName: 'roles'
     } %}
 
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs px-4" role="tablist">
         <li role="presentation" class="nav-item">
             <a href="#policies" class="nav-link active" role="tab" data-toggle="tab">
                 {{ 'policy.view.list.title'|trans|desc('Policies') }}
@@ -45,7 +45,7 @@
     </div>
 
     {{ form_start(delete_form, { action: path('ezplatform.role.delete', {roleId: role.id}) }) }}
-    <section class="container mb-4 mt-4">
+    <section class="container my-4 px-5">
         <div class="btn-toolbar" role="toolbar" >
             <a href="{{ path('ezplatform.role.update', {roleId: role.id}) }}" class="btn btn-info">
                 {{ 'role.view.view.actions.edit'|trans|desc('Edit') }}

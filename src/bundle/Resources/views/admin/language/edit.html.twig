@@ -22,7 +22,7 @@
 {% block content %}
     {{ form_start(form, {'action': actionUrl}) }}
 
-    <section class="container mt-4">
+    <section class="container mt-4 px-5">
         <div class="card">
             <div class="card-body">
                 {{ form_row(form.name) }}
@@ -31,7 +31,7 @@
         </div>
     </section>
 
-    <section class="container mt-4 mb-4">
+    <section class="container my-4 px-5">
         <div class="btn-toolbar justify-content-end" role="toolbar" >
             <a href="{{ path("ezplatform.language.list") }}" class="btn btn-default">
                 {{ "form.cancel"|trans|desc('Cancel') }}
