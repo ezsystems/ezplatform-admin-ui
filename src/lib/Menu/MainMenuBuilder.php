@@ -111,19 +111,49 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             ),
             self::ITEM_ADMIN__SECTIONS => $this->createMenuItem(
                 self::ITEM_ADMIN__SECTIONS,
-                ['route' => 'ezplatform.section.list']
+                ['route' => 'ezplatform.section.list', 'extras' => [
+                    'routes' => [
+                        'update' => 'ezplatform.section.update',
+                        'view' => 'ezplatform.section.view',
+                        'create' => 'ezplatform.section.create',
+                    ],
+                ]]
             ),
             self::ITEM_ADMIN__ROLES => $this->createMenuItem(
                 self::ITEM_ADMIN__ROLES,
-                ['route' => 'ezplatform.role.list']
+                ['route' => 'ezplatform.role.list', 'extras' => [
+                    'routes' => [
+                        'update' => 'ezplatform.role.update',
+                        'view' => 'ezplatform.role.view',
+                        'create' => 'ezplatform.role.create',
+                        'policy_update' => 'ezplatform.policy.update',
+                        'policy_list' => 'ezplatform.policy.list',
+                        'policy_create' => 'ezplatform.policy.create',
+                    ],
+                ]]
             ),
             self::ITEM_ADMIN__LANGUAGES => $this->createMenuItem(
                 self::ITEM_ADMIN__LANGUAGES,
-                ['route' => 'ezplatform.language.list']
+                ['route' => 'ezplatform.language.list', 'extras' => [
+                    'routes' => [
+                        'edit' => 'ezplatform.language.edit',
+                        'view' => 'ezplatform.language.view',
+                        'create' => 'ezplatform.language.create',
+                    ],
+                ]]
             ),
             self::ITEM_ADMIN__CONTENT_TYPES => $this->createMenuItem(
                     self::ITEM_ADMIN__CONTENT_TYPES,
-                    ['route' => 'ezplatform.content_type_group.list']
+                    ['route' => 'ezplatform.content_type_group.list', 'extras' => [
+                        'routes' => [
+                            'update' => 'ezplatform.content_type_group.update',
+                            'view' => 'ezplatform.content_type_group.view',
+                            'create' => 'ezplatform.content_type_group.create',
+                            'content_type_add' => 'ezplatform.content_type.add',
+                            'content_type_view' => 'ezplatform.content_type.view',
+                            'content_type_edit' => 'ezplatform.content_type.edit',
+                        ],
+                    ]]
                 ),
             self::ITEM_ADMIN__USERS => $this->createMenuItem(
                 self::ITEM_ADMIN__USERS,

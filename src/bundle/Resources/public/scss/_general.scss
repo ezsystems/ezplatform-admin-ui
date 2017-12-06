@@ -39,10 +39,8 @@ body {
     height: auto;
 }
 
-button {
-    &.btn {
-        white-space: normal;
-    }
+.btn {
+    white-space: normal;
 }
 
 .ez-field-edit {
