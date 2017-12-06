@@ -7,8 +7,10 @@
 
 {% block item %}
     {% if item.name != 'root' %}
-        {% do item.setLinkAttribute('class', 'nav-link') %}
-        {% do item.setAttribute('class', 'nav-item ez-user-menu__item') %}
+        {% set linkAttributes = item.linkAttributes|merge({'class': (item.linkAttributes.class|default('') ~ ' nav-link')|trim}) %}
+        {% set attributes = item.attributes|merge({'class': (item.attributes.class|default('') ~ ' nav-item ez-user-menu__item')|trim}) %}
+        {% do item.setLinkAttributes(linkAttributes) %}
+        {% do item.setAttributes(attributes) %}
     {% endif %}
     {% if item.getExtra('template') is not null %}
         {% include item.getExtra('template') ignore missing with options only %}
