@@ -4,6 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="CSRF-Token" content="{{ csrf_token('authenticate') }}" />
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
+
+        {% block page_head %}{% endblock %}
+
         <script>
             window.eZ = {
                 adminUiConfig: {{ admin_ui_config|json_encode|raw }},
@@ -58,6 +61,7 @@
             </div>
         </div>
         <div class="container-fluid ez-main-container">
+            {% block content_wrapper %}
             {% block content %}
 
                 {% block left_sidebar %}
@@ -67,6 +71,7 @@
                 {% endblock left_sidebar %}
 
             {% endblock content %}
+            {% endblock content_wrapper %}
         </div>
         <div class="ez-notifications-container">
             {% for label, messages in app.flashes %}
