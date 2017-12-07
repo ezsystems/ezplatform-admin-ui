@@ -1,9 +1,9 @@
 @mixin checkbox-icon() {
     border: 2px solid $ez-color-secondary;
-    padding: 4px;
+    padding: .2rem;
     margin: 0;
-    line-height: .5;
-    border-radius: .25rem;
+    line-height: 1;
+    border-radius: 5px;
     position: relative;
     z-index: 1;
     cursor: pointer;
@@ -11,27 +11,24 @@
     &:before {
         content: "";
         position: absolute;
-        width: 2rem;
-        height: 2rem;
+        width: 2.3rem;
+        height: 2.3rem;
         top: 50%;
         left: 0;
         background-color: $ez-color-secondary;
         z-index: -1;
-        border-radius: .25rem;
+        border-radius: 5px;
         transform: translate(calc(100% + .3rem), -50%);
         transition: all .2s $ez-admin-transition;
     }
 
     .ez-icon {
         fill: $ez-color-secondary;
-        margin: .125rem;
-        height: 1.5rem;
-        width: 1.5rem;
+        margin: .1rem;
     }
 
     .ez-icon + .ez-icon {
         fill: $ez-white;
-        margin: .125rem .125rem .125rem .3125rem;
     }
 
     &.is-checked {
