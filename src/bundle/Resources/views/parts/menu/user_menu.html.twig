@@ -8,8 +8,10 @@
 {% block item %}
     {% if item.name != 'root' %}
         {% set linkAttributes = item.linkAttributes|merge({'class': (item.linkAttributes.class|default('') ~ ' nav-link')|trim}) %}
+        {% set labelAttributes = item.labelAttributes|merge({'class': (item.labelAttributes.class|default('') ~ ' nav-link')|trim}) %}
         {% set attributes = item.attributes|merge({'class': (item.attributes.class|default('') ~ ' nav-item ez-user-menu__item')|trim}) %}
         {% do item.setLinkAttributes(linkAttributes) %}
+        {% do item.setLabelAttributes(labelAttributes) %}
         {% do item.setAttributes(attributes) %}
     {% endif %}
     {% if item.getExtra('template') is not null %}
