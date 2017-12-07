@@ -1,8 +1,8 @@
-{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+{% extends 'EzPlatformAdminUiBundle:admin/role:base.html.twig' %}
 
 {% trans_default_domain 'role' %}
 
-{% block breadcrumbs %}
+{% block breadcrumbs_admin %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans|desc('Roles') },
@@ -10,30 +10,30 @@
     ]} %}
 {% endblock %}
 
-{% block pageTitle %}
+{% block page_title_admin %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
         title: 'role.view.add.title'|trans|desc('Creating a new Role'),
         iconName: 'roles'
     } %}
 {% endblock %}
 
-{% block content %}
+{% block form %}
     {{ form_start(form) }}
+
     <section class="container mt-4 px-5">
-        <div class="card">
+        <div class="card ez-card">
             <div class="card-body">
                 {{ form_row(form.identifier) }}
             </div>
         </div>
     </section>
 
-    <section class="container my-4 px-5">
-        <div class="btn-toolbar justify-content-end" role="toolbar" >
-            <a href="{{ path("ezplatform.role.list") }}" class="btn btn-default">
-                {{ "form.cancel"|trans|desc('Cancel') }}
-            </a>
-            {{ form_widget(form.save, { 'attr': { 'class': 'btn btn-primary' } }) }}
-        </div>
-    </section>
+    {{ form_widget(form.save, { 'attr': { 'hidden': 'hidden' } }) }}
+
     {{ form_end(form) }}
+{% endblock %}
+
+{% block right_sidebar %}
+    {% set role_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.role_create.sidebar_right') %}
+    {{ knp_menu_render(role_create_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
