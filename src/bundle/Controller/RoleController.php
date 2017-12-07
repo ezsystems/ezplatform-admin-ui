@@ -12,6 +12,7 @@ use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Role;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RolesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper;
@@ -21,6 +22,9 @@ use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\Translation\Exception\InvalidArgumentException;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class RoleController extends Controller
@@ -79,7 +83,16 @@ class RoleController extends Controller
     {
         $roles = $this->roleService->loadRoles();
 
+        $rolesNumbers = array_column($roles, 'id');
+
+        $rolesDeleteData = new RolesDeleteData(
+            array_combine($rolesNumbers, array_fill_keys($rolesNumbers, false))
+        );
+
+        $rolesDeleteForm = $this->formFactory->deleteRoles($rolesDeleteData);
+
         return $this->render('@EzPlatformAdminUi/admin/role/list.html.twig', [
+            'form_roles_delete' => $rolesDeleteForm->createView(),
             'roles' => $roles,
         ]);
     }
@@ -205,5 +218,51 @@ class RoleController extends Controller
         return $this->redirect($this->generateUrl('ezplatform.role.view', [
             'roleId' => $role->id,
         ]));
+    }
+
+    /**
+     * Handles removing roles based on submitted form.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
+     * @throws InvalidOptionsException
+     */
+    public function bulkDeleteAction(Request $request): Response
+    {
+        $form = $this->formFactory->deleteRoles(
+            new RolesDeleteData()
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (RolesDeleteData $data) {
+                foreach ($data->getRoles() as $roleId => $selected) {
+                    $role = $this->roleService->loadRole($roleId);
+                    $this->roleService->deleteRole($role);
+
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Role '%role%' removed.") */
+                            'role.delete.success',
+                            ['%role%' => $role->identifier],
+                            'role'
+                        )
+                    );
+                }
+
+                return new RedirectResponse($this->generateUrl('ezplatform.role.list'));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return new RedirectResponse($this->generateUrl('ezplatform.role.list'));
     }
 }

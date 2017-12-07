@@ -10,6 +10,10 @@
         width: 1.5rem;
         height: 1.5rem;
         fill: $ez-color-primary;
+
+        &--secondary {
+            fill: $ez-color-secondary
+        }
     }
 }
 

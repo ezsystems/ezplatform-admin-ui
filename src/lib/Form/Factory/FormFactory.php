@@ -34,6 +34,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RolesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
@@ -69,6 +70,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RolesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionContentAssignType;
@@ -576,6 +578,23 @@ class FormFactory
         $name = $name ?: sprintf('delete-role-%d', $data->getRole()->id);
 
         return $this->formFactory->createNamed($name, RoleDeleteType::class, $data);
+    }
+
+    /**
+     * @param RolesDeleteData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function deleteRoles(
+        RolesDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('delete-roles');
+
+        return $this->formFactory->createNamed($name, RolesDeleteType::class, $data);
     }
 
     /**
