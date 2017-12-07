@@ -5,7 +5,7 @@
         <meta name="CSRF-Token" content="{{ csrf_token('authenticate') }}" />
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
 
-        {% block pageHead %}{% endblock %}
+        {% block page_head %}{% endblock %}
 
         <script>
             window.eZ = {
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="container-fluid ez-main-container">
-            {% block contentWrapper %}
+            {% block content_wrapper %}
             {% block content %}
 
                 {% block left_sidebar %}
@@ -69,7 +69,7 @@
                 {% endblock left_sidebar %}
 
             {% endblock content %}
-            {% endblock contentWrapper %}
+            {% endblock content_wrapper %}
         </div>
         <div class="ez-notifications-container">
             {% for label, messages in app.flashes %}
