@@ -17,8 +17,8 @@
         <note>key: policy.breadcrumb.add</note>
       </trans-unit>
       <trans-unit id="8a7079c136f19a37dc42a6192fb94a11d19105ad" resname="policy.breadcrumb.edit">
-        <source>Editing Policy "%module% / %function%"</source>
-        <target state="new">Editing Policy "%module% / %function%"</target>
+        <source>Edit limitations</source>
+        <target state="new">Edit limitations</target>
         <note>key: policy.breadcrumb.edit</note>
       </trans-unit>
       <trans-unit id="8a22274ebbfba3c96c4015fa64112db95d060525" resname="policy.delete.success">
@@ -47,13 +47,13 @@
         <note>key: policy.view.add.title</note>
       </trans-unit>
       <trans-unit id="aefaf3a17b8493e63c82678611eb6eacbcc45d19" resname="policy.view.edit.title">
-        <source>Editing Policy "%module% / %function%"</source>
-        <target state="new">Editing Policy "%module% / %function%"</target>
+        <source>Edit limitations</source>
+        <target state="new">Edit limitations</target>
         <note>key: policy.view.edit.title</note>
       </trans-unit>
       <trans-unit id="e182986ba1f94484d60ea6b1db7cc2707478f2a1" resname="policy.view.limitations.title">
-        <source>Limitations</source>
-        <target state="new">Limitations</target>
+        <source>Edit limitations</source>
+        <target state="new">Edit limitations</target>
         <note>key: policy.view.limitations.title</note>
       </trans-unit>
       <trans-unit id="84d0c2844a996fbfdc23872405533f92b6e6e2f6" resname="policy.view.list.action.add">
@@ -80,6 +80,11 @@
         <source>Policies</source>
         <target state="new">Policies</target>
         <note>key: policy.view.list.title</note>
+      </trans-unit>
+      <trans-unit id="9b1c2c53df24e9d0d141037860eb87d2878bdb05" resname="policy.view.policy.title">
+        <source>Editing - Policy type</source>
+        <target state="new">Editing - Policy type</target>
+        <note>key: policy.view.policy.title</note>
       </trans-unit>
       <trans-unit id="e2b7ae0acb75f99dc7943574a63b36abbb6c42bf" resname="role.assignment_create.success">
         <source>Assignments on role '%role%' created.</source>
@@ -110,6 +115,11 @@
         <source>%identifier%</source>
         <target state="new">%identifier%</target>
         <note>key: role.breadcrumb.view</note>
+      </trans-unit>
+      <trans-unit id="45788029a46cf9c1bc9a3d38077e86a99a650576" resname="role.breadcrumb.view.identifier">
+        <source>Role "%identifier%"</source>
+        <target state="new">Role "%identifier%"</target>
+        <note>key: role.breadcrumb.view.identifier</note>
       </trans-unit>
       <trans-unit id="59754dcca61db396ef9de8abd3aa63645bd50f65" resname="role.create.success">
         <source>Role '%role%' created.</source>

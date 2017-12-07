@@ -121,6 +121,26 @@
         <target state="new">Admin</target>
         <note>key: main_admin</note>
       </trans-unit>
+      <trans-unit id="bd668569e3e19db4ee8d34e4008f9bfceaad437b" resname="policy_create__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: policy_create__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="d33542eb7c2590dd5a7b92764f02a1b40fb99b8a" resname="policy_create__sidebar_right__create">
+        <source>Create</source>
+        <target state="new">Create</target>
+        <note>key: policy_create__sidebar_right__create</note>
+      </trans-unit>
+      <trans-unit id="6a2ed71b1ade1376874c2dffd3f5c85f6449a4af" resname="policy_edit__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: policy_edit__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="cb47e2c35d152c762cc9923eed5ca55bad4a1d8f" resname="policy_edit__sidebar_right__save">
+        <source>Update</source>
+        <target state="new">Update</target>
+        <note>key: policy_edit__sidebar_right__save</note>
+      </trans-unit>
       <trans-unit id="ec3a03215b15b79b7db72bac312b5e59734ac99c" resname="role_create__sidebar_right__cancel">
         <source>Discard changes</source>
         <target state="new">Discard changes</target>
@@ -181,6 +201,11 @@
         <target state="new">Empty Trash</target>
         <note>key: trash__sidebar_right__empty_trash</note>
       </trans-unit>
+      <trans-unit id="06accb26fbb1b72012942af2b3e03f7c138e28c3" resname="user__content">
+        <source>Logout</source>
+        <target state="new">Logout</target>
+        <note>key: user__content</note>
+      </trans-unit>
       <trans-unit id="40679174821cfa2ce3d3a4dc046f0ef65df6f483" resname="user_create__sidebar_right__cancel">
         <source>Cancel</source>
         <target state="new">Cancel</target>
@@ -200,11 +225,6 @@
         <source>Update</source>
         <target state="new">Update</target>
         <note>key: user_edit__sidebar_right__update</note>
-      </trans-unit>
-      <trans-unit id="06accb26fbb1b72012942af2b3e03f7c138e28c3" resname="user__content">
-        <source>Logout</source>
-        <target state="new">Logout</target>
-        <note>key: user__content</note>
       </trans-unit>
     </body>
   </file>
