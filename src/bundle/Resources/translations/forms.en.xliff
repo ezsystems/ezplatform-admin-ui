@@ -146,11 +146,6 @@
         <target state="new">Delete</target>
         <note>key: role_delete.delete</note>
       </trans-unit>
-      <trans-unit id="762d518e404e16c8089565cff024134dbed7c614" resname="role_remove_form.remove">
-        <source>Remove role</source>
-        <target state="new">Remove role</target>
-        <note>key: role_remove_form.remove</note>
-      </trans-unit>
       <trans-unit id="4c228e578ee76e86bf13d3f8daa8fffa45d6387a" resname="role_update.name">
         <source>Name</source>
         <target state="new">Name</target>
@@ -160,6 +155,11 @@
         <source>Update</source>
         <target state="new">Update</target>
         <note>key: role_update.save</note>
+      </trans-unit>
+      <trans-unit id="2b8a62034311f415eba9826996495c2ddd076745" resname="roles_delete_form.delete">
+        <source>Delete role</source>
+        <target state="new">Delete role</target>
+        <note>key: roles_delete_form.delete</note>
       </trans-unit>
       <trans-unit id="f3a2d2ec4f587435900fdec3f0fb973592b57147" resname="section_content_assign_form.assign">
         <source>Assign content</source>
