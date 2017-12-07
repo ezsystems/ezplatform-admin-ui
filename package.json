@@ -10,7 +10,6 @@
     "alloyeditor": "^1.4"
   },
   "devDependencies": {
-    "node-sass": "^4.5.0",
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -27,8 +26,6 @@
     "webpack": "^3.5.5"
   },
   "scripts": {
-    "sass-bootstrap": "node-sass --output-style compressed src/bundle/Resources/public/scss/ezplatform-bootstrap.scss src/bundle/Resources/public/css/ezplatform-bootstrap.min.css",
-    "sass-platform": "node-sass --output-style compressed src/bundle/Resources/public/scss/ezplatform.scss src/bundle/Resources/public/css/ezplatform.min.css",
     "componentize": "webpack"
   }
 }

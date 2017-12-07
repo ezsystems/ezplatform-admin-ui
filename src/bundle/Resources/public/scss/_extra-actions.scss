@@ -1,5 +1,5 @@
 .ez-extra-actions {
-    $block: &;
+    $block: '.ez-extra-actions';
 
     border-radius: 8px;
     border: 6px solid $ez-color-secondary;
