@@ -34,6 +34,15 @@
     }
 }
 
+.ez-side-menu,
+.ez-context-menu {
+    .ez-icon {
+        width: 1.875rem;
+        height: 1.875rem;
+        margin-bottom: .1875rem;
+    }
+}
+
 .ez-icon-search-button{
     fill: $ez-white;
     height: 1rem;
