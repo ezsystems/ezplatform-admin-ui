@@ -1,0 +1,37 @@
+{% extends 'EzPlatformAdminUiBundle:content/content_edit:content_edit_base.html.twig' %}
+
+{% trans_default_domain 'user_create' %}
+
+{% block details %}
+    <h4 class="text-muted">{{ 'creating'|trans({'%contentType%': contentType.name})|desc('Creating - %contentType%') }}</h4>
+    <h1>
+        <svg class="ez-icon ez-icon-{{ contentType.identifier }}">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ contentType.identifier }}"></use>
+        </svg>
+        {{ 'new_content_item'|trans({'%contentType%': contentType.name})|desc('New %contentType%') }}
+    </h1>
+
+    <div class="small">
+        {{ contentType.name }} / {{ 'group_id'|trans({'%groupId%': parentGroup.id})|desc('Group ID: %groupId%') }}
+    </div>
+    {# @todo remove if statement once getDescription() bug is resolved in kernel #}
+    {% if contentType.descriptions is not empty %}
+        <div class="small text-muted">{{ contentType.description }}</div>
+    {% endif %}
+{% endblock %}
+
+{% block form_fields %}
+    {{ parent() }}
+    {{ form_widget(form.create, {'attr': {'hidden': 'hidden'}}) }}
+    {{ form_widget(form.cancel, {'attr': {'hidden': 'hidden'}}) }}
+{% endblock %}
+
+{% block right_sidebar %}
+    {% set user_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.user_create.sidebar_right', [], {'parent_group': parentGroup, 'content_type': contentType}) %}
+    {{ knp_menu_render(user_create_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+{% endblock %}
+
+{% block closeButton %}
+    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': parentGroup.content.versionInfo.contentInfo.mainLocationId}) }}"></a>
+{% endblock %}
+
