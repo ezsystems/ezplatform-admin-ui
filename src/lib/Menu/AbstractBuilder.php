@@ -64,9 +64,9 @@ abstract class AbstractBuilder
      *
      * @return ConfigureMenuEvent
      */
-    protected function createConfigureMenuEvent(ItemInterface $menu): ConfigureMenuEvent
+    protected function createConfigureMenuEvent(ItemInterface $menu, array $options = []): ConfigureMenuEvent
     {
-        return new ConfigureMenuEvent($this->factory, $menu);
+        return new ConfigureMenuEvent($this->factory, $menu, $options);
     }
 
     /**
@@ -78,7 +78,7 @@ abstract class AbstractBuilder
     {
         $menu = $this->createStructure($options);
 
-        $this->dispatchMenuEvent($this->getConfigureEventName(), $this->createConfigureMenuEvent($menu));
+        $this->dispatchMenuEvent($this->getConfigureEventName(), $this->createConfigureMenuEvent($menu, $options));
 
         return $menu;
     }

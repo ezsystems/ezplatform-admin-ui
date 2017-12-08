@@ -39,14 +39,19 @@ class ConfigureMenuEvent extends Event
     /** @var ItemInterface */
     private $menu;
 
+    /** @var array|null */
+    private $options;
+
     /**
      * @param FactoryInterface $factory
      * @param ItemInterface $menu
+     * @param array $options
      */
-    public function __construct(FactoryInterface $factory, ItemInterface $menu)
+    public function __construct(FactoryInterface $factory, ItemInterface $menu, array $options = [])
     {
         $this->factory = $factory;
         $this->menu = $menu;
+        $this->options = $options;
     }
 
     /**
@@ -63,5 +68,13 @@ class ConfigureMenuEvent extends Event
     public function getMenu(): ItemInterface
     {
         return $this->menu;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions(): array
+    {
+        return $this->options ?? [];
     }
 }
