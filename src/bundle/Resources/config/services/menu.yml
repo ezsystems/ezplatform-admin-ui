@@ -83,3 +83,8 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.user_edit.sidebar_right }
 
+    EzSystems\EzPlatformAdminUi\Menu\Admin\Role\RoleAssignmentCreateRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.role_assignment_create.sidebar_right }
+

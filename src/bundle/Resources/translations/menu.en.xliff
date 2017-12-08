@@ -141,6 +141,16 @@
         <target state="new">Update</target>
         <note>key: policy_edit__sidebar_right__save</note>
       </trans-unit>
+      <trans-unit id="540d43aee8ab9ad7c36096274135992fbf77ae41" resname="role_assignment_create__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: role_assignment_create__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="574bac165f9c298de0c0d06801b68ec7e331658b" resname="role_assignment_create__sidebar_right__create">
+        <source>Create</source>
+        <target state="new">Create</target>
+        <note>key: role_assignment_create__sidebar_right__create</note>
+      </trans-unit>
       <trans-unit id="ec3a03215b15b79b7db72bac312b5e59734ac99c" resname="role_create__sidebar_right__cancel">
         <source>Discard changes</source>
         <target state="new">Discard changes</target>

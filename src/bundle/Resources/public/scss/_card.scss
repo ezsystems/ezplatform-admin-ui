@@ -20,6 +20,11 @@
         font-weight: 700;
         border-radius: .25rem .25rem 0 0;
         padding: .75rem 1.25rem .5rem 1.25rem;
+
+        &--secondary {
+            color: $ez-secondary-ground-medium;
+            font-weight: 400;
+        }
     }
 
     &__body {
