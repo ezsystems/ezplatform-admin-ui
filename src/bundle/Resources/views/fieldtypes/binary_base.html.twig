@@ -1,50 +1,47 @@
 {% trans_default_domain 'ezrepoforms_content' %}
 
 {% block binary_base_row %}
-    {% set fieldtype_identifier = form.parent.vars.value.fieldDefinition.fieldTypeIdentifier %}
     {% set file_is_empty = form.parent.vars.value.value.fileName is null or form.parent.vars.value.value.fileSize is null %}
+    {% set attr = attr|merge({'data-max-file-size': max_file_size}) %}
+    {% set wrapper_attr = wrapper_attr|default({})|merge({'class': (wrapper_attr.class|default('') ~ ' ez-field-edit--with-preview')|trim}) %}
+    {% set preview_attr = preview_attr|default({})|merge({'class': (preview_attr.class|default('') ~ ' ez-field-edit__preview')|trim}) %}
+    {% set widget_wrapper_attr = widget_wrapper_attr|default({})|merge({'class': (widget_wrapper_attr.class|default('') ~ ' ez-field-edit__data')|trim}) %}
+    {% if file_is_empty %}
+        {% set preview_attr = preview_attr|default({})|merge({'hidden': 'hidden'}) %}
+    {% else %}
+        {% set widget_wrapper_attr = widget_wrapper_attr|merge({'hidden': 'hidden'}) %}
+    {% endif %}
 
-    {% set wrapper_class = 'ez-field-edit ez-field-edit--with-preview ez-field-edit--' ~ fieldtype_identifier %}
-    {% set widget_class = 'ez-data-source__input' %}
-    {% set required_row_class = 'ez-field-edit--required' %}
-    {% set invalid_row_class = 'is-invalid' %}
-    {% set label_wrapper_class = 'ez-field-edit__label-wrapper' %}
-    {% set label_class = 'ez-field-edit__label' %}
-    {% set widget_wrapper_class = 'ez-field-edit__data'%}
-    {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ required_row_class)|trim %}{% endif %}
-    {% if errors|length > 0 %}{% set wrapper_class = (wrapper_class|default('') ~ ' ' ~ invalid_row_class)|trim %}{% endif %}
+    {% set widget_container_block = block('binary_base_widget_container') %}
 
-    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class)|trim}) %}
-    {% set new_attributes = {'class': (attr.class|default('') ~ ' ' ~ widget_class)|trim, 'data-max-file-size': max_file_size} %}
-    {% set attr = attr|merge(new_attributes) %}
-    {% set wrapper_attr = wrapper_attr|default({})|merge({class: (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
+    {{ block('form_row_fieldtype') }}
+{% endblock %}
 
-    <div{% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
-        <div class="{{ label_wrapper_class }}">
-            {{ form_label(form) }}
-            {{ block('form_errors') }}
-        </div>
-        <div class="ez-field-edit__preview"{% if file_is_empty %} hidden{% endif %}>
-            {{ block(preview_block_name) }}
-        </div>
-        <div class="{{ widget_wrapper_class }}"{% if not file_is_empty %} hidden{% endif %}>
-            <div class="ez-data-source">
-                <div class="ez-data-source__message--main">{{ 'fieldtype.binary_base.drag_drop'|trans|desc('Drag and drop your files on browser window or upload them') }}</div>
-                <div class="ez-data-source__btn-add">
-                    <svg class="ez-icon">
-                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#upload"></use>
-                    </svg>
-                    <span class="ez-data-source__btn-label">{{ 'fieldtype.binary_base.upload_file'|trans|desc('Upload file') }}</span>
-                </div>
-                {% if max_file_size is defined and max_file_size > 0 %}
-                    <div class="ez-data-source__message--filesize">{{ 'fieldtype.binary_base.max_file_size'|trans({'%size%': max_file_size|default(0)|ez_file_size(2)})|desc('Max file size: %size%') }}</div>
-                {% endif %}
-                {{- form_widget(form.file, {'attr': attr}) -}}
-                {{- form_widget(form.remove, {'attr': {
-                    'hidden': 'hidden',
-                    'class': 'ez-field-edit__option--remove-media'
-                }, 'label_attr': {'hidden': 'hidden'}}) -}}
-            </div>
+{% block binary_base_widget %}
+    <div class="ez-data-source__message--main">{{ 'fieldtype.binary_base.drag_drop'|trans|desc('Drag and drop your files on browser window or upload them') }}</div>
+    <div class="ez-data-source__btn-add">
+        <svg class="ez-icon">
+            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#upload"></use>
+        </svg>
+        <span class="ez-data-source__btn-label">{{ 'fieldtype.binary_base.upload_file'|trans|desc('Upload file') }}</span>
+    </div>
+    {% if max_file_size is defined and max_file_size > 0 %}
+        <div class="ez-data-source__message--filesize">{{ 'fieldtype.binary_base.max_file_size'|trans({'%size%': max_file_size|default(0)|ez_file_size(2)})|desc('Max file size: %size%') }}</div>
+    {% endif %}
+    {{- form_widget(form.file, {'attr': attr}) -}}
+    {{- form_widget(form.remove, {'attr': {
+        'hidden': 'hidden',
+        'class': 'ez-field-edit__option--remove-media'
+    }, 'label_attr': {'hidden': 'hidden'}}) -}}
+{% endblock %}
+
+{% block binary_base_widget_container %}
+    <div{% with { attr: preview_attr } %}{{ block('attributes') }}{% endwith %}>
+        {{ block(preview_block_name) }}
+    </div>
+    <div{% with { attr: widget_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+        <div class="ez-data-source">
+            {{ block('binary_base_widget') }}
         </div>
     </div>
 {% endblock %}
