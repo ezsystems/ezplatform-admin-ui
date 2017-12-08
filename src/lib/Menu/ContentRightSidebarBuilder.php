@@ -112,13 +112,13 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                         : array_merge($editAttributes, ['disabled' => 'disabled']),
                 ]
             ),
-            self::ITEM__SEND_TO_TRASH => $this->createMenuItem(
-                self::ITEM__SEND_TO_TRASH,
+            self::ITEM__MOVE => $this->createMenuItem(
+                self::ITEM__MOVE,
                 [
-                    'extras' => ['icon' => 'trash-send'],
+                    'extras' => ['icon' => 'move'],
                     'attributes' => [
-                        'data-toggle' => 'modal',
-                        'data-target' => '#trash-location-modal',
+                        'class' => 'btn--udw-move',
+                        'data-root-location' => 1,
                     ],
                 ]
             ),
@@ -132,13 +132,13 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     ],
                 ]
             ),
-            self::ITEM__MOVE => $this->createMenuItem(
-                self::ITEM__MOVE,
+            self::ITEM__SEND_TO_TRASH => $this->createMenuItem(
+                self::ITEM__SEND_TO_TRASH,
                 [
-                    'extras' => ['icon' => 'move'],
+                    'extras' => ['icon' => 'trash-send'],
                     'attributes' => [
-                        'class' => 'btn--udw-move',
-                        'data-root-location' => 1,
+                        'data-toggle' => 'modal',
+                        'data-target' => '#trash-location-modal',
                     ],
                 ]
             ),
