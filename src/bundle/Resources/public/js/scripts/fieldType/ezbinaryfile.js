@@ -56,14 +56,14 @@
             fieldContainer,
             eventsMap: [
                 {
-                    selector: `${SELECTOR_FIELD} input[type="file"]`,
+                    selector: `input[type="file"]`,
                     eventName: 'change',
                     callback: 'validateInput',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 },
                 {
                     isValueValidator: false,
-                    selector: `${SELECTOR_FIELD} input[type="file"]`,
+                    selector: `input[type="file"]`,
                     eventName: 'invalidFileSize',
                     callback: 'showFileSizeError',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],

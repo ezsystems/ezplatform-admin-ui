@@ -149,23 +149,23 @@
             fieldContainer,
             eventsMap: [
                 {
-                    selector: `${SELECTOR_FIELD} [type="file"]`,
+                    selector: `[type="file"]`,
                     eventName: 'change',
                     callback: 'validateInput',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 }, {
                     isValueValidator: false,
-                    selector: `${SELECTOR_FIELD} ${SELECTOR_INFO_WRAPPER}`,
+                    selector: `${SELECTOR_INFO_WRAPPER}`,
                     eventName: 'click',
                     callback: 'updateState',
                 }, {
                     isValueValidator: false,
-                    selector: `${SELECTOR_FIELD} [type="file"]`,
+                    selector: `[type="file"]`,
                     eventName: 'invalidFileSize',
                     callback: 'showFileSizeError',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 }, {
-                    selector: `${SELECTOR_FIELD} .ez-field-edit-preview__dimensions .form-control`,
+                    selector: `.ez-field-edit-preview__dimensions .form-control`,
                     eventName: 'blur',
                     callback: 'validateDimensions',
                     errorNodeSelectors: [`${SELECTOR_INFO_WRAPPER} .ez-field-edit-preview__label-wrapper`],

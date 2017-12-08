@@ -75,13 +75,13 @@
             fieldContainer,
             eventsMap: [
                 {
-                    selector: `${SELECTOR_FIELD} ${SELECTOR_INPUT_FILE}`,
+                    selector: `${SELECTOR_INPUT_FILE}`,
                     eventName: 'change',
                     callback: 'validateInput',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 },
                 {
-                    selector: `${SELECTOR_FIELD} ${SELECTOR_ALT_WRAPPER} .ez-data-source__input`,
+                    selector: `${SELECTOR_ALT_WRAPPER} .ez-data-source__input`,
                     eventName: 'blur',
                     callback: 'validateAltInput',
                     invalidStateSelectors: ['.ez-data-source__field--alternativeText'],
@@ -89,7 +89,7 @@
                 },
                 {
                     isValueValidator: false,
-                    selector: `${SELECTOR_FIELD} ${SELECTOR_INPUT_FILE}`,
+                    selector: `${SELECTOR_INPUT_FILE}`,
                     eventName: 'invalidFileSize',
                     callback: 'showFileSizeError',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
