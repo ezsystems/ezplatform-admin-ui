@@ -1,13 +1,13 @@
 {% block checkbox_row %}
-<div class="ez-field-edit-preview__info ez-field-edit-preview__info--{{ name }}">
-    <div class="ez-field-edit-preview__input-wrapper">
-        <label class="ez-data-source__label">
-            <span class="ez-data-source__indicator"></span>
-            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %}>
-        </label>
-        <span class="ez-data-source__label-text">{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</span>
+    <div class="ez-field-edit-preview__info ez-field-edit-preview__info--{{ name }}">
+        <div class="ez-field-edit-preview__input-wrapper">
+            <label class="ez-data-source__label{% if checked %} is-checked{% endif %}">
+                <span class="ez-data-source__indicator"></span>
+                <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %}>
+            </label>
+            <span class="ez-data-source__label-text">{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</span>
+        </div>
     </div>
-</div>
 {% endblock %}
 
 {% block integer_row %}
