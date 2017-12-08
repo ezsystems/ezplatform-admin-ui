@@ -34,9 +34,9 @@
         <script src="/bundles/fosjsrouting/js/router.js"></script>
         <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
         <title>{% block title %}eZ Platform{% endblock %}</title>
-        {% stylesheets
-            'bundles/ezplatformadminui/css/ezplatform-bootstrap.min.css'
-            'bundles/ezplatformadminui/css/ezplatform.min.css'
+        {% stylesheets filter='scssphp'
+            'bundles/ezplatformadminui/scss/ezplatform-bootstrap.scss'
+            'bundles/ezplatformadminui/scss/ezplatform.scss'
         %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
