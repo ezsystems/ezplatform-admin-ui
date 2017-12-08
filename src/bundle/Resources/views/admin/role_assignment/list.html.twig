@@ -1,25 +1,40 @@
 {% trans_default_domain 'role' %}
 
 <section class="container mt-4 px-5">
-    <div class="ez-table-header">
-        <h5>{{ 'role_assignment.view.list.title'|trans|desc('Assignments') }}</h5>
-
-        <a href="{{ path('ezplatform.role_assignment.create', {roleId: role.id}) }}" class="btn btn-primary">
-            {{ 'role_assignment.view.list.action.add'|trans|desc('Assign to Users/Groups') }}
-        </a>
+    <div class="ez-table-header round">
+        <h5>{{ 'role_assignment.view.list.header'|trans|desc('Users and Groups') }}</h5>
+        <div>
+            <a href="{{ path('ezplatform.role_assignment.create', {roleId: role.id}) }}" class="btn btn-secondary">
+                <svg class="ez-icon ez-icon-relations ez-icon--secondary">
+                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#relations"></use>
+                </svg>
+                {{ 'role_assignment.view.list.action.add'|trans|desc('Assign users/groups') }}
+            </a>
+            <button id="delete-role-assignments" class="btn btn-danger btn--trigger" disabled
+                    data-click="#role_assignments_delete_delete">
+                <svg class="ez-icon ez-icon-trash">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                </svg>
+            </button>
+        </div>
     </div>
-
-    <table class="table table-hover">
+    {{ form_start(form_role_assignments_delete, {
+        'action': path('ezplatform.role_assignment.bulk_delete', {"roleId": role.id} ),
+        'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-role-assignments' }
+    }) }}
+    <table class="table table-hover round">
         <thead>
         <tr>
+            <th></th>
             <th>{{ 'role_assignment.view.list.panel.assignments.column.user_group'|trans|desc('User/Group') }}</th>
             <th>{{ 'role_assignment.view.list.panel.assignments.column.limitation'|trans|desc('Limitation') }}</th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
         {% for role_assignment in assignments %}
             <tr>
+                <td class="ez-checkbox-cell">{{ form_widget(form_role_assignments_delete.role_assignments[role_assignment.id]) }}</td>
                 <td>
                     {%- if role_assignment.usergroup is defined -%}
                         {{ ez_content_name( role_assignment.usergroup ) }}
@@ -27,7 +42,7 @@
                         {{ ez_content_name( role_assignment.user ) }}
                     {%- endif -%}
                 </td>
-                <td>
+                <td class="ez-limitation-cell">
                     {%- set limitation = role_assignment.rolelimitation -%}
                     {%- if limitation -%}
                         <ul class="list-unstyled">
@@ -42,19 +57,9 @@
                         {{- 'policy.limitation.none'|trans|desc('None') -}}
                     {%- endif -%}
                 </td>
-                <td class="text-right">
-                    {% set deleteForm = deleteFormsByAssignmentId[role_assignment.id] %}
-                    {{ form_start(deleteForm, {
-                        "action": path('ezplatform.role_assignment.delete', {
-                            "roleId": role.id,
-                            "assignmentId": role_assignment.id
-                        })
-                    }) }}
-                    {{ form_widget(deleteForm.delete) }}
-                    {{ form_end(deleteForm) }}
-                </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {{ form_end(form_role_assignments_delete) }}
 </section>
