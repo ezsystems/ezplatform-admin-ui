@@ -99,6 +99,12 @@ ezplatform.language.delete:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Language:delete'
 
+ezplatform.language.bulk_delete:
+    path: /language/bulk-delete
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Language:bulkDelete'
+
 #
 # Role
 #

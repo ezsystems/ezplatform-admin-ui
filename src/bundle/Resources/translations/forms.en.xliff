@@ -71,6 +71,11 @@
         <target state="new">Save</target>
         <note>key: ezplatform.language.update.save</note>
       </trans-unit>
+      <trans-unit id="a1e42d4c649f7fbb614729978fea692be51d1485" resname="languages_delete_form.delete">
+        <source>Delete languages</source>
+        <target state="new">Delete languages</target>
+        <note>key: languages_delete_form.delete</note>
+      </trans-unit>
       <trans-unit id="e1f039c692df803a42d90f2bcd4f763623241bb2" resname="location_copy.copy">
         <source>Copy</source>
         <target state="new">Copy</target>

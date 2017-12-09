@@ -11,6 +11,7 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguagesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -19,6 +20,11 @@ use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class LanguageController extends Controller
@@ -74,16 +80,13 @@ class LanguageController extends Controller
     {
         $languageList = $this->languageService->loadLanguages();
 
-        $deleteFormsByLanguageId = [];
-        foreach ($languageList as $language) {
-            $deleteFormsByLanguageId[$language->id] = $this->formFactory->deleteLanguage(
-                new LanguageDeleteData($language)
-            )->createView();
-        }
+        $deleteLanguagesForm = $this->formFactory->deleteLanguages(
+            new LanguagesDeleteData($this->getLanguagesNumbers($languageList))
+        );
 
         return $this->render('@EzPlatformAdminUi/admin/language/list.html.twig', [
             'languageList' => $languageList,
-            'deleteFormsByLanguageId' => $deleteFormsByLanguageId,
+            'form_languages_delete' => $deleteLanguagesForm->createView(),
             'canEdit' => $this->isGranted(new Attribute('language', 'edit')),
             'canAssign' => $this->isGranted(new Attribute('language', 'assign')),
         ]);
@@ -148,12 +151,58 @@ class LanguageController extends Controller
         return $this->redirect($this->generateUrl('ezplatform.language.list'));
     }
 
+    /**
+     * Handles removing languages based on submitted form.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws UnauthorizedException
+     * @throws InvalidOptionsException
+     * @throws TranslationInvalidArgumentException
+     * @throws InvalidArgumentException
+     * @throws NotFoundException
+     * @throws \InvalidArgumentException
+     */
+    public function bulkDeleteAction(Request $request): Response
+    {
+        $form = $this->formFactory->deleteLanguages(
+            new LanguagesDeleteData()
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $result = $this->submitHandler->handle($form, function (LanguagesDeleteData $data) {
+                foreach ($data->getLanguages() as $languageId => $selected) {
+                    $language = $this->languageService->loadLanguageById($languageId);
+                    $this->languageService->deleteLanguage($language);
+
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Language '%name%' removed.") */
+                            'language.delete.success',
+                            ['%name%' => $language->name],
+                            'language'
+                        )
+                    );
+                }
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirect($this->generateUrl('ezplatform.language.list'));
+    }
+
     public function createAction(Request $request): Response
     {
         $form = $this->formFactory->createLanguage();
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $result = $this->submitHandler->handle($form, function (LanguageCreateData $data) {
                 $languageCreateStruct = $this->languageCreateMapper->reverseMap($data);
                 $language = $this->languageService->createLanguage($languageCreateStruct);
@@ -190,7 +239,7 @@ class LanguageController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $result = $this->submitHandler->handle($form, function (LanguageUpdateData $data) use ($language) {
                 $this->languageService->updateLanguageName($language, $data->getName());
 
@@ -222,5 +271,17 @@ class LanguageController extends Controller
             'actionUrl' => $this->generateUrl('ezplatform.language.edit', ['languageId' => $language->id]),
             'language' => $language,
         ]);
+    }
+
+    /**
+     * @param Language[] $languages
+     *
+     * @return array
+     */
+    private function getLanguagesNumbers(array $languages): array
+    {
+        $languagesNumbers = array_column($languages, 'id');
+
+        return array_combine($languagesNumbers, array_fill_keys($languagesNumbers, false));
     }
 }
