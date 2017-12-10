@@ -23,53 +23,64 @@
 
 {% block content %}
     <section class="container mt-4 px-5">
-        <div>
-            <dl>
-                <dt>{{ 'language.name.label'|trans|desc('Name') }}</dt>
-                <dd>{{ language.name }}</dd>
+        <header class="ez-table-header round">
+            <h5>{{ 'language.information.header'|trans|desc('Language information') }}</h5>
 
-                <dt>{{ 'language.code.label'|trans|desc('Language code') }}</dt>
-                <dd>{{ language.languageCode }}</dd>
-
-                <dt>{{ 'language.id.label'|trans|desc('ID') }}</dt>
-                <dd>{{ language.id }}</dd>
-
-                <dt>{{ 'language.enabled.label'|trans|desc('Enabled') }}</dt>
-                <dd>
-                    <input type="checkbox" disabled {% if language.enabled %}checked title="{{ 'language.enabled'|trans|desc('Enabled') }}"{% else %}title="{{ 'language.disabled'|trans|desc('Disabled') }}"{% endif %}>
-                </dd>
-            </dl>
-
-            {{ form_start(deleteForm, {"action": path("ezplatform.language.delete", {"languageId": language.id, "redirectErrorsTo": "view"})}) }}
-                {% if canEdit %}
-                    <a href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}" class="btn btn-info">{{ 'language.edit'|trans|desc('Edit') }}</a>
-                {% else %}
-                    <span class="btn btn-primary" disabled="disabled">{{ 'language.edit'|trans|desc('Edit') }}</span>
-                {% endif %}
+            <div>
+                {{ form_start(deleteForm, {"action": path("ezplatform.language.delete", {"languageId": language.id, "redirectErrorsTo": "view"})}) }}
 
                 {{ form_widget(deleteForm.language) }}
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-language-modal">{{ 'language.form.delete'|trans|desc('Delete') }}</button>
-                <div class="modal fade" id="delete-language-modal" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">{{ 'language.modal.title'|trans|desc('Please confirm') }}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>{{ 'language.modal.message'|trans|desc('Do you want to delete language?') }}</p>
-                        </div>
-                        <div class="modal-footer">
-                            {{ form_widget(deleteForm.delete, { 'attr': {'class': 'btn btn-danger'} }) }}
-                            <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">{{ 'language.form.cancel'|trans|desc('Cancel') }}</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            {{ form_end(deleteForm) }}
-        </div>
+                <button type="button"
+                        class="btn btn-danger"
+                        data-toggle="modal"
+                        data-target="#delete-language-modal">
+                    <svg class="ez-icon">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                    </svg>
+                </button>
+
+                {% include 'EzPlatformAdminUiBundle:admin/language:delete_confirmation_modal.html.twig' with {'deleteForm': deleteForm} %}
+
+                {{ form_end(deleteForm) }}
+            </div>
+        </header>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'language.name.label'|trans|desc('Name') }}</th>
+                    <th>{{ 'language.code.label'|trans|desc('Language code') }}</th>
+                    <th>{{ 'language.id.label'|trans|desc('ID') }}</th>
+                    <th>{{ 'language.enabled.label'|trans|desc('Enabled') }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ language.name }}</td>
+                    <td>{{ language.languageCode }}</td>
+                    <td>{{ language.id }}</td>
+                    <td>
+                        <input type="checkbox" disabled
+                            {% if language.enabled %}
+                                checked title="{{ 'language.enabled'|trans|desc('Enabled') }}"
+                            {% else %}
+                                title="{{ 'language.disabled'|trans|desc('Disabled') }}"
+                            {% endif %}>
+                    </td>
+                    <td class="text-center">
+                        <a href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
+                           class="btn btn-icon"
+                           title="{{ 'language.edit'|trans|desc('Edit') }}"
+                           {% if not canEdit %} data-disabled{% endif %}>
+                            <svg class="ez-icon ez-icon-edit">
+                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 {% endblock %}
 

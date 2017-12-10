@@ -6,11 +6,6 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="5cf420af18fd4a8d856fd30bc13aea5039369f9b" resname="form.cancel">
-        <source>Cancel</source>
-        <target state="new">Cancel</target>
-        <note>key: form.cancel</note>
-      </trans-unit>
       <trans-unit id="afee1c14dce2b30b230a0de49867c19712c3685f" resname="language.code">
         <source>Language code</source>
         <target state="new">Language code</target>
@@ -61,11 +56,6 @@
         <target state="new">Cancel</target>
         <note>key: language.form.cancel</note>
       </trans-unit>
-      <trans-unit id="06869c8162f8a2914b5a5b10af189b8b0a532e7d" resname="language.form.delete">
-        <source>Delete</source>
-        <target state="new">Delete</target>
-        <note>key: language.form.delete</note>
-      </trans-unit>
       <trans-unit id="acf6ff41e3b9acb2cbbcd4a8e908cf52c08b86af" resname="language.id">
         <source>ID</source>
         <target state="new">ID</target>
@@ -75,6 +65,11 @@
         <source>ID</source>
         <target state="new">ID</target>
         <note>key: language.id.label</note>
+      </trans-unit>
+      <trans-unit id="463ac52ab0cf571550389494d38d1318acab44c1" resname="language.information.header">
+        <source>Language information</source>
+        <target state="new">Language information</target>
+        <note>key: language.information.header</note>
       </trans-unit>
       <trans-unit id="ec0418b84a04e7ba4b75a65cbd8a395144e8d8e8" resname="language.list">
         <source>Languages</source>
