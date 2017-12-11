@@ -90,7 +90,7 @@ class RoleAssignmentController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $result = $this->submitHandler->handle($form, function (RoleAssignmentCreateData $data) use ($role) {
                 $users = $data->getUsers();
                 $groups = $data->getGroups();
@@ -156,7 +156,7 @@ class RoleAssignmentController extends Controller
             }
         }
 
-        return $this->render('@EzPlatformAdminUi/admin/role_assignment/add.html.twig', [
+        return $this->render('@EzPlatformAdminUi/admin/role_assignment/create.html.twig', [
             'role' => $role,
             'form' => $form->createView(),
         ]);
@@ -169,7 +169,7 @@ class RoleAssignmentController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $result = $this->submitHandler->handle($form, function (RoleAssignmentDeleteData $data) use ($role) {
                 $roleAssignment = $data->getRoleAssignment();
                 $this->roleService->removeRoleAssignment($roleAssignment);
