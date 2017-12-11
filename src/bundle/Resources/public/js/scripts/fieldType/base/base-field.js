@@ -21,7 +21,9 @@
          * @memberof BaseFieldValidator
          */
         attachEvent(config) {
-            [...doc.querySelectorAll(config.selector)].forEach(item => {
+            const container = this.fieldContainer ? this.fieldContainer : doc;
+
+            [...container.querySelectorAll(config.selector)].forEach(item => {
                 const isValueValidator = typeof config.isValueValidator !== 'undefined' ? config.isValueValidator : true;
 
                 this.fieldsToValidate.push({
@@ -45,7 +47,9 @@
          * @memberof BaseFieldValidator
          */
         removeEvent(eventName, selector, callback) {
-            [...doc.querySelectorAll(selector)].forEach(item => {
+            const container = this.fieldContainer ? this.fieldContainer : doc;
+
+            [...container.querySelectorAll(selector)].forEach(item => {
                 item.removeEventListener('checkIsValid', this.isValid, false);
                 item.removeEventListener(eventName, callback, false);
             });
