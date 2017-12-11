@@ -66,11 +66,18 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface
         $page = 1;
         $limit = 10;
 
+        $drafts = $this->contentService->loadContentDrafts();
+
+        // ContentService::loadContentDrafts returns unsorted list of VersionInfo.
+        // Sort results by modification date, descending.
+        usort($drafts, function (VersionInfo $a, VersionInfo $b) {
+            return $b->modificationDate <=> $a->modificationDate;
+        });
+
         $pager = new Pagerfanta(
-            new ArrayAdapter(
-                $this->contentService->loadContentDrafts()
-            )
+            new ArrayAdapter($drafts)
         );
+
         $pager->setMaxPerPage($limit);
         $pager->setCurrentPage($page);
 
