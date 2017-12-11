@@ -8,9 +8,13 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
+use eZ\Publish\API\Repository\Exceptions\LimitationValidationException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\Role;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PoliciesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
@@ -22,6 +26,8 @@ use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class PolicyController extends Controller
@@ -80,15 +86,12 @@ class PolicyController extends Controller
     {
         $policies = $role->getPolicies();
 
-        $deleteFormsByPolicyId = [];
-        foreach ($policies as $policy) {
-            $deleteFormsByPolicyId[$policy->id] = $this->formFactory->deletePolicy(
-                new PolicyDeleteData($policy)
-            )->createView();
-        }
+        $deletePoliciesForm = $this->formFactory->deletePolicies(
+                new PoliciesDeleteData($role, $this->getPoliciesNumbers($policies))
+        );
 
         return $this->render('@EzPlatformAdminUi/admin/policy/list.html.twig', [
-            'deleteFormsByPolicyId' => $deleteFormsByPolicyId,
+            'form_policies_delete' => $deletePoliciesForm->createView(),
             'role' => $role,
         ]);
     }
@@ -219,5 +222,77 @@ class PolicyController extends Controller
         return $this->redirect($this->generateUrl('ezplatform.role.view', [
             'roleId' => $role->id,
         ]));
+    }
+
+    /**
+     * Handles removing policies based on submitted form.
+     *
+     * @param Request $request
+     * @param Role $role
+     *
+     * @return Response
+     *
+     * @throws TranslationInvalidArgumentException
+     * @throws UnauthorizedException
+     * @throws LimitationValidationException
+     * @throws InvalidOptionsException
+     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     */
+    public function bulkDeleteAction(Request $request, Role $role): Response
+    {
+        $form = $this->formFactory->deletePolicies(
+            new PoliciesDeleteData()
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $result = $this->submitHandler->handle($form, function (PoliciesDeleteData $data) use ($role) {
+                $roleDraft = $this->roleService->createRoleDraft($role);
+
+                foreach ($data->getPolicies() as $policyId => $selected) {
+                    foreach ($roleDraft->getPolicies() as $policyDraft) {
+                        if ($policyDraft->originalId === $policyId) {
+                            $this->roleService->removePolicyByRoleDraft($roleDraft, $policyDraft);
+                        }
+                    }
+                }
+
+                $this->roleService->publishRoleDraft($roleDraft);
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Policies in role '%role%' removed.") */
+                        'policy.delete.success',
+                        ['%role%' => $role->identifier],
+                        'role'
+                    )
+                );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
+                    'roleId' => $role->id,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirect($this->generateUrl('ezplatform.role.view', [
+            'roleId' => $role->id,
+        ]));
+    }
+
+    /**
+     * @param Policy[] $policies
+     *
+     * @return array
+     */
+    private function getPoliciesNumbers(array $policies): array
+    {
+        $policiesNumbers = array_column($policies, 'id');
+
+        return array_combine($policiesNumbers, array_fill_keys($policiesNumbers, false));
     }
 }

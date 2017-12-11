@@ -22,7 +22,10 @@
 
 {% block content %}
     <section class="container mt-4 px-5">
-        {{ form_start(form_roles_delete, {'action': path('ezplatform.role.bulk_delete')}) }}
+        {{ form_start(form_roles_delete, {
+            'action': path('ezplatform.role.bulk_delete'),
+            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-roles' }
+        }) }}
         <div class="ez-table-header round">
             <h5>{{ 'role.view.list.title'|trans|desc('Roles') }}</h5>
             <div>
@@ -84,7 +87,7 @@
 
 {% block javascripts %}
     {% javascripts
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.role.list.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

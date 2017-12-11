@@ -8,12 +8,14 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
-use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\SubtreeLimitation;
 use eZ\Publish\API\Repository\Values\User\Role;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -22,6 +24,8 @@ use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\Translation\Exception\InvalidArgumentException;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class RoleAssignmentController extends Controller
@@ -35,9 +39,6 @@ class RoleAssignmentController extends Controller
     /** @var RoleService */
     private $roleService;
 
-    /** @var SearchService */
-    private $searchService;
-
     /** @var FormFactory */
     private $formFactory;
 
@@ -50,7 +51,6 @@ class RoleAssignmentController extends Controller
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
      * @param RoleService $roleService
-     * @param SearchService $searchService
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
      */
@@ -58,14 +58,12 @@ class RoleAssignmentController extends Controller
         NotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
         RoleService $roleService,
-        SearchService $searchService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
         $this->roleService = $roleService;
-        $this->searchService = $searchService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
     }
@@ -73,17 +71,14 @@ class RoleAssignmentController extends Controller
     public function listAction(Role $role): Response
     {
         $assignments = $this->roleService->getRoleAssignments($role);
-        $deleteFormsByAssignmentId = [];
 
-        foreach ($assignments as $assignment) {
-            $deleteFormsByAssignmentId[$assignment->id] = $this->formFactory->deleteRoleAssignment(
-                new RoleAssignmentDeleteData($assignment)
-            )->createView();
-        }
+        $deleteRoleAssignmentsForm = $this->formFactory->deleteRoleAssignments(
+            new RoleAssignmentsDeleteData($role, $this->getRoleAssignmentsNumbers($assignments))
+        );
 
         return $this->render('@EzPlatformAdminUi/admin/role_assignment/list.html.twig', [
             'role' => $role,
-            'deleteFormsByAssignmentId' => $deleteFormsByAssignmentId,
+            'form_role_assignments_delete' => $deleteRoleAssignmentsForm->createView(),
             'assignments' => $assignments,
         ]);
     }
@@ -201,5 +196,69 @@ class RoleAssignmentController extends Controller
         return $this->redirect($this->generateUrl('ezplatform.role.view', [
             'roleId' => $role->id,
         ]));
+    }
+
+    /**
+     * Handles removing role assignments based on submitted form.
+     *
+     * @param Request $request
+     * @param Role $role
+     *
+     * @return Response
+     *
+     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
+     * @throws NotFoundException
+     * @throws InvalidOptionsException
+     */
+    public function bulkDeleteAction(Request $request, Role $role): Response
+    {
+        $form = $this->formFactory->deleteRoleAssignments(
+            new RoleAssignmentsDeleteData()
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $result = $this->submitHandler->handle($form, function (RoleAssignmentsDeleteData $data) use ($role) {
+                foreach ($data->getRoleAssignments() as $roleAssignmentId => $selected) {
+                    $roleAssignment = $this->roleService->loadRoleAssignment($roleAssignmentId);
+                    $this->roleService->removeRoleAssignment($roleAssignment);
+                }
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Assignment on role '%role%' removed.") */
+                        'role.assignment_delete.success',
+                        ['%role%' => $role->identifier],
+                        'role'
+                    )
+                );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
+                    'roleId' => $role->id,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirect($this->generateUrl('ezplatform.role.view', [
+            'roleId' => $role->id,
+        ]));
+    }
+
+    /**
+     * @param RoleAssignment[] $roleAssignments
+     *
+     * @return array
+     */
+    private function getRoleAssignmentsNumbers(array $roleAssignments): array
+    {
+        $roleAssignmentsNumbers = array_column($roleAssignments, 'id');
+
+        return array_combine($roleAssignmentsNumbers, array_fill_keys($roleAssignmentsNumbers, false));
     }
 }

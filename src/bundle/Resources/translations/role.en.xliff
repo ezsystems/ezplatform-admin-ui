@@ -81,6 +81,11 @@
         <target state="new">Policies</target>
         <note>key: policy.view.list.title</note>
       </trans-unit>
+      <trans-unit id="bcb306dff55cc9a5c5b0277414dd1aab59c96176" resname="policy.view.list.title.count">
+        <source>Policies (%count%)</source>
+        <target state="new">Policies (%count%)</target>
+        <note>key: policy.view.list.title.count</note>
+      </trans-unit>
       <trans-unit id="9b1c2c53df24e9d0d141037860eb87d2878bdb05" resname="policy.view.policy.title">
         <source>Editing - Policy type</source>
         <target state="new">Editing - Policy type</target>
@@ -176,14 +181,9 @@
         <target state="new">Roles</target>
         <note>key: role.view.list.title</note>
       </trans-unit>
-      <trans-unit id="2d60c07614620d12e34a9d0a0d3b36fc565fe610" resname="role.view.view.actions.edit">
-        <source>Edit</source>
-        <target state="new">Edit</target>
-        <note>key: role.view.view.actions.edit</note>
-      </trans-unit>
       <trans-unit id="ed20cb1159498f2085d5df44b0d43c977abaa791" resname="role.view.view.title">
-        <source>"%identifier%" Role</source>
-        <target state="new">"%identifier%" Role</target>
+        <source>Role "%identifier%"</source>
+        <target state="new">Role "%identifier%"</target>
         <note>key: role.view.view.title</note>
       </trans-unit>
       <trans-unit id="e7ff6be9f5a7368f2493f29eacfa1ee321d9c383" resname="role_assignment.view.add.panel.limitations.title">
@@ -202,9 +202,14 @@
         <note>key: role_assignment.view.add.title</note>
       </trans-unit>
       <trans-unit id="a21a7a13956cadf2256095fbdd062f1b33dd05a8" resname="role_assignment.view.list.action.add">
-        <source>Assign to Users/Groups</source>
-        <target state="new">Assign to Users/Groups</target>
+        <source>Assign users/groups</source>
+        <target state="new">Assign users/groups</target>
         <note>key: role_assignment.view.list.action.add</note>
+      </trans-unit>
+      <trans-unit id="5111796ffacfccc152f157c56a6e7219d35c3fd8" resname="role_assignment.view.list.header">
+        <source>Users and Groups</source>
+        <target state="new">Users and Groups</target>
+        <note>key: role_assignment.view.list.header</note>
       </trans-unit>
       <trans-unit id="f7b9f2997c5eada07c20a0bde7e89cc0c688e1ea" resname="role_assignment.view.list.panel.assignments.column.limitation">
         <source>Limitation</source>

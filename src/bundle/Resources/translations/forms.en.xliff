@@ -86,6 +86,11 @@
         <target state="new">Send to Trash</target>
         <note>key: location_trash_form.trash</note>
       </trans-unit>
+      <trans-unit id="f86cd366867d370b0706e250355f605e2b783229" resname="policies_delete_form.delete">
+        <source>Delete policies</source>
+        <target state="new">Delete policies</target>
+        <note>key: policies_delete_form.delete</note>
+      </trans-unit>
       <trans-unit id="34ba9078fe178bd49df6ada9d8357455ee8ff7b3" resname="policy_create.save">
         <source>Create</source>
         <target state="new">Create</target>

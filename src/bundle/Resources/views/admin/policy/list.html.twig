@@ -1,17 +1,33 @@
 {% trans_default_domain 'role' %}
 
 <section class="container mt-4 px-5">
-    <div class="ez-table-header">
-        <h5>{{ 'policy.view.list.title'|trans|desc('Policies') }}</h5>
-
-        <a href="{{ path('ezplatform.policy.create', {roleId: role.id}) }}" class="btn btn-primary">
-            {{ 'policy.view.list.action.add'|trans|desc('Add a new Policy') }}
-        </a>
+    <div class="ez-table-header round">
+        <h5>{{ 'policy.view.list.title.count'|trans({'%count%': role.policies|length})|desc('Policies (%count%)') }}</h5>
+        <div>
+            <a title="{{ 'policy.view.list.action.add'|trans|desc('Add a new Policy') }}"
+               href="{{ path('ezplatform.policy.create', {roleId: role.id}) }}"
+               class="btn btn-primary">
+                <svg class="ez-icon ez-icon-create">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                </svg>
+            </a>
+            <button id="delete-policies" class="btn btn-danger btn--trigger" disabled data-click="#policies_delete_delete">
+                <svg class="ez-icon ez-icon-trash">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                </svg>
+            </button>
+        </div>
     </div>
-
+    {{ form_start(form_policies_delete, {
+        'action': path('ezplatform.policy.bulk_delete', {"roleId": role.id} ),
+        'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-policies' }
+    }) }}
     <table class="table table-hover">
         <thead>
         <tr>
+            <th></th>
             <th>{{ 'policy.view.list.panel.policies.column.module'|trans|desc('Module') }}</th>
             <th>{{ 'policy.view.list.panel.policies.column.function'|trans|desc('Function') }}</th>
             <th>{{ 'role_assignment.view.list.panel.assignments.column.limitations'|trans|desc('Limitations') }}</th>
@@ -21,6 +37,7 @@
         <tbody>
         {% for policy in role.policies %}
             <tr>
+                <td class="ez-checkbox-cell">{{ form_widget(form_policies_delete.policies[policy.id]) }}</td>
                 <td>{{ policy.module|capitalize }}</td>
                 <td>{{ policy.function|capitalize }}</td>
                 <td>
@@ -40,23 +57,16 @@
                     {%- endif -%}
                 </td>
                 <td class="text-right">
-                    {% set deleteForm = deleteFormsByPolicyId[policy.id] %}
-                    {{ form_start(deleteForm, {
-                        "action": path('ezplatform.policy.delete', {
-                            "roleId": role.id,
-                            "policyId": policy.id
-                        })
-                    }) }}
-                    <a href="{{ path('ezplatform.policy.update', { roleId: role.id, policyId: policy.id }) }}" class="btn btn-info">
-                        {{ 'policy.view.list.panel.policies.action.edit'|trans|desc('Edit') }}
+                    <a title="{{ 'policy.view.list.panel.policies.action.edit'|trans|desc('Edit') }}"
+                       href="{{ path('ezplatform.policy.update', { roleId: role.id, policyId: policy.id }) }}" class="btn btn-icon mx-3">
+                        <svg class="ez-icon ez-icon-edit">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                        </svg>
                     </a>
-                    {{ form_widget(deleteForm.delete, {
-                        "attr": {"class": "btn btn-danger"}
-                    }) }}
-                    {{ form_end(deleteForm) }}
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {{ form_end(form_policies_delete) }}
 </section>

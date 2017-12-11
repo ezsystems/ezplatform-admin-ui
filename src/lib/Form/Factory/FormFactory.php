@@ -27,9 +27,11 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PoliciesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
@@ -63,11 +65,13 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PoliciesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentsDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RolesDeleteType;
@@ -639,6 +643,23 @@ class FormFactory
     }
 
     /**
+     * @param RoleAssignmentsDeleteData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function deleteRoleAssignments(
+        RoleAssignmentsDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(RoleAssignmentsDeleteType::class);
+
+        return $this->formFactory->createNamed($name, RoleAssignmentsDeleteType::class, $data);
+    }
+
+    /**
      * @param PolicyCreateData|null $data
      * @param null|string $name
      *
@@ -681,6 +702,23 @@ class FormFactory
         $name = $name ?: sprintf('delete-policy-%s', md5(implode('/', $data->getPolicy())));
 
         return $this->formFactory->createNamed($name, PolicyDeleteType::class, $data);
+    }
+
+    /**
+     * @param PoliciesDeleteData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function deletePolicies(
+        PoliciesDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(PoliciesDeleteType::class);
+
+        return $this->formFactory->createNamed($name, PoliciesDeleteType::class, $data);
     }
 
     /**

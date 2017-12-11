@@ -103,8 +103,11 @@ class RoleController extends Controller
             new RoleDeleteData($role)
         );
 
+        $assignments = $this->roleService->getRoleAssignments($role);
+
         return $this->render('@EzPlatformAdminUi/admin/role/view.html.twig', [
             'role' => $role,
+            'assignments' => $assignments,
             'delete_form' => $deleteForm->createView(),
         ]);
     }

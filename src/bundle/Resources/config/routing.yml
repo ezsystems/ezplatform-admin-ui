@@ -183,6 +183,14 @@ ezplatform.policy.delete:
         roleId: \d+
         policyId: \d+
 
+ezplatform.policy.bulk_delete:
+    path: /role/{roleId}/policy/bulk-delete
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Policy:bulkDelete'
+    requirements:
+        roleId: \d+
+
 #
 # Role Assignment
 #
@@ -206,6 +214,14 @@ ezplatform.role_assignment.delete:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:RoleAssignment:delete'
+
+ezplatform.role_assignment.bulk_delete:
+    path: /role/{roleId}/assignment/bulk-delete
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:RoleAssignment:bulkDelete'
+    requirements:
+        roleId: \d+
 
 #
 # Content Type Group

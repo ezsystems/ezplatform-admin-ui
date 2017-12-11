@@ -2,23 +2,23 @@
 
 {% trans_default_domain 'role' %}
 
-{% block bodyClass %}ez-role-view{% endblock %}    
+{% block bodyClass %}ez-role-view{% endblock %}
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans|desc('Roles') },
-        { value: 'role.breadcrumb.view'|trans({'%identifier%': role.identifier })|desc('%identifier%') }
+        { value: 'role.breadcrumb.view.identifier'|trans({'%identifier%': role.identifier })|desc('Role "%identifier%"') }
     ]} %}
 {% endblock %}
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'role.view.view.title'|trans({'%identifier%': role.identifier})|desc('"%identifier%" Role'),
+        title: 'role.view.view.title'|trans({'%identifier%': role.identifier})|desc('Role "%identifier%"'),
         iconName: 'roles'
     } %}
 
-    <ul class="nav nav-tabs nav-tabs-systeminfo px-4" role="tablist">
+    <ul class="nav nav-tabs ez-nav-tabs--role px-4" role="tablist">
         <li role="presentation" class="nav-item">
             <a href="#policies" class="nav-link active" role="tab" data-toggle="tab">
                 {{ 'policy.view.list.title'|trans|desc('Policies') }}
@@ -26,7 +26,7 @@
         </li>
         <li role="presentation" class="nav-item">
             <a href="#users-and-groups" class="nav-link" role="tab" data-toggle="tab">
-                {{ 'role_assignment.view.list.title'|trans|desc('Assignments') }}
+                {{ 'role_assignment.view.list.title.count'|trans({'%count%': assignments|length})|desc('Assignments (%count%)') }}
             </a>
         </li>
     </ul>
@@ -45,15 +45,12 @@
             })) }}
         </div>
     </div>
+{% endblock %}
 
-    {{ form_start(delete_form, { action: path('ezplatform.role.delete', {roleId: role.id}) }) }}
-    <section class="container my-4 px-5">
-        <div class="btn-toolbar" role="toolbar" >
-            <a href="{{ path('ezplatform.role.update', {roleId: role.id}) }}" class="btn btn-info">
-                {{ 'role.view.view.actions.edit'|trans|desc('Edit') }}
-            </a>
-            {{ form_widget(delete_form.delete, { 'attr': { 'class': 'btn btn-danger' } }) }}
-        </div>
-    </section>
-    {{ form_end(delete_form) }}
+{% block javascripts %}
+    {% javascripts
+    '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
