@@ -44,6 +44,9 @@ class RoleAssignmentCreateRightSidebarBuilder extends AbstractBuilder implements
      */
     public function createStructure(array $options): ItemInterface
     {
+        /** @var Role $section */
+        $role = $options['role'];
+
         /** @var ItemInterface|ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
@@ -61,7 +64,10 @@ class RoleAssignmentCreateRightSidebarBuilder extends AbstractBuilder implements
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'route' => 'ezplatform.section.list',
+                    'route' => 'ezplatform.role.view',
+                    'routeParameters' => [
+                        'roleId' => $role->id,
+                    ],
                     'extras' => ['icon' => 'circle-close'],
                 ]
             ),
