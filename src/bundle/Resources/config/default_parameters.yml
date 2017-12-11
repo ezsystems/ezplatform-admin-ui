@@ -1,9 +1,9 @@
 parameters:
-    ezsettings.admin.content_edit.templates.edit: 'EzPlatformAdminUiBundle:content/content_edit:content_edit.html.twig'
-    ezsettings.admin.content_edit.templates.create: 'EzPlatformAdminUiBundle:content/content_edit:content_create.html.twig'
-    ezsettings.admin.content_edit.templates.create_draft: 'EzPlatformAdminUiBundle:content/content_edit:content_create_draft.html.twig'
-    ezsettings.admin.user_edit.templates.update: 'EzPlatformAdminUiBundle:content/content_edit:user_edit.html.twig'
-    ezsettings.admin.user_edit.templates.create: 'EzPlatformAdminUiBundle:content/content_edit:user_create.html.twig'
+    ezsettings.admin_group.content_edit.templates.edit: 'EzPlatformAdminUiBundle:content/content_edit:content_edit.html.twig'
+    ezsettings.admin_group.content_edit.templates.create: 'EzPlatformAdminUiBundle:content/content_edit:content_create.html.twig'
+    ezsettings.admin_group.content_edit.templates.create_draft: 'EzPlatformAdminUiBundle:content/content_edit:content_create_draft.html.twig'
+    ezsettings.admin_group.user_edit.templates.update: 'EzPlatformAdminUiBundle:content/content_edit:user_edit.html.twig'
+    ezsettings.admin_group.user_edit.templates.create: 'EzPlatformAdminUiBundle:content/content_edit:user_create.html.twig'
 
     ezsettings.global.system_info_view:
         pjax_tab:

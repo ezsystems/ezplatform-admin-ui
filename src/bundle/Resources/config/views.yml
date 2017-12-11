@@ -1,5 +1,5 @@
 system:
-    admin:
+    admin_group:
         user:
             login_template: "@EzPlatformAdminUi/Security/login.html.twig"
         content_view:
