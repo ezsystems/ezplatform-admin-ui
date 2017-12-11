@@ -226,10 +226,10 @@
         <target state="new">User/Group</target>
         <note>key: role_assignment.view.list.panel.assignments.column.user_group</note>
       </trans-unit>
-      <trans-unit id="b152833aa8e0248096e41ded7c2f10bb778e363b" resname="role_assignment.view.list.title">
-        <source>Assignments</source>
-        <target state="new">Assignments</target>
-        <note>key: role_assignment.view.list.title</note>
+      <trans-unit id="4b3ecf13ffafd795bc971bc6292ea7f5a0bbe64c" resname="role_assignment.view.list.title.count">
+        <source>Assignments (%count%)</source>
+        <target state="new">Assignments (%count%)</target>
+        <note>key: role_assignment.view.list.title.count</note>
       </trans-unit>
     </body>
   </file>

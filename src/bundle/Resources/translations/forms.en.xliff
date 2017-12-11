@@ -141,6 +141,11 @@
         <target state="new">User</target>
         <note>key: role_assignment.users</note>
       </trans-unit>
+      <trans-unit id="5f9be66217c70fdbd734a1ccb5968aae96bbdcd0" resname="role_assignments_delete_form.delete">
+        <source>Delete role assignments</source>
+        <target state="new">Delete role assignments</target>
+        <note>key: role_assignments_delete_form.delete</note>
+      </trans-unit>
       <trans-unit id="e36e86d3568ccc02a097560444b35c69c469c531" resname="role_create.name">
         <source>Name</source>
         <target state="new">Name</target>
