@@ -14,8 +14,8 @@
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'content_type_group.view.view.title'|trans({ '%identifier%': content_type_group.identifier })|desc('"%identifier%" Content Type Group'),
-        iconName: 'content-types'
+        title: 'content_type_group.view.view.title'|trans({ '%identifier%': content_type_group.identifier })|desc('%identifier%'),
+        iconName: 'content-type'
     } %}
 {% endblock %}
 

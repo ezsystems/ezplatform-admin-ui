@@ -187,13 +187,13 @@
         <note>key: content_type.view.list.column.name</note>
       </trans-unit>
       <trans-unit id="7c8c43d61131312dbeeeac5dc536a4f95154f33d" resname="content_type.view.list.title">
-        <source>Content Types</source>
-        <target state="new">Content Types</target>
+        <source>Content Types in %identifier%</source>
+        <target state="new">Content Types in %identifier%</target>
         <note>key: content_type.view.list.title</note>
       </trans-unit>
       <trans-unit id="dc7335e54d834bb6a342bf0bcb113850de4b69f9" resname="content_type.view.view.title">
-        <source>"%name%" Content Type</source>
-        <target state="new">"%name%" Content Type</target>
+        <source>%name%</source>
+        <target state="new">%name%</target>
         <note>key: content_type.view.view.title</note>
       </trans-unit>
       <trans-unit id="d74d01091280ceabfb457980ddd459dc841ad957" resname="content_type_group.breadcrumb.add">
@@ -292,8 +292,8 @@
         <note>key: content_type_group.view.list.title</note>
       </trans-unit>
       <trans-unit id="1769b5258d896d9ccb207c09e04534ce9a01c571" resname="content_type_group.view.view.title">
-        <source>"%identifier%" Content Type Group</source>
-        <target state="new">"%identifier%" Content Type Group</target>
+        <source>%identifier%</source>
+        <target state="new">%identifier%</target>
         <note>key: content_type_group.view.view.title</note>
       </trans-unit>
       <trans-unit id="5cf420af18fd4a8d856fd30bc13aea5039369f9b" resname="form.cancel">

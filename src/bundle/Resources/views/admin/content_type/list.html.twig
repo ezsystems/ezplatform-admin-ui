@@ -2,7 +2,7 @@
 
 <section class="container mt-4 px-5">
     <div class="ez-table-header">
-        <h4>{{ 'content_type.view.list.title'|trans|desc('Content Types') }}</h4>
+        <h4>{{ 'content_type.view.list.title'|trans({ '%identifier%': content_type_group.identifier })|desc('Content Types in %identifier%') }}</h4>
 
         <a href="{{ path('ezplatform.content_type.add', {contentTypeGroupId: content_type_group.id}) }}" class="btn btn-primary">
             {{ 'content_type.view.list.action.add'|trans|desc('Create a Content Type') }}
