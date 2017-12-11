@@ -1,0 +1,32 @@
+.ez-field-edit--ezobjectrelation,
+.ez-field-edit--ezobjectrelationlist {
+    .ez-relations__cta {
+        background: $ez-ground-base-dark;
+        padding: 2rem 0;
+        text-align: center;
+    }
+
+    .ez-relations__order-input {
+        width: 6ch;
+        text-align: center;
+    }
+
+    .ez-relations__table {
+        word-break: break-all;
+
+        &-header {
+            background-color: $ez-ground-primary;
+
+            th {
+                vertical-align: middle;
+                padding: .25rem .75rem;
+                font-size: $h5-font-size;
+            }
+        }
+
+        &-actions {
+            width: 130px;
+            text-align: right;
+        }
+    }
+}

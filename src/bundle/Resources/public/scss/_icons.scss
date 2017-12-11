@@ -142,3 +142,22 @@
         }
     }
 }
+
+.ez-field-edit--ezobjectrelation,
+.ez-field-edit--ezobjectrelationlist {
+    .ez-relations__cta-btn {
+        .ez-icon {
+            fill: $ez-white;
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+
+    [class*="ez-relations__table-action--"] {
+        .ez-icon {
+            fill: $ez-white;
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+}

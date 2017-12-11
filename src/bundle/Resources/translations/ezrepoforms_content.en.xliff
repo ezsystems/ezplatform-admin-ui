@@ -26,6 +26,46 @@
         <target state="new">Player settings</target>
         <note>key: content.field_type.ezmedia.player_settings</note>
       </trans-unit>
+      <trans-unit id="f95e95b9cb063f060b0e8ea74c0e11409643316d" resname="ezobjectrelationlist.cta.limit">
+        <source>Set up multiple relations with up to %limit% content items</source>
+        <target state="new">Set up multiple relations with up to %limit% content items</target>
+        <note>key: ezobjectrelationlist.cta.limit</note>
+      </trans-unit>
+      <trans-unit id="df33d5cc8c00514b2c50d4949b872cc3cd99284c" resname="ezobjectrelationlist.cta.select">
+        <source>Select content</source>
+        <target state="new">Select content</target>
+        <note>key: ezobjectrelationlist.cta.select</note>
+      </trans-unit>
+      <trans-unit id="91cee9d11eeed40768d4e5270d91cd5165f4562f" resname="ezobjectrelationlist.limit">
+        <source>Limit %limit% max</source>
+        <target state="new">Limit %limit% max</target>
+        <note>key: ezobjectrelationlist.limit</note>
+      </trans-unit>
+      <trans-unit id="4ab30b13084b6d6bff3b8fd7dc9ab5879b35097c" resname="ezobjectrelationlist.relations">
+        <source>Relations</source>
+        <target state="new">Relations</target>
+        <note>key: ezobjectrelationlist.relations</note>
+      </trans-unit>
+      <trans-unit id="97e94752cba8892136d56b07057f0cac9344cb56" resname="ezobjectrelationlist.table.row.content_type">
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
+        <note>key: ezobjectrelationlist.table.row.content_type</note>
+      </trans-unit>
+      <trans-unit id="13034b18b2f4c315e7fbfe4b4735259f6db82bb8" resname="ezobjectrelationlist.table.row.created">
+        <source>Created</source>
+        <target state="new">Created</target>
+        <note>key: ezobjectrelationlist.table.row.created</note>
+      </trans-unit>
+      <trans-unit id="2099e51f91926408c9e9514a5d05eaca332f371a" resname="ezobjectrelationlist.table.row.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: ezobjectrelationlist.table.row.name</note>
+      </trans-unit>
+      <trans-unit id="0254a0c716b5d598484130bb3431d278a7be11d8" resname="ezobjectrelationlist.table.row.order">
+        <source>Order</source>
+        <target state="new">Order</target>
+        <note>key: ezobjectrelationlist.table.row.order</note>
+      </trans-unit>
       <trans-unit id="1a3bc0622c5d839ed1a8ef9f32bd5dd9e5cfb479" resname="fieldtype.binary_base.drag_drop">
         <source>Drag and drop your files on browser window or upload them</source>
         <target state="new">Drag and drop your files on browser window or upload them</target>
