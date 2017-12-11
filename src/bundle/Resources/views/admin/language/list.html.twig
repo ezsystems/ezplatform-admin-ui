@@ -42,7 +42,10 @@
             </div>
         </div>
 
-        {{ form_start(form_languages_delete, {'action': path('ezplatform.language.bulk_delete')}) }}
+        {{ form_start(form_languages_delete, {
+            'action': path('ezplatform.language.bulk_delete'),
+            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-languages' }
+        }) }}
         <table class="table">
             <thead>
             <tr>
@@ -89,7 +92,7 @@
 
 {% block javascripts %}
     {% javascripts
-    '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.language.list.js'
+    '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
