@@ -51,3 +51,8 @@
         font-size: .8125rem;
     }
 }
+
+.btn.disabled,
+.btn:disabled {
+    opacity: .3;
+}
