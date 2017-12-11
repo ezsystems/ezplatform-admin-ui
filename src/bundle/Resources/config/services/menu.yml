@@ -88,3 +88,14 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.role_assignment_create.sidebar_right }
 
+    EzSystems\EzPlatformAdminUi\Menu\Admin\Language\LanguageCreateRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.language_create.sidebar_right }
+
+    EzSystems\EzPlatformAdminUi\Menu\Admin\Language\LanguageEditRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.language_edit.sidebar_right }
+
+

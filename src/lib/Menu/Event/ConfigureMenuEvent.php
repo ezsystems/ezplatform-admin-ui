@@ -33,6 +33,8 @@ class ConfigureMenuEvent extends Event
     const USER_EDIT_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.user_edit_sidebar_right';
     const USER_CREATE_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.user_create_sidebar_right';
     const ROLE_ASSIGNMENT_CREATE_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.role_assignment_create_sidebar_right';
+    const LANGUAGE_CREATE_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.language_create_sidebar_right';
+    const LANGUAGE_EDIT_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.language_edit_sidebar_right';
 
     /** @var FactoryInterface */
     private $factory;
