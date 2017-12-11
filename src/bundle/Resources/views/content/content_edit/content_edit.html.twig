@@ -37,7 +37,11 @@
 {% endblock %}
 
 {% block closeButton %}
-    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': content.versionInfo.contentInfo.mainLocationId}) }}"></a>
+    {% set locationId = content.versionInfo.contentInfo.mainLocationId
+        ? content.versionInfo.contentInfo.mainLocationId
+        : (parentLocations|first).id
+    %}
+    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': locationId }) }}"></a>
 {% endblock %}
 
 {% block form_before %}

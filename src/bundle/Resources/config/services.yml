@@ -76,3 +76,8 @@ services:
     EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: EzSystems\RepositoryForms\Form\Type\Content\ContentEditType }
+
+    EzSystems\EzPlatformAdminUi\RepositoryForms\View\ViewParametersListener:
+        public: true
+        tags:
+            - { name: kernel.event_subscriber }
