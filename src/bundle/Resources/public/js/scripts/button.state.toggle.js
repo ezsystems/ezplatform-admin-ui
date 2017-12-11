@@ -2,7 +2,7 @@
     const toggleForms = [...doc.querySelectorAll('.ez-toggle-btn-state')];
 
     toggleForms.forEach(toggleForm => {
-        const checkboxes = [...toggleForm.querySelectorAll('input[type="checkbox"]')];
+        const checkboxes = [...toggleForm.querySelectorAll('.ez-checkbox-cell input[type="checkbox"]')];
         const toggleButtonState = () => {
             const methodName = checkboxes.some(el => el.checked) ? 'removeAttribute' : 'setAttribute';
             const buttonRemove = doc.querySelector(toggleForm.dataset.toggleButtonId);
