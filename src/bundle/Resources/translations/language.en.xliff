@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="afee1c14dce2b30b230a0de49867c19712c3685f" resname="language.code">
-        <source>Language code</source>
-        <target state="new">Language code</target>
+        <source>Code</source>
+        <target state="new">Code</target>
         <note>key: language.code</note>
       </trans-unit>
       <trans-unit id="670884ed109bd22b18847ccb016a0faf72470640" resname="language.code.label">

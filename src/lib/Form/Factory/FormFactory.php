@@ -20,6 +20,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupDelet
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguagesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
@@ -58,6 +59,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDelet
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguagesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType;
@@ -537,6 +539,23 @@ class FormFactory
         $name = $name ?: sprintf('delete-language-%d', $data->getLanguage()->id);
 
         return $this->formFactory->createNamed($name, LanguageDeleteType::class, $data);
+    }
+
+    /**
+     * @param LanguagesDeleteData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function deleteLanguages(
+        LanguagesDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(LanguagesDeleteType::class);
+
+        return $this->formFactory->createNamed($name, LanguagesDeleteType::class, $data);
     }
 
     /**
