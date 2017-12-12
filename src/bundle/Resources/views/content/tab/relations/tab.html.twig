@@ -6,7 +6,7 @@
     {% if relations is not empty %}
         {{ include('@EzPlatformAdminUi/content/tab/relations/table.html.twig', {'relations': relations}) }}
     {% else %}
-        <p class="ez-relations-box-list-no-content">
+        <p class="ez-table-no-content">
             {{ 'tab.relations.no_relations'|trans()|desc('This content item has no related content.') }}
         </p>
     {% endif %}
@@ -16,7 +16,7 @@
         {% if reverse_relations is not empty %}
             {{ include('@EzPlatformAdminUi/content/tab/relations/table.html.twig', {'relations': reverse_relations}) }}
         {% else %}
-            <p class="ez-relations-box-list-no-content">
+            <p class="ez-table-no-content">
                 {{ 'tab.relations.no_reverse_relations'|trans()|desc('This content item has no reverse relations.') }}
             </p>
         {% endif %}
