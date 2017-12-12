@@ -34,13 +34,22 @@
                 border-bottom-left-radius: 5px;
             }
         }
+    }
 
-        .ez-data-source__field--alternativeText {
-            &.is-invalid {
-                .ez-data-source__label-wrapper,
-                .ez-data-source__label-wrapper .form-control-label {
-                    color: $ez-color-danger;
-                }
+    .ez-data-source__field--alternativeText {
+        &.is-invalid {
+            .ez-data-source__label-wrapper,
+            .ez-data-source__label-wrapper .form-control-label {
+                color: $ez-color-danger;
+            }
+
+            .ez-field-edit__error {
+                margin-left: 8px;
+                display: inline-block;
+            }
+
+            .ez-data-source__input {
+                background: $ez-color-warning-pale;
             }
         }
     }
