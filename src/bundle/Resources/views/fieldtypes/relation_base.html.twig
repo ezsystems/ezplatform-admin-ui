@@ -9,7 +9,10 @@
             <thead>
             <tr class="ez-relations__table-header">
                 <th colspan="5">
-                    {{ 'ezobjectrelationlist.relations'|trans|desc('Relations') }}: <small>{{ 'ezobjectrelationlist.limit'|trans({'%limit%': limit})|desc('Limit %limit% max') }}</small>
+                    {{ 'ezobjectrelationlist.relations'|trans|desc('Relations') }}:
+                    {% if limit != 0 %}
+                        <small>{{ 'ezobjectrelationlist.limit'|trans({'%limit%': limit})|desc('Limit %limit% max') }}</small>
+                    {% endif %}
                 </th>
                 <th class="ez-relations__table-actions">
                     <button class="ez-relations__table-action--create btn btn-primary" disabled>
@@ -17,7 +20,7 @@
                             <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#create"></use>
                         </svg>
                     </button>
-                    <button class="ez-relations__table-action--remove btn btn-primary">
+                    <button class="ez-relations__table-action--remove btn btn-primary" disabled>
                         <svg class="ez-icon">
                             <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
                         </svg>
@@ -48,7 +51,9 @@
     </div>
     <div class="ez-relations__cta" {% if has_relations %}hidden="true"{% endif %}>
         <p class="ez-relations__cta-text">
+        {% if limit != 0 %}
             {{ 'ezobjectrelationlist.cta.limit'|trans({'%limit%': limit})|desc('Set up multiple relations with up to %limit% content items') }}
+        {% endif %}
         </p>
         <button class="ez-relations__cta-btn btn btn-primary">
             <svg class="ez-icon">
