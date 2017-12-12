@@ -74,11 +74,12 @@
         const relationsWrapper = fieldContainer.querySelector('.ez-relations__wrapper');
         const relationsCTA = fieldContainer.querySelector('.ez-relations__cta');
         const addBtn = fieldContainer.querySelector(SELECTOR_BTN_ADD);
+        const trashBtn = fieldContainer.querySelector('.ez-relations__table-action--remove');
         const isSingle = fieldContainer.classList.contains(CLASS_FIELD_SINGLE);
         const selectedItemsLimit = isSingle ? 1 : parseInt(relationsContainer.dataset.limit, 10);
-        const startingLocation = relationsContainer.dataset.defaultLocation !== '0' ?
+        const startingLocationId = relationsContainer.dataset.defaultLocation !== '0' ?
             parseInt(relationsContainer.dataset.defaultLocation, 10) : 1;
-        const allowedContentTypes = relationsContainer.dataset.allowedContentTypes.split(',');
+        const allowedContentTypes = relationsContainer.dataset.allowedContentTypes.split(',').filter(item => item.length);
         const closeUDW = () => udwContainer.innerHTML = '';
         const renderRows = (items) => items.forEach((...args) => relationsContainer.insertAdjacentHTML('beforeend', renderRow(...args)));
         const updateInputValue = (items) => {
@@ -107,12 +108,13 @@
                 return callback(false);
             }
 
+            const isAlreadySelected = !!selectedItems.find(id => id === item.ContentInfo.Content._id);
+
             if (!selectedItemsLimit) {
-                return callback(true);
+                return callback(!isAlreadySelected);
             }
 
-            const canSelect = (selectedItems.length + itemsCount) < selectedItemsLimit &&
-                !selectedItems.find(id => id === item.ContentInfo.Content._id);
+            const canSelect = (selectedItems.length + itemsCount) < selectedItemsLimit && !isAlreadySelected;
 
             callback(canSelect);
         };
@@ -126,7 +128,7 @@
                 title: 'Select content',
                 multiple: isSingle ? false : selectedItemsLimit !== 1,
                 selectedItemsLimit,
-                startingLocation,
+                startingLocationId,
                 restInfo: { token, siteaccess },
                 canSelectContent
             }), udwContainer);
@@ -147,7 +149,7 @@
                     <td>${item.ContentInfo.Content.Name}</td>
                     <td>${item.ContentInfo.Content.ContentTypeInfo.names.value[0]['#text']}</td>
                     <td>${(new Date(item.ContentInfo.Content.publishedDate)).toLocaleString()}</td>
-                    <td><input class="ez-relations__order-input" type="number" value="${selectedItems.length + index + 1}" /></td>
+                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="${selectedItems.length + index + 1}" /></td>
                 </tr>
             `;
         };
@@ -159,9 +161,19 @@
             relationsCTA[ctaMethod]('hidden', true);
         };
         const updateAddBtnState = () => {
-            const methodName = selectedItems.length < selectedItemsLimit ? 'removeAttribute' : 'setAttribute';
+            const methodName = (!selectedItemsLimit || selectedItems.length < selectedItemsLimit) ? 'removeAttribute' : 'setAttribute';
 
             addBtn[methodName]('disabled', true);
+        };
+        const updateTrashBtnState = (event) => {
+            if (!event.target.hasAttribute('type') || event.target.type !== 'checkbox') {
+                return;
+            }
+
+            const anySelected = findCheckboxes().some(item => item.checked === true);
+            const methodName = anySelected ? 'removeAttribute' : 'setAttribute';
+
+            trashBtn[methodName]('disabled', true);
         };
         const removeItem = (event) => {
             event.preventDefault();
@@ -183,10 +195,11 @@
         const findOrderInputs = () => {
             return [...relationsContainer.querySelectorAll('.ez-relations__order-input')];
         };
+        const findCheckboxes = () => {
+            return [...relationsContainer.querySelectorAll('[type="checkbox"]')];
+        };
         const attachRowsEventHandlers = () => {
-            findOrderInputs().forEach(item => {
-                item.addEventListener('blur', updateSelectedItemsOrder, false);
-            });
+            findOrderInputs().forEach(item => item.addEventListener('blur', updateSelectedItemsOrder, false));
         };
         const emptyRelationsContainer = () => {
             while (relationsContainer.lastChild) {
@@ -222,13 +235,15 @@
         let selectedItemsMap = selectedItems.reduce((total, item) => Object.assign({}, total, { [item]: item }), {});
 
         updateAddBtnState();
+        attachRowsEventHandlers();
 
         [
             ...fieldContainer.querySelectorAll(SELECTOR_BTN_ADD),
             ...fieldContainer.querySelectorAll('.ez-relations__cta-btn')
         ].forEach(btn => btn.addEventListener('click', openUDW, false));
 
-        fieldContainer.querySelector('.ez-relations__table-action--remove').addEventListener('click', removeItem, false);
+        trashBtn.addEventListener('click', removeItem, false);
+        relationsContainer.addEventListener('change', updateTrashBtnState, false);
 
         validator.init();
 
