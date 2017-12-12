@@ -52,7 +52,7 @@
 {% endblock %}
 
 {% block right_sidebar %}
-    {% set role_assignment_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.role_assignment_create.sidebar_right') %}
+    {% set role_assignment_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.role_assignment_create.sidebar_right', [], {'role': role}) %}
     {{ knp_menu_render(role_assignment_create_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
