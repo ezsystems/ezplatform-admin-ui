@@ -4,12 +4,12 @@
 
 <section class="container mt-4 px-5">
     <div class="ez-table-header">
-        <h5>
+        <div class="ez-table-header__headline">
             {{ 'section.assigned_content.header'|trans({
                 '%name%': section.name,
                 '%count%': pagerfanta.nbResults
             } )|desc('Content items in %name% (%count%)') }}
-        </h5>
+        </div>
 
         {{ form_start(form_section_content_assign, {
             'action': path("ezplatform.section.assign_content", {"sectionId": section.id}),

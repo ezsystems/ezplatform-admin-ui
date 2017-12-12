@@ -37,9 +37,16 @@
 }
 
 .ez-table-header {
-    .ez-icon-create,
-    .ez-icon-trash {
+    .btn {
+        line-height: .85;
+        padding: .5rem .55rem;
+        margin-left: .15rem;
         margin-right: 0;
+
+        .ez-icon-create,
+        .ez-icon-trash {
+            margin-right: 0;
+        }
     }
 }
 

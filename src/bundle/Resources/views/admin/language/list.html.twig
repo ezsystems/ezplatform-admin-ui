@@ -22,8 +22,8 @@
 
 {% block content %}
     <section class="container mt-4 px-5">
-        <div class="ez-table-header round">
-            <h5>{{ 'language.list'|trans|desc('Languages') }}</h5>
+        <div class="ez-table-header">
+            <div class="ez-table-header__headline">{{ 'language.list'|trans|desc('Languages') }}</div ="ez-table-header__headline">
             <div>
                 <a title="{{ 'language.new'|trans|desc('Create a new Language') }}"
                    href="{{ path('ezplatform.language.create') }}"

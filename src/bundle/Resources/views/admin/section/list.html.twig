@@ -20,7 +20,7 @@
 {% block content %}
     <section class="container mt-4 px-5">
         <div class="ez-table-header">
-            <h5>{{ 'section.list.title'|trans|desc('Sections') }}</h5>
+            <div class="ez-table-header__headline">{{ 'section.list.title'|trans|desc('Sections') }}</div>
             <div>
                 <a href="{{ path('ezplatform.section.create') }}" class="btn btn-primary"
                    data-icon="&#xe616;"{% if not can_edit %} data-disabled{% endif %}>{{ 'section.new'|trans|desc('Create a new Section') }}</a>

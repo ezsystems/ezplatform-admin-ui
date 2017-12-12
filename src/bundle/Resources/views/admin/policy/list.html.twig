@@ -1,8 +1,8 @@
 {% trans_default_domain 'role' %}
 
 <section class="container mt-4 px-5">
-    <div class="ez-table-header round">
-        <h5>{{ 'policy.view.list.title.count'|trans({'%count%': role.policies|length})|desc('Policies (%count%)') }}</h5>
+    <div class="ez-table-header">
+        <div class="ez-table-header__headline">{{ 'policy.view.list.title.count'|trans({'%count%': role.policies|length})|desc('Policies (%count%)') }}</div>
         <div>
             <a title="{{ 'policy.view.list.action.add'|trans|desc('Add a new Policy') }}"
                href="{{ path('ezplatform.policy.create', {roleId: role.id}) }}"
@@ -24,7 +24,7 @@
         'action': path('ezplatform.policy.bulk_delete', {"roleId": role.id} ),
         'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-policies' }
     }) }}
-    <table class="table table-hover">
+    <table class="table">
         <thead>
         <tr>
             <th></th>
