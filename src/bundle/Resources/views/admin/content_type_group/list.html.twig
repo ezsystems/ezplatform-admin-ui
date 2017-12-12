@@ -21,7 +21,7 @@
 {% block content %}
     <section class="container mt-4 px-5">
         <div class="ez-table-header">
-            <h5>{{ 'content_type_group.view.list.title'|trans|desc('Content Type Groups') }}</h5>
+            <div class="ez-table-header__headline">{{ 'content_type_group.view.list.title'|trans|desc('Content Type Groups') }}</div>
             <div>
                 <a href="{{ path('ezplatform.content_type_group.create') }}" class="btn btn-primary">
                     {{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type Group') }}
@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <table class="table table-hover">
+        <table class="table">
             <thead>
                 <tr>
                     <th>{{ 'content_type_group.view.list.column.identifier'|trans|desc('Name') }}</th>

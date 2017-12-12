@@ -26,8 +26,8 @@
             'action': path('ezplatform.role.bulk_delete'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-roles' }
         }) }}
-        <div class="ez-table-header round">
-            <h5>{{ 'role.view.list.title'|trans|desc('Roles') }}</h5>
+        <div class="ez-table-header">
+            <div class="ez-table-header__headline">{{ 'role.view.list.title'|trans|desc('Roles') }}</div>
             <div>
                 <a title="{{ 'role.view.list.action.add'|trans|desc('Create a Role') }}" href="{{ path('ezplatform.role.create') }}" class="btn btn-primary">
                     <svg class="ez-icon ez-icon-create">
@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <table class="table table-hover">
+        <table class="table">
             <thead>
                 <tr>
                     <th></th>

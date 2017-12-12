@@ -5,30 +5,15 @@
     justify-content: space-between;
     background-color: $ez-ground-primary;
     align-items: center;
-    padding: .5rem 1rem;
+    padding: 0 1.25rem;
+    min-height: 50px;
+    border-radius: .25rem .25rem 0 0;
 
-    h5 {
+    &__headline {
+        font-size: 1.0625rem;
         margin-bottom: 0;
         font-weight: bold;
         color: $ez-black;
-    }
-
-    .ez-icon {
-        width: 1rem;
-        height: 1rem;
-        fill: $white;
-    }
-
-    &.round {
-        border-radius: 4px 4px 0 0;
-    }
-
-    &--label {
-        margin: 0;
-        padding: 0 .4375rem;
-        font-size: 1rem;
-        line-height: 2;
-        font-weight: bold;
     }
 }
 
@@ -36,22 +21,41 @@
     background-color: $ez-color-base-pale;
 }
 
+.table {
+    margin-bottom: 3rem;
+    
+    th, td {
+        padding: .7rem 1.4rem;
+        line-height: 20px;
+    }
+
+    thead th {
+        font-size: .9375rem;
+        vertical-align: top;
+    }
+
+    td {
+        font-size: .875rem;
+        vertical-align: middle;
+
+        .checkbox label {
+            margin-bottom: 0;
+        }
+    }
+}
+
 .ez-dashboard {
     .table {
+        margin-bottom: 0;
+
         thead {
-            background-color: $ez-ground-primary-inverted-light;
-            color: $white;
+            background-color: $ez-ground-primary;
+            color: $ez-black;
 
             th {
                 border-bottom: none;
             }
         }
-    }
-}
-
-.ez-content-view {
-    .table {
-        margin-bottom: 3rem;
     }
 }
 
@@ -63,12 +67,6 @@
 }
 
 .ez-info-view {
-    .table {
-        th, td {
-            padding: .8rem 1.4rem;
-        }
-    }
-
     .ez-table {
         &--list {
             background: none;

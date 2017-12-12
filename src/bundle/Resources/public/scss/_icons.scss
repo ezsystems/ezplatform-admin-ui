@@ -49,6 +49,14 @@
     width: 1rem;
 }
 
+.ez-table-header {
+    .ez-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: $white;
+    }
+}
+
 .ez-btn--extra-actions {
     .ez-icon {
         pointer-events: none;

@@ -1,8 +1,8 @@
 {% trans_default_domain 'role' %}
 
 <section class="container mt-4 px-5">
-    <div class="ez-table-header round">
-        <h5>{{ 'role_assignment.view.list.header'|trans|desc('Users and Groups') }}</h5>
+    <div class="ez-table-header">
+        <div class="ez-table-header__headline">{{ 'role_assignment.view.list.header'|trans|desc('Users and Groups') }}</div>
         <div>
             <a href="{{ path('ezplatform.role_assignment.create', {roleId: role.id}) }}" class="btn btn-secondary">
                 <svg class="ez-icon ez-icon-relations ez-icon--secondary">
@@ -23,7 +23,7 @@
         'action': path('ezplatform.role_assignment.bulk_delete', {"roleId": role.id} ),
         'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-role-assignments' }
     }) }}
-    <table class="table table-hover round">
+    <table class="table">
         <thead>
         <tr>
             <th></th>

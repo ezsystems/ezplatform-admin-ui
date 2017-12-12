@@ -20,7 +20,7 @@
 
                 {% if results is defined %}
                     <div class="ez-table-header mt-3">
-                        <h5>{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</h5>
+                        <div ="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
                     </div>
 
                     {% if results is empty %}
