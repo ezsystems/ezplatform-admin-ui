@@ -61,7 +61,6 @@ class ContentCreateType extends AbstractType
                 'create',
                 SubmitType::class,
                 [
-//                    'attr' => ['hidden' => true],
                     'label' => /** @Desc("Create") */
                         'content_draft_create_type.create',
                 ]

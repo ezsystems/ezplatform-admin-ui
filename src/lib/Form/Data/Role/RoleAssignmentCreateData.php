@@ -12,20 +12,75 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Section;
 use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\API\Repository\Values\User\UserGroup;
+use JMS\TranslationBundle\Model\Message;
+use JMS\TranslationBundle\Translation\TranslationContainerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class RoleAssignmentCreateData
+class RoleAssignmentCreateData implements TranslationContainerInterface
 {
+    const LIMITATION_TYPE_NONE = 'none';
+    const LIMITATION_TYPE_SECTION = 'section';
+    const LIMITATION_TYPE_LOCATION = 'location';
+
     /** @var UserGroup[] */
     private $groups;
 
     /** @var User[] */
     private $users;
 
-    /** @var Section[] */
+    /**
+     * @var Section[]
+     *
+     * @Assert\Expression(
+     *     "this.getLimitationType() != 'section' or (this.getLimitationType() == 'section' and value != [])",
+     *     message="validator.define_subtree_or_section_limitation"
+     * )
+     */
     private $sections;
 
-    /** @var Location[] */
+    /**
+     * @var Location[]
+     *
+     * @Assert\Expression(
+     *     "this.getLimitationType() != 'location' or (this.getLimitationType() == 'location' and value != [])",
+     *     message="validator.define_subtree_or_section_limitation"
+     * )
+     */
     private $locations;
+
+    /**
+     * @var string
+     *
+     * @Assert\NotNull()
+     * @Assert\Choice({
+     *     RoleAssignmentCreateData::LIMITATION_TYPE_NONE,
+     *     RoleAssignmentCreateData::LIMITATION_TYPE_SECTION,
+     *     RoleAssignmentCreateData::LIMITATION_TYPE_LOCATION
+     * })
+     */
+    private $limitationType;
+
+    /**
+     * @param UserGroup[] $groups
+     * @param User[] $users
+     * @param Section[] $sections
+     * @param Location[] $locations
+     * @param string $limitationType
+     */
+    public function __construct(
+        array $groups = [],
+        array $users = [],
+        array $sections = [],
+        array $locations = [],
+        $limitationType = self::LIMITATION_TYPE_NONE
+    ) {
+        $this->groups = $groups;
+        $this->users = $users;
+        $this->sections = $sections;
+        $this->locations = $locations;
+        $this->limitationType = $limitationType;
+    }
 
     /**
      * @return UserGroup[]
@@ -37,10 +92,14 @@ class RoleAssignmentCreateData
 
     /**
      * @param UserGroup[] $groups
+     *
+     * @return self
      */
-    public function setGroups(array $groups)
+    public function setGroups(array $groups): self
     {
         $this->groups = $groups;
+
+        return $this;
     }
 
     /**
@@ -53,10 +112,14 @@ class RoleAssignmentCreateData
 
     /**
      * @param User[] $users
+     *
+     * @return self
      */
-    public function setUsers(array $users)
+    public function setUsers(array $users): self
     {
         $this->users = $users;
+
+        return $this;
     }
 
     /**
@@ -69,10 +132,14 @@ class RoleAssignmentCreateData
 
     /**
      * @param Section[] $sections
+     *
+     * @return self
      */
-    public function setSections(array $sections)
+    public function setSections(array $sections): self
     {
         $this->sections = $sections;
+
+        return $this;
     }
 
     /**
@@ -85,9 +152,59 @@ class RoleAssignmentCreateData
 
     /**
      * @param Location[] $locations
+     *
+     * @return self
      */
-    public function setLocations(array $locations)
+    public function setLocations(array $locations): self
     {
         $this->locations = $locations;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLimitationType(): string
+    {
+        return $this->limitationType;
+    }
+
+    /**
+     * @param string $limitationType
+     *
+     * @return self
+     */
+    public function setLimitationType(string $limitationType): self
+    {
+        $this->limitationType = $limitationType;
+
+        return $this;
+    }
+
+    /**
+     * @param ExecutionContextInterface $context
+     * @param $payload
+     *
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload)
+    {
+        if (empty($this->getUsers()) && empty($this->getGroups())) {
+            $context->buildViolation(
+            'validator.assign_users_or_groups')
+                ->setTranslationDomain('role')
+                ->addViolation();
+        }
+    }
+
+    public static function getTranslationMessages()
+    {
+        return [
+            Message::create('validator.assign_users_or_groups', 'role')
+                ->setDesc('Assign User(s) and/or Group(s) to the Role'),
+            Message::create('validator.define_subtree_or_section_limitation', 'validators')
+                ->setDesc('Define a Subtree or Section limitation'),
+        ];
     }
 }

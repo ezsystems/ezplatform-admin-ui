@@ -6,6 +6,26 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="50fbff4724e8543718a7a0fe08fc1f134bbeb7d6" resname="limitation_type.none">
+        <source>No limitations</source>
+        <target state="new">No limitations</target>
+        <note>key: limitation_type.none</note>
+      </trans-unit>
+      <trans-unit id="e4eb27643d4149122e8009b8ca930678eadcd713" resname="limitation_type.section">
+        <source>Sections</source>
+        <target state="new">Sections</target>
+        <note>key: limitation_type.section</note>
+      </trans-unit>
+      <trans-unit id="5e91632f7d9ab6e55cf2df01163acebcb1a124d0" resname="limitation_type.subtree">
+        <source>Subtree</source>
+        <target state="new">Subtree</target>
+        <note>key: limitation_type.subtree</note>
+      </trans-unit>
+      <trans-unit id="0dbfb3fd5136aa1d54a82ba5e5f399c2908d26f2" resname="locations.select_subtree">
+        <source>Select Subtree</source>
+        <target state="new">Select Subtree</target>
+        <note>key: locations.select_subtree</note>
+      </trans-unit>
       <trans-unit id="d92993cb4cb3690f06c599b5f500a29fa23421c9" resname="policy.add.success">
         <source>New policies in role '%role%' created.</source>
         <target state="new">New policies in role '%role%' created.</target>
@@ -230,6 +250,11 @@
         <source>Assignments (%count%)</source>
         <target state="new">Assignments (%count%)</target>
         <note>key: role_assignment.view.list.title.count</note>
+      </trans-unit>
+      <trans-unit id="5abe6179f254b9bdd5e8680eec4456118980932e" resname="validator.assign_users_or_groups">
+        <source>Assign User(s) and/or Group(s) to the Role</source>
+        <target state="new">Assign User(s) and/or Group(s) to the Role</target>
+        <note>key: validator.assign_users_or_groups</note>
       </trans-unit>
     </body>
   </file>

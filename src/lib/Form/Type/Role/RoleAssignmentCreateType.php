@@ -9,11 +9,12 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Role;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
-use EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
 use EzSystems\EzPlatformAdminUi\Form\Type\UserChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\UserGroupChoiceType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -48,12 +49,26 @@ class RoleAssignmentCreateType extends AbstractType
                 ]
             )
             ->add('locations',
-                UniversalDiscoveryWidgetType::class,
+                LocationType::class,
                 [
                     'required' => false,
-                    'label' => /** @Desc("Choose Locations") */ 'role_assignment.locations',
+                    'multiple' => true,
+                    'label' => /** @Desc("Select subtree") */ 'role_assignment.locations',
                 ]
             )
+            ->add('limitation_type', ChoiceType::class, [
+                'required' => true,
+                'multiple' => false,
+                'expanded' => true,
+                'choices' => [
+                    RoleAssignmentCreateData::LIMITATION_TYPE_NONE => RoleAssignmentCreateData::LIMITATION_TYPE_NONE,
+                    RoleAssignmentCreateData::LIMITATION_TYPE_SECTION => RoleAssignmentCreateData::LIMITATION_TYPE_SECTION,
+                    RoleAssignmentCreateData::LIMITATION_TYPE_LOCATION => RoleAssignmentCreateData::LIMITATION_TYPE_LOCATION,
+                ],
+                'choice_name' => function ($value) {
+                    return $value;
+                },
+            ])
             ->add(
                 'save',
                 SubmitType::class,

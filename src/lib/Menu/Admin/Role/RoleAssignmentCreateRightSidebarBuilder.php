@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Menu\Admin\Role;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
+use eZ\Publish\API\Repository\Values\User\Role;
 use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use InvalidArgumentException;
@@ -22,7 +23,7 @@ use Knp\Menu\ItemInterface;
 class RoleAssignmentCreateRightSidebarBuilder extends AbstractBuilder implements TranslationContainerInterface
 {
     /* Menu items */
-    const ITEM__CREATE = 'role_assignment_create__sidebar_right__create';
+    const ITEM__SAVE = 'role_assignment_create__sidebar_right__save';
     const ITEM__CANCEL = 'role_assignment_create__sidebar_right__cancel';
 
     /**
@@ -44,19 +45,19 @@ class RoleAssignmentCreateRightSidebarBuilder extends AbstractBuilder implements
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var Role $section */
+        /** @var Role $role */
         $role = $options['role'];
 
         /** @var ItemInterface|ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
         $menu->setChildren([
-            self::ITEM__CREATE => $this->createMenuItem(
-                self::ITEM__CREATE,
+            self::ITEM__SAVE => $this->createMenuItem(
+                self::ITEM__SAVE,
                 [
                     'attributes' => [
                         'class' => 'btn--trigger',
-                        'data-click' => '#section_create_create',
+                        'data-click' => '#role_assignment_create_save',
                     ],
                     'extras' => ['icon' => 'publish'],
                 ]
@@ -82,7 +83,7 @@ class RoleAssignmentCreateRightSidebarBuilder extends AbstractBuilder implements
     public static function getTranslationMessages(): array
     {
         return [
-            (new Message(self::ITEM__CREATE, 'menu'))->setDesc('Create'),
+            (new Message(self::ITEM__SAVE, 'menu'))->setDesc('Save'),
             (new Message(self::ITEM__CANCEL, 'menu'))->setDesc('Discard changes'),
         ];
     }
