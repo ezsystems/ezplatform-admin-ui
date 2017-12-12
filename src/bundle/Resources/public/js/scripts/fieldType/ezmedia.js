@@ -61,6 +61,12 @@
     }
 
     class EzMediaPreviewField extends global.eZ.BasePreviewField {
+        constructor(config) {
+            super(config);
+
+            this.fillMediaDimensionsInfo = this.fillMediaDimensionsInfo.bind(this);
+        }
+
         /**
          * Loads dropped file preview
          *
@@ -93,9 +99,12 @@
         updateMediaSource(file) {
             const preview = this.fieldContainer.querySelector(SELECTOR_PREVIEW);
             const videoUrl = URL.createObjectURL(file);
+            const video = preview.querySelector(SELECTOR_MEDIA);
+
+            video.addEventListener('loadedmetadata', this.fillMediaDimensionsInfo, false);
 
             preview.querySelector('.ez-field-edit-preview__action--preview').href = videoUrl;
-            preview.querySelector(SELECTOR_MEDIA).setAttribute('src', videoUrl)
+            video.setAttribute('src', videoUrl);
         }
 
         /**
@@ -127,9 +136,28 @@
          * @param {Event} event
          */
         handleRemoveFile(event) {
+            const preview = this.fieldContainer.querySelector(SELECTOR_PREVIEW);
+            const video = preview.querySelector(SELECTOR_MEDIA);
+
             super.handleRemoveFile(event);
 
+            video.removeEventListener('loadedmetadata', this.fillMediaDimensionsInfo);
+
             this.showMediaLoadingScreen();
+        }
+
+        /**
+         * Fills media dimensions meta data with an actual video size
+         *
+         * @method fillMediaDimensionsInfo
+         * @param {Event} event
+         */
+        fillMediaDimensionsInfo(event) {
+            const video = event.currentTarget;
+            const preview = this.fieldContainer.querySelector(SELECTOR_PREVIEW);
+
+            preview.querySelector('.ez-field-edit-preview__info--width .form-control').value = video.videoWidth;
+            preview.querySelector('.ez-field-edit-preview__info--height .form-control').value = video.videoHeight;
         }
 
         /**
