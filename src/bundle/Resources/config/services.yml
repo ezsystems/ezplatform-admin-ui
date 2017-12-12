@@ -81,3 +81,11 @@ services:
         public: true
         tags:
             - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\EventListener\AdminExceptionListener:
+        arguments:
+            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+            $kernelRootDir: '%kernel.root_dir%'
+            $kernelEnvironment: '%kernel.environment%'
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }

@@ -1,0 +1,19 @@
+{% extends '@EzPlatformAdminUi/layout.html.twig' %}
+
+{% block navigation %}{% endblock %}
+
+{% block content %}
+<div class="row align-items-stretch ez-main-row">
+    <div class="error-page">
+        <div class="error-page__image-wrapper">
+            <img src="{{ asset('bundles/ezplatformadminui/img/errors/500.png') }}" />
+        </div>
+        <h2 class="error-page__title">Something went wrong. Sorry!</h2>
+        <div class="error-page__messages">
+            <p class="error-page__message">It's an error 500, an internal server error. The server was unable to complete your request and it's not your fault.</p>
+            <p class="error-page__message">Please contact your eZ Platform Administrator and inform her/him about the time the error occurred, the URL in your browser window and anything related you think may have caused the error.</p>
+            <p class="error-page__message">You can also go back or try to reload the application.</p>
+        </div>
+    </div>
+<div>
+{% endblock %}

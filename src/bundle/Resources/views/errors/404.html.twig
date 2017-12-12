@@ -1,0 +1,22 @@
+{% extends '@EzPlatformAdminUi/layout.html.twig' %}
+
+{% block navigation %}
+    {% if admin_ui_config.user.user is defined %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row align-items-stretch ez-main-row">
+    <div class="error-page">
+        <div class="error-page__image-wrapper">
+            <img src="{{ asset('bundles/ezplatformadminui/img/errors/404.png') }}" />
+        </div>
+        <h2 class="error-page__title">Something went wrong. Sorry!</h2>
+        <div class="error-page__messages">
+            <p class="error-page__message">It’s an error 404. The page you requested was not found.<br/>It might have been deleted or might be temporarily unavailable. </p>
+            <p class="error-page__message">Check the URL, in case there would be an error in there.<br/>If not, go to the <a class="error-page__link" href="{{ path('ezplatform.dashboard') }}">dashboard</a> or <a class="error-page__link" href="{{ path('ezplatform.search') }}">search</a> for specific content.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
