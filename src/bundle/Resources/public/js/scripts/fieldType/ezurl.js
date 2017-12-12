@@ -4,22 +4,23 @@
 
     class EzUrlValidator extends global.eZ.BaseFieldValidator {
         validateUrl(event) {
-            const isRequired = event.target.required;
-            const isEmpty = !event.target.value.trim();
-            const isValid = global.eZ.errors.urlRegexp.test(event.target.value);
-            const isError = (isEmpty && isRequired) || !isValid;
-            const label = event.target.closest(SELECTOR_FIELD_LINK).querySelector('.ez-data-source__label').innerHTML;
-            const result = {isError};
+            const input = event.currentTarget;
+            const isRequired = input.required;
+            const isEmpty = !input.value.trim();
+            const isValid = global.eZ.errors.urlRegexp.test(input.value);
+            const isError = (isEmpty && isRequired) || (!isEmpty && !isValid);
+            const label = input.closest(SELECTOR_FIELD_LINK).querySelector('.ez-data-source__label').innerHTML;
+            const result = { isError };
 
-            if (isEmpty) {
+            if (isRequired && isEmpty) {
                 result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
-            } else if (!isValid) {
+            } else if (!isEmpty && !isValid) {
                 result.errorMessage = global.eZ.errors.invalidUrl;
             }
 
             return result;
         }
-    };
+    }
 
     const validator = new EzUrlValidator({
         classInvalid: 'is-invalid',

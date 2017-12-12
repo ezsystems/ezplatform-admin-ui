@@ -11,22 +11,23 @@
          * @memberof EzEmailValidator
          */
         validateInput(event) {
-            const isRequired = event.target.required;
-            const isEmpty =  !event.target.value.trim();
-            const isValid = global.eZ.errors.emailRegexp.test(event.target.value);
-            const isError = (isRequired && isEmpty) || !isValid;
-            const fieldNode = event.target.closest(SELECTOR_FIELD);
-            const result = {isError};
+            const input = event.currentTarget;
+            const isRequired = input.required;
+            const isEmpty =  !input.value.trim();
+            const isValid = global.eZ.errors.emailRegexp.test(input.value);
+            const isError = (isRequired && isEmpty) || (!isEmpty && !isValid);
+            const label = input.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
+            const result = { isError };
 
-            if (isEmpty) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', fieldNode.querySelector('.ez-field-edit__label').innerHTML);
-            } else if (!isValid) {
+            if (isRequired && isEmpty) {
+                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+            } else if (!isEmpty && !isValid) {
                 result.errorMessage = global.eZ.errors.invalidEmail;
             }
 
             return result;
         }
-    };
+    }
 
     const validator = new EzEmailValidator({
         classInvalid: 'is-invalid',

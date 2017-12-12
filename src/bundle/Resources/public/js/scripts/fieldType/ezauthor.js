@@ -35,15 +35,17 @@
          * @memberof EzAuthorValidator
          */
         validateEmail(event) {
-            const isEmpty =  !event.target.value.trim();
-            const isValid = global.eZ.errors.emailRegexp.test(event.target.value);
-            const isError = (event.target.required && isEmpty) || !isValid;
-            const fieldNode = event.target.closest(SELECTOR_FIELD_EMAIL);
-            const result = {isError};
+            const input = event.currentTarget;
+            const isRequired = input.required;
+            const isEmpty = !input.value.trim();
+            const isValid = global.eZ.errors.emailRegexp.test(input.value);
+            const isError = (isRequired && isEmpty) || (!isEmpty && !isValid);
+            const label = input.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
+            const result = { isError };
 
-            if (isEmpty) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', fieldNode.querySelector(SELECTOR_LABEL).innerHTML);
-            } else if (!isValid) {
+            if (isRequired && isEmpty) {
+                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+            } else if (!isEmpty && !isValid) {
                 result.errorMessage = global.eZ.errors.invalidEmail;
             }
 
@@ -178,14 +180,14 @@
                 selector: '.ez-data-source__author .ez-data-source__field--name input',
                 eventName: 'blur',
                 callback: 'validateName',
-                invalidStateSelectors: [SELECTOR_AUTHOR, SELECTOR_FIELD_NAME],
+                invalidStateSelectors: [SELECTOR_FIELD_NAME],
                 errorNodeSelectors: ['.ez-data-source__field--name .ez-data-source__label-wrapper'],
             },
             {
                 selector: '.ez-data-source__author .ez-data-source__field--email input',
                 eventName: 'blur',
                 callback: 'validateEmail',
-                invalidStateSelectors: [SELECTOR_AUTHOR, SELECTOR_FIELD_EMAIL],
+                invalidStateSelectors: [SELECTOR_FIELD_EMAIL],
                 errorNodeSelectors: ['.ez-data-source__field--email .ez-data-source__label-wrapper'],
             },
             {
