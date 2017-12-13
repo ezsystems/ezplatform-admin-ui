@@ -54,7 +54,7 @@ class SectionCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                         'class' => 'btn--trigger',
                         'data-click' => '#section_create_create',
                     ],
-                    'extras' => ['icon' => 'save'],
+                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
