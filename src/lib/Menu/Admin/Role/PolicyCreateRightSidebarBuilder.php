@@ -59,7 +59,7 @@ class PolicyCreateRightSidebarBuilder extends AbstractBuilder implements Transla
                         'class' => 'btn--trigger',
                         'data-click' => '#policy_create_save',
                     ],
-                    'extras' => ['icon' => 'save'],
+                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(

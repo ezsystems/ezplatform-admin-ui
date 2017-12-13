@@ -55,7 +55,7 @@ class RoleCreateRightSidebarBuilder extends AbstractBuilder implements Translati
                         'class' => 'btn--trigger',
                         'data-click' => '#role_create_save',
                     ],
-                    'extras' => ['icon' => 'save'],
+                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
