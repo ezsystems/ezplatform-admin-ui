@@ -211,6 +211,11 @@
         <target state="new">Update</target>
         <note>key: section_update_form.update</note>
       </trans-unit>
+      <trans-unit id="1076fdadc49ac9198c278970f355457c26075975" resname="sections_delete_form.delete">
+        <source>Delete sections</source>
+        <target state="new">Delete sections</target>
+        <note>key: sections_delete_form.delete</note>
+      </trans-unit>
       <trans-unit id="6880a88558bf821ff5ca3266f2f4f42b6d911283" resname="swap_location_form.swap">
         <source>Select content item</source>
         <target state="new">Select content item</target>
