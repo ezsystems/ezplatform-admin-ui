@@ -2,8 +2,7 @@
 
 .ez-field-edit--ezrichtext {
     .ez-data-source__input {
-        opacity: 0;
-        height: 1px;
+        display: none;
     }
 
     .ez-data-source__richtext {
@@ -19,6 +18,11 @@
         .cke_widget_wrapper.cke_widget_focused > .cke_widget_element {
             outline: 2px dashed $ez-ground-base-dark;
             outline-offset: 1px;
+        }
+
+        &.is-invalid {
+            background: $ez-color-warning-pale;
+            border-color: $ez-color-danger;
         }
     }
 

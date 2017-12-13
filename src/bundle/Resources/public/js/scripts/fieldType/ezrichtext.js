@@ -1,6 +1,39 @@
 (function (global, doc) {
-    [...doc.querySelectorAll('.ez-field-edit--ezrichtext .ez-data-source__richtext')].forEach(container => {
-        const alloyEditor = AlloyEditor.editable(container.getAttribute('id'), {
+    const SELECTOR_FIELD = '.ez-field-edit--ezrichtext';
+    const SELECTOR_INPUT = '.ez-data-source__richtext';
+
+    class EzRichTextValidator extends global.eZ.BaseFieldValidator {
+        constructor(config) {
+            super(config);
+
+            this.alloyEditor = config.alloyEditor;
+        }
+        /**
+         * Validates the input
+         *
+         * @method validateInput
+         * @param {Event} event
+         * @returns {Object}
+         * @memberof EzRichTextValidator
+         */
+        validateInput(event) {
+            const fieldContainer = event.currentTarget.closest(SELECTOR_FIELD);
+            const isRequired = fieldContainer.classList.contains('ez-field-edit--required');
+            const label = fieldContainer.querySelector('.ez-field-edit__label').innerHTML;
+            const isEmpty = !this.alloyEditor.get('nativeEditor').getData().length;
+            const isError = isRequired && isEmpty;
+            const result = { isError };
+
+            if (isError) {
+                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+            }
+
+            return result;
+        }
+    }
+
+    [...doc.querySelectorAll(`${SELECTOR_FIELD} ${SELECTOR_INPUT}`)].forEach(container => {
+        const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
             toolbars: {
                 ezadd: {
                     buttons: [
@@ -38,7 +71,7 @@
         const getHTMLDocumentFragment = function (data) {
             const fragment = document.createDocumentFragment();
             const root = fragment.ownerDocument.createElement('div');
-            const doc = (new DOMParser()).parseFromString(data, "text/xml");
+            const doc = (new DOMParser()).parseFromString(data, 'text/xml');
             const importChildNodes = (parent, element, skipElement) => {
                 let i;
                 let newElement;
@@ -48,7 +81,7 @@
                 } else {
                     if (element.nodeType === Node.ELEMENT_NODE) {
                         newElement = parent.ownerDocument.createElement(element.localName);
-                        for (i = 0; i != element.attributes.length; i++) {
+                        for (i = 0; i !== element.attributes.length; i++) {
                             importChildNodes(newElement, element.attributes[i], false);
                         }
                         parent.appendChild(newElement);
@@ -63,13 +96,14 @@
                     }
                 }
 
-                for (i = 0; i != element.childNodes.length; i++) {
+                for (i = 0; i !== element.childNodes.length; i++) {
                     importChildNodes(newElement, element.childNodes[i], false);
                 }
             };
 
-            if (!doc || !doc.documentElement || doc.querySelector("parsererror")) {
-                console.warn("Unable to parse the content of the RichText field");
+            if (!doc || !doc.documentElement || doc.querySelector('parsererror')) {
+                console.warn('Unable to parse the content of the RichText field');
+
                 return fragment;
             }
 
@@ -139,5 +173,31 @@
 
             event.target.closest('.ez-data-source').querySelector('textarea').value = root.innerHTML;
         });
+
+        const validator = new EzRichTextValidator({
+            classInvalid: 'is-invalid',
+            fieldContainer: container.closest(SELECTOR_FIELD),
+            alloyEditor,
+            eventsMap: [
+                {
+                    selector: SELECTOR_INPUT,
+                    eventName: 'input',
+                    callback: 'validateInput',
+                    errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+                },
+                {
+                    selector: SELECTOR_INPUT,
+                    eventName: 'blur',
+                    callback: 'validateInput',
+                    errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+                },
+            ],
+        });
+
+        validator.init();
+
+        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
+            [...global.eZ.fieldTypeValidators, validator] :
+            [validator];
     });
 })(window, document);
