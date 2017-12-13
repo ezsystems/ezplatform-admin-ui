@@ -23,15 +23,31 @@
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'content_type_group.view.list.title'|trans|desc('Content Type Groups') }}</div>
             <div>
-                <a href="{{ path('ezplatform.content_type_group.create') }}" class="btn btn-primary">
-                    {{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type Group') }}
+                <a title="{{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type Group') }}"
+                   href="{{ path('ezplatform.content_type_group.create') }}"
+                   class="btn btn-primary">
+                    <svg class="ez-icon ez-icon-create">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                    </svg>
                 </a>
+                <button id="delete-content-type-groups" class="btn btn-danger btn--trigger" disabled data-click="#content_type_groups_delete_delete">
+                    <svg class="ez-icon ez-icon-trash">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                    </svg>
+                </button>
             </div>
         </div>
 
+        {{ form_start(form_content_type_groups_delete, {
+            'action': path('ezplatform.content_type_group.bulk_delete'),
+            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-content-type-groups' }
+        }) }}
         <table class="table">
             <thead>
                 <tr>
+                    <th></th>
                     <th>{{ 'content_type_group.view.list.column.identifier'|trans|desc('Name') }}</th>
                     <th>{{ 'content_type_group.view.list.column.id'|trans|desc('ID') }}</th>
                     <th></th>
@@ -40,6 +56,9 @@
             <tbody>
             {% for content_type_group in content_type_groups %}
                 <tr>
+                    <td class="ez-checkbox-cell">
+                        {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id]) }}
+                    </td>
                     <td>
                         {% set view_url = path('ezplatform.content_type_group.view', {
                             contentTypeGroupId: content_type_group.id
@@ -53,22 +72,26 @@
                             contentTypeGroupId: content_type_group.id
                         }) %}
 
-                        {% set delete_form = delete_forms[content_type_group.id] %}
-                        {{ form_start(delete_form, {
-                            'action': path('ezplatform.content_type_group.delete', { contentTypeGroupId: content_type_group.id })
-                        }) }}
-
-                        <a href="{{ edit_url }}" class="btn btn-secondary">
-                            {{ 'content_type_group.view.list.action.edit'|trans|desc('Edit') }}
+                        <a title="{{ 'content_type_group.view.list.action.edit'|trans|desc('Edit') }}"
+                           href="{{ edit_url }}"
+                           class="btn btn-icon mx-3">
+                            <svg class="ez-icon ez-icon-edit">
+                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                            </svg>
                         </a>
-                        {{ form_widget(delete_form.delete, {
-                            'attr': { 'class': 'btn btn-danger' }
-                        }) }}
-                        {{ form_end(delete_form) }}
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+        {{ form_end(form_content_type_groups_delete) }}
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts
+    '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

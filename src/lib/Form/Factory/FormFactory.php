@@ -17,6 +17,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
@@ -57,6 +58,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationAddType
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupsDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageDeleteType;
@@ -203,6 +205,23 @@ class FormFactory
         $name = $name ?: sprintf('delete-content-type-group-%d', $data->getContentTypeGroup()->id);
 
         return $this->formFactory->createNamed($name, ContentTypeGroupDeleteType::class, $data);
+    }
+
+    /**
+     * @param ContentTypeGroupsDeleteData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function deleteContentTypeGroups(
+        ContentTypeGroupsDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentTypeGroupsDeleteType::class);
+
+        return $this->formFactory->createNamed($name, ContentTypeGroupsDeleteType::class, $data);
     }
 
     /**
