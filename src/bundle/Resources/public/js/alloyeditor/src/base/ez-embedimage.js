@@ -10,19 +10,18 @@ export default class EzEmbedImageButton extends EzEmbedDiscoverContentButton {
      * be used as a `isSelectable` function implementation for the UDW.
      *
      * @method isImage
-     * @param {Object} item the UDW potential selection
+     * @param {Object} selection the UDW potential selection
      * @param {Function} callback
      */
-    isImage(item, callback) {
-        const request = new Request(item.ContentInfo.Content.ContentType._href, {
+    isImage(selection, callback) {
+        const request = new Request(selection.item.ContentInfo.Content.ContentType._href, {
             method: 'GET',
             headers: {'Accept': 'application/vnd.ez.api.ContentType+json'},
             mode: 'cors',
         });
 
-        // TODO: hardcoded content type image - should be in some config
         fetch(request)
             .then(response => response.json())
-            .then(contentType => callback(contentType.ContentType.identifier === 'image'));
+            .then(data => callback(!!data.ContentType.FieldDefinitions.FieldDefinition.find(field => field.fieldType === 'ezimage')));
     }
 }
