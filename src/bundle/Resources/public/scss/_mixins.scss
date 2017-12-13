@@ -157,6 +157,12 @@
             }
         }
     }
+
+    .flatpickr-input {
+        &.is-invalid {
+            background: $ez-color-warning-pale;
+        }
+    }
 }
 
 @mixin label-required() {

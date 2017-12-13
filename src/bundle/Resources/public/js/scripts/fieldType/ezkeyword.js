@@ -1,6 +1,7 @@
 (function (global) {
     const SELECTOR_FIELD = '.ez-field-edit--ezkeyword';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
+    const SELECTOR_TAGGIFY = '.ez-data-source__taggify';
 
     class EzKeywordValidator extends global.eZ.BaseFieldValidator {
         /**
@@ -42,7 +43,7 @@
     };
 
     [...document.querySelectorAll(SELECTOR_FIELD)].forEach(field => {
-        const taggifyContainer = field.querySelector('.ez-data-source__taggify');
+        const taggifyContainer = field.querySelector(SELECTOR_TAGGIFY);
         const validator = new EzKeywordValidator({
             classInvalid: 'is-invalid',
             fieldSelector: SELECTOR_FIELD,
@@ -53,12 +54,14 @@
                     eventName: 'blur',
                     callback: 'validateKeywords',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    invalidStateSelectors: [SELECTOR_TAGGIFY],
                 },
                 {
                     selector: `${SELECTOR_FIELD} .ez-data-source__input.form-control`,
                     eventName: 'change',
                     callback: 'validateKeywords',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    invalidStateSelectors: [SELECTOR_TAGGIFY],
                 }
             ],
         });
