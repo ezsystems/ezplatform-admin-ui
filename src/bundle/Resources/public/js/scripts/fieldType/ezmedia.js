@@ -5,6 +5,7 @@
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const SELECTOR_INFO_WRAPPER = '.ez-field-edit-preview__info';
     const SELECTOR_MEDIA_WRAPPER = '.ez-field-edit-preview__media-wrapper';
+    const SELECTOR_INPUT_FILE = 'input[type="file"]';
     const CLASS_MEDIA_WRAPPER_LOADING = 'ez-field-edit-preview__media-wrapper--loading';
 
     class EzMediaValidator extends global.eZ.BaseFileFieldValidator {
@@ -38,12 +39,13 @@
          * @memberof EzMediaValidator
          */
         validateDimensions(event) {
-            const isRequired = event.target.required;
-            const value = +event.target.value;
+            const input = event.currentTarget;
+            const isRequired = input.required;
+            const value = +input.value;
             const isEmpty = !value;
             const isInteger = Number.isInteger(value);
-            const isError = (isEmpty && isRequired) || !isInteger;
-            const label = event.target.closest(SELECTOR_INFO_WRAPPER).querySelector('.form-control-label').innerHTML;
+            const isError = (isEmpty && isRequired) || (!isEmpty && !isInteger);
+            const label = input.closest(SELECTOR_INFO_WRAPPER).querySelector('.form-control-label').innerHTML;
             const result = { isError };
 
             if (isEmpty) {
@@ -52,7 +54,9 @@
                 result.errorMessage = global.eZ.errors.isNotInteger.replace('{fieldName}', label);
             }
 
-            return result;
+            if (!input.closest('.ez-field-edit__preview').hasAttribute('hidden')) {
+                return result;
+            }
         }
     }
 
@@ -149,7 +153,7 @@
             fieldContainer,
             eventsMap: [
                 {
-                    selector: `[type="file"]`,
+                    selector: SELECTOR_INPUT_FILE,
                     eventName: 'change',
                     callback: 'validateInput',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
@@ -160,12 +164,12 @@
                     callback: 'updateState',
                 }, {
                     isValueValidator: false,
-                    selector: `[type="file"]`,
+                    selector: SELECTOR_INPUT_FILE,
                     eventName: 'invalidFileSize',
                     callback: 'showFileSizeError',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 }, {
-                    selector: `.ez-field-edit-preview__dimensions .form-control`,
+                    selector: '.ez-field-edit-preview__dimensions .form-control',
                     eventName: 'blur',
                     callback: 'validateDimensions',
                     errorNodeSelectors: [`${SELECTOR_INFO_WRAPPER} .ez-field-edit-preview__label-wrapper`],
@@ -175,7 +179,7 @@
         const previewField = new EzMediaPreviewField({
             validator,
             fieldContainer,
-            fileTypeAccept: fieldContainer.querySelector('input[type="file"]').accept
+            fileTypeAccept: fieldContainer.querySelector(SELECTOR_INPUT_FILE).accept
         });
 
         previewField.init();
