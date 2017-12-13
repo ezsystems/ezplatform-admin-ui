@@ -296,6 +296,21 @@
         <target state="new">Update</target>
         <note>key: user_edit__sidebar_right__update</note>
       </trans-unit>
+      <trans-unit id="2887dd09dcb0f287e947da3e735133c540991df1" resname="main__content__linkmanager">
+        <source>Link management</source>
+        <target state="new">Link manager</target>
+        <note>key: main__content__linkmanager</note>
+      </trans-unit>
+      <trans-unit id="dde5657fcef604bebe7f04ec38e4522fa8aea514" resname="url_edit__sidebar_right__save">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: url_edit__sidebar_right__save</note>
+      </trans-unit>
+      <trans-unit id="b6c1e93e1395dddb40be9d88c4a1a6a517aee214" resname="url_edit__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: url_create__sidebar_right__cancel</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

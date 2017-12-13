@@ -92,6 +92,10 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Version\VersionRemoveType;
+use EzSystems\RepositoryForms\Data\URL\URLListData;
+use EzSystems\RepositoryForms\Data\URL\URLUpdateData;
+use EzSystems\RepositoryForms\Form\Type\URL\URLEditType;
+use EzSystems\RepositoryForms\Form\Type\URL\URLListType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
@@ -812,5 +816,39 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(SearchData::class);
 
         return $this->formFactory->createNamed($name, SearchType::class, $data, $options);
+    }
+
+    /**
+     * @param URLListData|null $data
+     * @param null|string $name
+     * @param array $options
+     *
+     * @return FormInterface
+     */
+    public function createUrlListForm(
+        URLListData $data = null,
+        ?string $name = null,
+        array $options = []
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(SearchData::class);
+
+        return $this->formFactory->createNamed($name, URLListType::class, $data, $options);
+    }
+
+    /**
+     * @param URLUpdateData|null $data
+     * @param null|string $name
+     * @param array $options
+     *
+     * @return FormInterface
+     */
+    public function createUrlEditForm(
+        URLUpdateData $data = null,
+        ?string $name = null,
+        array $options = []
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(SearchData::class);
+
+        return $this->formFactory->createNamed($name, URLEditType::class, $data, $options);
     }
 }
