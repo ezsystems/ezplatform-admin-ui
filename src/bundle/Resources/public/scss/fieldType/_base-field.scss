@@ -12,7 +12,8 @@
     }
 
     &.is-invalid {
-        .ez-field-edit__label-wrapper {
+        .ez-field-edit__label-wrapper,
+        .ez-field-edit__label {
             color: $ez-color-danger;
         }
 
@@ -40,5 +41,18 @@
         display: inline-block;
         margin-left: 8px;
         color: $ez-color-danger;
+    }
+
+    .ez-data-source__input {
+        &.is-invalid {
+            border-color: $ez-color-danger;
+            background: $ez-color-warning-pale;
+        }
+    }
+
+    .ez-data-source__label {
+        &.is-invalid {
+            color: $ez-color-danger;
+        }
     }
 }
