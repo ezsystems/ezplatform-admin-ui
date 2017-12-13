@@ -46,6 +46,9 @@
 
 {% macro table_header_tools(form) %}
     <button class="btn btn-danger btn--trigger" data-click="#{{ form.remove.vars.id }}">
-        {{ form.remove.vars.label|trans({}, form.remove.vars.translation_domain) }}
+        <svg class="ez-icon ez-icon-trash">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+        </svg>
     </button>
 {% endmacro %}
