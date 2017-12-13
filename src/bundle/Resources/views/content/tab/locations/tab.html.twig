@@ -60,10 +60,16 @@
 {% include 'EzPlatformAdminUiBundle:content/tab/locations:panel_swap.html.twig' with {'form': form_content_location_swap} %}
 
 {% macro table_header_tools(form_add, form_remove) %}
-    <button class="btn btn-secondary btn--udw-add">
-        {{ form_add.add.vars.label|trans({}, form_add.add.vars.translation_domain) }}
+    <button class="btn btn-primary btn--udw-add">
+        <svg class="ez-icon ez-icon-create">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+        </svg>
     </button>
     <button class="btn btn-danger btn--trigger" data-click="#{{ form_remove.remove.vars.id }}">
-        {{ form_remove.remove.vars.label|trans({}, form_remove.remove.vars.translation_domain) }}
+        <svg class="ez-icon ez-icon-trash">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+        </svg>
     </button>
 {% endmacro %}
