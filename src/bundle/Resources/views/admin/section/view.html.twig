@@ -10,13 +10,13 @@
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.section.list'), value: 'section.list'|trans|desc('Sections') },
-        { value: 'section.view.title'|trans({ '%identifier%': section.name })|desc('"%identifier%" Section') }
+        { value: 'section.view.title.identifier'|trans({ '%identifier%': section.name })|desc('Section: %identifier%') }
     ]} %}
 {% endblock %}
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'section.view.title'|trans({ '%identifier%': section.name })|desc('"%identifier%" Section'),
+        title: 'section.view.title.identifier'|trans({ '%identifier%': section.name })|desc('Section: %identifier%'),
         iconName: 'sections'
     } %}
 {% endblock %}

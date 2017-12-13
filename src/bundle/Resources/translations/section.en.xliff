@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="84413bc1ae3385c0aac1af7ea5665cb0c1eaf3ba" resname="section.assign_content">
+        <source>Assign content</source>
+        <target state="new">Assign content</target>
+        <note>key: section.assign_content</note>
+      </trans-unit>
       <trans-unit id="2a6caa13cfd67503e2250af8e36f26a2f835a4a0" resname="section.assign_content.success">
         <source>%contentItemsCount% content items were assigned to '%name%'</source>
         <target state="new">%contentItemsCount% content items were assigned to '%name%'</target>
@@ -116,10 +121,10 @@
         <target state="new">Editing Section "%identifier%"</target>
         <note>key: section.update.title</note>
       </trans-unit>
-      <trans-unit id="7ca9da842cdea433f0a9e05a8c6b135def0bc6e3" resname="section.view.title">
+      <trans-unit id="9266789d0a5e68e102410798a2db431137039aad" resname="section.view.title.identifier">
         <source>Section: %identifier%</source>
         <target state="new">Section: %identifier%</target>
-        <note>key: section.view.title</note>
+        <note>key: section.view.title.identifier</note>
       </trans-unit>
     </body>
   </file>
