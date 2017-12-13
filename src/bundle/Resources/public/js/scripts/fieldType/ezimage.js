@@ -3,6 +3,7 @@
     const SELECTOR_INPUT_FILE = 'input[type="file"]';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const SELECTOR_ALT_WRAPPER = '.ez-field-edit-preview__image-alt';
+    const SELECTOR_INPUT_ALT = '.ez-field-edit-preview__image-alt .ez-data-source__input';
 
     class EzImageFilePreviewField extends global.eZ.BasePreviewField {
         /**
@@ -42,6 +43,7 @@
             sizeContainer.title = fileSize;
 
             preview.querySelector('.ez-field-edit-preview__action--preview').href = URL.createObjectURL(files[0]);
+            this.fieldContainer.querySelector(SELECTOR_INPUT_ALT).dispatchEvent(new CustomEvent('cancelErrors'));
         }
     }
 
@@ -81,7 +83,7 @@
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 },
                 {
-                    selector: `${SELECTOR_ALT_WRAPPER} .ez-data-source__input`,
+                    selector: SELECTOR_INPUT_ALT,
                     eventName: 'blur',
                     callback: 'validateAltInput',
                     invalidStateSelectors: ['.ez-data-source__field--alternativeText'],
@@ -94,6 +96,14 @@
                     callback: 'showFileSizeError',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 },
+                {
+                    isValueValidator: false,
+                    selector: SELECTOR_INPUT_ALT,
+                    eventName: 'cancelErrors',
+                    callback: 'cancelErrors',
+                    invalidStateSelectors: ['.ez-data-source__field--alternativeText'],
+                    errorNodeSelectors: [`${SELECTOR_ALT_WRAPPER} .ez-data-source__label-wrapper`],
+                }
             ],
         });
         const previewField = new EzImageFilePreviewField({
