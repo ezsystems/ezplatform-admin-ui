@@ -16,14 +16,25 @@
         validateCoordInput(input) {
             const value = parseFloat(input.value.replace(',', '.'));
             const result = { isError: false };
+            const label = input.closest('.ez-data-source__field').querySelector('.ez-data-source__label').innerHTML;
+            const isNumber = !isNaN(value);
+            const isCorrectValue = isNumber && (value <= 90 && value >= -90);
 
-            if (!input.required) {
+            if (!input.required && isCorrectValue) {
+                return result;
+            }
+
+            if (!isCorrectValue) {
+                result.isError = true;
+                result.errorMessage = window.eZ.errors.outOfRangeValue
+                    .replace('{fieldName}', label)
+                    .replace('{min}', -90)
+                    .replace('{max}', 90);
+
                 return result;
             }
 
             if (isNaN(value)) {
-                const label = input.closest('.ez-data-source__field').querySelector('.ez-data-source__label').innerHTML;
-
                 result.isError = true;
                 result.errorMessage = window.eZ.errors.emptyField.replace('{fieldName}', label);
             }
@@ -39,13 +50,14 @@
          * @returns {Object}
          */
         validateLongitude(event) {
-            const latInput = event.currentTarget.closest(SELECTOR_FIELD).querySelector(SELECTOR_LAT_INPUT);
             const lonResult = this.validateCoordInput(event.currentTarget);
-            const latResult = this.validateCoordInput(latInput);
 
             if (lonResult.isError) {
                 return lonResult;
             }
+
+            const latInput = event.currentTarget.closest(SELECTOR_FIELD).querySelector(SELECTOR_LAT_INPUT);
+            const latResult = this.validateCoordInput(latInput);
 
             if (latResult.isError) {
                 latInput.dispatchEvent(new Event('blur'));
@@ -62,13 +74,14 @@
          * @returns {Object}
          */
         validateLatitude(event) {
-            const lonInput = event.currentTarget.closest(SELECTOR_FIELD).querySelector(SELECTOR_LON_INPUT);
             const latResult = this.validateCoordInput(event.currentTarget);
-            const lonResult = this.validateCoordInput(lonInput);
 
             if (latResult.isError) {
                 return latResult;
             }
+
+            const lonInput = event.currentTarget.closest(SELECTOR_FIELD).querySelector(SELECTOR_LON_INPUT);
+            const lonResult = this.validateCoordInput(lonInput);
 
             if (lonResult.isError) {
                 lonInput.dispatchEvent(new Event('blur'));
@@ -92,7 +105,16 @@
                 return this.validateLongitude(event);
             }
 
-            return { isError: false };
+            /**
+             * If is not a Tab or Shift + Tab key set.
+             *
+             * When in the longitude field and after pressing the Tab or Shift + Tab key,
+             * the keyup event fires on a latitude input field instead of a latitude input field.
+             * It prevents such behaviour. The field will be validated on blur event.
+             */
+            if (event.keyCode !== 9 && event.keyCode !== 16) {
+                return { isError: false };
+            }
         }
 
         /**
@@ -110,7 +132,16 @@
                 return this.validateLatitude(event);
             }
 
-            return { isError: false };
+            /**
+             * If is not a Tab or Shift + Tab key set.
+             *
+             * When in the latitude field and after pressing the Tab or Shift + Tab key,
+             * the keyup event fires on a longitude input field instead of a latitude input field.
+             * It prevents such behaviour. The field will be validated on blur event.
+             */
+            if (event.keyCode !== 9 && event.keyCode !== 16) {
+                return { isError: false };
+            }
         }
 
         /**
