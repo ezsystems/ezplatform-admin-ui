@@ -18,6 +18,7 @@ use eZ\Publish\API\Repository\SearchService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionCreateMapper;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper;
@@ -117,20 +118,18 @@ class SectionController extends Controller
 
         $contentCountBySectionId = [];
         $deletableSections = [];
-        $deleteFormsBySectionId = [];
-        $assignContentFormsBySectionId = [];
+
+        $deleteSectionsForm = $this->formFactory->deleteSections(
+            new SectionsDeleteData($this->getSectionsNumbers($sectionList))
+        );
+
+        $assignContentForms = $this->formFactory->assignContentSectionForm(
+            new SectionContentAssignData()
+        );
 
         foreach ($sectionList as $section) {
             $contentCountBySectionId[$section->id] = $this->sectionService->countAssignedContents($section);
             $deletableSections[$section->id] = !$this->sectionService->isSectionUsed($section);
-
-            $deleteFormsBySectionId[$section->id] = $this->formFactory->deleteSection(
-                new SectionDeleteData($section)
-            )->createView();
-
-            $assignContentFormsBySectionId[$section->id] = $this->formFactory->assignContentSectionForm(
-                new SectionContentAssignData($section)
-            )->createView();
         }
 
         return $this->render('EzPlatformAdminUiBundle:admin/section:list.html.twig', [
@@ -139,8 +138,8 @@ class SectionController extends Controller
             'sections' => $sectionList,
             'content_count' => $contentCountBySectionId,
             'deletable' => $deletableSections,
-            'form_section_delete' => $deleteFormsBySectionId,
-            'form_section_content_assign' => $assignContentFormsBySectionId,
+            'form_sections_delete' => $deleteSectionsForm->createView(),
+            'form_section_content_assign' => $assignContentForms->createView(),
         ]);
     }
 
@@ -259,6 +258,47 @@ class SectionController extends Controller
     }
 
     /**
+     * Handles removing sections based on submitted form.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function bulkDeleteAction(Request $request): Response
+    {
+        $form = $this->formFactory->deleteSections(
+            new SectionsDeleteData()
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $result = $this->submitHandler->handle($form, function (SectionsDeleteData $data) {
+                foreach ($data->getSections() as $sectionId => $selected) {
+                    $section = $this->sectionService->loadSection($sectionId);
+                    $this->sectionService->deleteSection($section);
+
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Section '%name%' removed.") */
+                            'section.delete.success',
+                            ['%name%' => $section->name],
+                            'section'
+                        )
+                    );
+                }
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirect($this->generateUrl('ezplatform.section.list'));
+    }
+
+    /**
      * @param Request $request
      * @param Section $section
      *
@@ -267,7 +307,7 @@ class SectionController extends Controller
     public function assignContentAction(Request $request, Section $section): Response
     {
         $form = $this->formFactory->assignContentSectionForm(
-            new SectionContentAssignData($section)
+            new SectionContentAssignData()
         );
         $form->handleRequest($request);
 
@@ -387,5 +427,17 @@ class SectionController extends Controller
             'section' => $section,
             'form_section_update' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @param Section[] $sections
+     *
+     * @return array
+     */
+    private function getSectionsNumbers(array $sections): array
+    {
+        $sectionsNumbers = array_column($sections, 'id');
+
+        return array_combine($sectionsNumbers, array_fill_keys($sectionsNumbers, false));
     }
 }

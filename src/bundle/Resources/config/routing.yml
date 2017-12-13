@@ -64,6 +64,12 @@ ezplatform.section.delete:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Section:delete'
 
+ezplatform.section.bulk_delete:
+    path: /section/bulk-delete
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Section:bulkDelete'
+
 ezplatform.section.assign_content:
     path: /section/assign-content/{sectionId}
     defaults:
