@@ -16,10 +16,7 @@
     const openUDW = (event) => {
         event.preventDefault();
 
-        const form = document.querySelector('form[name="section_content_assign"]');
-        const btn = event.target.closest('a');
-        form.action = btn.dataset.formAction;
-        document.querySelector('#section_content_assign_section').value = btn.dataset.sectionId;
+        const form = event.target.closest('form');
 
         ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
             onConfirm: onConfirm.bind(this, form),

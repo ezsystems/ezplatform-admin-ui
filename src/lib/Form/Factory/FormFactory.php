@@ -43,6 +43,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
@@ -82,6 +83,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionContentAssignType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionsDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType;
@@ -438,7 +440,7 @@ class FormFactory
         SectionContentAssignData $data = null,
         ?string $name = null
     ): FormInterface {
-        $name = $name ?: sprintf('content-assign-section-%d', $data->getSection()->id);
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(SectionContentAssignType::class);
 
         return $this->formFactory->createNamed($name, SectionContentAssignType::class, $data);
     }
@@ -456,6 +458,23 @@ class FormFactory
         $name = $name ?: sprintf('delete-section-%d', $data->getSection()->id);
 
         return $this->formFactory->createNamed($name, SectionDeleteType::class, $data);
+    }
+
+    /**
+     * @param SectionsDeleteData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function deleteSections(
+        SectionsDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(SectionsDeleteType::class);
+
+        return $this->formFactory->createNamed($name, SectionsDeleteType::class, $data);
     }
 
     /**
