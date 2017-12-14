@@ -33,7 +33,6 @@
                         <svg class="ez-icon">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
-                        {{ 'section.form.delete'|trans|desc('Delete') }}
                     </button>
                     {% include 'EzPlatformAdminUiBundle:admin/section:delete_confirmation_modal.html.twig' with {'form': form_section_delete} %}
                 {% else %}
@@ -41,7 +40,6 @@
                         <svg class="ez-icon">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
-                        {{ 'section.form.delete'|trans|desc('Delete') }}
                     </button>
                 {% endif %}
             </div>

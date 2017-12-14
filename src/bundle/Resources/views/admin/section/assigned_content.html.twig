@@ -1,6 +1,6 @@
 {% trans_default_domain 'section' %}
 
-{% form_theme form_section_content_assign 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+{% form_theme form_section_content_assign 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' 'EzPlatformAdminUiBundle:parts/form:assign_section_widget.html.twig' %}
 
 <section class="container mt-4 px-5">
     <div class="ez-table-header">
@@ -15,7 +15,8 @@
             'action': path("ezplatform.section.assign_content", {"sectionId": section.id}),
             'attr': {'class': 'd-inline-block'}
         }) }}
-            {{ form_widget(form_section_content_assign.locations, { 'label': '' }) }}
+            {{ form_widget(form_section_content_assign.locations.location) }}
+            {{ form_widget(form_section_content_assign.locations.select_content, {'attr': {'class': 'btn btn-secondary btn--open-udw'}}) }}
         {{ form_end(form_section_content_assign) }}
     </div>
     <table class="table">
