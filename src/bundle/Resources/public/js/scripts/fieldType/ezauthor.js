@@ -109,7 +109,7 @@
         addItem(event) {
             const authorNode = event.target.closest(SELECTOR_FIELD);
             const template = authorNode.dataset.template;
-            const node = event.target.closest('.ez-field-edit__data');
+            const node = event.target.closest('.ez-field-edit__data .ez-data-source');
 
             node.insertAdjacentHTML('beforeend', this.setIndex(authorNode, template));
 
@@ -177,18 +177,27 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-data-source__author .ez-data-source__field--name input',
+                selector: `.ez-data-source__author ${SELECTOR_FIELD_NAME} .ez-data-source__input`,
                 eventName: 'blur',
                 callback: 'validateName',
-                invalidStateSelectors: [SELECTOR_FIELD_NAME],
-                errorNodeSelectors: ['.ez-data-source__field--name .ez-data-source__label-wrapper'],
+                invalidStateSelectors: [
+                    SELECTOR_FIELD_NAME,
+                    `${SELECTOR_FIELD_NAME} .ez-data-source__input`,
+                    `${SELECTOR_FIELD_NAME} .ez-data-source__label`
+
+                ],
+                errorNodeSelectors: [`${SELECTOR_FIELD_NAME} .ez-data-source__label-wrapper`],
             },
             {
-                selector: '.ez-data-source__author .ez-data-source__field--email input',
+                selector: `.ez-data-source__author ${SELECTOR_FIELD_EMAIL} .ez-data-source__input`,
                 eventName: 'blur',
                 callback: 'validateEmail',
-                invalidStateSelectors: [SELECTOR_FIELD_EMAIL],
-                errorNodeSelectors: ['.ez-data-source__field--email .ez-data-source__label-wrapper'],
+                invalidStateSelectors: [
+                    SELECTOR_FIELD_EMAIL,
+                    `${SELECTOR_FIELD_EMAIL} .ez-data-source__input`,
+                    `${SELECTOR_FIELD_EMAIL} .ez-data-source__label`
+                ],
+                errorNodeSelectors: [`${SELECTOR_FIELD_EMAIL} .ez-data-source__label-wrapper`],
             },
             {
                 isValueValidator: false,

@@ -40,6 +40,7 @@
                 eventName: 'blur',
                 callback: 'validateInput',
                 errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+                invalidStateSelectors: ['.ez-data-source__input']
             },
         ],
     });
