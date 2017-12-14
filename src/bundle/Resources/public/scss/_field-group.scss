@@ -4,14 +4,19 @@
 
     .ez-raw-content-title {
         border-bottom: 1px solid $ez-color-secondary;
-        padding-bottom: .25rem;
         color: $ez-color-secondary;
 
         h2 {
-        font-size: 1.125rem;
-        font-weight: 400;  
+            margin-top: 1rem;
+            margin-bottom: 0;
+            padding-bottom: .5rem;
+            font-size: 1.125rem;
+            font-weight: 400;  
         }
 
+        .form-inline {
+            padding-bottom: .25rem;
+        }
     }    
 }
 
@@ -26,10 +31,6 @@
 
     .ez-content-field-name {
         background-color: $ez-color-base-pale;
-        // margin-bottom: 0;
-        // padding: .5rem 1.5rem;
-        // border-top-right-radius: 5px;
-        // border-top-left-radius: 5px;
     }
 
     h2.ez-fieldgroup-name {
