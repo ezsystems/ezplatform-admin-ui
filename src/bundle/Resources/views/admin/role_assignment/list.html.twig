@@ -4,11 +4,13 @@
     <div class="ez-table-header">
         <div class="ez-table-header__headline">{{ 'role_assignment.view.list.header'|trans|desc('Users and Groups') }}</div>
         <div>
-            <a href="{{ path('ezplatform.role_assignment.create', {roleId: role.id}) }}" class="btn btn-secondary">
+            <a href="{{ path('ezplatform.role_assignment.create', {roleId: role.id}) }}"
+               title="{{ 'role_assignment.view.list.action.add'|trans|desc('Assign users/groups') }}"
+               class="btn btn-secondary">
                 <svg class="ez-icon ez-icon-relations ez-icon--secondary">
-                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#relations"></use>
+                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-user"></use>
                 </svg>
-                {{ 'role_assignment.view.list.action.add'|trans|desc('Assign users/groups') }}
+
             </a>
             <button id="delete-role-assignments" class="btn btn-danger btn--trigger" disabled
                     data-click="#role_assignments_delete_delete">
