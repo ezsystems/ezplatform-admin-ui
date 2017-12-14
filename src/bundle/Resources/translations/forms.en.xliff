@@ -31,6 +31,11 @@
         <target state="new">Remove translation</target>
         <note>key: content_translation_remove_form.remove</note>
       </trans-unit>
+      <trans-unit id="4c29e9392116163c51f0e3d4d0c08ff96717f695" resname="content_type_groups_delete_form.delete">
+        <source>Delete content type groups</source>
+        <target state="new">Delete content type groups</target>
+        <note>key: content_type_groups_delete_form.delete</note>
+      </trans-unit>
       <trans-unit id="0ad9197dcdbe88b1a05f099c564dc2b5634f8aa5" resname="ezplatform.language.create.enabled">
         <source>Enabled</source>
         <target state="new">Enabled</target>
