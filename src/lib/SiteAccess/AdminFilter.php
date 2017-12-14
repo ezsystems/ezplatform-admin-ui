@@ -44,7 +44,6 @@ class AdminFilter implements SiteAccessConfigurationFilter
                 ? str_replace('_group', '', $groupName) . '_admin'
                 : 'admin';
             $configuration['list'][] = $adminSiteAccessName;
-            $configuration['groups'][$groupName][] = $adminSiteAccessName;
             $configuration['groups'][self::ADMIN_GROUP_NAME][] = $adminSiteAccessName;
         }
 
