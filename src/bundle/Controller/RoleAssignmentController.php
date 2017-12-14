@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
+use eZ\Publish\API\Repository\Values\User\Limitation\RoleLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\SubtreeLimitation;
 use eZ\Publish\API\Repository\Values\User\Role;
@@ -85,55 +86,17 @@ class RoleAssignmentController extends Controller
 
     public function createAction(Request $request, Role $role): Response
     {
-        $form = $this->formFactory->createRoleAssignment(
-            new RoleAssignmentCreateData()
-        );
+        $form = $this->formFactory->createRoleAssignment(new RoleAssignmentCreateData());
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (RoleAssignmentCreateData $data) use ($role) {
-                $users = $data->getUsers();
-                $groups = $data->getGroups();
-                $sections = $data->getSections();
-                $locations = $data->getLocations();
-
-                $limitations = [];
-
-                if (empty($sections) && empty($locations)) {
-                    $limitations[] = null;
-                } else {
-                    if (!empty($sections)) {
-                        $limitation = new SectionLimitation();
-
-                        foreach ($sections as $section) {
-                            $limitation->limitationValues[] = $section->id;
-                        }
-
-                        $limitations[] = $limitation;
+                foreach ($this->createLimitations($data) as $limitation) {
+                    foreach ($data->getUsers() as $user) {
+                        $this->roleService->assignRoleToUser($role, $user, $limitation);
                     }
-
-                    if (!empty($locations)) {
-                        $limitation = new SubtreeLimitation();
-
-                        foreach ($locations as $location) {
-                            $limitation->limitationValues[] = $location->pathString;
-                        }
-
-                        $limitations[] = $limitation;
-                    }
-                }
-
-                foreach ($limitations as $limitation) {
-                    if (!empty($users)) {
-                        foreach ($users as $user) {
-                            $this->roleService->assignRoleToUser($role, $user, $limitation);
-                        }
-                    }
-
-                    if (!empty($groups)) {
-                        foreach ($groups as $group) {
-                            $this->roleService->assignRoleToUserGroup($role, $group, $limitation);
-                        }
+                    foreach ($data->getGroups() as $group) {
+                        $this->roleService->assignRoleToUserGroup($role, $group, $limitation);
                     }
                 }
 
@@ -260,5 +223,40 @@ class RoleAssignmentController extends Controller
         $roleAssignmentsNumbers = array_column($roleAssignments, 'id');
 
         return array_combine($roleAssignmentsNumbers, array_fill_keys($roleAssignmentsNumbers, false));
+    }
+
+    /**
+     * @param RoleAssignmentCreateData $data
+     *
+     * @return RoleLimitation[]
+     */
+    private function createLimitations(RoleAssignmentCreateData $data): array
+    {
+        $limitations = [];
+        switch ($data->getLimitationType()) {
+            case RoleAssignmentCreateData::LIMITATION_TYPE_LOCATION:
+                $limitation = new SubtreeLimitation();
+
+                foreach ($data->getLocations() as $location) {
+                    $limitation->limitationValues[] = $location->pathString;
+                }
+
+                $limitations[] = $limitation;
+                break;
+            case RoleAssignmentCreateData::LIMITATION_TYPE_SECTION:
+                $limitation = new SectionLimitation();
+
+                foreach ($data->getSections() as $section) {
+                    $limitation->limitationValues[] = $section->id;
+                }
+
+                $limitations[] = $limitation;
+                break;
+            case RoleAssignmentCreateData::LIMITATION_TYPE_NONE:
+                $limitations[] = null; // this acts as "no limitations"
+                break;
+        }
+
+        return $limitations;
     }
 }

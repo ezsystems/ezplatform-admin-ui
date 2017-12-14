@@ -1,25 +1,38 @@
-(function () {
-    const btns = document.querySelectorAll('.btn--open-udw');
-    const udwContainer = document.getElementById('react-udw');
-    const token = document.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
+(function (global, doc) {
+    const udwContainer = doc.getElementById('react-udw');
+    const limitationsRadio = [...doc.querySelectorAll('.ez-limitations__radio')];
+    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => udwContainer.innerHTML = '';
-    const onConfirm = (form, content) => {
-        const field = form.querySelector('#role_assignment_locations_value');
-        field.value = content.map(item => item.ContentInfo.Content._id).join();
+    const selectSubtreeConfirm = (data) => {
+        const selectedItems = data.reduce((total, item) => total + `<li>${item.ContentInfo.Content.Name}</li>`, '');
+
+        doc.querySelector('#role_assignment_create_locations').value = data.map(item => item.id).join();
+        doc.querySelector('.ez-limitations__selected-subtree').innerHTML = selectedItems;
+
         closeUDW();
     };
-    const onCancel = () => closeUDW();
-    const openUDW = (event) => {
+    const selectSubtree = (event) => {
         event.preventDefault();
 
-        const form = event.target.closest('form[name=role_assignment]');
         ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
-            onConfirm: onConfirm.bind(this, form),
-            onCancel: onCancel,
+            onConfirm: selectSubtreeConfirm.bind(this),
+            onCancel: closeUDW,
+            multiple: true,
             restInfo: {token, siteaccess}
         }), udwContainer);
     };
+    const toggleDisabledState = () => {
+        limitationsRadio.forEach(radio => {
+            const disableNode = doc.querySelector(radio.dataset.disableSelector);
+            const methodName = radio.checked ? 'removeAttribute' : 'setAttribute';
 
-    btns.forEach(btn => btn.addEventListener('click', openUDW, false));
-})();
+            if (disableNode) {
+                disableNode[methodName]('disabled', 'disabled');
+            }
+        });
+    };
+
+    doc.querySelector('.ez-btn--select-subtree').addEventListener('click', selectSubtree, false);
+    limitationsRadio.forEach(radio => radio.addEventListener('change', toggleDisabledState, false));
+})(window, document);

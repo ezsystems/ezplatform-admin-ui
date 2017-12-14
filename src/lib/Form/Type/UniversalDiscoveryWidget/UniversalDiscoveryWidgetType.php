@@ -98,11 +98,13 @@ class UniversalDiscoveryWidgetType extends AbstractType
                     return null;
                 }
 
-                return ['location' => implode(',', $value)];
+                $ids = implode(',', $value);
+
+                return ['location' => !empty($ids) ? $ids : null];
             },
             function ($value) {
                 if (is_array($value) && array_key_exists('location', $value)) {
-                    return $value['location'];
+                    return $value['location'] ?? null;
                 }
 
                 return null;

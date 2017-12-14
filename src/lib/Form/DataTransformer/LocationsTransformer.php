@@ -52,14 +52,14 @@ class LocationsTransformer implements DataTransformerInterface
      *
      * @param mixed $value
      *
-     * @return Location[]|null
+     * @return Location[]
      *
      * @throws TransformationFailedException
      */
     public function reverseTransform($value): ?array
     {
         if (empty($value)) {
-            return null;
+            return [];
         }
 
         if (!is_string($value)) {
