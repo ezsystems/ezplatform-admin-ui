@@ -57,7 +57,7 @@
             {% for content_type_group in content_type_groups %}
                 <tr>
                     <td class="ez-checkbox-cell">
-                        {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id]) }}
+                        {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id], {"disabled": not deletable[content_type_group.id]}) }}
                     </td>
                     <td>
                         {% set view_url = path('ezplatform.content_type_group.view', {

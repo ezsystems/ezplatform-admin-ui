@@ -75,15 +75,22 @@ class ContentTypeGroupController extends Controller
 
     public function listAction(): Response
     {
+        $deletableContentTypeGroup = [];
+
         $contentTypeGroupList = $this->contentTypeService->loadContentTypeGroups();
 
         $deleteContentTypeGroupsForm = $this->formFactory->deleteContentTypeGroups(
             new ContentTypeGroupsDeleteData($this->getContentTypeGroupsNumbers($contentTypeGroupList))
         );
 
+        foreach ($contentTypeGroupList as $contentTypeGroup) {
+            $deletableContentTypeGroup[$contentTypeGroup->id] = !(bool)count($this->contentTypeService->loadContentTypes($contentTypeGroup));
+        }
+
         return $this->render('@EzPlatformAdminUi/admin/content_type_group/list.html.twig', [
             'content_type_groups' => $contentTypeGroupList,
             'form_content_type_groups_delete' => $deleteContentTypeGroupsForm->createView(),
+            'deletable' => $deletableContentTypeGroup,
         ]);
     }
 
