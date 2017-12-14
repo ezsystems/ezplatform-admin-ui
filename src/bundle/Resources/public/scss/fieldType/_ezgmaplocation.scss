@@ -65,5 +65,13 @@
 
     .btn--search-by-address {
         border-radius: 0 .25rem .25rem 0;
+        padding: .3rem .5rem;
+        cursor: pointer;
+
+        .ez-icon {
+            width: 1.4rem;
+            height: 1.4rem;
+            margin-top: 2px;
+        }
     }
 }

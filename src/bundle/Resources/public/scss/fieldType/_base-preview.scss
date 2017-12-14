@@ -13,7 +13,7 @@
 
     .ez-field-edit__data {
         border-radius: .25rem;
-        border: 1px dashed $ez-color-primary;
+        border: 2px dashed $ez-color-base-pale;
         padding: 1rem;
         text-align: center;
         position: relative;
@@ -26,7 +26,7 @@
             cursor: pointer;
             letter-spacing: .5px;
             color: $ez-white;
-            font-size: .875rem;
+            font-size: 1rem;
             font-weight: 700;
             border: 1px solid $ez-color-primary;
             background-color: $ez-color-primary;
@@ -34,7 +34,10 @@
             align-items: center;
 
             .ez-icon {
+                margin-top: -.1rem;
                 margin-right: .5rem;
+                width: 1.5rem;
+                height: 1.5rem;
             }
         }
 
@@ -84,26 +87,36 @@
             transition: background .3s $ez-admin-transition;
             text-align: center;
             display: block;
+
+            .ez-icon {
+                margin-top: 7px;
+                height: 1.5rem;
+                width: 1.5rem;
+            }
         }
 
         &__action--preview {
             @include preview-action;
-            background: $ez-color-base-pale;
+            background: $ez-color-base-medium;
             margin-top: 1.25rem;
 
             &:hover,
             &:focus {
-                background: $ez-color-base-light;
+                background: darken($ez-color-base-medium, 15%);;
             }
         }
 
         &__action--remove {
             @include preview-action;
-            background: $ez-color-danger;
+            background: $ez-color-secondary;
+
+            .ez-icon {
+                margin-top: 8px;
+            }
 
             &:hover,
             &:focus {
-                background: $ez-color-danger-hover;
+                background: $ez-color-secondary-hover;
             }
         }
     }

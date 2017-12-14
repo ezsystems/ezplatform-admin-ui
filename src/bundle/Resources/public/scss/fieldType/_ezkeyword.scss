@@ -31,12 +31,14 @@
         padding: 4px 0 4px 8px;
         color: $ez-white;
         margin: 0 8px 8px 0;
+        border-radius: .25rem;
     }
 
     .taggify__btn--remove {
         color: $ez-white;
         background: none;
         border: 0 none;
+        margin-left: .375rem;
     }
 
     &.is-invalid {

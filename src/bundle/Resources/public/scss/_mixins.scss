@@ -58,7 +58,7 @@
         position: relative;
         width: $size;
         height: calc(#{$size} + .25rem);
-        background-color: $ez-ground-base-dark;
+        background-color: $ez-color-base-pale;
         margin-left: calc((#{$size} + .25rem) / 2);
         cursor: pointer;
 
@@ -71,7 +71,7 @@
             width: $size;
             height: $size;
             display: block;
-            background-color: $ez-ground-base-pale;
+            background-color: $ez-white;
             border-radius: 50%;
             position: absolute;
             top: 2px;
@@ -82,18 +82,18 @@
         }
 
         &.is-checked {
-            background-color: $ez-color-secondary;
+            background-color: $ez-secondary-ground;
 
             .ez-data-source__indicator {
                 transform: translateX(50%);
             }
 
             &:before {
-                background-color: $ez-color-secondary;
+                background-color: $ez-secondary-ground;
             }
 
             &:after {
-                background-color: $ez-color-secondary;
+                background-color: $ez-secondary-ground;
             }
         }
 
@@ -105,7 +105,7 @@
             border-radius: 50%;
             position: absolute;
             top: 50%;
-            background-color: $ez-ground-base-dark;
+            background-color: $ez-color-base-pale;
             z-index: -1;
             cursor: pointer;
         }

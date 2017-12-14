@@ -6,6 +6,23 @@
         text-align: center;
     }
 
+    .btn {
+        padding: .4rem 1.25rem;
+        font-weight: bold;
+
+        .ez-icon {
+            margin-top: .1rem;
+            margin-right: .25rem;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .ez-relations__cta-btn-label {
+            display: inline-block;
+            vertical-align: 25%;
+        }
+    }
+
     .ez-relations__order-input {
         width: 6ch;
         text-align: center;
