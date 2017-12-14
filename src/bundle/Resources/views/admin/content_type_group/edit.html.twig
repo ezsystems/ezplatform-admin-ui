@@ -1,8 +1,8 @@
-{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+{% extends "@EzPlatformAdminUi/admin/content_type_group/base.html.twig" %}
 
 {% trans_default_domain 'content_type' %}
 
-{% block breadcrumbs %}
+{% block breadcrumbs_admin %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
@@ -10,31 +10,30 @@
     ]} %}
 {% endblock %}
 
-{% block pageTitle %}
+{% block page_title_admin %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
         title: 'content_type_group.view.edit.title'|trans({'%identifier%': content_type_group.identifier})|desc('Editing Content Type Group "%identifier%"'),
         iconName: 'content-types'
     } %}
 {% endblock %}
 
-{% block content %}
+{% block form %}
     {{ form_start(form) }}
 
     <section class="container mt-4 px-5">
-        <div class="card">
+        <div class="card ez-card">
             <div class="card-body">
                 {{ form_row(form.identifier) }}
             </div>
         </div>
     </section>
 
-    <section class="container my-4 px-5">
-        <div class="btn-toolbar justify-content-end" role="toolbar" >
-            {{ form_widget(form.update, {
-                'attr': { 'class': 'btn btn-primary' }
-            }) }}
-        </div>
-    </section>
+    {{ form_widget(form.update, {'attr': {'hidden': 'hidden'}}) }}
 
     {{ form_end(form) }}
+{% endblock %}
+
+{% block right_sidebar %}
+    {% set content_type_group_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_group_edit.sidebar_right', [], {'save_id': form.update.vars.id}) %}
+    {{ knp_menu_render(content_type_group_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

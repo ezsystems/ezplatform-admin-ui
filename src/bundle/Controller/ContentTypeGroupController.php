@@ -120,7 +120,7 @@ class ContentTypeGroupController extends Controller
             }
         }
 
-        return $this->render('@EzPlatformAdminUi/admin/content_type_group/add.html.twig', [
+        return $this->render('@EzPlatformAdminUi/admin/content_type_group/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -24,7 +24,7 @@ class ContentTypeGroupCreateType extends AbstractType
     {
         $builder
             ->add('identifier', TextType::class, [
-                'label' => /** @Desc("Identifier") */ 'content_type_group.create.identifier',
+                'label' => /** @Desc("Name") */ 'content_type_group.create.name',
             ])
             ->add('create', SubmitType::class, [
                 'label' => /** @Desc("Create") */ 'content_type_group.create.submit',
