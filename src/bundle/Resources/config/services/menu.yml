@@ -98,4 +98,14 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.language_edit.sidebar_right }
 
+    EzSystems\EzPlatformAdminUi\Menu\Admin\ContentType\ContentTypeGroupCreateRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content_type_group_create.sidebar_right }
+
+    EzSystems\EzPlatformAdminUi\Menu\Admin\ContentType\ContentTypeGroupEditRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content_type_group_edit.sidebar_right }
+
 

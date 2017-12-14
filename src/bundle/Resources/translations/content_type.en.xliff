@@ -216,10 +216,10 @@
         <target state="new">%identifier%</target>
         <note>key: content_type_group.breadcrumb.view</note>
       </trans-unit>
-      <trans-unit id="03339a9ed2c7a92f0168e1bfbb276e17dcf52794" resname="content_type_group.create.identifier">
-        <source>Identifier</source>
-        <target state="new">Identifier</target>
-        <note>key: content_type_group.create.identifier</note>
+      <trans-unit id="e7cbc2b974608f280aa2b412d4c7836c7a56946d" resname="content_type_group.create.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: content_type_group.create.name</note>
       </trans-unit>
       <trans-unit id="b04a9c80f0219d1a12813a8aa4bc532e97653b28" resname="content_type_group.create.submit">
         <source>Create</source>
@@ -241,10 +241,10 @@
         <target state="new">Content type group '%name%' deleted.</target>
         <note>key: content_type_group.delete.success</note>
       </trans-unit>
-      <trans-unit id="2215ce796f8eb3bfc45224e4773b571e71429c3d" resname="content_type_group.update.identifier">
-        <source>Identifier</source>
-        <target state="new">Identifier</target>
-        <note>key: content_type_group.update.identifier</note>
+      <trans-unit id="4c6dfb0b81f5b9d70fed0dda3840f0677ece9570" resname="content_type_group.update.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: content_type_group.update.name</note>
       </trans-unit>
       <trans-unit id="d44e2ddf0ee9d2e6fcb0b4f2c49a2b579d629588" resname="content_type_group.update.submit">
         <source>Update</source>

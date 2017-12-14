@@ -71,6 +71,26 @@
         <target state="new">Save</target>
         <note>key: content_edit__sidebar_right__save_draft</note>
       </trans-unit>
+      <trans-unit id="ccdcdc5c7e006c865c33b29eee9c6b9e232a9308" resname="content_type_group_create__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: content_type_group_create__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="71e6fb2e4bbbcaaf043cdca260f6ba38f8ce2911" resname="content_type_group_create__sidebar_right__create">
+        <source>Create</source>
+        <target state="new">Create</target>
+        <note>key: content_type_group_create__sidebar_right__create</note>
+      </trans-unit>
+      <trans-unit id="0fa3cd41a8153814006c36b35a949d64576eaeea" resname="content_type_group_edit__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: content_type_group_edit__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="3951c5df8bf1c00b0dd99dc06acc76d1908ec825" resname="content_type_group_edit__sidebar_right__save">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: content_type_group_edit__sidebar_right__save</note>
+      </trans-unit>
       <trans-unit id="65804c068820b5fa679357bc65c5862d0fc90701" resname="language_create__sidebar_right__cancel">
         <source>Discard changes</source>
         <target state="new">Discard changes</target>

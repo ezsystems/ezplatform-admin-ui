@@ -24,7 +24,7 @@ class ContentTypeGroupUpdateType extends AbstractType
     {
         $builder
             ->add('identifier', TextType::class, [
-                'label' => /** @Desc("Identifier") */ 'content_type_group.update.identifier',
+                'label' => /** @Desc("Name") */ 'content_type_group.update.name',
             ])
             ->add('update', SubmitType::class, [
                 'label' => /** @Desc("Update") */ 'content_type_group.update.submit',
