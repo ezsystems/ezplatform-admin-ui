@@ -2014,6 +2014,889 @@
         }
     ];
 
+    const contentTypesMap = {
+        "/api/ezp/v2/content/types/27": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/27",
+            "id": 27,
+            "status": "DEFINED",
+            "identifier": "aimage",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "A - Image"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2017-12-12T17:57:48+01:00",
+            "modificationDate": "2017-12-12T18:00:22+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/27/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/27/draft"
+            },
+            "remoteId": "e7119c1d5778db16bda681fc34aa5ab5",
+            "urlAliasSchema": "",
+            "nameSchema": "<title>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/30": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/30",
+            "id": 30,
+            "status": "DEFINED",
+            "identifier": "ainconsistency",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "A - Incosistency in validation"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2017-12-13T11:05:02+01:00",
+            "modificationDate": "2017-12-13T17:53:00+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/30/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/30/draft"
+            },
+            "remoteId": "2dcfb1a14bb0792f68064797ebd1b3c2",
+            "urlAliasSchema": "",
+            "nameSchema": "<title>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/26": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/26",
+            "id": 26,
+            "status": "DEFINED",
+            "identifier": "amap",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "A - Map"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2017-12-12T15:09:05+01:00",
+            "modificationDate": "2017-12-13T08:46:10+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/26/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/26/draft"
+            },
+            "remoteId": "d745696c0a9bd6ea8e5c6fef374a2caa",
+            "urlAliasSchema": "",
+            "nameSchema": "<title>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/32": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/32",
+            "id": 32,
+            "status": "DEFINED",
+            "identifier": "anoglow",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "A - No glow"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2017-12-13T15:03:42+01:00",
+            "modificationDate": "2017-12-13T15:06:01+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/32/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/32/draft"
+            },
+            "remoteId": "5909c3a2db1f36e5cb307b8d8a8e124b",
+            "urlAliasSchema": "",
+            "nameSchema": "<new_ezdate_1>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/21": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/21",
+            "id": 21,
+            "status": "DEFINED",
+            "identifier": "arelatedcontent",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "A - Relations"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2017-12-05T10:49:39+01:00",
+            "modificationDate": "2017-12-12T11:00:44+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/21/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/21/draft"
+            },
+            "remoteId": "b9b120a209badafcd538279f3b401eed",
+            "urlAliasSchema": "",
+            "nameSchema": "<new_ezobjectrelationlist_1>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/25": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/25",
+            "id": 25,
+            "status": "DEFINED",
+            "identifier": "arelations",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "Multiple relation"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2017-12-11T15:27:25+01:00",
+            "modificationDate": "2017-12-11T15:28:47+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/25/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/25/draft"
+            },
+            "remoteId": "fb6debe143fd8cf6d3e81a1f7890755c",
+            "urlAliasSchema": "",
+            "nameSchema": "<new_ezobjectrelationlist_1>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/31": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/31",
+            "id": 31,
+            "status": "DEFINED",
+            "identifier": "aselection",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "A - Selection"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2017-12-13T14:01:28+01:00",
+            "modificationDate": "2017-12-13T14:02:59+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/31/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/31/draft"
+            },
+            "remoteId": "b69627003314d67a30fada08ad122987",
+            "urlAliasSchema": "",
+            "nameSchema": "<title>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/17": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/17",
+            "id": 17,
+            "status": "DEFINED",
+            "identifier": "blog",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "Blog"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2015-11-27T12:58:03+01:00",
+            "modificationDate": "2015-11-27T12:59:49+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/17/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/17/draft"
+            },
+            "remoteId": "3d64a4063e6588821358e3a0cab12515",
+            "urlAliasSchema": "",
+            "nameSchema": "<title>",
+            "isContainer": true,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/18": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/18",
+            "id": 18,
+            "status": "DEFINED",
+            "identifier": "blog_post",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "Blog post"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2015-11-27T13:00:13+01:00",
+            "modificationDate": "2015-11-27T13:03:52+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/18/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/18/draft"
+            },
+            "remoteId": "85e5fa69c6fd7b3e086a4331c07c13be",
+            "urlAliasSchema": "",
+            "nameSchema": "<title>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/19": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/19",
+            "id": 19,
+            "status": "DEFINED",
+            "identifier": "contact_form",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "Contact form"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2015-11-27T13:04:19+01:00",
+            "modificationDate": "2015-11-27T13:07:18+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/19/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/19/draft"
+            },
+            "remoteId": "ee1bf061169a8058fdd7d82c1f156146",
+            "urlAliasSchema": "",
+            "nameSchema": "<title>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/1": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/1",
+            "id": 1,
+            "status": "DEFINED",
+            "identifier": "folder",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "Folder"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2002-06-18T11:21:38+02:00",
+            "modificationDate": "2004-04-20T11:54:35+02:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/1/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/1/draft"
+            },
+            "remoteId": "a3d405b81be900468eb153d774f4f0d2",
+            "urlAliasSchema": null,
+            "nameSchema": "<short_name|name>",
+            "isContainer": true,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PATH",
+            "defaultSortOrder": "ASC"
+        },
+        "/api/ezp/v2/content/types/20": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/20",
+            "id": 20,
+            "status": "DEFINED",
+            "identifier": "gallery",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "Gallery"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2015-11-27T13:07:49+01:00",
+            "modificationDate": "2015-11-27T13:08:56+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/20/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/20/draft"
+            },
+            "remoteId": "e392b7db351c8b927c11d811647efa85",
+            "urlAliasSchema": "",
+            "nameSchema": "<title>",
+            "isContainer": true,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/16": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/16",
+            "id": 16,
+            "status": "DEFINED",
+            "identifier": "home_page",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "Home page"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2015-11-27T12:55:15+01:00",
+            "modificationDate": "2015-11-27T13:28:30+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/16/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/16/draft"
+            },
+            "remoteId": "b314698c7f550403d7a1a5fa5cabce16",
+            "urlAliasSchema": "",
+            "nameSchema": "<title>",
+            "isContainer": true,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/22": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/22",
+            "id": 22,
+            "status": "DEFINED",
+            "identifier": "mysteryuser",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "Mystery user"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2017-12-06T10:33:26+01:00",
+            "modificationDate": "2017-12-06T10:34:03+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/22/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/22/draft"
+            },
+            "remoteId": "e0576e56c87f9073943d91b864b81a8d",
+            "urlAliasSchema": "",
+            "nameSchema": "<new_ezuser_1>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PUBLISHED",
+            "defaultSortOrder": "DESC"
+        },
+        "/api/ezp/v2/content/types/4": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/4",
+            "id": 4,
+            "status": "DEFINED",
+            "identifier": "user",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "User"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2002-06-18T11:21:38+02:00",
+            "modificationDate": "2004-04-15T10:39:24+02:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/4/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/4/draft"
+            },
+            "remoteId": "40faa822edc579b02c25f6bb7beec3ad",
+            "urlAliasSchema": null,
+            "nameSchema": "<first_name> <last_name>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PATH",
+            "defaultSortOrder": "ASC"
+        },
+        "/api/ezp/v2/content/types/3": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/3",
+            "id": 3,
+            "status": "DEFINED",
+            "identifier": "user_group",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "User group"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2002-06-18T11:21:38+02:00",
+            "modificationDate": "2003-03-24T09:32:23+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/3/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/3/draft"
+            },
+            "remoteId": "25b4268cdcd01921b808a0d854b877ef",
+            "urlAliasSchema": null,
+            "nameSchema": "<name>",
+            "isContainer": true,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PATH",
+            "defaultSortOrder": "ASC"
+        },
+        "/api/ezp/v2/content/types/12": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/12",
+            "id": 12,
+            "status": "DEFINED",
+            "identifier": "file",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "File"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2003-05-08T11:17:52+02:00",
+            "modificationDate": "2003-05-08T11:21:09+02:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/12/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/12/draft"
+            },
+            "remoteId": "637d58bfddf164627bdfd265733280a0",
+            "urlAliasSchema": null,
+            "nameSchema": "<name>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PATH",
+            "defaultSortOrder": "ASC"
+        },
+        "/api/ezp/v2/content/types/5": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/5",
+            "id": 5,
+            "status": "DEFINED",
+            "identifier": "image",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "Image"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2002-09-08T13:36:32+02:00",
+            "modificationDate": "2003-03-24T09:33:04+01:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/8"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/5/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/5/draft"
+            },
+            "remoteId": "f6df12aa74e36230eb675f364fccd25a",
+            "urlAliasSchema": null,
+            "nameSchema": "<name>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PATH",
+            "defaultSortOrder": "ASC"
+        },
+        "/api/ezp/v2/content/types/14": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/14",
+            "id": 14,
+            "status": "DEFINED",
+            "identifier": "common_ini_settings",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "Common ini settings"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2004-04-13T14:07:04+02:00",
+            "modificationDate": "2004-04-13T14:07:04+02:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/14/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/14/draft"
+            },
+            "remoteId": "ffedf2e73b1ea0c3e630e42e2db9c900",
+            "urlAliasSchema": null,
+            "nameSchema": "<name>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PATH",
+            "defaultSortOrder": "ASC"
+        },
+        "/api/ezp/v2/content/types/15": {
+            "_media-type": "application/vnd.ez.api.ContentTypeInfo+json",
+            "_href": "/api/ezp/v2/content/types/15",
+            "id": 15,
+            "status": "DEFINED",
+            "identifier": "template_look",
+            "names": {
+                "value": [
+                    {
+                        "_languageCode": "eng-GB",
+                        "#text": "Template look"
+                    }
+                ]
+            },
+            "descriptions": {
+                "value": []
+            },
+            "creationDate": "2004-04-13T14:07:25+02:00",
+            "modificationDate": "2004-04-13T14:07:25+02:00",
+            "Creator": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Modifier": {
+                "_media-type": "application/vnd.ez.api.User+json",
+                "_href": "/api/ezp/v2/user/users/14"
+            },
+            "Groups": {
+                "_media-type": "application/vnd.ez.api.ContentTypeGroupRefList+json",
+                "_href": "/api/ezp/v2/content/types/15/groups"
+            },
+            "Draft": {
+                "_media-type": "application/vnd.ez.api.ContentType+json",
+                "_href": "/api/ezp/v2/content/types/15/draft"
+            },
+            "remoteId": "59b43cd9feaaf0e45ac974fb4bbd3f92",
+            "urlAliasSchema": null,
+            "nameSchema": "<title>",
+            "isContainer": false,
+            "mainLanguageCode": "eng-GB",
+            "defaultAlwaysAvailable": true,
+            "defaultSortField": "PATH",
+            "defaultSortOrder": "ASC"
+        }
+    };
+
     listContainers.forEach(container => {
         ReactDOM.render(React.createElement(eZ.modules.SubItems, {
             parentLocationId: container.dataset.location,
@@ -2034,7 +2917,8 @@
                     asButton: true
                 })
             }],
-            // items
+            items,
+            contentTypesMap
         }), container);
     });
 })();
