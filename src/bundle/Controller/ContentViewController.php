@@ -243,19 +243,19 @@ class ContentViewController extends Controller
             $this->restContentValueObjectVisitor->visit($this->outputVisitor, $this->outputGenerator, $restContent);
             $contentJson = $this->outputGenerator->endDocument($restContent);
 
-            $items[] = sprintf("{'location': %s, 'content': %s}", $locationJson, $contentJson);
+            $items[] = sprintf('{"location": %s, "content": %s}', $locationJson, $contentJson);
         }
 
-        $contentTypesJson = '';
+        $contentTypesJson = [];
         foreach ($contentTypes as $contentType) {
             $restContentType = new \eZ\Publish\Core\REST\Server\Values\RestContentType($contentType);
             $this->outputGenerator->reset();
             $this->outputGenerator->startDocument($restContentType);
             $this->restContentTypeValueObjectVisitor->visit($this->outputVisitor, $this->outputGenerator, $restContentType);
             $contentTypeJson = $this->outputGenerator->endDocument($restContentType);
-            $contentTypesJson .= sprintf('\'%s\': %s,', $contentType->remoteId, $contentTypeJson);
+            $contentTypesJson[] = sprintf('"%s": %s', $contentType->remoteId, $contentTypeJson);
         }
-        $contentTypesJson = '{' . $contentTypesJson . '}';
+        $contentTypesJson = '{' . implode(', ', $contentTypesJson) . '}';
 
         $view->addParameters([
             'subitems_rows_json' => '[' . implode(', ', $items) . ']',
