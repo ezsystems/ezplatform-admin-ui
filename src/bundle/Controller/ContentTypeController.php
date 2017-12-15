@@ -12,12 +12,20 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\RepositoryForms\Data\Mapper\ContentTypeDraftMapper;
 use EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface;
 use EzSystems\RepositoryForms\Form\Type\ContentType\ContentTypeUpdateType;
 use Symfony\Component\Form\Form;
+use eZ\Publish\API\Repository\Exceptions\BadStateException;
+use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -39,6 +47,9 @@ class ContentTypeController extends Controller
     /** @var array */
     private $languages;
 
+    /** @var FormFactory */
+    private $formFactory;
+
     /** @var SubmitHandler */
     private $submitHandler;
 
@@ -49,6 +60,7 @@ class ContentTypeController extends Controller
      * @param TranslatorInterface $translator
      * @param ContentTypeService $contentTypeService
      * @param ActionDispatcherInterface $contentTypeActionDispatcher
+     * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
      * @param array $languages
      */
@@ -57,6 +69,7 @@ class ContentTypeController extends Controller
         TranslatorInterface $translator,
         ContentTypeService $contentTypeService,
         ActionDispatcherInterface $contentTypeActionDispatcher,
+        FormFactory $formFactory,
         SubmitHandler $submitHandler,
         array $languages
     ) {
@@ -64,17 +77,31 @@ class ContentTypeController extends Controller
         $this->translator = $translator;
         $this->contentTypeService = $contentTypeService;
         $this->contentTypeActionDispatcher = $contentTypeActionDispatcher;
+        $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
         $this->languages = $languages;
     }
 
     public function listAction(ContentTypeGroup $group): Response
     {
+        $deletableTypes = [];
+
         $types = $this->contentTypeService->loadContentTypes($group, $this->languages);
+
+        $deleteContentTypesForm = $this->formFactory->deleteContentTypes(
+            new ContentTypesDeleteData($this->getContentTypesNumbers($types))
+        );
+
+        foreach ($types as $type) {
+            $deletableTypes[$type->id] = !$this->contentTypeService->isContentTypeUsed($type);
+        }
 
         return $this->render('@EzPlatformAdminUi/admin/content_type/list.html.twig', [
             'content_type_group' => $group,
             'content_types' => $types,
+            'deletable' => $deletableTypes,
+            'form_content_types_delete' => $deleteContentTypesForm->createView(),
+            'group' => $group,
         ]);
     }
 
@@ -194,6 +221,54 @@ class ContentTypeController extends Controller
         ]);
     }
 
+    /**
+     * Handles removing content types based on submitted form.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws BadStateException
+     * @throws TranslationInvalidArgumentException
+     * @throws InvalidOptionsException
+     * @throws UnauthorizedException
+     * @throws InvalidArgumentException
+     * @throws NotFoundException
+     * @throws \InvalidArgumentException
+     */
+    public function bulkDeleteAction(Request $request, ContentTypeGroup $group): Response
+    {
+        $form = $this->formFactory->deleteContentTypes(
+            new ContentTypesDeleteData()
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $result = $this->submitHandler->handle($form, function (ContentTypesDeleteData $data) {
+                foreach ($data->getContentTypes() as $contentTypeId => $selected) {
+                    $contentType = $this->contentTypeService->loadContentType($contentTypeId);
+
+                    $this->contentTypeService->deleteContentType($contentType);
+
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Content type '%name%' deleted.") */
+                            'content_type.delete.success',
+                            ['%name%' => $contentType->getName()],
+                            'content_type'
+                        )
+                    );
+                }
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirect($this->generateUrl('ezplatform.content_type_group.view', ['contentTypeGroupId' => $group->id]));
+    }
+
     public function viewAction(ContentTypeGroup $group, ContentType $contentType): Response
     {
         $fieldDefinitionsByGroup = [];
@@ -244,5 +319,17 @@ class ContentTypeController extends Controller
         ]);
 
         return $formBuilder->getForm();
+    }
+
+    /**
+     * @param ContentType[] $contentTypes
+     *
+     * @return array
+     */
+    private function getContentTypesNumbers(array $contentTypes): array
+    {
+        $contentTypesNumbers = array_column($contentTypes, 'id');
+
+        return array_combine($contentTypesNumbers, array_fill_keys($contentTypesNumbers, false));
     }
 }
