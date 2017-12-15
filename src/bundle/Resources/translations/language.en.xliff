@@ -111,10 +111,15 @@
         <target state="new">Language '%name%' updated.</target>
         <note>key: language.update.success</note>
       </trans-unit>
-      <trans-unit id="1fd8d969dd2111149c482ad69e7af580cb718195" resname="language.view">
+      <trans-unit id="451b73fc2ed5bb8b05754b0d293ea07293461ec9" resname="language.view.identifier">
         <source>%language%</source>
         <target state="new">%language%</target>
-        <note>key: language.view</note>
+        <note>key: language.view.identifier</note>
+      </trans-unit>
+      <trans-unit id="0a1cfca26e45dbcd8636d95297586e83f4d9f0f7" resname="language.view.page_title">
+        <source>Language: %language%</source>
+        <target state="new">Language: %language%</target>
+        <note>key: language.view.page_title</note>
       </trans-unit>
       <trans-unit id="8df2798a2851c0d43893e3862f8a2e6e4290b141" resname="language.view.title">
         <source>"%language%" Language</source>

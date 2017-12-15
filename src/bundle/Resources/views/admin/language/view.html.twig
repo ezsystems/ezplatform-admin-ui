@@ -8,7 +8,7 @@
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.language.list'), value: 'language.list'|trans|desc('Languages') },
-        { value: 'language.view'|trans({ '%language%': language.name })|desc('%language%') }
+        { value: 'language.view.identifier'|trans({ '%language%': language.name })|desc('%language%') }
     ]} %}
 {% endblock %}
 
@@ -16,7 +16,7 @@
 
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'language.view.title'|trans({ '%language%': language.name })|desc('"%language%" Language'),
+        title: 'language.view.page_title'|trans({ '%language%': language.name })|desc('Language: %language%'),
         iconName: 'languages'
     } %}
 {% endblock %}
