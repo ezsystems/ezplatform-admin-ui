@@ -3,15 +3,32 @@
 <section class="container mt-4 px-5">
     <div class="ez-table-header">
         <div class="ez-table-header__headline">{{ 'content_type.view.list.title'|trans({ '%identifier%': content_type_group.identifier })|desc('Content Types in %identifier%') }}</div>
-
-        <a href="{{ path('ezplatform.content_type.add', {contentTypeGroupId: content_type_group.id}) }}" class="btn btn-primary">
-            {{ 'content_type.view.list.action.add'|trans|desc('Create a Content Type') }}
-        </a>
+        <div>
+            <a href="{{ path('ezplatform.content_type.add', {contentTypeGroupId: content_type_group.id}) }}"
+               title="{{ 'content_type.view.list.action.add'|trans|desc('Create a Content Type') }}"
+               class="btn btn-primary">
+                <svg class="ez-icon ez-icon-create">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                </svg>
+            </a>
+            <button id="delete-content-types" class="btn btn-danger btn--trigger" disabled data-click="#content_types_delete_delete">
+                <svg class="ez-icon ez-icon-trash">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                </svg>
+            </button>
+        </div>
     </div>
 
+    {{ form_start(form_content_types_delete, {
+        'action': path('ezplatform.content_type.bulk_delete', {"contentTypeGroupId": group.id} ),
+        'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-content-types' }
+    }) }}
     <table class="table">
         <thead>
             <tr>
+                <th></th>
                 <th>{{ 'content_type.view.list.column.name'|trans|desc('Name') }}</th>
                 <th>{{ 'content_type.view.list.column.identifier'|trans|desc('Identifier') }}</th>
                 <th>{{ 'content_type.view.list.column.id'|trans|desc('ID') }}</th>
@@ -22,6 +39,9 @@
         <tbody>
         {% for content_type in content_types %}
             <tr>
+                <td class="ez-checkbox-cell">
+                    {{ form_widget(form_content_types_delete.content_types[content_type.id], {"disabled": not deletable[content_type.id]}) }}
+                </td>
                 <td>
                 {% set view_url = path('ezplatform.content_type.view', {
                         'contentTypeGroupId': content_type_group.id,
@@ -34,32 +54,30 @@
                 <td>{{ content_type.id }}</td>
                 <td>{{ content_type.modificationDate | date }}</td>
                 <td class="text-right">
-                    {% set delete_url = path('ezplatform.content_type.delete', {
-                        'contentTypeGroupId': content_type_group.id,
-                        'contentTypeId': content_type.id
-                    }) %}
-
                     {% set edit_url = path('ezplatform.content_type.edit', {
                         'contentTypeGroupId': content_type_group.id,
                         'contentTypeId': content_type.id
                     }) %}
 
-                    <form action="{{ delete_url }}" method="POST">
-                        <input name="_method" type="hidden" value="DELETE" />
-                        <input name="form[_token]" type="hidden" value="{{ csrf_token('form') }}" />
-
-                        <a href="{{ edit_url }}" class="btn btn-info">
-                            {{ 'content_type.view.list.action.edit'|trans|desc('Edit') }}
-                        </a>
-
-                        <button class="btn btn-danger">
-                            {{ 'content_type.view.list.action.delete'|trans|desc('Delete') }}
-                        </button>
-                    </form>
+                    <a title="{{ 'content_type.view.list.action.edit'|trans|desc('Edit') }}"
+                       href="{{ edit_url }}"
+                       class="btn btn-icon mx-3">
+                        <svg class="ez-icon ez-icon-edit">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                        </svg>
+                    </a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {{ form_end(form_content_types_delete) }}
 </section>
 
+{% block javascripts %}
+    {% javascripts
+    '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

@@ -345,6 +345,14 @@ ezplatform.content_type.delete:
     requirements:
         contentTypeGroupId: \d+
 
+ezplatform.content_type.bulk_delete:
+    path: /content_type/{contentTypeGroupId}/bulk-delete
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentType:bulkDelete'
+    requirements:
+        contentTypeGroupId: \d+
+
 ezplatform.content_type.view:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}
     methods: ['GET']
