@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentDraftCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
@@ -51,7 +51,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentDraftCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentEditType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentMainLocationUpdateType;
@@ -117,26 +117,26 @@ class FormFactory
     }
 
     /**
-     * @param ContentDraftCreateData|null $data
+     * @param ContentEditData|null $data
      * @param string|null $name
      *
      * @return FormInterface
      *
      * @throws InvalidOptionsException
      */
-    public function createContentDraft(
-        ?ContentDraftCreateData $data = null,
+    public function contentEdit(
+        ?ContentEditData $data = null,
         ?string $name = null
     ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentDraftCreateType::class);
-        $data = $data ?? new ContentDraftCreateData();
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentEditType::class);
+        $data = $data ?? new ContentEditData();
         $options = null !== $data->getVersionInfo()
             ? ['language_codes' => $data->getVersionInfo()->languageCodes]
             : [];
 
         return $this->formFactory->createNamed(
             $name,
-            ContentDraftCreateType::class,
+            ContentEditType::class,
             $data,
             $options
         );

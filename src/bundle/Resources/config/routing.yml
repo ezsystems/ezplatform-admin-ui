@@ -447,11 +447,11 @@ ezplatform.content.update_main_location:
 # Content Edit
 #
 
-ezplatform.content_draft.create:
-    path: /content/draft/create # @todo change to /content/draft/create once route is removed from repository-forms
+ezplatform.content.edit:
+    path: /content/edit
     methods: ['POST']
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:Content:createDraft'
+        _controller: 'EzPlatformAdminUiBundle:Content:edit'
 
 ezplatform.content.create:
     path: /content/create

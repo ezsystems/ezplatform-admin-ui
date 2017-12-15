@@ -15,7 +15,7 @@ use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 /**
  * @todo Add validation. $language have to be validated that $versionInfo indeed has this language
  */
-class ContentDraftCreateData
+class ContentEditData
 {
     /** @var ContentInfo|null */
     protected $contentInfo;

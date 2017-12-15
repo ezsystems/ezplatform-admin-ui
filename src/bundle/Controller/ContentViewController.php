@@ -11,7 +11,7 @@ use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentDraftCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
@@ -101,8 +101,8 @@ class ContentViewController extends Controller
             new LocationTrashData($location)
         );
 
-        $contentDraftCreateType = $this->formFactory->createContentDraft(
-            new ContentDraftCreateData($content->contentInfo, $versionInfo)
+        $contentEditType = $this->formFactory->contentEdit(
+            new ContentEditData($content->contentInfo, $versionInfo)
         );
 
         $contentCreateType = $this->formFactory->createContent(
@@ -113,7 +113,7 @@ class ContentViewController extends Controller
             'form_location_copy' => $locationCopyType->createView(),
             'form_location_move' => $locationMoveType->createView(),
             'form_location_trash' => $locationTrashType->createView(),
-            'form_content_draft_create' => $contentDraftCreateType->createView(),
+            'form_content_edit' => $contentEditType->createView(),
             'form_content_create' => $contentCreateType->createView(),
         ]);
     }

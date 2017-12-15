@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft;
 
 use eZ\Publish\API\Repository\LanguageService;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentDraftCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\VersionInfoType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType;
@@ -19,7 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ContentDraftCreateType extends AbstractType
+class ContentEditType extends AbstractType
 {
     /** @var LanguageService */
     protected $languageService;
@@ -65,7 +65,7 @@ class ContentDraftCreateType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'data_class' => ContentDraftCreateData::class,
+                'data_class' => ContentEditData::class,
                 'translation_domain' => 'forms',
                 'language_codes' => false,
             ])
