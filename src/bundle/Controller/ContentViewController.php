@@ -106,6 +106,11 @@ class ContentViewController extends Controller
             new ContentEditData($content->contentInfo, $versionInfo)
         );
 
+        $subitemsContentEdit = $this->formFactory->contentEdit(
+            null,
+            'form_subitems_content_edit'
+        );
+
         $contentCreateType = $this->formFactory->createContent(
             $this->getContentCreateData($location)
         );
@@ -116,6 +121,7 @@ class ContentViewController extends Controller
             'form_location_trash' => $locationTrashType->createView(),
             'form_content_edit' => $contentEditType->createView(),
             'form_content_create' => $contentCreateType->createView(),
+            'form_subitems_content_edit' => $subitemsContentEdit->createView(),
         ]);
     }
 

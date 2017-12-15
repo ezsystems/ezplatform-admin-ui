@@ -45,6 +45,8 @@
                     {{ ez_platform_tabs('location-view', {'content': content, 'location': location,  'contentType': contentType }, 'EzPlatformAdminUiBundle:parts/tab:locationview.html.twig') }}
 
                     {% if contentType.isContainer %}
+                    {{ form_start(form_subitems_content_edit, { 'action': path('ezplatform.content.edit'), 'attr': { 'hidden': 'hidden' }}) }}
+                    {{ form_end(form_subitems_content_edit) }}
                     <div class="container px-5">
                         <section class="ez-fieldgroup">
                             <h2 class="ez-fieldgroup-name">Sub-items</h2>

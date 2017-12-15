@@ -7,7 +7,7 @@
     const sortField = sortContainer.getAttribute('data-sort-field');
     const sortOrder = sortContainer.getAttribute('data-sort-order');
     const mfuAttrs = {
-        adminUiConfig: Object.assign({}, window.eZ.adminUiConfig, {
+        adminUiConfig: Object.assign({}, global.eZ.adminUiConfig, {
             token,
             siteaccess
         }),
@@ -17,6 +17,14 @@
             locationPath: mfuContainer.dataset.parentLocationPath,
             language: mfuContainer.dataset.parentContentLanguage
         },
+    };
+    const handleEditItem = (content) => {
+        doc.querySelector('#form_subitems_content_edit_content_info').value = content._id;
+        doc.querySelector('#form_subitems_content_edit_version_info_content_info').value = content._id;
+        doc.querySelector('#form_subitems_content_edit_version_info_version_no').value = content.CurrentVersion.Version.VersionInfo.versionNo;
+        doc.querySelector(`#form_subitems_content_edit_language_${content.mainLanguageCode}`).checked = true;
+
+        doc.querySelector('#form_subitems_content_edit_create').click();
     };
 
     listContainers.forEach(container => {
@@ -33,6 +41,7 @@
         }, {});
 
         global.ReactDOM.render(global.React.createElement(global.eZ.modules.SubItems, {
+            handleEditItem,
             parentLocationId: container.dataset.location,
             sortClauses: {[sortField]: sortOrder},
             restInfo: {token, siteaccess},
