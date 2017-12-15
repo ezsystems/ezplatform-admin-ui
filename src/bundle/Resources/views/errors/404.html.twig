@@ -1,7 +1,7 @@
 {% extends '@EzPlatformAdminUi/layout.html.twig' %}
 
 {% block navigation %}
-    {% if admin_ui_config.user.user is defined %}
+    {% if admin_ui_config.user.user is not empty %}
         {{ parent() }}
     {% endif %}
 {% endblock %}
