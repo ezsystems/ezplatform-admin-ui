@@ -12,7 +12,6 @@ use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
-use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -30,12 +29,12 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     private $tokenStorage;
 
     /**
-     * @param FactoryInterface $factory
+     * @param MenuItemFactory $factory
      * @param EventDispatcherInterface $eventDispatcher
      * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(
-        FactoryInterface $factory,
+        MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
         TokenStorageInterface $tokenStorage
     ) {
