@@ -139,16 +139,16 @@ class ContentController extends Controller
                 if (!$versionInfo->isDraft()) {
                     $contentDraft = $this->contentService->createContentDraft($contentInfo, $versionInfo);
                     $versionNo = $contentDraft->getVersionInfo()->versionNo;
-                }
 
-                $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("New Version Draft for '%name%' created.") */
-                        'content.create_draft.success',
-                        ['%name%' => $contentInfo->name],
-                        'content'
-                    )
-                );
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("New Version Draft for '%name%' created.") */
+                            'content.create_draft.success',
+                            ['%name%' => $contentInfo->name],
+                            'content'
+                        )
+                    );
+                }
 
                 return $this->redirectToRoute('ez_content_draft_edit', [
                     'contentId' => $contentInfo->id,
