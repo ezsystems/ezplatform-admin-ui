@@ -30,4 +30,30 @@
     &__body {
         padding: .75rem 1.25rem;
     }
+
+    &__field-control {
+        background-color: $ez-white;
+        border-radius: .5rem;
+        padding: .3rem;
+
+        .form-control {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.ez-card--fieldtype-container {
+    background: $ez-white;
+
+    .ez-card__header {
+        line-height: 40px;
+        padding: 0 20px;
+
+        label {
+            margin-bottom: 0;
+            font-weight: 700;
+            color: $ez-black;
+            font-size: 17px;
+        }
+    }
 }

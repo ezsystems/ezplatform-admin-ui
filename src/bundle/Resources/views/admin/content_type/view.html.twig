@@ -16,7 +16,7 @@
 {% block pageTitle %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
         title: 'content_type.view.view.title'|trans({ '%name%': content_type.name })|desc('%name%'),
-        iconName: content_type.identifier
+        iconName: 'content-type'
     } %}
 {% endblock %}
 
@@ -83,13 +83,13 @@
     </section>
 
 <section class="container mt-4 px-5">
-    <header class="ez-table-header">
+    <header class="ez-table-header mb-5">
         <div class="ez-table-header__headline">Content field definitions</div>
     </header>
 
     {% for group, field_definitions in field_definitions_by_group %}
-        <header class="ez-table-header">
-            <div class="ez-table-header__headline">{{ group }}</div>
+        <header class="ez-table-header ez-table-header">
+            <div class="ez-table-header__headline">{{ group|capitalize }}</div>
         </header>
 
         <table class="table">
