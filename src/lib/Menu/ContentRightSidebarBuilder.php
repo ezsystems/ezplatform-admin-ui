@@ -14,7 +14,6 @@ use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
-use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -37,11 +36,11 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
     /**
      * @param PermissionResolver $permissionResolver
-     * @param FactoryInterface $factory
+     * @param MenuItemFactory $factory
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
-        FactoryInterface $factory,
+        MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
         PermissionResolver $permissionResolver
     ) {

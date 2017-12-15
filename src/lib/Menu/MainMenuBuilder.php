@@ -10,10 +10,8 @@ namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
-use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -42,12 +40,12 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     private $configResolver;
 
     /**
-     * @param FactoryInterface $factory
+     * @param MenuItemFactory $factory
      * @param EventDispatcherInterface $eventDispatcher
      * @param ConfigResolverInterface $configResolver
      */
     public function __construct(
-        FactoryInterface $factory,
+        MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
         ConfigResolverInterface $configResolver
     ) {
@@ -66,45 +64,71 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
      *
      * @return ItemInterface
      *
-     * @throws InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function createStructure(array $options): ItemInterface
     {
+        /** @var ItemInterface|ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
         $menu->setChildren([
-            self::ITEM_CONTENT => $this->createMenuItem(
+            self::ITEM_CONTENT => $this->factory->createItem(
                 self::ITEM_CONTENT,
                 []
             ),
-            self::ITEM_ADMIN => $this->createMenuItem(
+            self::ITEM_ADMIN => $this->factory->createItem(
                 self::ITEM_ADMIN,
                 []
             ),
         ]);
 
-        $menu[self::ITEM_CONTENT]->setChildren([
-            self::ITEM_CONTENT__CONTENT_STRUCTURE => $this->createMenuItem(
-                self::ITEM_CONTENT__CONTENT_STRUCTURE,
-                [
-                    'route' => '_ezpublishLocation',
-                    'routeParameters' => [
-                        'locationId' => $this->configResolver->getParameter('location_ids.content'),
-                    ],
-                ]
-            ),
-            self::ITEM_CONTENT__MEDIA => $this->createMenuItem(
-                self::ITEM_CONTENT__MEDIA,
-                [
-                    'route' => '_ezpublishLocation',
-                    'routeParameters' => [
-                        'locationId' => $this->configResolver->getParameter('location_ids.media'),
-                    ],
-                ]
-            ),
-        ]);
+        $menu[self::ITEM_CONTENT]->setChildren($this->getContentMenuItems());
+        $menu[self::ITEM_ADMIN]->setChildren($this->getAdminMenuItems());
 
-        $menu[self::ITEM_ADMIN]->setChildren([
+        return $menu;
+    }
+
+    /**
+     * @return array
+     */
+    private function getContentMenuItems(): array
+    {
+        $menuItems = [];
+
+        $rootContentId = $this->configResolver->getParameter('content.tree_root.location_id');
+        $rootMediaId = $this->configResolver->getParameter('location_ids.media');
+
+        $contentStructureItem = $this->factory->createLocationMenuItem(
+            self::ITEM_CONTENT__CONTENT_STRUCTURE,
+            $rootContentId,
+            ['label' => self::ITEM_CONTENT__CONTENT_STRUCTURE]
+        );
+        $mediaItem = $this->factory->createLocationMenuItem(
+            self::ITEM_CONTENT__MEDIA,
+            $rootMediaId,
+            ['label' => self::ITEM_CONTENT__MEDIA]
+        );
+
+        if (null !== $contentStructureItem) {
+            $menuItems[$contentStructureItem->getName()] = $contentStructureItem;
+        }
+
+        if (null !== $mediaItem) {
+            $menuItems[$mediaItem->getName()] = $mediaItem;
+        }
+
+        return $menuItems;
+    }
+
+    /**
+     * @return array
+     */
+    private function getAdminMenuItems(): array
+    {
+        $menuItems = [
             self::ITEM_ADMIN__SYSTEMINFO => $this->createMenuItem(
                 self::ITEM_ADMIN__SYSTEMINFO,
                 ['route' => 'ezplatform.systeminfo']
@@ -143,30 +167,32 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                 ]]
             ),
             self::ITEM_ADMIN__CONTENT_TYPES => $this->createMenuItem(
-                    self::ITEM_ADMIN__CONTENT_TYPES,
-                    ['route' => 'ezplatform.content_type_group.list', 'extras' => [
-                        'routes' => [
-                            'update' => 'ezplatform.content_type_group.update',
-                            'view' => 'ezplatform.content_type_group.view',
-                            'create' => 'ezplatform.content_type_group.create',
-                            'content_type_add' => 'ezplatform.content_type.add',
-                            'content_type_view' => 'ezplatform.content_type.view',
-                            'content_type_edit' => 'ezplatform.content_type.edit',
-                        ],
-                    ]]
-                ),
-            self::ITEM_ADMIN__USERS => $this->createMenuItem(
-                self::ITEM_ADMIN__USERS,
-                [
-                    'route' => '_ezpublishLocation',
-                    'routeParameters' => [
-                        'locationId' => $this->configResolver->getParameter('location_ids.users'),
+                self::ITEM_ADMIN__CONTENT_TYPES,
+                ['route' => 'ezplatform.content_type_group.list', 'extras' => [
+                    'routes' => [
+                        'update' => 'ezplatform.content_type_group.update',
+                        'view' => 'ezplatform.content_type_group.view',
+                        'create' => 'ezplatform.content_type_group.create',
+                        'content_type_add' => 'ezplatform.content_type.add',
+                        'content_type_view' => 'ezplatform.content_type.view',
+                        'content_type_edit' => 'ezplatform.content_type.edit',
                     ],
-                ]
+                ]]
             ),
-        ]);
+        ];
 
-        return $menu;
+        $rootUsersId = $this->configResolver->getParameter('location_ids.users');
+        $usersItem = $this->factory->createLocationMenuItem(
+            self::ITEM_ADMIN__USERS,
+            $rootUsersId,
+            ['label' => self::ITEM_ADMIN__USERS]
+        );
+
+        if (null !== $usersItem) {
+            $menuItems[$usersItem->getName()] = $usersItem;
+        }
+
+        return $menuItems;
     }
 
     /**

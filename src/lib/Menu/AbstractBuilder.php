@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -19,17 +18,17 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 abstract class AbstractBuilder
 {
-    /** @var FactoryInterface */
+    /** @var MenuItemFactory */
     protected $factory;
 
     /** @var EventDispatcherInterface */
     protected $eventDispatcher;
 
     /**
-     * @param FactoryInterface $factory
+     * @param MenuItemFactory $factory
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
+    public function __construct(MenuItemFactory $factory, EventDispatcherInterface $eventDispatcher)
     {
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
@@ -41,13 +40,9 @@ abstract class AbstractBuilder
      *
      * @return ItemInterface
      */
-    protected function createMenuItem(string $id, array $options): ItemInterface
+    protected function createMenuItem(string $id, array $options): ?ItemInterface
     {
-        $defaults = [
-            'extras' => ['translation_domain' => 'menu'],
-        ];
-
-        return $this->factory->createItem($id, array_merge_recursive($defaults, $options));
+        return $this->factory->createItem($id, $options);
     }
 
     /**

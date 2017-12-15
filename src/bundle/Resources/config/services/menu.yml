@@ -5,6 +5,12 @@ services:
         public: true
 
     #
+    # Menu Item Factory
+    #
+
+    EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory: ~
+
+    #
     # Menu Builders
     #
 

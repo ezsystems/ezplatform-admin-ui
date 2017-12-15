@@ -14,7 +14,6 @@ use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
-use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -35,13 +34,13 @@ class TrashRightSidebarBuilder extends AbstractBuilder implements TranslationCon
     private $trashService;
 
     /**
-     * @param FactoryInterface $factory
+     * @param MenuItemFactory $factory
      * @param EventDispatcherInterface $eventDispatcher
      * @param PermissionResolver $permissionResolver
      * @param TrashService $trashService
      */
     public function __construct(
-        FactoryInterface $factory,
+        MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
         PermissionResolver $permissionResolver,
         TrashService $trashService
