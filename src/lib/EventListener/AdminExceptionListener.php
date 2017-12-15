@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\EventListener;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\SiteAccess\AdminFilter;
+use EzSystems\EzPlatformAdminUiBundle\EzPlatformAdminUiBundle;
 use SplFileInfo;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;
@@ -112,7 +112,7 @@ class AdminExceptionListener
         /** @var SiteAccess $siteAccess */
         $siteAccess = $request->get('siteaccess', new SiteAccess());
 
-        return in_array($siteAccess->name, $this->siteAccessGroups[AdminFilter::ADMIN_GROUP_NAME]);
+        return in_array($siteAccess->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME]);
     }
 
     /**
