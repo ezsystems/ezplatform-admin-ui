@@ -124,7 +124,12 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         $menuItems[self::ITEM_CONTENT__LINK_MANAGER] = $this->factory->createItem(
             self::ITEM_CONTENT__LINK_MANAGER,
             [
-                'route' => 'ezplatform.link_manager.list',
+                'route' => 'ezplatform.link_manager.list', 'extras' => [
+                    'routes' => [
+                        'edit' => 'ezplatform.link_manager.edit',
+                        'view' => 'ezplatform.link_manager.view',
+                    ],
+                ],
             ]
         );
 
