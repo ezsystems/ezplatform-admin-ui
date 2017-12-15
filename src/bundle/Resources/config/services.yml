@@ -9,6 +9,7 @@ imports:
     - { resource: services/ui_config.yml }
     - { resource: services/components.yml }
     - { resource: services/dashboard.yml }
+    - { resource: services/modules/subitems.yml }
 
 parameters:
 

@@ -8,25 +8,25 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\REST\Common\Value as RestValue;
+use eZ\Publish\Core\REST\Server\Values\RestContent;
+use eZ\Publish\Core\REST\Server\Values\RestLocation;
 
 class SubitemsRow extends RestValue
 {
-    /** @var Location */
-    public $location;
+    /** @var RestLocation */
+    public $restLocation;
 
-    /** @var Content */
-    public $content;
+    /** @var RestContent */
+    public $restContent;
 
     /**
-     * @param Location $location
-     * @param Content $content
+     * @param RestLocation $restLocation
+     * @param RestContent $restContent
      */
-    public function __construct(Location $location, Content $content)
+    public function __construct(RestLocation $restLocation, RestContent $restContent)
     {
-        $this->location = $location;
-        $this->content = $content;
+        $this->restLocation = $restLocation;
+        $this->restContent = $restContent;
     }
 }

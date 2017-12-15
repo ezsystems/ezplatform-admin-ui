@@ -12,6 +12,7 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ComponentPass
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ValueObjectVisitorPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\LocationIds;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\SubitemsModule;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -43,5 +44,6 @@ class EzPlatformAdminUiBundle extends Bundle
         $container->addCompilerPass(new UiConfigProviderPass());
         $container->addCompilerPass(new SystemInfoTabGroupPass());
         $container->addCompilerPass(new ComponentPass());
+        $container->addCompilerPass(new ValueObjectVisitorPass());
     }
 }
