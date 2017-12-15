@@ -12,7 +12,7 @@ use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentDraftCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -124,18 +124,22 @@ class ContentController extends Controller
      * @throws UnauthorizedException
      * @throws InvalidOptionsException
      */
-    public function createDraftAction(Request $request): Response
+    public function editAction(Request $request): Response
     {
-        $form = $this->formFactory->createContentDraft();
+        $form = $this->formFactory->contentEdit();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $result = $this->submitHandler->handle($form, function (ContentDraftCreateData $data) {
+            $result = $this->submitHandler->handle($form, function (ContentEditData $data) {
                 $contentInfo = $data->getContentInfo();
                 $versionInfo = $data->getVersionInfo();
                 $language = $data->getLanguage();
+                $versionNo = $versionInfo->versionNo;
 
-                $contentDraft = $this->contentService->createContentDraft($contentInfo, $versionInfo);
+                if (!$versionInfo->isDraft()) {
+                    $contentDraft = $this->contentService->createContentDraft($contentInfo, $versionInfo);
+                    $versionNo = $contentDraft->getVersionInfo()->versionNo;
+                }
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
@@ -148,7 +152,7 @@ class ContentController extends Controller
 
                 return $this->redirectToRoute('ez_content_draft_edit', [
                     'contentId' => $contentInfo->id,
-                    'versionNo' => $contentDraft->getVersionInfo()->versionNo,
+                    'versionNo' => $versionNo,
                     'language' => $language->languageCode,
                 ]);
             });
@@ -158,7 +162,7 @@ class ContentController extends Controller
             }
         }
 
-        /** @var ContentDraftCreateData $data */
+        /** @var ContentEditData $data */
         $data = $form->getData();
         $contentInfo = $data->getContentInfo();
 
@@ -216,7 +220,7 @@ class ContentController extends Controller
             }
         }
 
-        /** @var ContentDraftCreateData $data */
+        /** @var ContentEditData $data */
         $data = $form->getData();
         $contentInfo = $data->getContentInfo();
 

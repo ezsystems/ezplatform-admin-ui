@@ -3,7 +3,7 @@
 <div class="ez-extra-actions ez-extra-actions--edit ez-extra-actions--hidden bg-secondary" data-actions="edit">
     <div class="ez-extra-actions__header">{{ 'content.edit.select_language'|trans|desc('Select language') }}</div>
     <div class="ez-extra-actions__content">
-        {{ form_start(form, { 'action': path('ezplatform.content_draft.create') }) }}
+        {{ form_start(form, { 'action': path('ezplatform.content.edit') }) }}
         {{ form_widget(form.content_info, { 'attr': {
             'hidden': 'hidden',
             'class': 'ez-extra-actions__form-field'
