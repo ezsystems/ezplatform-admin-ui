@@ -66,11 +66,6 @@
         <target state="new">Edit</target>
         <note>key: section.edit</note>
       </trans-unit>
-      <trans-unit id="201c1849abe46fd6ea7013ec4bb1bc2630e46e0a" resname="section.form.delete">
-        <source>Delete</source>
-        <target state="new">Delete</target>
-        <note>key: section.form.delete</note>
-      </trans-unit>
       <trans-unit id="bcb0a8eedc29344eb4ad95a02dd684438aae1df6" resname="section.id">
         <source>ID</source>
         <target state="new">ID</target>
