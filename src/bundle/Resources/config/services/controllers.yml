@@ -39,3 +39,12 @@ services:
         public: true
         arguments:
             $defaultPaginationLimit: '$trash_pagination_limit$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\ContentViewController:
+        arguments:
+            $outputVisitor: '@ezpublish_rest.output.visitor.json'
+            $outputGenerator: '@ezpublish_rest.output.generator.json'
+            $restContentValueObjectVisitor: '@ezpublish_rest.output.value_object_visitor.RestContent'
+            $restLocationValueObjectVisitor: '@ezpublish_rest.output.value_object_visitor.RestLocation'
+            $restContentTypeValueObjectVisitor: '@ezpublish_rest.output.value_object_visitor.RestContentType'
+            $subitemsLimit: '$subitems_module.limit$'
