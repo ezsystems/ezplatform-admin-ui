@@ -26,6 +26,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     const ITEM_CONTENT = 'main__content';
     const ITEM_CONTENT__CONTENT_STRUCTURE = 'main__content__content_structure';
     const ITEM_CONTENT__MEDIA = 'main__content__media';
+    const ITEM_CONTENT__LINK_MANAGER = 'main__content__linkmanager';
 
     /* Main Menu / Admin */
     const ITEM_ADMIN = 'main_admin';
@@ -119,6 +120,13 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         if (null !== $mediaItem) {
             $menuItems[$mediaItem->getName()] = $mediaItem;
         }
+
+        $menuItems[self::ITEM_CONTENT__LINK_MANAGER] = $this->factory->createItem(
+            self::ITEM_CONTENT__LINK_MANAGER,
+            [
+                'route' => 'ezplatform.link_manager.list',
+            ]
+        );
 
         return $menuItems;
     }

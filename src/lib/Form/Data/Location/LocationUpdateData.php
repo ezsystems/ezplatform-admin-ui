@@ -55,7 +55,7 @@ class LocationUpdateData
      *
      * @return LocationUpdateData
      */
-    public function setSortField(int $sortField): LocationUpdateData
+    public function setSortField(int $sortField): self
     {
         $this->sortField = $sortField;
 
@@ -75,7 +75,7 @@ class LocationUpdateData
      *
      * @return LocationUpdateData
      */
-    public function setSortOrder(int $sortOrder): LocationUpdateData
+    public function setSortOrder(int $sortOrder): self
     {
         $this->sortOrder = $sortOrder;
 

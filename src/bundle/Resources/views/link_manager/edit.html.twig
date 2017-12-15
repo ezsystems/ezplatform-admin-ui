@@ -1,0 +1,45 @@
+{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+
+{% trans_default_domain "linkmanager" %}
+
+{%- block content -%}
+    <div class="row align-items-stretch ez-main-row">
+        <div class="col-sm-11 px-0 pb-4">
+            <div class="ez-header pt-4">
+                <div class="container">
+                    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+                        { value: 'url.list'|trans, url: path('ezplatform.link_manager.list') },
+                        { value: 'url.edit'|trans }
+                    ]} %}
+
+                    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+                        title: 'url.editing'|trans({'%url%': url.url|truncate(50) }),
+                        iconName: 'link'
+                    } %}
+                </div>
+            </div>
+
+            <div class="container px-0 pb-4 mt-5">
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+
+                <section class="container mt-4">
+                    <div class="card ez-card">
+                        <div class="card-body">
+                            {{ form_row(form.url) }}
+                        </div>
+                    </div>
+                </section>
+                <button id="url-update" type="submit" hidden></button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
+            {% set url_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.url_edit.sidebar_right', [], {'url': url}) %}
+
+            {{ knp_menu_render(url_create_sidebar_right, {
+                'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'
+            }) }}
+        </div>
+    </div>
+{%- endblock -%}

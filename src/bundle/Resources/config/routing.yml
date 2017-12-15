@@ -482,3 +482,26 @@ ezplatform.search:
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Search:search'
+
+#
+# Link manager
+#
+
+ezplatform.link_manager.list:
+    path: /linkmanagement
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:LinkManager:list'
+
+ezplatform.link_manager.edit:
+    path: /linkmanagement/edit/{urlId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:LinkManager:edit'
+    requirements:
+        urlId: \d+
+
+ezplatform.link_manager.view:
+    path: /linkmanagement/view/{urlId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:LinkManager:view'
+    requirements:
+        urlId: \d+

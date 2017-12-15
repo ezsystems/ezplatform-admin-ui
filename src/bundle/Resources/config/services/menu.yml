@@ -124,4 +124,7 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content_type_edit.sidebar_right }
 
-
+    EzSystems\EzPlatformAdminUi\Menu\URLEditRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.url_edit.sidebar_right }

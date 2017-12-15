@@ -1,0 +1,119 @@
+{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+
+{% trans_default_domain "linkmanager" %}
+
+{%- block breadcrumbs -%}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'url.list'|trans, url: path('ezplatform.link_manager.list') },
+        { value: 'url.detail'|trans|desc('Link detail')}
+    ]} %}
+{%- endblock -%}
+
+{%- block pageTitle -%}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: url.url|truncate(60),
+        iconName: 'link'
+    } %}
+{%- endblock -%}
+
+{% block bodyClass %}ez-link-manager-view{% endblock %}
+
+{%- block content -%}
+    <section class="container mt-5">
+        <table class="table ez-table--list">
+            <thead>
+                <tr>
+                   <th colspan="2">
+                       {{ 'url.tab.information'|trans|desc('Details') }}
+                   </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ 'url.label.address'|trans }}</td>
+                    <td>
+                        <a href="{{ url.url }}" target="_blank">{{ url.url }}</a>
+                        <a href="{{ path('ezplatform.link_manager.edit', { urlId: url.id }) }}" class="btn btn-icon float-right">
+                            <svg class="ez-icon ez-icon-edit">
+                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ 'url.label.status'|trans }}</td>
+                    <td>{{ url.isValid ? 'url.status.valid'|trans : 'url.status.invalid'|trans }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'url.label.last_checked'|trans }}</td>
+                    <td>
+                        {% if url.lastChecked %}
+                            {{ url.lastChecked | date('M d, Y h:i:sA') }}
+                        {% else %}
+                            {{ 'url.label.last_checked.never'|trans|desc('This URL has not been checked') }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ 'url.label.created'|trans }}</td>
+                    <td>{{ url.created | date('M d, Y h:i:sA') }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'url.label.modified'|trans }}</td>
+                    <td>{{ url.modified | date('M d, Y h:i:sA') }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="container mt-5">
+        <div class="ez-table-header">
+            <div class="ez-table-header__headline">
+                {{ 'url.tab.usages'|trans({'%count%': usages.nbResults })|desc('Content item(s) using this URL') }}
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'url.usages.column.name'|trans|desc('Name') }}</th>
+                    <th>{{ 'url.usages.column.status'|trans|desc('Status') }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for content in usages %}
+                    {% set view_url = path('_ez_content_view', { contentId: content.id }) %}
+                    {# TODO: Missing edit URL #}
+                    {% set edit_url = '' %}
+
+                    <tr>
+                        <td>
+                            <a href="{{ view_url }}">
+                                {{ ez_content_name(content) }}
+                            </a>
+                        </td>
+                        <td>{{ content.published ? 'Published' : 'Draft' }}</td>
+                        <td class="text-right">
+                            {% if can_edit %}
+                            <a href="{{ edit_url }}" class="btn btn-icon">
+                                <svg class="ez-icon ez-icon-edit">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                </svg>
+                            </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if usages.haveToPaginate %}
+            <div class="row justify-content-center align-items-center">
+                {{ pagerfanta(usages, 'ez') }}
+            </div>
+        {% endif %}
+    </section>
+{%- endblock -%}
+
+{% block title %}{{ 'url.view'|trans({ '%url%': url.url|truncate(60) }) }}{% endblock %}
+

@@ -90,3 +90,9 @@ services:
             $kernelEnvironment: '%kernel.environment%'
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
+
+    Twig_Extensions_Extension_Text:
+        public: true
+        class: \Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }

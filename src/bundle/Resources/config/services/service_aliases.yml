@@ -15,6 +15,7 @@ services:
     eZ\Publish\API\Repository\SearchService: '@ezpublish.api.service.search'
     eZ\Publish\API\Repository\SectionService: '@ezpublish.api.service.section'
     eZ\Publish\API\Repository\UserService: '@ezpublish.api.service.user'
+    eZ\Publish\API\Repository\URLService: '@ezpublish.api.service.url'
     eZ\Publish\API\Repository\URLAliasService: '@ezpublish.api.service.url_alias'
     eZ\Publish\API\Repository\TrashService: '@ezpublish.api.service.trash'
 

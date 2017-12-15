@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="6a23ab14fca2c76fe7ea84f53221ed5caf907f45" resname="url.detail">
+        <source>Link detail</source>
+        <target state="new">Link detail</target>
+        <note>key: url.detail</note>
+      </trans-unit>
+      <trans-unit id="23bfb0e222eeac1bfa481ba09c5b4aea1d0295da" resname="url.edit">
+        <source>Edit</source>
+        <target>Edit</target>
+        <note>key: url.edit</note>
+      </trans-unit>
+      <trans-unit id="3216bb10c40d59217fdb3802bfa247639d6f1648" resname="url.edit.cancel">
+        <source>Discard changes</source>
+        <target>Discard changes</target>
+        <note>key: url.edit.cancel</note>
+      </trans-unit>
+      <trans-unit id="20b1ccd57b5cd9852f5625ba80299cadc4f1b166" resname="url.edit.save">
+        <source>Save</source>
+        <target>Save</target>
+        <note>key: url.edit.save</note>
+      </trans-unit>
+      <trans-unit id="e890168e1ef7753c250affa3fcdfb21074c35c6f" resname="url.editing">
+        <source>Editing URL: %url%</source>
+        <target>Editing URL: %url%</target>
+        <note>key: url.editing</note>
+      </trans-unit>
+      <trans-unit id="8c27173bd289fbab90a41c921e3a0d742acd9042" resname="url.label.address">
+        <source>Address</source>
+        <target>Address</target>
+        <note>key: url.label.address</note>
+      </trans-unit>
+      <trans-unit id="ed6ebb919604a265c372578f297370881bfe4220" resname="url.label.created">
+        <source>Created</source>
+        <target>Created</target>
+        <note>key: url.label.created</note>
+      </trans-unit>
+      <trans-unit id="9f504bd4b4d9667acd04b788b3b0dbb4d7d9500f" resname="url.label.last_checked">
+        <source>Last checked</source>
+        <target>Last checked</target>
+        <note>key: url.label.last_checked</note>
+      </trans-unit>
+      <trans-unit id="e676ac2f04711e7a31e0f547a57e674f7cad4661" resname="url.label.last_checked.never">
+        <source>This URL has not been checked</source>
+        <target>This URL has not been checked</target>
+        <note>key: url.label.last_checked.never</note>
+      </trans-unit>
+      <trans-unit id="d23c2f190381df7d8a1ac3c3de0df4631c161818" resname="url.label.modified">
+        <source>Modified</source>
+        <target>Modified</target>
+        <note>key: url.label.modified</note>
+      </trans-unit>
+      <trans-unit id="323936a3e831f2a2db95bbf5f9a857b56ddc9c8a" resname="url.label.status">
+        <source>Status</source>
+        <target>Status</target>
+        <note>key: url.label.status</note>
+      </trans-unit>
+      <trans-unit id="d2c96c077eb7c3751d39ec3a861b17e60b210a1a" resname="url.list">
+        <source>Link manager</source>
+        <target>Link manager</target>
+        <note>key: url.list</note>
+      </trans-unit>
+      <trans-unit id="24a0b301998be73b299ac86967952ef729264dec" resname="url.list.title">
+        <source>Links (%count%)</source>
+        <target>Links (%count%)</target>
+        <note>key: url.list.title</note>
+      </trans-unit>
+      <trans-unit id="fd026c688f943eb5d0cb4dadf54c0dac101a9b8b" resname="url.list.no_urls">
+        <source>No URLs</source>
+        <target state="new">No URLs</target>
+        <note>key: url.list.no_urls</note>
+      </trans-unit>
+      <trans-unit id="126d1ac5ef68809c1a2bfdd3872470d7aafaacc3" resname="url.open">
+        <source>Open</source>
+        <target>Open</target>
+        <note>key: url.open</note>
+      </trans-unit>
+      <trans-unit id="226d3de8d2685074e329b9eca1657c96d9c89ead" resname="url.search">
+        <source>Search</source>
+        <target>Search</target>
+        <note>key: url.search</note>
+      </trans-unit>
+      <trans-unit id="960c2d7573696185d28d8e385eabe01dbe9dacf3" resname="url.search.placeholder">
+        <source>Search for URLs</source>
+        <target>Search for URLs</target>
+        <note>key: url.search.placeholder</note>
+      </trans-unit>
+      <trans-unit id="bce60197735a1f604ba70517b0f1b4b0d838d56a" resname="url.status.all">
+        <source>All</source>
+        <target>All</target>
+        <note>key: url.status.all</note>
+      </trans-unit>
+      <trans-unit id="3e0d8fcb74e476fcae45da9c4c7b0b261118c7a3" resname="url.status.invalid">
+        <source>Invalid</source>
+        <target>Invalid</target>
+        <note>key: url.status.invalid</note>
+      </trans-unit>
+      <trans-unit id="8907a4f74219ceff2ee07437ec1657f1ee75a830" resname="url.status.valid">
+        <source>Valid</source>
+        <target>Valid</target>
+        <note>key: url.status.valid</note>
+      </trans-unit>
+      <trans-unit id="ab21b5c3a570d491adc4ab793f2ce4f13f0f2ca7" resname="url.tab.information">
+        <source>Details</source>
+        <target>Details</target>
+        <note>key: url.tab.information</note>
+      </trans-unit>
+      <trans-unit id="af51e21b845c88f95912dd85c6e94559d7038df6" resname="url.tab.usages">
+        <source>Content item(s) using this URL</source>
+        <target>Content item(s) using this URL (%count%)</target>
+        <note>key: url.tab.usages</note>
+      </trans-unit>
+      <trans-unit id="f8004848ab391b70a287fac315ad2d7a546702fa" resname="url.update.error">
+        <source>Unable to update URL</source>
+        <target>Unable to update URL</target>
+        <note>key: url.update.error</note>
+      </trans-unit>
+      <trans-unit id="9ff98d02d294a164470b9491cabfa3526f2f63f6" resname="url.update.success">
+        <source>URL updated</source>
+        <target>URL updated</target>
+        <note>key: url.update.success</note>
+      </trans-unit>
+      <trans-unit id="8fe54f2938f83a529ad5d7aa94d4e2fc9934bac1" resname="url.usages.column.name">
+        <source>Name</source>
+        <target>Name</target>
+        <note>key: url.usages.column.name</note>
+      </trans-unit>
+      <trans-unit id="194bc7ae0ad8f96bbd8ad91fe58cc02ce1e465fc" resname="url.usages.column.status">
+        <source>Status</source>
+        <target>Status</target>
+        <note>key: url.usages.column.status</note>
+      </trans-unit>
+      <trans-unit id="dce98314e5ba27c161d28c789d2b970180ea852c" resname="url.view">
+        <source>Link %url%</source>
+        <target>Link %url%</target>
+        <note>key: url.view</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
