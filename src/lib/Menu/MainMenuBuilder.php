@@ -13,7 +13,6 @@ use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\FactoryInterface;
@@ -87,10 +86,6 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
      *
      * @return ItemInterface
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function createStructure(array $options): ItemInterface
     {
@@ -107,10 +102,10 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             ),
         ]);
 
-        // Is user has access to Content location ?
-        $rootContentId = $this->configResolver->getParameter('content.tree_root.location_id');
 
         try {
+            // Is user has access to Content location ?
+            $rootContentId = $this->configResolver->getParameter('content.tree_root.location_id');
             $this->permissionResolver->canUser(
                 'content',
                 'read',
@@ -127,7 +122,8 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     ],
                 ]
             )->setExtra('translation_domain', 'menu');
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         try {
             // Is User has access to Media Location ?
@@ -148,7 +144,8 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                 ]
 
             )->setExtra('translation_domain', 'menu');
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         $menu[self::ITEM_ADMIN]->setChildren([
             self::ITEM_ADMIN__SYSTEMINFO => $this->createMenuItem(
