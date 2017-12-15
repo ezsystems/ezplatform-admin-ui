@@ -4,7 +4,7 @@
 
 {% form_theme form_section_delete 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
 
-{% block bodyClass %}ez-section-view{% endblock %}
+{% block body_class %}ez-section-view{% endblock %}
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
@@ -14,7 +14,7 @@
     ]} %}
 {% endblock %}
 
-{% block pageTitle %}
+{% block page_title %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
         title: 'section.view.title.identifier'|trans({ '%identifier%': section.name })|desc('Section: %identifier%'),
         iconName: 'sections'

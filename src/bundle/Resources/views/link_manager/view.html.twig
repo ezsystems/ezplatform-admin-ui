@@ -9,14 +9,14 @@
     ]} %}
 {%- endblock -%}
 
-{%- block pageTitle -%}
+{%- block page_title -%}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
         title: url.url|truncate(60),
         iconName: 'link'
     } %}
 {%- endblock -%}
 
-{% block bodyClass %}ez-link-manager-view{% endblock %}
+{% block body_class %}ez-link-manager-view{% endblock %}
 
 {%- block content -%}
     <section class="container mt-5">

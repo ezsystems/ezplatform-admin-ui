@@ -2,7 +2,7 @@
 
 {% trans_default_domain 'systeminfo' %}
 
-{% block bodyClass %}ez-info-view{% endblock %}
+{% block body_class %}ez-info-view{% endblock %}
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
@@ -11,7 +11,7 @@
     ]} %}
 {% endblock %}
 
-{% block pageTitle %}
+{% block page_title %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
         title: 'systeminfo'|trans|desc('System Information'),
         iconName: 'information'

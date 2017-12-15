@@ -46,7 +46,7 @@
         {{ ezplatform_admin_ui_component_group('stylesheet-head') }}
         {{ ezplatform_admin_ui_component_group('script-head') }}
     </head>
-    <body class="{% block bodyClass %}{% endblock %}">
+    <body class="{% block body_class %}{% endblock %}">
         <div id="react-udw"></div>
 
         {% block navigation %}
@@ -55,7 +55,7 @@
         <div class="container-fluid ez-header">
             <div class="container">
                 {% block breadcrumbs %}{% endblock %}
-                {% block pageTitle %}{% endblock %}
+                {% block page_title %}{% endblock %}
             </div>
         </div>
         <div class="container-fluid ez-main-container">
@@ -98,7 +98,7 @@
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
-        {% block reactModules %}{% endblock %}
+        {% block react_modules %}{% endblock %}
         {% block javascripts %}{% endblock %}
         {{ ezplatform_admin_ui_component_group('stylesheet-body') }}
         {{ ezplatform_admin_ui_component_group('script-body') }}

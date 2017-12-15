@@ -1,7 +1,7 @@
 {% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
 {% trans_default_domain 'section' %}
 
-{% block bodyClass %}ez-section-list-view{% endblock %}
+{% block body_class %}ez-section-list-view{% endblock %}
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
@@ -10,7 +10,7 @@
     ]} %}
 {% endblock %}
 
-{% block pageTitle %}
+{% block page_title %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
         title: 'section.list.title'|trans|desc('Sections'),
         iconName: 'sections'

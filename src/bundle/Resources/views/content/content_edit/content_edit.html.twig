@@ -36,7 +36,7 @@
     {{ knp_menu_render(content_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
-{% block closeButton %}
+{% block close_button %}
     {% set locationId = content.versionInfo.contentInfo.mainLocationId
         ? content.versionInfo.contentInfo.mainLocationId
         : (parentLocations|first).id

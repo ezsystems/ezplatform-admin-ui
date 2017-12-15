@@ -7,7 +7,7 @@
 {% form_theme form_content_edit '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
 {% form_theme form_content_create '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' '@EzPlatformAdminUi/form_fields.html.twig' %}
 
-{% block bodyClass %}ez-content-view{% endblock %}
+{% block body_class %}ez-content-view{% endblock %}
 
 {% block content %}
     <div id="ez-mfu"
@@ -73,7 +73,7 @@
     </div>
 {% endblock %}
 
-{% block reactModules %}
+{% block react_modules %}
     {%  javascripts
         'bundles/ezplatformadminuimodules/js/SubItems.module.js'
         'bundles/ezplatformadminuimodules/js/MultiFileUpload.module.js'
