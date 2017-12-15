@@ -255,7 +255,7 @@ class ContentViewController extends Controller
             $contentTypeJson = $this->outputGenerator->endDocument($restContentType);
             $contentTypesJson .= sprintf('\'%s\': %s,', $contentType->remoteId, $contentTypeJson);
         }
-        $contentTypesJson = '{' . $contentTypeJson . '}';
+        $contentTypesJson = '{' . $contentTypesJson . '}';
 
         $view->addParameters([
             'subitems_rows_json' => '[' . implode(', ', $items) . ']',
