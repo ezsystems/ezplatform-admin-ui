@@ -126,7 +126,11 @@ class ContentController extends Controller
      */
     public function editAction(Request $request): Response
     {
-        $form = $this->formFactory->contentEdit();
+        /* @todo it shouldn't rely on keys from request */
+        $requestKeys = $request->request->keys();
+        $formName = reset($requestKeys) ?: null;
+
+        $form = $this->formFactory->contentEdit(null, $formName);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
