@@ -69,3 +69,11 @@
     align-items: center;
     justify-content: center;
 }
+
+.ez-card .form-control .ez-field-selection {
+    margin-bottom: 0;
+}
+
+.isContainer {
+    @include checkbox-switcher();
+}

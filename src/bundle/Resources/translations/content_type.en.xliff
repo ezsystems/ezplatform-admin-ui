@@ -12,8 +12,8 @@
         <note>key: content_type.breadcrumb.create</note>
       </trans-unit>
       <trans-unit id="7dd9e32add81dba08bfbaefaac9442a7e7dbb6ae" resname="content_type.breadcrumb.edit">
-        <source>Editing Content Type "%identifier%"</source>
-        <target state="new">Editing Content Type "%identifier%"</target>
+        <source>%identifier%</source>
+        <target state="new">%identifier%</target>
         <note>key: content_type.breadcrumb.edit</note>
       </trans-unit>
       <trans-unit id="5626938e64bdad8be0c090d0018c868960859d0a" resname="content_type.breadcrumb.view">
@@ -141,14 +141,34 @@
         <target state="new">URL alias name pattern</target>
         <note>key: content_type.url_alias_schema</note>
       </trans-unit>
+      <trans-unit id="56a9f26e930ab0493fc9cb9609318ea699cf8b76" resname="content_type.view.create.content_field_definitions">
+        <source>Content field definitions</source>
+        <target state="new">Content field definitions</target>
+        <note>key: content_type.view.create.content_field_definitions</note>
+      </trans-unit>
+      <trans-unit id="2ce3314c2ca5e24215b0935148a3693ba4fda221" resname="content_type.view.create.global_properties">
+        <source>Global properties</source>
+        <target state="new">Global properties</target>
+        <note>key: content_type.view.create.global_properties</note>
+      </trans-unit>
       <trans-unit id="4f63ade40ae91a9ad39e4be7b9e4f51003f1f4b3" resname="content_type.view.create.title">
         <source>Creating a new Content Type</source>
         <target state="new">Creating a new Content Type</target>
         <note>key: content_type.view.create.title</note>
       </trans-unit>
+      <trans-unit id="94367a951b897bc2964d0c45286b560c59ebb996" resname="content_type.view.edit.content_field_definitions">
+        <source>Content field definitions</source>
+        <target state="new">Content field definitions</target>
+        <note>key: content_type.view.edit.content_field_definitions</note>
+      </trans-unit>
+      <trans-unit id="a32a5e3d2d67da43b4c5f0f5574c90520868b36a" resname="content_type.view.edit.global_properties">
+        <source>Global properties</source>
+        <target state="new">Global properties</target>
+        <note>key: content_type.view.edit.global_properties</note>
+      </trans-unit>
       <trans-unit id="7eee653a60490713df6bcf4b847853020b79a1ee" resname="content_type.view.edit.title">
-        <source>Editing Content Type "%name%"</source>
-        <target state="new">Editing Content Type "%name%"</target>
+        <source>Editing Content Type: %name%</source>
+        <target state="new">Editing Content Type: %name%</target>
         <note>key: content_type.view.edit.title</note>
       </trans-unit>
       <trans-unit id="803a61fc8cf4e7bdfcf27432bb35e379a4971134" resname="content_type.view.list.action.add">
