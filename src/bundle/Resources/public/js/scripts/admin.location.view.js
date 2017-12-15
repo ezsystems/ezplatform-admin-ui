@@ -20,20 +20,17 @@
     };
 
     listContainers.forEach(container => {
-        console.log(container.dataset);
-        const items = JSON.parse(container.dataset.items).map(item => {
-            item.content = item.content.Content;
-            item.location = item.location.Location;
+        const subItemsList = JSON.parse(container.dataset.items).SubitemsList;
+        const items = subItemsList.SubitemsRow.map(item => ({
+            content: item.Content,
+            location: item.Location
+        }));
+        const contentTypes = JSON.parse(container.dataset.contentTypes).ContentTypeInfoList.ContentType;
+        const contentTypesMap = contentTypes.reduce((total, item) => {
+            total[item._href] = item;
 
-            return item;
-        });
-        const contentTypesMap = Object
-            .values(JSON.parse(container.dataset.contentTypes))
-            .reduce((total, {ContentTypeInfo}) => {
-                total[ContentTypeInfo._href] = ContentTypeInfo;
-
-                return total;
-            }, {});
+            return total;
+        }, {});
 
         global.ReactDOM.render(global.React.createElement(global.eZ.modules.SubItems, {
             parentLocationId: container.dataset.location,
@@ -56,7 +53,8 @@
             }],
             items,
             contentTypesMap,
-            limit: parseInt(container.dataset.limit, 10)
+            limit: parseInt(container.dataset.limit, 10),
+            totalCount: subItemsList.ChildrenCount
         }), container);
     });
 })(window, window.document);
