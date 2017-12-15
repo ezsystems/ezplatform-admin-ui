@@ -62,7 +62,7 @@ class LocationsTransformerTest extends TestCase
         $transformer = new LocationsTransformer($service);
         $result = $transformer->reverseTransform($value);
 
-        $this->assertEquals(null, $result);
+        $this->assertEmpty($result);
     }
 
     /**
