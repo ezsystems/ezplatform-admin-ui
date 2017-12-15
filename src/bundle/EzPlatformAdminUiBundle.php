@@ -11,7 +11,9 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ComponentPass
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ValueObjectVisitorPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\LocationIds;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\SubitemsModule;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -24,6 +26,7 @@ class EzPlatformAdminUiBundle extends Bundle
         /** @var EzPublishCoreExtension $core */
         $core = $container->getExtension('ezpublish');
         $core->addConfigParser(new LocationIds());
+        $core->addConfigParser(new SubitemsModule());
         $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ezplatform_default_settings.yml']);
 
         $this->addCompilerPasses($container);
@@ -38,5 +41,6 @@ class EzPlatformAdminUiBundle extends Bundle
         $container->addCompilerPass(new UiConfigProviderPass());
         $container->addCompilerPass(new SystemInfoTabGroupPass());
         $container->addCompilerPass(new ComponentPass());
+        $container->addCompilerPass(new ValueObjectVisitorPass());
     }
 }

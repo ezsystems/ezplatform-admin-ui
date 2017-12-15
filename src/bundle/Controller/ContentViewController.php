@@ -16,6 +16,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
 
 class ContentViewController extends Controller
@@ -32,22 +33,21 @@ class ContentViewController extends Controller
     /** @var FormFactory */
     private $formFactory;
 
-    /**
-     * @param ContentTypeService $contentTypeService
-     * @param LanguageService $languageService
-     * @param PathService $pathService
-     * @param FormFactory $formFactory
-     */
+    /** @var SubitemsContentViewParameterSupplier */
+    private $subitemsContentViewParameterSupplier;
+
     public function __construct(
         ContentTypeService $contentTypeService,
         LanguageService $languageService,
         PathService $pathService,
-        FormFactory $formFactory
+        FormFactory $formFactory,
+        SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier
     ) {
         $this->contentTypeService = $contentTypeService;
         $this->languageService = $languageService;
         $this->pathService = $pathService;
         $this->formFactory = $formFactory;
+        $this->subitemsContentViewParameterSupplier = $subitemsContentViewParameterSupplier;
     }
 
     public function locationViewAction(ContentView $view)
@@ -59,6 +59,7 @@ class ContentViewController extends Controller
         $this->supplyPathLocations($view);
         $this->supplyContentType($view);
         $this->supplyContentActionForms($view);
+        $this->subitemsContentViewParameterSupplier->supply($view);
 
         return $view;
     }

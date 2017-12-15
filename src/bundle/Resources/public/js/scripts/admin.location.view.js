@@ -1,9 +1,9 @@
-(function () {
-    const listContainers = [...document.querySelectorAll('.ez-sil')];
-    const mfuContainer = document.querySelector('#ez-mfu');
-    const token = document.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
-    const sortContainer = document.querySelector('[data-sort-field][data-sort-order]');
+(function (global, doc) {
+    const listContainers = [...doc.querySelectorAll('.ez-sil')];
+    const mfuContainer = doc.querySelector('#ez-mfu');
+    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
+    const sortContainer = doc.querySelector('[data-sort-field][data-sort-order]');
     const sortField = sortContainer.getAttribute('data-sort-field');
     const sortOrder = sortContainer.getAttribute('data-sort-order');
     const mfuAttrs = {
@@ -20,7 +20,19 @@
     };
 
     listContainers.forEach(container => {
-        ReactDOM.render(React.createElement(eZ.modules.SubItems, {
+        const subItemsList = JSON.parse(container.dataset.items).SubitemsList;
+        const items = subItemsList.SubitemsRow.map(item => ({
+            content: item.Content,
+            location: item.Location
+        }));
+        const contentTypes = JSON.parse(container.dataset.contentTypes).ContentTypeInfoList.ContentType;
+        const contentTypesMap = contentTypes.reduce((total, item) => {
+            total[item._href] = item;
+
+            return total;
+        }, {});
+
+        global.ReactDOM.render(global.React.createElement(global.eZ.modules.SubItems, {
             parentLocationId: container.dataset.location,
             sortClauses: {[sortField]: sortOrder},
             restInfo: {token, siteaccess},
@@ -28,7 +40,7 @@
             // discover content location view URL from backend routes
             locationViewLink: '/admin/content/location/{{locationId}}',
             extraActions: [{
-                component: eZ.modules.MultiFileUpload,
+                component: global.eZ.modules.MultiFileUpload,
                 attrs: Object.assign({}, mfuAttrs, {
                     onPopupClose: (itemsUploaded) => {
                         if (itemsUploaded.length) {
@@ -38,7 +50,11 @@
                     popupOnly: false,
                     asButton: true
                 })
-            }]
+            }],
+            items,
+            contentTypesMap,
+            limit: parseInt(container.dataset.limit, 10),
+            totalCount: subItemsList.ChildrenCount
         }), container);
     });
-})();
+})(window, window.document);
