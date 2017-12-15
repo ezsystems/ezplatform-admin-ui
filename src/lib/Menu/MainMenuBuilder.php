@@ -8,6 +8,9 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
+use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use InvalidArgumentException;
@@ -41,19 +44,37 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     /** @var ConfigResolverInterface */
     private $configResolver;
 
+    /** @var PermissionResolver */
+    private $permissionResolver;
+
+    /** @var LocationService */
+    private $locationService;
+
+    /** @var ContentService */
+    private $contentService;
+
     /**
      * @param FactoryInterface $factory
      * @param EventDispatcherInterface $eventDispatcher
      * @param ConfigResolverInterface $configResolver
+     * @param PermissionResolver $permissionResolver
+     * @param LocationService $locationService
+     * @param ContentService $contentService
      */
     public function __construct(
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        PermissionResolver $permissionResolver,
+        LocationService $locationService,
+        ContentService $contentService
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->configResolver = $configResolver;
+        $this->permissionResolver = $permissionResolver;
+        $this->locationService = $locationService;
+        $this->contentService = $contentService;
     }
 
     protected function getConfigureEventName(): string
@@ -66,7 +87,10 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
      *
      * @return ItemInterface
      *
-     * @throws InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function createStructure(array $options): ItemInterface
     {
@@ -83,26 +107,48 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             ),
         ]);
 
-        $menu[self::ITEM_CONTENT]->setChildren([
-            self::ITEM_CONTENT__CONTENT_STRUCTURE => $this->createMenuItem(
+        // Is user has access to Content location ?
+        $rootContentId = $this->configResolver->getParameter('content.tree_root.location_id');
+
+        try {
+            $this->permissionResolver->canUser(
+                'content',
+                'read',
+                $this->locationService->loadLocation($rootContentId)->contentInfo
+            );
+
+            $menu[self::ITEM_CONTENT]->addChild(
                 self::ITEM_CONTENT__CONTENT_STRUCTURE,
                 [
+                    'label' => self::ITEM_CONTENT__CONTENT_STRUCTURE,
                     'route' => '_ezpublishLocation',
                     'routeParameters' => [
-                        'locationId' => $this->configResolver->getParameter('location_ids.content'),
+                        'locationId' => $rootContentId,
                     ],
                 ]
-            ),
-            self::ITEM_CONTENT__MEDIA => $this->createMenuItem(
+            )->setExtra('translation_domain', 'menu');
+        } catch (\Exception $e) {}
+
+        try {
+            // Is User has access to Media Location ?
+            $rootMediaId = $this->configResolver->getParameter('location_ids.media');
+            $this->permissionResolver->canUser(
+            'content',
+            'read',
+                $this->locationService->loadLocation($rootMediaId)->contentInfo
+            );
+
+            $menu[self::ITEM_CONTENT]->addChild(
                 self::ITEM_CONTENT__MEDIA,
                 [
                     'route' => '_ezpublishLocation',
                     'routeParameters' => [
-                        'locationId' => $this->configResolver->getParameter('location_ids.media'),
+                        'locationId' => $rootMediaId,
                     ],
                 ]
-            ),
-        ]);
+
+            )->setExtra('translation_domain', 'menu');
+        } catch (\Exception $e) {}
 
         $menu[self::ITEM_ADMIN]->setChildren([
             self::ITEM_ADMIN__SYSTEMINFO => $this->createMenuItem(
