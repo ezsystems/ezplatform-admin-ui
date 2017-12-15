@@ -1,0 +1,23 @@
+.error-page {
+    background: $ez-white;
+    text-align: center;
+    width: 100%;
+
+    &__image-wrapper {
+        margin-top: 18vh;
+    }
+
+    &__title,
+    &__messages {
+        max-width: 596px;
+        margin: 3rem auto auto;
+    }
+
+    &__message {
+        font-size: 17px;
+    }
+
+    &__link {
+        text-decoration: underline;
+    }
+}

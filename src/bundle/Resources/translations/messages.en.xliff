@@ -26,6 +26,51 @@
         <target state="new">Admin</target>
         <note>key: breadcrumb.admin</note>
       </trans-unit>
+      <trans-unit id="7cb40cbc703336ab1285e81ebf100b82b05a0e27" resname="error.page.403.actions">
+        <source><![CDATA[You can also go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> here or <a class="error-page__link" href="%search%">search</a> for other content.]]></source>
+        <target state="new"><![CDATA[You can also go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> here or <a class="error-page__link" href="%search%">search</a> for other content.]]></target>
+        <note>key: error.page.403.actions</note>
+      </trans-unit>
+      <trans-unit id="2532cb9ce6fdf46258c107f3d20888c506115ef6" resname="error.page.403.message">
+        <source><![CDATA[It’s an error 403. You don’t have permission to retrieve or access this page.<br/>Please contact your eZ Platform Administrator to request access to<br/>this content or modify your profile.]]></source>
+        <target state="new"><![CDATA[It’s an error 403. You don’t have permission to retrieve or access this page.<br/>Please contact your eZ Platform Administrator to request access to<br/>this content or modify your profile.]]></target>
+        <note>key: error.page.403.message</note>
+      </trans-unit>
+      <trans-unit id="b1712cfa4c13874debdcc0f1f4a3b9fa4af3c966" resname="error.page.403.title">
+        <source>You don’t have permission for this page. Sorry!</source>
+        <target state="new">You don’t have permission for this page. Sorry!</target>
+        <note>key: error.page.403.title</note>
+      </trans-unit>
+      <trans-unit id="638be721c063eee72e70484fe99a25b2a990bb18" resname="error.page.404.actions">
+        <source><![CDATA[Check the URL, in case there would be an error in there.<br/>If not, go to the <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for specific content.]]></source>
+        <target state="new"><![CDATA[Check the URL, in case there would be an error in there.<br/>If not, go to the <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for specific content.]]></target>
+        <note>key: error.page.404.actions</note>
+      </trans-unit>
+      <trans-unit id="7027b2adcf028b82111334763e40823cd85a52fa" resname="error.page.404.message">
+        <source><![CDATA[It’s an error 404. The page you requested was not found.<br/>It might have been deleted or might be temporarily unavailable.]]></source>
+        <target state="new"><![CDATA[It’s an error 404. The page you requested was not found.<br/>It might have been deleted or might be temporarily unavailable.]]></target>
+        <note>key: error.page.404.message</note>
+      </trans-unit>
+      <trans-unit id="156b8a7f797412e60bdba432064e2dade6d4a7af" resname="error.page.404.title">
+        <source>Something went wrong. Sorry!</source>
+        <target state="new">Something went wrong. Sorry!</target>
+        <note>key: error.page.404.title</note>
+      </trans-unit>
+      <trans-unit id="a599d59a63814826906caa9842f0b3c33db24d09" resname="error.page.default.actions">
+        <source><![CDATA[Please contact your eZ Platform Administrator and inform her/him about the time the error occurred, the URL in your browser window and anything related you think may have caused the error.<br/>You can also go back or try to reload the application.]]></source>
+        <target state="new"><![CDATA[Please contact your eZ Platform Administrator and inform her/him about the time the error occurred, the URL in your browser window and anything related you think may have caused the error.<br/>You can also go back or try to reload the application.]]></target>
+        <note>key: error.page.default.actions</note>
+      </trans-unit>
+      <trans-unit id="8338c190462d420926edf71e8d4cddcae710d361" resname="error.page.default.message">
+        <source>It's an error 500, an internal server error. The server was unable to complete your request and it's not your fault.</source>
+        <target state="new">It's an error 500, an internal server error. The server was unable to complete your request and it's not your fault.</target>
+        <note>key: error.page.default.message</note>
+      </trans-unit>
+      <trans-unit id="889ba15bcc2f87bfac9b80282f659eaeb7c175d4" resname="error.page.default.title">
+        <source>Something went wrong. Sorry!</source>
+        <target state="new">Something went wrong. Sorry!</target>
+        <note>key: error.page.default.title</note>
+      </trans-unit>
       <trans-unit id="5cf420af18fd4a8d856fd30bc13aea5039369f9b" resname="form.cancel">
         <source>Cancel</source>
         <target state="new">Cancel</target>
