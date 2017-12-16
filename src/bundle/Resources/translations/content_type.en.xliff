@@ -61,10 +61,25 @@
         <target state="new">Description</target>
         <note>key: content_type.description</note>
       </trans-unit>
+      <trans-unit id="9eb89a2f51954babc5ff51f9060cbcda91dcf408" resname="content_type.field_definitions.modal.message">
+        <source>Do you want to delete selected field definitions?</source>
+        <target state="new">Do you want to delete selected field definitions?</target>
+        <note>key: content_type.field_definitions.modal.message</note>
+      </trans-unit>
       <trans-unit id="238db0c5dee8ec13199b073f7cc78728f53ffa36" resname="content_type.identifier">
         <source>Identifier</source>
         <target state="new">Identifier</target>
         <note>key: content_type.identifier</note>
+      </trans-unit>
+      <trans-unit id="02f6ddfcdd8bbd05cdd1b954503a3801288b74eb" resname="content_type.modal.message">
+        <source>Do you want to delete Content Type?</source>
+        <target state="new">Do you want to delete Content Type?</target>
+        <note>key: content_type.modal.message</note>
+      </trans-unit>
+      <trans-unit id="7b2d848f7d36edb5998704ab47adea259512e15d" resname="content_type.modal.title">
+        <source>Please confirm</source>
+        <target state="new">Please confirm</target>
+        <note>key: content_type.modal.title</note>
       </trans-unit>
       <trans-unit id="7fddd251857df821bd536dd680e1edbc921790a2" resname="content_type.name">
         <source>Name</source>
@@ -176,11 +191,6 @@
         <target state="new">Create a Content Type</target>
         <note>key: content_type.view.list.action.add</note>
       </trans-unit>
-      <trans-unit id="c3287b9fccc0b54216e50ba02e3d72e17cc1c92e" resname="content_type.view.list.action.delete">
-        <source>Delete</source>
-        <target state="new">Delete</target>
-        <note>key: content_type.view.list.action.delete</note>
-      </trans-unit>
       <trans-unit id="1a2e4ef61d405d0628d8bacdb80d7bbaa11143d5" resname="content_type.view.list.action.edit">
         <source>Edit</source>
         <target state="new">Edit</target>
@@ -261,6 +271,11 @@
         <target state="new">Content type group '%name%' deleted.</target>
         <note>key: content_type_group.delete.success</note>
       </trans-unit>
+      <trans-unit id="09f63694559a9149fb1297e33be843cf54788b95" resname="content_type_group.modal.message">
+        <source>Do you want to delete Content Type Group?</source>
+        <target state="new">Do you want to delete Content Type Group?</target>
+        <note>key: content_type_group.modal.message</note>
+      </trans-unit>
       <trans-unit id="4c6dfb0b81f5b9d70fed0dda3840f0677ece9570" resname="content_type_group.update.name">
         <source>Name</source>
         <target state="new">Name</target>
@@ -316,10 +331,15 @@
         <target state="new">%identifier%</target>
         <note>key: content_type_group.view.view.title</note>
       </trans-unit>
-      <trans-unit id="5cf420af18fd4a8d856fd30bc13aea5039369f9b" resname="form.cancel">
+      <trans-unit id="7fe072f41348fb097b6bb018eec4f1b1bc9cffc3" resname="modal.cancel">
         <source>Cancel</source>
         <target state="new">Cancel</target>
-        <note>key: form.cancel</note>
+        <note>key: modal.cancel</note>
+      </trans-unit>
+      <trans-unit id="9eae227b7c27ab230a6d0ce5947d93e7d2e1626f" resname="modal.delete">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note>key: modal.delete</note>
       </trans-unit>
       <trans-unit id="3e9deeb426f08a404990a6926d70558955272593" resname="yes_no">
         <source>{0}No|{1}Yes</source>

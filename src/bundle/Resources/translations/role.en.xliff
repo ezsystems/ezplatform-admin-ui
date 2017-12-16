@@ -56,6 +56,11 @@
         <target state="new">None</target>
         <note>key: policy.limitation.none</note>
       </trans-unit>
+      <trans-unit id="fda44832f6a675807e1bcd01460231f7117d9e1e" resname="policy.modal.message">
+        <source>Do you want to delete Policy?</source>
+        <target state="new">Do you want to delete Policy?</target>
+        <note>key: policy.modal.message</note>
+      </trans-unit>
       <trans-unit id="bb8f2aa78c28aa25b5eade0c7f40c37110110ec5" resname="policy.update.success">
         <source>Policies in role '%role%' updated.</source>
         <target state="new">Policies in role '%role%' updated.</target>
@@ -156,6 +161,11 @@
         <target state="new">Role '%role%' removed.</target>
         <note>key: role.delete.success</note>
       </trans-unit>
+      <trans-unit id="b8faa90fed74479d8cdb01dc2c0e1af8a79cf9b1" resname="role.modal.message">
+        <source>Do you want to delete Role?</source>
+        <target state="new">Do you want to delete Role?</target>
+        <note>key: role.modal.message</note>
+      </trans-unit>
       <trans-unit id="75637482fd2563256da5423615ecfb241fc03a57" resname="role.update.success">
         <source>Role '%role%' updated.</source>
         <target state="new">Role '%role%' updated.</target>
@@ -250,6 +260,11 @@
         <source>Assignments (%count%)</source>
         <target state="new">Assignments (%count%)</target>
         <note>key: role_assignment.view.list.title.count</note>
+      </trans-unit>
+      <trans-unit id="304836ca19b0d01940431c18b955ae028a6110f9" resname="role_assignments.modal.message">
+        <source>Do you want to delete Role Assignments?</source>
+        <target state="new">Do you want to delete Role Assignments?</target>
+        <note>key: role_assignments.modal.message</note>
       </trans-unit>
       <trans-unit id="5abe6179f254b9bdd5e8680eec4456118980932e" resname="validator.assign_users_or_groups">
         <source>Assign User(s) and/or Group(s) to the Role</source>

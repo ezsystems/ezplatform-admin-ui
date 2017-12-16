@@ -91,6 +91,11 @@
         <target state="new">Sections</target>
         <note>key: section.list.title</note>
       </trans-unit>
+      <trans-unit id="6a17e9f4ed416563fc8c3e188509b8eec8a6f7c0" resname="section.modal.message">
+        <source>Do you want to delete Section?</source>
+        <target state="new">Do you want to delete Section?</target>
+        <note>key: section.modal.message</note>
+      </trans-unit>
       <trans-unit id="376986256605f27a204911de172c7bca4bd8e3b6" resname="section.name">
         <source>Name</source>
         <target state="new">Name</target>

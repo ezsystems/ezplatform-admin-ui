@@ -31,12 +31,19 @@
                              xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                     </svg>
                 </a>
-                <button id="delete-content-type-groups" class="btn btn-danger btn--trigger" disabled data-click="#content_type_groups_delete_delete">
+                {% set modal_data_target = 'delete-content-type-groups-modal' %}
+                <button id="delete-content-type-groups" type="button" class="btn btn-danger" disabled data-toggle="modal"
+                        data-target="#{{ modal_data_target }}">
                     <svg class="ez-icon ez-icon-trash">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink"
                              xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                     </svg>
                 </button>
+                {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+                    'id': modal_data_target,
+                    'message': 'content_type_group.modal.message'|trans|desc('Do you want to delete Content Type Group?'),
+                    'data_click': '#content_type_groups_delete_delete',
+                }%}
             </div>
         </div>
 
