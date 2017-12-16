@@ -63,7 +63,9 @@
 
                 {% block left_sidebar %}
                     <div class="col-sm-1 bg-dark pt-4 ez-side-menu"> {# @todo sidebars should be moved to layout.html.twig !! #}
-                        {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@EzPlatformAdminUi/parts/menu/sidebar_left.html.twig'}) }}
+                        <div class="ez-sticky-container">
+                            {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@EzPlatformAdminUi/parts/menu/sidebar_left.html.twig'}) }}
+                        </div>
                     </div>
                 {% endblock left_sidebar %}
 

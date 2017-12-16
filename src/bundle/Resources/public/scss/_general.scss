@@ -32,11 +32,6 @@ a {
     padding-right: 0;
     padding-left: 0;
 
-    .ez-button-container {
-        position: sticky;
-        top: 1em;
-    }
-
     .ez-icon {
         display: block;
         margin: 0 auto;
@@ -126,4 +121,9 @@ a {
 .ez-section-list-view,
 .ez-trash-list-view {
     background-color: $ez-ground-base-light;
+}
+
+.ez-sticky-container {
+    position: sticky;
+    top: 1rem;
 }
