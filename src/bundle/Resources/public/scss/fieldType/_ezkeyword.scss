@@ -3,6 +3,14 @@
         display: flex;
         flex-wrap: wrap;
         padding-bottom: 0;
+
+        &.ez-data-source__taggify--focused {
+            border-color: $ez-color-secondary;
+        }
+
+        &.is-invalid {
+            background: $ez-color-warning-pale;
+        }
     }
 
     .taggify__wrapper {
@@ -18,6 +26,7 @@
         outline: none;
         min-width: 100px;
         padding-bottom: 8px;
+        background: transparent;
     }
 
     .taggify__tags {
@@ -44,6 +53,7 @@
     &.is-invalid {
         .ez-data-source__taggify {
             border: 1px solid $ez-color-danger;
+            background: $ez-color-warning-pale;
         }
     }
 }

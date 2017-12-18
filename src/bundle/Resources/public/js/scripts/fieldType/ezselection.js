@@ -17,8 +17,11 @@
          * @memberof EzSelectionValidator
          */
         validateInput(event) {
-            const isError = event.target.required && !event.target.value;
-            const label = event.target.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
+            const fieldContainer = event.currentTarget.closest(SELECTOR_FIELD);
+            const hasSelectedOptions = !!fieldContainer.querySelectorAll(`${SELECTOR_SELECTED} .selected-item`).length;
+            const isRequired = fieldContainer.classList.contains('ez-field-edit--required');
+            const isError = isRequired && !hasSelectedOptions;
+            const label = fieldContainer.querySelector('.ez-field-edit__label').innerHTML;
             const errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
 
             return {
@@ -33,10 +36,11 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-field-edit--ezselection .ez-data-source__input',
+                selector: '.ez-data-source__input',
                 eventName: EVENT_VALUE_CHANGED,
                 callback: 'validateInput',
                 errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+                invalidStateSelectors: [SELECTOR_SELECTED],
             },
         ],
     });
@@ -95,6 +99,8 @@
             }
 
             hideOptions();
+            container.querySelector('.ez-data-source__input').dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
+
         };
         const hideOptions = () => container.querySelector(SELECTOR_OPTIONS).classList.add(CLASS_HIDDEN);
         const handleClickOnInput = (event) => {
