@@ -125,7 +125,7 @@
          * @param {HTMLElement} input
          * @param {Array} selectors
          * @returns {Array}
-         * @memberof BaseFieldValidator
+         * @memberof EzAuthorValidator
          */
         findValidationStateNodes(fieldNode, input, selectors) {
             const authorRow = input.closest(SELECTOR_AUTHOR);
@@ -145,7 +145,7 @@
          * @param {HTMLElement} input
          * @param {Array} selectors
          * @returns {Array}
-         * @memberof BaseFieldValidator
+         * @memberof EzAuthorValidator
          */
         findErrorContainers(fieldNode, input, selectors) {
             const authorRow = input.closest(SELECTOR_AUTHOR);
@@ -165,10 +165,22 @@
          * @param {HTMLElement} input
          * @param {Array} selectors
          * @returns {Array}
-         * @memberof BaseFieldValidator
+         * @memberof EzAuthorValidator
          */
         findExistingErrorNodes(fieldNode, input, selectors) {
             return selectors.reduce((total, selector) => total.concat([...input.closest(SELECTOR_AUTHOR).querySelectorAll(selector)]), []);
+        }
+
+        /**
+         * Attaches event listeners based on a config.
+         *
+         * @method init
+         * @memberof EzAuthorValidator
+         */
+        init() {
+            super.init();
+
+            [...doc.querySelectorAll(this.fieldSelector)].forEach(field => this.updateDisabledState(field));
         }
     }
 
