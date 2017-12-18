@@ -331,6 +331,16 @@
         <target state="new">%identifier%</target>
         <note>key: content_type_group.view.view.title</note>
       </trans-unit>
+      <trans-unit id="2a6703809d34ce1103cc6e1342e07a8a81848c01" resname="location_update_form.in">
+        <source>in</source>
+        <target state="new">in</target>
+        <note>key: location_update_form.in</note>
+      </trans-unit>
+      <trans-unit id="53acad0127e4919fc2769ff04c46e1e66b7c601a" resname="location_update_form.order_by">
+        <source>Order by</source>
+        <target state="new">Order by</target>
+        <note>key: location_update_form.order_by</note>
+      </trans-unit>
       <trans-unit id="7fe072f41348fb097b6bb018eec4f1b1bc9cffc3" resname="modal.cancel">
         <source>Cancel</source>
         <target state="new">Cancel</target>

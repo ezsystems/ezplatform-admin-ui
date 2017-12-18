@@ -121,20 +121,15 @@
         <target state="new">Name</target>
         <note>key: tab.details.state_name</note>
       </trans-unit>
-      <trans-unit id="e1b7d3c1364b48bbad819511efa9a50c508e5372" resname="tab.details.sub_items_default_ordering">
-        <source>Sub-items default ordering</source>
-        <target state="new">Sub-items default ordering</target>
-        <note>key: tab.details.sub_items_default_ordering</note>
-      </trans-unit>
-      <trans-unit id="a8bf01d5deb416a97cd7d2a7f5f21084a0f86889" resname="tab.details.sub_items_listing_by">
-        <source>Default listing of sub-items by</source>
-        <target state="new">Default listing of sub-items by</target>
-        <note>key: tab.details.sub_items_listing_by</note>
-      </trans-unit>
       <trans-unit id="fe4321b1de5be805ed8224c8cf442a89e9fa38b4" resname="tab.details.sub_items_listing_by_set">
         <source>Set</source>
         <target state="new">Set</target>
         <note>key: tab.details.sub_items_listing_by_set</note>
+      </trans-unit>
+      <trans-unit id="03aa9832291905ed83ba60081ebffe5786d92418" resname="tab.details.sub_items_sorting_order">
+        <source>Sub-items sorting order</source>
+        <target state="new">Sub-items sorting order</target>
+        <note>key: tab.details.sub_items_sorting_order</note>
       </trans-unit>
       <trans-unit id="09fcd5ad39b9c2b778be171f88559f6c117ff48b" resname="tab.details.technical_details">
         <source>Technical details</source>
