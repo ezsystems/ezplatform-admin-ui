@@ -4,6 +4,10 @@
         flex-wrap: wrap;
         padding-bottom: 0;
 
+        &.ez-data-source__taggify--focused {
+            border-color: $ez-color-secondary;
+        }
+
         &.is-invalid {
             background: $ez-color-warning-pale;
         }

@@ -2,6 +2,7 @@
     const SELECTOR_FIELD = '.ez-field-edit--ezkeyword';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const SELECTOR_TAGGIFY = '.ez-data-source__taggify';
+    const CLASS_TAGGIFY_FOCUS = 'ez-data-source__taggify--focused';
 
     class EzKeywordValidator extends global.eZ.BaseFieldValidator {
         /**
@@ -74,9 +75,12 @@
         });
         const keywordInput = field.querySelector('.ez-data-source__input-wrapper .ez-data-source__input.form-control');
         const updateKeywords = updateValue.bind(this, keywordInput);
+        const addFocusState = () => taggifyContainer.classList.add(CLASS_TAGGIFY_FOCUS);
+        const removeFocusState = () => taggifyContainer.classList.remove(CLASS_TAGGIFY_FOCUS);
+        const taggifyInput = taggifyContainer.querySelector('.taggify__input');
 
         if (keywordInput.required) {
-            taggifyContainer.querySelector('.taggify__input').setAttribute('required', true);
+            taggifyInput.setAttribute('required', true);
         }
 
         validator.init();
@@ -90,6 +94,8 @@
 
         taggifyContainer.addEventListener('tagsCreated', updateKeywords, false);
         taggifyContainer.addEventListener('tagRemoved', updateKeywords, false);
+        taggifyInput.addEventListener('focus', addFocusState, false);
+        taggifyInput.addEventListener('blur', removeFocusState, false);
 
         global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
             [...global.eZ.fieldTypeValidators, validator] :
