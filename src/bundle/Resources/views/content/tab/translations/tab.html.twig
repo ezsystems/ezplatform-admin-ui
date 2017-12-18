@@ -50,7 +50,7 @@
     </button>
     {% include '@EzPlatformAdminUi/bulk_delete_confirmation_modal.html.twig' with {
         'id': modal_data_target,
-        'message': 'tab.locations.modal.message'|trans|desc('Do you want to delete Translation?'),
+        'message': 'tab.translations.modal.message'|trans|desc('Do you want to delete Translation?'),
         'data_click': '#' ~ form_translation_remove.remove.vars.id,
     }%}
 {% endmacro %}
