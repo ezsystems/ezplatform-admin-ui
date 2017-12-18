@@ -47,15 +47,15 @@
                     margin-bottom: 0;
 
                     span {
-                        background-color: $ez-color-base-medium;
+                        background-color: $ez-color-base-dark;
                         height: 2.25rem;
                         padding: .7rem .5rem;
                         display: block;
-                        color: $ez-color-base-dark;
+                        color: $ez-black;
                     }
 
                     input:checked + span {
-                        background-color: $ez-ground-base-dark;
+                        background-color: $ez-color-base-light;
                         color: $ez-white;
                     }
 
