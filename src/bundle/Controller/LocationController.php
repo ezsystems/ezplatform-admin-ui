@@ -24,6 +24,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Tab\LocationView\DetailsTab;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\LocationsTab;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -504,7 +505,7 @@ class LocationController extends Controller
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
                         'locationId' => $location->getContentInfo()->mainLocationId,
-                        '_fragment' => LocationsTab::URI_FRAGMENT,
+                        '_fragment' => DetailsTab::URI_FRAGMENT,
                     ]));
             });
 
@@ -515,7 +516,7 @@ class LocationController extends Controller
 
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $location->getContentInfo()->mainLocationId,
-            '_fragment' => LocationsTab::URI_FRAGMENT,
+            '_fragment' => DetailsTab::URI_FRAGMENT,
         ]));
     }
 }
