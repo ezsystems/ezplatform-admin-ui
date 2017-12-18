@@ -32,7 +32,15 @@
 
             window.CKEDITOR_BASEPATH = window.ALLOYEDITOR_BASEPATH = "/bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/";
         </script>
-        <script src="/bundles/fosjsrouting/js/router.js"></script>
+        {%  javascripts
+            'bundles/fosjsrouting/js/router.js'
+            'bundles/ezplatformadminuiassets/vendors/react/umd/react.production.min.js'
+            'bundles/ezplatformadminuiassets/vendors/react-dom/umd/react-dom.production.min.js'
+            'bundles/ezplatformadminuiassets/vendors/create-react-class/create-react-class.min.js'
+            'bundles/ezplatformadminuiassets/vendors/prop-types/prop-types.min.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
         <title>{% block title %}eZ Platform{% endblock %}</title>
         {% stylesheets filter='scssphp'
@@ -83,14 +91,11 @@
         </div>
 
         {%  javascripts
-            'bundles/ezplatformadminuiassets/vendors/react/umd/react.production.min.js'
-            'bundles/ezplatformadminuiassets/vendors/react-dom/umd/react-dom.production.min.js'
-            'bundles/ezplatformadminuiassets/vendors/create-react-class/create-react-class.min.js'
-            'bundles/ezplatformadminuiassets/vendors/prop-types/prop-types.min.js'
             'bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js'
             'bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js'
             'bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js'
-            'bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/alloy-editor-no-react-min.js'
+            'bundles/ezplatformadminuiassets/vendors/ckeditor/ckeditor.js'
+            'bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/alloy-editor-core.js'
             'bundles/ezplatformadminuimodules/js/UniversalDiscovery.module.js'
             'bundles/ezplatformadminui/js/scripts/button.trigger.js'
             'bundles/ezplatformadminui/js/scripts/button.prevent.default.js'
