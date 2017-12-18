@@ -18,4 +18,16 @@
 
         @include label-required();
     }
+
+    .form-control {
+        background-color: $ez-white;
+    }
+
+    .form-control[readonly] {
+        background-color: $ez-white;
+    }
+
+    .form-control:focus {
+        border-color: $ez-color-secondary;
+    }
 }
