@@ -76,7 +76,9 @@
                 {% for message in messages %}
                     <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <svg class="ez-icon ez-icon--light ez-icon-small">
+                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#circle-close"></use>
+                            </svg>
                         </button>
                         {{ message|trans }}
                     </div>
