@@ -36,7 +36,7 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-data-source__input',
+                selector: '.ez-data-source__input--selection',
                 eventName: EVENT_VALUE_CHANGED,
                 callback: 'validateInput',
                 errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
