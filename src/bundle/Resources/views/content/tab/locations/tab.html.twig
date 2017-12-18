@@ -6,7 +6,10 @@
 <section>
     {{ form(form_content_location_add, {'action': path('ezplatform.location.add')}) }}
     {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.locations.content_locations'|trans()|desc('Content locations'), tools: tab.table_header_tools(form_content_location_add, form_content_location_remove) } %}
-    {{ form_start(form_content_location_remove, {'action': path('ezplatform.location.remove')}) }}
+    {{ form_start(form_content_location_remove, {
+        'action': path('ezplatform.location.remove'),
+        'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-locations' }
+    }) }}
     <table class="table">
         <thead>
         <tr>
@@ -21,7 +24,9 @@
         {% if locations is not empty %}
             {% for location in locations %}
                 <tr>
-                    <td class="align-middle">{{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'disabled': not location.canDelete}}) }}</td>
+                    <td class="align-middle ez-checkbox-cell">
+                        {{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'disabled': not location.canDelete}}) }}
+                    </td>
                     <td class="align-middle">
                         {% include 'EzPlatformAdminUiBundle:parts:path.html.twig' with {'locations': location.pathLocations} %}
                     </td>
@@ -66,10 +71,26 @@
                  xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
         </svg>
     </button>
-    <button class="btn btn-danger btn--trigger" data-click="#{{ form_remove.remove.vars.id }}">
+
+    {% set modal_data_target = 'delete-content-types-modal' %}
+    <button id="delete-locations" type="button" class="btn btn-danger" disabled data-toggle="modal"
+            data-target="#{{ modal_data_target }}">
         <svg class="ez-icon ez-icon-trash">
             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                  xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
+    {% include '@EzPlatformAdminUi/bulk_delete_confirmation_modal.html.twig' with {
+        'id': modal_data_target,
+        'message': 'tab.locations.modal.message'|trans|desc('Do you want to delete Location?'),
+        'data_click': '#' ~ form_remove.remove.vars.id,
+    }%}
 {% endmacro %}
+
+{% block javascripts %}
+    {% javascripts
+    '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
