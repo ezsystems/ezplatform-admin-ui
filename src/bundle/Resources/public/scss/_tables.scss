@@ -23,7 +23,7 @@
 
 .table {
     margin-bottom: 3rem;
-    
+
     th, td {
         padding: .7rem 1.4rem;
         line-height: 20px;
@@ -56,6 +56,12 @@
                 border-bottom: none;
             }
         }
+    }
+}
+
+.ez-table--no-border {
+    td {
+        border: none;
     }
 }
 
