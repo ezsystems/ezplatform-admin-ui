@@ -1,11 +1,19 @@
+{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with {
+    headerText: 'tab.locations.location_content_swap'|trans()|desc('Location Content Swap'),
+    ground: 'ground-base'
+} %}
+
 {{ form_start(form, {'action': path('ezplatform.location.swap')}) }}
-<div class="ez-list-toolbar">
-    <h2 class="ez-list-toolbar-label">{{ 'tab.locations.location_content_swap'|trans()|desc('Location Content Swap') }}</h2>
-</div>
-<p>
-    {{ 'tab.locations.swap_with_another'|trans()|desc('Swap the content item at this location with another') }}
-    {{ form_widget(form.swap, {'attr': {'class': 'btn btn-outline-secondary btn--udw-swap', 'data-root-location': '2'}}) }}
-    {{ form_widget(form.current_location) }}
-    {{ form_widget(form.new_location) }}
-</p>
+<table class="table">
+    <tbody>
+    <tr>
+        <td>
+            {{ 'tab.locations.swap_with_another'|trans()|desc('Swap the content item at this location with another') }}
+            {{ form_widget(form.swap, {'attr': {'class': 'btn btn-outline-secondary btn--udw-swap ml-5', 'data-root-location': '2'}}) }}
+            {{ form_widget(form.current_location) }}
+            {{ form_widget(form.new_location) }}
+        </td>
+    </tr>
+    </tbody>
+</table>
 {{ form_end(form) }}
