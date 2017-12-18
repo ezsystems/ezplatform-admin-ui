@@ -5,8 +5,17 @@
     line-height: 2.25;
 
     .alert {
+        padding: 0.75rem 5rem;
         margin-bottom: 0;
+        border-radius: 0;
         transition: opacity 0.3s $ez-admin-transition;
+
+        .close {
+            opacity: 1;
+            top: 50%;
+            padding: 0 1.25rem;
+            cursor: pointer;
+        }
 
         &-success {
             background-color: $ez-color-positive;
