@@ -58,14 +58,15 @@
             </div>
         </div>
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
-            {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': contentType}) %}
-            {{ knp_menu_render(content_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+            <div class="ez-sticky-container">
+                {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': contentType}) %}
+                {{ knp_menu_render(content_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 
-            <div class="ez-extra-actions-container">
-                {% include '@EzPlatformAdminUi/content/widgets/content_create.html.twig' with {'form': form_content_create} only %}
-                {% include '@EzPlatformAdminUi/content/widgets/content_edit.html.twig' with {'form': form_content_edit} only %}
+                <div class="ez-extra-actions-container">
+                    {% include '@EzPlatformAdminUi/content/widgets/content_create.html.twig' with {'form': form_content_create} only %}
+                    {% include '@EzPlatformAdminUi/content/widgets/content_edit.html.twig' with {'form': form_content_edit} only %}
+                </div>
             </div>
-
             {% include '@EzPlatformAdminUi/content/modal_location_trash.html.twig' with {'form': form_location_trash} only %}
             {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}
             {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}

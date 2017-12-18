@@ -122,3 +122,8 @@ a {
 .ez-trash-list-view {
     background-color: $ez-ground-base-light;
 }
+
+.ez-sticky-container {
+    position: sticky;
+    top: 1rem;
+}

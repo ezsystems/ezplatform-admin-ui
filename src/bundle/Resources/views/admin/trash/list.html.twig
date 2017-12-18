@@ -19,7 +19,7 @@
             <section class="container mt-5">
                 {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with { title: 'trash.headline'|trans|desc('Trash'), iconName: 'trash' } %}
                 {{ form_start(form_trash_item_restore, {'action': path('ezplatform.trash.restore')}) }}
-                <div class="px-4">   
+                <div class="px-4">
                     <div class="ez-table-header mt-3">
                         <div class="ez-table-header__headline">{{ 'trash.table.header'|trans|desc('Trash') }}</div>
                         <div>
@@ -90,8 +90,10 @@
             </section>
         </div>
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
-            {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
-            {{ knp_menu_render(sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+            <div class="ez-sticky-container">
+                {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
+                {{ knp_menu_render(sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+            </div>
         </div>
     </div>
 {% endblock %}

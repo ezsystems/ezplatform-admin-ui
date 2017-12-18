@@ -39,7 +39,9 @@
             {% block form_after %}{% endblock %}
         </div>
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
-            {% block right_sidebar %}{% endblock %}
+            <div class="ez-sticky-container">
+                {% block right_sidebar %}{% endblock %}
+            </div>
         </div>
     </div>
 {% endblock %}
