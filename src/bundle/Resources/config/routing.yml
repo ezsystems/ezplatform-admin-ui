@@ -4,6 +4,8 @@
 
 _ezpublishLocation:
     path: /content/location/{locationId}/{languageCode}/{viewType}/{layout}
+    options:
+        expose: true
     defaults:
         _controller: ez_content:viewLocation
         viewType: full
