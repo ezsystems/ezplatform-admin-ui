@@ -57,6 +57,8 @@
             if (!input.closest('.ez-field-edit__preview').hasAttribute('hidden')) {
                 return result;
             }
+
+            return { isError: false };
         }
     }
 
