@@ -101,7 +101,7 @@
 </table>
 
 {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with {
-    headerText: 'tab.details.sub_items_default_ordering'|trans|desc('Sub-items default ordering'),
+    headerText: 'tab.details.sub_items_sorting_order'|trans|desc('Sub-items sorting order'),
     ground: 'ground-base'
 } %}
 
@@ -109,18 +109,15 @@
     <tbody>
     <tr>
         <td data-sort-field="{{ sort_field_clause_map[location.sortField] }}" data-sort-order="{{ location.sortOrder ? "ascending" : "descending" }}">
-            {{ 'tab.details.sub_items_listing_by'|trans|desc('Default listing of sub-items by') }}
-        </td>
-        <td>
             {{ form_start(form_location_update, {
                 'method': 'POST',
                 'action': path('ezplatform.location.update'),
-                'attr': {'class': 'form-inline'}
+                'attr': {'class': 'form-inline ez-form-inline'}
                 }) }}
 
                 {{ form_widget(form_location_update) }}
 
-                <button type="submit" class="btn btn-primary ml-1">
+                <button type="submit" class="btn btn-secondary ml-1">
                     {{ 'tab.details.sub_items_listing_by_set'|trans|desc('Set') }}
                 </button>
 

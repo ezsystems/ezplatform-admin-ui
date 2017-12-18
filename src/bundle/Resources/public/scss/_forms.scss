@@ -31,3 +31,10 @@
         border-color: $ez-color-secondary;
     }
 }
+
+.ez-form-inline {
+    .control-label,
+    .form-control {
+        margin-right: .5rem;
+    }
+}

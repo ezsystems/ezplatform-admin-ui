@@ -29,12 +29,12 @@ class LocationUpdateType extends AbstractType
             ->add(
                 'sortField',
                 SortFieldChoiceType::class,
-                ['label' => false]
+                ['label' => /** @Desc("Order by") */ 'location_update_form.order_by']
             )
             ->add(
                 'sortOrder',
                 SortOrderChoiceType::class,
-                ['label' => false]
+                ['label' => /** @Desc("in") */ 'location_update_form.in']
             )
         ;
     }
@@ -43,7 +43,7 @@ class LocationUpdateType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => LocationUpdateData::class,
-            'translation_domain' => 'forms',
+            'translation_domain' => 'content_type',
         ]);
     }
 }
