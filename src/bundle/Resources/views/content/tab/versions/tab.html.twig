@@ -1,6 +1,7 @@
 {% trans_default_domain 'locationview' %}
 
 {% import _self as tab %}
+{% form_theme form_archived_version_restore '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
 
 {% if draft_versions is not empty %}
     <section>
@@ -41,7 +42,7 @@
         }) }}
         {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.versions.archived_versions'|trans()|desc('Archived versions'), tools: tab.table_header_tools(form_version_remove_archived) } %}
         {% if archived_versions is not empty %}
-            {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', { 'versions': archived_versions, 'form': form_version_remove_archived }) }}
+            {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', { 'versions': archived_versions, 'form': form_version_remove_archived, 'is_archived': true, 'form_archived_version_restore': form_archived_version_restore }) }}
         {% else %}
             <p>
                 {{ 'tab.versions.no_permission'|trans()|desc('You don\'t have access to view the content item\'s versions') }}
@@ -50,6 +51,10 @@
         {{ form_end(form_version_remove_archived) }}
     </section>
 {% endif %}
+
+{{ form_start(form_archived_version_restore, {'action': path('ezplatform.content.edit')}) }}
+{{ form_widget(form_archived_version_restore.language, {'attr': {'hidden': 'hidden'}}) }}
+{{ form_end(form_archived_version_restore) }}
 
 {% macro table_header_tools(form) %}
     {% set modal_data_target = 'delete-versions-modal' %}

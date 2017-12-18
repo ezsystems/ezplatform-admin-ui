@@ -1,6 +1,7 @@
 {% trans_default_domain 'locationview' %}
 
 {% set is_draft = is_draft is defined and is_draft %}
+{% set is_archived = is_archived is defined and is_archived %}
 
 <table class="table">
     <thead>
@@ -13,7 +14,7 @@
         <th>{{ 'tab.versions.table.contributor'|trans()|desc('Contributor') }}</th>
         <th>{{ 'tab.versions.table.created'|trans()|desc('Created') }}</th>
         <th>{{ 'tab.versions.table.last_saved'|trans()|desc('Last saved') }}</th>
-        {% if is_draft %}
+        {% if is_draft or is_archived %}
             <th></th>
         {% endif %}
     </tr>
@@ -51,6 +52,15 @@
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                         </svg>
                     </a>
+                </td>
+            {% endif %}
+            {% if is_archived %}
+                <td>
+                    <button class="btn btn-icon ez-btn--restore-archived-version" data-content-id="{{ version.contentInfo.id }}" data-version-no="{{ version.versionNo }}" data-language-code="{{ version.initialLanguageCode }}">
+                        <svg class="ez-icon ez-icon-edit">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#archive-restore"></use>
+                        </svg>
+                    </button>
                 </td>
             {% endif %}
         </tr>

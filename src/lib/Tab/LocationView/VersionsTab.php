@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
@@ -98,6 +99,10 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
             $archivedVersions,
             false
         );
+        $archivedVersionRestoreForm = $this->formFactory->contentEdit(
+            new ContentEditData($contentInfo),
+            'archived_version_restore'
+        );
 
         $viewParameters = [
             'published_versions' => $versionsDataset->getPublishedVersions(),
@@ -105,6 +110,7 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
             'archived_versions' => $archivedVersions,
             'form_version_remove_draft' => $removeVersionDraftForm->createView(),
             'form_version_remove_archived' => $removeVersionArchivedForm->createView(),
+            'form_archived_version_restore' => $archivedVersionRestoreForm->createView(),
         ];
 
         return $this->twig->render(
