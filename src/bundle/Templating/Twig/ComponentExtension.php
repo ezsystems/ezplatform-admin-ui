@@ -9,8 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
 use EzSystems\EzPlatformAdminUi\Component\Registry as ComponentRegistry;
-use EzSystems\EzPlatformAdminUi\Component\Renderable;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use EzSystems\EzPlatformAdminUi\Component\Renderer\RendererInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
@@ -18,10 +17,14 @@ class ComponentExtension extends Twig_Extension
 {
     protected $registry;
 
+    protected $renderer;
+
     public function __construct(
-        ComponentRegistry $registry
+        ComponentRegistry $registry,
+        RendererInterface $renderer
     ) {
         $this->registry = $registry;
+        $this->renderer = $renderer;
     }
 
     public function getFunctions()
@@ -42,25 +45,11 @@ class ComponentExtension extends Twig_Extension
 
     public function renderComponentGroup(string $group, array $parameters = [])
     {
-        $components = $this->registry->getComponents($group);
-        $outputs = array_map(function (Renderable $component) use ($parameters) {
-            return $component->render($parameters);
-        }, $components);
-
-        return implode('', $outputs);
+        return implode('', $this->renderer->renderGroup($group, $parameters));
     }
 
     public function renderComponent(string $group, string $id, array $parameters = [])
     {
-        $components = $this->registry->getComponents($group);
-
-        if (!isset($components[$id])) {
-            throw new InvalidArgumentException('id', sprintf("Can't find Component '%s' in group '%s'", $id, $group));
-        }
-
-        /** @var Renderable $component */
-        $component = $components[$id];
-
-        return $component->render($parameters);
+        return $this->renderer->renderSingle($group, $id, $parameters);
     }
 }
