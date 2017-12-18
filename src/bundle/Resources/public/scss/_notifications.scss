@@ -1,10 +1,29 @@
 .ez-notifications-container {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	line-height: 2.1;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    line-height: 2.25;
 
-	.alert {
-		margin-bottom: 0;
-	}
+    .alert {
+        margin-bottom: 0;
+        transition: opacity 0.3s $ez-admin-transition;
+
+        &-success {
+            background-color: $ez-color-positive;
+            border-color: $ez-color-positive;
+            color: $ez-white;
+        }
+
+        &-warning {
+            background-color: $ez-color-warning;
+            border-color: $ez-color-warning;
+            color: $ez-black;
+        }
+
+        &-danger {
+            background-color: $ez-color-danger;
+            border-color: $ez-color-danger;
+            color: $ez-white;
+        }
+    }
 }
