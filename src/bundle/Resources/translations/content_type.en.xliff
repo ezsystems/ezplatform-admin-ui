@@ -311,6 +311,11 @@
         <target state="new">Edit</target>
         <note>key: content_type_group.view.list.action.edit</note>
       </trans-unit>
+      <trans-unit id="125bee275441fe2bd28cb9388b790c634d8ae3c6" resname="content_type_group.view.list.column.content_types_count">
+        <source>Content Types count</source>
+        <target state="new">Content Types count</target>
+        <note>key: content_type_group.view.list.column.content_types_count</note>
+      </trans-unit>
       <trans-unit id="cd462ce30cd4d0b21393e24ca2c9e974369c1f57" resname="content_type_group.view.list.column.id">
         <source>ID</source>
         <target state="new">ID</target>
