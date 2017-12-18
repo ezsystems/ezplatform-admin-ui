@@ -86,7 +86,7 @@
                         {{ pagerfanta(pager, 'ez') }}
                     </div>
                 {% endif %}
-                {% include 'EzPlatformAdminUiBundle:admin/trash:empty_trash_confirmation_modal.html.twig' with {'form': form_trash_empty, 'trash_items_count': trash_items|length} %}
+                {% include 'EzPlatformAdminUiBundle:admin/trash:empty_trash_confirmation_modal.html.twig' with {'form': form_trash_empty, 'trash_items_count': pager.nbResults} %}
             </section>
         </div>
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
