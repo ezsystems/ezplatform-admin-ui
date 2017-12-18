@@ -112,6 +112,8 @@
         };
         const handleClickOnOption = (event) => handleSelection(event.target, !event.target.classList.contains(CLASS_SELECTED));
 
+        selectFirstItem();
+
         container.querySelector(SELECTOR_SELECTED).addEventListener('click', handleClickOnInput, false);
         [...container.querySelectorAll(`${SELECTOR_OPTIONS} li`)].forEach(option => option.addEventListener('click', handleClickOnOption, false));
     });
