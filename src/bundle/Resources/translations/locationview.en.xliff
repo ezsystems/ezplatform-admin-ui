@@ -156,6 +156,11 @@
         <target state="new">Main</target>
         <note>key: tab.locations.main</note>
       </trans-unit>
+      <trans-unit id="e704444c07d73c053f58f427ebcc0b6b2042c63d" resname="tab.locations.modal.message">
+        <source>Do you want to delete Location?</source>
+        <target state="new">Do you want to delete Location?</target>
+        <note>key: tab.locations.modal.message</note>
+      </trans-unit>
       <trans-unit id="7514a2a1e82c82fa3a197dc3da8be56a9c68f136" resname="tab.locations.path">
         <source>Path</source>
         <target state="new">Path</target>
@@ -291,6 +296,11 @@
         <target state="new">Language name</target>
         <note>key: tab.translations.language_name</note>
       </trans-unit>
+      <trans-unit id="e8d52c9e980661178d301e925ac8c74661b4350d" resname="tab.translations.modal.message">
+        <source>Do you want to delete Translation?</source>
+        <target state="new">Do you want to delete Translation?</target>
+        <note>key: tab.translations.modal.message</note>
+      </trans-unit>
       <trans-unit id="852ca97b78e55e9b7734ff3e5a6c1b3fde6eca6f" resname="tab.translations.translation_manger">
         <source>Translation manager</source>
         <target state="new">Translation manager</target>
@@ -350,6 +360,11 @@
         <source>Draft under edit</source>
         <target state="new">Draft under edit</target>
         <note>key: tab.versions.draft_under_edit</note>
+      </trans-unit>
+      <trans-unit id="134ac8f9b086171dcda7931b3bb7acc0042bb1c9" resname="tab.versions.modal.message">
+        <source>Do you want to delete Versions?</source>
+        <target state="new">Do you want to delete Versions?</target>
+        <note>key: tab.versions.modal.message</note>
       </trans-unit>
       <trans-unit id="8cf65ae83fb935858286b91006ff05b9d6d15c4a" resname="tab.versions.no_permission">
         <source>You don't have access to view the content item's versions</source>
