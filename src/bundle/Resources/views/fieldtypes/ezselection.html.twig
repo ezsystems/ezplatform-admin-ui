@@ -1,5 +1,5 @@
 {%- block ezplatform_fieldtype_ezselection_widget -%}
-    {% set attr = attr|merge({'hidden': 'hidden'}) %}
+    {% set attr = attr|merge({'hidden': 'hidden', 'class': 'ez-data-source__input ez-data-source__input--selection'}) %}
     {{ block('choice_widget') }}
 
     <ul class="ez-data-source__selected">
