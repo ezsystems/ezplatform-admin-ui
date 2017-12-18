@@ -4,7 +4,10 @@
 
 {% if draft_versions is not empty %}
     <section>
-        {{ form_start(form_version_remove_draft, {'action': path('ezplatform.version.remove')}) }}
+        {{ form_start(form_version_remove_draft, {
+            'action': path('ezplatform.version.remove'),
+            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-'~form_version_remove_draft.remove.vars.id }
+        }) }}
         {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'), tools: tab.table_header_tools(form_version_remove_draft) } %}
         {% if draft_versions is not empty %}
             {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', { 'versions': draft_versions, 'is_draft': true, 'form': form_version_remove_draft }) }}
@@ -32,7 +35,10 @@
 
 {% if archived_versions is not empty %}
     <section>
-        {{ form_start(form_version_remove_archived, {'action': path('ezplatform.version.remove')}) }}
+        {{ form_start(form_version_remove_archived, {
+            'action': path('ezplatform.version.remove'),
+            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-'~form_version_remove_archived.remove.vars.id }
+        }) }}
         {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.versions.archived_versions'|trans()|desc('Archived versions'), tools: tab.table_header_tools(form_version_remove_archived) } %}
         {% if archived_versions is not empty %}
             {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', { 'versions': archived_versions, 'form': form_version_remove_archived }) }}
@@ -46,10 +52,25 @@
 {% endif %}
 
 {% macro table_header_tools(form) %}
-    <button class="btn btn-danger btn--trigger" data-click="#{{ form.remove.vars.id }}">
+    {% set modal_data_target = 'delete-versions-modal' %}
+    <button id="delete-translations-{{ form.remove.vars.id }}" type="button" class="btn btn-danger" disabled data-toggle="modal"
+            data-target="#{{ modal_data_target }}">
         <svg class="ez-icon ez-icon-trash">
             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                  xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
+    {% include '@EzPlatformAdminUi/bulk_delete_confirmation_modal.html.twig' with {
+    'id': modal_data_target,
+    'message': 'tab.locations.modal.message'|trans|desc('Do you want to delete Translation?'),
+    'data_click': '#' ~ form.remove.vars.id,
+    }%}
 {% endmacro %}
+
+{% block javascripts %}
+    {% javascripts
+    '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
