@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Model\Message;
@@ -40,19 +41,25 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     /** @var ConfigResolverInterface */
     private $configResolver;
 
+    /** @var PermissionResolver */
+    private $permissionResolver;
+
     /**
      * @param MenuItemFactory $factory
      * @param EventDispatcherInterface $eventDispatcher
      * @param ConfigResolverInterface $configResolver
+     * @param PermissionResolver $permissionResolver
      */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        PermissionResolver $permissionResolver
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->configResolver = $configResolver;
+        $this->permissionResolver = $permissionResolver;
     }
 
     protected function getConfigureEventName(): string
@@ -75,19 +82,17 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         /** @var ItemInterface|ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
-        $menu->setChildren([
-            self::ITEM_CONTENT => $this->factory->createItem(
-                self::ITEM_CONTENT,
-                []
-            ),
-            self::ITEM_ADMIN => $this->factory->createItem(
-                self::ITEM_ADMIN,
-                []
-            ),
-        ]);
+        $contentMenuItems = $this->getContentMenuItems();
+        if (!empty($contentMenuItems)) {
+            $menu->addChild($this->factory->createItem(self::ITEM_CONTENT, []));
+            $menu[self::ITEM_CONTENT]->setChildren($contentMenuItems);
+        }
 
-        $menu[self::ITEM_CONTENT]->setChildren($this->getContentMenuItems());
-        $menu[self::ITEM_ADMIN]->setChildren($this->getAdminMenuItems());
+        $adminMenuItems = $this->getAdminMenuItems();
+        if (!empty($adminMenuItems)) {
+            $menu->addChild($this->factory->createItem(self::ITEM_ADMIN, []));
+            $menu[self::ITEM_ADMIN]->setChildren($adminMenuItems);
+        }
 
         return $menu;
     }
@@ -112,6 +117,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             $rootMediaId,
             ['label' => self::ITEM_CONTENT__MEDIA]
         );
+        $linkManagerItem = $this->createLinkManagerMenuItem();
 
         if (null !== $contentStructureItem) {
             $menuItems[$contentStructureItem->getName()] = $contentStructureItem;
@@ -121,17 +127,9 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             $menuItems[$mediaItem->getName()] = $mediaItem;
         }
 
-        $menuItems[self::ITEM_CONTENT__LINK_MANAGER] = $this->factory->createItem(
-            self::ITEM_CONTENT__LINK_MANAGER,
-            [
-                'route' => 'ezplatform.link_manager.list', 'extras' => [
-                    'routes' => [
-                        'edit' => 'ezplatform.link_manager.edit',
-                        'view' => 'ezplatform.link_manager.view',
-                    ],
-                ],
-            ]
-        );
+        if (null !== $linkManagerItem) {
+            $menuItems[$linkManagerItem->getName()] = $linkManagerItem;
+        }
 
         return $menuItems;
     }
@@ -141,12 +139,17 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
      */
     private function getAdminMenuItems(): array
     {
-        $menuItems = [
-            self::ITEM_ADMIN__SYSTEMINFO => $this->createMenuItem(
+        $menuItems = [];
+
+        if ($this->permissionResolver->hasAccess('setup', 'system_info')) {
+            $menuItems[self::ITEM_ADMIN__SYSTEMINFO] = $this->createMenuItem(
                 self::ITEM_ADMIN__SYSTEMINFO,
                 ['route' => 'ezplatform.systeminfo']
-            ),
-            self::ITEM_ADMIN__SECTIONS => $this->createMenuItem(
+            );
+        }
+
+        if ($this->permissionResolver->hasAccess('section', 'view')) {
+            $menuItems[self::ITEM_ADMIN__SECTIONS] = $this->createMenuItem(
                 self::ITEM_ADMIN__SECTIONS,
                 ['route' => 'ezplatform.section.list', 'extras' => [
                     'routes' => [
@@ -155,8 +158,11 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                         'create' => 'ezplatform.section.create',
                     ],
                 ]]
-            ),
-            self::ITEM_ADMIN__ROLES => $this->createMenuItem(
+            );
+        }
+
+        if ($this->permissionResolver->hasAccess('role', 'read')) {
+            $menuItems[self::ITEM_ADMIN__ROLES] = $this->createMenuItem(
                 self::ITEM_ADMIN__ROLES,
                 ['route' => 'ezplatform.role.list', 'extras' => [
                     'routes' => [
@@ -168,31 +174,33 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                         'policy_create' => 'ezplatform.policy.create',
                     ],
                 ]]
-            ),
-            self::ITEM_ADMIN__LANGUAGES => $this->createMenuItem(
-                self::ITEM_ADMIN__LANGUAGES,
-                ['route' => 'ezplatform.language.list', 'extras' => [
-                    'routes' => [
-                        'edit' => 'ezplatform.language.edit',
-                        'view' => 'ezplatform.language.view',
-                        'create' => 'ezplatform.language.create',
-                    ],
-                ]]
-            ),
-            self::ITEM_ADMIN__CONTENT_TYPES => $this->createMenuItem(
-                self::ITEM_ADMIN__CONTENT_TYPES,
-                ['route' => 'ezplatform.content_type_group.list', 'extras' => [
-                    'routes' => [
-                        'update' => 'ezplatform.content_type_group.update',
-                        'view' => 'ezplatform.content_type_group.view',
-                        'create' => 'ezplatform.content_type_group.create',
-                        'content_type_add' => 'ezplatform.content_type.add',
-                        'content_type_view' => 'ezplatform.content_type.view',
-                        'content_type_edit' => 'ezplatform.content_type.edit',
-                    ],
-                ]]
-            ),
-        ];
+            );
+        }
+
+        $menuItems[self::ITEM_ADMIN__LANGUAGES] = $this->createMenuItem(
+            self::ITEM_ADMIN__LANGUAGES,
+            ['route' => 'ezplatform.language.list', 'extras' => [
+                'routes' => [
+                    'edit' => 'ezplatform.language.edit',
+                    'view' => 'ezplatform.language.view',
+                    'create' => 'ezplatform.language.create',
+                ],
+            ]]
+        );
+
+        $menuItems[self::ITEM_ADMIN__CONTENT_TYPES] = $this->createMenuItem(
+            self::ITEM_ADMIN__CONTENT_TYPES,
+            ['route' => 'ezplatform.content_type_group.list', 'extras' => [
+                'routes' => [
+                    'update' => 'ezplatform.content_type_group.update',
+                    'view' => 'ezplatform.content_type_group.view',
+                    'create' => 'ezplatform.content_type_group.create',
+                    'content_type_add' => 'ezplatform.content_type.add',
+                    'content_type_view' => 'ezplatform.content_type.view',
+                    'content_type_edit' => 'ezplatform.content_type.edit',
+                ],
+            ]]
+        );
 
         $rootUsersId = $this->configResolver->getParameter('location_ids.users');
         $usersItem = $this->factory->createLocationMenuItem(
@@ -206,6 +214,29 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         }
 
         return $menuItems;
+    }
+
+    /**
+     * @return ItemInterface|null
+     */
+    private function createLinkManagerMenuItem(): ?ItemInterface
+    {
+        if (!$this->permissionResolver->hasAccess('url', 'view')) {
+            return null;
+        }
+
+        return $this->factory->createItem(
+            self::ITEM_CONTENT__LINK_MANAGER,
+            [
+                'route' => 'ezplatform.link_manager.list',
+                'extras' => [
+                    'routes' => [
+                        'edit' => 'ezplatform.link_manager.edit',
+                        'view' => 'ezplatform.link_manager.view',
+                    ],
+                ],
+            ]
+        );
     }
 
     /**
