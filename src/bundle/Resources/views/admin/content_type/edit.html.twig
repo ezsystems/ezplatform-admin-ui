@@ -2,28 +2,6 @@
 
 {% trans_default_domain 'content_type' %}
 
-{% form_theme form _self %}
-
-{% block _ezrepoforms_contenttype_update_removeFieldDefinition_widget %}
-    {%- set type = type|default('submit') -%}
-    {%- if label is not same as(false) and label is empty -%}
-        {%- if label_format is not empty -%}
-            {% set label = label_format|replace({
-            '%name%': name,
-            '%id%': id,
-            }) %}
-        {%- else -%}
-            {% set label = name|humanize %}
-        {%- endif -%}
-    {%- endif -%}
-    <button type="{{ type }}" {{ block('button_attributes') }}>
-        <svg class="ez-icon ez-icon-trash">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-        </svg>
-    </button>
-{% endblock %}
-
 {% block breadcrumbs_admin %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
@@ -73,7 +51,17 @@
                     {{ form_widget(form.fieldTypeSelection, { attr: { class: 'ez-field-selection'}}) }}
                     {{ form_widget(form.addFieldDefinition, { attr: { class: 'btn btn-primary'}}) }}
                     </div>
-                    {{ form_widget(form.removeFieldDefinition, { attr: { class: 'btn btn-danger'}}) }}
+
+                    <button type="button"
+                            class="btn btn-danger"
+                            data-toggle="modal"
+                            data-target="#delete-content-type-modal">
+                        <svg class="ez-icon">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        </svg>
+                    </button>
+
+                    {% include 'EzPlatformAdminUiBundle:admin/content_type:delete_confirmation_modal.html.twig' with {'form': form} %}
                 </div>
             </div>
             <div class="card-body">

@@ -36,6 +36,11 @@
         <target state="new">Delete content type groups</target>
         <note>key: content_type_groups_delete_form.delete</note>
       </trans-unit>
+      <trans-unit id="5f7545e2c370cd0511521d95d0309d264b5d16e5" resname="content_types_delete_form.delete">
+        <source>Delete content types</source>
+        <target state="new">Delete content types</target>
+        <note>key: content_types_delete_form.delete</note>
+      </trans-unit>
       <trans-unit id="0ad9197dcdbe88b1a05f099c564dc2b5634f8aa5" resname="ezplatform.language.create.enabled">
         <source>Enabled</source>
         <target state="new">Enabled</target>

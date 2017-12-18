@@ -12,12 +12,19 @@
                          xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                 </svg>
             </a>
-            <button id="delete-policies" class="btn btn-danger btn--trigger" disabled data-click="#policies_delete_delete">
+            {% set modal_data_target = 'delete-policies-modal' %}
+            <button id="delete-policies" type="button" class="btn btn-danger" disabled data-toggle="modal"
+                    data-target="#{{ modal_data_target }}">
                 <svg class="ez-icon ez-icon-trash">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
                          xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                 </svg>
             </button>
+            {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+            'id': modal_data_target,
+            'message': 'policy.modal.message'|trans|desc('Do you want to delete Policy?'),
+            'data_click': '#policies_delete_delete',
+            }%}
         </div>
     </div>
     {{ form_start(form_policies_delete, {

@@ -76,6 +76,21 @@
         <target state="new">Cancel</target>
         <note>key: form.cancel</note>
       </trans-unit>
+      <trans-unit id="7fe072f41348fb097b6bb018eec4f1b1bc9cffc3" resname="modal.cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: modal.cancel</note>
+      </trans-unit>
+      <trans-unit id="9eae227b7c27ab230a6d0ce5947d93e7d2e1626f" resname="modal.delete">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note>key: modal.delete</note>
+      </trans-unit>
+      <trans-unit id="08a5f336891a76fbd5fce4f454bb2d71b1df0223" resname="modal.title">
+        <source>Please confirm</source>
+        <target state="new">Please confirm</target>
+        <note>key: modal.title</note>
+      </trans-unit>
       <trans-unit id="6fa93ef4dfbce97076a254427bb30bf7c5819c5d" resname="search.perform">
         <source>Search</source>
         <target state="new">Search</target>

@@ -35,12 +35,19 @@
                              xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                     </svg>
                 </a>
-                <button id="delete-roles" class="btn btn-danger btn--trigger" disabled data-click="#delete-roles_delete">
+                {% set modal_data_target = 'delete-sections-modal' %}
+                <button id="delete-roles" type="button" class="btn btn-danger" disabled data-toggle="modal"
+                        data-target="#{{ modal_data_target }}">
                     <svg class="ez-icon ez-icon-trash">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink"
                              xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                     </svg>
                 </button>
+                {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+                    'id': modal_data_target,
+                    'message': 'role.modal.message'|trans|desc('Do you want to delete Role?'),
+                    'data_click': '#delete-roles_delete',
+                }%}
             </div>
         </div>
 
