@@ -23,6 +23,8 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 
 class DetailsTab extends AbstractTab implements OrderedTabInterface
 {
+    const URI_FRAGMENT = 'ez-tab-location-view-details';
+
     /** @var Repository\ContentTypeService */
     protected $contentTypeService;
 
