@@ -76,6 +76,7 @@ class ContentTypeGroupController extends Controller
     public function listAction(): Response
     {
         $deletableContentTypeGroup = [];
+        $count = [];
 
         $contentTypeGroupList = $this->contentTypeService->loadContentTypeGroups();
 
@@ -84,13 +85,16 @@ class ContentTypeGroupController extends Controller
         );
 
         foreach ($contentTypeGroupList as $contentTypeGroup) {
-            $deletableContentTypeGroup[$contentTypeGroup->id] = !(bool)count($this->contentTypeService->loadContentTypes($contentTypeGroup));
+            $contentTypesCount = count($this->contentTypeService->loadContentTypes($contentTypeGroup));
+            $deletableContentTypeGroup[$contentTypeGroup->id] = !(bool)$contentTypesCount;
+            $count[$contentTypeGroup->id] = $contentTypesCount;
         }
 
         return $this->render('@EzPlatformAdminUi/admin/content_type_group/list.html.twig', [
             'content_type_groups' => $contentTypeGroupList,
             'form_content_type_groups_delete' => $deleteContentTypeGroupsForm->createView(),
             'deletable' => $deletableContentTypeGroup,
+            'content_types_count' => $count,
         ]);
     }
 

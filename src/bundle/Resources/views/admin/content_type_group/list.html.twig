@@ -57,6 +57,7 @@
                     <th></th>
                     <th>{{ 'content_type_group.view.list.column.identifier'|trans|desc('Name') }}</th>
                     <th>{{ 'content_type_group.view.list.column.id'|trans|desc('ID') }}</th>
+                    <th>{{ 'content_type_group.view.list.column.content_types_count'|trans|desc('Content Types count') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -74,6 +75,7 @@
                         <a href="{{ view_url }}">{{ content_type_group.identifier }}</a>
                     </td>
                     <td>{{ content_type_group.id }}</td>
+                    <td>{{ content_types_count[content_type_group.id] }}</td>
                     <td class="text-right">
                         {% set edit_url = path('ezplatform.content_type_group.update', {
                             contentTypeGroupId: content_type_group.id
