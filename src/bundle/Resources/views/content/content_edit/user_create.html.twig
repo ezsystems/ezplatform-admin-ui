@@ -31,7 +31,7 @@
     {{ knp_menu_render(user_create_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
-{% block closeButton %}
+{% block close_button %}
     <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': parentGroup.content.versionInfo.contentInfo.mainLocationId}) }}"></a>
 {% endblock %}
 

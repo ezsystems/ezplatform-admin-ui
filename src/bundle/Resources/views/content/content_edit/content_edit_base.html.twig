@@ -3,13 +3,13 @@
 {% trans_default_domain 'content_edit' %}
 {% form_theme form with 'EzPlatformAdminUiBundle:content:form_fields.html.twig' %}
 
-{% block bodyClass %}ez-standalone-page ez-content-edit{% endblock %}
+{% block body_class %}ez-standalone-page ez-content-edit{% endblock %}
 {% block navigation %}{% endblock %}
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
         {% block left_sidebar %}{% endblock left_sidebar %}
         <div class="container px-0 pb-4 mt-5 ez-content-edit-container">
-            {% block closeButton %}{% endblock %}
+            {% block close_button %}{% endblock %}
             {% block details %}{% endblock %}
 
             {% block form_before %}{% endblock %}

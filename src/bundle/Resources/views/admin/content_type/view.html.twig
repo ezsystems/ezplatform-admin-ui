@@ -2,7 +2,7 @@
 
 {% trans_default_domain 'content_type' %}
 
-{% block bodyClass %}ez-content-type-view{% endblock %}
+{% block body_class %}ez-content-type-view{% endblock %}
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
@@ -13,7 +13,7 @@
     ]} %}
 {% endblock %}
 
-{% block pageTitle %}
+{% block page_title %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
         title: 'content_type.view.view.title'|trans({ '%name%': content_type.name })|desc('%name%'),
         iconName: 'content-type'

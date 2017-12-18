@@ -4,7 +4,7 @@
 
 {% form_theme form_roles_delete '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
 
-{% block bodyClass %}ez-role-list-view{% endblock %}
+{% block body_class %}ez-role-list-view{% endblock %}
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
@@ -13,7 +13,7 @@
     ]} %}
 {% endblock %}
 
-{% block pageTitle %}
+{% block page_title %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
         title: 'role.breadcrumb.list'|trans|desc('Roles'),
         iconName: 'roles'
