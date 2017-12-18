@@ -1,25 +1,27 @@
 <div class="modal fade" id="delete-section-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog ez-modal--send-to-trash" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ 'section.modal.title'|trans|desc('Please confirm') }}</h5>
+                <h5 class="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>{{ 'section.modal.message'|trans|desc('Do you want to delete section?') }}</p>
+                <p class="modal-body-main">
+                    {{ 'section.modal.message'|trans|desc('Do you want to delete section?') }}
+                </p>
             </div>
             <div class="modal-footer">
                 {{ form_start(form, {
                     "action": path("ezplatform.section.delete", {"sectionId": section.id}),
                     'attr': {'class': 'd-inline-block'}
                 }) }}
-                {{ form_widget(form.delete, {'attr': {'class': 'btn btn-danger', 'disabled': not deletable}}) }}
-                {{ form_end(form) }}
                 <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">
                     {{ 'form.cancel'|trans|desc('Cancel') }}
                 </button>
+                {{ form_widget(form.delete, {'attr': {'class': 'btn btn-danger', 'disabled': not deletable}}) }}
+                {{ form_end(form) }}
             </div>
         </div>
     </div>

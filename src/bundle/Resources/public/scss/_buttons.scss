@@ -69,3 +69,53 @@
     align-items: center;
     justify-content: center;
 }
+
+.ez-content-view,
+.ez-trash-list-view,
+.ez-section-view,
+.ez-section-list-view,
+.ez-role-view,
+.ez-role-list-view,
+.ez-language-list-view,
+.ez-content-type-group-list-view {
+    .ez-context-menu,
+    .ez-main-container {
+        .ez-modal--send-to-trash {
+            .modal-footer {
+                border-top: none;
+
+                .btn {
+                    font-size: 1rem;
+                    padding-bottom: .5rem;
+                }
+                .btn-secondary {
+                    background-color: $ez-color-base-medium;
+                    border-color: $ez-color-base-medium;
+
+                    &:hover {
+                        background-color: darken($ez-color-base-medium, 15%);
+                        border-color: darken($ez-color-base-medium, 15%);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ez-section-view,
+.ez-section-list-view,
+.ez-role-view,
+.ez-role-list-view,
+.ez-language-list-view,
+.ez-content-type-group-list-view {
+    .ez-main-container {
+        .ez-modal--send-to-trash {
+            .modal-footer {
+                .btn {
+                    line-height: 1.25;
+                    padding: .5rem .75rem;
+                }
+            }
+        }
+    }
+}
