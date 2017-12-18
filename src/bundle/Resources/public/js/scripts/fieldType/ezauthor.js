@@ -97,6 +97,7 @@
             event.target.closest(SELECTOR_AUTHOR).remove();
 
             this.updateDisabledState(authorNode);
+            this.reinit();
         }
 
         /**
