@@ -7,8 +7,7 @@
     const onConfirm = (items) => {
         closeUDW();
 
-        // @todo hardcoded link has to go...
-        window.location.href = `/admin/content/location/${items[0].id}`;
+        window.location.href = window.Routing.generate('_ezpublishLocation', { locationId: items[0].id });
     };
     const onCancel = () => closeUDW();
     const openUDW = (event) => {

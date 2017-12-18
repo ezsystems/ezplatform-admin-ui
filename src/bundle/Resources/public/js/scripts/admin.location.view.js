@@ -26,6 +26,9 @@
 
         doc.querySelector('#form_subitems_content_edit_create').click();
     };
+    const handleViewItem = (locationId) => {
+        window.location.href = window.Routing.generate('_ezpublishLocation', { locationId });
+    };
 
     listContainers.forEach(container => {
         const subItemsList = JSON.parse(container.dataset.items).SubitemsList;
@@ -42,12 +45,10 @@
 
         global.ReactDOM.render(global.React.createElement(global.eZ.modules.SubItems, {
             handleEditItem,
+            handleViewItem,
             parentLocationId: container.dataset.location,
             sortClauses: {[sortField]: sortOrder},
             restInfo: {token, siteaccess},
-            // @TODO
-            // discover content location view URL from backend routes
-            locationViewLink: '/admin/content/location/{{locationId}}',
             extraActions: [{
                 component: global.eZ.modules.MultiFileUpload,
                 attrs: Object.assign({}, mfuAttrs, {
