@@ -22,8 +22,10 @@ services:
         lazy: true
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ComponentExtension:
-        autowire: true
-        autoconfigure: true
-        public: false
         tags:
             - { name: twig.extension }
+
+    EzSystems\EzPlatformAdminUi\Component\Renderer\DefaultRenderer:
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Component\Renderer\RendererInterface: '@EzSystems\EzPlatformAdminUi\Component\Renderer\DefaultRenderer'

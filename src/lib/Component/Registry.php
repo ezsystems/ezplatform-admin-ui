@@ -40,4 +40,13 @@ class Registry
     {
         return $this->components[$group] ?? [];
     }
+
+    /**
+     * @param string $group
+     * @param array $components
+     */
+    public function setComponents(string $group, array $components)
+    {
+        $this->components[$group] = $components;
+    }
 }
