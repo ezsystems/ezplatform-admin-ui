@@ -1,6 +1,6 @@
 {% trans_default_domain 'language' %}
 
-<div class="modal fade ez-modal--send-to-trash" id="delete-language-modal" tabindex="-1" role="dialog">
+<div class="modal fade ez-modal ez-modal--send-to-trash" id="delete-language-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,8 +12,8 @@
                 <p>{{ 'language.modal.message'|trans|desc('Do you want to delete Language?') }}</p>
             </div>
             <div class="modal-footer">
-                {{ form_widget(deleteForm.delete, { 'attr': {'class': 'btn btn-danger'} }) }}
                 <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">{{ 'language.form.cancel'|trans|desc('Cancel') }}</button>
+                {{ form_widget(deleteForm.delete, { 'attr': {'class': 'btn btn-danger'} }) }}
             </div>
         </div>
     </div>

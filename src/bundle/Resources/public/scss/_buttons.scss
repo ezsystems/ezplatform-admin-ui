@@ -70,29 +70,27 @@
     justify-content: center;
 }
 
-.ez-modal {
-    &--send-to-trash {
-        .modal-header {
-            .close {
-                position: absolute;
-                right: 1rem;
-            }
+.ez-modal--send-to-trash {
+    .modal-header {
+        .close {
+            position: absolute;
+            right: 1rem;
+        }
+    }
+
+    .modal-footer {
+        .btn {
+            line-height: 1.25;
+            padding: .5rem .75rem;
         }
 
-        .modal-footer {
-            .btn {
-                line-height: 1.25;
-                padding: .5rem .75rem;
-            }
+        .btn-secondary {
+            background-color: $ez-color-base-medium;
+            border-color: $ez-color-base-medium;
 
-            .btn-secondary {
-                background-color: $ez-color-base-medium;
-                border-color: $ez-color-base-medium;
-
-                &:hover {
-                    background-color: darken($ez-color-base-medium, 15%);
-                    border-color: darken($ez-color-base-medium, 15%);
-                }
+            &:hover {
+                background-color: $ez-ground-base-medium-hover;
+                border-color: $ez-ground-base-medium-hover;
             }
         }
     }
@@ -100,13 +98,11 @@
 
 .ez-content-view,
 .ez-trash-list-view {
-    .ez-modal {
-        &--send-to-trash {
-            .modal-footer {
-                .btn {
-                    font-size: 1rem;
-                    padding-bottom: .5rem;
-                }
+    .ez-modal--send-to-trash {
+        .modal-footer {
+            .btn {
+                font-size: 1rem;
+                padding-bottom: .5rem;
             }
         }
     }
