@@ -28,6 +28,7 @@ use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
 use EzSystems\EzPlatformAdminUiBundle\View\EzPagerfantaView;
 use EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate;
+use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,6 +70,9 @@ class SectionController extends Controller
     /** @var PathService */
     private $pathService;
 
+    /** @var int */
+    private $defaultPaginationLimit;
+
     /**
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
@@ -81,6 +85,7 @@ class SectionController extends Controller
      * @param ContentTypeService $contentTypeService
      * @param LocationService $locationService
      * @param PathService $pathService
+     * @param int $defaultPaginationLimit
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -93,7 +98,8 @@ class SectionController extends Controller
         SubmitHandler $submitHandler,
         ContentTypeService $contentTypeService,
         LocationService $locationService,
-        PathService $pathService
+        PathService $pathService,
+        int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -106,16 +112,27 @@ class SectionController extends Controller
         $this->contentTypeService = $contentTypeService;
         $this->locationService = $locationService;
         $this->pathService = $pathService;
+        $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
     /**
+     * @param Request $request
+     *
      * @return Response
      */
-    public function listAction(): Response
+    public function listAction(Request $request): Response
     {
-        /** @var Section[] $sectionList */
-        $sectionList = $this->sectionService->loadSections();
+        $page = $request->query->get('page') ?? 1;
 
+        $pagerfanta = new Pagerfanta(
+            new ArrayAdapter($this->sectionService->loadSections())
+        );
+
+        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
+
+        /** @var Section[] $sectionList */
+        $sectionList = $pagerfanta->getCurrentPageResults();
         $contentCountBySectionId = [];
         $deletableSections = [];
 
@@ -135,7 +152,7 @@ class SectionController extends Controller
         return $this->render('EzPlatformAdminUiBundle:admin/section:list.html.twig', [
             'can_edit' => $this->isGranted(new Attribute('section', 'edit')),
             'can_assign' => $this->isGranted(new Attribute('section', 'assign')),
-            'sections' => $sectionList,
+            'pager' => $pagerfanta,
             'content_count' => $contentCountBySectionId,
             'deletable' => $deletableSections,
             'form_sections_delete' => $deleteSectionsForm->createView(),

@@ -101,11 +101,6 @@
         <target state="new">Do you want to delete section?</target>
         <note>key: section.modal.message</note>
       </trans-unit>
-      <trans-unit id="27faaef86f94894cd19f80c94148cebc1a5dbfc0" resname="section.modal.title">
-        <source>Please confirm</source>
-        <target state="new">Please confirm</target>
-        <note>key: section.modal.title</note>
-      </trans-unit>
       <trans-unit id="1152c93462d8bed85642b961f01ed63a6f2525ab" resname="tab.locations.location_content_swap">
         <source>Location Content Swap</source>
         <target state="new">Location Content Swap</target>
@@ -140,11 +135,6 @@
         <source>Cancel</source>
         <target state="new">Cancel</target>
         <note>key: trash.form.cancel</note>
-      </trans-unit>
-      <trans-unit id="d207d407b17b38f0acb52606dd827c6b0fbd358b" resname="trash.form.title">
-        <source>Please confirm</source>
-        <target state="new">Please confirm</target>
-        <note>key: trash.form.title</note>
       </trans-unit>
       <trans-unit id="2720e3018fc8b1158cb728b1d5dc377ef7293b57" resname="trash.modal.message">
         <source>Are you sure you want to send this content item to trash?</source>

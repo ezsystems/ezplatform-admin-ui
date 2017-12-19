@@ -13,6 +13,7 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ValueObjectVisitorPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\LocationIds;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Pagination;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\SubitemsModule;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -27,6 +28,7 @@ class EzPlatformAdminUiBundle extends Bundle
         $core = $container->getExtension('ezpublish');
         $core->addConfigParser(new LocationIds());
         $core->addConfigParser(new SubitemsModule());
+        $core->addConfigParser(new Pagination());
         $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ezplatform_default_settings.yml']);
 
         $this->addCompilerPasses($container);

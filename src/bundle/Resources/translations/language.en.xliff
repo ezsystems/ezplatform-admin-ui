@@ -81,11 +81,6 @@
         <target state="new">Do you want to delete language?</target>
         <note>key: language.modal.message</note>
       </trans-unit>
-      <trans-unit id="5194109109a1b0a7ac056729d9369fb757e8d9cf" resname="language.modal.title">
-        <source>Please confirm</source>
-        <target state="new">Please confirm</target>
-        <note>key: language.modal.title</note>
-      </trans-unit>
       <trans-unit id="c0ccfb7e7bc6d434ca93e998637fe775ba4a2de0" resname="language.name">
         <source>Name</source>
         <target state="new">Name</target>
