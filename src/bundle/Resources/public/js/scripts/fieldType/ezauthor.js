@@ -40,7 +40,7 @@
             const isEmpty = !input.value.trim();
             const isValid = global.eZ.errors.emailRegexp.test(input.value);
             const isError = (isRequired && isEmpty) || (!isEmpty && !isValid);
-            const label = input.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
+            const label = input.closest(SELECTOR_FIELD_EMAIL).querySelector(SELECTOR_LABEL).innerHTML;
             const result = { isError };
 
             if (isRequired && isEmpty) {
