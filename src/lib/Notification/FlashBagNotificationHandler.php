@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Notification;
 
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class FlashBagNotificationHandler implements NotificationHandlerInterface
 {
@@ -17,15 +17,17 @@ class FlashBagNotificationHandler implements NotificationHandlerInterface
     const TYPE_WARNING = 'warning';
     const TYPE_ERROR = 'danger';
 
-    /** @var FlashBagInterface */
-    protected $flashBag;
+    /**
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+     */
+    protected $session;
 
     /**
-     * @param FlashBagInterface $flashBag
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
      */
-    public function __construct(FlashBagInterface $flashBag)
+    public function __construct(SessionInterface $session)
     {
-        $this->flashBag = $flashBag;
+        $this->session = $session;
     }
 
     /**
@@ -33,7 +35,7 @@ class FlashBagNotificationHandler implements NotificationHandlerInterface
      */
     public function info(string $message): void
     {
-        $this->flashBag->add(self::TYPE_INFO, $message);
+        $this->session->getFlashBag()->add(self::TYPE_INFO, $message);
     }
 
     /**
@@ -41,7 +43,7 @@ class FlashBagNotificationHandler implements NotificationHandlerInterface
      */
     public function success(string $message): void
     {
-        $this->flashBag->add(self::TYPE_SUCCESS, $message);
+        $this->session->getFlashBag()->add(self::TYPE_SUCCESS, $message);
     }
 
     /**
@@ -49,7 +51,7 @@ class FlashBagNotificationHandler implements NotificationHandlerInterface
      */
     public function warning(string $message): void
     {
-        $this->flashBag->add(self::TYPE_WARNING, $message);
+        $this->session->getFlashBag()->add(self::TYPE_WARNING, $message);
     }
 
     /**
@@ -57,6 +59,6 @@ class FlashBagNotificationHandler implements NotificationHandlerInterface
      */
     public function error(string $message): void
     {
-        $this->flashBag->add(self::TYPE_ERROR, $message);
+        $this->session->getFlashBag()->add(self::TYPE_ERROR, $message);
     }
 }

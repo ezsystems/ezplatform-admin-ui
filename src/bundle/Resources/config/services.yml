@@ -63,9 +63,7 @@ services:
     EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory: ~
 
 
-    EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler:
-        arguments:
-            $flashBag: "@=service('session').getFlashBag()"
+    EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler: ~
 
     EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler'
 
