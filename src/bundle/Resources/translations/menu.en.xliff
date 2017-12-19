@@ -171,6 +171,11 @@
         <target state="new">Content structure</target>
         <note>key: main__content__content_structure</note>
       </trans-unit>
+      <trans-unit id="2887dd09dcb0f287e947da3e735133c540991df1" resname="main__content__linkmanager">
+        <source>Link Manager</source>
+        <target state="new">Link Manager</target>
+        <note>key: main__content__linkmanager</note>
+      </trans-unit>
       <trans-unit id="e8c5aefc86b31ee2bed9359787ddf0a2b1cad4a6" resname="main__content__media">
         <source>Media</source>
         <target state="new">Media</target>
@@ -271,6 +276,16 @@
         <target state="new">Empty Trash</target>
         <note>key: trash__sidebar_right__empty_trash</note>
       </trans-unit>
+      <trans-unit id="5ded8d45683caa8bb19649d5cc39bd76ebabfa63" resname="url_edit__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: url_edit__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="9e8d8f6d06a5950f649d63b453d6dab7eba33f11" resname="url_edit__sidebar_right__save">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: url_edit__sidebar_right__save</note>
+      </trans-unit>
       <trans-unit id="06accb26fbb1b72012942af2b3e03f7c138e28c3" resname="user__content">
         <source>Logout</source>
         <target state="new">Logout</target>
@@ -295,21 +310,6 @@
         <source>Update</source>
         <target state="new">Update</target>
         <note>key: user_edit__sidebar_right__update</note>
-      </trans-unit>
-      <trans-unit id="2887dd09dcb0f287e947da3e735133c540991df1" resname="main__content__linkmanager">
-        <source>Link management</source>
-        <target state="new">Link manager</target>
-        <note>key: main__content__linkmanager</note>
-      </trans-unit>
-      <trans-unit id="dde5657fcef604bebe7f04ec38e4522fa8aea514" resname="url_edit__sidebar_right__save">
-        <source>Save</source>
-        <target state="new">Save</target>
-        <note>key: url_edit__sidebar_right__save</note>
-      </trans-unit>
-      <trans-unit id="b6c1e93e1395dddb40be9d88c4a1a6a517aee214" resname="url_edit__sidebar_right__cancel">
-        <source>Discard changes</source>
-        <target state="new">Discard changes</target>
-        <note>key: url_create__sidebar_right__cancel</note>
       </trans-unit>
     </body>
   </file>
