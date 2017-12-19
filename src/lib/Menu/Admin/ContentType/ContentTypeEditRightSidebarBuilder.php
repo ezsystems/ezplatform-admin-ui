@@ -7,13 +7,13 @@
 namespace EzSystems\EzPlatformAdminUi\Menu\Admin\ContentType;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
-use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
+use Symfony\Component\Form\FormView;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Section Edit contextual sidebar menu.
@@ -45,10 +45,8 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var ContentTypeGroup $section */
-        $group = $options['group'];
-
-        $saveId = $options['save_id'];
+        /** @var FormView $contentTypeEditFormView */
+        $contentTypeEditFormView = $options['form_view'];
 
         /** @var ItemInterface|ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
@@ -59,7 +57,7 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
                 [
                     'attributes' => [
                         'class' => 'btn--trigger',
-                        'data-click' => sprintf('#%s', $saveId),
+                        'data-click' => sprintf('#%s', $contentTypeEditFormView['publishContentType']->vars['id']),
                     ],
                     'extras' => ['icon' => 'save'],
                 ]
@@ -67,9 +65,9 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'route' => 'ezplatform.content_type_group.view',
-                    'routeParameters' => [
-                        'contentTypeGroupId' => $group->id,
+                    'attributes' => [
+                        'class' => 'btn--trigger',
+                        'data-click' => sprintf('#%s', $contentTypeEditFormView['removeDraft']->vars['id']),
                     ],
                     'extras' => ['icon' => 'circle-close'],
                 ]

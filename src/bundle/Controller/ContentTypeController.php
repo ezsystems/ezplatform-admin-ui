@@ -124,27 +124,33 @@ class ContentTypeController extends Controller
         ]);
     }
 
-    public function editAction(ContentTypeGroup $group, ContentTypeDraft $contentType): Response
+    public function editAction(ContentTypeGroup $group, ContentType $contentType): Response
     {
-        $form = $this->createUpdateForm($group, $contentType);
+        try {
+            $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentType->id);
+            $this->contentTypeService->deleteContentType($contentTypeDraft);
+            $contentTypeDraft = $this->contentTypeService->createContentTypeDraft($contentType);
+        } catch (NotFoundException $e) {
+            $contentTypeDraft = $this->contentTypeService->createContentTypeDraft($contentType);
+        }
 
-        return $this->render('@EzPlatformAdminUi/admin/content_type/edit.html.twig', [
-            'content_type_group' => $group,
-            'content_type' => $contentType,
-            'form' => $form->createView(),
+        return $this->redirectToRoute('ezplatform.content_type.update', [
+            'contentTypeId' => $contentTypeDraft->id,
+            'contentTypeGroupId' => $group->id,
         ]);
     }
 
-    public function updateAction(Request $request, ContentTypeGroup $group, ContentTypeDraft $contentType): Response
+    public function updateAction(Request $request, ContentTypeGroup $group, ContentTypeDraft $contentTypeDraft): Response
     {
-        $form = $this->createUpdateForm($group, $contentType);
+        $form = $this->createUpdateForm($group, $contentTypeDraft);
+
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function () use ($form, $group, $contentType) {
+            $result = $this->submitHandler->handle($form, function () use ($form, $group, $contentTypeDraft) {
                 $languageCode = reset($this->languages);
 
                 foreach ($this->languages as $prioritizedLanguage) {
-                    if (isset($contentType->names[$prioritizedLanguage])) {
+                    if (isset($contentTypeDraft->names[$prioritizedLanguage])) {
                         $languageCode = $prioritizedLanguage;
                         break;
                     }
@@ -165,18 +171,18 @@ class ContentTypeController extends Controller
                     $this->translator->trans(
                         /** @Desc("Content type '%name%' updated.") */
                         'content_type.update.success',
-                        ['%name%' => $contentType->getName()],
+                        ['%name%' => $contentTypeDraft->getName()],
                         'content_type'
                     )
                 );
 
                 $routeName = 'publishContentType' === $form->getClickedButton()->getName()
                     ? 'ezplatform.content_type.view'
-                    : 'ezplatform.content_type.edit';
+                    : 'ezplatform.content_type.update';
 
                 return $this->redirectToRoute($routeName, [
                     'contentTypeGroupId' => $group->id,
-                    'contentTypeId' => $contentType->id,
+                    'contentTypeId' => $contentTypeDraft->id,
                 ]);
             });
 
@@ -187,7 +193,7 @@ class ContentTypeController extends Controller
 
         return $this->render('@EzPlatformAdminUi/admin/content_type/edit.html.twig', [
             'content_type_group' => $group,
-            'content_type' => $contentType,
+            'content_type' => $contentTypeDraft,
             'form' => $form->createView(),
         ]);
     }
