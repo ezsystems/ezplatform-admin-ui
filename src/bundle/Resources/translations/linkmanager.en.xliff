@@ -116,6 +116,16 @@
         <target>Status</target>
         <note>key: url.usages.column.status</note>
       </trans-unit>
+      <trans-unit id="e7ae589ed6ce535328c6561f41bc0171f8fabeb8" resname="url.usages.content_status.draft">
+        <source>Draft</source>
+        <target state="new">Draft</target>
+        <note>key: url.usages.content_status.draft</note>
+      </trans-unit>
+      <trans-unit id="d831a1a74184672a12e3b9ae099692d1b4fd55b1" resname="url.usages.content_status.published">
+        <source>Published</source>
+        <target state="new">Published</target>
+        <note>key: url.usages.content_status.published</note>
+      </trans-unit>
       <trans-unit id="dce98314e5ba27c161d28c789d2b970180ea852c" resname="url.view">
         <source>Link %url%</source>
         <target>Link %url%</target>

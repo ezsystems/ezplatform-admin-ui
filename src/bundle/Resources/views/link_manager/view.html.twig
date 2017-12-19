@@ -90,7 +90,13 @@
                                 {{ ez_content_name(content) }}
                             </a>
                         </td>
-                        <td>{{ content.published ? 'Published' : 'Draft' }}</td>
+                        <td>
+                            {% if content.published %}
+                                {{ 'url.usages.content_status.published'|trans|desc('Published') }}
+                            {% else %}
+                                {{ 'url.usages.content_status.draft'|trans|desc('Draft') }}
+                            {% endif %}
+                        </td>
                         <td class="text-right">
                             {% if can_edit %}
                                 <button class="btn btn-icon btn-link ez-btn--content-edit"
