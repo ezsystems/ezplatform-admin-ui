@@ -117,8 +117,12 @@
             doc.querySelector('body')[methodName]('click', handleClickOutside, false);
         };
         const handleClickOnOption = (event) => handleSelection(event.target, !event.target.classList.contains(CLASS_SELECTED));
+        const isEmpty = ![...container.querySelectorAll('.selected-item')].length;
+        const isSingle = !container.querySelector(SELECTOR_SOURCE_INPUT).multiple;
 
-        selectFirstItem();
+        if (isEmpty && isSingle) {
+            selectFirstItem();
+        }
 
         container.querySelector(SELECTOR_SELECTED).addEventListener('click', handleClickOnInput, false);
         [...container.querySelectorAll(`${SELECTOR_OPTIONS} li`)].forEach(option => option.addEventListener('click', handleClickOnOption, false));
