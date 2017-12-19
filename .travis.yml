@@ -3,6 +3,14 @@ language: php
 matrix:
     include:
         - php: 7.1
+          env: PHPUNIT_CONFIG='phpunit.xml'
+        - php: 7.1
+          env: BEHAT_OPTS="--profile=adminui --suite=adminui" SYMFONY_ENV=behat
+
+env:
+  global:
+    # For acceptance tests
+    - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
 
 # test only master and stable branches (+ Pull requests)
 branches:
@@ -17,11 +25,14 @@ install:
     - travis_retry composer selfupdate
     # Avoid memory issues on composer install
     - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-    # Install packages
-    - travis_retry composer install --prefer-dist --no-interaction
+    # Install packages if needed
+    - if [ "${PHPUNIT_CONFIG}" != '' ]; then travis_retry composer install --prefer-dist --no-interaction --no-suggest ; fi
+    # Prepare Behat environment if needed
+    - if [ "${BEHAT_OPTS}" != "" ]; then ./.travis/prepare_ezplatform.sh ; fi
 
 script:
-    - ./vendor/bin/phpunit
+    - if [ "${PHPUNIT_CONFIG}" != '' ]; then ./vendor/bin/phpunit -c "${PHPUNIT_CONFIG}"; fi
+    - if [ "${BEHAT_OPTS}" != "" ]; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "./bin/behat $BEHAT_OPTS" ; fi
 
 notifications:
     email: false
