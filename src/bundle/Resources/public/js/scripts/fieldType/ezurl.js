@@ -9,15 +9,12 @@
             const input = event.currentTarget;
             const isRequired = input.required;
             const isEmpty = !input.value.trim();
-            const isValid = global.eZ.errors.urlRegexp.test(input.value);
-            const isError = (isEmpty && isRequired) || (!isEmpty && !isValid);
+            const isError = isEmpty && isRequired;
             const label = input.closest(SELECTOR_FIELD_LINK).querySelector(SELECTOR_LABEL).innerHTML;
             const result = { isError };
 
             if (isRequired && isEmpty) {
                 result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
-            } else if (!isEmpty && !isValid) {
-                result.errorMessage = global.eZ.errors.invalidUrl;
             }
 
             return result;
