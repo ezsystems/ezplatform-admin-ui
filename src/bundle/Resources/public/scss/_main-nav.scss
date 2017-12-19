@@ -7,7 +7,7 @@
     > .container-fluid {
         padding-right: 0;
     }
-    
+
     .navbar-brand {
         margin-top: .3125rem;
     }
@@ -52,10 +52,11 @@
             padding: .625rem 1rem;
             color: $ez-black;
 
-            &.active {
+            &.ez-active {
                 border-bottom: 3px solid $ez-color-primary;
                 font-weight: bold;
                 padding-bottom: 0.4375rem;
+                color: $ez-black;
             }
         }
     }
