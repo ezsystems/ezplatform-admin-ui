@@ -8,23 +8,13 @@
     <body>
       <trans-unit id="6a23ab14fca2c76fe7ea84f53221ed5caf907f45" resname="url.detail">
         <source>Link detail</source>
-        <target state="new">Link detail</target>
+        <target>Link detail</target>
         <note>key: url.detail</note>
       </trans-unit>
       <trans-unit id="23bfb0e222eeac1bfa481ba09c5b4aea1d0295da" resname="url.edit">
         <source>Edit</source>
         <target>Edit</target>
         <note>key: url.edit</note>
-      </trans-unit>
-      <trans-unit id="3216bb10c40d59217fdb3802bfa247639d6f1648" resname="url.edit.cancel">
-        <source>Discard changes</source>
-        <target>Discard changes</target>
-        <note>key: url.edit.cancel</note>
-      </trans-unit>
-      <trans-unit id="20b1ccd57b5cd9852f5625ba80299cadc4f1b166" resname="url.edit.save">
-        <source>Save</source>
-        <target>Save</target>
-        <note>key: url.edit.save</note>
       </trans-unit>
       <trans-unit id="e890168e1ef7753c250affa3fcdfb21074c35c6f" resname="url.editing">
         <source>Editing URL: %url%</source>
@@ -66,15 +56,15 @@
         <target>Link manager</target>
         <note>key: url.list</note>
       </trans-unit>
+      <trans-unit id="fd026c688f943eb5d0cb4dadf54c0dac101a9b8b" resname="url.list.no_urls">
+        <source>No URLs</source>
+        <target>No URLs</target>
+        <note>key: url.list.no_urls</note>
+      </trans-unit>
       <trans-unit id="24a0b301998be73b299ac86967952ef729264dec" resname="url.list.title">
         <source>Links (%count%)</source>
         <target>Links (%count%)</target>
         <note>key: url.list.title</note>
-      </trans-unit>
-      <trans-unit id="fd026c688f943eb5d0cb4dadf54c0dac101a9b8b" resname="url.list.no_urls">
-        <source>No URLs</source>
-        <target state="new">No URLs</target>
-        <note>key: url.list.no_urls</note>
       </trans-unit>
       <trans-unit id="126d1ac5ef68809c1a2bfdd3872470d7aafaacc3" resname="url.open">
         <source>Open</source>
@@ -90,11 +80,6 @@
         <source>Search for URLs</source>
         <target>Search for URLs</target>
         <note>key: url.search.placeholder</note>
-      </trans-unit>
-      <trans-unit id="bce60197735a1f604ba70517b0f1b4b0d838d56a" resname="url.status.all">
-        <source>All</source>
-        <target>All</target>
-        <note>key: url.status.all</note>
       </trans-unit>
       <trans-unit id="3e0d8fcb74e476fcae45da9c4c7b0b261118c7a3" resname="url.status.invalid">
         <source>Invalid</source>
@@ -115,11 +100,6 @@
         <source>Content item(s) using this URL</source>
         <target>Content item(s) using this URL (%count%)</target>
         <note>key: url.tab.usages</note>
-      </trans-unit>
-      <trans-unit id="f8004848ab391b70a287fac315ad2d7a546702fa" resname="url.update.error">
-        <source>Unable to update URL</source>
-        <target>Unable to update URL</target>
-        <note>key: url.update.error</note>
       </trans-unit>
       <trans-unit id="9ff98d02d294a164470b9491cabfa3526f2f63f6" resname="url.update.success">
         <source>URL updated</source>
