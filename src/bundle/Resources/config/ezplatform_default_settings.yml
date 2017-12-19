@@ -4,8 +4,9 @@ parameters:
     ezsettings.default.location_ids.users: 5
 
     # Pagination limits
-    ezsettings.default.search_pagination_limit: 10
-    ezsettings.default.trash_pagination_limit: 10
+    ezsettings.default.pagination.search_limit: 10
+    ezsettings.default.pagination.trash_limit: 10
+    ezsettings.default.pagination.section_limit: 10
 
     # Subitems Module
     ezsettings.default.subitems_module.limit: 10

@@ -103,8 +103,10 @@ class TrashController extends Controller
     }
 
     /**
-     * @param int $page Current page
-     * @param int $limit Number of items per page
+     * @param Request $request
+     *
+     * @internal param int $page Current page
+     * @internal param int $limit Number of items per page
      *
      * @return Response
      */

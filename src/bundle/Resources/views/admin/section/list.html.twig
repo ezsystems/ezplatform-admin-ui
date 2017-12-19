@@ -50,7 +50,7 @@
             'action': path('ezplatform.section.bulk_delete'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-sections' }
         }) }}
-        <table class="table">
+        <table class="table mb-3">
             <thead>
                 <tr>
                     <th></th>
@@ -62,7 +62,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for section in sections %}
+            {% for section in pager.currentPageResults %}
                 <tr>
                     <td class="ez-checkbox-cell">
                         {{ form_widget(form_sections_delete.sections[section.id], {"disabled": not deletable[section.id]}) }}
@@ -97,6 +97,19 @@
             </tbody>
         </table>
         {{ form_end(form_sections_delete) }}
+
+        {% if pager.haveToPaginate %}
+            <div class="row justify-content-center align-items-center mb-2">
+                <span>
+                    {{ 'section.viewing'|trans({
+                    '%viewing%': pager.currentPageResults|length,
+                    '%total%': pager.nbResults})|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                </span>
+            </div>
+            <div class="row justify-content-center align-items-center">
+                {{ pagerfanta(pager, 'ez') }}
+            </div>
+        {% endif %}
 
         {{ form_start(form_section_content_assign, {
             'attr': {'class': 'd-inline-block'}

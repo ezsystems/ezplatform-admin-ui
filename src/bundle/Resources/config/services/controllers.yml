@@ -28,7 +28,7 @@ services:
     EzSystems\EzPlatformAdminUiBundle\Controller\SearchController:
         public: true
         arguments:
-            $defaultPaginationLimit: '$search_pagination_limit$'
+            $defaultPaginationLimit: '$pagination.search_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentController:
         public: true
@@ -38,4 +38,9 @@ services:
     EzSystems\EzPlatformAdminUiBundle\Controller\TrashController:
         public: true
         arguments:
-            $defaultPaginationLimit: '$trash_pagination_limit$'
+            $defaultPaginationLimit: '$pagination.trash_limit$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\SectionController:
+        public: true
+        arguments:
+            $defaultPaginationLimit: '$pagination.section_limit$'
