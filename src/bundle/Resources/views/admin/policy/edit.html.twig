@@ -37,7 +37,7 @@
             </div>
             <div class="card-body">
                 {% for limitation_form in form.limitations %}
-                    {{ form_widget(limitation_form) }}
+                    {{ include(limitation_form.vars.template, {form: limitation_form}, with_context = false) }}
                 {% endfor %}
             </div>
         </div>
@@ -51,4 +51,12 @@
 {% block right_sidebar %}
     {% set policy_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.policy_edit.sidebar_right', [], {'role': role, 'save_id': form.save.vars.id}) %}
     {{ knp_menu_render(policy_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.limitation.pick.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
