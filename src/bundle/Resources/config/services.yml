@@ -64,6 +64,7 @@ services:
 
 
     EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler:
+        lazy: true
         arguments:
             $flashBag: "@=service('session').getFlashBag()"
 

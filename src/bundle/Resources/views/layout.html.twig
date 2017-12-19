@@ -72,18 +72,20 @@
             {% endblock content %}
         </div>
         <div class="ez-notifications-container">
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <svg class="ez-icon ez-icon--light ez-icon-small">
-                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#circle-close"></use>
-                            </svg>
-                        </button>
-                        {{ message|trans }}
-                    </div>
+            {% if app.request.hasPreviousSession %}
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <svg class="ez-icon ez-icon--light ez-icon-small">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#circle-close"></use>
+                                </svg>
+                            </button>
+                            {{ message|trans }}
+                        </div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
+            {% endif %}
         </div>
 
         {%  javascripts
