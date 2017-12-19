@@ -11,6 +11,7 @@ env:
   global:
     # For acceptance tests
     - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
+    - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform.git"
 
 # test only master and stable branches (+ Pull requests)
 branches:
