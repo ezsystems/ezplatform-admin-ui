@@ -11,6 +11,7 @@ use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use eZ\Publish\API\Repository\SearchService;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
@@ -114,10 +115,15 @@ class SearchController extends Controller
                 $pagerfanta->setMaxPerPage($limit);
                 $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
+                $editForm = $this->formFactory->contentEdit(
+                    new ContentEditData()
+                );
+
                 return $this->render('@EzPlatformAdminUi/admin/search/search.html.twig', [
                     'results' => $this->pagerContentToDataMapper->map($pagerfanta),
                     'form' => $form->createView(),
                     'pager' => $pagerfanta,
+                    'form_edit' => $editForm->createView(),
                 ]);
             });
 

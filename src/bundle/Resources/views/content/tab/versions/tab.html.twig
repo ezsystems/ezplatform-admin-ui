@@ -52,7 +52,10 @@
     </section>
 {% endif %}
 
-{{ form_start(form_archived_version_restore, {'action': path('ezplatform.content.edit')}) }}
+{{ form_start(form_archived_version_restore, {
+    'action': path('ezplatform.content.edit'),
+    'attr': { 'class': 'ez-edit-content-form'}
+}) }}
 {{ form_widget(form_archived_version_restore.language, {'attr': {'hidden': 'hidden'}}) }}
 {{ form_end(form_archived_version_restore) }}
 

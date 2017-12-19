@@ -59,6 +59,7 @@ class PagerContentToDataMapper
                 'version' => $content->versionInfo->versionNo,
                 'type' => $this->contentTypeService->loadContentType($contentInfo->contentTypeId)->getName(),
                 'modified' => $content->versionInfo->modificationDate,
+                'initialLanguageCode' => $content->versionInfo->initialLanguageCode,
             ];
         }
 
