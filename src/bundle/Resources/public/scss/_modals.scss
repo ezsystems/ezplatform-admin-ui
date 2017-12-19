@@ -1,0 +1,40 @@
+.ez-modal--send-to-trash {
+    .modal-dialog {
+        background-color: $ez-ground-base-medium;
+        border-radius: .25rem;
+    }
+
+    .modal-header {
+        border-bottom: none;
+        padding: 15px 15px 0 15px;
+        position: relative;
+        min-height: 2.5rem;
+    }
+
+    .modal-body {
+        padding: 15px 30px;
+
+        .ez-modal-body__main,
+        .ez-modal-body__explanation {
+            margin-bottom: 0;
+        }
+    }
+
+    .modal-footer {
+        border-top: none;
+    }
+}
+
+.ez-trash-list-view {
+    .ez-modal--send-to-trash {
+        .modal-body {
+            .ez-modal-body__main {
+                font-weight: 700;
+            }
+
+            .ez-modal-body__explanation {
+                font-size: .9375rem;
+            }
+        }
+    }
+}
