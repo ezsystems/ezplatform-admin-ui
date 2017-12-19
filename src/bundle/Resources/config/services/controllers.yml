@@ -49,3 +49,8 @@ services:
         public: true
         arguments:
             $defaultPaginationLimit: '$pagination.language_limit$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\RoleController:
+        public: true
+        arguments:
+            $defaultPaginationLimit: '$pagination.role_limit$'
