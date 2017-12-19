@@ -6,6 +6,8 @@
 
 {% block body_class %}ez-search-view{% endblock %}
 
+{% block title %}{{ 'search'|trans|desc('Search') }}{% endblock %}
+
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
 
@@ -19,8 +21,11 @@
                 {% include '@EzPlatformAdminUi/admin/search/search_form.html.twig' with { form: form } %}
 
                 {% if results is defined %}
+
+                    {% form_theme form_edit '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
+
                     <div class="ez-table-header mt-3">
-                        <div ="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
+                        <div class="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
                     </div>
 
                     {% if results is empty %}
@@ -65,12 +70,23 @@
                             </div>
                         {% endif %}
                     {% endif %}
-
+                    {{ form_start(form_edit, {
+                        'action': path('ezplatform.content.edit'),
+                        'attr': { 'class': 'ez-edit-content-form'}
+                    }) }}
+                    {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
+                    {{ form_end(form_edit) }}
                 {% endif %}
             </section>
         </div>
     </div>
 {% endblock %}
 
-{% block title %}{{ 'search'|trans|desc('Search') }}{% endblock %}
+{% block javascripts %}
+    {%  javascripts
+        'bundles/ezplatformadminui/js/scripts/button.content.edit.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 

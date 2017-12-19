@@ -56,7 +56,7 @@
             {% endif %}
             {% if is_archived %}
                 <td>
-                    <button class="btn btn-icon ez-btn--restore-archived-version" data-content-id="{{ version.contentInfo.id }}" data-version-no="{{ version.versionNo }}" data-language-code="{{ version.initialLanguageCode }}">
+                    <button class="btn btn-icon ez-btn--content-edit" data-content-id="{{ version.contentInfo.id }}" data-version-no="{{ version.versionNo }}" data-language-code="{{ version.initialLanguageCode }}">
                         <svg class="ez-icon ez-icon-edit">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#archive-restore"></use>
                         </svg>

@@ -4,13 +4,14 @@
     </td>
     <td>{{ row.modified|date('M d, Y h:iA') }}</td>
     <td>{{ row.type }}</td>
-    <td class="text-center"><a href="{{ path('ez_content_draft_create', {
-            'contentId': row.contentId,
-            'fromVersionNo': row.version,
-            'fromLanguage': row.language
-        }) }}" class="btn btn-icon">
+    <td class="text-center">
+        <button class="btn btn-icon ez-btn--content-edit"
+                data-content-id="{{ row.contentId }}"
+                data-version-no="{{ row.version }}"
+                data-language-code="{{ row.initialLanguageCode }}">
             <svg class="ez-icon ez-icon-edit">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
             </svg>
-        </a></td>
+        </button>
+    </td>
 </tr>
