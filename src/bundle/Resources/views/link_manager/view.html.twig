@@ -83,8 +83,6 @@
             <tbody>
                 {% for content in usages %}
                     {% set view_url = path('_ez_content_view', { contentId: content.id }) %}
-                    {# TODO: Missing edit URL #}
-                    {% set edit_url = '' %}
 
                     <tr>
                         <td>
@@ -95,11 +93,14 @@
                         <td>{{ content.published ? 'Published' : 'Draft' }}</td>
                         <td class="text-right">
                             {% if can_edit %}
-                            <a href="{{ edit_url }}" class="btn btn-icon">
-                                <svg class="ez-icon ez-icon-edit">
-                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-                                </svg>
-                            </a>
+                                <button class="btn btn-icon btn-link ez-btn--content-edit"
+                                        data-content-id="{{ content.id }}"
+                                        data-version-no="{{ content.currentVersionNo }}"
+                                        data-language-code="{{ content.mainLanguageCode }}">
+                                    <svg class="ez-icon ez-icon-edit">
+                                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                    </svg>
+                                </button>
                             {% endif %}
                         </td>
                     </tr>
@@ -112,8 +113,22 @@
                 {{ pagerfanta(usages, 'ez') }}
             </div>
         {% endif %}
+
+        {{ form_start(form_edit, {
+            'action': path('ezplatform.content.edit'),
+            'attr': { 'class': 'ez-edit-content-form'}
+        }) }}
+            {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
+        {{ form_end(form_edit) }}
     </section>
 {%- endblock -%}
 
 {% block title %}{{ 'url.view'|trans({ '%url%': url.url|truncate(60) }) }}{% endblock %}
 
+{% block javascripts %}
+    {%  javascripts
+        'bundles/ezplatformadminui/js/scripts/button.content.edit.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
