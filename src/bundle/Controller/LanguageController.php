@@ -17,6 +17,8 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,6 +49,9 @@ class LanguageController extends Controller
     /** @var FormFactory */
     private $formFactory;
 
+    /** @var int */
+    private $defaultPaginationLimit;
+
     /**
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
@@ -54,6 +59,7 @@ class LanguageController extends Controller
      * @param LanguageCreateMapper $languageCreateMapper
      * @param SubmitHandler $submitHandler
      * @param FormFactory $formFactory
+     * @param int $defaultPaginationLimit
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -61,7 +67,8 @@ class LanguageController extends Controller
         LanguageService $languageService,
         LanguageCreateMapper $languageCreateMapper,
         SubmitHandler $submitHandler,
-        FormFactory $formFactory
+        FormFactory $formFactory,
+        int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -69,23 +76,36 @@ class LanguageController extends Controller
         $this->languageCreateMapper = $languageCreateMapper;
         $this->submitHandler = $submitHandler;
         $this->formFactory = $formFactory;
+        $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
     /**
      * Renders the language list.
      *
+     * @param Request $request
+     *
      * @return Response
      */
-    public function listAction(): Response
+    public function listAction(Request $request): Response
     {
-        $languageList = $this->languageService->loadLanguages();
+        $page = $request->query->get('page') ?? 1;
+
+        $pagerfanta = new Pagerfanta(
+            new ArrayAdapter($this->languageService->loadLanguages())
+        );
+
+        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
+
+        /** @var Language[] $languageList */
+        $languageList = $pagerfanta->getCurrentPageResults();
 
         $deleteLanguagesForm = $this->formFactory->deleteLanguages(
             new LanguagesDeleteData($this->getLanguagesNumbers($languageList))
         );
 
         return $this->render('@EzPlatformAdminUi/admin/language/list.html.twig', [
-            'languageList' => $languageList,
+            'pager' => $pagerfanta,
             'form_languages_delete' => $deleteLanguagesForm->createView(),
             'canEdit' => $this->isGranted(new Attribute('language', 'edit')),
             'canAssign' => $this->isGranted(new Attribute('language', 'assign')),
