@@ -34,14 +34,12 @@ class TrashItemRestoreType extends AbstractType
 
         $builder->add('location', UniversalDiscoveryWidgetType::class, [
             'multiple' => false,
-            'label' => /** @Desc("Restore under new parent") */
-                'trash_item_restore_form.restore_under_new_parent',
+            'label' => false,
             'attr' => $options['attr'],
         ]);
 
         $builder->add('restore', SubmitType::class, [
-            'label' => /** @Desc("Restore selected") */
-                'trash_item_restore_form.restore',
+            'label' => false,
         ]);
     }
 

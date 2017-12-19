@@ -24,7 +24,12 @@
                         <div class="ez-table-header__headline">{{ 'trash.table.header'|trans|desc('Trash') }}</div>
                         <div>
                             {% if can_restore and form_trash_item_restore.trash_items is not empty %}
-                                {% set restore_under_new_parent_button_attr = form_trash_item_restore.location.select_content.vars.attr|merge({'attr': {'class': (form_trash_item_restore.location.select_content.vars.attr.class|default('') ~ ' d-inline-block')|trim, 'disabled': true}}) %}
+                                {% set restore_under_new_parent_button_attr = form_trash_item_restore.location.select_content.vars.attr|merge({
+                                    'attr': {
+                                        'class': (form_trash_item_restore.location.select_content.vars.attr.class|default('') ~ ' d-inline-block btn btn-secondary')|trim,
+                                        'disabled': true
+                                    }
+                                }) %}
                                 {{ form_widget(form_trash_item_restore.location.select_content, restore_under_new_parent_button_attr) }}
                                 {{ form_widget(form_trash_item_restore.location.location) }}
                                 {% do form_trash_item_restore.location.setRendered %}
@@ -76,12 +81,11 @@
                     </table>
                     {{ form_widget(form_trash_item_restore._token) }}
                     {{ form_end(form_trash_item_restore, { 'render_rest': false }) }}
-
-                    <div class="row justify-content-center align-items-center">
-                        <h6>{{ 'trash.viewing'|trans({'%viewing%': pager.currentPageResults|length, '%total%': pager.nbResults})|desc('Viewing %viewing% out of %total% items') }}</h6>
-                    </div>
                 </div>
                 {% if pager.haveToPaginate %}
+                    <div class="row justify-content-center align-items-center mb-2">
+                        <h6>{{ 'trash.viewing'|trans({'%viewing%': pager.currentPageResults|length, '%total%': pager.nbResults})|desc('Viewing %viewing% out of %total% items') }}</h6>
+                    </div>
                     <div class="row justify-content-center align-items-center">
                         {{ pagerfanta(pager, 'ez') }}
                     </div>

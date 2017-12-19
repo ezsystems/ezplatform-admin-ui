@@ -236,16 +236,6 @@
         <target state="new">Delete permanently</target>
         <note>key: trash_empty_form.empty</note>
       </trans-unit>
-      <trans-unit id="1b05bfd460ef104fc79726b60f1b5872cb0cbc1d" resname="trash_item_restore_form.restore">
-        <source>Restore selected</source>
-        <target state="new">Restore selected</target>
-        <note>key: trash_item_restore_form.restore</note>
-      </trans-unit>
-      <trans-unit id="9842e86d98a92b6afb831334a75a562a239dd70a" resname="trash_item_restore_form.restore_under_new_parent">
-        <source>Restore under new parent</source>
-        <target state="new">Restore under new parent</target>
-        <note>key: trash_item_restore_form.restore_under_new_parent</note>
-      </trans-unit>
       <trans-unit id="3b2ae7aa286887e2fbd2b6e77ca237f9f9109e9b" resname="version_remove_form.remove">
         <source>Remove version</source>
         <target state="new">Remove version</target>
