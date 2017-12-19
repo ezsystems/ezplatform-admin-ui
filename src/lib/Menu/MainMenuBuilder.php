@@ -198,6 +198,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'content_type_add' => 'ezplatform.content_type.add',
                     'content_type_view' => 'ezplatform.content_type.view',
                     'content_type_edit' => 'ezplatform.content_type.edit',
+                    'content_type_update' => 'ezplatform.content_type.update',
                 ],
             ]]
         );

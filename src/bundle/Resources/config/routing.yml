@@ -332,8 +332,8 @@ ezplatform.content_type.edit:
         contentTypeGroupId: \d+
 
 ezplatform.content_type.update:
-    path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/edit
-    methods: ['POST']
+    path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/update
+    methods: ['GET', 'POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentType:update'
     requirements:

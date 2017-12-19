@@ -10,6 +10,7 @@ imports:
     - { resource: services/components.yml }
     - { resource: services/dashboard.yml }
     - { resource: services/modules/subitems.yml }
+    - { resource: services/form_processors.yml }
 
 parameters:
 
@@ -67,12 +68,6 @@ services:
             $flashBag: "@=service('session').getFlashBag()"
 
     EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler'
-
-    EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\:
-        resource: "../../../lib/RepositoryForms/Form/Processor/*"
-        public: true
-        tags:
-            - { name: kernel.event_subscriber }
 
     EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
         tags:
