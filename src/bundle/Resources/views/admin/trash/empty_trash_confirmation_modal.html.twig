@@ -1,20 +1,19 @@
 {% form_theme form 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
 
-<div class="modal fade" id="confirmEmptyTrash" tabindex="-1" role="dialog" aria-labelledby="confirmEmptyTrash"
+<div class="modal fade ez-modal--send-to-trash" id="confirmEmptyTrash" tabindex="-1" role="dialog" aria-labelledby="confirmEmptyTrash"
      aria-hidden="true">
-    <div class="modal-dialog ez-modal--send-to-trash" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="modal-body-main">
+                <p class="ez-modal-body__main">
                     {{ 'trash.delete.all.confirm'|trans({'%trashItemsCount%': trash_items_count})|desc('Are you sure you want to permanently delete %trashItemsCount% item(s)?') }}
                 </p>
-                <p class="modal-body-explanation">
+                <p class="ez-modal-body__explanation">
                     {{ 'trash.delete.all.info'|trans|desc('This action cannot be reversed') }}
                 </p>
             </div>

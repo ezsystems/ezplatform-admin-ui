@@ -1,47 +1,41 @@
-.ez-content-view,
-.ez-trash-list-view,
-.ez-section-view,
-.ez-section-list-view,
-.ez-role-view,
-.ez-role-list-view,
-.ez-language-list-view,
-.ez-content-type-group-list-view {
-    .ez-context-menu,
-    .ez-main-container {
-        .ez-modal--send-to-trash {
+.ez-modal {
+    &--send-to-trash {
+        .modal-dialog {
             background-color: $ez-ground-base-medium;
             border-radius: .25rem;
-            
-            .modal-header {
-                border-bottom: none;
-                padding: 15px 15px 0 15px;
-            }
+        }
 
-            .modal-body {
-                padding: 15px 30px;
+        .modal-header {
+            border-bottom: none;
+            padding: 15px 15px 0 15px;
+            position: relative;
+            min-height: 2.5rem;
+        }
 
-                .modal-body-main,
-                .modal-body-explanation {
-                    margin-bottom: 0;
-                }
-            }
+        .modal-body {
+            padding: 15px 30px;
 
-            .modal-footer {
-                border-top: none;
+            .ez-modal-body__main,
+            .ez-modal-body__explanation {
+                margin-bottom: 0;
             }
+        }
+
+        .modal-footer {
+            border-top: none;
         }
     }
 }
 
 .ez-trash-list-view {
-    .ez-main-container {
-        .ez-modal--send-to-trash {
+    .ez-modal {
+        &--send-to-trash {
             .modal-body {
-                .modal-body-main {
+                .ez-modal-body__main {
                     font-weight: 700;
                 }
 
-                .modal-body-explanation {
+                .ez-modal-body__explanation {
                     font-size: .9375rem;
                 }
             }
