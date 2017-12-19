@@ -42,6 +42,7 @@
                 border-radius: initial;
                 cursor: pointer;
                 border-radius: 5px;
+                background: none;
 
                 &.ez-preview__action--selected {
                     background-color: $ez-color-base-medium;
