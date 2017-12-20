@@ -19,12 +19,19 @@
                 {{ ezplatform_admin_ui_component_group('dashboard-blocks') }}
             </div>
         </div>
+        {{ form_start(form_edit, {
+            'action': path('ezplatform.content.edit'),
+            'attr': { 'class': 'ez-edit-content-form'}
+        }) }}
+        {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
+        {{ form_end(form_edit) }}
     </div>
 {% endblock %}
 
 {% block javascripts %}
     {%  javascripts
         'bundles/ezplatformadminui/js/scripts/udw/browse.js'
+        'bundles/ezplatformadminui/js/scripts/button.content.edit.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
