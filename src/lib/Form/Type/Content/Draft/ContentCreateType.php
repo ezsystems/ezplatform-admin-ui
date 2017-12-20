@@ -12,7 +12,7 @@ use eZ\Publish\API\Repository\LanguageService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeChoiceType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\LimitedLanguageChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -50,7 +50,7 @@ class ContentCreateType extends AbstractType
             )
             ->add(
                 'language',
-                LanguageChoiceType::class,
+                LimitedLanguageChoiceType::class,
                 [
                     'label' => false,
                     'multiple' => false,
