@@ -18,11 +18,13 @@ services:
         arguments:
             $contentTypeActionDispatcher: '@ezrepoforms.action_dispatcher.content_type'
             $languages: '$languages$'
+            $defaultPaginationLimit: '$pagination.content_type_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeGroupController:
         public: true
         arguments:
             $languages: '$languages$'
+            $defaultPaginationLimit: '$pagination.content_type_group_limit$'
 
 
     EzSystems\EzPlatformAdminUiBundle\Controller\SearchController:
