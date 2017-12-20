@@ -6,6 +6,86 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="cf558f546b83d94f1272929f81c64bd33d2997bc" resname="js.error.address_not_found">
+        <source>Provided address does not exist</source>
+        <target state="new">Provided address does not exist</target>
+        <note>key: js.error.address_not_found</note>
+      </trans-unit>
+      <trans-unit id="74dc0c29a623eb80ca8f6460f0176503c7785904" resname="js.error.empty.field">
+        <source>{fieldName} field is required</source>
+        <target state="new">{fieldName} field is required</target>
+        <note>key: js.error.empty.field</note>
+      </trans-unit>
+      <trans-unit id="3ff026ea6e244dbbf70509ebf0a71c5f46cef0e0" resname="js.error.invalid_email">
+        <source>A valid email address is required</source>
+        <target state="new">A valid email address is required</target>
+        <note>key: js.error.invalid_email</note>
+      </trans-unit>
+      <trans-unit id="5c26acfa4532917d4763c44d5b7ec8dd180b98a4" resname="js.error.invalid_file_size">
+        <source>{fieldName}: Cannot upload. File exceeds file size limit.</source>
+        <target state="new">{fieldName}: Cannot upload. File exceeds file size limit.</target>
+        <note>key: js.error.invalid_file_size</note>
+      </trans-unit>
+      <trans-unit id="21c38818d1cb73ff54f0dc0b184d6de25058f24d" resname="js.error.invalid_url">
+        <source>A valid URL is required</source>
+        <target state="new">A valid URL is required</target>
+        <note>key: js.error.invalid_url</note>
+      </trans-unit>
+      <trans-unit id="7baf32f4dc7e29e693c448b770eb34e9a614bbfe" resname="js.error.invalid_value">
+        <source>{fieldName} field has invalid values</source>
+        <target state="new">{fieldName} field has invalid values</target>
+        <note>key: js.error.invalid_value</note>
+      </trans-unit>
+      <trans-unit id="615db469cfe0c995622a179cc4e7402299acd607" resname="js.error.is_greater">
+        <source>{fieldName} value should be less than or equal to {maxValue}</source>
+        <target state="new">{fieldName} value should be less than or equal to {maxValue}</target>
+        <note>key: js.error.is_greater</note>
+      </trans-unit>
+      <trans-unit id="183ac24611110626431660e39c7b66a408796e22" resname="js.error.is_less">
+        <source>{fieldName} value should be greater than or equal to {minValue}</source>
+        <target state="new">{fieldName} value should be greater than or equal to {minValue}</target>
+        <note>key: js.error.is_less</note>
+      </trans-unit>
+      <trans-unit id="4fb6689be5f8ff74f3f86c7af72bdeb92c74bd53" resname="js.error.is_not_float">
+        <source>{fieldName} value should be a float number</source>
+        <target state="new">{fieldName} value should be a float number</target>
+        <note>key: js.error.is_not_float</note>
+      </trans-unit>
+      <trans-unit id="f9cf14c56aca4bc1c2bccd9cae839ff0d3f3cd36" resname="js.error.is_not_integer">
+        <source>{fieldName} value should be an integer</source>
+        <target state="new">{fieldName} value should be an integer</target>
+        <note>key: js.error.is_not_integer</note>
+      </trans-unit>
+      <trans-unit id="3923eef870a213df547b7792f8ae52af887fd165" resname="js.error.not_same_passwords">
+        <source>Passwords do not match</source>
+        <target state="new">Passwords do not match</target>
+        <note>key: js.error.not_same_passwords</note>
+      </trans-unit>
+      <trans-unit id="0d56229ac397e8c67aca29ec21ce771a67e04a9c" resname="js.error.out_of_range_value">
+        <source>{fieldName} field value is out of range. The value has to be between {min} and {max}</source>
+        <target state="new">{fieldName} field value is out of range. The value has to be between {min} and {max}</target>
+        <note>key: js.error.out_of_range_value</note>
+      </trans-unit>
+      <trans-unit id="fff2e4db98c86a312a0a3fd9861781e511d24d79" resname="js.error.provide_latitude_value">
+        <source>Please, provide latitude value in the Latitude field</source>
+        <target state="new">Please, provide latitude value in the Latitude field</target>
+        <note>key: js.error.provide_latitude_value</note>
+      </trans-unit>
+      <trans-unit id="ed724243af56a0ff1a761c6ac10bffee055c7a47" resname="js.error.provide_longitude_value">
+        <source>Please, provide longitude value in the Longitude field</source>
+        <target state="new">Please, provide longitude value in the Longitude field</target>
+        <note>key: js.error.provide_longitude_value</note>
+      </trans-unit>
+      <trans-unit id="4486bc31f8e72bc3452052da1b3e7b1f6ccd7f6b" resname="js.error.too_long">
+        <source>{fieldName} value should be less than or equal to {maxLength} characters</source>
+        <target state="new">{fieldName} value should be less than or equal to {maxLength} characters</target>
+        <note>key: js.error.too_long</note>
+      </trans-unit>
+      <trans-unit id="dc794513d2664b4f9ea5335d347c97a2183f398f" resname="js.error.too_short">
+        <source>{fieldName} value should be greater than or equal to {minLength} characters</source>
+        <target state="new">{fieldName} value should be greater than or equal to {minLength} characters</target>
+        <note>key: js.error.too_short</note>
+      </trans-unit>
       <trans-unit id="f52d0870dd7bdbff2c2728c2b6ec708aa5cb240b" resname="validator.define_subtree_or_section_limitation">
         <source>Define a Subtree or Section limitation</source>
         <target state="new">Define a Subtree or Section limitation</target>
