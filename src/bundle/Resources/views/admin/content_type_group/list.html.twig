@@ -1,5 +1,7 @@
 {% extends "@EzPlatformAdminUi/layout.html.twig" %}
 
+{% form_theme form_content_type_groups_delete '@EzPlatformAdminUi/form_fields.html.twig'  %}
+
 {% trans_default_domain 'content_type' %}
 
 {% block body_class %}ez-content-type-group-list-view{% endblock %}

@@ -1,6 +1,7 @@
 {% extends "@EzPlatformAdminUi/admin/base.html.twig" %}
 
 {% trans_default_domain 'content_type' %}
+{% form_theme form '@EzPlatformAdminUi/form_fields.html.twig' %}
 
 {% block breadcrumbs_admin %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [

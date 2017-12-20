@@ -1,6 +1,8 @@
+{% form_theme form '@EzPlatformAdminUi/form_fields.html.twig'  %}
+
 {{ form_start(form) }}
 <div class="input-group px-4">
-    {{ form_widget(form.query, {'attr': {'class': 'form-control'} }) }}
+    {{ form_widget(form.query) }}
 
     <span class="input-group-btn">
         <button type="submit" class="btn btn-primary">

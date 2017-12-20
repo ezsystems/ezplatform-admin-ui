@@ -1,3 +1,5 @@
+{% extends 'bootstrap_4_layout.html.twig' %}
+
 {% block ezsystems_ezplatform_type_udw_widget %}
     {{ form_widget(form.location) }}
     {{ form_widget(form.select_content) }}
@@ -27,7 +29,7 @@
                 {{- block('content_type_choice_widget_options') -}}
             </div>
         {%- else -%}
-            <div class="radio ez-instant-filter__group-item">
+            <div class="form-check ez-instant-filter__group-item">
                 {{ form_widget(form[choice.value], {'parent_label_class': 'radio-inline'}) }}
             </div>
         {%- endif -%}

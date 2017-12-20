@@ -2,7 +2,7 @@
 
 {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.content_details'|trans()|desc('Content details') } %}
 
-{% form_theme form_location_update '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
+{% form_theme form_location_update '@EzPlatformAdminUi/form_fields.html.twig' %}
 
 <table class="table">
     <thead>
@@ -115,11 +115,13 @@
                 'attr': {'class': 'form-inline ez-form-inline'}
                 }) }}
 
-                {{ form_widget(form_location_update) }}
+                {{ form_label(form_location_update.sort_field, 'tab.details.sub_items_listing_by.order_by'|trans|desc('Order by')) }}
+                {{ form_widget(form_location_update.sort_field) }}
 
-                <button type="submit" class="btn btn-secondary ml-1">
-                    {{ 'tab.details.sub_items_listing_by_set'|trans|desc('Set') }}
-                </button>
+                {{ form_label(form_location_update.sort_order, 'tab.details.sub_items_listing_by.in'|trans|desc('in')) }}
+                {{ form_widget(form_location_update.sort_order) }}
+
+                {{ form_widget(form_location_update.update, { 'label': 'tab.details.sub_items_listing_by_set'|trans|desc('Set'), 'translation_domain': false, 'attr': {'class': 'btn-secondary ml-1'} }) }}
 
             {{ form_end(form_location_update) }}
         </td>

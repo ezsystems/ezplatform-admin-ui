@@ -20,7 +20,7 @@
                 errorMessage
             };
         }
-    };
+    }
 
     const validator = new EzTextValidator({
         classInvalid: 'is-invalid',

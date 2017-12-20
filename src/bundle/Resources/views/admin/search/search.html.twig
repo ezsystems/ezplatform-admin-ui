@@ -22,7 +22,6 @@
 
                 {% if results is defined %}
 
-                    {% form_theme form_edit '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
 
                     <div class="ez-table-header mt-3">
                         <div class="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
@@ -70,6 +69,9 @@
                             </div>
                         {% endif %}
                     {% endif %}
+
+                    {% form_theme form_edit '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
+
                     {{ form_start(form_edit, {
                         'action': path('ezplatform.content.edit'),
                         'attr': { 'class': 'ez-edit-content-form'}
