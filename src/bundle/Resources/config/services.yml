@@ -86,3 +86,8 @@ services:
         class: \Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
+
+    EzSystems\EzPlatformAdminUi\Menu\Voter\LocationVoter:
+        arguments: [ '@request_stack' ]
+        tags:
+            - { name: knp_menu.voter }
