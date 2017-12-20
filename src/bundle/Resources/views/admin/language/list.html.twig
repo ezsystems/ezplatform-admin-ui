@@ -53,7 +53,7 @@
             'action': path('ezplatform.language.bulk_delete'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-languages' }
         }) }}
-        <table class="table">
+        <table class="table mb-3">
             <thead>
             <tr>
                 <th></th>
@@ -65,7 +65,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for language in languageList %}
+            {% for language in pager.currentPageResults %}
                 <tr>
                     <td class="ez-checkbox-cell">
                         {{ form_widget(form_languages_delete.languages[language.id], {"disabled": not canEdit}) }}
@@ -94,6 +94,19 @@
             </tbody>
         </table>
         {{ form_end(form_languages_delete) }}
+
+        {% if pager.haveToPaginate %}
+            <div class="row justify-content-center align-items-center mb-2">
+                <span>
+                    {{ 'language.viewing'|trans({
+                        '%viewing%': pager.currentPageResults|length,
+                        '%total%': pager.nbResults})|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                </span>
+            </div>
+            <div class="row justify-content-center align-items-center">
+                {{ pagerfanta(pager, 'ez') }}
+            </div>
+        {% endif %}
     </section>
 {% endblock %}
 

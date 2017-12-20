@@ -24,6 +24,7 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
  *              search_limit: 10
  *              trash_limit: 10
  *              section_limit: 10
+ *              language_limit: 10
  * ```
  */
 class Pagination extends AbstractParser
@@ -42,6 +43,7 @@ class Pagination extends AbstractParser
                     ->scalarNode('search_limit')->isRequired()->end()
                     ->scalarNode('trash_limit')->isRequired()->end()
                     ->scalarNode('section_limit')->isRequired()->end()
+                    ->scalarNode('language_limit')->isRequired()->end()
                 ->end()
             ->end();
     }
@@ -56,7 +58,7 @@ class Pagination extends AbstractParser
         }
 
         $settings = $scopeSettings['pagination'];
-        $keys = ['search_limit', 'trash_limit', 'section_limit'];
+        $keys = ['search_limit', 'trash_limit', 'section_limit', 'language_limit'];
 
         foreach ($keys as $key) {
             if (!isset($settings[$key]) || empty($settings[$key])) {

@@ -44,3 +44,8 @@ services:
         public: true
         arguments:
             $defaultPaginationLimit: '$pagination.section_limit$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\LanguageController:
+        public: true
+        arguments:
+            $defaultPaginationLimit: '$pagination.language_limit$'
