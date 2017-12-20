@@ -1,5 +1,6 @@
 parameters:
     # System Location IDs
+    ezsettings.default.location_ids.content_structure: 2
     ezsettings.default.location_ids.media: 43
     ezsettings.default.location_ids.users: 5
 
