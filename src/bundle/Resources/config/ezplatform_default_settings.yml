@@ -8,6 +8,8 @@ parameters:
     ezsettings.default.pagination.trash_limit: 10
     ezsettings.default.pagination.section_limit: 10
     ezsettings.default.pagination.language_limit: 10
+    ezsettings.default.pagination.role_assignment_limit: 10
+    ezsettings.default.pagination.policy_limit: 10
 
     # Subitems Module
     ezsettings.default.subitems_module.limit: 10
