@@ -19,6 +19,8 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,6 +52,9 @@ class RoleController extends Controller
     /** @var SubmitHandler */
     private $submitHandler;
 
+    /** @var int */
+    private $defaultPaginationLimit;
+
     /**
      * RoleController constructor.
      *
@@ -60,6 +65,7 @@ class RoleController extends Controller
      * @param RoleUpdateMapper $roleUpdateMapper
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
+     * @param int $defaultPaginationLimit
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -68,7 +74,8 @@ class RoleController extends Controller
         RoleCreateMapper $roleCreateMapper,
         RoleUpdateMapper $roleUpdateMapper,
         FormFactory $formFactory,
-        SubmitHandler $submitHandler
+        SubmitHandler $submitHandler,
+        int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -77,11 +84,27 @@ class RoleController extends Controller
         $this->roleUpdateMapper = $roleUpdateMapper;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
+        $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
-    public function listAction(): Response
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function listAction(Request $request): Response
     {
-        $roles = $this->roleService->loadRoles();
+        $page = $request->query->get('page') ?? 1;
+
+        $pagerfanta = new Pagerfanta(
+            new ArrayAdapter($this->roleService->loadRoles())
+        );
+
+        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
+
+        /** @var Role[] $sectionList */
+        $roles = $pagerfanta->getCurrentPageResults();
 
         $rolesNumbers = array_column($roles, 'id');
 
@@ -93,7 +116,7 @@ class RoleController extends Controller
 
         return $this->render('@EzPlatformAdminUi/admin/role/list.html.twig', [
             'form_roles_delete' => $rolesDeleteForm->createView(),
-            'roles' => $roles,
+            'pager' => $pagerfanta,
         ]);
     }
 
