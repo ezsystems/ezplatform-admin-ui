@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
@@ -156,10 +157,15 @@ class LinkManagerController extends Controller
         $usages->setCurrentPage($request->query->getInt('page', 1));
         $usages->setMaxPerPage($request->query->getInt('limit', self::DEFAULT_MAX_PER_PAGE));
 
+        $editForm = $this->formFactory->contentEdit(
+            new ContentEditData()
+        );
+
         return $this->render('@EzPlatformAdminUi/link_manager/view.html.twig', [
             'url' => $url,
             'can_edit' => $this->isGranted(new Attribute('url', 'update')),
             'usages' => $usages,
+            'form_edit' => $editForm->createView(),
         ]);
     }
 
