@@ -44,8 +44,11 @@ class Pagination extends AbstractParser
                     ->scalarNode('trash_limit')->isRequired()->end()
                     ->scalarNode('section_limit')->isRequired()->end()
                     ->scalarNode('language_limit')->isRequired()->end()
+                    ->scalarNode('role_limit')->isRequired()->end()
                     ->scalarNode('role_assignment_limit')->isRequired()->end()
                     ->scalarNode('policy_limit')->isRequired()->end()
+                    ->scalarNode('content_type_group_limit')->isRequired()->end()
+                    ->scalarNode('content_type_limit')->isRequired()->end()
                 ->end()
             ->end();
     }
@@ -65,8 +68,11 @@ class Pagination extends AbstractParser
             'trash_limit',
             'section_limit',
             'language_limit',
+            'role_limit',
             'role_assignment_limit',
             'policy_limit',
+            'content_type_group_limit',
+            'content_type_limit',
         ];
 
         foreach ($keys as $key) {

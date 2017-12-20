@@ -21,6 +21,7 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
  *   system:
  *      default: # configuration per siteaccess or siteaccess group
  *          location_ids:
+ *              content_structure: 2
  *              media: 43
  *              users: 5
  * ```
@@ -38,6 +39,7 @@ class LocationIds extends AbstractParser
             ->arrayNode('location_ids')
                 ->info('System locations id configuration')
                 ->children()
+                    ->scalarNode('content_structure')->isRequired()->end()
                     ->scalarNode('media')->isRequired()->end()
                     ->scalarNode('users')->isRequired()->end()
                 ->end()
@@ -54,7 +56,7 @@ class LocationIds extends AbstractParser
         }
 
         $settings = $scopeSettings['location_ids'];
-        $keys = ['media', 'users'];
+        $keys = ['content_structure', 'media', 'users'];
 
         foreach ($keys as $key) {
             if (!isset($settings[$key]) || empty($settings[$key])) {

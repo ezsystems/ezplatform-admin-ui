@@ -21,6 +21,8 @@
 
 {% block content %}
     {{ render(controller('EzPlatformAdminUiBundle:ContentType:list', {
-        contentTypeGroupId: content_type_group.id
+        contentTypeGroupId: content_type_group.id,
+        page: page,
+        routeName: route_name
     })) }}
 {% endblock %}

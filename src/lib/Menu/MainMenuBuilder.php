@@ -104,7 +104,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     {
         $menuItems = [];
 
-        $rootContentId = $this->configResolver->getParameter('content.tree_root.location_id');
+        $rootContentId = $this->configResolver->getParameter('location_ids.content_structure');
         $rootMediaId = $this->configResolver->getParameter('location_ids.media');
 
         $contentStructureItem = $this->factory->createLocationMenuItem(

@@ -1,5 +1,6 @@
 parameters:
     # System Location IDs
+    ezsettings.default.location_ids.content_structure: 2
     ezsettings.default.location_ids.media: 43
     ezsettings.default.location_ids.users: 5
 
@@ -8,8 +9,11 @@ parameters:
     ezsettings.default.pagination.trash_limit: 10
     ezsettings.default.pagination.section_limit: 10
     ezsettings.default.pagination.language_limit: 10
+    ezsettings.default.pagination.role_limit: 10
     ezsettings.default.pagination.role_assignment_limit: 10
     ezsettings.default.pagination.policy_limit: 10
+    ezsettings.default.pagination.content_type_group_limit: 10
+    ezsettings.default.pagination.content_type_limit: 10
 
     # Subitems Module
     ezsettings.default.subitems_module.limit: 10
