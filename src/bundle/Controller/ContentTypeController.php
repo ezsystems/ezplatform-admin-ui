@@ -19,6 +19,8 @@ use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\RepositoryForms\Data\Mapper\ContentTypeDraftMapper;
 use EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface;
 use EzSystems\RepositoryForms\Form\Type\ContentType\ContentTypeUpdateType;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\Form\Form;
 use eZ\Publish\API\Repository\Exceptions\BadStateException;
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
@@ -53,6 +55,9 @@ class ContentTypeController extends Controller
     /** @var SubmitHandler */
     private $submitHandler;
 
+    /** @var int */
+    private $defaultPaginationLimit;
+
     /**
      * ContentTypeController constructor.
      *
@@ -63,6 +68,7 @@ class ContentTypeController extends Controller
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
      * @param array $languages
+     * @param int $defaultPaginationLimit
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -71,7 +77,8 @@ class ContentTypeController extends Controller
         ActionDispatcherInterface $contentTypeActionDispatcher,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        array $languages
+        array $languages,
+        int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -80,13 +87,29 @@ class ContentTypeController extends Controller
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
         $this->languages = $languages;
+        $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
-    public function listAction(ContentTypeGroup $group): Response
+    /**
+     * @param ContentTypeGroup $group
+     * @param string $routeName
+     * @param int $page
+     *
+     * @return Response
+     */
+    public function listAction(ContentTypeGroup $group, string $routeName, int $page): Response
     {
         $deletableTypes = [];
 
-        $types = $this->contentTypeService->loadContentTypes($group, $this->languages);
+        $pagerfanta = new Pagerfanta(
+            new ArrayAdapter($this->contentTypeService->loadContentTypes($group, $this->languages))
+        );
+
+        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
+
+        /** @var ContentTypeGroup[] $contentTypeGroupList */
+        $types = $pagerfanta->getCurrentPageResults();
 
         $deleteContentTypesForm = $this->formFactory->deleteContentTypes(
             new ContentTypesDeleteData($this->getContentTypesNumbers($types))
@@ -98,10 +121,11 @@ class ContentTypeController extends Controller
 
         return $this->render('@EzPlatformAdminUi/admin/content_type/list.html.twig', [
             'content_type_group' => $group,
-            'content_types' => $types,
+            'pager' => $pagerfanta,
             'deletable' => $deletableTypes,
             'form_content_types_delete' => $deleteContentTypesForm->createView(),
             'group' => $group,
+            'route_name' => $routeName,
         ]);
     }
 

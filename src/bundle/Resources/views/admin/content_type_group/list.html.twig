@@ -62,7 +62,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for content_type_group in content_type_groups %}
+            {% for content_type_group in pager.currentPageResults %}
                 <tr>
                     <td class="ez-checkbox-cell">
                         {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id], {"disabled": not deletable[content_type_group.id]}) }}
@@ -94,6 +94,19 @@
             </tbody>
         </table>
         {{ form_end(form_content_type_groups_delete) }}
+
+        {% if pager.haveToPaginate %}
+            <div class="row justify-content-center align-items-center mb-2">
+                <span>
+                    {{ 'pagination.viewing'|trans({
+                        '%viewing%': pager.currentPageResults|length,
+                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                </span>
+            </div>
+            <div class="row justify-content-center align-items-center">
+                {{ pagerfanta(pager, 'ez') }}
+            </div>
+        {% endif %}
     </section>
 {% endblock %}
 

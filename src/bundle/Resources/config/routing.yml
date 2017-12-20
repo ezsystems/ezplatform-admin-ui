@@ -248,12 +248,14 @@ ezplatform.content_type_group.list:
         _controller: 'EzPlatformAdminUiBundle:ContentTypeGroup:list'
 
 ezplatform.content_type_group.view:
-    path: /contenttypegroup/{contentTypeGroupId}
+    path: /contenttypegroup/{contentTypeGroupId}/{page}
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentTypeGroup:view'
+        page: 1
     requirements:
         contentTypeGroupId: \d+
+        page: \d+
 
 ezplatform.content_type_group.create:
     path: /contenttypegroup/create
