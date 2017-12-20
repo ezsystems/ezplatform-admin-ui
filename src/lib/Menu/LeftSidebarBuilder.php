@@ -6,11 +6,13 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI left sidebar menu.
@@ -19,10 +21,28 @@ use Knp\Menu\ItemInterface;
  */
 class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainerInterface
 {
+    /** @var ConfigResolverInterface */
+    private $configResolver;
+
     /* Menu items */
     const ITEM__SEARCH = 'sidebar_left__search';
     const ITEM__BROWSE = 'sidebar_left__browse';
     const ITEM__TRASH = 'sidebar_left__trash';
+
+    /**
+     * @param MenuItemFactory $factory
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param ConfigResolverInterface $configResolver
+     */
+    public function __construct(
+        MenuItemFactory $factory,
+        EventDispatcherInterface $eventDispatcher,
+        ConfigResolverInterface $configResolver
+    ) {
+        parent::__construct($factory, $eventDispatcher);
+
+        $this->configResolver = $configResolver;
+    }
 
     /**
      * @return string
@@ -57,7 +77,9 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                     'extras' => ['icon' => 'browse'],
                     'attributes' => [
                         'class' => 'btn--udw-browse',
-                        'data-starting-location-id' => 1,
+                        'data-starting-location-id' => $this->configResolver->getParameter(
+                            'universal_discovery_widget_module.default_location_id'
+                        ),
                     ],
                 ]
             ),

@@ -10,6 +10,7 @@ use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
@@ -34,19 +35,25 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var PermissionResolver */
     private $permissionResolver;
 
+    /** @var ConfigResolverInterface */
+    private $configResolver;
+
     /**
-     * @param PermissionResolver $permissionResolver
      * @param MenuItemFactory $factory
      * @param EventDispatcherInterface $eventDispatcher
+     * @param PermissionResolver $permissionResolver
+     * @param ConfigResolverInterface $configResolver
      */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        ConfigResolverInterface $configResolver
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -117,7 +124,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'extras' => ['icon' => 'move'],
                     'attributes' => [
                         'class' => 'btn--udw-move',
-                        'data-root-location' => 1,
+                        'data-root-location' => $this->configResolver->getParameter(
+                            'universal_discovery_widget_module.default_location_id'
+                        ),
                     ],
                 ]
             ),
@@ -127,7 +136,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'extras' => ['icon' => 'copy'],
                     'attributes' => [
                         'class' => 'btn--udw-copy',
-                        'data-root-location' => 1,
+                        'data-root-location' => $this->configResolver->getParameter(
+                            'universal_discovery_widget_module.default_location_id'
+                        ),
                     ],
                 ]
             ),

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser;
+namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Module;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\AbstractParser;
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
@@ -24,7 +24,7 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
  *              limit: 10
  * ```
  */
-class SubitemsModule extends AbstractParser
+class Subitems extends AbstractParser
 {
     /**
      * Adds semantic configuration definition.

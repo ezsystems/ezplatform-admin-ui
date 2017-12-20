@@ -77,8 +77,9 @@
         const trashBtn = fieldContainer.querySelector('.ez-relations__table-action--remove');
         const isSingle = fieldContainer.classList.contains(CLASS_FIELD_SINGLE);
         const selectedItemsLimit = isSingle ? 1 : parseInt(relationsContainer.dataset.limit, 10);
-        const startingLocationId = relationsContainer.dataset.defaultLocation !== '0' ?
-            parseInt(relationsContainer.dataset.defaultLocation, 10) : 1;
+        const startingLocationId = relationsContainer.dataset.defaultLocation !== '0'
+            ? parseInt(relationsContainer.dataset.defaultLocation, 10)
+            : window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId;
         const allowedContentTypes = relationsContainer.dataset.allowedContentTypes.split(',').filter(item => item.length);
         const closeUDW = () => udwContainer.innerHTML = '';
         const renderRows = (items) => items.forEach((...args) => relationsContainer.insertAdjacentHTML('beforeend', renderRow(...args)));

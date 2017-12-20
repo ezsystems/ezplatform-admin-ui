@@ -24,6 +24,7 @@
             confirmLabel: 'Add location',
             title: 'Select location',
             multiple: false,
+            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess}
         }), udwContainer);
     };

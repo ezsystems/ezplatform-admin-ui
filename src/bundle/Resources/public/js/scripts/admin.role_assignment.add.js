@@ -19,6 +19,7 @@
             onConfirm: selectSubtreeConfirm.bind(this),
             onCancel: closeUDW,
             multiple: true,
+            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess}
         }), udwContainer);
     };

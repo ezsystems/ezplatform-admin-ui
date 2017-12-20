@@ -23,6 +23,7 @@
             onCancel,
             confirmLabel: 'Restore',
             title: 'Select a location to restore you content item(s)',
+            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess}
         }), udwContainer);
     };
