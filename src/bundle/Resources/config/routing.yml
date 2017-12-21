@@ -19,8 +19,7 @@ _ezpublishLocation:
 ezplatform.dashboard:
     path: /dashboard
     defaults:
-        _controller: 'FrameworkBundle:Template:template'
-        template: 'EzPlatformAdminUiBundle:dashboard:dashboard.html.twig'
+        _controller: 'EzPlatformAdminUiBundle:Dashboard:dashboard'
 
 #
 # System Information
