@@ -23,8 +23,11 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
@@ -53,6 +56,12 @@ class PolicyController extends Controller
     /** @var SubmitHandler */
     private $submitHandler;
 
+    /** @var RequestStack */
+    private $requestStack;
+
+    /** @var int */
+    private $defaultPaginationLimit;
+
     /**
      * PolicyController constructor.
      *
@@ -63,6 +72,8 @@ class PolicyController extends Controller
      * @param PolicyUpdateMapper $policyUpdateMapper
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
+     * @param RequestStack $requestStack
+     * @param int $defaultPaginationLimit
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -71,7 +82,9 @@ class PolicyController extends Controller
         PolicyCreateMapper $policyCreateMapper,
         PolicyUpdateMapper $policyUpdateMapper,
         FormFactory $formFactory,
-        SubmitHandler $submitHandler
+        SubmitHandler $submitHandler,
+        RequestStack $requestStack,
+        int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -80,11 +93,25 @@ class PolicyController extends Controller
         $this->policyUpdateMapper = $policyUpdateMapper;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
+        $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->requestStack = $requestStack;
     }
 
     public function listAction(Role $role): Response
     {
-        $policies = $role->getPolicies();
+        $parentRequest = $this->requestStack->getParentRequest();
+
+        $page = $parentRequest->query->get('policies_page') ?? 1;
+
+        $pagerfanta = new Pagerfanta(
+            new ArrayAdapter($role->getPolicies())
+        );
+
+        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
+
+        /** @var Policy[] $policies */
+        $policies = $pagerfanta->getCurrentPageResults();
 
         $deletePoliciesForm = $this->formFactory->deletePolicies(
                 new PoliciesDeleteData($role, $this->getPoliciesNumbers($policies))
@@ -93,6 +120,8 @@ class PolicyController extends Controller
         return $this->render('@EzPlatformAdminUi/admin/policy/list.html.twig', [
             'form_policies_delete' => $deletePoliciesForm->createView(),
             'role' => $role,
+            'pager' => $pagerfanta,
+            'parentRequest' => $parentRequest,
         ]);
     }
 

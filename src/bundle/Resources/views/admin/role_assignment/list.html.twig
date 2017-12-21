@@ -42,7 +42,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for role_assignment in assignments %}
+        {% for role_assignment in pager.currentPageResults %}
             <tr>
                 <td class="ez-checkbox-cell">{{ form_widget(form_role_assignments_delete.role_assignments[role_assignment.id]) }}</td>
                 <td>
@@ -72,4 +72,21 @@
         </tbody>
     </table>
     {{ form_end(form_role_assignments_delete) }}
+
+    {% if pager.haveToPaginate %}
+        <div class="row justify-content-center align-items-center mb-2">
+                <span>
+                    {{ 'pagination.viewing'|trans({
+                        '%viewing%': pager.currentPageResults|length,
+                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                </span>
+        </div>
+        <div class="row justify-content-center align-items-center">
+            {{ pagerfanta(pager, 'ez',{
+                'routeName': parentRequest.get('_route'),
+                'routeParams': parentRequest.get('_route_params')|merge({'_fragment': 'users-and-groups' }),
+                'pageParameter': '[assignment_page]',
+            }) }}
+        </div>
+    {% endif %}
 </section>

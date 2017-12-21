@@ -10,6 +10,8 @@ parameters:
     ezsettings.default.pagination.section_limit: 10
     ezsettings.default.pagination.language_limit: 10
     ezsettings.default.pagination.role_limit: 10
+    ezsettings.default.pagination.role_assignment_limit: 10
+    ezsettings.default.pagination.policy_limit: 10
     ezsettings.default.pagination.content_type_group_limit: 10
     ezsettings.default.pagination.content_type_limit: 10
 
