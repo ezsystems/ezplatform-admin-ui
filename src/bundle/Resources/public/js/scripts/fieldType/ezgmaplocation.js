@@ -19,13 +19,13 @@
             const result = { isError: false };
             const label = input.closest('.ez-data-source__field').querySelector('.ez-data-source__label').innerHTML;
             const isNumber = !isNaN(value);
-            const isCorrectValue = isNumber && (value <= max && value >= min);
+            const isInRange = (value <= max && value >= min);
 
-            if (!input.required && isCorrectValue) {
+            if (!input.required && isNumber && isInRange) {
                 return result;
             }
 
-            if (!isCorrectValue) {
+            if (isNumber && !isInRange) {
                 result.isError = true;
                 result.errorMessage = window.eZ.errors.outOfRangeValue
                     .replace('{fieldName}', label)
@@ -35,7 +35,7 @@
                 return result;
             }
 
-            if (isNaN(value)) {
+            if (input.required && !isNumber) {
                 result.isError = true;
                 result.errorMessage = window.eZ.errors.emptyField.replace('{fieldName}', label);
             }
