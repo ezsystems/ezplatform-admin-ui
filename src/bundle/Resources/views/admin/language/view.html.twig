@@ -14,11 +14,11 @@
     ]} %}
 {% endblock %}
 
-{% block title %}{{ 'language.view.title'|trans({ '%language%': language.name })|desc('"%language%" Language') }}{% endblock %}
+{% block title %}{{ 'language.view.title.identifier'|trans({ '%language%': language.name })|desc('Language "%language%"') }}{% endblock %}
 
 {% block page_title %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'language.view.page_title'|trans({ '%language%': language.name })|desc('Language: %language%'),
+        title: 'language.view.title.identifier'|trans({ '%language%': language.name })|desc('Language "%language%"'),
         iconName: 'languages'
     } %}
 {% endblock %}
