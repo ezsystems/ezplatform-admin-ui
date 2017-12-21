@@ -374,7 +374,7 @@ class SectionController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $result = $this->submitHandler->handle($form, function (SectionCreateData $data) {
                 $sectionCreateStruct = $this->sectionCreateMapper->reverseMap($data);
                 $section = $this->sectionService->createSection($sectionCreateStruct);
@@ -416,7 +416,7 @@ class SectionController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $result = $this->submitHandler->handle($form, function (SectionUpdateData $data) {
                 $sectionUpdateStruct = $this->sectionUpdateMapper->reverseMap($data);
                 $section = $this->sectionService->updateSection($data->getSection(), $sectionUpdateStruct);
