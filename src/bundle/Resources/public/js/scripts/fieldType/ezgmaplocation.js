@@ -176,6 +176,13 @@
             errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
             invalidStateSelectors: ['.ez-data-source__field--longitude']
         }, {
+            isValueValidator: false,
+            selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
+            eventName: 'cancelErrors',
+            callback: 'cancelErrors',
+            errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+            invalidStateSelectors: ['.ez-data-source__field--longitude']
+        }, {
             selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
             eventName: 'blur',
             callback: 'validateLatitude',
@@ -186,6 +193,13 @@
             selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
             eventName: 'keyup',
             callback: 'validateLatitudeOnEnter',
+            errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+            invalidStateSelectors: ['.ez-data-source__field--latitude']
+        }, {
+            isValueValidator: false,
+            selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
+            eventName: 'cancelErrors',
+            callback: 'cancelErrors',
             errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
             invalidStateSelectors: ['.ez-data-source__field--latitude']
         }, {
@@ -259,9 +273,9 @@
     const correctNotation = (event) => event.currentTarget.value = event.currentTarget.value.replace(',', '.');
 
     [...document.querySelectorAll(SELECTOR_FIELD)].forEach(field => {
-        const addressInput = field.querySelector('.ez-data-source__field--address .ez-data-source__input');
-        const longitudeInput = field.querySelector('.ez-data-source__field--longitude .ez-data-source__input');
-        const latitudeInput = field.querySelector('.ez-data-source__field--latitude .ez-data-source__input');
+        const addressInput = field.querySelector(SELECTOR_ADDRESS_INPUT);
+        const longitudeInput = field.querySelector(SELECTOR_LON_INPUT);
+        const latitudeInput = field.querySelector(SELECTOR_LAT_INPUT);
         const areCoordsSet = !!longitudeInput.value.length && !!latitudeInput.value.length;
         const locateMeBtn = field.querySelector('.ez-data-source__locate-me .btn');
         const searchBtn = field.querySelector('.btn--search-by-address');
@@ -295,6 +309,8 @@
             }).addTo(map);
 
             addressInput.dispatchEvent(new CustomEvent('cancelErrors'));
+            longitudeInput.dispatchEvent(new CustomEvent('cancelErrors'));
+            latitudeInput.dispatchEvent(new CustomEvent('cancelErrors'));
         };
 
         /**
