@@ -18,7 +18,7 @@
                 {% include '@EzPlatformAdminUi/admin/search/search_form.html.twig' with { form: form } %}
 
                 <div class="ez-table-header mt-3">
-                    <div ="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pagerfanta.nbResults})|desc('Search results (%total%)') }}</div>
+                    <div class="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pagerfanta.nbResults})|desc('Search results (%total%)') }}</div>
                 </div>
 
                 {% if results is empty %}

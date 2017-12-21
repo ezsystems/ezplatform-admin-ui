@@ -1,5 +1,7 @@
 {% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
 
+{% form_theme form '@EzPlatformAdminUi/form_fields.html.twig'  %}
+
 {% trans_default_domain "linkmanager" %}
 
 {% block title %}{{ 'url.list'|trans }}{% endblock %}
@@ -19,8 +21,8 @@
 
 {%- block content -%}
     <section class="container mt-4">
-        {{ form_start(form) }}
-            <div class="row justify-content-between">
+        {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+            <div class="row w-100 justify-content-between">
                 <div class="col-lg-6">
                     <div class="input-group">
                         {{ form_widget(form.searchQuery, { attr: {
@@ -35,7 +37,7 @@
                     </div>
                 </div>
                 <div class="col-auto">
-                    <div class="form-inline">
+                    <div class="d-inline-flex">
                         {{ form_label(form.status) }} &nbsp;
                         {{ form_widget(form.status) }}
                     </div>

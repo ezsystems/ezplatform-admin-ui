@@ -1,4 +1,4 @@
-*:not(.form-inline) {
+form:not(.form-inline) {
     .form-control-label {
         font-weight: 700;
         font-size: 14px;
@@ -34,7 +34,8 @@
 
 .ez-form-inline {
     .control-label,
-    .form-control {
+    .form-control,
+    .form-control-label {
         margin-right: .5rem;
     }
 }

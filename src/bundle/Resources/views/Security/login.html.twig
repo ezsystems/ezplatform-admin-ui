@@ -14,7 +14,10 @@
                 </svg>
                 <form action="{{ path( 'login_check' ) }}" method="post" role="form">
                     <fieldset>
-                        <div class="form-group">
+                        {% if error %}
+                            <span>{{ error.message }}</span>
+                        {% endif %}
+                        <div class="form-group{% if error %} has-error{% endif %}">
                             <label class="ez-login__form-label" for="username">{{ 'authentication.username'|trans|desc('Username') }}:</label>
                             <input type="text" id="username" class="ez-login__form-input form-control" name="_username" value="{{ last_username }}" required="required" autofocus="autofocus" autocomplete="on"/>
                         </div>

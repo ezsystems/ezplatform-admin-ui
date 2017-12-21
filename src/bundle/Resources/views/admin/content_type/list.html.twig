@@ -1,5 +1,7 @@
 {% trans_default_domain 'content_type' %}
 
+{% form_theme form_content_types_delete '@EzPlatformAdminUi/form_fields.html.twig'  %}
+
 <section class="container mt-4 px-5">
     <div class="ez-table-header">
         <div class="ez-table-header__headline">{{ 'content_type.view.list.title'|trans({ '%identifier%': content_type_group.identifier })|desc('Content Types in %identifier%') }}</div>

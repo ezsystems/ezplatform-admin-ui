@@ -1,3 +1,5 @@
+{% form_theme form '@EzPlatformAdminUi/form_fields.html.twig'  %}
+
 <div class="modal fade ez-modal ez-modal--send-to-trash" id="delete-section-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -13,13 +15,13 @@
             </div>
             <div class="modal-footer">
                 {{ form_start(form, {
-                    "action": path("ezplatform.section.delete", {"sectionId": section.id}),
+                    "action": path('ezplatform.section.delete', {'sectionId': section.id}),
                     'attr': {'class': 'd-inline-block'}
                 }) }}
                 <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">
                     {{ 'form.cancel'|trans|desc('Cancel') }}
                 </button>
-                {{ form_widget(form.delete, {'attr': {'class': 'btn btn-danger', 'disabled': not deletable}}) }}
+                {{ form_widget(form.delete, {'attr': {'class': 'btn-danger', 'disabled': not deletable}}) }}
                 {{ form_end(form) }}
             </div>
         </div>

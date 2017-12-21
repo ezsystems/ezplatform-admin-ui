@@ -1,4 +1,4 @@
-{% form_theme form 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+{% form_theme form '@EzPlatformAdminUi/form_fields.html.twig'  %}
 
 <div class="modal fade ez-modal ez-modal--send-to-trash" id="confirmEmptyTrash" tabindex="-1" role="dialog" aria-labelledby="confirmEmptyTrash"
      aria-hidden="true">
@@ -24,7 +24,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     {{ 'trash.delete.button.cancel'|trans|desc('Cancel') }}
                 </button>
-                {{ form_widget(form.empty, {'attr': {'class': 'btn btn-danger'}}) }}
+                {{ form_widget(form.empty, {'attr': {'class': 'btn-danger'}}) }}
                 {{ form_widget(form.empty_trash, {'label_attr': {'class': 'checkbox-inline'}, 'attr': {'hidden': true}}) }}
                 {{ form_end(form) }}
             </div>

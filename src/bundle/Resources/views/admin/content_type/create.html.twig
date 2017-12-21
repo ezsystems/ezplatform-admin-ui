@@ -2,7 +2,7 @@
 
 {% trans_default_domain 'content_type' %}
 
-{% form_theme form _self %}
+{% form_theme form _self '@EzPlatformAdminUi/form_fields.html.twig'  %}
 
 {% block _ezrepoforms_contenttype_update_removeFieldDefinition_widget %}
     <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>

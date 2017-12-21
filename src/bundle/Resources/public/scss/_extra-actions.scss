@@ -54,7 +54,7 @@
             overflow: auto;
         }
 
-        .radio {
+        .form-check {
             display: block;
             background: none;
             border: 0 none;
@@ -68,6 +68,7 @@
             text-decoration: none;
             cursor: pointer;
             transition: all .2s $ez-admin-transition;
+            margin-bottom: 0;
 
             &:hover,
             &:focus {
@@ -119,11 +120,11 @@
             padding: 0;
         }
 
-        .radio {
+        .form-check {
             cursor: pointer;
             background: $ez-white;
             transition: all .2s $ez-admin-transition;
-            padding-left: 1.5rem;
+            margin-bottom: 0;
 
             &:hover,
             &:focus {

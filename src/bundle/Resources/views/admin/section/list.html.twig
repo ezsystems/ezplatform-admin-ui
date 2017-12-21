@@ -1,4 +1,8 @@
 {% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+
+{% form_theme form_sections_delete '@EzPlatformAdminUi/form_fields.html.twig'  %}
+{% form_theme form_section_content_assign '@EzPlatformAdminUi/form_fields.html.twig'  %}
+
 {% trans_default_domain 'section' %}
 
 {% block body_class %}ez-section-list-view{% endblock %}

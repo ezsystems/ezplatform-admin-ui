@@ -1,5 +1,7 @@
 {% trans_default_domain 'role' %}
 
+{% form_theme form_policies_delete '@EzPlatformAdminUi/form_fields.html.twig'  %}
+
 <section class="container mt-4 px-5">
     <div class="ez-table-header">
         <div class="ez-table-header__headline">{{ 'policy.view.list.title.count'|trans({'%count%': role.policies|length})|desc('Policies (%count%)') }}</div>
