@@ -61,11 +61,6 @@
         <target state="new">Type</target>
         <note>key: trash.type</note>
       </trans-unit>
-      <trans-unit id="9894fcfeef8935ecd3c257204fae8514b72961f1" resname="trash.viewing">
-        <source>Viewing %viewing% out of %total% items</source>
-        <target state="new">Viewing %viewing% out of %total% items</target>
-        <note>key: trash.viewing</note>
-      </trans-unit>
     </body>
   </file>
 </xliff>
