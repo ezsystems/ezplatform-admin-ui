@@ -1,6 +1,6 @@
 {% trans_default_domain 'ezrepoforms_content' %}
 
-{% use '@EzPlatformAdminUi/fieldtypes/binary_base.html.twig' %}
+{% use '@EzPlatformAdminUi/fieldtypes/edit/binary_base.html.twig' %}
 
 {%- block ezplatform_fieldtype_ezmedia_row -%}
     {% set preview_block_name = 'ezmedia_preview' %}
@@ -10,7 +10,7 @@
 {%- endblock -%}
 
 {% block ezmedia_preview %}
-    {% form_theme form '@EzPlatformAdminUi/fieldtypes/binary_base_fields.html.twig' %}
+    {% form_theme form '@EzPlatformAdminUi/fieldtypes/edit/binary_base_fields.html.twig' %}
 
     <div class="ez-field-edit-preview">
         <div class="ez-field-edit-preview__visual">

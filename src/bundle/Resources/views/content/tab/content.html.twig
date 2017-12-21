@@ -27,7 +27,7 @@
                             <em>{{ 'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty') }}</em>
                         {% else %}
                             {{ ez_render_field(content, fieldDefinition.identifier, {
-                                template: '@EzPlatformAdminUi/content_fields.html.twig'
+                                template: '@EzPlatformAdminUi/fieldtypes/preview/content_fields.html.twig'
                             }) }}
                         {% endif %}
                     </div>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="540d6bae1cf130f98f00799d4ef1c6f6b5752907" resname="ezboolean.no">
+        <source>No</source>
+        <target state="new">No</target>
+        <note>key: ezboolean.no</note>
+      </trans-unit>
+      <trans-unit id="dfb5fd4a5dec38539847d92bb5e8417c5b82b96a" resname="ezboolean.yes">
+        <source>yes</source>
+        <target state="new">yes</target>
+        <note>key: ezboolean.yes</note>
+      </trans-unit>
+      <trans-unit id="bf1525899659fa5ea6c18aa4bf63d596fecbf97e" resname="ezgmaplocation.address">
+        <source>Address</source>
+        <target state="new">Address</target>
+        <note>key: ezgmaplocation.address</note>
+      </trans-unit>
+      <trans-unit id="706821bf7c10bf965680842f9e0b0bad3ab737ed" resname="ezgmaplocation.latitude">
+        <source>Latitude</source>
+        <target state="new">Latitude</target>
+        <note>key: ezgmaplocation.latitude</note>
+      </trans-unit>
+      <trans-unit id="38022a4ef42d878eb38c71537fdc4c72b5fbb989" resname="ezgmaplocation.location_properties">
+        <source>Location properties</source>
+        <target state="new">Location properties</target>
+        <note>key: ezgmaplocation.location_properties</note>
+      </trans-unit>
+      <trans-unit id="ba4a253dc02df12654dabc50ef81b428ee888bcf" resname="ezgmaplocation.longitude">
+        <source>Longitude</source>
+        <target state="new">Longitude</target>
+        <note>key: ezgmaplocation.longitude</note>
+      </trans-unit>
+      <trans-unit id="504719a5dc2e1c7d5c59a159e3d96e767d6b8ae2" resname="ezimage.alternative_text">
+        <source>Alternative text</source>
+        <target state="new">Alternative text</target>
+        <note>key: ezimage.alternative_text</note>
+      </trans-unit>
+      <trans-unit id="80978f6269fb07d09667395cd32f6ebd6281ff25" resname="ezimage.file_name">
+        <source>File name</source>
+        <target state="new">File name</target>
+        <note>key: ezimage.file_name</note>
+      </trans-unit>
+      <trans-unit id="d21adcec4365478ce3f618a65ae4ddfdbb94e457" resname="ezimage.image_file_properties">
+        <source>Image file properties</source>
+        <target state="new">Image file properties</target>
+        <note>key: ezimage.image_file_properties</note>
+      </trans-unit>
+      <trans-unit id="ac1f7c0bca124e29b9e6b09eaa0bb58334c62327" resname="ezimage.size">
+        <source>Size</source>
+        <target state="new">Size</target>
+        <note>key: ezimage.size</note>
+      </trans-unit>
+      <trans-unit id="e371d4573dda857ef4a58cebd2420f87992b8864" resname="ezmedia.auto_play">
+        <source>Auto play</source>
+        <target state="new">Auto play</target>
+        <note>key: ezmedia.auto_play</note>
+      </trans-unit>
+      <trans-unit id="84c1e46564bf281d22c3b554a0af412a8bbbdacc" resname="ezmedia.browser_does_not_support_html5_video">
+        <source>Your browser does not support HTML5 video</source>
+        <target state="new">Your browser does not support HTML5 video</target>
+        <note>key: ezmedia.browser_does_not_support_html5_video</note>
+      </trans-unit>
+      <trans-unit id="8f298e16cc3766b185e4e45db13e4f84f03f5d89" resname="ezmedia.display_controls">
+        <source>Display controls</source>
+        <target state="new">Display controls</target>
+        <note>key: ezmedia.display_controls</note>
+      </trans-unit>
+      <trans-unit id="0a8b2fdd1d0a69bd12d066f8f7f8b517df9974bf" resname="ezmedia.file_name">
+        <source>File name</source>
+        <target state="new">File name</target>
+        <note>key: ezmedia.file_name</note>
+      </trans-unit>
+      <trans-unit id="5031ab8e376bd36df793ef5f7b8ce51d1c785be3" resname="ezmedia.loop">
+        <source>Loop</source>
+        <target state="new">Loop</target>
+        <note>key: ezmedia.loop</note>
+      </trans-unit>
+      <trans-unit id="c351fa9d7e7c134199f7f49e0cd010dedafb4e13" resname="ezmedia.no">
+        <source>No</source>
+        <target state="new">No</target>
+        <note>key: ezmedia.no</note>
+      </trans-unit>
+      <trans-unit id="099406392256d6e1816e54f4898f09b9ae005ffa" resname="ezmedia.size">
+        <source>Size</source>
+        <target state="new">Size</target>
+        <note>key: ezmedia.size</note>
+      </trans-unit>
+      <trans-unit id="75c0855b33b165884b37017870852e662de3ea73" resname="ezmedia.type">
+        <source>Type</source>
+        <target state="new">Type</target>
+        <note>key: ezmedia.type</note>
+      </trans-unit>
+      <trans-unit id="207f2af6642a19b3e2ee254f82bd71ae2351d6f0" resname="ezmedia.video_file_properties">
+        <source>Video file properties</source>
+        <target state="new">Video file properties</target>
+        <note>key: ezmedia.video_file_properties</note>
+      </trans-unit>
+      <trans-unit id="2f9f973623d548ff2cac08afcd1de234bd2493c8" resname="ezmedia.yes">
+        <source>Yes</source>
+        <target state="new">Yes</target>
+        <note>key: ezmedia.yes</note>
+      </trans-unit>
+      <trans-unit id="df17c526bb1674b64ac8a4cd4eda1af9e0c5e7e5" resname="ezobjectrelation.content_type">
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
+        <note>key: ezobjectrelation.content_type</note>
+      </trans-unit>
+      <trans-unit id="79f0c6856a30e0436b61aa28cfc859df8289edfb" resname="ezobjectrelation.created">
+        <source>Created</source>
+        <target state="new">Created</target>
+        <note>key: ezobjectrelation.created</note>
+      </trans-unit>
+      <trans-unit id="feb25b24199466f077038c5e6e38209deae21471" resname="ezobjectrelation.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: ezobjectrelation.name</note>
+      </trans-unit>
+      <trans-unit id="bd321e94e97034129cf78323f54e93c782250971" resname="ezobjectrelation.single_relation">
+        <source>Single relation</source>
+        <target state="new">Single relation</target>
+        <note>key: ezobjectrelation.single_relation</note>
+      </trans-unit>
+      <trans-unit id="61c7580e3e4d4547527322089f577eca2ff1ea5b" resname="ezobjectrelationlist.content_type">
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
+        <note>key: ezobjectrelationlist.content_type</note>
+      </trans-unit>
+      <trans-unit id="07ffe77032c4f0b4f8c64f7c40218274e805491f" resname="ezobjectrelationlist.created">
+        <source>Created</source>
+        <target state="new">Created</target>
+        <note>key: ezobjectrelationlist.created</note>
+      </trans-unit>
+      <trans-unit id="ac6f4439a9d7e655920f9789346d6c928182127e" resname="ezobjectrelationlist.multiple_relations">
+        <source>Multiple relations</source>
+        <target state="new">Multiple relations</target>
+        <note>key: ezobjectrelationlist.multiple_relations</note>
+      </trans-unit>
+      <trans-unit id="44d2ac9ae83f6b73fa8f61fad66a77d76d2159f0" resname="ezobjectrelationlist.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: ezobjectrelationlist.name</note>
+      </trans-unit>
+      <trans-unit id="eb451c657d2bd24b90aaea1619ba0ffb33ba52cc" resname="ezuser.email">
+        <source>E-mail</source>
+        <target state="new">E-mail</target>
+        <note>key: ezuser.email</note>
+      </trans-unit>
+      <trans-unit id="fc4b6b718b2cee2f8a91703c070fd69756d5c4cd" resname="ezuser.username">
+        <source>Username</source>
+        <target state="new">Username</target>
+        <note>key: ezuser.username</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

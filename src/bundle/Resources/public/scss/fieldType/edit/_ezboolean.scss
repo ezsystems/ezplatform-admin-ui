@@ -1,5 +1,3 @@
-@import '../custom';
-
 .ez-field-edit--ezboolean {
     @include checkbox-switcher();
 }
