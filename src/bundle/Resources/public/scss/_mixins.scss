@@ -7,6 +7,7 @@
     position: relative;
     z-index: 1;
     cursor: pointer;
+    min-width: 4.6875rem;
 
     &:before {
         content: "";
