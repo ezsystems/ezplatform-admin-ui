@@ -8,8 +8,8 @@ system:
                     controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
                     template: '@EzPlatformAdminUi/content/locationview.html.twig'
                     match: true
-            embed:
-                preview_ezobjectrelationlist_row:
+            preview_ezobjectrelationlist_row:
+                default:
                     controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
                     template: '@EzPlatformAdminUi\fieldtypes\preview\ezobjectrelationlist_row.html.twig'
                     match: true
