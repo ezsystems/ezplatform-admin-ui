@@ -84,7 +84,11 @@
                 </div>
                 {% if pager.haveToPaginate %}
                     <div class="row justify-content-center align-items-center mb-2">
-                        <h6>{{ 'trash.viewing'|trans({'%viewing%': pager.currentPageResults|length, '%total%': pager.nbResults})|desc('Viewing %viewing% out of %total% items') }}</h6>
+                        <span>
+                            {{ 'pagination.viewing'|trans({
+                                '%viewing%': pager.currentPageResults|length,
+                                '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                        </span>
                     </div>
                     <div class="row justify-content-center align-items-center">
                         {{ pagerfanta(pager, 'ez') }}
