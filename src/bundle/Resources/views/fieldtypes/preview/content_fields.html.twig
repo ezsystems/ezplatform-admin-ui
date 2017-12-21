@@ -1,0 +1,437 @@
+{% extends '@EzPublishCore/content_fields.html.twig' %}
+
+{% trans_default_domain 'fieldtypes_preview' %}
+
+{% block ezauthor_field %}
+    {% spaceless %}
+        {% if field.value.authors|length() > 0 %}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezauthor')|trim}) %}
+            <ul {{ block( 'field_attributes' ) }}>
+                {% for author in field.value.authors %}
+                    <li>{{ author.name }} &lt;<a href="mailto:{{ author.email|escape( 'url' ) }}">{{ author.email }}</a>&gt;</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+
+{% block ezstring_field %}
+{% spaceless %}
+    {% set field_value = field.value.text %}
+    {{ block( 'simple_inline_field' ) }}
+{% endspaceless %}
+{% endblock %}
+
+{% block eztext_field %}
+{% spaceless %}
+    {% set field_value = field.value|nl2br %}
+    {{ block( 'simple_block_field' ) }}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezrichtext_field %}
+    {%- set field_value = field.value.xml|richtext_to_html5 -%}
+    {{ block( 'simple_block_field' ) }}
+{% endblock %}
+
+{% block ezcountry_field %}
+{% spaceless %}
+    {% if fieldSettings.isMultiple and field.value.countries|length > 0 %}
+        <ul {{ block( 'field_attributes' ) }}>
+            {% for country in field.value.countries %}
+                <li>{{ country['Name'] }}</li>
+            {% endfor %}
+        </ul>
+    {% elseif field.value.countries|length() == 1 %}
+        <p {{ block( 'field_attributes' ) }}>
+        {% for country in field.value.countries %}
+            {{ country['Name'] }}
+        {% endfor %}
+        </p>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezboolean_field %}
+{% spaceless %}
+    {% set field_value = field.value.bool ? 'ezboolean.yes'|trans|desc('yes') : 'ezboolean.no'|trans|desc('No') %}
+    {{ block( 'simple_inline_field' ) }}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezdatetime_field %}
+{% spaceless %}
+    {% if not ez_is_field_empty( content, field ) %}
+        {% if fieldSettings.useSeconds %}
+            {% set field_value = field.value.value|localizeddate( 'short', 'medium', parameters.locale ) %}
+        {% else %}
+            {% set field_value = field.value.value|localizeddate( 'short', 'short', parameters.locale ) %}
+        {% endif %}
+        {{ block( 'simple_block_field' ) }}
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezdate_field %}
+{% spaceless %}
+    {% if not ez_is_field_empty( content, field ) %}
+        {% set field_value = field.value.date|localizeddate( 'short', 'none', parameters.locale, 'UTC' ) %}
+        {{ block( 'simple_block_field' ) }}
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block eztime_field %}
+{% spaceless %}
+    {% if not ez_is_field_empty( content, field ) %}
+        {% if fieldSettings.useSeconds %}
+            {% set field_value = field.value.time|localizeddate( 'none', 'medium', parameters.locale, 'UTC' ) %}
+        {% else %}
+            {% set field_value = field.value.time|localizeddate( 'none', 'short', parameters.locale, 'UTC' ) %}
+        {% endif %}
+        {{ block( 'simple_block_field' ) }}
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezemail_field %}
+{% spaceless %}
+    {% if not ez_is_field_empty( content, field ) %}
+        {% set field_value = field.value.email %}
+        <a href="mailto:{{ field.value.email|escape( 'url' ) }}" {{ block( 'field_attributes' ) }}>{{ field.value.email }}</a>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezinteger_field %}
+{% spaceless %}
+    {% if not ez_is_field_empty( content, field ) %}
+        {% set field_value = field.value.value %}
+        {{ block( 'simple_inline_field' ) }}
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezfloat_field %}
+{% spaceless %}
+    {% if not ez_is_field_empty( content, field ) %}
+        {% set field_value = field.value.value %}
+        {{ block( 'simple_inline_field' ) }}
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezurl_field %}
+{% spaceless %}
+    {% if not ez_is_field_empty( content, field ) %}
+        <a href="{{ field.value.link }}"
+            {{ block( 'field_attributes' ) }}>{{ field.value.text ? field.value.text : field.value.link }}</a>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezisbn_field %}
+{% spaceless %}
+    {% set field_value = field.value.isbn %}
+    {{ block( 'simple_inline_field' ) }}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezkeyword_field %}
+{% spaceless %}
+    {% if not ez_is_field_empty( content, field ) %}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezkeyword')|trim}) %}
+        <ul {{ block( 'field_attributes' ) }}>
+        {% for keyword in field.value.values %}
+            <li class="ez-keyword__item">{{ keyword }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezselection_field %}
+{% spaceless %}
+    {% if fieldSettings.isMultiple and field.value.selection|length() > 0  %}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezselection-multiple')|trim}) %}
+        <ul {{ block( 'field_attributes' ) }}>
+        {% for selectedIndex in field.value.selection %}
+            <li class="ez-selection__item">{{ fieldSettings.options[selectedIndex] }}</li>
+        {% endfor %}
+        </ul>
+    {% elseif not fieldSettings.isMultiple %}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezselection-single')|trim}) %}
+        {% set field_value = fieldSettings.options[field.value.selection.0] %}
+        {{ block( 'simple_block_field' ) }}
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{# @todo:
+ # - add translate filter
+ # - legacy used to dump is_locked attribute
+ #}
+{% block ezuser_field %}
+{% spaceless %}
+{% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezuser')|trim}) %}
+<table {{ block( 'field_attributes' ) }}>
+    <tbody>
+        <tr>
+            <td class="ez-user__type">{{ 'ezuser.username'|trans|desc('Username') }}:</td>
+            <td>{{ field.value.login }}</td>
+        </tr>
+        <tr>
+            <td class="ez-user__type">{{ 'ezuser.email'|trans|desc('E-mail') }}:</td>
+            <td><a href="mailto:{{ field.value.email|escape( 'url' ) }}">{{ field.value.email }}</td>
+        </tr>
+    </tbody>
+</table>
+{% endspaceless %}
+{% endblock %}
+
+{% block ezbinaryfile_field %}
+{% spaceless %}
+    {% if not ez_is_field_empty( content, field ) %}
+        {% set route_reference = ez_route( 'ez_content_download', { 'content': content, 'fieldIdentifier': field.fieldDefIdentifier } ) %}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezbinaryfile')|trim}) %}
+        <div {{ block( 'field_attributes' ) }}>
+            <svg class="ez-icon ez-icon--file">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#file"></use>
+            </svg>
+            {{ field.value.fileName }}
+            {{ field.value.fileSize|ez_file_size( 1 ) }}
+            <a href="{{ path( route_reference ) }}">
+                <svg class="ez-icon ez-icon--download ez-icon--light">
+                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#download"></use>
+                </svg>
+            </a>
+        </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezmedia_field %}
+{% if not ez_is_field_empty( content, field ) %}
+{% spaceless %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezmedia')|trim}) %}
+    {% set type = fieldSettings.mediaType %}
+    {% set value = field.value %}
+    {% set route_reference = ez_route( 'ez_content_download', {'content': content, 'fieldIdentifier': field.fieldDefIdentifier} ) %}
+    {% set download = path( route_reference ) %}
+    {% set hasController = value.hasController ? 'ezmedia.yes'|trans|desc('Yes') : 'ezmedia.no'|trans|desc('No') %}
+    {% set autoplay = value.autoplay ? 'ezmedia.yes'|trans|desc('Yes') : 'ezmedia.no'|trans|desc('No') %}
+    {% set loop = value.loop ? 'ezmedia.yes'|trans|desc('Yes') : 'ezmedia.no'|trans|desc('No') %}
+    <div {{ block( 'field_attributes' ) }}>
+    {% autoescape false %}
+    {% if type == "html5_video"
+        or type == "quick_time"
+        or type == "windows_media_player"
+        or type == "real_player" %}
+        <video src="{{ download }}" width="50%" height="100%" controls>
+            {{ 'ezmedia.browser_does_not_support_html5_video'|trans|desc('Your browser does not support HTML5 video') }}
+        </video>
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ 'ezmedia.video_file_properties'|trans|desc('Video file properties') }}:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ 'ezmedia.file_name'|trans|desc('File name') }}:</td>
+                    <td>{{ value.fileName }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'ezmedia.type'|trans|desc('Type') }}:</td>
+                    <td>{{ value.mimeType }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'ezmedia.size'|trans|desc('Size') }}:</td>
+                    <td>{{ value.fileSize|ez_file_size( 1 ) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'ezmedia.display_controls'|trans|desc('Display controls') }}:</td>
+                    <td>{{hasController}}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'ezmedia.auto_play'|trans|desc('Auto play') }}:</td>
+                    <td>{{autoplay}}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'ezmedia.loop'|trans|desc('Loop') }}:</td>
+                    <td>{{loop}}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
+    {% endautoescape %}
+    </div>
+{% endspaceless %}
+{% endif %}
+{% endblock %}
+
+{% block ezobjectrelationlist_field %}
+{% spaceless %}
+    {% if not ez_is_field_empty( content, field ) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezobjectrelationlist')|trim}) %}
+    <div {{ block( 'field_attributes' ) }}>
+        <div class="ez-table-header ">
+            <div class="ez-table-header__headline">{{ 'ezobjectrelationlist.multiple_relations'|trans|desc('Multiple relations') }}:</div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'ezobjectrelationlist.name'|trans|desc('Name') }}</th>
+                    <th>{{ 'ezobjectrelationlist.content_type'|trans|desc('Content Type') }}</th>
+                    <th>{{ 'ezobjectrelationlist.created'|trans|desc('Created') }}</th>
+                </tr>
+            </thead>
+            {% for contentId in field.value.destinationContentIds %}
+            <tr>
+                {{ render(controller('ez_content:viewAction', {'contentId': contentId, 'viewType': 'embed', 'noLayout': 1, 'layout': 'preview_ezobjectrelationlist_row'})) }}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+
+{% block ezgmaplocation_field %}
+{% spaceless %}
+{% if field.value is not null %}
+    {% set latitude = field.value.latitude %}
+    {% set longitude = field.value.longitude %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezgmaplocation')|trim}) %}
+    <div {{ block( 'field_attributes' ) }}>
+        <div class="ez-gmaplocation__map"  data-longitude="{{ longitude }}" data-latitude="{{ latitude }}"></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ 'ezgmaplocation.location_properties'|trans|desc('Location properties') }}:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ 'ezgmaplocation.address'|trans|desc('Address') }}:</td>
+                    <td>{{ field.value.address }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'ezgmaplocation.latitude'|trans|desc('Latitude') }}:</td>
+                    <td>{{ field.value.latitude }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'ezgmaplocation.longitude'|trans|desc('Longitude') }}:</td>
+                    <td>{{ field.value.longitude }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezimage_field %}
+{% spaceless %}
+{% if not ez_is_field_empty( content, field ) %}
+{% set imageAlias = ez_image_alias( field, versionInfo, parameters.alias|default( 'original' ) ) %}
+{% set src = imageAlias ? asset( imageAlias.uri ) : "//:0" %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezimage')|trim}) %}
+<div {{ block( 'field_attributes' ) }}>
+    <div class="ez-image__wrapper">
+        <img src="{{ src }}">
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>{{ 'ezimage.image_file_properties'|trans|desc('Image file properties') }}:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ 'ezimage.file_name'|trans|desc('File name') }}:</td>
+                <td>{{ field.value.fileName }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'ezimage.size'|trans|desc('Size') }}</td>
+                <td>{{ field.value.fileSize|ez_file_size( 1 ) }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'ezimage.alternative_text'|trans|desc('Alternative text') }}</td>
+                <td>{{ field.value.alternativeText }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezobjectrelation_field %}
+{% spaceless %}
+{% if not ez_is_field_empty( content, field ) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezobjectrelationlist')|trim}) %}
+    <div {{ block( 'field_attributes' ) }}>
+        <div class="ez-table-header ">
+            <div class="ez-table-header__headline">{{ 'ezobjectrelation.single_relation'|trans|desc('Single relation') }}:</div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'ezobjectrelation.name'|trans|desc('Name') }}</th>
+                    <th>{{ 'ezobjectrelation.content_type'|trans|desc('Content Type') }}</th>
+                    <th>{{ 'ezobjectrelation.created'|trans|desc('Created') }}</th>
+                </tr>
+            </thead>
+            <tr>
+                {{ render(controller('ez_content:viewAction', {'contentId': field.value.destinationContentId, 'viewType': 'embed', 'noLayout': 1, 'layout': 'preview_ezobjectrelationlist_row'})) }}
+            </tr>
+        </table>
+    </div>
+{% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{# pageService is exposed under parameters.pageService thanks to Page\ParameterProvider #}
+{% block ezpage_field %}
+{% spaceless %}
+{% if not ez_is_field_empty( content, field ) %}
+    {% set layout = field.value.page.layout %}
+    {% set template = parameters.pageService.getLayoutTemplate( layout ) %}
+    {% include template with { 'zones': field.value.page.zones, 'zone_layout': layout, 'pageService': parameters.pageService } %}
+{% endif %}
+{% endspaceless %}
+{% endblock %}
+
+
+{# The simple_block_field block is a shorthand html block-based fields (like eztext or ezrichtext) #}
+{# You can define a field_value variable before rendering this one if you need special operation for rendering content (i.e. nl2br) #}
+{% block simple_block_field %}
+{% spaceless %}
+    {% if field_value is not defined %}
+        {% set field_value = field.value %}
+    {% endif %}
+    <div {{ block( 'field_attributes' ) }}>
+        {% endspaceless %}{{ field_value|raw }}{% spaceless %}
+    </div>
+{% endspaceless %}
+{% endblock %}
+
+{% block simple_inline_field %}
+{% spaceless %}
+    {% if field_value is not defined %}
+        {% set field_value = field.value %}
+    {% endif %}
+    <span {{ block( 'field_attributes' ) }}>{{ field_value }}</span>
+{% endspaceless %}
+{% endblock %}
+
+{# Block for field attributes rendering. Useful to add a custom class, id or whatever HTML attribute to the field markup #}
+{% block field_attributes %}
+{% spaceless %}
+    {% set attr = attr|default( {} ) %}
+    {% for attrname, attrvalue in attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+{% endspaceless %}
+{% endblock %}

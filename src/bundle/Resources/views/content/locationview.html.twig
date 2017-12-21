@@ -74,6 +74,14 @@
     </div>
 {% endblock %}
 
+{% block stylesheets %}
+    {% stylesheets
+        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/leaflet/dist/leaflet.css'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block react_modules %}
     {%  javascripts
         'bundles/ezplatformadminuimodules/js/SubItems.module.js'
@@ -100,6 +108,8 @@
         'bundles/ezplatformadminui/js/scripts/sidebar/btn/location.edit.js'
         'bundles/ezplatformadminui/js/scripts/sidebar/btn/location.create.js'
         'bundles/ezplatformadminui/js/scripts/sidebar/instant.filter.js'
+        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/leaflet/dist/leaflet.js'
+        'bundles/ezplatformadminui/js/scripts/admin.location.load.map.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

@@ -1,10 +1,16 @@
 system:
     admin_group:
         user:
-            login_template: "@EzPlatformAdminUi/Security/login.html.twig"
+            login_template: '@EzPlatformAdminUi/Security/login.html.twig'
         content_view:
             full:
                 default:
                     controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
-                    template: "@EzPlatformAdminUi/content/locationview.html.twig"
+                    template: '@EzPlatformAdminUi/content/locationview.html.twig'
                     match: true
+            embed:
+                preview_ezobjectrelationlist_row:
+                    controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
+                    template: '@EzPlatformAdminUi\fieldtypes\preview\ezobjectrelationlist_row.html.twig'
+                    match: true
+

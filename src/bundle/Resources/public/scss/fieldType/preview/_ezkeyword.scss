@@ -1,0 +1,13 @@
+.ez-field-preview--ezkeyword {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+
+    .ez-keyword__item {
+        display: inline-block;
+        padding: .5rem 1rem;
+        background: $ez-ground-primary;
+        border-radius: 5px;
+        margin: .25rem;
+    }
+}
