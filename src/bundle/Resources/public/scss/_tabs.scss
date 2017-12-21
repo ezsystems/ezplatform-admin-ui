@@ -44,8 +44,10 @@
     .nav-tabs {
         border-bottom: 2px solid $ez-ground-base-dark;
 
-        .nav-item {
-            margin-bottom: -2px;
+        &.ez-tabs {
+            .nav-item {
+                margin-bottom: -2px;
+            }
         }
     }
 }
