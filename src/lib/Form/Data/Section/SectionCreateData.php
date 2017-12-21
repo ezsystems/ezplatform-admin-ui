@@ -8,15 +8,29 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @todo add validation
  */
 class SectionCreateData
 {
-    /** @var string|null */
+    /**
+     * @var string|null
+     *
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     *     pattern="/^[[:alnum:]_]+$/",
+     *     message="ez.section.identifier.format"
+     * )
+     */
     protected $identifier;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     *
+     * @Assert\NotBlank()
+     */
     protected $name;
 
     /**

@@ -34,6 +34,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
+use Exception;
 
 class SectionController extends Controller
 {
@@ -375,7 +376,8 @@ class SectionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $result = $this->submitHandler->handle($form, function (SectionCreateData $data) {
+            $data = $form->getData();
+            try {
                 $sectionCreateStruct = $this->sectionCreateMapper->reverseMap($data);
                 $section = $this->sectionService->createSection($sectionCreateStruct);
 
@@ -391,10 +393,8 @@ class SectionController extends Controller
                 return new RedirectResponse($this->generateUrl('ezplatform.section.view', [
                     'sectionId' => $section->id,
                 ]));
-            });
-
-            if ($result instanceof Response) {
-                return $result;
+            } catch (Exception $e) {
+                $this->notificationHandler->error($e->getMessage());
             }
         }
 
@@ -417,7 +417,8 @@ class SectionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $result = $this->submitHandler->handle($form, function (SectionUpdateData $data) {
+            $data = $form->getData();
+            try {
                 $sectionUpdateStruct = $this->sectionUpdateMapper->reverseMap($data);
                 $section = $this->sectionService->updateSection($data->getSection(), $sectionUpdateStruct);
 
@@ -433,10 +434,8 @@ class SectionController extends Controller
                 return new RedirectResponse($this->generateUrl('ezplatform.section.view', [
                     'sectionId' => $section->id,
                 ]));
-            });
-
-            if ($result instanceof Response) {
-                return $result;
+            } catch (Exception $e) {
+                $this->notificationHandler->error($e->getMessage());
             }
         }
 
