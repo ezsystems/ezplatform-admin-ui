@@ -121,6 +121,16 @@
         <target state="new">Name</target>
         <note>key: tab.details.state_name</note>
       </trans-unit>
+      <trans-unit id="8ddd1c9e60bd352b4395e1753ede6534db2aac8b" resname="tab.details.sub_items_listing_by.in">
+        <source>in</source>
+        <target state="new">in</target>
+        <note>key: tab.details.sub_items_listing_by.in</note>
+      </trans-unit>
+      <trans-unit id="c7f8179865bd73db9d2f07c39ae4a364668476c5" resname="tab.details.sub_items_listing_by.order_by">
+        <source>Order by</source>
+        <target state="new">Order by</target>
+        <note>key: tab.details.sub_items_listing_by.order_by</note>
+      </trans-unit>
       <trans-unit id="fe4321b1de5be805ed8224c8cf442a89e9fa38b4" resname="tab.details.sub_items_listing_by_set">
         <source>Set</source>
         <target state="new">Set</target>
