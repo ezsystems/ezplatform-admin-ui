@@ -44,6 +44,17 @@
         &-actions {
             width: 170px;
             text-align: right;
+
+            .btn {
+                line-height: .85;
+                padding: .5rem .55rem;
+                margin-left: .15rem;
+                margin-right: 0;
+            }
         }
+    }
+
+    .ez-relations__item-name {
+        max-width: 25vw;
     }
 }
