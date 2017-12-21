@@ -4,13 +4,13 @@ imports:
     - { resource: services/tabs.yml }
     - { resource: services/menu.yml }
     - { resource: services/application_config.yml }
+    - { resource: services/type_extensions.yml }
     - { resource: services/pagination.yml }
     - { resource: services/ui_config.yml }
     - { resource: services/components.yml }
     - { resource: services/dashboard.yml }
     - { resource: services/modules/subitems.yml }
     - { resource: services/form_processors.yml }
-    - { resource: services/form_types.yml }
 
 parameters:
 
@@ -43,6 +43,9 @@ services:
             - '%ezpublish.siteaccess.groups%'
         tags:
             - {name: kernel.event_subscriber}
+
+    EzSystems\EzPlatformAdminUi\Form\Type\:
+        resource: '../../../lib/Form/Type'
 
     EzSystems\EzPlatformAdminUi\Form\DataMapper\:
         resource: '../../../lib/Form/DataMapper'
