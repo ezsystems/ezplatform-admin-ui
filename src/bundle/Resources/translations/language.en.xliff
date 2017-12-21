@@ -36,10 +36,10 @@
         <target state="new">Edit</target>
         <note>key: language.edit</note>
       </trans-unit>
-      <trans-unit id="f0bb8e1a1b26634c005357a45b948b0b28ae6d03" resname="language.edit.title">
+      <trans-unit id="a11e2bfe5281d9163ca46f0e051832659104287f" resname="language.edit.identifier">
         <source>Editing Language "%language%"</source>
         <target state="new">Editing Language "%language%"</target>
-        <note>key: language.edit.title</note>
+        <note>key: language.edit.identifier</note>
       </trans-unit>
       <trans-unit id="065fdff561c25266ec49bbdaf8c5d0bdd6e9dd7f" resname="language.enabled">
         <source>Enabled</source>
@@ -111,15 +111,10 @@
         <target state="new">%language%</target>
         <note>key: language.view.identifier</note>
       </trans-unit>
-      <trans-unit id="0a1cfca26e45dbcd8636d95297586e83f4d9f0f7" resname="language.view.page_title">
-        <source>Language: %language%</source>
-        <target state="new">Language: %language%</target>
-        <note>key: language.view.page_title</note>
-      </trans-unit>
-      <trans-unit id="8df2798a2851c0d43893e3862f8a2e6e4290b141" resname="language.view.title">
-        <source>"%language%" Language</source>
-        <target state="new">"%language%" Language</target>
-        <note>key: language.view.title</note>
+      <trans-unit id="b19ebb675189cb5361277711104fee1df0d7ee65" resname="language.view.title.identifier">
+        <source>Language "%language%"</source>
+        <target state="new">Language "%language%"</target>
+        <note>key: language.view.title.identifier</note>
       </trans-unit>
       <trans-unit id="a46aeb190cbc586a29c72689dfc5d88a3e21d2f9" resname="language.viewing">
         <source><![CDATA[Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items]]></source>
