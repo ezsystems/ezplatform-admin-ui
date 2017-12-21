@@ -44,6 +44,6 @@ class LocationVoter implements VoterInterface
             }
         }
 
-        return false;
+        return null;
     }
 }
