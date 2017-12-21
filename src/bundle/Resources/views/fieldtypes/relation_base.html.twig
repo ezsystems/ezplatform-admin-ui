@@ -40,7 +40,7 @@
             {% for relation in relations %}
                 <tr class="ez-relations__item" data-content-id="{{ relation.contentInfo.id }}">
                     <td><input type="checkbox" value="{{ relation.contentInfo.id }}" /></td>
-                    <td>{{ relation.contentInfo.name }}</td>
+                    <td class="ez-relations__item-name">{{ relation.contentInfo.name }}</td>
                     <td>{{ relation.contentType.name }}</td>
                     <td>{{ relation.contentInfo.publishedDate|localizeddate('short', 'medium') }}</td>
                     <td colspan="2"><input class="ez-relations__order-input" type="number" value="{{ loop.index }}" /></td>

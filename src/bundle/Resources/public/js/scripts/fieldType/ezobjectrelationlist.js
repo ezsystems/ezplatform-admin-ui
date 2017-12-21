@@ -147,7 +147,7 @@
             return `
                 <tr class="ez-relations__item" data-content-id="${item.ContentInfo.Content._id}">
                     <td><input type="checkbox" value="${item.ContentInfo.Content._id}" /></td>
-                    <td>${item.ContentInfo.Content.Name}</td>
+                    <td class="ez-relations__item-name">${item.ContentInfo.Content.Name}</td>
                     <td>${item.ContentInfo.Content.ContentTypeInfo.names.value[0]['#text']}</td>
                     <td>${(new Date(item.ContentInfo.Content.publishedDate)).toLocaleString()}</td>
                     <td colspan="2"><input class="ez-relations__order-input" type="number" value="${selectedItems.length + index + 1}" /></td>
