@@ -35,12 +35,17 @@ class LocationVoter implements VoterInterface
      */
     public function matchItem(ItemInterface $item)
     {
-        $route = $item->getExtra('routes')[0];
-        $contentView = $this->requestStack->getCurrentRequest()->attributes->get('view');
+        $routes = $item->getExtra('routes', []);
 
-        if ($route['route'] === self::EZ_PUBLISH_LOCATION_ROUTE_NAME && $contentView instanceof ContentView) {
-            if ((int)$contentView->getLocation()->path[1] === $route['parameters']['locationId']) {
-                return true;
+        foreach ($routes as $route) {
+            if (isset($route['route']) && $route['route'] === self::EZ_PUBLISH_LOCATION_ROUTE_NAME) {
+                $request = $this->requestStack->getCurrentRequest();
+                $contentView = $request->attributes->get('view');
+                $locationId = $route['parameters']['locationId'];
+
+                if ($contentView instanceof ContentView && in_array($locationId, $contentView->getLocation()->path ?? [$contentView->getLocation()->id])) {
+                    return true;
+                }
             }
         }
 
