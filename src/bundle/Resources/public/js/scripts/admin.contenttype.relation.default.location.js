@@ -30,7 +30,7 @@
             confirmLabel: 'Confirm location',
             title: event.currentTarget.dataset.universaldiscoveryTitle,
             multiple: false,
-            startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
+            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: { token, siteaccess }
         }), udwContainer);
     };
