@@ -9,7 +9,7 @@
             {% set label = name|humanize %}
         {%- endif -%}
     {%- endif -%}
-    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
+    <button title="{{ 'section.assign,content'|trans|desc('Assign Content') }}" type="{{ type|default('button') }}" {{ block('button_attributes') }}>
         <svg class="ez-icon ez-icon--secondary">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-section"></use>
         </svg>

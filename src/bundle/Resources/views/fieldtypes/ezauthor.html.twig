@@ -17,12 +17,14 @@
         {{- form_row(form.name, {'wrapper_attr': {'class': 'col'}}) -}}
         {{- form_row(form.email, {'wrapper_attr': {'class': 'col'}}) -}}
         <div class="col ez-data-source__actions">
-            <button type="button" class="ez-data-source__action ez-btn btn btn-secondary btn-icon ez-btn--secondary ez-btn--remove-author" disabled>
+            <button type="button" class="ez-data-source__action ez-btn btn btn-secondary btn-icon ez-btn--secondary ez-btn--remove-author"
+                    title="{{ 'ezauthor.action.delete'|trans|desc('Remove author') }}" disabled>
                 <svg class="ez-icon ez-icon-trash">
                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
                 </svg>
             </button>
-            <button type="button" class="ez-data-source__action ez-btn btn btn-secondary btn-icon ez-btn--secondary ez-btn--add-author">
+            <button type="button" class="ez-data-source__action ez-btn btn btn-secondary btn-icon ez-btn--secondary ez-btn--add-author"
+                    title="{{ 'ezauthor.action.add'|trans|desc('Add author') }}">
                 <svg class="ez-icon ez-icon-create">
                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#create"></use>
                 </svg>

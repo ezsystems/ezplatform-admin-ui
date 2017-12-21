@@ -33,7 +33,9 @@
                     <td>{{ 'url.label.address'|trans }}</td>
                     <td>
                         <a href="{{ url.url }}" target="_blank">{{ url.url }}</a>
-                        <a href="{{ path('ezplatform.link_manager.edit', { urlId: url.id }) }}" class="btn btn-icon float-right">
+                        <a href="{{ path('ezplatform.link_manager.edit', { urlId: url.id }) }}"
+                           class="btn btn-icon float-right "
+                           title="{{ 'url.action.edit'|trans|desc('Edit URL') }}">
                             <svg class="ez-icon ez-icon-edit">
                                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                             </svg>
@@ -100,6 +102,7 @@
                         <td class="text-right">
                             {% if can_edit %}
                                 <button class="btn btn-icon btn-link ez-btn--content-edit"
+                                        title="{{ 'url.action.item.edit'|trans|desc('Edit Item') }}"
                                         data-content-id="{{ content.id }}"
                                         data-version-no="{{ content.currentVersionNo }}"
                                         data-language-code="{{ content.mainLanguageCode }}">

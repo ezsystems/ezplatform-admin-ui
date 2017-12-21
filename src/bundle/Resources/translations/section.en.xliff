@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="128df491a522e7af4916cd002d9e11a3d2bc4078" resname="section.action.delete">
+        <source>Delete Section</source>
+        <target state="new">Delete Section</target>
+        <note>key: section.action.delete</note>
+      </trans-unit>
       <trans-unit id="84413bc1ae3385c0aac1af7ea5665cb0c1eaf3ba" resname="section.assign_content">
         <source>Assign content</source>
         <target state="new">Assign content</target>
@@ -55,6 +60,11 @@
         <source>Section '%name%' created.</source>
         <target state="new">Section '%name%' created.</target>
         <note>key: section.create.success</note>
+      </trans-unit>
+      <trans-unit id="48a0071d3b889cbfef3ff4ee5af8cf83b1e8b7f6" resname="section.delete">
+        <source>Delete Section</source>
+        <target state="new">Delete Section</target>
+        <note>key: section.delete</note>
       </trans-unit>
       <trans-unit id="663e1bfb8478f95028221190755c01441b2a8fde" resname="section.delete.success">
         <source>Section '%name%' removed.</source>

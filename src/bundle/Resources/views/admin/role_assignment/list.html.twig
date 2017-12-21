@@ -16,7 +16,7 @@
             </a>
             {% set modal_data_target = 'delete-role-assignments-modal' %}
             <button id="delete-role-assignments" type="button" class="btn btn-danger" disabled data-toggle="modal"
-                    data-target="#{{ modal_data_target }}">
+                    data-target="#{{ modal_data_target }}" title="{{ 'role_assignment.view.list.action.delete'|trans|desc('Delete Assignment') }}">
                 <svg class="ez-icon ez-icon-trash">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
                          xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>

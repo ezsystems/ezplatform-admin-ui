@@ -16,12 +16,13 @@
             <div class="ez-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</div>
         </div>
         <div class="ez-field-edit-preview__actions">
-            <a class="ez-field-edit-preview__action--preview" href="{{ form.parent.vars.value.value.uri }}" download>
+            <a class="ez-field-edit-preview__action--preview" href="{{ form.parent.vars.value.value.uri }}"
+               title="{{ 'ezbinaryfile.action.preview'|trans|desc('Preview') }}" download>
                 <svg class="ez-icon">
                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#download"></use>
                 </svg>
             </a>
-            <button class="ez-field-edit-preview__action--remove">
+            <button class="ez-field-edit-preview__action--remove" title="{{ 'ezbinaryfile.action.remove'|trans|desc('Remove') }}">
                 <svg class="ez-icon">
                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
                 </svg>

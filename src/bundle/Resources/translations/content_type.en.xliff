@@ -171,6 +171,11 @@
         <target state="new">Creating a new Content Type</target>
         <note>key: content_type.view.create.title</note>
       </trans-unit>
+      <trans-unit id="621f64c5f4acef41bca216c9d712860e3438f742" resname="content_type.view.edit.content_field_definition.delete">
+        <source>Delete Content field definition</source>
+        <target state="new">Delete Content field definition</target>
+        <note>key: content_type.view.edit.content_field_definition.delete</note>
+      </trans-unit>
       <trans-unit id="94367a951b897bc2964d0c45286b560c59ebb996" resname="content_type.view.edit.content_field_definitions">
         <source>Content field definitions</source>
         <target state="new">Content field definitions</target>
@@ -190,6 +195,11 @@
         <source>Create a Content Type</source>
         <target state="new">Create a Content Type</target>
         <note>key: content_type.view.list.action.add</note>
+      </trans-unit>
+      <trans-unit id="c3287b9fccc0b54216e50ba02e3d72e17cc1c92e" resname="content_type.view.list.action.delete">
+        <source>Delete Content Type</source>
+        <target state="new">Delete Content Type</target>
+        <note>key: content_type.view.list.action.delete</note>
       </trans-unit>
       <trans-unit id="1a2e4ef61d405d0628d8bacdb80d7bbaa11143d5" resname="content_type.view.list.action.edit">
         <source>Edit</source>
@@ -306,6 +316,11 @@
         <target state="new">Create a Content Type Group</target>
         <note>key: content_type_group.view.list.action.add</note>
       </trans-unit>
+      <trans-unit id="ceb2e962eccd99d66a600df886fb1ff3253c2f16" resname="content_type_group.view.list.action.delete">
+        <source>Delete Content Type Group</source>
+        <target state="new">Delete Content Type Group</target>
+        <note>key: content_type_group.view.list.action.delete</note>
+      </trans-unit>
       <trans-unit id="e078a8733eac84a6f85ccb7883df2767d357528e" resname="content_type_group.view.list.action.edit">
         <source>Edit</source>
         <target state="new">Edit</target>
@@ -336,15 +351,20 @@
         <target state="new">%identifier%</target>
         <note>key: content_type_group.view.view.title</note>
       </trans-unit>
-      <trans-unit id="2a6703809d34ce1103cc6e1342e07a8a81848c01" resname="location_update_form.in">
-        <source>in</source>
-        <target state="new">in</target>
-        <note>key: location_update_form.in</note>
+      <trans-unit id="62ac918fce5389cd868b988e65b4ab96477a1344" resname="location_update_form.sort_field">
+        <source>Sort field</source>
+        <target state="new">Sort field</target>
+        <note>key: location_update_form.sort_field</note>
       </trans-unit>
-      <trans-unit id="53acad0127e4919fc2769ff04c46e1e66b7c601a" resname="location_update_form.order_by">
-        <source>Order by</source>
-        <target state="new">Order by</target>
-        <note>key: location_update_form.order_by</note>
+      <trans-unit id="7d29fb5b1206bd3313bd2eb6c078ab72c244545a" resname="location_update_form.sort_order">
+        <source>Sort order</source>
+        <target state="new">Sort order</target>
+        <note>key: location_update_form.sort_order</note>
+      </trans-unit>
+      <trans-unit id="2bb23a852a2a16458d2dad6931debc447564dff2" resname="location_update_form.update">
+        <source>Update</source>
+        <target state="new">Update</target>
+        <note>key: location_update_form.update</note>
       </trans-unit>
       <trans-unit id="7fe072f41348fb097b6bb018eec4f1b1bc9cffc3" resname="modal.cancel">
         <source>Cancel</source>
