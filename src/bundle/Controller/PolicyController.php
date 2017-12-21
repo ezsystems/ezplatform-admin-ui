@@ -23,6 +23,8 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,6 +55,9 @@ class PolicyController extends Controller
     /** @var SubmitHandler */
     private $submitHandler;
 
+    /** @var int */
+    private $defaultPaginationLimit;
+
     /**
      * PolicyController constructor.
      *
@@ -63,6 +68,7 @@ class PolicyController extends Controller
      * @param PolicyUpdateMapper $policyUpdateMapper
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
+     * @param int $defaultPaginationLimit
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -71,7 +77,8 @@ class PolicyController extends Controller
         PolicyCreateMapper $policyCreateMapper,
         PolicyUpdateMapper $policyUpdateMapper,
         FormFactory $formFactory,
-        SubmitHandler $submitHandler
+        SubmitHandler $submitHandler,
+        int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -80,11 +87,20 @@ class PolicyController extends Controller
         $this->policyUpdateMapper = $policyUpdateMapper;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
+        $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
-    public function listAction(Role $role): Response
+    public function listAction(Role $role, string $routeName, int $policyPage = 1): Response
     {
-        $policies = $role->getPolicies();
+        $pagerfanta = new Pagerfanta(
+            new ArrayAdapter($role->getPolicies())
+        );
+
+        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setCurrentPage(min($policyPage, $pagerfanta->getNbPages()));
+
+        /** @var Policy[] $policies */
+        $policies = $pagerfanta->getCurrentPageResults();
 
         $deletePoliciesForm = $this->formFactory->deletePolicies(
                 new PoliciesDeleteData($role, $this->getPoliciesNumbers($policies))
@@ -93,6 +109,8 @@ class PolicyController extends Controller
         return $this->render('@EzPlatformAdminUi/admin/policy/list.html.twig', [
             'form_policies_delete' => $deletePoliciesForm->createView(),
             'role' => $role,
+            'pager' => $pagerfanta,
+            'route_name' => $routeName,
         ]);
     }
 

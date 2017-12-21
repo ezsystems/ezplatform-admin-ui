@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException as APIUnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Role;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
@@ -120,7 +121,17 @@ class RoleController extends Controller
         ]);
     }
 
-    public function viewAction(Role $role): Response
+    /**
+     * @param Request $request
+     * @param Role $role
+     * @param int $policyPage
+     * @param int $assignmentPage
+     *
+     * @return Response
+     *
+     * @throws APIUnauthorizedException
+     */
+    public function viewAction(Request $request, Role $role, int $policyPage = 1, int $assignmentPage = 1): Response
     {
         $deleteForm = $this->formFactory->deleteRole(
             new RoleDeleteData($role)
@@ -132,6 +143,9 @@ class RoleController extends Controller
             'role' => $role,
             'assignments' => $assignments,
             'delete_form' => $deleteForm->createView(),
+            'route_name' => $request->get('_route'),
+            'policyPage' => $policyPage,
+            'assignmentPage' => $assignmentPage,
         ]);
     }
 
