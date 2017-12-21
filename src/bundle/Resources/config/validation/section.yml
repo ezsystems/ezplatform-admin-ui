@@ -1,0 +1,19 @@
+EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData:
+    properties:
+        identifier:
+            - NotBlank: ~
+            - Regex:
+                pattern: "/^[[:alnum:]_]+$/"
+                message: "ez.section.identifier.format"
+        name:
+            - NotBlank: ~
+
+EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData:
+    properties:
+        identifier:
+            - NotBlank: ~
+            - Regex:
+                pattern: "/^[[:alnum:]_]+$/"
+                message: "ez.section.identifier.format"
+        name:
+            - NotBlank: ~
