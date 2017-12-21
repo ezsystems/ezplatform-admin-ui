@@ -14,7 +14,7 @@
         </div>
         <div class="ez-data-source__input-wrapper">
             {{ form_widget(form.address, {'attr': {'class': 'ez-data-source__input'}}) }}
-            <button class="btn btn-secondary btn--search-by-address">
+            <button class="btn btn-secondary btn--search-by-address" title="{{ 'ezgmaplocation.action.search'|trans|desc('Search') }}">
                 <svg class="ez-icon ez-icon-search">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
                 </svg>

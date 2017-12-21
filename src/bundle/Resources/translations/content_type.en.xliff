@@ -171,6 +171,11 @@
         <target state="new">Creating a new Content Type</target>
         <note>key: content_type.view.create.title</note>
       </trans-unit>
+      <trans-unit id="621f64c5f4acef41bca216c9d712860e3438f742" resname="content_type.view.edit.content_field_definition.delete">
+        <source>Delete Content field definition</source>
+        <target state="new">Delete Content field definition</target>
+        <note>key: content_type.view.edit.content_field_definition.delete</note>
+      </trans-unit>
       <trans-unit id="94367a951b897bc2964d0c45286b560c59ebb996" resname="content_type.view.edit.content_field_definitions">
         <source>Content field definitions</source>
         <target state="new">Content field definitions</target>
@@ -190,6 +195,11 @@
         <source>Create a Content Type</source>
         <target state="new">Create a Content Type</target>
         <note>key: content_type.view.list.action.add</note>
+      </trans-unit>
+      <trans-unit id="c3287b9fccc0b54216e50ba02e3d72e17cc1c92e" resname="content_type.view.list.action.delete">
+        <source>Delete Content Type</source>
+        <target state="new">Delete Content Type</target>
+        <note>key: content_type.view.list.action.delete</note>
       </trans-unit>
       <trans-unit id="1a2e4ef61d405d0628d8bacdb80d7bbaa11143d5" resname="content_type.view.list.action.edit">
         <source>Edit</source>
@@ -305,6 +315,11 @@
         <source>Create a Content Type Group</source>
         <target state="new">Create a Content Type Group</target>
         <note>key: content_type_group.view.list.action.add</note>
+      </trans-unit>
+      <trans-unit id="ceb2e962eccd99d66a600df886fb1ff3253c2f16" resname="content_type_group.view.list.action.delete">
+        <source>Delete Content Type Group</source>
+        <target state="new">Delete Content Type Group</target>
+        <note>key: content_type_group.view.list.action.delete</note>
       </trans-unit>
       <trans-unit id="e078a8733eac84a6f85ccb7883df2767d357528e" resname="content_type_group.view.list.action.edit">
         <source>Edit</source>

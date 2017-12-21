@@ -27,14 +27,14 @@
             <div>
                 {% if deletable %}
                     <button type="button" class="btn btn-danger" data-toggle="modal"
-                            data-target="#delete-section-modal">
+                            data-target="#delete-section-modal" title="{{ 'section.action.delete'|trans|desc('Delete Section') }}">
                         <svg class="ez-icon">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
                     </button>
                     {% include 'EzPlatformAdminUiBundle:admin/section:delete_confirmation_modal.html.twig' with {'form': form_section_delete} %}
                 {% else %}
-                    <button type="button" class="btn btn-danger disabled">
+                    <button type="button" class="btn btn-danger disabled" title="{{ 'section.action.delete'|trans|desc('Delete Section') }}">
                         <svg class="ez-icon">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>

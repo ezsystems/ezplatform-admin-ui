@@ -31,6 +31,21 @@
         <target state="new">No content items. Media items you create will appear here</target>
         <note>key: dashboard.tab.my_media.empty</note>
       </trans-unit>
+      <trans-unit id="749d4759e304735bcec6ef6ec10af43e70f1f289" resname="dashboard.table.all.content.edit">
+        <source>Edit Content</source>
+        <target state="new">Edit Content</target>
+        <note>key: dashboard.table.all.content.edit</note>
+      </trans-unit>
+      <trans-unit id="d55b4e897f7b7f5748c600e865a61eae6c9fe3da" resname="dashboard.table.all.media.edit">
+        <source>Edit Media</source>
+        <target state="new">Edit Media</target>
+        <note>key: dashboard.table.all.media.edit</note>
+      </trans-unit>
+      <trans-unit id="f0adf5df30310686ce6864bef32325c9a6988b49" resname="dashboard.table.content.edit">
+        <source>Edit Content</source>
+        <target state="new">Edit Content</target>
+        <note>key: dashboard.table.content.edit</note>
+      </trans-unit>
       <trans-unit id="e17a8999c9e44b7e8ea1ba0f5cff596ece264da5" resname="dashboard.table.content_type">
         <source>Content Type</source>
         <target state="new">Content Type</target>
@@ -41,10 +56,20 @@
         <target state="new">Contributor</target>
         <note>key: dashboard.table.contributor</note>
       </trans-unit>
+      <trans-unit id="93a5fc53032106ea0ae1658261fd187e5c9c6a94" resname="dashboard.table.draft.edit">
+        <source>Edit Draft</source>
+        <target state="new">Edit Draft</target>
+        <note>key: dashboard.table.draft.edit</note>
+      </trans-unit>
       <trans-unit id="3a857cc58c009830e22845ef1edbd43794206aed" resname="dashboard.table.last_saved">
         <source>Last Saved</source>
         <target state="new">Last Saved</target>
         <note>key: dashboard.table.last_saved</note>
+      </trans-unit>
+      <trans-unit id="ec988391649c3e25028a629b4e38dc426f4c4615" resname="dashboard.table.media.edit">
+        <source>Edit Media</source>
+        <target state="new">Edit Media</target>
+        <note>key: dashboard.table.media.edit</note>
       </trans-unit>
       <trans-unit id="0ccebfdea2e8be0bcae0f3cab3f3db5ef47d71c8" resname="dashboard.table.modified_language">
         <source>Modified Language</source>

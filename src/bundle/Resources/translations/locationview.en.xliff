@@ -151,6 +151,16 @@
         <target state="new">Translations</target>
         <note>key: tab.details.translations</note>
       </trans-unit>
+      <trans-unit id="8eb3feb6461dacdbd425ef30fc4848a94ab3db0d" resname="tab.locations.action.add">
+        <source>Add Location</source>
+        <target state="new">Add Location</target>
+        <note>key: tab.locations.action.add</note>
+      </trans-unit>
+      <trans-unit id="80808d78f600e925ec3e2dd4b2a0e7570169fd83" resname="tab.locations.action.delete">
+        <source>Delete Location</source>
+        <target state="new">Delete Location</target>
+        <note>key: tab.locations.action.delete</note>
+      </trans-unit>
       <trans-unit id="7ac57e88d1f970747986392b6689075ba64cf270" resname="tab.locations.content_locations">
         <source>Content locations</source>
         <target state="new">Content locations</target>
@@ -276,6 +286,16 @@
         <target state="new">Link</target>
         <note>key: tab.relations.table.relation_type.link</note>
       </trans-unit>
+      <trans-unit id="492cea0fd67c4af8e41d21710668239c9db66cfc" resname="tab.translations.action.add">
+        <source>Add Translation</source>
+        <target state="new">Add Translation</target>
+        <note>key: tab.translations.action.add</note>
+      </trans-unit>
+      <trans-unit id="8c29b038407b67badc381aca362d4770d299df8b" resname="tab.translations.action.delete">
+        <source>Delete Translation</source>
+        <target state="new">Delete Translation</target>
+        <note>key: tab.translations.action.delete</note>
+      </trans-unit>
       <trans-unit id="5022ce879be6a69956541173bf658dccff5d7280" resname="tab.translations.add.base_language">
         <source>Base this translation on an existing translation</source>
         <target state="new">Base this translation on an existing translation</target>
@@ -361,6 +381,11 @@
         <target state="new">URL</target>
         <note>key: tab.urls.url</note>
       </trans-unit>
+      <trans-unit id="a4297fe31e8eb3307caa2cf855328056c3b98962" resname="tab.versions.action.delete">
+        <source>Delete Version</source>
+        <target state="new">Delete Version</target>
+        <note>key: tab.versions.action.delete</note>
+      </trans-unit>
       <trans-unit id="699b5bf627b908f8d270984ab9a4734a48b28abe" resname="tab.versions.archived_versions">
         <source>Archived versions</source>
         <target state="new">Archived versions</target>
@@ -385,6 +410,16 @@
         <source>Published version</source>
         <target state="new">Published version</target>
         <note>key: tab.versions.published_version</note>
+      </trans-unit>
+      <trans-unit id="628c74bcc6328324ea1c084c8bbe686f7e572c16" resname="tab.versions.table.action.archived.delete">
+        <source>Delete Archived Version</source>
+        <target state="new">Delete Archived Version</target>
+        <note>key: tab.versions.table.action.archived.delete</note>
+      </trans-unit>
+      <trans-unit id="f7b4cf0de472a75da3ed9502ef8eedd21a02a266" resname="tab.versions.table.action.draft.delete">
+        <source>Delete Draft Version</source>
+        <target state="new">Delete Draft Version</target>
+        <note>key: tab.versions.table.action.draft.delete</note>
       </trans-unit>
       <trans-unit id="4c27637d649c221e58c6a9629f14a2f75aeed151" resname="tab.versions.table.contributor">
         <source>Contributor</source>

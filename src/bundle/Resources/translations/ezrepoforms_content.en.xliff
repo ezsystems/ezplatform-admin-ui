@@ -26,6 +26,21 @@
         <target state="new">Player settings</target>
         <note>key: content.field_type.ezmedia.player_settings</note>
       </trans-unit>
+      <trans-unit id="b244ed2b3b30d53cd73ea9d25c21c7d938e97973" resname="ezbinaryfile.action.preview">
+        <source>Preview</source>
+        <target state="new">Preview</target>
+        <note>key: ezbinaryfile.action.preview</note>
+      </trans-unit>
+      <trans-unit id="936018db97b7f60296d65482bc41f138e787b5c9" resname="ezbinaryfile.action.remove">
+        <source>Remove</source>
+        <target state="new">Remove</target>
+        <note>key: ezbinaryfile.action.remove</note>
+      </trans-unit>
+      <trans-unit id="b388b6cf9e8d44856fed11bc8ff3f4decb177449" resname="ezgmaplocation.action.search">
+        <source>Search</source>
+        <target state="new">Search</target>
+        <note>key: ezgmaplocation.action.search</note>
+      </trans-unit>
       <trans-unit id="f95e95b9cb063f060b0e8ea74c0e11409643316d" resname="ezobjectrelationlist.cta.limit">
         <source>Set up multiple relations with up to %limit% content items</source>
         <target state="new">Set up multiple relations with up to %limit% content items</target>

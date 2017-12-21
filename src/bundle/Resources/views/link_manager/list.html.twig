@@ -82,7 +82,7 @@
                     <td>{{ url.modified | date('M d, Y h:i:sA') }}</td>
                     <td class="text-right">
                         {% if can_edit %}
-                            <a href="{{ edit_url }}" class="btn btn-icon">
+                            <a href="{{ edit_url }}" class="btn btn-icon" title="{{ 'url.action.edit'|trans|desc('Edit URL') }}">
                                 <svg class="ez-icon ez-icon-edit">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                                 </svg>

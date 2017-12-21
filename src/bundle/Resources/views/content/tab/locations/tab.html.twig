@@ -65,7 +65,7 @@
 {% include 'EzPlatformAdminUiBundle:content/tab/locations:panel_swap.html.twig' with {'form': form_content_location_swap} %}
 
 {% macro table_header_tools(form_add, form_remove) %}
-    <button class="btn btn-primary btn--udw-add">
+    <button class="btn btn-primary btn--udw-add" title="{{ 'tab.locations.action.add'|trans|desc('Add Location') }}">
         <svg class="ez-icon ez-icon-create">
             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                  xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
@@ -74,7 +74,7 @@
 
     {% set modal_data_target = 'delete-content-types-modal' %}
     <button id="delete-locations" type="button" class="btn btn-danger" disabled data-toggle="modal"
-            data-target="#{{ modal_data_target }}">
+            data-target="#{{ modal_data_target }}" title="{{ 'tab.locations.action.delete'|trans|desc('Delete Location') }}">
         <svg class="ez-icon ez-icon-trash">
             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                  xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>

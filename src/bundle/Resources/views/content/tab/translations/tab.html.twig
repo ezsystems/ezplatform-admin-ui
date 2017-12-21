@@ -33,7 +33,8 @@
 </section>
 
 {% macro table_header_tools(form_translation_remove) %}
-    <button class="btn btn-primary ez-btn--prevented ez-btn--add-translation" data-toggle="modal" data-target="#add-translation-modal" >
+    <button class="btn btn-primary ez-btn--prevented ez-btn--add-translation" data-toggle="modal" data-target="#add-translation-modal"
+            title="{{ 'tab.translations.action.add'|trans|desc('Add Translation') }}">
         <svg class="ez-icon ez-icon-create">
             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                  xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
@@ -42,7 +43,7 @@
 
     {% set modal_data_target = 'delete-translations-modal' %}
     <button id="delete-translations" type="button" class="btn btn-danger" disabled data-toggle="modal"
-            data-target="#{{ modal_data_target }}">
+            data-target="#{{ modal_data_target }}" title="{{ 'tab.translations.action.delete'|trans|desc('Delete Translation') }}">
         <svg class="ez-icon ez-icon-trash">
             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                  xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
