@@ -56,3 +56,13 @@ services:
         public: true
         arguments:
             $defaultPaginationLimit: '$pagination.role_limit$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\RoleAssignmentController:
+        public: true
+        arguments:
+            $defaultPaginationLimit: '$pagination.role_assignment_limit$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\PolicyController:
+        public: true
+        arguments:
+            $defaultPaginationLimit: '$pagination.policy_limit$'

@@ -18,7 +18,7 @@
         iconName: 'roles'
     } %}
 
-    <ul class="nav nav-tabs ez-nav-tabs--role px-4" role="tablist">
+    <ul class="nav nav-tabs ez-nav-tabs--role px-4 ez-tabs" role="tablist">
         <li role="presentation" class="nav-item">
             <a href="#policies" class="nav-link active" role="tab" data-toggle="tab">
                 {{ 'policy.view.list.title'|trans|desc('Policies') }}
@@ -34,14 +34,18 @@
 
 {% block content %}
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane fade show active" id="policies">
+        <div role="tabpanel" class="tab-pane active" id="policies">
             {{ render(controller('EzPlatformAdminUiBundle:Policy:list', {
-                roleId: role.id
+                roleId: role.id,
+                policyPage: policyPage,
+                routeName: route_name
             })) }}
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="users-and-groups">
+        <div role="tabpanel" class="tab-pane" id="users-and-groups">
             {{ render(controller('EzPlatformAdminUiBundle:RoleAssignment:list', {
-                roleId: role.id
+                roleId: role.id,
+                assignmentPage: assignmentPage,
+                routeName: route_name
             })) }}
         </div>
     </div>
@@ -50,6 +54,7 @@
 {% block javascripts %}
     {% javascripts
     '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
+    '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.tab.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

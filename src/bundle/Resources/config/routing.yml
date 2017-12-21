@@ -123,12 +123,16 @@ ezplatform.role.list:
         _controller: 'EzPlatformAdminUiBundle:Role:list'
 
 ezplatform.role.view:
-    path: /role/{roleId}
+    path: /role/{roleId}/{policyPage}/{assignmentPage}
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Role:view'
+        policyPage: 1
+        assignmentPage: 1
     requirements:
         roleId: \d+
+        policyPage: \d+
+        assignmentPage: \d+
 
 ezplatform.role.create:
     path: /role/create

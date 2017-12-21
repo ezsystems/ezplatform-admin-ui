@@ -22,6 +22,8 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,6 +48,9 @@ class RoleAssignmentController extends Controller
     /** @var SubmitHandler */
     private $submitHandler;
 
+    /** @var int */
+    private $defaultPaginationLimit;
+
     /**
      * PolicyController constructor.
      *
@@ -54,24 +59,42 @@ class RoleAssignmentController extends Controller
      * @param RoleService $roleService
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
+     * @param int $defaultPaginationLimit
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
         RoleService $roleService,
         FormFactory $formFactory,
-        SubmitHandler $submitHandler
+        SubmitHandler $submitHandler,
+        int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
         $this->roleService = $roleService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
+        $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
-    public function listAction(Role $role): Response
+    /**
+     * @param Role $role
+     * @param string $routeName
+     * @param int $assignmentPage
+     *
+     * @return Response
+     */
+    public function listAction(Role $role, string $routeName, int $assignmentPage = 1): Response
     {
-        $assignments = $this->roleService->getRoleAssignments($role);
+        $pagerfanta = new Pagerfanta(
+            new ArrayAdapter($this->roleService->getRoleAssignments($role))
+        );
+
+        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setCurrentPage(min($assignmentPage, $pagerfanta->getNbPages()));
+
+        /** @var RoleAssignment[] $assignments */
+        $assignments = $pagerfanta->getCurrentPageResults();
 
         $deleteRoleAssignmentsForm = $this->formFactory->deleteRoleAssignments(
             new RoleAssignmentsDeleteData($role, $this->getRoleAssignmentsNumbers($assignments))
@@ -80,7 +103,8 @@ class RoleAssignmentController extends Controller
         return $this->render('@EzPlatformAdminUi/admin/role_assignment/list.html.twig', [
             'role' => $role,
             'form_role_assignments_delete' => $deleteRoleAssignmentsForm->createView(),
-            'assignments' => $assignments,
+            'pager' => $pagerfanta,
+            'route_name' => $routeName,
         ]);
     }
 
