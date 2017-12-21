@@ -3,8 +3,6 @@ imports:
     - { resource: services/controllers.yml }
     - { resource: services/tabs.yml }
     - { resource: services/menu.yml }
-    - { resource: services/application_config.yml }
-    - { resource: services/type_extensions.yml }
     - { resource: services/pagination.yml }
     - { resource: services/ui_config.yml }
     - { resource: services/components.yml }

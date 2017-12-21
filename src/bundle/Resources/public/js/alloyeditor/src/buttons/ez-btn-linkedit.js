@@ -85,7 +85,7 @@ export default class EzBtnLinkEdit extends Component {
                 confirmLabel: 'Select content',
                 title: 'Select content',
                 multiple: false,
-                startingLocationId: '1',
+                startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                 restInfo: {token, siteaccess},
             }), udwContainer);
         };

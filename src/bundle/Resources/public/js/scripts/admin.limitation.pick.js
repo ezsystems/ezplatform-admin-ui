@@ -19,6 +19,7 @@
             onCancel: closeUDW,
             confirmLabel: 'Add locations',
             title: 'Choose locations',
+            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             multiple: true,
             restInfo: {token, siteaccess}
         }), udwContainer);

@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: true
-
-    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UiConfigExtension: ~
-    EzSystems\EzPlatformAdminUi\UI\Config\Aggregator: ~

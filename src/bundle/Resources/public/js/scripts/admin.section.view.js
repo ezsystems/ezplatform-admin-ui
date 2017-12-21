@@ -21,6 +21,7 @@
         ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
             onConfirm: onConfirm.bind(this, form),
             onCancel,
+            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess}
         }), udwContainer);
     };

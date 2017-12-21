@@ -21,7 +21,7 @@ export default class EzEmbedDiscoverContentButton extends EzWidgetButton {
             confirmLabel: 'Select content',
             title: this.props.udwTitle,
             multiple: false,
-            startingLocationId: '1',
+            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess},
             canSelectContent: selectable,
         }), udwContainer);
