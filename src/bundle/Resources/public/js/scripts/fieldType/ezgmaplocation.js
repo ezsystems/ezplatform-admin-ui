@@ -58,7 +58,7 @@
             }
 
             const latInput = event.currentTarget.closest(SELECTOR_FIELD).querySelector(SELECTOR_LAT_INPUT);
-            const latResult = this.validateCoordInput(latInput);
+            const latResult = this.validateCoordInput(latInput, {min: -90, max: 90});
 
             if (latResult.isError) {
                 latInput.dispatchEvent(new Event('blur'));
