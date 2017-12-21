@@ -41,8 +41,8 @@
         validateDimensions(event) {
             const input = event.currentTarget;
             const isRequired = input.required;
-            const value = +input.value;
-            const isEmpty = !value;
+            const value = parseInt(input.value, 10);
+            const isEmpty = isNaN(value);
             const isInteger = Number.isInteger(value);
             const isError = (isEmpty && isRequired) || (!isEmpty && !isInteger);
             const label = input.closest(SELECTOR_INFO_WRAPPER).querySelector('.form-control-label').innerHTML;
