@@ -102,12 +102,22 @@ class PolicyController extends Controller
         /** @var Policy[] $policies */
         $policies = $pagerfanta->getCurrentPageResults();
 
+        $isEditable = [];
+        foreach ($policies as $policy) {
+            $limitationTypes = $policy->module
+                ? $this->roleService->getLimitationTypesByModuleFunction($policy->module, $policy->function)
+                : [];
+
+            $isEditable[$policy->id] = !empty($limitationTypes);
+        }
+
         $deletePoliciesForm = $this->formFactory->deletePolicies(
-                new PoliciesDeleteData($role, $this->getPoliciesNumbers($policies))
+            new PoliciesDeleteData($role, $this->getPoliciesNumbers($policies))
         );
 
         return $this->render('@EzPlatformAdminUi/admin/policy/list.html.twig', [
             'form_policies_delete' => $deletePoliciesForm->createView(),
+            'is_editable' => $isEditable,
             'role' => $role,
             'pager' => $pagerfanta,
             'route_name' => $routeName,
