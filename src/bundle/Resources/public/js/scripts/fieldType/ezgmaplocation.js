@@ -11,14 +11,15 @@
          *
          * @method validateCoordInput
          * @param {HTMLElement} input
+         * @param {Object} range of coord input
          * @returns {Boolean}
          */
-        validateCoordInput(input) {
+        validateCoordInput(input, {min, max}) {
             const value = parseFloat(input.value.replace(',', '.'));
             const result = { isError: false };
             const label = input.closest('.ez-data-source__field').querySelector('.ez-data-source__label').innerHTML;
             const isNumber = !isNaN(value);
-            const isCorrectValue = isNumber && (value <= 90 && value >= -90);
+            const isCorrectValue = isNumber && (value <= max && value >= min);
 
             if (!input.required && isCorrectValue) {
                 return result;
@@ -28,8 +29,8 @@
                 result.isError = true;
                 result.errorMessage = window.eZ.errors.outOfRangeValue
                     .replace('{fieldName}', label)
-                    .replace('{min}', -90)
-                    .replace('{max}', 90);
+                    .replace('{min}', min)
+                    .replace('{max}', max);
 
                 return result;
             }
@@ -50,14 +51,14 @@
          * @returns {Object}
          */
         validateLongitude(event) {
-            const lonResult = this.validateCoordInput(event.currentTarget);
+            const lonResult = this.validateCoordInput(event.currentTarget, {min: -180, max: 180});
 
             if (lonResult.isError) {
                 return lonResult;
             }
 
             const latInput = event.currentTarget.closest(SELECTOR_FIELD).querySelector(SELECTOR_LAT_INPUT);
-            const latResult = this.validateCoordInput(latInput);
+            const latResult = this.validateCoordInput(latInput, {min: -90, max: 90});
 
             if (latResult.isError) {
                 latInput.dispatchEvent(new Event('blur'));
@@ -74,14 +75,14 @@
          * @returns {Object}
          */
         validateLatitude(event) {
-            const latResult = this.validateCoordInput(event.currentTarget);
+            const latResult = this.validateCoordInput(event.currentTarget, {min: -90, max: 90});
 
             if (latResult.isError) {
                 return latResult;
             }
 
             const lonInput = event.currentTarget.closest(SELECTOR_FIELD).querySelector(SELECTOR_LON_INPUT);
-            const lonResult = this.validateCoordInput(lonInput);
+            const lonResult = this.validateCoordInput(lonInput, {min: -180, max: 180});
 
             if (lonResult.isError) {
                 lonInput.dispatchEvent(new Event('blur'));
