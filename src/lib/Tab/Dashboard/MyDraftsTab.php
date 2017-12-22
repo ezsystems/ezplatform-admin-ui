@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
@@ -26,22 +27,28 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface
     /** @var ContentTypeService */
     protected $contentTypeService;
 
+    /** @var LocationService */
+    private $locationService;
+
     /**
      * @param Environment $twig
      * @param TranslatorInterface $translator
      * @param ContentService $contentService
      * @param ContentTypeService $contentTypeService
+     * @param LocationService $locationService
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         ContentService $contentService,
-        ContentTypeService $contentTypeService
+        ContentTypeService $contentTypeService,
+        LocationService $locationService
     ) {
         parent::__construct($twig, $translator);
 
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
+        $this->locationService = $locationService;
     }
 
     public function getIdentifier(): string
@@ -86,6 +93,14 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface
         foreach ($pager as $version) {
             $contentInfo = $version->getContentInfo();
             $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);
+
+            if (null === $contentInfo->mainLocationId) {
+                $locations = $this->locationService->loadParentLocationsForDraftContent($version);
+                // empty Locations here means Location has been trashed and Draft should be ignored
+                if (empty($locations)) {
+                    continue;
+                }
+            }
 
             $data[] = [
                 'contentId' => $contentInfo->id,
