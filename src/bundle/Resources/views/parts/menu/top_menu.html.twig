@@ -3,7 +3,7 @@
 {% block root %}
     {% set listAttributes = item.childrenAttributes %}
     {% set currentItem = item %}
-    {% for item in currentItem.children if item.children|length > 0 %}
+    {% for item in currentItem.children if item.children|length > 0 or (item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink)) %}
         {{ block('item') }}
     {% endfor %}
 {% endblock %}
