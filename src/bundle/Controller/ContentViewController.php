@@ -18,6 +18,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
+use Symfony\Component\HttpFoundation\Request;
 
 class ContentViewController extends Controller
 {
@@ -36,21 +37,34 @@ class ContentViewController extends Controller
     /** @var SubitemsContentViewParameterSupplier */
     private $subitemsContentViewParameterSupplier;
 
+    /** @var int */
+    private $defaultPaginationLimit;
+
+    /**
+     * @param ContentTypeService $contentTypeService
+     * @param LanguageService $languageService
+     * @param PathService $pathService
+     * @param FormFactory $formFactory
+     * @param SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier
+     * @param int $defaultPaginationLimit
+     */
     public function __construct(
         ContentTypeService $contentTypeService,
         LanguageService $languageService,
         PathService $pathService,
         FormFactory $formFactory,
-        SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier
+        SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier,
+        int $defaultPaginationLimit
     ) {
         $this->contentTypeService = $contentTypeService;
         $this->languageService = $languageService;
         $this->pathService = $pathService;
         $this->formFactory = $formFactory;
         $this->subitemsContentViewParameterSupplier = $subitemsContentViewParameterSupplier;
+        $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
-    public function locationViewAction(ContentView $view)
+    public function locationViewAction(Request $request, ContentView $view)
     {
         // We should not cache ContentView because we use forms with CSRF tokens in template
         // JIRA ref: https://jira.ez.no/browse/EZP-28190
@@ -59,6 +73,8 @@ class ContentViewController extends Controller
         $this->supplyPathLocations($view);
         $this->supplyContentType($view);
         $this->supplyContentActionForms($view);
+
+        $this->supplyDraftPagination($view, $request);
         $this->subitemsContentViewParameterSupplier->supply($view);
 
         return $view;
@@ -134,6 +150,23 @@ class ContentViewController extends Controller
             'form_content_edit' => $contentEditType->createView(),
             'form_content_create' => $contentCreateType->createView(),
             'form_subitems_content_edit' => $subitemsContentEdit->createView(),
+        ]);
+    }
+
+    /**
+     * @param ContentView $view
+     * @param Request $request
+     */
+    private function supplyDraftPagination(ContentView $view, Request $request): void
+    {
+        $page = $request->query->get('page');
+
+        $view->addParameters([
+            'draft_pagination_params' => [
+                'route_name' => $request->get('_route'),
+                'page' => $page['version_draft'] ?? 1,
+                'limit' => $this->defaultPaginationLimit,
+            ],
         ]);
     }
 
