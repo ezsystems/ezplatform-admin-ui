@@ -8,5 +8,7 @@
         }
     }
 
-    .ez-data-source__input-wrapper {@include checkbox-switcher()}
+    .ez-data-source__input-wrapper {
+    	@include checkbox-switcher();
+    }
 }
