@@ -83,16 +83,12 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         $menu = $this->factory->createItem('root');
 
         $contentMenuItems = $this->getContentMenuItems();
-        if (!empty($contentMenuItems)) {
-            $menu->addChild($this->factory->createItem(self::ITEM_CONTENT, []));
-            $menu[self::ITEM_CONTENT]->setChildren($contentMenuItems);
-        }
+        $menu->addChild($this->factory->createItem(self::ITEM_CONTENT, []));
+        $menu[self::ITEM_CONTENT]->setChildren($contentMenuItems);
 
         $adminMenuItems = $this->getAdminMenuItems();
-        if (!empty($adminMenuItems)) {
-            $menu->addChild($this->factory->createItem(self::ITEM_ADMIN, []));
-            $menu[self::ITEM_ADMIN]->setChildren($adminMenuItems);
-        }
+        $menu->addChild($this->factory->createItem(self::ITEM_ADMIN, []));
+        $menu[self::ITEM_ADMIN]->setChildren($adminMenuItems);
 
         return $menu;
     }
