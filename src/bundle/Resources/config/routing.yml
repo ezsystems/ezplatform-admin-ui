@@ -40,39 +40,39 @@ ezplatform.systeminfo.php:
 #
 
 ezplatform.section.list:
-    path: /section/list
+    path: /sections/list
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Section:list'
 
 ezplatform.section.create:
-    path: /section/create
+    path: /sections/create
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Section:create'
 
 ezplatform.section.view:
-    path: /section/view/{sectionId}
+    path: /sections/view/{sectionId}
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Section:view'
 
 ezplatform.section.update:
-    path: /section/update/{sectionId}
+    path: /sections/update/{sectionId}
     defaults:
         sectionId: null
         _controller: 'EzPlatformAdminUiBundle:Section:update'
 
 ezplatform.section.delete:
-    path: /section/delete/{sectionId}
+    path: /sections/delete/{sectionId}
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Section:delete'
 
 ezplatform.section.bulk_delete:
-    path: /section/bulk-delete
+    path: /sections/bulk-delete
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Section:bulkDelete'
 
 ezplatform.section.assign_content:
-    path: /section/assign-content/{sectionId}
+    path: /sections/assign-content/{sectionId}
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Section:assignContent'
 
@@ -117,13 +117,13 @@ ezplatform.language.bulk_delete:
 #
 
 ezplatform.role.list:
-    path: /role/list
+    path: /roles/list
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Role:list'
 
 ezplatform.role.view:
-    path: /role/{roleId}/{policyPage}/{assignmentPage}
+    path: /roles/{roleId}/{policyPage}/{assignmentPage}
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Role:view'
@@ -135,13 +135,13 @@ ezplatform.role.view:
         assignmentPage: \d+
 
 ezplatform.role.create:
-    path: /role/create
+    path: /roles/create
     methods: ['GET', 'POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Role:create'
 
 ezplatform.role.update:
-    path: /role/{roleId}/update
+    path: /roles/{roleId}/update
     methods: ['GET', 'POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Role:update'
@@ -149,7 +149,7 @@ ezplatform.role.update:
         roleId: \d+
 
 ezplatform.role.delete:
-    path: /role/{roleId}/delete
+    path: /roles/{roleId}/delete
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Role:delete'
@@ -157,7 +157,7 @@ ezplatform.role.delete:
         roleId: \d+
 
 ezplatform.role.bulk_delete:
-    path: /role/bulk-delete
+    path: /roles/bulk-delete
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Role:bulkDelete'
@@ -167,7 +167,7 @@ ezplatform.role.bulk_delete:
 #
 
 ezplatform.policy.list:
-    path: /role/{roleId}/policy/list
+    path: /roles/{roleId}/policy/list
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Policy:list'
@@ -175,7 +175,7 @@ ezplatform.policy.list:
         roleId: \d+
 
 ezplatform.policy.create:
-    path: /role/{roleId}/policy/create
+    path: /roles/{roleId}/policy/create
     methods: ['GET', 'POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Policy:create'
@@ -183,7 +183,7 @@ ezplatform.policy.create:
         roleId: \d+
 
 ezplatform.policy.update:
-    path: /role/{roleId}/policy/{policyId}/update
+    path: /roles/{roleId}/policy/{policyId}/update
     methods: ['GET', 'POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Policy:update'
@@ -192,7 +192,7 @@ ezplatform.policy.update:
         policyId: \d+
 
 ezplatform.policy.delete:
-    path: /role/{roleId}/policy/{policyId}
+    path: /roles/{roleId}/policy/{policyId}
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Policy:delete'
@@ -201,7 +201,7 @@ ezplatform.policy.delete:
         policyId: \d+
 
 ezplatform.policy.bulk_delete:
-    path: /role/{roleId}/policy/bulk-delete
+    path: /roles/{roleId}/policy/bulk-delete
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Policy:bulkDelete'
@@ -213,13 +213,13 @@ ezplatform.policy.bulk_delete:
 #
 
 ezplatform.role_assignment.list:
-    path: /role/{roleId}/assignment
+    path: /roles/{roleId}/assignment
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:RoleAssignment:list'
 
 ezplatform.role_assignment.create:
-    path: /role/{roleId}/assignment/create
+    path: /roles/{roleId}/assignment/create
     methods: ['GET', 'POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:RoleAssignment:create'
@@ -227,13 +227,13 @@ ezplatform.role_assignment.create:
         roleId: \d+
 
 ezplatform.role_assignment.delete:
-    path: /role/{roleId}/assignment/{assignmentId}/delete
+    path: /roles/{roleId}/assignment/{assignmentId}/delete
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:RoleAssignment:delete'
 
 ezplatform.role_assignment.bulk_delete:
-    path: /role/{roleId}/assignment/bulk-delete
+    path: /roles/{roleId}/assignment/bulk-delete
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:RoleAssignment:bulkDelete'
