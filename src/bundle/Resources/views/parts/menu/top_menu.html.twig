@@ -3,7 +3,7 @@
 {% block root %}
     {% set listAttributes = item.childrenAttributes %}
     {% set currentItem = item %}
-    {% for item in currentItem.children %}
+    {% for item in currentItem.children if item.children|length > 0 %}
         {{ block('item') }}
     {% endfor %}
 {% endblock %}
