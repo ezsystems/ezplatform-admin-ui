@@ -28,7 +28,7 @@
                     {% for pathLocation in pathLocations %}
                         {% set items = items|merge([{
                             'value': pathLocation.contentInfo.name,
-                            'url': path('_ez_content_view', {'contentId': pathLocation.contentInfo.id, 'locationId': pathLocation.id, 'viewType': 'full'})
+                            'url': path('_ezpublishLocation', {'locationId': pathLocation.id})
                         }]) %}
                     {% endfor %}
                     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: items} %}
