@@ -110,9 +110,9 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
      */
     private function createTranslationAddForm(Location $location): FormInterface
     {
-        $translationRemoveData = new TranslationAddData($location);
+        $translationAddData = new TranslationAddData($location);
 
-        return $this->formFactory->addTranslation($translationRemoveData);
+        return $this->formFactory->addTranslation($translationAddData);
     }
 
     /**
