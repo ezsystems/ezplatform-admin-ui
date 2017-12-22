@@ -84,7 +84,7 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
 
         $translationAddForm = $this->createTranslationAddForm($location);
 
-        $translationRemoveForm = $this->createTranslationRemoveForm(
+        $translationDeleteForm = $this->createTranslationDeleteForm(
             $location,
             $translationsDataset->getLanguageCodes()
         );
@@ -92,7 +92,7 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
         $viewParameters = [
             'translations' => $translationsDataset->getTranslations(),
             'form_translation_add' => $translationAddForm->createView(),
-            'form_translation_remove' => $translationRemoveForm->createView(),
+            'form_translation_remove' => $translationDeleteForm->createView(),
         ];
 
         return $this->twig->render(
@@ -123,7 +123,7 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
      *
      * @throws InvalidOptionsException
      */
-    private function createTranslationRemoveForm(Location $location, array $languageCodes): FormInterface
+    private function createTranslationDeleteForm(Location $location, array $languageCodes): FormInterface
     {
         $translationDeleteData = new TranslationDeleteData(
             $location->getContentInfo(),
