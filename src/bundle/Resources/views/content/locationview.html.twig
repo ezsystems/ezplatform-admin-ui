@@ -42,7 +42,12 @@
             </div>
             <div class="panel panel-primary">
                 <div class="panel-body">
-                    {{ ez_platform_tabs('location-view', {'content': content, 'location': location,  'contentType': contentType }, 'EzPlatformAdminUiBundle:parts/tab:locationview.html.twig') }}
+                    {{ ez_platform_tabs('location-view', {
+                        'content': content,
+                        'location': location,
+                        'contentType': contentType,
+                        'draft_pagination_params': draft_pagination_params
+                    }, 'EzPlatformAdminUiBundle:parts/tab:locationview.html.twig') }}
 
                     {% if contentType.isContainer %}
                     {{ form_start(form_subitems_content_edit, { 'action': path('ezplatform.content.edit'), 'attr': { 'hidden': 'hidden' }}) }}

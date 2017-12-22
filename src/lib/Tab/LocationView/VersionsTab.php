@@ -17,11 +17,14 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
+use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
 
 class VersionsTab extends AbstractTab implements OrderedTabInterface
 {
@@ -81,12 +84,24 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
         $content = $parameters['content'];
         /** @var Location $location */
         $location = $parameters['location'];
+
+        $draftPaginationParams = $parameters['draft_pagination_params'];
+
         $versionInfo = $content->getVersionInfo();
         $contentInfo = $versionInfo->getContentInfo();
         $versionsDataset = $this->datasetFactory->versions();
         $versionsDataset->load($contentInfo);
 
-        $draftVersions = $versionsDataset->getDraftVersions();
+        $draftPagerfanta = new Pagerfanta(
+            new ArrayAdapter($versionsDataset->getDraftVersions())
+        );
+
+        $draftPagerfanta->setMaxPerPage($draftPaginationParams['limit']);
+        $draftPagerfanta->setCurrentPage(min($draftPaginationParams['page'], $draftPagerfanta->getNbPages()));
+
+        /** @var UIValue\Content\VersionInfo[] $policies */
+        $draftVersions = $draftPagerfanta->getCurrentPageResults();
+
         $archivedVersions = $versionsDataset->getArchivedVersions();
 
         $removeVersionDraftForm = $this->createVersionRemoveForm(
@@ -106,11 +121,12 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
 
         $viewParameters = [
             'published_versions' => $versionsDataset->getPublishedVersions(),
-            'draft_versions' => $draftVersions,
             'archived_versions' => $archivedVersions,
             'form_version_remove_draft' => $removeVersionDraftForm->createView(),
             'form_version_remove_archived' => $removeVersionArchivedForm->createView(),
             'form_archived_version_restore' => $archivedVersionRestoreForm->createView(),
+            'draft_pager' => $draftPagerfanta,
+            'draft_pagination_params' => $draftPaginationParams,
         ];
 
         return $this->twig->render(

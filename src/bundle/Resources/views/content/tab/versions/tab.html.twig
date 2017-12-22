@@ -5,21 +5,42 @@
 {% form_theme form_version_remove_draft '@EzPlatformAdminUi/form_fields.html.twig' %}
 {% form_theme form_version_remove_archived '@EzPlatformAdminUi/form_fields.html.twig' %}
 
-{% if draft_versions is not empty %}
+{% if draft_pager.currentPageResults is not empty %}
     <section>
         {{ form_start(form_version_remove_draft, {
             'action': path('ezplatform.version.remove'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-' ~ form_version_remove_draft.remove.vars.id }
         }) }}
         {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'), tools: tab.table_header_tools(form_version_remove_draft) } %}
-        {% if draft_versions is not empty %}
-            {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', { 'versions': draft_versions, 'is_draft': true, 'form': form_version_remove_draft }) }}
+        {% if draft_pager.currentPageResults is not empty %}
+            {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', { 'versions': draft_pager.currentPageResults, 'is_draft': true, 'form': form_version_remove_draft }) }}
         {% else %}
             <p class="ez-relations-box-list-no-content">
                 {{ 'tab.versions.no_permission'|trans()|desc('You don\'t have access to view the content item\'s versions') }}
             </p>
         {% endif %}
         {{ form_end(form_version_remove_draft) }}
+
+        {% if draft_pager.haveToPaginate %}
+            <div class="row justify-content-center align-items-center mb-2">
+                <span>
+                    {{ 'pagination.viewing'|trans({
+                        '%viewing%': draft_pager.currentPageResults|length,
+                        '%total%': draft_pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                </span>
+            </div>
+            <div class="row justify-content-center align-items-center">
+                {{ pagerfanta(draft_pager, 'ez',{
+                    'routeName': draft_pagination_params.route_name,
+                    'routeParams': {
+                        '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\VersionsTab::URI_FRAGMENT'),
+                        'locationId': location.id,
+                        'contentId': content.id,
+                    },
+                    'pageParameter': '[page][version_draft]'
+                }) }}
+            </div>
+        {% endif %}
     </section>
 {% endif %}
 
