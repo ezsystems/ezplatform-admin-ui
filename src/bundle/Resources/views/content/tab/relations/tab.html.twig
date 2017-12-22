@@ -4,7 +4,7 @@
     {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.relations.related_content'|trans({'%contentName%' : ez_content_name(content)})|desc('Related content (content items used by %contentName%)') } %}
 
     {% if relations is not empty %}
-        {{ include('@EzPlatformAdminUi/content/tab/relations/table.html.twig', {'relations': relations}) }}
+        {{ include('@EzPlatformAdminUi/content/tab/relations/table_relations.html.twig', {'relations': relations}) }}
     {% else %}
         <p class="ez-table-no-content">
             {{ 'tab.relations.no_relations'|trans()|desc('This content item has no related content.') }}
@@ -14,7 +14,7 @@
     {% if reverse_relations is defined %}
         {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.relations.reverse_relations'|trans({'%contentName%' : ez_content_name(content)})|desc('Reverse relations (content items using %contentName%)') } %}
         {% if reverse_relations is not empty %}
-            {{ include('@EzPlatformAdminUi/content/tab/relations/table.html.twig', {'relations': reverse_relations}) }}
+            {{ include('@EzPlatformAdminUi/content/tab/relations/table_relations_reverse.html.twig', {'relations': reverse_relations}) }}
         {% else %}
             <p class="ez-table-no-content">
                 {{ 'tab.relations.no_reverse_relations'|trans()|desc('This content item has no reverse relations.') }}
