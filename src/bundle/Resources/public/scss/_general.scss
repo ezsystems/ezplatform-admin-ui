@@ -85,7 +85,8 @@ button {
     @include checkbox-icon();
 }
 
-.ez-visually-hidden {
+.ez-visually-hidden,
+.ez-visually-hidden[readonly] {
     height: 1px;
     opacity: 0;
     position: relative;
