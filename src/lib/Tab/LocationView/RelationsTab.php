@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
+use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
@@ -24,6 +25,9 @@ class RelationsTab extends AbstractTab implements OrderedTabInterface
     /** @var DatasetFactory */
     protected $datasetFactory;
 
+    /** @var ContentTypeService */
+    protected $contentTypeService;
+
     /**
      * @param Environment $twig
      * @param TranslatorInterface $translator
@@ -34,12 +38,14 @@ class RelationsTab extends AbstractTab implements OrderedTabInterface
         Environment $twig,
         TranslatorInterface $translator,
         PermissionResolver $permissionResolver,
-        DatasetFactory $datasetFactory
+        DatasetFactory $datasetFactory,
+        ContentTypeService $contentTypeService
     ) {
         parent::__construct($twig, $translator);
 
         $this->permissionResolver = $permissionResolver;
         $this->datasetFactory = $datasetFactory;
+        $this->contentTypeService = $contentTypeService;
     }
 
     public function getIdentifier(): string
@@ -66,11 +72,37 @@ class RelationsTab extends AbstractTab implements OrderedTabInterface
         $relationsDataset = $this->datasetFactory->relations();
         $relationsDataset->load($versionInfo);
 
-        $viewParameters = ['relations' => $relationsDataset->getRelations()];
+        $contentTypes = [];
+
+        $relations = $relationsDataset->getRelations();
+
+        $viewParameters = [];
+
+        foreach ($relations as $relation) {
+            $contentTypeId = $relation->getDestinationContentInfo()->contentTypeId;
+
+            if (!isset($contentTypes[$contentTypeId])) {
+                $contentTypes[$contentTypeId] = $this->contentTypeService->loadContentType($contentTypeId);
+            }
+        }
+
+        $viewParameters['relations'] = $relations;
 
         if (true === $this->permissionResolver->hasAccess('module', 'reverserelatedlist')) {
-            $viewParameters['reverse_relations'] = $relationsDataset->getReverseRelations();
+            $reverseRelations = $relationsDataset->getReverseRelations();
+
+            foreach ($reverseRelations as $relation) {
+                $contentTypeId = $relation->getSourceContentInfo()->contentTypeId;
+
+                if (!isset($contentTypes[$contentTypeId])) {
+                    $contentTypes[$contentTypeId] = $this->contentTypeService->loadContentType($contentTypeId);
+                }
+            }
+
+            $viewParameters['reverse_relations'] = $reverseRelations;
         }
+
+        $viewParameters['contentTypes'] = $contentTypes;
 
         return $this->twig->render(
             'EzPlatformAdminUiBundle:content/tab/relations:tab.html.twig',
