@@ -14,12 +14,12 @@
     },
     "require": {
         "php": ">=7.1",
-        "symfony/symfony": "^3.4@beta",
+        "symfony/symfony": "^3.4",
         "jms/translation-bundle": "^1.3.2",
-        "ezsystems/ezpublish-kernel": "^7.0@dev",
-        "ezsystems/repository-forms": "^2.0@dev",
-        "ezsystems/ezplatform-admin-ui-modules": "^1.0@dev",
-        "ezsystems/ez-support-tools": "^0.2@dev",
+        "ezsystems/ezpublish-kernel": "^7.0",
+        "ezsystems/repository-forms": "^2.0",
+        "ezsystems/ezplatform-admin-ui-modules": "^1.0",
+        "ezsystems/ez-support-tools": "^0.2",
         "white-october/pagerfanta-bundle": "^1.1",
         "knplabs/knp-menu-bundle": "^2.1"
     },
