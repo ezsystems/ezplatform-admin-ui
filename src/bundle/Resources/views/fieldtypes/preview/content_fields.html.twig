@@ -182,7 +182,11 @@
         </tr>
         <tr>
             <td class="ez-user__type">{{ 'ezuser.email'|trans|desc('E-mail') }}:</td>
-            <td><a href="mailto:{{ field.value.email|escape( 'url' ) }}">{{ field.value.email }}</td>
+            <td><a href="mailto:{{ field.value.email|escape( 'url' ) }}">{{ field.value.email }}</a></td>
+        </tr>
+        <tr>
+            <td class="ez-user__type">{{ 'ezuser.enabled'|trans|desc('Enabled') }}:</td>
+            <td>{{ field.value.enabled ? 'ezuser.yes'|trans|desc('Yes') : 'ezuser.no'|trans|desc('No') }}</td>
         </tr>
     </tbody>
 </table>

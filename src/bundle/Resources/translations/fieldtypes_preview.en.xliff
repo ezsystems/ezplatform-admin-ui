@@ -151,10 +151,25 @@
         <target state="new">E-mail</target>
         <note>key: ezuser.email</note>
       </trans-unit>
+      <trans-unit id="09acf9d3220515cf63f284525c54ed3f88b7a396" resname="ezuser.enabled">
+        <source>Enabled</source>
+        <target state="new">Enabled</target>
+        <note>key: ezuser.enabled</note>
+      </trans-unit>
+      <trans-unit id="26b99946e7309fcdd54dd12a959fee7d666b82f9" resname="ezuser.no">
+        <source>No</source>
+        <target state="new">No</target>
+        <note>key: ezuser.no</note>
+      </trans-unit>
       <trans-unit id="fc4b6b718b2cee2f8a91703c070fd69756d5c4cd" resname="ezuser.username">
         <source>Username</source>
         <target state="new">Username</target>
         <note>key: ezuser.username</note>
+      </trans-unit>
+      <trans-unit id="0e86a412baba94a10cf9d1b03332c9f8f1d5e1bb" resname="ezuser.yes">
+        <source>Yes</source>
+        <target state="new">Yes</target>
+        <note>key: ezuser.yes</note>
       </trans-unit>
     </body>
   </file>

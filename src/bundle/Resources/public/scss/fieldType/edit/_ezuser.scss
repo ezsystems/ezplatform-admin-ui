@@ -7,4 +7,8 @@
             max-width: 30%;
         }
     }
+
+    .ez-data-source__input-wrapper {
+    	@include checkbox-switcher();
+    }
 }
