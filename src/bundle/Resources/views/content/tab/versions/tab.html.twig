@@ -13,7 +13,12 @@
         }) }}
         {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'), tools: tab.table_header_tools(form_version_remove_draft) } %}
         {% if draft_pager.currentPageResults is not empty %}
-            {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', { 'versions': draft_pager.currentPageResults, 'is_draft': true, 'form': form_version_remove_draft }) }}
+            {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', {
+                'versions': draft_pager.currentPageResults,
+                'is_draft': true,
+                'form': form_version_remove_draft,
+                'haveToPaginate': draft_pager.haveToPaginate
+            }) }}
         {% else %}
             <p class="ez-relations-box-list-no-content">
                 {{ 'tab.versions.no_permission'|trans()|desc('You don\'t have access to view the content item\'s versions') }}
@@ -29,7 +34,7 @@
                         '%total%': draft_pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
                 </span>
             </div>
-            <div class="row justify-content-center align-items-center">
+            <div class="row justify-content-center align-items-center mb-3">
                 {{ pagerfanta(draft_pager, 'ez',{
                     'routeName': draft_pagination_params.route_name,
                     'routeParams': {

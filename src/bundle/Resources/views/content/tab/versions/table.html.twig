@@ -3,7 +3,7 @@
 {% set is_draft = is_draft is defined and is_draft %}
 {% set is_archived = is_archived is defined and is_archived %}
 
-<table class="table">
+<table class="table {% if is_draft and haveToPaginate %} mb-3 {% endif %}">
     <thead>
     <tr>
         {% if form is defined %}
