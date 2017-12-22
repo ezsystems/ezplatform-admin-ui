@@ -13,14 +13,16 @@
         input.value = items[0].id;
         submitButton.click();
     };
+    const canSelectContent = ({ item }, callback) => callback(item.ContentInfo.Content.ContentTypeInfo.isContainer);
     const onCancel = () => closeUDW();
     const openUDW = (event) => {
         event.preventDefault();
         event.stopPropagation();
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
+        window.ReactDOM.render(window.React.createElement(window.eZ.modules.UniversalDiscovery, {
             onConfirm,
             onCancel,
+            canSelectContent,
             confirmLabel: 'Add location',
             title: 'Select location',
             multiple: false,
