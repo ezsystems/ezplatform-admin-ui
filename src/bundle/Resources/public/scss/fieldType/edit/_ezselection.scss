@@ -68,7 +68,6 @@
                         width: .1rem;
                         height: 1rem;
                         background-color: $ez-white;
-                        content: '';
                         position: absolute;
                         top: 50%;
                         left: 50%;
@@ -103,6 +102,7 @@
             border: 1px solid $ez-ground-primary;
             background-color: $ez-white;
             color: $ez-black;
+            z-index: 1;
 
             &--hidden {
                 transform: scaleY(0);
