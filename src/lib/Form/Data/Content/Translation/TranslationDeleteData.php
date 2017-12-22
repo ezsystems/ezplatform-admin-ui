@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 
-class TranslationRemoveData
+class TranslationDeleteData
 {
     /** @var ContentInfo|null */
     protected $contentInfo;

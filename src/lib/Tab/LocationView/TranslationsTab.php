@@ -11,7 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
@@ -84,7 +84,7 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
 
         $translationAddForm = $this->createTranslationAddForm($location);
 
-        $translationRemoveForm = $this->createTranslationRemoveForm(
+        $translationDeleteForm = $this->createTranslationDeleteForm(
             $location,
             $translationsDataset->getLanguageCodes()
         );
@@ -92,7 +92,7 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
         $viewParameters = [
             'translations' => $translationsDataset->getTranslations(),
             'form_translation_add' => $translationAddForm->createView(),
-            'form_translation_remove' => $translationRemoveForm->createView(),
+            'form_translation_remove' => $translationDeleteForm->createView(),
         ];
 
         return $this->twig->render(
@@ -110,9 +110,9 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
      */
     private function createTranslationAddForm(Location $location): FormInterface
     {
-        $translationRemoveData = new TranslationAddData($location);
+        $translationAddData = new TranslationAddData($location);
 
-        return $this->formFactory->addTranslation($translationRemoveData);
+        return $this->formFactory->addTranslation($translationAddData);
     }
 
     /**
@@ -123,13 +123,13 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
      *
      * @throws InvalidOptionsException
      */
-    private function createTranslationRemoveForm(Location $location, array $languageCodes): FormInterface
+    private function createTranslationDeleteForm(Location $location, array $languageCodes): FormInterface
     {
-        $translationRemoveData = new TranslationRemoveData(
+        $translationDeleteData = new TranslationDeleteData(
             $location->getContentInfo(),
             array_combine($languageCodes, array_fill_keys($languageCodes, false))
         );
 
-        return $this->formFactory->removeTranslation($translationRemoveData);
+        return $this->formFactory->deleteTranslation($translationDeleteData);
     }
 }
