@@ -14,7 +14,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUp
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupDeleteData;
@@ -265,15 +265,15 @@ class FormFactory
     }
 
     /**
-     * @param TranslationRemoveData|null $data
+     * @param TranslationDeleteData|null $data
      * @param null|string $name
      *
      * @return FormInterface
      *
      * @throws InvalidOptionsException
      */
-    public function removeTranslation(
-        TranslationRemoveData $data = null,
+    public function deleteTranslation(
+        TranslationDeleteData $data = null,
         ?string $name = null
     ): FormInterface {
         $name = $name ?: sprintf('delete-translations');

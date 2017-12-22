@@ -11,7 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
@@ -125,11 +125,11 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
      */
     private function createTranslationRemoveForm(Location $location, array $languageCodes): FormInterface
     {
-        $translationRemoveData = new TranslationRemoveData(
+        $translationDeleteData = new TranslationDeleteData(
             $location->getContentInfo(),
             array_combine($languageCodes, array_fill_keys($languageCodes, false))
         );
 
-        return $this->formFactory->removeTranslation($translationRemoveData);
+        return $this->formFactory->deleteTranslation($translationDeleteData);
     }
 }

@@ -9,7 +9,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
@@ -104,14 +104,14 @@ class TranslationController extends Controller
      */
     public function removeAction(Request $request): Response
     {
-        $form = $this->formFactory->removeTranslation();
+        $form = $this->formFactory->deleteTranslation();
         $form->handleRequest($request);
 
         /** @var ContentInfo $contentInfo */
         $contentInfo = $form->getData()->getContentInfo();
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (TranslationRemoveData $data) {
+            $result = $this->submitHandler->handle($form, function (TranslationDeleteData $data) {
                 $contentInfo = $data->getContentInfo();
 
                 foreach ($data->getLanguageCodes() as $languageCode => $selected) {
