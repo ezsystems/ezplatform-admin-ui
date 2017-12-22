@@ -115,7 +115,7 @@ class TranslationController extends Controller
                 $contentInfo = $data->getContentInfo();
 
                 foreach ($data->getLanguageCodes() as $languageCode => $selected) {
-                    $this->contentService->removeTranslation($contentInfo, $languageCode);
+                    $this->contentService->deleteTranslation($contentInfo, $languageCode);
 
                     $this->notificationHandler->success(
                         $this->translator->trans(
