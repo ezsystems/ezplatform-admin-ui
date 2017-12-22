@@ -56,7 +56,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddTyp
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentMainLocationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationAddType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationRemoveType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType;
@@ -278,7 +278,7 @@ class FormFactory
     ): FormInterface {
         $name = $name ?: sprintf('delete-translations');
 
-        return $this->formFactory->createNamed($name, TranslationRemoveType::class, $data);
+        return $this->formFactory->createNamed($name, TranslationDeleteType::class, $data);
     }
 
     /**
