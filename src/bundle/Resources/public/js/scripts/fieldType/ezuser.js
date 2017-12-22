@@ -89,10 +89,13 @@
                 .querySelector(`${SELECTOR_FIELD_FIRST} ${SELECTOR_INPUT}`)
                 .value.trim();
             const secondPassword = target.value.trim();
+            const passwordsMatch = firstPassword === secondPassword;
+            const requiredNotMatch = target.required && !passwordsMatch;
+            const notRequiredNotMatch = !target.required && (firstPassword.length || secondPassword.length) && !passwordsMatch;
             let isError = false;
             let errorMessage;
 
-            if (target.required && firstPassword !== secondPassword) {
+            if (requiredNotMatch || notRequiredNotMatch) {
                 isError = true;
                 errorMessage = global.eZ.errors.notSamePasswords;
             }
