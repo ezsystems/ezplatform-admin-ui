@@ -1,41 +1,59 @@
-{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>eZ Platform</title>
+        {% stylesheets filter='scssphp'
+            'bundles/ezplatformadminui/scss/ezplatform-bootstrap.scss'
+            'bundles/ezplatformadminui/scss/ezplatform.scss'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/img/favicon.ico') }}" />
+    </head>
+    <body class="ez-login-view">
+        <div class="container-fluid ez-main-container">
+            <div class="row ez-login">
+                <div class="col-6 ez-login__image"></div>
+                <div class="col-6 ez-login__form">
+                    <div class="ez-login__form-wrapper">
+                        <svg class="ez-icon ez-icon--logo">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/bundles/ezplatformadminui/img/ez-logo.svg#logo-white"></use>
+                        </svg>
+                        <form action="{{ path( 'login_check' ) }}" method="post" role="form">
+                            <fieldset>
+                                {% if error %}
+                                    <span>{{ error.message }}</span>
+                                {% endif %}
+                                <div class="form-group{% if error %} has-error{% endif %}">
+                                    <label class="ez-login__form-label" for="username">{{ 'authentication.username'|trans|desc('Username') }}:</label>
+                                    <input type="text" id="username" class="ez-login__form-input form-control" name="_username" value="{{ last_username }}" required="required" autofocus="autofocus" autocomplete="on"/>
+                                </div>
+                                <div class="form-group{% if error %} has-error{% endif %}">
+                                    <label class="ez-login__form-label" for="password">{{ 'authentication.password'|trans|desc('Password') }}:</label>
+                                    <input type="password" id="password" class="ez-login__form-input form-control" name="_password" required="required"/>
+                                </div>
 
-{% block navigation %}{% endblock %}
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token("authenticate") }}" />
+                                <input type="hidden" name="_target_path" value="{{ url('ezplatform.dashboard') }}" />
 
-{% block body_class %}ez-login-view{% endblock %}
-
-{% block content %}
-    <div class="row ez-login">
-        <div class="col-6 ez-login__image"></div>
-        <div class="col-6 ez-login__form">
-            <div class="ez-login__form-wrapper">
-                <svg class="ez-icon ez-icon--logo">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/bundles/ezplatformadminui/img/ez-logo.svg#logo-white"></use>
-                </svg>
-                <form action="{{ path( 'login_check' ) }}" method="post" role="form">
-                    <fieldset>
-                        {% if error %}
-                            <span>{{ error.message }}</span>
-                        {% endif %}
-                        <div class="form-group{% if error %} has-error{% endif %}">
-                            <label class="ez-login__form-label" for="username">{{ 'authentication.username'|trans|desc('Username') }}:</label>
-                            <input type="text" id="username" class="ez-login__form-input form-control" name="_username" value="{{ last_username }}" required="required" autofocus="autofocus" autocomplete="on"/>
-                        </div>
-                        <div class="form-group{% if error %} has-error{% endif %}">
-                            <label class="ez-login__form-label" for="password">{{ 'authentication.password'|trans|desc('Password') }}:</label>
-                            <input type="password" id="password" class="ez-login__form-input form-control" name="_password" required="required"/>
-                        </div>
-
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token("authenticate") }}" />
-                        <input type="hidden" name="_target_path" value="{{ url('ezplatform.dashboard') }}" />
-
-                        <button type="submit" class="btn btn-primary ez-btn ez-btn--login">{{ 'authentication.submit'|trans|desc('Login') }}</button>
-                    </fieldset>
-                </form>
-            </div>
-            <div class="ez-login__footer">
-                <span>eZ Platform ©1999-{{ "now"|date("Y") }} <a href="http://ez.no">eZ Systems AS</a> and others.</span>
+                                <button type="submit" class="btn btn-primary ez-btn ez-btn--login">{{ 'authentication.submit'|trans|desc('Login') }}</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="ez-login__footer">
+                        <span>eZ Platform ©1999-{{ "now"|date("Y") }} <a href="http://ez.no">eZ Systems AS</a> and others.</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-{% endblock %}
+
+        {% javascripts
+            'bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js'
+            'bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js'
+            'bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    </bodyc>
+</html>
