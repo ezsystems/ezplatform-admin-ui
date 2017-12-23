@@ -1,73 +1,63 @@
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: false
-
     EzSystems\EzPlatformAdminUiBundle\Controller\:
         resource: "../../Controller/*"
         exclude: "../../Controller/{Controller}"
-        public: true
-        tags: ['controller.service_arguments']
-        calls:
-            - [setContainer, ["@service_container"]]
-            - [performAccessCheck, []]
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController:
-        public: true
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $contentTypeActionDispatcher: '@ezrepoforms.action_dispatcher.content_type'
             $languages: '$languages$'
             $defaultPaginationLimit: '$pagination.content_type_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeGroupController:
-        public: true
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $languages: '$languages$'
             $defaultPaginationLimit: '$pagination.content_type_group_limit$'
 
-
     EzSystems\EzPlatformAdminUiBundle\Controller\SearchController:
-        public: true
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.search_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentController:
-        public: true
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultSiteaccess: '%ezpublish.siteaccess.default%'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\TrashController:
-        public: true
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.trash_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\SectionController:
-        public: true
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.section_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\LanguageController:
-        public: true
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.language_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\RoleController:
-        public: true
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.role_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\RoleAssignmentController:
-        public: true
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.role_assignment_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\PolicyController:
-        public: true
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.policy_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentViewController:
-        public: true
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.version_draft_limit$'
