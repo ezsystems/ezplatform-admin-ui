@@ -18,6 +18,12 @@ services:
         autoconfigure: true
         public: false
 
+    EzSystems\EzPlatformAdminUiBundle\Controller\Controller:
+        tags: ['controller.service_arguments']
+        calls:
+            - [setContainer, ["@service_container"]]
+            - [performAccessCheck, []]
+
     EzSystems\EzPlatformAdminUiBundle\ParamConverter\:
         resource: "../../ParamConverter/*"
         public: true
