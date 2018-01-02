@@ -55,7 +55,9 @@ class LanguageChoiceType extends AbstractType
                     $repoLanguages = $languageService->loadLanguages();
                     foreach ($siteAccessLanguages as $siteAccessLanguage) {
                         foreach ($repoLanguages as $key => $repoLanguage) {
-                            if ($siteAccessLanguage === null) {
+                            if (!$repoLanguage->enabled) {
+                              continue;
+                            } elseif ($siteAccessLanguage === null) {
                                 $languages[] = $repoLanguage;
                             } elseif ($repoLanguage->languageCode === $siteAccessLanguage) {
                                 $languages[] = $repoLanguage;
