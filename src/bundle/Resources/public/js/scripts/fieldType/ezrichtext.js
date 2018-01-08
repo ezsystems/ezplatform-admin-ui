@@ -166,12 +166,12 @@
                 return body.innerHTML;
             };
 
-            root.innerHTML = xhtmlify(data).replace(xhtmlNamespace, ezNamespace);
+            root.innerHTML = data;
             doc.appendChild(root);
 
             [...doc.querySelectorAll('[data-ezelement="ezembed"]')].forEach(emptyEmbed);
 
-            event.target.closest('.ez-data-source').querySelector('textarea').value = root.innerHTML;
+            event.target.closest('.ez-data-source').querySelector('textarea').value = xhtmlify(root.innerHTML).replace(xhtmlNamespace, ezNamespace);
         });
 
         const validator = new EzRichTextValidator({
