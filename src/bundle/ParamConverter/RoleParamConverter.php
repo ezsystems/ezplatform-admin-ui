@@ -37,6 +37,10 @@ class RoleParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
+        if (!$request->get(self::PARAMETER_ROLE_ID)) {
+            return false;
+        }
+
         $id = (int)$request->get(self::PARAMETER_ROLE_ID);
 
         $role = $this->roleService->loadRole($id);
