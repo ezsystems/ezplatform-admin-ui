@@ -35,6 +35,10 @@ class RoleAssignmentParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
+        if (!$request->get(self::PRAMETER_ROLE_ASSIGNMENT_ID)) {
+            return false;
+        }
+
         $roleAssigmentId = (int)$request->get(self::PRAMETER_ROLE_ASSIGNMENT_ID);
 
         $roleAssigment = $this->roleService->loadRoleAssignment($roleAssigmentId);
