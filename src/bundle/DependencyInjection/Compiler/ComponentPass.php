@@ -13,13 +13,18 @@ use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\Exception;
 
 class ComponentPass implements CompilerPassInterface
 {
     const TAG_NAME = 'ezplatform.admin_ui.component';
 
     /**
-     * You can modify the container here before it is dumped to PHP code.
+     * @param ContainerBuilder $container
+     *
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\ServiceNotFoundException
+     * @throws InvalidArgumentException
      */
     public function process(ContainerBuilder $container)
     {

@@ -11,6 +11,8 @@ namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
 use EzSystems\EzPlatformAdminUi\UI\Config\Aggregator;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -18,17 +20,26 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class UiConfigProviderPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    const TAG_CONFIG_PROVIDER = 'ezplatform.admin_ui.config_provider';
+
+    /**
+     * @param ContainerBuilder $container
+     *
+     * @throws InvalidArgumentException
+     * @throws ServiceNotFoundException
+     */
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition(Aggregator::class)) {
             return;
         }
 
         $aggregatorDefinition = $container->getDefinition(Aggregator::class);
-        $taggedServiceIds = $container->findTaggedServiceIds('ezplatform.admin_ui.config_provider');
+        $taggedServiceIds = $container->findTaggedServiceIds(self::TAG_CONFIG_PROVIDER);
+
         foreach ($taggedServiceIds as $taggedServiceId => $tags) {
             foreach ($tags as $tag) {
-                $key = isset($tag['key']) ? $tag['key'] : $taggedServiceId;
+                $key = $tag['key'] ?? $taggedServiceId;
                 $aggregatorDefinition->addMethodCall('addProvider', [$key, new Reference($taggedServiceId)]);
             }
         }

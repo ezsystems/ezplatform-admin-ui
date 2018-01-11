@@ -18,7 +18,10 @@ class TabPass implements CompilerPassInterface
 {
     const TAG_TAB = 'ezplatform.tab';
 
-    public function process(ContainerBuilder $container)
+    /**
+     * @param ContainerBuilder $container
+     */
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition(TabRegistry::class)) {
             return;
