@@ -20,7 +20,6 @@ use eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentTypeInfoList as
 use eZ\Publish\Core\REST\Server\Values\ContentTypeInfoList;
 use eZ\Publish\Core\REST\Server\Values\RestContent;
 use eZ\Publish\Core\REST\Server\Values\RestLocation;
-use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsRow as SubitemsRowValueObjectVisitor;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList as SubitemsListValueObjectVisitor;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsList;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsRow;
@@ -36,9 +35,6 @@ class ContentViewParameterSupplier
 
     /** @var JsonOutputGenerator */
     private $outputGenerator;
-
-    /** @var SubitemsRowValueObjectVisitor */
-    private $subitemsRowValueObjectVisitor;
 
     /** @var ContentTypeInfoListValueObjectVisitor */
     private $contentTypeInfoListValueObjectVisitor;
@@ -61,8 +57,8 @@ class ContentViewParameterSupplier
     /**
      * @param Visitor $outputVisitor
      * @param JsonOutputGenerator $outputGenerator
-     * @param SubitemsRowValueObjectVisitor $subitemsRowValueObjectVisitor
      * @param ContentTypeInfoListValueObjectVisitor $contentTypeInfoListValueObjectVisitor
+     * @param SubitemsListValueObjectVisitor $subitemsListValueObjectVisitor
      * @param LocationService $locationService
      * @param ContentService $contentService
      * @param ContentTypeService $contentTypeService
@@ -71,7 +67,6 @@ class ContentViewParameterSupplier
     public function __construct(
         Visitor $outputVisitor,
         JsonOutputGenerator $outputGenerator,
-        SubitemsRowValueObjectVisitor $subitemsRowValueObjectVisitor,
         ContentTypeInfoListValueObjectVisitor $contentTypeInfoListValueObjectVisitor,
         SubitemsListValueObjectVisitor $subitemsListValueObjectVisitor,
         LocationService $locationService,
@@ -81,7 +76,6 @@ class ContentViewParameterSupplier
     ) {
         $this->outputVisitor = $outputVisitor;
         $this->outputGenerator = $outputGenerator;
-        $this->subitemsRowValueObjectVisitor = $subitemsRowValueObjectVisitor;
         $this->contentTypeInfoListValueObjectVisitor = $contentTypeInfoListValueObjectVisitor;
         $this->subitemsListValueObjectVisitor = $subitemsListValueObjectVisitor;
         $this->locationService = $locationService;
