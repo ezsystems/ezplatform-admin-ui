@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver;
 use eZ\Publish\API\Repository\LanguageService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
@@ -25,16 +24,17 @@ class LanguageChoiceType extends AbstractType
     /** @var LanguageService */
     protected $languageService;
 
-    /** @var ConfigResolver */
-    protected $configResolver;
+    /** @var array */
+    protected $siteAccessLanguages;
 
     /**
      * @param LanguageService $languageService
+     * @param array $siteAccessLanguages
      */
-    public function __construct(LanguageService $languageService, ConfigResolver $configResolver)
+    public function __construct(LanguageService $languageService, array $siteAccessLanguages)
     {
         $this->languageService = $languageService;
-        $this->configResolver = $configResolver;
+        $this->siteAccessLanguages = $siteAccessLanguages;
     }
 
     public function getParent()
@@ -44,30 +44,28 @@ class LanguageChoiceType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $languageService = $this->languageService;
-        $siteAccessLanguages = $this->configResolver->getParameter('languages');
         $resolver
             ->setDefaults([
-                'choice_loader' => new CallbackChoiceLoader(function () use ($languageService, $siteAccessLanguages) {
-                    // Order languages by siteaccess languages first, then the rest
-                    $siteAccessLanguages[] = null;
-                    $languages = [];
-                    $repoLanguages = $languageService->loadLanguages();
-                    foreach ($siteAccessLanguages as $siteAccessLanguage) {
-                        foreach ($repoLanguages as $key => $repoLanguage) {
-                            if (!$repoLanguage->enabled) {
-                                continue;
-                            } elseif ($siteAccessLanguage === null) {
-                                $languages[] = $repoLanguage;
-                            } elseif ($repoLanguage->languageCode === $siteAccessLanguage) {
-                                $languages[] = $repoLanguage;
-                                unset($repoLanguages[$key]);
-                                break;
-                            }
+                'choice_loader' => new CallbackChoiceLoader(function() {
+                    $saLanguages = [];
+                    $languagesByCode = [];
+
+                    foreach ($this->languageService->loadLanguages() as $language) {
+                        if ($language->enabled) {
+                            $languagesByCode[$language->languageCode] = $language;
                         }
                     }
 
-                    return $languages;
+                    foreach ($this->siteAccessLanguages as $languageCode) {
+                        if (!isset($languagesByCode[$languageCode])) {
+                            continue;
+                        }
+
+                        $saLanguages[] = $languagesByCode[$languageCode];
+                        unset($languagesByCode[$languageCode]);
+                    }
+
+                    return array_merge($saLanguages, array_values($languagesByCode));
                 }),
                 'choice_label' => 'name',
                 'choice_name' => 'languageCode',
