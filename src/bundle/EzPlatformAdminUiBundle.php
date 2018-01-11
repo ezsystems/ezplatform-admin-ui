@@ -11,7 +11,6 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ComponentPass
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ValueObjectVisitorPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\LocationIds;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Module;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Pagination;
@@ -20,7 +19,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class EzPlatformAdminUiBundle extends Bundle
 {
-    const ADMIN_GROUP_NAME = 'admin_group';
+    public const ADMIN_GROUP_NAME = 'admin_group';
 
     public function build(ContainerBuilder $container)
     {
@@ -44,6 +43,5 @@ class EzPlatformAdminUiBundle extends Bundle
         $container->addCompilerPass(new UiConfigProviderPass());
         $container->addCompilerPass(new SystemInfoTabGroupPass());
         $container->addCompilerPass(new ComponentPass());
-        $container->addCompilerPass(new ValueObjectVisitorPass());
     }
 }
