@@ -46,7 +46,7 @@ class LanguageChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choice_loader' => new CallbackChoiceLoader(function() {
+                'choice_loader' => new CallbackChoiceLoader(function () {
                     $saLanguages = [];
                     $languagesByCode = [];
 
