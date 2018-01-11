@@ -25,7 +25,8 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "~2.7.1",
-        "phpunit/phpunit": "^6.4"
+        "phpunit/phpunit": "^6.4",
+        "matthiasnoback/symfony-dependency-injection-test": "^2.3"
     },
     "scripts": {
         "fix-cs": "@php ./vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
@@ -33,8 +34,8 @@
     "extra": {
         "_ezplatform_branch_for_behat_tests": "master",
         "branch-alias": {
-            "dev-tmp_ci_branch": "2.1.x-dev",
-            "dev-master": "1.1.x-dev"
+            "dev-tmp_ci_branch": "2.0.x-dev",
+            "dev-master": "1.0.x-dev"
         }
     }
 }
