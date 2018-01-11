@@ -25,7 +25,8 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "~2.7.1",
-        "phpunit/phpunit": "^6.4"
+        "phpunit/phpunit": "^6.4",
+        "matthiasnoback/symfony-dependency-injection-test": "^2.3"
     },
     "scripts": {
         "fix-cs": "@php ./vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
