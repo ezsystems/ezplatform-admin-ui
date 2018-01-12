@@ -48,6 +48,10 @@ class ContentParamConverter implements ParamConverterInterface
         $versionNo = $request->get(self::PARAMETER_VERSION_NO);
         $languageCode = $request->get(self::PARAMETER_LANGUAGE_CODE);
 
+        if (null === $contentId || !\is_array($languageCode)) {
+            return false;
+        }
+
         $content = $this->contentService->loadContent($contentId, (array) $languageCode, $versionNo);
 
         $request->attributes->set($configuration->getName(), $content);

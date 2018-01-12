@@ -40,6 +40,10 @@ class VersionInfoParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration): bool
     {
+        if (!$request->get(self::PARAMETER_VERSION_NO) || !$request->get(self::PARAMETER_CONTENT_ID)) {
+            return false;
+        }
+
         $versionNo = (int)$request->get(self::PARAMETER_VERSION_NO);
         $contentId = (int)$request->get(self::PARAMETER_CONTENT_ID);
 
