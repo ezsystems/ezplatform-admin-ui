@@ -47,7 +47,7 @@
             {% if is_draft %}
                 <td>
                     <a href="{{ path('ez_content_draft_edit', { 'contentId': version.contentInfo.id, 'versionNo': version.versionNo, 'language': version.translations[0].languageCode }) }}"
-                       class="btn btn-icon" title="{{ 'tab.versions.table.action.draft.delete'|trans|desc('Delete Draft Version') }}">
+                       class="btn btn-icon" title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}">
                         <svg class="ez-icon ez-icon-edit">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                         </svg>
@@ -57,7 +57,7 @@
             {% if is_archived %}
                 <td>
                     <button class="btn btn-icon ez-btn--content-edit"
-                            title="{{ 'tab.versions.table.action.archived.delete'|trans|desc('Delete Archived Version') }}"
+                            title="{{ 'tab.versions.table.action.archived.edit'|trans|desc('Restore Archived Version') }}"
                             data-content-id="{{ version.contentInfo.id }}"
                             data-version-no="{{ version.versionNo }}"
                             data-language-code="{{ version.initialLanguageCode }}">

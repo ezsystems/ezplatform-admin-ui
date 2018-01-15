@@ -411,15 +411,15 @@
         <target state="new">Published version</target>
         <note>key: tab.versions.published_version</note>
       </trans-unit>
-      <trans-unit id="628c74bcc6328324ea1c084c8bbe686f7e572c16" resname="tab.versions.table.action.archived.delete">
-        <source>Delete Archived Version</source>
-        <target state="new">Delete Archived Version</target>
-        <note>key: tab.versions.table.action.archived.delete</note>
+      <trans-unit id="d2e707023baa6830915c5d12b915974d627522e4" resname="tab.versions.table.action.archived.edit">
+        <source>Restore Archived Version</source>
+        <target state="new">Restore Archived Version</target>
+        <note>key: tab.versions.table.action.archived.edit</note>
       </trans-unit>
-      <trans-unit id="f7b4cf0de472a75da3ed9502ef8eedd21a02a266" resname="tab.versions.table.action.draft.delete">
-        <source>Delete Draft Version</source>
-        <target state="new">Delete Draft Version</target>
-        <note>key: tab.versions.table.action.draft.delete</note>
+      <trans-unit id="97721a4a6c33834bb6421c29ef72e8654f39a4ab" resname="tab.versions.table.action.draft.edit">
+        <source>Edit Draft</source>
+        <target state="new">Edit Draft</target>
+        <note>key: tab.versions.table.action.draft.edit</note>
       </trans-unit>
       <trans-unit id="4c27637d649c221e58c6a9629f14a2f75aeed151" resname="tab.versions.table.contributor">
         <source>Contributor</source>
