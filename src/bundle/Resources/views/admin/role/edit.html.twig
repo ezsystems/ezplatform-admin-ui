@@ -1,5 +1,7 @@
 {% extends 'EzPlatformAdminUiBundle:admin/role:base.html.twig' %}
 
+{% form_theme form '@EzPlatformAdminUi/form_fields.html.twig'  %}
+
 {% trans_default_domain 'role' %}
 
 {% block breadcrumbs_admin %}
@@ -20,7 +22,7 @@
 {% block form %}
     {{ form_start(form, {'attr': {'class': 'update-section'}}) }}
 
-    <section class="container mt-4">
+    <section class="container mt-4 px-5">
         <div class="card ez-card">
             <div class="card-body">
                 {{ form_row(form.identifier) }}
