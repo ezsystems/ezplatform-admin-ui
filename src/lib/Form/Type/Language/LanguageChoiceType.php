@@ -24,12 +24,17 @@ class LanguageChoiceType extends AbstractType
     /** @var LanguageService */
     protected $languageService;
 
+    /** @var array */
+    protected $siteAccessLanguages;
+
     /**
      * @param LanguageService $languageService
+     * @param array $siteAccessLanguages
      */
-    public function __construct(LanguageService $languageService)
+    public function __construct(LanguageService $languageService, array $siteAccessLanguages)
     {
         $this->languageService = $languageService;
+        $this->siteAccessLanguages = $siteAccessLanguages;
     }
 
     public function getParent()
@@ -41,7 +46,27 @@ class LanguageChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choice_loader' => new CallbackChoiceLoader([$this->languageService, 'loadLanguages']),
+                'choice_loader' => new CallbackChoiceLoader(function () {
+                    $saLanguages = [];
+                    $languagesByCode = [];
+
+                    foreach ($this->languageService->loadLanguages() as $language) {
+                        if ($language->enabled) {
+                            $languagesByCode[$language->languageCode] = $language;
+                        }
+                    }
+
+                    foreach ($this->siteAccessLanguages as $languageCode) {
+                        if (!isset($languagesByCode[$languageCode])) {
+                            continue;
+                        }
+
+                        $saLanguages[] = $languagesByCode[$languageCode];
+                        unset($languagesByCode[$languageCode]);
+                    }
+
+                    return array_merge($saLanguages, array_values($languagesByCode));
+                }),
                 'choice_label' => 'name',
                 'choice_name' => 'languageCode',
                 'choice_value' => 'languageCode',

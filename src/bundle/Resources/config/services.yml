@@ -54,6 +54,10 @@ services:
     EzSystems\EzPlatformAdminUi\Form\DataMapper\:
         resource: '../../../lib/Form/DataMapper'
 
+    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType:
+        arguments:
+            $siteAccessLanguages: '$languages$'
+
     EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyChoiceType:
         arguments:
             $policyMap: "%ezpublish.api.role.policy_map%"
