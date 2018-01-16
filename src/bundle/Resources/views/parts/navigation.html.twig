@@ -7,7 +7,8 @@
         </a>
         <div class="collapse navbar-collapse">
             <ul class="nav nav-tabs" role="tablist">
-                {{ knp_menu_render('ezplatform_admin_ui.menu.main', {
+                {% set main_menu = knp_menu_get('ezplatform_admin_ui.menu.main', [], {'location': location is defined ? location : null, 'content': content is defined ? content : null}) %}
+                {{ knp_menu_render(main_menu, {
                     'depth': 1,
                     'template': '@EzPlatformAdminUi/parts/menu/top_menu.html.twig',
                     'currentClass': 'active',
