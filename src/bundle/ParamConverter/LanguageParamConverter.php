@@ -37,6 +37,10 @@ class LanguageParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
+        if (!$request->get(self::PARAMETER_LANGUAGE_ID)) {
+            return false;
+        }
+
         $id = (int)$request->get(self::PARAMETER_LANGUAGE_ID);
 
         $language = $this->languageService->loadLanguageById($id);
