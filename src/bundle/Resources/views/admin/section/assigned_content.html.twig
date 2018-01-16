@@ -37,7 +37,7 @@
                     {% if content.path|length > 1 %}
                         {% for location in content.path %}
                             {% if loop.revindex > 1 %}
-                                <a href="{{ path(location) }}">
+                                <a href="{{ path('_ezpublishLocation', {'locationId': location.id}) }}">
                                     {{ ez_content_name(location.contentInfo) }}
                                 </a>
 
