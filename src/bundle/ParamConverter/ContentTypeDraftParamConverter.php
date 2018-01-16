@@ -34,6 +34,10 @@ class ContentTypeDraftParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
+        if (!$request->get(self::PARAMETER_CONTENT_TYPE_ID)) {
+            return false;
+        }
+
         $id = (int)$request->get(self::PARAMETER_CONTENT_TYPE_ID);
 
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($id);

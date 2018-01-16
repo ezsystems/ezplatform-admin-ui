@@ -39,6 +39,10 @@ class SectionParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
+        if (!$request->get(self::PARAMETER_SECTION_ID)) {
+            return false;
+        }
+
         $id = (int)$request->get(self::PARAMETER_SECTION_ID);
 
         $section = $this->sectionService->loadSection($id);

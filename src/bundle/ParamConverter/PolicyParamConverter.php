@@ -38,6 +38,10 @@ class PolicyParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
+        if (!$request->get(self::PARAMETER_ROLE_ID) || !$request->get(self::PARAMETER_POLICY_ID)) {
+            return false;
+        }
+
         $roleId = (int)$request->get(self::PARAMETER_ROLE_ID);
 
         $role = $this->roleService->loadRole($roleId);
