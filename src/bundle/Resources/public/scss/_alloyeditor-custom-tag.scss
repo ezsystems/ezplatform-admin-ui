@@ -1,0 +1,21 @@
+.ae-ui {
+    .ae-container {
+        .ez-ae-custom-tag {
+            max-height: 400px;
+            overflow: auto;
+            padding: 1rem;
+
+            .attribute__wrapper {
+                margin-bottom: .5rem;
+            }
+
+            .attribute__label {
+                margin: .5rem 0;
+            }
+
+            .ez-btn-ae--custom-tag {
+                color: $ez-white;
+            }
+        }
+    }
+}

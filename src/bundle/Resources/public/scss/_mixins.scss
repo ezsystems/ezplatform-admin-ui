@@ -62,7 +62,6 @@
         background-color: $ez-color-base-pale;
         margin-left: calc((#{$size} + .25rem) / 2);
         cursor: pointer;
-        z-index: 1;
 
         input {
             opacity: 0;
