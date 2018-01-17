@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\UserService;
 use Pagerfanta\Pagerfanta;
 
@@ -51,11 +52,17 @@ class PagerContentToDataMapper
         foreach ($pager as $content) {
             $contentInfo = $this->contentService->loadContentInfo($content->id);
 
+            try {
+                $contributor = $this->userService->loadUser($contentInfo->ownerId);
+            } catch (NotFoundException $e) {
+                $contributor = null;
+            }
+
             $data[] = [
                 'contentId' => $content->id,
                 'name' => $contentInfo->name,
                 'language' => $contentInfo->mainLanguageCode,
-                'contributor' => $this->userService->loadUser($contentInfo->ownerId),
+                'contributor' => $contributor,
                 'version' => $content->versionInfo->versionNo,
                 'type' => $this->contentTypeService->loadContentType($contentInfo->contentTypeId)->getName(),
                 'modified' => $content->versionInfo->modificationDate,
