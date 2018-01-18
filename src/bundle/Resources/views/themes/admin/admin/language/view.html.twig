@@ -1,0 +1,89 @@
+{% extends "@ezdesign/layout.html.twig" %}
+
+{% form_theme deleteForm '@ezdesign/form_fields.html.twig'  %}
+
+{% trans_default_domain 'language' %}
+
+{% block body_class %}ez-language-view{% endblock %}
+
+{% block breadcrumbs %}
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.language.list'), value: 'language.list'|trans|desc('Languages') },
+        { value: 'language.view.identifier'|trans({ '%language%': language.name })|desc('%language%') }
+    ]} %}
+{% endblock %}
+
+{% block title %}{{ 'language.view.title.identifier'|trans({ '%language%': language.name })|desc('Language "%language%"') }}{% endblock %}
+
+{% block page_title %}
+    {% include '@ezdesign/parts/page_title.html.twig' with {
+        title: 'language.view.title.identifier'|trans({ '%language%': language.name })|desc('Language "%language%"'),
+        iconName: 'languages'
+    } %}
+{% endblock %}
+
+{% block content %}
+    <section class="container mt-4 px-5">
+        <header class="ez-table-header round">
+            <h5>{{ 'language.information.header'|trans|desc('Language information') }}</h5>
+
+            <div>
+                {{ form_start(deleteForm, {"action": path("ezplatform.language.delete", {"languageId": language.id, "redirectErrorsTo": "view"})}) }}
+
+                {{ form_widget(deleteForm.language) }}
+                <button type="button"
+                        class="btn btn-danger"
+                        data-toggle="modal"
+                        title="{{ 'language.delete'|trans|desc('Delete Language') }}"
+                        data-target="#delete-language-modal">
+                    <svg class="ez-icon">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                    </svg>
+                </button>
+
+                {% include '@ezdesign/admin/language/delete_confirmation_modal.html.twig' with {'deleteForm': deleteForm} %}
+
+                {{ form_end(deleteForm) }}
+            </div>
+        </header>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'language.name.label'|trans|desc('Name') }}</th>
+                    <th>{{ 'language.code.label'|trans|desc('Language code') }}</th>
+                    <th>{{ 'language.id.label'|trans|desc('ID') }}</th>
+                    <th>{{ 'language.enabled.label'|trans|desc('Enabled') }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ language.name }}</td>
+                    <td>{{ language.languageCode }}</td>
+                    <td>{{ language.id }}</td>
+                    <td>
+                        <input type="checkbox" disabled
+                            {% if language.enabled %}
+                                checked title="{{ 'language.enabled'|trans|desc('Enabled') }}"
+                            {% else %}
+                                title="{{ 'language.disabled'|trans|desc('Disabled') }}"
+                            {% endif %}>
+                    </td>
+                    <td class="text-center">
+                        <a href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
+                           class="btn btn-icon"
+                           title="{{ 'language.edit'|trans|desc('Edit') }}"
+                           {% if not canEdit %} data-disabled{% endif %}>
+                            <svg class="ez-icon ez-icon-edit">
+                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+{% endblock %}
+

@@ -130,7 +130,7 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
         ];
 
         return $this->twig->render(
-            '@EzPlatformAdminUi/content/tab/versions/tab.html.twig',
+            '@ezdesign/content/tab/versions/tab.html.twig',
             array_merge($viewParameters, $parameters)
         );
     }

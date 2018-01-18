@@ -29,7 +29,7 @@ class SystemInfoController extends Controller
      */
     public function infoAction(): Response
     {
-        return $this->render('@EzPlatformAdminUi/admin/systeminfo/info.html.twig', [
+        return $this->render('@ezdesign/admin/systeminfo/info.html.twig', [
             'collector_identifiers' => $this->collectorRegistry->getIdentifiers(),
         ]);
     }

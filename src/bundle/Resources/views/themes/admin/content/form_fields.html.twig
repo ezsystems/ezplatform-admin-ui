@@ -1,0 +1,113 @@
+{% use 'bootstrap_4_layout.html.twig' %}
+
+{# specific fieldtypes theming #}
+{% use '@ezdesign/fieldtypes/edit/ezauthor.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezboolean.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezdatetime.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezrichtext.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezselection.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/eztime.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezdate.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezmedia.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezimage.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezbinaryfile.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezkeyword.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezgmaplocation.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezobjectrelationlist.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezobjectrelation.html.twig' %}
+{% use '@ezdesign/fieldtypes/edit/ezuser.html.twig' %}
+
+{% trans_default_domain 'content_edit' %}
+
+{# general content editing theming #}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <em class="ez-field-edit__error">{{ error.message }}</em>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock -%}
+
+{% block form_row -%}
+    {% set is_fieldtype = form.parent.vars.value.fieldDefinition.fieldTypeIdentifier is defined %}
+
+    {% if is_fieldtype %}
+        {{ block('form_row_fieldtype') }}
+    {% else %}
+        {{ block('form_row_subfield') }}
+    {% endif %}
+{%- endblock %}
+
+{% block form_row_subfield -%}
+    {% set wrapper_class = 'ez-data-source__field ez-data-source__field--' ~ name %}
+    {% set wrapper_class = wrapper_class|replace({'___name___': name}) %}
+    {% if required %}{% set wrapper_class = (wrapper_class ~ ' ez-data-source__field--required')|trim %}{% endif %}
+    {% if errors|length > 0 %}{% set wrapper_class = (wrapper_class|default('') ~ ' is-invalid')|trim %}{% endif %}
+
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ez-data-source__label')|trim}) %}
+    {% set label_wrapper_attr = label_wrapper_attr|default({})|merge({'class': (label_wrapper_attr.class|default('') ~ ' ez-data-source__label-wrapper')|trim}) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-data-source__input')|trim}) %}
+    {% set wrapper_attr = wrapper_attr|default({})|merge({class: (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
+    {% set widget_wrapper_attr = widget_wrapper_attr|default({})|merge({class: (widget_wrapper_attr.class|default('') ~ ' ez-data-source__input-wrapper')|trim}) %}
+
+    <div{% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+        <div{% with { attr: label_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+            {{- block('form_label') }}
+            {{- block('form_errors') -}}
+        </div>
+        <div{% with { attr: widget_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+            {{- form_widget(form, {'attr': attr}) -}}
+        </div>
+    </div>
+{%- endblock %}
+
+{% block form_row_fieldtype %}
+    {% set fieldtype = form.parent %}
+    {% set fieldtype_identifier = fieldtype.vars.value.fieldDefinition.fieldTypeIdentifier %}
+    {% set translation_mode = fieldtype.vars.mainLanguageCode != fieldtype.vars.languageCode %}
+    {% set fieldtype_is_not_translatable = translation_mode and not fieldtype.vars.value.fieldDefinition.isTranslatable %}
+
+    {% set widget_wrapper_attr = widget_wrapper_attr|default({})|merge({'class': (widget_wrapper_attr.class|default('') ~ ' ez-field-edit__data')|trim}) %}
+    {% set wrapper_class = 'ez-field-edit ez-field-edit--' ~ fieldtype_identifier %}
+    {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ez-field-edit--required')|trim %}{% endif %}
+    {% if errors|length > 0 %}{% set wrapper_class = (wrapper_class|default('') ~ ' is-invalid')|trim %}{% endif %}
+    {% if fieldtype_is_not_translatable %}
+        {% set wrapper_class = (wrapper_class|default('') ~ ' ez-field-edit--nontranslatable')|trim %}
+        {% set attr = attr|merge({'readonly': 'readonly'}) %}
+    {% endif %}
+
+    {% set label_wrapper_attr = label_wrapper_attr|default({})|merge({'class': (label_wrapper_attr.class|default('') ~ 'ez-field-edit__label-wrapper')|trim}) %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ez-field-edit__label')|trim}) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-data-source__input')|trim}) %}
+    {% set wrapper_attr = wrapper_attr|default({})|merge({'class': (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
+
+    <div{% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+        <div{% with { attr: label_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+            {{ block('form_label') }}
+            {{ block('form_errors') }}
+        </div>
+
+        {% if widget_container_block is defined %}
+            {{ widget_container_block|raw }}
+        {% else %}
+            <div{% with { attr: widget_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+                <div class="ez-data-source">
+                    {{- form_widget(form, {'attr': attr}) -}}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if fieldtype_is_not_translatable %}
+            <p class="ez-field-edit__nontranslatable text-secondary">{{ 'fieldtype.translation_is_disabled'|trans({'%fieldName%': label})|desc('Translation for %fieldName% is disabled') }}</p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{%- block form_widget_compound -%}
+    {%- if form.parent is empty -%}
+        {{ form_errors(form) }}
+    {%- endif -%}
+    {{- block('form_rows') -}}
+    {{- form_rest(form) -}}
+{%- endblock form_widget_compound -%}

@@ -1,0 +1,38 @@
+{% extends '@ezdesign/layout.html.twig' %}
+
+{% trans_default_domain 'dashboard' %}
+
+{% block body_class %}ez-dashboard{% endblock %}
+
+{% block content %}
+    <div class="row align-items-stretch ez-main-row ez-dashboard-row">
+        {% block left_sidebar %}{% endblock left_sidebar %}
+        <div class="container-fluid ez-header">
+            <div class="col-sm-12">
+                <div class="container">
+                    <h1 class="py-3">My dashboard</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="container">
+                {{ ezplatform_admin_ui_component_group('dashboard-blocks') }}
+            </div>
+        </div>
+        {{ form_start(form_edit, {
+            'action': path('ezplatform.content.edit'),
+            'attr': { 'class': 'ez-edit-content-form'}
+        }) }}
+        {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
+        {{ form_end(form_edit) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {%  javascripts
+        'bundles/ezplatformadminui/js/scripts/udw/browse.js'
+        'bundles/ezplatformadminui/js/scripts/button.content.edit.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

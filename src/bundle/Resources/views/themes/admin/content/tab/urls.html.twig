@@ -1,0 +1,67 @@
+{% trans_default_domain 'locationview' %}
+
+{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.urls.custom_url_aliases'|trans({'%contentName%' : ez_content_name(content)})|desc('Custom URL aliases for %contentName%') } %}
+
+{% if custom_urls is not empty %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>{{ 'tab.urls.url'|trans|desc('URL') }}</th>
+            <th>{{ 'tab.urls.language'|trans|desc('Language') }}</th>
+            <th>{{ 'tab.urls.type'|trans|desc('Type') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for custom_url in custom_urls %}
+            <tr>
+                <td></td>
+                <td>{{ custom_url.path }}</td>
+                <td>
+                    {% for languageCode in custom_url.languageCodes %}{{ languageCode }}<br>{% endfor %}
+                </td>
+                <td>
+                    {% if custom_url.forward %}
+                        {{ 'tab.urls.type.redirect'|trans|desc('Redirect') }}
+                    {% else %}
+                        {{ 'tab.urls.type.direct'|trans|desc('Direct') }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="ez-table-no-content">
+        {{ 'tab.urls.no_custom_urls'|trans|desc('This content item has no custom url aliases.') }}
+    </p>
+{% endif %}
+
+{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.urls.system.title'|trans|desc('System URL') } %}
+
+{% if system_urls is defined %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>{{ 'tab.urls.url'|trans|desc('URL') }}</th>
+            <th>{{ 'tab.urls.language'|trans|desc('Language') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for system_url in system_urls %}
+            <tr>
+                <td>{{ system_url.path }}</td>
+                <td>
+                    {% for languageCode in system_url.languageCodes %}{{ languageCode }}<br>{% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="ez-table-no-content">
+        {{ 'tab.urls.no_system_urls'|trans|desc('This content item has no system urls.') }}
+    </p>
+{% endif %}
+
+

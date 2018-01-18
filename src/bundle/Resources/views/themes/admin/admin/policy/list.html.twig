@@ -1,0 +1,98 @@
+{% trans_default_domain 'role' %}
+
+{% form_theme form_policies_delete '@ezdesign/form_fields.html.twig'  %}
+
+<section class="container mt-4 px-5">
+    <div class="ez-table-header">
+        <div class="ez-table-header__headline">{{ 'policy.view.list.title.count'|trans({'%count%': role.policies|length})|desc('Policies (%count%)') }}</div>
+        <div>
+            <a title="{{ 'policy.view.list.action.add'|trans|desc('Add a new Policy') }}"
+               href="{{ path('ezplatform.policy.create', {roleId: role.id}) }}"
+               class="btn btn-primary">
+                <svg class="ez-icon ez-icon-create">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                </svg>
+            </a>
+            {% set modal_data_target = 'delete-policies-modal' %}
+            <button id="delete-policies" type="button" class="btn btn-danger" disabled data-toggle="modal"
+                    data-target="#{{ modal_data_target }}" title="{{ 'policy.view.list.action.delete'|trans|desc('Delete Policy') }}">
+                <svg class="ez-icon ez-icon-trash">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                </svg>
+            </button>
+            {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
+            'id': modal_data_target,
+            'message': 'policy.modal.message'|trans|desc('Do you want to delete Policy?'),
+            'data_click': '#policies_delete_delete',
+            }%}
+        </div>
+    </div>
+    {{ form_start(form_policies_delete, {
+        'action': path('ezplatform.policy.bulk_delete', {"roleId": role.id} ),
+        'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-policies' }
+    }) }}
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>{{ 'policy.view.list.panel.policies.column.module'|trans|desc('Module') }}</th>
+            <th>{{ 'policy.view.list.panel.policies.column.function'|trans|desc('Function') }}</th>
+            <th>{{ 'role_assignment.view.list.panel.assignments.column.limitations'|trans|desc('Limitations') }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for policy in pager.currentPageResults %}
+            <tr>
+                <td class="ez-checkbox-cell">{{ form_widget(form_policies_delete.policies[policy.id]) }}</td>
+                <td>{{ policy.module|capitalize }}</td>
+                <td>{{ policy.function|capitalize }}</td>
+                <td>
+                    {%- if policy.limitations is not empty -%}
+                        <ul class="list-unstyled">
+                            {%- for limitation in policy.limitations -%}
+                                <li>
+                                    <span class="font-weight-bold" title="{{ 'policy.limitation.identifier_tooltip'|trans({'%identifier%': limitation.identifier})|desc('"%identifier%" Limitation') }}">
+                                        {{ ('policy.limitation.identifier.' ~ limitation.identifier|lower)|trans({'%identifier%': limitation.identifier}, 'ezrepoforms_policies')|desc('%identifier%') }}:
+                                    </span>
+                                    {{ ez_render_limitation_value(limitation) }}
+                                </li>
+                            {%- endfor -%}
+                        </ul>
+                    {%- else -%}
+                        {{- 'policy.limitation.none'|trans|desc('None') -}}
+                    {%- endif -%}
+                </td>
+                <td class="text-right">
+                    <a title="{{ 'policy.view.list.panel.policies.action.edit'|trans|desc('Edit') }}"
+                       href="{{ path('ezplatform.policy.update', { roleId: role.id, policyId: policy.id }) }}" class="btn btn-icon mx-3{{ not is_editable[policy.id] ? ' disabled' : '' }}">
+                        <svg class="ez-icon ez-icon-edit">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                        </svg>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ form_end(form_policies_delete) }}
+
+    {% if pager.haveToPaginate %}
+        <div class="row justify-content-center align-items-center mb-2">
+                <span>
+                    {{ 'pagination.viewing'|trans({
+                        '%viewing%': pager.currentPageResults|length,
+                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                </span>
+        </div>
+        <div class="row justify-content-center align-items-center">
+            {{ pagerfanta(pager, 'ez',{
+                'routeName': route_name,
+                'routeParams': {'_fragment': 'policies', 'roleId': role.id},
+                'pageParameter': '[policyPage]',
+            }) }}
+        </div>
+    {% endif %}
+</section>

@@ -150,7 +150,7 @@ class SectionController extends Controller
             $deletableSections[$section->id] = !$this->sectionService->isSectionUsed($section);
         }
 
-        return $this->render('@EzPlatformAdminUi/admin/section/list.html.twig', [
+        return $this->render('@ezdesign/admin/section/list.html.twig', [
             'can_edit' => $this->isGranted(new Attribute('section', 'edit')),
             'can_assign' => $this->isGranted(new Attribute('section', 'assign')),
             'pager' => $pagerfanta,
@@ -172,7 +172,7 @@ class SectionController extends Controller
             new SectionDeleteData($section)
         )->createView();
 
-        return $this->render('@EzPlatformAdminUi/admin/section/view.html.twig', [
+        return $this->render('@ezdesign/admin/section/view.html.twig', [
             'section' => $section,
             'form_section_delete' => $sectionDeleteForm,
             'deletable' => !$this->sectionService->isSectionUsed($section),
@@ -226,7 +226,7 @@ class SectionController extends Controller
 
         $pagination = (new EzPagerfantaView(new EzPagerfantaTemplate($this->translator)))->render($pagerfanta, $routeGenerator);
 
-        return $this->render('@EzPlatformAdminUi/admin/section/assigned_content.html.twig', [
+        return $this->render('@ezdesign/admin/section/assigned_content.html.twig', [
             'section' => $section,
             'form_section_content_assign' => $sectionContentAssignForm,
             'assigned_content' => $assignedContent,
@@ -398,7 +398,7 @@ class SectionController extends Controller
             }
         }
 
-        return $this->render('@EzPlatformAdminUi/admin/section/create.html.twig', [
+        return $this->render('@ezdesign/admin/section/create.html.twig', [
             'form_section_create' => $form->createView(),
         ]);
     }
@@ -439,7 +439,7 @@ class SectionController extends Controller
             }
         }
 
-        return $this->render('@EzPlatformAdminUi/admin/section/update.html.twig', [
+        return $this->render('@ezdesign/admin/section/update.html.twig', [
             'section' => $section,
             'form_section_update' => $form->createView(),
         ]);

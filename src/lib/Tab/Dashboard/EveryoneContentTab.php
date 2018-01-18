@@ -74,7 +74,7 @@ class EveryoneContentTab extends AbstractTab implements OrderedTabInterface
         $pager->setMaxPerPage($limit);
         $pager->setCurrentPage($page);
 
-        return $this->twig->render('@EzPlatformAdminUi/dashboard/tab/all_content.html.twig', [
+        return $this->twig->render('@ezdesign/dashboard/tab/all_content.html.twig', [
             'data' => $this->pagerContentToDataMapper->map($pager),
         ]);
     }

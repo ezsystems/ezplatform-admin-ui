@@ -1,0 +1,134 @@
+{% extends '@ezdesign/layout.html.twig' %}
+
+{% form_theme form_sections_delete '@ezdesign/form_fields.html.twig'  %}
+{% form_theme form_section_content_assign '@ezdesign/form_fields.html.twig'  %}
+
+{% trans_default_domain 'section' %}
+
+{% block body_class %}ez-section-list-view{% endblock %}
+
+{% block breadcrumbs %}
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { value: 'section.list.title'|trans|desc('Sections') }
+    ]} %}
+{% endblock %}
+
+{% block page_title %}
+    {% include '@ezdesign/parts/page_title.html.twig' with {
+        title: 'section.list.title'|trans|desc('Sections'),
+        iconName: 'sections'
+    } %}
+{% endblock %}
+
+{% block content %}
+    <section class="container mt-4 px-5">
+        <div class="ez-table-header">
+            <div class="ez-table-header__headline">{{ 'section.list.title'|trans|desc('Sections') }}</div>
+            <div>
+                <a title="{{ 'section.new'|trans|desc('Create a new Section') }}"
+                   href="{{ path('ezplatform.section.create') }}"
+                   class="btn btn-primary" {% if not can_edit %} data-disabled{% endif %}>
+                    <svg class="ez-icon ez-icon-create">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                    </svg>
+                </a>
+                {% set modal_data_target = 'delete-sections-modal' %}
+                <button id="delete-sections" type="button" class="btn btn-danger" disabled data-toggle="modal"
+                        data-target="#{{ modal_data_target }}" title="{{ 'section.delete'|trans|desc('Delete Section') }}">
+                    <svg class="ez-icon ez-icon-trash">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                    </svg>
+                </button>
+                {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
+                    'id': modal_data_target,
+                    'message': 'section.modal.message'|trans|desc('Do you want to delete Section?'),
+                    'data_click': '#sections_delete_delete',
+                }%}
+            </div>
+        </div>
+
+        {{ form_start(form_sections_delete, {
+            'action': path('ezplatform.section.bulk_delete'),
+            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-sections' }
+        }) }}
+        <table class="table mb-3">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>{{ 'section.name'|trans|desc('Name') }}</th>
+                    <th>{{ 'section.identifier'|trans|desc('Identifier') }}</th>
+                    <th>{{ 'section.id'|trans|desc('ID') }}</th>
+                    <th>{{ 'section.assigned.content'|trans|desc('Assignments count') }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for section in pager.currentPageResults %}
+                <tr>
+                    <td class="ez-checkbox-cell">
+                        {{ form_widget(form_sections_delete.sections[section.id], {"disabled": not deletable[section.id]}) }}
+                    </td>
+                    <td><a href="{{ path( 'ezplatform.section.view', {'sectionId': section.id} ) }}">{{ section.name }}</a></td>
+                    <td>{{ section.identifier }}</td>
+                    <td>{{ section.id }}</td>
+                    <td>{{ content_count[section.id] }}</td>
+                    <td class="text-right">
+                        <a title="{{ 'section.assign_content'|trans|desc('Assign content') }}"
+                           href="#"
+                           data-section-id="{{ section.id }}"
+                           data-form-action="{{ path("ezplatform.section.assign_content", {"sectionId": section.id}) }}"
+                           class="btn btn-icon mx-3">
+                            <svg class="ez-icon ez-icon-relations ez-icon--secondary btn--open-udw">
+                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-section"></use>
+                            </svg>
+                        </a>
+
+                        {% if can_edit %}
+                            <a title="{{ 'section.edit'|trans|desc('Edit') }}"
+                               href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
+                               class="btn btn-icon mx-3">
+                                <svg class="ez-icon ez-icon-edit">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ form_end(form_sections_delete) }}
+
+        {% if pager.haveToPaginate %}
+            <div class="row justify-content-center align-items-center mb-2">
+                <span>
+                    {{ 'section.viewing'|trans({
+                    '%viewing%': pager.currentPageResults|length,
+                    '%total%': pager.nbResults})|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                </span>
+            </div>
+            <div class="row justify-content-center align-items-center">
+                {{ pagerfanta(pager, 'ez') }}
+            </div>
+        {% endif %}
+
+        {{ form_start(form_section_content_assign, {
+            'attr': {'class': 'd-inline-block'}
+        }) }}
+        {{ form_widget(form_section_content_assign.locations.select_content, {'attr': {'hidden': 'hidden'}}) }}
+        {{ form_widget(form_section_content_assign.locations.location, {'label': false}) }}
+        {{ form_end(form_section_content_assign) }}
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {%  javascripts
+        'bundles/ezplatformadminui/js/scripts/admin.section.list.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

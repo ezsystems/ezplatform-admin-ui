@@ -1,0 +1,117 @@
+{% extends "@ezdesign/layout.html.twig" %}
+
+{% trans_default_domain 'trash' %}
+
+{% block page_title %}{% endblock %}
+
+{% form_theme form_trash_item_restore '@ezdesign/form_fields.html.twig' %}
+
+{% block body_class %}ez-trash-list-view{% endblock %}
+
+{% block content %}
+    <div class="row align-items-stretch ez-main-row">
+
+        {% block left_sidebar %}
+            {{ parent() }}
+        {% endblock left_sidebar %}
+
+        <div class="col-sm-10 px-0">
+            <section class="container mt-5">
+                {% include '@ezdesign/parts/page_title.html.twig' with { title: 'trash.headline'|trans|desc('Trash'), iconName: 'trash' } %}
+                {{ form_start(form_trash_item_restore, {'action': path('ezplatform.trash.restore')}) }}
+                <div class="px-4">
+                    <div class="ez-table-header mt-3">
+                        <div class="ez-table-header__headline">{{ 'trash.table.header'|trans|desc('Trash') }}</div>
+                        <div>
+                            {% if can_restore and form_trash_item_restore.trash_items is not empty %}
+                                {% set restore_under_new_parent_button_attr = form_trash_item_restore.location.select_content.vars.attr|merge({
+                                    'attr': {
+                                        'class': (form_trash_item_restore.location.select_content.vars.attr.class|default('') ~ ' d-inline-block btn btn-secondary')|trim,
+                                        'disabled': true
+                                    }
+                                }) %}
+                                {{ form_widget(form_trash_item_restore.location.select_content, restore_under_new_parent_button_attr) }}
+                                {{ form_widget(form_trash_item_restore.location.location) }}
+                                {% do form_trash_item_restore.location.setRendered %}
+                                {{ form_widget(form_trash_item_restore.restore, {'attr': {'class': 'btn btn-primary', 'disabled': true}}) }}
+                            {% else %}
+                                {% do form_trash_item_restore.location.setRendered %}
+                                {% do form_trash_item_restore.restore.setRendered %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>{{ 'trash.name'|trans|desc('Name') }}</th>
+                                <th>{{ 'trash.type'|trans|desc('Type') }}</th>
+                                <th>{{ 'trash.original_location'|trans|desc('Original location') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% if trash_items is empty %}
+                            <tr>
+                                <td colspan="4">
+                                    <span class="ez-table-no-content mb-0 py-1 pl-0">{{ 'trash.empty'|trans|desc('Trash is empty. Any content item you send to trash will end up here.') }}</span>
+                                </td>
+                            </tr>
+                        {% else %}
+                            {% for key, form in form_trash_item_restore.trash_items %}
+                                {% set trash_item = trash_items[key] %}
+                                <tr>
+                                    <td>
+                                        {{ form_widget(form, {attr: {
+                                            'data-is-parent-in-trash': trash_item.isParentInTrash() ? '1': '0'
+                                        }}) }}
+                                    </td>
+                                    <td>{{ ez_content_name(trash_item.location.contentInfo) }}</td>
+                                    <td>{{ trash_item.contentType.name }}</td>
+                                    <td>
+                                        {% if not trash_item.parentInTrash %}
+                                            {% include '@ezdesign/parts/path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
+                                        {% else %}
+                                            <em>{{ 'trash.item.ancesor_in_trash'|trans|desc('Ancestor is in the Trash') }}</em>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                    {{ form_widget(form_trash_item_restore._token) }}
+                    {{ form_end(form_trash_item_restore, { 'render_rest': false }) }}
+                </div>
+                {% if pager.haveToPaginate %}
+                    <div class="row justify-content-center align-items-center mb-2">
+                        <span>
+                            {{ 'pagination.viewing'|trans({
+                                '%viewing%': pager.currentPageResults|length,
+                                '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                        </span>
+                    </div>
+                    <div class="row justify-content-center align-items-center">
+                        {{ pagerfanta(pager, 'ez') }}
+                    </div>
+                {% endif %}
+                {% include '@ezdesign/admin/trash/empty_trash_confirmation_modal.html.twig' with {'form': form_trash_empty, 'trash_items_count': pager.nbResults} %}
+            </section>
+        </div>
+        <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
+            <div class="ez-sticky-container">
+                {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
+                {{ knp_menu_render(sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {%  javascripts
+        'bundles/ezplatformadminui/js/scripts/admin.trash.list.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block title %}{{ 'trash'|trans|desc('Trash') }}{% endblock %}
