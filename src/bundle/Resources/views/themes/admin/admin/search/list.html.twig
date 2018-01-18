@@ -1,4 +1,4 @@
-{% extends "@ezdesign/layout.html.twig" %}
+{% extends ezpublish.configResolver.parameter('pagelayout', 'ez_platform_admin_ui') %}
 
 {% trans_default_domain 'search' %}
 

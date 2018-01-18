@@ -1,4 +1,4 @@
-{% extends '@ezdesign/layout.html.twig' %}
+{% extends ezpublish.configResolver.parameter('pagelayout', 'ez_platform_admin_ui') %}
 
 {% block content %}
 <div class="row align-items-stretch ez-main-row">

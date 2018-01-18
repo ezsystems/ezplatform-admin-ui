@@ -5,6 +5,8 @@ parameters:
     ezsettings.admin_group.user_edit.templates.update: '@@ezdesign/content/content_edit/user_edit.html.twig'
     ezsettings.admin_group.user_edit.templates.create: '@@ezdesign/content/content_edit/user_create.html.twig'
 
+    ez_platform_admin_ui.admin_group.pagelayout: '@@ezdesign/layout.html.twig'
+
     ezsettings.global.system_info_view:
         pjax_tab:
             composer:
