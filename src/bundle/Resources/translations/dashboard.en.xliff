@@ -56,6 +56,11 @@
         <target state="new">Contributor</target>
         <note>key: dashboard.table.contributor</note>
       </trans-unit>
+      <trans-unit id="e7790665f417ad7d9479f8b7c0920d212e4e24f6" resname="dashboard.table.contributor.not_found">
+        <source>Can’t fetch contributor</source>
+        <target state="new">Can’t fetch contributor</target>
+        <note>key: dashboard.table.contributor.not_found</note>
+      </trans-unit>
       <trans-unit id="93a5fc53032106ea0ae1658261fd187e5c9c6a94" resname="dashboard.table.draft.edit">
         <source>Edit Draft</source>
         <target state="new">Edit Draft</target>
