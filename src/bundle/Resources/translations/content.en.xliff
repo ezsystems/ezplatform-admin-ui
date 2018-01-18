@@ -16,6 +16,11 @@
         <target state="new">Main location for '%name%' updated.</target>
         <note>key: content.main_location_update.success</note>
       </trans-unit>
+      <trans-unit id="4492a79e25635e7612f98971e02b4d0e6a408394" resname="user.delete.success">
+        <source>User with login '%login%' deleted.</source>
+        <target state="new">User with login '%login%' deleted.</target>
+        <note>key: user.delete.success</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

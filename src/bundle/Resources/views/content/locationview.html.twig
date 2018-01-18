@@ -3,7 +3,6 @@
 {% trans_default_domain 'locationview' %}
 {% form_theme form_location_copy '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
 {% form_theme form_location_move '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
-{% form_theme form_location_trash '@EzPlatformAdminUi/form_fields.html.twig' %}
 {% form_theme form_content_edit '@EzPlatformAdminUi/form_fields.html.twig' %}
 {% form_theme form_content_create '@EzPlatformAdminUi/form_fields.html.twig' %}
 
@@ -72,7 +71,12 @@
                     {% include '@EzPlatformAdminUi/content/widgets/content_edit.html.twig' with {'form': form_content_edit} only %}
                 </div>
             </div>
-            {% include '@EzPlatformAdminUi/content/modal_location_trash.html.twig' with {'form': form_location_trash} only %}
+            {%  if form_location_trash is defined %}
+                {% include '@EzPlatformAdminUi/content/modal_location_trash.html.twig' with {'form': form_location_trash} only %}
+            {% endif %}
+            {%  if form_user_delete is defined %}
+                {% include '@EzPlatformAdminUi/content/modal_user_delete.html.twig' with {'form': form_user_delete} only %}
+            {% endif %}
             {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}
             {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}
         </div>

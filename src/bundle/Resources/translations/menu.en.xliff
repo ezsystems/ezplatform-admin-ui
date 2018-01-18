@@ -16,6 +16,11 @@
         <target state="new">Create</target>
         <note>key: content__sidebar_right__create</note>
       </trans-unit>
+      <trans-unit id="b3937ec2d3ae4980f8ae00ed20818d92bfab3407" resname="content__sidebar_right__delete">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note>key: content__sidebar_right__delete</note>
+      </trans-unit>
       <trans-unit id="c01e10e86b48dd064915bf18551985d47244c191" resname="content__sidebar_right__edit">
         <source>Edit</source>
         <target state="new">Edit</target>

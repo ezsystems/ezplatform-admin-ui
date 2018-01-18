@@ -27,6 +27,9 @@ services:
         arguments:
             $defaultSiteaccess: '%ezpublish.siteaccess.default%'
 
+    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserDeleteController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+
     EzSystems\EzPlatformAdminUiBundle\Controller\TrashController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
