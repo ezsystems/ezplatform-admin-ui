@@ -96,7 +96,7 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
         ];
 
         return $this->twig->render(
-            'EzPlatformAdminUiBundle:content/tab/translations:tab.html.twig',
+            '@EzPlatformAdminUi/content/tab/translations/tab.html.twig',
             array_merge($viewParameters, $parameters)
         );
     }

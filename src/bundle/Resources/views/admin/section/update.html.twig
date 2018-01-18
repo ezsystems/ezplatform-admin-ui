@@ -1,11 +1,11 @@
-{% extends 'EzPlatformAdminUiBundle:admin/section:base.html.twig' %}
+{% extends '@EzPlatformAdminUi/admin/section/base.html.twig' %}
 
 {% form_theme form_section_update '@EzPlatformAdminUi/form_fields.html.twig'  %}
 
 {% trans_default_domain 'section' %}
 
 {% block breadcrumbs_admin %}
-    {% include 'EzPlatformAdminUiBundle:parts:breadcrumbs.html.twig' with { 'items': [
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { 'items': [
         { 'value': 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { 'url': path('ezplatform.section.list'), 'value': 'section.list'|trans|desc('Sections') },
         { 'value': 'section.update.title'|trans({ '%identifier%': section.name })|desc('Editing Section "%identifier%"') }

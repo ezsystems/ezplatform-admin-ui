@@ -11,6 +11,6 @@ system:
             preview_ezobjectrelationlist_row:
                 default:
                     controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
-                    template: '@EzPlatformAdminUi\fieldtypes\preview\ezobjectrelationlist_row.html.twig'
+                    template: '@EzPlatformAdminUi/fieldtypes/preview/ezobjectrelationlist_row.html.twig'
                     match: true
 

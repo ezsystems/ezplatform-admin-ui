@@ -1,4 +1,4 @@
-{% extends "EzPlatformAdminUiBundle::layout.html.twig" %}
+{% extends "@EzPlatformAdminUi/layout.html.twig" %}
 
 {% trans_default_domain 'trash' %}
 
@@ -69,7 +69,7 @@
                                     <td>{{ trash_item.contentType.name }}</td>
                                     <td>
                                         {% if not trash_item.parentInTrash %}
-                                            {% include 'EzPlatformAdminUiBundle:parts:path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
+                                            {% include '@EzPlatformAdminUi/parts/path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
                                         {% else %}
                                             <em>{{ 'trash.item.ancesor_in_trash'|trans|desc('Ancestor is in the Trash') }}</em>
                                         {% endif %}
@@ -94,7 +94,7 @@
                         {{ pagerfanta(pager, 'ez') }}
                     </div>
                 {% endif %}
-                {% include 'EzPlatformAdminUiBundle:admin/trash:empty_trash_confirmation_modal.html.twig' with {'form': form_trash_empty, 'trash_items_count': pager.nbResults} %}
+                {% include '@EzPlatformAdminUi/admin/trash/empty_trash_confirmation_modal.html.twig' with {'form': form_trash_empty, 'trash_items_count': pager.nbResults} %}
             </section>
         </div>
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">

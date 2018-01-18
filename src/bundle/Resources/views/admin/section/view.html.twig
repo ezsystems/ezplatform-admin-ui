@@ -1,4 +1,4 @@
-{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+{% extends '@EzPlatformAdminUi/layout.html.twig' %}
 
 {% trans_default_domain 'section' %}
 
@@ -32,7 +32,7 @@
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
                     </button>
-                    {% include 'EzPlatformAdminUiBundle:admin/section:delete_confirmation_modal.html.twig' with {'form': form_section_delete} %}
+                    {% include '@EzPlatformAdminUi/admin/section/delete_confirmation_modal.html.twig' with {'form': form_section_delete} %}
                 {% else %}
                     <button type="button" class="btn btn-danger disabled" title="{{ 'section.action.delete'|trans|desc('Delete Section') }}">
                         <svg class="ez-icon">

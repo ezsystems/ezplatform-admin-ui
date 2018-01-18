@@ -1,34 +1,34 @@
 parameters:
-    ezsettings.admin_group.content_edit.templates.edit: 'EzPlatformAdminUiBundle:content/content_edit:content_edit.html.twig'
-    ezsettings.admin_group.content_edit.templates.create: 'EzPlatformAdminUiBundle:content/content_edit:content_create.html.twig'
-    ezsettings.admin_group.content_edit.templates.create_draft: 'EzPlatformAdminUiBundle:content/content_edit:content_create_draft.html.twig'
-    ezsettings.admin_group.user_edit.templates.update: 'EzPlatformAdminUiBundle:content/content_edit:user_edit.html.twig'
-    ezsettings.admin_group.user_edit.templates.create: 'EzPlatformAdminUiBundle:content/content_edit:user_create.html.twig'
+    ezsettings.admin_group.content_edit.templates.edit: '@@EzPlatformAdminUi/content/content_edit/content_edit.html.twig'
+    ezsettings.admin_group.content_edit.templates.create: '@@EzPlatformAdminUi/content/content_edit/content_create.html.twig'
+    ezsettings.admin_group.content_edit.templates.create_draft: '@@EzPlatformAdminUi/content/content_edit/content_create_draft.html.twig'
+    ezsettings.admin_group.user_edit.templates.update: '@@EzPlatformAdminUi/content/content_edit/user_edit.html.twig'
+    ezsettings.admin_group.user_edit.templates.create: '@@EzPlatformAdminUi/content/content_edit/user_create.html.twig'
 
     ezsettings.global.system_info_view:
         pjax_tab:
             composer:
-                template: 'EzPlatformAdminUiBundle:admin/systeminfo:composer.html.twig'
+                template: '@@EzPlatformAdminUi/admin/systeminfo/composer.html.twig'
                 match:
                     SystemInfo\Identifier: 'composer'
             database:
-                template: 'EzPlatformAdminUiBundle:admin/systeminfo:database.html.twig'
+                template: '@@EzPlatformAdminUi/admin/systeminfo/database.html.twig'
                 match:
                     SystemInfo\Identifier: 'database'
             hardware:
-                template: 'EzPlatformAdminUiBundle:admin/systeminfo:hardware.html.twig'
+                template: '@@EzPlatformAdminUi/admin/systeminfo/hardware.html.twig'
                 match:
                     SystemInfo\Identifier: 'hardware'
             php:
-                template: 'EzPlatformAdminUiBundle:admin/systeminfo:php.html.twig'
+                template: '@@EzPlatformAdminUi/admin/systeminfo/php.html.twig'
                 match:
                     SystemInfo\Identifier: 'php'
             symfony_kernel:
-                template: 'EzPlatformAdminUiBundle:admin/systeminfo:symfony_kernel.html.twig'
+                template: '@@EzPlatformAdminUi/admin/systeminfo/symfony_kernel.html.twig'
                 match:
                     SystemInfo\Identifier: 'symfony_kernel'
 
-    ezplatform.content_view.tabs.default_template: 'EzPlatformAdminUiBundle:parts/tab:default.html.twig'
+    ezplatform.content_view.tabs.default_template: '@@EzPlatformAdminUi/parts/tab/default.html.twig'
 
     ezplatform.multifile_upload.location.mappings: []
 
