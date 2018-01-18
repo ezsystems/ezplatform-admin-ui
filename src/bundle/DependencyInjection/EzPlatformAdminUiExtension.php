@@ -44,6 +44,7 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
     {
         $this->prependViews($container);
         $this->prependImageVariations($container);
+        $this->prependTwig($container);
     }
 
     /**
@@ -66,5 +67,23 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $config = Yaml::parse(file_get_contents($imageConfigFile));
         $container->prependExtensionConfig('ezpublish', $config);
         $container->addResource(new FileResource($imageConfigFile));
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function prependTwig(ContainerBuilder $container)
+    {
+        // Register templates from the admin theme under @EzPlatformAdminUi namespace
+        // to keep external references to templates working after they were
+        // moved to theme based paths
+        $container->prependExtensionConfig(
+            'twig',
+            [
+                'paths' => [
+                    __DIR__ . '/../Resources/views/themes/admin' => 'EzPlatformAdminUi',
+                ],
+            ]
+        );
     }
 }
