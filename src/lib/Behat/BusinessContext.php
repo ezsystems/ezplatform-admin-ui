@@ -11,6 +11,7 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 
 abstract class BusinessContext implements Context
 {
+    /** @var UtilityContext */
     protected $utilityContext;
 
     /** @BeforeScenario

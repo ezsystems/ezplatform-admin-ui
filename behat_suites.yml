@@ -11,3 +11,4 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\UtilityContext
                 - EzSystems\EzPlatformAdminUi\Behat\AuthenticationContext
                 - EzSystems\EzPlatformAdminUi\Behat\NavigationContext
+                - EzSystems\EzPlatformAdminUi\Behat\Hooks

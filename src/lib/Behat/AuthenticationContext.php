@@ -11,6 +11,8 @@ use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 
 class AuthenticationContext extends BusinessContext
 {
+    private $userPasswords = ['admin' => 'publish', 'jessica' => 'publish', 'yura' => 'publish', 'anil' => 'publish'];
+
     /**
      * @When I login as :username with password :password
      *
@@ -20,6 +22,25 @@ class AuthenticationContext extends BusinessContext
     public function iLoginAs(string $username, string $password): void
     {
         $loginPage = PageObjectFactory::createPage($this->utilityContext, LoginPage::PAGE_NAME);
+        $loginPage->login($username, $password);
+    }
+
+    /**
+     * @Given I am logged as :username
+     *
+     * @param string $username
+     */
+    public function iAmLoggedAs(string $username)
+    {
+        $loginPage = PageObjectFactory::createPage($this->utilityContext, LoginPage::PAGE_NAME);
+        $loginPage->open();
+
+        if (!\in_array($username, $this->userPasswords, true))
+        {
+            // throw;
+        }
+
+        $password = $this->userPasswords[$username];
         $loginPage->login($username, $password);
     }
 }
