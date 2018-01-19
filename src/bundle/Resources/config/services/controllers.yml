@@ -64,3 +64,4 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.version_draft_limit$'
+            $siteAccessLanguages: '$languages$'

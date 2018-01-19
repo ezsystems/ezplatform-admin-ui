@@ -30,6 +30,13 @@ services:
         tags:
             - { name: 'request.param_converter' }
 
+    EzSystems\EzPlatformAdminUiBundle\ParamConverter\ContentTypeParamConverter:
+        public: true
+        arguments:
+            $siteAccessLanguages: '$languages$'
+        tags:
+            - { name: 'request.param_converter' }
+
     EzSystems\EzPlatformAdminUi\EventListener\:
         resource: "../../../lib/EventListener/*"
         public: true

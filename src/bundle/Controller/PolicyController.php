@@ -166,6 +166,27 @@ class PolicyController extends Controller
 
     public function updateAction(Request $request, Role $role, Policy $policy): Response
     {
+        $limitationTypes = $policy->module
+            ? $this->roleService->getLimitationTypesByModuleFunction($policy->module, $policy->function)
+            : [];
+
+        $isEditable = !empty($limitationTypes);
+
+        if (!$isEditable) {
+            $this->notificationHandler->error(
+                $this->translator->trans(
+                    /** @Desc("Policy type '%policy%' does not contain limitations.") */
+                    'policy.edit.no_limitations',
+                    ['%policy%' => $policy->module . '/' . $policy->function],
+                    'role'
+                )
+            );
+
+            return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
+                'roleId' => $role->id,
+            ]));
+        }
+
         $form = $this->formFactory->updatePolicy(
             new PolicyUpdateData($policy)
         );
