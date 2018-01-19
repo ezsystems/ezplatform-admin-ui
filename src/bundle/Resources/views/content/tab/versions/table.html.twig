@@ -36,6 +36,8 @@
             <td>
                 {% if version.author is not empty %}
                     {{ ez_content_name(version.author) }}
+                {% else %}
+                    {{ 'tab.versions.table.author.not_found'|trans|desc('Can’t fetch contributor') }}
                 {% endif %}
             </td>
             <td>

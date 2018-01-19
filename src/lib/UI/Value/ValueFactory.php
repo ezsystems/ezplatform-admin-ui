@@ -21,6 +21,7 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Relation;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
+use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
 use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
@@ -97,8 +98,11 @@ class ValueFactory
         $translationsDataset = $this->datasetFactory->translations();
         $translationsDataset->load($versionInfo);
 
+        $author = (new UserExists($this->userService))->isSatisfiedBy($versionInfo->creatorId)
+            ? $this->userService->loadUser($versionInfo->creatorId) : null;
+
         return new UIValue\Content\VersionInfo($versionInfo, [
-            'author' => $this->userService->loadUser($versionInfo->creatorId),
+            'author' => $author,
             'translations' => $translationsDataset->getTranslations(),
         ]);
     }
