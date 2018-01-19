@@ -236,6 +236,11 @@
         <target state="new">Delete permanently</target>
         <note>key: trash_empty_form.empty</note>
       </trans-unit>
+      <trans-unit id="7fb1cbcd94553ff377f8e1e4461246af38e14e85" resname="user_delete_form.delete">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note>key: user_delete_form.delete</note>
+      </trans-unit>
       <trans-unit id="3b2ae7aa286887e2fbd2b6e77ca237f9f9109e9b" resname="version_remove_form.remove">
         <source>Remove version</source>
         <target state="new">Remove version</target>

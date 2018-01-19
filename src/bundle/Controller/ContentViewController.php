@@ -9,13 +9,16 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
+use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,6 +40,9 @@ class ContentViewController extends Controller
     /** @var SubitemsContentViewParameterSupplier */
     private $subitemsContentViewParameterSupplier;
 
+    /** @var UserService */
+    private $userService;
+
     /** @var int */
     private $defaultPaginationLimit;
 
@@ -46,6 +52,7 @@ class ContentViewController extends Controller
      * @param PathService $pathService
      * @param FormFactory $formFactory
      * @param SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier
+     * @param UserService $userService
      * @param int $defaultPaginationLimit
      */
     public function __construct(
@@ -54,6 +61,7 @@ class ContentViewController extends Controller
         PathService $pathService,
         FormFactory $formFactory,
         SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier,
+        UserService $userService,
         int $defaultPaginationLimit
     ) {
         $this->contentTypeService = $contentTypeService;
@@ -61,6 +69,7 @@ class ContentViewController extends Controller
         $this->pathService = $pathService;
         $this->formFactory = $formFactory;
         $this->subitemsContentViewParameterSupplier = $subitemsContentViewParameterSupplier;
+        $this->userService = $userService;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
@@ -126,10 +135,6 @@ class ContentViewController extends Controller
             new LocationMoveData($location)
         );
 
-        $locationTrashType = $this->formFactory->trashLocation(
-            new LocationTrashData($location)
-        );
-
         $contentEditType = $this->formFactory->contentEdit(
             new ContentEditData($content->contentInfo, $versionInfo)
         );
@@ -146,11 +151,28 @@ class ContentViewController extends Controller
         $view->addParameters([
             'form_location_copy' => $locationCopyType->createView(),
             'form_location_move' => $locationMoveType->createView(),
-            'form_location_trash' => $locationTrashType->createView(),
             'form_content_edit' => $contentEditType->createView(),
             'form_content_create' => $contentCreateType->createView(),
             'form_subitems_content_edit' => $subitemsContentEdit->createView(),
         ]);
+
+        if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
+            $userDeleteType = $this->formFactory->deleteUser(
+                new UserDeleteData($content->contentInfo)
+            );
+
+            $view->addParameters([
+                'form_user_delete' => $userDeleteType->createView(),
+            ]);
+        } else {
+            $locationTrashType = $this->formFactory->trashLocation(
+                new LocationTrashData($location)
+            );
+
+            $view->addParameters([
+                'form_location_trash' => $locationTrashType->createView(),
+            ]);
+        }
     }
 
     /**
