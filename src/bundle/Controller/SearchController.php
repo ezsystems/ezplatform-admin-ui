@@ -99,13 +99,7 @@ class SearchController extends Controller
                 $queryString = $data->getQuery();
 
                 $query = new Query();
-                $query->filter = new Criterion\LogicalAnd(
-                    [
-                        new Criterion\Visibility(Criterion\Visibility::VISIBLE),
-                        new Criterion\FullText($queryString),
-                    ]
-                );
-
+                $query->filter = new Criterion\FullText($queryString);
                 $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
 
                 $pagerfanta = new Pagerfanta(
