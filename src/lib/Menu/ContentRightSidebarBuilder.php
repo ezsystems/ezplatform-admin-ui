@@ -8,15 +8,18 @@ namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use eZ\Publish\API\Repository\UserService;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Location View contextual sidebar menu.
@@ -31,6 +34,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     const ITEM__SEND_TO_TRASH = 'content__sidebar_right__send_to_trash';
     const ITEM__COPY = 'content__sidebar_right__copy';
     const ITEM__MOVE = 'content__sidebar_right__move';
+    const ITEM__DELETE = 'content__sidebar_right__delete';
 
     /** @var PermissionResolver */
     private $permissionResolver;
@@ -38,22 +42,28 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var ConfigResolverInterface */
     private $configResolver;
 
+    /** @var UserService */
+    private $userService;
+
     /**
      * @param MenuItemFactory $factory
      * @param EventDispatcherInterface $eventDispatcher
      * @param PermissionResolver $permissionResolver
      * @param ConfigResolverInterface $configResolver
+     * @param UserService $userService
      */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
         PermissionResolver $permissionResolver,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        UserService $userService
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
+        $this->userService = $userService;
     }
 
     /**
@@ -79,6 +89,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $location = $options['location'];
         /** @var ContentType $contentType */
         $contentType = $options['content_type'];
+        /** @var Content $content */
+        $content = $options['content'];
         /** @var ItemInterface|ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
         $canCreate = $this->permissionResolver->hasAccess('content', 'create')
@@ -87,6 +99,11 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'content',
             'edit',
             $location->getContentInfo()
+        );
+        $canDelete = $this->permissionResolver->canUser(
+            'content',
+            'delete',
+            $options['content']
         );
 
         $createAttributes = [
@@ -97,6 +114,10 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $editAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--edit',
             'data-actions' => 'edit',
+        ];
+        $deleteAttributes = [
+                'data-toggle' => 'modal',
+                'data-target' => '#delete-user-modal',
         ];
 
         $menu->setChildren([
@@ -142,17 +163,34 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     ],
                 ]
             ),
-            self::ITEM__SEND_TO_TRASH => $this->createMenuItem(
-                self::ITEM__SEND_TO_TRASH,
-                [
-                    'extras' => ['icon' => 'trash-send'],
-                    'attributes' => [
-                        'data-toggle' => 'modal',
-                        'data-target' => '#trash-location-modal',
-                    ],
-                ]
-            ),
         ]);
+
+        if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
+            $menu->addChild(
+                $this->createMenuItem(
+                    self::ITEM__DELETE,
+                    [
+                        'extras' => ['icon' => 'trash'],
+                        'attributes' => $canDelete
+                            ? $deleteAttributes
+                            : array_merge($deleteAttributes, ['disabled' => 'disabled']),
+                    ]
+                )
+            );
+        } else {
+            $menu->addChild(
+                $this->createMenuItem(
+                    self::ITEM__SEND_TO_TRASH,
+                    [
+                        'extras' => ['icon' => 'trash-send'],
+                        'attributes' => [
+                            'data-toggle' => 'modal',
+                            'data-target' => '#trash-location-modal',
+                        ],
+                    ]
+                )
+            );
+        }
 
         if (1 === $location->depth) {
             $menu[self::ITEM__SEND_TO_TRASH]->setAttribute('disabled', 'disabled');
@@ -173,6 +211,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             (new Message(self::ITEM__SEND_TO_TRASH, 'menu'))->setDesc('Send to Trash'),
             (new Message(self::ITEM__COPY, 'menu'))->setDesc('Copy'),
             (new Message(self::ITEM__MOVE, 'menu'))->setDesc('Move'),
+            (new Message(self::ITEM__DELETE, 'menu'))->setDesc('Delete'),
         ];
     }
 }

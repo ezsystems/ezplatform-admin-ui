@@ -17,8 +17,11 @@
                 <td><a href="{{ url('_ez_content_view', { 'contentId': row.contentId }) }}">{{ row.name }}</a></td>
                 <td>{{ row.type }}</td>
                 <td>
-                    {{ ez_render_field(row.contributor, 'first_name') }}
-                    {{ ez_render_field(row.contributor, 'last_name') }}
+                    {% if row.contributor is not null %}
+                        {{ row.contributor.name }}
+                    {% else %}
+                        {{ 'dashboard.table.contributor.not_found'|trans|desc('Can’t fetch contributor') }}
+                    {% endif %}
                 </td>
                 <td>{{ row.modified|date('M d, Y h:iA') }}</td>
                 <td class="text-center">

@@ -512,3 +512,13 @@ ezplatform.link_manager.view:
         _controller: 'EzPlatformAdminUiBundle:LinkManager:view'
     requirements:
         urlId: \d+
+
+#
+# User
+#
+
+ezplatform.user.delete:
+    path: /user/delete
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:User\UserDelete:userDelete'
