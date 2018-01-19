@@ -5,3 +5,11 @@ services:
         public: true
         tags:
             - { name: ezplatform.tab, group: location-view }
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\ContentTab:
+        public: true
+        autowire: true
+        arguments:
+            $siteAccessLanguages: '$languages$'
+        tags:
+            - { name: ezplatform.tab, group: location-view }

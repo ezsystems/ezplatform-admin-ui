@@ -25,15 +25,18 @@
                 <div class="container">
                     {% set items = [] %}
                     {% for pathLocation in pathLocations %}
-                        {% set items = items|merge([{
-                            'value': pathLocation.contentInfo.name,
-                            'url': path('_ezpublishLocation', {'locationId': pathLocation.id})
-                        }]) %}
+                        {% if not loop.last %}
+                            {% set items = items|merge([{
+                                'value': pathLocation.contentInfo.name,
+                                'url': path('_ezpublishLocation', {'locationId': pathLocation.id})
+                            }]) %}
+                        {% endif %}
                     {% endfor %}
-                    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: items} %}
+                    {% set items = items|merge([{ 'value': content.name }]) %}
+                    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: items } %}
 
                     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-                        title: ez_content_name(content),
+                        title: content.name,
                         iconName: contentType.identifier,
                         contentTypeName: contentType.name
                     } %}

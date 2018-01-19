@@ -46,6 +46,11 @@
         <target state="new">Policies in role '%role%' removed.</target>
         <note>key: policy.delete.success</note>
       </trans-unit>
+      <trans-unit id="9c322357fb302e5b708bc1c11c287d8a4e4859ec" resname="policy.edit.no_limitations">
+        <source>Policy type '%policy%' does not contain limitations.</source>
+        <target state="new">Policy type '%policy%' does not contain limitations.</target>
+        <note>key: policy.edit.no_limitations</note>
+      </trans-unit>
       <trans-unit id="41bcfef149f877e1abb0ce2cd2aa5afb713ea1de" resname="policy.limitation.identifier_tooltip">
         <source>"%identifier%" Limitation</source>
         <target state="new">"%identifier%" Limitation</target>

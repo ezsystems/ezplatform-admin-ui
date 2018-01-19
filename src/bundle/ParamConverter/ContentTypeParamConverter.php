@@ -22,12 +22,17 @@ class ContentTypeParamConverter implements ParamConverterInterface
     /** @var ContentTypeService */
     private $contentTypeService;
 
+    /** @var array */
+    private $siteAccessLanguages;
+
     /**
      * @param ContentTypeService $contentTypeGroupService
+     * @param array $siteAccessLanguages
      */
-    public function __construct(ContentTypeService $contentTypeGroupService)
+    public function __construct(ContentTypeService $contentTypeGroupService, array $siteAccessLanguages)
     {
         $this->contentTypeService = $contentTypeGroupService;
+        $this->siteAccessLanguages = $siteAccessLanguages;
     }
 
     /**
@@ -41,7 +46,7 @@ class ContentTypeParamConverter implements ParamConverterInterface
 
         $id = (int)$request->get(self::PARAMETER_CONTENT_TYPE_ID);
 
-        $contentType = $this->contentTypeService->loadContentType($id);
+        $contentType = $this->contentTypeService->loadContentType($id, $this->siteAccessLanguages);
         if (!$contentType) {
             throw new NotFoundHttpException("ContentType $id not found!");
         }

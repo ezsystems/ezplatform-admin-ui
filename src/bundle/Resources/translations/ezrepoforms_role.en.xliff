@@ -31,11 +31,6 @@
         <target state="new">All modules / All functions</target>
         <note>key: role.policy.all_modules_all_functions</note>
       </trans-unit>
-      <trans-unit id="2a8bdc606cd0c96a53e2f661f0585029840af4b9" resname="role.policy.available_limitations">
-        <source>role.policy.available_limitations</source>
-        <target state="new">role.policy.available_limitations</target>
-        <note>key: role.policy.available_limitations</note>
-      </trans-unit>
       <trans-unit id="d3c70d265ab037db5ade02a8b738b5981353c7ac" resname="role.policy.type">
         <source>Type</source>
         <target state="new">Type</target>
