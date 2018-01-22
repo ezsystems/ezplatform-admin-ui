@@ -46,6 +46,9 @@ class ContentViewController extends Controller
     /** @var int */
     private $defaultPaginationLimit;
 
+    /** @var array */
+    private $siteAccessLanguages;
+
     /**
      * @param ContentTypeService $contentTypeService
      * @param LanguageService $languageService
@@ -54,6 +57,7 @@ class ContentViewController extends Controller
      * @param SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier
      * @param UserService $userService
      * @param int $defaultPaginationLimit
+     * @param array $siteAccessLanguages
      */
     public function __construct(
         ContentTypeService $contentTypeService,
@@ -62,7 +66,8 @@ class ContentViewController extends Controller
         FormFactory $formFactory,
         SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier,
         UserService $userService,
-        int $defaultPaginationLimit
+        int $defaultPaginationLimit,
+        array $siteAccessLanguages
     ) {
         $this->contentTypeService = $contentTypeService;
         $this->languageService = $languageService;
@@ -71,6 +76,7 @@ class ContentViewController extends Controller
         $this->subitemsContentViewParameterSupplier = $subitemsContentViewParameterSupplier;
         $this->userService = $userService;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->siteAccessLanguages = $siteAccessLanguages;
     }
 
     public function locationViewAction(Request $request, ContentView $view)
@@ -117,7 +123,8 @@ class ContentViewController extends Controller
     private function supplyContentType(ContentView $view): void
     {
         $content = $view->getContent();
-        $contentType = $this->contentTypeService->loadContentType($content->contentInfo->contentTypeId);
+        $contentType = $this->contentTypeService->loadContentType($content->contentInfo->contentTypeId, $this->siteAccessLanguages);
+
         $view->addParameters(['contentType' => $contentType]);
     }
 

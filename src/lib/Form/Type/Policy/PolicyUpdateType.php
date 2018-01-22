@@ -65,7 +65,7 @@ class PolicyUpdateType extends AbstractType
                 );
 
                 $form->add('limitations', CollectionType::class, [
-                    'label' => 'role.policy.available_limitations',
+                    'label' => false,
                     'translation_domain' => 'ezrepoforms_role',
                     'entry_type' => LimitationType::class,
                     'data' => $this->generateLimitationList(

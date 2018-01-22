@@ -26,22 +26,28 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
     /** @var LanguageService */
     private $languageService;
 
+    /** @var array */
+    private $siteAccessLanguages;
+
     /**
      * @param Environment $twig
      * @param TranslatorInterface $translator
      * @param FieldsGroupsList $fieldsGroupsListHelper
-     * @param LanguageService $langaugeService
+     * @param LanguageService $languageService
+     * @param array $siteAccessLanguages
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         FieldsGroupsList $fieldsGroupsListHelper,
-        LanguageService $langaugeService
+        LanguageService $languageService,
+        array $siteAccessLanguages
     ) {
         parent::__construct($twig, $translator);
 
         $this->fieldsGroupsListHelper = $fieldsGroupsListHelper;
-        $this->languageService = $langaugeService;
+        $this->languageService = $languageService;
+        $this->siteAccessLanguages = $siteAccessLanguages;
     }
 
     public function getIdentifier(): string
@@ -124,9 +130,23 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
             return $language->enabled && in_array($language->languageCode, $contentLanguages, true);
         };
 
-        return array_filter(
-             $this->languageService->loadLanguages(),
-             $filter
-         );
+        $languagesByCode = [];
+
+        foreach (array_filter($this->languageService->loadLanguages(), $filter) as $language) {
+            $languagesByCode[$language->languageCode] = $language;
+        }
+
+        $saLanguages = [];
+
+        foreach ($this->siteAccessLanguages as $languageCode) {
+            if (!isset($languagesByCode[$languageCode])) {
+                continue;
+            }
+
+            $saLanguages[] = $languagesByCode[$languageCode];
+            unset($languagesByCode[$languageCode]);
+        }
+
+        return array_merge($saLanguages, array_values($languagesByCode));
     }
 }
