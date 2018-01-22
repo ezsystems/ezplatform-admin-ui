@@ -46,10 +46,20 @@
         <target state="new">Creator</target>
         <note>key: tab.details.creator</note>
       </trans-unit>
+      <trans-unit id="91b45af4dd219651dc8b1a7d050822b71f03fad3" resname="tab.details.creator.not_found">
+        <source>Can’t fetch creator</source>
+        <target state="new">Can’t fetch creator</target>
+        <note>key: tab.details.creator.not_found</note>
+      </trans-unit>
       <trans-unit id="acc17a8db8d00036233faa9948ad9a496cd621b3" resname="tab.details.last_contributor">
         <source>Last contributor</source>
         <target state="new">Last contributor</target>
         <note>key: tab.details.last_contributor</note>
+      </trans-unit>
+      <trans-unit id="ba5ca8a7f923f6ee3a0e6bf9aca428403d0158fd" resname="tab.details.last_contributor.not_found">
+        <source>Can’t fetch last contributor</source>
+        <target state="new">Can’t fetch last contributor</target>
+        <note>key: tab.details.last_contributor.not_found</note>
       </trans-unit>
       <trans-unit id="671c2d4e91244548b29e8f293cd8d4d97a3c23bd" resname="tab.details.location_id">
         <source>Location ID</source>
@@ -420,6 +430,11 @@
         <source>Edit Draft</source>
         <target state="new">Edit Draft</target>
         <note>key: tab.versions.table.action.draft.edit</note>
+      </trans-unit>
+      <trans-unit id="a602612589c6e902caaf8acf1fd51fcd215955f1" resname="tab.versions.table.author.not_found">
+        <source>Can’t fetch contributor</source>
+        <target state="new">Can’t fetch contributor</target>
+        <note>key: tab.versions.table.author.not_found</note>
       </trans-unit>
       <trans-unit id="4c27637d649c221e58c6a9629f14a2f75aeed151" resname="tab.versions.table.contributor">
         <source>Contributor</source>

@@ -10,8 +10,8 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\UserService;
+use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use Pagerfanta\Pagerfanta;
 
 class PagerContentToDataMapper
@@ -52,11 +52,8 @@ class PagerContentToDataMapper
         foreach ($pager as $content) {
             $contentInfo = $this->contentService->loadContentInfo($content->id);
 
-            try {
-                $contributor = $this->userService->loadUser($contentInfo->ownerId);
-            } catch (NotFoundException $e) {
-                $contributor = null;
-            }
+            $contributor = (new UserExists($this->userService))->isSatisfiedBy($contentInfo->ownerId)
+                ? $this->userService->loadUser($contentInfo->ownerId) : null;
 
             $data[] = [
                 'contentId' => $content->id,

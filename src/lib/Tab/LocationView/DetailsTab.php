@@ -14,6 +14,7 @@ use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
+use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
@@ -97,12 +98,18 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
         $objectStatesDataset = $this->datasetFactory->objectStates();
         $objectStatesDataset->load($contentInfo);
 
+        $creator = (new UserExists($this->userService))->isSatisfiedBy($contentInfo->ownerId)
+            ? $this->userService->loadUser($contentInfo->ownerId) : null;
+
+        $lastContributor = (new UserExists($this->userService))->isSatisfiedBy($versionInfo->creatorId)
+            ? $this->userService->loadUser($versionInfo->creatorId) : null;
+
         $viewParameters = [
             'section' => $this->sectionService->loadSection($contentInfo->sectionId),
             'contentInfo' => $contentInfo,
             'versionInfo' => $versionInfo,
-            'creator' => $this->userService->loadUser($contentInfo->ownerId),
-            'lastContributor' => $this->userService->loadUser($versionInfo->creatorId),
+            'creator' => $creator,
+            'lastContributor' => $lastContributor,
             'translations' => $translationsDataset->getTranslations(),
             'form_location_update' => $locationUpdateType->createView(),
             'objectStates' => $objectStatesDataset->getObjectStates(),
