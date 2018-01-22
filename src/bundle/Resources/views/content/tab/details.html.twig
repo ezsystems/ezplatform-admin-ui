@@ -16,11 +16,19 @@
     <tbody>
     <tr>
         <td>
-            {% if creator is not empty %} {{ ez_content_name(creator) }} {% endif %}
+            {% if creator is not empty %}
+                {{ ez_content_name(creator) }}
+            {% else %}
+                {{ 'tab.details.creator.not_found'|trans|desc('Can’t fetch creator') }}
+            {% endif %}
             ({{ contentInfo.publishedDate|localizeddate('medium', 'short', app.request.locale) }})
         </td>
         <td>
-            {% if lastContributor is not empty %}{{ ez_content_name(lastContributor) }} {% endif %}
+            {% if lastContributor is not empty %}
+                {{ ez_content_name(lastContributor) }}
+            {% else %}
+                {{ 'tab.details.last_contributor.not_found'|trans|desc('Can’t fetch last contributor') }}
+            {% endif %}
             ({{ versionInfo.modificationDate|localizeddate('medium', 'short', app.request.locale) }})
         </td>
         <td>{{ versionInfo.versionNo }}</td>
