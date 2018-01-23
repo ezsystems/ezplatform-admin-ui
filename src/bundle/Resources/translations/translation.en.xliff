@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="e4b8188e898e654dae14fc6b18133958f8e56084" resname="translation.remove.success">
-        <source>Translation '%languageCode%' removed from content `%name%`.</source>
-        <target state="new">Translation '%languageCode%' removed from content `%name%`.</target>
+        <source>Translation '%languageCode%' removed from content '%name%'.</source>
+        <target state="new">Translation '%languageCode%' removed from content '%name%'.</target>
         <note>key: translation.remove.success</note>
       </trans-unit>
     </body>

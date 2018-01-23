@@ -221,7 +221,7 @@ class TrashController extends Controller
                     } else {
                         $this->notificationHandler->success(
                             $this->translator->trans(
-                                /** @Desc("Items restored under `%location%` location.") */
+                                /** @Desc("Items restored under '%location%' location.") */
                                 'trash.restore_new_location.success',
                                 ['%location%' => $newParentLocation->getContentInfo()->name],
                                 'trash'
