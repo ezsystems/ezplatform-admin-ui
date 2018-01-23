@@ -37,11 +37,7 @@
 {% endblock %}
 
 {% block close_button %}
-    {% set locationId = content.versionInfo.contentInfo.mainLocationId
-        ? content.versionInfo.contentInfo.mainLocationId
-        : (parentLocations|first).id
-    %}
-    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': locationId }) }}"></a>
+    <a class="ez-content-edit-container__close btn--trigger" data-click="#ezrepoforms_content_edit_cancel"></a>
 {% endblock %}
 
 {% block form_before %}
