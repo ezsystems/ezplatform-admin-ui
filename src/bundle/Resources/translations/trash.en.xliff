@@ -11,6 +11,16 @@
         <target state="new">Trash</target>
         <note>key: trash</note>
       </trans-unit>
+      <trans-unit id="49df4e6f73344ab17f4dfd94818974848f74f53a" resname="trash.button.restore">
+        <source>Restore</source>
+        <target state="new">Restore</target>
+        <note>key: trash.button.restore</note>
+      </trans-unit>
+      <trans-unit id="5424e0925328bb62806b43b2a65cc86fef6ad7d9" resname="trash.button.restore_new_location">
+        <source>Restore under new parent location</source>
+        <target state="new">Restore under new parent location</target>
+        <note>key: trash.button.restore_new_location</note>
+      </trans-unit>
       <trans-unit id="7883128cdfb813826271abe90b3a1f3190833ce6" resname="trash.empty">
         <source>Trash is empty. Any content item you send to trash will end up here.</source>
         <target state="new">Trash is empty. Any content item you send to trash will end up here.</target>
