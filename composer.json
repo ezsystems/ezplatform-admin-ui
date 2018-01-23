@@ -1,6 +1,6 @@
 {
     "name": "ezsystems/ezplatform-admin-ui",
-    "license": "GPL-2.0",
+    "license": "GPL-2.0-only",
     "type": "project",
     "description": "eZ Platform Admin v2",
     "autoload": {
