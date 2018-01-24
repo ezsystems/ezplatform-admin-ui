@@ -42,8 +42,8 @@
         <note>key: trash.original_location</note>
       </trans-unit>
       <trans-unit id="a8c2da925faa48def8e407037a6115f1340070c7" resname="trash.restore_new_location.success">
-        <source>Items restored under `%location%` location.</source>
-        <target state="new">Items restored under `%location%` location.</target>
+        <source>Items restored under '%location%' location.</source>
+        <target state="new">Items restored under '%location%' location.</target>
         <note>key: trash.restore_new_location.success</note>
       </trans-unit>
       <trans-unit id="d4e8ddb6a84d9ca3a3b39485e9b7c5ef2860d879" resname="trash.restore_original_location.success">
