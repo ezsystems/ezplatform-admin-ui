@@ -8,7 +8,6 @@
         <th>{{ 'tab.relations.table.name'|trans()|desc('Name') }}</th>
         <th>{{ 'tab.relations.table.content_type'|trans()|desc('Content type') }}</th>
         <th>{{ 'tab.relations.table.relation_type'|trans()|desc('Relation type') }}</th>
-        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -22,13 +21,6 @@
                 {% if (relation.relationFieldDefinitionName) %}
                     ({{ relation.relationFieldDefinitionName }})
                 {% endif %}
-            </td>
-            <td>
-                <a href="#" class="btn btn-icon disabled">
-                    <svg class="ez-icon ez-icon-edit">
-                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-                    </svg>
-                </a>
             </td>
         </tr>
     {% endfor %}
