@@ -119,7 +119,7 @@ class ContentTypeController extends Controller
             $deletableTypes[$type->id] = !$this->contentTypeService->isContentTypeUsed($type);
         }
 
-        return $this->render('@EzPlatformAdminUi/admin/content_type/list.html.twig', [
+        return $this->render('@ezdesign/admin/content_type/list.html.twig', [
             'content_type_group' => $group,
             'pager' => $pagerfanta,
             'deletable' => $deletableTypes,
@@ -141,7 +141,7 @@ class ContentTypeController extends Controller
 
         $form = $this->createUpdateForm($group, $contentTypeDraft);
 
-        return $this->render('@EzPlatformAdminUi/admin/content_type/create.html.twig', [
+        return $this->render('@ezdesign/admin/content_type/create.html.twig', [
             'content_type_group' => $group,
             'content_type' => $contentTypeDraft,
             'form' => $form->createView(),
@@ -215,7 +215,7 @@ class ContentTypeController extends Controller
             }
         }
 
-        return $this->render('@EzPlatformAdminUi/admin/content_type/edit.html.twig', [
+        return $this->render('@ezdesign/admin/content_type/edit.html.twig', [
             'content_type_group' => $group,
             'content_type' => $contentTypeDraft,
             'form' => $form->createView(),
@@ -306,7 +306,7 @@ class ContentTypeController extends Controller
             $fieldDefinitionsByGroup[$fieldDefinition->fieldGroup ?: 'content'][] = $fieldDefinition;
         }
 
-        return $this->render('@EzPlatformAdminUi/admin/content_type/view.html.twig', [
+        return $this->render('@ezdesign/admin/content_type/view.html.twig', [
             'content_type_group' => $group,
             'content_type' => $contentType,
             'field_definitions_by_group' => $fieldDefinitionsByGroup,

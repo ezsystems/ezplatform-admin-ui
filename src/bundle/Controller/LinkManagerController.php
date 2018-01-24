@@ -96,7 +96,7 @@ class LinkManagerController extends Controller
         $urls->setCurrentPage($data->page);
         $urls->setMaxPerPage($data->limit ? $data->limit : self::DEFAULT_MAX_PER_PAGE);
 
-        return $this->render('@EzPlatformAdminUi/link_manager/list.html.twig', [
+        return $this->render('@ezdesign/link_manager/list.html.twig', [
             'form' => $form->createView(),
             'can_edit' => $this->isGranted(new Attribute('url', 'update')),
             'urls' => $urls,
@@ -135,7 +135,7 @@ class LinkManagerController extends Controller
             }
         }
 
-        return $this->render('@EzPlatformAdminUi/link_manager/edit.html.twig', [
+        return $this->render('@ezdesign/link_manager/edit.html.twig', [
             'form' => $form->createView(),
             'url' => $url,
         ]);
@@ -161,7 +161,7 @@ class LinkManagerController extends Controller
             new ContentEditData()
         );
 
-        return $this->render('@EzPlatformAdminUi/link_manager/view.html.twig', [
+        return $this->render('@ezdesign/link_manager/view.html.twig', [
             'url' => $url,
             'can_edit' => $this->isGranted(new Attribute('url', 'update')),
             'usages' => $usages,

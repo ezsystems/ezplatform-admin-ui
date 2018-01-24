@@ -1,0 +1,74 @@
+{% extends ezpublish.configResolver.parameter('pagelayout', 'ez_platform_admin_ui') %}
+
+{% trans_default_domain 'content_edit' %}
+{% form_theme form with '@ezdesign/content/form_fields.html.twig' %}
+
+{% block body_class %}ez-standalone-page ez-content-edit{% endblock %}
+{% block navigation %}{% endblock %}
+{% block content %}
+    <div class="row align-items-stretch ez-main-row">
+        {% block left_sidebar %}{% endblock left_sidebar %}
+        <div class="container px-0 pb-4 mt-5 ez-content-edit-container">
+            {% block close_button %}{% endblock %}
+            {% block details %}{% endblock %}
+
+            {% block form_before %}{% endblock %}
+
+            {% block form %}
+                {{ form_start(form, {'attr': {'class': 'ez-form-validate'}}) }}
+
+                {% block form_fields %}
+                    {% for field in form.fieldsData -%}
+                        {% if field.value is defined %}
+                            {{- form_widget(field) -}}
+                        {% else %}
+                            <div>
+                                {{- form_label(field) -}}
+                                <p class="non-editable">
+                                    {{ "content.field.non_editable"|trans|desc('Field type is not editable') }}
+                                </p>
+                                {% do field.setRendered() %}
+                            </div>
+                        {% endif %}
+                    {%- endfor %}
+                {% endblock %}
+
+                {{ form_end(form) }}
+            {% endblock %}
+
+            {% block form_after %}{% endblock %}
+        </div>
+        <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
+            <div class="ez-sticky-container">
+                {% block right_sidebar %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {%  javascripts
+        '@EzPlatformAdminUiBundle/Resources/public/js/alloyeditor/dist/*.js'
+        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.js'
+        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/taggify/src/js/taggify.js'
+        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/leaflet/dist/leaflet.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.content.edit.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/fieldType/base/base-field.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/fieldType/base/base-file-field.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/fieldType/base/base-preview-field.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/fieldType/*'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/extra.actions.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets
+        'bundles/ezplatformadminui/css/alloyeditor/alloyeditor-ez.css'
+        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.css'
+        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/leaflet/dist/leaflet.css'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}

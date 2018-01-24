@@ -1,0 +1,138 @@
+{% trans_default_domain 'locationview' %}
+
+{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.content_details'|trans()|desc('Content details') } %}
+
+{% form_theme form_location_update '@ezdesign/form_fields.html.twig' %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ 'tab.details.creator'|trans()|desc('Creator') }}</th>
+        <th>{{ 'tab.details.last_contributor'|trans()|desc('Last contributor') }}</th>
+        <th>{{ 'tab.details.published_version'|trans()|desc('Published version') }}</th>
+        <th>{{ 'tab.details.translations'|trans()|desc('Translations') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            {% if creator is not empty %}
+                {{ ez_content_name(creator) }}
+            {% else %}
+                {{ 'tab.details.creator.not_found'|trans|desc('Can’t fetch creator') }}
+            {% endif %}
+            ({{ contentInfo.publishedDate|localizeddate('medium', 'short', app.request.locale) }})
+        </td>
+        <td>
+            {% if lastContributor is not empty %}
+                {{ ez_content_name(lastContributor) }}
+            {% else %}
+                {{ 'tab.details.last_contributor.not_found'|trans|desc('Can’t fetch last contributor') }}
+            {% endif %}
+            ({{ versionInfo.modificationDate|localizeddate('medium', 'short', app.request.locale) }})
+        </td>
+        <td>{{ versionInfo.versionNo }}</td>
+        <td>{{ translations|length }}
+            {% for translation in translations %}
+                {{ translation.name }}<br>
+            {% endfor %}
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.technical_details'|trans()|desc('Technical details') } %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ 'tab.details.content_id'|trans()|desc('Content ID') }}</th>
+        <th>{{ 'tab.details.location_id'|trans()|desc('Location ID') }}</th>
+        <th>{{ 'tab.details.content_remote_id'|trans()|desc('Content remote ID') }}</th>
+        <th>{{ 'tab.details.location_remote_id'|trans()|desc('Location remote ID') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ contentInfo.id }}</td>
+        <td>{{ location.id }}</td>
+        <td>{{ contentInfo.remoteId }}</td>
+        <td>{{ location.remoteId }}</td>
+    </tr>
+    </tbody>
+</table>
+
+{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.section_details'|trans()|desc('Section details') } %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ 'tab.details.section_name'|trans()|desc('Section name') }}</th>
+        <th>{{ 'tab.details.section_identifier'|trans()|desc('Section identifier') }}</th>
+        <th>{{ 'tab.details.section_id'|trans()|desc('Section ID') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ section.name }}</td>
+        <td>{{ section.identifier }}</td>
+        <td>{{ section.id }}</td>
+    </tr>
+    </tbody>
+</table>
+
+{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.state_details'|trans()|desc('State details') } %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ 'tab.details.state_group_name'|trans()|desc('Group name') }}</th>
+        <th>{{ 'tab.details.state_group_identifier'|trans()|desc('Group identifier') }}</th>
+        <th>{{ 'tab.details.state_group_id'|trans()|desc('Group ID') }}</th>
+        <th>{{ 'tab.details.state_name'|trans()|desc('Name') }}</th>
+        <th>{{ 'tab.details.state_identifier'|trans()|desc('Identifier') }}</th>
+        <th>{{ 'tab.details.state_id'|trans()|desc('State ID') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for objectState in objectStates %}
+        <tr>
+            <td>{{ objectState.objectStateGroup.name }}</td>
+            <td>{{ objectState.objectStateGroup.identifier }}</td>
+            <td>{{ objectState.objectStateGroup.id }}</td>
+            <td>{{ objectState.name }}</td>
+            <td>{{ objectState.identifier }}</td>
+            <td>{{ objectState.id }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% include '@ezdesign/parts/table_header.html.twig' with {
+    headerText: 'tab.details.sub_items_sorting_order'|trans|desc('Sub-items sorting order'),
+    ground: 'ground-base'
+} %}
+
+<table class="table ez-table--no-border">
+    <tbody>
+    <tr>
+        <td data-sort-field="{{ sort_field_clause_map[location.sortField] }}" data-sort-order="{{ location.sortOrder ? "ascending" : "descending" }}">
+            {{ form_start(form_location_update, {
+                'method': 'POST',
+                'action': path('ezplatform.location.update'),
+                'attr': {'class': 'form-inline ez-form-inline'}
+                }) }}
+
+                {{ form_label(form_location_update.sort_field, 'tab.details.sub_items_listing_by.order_by'|trans|desc('Order by')) }}
+                {{ form_widget(form_location_update.sort_field) }}
+
+                {{ form_label(form_location_update.sort_order, 'tab.details.sub_items_listing_by.in'|trans|desc('in')) }}
+                {{ form_widget(form_location_update.sort_order) }}
+
+                {{ form_widget(form_location_update.update, { 'label': 'tab.details.sub_items_listing_by_set'|trans|desc('Set'), 'translation_domain': false, 'attr': {'class': 'btn-secondary ml-1'} }) }}
+
+            {{ form_end(form_location_update) }}
+        </td>
+    </tr>
+    </tbody>
+</table>

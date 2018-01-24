@@ -250,7 +250,7 @@ class ContentController extends Controller
             $languageCode = $content->contentInfo->mainLanguageCode;
         }
 
-        return $this->render('@EzPlatformAdminUi/content/content_preview.html.twig', [
+        return $this->render('@ezdesign/content/content_preview.html.twig', [
             'content' => $content,
             'language_code' => $languageCode,
             'siteaccess' => $this->defaultSiteaccess,

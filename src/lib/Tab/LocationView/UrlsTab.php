@@ -62,7 +62,7 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
         ];
 
         return $this->twig->render(
-            'EzPlatformAdminUiBundle:content/tab:urls.html.twig',
+            '@ezdesign/content/tab/urls.html.twig',
             array_merge($viewParameters, $parameters)
         );
     }
