@@ -172,9 +172,15 @@
         content: ': ';
     }
 
-    &.required {
+    &.required:not(.ez-data-source__label) {
         &:after {
             content: '*: ';
+        }
+    }
+
+    &.required.ez-data-source__label {
+        &:after {
+            content: ': ';
         }
     }
 }
