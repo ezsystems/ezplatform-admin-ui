@@ -8,8 +8,11 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use EzSystems\EzPlatformAdminUi\Behat\UtilityContext;
 
-class Element
+abstract class Element
 {
+    /** @var int */
+    public $defaultTimeout = 5;
+
     /* \EzSystems\EzPlatformAdminUi\Behat\UtilityContext */
     protected $context;
 
@@ -18,8 +21,7 @@ class Element
         $this->context = $context;
     }
 
-    public function verifyVisibility() : void
+    public function verifyVisibility(): void
     {
-
     }
 }

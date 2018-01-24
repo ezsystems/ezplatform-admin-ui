@@ -17,6 +17,7 @@ class ContentStructurePage extends Page
     /** @var string Name by which Page is recognised */
     public const PAGE_NAME = 'ContentStructure';
 
+    /** @var RightMenu Element representing the right menu */
     protected $rightMenu;
 
     public function __construct(UtilityContext $context)
@@ -25,13 +26,21 @@ class ContentStructurePage extends Page
         $this->rightMenu = new RightMenu($this->context);
     }
 
-    public function create()
+    public function createLandingPage($name, $description)
     {
-        $this->rightMenu->clickButton('Create');
+        $this->startCreatingContent('Landing page');
+        $this->context->getSession()->getPage()->findField('Title')->setValue($name);
+        $this->context->getSession()->getPage()->findField('Description')->setValue($description);
     }
 
-    public function performAction($actionName)
+    /**
+     * Clicks "Create" and selects Content Type in displayed search.
+     *
+     * @param $contentType
+     */
+    public function startCreatingContent($contentType)
     {
-        $this->rightMenu->clickButton($actionName);
+        $this->rightMenu->clickButton('Create');
+        $this->context->getElementByText($contentType, '.form-check-label')->click();
     }
 }

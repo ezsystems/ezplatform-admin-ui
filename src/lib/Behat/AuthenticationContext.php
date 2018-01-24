@@ -8,9 +8,11 @@ namespace EzSystems\EzPlatformAdminUi\Behat;
 
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\LoginPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use OutOfBoundsException;
 
 class AuthenticationContext extends BusinessContext
 {
+    /** @var array Dictionary of known user logins and their passwords */
     private $userPasswords = ['admin' => 'publish', 'jessica' => 'publish', 'yura' => 'publish', 'anil' => 'publish'];
 
     /**
@@ -29,15 +31,16 @@ class AuthenticationContext extends BusinessContext
      * @Given I am logged as :username
      *
      * @param string $username
+     *
+     * @throws \OutOfBoundsException when username is not recognised
      */
     public function iAmLoggedAs(string $username)
     {
         $loginPage = PageObjectFactory::createPage($this->utilityContext, LoginPage::PAGE_NAME);
         $loginPage->open();
 
-        if (!\in_array($username, $this->userPasswords, true))
-        {
-            // throw;
+        if (!\array_key_exists($username, $this->userPasswords)) {
+            throw new OutOfBoundsException('Login is not recognised ');
         }
 
         $password = $this->userPasswords[$username];

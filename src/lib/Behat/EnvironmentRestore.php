@@ -1,10 +1,10 @@
 <?php
+
 /**
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Behat;
-
 
 use EzSystems\PlatformInstallerBundle\Installer\Installer;
 use Symfony\Component\Console\Output\NullOutput;
@@ -23,7 +23,7 @@ class EnvironmentRestore
     private $installerServices = ['platform' => 'ezplatform.installer.clean_installer',
         'platform-demo' => 'app.installer.demo_installer',
         'platform-ee' => 'ezstudio.installer.studio_installer',
-        'platform-ee-demo' => 'app.installer.ee_demo_installer'];
+        'platform-ee-demo' => 'app.installer.ee_demo_installer', ];
 
     /**
      * EnvironmentRestore constructor.
@@ -36,9 +36,9 @@ class EnvironmentRestore
     }
 
     /**
-     * Detects installation type and restores the database using parameters from parameters.yml
+     * Detects installation type and restores the database using parameters from parameters.yml.
      */
-    public function restoreDatabase() : void
+    public function restoreDatabase(): void
     {
         $currentDirectory = getcwd();
         $installer = $this->getInstallerService();
@@ -54,7 +54,7 @@ class EnvironmentRestore
      *
      * Override cache path in AppKernel (getCacheDir method) to point to another directory
      */
-    public function clearCache() : void
+    public function clearCache(): void
     {
         $pool = $this->serviceContainer->get('ezpublish.cache_pool');
         $pool->clear();
@@ -65,7 +65,7 @@ class EnvironmentRestore
      *
      * @throws \Exception When the directory is not found going up to 5 levels
      */
-    private function findDirectoryToRunScripts()
+    private function findDirectoryToRunScripts(): void
     {
         $counter = 0;
         while (!$this->areExpectedDirectoriesPresent()) {
@@ -83,7 +83,7 @@ class EnvironmentRestore
      *
      * @return bool
      */
-    private function areExpectedDirectoriesPresent()
+    private function areExpectedDirectoriesPresent(): bool
     {
         $actualDirectories = scandir(getcwd(), 0);
 
@@ -95,8 +95,9 @@ class EnvironmentRestore
     }
 
     /**
-     *  Returns installer service depending on current install type
+     *  Returns installer service depending on current install type.
      *
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException  When no suitable service is found
      *
      * @return Installer Installer service

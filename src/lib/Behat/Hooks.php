@@ -1,53 +1,41 @@
 <?php
+
 /**
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Behat;
 
-use Behat\Behat\Context\Context;
+use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelDictionary;
-use Behat\Behat\Hook\Scope\AfterScenarioScope;
-use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 
-class Hooks implements Context
+class Hooks extends RawMinkContext
 {
     use KernelDictionary;
 
-    /** Tag used to mark tests that require database restore before running. */
-    private const RESTORE_ENVIRONMENT_TAG_BEFORE = 'restoreEnvironmentBefore';
-
-    /** Tag used to mark tests that require database restore before running. */
-    private const RESTORE_ENVIRONMENT_TAG_AFTER = 'restoreEnvironmentAfter';
-
     /** @BeforeScenario
-     * Restores the database and clears cache for tests marked with restoreStudioDatabase tag
-     *
-     * @param BeforeScenarioScope $scope
      */
-    public function restoreEnvironmentBeforeScenario(BeforeScenarioScope $scope)
+    public function restartSessionBeforeScenario()
     {
-        if (!$scope->getScenario()->hasTag(self::RESTORE_ENVIRONMENT_TAG_BEFORE)) {
-            return;
-        }
+        $this->getSession()->restart();
+    }
 
+    /** @BeforeScenario @restoreEnvironmentBefore
+     * Restores the database and clears cache for tests marked with @restoreEnvironmentBefore tag
+     */
+    public function restoreEnvironmentBeforeScenario()
+    {
         $envRestorer = new EnvironmentRestore($this->getContainer());
 
         $envRestorer->restoreDatabase();
         $envRestorer->clearCache();
     }
 
-    /** @AfterScenario
-     * Restores the database and clears cache for tests marked with restoreStudioDatabase tag
-     *
-     * @param AfterScenarioScope $scope
+    /** @AfterScenario @restoreEnvironmentAfter
+     * Restores the database and clears cache for tests marked with @restoreEnvironmentAfter tag
      */
-    public function restoreEnvironmentAfterScenario(AfterScenarioScope $scope)
+    public function restoreEnvironmentAfterScenario()
     {
-        if (!$scope->getScenario()->hasTag(self::RESTORE_ENVIRONMENT_TAG_AFTER)) {
-            return;
-        }
-
         $envRestorer = new EnvironmentRestore($this->getContainer());
 
         $envRestorer->restoreDatabase();

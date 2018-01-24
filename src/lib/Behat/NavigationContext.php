@@ -47,10 +47,8 @@ class NavigationContext extends BusinessContext
         $upperMenu = new UpperMenu($this->utilityContext);
         $upperMenu->goToTab($tabName);
 
-        if ($subTab !== null)
-        {
+        if ($subTab !== null) {
             $upperMenu->goToSubTab($subTab);
         }
     }
-
 }
