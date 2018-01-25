@@ -52,7 +52,7 @@
             {% set label = name|humanize %}
         {%- endif -%}
     {%- endif -%}
-    <button type="{{ type }}" {{ block('button_attributes') }} title={{'trash.button.restore'|trans|desc('Restore') }}>
+    <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore'|trans({},'trash')|desc('Restore') }}">
         <svg class="ez-icon">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#restore"></use>
         </svg>
@@ -72,7 +72,7 @@
             {% set label = name|humanize %}
         {%- endif -%}
     {%- endif -%}
-    <button type="{{ type }}" {{ block('button_attributes') }} title={{'trash.button.restore_new_location'|trans|desc('Restore under new parent location') }}>
+    <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore_new_location'|trans({},'trash')|desc("Restore under new parent location") }}">
         <svg class="ez-icon">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#restore-parent"></use>
         </svg>
