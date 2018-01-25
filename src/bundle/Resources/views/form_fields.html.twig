@@ -41,41 +41,41 @@
 {%- endblock -%}
 
 {%- block _trash_item_restore_restore_widget -%}
-        {%- set type = type|default('submit') -%}
-        {%- if label is not same as(false) and label is empty -%}
-            {%- if label_format is not empty -%}
-                {% set label = label_format|replace({
+    {%- set type = type|default('submit') -%}
+    {%- if label is not same as(false) and label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
                 '%name%': name,
                 '%id%': id,
-                }) %}
-            {%- else -%}
-                {% set label = name|humanize %}
-            {%- endif -%}
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
         {%- endif -%}
-        <button type="{{ type }}" {{ block('button_attributes') }}>
-            <svg class="ez-icon">
-                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#restore"></use>
-            </svg>
-            {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
-        </button>
+    {%- endif -%}
+    <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore'|trans({},'trash')|desc('Restore') }}">
+        <svg class="ez-icon">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#restore"></use>
+        </svg>
+        {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
+    </button>
 {%- endblock -%}
 
 {%- block _trash_item_restore_location_select_content_widget -%}
-        {%- set type = type|default('submit') -%}
-        {%- if label is not same as(false) and label is empty -%}
-            {%- if label_format is not empty -%}
-                {% set label = label_format|replace({
+    {%- set type = type|default('submit') -%}
+    {%- if label is not same as(false) and label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
                 '%name%': name,
                 '%id%': id,
-                }) %}
-            {%- else -%}
-                {% set label = name|humanize %}
-            {%- endif -%}
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
         {%- endif -%}
-        <button type="{{ type }}" {{ block('button_attributes') }}>
-            <svg class="ez-icon">
-                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#restore-parent"></use>
-            </svg>
-            {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
-        </button>
+    {%- endif -%}
+    <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore_new_location'|trans({},'trash')|desc("Restore under new parent location") }}">
+        <svg class="ez-icon">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#restore-parent"></use>
+        </svg>
+        {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
+    </button>
 {%- endblock -%}
