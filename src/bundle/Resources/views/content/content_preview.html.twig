@@ -10,7 +10,7 @@
 <div class="ez-preview">
     <div class="ez-preview__nav">
         <div class="ez-preview__item ez-preview__item--back">
-            <a href="{{ url('ez_content_draft_edit', {'contentId': content.id, 'versionNo': content.versionInfo.versionNo, 'language': language_code}) }}" class="">
+            <a href="{{ url('ez_content_draft_edit', {'contentId': content.id, 'versionNo': versionNo, 'language': language_code}) }}" >
                 <svg class="ez-icon ez-icon-back">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#caret-back"></use>
                 </svg>
@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="ez-preview__iframe ez-preview__iframe--desktop">
-        <iframe src="{{ url('_ezpublishPreviewContent', {'contentId': content.id, 'versionNo': content.versionInfo.versionNo, 'language': language_code, 'siteAccessName': siteaccess}) }}" frameborder="0"></iframe>
+        <iframe src="{{ url('_ezpublishPreviewContent', {'contentId': content.id, 'versionNo': versionNo, 'language': language_code, 'siteAccessName': siteaccess}) }}" frameborder="0"></iframe>
     </div>
 </div>
 {% endblock %}

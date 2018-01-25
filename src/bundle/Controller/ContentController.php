@@ -241,10 +241,11 @@ class ContentController extends Controller
     /**
      * @param Content $content
      * @param string|null $languageCode
+     * @param int|null $versionNo
      *
      * @return Response
      */
-    public function previewAction(Content $content, ?string $languageCode = null): Response
+    public function previewAction(Content $content, ?string $languageCode = null, ?int $versionNo = null): Response
     {
         if (null === $languageCode) {
             $languageCode = $content->contentInfo->mainLanguageCode;
@@ -254,6 +255,7 @@ class ContentController extends Controller
             'content' => $content,
             'language_code' => $languageCode,
             'siteaccess' => $this->defaultSiteaccess,
+            'versionNo' => $versionNo ?? $content->getVersionInfo()->versionNo,
         ]);
     }
 }
