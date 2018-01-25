@@ -1,7 +1,11 @@
 .ez-field-edit {
-    .ez-field-edit__label,
-    .ez-data-source__label {
+    .ez-field-edit__label {
         @include label-required();
+    }
+    .ez-data-source__label {
+        &:after {
+            content: ': ';
+        }
     }
 
     &--nontranslatable {
