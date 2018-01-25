@@ -13,7 +13,7 @@ use OutOfBoundsException;
 class AuthenticationContext extends BusinessContext
 {
     /** @var array Dictionary of known user logins and their passwords */
-    private $userPasswords = ['admin' => 'publish', 'jessica' => 'publish', 'yura' => 'publish', 'anil' => 'publish'];
+    private $userCredentials = ['admin' => 'publish', 'jessica' => 'publish', 'yura' => 'publish', 'anil' => 'publish'];
 
     /**
      * @When I login as :username with password :password
@@ -39,11 +39,11 @@ class AuthenticationContext extends BusinessContext
         $loginPage = PageObjectFactory::createPage($this->utilityContext, LoginPage::PAGE_NAME);
         $loginPage->open();
 
-        if (!\array_key_exists($username, $this->userPasswords)) {
-            throw new OutOfBoundsException('Login is not recognised ');
+        if (!\array_key_exists($username, $this->userCredentials)) {
+            throw new OutOfBoundsException('Login is not recognised');
         }
 
-        $password = $this->userPasswords[$username];
+        $password = $this->userCredentials[$username];
         $loginPage->login($username, $password);
     }
 }

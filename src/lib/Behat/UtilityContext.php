@@ -43,15 +43,13 @@ class UtilityContext extends MinkContext
      * to find all element with a given css selector that might still be loading.
      *
      * @param   string      $locator        css selector for the element
-     * @param   NodeElement $baseElement    base Mink node element from where the find should be called
+     * @param   TraversableElement $baseElement    base Mink node element from where the find should be called
      *
      * @return  NodeElement[]
      */
-    public function findAllWithWait($locator, $baseElement = null): array
+    public function findAllWithWait(string $locator, TraversableElement $baseElement = null): array
     {
-        if (!$baseElement) {
-            $baseElement = $this->getSession()->getPage();
-        }
+        $baseElement = $baseElement ?? $this->getSession()->getPage();
 
         $elements = $this->waitUntil(10,
             function () use ($locator, $baseElement) {
@@ -80,9 +78,8 @@ class UtilityContext extends MinkContext
      */
     public function getElementByText(string $text, string $selector, string $textSelector = null, TraversableElement $baseElement = null): ?NodeElement
     {
-        if ($baseElement == null) {
-            $baseElement = $this->getSession()->getPage();
-        }
+        $baseElement = $baseElement ?? $this->getSession()->getPage();
+
         $elements = $this->findAllWithWait($selector, $baseElement);
         foreach ($elements as $element) {
             if ($textSelector !== null) {
@@ -94,7 +91,7 @@ class UtilityContext extends MinkContext
             } else {
                 $elementText = $element->getText();
             }
-            if ($elementText == $text) {
+            if ($elementText === $text) {
                 return $element;
             }
         }
@@ -152,9 +149,7 @@ class UtilityContext extends MinkContext
      */
     public function findElement(string $selector, int $timeout = 5, TraversableElement $baseElement = null): ?NodeElement
     {
-        if ($baseElement === null) {
-            $baseElement = $this->getSession()->getPage();
-        }
+        $baseElement = $baseElement ?? $this->getSession()->getPage();
 
         try {
             return $this->waitUntil($timeout,
