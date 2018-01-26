@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
 use EzSystems\EzPlatformAdminUi\Behat\UtilityContext;
+use EzSystems\StudioUIBundle\Tests\Behat\PageObject\LandingPageEditorPage;
 
 class PageObjectFactory
 {
@@ -25,6 +26,10 @@ class PageObjectFactory
                 return new LoginPage($context);
             case DashboardPage::PAGE_NAME:
                 return new DashboardPage($context);
+            case ContentStructurePage::PAGE_NAME:
+                return new ContentStructurePage($context);
+            case LandingPageEditorPage::PAGE_NAME:
+                return new LandingPageEditorPage($context);
             default:
                 throw new \InvalidArgumentException(sprintf('Unrecognised page name: %s', $pageName));
         }

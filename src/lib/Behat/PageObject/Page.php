@@ -62,4 +62,14 @@ abstract class Page
     public function verifyElements(): void
     {
     }
+
+    /**
+     * Gets the header text displayed in AdminUI.
+     *
+     * @return string
+     */
+    public function getPageHeaderTitle(): string
+    {
+        return $this->context->findElement('.ez-page-title')->getText();
+    }
 }

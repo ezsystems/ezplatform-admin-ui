@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat;
 
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\UpperMenu;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 
 class NavigationContext extends BusinessContext
@@ -35,5 +36,19 @@ class NavigationContext extends BusinessContext
     {
         $page = PageObjectFactory::createPage($this->utilityContext, $pageName);
         $page->verifyIsLoaded();
+    }
+
+    /**
+     * @Then I go to :tab tab
+     * @Then I go to :subTab in :tab tab
+     */
+    public function iGoToTab($tabName, $subTab = null): void
+    {
+        $upperMenu = new UpperMenu($this->utilityContext);
+        $upperMenu->goToTab($tabName);
+
+        if ($subTab !== null) {
+            $upperMenu->goToSubTab($subTab);
+        }
     }
 }
