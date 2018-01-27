@@ -35,7 +35,12 @@
                                 </div>
 
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token("authenticate") }}" />
-                                <input type="hidden" name="_target_path" value="{{ url('ezplatform.dashboard') }}" />
+                                {% set targetPath = url('ezplatform.dashboard') %}
+                                {% set sfRedirect = app.session.get('sf_redirect') %}
+                                {% if sfRedirect and sfRedirect.status_text == 'Found' and sfRedirect.route == 'ez_urlalias' %}
+                                    {% set targetPath = app.session.get('_security.ezpublish_front.target_path') %}
+                                {% endif %}
+                                <input type="hidden" name="_target_path" value="{{ targetPath }}" />
 
                                 <button type="submit" class="btn btn-primary ez-btn ez-btn--login">{{ 'authentication.submit'|trans|desc('Login') }}</button>
                             </fieldset>
