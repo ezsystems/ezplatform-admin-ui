@@ -111,3 +111,8 @@
     {{- block('form_rows') -}}
     {{- form_rest(form) -}}
 {%- endblock form_widget_compound -%}
+
+{%- block number_widget -%}
+    {%- set type = type|default('number') -%}
+    {{ block('form_widget_simple') }}
+{%- endblock number_widget -%}
