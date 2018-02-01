@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="e3134aea8177d5285a440a147f434f843d81e0dc" resname="version.conflict.are_you_sure">
+        <source>Are you sure you want to continue and overwrite the latest version?</source>
+        <target state="new">Are you sure you want to continue and overwrite the latest version?</target>
+        <note>key: version.conflict.are_you_sure</note>
+      </trans-unit>
+      <trans-unit id="f77f809ec953a9ee0a8fe642ab53e2763e5eaed2" resname="version.conflict.choices">
+        <source>To resolve the conflict, click Cancel and delete the draft. Then edit the published Content Item.</source>
+        <target state="new">To resolve the conflict, click Cancel and delete the draft. Then edit the published Content Item.</target>
+        <note>key: version.conflict.choices</note>
+      </trans-unit>
+      <trans-unit id="9fad7ad8b2a4215487f98fc67dd7d793dd0382e8" resname="version.conflict.consequences">
+        <source>If you continue, the previous version will be overwritten.</source>
+        <target state="new">If you continue, the previous version will be overwritten.</target>
+        <note>key: version.conflict.consequences</note>
+      </trans-unit>
+      <trans-unit id="5b6635730e66eb50ae26455406ca774eac8fd8e1" resname="version.conflict.form.cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: version.conflict.form.cancel</note>
+      </trans-unit>
+      <trans-unit id="c70ab0acdd2b67e3043949422191e75e6e09440e" resname="version.conflict.form.continue">
+        <source>Continue</source>
+        <target state="new">Continue</target>
+        <note>key: version.conflict.form.continue</note>
+      </trans-unit>
+      <trans-unit id="0fcf485b042da069359444e8395122974ad929fc" resname="version.conflict.header">
+        <source>Version conflict when editing</source>
+        <target state="new">Version conflict when editing</target>
+        <note>key: version.conflict.header</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

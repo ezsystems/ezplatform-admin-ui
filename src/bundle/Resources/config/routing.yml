@@ -418,6 +418,13 @@ ezplatform.version.remove:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Version:remove'
 
+ezplatform.version.has_no_conflict:
+    path: /version/has-no-conflict/{contentId}/{versionNo}/{languageCode}
+    options:
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Version\VersionConflict:versionHasNoConflict'
+        languageCode: ~
+
 # LocationView / Locations tab
 
 ezplatform.location.add:
