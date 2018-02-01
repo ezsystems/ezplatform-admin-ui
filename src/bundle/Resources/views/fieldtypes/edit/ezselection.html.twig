@@ -12,7 +12,7 @@
     </ul>
     <ul class="ez-data-source__options ez-data-source__options--hidden">
         {%- if placeholder is not none -%}
-            <li data-value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) }}</li>
+            <li data-value="" class="option-item"{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) }}</li>
         {%- endif -%}
         {% for choice in choices %}
             <li data-value="{{ choice.value }}" class="option-item{% if choice is selectedchoice(value) %} option-selected{% endif %}">

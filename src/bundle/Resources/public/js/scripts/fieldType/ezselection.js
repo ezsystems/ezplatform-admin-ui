@@ -66,7 +66,7 @@
             container.querySelector(`${SELECTOR_SOURCE_INPUT} [value="${value}"]`).selected = selected;
             container.querySelector(`${SELECTOR_OPTIONS} [data-value="${value}"]`).classList[CSSMethodName](CLASS_SELECTED);
 
-            if (selected) {
+            if (selected && value) {
                 container.querySelector(SELECTOR_SELECTED).insertAdjacentHTML('beforeend', createSelectedItem(value, element.innerHTML));
             } else {
                 container.querySelector(`${SELECTOR_SELECTED} [data-value="${value}"]`).remove();
@@ -83,6 +83,10 @@
             const firstOption = container.querySelector(`${SELECTOR_OPTIONS} li`);
 
             firstOption.classList.add(CLASS_SELECTED);
+
+            if (!firstOption.dataset.value) {
+                return;
+            }
 
             container
                 .querySelector(SELECTOR_SELECTED)

@@ -110,6 +110,7 @@
 
             .option-item {
                 padding: .2rem .5rem;
+                min-height: 1.875rem;
 
                 &.option-selected {
                     background-color: $ez-ground-primary;
