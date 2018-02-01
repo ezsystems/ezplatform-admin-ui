@@ -21,10 +21,19 @@
         transition: all .2s $ez-admin-transition;
 
         &:hover,
-        &:focus {
-            background: $ez-color-secondary;
-            color: $ez-white;
+        &:focus, 
+        &:active {
             text-decoration: none;
+        }
+
+        &:hover,
+        &:focus {
+            background: $ez-secondary-ground-pale;
+        }
+
+        &:active {
+            background: $ez-secondary-ground;
+            color: $ez-white;
         }
     }
 
@@ -71,10 +80,19 @@
             margin-bottom: 0;
 
             &:hover,
-            &:focus {
-                background: $ez-color-secondary;
-                color: $ez-white;
+            &:focus, 
+            &:active {
                 text-decoration: none;
+            }
+
+            &:hover,
+            &:focus {
+                background: $ez-secondary-ground-pale;
+            }
+
+            &:active {
+                background: $ez-secondary-ground;
+                color: $ez-white;
             }
 
             &:not(:last-child) {
@@ -128,7 +146,12 @@
 
             &:hover,
             &:focus {
-                background: $ez-color-secondary;
+                background: $ez-secondary-ground-pale;
+            }
+
+            &:active {
+                background: $ez-secondary-ground;
+                color: $ez-white;
             }
 
             label {
