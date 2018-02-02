@@ -14,7 +14,7 @@ class NavigationContext extends BusinessContext
     /**
      * @Given I open :pageName page
      */
-    public function openPage($pageName): void
+    public function openPage(string $pageName): void
     {
         $page = PageObjectFactory::createPage($this->utilityContext, $pageName);
         $page->open();
@@ -23,7 +23,7 @@ class NavigationContext extends BusinessContext
     /**
      * @Given I try to open :pageName page
      */
-    public function tryToOpenPage($pageName): void
+    public function tryToOpenPage(string $pageName): void
     {
         $page = PageObjectFactory::createPage($this->utilityContext, $pageName);
         $page->open(false);
@@ -32,7 +32,7 @@ class NavigationContext extends BusinessContext
     /**
      * @Then I should be on :pageName page
      */
-    public function iAmOnPage($pageName): void
+    public function iAmOnPage(string $pageName): void
     {
         $page = PageObjectFactory::createPage($this->utilityContext, $pageName);
         $page->verifyIsLoaded();
@@ -42,7 +42,7 @@ class NavigationContext extends BusinessContext
      * @Then I go to :tab tab
      * @Then I go to :subTab in :tab tab
      */
-    public function iGoToTab($tabName, $subTab = null): void
+    public function iGoToTab(string $tabName, string $subTab = null): void
     {
         $upperMenu = new UpperMenu($this->utilityContext);
         $upperMenu->goToTab($tabName);

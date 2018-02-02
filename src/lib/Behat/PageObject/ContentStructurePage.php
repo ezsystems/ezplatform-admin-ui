@@ -26,13 +26,6 @@ class ContentStructurePage extends Page
         $this->rightMenu = new RightMenu($this->context);
     }
 
-    public function createLandingPage($name, $description)
-    {
-        $this->startCreatingContent('Landing page');
-        $this->context->getSession()->getPage()->findField('Title')->setValue($name);
-        $this->context->getSession()->getPage()->findField('Description')->setValue($description);
-    }
-
     /**
      * Clicks "Create" and selects Content Type in displayed search.
      *

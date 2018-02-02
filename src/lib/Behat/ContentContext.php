@@ -31,7 +31,25 @@ class ContentContext extends BusinessContext
     public function startCreatingNewLandingPage($name)
     {
         $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
-        $contentStructurePage->createLandingPage($name, 'Test Desc');
+        $contentStructurePage->startCreatingContent('Landing page');
+
+        $this->utilityContext->getSession()->getPage()->findField('Title')->setValue($name);
+        $this->utilityContext->getSession()->getPage()->findField('Description')->setValue('Test desc');
+    }
+
+    /**
+     * @Given I start creating a new Article :name
+     */
+    public function startCreatingArticle($name)
+    {
+        $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
+        $contentStructurePage->startCreatingContent('Article');
+
+        $this->utilityContext->getSession()->getPage()->findField('Title')->setValue($name);
+
+        $summaryField = $this->utilityContext->findElement('.ez-data-source__richtext');//$this->utilityContext->getSession()->getPage()->findField('Summary');
+        $summaryField->click();
+        $summaryField->setValue('Test desc');
     }
 
     /**
