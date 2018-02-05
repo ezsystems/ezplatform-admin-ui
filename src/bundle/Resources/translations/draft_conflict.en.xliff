@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="1020ca59a2c9fa207ebe162fd6727fd1a81027c0" resname="draft.conflict.choice">
+        <source>You can either edit any of your existing draft(s) or add a new one.</source>
+        <target state="new">You can either edit any of your existing draft(s) or add a new one.</target>
+        <note>key: draft.conflict.choice</note>
+      </trans-unit>
+      <trans-unit id="57ae8e493adef8a884a3f0c5e9e4501b7f2ec395" resname="draft.conflict.header">
+        <source>Draft conflict when editing</source>
+        <target state="new">Draft conflict when editing</target>
+        <note>key: draft.conflict.header</note>
+      </trans-unit>
+      <trans-unit id="d5fdbb680e6950e955c933e05f15f861c2020517" resname="draft.conflict.number">
+        <source>{1}There are %number% draft for this content item.|]1,Inf[ There are %number% drafts for this content item</source>
+        <target state="new">{1}There are %number% draft for this content item.|]1,Inf[ There are %number% drafts for this content item</target>
+        <note>key: draft.conflict.number</note>
+      </trans-unit>
+      <trans-unit id="a4297fe31e8eb3307caa2cf855328056c3b98962" resname="tab.versions.action.delete">
+        <source>Add draft</source>
+        <target state="new">Add draft</target>
+        <note>key: tab.versions.action.delete</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

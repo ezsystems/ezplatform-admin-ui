@@ -420,10 +420,16 @@ ezplatform.version.remove:
 
 ezplatform.version.has_no_conflict:
     path: /version/has-no-conflict/{contentId}/{versionNo}/{languageCode}
-    options:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Version\VersionConflict:versionHasNoConflict'
         languageCode: ~
+
+ezplatform.version_draft.has_no_conflict:
+    path: /version-draft/has-no-conflict/{contentId}
+    options:
+        expose: true
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Content\VersionDraftConflict:draftHasNoConflict'
 
 # LocationView / Locations tab
 

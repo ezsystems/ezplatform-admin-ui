@@ -138,3 +138,8 @@ button {
 .ez-dashboard-row {
     flex-direction: column;
 }
+
+.ez-scrollable-wrapper {
+    max-height: 60vh;
+    overflow: auto;
+}

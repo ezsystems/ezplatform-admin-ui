@@ -72,6 +72,21 @@ class VersionsDataset
     }
 
     /**
+     * @param int $currentVersionNo
+     *
+     * @return array
+     */
+    public function getConflictedDraftVersions(int $currentVersionNo): array
+    {
+        return $this->filterVersions(
+            $this->data,
+            function (VersionInfo $versionInfo) use ($currentVersionNo) {
+                return $versionInfo->isDraft() && $versionInfo->versionNo > $currentVersionNo;
+            }
+        );
+    }
+
+    /**
      * @return UIValue\Content\VersionInfo[]
      */
     public function getPublishedVersions(): array
