@@ -1,0 +1,42 @@
+{% trans_default_domain 'version_conflict' %}
+
+<div class="modal fade ez-modal ez-modal--version-conflict" id="version-conflict-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>{{ 'version.conflict.header'|trans|desc('Version conflict when editing') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="ez-modal-body__explanation">
+                    <strong>
+                        {{ 'version.conflict.are_you_sure'|trans|desc(
+                        'Are you sure you want to continue and overwrite the latest version?'
+                        ) }}
+                    </strong>
+                </p>
+                <p class="ez-modal-body__explanation">
+                    {{ 'version.conflict.consequences'|trans|desc(
+                    'If you continue, the previous version will be overwritten.'
+                    ) }}
+                </p>
+                <p class="ez-modal-body__explanation">
+                    {{ 'version.conflict.choices'|trans|desc(
+                    'To resolve the conflict, click Cancel and delete the draft. Then edit the published Content Item.'
+                    ) }}
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    {{ 'version.conflict.form.cancel'|trans|desc('Cancel') }}
+                </button>
+                <a id="edit-conflicted-draft" class="btn btn-primary"
+                   href="#">
+                    {{ 'version.conflict.form.continue'|trans|desc('Continue') }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
