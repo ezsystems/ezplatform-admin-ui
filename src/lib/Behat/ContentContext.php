@@ -6,7 +6,11 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat;
 
+use Behat\Behat\Tester\Exception\PendingException;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\LanguagePicker;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\LeftMenu;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentStructurePage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 use PHPUnit\Framework\Assert;
@@ -60,6 +64,17 @@ class ContentContext extends BusinessContext
         $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
         Assert::assertEquals($title, $contentStructurePage->getPageHeaderTitle());
     }
+    /**
+     * @Given I start editing the content in :language language
+     */
+    public function startEditingContent($language)
+    {
+        $rightMenu = new RightMenu($this->utilityContext);
+        $rightMenu->clickButton('Edit');
+
+        $languagePicker = new LanguagePicker($this->utilityContext);
+        $languagePicker->chooseLanguage($language);
+    }
 
     /**
      * @When I set :field to :value
@@ -75,4 +90,20 @@ class ContentContext extends BusinessContext
         $fieldNode->setValue('');
         $fieldNode->setValue($value);
     }
+
+    /**
+     * @Given I open UDW and go to :itemPath
+     */
+    public function iOpenUDWAndGoTo($itemPath)
+    {
+        $leftMenu = new LeftMenu($this->utilityContext);
+        $leftMenu->clickButton('Browse');
+
+        $udw = new UniversalDiscoveryWidget($this->utilityContext);
+        $udw->verifyVisibility();
+        $udw->selectContent($itemPath);
+        $udw->confirm();
+    }
+
+
 }
