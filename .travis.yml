@@ -5,7 +5,7 @@ matrix:
         - php: 7.1
           env: PHPUNIT_CONFIG='phpunit.xml'
         - php: 7.1
-          env: BEHAT_OPTS="--profile=adminui --suite=adminui" SYMFONY_ENV=behat
+          env: BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction" SYMFONY_ENV=behat
 
 env:
   global:

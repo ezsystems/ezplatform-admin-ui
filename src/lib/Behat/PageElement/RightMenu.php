@@ -8,6 +8,9 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 class RightMenu extends Element
 {
+    /** @var string Name by which Element is recognised */
+    public const ELEMENT_NAME = 'Right Menu';
+
     /**
      * Clicks a button on the right menu (Create, Preview, Publish etc.).
      *
@@ -16,5 +19,10 @@ class RightMenu extends Element
     public function clickButton($buttonName)
     {
         $this->context->getElementByText($buttonName, '.ez-context-menu .btn-block')->click();
+    }
+
+    public function verifyVisibility(): void
+    {
+        // TODO: Implement verifyVisibility() method.
     }
 }

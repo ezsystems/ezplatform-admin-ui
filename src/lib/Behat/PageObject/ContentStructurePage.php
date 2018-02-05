@@ -7,7 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
-use EzSystems\EzPlatformAdminUi\Behat\UtilityContext;
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
 class ContentStructurePage extends Page
 {
@@ -42,5 +42,10 @@ class ContentStructurePage extends Page
     {
         $this->rightMenu->clickButton('Create');
         $this->context->getElementByText($contentType, '.form-check-label')->click();
+    }
+
+    public function verifyElements(): void
+    {
+        // TODO: Implement verifyElements() method.
     }
 }

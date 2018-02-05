@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Behat;
+namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\LoginPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;

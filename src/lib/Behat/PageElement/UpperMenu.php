@@ -8,6 +8,9 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 class UpperMenu extends Element
 {
+    /** @var string Name by which Element is recognised */
+    public const ELEMENT_NAME = 'Upper Menu';
+
     /**
      * Clicks on top menu, for example "Content" tab.
      *
@@ -26,5 +29,10 @@ class UpperMenu extends Element
     public function goToSubTab($tabName)
     {
         $this->context->getElementByText($tabName, '.navbar-expand-lg .nav-link')->click();
+    }
+
+    public function verifyVisibility(): void
+    {
+        // TODO: Implement verifyVisibility() method.
     }
 }
