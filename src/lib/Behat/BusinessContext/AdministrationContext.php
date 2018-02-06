@@ -143,7 +143,7 @@ class AdministrationContext extends BusinessContext
     /**
      * @Given I go to :itemName :itemType page
      */
-    public function iGoToListItem(string $itemName, string $itemType)
+    public function iGoToListItem(string $itemName, string $itemType): void
     {
         PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType])
             ->adminList->clickListElement($itemName);
@@ -152,7 +152,7 @@ class AdministrationContext extends BusinessContext
     /**
      * @When I start editing :itemType :itemName
      */
-    public function iStartEditingItem(string $itemType, string $itemName)
+    public function iStartEditingItem(string $itemType, string $itemName): void
     {
         PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType])
             ->adminList->clickEditButton($itemName);
@@ -161,7 +161,7 @@ class AdministrationContext extends BusinessContext
     /**
      * @When I delete :itemType :itemName
      */
-    public function iDeleteItem(string $itemType, string $itemName)
+    public function iDeleteItem(string $itemType, string $itemName): void
     {
         $contentTypeGroups = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType]);
         $contentTypeGroups->adminList->selectListElement($itemName);
