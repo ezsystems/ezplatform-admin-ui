@@ -12,9 +12,12 @@ class LoginPage extends Page
     protected $route = '/admin/login';
 
     /** @var string Name by which Page is recognised */
-    const PAGE_NAME = 'Login';
+    public const PAGE_NAME = 'Login';
 
-    protected $fields = ['username' => '#username', 'password' => '#password'];
+    protected $fields = [
+        'username' => '#username',
+        'password' => '#password',
+    ];
 
     /**
      * Performs login action.

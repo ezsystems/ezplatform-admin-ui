@@ -4,12 +4,13 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Behat;
+namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\LoginPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 use OutOfBoundsException;
 
+/** Context for authentication actions */
 class AuthenticationContext extends BusinessContext
 {
     /** @var array Dictionary of known user logins and their passwords */
@@ -34,7 +35,7 @@ class AuthenticationContext extends BusinessContext
      *
      * @throws \OutOfBoundsException when username is not recognised
      */
-    public function iAmLoggedAs(string $username)
+    public function iAmLoggedAs(string $username): void
     {
         $loginPage = PageObjectFactory::createPage($this->utilityContext, LoginPage::PAGE_NAME);
         $loginPage->open();
