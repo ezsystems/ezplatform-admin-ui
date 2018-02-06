@@ -14,7 +14,7 @@ class DashboardPage extends Page
     protected $route = '/admin/dashboard';
 
     /** @var string Name by which Page is recognised */
-    const PAGE_NAME = 'Dashboard';
+    public const PAGE_NAME = 'Dashboard';
 
     /**
      * Verifies that the Dashboard has the "Me" section.

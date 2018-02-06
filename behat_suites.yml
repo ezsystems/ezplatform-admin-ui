@@ -4,11 +4,16 @@ adminui:
     suites:
         adminui:
             paths:
-                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/src/features'
+                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features'
             filters:
                 tags: "@common"
             contexts:
-                - EzSystems\EzPlatformAdminUi\Behat\UtilityContext
-                - EzSystems\EzPlatformAdminUi\Behat\AuthenticationContext
-                - EzSystems\EzPlatformAdminUi\Behat\NavigationContext
-                - EzSystems\EzPlatformAdminUi\Behat\Hooks
+                - EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext
+                - EzSystems\EzPlatformAdminUi\Behat\Helper\Hooks
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AuthenticationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NavigationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AdministrationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentViewContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UpdateContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RightMenuContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext

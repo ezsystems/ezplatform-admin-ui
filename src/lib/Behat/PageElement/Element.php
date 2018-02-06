@@ -6,8 +6,9 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
-use EzSystems\EzPlatformAdminUi\Behat\UtilityContext;
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
+/** Abstract for pages elements */
 abstract class Element
 {
     /** @var int */
@@ -15,13 +16,12 @@ abstract class Element
 
     /* \EzSystems\EzPlatformAdminUi\Behat\UtilityContext */
     protected $context;
+    protected $fields;
 
     public function __construct(UtilityContext $context)
     {
         $this->context = $context;
     }
 
-    public function verifyVisibility(): void
-    {
-    }
+    abstract public function verifyVisibility(): void;
 }

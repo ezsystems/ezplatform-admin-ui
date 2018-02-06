@@ -6,17 +6,20 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-use EzSystems\EzPlatformAdminUi\Behat\UtilityContext;
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
 abstract class Page
 {
-    protected $defaultTimeout = 5;
+    protected $defaultTimeout = 50;
 
     /** @var string Route under which the Page is available */
     protected $route;
 
     /** @var UtilityContext context for interactions with the page */
     protected $context;
+
+    // @var UpperMenu
+    public $upperMenu;
 
     public function __construct(UtilityContext $context)
     {
@@ -59,9 +62,7 @@ abstract class Page
     /**
      * Verifies that expected elements are present.
      */
-    public function verifyElements(): void
-    {
-    }
+    abstract public function verifyElements(): void;
 
     /**
      * Gets the header text displayed in AdminUI.

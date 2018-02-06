@@ -7,7 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
-use EzSystems\EzPlatformAdminUi\Behat\UtilityContext;
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
 class ContentStructurePage extends Page
 {
@@ -26,7 +26,7 @@ class ContentStructurePage extends Page
         $this->rightMenu = new RightMenu($this->context);
     }
 
-    public function createLandingPage($name, $description)
+    public function createLandingPage(string $name, string $description): void
     {
         $this->startCreatingContent('Landing page');
         $this->context->getSession()->getPage()->findField('Title')->setValue($name);
@@ -38,9 +38,14 @@ class ContentStructurePage extends Page
      *
      * @param $contentType
      */
-    public function startCreatingContent($contentType)
+    public function startCreatingContent(string $contentType): void
     {
         $this->rightMenu->clickButton('Create');
         $this->context->getElementByText($contentType, '.form-check-label')->click();
+    }
+
+    public function verifyElements(): void
+    {
+        // TODO: Implement verifyElements() method.
     }
 }
