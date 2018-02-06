@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+/** Element that describes breadcrumb */
 class Breadcrumb extends Element
 {
     protected $fields = [

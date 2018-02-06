@@ -36,7 +36,7 @@ class ElementFactory
             case Notification::ELEMENT_NAME:
                 return new Notification($context);
             default:
-                throw new \InvalidArgumentException(sprintf('Unrecognised element name: %s', $elementName));
+                throw new \InvalidArgumentException(sprintf('Unrecognized element name: %s', $elementName));
         }
     }
 }

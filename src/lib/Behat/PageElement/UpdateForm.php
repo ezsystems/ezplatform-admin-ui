@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+/** Element that describes structures in all update forms */
 class UpdateForm extends Element
 {
     protected $fields = [

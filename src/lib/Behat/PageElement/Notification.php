@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+/** Element that describes user notification bar, that appears on the bottom of the screen */
 class Notification extends Element
 {
     protected $fields = [

@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
+/** Element that describes list-table structure that repeats in every Admin pages */
 class AdminList extends Element
 {
     protected $fields = [
@@ -24,6 +25,7 @@ class AdminList extends Element
 
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Admin List';
+    /** @var string list table title placed in the blue bar */
     protected $listHeader;
 
     public function __construct(UtilityContext $context, string $listHeader)

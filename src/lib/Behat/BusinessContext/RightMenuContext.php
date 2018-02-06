@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
 
+/** Context for actions on right menu */
 class RightMenuContext extends BusinessContext
 {
     /**

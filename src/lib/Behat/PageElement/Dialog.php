@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+/** Element that describes dialog popup */
 class Dialog extends Element
 {
     protected $fields = [

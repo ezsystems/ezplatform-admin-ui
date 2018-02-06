@@ -12,6 +12,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypeGroupsPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 
+/** Context for common actions (creating, editing, deleting, etc) in Admin pages (Content Types, Languages, etc.) */
 class AdministrationContext extends BusinessContext
 {
     private $itemCreateMapping = [
@@ -46,8 +47,8 @@ class AdministrationContext extends BusinessContext
      */
     public function iStartCreatingNew(string $newItemType): void
     {
-        if (!\array_key_exists($newItemType, $this->itemCreateMapping)) {
-            throw new \InvalidArgumentException(sprintf('Unrecognised item type name: %s', $newItemType));
+        if (!array_key_exists($newItemType, $this->itemCreateMapping)) {
+            throw new \InvalidArgumentException(sprintf('Unrecognized item type name: %s', $newItemType));
         }
         PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$newItemType])
             ->adminList->clickPlusButton();
@@ -65,7 +66,8 @@ class AdministrationContext extends BusinessContext
         if (!$isElementOnTheList) {
             throw new ElementNotFoundException(
                     $this->utilityContext->getSession(),
-                    sprintf('Element "%s" is not on the %s list.', $listElementName, $page));
+                    sprintf('Element "%s" is not on the %s list.', $listElementName, $page)
+            );
         }
     }
 
@@ -81,16 +83,17 @@ class AdministrationContext extends BusinessContext
         if ($isElementOnTheList) {
             throw new ElementNotFoundException(
                 $this->utilityContext->getSession(),
-                sprintf('Element "%s" is on the %s list.', $listElementName, $page));
+                sprintf('Element "%s" is on the %s list.', $listElementName, $page)
+            );
         }
     }
 
     /**
      * Check if item is or is not empty, according to $empty param.
      *
-     * @param $itemName
-     * @param $page
-     * @param $shouldBeEmpty
+     * @param string $itemName
+     * @param string $page
+     * @param string $shouldBeEmpty
      */
     private function verifyContentsStatus(string $itemName, string $page, string $shouldBeEmpty): void
     {

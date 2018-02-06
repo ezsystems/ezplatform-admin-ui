@@ -10,6 +10,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageObject\LoginPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 use OutOfBoundsException;
 
+/** Context for authentication actions */
 class AuthenticationContext extends BusinessContext
 {
     /** @var array Dictionary of known user logins and their passwords */

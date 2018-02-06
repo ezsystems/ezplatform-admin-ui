@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+/** Element that describes upper menu (Content, Admin, Page and theirs children) */
 class UpperMenu extends Element
 {
     /** @var string Name by which Element is recognised */

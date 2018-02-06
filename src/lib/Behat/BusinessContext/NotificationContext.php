@@ -10,6 +10,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Notification;
 use PHPUnit\Framework\Assert;
 
+/** Context for actions on notifications */
 class NotificationContext extends BusinessContext
 {
     /**

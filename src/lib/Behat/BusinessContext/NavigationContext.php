@@ -11,6 +11,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UpperMenu;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 
+/** Context for general navigation actions */
 class NavigationContext extends BusinessContext
 {
     /**

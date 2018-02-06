@@ -6,13 +6,14 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+/** Element that describes right action menu (Create, Preview, Publish etc.) */
 class RightMenu extends Element
 {
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Right Menu';
 
     /**
-     * Clicks a button on the right menu (Create, Preview, Publish etc.).
+     * Clicks a button on the right menu.
      *
      * @param $buttonName
      */

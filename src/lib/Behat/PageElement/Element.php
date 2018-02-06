@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
+/** Abstract for pages elements */
 abstract class Element
 {
     /** @var int */

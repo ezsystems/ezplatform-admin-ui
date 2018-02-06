@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\UpdateItemPage;
 
+/** Context for common actions for creating and updating */
 class UpdateContext extends BusinessContext
 {
     /**
