@@ -16,7 +16,7 @@ class UpperMenu extends Element
      *
      * @param $tabName
      */
-    public function goToTab($tabName)
+    public function goToTab(string $tabName): void
     {
         $this->context->getElementByText($tabName, '.nav-link')->click();
     }
@@ -26,7 +26,7 @@ class UpperMenu extends Element
      *
      * @param $tabName
      */
-    public function goToSubTab($tabName)
+    public function goToSubTab(string $tabName): void
     {
         $this->context->getElementByText($tabName, '.navbar-expand-lg .nav-link')->click();
     }

@@ -8,8 +8,10 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 class Notification extends Element
 {
-    protected $fields = ['alert' => '.alert',
-                        'successAlert' => '.alert-success', ];
+    protected $fields = [
+        'alert' => '.alert',
+        'successAlert' => '.alert-success',
+    ];
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Notification';
 
@@ -18,7 +20,7 @@ class Notification extends Element
         $this->context->waitUntilElementIsVisible($this->fields['alert'], $this->defaultTimeout);
     }
 
-    public function verifyAlertSuccess()
+    public function verifyAlertSuccess(): void
     {
         $this->context->assertElementOnPage($this->fields['successAlert']);
     }

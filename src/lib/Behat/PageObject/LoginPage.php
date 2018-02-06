@@ -14,7 +14,10 @@ class LoginPage extends Page
     /** @var string Name by which Page is recognised */
     public const PAGE_NAME = 'Login';
 
-    protected $fields = ['username' => '#username', 'password' => '#password'];
+    protected $fields = [
+        'username' => '#username',
+        'password' => '#password',
+    ];
 
     /**
      * Performs login action.

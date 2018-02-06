@@ -8,8 +8,10 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 class UpdateForm extends Element
 {
-    protected $fields = ['formElement' => '.form-group',
-                    'mainFormSection' => '.px-5:nth-child(1) .card-body', ];
+    protected $fields = [
+        'formElement' => '.form-group',
+        'mainFormSection' => '.px-5:nth-child(1) .card-body',
+    ];
 
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Admin Update Form';

@@ -15,7 +15,7 @@ class UpdateContext extends BusinessContext
      * @When I set :field to :value
      * @When I set :field as empty
      */
-    public function fillFieldWithValue($field, $value = '')
+    public function fillFieldWithValue(string $field, string $value = ''): void
     {
         PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME)
             ->updateForm->fillFIeldWithValue($field, $value);

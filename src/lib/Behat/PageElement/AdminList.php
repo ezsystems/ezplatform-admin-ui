@@ -11,14 +11,16 @@ use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
 class AdminList extends Element
 {
-    protected $fields = ['list' => 'form',
-                        'plusButton' => '.ez-icon-create',
-                        'trashButton' => '.ez-icon-trash',
-                        'editButton' => 'tr:nth-child(%s) a[title=Edit]',
-                        'listHeader' => '.ez-table-header__headline',
-                        'tableHeader' => 'th',
-                        'listElementLink' => '.ez-checkbox-cell+ td a',
-                        'tableCell' => 'tr:nth-child(%s) td:nth-child(%s)', ];
+    protected $fields = [
+        'list' => 'form',
+        'plusButton' => '.ez-icon-create',
+        'trashButton' => '.ez-icon-trash',
+        'editButton' => 'tr:nth-child(%s) a[title=Edit]',
+        'listHeader' => '.ez-table-header__headline',
+        'tableHeader' => 'th',
+        'listElementLink' => '.ez-checkbox-cell+ td a',
+        'tableCell' => 'tr:nth-child(%s) td:nth-child(%s)',
+    ];
 
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Admin List';
@@ -32,7 +34,9 @@ class AdminList extends Element
 
     private function verifyProperList(): void
     {
-        if ($this->listHeader !== $this->context->findElement($this->fields['listHeader'], $this->defaultTimeout)->getText()) {
+        $actualHeader = $this->context->findElement($this->fields['listHeader'], $this->defaultTimeout)->getText();
+
+        if ($this->listHeader !== $actualHeader) {
             throw new ElementNotFoundException($this->context->getSession(), 'table header', $this->fields['listHeader']);
         }
     }

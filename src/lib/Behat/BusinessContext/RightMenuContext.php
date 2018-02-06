@@ -16,7 +16,7 @@ class RightMenuContext extends BusinessContext
      *
      * @param  string   $button     Text of the element to click
      */
-    public function clickEditActionBar($button)
+    public function clickEditActionBar(string $button): void
     {
         $rightMenu = new RightMenu($this->utilityContext);
         $rightMenu->clickButton($button);

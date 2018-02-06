@@ -34,7 +34,7 @@ class AuthenticationContext extends BusinessContext
      *
      * @throws \OutOfBoundsException when username is not recognised
      */
-    public function iAmLoggedAs(string $username)
+    public function iAmLoggedAs(string $username): void
     {
         $loginPage = PageObjectFactory::createPage($this->utilityContext, LoginPage::PAGE_NAME);
         $loginPage->open();

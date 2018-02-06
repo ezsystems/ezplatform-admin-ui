@@ -8,17 +8,19 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 class Dialog extends Element
 {
-    protected $fields = ['confirm' => '.btn--trigger',
-                        'decline' => '.btn--no', ];
+    protected $fields = [
+        'confirm' => '.btn--trigger',
+        'decline' => '.btn--no',
+    ];
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Dialog';
 
-    public function confirm()
+    public function confirm(): void
     {
         $this->context->findElement($this->fields['confirm'])->click();
     }
 
-    public function decline()
+    public function decline(): void
     {
         $this->context->findElement($this->fields['decline'])->click();
     }

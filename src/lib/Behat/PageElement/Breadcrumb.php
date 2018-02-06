@@ -8,8 +8,10 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 class Breadcrumb extends Element
 {
-    protected $fields = ['breadcrumbItem' => '.breadcrumb-item',
-                        'breadcrumbItemLink' => '.breadcrumb-item a', ];
+    protected $fields = [
+        'breadcrumbItem' => '.breadcrumb-item',
+        'breadcrumbItemLink' => '.breadcrumb-item a',
+    ];
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Breadcrumb';
 
@@ -18,7 +20,7 @@ class Breadcrumb extends Element
         $this->context->waitUntilElementIsVisible($this->fields['breadcrumbItem']);
     }
 
-    public function clickBreadcrumbItem(string $itemName)
+    public function clickBreadcrumbItem(string $itemName): void
     {
         $this->context->getElementByText($itemName, $this->fields['breadcrumbItemLink'])->click();
     }

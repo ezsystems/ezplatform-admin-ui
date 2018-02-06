@@ -16,7 +16,7 @@ class RightMenu extends Element
      *
      * @param $buttonName
      */
-    public function clickButton($buttonName)
+    public function clickButton(string $buttonName): void
     {
         $this->context->getElementByText($buttonName, '.ez-context-menu .btn-block')->click();
     }

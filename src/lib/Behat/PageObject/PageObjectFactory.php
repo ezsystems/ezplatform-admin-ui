@@ -7,8 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
-
-//use EzSystems\StudioUIBundle\Tests\Behat\PageObject\LandingPageEditorPage;
+use EzSystems\StudioUIBundle\Tests\Behat\PageObject\LandingPageEditorPage;
 
 class PageObjectFactory
 {
@@ -21,7 +20,7 @@ class PageObjectFactory
      *
      * @return LoginPage|DashboardPage|ContentStructurePage|ContentTypeGroupsPage|UpdateItemPage to interact with
      */
-    public static function createPage(UtilityContext $context, string $pageName, ...$parameters): Page
+    public static function createPage(UtilityContext $context, string $pageName, ?string ...$parameters): Page
     {
         switch ($pageName) {
             case LoginPage::PAGE_NAME:

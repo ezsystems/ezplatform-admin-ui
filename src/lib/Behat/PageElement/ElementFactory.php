@@ -18,7 +18,7 @@ class ElementFactory
      *
      * @return AdminList|Dialog|RightMenu|UpperMenu|UpdateForm|Breadcrumb|Notification Element to interact with
      */
-    public static function createElement(UtilityContext $context, string $elementName, ...$parameters): Element
+    public static function createElement(UtilityContext $context, string $elementName, ?string ...$parameters): Element
     {
         switch ($elementName) {
             case AdminList::ELEMENT_NAME:

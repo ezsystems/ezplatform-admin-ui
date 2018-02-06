@@ -14,14 +14,18 @@ use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 
 class AdministrationContext extends BusinessContext
 {
-    private $itemCreateMapping = ['Content Type Group' => ContentTypeGroupsPage::PAGE_NAME,
-                        'Content Type' => '',
-                        'Language' => '',
-                        'Role' => '',
-                        'Section' => '',
-                        'User' => '', ];
-    private $emptyHeaderMapping = ['Content Type Groups' => 'Content Types count',
-                            'Sections' => 'Assigned Content items', ];
+    private $itemCreateMapping = [
+        'Content Type Group' => ContentTypeGroupsPage::PAGE_NAME,
+        'Content Type' => '',
+        'Language' => '',
+        'Role' => '',
+        'Section' => '',
+        'User' => '',
+    ];
+    private $emptyHeaderMapping = [
+        'Content Type Groups' => 'Content Types count',
+        'Sections' => 'Assigned Content items',
+    ];
 
     /**
      * @Then I should see :pageName list
@@ -53,12 +57,12 @@ class AdministrationContext extends BusinessContext
      * @Then there's :listElementName on :page list
      * @Then there's :listElementName on :parameter :page list
      */
-    public function isElementOnTheList($listElementName, $page): void
+    public function isElementOnTheList(string $listElementName, string $page): void
     {
-        $actual = PageObjectFactory::createPage($this->utilityContext, $page)
+        $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page)
             ->adminList->isElementOnList($listElementName);
 
-        if (!$actual) {
+        if (!$isElementOnTheList) {
             throw new ElementNotFoundException(
                     $this->utilityContext->getSession(),
                     sprintf('Element "%s" is not on the %s list.', $listElementName, $page));
@@ -69,12 +73,12 @@ class AdministrationContext extends BusinessContext
      * @Then there's no :listElementName on :page list
      * @Then there's no :listElementName on :parameter :page list
      */
-    public function isElementNotOnTheList($listElementName, $page, $parameter = null): void
+    public function isElementNotOnTheList(string $listElementName, string $page, string $parameter = null): void
     {
-        $actual = PageObjectFactory::createPage($this->utilityContext, $page, $parameter)
+        $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page, $parameter)
             ->adminList->isElementOnList($listElementName);
 
-        if ($actual) {
+        if ($isElementOnTheList) {
             throw new ElementNotFoundException(
                 $this->utilityContext->getSession(),
                 sprintf('Element "%s" is on the %s list.', $listElementName, $page));
@@ -88,9 +92,9 @@ class AdministrationContext extends BusinessContext
      * @param $page
      * @param $shouldBeEmpty
      */
-    private function verifyContentsStatus($itemName, $page, $shouldBeEmpty): void
+    private function verifyContentsStatus(string $itemName, string $page, string $shouldBeEmpty): void
     {
-        $isEmpty = '0';
+        $emptyContainerCellValue = '0';
 
         $contentsCount = PageObjectFactory::createPage($this->utilityContext, $page)
             ->adminList->getListItemAttribute($itemName, $this->emptyHeaderMapping[$page]);
@@ -100,7 +104,7 @@ class AdministrationContext extends BusinessContext
             $msg = ' non';
         }
 
-        if (($contentsCount !== $isEmpty) === $shouldBeEmpty) {
+        if (($contentsCount !== $emptyContainerCellValue) === $shouldBeEmpty) {
             throw new ElementNotFoundException(
                 $this->utilityContext->getSession(),
                 sprintf('No%s empty %s on the %s list.', $msg, $itemName, $page));
@@ -110,7 +114,7 @@ class AdministrationContext extends BusinessContext
     /**
      * @Given there's empty :itemName on :page list
      */
-    public function isEmptyElementOnTheList($itemName, $page): void
+    public function isEmptyElementOnTheList(string $itemName, string $page): void
     {
         $this->verifyContentsStatus($itemName, $page, true);
     }
@@ -118,7 +122,7 @@ class AdministrationContext extends BusinessContext
     /**
      * @Given there's non-empty :itemName on :page list
      */
-    public function isNonEmptyElementOnTheList($itemName, $page): void
+    public function isNonEmptyElementOnTheList(string $itemName, string $page): void
     {
         $this->verifyContentsStatus($itemName, $page, false);
     }
@@ -126,12 +130,12 @@ class AdministrationContext extends BusinessContext
     /**
      * @Then :itemType :itemName cannot be selected
      */
-    public function itemCannotBeSelected($itemType, $itemName): void
+    public function itemCannotBeSelected(string $itemType, string $itemName): void
     {
-        $checkboxState = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType])
+        $isListElementSelectable = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType])
             ->adminList->isListElementSelectable($itemName);
 
-        if ($checkboxState) {
+        if ($isListElementSelectable) {
             throw new \Exception(sprintf('Element %s shoudn\'t be selectable.', $itemName));
         }
     }
@@ -139,7 +143,7 @@ class AdministrationContext extends BusinessContext
     /**
      * @Given I go to :itemName :itemType page
      */
-    public function iGoToListItem($itemName, $itemType)
+    public function iGoToListItem(string $itemName, string $itemType)
     {
         PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType])
             ->adminList->clickListElement($itemName);
@@ -148,7 +152,7 @@ class AdministrationContext extends BusinessContext
     /**
      * @When I start editing :itemType :itemName
      */
-    public function iStartEditingItem($itemType, $itemName)
+    public function iStartEditingItem(string $itemType, string $itemName)
     {
         PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType])
             ->adminList->clickEditButton($itemName);
@@ -157,7 +161,7 @@ class AdministrationContext extends BusinessContext
     /**
      * @When I delete :itemType :itemName
      */
-    public function iDeleteItem($itemType, $itemName)
+    public function iDeleteItem(string $itemType, string $itemName)
     {
         $contentTypeGroups = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType]);
         $contentTypeGroups->adminList->selectListElement($itemName);

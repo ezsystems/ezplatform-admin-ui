@@ -16,7 +16,7 @@ class NavigationContext extends BusinessContext
     /**
      * @Given I open :pageName page
      */
-    public function openPage($pageName): void
+    public function openPage(string $pageName): void
     {
         $page = PageObjectFactory::createPage($this->utilityContext, $pageName);
         $page->open();
@@ -25,7 +25,7 @@ class NavigationContext extends BusinessContext
     /**
      * @Given I try to open :pageName page
      */
-    public function tryToOpenPage($pageName): void
+    public function tryToOpenPage(string $pageName): void
     {
         $page = PageObjectFactory::createPage($this->utilityContext, $pageName);
         $page->open(false);
@@ -35,7 +35,7 @@ class NavigationContext extends BusinessContext
      * @Then I should be on :pageName page
      * @Then I should be on :pageName :itemName page
      */
-    public function iAmOnPage($pageName, $itemName = null): void
+    public function iAmOnPage(string $pageName, string $itemName = null): void
     {
         $page = PageObjectFactory::createPage($this->utilityContext, $pageName, $itemName);
         $page->verifyIsLoaded();
@@ -45,7 +45,7 @@ class NavigationContext extends BusinessContext
      * @Then I go to :tab tab
      * @Then I go to :subTab in :tab tab
      */
-    public function iGoToTab($tabName, $subTab = null): void
+    public function iGoToTab(string $tabName, string $subTab = null): void
     {
         $upperMenu = ElementFactory::createElement($this->utilityContext, UpperMenu::ELEMENT_NAME);
         $upperMenu->goToTab($tabName);
@@ -58,7 +58,7 @@ class NavigationContext extends BusinessContext
     /**
      * @When I click on :element on breadcrumb
      */
-    public function iClickOnBreadcrumbLink($element)
+    public function iClickOnBreadcrumbLink(string $element): void
     {
         $breadcrumb = ElementFactory::createElement($this->utilityContext, Breadcrumb::ELEMENT_NAME);
         $breadcrumb->verifyVisibility();

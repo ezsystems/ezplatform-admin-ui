@@ -15,7 +15,7 @@ class ContentViewContext extends BusinessContext
     /**
      * @Given I start creating a new Landing Page :name
      */
-    public function startCreatingNewLandingPage($name)
+    public function startCreatingNewLandingPage(string $name): void
     {
         $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
         $contentStructurePage->createLandingPage($name, 'Test Desc');
@@ -24,7 +24,7 @@ class ContentViewContext extends BusinessContext
     /**
      * @Then I (should) see :title title/topic
      */
-    public function iSeeTitle($title)
+    public function iSeeTitle(string $title): void
     {
         $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
         Assert::assertEquals($title, $contentStructurePage->getPageHeaderTitle());
