@@ -6,15 +6,25 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use PHPUnit\Framework\Assert;
+
 class LeftMenu extends Element
 {
+    private $buttonSelector = '.ez-sticky-container .btn';
+    private $menuSelector = 'ez-side-menu';
+
     /**
-     * Clicks a button on the right menu (Create, Preview, Publish etc.).
+     * Clicks a button on the left menu (CSearch, Browse, Trash).
      *
-     * @param $buttonName
+     * @param string $buttonName
      */
-    public function clickButton($buttonName)
+    public function clickButton(string $buttonName)
     {
-        $this->context->getElementByText($buttonName, '.ez-sticky-container .btn')->click();
+        $this->context->getElementByText($buttonName, $this->buttonSelector)->click();
+    }
+
+    public function verifyVisibility(): void
+    {
+        Assert::assertTrue($this->context->findElement($this->menuSelector)->isVisible());
     }
 }

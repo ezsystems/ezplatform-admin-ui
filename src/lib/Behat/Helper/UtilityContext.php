@@ -197,6 +197,18 @@ class UtilityContext extends MinkContext
     }
 
     /**
+     * Filters an array of elements and returns the visible ones.
+     *
+     * @param NodeElement[] $elements
+     *
+     * @return NodeElement[]
+     */
+    public function getVisibleElements(array $elements): array
+    {
+        return array_filter($elements, function ($element) { return $element->isVisible(); });
+    }
+
+    /**
      * Checks the visibility of a HTML element found by class.
      *
      * @param string $locator CSS locator of the element

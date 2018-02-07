@@ -6,25 +6,40 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use PHPUnit\Framework\Assert;
 
 class UniversalDiscoveryWidget extends Element
 {
-    public function selectContent($itemPath)
+    public function __construct(UtilityContext $context)
+    {
+        parent::__construct($context);
+        $this->fields = [
+            'tabSelector' => '.c-tab-nav-item',
+            'confirmButton' => '.m-ud__action--confirm',
+            'selectContentButton' => '.c-meta-preview__btn--select',
+            'elementSelector' => '.c-finder-tree-branch:nth-of-type(%d) .c-finder-tree-leaf',
+        ];
+    }
+
+    /**
+     * @param string $itemPath
+     */
+    public function selectContent(string $itemPath): void
     {
         $pathParts = explode('/', $itemPath);
         $depth = 1;
         foreach ($pathParts as $part) {
-            $this->context->getElementByText($part, ".c-finder-tree-branch:nth-of-type({$depth}) .c-finder-tree-leaf")->click();
+            $this->context->getElementByText($part, sprintf($this->fields['elementSelector'], $depth))->click();
             ++$depth;
         }
 
-        $this->context->findElement('.c-meta-preview__btn--select')->click();
+        $this->context->findElement($this->fields['selectContentButton'])->click();
     }
 
-    public function confirm()
+    public function confirm(): void
     {
-        $this->context->getElementByText('Confirm', '.m-ud__action--confirm')->click();
+        $this->context->getElementByText('Confirm', $this->fields['confirmButton'])->click();
     }
 
     public function verifyVisibility(): void
@@ -36,7 +51,8 @@ class UniversalDiscoveryWidget extends Element
     {
         $expectedTabTitles = ['Browse', 'Search'];
 
-        $tabs = $this->context->findAllWithWait('.c-tab-nav-item');
+        $actualTabTitles = [];
+        $tabs = $this->context->findAllWithWait($this->fields['tabSelector']);
         foreach ($tabs as $tab) {
             $actualTabTitles[] = $tab->getText();
         }

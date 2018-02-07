@@ -12,6 +12,7 @@ class UpdateForm extends Element
     protected $fields = [
         'formElement' => '.form-group',
         'mainFormSection' => '.px-5:nth-child(1) .card-body',
+        'richTextSelector' => '.ez-data-source__richtext',
     ];
 
     /** @var string Name by which Element is recognised */
@@ -32,5 +33,12 @@ class UpdateForm extends Element
 
         $fieldNode->setValue('');
         $fieldNode->setValue($value);
+    }
+
+    public function fillRichtextWithValue(string $value): void
+    {
+        $summaryField = $this->context->findElement($this->fields['richTextSelector']);
+        $summaryField->click();
+        $summaryField->setValue($value);
     }
 }

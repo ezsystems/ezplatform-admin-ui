@@ -18,35 +18,36 @@ class ContentViewContext extends BusinessContext
 {
     /**
      * @Given I start creating a new Landing Page :name
+     *
+     * @param string $name
      */
-    public function startCreatingNewLandingPage($name)
+    public function startCreatingNewLandingPage(string $name): void
     {
         $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
-        $contentStructurePage->startCreatingContent('Landing page');
+        $updatePage = $contentStructurePage->startCreatingContent('Landing page');
 
-        $this->utilityContext->getSession()->getPage()->findField('Title')->setValue($name);
-        $this->utilityContext->getSession()->getPage()->findField('Description')->setValue('Test desc');
+        $updatePage->updateForm->fillFIeldWithValue('Title', $name);
+        $updatePage->updateForm->fillFIeldWithValue('Description', $name);
     }
 
     /**
      * @Given I start creating a new Article :name
+     *
+     * @param string $name
      */
-    public function startCreatingArticle($name)
+    public function startCreatingArticle($name): void
     {
         $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
-        $contentStructurePage->startCreatingContent('Article');
+        $updatePage = $contentStructurePage->startCreatingContent('Article');
 
-        $this->utilityContext->getSession()->getPage()->findField('Title')->setValue($name);
-
-        $summaryField = $this->utilityContext->findElement('.ez-data-source__richtext');//$this->utilityContext->getSession()->getPage()->findField('Summary');
-        $summaryField->click();
-        $summaryField->setValue('Test desc');
+        $updatePage->updateForm->fillFIeldWithValue('Title', $name);
+        $updatePage->updateForm->fillRichtextWithValue('Test desc');
     }
 
     /**
      * @Given I start editing the content in :language language
      */
-    public function startEditingContent($language)
+    public function startEditingContent($language): void
     {
         $rightMenu = new RightMenu($this->utilityContext);
         $rightMenu->clickButton('Edit');
@@ -58,7 +59,7 @@ class ContentViewContext extends BusinessContext
     /**
      * @Given I open UDW and go to :itemPath
      */
-    public function iOpenUDWAndGoTo($itemPath)
+    public function iOpenUDWAndGoTo($itemPath): void
     {
         $leftMenu = new LeftMenu($this->utilityContext);
         $leftMenu->clickButton('Browse');

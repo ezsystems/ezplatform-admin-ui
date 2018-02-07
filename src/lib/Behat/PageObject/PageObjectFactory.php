@@ -19,9 +19,9 @@ class PageObjectFactory
      *
      * @param UtilityContext $context
      * @param string $pageName Name of the Page to creator
-     * @param null[]|string[] $parameters
+     * @param null[]|string[] $parameters additional parameters
      *
-     * @return Page to interact with
+     * @return LoginPage|DashboardPage|ContentStructurePage|ContentTypeGroupsPage|UpdateItemPage|FormManagerPage|FormDetailsPage|FormDeletionConfirmationPage to interact with
      */
     public static function createPage(UtilityContext $context, string $pageName, ?string ...$parameters): Page
     {
