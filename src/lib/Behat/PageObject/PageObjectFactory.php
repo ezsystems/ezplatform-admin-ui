@@ -7,6 +7,10 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
 use EzSystems\EzPlatformAdminUi\Behat\UtilityContext;
+use EzSystems\FormBuilder\API\Repository\Values\Form;
+use EzSystems\FormBuilderBundle\Tests\Behat\PageObject\FormDeletionConfirmationPage;
+use EzSystems\FormBuilderBundle\Tests\Behat\PageObject\FormDetailsPage;
+use EzSystems\FormBuilderBundle\Tests\Behat\PageObject\FormManagerPage;
 use EzSystems\StudioUIBundle\Tests\Behat\PageObject\LandingPageEditorPage;
 
 class PageObjectFactory
@@ -30,6 +34,12 @@ class PageObjectFactory
                 return new ContentStructurePage($context);
             case LandingPageEditorPage::PAGE_NAME:
                 return new LandingPageEditorPage($context);
+            case FormManagerPage::PAGE_NAME:
+                return new FormManagerPage($context);
+            case FormDetailsPage::PAGE_NAME:
+                return new FormDetailsPage($context);
+            case FormDeletionConfirmationPage::PAGE_NAME:
+                return new FormDeletionConfirmationPage($context);
             default:
                 throw new \InvalidArgumentException(sprintf('Unrecognised page name: %s', $pageName));
         }
