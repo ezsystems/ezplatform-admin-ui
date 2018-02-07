@@ -60,7 +60,7 @@
 }
 
 .btn.disabled,
-.btn:disabled {
+.btn[disabled] {
     opacity: .3;
 }
 
