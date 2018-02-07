@@ -36,7 +36,7 @@ export default class EzBtnImage extends EzEmbedImageButton {
         widget.loadImagePreviewFromCurrentVersion(items[0].ContentInfo.Content.CurrentVersion._href);
         widget.setFocused(true);
 
-        document.querySelector('#react-udw').innerHTML = '';
+        ReactDOM.unmountComponentAtNode(document.querySelector('#react-udw'));
     }
 
     /**
