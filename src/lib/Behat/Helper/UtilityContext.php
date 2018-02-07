@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Behat;
+namespace EzSystems\EzPlatformAdminUi\Behat\Helper;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Element\TraversableElement;
@@ -97,6 +97,41 @@ class UtilityContext extends MinkContext
         }
 
         return null;
+    }
+
+    /**
+     * Finds an HTML element by class and the text value and returns it's position in order. Search can be narrowed to children of baseElement.
+     *
+     * @param string $text Text value of the element
+     * @param string $selector CSS selector of the element
+     * @param string $textSelector Extra CSS selector for text of the element
+     * @param TraversableElement|null $baseElement
+     *
+     * @return int
+     */
+    public function getElementPositionByText(string $text, string $selector, string $textSelector = null, TraversableElement $baseElement = null): int
+    {
+        $baseElement = $baseElement ?? $this->getSession()->getPage();
+        $counter = 0;
+
+        $elements = $this->findAllWithWait($selector, $baseElement);
+        foreach ($elements as $element) {
+            ++$counter;
+            if ($textSelector !== null) {
+                try {
+                    $elementText = $this->findElement($textSelector, 10, $element)->getText();
+                } catch (\Exception $e) {
+                    continue;
+                }
+            } else {
+                $elementText = $element->getText();
+            }
+            if ($elementText === $text) {
+                return $counter;
+            }
+        }
+
+        return 0;
     }
 
     /**
