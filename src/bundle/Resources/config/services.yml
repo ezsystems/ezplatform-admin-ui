@@ -9,6 +9,7 @@ imports:
     - { resource: services/dashboard.yml }
     - { resource: services/modules/subitems.yml }
     - { resource: services/form_processors.yml }
+    - { resource: services/validators.yml }
 
 parameters:
 

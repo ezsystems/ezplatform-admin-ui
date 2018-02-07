@@ -49,6 +49,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
+use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType;
@@ -73,6 +74,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordChangeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PoliciesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType;
@@ -867,5 +869,22 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(UserDeleteType::class);
 
         return $this->formFactory->createNamed($name, UserDeleteType::class, $data);
+    }
+
+    /**
+     * @param UserPasswordChangeData $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function changeUserPassword(
+        UserPasswordChangeData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordChangeType::class);
+
+        return $this->formFactory->createNamed($name, UserPasswordChangeType::class, $data);
     }
 }

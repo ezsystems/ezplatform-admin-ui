@@ -291,6 +291,11 @@
         <target state="new">Save</target>
         <note>key: url_edit__sidebar_right__save</note>
       </trans-unit>
+      <trans-unit id="da5c7f4f526c2dd5b1e1f51ab5238ef4ba86d421" resname="user__change_password">
+        <source>Change password</source>
+        <target state="new">Change password</target>
+        <note>key: user__change_password</note>
+      </trans-unit>
       <trans-unit id="06accb26fbb1b72012942af2b3e03f7c138e28c3" resname="user__content">
         <source>Logout</source>
         <target state="new">Logout</target>
@@ -315,6 +320,16 @@
         <source>Update</source>
         <target state="new">Update</target>
         <note>key: user_edit__sidebar_right__update</note>
+      </trans-unit>
+      <trans-unit id="d79a55ddd58ecf56b4edb39c794c858d649481e2" resname="user_password_change__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: user_password_change__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="ab8629add84cbd9cebfdf326f7242044ae7650af" resname="user_password_change__sidebar_right__update">
+        <source>Update</source>
+        <target state="new">Update</target>
+        <note>key: user_password_change__sidebar_right__update</note>
       </trans-unit>
     </body>
   </file>
