@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 use Behat\Mink\Exception\ElementNotFoundException;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypeGroupPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypeGroupsPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 
@@ -17,7 +18,7 @@ class AdministrationContext extends BusinessContext
 {
     private $itemCreateMapping = [
         'Content Type Group' => ContentTypeGroupsPage::PAGE_NAME,
-        'Content Type' => '',
+        'Content Type' => ContentTypeGroupPage::PAGE_NAME,
         'Language' => '',
         'Role' => '',
         'Section' => '',
@@ -42,15 +43,16 @@ class AdministrationContext extends BusinessContext
 
     /**
      * @When I start creating new :newItemType
+     * @When I start creating new :newItemType in :containerItem
      *
      * @param string $newItemType
      */
-    public function iStartCreatingNew(string $newItemType): void
+    public function iStartCreatingNew(string $newItemType, ?string $containerItem = null): void
     {
         if (!array_key_exists($newItemType, $this->itemCreateMapping)) {
             throw new \InvalidArgumentException(sprintf('Unrecognized item type name: %s', $newItemType));
         }
-        PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$newItemType])
+        PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$newItemType], $containerItem)
             ->adminList->clickPlusButton();
     }
 
@@ -58,10 +60,10 @@ class AdministrationContext extends BusinessContext
      * @Then there's :listElementName on :page list
      * @Then there's :listElementName on :parameter :page list
      */
-    public function isElementOnTheList(string $listElementName, string $page): void
+    public function isElementOnTheList(string $listElementName, string $page, ?string $parameter = null): void
     {
-        $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page)
-            ->adminList->isElementOnList($listElementName);
+        $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page, $parameter)
+            ->adminList->isLinkedItemOnList($listElementName);
 
         if (!$isElementOnTheList) {
             throw new ElementNotFoundException(
@@ -78,7 +80,7 @@ class AdministrationContext extends BusinessContext
     public function isElementNotOnTheList(string $listElementName, string $page, string $parameter = null): void
     {
         $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page, $parameter)
-            ->adminList->isElementOnList($listElementName);
+            ->adminList->isLinkedItemOnList($listElementName);
 
         if ($isElementOnTheList) {
             throw new ElementNotFoundException(
@@ -145,31 +147,35 @@ class AdministrationContext extends BusinessContext
 
     /**
      * @Given I go to :itemName :itemType page
+     * @Given I go to :itemName :itemType page from :itemContainer
      */
-    public function iGoToListItem(string $itemName, string $itemType): void
+    public function iGoToListItem(string $itemName, string $itemType, string $itemContainer = null): void
     {
-        PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType])
+        PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer)
             ->adminList->clickListElement($itemName);
     }
 
     /**
      * @When I start editing :itemType :itemName
+     * @When I start editing :itemType :itemName from :containerName
      */
-    public function iStartEditingItem(string $itemType, string $itemName): void
+    public function iStartEditingItem(string $itemType, string $itemName, ?string $containerName = null): void
     {
-        PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType])
+        PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $containerName)
             ->adminList->clickEditButton($itemName);
     }
 
     /**
      * @When I delete :itemType :itemName
+     * @When I delete :itemType :itemName from :itemContainer
      */
-    public function iDeleteItem(string $itemType, string $itemName): void
+    public function iDeleteItem(string $itemType, string $itemName, ?string $itemContainer = null): void
     {
-        $contentTypeGroups = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType]);
+        $contentTypeGroups = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer);
         $contentTypeGroups->adminList->selectListElement($itemName);
         $contentTypeGroups->adminList->clickTrashButton();
-        ElementFactory::createElement($this->utilityContext, Dialog::ELEMENT_NAME)
-            ->confirm();
+        $dialog = ElementFactory::createElement($this->utilityContext, Dialog::ELEMENT_NAME);
+        $dialog->verifyVisibility();
+        $dialog->confirm();
     }
 }
