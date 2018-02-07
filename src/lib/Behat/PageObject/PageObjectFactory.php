@@ -6,8 +6,6 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-use EzSystems\EzPlatformAdminUi\Behat\UtilityContext;
-use EzSystems\FormBuilder\API\Repository\Values\Form;
 use EzSystems\FormBuilderBundle\Tests\Behat\PageObject\FormDeletionConfirmationPage;
 use EzSystems\FormBuilderBundle\Tests\Behat\PageObject\FormDetailsPage;
 use EzSystems\FormBuilderBundle\Tests\Behat\PageObject\FormManagerPage;
@@ -21,9 +19,9 @@ class PageObjectFactory
      *
      * @param UtilityContext $context
      * @param string $pageName Name of the Page to creator
-     * @param string $parameter additional parameter for constructor, e.g. name of item
+     * @param null[]|string[] $parameters
      *
-     * @return LoginPage|DashboardPage|ContentStructurePage|ContentTypeGroupsPage|UpdateItemPage to interact with
+     * @return Page to interact with
      */
     public static function createPage(UtilityContext $context, string $pageName, ?string ...$parameters): Page
     {
@@ -45,7 +43,7 @@ class PageObjectFactory
             case FormManagerPage::PAGE_NAME:
                 return new FormManagerPage($context);
             case FormDetailsPage::PAGE_NAME:
-                return new FormDetailsPage($context);
+                return new FormDetailsPage($context, $parameters[0]);
             case FormDeletionConfirmationPage::PAGE_NAME:
                 return new FormDeletionConfirmationPage($context);
             default:

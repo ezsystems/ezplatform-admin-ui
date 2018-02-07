@@ -6,6 +6,10 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\LanguagePicker;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\LeftMenu;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentStructurePage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 use PHPUnit\Framework\Assert;

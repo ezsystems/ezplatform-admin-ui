@@ -14,8 +14,9 @@ abstract class Element
     /** @var int */
     public $defaultTimeout = 5;
 
-    /* \EzSystems\EzPlatformAdminUi\Behat\UtilityContext */
+    /* \EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext */
     protected $context;
+
     protected $fields;
 
     public function __construct(UtilityContext $context)
@@ -25,6 +26,5 @@ abstract class Element
 
     public function verifyVisibility(): void
     {
-
     }
 }

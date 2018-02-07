@@ -1,10 +1,10 @@
 <?php
+
 /**
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
-
 
 use PHPUnit\Framework\Assert;
 
@@ -14,8 +14,7 @@ class UniversalDiscoveryWidget extends Element
     {
         $pathParts = explode('/', $itemPath);
         $depth = 1;
-        foreach ($pathParts as $part)
-        {
+        foreach ($pathParts as $part) {
             $this->context->getElementByText($part, ".c-finder-tree-branch:nth-of-type({$depth}) .c-finder-tree-leaf")->click();
             ++$depth;
         }
@@ -33,13 +32,12 @@ class UniversalDiscoveryWidget extends Element
         $this->assertExpectedTabsExist();
     }
 
-    private function assertExpectedTabsExist() : void
+    private function assertExpectedTabsExist(): void
     {
-        $expectedTabTitles = ['Browse', 'Search', ];
+        $expectedTabTitles = ['Browse', 'Search'];
 
         $tabs = $this->context->findAllWithWait('.c-tab-nav-item');
-        foreach ($tabs as $tab)
-        {
+        foreach ($tabs as $tab) {
             $actualTabTitles[] = $tab->getText();
         }
 
