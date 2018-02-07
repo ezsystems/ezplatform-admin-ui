@@ -81,7 +81,7 @@
             ? parseInt(relationsContainer.dataset.defaultLocation, 10)
             : window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId;
         const allowedContentTypes = relationsContainer.dataset.allowedContentTypes.split(',').filter(item => item.length);
-        const closeUDW = () => udwContainer.innerHTML = '';
+        const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
         const renderRows = (items) => items.forEach((...args) => relationsContainer.insertAdjacentHTML('beforeend', renderRow(...args)));
         const updateInputValue = (items) => {
             sourceInput.value = items.join();

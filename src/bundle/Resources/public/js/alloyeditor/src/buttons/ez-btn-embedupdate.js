@@ -24,7 +24,7 @@ export default class EzBtnEmbedUpdate extends EzEmbedDiscoverContentButton {
         widget.setWidgetContent("");
         widget.renderEmbedPreview(items[0].ContentInfo.Content.Name);
 
-        document.querySelector('#react-udw').innerHTML = '';
+        ReactDOM.unmountComponentAtNode(document.querySelector('#react-udw'));
     }
 
     /**

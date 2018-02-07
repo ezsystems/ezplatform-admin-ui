@@ -76,12 +76,12 @@ export default class EzBtnLinkEdit extends Component {
                 );
                 this.focusEditedLink();
 
-                udwContainer.innerHTML = '';
+                ReactDOM.unmountComponentAtNode(udwContainer);
             };
 
             ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
                 onConfirm: udwOnConfirm,
-                onCancel: () => udwContainer.innerHTML = '',
+                onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
                 confirmLabel: 'Select content',
                 title: 'Select content',
                 multiple: false,
