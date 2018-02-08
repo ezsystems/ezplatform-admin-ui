@@ -9,6 +9,11 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 /** Element that describes upper menu (Content, Admin, Page and theirs children) */
 class UpperMenu extends Element
 {
+    protected $fields = [
+        'menuButton' => '.nav-link',
+        'submenuButton' => '.navbar-expand-lg .nav-link',
+    ];
+
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Upper Menu';
 
@@ -19,7 +24,7 @@ class UpperMenu extends Element
      */
     public function goToTab(string $tabName): void
     {
-        $this->context->getElementByText($tabName, '.nav-link')->click();
+        $this->context->getElementByText($tabName, $this->fields['menuButton'])->click();
     }
 
     /**
@@ -29,11 +34,11 @@ class UpperMenu extends Element
      */
     public function goToSubTab(string $tabName): void
     {
-        $this->context->getElementByText($tabName, '.navbar-expand-lg .nav-link')->click();
+        $this->context->getElementByText($tabName, $this->fields['submenuButton'])->click();
     }
 
     public function verifyVisibility(): void
     {
-        $this->context->waitUntilElementIsVisible('.nav-link');
+        $this->context->waitUntilElementIsVisible($this->fields['menuButton']);
     }
 }
