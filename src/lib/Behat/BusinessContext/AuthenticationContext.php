@@ -18,9 +18,6 @@ class AuthenticationContext extends BusinessContext
 
     /**
      * @When I login as :username with password :password
-     *
-     * @param string $username
-     * @param string $password
      */
     public function iLoginAs(string $username, string $password): void
     {
@@ -30,10 +27,6 @@ class AuthenticationContext extends BusinessContext
 
     /**
      * @Given I am logged as :username
-     *
-     * @param string $username
-     *
-     * @throws \OutOfBoundsException when username is not recognised
      */
     public function iAmLoggedAs(string $username): void
     {

@@ -6,25 +6,32 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use PHPUnit\Framework\Assert;
 
 class LeftMenu extends Element
 {
-    private $buttonSelector = '.ez-sticky-container .btn';
-    private $menuSelector = 'ez-side-menu';
+    public function __construct(UtilityContext $context)
+    {
+        parent::__construct($context);
+        $this->fields = [
+            'buttonSelector' => '.ez-sticky-container .btn',
+            'menuSelector' => '.ez-side-menu',
+        ];
+    }
 
     /**
-     * Clicks a button on the left menu (CSearch, Browse, Trash).
+     * Clicks a button on the left menu (Search, Browse, Trash).
      *
      * @param string $buttonName
      */
     public function clickButton(string $buttonName)
     {
-        $this->context->getElementByText($buttonName, $this->buttonSelector)->click();
+        $this->context->getElementByText($buttonName, $this->fields['buttonSelector'])->click();
     }
 
     public function verifyVisibility(): void
     {
-        Assert::assertTrue($this->context->findElement($this->menuSelector)->isVisible());
+        Assert::assertTrue($this->context->findElement($this->fields['menuSelector'])->isVisible());
     }
 }

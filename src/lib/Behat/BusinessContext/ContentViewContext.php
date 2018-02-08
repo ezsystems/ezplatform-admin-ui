@@ -18,8 +18,6 @@ class ContentViewContext extends BusinessContext
 {
     /**
      * @Given I start creating a new Landing Page :name
-     *
-     * @param string $name
      */
     public function startCreatingNewLandingPage(string $name): void
     {
@@ -32,10 +30,8 @@ class ContentViewContext extends BusinessContext
 
     /**
      * @Given I start creating a new Article :name
-     *
-     * @param string $name
      */
-    public function startCreatingArticle($name): void
+    public function startCreatingArticle(string $name): void
     {
         $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
         $updatePage = $contentStructurePage->startCreatingContent('Article');
@@ -47,7 +43,7 @@ class ContentViewContext extends BusinessContext
     /**
      * @Given I start editing the content in :language language
      */
-    public function startEditingContent($language): void
+    public function startEditingContent(string $language): void
     {
         $rightMenu = new RightMenu($this->utilityContext);
         $rightMenu->clickButton('Edit');
@@ -59,9 +55,10 @@ class ContentViewContext extends BusinessContext
     /**
      * @Given I open UDW and go to :itemPath
      */
-    public function iOpenUDWAndGoTo($itemPath): void
+    public function iOpenUDWAndGoTo(string $itemPath): void
     {
         $leftMenu = new LeftMenu($this->utilityContext);
+        $leftMenu->verifyVisibility();
         $leftMenu->clickButton('Browse');
 
         $udw = new UniversalDiscoveryWidget($this->utilityContext);

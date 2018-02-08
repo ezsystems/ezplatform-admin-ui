@@ -14,6 +14,7 @@ class Breadcrumb extends Element
         'breadcrumbItemLink' => '.breadcrumb-item a',
         'activeBreadcrumb' => '.breadcrumb-item.active',
     ];
+
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Breadcrumb';
 
