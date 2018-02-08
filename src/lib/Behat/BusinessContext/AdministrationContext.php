@@ -63,7 +63,7 @@ class AdministrationContext extends BusinessContext
     public function isElementOnTheList(string $listElementName, string $page, ?string $parameter = null): void
     {
         $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page, $parameter)
-            ->adminList->isLinkedItemOnList($listElementName);
+            ->adminList->isLinkElementOnList($listElementName);
 
         if (!$isElementOnTheList) {
             throw new ElementNotFoundException(
@@ -80,7 +80,7 @@ class AdministrationContext extends BusinessContext
     public function isElementNotOnTheList(string $listElementName, string $page, string $parameter = null): void
     {
         $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page, $parameter)
-            ->adminList->isLinkedItemOnList($listElementName);
+            ->adminList->isLinkElementOnList($listElementName);
 
         if ($isElementOnTheList) {
             throw new ElementNotFoundException(

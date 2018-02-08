@@ -18,10 +18,9 @@ class AdminList extends Element
         'trashButton' => '.ez-icon-trash',
         'editButton' => 'tr:nth-child(%s) a[title=Edit]',
         'listHeader' => '.ez-table-header__headline',
-        //'horizontalHeaders' => '.ez-table-header + .table,form thead th',
         'horizontalHeaders' => '.ez-table-header + .table thead th, .ez-table-header + form thead th',
         'listElementLink' => '.ez-checkbox-cell+ td a',
-        'tableCell' => 'tr:nth-child(%s) td:nth-child(%s)',
+        'tableCell' => 'tr:nth-child(%d) td:nth-child(%d)',
         'verticalHeaders' => 'colgroup+ tbody th',
         'insideHeaders' => 'thead+ tbody th',
     ];
@@ -75,7 +74,7 @@ class AdminList extends Element
         $this->context->getElementByText($name, $this->fields['listElementLink'])->click();
     }
 
-    public function isLinkedItemOnList(string $name): bool
+    public function isLinkElementOnList(string $name): bool
     {
         return $this->context->getElementByText($name, $this->fields['listElementLink']) !== null;
     }
@@ -113,7 +112,7 @@ class AdminList extends Element
             $this->context->findElement($this->fields['list'])
         );
 
-        return $this->context->findElement(sprintf($this->fields['tableCell'], $rowPosition, '2'))->getText();
+        return $this->context->findElement(sprintf($this->fields['tableCell'], $rowPosition, 2))->getText();
     }
 
     public function getCellValueFromDoubleHeaderTable(string $columnHeader, string $rowHeader): string

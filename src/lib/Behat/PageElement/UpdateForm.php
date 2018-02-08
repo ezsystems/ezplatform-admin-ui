@@ -14,7 +14,7 @@ class UpdateForm extends Element
     protected $fields = [
         'formElement' => '.form-group',
         'mainFormSection' => '.px-5:nth-child(1) .card-body',
-        'fieldTypesList' => 'ezrepoforms_contenttype_update_fieldTypeSelection',
+        'fieldTypesList' => '#ezrepoforms_contenttype_update_fieldTypeSelection',
         'addFieldDefinition' => 'ezrepoforms_contenttype_update_addFieldDefinition',
         'fieldDefinitionContainer' => '.ez-card--fieldtype-container',
         'fieldDefinitionName' => '.ez-card--fieldtype-container .ez-card__header .form-check-label',
@@ -62,7 +62,7 @@ class UpdateForm extends Element
 
     public function selectFieldDefinition(string $fieldName)
     {
-        $this->context->findElement('#' . $this->fields['fieldTypesList'], $this->defaultTimeout)->selectOption($fieldName);
+        $this->context->findElement($this->fields['fieldTypesList'], $this->defaultTimeout)->selectOption($fieldName);
     }
 
     public function clickAddFieldDefinition()
