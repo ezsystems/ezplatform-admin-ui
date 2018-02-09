@@ -9,6 +9,10 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 /** Element that describes right action menu (Create, Preview, Publish etc.) */
 class RightMenu extends Element
 {
+    protected $fields = [
+        'menuButton' => '.ez-context-menu .btn-block',
+    ];
+
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Right Menu';
 
@@ -19,11 +23,11 @@ class RightMenu extends Element
      */
     public function clickButton(string $buttonName): void
     {
-        $this->context->getElementByText($buttonName, '.ez-context-menu .btn-block')->click();
+        $this->context->getElementByText($buttonName, $this->fields['menuButton'])->click();
     }
 
     public function verifyVisibility(): void
     {
-        // TODO: Implement verifyVisibility() method.
+        $this->context->waitUntilElementIsVisible($this->fields['menuButton']);
     }
 }

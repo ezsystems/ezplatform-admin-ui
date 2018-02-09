@@ -28,6 +28,7 @@ class Dialog extends Element
 
     public function verifyVisibility(): void
     {
-        // TODO: Implement verifyVisibility() method. Not sure if it's needed
+        $this->context->waitUntilElementIsVisible($this->fields['confirm']);
+        $this->context->waitUntilElementIsVisible($this->fields['decline']);
     }
 }

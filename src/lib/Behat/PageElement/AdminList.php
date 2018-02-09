@@ -13,14 +13,16 @@ use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 class AdminList extends Element
 {
     protected $fields = [
-        'list' => 'form',
+        'list' => 'section',
         'plusButton' => '.ez-icon-create',
         'trashButton' => '.ez-icon-trash',
         'editButton' => 'tr:nth-child(%s) a[title=Edit]',
         'listHeader' => '.ez-table-header__headline',
-        'tableHeader' => 'th',
+        'horizontalHeaders' => '.ez-table-header + .table thead th, .ez-table-header + form thead th',
         'listElementLink' => '.ez-checkbox-cell+ td a',
-        'tableCell' => 'tr:nth-child(%s) td:nth-child(%s)',
+        'tableCell' => 'tr:nth-child(%d) td:nth-child(%d)',
+        'verticalHeaders' => 'colgroup+ tbody th',
+        'insideHeaders' => 'thead+ tbody th',
     ];
 
     /** @var string Name by which Element is recognised */
@@ -34,22 +36,13 @@ class AdminList extends Element
         $this->listHeader = $listHeader;
     }
 
-    private function verifyProperList(): void
-    {
-        $actualHeader = $this->context->findElement($this->fields['listHeader'], $this->defaultTimeout)->getText();
-
-        if ($this->listHeader !== $actualHeader) {
-            throw new ElementNotFoundException($this->context->getSession(), 'table header', $this->fields['listHeader']);
-        }
-    }
-
     public function verifyVisibility(): void
     {
-        $this->context->waitUntilElementIsVisible($this->fields['plusButton'], $this->defaultTimeout);
-        $this->context->waitUntilElementIsVisible($this->fields['trashButton'], $this->defaultTimeout);
-        $this->context->waitUntilElementIsVisible($this->fields['listHeader'], $this->defaultTimeout);
+        $actualHeader = $this->context->getElementByText($this->listHeader, $this->fields['listHeader']);
 
-        $this->verifyProperList();
+        if ($actualHeader === null) {
+            throw new ElementNotFoundException($this->context->getSession(), 'table header', $this->fields['listHeader']);
+        }
     }
 
     public function clickPlusButton(): void
@@ -81,15 +74,25 @@ class AdminList extends Element
         $this->context->getElementByText($name, $this->fields['listElementLink'])->click();
     }
 
-    public function isElementOnList(string $name): bool
+    public function isLinkElementOnList(string $name): bool
     {
         return $this->context->getElementByText($name, $this->fields['listElementLink']) !== null;
     }
 
     public function getListItemAttribute(string $name, string $header): string
     {
-        $columnPosition = $this->context->getElementPositionByText($header, $this->fields['tableHeader'], null, $this->context->findElement($this->fields['list']));
-        $rowPosition = $this->context->getElementPositionByText($name, $this->fields['listElementLink'], null, $this->context->findElement($this->fields['list']));
+        $columnPosition = $this->context->getElementPositionByText(
+            $header,
+            $this->fields['horizontalHeaders'],
+            null,
+            $this->context->findElement($this->fields['list'])
+        );
+        $rowPosition = $this->context->getElementPositionByText(
+            $name,
+            $this->fields['listElementLink'],
+            null,
+            $this->context->findElement($this->fields['list'])
+        );
 
         return $this->context->findElement(sprintf($this->fields['tableCell'], $rowPosition, $columnPosition))->getText();
     }
@@ -98,5 +101,31 @@ class AdminList extends Element
     {
         $position = $this->context->getElementPositionByText($listItemName, $this->fields['listElementLink']);
         $this->context->findElement(sprintf($this->fields['editButton'], $position))->click();
+    }
+
+    public function getCellValueFromVerticalOrientedTable(string $header): string
+    {
+        $rowPosition = $this->context->getElementPositionByText(
+            $header,
+            $this->fields['verticalHeaders'],
+            null,
+            $this->context->findElement($this->fields['list'])
+        );
+
+        return $this->context->findElement(sprintf($this->fields['tableCell'], $rowPosition, 2))->getText();
+    }
+
+    public function getCellValueFromDoubleHeaderTable(string $columnHeader, string $rowHeader): string
+    {
+        $columnPosition = $this->context->getElementPositionByText(
+            $columnHeader,
+            $this->fields['horizontalHeaders']
+        );
+        $rowPosition = $this->context->getElementPositionByText(
+            $rowHeader,
+            $this->fields['insideHeaders']
+        );
+
+        return $this->context->findElement(sprintf($this->fields['tableCell'], $rowPosition, $columnPosition))->getText();
     }
 }

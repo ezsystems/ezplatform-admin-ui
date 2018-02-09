@@ -14,7 +14,12 @@ use OutOfBoundsException;
 class AuthenticationContext extends BusinessContext
 {
     /** @var array Dictionary of known user logins and their passwords */
-    private $userCredentials = ['admin' => 'publish', 'jessica' => 'publish', 'yura' => 'publish', 'anil' => 'publish'];
+    private $userCredentials = [
+        'admin' => 'publish',
+        'jessica' => 'publish',
+        'yura' => 'publish',
+        'anil' => 'publish',
+    ];
 
     /**
      * @When I login as :username with password :password
