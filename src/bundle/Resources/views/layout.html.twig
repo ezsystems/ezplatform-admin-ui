@@ -92,13 +92,19 @@
             'bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js'
             'bundles/ezplatformadminuiassets/vendors/create-react-class/create-react-class.min.js'
             'bundles/ezplatformadminuiassets/vendors/prop-types/prop-types.min.js'
-            'bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/alloy-editor-no-react-min.js'
             'bundles/ezplatformadminuimodules/js/UniversalDiscovery.module.js'
             'bundles/ezplatformadminui/js/scripts/button.trigger.js'
             'bundles/ezplatformadminui/js/scripts/button.prevent.default.js'
             'bundles/ezplatformadminui/js/scripts/udw/browse.js'
             'bundles/ezplatformadminui/js/scripts/admin.user.menu.js'
 
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {# CKEditor is not compatible with 'use strict' mode, React 16 force 'use strict' on the entire file.
+           CKEditor and React 16 cannot be compiled into one file by assetic #}
+        {%  javascripts
+            'bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/alloy-editor-no-react-min.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
