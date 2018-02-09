@@ -41,6 +41,6 @@ class ContentStructurePage extends Page
 
     public function verifyElements(): void
     {
-        // TODO: Implement verifyElements() method.
+        $this->rightMenu->verifyVisibility();
     }
 }
