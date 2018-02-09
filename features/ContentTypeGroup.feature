@@ -1,4 +1,4 @@
-Feature: Content types management
+Feature: Content type groups management
   As an administrator
   In order to customize my eZ installation
   I want to manage my Content types structure.
