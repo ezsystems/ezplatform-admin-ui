@@ -6,6 +6,10 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\LanguagePicker;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\LeftMenu;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentStructurePage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 use PHPUnit\Framework\Assert;
@@ -18,7 +22,49 @@ class ContentViewContext extends BusinessContext
     public function startCreatingNewLandingPage(string $name): void
     {
         $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
-        $contentStructurePage->createLandingPage($name, 'Test Desc');
+        $updatePage = $contentStructurePage->startCreatingContent('Landing page');
+
+        $updatePage->updateForm->fillFIeldWithValue('Title', $name);
+        $updatePage->updateForm->fillFIeldWithValue('Description', $name);
+    }
+
+    /**
+     * @Given I start creating a new Article :name
+     */
+    public function startCreatingArticle(string $name): void
+    {
+        $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
+        $updatePage = $contentStructurePage->startCreatingContent('Article');
+
+        $updatePage->updateForm->fillFIeldWithValue('Title', $name);
+        $updatePage->updateForm->fillRichtextWithValue('Test desc');
+    }
+
+    /**
+     * @Given I start editing the content in :language language
+     */
+    public function startEditingContent(string $language): void
+    {
+        $rightMenu = new RightMenu($this->utilityContext);
+        $rightMenu->clickButton('Edit');
+
+        $languagePicker = new LanguagePicker($this->utilityContext);
+        $languagePicker->chooseLanguage($language);
+    }
+
+    /**
+     * @Given I open UDW and go to :itemPath
+     */
+    public function iOpenUDWAndGoTo(string $itemPath): void
+    {
+        $leftMenu = new LeftMenu($this->utilityContext);
+        $leftMenu->verifyVisibility();
+        $leftMenu->clickButton('Browse');
+
+        $udw = new UniversalDiscoveryWidget($this->utilityContext);
+        $udw->verifyVisibility();
+        $udw->selectContent($itemPath);
+        $udw->confirm();
     }
 
     /**

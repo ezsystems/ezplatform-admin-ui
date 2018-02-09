@@ -6,6 +6,9 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
+use EzSystems\FormBuilderBundle\Tests\Behat\PageObject\FormDeletionConfirmationPage;
+use EzSystems\FormBuilderBundle\Tests\Behat\PageObject\FormDetailsPage;
+use EzSystems\FormBuilderBundle\Tests\Behat\PageObject\FormManagerPage;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\StudioUIBundle\Tests\Behat\PageObject\LandingPageEditorPage;
 
@@ -16,9 +19,9 @@ class PageObjectFactory
      *
      * @param UtilityContext $context
      * @param string $pageName Name of the Page to creator
-     * @param string $parameter additional parameter for constructor, e.g. name of item
+     * @param null[]|string[] $parameters additional parameters
      *
-     * @return LoginPage|DashboardPage|ContentStructurePage|ContentTypeGroupsPage|UpdateItemPage|ContentTypePage to interact with
+     * @return LoginPage|DashboardPage|ContentStructurePage|ContentTypeGroupsPage|UpdateItemPage|ContentTypePage|FormManagerPage|FormDetailsPage|FormDeletionConfirmationPage
      */
     public static function createPage(UtilityContext $context, string $pageName, ?string ...$parameters): Page
     {
@@ -39,6 +42,12 @@ class PageObjectFactory
                 return new ContentTypePage($context, $parameters[0]);
             case LandingPageEditorPage::PAGE_NAME:
                 return new LandingPageEditorPage($context);
+            case FormManagerPage::PAGE_NAME:
+                return new FormManagerPage($context);
+            case FormDetailsPage::PAGE_NAME:
+                return new FormDetailsPage($context, $parameters[0]);
+            case FormDeletionConfirmationPage::PAGE_NAME:
+                return new FormDeletionConfirmationPage($context);
             default:
                 throw new \InvalidArgumentException(sprintf('Unrecognised page name: %s', $pageName));
         }
