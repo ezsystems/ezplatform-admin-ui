@@ -12,7 +12,9 @@ class Breadcrumb extends Element
     protected $fields = [
         'breadcrumbItem' => '.breadcrumb-item',
         'breadcrumbItemLink' => '.breadcrumb-item a',
+        'activeBreadcrumb' => '.breadcrumb-item.active',
     ];
+
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Breadcrumb';
 
@@ -24,5 +26,10 @@ class Breadcrumb extends Element
     public function clickBreadcrumbItem(string $itemName): void
     {
         $this->context->getElementByText($itemName, $this->fields['breadcrumbItemLink'])->click();
+    }
+
+    public function getActiveName(): string
+    {
+        return $this->context->findElement($this->fields['activeBreadcrumb'])->getText();
     }
 }

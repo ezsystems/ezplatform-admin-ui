@@ -14,8 +14,6 @@ class RightMenuContext extends BusinessContext
     /**
      * @Given I click (on) the edit action bar button :button
      * Click on a AdminUI edit action bar
-     *
-     * @param  string   $button     Text of the element to click
      */
     public function clickEditActionBar(string $button): void
     {

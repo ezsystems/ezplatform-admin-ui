@@ -8,23 +8,18 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
-/** Abstract for pages elements */
-abstract class Element
+class LanguagePicker extends Element
 {
-    /** @var int */
-    public $defaultTimeout = 5;
-
-    /* \EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext */
-    protected $context;
-
-    protected $fields;
-
     public function __construct(UtilityContext $context)
     {
-        $this->context = $context;
+        parent::__construct($context);
+        $this->fields = [
+            'languageSelector' => '#content_edit_language .form-check-label',
+        ];
     }
 
-    public function verifyVisibility(): void
+    public function chooseLanguage($language)
     {
+        $this->context->getElementByText($language, $this->fields['languageSelector'])->click();
     }
 }

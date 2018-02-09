@@ -26,22 +26,17 @@ class ContentStructurePage extends Page
         $this->rightMenu = new RightMenu($this->context);
     }
 
-    public function createLandingPage(string $name, string $description): void
-    {
-        $this->startCreatingContent('Landing page');
-        $this->context->getSession()->getPage()->findField('Title')->setValue($name);
-        $this->context->getSession()->getPage()->findField('Description')->setValue($description);
-    }
-
     /**
      * Clicks "Create" and selects Content Type in displayed search.
      *
-     * @param $contentType
+     * @param string $contentType
      */
-    public function startCreatingContent(string $contentType): void
+    public function startCreatingContent(string $contentType): UpdateItemPage
     {
         $this->rightMenu->clickButton('Create');
         $this->context->getElementByText($contentType, '.form-check-label')->click();
+
+        return PageObjectFactory::createPage($this->context, UpdateItemPage::PAGE_NAME);
     }
 
     public function verifyElements(): void

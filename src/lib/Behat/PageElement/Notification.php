@@ -12,7 +12,9 @@ class Notification extends Element
     protected $fields = [
         'alert' => '.alert',
         'successAlert' => '.alert-success',
+        'failureAlert' => '.alert-danger',
     ];
+
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Notification';
 
@@ -24,6 +26,11 @@ class Notification extends Element
     public function verifyAlertSuccess(): void
     {
         $this->context->assertElementOnPage($this->fields['successAlert']);
+    }
+
+    public function verifyAlertFailure(): void
+    {
+        $this->context->assertElementOnPage($this->fields['failureAlert']);
     }
 
     public function getMessage(): string
