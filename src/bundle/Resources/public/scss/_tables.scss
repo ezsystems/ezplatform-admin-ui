@@ -45,7 +45,7 @@
 }
 
 .ez-dashboard {
-    .table {
+    .table:not(.ez-table__draft-conflict) {
         margin-bottom: 0;
 
         thead {

@@ -12,7 +12,7 @@
 
     const changeHandler = () => {
         const showModal = (modalHtml) => {
-            const wrapper = doc.querySelector('.ez-version-draft-conflict-modal-wrapper');
+            const wrapper = doc.querySelector('.ez-modal-wrapper');
             wrapper.innerHTML = modalHtml;
             wrapper.querySelector('.ez-btn--add-draft').addEventListener('click', addDraft, false);
             [...wrapper.querySelectorAll('.ez-btn--prevented')].forEach(btn => btn.addEventListener('click', event => event.preventDefault(), false));
