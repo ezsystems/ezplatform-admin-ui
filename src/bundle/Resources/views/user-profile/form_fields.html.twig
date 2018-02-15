@@ -5,7 +5,7 @@
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         {%- for error in errors -%}
-            <em class="ez-field-edit__error">{{ error.message }}</em>
+            <em class="ez-field__error">{{ error.message }}</em>
         {%- endfor -%}
     {%- endif -%}
 {%- endblock -%}

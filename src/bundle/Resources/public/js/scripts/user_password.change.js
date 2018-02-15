@@ -1,10 +1,13 @@
 (function (global, doc) {
-    const form = doc.querySelector('.ez-form-validate');
+    const form = doc.querySelector('form[name="user_password_change"]');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
-    const SELECTOR_INNER_FIELD = '.ez-field';
+    const oldPasswordInput = form.querySelector('#user_password_change_oldPassword');
+    const newPasswordInput = form.querySelector('#user_password_change_newPassword_first');
+    const confirmPasswordInput = form.querySelector('#user_password_change_newPassword_second');
+    const SELECTOR_FIELD = '.ez-field';
     const SELECTOR_LABEL = '.ez-field__label';
     const SELECTOR_LABEL_WRAPPER = '.ez-field__label-wrapper';
-    const classInvalid ='is-invalid';
+    const CLASS_INVALID ='is-invalid';
 
     /**
      * Creates an error node
@@ -23,45 +26,64 @@
     };
 
     /**
-     * Toggles the invalid state
+     * Toggles the error
      *
-     * @method toggleInvalidState
+     * @method toggleError
      * @param {Boolean} isError
-     * @param {HTMLElement} fieldContainer
-     * @param {HTMLElement} input
+     * @param {String} message
+     * @param {HTMLElement} target
      */
-    const toggleInvalidState = (isError, fieldContainer, input) => {
+    const toggleError = (isError, message, target) => {
         const methodName = isError ? 'add' : 'remove';
-        fieldContainer.classList[methodName](classInvalid);
-        input.classList[methodName](classInvalid);
-    };
-
-    /**
-     * Toggles the error message
-     *
-     * @method toggleErrorMessage
-     * @param {Boolean} isError
-     * @param {HTMLElement} fieldContainer
-     */
-    const toggleErrorMessage = (isError, fieldContainer) => {
-        const labelWrapper = fieldContainer.querySelector(SELECTOR_LABEL_WRAPPER);
+        const field = target.closest(SELECTOR_FIELD);
+        const labelWrapper = field.querySelector(SELECTOR_LABEL_WRAPPER);
         const errorNodes = [...labelWrapper.querySelectorAll('.ez-field__error')];
+
+        field.classList[methodName](CLASS_INVALID);
+        target.classList[methodName](CLASS_INVALID);
+
         errorNodes.forEach(el => el.remove());
 
         if (isError) {
-            const errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', fieldContainer.querySelector(SELECTOR_LABEL).innerHTML);
-            const errorNode = createErrorNode(errorMessage);
-            labelWrapper.append(errorNode);
+            labelWrapper.append(createErrorNode(message));
         }
     };
 
-    const validate = (target) => {
+    /**
+     * Compares passwords
+     *
+     * @method comparePasswords
+     * @return {Boolean}
+     */
+    const comparePasswords = () => {
+        const newPassword = newPasswordInput.value.trim();
+        const confirmPassword = confirmPasswordInput.value.trim();
+        const isNotEmptyPassword = checkIsNotEmpty(newPasswordInput) && checkIsNotEmpty(confirmPasswordInput);
+        const passwordMatch = newPassword === confirmPassword;
+        const message = global.eZ.errors.notSamePasswords;
+
+        if (!passwordMatch) {
+            toggleError(!passwordMatch, message, confirmPasswordInput);
+        }
+
+        return passwordMatch && isNotEmptyPassword;
+    };
+
+    /**
+     * Checks if input has not empty value
+     *
+     * @method checkIsNotEmpty
+     * @param {HTMLElement} target
+     * @return {Boolean}
+     */
+    const checkIsNotEmpty = (target) => {
         const isRequired = target.required;
         const isEmpty = !target.value.trim();
         const isError = (isRequired && isEmpty);
-        const fieldContainer = target.closest(SELECTOR_INNER_FIELD);
-        toggleInvalidState(isError, fieldContainer, target);
-        toggleErrorMessage(isError, fieldContainer);
+        const fieldContainer = target.closest(SELECTOR_FIELD);
+        const message = global.eZ.errors.emptyField.replace('{fieldName}', fieldContainer.querySelector(SELECTOR_LABEL).innerHTML);
+
+        toggleError(isError, message, target);
 
         return !isError;
     };
@@ -70,21 +92,27 @@
 
     submitBtns.forEach(btn => {
         const clickHandler = (event) => {
-            console.log('asdasd');
             if (!parseInt(btn.dataset.isFormValid, 10)) {
                 event.preventDefault();
-                const requiredFields = [...form.querySelectorAll('.ez-field input')];
-                const isFormValid = requiredFields.map(validate).every(result => result);
+
+                const requiredFields = [...form.querySelectorAll('.ez-field input[required]')];
+                const isFormValid = requiredFields.map(checkIsNotEmpty).every(result => result) && comparePasswords();
 
                 if (isFormValid) {
                     btn.dataset.isFormValid = 1;
                     // for some reason trying to fire click event inside the event handler flow is impossible
                     // the following line breaks the flow so it's possible to fire click event on a button again.
-                    window.setTimeout(() => btn.click(), 0);
+                    global.setTimeout(() => btn.click(), 0);
                 }
             }
         };
+
         btn.dataset.isFormValid = 0;
         btn.addEventListener('click', clickHandler, false);
     });
+
+    oldPasswordInput.addEventListener('blur', (event) => checkIsNotEmpty(event.currentTarget), false);
+    newPasswordInput.addEventListener('blur', (event) => checkIsNotEmpty(event.currentTarget), false);
+    confirmPasswordInput.addEventListener('blur', (event) => checkIsNotEmpty(event.currentTarget), false);
+    confirmPasswordInput.addEventListener('blur', comparePasswords, false);
 })(window, document);
