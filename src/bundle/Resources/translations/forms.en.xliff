@@ -41,6 +41,26 @@
         <target state="new">Delete content types</target>
         <note>key: content_types_delete_form.delete</note>
       </trans-unit>
+      <trans-unit id="56281d5c292a4fe95f9b1af5ae0b1deaebab7342" resname="ezplatform.change_user_password.change">
+        <source>Change</source>
+        <target state="new">Change</target>
+        <note>key: ezplatform.change_user_password.change</note>
+      </trans-unit>
+      <trans-unit id="390eb98ace269d5909c838416c36248c40895058" resname="ezplatform.change_user_password.confirm_new_password">
+        <source>Confirm password</source>
+        <target state="new">Confirm password</target>
+        <note>key: ezplatform.change_user_password.confirm_new_password</note>
+      </trans-unit>
+      <trans-unit id="43521bfea046f591270e027a69fc52cccc486e23" resname="ezplatform.change_user_password.new_password">
+        <source>New password</source>
+        <target state="new">New password</target>
+        <note>key: ezplatform.change_user_password.new_password</note>
+      </trans-unit>
+      <trans-unit id="7d2421be11a5351c12c952611c7a1a7f00f51cd9" resname="ezplatform.change_user_password.old_password">
+        <source>Old password</source>
+        <target state="new">Old password</target>
+        <note>key: ezplatform.change_user_password.old_password</note>
+      </trans-unit>
       <trans-unit id="0ad9197dcdbe88b1a05f099c564dc2b5634f8aa5" resname="ezplatform.language.create.enabled">
         <source>Enabled</source>
         <target state="new">Enabled</target>

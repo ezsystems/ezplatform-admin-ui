@@ -535,3 +535,11 @@ ezplatform.user.delete:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:User\UserDelete:userDelete'
+
+#
+# Profile
+#
+ezplatform.user_profile.change_password:
+    path: /user/change-password
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:UserProfile\UserPasswordChange:userPasswordChange'

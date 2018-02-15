@@ -62,3 +62,41 @@ form:not(.form-inline) {
         margin-right: .5rem;
     }
 }
+
+.ez-field {
+    .ez-field__label {
+        @include label-required();
+    }
+
+    &.is-invalid {
+        .ez-field__label-wrapper,
+        .ez-field__label {
+            color: $ez-color-danger;
+        }
+
+        .ez-field__data {
+            position: relative;
+
+            &:before {
+                content : '!';
+                position: absolute;
+                top: 0;
+                left: -20px;
+                width: 20px;
+
+                background: red;
+                color: white;
+                text-align: center;
+                font-size: 1.5rem;
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+        }
+    }
+
+    &__error {
+        display: inline-block;
+        margin-left: 8px;
+        color: $ez-color-danger;
+    }
+}
