@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\Helper;
 use Behat\Mink\Element\NodeElement;
 use Exception;
 use PHPUnit\Framework\Assert;
+use WebDriver\Exception\UnknownError;
 
 /**
  * @deprecated These methods are used by StudioUI bundle, but should not be used in AdminUI
@@ -62,14 +63,15 @@ trait StudioUtility
     /**
      * Clicks an element. If it was overlayed waits some time and then clicks again.
      *
-     * @deprecated Should be removed when Studio rework is done (and the spinner. No need to use it in AdminUI
+     * @deprecated Should be removed when Studio rework is done (and the spinner). No need to use it in AdminUI
      *
-     * @param $selector CSS Selector of the element
+     * @param string $selector CSS Selector of the element
      * @param int $position Index of the element (in case there are more with the same selector)
+     * @param int $numberOfRetries how many times the operation will be repeated in case of failure
      *
      * @throws UnknownError If element wasn't clicked but not because of overlay
      */
-    public function clickVisibleWithPossibleOverlay(string $selector, int $position = 1)
+    public function clickVisibleWithPossibleOverlay(string $selector, int $position = 1, int $numberOfRetries = 5)
     {
         $this->getSession()->executeScript('window.scrollTo(0,0);');
 
@@ -77,12 +79,17 @@ trait StudioUtility
             $this->clickVisibleOfTheSameType($selector, $position);
         } catch (UnknownError $e) {
             if (strpos($e->getMessage(), 'is not clickable at point') !== false) {
-                sleep(3);
-                $this->clickVisibleOfTheSameType($selector, $position);
+                sleep(5);
 
-                return;
+                --$numberOfRetries;
+                if ($numberOfRetries > 0) {
+                    throw $e;
+                }
+
+                $this->clickVisibleWithPossibleOverlay($selector, $position, $numberOfRetries);
+            } else {
+                throw $e;
             }
-            throw $e;
         }
     }
 
