@@ -1,7 +1,7 @@
 {% trans_default_domain 'locationview' %}
 
 <div class="ez-extra-actions ez-extra-actions--create ez-extra-actions--hidden bg-secondary" data-actions="create">
-    <div class="ez-extra-actions__header">{{ 'content.create.choose_content_type'|trans|desc('Choose content type') }}</div>
+    <div class="ez-extra-actions__header">{{ 'content.create.choose_content_type'|trans|desc('Create your content') }}</div>
     <div class="ez-extra-actions__content">
         {{ form_start(form, { 'action': path('ezplatform.content.create') }) }}
             {% if form.language.vars.choices|length == 1 %}

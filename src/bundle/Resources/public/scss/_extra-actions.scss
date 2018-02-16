@@ -45,6 +45,7 @@
         line-height: 45px;
         color: $ez-white;
         padding: 0 8px;
+        font-weight: 700;
     }
 
     &__content {
@@ -73,11 +74,11 @@
             padding: 0 16px;
             line-height: 45px;
             background: $ez-white;
-            color: $ez-color-secondary;
             text-decoration: none;
             cursor: pointer;
             transition: all .2s $ez-admin-transition;
             margin-bottom: 0;
+            font-size: .9375rem;
 
             &:hover,
             &:focus, 
@@ -114,14 +115,15 @@
 
     &__section-header {
         background: $ez-ground-base-dark;
-        color: $ez-color-base-dark;
-        padding-left: .5rem;
+        padding: .25rem 0 .25rem .5rem;
+        font-size: .9375rem;
+        font-weight: 700;
     }
 
     &__section-content {
         background: $ez-white;
-        color: $ez-color-base-dark;
         padding: 1rem .5rem;
+        font-size: .9375rem;
 
         select {
             display: inline-block;
