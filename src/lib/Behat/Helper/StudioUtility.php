@@ -82,7 +82,7 @@ trait StudioUtility
                 sleep(5);
 
                 --$numberOfRetries;
-                if ($numberOfRetries > 0) {
+                if ($numberOfRetries < 0) {
                     throw $e;
                 }
 
