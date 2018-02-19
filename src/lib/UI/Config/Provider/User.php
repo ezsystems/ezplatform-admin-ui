@@ -11,7 +11,8 @@ use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\User\User as ApiUser;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use eZ\Publish\Core\MVC\Symfony\Security\UserInterface;
 
 /**
  * Provides information about current user with resolved profile picture.
@@ -44,12 +45,15 @@ class User implements ProviderInterface
     public function getConfig(): array
     {
         $config = ['user' => null, 'profile_picture_field' => null];
+
         $token = $this->tokenStorage->getToken();
+        if (!$token instanceof TokenInterface) {
+            return $config;
+        }
 
-        if ($token instanceof UsernamePasswordToken) {
-            $user = $token->getUser();
+        $user = $token->getUser();
+        if ($user instanceof UserInterface) {
             $apiUser = $user->getAPIUser();
-
             $config['user'] = $apiUser;
             $config['profile_picture_field'] = $this->resolveProfilePictureField($apiUser);
         }
