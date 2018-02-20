@@ -32,6 +32,76 @@
         }
     }
 
+    const customTags = Object.keys(global.eZ.adminUiConfig.richTextCustomTags);
+    const customTagsToolbars = customTags.map(customTag => {
+        const alloyEditorConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
+
+        return new global.eZ.ezAlloyEditor.ezCustomTagConfig({
+            name: customTag,
+            alloyEditor: alloyEditorConfig,
+        });
+    });
+
+    customTags.forEach(customTag => {
+        const tagConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
+        const className = `ezBtn${customTag.charAt(0).toUpperCase() + customTag.slice(1)}`;
+        const editClassName = `${className}Edit`;
+        const updateClassName = `${className}Update`;
+
+        class buttonCustomTag extends global.eZ.ezAlloyEditor.ezBtnCustomTag {
+            constructor(props) {
+                super(props);
+
+                const values = {};
+
+                Object.keys(tagConfig.attributes).forEach(attr => {
+                    values[attr] = {
+                        value: tagConfig.attributes[attr].defaultValue
+                    };
+                });
+
+                this.label = tagConfig.label;
+                this.icon = tagConfig.icon || '/bundles/ezplatformadminui/img/ez-icons.svg#tag';
+                this.customTagName = customTag;
+                this.values = values;
+            }
+
+            static get key() {
+                return customTag;
+            }
+        }
+
+        class buttonCustomTagEdit extends global.eZ.ezAlloyEditor.ezBtnCustomTagEdit {
+            constructor(props) {
+                super(props);
+
+                this.customTagName = customTag;
+                this.attributes = tagConfig.attributes;
+            }
+
+            static get key() {
+                return `${customTag}edit`;
+            }
+        }
+
+        class buttonCustomTagUpdate extends global.eZ.ezAlloyEditor.ezBtnCustomTagUpdate {
+            constructor(props) {
+                super(props);
+
+                this.customTagName = customTag;
+                this.attributes = tagConfig.attributes;
+            }
+
+            static get key() {
+                return `${customTag}update`;
+            }
+        }
+
+        global.AlloyEditor.Buttons[buttonCustomTag.key] = global.AlloyEditor[className] = buttonCustomTag;
+        global.AlloyEditor.Buttons[buttonCustomTagEdit.key] = global.AlloyEditor[editClassName] = buttonCustomTagEdit;
+        global.AlloyEditor.Buttons[buttonCustomTagUpdate.key] = global.AlloyEditor[updateClassName] = buttonCustomTagUpdate;
+    });
+
     [...doc.querySelectorAll(`${SELECTOR_FIELD} ${SELECTOR_INPUT}`)].forEach(container => {
         const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
             toolbars: {
@@ -44,11 +114,13 @@
                         'ezimage',
                         'ezembed',
                         'eztable',
+                        ...customTags,
                     ],
                     tabIndex: 2,
                 },
                 styles: {
                     selections: [
+                        ...customTagsToolbars,
                         new window.eZ.ezAlloyEditor.ezLinkConfig(),
                         new window.eZ.ezAlloyEditor.ezTextConfig(),
                         new window.eZ.ezAlloyEditor.ezParagraphConfig(),
@@ -66,6 +138,7 @@
                 'ezremoveblock',
                 'ezembed',
                 'ezfocusblock',
+                'ezcustomtag',
             ].join(','),
         });
         const getHTMLDocumentFragment = function (data) {
@@ -170,6 +243,7 @@
             doc.appendChild(root);
 
             [...doc.querySelectorAll('[data-ezelement="ezembed"]')].forEach(emptyEmbed);
+            [...doc.querySelectorAll('[data-ezelement="ezcustomtag"]')].forEach(emptyEmbed);
 
             event.target.closest('.ez-data-source').querySelector('textarea').value = xhtmlify(root.innerHTML).replace(xhtmlNamespace, ezNamespace);
         });

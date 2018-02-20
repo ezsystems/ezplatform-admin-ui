@@ -4,7 +4,7 @@ imports:
     - { resource: services/tabs.yml }
     - { resource: services/menu.yml }
     - { resource: services/pagination.yml }
-    - { resource: services/ui_config.yml }
+    - { resource: services/ui_config/* }
     - { resource: services/components.yml }
     - { resource: services/dashboard.yml }
     - { resource: services/modules/subitems.yml }

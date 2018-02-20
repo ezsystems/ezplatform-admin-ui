@@ -33,3 +33,8 @@ services:
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module\UniversalDiscoveryWidget:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'universalDiscoveryWidget' }
+
+    # Custom Tags UI configuration provider
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText\CustomTag:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'richTextCustomTags' }
