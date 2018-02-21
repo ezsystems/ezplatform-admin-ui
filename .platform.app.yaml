@@ -68,21 +68,23 @@ hooks:
     # Build hook, done once before connected to services, disk is still writable here
     build: |
         set -e
-        rm web/app_dev.php
-        . ./.env
-        if [ "$SYMFONY_ENV" = "dev" ] ; then
-            composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
-        else
-            composer install --no-dev --prefer-dist --no-progress --no-interaction --optimize-autoloader
-        fi
+        #rm web/app_dev.php
+        #. ./.env
+        /bin/bash -c './.platform_setup_pr.sh https://github.com/ezsystems/ezplatform-demo.git 2.0'
+        #if [ "$SYMFONY_ENV" = "dev" ] ; then
+        #    composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
+        #else
+        #    composer install --no-dev --prefer-dist --no-progress --no-interaction --optimize-autoloader
+        #fi
     # Deploy hook, access to services & done once (per cluster, not per node), only mounts are writable at this point
     deploy: |
         set -e
         . ./.env
-        if [ ! -f web/var/.platform.installed ]; then
+        # We will re-run the installer on every deployment ( on every PR change )
+        #if [ ! -f web/var/.platform.installed ]; then
             php -d memory_limit=-1 bin/console ezplatform:install $INSTALL_EZ_INSTALL_TYPE
             touch web/var/.platform.installed
-        fi
+        #fi
         # As we are deploying code changes we need to clear any kind of code/system cache
         rm -Rf app/cache/*/*
         bin/console cache:clear
