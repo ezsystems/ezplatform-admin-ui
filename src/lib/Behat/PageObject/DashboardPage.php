@@ -6,15 +6,20 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+
 class DashboardPage extends Page
 {
-    protected $fields = ['meSection' => '.card-body'];
-
-    /** @var string Route under which the Page is available */
-    protected $route = '/admin/dashboard';
-
     /** @var string Name by which Page is recognised */
     public const PAGE_NAME = 'Dashboard';
+
+    public function __construct(UtilityContext $context)
+    {
+        parent::__construct($context);
+        $this->route = '/admin/dashboard';
+        $this->fields = ['meSection' => '.card-body'];
+        $this->pageTitle = 'My dashboard';
+    }
 
     /**
      * Verifies that the Dashboard has the "Me" section.

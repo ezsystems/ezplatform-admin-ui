@@ -6,16 +6,22 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+
 /** Element that describes upper menu (Content, Admin, Page and theirs children) */
 class UpperMenu extends Element
 {
-    protected $fields = [
-        'menuButton' => '.nav-link',
-        'submenuButton' => '.navbar-expand-lg .nav-link',
-    ];
-
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Upper Menu';
+
+    public function __construct(UtilityContext $context)
+    {
+        parent::__construct($context);
+        $this->fields = [
+            'menuButton' => '.nav-link',
+            'submenuButton' => '.navbar-expand-lg .nav-link',
+        ];
+    }
 
     /**
      * Clicks on top menu, for example "Content" tab.

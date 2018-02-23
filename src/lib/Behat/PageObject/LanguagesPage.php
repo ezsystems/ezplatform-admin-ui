@@ -9,33 +9,37 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use PHPUnit\Framework\Assert;
 
-class ContentTypeGroupPage extends Page
+class LanguagesPage extends Page
 {
     /** @var string Name by which Page is recognised */
-    public const PAGE_NAME = 'Content Type Group';
-    /** @var string Name of actual group */
-    public $groupName;
+    public const PAGE_NAME = 'Languages';
 
     /**
      * @var \EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList
      */
     public $adminList;
 
-    public function __construct(UtilityContext $context, string $groupName)
+    public function __construct(UtilityContext $context)
     {
         parent::__construct($context);
-        $this->route = '/admin/contenttypegroup/';
-        $this->groupName = $groupName;
-        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, sprintf('Content Types in %s', $this->groupName));
-        $this->pageTitle = $groupName;
+        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME);
+        $this->route = '/admin/language/list';
+        $this->pageTitle = self::PAGE_NAME;
     }
 
-    /**
-     * Verifies that all necessary elements are visible.
-     */
     public function verifyElements(): void
     {
         $this->adminList->verifyVisibility();
+    }
+
+    public function verifyItemAttribute(string $label, string $value, string $itemName): void
+    {
+        Assert::assertEquals(
+            $value,
+            $this->adminList->getListItemAttribute($itemName, $label),
+            sprintf('Attribute "%s" of item "%s" has wrong value.', $label, $itemName)
+        );
     }
 }

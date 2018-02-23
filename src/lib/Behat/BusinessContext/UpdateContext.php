@@ -17,7 +17,7 @@ class UpdateContext extends BusinessContext
      * @When I set :field to :value
      * @When I set :field as empty
      */
-    public function fillFieldWithValue(string $field, string $value = ''): void
+    public function iSetField(string $field, string $value = ''): void
     {
         PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME)
             ->updateForm->fillFieldWithValue($field, $value);
@@ -30,7 +30,7 @@ class UpdateContext extends BusinessContext
     {
         $hash = $table->getHash();
         foreach ($hash as $row) {
-            $this->fillFieldWithValue($row['label'], $row['value']);
+            $this->iSetField($row['label'], $row['value']);
         }
     }
 

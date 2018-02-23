@@ -13,7 +13,6 @@ Feature: Content type groups management
       And I set "Name" to "Test CTG"
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Content Type Groups" page
-      And I should see "Content Type Groups" list
       And there's no "Test CTG" on "Content Type Groups" list
 
   @javascript @common
@@ -28,7 +27,6 @@ Feature: Content type groups management
     Given I go to "Test CTG" "Content Type Group" page
     When I click on "Content Types" on breadcrumb
     Then I should be on "Content Type Groups" page
-      And I should see "Content Type Groups" list
 
   @javascript @common
   Scenario: Changes can be discarded while editing Content Type Group
@@ -37,7 +35,6 @@ Feature: Content type groups management
       And I set "Name" to "Test CTG edited"
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Content Type Groups" page
-      And I should see "Content Type Groups" list
       And there's "Test CTG" on "Content Type Groups" list
       And there's no "Test CTG edited" on "Content Type Groups" list
 
