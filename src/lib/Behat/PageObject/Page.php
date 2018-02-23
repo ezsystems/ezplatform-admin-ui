@@ -6,7 +6,9 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use PHPUnit\Framework\Assert;
 
 abstract class Page
 {
@@ -14,6 +16,9 @@ abstract class Page
 
     /** @var string Route under which the Page is available */
     protected $route;
+
+    /** @var string title that we see directly below upper menu */
+    protected $pageTitle;
 
     /** @var UtilityContext context for interactions with the page */
     protected $context;
@@ -33,6 +38,7 @@ abstract class Page
     {
         $this->verifyRoute();
         $this->verifyElements();
+        $this->verifyTitle();
     }
 
     /**
@@ -59,6 +65,15 @@ abstract class Page
         });
     }
 
+    public function verifyTitle(): void
+    {
+        Assert::assertEquals(
+            $this->pageTitle,
+            $this->getPageTitle(),
+            'Wrong page title.'
+        );
+    }
+
     /**
      * Verifies that expected elements are present.
      */
@@ -69,8 +84,12 @@ abstract class Page
      *
      * @return string
      */
-    public function getPageHeaderTitle(): string
+    public function getPageTitle(): string
     {
-        return $this->context->findElement('.ez-page-title')->getText();
+        try {
+            return $this->context->findElement('.ez-header-title')->getText();
+        } catch (ElementNotFoundException $e) {
+            return $this->context->findElement('.ez-header h1')->getText();
+        }
     }
 }

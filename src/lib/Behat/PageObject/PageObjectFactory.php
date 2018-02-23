@@ -21,7 +21,7 @@ class PageObjectFactory
      * @param string $pageName Name of the Page to creator
      * @param null[]|string[] $parameters additional parameters
      *
-     * @return LoginPage|DashboardPage|ContentStructurePage|ContentTypeGroupsPage|UpdateItemPage|ContentTypePage|FormManagerPage|FormDetailsPage|FormDeletionConfirmationPage
+     * @return LoginPage|DashboardPage|ContentStructurePage|ContentTypeGroupsPage|UpdateItemPage|ContentTypePage|FormManagerPage|FormDetailsPage|FormDeletionConfirmationPage|LanguagesPage|LanguagePage
      */
     public static function createPage(UtilityContext $context, string $pageName, ?string ...$parameters): Page
     {
@@ -40,6 +40,10 @@ class PageObjectFactory
                 return new ContentTypeGroupPage($context, $parameters[0]);
             case ContentTypePage::PAGE_NAME:
                 return new ContentTypePage($context, $parameters[0]);
+            case LanguagesPage::PAGE_NAME:
+                return new LanguagesPage($context);
+            case LanguagePage::PAGE_NAME:
+                return new LanguagePage($context, $parameters[0]);
             case LandingPageEditorPage::PAGE_NAME:
                 return new LandingPageEditorPage($context);
             case FormManagerPage::PAGE_NAME:

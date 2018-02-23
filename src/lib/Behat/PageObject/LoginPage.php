@@ -32,6 +32,11 @@ class LoginPage extends Page
         $this->clickLogin();
     }
 
+    public function verifyTitle(): void
+    {
+        //Login page has no title, so we don't want to check it
+    }
+
     /**
      * Clicks login button.
      */

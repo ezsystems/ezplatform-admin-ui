@@ -6,15 +6,21 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+
 /** Element that describes right action menu (Create, Preview, Publish etc.) */
 class RightMenu extends Element
 {
-    protected $fields = [
-        'menuButton' => '.ez-context-menu .btn-block',
-    ];
-
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Right Menu';
+
+    public function __construct(UtilityContext $context)
+    {
+        parent::__construct($context);
+        $this->fields = [
+            'menuButton' => '.ez-context-menu .btn-block',
+        ];
+    }
 
     /**
      * Clicks a button on the right menu.

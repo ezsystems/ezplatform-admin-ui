@@ -23,4 +23,15 @@ class NotificationContext extends BusinessContext
         $notification->verifyAlertSuccess();
         Assert::assertEquals(sprintf('%s \'%s\' %s.', $itemType, $itemName, $action), $notification->getMessage());
     }
+
+    /**
+     * @Then error notification that :message appears
+     */
+    public function errorNotificationAppears(string $message): void
+    {
+        $notification = ElementFactory::createElement($this->utilityContext, Notification::ELEMENT_NAME);
+        $notification->verifyVisibility();
+        $notification->verifyAlertFailure();
+        Assert::assertContains($message, $notification->getMessage());
+    }
 }

@@ -7,20 +7,11 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use Behat\Mink\Element\NodeElement;
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
 /** Element that describes structures in all update forms */
 class UpdateForm extends Element
 {
-    protected $fields = [
-        'formElement' => '.form-group',
-        'mainFormSection' => '.px-5:nth-child(1) .card-body',
-        'richTextSelector' => '.ez-data-source__richtext',
-        'fieldTypesList' => '#ezrepoforms_contenttype_update_fieldTypeSelection',
-        'addFieldDefinition' => 'ezrepoforms_contenttype_update_addFieldDefinition',
-        'fieldDefinitionContainer' => '.ez-card--fieldtype-container',
-        'fieldDefinitionName' => '.ez-card--fieldtype-container .ez-card__header .form-check-label',
-    ];
-
     private $fieldTypesMapping = [
         'Text line' => 'ezstring',
         'Country' => 'ezcountry',
@@ -29,17 +20,39 @@ class UpdateForm extends Element
 
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Admin Update Form';
-    public const MAIN_FORM_SECTION = 'mainFormSection';
+
+    public function __construct(UtilityContext $context)
+    {
+        parent::__construct($context);
+        $this->fields = [
+            'formElement' => '.form-group',
+            'mainFormSection' => '.px-5:nth-child(1) .card-body',
+            'richTextSelector' => '.ez-data-source__richtext',
+            'fieldTypesList' => '#ezrepoforms_contenttype_update_fieldTypeSelection',
+            'addFieldDefinition' => 'ezrepoforms_contenttype_update_addFieldDefinition',
+            'fieldDefinitionContainer' => '.ez-card--fieldtype-container',
+            'fieldDefinitionName' => '.ez-card--fieldtype-container .ez-card__header .form-check-label',
+        ];
+    }
 
     public function verifyVisibility(): void
     {
         $this->context->waitUntilElementIsVisible($this->fields['formElement']);
     }
 
+    /**
+     * Fill in field values depending on the field type.
+     *
+     * @param string $fieldName
+     * @param string $value
+     * @param null|string $containerName for fields that defines new field type in content type
+     *
+     * @throws \Exception
+     */
     public function fillFieldWithValue(string $fieldName, string $value, ?string $containerName = null): void
     {
         if ($containerName !== null) {
-            $container = $this->getContainerByHeader($containerName);
+            $container = $this->getFieldDefinitionContainer($containerName);
         } else {
             $container = $this->context->getSession()->getPage();
         }
@@ -50,8 +63,17 @@ class UpdateForm extends Element
             throw new \Exception(sprintf('Field %s not found.', $fieldName));
         }
 
-        $fieldNode->setValue('');
-        $fieldNode->setValue($value);
+        switch ($fieldNode->getAttribute('type')) {
+            case 'text':
+                $fieldNode->setValue('');
+                $fieldNode->setValue($value);
+                break;
+            case 'checkbox':
+                $fieldNode->setValue(filter_var($value, FILTER_VALIDATE_BOOLEAN));
+                break;
+            default:
+                throw new \Exception(sprintf('Field type "%s" not defined in UpdateForm.', $fieldNode->getAttribute('type')));
+        }
     }
 
     public function fillRichtextWithValue(string $value): void
@@ -61,13 +83,25 @@ class UpdateForm extends Element
         $summaryField->setValue($value);
     }
 
-    public function getContainerByHeader(string $containerName): NodeElement
+    /**
+     * Returns NodeElement that contains all fields for specified content type field type.
+     *
+     * @param string $containerName
+     *
+     * @return NodeElement
+     */
+    public function getFieldDefinitionContainer(string $containerName): NodeElement
     {
         $containerIndex = $this->context->getElementPositionByText($containerName, $this->fields['fieldDefinitionName']);
 
         return $this->context->findAllWithWait($this->fields['fieldDefinitionContainer'])[$containerIndex - 1];
     }
 
+    /**
+     * Select field definition with given name from select list.
+     *
+     * @param string $fieldName
+     */
     public function selectFieldDefinition(string $fieldName)
     {
         $this->context->findElement($this->fields['fieldTypesList'], $this->defaultTimeout)->selectOption($fieldName);
@@ -78,6 +112,13 @@ class UpdateForm extends Element
         $this->context->pressButton($this->fields['addFieldDefinition']);
     }
 
+    /**
+     * Verifies that form container with new field definition of given name is visible.
+     *
+     * @param string $fieldName
+     *
+     * @throws \Exception
+     */
     public function verifyNewFieldDefinitionFormExists(string $fieldName)
     {
         $form = $this->context->getElementByText(
