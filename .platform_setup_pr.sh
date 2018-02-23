@@ -71,7 +71,7 @@ composer require --no-update "${bundleName}:dev-master$selfAliasString"
 
 cat composer.json
 echo "kake"
-grep platform-ui-bundle -r *|grep composer.json
+grep ezplatform-admin-ui -r *|grep composer.json
 composer install --no-progress --no-interaction --prefer-dist --no-suggest --optimize-autoloader
 
 #composer depends ezsystems/ezplatform-demo
