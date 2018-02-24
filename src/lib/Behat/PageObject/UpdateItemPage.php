@@ -10,6 +10,7 @@ use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UpdateForm;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
+use PHPUnit\Framework\Assert;
 
 class UpdateItemPage extends Page
 {
@@ -34,11 +35,21 @@ class UpdateItemPage extends Page
         parent::__construct($context);
         $this->updateForm = ElementFactory::createElement($this->context, UpdateForm::ELEMENT_NAME);
         $this->rightMenu = ElementFactory::createElement($this->context, RightMenu::ELEMENT_NAME);
+        $this->pageTitle = 'Editing';
     }
 
     public function verifyElements(): void
     {
         $this->rightMenu->verifyVisibility();
         $this->updateForm->verifyVisibility();
+    }
+
+    public function verifyTitle(): void
+    {
+        Assert::assertContains(
+            $this->pageTitle,
+            $this->getPageTitle(),
+            'Wrong page title.'
+        );
     }
 }

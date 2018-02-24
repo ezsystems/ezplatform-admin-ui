@@ -6,11 +6,13 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
+use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypeGroupPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypeGroupsPage;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\LanguagesPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 
 /** Context for common actions (creating, editing, deleting, etc) in Admin pages (Content Types, Languages, etc.) */
@@ -19,7 +21,7 @@ class AdministrationContext extends BusinessContext
     private $itemCreateMapping = [
         'Content Type Group' => ContentTypeGroupsPage::PAGE_NAME,
         'Content Type' => ContentTypeGroupPage::PAGE_NAME,
-        'Language' => '',
+        'Language' => LanguagesPage::PAGE_NAME,
         'Role' => '',
         'Section' => '',
         'User' => '',
@@ -138,7 +140,7 @@ class AdministrationContext extends BusinessContext
     public function itemCannotBeSelected(string $itemType, string $itemName): void
     {
         $isListElementSelectable = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType])
-            ->adminList->isListElementSelectable($itemName);
+            ->adminList->isLinkElementSelectable($itemName);
 
         if ($isListElementSelectable) {
             throw new \Exception(sprintf('Element %s shoudn\'t be selectable.', $itemName));
@@ -177,5 +179,35 @@ class AdministrationContext extends BusinessContext
         $dialog = ElementFactory::createElement($this->utilityContext, Dialog::ELEMENT_NAME);
         $dialog->verifyVisibility();
         $dialog->confirm();
+    }
+
+    /**
+     * @Then :itemType :itemName has attribute :attributeName set to :value
+     */
+    public function itemHasProperAttribute(string $itemType, string $itemName, string $attributeName, string $value)
+    {
+        $pageObject = PageObjectFactory::createPage($this->utilityContext, $itemType, $itemName);
+
+        $pageObject->verifyItemAttribute($attributeName, $value);
+    }
+
+    /**
+     * @When :itemName on :pageName list has attribute :attributeName set to :value
+     */
+    public function linkItemHasProperAttribute(string $itemName, string $pageName, string $attributeName, string $value)
+    {
+        $pageObject = PageObjectFactory::createPage($this->utilityContext, $pageName);
+        $pageObject->verifyItemAttribute($attributeName, $value, $itemName);
+    }
+
+    /**
+     * @Then :itemType :itemName has proper attributes
+     */
+    public function itemHasProperAttributes(string $itemType, string $itemName, TableNode $settings)
+    {
+        $hash = $settings->getHash();
+        foreach ($hash as $setting) {
+            $this->itemHasProperAttribute($itemType, $itemName, $setting['label'], $setting['value']);
+        }
     }
 }

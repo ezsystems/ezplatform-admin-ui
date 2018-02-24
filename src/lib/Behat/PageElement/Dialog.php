@@ -6,15 +6,22 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+
 /** Element that describes dialog popup */
 class Dialog extends Element
 {
-    protected $fields = [
-        'confirm' => '.btn--trigger',
-        'decline' => '.btn--no',
-    ];
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Dialog';
+
+    public function __construct(UtilityContext $context)
+    {
+        parent::__construct($context);
+        $this->fields = [
+            'confirm' => '.btn--trigger',
+            'decline' => '.btn--no',
+        ];
+    }
 
     public function confirm(): void
     {

@@ -12,8 +12,6 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 
 class ContentTypeGroupsPage extends Page
 {
-    /** @var string Route under which the Page is available */
-    protected $route = '/admin/contenttypegroup/list';
     /** @var string Name by which Page is recognised */
     public const PAGE_NAME = 'Content Type Groups';
 
@@ -25,7 +23,9 @@ class ContentTypeGroupsPage extends Page
     public function __construct(UtilityContext $context)
     {
         parent::__construct($context);
+        $this->route = '/admin/contenttypegroup/list';
         $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME);
+        $this->pageTitle = self::PAGE_NAME;
     }
 
     /**

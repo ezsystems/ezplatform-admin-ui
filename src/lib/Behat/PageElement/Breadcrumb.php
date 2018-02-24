@@ -6,17 +6,23 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+
 /** Element that describes breadcrumb */
 class Breadcrumb extends Element
 {
-    protected $fields = [
-        'breadcrumbItem' => '.breadcrumb-item',
-        'breadcrumbItemLink' => '.breadcrumb-item a',
-        'activeBreadcrumb' => '.breadcrumb-item.active',
-    ];
-
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Breadcrumb';
+
+    public function __construct(UtilityContext $context)
+    {
+        parent::__construct($context);
+        $this->fields = [
+            'breadcrumbItem' => '.breadcrumb-item',
+            'breadcrumbItemLink' => '.breadcrumb-item a',
+            'activeBreadcrumb' => '.breadcrumb-item.active',
+        ];
+    }
 
     public function verifyVisibility(): void
     {

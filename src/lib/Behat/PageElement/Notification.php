@@ -6,17 +6,23 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+
 /** Element that describes user notification bar, that appears on the bottom of the screen */
 class Notification extends Element
 {
-    protected $fields = [
-        'alert' => '.alert',
-        'successAlert' => '.alert-success',
-        'failureAlert' => '.alert-danger',
-    ];
-
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Notification';
+
+    public function __construct(UtilityContext $context)
+    {
+        parent::__construct($context);
+        $this->fields = [
+            'alert' => '.alert',
+            'successAlert' => '.alert-success',
+            'failureAlert' => '.alert-danger',
+        ];
+    }
 
     public function verifyVisibility(): void
     {
