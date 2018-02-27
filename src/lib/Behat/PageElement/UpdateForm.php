@@ -65,6 +65,7 @@ class UpdateForm extends Element
 
         switch ($fieldNode->getAttribute('type')) {
             case 'text':
+            case 'email':
                 $fieldNode->setValue('');
                 $fieldNode->setValue($value);
                 break;
