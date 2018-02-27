@@ -19,12 +19,38 @@
         },
     };
     const handleEditItem = (content) => {
-        doc.querySelector('#form_subitems_content_edit_content_info').value = content._id;
-        doc.querySelector('#form_subitems_content_edit_version_info_content_info').value = content._id;
-        doc.querySelector('#form_subitems_content_edit_version_info_version_no').value = content.CurrentVersion.Version.VersionInfo.versionNo;
-        doc.querySelector(`#form_subitems_content_edit_language_${content.mainLanguageCode}`).checked = true;
+        const contentId = content._id;
+        const checkVersionDraftLink = window.Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId });
+        const submitVersionEditForm = () => {
+            doc.querySelector('#form_subitems_content_edit_content_info').value = contentId;
+            doc.querySelector('#form_subitems_content_edit_version_info_content_info').value = contentId;
+            doc.querySelector('#form_subitems_content_edit_version_info_version_no').value = content.CurrentVersion.Version.VersionInfo.versionNo;
+            doc.querySelector(`#form_subitems_content_edit_language_${content.mainLanguageCode}`).checked = true;
+            doc.querySelector('#form_subitems_content_edit_create').click();
+        };
+        const addDraft = () => {
+            submitVersionEditForm();
+            $('#version-draft-conflict-modal').modal('hide');
+        };
+        const showModal = (modalHtml) => {
+            const wrapper = doc.querySelector('.ez-modal-wrapper');
 
-        doc.querySelector('#form_subitems_content_edit_create').click();
+            wrapper.innerHTML = modalHtml;
+            wrapper.querySelector('.ez-btn--add-draft').addEventListener('click', addDraft, false);
+            [...wrapper.querySelectorAll('.ez-btn--prevented')].forEach(btn => btn.addEventListener('click', event => event.preventDefault(), false));
+            $('#version-draft-conflict-modal').modal('show');
+        };
+        fetch(checkVersionDraftLink, {
+            credentials: 'same-origin'
+        }).then(function (response) {
+            // Status 409 means that a draft conflict has occurred and the modal must be displayed.
+            // Otherwise we can go to Content Item edit page.
+            if (response.status === 409) {
+                response.text().then(showModal);
+            } else if (response.status === 200) {
+                submitVersionEditForm();
+            }
+        });
     };
     const generateLink = (locationId) => window.Routing.generate('_ezpublishLocation', { locationId });
 

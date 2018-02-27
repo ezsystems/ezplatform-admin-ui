@@ -4,7 +4,7 @@
 {% set is_archived = is_archived is defined and is_archived %}
 {% set is_draft_conflict = is_draft_conflict is defined and is_draft_conflict %}
 
-<table class="table {% if is_draft and haveToPaginate %} mb-3 {% endif %}">
+<table class="table {% if is_draft and haveToPaginate %} mb-3 {% endif %} {% if is_draft_conflict %} ez-table__draft-conflict {% endif %}">
     <thead>
     <tr>
         {% if form is defined %}
