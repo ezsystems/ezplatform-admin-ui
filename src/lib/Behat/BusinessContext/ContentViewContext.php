@@ -73,6 +73,6 @@ class ContentViewContext extends BusinessContext
     public function iSeeTitle(string $title): void
     {
         $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
-        Assert::assertEquals($title, $contentStructurePage->getPageHeaderTitle());
+        Assert::assertEquals($title, $contentStructurePage->getPageTitle());
     }
 }
