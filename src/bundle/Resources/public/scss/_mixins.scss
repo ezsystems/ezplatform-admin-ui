@@ -80,6 +80,7 @@
             transition: all .3s ease-in-out;
             transform: translateX(-50%);
             cursor: pointer;
+            z-index: 1;
         }
 
         &.is-checked {
@@ -107,7 +108,6 @@
             position: absolute;
             top: 50%;
             background-color: $ez-color-base-pale;
-            z-index: -1;
             cursor: pointer;
         }
 
