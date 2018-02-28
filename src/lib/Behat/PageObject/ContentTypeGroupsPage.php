@@ -26,6 +26,7 @@ class ContentTypeGroupsPage extends Page
         $this->route = '/admin/contenttypegroup/list';
         $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME);
         $this->pageTitle = self::PAGE_NAME;
+        $this->pageTitleLocator = '.ez-header h1';
     }
 
     /**
