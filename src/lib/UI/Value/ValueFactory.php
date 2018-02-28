@@ -116,7 +116,7 @@ class ValueFactory
     public function createLanguage(Language $language, VersionInfo $versionInfo): UIValue\Content\Language
     {
         return new UIValue\Content\Language($language, [
-            'userCanRemove' => $this->permissionResolver->canUser('content', 'delete', $versionInfo),
+            'userCanRemove' => $this->permissionResolver->canUser('content', 'remove', $versionInfo),
             'main' => $language->languageCode === $versionInfo->getContentInfo()->mainLanguageCode,
         ]);
     }
