@@ -42,6 +42,7 @@ class ContentTypePage extends Page
             'Content'
         );
         $this->pageTitle = $contentTypeName;
+        $this->pageTitleLocator = '.ez-header h1';
     }
 
     public function verifyElements(): void

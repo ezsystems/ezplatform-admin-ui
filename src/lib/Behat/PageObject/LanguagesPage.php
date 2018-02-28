@@ -27,6 +27,7 @@ class LanguagesPage extends Page
         $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME);
         $this->route = '/admin/language/list';
         $this->pageTitle = self::PAGE_NAME;
+        $this->pageTitleLocator = '.ez-header h1';
     }
 
     public function verifyElements(): void
