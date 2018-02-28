@@ -102,7 +102,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         );
         $canDelete = $this->permissionResolver->canUser(
             'content',
-            'delete',
+            'remove',
             $options['content']
         );
 
