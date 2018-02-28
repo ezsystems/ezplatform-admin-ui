@@ -14,10 +14,15 @@ export default class EzEmbedImageButton extends EzEmbedDiscoverContentButton {
      * @param {Function} callback
      */
     isImage(selection, callback) {
+        const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
         const request = new Request(selection.item.ContentInfo.Content.ContentType._href, {
             method: 'GET',
-            headers: {'Accept': 'application/vnd.ez.api.ContentType+json'},
-            mode: 'cors',
+            headers: {
+                'Accept': 'application/vnd.ez.api.ContentType+json',
+                'X-Siteaccess': siteaccess
+            },
+            mode: 'same-origin',
+            credentials: 'same-origin'
         });
 
         fetch(request)
