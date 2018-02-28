@@ -23,6 +23,7 @@ class ContentStructurePage extends Page
         $this->route = '/admin/content/location';
         $this->rightMenu = new RightMenu($this->context);
         $this->pageTitle = 'Home';
+        $this->pageTitleLocator = '.ez-page-title';
     }
 
     /**

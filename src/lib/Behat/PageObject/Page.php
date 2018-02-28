@@ -6,7 +6,6 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use PHPUnit\Framework\Assert;
 
@@ -22,6 +21,9 @@ abstract class Page
 
     /** @var UtilityContext context for interactions with the page */
     protected $context;
+
+    /** @var string locator for page title */
+    protected $pageTitleLocator;
 
     // @var UpperMenu
     public $upperMenu;
@@ -86,10 +88,6 @@ abstract class Page
      */
     public function getPageTitle(): string
     {
-        try {
-            return $this->context->findElement('.ez-header-title')->getText();
-        } catch (ElementNotFoundException $e) {
-            return $this->context->findElement('.ez-header h1')->getText();
-        }
+        return $this->context->findElement($this->pageTitleLocator)->getText();
     }
 }

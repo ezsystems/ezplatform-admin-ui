@@ -19,6 +19,7 @@ class DashboardPage extends Page
         $this->route = '/admin/dashboard';
         $this->fields = ['meSection' => '.card-body'];
         $this->pageTitle = 'My dashboard';
+        $this->pageTitleLocator = '.ez-header h1';
     }
 
     /**
