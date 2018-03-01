@@ -44,3 +44,38 @@
         cursor: pointer;
     }
 }
+
+.ez-modal--custom-url-alias {
+    width: 100%;
+
+    &.modal {
+        .modal-dialog {
+            max-width: initial;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    .modal-header {
+        background: $ez-color-base-pale;
+    }
+
+    .modal-body {
+        padding: 2rem;
+    }
+
+    &__label {
+        font-size: 14px;
+        font-weight: 700;
+        display: block;
+        margin-top: 1.5rem;
+
+        @include label-required();
+    }
+
+    &__info-text {
+        font-size: 14px;
+    }
+}
+

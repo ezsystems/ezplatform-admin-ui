@@ -30,7 +30,7 @@
             font-weight: 700;
             border: 1px solid $ez-color-primary;
             background-color: $ez-color-primary;
-            transition: background .3s ease-in-out;
+            transition: background .3s $ez-admin-transition;
             align-items: center;
 
             .ez-icon {

@@ -1,6 +1,6 @@
-{% trans_default_domain 'locationview' %}
-
-{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.urls.custom_url_aliases'|trans({'%contentName%' : ez_content_name(content)})|desc('Custom URL aliases for %contentName%') } %}
+{% trans_default_domain 'content_url' %}
+{% import _self as tab %}
+{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.urls.custom_url_aliases'|trans({'%contentName%' : ez_content_name(content)})|desc('Custom URL aliases for %contentName%'), tools: tab.table_header_tools() } %}
 
 {% if custom_urls is not empty %}
     <table class="table">
@@ -15,7 +15,7 @@
         <tbody>
         {% for custom_url in custom_urls %}
             <tr>
-                <td></td>
+                <td class="ez-checkbox-cell"></td>
                 <td>{{ custom_url.path }}</td>
                 <td>
                     {% for languageCode in custom_url.languageCodes %}{{ languageCode }}<br>{% endfor %}
@@ -64,4 +64,12 @@
     </p>
 {% endif %}
 
+{% include '@EzPlatformAdminUi/content/tab/url/modal_add_custom_url.html.twig' with {'form': form_custom_url_add} only %}
 
+{% macro table_header_tools() %}
+    <button class="btn btn-primary ez-btn--prevented" data-toggle="modal" data-target="#ez-modal--custom-url-alias" title="{{ 'tab.urls.action.add'|trans|desc('Add Custom Url') }}">
+        <svg class="ez-icon ez-icon-create">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+        </svg>
+    </button>
+{% endmacro %}
