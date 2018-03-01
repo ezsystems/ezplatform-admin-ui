@@ -8,7 +8,12 @@
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezauthor')|trim}) %}
             <ul {{ block( 'field_attributes' ) }}>
                 {% for author in field.value.authors %}
-                    <li>{{ author.name }} &lt;<a href="mailto:{{ author.email|escape( 'url' ) }}">{{ author.email }}</a>&gt;</li>
+                    <li>
+                        {{ author.name }}
+                        {% if author.email is not empty %}
+                            &lt;<a href="mailto:{{ author.email|escape( 'url' ) }}">{{ author.email }}</a>&gt;
+                        {% endif %}
+                    </li>
                 {% endfor %}
             </ul>
         {% endif %}
