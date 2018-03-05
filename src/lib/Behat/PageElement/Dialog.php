@@ -14,12 +14,15 @@ class Dialog extends Element
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Dialog';
 
-    public function __construct(UtilityContext $context)
+    public $dialogContainer;
+
+    public function __construct(UtilityContext $context, ?string $containerLocator = 'body')
     {
         parent::__construct($context);
         $this->fields = [
-            'confirm' => '.btn--trigger',
-            'decline' => '.btn--no',
+            'dialogContainer' => $containerLocator,
+            'confirm' => $containerLocator . ' .btn--trigger',
+            'decline' => $containerLocator . ' .btn--no',
         ];
     }
 

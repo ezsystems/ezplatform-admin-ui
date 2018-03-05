@@ -100,6 +100,39 @@ class UtilityContext extends MinkContext
     }
 
     /**
+     * Finds an HTML element by class and the text value and returns it. Search can be narrowed to children of baseElement.
+     *
+     * @param string $text Text value of the element
+     * @param string $selector CSS selector of the element
+     * @param string $textSelector Extra CSS selector for text of the element
+     * @param TraversableElement|null $baseElement
+     *
+     * @return NodeElement|null
+     */
+    public function getElementByTextFragment(string $text, string $selector, string $textSelector = null, TraversableElement $baseElement = null): ?NodeElement
+    {
+        $baseElement = $baseElement ?? $this->getSession()->getPage();
+
+        $elements = $this->findAllWithWait($selector, $baseElement);
+        foreach ($elements as $element) {
+            if ($textSelector !== null) {
+                try {
+                    $elementText = $this->findElement($textSelector, 10, $element)->getText();
+                } catch (\Exception $e) {
+                    continue;
+                }
+            } else {
+                $elementText = $element->getText();
+            }
+            if (strpos($elementText, $text) !== false) {
+                return $element;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Finds an HTML element by class and the text value and returns it's position in order. Search can be narrowed to children of baseElement.
      *
      * @param string $text Text value of the element

@@ -6,31 +6,29 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
+
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\SimpleTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\LinkedListTable;
 use PHPUnit\Framework\Assert;
 
-class LanguagePage extends Page
+class RolesPage extends Page
 {
     /** @var string Name by which Page is recognised */
-    public const PAGE_NAME = 'Language';
-    /** @var string $languageName */
-    private $languageName;
+    public const PAGE_NAME = 'Roles';
 
     /**
      * @var \EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList
      */
     public $adminList;
 
-    public function __construct(UtilityContext $context, string $languageName)
+    public function __construct(UtilityContext $context)
     {
         parent::__construct($context);
-        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME . ' information', SimpleTable::ELEMENT_NAME);
-        $this->languageName = $languageName;
-        $this->route = '/admin/language/view';
-        $this->pageTitle = sprintf('Language "%s"', $languageName);
+        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME, LinkedListTable::ELEMENT_NAME);
+        $this->route = '/admin/role/list';
+        $this->pageTitle = self::PAGE_NAME;
         $this->pageTitleLocator = '.ez-header h1';
     }
 
@@ -39,12 +37,12 @@ class LanguagePage extends Page
         $this->adminList->verifyVisibility();
     }
 
-    public function verifyItemAttribute(string $label, string $value): void
+    public function verifyItemAttribute(string $label, string $value, string $itemName): void
     {
         Assert::assertEquals(
             $value,
-            $this->adminList->table->getTableCellValue($label),
-            sprintf('Attribute "%s" has wrong value.', $label)
+            $this->adminList->table->getTableCellValue($itemName, $label),
+            sprintf('Attribute "%s" of item "%s" has wrong value.', $label, $itemName)
         );
     }
 }

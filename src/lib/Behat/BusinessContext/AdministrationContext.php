@@ -10,6 +10,8 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\RolePage;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\RolesPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypeGroupPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypeGroupsPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\LanguagesPage;
@@ -22,7 +24,9 @@ class AdministrationContext extends BusinessContext
         'Content Type Group' => ContentTypeGroupsPage::PAGE_NAME,
         'Content Type' => ContentTypeGroupPage::PAGE_NAME,
         'Language' => LanguagesPage::PAGE_NAME,
-        'Role' => '',
+        'Role' => RolesPage::PAGE_NAME,
+        'Limitation' => RolePage::PAGE_NAME,
+        'Policy' => RolePage::PAGE_NAME,
         'Section' => '',
         'User' => '',
     ];
@@ -59,13 +63,22 @@ class AdministrationContext extends BusinessContext
     }
 
     /**
+     * @When I start assigning to :itemName :itemType
+     */
+    public function iStartAssigningTo(string $itemName, string $itemType): void
+    {
+        $pageObject = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType]);
+        $pageObject->adminList->clickAssignButton($itemName);
+    }
+
+    /**
      * @Then there's :listElementName on :page list
      * @Then there's :listElementName on :parameter :page list
      */
     public function isElementOnTheList(string $listElementName, string $page, ?string $parameter = null): void
     {
         $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page, $parameter)
-            ->adminList->isLinkElementOnList($listElementName);
+            ->adminList->table->isElementInTable($listElementName);
 
         if (!$isElementOnTheList) {
             throw new ElementNotFoundException(
@@ -82,7 +95,7 @@ class AdministrationContext extends BusinessContext
     public function isElementNotOnTheList(string $listElementName, string $page, string $parameter = null): void
     {
         $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page, $parameter)
-            ->adminList->isLinkElementOnList($listElementName);
+            ->adminList->table->isElementInTable($listElementName);
 
         if ($isElementOnTheList) {
             throw new ElementNotFoundException(
@@ -97,14 +110,14 @@ class AdministrationContext extends BusinessContext
      *
      * @param string $itemName
      * @param string $page
-     * @param string $shouldBeEmpty
+     * @param bool $shouldBeEmpty
      */
-    private function verifyContentsStatus(string $itemName, string $page, string $shouldBeEmpty): void
+    private function verifyContentsStatus(string $itemName, string $page, bool $shouldBeEmpty): void
     {
         $emptyContainerCellValue = '0';
 
         $contentsCount = PageObjectFactory::createPage($this->utilityContext, $page)
-            ->adminList->getListItemAttribute($itemName, $this->emptyHeaderMapping[$page]);
+            ->adminList->table->getTableCellValue($itemName, $this->emptyHeaderMapping[$page]);
 
         $msg = '';
         if ($shouldBeEmpty) {
@@ -140,7 +153,7 @@ class AdministrationContext extends BusinessContext
     public function itemCannotBeSelected(string $itemType, string $itemName): void
     {
         $isListElementSelectable = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType])
-            ->adminList->isLinkElementSelectable($itemName);
+            ->adminList->table->isElementSelectable($itemName);
 
         if ($isListElementSelectable) {
             throw new \Exception(sprintf('Element %s shoudn\'t be selectable.', $itemName));
@@ -154,7 +167,7 @@ class AdministrationContext extends BusinessContext
     public function iGoToListItem(string $itemName, string $itemType, string $itemContainer = null): void
     {
         PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer)
-            ->adminList->clickListElement($itemName);
+            ->adminList->table->clickListElement($itemName);
     }
 
     /**
@@ -163,8 +176,20 @@ class AdministrationContext extends BusinessContext
      */
     public function iStartEditingItem(string $itemType, string $itemName, ?string $containerName = null): void
     {
+        $areListItemsLinks = $this->itemCreateMapping[$itemType] === 'Role' ? false : true;
         PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $containerName)
-            ->adminList->clickEditButton($itemName);
+            ->adminList->table->clickEditButton($itemName, $areListItemsLinks);
+    }
+
+    /**
+     * @When I delete :itemType from :itemContainer
+     */
+    public function iDeleteItems(string $itemType, string $itemContainer, TableNode $settings): void
+    {
+        $hash = $settings->getHash();
+        foreach ($hash as $setting) {
+            $this->iDeleteItem($itemType, $setting['item'], $itemContainer);
+        }
     }
 
     /**
@@ -173,9 +198,9 @@ class AdministrationContext extends BusinessContext
      */
     public function iDeleteItem(string $itemType, string $itemName, ?string $itemContainer = null): void
     {
-        $contentTypeGroups = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer);
-        $contentTypeGroups->adminList->selectListElement($itemName);
-        $contentTypeGroups->adminList->clickTrashButton();
+        $pageObject = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer);
+        $pageObject->adminList->table->selectListElement($itemName);
+        $pageObject->adminList->clickTrashButton();
         $dialog = ElementFactory::createElement($this->utilityContext, Dialog::ELEMENT_NAME);
         $dialog->verifyVisibility();
         $dialog->confirm();
@@ -209,5 +234,14 @@ class AdministrationContext extends BusinessContext
         foreach ($hash as $setting) {
             $this->itemHasProperAttribute($itemType, $itemName, $setting['label'], $setting['value']);
         }
+    }
+
+    /**
+     * @Then :listName list in :itemType :itemName is empty
+     */
+    public function listIsEmpty(string $listName, string $itemType, string $itemName): void
+    {
+        $pageObject = PageObjectFactory::createPage($this->utilityContext, $itemType, $itemName);
+        $pageObject->verifyListIsEmpty($listName);
     }
 }

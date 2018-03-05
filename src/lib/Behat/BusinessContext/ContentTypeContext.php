@@ -20,7 +20,7 @@ class ContentTypeContext extends BusinessContext
         $hash = $table->getHash();
         $contentTypePage = PageObjectFactory::createPage($this->utilityContext, ContentTypePage::PAGE_NAME, $hash[0]['value']);
         foreach ($hash as $row) {
-            $actualValue = $contentTypePage->globalPropertiesAdminList->getCellValueFromVerticalOrientedTable($row['label']);
+            $actualValue = $contentTypePage->globalPropertiesAdminList->table->getTableCellValue($row['label']);
             if ($actualValue !== $row['value']) {
                 throw new \Exception(
                     sprintf(
@@ -39,7 +39,7 @@ class ContentTypeContext extends BusinessContext
     public function contentTypeHasField(string $contentTypeName, string $fieldName, string $fieldType): void
     {
         $actualFieldType = PageObjectFactory::createPage($this->utilityContext, ContentTypePage::PAGE_NAME, $contentTypeName)
-            ->contentAdminList->getCellValueFromDoubleHeaderTable('Type', $fieldName);
+            ->contentAdminList->table->getTableCellValue('Type', $fieldName);
 
         if ($actualFieldType !== $fieldType) {
             throw new \Exception(

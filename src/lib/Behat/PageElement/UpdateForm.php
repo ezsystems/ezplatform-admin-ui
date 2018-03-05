@@ -32,6 +32,7 @@ class UpdateForm extends Element
             'addFieldDefinition' => 'ezrepoforms_contenttype_update_addFieldDefinition',
             'fieldDefinitionContainer' => '.ez-card--fieldtype-container',
             'fieldDefinitionName' => '.ez-card--fieldtype-container .ez-card__header .form-check-label',
+            'button' => '.btn-secondary',
         ];
     }
 
@@ -72,6 +73,10 @@ class UpdateForm extends Element
             case 'checkbox':
                 $fieldNode->setValue(filter_var($value, FILTER_VALIDATE_BOOLEAN));
                 break;
+            case 'radio':
+                if($fieldNode->isChecked() xor ($value === 'true'))
+                    $fieldNode->click();
+                break;
             default:
                 throw new \Exception(sprintf('Field type "%s" not defined in UpdateForm.', $fieldNode->getAttribute('type')));
         }
@@ -103,12 +108,12 @@ class UpdateForm extends Element
      *
      * @param string $fieldName
      */
-    public function selectFieldDefinition(string $fieldName)
+    public function selectFieldDefinition(string $fieldName): void
     {
         $this->context->findElement($this->fields['fieldTypesList'], $this->defaultTimeout)->selectOption($fieldName);
     }
 
-    public function clickAddFieldDefinition()
+    public function clickAddFieldDefinition(): void
     {
         $this->context->pressButton($this->fields['addFieldDefinition']);
     }
@@ -120,7 +125,7 @@ class UpdateForm extends Element
      *
      * @throws \Exception
      */
-    public function verifyNewFieldDefinitionFormExists(string $fieldName)
+    public function verifyNewFieldDefinitionFormExists(string $fieldName): void
     {
         $form = $this->context->getElementByText(
             sprintf('New FieldDefinition (%s)', $this->fieldTypesMapping[$fieldName]),
@@ -129,5 +134,15 @@ class UpdateForm extends Element
         if ($form === null) {
             throw new \Exception('Field definition not added to the form.');
         }
+    }
+
+    /**
+     * Click button with given label
+     *
+     * @param string $label
+     */
+    public function clickButton(string $label): void
+    {
+        $this->context->getElementByTextFragment($label, $this->fields['button'])->click();
     }
 }

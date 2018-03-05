@@ -21,7 +21,7 @@ class PageObjectFactory
      * @param string $pageName Name of the Page to creator
      * @param null[]|string[] $parameters additional parameters
      *
-     * @return LoginPage|DashboardPage|ContentStructurePage|ContentTypeGroupsPage|UpdateItemPage|ContentTypePage|FormManagerPage|FormDetailsPage|FormDeletionConfirmationPage|LanguagesPage|LanguagePage
+     * @return LoginPage|DashboardPage|ContentStructurePage|ContentTypeGroupsPage|UpdateItemPage|ContentTypePage|FormManagerPage|FormDetailsPage|FormDeletionConfirmationPage|LanguagesPage|LanguagePage|RolesPage|RolePage
      */
     public static function createPage(UtilityContext $context, string $pageName, ?string ...$parameters): Page
     {
@@ -52,6 +52,10 @@ class PageObjectFactory
                 return new FormDetailsPage($context, $parameters[0]);
             case FormDeletionConfirmationPage::PAGE_NAME:
                 return new FormDeletionConfirmationPage($context);
+            case RolesPage::PAGE_NAME:
+                return new RolesPage($context);
+            case RolePage::PAGE_NAME:
+                return new RolePage($context, $parameters[0]);
             default:
                 throw new \InvalidArgumentException(sprintf('Unrecognised page name: %s', $pageName));
         }
