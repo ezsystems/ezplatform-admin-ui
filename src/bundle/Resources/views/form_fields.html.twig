@@ -29,8 +29,8 @@
                 {{- block('content_type_choice_widget_options') -}}
             </div>
         {%- else -%}
-            <div class="form-check ez-instant-filter__group-item">
-                {{ form_widget(form[choice.value], {'parent_label_class': 'radio-inline'}) }}
+            <div class="ez-instant-filter__group-item"">
+                {{ form_widget(form[choice.value]) }}
             </div>
         {%- endif -%}
     {%- endfor -%}
