@@ -4,7 +4,7 @@
 
 {%- block ezplatform_fieldtype_ezbinaryfile_row -%}
     {% set preview_block_name = 'ezbinaryfile_preview' %}
-    {% set max_file_size = (form.parent.vars.value.fieldDefinition.validatorConfiguration.FileSizeValidator.maxFileSize * 1024 * 1024)|round %}
+    {% set max_file_size = min((form.parent.vars.value.fieldDefinition.validatorConfiguration.FileSizeValidator.maxFileSize * 1024 * 1024), max_upload_size)|round %}
     {{ block('binary_base_row') }}
 {%- endblock -%}
 
