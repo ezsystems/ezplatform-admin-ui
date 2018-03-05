@@ -36,6 +36,11 @@
         <target state="new">Create</target>
         <note>key: custom_url_alias_add_form.add</note>
       </trans-unit>
+      <trans-unit id="84348d405f3829787a5dfa80fbe5abbf07e3c118" resname="custom_url_alias_add_form.remove">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note>key: custom_url_alias_add_form.remove</note>
+      </trans-unit>
       <trans-unit id="7cb40cbc703336ab1285e81ebf100b82b05a0e27" resname="error.page.403.actions">
         <source><![CDATA[You can also go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> here or <a class="error-page__link" href="%search%">search</a> for other content.]]></source>
         <target state="new"><![CDATA[You can also go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> here or <a class="error-page__link" href="%search%">search</a> for other content.]]></target>

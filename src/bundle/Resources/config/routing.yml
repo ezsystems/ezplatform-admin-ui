@@ -553,3 +553,9 @@ ezplatform.custom_url.add:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:UrlAlias:add'
+
+ezplatform.custom_url.remove:
+    path: /url-alias/remove
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:UrlAlias:remove'

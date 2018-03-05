@@ -7,9 +7,14 @@
     </header>
     <body>
       <trans-unit id="5c48ac36c2a46c2dc2a89fd4c91a2a3d684eb5d8" resname="tab.urls.action.add">
-        <source>Add Custom Url</source>
-        <target state="new">Add Custom Url</target>
+        <source>Add Custom URL</source>
+        <target state="new">Add Custom URL</target>
         <note>key: tab.urls.action.add</note>
+      </trans-unit>
+      <trans-unit id="9b4504fd2e75dffb2c22283be3e9816e8142538a" resname="tab.urls.action.delete">
+        <source>Delete Custom URL</source>
+        <target state="new">Delete Custom URL</target>
+        <note>key: tab.urls.action.delete</note>
       </trans-unit>
       <trans-unit id="2398a15c604fd353b25fc8f558e2d099a6afeb33" resname="tab.urls.add.cancel">
         <source>Cancel</source>
@@ -52,8 +57,8 @@
         <note>key: tab.urls.add.site_root.helper.checked</note>
       </trans-unit>
       <trans-unit id="db531fb5f993263b5ea57393101781b9d731a738" resname="tab.urls.add.site_root.helper.unchecked">
-        <source>Unchecked will create the new alias under %name_of_parent%</source>
-        <target state="new">Unchecked will create the new alias under %name_of_parent%</target>
+        <source>Unchecked will create the new alias under %parent_name%</source>
+        <target state="new">Unchecked will create the new alias under %parent_name%</target>
         <note>key: tab.urls.add.site_root.helper.unchecked</note>
       </trans-unit>
       <trans-unit id="25badd959ce69714e8eb349ebddbbbe126c14458" resname="tab.urls.add.title">
@@ -70,6 +75,11 @@
         <source>Language</source>
         <target state="new">Language</target>
         <note>key: tab.urls.language</note>
+      </trans-unit>
+      <trans-unit id="0d3138c0198569f427ab4568fffa5d9d894db72a" resname="tab.urls.modal.message">
+        <source>Do you want to delete selected Custom URLs?</source>
+        <target state="new">Do you want to delete selected Custom URLs?</target>
+        <note>key: tab.urls.modal.message</note>
       </trans-unit>
       <trans-unit id="777d1a83ab6a6c4644dd31409906e48a0a7a4a51" resname="tab.urls.modal_close">
         <source>Close</source>

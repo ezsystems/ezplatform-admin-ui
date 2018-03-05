@@ -18,17 +18,15 @@ use Symfony\Component\Form\FormEvent;
 
 class AddLanguageFieldBasedOnContentListener
 {
-    /** @var ContentService */
-    private $contentService;
-
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
+
     /**
-     * AddLanguageFieldBasedOnContentListener constructor.
-     *
-     * @param ContentService $contentService
-     * @param LanguageService $languageService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
      */
     public function __construct(ContentService $contentService, LanguageService $languageService)
     {
@@ -37,7 +35,7 @@ class AddLanguageFieldBasedOnContentListener
     }
 
     /**
-     * @param FormEvent $event
+     * @param \Symfony\Component\Form\FormEvent $event
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
@@ -68,6 +66,11 @@ class AddLanguageFieldBasedOnContentListener
         );
     }
 
+    /**
+     * @param array $contentLanguages
+     *
+     * @return callable
+     */
     protected function getCallableFilter(array $contentLanguages): callable
     {
         return function () use ($contentLanguages) {
@@ -75,6 +78,11 @@ class AddLanguageFieldBasedOnContentListener
         };
     }
 
+    /**
+     * @param array $contentLanguages
+     *
+     * @return array
+     */
     protected function filterLanguages(array $contentLanguages): array
     {
         return array_filter(

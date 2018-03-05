@@ -10,28 +10,28 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\URLAliasService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\UrlsTab;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class UrlAliasController extends Controller
 {
-    /** @var FormFactory */
-    private $formFactory;
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
+    protected $formFactory;
 
-    /** @var SubmitHandler */
-    private $submitHandler;
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
+    protected $submitHandler;
 
-    /** @var URLAliasService */
-    private $urlAliasService;
+    /** @var \eZ\Publish\API\Repository\URLAliasService */
+    protected $urlAliasService;
 
     /**
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
-     * @param URLAliasService $urlAliasService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
+     * @param \eZ\Publish\API\Repository\URLAliasService $urlAliasService
      */
     public function __construct(
         FormFactory $formFactory,
@@ -44,9 +44,9 @@ class UrlAliasController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function addAction(Request $request): Response
     {
@@ -66,10 +66,7 @@ class UrlAliasController extends Controller
                     $data->isRedirect()
                 );
 
-                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
-                    'locationId' => $data->getLocation()->id,
-                    '_fragment' => UrlsTab::URI_FRAGMENT,
-                ]));
+                return $this->redirectToLocation($data->getLocation(), UrlsTab::URI_FRAGMENT);
             });
 
             if ($result instanceof Response) {
@@ -77,13 +74,45 @@ class UrlAliasController extends Controller
             }
         }
 
-        $redirectionUrl = null !== $location
-            ? $this->generateUrl('_ezpublishLocation', [
-                'locationId' => $location->id,
-                '_fragment' => UrlsTab::URI_FRAGMENT,
-            ])
-            : $this->generateUrl('ezplatform.dashboard');
+        if ($location) {
+            return $this->redirectToLocation($location, UrlsTab::URI_FRAGMENT);
+        }
 
-        return $this->redirect($redirectionUrl);
+        return $this->redirectToRoute('ezplatform.dashboard');
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function removeAction(Request $request): Response
+    {
+        $form = $this->formFactory->removeCustomUrl();
+        $form->handleRequest($request);
+
+        $location = $form->getData()->getLocation();
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (CustomUrlRemoveData $data) {
+                $aliasToRemoveList = [];
+                foreach ($data->getUrlAliases() as $customUrlId => $selected) {
+                    $aliasToRemoveList[] = $this->urlAliasService->load($customUrlId);
+                }
+                $this->urlAliasService->removeAliases($aliasToRemoveList);
+
+                return $this->redirectToLocation($data->getLocation(), UrlsTab::URI_FRAGMENT);
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        if ($location) {
+            return $this->redirectToLocation($location, UrlsTab::URI_FRAGMENT);
+        }
+
+        return $this->redirectToRoute('ezplatform.dashboard');
     }
 }
