@@ -74,8 +74,9 @@ class UpdateForm extends Element
                 $fieldNode->setValue(filter_var($value, FILTER_VALIDATE_BOOLEAN));
                 break;
             case 'radio':
-                if($fieldNode->isChecked() xor ($value === 'true'))
+                if ($fieldNode->isChecked() xor ($value === 'true')) {
                     $fieldNode->click();
+                }
                 break;
             default:
                 throw new \Exception(sprintf('Field type "%s" not defined in UpdateForm.', $fieldNode->getAttribute('type')));
@@ -137,7 +138,7 @@ class UpdateForm extends Element
     }
 
     /**
-     * Click button with given label
+     * Click button with given label.
      *
      * @param string $label
      */

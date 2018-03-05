@@ -1,13 +1,10 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: maciejtyrala
- * Date: 02/03/2018
- * Time: 09:04
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
-
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
@@ -19,13 +16,13 @@ class LinkedListTable extends Table
     public function __construct(UtilityContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
-        $this->fields['horizontalHeaders'] = $this->fields['list'].' .ez-table-header + .table thead th, .ez-table-header + form thead th';
-        $this->fields['listElementLink'] = $this->fields['list'].' .ez-checkbox-cell+ td a';
+        $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .ez-table-header + .table thead th, .ez-table-header + form thead th';
+        $this->fields['listElementLink'] = $this->fields['list'] . ' .ez-checkbox-cell+ td a';
         $this->fields['checkboxInput'] = ' .form-check-input';
-        $this->fields['assignButton'] = $this->fields['list'].' tr:nth-child(%s) a[title*=Assign]';
+        $this->fields['assignButton'] = $this->fields['list'] . ' tr:nth-child(%s) a[title*=Assign]';
     }
 
-    public  function getTableCellValue(string $header, ?string $secondHeader = null): string
+    public function getTableCellValue(string $header, ?string $secondHeader = null): string
     {
         $rowPosition = $this->context->getElementPositionByText(
             $header,
@@ -95,6 +92,5 @@ class LinkedListTable extends Table
     {
         $position = $this->context->getElementPositionByText($listItemName, $this->fields['listElementLink']);
         $this->context->findElement(sprintf($this->fields['assignButton'], $position))->click();
-
     }
 }

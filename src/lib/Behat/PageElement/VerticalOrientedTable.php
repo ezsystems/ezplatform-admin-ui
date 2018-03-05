@@ -1,13 +1,10 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: maciejtyrala
- * Date: 02/03/2018
- * Time: 09:00
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
-
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
@@ -19,8 +16,9 @@ class VerticalOrientedTable extends Table
     public function __construct(UtilityContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
-        $this->fields['verticalHeaders'] = $this->fields['list'].' colgroup+ tbody th';
+        $this->fields['verticalHeaders'] = $this->fields['list'] . ' colgroup+ tbody th';
     }
+
     public function getTableCellValue(string $header, ?string $secondHeader = null): string
     {
         $rowPosition = $this->context->getElementPositionByText(

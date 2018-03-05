@@ -18,7 +18,7 @@ class AdminList extends Element
     protected $listHeader;
     /** @var \Behat\Mink\Element\NodeElement|null element containing admin list */
     protected $listContainer;
-    /** @var  Table  */
+    /** @var Table */
     public $table;
 
     public function __construct(UtilityContext $context, string $listHeader, string $tableName, ?string $containerLocator = 'section')
@@ -38,7 +38,7 @@ class AdminList extends Element
 
     public function verifyVisibility(): void
     {
-        $actualHeader = $this->context->getElementByTextFragment($this->listHeader, $this->fields['listHeader'],null, $this->listContainer);
+        $actualHeader = $this->context->getElementByTextFragment($this->listHeader, $this->fields['listHeader'], null, $this->listContainer);
         if ($actualHeader === null) {
             throw new ElementNotFoundException($this->context->getSession(), sprintf('table header "%s"', $this->listHeader), $this->fields['listHeader']);
         }
@@ -56,7 +56,7 @@ class AdminList extends Element
 
     public function clickAssignButton(?string $listItemName = null): void
     {
-        if($listItemName === null){
+        if ($listItemName === null) {
             $this->context->findElement($this->fields['mainAssignButton'], $this->defaultTimeout, $this->listContainer)->click();
         } else {
             $this->table->clickAssignButton($listItemName);

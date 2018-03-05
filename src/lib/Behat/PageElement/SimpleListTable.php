@@ -6,7 +6,6 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
-
 use Behat\Mink\Element\NodeElement;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
@@ -18,12 +17,12 @@ class SimpleListTable extends Table
     public function __construct(UtilityContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
-        $this->fields['horizontalHeaders'] = $this->fields['list'].' .ez-table-header + form thead th';
-        $this->fields['listElement'] = $this->fields['list'].' .ez-checkbox-cell+ td';
+        $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .ez-table-header + form thead th';
+        $this->fields['listElement'] = $this->fields['list'] . ' .ez-checkbox-cell+ td';
         $this->fields['checkboxInput'] = ' .form-check-input';
     }
 
-    public  function getTableCellValue(string $header, ?string $secondHeader = null): string
+    public function getTableCellValue(string $header, ?string $secondHeader = null): string
     {
         $columnPosition = $this->context->getElementPositionByText(
             $header,
@@ -49,18 +48,19 @@ class SimpleListTable extends Table
         /** @var NodeElement[] $allRows */
         $allRows = $this->context->getSession()->getPage()->findAll('css', $this->fields['listRow']);
         $j = 0;
-        foreach($allRows as $row){
+        foreach ($allRows as $row) {
             $rowHash = [];
             /** @var NodeElement[] $allCells */
             $allCells = $row->findAll('css', 'td');
             $i = 0;
-            foreach($allCells as $cell){
+            foreach ($allCells as $cell) {
                 $rowHash[$allHeaders[$i]->getText()] = $cell->getText();
-                $i++;
+                ++$i;
             }
             $tableHash[$j] = $rowHash;
-            $j++;
+            ++$j;
         }
+
         return $tableHash;
     }
 

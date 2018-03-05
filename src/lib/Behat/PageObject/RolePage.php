@@ -6,15 +6,12 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\Element;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\NavLinkTabs;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\SimpleListTable;
-use WebDriver\Exception;
 
 class RolePage extends Page
 {
@@ -72,15 +69,15 @@ class RolePage extends Page
     }
 
     /**
-     * Verifies if lists from given tab is empty
+     * Verifies if lists from given tab is empty.
+     *
      * @param string $tabName
      */
     public function verifyListIsEmpty(string $tabName): void
     {
         $this->navLinkTabs->goToTab($tabName);
-        if($this->adminLists[$tabName]->table->getItemCount() > 0){
+        if ($this->adminLists[$tabName]->table->getItemCount() > 0) {
             throw new \Exception(sprintf('"%s" list is not empty.', $tabName));
         }
     }
-
 }

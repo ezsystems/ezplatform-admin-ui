@@ -15,13 +15,13 @@ abstract class Table extends Element
         parent::__construct($context);
         $this->fields = [
             'list' => $containerLocator,
-            'tableCell' => $containerLocator.' tr:nth-child(%d) td:nth-child(%d)',
-            'editButton' => $containerLocator.' tr:nth-child(%s) a[title=Edit]',
-            'listRow' => $containerLocator.' tbody tr',
+            'tableCell' => $containerLocator . ' tr:nth-child(%d) td:nth-child(%d)',
+            'editButton' => $containerLocator . ' tr:nth-child(%s) a[title=Edit]',
+            'listRow' => $containerLocator . ' tbody tr',
         ];
     }
 
-    public abstract function getTableCellValue(string $header, ?string $secondHeader = null): string;
+    abstract public function getTableCellValue(string $header, ?string $secondHeader = null): string;
 
     public function getItemCount(): int
     {

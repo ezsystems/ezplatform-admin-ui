@@ -16,7 +16,7 @@ class SimpleTable extends Table
     public function __construct(UtilityContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
-        $this->fields['horizontalHeaders'] = $this->fields['list'].' .ez-table-header + .table thead th, .ez-table-header + form thead th';
+        $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .ez-table-header + .table thead th, .ez-table-header + form thead th';
     }
 
     public function getTableCellValue(string $header, ?string $secondHeader = null): string

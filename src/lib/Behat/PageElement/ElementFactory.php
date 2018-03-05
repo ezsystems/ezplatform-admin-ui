@@ -22,14 +22,16 @@ class ElementFactory
     {
         switch ($elementName) {
             case AdminList::ELEMENT_NAME:
-                if(array_key_exists(2, $parameters)) {
+                if (array_key_exists(2, $parameters)) {
                     return new AdminList($context, $parameters[0], $parameters[1], $parameters[2]);
                 }
+
                 return new AdminList($context, $parameters[0], $parameters[1]);
             case Dialog::ELEMENT_NAME:
-                if(array_key_exists(0, $parameters)) {
+                if (array_key_exists(0, $parameters)) {
                     return new Dialog($context, $parameters[0]);
                 }
+
                 return new Dialog($context);
             case RightMenu::ELEMENT_NAME:
                 return new RightMenu($context);

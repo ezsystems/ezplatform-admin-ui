@@ -42,12 +42,13 @@ class ContentTypeGroupPage extends Page
     }
 
     /**
-     * Verifies if lists from given tab is empty
+     * Verifies if lists from given tab is empty.
+     *
      * @param string $tabName
      */
     public function verifyListIsEmpty(string $tabName): void
     {
-        if($this->adminList->table->getItemCount() > 0){
+        if ($this->adminList->table->getItemCount() > 0) {
             throw new \Exception(sprintf('%s list is not empty.', $tabName));
         }
     }

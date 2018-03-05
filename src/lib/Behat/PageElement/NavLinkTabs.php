@@ -1,13 +1,10 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: maciejtyrala
- * Date: 22/02/2018
- * Time: 13:26
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
-
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
@@ -37,8 +34,8 @@ class NavLinkTabs extends Element
 
     public function goToTab(string $tabName): void
     {
-        if($tabName !== $this->getActiveTabName()){
-            $this->context->getElementByTextFragment($tabName,$this->fields['navLink'])->click();
+        if ($tabName !== $this->getActiveTabName()) {
+            $this->context->getElementByTextFragment($tabName, $this->fields['navLink'])->click();
         }
     }
 }

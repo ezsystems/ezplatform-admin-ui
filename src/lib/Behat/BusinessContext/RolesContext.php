@@ -6,7 +6,6 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
-
 use Behat\Gherkin\Node\TableNode;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
@@ -77,19 +76,18 @@ class RolesContext extends BusinessContext
         $actualPoliciesList = $adminList->table->getTableHash();
         $policyExists = false;
         foreach ($actualPoliciesList as $policy) {
-            if(
+            if (
                 $policy['Module'] === explode('/', $moduleAndFunction)[0] &&
-                $policy['Function'] ===  explode('/', $moduleAndFunction)[1] &&
-                strpos($policy['Limitations'],$limitation) !== false
+                $policy['Function'] === explode('/', $moduleAndFunction)[1] &&
+                strpos($policy['Limitations'], $limitation) !== false
             ) {
                 $policyExists = true;
             }
         }
 
-        if(!$policyExists) {
+        if (!$policyExists) {
             throw new Exception(sprintf('Policy "%s" with limitation "%s" not found.', $moduleAndFunction, $limitation));
         }
-
     }
 
     /**
@@ -103,12 +101,12 @@ class RolesContext extends BusinessContext
         $actualAssignmentList = $adminList->table->getTableHash();
         $assignmentExists = false;
         foreach ($actualAssignmentList as $policy) {
-            if( $policy['User/Group'] === $userOrGroup && (strpos($policy['Limitation'],$limitation) !== false)) {
+            if ($policy['User/Group'] === $userOrGroup && (strpos($policy['Limitation'], $limitation) !== false)) {
                 $assignmentExists = true;
             }
         }
 
-        if(!$assignmentExists) {
+        if (!$assignmentExists) {
             throw new Exception(sprintf('Assignment to "%s" with limitation "%s" not found.', $userOrGroup, $limitation));
         }
     }

@@ -11,7 +11,7 @@ use PHPUnit\Framework\Assert;
 
 class UniversalDiscoveryWidget extends Element
 {
-    public const ELEMENT_NAME = "UDW";
+    public const ELEMENT_NAME = 'UDW';
 
     public function __construct(UtilityContext $context)
     {
