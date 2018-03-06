@@ -197,3 +197,9 @@
         margin-right: .5rem;
     }
 }
+
+.ez-alert--info {
+    .ez-icon-warning {
+        fill: $ez-secondary-ground-medium;
+    }
+}

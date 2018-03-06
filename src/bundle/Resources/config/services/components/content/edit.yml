@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: false
+        autowire: true
+        autoconfigure: true
+
+    EzSystems\EzPlatformAdminUi\Component\Content\PreviewUnavailableTwigComponent:
+        tags:
+            - { name: ezplatform.admin_ui.component, group: 'content-edit-form-before' }
