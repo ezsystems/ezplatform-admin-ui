@@ -35,7 +35,6 @@
                                 </div>
 
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token("authenticate") }}" />
-                                <input type="hidden" name="_target_path" value="{{ url('ezplatform.dashboard') }}" />
 
                                 <button type="submit" class="btn btn-primary ez-btn ez-btn--login">{{ 'authentication.submit'|trans|desc('Login') }}</button>
                             </fieldset>
