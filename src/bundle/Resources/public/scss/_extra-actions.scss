@@ -21,7 +21,7 @@
         transition: all .2s $ez-admin-transition;
 
         &:hover,
-        &:focus, 
+        &:focus,
         &:active {
             text-decoration: none;
         }
@@ -81,14 +81,9 @@
             font-size: .9375rem;
 
             &:hover,
-            &:focus, 
-            &:active {
-                text-decoration: none;
-            }
-
-            &:hover,
             &:focus {
                 background: $ez-secondary-ground-pale;
+                text-decoration: none;
             }
 
             &:active {
@@ -100,15 +95,15 @@
                 margin-bottom: .5rem;
             }
 
-            label {
+            &-label {
                 display: flex;
                 align-items: center;
                 margin: 0;
                 cursor: pointer;
+            }
 
-                [type="radio"] {
-                    display: none;
-                }
+            &-input[type="radio"] {
+                display: none;
             }
         }
     }
@@ -145,6 +140,7 @@
             background: $ez-white;
             transition: all .2s $ez-admin-transition;
             margin-bottom: 0;
+            padding-left: 0;
 
             &:hover,
             &:focus {
@@ -156,13 +152,14 @@
                 color: $ez-white;
             }
 
-            label {
+            &-label {
                 margin: 0;
                 display: block;
+                padding-left: 1.5rem;
+            }
 
-                [type="radio"] {
-                    display: none;
-                }
+            &-input[type="radio"] {
+                display: none;
             }
         }
 
