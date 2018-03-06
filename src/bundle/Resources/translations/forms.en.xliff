@@ -61,6 +61,21 @@
         <target state="new">Old password</target>
         <note>key: ezplatform.change_user_password.old_password</note>
       </trans-unit>
+      <trans-unit id="859bfc3d21113eecb4a19d4a9305f2519eb4b331" resname="ezplatform.forgot_user_password.email">
+        <source>Enter your email address:</source>
+        <target state="new">Enter your email address:</target>
+        <note>key: ezplatform.forgot_user_password.email</note>
+      </trans-unit>
+      <trans-unit id="ffb6990d5e75fe6dc86e94166b77e40a79e4e2a3" resname="ezplatform.forgot_user_password.login">
+        <source>Enter your login:</source>
+        <target state="new">Enter your login:</target>
+        <note>key: ezplatform.forgot_user_password.login</note>
+      </trans-unit>
+      <trans-unit id="0f7bbe027d2c53c78c7b3ce938af6c0ef6c1c2e2" resname="ezplatform.forgot_user_password.reset">
+        <source>Reset</source>
+        <target state="new">Reset</target>
+        <note>key: ezplatform.forgot_user_password.reset</note>
+      </trans-unit>
       <trans-unit id="0ad9197dcdbe88b1a05f099c564dc2b5634f8aa5" resname="ezplatform.language.create.enabled">
         <source>Enabled</source>
         <target state="new">Enabled</target>
@@ -100,6 +115,21 @@
         <source>Save</source>
         <target state="new">Save</target>
         <note>key: ezplatform.language.update.save</note>
+      </trans-unit>
+      <trans-unit id="877b8a2a4e3b2c7c137b7776a54cd7531421e5d3" resname="ezplatform.reset_user_password.confirm_new_password">
+        <source>Confirm password</source>
+        <target state="new">Confirm password</target>
+        <note>key: ezplatform.reset_user_password.confirm_new_password</note>
+      </trans-unit>
+      <trans-unit id="943fa9c11c71de16802dad7eea78690f53eb9888" resname="ezplatform.reset_user_password.new_password">
+        <source>New password</source>
+        <target state="new">New password</target>
+        <note>key: ezplatform.reset_user_password.new_password</note>
+      </trans-unit>
+      <trans-unit id="7f0836bb06a0030f7595c4c5d5d4079cdcece47f" resname="ezplatform.reset_user_password.update">
+        <source>Update</source>
+        <target state="new">Update</target>
+        <note>key: ezplatform.reset_user_password.update</note>
       </trans-unit>
       <trans-unit id="a1e42d4c649f7fbb614729978fea692be51d1485" resname="languages_delete_form.delete">
         <source>Delete languages</source>

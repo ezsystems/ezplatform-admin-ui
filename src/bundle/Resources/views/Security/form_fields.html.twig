@@ -1,0 +1,48 @@
+{% use 'bootstrap_4_layout.html.twig' %}
+
+{% trans_default_domain 'change_user_password' %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <em class="ez-field__error">{{ error.message }}</em>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock -%}
+
+{%- block form_label -%}
+    {% if label is not same as(false) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif -%}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {%- endif -%}
+        {% if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+        <{{ element|default('label') }}{% if label_attr %}{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}{% endif %}>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</{{ element|default('label') }}>
+    {%- endif -%}
+{%- endblock form_label -%}
+
+{% block form_row -%}
+    {% set wrapper_class = 'form-group' %}
+    {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ez-field--required')|trim %}{% endif %}
+    {% if errors|length > 0 %}{% set wrapper_class = (wrapper_class|default('') ~ ' is-invalid')|trim %}{% endif %}
+
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ez-login__form-label')|trim}) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-login__form-input')|trim}) %}
+    {% set wrapper_attr = wrapper_attr|default({})|merge({'class': (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
+    <div{% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+        {{ block('form_errors') }}
+        {{ block('form_label') }}
+        {{- form_widget(form, {'attr': attr}) -}}
+    </div>
+{%- endblock %}

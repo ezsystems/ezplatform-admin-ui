@@ -16,6 +16,9 @@ parameters:
     ezsettings.default.pagination.policy_limit: 10
     ezsettings.default.pagination.version_draft_limit: 5
 
+    # Security
+    ezsettings.default.security.token_interval_spec: PT1H
+
     # Subitems Module
     ezsettings.default.subitems_module.limit: 10
 

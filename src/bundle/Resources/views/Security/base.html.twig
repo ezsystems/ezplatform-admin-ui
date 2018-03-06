@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>eZ Platform</title>
+        {% stylesheets filter='scssphp'
+            'bundles/ezplatformadminui/scss/ezplatform-bootstrap.scss'
+            'bundles/ezplatformadminui/scss/ezplatform.scss'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/img/favicon.ico') }}" />
+    </head>
+    <body class="ez-login-view">
+        <div class="container-fluid ez-main-container">
+            <div class="row ez-login">
+                <div class="col-6 ez-login__image"></div>
+                <div class="col-6 ez-login__form">
+                    <div class="{%- block login_wrapper -%}ez-login__form-wrapper{%- endblock -%}">
+                        <svg class="ez-icon ez-icon--logo">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/bundles/ezplatformadminui/img/ez-logo.svg#logo-white"></use>
+                        </svg>
+                        {%- block content -%}
+
+                        {%- endblock content -%}
+                    </div>
+                    <div class="ez-login__footer">
+                        <span>eZ Platform ©1999-{{ "now"|date("Y") }} <a href="http://ez.no">eZ Systems AS</a> and others.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% javascripts
+            'bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js'
+            'bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js'
+            'bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    </body>
+</html>
