@@ -26,13 +26,13 @@ class UpdateForm extends Element
         parent::__construct($context);
         $this->fields = [
             'formElement' => '.form-group',
-            'mainFormSection' => '.px-5:nth-child(1) .card-body',
+            'mainFormSection' => 'form',
             'richTextSelector' => '.ez-data-source__richtext',
             'fieldTypesList' => '#ezrepoforms_contenttype_update_fieldTypeSelection',
             'addFieldDefinition' => 'ezrepoforms_contenttype_update_addFieldDefinition',
             'fieldDefinitionContainer' => '.ez-card--fieldtype-container',
             'fieldDefinitionName' => '.ez-card--fieldtype-container .ez-card__header .form-check-label',
-            'button' => '.btn-secondary',
+            'button' => 'button',
         ];
     }
 
@@ -74,7 +74,7 @@ class UpdateForm extends Element
                 $fieldNode->setValue(filter_var($value, FILTER_VALIDATE_BOOLEAN));
                 break;
             case 'radio':
-                if ($fieldNode->isChecked() xor ($value === 'true')) {
+                if ($fieldNode->isChecked() !== ($value === 'true')) {
                     $fieldNode->click();
                 }
                 break;
@@ -142,8 +142,14 @@ class UpdateForm extends Element
      *
      * @param string $label
      */
-    public function clickButton(string $label): void
+    public function clickButton(string $label, int $no = 0): void
     {
-        $this->context->getElementByTextFragment($label, $this->fields['button'])->click();
+        $formButtons = $this->context->findAllWithWait($this->fields['button'], $this->context->findElement($this->fields['mainFormSection']));
+        foreach ($formButtons as $key => $formButton) {
+            if ($formButton->getText() !== $label) {
+                array_splice($formButtons, $key);
+            }
+        }
+        $formButtons[$no]->click();
     }
 }

@@ -176,21 +176,20 @@ class AdministrationContext extends BusinessContext
      */
     public function iStartEditingItem(string $itemType, string $itemName, ?string $containerName = null): void
     {
-        $areListItemsLinks = $this->itemCreateMapping[$itemType] === 'Role' ? false : true;
         PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $containerName)
-            ->adminList->table->clickEditButton($itemName, $areListItemsLinks);
+            ->adminList->table->clickEditButton($itemName);
     }
 
-    /**
-     * @When I delete :itemType from :itemContainer
-     */
-    public function iDeleteItems(string $itemType, string $itemContainer, TableNode $settings): void
-    {
-        $hash = $settings->getHash();
-        foreach ($hash as $setting) {
-            $this->iDeleteItem($itemType, $setting['item'], $itemContainer);
-        }
-    }
+//    /**
+//     * @When I delete :itemType from :itemContainer
+//     */
+//    public function iDeleteItems(string $itemType, string $itemContainer, TableNode $settings): void
+//    {
+//        $hash = $settings->getHash();
+//        foreach ($hash as $setting) {
+//            $this->iDeleteItem($itemType, $setting['item'], $itemContainer);
+//        }
+//    }
 
     /**
      * @When I delete :itemType :itemName
@@ -198,9 +197,9 @@ class AdministrationContext extends BusinessContext
      */
     public function iDeleteItem(string $itemType, string $itemName, ?string $itemContainer = null): void
     {
-        $pageObject = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer);
-        $pageObject->adminList->table->selectListElement($itemName);
-        $pageObject->adminList->clickTrashButton();
+        $page = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer);
+        $page->adminList->table->selectListElement($itemName);
+        $page->adminList->clickTrashButton();
         $dialog = ElementFactory::createElement($this->utilityContext, Dialog::ELEMENT_NAME);
         $dialog->verifyVisibility();
         $dialog->confirm();

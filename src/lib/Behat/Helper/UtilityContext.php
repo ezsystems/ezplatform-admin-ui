@@ -100,16 +100,16 @@ class UtilityContext extends MinkContext
     }
 
     /**
-     * Finds an HTML element by class and the text value and returns it. Search can be narrowed to children of baseElement.
+     * Finds an HTML element by class and the fragment of text value and returns it. Search can be narrowed to children of baseElement.
      *
-     * @param string $text Text value of the element
+     * @param string $text Fragment of text value of the element
      * @param string $selector CSS selector of the element
      * @param string $textSelector Extra CSS selector for text of the element
      * @param TraversableElement|null $baseElement
      *
      * @return NodeElement|null
      */
-    public function getElementByTextFragment(string $text, string $selector, string $textSelector = null, TraversableElement $baseElement = null): ?NodeElement
+    public function getElementByTextFragment(string $textFragment, string $selector, string $textSelector = null, TraversableElement $baseElement = null): ?NodeElement
     {
         $baseElement = $baseElement ?? $this->getSession()->getPage();
 
@@ -124,7 +124,7 @@ class UtilityContext extends MinkContext
             } else {
                 $elementText = $element->getText();
             }
-            if (strpos($elementText, $text) !== false) {
+            if (strpos($elementText, $textFragment) !== false) {
                 return $element;
             }
         }

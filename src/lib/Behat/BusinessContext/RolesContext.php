@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\RolePage;
@@ -20,41 +21,59 @@ class RolesContext extends BusinessContext
         'assignment' => 'Assignments',
     ];
 
+    private $fields = [
+        'newPolicySelectList' => 'policy_create_policy',
+        'newPolicyAssignmentLimitation' => 'role_assignment_create_sections'
+    ];
+
     /**
-     * @When I start assigning users and groups to :roleName from :pageName page
+     * @When I start assigning users and groups to :roleName from role page
      */
-    public function iStartAssigningTo(string $roleName, string $pageName): void
+    public function iStartAssigningTo(string $roleName): void
     {
-        $pageObject = PageObjectFactory::createPage($this->utilityContext, $pageName, $roleName);
+        $pageObject = PageObjectFactory::createPage($this->utilityContext, 'Role', $roleName);
         $pageObject->navLinkTabs->goToTab($this->tabMapping['assignment']);
         $pageObject->adminLists[$this->tabMapping['assignment']]->clickAssignButton();
     }
 
     /**
-     * @When I :buttonLabel :itemPath through UDW
+     * @When I select limitation :itemPath for :tabName through UDW
+     * @When I select :kind limitation :itemPath for :tabName through UDW
      */
-    public function iSelectLocationThroughUDW(string $buttonLabel, string $itemPath): void
+    public function iSelectSubtreeLimitationThroughUDW(string $itemPath, string $tabName, ?string $kind = null): void
     {
-        $pageObject = PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME);
-        $pageObject->updateForm->clickButton($buttonLabel);
+        $buttonLabel = 'Select locations';
+        $buttonNo = 0;
 
-        $udw = new UniversalDiscoveryWidget($this->utilityContext);
+        if('assignment' === $tabName) {
+            PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME)
+                ->updateForm->fillFieldWithValue('Subtree', 'true');
+            $buttonLabel = 'Select Subtree';
+        }
+
+        if($kind === 'subtree') {
+            $buttonNo = 1;
+        }
+
+        $pageObject = PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME);
+        $pageObject->updateForm->clickButton($buttonLabel, $buttonNo);
+
+        $udw = ElementFactory::createElement($this->utilityContext, UniversalDiscoveryWidget::ELEMENT_NAME);
         $udw->verifyVisibility();
         $udw->selectContent($itemPath);
         $udw->confirm();
     }
 
     /**
-     * @When I delete :itemType :itemName from :roleName role
      * @When I delete :itemType from :roleName role
      */
-    public function iDeleteManyFromRole(string $itemType, string $roleName, ?string $itemName = null, ?TableNode $settings = null): void
+    public function iDeleteManyFromRole(string $itemType, string $roleName, TableNode $settings): void
     {
         $rolePage = PageObjectFactory::createPage($this->utilityContext, RolePage::PAGE_NAME, $roleName);
         $rolePage->navLinkTabs->goToTab($this->tabMapping[$itemType]);
         $adminList = $rolePage->adminLists[$this->tabMapping[$itemType]];
 
-        $elements = ($settings === null) ? [['item' => $itemName]] : $settings->getHash();
+        $elements = $settings->getHash();
         foreach ($elements as $element) {
             $adminList->table->selectListElement($element['item']);
         }
@@ -75,10 +94,12 @@ class RolesContext extends BusinessContext
         $adminList = $rolePage->adminLists[$this->tabMapping['policy']];
         $actualPoliciesList = $adminList->table->getTableHash();
         $policyExists = false;
+        $expectedModule = explode('/', $moduleAndFunction)[0];
+        $expectedFunction = explode('/', $moduleAndFunction)[1];
         foreach ($actualPoliciesList as $policy) {
             if (
-                $policy['Module'] === explode('/', $moduleAndFunction)[0] &&
-                $policy['Function'] === explode('/', $moduleAndFunction)[1] &&
+                $policy['Module'] === $expectedModule &&
+                $policy['Function'] === $expectedFunction &&
                 strpos($policy['Limitations'], $limitation) !== false
             ) {
                 $policyExists = true;
@@ -91,7 +112,7 @@ class RolesContext extends BusinessContext
     }
 
     /**
-     * @Then There's a assignment :limitation for :userOrGroup on the :roleName assignments list
+     * @Then There's an assignment :limitation for :userOrGroup on the :roleName assignments list
      */
     public function thereIsAnAssignment(string $limitation, string $userOrGroup, string $roleName): void
     {
@@ -112,7 +133,7 @@ class RolesContext extends BusinessContext
     }
 
     /**
-     * @Then There's policies on the :roleName policies list
+     * @Then There are policies on the :roleName policies list
      */
     public function thereArePolicies(string $roleName, TableNode $settings): void
     {
@@ -123,7 +144,7 @@ class RolesContext extends BusinessContext
     }
 
     /**
-     * @Then There's assignments on the :roleName assignments list
+     * @Then There are assignments on the :roleName assignments list
      */
     public function thereAreAssignments(string $roleName, TableNode $settings): void
     {
@@ -131,5 +152,23 @@ class RolesContext extends BusinessContext
         foreach ($policies as $policy) {
             $this->thereIsAnAssignment($policy['limitation'], $policy['user/group'], $roleName);
         }
+    }
+
+    /**
+     * @When I select policy :policyName
+     */
+    public function iSelectPolicy(string $policyName): void
+    {
+        $this->utilityContext->selectOption($this->fields['newPolicySelectList'],$policyName);
+    }
+
+    /**
+     * @When I select :limitationName from Sections as role assignment limitation
+     */
+    public function iSelectSectionLimitation(string $limitationName): void
+    {
+        PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME)
+            ->updateForm->fillFieldWithValue('Sections', 'true');
+        $this->utilityContext->selectOption($this->fields['newPolicyAssignmentLimitation'], $limitationName);
     }
 }

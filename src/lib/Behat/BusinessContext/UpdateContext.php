@@ -53,4 +53,16 @@ class UpdateContext extends BusinessContext
         PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME)
             ->updateForm->fillFieldWithValue($field, $value, sprintf('New FieldDefinition (%s)', $containerName));
     }
+
+    /**
+     * @When I select options from :selectName
+     */
+    public function iSelectOptionsFrom(string $selectName, TableNode $options): void
+    {
+        $optionsHash = $options->getHash();
+        $this->utilityContext->selectOption($selectName, $optionsHash[0]['option']);
+        for ($i = 1; $i < count($optionsHash); $i++) {
+            $this->utilityContext->additionallySelectOption($selectName, $optionsHash[$i]['option']);
+        }
+    }
 }

@@ -14,7 +14,7 @@ class Dialog extends Element
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Dialog';
 
-    public $dialogContainer;
+    //public $dialogContainer;
 
     public function __construct(UtilityContext $context, ?string $containerLocator = 'body')
     {
