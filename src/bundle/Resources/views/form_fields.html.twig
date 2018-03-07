@@ -29,10 +29,35 @@
                 {{- block('content_type_choice_widget_options') -}}
             </div>
         {%- else -%}
-            <div class="ez-instant-filter__group-item"">
+            <div class="ez-instant-filter__group-item">
                 {{ form_widget(form[choice.value]) }}
             </div>
         {%- endif -%}
+    {%- endfor -%}
+{%- endblock -%}
+
+{%- block _search_content_types_widget -%}
+    <div class="ez-content-type-selector ez-content-type-selector--collapsed">
+    {%- set options = choices -%}
+    {%- for group_label, choice in options -%}
+        <div class="ez-content-type-selector__group">
+            <span class="ez-content-type-selector__group-title">
+                {{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }}
+            </span>
+            <ul class="ez-content-type-selector__list">
+            {%- set options = choice -%}
+            {{- block('search_type_choice_widget_options') -}}
+            </ul>
+        </div>
+    {%- endfor -%}
+    </div>
+{%- endblock -%}
+
+{%- block search_type_choice_widget_options -%}
+    {%- for group_label, choice in options -%}
+        <li class="ez-content-type-selector__item">
+            {{ form_widget(form[choice.value]) }}
+        </li>
     {%- endfor -%}
 {%- endblock -%}
 

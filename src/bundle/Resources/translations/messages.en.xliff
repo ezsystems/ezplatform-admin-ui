@@ -106,15 +106,85 @@
         <target state="new">Delete</target>
         <note>key: modal.delete</note>
       </trans-unit>
+      <trans-unit id="ef88894d37b21eeb205ece403d77ab05ccea52cf" resname="modal.select">
+        <source>Select</source>
+        <target state="new">Select</target>
+        <note>key: modal.select</note>
+      </trans-unit>
       <trans-unit id="08a5f336891a76fbd5fce4f454bb2d71b1df0223" resname="modal.title">
         <source>Please confirm</source>
         <target state="new">Please confirm</target>
         <note>key: modal.title</note>
       </trans-unit>
+      <trans-unit id="2c0d71c1688c1f04ff156bb9dff167ca5ae663b6" resname="search.any.content.type">
+        <source>Any content type</source>
+        <target state="new">Any content type</target>
+        <note>key: search.any.content.type</note>
+      </trans-unit>
+      <trans-unit id="08232f4c5c3ca88a7f2fd8e29eda7e20ec346aae" resname="search.any_time">
+        <source>Any time</source>
+        <target state="new">Any time</target>
+        <note>key: search.any_time</note>
+      </trans-unit>
+      <trans-unit id="8605c5030193beebc7097a652f6c9dcb648cccec" resname="search.apply">
+        <source>Apply</source>
+        <target state="new">Apply</target>
+        <note>key: search.apply</note>
+      </trans-unit>
+      <trans-unit id="27f2f932e2b2f60b36b3331b45a3e15b421ee86f" resname="search.clear">
+        <source>Clear</source>
+        <target state="new">Clear</target>
+        <note>key: search.clear</note>
+      </trans-unit>
+      <trans-unit id="52574f2c1d5e0b3ffcd4f105b770e91ae1e519fa" resname="search.content.type">
+        <source>Content type:</source>
+        <target state="new">Content type:</target>
+        <note>key: search.content.type</note>
+      </trans-unit>
+      <trans-unit id="738c66eb92535505455b34b383f8089fb1bc0479" resname="search.created">
+        <source>Created:</source>
+        <target state="new">Created:</target>
+        <note>key: search.created</note>
+      </trans-unit>
+      <trans-unit id="9cef4cf2cb67458460a2a01c0adc1b4238320459" resname="search.date.from">
+        <source>From:</source>
+        <target state="new">From:</target>
+        <note>key: search.date.from</note>
+      </trans-unit>
+      <trans-unit id="f32993c555744e5c203137f3ee0e380d27e9cfef" resname="search.date.range">
+        <source>Select date range</source>
+        <target state="new">Select date range</target>
+        <note>key: search.date.range</note>
+      </trans-unit>
+      <trans-unit id="ec2194ad5a5851c9bb326a091c6985adedcd42b2" resname="search.date.to">
+        <source>To:</source>
+        <target state="new">To:</target>
+        <note>key: search.date.to</note>
+      </trans-unit>
+      <trans-unit id="9db82102d1da5efb63380ca328a83d13732a02ee" resname="search.filter">
+        <source>Filter</source>
+        <target state="new">Filter</target>
+        <note>key: search.filter</note>
+      </trans-unit>
+      <trans-unit id="c2e9df867c114a94918c00f775d3a54d24358dfa" resname="search.last.modified">
+        <source>Last modified:</source>
+        <target state="new">Last modified:</target>
+        <note>key: search.last.modified</note>
+      </trans-unit>
       <trans-unit id="6fa93ef4dfbce97076a254427bb30bf7c5819c5d" resname="search.perform">
         <source>Search</source>
         <target state="new">Search</target>
         <note>key: search.perform</note>
+      </trans-unit>
+      <trans-unit id="34cd11448c2016e5c0a098947eb3e2aef01a9ac5" resname="search.section">
+        <source>Section:</source>
+        <target state="new">Section:</target>
+        <note>key: search.section</note>
+      </trans-unit>
+      <trans-unit id="03d6d5922fd2012e155e50306eaf98e2dfeb21c6" resname="search.section.any">
+        <source>Any section</source>
+        <target state="new">Any section</target>
+        <note>key: search.section.any</note>
       </trans-unit>
       <trans-unit id="9567771350aff93580f743089937b0c8fe31058e" resname="section.assign,content">
         <source>Assign Content</source>

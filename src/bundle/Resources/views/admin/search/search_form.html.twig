@@ -1,7 +1,7 @@
 {% form_theme form '@EzPlatformAdminUi/form_fields.html.twig'  %}
 
 {{ form_start(form) }}
-<div class="input-group px-4">
+<div class="input-group">
     {{ form_widget(form.query) }}
 
     <span class="input-group-btn">
@@ -10,6 +10,100 @@
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
             </svg>
             {{ 'search.perform'|trans|desc('Search') }}</button>
+        <button type="submit" class="btn btn-dark ez-btn--filter ml-4">
+            <svg class="ez-icon ez-icon--small ez-icon--light ez-icon-filters">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#filters"></use>
+            </svg>
+            {{ 'search.filter'|trans|desc('Filter') }}</button>
     </span>
+</div>
+<div class="ez-filters ez-filters--collapsed mt-4 pt-2">
+    <div class="ez-filters__item ez-filters__item--content-type">
+        <label class="ez-filters__item-label">{{ 'search.content.type'|trans|desc('Content type:') }}</label>
+        <select class="form-control ez-filters__select">
+            <option class="ez-filters__option ez-filters__option--hidden" data-default="{{ 'search.any.content.type'|trans|desc('Any content type') }}" value="">{{ 'search.any.content.type'|trans|desc('Any content type') }}</option>
+        </select>
+        {{ form_widget(form.content_types, {'attr': {'class': 'ez-filters__select'}}) }}
+    </div>
+    <div class="ez-filters__item ez-filters__item--section">
+        <label class="ez-filters__item-label">{{ 'search.section'|trans|desc('Section:') }}</label>
+        {{ form_widget(form.section, {'attr': {'class': 'ez-filters__select'}}) }}
+    </div>
+    <div class="ez-filters__item ez-filters__item--modified">
+        <label class="ez-filters__item-label">{{ 'search.last.modified'|trans|desc('Last modified:') }}</label>
+        {{ form_widget(form.last_modified_select, {'attr': {'class': 'ez-filters__select', 'data-target-selector': '.ez-modal--select-modified-range'}}) }}
+    </div>
+    <div class="ez-filters__item ez-filters__item--created">
+        <label class="ez-filters__item-label">{{ 'search.created'|trans|desc('Created:') }}</label>
+        {{ form_widget(form.created_select, {'attr': {'class': 'ez-filters__select', 'data-target-selector': '.ez-modal--select-created-range'}}) }}
+    </div>
+    <div class="ez-filters__btns">
+        <button class="btn btn-dark ez-btn-clear">
+            {{ 'search.clear'|trans|desc('Clear') }}</button>
+        <button type="submit" class="btn btn-secondary ez-btn-apply" disabled>
+            {{ 'search.apply'|trans|desc('Apply') }}</button>
+    </div>
+</div>
+{{ form_widget(form.last_modified, {'attr': {'hidden': 'hidden'}}) }}
+{{ form_widget(form.created, {'attr': {'hidden': 'hidden'}}) }}
+<div class="modal fade ez-modal ez-modal--select-modified-range" tabindex="-1" role="dialog" data-period-selector="#search_last_modified_date_interval" data-end-selector="#search_last_modified_end_date">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ 'search.date.range'|trans|desc('Select date range') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label class="ez-filters__item-label">{{ 'search.date.from'|trans|desc('From:') }}
+                    <input type="text" class="form-control ez-date-select ez-date-select--start" data-target-selector="#modified-start-range">
+                    <input type="text" id="modified-start-range" hidden>
+                </label>
+                <label class="ez-filters__item-label">{{ 'search.date.to'|trans|desc('To:') }}
+                    <input type="text" class="form-control ez-date-select ez-date-select--end" data-target-selector="#modified-end-range">
+                    <input type="text" id="modified-end-range" hidden>
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">
+                    {{ 'modal.cancel'|trans|desc('Cancel') }}
+                </button>
+                <button class="btn btn-secondary ez-btn--select" data-dismiss="modal" disabled>
+                    {{ 'modal.select'|trans|desc('Select') }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade ez-modal ez-modal--select-created-range" tabindex="-1" role="dialog" data-period-selector="#search_created_date_interval" data-end-selector="#search_created_end_date">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ 'search.date.range'|trans|desc('Select date range') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label class="ez-filters__item-label">{{ 'search.date.from'|trans|desc('From:') }}
+                    <input type="text" class="form-control ez-date-select ez-date-select--start" data-target-selector="#created-start-range">
+                    <input type="text" id="created-start-range" hidden>
+                </label>
+                <label class="ez-filters__item-label">{{ 'search.date.to'|trans|desc('To:') }}
+                    <input type="text" class="form-control ez-date-select ez-date-select--end" data-target-selector="#created-end-range">
+                    <input type="text" id="created-end-range" hidden>
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">
+                    {{ 'modal.cancel'|trans|desc('Cancel') }}
+                </button>
+                <button class="btn btn-secondary ez-btn--select" data-dismiss="modal" disabled>
+                    {{ 'modal.select'|trans|desc('Select') }}
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 {{ form_end(form) }}
