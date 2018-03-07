@@ -54,7 +54,7 @@
             {% if is_draft_conflict %}
                 <td>
                     {% set edit_draft_disabled = version.author.id != admin_ui_config.user.user.id %}
-                    <a href="{{ path('ez_content_draft_edit', { 'contentId': version.contentInfo.id, 'versionNo': version.versionNo, 'language': version.translations[0].languageCode }) }}"
+                    <a href="{{ path('ez_content_draft_edit', { 'contentId': version.contentInfo.id, 'versionNo': version.versionNo, 'language': version.translations[0].languageCode, 'locationId': location.id }) }}"
                        class="btn btn-icon {% if edit_draft_disabled %}ez-btn--prevented{% endif %}"
                        title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}"
                        {% if edit_draft_disabled %}disabled{% endif %}>
@@ -69,7 +69,8 @@
                         data-content-draft-edit-url="{{ path('ez_content_draft_edit', {
                             'contentId': version.contentInfo.id,
                             'versionNo': version.versionNo,
-                            'language': version.translations[0].languageCode
+                            'language': version.translations[0].languageCode,
+                            'locationId': location.id
                         }) }}"
                         data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
                             'contentId': version.contentInfo.id,

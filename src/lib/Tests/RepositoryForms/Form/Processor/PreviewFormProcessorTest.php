@@ -77,6 +77,7 @@ class PreviewFormProcessorTest extends TestCase
     {
         $languageCode = 'cyb-CY';
         $contentDraftId = 123;
+        $locationId = 55;
         $url = 'http://url';
         $fieldDefinitionIdentifier = 'identifier_1';
         $fieldDataValue = 'some_value';
@@ -88,9 +89,14 @@ class PreviewFormProcessorTest extends TestCase
             $languageCode, $fieldDefinitionIdentifier, $fieldDataValue
         );
 
-        $contentDraft = $this->generateContentDraft($contentDraftId, $languageCode);
+        $contentDraft = $this->generateContentDraft($contentDraftId, $languageCode, $locationId);
         $contentService = $this->generateContentServiceMock($contentStruct, $contentDraft);
-        $urlGenerator = $this->generateUrlGeneratorMock($contentDraft, $languageCode, $url);
+        $urlGenerator = $this->generateUrlGeneratorMock($contentDraft, $languageCode, $url, $locationId);
+
+        $this->translator
+            ->method('trans')
+            ->with('error.preview', [], 'content_preview')
+            ->willReturn('Cannot save content draft.');
 
         $config = $this->generateConfigMock($languageCode);
         $form = $this->generateFormMock($config);
@@ -109,6 +115,7 @@ class PreviewFormProcessorTest extends TestCase
         $contentDraftId = 123;
         $url = 'http://url';
         $fieldDefinitionIdentifier = 'identifier_1';
+        $locationId = 55;
         $fieldDataValue = 'some_value';
 
         $contentStruct = $this->generateContentStruct($languageCode, $fieldDefinitionIdentifier, $fieldDataValue);
@@ -119,7 +126,7 @@ class PreviewFormProcessorTest extends TestCase
 
         $event = new FormActionEvent($form, $contentStruct, 'fooAction');
 
-        $contentDraft = $this->generateContentDraft($contentDraftId, $languageCode);
+        $contentDraft = $this->generateContentDraft($contentDraftId, $languageCode, $locationId);
         $contentService = $this->createMock(ContentService::class);
         $contentService
             ->expects(self::once())
@@ -228,8 +235,12 @@ class PreviewFormProcessorTest extends TestCase
      *
      * @return MockObject
      */
-    private function generateUrlGeneratorMock(APIContent $contentDraft, string $languageCode, string $url): MockObject
-    {
+    private function generateUrlGeneratorMock(
+        APIContent $contentDraft,
+        string $languageCode,
+        string $url,
+        int $locationId
+    ): MockObject {
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $urlGenerator
             ->expects(self::once())
@@ -238,6 +249,7 @@ class PreviewFormProcessorTest extends TestCase
                 'contentId' => $contentDraft->id,
                 'versionNo' => $contentDraft->getVersionInfo()->versionNo,
                 'languageCode' => $languageCode,
+                'locationId' => $locationId,
             ])
             ->willReturn($url);
 
@@ -273,12 +285,16 @@ class PreviewFormProcessorTest extends TestCase
      *
      * @return APIContent
      */
-    private function generateContentDraft($contentDraftId, $languageCode): APIContent
+    private function generateContentDraft($contentDraftId, $languageCode, $mainLocationId): APIContent
     {
         $contentDraft = new Content([
             'versionInfo' => new VersionInfo(
                 [
-                    'contentInfo' => new ContentInfo(['id' => $contentDraftId, 'mainLanguageCode' => $languageCode]),
+                    'contentInfo' => new ContentInfo([
+                        'id' => $contentDraftId,
+                        'mainLanguageCode' => $languageCode,
+                        'mainLocationId' => $mainLocationId,
+                    ]),
                 ]
             ),
         ]);

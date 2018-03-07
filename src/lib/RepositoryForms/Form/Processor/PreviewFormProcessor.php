@@ -87,10 +87,14 @@ class PreviewFormProcessor implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
         $languageCode = $form->getConfig()->getOption('languageCode');
+        $referrerLocation = $event->getOption('referrerLocation');
 
         try {
             $contentDraft = $this->saveDraft($data, $languageCode);
             $url = $this->urlGenerator->generate('ezplatform.content.preview', [
+                'locationId' => null !== $referrerLocation
+                    ? $referrerLocation->id
+                    : $contentDraft->contentInfo->mainLocationId,
                 'contentId' => $contentDraft->id,
                 'versionNo' => $contentDraft->getVersionInfo()->versionNo,
                 'languageCode' => $languageCode,
@@ -98,11 +102,7 @@ class PreviewFormProcessor implements EventSubscriberInterface
         } catch (Exception $e) {
             $this->notificationHandler->error(
                 /** @Desc("Cannot save content draft.") */
-                $this->translator->trans(
-                    'error.preview',
-                    [],
-                    'content_preview'
-                )
+                $this->translator->trans('error.preview', [], 'content_preview')
             );
             $url = $this->getContentEditUrl($data, $languageCode);
         }

@@ -143,7 +143,7 @@ class ContentViewController extends Controller
         );
 
         $contentEditType = $this->formFactory->contentEdit(
-            new ContentEditData($content->contentInfo, $versionInfo)
+            new ContentEditData($content->contentInfo, $versionInfo, null, $location)
         );
 
         $subitemsContentEdit = $this->formFactory->contentEdit(

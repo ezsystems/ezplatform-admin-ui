@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft;
 use eZ\Publish\API\Repository\LanguageService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\VersionInfoType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType;
 use Symfony\Component\Form\AbstractType;
@@ -35,6 +36,11 @@ class ContentEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add(
+                'location',
+                LocationType::class,
+                ['label' => false, 'attr' => ['hidden' => true]]
+            )
             ->add(
                 'content_info',
                 ContentInfoType::class,

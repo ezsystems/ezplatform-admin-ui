@@ -9,7 +9,9 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions as ApiException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
@@ -35,6 +37,9 @@ class ContentController extends Controller
     /** @var ContentService */
     private $contentService;
 
+    /** @var LocationService */
+    private $locationService;
+
     /** @var FormFactory */
     private $formFactory;
 
@@ -58,6 +63,7 @@ class ContentController extends Controller
      * @param TranslatorInterface $translator
      * @param ContentMainLocationUpdateMapper $contentMetadataUpdateMapper
      * @param string $defaultSiteaccess
+     * @param LocationService $locationService
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -66,7 +72,8 @@ class ContentController extends Controller
         SubmitHandler $submitHandler,
         TranslatorInterface $translator,
         ContentMainLocationUpdateMapper $contentMetadataUpdateMapper,
-        string $defaultSiteaccess
+        string $defaultSiteaccess,
+        LocationService $locationService
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->contentService = $contentService;
@@ -75,6 +82,7 @@ class ContentController extends Controller
         $this->translator = $translator;
         $this->contentMainLocationUpdateMapper = $contentMetadataUpdateMapper;
         $this->defaultSiteaccess = $defaultSiteaccess;
+        $this->locationService = $locationService;
     }
 
     /**
@@ -139,6 +147,7 @@ class ContentController extends Controller
                 $versionInfo = $data->getVersionInfo();
                 $language = $data->getLanguage();
                 $versionNo = $versionInfo->versionNo;
+                $location = $data->getLocation();
 
                 if (!$versionInfo->isDraft()) {
                     $contentDraft = $this->contentService->createContentDraft($contentInfo, $versionInfo);
@@ -158,6 +167,9 @@ class ContentController extends Controller
                     'contentId' => $contentInfo->id,
                     'versionNo' => $versionNo,
                     'language' => $language->languageCode,
+                    'locationId' => null !== $location
+                        ? $location->id
+                        : $contentInfo->mainLocationId,
                 ]);
             });
 
@@ -242,13 +254,22 @@ class ContentController extends Controller
      * @param Content $content
      * @param string|null $languageCode
      * @param int|null $versionNo
+     * @param Location|null $location
      *
      * @return Response
      */
-    public function previewAction(Content $content, ?string $languageCode = null, ?int $versionNo = null): Response
-    {
+    public function previewAction(
+        Content $content,
+        ?string $languageCode = null,
+        ?int $versionNo = null,
+        ?Location $location = null
+    ): Response {
         if (null === $languageCode) {
             $languageCode = $content->contentInfo->mainLanguageCode;
+        }
+
+        if (null === $location) {
+            $location = $this->locationService->loadLocation($content->contentInfo->mainLocationId);
         }
 
         return $this->render('@EzPlatformAdminUi/content/content_preview.html.twig', [
@@ -256,6 +277,7 @@ class ContentController extends Controller
             'language_code' => $languageCode,
             'siteaccess' => $this->defaultSiteaccess,
             'versionNo' => $versionNo ?? $content->getVersionInfo()->versionNo,
+            'location' => $location,
         ]);
     }
 }
