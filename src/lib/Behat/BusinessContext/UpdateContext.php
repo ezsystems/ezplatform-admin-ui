@@ -61,7 +61,7 @@ class UpdateContext extends BusinessContext
     {
         $optionsHash = $options->getHash();
         $this->utilityContext->selectOption($selectName, $optionsHash[0]['option']);
-        for ($i = 1; $i < count($optionsHash); $i++) {
+        for ($i = 1; $i < count($optionsHash); ++$i) {
             $this->utilityContext->additionallySelectOption($selectName, $optionsHash[$i]['option']);
         }
     }

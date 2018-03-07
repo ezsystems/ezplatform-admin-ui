@@ -23,7 +23,7 @@ class RolesContext extends BusinessContext
 
     private $fields = [
         'newPolicySelectList' => 'policy_create_policy',
-        'newPolicyAssignmentLimitation' => 'role_assignment_create_sections'
+        'newPolicyAssignmentLimitation' => 'role_assignment_create_sections',
     ];
 
     /**
@@ -45,13 +45,13 @@ class RolesContext extends BusinessContext
         $buttonLabel = 'Select locations';
         $buttonNo = 0;
 
-        if('assignment' === $tabName) {
+        if ('assignment' === $tabName) {
             PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME)
                 ->updateForm->fillFieldWithValue('Subtree', 'true');
             $buttonLabel = 'Select Subtree';
         }
 
-        if($kind === 'subtree') {
+        if ($kind === 'subtree') {
             $buttonNo = 1;
         }
 
@@ -159,7 +159,7 @@ class RolesContext extends BusinessContext
      */
     public function iSelectPolicy(string $policyName): void
     {
-        $this->utilityContext->selectOption($this->fields['newPolicySelectList'],$policyName);
+        $this->utilityContext->selectOption($this->fields['newPolicySelectList'], $policyName);
     }
 
     /**
