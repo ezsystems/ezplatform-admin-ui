@@ -1,13 +1,16 @@
 (function () {
     const CLASS_HIDDEN = 'ez-extra-actions--hidden';
+    const CLASS_PREVENT_SHOW = 'ez-extra-actions--prevent-show';
     const btns = [...document.querySelectorAll('.ez-btn--extra-actions')];
 
     btns.forEach(btn => {
         btn.addEventListener('click', () => {
             const actions = document.querySelector(`.ez-extra-actions[data-actions="${btn.dataset.actions}"]`);
-            const cssMethodName = actions.classList.contains(CLASS_HIDDEN) ? 'remove' : 'add';
+            const haveHiddenPart = (element) => {
+                return element.classList.contains(CLASS_HIDDEN) && !element.classList.contains(CLASS_PREVENT_SHOW)
+            };
+            const methodName = haveHiddenPart(actions) ? 'remove' : 'add';
             const clickOutsideMethodName = actions.classList.contains(CLASS_HIDDEN) ? 'addEventListener' : 'removeEventListener';
-            const btnRect = btn.getBoundingClientRect();
             const focusElement = actions.querySelector(btn.dataset.focusElement);
             const detectClickOutside = (event) => {
                 const isNotButton = !event.target.contains(btn);
@@ -21,7 +24,7 @@
             };
 
             actions.style.top = btn.offsetTop + 'px';
-            actions.classList[cssMethodName](CLASS_HIDDEN);
+            actions.classList[methodName](CLASS_HIDDEN);
             document.body[clickOutsideMethodName]('click', detectClickOutside, false);
 
             if (focusElement) {
