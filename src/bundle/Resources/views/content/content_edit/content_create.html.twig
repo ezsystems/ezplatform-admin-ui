@@ -2,6 +2,10 @@
 
 {% trans_default_domain 'content_create' %}
 
+{% block meta %}
+    <meta name="LanguageCode" content="{{ language.languageCode }}" />
+{% endblock %}
+
 {% block details %}
     <h2 class="text-muted">{{ 'creating_in_language'|trans({'%contentTypeName%': contentType.name, '%languageName%': language.name})|desc('Creating - %contentTypeName% in %languageName%') }}</h2>
     <h1>

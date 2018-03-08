@@ -9,8 +9,17 @@
         {% block left_sidebar %}{% endblock left_sidebar %}
         <div class="container-fluid ez-header">
             <div class="col-sm-12">
-                <div class="container">
+                <div class="container ez-dashboard__header">
                     <h1 class="py-3">My dashboard</h1>
+                    <div class="ez-dashboard__create">
+                        <button class="btn btn-primary ez-btn--cotf-create">
+                            <svg class="ez-icon ez-icon--medium ez-icon--light ez-icon-create">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                            </svg>
+                            <span>{{ 'dashboard.create'|trans|desc('Create') }}</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -31,6 +40,7 @@
 {% block javascripts %}
     {%  javascripts
         'bundles/ezplatformadminui/js/scripts/udw/browse.js'
+        'bundles/ezplatformadminui/js/scripts/cotf/create.js'
         'bundles/ezplatformadminui/js/scripts/button.content.edit.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.version.edit.conflict.js'
     %}

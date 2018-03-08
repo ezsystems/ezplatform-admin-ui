@@ -8,6 +8,10 @@
 %}
 {% set locationId = location is not null ? location.id : fallbackLocationId %}
 
+{% block meta %}
+    <meta name="LanguageCode" content="{{ language.languageCode }}" />
+{% endblock %}
+
 {% block details %}
     {% if baseLanguage is defined and baseLanguage is not null %}
         <h2 class="text-muted">{{ 'editing_in_language_based_on'|trans({'%contentName%': content.name, '%languageName%': language.name, '%baseLanguageName%': baseLanguage.name})|desc('Editing - %contentName% in %languageName% based on %baseLanguageName%') }}</h2>

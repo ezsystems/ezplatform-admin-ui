@@ -113,3 +113,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\EventListener\:
         resource: '../../../lib/Form/EventListener'
+
+    EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\ContentOnTheFlyDispatcher:
+        calls:
+            - [setEventDispatcher, ["@event_dispatcher"]]

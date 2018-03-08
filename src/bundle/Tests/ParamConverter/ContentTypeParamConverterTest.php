@@ -18,7 +18,7 @@ class ContentTypeParamConverterTest extends AbstractParamConverterTest
     const SUPPORTED_CLASS = ContentType::class;
     const PARAMETER_NAME = 'contentType';
 
-    /** @var ContentTypeGroupParamConverter */
+    /** @var ContentTypeParamConverter */
     protected $converter;
 
     /** @var MockObject */
@@ -31,19 +31,19 @@ class ContentTypeParamConverterTest extends AbstractParamConverterTest
         $this->converter = new ContentTypeParamConverter($this->serviceMock, []);
     }
 
-    public function testApply()
+    public function testApplyId()
     {
-        $contentTypeGroupId = 42;
+        $contentTypeId = 42;
         $valueObject = $this->createMock(ContentType::class);
 
         $this->serviceMock
             ->expects($this->once())
             ->method('loadContentType')
-            ->with($contentTypeGroupId)
+            ->with($contentTypeId)
             ->willReturn($valueObject);
 
         $requestAttributes = [
-            ContentTypeParamConverter::PARAMETER_CONTENT_TYPE_ID => $contentTypeGroupId,
+            ContentTypeParamConverter::PARAMETER_CONTENT_TYPE_ID => $contentTypeId,
         ];
 
         $request = new Request([], [], $requestAttributes);
@@ -54,7 +54,7 @@ class ContentTypeParamConverterTest extends AbstractParamConverterTest
         $this->assertInstanceOf(self::SUPPORTED_CLASS, $request->attributes->get(self::PARAMETER_NAME));
     }
 
-    public function testApplyWithWrongAttribute()
+    public function testApplyIdWithWrongValue()
     {
         $requestAttributes = [
             ContentTypeParamConverter::PARAMETER_CONTENT_TYPE_ID => null,
@@ -67,21 +67,80 @@ class ContentTypeParamConverterTest extends AbstractParamConverterTest
         $this->assertNull($request->attributes->get(self::PARAMETER_NAME));
     }
 
-    public function testApplyWhenNotFound()
+    public function testApplyIdWhenNotFound()
     {
-        $contentTypeGroupId = 42;
+        $contentTypeId = 42;
 
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage(sprintf('ContentType %s not found!', $contentTypeGroupId));
+        $this->expectExceptionMessage(sprintf('ContentType %s not found!', $contentTypeId));
 
         $this->serviceMock
             ->expects($this->once())
             ->method('loadContentType')
-            ->with($contentTypeGroupId)
+            ->with($contentTypeId)
             ->willReturn(null);
 
         $requestAttributes = [
-            ContentTypeParamConverter::PARAMETER_CONTENT_TYPE_ID => $contentTypeGroupId,
+            ContentTypeParamConverter::PARAMETER_CONTENT_TYPE_ID => $contentTypeId,
+        ];
+
+        $request = new Request([], [], $requestAttributes);
+        $config = $this->createConfiguration(self::SUPPORTED_CLASS, self::PARAMETER_NAME);
+
+        $this->converter->apply($request, $config);
+    }
+
+    public function testApplyIdentifier()
+    {
+        $contentTypeIdentifier = 'test_identifier';
+        $valueObject = $this->createMock(ContentType::class);
+
+        $this->serviceMock
+            ->expects($this->once())
+            ->method('loadContentTypeByIdentifier')
+            ->with($contentTypeIdentifier)
+            ->willReturn($valueObject);
+
+        $requestAttributes = [
+            ContentTypeParamConverter::PARAMETER_CONTENT_TYPE_IDENTIFIER => $contentTypeIdentifier,
+        ];
+
+        $request = new Request([], [], $requestAttributes);
+        $config = $this->createConfiguration(self::SUPPORTED_CLASS, self::PARAMETER_NAME);
+
+        $this->converter->apply($request, $config);
+
+        $this->assertInstanceOf(self::SUPPORTED_CLASS, $request->attributes->get(self::PARAMETER_NAME));
+    }
+
+    public function testApplyIdentifierWithWrongValue()
+    {
+        $requestAttributes = [
+            ContentTypeParamConverter::PARAMETER_CONTENT_TYPE_IDENTIFIER => null,
+        ];
+
+        $request = new Request([], [], $requestAttributes);
+        $config = $this->createConfiguration(self::SUPPORTED_CLASS, self::PARAMETER_NAME);
+
+        $this->assertFalse($this->converter->apply($request, $config));
+        $this->assertNull($request->attributes->get(self::PARAMETER_NAME));
+    }
+
+    public function testApplyIdentifierWhenNotFound()
+    {
+        $contentTypeIdentifier = 'test_identifier';
+
+        $this->expectException(NotFoundHttpException::class);
+        $this->expectExceptionMessage(sprintf('ContentType %s not found!', $contentTypeIdentifier));
+
+        $this->serviceMock
+            ->expects($this->once())
+            ->method('loadContentTypeByIdentifier')
+            ->with($contentTypeIdentifier)
+            ->willReturn(null);
+
+        $requestAttributes = [
+            ContentTypeParamConverter::PARAMETER_CONTENT_TYPE_IDENTIFIER => $contentTypeIdentifier,
         ];
 
         $request = new Request([], [], $requestAttributes);

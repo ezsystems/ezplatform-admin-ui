@@ -4,6 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="CSRF-Token" content="{{ csrf_token('authenticate') }}" />
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
+        {% block meta %}
+        {% endblock %}
         <script>
             window.eZ = {
                 adminUiConfig: {{ admin_ui_config|json_encode|raw }},
