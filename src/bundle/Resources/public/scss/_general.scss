@@ -49,6 +49,7 @@ a {
 .btn {
     white-space: normal;
     cursor: pointer;
+    transition: opacity .3s $ez-admin-transition, background .3s $ez-admin-transition;
 }
 
 button {

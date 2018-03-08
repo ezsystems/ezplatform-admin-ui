@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
@@ -52,6 +53,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentEditType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
@@ -886,5 +888,22 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordChangeType::class);
 
         return $this->formFactory->createNamed($name, UserPasswordChangeType::class, $data);
+    }
+
+    /**
+     * @param TranslationAddData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function addCustomUrl(
+        CustomUrlAddData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(CustomUrlAddType::class);
+
+        return $this->formFactory->createNamed($name, CustomUrlAddType::class, $data ?? new CustomUrlAddData());
     }
 }

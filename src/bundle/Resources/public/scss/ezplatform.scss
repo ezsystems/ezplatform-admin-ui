@@ -20,6 +20,11 @@
 @import 'user-menu';
 @import 'typography';
 @import 'content-edit';
+@import 'card';
+@import 'pagination';
+@import 'error-page';
+@import 'alloyeditor-link-edit';
+@import 'alloyeditor-custom-tag';
 @import 'fieldType/edit/base-field';
 @import 'fieldType/edit/base-preview';
 @import 'fieldType/edit/ezauthor';
@@ -49,8 +54,3 @@
 @import 'fieldType/preview/ezmedia';
 @import 'fieldType/preview/ezimage';
 @import 'fieldType/preview/ezgmaplocation';
-@import 'alloyeditor-link-edit';
-@import 'alloyeditor-custom-tag';
-@import 'card';
-@import 'pagination';
-@import 'error-page';

@@ -16,11 +16,6 @@
         <target state="new">Old password does not match.</target>
         <note>key: ezplatform.change_user_password.not_match</note>
       </trans-unit>
-      <trans-unit id="0df5780cec00543c463fbd75baf82c6854a2dbaf" resname="ezplatform.change_user_password.not_match2">
-        <source>Old password does not match.</source>
-        <target state="new">Old password does not match.</target>
-        <note>key: ezplatform.change_user_password.not_match2</note>
-      </trans-unit>
       <trans-unit id="54d912b0089483cfd533714e50262851b6d1421a" resname="ezplatform.change_user_password.passwords_must_match">
         <source>The password fields must match.</source>
         <target state="new">The password fields must match.</target>

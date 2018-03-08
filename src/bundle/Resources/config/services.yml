@@ -110,3 +110,6 @@ services:
         arguments: [ '@request_stack' ]
         tags:
             - { name: knp_menu.voter }
+
+    EzSystems\EzPlatformAdminUi\Form\EventListener\:
+        resource: '../../../lib/Form/EventListener'
