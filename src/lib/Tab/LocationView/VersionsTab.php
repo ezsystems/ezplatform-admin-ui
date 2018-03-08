@@ -115,7 +115,7 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
             false
         );
         $archivedVersionRestoreForm = $this->formFactory->contentEdit(
-            new ContentEditData($contentInfo),
+            new ContentEditData($contentInfo, null, null, $location),
             'archived_version_restore'
         );
 

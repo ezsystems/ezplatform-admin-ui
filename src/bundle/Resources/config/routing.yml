@@ -480,11 +480,12 @@ ezplatform.content.create:
         _controller: 'EzPlatformAdminUiBundle:Content:create'
 
 ezplatform.content.preview:
-    path: /content/{contentId}/preview/{versionNo}/{languageCode}
+    path: /content/{contentId}/preview/{versionNo}/{languageCode}/{locationId}
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Content:preview'
         languageCode: ~
+        locationId: ~
 
 ezplatform.content.translate:
     path: /content/{contentId}/translate/{toLanguageCode}/{fromLanguageCode}

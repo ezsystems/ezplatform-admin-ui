@@ -2,6 +2,12 @@
 
 {% trans_default_domain 'content_edit' %}
 
+{% set fallbackLocationId = content.versionInfo.contentInfo.mainLocationId is defined
+    ? content.versionInfo.contentInfo.mainLocationId
+    : (parentLocations|first).id
+%}
+{% set locationId = location is not null ? location.id : fallbackLocationId %}
+
 {% block details %}
     {% if baseLanguage is defined and baseLanguage is not null %}
         <h2 class="text-muted">{{ 'editing_in_language_based_on'|trans({'%contentName%': content.name, '%languageName%': language.name, '%baseLanguageName%': baseLanguage.name})|desc('Editing - %contentName% in %languageName% based on %baseLanguageName%') }}</h2>
@@ -16,7 +22,7 @@
     </h1>
 
     <div class="small">
-        {{ contentType.name }} / {{ 'created_by'|trans({'%name%': 'Administrator'})|desc('Created by %name%') }} / {{ content.versionInfo.creationDate|localizeddate('medium', 'medium', app.request.locale) }} / {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }}{% if content.versionInfo.contentInfo.mainLocationId %}, {{ 'location_id'|trans({'%locationId%': content.versionInfo.contentInfo.mainLocationId})|desc('Location ID: %locationId%') }}{% endif %}
+        {{ contentType.name }} / {{ 'created_by'|trans({'%name%': 'Administrator'})|desc('Created by %name%') }} / {{ content.versionInfo.creationDate|localizeddate('medium', 'medium', app.request.locale) }} / {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }}, {{ 'location_id'|trans({'%locationId%': locationId})|desc('Location ID: %locationId%') }}
     </div>
     {# @todo remove if statement once getDescription() bug is resolved in kernel #}
     {% if contentType.descriptions is not empty %}
@@ -37,10 +43,6 @@
 {% endblock %}
 
 {% block close_button %}
-    {% set locationId = content.versionInfo.contentInfo.mainLocationId
-        ? content.versionInfo.contentInfo.mainLocationId
-        : (parentLocations|first).id
-    %}
     <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': locationId }) }}"></a>
 {% endblock %}
 

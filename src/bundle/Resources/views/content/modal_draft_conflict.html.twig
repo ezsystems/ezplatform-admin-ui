@@ -25,6 +25,7 @@
                 <div class="ez-scrollable-wrapper">
                     {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', {
                         'versions': conflicted_drafts,
+                        'location': location,
                         'is_draft': true,
                         'haveToPaginate': false,
                         'is_draft_conflict': true,
