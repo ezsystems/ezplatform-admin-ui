@@ -1,28 +1,30 @@
-{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+{% extends "@EzPlatformAdminUi/admin/object_state/base.html.twig" %}
+
+{% form_theme form '@EzPlatformAdminUi/form_fields.html.twig'  %}
 
 {% trans_default_domain 'object_state' %}
 
-{% block breadcrumbs %}
+{% block breadcrumbs_admin %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
-        { url: path('ezplatform.object_state.groups.list'), value: 'object_state_group.breadcrumb.list'|trans|desc('State') },
-        { url: path('ezplatform.object_state.group.view', { 'objectStateGroupId': object_state_group.id }), value: 'object_state_group.breadcrumb.view'|trans({ '%name%': object_state_group.name })|desc('"%name%" Object State Group') },
-        { value: 'object_state.breadcrumb.edit'|trans({ '%identifier%': object_state.identifier })|desc('Editing Object State "%identifier%"') }
+        { url: path('ezplatform.object_state.groups.list'), value: 'object_state_group.breadcrumb.list'|trans|desc('Object States') },
+        { url: path('ezplatform.object_state.group.view', { 'objectStateGroupId': object_state_group.id }), value: 'object_state_group.breadcrumb.view'|trans({ '%name%': object_state_group.name })|desc('Object State Group: %name%') },
+        { value: 'object_state.breadcrumb.edit'|trans({ '%name%': object_state.name })|desc('Editing Object State: %name%') }
     ]} %}
 {% endblock %}
 
-{% block pageTitle %}
+{% block page_title_admin %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'object_state.view.edit.title'|trans({'%identifier%': object_state_group.identifier})|desc('Editing Object State "%identifier%"'),
-        iconName: 'object-states'
+        title: 'object_state.view.edit.title'|trans({'%name%': object_state_group.name})|desc('Editing Object State: %name%'),
+        iconName: 'object-state'
     } %}
 {% endblock %}
 
-{% block content %}
+{% block form %}
     {{ form_start(form) }}
 
-    <section class="container mt-4">
-        <div class="card">
+    <section class="container mt-4 px-5">
+        <div class="card ez-card">
             <div class="card-body">
                 {{ form_row(form.name) }}
                 {{ form_row(form.identifier) }}
@@ -30,13 +32,12 @@
         </div>
     </section>
 
-    <section class="container mt-4 mb-4">
-        <div class="btn-toolbar justify-content-end" role="toolbar" >
-            {{ form_widget(form.update, {
-                'attr': { 'class': 'btn btn-primary' }
-            }) }}
-        </div>
-    </section>
+    {{ form_widget(form.save, { 'attr': { 'hidden': 'hidden' } }) }}
 
     {{ form_end(form) }}
+{% endblock %}
+
+{% block right_sidebar %}
+    {% set object_state_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.object_state_edit.sidebar_right', [], {'group_id': object_state_group.id, 'save_id': form.save.vars.id}) %}
+    {{ knp_menu_render(object_state_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

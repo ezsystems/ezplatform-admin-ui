@@ -97,6 +97,7 @@
     </thead>
     <tbody>
     {% for objectState in objectStates %}
+        {% form_theme form_state_update[objectState.objectStateGroup.id] '@EzPlatformAdminUi/form_fields.html.twig' %}
         <tr>
             <td>{{ objectState.objectStateGroup.name }}</td>
             <td>{{ objectState.objectStateGroup.identifier }}</td>

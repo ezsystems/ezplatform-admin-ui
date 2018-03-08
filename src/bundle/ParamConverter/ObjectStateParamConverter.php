@@ -19,15 +19,11 @@ class ObjectStateParamConverter implements ParamConverterInterface
 {
     const PARAMETER_OBJECT_STATE_ID = 'objectStateId';
 
-    /**
-     * @var ObjectStateService
-     */
+    /** @var \eZ\Publish\API\Repository\ObjectStateService */
     private $objectStateService;
 
     /**
-     * ObjectStateServiceParamConverter constructor.
-     *
-     * @param ObjectStateService $objectStateService
+     * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
      */
     public function __construct(ObjectStateService $objectStateService)
     {
@@ -35,12 +31,16 @@ class ObjectStateParamConverter implements ParamConverterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter $configuration
+     *
+     * @return bool
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
         $id = (int)$request->get(self::PARAMETER_OBJECT_STATE_ID);
-
         $objectState = $this->objectStateService->loadObjectState($id);
 
         if (!$objectState) {
@@ -53,7 +53,9 @@ class ObjectStateParamConverter implements ParamConverterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param \Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter $configuration
+     *
+     * @return bool
      */
     public function supports(ParamConverter $configuration)
     {

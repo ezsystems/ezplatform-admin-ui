@@ -12,7 +12,7 @@ use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 
 class ObjectStateGroupUpdateData
 {
-    /** @var ObjectStateGroup */
+    /** @var \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup|null */
     private $objectStateGroup;
 
     /** @var string */
@@ -21,6 +21,9 @@ class ObjectStateGroupUpdateData
     /** @var string */
     private $name;
 
+    /**
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup|null $objectStateGroup
+     */
     public function __construct(?ObjectStateGroup $objectStateGroup = null)
     {
         if ($objectStateGroup instanceof ObjectStateGroup) {
@@ -63,7 +66,7 @@ class ObjectStateGroupUpdateData
     }
 
     /**
-     * @return ObjectStateGroup
+     * @return \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup
      */
     public function getObjectStateGroup(): ObjectStateGroup
     {
@@ -71,7 +74,7 @@ class ObjectStateGroupUpdateData
     }
 
     /**
-     * @param ObjectStateGroup $objectStateGroup
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $objectStateGroup
      */
     public function setObjectStateGroup(ObjectStateGroup $objectStateGroup)
     {

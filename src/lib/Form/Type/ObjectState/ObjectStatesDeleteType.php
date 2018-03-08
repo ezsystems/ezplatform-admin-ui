@@ -8,39 +8,36 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ObjectState;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStatesDeleteData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ObjectStateGroupUpdateType extends AbstractType
+class ObjectStatesDeleteType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('identifier', TextType::class, [
-                'label' => /** @Desc("Identifier") */ 'object_state_group.update.identifier',
+            ->add('objectStates', CollectionType::class, [
+                'entry_type' => CheckboxType::class,
+                'required' => false,
+                'allow_add' => true,
+                'label' => false,
+                'entry_options' => ['label' => false],
             ])
-            ->add('name', TextType::class, [
-                'label' => /** @Desc("Name") */ 'object_state_group.update.name',
-            ])
-            ->add('save', SubmitType::class, [
-                'label' => /** @Desc("Save") */ 'object_state_group.update.save',
+            ->add('delete', SubmitType::class, [
+                'attr' => ['hidden' => true],
+                'label' => /** @Desc("Delete Object State ") */ 'object_state.bulk_delete.delete',
             ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ObjectStateGroupUpdateData::class,
+            'data_class' => ObjectStatesDeleteData::class,
             'translation_domain' => 'object_state',
         ]);
     }

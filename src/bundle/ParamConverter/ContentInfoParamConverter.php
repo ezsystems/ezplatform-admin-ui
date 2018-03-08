@@ -36,8 +36,8 @@ class ContentInfoParamConverter implements ParamConverterInterface
     public function apply(Request $request, ParamConverter $configuration)
     {
         $id = (int)$request->get(self::PARAMETER_CONTENT_INFO_ID);
-
         $contentInfo = $this->contentService->loadContentInfo($id);
+
         if (!$contentInfo) {
             throw new NotFoundHttpException("ContentInfo $id not found!");
         }

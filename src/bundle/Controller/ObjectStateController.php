@@ -4,6 +4,8 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ObjectStateService;
@@ -14,41 +16,41 @@ use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStatesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ObjectStateController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var TranslatorInterface */
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var ObjectStateService */
+    /** @var \eZ\Publish\API\Repository\ObjectStateService */
     private $objectStateService;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
     /** @var array */
     private $languages;
 
     /**
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
-     * @param ObjectStateService $objectStateService
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param array $languages
      */
     public function __construct(
@@ -68,48 +70,59 @@ class ObjectStateController extends Controller
     }
 
     /**
-     * @param ObjectStateGroup $objectStateGroup
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $objectStateGroup
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listAction(ObjectStateGroup $objectStateGroup): Response
     {
         /** @var ObjectState[] $objectStates */
         $objectStates = $this->objectStateService->loadObjectStates($objectStateGroup);
-        $deleteFormsByObjectStateId = [];
 
-        foreach ($objectStates as $objectState) {
-            $deleteFormsByObjectStateId[$objectState->id] = $this->formFactory->deleteObjectState(
-                new ObjectStateDeleteData($objectState)
-            )->createView();
+        $deleteObjectStatesForm = $this->formFactory->deleteObjectStates(
+            new ObjectStatesDeleteData($this->getObjectStatesIds($objectStates))
+        );
+
+        $unusedObjectStates = [];
+
+        foreach ($objectStates as $state) {
+            $unusedObjectStates[$state->id] = empty($this->objectStateService->getContentCount($state));
         }
 
         return $this->render('EzPlatformAdminUiBundle:admin/object_state:list.html.twig', [
             'can_administrate' => $this->isGranted(new Attribute('state', 'administrate')),
             'object_state_group' => $objectStateGroup,
             'object_states' => $objectStates,
-            'form_object_state_delete' => $deleteFormsByObjectStateId,
+            'unused_object_states' => $unusedObjectStates,
+            'form_states_delete' => $deleteObjectStatesForm->createView(),
         ]);
     }
 
     /**
-     * @param ObjectState $objectState
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectState $objectState
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(ObjectState $objectState): Response
     {
-        $delete_form = $this->formFactory->deleteObjectState(
+        $deleteForm = $this->formFactory->deleteObjectState(
             new ObjectStateDeleteData($objectState)
         )->createView();
 
         return $this->render('EzPlatformAdminUiBundle:admin/object_state:view.html.twig', [
+            'can_administrate' => $this->isGranted(new Attribute('state', 'administrate')),
             'object_state_group' => $objectState->getObjectStateGroup(),
             'object_state' => $objectState,
-            'delete_form' => $delete_form,
+            'delete_form' => $deleteForm,
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $objectStateGroup
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function addAction(Request $request, ObjectStateGroup $objectStateGroup): Response
     {
         $defaultLanguageCode = reset($this->languages);
@@ -138,9 +151,9 @@ class ObjectStateController extends Controller
                         )
                     );
 
-                    return new RedirectResponse($this->generateUrl('ezplatform.object_state.state.view', [
+                    return $this->redirectToRoute('ezplatform.object_state.state.view', [
                         'objectStateId' => $objectState->id,
-                    ]));
+                    ]);
                 });
             if ($result instanceof Response) {
                 return $result;
@@ -153,6 +166,12 @@ class ObjectStateController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectState $objectState
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function deleteAction(Request $request, ObjectState $objectState): Response
     {
         $form = $this->formFactory->deleteObjectState(
@@ -180,11 +199,59 @@ class ObjectStateController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('ezplatform.object_state.group.view', [
+        return $this->redirectToRoute('ezplatform.object_state.group.view', [
             'objectStateGroupId' => $objectState->getObjectStateGroup()->id,
-        ]));
+        ]);
     }
 
+    /**
+     * Handles removing object state groups based on submitted form.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param int $objectStateGroupId
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function bulkDeleteAction(Request $request, int $objectStateGroupId): Response
+    {
+        $form = $this->formFactory->deleteObjectStates(
+            new ObjectStatesDeleteData()
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (ObjectStatesDeleteData $data) {
+                foreach ($data->getObjectStates() as $objectStateId => $selected) {
+                    $objectState = $this->objectStateService->loadObjectState($objectStateId);
+                    $this->objectStateService->deleteObjectState($objectState);
+
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Object state '%name%' deleted.") */
+                            'object_state.delete.success',
+                            ['%name%' => $objectState->identifier],
+                            'object_state'
+                        )
+                    );
+                }
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirectToRoute('ezplatform.object_state.group.view', [
+            'objectStateGroupId' => $objectStateGroupId,
+        ]);
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectState $objectState
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function updateAction(Request $request, ObjectState $objectState): Response
     {
         $form = $this->formFactory->updateObjectState(
@@ -197,6 +264,7 @@ class ObjectStateController extends Controller
                 $objectState = $data->getObjectState();
                 $updateStruct = $this->objectStateService->newObjectStateUpdateStruct();
                 $updateStruct->identifier = $data->getIdentifier();
+                $updateStruct->names[$objectState->mainLanguageCode] = $data->getName();
 
                 $this->objectStateService->updateObjectState($objectState, $updateStruct);
 
@@ -209,9 +277,9 @@ class ObjectStateController extends Controller
                     )
                 );
 
-                return new RedirectResponse($this->generateUrl('ezplatform.object_state.state.view', [
+                return $this->redirectToRoute('ezplatform.object_state.state.view', [
                     'objectStateId' => $objectState->id,
-                ]));
+                ]);
             });
 
             if ($result instanceof Response) {
@@ -226,6 +294,13 @@ class ObjectStateController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $objectStateGroup
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function updateContentStateAction(
         Request $request,
         ContentInfo $contentInfo,
@@ -258,9 +333,21 @@ class ObjectStateController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+        return $this->redirectToRoute('_ezpublishLocation', [
             'locationId' => $contentInfo->mainLocationId,
             '_fragment' => 'ez-tab-location-view-details',
-        ]));
+        ]);
+    }
+
+    /**
+     * @param array $states
+     *
+     * @return array
+     */
+    private function getObjectStatesIds(array $states): array
+    {
+        $statesIds = array_column($states, 'id');
+
+        return array_combine($statesIds, array_fill_keys($statesIds, false));
     }
 }

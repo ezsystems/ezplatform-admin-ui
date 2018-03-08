@@ -606,6 +606,11 @@ ezplatform.object_state.group.delete:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:delete'
 
+ezplatform.object_state.group.bulk_delete:
+    path: /state/group/bulk-delete
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:bulkDelete'
+
 ezplatform.object_state.group.view:
     path: /state/group/{objectStateGroupId}
     defaults:
@@ -630,6 +635,11 @@ ezplatform.object_state.state.delete:
     path: /state/state/delete/{objectStateId}
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ObjectState:delete'
+
+ezplatform.object_state.state.bulk_delete:
+    path: /state/state/bulk-delete/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:bulkDelete'
 
 ezplatform.object_state.contentstate.update:
     path: /state/contentstate/update/{contentInfoId}/group/{objectStateGroupId}

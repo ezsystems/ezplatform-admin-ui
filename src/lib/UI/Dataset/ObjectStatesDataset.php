@@ -42,12 +42,20 @@ class ObjectStatesDataset
      */
     public function load(ContentInfo $contentInfo): self
     {
-        $this->data = array_map(
+        $data = array_map(
             function (ObjectStateGroup $objectStateGroup) use ($contentInfo) {
+                $hasObjectStates = !empty($this->objectStateService->loadObjectStates($objectStateGroup));
+                if (!$hasObjectStates) {
+                    return [];
+                }
+
                 return $this->valueFactory->createObjectState($contentInfo, $objectStateGroup);
             },
             $this->objectStateService->loadObjectStateGroups()
         );
+
+        // Get rid of empty Object State Groups
+        $this->data = array_filter($data);
 
         return $this;
     }

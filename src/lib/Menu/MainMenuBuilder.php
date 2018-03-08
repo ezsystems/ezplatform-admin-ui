@@ -37,7 +37,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     const ITEM_ADMIN__LANGUAGES = 'main__admin__languages';
     const ITEM_ADMIN__CONTENT_TYPES = 'main__admin__content_types';
     const ITEM_ADMIN__USERS = 'main__admin__users';
-    const ITEM_ADMIN__STATE = 'main__admin__state';
+    const ITEM_ADMIN__OBJECT_STATES = 'main__admin__object_states';
 
     /** @var ConfigResolverInterface */
     private $configResolver;
@@ -182,11 +182,6 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             );
         }
 
-        $menuItems[self::ITEM_ADMIN__STATE] = $this->createMenuItem(
-            self::ITEM_ADMIN__STATE,
-            ['route' => 'ezplatform.object_state.groups.list']
-        );
-
         $menuItems[self::ITEM_ADMIN__LANGUAGES] = $this->createMenuItem(
             self::ITEM_ADMIN__LANGUAGES,
             ['route' => 'ezplatform.language.list', 'extras' => [
@@ -223,6 +218,21 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         if (null !== $usersItem) {
             $menuItems[$usersItem->getName()] = $usersItem;
         }
+
+        $menuItems[self::ITEM_ADMIN__OBJECT_STATES] = $this->createMenuItem(
+            self::ITEM_ADMIN__OBJECT_STATES,
+            ['route' => 'ezplatform.object_state.groups.list', 'extras' => [
+                'routes' => [
+                    'group_list' => 'ezplatform.object_state.groups.list',
+                    'group_create' => 'ezplatform.object_state.group.add',
+                    'group_edit' => 'ezplatform.object_state.group.update',
+                    'group_view' => 'ezplatform.object_state.group.view',
+                    'state_create' => 'ezplatform.object_state.state.add',
+                    'state_view' => 'ezplatform.object_state.state.view',
+                    'state_edit' => 'ezplatform.object_state.state.update',
+                ],
+            ]]
+        );
 
         return $menuItems;
     }
@@ -267,7 +277,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             (new Message(self::ITEM_ADMIN__CONTENT_TYPES, 'menu'))->setDesc('Content Types'),
             (new Message(self::ITEM_ADMIN__USERS, 'menu'))->setDesc('Users'),
             (new Message(self::ITEM_CONTENT__LINK_MANAGER, 'menu'))->setDesc('Link Manager'),
-            (new Message(self::ITEM_ADMIN__STATE, 'menu'))->setDesc('State'),
+            (new Message(self::ITEM_ADMIN__OBJECT_STATES, 'menu'))->setDesc('Object States'),
         ];
     }
 }

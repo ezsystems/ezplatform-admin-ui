@@ -4,6 +4,8 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ObjectStateService;
@@ -11,41 +13,41 @@ use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ObjectStateGroupController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var TranslatorInterface */
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var ObjectStateService */
+    /** @var \eZ\Publish\API\Repository\ObjectStateService */
     private $objectStateService;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
     /** @var array */
     private $languages;
 
     /**
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
-     * @param ObjectStateService $objectStateService
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param array $languages
      */
     public function __construct(
@@ -65,44 +67,53 @@ class ObjectStateGroupController extends Controller
     }
 
     /**
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listAction(): Response
     {
         /** @var ObjectStateGroup[] $objectStateGroups */
         $objectStateGroups = $this->objectStateService->loadObjectStateGroups();
-        $deleteFormsByObjectStateGroupId = [];
+        $emptyObjectStateGroups = [];
 
-        foreach ($objectStateGroups as $objectStateGroup) {
-            $deleteFormsByObjectStateGroupId[$objectStateGroup->id] = $this->formFactory->deleteObjectStateGroup(
-                new ObjectStateGroupDeleteData($objectStateGroup)
-            )->createView();
+        foreach ($objectStateGroups as $group) {
+            $emptyObjectStateGroups[$group->id] = empty($this->objectStateService->loadObjectStates($group));
         }
+
+        $deleteObjectStateGroupsForm = $this->formFactory->deleteObjectStateGroups(
+            new ObjectStateGroupsDeleteData($this->getObjectStateGroupsIds($objectStateGroups))
+        );
 
         return $this->render('EzPlatformAdminUiBundle:admin/object_state_group:list.html.twig', [
             'can_administrate' => $this->isGranted(new Attribute('state', 'administrate')),
             'object_state_groups' => $objectStateGroups,
-            'form_object_state_group_delete' => $deleteFormsByObjectStateGroupId,
+            'empty_object_state_groups' => $emptyObjectStateGroups,
+            'form_state_groups_delete' => $deleteObjectStateGroupsForm->createView(),
         ]);
     }
 
     /**
-     * @param ObjectStateGroup $objectStateGroup
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $objectStateGroup
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(ObjectStateGroup $objectStateGroup): Response
     {
-        $delete_form = $this->formFactory->deleteObjectStateGroup(
+        $deleteForm = $this->formFactory->deleteObjectStateGroup(
             new ObjectStateGroupDeleteData($objectStateGroup)
         )->createView();
 
         return $this->render('EzPlatformAdminUiBundle:admin/object_state_group:view.html.twig', [
+            'can_administrate' => $this->isGranted(new Attribute('state', 'administrate')),
             'object_state_group' => $objectStateGroup,
-            'delete_form' => $delete_form,
+            'delete_form' => $deleteForm,
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function addAction(Request $request): Response
     {
         $defaultLanguageCode = reset($this->languages);
@@ -131,9 +142,9 @@ class ObjectStateGroupController extends Controller
                         )
                     );
 
-                    return new RedirectResponse($this->generateUrl('ezplatform.object_state.group.view', [
+                    return $this->redirectToRoute('ezplatform.object_state.group.view', [
                         'objectStateGroupId' => $group->id,
-                    ]));
+                    ]);
                 });
 
             if ($result instanceof Response) {
@@ -146,6 +157,12 @@ class ObjectStateGroupController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $group
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function deleteAction(Request $request, ObjectStateGroup $group): Response
     {
         $form = $this->formFactory->deleteObjectStateGroup(
@@ -173,9 +190,54 @@ class ObjectStateGroupController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('ezplatform.object_state.groups.list'));
+        return $this->redirectToRoute('ezplatform.object_state.groups.list');
     }
 
+    /**
+     * Handles removing object state groups based on submitted form.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function bulkDeleteAction(Request $request): Response
+    {
+        $form = $this->formFactory->deleteObjectStateGroups(
+            new ObjectStateGroupsDeleteData()
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (ObjectStateGroupsDeleteData $data) {
+                foreach ($data->getObjectStateGroups() as $objectStateGroupId => $selected) {
+                    $objectStateGroup = $this->objectStateService->loadObjectStateGroup($objectStateGroupId);
+                    $this->objectStateService->deleteObjectStateGroup($objectStateGroup);
+
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Object state type group '%name%' deleted.") */
+                            'object_state_group.delete.success',
+                            ['%name%' => $objectStateGroup->identifier],
+                            'object_state'
+                        )
+                    );
+                }
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirectToRoute('ezplatform.object_state.groups.list');
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $group
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function updateAction(Request $request, ObjectStateGroup $group): Response
     {
         $form = $this->formFactory->updateObjectStateGroup(
@@ -188,6 +250,7 @@ class ObjectStateGroupController extends Controller
                 $group = $data->getObjectStateGroup();
                 $updateStruct = $this->objectStateService->newObjectStateGroupUpdateStruct();
                 $updateStruct->identifier = $data->getIdentifier();
+                $updateStruct->names[$group->mainLanguageCode] = $data->getName();
 
                 $this->objectStateService->updateObjectStateGroup($group, $updateStruct);
 
@@ -200,9 +263,9 @@ class ObjectStateGroupController extends Controller
                     )
                 );
 
-                return new RedirectResponse($this->generateUrl('ezplatform.object_state.group.view', [
+                return $this->redirectToRoute('ezplatform.object_state.group.view', [
                     'objectStateGroupId' => $group->id,
-                ]));
+                ]);
             });
 
             if ($result instanceof Response) {
@@ -214,5 +277,17 @@ class ObjectStateGroupController extends Controller
             'object_state_group' => $group,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup[] $groups
+     *
+     * @return array
+     */
+    private function getObjectStateGroupsIds(array $groups): array
+    {
+        $groupsIds = array_column($groups, 'id');
+
+        return array_combine($groupsIds, array_fill_keys($groupsIds, false));
     }
 }

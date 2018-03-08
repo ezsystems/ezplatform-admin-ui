@@ -37,7 +37,9 @@ use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStatesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PoliciesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
@@ -85,6 +87,8 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupsDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStatesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordChangeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType;
@@ -971,6 +975,23 @@ class FormFactory
     }
 
     /**
+     * @param ObjectStateGroupsDeleteData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function deleteObjectStateGroups(
+        ObjectStateGroupsDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ObjectStateGroupsDeleteType::class);
+
+        return $this->formFactory->createNamed($name, ObjectStateGroupsDeleteType::class, $data);
+    }
+
+    /**
      * @param ObjectStateGroupUpdateData|null $data
      * @param null|string $name
      *
@@ -1017,6 +1038,23 @@ class FormFactory
         $name = $name ?: sprintf('delete-object-state-%d', $data->getObjectState()->id);
 
         return $this->formFactory->createNamed($name, ObjectStateDeleteType::class, $data);
+    }
+
+    /**
+     * @param ObjectStatesDeleteData|null $data
+     * @param null|string $name
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    public function deleteObjectStates(
+        ObjectStatesDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ObjectStatesDeleteType::class);
+
+        return $this->formFactory->createNamed($name, ObjectStatesDeleteType::class, $data);
     }
 
     /**

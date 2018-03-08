@@ -12,16 +12,21 @@ use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 
 class ObjectStateGroupDeleteData
 {
-    /** @var ObjectStateGroup */
+    /**
+     * @var \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup|null
+     */
     private $objectStateGroup;
 
+    /**
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup|null $objectStateGroup
+     */
     public function __construct(?ObjectStateGroup $objectStateGroup = null)
     {
         $this->objectStateGroup = $objectStateGroup;
     }
 
     /**
-     * @return ObjectStateGroup
+     * @return \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup
      */
     public function getObjectStateGroup(): ObjectStateGroup
     {
@@ -29,7 +34,7 @@ class ObjectStateGroupDeleteData
     }
 
     /**
-     * @param ObjectStateGroup $objectStateGroup
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $objectStateGroup
      */
     public function setObjectStateGroup(ObjectStateGroup $objectStateGroup)
     {

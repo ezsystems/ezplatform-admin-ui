@@ -14,15 +14,26 @@ use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 
 class ContentObjectStateUpdateData
 {
-    /** @var ContentInfo */
+    /**
+     * @var \eZ\Publish\API\Repository\Values\Content\ContentInfo
+     */
     private $contentInfo;
 
-    /** @var ObjectStateGroup */
+    /**
+     * @var \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup
+     */
     private $objectStateGroup;
 
-    /** @var ObjectState */
+    /**
+     * @var \eZ\Publish\API\Repository\Values\ObjectState\ObjectState
+     */
     private $objectState;
 
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup|null $objectStateGroup
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectState|null $objectState
+     */
     public function __construct(
         ContentInfo $contentInfo = null,
         ObjectStateGroup $objectStateGroup = null,
@@ -34,7 +45,7 @@ class ContentObjectStateUpdateData
     }
 
     /**
-     * @return ContentInfo
+     * @return \eZ\Publish\API\Repository\Values\Content\ContentInfo
      */
     public function getContentInfo(): ContentInfo
     {
@@ -42,7 +53,7 @@ class ContentObjectStateUpdateData
     }
 
     /**
-     * @param ContentInfo $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
      */
     public function setContentInfo(ContentInfo $contentInfo)
     {
@@ -50,7 +61,7 @@ class ContentObjectStateUpdateData
     }
 
     /**
-     * @return ObjectStateGroup
+     * @return \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup
      */
     public function getObjectStateGroup(): ObjectStateGroup
     {
@@ -58,7 +69,7 @@ class ContentObjectStateUpdateData
     }
 
     /**
-     * @param ObjectStateGroup $objectStateGroup
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $objectStateGroup
      */
     public function setObjectStateGroup(ObjectStateGroup $objectStateGroup)
     {
@@ -66,7 +77,7 @@ class ContentObjectStateUpdateData
     }
 
     /**
-     * @return ObjectState
+     * @return \eZ\Publish\API\Repository\Values\ObjectState\ObjectState|null
      */
     public function getObjectState(): ?ObjectState
     {
@@ -74,7 +85,7 @@ class ContentObjectStateUpdateData
     }
 
     /**
-     * @param ObjectState $objectState
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectState $objectState
      */
     public function setObjectState(ObjectState $objectState)
     {

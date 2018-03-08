@@ -24,14 +24,13 @@ class ObjectStateUpdateType extends AbstractType
     {
         $builder
             ->add('identifier', TextType::class, [
-                'label' => /** @Desc("Identifier") */ 'object_state_.update.identifier',
+                'label' => /** @Desc("Identifier") */ 'object_state.update.identifier',
             ])
             ->add('name', TextType::class, [
-                'label' => /** @Desc("Name") */ 'object_state_.update.name',
+                'label' => /** @Desc("Name") */ 'object_state.update.name',
             ])
-            ->add('update', SubmitType::class, [
-                'label' => /** @Desc("Update") */
-                    'object_state_.update.submit',
+            ->add('save', SubmitType::class, [
+                'label' => /** @Desc("Save") */ 'object_state.update.submit',
             ]);
     }
 

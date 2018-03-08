@@ -12,7 +12,9 @@ use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
 
 class ObjectStateUpdateData
 {
-    /** @var ObjectState */
+    /**
+     * @var \eZ\Publish\API\Repository\Values\ObjectState\ObjectState|null
+     */
     private $objectState;
 
     /** @var string */
@@ -21,6 +23,9 @@ class ObjectStateUpdateData
     /** @var string */
     private $name;
 
+    /**
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectState|null $objectState
+     */
     public function __construct(?ObjectState $objectState = null)
     {
         if ($objectState instanceof ObjectState) {
@@ -63,7 +68,7 @@ class ObjectStateUpdateData
     }
 
     /**
-     * @return ObjectState
+     * @return \eZ\Publish\API\Repository\Values\ObjectState\ObjectState
      */
     public function getObjectState(): ObjectState
     {
@@ -71,7 +76,7 @@ class ObjectStateUpdateData
     }
 
     /**
-     * @param ObjectState $objectState
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectState $objectState
      */
     public function setObjectState(ObjectState $objectState)
     {

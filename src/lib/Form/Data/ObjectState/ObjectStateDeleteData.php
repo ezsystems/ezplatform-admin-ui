@@ -12,16 +12,21 @@ use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
 
 class ObjectStateDeleteData
 {
-    /** @var ObjectState */
+    /**
+     * @var \eZ\Publish\API\Repository\Values\ObjectState\ObjectState|null
+     */
     private $objectState;
 
+    /**
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectState|null $objectState
+     */
     public function __construct(?ObjectState $objectState = null)
     {
         $this->objectState = $objectState;
     }
 
     /**
-     * @return ObjectState
+     * @return \eZ\Publish\API\Repository\Values\ObjectState\ObjectState
      */
     public function getObjectState(): ObjectState
     {
@@ -29,7 +34,7 @@ class ObjectStateDeleteData
     }
 
     /**
-     * @param ObjectState $objectState
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectState $objectState
      */
     public function setObjectState(ObjectState $objectState)
     {
