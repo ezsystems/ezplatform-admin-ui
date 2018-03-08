@@ -7,15 +7,32 @@
             display: inline-block;
             left: 50%;
             transform: translateX(-50%);
+            border-radius: .25rem;
         }
     }
 
     .modal-header {
-        background: $ez-ground-base;
+        background: $ez-color-base-pale;
+        border-bottom: none;
+
+        .modal-title {
+            font-size: 1.5rem;
+        }
+
+        .close {
+            margin-top: -.5625rem;
+        }
     }
 
     .modal-body {
         padding: 2rem;
+        background-color: $ez-ground-base-medium;
+        border-radius: 0 0 .25rem .25rem;
+    }
+
+    .modal-footer {
+        border-top: none;
+        padding: 1rem 1rem 0 1rem;
     }
 
     &__title {
@@ -34,7 +51,7 @@
 
     &__input-wrapper {
         width: 15rem;
-        background: $ez-ground-primary;
+        background: $ez-white;
         margin: .5rem;
         border-radius: 5px;
         line-height: 1;
@@ -64,6 +81,7 @@
 
             .ez-icon {
                 display: inline;
+                fill: $ez-white;
             }
         }
     }
