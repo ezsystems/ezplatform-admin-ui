@@ -14,17 +14,15 @@ use Symfony\Component\Form\FormEvent;
 
 class BuildPathFromRootListener
 {
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
-    /** @var URLAliasService */
+    /** @var \eZ\Publish\API\Repository\URLAliasService */
     private $urlAliasService;
 
     /**
-     * BuildPathFromRootListener constructor.
-     *
-     * @param LocationService $locationService
-     * @param URLAliasService $urlAliasService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\URLAliasService $urlAliasService
      */
     public function __construct(LocationService $locationService, URLAliasService $urlAliasService)
     {
@@ -33,7 +31,7 @@ class BuildPathFromRootListener
     }
 
     /**
-     * @param FormEvent $event
+     * @param \Symfony\Component\Form\FormEvent $event
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
@@ -43,7 +41,8 @@ class BuildPathFromRootListener
         $data = $event->getData();
         if (!array_key_exists('site_root', $data) || false === (bool)$data['site_root']) {
             $location = $this->locationService->loadLocation($data['location']);
-            $urlAlias = $this->urlAliasService->reverseLookup($location);
+            $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
+            $urlAlias = $this->urlAliasService->reverseLookup($parentLocation);
             $data['path'] = $urlAlias->path . '/' . $data['path'];
             $event->setData($data);
         }

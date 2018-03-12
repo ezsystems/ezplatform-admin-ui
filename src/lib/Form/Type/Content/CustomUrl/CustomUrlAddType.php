@@ -23,15 +23,20 @@ use Symfony\Component\Form\FormEvents;
 
 class CustomUrlAddType extends AbstractType
 {
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
-    /** @var AddLanguageFieldBasedOnContentListener */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener */
     private $addLanguageFieldBasedOnContentListener;
 
-    /** @var BuildPathFromRootListener */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener */
     private $buildPathFromRootListener;
 
+    /**
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
+     * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener $addLanguageFieldBasedOnContentListener
+     * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener $buildPathFromRootListener
+     */
     public function __construct(
         LanguageService $languageService,
         AddLanguageFieldBasedOnContentListener $addLanguageFieldBasedOnContentListener,
@@ -42,6 +47,10 @@ class CustomUrlAddType extends AbstractType
         $this->buildPathFromRootListener = $buildPathFromRootListener;
     }
 
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

@@ -12,6 +12,7 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\ObjectStateService;
+use eZ\Publish\API\Repository\URLAliasService;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 
 class DatasetFactory
@@ -31,11 +32,15 @@ class DatasetFactory
     /** @var LocationService */
     protected $locationService;
 
+    /** @var URLAliasService */
+    private $urlAliasService;
+
     /**
      * @param ContentService $contentService
      * @param LanguageService $languageService
      * @param LocationService $locationService
      * @param ObjectStateService $objectStateService
+     * @param URLAliasService $urlAliasService
      * @param ValueFactory $valueFactory
      */
     public function __construct(
@@ -43,12 +48,14 @@ class DatasetFactory
         LanguageService $languageService,
         LocationService $locationService,
         ObjectStateService $objectStateService,
+        URLAliasService $urlAliasService,
         ValueFactory $valueFactory
     ) {
         $this->contentService = $contentService;
         $this->languageService = $languageService;
         $this->locationService = $locationService;
         $this->objectStateService = $objectStateService;
+        $this->urlAliasService = $urlAliasService;
         $this->valueFactory = $valueFactory;
     }
 
@@ -90,5 +97,13 @@ class DatasetFactory
     public function objectStates(): ObjectStatesDataset
     {
         return new ObjectStatesDataset($this->objectStateService, $this->valueFactory);
+    }
+
+    /**
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\CustomUrlsDataset
+     */
+    public function customUrls(): CustomUrlsDataset
+    {
+        return new CustomUrlsDataset($this->urlAliasService, $this->valueFactory);
     }
 }

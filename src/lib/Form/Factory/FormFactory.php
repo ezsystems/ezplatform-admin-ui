@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
@@ -54,6 +55,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlAddType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentEditType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
@@ -891,12 +893,10 @@ class FormFactory
     }
 
     /**
-     * @param TranslationAddData|null $data
-     * @param null|string $name
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData|null $data
+     * @param string|null $name
      *
-     * @return FormInterface
-     *
-     * @throws InvalidOptionsException
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function addCustomUrl(
         CustomUrlAddData $data = null,
@@ -905,5 +905,20 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(CustomUrlAddType::class);
 
         return $this->formFactory->createNamed($name, CustomUrlAddType::class, $data ?? new CustomUrlAddData());
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData|null $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function removeCustomUrl(
+        CustomUrlRemoveData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(CustomUrlRemoveType::class);
+
+        return $this->formFactory->createNamed($name, CustomUrlRemoveType::class, $data ?? new CustomUrlRemoveData());
     }
 }
