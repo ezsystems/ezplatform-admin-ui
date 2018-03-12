@@ -1,3 +1,4 @@
+{% set tabViews = {} %}
 <div>
     <div class="ez-header px-4">
         <div class="container">
@@ -5,11 +6,15 @@
                 {% for tab in tabs %}
                     {% set id = group ~ '-' ~ tab.identifier %}
                     {% set active = loop.first %}
-                    <li class="nav-item">
-                        <a class="nav-link{% if active %} active{% endif %}" id="ez-tab-label-{{ group }}"
-                           data-toggle="tab" href="#ez-tab-{{ id }}" role="tab" aria-controls="ez-tab-{{ id }}"
-                           aria-expanded="{{ active }}">{{ tab.name }}</a>
-                    </li>
+                    {% set view = tab.view|raw|trim %}
+                    {% if view is not empty %}
+                        {% set tabViews = tabViews|merge({""~id:view}) %}
+                        <li class="nav-item">
+                            <a class="nav-link{% if active %} active{% endif %}" id="ez-tab-label-{{ group }}"
+                               data-toggle="tab" href="#ez-tab-{{ id }}" role="tab" aria-controls="ez-tab-{{ id }}"
+                               aria-expanded="{{ active }}">{{ tab.name }}</a>
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </div>
@@ -18,11 +23,12 @@
         {% for tab in tabs %}
             {% set id = group ~ '-' ~ tab.identifier %}
             {% set active = loop.first %}
-
-            <div class="tab-pane{% if active %} active{% endif %}" id="ez-tab-{{ id }}" role="tabpanel"
-                 aria-labelledby="ez-tab-label-{{ group }}">
-                {{ tab.view|raw }}
-            </div>
+            {% if tabViews[id] is defined %}
+                <div class="tab-pane{% if active %} active{% endif %}" id="ez-tab-{{ id }}" role="tabpanel"
+                     aria-labelledby="ez-tab-label-{{ group }}">
+                    {{ tabViews[id] }}
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 </div>
