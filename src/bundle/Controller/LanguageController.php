@@ -107,8 +107,8 @@ class LanguageController extends Controller
         return $this->render('@EzPlatformAdminUi/admin/language/list.html.twig', [
             'pager' => $pagerfanta,
             'form_languages_delete' => $deleteLanguagesForm->createView(),
-            'canEdit' => $this->isGranted(new Attribute('language', 'edit')),
-            'canAssign' => $this->isGranted(new Attribute('language', 'assign')),
+            'canEdit' => $this->isGranted(new Attribute('content', 'translations')),
+            'canAssign' => $this->isGranted(new Attribute('content', 'translations')),
         ]);
     }
 
@@ -128,8 +128,8 @@ class LanguageController extends Controller
         return $this->render('@EzPlatformAdminUi/admin/language/view.html.twig', [
             'language' => $language,
             'deleteForm' => $deleteForm->createView(),
-            'canEdit' => $this->isGranted(new Attribute('language', 'edit')),
-            'canAssign' => $this->isGranted(new Attribute('language', 'assign')),
+            'canEdit' => $this->isGranted(new Attribute('content', 'translations')),
+            'canAssign' => $this->isGranted(new Attribute('content', 'translations')),
         ]);
     }
 
