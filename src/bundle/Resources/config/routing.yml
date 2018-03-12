@@ -540,6 +540,7 @@ ezplatform.user.delete:
 #
 # Profile
 #
+
 ezplatform.user_profile.change_password:
     path: /user/change-password
     defaults:
@@ -548,6 +549,7 @@ ezplatform.user_profile.change_password:
 #
 # Custom URL alias
 #
+
 ezplatform.custom_url.add:
     path: /url-alias/add
     methods: ['POST']
@@ -559,3 +561,23 @@ ezplatform.custom_url.remove:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:UrlAlias:remove'
+
+#
+# Content on the Fly
+#
+
+ezplatform.content_on_the_fly.create:
+    path: /content/create/on-the-fly/{contentTypeIdentifier}/{languageCode}/{locationId}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentOnTheFly:createContent'
+    options:
+        expose: true
+
+ezplatform.content_on_the_fly.has_access:
+    path: /content/create/on-the-fly/{contentTypeIdentifier}/{languageCode}/{locationId}/has-access
+    methods: ['GET']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentOnTheFly:hasCreateAccess'
+    options:
+        expose: true

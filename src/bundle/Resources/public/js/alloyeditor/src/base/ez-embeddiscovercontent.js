@@ -14,6 +14,7 @@ export default class EzEmbedDiscoverContentButton extends EzWidgetButton {
         const udwContainer = document.querySelector('#react-udw');
         const token = document.querySelector('meta[name="CSRF-Token"]').content;
         const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
+        const languageCode = document.querySelector('meta[name="LanguageCode"]').content;
 
         ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
             onConfirm: this[this.props.udwContentDiscoveredMethod].bind(this),
@@ -24,6 +25,7 @@ export default class EzEmbedDiscoverContentButton extends EzWidgetButton {
             startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess},
             canSelectContent: selectable,
+            cotfForcedLanguage: languageCode
         }), udwContainer);
     }
 
