@@ -133,3 +133,23 @@ services:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.user_password_change.sidebar_right }
+
+    EzSystems\EzPlatformAdminUi\Menu\Admin\ObjectState\ObjectStateGroupCreateRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.object_state_group_create.sidebar_right }
+
+    EzSystems\EzPlatformAdminUi\Menu\Admin\ObjectState\ObjectStateGroupEditRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.object_state_group_edit.sidebar_right }
+
+    EzSystems\EzPlatformAdminUi\Menu\Admin\ObjectState\ObjectStateCreateRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.object_state_create.sidebar_right }
+
+    EzSystems\EzPlatformAdminUi\Menu\Admin\ObjectState\ObjectStateEditRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.object_state_edit.sidebar_right }

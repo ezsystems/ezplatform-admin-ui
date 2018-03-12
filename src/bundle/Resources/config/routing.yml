@@ -581,3 +581,67 @@ ezplatform.content_on_the_fly.has_access:
         _controller: 'EzPlatformAdminUiBundle:ContentOnTheFly:hasCreateAccess'
     options:
         expose: true
+
+#
+# Object States
+#
+
+ezplatform.object_state.groups.list:
+    path: /state/groups
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:list'
+
+ezplatform.object_state.group.add:
+    path: /state/group/create
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:add'
+
+ezplatform.object_state.group.update:
+    path: /state/group/update/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:update'
+
+ezplatform.object_state.group.delete:
+    path: /state/group/delete/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:delete'
+
+ezplatform.object_state.group.bulk_delete:
+    path: /state/group/bulk-delete
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:bulkDelete'
+
+ezplatform.object_state.group.view:
+    path: /state/group/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:view'
+
+ezplatform.object_state.state.add:
+    path: /state/state/create/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:add'
+
+ezplatform.object_state.state.view:
+    path: /state/state/{objectStateId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:view'
+
+ezplatform.object_state.state.update:
+    path: /state/state/update/{objectStateId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:update'
+
+ezplatform.object_state.state.delete:
+    path: /state/state/delete/{objectStateId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:delete'
+
+ezplatform.object_state.state.bulk_delete:
+    path: /state/state/bulk-delete/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:bulkDelete'
+
+ezplatform.object_state.contentstate.update:
+    path: /state/contentstate/update/{contentInfoId}/group/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:updateContentState'

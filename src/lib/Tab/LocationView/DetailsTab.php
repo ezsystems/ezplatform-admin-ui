@@ -14,13 +14,14 @@ use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 
 class DetailsTab extends AbstractTab implements OrderedTabInterface
 {
@@ -97,6 +98,14 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
         );
         $objectStatesDataset = $this->datasetFactory->objectStates();
         $objectStatesDataset->load($contentInfo);
+        $contentObjectStateUpdateTypeByGroupId = [];
+        $contentObjectStateUpdateCanAssignGroupId = [];
+        foreach ($objectStatesDataset->getObjectStates() as $objectState) {
+            $contentObjectStateUpdateTypeByGroupId[$objectState->objectStateGroup->id] = $this->formFactory->updateContentObjectState(
+                new ContentObjectStateUpdateData($contentInfo, $objectState->objectStateGroup, $objectState)
+            )->createView();
+            $contentObjectStateUpdateCanAssignGroupId[$objectState->objectStateGroup->id] = $objectState->userCanAssign;
+        }
 
         $creator = (new UserExists($this->userService))->isSatisfiedBy($contentInfo->ownerId)
             ? $this->userService->loadUser($contentInfo->ownerId) : null;
@@ -114,6 +123,8 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
             'form_location_update' => $locationUpdateType->createView(),
             'objectStates' => $objectStatesDataset->getObjectStates(),
             'sort_field_clause_map' => $this->getSortFieldClauseMap(),
+            'form_state_update' => $contentObjectStateUpdateTypeByGroupId,
+            'state_update_disabled' => $contentObjectStateUpdateCanAssignGroupId,
         ];
 
         return $this->twig->render(
