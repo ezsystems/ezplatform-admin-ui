@@ -6,10 +6,20 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="d2293b387ecddbc6173fd579abd37873fcbc5e97" resname="authentication.forgot_password">
+        <source>Forgot password?</source>
+        <target state="new">Forgot password?</target>
+        <note>key: authentication.forgot_password</note>
+      </trans-unit>
       <trans-unit id="da44d8915172b0c8a874e26956f44aa5501c7e6b" resname="authentication.password">
         <source>Password</source>
         <target state="new">Password</target>
         <note>key: authentication.password</note>
+      </trans-unit>
+      <trans-unit id="7a3631c8f70b8b52f902530ad052c71609eb7177" resname="authentication.reset_your_password">
+        <source>Reset your password</source>
+        <target state="new">Reset your password</target>
+        <note>key: authentication.reset_your_password</note>
       </trans-unit>
       <trans-unit id="8785f4abdfdf72fe9001fe0553c6e3a582cfcc08" resname="authentication.submit">
         <source>Login</source>
@@ -95,6 +105,64 @@
         <source>Remove author</source>
         <target state="new">Remove author</target>
         <note>key: ezauthor.action.delete</note>
+      </trans-unit>
+      <trans-unit id="f73d03811ba3033d6b44986d55ca728c5a88b168" resname="ezplatform.forgot_user_password.contact_administrator">
+        <source>If you do not remember your login, please contact the site administrator.</source>
+        <target state="new">If you do not remember your login, please contact the site administrator.</target>
+        <note>key: ezplatform.forgot_user_password.contact_administrator</note>
+      </trans-unit>
+      <trans-unit id="ffb6990d5e75fe6dc86e94166b77e40a79e4e2a3" resname="ezplatform.forgot_user_password.login">
+        <source>This email is connected with several accounts. Please enter your login.</source>
+        <target state="new">This email is connected with several accounts. Please enter your login.</target>
+        <note>key: ezplatform.forgot_user_password.login</note>
+      </trans-unit>
+      <trans-unit id="db6dd97ed4776bb0e9843554c48e3962327e8f50" resname="ezplatform.forgot_user_password.message">
+        <source><![CDATA[Hi,
+        <br /><br />
+        We have received a request to reset the password for your account on site. Click “reset password” below to choose a new password:
+        <br /><br />
+        <a href="%reset_password%">Reset password<a/>
+        <br /><br />
+        If you did not request a password reset, please ignore this email, and your password will remain the same.]]></source>
+        <target state="new"><![CDATA[Hi,
+        <br /><br />
+        We have received a request to reset the password for your account on site. Click “reset password” below to choose a new password:
+        <br /><br />
+        <a href="%reset_password%">Reset password<a/>
+        <br /><br />
+        If you did not request a password reset, please ignore this email, and your password will remain the same.]]></target>
+        <note>key: ezplatform.forgot_user_password.message</note>
+      </trans-unit>
+      <trans-unit id="801ba7693e80ca58fbf2a9da2b735bf3f324fd27" resname="ezplatform.forgot_user_password.reset_your_password">
+        <source>Reset your password</source>
+        <target state="new">Reset your password</target>
+        <note>key: ezplatform.forgot_user_password.reset_your_password</note>
+      </trans-unit>
+      <trans-unit id="36aa6723300a41ba80ee0096c0d2bcf34fd48aca" resname="ezplatform.forgot_user_password.success">
+        <source><![CDATA[<p>We have sent an email to the email address of your account. You should receive the email shortly.</p>
+            <p>If the email is slow to arrive, check your spam folders.</p>
+            <p>If you receive no email, it’s that your username or email is unknown to us, so please double check.</p>
+            <p>If you reset your password multiple times, only the most recent email link will be valid</p>]]></source>
+        <target state="new"><![CDATA[<p>We have sent an email to the email address of your account. You should receive the email shortly.</p>
+            <p>If the email is slow to arrive, check your spam folders.</p>
+            <p>If you receive no email, it’s that your username or email is unknown to us, so please double check.</p>
+            <p>If you reset your password multiple times, only the most recent email link will be valid</p>]]></target>
+        <note>key: ezplatform.forgot_user_password.success</note>
+      </trans-unit>
+      <trans-unit id="40dd2934190789b016771a0fc3b41dcdfe0bb920" resname="ezplatform.reset_user_password.change_password">
+        <source>Change password</source>
+        <target state="new">Change password</target>
+        <note>key: ezplatform.reset_user_password.change_password</note>
+      </trans-unit>
+      <trans-unit id="8359e9b6409139537d0eaeeacaedbc4d0912a105" resname="ezplatform.reset_user_password.link_is_not_valid">
+        <source><![CDATA[This link is not valid anymore, you can <a href="%forgot_user_password%">generate a new link</a> to reset your password.]]></source>
+        <target state="new"><![CDATA[This link is not valid anymore, you can <a href="%forgot_user_password%">generate a new link</a> to reset your password.]]></target>
+        <note>key: ezplatform.reset_user_password.link_is_not_valid</note>
+      </trans-unit>
+      <trans-unit id="5149c594d64197e519d38a1a2e7368140716bb81" resname="ezplatform.reset_user_password.success">
+        <source><![CDATA[Congrats, your password has been changed, you can now <a href="%login%">login</a> to eZ Platform.]]></source>
+        <target state="new"><![CDATA[Congrats, your password has been changed, you can now <a href="%login%">login</a> to eZ Platform.]]></target>
+        <note>key: ezplatform.reset_user_password.success</note>
       </trans-unit>
       <trans-unit id="5cf420af18fd4a8d856fd30bc13aea5039369f9b" resname="form.cancel">
         <source>Cancel</source>

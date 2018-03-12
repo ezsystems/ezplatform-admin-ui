@@ -62,6 +62,9 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotData;
+use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotWithLoginData;
+use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlRemoveType;
@@ -117,6 +120,9 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionsDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordForgotType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordForgotWithLoginType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordResetType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Version\VersionRemoveType;
 use EzSystems\RepositoryForms\Data\URL\URLListData;
 use EzSystems\RepositoryForms\Data\URL\URLUpdateData;
@@ -908,6 +914,57 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordChangeType::class);
 
         return $this->formFactory->createNamed($name, UserPasswordChangeType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotData $data
+     * @param null|string $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     */
+    public function forgotUserPassword(
+        UserPasswordForgotData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordForgotType::class);
+
+        return $this->formFactory->createNamed($name, UserPasswordForgotType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotWithLoginData $data
+     * @param null|string $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     */
+    public function forgotUserPasswordWithLogin(
+        UserPasswordForgotWithLoginData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordForgotWithLoginType::class);
+
+        return $this->formFactory->createNamed($name, UserPasswordForgotWithLoginType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData $data
+     * @param null|string $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     */
+    public function resetUserPassword(
+        UserPasswordResetData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordResetType::class);
+
+        return $this->formFactory->createNamed($name, UserPasswordResetType::class, $data);
     }
 
     /**
