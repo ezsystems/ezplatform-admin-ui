@@ -10,6 +10,7 @@ imports:
     - { resource: services/modules/subitems.yml }
     - { resource: services/form_processors.yml }
     - { resource: services/validators.yml }
+    - { resource: services/siteaccess.yml }
 
 parameters:
 

@@ -4,6 +4,11 @@ services:
         exclude: "../../Controller/{Controller}"
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
 
+    EzSystems\EzPlatformAdminUiBundle\Controller\ContentController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $siteaccessResolver: '@EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver'
+
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
@@ -21,11 +26,6 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.search_limit$'
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\ContentController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        arguments:
-            $defaultSiteaccess: '%ezpublish.siteaccess.default%'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\User\UserDeleteController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller

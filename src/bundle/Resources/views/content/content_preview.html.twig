@@ -15,7 +15,10 @@
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#caret-back"></use>
                 </svg>
             </a>
-            <span>{{ 'preview'|trans|desc('Preview') }}</span>
+        </div>
+        <div class="ez-preview__item ez-preview__item--description">
+            <span class="ez-preview__item-label">{{ 'previewing'|trans|desc('Previewing') }}:</span>
+            <span class="ez-preview__item-text">{{ content.name }}</span>
         </div>
         <div class="ez-preview__item ez-preview__item--actions">
             <button data-preview-mode="desktop" class="ez-preview__action ez-preview__action--selected">
@@ -34,12 +37,18 @@
                 </svg>
             </button>
         </div>
-        <div class="ez-preview__item ez-preview__item--description">
-            <span class="ez-preview__item-text">{{ content.name }}</span>
-        </div>
+        {% if siteaccesses|length > 1 %}
+            <div class="ez-preview__item ez-preview__item--siteaccess">
+                <select class="form-control">
+                    {% for previewSiteaccess in siteaccesses %}
+                        <option value="{{ path('_ezpublishPreviewContent', {'contentId': content.id, 'versionNo': versionNo, 'language': language_code, 'siteAccessName': previewSiteaccess}) }}">{{ previewSiteaccess }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% endif %}
     </div>
     <div class="ez-preview__iframe ez-preview__iframe--desktop">
-        <iframe src="{{ url('_ezpublishPreviewContent', {'contentId': content.id, 'versionNo': versionNo, 'language': language_code, 'siteAccessName': siteaccess}) }}" frameborder="0"></iframe>
+        <iframe src="{{ url('_ezpublishPreviewContent', {'contentId': content.id, 'versionNo': versionNo, 'language': language_code, 'siteAccessName': siteaccesses|first}) }}" frameborder="0"></iframe>
     </div>
 </div>
 {% endblock %}

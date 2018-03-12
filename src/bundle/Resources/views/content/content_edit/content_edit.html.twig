@@ -38,7 +38,12 @@
 {% endblock %}
 
 {% block right_sidebar %}
-    {% set content_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_edit.sidebar_right', [], {'content': content, 'content_type': contentType}) %}
+    {% set content_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_edit.sidebar_right', [], {
+        'content': content,
+        'content_type': contentType,
+        'location': location,
+        'language': language
+    }) %}
     {{ knp_menu_render(content_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
@@ -49,13 +54,17 @@
 {% block form_before %}
     {{ ezplatform_admin_ui_component_group('content-edit-form-before', {
         'content': content,
-        'contentType': contentType
+        'contentType': contentType,
+        'location': location,
+        'language': language
     }) }}
 {% endblock %}
 
 {% block form_after %}
     {{ ezplatform_admin_ui_component_group('content-edit-form-after', {
         'content': content,
-        'contentType': contentType
+        'contentType': contentType,
+        'location': location,
+        'language': language
     }) }}
 {% endblock %}

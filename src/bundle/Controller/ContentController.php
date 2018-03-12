@@ -12,6 +12,7 @@ use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\Core\Base\Exceptions\BadStateException;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
@@ -20,6 +21,7 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,9 +39,6 @@ class ContentController extends Controller
     /** @var ContentService */
     private $contentService;
 
-    /** @var LocationService */
-    private $locationService;
-
     /** @var FormFactory */
     private $formFactory;
 
@@ -52,8 +51,11 @@ class ContentController extends Controller
     /** @var ContentMainLocationUpdateMapper */
     private $contentMainLocationUpdateMapper;
 
-    /** @var string */
-    private $defaultSiteaccess;
+    /** @var SiteaccessResolverInterface */
+    private $siteaccessResolver;
+
+    /** @var LocationService */
+    private $locationService;
 
     /**
      * @param NotificationHandlerInterface $notificationHandler
@@ -62,7 +64,7 @@ class ContentController extends Controller
      * @param SubmitHandler $submitHandler
      * @param TranslatorInterface $translator
      * @param ContentMainLocationUpdateMapper $contentMetadataUpdateMapper
-     * @param string $defaultSiteaccess
+     * @param SiteaccessResolverInterface $siteaccessResolver
      * @param LocationService $locationService
      */
     public function __construct(
@@ -72,7 +74,7 @@ class ContentController extends Controller
         SubmitHandler $submitHandler,
         TranslatorInterface $translator,
         ContentMainLocationUpdateMapper $contentMetadataUpdateMapper,
-        string $defaultSiteaccess,
+        SiteaccessResolverInterface $siteaccessResolver,
         LocationService $locationService
     ) {
         $this->notificationHandler = $notificationHandler;
@@ -81,7 +83,7 @@ class ContentController extends Controller
         $this->submitHandler = $submitHandler;
         $this->translator = $translator;
         $this->contentMainLocationUpdateMapper = $contentMetadataUpdateMapper;
-        $this->defaultSiteaccess = $defaultSiteaccess;
+        $this->siteaccessResolver = $siteaccessResolver;
         $this->locationService = $locationService;
     }
 
@@ -272,12 +274,21 @@ class ContentController extends Controller
             $location = $this->locationService->loadLocation($content->contentInfo->mainLocationId);
         }
 
+        $siteaccesses = $this->siteaccessResolver->getSiteaccessesForLocation($location, $versionNo, $languageCode);
+
+        if (empty($siteaccesses)) {
+            throw new BadStateException(
+                'siteaccess',
+                'There is no siteaccesses available for particular content'
+            );
+        }
+
         return $this->render('@EzPlatformAdminUi/content/content_preview.html.twig', [
+            'location' => $location,
             'content' => $content,
             'language_code' => $languageCode,
-            'siteaccess' => $this->defaultSiteaccess,
+            'siteaccesses' => $siteaccesses,
             'versionNo' => $versionNo ?? $content->getVersionInfo()->versionNo,
-            'location' => $location,
         ]);
     }
 }

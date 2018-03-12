@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface: '@EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolver'
+    EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolver: ~
+    EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver: ~

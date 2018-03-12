@@ -15,6 +15,7 @@ use eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException;
 use eZ\Publish\API\Repository\Exceptions\ContentValidationException;
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentStruct;
 use EzSystems\EzPlatformAdminUi\Form\Event\ContentEditEvents;
@@ -48,22 +49,28 @@ class PreviewFormProcessor implements EventSubscriberInterface
     /** @var TranslatorInterface */
     private $translator;
 
+    /** @var LocationService */
+    private $locationService;
+
     /**
      * @param ContentService $contentService
      * @param UrlGeneratorInterface $urlGenerator
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
+     * @param LocationService $locationService
      */
     public function __construct(
         ContentService $contentService,
         UrlGeneratorInterface $urlGenerator,
         NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        LocationService $locationService
     ) {
         $this->contentService = $contentService;
         $this->urlGenerator = $urlGenerator;
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
+        $this->locationService = $locationService;
     }
 
     /**
@@ -94,7 +101,7 @@ class PreviewFormProcessor implements EventSubscriberInterface
             $url = $this->urlGenerator->generate('ezplatform.content.preview', [
                 'locationId' => null !== $referrerLocation
                     ? $referrerLocation->id
-                    : $contentDraft->contentInfo->mainLocationId,
+                    : $this->resolveMainLocationId($contentDraft),
                 'contentId' => $contentDraft->id,
                 'versionNo' => $contentDraft->getVersionInfo()->versionNo,
                 'languageCode' => $languageCode,
@@ -184,5 +191,22 @@ class PreviewFormProcessor implements EventSubscriberInterface
         return $data->isNew()
             ? $data->mainLanguageCode
             : $data->contentDraft->getVersionInfo()->getContentInfo()->mainLanguageCode;
+    }
+
+    /**
+     * @param Content $contentDraft
+     *
+     * @return int
+     */
+    private function resolveMainLocationId(Content $contentDraft)
+    {
+        $mainLocationId = $contentDraft->contentInfo->mainLocationId;
+
+        if (null === $mainLocationId && !$contentDraft->contentInfo->published) {
+            $parentLocation = $this->locationService->loadParentLocationsForDraftContent($contentDraft->getVersionInfo())[0];
+            $mainLocationId = $parentLocation->id;
+        }
+
+        return (int) $mainLocationId;
     }
 }
