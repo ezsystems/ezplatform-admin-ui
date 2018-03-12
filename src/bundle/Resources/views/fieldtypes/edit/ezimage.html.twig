@@ -4,7 +4,7 @@
 
 {%- block ezplatform_fieldtype_ezimage_row -%}
     {% set preview_block_name = 'ezimage_preview' %}
-    {% set max_file_size = form.parent.vars.value.fieldDefinition.validatorConfiguration.FileSizeValidator.maxFileSize %}
+    {% set max_file_size = min(form.parent.vars.value.fieldDefinition.validatorConfiguration.FileSizeValidator.maxFileSize, max_upload_size) %}
     {% set attr = attr|merge({'accept': 'image/*'}) %}
     {{ block('binary_base_row') }}
 {%- endblock -%}
