@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor;
 
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use EzSystems\RepositoryForms\Data\Content\FieldData;
@@ -43,12 +44,16 @@ class PreviewFormProcessorTest extends TestCase
     /** @var TranslatorInterface $translator */
     private $translator;
 
+    /** @var LocationService $locationService */
+    private $locationService;
+
     public function setUp()
     {
         $this->contentService = $this->createMock(ContentService::class);
         $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $this->notificationHandler = $this->createMock(NotificationHandlerInterface::class);
         $this->translator = $this->createMock(TranslatorInterface::class);
+        $this->locationService = $this->createMock(LocationService::class);
     }
 
     /**
@@ -56,6 +61,7 @@ class PreviewFormProcessorTest extends TestCase
      * @param UrlGeneratorInterface|null $urlGenerator
      * @param NotificationHandlerInterface|null $notificationHandler
      * @param TranslatorInterface|null $translator
+     * @param \eZ\Publish\API\Repository\LocationService|null $locationService
      *
      * @return PreviewFormProcessor
      */
@@ -63,13 +69,15 @@ class PreviewFormProcessorTest extends TestCase
         ContentService $contentService = null,
         UrlGeneratorInterface $urlGenerator = null,
         NotificationHandlerInterface $notificationHandler = null,
-        TranslatorInterface $translator = null
+        TranslatorInterface $translator = null,
+        LocationService $locationService = null
     ): PreviewFormProcessor {
         return new PreviewFormProcessor(
             $contentService ?? $this->contentService,
             $urlGenerator ?? $this->urlGenerator,
             $notificationHandler ?? $this->notificationHandler,
-            $translator ?? $this->translator
+            $translator ?? $this->translator,
+            $locationService ?? $this->locationService
         );
     }
 
