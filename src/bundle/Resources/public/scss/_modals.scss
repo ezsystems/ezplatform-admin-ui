@@ -79,3 +79,19 @@
     }
 }
 
+.ez-modal--select-modified-range,
+.ez-modal--select-created-range {
+    .modal-header {
+        background-color: $ez-ground-base-dark;
+    }
+
+    .modal-body {
+        display: flex;
+        padding: 2rem;
+        background-color: $ez-ground-base;
+        justify-content: space-between;
+    }
+    .modal-footer  {
+        background-color: $ez-ground-base;
+    }
+}

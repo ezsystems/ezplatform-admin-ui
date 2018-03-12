@@ -11,6 +11,11 @@
         <target state="new">Search</target>
         <note>key: search</note>
       </trans-unit>
+      <trans-unit id="a18d7835f5b4a97ac94331f82e729abcb698be41" resname="search.custom_range">
+        <source>Custom range</source>
+        <target state="new">Custom range</target>
+        <note>key: search.custom_range</note>
+      </trans-unit>
       <trans-unit id="0ec8148d681b43e87a6d0751fff188517be1ea26" resname="search.header">
         <source>Search results (%total%)</source>
         <target state="new">Search results (%total%)</target>
@@ -20,6 +25,21 @@
         <source>Search</source>
         <target state="new">Search</target>
         <note>key: search.headline</note>
+      </trans-unit>
+      <trans-unit id="2d007a8d9fc080db790dc5c45c12dd369d144fbe" resname="search.last_month">
+        <source>Last month</source>
+        <target state="new">Last month</target>
+        <note>key: search.last_month</note>
+      </trans-unit>
+      <trans-unit id="967e0a47af2b621d7e8fa29b2429a30644f8d6bb" resname="search.last_week">
+        <source>Last week</source>
+        <target state="new">Last week</target>
+        <note>key: search.last_week</note>
+      </trans-unit>
+      <trans-unit id="c1244001dc023e80d3e6d8331935c68ac140788b" resname="search.last_year">
+        <source>Last year</source>
+        <target state="new">Last year</target>
+        <note>key: search.last_year</note>
       </trans-unit>
       <trans-unit id="6ceaf9887c3974130781c3dadfcb129926496770" resname="search.list">
         <source>search.list</source>

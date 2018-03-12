@@ -22,7 +22,6 @@
 
                 {% if results is defined %}
 
-
                     <div class="ez-table-header mt-3">
                         <div class="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
                     </div>
@@ -91,9 +90,19 @@
 
 {% block javascripts %}
     {%  javascripts
+        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.js'
         'bundles/ezplatformadminui/js/scripts/button.content.edit.js'
+        'bundles/ezplatformadminui/js/scripts/admin.search.filters.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets
+        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.css'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
 {% endblock %}
 
