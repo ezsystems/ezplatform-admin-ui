@@ -26,8 +26,7 @@
                             data-content-draft-edit-url="{{ path('ez_content_draft_edit', {
                                 'contentId': row.contentId,
                                 'versionNo': row.version,
-                                'language': row.language,
-                                'locationId': location.id
+                                'language': row.language
                             }) }}"
                             data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
                                 'contentId': row.contentId,

@@ -20,3 +20,10 @@ system:
                     match: true
                     params:
                         viewbaseLayout: '@EzPlatformAdminUi/layout.html.twig'
+        content_create_view:
+            full:
+                ezplatform_admin_ui:
+                    template: '@EzPlatformAdminUi/content/content_edit/content_create.html.twig'
+                    match: true
+                    params:
+                        viewbaseLayout: '@EzPlatformAdminUi/layout.html.twig'
