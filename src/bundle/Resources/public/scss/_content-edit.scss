@@ -1,14 +1,21 @@
+.ez-content-item-status {
+    font-size: 1.125rem;
+    color: $ez-color-base-light;
+}
+
 .ez-content-edit-container {
     position: relative;
 
     &__close {
         position: absolute;
-        right: 1rem;
-        top: 1rem;
+        left: 0;
+        top: 0;
         font-size: 2rem;
         color: $ez-black;
         width: 2rem;
         height: 2rem;
+        margin-left: .5rem;
+        padding: 1rem;
 
         &:before,
         &:after {
