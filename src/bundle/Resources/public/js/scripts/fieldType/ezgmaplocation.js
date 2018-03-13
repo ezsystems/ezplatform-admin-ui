@@ -387,7 +387,9 @@
          * @param {Event} event
          */
         const handleOnMapClick = (event) => {
-            updateMapState(event.latlng.lat, event.latlng.lng);
+            const latlng = event.latlng.wrap();
+
+            updateMapState(latlng.lat, latlng.lng);
         };
 
         /**
