@@ -6,21 +6,23 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5>{{ 'draft.conflict.header'|trans|desc('Draft conflict when editing') }}</h5>
+                <h5 class="modal-title">{{ 'draft.conflict.header'|trans|desc('Draft conflict when editing') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="ez-modal-body__main">
-                    {% set number = conflicted_drafts|length %}
-                    {{ 'draft.conflict.number'|transchoice(number, {'%number%': number })|desc(
-                    '{1}There are %number% draft for this content item.|]1,Inf[ There are %number% drafts for this content item'
-                    ) }}
-                </p>
-                <p class="ez-modal-body__main">
-                    {{ 'draft.conflict.choice'|trans({})|desc('You can either edit any of your existing draft(s) or add a new one.') }}
-                </p>
+                <div class="ez-modal-body__main">
+                    <p class="ez-modal-body__main-content">
+                        {% set number = conflicted_drafts|length %}
+                        {{ 'draft.conflict.number'|transchoice(number, {'%number%': number })|desc(
+                        '{1}There are %number% draft for this content item.|]1,Inf[ There are %number% drafts for this content item'
+                        ) }}
+                    </p>
+                    <p class="ez-modal-body__main-content">
+                        {{ 'draft.conflict.choice'|trans({})|desc('You can either edit any of your existing draft(s) or add a new one.') }}
+                    </p>
+                </div>
                 {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: null, tools: version_modal_draft_conflict.table_header_tools() } %}
                 <div class="ez-scrollable-wrapper">
                     {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', {
