@@ -16,207 +16,50 @@ class AdminList extends Element
     public const ELEMENT_NAME = 'Admin List';
     /** @var string list table title placed in the blue bar */
     protected $listHeader;
+    /** @var \Behat\Mink\Element\NodeElement|null element containing admin list */
+    protected $listContainer;
+    /** @var Table */
+    public $table;
 
-    public function __construct(UtilityContext $context, string $listHeader)
+    public function __construct(UtilityContext $context, string $listHeader, string $tableName, ?string $containerLocator = 'section')
     {
         parent::__construct($context);
         $this->listHeader = $listHeader;
         $this->fields = [
-            'list' => 'section',
+            'list' => $containerLocator,
             'listHeader' => '.ez-table-header__headline, header h5',
             'plusButton' => '.ez-icon-create',
             'trashButton' => '.ez-icon-trash',
-            'editButton' => 'tr:nth-child(%s) a[title=Edit]',
-            'listElementLink' => '.ez-checkbox-cell+ td a',
-            'tableCell' => 'tr:nth-child(%d) td:nth-child(%d)',
-            'checkboxInput' => ' .form-check-input',
-            'verticalHeaders' => 'colgroup+ tbody th',
-            'insideHeaders' => 'thead+ tbody th',
-            'horizontalHeaders' => '.ez-table-header + .table thead th, .ez-table-header + form thead th',
+            'mainAssignButton' => '.ez-table-header a[title*=Assign]',
         ];
+        $this->listContainer = $this->context->findElement($containerLocator);
+        $this->table = ElementFactory::createElement($context, $tableName, $containerLocator);
     }
 
     public function verifyVisibility(): void
     {
-        $actualHeader = $this->context->getElementByText($this->listHeader, $this->fields['listHeader']);
+        $actualHeader = $this->context->getElementByTextFragment($this->listHeader, $this->fields['listHeader'], null, $this->listContainer);
         if ($actualHeader === null) {
-            throw new ElementNotFoundException($this->context->getSession(), 'table header', $this->fields['listHeader']);
+            throw new ElementNotFoundException($this->context->getSession(), sprintf('table header "%s"', $this->listHeader), $this->fields['listHeader']);
         }
     }
 
     public function clickPlusButton(): void
     {
-        $this->context->findElement($this->fields['plusButton'])->click();
+        $this->context->findElement($this->fields['plusButton'], $this->defaultTimeout, $this->listContainer)->click();
     }
 
     public function clickTrashButton(): void
     {
-        $this->context->findElement($this->fields['trashButton'])->click();
+        $this->context->findElement($this->fields['trashButton'], $this->defaultTimeout, $this->listContainer)->click();
     }
 
-    public function clickEditButton(string $listItemName): void
+    public function clickAssignButton(?string $listItemName = null): void
     {
-        $position = $this->context->getElementPositionByText($listItemName, $this->fields['listElementLink']);
-        $this->context->findElement(sprintf($this->fields['editButton'], $position))->click();
-    }
-
-    /**
-     * Check if list contains link element with given name.
-     *
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function isLinkElementOnList(string $name): bool
-    {
-        return $this->context->getElementByText($name, $this->fields['listElementLink']) !== null;
-    }
-
-    /**
-     * Check if checkbox left to link element if active.
-     *
-     * @param string $name
-     *
-     * @return bool 'true' for enabled and 'false' for disabled
-     */
-    public function isLinkElementSelectable(string $name): bool
-    {
-        $position = $this->context->getElementPositionByText($name, $this->fields['listElementLink']);
-        $checkbox = $this->context->findElement(sprintf($this->fields['tableCell'], $position, 1) . $this->fields['checkboxInput'])->getAttribute('disabled');
-
-        return $checkbox !== 'disabled';
-    }
-
-    /**
-     * Check checkbox left to link element with given name.
-     *
-     * @param string $name
-     */
-    public function selectListElement(string $name): void
-    {
-        $position = $this->context->getElementPositionByText($name, $this->fields['listElementLink']);
-        $this->context->findElement(sprintf($this->fields['tableCell'], $position, 1))->checkField('');
-    }
-
-    /**
-     * Click link element with given name.
-     *
-     * @param string $name
-     */
-    public function clickListElement(string $name): void
-    {
-        $this->context->getElementByText($name, $this->fields['listElementLink'])->click();
-    }
-
-    /**
-     * Get value of cell with given coordinates.
-     *
-     * @param int $row
-     * @param int $column
-     *
-     * @return string
-     *
-     * @throws \Exception when coordinates are invalid
-     */
-    public function getCellValue(int $row, int $column): string
-    {
-        $cell = $this->context->findElement(sprintf($this->fields['tableCell'], $row, $column));
-
-        if ($cell !== null) {
-            if (strpos($cell->getHtml(), 'type="checkbox"') !== false) {
-                return strpos($cell->getHtml(), 'checked') ? 'true' : 'false';
-            }
-
-            return $cell->getText();
+        if ($listItemName === null) {
+            $this->context->findElement($this->fields['mainAssignButton'], $this->defaultTimeout, $this->listContainer)->click();
+        } else {
+            $this->table->clickAssignButton($listItemName);
         }
-
-        throw new \Exception('Cell coordinates not valid - row %d, column %d', $row, $column);
-    }
-
-    /**
-     * Getting attribute of link elements with given name, from column with given header.
-     *
-     * @param string $name
-     * @param string $header
-     *
-     * @return string
-     */
-    public function getListItemAttribute(string $name, string $header): string
-    {
-        $columnPosition = $this->context->getElementPositionByText(
-            $header,
-            $this->fields['horizontalHeaders'],
-            null,
-            $this->context->findElement($this->fields['list'])
-        );
-        $rowPosition = $this->context->getElementPositionByText(
-            $name,
-            $this->fields['listElementLink'],
-            null,
-            $this->context->findElement($this->fields['list'])
-        );
-
-        return $this->getCellValue($rowPosition, $columnPosition);
-    }
-
-    /**
-     * Getting attributes of list which is vertical oriented table,
-     * like in Content Type details view General information.
-     *
-     * @param string $header
-     *
-     * @return string
-     */
-    public function getCellValueFromVerticalOrientedTable(string $header): string
-    {
-        $rowPosition = $this->context->getElementPositionByText(
-            $header,
-            $this->fields['verticalHeaders'],
-            null,
-            $this->context->findElement($this->fields['list'])
-        );
-
-        return $this->getCellValue($rowPosition, 2);
-    }
-
-    /**
-     * Getting attributes of list which has both - horizontal and vertical headers,
-     * like in Content Type details view Content fields information.
-     *
-     * @param string $columnHeader
-     * @param string $rowHeader
-     *
-     * @return string
-     */
-    public function getCellValueFromDoubleHeaderTable(string $columnHeader, string $rowHeader): string
-    {
-        $columnPosition = $this->context->getElementPositionByText(
-            $columnHeader,
-            $this->fields['horizontalHeaders']
-        );
-        $rowPosition = $this->context->getElementPositionByText(
-            $rowHeader,
-            $this->fields['insideHeaders']
-        );
-
-        return $this->getCellValue($rowPosition, $columnPosition);
-    }
-
-    /**
-     * Getting attributes of list which has only horizontal headers, and no links elements
-     * like in Languages details view.
-     *
-     * @param string $columnHeader
-     *
-     * @return string
-     */
-    public function getCellValueFromSimpleTable(string $columnHeader): string
-    {
-        $columnPosition = $this->context->getElementPositionByText(
-            $columnHeader,
-            $this->fields['horizontalHeaders']
-        );
-
-        return $this->getCellValue(1, $columnPosition);
     }
 }

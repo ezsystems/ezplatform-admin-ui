@@ -21,6 +21,7 @@ Feature: Content type groups management
       And I set "Name" to "Test CTG"
       And I click on the edit action bar button "Create"
     Then I should be on "Content Type Group" "Test CTG" page
+      And "Content Types" list in "Content Type Group" "Test CTG" is empty
 
   @javascript @common
   Scenario: I can navigate to Admin / Content Types through breadcrumb

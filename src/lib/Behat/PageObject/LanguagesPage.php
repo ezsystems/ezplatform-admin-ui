@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\LinkedListTable;
 use PHPUnit\Framework\Assert;
 
 class LanguagesPage extends Page
@@ -24,7 +25,7 @@ class LanguagesPage extends Page
     public function __construct(UtilityContext $context)
     {
         parent::__construct($context);
-        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME);
+        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME, LinkedListTable::ELEMENT_NAME);
         $this->route = '/admin/language/list';
         $this->pageTitle = self::PAGE_NAME;
         $this->pageTitleLocator = '.ez-header h1';
@@ -39,7 +40,7 @@ class LanguagesPage extends Page
     {
         Assert::assertEquals(
             $value,
-            $this->adminList->getListItemAttribute($itemName, $label),
+            $this->adminList->table->getTableCellValue($itemName, $label),
             sprintf('Attribute "%s" of item "%s" has wrong value.', $label, $itemName)
         );
     }
