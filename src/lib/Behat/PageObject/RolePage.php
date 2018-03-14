@@ -33,9 +33,9 @@ class RolePage extends Page
     public $adminList;
 
     /**
-     * @var \EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog[]
+     * @var \EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog
      */
-    public $dialogs;
+    public $dialog;
 
     /**
      * @var AdminList|\EzSystems\EzPlatformAdminUi\Behat\PageElement\NavLinkTabs
@@ -51,8 +51,7 @@ class RolePage extends Page
         $this->adminLists['Assignments'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Users and Groups', SimpleListTable::ELEMENT_NAME, $this->activeAdminListContainerLocator);
         $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, '', SimpleListTable::ELEMENT_NAME, $this->activeAdminListContainerLocator);
         $this->navLinkTabs = ElementFactory::createElement($this->context, NavLinkTabs::ELEMENT_NAME);
-        $this->dialogs['Policies'] = ElementFactory::createElement($this->context, Dialog::ELEMENT_NAME, $this->activeAdminListContainerLocator);
-        $this->dialogs['Assignments'] = ElementFactory::createElement($this->context, Dialog::ELEMENT_NAME, $this->activeAdminListContainerLocator);
+        $this->dialog = ElementFactory::createElement($this->context, Dialog::ELEMENT_NAME);
         $this->pageTitle = sprintf('Role "%s"', $roleName);
         $this->pageTitleLocator = '.ez-header h1';
     }

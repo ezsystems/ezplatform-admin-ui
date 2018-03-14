@@ -141,15 +141,13 @@ class UpdateForm extends Element
      * Click button with given label.
      *
      * @param string $label
+     * @param int $indexOfButton
      */
-    public function clickButton(string $label, int $no = 0): void
+    public function clickButton(string $label, int $indexOfButton = 0): void
     {
         $formButtons = $this->context->findAllWithWait($this->fields['button'], $this->context->findElement($this->fields['mainFormSection']));
-        foreach ($formButtons as $key => $formButton) {
-            if ($formButton->getText() !== $label) {
-                array_splice($formButtons, $key);
-            }
-        }
-        $formButtons[$no]->click();
+        $filteredButtons = array_filter($formButtons, function ($element) use ($label) { return $element->getText() === $label; });
+
+        $filteredButtons[$indexOfButton]->click();
     }
 }

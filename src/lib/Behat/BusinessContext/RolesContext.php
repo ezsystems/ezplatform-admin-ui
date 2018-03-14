@@ -79,9 +79,8 @@ class RolesContext extends BusinessContext
         }
 
         $adminList->clickTrashButton();
-        $dialog = $rolePage->dialogs[$this->tabMapping[$itemType]];
-        $dialog->verifyVisibility();
-        $dialog->confirm();
+        $rolePage->dialog->verifyVisibility();
+        $rolePage->dialog->confirm();
     }
 
     /**
