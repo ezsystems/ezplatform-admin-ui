@@ -59,6 +59,10 @@
 
     .modal-header {
         background: $ez-color-base-pale;
+
+        .close {
+            padding-top: 1.25rem;
+        }
     }
 
     .modal-body {
