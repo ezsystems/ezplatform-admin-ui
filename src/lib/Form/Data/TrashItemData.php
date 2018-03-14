@@ -91,6 +91,8 @@ class TrashItemData
 
     public function isParentInTrash(): bool
     {
-        return !end($this->ancestors) instanceof Location;
+        $lastAncestor = end($this->ancestors);
+
+        return $this->location->path !== array_merge($lastAncestor->path, [(string)$this->location->id]);
     }
 }
