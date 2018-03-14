@@ -18,3 +18,4 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RightMenuContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentTypeContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RolesContext

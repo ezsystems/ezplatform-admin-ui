@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\LinkedListTable;
 
 class ContentTypeGroupPage extends Page
 {
@@ -27,7 +28,7 @@ class ContentTypeGroupPage extends Page
         parent::__construct($context);
         $this->route = '/admin/contenttypegroup/';
         $this->groupName = $groupName;
-        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, sprintf('Content Types in %s', $this->groupName));
+        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, sprintf('Content Types in %s', $this->groupName), LinkedListTable::ELEMENT_NAME);
         $this->pageTitle = $groupName;
         $this->pageTitleLocator = '.ez-header h1';
     }
@@ -38,5 +39,17 @@ class ContentTypeGroupPage extends Page
     public function verifyElements(): void
     {
         $this->adminList->verifyVisibility();
+    }
+
+    /**
+     * Verifies if lists from given tab is empty.
+     *
+     * @param string $tabName
+     */
+    public function verifyListIsEmpty(string $tabName): void
+    {
+        if ($this->adminList->table->getItemCount() > 0) {
+            throw new \Exception(sprintf('%s list is not empty.', $tabName));
+        }
     }
 }
