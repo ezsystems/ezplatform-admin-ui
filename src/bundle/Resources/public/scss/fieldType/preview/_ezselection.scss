@@ -2,6 +2,9 @@
     list-style: none;
     padding-left: 0;
     margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 
     .ez-selection__item {
         display: inline-block;
@@ -9,6 +12,7 @@
         background: $ez-ground-primary;
         border-radius: 5px;
         margin: .25rem;
+        min-height: 40px;
     }
 }
 
