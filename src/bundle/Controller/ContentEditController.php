@@ -65,6 +65,10 @@ class ContentEditController extends Controller
      * @param int|null $locationId
      *
      * @return ContentEditView|Response
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function translateAction(
         Content $content,
@@ -111,7 +115,7 @@ class ContentEditController extends Controller
             }
         }
 
-        return new ContentEditView(null, [
+        return new ContentEditView('@EzPlatformAdminUi/content/content_edit/content_edit.html.twig', [
             'form' => $form->createView(),
             'location' => $location,
             'language' => $toLanguage,
