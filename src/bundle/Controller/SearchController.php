@@ -171,6 +171,7 @@ class SearchController extends Controller
                     'form' => $form->createView(),
                     'pager' => $pagerfanta,
                     'form_edit' => $editForm->createView(),
+                    'filters_expanded' => $data->isFiltered(),
                 ]);
             });
 
@@ -181,6 +182,7 @@ class SearchController extends Controller
 
         return $this->render('@EzPlatformAdminUi/admin/search/search.html.twig', [
             'form' => $form->createView(),
+            'filters_expanded' => false,
         ]);
     }
 }

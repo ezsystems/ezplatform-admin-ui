@@ -37,6 +37,8 @@
         lastModifiedEnd.value = '';
         lastCreatedPeriod.value = '';
         lastCreatedEnd.value = '';
+
+        event.target.closest('form').submit();
     };
     const toggleApplyBtnDisabledState = () => {
         const contentTypeOption = contentTypeSelect.querySelector('option');
@@ -54,10 +56,18 @@
 
         filters.classList.toggle('ez-filters--collapsed');
     };
-    const toggleContentTypeSelectorVisibility = (event) => {
-        event.preventDefault();
+    const handleClickOutside = (event) => {
+        if (event.target.closest('.ez-content-type-selector') || event.target.closest('.ez-filters__select--content-type')) {
+            return;
+        }
+
+        toggleContentTypeSelectorVisibility();
+    };
+    const toggleContentTypeSelectorVisibility = () => {
+        const methodName = contentTypeSelector.classList.contains('ez-content-type-selector--collapsed') ? 'addEventListener' : 'removeEventListener';
 
         contentTypeSelector.classList.toggle('ez-content-type-selector--collapsed');
+        doc.querySelector('body')[methodName]('click', handleClickOutside, false);
     };
     const toggleModalVisibility = (event) => {
         const modal = $(event.target.dataset.targetSelector);
@@ -80,7 +90,7 @@
     };
     const filterByContentType = () => {
         const selectedCheckboxes = contentTypeCheckboxes.filter(checkbox => checkbox.checked);
-        const contentTypesText = selectedCheckboxes.map(checkbox => checkbox.value).join();
+        const contentTypesText = selectedCheckboxes.map(checkbox => checkbox.dataset.name).join(', ');
         const option = contentTypeSelect[0];
         const defaultText = option.dataset.default;
 
@@ -146,6 +156,8 @@
     };
 
     dateFields.forEach(initFlatPickr);
+
+    filterByContentType();
 
     clearBtn.addEventListener('click', clearFilters, false);
     filterBtn.addEventListener('click', toggleFiltersVisibility, false);

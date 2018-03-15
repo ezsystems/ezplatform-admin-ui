@@ -24,8 +24,8 @@
     }
 
     &__item {
-        min-width: 8rem;
-        padding-right: 1rem;
+        flex-basis: 33%;
+        display: flex;
     }
 
     &__group-title {
