@@ -237,7 +237,7 @@
                 }
             });
 
-            return results.every(result => !result.isError);
+            return results.every(result => result && !result.isError);
         }
     };
 })(window, document);

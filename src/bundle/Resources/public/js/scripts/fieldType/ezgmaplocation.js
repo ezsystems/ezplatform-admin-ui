@@ -1,9 +1,16 @@
-(function (global) {
+(function (global, doc) {
     const SELECTOR_FIELD = '.ez-field-edit--ezgmaplocation';
     const SELECTOR_ADDRESS_INPUT = '.ez-data-source__field--address .ez-data-source__input';
+    const SELECTOR_LAT_FIELD = '.ez-data-source__field--latitude';
+    const SELECTOR_LON_FIELD = '.ez-data-source__field--longitude';
     const SELECTOR_LAT_INPUT = '.ez-data-source__field--latitude .ez-data-source__input';
     const SELECTOR_LON_INPUT = '.ez-data-source__field--longitude .ez-data-source__input';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
+    const EVENT_BLUR = 'blur';
+    const EVENT_KEYUP = 'keyup';
+    const EVENT_CANCEL_ERRORS = 'cancelErrors';
+    const POSITION_TYPE_LONGITUDE = 'longitude';
+    const POSITION_TYPE_LATITUDE = 'latitude';
 
     class EzGMapLocationValidator extends global.eZ.BaseFieldValidator {
         /**
@@ -27,7 +34,7 @@
 
             if (isNumber && !isInRange) {
                 result.isError = true;
-                result.errorMessage = window.eZ.errors.outOfRangeValue
+                result.errorMessage = global.eZ.errors.outOfRangeValue
                     .replace('{fieldName}', label)
                     .replace('{min}', min)
                     .replace('{max}', max);
@@ -37,7 +44,7 @@
 
             if (input.required && !isNumber) {
                 result.isError = true;
-                result.errorMessage = window.eZ.errors.emptyField.replace('{fieldName}', label);
+                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
             }
 
             return result;
@@ -59,12 +66,25 @@
 
             const latInput = event.currentTarget.closest(SELECTOR_FIELD).querySelector(SELECTOR_LAT_INPUT);
             const latResult = this.validateCoordInput(latInput, {min: -90, max: 90});
+            const isNativeEvent = event.type && (event.type === EVENT_BLUR || event.type === EVENT_KEYUP);
+            const allEmptyOrFilledResult = this.checkAllFieldsEmptyOrFilled(latInput, event.currentTarget);
+            const invalidLatitude = allEmptyOrFilledResult.invalidInputType === POSITION_TYPE_LATITUDE;
 
-            if (latResult.isError) {
-                latInput.dispatchEvent(new Event('blur'));
+            if (latResult.isError || (!isNativeEvent && invalidLatitude)) {
+                if (invalidLatitude && !latResult.isError) {
+                    latResult.isError = true;
+                    latResult.errorMessage = allEmptyOrFilledResult.errorMessage;
+                }
+
+                latInput.dispatchEvent(new Event('showLatitudeError'));
+            } else if (!isNativeEvent && allEmptyOrFilledResult.invalidInputType === POSITION_TYPE_LONGITUDE) {
+                lonResult.isError = true;
+                lonResult.errorMessage = allEmptyOrFilledResult.errorMessage;
+
+                return lonResult;
+            } else {
+                return lonResult;
             }
-
-            return lonResult;
         }
 
         /**
@@ -83,12 +103,83 @@
 
             const lonInput = event.currentTarget.closest(SELECTOR_FIELD).querySelector(SELECTOR_LON_INPUT);
             const lonResult = this.validateCoordInput(lonInput, {min: -180, max: 180});
+            const isNativeEvent = event.type && (event.type === EVENT_BLUR || event.type === EVENT_KEYUP);
+            const allEmptyOrFilledResult = this.checkAllFieldsEmptyOrFilled(event.currentTarget, lonInput);
+            const invalidLongitude = allEmptyOrFilledResult.invalidInputType === POSITION_TYPE_LONGITUDE;
 
-            if (lonResult.isError) {
-                lonInput.dispatchEvent(new Event('blur'));
+            if (lonResult.isError || (!isNativeEvent && invalidLongitude)) {
+                if (invalidLongitude && !lonResult.isError) {
+                    lonResult.isError = true;
+                    lonResult.errorMessage = allEmptyOrFilledResult.errorMessage;
+                }
+
+                lonInput.dispatchEvent(new Event('showLongitudeError'));
+            } else if (!isNativeEvent && allEmptyOrFilledResult.invalidInputType === POSITION_TYPE_LATITUDE) {
+                latResult.isError = true;
+                latResult.errorMessage = allEmptyOrFilledResult.errorMessage;
+
+                return latResult;
+            } else {
+                return latResult;
+            }
+        }
+
+        /**
+         * Checks whether both longitude input field and latitude input field are filled or empty.
+         *
+         * @method checkAllFieldsEmptyOrFilled
+         * @param {HTMLElement} latInput latitude input DOM node
+         * @param {HTLMElement} lonInput longitude input DOM node
+         * @returns {Object}
+         */
+        checkAllFieldsEmptyOrFilled(latInput, lonInput) {
+            const lonInputFilled = lonInput.value.trim().length;
+            const latInputFilled = latInput.value.trim().length;
+            const lonInputFilledlatInputEmpty = lonInputFilled && !latInputFilled;
+            const latInputFilledlonInputEmpty = !lonInputFilled && latInputFilled;
+
+            let errorMessage = null;
+            let invalidInputType = null;
+
+            if (lonInputFilledlatInputEmpty) {
+                errorMessage = global.eZ.errors.provideLatitudeValue;
+                invalidInputType = POSITION_TYPE_LATITUDE;
+            } else if (latInputFilledlonInputEmpty) {
+                errorMessage = global.eZ.errors.provideLongitudeValue;
+                invalidInputType = POSITION_TYPE_LONGITUDE;
             }
 
-            return latResult;
+            return {
+                isError: lonInputFilledlatInputEmpty || latInputFilledlonInputEmpty,
+                invalidInputType,
+                errorMessage
+            };
+        }
+
+        /**
+         * Displays the longitude input error
+         *
+         * @method showLongitudeError
+         * @returns {Object}
+         */
+        showLongitudeError() {
+            return {
+                isError: true,
+                errorMessage: global.eZ.errors.provideLongitudeValue
+            };
+        }
+
+        /**
+         * Displays the latitude input error
+         *
+         * @method showLatitudeError
+         * @returns {Object}
+         */
+        showLatitudeError() {
+            return {
+                isError: true,
+                errorMessage: global.eZ.errors.provideLatitudeValue
+            };
         }
 
         /**
@@ -164,44 +255,62 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [{
             selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
-            eventName: 'blur',
+            positionType: POSITION_TYPE_LONGITUDE,
+            eventName: EVENT_BLUR,
             callback: 'validateLongitude',
             errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-            invalidStateSelectors: ['.ez-data-source__field--longitude']
+            invalidStateSelectors: [SELECTOR_LON_FIELD]
         }, {
             isValueValidator: false,
             selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
-            eventName: 'keyup',
+            positionType: POSITION_TYPE_LONGITUDE,
+            eventName: 'showLongitudeError',
+            callback: 'showLongitudeError',
+            errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+            invalidStateSelectors: [SELECTOR_LON_FIELD]
+        },{
+            isValueValidator: false,
+            selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
+            eventName: EVENT_KEYUP,
             callback: 'validateLongitudeOnEnter',
             errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-            invalidStateSelectors: ['.ez-data-source__field--longitude']
+            invalidStateSelectors: [SELECTOR_LON_FIELD]
         }, {
             isValueValidator: false,
             selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
-            eventName: 'cancelErrors',
+            eventName: EVENT_CANCEL_ERRORS,
             callback: 'cancelErrors',
             errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-            invalidStateSelectors: ['.ez-data-source__field--longitude']
+            invalidStateSelectors: [SELECTOR_LON_FIELD]
         }, {
             selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
-            eventName: 'blur',
+            positionType: POSITION_TYPE_LATITUDE,
+            eventName: EVENT_BLUR,
             callback: 'validateLatitude',
             errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-            invalidStateSelectors: ['.ez-data-source__field--latitude']
+            invalidStateSelectors: [SELECTOR_LAT_FIELD]
         }, {
             isValueValidator: false,
             selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
-            eventName: 'keyup',
+            positionType: POSITION_TYPE_LATITUDE,
+            eventName: 'showLatitudeError',
+            callback: 'showLatitudeError',
+            errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+            invalidStateSelectors: [SELECTOR_LAT_FIELD]
+        },{
+            isValueValidator: false,
+            selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
+            eventName: EVENT_KEYUP,
             callback: 'validateLatitudeOnEnter',
             errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-            invalidStateSelectors: ['.ez-data-source__field--latitude']
+            invalidStateSelectors: [SELECTOR_LAT_FIELD]
         }, {
             isValueValidator: false,
             selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
-            eventName: 'cancelErrors',
+            eventName: EVENT_CANCEL_ERRORS,
             callback: 'cancelErrors',
             errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-            invalidStateSelectors: ['.ez-data-source__field--latitude']
+            invalidStateSelectors: [SELECTOR_LAT_FIELD]
         }, {
             isValueValidator: false,
             selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
@@ -211,7 +320,7 @@
         }, {
             isValueValidator: false,
             selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
-            eventName: 'cancelErrors',
+            eventName: EVENT_CANCEL_ERRORS,
             callback: 'cancelErrors',
             errorNodeSelectors: [SELECTOR_LABEL_WRAPPER]
         }],
@@ -228,7 +337,7 @@
      * @param {Function} notFoundCallback
      */
     const searchByAddress = (value, foundCallback, notFoundCallback) => {
-        fetch(`http://nominatim.openstreetmap.org/search?format=json&q=${window.encodeURI(value)}&zoom=15`)
+        fetch(`http://nominatim.openstreetmap.org/search?format=json&q=${global.encodeURI(value)}&zoom=15`)
             .then(response => response.json())
             .then(locations => {
                 if (locations.length) {
@@ -272,7 +381,7 @@
      */
     const correctNotation = (event) => event.currentTarget.value = event.currentTarget.value.replace(',', '.');
 
-    [...document.querySelectorAll(SELECTOR_FIELD)].forEach(field => {
+    [...doc.querySelectorAll(SELECTOR_FIELD)].forEach(field => {
         const addressInput = field.querySelector(SELECTOR_ADDRESS_INPUT);
         const longitudeInput = field.querySelector(SELECTOR_LON_INPUT);
         const latitudeInput = field.querySelector(SELECTOR_LAT_INPUT);
@@ -283,7 +392,7 @@
             zoom: areCoordsSet ? 15 : 1,
             center: areCoordsSet ? [parseFloat(latitudeInput.value), parseFloat(longitudeInput.value)] : [0, 0]
         };
-        const map = window.L.map(field.querySelector('.ez-data-source__map'), mapConfig);
+        const map = global.L.map(field.querySelector('.ez-data-source__map'), mapConfig);
 
         /**
          * Updates map state to show location with provided coordinates
@@ -293,7 +402,7 @@
          * @param {Number} lon
          */
         const updateMapState = (lat, lon) => {
-            map.setView(window.L.latLng(lat, lon), 15);
+            map.setView(global.L.latLng(lat, lon), 15);
 
             longitudeInput.value = lon;
             latitudeInput.value = lat;
@@ -302,15 +411,15 @@
                 map.removeLayer(locationMarker);
             }
 
-            locationMarker = window.L.marker([lat, lon], {
-                icon: new window.L.Icon.Default({
+            locationMarker = global.L.marker([lat, lon], {
+                icon: new global.L.Icon.Default({
                     imagePath: '/bundles/ezplatformadminuiassets/vendors/leaflet/dist/images/'
                 })
             }).addTo(map);
 
-            addressInput.dispatchEvent(new CustomEvent('cancelErrors'));
-            longitudeInput.dispatchEvent(new CustomEvent('cancelErrors'));
-            latitudeInput.dispatchEvent(new CustomEvent('cancelErrors'));
+            addressInput.dispatchEvent(new CustomEvent(EVENT_CANCEL_ERRORS));
+            longitudeInput.dispatchEvent(new CustomEvent(EVENT_CANCEL_ERRORS));
+            latitudeInput.dispatchEvent(new CustomEvent(EVENT_CANCEL_ERRORS));
         };
 
         /**
@@ -350,7 +459,7 @@
             }
 
             if (!longitudeInput.value.trim().length) {
-                longitudeInput.dispatchEvent(new Event('blur'));
+                longitudeInput.dispatchEvent(new Event(EVENT_BLUR));
 
                 return;
             }
@@ -373,7 +482,7 @@
             }
 
             if (!latitudeInput.value.trim().length) {
-                latitudeInput.dispatchEvent(new Event('blur'));
+                latitudeInput.dispatchEvent(new Event(EVENT_BLUR));
 
                 return;
             }
@@ -412,7 +521,7 @@
         };
         let locationMarker;
 
-        window.L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        global.L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
@@ -420,17 +529,17 @@
             updateMapState(mapConfig.center[0], mapConfig.center[1]);
         }
 
-        addressInput.addEventListener('keyup', handleAddressInput, false);
+        addressInput.addEventListener(EVENT_KEYUP, handleAddressInput, false);
         addressInput.addEventListener('focus', preventFormSubmission, false);
-        addressInput.addEventListener('blur', enableFormSubmission, false);
+        addressInput.addEventListener(EVENT_BLUR, enableFormSubmission, false);
         searchBtn.addEventListener('click', handleAddressInput, false);
-        longitudeInput.addEventListener('keyup', handleLongitudeInput, false);
-        longitudeInput.addEventListener('blur', correctNotation, false);
-        latitudeInput.addEventListener('keyup', handleLatitudeInput, false);
-        latitudeInput.addEventListener('blur', correctNotation, false);
+        longitudeInput.addEventListener(EVENT_KEYUP, handleLongitudeInput, false);
+        longitudeInput.addEventListener(EVENT_BLUR, correctNotation, false);
+        latitudeInput.addEventListener(EVENT_KEYUP, handleLatitudeInput, false);
+        latitudeInput.addEventListener(EVENT_BLUR, correctNotation, false);
         map.on('click', handleOnMapClick);
 
-        if (window.location.protocol === 'https:') {
+        if (global.location.protocol === 'https:') {
             locateMeBtn.addEventListener('click', setCurrentLocation, false);
         } else {
             locateMeBtn.setAttribute('disabled', 'disabled');
@@ -440,4 +549,4 @@
     global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
         [...global.eZ.fieldTypeValidators, validator] :
         [validator];
-})(window);
+})(window, window.document);
