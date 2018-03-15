@@ -95,3 +95,37 @@
         background-color: $ez-ground-base;
     }
 }
+
+.ez-modal--version-draft-conflict {
+    .modal-header {
+        background: $ez-color-base-pale;
+        border-bottom: none;
+
+        .modal-title {
+            font-size: 1.5rem;
+        }
+
+        .close {
+            margin-top: -.5625rem;
+        }
+    }
+
+    .modal-body {
+        padding: 2rem;
+        background-color: $ez-ground-base-medium;
+        border-radius: 0 0 .25rem .25rem;
+
+        .ez-modal-body__main {
+            margin-bottom: 1.5rem;
+
+            .ez-modal-body__main-content {
+                margin-bottom: 0;
+            }
+        }
+
+        .ez-table-header,
+        .ez-table__draft-conflict {
+            margin-bottom: 0;
+        }
+    }
+}
