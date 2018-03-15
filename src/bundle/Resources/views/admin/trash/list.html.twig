@@ -59,16 +59,17 @@
                         {% else %}
                             {% for key, form in form_trash_item_restore.trash_items %}
                                 {% set trash_item = trash_items[key] %}
+                                {% set is_parent_in_trash = trash_item.parentInTrash %}
                                 <tr>
                                     <td>
                                         {{ form_widget(form, {attr: {
-                                            'data-is-parent-in-trash': trash_item.isParentInTrash() ? '1': '0'
+                                            'data-is-parent-in-trash': is_parent_in_trash ? '1': '0'
                                         }}) }}
                                     </td>
                                     <td>{{ ez_content_name(trash_item.location.contentInfo) }}</td>
                                     <td>{{ trash_item.contentType.name }}</td>
                                     <td>
-                                        {% if not trash_item.parentInTrash %}
+                                        {% if not is_parent_in_trash %}
                                             {% include 'EzPlatformAdminUiBundle:parts:path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
                                         {% else %}
                                             <em>{{ 'trash.item.ancesor_in_trash'|trans|desc('Ancestor is in the Trash') }}</em>
