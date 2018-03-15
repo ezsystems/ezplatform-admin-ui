@@ -71,12 +71,7 @@
             const invalidLatitude = allEmptyOrFilledResult.invalidInputType === POSITION_TYPE_LATITUDE;
 
             if (latResult.isError || (!isNativeEvent && invalidLatitude)) {
-                if (invalidLatitude && !latResult.isError) {
-                    latResult.isError = true;
-                    latResult.errorMessage = allEmptyOrFilledResult.errorMessage;
-                }
-
-                latInput.dispatchEvent(new Event('showLatitudeError'));
+                return false;
             } else if (!isNativeEvent && allEmptyOrFilledResult.invalidInputType === POSITION_TYPE_LONGITUDE) {
                 lonResult.isError = true;
                 lonResult.errorMessage = allEmptyOrFilledResult.errorMessage;
@@ -108,12 +103,7 @@
             const invalidLongitude = allEmptyOrFilledResult.invalidInputType === POSITION_TYPE_LONGITUDE;
 
             if (lonResult.isError || (!isNativeEvent && invalidLongitude)) {
-                if (invalidLongitude && !lonResult.isError) {
-                    lonResult.isError = true;
-                    lonResult.errorMessage = allEmptyOrFilledResult.errorMessage;
-                }
-
-                lonInput.dispatchEvent(new Event('showLongitudeError'));
+                return false;
             } else if (!isNativeEvent && allEmptyOrFilledResult.invalidInputType === POSITION_TYPE_LATITUDE) {
                 latResult.isError = true;
                 latResult.errorMessage = allEmptyOrFilledResult.errorMessage;
@@ -153,32 +143,6 @@
                 isError: lonInputFilledlatInputEmpty || latInputFilledlonInputEmpty,
                 invalidInputType,
                 errorMessage
-            };
-        }
-
-        /**
-         * Displays the longitude input error
-         *
-         * @method showLongitudeError
-         * @returns {Object}
-         */
-        showLongitudeError() {
-            return {
-                isError: true,
-                errorMessage: global.eZ.errors.provideLongitudeValue
-            };
-        }
-
-        /**
-         * Displays the latitude input error
-         *
-         * @method showLatitudeError
-         * @returns {Object}
-         */
-        showLatitudeError() {
-            return {
-                isError: true,
-                errorMessage: global.eZ.errors.provideLatitudeValue
             };
         }
 
@@ -263,14 +227,6 @@
         }, {
             isValueValidator: false,
             selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
-            positionType: POSITION_TYPE_LONGITUDE,
-            eventName: 'showLongitudeError',
-            callback: 'showLongitudeError',
-            errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-            invalidStateSelectors: [SELECTOR_LON_FIELD]
-        },{
-            isValueValidator: false,
-            selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
             eventName: EVENT_KEYUP,
             callback: 'validateLongitudeOnEnter',
             errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
@@ -290,14 +246,6 @@
             errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
             invalidStateSelectors: [SELECTOR_LAT_FIELD]
         }, {
-            isValueValidator: false,
-            selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
-            positionType: POSITION_TYPE_LATITUDE,
-            eventName: 'showLatitudeError',
-            callback: 'showLatitudeError',
-            errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-            invalidStateSelectors: [SELECTOR_LAT_FIELD]
-        },{
             isValueValidator: false,
             selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
             eventName: EVENT_KEYUP,
