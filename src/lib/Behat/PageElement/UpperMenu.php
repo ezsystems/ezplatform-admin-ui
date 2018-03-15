@@ -18,8 +18,8 @@ class UpperMenu extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'menuButton' => '.nav-link',
-            'submenuButton' => '.navbar-expand-lg .nav-link',
+            'menuButton' => '.ez-main-nav .nav-link',
+            'submenuButton' => '.ez-main-sub-nav .nav-link',
         ];
     }
 
