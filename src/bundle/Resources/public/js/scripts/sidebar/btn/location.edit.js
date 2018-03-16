@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function (global, doc, $) {
     const editActions = doc.querySelector('.ez-extra-actions--edit');
     const btns = [...editActions.querySelectorAll('.form-check [type="radio"]')];
     const form = editActions.querySelector('form');
@@ -31,4 +31,4 @@
     };
 
     btns.forEach(btn => btn.addEventListener('change', changeHandler, false));
-})(window, document);
+})(window, document, window.jQuery);

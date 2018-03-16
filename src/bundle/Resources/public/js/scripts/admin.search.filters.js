@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function (global, doc, $) {
     const filterBtn = doc.querySelector('.ez-btn--filter');
     const filters = doc.querySelector('.ez-filters');
     const clearBtn = filters.querySelector('.ez-btn-clear');
@@ -156,4 +156,4 @@
     listGroupsTitle.forEach(group => group.addEventListener('click', toggleGroupState, false));
     contentTypeCheckboxes.forEach(checkbox => checkbox.addEventListener('change', filterByContentType, false));
     selectBtns.forEach(btn => btn.addEventListener('click', setSelectedDateRange, false));
-})(window, document);
+})(window, document, window.jQuery);

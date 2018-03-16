@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function (global, doc, $) {
     const listContainers = [...doc.querySelectorAll('.ez-sil')];
     const mfuContainer = doc.querySelector('#ez-mfu');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
@@ -91,4 +91,4 @@
             totalCount: subItemsList.ChildrenCount
         }), container);
     });
-})(window, window.document);
+})(window, window.document, window.jQuery);
