@@ -1,11 +1,8 @@
-(function () {
-    var url = document.location.toString();
-    if (url.match('#')) {
-        $('.ez-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
-    }
+(function (global, doc, $) {
+    $('.ez-tabs a[href="#' + global.location.hash.split('#')[1] + '"]').tab('show');
 
     // Change hash for page-reload
     $('.ez-tabs a').on('shown.bs.tab', function (e) {
-        window.location.hash = e.target.hash + '#tab';
+        global.location.hash = e.target.hash + '#tab';
     })
-})();
+})(window, document, window.jQuery);

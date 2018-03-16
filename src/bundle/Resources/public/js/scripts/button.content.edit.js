@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function (global, doc, $) {
     const FORM_EDIT = 'form.ez-edit-content-form';
     const editVersion = (event) => {
         const versionEditForm = doc.querySelector(FORM_EDIT);
@@ -47,4 +47,4 @@
     };
 
     [...doc.querySelectorAll('.ez-btn--content-edit')].forEach(button => button.addEventListener('click', editVersion, false));
-})(window, document);
+})(window, document, window.jQuery);
