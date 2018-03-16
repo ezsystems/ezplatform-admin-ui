@@ -56,7 +56,7 @@
 {%- block search_type_choice_widget_options -%}
     {%- for group_label, choice in options -%}
         <li class="ez-content-type-selector__item">
-            {{ form_widget(form[choice.value]) }}
+            {{ form_widget(form[choice.value], {'attr': {'data-name': choice.label}, 'label_attr': {'class': 'checkbox-inline'}}) }}
         </li>
     {%- endfor -%}
 {%- endblock -%}

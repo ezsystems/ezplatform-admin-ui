@@ -1,5 +1,7 @@
 {% form_theme form '@EzPlatformAdminUi/form_fields.html.twig'  %}
 
+{% trans_default_domain 'search' %}
+
 {{ form_start(form) }}
 <div class="input-group">
     {{ form_widget(form.query) }}
@@ -17,10 +19,10 @@
             {{ 'search.filter'|trans|desc('Filter') }}</button>
     </span>
 </div>
-<div class="ez-filters ez-filters--collapsed mt-4 pt-2">
+<div class="ez-filters mt-4 pt-2{% if not filters_expanded %} ez-filters--collapsed{% endif %}">
     <div class="ez-filters__item ez-filters__item--content-type">
-        <label class="ez-filters__item-label">{{ 'search.content.type'|trans|desc('Content type:') }}</label>
-        <select class="form-control ez-filters__select">
+        <label class="ez-filters__item-label">{{ 'search.content.type'|trans|desc('Content Type:') }}</label>
+        <select class="form-control ez-filters__select ez-filters__select--content-type">
             <option class="ez-filters__option ez-filters__option--hidden" data-default="{{ 'search.any.content.type'|trans|desc('Any content type') }}" value="">{{ 'search.any.content.type'|trans|desc('Any content type') }}</option>
         </select>
         {{ form_widget(form.content_types, {'attr': {'class': 'ez-filters__select'}}) }}

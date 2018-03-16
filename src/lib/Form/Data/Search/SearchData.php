@@ -200,4 +200,17 @@ class SearchData
     {
         return $this->created;
     }
+
+    /**
+     * @return bool
+     */
+    public function isFiltered(): bool
+    {
+        $contentTypes = $this->getContentTypes();
+        $section = $this->getSection();
+        $lastModified = $this->getLastModified();
+        $created = $this->getCreated();
+
+        return !empty($contentTypes) || null !== $section || !empty($lastModified) || !empty($created);
+    }
 }
