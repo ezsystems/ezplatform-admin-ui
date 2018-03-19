@@ -144,3 +144,8 @@ button {
     max-height: 60vh;
     overflow: auto;
 }
+
+.ez-prevent-click,
+.ez-prevent-click * {
+    pointer-events: none !important;
+}
