@@ -285,7 +285,7 @@
      * @param {Function} notFoundCallback
      */
     const searchByAddress = (value, foundCallback, notFoundCallback) => {
-        fetch(`http://nominatim.openstreetmap.org/search?format=json&q=${global.encodeURI(value)}&zoom=15`)
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${global.encodeURI(value)}&zoom=15`)
             .then(response => response.json())
             .then(locations => {
                 if (locations.length) {
@@ -469,8 +469,8 @@
         };
         let locationMarker;
 
-        global.L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        global.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
         if (areCoordsSet) {
