@@ -1,14 +1,16 @@
 {% trans_default_domain 'locationview' %}
 {% form_theme form '@EzPlatformAdminUi/form_fields.html.twig' '@EzPlatformAdminUi/content/tab/translations/translation_add_form_fields.html.twig' %}
 
-<div class="modal fade ez-translation" id="add-translation-modal" tabindex="-1" role="dialog">
+<div class="modal fade ez-modal ez-translation" id="add-translation-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         {{ form_start(form, {'action': path('ezplatform.translation.add')}) }}
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ 'tab.translations.add.title'|trans|desc('Create new translation') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'translation.modal_close'|trans|desc('Close') }}">
-                    <span aria-hidden="true">&times;</span>
+                    <svg class="ez-icon ez-icon--medium" aria-hidden="true">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
+                    </svg>
                 </button>
             </div>
             <div class="modal-body">

@@ -50,14 +50,16 @@
 
 .ez-side-menu,
 .ez-context-menu {
-    .ez-icon {
-        width: 1.875rem;
-        height: 1.875rem;
-        margin-bottom: .1875rem;
+    .ez-sticky-container {
+        .ez-icon {
+            width: 1.875rem;
+            height: 1.875rem;
+            margin-bottom: .1875rem;
+        }
     }
 }
 
-.ez-icon-search-button{
+.ez-icon-search-button {
     fill: $ez-white;
     height: 1rem;
     width: 1rem;
@@ -201,5 +203,13 @@
 .ez-alert--info {
     .ez-icon-warning {
         fill: $ez-secondary-ground-medium;
+    }
+}
+
+.ez-modal {
+    .modal-header {
+        .ez-icon {
+            fill: $ez-black;
+        }
     }
 }
