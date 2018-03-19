@@ -1,0 +1,224 @@
+{# Template blocks to be used for fieldDefinition edition #}
+{# Block naming convention is <fieldTypeIdentifier>_field_definition_edit #}
+{# Following variables are passed:
+ # - \EzSystems\RepositoryForms\Data\FieldDefinitionData data Data object for current fieldDefinition.
+ # - \Symfony\Component\Form\FormView form Field definition form.
+ # - string languageCode
+ #}
+
+{# @var data \EzSystems\RepositoryForms\Data\FieldDefinitionData #}
+{# @var form \Symfony\Component\Form\FormView #}
+{% block ezbinaryfile_field_definition_edit %}
+    <div class="ezbinaryfile-validator max-file-size{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.maxSize) -}}
+    </div>
+{% endblock %}
+
+{% block ezboolean_field_definition_edit %}
+    <div class="ezboolean-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.defaultValue) -}}
+    </div>
+{% endblock %}
+
+{% block ezcountry_field_definition_edit %}
+    <div class="ezcountry-settings is-multiple{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.isMultiple) -}}
+    </div>
+
+    <div class="ezcountry-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.defaultValue) -}}
+    </div>
+{% endblock %}
+
+{% block ezdate_field_definition_edit %}
+    <div class="ezdate-settings default-type{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.defaultType, {'label_attr': {'class': 'radio-inline'}}) -}}
+    </div>
+{% endblock %}
+
+{% block ezdatetime_field_definition_edit %}
+    <div class="ezdatetime-settings use-seconds{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.useSeconds, {'label_attr': {'class': 'checkbox-inline'}}) -}}
+    </div>
+
+    <div class="ezdatetime-settings default-type{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.defaultType, {'label_attr': {'class': 'radio-inline'}}) -}}
+    </div>
+
+    <div class="ezdatetime-settings date-interval{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.dateInterval, {'label_attr': {'class': 'col-form-legend'}}) -}}
+    </div>
+{% endblock %}
+
+{% block eztime_field_definition_edit %}
+    <div class="eztime-settings use-seconds{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.useSeconds, {'label_attr': {'class': 'checkbox-inline'}}) -}}
+    </div>
+
+    <div class="eztime-settings default-type{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.defaultType, {'label_attr': {'class': 'radio-inline'}}) -}}
+    </div>
+{% endblock %}
+
+{% block ezfloat_field_definition_edit %}
+    <div class="ezfloat-validator min-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.minValue) -}}
+    </div>
+
+    <div class="ezfloat-validator max-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.maxValue) -}}
+    </div>
+
+    <div class="ezfloat-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.defaultValue) -}}
+    </div>
+{% endblock %}
+
+{% block ezimage_field_definition_edit %}
+    <div class="ezimage-validator max-file-size{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.maxSize) -}}
+    </div>
+{% endblock %}
+
+{% block ezinteger_field_definition_edit %}
+    <div class="ezinteger-validator min-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.minValue) -}}
+    </div>
+
+    <div class="ezinteger-validator max-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.maxValue) -}}
+    </div>
+
+    <div class="ezinteger-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.defaultValue) -}}
+    </div>
+{% endblock %}
+
+{% block ezisbn_field_definition_edit %}
+    <div class="ezisbn-settings is-isbn13{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.isISBN13) -}}
+    </div>
+
+    <div class="ezisbn-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.defaultValue) -}}
+    </div>
+{% endblock %}
+
+{% block ezmedia_field_definition_edit %}
+    <div class="ezmedia-validator max-file-size{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.maxSize) -}}
+    </div>
+
+    <div class="ezmedia-settings media-type{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.mediaType) -}}
+    </div>
+{% endblock %}
+
+{% block ezobjectrelation_field_definition_edit %}
+    <div class="ezobjectrelation-settings selection-root">
+        {{- form_row(form.selectionRoot) -}}
+
+        <div class="mt-1">
+            <button data-universaldiscovery-title="{{"field_definition.ezobjectrelation.selection_root_udw_title"|trans({}, "ezrepoforms_content_type")}}"
+                    class="ez-button-tree pure-button ez-font-icon ez-button ez-relation-pick-root-button btn btn-secondary btn--udw-relation-default-location"
+                    data-relation-root-input-selector="#{{form.selectionRoot.vars.id}}"
+                    data-relation-selected-root-name-selector="#{{form.selectionRoot.vars.id}}-selected-root-name"
+                    data-starting-location-id="{{ admin_ui_config.universalDiscoveryWidget.startingLocationId|default(1) }}"
+                    >{{"field_definition.ezobjectrelation.selection_root_udw_button"|trans({}, "ezrepoforms_content_type")}}</button>
+        </div>
+        <div id="{{form.selectionRoot.vars.id}}-selected-root-name">
+            {% if form.selectionRoot.vars.value is not empty %}
+                {{ render( controller( "ez_content:viewLocation", {'locationId': form.selectionRoot.vars.value, 'viewType': '_platformui_content_name'} ) ) }}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="ezobjectrelationlist-settings selection-content-types">
+        {{- form_row(form.selectionContentTypes) -}}
+    </div>
+{% endblock %}
+
+{% block ezobjectrelationlist_field_definition_edit %}
+    <div class="ezobjectrelationlist-settings selection-default-location">
+        {{- form_row(form.selectionDefaultLocation) -}}
+
+        <div class="mt-1">
+            <button data-universaldiscovery-title="{{"field_definition.ezobjectrelationlist.selection_root_udw_title"|trans({}, "ezrepoforms_content_type")}}"
+                    class="ez-button-tree pure-button ez-font-icon ez-button ez-relation-pick-root-button btn btn-secondary btn--udw-relation-default-location"
+                    data-relation-root-input-selector="#{{form.selectionDefaultLocation.vars.id}}"
+                    data-relation-selected-root-name-selector="#{{form.selectionDefaultLocation.vars.id}}-selected-root-name"
+                    data-starting-location-id="{{ admin_ui_config.universalDiscoveryWidget.startingLocationId|default(1) }}"
+                    >{{"field_definition.ezobjectrelationlist.selection_root_udw_button"|trans({}, "ezrepoforms_content_type")}}</button>
+        </div>
+        <div id="{{form.selectionDefaultLocation.vars.id}}-selected-root-name">
+            {% if form.selectionDefaultLocation.vars.value is not empty %}
+                {{ render( controller( "ez_content:viewLocation", {'locationId': form.selectionDefaultLocation.vars.value, 'viewType': '_platformui_content_name'} ) ) }}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="ezobjectrelationlist-settings selection-content-types">
+        {{- form_row(form.selectionContentTypes) -}}
+    </div>
+
+    <div class="ezobjectrelationlist-settings selection-limit">
+        {{- form_row(form.selectionLimit) -}}
+    </div>
+{% endblock %}
+
+{% block ezpage_field_definition_edit %}
+    <div class="ezpage-settings default-layout{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.defaultLayout) -}}
+    </div>
+{% endblock %}
+
+{% block ezselection_field_definition_edit %}
+    <div class="ezselection-settings is-multiple{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.isMultiple) -}}
+    </div>
+
+    <div class="ezselection-settings options{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{ form_label(form.options) }}
+        {{ form_errors(form.options) }}
+        <ul class="ezselection-settings-option-list ez-selection-table list-unstyled" data-selection-buttons=".ezselection-settings-option-remove">
+        {% for option in form.options %}
+            <li class="ezselection-settings-option-value ez-selection-table-row mb-2 d-flex align-items-center">
+                <input type="checkbox" class="ezselection-settings-option-checkbox ez-selection-table-checkbox">
+                {{ form_errors(option) }}
+                {{ form_widget(option, { 'attr': { 'class': 'form-control ml-1 mb-0'}}) }}
+            </li>
+        {% endfor %}
+        </ul>
+        <script type="text/template" class="ezselection-settings-option-value-prototype" data-ezselection-option-input-name="{{ form.options.vars.prototype.vars.full_name }}" data-ezselection-option-input-id="{{ form.options.vars.prototype.vars.id }}">
+            <li class="ezselection-settings-option-value ez-selection-table-row mb-2 d-flex align-items-center">
+                <input type="checkbox" class="ezselection-settings-option-checkbox ez-selection-table-checkbox">
+                {{ form_widget(form.options.vars.prototype, { 'attr': { 'class': 'form-control ml-1 mb-0'}}) }}
+            </li>
+        </script>
+
+        <div class="ezselection-settings-toolbar">
+            <button type="button" class="ezselection-settings-option-add ez-font-icon ez-button btn btn-secondary ez-button-add pure-button">{{"field_definition.ezselection.add_option"|trans({}, "ezrepoforms_content_type")}}</button>
+            <button type="button" class="ezselection-settings-option-remove ez-font-icon ez-button btn btn-danger ez-button-delete pure-button" disabled>{{"field_definition.ezselection.remove_selected_options"|trans({}, "ezrepoforms_content_type")}}</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block ezstring_field_definition_edit %}
+    <div class="ezstring-validator min-length{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.minLength) -}}
+    </div>
+
+    <div class="ezstring-validator max-length{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.maxLength) -}}
+    </div>
+
+    <div class="ezstring-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.defaultValue) -}}
+    </div>
+{% endblock %}
+
+{% block eztext_field_definition_edit %}
+    <div class="eztext-settings text-rows{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.textRows) -}}
+    </div>
+{% endblock %}

@@ -41,28 +41,34 @@
                     {{ 'role_assignment.view.add.panel.limitations.title'|trans|desc('Limitations') }}
                 </div>
                 <div class="card-body ez-limitations">
-                    {{ form_widget(form.limitation_type.none, {'label': 'limitation_type.none'|trans|desc('No limitations'), 'attr': {'class': 'ez-limitations__radio'}, 'label_attr': {'class': 'ez-limitations__label'}}) }}
-                    {% if not form.limitation_type.section.vars.checked %}
-                        {% set sections_attr = {'attr': {'disabled': 'disabled'}} %}
-                    {% else %}
-                        {% set sections_attr = {} %}
-                    {% endif %}
-                    {{ form_widget(form.limitation_type.section, {'label': 'limitation_type.section'|trans|desc('Sections'), 'attr': {'class': 'ez-limitations__radio', 'data-disable-selector': '#' ~ form.sections.vars.id}, 'label_attr': {'class': 'ez-limitations__label'}}) }}
-                    {{ form_widget(form.sections, sections_attr) }}
-                    {{ form_widget(form.limitation_type.location, {'label': 'limitation_type.subtree'|trans|desc('Subtree'), 'attr': {'class': 'ez-limitations__radio', 'data-disable-selector': '#role_assignment_create_locations_select_content'}, 'label_attr': {'class': 'ez-limitations__label'}}) }}
-                    {{ form_widget(form.locations) }}
-                    <button id="role_assignment_create_locations_select_content" class="btn btn-secondary ez-btn--select-subtree"{% if not form.limitation_type.location.vars.checked %} disabled{% endif %}>
-                        <svg class="ez-icon ez-icon--select-subtree ez-icon--medium ez-icon--light">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#relations"></use>
-                        </svg>
-                        {{ 'locations.select_subtree'|trans|desc('Select Subtree') }}
-                    </button>
-                    <ul class="ez-limitations__selected-subtree mt-4">
-                        {% for location in form.locations.vars.data %}
-                            <li>{{ location.contentInfo.name }}</li>
-                        {% endfor %}
-                    </ul>
+                    {{ form_widget(form.limitation_type.none, {'label': 'limitation_type.none'|trans|desc('No limitations'), 'attr': {'class': 'ez-limitations__radio'}, 'label_attr': {'class': 'ez-limitations__label radio-inline'}}) }}
+                    <div class="ez-limitations__item">
+                        {% if not form.limitation_type.section.vars.checked %}
+                            {% set sections_attr = {'attr': {'disabled': 'disabled'}} %}
+                        {% else %}
+                            {% set sections_attr = {} %}
+                        {% endif %}
+                        {{ form_widget(form.limitation_type.section, {'label': 'limitation_type.section'|trans|desc('Sections'), 'attr': {'class': 'ez-limitations__radio', 'data-disable-selector': '#' ~ form.sections.vars.id}, 'label_attr': {'class': 'ez-limitations__label radio-inline'}}) }}
+                        {{ form_widget(form.sections, sections_attr) }}
+                    </div>
+                    <div class="ez-limitations__item">
+                        {{ form_widget(form.limitation_type.location, {'label': 'limitation_type.subtree'|trans|desc('Subtree'), 'attr': {'class': 'ez-limitations__radio', 'data-disable-selector': '#role_assignment_create_locations_select_content'}, 'label_attr': {'class': 'ez-limitations__label radio-inline'}}) }}
+                        {{ form_widget(form.locations) }}
+                        <div class="ez-limitations__item-subtree">
+                            <button id="role_assignment_create_locations_select_content" class="btn btn-secondary ez-btn--select-subtree"{% if not form.limitation_type.location.vars.checked %} disabled{% endif %}>
+                                <svg class="ez-icon ez-icon--select-subtree ez-icon--medium ez-icon--light">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#relations"></use>
+                                </svg>
+                                {{ 'locations.select_subtree'|trans|desc('Select Subtree') }}
+                            </button>
+                            <ul class="ez-limitations__selected-subtree mt-4">
+                                {% for location in form.locations.vars.data %}
+                                    <li>{{ location.contentInfo.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
