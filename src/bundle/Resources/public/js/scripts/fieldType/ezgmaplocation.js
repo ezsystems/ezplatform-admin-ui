@@ -212,6 +212,32 @@
                 errorMessage: global.eZ.errors.addressNotFound
             };
         }
+
+        /**
+         * Validates the address input value.
+         *
+         * @method validateAddress
+         * @param {Event} event
+         * @returns {Object}
+         */
+        validateAddress(event) {
+            const field = event.currentTarget.closest(SELECTOR_FIELD);
+            const latInput = field.querySelector(SELECTOR_LAT_INPUT);
+            const lonInput = field.querySelector(SELECTOR_LON_INPUT);
+
+            if (!event.currentTarget.value.trim().length) {
+                return { isError: false };
+            }
+
+            if (!latInput.value.trim().length || !lonInput.value.trim().length) {
+                return {
+                    isError: true,
+                    errorMessage: global.eZ.errors.addressNotFound
+                }
+            }
+
+            return { isError: false };
+        }
     }
 
     const validator = new EzGMapLocationValidator({
@@ -271,6 +297,11 @@
             eventName: EVENT_CANCEL_ERRORS,
             callback: 'cancelErrors',
             errorNodeSelectors: [SELECTOR_LABEL_WRAPPER]
+        }, {
+            selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
+            eventName: 'checkValidity',
+            callback: 'validateAddress',
+            errorNodeSelectors: ['.ez-data-source__field--address .ez-data-source__label-wrapper']
         }],
     });
 
