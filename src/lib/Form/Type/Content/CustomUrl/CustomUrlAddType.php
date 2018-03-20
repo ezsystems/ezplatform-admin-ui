@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl;
 use eZ\Publish\API\Repository\LanguageService;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener;
+use EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
@@ -32,19 +33,25 @@ class CustomUrlAddType extends AbstractType
     /** @var \EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener */
     private $buildPathFromRootListener;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener */
+    private $checkboxIfRootLocationListener;
+
     /**
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
      * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener $addLanguageFieldBasedOnContentListener
      * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener $buildPathFromRootListener
+     * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener $checkboxIfRootLocationListener
      */
     public function __construct(
         LanguageService $languageService,
         AddLanguageFieldBasedOnContentListener $addLanguageFieldBasedOnContentListener,
-        BuildPathFromRootListener $buildPathFromRootListener
+        BuildPathFromRootListener $buildPathFromRootListener,
+        DisableSiteRootCheckboxIfRootLocationListener $checkboxIfRootLocationListener
     ) {
         $this->languageService = $languageService;
         $this->addLanguageFieldBasedOnContentListener = $addLanguageFieldBasedOnContentListener;
         $this->buildPathFromRootListener = $buildPathFromRootListener;
+        $this->checkboxIfRootLocationListener = $checkboxIfRootLocationListener;
     }
 
     /**
@@ -105,6 +112,10 @@ class CustomUrlAddType extends AbstractType
         $builder->addEventListener(FormEvents::PRE_SUBMIT, [
             $this->buildPathFromRootListener,
             'onPreSubmitData',
+        ]);
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, [
+            $this->checkboxIfRootLocationListener,
+            'onPreSetData',
         ]);
     }
 }
