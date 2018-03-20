@@ -4,7 +4,6 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ 'content_type.modal.title'|trans|desc('Please confirm') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg class="ez-icon ez-icon--medium" aria-hidden="true">
                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
@@ -12,11 +11,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>{{ 'content_type.field_definitions.modal.message'|trans|desc('Do you want to delete selected field definitions?') }}</p>
+                <p class="ez-modal-body__main">{{ 'content_type.field_definitions.modal.message'|trans|desc('Do you want to delete selected field definitions?') }}</p>
             </div>
             <div class="modal-footer">
-                {{ form_widget(form.removeFieldDefinition, { attr: { class: 'btn btn-danger'}, label: 'modal.delete'|trans|desc('Delete')}) }}
                 <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">{{ 'modal.cancel'|trans|desc('Cancel') }}</button>
+                {{ form_widget(form.removeFieldDefinition, { attr: { class: 'btn btn-danger'}, label: 'modal.delete'|trans|desc('Delete')}) }}
             </div>
         </div>
     </div>
