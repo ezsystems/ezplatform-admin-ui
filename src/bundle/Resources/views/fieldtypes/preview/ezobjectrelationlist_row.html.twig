@@ -1,5 +1,12 @@
 <td>
-    <a href="{{ path('_ezpublishLocation', { 'locationId': locationId } ) }}">{{ content.getName() }}</a>
+    <a {% if not content.contentInfo.trashed %}
+        href="{{ path('_ezpublishLocation', { 'locationId': locationId } ) }}"
+    {% endif %}>
+        {{ content.getName() }}
+        {% if content.contentInfo.trashed %}
+            <em>({{ 'content.in_trash'|trans(domain='content')|desc('In Trash') }})</em>
+        {% endif %}
+    </a>
 </td>
 <td>
     {{ contentType.getName() }}

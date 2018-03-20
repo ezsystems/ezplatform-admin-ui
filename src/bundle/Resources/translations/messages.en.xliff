@@ -41,6 +41,11 @@
         <target state="new">User Preferences</target>
         <note>key: breadcrumb.user_preferences</note>
       </trans-unit>
+      <trans-unit id="fb19ae886e63bac3aa3b851ac00aae8a3b777992" resname="content.in_trash">
+        <source>In Trash</source>
+        <target state="new">In Trash</target>
+        <note>key: content.in_trash</note>
+      </trans-unit>
       <trans-unit id="fe1c876b1a9bcde155f03227bce4ae4fbd54c24f" resname="custom_url_alias_add_form.add">
         <source>Create</source>
         <target state="new">Create</target>
