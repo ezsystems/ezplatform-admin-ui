@@ -33,7 +33,7 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('query', CoreSearchType::class)
+            ->add('query', CoreSearchType::class, ['required' => false])
             ->add('page', HiddenType::class)
             ->add('limit', HiddenType::class)
             ->add('section', SectionChoiceType::class, [

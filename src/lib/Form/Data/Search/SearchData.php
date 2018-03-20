@@ -25,11 +25,7 @@ class SearchData
     /** @var int */
     private $page;
 
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     */
+    /** @var string */
     private $query;
 
     /** @var \eZ\Publish\API\Repository\Values\Content\Section */
