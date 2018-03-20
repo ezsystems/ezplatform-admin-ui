@@ -85,18 +85,32 @@
 
 .ez-modal--select-modified-range,
 .ez-modal--select-created-range {
+    .modal-dialog {
+        border-radius: .25rem;
+        background-color: $ez-ground-base-medium;
+    }
+
     .modal-header {
-        background-color: $ez-ground-base-dark;
+        background-color: $ez-color-base-pale;
+        border-bottom: none;
+
+        .modal-title {
+            font-size: 1.5rem;
+        }
+
+        .close {
+            margin-top: -.5625rem;
+        }
     }
 
     .modal-body {
         display: flex;
         padding: 2rem;
-        background-color: $ez-ground-base;
         justify-content: space-between;
     }
+    
     .modal-footer  {
-        background-color: $ez-ground-base;
+        border-top: none;
     }
 }
 
