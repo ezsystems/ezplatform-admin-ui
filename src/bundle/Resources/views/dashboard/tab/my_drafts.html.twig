@@ -17,7 +17,7 @@
             <tr>
                 <td>{{ row.name }}</td>
                 <td>{{ row.type }}</td>
-                <td>{{ row.language }}</td>
+                <td>{{ admin_ui_config.languages.map[row.language].name }}</td>
                 <td>{{ row.version }}</td>
                 <td>{{ row.modified|date('M d, Y h:iA') }}</td>
                 <td class="text-center">
