@@ -41,6 +41,9 @@ class BuildPathFromRootListener
         $data = $event->getData();
         if (!array_key_exists('site_root', $data) || false === (bool)$data['site_root']) {
             $location = $this->locationService->loadLocation($data['location']);
+            if (1 >= $location->depth) {
+                return;
+            }
             $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
             $urlAlias = $this->urlAliasService->reverseLookup($parentLocation);
             $data['path'] = $urlAlias->path . '/' . $data['path'];
