@@ -13,32 +13,40 @@
 {% endblock %}
 
 {% block details %}
-    {% if baseLanguage is defined and baseLanguage is not null %}
-        <h2 class="text-muted">{{ 'editing_in_language_based_on'|trans({'%contentName%': content.name, '%languageName%': language.name, '%baseLanguageName%': baseLanguage.name})|desc('Editing - %contentName% in %languageName% based on %baseLanguageName%') }}</h2>
-    {% else %}
-        <h2 class="text-muted">{{ 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing - %contentName% in %languageName%') }}</h2>
-    {% endif %}
-    <h1>
-        <svg class="ez-icon ez-icon-{{ contentType.identifier }}">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ contentType.identifier }}"></use>
-        </svg>
-        {{ content.name }}
-    </h1>
+    <div class="container mt-5 px-5">
+        {% if baseLanguage is defined and baseLanguage is not null %}
+            <h2 class="ez-content-item-status">{{ 'editing_in_language_based_on'|trans({'%contentName%': content.name, '%languageName%': language.name, '%baseLanguageName%': baseLanguage.name})|desc('Editing - %contentName% in %languageName% based on %baseLanguageName%') }}</h2>
+        {% else %}
+            <h2 class="ez-content-item-status">{{ 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing - %contentName% in %languageName%') }}</h2>
+        {% endif %}
+        <h1>
+            <svg class="ez-icon ez-icon-{{ contentType.identifier }}">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ contentType.identifier }}"></use>
+            </svg>
+            {{ content.name }}
+        </h1>
 
-    <div class="small">
-        {{ contentType.name }} / {{ 'created_by'|trans({'%name%': 'Administrator'})|desc('Created by %name%') }} / {{ content.versionInfo.creationDate|localizeddate('medium', 'medium', app.request.locale) }} / {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }}, {{ 'location_id'|trans({'%locationId%': locationId})|desc('Location ID: %locationId%') }}
+        <div class="small">
+            {{ contentType.name }} / {{ 'created_by'|trans({'%name%': 'Administrator'})|desc('Created by %name%') }} / {{ content.versionInfo.creationDate|localizeddate('medium', 'medium', app.request.locale) }} / {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }}, {{ 'location_id'|trans({'%locationId%': locationId})|desc('Location ID: %locationId%') }}
+        </div>
+        {# @todo remove if statement once getDescription() bug is resolved in kernel #}
+        {% if contentType.descriptions is not empty %}
+            <div class="small text-muted">{{ contentType.description }}</div>
+        {% endif %}
     </div>
-    {# @todo remove if statement once getDescription() bug is resolved in kernel #}
-    {% if contentType.descriptions is not empty %}
-        <div class="small text-muted">{{ contentType.description }}</div>
-    {% endif %}
 {% endblock %}
 
 {% block form_fields %}
-    {{ parent() }}
-    {{ form_widget(form.publish, {'attr': {'hidden': 'hidden'}}) }}
-    {{ form_widget(form.saveDraft, {'attr': {'hidden': 'hidden'}}) }}
-    {{ form_widget(form.cancel, {'attr': {'hidden': 'hidden'}}) }}
+    <section class="container mt-4 px-5">
+        <div class="card ez-card">
+            <div class="card-body">
+                {{ parent() }}
+                {{ form_widget(form.publish, {'attr': {'hidden': 'hidden'}}) }}
+                {{ form_widget(form.saveDraft, {'attr': {'hidden': 'hidden'}}) }}
+                {{ form_widget(form.cancel, {'attr': {'hidden': 'hidden'}}) }}
+            </div>
+        </div>
+    </section>
 {% endblock %}
 
 {% block right_sidebar %}
