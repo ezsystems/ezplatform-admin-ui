@@ -26,6 +26,7 @@
             confirmLabel: 'Add location',
             title: 'Select location',
             multiple: false,
+            allowContainersOnly: true,
             startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess}
         }), udwContainer);

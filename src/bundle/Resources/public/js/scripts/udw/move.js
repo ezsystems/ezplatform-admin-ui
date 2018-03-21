@@ -24,6 +24,7 @@
             confirmLabel: 'Move to location',
             title: 'Select destination',
             multiple: false,
+            allowContainersOnly: true,
             startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
             restInfo: {token, siteaccess}
         }), udwContainer);

@@ -22,6 +22,7 @@
             confirmLabel: 'Copy to location',
             title: 'Select location',
             multiple: false,
+            allowContainersOnly: true,
             startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
             restInfo: {token, siteaccess}
         }), udwContainer);

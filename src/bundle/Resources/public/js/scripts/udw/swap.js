@@ -22,6 +22,7 @@
             confirmLabel: 'Swap location',
             title: 'Select location to be swapped with',
             multiple: false,
+            allowContainersOnly: true,
             startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess}
         }), udwContainer);
