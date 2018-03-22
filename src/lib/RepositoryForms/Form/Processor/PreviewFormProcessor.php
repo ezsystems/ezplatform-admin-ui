@@ -18,10 +18,12 @@ use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentStruct;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Event\ContentEditEvents;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\RepositoryForms\Data\Content\ContentCreateData;
 use EzSystems\RepositoryForms\Data\Content\ContentUpdateData;
+use EzSystems\RepositoryForms\Data\NewnessCheckable;
 use EzSystems\RepositoryForms\Data\NewnessChecker;
 use EzSystems\RepositoryForms\Event\FormActionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -98,10 +100,9 @@ class PreviewFormProcessor implements EventSubscriberInterface
 
         try {
             $contentDraft = $this->saveDraft($data, $languageCode);
+            $contentLocation = $this->resolveLocation($contentDraft, $referrerLocation, $data);
             $url = $this->urlGenerator->generate('ezplatform.content.preview', [
-                'locationId' => null !== $referrerLocation
-                    ? $referrerLocation->id
-                    : $this->resolveMainLocationId($contentDraft),
+                'locationId' => null !== $contentLocation ? $contentLocation->id : null,
                 'contentId' => $contentDraft->id,
                 'versionNo' => $contentDraft->getVersionInfo()->versionNo,
                 'languageCode' => $languageCode,
@@ -194,19 +195,18 @@ class PreviewFormProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param Content $contentDraft
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $referrerLocation
+     * @param \EzSystems\RepositoryForms\Data\NewnessCheckable $data
      *
-     * @return int
+     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
      */
-    private function resolveMainLocationId(Content $contentDraft)
+    private function resolveLocation(Content $content, ?Location $referrerLocation, NewnessCheckable $data): ?Location
     {
-        $mainLocationId = $contentDraft->contentInfo->mainLocationId;
-
-        if (null === $mainLocationId && !$contentDraft->contentInfo->published) {
-            $parentLocation = $this->locationService->loadParentLocationsForDraftContent($contentDraft->getVersionInfo())[0];
-            $mainLocationId = $parentLocation->id;
+        if ($data->isNew() || (!$content->contentInfo->published && null === $content->contentInfo->mainLocationId)) {
+            return null; // no location exists until new content is published
         }
 
-        return (int) $mainLocationId;
+        return $referrerLocation ?? $this->locationService->loadLocation($content->contentInfo->mainLocationId);
     }
 }

@@ -41,6 +41,11 @@
         <target state="new">Location ID: %locationId%</target>
         <note>key: location_id</note>
       </trans-unit>
+      <trans-unit id="cce4ced380a283ffdecf364aeb5312ee001e6601" resname="parent_location_id">
+        <source>Parent Location ID: %locationId%</source>
+        <target state="new">Parent Location ID: %locationId%</target>
+        <note>key: parent_location_id</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>
