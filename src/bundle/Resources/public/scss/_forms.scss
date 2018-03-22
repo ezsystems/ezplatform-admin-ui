@@ -40,10 +40,22 @@ form:not(.form-inline) {
 }
 
 .ez-form-inline {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+
     .col-form-label,
     .form-control,
     .form-control-label {
         margin-right: .5rem;
+    }
+}
+
+.ez-table--no-border {
+    .ez-form-inline {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
     }
 }
 
