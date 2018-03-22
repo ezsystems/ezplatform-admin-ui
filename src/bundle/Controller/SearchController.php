@@ -129,9 +129,11 @@ class SearchController extends Controller
                 $lastModified = $data->getLastModified();
                 $created = $data->getCreated();
                 $query = new Query();
-                $criteria = [
-                    new Criterion\FullText($queryString),
-                ];
+                $criteria = [];
+
+                if (null !== $queryString) {
+                    $criteria[] = new Criterion\FullText($queryString);
+                }
                 if (null !== $section) {
                     $criteria[] = new Criterion\SectionId($section->id);
                 }
@@ -152,7 +154,10 @@ class SearchController extends Controller
                         [$created['start_date'], $created['end_date']]
                     );
                 }
-                $query->filter = new Criterion\LogicalAnd($criteria);
+                if (!empty($criteria)) {
+                    $query->filter = new Criterion\LogicalAnd($criteria);
+                }
+
                 $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
 
                 $pagerfanta = new Pagerfanta(
