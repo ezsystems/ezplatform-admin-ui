@@ -8,26 +8,37 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\View;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
+use eZ\Publish\Core\MVC\Symfony\View\View;
 use EzSystems\RepositoryForms\Content\View\ContentEditView;
+use EzSystems\RepositoryForms\User\View\UserUpdateView;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ViewParametersListener implements EventSubscriberInterface
 {
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     protected $locationService;
 
+    /** @var \eZ\Publish\API\Repository\UserService */
+    protected $userService;
+
     /**
-     * @param LocationService $locationService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\UserService $userService
      */
-    public function __construct(LocationService $locationService)
+    public function __construct(LocationService $locationService, UserService $userService)
     {
         $this->locationService = $locationService;
+        $this->userService = $userService;
     }
 
     /**
@@ -35,15 +46,25 @@ class ViewParametersListener implements EventSubscriberInterface
      *
      * @return array The event names to listen to
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
-        return [MVCEvents::PRE_CONTENT_VIEW => 'setViewTemplateParameters'];
+        return [
+            MVCEvents::PRE_CONTENT_VIEW => [
+                ['setContentEditViewTemplateParameters', 10],
+                ['setUserUpdateViewTemplateParameters', 5],
+            ],
+        ];
     }
 
     /**
-     * @param PreContentViewEvent $event
+     * @param \eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent $event
+     *
+     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    public function setViewTemplateParameters(PreContentViewEvent $event)
+    public function setContentEditViewTemplateParameters(PreContentViewEvent $event)
     {
         $contentView = $event->getContentView();
 
@@ -51,6 +72,7 @@ class ViewParametersListener implements EventSubscriberInterface
             return;
         }
 
+        /** @var Content $content */
         $content = $contentView->getParameter('content');
         $location = $contentView->hasParameter('location') ? $contentView->getParameter('location') : null;
         $isPublished = null !== $content->contentInfo->mainLocationId && $content->contentInfo->published;
@@ -65,6 +87,45 @@ class ViewParametersListener implements EventSubscriberInterface
                 'parentLocations' => $this->locationService->loadParentLocationsForDraftContent($content->versionInfo),
             ]);
         }
+
+        $contentInfo = $content->versionInfo->contentInfo;
+
+        $this->processCreator($contentInfo, $contentView);
+    }
+
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent $event
+     */
+    public function setUserUpdateViewTemplateParameters(PreContentViewEvent $event)
+    {
+        $contentView = $event->getContentView();
+
+        if (!$contentView instanceof UserUpdateView) {
+            return;
+        }
+
+        /** @var User $user */
+        $user = $contentView->getParameter('user');
+        $contentInfo = $user->versionInfo->contentInfo;
+
+        $this->processCreator($contentInfo, $contentView);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
+     * @param \eZ\Publish\Core\MVC\Symfony\View\View $contentView
+     */
+    private function processCreator(ContentInfo $contentInfo, View $contentView)
+    {
+        try {
+            $creator = $this->userService->loadUser($contentInfo->ownerId);
+        } catch (NotFoundException $exception) {
+            $creator = null;
+        }
+
+        $contentView->addParameters([
+            'creator' => $creator,
+        ]);
     }
 
     /**
@@ -74,6 +135,7 @@ class ViewParametersListener implements EventSubscriberInterface
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Location
      *
+     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
