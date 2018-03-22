@@ -17,7 +17,12 @@
             <tr>
                 <td>{{ row.name }}</td>
                 <td>{{ row.type }}</td>
-                <td>{{ admin_ui_config.languages.map[row.language].name }}</td>
+                <td>
+                    {% for languageCode in row.languageList %}
+                        {{ admin_ui_config.languages.map[languageCode].name }}
+                        <br/>
+                    {% endfor %}
+                </td>
                 <td>{{ row.version }}</td>
                 <td>{{ row.modified|date('M d, Y h:iA') }}</td>
                 <td class="text-center">
