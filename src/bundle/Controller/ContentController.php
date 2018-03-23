@@ -275,6 +275,7 @@ class ContentController extends Controller
             $versionInfo = $this->contentService->loadVersionInfo($content->contentInfo, $versionNo);
             $parentLocations = $this->locationService->loadParentLocationsForDraftContent($versionInfo);
             $location = reset($parentLocations);
+            $versionNo = null;
         }
 
         if (null === $location) {

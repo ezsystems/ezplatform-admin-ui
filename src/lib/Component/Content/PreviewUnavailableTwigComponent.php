@@ -55,16 +55,18 @@ class PreviewUnavailableTwigComponent implements Renderable
         $content = $parameters['content'];
         /** @var Language $language */
         $language = $parameters['language'];
+        $versionNo = $content->getVersionInfo()->versionNo;
 
         // nonpublished content should use parent location instead because location doesn't exist yet
         if (!$content->contentInfo->published && null === $content->contentInfo->mainLocationId) {
             $parentLocations = $this->locationService->loadParentLocationsForDraftContent($content->getVersionInfo());
             $location = reset($parentLocations);
+            $versionNo = null;
         }
 
         $siteaccesses = $this->siteaccessResolver->getSiteaccessesForLocation(
             $location,
-            $content->getVersionInfo()->versionNo,
+            $versionNo,
             $language->languageCode
         );
 

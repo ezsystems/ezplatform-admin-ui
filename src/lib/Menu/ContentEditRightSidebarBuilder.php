@@ -148,14 +148,17 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         Language $language,
         Location $parentLocation
     ): ItemInterface {
+        $versionNo = $content->getVersionInfo()->versionNo;
+
         // nonpublished content should use parent location instead because location doesn't exist yet
         if (!$content->contentInfo->published && null === $content->contentInfo->mainLocationId) {
             $location = $parentLocation;
+            $versionNo = null;
         }
 
         $siteaccesses = $this->siteaccessResolver->getSiteaccessesForLocation(
             $location,
-            $content->getVersionInfo()->versionNo,
+            $versionNo,
             $language->languageCode
         );
 

@@ -35,8 +35,9 @@ class SiteaccessResolver implements SiteaccessResolverInterface
         int $versionNo = null,
         string $languageCode = null
     ): array {
-        $languageCode = $languageCode ?? $location->getContentInfo()->mainLanguageCode;
-        $versionInfo = $this->contentService->loadVersionInfo($location->getContentInfo(), $versionNo);
+        $contentInfo = $location->getContentInfo();
+        $languageCode = $languageCode ?? $contentInfo->mainLanguageCode;
+        $versionInfo = $this->contentService->loadVersionInfo($contentInfo, $versionNo);
         $contentLanguages = $versionInfo->languageCodes;
 
         $eligibleSiteaccesses = [];
