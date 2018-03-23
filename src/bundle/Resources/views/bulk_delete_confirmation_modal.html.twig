@@ -2,7 +2,6 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ 'modal.title'|trans|desc('Please confirm') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg class="ez-icon ez-icon--medium" aria-hidden="true">
                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
@@ -10,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>{{ message }}</p>
+                <p class="ez-modal-body__main">{{ message }}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">
