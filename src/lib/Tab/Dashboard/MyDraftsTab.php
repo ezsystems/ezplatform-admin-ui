@@ -107,6 +107,7 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface
                 'name' => $version->getName(),
                 'type' => $contentType->getName(),
                 'language' => $version->initialLanguageCode,
+                'languageList' => $version->languageCodes,
                 'version' => $version->versionNo,
                 'modified' => $version->modificationDate,
             ];
