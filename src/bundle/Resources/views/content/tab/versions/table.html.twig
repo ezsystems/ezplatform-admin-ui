@@ -32,9 +32,7 @@
                 {{ version.versionNo }}
             </td>
             <td>
-                {% for translation in version.translations %}
-                    {{ translation.name }}<br>
-                {% endfor %}
+                {{ admin_ui_config.languages.map[version.initialLanguageCode].name }}
             </td>
             <td>
                 {% if version.author is not empty %}
