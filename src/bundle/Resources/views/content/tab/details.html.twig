@@ -32,7 +32,7 @@
             ({{ versionInfo.modificationDate|localizeddate('medium', 'short', app.request.locale) }})
         </td>
         <td>{{ versionInfo.versionNo }}</td>
-        <td>{{ translations|length }}
+        <td>
             {% for translation in translations %}
                 {{ translation.name }}<br>
             {% endfor %}
