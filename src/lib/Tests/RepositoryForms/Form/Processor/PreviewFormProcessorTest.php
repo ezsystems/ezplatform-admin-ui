@@ -85,14 +85,12 @@ class PreviewFormProcessorTest extends TestCase
     {
         $languageCode = 'cyb-CY';
         $contentDraftId = 123;
-        $locationId = 55;
+        $locationId = null;
         $url = 'http://url';
         $fieldDefinitionIdentifier = 'identifier_1';
         $fieldDataValue = 'some_value';
 
-        /**
-         * $data variable in PreviewFormProcessor classs.
-         */
+        /** $data variable in PreviewFormProcessor class */
         $contentStruct = $this->generateContentStruct(
             $languageCode, $fieldDefinitionIdentifier, $fieldDataValue
         );
@@ -240,18 +238,18 @@ class PreviewFormProcessorTest extends TestCase
      * @param APIContent $contentDraft
      * @param string $languageCode
      * @param string $url
+     * @param int|null $locationId
      *
-     * @return MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function generateUrlGeneratorMock(
         APIContent $contentDraft,
         string $languageCode,
         string $url,
-        int $locationId
+        ?int $locationId = null
     ): MockObject {
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $urlGenerator
-            ->expects(self::once())
             ->method('generate')
             ->with('ezplatform.content.preview', [
                 'contentId' => $contentDraft->id,

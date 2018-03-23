@@ -270,6 +270,14 @@ class ContentController extends Controller
             $languageCode = $content->contentInfo->mainLanguageCode;
         }
 
+        // nonpublished content should use parent location instead because location doesn't exist yet
+        if (!$content->contentInfo->published && null === $content->contentInfo->mainLocationId) {
+            $versionInfo = $this->contentService->loadVersionInfo($content->contentInfo, $versionNo);
+            $parentLocations = $this->locationService->loadParentLocationsForDraftContent($versionInfo);
+            $location = reset($parentLocations);
+            $versionNo = null;
+        }
+
         if (null === $location) {
             $location = $this->locationService->loadLocation($content->contentInfo->mainLocationId);
         }

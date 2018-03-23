@@ -25,7 +25,13 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class ContentEditRightSidebarBuilder extends AbstractBuilder implements TranslationContainerInterface
 {
-    /** @var NonAdminSiteaccessResolver */
+    /* Menu items */
+    const ITEM__PUBLISH = 'content_edit__sidebar_right__publish';
+    const ITEM__SAVE_DRAFT = 'content_edit__sidebar_right__save_draft';
+    const ITEM__PREVIEW = 'content_edit__sidebar_right__preview';
+    const ITEM__CANCEL = 'content_edit__sidebar_right__cancel';
+
+    /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver */
     private $siteaccessResolver;
 
     public function __construct(
@@ -37,12 +43,6 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
 
         $this->siteaccessResolver = $siteaccessResolver;
     }
-
-    /* Menu items */
-    const ITEM__PUBLISH = 'content_edit__sidebar_right__publish';
-    const ITEM__SAVE_DRAFT = 'content_edit__sidebar_right__save_draft';
-    const ITEM__PREVIEW = 'content_edit__sidebar_right__preview';
-    const ITEM__CANCEL = 'content_edit__sidebar_right__cancel';
 
     /**
      * @return string
@@ -72,6 +72,8 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         $content = $options['content'];
         /** @var Language $language */
         $language = $options['language'];
+        /** @var Location $parentLocation */
+        $parentLocation = $options['parent_location'];
 
         $items = [
             self::ITEM__PUBLISH => $this->createMenuItem(
@@ -96,21 +98,11 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
             ),
         ];
 
-        $siteaccesses = $this->siteaccessResolver->getSiteaccessesForLocation(
+        $items[self::ITEM__PREVIEW] = $this->getContentPreviewItem(
             $location,
-            $content->getVersionInfo()->versionNo,
-            $language->languageCode
-        );
-        $items[self::ITEM__PREVIEW] = $this->createMenuItem(
-            self::ITEM__PREVIEW,
-            [
-                'attributes' => [
-                    'class' => 'btn--trigger',
-                    'data-click' => '#ezrepoforms_content_edit_preview',
-                    'disabled' => empty($siteaccesses),
-                ],
-                'extras' => ['icon' => 'view-desktop'],
-            ]
+            $content,
+            $language,
+            $parentLocation
         );
 
         $items[self::ITEM__CANCEL] = $this->createMenuItem(
@@ -140,5 +132,46 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
             (new Message(self::ITEM__PREVIEW, 'menu'))->setDesc('Preview'),
             (new Message(self::ITEM__CANCEL, 'menu'))->setDesc('Delete draft'),
         ];
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $parentLocation
+     *
+     * @return \Knp\Menu\ItemInterface
+     */
+    private function getContentPreviewItem(
+        ?Location $location,
+        Content $content,
+        Language $language,
+        Location $parentLocation
+    ): ItemInterface {
+        $versionNo = $content->getVersionInfo()->versionNo;
+
+        // nonpublished content should use parent location instead because location doesn't exist yet
+        if (!$content->contentInfo->published && null === $content->contentInfo->mainLocationId) {
+            $location = $parentLocation;
+            $versionNo = null;
+        }
+
+        $siteaccesses = $this->siteaccessResolver->getSiteaccessesForLocation(
+            $location,
+            $versionNo,
+            $language->languageCode
+        );
+
+        return $this->createMenuItem(
+            self::ITEM__PREVIEW,
+            [
+                'attributes' => [
+                    'class' => 'btn--trigger',
+                    'data-click' => '#ezrepoforms_content_edit_preview',
+                    'disabled' => empty($siteaccesses),
+                ],
+                'extras' => ['icon' => 'view-desktop'],
+            ]
+        );
     }
 }

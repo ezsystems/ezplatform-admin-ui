@@ -8,20 +8,15 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\RepositoryForms\View;
 
-use PHPUnit\Framework\TestCase;
-use EzSystems\EzPlatformAdminUi\RepositoryForms\View\ViewParametersListener;
 use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\API\Repository\Values\Content\Content as ApiContent;
-use eZ\Publish\API\Repository\Values\Content\VersionInfo as APIVersionInfo;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo as APIContentInfo;
+use eZ\Publish\API\Repository\Values\Content as API;
 use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
-use EzSystems\RepositoryForms\Content\View\ContentEditView;
 use eZ\Publish\Core\MVC\Symfony\View\View;
-use eZ\Publish\Core\Repository\Values\Content\Content;
-use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\Core\Repository\Values\Content\Location;
+use eZ\Publish\Core\Repository\Values\Content as Core;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\View\ViewParametersListener;
+use EzSystems\RepositoryForms\Content\View\ContentEditView;
+use PHPUnit\Framework\TestCase;
 
 class ViewParametersListenerTest extends TestCase
 {
@@ -40,60 +35,82 @@ class ViewParametersListenerTest extends TestCase
         $this->event = new PreContentViewEvent($contentView);
     }
 
-    /**
-     * Check if parentLocations paramter is.
-     */
     public function testSetViewTemplateParameters()
     {
-        $locations = [new Location(), new Location()];
+        $locations = [new Core\Location(), new Core\Location()];
 
         $contentInfo = $this->generateContentInfo();
 
         $versionInfo = $this->generateVersionInfo($contentInfo);
+        $content = $this->generateContent($versionInfo);
+        $location = $this->generateLocation();
 
         $contentView = new ContentEditView();
-        $contentView->setParameters(['content' => $this->generateContent($versionInfo)]);
+        $contentView->setParameters([
+            'content' => $content,
+            'location' => $location,
+        ]);
 
         $event = new PreContentViewEvent($contentView);
 
         $locationService = $this->createMock(LocationService::class);
-        $locationService->expects(self::once())
+        $locationService
             ->method('loadParentLocationsForDraftContent')
             ->with($versionInfo)
             ->willReturn($locations);
 
         $viewParametersListener = new ViewParametersListener($locationService);
-
         $viewParametersListener->setViewTemplateParameters($event);
 
         $this->assertSame($locations, $contentView->getParameter('parentLocations'));
     }
 
+    /**
+     * @param int|null $parentLocationId
+     *
+     * @return \eZ\Publish\API\Repository\Values\Content\Location
+     */
+    private function generateLocation(int $parentLocationId = null): API\Location
+    {
+        return new Core\Location(['parentLocationId' => $parentLocationId]);
+    }
+
     public function testSetViewTemplateParametersWithMainLocationId()
     {
         $mainLocationId = 123;
+        $parentLocationId = 456;
+        $published = true;
 
-        $contentInfo = $this->generateContentInfo($mainLocationId);
-
+        $parentLocations = [new Core\Location(['id' => $parentLocationId])];
+        $contentInfo = $this->generateContentInfo($mainLocationId, $published);
         $versionInfo = $this->generateVersionInfo($contentInfo);
+        $content = $this->generateContent($versionInfo);
+        $location = $this->generateLocation($parentLocationId);
 
         $contentView = new ContentEditView();
         $contentView->setParameters([
-            'content' => $this->generateContent($versionInfo),
+            'content' => $content,
+            'location' => $location,
             'parentLocations' => [],
         ]);
 
         $event = new PreContentViewEvent($contentView);
 
         $locationService = $this->createMock(LocationService::class);
-        $locationService->expects(self::never())
-            ->method('loadParentLocationsForDraftContent');
+        $locationService
+            ->method('loadParentLocationsForDraftContent')
+            ->with($versionInfo)
+            ->willReturn($parentLocations);
+        $locationService
+            ->method('loadLocation')
+            ->with($parentLocationId)
+            ->willReturn(reset($parentLocations));
 
         $viewParametersListener = new ViewParametersListener($locationService);
-
         $viewParametersListener->setViewTemplateParameters($event);
 
         $this->assertSame([], $contentView->getParameter('parentLocations'));
+        $this->assertSame(reset($parentLocations), $contentView->getParameter('parentLocation'));
     }
 
     public function testSetViewTemplateParametersWithoutContentEditViewInstance()
@@ -117,36 +134,38 @@ class ViewParametersListenerTest extends TestCase
 
         $viewParametersListener = new ViewParametersListener($locationService);
 
-        $this->assertSame([MVCEvents::PRE_CONTENT_VIEW => 'setViewTemplateParameters'], $viewParametersListener::getSubscribedEvents());
-    }
-
-    /**
-     * @param VersionInfo $versionInfo
-     *
-     * @return ApiContent
-     */
-    private function generateContent(VersionInfo $versionInfo): ApiContent
-    {
-        return new Content(['versionInfo' => $versionInfo]);
-    }
-
-    /**
-     * @param ContentInfo $contentInfo
-     *
-     * @return APIVersionInfo
-     */
-    private function generateVersionInfo(APIContentInfo $contentInfo): APIVersionInfo
-    {
-        return new VersionInfo(['contentInfo' => $contentInfo]);
+        $this->assertSame([MVCEvents::PRE_CONTENT_VIEW => 'setViewTemplateParameters'],
+            $viewParametersListener::getSubscribedEvents());
     }
 
     /**
      * @param int $mainLocationId
+     * @param bool $published
      *
-     * @return ContentInfo
+     * @return \eZ\Publish\API\Repository\Values\Content\ContentInfo
      */
-    private function generateContentInfo(int $mainLocationId = null): APIContentInfo
+    private function generateContentInfo(int $mainLocationId = null, bool $published = false): API\ContentInfo
     {
-        return new ContentInfo(['mainLocationId' => $mainLocationId]);
+        return new API\ContentInfo(['mainLocationId' => $mainLocationId, 'published' => $published]);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
+     *
+     * @return \eZ\Publish\API\Repository\Values\Content\VersionInfo
+     */
+    private function generateVersionInfo(API\ContentInfo $contentInfo): API\VersionInfo
+    {
+        return new Core\VersionInfo(['contentInfo' => $contentInfo]);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo $versionInfo
+     *
+     * @return \eZ\Publish\API\Repository\Values\Content\Content
+     */
+    private function generateContent(API\VersionInfo $versionInfo): API\Content
+    {
+        return new Core\Content(['versionInfo' => $versionInfo]);
     }
 }

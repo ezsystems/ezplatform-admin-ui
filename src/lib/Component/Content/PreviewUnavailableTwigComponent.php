@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Component\Content;
 
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -17,22 +18,28 @@ use Twig\Environment;
 
 class PreviewUnavailableTwigComponent implements Renderable
 {
-    /** @var Environment */
+    /** @var \Twig\Environment */
     private $twig;
 
-    /** @var NonAdminSiteaccessResolver */
+    /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver */
     private $siteaccessResolver;
 
+    /** @var \eZ\Publish\API\Repository\LocationService */
+    private $locationService;
+
     /**
-     * @param Environment $twig
-     * @param NonAdminSiteaccessResolver $siteaccessResolver
+     * @param \Twig\Environment $twig
+     * @param \EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver $siteaccessResolver
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
      */
     public function __construct(
         Environment $twig,
-        NonAdminSiteaccessResolver $siteaccessResolver
+        NonAdminSiteaccessResolver $siteaccessResolver,
+        LocationService $locationService
     ) {
         $this->twig = $twig;
         $this->siteaccessResolver = $siteaccessResolver;
+        $this->locationService = $locationService;
     }
 
     /**
@@ -48,10 +55,18 @@ class PreviewUnavailableTwigComponent implements Renderable
         $content = $parameters['content'];
         /** @var Language $language */
         $language = $parameters['language'];
+        $versionNo = $content->getVersionInfo()->versionNo;
+
+        // nonpublished content should use parent location instead because location doesn't exist yet
+        if (!$content->contentInfo->published && null === $content->contentInfo->mainLocationId) {
+            $parentLocations = $this->locationService->loadParentLocationsForDraftContent($content->getVersionInfo());
+            $location = reset($parentLocations);
+            $versionNo = null;
+        }
 
         $siteaccesses = $this->siteaccessResolver->getSiteaccessesForLocation(
             $location,
-            $content->getVersionInfo()->versionNo,
+            $versionNo,
             $language->languageCode
         );
 
