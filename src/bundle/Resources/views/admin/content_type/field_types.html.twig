@@ -16,13 +16,13 @@
 
 {% block ezboolean_field_definition_edit %}
     <div class="ezboolean-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.defaultValue) -}}
+        {{- form_row(form.defaultValue, {'label_attr': {'class': 'checkbox-inline'}}) -}}
     </div>
 {% endblock %}
 
 {% block ezcountry_field_definition_edit %}
     <div class="ezcountry-settings is-multiple{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.isMultiple) -}}
+        {{- form_row(form.isMultiple, {'label_attr': {'class': 'checkbox-inline'}}) -}}
     </div>
 
     <div class="ezcountry-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
@@ -96,7 +96,7 @@
 
 {% block ezisbn_field_definition_edit %}
     <div class="ezisbn-settings is-isbn13{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.isISBN13) -}}
+        {{- form_row(form.isISBN13, {'label_attr': {'class': 'checkbox-inline'}}) -}}
     </div>
 
     <div class="ezisbn-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
@@ -174,7 +174,7 @@
 
 {% block ezselection_field_definition_edit %}
     <div class="ezselection-settings is-multiple{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.isMultiple) -}}
+        {{- form_row(form.isMultiple, {'label_attr': {'class': 'checkbox-inline'}}) -}}
     </div>
 
     <div class="ezselection-settings options{% if group_class is not empty %} {{ group_class }}{% endif %}">
