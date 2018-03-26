@@ -85,12 +85,15 @@ class ContentViewController extends Controller
         // JIRA ref: https://jira.ez.no/browse/EZP-28190
         $view->setCacheEnabled(false);
 
-        $this->supplyPathLocations($view);
+        if (!$view->getContent()->contentInfo->isTrashed()) {
+            $this->supplyPathLocations($view);
+            $this->subitemsContentViewParameterSupplier->supply($view);
+        }
+
         $this->supplyContentType($view);
         $this->supplyContentActionForms($view);
 
         $this->supplyDraftPagination($view, $request);
-        $this->subitemsContentViewParameterSupplier->supply($view);
 
         return $view;
     }
