@@ -9,13 +9,17 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Tests\RepositoryForms\View;
 
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content as API;
+use eZ\Publish\API\Repository\Values\User\User as APIUser;
 use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use eZ\Publish\Core\MVC\Symfony\View\View;
 use eZ\Publish\Core\Repository\Values\Content as Core;
+use eZ\Publish\Core\Repository\Values\User\User as CoreUser;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\View\ViewParametersListener;
 use EzSystems\RepositoryForms\Content\View\ContentEditView;
+use EzSystems\RepositoryForms\User\View\UserUpdateView;
 use PHPUnit\Framework\TestCase;
 
 class ViewParametersListenerTest extends TestCase
@@ -59,8 +63,10 @@ class ViewParametersListenerTest extends TestCase
             ->with($versionInfo)
             ->willReturn($locations);
 
-        $viewParametersListener = new ViewParametersListener($locationService);
-        $viewParametersListener->setViewTemplateParameters($event);
+        $userService = $this->createMock(UserService::class);
+
+        $viewParametersListener = new ViewParametersListener($locationService, $userService);
+        $viewParametersListener->setContentEditViewTemplateParameters($event);
 
         $this->assertSame($locations, $contentView->getParameter('parentLocations'));
     }
@@ -106,8 +112,10 @@ class ViewParametersListenerTest extends TestCase
             ->with($parentLocationId)
             ->willReturn(reset($parentLocations));
 
-        $viewParametersListener = new ViewParametersListener($locationService);
-        $viewParametersListener->setViewTemplateParameters($event);
+        $userService = $this->createMock(UserService::class);
+
+        $viewParametersListener = new ViewParametersListener($locationService, $userService);
+        $viewParametersListener->setContentEditViewTemplateParameters($event);
 
         $this->assertSame([], $contentView->getParameter('parentLocations'));
         $this->assertSame(reset($parentLocations), $contentView->getParameter('parentLocation'));
@@ -121,9 +129,53 @@ class ViewParametersListenerTest extends TestCase
         $locationService->expects(self::never())
             ->method('loadParentLocationsForDraftContent');
 
-        $viewParametersListener = new ViewParametersListener($locationService);
+        $userService = $this->createMock(UserService::class);
 
-        $this->assertNull($viewParametersListener->setViewTemplateParameters(new PreContentViewEvent($contentView)));
+        $viewParametersListener = new ViewParametersListener($locationService, $userService);
+
+        $this->assertNull($viewParametersListener->setContentEditViewTemplateParameters(new PreContentViewEvent($contentView)));
+    }
+
+    public function testSetUserUpdateViewTemplateParametersWithoutUserUpdateViewInstance()
+    {
+        $view = $this->createMock(View::class);
+
+        $locationService = $this->createMock(LocationService::class);
+        $locationService->expects(self::never())
+            ->method('loadParentLocationsForDraftContent');
+
+        $userService = $this->createMock(UserService::class);
+
+        $viewParametersListener = new ViewParametersListener($locationService, $userService);
+
+        $this->assertNull($viewParametersListener->setUserUpdateViewTemplateParameters(new PreContentViewEvent($view)));
+    }
+
+    public function testSetUserUpdateViewTemplateParameters()
+    {
+        $ownerId = 42;
+
+        $user = $this->generateUser($ownerId);
+
+        $userUpdateView = new UserUpdateView();
+        $userUpdateView->setParameters([
+            'user' => $user,
+        ]);
+
+        $event = new PreContentViewEvent($userUpdateView);
+
+        $locationService = $this->createMock(LocationService::class);
+
+        $userService = $this->createMock(UserService::class);
+        $userService
+            ->method('loadUser')
+            ->with($ownerId)
+            ->willReturn($user);
+
+        $viewParametersListener = new ViewParametersListener($locationService, $userService);
+        $viewParametersListener->setUserUpdateViewTemplateParameters($event);
+
+        $this->assertSame($user, $userUpdateView->getParameter('creator'));
     }
 
     public function testSubscribedEvents()
@@ -132,10 +184,18 @@ class ViewParametersListenerTest extends TestCase
         $locationService->expects(self::never())
             ->method('loadParentLocationsForDraftContent');
 
-        $viewParametersListener = new ViewParametersListener($locationService);
+        $userService = $this->createMock(UserService::class);
 
-        $this->assertSame([MVCEvents::PRE_CONTENT_VIEW => 'setViewTemplateParameters'],
-            $viewParametersListener::getSubscribedEvents());
+        $viewParametersListener = new ViewParametersListener($locationService, $userService);
+
+        $expectedSubscribedEvents = [
+            MVCEvents::PRE_CONTENT_VIEW => [
+                ['setContentEditViewTemplateParameters', 10],
+                ['setUserUpdateViewTemplateParameters', 5],
+            ],
+        ];
+
+        $this->assertSame($expectedSubscribedEvents, $viewParametersListener::getSubscribedEvents());
     }
 
     /**
@@ -167,5 +227,21 @@ class ViewParametersListenerTest extends TestCase
     private function generateContent(API\VersionInfo $versionInfo): API\Content
     {
         return new Core\Content(['versionInfo' => $versionInfo]);
+    }
+
+    /**
+     * @param int $ownerId
+     *
+     * @return \eZ\Publish\API\Repository\Values\User\User
+     */
+    private function generateUser(int $ownerId): APIUser
+    {
+        $contentInfo = new API\ContentInfo(['ownerId' => $ownerId]);
+
+        $versionInfo = new Core\VersionInfo(['contentInfo' => $contentInfo]);
+
+        $content = $this->generateContent($versionInfo);
+
+        return new CoreUser(['content' => $content]);
     }
 }
