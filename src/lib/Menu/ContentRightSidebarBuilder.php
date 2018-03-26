@@ -103,7 +103,13 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $canDelete = $this->permissionResolver->canUser(
             'content',
             'remove',
-            $options['content']
+            $content
+        );
+        $canTrashLocation = $this->permissionResolver->canUser(
+            'content',
+            'manage_locations',
+            $location->getContentInfo(),
+            [$location]
         );
 
         $createAttributes = [
@@ -116,8 +122,12 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'data-actions' => 'edit',
         ];
         $deleteAttributes = [
-                'data-toggle' => 'modal',
-                'data-target' => '#delete-user-modal',
+            'data-toggle' => 'modal',
+            'data-target' => '#delete-user-modal',
+        ];
+        $sendToTrashAttributes = [
+            'data-toggle' => 'modal',
+            'data-target' => '#trash-location-modal',
         ];
 
         $menu->setChildren([
@@ -183,10 +193,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__SEND_TO_TRASH,
                     [
                         'extras' => ['icon' => 'trash-send'],
-                        'attributes' => [
-                            'data-toggle' => 'modal',
-                            'data-target' => '#trash-location-modal',
-                        ],
+                        'attributes' => $canTrashLocation ?
+                            $sendToTrashAttributes
+                            : array_merge($sendToTrashAttributes, ['disabled' => 'disabled']),
                     ]
                 )
             );
