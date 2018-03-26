@@ -23,7 +23,7 @@
                 <td class="ez-checkbox-cell">{{ form_widget(form_custom_url_remove.url_aliases[custom_url.id]) }}</td>
                 <td>{{ custom_url.path }}</td>
                 <td>
-                    {% for languageCode in custom_url.languageCodes %}{{ admin_ui_config.languages.map[languageCode].name }}<br>{% endfor %}
+                    {% for languageCode in custom_url.languageCodes %}{{ admin_ui_config.languages.mappings[languageCode].name }}<br>{% endfor %}
                 </td>
                 <td>
                     {% if custom_url.forward %}
@@ -59,7 +59,7 @@
             <tr>
                 <td>{{ system_url.path }}</td>
                 <td>
-                    {% for languageCode in system_url.languageCodes %}{{ admin_ui_config.languages.map[languageCode].name }}<br>{% endfor %}
+                    {% for languageCode in system_url.languageCodes %}{{ admin_ui_config.languages.mappings[languageCode].name }}<br>{% endfor %}
                 </td>
             </tr>
         {% endfor %}

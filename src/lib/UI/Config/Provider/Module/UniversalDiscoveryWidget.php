@@ -48,7 +48,6 @@ class UniversalDiscoveryWidget implements ProviderInterface
         /* config structure has to reflect UDW module's config structure */
         return [
             'startingLocationId' => $this->getStartingLocationId(),
-            'contentOnTheFly' => $this->getContentOnTheFlyConfiguration(),
         ];
     }
 
@@ -60,35 +59,5 @@ class UniversalDiscoveryWidget implements ProviderInterface
         return $this->configResolver->getParameter(
             'universal_discovery_widget_module.default_location_id'
         );
-    }
-
-    /**
-     * @return array
-     */
-    protected function getContentOnTheFlyConfiguration(): array
-    {
-        $languages = [];
-        foreach ($this->languageService->loadLanguages() as $language) {
-            $languages[] = [
-                'languageCode' => $language->languageCode,
-                'name' => $language->name,
-            ];
-        }
-
-        $contentTypeGroups = [];
-
-        foreach ($this->contentTypeService->loadContentTypeGroups() as $contentTypeGroup) {
-            foreach ($this->contentTypeService->loadContentTypes($contentTypeGroup) as $contentType) {
-                $contentTypeGroups[$contentTypeGroup->identifier][] = [
-                    'identifier' => $contentType->identifier,
-                    'name' => $contentType->getName(),
-                ];
-            }
-        }
-
-        return [
-            'languages' => $languages,
-            'contentTypes' => $contentTypeGroups,
-        ];
     }
 }

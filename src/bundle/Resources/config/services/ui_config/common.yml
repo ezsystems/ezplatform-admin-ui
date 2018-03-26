@@ -34,6 +34,10 @@ services:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'languages' }
 
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypes:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'contentTypes' }
+
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module\UniversalDiscoveryWidget:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'universalDiscoveryWidget' }
