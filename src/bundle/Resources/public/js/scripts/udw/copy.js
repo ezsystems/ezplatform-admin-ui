@@ -23,7 +23,8 @@
             title: 'Select location',
             multiple: false,
             startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
-            restInfo: {token, siteaccess}
+            restInfo: {token, siteaccess},
+            allowContainersOnly: true
         }), udwContainer);
     };
 
