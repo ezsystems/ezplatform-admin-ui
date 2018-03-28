@@ -48,7 +48,7 @@
                 <td>{{ content_type.descriptions[language_code]|default('') }}</td>
             </tr>
             <tr>
-                <th>{{ "content_type.name_schema"|trans|desc("Content name pattern") }}</th>
+                <th>{{ "content_type.name_schema"|trans|desc("Content name schema") }}</th>
                 <td>{{ content_type.nameSchema }}</td>
             </tr>
             <tr>
@@ -71,7 +71,7 @@
             </tr>
             <tr>
                 <th>
-                    {{ "content_type.default_availability"|trans|desc('Default content availability') }}
+                    {{ "content_type.default_availability"|trans|desc('Default availability') }}
                     <p class="text-secondary small">
                         {{ "content_type.default_availability.help"|trans|desc("Default availability in primary language, if translation is absent") }}
                     </p>
