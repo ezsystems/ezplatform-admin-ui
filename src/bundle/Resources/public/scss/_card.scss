@@ -24,6 +24,12 @@
             color: $ez-secondary-ground-medium;
             font-weight: 400;
         }
+
+        &--sticky-top {
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+        }
     }
 
     &__body {
