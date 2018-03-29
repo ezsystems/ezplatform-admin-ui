@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
+use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\SectionService;
@@ -49,6 +50,9 @@ class SearchController extends Controller
     /** @var int */
     private $defaultPaginationLimit;
 
+    /** @var array */
+    private $userContentTypeIdentifier;
+
     /**
      * @param \eZ\Publish\API\Repository\SearchService $searchService
      * @param \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper $pagerContentToDataMapper
@@ -58,6 +62,7 @@ class SearchController extends Controller
      * @param \eZ\Publish\API\Repository\SectionService $sectionService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param int $defaultPaginationLimit
+     * @param array $userContentTypeIdentifier
      */
     public function __construct(
         SearchService $searchService,
@@ -67,7 +72,8 @@ class SearchController extends Controller
         SubmitHandler $submitHandler,
         SectionService $sectionService,
         ContentTypeService $contentTypeService,
-        int $defaultPaginationLimit
+        int $defaultPaginationLimit,
+        array $userContentTypeIdentifier
     ) {
         $this->searchService = $searchService;
         $this->pagerContentToDataMapper = $pagerContentToDataMapper;
@@ -77,6 +83,7 @@ class SearchController extends Controller
         $this->sectionService = $sectionService;
         $this->contentTypeService = $contentTypeService;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->userContentTypeIdentifier = $userContentTypeIdentifier;
     }
 
     /**
@@ -86,6 +93,8 @@ class SearchController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \InvalidArgumentException
      */
     public function searchAction(Request $request): Response
@@ -95,6 +104,7 @@ class SearchController extends Controller
         $page = $search['page'] ?? 1;
         $query = $search['query'];
         $section = null;
+        $creator = null;
         $contentTypes = [];
         $lastModified = $search['last_modified'] ?? [];
         $created = $search['created'] ?? [];
@@ -109,7 +119,7 @@ class SearchController extends Controller
         }
 
         $form = $this->formFactory->createSearchForm(
-            new SearchData($limit, $page, $query, $section, $contentTypes, $lastModified, $created),
+            new SearchData($limit, $page, $query, $section, $contentTypes, $lastModified, $created, $creator),
             'search',
             [
                 'method' => Request::METHOD_GET,
@@ -128,6 +138,7 @@ class SearchController extends Controller
                 $contentTypes = $data->getContentTypes();
                 $lastModified = $data->getLastModified();
                 $created = $data->getCreated();
+                $creator = $data->getCreator();
                 $query = new Query();
                 $criteria = [];
 
@@ -154,6 +165,13 @@ class SearchController extends Controller
                         [$created['start_date'], $created['end_date']]
                     );
                 }
+                if ($creator instanceof User) {
+                    $criteria[] = new Criterion\UserMetadata(
+                        Criterion\UserMetadata::OWNER,
+                        Criterion\Operator::EQ,
+                        $creator->id
+                    );
+                }
                 if (!empty($criteria)) {
                     $query->filter = new Criterion\LogicalAnd($criteria);
                 }
@@ -177,6 +195,7 @@ class SearchController extends Controller
                     'pager' => $pagerfanta,
                     'form_edit' => $editForm->createView(),
                     'filters_expanded' => $data->isFiltered(),
+                    'user_content_type_identifier' => $this->userContentTypeIdentifier,
                 ]);
             });
 
@@ -188,6 +207,7 @@ class SearchController extends Controller
         return $this->render('@EzPlatformAdminUi/admin/search/search.html.twig', [
             'form' => $form->createView(),
             'filters_expanded' => false,
+            'user_content_type_identifier' => $this->userContentTypeIdentifier,
         ]);
     }
 }

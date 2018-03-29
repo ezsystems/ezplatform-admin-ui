@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Search;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -47,6 +48,7 @@ class SearchType extends AbstractType
             ])
             ->add('last_modified', DateIntervalType::class)
             ->add('created', DateIntervalType::class)
+            ->add('creator', UserType::class)
             ->add('last_modified_select', ChoiceType::class, [
                 'choices' => $this->getTimePeriodChoices(),
                 'required' => false,

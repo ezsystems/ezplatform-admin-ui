@@ -26,6 +26,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.search_limit$'
+            $userContentTypeIdentifier: '$user_content_type_identifier$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\User\UserDeleteController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller

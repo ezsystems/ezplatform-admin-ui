@@ -39,6 +39,20 @@
         <label class="ez-filters__item-label">{{ 'search.created'|trans|desc('Created:') }}</label>
         {{ form_widget(form.created_select, {'attr': {'class': 'ez-filters__select', 'data-target-selector': '.ez-modal--select-created-range'}}) }}
     </div>
+    <div class="ez-filters__item ez-filters__item--creator">
+        <label class="ez-filters__item-label">{{ 'search.creator'|trans|desc('Creator:') }}</label>
+        {% set creator = form.vars.data.creator %}
+        <input type="text"
+               class="form-control ez-filters__input"
+               data-content-type-identifiers="{{ user_content_type_identifier|join(',') }}"
+               value="{{ creator is not empty ? ez_content_name(creator) }}"
+               {{ creator is not empty ? 'disabled'  }}
+        >
+        <svg class="ez-icon ez-icon--light ez-icon--medium ez-icon--reset">
+            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#circle-close"></use>
+        </svg>
+        <ul class="ez-filters__user-list ez-filters__user-list--hidden"></ul>
+    </div>
     <div class="ez-filters__btns">
         <button class="btn btn-dark ez-btn-clear">
             {{ 'search.clear'|trans|desc('Clear') }}</button>
@@ -48,6 +62,7 @@
 </div>
 {{ form_widget(form.last_modified, {'attr': {'hidden': 'hidden'}}) }}
 {{ form_widget(form.created, {'attr': {'hidden': 'hidden'}}) }}
+{{ form_widget(form.creator, {'attr': {'hidden': 'hidden'}}) }}
 <div class="modal fade ez-modal ez-modal--select-modified-range" tabindex="-1" role="dialog" data-period-selector="#search_last_modified_date_interval" data-end-selector="#search_last_modified_end_date">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
