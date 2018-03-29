@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use PHPUnit\Framework\Assert;
 
 /** Element that describes list-table structure that repeats in every Admin pages */
 class AdminList extends Element
@@ -40,7 +41,7 @@ class AdminList extends Element
     {
         $actualHeader = $this->context->getElementByTextFragment($this->listHeader, $this->fields['listHeader'], null, $this->listContainer);
         if ($actualHeader === null) {
-            throw new ElementNotFoundException($this->context->getSession(), sprintf('table header "%s"', $this->listHeader), $this->fields['listHeader']);
+            Assert::fail(sprintf('Table header "%s" not found on page', $this->listHeader));
         }
     }
 

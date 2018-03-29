@@ -17,6 +17,7 @@ class SimpleTable extends Table
     {
         parent::__construct($context, $containerLocator);
         $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .ez-table-header + .table thead th, .ez-table-header + form thead th';
+        $this->fields['listElement'] = $this->fields['list'] . ' td:nth-child(1)';
     }
 
     public function getTableCellValue(string $header, ?string $secondHeader = null): string
@@ -26,6 +27,47 @@ class SimpleTable extends Table
             $this->fields['horizontalHeaders']
         );
 
-        return $this->getCellValue(1, $columnPosition);
+        $rowPosition = 1;
+        if($secondHeader) {
+            $rowPosition = $this->context->getElementPositionByText(
+                $secondHeader,
+                $this->fields['listElement']
+            );
+        }
+
+        return $this->getCellValue($rowPosition, $columnPosition);
+    }
+
+    public function clickEditButton(string $listItemName): void
+    {
+        $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
+    }
+
+    /**
+     * @return array all table records as hash map
+     */
+    public function getTableHash(): array
+    {
+        $tableHash = [];
+
+        /** @var NodeElement[] $allHeaders */
+        $allHeaders = $this->context->findAllWithWait($this->fields['horizontalHeaders']);
+        /** @var NodeElement[] $allRows */
+        $allRows = $this->context->findAllWithWait($this->fields['listRow']);
+        $j = 0;
+        foreach ($allRows as $row) {
+            $rowHash = [];
+            /** @var NodeElement[] $allCells */
+            $allCells = $row->findAll('css', 'td');
+            $i = 0;
+            foreach ($allCells as $cell) {
+                $rowHash[$allHeaders[$i]->getText()] = $cell->getText();
+                ++$i;
+            }
+            $tableHash[$j] = $rowHash;
+            ++$j;
+        }
+
+        return $tableHash;
     }
 }
