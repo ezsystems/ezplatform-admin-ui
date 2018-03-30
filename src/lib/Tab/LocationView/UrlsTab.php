@@ -17,6 +17,8 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -99,19 +101,38 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
         /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
         $location = $parameters['location'];
 
-        $translationsDataset = $this->datasetFactory->customUrls();
-        $translationsDataset->load($location);
-        $customUrlAliases = $translationsDataset->getCustomUrlAliases();
+        $customUrlsPaginationParams = $parameters['custom_urls_pagination_params'];
+        $systemUrlsPaginationParams = $parameters['system_urls_pagination_params'];
+
+        $customUrlsDataset = $this->datasetFactory->customUrls();
+        $customUrlsDataset->load($location);
+
+        $customUrlPagerfanta = new Pagerfanta(
+            new ArrayAdapter($customUrlsDataset->getCustomUrlAliases())
+        );
+
+        $customUrlPagerfanta->setMaxPerPage($customUrlsPaginationParams['limit']);
+        $customUrlPagerfanta->setCurrentPage(min($customUrlsPaginationParams['page'], $customUrlPagerfanta->getNbPages()));
+
+        $systemUrlPagerfanta = new Pagerfanta(
+            new ArrayAdapter($this->urlAliasService->listLocationAliases($location, false))
+        );
+
+        $systemUrlPagerfanta->setMaxPerPage($systemUrlsPaginationParams['limit']);
+        $systemUrlPagerfanta->setCurrentPage(min($systemUrlsPaginationParams['page'], $systemUrlPagerfanta->getNbPages()));
+
         $customUrlAddForm = $this->createCustomUrlAddForm($location);
-        $customUrlRemoveForm = $this->createCustomUrlRemoveForm($location, $customUrlAliases);
+        $customUrlRemoveForm = $this->createCustomUrlRemoveForm($location, $customUrlPagerfanta->getCurrentPageResults());
         $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
 
         $viewParameters = [
-            'custom_urls' => $this->urlAliasService->listLocationAliases($location, true, null, true),
-            'system_urls' => $this->urlAliasService->listLocationAliases($location, false),
             'form_custom_url_add' => $customUrlAddForm->createView(),
             'form_custom_url_remove' => $customUrlRemoveForm->createView(),
             'parent_name' => $parentLocation->contentInfo->name,
+            'custom_urls_pager' => $customUrlPagerfanta,
+            'custom_urls_pagination_params' => $customUrlsPaginationParams,
+            'system_urls_pager' => $systemUrlPagerfanta,
+            'system_urls_pagination_params' => $systemUrlsPaginationParams,
         ];
 
         return $this->twig->render(
