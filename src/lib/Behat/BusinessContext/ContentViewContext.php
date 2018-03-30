@@ -42,15 +42,19 @@ class ContentViewContext extends BusinessContext
     }
 
     /**
+     * @given I start editing the content
      * @Given I start editing the content in :language language
      */
-    public function startEditingContent(string $language): void
+    public function startEditingContent(string $language = null): void
     {
         $rightMenu = new RightMenu($this->utilityContext);
         $rightMenu->clickButton('Edit');
 
         $languagePicker = new LanguagePicker($this->utilityContext);
-        $languagePicker->chooseLanguage($language);
+
+        if ($languagePicker->isVisible()) {
+            $languagePicker->chooseLanguage($language);
+        }
     }
 
     /**
