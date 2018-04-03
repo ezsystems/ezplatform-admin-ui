@@ -18,7 +18,7 @@ class Dialog extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'confirm' => '.modal.show .btn--trigger',
+            'confirm' => '.modal.show button[type="submit"],.modal.show .btn--trigger',
             'decline' => '.modal.show .btn--no',
         ];
     }

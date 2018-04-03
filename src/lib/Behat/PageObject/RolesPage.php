@@ -44,4 +44,14 @@ class RolesPage extends Page
             sprintf('Attribute "%s" of item "%s" has wrong value.', $label, $itemName)
         );
     }
+
+    public function startEditingItem(string $itemName): void
+    {
+        $this->adminList->table->clickEditButton($itemName);
+    }
+
+    public function startAssigningToItem(string $itemName): void
+    {
+        $this->adminList->clickAssignButton($itemName);
+    }
 }

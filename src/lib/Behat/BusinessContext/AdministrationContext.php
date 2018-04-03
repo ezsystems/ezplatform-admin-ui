@@ -7,15 +7,18 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Exception\ElementNotFoundException;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\Page;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\RolePage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\RolesPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypeGroupPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypeGroupsPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\LanguagesPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\SectionPage;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\SectionsPage;
+use PHPUnit\Framework\Assert;
 
 /** Context for common actions (creating, editing, deleting, etc) in Admin pages (Content Types, Languages, etc.) */
 class AdministrationContext extends BusinessContext
@@ -27,12 +30,12 @@ class AdministrationContext extends BusinessContext
         'Role' => RolesPage::PAGE_NAME,
         'Limitation' => RolePage::PAGE_NAME,
         'Policy' => RolePage::PAGE_NAME,
-        'Section' => '',
+        'Section' => SectionsPage::PAGE_NAME,
         'User' => '',
     ];
     private $emptyHeaderMapping = [
         'Content Type Groups' => 'Content Types count',
-        'Sections' => 'Assigned Content items',
+        'Sections' => 'Assignments count',
     ];
 
     /**
@@ -63,12 +66,12 @@ class AdministrationContext extends BusinessContext
     }
 
     /**
-     * @When I start assigning to :itemName :itemType
+     * @When I start assigning to :itemName from :pageType page
      */
-    public function iStartAssigningTo(string $itemName, string $itemType): void
+    public function iStartAssigningTo(string $itemName, string $pageType): void
     {
-        $pageObject = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType]);
-        $pageObject->adminList->clickAssignButton($itemName);
+        $pageObject = PageObjectFactory::createPage($this->utilityContext, $pageType, $itemName);
+        $pageObject->startAssigningToItem($itemName);
     }
 
     /**
@@ -81,10 +84,7 @@ class AdministrationContext extends BusinessContext
             ->adminList->table->isElementInTable($listElementName);
 
         if (!$isElementOnTheList) {
-            throw new ElementNotFoundException(
-                    $this->utilityContext->getSession(),
-                    sprintf('Element "%s" is not on the %s list.', $listElementName, $page)
-            );
+            Assert::fail(sprintf('Element "%s" is not on the %s list.', $listElementName, $page));
         }
     }
 
@@ -98,10 +98,7 @@ class AdministrationContext extends BusinessContext
             ->adminList->table->isElementInTable($listElementName);
 
         if ($isElementOnTheList) {
-            throw new ElementNotFoundException(
-                $this->utilityContext->getSession(),
-                sprintf('Element "%s" is on the %s list.', $listElementName, $page)
-            );
+            Assert::fail(sprintf('Element "%s" is on the %s list.', $listElementName, $page));
         }
     }
 
@@ -125,9 +122,7 @@ class AdministrationContext extends BusinessContext
         }
 
         if (($contentsCount !== $emptyContainerCellValue) === $shouldBeEmpty) {
-            throw new ElementNotFoundException(
-                $this->utilityContext->getSession(),
-                sprintf('No%s empty %s on the %s list.', $msg, $itemName, $page));
+            Assert::fail(sprintf('No%s empty %s on the %s list.', $msg, $itemName, $page));
         }
     }
 
@@ -156,7 +151,7 @@ class AdministrationContext extends BusinessContext
             ->adminList->table->isElementSelectable($itemName);
 
         if ($isListElementSelectable) {
-            throw new \Exception(sprintf('Element %s shoudn\'t be selectable.', $itemName));
+            Assert::fail(sprintf('Element %s shoudn\'t be selectable.', $itemName));
         }
     }
 
@@ -177,17 +172,64 @@ class AdministrationContext extends BusinessContext
     public function iStartEditingItem(string $itemType, string $itemName, ?string $containerName = null): void
     {
         PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $containerName)
-            ->adminList->table->clickEditButton($itemName);
+            ->startEditingItem($itemName);
     }
 
     /**
-     * @When I delete :itemType :itemName
-     * @When I delete :itemType :itemName from :itemContainer
+     * @When I start editing :itemType :itemName from details page
      */
-    public function iDeleteItem(string $itemType, string $itemName, ?string $itemContainer = null): void
+    public function iStartEditingItemFromDetails(string $itemType, string $itemName): void
     {
-        $page = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer);
-        $page->adminList->table->selectListElement($itemName);
+        PageObjectFactory::createPage($this->utilityContext, $itemType, $itemName)
+            ->startEditingItem($itemName);
+    }
+
+    /**
+     * @When I delete :itemType
+     */
+    public function iDeleteItems(string $itemType, TableNode $settings): void
+    {
+        $hash = $settings->getHash();
+
+        $page = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType]);
+        foreach ($hash as $setting) {
+            $page->adminList->table->selectListElement($setting['item']);
+        }
+
+        $this->performDeletion($page);
+    }
+
+    /**
+     * @When I delete :itemType from :containerName
+     */
+    public function iDeleteItemsFromContainer(string $itemType, ?string $containerName = null, TableNode $settings): void
+    {
+        $hash = $settings->getHash();
+
+        $page = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $containerName);
+        foreach ($hash as $setting) {
+            $page->adminList->table->selectListElement($setting['item']);
+        }
+
+        $this->performDeletion($page);
+    }
+
+    /**
+     * @When I delete :itemType from details page
+     */
+    public function iDeleteItemsFromDetails(string $itemType, TableNode $settings): void
+    {
+        $hash = $settings->getHash();
+
+        $page = PageObjectFactory::createPage($this->utilityContext, $itemType, $hash[0]['item']);
+        $this->performDeletion($page);
+    }
+
+    /**
+     * @param ContentTypeGroupsPage|SectionPage|SectionsPage|LanguagesPage|RolesPage|RolePage $page
+     */
+    private function performDeletion(Page $page)
+    {
         $page->adminList->clickTrashButton();
         $dialog = ElementFactory::createElement($this->utilityContext, Dialog::ELEMENT_NAME);
         $dialog->verifyVisibility();

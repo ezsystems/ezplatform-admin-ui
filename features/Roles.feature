@@ -53,7 +53,7 @@ Feature: Roles management
   @javascript @common
   Scenario: User assignation can be discarded
     Given there's "Test RL edited" on "Roles" list
-    When I start assigning to "Test RL edited" "Role"
+    When I start assigning to "Test RL edited" from "Roles" page
       And I select "Administrator User" from "User"
       And I select options from "Group"
       | option  |
@@ -68,7 +68,7 @@ Feature: Roles management
   @javascript @common
   Scenario: User can be assigned to role from the Roles list
     Given there's "Test RL edited" on "Roles" list
-    When I start assigning to "Test RL edited" "Role"
+    When I start assigning to "Test RL edited" from "Roles" page
       And I select options from "User"
       | option             |
       | Administrator User |
@@ -169,6 +169,8 @@ Feature: Roles management
   @javascript @common
   Scenario: Role can be deleted
     Given there's "Test RL edited" on "Roles" list
-    When I delete "Role" "Test RL edited" from "Roles"
+    When I delete "Role"
+      | item           |
+      | Test RL edited |
     Then there's no "Test RL edited" on "Roles" list
       And notification that "Role" "Test RL edited" is removed appears

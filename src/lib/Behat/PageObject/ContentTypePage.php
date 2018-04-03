@@ -19,6 +19,9 @@ class ContentTypePage extends Page
     /** @var string Name of actual group */
     public $contentTypeName;
 
+    /** @var string locator for container of Content list */
+    public $secondListContainerLocator = 'section:nth-of-type(2)';
+
     /**
      * @var \EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList
      */
@@ -44,7 +47,7 @@ class ContentTypePage extends Page
             AdminList::ELEMENT_NAME,
             'Content',
             DoubleHeaderTable::ELEMENT_NAME,
-            'section:nth-of-type(2)'
+            $this->secondListContainerLocator
         );
         $this->pageTitle = $contentTypeName;
         $this->pageTitleLocator = '.ez-header h1';

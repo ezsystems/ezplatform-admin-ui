@@ -19,6 +19,7 @@ class UniversalDiscoveryWidget extends Element
         $this->fields = [
             'tabSelector' => '.c-tab-nav-item',
             'confirmButton' => '.m-ud__action--confirm',
+            'cancelButton' => '.m-ud__action--cancel',
             'selectContentButton' => '.c-meta-preview__btn--select',
             'elementSelector' => '.c-finder-tree-branch:nth-of-type(%d) .c-finder-tree-leaf',
         ];
@@ -42,6 +43,11 @@ class UniversalDiscoveryWidget extends Element
     public function confirm(): void
     {
         $this->context->getElementByText('Confirm', $this->fields['confirmButton'])->click();
+    }
+
+    public function cancel(): void
+    {
+        $this->context->getElementByText('Cancel', $this->fields['cancelButton'])->click();
     }
 
     public function verifyVisibility(): void
