@@ -27,13 +27,9 @@ class SimpleTable extends Table
             $this->fields['horizontalHeaders']
         );
 
-        $rowPosition = 1;
-        if ($secondHeader) {
-            $rowPosition = $this->context->getElementPositionByText(
-                $secondHeader,
-                $this->fields['listElement']
-            );
-        }
+        $rowPosition = $secondHeader ?
+            $this->context->getElementPositionByText($secondHeader, $this->fields['listElement'])
+            : 1;
 
         return $this->getCellValue($rowPosition, $columnPosition);
     }

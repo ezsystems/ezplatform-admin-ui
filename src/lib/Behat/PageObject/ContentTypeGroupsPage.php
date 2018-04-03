@@ -37,4 +37,9 @@ class ContentTypeGroupsPage extends Page
     {
         $this->adminList->verifyVisibility();
     }
+
+    public function startEditingItem(string $itemName): void
+    {
+        $this->adminList->table->clickEditButton($itemName);
+    }
 }

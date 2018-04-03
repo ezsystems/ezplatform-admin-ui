@@ -51,7 +51,9 @@ Feature: Content type groups management
   @javascript @common
   Scenario: Content type group can be deleted
     Given there's empty "Test CTG edited" on "Content Type Groups" list
-    When I delete "Content Type Group" "Test CTG edited"
+    When I delete "Content Type Group"
+      | item            |
+      | Test CTG edited |
     Then there's no "Test CTG edited" on "Content Type Groups" list
       And notification that "Content type group" "Test CTG edited" is deleted appears
 

@@ -29,8 +29,8 @@ class AdminList extends Element
             'list' => $containerLocator,
             'listHeader' => '.ez-table-header__headline, header h5',
             'plusButton' => '.ez-icon-create',
-            'trashButton' => '.ez-icon-trash',
-            'mainAssignButton' => '.ez-table-header a[title*=Assign]',
+            'trashButton' => '.ez-icon-trash,button[title^="Delete"]',
+            'mainAssignButton' => '.ez-table-header [title^=Assign]',
         ];
         $this->listContainer = $this->context->findElement($containerLocator);
         $this->table = ElementFactory::createElement($context, $tableName, $containerLocator);

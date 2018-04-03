@@ -38,7 +38,7 @@ abstract class Table extends Element
      *
      * @throws \Exception when coordinates are invalid
      */
-    protected function getCellValue(int $row, int $column): string
+    public function getCellValue(int $row, int $column): string
     {
         $cell = $this->context->findElement(sprintf($this->fields['tableCell'], $row, $column));
 
