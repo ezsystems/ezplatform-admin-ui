@@ -28,7 +28,7 @@ class SimpleTable extends Table
         );
 
         $rowPosition = 1;
-        if($secondHeader) {
+        if ($secondHeader) {
             $rowPosition = $this->context->getElementPositionByText(
                 $secondHeader,
                 $this->fields['listElement']

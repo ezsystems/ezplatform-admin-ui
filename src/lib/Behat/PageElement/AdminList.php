@@ -6,7 +6,6 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use PHPUnit\Framework\Assert;
 

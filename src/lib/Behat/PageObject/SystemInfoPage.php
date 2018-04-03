@@ -6,7 +6,6 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
@@ -62,15 +61,17 @@ class SystemInfoPage extends Page
         $this->adminLists[$tableName]->verifyVisibility();
         $tableHash = $this->adminLists[$tableName]->table->getTableHash();
 
-        foreach($records as $desiredRecord) {
+        foreach ($records as $desiredRecord) {
             $found = false;
             foreach ($tableHash as $actualRecord) {
-                if($desiredRecord['Name'] === $actualRecord['Name']) {
+                if ($desiredRecord['Name'] === $actualRecord['Name']) {
                     $found = true;
+                    break;
                 }
             }
-            if(!$found)
+            if (!$found) {
                 Assert::fail(sprintf('Desired record [%s] not found in "%s" list.', $desiredRecord['Name'], $tableName));
+            }
         }
     }
 }

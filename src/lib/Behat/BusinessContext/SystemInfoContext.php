@@ -6,7 +6,6 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
-
 use Behat\Gherkin\Node\TableNode;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\SystemInfoPage;
@@ -19,13 +18,21 @@ class SystemInfoContext extends BusinessContext
     ];
 
     /**
+     * @When I go to :tabName tab in System Information
+     */
+    public function iGoToTabInSYstemInfo(string $tabName): void
+    {
+        $systemInfoPage = PageObjectFactory::createPage($this->utilityContext, SystemInfoPage::PAGE_NAME);
+        $systemInfoPage->verifyIsLoaded();
+        $systemInfoPage->navLinkTabs->goToTab($tabName);
+    }
+
+    /**
      * @Then I see :tabName system information table
      */
     public function iSeeSystemInformationTable(string $tabName): void
     {
         $systemInfoPage = PageObjectFactory::createPage($this->utilityContext, SystemInfoPage::PAGE_NAME);
-        $systemInfoPage->verifyIsLoaded();
-        $systemInfoPage->navLinkTabs->goToTab($tabName);
         $systemInfoPage->verifySystemInfoTable($tabName);
     }
 

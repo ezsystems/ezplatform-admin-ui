@@ -9,6 +9,7 @@ Feature: System info verification
 
   @javascript @common
   Scenario: Check Composer System Information
+    When I go to "Composer" tab in System Information
     Then I see "Composer" system information table
       And I see "Packages" table with given records
         | Name                                    |
@@ -24,18 +25,22 @@ Feature: System info verification
 
   @javascript @common
   Scenario: Check Database System Information
+    When I go to "Database" tab in System Information
     Then I see "Database" system information table
 
   @javascript @common
   Scenario: Check Hardware System Information
+    When I go to "Hardware" tab in System Information
     Then I see "Hardware" system information table
 
   @javascript @common
   Scenario: Check PHP System Information
+    When I go to "PHP" tab in System Information
     Then I see "PHP" system information table
 
   @javascript @common
   Scenario: Check Symfony Kernel System Information
+    When I go to "Symfony Kernel" tab in System Information
     Then I see "Symfony Kernel" system information table
       And I see "Bundles" table with given records
         | Name                                      |

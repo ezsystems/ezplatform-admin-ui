@@ -6,7 +6,6 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
-
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use PHPUnit\Framework\Assert;
 
@@ -39,5 +38,4 @@ class SystemInfoTable extends Table
             'System info table "%s" has wrong header.'
         );
     }
-
 }
