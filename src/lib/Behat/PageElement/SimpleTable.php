@@ -17,6 +17,7 @@ class SimpleTable extends Table
     {
         parent::__construct($context, $containerLocator);
         $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .ez-table-header + .table thead th, .ez-table-header + form thead th';
+        $this->fields['listElement'] = $this->fields['list'] . ' td:nth-child(1)';
     }
 
     public function getTableCellValue(string $header, ?string $secondHeader = null): string
@@ -26,6 +27,15 @@ class SimpleTable extends Table
             $this->fields['horizontalHeaders']
         );
 
-        return $this->getCellValue(1, $columnPosition);
+        $rowPosition = $secondHeader ?
+            $this->context->getElementPositionByText($secondHeader, $this->fields['listElement'])
+            : 1;
+
+        return $this->getCellValue($rowPosition, $columnPosition);
+    }
+
+    public function clickEditButton(string $listItemName): void
+    {
+        $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
     }
 }

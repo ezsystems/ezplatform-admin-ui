@@ -36,6 +36,11 @@ class LanguagesPage extends Page
         $this->adminList->verifyVisibility();
     }
 
+    public function startEditingItem(string $itemName): void
+    {
+        $this->adminList->table->clickEditButton($itemName);
+    }
+
     public function verifyItemAttribute(string $label, string $value, string $itemName): void
     {
         Assert::assertEquals(
