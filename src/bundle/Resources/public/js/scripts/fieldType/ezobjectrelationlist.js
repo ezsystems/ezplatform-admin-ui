@@ -122,7 +122,9 @@
         const openUDW = (event) => {
             event.preventDefault();
 
-            ReactDOM.render(React.createElement(global.eZ.modules.UniversalDiscovery, {
+            const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+
+            ReactDOM.render(React.createElement(global.eZ.modules.UniversalDiscovery, Object.assign({
                 onConfirm,
                 onCancel: closeUDW,
                 confirmLabel: 'Confirm selection',
@@ -132,7 +134,7 @@
                 startingLocationId,
                 restInfo: { token, siteaccess },
                 canSelectContent
-            }), udwContainer);
+            }, config)), udwContainer);
         };
         const excludeDuplicatedItems = (items) => {
             selectedItemsMap = items.reduce((total, item) => Object.assign(

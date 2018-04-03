@@ -19,7 +19,9 @@
         event.preventDefault();
         event.stopPropagation();
 
-        window.ReactDOM.render(window.React.createElement(window.eZ.modules.UniversalDiscovery, {
+        const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+
+        window.ReactDOM.render(window.React.createElement(window.eZ.modules.UniversalDiscovery, Object.assign({
             onConfirm,
             onCancel,
             canSelectContent,
@@ -28,7 +30,7 @@
             multiple: false,
             startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess}
-        }), udwContainer);
+        }, config)), udwContainer);
     };
 
     btns.forEach(btn => btn.addEventListener('click', openUDW, false));

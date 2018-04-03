@@ -17,8 +17,9 @@
         event.preventDefault();
 
         const form = event.target.closest('form[name="trash_item_restore"]');
+        const config = JSON.parse(event.currentTarget.dataset.udwConfig);
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
+        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
             onConfirm: onConfirm.bind(this, form),
             onCancel,
             confirmLabel: 'Restore',
@@ -27,7 +28,7 @@
             allowContainersOnly: true,
             restInfo: {token, siteaccess},
             multiple: false
-        }), udwContainer);
+        }, config)), udwContainer);
     };
 
     btns.forEach(btn => btn.addEventListener('click', openUDW, false));

@@ -15,8 +15,10 @@ export default class EzEmbedDiscoverContentButton extends EzWidgetButton {
         const token = document.querySelector('meta[name="CSRF-Token"]').content;
         const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
         const languageCode = document.querySelector('meta[name="LanguageCode"]').content;
+        const udwConfigName = this.props.udwConfigName;
+        const config = JSON.parse(document.querySelector(`[data-udw-config-name="${udwConfigName}"]`).dataset.udwConfig);
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
+        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
             onConfirm: this[this.props.udwContentDiscoveredMethod].bind(this),
             onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
             confirmLabel: 'Select content',
@@ -25,8 +27,8 @@ export default class EzEmbedDiscoverContentButton extends EzWidgetButton {
             startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess},
             canSelectContent: selectable,
-            cotfForcedLanguage: languageCode
-        }), udwContainer);
+            cotfAllowedLanguages: [languageCode]
+        }, config)), udwContainer);
     }
 
     /**

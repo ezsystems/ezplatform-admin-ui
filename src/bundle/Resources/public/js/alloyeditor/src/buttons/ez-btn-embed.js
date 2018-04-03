@@ -67,4 +67,5 @@ EzBtnEmbed.defaultProps = {
     modifiesSelection: true,
     udwTitle: 'Select a content to embed',
     udwContentDiscoveredMethod: 'addEmbed',
+    udwConfigName: 'richtext_embed'
 };

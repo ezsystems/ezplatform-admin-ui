@@ -51,5 +51,6 @@ AlloyEditor.Buttons[EzBtnEmbedUpdate.key] = AlloyEditor.EzBtnEmbedUpdate = EzBtn
 EzBtnEmbedUpdate.defaultProps = {
     udwTitle: 'Select a content to embed',
     udwContentDiscoveredMethod: 'updateEmbed',
+    udwConfigName: 'richtext_embed',
     label: 'Select antoher content item',
 };

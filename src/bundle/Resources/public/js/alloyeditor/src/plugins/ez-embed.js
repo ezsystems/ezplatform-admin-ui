@@ -185,6 +185,13 @@
 
                     if (isEmbedImage) {
                         const fieldImage = content.CurrentVersion.Version.Fields.field.find(field => field.fieldTypeIdentifier === 'ezimage');
+
+                        if (!fieldImage || !fieldImage.fieldValue) {
+                            this.renderEmbedPreview(content.Name);
+
+                            return;
+                        }
+
                         const size = this.getConfig('size');
                         const variationHref = fieldImage.fieldValue.variations[size].href;
 
@@ -201,8 +208,9 @@
                  *
                  * @method loadImagePreviewFromCurrentVersion
                  * @param {String} currentVersionHref The current version href
+                 * @param {String} contnetName The content name
                  */
-                loadImagePreviewFromCurrentVersion: function (currentVersionHref) {
+                loadImagePreviewFromCurrentVersion: function (currentVersionHref, contentName) {
                     const token = document.querySelector('meta[name="CSRF-Token"]').content;
                     const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
                     const request = new Request(currentVersionHref, {
@@ -220,6 +228,15 @@
                         .then(response => response.json())
                         .then(data => {
                             const fieldImage = data.Version.Fields.field.find(field => field.fieldTypeIdentifier === 'ezimage');
+
+                            if (!fieldImage || !fieldImage.fieldValue) {
+                                contentName = contentName ? contentName : '';
+
+                                this.renderEmbedPreview(contentName);
+
+                                return;
+                            }
+
                             const size = this.getConfig('size');
                             const variationHref = fieldImage.fieldValue.variations[size].href;
 

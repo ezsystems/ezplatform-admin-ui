@@ -15,13 +15,15 @@
     const selectSubtree = (event) => {
         event.preventDefault();
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
+        const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+
+        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
             onConfirm: selectSubtreeConfirm.bind(this),
             onCancel: closeUDW,
             multiple: true,
             startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess}
-        }), udwContainer);
+        }, config)), udwContainer);
     };
     const toggleDisabledState = () => {
         limitationsRadio.forEach(radio => {
