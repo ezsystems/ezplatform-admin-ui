@@ -10,47 +10,44 @@ use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\LinkedListTable;
+use PHPUnit\Framework\Assert;
 
-class ContentTypeGroupPage extends Page
+class SectionsPage extends Page
 {
     /** @var string Name by which Page is recognised */
-    public const PAGE_NAME = 'Content Type Group';
-    /** @var string Name of actual group */
-    public $groupName;
+    public const PAGE_NAME = 'Sections';
 
     /**
      * @var \EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList
      */
     public $adminList;
 
-    public function __construct(UtilityContext $context, string $groupName)
+    public function __construct(UtilityContext $context)
     {
         parent::__construct($context);
-        $this->route = '/admin/contenttypegroup/';
-        $this->groupName = $groupName;
-        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, sprintf('Content Types in %s', $this->groupName), LinkedListTable::ELEMENT_NAME);
-        $this->pageTitle = $groupName;
+        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME, LinkedListTable::ELEMENT_NAME);
+        $this->route = '/admin/section/list';
+        $this->pageTitle = self::PAGE_NAME;
         $this->pageTitleLocator = '.ez-header h1';
     }
 
-    /**
-     * Verifies that all necessary elements are visible.
-     */
     public function verifyElements(): void
     {
         $this->adminList->verifyVisibility();
     }
 
-    /**
-     * Verifies if lists from given tab is empty.
-     *
-     * @param string $tabName
-     */
-    public function verifyListIsEmpty(string $tabName): void
+    public function verifyItemAttribute(string $label, string $value, string $itemName): void
     {
-        if ($this->adminList->table->getItemCount() > 0) {
-            throw new \Exception(sprintf('%s list is not empty.', $tabName));
-        }
+        Assert::assertEquals(
+            $value,
+            $this->adminList->table->getTableCellValue($itemName, $label),
+            sprintf('Attribute "%s" of item "%s" has wrong value.', $label, $itemName)
+        );
+    }
+
+    public function startAssigningToItem(string $itemName): void
+    {
+        $this->adminList->clickAssignButton($itemName);
     }
 
     public function startEditingItem(string $itemName): void

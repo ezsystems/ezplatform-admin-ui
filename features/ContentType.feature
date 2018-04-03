@@ -78,6 +78,8 @@ Feature: Content types management
   @javascript @common
   Scenario: Content type can be deleted from Content Type Group
     Given there's "Test CT edited" on "Content" "Content Type Group" list
-    When I delete "Content Type" "Test CT edited" from "Content"
+    When I delete "Content Type" from "Content"
+      | item           |
+      | Test CT edited |
     Then there's no "Test CT edited" on "Content" "Content Type Group" list
       And notification that "Content type" "Test CT edited" is deleted appears

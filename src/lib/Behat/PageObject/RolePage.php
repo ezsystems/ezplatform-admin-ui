@@ -12,6 +12,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\NavLinkTabs;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\SimpleListTable;
+use PHPUnit\Framework\Assert;
 
 class RolePage extends Page
 {
@@ -68,7 +69,7 @@ class RolePage extends Page
     }
 
     /**
-     * Verifies if lists from given tab is empty.
+     * Verifies if list from given tab is empty.
      *
      * @param string $tabName
      */
@@ -78,5 +79,23 @@ class RolePage extends Page
         if ($this->adminLists[$tabName]->table->getItemCount() > 0) {
             throw new \Exception(sprintf('"%s" list is not empty.', $tabName));
         }
+    }
+
+    public function startEditingItem(string $itemName): void
+    {
+        $this->navLinkTabs->goToTab('Policies');
+        $this->adminLists['Policies']->table->clickEditButton($itemName);
+    }
+
+    public function startAssigningToItem(string $roleName): void
+    {
+        Assert::assertEquals(
+            $roleName,
+            $this->roleName,
+            'Wrong role page'
+        );
+
+        $this->navLinkTabs->goToTab('Assignments');
+        $this->adminLists['Assignments']->clickAssignButton();
     }
 }
