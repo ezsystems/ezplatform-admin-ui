@@ -33,6 +33,7 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
 
         $loader->load('default_parameters.yml');
         $loader->load('services.yml');
+        $loader->load('role.yml');
     }
 
     /**
