@@ -13,6 +13,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentStructurePage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use EzSystems\EzPlatformAdminUi\UI\Value\Content\Language;
 use PHPUnit\Framework\Assert;
 
 class ContentViewContext extends BusinessContext
@@ -50,9 +51,12 @@ class ContentViewContext extends BusinessContext
         $rightMenu = new RightMenu($this->utilityContext);
         $rightMenu->clickButton('Edit');
 
-        $languagePicker = new LanguagePicker($this->utilityContext);
+        $languagePicker = ElementFactory::createElement($this->utilityContext, LanguagePicker::ELEMENT_NAME);
 
         if ($languagePicker->isVisible()) {
+            $availableLanguages = $languagePicker->getLanguages();
+            Assert::assertGreaterThan(1, count($availableLanguages));
+            Assert::assertContains($language, $availableLanguages);
             $languagePicker->chooseLanguage($language);
         }
     }

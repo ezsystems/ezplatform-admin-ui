@@ -7,6 +7,8 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\FlexWorkflow\Behat\PageElement\OldSendForReviewForm;
+use EzSystems\StudioUIBundle\Tests\Behat\PageElement\ConfirmationPopup;
 
 class ElementFactory
 {
@@ -16,7 +18,7 @@ class ElementFactory
      * @param UtilityContext $context
      * @param string $elementName Name of the Element to creator
      *
-     * @return AdminList|Dialog|RightMenu|UpperMenu|UpdateForm|Breadcrumb|Notification|NavLinkTabs|UniversalDiscoveryWidget Element to interact with
+     * @return AdminList|Dialog|RightMenu|UpperMenu|UpdateForm|Breadcrumb|Notification|NavLinkTabs|UniversalDiscoveryWidget|LanguagePicker|OldSendForReviewForm|ConfirmationPopup Element to interact with
      */
     public static function createElement(UtilityContext $context, string $elementName, ?string ...$parameters): Element
     {
@@ -51,8 +53,14 @@ class ElementFactory
                 return new DoubleHeaderTable($context, $parameters[0]);
             case NavLinkTabs::ELEMENT_NAME:
                 return new NavLinkTabs($context);
+            case LanguagePicker::ELEMENT_NAME:
+                return new LanguagePicker($context);
             case UniversalDiscoveryWidget::ELEMENT_NAME:
                 return new UniversalDiscoveryWidget($context);
+            case OldSendForReviewForm::ELEMENT_NAME:
+                return new OldSendForReviewForm($context);
+            case ConfirmationPopup::ELEMENT_NAME:
+                return new ConfirmationPopup($context);
             default:
                 throw new \InvalidArgumentException(sprintf('Unrecognized element name: %s', $elementName));
         }

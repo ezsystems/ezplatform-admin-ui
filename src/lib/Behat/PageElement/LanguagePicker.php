@@ -6,11 +6,15 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use Behat\Mink\Element\NodeElement;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use WebDriver\Exception\ElementNotVisible;
 
 class LanguagePicker extends Element
 {
+    /** @var string Name by which Element is recognised */
+    public const ELEMENT_NAME = 'LanguagePicker';
+
     private $loadingTimeout;
 
     public function __construct(UtilityContext $context)
@@ -23,12 +27,19 @@ class LanguagePicker extends Element
         $this->loadingTimeout = 5;
     }
 
-    public function chooseLanguage($language)
+    public function chooseLanguage($language): void
     {
         $this->context->getElementByText($language, $this->fields['languageSelector'])->click();
     }
 
-    public function isVisible()
+    public function getLanguages(): array
+    {
+        return array_map(function (NodeElement $element) {
+            return $element->getText();
+        }, $this->context->findAllWithWait($this->fields['languageSelector']));
+    }
+
+    public function isVisible(): bool
     {
         try {
             $this->context->waitUntilElementIsVisible($this->fields['languagePickerSelector'], $this->loadingTimeout);
