@@ -59,6 +59,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
@@ -92,6 +93,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupsDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStatesDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordChangeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType;
@@ -487,6 +489,23 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashItemRestoreType::class);
 
         return $this->formFactory->createNamed($name, TrashItemRestoreType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData|null $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     */
+    public function deleteTrashItem(
+        TrashItemDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashItemDeleteType::class);
+
+        return $this->formFactory->createNamed($name, TrashItemDeleteType::class, $data);
     }
 
     /**

@@ -21,6 +21,16 @@
         <target state="new">Restore under new parent location</target>
         <note>key: trash.button.restore_new_location</note>
       </trans-unit>
+      <trans-unit id="7ffaa1444a83e959f8de3c2410bb65acdd3e3ff0" resname="trash.delete">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note>key: trash.delete</note>
+      </trans-unit>
+      <trans-unit id="45548aed8adb5019c3b806992e903965699c7e08" resname="trash.deleted.success">
+        <source>Deleted selected trash items.</source>
+        <target state="new">Deleted selected trash items.</target>
+        <note>key: trash.deleted.success</note>
+      </trans-unit>
       <trans-unit id="7883128cdfb813826271abe90b3a1f3190833ce6" resname="trash.empty">
         <source>Trash is empty. Any content item you send to trash will end up here.</source>
         <target state="new">Trash is empty. Any content item you send to trash will end up here.</target>
@@ -40,6 +50,11 @@
         <source>Ancestor is in the Trash</source>
         <target state="new">Ancestor is in the Trash</target>
         <note>key: trash.item.ancesor_in_trash</note>
+      </trans-unit>
+      <trans-unit id="2720e3018fc8b1158cb728b1d5dc377ef7293b57" resname="trash.modal.message">
+        <source>Do you want to delete selected item(s) from Trash?</source>
+        <target state="new">Do you want to delete selected item(s) from Trash?</target>
+        <note>key: trash.modal.message</note>
       </trans-unit>
       <trans-unit id="34525fc5da381111c2104d20a55021eb8b698c7c" resname="trash.name">
         <source>Name</source>

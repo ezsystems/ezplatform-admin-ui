@@ -308,6 +308,12 @@ ezplatform.trash.restore:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Trash:restore'
 
+ezplatform.trash.delete:
+    path: /trash/delete
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Trash:delete'
+
 #
 # Content Type
 #
