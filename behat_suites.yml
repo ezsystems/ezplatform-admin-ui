@@ -19,5 +19,6 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentTypeContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RolesContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SystemInfoContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SectionsContext
