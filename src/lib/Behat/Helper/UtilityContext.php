@@ -23,7 +23,7 @@ class UtilityContext extends MinkContext
      * @param string $cssSelector
      * @param int $timeout
      *
-     * @throws Exception when element not found
+     * @throws Exception when element not found or is not visible
      */
     public function waitUntilElementIsVisible(string $cssSelector, int $timeout = 5): void
     {
