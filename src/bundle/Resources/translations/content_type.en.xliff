@@ -76,11 +76,6 @@
         <target state="new">Do you want to delete Content Type?</target>
         <note>key: content_type.modal.message</note>
       </trans-unit>
-      <trans-unit id="7b2d848f7d36edb5998704ab47adea259512e15d" resname="content_type.modal.title">
-        <source>Please confirm</source>
-        <target state="new">Please confirm</target>
-        <note>key: content_type.modal.title</note>
-      </trans-unit>
       <trans-unit id="7fddd251857df821bd536dd680e1edbc921790a2" resname="content_type.name">
         <source>Name</source>
         <target state="new">Name</target>

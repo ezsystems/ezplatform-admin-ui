@@ -5,6 +5,7 @@
 {% block page_title %}{% endblock %}
 
 {% form_theme form_trash_item_restore '@EzPlatformAdminUi/form_fields.html.twig' %}
+{% form_theme form_trash_item_delete '@EzPlatformAdminUi/form_fields.html.twig' %}
 
 {% block body_class %}ez-trash-list-view{% endblock %}
 
@@ -38,6 +39,19 @@
                                 {% do form_trash_item_restore.location.setRendered %}
                                 {% do form_trash_item_restore.restore.setRendered %}
                             {% endif %}
+                            {% set modal_data_target = 'delete-trash-items-modal' %}
+                            <button id="delete-trash-items" type="button" class="btn btn-danger" disabled data-toggle="modal"
+                                    data-target="#{{ modal_data_target }}" title="{{ 'trash.delete'|trans|desc('Delete') }}">
+                                <svg class="ez-icon ez-icon-trash">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                                </svg>
+                            </button>
+                            {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+                                'id': modal_data_target,
+                                'message': 'trash.modal.message'|trans|desc('Do you want to delete selected item(s) from Trash?'),
+                                'data_click': '#trash_item_delete_delete',
+                            }%}
                         </div>
                     </div>
                     <table class="table">
@@ -83,6 +97,18 @@
                     {{ form_widget(form_trash_item_restore._token) }}
                     {{ form_end(form_trash_item_restore, { 'render_rest': false }) }}
                 </div>
+
+                {{ form_start(form_trash_item_delete, {
+                    'action': path('ezplatform.trash.delete')
+                }) }}
+                {% for key, form in form_trash_item_delete.trash_items %}
+                {% set trash_item = trash_items[key] %}
+                    {{ form_widget(form) }}
+                {% endfor %}
+                {{ form_widget(form_trash_item_delete._token) }}
+                {{ form_widget(form_trash_item_delete.delete) }}
+                {{ form_end(form_trash_item_delete, { 'render_rest': false }) }}
+
                 {% if pager.haveToPaginate %}
                     <div class="row justify-content-center align-items-center mb-2">
                         <span>

@@ -4,6 +4,8 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
@@ -11,9 +13,9 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\TrashItem;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
 use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -30,50 +32,50 @@ use EzSystems\EzPlatformAdminUi\UI\Service\PathService as UiPathService;
 
 class TrashController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var TranslatorInterface */
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var TrashService */
+    /** @var \eZ\Publish\API\Repository\TrashService */
     private $trashService;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
-    /** @var UiPathService */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Service\PathService */
     private $uiPathService;
 
-    /** @var UrlGeneratorInterface */
+    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     private $urlGenerator;
 
     /** @var int */
     private $defaultPaginationLimit;
 
     /**
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
-     * @param TrashService $trashService
-     * @param LocationService $locationService
-     * @param ContentService $contentService
-     * @param ContentTypeService $contentTypeService
-     * @param UiPathService $uiPathService
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
-     * @param UrlGeneratorInterface $urlGenerator
+     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\TrashService $trashService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \EzSystems\EzPlatformAdminUi\UI\Service\PathService $uiPathService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      * @param int $defaultPaginationLimit
      */
     public function __construct(
@@ -103,12 +105,21 @@ class TrashController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @internal param int $page Current page
      * @internal param int $limit Number of items per page
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \LogicException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Pagerfanta\Exception\OutOfRangeCurrentPageException
+     * @throws \Pagerfanta\Exception\NotIntegerCurrentPageException
+     * @throws \Pagerfanta\Exception\LessThan1CurrentPageException
+     * @throws \Pagerfanta\Exception\NotIntegerMaxPerPageException
+     * @throws \Pagerfanta\Exception\LessThan1MaxPerPageException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function listAction(Request $request): Response
     {
@@ -126,7 +137,7 @@ class TrashController extends Controller
         $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
         $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
-        /** @var TrashItem $item */
+        /** @var \eZ\Publish\API\Repository\Values\Content\TrashItem $item */
         foreach ($pagerfanta->getCurrentPageResults() as $item) {
             $contentType = $this->contentTypeService->loadContentType($item->contentInfo->contentTypeId);
             $ancestors = $this->uiPathService->loadPathLocations($item);
@@ -136,6 +147,10 @@ class TrashController extends Controller
 
         $trashItemRestoreForm = $this->formFactory->restoreTrashItem(
             new TrashItemRestoreData($pagerfanta->getCurrentPageResults(), null)
+        );
+
+        $trashItemDeleteForm = $this->formFactory->deleteTrashItem(
+            new TrashItemDeleteData($pagerfanta->getCurrentPageResults())
         );
 
         $trashEmptyForm = $this->formFactory->emptyTrash(
@@ -148,42 +163,50 @@ class TrashController extends Controller
             'trash_items' => $trashItemsList,
             'pager' => $pagerfanta,
             'form_trash_item_restore' => $trashItemRestoreForm->createView(),
+            'form_trash_item_delete' => $trashItemDeleteForm->createView(),
             'form_trash_empty' => $trashEmptyForm->createView(),
         ]);
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \LogicException
+     * @throws \InvalidArgumentException
      */
     public function emptyAction(Request $request): Response
     {
-        if ($this->isGranted(new Attribute('content', 'remove'))) {
-            $form = $this->formFactory->emptyTrash(
-                new TrashEmptyData(true)
-            );
-            $form->handleRequest($request);
+        if (!$this->isGranted(new Attribute('content', 'remove'))) {
+            return $this->redirect($this->generateUrl('ezplatform.trash.list'));
+        }
 
-            if ($form->isSubmitted()) {
-                $result = $this->submitHandler->handle($form, function () {
-                    $this->trashService->emptyTrash();
+        $form = $this->formFactory->emptyTrash(
+            new TrashEmptyData(true)
+        );
+        $form->handleRequest($request);
 
-                    $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Trash empty.") */
-                            'trash.empty.success',
-                            [],
-                            'trash'
-                        )
-                    );
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function () {
+                $this->trashService->emptyTrash();
 
-                    return new RedirectResponse($this->generateUrl('ezplatform.trash.list'));
-                });
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Trash empty.") */
+                        'trash.empty.success',
+                        [],
+                        'trash'
+                    )
+                );
 
-                if ($result instanceof Response) {
-                    return $result;
-                }
+                return new RedirectResponse($this->generateUrl('ezplatform.trash.list'));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
             }
         }
 
@@ -191,50 +214,103 @@ class TrashController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \LogicException
+     * @throws \InvalidArgumentException
      */
     public function restoreAction(Request $request): Response
     {
-        if ($this->isGranted(new Attribute('content', 'restore'))) {
-            $form = $this->formFactory->restoreTrashItem();
-            $form->handleRequest($request);
+        if (!$this->isGranted(new Attribute('content', 'restore'))) {
+            return $this->redirect($this->generateUrl('ezplatform.trash.list'));
+        }
 
-            if ($form->isSubmitted()) {
-                $result = $this->submitHandler->handle($form, function (TrashItemRestoreData $data) {
-                    $newParentLocation = $data->getLocation();
+        $form = $this->formFactory->restoreTrashItem();
+        $form->handleRequest($request);
 
-                    foreach ($data->getTrashItems() as $trashItem) {
-                        $this->trashService->recover($trashItem, $newParentLocation);
-                    }
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (TrashItemRestoreData $data) {
+                $newParentLocation = $data->getLocation();
 
-                    if (null === $newParentLocation) {
-                        $this->notificationHandler->success(
-                            $this->translator->trans(
-                                /** @Desc("Items restored under their original location.") */
-                                'trash.restore_original_location.success',
-                                [],
-                                'trash'
-                            )
-                        );
-                    } else {
-                        $this->notificationHandler->success(
-                            $this->translator->trans(
-                                /** @Desc("Items restored under '%location%' location.") */
-                                'trash.restore_new_location.success',
-                                ['%location%' => $newParentLocation->getContentInfo()->name],
-                                'trash'
-                            )
-                        );
-                    }
-
-                    return new RedirectResponse($this->generateUrl('ezplatform.trash.list'));
-                });
-
-                if ($result instanceof Response) {
-                    return $result;
+                foreach ($data->getTrashItems() as $trashItem) {
+                    $this->trashService->recover($trashItem, $newParentLocation);
                 }
+
+                if (null === $newParentLocation) {
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Items restored under their original location.") */
+                            'trash.restore_original_location.success',
+                            [],
+                            'trash'
+                        )
+                    );
+                } else {
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Items restored under '%location%' location.") */
+                            'trash.restore_new_location.success',
+                            ['%location%' => $newParentLocation->getContentInfo()->name],
+                            'trash'
+                        )
+                    );
+                }
+
+                return new RedirectResponse($this->generateUrl('ezplatform.trash.list'));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirect($this->generateUrl('ezplatform.trash.list'));
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \LogicException
+     * @throws \InvalidArgumentException
+     */
+    public function deleteAction(Request $request): Response
+    {
+        if (!$this->isGranted(new Attribute('content', 'remove'))) {
+            return $this->redirect($this->generateUrl('ezplatform.trash.list'));
+        }
+
+        $form = $this->formFactory->deleteTrashItem();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (TrashItemDeleteData $data) {
+                foreach ($data->getTrashItems() as $trashItem) {
+                    $this->trashService->deleteTrashItem($trashItem);
+                }
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Deleted selected trash items.") */
+                        'trash.deleted.success',
+                        [],
+                        'trash'
+                    )
+                );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.trash.list'));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
             }
         }
 

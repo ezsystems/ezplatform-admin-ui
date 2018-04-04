@@ -32,14 +32,19 @@
 
     btns.forEach(btn => btn.addEventListener('click', openUDW, false));
 
-    const checkboxes = [...document.querySelectorAll('form[name="trash_item_restore"] input[type="checkbox"]')]
-    ;
+    const checkboxes = [...document.querySelectorAll('form[name="trash_item_restore"] input[type="checkbox"]')];
     const buttonRestore = document.querySelector('#trash_item_restore_restore');
     const buttonRestoreUnderNewParent = document.querySelector('#trash_item_restore_location_select_content');
+    const buttonDelete = document.querySelector('#delete-trash-items');
 
     const enableButtons = (event) => {
+        const deleteCheckbox = document.querySelector('form[name="trash_item_delete"] input[type="checkbox"][value="' + event.target.value + '"]');
         const isNonEmptySelection = checkboxes.some(el => el.checked);
         const isMissingParent = checkboxes.some(el => el.checked && parseInt(el.dataset.isParentInTrash, 10) === 1);
+
+        if (deleteCheckbox) {
+            deleteCheckbox.checked = event.target.checked;
+        }
 
         if (isNonEmptySelection && !isMissingParent) {
             buttonRestore.removeAttribute('disabled');
@@ -50,9 +55,11 @@
 
         if (isNonEmptySelection) {
             buttonRestoreUnderNewParent.removeAttribute('disabled');
+            buttonDelete.removeAttribute('disabled');
         }
         else {
             buttonRestoreUnderNewParent.setAttribute('disabled', true);
+            buttonDelete.setAttribute('disabled', true);
         }
     }
 

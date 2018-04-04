@@ -184,11 +184,6 @@
         <target state="new">Delete</target>
         <note>key: modal.delete</note>
       </trans-unit>
-      <trans-unit id="08a5f336891a76fbd5fce4f454bb2d71b1df0223" resname="modal.title">
-        <source>Please confirm</source>
-        <target state="new">Please confirm</target>
-        <note>key: modal.title</note>
-      </trans-unit>
       <trans-unit id="08232f4c5c3ca88a7f2fd8e29eda7e20ec346aae" resname="search.any_time">
         <source>Any time</source>
         <target state="new">Any time</target>
