@@ -38,4 +38,32 @@ class SimpleTable extends Table
     {
         $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
     }
+
+    /**
+     * @return array all table records as hash map
+     */
+    public function getTableHash(): array
+    {
+        $tableHash = [];
+
+        /** @var NodeElement[] $allHeaders */
+        $allHeaders = $this->context->findAllWithWait($this->fields['horizontalHeaders']);
+        /** @var NodeElement[] $allRows */
+        $allRows = $this->context->findAllWithWait($this->fields['listRow']);
+        $j = 0;
+        foreach ($allRows as $row) {
+            $rowHash = [];
+            /** @var NodeElement[] $allCells */
+            $allCells = $row->findAll('css', 'td');
+            $i = 0;
+            foreach ($allCells as $cell) {
+                $rowHash[$allHeaders[$i]->getText()] = $cell->getText();
+                ++$i;
+            }
+            $tableHash[$j] = $rowHash;
+            ++$j;
+        }
+
+        return $tableHash;
+    }
 }
