@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzSupportToolsBundle\SystemInfo\SystemInfoCollectorRegistry;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,6 +21,12 @@ class SystemInfoController extends Controller
     public function __construct(SystemInfoCollectorRegistry $collectorRegistry)
     {
         $this->collectorRegistry = $collectorRegistry;
+    }
+
+    public function performAccessCheck()
+    {
+        parent::performAccessCheck();
+        $this->denyAccessUnlessGranted(new Attribute('setup', 'system_info'));
     }
 
     /**
