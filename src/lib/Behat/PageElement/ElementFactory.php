@@ -18,7 +18,7 @@ class ElementFactory
      * @param UtilityContext $context
      * @param string $elementName Name of the Element to creator
      *
-     * @return AdminList|Dialog|RightMenu|UpperMenu|UpdateForm|Breadcrumb|Notification|NavLinkTabs|UniversalDiscoveryWidget|LanguagePicker|OldSendForReviewForm|ConfirmationPopup Element to interact with
+     * @return AdminList|Dialog|SystemInfoTable|RightMenu|UpperMenu|UpdateForm|Breadcrumb|Notification|NavLinkTabs|UniversalDiscoveryWidget|LanguagePicker|OldSendForReviewForm|ConfirmationPopup Element to interact with
      */
     public static function createElement(UtilityContext $context, string $elementName, ?string ...$parameters): Element
     {
@@ -51,6 +51,8 @@ class ElementFactory
                 return new VerticalOrientedTable($context, $parameters[0]);
             case DoubleHeaderTable::ELEMENT_NAME:
                 return new DoubleHeaderTable($context, $parameters[0]);
+            case SystemInfoTable::ELEMENT_NAME:
+                return new SystemInfoTable($context, $parameters[0]);
             case NavLinkTabs::ELEMENT_NAME:
                 return new NavLinkTabs($context);
             case LanguagePicker::ELEMENT_NAME:
