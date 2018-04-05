@@ -13,10 +13,36 @@
     }
 
     &__item {
-        flex-basis: 23%;
+        flex-basis: 18%;
 
         &-label {
             margin-bottom: 0;
+        }
+
+        &--creator {
+            position: relative;
+
+            .ez-filters__input {
+                + .ez-icon {
+                    display: none;
+                }
+
+                &:disabled {
+                    cursor: auto;
+                    background-color: $ez-color-base-dark;
+                    color: $ez-white;
+                    padding-right: 2rem;
+                    text-overflow: ellipsis;
+
+                    & + .ez-icon {
+                        display: block;
+                        position: absolute;
+                        bottom: .4375rem;
+                        right: .375rem;
+                        cursor: pointer;
+                    }
+                }
+            }
         }
     }
 
@@ -33,5 +59,30 @@
 
     &__option--hidden {
         display: none;
+    }
+
+    &__user-list {
+        padding: 0;
+        list-style: none;
+        position: absolute;
+        right: 0;
+        min-width: 100%;
+        border-radius: 5px;
+        margin-bottom: 0;
+        background-color: $ez-ground-base-dark;
+        max-height: 300px;
+        overflow: auto;
+        transform: scaleY(1);
+        transform-origin: top center;
+        transition: transform .2s $ez-admin-transition;
+
+        &--hidden {
+            transform: scaleY(0);
+        }
+    }
+
+    &__user-item {
+        padding: .5rem 1rem;
+        cursor: pointer;
     }
 }

@@ -1,4 +1,7 @@
 (function (global, doc, $) {
+    let getUsersTimeout;
+    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const filterBtn = doc.querySelector('.ez-btn--filter');
     const filters = doc.querySelector('.ez-filters');
     const clearBtn = filters.querySelector('.ez-btn-clear');
@@ -10,6 +13,10 @@
     const sectionSelect = doc.querySelector('.ez-filters__item--section .ez-filters__select');
     const lastModifiedSelect = doc.querySelector('.ez-filters__item--modified .ez-filters__select');
     const lastCreatedSelect = doc.querySelector('.ez-filters__item--created .ez-filters__select');
+    const creatorInput = doc.querySelector('.ez-filters__item--creator .ez-filters__input');
+    const searchCreatorInput = doc.querySelector('#search_creator');
+    const usersList = doc.querySelector('.ez-filters__item--creator .ez-filters__user-list');
+    const resetCreatorBtn = doc.querySelector('.ez-filters__item--creator .ez-icon--reset');
     const listGroupsTitle = [...doc.querySelectorAll('.ez-content-type-selector__group-title')];
     const contentTypeCheckboxes = [...doc.querySelectorAll('.ez-content-type-selector__item [type="checkbox"]')];
     const clearFilters = (event) => {
@@ -38,15 +45,18 @@
         lastCreatedPeriod.value = '';
         lastCreatedEnd.value = '';
 
+        handleResetUser();
+
         event.target.closest('form').submit();
     };
-    const toggleApplyBtnDisabledState = () => {
+    const toggleDisabledStateOnApplyBtn = () => {
         const contentTypeOption = contentTypeSelect.querySelector('option');
         const isContentTypeSelected = contentTypeOption.innerHTML !== contentTypeOption.dataset.default;
         const isSectionSelected = !!sectionSelect.value;
         const isModifiedSelected = !!lastModifiedSelect.value;
         const isCreatedSelected = !!lastCreatedSelect.value;
-        const isEnabled = isContentTypeSelected || isSectionSelected || isModifiedSelected || isCreatedSelected;
+        const isCreatorSelected = !!searchCreatorInput.value;
+        const isEnabled = isContentTypeSelected || isSectionSelected || isModifiedSelected || isCreatedSelected || isCreatorSelected;
         const methodName = isEnabled ? 'removeAttribute' : 'setAttribute';
 
         applyBtn[methodName]('disabled', !isEnabled);
@@ -76,7 +86,7 @@
             doc.querySelector(modal[0].dataset.periodSelector).value = event.target.value;
             doc.querySelector(modal[0].dataset.endSelector).value = '';
 
-            toggleApplyBtnDisabledState();
+            toggleDisabledStateOnApplyBtn();
 
             return;
         }
@@ -96,7 +106,7 @@
 
         option.innerHTML = contentTypesText || defaultText;
 
-        toggleApplyBtnDisabledState();
+        toggleDisabledStateOnApplyBtn();
     };
     const dateConfig = {
         formatDate: (date) => (new Date(date)).toLocaleDateString()
@@ -123,7 +133,7 @@
         doc.querySelector(modal.dataset.periodSelector).value = `P0Y0M${days}D`;
         doc.querySelector(modal.dataset.endSelector).value = endDate;
 
-        toggleApplyBtnDisabledState();
+        toggleDisabledStateOnApplyBtn();
     };
     const updateSourceInputValue = (sourceInput, date) => {
         if (!date.length) {
@@ -154,6 +164,93 @@
             defaultDate
         }));
     };
+    const getUsersList = (value) => {
+        const body = JSON.stringify({
+            ViewInput: {
+                identifier: `find-user-by-name-${value}`,
+                public: false,
+                ContentQuery: {
+                    Criteria: {},
+                    FacetBuilders: {},
+                    SortClauses: {},
+                    Query: {
+                        FullTextCriterion: `${value}*`,
+                        ContentTypeIdentifierCriterion: creatorInput.dataset.contentTypeIdentifiers
+                    },
+                    limit: 50,
+                    offset: 0
+                }
+            }
+        });
+        const request = new Request('/api/ezp/v2/views', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/vnd.ez.api.View+json; version=1.1',
+                'Content-Type': 'application/vnd.ez.api.ViewInput+json; version=1.1',
+                'X-Siteaccess': siteaccess,
+                'X-CSRF-Token': token
+            },
+            body,
+            mode: 'same-origin',
+            credentials: 'same-origin'
+        });
+
+        fetch(request)
+            .then(response => response.json())
+            .then(showUsersList);
+    };
+    const createUsersListItem = (user) => `<li data-id="${user._id}" data-name="${user.Name}" class="ez-filters__user-item">${user.Name}</li>`;
+    const showUsersList = (data) => {
+        const hits = data.View.Result.searchHits.searchHit;
+        const users = hits.reduce((total, hit) => total + createUsersListItem(hit.value.Content), '');
+        const methodName = users ? 'addEventListener' : 'removeEventListener';
+
+        usersList.innerHTML = users;
+        usersList.classList.remove('ez-filters__user-list--hidden');
+
+        doc.querySelector('body')[methodName]('click', handleClickOutsideUserList, false);
+    };
+    const handleTyping = (event) => {
+        const value = event.target.value.trim();
+
+        window.clearTimeout(getUsersTimeout);
+
+        if (value.length > 2) {
+            getUsersTimeout = window.setTimeout(getUsersList.bind(null, value), 200);
+        } else {
+            usersList.classList.add('ez-filters__user-list--hidden');
+            doc.querySelector('body').removeEventListener('click', handleClickOutsideUserList, false);
+        }
+    };
+    const handleSelectUser = (event) => {
+        searchCreatorInput.value = event.target.dataset.id;
+
+        usersList.classList.add('ez-filters__user-list--hidden');
+
+        creatorInput.value = event.target.dataset.name;
+        creatorInput.setAttribute('disabled', true);
+
+        doc.querySelector('body').removeEventListener('click', handleClickOutsideUserList, false);
+
+        toggleDisabledStateOnApplyBtn();
+    };
+    const handleResetUser = () => {
+        searchCreatorInput.value = '';
+
+        creatorInput.value = '';
+        creatorInput.removeAttribute('disabled');
+
+        toggleDisabledStateOnApplyBtn();
+    };
+    const handleClickOutsideUserList = (event) => {
+        if (event.target.closest('.ez-filters__item--creator')) {
+            return;
+        }
+
+        creatorInput.value = '';
+        usersList.classList.add('ez-filters__user-list--hidden');
+        doc.querySelector('body').removeEventListener('click', handleClickOutsideUserList, false);
+    };
 
     dateFields.forEach(initFlatPickr);
 
@@ -162,9 +259,12 @@
     clearBtn.addEventListener('click', clearFilters, false);
     filterBtn.addEventListener('click', toggleFiltersVisibility, false);
     contentTypeSelect.addEventListener('click', toggleContentTypeSelectorVisibility, false);
-    sectionSelect.addEventListener('change', toggleApplyBtnDisabledState, false);
+    sectionSelect.addEventListener('change', toggleDisabledStateOnApplyBtn, false);
     lastModifiedSelect.addEventListener('change', toggleModalVisibility, false);
     lastCreatedSelect.addEventListener('change', toggleModalVisibility, false);
+    creatorInput.addEventListener('keyup', handleTyping, false);
+    usersList.addEventListener('click', handleSelectUser, false);
+    resetCreatorBtn.addEventListener('click', handleResetUser, false);
     listGroupsTitle.forEach(group => group.addEventListener('click', toggleGroupState, false));
     contentTypeCheckboxes.forEach(checkbox => checkbox.addEventListener('change', filterByContentType, false));
     selectBtns.forEach(btn => btn.addEventListener('click', setSelectedDateRange, false));
