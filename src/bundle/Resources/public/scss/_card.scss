@@ -63,15 +63,67 @@
 .ez-card--fieldtype-container {
     background: $ez-white;
 
+    &.ez-card--collapsed {
+        .ez-card__body {
+            max-height: 0;
+            overflow: hidden;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .ez-card__body-display-toggler {
+            .ez-icon--caret-down {
+                display: none;
+            }
+        }
+    }
+
+    &:not(.ez-card--collapsed) {
+        .ez-card__body-display-toggler {
+            .ez-icon--caret-next {
+                display: none;
+            }
+        }
+    }
+
     .ez-card__header {
         line-height: 40px;
         padding: 0 20px;
+        display: flex;
 
-        label {
+        .form-check-label {
             margin-bottom: 0;
             font-weight: 700;
             color: $ez-black;
             font-size: 17px;
+        }
+
+        .ez-card__body-display-toggler {
+            margin: .25rem 0 .25rem auto;
+            height: 2rem;
+            width: 2rem;
+            padding: 0;
+            cursor: pointer;
+            background: $ez-color-base-pale;
+            transition: background .3s $ez-admin-transition;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background: darken($ez-color-base-pale, 15%);
+                outline: none;
+                box-shadow: none;
+            }
+
+            &:focus {
+                outline: none;
+                box-shadow: none;
+            }
+
+            .ez-icon {
+                fill: $ez-black;
+            }
         }
     }
 }
