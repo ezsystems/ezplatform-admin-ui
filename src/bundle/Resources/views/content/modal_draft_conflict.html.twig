@@ -1,0 +1,51 @@
+{% trans_default_domain 'draft_conflict' %}
+
+{% import _self as version_modal_draft_conflict %}
+
+<div class="modal fade ez-modal ez-modal--version-draft-conflict" id="version-draft-conflict-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ 'draft.conflict.header'|trans|desc('Draft conflict when editing') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg class="ez-icon ez-icon--medium" aria-hidden="true">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="ez-modal-body__main">
+                    <p class="ez-modal-body__main-content">
+                        {% set number = conflicted_drafts|length %}
+                        {{ 'draft.conflict.number'|transchoice(number, {'%number%': number })|desc(
+                        '{1}There are %number% draft for this content item.|]1,Inf[ There are %number% drafts for this content item'
+                        ) }}
+                    </p>
+                    <p class="ez-modal-body__main-content">
+                        {{ 'draft.conflict.choice'|trans({})|desc('You can either edit any of your existing draft(s) or add a new one.') }}
+                    </p>
+                </div>
+                {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: null, tools: version_modal_draft_conflict.table_header_tools() } %}
+                <div class="ez-scrollable-wrapper">
+                    {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', {
+                        'versions': conflicted_drafts,
+                        'location': location,
+                        'is_draft': true,
+                        'haveToPaginate': false,
+                        'is_draft_conflict': true,
+                    }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% macro table_header_tools() %}
+    <button type="button" class="btn btn-primary ez-btn--add-draft"
+            title="{{ 'tab.versions.action.delete'|trans|desc('Add draft') }}">
+        <svg class="ez-icon ez-icon-create">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+        </svg>
+    </button>
+{% endmacro %}

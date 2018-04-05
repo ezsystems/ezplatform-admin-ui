@@ -40,6 +40,11 @@ class ConfigureMenuEvent extends Event
     const CONTENT_TYPE_CREATE_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.content_type_create_sidebar_right';
     const CONTENT_TYPE_EDIT_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.content_type_edit_sidebar_right';
     const URL_EDIT_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.url_edit_sidebar_right';
+    const USER_PASSWORD_CHANGE_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.user_password_change_sidebar_right';
+    const OBJECT_STATE_GROUP_CREATE_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.object_state_group_create_sidebar_right';
+    const OBJECT_STATE_GROUP_EDIT_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.object_state_group_edit_sidebar_right';
+    const OBJECT_STATE_CREATE_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.object_state_create_sidebar_right';
+    const OBJECT_STATE_EDIT_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.object_state_edit_sidebar_right';
 
     /** @var FactoryInterface */
     private $factory;

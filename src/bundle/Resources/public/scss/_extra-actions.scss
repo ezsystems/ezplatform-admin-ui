@@ -21,7 +21,7 @@
         transition: all .2s $ez-admin-transition;
 
         &:hover,
-        &:focus, 
+        &:focus,
         &:active {
             text-decoration: none;
         }
@@ -45,6 +45,7 @@
         line-height: 45px;
         color: $ez-white;
         padding: 0 8px;
+        font-weight: 700;
     }
 
     &__content {
@@ -73,21 +74,16 @@
             padding: 0 16px;
             line-height: 45px;
             background: $ez-white;
-            color: $ez-color-secondary;
             text-decoration: none;
             cursor: pointer;
             transition: all .2s $ez-admin-transition;
             margin-bottom: 0;
-
-            &:hover,
-            &:focus, 
-            &:active {
-                text-decoration: none;
-            }
+            font-size: .9375rem;
 
             &:hover,
             &:focus {
                 background: $ez-secondary-ground-pale;
+                text-decoration: none;
             }
 
             &:active {
@@ -99,29 +95,30 @@
                 margin-bottom: .5rem;
             }
 
-            label {
+            &-label {
                 display: flex;
                 align-items: center;
                 margin: 0;
                 cursor: pointer;
+            }
 
-                [type="radio"] {
-                    display: none;
-                }
+            &-input[type="radio"] {
+                display: none;
             }
         }
     }
 
     &__section-header {
         background: $ez-ground-base-dark;
-        color: $ez-color-base-dark;
-        padding-left: .5rem;
+        padding: .25rem 0 .25rem .5rem;
+        font-size: .9375rem;
+        font-weight: 700;
     }
 
     &__section-content {
         background: $ez-white;
-        color: $ez-color-base-dark;
         padding: 1rem .5rem;
+        font-size: .9375rem;
 
         select {
             display: inline-block;
@@ -143,6 +140,7 @@
             background: $ez-white;
             transition: all .2s $ez-admin-transition;
             margin-bottom: 0;
+            padding-left: 0;
 
             &:hover,
             &:focus {
@@ -154,13 +152,14 @@
                 color: $ez-white;
             }
 
-            label {
+            &-label {
                 margin: 0;
                 display: block;
+                padding-left: 1.5rem;
+            }
 
-                [type="radio"] {
-                    display: none;
-                }
+            &-input[type="radio"] {
+                display: none;
             }
         }
 

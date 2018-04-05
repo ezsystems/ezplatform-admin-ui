@@ -1,0 +1,37 @@
+.ez-filters {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid $ez-color-secondary;
+    transform: scaleY(1);
+    transform-origin: top center;
+    transition: all 0.2s $ez-admin-transition;
+    flex-wrap: wrap;
+
+    &--collapsed {
+        transform: scaleY(0);
+        height: 0;
+    }
+
+    &__item {
+        flex-basis: 23%;
+
+        &-label {
+            margin-bottom: 0;
+        }
+    }
+
+    &__btns {
+        flex-basis: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+
+        .btn {
+            margin: 0 1rem;
+        }
+    }
+
+    &__option--hidden {
+        display: none;
+    }
+}

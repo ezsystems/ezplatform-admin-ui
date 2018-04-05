@@ -418,6 +418,19 @@ ezplatform.version.remove:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Version:remove'
 
+ezplatform.version.has_no_conflict:
+    path: /version/has-no-conflict/{contentId}/{versionNo}/{languageCode}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Version\VersionConflict:versionHasNoConflict'
+        languageCode: ~
+
+ezplatform.version_draft.has_no_conflict:
+    path: /version-draft/has-no-conflict/{contentId}
+    options:
+        expose: true
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Content\VersionDraftConflict:draftHasNoConflict'
+
 # LocationView / Locations tab
 
 ezplatform.location.add:
@@ -467,11 +480,12 @@ ezplatform.content.create:
         _controller: 'EzPlatformAdminUiBundle:Content:create'
 
 ezplatform.content.preview:
-    path: /content/{contentId}/preview/{versionNo}/{languageCode}
+    path: /content/{contentId}/preview/{versionNo}/{languageCode}/{locationId}
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Content:preview'
         languageCode: ~
+        locationId: ~
 
 ezplatform.content.translate:
     path: /content/{contentId}/translate/{toLanguageCode}/{fromLanguageCode}
@@ -522,3 +536,127 @@ ezplatform.user.delete:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:User\UserDelete:userDelete'
+
+ezplatform.user.forgot_password:
+    path: /user/forgot-password
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:User\UserForgotPassword:userForgotPassword'
+
+ezplatform.user.forgot_password.login:
+    path: /user/forgot-password/login
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:User\UserForgotPassword:userForgotPasswordLogin'
+
+ezplatform.user.reset_password:
+    path: /user/reset-password/{hashKey}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:User\UserForgotPassword:userResetPassword'
+
+#
+# Profile
+#
+
+ezplatform.user_profile.change_password:
+    path: /user/change-password
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:UserProfile\UserPasswordChange:userPasswordChange'
+
+#
+# Custom URL alias
+#
+
+ezplatform.custom_url.add:
+    path: /url-alias/add
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:UrlAlias:add'
+
+ezplatform.custom_url.remove:
+    path: /url-alias/remove
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:UrlAlias:remove'
+
+#
+# Content on the Fly
+#
+
+ezplatform.content_on_the_fly.create:
+    path: /content/create/on-the-fly/{contentTypeIdentifier}/{languageCode}/{locationId}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentOnTheFly:createContent'
+    options:
+        expose: true
+
+ezplatform.content_on_the_fly.has_access:
+    path: /content/create/on-the-fly/{contentTypeIdentifier}/{languageCode}/{locationId}/has-access
+    methods: ['GET']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentOnTheFly:hasCreateAccess'
+    options:
+        expose: true
+
+#
+# Object States
+#
+
+ezplatform.object_state.groups.list:
+    path: /state/groups
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:list'
+
+ezplatform.object_state.group.add:
+    path: /state/group/create
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:add'
+
+ezplatform.object_state.group.update:
+    path: /state/group/update/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:update'
+
+ezplatform.object_state.group.delete:
+    path: /state/group/delete/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:delete'
+
+ezplatform.object_state.group.bulk_delete:
+    path: /state/group/bulk-delete
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:bulkDelete'
+
+ezplatform.object_state.group.view:
+    path: /state/group/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectStateGroup:view'
+
+ezplatform.object_state.state.add:
+    path: /state/state/create/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:add'
+
+ezplatform.object_state.state.view:
+    path: /state/state/{objectStateId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:view'
+
+ezplatform.object_state.state.update:
+    path: /state/state/update/{objectStateId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:update'
+
+ezplatform.object_state.state.delete:
+    path: /state/state/delete/{objectStateId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:delete'
+
+ezplatform.object_state.state.bulk_delete:
+    path: /state/state/bulk-delete/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:bulkDelete'
+
+ezplatform.object_state.contentstate.update:
+    path: /state/contentstate/update/{contentInfoId}/group/{objectStateGroupId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ObjectState:updateContentState'

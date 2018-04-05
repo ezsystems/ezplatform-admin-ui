@@ -4,7 +4,7 @@
 
 {%- block ezplatform_fieldtype_ezmedia_row -%}
     {% set preview_block_name = 'ezmedia_preview' %}
-    {% set max_file_size = (form.parent.vars.value.fieldDefinition.validatorConfiguration.FileSizeValidator.maxFileSize * 1024 * 1024)|round %}
+    {% set max_file_size = min(form.parent.vars.value.fieldDefinition.validatorConfiguration.FileSizeValidator.maxFileSize * 1024 * 1024, max_upload_size)|round %}
     {% set attr = attr|merge({'accept': 'video/*'}) %}
     {{ block('binary_base_row') }}
 {%- endblock -%}
@@ -32,9 +32,9 @@
             <div class="ez-field-edit-preview__settings">
                 <div class="ez-field-edit-preview__section-title form-control-label">{{ 'content.field_type.ezmedia.player_settings'|trans({}, 'ezrepoforms_content')|desc('Player settings') }}</div>
                 <div class="ez-field-edit-preview__toggles">
-                    {{ form_row(form.hasController) }}
-                    {{ form_row(form.autoplay) }}
-                    {{ form_row(form.loop) }}
+                    {{ form_row(form.hasController, {'label_attr': {'class': 'checkbox-inline'}}) }}
+                    {{ form_row(form.autoplay, {'label_attr': {'class': 'checkbox-inline'}}) }}
+                    {{ form_row(form.loop, {'label_attr': {'class': 'checkbox-inline'}}) }}
                 </div>
                 <div class="ez-field-edit-preview__dimensions">
                     {{ form_row(form.width) }}

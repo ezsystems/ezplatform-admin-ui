@@ -4,11 +4,13 @@ imports:
     - { resource: services/tabs.yml }
     - { resource: services/menu.yml }
     - { resource: services/pagination.yml }
-    - { resource: services/ui_config.yml }
+    - { resource: services/ui_config/* }
     - { resource: services/components.yml }
     - { resource: services/dashboard.yml }
     - { resource: services/modules/subitems.yml }
     - { resource: services/form_processors.yml }
+    - { resource: services/validators.yml }
+    - { resource: services/siteaccess.yml }
 
 parameters:
 
@@ -23,6 +25,13 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
             - [performAccessCheck, []]
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserForgotPasswordController:
+        tags: [controller.service_arguments]
+        calls:
+            - [setContainer, ['@service_container']]
+        arguments:
+            $tokenIntervalSpec: '$security.token_interval_spec$'
 
     EzSystems\EzPlatformAdminUiBundle\ParamConverter\:
         resource: "../../ParamConverter/*"
@@ -109,3 +118,10 @@ services:
         arguments: [ '@request_stack' ]
         tags:
             - { name: knp_menu.voter }
+
+    EzSystems\EzPlatformAdminUi\Form\EventListener\:
+        resource: '../../../lib/Form/EventListener'
+
+    EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\ContentOnTheFlyDispatcher:
+        calls:
+            - [setEventDispatcher, ["@event_dispatcher"]]

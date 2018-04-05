@@ -12,18 +12,12 @@
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-' ~ form_version_remove_draft.remove.vars.id }
         }) }}
         {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'), tools: tab.table_header_tools(form_version_remove_draft) } %}
-        {% if draft_pager.currentPageResults is not empty %}
-            {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', {
-                'versions': draft_pager.currentPageResults,
-                'is_draft': true,
-                'form': form_version_remove_draft,
-                'haveToPaginate': draft_pager.haveToPaginate
-            }) }}
-        {% else %}
-            <p class="ez-relations-box-list-no-content">
-                {{ 'tab.versions.no_permission'|trans()|desc('You don\'t have access to view the content item\'s versions') }}
-            </p>
-        {% endif %}
+        {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', {
+            'versions': draft_pager.currentPageResults,
+            'is_draft': true,
+            'form': form_version_remove_draft,
+            'haveToPaginate': draft_pager.haveToPaginate
+        }) }}
         {{ form_end(form_version_remove_draft) }}
 
         {% if draft_pager.haveToPaginate %}
@@ -47,6 +41,7 @@
             </div>
         {% endif %}
     </section>
+    {% include '@EzPlatformAdminUi/content/modal_version_conflict.html.twig' %}
 {% endif %}
 
 {% if published_versions is not empty %}
@@ -102,11 +97,3 @@
     'data_click': '#' ~ form.remove.vars.id,
     } %}
 {% endmacro %}
-
-{% block javascripts %}
-    {% javascripts
-    '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}

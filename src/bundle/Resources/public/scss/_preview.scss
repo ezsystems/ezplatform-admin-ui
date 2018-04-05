@@ -14,24 +14,43 @@
                 align-items: center;
                 justify-content: space-between;
                 line-height: 0;
+                flex-basis: 10%;
             }
 
             &--actions {
-                flex-basis: auto;
                 display: flex;
                 justify-content: center;
                 border: 1px solid $ez-color-base-medium;
                 border-radius: 5px;
                 padding: .1rem;
                 background: $ez-white;
+                flex-basis: 5%;
+                margin-right: 2rem;
+            }
+
+            &--description {
+                flex-basis: 75%;
+                display: flex;
+                align-items: center;
+            }
+
+            &--siteaccess {
+                flex-basis: 10%;
+            }
+
+            &-label {
+                display: inline-block;
+                margin-right: .5rem;
+                font-size: .8rem;
             }
 
             &-text {
                 text-overflow: ellipsis;
                 width: 80%;
-                display: block;
                 overflow: hidden;
+                display: inline-block;
                 white-space: nowrap;
+                font-weight: 700;
             }
 
             .ez-preview__action {

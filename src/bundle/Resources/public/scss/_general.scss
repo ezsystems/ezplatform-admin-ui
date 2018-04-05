@@ -48,6 +48,8 @@ a {
 
 .btn {
     white-space: normal;
+    cursor: pointer;
+    transition: opacity .3s $ez-admin-transition, background .3s $ez-admin-transition;
 }
 
 button {
@@ -136,4 +138,14 @@ button {
 
 .ez-dashboard-row {
     flex-direction: column;
+}
+
+.ez-scrollable-wrapper {
+    max-height: 60vh;
+    overflow: auto;
+}
+
+.ez-prevent-click,
+.ez-prevent-click * {
+    pointer-events: none !important;
 }

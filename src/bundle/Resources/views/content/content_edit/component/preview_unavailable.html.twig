@@ -1,0 +1,10 @@
+{% trans_default_domain 'content_edit_component_preview_unavailable' %}
+
+<div class="alert alert-info mt-3 mx-5 ez-alert ez-alert--info" role="alert">
+    <svg class="ez-icon ez-icon--small ez-icon-warning">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#warning"></use>
+    </svg>
+
+    {{ 'preview_unavailable'|trans|desc('You cannot preview this translation: there is no site available for this language. Please contact the website administrator.') }}
+</div>

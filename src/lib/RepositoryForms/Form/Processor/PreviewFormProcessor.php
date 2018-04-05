@@ -15,12 +15,15 @@ use eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException;
 use eZ\Publish\API\Repository\Exceptions\ContentValidationException;
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentStruct;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Event\ContentEditEvents;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\RepositoryForms\Data\Content\ContentCreateData;
 use EzSystems\RepositoryForms\Data\Content\ContentUpdateData;
+use EzSystems\RepositoryForms\Data\NewnessCheckable;
 use EzSystems\RepositoryForms\Data\NewnessChecker;
 use EzSystems\RepositoryForms\Event\FormActionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -48,22 +51,28 @@ class PreviewFormProcessor implements EventSubscriberInterface
     /** @var TranslatorInterface */
     private $translator;
 
+    /** @var LocationService */
+    private $locationService;
+
     /**
      * @param ContentService $contentService
      * @param UrlGeneratorInterface $urlGenerator
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
+     * @param LocationService $locationService
      */
     public function __construct(
         ContentService $contentService,
         UrlGeneratorInterface $urlGenerator,
         NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        LocationService $locationService
     ) {
         $this->contentService = $contentService;
         $this->urlGenerator = $urlGenerator;
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
+        $this->locationService = $locationService;
     }
 
     /**
@@ -87,10 +96,13 @@ class PreviewFormProcessor implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
         $languageCode = $form->getConfig()->getOption('languageCode');
+        $referrerLocation = $event->getOption('referrerLocation');
 
         try {
             $contentDraft = $this->saveDraft($data, $languageCode);
+            $contentLocation = $this->resolveLocation($contentDraft, $referrerLocation, $data);
             $url = $this->urlGenerator->generate('ezplatform.content.preview', [
+                'locationId' => null !== $contentLocation ? $contentLocation->id : null,
                 'contentId' => $contentDraft->id,
                 'versionNo' => $contentDraft->getVersionInfo()->versionNo,
                 'languageCode' => $languageCode,
@@ -98,11 +110,7 @@ class PreviewFormProcessor implements EventSubscriberInterface
         } catch (Exception $e) {
             $this->notificationHandler->error(
                 /** @Desc("Cannot save content draft.") */
-                $this->translator->trans(
-                    'error.preview',
-                    [],
-                    'content_preview'
-                )
+                $this->translator->trans('error.preview', [], 'content_preview')
             );
             $url = $this->getContentEditUrl($data, $languageCode);
         }
@@ -184,5 +192,21 @@ class PreviewFormProcessor implements EventSubscriberInterface
         return $data->isNew()
             ? $data->mainLanguageCode
             : $data->contentDraft->getVersionInfo()->getContentInfo()->mainLanguageCode;
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $referrerLocation
+     * @param \EzSystems\RepositoryForms\Data\NewnessCheckable $data
+     *
+     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
+     */
+    private function resolveLocation(Content $content, ?Location $referrerLocation, NewnessCheckable $data): ?Location
+    {
+        if ($data->isNew() || (!$content->contentInfo->published && null === $content->contentInfo->mainLocationId)) {
+            return null; // no location exists until new content is published
+        }
+
+        return $referrerLocation ?? $this->locationService->loadLocation($content->contentInfo->mainLocationId);
     }
 }

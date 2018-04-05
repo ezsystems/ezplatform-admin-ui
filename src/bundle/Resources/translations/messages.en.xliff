@@ -6,10 +6,20 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="d2293b387ecddbc6173fd579abd37873fcbc5e97" resname="authentication.forgot_password">
+        <source>Forgot password?</source>
+        <target state="new">Forgot password?</target>
+        <note>key: authentication.forgot_password</note>
+      </trans-unit>
       <trans-unit id="da44d8915172b0c8a874e26956f44aa5501c7e6b" resname="authentication.password">
         <source>Password</source>
         <target state="new">Password</target>
         <note>key: authentication.password</note>
+      </trans-unit>
+      <trans-unit id="7a3631c8f70b8b52f902530ad052c71609eb7177" resname="authentication.reset_your_password">
+        <source>Reset your password</source>
+        <target state="new">Reset your password</target>
+        <note>key: authentication.reset_your_password</note>
       </trans-unit>
       <trans-unit id="8785f4abdfdf72fe9001fe0553c6e3a582cfcc08" resname="authentication.submit">
         <source>Login</source>
@@ -25,6 +35,26 @@
         <source>Admin</source>
         <target state="new">Admin</target>
         <note>key: breadcrumb.admin</note>
+      </trans-unit>
+      <trans-unit id="74954052fb86d856c77ee642195c0c0b23bf9e70" resname="breadcrumb.user_preferences">
+        <source>User Preferences</source>
+        <target state="new">User Preferences</target>
+        <note>key: breadcrumb.user_preferences</note>
+      </trans-unit>
+      <trans-unit id="fb19ae886e63bac3aa3b851ac00aae8a3b777992" resname="content.in_trash">
+        <source>In Trash</source>
+        <target state="new">In Trash</target>
+        <note>key: content.in_trash</note>
+      </trans-unit>
+      <trans-unit id="fe1c876b1a9bcde155f03227bce4ae4fbd54c24f" resname="custom_url_alias_add_form.add">
+        <source>Create</source>
+        <target state="new">Create</target>
+        <note>key: custom_url_alias_add_form.add</note>
+      </trans-unit>
+      <trans-unit id="84348d405f3829787a5dfa80fbe5abbf07e3c118" resname="custom_url_alias_add_form.remove">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note>key: custom_url_alias_add_form.remove</note>
       </trans-unit>
       <trans-unit id="7cb40cbc703336ab1285e81ebf100b82b05a0e27" resname="error.page.403.actions">
         <source><![CDATA[You can also go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> here or <a class="error-page__link" href="%search%">search</a> for other content.]]></source>
@@ -81,6 +111,64 @@
         <target state="new">Remove author</target>
         <note>key: ezauthor.action.delete</note>
       </trans-unit>
+      <trans-unit id="f73d03811ba3033d6b44986d55ca728c5a88b168" resname="ezplatform.forgot_user_password.contact_administrator">
+        <source>If you do not remember your login, please contact the site administrator.</source>
+        <target state="new">If you do not remember your login, please contact the site administrator.</target>
+        <note>key: ezplatform.forgot_user_password.contact_administrator</note>
+      </trans-unit>
+      <trans-unit id="ffb6990d5e75fe6dc86e94166b77e40a79e4e2a3" resname="ezplatform.forgot_user_password.login">
+        <source>This email is connected with several accounts. Please enter your login.</source>
+        <target state="new">This email is connected with several accounts. Please enter your login.</target>
+        <note>key: ezplatform.forgot_user_password.login</note>
+      </trans-unit>
+      <trans-unit id="db6dd97ed4776bb0e9843554c48e3962327e8f50" resname="ezplatform.forgot_user_password.message">
+        <source><![CDATA[Hi,
+        <br /><br />
+        We have received a request to reset the password for your account on site. Click “reset password” below to choose a new password:
+        <br /><br />
+        <a href="%reset_password%">Reset password<a/>
+        <br /><br />
+        If you did not request a password reset, please ignore this email, and your password will remain the same.]]></source>
+        <target state="new"><![CDATA[Hi,
+        <br /><br />
+        We have received a request to reset the password for your account on site. Click “reset password” below to choose a new password:
+        <br /><br />
+        <a href="%reset_password%">Reset password<a/>
+        <br /><br />
+        If you did not request a password reset, please ignore this email, and your password will remain the same.]]></target>
+        <note>key: ezplatform.forgot_user_password.message</note>
+      </trans-unit>
+      <trans-unit id="801ba7693e80ca58fbf2a9da2b735bf3f324fd27" resname="ezplatform.forgot_user_password.reset_your_password">
+        <source>Reset your password</source>
+        <target state="new">Reset your password</target>
+        <note>key: ezplatform.forgot_user_password.reset_your_password</note>
+      </trans-unit>
+      <trans-unit id="36aa6723300a41ba80ee0096c0d2bcf34fd48aca" resname="ezplatform.forgot_user_password.success">
+        <source><![CDATA[<p>We have sent an email to the email address of your account. You should receive the email shortly.</p>
+            <p>If the email is slow to arrive, check your spam folders.</p>
+            <p>If you receive no email, it’s that your username or email is unknown to us, so please double check.</p>
+            <p>If you reset your password multiple times, only the most recent email link will be valid</p>]]></source>
+        <target state="new"><![CDATA[<p>We have sent an email to the email address of your account. You should receive the email shortly.</p>
+            <p>If the email is slow to arrive, check your spam folders.</p>
+            <p>If you receive no email, it’s that your username or email is unknown to us, so please double check.</p>
+            <p>If you reset your password multiple times, only the most recent email link will be valid</p>]]></target>
+        <note>key: ezplatform.forgot_user_password.success</note>
+      </trans-unit>
+      <trans-unit id="40dd2934190789b016771a0fc3b41dcdfe0bb920" resname="ezplatform.reset_user_password.change_password">
+        <source>Change password</source>
+        <target state="new">Change password</target>
+        <note>key: ezplatform.reset_user_password.change_password</note>
+      </trans-unit>
+      <trans-unit id="8359e9b6409139537d0eaeeacaedbc4d0912a105" resname="ezplatform.reset_user_password.link_is_not_valid">
+        <source><![CDATA[This link is not valid anymore, you can <a href="%forgot_user_password%">generate a new link</a> to reset your password.]]></source>
+        <target state="new"><![CDATA[This link is not valid anymore, you can <a href="%forgot_user_password%">generate a new link</a> to reset your password.]]></target>
+        <note>key: ezplatform.reset_user_password.link_is_not_valid</note>
+      </trans-unit>
+      <trans-unit id="5149c594d64197e519d38a1a2e7368140716bb81" resname="ezplatform.reset_user_password.success">
+        <source><![CDATA[Congrats, your password has been changed, you can now <a href="%login%">login</a> to eZ Platform.]]></source>
+        <target state="new"><![CDATA[Congrats, your password has been changed, you can now <a href="%login%">login</a> to eZ Platform.]]></target>
+        <note>key: ezplatform.reset_user_password.success</note>
+      </trans-unit>
       <trans-unit id="5cf420af18fd4a8d856fd30bc13aea5039369f9b" resname="form.cancel">
         <source>Cancel</source>
         <target state="new">Cancel</target>
@@ -101,10 +189,15 @@
         <target state="new">Please confirm</target>
         <note>key: modal.title</note>
       </trans-unit>
-      <trans-unit id="6fa93ef4dfbce97076a254427bb30bf7c5819c5d" resname="search.perform">
-        <source>Search</source>
-        <target state="new">Search</target>
-        <note>key: search.perform</note>
+      <trans-unit id="08232f4c5c3ca88a7f2fd8e29eda7e20ec346aae" resname="search.any_time">
+        <source>Any time</source>
+        <target state="new">Any time</target>
+        <note>key: search.any_time</note>
+      </trans-unit>
+      <trans-unit id="03d6d5922fd2012e155e50306eaf98e2dfeb21c6" resname="search.section.any">
+        <source>Any section</source>
+        <target state="new">Any section</target>
+        <note>key: search.section.any</note>
       </trans-unit>
       <trans-unit id="9567771350aff93580f743089937b0c8fe31058e" resname="section.assign,content">
         <source>Assign Content</source>

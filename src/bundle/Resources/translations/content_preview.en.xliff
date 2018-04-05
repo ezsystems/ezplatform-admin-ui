@@ -16,6 +16,11 @@
         <target state="new">Preview</target>
         <note>key: preview</note>
       </trans-unit>
+      <trans-unit id="4f8fad3c2cfe284942ebc83149ede92126ba2dc7" resname="previewing">
+        <source>Previewing</source>
+        <target state="new">Previewing</target>
+        <note>key: previewing</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

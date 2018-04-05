@@ -146,6 +146,11 @@
         <target state="new">Languages</target>
         <note>key: main__admin__languages</note>
       </trans-unit>
+      <trans-unit id="1d350945e7732f519fd5d2f6a69c926a193d6146" resname="main__admin__object_states">
+        <source>Object States</source>
+        <target state="new">Object States</target>
+        <note>key: main__admin__object_states</note>
+      </trans-unit>
       <trans-unit id="8a5845bd0e93b67b2ac54a06f2eae85f2cb3b13d" resname="main__admin__roles">
         <source>Roles</source>
         <target state="new">Roles</target>
@@ -190,6 +195,46 @@
         <source>Admin</source>
         <target state="new">Admin</target>
         <note>key: main_admin</note>
+      </trans-unit>
+      <trans-unit id="f3561dffc3e7e63e03f3f5d1a4e2b4eda80e051a" resname="object_state_create__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: object_state_create__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="1052991c551dfafbaca03084515a930162d9f453" resname="object_state_create__sidebar_right__create">
+        <source>Create</source>
+        <target state="new">Create</target>
+        <note>key: object_state_create__sidebar_right__create</note>
+      </trans-unit>
+      <trans-unit id="b18f3c02433848bb82632323b018b3e3094c5eab" resname="object_state_edit__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: object_state_edit__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="063a560058e7b40ddfc281c414fa7bb7056cb18d" resname="object_state_edit__sidebar_right__save">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: object_state_edit__sidebar_right__save</note>
+      </trans-unit>
+      <trans-unit id="6d0d5ef21648f88e82cdd49203e02eb897d55290" resname="object_state_group_create__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: object_state_group_create__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="929c5571f3871d9c90c2eaacb8b41ffd25ed71de" resname="object_state_group_create__sidebar_right__create">
+        <source>Create</source>
+        <target state="new">Create</target>
+        <note>key: object_state_group_create__sidebar_right__create</note>
+      </trans-unit>
+      <trans-unit id="b5dfd081ee2a144e617aaa44648c631d6bc09fee" resname="object_state_group_edit__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: object_state_group_edit__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="c0dc534365fb45019db9b586ca8a71db6edda39d" resname="object_state_group_edit__sidebar_right__save">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: object_state_group_edit__sidebar_right__save</note>
       </trans-unit>
       <trans-unit id="bd668569e3e19db4ee8d34e4008f9bfceaad437b" resname="policy_create__sidebar_right__cancel">
         <source>Discard changes</source>
@@ -291,6 +336,11 @@
         <target state="new">Save</target>
         <note>key: url_edit__sidebar_right__save</note>
       </trans-unit>
+      <trans-unit id="da5c7f4f526c2dd5b1e1f51ab5238ef4ba86d421" resname="user__change_password">
+        <source>Change password</source>
+        <target state="new">Change password</target>
+        <note>key: user__change_password</note>
+      </trans-unit>
       <trans-unit id="06accb26fbb1b72012942af2b3e03f7c138e28c3" resname="user__content">
         <source>Logout</source>
         <target state="new">Logout</target>
@@ -315,6 +365,16 @@
         <source>Update</source>
         <target state="new">Update</target>
         <note>key: user_edit__sidebar_right__update</note>
+      </trans-unit>
+      <trans-unit id="d79a55ddd58ecf56b4edb39c794c858d649481e2" resname="user_password_change__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: user_password_change__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="ab8629add84cbd9cebfdf326f7242044ae7650af" resname="user_password_change__sidebar_right__update">
+        <source>Update</source>
+        <target state="new">Update</target>
+        <note>key: user_password_change__sidebar_right__update</note>
       </trans-unit>
     </body>
   </file>

@@ -74,11 +74,11 @@ class TabExtension extends Twig_Extension
         $template = $template ?? $this->defaultTemplate;
 
         $tabGroup = $this->tabService->getTabGroup($groupIdentifier);
-        $tabGroupEvent = $this->dispatchTabGroupPreRenderEvent($tabGroup);
+        $tabGroupEvent = $this->dispatchTabGroupPreRenderEvent($tabGroup, $parameters);
 
         $tabs = [];
         foreach ($tabGroupEvent->getData()->getTabs() as $tab) {
-            $tabEvent = $this->dispatchTabPreRenderEvent($tab);
+            $tabEvent = $this->dispatchTabPreRenderEvent($tab, $parameters);
             $tabs[] = $this->composeTabParameters($tabEvent->getData(), $parameters);
         }
 
@@ -90,13 +90,15 @@ class TabExtension extends Twig_Extension
 
     /**
      * @param TabGroup $tabGroup
+     * @param array $parameters
      *
      * @return TabGroupEvent
      */
-    private function dispatchTabGroupPreRenderEvent(TabGroup $tabGroup): TabGroupEvent
+    private function dispatchTabGroupPreRenderEvent(TabGroup $tabGroup, array $parameters = []): TabGroupEvent
     {
         $tabGroupEvent = new TabGroupEvent();
         $tabGroupEvent->setData($tabGroup);
+        $tabGroupEvent->setParameters($parameters);
 
         $this->eventDispatcher->dispatch(TabEvents::TAB_GROUP_PRE_RENDER, $tabGroupEvent);
 
@@ -105,13 +107,15 @@ class TabExtension extends Twig_Extension
 
     /**
      * @param TabInterface $tab
+     * @param array $parameters
      *
      * @return TabEvent
      */
-    private function dispatchTabPreRenderEvent(TabInterface $tab): TabEvent
+    private function dispatchTabPreRenderEvent(TabInterface $tab, array $parameters): TabEvent
     {
         $tabEvent = new TabEvent();
         $tabEvent->setData($tab);
+        $tabEvent->setParameters($parameters);
 
         $this->eventDispatcher->dispatch(TabEvents::TAB_PRE_RENDER, $tabEvent);
 

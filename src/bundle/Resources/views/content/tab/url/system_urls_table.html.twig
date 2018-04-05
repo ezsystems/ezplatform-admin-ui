@@ -1,0 +1,21 @@
+{% trans_default_domain 'content_url' %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ 'tab.urls.url'|trans|desc('URL') }}</th>
+        <th>{{ 'tab.urls.language'|trans|desc('Language') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for system_url in system_urls_pager.currentPageResults %}
+        <tr>
+            <td>{{ system_url.path }}</td>
+            <td>
+                {% for languageCode in system_url.languageCodes %}{{ admin_ui_config.languages.mappings[languageCode].name }}<br>{% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+

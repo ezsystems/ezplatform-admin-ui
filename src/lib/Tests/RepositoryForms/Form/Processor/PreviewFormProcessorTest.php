@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor;
 
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use EzSystems\RepositoryForms\Data\Content\FieldData;
@@ -43,12 +44,16 @@ class PreviewFormProcessorTest extends TestCase
     /** @var TranslatorInterface $translator */
     private $translator;
 
+    /** @var LocationService $locationService */
+    private $locationService;
+
     public function setUp()
     {
         $this->contentService = $this->createMock(ContentService::class);
         $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $this->notificationHandler = $this->createMock(NotificationHandlerInterface::class);
         $this->translator = $this->createMock(TranslatorInterface::class);
+        $this->locationService = $this->createMock(LocationService::class);
     }
 
     /**
@@ -56,6 +61,7 @@ class PreviewFormProcessorTest extends TestCase
      * @param UrlGeneratorInterface|null $urlGenerator
      * @param NotificationHandlerInterface|null $notificationHandler
      * @param TranslatorInterface|null $translator
+     * @param \eZ\Publish\API\Repository\LocationService|null $locationService
      *
      * @return PreviewFormProcessor
      */
@@ -63,13 +69,15 @@ class PreviewFormProcessorTest extends TestCase
         ContentService $contentService = null,
         UrlGeneratorInterface $urlGenerator = null,
         NotificationHandlerInterface $notificationHandler = null,
-        TranslatorInterface $translator = null
+        TranslatorInterface $translator = null,
+        LocationService $locationService = null
     ): PreviewFormProcessor {
         return new PreviewFormProcessor(
             $contentService ?? $this->contentService,
             $urlGenerator ?? $this->urlGenerator,
             $notificationHandler ?? $this->notificationHandler,
-            $translator ?? $this->translator
+            $translator ?? $this->translator,
+            $locationService ?? $this->locationService
         );
     }
 
@@ -77,20 +85,24 @@ class PreviewFormProcessorTest extends TestCase
     {
         $languageCode = 'cyb-CY';
         $contentDraftId = 123;
+        $locationId = null;
         $url = 'http://url';
         $fieldDefinitionIdentifier = 'identifier_1';
         $fieldDataValue = 'some_value';
 
-        /**
-         * $data variable in PreviewFormProcessor classs.
-         */
+        /** $data variable in PreviewFormProcessor class */
         $contentStruct = $this->generateContentStruct(
             $languageCode, $fieldDefinitionIdentifier, $fieldDataValue
         );
 
-        $contentDraft = $this->generateContentDraft($contentDraftId, $languageCode);
+        $contentDraft = $this->generateContentDraft($contentDraftId, $languageCode, $locationId);
         $contentService = $this->generateContentServiceMock($contentStruct, $contentDraft);
-        $urlGenerator = $this->generateUrlGeneratorMock($contentDraft, $languageCode, $url);
+        $urlGenerator = $this->generateUrlGeneratorMock($contentDraft, $languageCode, $url, $locationId);
+
+        $this->translator
+            ->method('trans')
+            ->with('error.preview', [], 'content_preview')
+            ->willReturn('Cannot save content draft.');
 
         $config = $this->generateConfigMock($languageCode);
         $form = $this->generateFormMock($config);
@@ -109,6 +121,7 @@ class PreviewFormProcessorTest extends TestCase
         $contentDraftId = 123;
         $url = 'http://url';
         $fieldDefinitionIdentifier = 'identifier_1';
+        $locationId = 55;
         $fieldDataValue = 'some_value';
 
         $contentStruct = $this->generateContentStruct($languageCode, $fieldDefinitionIdentifier, $fieldDataValue);
@@ -119,7 +132,7 @@ class PreviewFormProcessorTest extends TestCase
 
         $event = new FormActionEvent($form, $contentStruct, 'fooAction');
 
-        $contentDraft = $this->generateContentDraft($contentDraftId, $languageCode);
+        $contentDraft = $this->generateContentDraft($contentDraftId, $languageCode, $locationId);
         $contentService = $this->createMock(ContentService::class);
         $contentService
             ->expects(self::once())
@@ -225,19 +238,24 @@ class PreviewFormProcessorTest extends TestCase
      * @param APIContent $contentDraft
      * @param string $languageCode
      * @param string $url
+     * @param int|null $locationId
      *
-     * @return MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
-    private function generateUrlGeneratorMock(APIContent $contentDraft, string $languageCode, string $url): MockObject
-    {
+    private function generateUrlGeneratorMock(
+        APIContent $contentDraft,
+        string $languageCode,
+        string $url,
+        ?int $locationId = null
+    ): MockObject {
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $urlGenerator
-            ->expects(self::once())
             ->method('generate')
             ->with('ezplatform.content.preview', [
                 'contentId' => $contentDraft->id,
                 'versionNo' => $contentDraft->getVersionInfo()->versionNo,
                 'languageCode' => $languageCode,
+                'locationId' => $locationId,
             ])
             ->willReturn($url);
 
@@ -273,12 +291,16 @@ class PreviewFormProcessorTest extends TestCase
      *
      * @return APIContent
      */
-    private function generateContentDraft($contentDraftId, $languageCode): APIContent
+    private function generateContentDraft($contentDraftId, $languageCode, $mainLocationId): APIContent
     {
         $contentDraft = new Content([
             'versionInfo' => new VersionInfo(
                 [
-                    'contentInfo' => new ContentInfo(['id' => $contentDraftId, 'mainLanguageCode' => $languageCode]),
+                    'contentInfo' => new ContentInfo([
+                        'id' => $contentDraftId,
+                        'mainLanguageCode' => $languageCode,
+                        'mainLocationId' => $mainLocationId,
+                    ]),
                 ]
             ),
         ]);

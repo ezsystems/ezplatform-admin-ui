@@ -8,9 +8,8 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Mapper\ContentTranslationMapper;
 use EzSystems\RepositoryForms\Content\View\ContentEditView;
@@ -34,22 +33,28 @@ class ContentEditController extends Controller
     /** @var ActionDispatcherInterface */
     private $contentActionDispatcher;
 
+    /** @var LocationService */
+    private $locationService;
+
     /**
      * @param ContentService $contentService
      * @param ContentTypeService $contentTypeService
      * @param LanguageService $languageService
      * @param ContentDispatcher $contentActionDispatcher
+     * @param LocationService $locationService
      */
     public function __construct(
         ContentService $contentService,
         ContentTypeService $contentTypeService,
         LanguageService $languageService,
-        ContentDispatcher $contentActionDispatcher
+        ContentDispatcher $contentActionDispatcher,
+        LocationService $locationService
     ) {
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->languageService = $languageService;
         $this->contentActionDispatcher = $contentActionDispatcher;
+        $this->locationService = $locationService;
     }
 
     /**
@@ -57,23 +62,27 @@ class ContentEditController extends Controller
      * @param string|null $fromLanguageCode
      * @param string|null $toLanguageCode
      * @param Request $request
+     * @param int|null $locationId
      *
-     * @return ContentEditView|Response|null
+     * @return ContentEditView|Response
      *
-     * @throws UnauthorizedException
-     * @throws NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function translateAction(
         Content $content,
         ?string $fromLanguageCode,
         ?string $toLanguageCode,
-        Request $request
+        Request $request,
+        ?int $locationId = null
     ) {
         /* @todo could be improved with ParamConverters */
         $fromLanguage = null === $fromLanguageCode ? null : $this->languageService->loadLanguage($fromLanguageCode);
         $toLanguage = $this->languageService->loadLanguage($toLanguageCode);
         $contentType = $this->contentTypeService->loadContentType($content->contentInfo->contentTypeId);
         $contentInfo = $content->contentInfo;
+        $location = $this->locationService->loadLocation($locationId ?? $contentInfo->mainLocationId);
 
         $contentUpdate = (new ContentTranslationMapper())->mapToFormData(
             $content,
@@ -95,14 +104,20 @@ class ContentEditController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->contentActionDispatcher->dispatchFormAction($form, $contentUpdate, $form->getClickedButton()->getName());
+            $this->contentActionDispatcher->dispatchFormAction(
+                $form,
+                $contentUpdate,
+                $form->getClickedButton()->getName(),
+                ['referrerLocation' => $location]
+            );
             if ($response = $this->contentActionDispatcher->getResponse()) {
                 return $response;
             }
         }
 
-        return new ContentEditView(null, [
+        return new ContentEditView('@EzPlatformAdminUi/content/content_edit/content_edit.html.twig', [
             'form' => $form->createView(),
+            'location' => $location,
             'language' => $toLanguage,
             'baseLanguage' => $fromLanguage ?: null,
             'content' => $this->contentService->loadContentByContentInfo($contentInfo, [$contentInfo->mainLanguageCode]),

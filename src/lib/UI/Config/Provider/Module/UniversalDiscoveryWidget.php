@@ -6,6 +6,8 @@
  */
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module;
 
+use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 
@@ -17,13 +19,25 @@ class UniversalDiscoveryWidget implements ProviderInterface
     /** @var ConfigResolverInterface */
     private $configResolver;
 
+    /** @var LanguageService */
+    private $languageService;
+
+    /** @var ContentTypeService */
+    private $contentTypeService;
+
     /**
      * @param ConfigResolverInterface $configResolver
+     * @param LanguageService $languageService
+     * @param ContentTypeService $contentTypeService
      */
     public function __construct(
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        LanguageService $languageService,
+        ContentTypeService $contentTypeService
     ) {
         $this->configResolver = $configResolver;
+        $this->languageService = $languageService;
+        $this->contentTypeService = $contentTypeService;
     }
 
     /**
@@ -33,9 +47,17 @@ class UniversalDiscoveryWidget implements ProviderInterface
     {
         /* config structure has to reflect UDW module's config structure */
         return [
-            'startingLocationId' => $this->configResolver->getParameter(
-                'universal_discovery_widget_module.default_location_id'
-            ),
+            'startingLocationId' => $this->getStartingLocationId(),
         ];
+    }
+
+    /**
+     * @return int|null
+     */
+    protected function getStartingLocationId(): ?int
+    {
+        return $this->configResolver->getParameter(
+            'universal_discovery_widget_module.default_location_id'
+        );
     }
 }

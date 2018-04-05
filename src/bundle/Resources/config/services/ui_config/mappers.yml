@@ -1,0 +1,24 @@
+parameters:
+    ezplatform.field_type.ezrichtext.custom_tags.translation_domain: 'custom_tags'
+
+services:
+    # RichText Custom Tags UI config attribute type mappers
+    EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\CustomTag\CommonAttributeMapper:
+        autowire: true
+        arguments:
+            $translationDomain: '%ezplatform.field_type.ezrichtext.custom_tags.translation_domain%'
+        tags:
+            - { name: ezplatform.admin_ui.richtext_custom_tag_attribute_mapper, priority: 0 }
+
+    EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\CustomTag\ChoiceAttributeMapper:
+        parent: EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\CustomTag\CommonAttributeMapper
+        tags:
+            - { name: ezplatform.admin_ui.richtext_custom_tag_attribute_mapper, priority: 10 }
+
+    # RichText Custom Tags UI config mapper
+    EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\CustomTag:
+        autowire: true
+        arguments:
+            $customTagsConfiguration: '%ezplatform.ezrichtext.custom_tags%'
+            $translationDomain: '%ezplatform.field_type.ezrichtext.custom_tags.translation_domain%'
+            $customTagAttributeMappers: !tagged ezplatform.admin_ui.richtext_custom_tag_attribute_mapper

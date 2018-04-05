@@ -16,6 +16,9 @@ class TabGroupEvent extends Event
     /** @var TabGroup */
     private $data;
 
+    /** @var array */
+    private $parameters;
+
     /**
      * @return TabGroup
      */
@@ -30,5 +33,21 @@ class TabGroupEvent extends Event
     public function setData(TabGroup $data)
     {
         $this->data = $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters(): array
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @param array $parameters
+     */
+    public function setParameters(array $parameters): void
+    {
+        $this->parameters = $parameters;
     }
 }

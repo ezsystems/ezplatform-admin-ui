@@ -4,6 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="CSRF-Token" content="{{ csrf_token('authenticate') }}" />
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
+        {% block meta %}
+        {% endblock %}
         <script>
             window.eZ = {
                 adminUiConfig: {{ admin_ui_config|json_encode|raw }},
@@ -83,20 +85,34 @@
                 {% endfor %}
             {% endfor %}
         </div>
-
+        <div class="ez-modal-wrapper"></div>
         {%  javascripts
-            'bundles/ezplatformadminuiassets/vendors/react/dist/react.min.js'
-            'bundles/ezplatformadminuiassets/vendors/react-dom/dist/react-dom.min.js'
+            'bundles/ezplatformadminuiassets/vendors/react/umd/react.production.min.js'
+            'bundles/ezplatformadminuiassets/vendors/react-dom/umd/react-dom.production.min.js'
             'bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js'
             'bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js'
             'bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js'
-            'bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/alloy-editor-no-react-min.js'
+            'bundles/ezplatformadminuiassets/vendors/create-react-class/create-react-class.min.js'
+            'bundles/ezplatformadminuiassets/vendors/prop-types/prop-types.min.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {{ ezplatform_admin_ui_component_group('custom-admin-ui-modules') }}
+        {{ ezplatform_admin_ui_component_group('custom-admin-ui-config') }}
+        {%  javascripts
             'bundles/ezplatformadminuimodules/js/UniversalDiscovery.module.js'
             'bundles/ezplatformadminui/js/scripts/button.trigger.js'
             'bundles/ezplatformadminui/js/scripts/button.prevent.default.js'
             'bundles/ezplatformadminui/js/scripts/udw/browse.js'
             'bundles/ezplatformadminui/js/scripts/admin.user.menu.js'
-
+            'bundles/ezplatformadminui/js/scripts/admin.prevent.click.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {# CKEditor is not compatible with 'use strict' mode, React 16 force 'use strict' on the entire file.
+           CKEditor and React 16 cannot be compiled into one file by assetic #}
+        {%  javascripts
+            'bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/alloy-editor-no-react-min.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

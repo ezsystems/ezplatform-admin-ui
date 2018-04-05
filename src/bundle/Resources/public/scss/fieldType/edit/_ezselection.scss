@@ -16,6 +16,9 @@
             position: relative;
             min-height: 2.8rem;
             background-color: $ez-white;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
 
             &:after {
                 content: '';
@@ -52,6 +55,7 @@
                 border-radius: .25rem;
                 position: relative;
                 color: $ez-white;
+                min-height: 34px;
 
                 .remove-selection {
                     width: 1rem;
@@ -114,6 +118,11 @@
 
                 &.option-selected {
                     background-color: $ez-ground-primary;
+                }
+
+                &:not(.option-selected):hover,
+                &:not(.option-selected):focus {
+                    background: $ez-secondary-ground-pale;
                 }
             }
         }

@@ -1,0 +1,255 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import AlloyEditor from 'alloyeditor';
+import EzWidgetButton from '../base/ez-widgetbutton';
+
+export default class EzBtnCustomTagUpdate extends EzWidgetButton {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            values: props.values
+        };
+    }
+
+    /**
+     * Renders the text input.
+     *
+     * @method renderString
+     * @param {Object} config
+     * @param {String} attrName
+     * @return {Object} The rendered text input.
+     */
+    renderString(config, attrName) {
+        return (
+            <div className="attribute__wrapper">
+                <label className="attribute__label form-control-label">{config.label}</label>
+                <input
+                    type="text"
+                    defaultValue={config.defaultValue}
+                    required={config.required}
+                    className="attribute__input form-control"
+                    value={this.state.values[attrName].value}
+                    onChange={this.updateValues.bind(this)}
+                    data-attr-name={attrName}
+                ></input>
+            </div>
+        );
+    }
+
+    /**
+     * Renders the checkbox input.
+     *
+     * @method renderCheckbox
+     * @param {Object} config
+     * @param {String} attrName
+     * @return {Object} The rendered checkbox input.
+     */
+    renderCheckbox(config, attrName) {
+        return (
+            <div className="attribute__wrapper">
+                <label className="attribute__label form-control-label">{config.label}</label>
+                <input
+                    type="checkbox"
+                    defaultValue={config.defaultValue}
+                    required={config.required}
+                    className="attribute__input form-control"
+                    checked={this.state.values[attrName].value}
+                    onChange={this.updateValues.bind(this)}
+                    data-attr-name={attrName}
+                ></input>
+            </div>
+        );
+    }
+
+    /**
+     * Renders the number input.
+     *
+     * @method renderNumber
+     * @param {Object} config
+     * @param {String} attrName
+     * @return {Object} The rendered number input.
+     */
+    renderNumber(config, attrName) {
+        return (
+            <div className="attribute__wrapper">
+                <label className="attribute__label form-control-label">{config.label}</label>
+                <input
+                    type="number"
+                    defaultValue={config.defaultValue}
+                    required={config.required}
+                    className="attribute__input form-control"
+                    value={this.state.values[attrName].value}
+                    onChange={this.updateValues.bind(this)}
+                    data-attr-name={attrName}
+                ></input>
+            </div>
+        );
+    }
+
+    /**
+     * Renders the select.
+     *
+     * @method renderSelect
+     * @param {Object} config
+     * @param {String} attrName
+     * @return {Object} The rendered select.
+     */
+    renderSelect(config, attrName) {
+        return (
+            <div className="attribute__wrapper">
+                <label className="attribute__label form-control-label">{config.label}</label>
+                <select
+                    className="attribute__input form-control"
+                    value={this.state.values[attrName].value}
+                    onChange={this.updateValues.bind(this)}
+                    data-attr-name={attrName}
+                >
+                    {config.choices.map(this.renderChoice.bind(this))}
+                </select>
+            </div>
+        );
+    }
+
+    /**
+     * Renders the option.
+     *
+     * @method renderChoice
+     * @param {String} choice
+     * @return {Object} The rendered option.
+     */
+    renderChoice(choice) {
+        return (
+            <option value={choice}>{choice}</option>
+        );
+    }
+
+    /**
+     * Renders the attribute.
+     *
+     * @method renderAttribute
+     * @param {Object} attribute
+     * @return {Object} The rendered attribute.
+     */
+    renderAttribute(attribute) {
+        const attributeConfig = this.attributes[attribute];
+        const renderMethods = this.getAttributeRenderMethods();
+        const methodName = renderMethods[attributeConfig.type];
+
+        return (
+            <div className="ez-ae-custom-tag__attributes">
+                {this[methodName](attributeConfig, attribute)}
+            </div>
+        );
+    }
+
+    /**
+     * Lifecycle. Renders the UI of the button.
+     *
+     * @method render
+     * @return {Object} The content which should be rendered.
+     */
+    render() {
+        const attrs = Object.keys(this.attributes);
+        const isValid = this.isValid();
+
+        return (
+            <div className="ez-ae-custom-tag">
+                {attrs.map(this.renderAttribute.bind(this))}
+                <button
+                    className="ez-btn-ae btn btn-secondary ez-btn-ae--custom-tag float-right"
+                    onClick={this.saveCustomTag.bind(this)}
+                    disabled={!isValid}
+                >Save</button>
+            </div>
+        );
+    }
+
+    /**
+     * Checks if values are valid.
+     *
+     * @method isValid
+     * @return {Boolean} are values valid
+     */
+    isValid() {
+        return Object.keys(this.attributes).every(attr => {
+            return this.attributes[attr].required ? !!this.state.values[attr].value : true;
+        });
+    }
+
+    /**
+     * Creates the custom tag in AlloyEditor.
+     *
+     * @method saveCustomTag
+     */
+    saveCustomTag() {
+        if (this.props.createNewTag) {
+            this.execCommand();
+        }
+
+        const widget = this.getWidget();
+        const configValues = Object.assign({}, this.state.values);
+
+        widget.setFocused(true);
+        widget.setName(this.customTagName);
+        widget.setWidgetContent(this.createContent());
+        widget.clearConfig();
+
+        Object.keys(this.attributes).forEach(key => {
+            widget.setConfig(key, configValues[key].value);
+        });
+    }
+
+    /**
+     * Creates a content.
+     *
+     * @method createContent
+     * @return {String} the ezcontent
+     */
+    createContent() {
+        return Object.keys(this.attributes).reduce((total, attr) => `${total}<p>${this.attributes[attr].label}: ${this.state.values[attr].value}</p>`,'');
+    }
+
+    /**
+     * Update values.
+     *
+     * @method updateValues
+     * @param {Object} event
+     */
+    updateValues(event) {
+        const values = Object.assign({}, this.state.values);
+        const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+
+        values[event.target.dataset.attrName].value = value;
+
+        this.setState({
+            values: values
+        });
+    }
+
+    /**
+     * Gets the render method map.
+     *
+     * @method getAttributeRenderMethods
+     * @return {Object} the render method map
+     */
+    getAttributeRenderMethods() {
+        return {
+            string: 'renderString',
+            boolean: 'renderCheckbox',
+            number: 'renderNumber',
+            choice: 'renderSelect'
+        }
+    }
+}
+
+EzBtnCustomTagUpdate.defaultProps = {
+    command: 'ezcustomtag',
+    modifiesSelection: true,
+};
+
+EzBtnCustomTagUpdate.propTypes = {
+    editor: PropTypes.object.isRequired,
+    label: PropTypes.string.isRequired,
+    tabIndex: PropTypes.number.isRequired,
+};

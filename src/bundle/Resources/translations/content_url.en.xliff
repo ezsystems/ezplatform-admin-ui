@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="5c48ac36c2a46c2dc2a89fd4c91a2a3d684eb5d8" resname="tab.urls.action.add">
+        <source>Add Custom URL</source>
+        <target state="new">Add Custom URL</target>
+        <note>key: tab.urls.action.add</note>
+      </trans-unit>
+      <trans-unit id="9b4504fd2e75dffb2c22283be3e9816e8142538a" resname="tab.urls.action.delete">
+        <source>Delete Custom URL</source>
+        <target state="new">Delete Custom URL</target>
+        <note>key: tab.urls.action.delete</note>
+      </trans-unit>
+      <trans-unit id="2398a15c604fd353b25fc8f558e2d099a6afeb33" resname="tab.urls.add.cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: tab.urls.add.cancel</note>
+      </trans-unit>
+      <trans-unit id="a0572cab5c339956a087626a6e62cc12643b8d26" resname="tab.urls.add.language">
+        <source>Language</source>
+        <target state="new">Language</target>
+        <note>key: tab.urls.add.language</note>
+      </trans-unit>
+      <trans-unit id="c5c776feab332a508b69aa0ff9f5f5ff3fe468e0" resname="tab.urls.add.path">
+        <source>URL</source>
+        <target state="new">URL</target>
+        <note>key: tab.urls.add.path</note>
+      </trans-unit>
+      <trans-unit id="89135eef0092aa6e6609d38d013230705894f219" resname="tab.urls.add.redirect">
+        <source>Alias should redirect to its destination</source>
+        <target state="new">Alias should redirect to its destination</target>
+        <note>key: tab.urls.add.redirect</note>
+      </trans-unit>
+      <trans-unit id="e84da49f6798548a0e09f5f7d5095788257f0119" resname="tab.urls.add.redirect.helper.checked">
+        <source>Checked will redirect to the destination using an HTTP 301 response.</source>
+        <target state="new">Checked will redirect to the destination using an HTTP 301 response.</target>
+        <note>key: tab.urls.add.redirect.helper.checked</note>
+      </trans-unit>
+      <trans-unit id="bccfa7be40c2932ae04a50767aee2184bd5ca4d5" resname="tab.urls.add.redirect.helper.unchecked">
+        <source>Unchecked will not redirect to the destination and the URL will stay the same.</source>
+        <target state="new">Unchecked will not redirect to the destination and the URL will stay the same.</target>
+        <note>key: tab.urls.add.redirect.helper.unchecked</note>
+      </trans-unit>
+      <trans-unit id="9ef990fca45f612ab2d3af7b21968803d76d5d77" resname="tab.urls.add.site_root">
+        <source>Place alias at the site root</source>
+        <target state="new">Place alias at the site root</target>
+        <note>key: tab.urls.add.site_root</note>
+      </trans-unit>
+      <trans-unit id="9fc6fbd86b58ee883321610dd1726551772edaf1" resname="tab.urls.add.site_root.helper.checked">
+        <source>Checked will create the alias at the site root.</source>
+        <target state="new">Checked will create the alias at the site root.</target>
+        <note>key: tab.urls.add.site_root.helper.checked</note>
+      </trans-unit>
+      <trans-unit id="db531fb5f993263b5ea57393101781b9d731a738" resname="tab.urls.add.site_root.helper.unchecked">
+        <source>Unchecked will create the new alias under %parent_name%</source>
+        <target state="new">Unchecked will create the new alias under %parent_name%</target>
+        <note>key: tab.urls.add.site_root.helper.unchecked</note>
+      </trans-unit>
+      <trans-unit id="25badd959ce69714e8eb349ebddbbbe126c14458" resname="tab.urls.add.title">
+        <source>Create new URL alias</source>
+        <target state="new">Create new URL alias</target>
+        <note>key: tab.urls.add.title</note>
+      </trans-unit>
+      <trans-unit id="d244966cab8b41f92fd5553d8f33f0e1ca8bf85f" resname="tab.urls.custom_url_aliases">
+        <source>Custom URL aliases for %contentName%</source>
+        <target state="new">Custom URL aliases for %contentName%</target>
+        <note>key: tab.urls.custom_url_aliases</note>
+      </trans-unit>
+      <trans-unit id="5a1947624cf55689d80d38b7583bac538da641bb" resname="tab.urls.language">
+        <source>Language</source>
+        <target state="new">Language</target>
+        <note>key: tab.urls.language</note>
+      </trans-unit>
+      <trans-unit id="0d3138c0198569f427ab4568fffa5d9d894db72a" resname="tab.urls.modal.message">
+        <source>Do you want to delete selected Custom URLs?</source>
+        <target state="new">Do you want to delete selected Custom URLs?</target>
+        <note>key: tab.urls.modal.message</note>
+      </trans-unit>
+      <trans-unit id="777d1a83ab6a6c4644dd31409906e48a0a7a4a51" resname="tab.urls.modal_close">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note>key: tab.urls.modal_close</note>
+      </trans-unit>
+      <trans-unit id="56d218db883ed4cc59dbbca53364dc2e725013e4" resname="tab.urls.no_custom_urls">
+        <source>This content item has no custom url aliases.</source>
+        <target state="new">This content item has no custom url aliases.</target>
+        <note>key: tab.urls.no_custom_urls</note>
+      </trans-unit>
+      <trans-unit id="c9fdd1434b44a4592626e8fe493c19141aab24d5" resname="tab.urls.no_system_urls">
+        <source>This content item has no system urls.</source>
+        <target state="new">This content item has no system urls.</target>
+        <note>key: tab.urls.no_system_urls</note>
+      </trans-unit>
+      <trans-unit id="902beb4ac170382cb95bd554cb1e763d8fdd413c" resname="tab.urls.system.title">
+        <source>System URL</source>
+        <target state="new">System URL</target>
+        <note>key: tab.urls.system.title</note>
+      </trans-unit>
+      <trans-unit id="0de66a25f1019287cf737f27622ca4d05f582764" resname="tab.urls.type">
+        <source>Type</source>
+        <target state="new">Type</target>
+        <note>key: tab.urls.type</note>
+      </trans-unit>
+      <trans-unit id="1d87d09bd23142580b88dfe4cf987cf0a6b2d993" resname="tab.urls.type.direct">
+        <source>Direct</source>
+        <target state="new">Direct</target>
+        <note>key: tab.urls.type.direct</note>
+      </trans-unit>
+      <trans-unit id="ea8af6bc33d14986b233c0acb340bd122ff0c2bd" resname="tab.urls.type.redirect">
+        <source>Redirect</source>
+        <target state="new">Redirect</target>
+        <note>key: tab.urls.type.redirect</note>
+      </trans-unit>
+      <trans-unit id="5028d3abfd74c419dc7a3daee4303b084c94d2e6" resname="tab.urls.url">
+        <source>URL</source>
+        <target state="new">URL</target>
+        <note>key: tab.urls.url</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

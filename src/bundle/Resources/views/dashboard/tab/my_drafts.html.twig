@@ -17,15 +17,22 @@
             <tr>
                 <td>{{ row.name }}</td>
                 <td>{{ row.type }}</td>
-                <td>{{ row.language }}</td>
+                <td>{{ admin_ui_config.languages.mappings[row.language].name }}</td>
                 <td>{{ row.version }}</td>
                 <td>{{ row.modified|date('M d, Y h:iA') }}</td>
                 <td class="text-center">
-                    <button class="btn btn-icon ez-btn--content-edit"
+                    <button class="btn btn-icon ez-btn--content-draft-edit"
                             title="{{ 'dashboard.table.draft.edit'|trans|desc('Edit Draft') }}"
-                            data-content-id="{{ row.contentId }}"
-                            data-version-no="{{ row.version }}"
-                            data-language-code="{{ row.language }}">
+                            data-content-draft-edit-url="{{ path('ez_content_draft_edit', {
+                                'contentId': row.contentId,
+                                'versionNo': row.version,
+                                'language': row.language
+                            }) }}"
+                            data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
+                                'contentId': row.contentId,
+                                'versionNo': row.version,
+                                'languageCode': row.language
+                            }) }}">
                         <svg class="ez-icon ez-icon-edit">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                         </svg>
@@ -35,6 +42,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {% include '@EzPlatformAdminUi/content/modal_version_conflict.html.twig' %}
 {% else %}
     <p class="ez-table-no-content mb-0 py-0">{{ 'dashboard.tab.my_drafts.empty'|trans|desc('No content items. Draft items you create will appear here') }}</p>
 {% endif %}

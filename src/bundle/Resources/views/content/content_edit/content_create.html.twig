@@ -2,29 +2,41 @@
 
 {% trans_default_domain 'content_create' %}
 
-{% block details %}
-    <h2 class="text-muted">{{ 'creating_in_language'|trans({'%contentTypeName%': contentType.name, '%languageName%': language.name})|desc('Creating - %contentTypeName% in %languageName%') }}</h2>
-    <h1>
-        <svg class="ez-icon ez-icon-{{ contentType.identifier }}">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ contentType.identifier }}"></use>
-        </svg>
-        {{ 'new_content_item'|trans({'%contentType%': contentType.name})|desc('New %contentType%') }}
-    </h1>
+{% block meta %}
+    <meta name="LanguageCode" content="{{ language.languageCode }}" />
+{% endblock %}
 
-    <div class="small">
-        {{ contentType.name }} / Parent Location ID: {{ parentLocation.id }}
+{% block details %}
+    <div class="container mt-5 px-5">
+        <h2 class="ez-content-item-status">{{ 'creating_in_language'|trans({'%contentTypeName%': contentType.name, '%languageName%': language.name})|desc('Creating - %contentTypeName% in %languageName%') }}</h2>
+        <h1>
+            <svg class="ez-icon ez-icon-{{ contentType.identifier }}">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ contentType.identifier }}"></use>
+            </svg>
+            {{ 'new_content_item'|trans({'%contentType%': contentType.name})|desc('New %contentType%') }}
+        </h1>
+
+        <div class="small">
+            {{ contentType.name }} / Parent Location ID: {{ parentLocation.id }}
+        </div>
+        {# @todo remove if statement once getDescription() bug is resolved in kernel #}
+        {% if contentType.descriptions is not empty %}
+            <div class="small text-muted">{{ contentType.description }}</div>
+        {% endif %}
     </div>
-    {# @todo remove if statement once getDescription() bug is resolved in kernel #}
-    {% if contentType.descriptions is not empty %}
-        <div class="small text-muted">{{ contentType.description }}</div>
-    {% endif %}
 {% endblock %}
 
 {% block form_fields %}
-    {{ parent() }}
-    {{ form_widget(form.publish, {'attr': {'hidden': 'hidden'}}) }}
-    {{ form_widget(form.saveDraft, {'attr': {'hidden': 'hidden'}}) }}
-    {{ form_widget(form.cancel, {'attr': {'hidden': 'hidden'}}) }}
+    <section class="container mt-4 px-5">
+        <div class="card ez-card">
+            <div class="card-body">
+                {{ parent() }}
+                {{ form_widget(form.publish, {'attr': {'hidden': 'hidden'}}) }}
+                {{ form_widget(form.saveDraft, {'attr': {'hidden': 'hidden'}}) }}
+                {{ form_widget(form.cancel, {'attr': {'hidden': 'hidden'}}) }}
+            </div>
+        </div>
+    </section>
 {% endblock %}
 
 {% block right_sidebar %}

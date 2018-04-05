@@ -6,10 +6,20 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="cd6fb4cd7385ecdb31009da852c23fb5038b9c72" resname="content.draft_saved.success">
+        <source>Content draft saved.</source>
+        <target state="new">Content draft saved.</target>
+        <note>key: content.draft_saved.success</note>
+      </trans-unit>
       <trans-unit id="e735240930546ee4e9ae782ffa95ee09d846665a" resname="content.field.non_editable">
         <source>Field type is not editable</source>
         <target state="new">Field type is not editable</target>
         <note>key: content.field.non_editable</note>
+      </trans-unit>
+      <trans-unit id="07d6fb7c02b8730592a3bb68a315caa63031d44e" resname="content.published.success">
+        <source>Content published.</source>
+        <target state="new">Content published.</target>
+        <note>key: content.published.success</note>
       </trans-unit>
       <trans-unit id="6a2083913f3647b44f205204e369f764e83233b1" resname="content_id">
         <source>Content ID: %contentId%</source>
@@ -40,6 +50,11 @@
         <source>Location ID: %locationId%</source>
         <target state="new">Location ID: %locationId%</target>
         <note>key: location_id</note>
+      </trans-unit>
+      <trans-unit id="cce4ced380a283ffdecf364aeb5312ee001e6601" resname="parent_location_id">
+        <source>Parent Location ID: %locationId%</source>
+        <target state="new">Parent Location ID: %locationId%</target>
+        <note>key: parent_location_id</note>
       </trans-unit>
     </body>
   </file>

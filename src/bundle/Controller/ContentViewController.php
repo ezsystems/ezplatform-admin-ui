@@ -85,12 +85,17 @@ class ContentViewController extends Controller
         // JIRA ref: https://jira.ez.no/browse/EZP-28190
         $view->setCacheEnabled(false);
 
-        $this->supplyPathLocations($view);
+        if (!$view->getContent()->contentInfo->isTrashed()) {
+            $this->supplyPathLocations($view);
+            $this->subitemsContentViewParameterSupplier->supply($view);
+        }
+
         $this->supplyContentType($view);
         $this->supplyContentActionForms($view);
 
         $this->supplyDraftPagination($view, $request);
-        $this->subitemsContentViewParameterSupplier->supply($view);
+        $this->supplyCustomUrlPagination($view, $request);
+        $this->supplySystemUrlPagination($view, $request);
 
         return $view;
     }
@@ -143,7 +148,7 @@ class ContentViewController extends Controller
         );
 
         $contentEditType = $this->formFactory->contentEdit(
-            new ContentEditData($content->contentInfo, $versionInfo)
+            new ContentEditData($content->contentInfo, $versionInfo, null, $location)
         );
 
         $subitemsContentEdit = $this->formFactory->contentEdit(
@@ -194,6 +199,40 @@ class ContentViewController extends Controller
             'draft_pagination_params' => [
                 'route_name' => $request->get('_route'),
                 'page' => $page['version_draft'] ?? 1,
+                'limit' => $this->defaultPaginationLimit,
+            ],
+        ]);
+    }
+
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    private function supplyCustomUrlPagination(ContentView $view, Request $request): void
+    {
+        $page = $request->query->get('page');
+
+        $view->addParameters([
+            'custom_urls_pagination_params' => [
+                'route_name' => $request->get('_route'),
+                'page' => $page['custom_url'] ?? 1,
+                'limit' => $this->defaultPaginationLimit,
+            ],
+        ]);
+    }
+
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    private function supplySystemUrlPagination(ContentView $view, Request $request): void
+    {
+        $page = $request->query->get('page');
+
+        $view->addParameters([
+            'system_urls_pagination_params' => [
+                'route_name' => $request->get('_route'),
+                'page' => $page['system_url'] ?? 1,
                 'limit' => $this->defaultPaginationLimit,
             ],
         ]);

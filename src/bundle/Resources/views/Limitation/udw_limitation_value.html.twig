@@ -1,0 +1,23 @@
+<div>
+    {{ form_label(form.limitationValues) }}
+    {{ form_errors(form.limitationValues) }}
+    {{ form_widget(form.limitationValues) }}
+
+    <div>
+        <button data-universaldiscovery-title="{{ "role.policy.limitation.location.udw_title"|trans({}, "ezrepoforms_role") }}"
+                class="ez-button-tree pure-button ez-font-icon ez-button btn btn-secondary ez-pick-location-limitation-button"
+                data-location-input-selector="#{{ form.limitationValues.vars.id }}"
+                data-selected-location-list-selector="#{{ form.limitationValues.vars.id }}-selected-location"
+        >{{ "role.policy.limitation.location.udw_button"|trans({}, "ezrepoforms_role") }}</button>
+    </div>
+</div>
+
+<ul id="{{ form.limitationValues.vars.id }}-selected-location">
+    {% for limitationValue in form.limitationValues.vars.value|split(',') %}
+        {% if limitationValue is not empty %}
+            <li>
+                {{ render( controller( "ez_content:viewAction", {'locationId': limitationValue, 'viewType': '_platformui_content_name'} ) ) }}
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

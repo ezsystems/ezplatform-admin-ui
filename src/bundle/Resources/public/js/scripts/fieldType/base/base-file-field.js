@@ -1,6 +1,6 @@
 (function (global) {
     const eZ = global.eZ = global.eZ || {};
-    const SELECTOR_FIELD_LABEL = '.ez-field-edit__label-wrapper .col-form-legend';
+    const SELECTOR_FIELD_LABEL = '.ez-field-edit__label-wrapper .col-form-label';
 
     class BaseFileFieldValidator extends global.eZ.BaseFieldValidator {
         /**

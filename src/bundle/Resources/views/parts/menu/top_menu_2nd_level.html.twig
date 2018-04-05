@@ -27,7 +27,7 @@
     {% set linkAttributes = item.linkAttributes|merge({
         'href': item.uri,
         'aria-controls': item.name,
-        'class': 'nav-link' ~ (matcher.isCurrent(item) ? ' ' ~ options.currentClass)
+        'class': ('nav-link' ~ (matcher.isCurrent(item) ? ' ' ~ options.currentClass|trim)) ~ (item.linkAttributes.class is defined ?  ' ' ~ item.linkAttributes.class|trim)
     }) %}
     <a{{ knp_menu.attributes(linkAttributes) }}>
         {{ block('label') }}

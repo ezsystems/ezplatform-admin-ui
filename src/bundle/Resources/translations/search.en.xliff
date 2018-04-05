@@ -6,10 +6,70 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="7fe072f41348fb097b6bb018eec4f1b1bc9cffc3" resname="modal.cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: modal.cancel</note>
+      </trans-unit>
+      <trans-unit id="ef88894d37b21eeb205ece403d77ab05ccea52cf" resname="modal.select">
+        <source>Select</source>
+        <target state="new">Select</target>
+        <note>key: modal.select</note>
+      </trans-unit>
       <trans-unit id="3559d7accf00360971961ca18989adc0614089c0" resname="search">
         <source>Search</source>
         <target state="new">Search</target>
         <note>key: search</note>
+      </trans-unit>
+      <trans-unit id="2c0d71c1688c1f04ff156bb9dff167ca5ae663b6" resname="search.any.content.type">
+        <source>Any content type</source>
+        <target state="new">Any content type</target>
+        <note>key: search.any.content.type</note>
+      </trans-unit>
+      <trans-unit id="8605c5030193beebc7097a652f6c9dcb648cccec" resname="search.apply">
+        <source>Apply</source>
+        <target state="new">Apply</target>
+        <note>key: search.apply</note>
+      </trans-unit>
+      <trans-unit id="27f2f932e2b2f60b36b3331b45a3e15b421ee86f" resname="search.clear">
+        <source>Clear</source>
+        <target state="new">Clear</target>
+        <note>key: search.clear</note>
+      </trans-unit>
+      <trans-unit id="52574f2c1d5e0b3ffcd4f105b770e91ae1e519fa" resname="search.content.type">
+        <source>Content Type:</source>
+        <target state="new">Content Type:</target>
+        <note>key: search.content.type</note>
+      </trans-unit>
+      <trans-unit id="738c66eb92535505455b34b383f8089fb1bc0479" resname="search.created">
+        <source>Created:</source>
+        <target state="new">Created:</target>
+        <note>key: search.created</note>
+      </trans-unit>
+      <trans-unit id="a18d7835f5b4a97ac94331f82e729abcb698be41" resname="search.custom_range">
+        <source>Custom range</source>
+        <target state="new">Custom range</target>
+        <note>key: search.custom_range</note>
+      </trans-unit>
+      <trans-unit id="9cef4cf2cb67458460a2a01c0adc1b4238320459" resname="search.date.from">
+        <source>From:</source>
+        <target state="new">From:</target>
+        <note>key: search.date.from</note>
+      </trans-unit>
+      <trans-unit id="f32993c555744e5c203137f3ee0e380d27e9cfef" resname="search.date.range">
+        <source>Select date range</source>
+        <target state="new">Select date range</target>
+        <note>key: search.date.range</note>
+      </trans-unit>
+      <trans-unit id="ec2194ad5a5851c9bb326a091c6985adedcd42b2" resname="search.date.to">
+        <source>To:</source>
+        <target state="new">To:</target>
+        <note>key: search.date.to</note>
+      </trans-unit>
+      <trans-unit id="9db82102d1da5efb63380ca328a83d13732a02ee" resname="search.filter">
+        <source>Filter</source>
+        <target state="new">Filter</target>
+        <note>key: search.filter</note>
       </trans-unit>
       <trans-unit id="0ec8148d681b43e87a6d0751fff188517be1ea26" resname="search.header">
         <source>Search results (%total%)</source>
@@ -20,6 +80,26 @@
         <source>Search</source>
         <target state="new">Search</target>
         <note>key: search.headline</note>
+      </trans-unit>
+      <trans-unit id="c2e9df867c114a94918c00f775d3a54d24358dfa" resname="search.last.modified">
+        <source>Last modified:</source>
+        <target state="new">Last modified:</target>
+        <note>key: search.last.modified</note>
+      </trans-unit>
+      <trans-unit id="2d007a8d9fc080db790dc5c45c12dd369d144fbe" resname="search.last_month">
+        <source>Last month</source>
+        <target state="new">Last month</target>
+        <note>key: search.last_month</note>
+      </trans-unit>
+      <trans-unit id="967e0a47af2b621d7e8fa29b2429a30644f8d6bb" resname="search.last_week">
+        <source>Last week</source>
+        <target state="new">Last week</target>
+        <note>key: search.last_week</note>
+      </trans-unit>
+      <trans-unit id="c1244001dc023e80d3e6d8331935c68ac140788b" resname="search.last_year">
+        <source>Last year</source>
+        <target state="new">Last year</target>
+        <note>key: search.last_year</note>
       </trans-unit>
       <trans-unit id="6ceaf9887c3974130781c3dadfcb129926496770" resname="search.list">
         <source>search.list</source>
@@ -40,6 +120,16 @@
         <source>Sorry, no results were found for "%query%".</source>
         <target state="new">Sorry, no results were found for "%query%".</target>
         <note>key: search.no_result</note>
+      </trans-unit>
+      <trans-unit id="6fa93ef4dfbce97076a254427bb30bf7c5819c5d" resname="search.perform">
+        <source>Search</source>
+        <target state="new">Search</target>
+        <note>key: search.perform</note>
+      </trans-unit>
+      <trans-unit id="34cd11448c2016e5c0a098947eb3e2aef01a9ac5" resname="search.section">
+        <source>Section:</source>
+        <target state="new">Section:</target>
+        <note>key: search.section</note>
       </trans-unit>
       <trans-unit id="777cc1ef279096d5a978aa3553e9434d828f8248" resname="search.tips.check_spelling">
         <source>Check spelling of keywords.</source>

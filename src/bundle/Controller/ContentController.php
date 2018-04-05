@@ -9,7 +9,10 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions as ApiException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\Core\Base\Exceptions\BadStateException;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
@@ -18,6 +21,7 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,8 +51,11 @@ class ContentController extends Controller
     /** @var ContentMainLocationUpdateMapper */
     private $contentMainLocationUpdateMapper;
 
-    /** @var string */
-    private $defaultSiteaccess;
+    /** @var SiteaccessResolverInterface */
+    private $siteaccessResolver;
+
+    /** @var LocationService */
+    private $locationService;
 
     /**
      * @param NotificationHandlerInterface $notificationHandler
@@ -57,7 +64,8 @@ class ContentController extends Controller
      * @param SubmitHandler $submitHandler
      * @param TranslatorInterface $translator
      * @param ContentMainLocationUpdateMapper $contentMetadataUpdateMapper
-     * @param string $defaultSiteaccess
+     * @param SiteaccessResolverInterface $siteaccessResolver
+     * @param LocationService $locationService
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -66,7 +74,8 @@ class ContentController extends Controller
         SubmitHandler $submitHandler,
         TranslatorInterface $translator,
         ContentMainLocationUpdateMapper $contentMetadataUpdateMapper,
-        string $defaultSiteaccess
+        SiteaccessResolverInterface $siteaccessResolver,
+        LocationService $locationService
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->contentService = $contentService;
@@ -74,7 +83,8 @@ class ContentController extends Controller
         $this->submitHandler = $submitHandler;
         $this->translator = $translator;
         $this->contentMainLocationUpdateMapper = $contentMetadataUpdateMapper;
-        $this->defaultSiteaccess = $defaultSiteaccess;
+        $this->siteaccessResolver = $siteaccessResolver;
+        $this->locationService = $locationService;
     }
 
     /**
@@ -139,6 +149,7 @@ class ContentController extends Controller
                 $versionInfo = $data->getVersionInfo();
                 $language = $data->getLanguage();
                 $versionNo = $versionInfo->versionNo;
+                $location = $data->getLocation();
 
                 if (!$versionInfo->isDraft()) {
                     $contentDraft = $this->contentService->createContentDraft($contentInfo, $versionInfo);
@@ -158,6 +169,9 @@ class ContentController extends Controller
                     'contentId' => $contentInfo->id,
                     'versionNo' => $versionNo,
                     'language' => $language->languageCode,
+                    'locationId' => null !== $location
+                        ? $location->id
+                        : $contentInfo->mainLocationId,
                 ]);
             });
 
@@ -242,19 +256,46 @@ class ContentController extends Controller
      * @param Content $content
      * @param string|null $languageCode
      * @param int|null $versionNo
+     * @param Location|null $location
      *
      * @return Response
      */
-    public function previewAction(Content $content, ?string $languageCode = null, ?int $versionNo = null): Response
-    {
+    public function previewAction(
+        Content $content,
+        ?string $languageCode = null,
+        ?int $versionNo = null,
+        ?Location $location = null
+    ): Response {
         if (null === $languageCode) {
             $languageCode = $content->contentInfo->mainLanguageCode;
         }
 
+        // nonpublished content should use parent location instead because location doesn't exist yet
+        if (!$content->contentInfo->published && null === $content->contentInfo->mainLocationId) {
+            $versionInfo = $this->contentService->loadVersionInfo($content->contentInfo, $versionNo);
+            $parentLocations = $this->locationService->loadParentLocationsForDraftContent($versionInfo);
+            $location = reset($parentLocations);
+            $versionNo = null;
+        }
+
+        if (null === $location) {
+            $location = $this->locationService->loadLocation($content->contentInfo->mainLocationId);
+        }
+
+        $siteaccesses = $this->siteaccessResolver->getSiteaccessesForLocation($location, $versionNo, $languageCode);
+
+        if (empty($siteaccesses)) {
+            throw new BadStateException(
+                'siteaccess',
+                'There is no siteaccesses available for particular content'
+            );
+        }
+
         return $this->render('@EzPlatformAdminUi/content/content_preview.html.twig', [
+            'location' => $location,
             'content' => $content,
             'language_code' => $languageCode,
-            'siteaccess' => $this->defaultSiteaccess,
+            'siteaccesses' => $siteaccesses,
             'versionNo' => $versionNo ?? $content->getVersionInfo()->versionNo,
         ]);
     }

@@ -34,6 +34,6 @@ export default class EzParagraphConfig extends EzConfigBase {
         const nativeEditor = payload.editor.get('nativeEditor');
         const path = nativeEditor.elementPath();
 
-        return (nativeEditor.isSelectionEmpty() && path.contains('p'));
+        return (nativeEditor.isSelectionEmpty() && path && path.contains('p'));
     }
 }

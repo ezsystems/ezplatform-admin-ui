@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="a4b9e9b4898dd285237fc60130970ce7ed988871" resname="content.create.choose_content_type">
-        <source>Choose content type</source>
-        <target state="new">Choose content type</target>
+        <source>Create your content</source>
+        <target state="new">Create your content</target>
         <note>key: content.create.choose_content_type</note>
       </trans-unit>
       <trans-unit id="f599001c1ab9442f20e23d535e1dad8f3b75c337" resname="content.create.select_content_type">
@@ -345,51 +345,6 @@
         <source>Translation manager</source>
         <target state="new">Translation manager</target>
         <note>key: tab.translations.translation_manger</note>
-      </trans-unit>
-      <trans-unit id="d244966cab8b41f92fd5553d8f33f0e1ca8bf85f" resname="tab.urls.custom_url_aliases">
-        <source>Custom URL aliases for %contentName%</source>
-        <target state="new">Custom URL aliases for %contentName%</target>
-        <note>key: tab.urls.custom_url_aliases</note>
-      </trans-unit>
-      <trans-unit id="5a1947624cf55689d80d38b7583bac538da641bb" resname="tab.urls.language">
-        <source>Language</source>
-        <target state="new">Language</target>
-        <note>key: tab.urls.language</note>
-      </trans-unit>
-      <trans-unit id="56d218db883ed4cc59dbbca53364dc2e725013e4" resname="tab.urls.no_custom_urls">
-        <source>This content item has no custom url aliases.</source>
-        <target state="new">This content item has no custom url aliases.</target>
-        <note>key: tab.urls.no_custom_urls</note>
-      </trans-unit>
-      <trans-unit id="c9fdd1434b44a4592626e8fe493c19141aab24d5" resname="tab.urls.no_system_urls">
-        <source>This content item has no system urls.</source>
-        <target state="new">This content item has no system urls.</target>
-        <note>key: tab.urls.no_system_urls</note>
-      </trans-unit>
-      <trans-unit id="902beb4ac170382cb95bd554cb1e763d8fdd413c" resname="tab.urls.system.title">
-        <source>System URL</source>
-        <target state="new">System URL</target>
-        <note>key: tab.urls.system.title</note>
-      </trans-unit>
-      <trans-unit id="0de66a25f1019287cf737f27622ca4d05f582764" resname="tab.urls.type">
-        <source>Type</source>
-        <target state="new">Type</target>
-        <note>key: tab.urls.type</note>
-      </trans-unit>
-      <trans-unit id="1d87d09bd23142580b88dfe4cf987cf0a6b2d993" resname="tab.urls.type.direct">
-        <source>Direct</source>
-        <target state="new">Direct</target>
-        <note>key: tab.urls.type.direct</note>
-      </trans-unit>
-      <trans-unit id="ea8af6bc33d14986b233c0acb340bd122ff0c2bd" resname="tab.urls.type.redirect">
-        <source>Redirect</source>
-        <target state="new">Redirect</target>
-        <note>key: tab.urls.type.redirect</note>
-      </trans-unit>
-      <trans-unit id="5028d3abfd74c419dc7a3daee4303b084c94d2e6" resname="tab.urls.url">
-        <source>URL</source>
-        <target state="new">URL</target>
-        <note>key: tab.urls.url</note>
       </trans-unit>
       <trans-unit id="a4297fe31e8eb3307caa2cf855328056c3b98962" resname="tab.versions.action.delete">
         <source>Delete Version</source>

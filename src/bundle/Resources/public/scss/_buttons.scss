@@ -60,7 +60,7 @@
 }
 
 .btn.disabled,
-.btn:disabled {
+.btn[disabled] {
     opacity: .3;
 }
 
@@ -111,4 +111,8 @@
 .ez-btn--content-edit {
     background-color: transparent;
     cursor: pointer;
+}
+
+.ez-btn--cotf-create {
+    display: flex;
 }

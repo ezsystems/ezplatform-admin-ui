@@ -19,6 +19,7 @@ use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Relation;
+use eZ\Publish\API\Repository\Values\Content\URLAlias;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
@@ -175,5 +176,15 @@ class ValueFactory
         return new UIValue\ObjectState\ObjectState($objectState, [
             'userCanAssign' => $this->permissionResolver->canUser('state', 'assign', $contentInfo),
         ]);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\URLAlias $urlAlias
+     *
+     * @return \EzSystems\EzPlatformAdminUi\UI\Value\Content\UrlAlias
+     */
+    public function createUrlAlias(URLAlias $urlAlias): UIValue\Content\UrlAlias
+    {
+        return new UIValue\Content\UrlAlias($urlAlias);
     }
 }

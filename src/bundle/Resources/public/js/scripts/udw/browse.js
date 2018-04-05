@@ -3,7 +3,7 @@
     const udwContainer = document.getElementById('react-udw');
     const token = document.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
-    const closeUDW = () => udwContainer.innerHTML = '';
+    const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (items) => {
         closeUDW();
 

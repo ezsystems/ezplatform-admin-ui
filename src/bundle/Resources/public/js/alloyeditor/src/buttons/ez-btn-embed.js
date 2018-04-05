@@ -37,7 +37,7 @@ export default class EzBtnEmbed extends EzEmbedDiscoverContentButton {
         widget.renderEmbedPreview(items[0].ContentInfo.Content.Name);
         widget.setFocused(true);
 
-        document.querySelector('#react-udw').innerHTML = '';
+        ReactDOM.unmountComponentAtNode(document.querySelector('#react-udw'));
     }
 
     /**

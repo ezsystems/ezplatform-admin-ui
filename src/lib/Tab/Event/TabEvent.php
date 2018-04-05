@@ -16,6 +16,9 @@ class TabEvent extends Event
     /** @var TabInterface */
     private $data;
 
+    /** @var array */
+    private $parameters;
+
     /**
      * @return TabInterface
      */
@@ -30,5 +33,21 @@ class TabEvent extends Event
     public function setData(TabInterface $data)
     {
         $this->data = $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters(): array
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @param array $parameters
+     */
+    public function setParameters(array $parameters): void
+    {
+        $this->parameters = $parameters;
     }
 }

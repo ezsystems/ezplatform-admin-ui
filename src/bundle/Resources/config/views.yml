@@ -13,4 +13,19 @@ system:
                     controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
                     template: '@EzPlatformAdminUi\fieldtypes\preview\ezobjectrelationlist_row.html.twig'
                     match: true
-
+        content_edit_view:
+            full:
+                ezplatform_admin_ui:
+                    template: '@EzPlatformAdminUi/content/content_edit/content_edit.html.twig'
+                    match: true
+                    params:
+                        viewbaseLayout: '@EzPlatformAdminUi/layout.html.twig'
+        content_create_view:
+            full:
+                ezplatform_admin_ui:
+                    template: '@EzPlatformAdminUi/content/content_edit/content_create.html.twig'
+                    match: true
+                    params:
+                        viewbaseLayout: '@EzPlatformAdminUi/layout.html.twig'
+        fielddefinition_edit_templates:
+            - { template: '@EzPlatformAdminUi/admin/content_type/field_types.html.twig', priority: 10 }

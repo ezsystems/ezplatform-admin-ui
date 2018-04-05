@@ -32,7 +32,7 @@
             ({{ versionInfo.modificationDate|localizeddate('medium', 'short', app.request.locale) }})
         </td>
         <td>{{ versionInfo.versionNo }}</td>
-        <td>{{ translations|length }}
+        <td>
             {% for translation in translations %}
                 {{ translation.name }}<br>
             {% endfor %}
@@ -92,10 +92,12 @@
         <th>{{ 'tab.details.state_name'|trans()|desc('Name') }}</th>
         <th>{{ 'tab.details.state_identifier'|trans()|desc('Identifier') }}</th>
         <th>{{ 'tab.details.state_id'|trans()|desc('State ID') }}</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
     {% for objectState in objectStates %}
+        {% form_theme form_state_update[objectState.objectStateGroup.id] '@EzPlatformAdminUi/form_fields.html.twig' %}
         <tr>
             <td>{{ objectState.objectStateGroup.name }}</td>
             <td>{{ objectState.objectStateGroup.identifier }}</td>
@@ -103,6 +105,25 @@
             <td>{{ objectState.name }}</td>
             <td>{{ objectState.identifier }}</td>
             <td>{{ objectState.id }}</td>
+            <td>
+                {{ form_start(form_state_update[objectState.objectStateGroup.id], {
+                    'method': 'POST',
+                    'action': path('ezplatform.object_state.contentstate.update', {
+                        'contentInfoId': contentInfo.id,
+                        'objectStateGroupId': objectState.objectStateGroup.id
+                    }),
+                    'attr': {'class': 'form-inline ez-form-inline'}
+                }) }}
+                {{ form_row(form_state_update[objectState.objectStateGroup.id].contentInfo) }}
+                {{ form_row(form_state_update[objectState.objectStateGroup.id].objectStateGroup) }}
+                {{ form_row(form_state_update[objectState.objectStateGroup.id].objectState) }}
+
+                <button type="submit" class="btn btn-secondary"{% if not state_update_disabled[objectState.objectStateGroup.id] %}data-disabled{% endif %}>
+                    {{ 'tab.details.sub_items_listing_by_set'|trans|desc('Set') }}
+                </button>
+
+                {{ form_end(form_state_update[objectState.objectStateGroup.id]) }}
+            </td>
         </tr>
     {% endfor %}
     </tbody>
@@ -129,7 +150,7 @@
                 {{ form_label(form_location_update.sort_order, 'tab.details.sub_items_listing_by.in'|trans|desc('in')) }}
                 {{ form_widget(form_location_update.sort_order) }}
 
-                {{ form_widget(form_location_update.update, { 'label': 'tab.details.sub_items_listing_by_set'|trans|desc('Set'), 'translation_domain': false, 'attr': {'class': 'btn-secondary ml-1'} }) }}
+                {{ form_widget(form_location_update.update, { 'label': 'tab.details.sub_items_listing_by_set'|trans|desc('Set'), 'translation_domain': false, 'attr': {'class': 'btn-secondary'} }) }}
 
             {{ form_end(form_location_update) }}
         </td>

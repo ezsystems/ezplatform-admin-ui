@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ContentTypeParamConverter implements ParamConverterInterface
 {
     const PARAMETER_CONTENT_TYPE_ID = 'contentTypeId';
+    const PARAMETER_CONTENT_TYPE_IDENTIFIER = 'contentTypeIdentifier';
 
     /** @var ContentTypeService */
     private $contentTypeService;
@@ -40,15 +41,20 @@ class ContentTypeParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
-        if (!$request->get(self::PARAMETER_CONTENT_TYPE_ID)) {
+        if (!$request->get(self::PARAMETER_CONTENT_TYPE_ID) && !$request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER)) {
             return false;
         }
 
-        $id = (int)$request->get(self::PARAMETER_CONTENT_TYPE_ID);
+        if ($request->get(self::PARAMETER_CONTENT_TYPE_ID)) {
+            $id = (int)$request->get(self::PARAMETER_CONTENT_TYPE_ID);
+            $contentType = $this->contentTypeService->loadContentType($id, $this->siteAccessLanguages);
+        } elseif ($request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER)) {
+            $identifier = $request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER);
+            $contentType = $this->contentTypeService->loadContentTypeByIdentifier($identifier, $this->siteAccessLanguages);
+        }
 
-        $contentType = $this->contentTypeService->loadContentType($id, $this->siteAccessLanguages);
         if (!$contentType) {
-            throw new NotFoundHttpException("ContentType $id not found!");
+            throw new NotFoundHttpException('ContentType ' . ($id ?? $identifier) . ' not found!');
         }
 
         $request->attributes->set($configuration->getName(), $contentType);

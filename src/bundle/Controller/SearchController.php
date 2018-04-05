@@ -11,6 +11,8 @@ use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use eZ\Publish\API\Repository\SearchService;
+use eZ\Publish\API\Repository\SectionService;
+use eZ\Publish\API\Repository\ContentTypeService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -23,30 +25,38 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SearchController extends Controller
 {
-    /** @var SearchService */
+    /** @var \eZ\Publish\API\Repository\SearchService */
     private $searchService;
 
-    /** @var PagerContentToDataMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper */
     private $pagerContentToDataMapper;
 
-    /** @var UrlGeneratorInterface */
+    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
+
+    /** @var \eZ\Publish\API\Repository\SectionService */
+    private $sectionService;
+
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    private $contentTypeService;
 
     /** @var int */
     private $defaultPaginationLimit;
 
     /**
-     * @param SearchService $searchService
-     * @param PagerContentToDataMapper $pagerContentToDataMapper
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
+     * @param \eZ\Publish\API\Repository\SearchService $searchService
+     * @param \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper $pagerContentToDataMapper
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
+     * @param \eZ\Publish\API\Repository\SectionService $sectionService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param int $defaultPaginationLimit
      */
     public function __construct(
@@ -55,6 +65,8 @@ class SearchController extends Controller
         UrlGeneratorInterface $urlGenerator,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
+        SectionService $sectionService,
+        ContentTypeService $contentTypeService,
         int $defaultPaginationLimit
     ) {
         $this->searchService = $searchService;
@@ -62,15 +74,17 @@ class SearchController extends Controller
         $this->urlGenerator = $urlGenerator;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
+        $this->sectionService = $sectionService;
+        $this->contentTypeService = $contentTypeService;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
     /**
      * Renders the simple search form and search results.
      *
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \InvalidArgumentException
      */
@@ -80,9 +94,22 @@ class SearchController extends Controller
         $limit = $search['limit'] ?? $this->defaultPaginationLimit;
         $page = $search['page'] ?? 1;
         $query = $search['query'];
+        $section = null;
+        $contentTypes = [];
+        $lastModified = $search['last_modified'] ?? [];
+        $created = $search['created'] ?? [];
+
+        if (!empty($search['section'])) {
+            $section = $this->sectionService->loadSection($search['section']);
+        }
+        if (!empty($search['content_types']) && is_array($search['content_types'])) {
+            foreach ($search['content_types'] as $identifier) {
+                $contentTypes[] = $this->contentTypeService->loadContentTypeByIdentifier($identifier);
+            }
+        }
 
         $form = $this->formFactory->createSearchForm(
-            new SearchData($limit, $page, $query),
+            new SearchData($limit, $page, $query, $section, $contentTypes, $lastModified, $created),
             'search',
             [
                 'method' => Request::METHOD_GET,
@@ -92,14 +119,45 @@ class SearchController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (SearchData $data) use ($form) {
                 $limit = $data->getLimit();
                 $page = $data->getPage();
                 $queryString = $data->getQuery();
-
+                $section = $data->getSection();
+                $contentTypes = $data->getContentTypes();
+                $lastModified = $data->getLastModified();
+                $created = $data->getCreated();
                 $query = new Query();
-                $query->filter = new Criterion\FullText($queryString);
+                $criteria = [];
+
+                if (null !== $queryString) {
+                    $criteria[] = new Criterion\FullText($queryString);
+                }
+                if (null !== $section) {
+                    $criteria[] = new Criterion\SectionId($section->id);
+                }
+                if (!empty($contentTypes)) {
+                    $criteria[] = new Criterion\ContentTypeId(array_column($contentTypes, 'id'));
+                }
+                if (!empty($lastModified)) {
+                    $criteria[] = new Criterion\DateMetadata(
+                        Criterion\DateMetadata::MODIFIED,
+                        Criterion\Operator::BETWEEN,
+                        [$lastModified['start_date'], $lastModified['end_date']]
+                    );
+                }
+                if (!empty($created)) {
+                    $criteria[] = new Criterion\DateMetadata(
+                        Criterion\DateMetadata::CREATED,
+                        Criterion\Operator::BETWEEN,
+                        [$created['start_date'], $created['end_date']]
+                    );
+                }
+                if (!empty($criteria)) {
+                    $query->filter = new Criterion\LogicalAnd($criteria);
+                }
+
                 $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
 
                 $pagerfanta = new Pagerfanta(
@@ -118,6 +176,7 @@ class SearchController extends Controller
                     'form' => $form->createView(),
                     'pager' => $pagerfanta,
                     'form_edit' => $editForm->createView(),
+                    'filters_expanded' => $data->isFiltered(),
                 ]);
             });
 
@@ -128,6 +187,7 @@ class SearchController extends Controller
 
         return $this->render('@EzPlatformAdminUi/admin/search/search.html.twig', [
             'form' => $form->createView(),
+            'filters_expanded' => false,
         ]);
     }
 }

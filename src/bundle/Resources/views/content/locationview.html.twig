@@ -48,7 +48,9 @@
                         'content': content,
                         'location': location,
                         'contentType': contentType,
-                        'draft_pagination_params': draft_pagination_params
+                        'draft_pagination_params': draft_pagination_params,
+                        'custom_urls_pagination_params': custom_urls_pagination_params,
+                        'system_urls_pagination_params': system_urls_pagination_params
                     }, 'EzPlatformAdminUiBundle:parts/tab:locationview.html.twig') }}
 
                     {% if contentType.isContainer %}
@@ -122,6 +124,10 @@
         'bundles/ezplatformadminui/js/scripts/sidebar/instant.filter.js'
         '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/leaflet/dist/leaflet.js'
         'bundles/ezplatformadminui/js/scripts/admin.location.load.map.js'
+        'bundles/ezplatformadminui/js/scripts/sidebar/btn/content.edit.js'
+        'bundles/ezplatformadminui/js/scripts/admin.location.add.custom_url.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.version.edit.conflict.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

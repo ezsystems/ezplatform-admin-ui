@@ -36,6 +36,10 @@
         text-align: center;
     }
 
+    [data-ezelement="ezconfig"] {
+        display: none;
+    }
+
     [data-ezelement="ezembed"] {
         background: $ez-ground-base;
         border: 1px solid $ez-ground-base-dark;
@@ -46,10 +50,6 @@
         box-sizing: border-box;
         line-height: 1;
         min-height: auto;
-
-        [data-ezelement="ezconfig"] {
-            display: none;
-        }
 
         .ez-embed-content {
             margin-bottom: 0;

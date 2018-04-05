@@ -88,7 +88,7 @@ class RelationsTab extends AbstractTab implements OrderedTabInterface
 
         $viewParameters['relations'] = $relations;
 
-        if (true === $this->permissionResolver->hasAccess('module', 'reverserelatedlist')) {
+        if (true === $this->permissionResolver->hasAccess('content', 'reverserelatedlist')) {
             $reverseRelations = $relationsDataset->getReverseRelations();
 
             foreach ($reverseRelations as $relation) {

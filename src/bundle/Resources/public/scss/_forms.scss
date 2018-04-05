@@ -40,10 +40,22 @@ form:not(.form-inline) {
 }
 
 .ez-form-inline {
-    .control-label,
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+
+    .col-form-label,
     .form-control,
     .form-control-label {
         margin-right: .5rem;
+    }
+}
+
+.ez-table--no-border {
+    .ez-form-inline {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
     }
 }
 
@@ -60,5 +72,43 @@ form:not(.form-inline) {
         position: initial;
         margin-bottom: .25rem;
         margin-right: .5rem;
+    }
+}
+
+.ez-field {
+    .ez-field__label {
+        @include label-required();
+    }
+
+    &.is-invalid {
+        .ez-field__label-wrapper,
+        .ez-field__label {
+            color: $ez-color-danger;
+        }
+
+        .ez-field__data {
+            position: relative;
+
+            &:before {
+                content : '!';
+                position: absolute;
+                top: 0;
+                left: -20px;
+                width: 20px;
+
+                background: red;
+                color: white;
+                text-align: center;
+                font-size: 1.5rem;
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+        }
+    }
+
+    &__error {
+        display: inline-block;
+        margin-left: 8px;
+        color: $ez-color-danger;
     }
 }

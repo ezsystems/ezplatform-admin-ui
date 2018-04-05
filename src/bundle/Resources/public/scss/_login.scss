@@ -1,13 +1,22 @@
 .ez-login {
     height: 100%;
 
+    .form-group {
+        padding-top: 1rem;
+    }
+
+    .ez-field__error {
+        margin-left: 0;
+        color: $ez-color-warning-dark;
+    }
+
     &__image {
         background: url('/bundles/ezplatformadminui/img/login-background.jpg');
         background-size: cover;
     }
 
     &__form {
-        background: linear-gradient(to bottom, #fd8a52 0%,#ef6533 70%);
+        background: #ff7b1e;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -16,7 +25,6 @@
 
         &-label {
             margin-bottom: 0;
-            margin-top: 1rem;
         }
 
         &-input {
@@ -30,5 +38,19 @@
             flex-direction: column;
             justify-content: center;
         }
+    }
+
+    &__text {
+        &-wrapper {
+            width: 32rem;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    &__header {
+        font-weight: 400;
     }
 }
