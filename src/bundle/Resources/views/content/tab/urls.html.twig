@@ -1,74 +1,58 @@
 {% trans_default_domain 'content_url' %}
 {% import _self as tab %}
 {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.urls.custom_url_aliases'|trans({'%contentName%' : ez_content_name(content)})|desc('Custom URL aliases for %contentName%'), tools: tab.table_header_tools(form_custom_url_remove) } %}
-{% form_theme form_custom_url_remove '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
 
-{% if custom_urls is not empty %}
-    {{ form_start(form_custom_url_remove, {
-        'action': path('ezplatform.custom_url.remove'),
-        'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-custom-urls' }
+{% if custom_urls_pager.currentPageResults is not empty %}
+    {{  include('@EzPlatformAdminUi/content/tab/url/custom_urls_table.html.twig', {
+            'custom_urls_pager': custom_urls_pager,
+            'form_custom_url_remove': form_custom_url_remove,
     }) }}
-    <table class="table">
-        <thead>
-        <tr>
-            <th></th>
-            <th>{{ 'tab.urls.url'|trans|desc('URL') }}</th>
-            <th>{{ 'tab.urls.language'|trans|desc('Language') }}</th>
-            <th>{{ 'tab.urls.type'|trans|desc('Type') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for custom_url in custom_urls %}
-            <tr>
-                <td class="ez-checkbox-cell">{{ form_widget(form_custom_url_remove.url_aliases[custom_url.id]) }}</td>
-                <td>{{ custom_url.path }}</td>
-                <td>
-                    {% for languageCode in custom_url.languageCodes %}{{ admin_ui_config.languages.mappings[languageCode].name }}<br>{% endfor %}
-                </td>
-                <td>
-                    {% if custom_url.forward %}
-                        {{ 'tab.urls.type.redirect'|trans|desc('Redirect') }}
-                    {% else %}
-                        {{ 'tab.urls.type.direct'|trans|desc('Direct') }}
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {{ form_end(form_custom_url_remove) }}
-
 {% else %}
     <p class="ez-table-no-content">
         {{ 'tab.urls.no_custom_urls'|trans|desc('This content item has no custom url aliases.') }}
     </p>
 {% endif %}
 
+{% if custom_urls_pager.haveToPaginate %}
+    {{  include('@EzPlatformAdminUi/content/tab/pagination.html.twig', {
+            'pager': custom_urls_pager,
+            'paginatonParams': {
+                'routeName': custom_urls_pagination_params.route_name,
+                'routeParams': {
+                    '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
+                    'locationId': location.id,
+                    'page[system_url]': system_urls_pagination_params.page
+                },
+                'pageParameter': '[page][custom_url]'
+            }
+    }) }}
+{% endif %}
+
 {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.urls.system.title'|trans|desc('System URL') } %}
 
-{% if system_urls is defined %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>{{ 'tab.urls.url'|trans|desc('URL') }}</th>
-            <th>{{ 'tab.urls.language'|trans|desc('Language') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for system_url in system_urls %}
-            <tr>
-                <td>{{ system_url.path }}</td>
-                <td>
-                    {% for languageCode in system_url.languageCodes %}{{ admin_ui_config.languages.mappings[languageCode].name }}<br>{% endfor %}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% if system_urls_pager.currentPageResults is not empty %}
+    {{  include('@EzPlatformAdminUi/content/tab/url/system_urls_table.html.twig', {
+            'system_urls_pager': system_urls_pager,
+    }) }}
 {% else %}
     <p class="ez-table-no-content">
         {{ 'tab.urls.no_system_urls'|trans|desc('This content item has no system urls.') }}
     </p>
+{% endif %}
+
+{% if system_urls_pager.haveToPaginate %}
+    {{  include('@EzPlatformAdminUi/content/tab/pagination.html.twig', {
+        'pager': system_urls_pager,
+        'paginatonParams': {
+            'routeName': system_urls_pagination_params.route_name,
+            'routeParams': {
+                '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
+                'locationId': location.id,
+                'page[custom_url]': custom_urls_pagination_params.page
+            },
+            'pageParameter': '[page][system_url]'
+        }
+    }) }}
 {% endif %}
 
 {% include '@EzPlatformAdminUi/content/tab/url/modal_add_custom_url.html.twig' with {'form': form_custom_url_add, 'parent_name': parent_name} only %}
