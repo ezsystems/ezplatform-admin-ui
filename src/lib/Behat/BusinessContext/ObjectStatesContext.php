@@ -12,7 +12,6 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ObjectStateGroupPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\AssertionFailedError;
 
 class ObjectStatesContext extends BusinessContext
 {
@@ -25,26 +24,26 @@ class ObjectStatesContext extends BusinessContext
         $objectStateGroupPage->verifyIsLoaded();
         $objectStateExists = $objectStateGroupPage->adminLists['Object States']->table->isElementInTable($objectStateName);
 
-        if (!$objectStateExists) {
-            Assert::fail(sprintf('Element "%s" is not on the "%s" object states list.', $objectStateName, $objectStateGroupName));
-        }
+        Assert::assertTrue(
+            $objectStateExists,
+            sprintf('Element "%s" is not on the "%s" object states list.', $objectStateName, $objectStateGroupName)
+        );
     }
 
     /**
      * @Then there's no :objectStateName on :objectStateGroupName Object States list
      */
-    public function verfyObjectStateIsNotOnList(string $objectStateName, string $objectStateGroupName): void
+    public function verifyObjectStateIsNotOnList(string $objectStateName, string $objectStateGroupName): void
     {
         $objectStateGroupPage = PageObjectFactory::createPage($this->utilityContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
         $objectStateGroupPage->verifyIsLoaded();
-        try {
-            $objectStateGroupPage->verifyListIsEmpty();
-        } catch (AssertionFailedError $e) {
+        if (!$objectStateGroupPage->isListEmpty('Object States')) {
             $objectStateExists = $objectStateGroupPage->adminLists['Object States']->table->isElementInTable($objectStateName);
 
-            if ($objectStateExists) {
-                Assert::fail(sprintf('Element "%s" is on the "%s" object states list.', $objectStateName, $objectStateGroupName));
-            }
+            Assert::assertFalse(
+                $objectStateExists,
+                sprintf('Element "%s" is on the "%s" object states list.', $objectStateName, $objectStateGroupName)
+            );
         }
     }
 

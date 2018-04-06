@@ -20,7 +20,7 @@ class ObjectStateGroupPage extends Page
     /** @var string Name of actual group */
     public $objectStateGroupName;
 
-    /** @var string locator for container of Content list */
+    /** @var string locator for container of Object States list */
     public $secondListContainerLocator = 'section:nth-of-type(2)';
 
     /**
@@ -57,18 +57,22 @@ class ObjectStateGroupPage extends Page
     /**
      * Verifies if list of Object States is empty.
      *
-     * @param string $tabName
+     * @param string $listName
      */
-    public function verifyListIsEmpty(): void
+    public function verifyListIsEmpty($listName): void
     {
-        $firstRowValue = $this->adminLists['Object States']->table->getCellValue(1, 1);
+        Assert::assertTrue(
+            $this->isListEmpty($listName),
+            '"Object States" list is not empty.'
+        );
+    }
 
-        if (
-            !($this->adminLists['Object States']->table->getItemCount() === 1 &&
-                strpos($firstRowValue, 'No Object State configured.') !== false)
-        ) {
-            Assert::fail('"Content items" list is not empty.');
-        }
+    public function isListEmpty(string $listName): bool
+    {
+        $firstRowValue = $this->adminLists[$listName]->table->getCellValue(1, 1);
+
+        return $this->adminLists[$listName]->table->getItemCount() === 1 &&
+            strpos($firstRowValue, 'No Object State configured.') !== false;
     }
 
     public function startEditingItem(string $itemName): void
