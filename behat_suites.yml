@@ -22,3 +22,4 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SystemInfoContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SectionsContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ObjectStatesContext

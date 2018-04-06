@@ -9,6 +9,8 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 use Behat\Gherkin\Node\TableNode;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\ObjectStateGroupPage;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\ObjectStateGroupsPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\Page;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\RolePage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\RolesPage;
@@ -31,6 +33,8 @@ class AdministrationContext extends BusinessContext
         'Limitation' => RolePage::PAGE_NAME,
         'Policy' => RolePage::PAGE_NAME,
         'Section' => SectionsPage::PAGE_NAME,
+        'Object State Group' => ObjectStateGroupsPage::PAGE_NAME,
+        'Object State' => ObjectStateGroupPage::PAGE_NAME,
         'User' => '',
     ];
     private $emptyHeaderMapping = [
@@ -62,7 +66,7 @@ class AdministrationContext extends BusinessContext
             throw new \InvalidArgumentException(sprintf('Unrecognized item type name: %s', $newItemType));
         }
         PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$newItemType], $containerItem)
-            ->adminList->clickPlusButton();
+            ->startCreatingItem();
     }
 
     /**
@@ -181,7 +185,7 @@ class AdministrationContext extends BusinessContext
     public function iStartEditingItemFromDetails(string $itemType, string $itemName): void
     {
         PageObjectFactory::createPage($this->utilityContext, $itemType, $itemName)
-            ->startEditingItem($itemName);
+            ->startEditingSelf($itemName);
     }
 
     /**

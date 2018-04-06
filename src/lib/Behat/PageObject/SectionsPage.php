@@ -54,4 +54,9 @@ class SectionsPage extends Page
     {
         $this->adminList->table->clickEditButton($itemName);
     }
+
+    public function startCreatingItem(): void
+    {
+        $this->adminList->clickPlusButton();
+    }
 }

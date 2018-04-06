@@ -87,6 +87,12 @@ class RolePage extends Page
         $this->adminLists['Policies']->table->clickEditButton($itemName);
     }
 
+    public function startCreatingItem(): void
+    {
+        $this->navLinkTabs->goToTab('Policies');
+        $this->adminLists['Policies']->clickPlusButton();
+    }
+
     public function startAssigningToItem(string $roleName): void
     {
         Assert::assertEquals(

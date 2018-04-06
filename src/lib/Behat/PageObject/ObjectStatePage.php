@@ -9,25 +9,28 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\LinkedListTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\SimpleTable;
 use PHPUnit\Framework\Assert;
 
-class LanguagesPage extends Page
+class ObjectStatePage extends Page
 {
     /** @var string Name by which Page is recognised */
-    public const PAGE_NAME = 'Languages';
+    public const PAGE_NAME = 'Object State';
+    /** @var string $languageName */
+    private $objectStateName;
 
     /**
      * @var \EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList
      */
     public $adminList;
 
-    public function __construct(UtilityContext $context)
+    public function __construct(UtilityContext $context, string $objectStateName)
     {
         parent::__construct($context);
-        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME, LinkedListTable::ELEMENT_NAME);
-        $this->route = '/admin/language/list';
-        $this->pageTitle = self::PAGE_NAME;
+        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME . ' Information', SimpleTable::ELEMENT_NAME);
+        $this->objectStateName = $objectStateName;
+        $this->route = '/admin/state/state';
+        $this->pageTitle = sprintf('Object State: %s', $objectStateName);
         $this->pageTitleLocator = '.ez-header h1';
     }
 
@@ -36,22 +39,17 @@ class LanguagesPage extends Page
         $this->adminList->verifyVisibility();
     }
 
-    public function startEditingItem(string $itemName): void
+    public function startEditingSelf(string $itemName): void
     {
         $this->adminList->table->clickEditButton($itemName);
     }
 
-    public function verifyItemAttribute(string $label, string $value, string $itemName): void
+    public function verifyItemAttribute(string $label, string $value): void
     {
         Assert::assertEquals(
             $value,
-            $this->adminList->table->getTableCellValue($itemName, $label),
-            sprintf('Attribute "%s" of item "%s" has wrong value.', $label, $itemName)
+            $this->adminList->table->getTableCellValue($label),
+            sprintf('Attribute "%s" has wrong value.', $label)
         );
-    }
-
-    public function startCreatingItem(): void
-    {
-        $this->adminList->clickPlusButton();
     }
 }
