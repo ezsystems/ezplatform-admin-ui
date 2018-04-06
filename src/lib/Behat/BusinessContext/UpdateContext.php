@@ -42,7 +42,7 @@ class UpdateContext extends BusinessContext
         $updateItemPage = PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME);
         $updateItemPage->updateForm->selectFieldDefinition($fieldName);
         $updateItemPage->updateForm->clickAddFieldDefinition();
-        $updateItemPage->updateForm->verifyNewFieldDefinitionFormExists($fieldName);
+        $updateItemPage->updateForm->verifyNewFieldDefinitionFormExists(sprintf('New FieldDefinition (%s)', $fieldName));
     }
 
     /**
@@ -50,8 +50,9 @@ class UpdateContext extends BusinessContext
      */
     public function iSetFieldInContainer(string $field, string $containerName, string $value): void
     {
-        PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME)
-            ->updateForm->fillFieldWithValue($field, $value, sprintf('New FieldDefinition (%s)', $containerName));
+        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME);
+        $updateItemPage->updateForm->expandFieldDefinition(sprintf('New FieldDefinition (%s)', $containerName));
+        $updateItemPage->updateForm->fillFieldWithValue($field, $value, sprintf('New FieldDefinition (%s)', $containerName));
     }
 
     /**

@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
 /** Element that describes structures in all update forms */
@@ -32,6 +33,9 @@ class UpdateForm extends Element
             'addFieldDefinition' => 'ezrepoforms_contenttype_update_addFieldDefinition',
             'fieldDefinitionContainer' => '.ez-card--fieldtype-container',
             'fieldDefinitionName' => '.ez-card--fieldtype-container .ez-card__header .form-check-label',
+            'fieldBody' => 'ez-card__body',
+            'fieldCollapsed' => 'ez-card--collapsed',
+            'fieldDefinitionToggler' => '.ez-card__body-display-toggler',
             'button' => 'button',
         ];
     }
@@ -128,10 +132,7 @@ class UpdateForm extends Element
      */
     public function verifyNewFieldDefinitionFormExists(string $fieldName): void
     {
-        $form = $this->context->getElementByText(
-            sprintf('New FieldDefinition (%s)', $this->fieldTypesMapping[$fieldName]),
-            $this->fields['fieldDefinitionName']
-        );
+        $form = $this->context->getElementByText($fieldName, $this->fields['fieldDefinitionName']);
         if ($form === null) {
             throw new \Exception('Field definition not added to the form.');
         }
@@ -149,5 +150,24 @@ class UpdateForm extends Element
         $filteredButtons = array_filter($formButtons, function ($element) use ($label) { return $element->getText() === $label; });
 
         $filteredButtons[$indexOfButton]->click();
+    }
+
+    /**
+     * Expand field definition if it is collapsed.
+     *
+     * @param string $fieldName
+     */
+    public function expandFieldDefinition(string $fieldName): void
+    {
+        try {
+            $notification = ElementFactory::createElement($this->context, Notification::ELEMENT_NAME);
+            $notification->closeAlert();
+        } catch (ElementNotFoundException $ignore) {
+        }
+
+        $container = $this->getFieldDefinitionContainer($fieldName);
+        if (strpos($container->getAttribute('class'), $this->fields['fieldCollapsed']) !== false) {
+            $container->find('css', $this->fields['fieldDefinitionToggler'])->click();
+        }
     }
 }

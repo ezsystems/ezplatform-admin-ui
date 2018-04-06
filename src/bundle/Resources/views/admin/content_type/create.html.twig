@@ -70,12 +70,20 @@
                 {% for field_definition in form.fieldDefinitionsData %}
                     {% set value = field_definition.vars.value %}
 
-                    <div class="card ez-card ez-card--fieldtype-container">
+                    <div class="card ez-card ez-card--fieldtype-container mb-3 ez-card--collapsed">
                         <div id="field-definition-{{ value.identifier }}" class="ez-card__header ez-card__header--secondary">
                             {{ form_widget(field_definition.selected, {
                                 'label': '%s (%s)' | format(value.names[language_code], value.fieldTypeIdentifier),
                                 'label_attr': {class: 'checkbox-inline'}
                             }) }}
+                            <button class="ez-card__body-display-toggler btn">
+                                <svg class="ez-icon ez-icon--medium ez-icon--caret-down" aria-hidden="true">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#caret-down"></use>
+                                </svg>
+                                <svg class="ez-icon ez-icon--medium ez-icon--caret-next" aria-hidden="true">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#caret-next"></use>
+                                </svg>
+                            </button>
                         </div>
 
                         <div class="ez-card__body">
@@ -128,6 +136,7 @@
 {% block javascripts %}
     {%  javascripts
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.contenttype.selection.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.contenttype.fieldtype.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

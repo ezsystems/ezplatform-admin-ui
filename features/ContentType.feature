@@ -27,7 +27,7 @@ Feature: Content types management
       | Name                 | Test CT  |
       | Identifier           | iTestCT  |
       | Content name pattern | <name>   |
-      And I add field "Country" to Content Type definition
+      And I add field "ezcountry" to Content Type definition
       And I set "Name" in "ezcountry" to "CountryField"
       And I click on the edit action bar button "Save"
     Then I should be on "Content Type" "Test CT" page
@@ -60,7 +60,7 @@ Feature: Content types management
     Given there's "Test CT" on "Content" "Content Type Group" list
     When I start editing "Content Type" "Test CT" from "Content"
       And I set "Name" to "Test CT edited"
-      And I add field "Date" to Content Type definition
+      And I add field "ezdate" to Content Type definition
       And I set "Name" in "ezdate" to "DateField"
       And I click on the edit action bar button "Save"
     Then I should be on "Content Type" "Test CT edited" page
