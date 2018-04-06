@@ -27,8 +27,8 @@
         <note>key: content_type.container</note>
       </trans-unit>
       <trans-unit id="693f9ade0c2bb6a7c19b6f9b818d96aa23f1e013" resname="content_type.default_availability">
-        <source>Default availability</source>
-        <target state="new">Default availability</target>
+        <source>Default content availability</source>
+        <target state="new">Default content availability</target>
         <note>key: content_type.default_availability</note>
       </trans-unit>
       <trans-unit id="3b3fc626a669a5462ec9fa7c94280a3573d8b106" resname="content_type.default_availability.help">
@@ -82,8 +82,8 @@
         <note>key: content_type.name</note>
       </trans-unit>
       <trans-unit id="9e9628fc59643f3167ebe81dfed3e40eecd281c9" resname="content_type.name_schema">
-        <source>Content name schema</source>
-        <target state="new">Content name schema</target>
+        <source>Content name pattern</source>
+        <target state="new">Content name pattern</target>
         <note>key: content_type.name_schema</note>
       </trans-unit>
       <trans-unit id="da59e6ae77cae375a30d7285970b1b2d9690049e" resname="content_type.sort_field.ascending">

@@ -35,7 +35,7 @@ Feature: Content types management
       | label                | value    |
       | Name                 | Test CT  |
       | Identifier           | iTestCT  |
-      | Content name schema  | <name>   |
+      | Content name pattern | <name>   |
       And Content Type "Test CT" has field "CountryField" of type "ezcountry"
       And notification that "Content type" "Test CT" is updated appears
 
@@ -68,7 +68,7 @@ Feature: Content types management
       | label                | value           |
       | Name                 | Test CT edited  |
       | Identifier           | iTestCT         |
-      | Content name schema  | <name>          |
+      | Content name pattern | <name>          |
       And Content Type "Test CT" has proper fields
       | fieldName      | fieldType |
       | CountryField   | ezcountry |
