@@ -21,6 +21,7 @@ class Notification extends Element
             'alert' => '.alert',
             'successAlert' => '.alert-success',
             'failureAlert' => '.alert-danger',
+            'closeAlert' => '.alert.show button.close',
         ];
     }
 
@@ -42,5 +43,10 @@ class Notification extends Element
     public function getMessage(): string
     {
         return $this->context->findElement($this->fields['alert'])->getText();
+    }
+
+    public function closeAlert(): void
+    {
+        $this->context->findElement($this->fields['closeAlert'])->click();
     }
 }
