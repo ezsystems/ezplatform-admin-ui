@@ -25,6 +25,7 @@ class CustomTag
 
     /**
      * @var TranslatorInterface
+     *
      * @deprecated Deprecated since v1.2.0. Label generation is now covered by a LabelMaker.
      */
     private $translator;
@@ -40,6 +41,7 @@ class CustomTag
 
     /**
      * @var string
+     *
      * @deprecated Deprecated since v1.2.0. Label generation is now covered by a LabelMaker.
      */
     private $translationDomain;

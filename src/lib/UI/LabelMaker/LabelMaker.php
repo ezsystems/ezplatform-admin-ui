@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUi\UI\LabelMaker;
 
 /**
@@ -9,10 +14,10 @@ interface LabelMaker
     /**
      * @param string $identifier Identifier of the label to make. Example: 'description'.
      * @param string mixed $items Components of the generated item. Example: a custom tag's identifier & attribute.
-     * @param bool $generateDefault Wether or not to generate a default label if none is set.
+     * @param bool $generateDefault wether or not to generate a default label if none is set
+     *
      * @return string The label if one exists.
      *                If none exists, a default is built based on $defaultBase, unless it is set to false.
-     *
      */
     public function getLabel(string $identifier, $items, bool $generateDefault = true): string;
 }

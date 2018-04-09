@@ -18,12 +18,14 @@ class CommonAttributeMapper implements AttributeMapper
 {
     /**
      * @var TranslatorInterface
+     *
      * @deprecated Deprecated since v1.2.0. Label generation is now covered by a LabelMaker.
      */
     protected $translator;
 
     /**
      * @var string
+     *
      * @deprecated Deprecated since v1.2.0. Label generation is now covered by a LabelMaker.
      */
     protected $translationDomain;
@@ -69,6 +71,7 @@ class CommonAttributeMapper implements AttributeMapper
     /**
      * @param string $tagName
      * @param string $attributeName
+     *
      * @return string
      */
     private function getLabel(string $tagName, string $attributeName): string

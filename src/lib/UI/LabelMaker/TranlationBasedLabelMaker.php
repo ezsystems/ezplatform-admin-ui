@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace EzSystems\EzPlatformAdminUi\UI\LabelMaker;
 
 use Symfony\Component\Translation\TranslatorInterface;
@@ -53,6 +58,7 @@ class TranlationBasedLabelMaker implements LabelMaker
     /**
      * @param array $items
      * @param string $labelIdentifier
+     *
      * @return string
      */
     private function makeTranslationKey(array $items, string $labelIdentifier): string
