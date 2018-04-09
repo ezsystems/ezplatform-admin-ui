@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\CustomTag;
 
+use EzSystems\EzPlatformAdminUi\UI\LabelMaker\LabelMaker;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -15,16 +16,30 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class CommonAttributeMapper implements AttributeMapper
 {
-    /** @var TranslatorInterface */
+    /**
+     * @var TranslatorInterface
+     * @deprecated Deprecated since v1.2.0. Label generation is now covered by a LabelMaker.
+     */
     protected $translator;
 
-    /** @var string */
+    /**
+     * @var string
+     * @deprecated Deprecated since v1.2.0. Label generation is now covered by a LabelMaker.
+     */
     protected $translationDomain;
+    /**
+     * @var LabelMaker
+     */
+    private $richTextAttributeLabelMaker;
 
-    public function __construct(TranslatorInterface $translator, string $translationDomain)
-    {
+    public function __construct(
+        TranslatorInterface $translator,
+        string $translationDomain,
+        LabelMaker $richTextAttributeLabelMaker = null
+    ) {
         $this->translator = $translator;
         $this->translationDomain = $translationDomain;
+        $this->richTextAttributeLabelMaker = $richTextAttributeLabelMaker;
     }
 
     /**
@@ -44,7 +59,23 @@ class CommonAttributeMapper implements AttributeMapper
         array $customTagAttributeProperties
     ): array {
         return [
-            'label' => $this->translator->trans(
+            'label' => $this->getLabel($tagName, $attributeName),
+            'type' => $customTagAttributeProperties['type'],
+            'required' => $customTagAttributeProperties['required'],
+            'defaultValue' => $customTagAttributeProperties['default_value'],
+        ];
+    }
+
+    /**
+     * @param string $tagName
+     * @param string $attributeName
+     * @return string
+     */
+    private function getLabel(string $tagName, string $attributeName): string
+    {
+        /** @deprecated v1.2.0 backward compatibility */
+        if ($this->richTextAttributeLabelMaker === null) {
+            return $this->translator->trans(
                 sprintf(
                     'ezrichtext.custom_tags.%s.attributes.%s.label',
                     $tagName,
@@ -52,10 +83,9 @@ class CommonAttributeMapper implements AttributeMapper
                 ),
                 [],
                 $this->translationDomain
-            ),
-            'type' => $customTagAttributeProperties['type'],
-            'required' => $customTagAttributeProperties['required'],
-            'defaultValue' => $customTagAttributeProperties['default_value'],
-        ];
+            );
+        }
+
+        return $this->richTextAttributeLabelMaker->getLabel('label', [$tagName, $attributeName]);
     }
 }

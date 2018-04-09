@@ -7,6 +7,7 @@ services:
         autowire: true
         arguments:
             $translationDomain: '%ezplatform.field_type.ezrichtext.custom_tags.translation_domain%'
+            $richTextAttributeLabelMaker: '@EzSystems\EzPlatformAdminUi\UI\LabelMaker\RichTextCustomTagAttributeLabelMaker'
         tags:
             - { name: ezplatform.admin_ui.richtext_custom_tag_attribute_mapper, priority: 0 }
 
@@ -22,3 +23,4 @@ services:
             $customTagsConfiguration: '%ezplatform.ezrichtext.custom_tags%'
             $translationDomain: '%ezplatform.field_type.ezrichtext.custom_tags.translation_domain%'
             $customTagAttributeMappers: !tagged ezplatform.admin_ui.richtext_custom_tag_attribute_mapper
+            $labelMaker: '@EzSystems\EzPlatformAdminUi\UI\LabelMaker\RichTextCustomTagLabelMaker'

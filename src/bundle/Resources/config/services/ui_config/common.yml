@@ -46,3 +46,20 @@ services:
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText\CustomTag:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'richTextCustomTags' }
+
+    EzSystems\EzPlatformAdminUi\UI\LabelMaker\RichTextCustomTagLabelMaker:
+        class: EzSystems\EzPlatformAdminUi\UI\LabelMaker\TranlationBasedLabelMaker
+        arguments:
+            $config:
+                domain: '%ezplatform.field_type.ezrichtext.custom_tags.translation_domain%'
+                patterns:
+                    label: 'ezrichtext.custom_tags.%%s.label'
+                    description: 'ezrichtext.custom_tags.%%s.description'
+
+    EzSystems\EzPlatformAdminUi\UI\LabelMaker\RichTextCustomTagAttributeLabelMaker:
+        class: EzSystems\EzPlatformAdminUi\UI\LabelMaker\TranlationBasedLabelMaker
+        arguments:
+            $config:
+                domain: '%ezplatform.field_type.ezrichtext.custom_tags.translation_domain%'
+                patterns:
+                    label: 'ezrichtext.custom_tags.%%s.attributes.%%s.label'

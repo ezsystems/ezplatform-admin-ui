@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText;
 
 use EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\CustomTag\AttributeMapper;
+use EzSystems\EzPlatformAdminUi\UI\LabelMaker\LabelMaker;
 use RuntimeException;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -22,7 +23,10 @@ class CustomTag
     /** @var array */
     private $customTagsConfiguration;
 
-    /** @var TranslatorInterface */
+    /**
+     * @var TranslatorInterface
+     * @deprecated Deprecated since v1.2.0. Label generation is now covered by a LabelMaker.
+     */
     private $translator;
 
     /** @var Packages */
@@ -34,15 +38,22 @@ class CustomTag
     /** @var AttributeMapper[] */
     private $supportedTagAttributeMappersCache;
 
-    /** @var string */
+    /**
+     * @var string
+     * @deprecated Deprecated since v1.2.0. Label generation is now covered by a LabelMaker.
+     */
     private $translationDomain;
+
+    /** @var LabelMaker */
+    private $labelMaker;
 
     public function __construct(
         array $customTagsConfiguration,
         TranslatorInterface $translator,
         string $translationDomain,
         Packages $packages,
-        Traversable $customTagAttributeMappers
+        Traversable $customTagAttributeMappers,
+        LabelMaker $labelMaker
     ) {
         $this->customTagsConfiguration = $customTagsConfiguration;
         $this->translator = $translator;
@@ -50,6 +61,7 @@ class CustomTag
         $this->packages = $packages;
         $this->customTagAttributeMappers = $customTagAttributeMappers;
         $this->supportedTagAttributeMappersCache = [];
+        $this->labelMaker = $labelMaker;
     }
 
     /**
@@ -77,19 +89,8 @@ class CustomTag
                 );
             }
 
-            $config[$tagName]['label'] = $this->translator->trans(
-                sprintf('ezrichtext.custom_tags.%s.label', $tagName),
-                [],
-                $this->translationDomain
-            );
-            $config[$tagName]['description'] = $this->translator->trans(
-                sprintf(
-                    'ezrichtext.custom_tags.%s.description',
-                    $tagName
-                ),
-                [],
-                $this->translationDomain
-            );
+            $config[$tagName]['label'] = $this->labelMaker->getLabel('label', $tagName);
+            $config[$tagName]['description'] = $this->labelMaker->getLabel('description', $tagName, false);
 
             foreach ($customTagConfiguration['attributes'] as $attributeName => $properties) {
                 $typeMapper = $this->getAttributeTypeMapper(
