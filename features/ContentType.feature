@@ -12,74 +12,74 @@ Feature: Content types management
   Scenario: Changes can be discarded while creating Content Type
     When I start creating new "Content Type" in "Content"
       And I set fields
-      | label      | value    |
-      | Name       | Test CT  |
-      | Identifier | iTestCT  |
+      | label      | value                     |
+      | Name       | Test Content Type         |
+      | Identifier | TestContentTypeIdentifier |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Content Type Group" "Content" page
-      And there's no "Test CT" on "Content" "Content Type Group" list
+      And there's no "Test Content Type" on "Content" "Content Type Group" list
 
   @javascript @common
   Scenario: New Content Type can be added to Content Type Group
     When I start creating new "Content Type" in "Content"
       And I set fields
-      | label                | value    |
-      | Name                 | Test CT  |
-      | Identifier           | iTestCT  |
-      | Content name pattern | <name>   |
+      | label                | value                     |
+      | Name                 | Test Content Type         |
+      | Identifier           | TestContentTypeIdentifier |
+      | Content name pattern | <name>                    |
       And I add field "ezcountry" to Content Type definition
       And I set "Name" in "ezcountry" to "CountryField"
       And I click on the edit action bar button "Save"
-    Then I should be on "Content Type" "Test CT" page
+    Then I should be on "Content Type" "Test Content Type" page
       And Content Type has proper Global properties
-      | label                | value    |
-      | Name                 | Test CT  |
-      | Identifier           | iTestCT  |
-      | Content name pattern | <name>   |
-      And Content Type "Test CT" has field "CountryField" of type "ezcountry"
-      And notification that "Content type" "Test CT" is updated appears
+      | label                | value                     |
+      | Name                 | Test Content Type         |
+      | Identifier           | TestContentTypeIdentifier |
+      | Content name pattern | <name>                    |
+      And Content Type "Test Content Type" has field "CountryField" of type "ezcountry"
+      And notification that "Content type" "Test Content Type" is updated appears
 
   @javascript @common
   Scenario: I can navigate to Content Type Group through breadcrumb
-    Given I go to "Test CT" "Content Type" page from "Content"
+    Given I go to "Test Content Type" "Content Type" page from "Content"
     When I click on "Content" on breadcrumb
     Then I should be on "Content Type Group" "Content" page
 
   @javascript @common
   Scenario: Changes can be discarded while editing Content type
-    Given there's "Test CT" on "Content" "Content Type Group" list
-    When I start editing "Content Type" "Test CT" from "Content"
-      And I set "Name" to "Test CT edited"
+    Given there's "Test Content Type" on "Content" "Content Type Group" list
+    When I start editing "Content Type" "Test Content Type" from "Content"
+      And I set "Name" to "Test Content Type edited"
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Content Type Group" "Content" page
-      And there's "Test CT" on "Content" "Content Type Group" list
-      And there's no "Test CT edited" on "Content" "Content Type Group" list
+      And there's "Test Content Type" on "Content" "Content Type Group" list
+      And there's no "Test Content Type edited" on "Content" "Content Type Group" list
 
   @javascript @common
   Scenario: New Field can be added while editing Content Type
-    Given there's "Test CT" on "Content" "Content Type Group" list
-    When I start editing "Content Type" "Test CT" from "Content"
-      And I set "Name" to "Test CT edited"
+    Given there's "Test Content Type" on "Content" "Content Type Group" list
+    When I start editing "Content Type" "Test Content Type" from "Content"
+      And I set "Name" to "Test Content Type edited"
       And I add field "ezdate" to Content Type definition
       And I set "Name" in "ezdate" to "DateField"
       And I click on the edit action bar button "Save"
-    Then I should be on "Content Type" "Test CT edited" page
+    Then I should be on "Content Type" "Test Content Type edited" page
       And Content Type has proper Global properties
-      | label                | value           |
-      | Name                 | Test CT edited  |
-      | Identifier           | iTestCT         |
-      | Content name pattern | <name>          |
-      And Content Type "Test CT" has proper fields
+      | label                | value                     |
+      | Name                 | Test Content Type edited  |
+      | Identifier           | TestContentTypeIdentifier |
+      | Content name pattern | <name>                    |
+      And Content Type "Test Content Type" has proper fields
       | fieldName      | fieldType |
       | CountryField   | ezcountry |
       | DateField      | ezdate    |
-      And notification that "Content type" "Test CT edited" is updated appears
+      And notification that "Content type" "Test Content Type edited" is updated appears
 
   @javascript @common
   Scenario: Content type can be deleted from Content Type Group
-    Given there's "Test CT edited" on "Content" "Content Type Group" list
+    Given there's "Test Content Type edited" on "Content" "Content Type Group" list
     When I delete "Content Type" from "Content"
-      | item           |
-      | Test CT edited |
-    Then there's no "Test CT edited" on "Content" "Content Type Group" list
-      And notification that "Content type" "Test CT edited" is deleted appears
+      | item                     |
+      | Test Content Type edited |
+    Then there's no "Test Content Type edited" on "Content" "Content Type Group" list
+      And notification that "Content type" "Test Content Type edited" is deleted appears

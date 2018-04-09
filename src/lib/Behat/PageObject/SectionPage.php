@@ -88,7 +88,7 @@ class SectionPage extends Page
         $this->adminLists['Content items']->clickAssignButton();
     }
 
-    public function startEditingItem(string $itemName): void
+    public function startEditingSelf(string $itemName): void
     {
         $this->adminLists['Section information']->table->clickEditButton($itemName);
     }

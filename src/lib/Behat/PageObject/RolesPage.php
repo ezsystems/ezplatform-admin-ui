@@ -54,4 +54,9 @@ class RolesPage extends Page
     {
         $this->adminList->clickAssignButton($itemName);
     }
+
+    public function startCreatingItem(): void
+    {
+        $this->adminList->clickPlusButton();
+    }
 }
