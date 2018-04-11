@@ -16,6 +16,7 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\L
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Module;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Pagination;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Security;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\UserIdentifier;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -32,6 +33,7 @@ class EzPlatformAdminUiBundle extends Bundle
         $core->addConfigParser(new Module\UniversalDiscoveryWidget());
         $core->addConfigParser(new Pagination());
         $core->addConfigParser(new Security());
+        $core->addConfigParser(new UserIdentifier());
         $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ezplatform_default_settings.yml']);
 
         $this->addCompilerPasses($container);

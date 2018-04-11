@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Search;
 
 use eZ\Publish\API\Repository\Values\Content\Section;
+use eZ\Publish\API\Repository\Values\User\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class SearchData
@@ -40,6 +41,9 @@ class SearchData
     /** @var array */
     private $created;
 
+    /** @var \eZ\Publish\API\Repository\Values\User\User */
+    private $creator;
+
     /**
      * SimpleSearchData constructor.
      *
@@ -50,6 +54,7 @@ class SearchData
      * @param array $contentTypes
      * @param array $lastModified
      * @param array $created
+     * @param \eZ\Publish\API\Repository\Values\User\User|null $creator
      */
     public function __construct(
         int $limit = 10,
@@ -58,7 +63,8 @@ class SearchData
         ?Section $section = null,
         array $contentTypes = [],
         array $lastModified = [],
-        array $created = []
+        array $created = [],
+        ?User $creator = null
     ) {
         $this->limit = $limit;
         $this->page = $page;
@@ -67,6 +73,7 @@ class SearchData
         $this->contentTypes = $contentTypes;
         $this->lastModified = $lastModified;
         $this->created = $created;
+        $this->creator = $creator;
     }
 
     /**
@@ -142,6 +149,14 @@ class SearchData
     }
 
     /**
+     * @param \eZ\Publish\API\Repository\Values\User\User $creator
+     */
+    public function setCreator(User $creator): void
+    {
+        $this->creator = $creator;
+    }
+
+    /**
      * @return int
      */
     public function getLimit(): int
@@ -198,6 +213,14 @@ class SearchData
     }
 
     /**
+     * @return \eZ\Publish\API\Repository\Values\User\User|null
+     */
+    public function getCreator(): ?User
+    {
+        return $this->creator;
+    }
+
+    /**
      * @return bool
      */
     public function isFiltered(): bool
@@ -206,7 +229,8 @@ class SearchData
         $section = $this->getSection();
         $lastModified = $this->getLastModified();
         $created = $this->getCreated();
+        $creator = $this->getCreator();
 
-        return !empty($contentTypes) || null !== $section || !empty($lastModified) || !empty($created);
+        return !empty($contentTypes) || null !== $section || !empty($lastModified) || !empty($created) || !empty($creator);
     }
 }
