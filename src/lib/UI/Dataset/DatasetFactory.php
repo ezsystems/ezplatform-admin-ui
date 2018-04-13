@@ -9,58 +9,91 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\ObjectStateService;
+use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\URLAliasService;
+use eZ\Publish\API\Repository\UserService;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 
 class DatasetFactory
 {
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     protected $contentService;
 
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    private $contentTypeService;
+
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     protected $languageService;
 
-    /** @var ObjectStateService */
+    /** @var \eZ\Publish\API\Repository\ObjectStateService */
     protected $objectStateService;
 
-    /** @var ValueFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory */
     protected $valueFactory;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     protected $locationService;
 
-    /** @var URLAliasService */
+    /** @var \eZ\Publish\API\Repository\URLAliasService */
     private $urlAliasService;
 
+    /** @var \eZ\Publish\API\Repository\RoleService */
+    private $roleService;
+
+    /** @var \eZ\Publish\API\Repository\UserService */
+    private $userService;
+
+    /** @var array */
+    private $userContentTypeIdentifier;
+
+    /** @var array */
+    private $userGroupContentTypeIdentifier;
+
     /**
-     * @param ContentService $contentService
-     * @param LanguageService $languageService
-     * @param LocationService $locationService
-     * @param ObjectStateService $objectStateService
-     * @param URLAliasService $urlAliasService
-     * @param ValueFactory $valueFactory
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
+     * @param \eZ\Publish\API\Repository\URLAliasService $urlAliasService
+     * @param \eZ\Publish\API\Repository\RoleService $roleService
+     * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory $valueFactory
+     * @param array $userContentTypeIdentifier
+     * @param array $userGroupContentTypeIdentifier
      */
     public function __construct(
         ContentService $contentService,
+        ContentTypeService $contentTypeService,
         LanguageService $languageService,
         LocationService $locationService,
         ObjectStateService $objectStateService,
         URLAliasService $urlAliasService,
-        ValueFactory $valueFactory
+        RoleService $roleService,
+        UserService $userService,
+        ValueFactory $valueFactory,
+        array $userContentTypeIdentifier,
+        array $userGroupContentTypeIdentifier
     ) {
         $this->contentService = $contentService;
+        $this->contentTypeService = $contentTypeService;
         $this->languageService = $languageService;
         $this->locationService = $locationService;
         $this->objectStateService = $objectStateService;
         $this->urlAliasService = $urlAliasService;
+        $this->roleService = $roleService;
+        $this->userService = $userService;
         $this->valueFactory = $valueFactory;
+        $this->userContentTypeIdentifier = $userContentTypeIdentifier;
+        $this->userGroupContentTypeIdentifier = $userGroupContentTypeIdentifier;
     }
 
     /**
-     * @return VersionsDataset
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\VersionsDataset
      */
     public function versions(): VersionsDataset
     {
@@ -68,7 +101,7 @@ class DatasetFactory
     }
 
     /**
-     * @return TranslationsDataset
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\TranslationsDataset
      */
     public function translations(): TranslationsDataset
     {
@@ -76,7 +109,7 @@ class DatasetFactory
     }
 
     /**
-     * @return RelationsDataset
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\RelationsDataset
      */
     public function relations(): RelationsDataset
     {
@@ -84,7 +117,7 @@ class DatasetFactory
     }
 
     /**
-     * @return LocationsDataset
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\LocationsDataset
      */
     public function locations(): LocationsDataset
     {
@@ -92,7 +125,7 @@ class DatasetFactory
     }
 
     /**
-     * @return ObjectStatesDataset
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\ObjectStatesDataset
      */
     public function objectStates(): ObjectStatesDataset
     {
@@ -105,5 +138,21 @@ class DatasetFactory
     public function customUrls(): CustomUrlsDataset
     {
         return new CustomUrlsDataset($this->urlAliasService, $this->valueFactory);
+    }
+
+    /**
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\RolesDataset
+     */
+    public function roles(): RolesDataset
+    {
+        return new RolesDataset(
+            $this->roleService,
+            $this->contentService,
+            $this->contentTypeService,
+            $this->userService,
+            $this->valueFactory,
+            $this->userContentTypeIdentifier,
+            $this->userGroupContentTypeIdentifier
+        );
     }
 }

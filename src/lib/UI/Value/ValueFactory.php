@@ -22,6 +22,7 @@ use eZ\Publish\API\Repository\Values\Content\Relation;
 use eZ\Publish\API\Repository\Values\Content\URLAlias;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
+use eZ\Publish\API\Repository\Values\User\RoleAssignment;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
@@ -186,5 +187,15 @@ class ValueFactory
     public function createUrlAlias(URLAlias $urlAlias): UIValue\Content\UrlAlias
     {
         return new UIValue\Content\UrlAlias($urlAlias);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\User\RoleAssignment $roleAssignment
+     *
+     * @return \EzSystems\EzPlatformAdminUi\UI\Value\User\Role
+     */
+    public function createRole(RoleAssignment $roleAssignment): UIValue\User\Role
+    {
+        return new UIValue\User\Role($roleAssignment);
     }
 }

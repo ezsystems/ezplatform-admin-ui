@@ -221,6 +221,11 @@
         <target state="new">Relations</target>
         <note>key: tab.name.relations</note>
       </trans-unit>
+      <trans-unit id="c58716ba1092b0208a11137dc226327a3ddf84dc" resname="tab.name.roles">
+        <source>Roles</source>
+        <target state="new">Roles</target>
+        <note>key: tab.name.roles</note>
+      </trans-unit>
       <trans-unit id="0b83b391386f47130b2d3ac1869fe27aa8c45fb7" resname="tab.name.translations">
         <source>Translations</source>
         <target state="new">Translations</target>

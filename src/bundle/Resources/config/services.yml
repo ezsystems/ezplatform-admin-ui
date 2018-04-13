@@ -78,7 +78,11 @@ services:
         arguments:
             $policyMap: "%ezpublish.api.role.policy_map%"
 
-    EzSystems\EzPlatformAdminUi\UI\Dataset\Factory: ~
+    EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory:
+        arguments:
+            $userContentTypeIdentifier: '$user_content_type_identifier$'
+            $userGroupContentTypeIdentifier: '$user_group_content_type_identifier$'
+
     EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory:
         lazy: true
         tags:

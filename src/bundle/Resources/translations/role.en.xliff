@@ -291,6 +291,26 @@
         <target state="new">Do you want to delete Role Assignments?</target>
         <note>key: role_assignments.modal.message</note>
       </trans-unit>
+      <trans-unit id="e9f659f5717d317c994c7950c14bcb4be644062c" resname="tab.roles.limitation">
+        <source>Limitation</source>
+        <target state="new">Limitation</target>
+        <note>key: tab.roles.limitation</note>
+      </trans-unit>
+      <trans-unit id="fbe67472651ec35066be2897a5cdab7afcb63733" resname="tab.roles.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: tab.roles.name</note>
+      </trans-unit>
+      <trans-unit id="9e3fbe7cbb68fbe5996471da829e0fab59c3fc8b" resname="tab.roles.no_roles">
+        <source>This content item has no roles.</source>
+        <target state="new">This content item has no roles.</target>
+        <note>key: tab.roles.no_roles</note>
+      </trans-unit>
+      <trans-unit id="cfba356470eba180c21d9a43e9bebbfe5e2d427b" resname="tab.roles.roles">
+        <source>Roles</source>
+        <target state="new">Roles</target>
+        <note>key: tab.roles.roles</note>
+      </trans-unit>
       <trans-unit id="5abe6179f254b9bdd5e8680eec4456118980932e" resname="validator.assign_users_or_groups">
         <source>Assign User(s) and/or Group(s) to the Role</source>
         <target state="new">Assign User(s) and/or Group(s) to the Role</target>

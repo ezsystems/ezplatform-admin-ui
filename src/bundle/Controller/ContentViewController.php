@@ -4,6 +4,8 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -25,22 +27,22 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ContentViewController extends Controller
 {
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
-    /** @var PathService */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Service\PathService */
     private $pathService;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubitemsContentViewParameterSupplier */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier */
     private $subitemsContentViewParameterSupplier;
 
-    /** @var UserService */
+    /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
     /** @var int */
@@ -49,15 +51,19 @@ class ContentViewController extends Controller
     /** @var array */
     private $siteAccessLanguages;
 
+    /** @var int */
+    private $defaultRolePaginationLimit;
+
     /**
-     * @param ContentTypeService $contentTypeService
-     * @param LanguageService $languageService
-     * @param PathService $pathService
-     * @param FormFactory $formFactory
-     * @param SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier
-     * @param UserService $userService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
+     * @param \EzSystems\EzPlatformAdminUi\UI\Service\PathService $pathService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier $subitemsContentViewParameterSupplier
+     * @param \eZ\Publish\API\Repository\UserService $userService
      * @param int $defaultPaginationLimit
      * @param array $siteAccessLanguages
+     * @param int $defaultRolePaginationLimit
      */
     public function __construct(
         ContentTypeService $contentTypeService,
@@ -67,7 +73,8 @@ class ContentViewController extends Controller
         SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier,
         UserService $userService,
         int $defaultPaginationLimit,
-        array $siteAccessLanguages
+        array $siteAccessLanguages,
+        int $defaultRolePaginationLimit
     ) {
         $this->contentTypeService = $contentTypeService;
         $this->languageService = $languageService;
@@ -77,8 +84,15 @@ class ContentViewController extends Controller
         $this->userService = $userService;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
         $this->siteAccessLanguages = $siteAccessLanguages;
+        $this->defaultRolePaginationLimit = $defaultRolePaginationLimit;
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     *
+     * @return \eZ\Publish\Core\MVC\Symfony\View\ContentView
+     */
     public function locationViewAction(Request $request, ContentView $view)
     {
         // We should not cache ContentView because we use forms with CSRF tokens in template
@@ -96,10 +110,16 @@ class ContentViewController extends Controller
         $this->supplyDraftPagination($view, $request);
         $this->supplyCustomUrlPagination($view, $request);
         $this->supplySystemUrlPagination($view, $request);
+        $this->supplyRolePagination($view, $request);
 
         return $view;
     }
 
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     *
+     * @return \eZ\Publish\Core\MVC\Symfony\View\ContentView
+     */
     public function embedViewAction(ContentView $view)
     {
         // We should not cache ContentView because we use forms with CSRF tokens in template
@@ -113,7 +133,7 @@ class ContentViewController extends Controller
     }
 
     /**
-     * @param ContentView $view
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
      */
     private function supplyPathLocations(ContentView $view): void
     {
@@ -123,7 +143,9 @@ class ContentViewController extends Controller
     }
 
     /**
-     * @param ContentView $view
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     private function supplyContentType(ContentView $view): void
     {
@@ -133,6 +155,11 @@ class ContentViewController extends Controller
         $view->addParameters(['contentType' => $contentType]);
     }
 
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     */
     private function supplyContentActionForms(ContentView $view): void
     {
         $location = $view->getLocation();
@@ -188,8 +215,8 @@ class ContentViewController extends Controller
     }
 
     /**
-     * @param ContentView $view
-     * @param Request $request
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     private function supplyDraftPagination(ContentView $view, Request $request): void
     {
@@ -239,9 +266,26 @@ class ContentViewController extends Controller
     }
 
     /**
-     * @param Location|null $location
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    private function supplyRolePagination(ContentView $view, Request $request): void
+    {
+        $page = $request->query->get('page');
+
+        $view->addParameters([
+            'roles_pagination_params' => [
+                'route_name' => $request->get('_route'),
+                'page' => $page['role'] ?? 1,
+                'limit' => $this->defaultRolePaginationLimit,
+            ],
+        ]);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
      *
-     * @return ContentCreateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData
      */
     private function getContentCreateData(?Location $location): ContentCreateData
     {

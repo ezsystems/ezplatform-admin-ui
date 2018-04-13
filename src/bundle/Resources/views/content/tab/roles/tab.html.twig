@@ -1,0 +1,27 @@
+{% trans_default_domain 'role' %}
+{% import _self as tab %}
+{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.roles.roles'|trans|desc('Roles') } %}
+
+{% if roles_pager.currentPageResults is not empty %}
+    {{  include('@EzPlatformAdminUi/content/tab/roles/table.html.twig', {
+            'roles_pager': roles_pager,
+    }) }}
+{% else %}
+    <p class="ez-table-no-content">
+        {{ 'tab.roles.no_roles'|trans|desc('This content item has no roles.') }}
+    </p>
+{% endif %}
+
+{% if roles_pager.haveToPaginate %}
+    {{  include('@EzPlatformAdminUi/content/tab/pagination.html.twig', {
+            'pager': roles_pager,
+            'paginatonParams': {
+                'routeName': roles_pagination_params.route_name,
+                'routeParams': {
+                    '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\RolesTab::URI_FRAGMENT'),
+                    'locationId': location.id
+                },
+                'pageParameter': '[page][role]'
+            }
+    }) }}
+{% endif %}
