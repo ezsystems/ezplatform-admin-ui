@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="779646634b8d89b40f5abaa2ccd6107b300bf429" resname="content_type.action.edit">
+        <source>Edit</source>
+        <target state="new">Edit</target>
+        <note>key: content_type.action.edit</note>
+      </trans-unit>
       <trans-unit id="0aef83746d192c9b507ecabebe250aeb684cc210" resname="content_type.breadcrumb.create">
         <source>Creating a new Content Type</source>
         <target state="new">Creating a new Content Type</target>
@@ -195,11 +200,6 @@
         <source>Delete Content Type</source>
         <target state="new">Delete Content Type</target>
         <note>key: content_type.view.list.action.delete</note>
-      </trans-unit>
-      <trans-unit id="1a2e4ef61d405d0628d8bacdb80d7bbaa11143d5" resname="content_type.view.list.action.edit">
-        <source>Edit</source>
-        <target state="new">Edit</target>
-        <note>key: content_type.view.list.action.edit</note>
       </trans-unit>
       <trans-unit id="bef02fc3d41e74bf002af93b413a2a203a04db1a" resname="content_type.view.list.column.id">
         <source>ID</source>

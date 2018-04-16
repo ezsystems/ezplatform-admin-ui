@@ -1,0 +1,16 @@
+{% trans_default_domain 'content_type' %}
+
+{% macro content_type_edit(content_type, content_type_group, class_name) %}
+    {% set edit_url = path('ezplatform.content_type.edit', {
+    'contentTypeGroupId': content_type_group.id,
+    'contentTypeId': content_type.id
+    }) %}
+
+    <a title="{{ 'content_type.action.edit'|trans|desc('Edit') }}"
+       href="{{ edit_url }}"
+        {% if class_name %}class="{{ class_name }}"{% endif %}>
+        <svg class="ez-icon ez-icon-edit">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+        </svg>
+    </a>
+{% endmacro %}
