@@ -1,5 +1,7 @@
 {% trans_default_domain 'content_type' %}
 
+{% import "@EzPlatformAdminUi/admin/content_type/macros.html.twig" as macros %}
+
 {% form_theme form_content_types_delete '@EzPlatformAdminUi/form_fields.html.twig'  %}
 
 <section class="container mt-4 px-5">
@@ -63,18 +65,7 @@
                 <td>{{ content_type.id }}</td>
                 <td>{{ content_type.modificationDate | date }}</td>
                 <td class="text-right">
-                    {% set edit_url = path('ezplatform.content_type.edit', {
-                        'contentTypeGroupId': content_type_group.id,
-                        'contentTypeId': content_type.id
-                    }) %}
-
-                    <a title="{{ 'content_type.view.list.action.edit'|trans|desc('Edit') }}"
-                       href="{{ edit_url }}"
-                       class="btn btn-icon mx-3">
-                        <svg class="ez-icon ez-icon-edit">
-                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-                        </svg>
-                    </a>
+                    {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-3') }}
                 </td>
             </tr>
         {% endfor %}
