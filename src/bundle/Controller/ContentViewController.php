@@ -194,12 +194,18 @@ class ContentViewController extends Controller
             $this->getContentCreateData($location)
         );
 
+        $locationCopySubtreeType = $this->formFactory->copyLocation(
+            new LocationCopyData($location),
+            'location_copy_subtree'
+        );
+
         $view->addParameters([
             'form_location_copy' => $locationCopyType->createView(),
             'form_location_move' => $locationMoveType->createView(),
             'form_content_edit' => $contentEditType->createView(),
             'form_content_create' => $contentCreateType->createView(),
             'form_subitems_content_edit' => $subitemsContentEdit->createView(),
+            'form_location_copy_subtree' => $locationCopySubtreeType->createView(),
         ]);
 
         if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {

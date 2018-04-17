@@ -86,6 +86,7 @@
             {% endif %}
             {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}
             {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}
+            {{ form(form_location_copy_subtree, {'action': path('ezplatform.location.copy_subtree')}) }}
         </div>
     </div>
 {% endblock %}
@@ -119,6 +120,7 @@
         'bundles/ezplatformadminui/js/scripts/udw/move.js'
         'bundles/ezplatformadminui/js/scripts/udw/copy.js'
         'bundles/ezplatformadminui/js/scripts/udw/swap.js'
+        'bundles/ezplatformadminui/js/scripts/udw/copy_subtree.js'
         'bundles/ezplatformadminui/js/scripts/udw/locations.tab.js'
         'bundles/ezplatformadminui/js/scripts/sidebar/extra.actions.js'
         'bundles/ezplatformadminui/js/scripts/sidebar/btn/location.edit.js'
