@@ -11,6 +11,11 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Event;
 class TabEvents
 {
     /**
+     * Happens just after tabs group creation.
+     */
+    const TAB_GROUP_INITIALIZE = 'ezplatform.tab.group.initialize';
+
+    /**
      * Happens just before rendering tabs group.
      */
     const TAB_GROUP_PRE_RENDER = 'ezplatform.tab.group.pre_render';

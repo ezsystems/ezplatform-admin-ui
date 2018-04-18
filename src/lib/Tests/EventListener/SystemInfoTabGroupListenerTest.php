@@ -81,11 +81,6 @@ class SystemInfoTabGroupListenerTest extends TestCase
                 ->method('createTab')
                 ->with($identifier)
                 ->willReturn($tab);
-
-            $this->tabRegistry
-                ->expects($this->at($i))
-                ->method('addTab')
-                ->with($tab, 'systeminfo');
         }
 
         $systemInfoCollectorRegistry = $this->createMock(SystemInfoCollectorRegistry::class);

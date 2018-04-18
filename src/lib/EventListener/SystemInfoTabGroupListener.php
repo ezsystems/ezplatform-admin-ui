@@ -61,10 +61,7 @@ class SystemInfoTabGroupListener implements EventSubscriberInterface
         }
 
         foreach ($this->systeminfoCollectorRegistry->getIdentifiers() as $collectorIdentifier) {
-            $this->tabRegistry->addTab(
-                $this->tabFactory->createTab($collectorIdentifier),
-                'systeminfo'
-            );
+            $tabGroup->addTab($this->tabFactory->createTab($collectorIdentifier));
         }
     }
 }
