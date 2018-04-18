@@ -14,6 +14,14 @@ services:
         tags:
             - { name: ezplatform.tab, group: location-view }
 
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\PoliciesTab:
+        autowire: true
+        arguments:
+            $userContentTypeIdentifier: '$user_content_type_identifier$'
+            $userGroupContentTypeIdentifier: '$user_group_content_type_identifier$'
+        tags:
+            - { name: ezplatform.tab, group: location-view }
+
     EzSystems\EzPlatformAdminUi\Tab\LocationView\ContentTab:
         public: true
         autowire: true
