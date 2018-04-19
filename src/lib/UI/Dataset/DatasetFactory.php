@@ -155,4 +155,20 @@ class DatasetFactory
             $this->userGroupContentTypeIdentifier
         );
     }
+
+    /**
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\PoliciesDataset
+     */
+    public function policies(): PoliciesDataset
+    {
+        return new PoliciesDataset(
+            $this->roleService,
+            $this->contentService,
+            $this->contentTypeService,
+            $this->userService,
+            $this->valueFactory,
+            $this->userContentTypeIdentifier,
+            $this->userGroupContentTypeIdentifier
+        );
+    }
 }

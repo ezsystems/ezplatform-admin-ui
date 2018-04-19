@@ -22,6 +22,8 @@ use eZ\Publish\API\Repository\Values\Content\Relation;
 use eZ\Publish\API\Repository\Values\Content\URLAlias;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
+use eZ\Publish\API\Repository\Values\User\Policy;
+use eZ\Publish\API\Repository\Values\User\Role;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
@@ -197,5 +199,16 @@ class ValueFactory
     public function createRole(RoleAssignment $roleAssignment): UIValue\User\Role
     {
         return new UIValue\User\Role($roleAssignment);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\User\Policy $policy
+     * @param \eZ\Publish\API\Repository\Values\User\RoleAssignment $roleAssignment
+     *
+     * @return \EzSystems\EzPlatformAdminUi\UI\Value\User\Policy
+     */
+    public function createPolicy(Policy $policy, RoleAssignment $roleAssignment): UIValue\User\Policy
+    {
+        return new UIValue\User\Policy($policy, ['role_assignment' => $roleAssignment]);
     }
 }

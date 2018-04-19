@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="41bcfef149f877e1abb0ce2cd2aa5afb713ea1de" resname="policy.limitation.identifier_tooltip">
+        <source>"%identifier%" Limitation</source>
+        <target state="new">"%identifier%" Limitation</target>
+        <note>key: policy.limitation.identifier_tooltip</note>
+      </trans-unit>
+      <trans-unit id="77e814db3b3f1bd68101d274277bee08d164f0a2" resname="policy.limitation.none">
+        <source>None</source>
+        <target state="new">None</target>
+        <note>key: policy.limitation.none</note>
+      </trans-unit>
+      <trans-unit id="15c7918829705fa0d6e560ba6697675a1fb3642d" resname="tab.policies.assignment">
+        <source>User/Group</source>
+        <target state="new">User/Group</target>
+        <note>key: tab.policies.assignment</note>
+      </trans-unit>
+      <trans-unit id="359681221fc63adcf852c1352342fe531e554503" resname="tab.policies.function">
+        <source>Function</source>
+        <target state="new">Function</target>
+        <note>key: tab.policies.function</note>
+      </trans-unit>
+      <trans-unit id="5098755527692813df1b8d6f49caa4dea5456f86" resname="tab.policies.limitations">
+        <source>Limitations</source>
+        <target state="new">Limitations</target>
+        <note>key: tab.policies.limitations</note>
+      </trans-unit>
+      <trans-unit id="0b7526586468170ae85e2dec10e6ffe06da7e146" resname="tab.policies.module">
+        <source>Module</source>
+        <target state="new">Module</target>
+        <note>key: tab.policies.module</note>
+      </trans-unit>
+      <trans-unit id="445e5dce642562c06137fef60c9a7fcf788a9da6" resname="tab.policies.no_policies">
+        <source>This content item has no policies.</source>
+        <target state="new">This content item has no policies.</target>
+        <note>key: tab.policies.no_policies</note>
+      </trans-unit>
+      <trans-unit id="1a761d1b544608935dfa6ce9d196cf2c31f7edda" resname="tab.policies.policies">
+        <source>Policies</source>
+        <target state="new">Policies</target>
+        <note>key: tab.policies.policies</note>
+      </trans-unit>
+      <trans-unit id="1a1635237bc7c5c0b73865100d03763e9bd71e1f" resname="tab.policies.role">
+        <source>Role</source>
+        <target state="new">Role</target>
+        <note>key: tab.policies.role</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

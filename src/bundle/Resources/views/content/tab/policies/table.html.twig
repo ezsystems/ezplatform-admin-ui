@@ -1,0 +1,54 @@
+{% trans_default_domain 'policy' %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ 'tab.policies.role'|trans|desc('Role') }}</th>
+        <th>{{ 'tab.policies.assignment'|trans|desc('User/Group') }}</th>
+        <th>{{ 'tab.policies.module'|trans|desc('Module') }}</th>
+        <th>{{ 'tab.policies.function'|trans|desc('Function') }}</th>
+        <th>{{ 'tab.policies.limitations'|trans|desc('Limitations') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for policy in policies_pager.currentPageResults %}
+        <tr>
+            <td>
+                <a href="{{ path('ezplatform.role.view', { roleId: policy.role_assignment.role.id}) }}">
+                    {{ policy.role_assignment.role.identifier }}
+                </a>
+            </td>
+            <td>
+                {%- if policy.role_assignment.usergroup is defined -%}
+                    {{ ez_content_name( policy.role_assignment.usergroup ) }}
+                {%- else -%}
+                    {{ ez_content_name( policy.role_assignment.user ) }}
+                {%- endif -%}
+            </td>
+            <td>
+                {{ policy.module|capitalize }}
+            </td>
+            <td>
+                {{ policy.function|capitalize }}
+            </td>
+            <td>
+                {%- if policy.limitations is not empty -%}
+                    <ul class="list-unstyled">
+                        {%- for limitation in policy.limitations -%}
+                            <li>
+                                <span class="font-weight-bold" title="{{ 'policy.limitation.identifier_tooltip'|trans({'%identifier%': limitation.identifier})|desc('"%identifier%" Limitation') }}">
+                                    {{ ('policy.limitation.identifier.' ~ limitation.identifier|lower)|trans({'%identifier%': limitation.identifier}, 'ezrepoforms_policies')|desc('%identifier%') }}:
+                                </span>
+                                {{ ez_render_limitation_value(limitation, {'template': '@EzPlatformAdminUi/content/tab/policies/limitation_values.html.twig'}) }}
+                            </li>
+                        {%- endfor -%}
+                    </ul>
+                {%- else -%}
+                    {{- 'policy.limitation.none'|trans|desc('None') -}}
+                {%- endif -%}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+

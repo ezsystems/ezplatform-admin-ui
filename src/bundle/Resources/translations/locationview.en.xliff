@@ -216,6 +216,11 @@
         <target state="new">Locations</target>
         <note>key: tab.name.locations</note>
       </trans-unit>
+      <trans-unit id="a483f367c17cc75d6c5cf331f80e395b254cbbd6" resname="tab.name.policies">
+        <source>Policies</source>
+        <target state="new">Policies</target>
+        <note>key: tab.name.policies</note>
+      </trans-unit>
       <trans-unit id="8954433abc5d011c00f81f317c7eebec41fbb1c0" resname="tab.name.relations">
         <source>Relations</source>
         <target state="new">Relations</target>

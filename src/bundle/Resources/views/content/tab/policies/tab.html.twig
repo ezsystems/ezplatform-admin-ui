@@ -1,0 +1,27 @@
+{% trans_default_domain 'policy' %}
+{% import _self as tab %}
+{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.policies.policies'|trans|desc('Policies') } %}
+
+{% if policies_pager.currentPageResults is not empty %}
+    {{  include('@EzPlatformAdminUi/content/tab/policies/table.html.twig', {
+            'policies_pager': policies_pager,
+    }) }}
+{% else %}
+    <p class="ez-table-no-content">
+        {{ 'tab.policies.no_policies'|trans|desc('This content item has no policies.') }}
+    </p>
+{% endif %}
+
+{% if policies_pager.haveToPaginate %}
+    {{  include('@EzPlatformAdminUi/content/tab/pagination.html.twig', {
+            'pager': policies_pager,
+            'paginatonParams': {
+                'routeName': policies_pagination_params.route_name,
+                'routeParams': {
+                    '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\PoliciesTab::URI_FRAGMENT'),
+                    'locationId': location.id
+                },
+                'pageParameter': '[page][policy]'
+            }
+    }) }}
+{% endif %}
