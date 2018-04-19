@@ -103,7 +103,6 @@ class PoliciesDataset
         foreach ($roleAssignments as $roleAssignment) {
             $policies[] = array_map(
                 function (Policy $policy) use ($roleAssignment) {
-
                     return $this->valueFactory->createPolicy($policy, $roleAssignment);
                 },
                 $roleAssignment->getRole()->getPolicies()
