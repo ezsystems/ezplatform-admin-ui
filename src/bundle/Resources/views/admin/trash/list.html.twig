@@ -26,6 +26,7 @@
                             {% if can_restore and form_trash_item_restore.trash_items is not empty %}
                                 {% set restore_under_new_parent_button_attr = form_trash_item_restore.location.select_content.vars.attr|merge({
                                     'attr': {
+                                        'data-udw-config': ez_udw_config('single_container', {}),
                                         'class': (form_trash_item_restore.location.select_content.vars.attr.class|default('') ~ ' d-inline-block btn btn-secondary')|trim,
                                         'disabled': true
                                     }

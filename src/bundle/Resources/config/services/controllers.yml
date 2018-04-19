@@ -75,3 +75,8 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $languages: '$languages$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $visitor: '@ezpublish_rest.output.visitor.json'

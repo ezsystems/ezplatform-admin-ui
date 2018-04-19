@@ -28,7 +28,14 @@ class UniversalDiscoveryWidget extends AbstractParser
             ->arrayNode('universal_discovery_widget_module')
                 ->info('UDW module configuration')
                 ->children()
-                    ->scalarNode('default_location_id')->isRequired()->end()
+                    ->scalarNode('default_location_id')
+                        ->setDeprecated('Use configuration.default.starting_location_id instead.')
+                        ->isRequired()
+                    ->end()
+                    ->arrayNode('configuration')
+                        ->isRequired()
+                        ->variablePrototype()
+                    ->end()
                 ->end()
             ->end();
     }
@@ -52,6 +59,12 @@ class UniversalDiscoveryWidget extends AbstractParser
             'universal_discovery_widget_module.default_location_id',
             $currentScope,
             $settings['default_location_id']
+        );
+
+        $contextualizer->setContextualParameter(
+            'universal_discovery_widget_module.configuration',
+            $currentScope,
+            $settings['configuration']
         );
     }
 }

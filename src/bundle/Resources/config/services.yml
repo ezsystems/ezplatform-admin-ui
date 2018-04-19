@@ -11,6 +11,7 @@ imports:
     - { resource: services/form_processors.yml }
     - { resource: services/validators.yml }
     - { resource: services/siteaccess.yml }
+    - { resource: services/universal_discovery_widget.yml }
 
 parameters:
 
