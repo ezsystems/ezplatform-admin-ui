@@ -22,7 +22,7 @@
 
 .ez-fieldgroup {
 
-    .ez-fieldgroup-name {
+    &__name, .ez-fieldgroup-name {
         color: $ez-color-secondary;
         border-bottom: 1px solid $ez-color-secondary;
         padding-bottom: .5rem;

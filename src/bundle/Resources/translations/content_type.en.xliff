@@ -31,6 +31,11 @@
         <target state="new">Container</target>
         <note>key: content_type.container</note>
       </trans-unit>
+      <trans-unit id="3066b4a1b2277f4e299d9c91ad3134d725467b39" resname="content_type.content_type">
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
+        <note>key: content_type.content_type</note>
+      </trans-unit>
       <trans-unit id="693f9ade0c2bb6a7c19b6f9b818d96aa23f1e013" resname="content_type.default_availability">
         <source>Default content availability</source>
         <target state="new">Default content availability</target>
@@ -47,8 +52,8 @@
         <note>key: content_type.default_availability.value</note>
       </trans-unit>
       <trans-unit id="5ebf6515da27060877064931a5ac1d5a8540e28d" resname="content_type.default_children_sorting">
-        <source>Default property for sorting children</source>
-        <target state="new">Default property for sorting children</target>
+        <source>Default field for sorting children</source>
+        <target state="new">Default field for sorting children</target>
         <note>key: content_type.default_children_sorting</note>
       </trans-unit>
       <trans-unit id="cefc13177fd81d4c9df6f8e86eb5278fccbe5a5a" resname="content_type.default_sort">
@@ -70,6 +75,11 @@
         <source>Do you want to delete selected field definitions?</source>
         <target state="new">Do you want to delete selected field definitions?</target>
         <note>key: content_type.field_definitions.modal.message</note>
+      </trans-unit>
+      <trans-unit id="8bf6d91a6b0731a38103e04e03f3f9e8bf4459a1" resname="content_type.global_properties">
+        <source>Global properties</source>
+        <target state="new">Global properties</target>
+        <note>key: content_type.global_properties</note>
       </trans-unit>
       <trans-unit id="238db0c5dee8ec13199b073f7cc78728f53ffa36" resname="content_type.identifier">
         <source>Identifier</source>
