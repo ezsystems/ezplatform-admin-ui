@@ -42,7 +42,7 @@
                 <div class="ez-preview__item ez-preview__item--siteaccess">
                     <select class="form-control">
                         {% for previewSiteaccess in siteaccesses %}
-                            <option value="{{ path('_ezpublishPreviewContent', {'contentId': content.id, 'versionNo': versionNo, 'language': language_code, 'siteAccessName': previewSiteaccess}) }}">{{ previewSiteaccess }}</option>
+                            <option value="{{ path('_ezpublishPreviewContent', {'contentId': content.id, 'versionNo': versionNo, 'language': language_code, 'siteAccessName': previewSiteaccess}) }}">{{ previewSiteaccess|trans({}, 'ezplatform_siteaccess') ~ ' (' ~ previewSiteaccess ~ ')' }}</option>
                         {% endfor %}
                     </select>
                 </div>
