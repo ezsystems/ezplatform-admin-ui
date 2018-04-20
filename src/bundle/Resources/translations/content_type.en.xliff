@@ -31,6 +31,11 @@
         <target state="new">Container</target>
         <note>key: content_type.container</note>
       </trans-unit>
+      <trans-unit id="694d6cbecfee848cf42a300c0b310f45ece6a09b" resname="content_type.content_field_definitions">
+        <source>Content field definitions</source>
+        <target state="new">Content field definitions</target>
+        <note>key: content_type.content_field_definitions</note>
+      </trans-unit>
       <trans-unit id="3066b4a1b2277f4e299d9c91ad3134d725467b39" resname="content_type.content_type">
         <source>Content Type</source>
         <target state="new">Content Type</target>
