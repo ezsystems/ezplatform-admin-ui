@@ -24,10 +24,10 @@ class SystemInfoTable extends Table
     {
         $columnPosition = $this->context->getElementPositionByText(
             $header,
-            $this->fields['horizontalHeaders']
+            $this->fields['listElement']
         );
 
-        return $this->getCellValue(1, $columnPosition);
+        return $this->getCellValue($columnPosition, 2);
     }
 
     public function verifyHeader(string $header): void

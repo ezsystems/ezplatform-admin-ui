@@ -10,7 +10,8 @@ use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\DoubleHeaderTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\VerticalOrientedTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\SimpleTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\SystemInfoTable;
 
 class ContentTypePage extends Page
 {
@@ -20,34 +21,48 @@ class ContentTypePage extends Page
     public $contentTypeName;
 
     /** @var string locator for container of Content list */
-    public $secondListContainerLocator = 'section:nth-of-type(2)';
+    public $contentFieldDefinitionsListLocator = 'section:nth-of-type(2)';
+
+    /** @var string locator for container of Content list */
+    public $globalPropertiesTableLocator = '.ez-table--list';
 
     /**
      * @var \EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList
      */
-    public $globalPropertiesAdminList;
+    public $globalPropertiesTable;
     /**
      * @var \EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList
      */
-    public $contentAdminList;
+    public $fieldsAdminList;
+
+    /**
+     * @var \EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList
+     */
+    public $contentTypeAdminList;
 
     public function __construct(UtilityContext $context, string $contentTypeName)
     {
         parent::__construct($context);
         $this->groupName = $contentTypeName;
         $this->route = '/admin/contenttypegroup/';
-        $this->globalPropertiesAdminList = ElementFactory::createElement(
+
+        $this->contentTypeAdminList = ElementFactory::createElement(
             $this->context,
             AdminList::ELEMENT_NAME,
-            'Global properties',
-            VerticalOrientedTable::ELEMENT_NAME
+            'Content Type',
+            SimpleTable::ELEMENT_NAME
         );
-        $this->contentAdminList = ElementFactory::createElement(
+        $this->globalPropertiesTable = ElementFactory::createElement(
+            $this->context,
+            SystemInfoTable::ELEMENT_NAME,
+            $this->globalPropertiesTableLocator
+        );
+        $this->fieldsAdminList = ElementFactory::createElement(
             $this->context,
             AdminList::ELEMENT_NAME,
             'Content',
             DoubleHeaderTable::ELEMENT_NAME,
-            $this->secondListContainerLocator
+            $this->contentFieldDefinitionsListLocator
         );
         $this->pageTitle = $contentTypeName;
         $this->pageTitleLocator = '.ez-header h1';
@@ -55,7 +70,7 @@ class ContentTypePage extends Page
 
     public function verifyElements(): void
     {
-        $this->globalPropertiesAdminList->verifyVisibility();
-        $this->contentAdminList->verifyVisibility();
+        $this->contentTypeAdminList->verifyVisibility();
+        $this->fieldsAdminList->verifyVisibility();
     }
 }

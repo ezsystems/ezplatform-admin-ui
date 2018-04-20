@@ -38,7 +38,7 @@ class AdminList extends Element
 
     public function verifyVisibility(): void
     {
-        $actualHeader = $this->context->getElementByTextFragment($this->listHeader, $this->fields['listHeader'], null, $this->listContainer);
+        $actualHeader = $this->context->getElementByTextFragment($this->listHeader, $this->fields['list'] . ' ' . $this->fields['listHeader']);
         if ($actualHeader === null) {
             Assert::fail(sprintf('Table header "%s" not found on page', $this->listHeader));
         }

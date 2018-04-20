@@ -26,6 +26,11 @@
         <target state="new">Select language</target>
         <note>key: content.edit.select_language</note>
       </trans-unit>
+      <trans-unit id="9c91d85bc7658ec7dc6bbb07b720979177c0846a" resname="content.view.subitems">
+        <source>Sub-items</source>
+        <target state="new">Sub-items</target>
+        <note>key: content.view.subitems</note>
+      </trans-unit>
       <trans-unit id="c0b36efcf0ebbe2ac0f9861cae35e12e668cbcc0" resname="tab.details.content_details">
         <source>Content details</source>
         <target state="new">Content details</target>

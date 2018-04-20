@@ -1,4 +1,27 @@
-@import 'custom';
+.ez-table {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        background-color: $ez-ground-primary;
+        align-items: center;
+        padding: 0 1.25rem;
+        min-height: 50px;
+        border-radius: .25rem .25rem 0 0;
+    }
+
+    &__headline {
+        font-size: 1.0625rem;
+        margin-bottom: 0;
+        font-weight: bold;
+        color: $ez-black;
+    }
+
+    &__cell {
+        &--field-definitions-head {
+            width: calc(100% / 3);
+        }
+    }
+}
 
 .ez-table-header {
     display: flex;
@@ -74,7 +97,9 @@
     color: $ez-color-base-dark;
 }
 
-.ez-info-view, .ez-link-manager-view {
+.ez-info-view,
+.ez-link-manager-view,
+.ez-content-type-view {
     .ez-table {
         &--list {
             background: none;
