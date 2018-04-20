@@ -9,9 +9,12 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 use Behat\Gherkin\Node\TableNode;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypePage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use PHPUnit\Framework\Assert;
 
 class ContentTypeContext extends BusinessContext
 {
+    private $contentTypeTableHeaders = ['Name', 'Identifier', 'Description'];
+
     /**
      * @Then Content Type has proper Global properties
      */
@@ -20,16 +23,17 @@ class ContentTypeContext extends BusinessContext
         $hash = $table->getHash();
         $contentTypePage = PageObjectFactory::createPage($this->utilityContext, ContentTypePage::PAGE_NAME, $hash[0]['value']);
         foreach ($hash as $row) {
-            $actualValue = $contentTypePage->globalPropertiesAdminList->table->getTableCellValue($row['label']);
-            if ($actualValue !== $row['value']) {
-                throw new \Exception(
-                    sprintf(
-                        'Content Type has wrong %s - actual: %s, expected: %s.',
-                        $row['label'],
-                        $actualValue,
-                        $row['value']
-                    ));
+            if (in_array($row['label'], $this->contentTypeTableHeaders)) {
+                $actualValue = $contentTypePage->contentTypeAdminList->table->getTableCellValue($row['label']);
+            } else {
+                $actualValue = $contentTypePage->globalPropertiesTable->getTableCellValue($row['label']);
             }
+
+            Assert::assertEquals(
+                $row['value'],
+                $actualValue,
+                sprintf('Content Type has wrong %s - actual: %s, expected: %s.', $row['label'], $actualValue, $row['value'])
+            );
         }
     }
 
@@ -39,7 +43,7 @@ class ContentTypeContext extends BusinessContext
     public function contentTypeHasField(string $contentTypeName, string $fieldName, string $fieldType): void
     {
         $actualFieldType = PageObjectFactory::createPage($this->utilityContext, ContentTypePage::PAGE_NAME, $contentTypeName)
-            ->contentAdminList->table->getTableCellValue('Type', $fieldName);
+            ->fieldsAdminList->table->getTableCellValue('Type', $fieldName);
 
         if ($actualFieldType !== $fieldType) {
             throw new \Exception(
