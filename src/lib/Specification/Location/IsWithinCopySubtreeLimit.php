@@ -46,6 +46,10 @@ class IsWithinCopySubtreeLimit extends AbstractSpecification
             return true;
         }
 
+        if ($this->copyLimit === 0) {
+            return false;
+        }
+
         $query = new LocationQuery([
             'filter' => new Criterion\Subtree($item->pathString),
         ]);

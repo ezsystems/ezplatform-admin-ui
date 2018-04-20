@@ -27,13 +27,6 @@ services:
             - [setContainer, ["@service_container"]]
             - [performAccessCheck, []]
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\LocationController:
-        tags: [controller.service_arguments]
-        calls:
-            - [setContainer, ['@service_container']]
-        arguments:
-            $copySubtreeLimit: '$subtree_operations.copy_subtree.limit$'
-
     EzSystems\EzPlatformAdminUiBundle\Controller\User\UserForgotPasswordController:
         tags: [controller.service_arguments]
         calls:

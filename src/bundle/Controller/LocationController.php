@@ -11,7 +11,6 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\LocationUpdateStruct;
@@ -19,6 +18,7 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
@@ -27,8 +27,6 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\Specification\Location\IsContainer;
-use EzSystems\EzPlatformAdminUi\Specification\Location\IsWithinCopySubtreeLimit;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\DetailsTab;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\LocationsTab;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -65,12 +63,6 @@ class LocationController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
-    /** @var \eZ\Publish\API\Repository\SearchService */
-    private $searchService;
-
-    /** @var int */
-    private $copySubtreeLimit;
-
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
@@ -80,8 +72,6 @@ class LocationController extends Controller
      * @param \eZ\Publish\API\Repository\TrashService $trashService
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param int $copySubtreeLimit
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -91,9 +81,7 @@ class LocationController extends Controller
         ContentService $contentService,
         TrashService $trashService,
         FormFactory $formFactory,
-        SubmitHandler $submitHandler,
-        SearchService $searchService,
-        int $copySubtreeLimit
+        SubmitHandler $submitHandler
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -103,8 +91,6 @@ class LocationController extends Controller
         $this->trashService = $trashService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
-        $this->searchService = $searchService;
-        $this->copySubtreeLimit = $copySubtreeLimit;
     }
 
     /**
@@ -174,8 +160,8 @@ class LocationController extends Controller
      */
     public function copyAction(Request $request): Response
     {
-        $form = $this->formFactory->copyLocation(
-            new LocationCopyData()
+        $form = $this->formFactory->copyLocationSubtree(
+            new LocationCopySubtreeData()
         );
         $form->handleRequest($request);
 
@@ -238,44 +224,16 @@ class LocationController extends Controller
      */
     public function copySubtreeAction(Request $request): Response
     {
-        $form = $this->formFactory->copyLocation(
-            new LocationCopyData(),
-            'location_copy_subtree'
+        $form = $this->formFactory->copyLocationSubtree(
+            new LocationCopySubtreeData()
         );
         $form->handleRequest($request);
 
         $location = $form->getData()->getLocation();
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (LocationCopyData $data) {
-                $location = $data->getLocation();
+            $result = $this->submitHandler->handle($form, function (LocationCopySubtreeData $data) use ($location) {
                 $newParentLocation = $data->getNewParentLocation();
-
-                $isContainer = new IsContainer($this->contentTypeService);
-
-                if (!$isContainer->isSatisfiedBy($newParentLocation)) {
-                    throw new InvalidArgumentException(
-                        '$newParentLocation',
-                        'Cannot copy location to a parent that is not a container'
-                    );
-                }
-
-                if (!$isContainer->isSatisfiedBy($location)) {
-                    throw new InvalidArgumentException(
-                        '$newParentLocation',
-                        'Cannot copy subtree of non container location'
-                    );
-                }
-
-                if (!(new IsWithinCopySubtreeLimit(
-                    $this->copySubtreeLimit,
-                    $this->searchService
-                ))->isSatisfiedBy($location)) {
-                    throw new InvalidArgumentException(
-                        '$location',
-                        sprintf('Copy subtree limit exceeded. Current limit: %d', $this->copySubtreeLimit)
-                    );
-                }
 
                 $copiedContent = $this->locationService->copySubtree(
                     $location,

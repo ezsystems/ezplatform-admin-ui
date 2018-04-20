@@ -4,6 +4,13 @@ services:
         autoconfigure: true
         public: false
 
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\:
+        resource: "../../../lib/Validator/Constraints"
+
     EzSystems\EzPlatformAdminUi\Validator\Constraints\UserPasswordValidator:
         tags:
             - { name: validator.constraint_validator }
+
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationIsWithinCopySubtreeLimitValidator:
+        arguments:
+            $copySubtreeLimit: '$subtree_operations.copy_subtree.limit$'

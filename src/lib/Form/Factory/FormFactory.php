@@ -27,6 +27,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguagesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
@@ -85,6 +86,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguagesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopySubtreeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
@@ -1162,5 +1164,20 @@ class FormFactory
             $data->getObjectStateGroup()->id);
 
         return $this->formFactory->createNamed($name, ContentObjectStateUpdateType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function copyLocationSubtree(
+        LocationCopySubtreeData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationCopySubtreeType::class);
+
+        return $this->formFactory->createNamed($name, LocationCopySubtreeType::class, $data);
     }
 }

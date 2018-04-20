@@ -18,6 +18,7 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
+use EzSystems\EzPlatformAdminUi\Specification\Location\IsRoot;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsContainer;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsWithinCopySubtreeLimit;
@@ -166,7 +167,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $canCopySubtree = (new IsWithinCopySubtreeLimit(
             $copyLimit,
             $this->searchService
-        ))->and(new IsContainer($this->contentTypeService))->isSatisfiedBy($location);
+        ))->and((new IsRoot())->not())->isSatisfiedBy($location);
 
         $menu->setChildren([
             self::ITEM__CREATE => $this->createMenuItem(
