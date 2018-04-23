@@ -23,6 +23,12 @@ branches:
         - master
         - /^\d+\.\d+$/
 
+notifications:
+  slack:
+    on_success: change
+    on_failure: always
+    secure: P0Qir+iYhFgO/PLIR3DucuqwBxYaZ0Avkq8auPEgZOHtlSSyHpm0sRUJqaw0s49ClUfn2NhOC8KXVv13O0Ngzh6Ue/NvzMsIX97oU8JqczGV6LT7Z2nsWFpV1hDlgC0bM6W/dl2Vj6zTK24gNaFFD8P+TbYOeAvLArlFl9nfqhJ/jh1ztBtjcsDPVs0LZu+aQp/XBQzENtRSiR7u7nFlVuSbzR9zY376t8LZyy2Re4ynef7EiXimLA2wSKMb9ID8h1pj1p0vx1Ts3DMLpOlKJaSeEsvneqLRyGA/OB+nfQlAASQYhplKs5gJBiMrhSi/9kLo+LdqiMEdJsvpq/mO5qR0r3e4Jnq0utW0kTPAwuOfS+Oh4XpZhbfpwokQmTgjbPDpt79q0Dzjz+veUep96Kj1DBxcxpSCjk9xJZWYbR1RPgDJmK9FRQJYWJHcj//U5ilup9SJ/AgiHcu4hsa109lc+0znTQOjXhXa1Y7Z5jr44T3h3lypq393uVMUUHogav/kv2tpLwu05RMzJ8VMT03aHSCtAGvgDf5IJOIOL/P2vRpoLCc/iFukzOuAYNxDQ60Us8Ej2xKhCp3r0ETM73PsBPvUTGzL31uaQ+LRYy1067HIUFtepBT7bVwmuCI5oRCSvRQpZeku9mw6On0B+JJLRSajh9MP6c4tB+yza4Y=
+
 install:
     # Disable XDebug for performance
     - phpenv config-rm xdebug.ini
