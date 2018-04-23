@@ -16,7 +16,7 @@ class DoubleHeaderTable extends Table
     public function __construct(UtilityContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
-        $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .ez-table-header + .table thead th, .ez-table-header + form thead th';
+        $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .ez-table__header + .table thead th';
         $this->fields['insideHeaders'] = $this->fields['list'] . ' thead+ tbody th';
     }
 

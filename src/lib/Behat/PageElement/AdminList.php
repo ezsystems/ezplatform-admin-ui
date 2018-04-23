@@ -27,7 +27,7 @@ class AdminList extends Element
         $this->listHeader = $listHeader;
         $this->fields = [
             'list' => $containerLocator,
-            'listHeader' => '.ez-table-header__headline, header h5',
+            'listHeader' => '.ez-table-header .ez-table-header__headline, header .ez-table__headline, header h5',
             'plusButton' => '.ez-icon-create',
             'trashButton' => '.ez-icon-trash,button[title^="Delete"]',
             'mainAssignButton' => '.ez-table-header [title^=Assign]',

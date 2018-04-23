@@ -16,7 +16,7 @@ class SimpleTable extends Table
     public function __construct(UtilityContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
-        $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .ez-table-header + .table thead th, .ez-table-header + form thead th';
+        $this->fields['horizontalHeaders'] = sprintf('%1$s .ez-table__header + .table thead th, %1$s .ez-table-header + .table thead th, .ez-table-header + form thead th', $this->fields['list']);
         $this->fields['listElement'] = $this->fields['list'] . ' td:nth-child(1)';
     }
 
