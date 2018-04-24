@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle;
 
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\AdminThemePathPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ComponentPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SecurityLoginPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
@@ -21,6 +22,7 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\S
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\SubtreeOperations;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\UserGroupIdentifier;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\UserIdentifier;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -57,6 +59,7 @@ class EzPlatformAdminUiBundle extends Bundle
         $container->addCompilerPass(new ComponentPass());
         $container->addCompilerPass(new SecurityLoginPass());
         $container->addCompilerPass(new ViewBuilderRegistryPass());
+        $container->addCompilerPass(new AdminThemePathPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1);
     }
 
     /**
