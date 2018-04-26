@@ -57,13 +57,16 @@
             <td>{{ section.identifier }}</td>
             <td>{{ section.id }}</td>
             <td class="text-right">
-                <a href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
-                   title="{{ 'section.edit'|trans|desc('Edit') }}"
-                   class="btn btn-icon mx-3"{% if not can_edit %} data-disabled{% endif %}>
-                    <svg class="ez-icon ez-icon-edit">
-                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-                    </svg>
-                </a>
+                {% if can_edit %}
+                    <a
+                        href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
+                        title="{{ 'section.edit'|trans|desc('Edit') }}"
+                        class="btn btn-icon mx-3">
+                        <svg class="ez-icon ez-icon-edit">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                        </svg>
+                    </a>
+                {% endif %}
             </td>
             </tbody>
         </table>
