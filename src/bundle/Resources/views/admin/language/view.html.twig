@@ -72,14 +72,16 @@
                             {% endif %}>
                     </td>
                     <td class="text-center">
-                        <a href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
-                           class="btn btn-icon"
-                           title="{{ 'language.edit'|trans|desc('Edit') }}"
-                           {% if not canEdit %} data-disabled{% endif %}>
-                            <svg class="ez-icon ez-icon-edit">
-                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-                            </svg>
-                        </a>
+                        {% if canEdit %}
+                            <a
+                                href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
+                                class="btn btn-icon"
+                                title="{{ 'language.edit'|trans|desc('Edit') }}">
+                                <svg class="ez-icon ez-icon-edit">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
                     </td>
                 </tr>
             </tbody>
