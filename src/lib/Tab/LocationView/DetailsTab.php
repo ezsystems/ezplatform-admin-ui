@@ -98,13 +98,12 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
         );
         $objectStatesDataset = $this->datasetFactory->objectStates();
         $objectStatesDataset->load($contentInfo);
+
         $contentObjectStateUpdateTypeByGroupId = [];
-        $contentObjectStateUpdateCanAssignGroupId = [];
         foreach ($objectStatesDataset->getObjectStates() as $objectState) {
             $contentObjectStateUpdateTypeByGroupId[$objectState->objectStateGroup->id] = $this->formFactory->updateContentObjectState(
                 new ContentObjectStateUpdateData($contentInfo, $objectState->objectStateGroup, $objectState)
             )->createView();
-            $contentObjectStateUpdateCanAssignGroupId[$objectState->objectStateGroup->id] = $objectState->userCanAssign;
         }
 
         $creator = (new UserExists($this->userService))->isSatisfiedBy($contentInfo->ownerId)
@@ -124,7 +123,6 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
             'objectStates' => $objectStatesDataset->getObjectStates(),
             'sort_field_clause_map' => $this->getSortFieldClauseMap(),
             'form_state_update' => $contentObjectStateUpdateTypeByGroupId,
-            'state_update_disabled' => $contentObjectStateUpdateCanAssignGroupId,
         ];
 
         return $this->twig->render(
