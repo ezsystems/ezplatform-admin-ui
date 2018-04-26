@@ -26,14 +26,16 @@
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'section.list.title'|trans|desc('Sections') }}</div>
             <div>
-                <a title="{{ 'section.new'|trans|desc('Create a new Section') }}"
-                   href="{{ path('ezplatform.section.create') }}"
-                   class="btn btn-primary" {% if not can_edit %} data-disabled{% endif %}>
-                    <svg class="ez-icon ez-icon-create">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
-                    </svg>
-                </a>
+                {% if can_edit %}
+                    <a title="{{ 'section.new'|trans|desc('Create a new Section') }}"
+                       href="{{ path('ezplatform.section.create') }}"
+                    class="btn btn-primary">
+                        <svg class="ez-icon ez-icon-create">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                        </svg>
+                    </a>
+                {% endif %}
                 {% set modal_data_target = 'delete-sections-modal' %}
                 <button id="delete-sections" type="button" class="btn btn-danger" disabled data-toggle="modal"
                         data-target="#{{ modal_data_target }}" title="{{ 'section.delete'|trans|desc('Delete Section') }}">
