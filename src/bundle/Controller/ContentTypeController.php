@@ -21,54 +21,57 @@ use EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface;
 use EzSystems\RepositoryForms\Form\Type\ContentType\ContentTypeUpdateType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
-use Symfony\Component\Form\Form;
 use eZ\Publish\API\Repository\Exceptions\BadStateException;
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
+use eZ\Publish\API\Repository\UserService;
 
 class ContentTypeController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var TranslatorInterface */
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var ActionDispatcherInterface */
+    /** @var \EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface */
     private $contentTypeActionDispatcher;
 
     /** @var array */
     private $languages;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
     /** @var int */
     private $defaultPaginationLimit;
 
+    /** @var \eZ\Publish\API\Repository\UserService */
+    private $userService;
+
     /**
-     * ContentTypeController constructor.
-     *
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
-     * @param ContentTypeService $contentTypeService
-     * @param ActionDispatcherInterface $contentTypeActionDispatcher
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface $contentTypeActionDispatcher
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param array $languages
      * @param int $defaultPaginationLimit
+     * @param \eZ\Publish\API\Repository\UserService $userService
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -78,7 +81,8 @@ class ContentTypeController extends Controller
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
         array $languages,
-        int $defaultPaginationLimit
+        int $defaultPaginationLimit,
+        UserService $userService
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -88,14 +92,22 @@ class ContentTypeController extends Controller
         $this->submitHandler = $submitHandler;
         $this->languages = $languages;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->userService = $userService;
     }
 
     /**
-     * @param ContentTypeGroup $group
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
      * @param string $routeName
      * @param int $page
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws \Pagerfanta\Exception\OutOfRangeCurrentPageException
+     * @throws \Pagerfanta\Exception\NotIntegerCurrentPageException
+     * @throws \Pagerfanta\Exception\NotIntegerMaxPerPageException
+     * @throws \Pagerfanta\Exception\LessThan1CurrentPageException
+     * @throws \Pagerfanta\Exception\LessThan1MaxPerPageException
      */
     public function listAction(ContentTypeGroup $group, string $routeName, int $page): Response
     {
@@ -108,7 +120,7 @@ class ContentTypeController extends Controller
         $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
         $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
-        /** @var ContentTypeGroup[] $contentTypeGroupList */
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup[] $contentTypeGroupList */
         $types = $pagerfanta->getCurrentPageResults();
 
         $deleteContentTypesForm = $this->formFactory->deleteContentTypes(
@@ -129,6 +141,15 @@ class ContentTypeController extends Controller
         ]);
     }
 
+    /**
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
+     */
     public function addAction(ContentTypeGroup $group): Response
     {
         $mainLanguageCode = reset($this->languages);
@@ -148,14 +169,42 @@ class ContentTypeController extends Controller
         ]);
     }
 
+    /**
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     */
     public function editAction(ContentTypeGroup $group, ContentType $contentType): Response
     {
+        // Kernel does not allow editing the same Content Type simultaneously by more than one user.
+        // So we need to catch 'BadStateException' and inform user about another user editing the Content Type
         try {
             $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentType->id);
             $this->contentTypeService->deleteContentType($contentTypeDraft);
             $contentTypeDraft = $this->contentTypeService->createContentTypeDraft($contentType);
         } catch (NotFoundException $e) {
-            $contentTypeDraft = $this->contentTypeService->createContentTypeDraft($contentType);
+            try {
+                $contentTypeDraft = $this->contentTypeService->createContentTypeDraft($contentType);
+            } catch (BadStateException $e) {
+                $userId = $contentType->modifierId;
+                $this->notificationHandler->error(
+                    $this->translator->trans(
+                        /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
+                        'content_type.edit.error.already_exists',
+                        ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($userId)],
+                        'content_type'
+                    )
+                );
+
+                return $this->redirectToRoute('ezplatform.content_type.view', [
+                    'contentTypeGroupId' => $group->id,
+                    'contentTypeId' => $contentType->id,
+                ]);
+            }
         }
 
         return $this->redirectToRoute('ezplatform.content_type.update', [
@@ -164,6 +213,15 @@ class ContentTypeController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft $contentTypeDraft
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     */
     public function updateAction(Request $request, ContentTypeGroup $group, ContentTypeDraft $contentTypeDraft): Response
     {
         $form = $this->createUpdateForm($group, $contentTypeDraft);
@@ -193,7 +251,7 @@ class ContentTypeController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Content type '%name%' updated.") */
+                        /** @Desc("Content Type '%name%' updated.") */
                         'content_type.update.success',
                         ['%name%' => $contentTypeDraft->getName()],
                         'content_type'
@@ -222,6 +280,17 @@ class ContentTypeController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     */
     public function deleteAction(Request $request, ContentTypeGroup $group, ContentType $contentType): Response
     {
         $form = $this->createDeleteForm($group, $contentType);
@@ -233,7 +302,7 @@ class ContentTypeController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Content type '%name%' deleted.") */
+                        /** @Desc("Content Type '%name%' deleted.") */
                         'content_type.delete.success',
                         ['%name%' => $contentType->getName()],
                         'content_type'
@@ -254,9 +323,10 @@ class ContentTypeController extends Controller
     /**
      * Handles removing content types based on submitted form.
      *
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws BadStateException
      * @throws TranslationInvalidArgumentException
@@ -282,7 +352,7 @@ class ContentTypeController extends Controller
 
                     $this->notificationHandler->success(
                         $this->translator->trans(
-                            /** @Desc("Content type '%name%' deleted.") */
+                            /** @Desc("Content Type '%name%' deleted.") */
                             'content_type.delete.success',
                             ['%name%' => $contentType->getName()],
                             'content_type'
@@ -299,6 +369,12 @@ class ContentTypeController extends Controller
         return $this->redirect($this->generateUrl('ezplatform.content_type_group.view', ['contentTypeGroupId' => $group->id]));
     }
 
+    /**
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function viewAction(ContentTypeGroup $group, ContentType $contentType): Response
     {
         $fieldDefinitionsByGroup = [];
@@ -313,7 +389,13 @@ class ContentTypeController extends Controller
         ]);
     }
 
-    public function createUpdateForm(ContentTypeGroup $group, ContentTypeDraft $contentTypeDraft): Form
+    /**
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft $contentTypeDraft
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function createUpdateForm(ContentTypeGroup $group, ContentTypeDraft $contentTypeDraft): FormInterface
     {
         $contentTypeData = (new ContentTypeDraftMapper())->mapToFormData(
             $contentTypeDraft
@@ -338,7 +420,13 @@ class ContentTypeController extends Controller
         ]);
     }
 
-    protected function createDeleteForm(ContentTypeGroup $group, ContentType $contentType): Form
+    /**
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    protected function createDeleteForm(ContentTypeGroup $group, ContentType $contentType): FormInterface
     {
         $formBuilder = $this->createFormBuilder(null, [
             'method' => Request::METHOD_DELETE,
@@ -361,5 +449,28 @@ class ContentTypeController extends Controller
         $contentTypesNumbers = array_column($contentTypes, 'id');
 
         return array_combine($contentTypesNumbers, array_fill_keys($contentTypesNumbers, false));
+    }
+
+    /**
+     * @param int $userId
+     *
+     * @return string|null
+     *
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     */
+    private function getUserNameById(int $userId): ?string
+    {
+        try {
+            $user = $this->userService->loadUser($userId);
+
+            return $user->getName();
+        } catch (\Exception $e) {
+            return $this->translator->trans(
+                /** @Desc("another user") */
+                'content_type.user_name.can_not_be_fetched',
+                [],
+                'content_type'
+            );
+        }
     }
 }
