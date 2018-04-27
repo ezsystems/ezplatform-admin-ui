@@ -107,7 +107,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         );
         $canTrashLocation = $this->permissionResolver->canUser(
             'content',
-            'manage_locations',
+            'remove',
             $location->getContentInfo(),
             [$location]
         );
