@@ -95,6 +95,8 @@ class ValueFactory
      * @param VersionInfo $versionInfo
      *
      * @return UIValue\Content\VersionInfo
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function createVersionInfo(VersionInfo $versionInfo): UIValue\Content\VersionInfo
     {
@@ -115,6 +117,9 @@ class ValueFactory
      * @param VersionInfo $versionInfo
      *
      * @return UIValue\Content\Language
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function createLanguage(Language $language, VersionInfo $versionInfo): UIValue\Content\Language
     {
@@ -129,6 +134,9 @@ class ValueFactory
      * @param ContentInfo $contentInfo
      *
      * @return UIValue\Content\Relation
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function createRelation(Relation $relation, ContentInfo $contentInfo): UIValue\Content\Relation
     {
@@ -147,6 +155,9 @@ class ValueFactory
      * @param Location $location
      *
      * @return UIValue\Content\Location
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function createLocation(Location $location): UIValue\Content\Location
     {
@@ -168,6 +179,9 @@ class ValueFactory
      * @param ObjectStateGroup $objectStateGroup
      *
      * @return UIValue\ObjectState\ObjectState
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function createObjectState(
         ContentInfo $contentInfo,
@@ -176,7 +190,7 @@ class ValueFactory
         $objectState = $this->objectStateService->getContentState($contentInfo, $objectStateGroup);
 
         return new UIValue\ObjectState\ObjectState($objectState, [
-            'userCanAssign' => $this->permissionResolver->canUser('state', 'assign', $contentInfo),
+            'userCanAssign' => $this->permissionResolver->canUser('state', 'assign', $contentInfo, [$objectState]),
         ]);
     }
 
