@@ -76,6 +76,11 @@
         <target state="new">Description</target>
         <note>key: content_type.description</note>
       </trans-unit>
+      <trans-unit id="2f9cb676bb073af7a8e4b52b374384dfc0aa9551" resname="content_type.edit.error.already_exists">
+        <source>Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'</source>
+        <target state="new">Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'</target>
+        <note>key: content_type.edit.error.already_exists</note>
+      </trans-unit>
       <trans-unit id="9eb89a2f51954babc5ff51f9060cbcda91dcf408" resname="content_type.field_definitions.modal.message">
         <source>Do you want to delete selected field definitions?</source>
         <target state="new">Do you want to delete selected field definitions?</target>
@@ -170,6 +175,11 @@
         <source>URL alias name pattern</source>
         <target state="new">URL alias name pattern</target>
         <note>key: content_type.url_alias_schema</note>
+      </trans-unit>
+      <trans-unit id="30f5ddb258e0ab8c31381ec10d9a90f7071bbf6f" resname="content_type.user_name.can_not_be_fetched">
+        <source>another user</source>
+        <target state="new">another user</target>
+        <note>key: content_type.user_name.can_not_be_fetched</note>
       </trans-unit>
       <trans-unit id="56a9f26e930ab0493fc9cb9609318ea699cf8b76" resname="content_type.view.create.content_field_definitions">
         <source>Content field definitions</source>
