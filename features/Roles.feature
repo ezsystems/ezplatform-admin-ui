@@ -78,7 +78,7 @@ Feature: Roles management
       And I click on the edit action bar button "Save"
     Then I should be on "Role" "Test Role edited" page
       And "Policies" list in "Role" "Test Role edited" is empty
-      And There are assignments on the "Test Role edited" assignments list
+      And there are assignments on the "Test Role edited" assignments list
       | user/group          | limitation                         |
       | Administrator User  | Subtree of Location: /Media/Images |
       | Anonymous User      | Subtree of Location: /Media/Images |
@@ -93,7 +93,7 @@ Feature: Roles management
       And I click on the edit action bar button "Save"
     Then I should be on "Role" "Test Role edited" page
       And "Policies" list in "Role" "Test Role edited" is empty
-      And There are assignments on the "Test Role edited" assignments list
+      And there are assignments on the "Test Role edited" assignments list
       | user/group          | limitation                         |
       | Administrator User  | Subtree of Location: /Media/Images |
       | Editors             | Subtree of Location: /Media/Images |
@@ -111,7 +111,7 @@ Feature: Roles management
       | Users	            |
     Then I should be on "Role" "Test Role edited" page
       And "Policies" list in "Role" "Test Role edited" is empty
-      And There's an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
+      And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common
   Scenario: Adding policy can be discarded
@@ -122,7 +122,7 @@ Feature: Roles management
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Role" "Test Role edited" page
       And "Policies" list in "Role" "Test Role edited" is empty
-      And There's an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
+      And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common
   Scenario: Policies can be added to role
@@ -131,9 +131,24 @@ Feature: Roles management
     When I start creating new "Policy" in "Test Role edited"
       And I select policy "Content / Read"
       And I click on the edit action bar button "Create"
+      And I select options from "Class"
+        | option  |
+        | File |
+      And I click on the edit action bar button "Update"
     Then I should be on "Role" "Test Role edited" page
-      And There's a policy "Content/Read" with "None" limitation on the "Test Role edited" policies list
-      And There's an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
+      And there is a policy "Content/Read" with "Content Type: File" limitation on the "Test Role edited" policies list
+      And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
+
+  @javascript @common
+  Scenario: Policies without limitations can be added to role
+    Given there's "Test Role edited" on "Roles" list
+      And I go to "Test Role edited" "Role" page
+    When I start creating new "Policy" in "Test Role edited"
+      And I select policy "User / Password"
+      And I click on the edit action bar button "Create"
+    Then I should be on "Role" "Test Role edited" page
+      And there is a policy "User/Password" with "None" limitation on the "Test Role edited" policies list
+      And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common
   Scenario: Policies can be edited
@@ -148,12 +163,12 @@ Feature: Roles management
       And I select "Lock:Locked" from "State"
       And I click on the edit action bar button "Update"
     Then I should be on "Role" "Test Role edited" page
-      And There are policies on the "Test Role edited" policies list
+      And there are policies on the "Test Role edited" policies list
       | policy       | limitation                                  |
       | Content/Read | Content Type: Article, Folder               |
       | Content/Read | Subtree of Location: /Users/Anonymous Users |
       | Content/Read | State: Lock:Locked                          |
-      And There's an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
+      And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common
   Scenario: Policy can be deleted
@@ -163,8 +178,8 @@ Feature: Roles management
       | item     |
       | Content  |
     Then notification that "Policies in role" "Test Role edited" is removed appears
-      And "Policies" list in "Role" "Test Role edited" is empty
-      And There's an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
+      And there is no policy "Content/Read" with "Content Type: File" limitation on the "Test Role edited" policies list
+      And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common
   Scenario: Role can be deleted

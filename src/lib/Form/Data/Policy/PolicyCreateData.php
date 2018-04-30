@@ -16,6 +16,9 @@ class PolicyCreateData
     /** @var string */
     private $function;
 
+    /** @var array */
+    private $limitations = [];
+
     /**
      * @return string
      */
@@ -78,5 +81,21 @@ class PolicyCreateData
             'module' => $this->getModule(),
             'function' => $this->getFunction(),
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getLimitations(): ?array
+    {
+        return $this->limitations;
+    }
+
+    /**
+     * @param array $limitations
+     */
+    public function setLimitations(array $limitations)
+    {
+        $this->limitations = $limitations;
     }
 }

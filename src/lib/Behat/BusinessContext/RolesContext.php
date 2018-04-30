@@ -84,7 +84,7 @@ class RolesContext extends BusinessContext
     }
 
     /**
-     * @Then There's a policy :moduleAndFunction with :limitation limitation on the :roleName policies list
+     * @Then there is a policy :moduleAndFunction with :limitation limitation on the :roleName policies list
      */
     public function thereIsAPolicy(string $moduleAndFunction, string $limitation, string $roleName): void
     {
@@ -99,19 +99,46 @@ class RolesContext extends BusinessContext
             if (
                 $policy['Module'] === $expectedModule &&
                 $policy['Function'] === $expectedFunction &&
-                strpos($policy['Limitations'], $limitation) !== false
+                false !== strpos($policy['Limitations'], $limitation)
             ) {
                 $policyExists = true;
             }
         }
 
         if (!$policyExists) {
-            throw new Exception(sprintf('Policy "%s" with limitation "%s" not found.', $moduleAndFunction, $limitation));
+            throw new Exception(sprintf('Policy "%s" with limitation "%s" not found on the "%s" policies list.', $moduleAndFunction, $limitation, $roleName));
         }
     }
 
     /**
-     * @Then There's an assignment :limitation for :userOrGroup on the :roleName assignments list
+     * @Then there is no policy :moduleAndFunction with :limitation limitation on the :roleName policies list
+     */
+    public function thereIsNoPolicy(string $moduleAndFunction, string $limitation, string $roleName): void
+    {
+        $rolePage = PageObjectFactory::createPage($this->utilityContext, RolePage::PAGE_NAME, $roleName);
+        $rolePage->navLinkTabs->goToTab($this->tabMapping['policy']);
+        $adminList = $rolePage->adminLists[$this->tabMapping['policy']];
+        $actualPoliciesList = $adminList->table->getTableHash();
+        $policyExists = false;
+        $expectedModule = explode('/', $moduleAndFunction)[0];
+        $expectedFunction = explode('/', $moduleAndFunction)[1];
+        foreach ($actualPoliciesList as $policy) {
+            if (
+                $policy['Module'] === $expectedModule &&
+                $policy['Function'] === $expectedFunction &&
+                false !== strpos($policy['Limitations'], $limitation)
+            ) {
+                $policyExists = true;
+            }
+        }
+
+        if ($policyExists) {
+            throw new Exception(sprintf('Policy "%s" with limitation "%s" found on the "%s" policies list.', $moduleAndFunction, $limitation, $roleName));
+        }
+    }
+
+    /**
+     * @Then there is an assignment :limitation for :userOrGroup on the :roleName assignments list
      */
     public function thereIsAnAssignment(string $limitation, string $userOrGroup, string $roleName): void
     {
@@ -132,7 +159,7 @@ class RolesContext extends BusinessContext
     }
 
     /**
-     * @Then There are policies on the :roleName policies list
+     * @Then there are policies on the :roleName policies list
      */
     public function thereArePolicies(string $roleName, TableNode $settings): void
     {
@@ -143,7 +170,7 @@ class RolesContext extends BusinessContext
     }
 
     /**
-     * @Then There are assignments on the :roleName assignments list
+     * @Then there are assignments on the :roleName assignments list
      */
     public function thereAreAssignments(string $roleName, TableNode $settings): void
     {
