@@ -17,10 +17,6 @@ class LocationCopySubtreeData extends AbstractLocationCopyData
      * @AdminUiAssert\LocationIsWithinCopySubtreeLimit()
      * @AdminUiAssert\LocationIsNotRoot()
      * @Assert\NotNull()
-     * @Assert\NotEqualTo(
-     *     propertyPath="newParentLocation",
-     *     message="ezplatform.copy_subtree.source_equal_to_target"
-     * )
      */
     protected $location;
 
@@ -29,6 +25,9 @@ class LocationCopySubtreeData extends AbstractLocationCopyData
      *
      * @AdminUiAssert\LocationIsContainer()
      * @Assert\NotNull()
+     * @AdminUiAssert\LocationIsNotSubLocation(
+     *     propertyPath="location"
+     * )
      */
     protected $newParentLocation;
 }

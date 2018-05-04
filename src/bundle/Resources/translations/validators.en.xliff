@@ -31,15 +31,15 @@
         <target state="new">Selected Location can not be root Location.</target>
         <note>key: ezplatform.copy_subtree.is_root</note>
       </trans-unit>
+      <trans-unit id="fc7e56b8b26344ec7393604951e1fb2199069e18" resname="ezplatform.copy_subtree.is_sub_location">
+        <source>Target parent location is a sub location of the source subtree</source>
+        <target state="new">Target parent location is a sub location of the source subtree</target>
+        <note>key: ezplatform.copy_subtree.is_sub_location</note>
+      </trans-unit>
       <trans-unit id="631da4c4fb5b000ee7f5c0c422e830ca192341a6" resname="ezplatform.copy_subtree.limit_exceeded">
         <source>Copy subtree limit exceeded. Current limit: %currentLimit%</source>
         <target state="new">Copy subtree limit exceeded. Current limit: %currentLimit%</target>
         <note>key: ezplatform.copy_subtree.limit_exceeded</note>
-      </trans-unit>
-      <trans-unit id="c078751ef0802badf5a38ae30ab35c4854b32d4a" resname="ezplatform.copy_subtree.source_equal_to_target">
-        <source>Source Location can not be equal to target one</source>
-        <target state="new">Source Location can not be equal to target one</target>
-        <note>key: ezplatform.copy_subtree.source_equal_to_target</note>
       </trans-unit>
       <trans-unit id="58f9ad2e8a8df010fb8abb25e39b46f2ccf92294" resname="ezplatform.reset_user_password.passwords_must_match">
         <source>The password fields must match.</source>

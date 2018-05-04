@@ -10,17 +10,20 @@ namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
 
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
+use Symfony\Component\Validator\Constraints\AbstractComparison;
 
-class LocationCopySubtreeValidationMessages implements TranslationContainerInterface
+/**
+ * @Annotation
+ */
+class LocationIsNotSubLocation extends AbstractComparison implements TranslationContainerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
+    public $message = 'ezplatform.copy_subtree.is_sub_location';
+
     public static function getTranslationMessages()
     {
         return [
-            Message::create('ezplatform.copy_subtree.source_equal_to_target', 'validators')
-                ->setDesc('Source Location can not be equal to target one'),
+            Message::create('ezplatform.copy_subtree.is_sub_location', 'validators')
+                ->setDesc('Target parent location is a sub location of the source subtree'),
         ];
     }
 }
