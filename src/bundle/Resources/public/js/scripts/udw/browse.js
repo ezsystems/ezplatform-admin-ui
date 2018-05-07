@@ -13,15 +13,17 @@
     const openUDW = (event) => {
         event.preventDefault();
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
+        const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+
+        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
             onConfirm,
             onCancel,
             confirmLabel: 'View content',
             title: 'Browse content',
             multiple: false,
             startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
-            restInfo: {token, siteaccess}
-        }), udwContainer);
+            restInfo: {token, siteaccess},
+        }, config)), udwContainer);
     };
 
     btns.forEach(btn => btn.addEventListener('click', openUDW, false));

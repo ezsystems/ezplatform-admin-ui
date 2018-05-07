@@ -8,7 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use InvalidArgumentException;
+use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -21,8 +21,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainerInterface
 {
-    /** @var ConfigResolverInterface */
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
+
+    /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
+    private $udwExtension;
 
     /* Menu items */
     const ITEM__SEARCH = 'sidebar_left__search';
@@ -30,18 +33,21 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
     const ITEM__TRASH = 'sidebar_left__trash';
 
     /**
-     * @param MenuItemFactory $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param ConfigResolverInterface $configResolver
+     * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension $udwExtension
      */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        UniversalDiscoveryExtension $udwExtension
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->configResolver = $configResolver;
+        $this->udwExtension = $udwExtension;
     }
 
     /**
@@ -55,9 +61,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
     /**
      * @param array $options
      *
-     * @return ItemInterface
-     *
-     * @throws InvalidArgumentException
+     * @return \Knp\Menu\ItemInterface
      */
     public function createStructure(array $options): ItemInterface
     {
@@ -77,6 +81,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                     'extras' => ['icon' => 'browse'],
                     'attributes' => [
                         'class' => 'btn--udw-browse',
+                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single'),
                         'data-starting-location-id' => $this->configResolver->getParameter(
                             'universal_discovery_widget_module.default_location_id'
                         ),
@@ -96,7 +101,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
     }
 
     /**
-     * @return Message[]
+     * @return JMS\TranslationBundle\Model\Message[]
      */
     public static function getTranslationMessages(): array
     {

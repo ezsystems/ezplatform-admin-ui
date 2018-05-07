@@ -14,6 +14,10 @@ export default class EzEmbedImageButton extends EzEmbedDiscoverContentButton {
      * @param {Function} callback
      */
     isImage(selection, callback) {
+        console.warn('[DEPRECATED] isImage method is deprecated');
+        console.warn('[DEPRECATED] it will be removed from ezplatform-admin-ui 2.0');
+        console.warn('[DEPRECATED] please use richtext_embed_image.content_on_the_fly.allowed_content_types in the UDW config');
+
         const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
         const request = new Request(selection.item.ContentInfo.Content.ContentType._href, {
             method: 'GET',

@@ -17,12 +17,13 @@ export default class EzBtnImageUpdate extends EzEmbedImageButton {
      */
     updateImage(items) {
         const contentId = items[0].ContentInfo.Content._id;
+        const content = items[0].ContentInfo.Content;
         const widget = this.getWidget();
 
         this.setContentInfo(contentId);
         widget.focus();
         widget.setWidgetContent("");
-        widget.loadImagePreviewFromCurrentVersion(items[0].ContentInfo.Content.CurrentVersion._href);
+        widget.loadImagePreviewFromCurrentVersion(content.CurrentVersion._href, content.Name);
 
         ReactDOM.unmountComponentAtNode(document.querySelector('#react-udw'));
     }
@@ -51,6 +52,6 @@ AlloyEditor.Buttons[EzBtnImageUpdate.key] = AlloyEditor.EzBtnImageUpdate = EzBtn
 EzBtnImageUpdate.defaultProps = {
     udwTitle: 'Select an image to embed',
     udwContentDiscoveredMethod: 'updateImage',
+    udwConfigName: 'richtext_embed_image',
     label: 'Select antoher image item',
-    udwIsSelectableMethod: 'isImage',
 };

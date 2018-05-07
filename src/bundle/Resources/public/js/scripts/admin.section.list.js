@@ -18,15 +18,16 @@
 
         const form = document.querySelector('form[name="section_content_assign"]');
         const btn = event.target.closest('a');
+        const config = JSON.parse(btn.dataset.udwConfig);
         form.action = btn.dataset.formAction;
         document.querySelector('#section_content_assign_section').value = btn.dataset.sectionId;
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
+        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
             onConfirm: onConfirm.bind(this, form),
             onCancel,
             startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess}
-        }), udwContainer);
+        }, config)), udwContainer);
     };
 
     btns.forEach(btn => btn.addEventListener('click', openUDW, false));

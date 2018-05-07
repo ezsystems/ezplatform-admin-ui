@@ -16,7 +16,9 @@
     const openUDW = (event) => {
         event.preventDefault();
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
+        const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+
+        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
             onConfirm,
             onCancel,
             confirmLabel: 'Swap location',
@@ -24,7 +26,7 @@
             multiple: false,
             startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess}
-        }), udwContainer);
+        }, config)), udwContainer);
     };
 
     btns.forEach(btn => btn.addEventListener('click', openUDW, false));

@@ -666,3 +666,15 @@ ezplatform.object_state.contentstate.update:
     path: /state/contentstate/update/{contentInfoId}/group/{objectStateGroupId}
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ObjectState:updateContentState'
+
+#
+# Universal Discovery Widget
+#
+
+ezplatform.udw.preselected_location.data:
+    path: /udw/preselected-location/data/{startingLocationId}/{locationId}/{limit}
+    options:
+        expose: true
+    defaults:
+        limit: 50
+        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:preselectedLocationData'

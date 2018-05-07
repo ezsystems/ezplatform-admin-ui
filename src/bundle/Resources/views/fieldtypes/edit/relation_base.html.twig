@@ -15,7 +15,13 @@
                     {% endif %}
                 </th>
                 <th class="ez-relations__table-actions">
-                    <button class="ez-relations__table-action--create btn btn-primary" disabled>
+                    <button
+                        {% if limit == 1 %}
+                            data-udw-config="{{ ez_udw_config('single', {}) }}"
+                        {% else %}
+                            data-udw-config="{{ ez_udw_config('multiple', {}) }}"
+                        {% endif %}
+                        class="ez-relations__table-action--create btn btn-primary" disabled>
                         <svg class="ez-icon">
                             <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#create"></use>
                         </svg>
@@ -55,7 +61,13 @@
             {{ 'ezobjectrelationlist.cta.limit'|trans({'%limit%': limit})|desc('Set up multiple relations with up to %limit% content items') }}
         {% endif %}
         </p>
-        <button class="ez-relations__cta-btn btn btn-primary">
+        <button
+                {% if limit == 1 %}
+                    data-udw-config="{{ ez_udw_config('single', {}) }}"
+                {% else %}
+                    data-udw-config="{{ ez_udw_config('multiple', {}) }}"
+                {% endif %}
+                class="ez-relations__cta-btn btn btn-primary">
             <svg class="ez-icon">
                 <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#relations"></use>
             </svg>

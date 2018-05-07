@@ -17,7 +17,9 @@
     const openUDW = (event) => {
         event.preventDefault();
 
-        window.ReactDOM.render(window.React.createElement(window.eZ.modules.UniversalDiscovery, {
+        const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+
+        window.ReactDOM.render(window.React.createElement(window.eZ.modules.UniversalDiscovery, Object.assign({
             onConfirm,
             onCancel,
             canSelectContent,
@@ -27,7 +29,7 @@
             startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
             restInfo: {token, siteaccess},
             allowContainersOnly: true
-        }), udwContainer);
+        }, config)), udwContainer);
     };
 
     btns.forEach(btn => btn.addEventListener('click', openUDW, false));

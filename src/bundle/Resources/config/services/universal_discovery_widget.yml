@@ -1,0 +1,18 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension:
+        tags:
+            - { name: twig.extension }
+
+    EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber\:
+        resource: "../../../lib/UniversalDiscovery/Event/Subscriber/*"
+        public: true
+        tags: ['kernel.event_subscriber']
+
+    EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver:
+        arguments:
+            $udwConfiguration: '$universal_discovery_widget_module.configuration$'
