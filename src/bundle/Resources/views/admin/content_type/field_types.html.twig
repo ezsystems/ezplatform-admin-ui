@@ -124,6 +124,7 @@
                     data-relation-root-input-selector="#{{form.selectionRoot.vars.id}}"
                     data-relation-selected-root-name-selector="#{{form.selectionRoot.vars.id}}-selected-root-name"
                     data-starting-location-id="{{ admin_ui_config.universalDiscoveryWidget.startingLocationId|default(1) }}"
+                    data-udw-config="{{ ez_udw_config('single', {}) }}"
                     >{{"field_definition.ezobjectrelation.selection_root_udw_button"|trans({}, "ezrepoforms_content_type")}}</button>
         </div>
         <div id="{{form.selectionRoot.vars.id}}-selected-root-name">

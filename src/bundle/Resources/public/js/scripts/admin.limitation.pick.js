@@ -14,7 +14,9 @@
     const openUDW = (event) => {
         event.preventDefault();
 
-        ReactDOM.render(React.createElement(global.eZ.modules.UniversalDiscovery, {
+        const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+
+        ReactDOM.render(React.createElement(global.eZ.modules.UniversalDiscovery, Object.assign({
             onConfirm: selectLocationsConfirm.bind(this, event.target),
             onCancel: closeUDW,
             confirmLabel: 'Add locations',
@@ -22,7 +24,7 @@
             startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             multiple: true,
             restInfo: {token, siteaccess}
-        }), udwContainer);
+        }, config)), udwContainer);
     };
 
     [...doc.querySelectorAll('.ez-pick-location-limitation-button')].forEach(btn => btn.addEventListener('click', openUDW, false));

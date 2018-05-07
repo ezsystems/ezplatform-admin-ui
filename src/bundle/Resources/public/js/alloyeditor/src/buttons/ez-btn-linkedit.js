@@ -70,6 +70,7 @@ export default class EzBtnLinkEdit extends Component {
             const udwContainer = document.querySelector('#react-udw');
             const token = document.querySelector('meta[name="CSRF-Token"]').content;
             const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
+            const config = JSON.parse(document.querySelector(`[data-udw-config-name="richtext_embed"]`).dataset.udwConfig);
             const udwOnConfirm = (items) => {
                 this.state.element.setAttribute(
                     'href', 'ezlocation://' + items[0].id
@@ -79,7 +80,7 @@ export default class EzBtnLinkEdit extends Component {
                 ReactDOM.unmountComponentAtNode(udwContainer);
             };
 
-            ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
+            ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
                 onConfirm: udwOnConfirm,
                 onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
                 confirmLabel: 'Select content',
@@ -87,7 +88,7 @@ export default class EzBtnLinkEdit extends Component {
                 multiple: false,
                 startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                 restInfo: {token, siteaccess},
-            }), udwContainer);
+            }, config)), udwContainer);
         };
 
         this.setState({

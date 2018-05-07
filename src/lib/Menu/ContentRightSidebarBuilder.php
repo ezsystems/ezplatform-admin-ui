@@ -6,7 +6,6 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
-use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -14,7 +13,7 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
-use InvalidArgumentException;
+use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -36,34 +35,40 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     const ITEM__MOVE = 'content__sidebar_right__move';
     const ITEM__DELETE = 'content__sidebar_right__delete';
 
-    /** @var PermissionResolver */
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /** @var ConfigResolverInterface */
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
-    /** @var UserService */
+    /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
+    /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
+    private $udwExtension;
+
     /**
-     * @param MenuItemFactory $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param PermissionResolver $permissionResolver
-     * @param ConfigResolverInterface $configResolver
-     * @param UserService $userService
+     * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension $udwExtension
      */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
         PermissionResolver $permissionResolver,
         ConfigResolverInterface $configResolver,
-        UserService $userService
+        UserService $userService,
+        UniversalDiscoveryExtension $udwExtension
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
         $this->userService = $userService;
+        $this->udwExtension = $udwExtension;
     }
 
     /**
@@ -77,11 +82,10 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /**
      * @param array $options
      *
-     * @return ItemInterface
+     * @return \Knp\Menu\ItemInterface
      *
-     * @throws ApiExceptions\InvalidArgumentException
-     * @throws ApiExceptions\BadStateException
-     * @throws InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function createStructure(array $options): ItemInterface
     {
@@ -155,6 +159,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'extras' => ['icon' => 'move'],
                     'attributes' => [
                         'class' => 'btn--udw-move',
+                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
                         'data-root-location' => $this->configResolver->getParameter(
                             'universal_discovery_widget_module.default_location_id'
                         ),
@@ -167,6 +172,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'extras' => ['icon' => 'copy'],
                     'attributes' => [
                         'class' => 'btn--udw-copy',
+                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
                         'data-root-location' => $this->configResolver->getParameter(
                             'universal_discovery_widget_module.default_location_id'
                         ),
@@ -210,7 +216,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     }
 
     /**
-     * @return Message[]
+     * @return JMS\TranslationBundle\Model\Message[]
      */
     public static function getTranslationMessages(): array
     {

@@ -1,0 +1,39 @@
+system:
+    default:
+        universal_discovery_widget_module:
+            default_location_id: 1
+            configuration:
+                default:
+                    multiple: true
+                    active_tab: 'browse'
+                    starting_location_id: 1
+                    visible_tabs: []
+                    selected_items_limit: 0
+                    containers_only: false
+                    content_on_the_fly:
+                        allowed_languages: []
+                        allowed_content_types: []
+                        allowed_locations: []
+                        preselected_language: null
+                        preselected_content_type: null
+                        preselected_location: null
+                    search:
+                        results_per_page: 10
+                create:
+                    active_tab: 'create'
+                    visible_tabs: ['create']
+                    multiple: false
+                    starting_location_id: 1
+                single:
+                    multiple: false
+                multiple:
+                    multiple: true
+                single_container:
+                    multiple: false
+                    containers_only: true
+                richtext_embed:
+                    multiple: false
+                richtext_embed_image:
+                    multiple: false
+                    content_on_the_fly:
+                        allowed_content_types: ['image']

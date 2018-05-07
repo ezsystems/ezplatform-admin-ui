@@ -17,13 +17,14 @@
         event.preventDefault();
 
         const form = event.target.closest('form');
+        const config = JSON.parse(event.currentTarget.dataset.udwConfig);
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
+        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
             onConfirm: onConfirm.bind(this, form),
             onCancel,
             startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
             restInfo: {token, siteaccess}
-        }), udwContainer);
+        }, config)), udwContainer);
     };
 
     btns.forEach(btn => btn.addEventListener('click', openUDW, false));

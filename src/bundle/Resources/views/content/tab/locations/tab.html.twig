@@ -65,7 +65,7 @@
 {% include 'EzPlatformAdminUiBundle:content/tab/locations:panel_swap.html.twig' with {'form': form_content_location_swap} %}
 
 {% macro table_header_tools(form_add, form_remove) %}
-    <button class="btn btn-primary btn--udw-add" title="{{ 'tab.locations.action.add'|trans|desc('Add Location') }}">
+    <button data-udw-config="{{ ez_udw_config('single', {}) }}" class="btn btn-primary btn--udw-add" title="{{ 'tab.locations.action.add'|trans|desc('Add Location') }}">
         <svg class="ez-icon ez-icon-create">
             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                  xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>

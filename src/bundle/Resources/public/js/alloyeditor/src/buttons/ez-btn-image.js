@@ -26,14 +26,16 @@ export default class EzBtnImage extends EzEmbedImageButton {
      * @param {Array} items the result of the choice in the UDW
      */
     addImage(items) {
+        const content = items[0].ContentInfo.Content;
+
         this.execCommand();
-        this.setContentInfo(items[0].ContentInfo.Content._id);
+        this.setContentInfo(content._id);
 
         const widget = this.getWidget()
             .setConfig('size', 'medium')
             .setImageType()
             .setWidgetContent('');
-        widget.loadImagePreviewFromCurrentVersion(items[0].ContentInfo.Content.CurrentVersion._href);
+        widget.loadImagePreviewFromCurrentVersion(content.CurrentVersion._href, content.Name);
         widget.setFocused(true);
 
         ReactDOM.unmountComponentAtNode(document.querySelector('#react-udw'));
@@ -66,6 +68,6 @@ EzBtnImage.defaultProps = {
     modifiesSelection: true,
     udwTitle: 'Select an image to embed',
     udwContentDiscoveredMethod: 'addImage',
-    udwIsSelectableMethod: 'isImage',
+    udwConfigName: 'richtext_embed_image',
     udwLoadContent: true,
 };

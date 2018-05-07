@@ -39,16 +39,17 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
     /**
      * Allow an extension to prepend the extension configurations.
      *
-     * @param ContainerBuilder $container
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     public function prepend(ContainerBuilder $container)
     {
         $this->prependViews($container);
         $this->prependImageVariations($container);
+        $this->prependUniversalDiscoveryWidget($container);
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     private function prependViews(ContainerBuilder $container): void
     {
@@ -59,7 +60,7 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     private function prependImageVariations(ContainerBuilder $container)
     {
@@ -67,5 +68,16 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $config = Yaml::parse(file_get_contents($imageConfigFile));
         $container->prependExtensionConfig('ezpublish', $config);
         $container->addResource(new FileResource($imageConfigFile));
+    }
+
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    private function prependUniversalDiscoveryWidget(ContainerBuilder $container)
+    {
+        $udwConfigFile = __DIR__ . '/../Resources/config/universal_discovery_widget.yml';
+        $config = Yaml::parse(file_get_contents($udwConfigFile));
+        $container->prependExtensionConfig('ezpublish', $config);
+        $container->addResource(new FileResource($udwConfigFile));
     }
 }
