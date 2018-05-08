@@ -104,4 +104,37 @@ class RolePage extends Page
         $this->navLinkTabs->goToTab('Assignments');
         $this->adminLists['Assignments']->clickAssignButton();
     }
+
+    /**
+     * Verifies if Role with Limitation from given list is present.
+     *
+     * @param string $listName
+     * @param string $moduleAndFunction
+     * @param string $limitation
+     *
+     * @return bool
+     */
+    public function isRoleWithLimitationPresent(string $listName, string $moduleAndFunction, string $limitation): bool
+    {
+        $policyExists = false;
+
+        $this->navLinkTabs->goToTab($listName);
+        $adminList = $this->adminLists[$listName];
+        $actualPoliciesList = $adminList->table->getTableHash();
+
+        $expectedModule = explode('/', $moduleAndFunction)[0];
+        $expectedFunction = explode('/', $moduleAndFunction)[1];
+
+        foreach ($actualPoliciesList as $policy) {
+            if (
+                $policy['Module'] === $expectedModule &&
+                $policy['Function'] === $expectedFunction &&
+                false !== strpos($policy['Limitations'], $limitation)
+            ) {
+                $policyExists = true;
+            }
+        }
+
+        return $policyExists;
+    }
 }

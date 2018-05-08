@@ -89,23 +89,8 @@ class RolesContext extends BusinessContext
     public function thereIsAPolicy(string $moduleAndFunction, string $limitation, string $roleName): void
     {
         $rolePage = PageObjectFactory::createPage($this->utilityContext, RolePage::PAGE_NAME, $roleName);
-        $rolePage->navLinkTabs->goToTab($this->tabMapping['policy']);
-        $adminList = $rolePage->adminLists[$this->tabMapping['policy']];
-        $actualPoliciesList = $adminList->table->getTableHash();
-        $policyExists = false;
-        $expectedModule = explode('/', $moduleAndFunction)[0];
-        $expectedFunction = explode('/', $moduleAndFunction)[1];
-        foreach ($actualPoliciesList as $policy) {
-            if (
-                $policy['Module'] === $expectedModule &&
-                $policy['Function'] === $expectedFunction &&
-                false !== strpos($policy['Limitations'], $limitation)
-            ) {
-                $policyExists = true;
-            }
-        }
 
-        if (!$policyExists) {
+        if (!$rolePage->isRoleWithLimitationPresent($this->tabMapping['policy'], $moduleAndFunction, $limitation)) {
             throw new Exception(sprintf('Policy "%s" with limitation "%s" not found on the "%s" policies list.', $moduleAndFunction, $limitation, $roleName));
         }
     }
@@ -116,23 +101,8 @@ class RolesContext extends BusinessContext
     public function thereIsNoPolicy(string $moduleAndFunction, string $limitation, string $roleName): void
     {
         $rolePage = PageObjectFactory::createPage($this->utilityContext, RolePage::PAGE_NAME, $roleName);
-        $rolePage->navLinkTabs->goToTab($this->tabMapping['policy']);
-        $adminList = $rolePage->adminLists[$this->tabMapping['policy']];
-        $actualPoliciesList = $adminList->table->getTableHash();
-        $policyExists = false;
-        $expectedModule = explode('/', $moduleAndFunction)[0];
-        $expectedFunction = explode('/', $moduleAndFunction)[1];
-        foreach ($actualPoliciesList as $policy) {
-            if (
-                $policy['Module'] === $expectedModule &&
-                $policy['Function'] === $expectedFunction &&
-                false !== strpos($policy['Limitations'], $limitation)
-            ) {
-                $policyExists = true;
-            }
-        }
 
-        if ($policyExists) {
+        if ($rolePage->isRoleWithLimitationPresent($this->tabMapping['policy'], $moduleAndFunction, $limitation)) {
             throw new Exception(sprintf('Policy "%s" with limitation "%s" found on the "%s" policies list.', $moduleAndFunction, $limitation, $roleName));
         }
     }
