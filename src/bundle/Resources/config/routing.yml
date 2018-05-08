@@ -402,6 +402,12 @@ ezplatform.location.update:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location:update'
 
+ezplatform.location.copy_subtree:
+    path: /location/copy-subtree
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Location:copySubtree'
+
 # LocationView / Translation tab
 
 ezplatform.translation.add:

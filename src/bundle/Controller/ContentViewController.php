@@ -16,6 +16,7 @@ use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
@@ -194,12 +195,17 @@ class ContentViewController extends Controller
             $this->getContentCreateData($location)
         );
 
+        $locationCopySubtreeType = $this->formFactory->copyLocationSubtree(
+            new LocationCopySubtreeData($location)
+        );
+
         $view->addParameters([
             'form_location_copy' => $locationCopyType->createView(),
             'form_location_move' => $locationMoveType->createView(),
             'form_content_edit' => $contentEditType->createView(),
             'form_content_create' => $contentCreateType->createView(),
             'form_subitems_content_edit' => $subitemsContentEdit->createView(),
+            'form_location_copy_subtree' => $locationCopySubtreeType->createView(),
         ]);
 
         if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {

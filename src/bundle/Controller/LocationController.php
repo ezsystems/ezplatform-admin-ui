@@ -4,6 +4,8 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
@@ -16,6 +18,7 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
@@ -36,39 +39,39 @@ use Symfony\Component\Translation\Exception\InvalidArgumentException as Translat
 
 class LocationController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var TranslatorInterface */
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var TrashService */
+    /** @var \eZ\Publish\API\Repository\TrashService */
     private $trashService;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
     /**
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
-     * @param LocationService $locationService
-     * @param ContentTypeService $contentTypeService
-     * @param ContentService $contentService
-     * @param TrashService $trashService
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\TrashService $trashService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -210,6 +213,55 @@ class LocationController extends Controller
         return $this->redirect($this->generateUrl('_ezpublishLocation', [
             'locationId' => $location->id,
         ]));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws InvalidArgumentException
+     */
+    public function copySubtreeAction(Request $request): Response
+    {
+        $form = $this->formFactory->copyLocationSubtree(
+            new LocationCopySubtreeData()
+        );
+        $form->handleRequest($request);
+
+        $location = $form->getData()->getLocation();
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (LocationCopySubtreeData $data) use ($location) {
+                $newParentLocation = $data->getNewParentLocation();
+
+                $copiedContent = $this->locationService->copySubtree(
+                    $location,
+                    $newParentLocation
+                );
+
+                $newLocation = $this->locationService->loadLocation($copiedContent->contentInfo->mainLocationId);
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Subtree '%name%' copied to location '%location%'") */
+                        'location.copy_subtree.success', [
+                        '%name%' => $location->getContentInfo()->name,
+                        '%location%' => $newParentLocation->getContentInfo()->name,
+                    ],
+                        'location'
+                    )
+                );
+
+                return $this->redirectToLocation($newLocation);
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirectToLocation($location);
     }
 
     /**

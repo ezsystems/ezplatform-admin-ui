@@ -4,16 +4,22 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
+use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
+use EzSystems\EzPlatformAdminUi\Specification\Location\IsRoot;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
+use EzSystems\EzPlatformAdminUi\Specification\Location\IsWithinCopySubtreeLimit;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -32,6 +38,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     const ITEM__EDIT = 'content__sidebar_right__edit';
     const ITEM__SEND_TO_TRASH = 'content__sidebar_right__send_to_trash';
     const ITEM__COPY = 'content__sidebar_right__copy';
+    const ITEM__COPY_SUBTREE = 'content__sidebar_right__copy_subtree';
     const ITEM__MOVE = 'content__sidebar_right__move';
     const ITEM__DELETE = 'content__sidebar_right__delete';
 
@@ -44,6 +51,12 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    private $contentTypeService;
+
+    /** @var \eZ\Publish\API\Repository\SearchService */
+    private $searchService;
+
     /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
     private $udwExtension;
 
@@ -53,6 +66,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\API\Repository\SearchService $searchService
      * @param \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension $udwExtension
      */
     public function __construct(
@@ -61,6 +76,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         PermissionResolver $permissionResolver,
         ConfigResolverInterface $configResolver,
         UserService $userService,
+        ContentTypeService $contentTypeService,
+        SearchService $searchService,
         UniversalDiscoveryExtension $udwExtension
     ) {
         parent::__construct($factory, $eventDispatcher);
@@ -68,6 +85,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
         $this->userService = $userService;
+        $this->contentTypeService = $contentTypeService;
+        $this->searchService = $searchService;
         $this->udwExtension = $udwExtension;
     }
 
@@ -133,6 +152,20 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'data-toggle' => 'modal',
             'data-target' => '#trash-location-modal',
         ];
+        $copySubtreeAttributes = [
+            'class' => 'ez-btn--udw-copy-subtree',
+            'data-root-location' => $this->configResolver->getParameter(
+                'universal_discovery_widget_module.default_location_id'
+            ),
+        ];
+
+        $copyLimit = $this->configResolver->getParameter(
+            'subtree_operations.copy_subtree.limit'
+        );
+        $canCopySubtree = (new IsWithinCopySubtreeLimit(
+            $copyLimit,
+            $this->searchService
+        ))->and((new IsRoot())->not())->isSatisfiedBy($location);
 
         $menu->setChildren([
             self::ITEM__CREATE => $this->createMenuItem(
@@ -179,6 +212,15 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     ],
                 ]
             ),
+            self::ITEM__COPY_SUBTREE => $this->createMenuItem(
+                self::ITEM__COPY_SUBTREE,
+                [
+                    'extras' => ['icon' => 'copy-subtree'],
+                    'attributes' => $canCopySubtree
+                        ? $copySubtreeAttributes
+                        : array_merge($copySubtreeAttributes, ['disabled' => 'disabled']),
+                ]
+            ),
         ]);
 
         if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
@@ -216,7 +258,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     }
 
     /**
-     * @return JMS\TranslationBundle\Model\Message[]
+     * @return \JMS\TranslationBundle\Model\Message[]
      */
     public static function getTranslationMessages(): array
     {
@@ -225,6 +267,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             (new Message(self::ITEM__EDIT, 'menu'))->setDesc('Edit'),
             (new Message(self::ITEM__SEND_TO_TRASH, 'menu'))->setDesc('Send to Trash'),
             (new Message(self::ITEM__COPY, 'menu'))->setDesc('Copy'),
+            (new Message(self::ITEM__COPY_SUBTREE, 'menu'))->setDesc('Copy Subtree'),
             (new Message(self::ITEM__MOVE, 'menu'))->setDesc('Move'),
             (new Message(self::ITEM__DELETE, 'menu'))->setDesc('Delete'),
         ];

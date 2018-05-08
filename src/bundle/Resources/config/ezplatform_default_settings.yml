@@ -32,3 +32,6 @@ parameters:
 
     # User Group identifier
     ezsettings.default.user_group_content_type_identifier: ['user_group']
+
+    # Subtree Operations
+    ezsettings.default.subtree_operations.copy_subtree.limit: 100
