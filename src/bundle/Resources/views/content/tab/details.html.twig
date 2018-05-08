@@ -106,23 +106,21 @@
             <td>{{ objectState.identifier }}</td>
             <td>{{ objectState.id }}</td>
             <td>
-                {{ form_start(form_state_update[objectState.objectStateGroup.id], {
-                    'method': 'POST',
-                    'action': path('ezplatform.object_state.contentstate.update', {
-                        'contentInfoId': contentInfo.id,
-                        'objectStateGroupId': objectState.objectStateGroup.id
-                    }),
-                    'attr': {'class': 'form-inline ez-form-inline'}
-                }) }}
-                {{ form_row(form_state_update[objectState.objectStateGroup.id].contentInfo) }}
-                {{ form_row(form_state_update[objectState.objectStateGroup.id].objectStateGroup) }}
-                {{ form_row(form_state_update[objectState.objectStateGroup.id].objectState) }}
-
-                <button type="submit" class="btn btn-secondary"{% if not state_update_disabled[objectState.objectStateGroup.id] %}data-disabled{% endif %}>
-                    {{ 'tab.details.sub_items_listing_by_set'|trans|desc('Set') }}
-                </button>
-
-                {{ form_end(form_state_update[objectState.objectStateGroup.id]) }}
+                {% if form_state_update[objectState.objectStateGroup.id].objectState.vars.choices|length != 0 %}
+                    {{ form_start(form_state_update[objectState.objectStateGroup.id], {
+                        'method': 'POST',
+                        'action': path('ezplatform.object_state.contentstate.update', {
+                            'contentInfoId': contentInfo.id,
+                            'objectStateGroupId': objectState.objectStateGroup.id
+                        }),
+                        'attr': {'class': 'form-inline ez-form-inline'}
+                    }) }}
+                        {{ form_row(form_state_update[objectState.objectStateGroup.id].contentInfo) }}
+                        {{ form_row(form_state_update[objectState.objectStateGroup.id].objectStateGroup) }}
+                        {{ form_row(form_state_update[objectState.objectStateGroup.id].objectState) }}
+                        {{ form_row(form_state_update[objectState.objectStateGroup.id].set) }}
+                    {{ form_end(form_state_update[objectState.objectStateGroup.id]) }}
+                {% endif %}
             </td>
         </tr>
     {% endfor %}
