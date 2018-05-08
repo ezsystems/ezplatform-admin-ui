@@ -26,20 +26,21 @@
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'section.list.title'|trans|desc('Sections') }}</div>
             <div>
-                <a title="{{ 'section.new'|trans|desc('Create a new Section') }}"
-                   href="{{ path('ezplatform.section.create') }}"
-                   class="btn btn-primary" {% if not can_edit %} data-disabled{% endif %}>
-                    <svg class="ez-icon ez-icon-create">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
-                    </svg>
-                </a>
+                {% if can_edit %}
+                    <a
+                        title="{{ 'section.new'|trans|desc('Create a new Section') }}"
+                        href="{{ path('ezplatform.section.create') }}"
+                        class="btn btn-primary">
+                        <svg class="ez-icon ez-icon-create">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                        </svg>
+                    </a>
+                {% endif %}
                 {% set modal_data_target = 'delete-sections-modal' %}
                 <button id="delete-sections" type="button" class="btn btn-danger" disabled data-toggle="modal"
                         data-target="#{{ modal_data_target }}" title="{{ 'section.delete'|trans|desc('Delete Section') }}">
                     <svg class="ez-icon ez-icon-trash">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                     </svg>
                 </button>
                 {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
@@ -76,12 +77,13 @@
                     <td>{{ section.id }}</td>
                     <td>{{ content_count[section.id] }}</td>
                     <td class="text-right">
-                        <a title="{{ 'section.assign_content'|trans|desc('Assign content') }}"
-                           href="#"
-                           data-section-id="{{ section.id }}"
-                           data-form-action="{{ path("ezplatform.section.assign_content", {"sectionId": section.id}) }}"
-                           data-udw-config="{{ ez_udw_config('multiple', {}) }}"
-                           class="btn btn-icon mx-3">
+                        <a
+                            title="{{ 'section.assign_content'|trans|desc('Assign content') }}"
+                            href="#"
+                            data-section-id="{{ section.id }}"
+                            data-form-action="{{ path("ezplatform.section.assign_content", {"sectionId": section.id}) }}"
+                            data-udw-config="{{ ez_udw_config('multiple', {}) }}"
+                            class="btn btn-icon mx-3">
                             <svg class="ez-icon ez-icon-relations ez-icon--secondary btn--open-udw">
                                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-section"></use>
                             </svg>
