@@ -160,8 +160,8 @@ class LocationController extends Controller
      */
     public function copyAction(Request $request): Response
     {
-        $form = $this->formFactory->copyLocationSubtree(
-            new LocationCopySubtreeData()
+        $form = $this->formFactory->copyLocation(
+            new LocationCopyData()
         );
         $form->handleRequest($request);
 
