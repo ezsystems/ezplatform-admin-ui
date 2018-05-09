@@ -352,7 +352,7 @@
     <div class="ez-image__wrapper">
         <img src="{{ src }}">
     </div>
-    <table>
+    <table class="ez-field-preview__image-meta">
         <thead>
             <tr>
                 <th>{{ 'ezimage.image_file_properties'|trans|desc('Image file properties') }}:</th>
@@ -382,9 +382,9 @@
 
         </tbody>
     </table>
-    <div>
-        <a class="ez-field-preview--ezimage__action--preview" href="{{ field.value.uri }}" target="_blank">
-            <svg class="ez-icon">
+    <div class="ez-field-preview__actions-wrapper">
+        <a class="ez-field-preview__action ez-field-preview__action--preview" href="{{ field.value.uri }}" target="_blank">
+            <svg class="ez-icon ez-icon--medium ez-icon--light">
                 <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab"></use>
             </svg>
         </a>
