@@ -8,11 +8,11 @@
 
     .ez-field-preview {
         &__image-meta {
-            flex-basis: 43%
+            flex-basis: 43%;
         }
 
         &__actions-wrapper {
-            flex-basis: 7%
+            flex-basis: 7%;
         }
 
         &__action {
@@ -30,10 +30,10 @@
                 cursor: pointer;
                 transition: background .3s $ez-admin-transition;
                 text-align: center;
-                display: flex;
+                display: block;
                 margin-top: 0;
-                flex-wrap: nowrap;
                 background: $ez-color-base-medium;
+                
                 &:hover,
                 &:focus {
                     background: darken($ez-color-base-medium, 15%);
