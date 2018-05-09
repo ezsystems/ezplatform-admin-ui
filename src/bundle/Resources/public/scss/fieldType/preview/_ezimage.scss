@@ -22,7 +22,7 @@
 
             &--preview {
                 padding: 0 1.25rem;
-                border: 0 none;
+                border: none;
                 border-radius: 50%;
                 height: 40px;
                 width: 40px;
@@ -30,7 +30,7 @@
                 cursor: pointer;
                 transition: background .3s $ez-admin-transition;
                 text-align: center;
-                display: block;
+                display: flex;
                 margin-top: 0;
                 flex-wrap: nowrap;
                 background: $ez-color-base-medium;
