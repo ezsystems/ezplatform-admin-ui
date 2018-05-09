@@ -5,4 +5,42 @@
         width: 50%;
         margin-right: 2rem;
     }
+
+    table {
+        flex-basis: 50%;
+    }
+
+    &__action--preview {
+
+        @mixin preview-action {
+            padding: 0;
+            border: 0 none;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            transition: background .3s $ez-admin-transition;
+            text-align: center;
+            display: block;
+
+            .ez-icon {
+                margin-top: 7px;
+                height: 1.5rem;
+                width: 1.5rem;
+                fill: $ez-white;
+            }
+        }
+
+        margin-top: 0;
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 0 1.25rem;
+        @include preview-action;
+        background: $ez-color-base-medium;
+        &:hover,
+        &:focus {
+            background: darken($ez-color-base-medium, 15%);
+        }
+    }
 }
