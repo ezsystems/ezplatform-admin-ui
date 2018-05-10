@@ -11,8 +11,6 @@ namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 use eZ\Publish\API\Repository;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -22,36 +20,41 @@ use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
+use eZ\Publish\API\Repository\PermissionResolver;
 
 class DetailsTab extends AbstractTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-location-view-details';
 
-    /** @var Repository\ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
-    /** @var FieldsGroupsList */
+    /** @var \eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList */
     protected $fieldsGroupsListHelper;
 
-    /** @var Repository\UserService */
+    /** @var \eZ\Publish\API\Repository\UserService */
     protected $userService;
 
-    /** @var Repository\SectionService */
+    /** @var \eZ\Publish\API\Repository\SectionService */
     protected $sectionService;
 
-    /** @var DatasetFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
     protected $datasetFactory;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
     /**
-     * @param Environment $twig
-     * @param TranslatorInterface $translator
-     * @param SectionService $sectionService
-     * @param UserService $userService
-     * @param DatasetFactory $datasetFactory
-     * @param FormFactory $formFactory
+     * @param \Twig\Environment $twig
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\SectionService $sectionService
+     * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         Environment $twig,
@@ -59,7 +62,8 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
         SectionService $sectionService,
         UserService $userService,
         DatasetFactory $datasetFactory,
-        FormFactory $formFactory
+        FormFactory $formFactory,
+        PermissionResolver $permissionResolver
     ) {
         parent::__construct($twig, $translator);
 
@@ -67,27 +71,49 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
         $this->userService = $userService;
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
+        $this->permissionResolver = $permissionResolver;
     }
 
+    /**
+     * @return string
+     */
     public function getIdentifier(): string
     {
         return 'details';
     }
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         /** @Desc("Details") */
         return $this->translator->trans('tab.name.details', [], 'locationview');
     }
 
+    /**
+     * @return int
+     */
     public function getOrder(): int
     {
         return 200;
     }
 
+    /**
+     * @param array $parameters
+     *
+     * @return string
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
     public function renderView(array $parameters): string
     {
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $parameters['content'];
         $versionInfo = $content->getVersionInfo();
         $contentInfo = $versionInfo->getContentInfo();
@@ -112,8 +138,10 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
         $lastContributor = (new UserExists($this->userService))->isSatisfiedBy($versionInfo->creatorId)
             ? $this->userService->loadUser($versionInfo->creatorId) : null;
 
+        $can_see_section = $this->permissionResolver->hasAccess('section', 'view');
+
         $viewParameters = [
-            'section' => $this->sectionService->loadSection($contentInfo->sectionId),
+            'section' => $can_see_section ? $this->sectionService->loadSection($contentInfo->sectionId) : null,
             'contentInfo' => $contentInfo,
             'versionInfo' => $versionInfo,
             'creator' => $creator,
@@ -123,6 +151,7 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
             'objectStates' => $objectStatesDataset->getObjectStates(),
             'sort_field_clause_map' => $this->getSortFieldClauseMap(),
             'form_state_update' => $contentObjectStateUpdateTypeByGroupId,
+            'can_see_section' => $can_see_section,
         ];
 
         return $this->twig->render(
