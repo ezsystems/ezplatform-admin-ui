@@ -191,6 +191,16 @@ ezplatform.policy.update:
         roleId: \d+
         policyId: \d+
 
+ezplatform.policy.create_with_limitation:
+    path: /role/{roleId}/policy/create/{policyModule}/{policyFunction}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Policy:createWithLimitation'
+    requirements:
+        roleId: \d+
+        policyModule: \w+
+        policyFunction: \w+
+
 ezplatform.policy.delete:
     path: /role/{roleId}/policy/{policyId}
     methods: ['POST']

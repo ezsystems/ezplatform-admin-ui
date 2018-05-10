@@ -26,6 +26,16 @@
         <target state="new">Select Subtree</target>
         <note>key: locations.select_subtree</note>
       </trans-unit>
+      <trans-unit id="8e8d15bb05038bded496a7dfcdf6374b9449bc51" resname="policy.add.policy.title">
+        <source>Adding - Policy type</source>
+        <target state="new">Adding - Policy type</target>
+        <note>key: policy.add.policy.title</note>
+      </trans-unit>
+      <trans-unit id="df3bafbf431f3c222cebeaec45da0a089cf63736" resname="policy.add.set_limitation">
+        <source>Now you can set limitations for the policy.</source>
+        <target state="new">Now you can set limitations for the policy.</target>
+        <note>key: policy.add.set_limitation</note>
+      </trans-unit>
       <trans-unit id="d92993cb4cb3690f06c599b5f500a29fa23421c9" resname="policy.add.success">
         <source>New policies in role '%role%' created.</source>
         <target state="new">New policies in role '%role%' created.</target>

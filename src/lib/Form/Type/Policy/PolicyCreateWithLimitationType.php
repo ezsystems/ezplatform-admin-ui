@@ -9,25 +9,23 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
 
 use eZ\Publish\API\Repository\RoleService;
-use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
-use EzSystems\RepositoryForms\Form\Type\Role\LimitationType;
+use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use EzSystems\RepositoryForms\Form\Type\Role\LimitationType;
 
-class PolicyUpdateType extends AbstractType
+class PolicyCreateWithLimitationType extends AbstractType
 {
-    /** @var RoleService */
+    /** @var \eZ\Publish\API\Repository\RoleService */
     private $roleService;
 
     /**
-     * PolicyLimitationsType constructor.
-     *
-     * @param RoleService $roleService
+     * @param \eZ\Publish\API\Repository\RoleService $roleService
      */
     public function __construct(RoleService $roleService)
     {
@@ -51,14 +49,14 @@ class PolicyUpdateType extends AbstractType
             ->add(
                 'save',
                 SubmitType::class,
-                ['label' => /** @Desc("Update") */ 'policy_create.update']
+                ['label' => /** @Desc("Create") */ 'policy_create.save']
             );
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
             $data = $event->getData();
             $form = $event->getForm();
 
-            if ($data instanceof PolicyUpdateData) {
+            if ($data instanceof PolicyCreateData) {
                 $availableLimitationTypes = $this->roleService->getLimitationTypesByModuleFunction(
                     $data->getModule(),
                     $data->getFunction()
@@ -84,7 +82,7 @@ class PolicyUpdateType extends AbstractType
     {
         $resolver->setDefaults([
             'translation_domain' => 'ezrepoforms_role',
-            'data_class' => PolicyUpdateData::class,
+            'data_class' => PolicyCreateData::class,
         ]);
     }
 

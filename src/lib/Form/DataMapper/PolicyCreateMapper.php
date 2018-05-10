@@ -35,6 +35,7 @@ class PolicyCreateMapper implements DataMapperInterface
 
         $data->setModule($value->module);
         $data->setFunction($value->function);
+        $data->setLimitations($value->getLimitations());
 
         return $data;
     }
@@ -54,9 +55,17 @@ class PolicyCreateMapper implements DataMapperInterface
             throw new InvalidArgumentException('data', 'must be an instance of ' . PolicyCreateData::class);
         }
 
-        return new PolicyCreateStruct([
+        $policyCreateStruct = new PolicyCreateStruct([
             'module' => $data->getModule(),
             'function' => $data->getFunction(),
         ]);
+
+        foreach ($data->getLimitations() as $limitation) {
+            if (!empty($limitation->limitationValues)) {
+                $policyCreateStruct->addLimitation($limitation);
+            }
+        }
+
+        return $policyCreateStruct;
     }
 }

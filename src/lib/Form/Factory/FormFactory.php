@@ -95,6 +95,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupsDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStatesDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateWithLimitationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordChangeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType;
@@ -793,8 +794,8 @@ class FormFactory
     }
 
     /**
-     * @param PolicyCreateData|null $data
-     * @param null|string $name
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData|null $data
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -805,6 +806,21 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(PolicyCreateType::class);
 
         return $this->formFactory->createNamed($name, PolicyCreateType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData|null $data
+     * @param string|null $name
+     *
+     * @return FormInterface
+     */
+    public function createPolicyWithLimitation(
+        ?PolicyCreateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(PolicyCreateWithLimitationType::class);
+
+        return $this->formFactory->createNamed($name, PolicyCreateWithLimitationType::class, $data);
     }
 
     /**
