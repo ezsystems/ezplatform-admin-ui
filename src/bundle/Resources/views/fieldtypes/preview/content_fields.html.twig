@@ -352,7 +352,7 @@
     <div class="ez-image__wrapper">
         <img src="{{ src }}">
     </div>
-    <table>
+    <table class="ez-field-preview__image-meta">
         <thead>
             <tr>
                 <th>{{ 'ezimage.image_file_properties'|trans|desc('Image file properties') }}:</th>
@@ -364,15 +364,31 @@
                 <td>{{ field.value.fileName }}</td>
             </tr>
             <tr>
-                <td>{{ 'ezimage.size'|trans|desc('Size') }}</td>
+                <td>{{ 'ezimage.size'|trans|desc('Size') }}:</td>
                 <td>{{ field.value.fileSize|ez_file_size( 1 ) }}</td>
             </tr>
             <tr>
-                <td>{{ 'ezimage.alternative_text'|trans|desc('Alternative text') }}</td>
+                <td>{{ 'ezimage.alternative_text'|trans|desc('Alternative text') }}:</td>
                 <td>{{ field.value.alternativeText }}</td>
             </tr>
+            <tr>
+                <td>{{ 'ezimage.master_dimensions'|trans|desc('Master dimensions') }}:</td>
+                <td>{{ 'ezimage.width_and_height'|trans({'%width%': field.value.width, '%height%': field.value.height})|desc('%width%px Width - %height%px Height') }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'ezimage.ratio'|trans|desc('Ratio') }}:</td>
+                <td>{{ (field.value.width/field.value.height)|round(2) }}</td>
+            </tr>
+
         </tbody>
     </table>
+    <div class="ez-field-preview__actions-wrapper">
+        <a class="ez-field-preview__action ez-field-preview__action--preview" href="{{ field.value.uri }}" target="_blank">
+            <svg class="ez-icon ez-icon--medium ez-icon--light">
+                <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab"></use>
+            </svg>
+        </a>
+    </div>
 </div>
 {% endif %}
 {% endspaceless %}

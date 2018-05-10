@@ -51,10 +51,25 @@
         <target state="new">Image file properties</target>
         <note>key: ezimage.image_file_properties</note>
       </trans-unit>
+      <trans-unit id="504042c3fda41a357db1614358fd3c8dc94e301f" resname="ezimage.master_dimensions">
+        <source>Master dimensions</source>
+        <target state="new">Master dimensions</target>
+        <note>key: ezimage.master_dimensions</note>
+      </trans-unit>
+      <trans-unit id="55cfda30a4255cffac54e4c644dc6033720c28f6" resname="ezimage.ratio">
+        <source>Ratio</source>
+        <target state="new">Ratio</target>
+        <note>key: ezimage.ratio</note>
+      </trans-unit>
       <trans-unit id="ac1f7c0bca124e29b9e6b09eaa0bb58334c62327" resname="ezimage.size">
         <source>Size</source>
         <target state="new">Size</target>
         <note>key: ezimage.size</note>
+      </trans-unit>
+      <trans-unit id="d34002f3e81ae0592b02f40872388e0adea41279" resname="ezimage.width_and_height">
+        <source>%width%px Width - %height%px Height</source>
+        <target state="new">%width%px Width - %height%px Height</target>
+        <note>key: ezimage.width_and_height</note>
       </trans-unit>
       <trans-unit id="e371d4573dda857ef4a58cebd2420f87992b8864" resname="ezmedia.auto_play">
         <source>Auto play</source>
