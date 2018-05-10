@@ -373,7 +373,7 @@
             </tr>
             <tr>
                 <td>{{ 'ezimage.master_dimensions'|trans|desc('Master dimensions') }}:</td>
-                <td>{{ field.value.width ~ 'px W' ~ ' - ' ~ field.value.height ~ 'px H' }}</td>
+                <td>{{ field.value.width ~ 'px ' ~ 'ezimage.width'|trans|desc('Width') ~ ' - ' ~ field.value.height ~ 'px ' ~ 'ezimage.height'|trans|desc('Height') }}</td>
             </tr>
             <tr>
                 <td>{{ 'ezimage.ratio'|trans|desc('Ratio') }}:</td>
