@@ -46,11 +46,6 @@
         <target state="new">File name</target>
         <note>key: ezimage.file_name</note>
       </trans-unit>
-      <trans-unit id="e1ea3c76acaf5c2cf213ae484b0e124658ac0578" resname="ezimage.height">
-        <source>Height</source>
-        <target state="new">Height</target>
-        <note>key: ezimage.height</note>
-      </trans-unit>
       <trans-unit id="d21adcec4365478ce3f618a65ae4ddfdbb94e457" resname="ezimage.image_file_properties">
         <source>Image file properties</source>
         <target state="new">Image file properties</target>
@@ -71,10 +66,10 @@
         <target state="new">Size</target>
         <note>key: ezimage.size</note>
       </trans-unit>
-      <trans-unit id="2b102528fd4d50ac36bb38d1c1c70dbf9485c5e6" resname="ezimage.width">
-        <source>Width</source>
-        <target state="new">Width</target>
-        <note>key: ezimage.width</note>
+      <trans-unit id="d34002f3e81ae0592b02f40872388e0adea41279" resname="ezimage.width_and_height">
+        <source>%width%px Width - %height%px Height</source>
+        <target state="new">%width%px Width - %height%px Height</target>
+        <note>key: ezimage.width_and_height</note>
       </trans-unit>
       <trans-unit id="e371d4573dda857ef4a58cebd2420f87992b8864" resname="ezmedia.auto_play">
         <source>Auto play</source>
