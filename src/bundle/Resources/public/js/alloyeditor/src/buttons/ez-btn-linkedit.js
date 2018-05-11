@@ -108,6 +108,45 @@ export default class EzBtnLinkEdit extends Component {
         editor.focus();
         editor.eZ.moveCaretToElement(editor, this.state.element);
         editor.fire('actionPerformed', this);
+
+        this.showUI();
+    }
+
+    /**
+     * Fires the editorInteraction event so that AlloyEditor editor
+     * UI remains visible and is updated.
+     *
+     * @method showUI
+     */
+    showUI() {
+        const nativeEditor = this.props.editor.get('nativeEditor');
+
+        nativeEditor.fire('editorInteraction', {
+            editor: this.props.editor,
+            selectionData: {
+                element: this.state.element,
+                region: this.getRegion()
+            }
+        });
+    }
+
+    /**
+     * Returns the element region.
+     *
+     * @method getRegion
+     * @return {Object}
+     */
+    getRegion() {
+        const scroll = this.state.element.getWindow().getScrollPosition();
+        const region = this.state.element.getClientRect();
+
+        region.top += scroll.y;
+        region.bottom += scroll.y;
+        region.left += scroll.x;
+        region.right += scroll.x;
+        region.direction = CKEDITOR.SELECTION_TOP_TO_BOTTOM;
+
+        return region;
     }
 
     /**
