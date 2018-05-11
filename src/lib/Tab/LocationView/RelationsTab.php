@@ -143,7 +143,7 @@ class RelationsTab extends AbstractTab implements OrderedTabInterface, Condition
         $viewParameters['contentTypes'] = $contentTypes;
 
         return $this->twig->render(
-            'EzPlatformAdminUiBundle:content/tab/relations:tab.html.twig',
+            '@ezdesign/content/tab/relations/tab.html.twig',
             array_merge($viewParameters, $parameters)
         );
     }

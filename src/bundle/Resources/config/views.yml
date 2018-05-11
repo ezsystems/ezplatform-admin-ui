@@ -1,43 +1,43 @@
 system:
     admin_group:
         user:
-            login_template: '@EzPlatformAdminUi/Security/login.html.twig'
+            login_template: '@ezdesign/Security/login.html.twig'
 
         content_view:
             full:
                 default:
                     controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
-                    template: '@EzPlatformAdminUi/content/locationview.html.twig'
+                    template: '@ezdesign/content/locationview.html.twig'
                     match: true
             preview_ezobjectrelationlist_row:
                 default:
                     controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
-                    template: '@EzPlatformAdminUi\fieldtypes\preview\ezobjectrelationlist_row.html.twig'
+                    template: '@ezdesign\fieldtypes\preview\ezobjectrelationlist_row.html.twig'
                     match: true
 
         content_edit_view:
             full:
                 ezplatform_admin_ui:
-                    template: '@EzPlatformAdminUi/content/content_edit/content_edit.html.twig'
+                    template: '@ezdesign/content/content_edit/content_edit.html.twig'
                     match: true
                     params:
-                        viewbaseLayout: '@EzPlatformAdminUi/layout.html.twig'
+                        viewbaseLayout: '@ezdesign/layout.html.twig'
 
         content_create_view:
             full:
                 ezplatform_admin_ui:
-                    template: '@EzPlatformAdminUi/content/content_edit/content_create.html.twig'
+                    template: '@ezdesign/content/content_edit/content_create.html.twig'
                     match: true
                     params:
-                        viewbaseLayout: '@EzPlatformAdminUi/layout.html.twig'
+                        viewbaseLayout: '@ezdesign/layout.html.twig'
 
         content_translate_view:
             full:
                 ezplatform_admin_ui:
-                    template: '@EzPlatformAdminUi/content/content_edit/content_edit.html.twig'
+                    template: '@ezdesign/content/content_edit/content_edit.html.twig'
                     match: true
                     params:
-                        viewbaseLayout: '@EzPlatformAdminUi/layout.html.twig'
+                        viewbaseLayout: '@ezdesign/layout.html.twig'
 
         fielddefinition_edit_templates:
-            - { template: '@EzPlatformAdminUi/admin/content_type/field_types.html.twig', priority: 10 }
+            - { template: '@ezdesign/admin/content_type/field_types.html.twig', priority: 10 }

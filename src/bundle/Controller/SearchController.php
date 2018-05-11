@@ -189,7 +189,7 @@ class SearchController extends Controller
                     new ContentEditData()
                 );
 
-                return $this->render('@EzPlatformAdminUi/admin/search/search.html.twig', [
+                return $this->render('@ezdesign/admin/search/search.html.twig', [
                     'results' => $this->pagerContentToDataMapper->map($pagerfanta),
                     'form' => $form->createView(),
                     'pager' => $pagerfanta,
@@ -204,7 +204,7 @@ class SearchController extends Controller
             }
         }
 
-        return $this->render('@EzPlatformAdminUi/admin/search/search.html.twig', [
+        return $this->render('@ezdesign/admin/search/search.html.twig', [
             'form' => $form->createView(),
             'filters_expanded' => false,
             'user_content_type_identifier' => $this->userContentTypeIdentifier,

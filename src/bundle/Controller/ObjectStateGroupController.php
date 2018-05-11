@@ -83,7 +83,7 @@ class ObjectStateGroupController extends Controller
             new ObjectStateGroupsDeleteData($this->getObjectStateGroupsIds($objectStateGroups))
         );
 
-        return $this->render('EzPlatformAdminUiBundle:admin/object_state_group:list.html.twig', [
+        return $this->render('@ezdesign/admin/object_state_group/list.html.twig', [
             'can_administrate' => $this->isGranted(new Attribute('state', 'administrate')),
             'object_state_groups' => $objectStateGroups,
             'empty_object_state_groups' => $emptyObjectStateGroups,
@@ -102,7 +102,7 @@ class ObjectStateGroupController extends Controller
             new ObjectStateGroupDeleteData($objectStateGroup)
         )->createView();
 
-        return $this->render('EzPlatformAdminUiBundle:admin/object_state_group:view.html.twig', [
+        return $this->render('@ezdesign/admin/object_state_group/view.html.twig', [
             'can_administrate' => $this->isGranted(new Attribute('state', 'administrate')),
             'object_state_group' => $objectStateGroup,
             'delete_form' => $deleteForm,
@@ -153,7 +153,7 @@ class ObjectStateGroupController extends Controller
             }
         }
 
-        return $this->render('EzPlatformAdminUiBundle:admin/object_state_group:add.html.twig', [
+        return $this->render('@ezdesign/admin/object_state_group/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -277,7 +277,7 @@ class ObjectStateGroupController extends Controller
             }
         }
 
-        return $this->render('@EzPlatformAdminUi/admin/object_state_group/edit.html.twig', [
+        return $this->render('@ezdesign/admin/object_state_group/edit.html.twig', [
             'object_state_group' => $group,
             'form' => $form->createView(),
         ]);

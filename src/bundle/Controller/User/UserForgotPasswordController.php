@@ -106,10 +106,10 @@ class UserForgotPasswordController extends Controller
                 $this->sendResetPasswordMessage($user->email, $token);
             }
 
-            return $this->render('@EzPlatformAdminUi/Security/forgot_user_password/success.html.twig');
+            return $this->render('@ezdesign/Security/forgot_user_password/success.html.twig');
         }
 
-        return $this->render('@EzPlatformAdminUi/Security/forgot_user_password/index.html.twig', [
+        return $this->render('@ezdesign/Security/forgot_user_password/index.html.twig', [
             'form_forgot_user_password' => $form->createView(),
         ]);
     }
@@ -141,16 +141,16 @@ class UserForgotPasswordController extends Controller
             }
 
             if (!$user || count($this->userService->loadUsersByEmail($user->email)) < 2) {
-                return $this->render('@EzPlatformAdminUi/Security/forgot_user_password/success.html.twig');
+                return $this->render('@ezdesign/Security/forgot_user_password/success.html.twig');
             }
 
             $token = $this->updateUserToken($user);
             $this->sendResetPasswordMessage($user->email, $token);
 
-            return $this->render('@EzPlatformAdminUi/Security/forgot_user_password/success.html.twig');
+            return $this->render('@ezdesign/Security/forgot_user_password/success.html.twig');
         }
 
-        return $this->render('@EzPlatformAdminUi/Security/forgot_user_password/with_login.html.twig', [
+        return $this->render('@ezdesign/Security/forgot_user_password/with_login.html.twig', [
             'form_forgot_user_password_with_login' => $form->createView(),
         ]);
     }
@@ -172,7 +172,7 @@ class UserForgotPasswordController extends Controller
         try {
             $this->userService->loadUserByToken($hashKey);
         } catch (NotFoundException $e) {
-            return $this->render('@EzPlatformAdminUi/Security/reset_user_password/invalid_link.html.twig', [], $response);
+            return $this->render('@ezdesign/Security/reset_user_password/invalid_link.html.twig', [], $response);
         }
 
         $form = $this->formFactory->resetUserPassword();
@@ -184,7 +184,7 @@ class UserForgotPasswordController extends Controller
                 $currentUser = $this->permissionResolver->getCurrentUserReference();
                 $this->permissionResolver->setCurrentUserReference($user);
             } catch (NotFoundException $e) {
-                return $this->render('@EzPlatformAdminUi/Security/reset_user_password/invalid_link.html.twig', [], $response);
+                return $this->render('@ezdesign/Security/reset_user_password/invalid_link.html.twig', [], $response);
             }
 
             $data = $form->getData();
@@ -196,13 +196,13 @@ class UserForgotPasswordController extends Controller
                 $this->userService->expireUserToken($hashKey);
                 $this->permissionResolver->setCurrentUserReference($currentUser);
 
-                return $this->render('@EzPlatformAdminUi/Security/reset_user_password/success.html.twig', [], $response);
+                return $this->render('@ezdesign/Security/reset_user_password/success.html.twig', [], $response);
             } catch (\Exception $e) {
                 $this->notificationHandler->error($e->getMessage());
             }
         }
 
-        return $this->render('@EzPlatformAdminUi/Security/reset_user_password/index.html.twig', [
+        return $this->render('@ezdesign/Security/reset_user_password/index.html.twig', [
             'form_reset_user_password' => $form->createView(),
         ], $response);
     }
@@ -236,7 +236,7 @@ class UserForgotPasswordController extends Controller
      */
     private function sendResetPasswordMessage(string $to, string $hashKey)
     {
-        $template = $this->twig->loadTemplate('@EzPlatformAdminUi/Security/mail/forgot_user_password.html.twig');
+        $template = $this->twig->loadTemplate('@ezdesign/Security/mail/forgot_user_password.html.twig');
 
         $subject = $template->renderBlock('subject', []);
         $from = $template->renderBlock('from', []);

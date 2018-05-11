@@ -109,7 +109,7 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
         ];
 
         return $this->twig->render(
-            'EzPlatformAdminUiBundle:content/tab/locations:tab.html.twig',
+            '@ezdesign/content/tab/locations/tab.html.twig',
             array_merge($viewParameters, $parameters)
         );
     }
