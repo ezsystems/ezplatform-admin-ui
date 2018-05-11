@@ -1,11 +1,11 @@
-{% extends "EzPlatformAdminUiBundle::layout.html.twig" %}
+{% extends "@ezdesign/layout.html.twig" %}
 
 {% trans_default_domain 'trash' %}
 
 {% block page_title %}{% endblock %}
 
-{% form_theme form_trash_item_restore '@EzPlatformAdminUi/form_fields.html.twig' %}
-{% form_theme form_trash_item_delete '@EzPlatformAdminUi/form_fields.html.twig' %}
+{% form_theme form_trash_item_restore '@ezdesign/form_fields.html.twig' %}
+{% form_theme form_trash_item_delete '@ezdesign/form_fields.html.twig' %}
 
 {% block body_class %}ez-trash-list-view{% endblock %}
 
@@ -18,7 +18,7 @@
 
         <div class="col-sm-10 px-0">
             <section class="container mt-5">
-                {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with { title: 'trash.headline'|trans|desc('Trash'), iconName: 'trash' } %}
+                {% include '@ezdesign/parts/page_title.html.twig' with { title: 'trash.headline'|trans|desc('Trash'), iconName: 'trash' } %}
                 {{ form_start(form_trash_item_restore, {'action': path('ezplatform.trash.restore')}) }}
                 <div class="px-4">
                     <div class="ez-table-header mt-3">
@@ -48,7 +48,7 @@
                                          xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                                 </svg>
                             </button>
-                            {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+                            {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
                                 'id': modal_data_target,
                                 'message': 'trash.modal.message'|trans|desc('Do you want to delete selected item(s) from Trash?'),
                                 'data_click': '#trash_item_delete_delete',
@@ -85,7 +85,7 @@
                                     <td>{{ trash_item.contentType.name }}</td>
                                     <td>
                                         {% if not is_parent_in_trash %}
-                                            {% include 'EzPlatformAdminUiBundle:parts:path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
+                                            {% include '@ezdesign/parts/path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
                                         {% else %}
                                             <em>{{ 'trash.item.ancesor_in_trash'|trans|desc('Ancestor is in the Trash') }}</em>
                                         {% endif %}
@@ -122,13 +122,13 @@
                         {{ pagerfanta(pager, 'ez') }}
                     </div>
                 {% endif %}
-                {% include 'EzPlatformAdminUiBundle:admin/trash:empty_trash_confirmation_modal.html.twig' with {'form': form_trash_empty, 'trash_items_count': pager.nbResults} %}
+                {% include '@ezdesign/admin/trash/empty_trash_confirmation_modal.html.twig' with {'form': form_trash_empty, 'trash_items_count': pager.nbResults} %}
             </section>
         </div>
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
             <div class="ez-sticky-container">
                 {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
-                {{ knp_menu_render(sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+                {{ knp_menu_render(sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
             </div>
         </div>
     </div>

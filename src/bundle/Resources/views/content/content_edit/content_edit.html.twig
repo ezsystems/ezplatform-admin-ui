@@ -1,4 +1,4 @@
-{% extends 'EzPlatformAdminUiBundle:content/content_edit:content_edit_base.html.twig' %}
+{% extends '@ezdesign/content/content_edit/content_edit_base.html.twig' %}
 
 {% trans_default_domain 'content_edit' %}
 
@@ -59,7 +59,7 @@
         'parent_location': parentLocation,
         'language': language
     }) %}
-    {{ knp_menu_render(content_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(content_edit_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
 {% block close_button %}

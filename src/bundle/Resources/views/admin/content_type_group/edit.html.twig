@@ -1,11 +1,11 @@
-{% extends "@EzPlatformAdminUi/admin/content_type_group/base.html.twig" %}
+{% extends "@ezdesign/admin/content_type_group/base.html.twig" %}
 
-{% form_theme form '@EzPlatformAdminUi/form_fields.html.twig'  %}
+{% form_theme form '@ezdesign/form_fields.html.twig'  %}
 
 {% trans_default_domain 'content_type' %}
 
 {% block breadcrumbs_admin %}
-    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
         { value: 'content_type_group.breadcrumb.edit'|trans({ '%identifier%': content_type_group.identifier })|desc('Editing Content Type Group "%identifier%"') }
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block page_title_admin %}
-    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+    {% include '@ezdesign/parts/page_title.html.twig' with {
         title: 'content_type_group.view.edit.title'|trans({'%identifier%': content_type_group.identifier})|desc('Editing Content Type Group "%identifier%"'),
         iconName: 'content-types'
     } %}
@@ -37,5 +37,5 @@
 
 {% block right_sidebar %}
     {% set content_type_group_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_group_edit.sidebar_right', [], {'save_id': form.update.vars.id}) %}
-    {{ knp_menu_render(content_type_group_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(content_type_group_edit_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

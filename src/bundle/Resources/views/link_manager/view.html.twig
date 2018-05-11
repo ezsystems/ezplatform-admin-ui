@@ -1,16 +1,16 @@
-{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+{% extends '@ezdesign/layout.html.twig' %}
 
 {% trans_default_domain "linkmanager" %}
 
 {%- block breadcrumbs -%}
-    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
         { value: 'url.list'|trans, url: path('ezplatform.link_manager.list') },
         { value: 'url.detail'|trans|desc('Link detail')}
     ]} %}
 {%- endblock -%}
 
 {%- block page_title -%}
-    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+    {% include '@ezdesign/parts/page_title.html.twig' with {
         title: url.url|truncate(60),
         iconName: 'link'
     } %}

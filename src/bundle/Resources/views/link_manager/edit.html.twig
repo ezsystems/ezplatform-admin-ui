@@ -1,6 +1,6 @@
-{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+{% extends '@ezdesign/layout.html.twig' %}
 
-{% form_theme form '@EzPlatformAdminUi/form_fields.html.twig'  %}
+{% form_theme form '@ezdesign/form_fields.html.twig'  %}
 
 {% trans_default_domain "linkmanager" %}
 
@@ -9,12 +9,12 @@
         <div class="col-sm-11 px-0 pb-4">
             <div class="ez-header pt-4">
                 <div class="container">
-                    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+                    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
                         { value: 'url.list'|trans, url: path('ezplatform.link_manager.list') },
                         { value: 'url.edit'|trans }
                     ]} %}
 
-                    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+                    {% include '@ezdesign/parts/page_title.html.twig' with {
                         title: 'url.editing'|trans({'%url%': url.url|truncate(50) }),
                         iconName: 'link'
                     } %}
@@ -40,7 +40,7 @@
             {% set url_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.url_edit.sidebar_right', [], {'url': url}) %}
 
             {{ knp_menu_render(url_create_sidebar_right, {
-                'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'
+                'template': '@ezdesign/parts/menu/sidebar_right.html.twig'
             }) }}
         </div>
     </div>

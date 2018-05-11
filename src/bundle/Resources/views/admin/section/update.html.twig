@@ -1,11 +1,11 @@
-{% extends 'EzPlatformAdminUiBundle:admin/section:base.html.twig' %}
+{% extends '@ezdesign/admin/section/base.html.twig' %}
 
-{% form_theme form_section_update '@EzPlatformAdminUi/form_fields.html.twig'  %}
+{% form_theme form_section_update '@ezdesign/form_fields.html.twig'  %}
 
 {% trans_default_domain 'section' %}
 
 {% block breadcrumbs_admin %}
-    {% include 'EzPlatformAdminUiBundle:parts:breadcrumbs.html.twig' with { 'items': [
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { 'items': [
         { 'value': 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { 'url': path('ezplatform.section.list'), 'value': 'section.list'|trans|desc('Sections') },
         { 'value': 'section.update.title'|trans({ '%identifier%': section.name })|desc('Editing Section "%identifier%"') }
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block page_title_admin %}
-    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+    {% include '@ezdesign/parts/page_title.html.twig' with {
         title: 'section.update.title'|trans({ '%identifier%': section.name })|desc('Editing Section "%identifier%"'),
         iconName: 'sections'
     } %}
@@ -38,5 +38,5 @@
 
 {% block right_sidebar %}
     {% set section_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.section_edit.sidebar_right', [], {'section': section}) %}
-    {{ knp_menu_render(section_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(section_edit_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

@@ -57,7 +57,7 @@
         <div id="react-udw"></div>
 
         {% block navigation %}
-            {% include 'EzPlatformAdminUiBundle:parts:navigation.html.twig' %}
+            {% include '@ezdesign/parts/navigation.html.twig' %}
         {% endblock %}
         <div class="container-fluid ez-header">
             <div class="container">
@@ -71,7 +71,7 @@
                 {% block left_sidebar %}
                     <div class="col-sm-1 bg-dark pt-4 ez-side-menu">
                         <div class="ez-sticky-container">
-                            {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@EzPlatformAdminUi/parts/menu/sidebar_left.html.twig'}) }}
+                            {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@ezdesign/parts/menu/sidebar_left.html.twig'}) }}
                         </div>
                     </div>
                 {% endblock left_sidebar %}
@@ -81,7 +81,7 @@
         <div
             class="ez-notifications-container"
             data-notifications="{{ app.flashes|json_encode() }}"
-            data-template="{{ include('EzPlatformAdminUiBundle:parts:notification.html.twig', {
+            data-template="{{ include('@ezdesign/parts/notification.html.twig', {
                 label: '{{ label }}',
                 message: '{{ message }}'
             })|e('html_attr')  }}"></div>

@@ -1,11 +1,11 @@
-{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+{% extends '@ezdesign/layout.html.twig' %}
 
 {% trans_default_domain 'section' %}
 
 {% block body_class %}ez-section-view{% endblock %}
 
 {% block breadcrumbs %}
-    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.section.list'), value: 'section.list'|trans|desc('Sections') },
         { value: 'section.view.title.identifier'|trans({ '%identifier%': section.name })|desc('Section: %identifier%') }
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block page_title %}
-    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+    {% include '@ezdesign/parts/page_title.html.twig' with {
         title: 'section.view.title.identifier'|trans({ '%identifier%': section.name })|desc('Section: %identifier%'),
         iconName: 'sections'
     } %}
@@ -37,7 +37,7 @@
                         </svg>
                     </button>
                     {% if deletable %}
-                        {% include 'EzPlatformAdminUiBundle:admin/section:delete_confirmation_modal.html.twig' with {'form': form_section_delete} %}
+                        {% include '@ezdesign/admin/section/delete_confirmation_modal.html.twig' with {'form': form_section_delete} %}
                     {% endif %}
                 {% endif %}
             </div>

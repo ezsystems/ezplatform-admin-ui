@@ -1,8 +1,8 @@
 {% trans_default_domain 'locationview' %}
 
-{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.content_details'|trans()|desc('Content details') } %}
+{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.content_details'|trans()|desc('Content details') } %}
 
-{% form_theme form_location_update '@EzPlatformAdminUi/form_fields.html.twig' %}
+{% form_theme form_location_update '@ezdesign/form_fields.html.twig' %}
 
 <table class="table">
     <thead>
@@ -41,7 +41,7 @@
     </tbody>
 </table>
 
-{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.technical_details'|trans()|desc('Technical details') } %}
+{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.technical_details'|trans()|desc('Technical details') } %}
 
 <table class="table">
     <thead>
@@ -62,7 +62,7 @@
     </tbody>
 </table>
 {% if can_see_section %}
-    {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.section_details'|trans()|desc('Section details') } %}
+    {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.section_details'|trans()|desc('Section details') } %}
 
     <table class="table">
         <thead>
@@ -82,7 +82,7 @@
     </table>
 {% endif %}
 
-{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.state_details'|trans()|desc('State details') } %}
+{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.state_details'|trans()|desc('State details') } %}
 
 <table class="table">
     <thead>
@@ -98,7 +98,7 @@
     </thead>
     <tbody>
     {% for objectState in objectStates %}
-        {% form_theme form_state_update[objectState.objectStateGroup.id] '@EzPlatformAdminUi/form_fields.html.twig' %}
+        {% form_theme form_state_update[objectState.objectStateGroup.id] '@ezdesign/form_fields.html.twig' %}
         <tr>
             <td>{{ objectState.objectStateGroup.name }}</td>
             <td>{{ objectState.objectStateGroup.identifier }}</td>
@@ -128,7 +128,7 @@
     </tbody>
 </table>
 
-{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with {
+{% include '@ezdesign/parts/table_header.html.twig' with {
     headerText: 'tab.details.sub_items_sorting_order'|trans|desc('Sub-items sorting order'),
     ground: 'ground-base'
 } %}

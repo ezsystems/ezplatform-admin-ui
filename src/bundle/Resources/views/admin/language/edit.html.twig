@@ -1,11 +1,11 @@
-{% extends 'EzPlatformAdminUiBundle:admin/language:base.html.twig' %}
+{% extends '@ezdesign/admin/language/base.html.twig' %}
 
-{% form_theme form '@EzPlatformAdminUi/form_fields.html.twig'  %}
+{% form_theme form '@ezdesign/form_fields.html.twig'  %}
 
 {% trans_default_domain 'language' %}
 
 {% block breadcrumbs_admin %}
-    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.language.list'), value: 'language.list'|trans|desc('Languages') },
         { value: 'language.edit.identifier'|trans({ '%language%': language.name })|desc('Editing Language "%language%"') }
@@ -15,7 +15,7 @@
 {% block title %}{{ 'language.edit.identifier'|trans({ '%language%': language.name })|desc('Editing Language "%language%"') }}{% endblock %}
 
 {% block page_title_admin %}
-    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+    {% include '@ezdesign/parts/page_title.html.twig' with {
         title: 'language.edit.identifier'|trans({ '%language%': language.name })|desc('Editing Language "%language%"'),
         iconName: 'languages'
     } %}
@@ -40,5 +40,5 @@
 
 {% block right_sidebar %}
     {% set language_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.language_edit.sidebar_right', [], {'save_id': form.save.vars.id}) %}
-    {{ knp_menu_render(language_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(language_edit_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

@@ -1,20 +1,20 @@
-{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+{% extends "@ezdesign/layout.html.twig" %}
 
-{% form_theme form_content_type_groups_delete '@EzPlatformAdminUi/form_fields.html.twig'  %}
+{% form_theme form_content_type_groups_delete '@ezdesign/form_fields.html.twig'  %}
 
 {% trans_default_domain 'content_type' %}
 
 {% block body_class %}ez-content-type-group-list-view{% endblock %}
 
 {% block breadcrumbs %}
-    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') }
     ]} %}
 {% endblock %}
 
 {% block page_title %}
-    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+    {% include '@ezdesign/parts/page_title.html.twig' with {
         title: 'content_type_group.view.list.title'|trans|desc('Content Type Groups'),
         iconName: 'content-type'
     } %}
@@ -41,7 +41,7 @@
                              xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                     </svg>
                 </button>
-                {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+                {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
                     'id': modal_data_target,
                     'message': 'content_type_group.modal.message'|trans|desc('Do you want to delete Content Type Group?'),
                     'data_click': '#content_type_groups_delete_delete',
