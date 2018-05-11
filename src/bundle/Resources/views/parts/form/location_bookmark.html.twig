@@ -1,0 +1,18 @@
+{% trans_default_domain 'locationview' %}
+
+<div>
+    {% if form.vars.value.bookmarked %}
+        <div title = {{ 'location.bookmark.remove'|trans|desc('Remove from Bookmarks') }}>
+            <svg class="ez-icon">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#bookmark-active"></use>
+            </svg>
+        </div>
+    {% else %}
+        <div title = {{ 'location.bookmark.add'|trans|desc('Add to Bookmarks') }}>
+            <svg class="ez-icon">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#bookmark"></use>
+            </svg>
+        </div>
+    {% endif %}
+    {{ form(form, {'action': path('ezplatform.location.update_bookmark')})}}
+</div>
