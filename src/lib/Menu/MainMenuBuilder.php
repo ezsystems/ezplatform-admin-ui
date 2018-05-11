@@ -39,17 +39,17 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     const ITEM_ADMIN__USERS = 'main__admin__users';
     const ITEM_ADMIN__OBJECT_STATES = 'main__admin__object_states';
 
-    /** @var ConfigResolverInterface */
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
-    /** @var PermissionResolver */
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
     /**
-     * @param MenuItemFactory $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param ConfigResolverInterface $configResolver
-     * @param PermissionResolver $permissionResolver
+     * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         MenuItemFactory $factory,
@@ -71,12 +71,9 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     /**
      * @param array $options
      *
-     * @return ItemInterface
+     * @return \Knp\Menu\ItemInterface
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function createStructure(array $options): ItemInterface
     {
@@ -96,6 +93,8 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 
     /**
      * @return array
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     private function getContentMenuItems(): array
     {
@@ -141,6 +140,8 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 
     /**
      * @return array
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     private function getAdminMenuItems(): array
     {
@@ -239,6 +240,8 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 
     /**
      * @return ItemInterface|null
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     private function createLinkManagerMenuItem(): ?ItemInterface
     {

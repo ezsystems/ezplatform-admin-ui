@@ -130,3 +130,7 @@ services:
     EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\ContentOnTheFlyDispatcher:
         calls:
             - [setEventDispatcher, ["@event_dispatcher"]]
+
+    EzSystems\EzPlatformAdminUi\EventListener\MenuPermissionsListener:
+        tags:
+            - {name: kernel.event_subscriber, priority: -250}
