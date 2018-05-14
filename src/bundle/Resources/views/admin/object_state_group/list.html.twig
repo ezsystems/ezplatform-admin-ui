@@ -27,27 +27,34 @@
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'object_state_group.view.list.title'|trans|desc('Object State Groups') }}</div>
             <div>
-                <a title="{{ 'object_state_group.new'|trans|desc('Create a new Object State Group') }}"
-                   href="{{ path('ezplatform.object_state.group.add') }}"
-                   class="btn btn-primary" {% if not can_administrate %} disabled="disabled"{% endif %}>
-                    <svg class="ez-icon ez-icon-create">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
-                    </svg>
-                </a>
-                {% set modal_data_target = 'delete-object-state-groups-modal' %}
-                <button id="delete-object-state-groups" type="button" class="btn btn-danger" disabled data-toggle="modal"
-                        data-target="#{{ modal_data_target }}" title="{{ 'object_state_group.delete.bulk_delete.submit'|trans|desc('Delete Object State Group') }}">
-                    <svg class="ez-icon ez-icon-trash">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-                    </svg>
-                </button>
-                {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
-                    'id': modal_data_target,
-                    'message': 'object_state_group.modal.message'|trans|desc('Do you want to delete Object State Group?'),
-                    'data_click': '#object_state_groups_delete_delete',
-                }%}
+                {% if can_administrate %}
+                    <a
+                        title="{{ 'object_state_group.new'|trans|desc('Create a new Object State Group') }}"
+                        href="{{ path('ezplatform.object_state.group.add') }}"
+                        class="btn btn-primary">
+                        <svg class="ez-icon ez-icon-create">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                        </svg>
+                    </a>
+                    {% set modal_data_target = 'delete-object-state-groups-modal' %}
+                    <button
+                        id="delete-object-state-groups"
+                        type="button"
+                        class="btn btn-danger"
+                        disabled
+                        data-toggle="modal"
+                        data-target="#{{ modal_data_target }}"
+                        title="{{ 'object_state_group.delete.bulk_delete.submit'|trans|desc('Delete Object State Group') }}">
+                        <svg class="ez-icon ez-icon-trash">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        </svg>
+                    </button>
+                    {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+                        'id': modal_data_target,
+                        'message': 'object_state_group.modal.message'|trans|desc('Do you want to delete Object State Group?'),
+                        'data_click': '#object_state_groups_delete_delete',
+                    }%}
+                {% endif %}
             </div>
         </div>
 
@@ -76,16 +83,21 @@
                 {% for object_state_group in object_state_groups %}
                     <tr>
                         <td class="ez-checkbox-cell">
-                            {{ form_widget(form_state_groups_delete.objectStateGroups[object_state_group.id], {"disabled": not can_administrate}) }}
+                            {% if can_administrate %}
+                                {{ form_widget(form_state_groups_delete.objectStateGroups[object_state_group.id]) }}
+                            {% else %}
+                                {% do form_state_groups_delete.objectStateGroups.setRendered %}
+                            {% endif %}
                         </td>
                         <td><a href="{{ path( 'ezplatform.object_state.group.view', {'objectStateGroupId': object_state_group.id} ) }}">{{ object_state_group.name }}</a></td>
                         <td>{{ object_state_group.identifier }}</td>
                         <td>{{ object_state_group.id }}</td>
                         <td class="text-right">
                             {% if can_administrate %}
-                                <a title="{{ 'object_state_group.view.list.action.edit'|trans|desc('Edit') }}"
-                                   href="{{ path('ezplatform.object_state.group.update', {'objectStateGroupId': object_state_group.id}) }}"
-                                   class="btn btn-icon mx-3">
+                                <a
+                                    title="{{ 'object_state_group.view.list.action.edit'|trans|desc('Edit') }}"
+                                    href="{{ path('ezplatform.object_state.group.update', {'objectStateGroupId': object_state_group.id}) }}"
+                                    class="btn btn-icon mx-3">
                                     <svg class="ez-icon ez-icon-edit">
                                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                                     </svg>

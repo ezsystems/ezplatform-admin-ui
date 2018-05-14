@@ -12,6 +12,7 @@ use eZ\Publish\API\Repository\ObjectStateService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateCreateData;
@@ -42,6 +43,9 @@ class ObjectStateController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
     /** @var array */
     private $languages;
 
@@ -51,6 +55,7 @@ class ObjectStateController extends Controller
      * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param array $languages
      */
     public function __construct(
@@ -59,6 +64,7 @@ class ObjectStateController extends Controller
         ObjectStateService $objectStateService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
+        PermissionResolver $permissionResolver,
         array $languages
     ) {
         $this->notificationHandler = $notificationHandler;
@@ -66,6 +72,7 @@ class ObjectStateController extends Controller
         $this->objectStateService = $objectStateService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
+        $this->permissionResolver = $permissionResolver;
         $this->languages = $languages;
     }
 
@@ -125,6 +132,7 @@ class ObjectStateController extends Controller
      */
     public function addAction(Request $request, ObjectStateGroup $objectStateGroup): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
         $defaultLanguageCode = reset($this->languages);
 
         $form = $this->formFactory->createObjectState(
@@ -174,6 +182,7 @@ class ObjectStateController extends Controller
      */
     public function deleteAction(Request $request, ObjectState $objectState): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
         $form = $this->formFactory->deleteObjectState(
             new ObjectStateDeleteData($objectState)
         );
@@ -214,6 +223,7 @@ class ObjectStateController extends Controller
      */
     public function bulkDeleteAction(Request $request, int $objectStateGroupId): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
         $form = $this->formFactory->deleteObjectStates(
             new ObjectStatesDeleteData()
         );
@@ -254,6 +264,7 @@ class ObjectStateController extends Controller
      */
     public function updateAction(Request $request, ObjectState $objectState): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
         $form = $this->formFactory->updateObjectState(
             new ObjectStateUpdateData($objectState)
         );
@@ -300,12 +311,22 @@ class ObjectStateController extends Controller
      * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $objectStateGroup
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function updateContentStateAction(
         Request $request,
         ContentInfo $contentInfo,
         ObjectStateGroup $objectStateGroup
     ): Response {
+        if (!$this->permissionResolver->hasAccess('state', 'assign')) {
+            $exception = $this->createAccessDeniedException();
+            $exception->setAttributes('state');
+            $exception->setSubject('assign');
+
+            throw $exception;
+        }
+
         $form = $this->formFactory->updateContentObjectState(
             new ContentObjectStateUpdateData($contentInfo, $objectStateGroup)
         );

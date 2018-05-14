@@ -107,7 +107,7 @@
             <td>{{ objectState.identifier }}</td>
             <td>{{ objectState.id }}</td>
             <td>
-                {% if form_state_update[objectState.objectStateGroup.id].objectState.vars.choices|length != 0 %}
+                {% if can_assign and form_state_update[objectState.objectStateGroup.id].objectState.vars.choices|length != 0 %}
                     {{ form_start(form_state_update[objectState.objectStateGroup.id], {
                         'method': 'POST',
                         'action': path('ezplatform.object_state.contentstate.update', {

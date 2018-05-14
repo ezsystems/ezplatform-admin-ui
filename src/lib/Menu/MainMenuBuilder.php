@@ -222,20 +222,22 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             $menuItems[$usersItem->getName()] = $usersItem;
         }
 
-        $menuItems[self::ITEM_ADMIN__OBJECT_STATES] = $this->createMenuItem(
-            self::ITEM_ADMIN__OBJECT_STATES,
-            ['route' => 'ezplatform.object_state.groups.list', 'extras' => [
-                'routes' => [
-                    'group_list' => 'ezplatform.object_state.groups.list',
-                    'group_create' => 'ezplatform.object_state.group.add',
-                    'group_edit' => 'ezplatform.object_state.group.update',
-                    'group_view' => 'ezplatform.object_state.group.view',
-                    'state_create' => 'ezplatform.object_state.state.add',
-                    'state_view' => 'ezplatform.object_state.state.view',
-                    'state_edit' => 'ezplatform.object_state.state.update',
-                ],
-            ]]
-        );
+        if ($this->permissionResolver->hasAccess('state', 'administrate')) {
+            $menuItems[self::ITEM_ADMIN__OBJECT_STATES] = $this->createMenuItem(
+                self::ITEM_ADMIN__OBJECT_STATES,
+                ['route' => 'ezplatform.object_state.groups.list', 'extras' => [
+                    'routes' => [
+                        'group_list' => 'ezplatform.object_state.groups.list',
+                        'group_create' => 'ezplatform.object_state.group.add',
+                        'group_edit' => 'ezplatform.object_state.group.update',
+                        'group_view' => 'ezplatform.object_state.group.view',
+                        'state_create' => 'ezplatform.object_state.state.add',
+                        'state_view' => 'ezplatform.object_state.state.view',
+                        'state_edit' => 'ezplatform.object_state.state.update',
+                    ],
+                ]]
+            );
+        }
 
         return $menuItems;
     }

@@ -65,10 +65,11 @@ class ContentObjectStateUpdateType extends AbstractType
             $form->add('objectState', ObjectStateChoiceType::class, [
                 'label' => false,
                 'choice_loader' => new CallbackChoiceLoader(function () use ($objectStateGroup, $contentInfo) {
+                    $contentState = $this->objectStateService->getContentState($contentInfo, $objectStateGroup);
                     return array_filter(
                         $this->objectStateService->loadObjectStates($objectStateGroup),
-                        function (ObjectState $objectState) use ($contentInfo) {
-                            return $this->permissionResolver->canUser('state', 'assign', $contentInfo, [$objectState]);
+                        function (ObjectState $objectState) use ($contentInfo, $contentState) {
+                            return $this->permissionResolver->canUser('state', 'assign', $contentInfo, [$objectState]) && $contentState->id !== $objectState->id;
                         }
                     );
                 }),
