@@ -17,19 +17,27 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
+use eZ\Publish\API\Repository\PermissionResolver;
 
 class SearchType extends AbstractType
 {
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    public function __construct(TranslatorInterface $translator)
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
+    public function __construct(TranslatorInterface $translator, PermissionResolver $permissionResolver)
     {
         $this->translator = $translator;
+        $this->permissionResolver = $permissionResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -37,11 +45,6 @@ class SearchType extends AbstractType
             ->add('query', CoreSearchType::class, ['required' => false])
             ->add('page', HiddenType::class)
             ->add('limit', HiddenType::class)
-            ->add('section', SectionChoiceType::class, [
-                'required' => false,
-                'multiple' => false,
-                'placeholder' => /** @Desc("Any section") */ 'search.section.any',
-            ])
             ->add('content_types', ContentTypeChoiceType::class, [
                 'multiple' => true,
                 'expanded' => true,
@@ -62,6 +65,14 @@ class SearchType extends AbstractType
                 'mapped' => false,
             ])
         ;
+
+        if ($this->permissionResolver->hasAccess('section', 'view')) {
+            $builder->add('section', SectionChoiceType::class, [
+                'required' => false,
+                'multiple' => false,
+                'placeholder' => /** @Desc("Any section") */ 'search.section.any',
+            ]);
+        }
     }
 
     /**

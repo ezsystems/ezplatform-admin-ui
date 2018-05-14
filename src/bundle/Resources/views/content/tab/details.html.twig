@@ -61,25 +61,26 @@
     </tr>
     </tbody>
 </table>
+{% if can_see_section %}
+    {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.section_details'|trans()|desc('Section details') } %}
 
-{% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.section_details'|trans()|desc('Section details') } %}
-
-<table class="table">
-    <thead>
-    <tr>
-        <th>{{ 'tab.details.section_name'|trans()|desc('Section name') }}</th>
-        <th>{{ 'tab.details.section_identifier'|trans()|desc('Section identifier') }}</th>
-        <th>{{ 'tab.details.section_id'|trans()|desc('Section ID') }}</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>{{ section.name }}</td>
-        <td>{{ section.identifier }}</td>
-        <td>{{ section.id }}</td>
-    </tr>
-    </tbody>
-</table>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>{{ 'tab.details.section_name'|trans()|desc('Section name') }}</th>
+            <th>{{ 'tab.details.section_identifier'|trans()|desc('Section identifier') }}</th>
+            <th>{{ 'tab.details.section_id'|trans()|desc('Section ID') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ section.name }}</td>
+            <td>{{ section.identifier }}</td>
+            <td>{{ section.id }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
 
 {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.details.state_details'|trans()|desc('State details') } %}
 

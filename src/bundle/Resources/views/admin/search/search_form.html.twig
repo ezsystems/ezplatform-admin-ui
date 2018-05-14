@@ -27,10 +27,12 @@
         </select>
         {{ form_widget(form.content_types, {'attr': {'class': 'ez-filters__select'}}) }}
     </div>
-    <div class="ez-filters__item ez-filters__item--section">
-        <label class="ez-filters__item-label">{{ 'search.section'|trans|desc('Section:') }}</label>
-        {{ form_widget(form.section, {'attr': {'class': 'ez-filters__select'}}) }}
-    </div>
+    {% if form.section is defined %}
+        <div class="ez-filters__item ez-filters__item--section">
+            <label class="ez-filters__item-label">{{ 'search.section'|trans|desc('Section:') }}</label>
+            {{ form_widget(form.section, {'attr': {'class': 'ez-filters__select'}}) }}
+        </div>
+    {% endif %}
     <div class="ez-filters__item ez-filters__item--modified">
         <label class="ez-filters__item-label">{{ 'search.last.modified'|trans|desc('Last modified:') }}</label>
         {{ form_widget(form.last_modified_select, {'attr': {'class': 'ez-filters__select', 'data-target-selector': '.ez-modal--select-modified-range'}}) }}

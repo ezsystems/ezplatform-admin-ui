@@ -36,7 +36,11 @@
             checkbox.removeAttribute('checked');
             checkbox.checked = false;
         });
-        sectionSelect[0].selected = true;
+
+        if (sectionSelect) {
+            sectionSelect[0].selected = true;
+        }
+
         lastModifiedSelect[0].selected = true;
         lastCreatedSelect[0].selected = true;
         lastModifiedSelect.querySelector('option').selected = true;
@@ -52,7 +56,7 @@
     const toggleDisabledStateOnApplyBtn = () => {
         const contentTypeOption = contentTypeSelect.querySelector('option');
         const isContentTypeSelected = contentTypeOption.innerHTML !== contentTypeOption.dataset.default;
-        const isSectionSelected = !!sectionSelect.value;
+        const isSectionSelected = sectionSelect ? !!sectionSelect.value : false;
         const isModifiedSelected = !!lastModifiedSelect.value;
         const isCreatedSelected = !!lastCreatedSelect.value;
         const isCreatorSelected = !!searchCreatorInput.value;
@@ -259,7 +263,11 @@
     clearBtn.addEventListener('click', clearFilters, false);
     filterBtn.addEventListener('click', toggleFiltersVisibility, false);
     contentTypeSelect.addEventListener('click', toggleContentTypeSelectorVisibility, false);
-    sectionSelect.addEventListener('change', toggleDisabledStateOnApplyBtn, false);
+
+    if (sectionSelect) {
+        sectionSelect.addEventListener('change', toggleDisabledStateOnApplyBtn, false);
+    }
+
     lastModifiedSelect.addEventListener('change', toggleModalVisibility, false);
     lastCreatedSelect.addEventListener('change', toggleModalVisibility, false);
     creatorInput.addEventListener('keyup', handleTyping, false);
