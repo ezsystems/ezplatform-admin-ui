@@ -8,10 +8,10 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\DoubleHeaderTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\DoubleHeaderTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\SimpleTable;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\SystemInfoTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SimpleTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SystemInfoTable;
 
 class ContentTypePage extends Page
 {

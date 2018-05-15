@@ -5,7 +5,7 @@ Feature: System info verification
 
   Background:
     Given I am logged as "admin"
-    And I go to "System Information" in "Admin" tab
+      And I go to "System Information" in "Admin" tab
 
   @javascript @common
   Scenario: Check Composer System Information

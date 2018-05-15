@@ -53,7 +53,9 @@ Feature: Languages management
   Scenario: Changes can be discarded while editing Language
     Given there's "Deutsch" on "Languages" list
     When I start editing "Language" "Deutsch"
-      And I set "Name" to "Edited Deutsch"
+      And I set fields
+        | label | value          |
+        | Name  | Edited Deutsch |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Languages" page
       And there's "Deutsch" on "Languages" list
@@ -81,7 +83,9 @@ Feature: Languages management
     Given there's "Edited Deutsch" on "Languages" list
       And "Edited Deutsch" on "Languages" list has attribute "Enabled" set to "false"
     When I start editing "Language" "Edited Deutsch"
-      And I set "Enabled" to "true"
+      And I set fields
+        | label   | value |
+        | Enabled | true  |
       And I click on the edit action bar button "Save"
     Then I should be on "Language" "Edited Deutsch" page
       And notification that "Language" "Edited Deutsch" is updated appears

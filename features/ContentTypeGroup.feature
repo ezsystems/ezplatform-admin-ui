@@ -10,7 +10,9 @@ Feature: Content type groups management
   @javascript @common
   Scenario: Changes can be discarded while creating new Content Type Group
     When I start creating new "Content Type Group"
-      And I set "Name" to "Test Content Type Group"
+      And I set fields
+        | label | value    |
+        | Name  | Test Content Type Group |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Content Type Groups" page
       And there's no "Test Content Type Group" on "Content Type Groups" list
@@ -18,7 +20,9 @@ Feature: Content type groups management
   @javascript @common
   Scenario: New Content Type Group can be added
     When I start creating new "Content Type Group"
-      And I set "Name" to "Test Content Type Group"
+      And I set fields
+        | label | value    |
+        | Name  | Test Content Type Group |
       And I click on the edit action bar button "Create"
     Then I should be on "Content Type Group" "Test Content Type Group" page
       And "Content Types" list in "Content Type Group" "Test Content Type Group" is empty
@@ -33,7 +37,9 @@ Feature: Content type groups management
   Scenario: Changes can be discarded while editing Content Type Group
     Given there's "Test Content Type Group" on "Content Type Groups" list
     When I start editing "Content Type Group" "Test Content Type Group"
-      And I set "Name" to "Test Content Type Group edited"
+      And I set fields
+        | label | value           |
+        | Name  | Test Content Type Group edited |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Content Type Groups" page
       And there's "Test Content Type Group" on "Content Type Groups" list
@@ -43,7 +49,9 @@ Feature: Content type groups management
   Scenario: Content Type Group can be edited
     Given there's "Test Content Type Group" on "Content Type Groups" list
     When I start editing "Content Type Group" "Test Content Type Group"
-      And I set "Name" to "Test Content Type Group edited"
+      And I set fields
+        | label | value                          |
+        | Name  | Test Content Type Group edited |
       And I click on the edit action bar button "Save"
     Then I should be on "Content Type Group" "Test Content Type Group edited" page
       And notification that "Content type group" "Test Content Type Group" is updated appears
@@ -52,7 +60,7 @@ Feature: Content type groups management
   Scenario: Content type group can be deleted
     Given there's empty "Test Content Type Group edited" on "Content Type Groups" list
     When I delete "Content Type Group"
-      | item                           |
+      | item            |
       | Test Content Type Group edited |
     Then there's no "Test Content Type Group edited" on "Content Type Groups" list
       And notification that "Content type group" "Test Content Type Group edited" is deleted appears

@@ -4,9 +4,10 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
+namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Element;
 
 abstract class Table extends Element
 {
@@ -16,7 +17,7 @@ abstract class Table extends Element
         $this->fields = [
             'list' => $containerLocator,
             'tableCell' => $containerLocator . ' tr:nth-child(%d) td:nth-child(%d)',
-            'editButton' => $containerLocator . ' tr:nth-child(%s) a[title=Edit]',
+            'editButton' => $containerLocator . ' tr:nth-child(%s) .ez-icon-edit',
             'listRow' => $containerLocator . ' tbody tr',
         ];
     }

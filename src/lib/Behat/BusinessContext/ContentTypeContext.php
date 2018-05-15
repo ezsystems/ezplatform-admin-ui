@@ -61,7 +61,6 @@ class ContentTypeContext extends BusinessContext
      */
     public function contentTypeHasProperFields(string $contentTypeName, TableNode $table): void
     {
-        $contentTypePage = PageObjectFactory::createPage($this->utilityContext, ContentTypePage::PAGE_NAME, $contentTypeName);
         $hash = $table->getHash();
         foreach ($hash as $row) {
             $this->contentTypeHasField($contentTypeName, $row['fieldName'], $row['fieldType']);
