@@ -8,9 +8,9 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\DoubleHeaderTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\DoubleHeaderTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\VerticalOrientedTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\VerticalOrientedTable;
 
 class ContentTypePage extends Page
 {

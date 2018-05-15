@@ -10,7 +10,9 @@ Feature: Roles management
   @javascript @common
   Scenario: Changes can be discarded while creating Role
     When I start creating new "Role"
-      And I set "Name" to "Test Role"
+      And I set fields
+        | label | value     |
+        | Name  | Test Role |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Roles" page
       And there's no "Test Role" on "Roles" list
@@ -18,7 +20,9 @@ Feature: Roles management
   @javascript @common
   Scenario: New Role can be created
     When I start creating new "Role"
-      And I set "Name" to "Test Role"
+      And I set fields
+        | label | value     |
+        | Name  | Test Role |
       And I click on the edit action bar button "Create"
     Then I should be on "Role" "Test Role" page
       And "Policies" list in "Role" "Test Role" is empty
@@ -34,7 +38,9 @@ Feature: Roles management
   Scenario: Changes can be discarded while editing Role
     Given there's "Test Role" on "Roles" list
     When I start editing "Role" "Test Role"
-      And I set "Name" to "Test Role edited"
+      And I set fields
+        | label | value            |
+        | Name  | Test Role edited |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Roles" page
       And there's "Test Role" on "Roles" list
@@ -44,7 +50,9 @@ Feature: Roles management
   Scenario: Role can be edited
     Given there's "Test Role" on "Roles" list
     When I start editing "Role" "Test Role"
-      And I set "Name" to "Test Role edited"
+      And I set fields
+        | label | value            |
+        | Name  | Test Role edited |
       And I click on the edit action bar button "Save"
     Then I should be on "Role" "Test Role edited" page
       And "Policies" list in "Role" "Test Role" is empty
@@ -56,9 +64,9 @@ Feature: Roles management
     When I start assigning to "Test Role edited" from "Roles" page
       And I select "Administrator User" from "User"
       And I select options from "Group"
-      | option  |
-      | Editors |
-      | Users   |
+        | option  |
+        | Editors |
+        | Users   |
       And I select "Media" from Sections as role assignment limitation
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Role" "Test Role edited" page
@@ -70,19 +78,19 @@ Feature: Roles management
     Given there's "Test Role edited" on "Roles" list
     When I start assigning to "Test Role edited" from "Roles" page
       And I select options from "User"
-      | option             |
-      | Administrator User |
-      | Anonymous User     |
+        | option             |
+        | Administrator User |
+        | Anonymous User     |
       And I select "Editors" from "Group"
       And I select limitation "Media/Images" for assignment through UDW
       And I click on the edit action bar button "Save"
     Then I should be on "Role" "Test Role edited" page
       And "Policies" list in "Role" "Test Role edited" is empty
       And There are assignments on the "Test Role edited" assignments list
-      | user/group          | limitation                         |
-      | Administrator User  | Subtree of Location: /Media/Images |
-      | Anonymous User      | Subtree of Location: /Media/Images |
-      | Editors             | Subtree of Location: /Media/Images |
+        | user/group          | limitation                         |
+        | Administrator User  | Subtree of Location: /Media/Images |
+        | Anonymous User      | Subtree of Location: /Media/Images |
+        | Editors             | Subtree of Location: /Media/Images |
 
   @javascript @common
   Scenario: User can be assigned to role from the Role details view
@@ -94,11 +102,11 @@ Feature: Roles management
     Then I should be on "Role" "Test Role edited" page
       And "Policies" list in "Role" "Test Role edited" is empty
       And There are assignments on the "Test Role edited" assignments list
-      | user/group          | limitation                         |
-      | Administrator User  | Subtree of Location: /Media/Images |
-      | Editors             | Subtree of Location: /Media/Images |
-      | Anonymous User      | Subtree of Location: /Media/Images |
-      | Users	            | None                               |
+        | user/group          | limitation                         |
+        | Administrator User  | Subtree of Location: /Media/Images |
+        | Editors             | Subtree of Location: /Media/Images |
+        | Anonymous User      | Subtree of Location: /Media/Images |
+        | Users	            | None                               |
 
   @javascript @common
   Scenario: Assignment can be deleted from role
@@ -141,18 +149,18 @@ Feature: Roles management
       And I go to "Test Role edited" "Role" page
     When I start editing "Policy" "Content" from "Test Role edited"
       And I select options from "Class"
-      | option  |
-      | Article |
-      | Folder  |
+        | option  |
+        | Article |
+        | Folder  |
       And I select subtree limitation "Users/Anonymous Users" for policy through UDW
       And I select "Lock:Locked" from "State"
       And I click on the edit action bar button "Update"
     Then I should be on "Role" "Test Role edited" page
       And There are policies on the "Test Role edited" policies list
-      | policy       | limitation                                  |
-      | Content/Read | Content Type: Article, Folder               |
-      | Content/Read | Subtree of Location: /Users/Anonymous Users |
-      | Content/Read | State: Lock:Locked                          |
+        | policy       | limitation                                  |
+        | Content/Read | Content Type: Article, Folder               |
+        | Content/Read | Subtree of Location: /Users/Anonymous Users |
+        | Content/Read | State: Lock:Locked                          |
       And There's an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common
@@ -170,7 +178,7 @@ Feature: Roles management
   Scenario: Role can be deleted
     Given there's "Test Role edited" on "Roles" list
     When I delete "Role"
-      | item           |
+      | item            |
       | Test Role edited |
     Then there's no "Test Role edited" on "Roles" list
       And notification that "Role" "Test Role edited" is removed appears

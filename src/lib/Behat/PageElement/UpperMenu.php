@@ -20,6 +20,7 @@ class UpperMenu extends Element
         $this->fields = [
             'menuButton' => '.ez-main-nav .nav-link',
             'submenuButton' => '.ez-main-sub-nav .nav-link',
+            'dashboardLink' => '.navbar-brand',
         ];
     }
 
@@ -31,6 +32,16 @@ class UpperMenu extends Element
     public function goToTab(string $tabName): void
     {
         $this->context->getElementByText($tabName, $this->fields['menuButton'])->click();
+    }
+
+    /**
+     * Clicks on top menu dashboard link.
+     *
+     * @param $tabName
+     */
+    public function goToDashboard(): void
+    {
+        $this->context->findElement($this->fields['dashboardLink'])->click();
     }
 
     /**

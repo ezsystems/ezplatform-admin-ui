@@ -11,6 +11,9 @@ use PHPUnit\Framework\Assert;
 
 class LeftMenu extends Element
 {
+    /** @var string Name by which Element is recognised */
+    public const ELEMENT_NAME = 'LeftMenu';
+
     public function __construct(UtilityContext $context)
     {
         parent::__construct($context);

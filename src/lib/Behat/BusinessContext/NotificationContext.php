@@ -16,18 +16,30 @@ class NotificationContext extends BusinessContext
     /**
      * @Then notification that :itemType :itemName is :action appears
      */
-    public function notificationAppears(string $itemType, string $itemName, string $action): void
+    public function notificationAppears(string $itemType, ?string $itemName = null, string $action): void
     {
         $notification = ElementFactory::createElement($this->utilityContext, Notification::ELEMENT_NAME);
         $notification->verifyVisibility();
         $notification->verifyAlertSuccess();
-        Assert::assertEquals(sprintf('%s \'%s\' %s.', $itemType, $itemName, $action), $notification->getMessage());
+        $msg = !$itemName ? sprintf('%s %s.', $itemType, $action) : sprintf('%s \'%s\' %s.', $itemType, $itemName, $action);
+        Assert::assertEquals($msg, $notification->getMessage());
+    }
+
+    /**
+     * @Then success notification that :message appears
+     */
+    public function specificNotificationAppears(string $message): void
+    {
+        $notification = ElementFactory::createElement($this->utilityContext, Notification::ELEMENT_NAME);
+        $notification->verifyVisibility();
+        $notification->verifyAlertSuccess();
+        Assert::assertEquals($message, $notification->getMessage());
     }
 
     /**
      * @Then error notification that :message appears
      */
-    public function errorNotificationAppears(string $message): void
+    public function specificErrorNotificationAppears(string $message): void
     {
         $notification = ElementFactory::createElement($this->utilityContext, Notification::ELEMENT_NAME);
         $notification->verifyVisibility();
