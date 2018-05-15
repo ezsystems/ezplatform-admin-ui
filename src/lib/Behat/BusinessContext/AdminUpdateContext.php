@@ -7,6 +7,8 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Notification;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\AdminUpdateItemPage;
 
@@ -46,6 +48,10 @@ class AdminUpdateContext extends BusinessContext
         $updateItemPage->adminUpdateForm->selectFieldDefinition($fieldName);
         $updateItemPage->adminUpdateForm->clickAddFieldDefinition();
         $updateItemPage->adminUpdateForm->verifyNewFieldDefinitionFormExists($fieldName);
+        $notification = ElementFactory::createElement($this->utilityContext, Notification::ELEMENT_NAME);
+        $notification->verifyVisibility();
+        $notification->verifyAlertSuccess();
+        $notification->closeAlert();
     }
 
     /**

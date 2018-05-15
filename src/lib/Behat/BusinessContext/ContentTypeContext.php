@@ -63,14 +63,7 @@ class ContentTypeContext extends BusinessContext
     {
         $hash = $table->getHash();
         foreach ($hash as $row) {
-            $actualFieldType = PageObjectFactory::createPage($this->utilityContext, ContentTypePage::PAGE_NAME, $contentTypeName)
-                ->contentAdminList->table->getTableCellValue('Type', $row['fieldName']);
-
-            Assert::assertEquals(
-                $row['fieldType'],
-                $actualFieldType,
-                sprintf('Content Type field %s has wrong type', $row['fieldName'])
-            );
+            $this->contentTypeHasField($contentTypeName, $row['fieldName'], $row['fieldType']);
         }
     }
 }
