@@ -107,7 +107,9 @@ class LanguageController extends Controller
         return $this->render('@EzPlatformAdminUi/admin/language/list.html.twig', [
             'pager' => $pagerfanta,
             'form_languages_delete' => $deleteLanguagesForm->createView(),
+            /* @deprecated since version 2.2, to be removed in 3.0. Use 'can_administrate' instead. */
             'canEdit' => $this->isGranted(new Attribute('content', 'translations')),
+            /* @deprecated since version 2.2, to be removed in 3.0. Use 'can_administrate' instead. */
             'canAssign' => $this->isGranted(new Attribute('content', 'translations')),
             'can_administrate' => $this->isGranted(new Attribute('content', 'translations')),
         ]);
@@ -129,7 +131,9 @@ class LanguageController extends Controller
         return $this->render('@EzPlatformAdminUi/admin/language/view.html.twig', [
             'language' => $language,
             'deleteForm' => $deleteForm->createView(),
+            /* @deprecated since version 2.2, to be removed in 3.0. Use 'can_administrate' instead. */
             'canEdit' => $this->isGranted(new Attribute('content', 'translations')),
+            /* @deprecated since version 2.2, to be removed in 3.0. Use 'can_administrate' instead. */
             'canAssign' => $this->isGranted(new Attribute('content', 'translations')),
             'can_administrate' => $this->isGranted(new Attribute('content', 'translations')),
         ]);
