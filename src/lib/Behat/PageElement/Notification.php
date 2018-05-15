@@ -49,4 +49,9 @@ class Notification extends Element
     {
         $this->context->findElement($this->fields['closeAlert'])->click();
     }
+
+    public function isVisible(): bool
+    {
+        return $this->context->checkVisibilityByClass($this->fields['alert']);
+    }
 }

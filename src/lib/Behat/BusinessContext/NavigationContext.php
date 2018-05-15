@@ -9,7 +9,9 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Breadcrumb;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UpperMenu;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentItemPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use PHPUnit\Framework\Assert;
 
 /** Context for general navigation actions */
 class NavigationContext extends BusinessContext
@@ -21,6 +23,15 @@ class NavigationContext extends BusinessContext
     {
         $page = PageObjectFactory::createPage($this->utilityContext, $pageName);
         $page->open();
+    }
+
+    /**
+     * @Given I go to dashboard
+     */
+    public function iGoToDashboard(): void
+    {
+        $upperMenu = ElementFactory::createElement($this->utilityContext, UpperMenu::ELEMENT_NAME);
+        $upperMenu->goToDashboard();
     }
 
     /**
@@ -64,5 +75,28 @@ class NavigationContext extends BusinessContext
         $breadcrumb = ElementFactory::createElement($this->utilityContext, Breadcrumb::ELEMENT_NAME);
         $breadcrumb->verifyVisibility();
         $breadcrumb->clickBreadcrumbItem($element);
+    }
+
+    /**
+     * @Given I navigate to content :contentName of type :contentType in :path
+     */
+    public function iNavigateToContent(string $contentName, string $contentType, string $path)
+    {
+        $contentPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName);
+        $contentPage->navigateToPath($path);
+        $contentPage->goToSubItem($contentName, $contentType);
+    }
+
+    /**
+     * @Then breadcrumb shows :path path
+     */
+    public function verifyIfBreadcrumbShowsPath(string $path): void
+    {
+        $breadcrumb = ElementFactory::createElement($this->utilityContext, Breadcrumb::ELEMENT_NAME);
+        Assert::assertEquals(
+            str_replace('/', ' ', $path),
+            $breadcrumb->getBreadcrumb(),
+            'Breadcrumb shows invalid path'
+        );
     }
 }

@@ -10,8 +10,8 @@ use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\NavLinkTabs;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\SimpleTable;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\SystemInfoTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SimpleTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SystemInfoTable;
 use PHPUnit\Framework\Assert;
 
 class SystemInfoPage extends Page

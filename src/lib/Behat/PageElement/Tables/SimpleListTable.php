@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
+namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 
 use Behat\Mink\Element\NodeElement;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
@@ -77,5 +77,17 @@ class SimpleListTable extends Table
     public function clickEditButton(string $listItemName): void
     {
         $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
+    }
+
+    /**
+     * Check if list contains link element with given name.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function isElementInTable(string $name): bool
+    {
+        return $this->context->getElementByText($name, $this->fields['listElement']) !== null;
     }
 }

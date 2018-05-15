@@ -11,7 +11,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\RolePage;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\UpdateItemPage;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\AdminUpdateItemPage;
 use PHPUnit\Framework\Exception;
 
 class RolesContext extends BusinessContext
@@ -46,8 +46,8 @@ class RolesContext extends BusinessContext
         $buttonNo = 0;
 
         if ('assignment' === $tabName) {
-            PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME)
-                ->updateForm->fillFieldWithValue('Subtree', 'true');
+            PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME)
+                ->adminUpdateForm->fillFieldWithValue('Subtree', 'true');
             $buttonLabel = 'Select Subtree';
         }
 
@@ -55,8 +55,8 @@ class RolesContext extends BusinessContext
             $buttonNo = 1;
         }
 
-        $pageObject = PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME);
-        $pageObject->updateForm->clickButton($buttonLabel, $buttonNo);
+        $pageObject = PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME);
+        $pageObject->adminUpdateForm->clickButton($buttonLabel, $buttonNo);
 
         $udw = ElementFactory::createElement($this->utilityContext, UniversalDiscoveryWidget::ELEMENT_NAME);
         $udw->verifyVisibility();
@@ -163,8 +163,8 @@ class RolesContext extends BusinessContext
      */
     public function iSelectSectionLimitation(string $limitationName): void
     {
-        PageObjectFactory::createPage($this->utilityContext, UpdateItemPage::PAGE_NAME)
-            ->updateForm->fillFieldWithValue('Sections', 'true');
+        PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME)
+            ->adminUpdateForm->fillFieldWithValue('Sections', 'true');
         $this->utilityContext->selectOption($this->fields['newPolicyAssignmentLimitation'], $limitationName);
     }
 }

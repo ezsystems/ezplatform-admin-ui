@@ -9,7 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\SimpleTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SimpleTable;
 use PHPUnit\Framework\Assert;
 
 class LanguagePage extends Page

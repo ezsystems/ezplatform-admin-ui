@@ -18,6 +18,7 @@ class Breadcrumb extends Element
     {
         parent::__construct($context);
         $this->fields = [
+            'breadcrumb' => '.breadcrumb',
             'breadcrumbItem' => '.breadcrumb-item',
             'breadcrumbItemLink' => '.breadcrumb-item a',
             'activeBreadcrumb' => '.breadcrumb-item.active',
@@ -37,5 +38,10 @@ class Breadcrumb extends Element
     public function getActiveName(): string
     {
         return $this->context->findElement($this->fields['activeBreadcrumb'])->getText();
+    }
+
+    public function getBreadcrumb(): string
+    {
+        return $this->context->findElement($this->fields['breadcrumb'])->getText();
     }
 }

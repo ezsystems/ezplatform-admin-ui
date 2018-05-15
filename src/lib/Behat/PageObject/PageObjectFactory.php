@@ -21,7 +21,7 @@ class PageObjectFactory
      * @param string $pageName Name of the Page to creator
      * @param null[]|string[] $parameters additional parameters
      *
-     * @return LoginPage|ObjectStateGroupsPage|ObjectStateGroupPage|ObjectStatePage|SystemInfoPage|DashboardPage|ContentStructurePage|ContentTypeGroupsPage|SectionPage|SectionsPage|UpdateItemPage|ContentTypePage|FormManagerPage|FormDetailsPage|FormDeletionConfirmationPage|LanguagesPage|LanguagePage|RolesPage|RolePage
+     * @return LoginPage|TrashPage|ContentPreviewPage|ObjectStateGroupsPage|ObjectStateGroupPage|ObjectStatePage|SystemInfoPage|DashboardPage|ContentItemPage|ContentTypeGroupsPage|SectionPage|SectionsPage|ContentUpdateItemPage|AdminUpdateItemPage|ContentTypePage|FormManagerPage|FormDetailsPage|FormDeletionConfirmationPage|LanguagesPage|LanguagePage|RolesPage|RolePage
      */
     public static function createPage(UtilityContext $context, string $pageName, ?string ...$parameters): Page
     {
@@ -30,12 +30,14 @@ class PageObjectFactory
                 return new LoginPage($context);
             case DashboardPage::PAGE_NAME:
                 return new DashboardPage($context);
-            case ContentStructurePage::PAGE_NAME:
-                return new ContentStructurePage($context);
+            case ContentItemPage::PAGE_NAME:
+                return new ContentItemPage($context, $parameters[0]);
             case ContentTypeGroupsPage::PAGE_NAME:
                 return new ContentTypeGroupsPage($context);
-            case UpdateItemPage::PAGE_NAME:
-                return new UpdateItemPage($context);
+            case AdminUpdateItemPage::PAGE_NAME:
+                return new AdminUpdateItemPage($context);
+            case ContentUpdateItemPage::PAGE_NAME:
+                return new ContentUpdateItemPage($context, $parameters[0]);
             case ContentTypeGroupPage::PAGE_NAME:
                 return new ContentTypeGroupPage($context, $parameters[0]);
             case ContentTypePage::PAGE_NAME:
@@ -60,6 +62,10 @@ class PageObjectFactory
                 return new ObjectStateGroupPage($context, $parameters[0]);
             case ObjectStatePage::PAGE_NAME:
                 return new ObjectStatePage($context, $parameters[0]);
+            case ContentPreviewPage::PAGE_NAME:
+                return new ContentPreviewPage($context, $parameters[0]);
+            case TrashPage::PAGE_NAME:
+                return new TrashPage($context);
             case FormManagerPage::PAGE_NAME:
                 return new FormManagerPage($context);
             case FormDetailsPage::PAGE_NAME:

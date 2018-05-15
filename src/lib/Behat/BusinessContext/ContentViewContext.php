@@ -6,14 +6,17 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
+use Behat\Gherkin\Node\TableNode;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Breadcrumb;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\DraftConflictDialog;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\LanguagePicker;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\LeftMenu;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentStructurePage;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentItemPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
-use EzSystems\EzPlatformAdminUi\UI\Value\Content\Language;
 use PHPUnit\Framework\Assert;
 
 class ContentViewContext extends BusinessContext
@@ -23,23 +26,19 @@ class ContentViewContext extends BusinessContext
      */
     public function startCreatingNewLandingPage(string $name): void
     {
-        $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
-        $updatePage = $contentStructurePage->startCreatingContent('Landing page');
+        $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, 'Home');
+        $updatePage = $contentItemPage->startCreatingContent('Landing page');
 
-        $updatePage->updateForm->fillFIeldWithValue('Title', $name);
-        $updatePage->updateForm->fillFIeldWithValue('Description', $name);
+        $updatePage->contentUpdateForm->fillFieldWithValue('Title', ['value' => $name]);
+        $updatePage->contentUpdateForm->fillFIeldWithValue('Description', ['value' => $name]);
     }
 
     /**
-     * @Given I start creating a new Article :name
+     * @Given I start creating a new content :contentType
      */
-    public function startCreatingArticle(string $name): void
+    public function startCreatingContent(string $contentType): void
     {
-        $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
-        $updatePage = $contentStructurePage->startCreatingContent('Article');
-
-        $updatePage->updateForm->fillFIeldWithValue('Title', $name);
-        $updatePage->updateForm->fillRichtextWithValue('Test desc');
+        PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, 'Home')->startCreatingContent($contentType);
     }
 
     /**
@@ -81,7 +80,121 @@ class ContentViewContext extends BusinessContext
      */
     public function iSeeTitle(string $title): void
     {
-        $contentStructurePage = PageObjectFactory::createPage($this->utilityContext, ContentStructurePage::PAGE_NAME);
-        Assert::assertEquals($title, $contentStructurePage->getPageTitle());
+        $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, 'Home');
+        Assert::assertEquals($title, $contentItemPage->getPageTitle());
+    }
+
+    /**
+     * @Then there's no :itemName :itemType on :folder Sub-items list
+     */
+    public function verifyThereIsNoItemInSubItemList(string $itemName, string $itemType, string $folder): void
+    {
+        $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $folder);
+
+        Assert::assertFalse(
+            $contentItemPage->subItemList->table->isElementInTable($itemName, $itemType),
+            sprintf('%s "%s" shouldn\'t be on %s Sub-items list', $itemType, $itemName, $folder)
+        );
+    }
+
+    /**
+     * @Given I should be on content item page :contentName of type :contentType
+     * @Given I should be on content item page :contentName of type :contentType in :path
+     */
+    public function verifyImOnContentItemPage(string $contentName, string $contentType, ?string $path = null)
+    {
+        $path = !$path ? $contentName : $path . '/' . $contentName;
+        $spacedPath = str_replace('/', ' ', $path);
+
+        $contentPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName);
+        $contentPage->verifyIsLoaded();
+        $contentPage->verifyContentType($contentType);
+        $breadcrumb = ElementFactory::createElement($this->utilityContext, Breadcrumb::ELEMENT_NAME);
+        Assert::assertEquals($spacedPath, $breadcrumb->getBreadcrumb(), 'Wrong content location');
+    }
+
+    /**
+     * @Given I should be on content container page :contentName of type :contentType
+     * @Given I should be on content container page :contentName of type :contentType in :path
+     */
+    public function verifyImOnContentContainerPage(string $contentName, string $contentType, ?string $path = null)
+    {
+        $this->verifyImOnContentItemPage($contentName, $contentType, $path);
+
+        PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName)->verifySubItemListVisibility();
+    }
+
+    /**
+     * @Then content attributes equal
+     */
+    public function contentAttributesEqual(TableNode $parameters): void
+    {
+        $hash = $parameters->getHash();
+        $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, '');
+        foreach ($hash as $field) {
+            $contentItemPage->contentField->verifyFieldHasValue($field['label'], $field['value']);
+        }
+    }
+
+    /**
+     * @When I start creating new draft from draft conflict modal
+     */
+    public function startCreatingNewDraftFromDraftConflictModal(): void
+    {
+        $draftConflictModal = ElementFactory::createElement($this->utilityContext, DraftConflictDialog::ELEMENT_NAME);
+        $draftConflictModal->createNewDraft();
+    }
+
+    /**
+     * @When I start editing draft with ID :draftID from draft conflict modal
+     */
+    public function startEditingDraftFromDraftConflictModal(string $draftID): void
+    {
+        $draftConflictModal = ElementFactory::createElement($this->utilityContext, DraftConflictDialog::ELEMENT_NAME);
+        $draftConflictModal->dashboardTable->clickEditButton($draftID);
+    }
+
+    /**
+     * @Then going to :path there is no :contentName :contentType on Sub-items list
+     */
+    public function goingToPathTheresNoSubItem(string $path, string $contentName, string $contentType): void
+    {
+        $contentPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName);
+        $contentPage->navigateToPath($path);
+
+        $explodedPath = explode('/', $path);
+
+        $this->verifyThereIsNoItemInSubItemList($contentName, $contentType, $explodedPath[count($explodedPath) - 1]);
+    }
+
+    /**
+     * @Then going to :path there is a :contentName :contentType on Sub-items list
+     */
+    public function goingToPathTheresSubItem(string $path, string $contentName, string $contentType): void
+    {
+        $contentPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName);
+        $contentPage->navigateToPath($path);
+
+        $explodedPath = explode('/', $path);
+        $pathSize = count($explodedPath);
+
+        $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $explodedPath[$pathSize - 1]);
+
+        Assert::assertTrue(
+            $contentItemPage->subItemList->table->isElementInTable($contentName, $contentType),
+            sprintf('%s "%s" shouldn\'t be on %s Sub-items list', $contentType, $contentName, $explodedPath[$pathSize - 1])
+        );
+    }
+
+    /**
+     * @When I send content to trash
+     */
+    public function iSendContentToTrash(): void
+    {
+        $rightMenu = ElementFactory::createElement($this->utilityContext, RightMenu::ELEMENT_NAME);
+        $rightMenu->clickButton('Send to Trash');
+
+        $dialog = ElementFactory::createElement($this->utilityContext, Dialog::ELEMENT_NAME);
+        $dialog->confirm();
     }
 }

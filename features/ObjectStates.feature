@@ -44,7 +44,9 @@ Feature: Object States management
   Scenario: Changes can be discarded while editing Object State Groups
     Given there's "Test Object State Group" on "Object State Groups" list
     When I start editing "Object State Group" "Test Object State Group"
-      And I set "Name" to "Test Object State Group edited"
+      And I set fields
+        | label | value                          |
+        | Name  | Test Object State Group edited |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Object State Groups" page
       And there's "Test Object State Group" on "Object State Groups" list
@@ -54,7 +56,9 @@ Feature: Object States management
   Scenario: Object State Group can be edited
     Given there's "Test Object State Group" on "Object State Groups" list
     When I start editing "Object State Group" "Test Object State Group"
-      And I set "Name" to "Test Object State Group edited"
+      And I set fields
+        | label | value                          |
+        | Name  | Test Object State Group edited |
       And I click on the edit action bar button "Save"
     Then I should be on "Object State Group" "Test Object State Group edited" page
       And notification that "Object state group" "TestObjectStateGroupIdentifier" is updated appears
@@ -63,7 +67,9 @@ Feature: Object States management
   Scenario: Changes can be discarded while editing Object State Group from group details
     Given I go to "Test Object State Group edited" "Object State Group" page
     When I start editing "Object State Group" "Test Object State Group edited" from details page
-      And I set "Name" to "Test Object State Group edited2"
+      And I set fields
+        | label | value                           |
+        | Name  | Test Object State Group edited2 |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Object State Groups" page
       And there's "Test Object State Group edited" on "Object State Groups" list
@@ -73,7 +79,9 @@ Feature: Object States management
   Scenario: Object State Group can be edited from group details
     Given I go to "Test Object State Group edited" "Object State Group" page
     When I start editing "Object State Group" "Test Object State Group edited" from details page
-      And I set "Name" to "Test Object State Group edited2"
+      And I set fields
+        | label | value                           |
+        | Name  | Test Object State Group edited2 |
       And I click on the edit action bar button "Save"
     Then I should be on "Object State Group" "Test Object State Group edited2" page
       And notification that "Object state group" "TestObjectStateGroupIdentifier" is updated appears
@@ -117,7 +125,9 @@ Feature: Object States management
   Scenario: Changes can be discarded while editing Object State
     Given I go to "Test Object State Group edited2" "Object State Group" page
     When I start editing "Object State" "Test Object State" from "Test Object State Group edited2"
-      And I set "Name" to "Test Object State edited"
+      And I set fields
+        | label | value                    |
+        | Name  | Test Object State edited |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Object State Group" "Test Object State Group edited2" page
       And there's "Test Object State" on "Test Object State Group edited2" Object States list
@@ -127,7 +137,9 @@ Feature: Object States management
   Scenario: Object State can be edited
     Given I go to "Test Object State Group edited2" "Object State Group" page
     When I start editing "Object State" "Test Object State" from "Test Object State Group edited2"
-      And I set "Name" to "Test Object State edited"
+      And I set fields
+        | label | value                    |
+        | Name  | Test Object State edited |
       And I click on the edit action bar button "Save"
     Then I should be on "Object State" "Test Object State edited" page
       And notification that "Object state" "TestObjectStateIdentifier" is updated appears
@@ -141,7 +153,9 @@ Feature: Object States management
     Given I go to "Test Object State Group edited2" "Object State Group" page
       And I go to "Test Object State edited" Object State page from "Test Object State Group edited2"
     When I start editing "Object State" "Test Object State edited" from details page
-      And I set "Name" to "Test Object State edited2"
+      And I set fields
+        | label | value                     |
+        | Name  | Test Object State edited2 |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Object State Group" "Test Object State Group edited2" page
       And there's "Test Object State edited" on "Test Object State Group edited2" Object States list
@@ -152,7 +166,9 @@ Feature: Object States management
     Given I go to "Test Object State Group edited2" "Object State Group" page
       And I go to "Test Object State edited" Object State page from "Test Object State Group edited2"
     When I start editing "Object State" "Test Object State edited" from details page
-      And I set "Name" to "Test Object State edited2"
+      And I set fields
+        | label | value                     |
+        | Name  | Test Object State edited2 |
       And I click on the edit action bar button "Save"
     Then I should be on "Object State" "Test Object State edited2" page
       And notification that "Object state" "TestObjectStateIdentifier" is updated appears

@@ -4,20 +4,22 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
+namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 
+use Behat\Mink\Element\NodeElement;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 
-class SimpleTable extends Table
+class TrashTable extends Table
 {
     /** @var string Name by which Element is recognised */
-    public const ELEMENT_NAME = 'Simple Table';
+    public const ELEMENT_NAME = 'Trash Table';
 
     public function __construct(UtilityContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
-        $this->fields['horizontalHeaders'] = sprintf('%1$s .ez-table__header + .table thead th, %1$s .ez-table-header + .table thead th, .ez-table-header + form thead th', $this->fields['list']);
-        $this->fields['listElement'] = $this->fields['list'] . ' td:nth-child(1)';
+        $this->fields['horizontalHeaders'] = $this->fields['list'] . ' thead th';
+        $this->fields['listElement'] = $this->fields['list'] . ' tbody td:nth-child(2)';
+        $this->fields['checkboxInput'] = $this->fields['list'] . ' tbody td input';
     }
 
     public function getTableCellValue(string $header, ?string $secondHeader = null): string
@@ -26,17 +28,12 @@ class SimpleTable extends Table
             $header,
             $this->fields['horizontalHeaders']
         );
-
-        $rowPosition = $secondHeader ?
-            $this->context->getElementPositionByText($secondHeader, $this->fields['listElement'])
-            : 1;
+        $rowPosition = $this->context->getElementPositionByText(
+            $secondHeader,
+            $this->fields['listElement']
+        );
 
         return $this->getCellValue($rowPosition, $columnPosition);
-    }
-
-    public function clickEditButton(string $listItemName): void
-    {
-        $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
     }
 
     /**
@@ -65,5 +62,32 @@ class SimpleTable extends Table
         }
 
         return $tableHash;
+    }
+
+    /**
+     * Check checkbox left to link element with given name.
+     *
+     * @param string $name
+     */
+    public function selectListElement(string $name): void
+    {
+        $this->selectElement($name, $this->fields['listElement']);
+    }
+
+    public function clickEditButton(string $listItemName): void
+    {
+        $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
+    }
+
+    /**
+     * Check if list contains link element with given name.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function isElementInTable(string $name): bool
+    {
+        return $this->context->getElementByText($name, $this->fields['listElement']) !== null;
     }
 }
