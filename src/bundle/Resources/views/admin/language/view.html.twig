@@ -29,22 +29,25 @@
             <h5>{{ 'language.information.header'|trans|desc('Language information') }}</h5>
 
             <div>
-                {{ form_start(deleteForm, {"action": path("ezplatform.language.delete", {"languageId": language.id, "redirectErrorsTo": "view"})}) }}
+                {% if can_administrate %}
+                    {{ form_start(deleteForm, {"action": path("ezplatform.language.delete", {"languageId": language.id, "redirectErrorsTo": "view"})}) }}
 
-                {{ form_widget(deleteForm.language) }}
-                <button type="button"
+                    {{ form_widget(deleteForm.language) }}
+                    <button
+                        type="button"
                         class="btn btn-danger"
                         data-toggle="modal"
                         title="{{ 'language.delete'|trans|desc('Delete Language') }}"
                         data-target="#delete-language-modal">
-                    <svg class="ez-icon">
-                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-                    </svg>
-                </button>
+                        <svg class="ez-icon">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        </svg>
+                    </button>
 
-                {% include 'EzPlatformAdminUiBundle:admin/language:delete_confirmation_modal.html.twig' with {'deleteForm': deleteForm} %}
+                    {% include 'EzPlatformAdminUiBundle:admin/language:delete_confirmation_modal.html.twig' with {'deleteForm': deleteForm} %}
 
-                {{ form_end(deleteForm) }}
+                    {{ form_end(deleteForm) }}
+                {% endif %}
             </div>
         </header>
 
@@ -64,15 +67,14 @@
                     <td>{{ language.languageCode }}</td>
                     <td>{{ language.id }}</td>
                     <td>
-                        <input type="checkbox" disabled
-                            {% if language.enabled %}
-                                checked title="{{ 'language.enabled'|trans|desc('Enabled') }}"
-                            {% else %}
-                                title="{{ 'language.disabled'|trans|desc('Disabled') }}"
-                            {% endif %}>
+                        <input
+                            type="checkbox"
+                            title="{{ language.enabled ? 'language.enabled'|trans|desc('Enabled') : 'language.enabled'|trans|desc('Enabled') }}"
+                            disabled
+                            {% if language.enabled %}checked{% endif %}>
                     </td>
                     <td class="text-center">
-                        {% if canEdit %}
+                        {% if can_administrate %}
                             <a
                                 href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
                                 class="btn btn-icon"

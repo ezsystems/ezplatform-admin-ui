@@ -109,6 +109,7 @@ class LanguageController extends Controller
             'form_languages_delete' => $deleteLanguagesForm->createView(),
             'canEdit' => $this->isGranted(new Attribute('content', 'translations')),
             'canAssign' => $this->isGranted(new Attribute('content', 'translations')),
+            'can_administrate' => $this->isGranted(new Attribute('content', 'translations')),
         ]);
     }
 
@@ -130,6 +131,7 @@ class LanguageController extends Controller
             'deleteForm' => $deleteForm->createView(),
             'canEdit' => $this->isGranted(new Attribute('content', 'translations')),
             'canAssign' => $this->isGranted(new Attribute('content', 'translations')),
+            'can_administrate' => $this->isGranted(new Attribute('content', 'translations')),
         ]);
     }
 

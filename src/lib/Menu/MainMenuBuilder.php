@@ -182,17 +182,18 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                 ]]
             );
         }
-
-        $menuItems[self::ITEM_ADMIN__LANGUAGES] = $this->createMenuItem(
-            self::ITEM_ADMIN__LANGUAGES,
-            ['route' => 'ezplatform.language.list', 'extras' => [
-                'routes' => [
-                    'edit' => 'ezplatform.language.edit',
-                    'view' => 'ezplatform.language.view',
-                    'create' => 'ezplatform.language.create',
-                ],
-            ]]
-        );
+        if ($this->permissionResolver->hasAccess('setup', 'administrate')) {
+            $menuItems[self::ITEM_ADMIN__LANGUAGES] = $this->createMenuItem(
+                self::ITEM_ADMIN__LANGUAGES,
+                ['route' => 'ezplatform.language.list', 'extras' => [
+                    'routes' => [
+                        'edit' => 'ezplatform.language.edit',
+                        'view' => 'ezplatform.language.view',
+                        'create' => 'ezplatform.language.create',
+                    ],
+                ]]
+            );
+        }
 
         $menuItems[self::ITEM_ADMIN__CONTENT_TYPES] = $this->createMenuItem(
             self::ITEM_ADMIN__CONTENT_TYPES,
