@@ -1,40 +1,40 @@
-@keyframes background-toTransparent {
-   0% {
-      transform: scale(1);
-      box-shadow: none;
-      background-color: #fff;
-   }
-   25% {
-      box-shadow: inset 10px 10px 10px 4px rgba(237, 237, 237, 0.1),
-         inset -10px -10px 10px 4px rgba(237, 237, 237, 0.1),
-         inset 10px -10px 10px 4px rgba(237, 237, 237, 0.1),
-         inset -10px 10px 10px 4px rgba(237, 237, 237, 0.1);
-   }
-   50% {
-      transform: scale(0.75);
-      box-shadow: none;
-   }
-   100% {
-      transform: scale(1);
-      box-shadow: none;
-   }
+@keyframes background-to-transparent {
+    0% {
+        transform: scale(1);
+        box-shadow: none;
+        background-color: #fff;
+    }
+    25% {
+        box-shadow: inset 10px 10px 10px 4px rgba(237, 237, 237, 0.1),
+            inset -10px -10px 10px 4px rgba(237, 237, 237, 0.1),
+            inset 10px -10px 10px 4px rgba(237, 237, 237, 0.1),
+            inset -10px 10px 10px 4px rgba(237, 237, 237, 0.1);
+    }
+    50% {
+        transform: scale(0.75);
+        box-shadow: none;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: none;
+    }
 }
 
-@keyframes background-toWhite {
-   0% {
-      transform: scale(1);
-      background-color: transparent;
-   }
-   50% {
-      transform: scale(0.75);
-      box-shadow: inset 10px 10px 10px 4px rgba(237, 237, 237, 0.1),
-         inset -10px -10px 10px 4px rgba(237, 237, 237, 0.1),
-         inset 10px -10px 10px 4px rgba(237, 237, 237, 0.1),
-         inset -10px 10px 10px 4px rgba(237, 237, 237, 0.1);
-      background-color: rgba(237, 237, 237, 0.1);
-   }
-   100% {
-      transform: scale(1);
-      background-color: #fff;
-   }
+@keyframes background-to-white {
+    0% {
+        transform: scale(1);
+        background-color: transparent;
+    }
+    50% {
+        transform: scale(0.75);
+        box-shadow: inset 10px 10px 10px 4px rgba(237, 237, 237, 0.1),
+            inset -10px -10px 10px 4px rgba(237, 237, 237, 0.1),
+            inset 10px -10px 10px 4px rgba(237, 237, 237, 0.1),
+            inset -10px 10px 10px 4px rgba(237, 237, 237, 0.1);
+        background-color: rgba(237, 237, 237, 0.1);
+    }
+    100% {
+        transform: scale(1);
+        background-color: #fff;
+    }
 }
