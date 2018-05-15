@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\Table;
 use PHPUnit\Framework\Assert;
 
 /** Element that describes list-table structure that repeats in every Admin pages */
@@ -24,6 +25,7 @@ class AdminList extends Element
     public function __construct(UtilityContext $context, string $listHeader, string $tableName, ?string $containerLocator = 'section')
     {
         parent::__construct($context);
+        $containerLocator = !$containerLocator ? 'section' : $containerLocator;
         $this->listHeader = $listHeader;
         $this->fields = [
             'list' => $containerLocator,
