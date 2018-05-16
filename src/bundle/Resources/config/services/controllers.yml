@@ -83,3 +83,8 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $visitor: '@ezpublish_rest.output.visitor.json'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\BookmarkController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $defaultPaginationLimit: '$pagination.bookmark_limit$'

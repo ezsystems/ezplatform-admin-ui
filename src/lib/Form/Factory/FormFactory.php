@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 
+use EzSystems\EzPlatformAdminUi\Form\Data\Bookmark\BookmarkRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
@@ -69,6 +70,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotWithLoginData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Bookmark\BookmarkRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType;
@@ -1212,5 +1214,20 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationUpdateBookmarkType::class);
 
         return $this->formFactory->createNamed($name, LocationUpdateBookmarkType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Bookmark\BookmarkRemoveData|null $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function removeBookmark(
+        BookmarkRemoveData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(BookmarkRemoveType::class);
+
+        return $this->formFactory->createNamed($name, BookmarkRemoveType::class, $data);
     }
 }

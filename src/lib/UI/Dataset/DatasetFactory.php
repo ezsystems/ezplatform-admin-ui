@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
 
+use eZ\Publish\API\Repository\BookmarkService;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
@@ -47,6 +48,9 @@ class DatasetFactory
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
+    /** @var \eZ\Publish\API\Repository\BookmarkService */
+    private $bookmarkService;
+
     /** @var array */
     private $userContentTypeIdentifier;
 
@@ -62,6 +66,7 @@ class DatasetFactory
      * @param \eZ\Publish\API\Repository\URLAliasService $urlAliasService
      * @param \eZ\Publish\API\Repository\RoleService $roleService
      * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \eZ\Publish\API\Repository\BookmarkService $bookmarkService
      * @param \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory $valueFactory
      * @param array $userContentTypeIdentifier
      * @param array $userGroupContentTypeIdentifier
@@ -75,6 +80,7 @@ class DatasetFactory
         URLAliasService $urlAliasService,
         RoleService $roleService,
         UserService $userService,
+        BookmarkService $bookmarkService,
         ValueFactory $valueFactory,
         array $userContentTypeIdentifier,
         array $userGroupContentTypeIdentifier
@@ -87,6 +93,7 @@ class DatasetFactory
         $this->urlAliasService = $urlAliasService;
         $this->roleService = $roleService;
         $this->userService = $userService;
+        $this->bookmarkService = $bookmarkService;
         $this->valueFactory = $valueFactory;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
         $this->userGroupContentTypeIdentifier = $userGroupContentTypeIdentifier;
@@ -169,6 +176,17 @@ class DatasetFactory
             $this->valueFactory,
             $this->userContentTypeIdentifier,
             $this->userGroupContentTypeIdentifier
+        );
+    }
+
+    /**
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\BookmarksDataset
+     */
+    public function bookmarks(): BookmarksDataset
+    {
+        return new BookmarksDataset(
+            $this->bookmarkService,
+            $this->valueFactory
         );
     }
 }

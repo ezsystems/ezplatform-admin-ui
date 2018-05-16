@@ -30,6 +30,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
     /* Menu items */
     const ITEM__SEARCH = 'sidebar_left__search';
     const ITEM__BROWSE = 'sidebar_left__browse';
+    const ITEM__BOOKMARK = 'sidebar_left__bookmark';
     const ITEM__TRASH = 'sidebar_left__trash';
 
     /**
@@ -88,6 +89,13 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                     ],
                 ]
             ),
+            self::ITEM__BOOKMARK => $this->createMenuItem(
+                self::ITEM__BOOKMARK,
+                [
+                    'route' => 'ezplatform.bookmark.list',
+                    'extras' => ['icon' => 'bookmark-manager'],
+                ]
+            ),
             self::ITEM__TRASH => $this->createMenuItem(
                 self::ITEM__TRASH,
                 [
@@ -101,7 +109,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
     }
 
     /**
-     * @return JMS\TranslationBundle\Model\Message[]
+     * @return \JMS\TranslationBundle\Model\Message[]
      */
     public static function getTranslationMessages(): array
     {
@@ -109,6 +117,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
             (new Message(self::ITEM__SEARCH, 'menu'))->setDesc('Search'),
             (new Message(self::ITEM__BROWSE, 'menu'))->setDesc('Browse'),
             (new Message(self::ITEM__TRASH, 'menu'))->setDesc('Trash'),
+            (new Message(self::ITEM__BOOKMARK, 'menu'))->setDesc('Bookmarks'),
         ];
     }
 }
