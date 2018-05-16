@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use eZ\Publish\API\Repository\BookmarkService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -19,6 +20,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateBookmarkData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
@@ -46,6 +48,9 @@ class ContentViewController extends Controller
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
+    /** @var \eZ\Publish\API\Repository\BookmarkService */
+    private $bookmarkService;
+
     /** @var int */
     private $defaultPaginationLimit;
 
@@ -65,6 +70,7 @@ class ContentViewController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier $subitemsContentViewParameterSupplier
      * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \eZ\Publish\API\Repository\BookmarkService $bookmarkService
      * @param int $defaultPaginationLimit
      * @param array $siteAccessLanguages
      * @param int $defaultRolePaginationLimit
@@ -77,6 +83,7 @@ class ContentViewController extends Controller
         FormFactory $formFactory,
         SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier,
         UserService $userService,
+        BookmarkService $bookmarkService,
         int $defaultPaginationLimit,
         array $siteAccessLanguages,
         int $defaultRolePaginationLimit,
@@ -88,6 +95,7 @@ class ContentViewController extends Controller
         $this->formFactory = $formFactory;
         $this->subitemsContentViewParameterSupplier = $subitemsContentViewParameterSupplier;
         $this->userService = $userService;
+        $this->bookmarkService = $bookmarkService;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
         $this->siteAccessLanguages = $siteAccessLanguages;
         $this->defaultRolePaginationLimit = $defaultRolePaginationLimit;
@@ -199,6 +207,13 @@ class ContentViewController extends Controller
             new LocationCopySubtreeData($location)
         );
 
+        $bookmarkUpdateType = $this->formFactory->updateBookmarkLocation(
+            new LocationUpdateBookmarkData(
+                $location,
+                $this->bookmarkService->isBookmarked($location)
+            )
+        );
+
         $view->addParameters([
             'form_location_copy' => $locationCopyType->createView(),
             'form_location_move' => $locationMoveType->createView(),
@@ -206,6 +221,7 @@ class ContentViewController extends Controller
             'form_content_create' => $contentCreateType->createView(),
             'form_subitems_content_edit' => $subitemsContentEdit->createView(),
             'form_location_copy_subtree' => $locationCopySubtreeType->createView(),
+            'form_location_bookmark' => $bookmarkUpdateType->createView(),
         ]);
 
         if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {

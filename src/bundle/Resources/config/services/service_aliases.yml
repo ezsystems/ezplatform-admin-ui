@@ -18,6 +18,7 @@ services:
     eZ\Publish\API\Repository\URLService: '@ezpublish.api.service.url'
     eZ\Publish\API\Repository\URLAliasService: '@ezpublish.api.service.url_alias'
     eZ\Publish\API\Repository\TrashService: '@ezpublish.api.service.trash'
+    eZ\Publish\API\Repository\BookmarkService: '@ezpublish.api.service.bookmark'
 
     eZ\Publish\API\Repository\PermissionResolver:
         factory: 'eZ\Publish\API\Repository\Repository:getPermissionResolver'

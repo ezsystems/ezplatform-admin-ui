@@ -40,6 +40,9 @@
                         iconName: contentType.identifier,
                         contentTypeName: contentType.name
                     } %}
+                    {% include '@EzPlatformAdminUi/parts/form/location_bookmark.html.twig' with {
+                        form: form_location_bookmark
+                    } %}
                 </div>
             </div>
             <div class="panel panel-primary">
@@ -110,28 +113,29 @@
 
 {% block javascripts %}
     {%  javascripts
-        'bundles/ezplatformadminui/js/scripts/admin.location.change_language.js'
-        'bundles/ezplatformadminui/js/scripts/admin.location.view.js'
-        'bundles/ezplatformadminui/js/scripts/admin.location.tab.js'
-        'bundles/ezplatformadminui/js/scripts/admin.location.visibility.js'
-        'bundles/ezplatformadminui/js/scripts/admin.location.update.js'
-        'bundles/ezplatformadminui/js/scripts/admin.location.add.translation.js'
-        'bundles/ezplatformadminui/js/scripts/button.content.edit.js'
-        'bundles/ezplatformadminui/js/scripts/udw/move.js'
-        'bundles/ezplatformadminui/js/scripts/udw/copy.js'
-        'bundles/ezplatformadminui/js/scripts/udw/swap.js'
-        'bundles/ezplatformadminui/js/scripts/udw/copy_subtree.js'
-        'bundles/ezplatformadminui/js/scripts/udw/locations.tab.js'
-        'bundles/ezplatformadminui/js/scripts/sidebar/extra.actions.js'
-        'bundles/ezplatformadminui/js/scripts/sidebar/btn/location.edit.js'
-        'bundles/ezplatformadminui/js/scripts/sidebar/btn/location.create.js'
-        'bundles/ezplatformadminui/js/scripts/sidebar/instant.filter.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.change_language.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.view.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.tab.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.visibility.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.update.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.add.translation.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.content.edit.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/udw/move.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/udw/copy.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/udw/swap.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/udw/copy_subtree.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/udw/locations.tab.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/extra.actions.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/btn/location.edit.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/btn/location.create.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/instant.filter.js'
         '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/leaflet/dist/leaflet.js'
-        'bundles/ezplatformadminui/js/scripts/admin.location.load.map.js'
-        'bundles/ezplatformadminui/js/scripts/sidebar/btn/content.edit.js'
-        'bundles/ezplatformadminui/js/scripts/admin.location.add.custom_url.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.load.map.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/btn/content.edit.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.add.custom_url.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.version.edit.conflict.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.bookmark.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

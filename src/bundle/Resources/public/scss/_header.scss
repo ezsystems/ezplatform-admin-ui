@@ -1,6 +1,10 @@
 .ez-header {
     background-color: $ez-ground-base-dark;
 
+    .container {
+    	position: relative;
+    }
+
     .breadcrumb {
         margin-bottom: 0;
         padding-left: 0;

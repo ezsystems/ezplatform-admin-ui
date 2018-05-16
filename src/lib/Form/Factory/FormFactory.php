@@ -30,6 +30,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateBookmarkData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
@@ -90,6 +91,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopySubtreeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateBookmarkType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
@@ -1195,5 +1197,20 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationCopySubtreeType::class);
 
         return $this->formFactory->createNamed($name, LocationCopySubtreeType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateBookmarkData|null $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function updateBookmarkLocation(
+        LocationUpdateBookmarkData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationUpdateBookmarkType::class);
+
+        return $this->formFactory->createNamed($name, LocationUpdateBookmarkType::class, $data);
     }
 }

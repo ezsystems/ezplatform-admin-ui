@@ -1,0 +1,57 @@
+.ez-add-to-bookmarks {
+    width: 3rem;
+    position: absolute;
+    top: 50%;
+    right: 5rem;
+    transform: translateY(-50%);
+
+    &__label {
+        width: 3rem;
+        height: 3rem;
+        display: block;
+        position: relative;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &::after {
+            display: block;
+            margin-left: -1px;
+            border-radius: 50%;
+            content: "";
+            animation: background-to-transparent .25s ease-in;
+            animation-direction: normal;
+            animation-iteration-count: 1;
+            animation-play-state: running;
+        }
+
+        &::after,
+        .ez-add-to-bookmarks__icon-wrapper {
+            position: absolute;
+            width: 3rem;
+            height: 3rem;
+            padding: .4rem;
+            transition: all .25s ease-in;
+        }
+    }
+
+    &__checkbox:checked + &__label {
+        &::after {
+            background-color: #fff;
+            animation: background-to-white .25s ease-in;
+            animation-direction: normal;
+            animation-iteration-count: 1;
+            animation-play-state: running;
+        }
+    }
+
+    &__icon-wrapper {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    &__checkbox:checked + &__label &__icon-wrapper--add,
+    &__checkbox:not(:checked) + &__label &__icon-wrapper--remove {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
