@@ -4,11 +4,14 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\SectionService;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\Content\Section;
@@ -38,54 +41,54 @@ use Exception;
 
 class SectionController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var TranslatorInterface */
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var SectionService */
+    /** @var \eZ\Publish\API\Repository\SectionService */
     private $sectionService;
 
-    /** @var SearchService */
+    /** @var \eZ\Publish\API\Repository\SearchService */
     private $searchService;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SectionCreateMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionCreateMapper */
     private $sectionCreateMapper;
 
-    /** @var SectionUpdateMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper */
     private $sectionUpdateMapper;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
-    /** @var PathService */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Service\PathService */
     private $pathService;
 
     /** @var int */
     private $defaultPaginationLimit;
 
     /**
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
-     * @param SectionService $sectionService
-     * @param SearchService $searchService
-     * @param FormFactory $formFactory
-     * @param SectionCreateMapper $sectionCreateMapper
-     * @param SectionUpdateMapper $sectionUpdateMapper
-     * @param SubmitHandler $submitHandler
-     * @param ContentTypeService $contentTypeService
-     * @param LocationService $locationService
-     * @param PathService $pathService
+     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\SectionService $sectionService
+     * @param \eZ\Publish\API\Repository\SearchService $searchService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionCreateMapper $sectionCreateMapper
+     * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper $sectionUpdateMapper
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \EzSystems\EzPlatformAdminUi\UI\Service\PathService $pathService
      * @param int $defaultPaginationLimit
      */
     public function __construct(
@@ -116,10 +119,18 @@ class SectionController extends Controller
         $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
+    public function performAccessCheck(): void
+    {
+        parent::performAccessCheck();
+        $this->denyAccessUnlessGranted(new Attribute('section', 'view'));
+    }
+
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function listAction(Request $request): Response
     {
@@ -132,10 +143,11 @@ class SectionController extends Controller
         $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
         $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
-        /** @var Section[] $sectionList */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Section[] $sectionList */
         $sectionList = $pagerfanta->getCurrentPageResults();
         $contentCountBySectionId = [];
         $deletableSections = [];
+        $assignableSections = [];
 
         $deleteSectionsForm = $this->formFactory->deleteSections(
             new SectionsDeleteData($this->getSectionsNumbers($sectionList))
@@ -148,6 +160,7 @@ class SectionController extends Controller
         foreach ($sectionList as $section) {
             $contentCountBySectionId[$section->id] = $this->sectionService->countAssignedContents($section);
             $deletableSections[$section->id] = !$this->sectionService->isSectionUsed($section);
+            $assignableSections[$section->id] = $this->canUserAssignSectionToAnyContent($section);
         }
 
         return $this->render('EzPlatformAdminUiBundle:admin/section:list.html.twig', [
@@ -156,15 +169,16 @@ class SectionController extends Controller
             'pager' => $pagerfanta,
             'content_count' => $contentCountBySectionId,
             'deletable' => $deletableSections,
+            'assignable' => $assignableSections,
             'form_sections_delete' => $deleteSectionsForm->createView(),
             'form_section_content_assign' => $assignContentForms->createView(),
         ]);
     }
 
     /**
-     * @param Section $section
+     * @param \eZ\Publish\API\Repository\Values\Content\Section $section
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(Section $section): Response
     {
@@ -183,11 +197,14 @@ class SectionController extends Controller
     /**
      * Fragment action which renders list of contents assigned to section.
      *
-     * @param Section $section
+     * @param \eZ\Publish\API\Repository\Values\Content\Section $section
      * @param int $page Current page
      * @param int $limit Number of items per page
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function viewSectionContentAction(Section $section, int $page = 1, int $limit = 10): Response
     {
@@ -232,18 +249,19 @@ class SectionController extends Controller
             'assigned_content' => $assignedContent,
             'pagerfanta' => $pagerfanta,
             'pagination' => $pagination,
-            'can_assign' => $this->isGranted(new Attribute('section', 'assign')),
+            'can_assign' => $this->canUserAssignSectionToAnyContent($section),
         ]);
     }
 
     /**
-     * @param Request $request
-     * @param Section $section
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\Content\Section $section
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function deleteAction(Request $request, Section $section): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('section', 'edit'));
         $form = $this->formFactory->deleteSection(
             new SectionDeleteData($section)
         );
@@ -278,14 +296,13 @@ class SectionController extends Controller
     /**
      * Handles removing sections based on submitted form.
      *
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
-     *
-     * @throws \InvalidArgumentException
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function bulkDeleteAction(Request $request): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('section', 'edit'));
         $form = $this->formFactory->deleteSections(
             new SectionsDeleteData()
         );
@@ -317,13 +334,21 @@ class SectionController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param Section $section
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\Content\Section $section
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function assignContentAction(Request $request, Section $section): Response
     {
+        if (!$this->isGranted(new Attribute('section', 'assign', ['valueObject' => new ContentInfo(), 'targets' => $section]))) {
+            $exception = $this->createAccessDeniedException();
+            $exception->setAttributes('state');
+            $exception->setSubject('assign');
+
+            throw $exception;
+        }
+
         $form = $this->formFactory->assignContentSectionForm(
             new SectionContentAssignData()
         );
@@ -364,12 +389,13 @@ class SectionController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('section', 'edit'));
         $form = $this->formFactory->createSection(
             new SectionCreateData()
         );
@@ -404,13 +430,14 @@ class SectionController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param Section $section
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\Content\Section $section
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, Section $section): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('section', 'edit'));
         $form = $this->formFactory->updateSection(
             new SectionUpdateData($section)
         );
@@ -446,7 +473,7 @@ class SectionController extends Controller
     }
 
     /**
-     * @param Section[] $sections
+     * @param \eZ\Publish\API\Repository\Values\Content\Section[] $sections
      *
      * @return array
      */
@@ -455,5 +482,17 @@ class SectionController extends Controller
         $sectionsNumbers = array_column($sections, 'id');
 
         return array_combine($sectionsNumbers, array_fill_keys($sectionsNumbers, false));
+    }
+
+    /**
+     * Specifies if the User has access to assigning a given Section to Content.
+     *
+     * @param \eZ\Publish\API\Repository\Values\Content\Section $section
+     *
+     * @return bool
+     */
+    private function canUserAssignSectionToAnyContent(Section $section): bool
+    {
+        return $this->isGranted(new Attribute('section', 'assign', ['valueObject' => new ContentInfo(), 'targets' => $section]));
     }
 }

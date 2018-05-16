@@ -10,14 +10,15 @@
                 '%count%': pagerfanta.nbResults
             } )|desc('Content items in %name% (%count%)') }}
         </div>
-
-        {{ form_start(form_section_content_assign, {
-            'action': path("ezplatform.section.assign_content", {"sectionId": section.id}),
-            'attr': {'class': 'd-inline-block'}
-        }) }}
-            {{ form_widget(form_section_content_assign.locations.location) }}
-            {{ form_widget(form_section_content_assign.locations.select_content, {'attr': {'class': 'btn btn-secondary btn--open-udw', 'data-udw-config': ez_udw_config('multiple', {})}}) }}
-        {{ form_end(form_section_content_assign) }}
+        {% if can_assign %}
+            {{ form_start(form_section_content_assign, {
+                'action': path("ezplatform.section.assign_content", {"sectionId": section.id}),
+                'attr': {'class': 'd-inline-block'}
+            }) }}
+                {{ form_widget(form_section_content_assign.locations.location) }}
+                {{ form_widget(form_section_content_assign.locations.select_content, {'attr': {'class': 'btn btn-secondary btn--open-udw', 'data-udw-config': ez_udw_config('multiple', {})}}) }}
+            {{ form_end(form_section_content_assign) }}
+        {% endif %}
     </div>
     <table class="table">
         <thead>

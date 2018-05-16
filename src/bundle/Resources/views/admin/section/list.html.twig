@@ -35,19 +35,25 @@
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                         </svg>
                     </a>
+                    {% set modal_data_target = 'delete-sections-modal' %}
+                    <button
+                        id="delete-sections"
+                        type="button"
+                        class="btn btn-danger"
+                        disabled
+                        data-toggle="modal"
+                        data-target="#{{ modal_data_target }}"
+                        title="{{ 'section.delete'|trans|desc('Delete Section') }}">
+                        <svg class="ez-icon ez-icon-trash">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        </svg>
+                    </button>
+                    {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+                        'id': modal_data_target,
+                        'message': 'section.modal.message'|trans|desc('Do you want to delete Section?'),
+                        'data_click': '#sections_delete_delete',
+                    }%}
                 {% endif %}
-                {% set modal_data_target = 'delete-sections-modal' %}
-                <button id="delete-sections" type="button" class="btn btn-danger" disabled data-toggle="modal"
-                        data-target="#{{ modal_data_target }}" title="{{ 'section.delete'|trans|desc('Delete Section') }}">
-                    <svg class="ez-icon ez-icon-trash">
-                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-                    </svg>
-                </button>
-                {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
-                    'id': modal_data_target,
-                    'message': 'section.modal.message'|trans|desc('Do you want to delete Section?'),
-                    'data_click': '#sections_delete_delete',
-                }%}
             </div>
         </div>
 
@@ -70,25 +76,30 @@
             {% for section in pager.currentPageResults %}
                 <tr>
                     <td class="ez-checkbox-cell">
-                        {{ form_widget(form_sections_delete.sections[section.id], {"disabled": not deletable[section.id]}) }}
+                        {% if can_edit %}
+                            {{ form_widget(form_sections_delete.sections[section.id], {"disabled": not deletable[section.id]}) }}
+                        {% else %}
+                            {% do form_sections_delete.sections.setRendered %}
+                        {% endif %}
                     </td>
                     <td><a href="{{ path( 'ezplatform.section.view', {'sectionId': section.id} ) }}">{{ section.name }}</a></td>
                     <td>{{ section.identifier }}</td>
                     <td>{{ section.id }}</td>
                     <td>{{ content_count[section.id] }}</td>
                     <td class="text-right">
-                        <a
-                            title="{{ 'section.assign_content'|trans|desc('Assign content') }}"
-                            href="#"
-                            data-section-id="{{ section.id }}"
-                            data-form-action="{{ path("ezplatform.section.assign_content", {"sectionId": section.id}) }}"
-                            data-udw-config="{{ ez_udw_config('multiple', {}) }}"
-                            class="btn btn-icon mx-3">
-                            <svg class="ez-icon ez-icon-relations ez-icon--secondary btn--open-udw">
-                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-section"></use>
-                            </svg>
-                        </a>
-
+                        {% if assignable[section.id] %}
+                            <a
+                                title="{{ 'section.assign_content'|trans|desc('Assign content') }}"
+                                href="#"
+                                data-section-id="{{ section.id }}"
+                                data-form-action="{{ path("ezplatform.section.assign_content", {"sectionId": section.id}) }}"
+                                data-udw-config="{{ ez_udw_config('multiple', {}) }}"
+                                class="btn btn-icon mx-3">
+                                <svg class="ez-icon ez-icon-relations ez-icon--secondary btn--open-udw">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-section"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
                         {% if can_edit %}
                             <a title="{{ 'section.edit'|trans|desc('Edit') }}"
                                href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
