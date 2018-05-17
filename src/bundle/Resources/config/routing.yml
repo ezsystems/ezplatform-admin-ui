@@ -700,3 +700,18 @@ ezplatform.udw.preselected_location.data:
     defaults:
         limit: 50
         _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:preselectedLocationData'
+
+#
+# Bookmark manager
+#
+ezplatform.bookmark.list:
+    path: /bookmark/list
+    methods: ['GET']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Bookmark:list'
+
+ezplatform.bookmark.remove:
+    path: /bookmark/remove
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Bookmark:remove'

@@ -224,4 +224,28 @@ class ValueFactory
     {
         return new UIValue\User\Policy($policy, ['role_assignment' => $roleAssignment]);
     }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     *
+     * @return \EzSystems\EzPlatformAdminUi\UI\Value\Location\Bookmark
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    public function createBookmark(Location $location): UIValue\Location\Bookmark
+    {
+        return new UIValue\Location\Bookmark(
+            $location,
+            [
+                'contentType' => $this->contentTypeService->loadContentType($location->contentInfo->contentTypeId),
+                'pathLocations' => $this->pathService->loadPathLocations(
+                    $this->locationService->loadLocation($location->contentInfo->mainLocationId)
+                ),
+                'userCanEdit' => $this->permissionResolver->canUser('content', 'edit', $location->contentInfo),
+            ]
+        );
+    }
 }

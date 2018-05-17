@@ -109,3 +109,22 @@
     {%- set type = type|default('number') -%}
     {{ block('form_widget_simple') }}
 {%- endblock number_widget -%}
+
+{%- block _bookmark_remove_remove_widget -%}
+    {%- set type = type|default('submit') -%}
+    {%- if label is not same as(false) and label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type }}" {{ block('button_attributes') }} title="{{'bookmark.button.remove'|trans({},'bookmark')|desc('Remove') }}">
+        <svg class="ez-icon">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+        </svg>
+    </button>
+{%- endblock -%}

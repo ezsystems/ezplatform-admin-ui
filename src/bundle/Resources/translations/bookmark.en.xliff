@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="5cc4d552faa942983e3eb8ec85c053aeb1e42ae4" resname="bookmark.button.remove">
+        <source>Remove</source>
+        <target state="new">Remove</target>
+        <note>key: bookmark.button.remove</note>
+      </trans-unit>
+      <trans-unit id="c2c1dc512033aabc10e0c6a46cf5e99355f5c750" resname="bookmark.headline">
+        <source>Bookmarks</source>
+        <target state="new">Bookmarks</target>
+        <note>key: bookmark.headline</note>
+      </trans-unit>
+      <trans-unit id="5001931b6bf98acefb5138b1cdba97d97fed4844" resname="bookmark.list.content.edit">
+        <source>Edit Content</source>
+        <target state="new">Edit Content</target>
+        <note>key: bookmark.list.content.edit</note>
+      </trans-unit>
+      <trans-unit id="cf687b0218c513d53ad3f52b2547c23500242c48" resname="bookmark.list.content_type">
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
+        <note>key: bookmark.list.content_type</note>
+      </trans-unit>
+      <trans-unit id="d84749a19f2864dd1d5d3cee0a127f2435e5cdc5" resname="bookmark.list.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: bookmark.list.name</note>
+      </trans-unit>
+      <trans-unit id="fa0e2c8d987f0282f85003e05398c602de5da17b" resname="bookmark.list.path">
+        <source>Path</source>
+        <target state="new">Path</target>
+        <note>key: bookmark.list.path</note>
+      </trans-unit>
+      <trans-unit id="0cf4491e1bb4fde851986596d3adfb4dbe2f5a17" resname="bookmark.table.header">
+        <source>Bookmarks</source>
+        <target state="new">Bookmarks</target>
+        <note>key: bookmark.table.header</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

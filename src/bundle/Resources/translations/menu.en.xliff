@@ -311,6 +311,11 @@
         <target state="new">Save</target>
         <note>key: section_edit__sidebar_right__save</note>
       </trans-unit>
+      <trans-unit id="d69b54667fe89acac2f0e05bf84c606aff91d52b" resname="sidebar_left__bookmark">
+        <source>Bookmarks</source>
+        <target state="new">Bookmarks</target>
+        <note>key: sidebar_left__bookmark</note>
+      </trans-unit>
       <trans-unit id="951ac18ce3ab253f9de7fd9caef6636b18edd1c3" resname="sidebar_left__browse">
         <source>Browse</source>
         <target state="new">Browse</target>
@@ -340,6 +345,11 @@
         <source>Save</source>
         <target state="new">Save</target>
         <note>key: url_edit__sidebar_right__save</note>
+      </trans-unit>
+      <trans-unit id="8acab9e005da20efe4001fac5f84ff2c835bb7c8" resname="user__bookmark">
+        <source>Bookmarks</source>
+        <target state="new">Bookmarks</target>
+        <note>key: user__bookmark</note>
       </trans-unit>
       <trans-unit id="da5c7f4f526c2dd5b1e1f51ab5238ef4ba86d421" resname="user__change_password">
         <source>Change password</source>
