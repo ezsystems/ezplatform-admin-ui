@@ -27,27 +27,34 @@
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'language.list'|trans|desc('Languages') }}</div ="ez-table-header__headline">
             <div>
-                <a title="{{ 'language.new'|trans|desc('Create a new Language') }}"
-                   href="{{ path('ezplatform.language.create') }}"
-                   class="btn btn-primary" {% if not canEdit %} disabled="disabled"{% endif %}>
-                    <svg class="ez-icon ez-icon-create">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
-                    </svg>
-                </a>
-                {% set modal_data_target = 'delete-languages-modal' %}
-                <button id="delete-languages" type="button" class="btn btn-danger" disabled data-toggle="modal"
-                        data-target="#{{ modal_data_target }}" title="{{ 'language.delete'|trans|desc('Delete Language') }}">
-                    <svg class="ez-icon ez-icon-trash">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-                    </svg>
-                </button>
-                {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
-                    'id': modal_data_target,
-                    'message': 'language.modal.message'|trans|desc('Do you want to delete Language?'),
-                    'data_click': '#languages_delete_delete',
-                }%}
+                {% if can_administrate %}
+                    <a
+                        title="{{ 'language.new'|trans|desc('Create a new Language') }}"
+                        href="{{ path('ezplatform.language.create') }}"
+                        class="btn btn-primary">
+                        <svg class="ez-icon ez-icon-create">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                        </svg>
+                    </a>
+                    {% set modal_data_target = 'delete-languages-modal' %}
+                    <button
+                        id="delete-languages"
+                        type="button"
+                        class="btn btn-danger"
+                        disabled
+                        data-toggle="modal"
+                        data-target="#{{ modal_data_target }}"
+                        title="{{ 'language.delete'|trans|desc('Delete Language') }}">
+                        <svg class="ez-icon ez-icon-trash">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        </svg>
+                    </button>
+                    {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+                        'id': modal_data_target,
+                        'message': 'language.modal.message'|trans|desc('Do you want to delete Language?'),
+                        'data_click': '#languages_delete_delete',
+                    }%}
+                {% endif %}
             </div>
         </div>
 
@@ -70,21 +77,28 @@
             {% for language in pager.currentPageResults %}
                 <tr>
                     <td class="ez-checkbox-cell">
-                        {{ form_widget(form_languages_delete.languages[language.id], {"disabled": not canEdit}) }}
+                        {% if can_administrate %}
+                            {{ form_widget(form_languages_delete.languages[language.id]) }}
+                        {% else %}
+                            {% do form_languages_delete.languages.setRendered %}
+                        {% endif %}
                     </td>
                     <td><a href="{{ path( 'ezplatform.language.view', {'languageId': language.id} ) }}">{{ language.name }}</a></td>
                     <td>{{ language.languageCode }}</td>
                     <td>{{ language.id }}</td>
                     <td>
-                        <input type="checkbox" disabled {% if language.enabled %}checked
-                            title="{{ 'language.enabled'|trans|desc('Enabled') }}"
-                            {% else %}title="{{ 'language.disabled'|trans|desc('Disabled') }}"{% endif %}>
+                        <input
+                            type="checkbox"
+                            title="{{ language.enabled ? 'language.enabled'|trans|desc('Enabled')  : 'language.disabled'|trans|desc('Disabled')  }}"
+                            disabled
+                            {% if language.enabled %}checked{% endif %}>
                     </td>
                     <td class="text-right">
-                        {% if canEdit %}
-                            <a title="{{ 'language.edit'|trans|desc('Edit') }}"
-                               href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
-                               class="btn btn-icon mx-3">
+                        {% if can_administrate %}
+                            <a
+                                title="{{ 'language.edit'|trans|desc('Edit') }}"
+                                href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
+                                class="btn btn-icon mx-3">
                                 <svg class="ez-icon ez-icon-edit">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                                 </svg>
