@@ -15,14 +15,14 @@
             <section class="container mt-5">
                 {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with { title: 'bookmark.headline'|trans|desc('Bookmarks'), iconName: 'bookmark-manager' } %}
                 <div class="px-4">
-                    {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with {
-                         headerText: 'bookmark.table.header'|trans|desc('Bookmarks') ~ ' (' ~ pager.count ~ ')',
-                         tools: form_widget(form_remove.remove, {'attr': {'class': 'btn btn-primary', 'disabled': true}})
-                     } %}
                     {{ form_start(form_remove, {
                         'action': path('ezplatform.bookmark.remove'),
                         'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#bookmark_remove_remove' }
                     }) }}
+                    {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with {
+                         headerText: 'bookmark.table.header'|trans|desc('Bookmarks') ~ ' (' ~ pager.count ~ ')',
+                         tools: form_widget(form_remove.remove, {'attr': {'class': 'btn btn-primary', 'disabled': true}})
+                     } %}
                     <table class="table">
                         <thead>
                         <tr>
