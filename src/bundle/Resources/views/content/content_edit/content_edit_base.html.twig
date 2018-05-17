@@ -1,7 +1,10 @@
 {% extends viewbaseLayout is defined ? viewbaseLayout : 'EzPlatformAdminUiBundle::layout.html.twig' %}
 
+{% set default_form_templates = ['@EzPlatformAdminUi/content/form_fields.html.twig'] %}
+{% set form_templates = form_templates is defined ? form_templates|merge(default_form_templates) : default_form_templates %}
+
 {% trans_default_domain 'content_edit' %}
-{% form_theme form with 'EzPlatformAdminUiBundle:content:form_fields.html.twig' %}
+{% form_theme form with form_templates %}
 
 {% block body_class %}ez-standalone-page ez-content-edit{% endblock %}
 
