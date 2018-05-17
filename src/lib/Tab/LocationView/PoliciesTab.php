@@ -19,6 +19,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
+use eZ\Publish\API\Repository\PermissionResolver;
 
 class PoliciesTab extends AbstractTab implements OrderedTabInterface, ConditionalTabInterface
 {
@@ -33,25 +34,31 @@ class PoliciesTab extends AbstractTab implements OrderedTabInterface, Conditiona
     /** @var array */
     private $userGroupContentTypeIdentifier;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    protected $permissionResolver;
+
     /**
      * @param \Twig\Environment $twig
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
      * @param array $userContentTypeIdentifier
      * @param array $userGroupContentTypeIdentifier
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         DatasetFactory $datasetFactory,
         array $userContentTypeIdentifier,
-        array $userGroupContentTypeIdentifier
+        array $userGroupContentTypeIdentifier,
+        PermissionResolver $permissionResolver
     ) {
         parent::__construct($twig, $translator);
 
         $this->datasetFactory = $datasetFactory;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
         $this->userGroupContentTypeIdentifier = $userGroupContentTypeIdentifier;
+        $this->permissionResolver = $permissionResolver;
     }
 
     /**
@@ -87,9 +94,16 @@ class PoliciesTab extends AbstractTab implements OrderedTabInterface, Conditiona
      * @param array $parameters
      *
      * @return bool
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function evaluate(array $parameters): bool
     {
+        if (false === $this->permissionResolver->canUser('role', 'read', $parameters['content'])) {
+            return false;
+        }
+
         /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $parameters['contentType'];
 
