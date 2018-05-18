@@ -26,6 +26,11 @@
         <target state="new">Content Type</target>
         <note>key: bookmark.list.content_type</note>
       </trans-unit>
+      <trans-unit id="e55cc61e6e0bcd97f329c00790704a381212f55b" resname="bookmark.list.empty">
+        <source>The bookmark list is empty. Any Content item you bookmark will end up here.</source>
+        <target state="new">The bookmark list is empty. Any Content item you bookmark will end up here.</target>
+        <note>key: bookmark.list.empty</note>
+      </trans-unit>
       <trans-unit id="d84749a19f2864dd1d5d3cee0a127f2435e5cdc5" resname="bookmark.list.name">
         <source>Name</source>
         <target state="new">Name</target>

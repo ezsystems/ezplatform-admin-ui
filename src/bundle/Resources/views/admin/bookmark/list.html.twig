@@ -34,10 +34,17 @@
                         </tr>
                         </thead>
                         <tbody>
+                        {% if pager.count is same as(0) %}
+                        <tr>
+                            <td colspan="4">
+                                <span class="ez-table-no-content mb-0 py-1 pl-0">{{ 'bookmark.list.empty'|trans|desc('The bookmark list is empty. Any Content item you bookmark will end up here.') }}</span>
+                            </td>
+                        </tr>
+                        {% else %}
                         {% for bookmark in pager.currentPageResults %}
                             <tr>
                                 <td class="ez-checkbox-cell">{{ form_widget(form_remove.bookmarks[bookmark.id]) }}</td>
-                                <td><a href="{{ path('_ez_content_view', { 'contentId': bookmark.contentInfo.id }) }}">{{ ez_content_name(bookmark.contentInfo) }}</a></td>
+                                <td><a href="{{ path('_ezpublishLocation', { 'locationId': bookmark.id }) }}">{{ ez_content_name(bookmark.contentInfo) }}</a></td>
                                 <td>{{ bookmark.contentType.name }}</td>
                                 <td>
                                     {% if bookmark.pathLocations|length > 1 %}
@@ -69,6 +76,7 @@
                                 </td>
                             </tr>
                         {% endfor %}
+                        {% endif %}
                         </tbody>
                     </table>
                     {{ form_end(form_remove) }}
