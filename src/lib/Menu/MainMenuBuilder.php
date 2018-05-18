@@ -112,6 +112,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'routes' => [
                         'search' => 'ezplatform.search',
                         'trash' => 'ezplatform.trash.list',
+                        'bookmark' => 'ezplatform.bookmark.list',
                     ],
                 ],
             ]
