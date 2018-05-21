@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException as APIUnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Role;
+use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RolesDeleteData;
@@ -32,40 +32,38 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class RoleController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var TranslatorInterface */
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var RoleService */
+    /** @var \eZ\Publish\API\Repository\RoleService */
     private $roleService;
 
-    /** @var RoleCreateMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper */
     private $roleCreateMapper;
 
-    /** @var RoleUpdateMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper */
     private $roleUpdateMapper;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
     /** @var int */
     private $defaultPaginationLimit;
 
     /**
-     * RoleController constructor.
-     *
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
-     * @param RoleService $roleService
-     * @param RoleCreateMapper $roleCreateMapper
-     * @param RoleUpdateMapper $roleUpdateMapper
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\RoleService $roleService
+     * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper $roleCreateMapper
+     * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper $roleUpdateMapper
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param int $defaultPaginationLimit
      */
     public function __construct(
@@ -89,9 +87,11 @@ class RoleController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function listAction(Request $request): Response
     {
@@ -104,7 +104,7 @@ class RoleController extends Controller
         $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
         $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
-        /** @var Role[] $sectionList */
+        /** @var \eZ\Publish\API\Repository\Values\User\Role[] $sectionList */
         $roles = $pagerfanta->getCurrentPageResults();
 
         $rolesNumbers = array_column($roles, 'id');
@@ -118,18 +118,20 @@ class RoleController extends Controller
         return $this->render('@EzPlatformAdminUi/admin/role/list.html.twig', [
             'form_roles_delete' => $rolesDeleteForm->createView(),
             'pager' => $pagerfanta,
+            'can_create' => $this->isGranted(new Attribute('role', 'create')),
+            'can_delete' => $this->isGranted(new Attribute('role', 'delete')),
+            'can_update' => $this->isGranted(new Attribute('role', 'update')),
+            'can_assign' => $this->isGranted(new Attribute('role', 'assign')),
         ]);
     }
 
     /**
-     * @param Request $request
-     * @param Role $role
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\User\Role $role
      * @param int $policyPage
      * @param int $assignmentPage
      *
-     * @return Response
-     *
-     * @throws APIUnauthorizedException
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(Request $request, Role $role, int $policyPage = 1, int $assignmentPage = 1): Response
     {
@@ -137,7 +139,12 @@ class RoleController extends Controller
             new RoleDeleteData($role)
         );
 
-        $assignments = $this->roleService->getRoleAssignments($role);
+        // If user has no permission to content/read than he should see empty table.
+        try {
+            $assignments = $this->roleService->getRoleAssignments($role);
+        } catch (UnauthorizedException $e) {
+            $assignments = [];
+        }
 
         return $this->render('@EzPlatformAdminUi/admin/role/view.html.twig', [
             'role' => $role,
@@ -149,8 +156,14 @@ class RoleController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function createAction(Request $request): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'create'));
         $form = $this->formFactory->createRole();
         $form->handleRequest($request);
 
@@ -184,8 +197,15 @@ class RoleController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\User\Role $role
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function updateAction(Request $request, Role $role): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'update'));
         $form = $this->formFactory->updateRole(
             new RoleUpdateData($role)
         );
@@ -226,8 +246,15 @@ class RoleController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\User\Role $role
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function deleteAction(Request $request, Role $role): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'delete'));
         $form = $this->formFactory->deleteRole(
             new RoleDeleteData($role)
         );
@@ -269,11 +296,11 @@ class RoleController extends Controller
      *
      * @throws \InvalidArgumentException
      * @throws InvalidArgumentException
-     * @throws UnauthorizedException
      * @throws InvalidOptionsException
      */
     public function bulkDeleteAction(Request $request): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'delete'));
         $form = $this->formFactory->deleteRoles(
             new RolesDeleteData()
         );

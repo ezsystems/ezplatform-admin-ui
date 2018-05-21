@@ -29,25 +29,36 @@
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'role.view.list.title'|trans|desc('Roles') }}</div>
             <div>
-                <a title="{{ 'role.view.list.action.add'|trans|desc('Create a Role') }}" href="{{ path('ezplatform.role.create') }}" class="btn btn-primary">
-                    <svg class="ez-icon ez-icon-create">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
-                    </svg>
-                </a>
-                {% set modal_data_target = 'delete-sections-modal' %}
-                <button id="delete-roles" type="button" class="btn btn-danger" disabled data-toggle="modal"
-                        data-target="#{{ modal_data_target }}" title="{{ 'role.view.list.action.delete'|trans|desc('Delete Role') }}">
-                    <svg class="ez-icon ez-icon-trash">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-                    </svg>
-                </button>
-                {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
-                    'id': modal_data_target,
-                    'message': 'role.modal.message'|trans|desc('Do you want to delete Role?'),
-                    'data_click': '#delete-roles_delete',
-                }%}
+                {% if can_create %}
+                    <a
+                        title="{{ 'role.view.list.action.add'|trans|desc('Create a Role') }}"
+                        href="{{ path('ezplatform.role.create') }}"
+                        class="btn btn-primary">
+                        <svg class="ez-icon ez-icon-create">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+                {% if can_delete %}
+                    {% set modal_data_target = 'delete-sections-modal' %}
+                    <button
+                        id="delete-roles"
+                        type="button"
+                        class="btn btn-danger"
+                        disabled
+                        data-toggle="modal"
+                        data-target="#{{ modal_data_target }}"
+                        title="{{ 'role.view.list.action.delete'|trans|desc('Delete Role') }}">
+                        <svg class="ez-icon ez-icon-trash">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        </svg>
+                    </button>
+                    {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+                        'id': modal_data_target,
+                        'message': 'role.modal.message'|trans|desc('Do you want to delete Role?'),
+                        'data_click': '#delete-roles_delete',
+                    }%}
+                {% endif %}
             </div>
         </div>
 
@@ -63,7 +74,13 @@
             <tbody>
             {% for role in pager.currentPageResults %}
                 <tr>
-                    <td class="ez-checkbox-cell">{{ form_widget(form_roles_delete.roles[role.id]) }}</td>
+                    <td class="ez-checkbox-cell">
+                        {% if can_delete %}
+                            {{ form_widget(form_roles_delete.roles[role.id]) }}
+                        {% else %}
+                            {% do form_roles_delete.roles.setRendered %}
+                        {% endif %}
+                    </td>
                     <td>
                         <a href="{{ path('ezplatform.role.view', { roleId: role.id }) }}">
                             {{ role.identifier }}
@@ -71,18 +88,26 @@
                     </td>
                     <td>{{ role.id }}</td>
                     <td class="text-right">
-                        <a title="{{ 'role.view.list.action.assign_to_users_or_groups'|trans|desc('Assign to Users/Groups') }}"
-                           href="{{ path('ezplatform.role_assignment.create', { roleId: role.id }) }}" class="btn btn-icon mx-3">
-                            <svg class="ez-icon ez-icon-relations ez-icon--secondary">
-                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-user"></use>
-                            </svg>
-                        </a>
-                        <a title="{{ 'role.view.list.action.edit'|trans|desc('Edit') }}"
-                           href="{{ path('ezplatform.role.update', { roleId: role.id }) }}" class="btn btn-icon mx-3">
-                            <svg class="ez-icon ez-icon-edit">
-                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-                            </svg>
-                        </a>
+                        {% if can_assign %}
+                            <a
+                                title="{{ 'role.view.list.action.assign_to_users_or_groups'|trans|desc('Assign to Users/Groups') }}"
+                                href="{{ path('ezplatform.role_assignment.create', { roleId: role.id }) }}"
+                                class="btn btn-icon mx-3">
+                                <svg class="ez-icon ez-icon-relations ez-icon--secondary">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-user"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
+                        {% if can_update %}
+                            <a
+                                title="{{ 'role.view.list.action.edit'|trans|desc('Edit') }}"
+                                href="{{ path('ezplatform.role.update', { roleId: role.id }) }}"
+                                class="btn btn-icon mx-3">
+                                <svg class="ez-icon ez-icon-edit">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
