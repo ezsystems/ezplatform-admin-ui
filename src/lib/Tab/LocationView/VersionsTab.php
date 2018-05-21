@@ -8,81 +8,118 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
-use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
 
-class VersionsTab extends AbstractTab implements OrderedTabInterface
+class VersionsTab extends AbstractTab implements OrderedTabInterface, ConditionalTabInterface
 {
     public const FORM_REMOVE_DRAFT = 'version_remove_draft';
     public const FORM_REMOVE_ARCHIVED = 'version_remove_archived';
     const URI_FRAGMENT = 'ez-tab-location-view-versions';
 
-    /** @var DatasetFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
     protected $datasetFactory;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     protected $formFactory;
 
-    /** @var UrlGeneratorInterface */
+    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     protected $urlGenerator;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    protected $permissionResolver;
+
     /**
-     * @param Environment $twig
-     * @param TranslatorInterface $translator
-     * @param DatasetFactory $datasetFactory
-     * @param FormFactory $formFactory
-     * @param UrlGeneratorInterface $urlGenerator
+     * @param \Twig\Environment $twig
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         DatasetFactory $datasetFactory,
         FormFactory $formFactory,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
+        PermissionResolver $permissionResolver
     ) {
         parent::__construct($twig, $translator);
 
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
+        $this->permissionResolver = $permissionResolver;
     }
 
+    /**
+     * @return string
+     */
     public function getIdentifier(): string
     {
         return 'versions';
     }
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         /** @Desc("Versions") */
         return $this->translator->trans('tab.name.versions', [], 'locationview');
     }
 
+    /**
+     * @return int
+     */
     public function getOrder(): int
     {
         return 300;
     }
 
+    /**
+     * Get information about tab presence.
+     *
+     * @param array $parameters
+     *
+     * @return bool
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    public function evaluate(array $parameters): bool
+    {
+        return $this->permissionResolver->canUser('content', 'versionread', $parameters['content']);
+    }
+
+    /**
+     * @param array $parameters
+     *
+     * @return string
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function renderView(array $parameters): string
     {
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $parameters['content'];
-        /** @var Location $location */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
         $location = $parameters['location'];
 
         $draftPaginationParams = $parameters['draft_pagination_params'];
@@ -99,7 +136,7 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
         $draftPagerfanta->setMaxPerPage($draftPaginationParams['limit']);
         $draftPagerfanta->setCurrentPage(min($draftPaginationParams['page'], $draftPagerfanta->getNbPages()));
 
-        /** @var UIValue\Content\VersionInfo[] $policies */
+        /** @var \EzSystems\EzPlatformAdminUi\UI\Value\Content\VersionInfo[] $policies */
         $draftVersions = $draftPagerfanta->getCurrentPageResults();
 
         $archivedVersions = $versionsDataset->getArchivedVersions();
@@ -136,7 +173,7 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param VersionInfo[] $versions
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo[] $versions
      *
      * @return array
      */
@@ -148,13 +185,11 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param Location $location
-     * @param VersionInfo[] $versions
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param array $versions
      * @param bool $isDraftForm
      *
-     * @return FormInterface
-     *
-     * @throws InvalidOptionsException
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function createVersionRemoveForm(Location $location, array $versions, bool $isDraftForm): FormInterface
     {
