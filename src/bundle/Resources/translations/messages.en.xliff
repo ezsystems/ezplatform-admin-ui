@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="bb7c5bc498a649c6ec116abc12e7b8be1d4f7b92" resname="alert.close">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note>key: alert.close</note>
+      </trans-unit>
       <trans-unit id="d2293b387ecddbc6173fd579abd37873fcbc5e97" resname="authentication.forgot_password">
         <source>Forgot password?</source>
         <target state="new">Forgot password?</target>
