@@ -110,6 +110,7 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
             }
 
             $fieldDefinitionsByGroup[$groupId]['fieldDefinitions'][] = $fieldDefinition;
+            $fieldDefinitionsByGroup[$groupId]['name'] = $fieldDefinitionsByGroup[$groupId]['name'] ?? $groupId;
         }
 
         return $fieldDefinitionsByGroup;
