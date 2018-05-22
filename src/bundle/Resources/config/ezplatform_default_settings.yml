@@ -36,3 +36,9 @@ parameters:
 
     # Subtree Operations
     ezsettings.default.subtree_operations.copy_subtree.limit: 100
+
+    # Notifications
+    ezsettings.default.notifications.error.timeout: 0
+    ezsettings.default.notifications.warning.timeout: 0
+    ezsettings.default.notifications.success.timeout: 5000
+    ezsettings.default.notifications.info.timeout: 0

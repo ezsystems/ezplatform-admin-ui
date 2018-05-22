@@ -46,3 +46,8 @@ services:
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText\CustomTag:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'richTextCustomTags' }
+
+    # Notifications
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\Notifications:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'notifications' }
