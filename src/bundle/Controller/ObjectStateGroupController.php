@@ -71,7 +71,7 @@ class ObjectStateGroupController extends Controller
      */
     public function listAction(): Response
     {
-        /** @var ObjectStateGroup[] $objectStateGroups */
+        /** @var \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup[] $objectStateGroups */
         $objectStateGroups = $this->objectStateService->loadObjectStateGroups();
         $emptyObjectStateGroups = [];
 
@@ -116,6 +116,7 @@ class ObjectStateGroupController extends Controller
      */
     public function addAction(Request $request): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
         $defaultLanguageCode = reset($this->languages);
 
         $form = $this->formFactory->createObjectStateGroup(
@@ -165,6 +166,7 @@ class ObjectStateGroupController extends Controller
      */
     public function deleteAction(Request $request, ObjectStateGroup $group): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
         $form = $this->formFactory->deleteObjectStateGroup(
             new ObjectStateGroupDeleteData($group)
         );
@@ -202,6 +204,7 @@ class ObjectStateGroupController extends Controller
      */
     public function bulkDeleteAction(Request $request): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
         $form = $this->formFactory->deleteObjectStateGroups(
             new ObjectStateGroupsDeleteData()
         );
@@ -240,6 +243,7 @@ class ObjectStateGroupController extends Controller
      */
     public function updateAction(Request $request, ObjectStateGroup $group): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
         $form = $this->formFactory->updateObjectStateGroup(
             new ObjectStateGroupUpdateData($group)
         );

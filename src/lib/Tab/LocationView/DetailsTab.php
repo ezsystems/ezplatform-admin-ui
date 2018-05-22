@@ -21,13 +21,12 @@ use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\Location;
 
 class DetailsTab extends AbstractTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-location-view-details';
-
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    protected $contentTypeService;
 
     /** @var \eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList */
     protected $fieldsGroupsListHelper;
@@ -107,9 +106,9 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function renderView(array $parameters): string
     {
@@ -138,10 +137,10 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
         $lastContributor = (new UserExists($this->userService))->isSatisfiedBy($versionInfo->creatorId)
             ? $this->userService->loadUser($versionInfo->creatorId) : null;
 
-        $can_see_section = $this->permissionResolver->hasAccess('section', 'view');
+        $canSeeSection = $this->permissionResolver->hasAccess('section', 'view');
 
         $viewParameters = [
-            'section' => $can_see_section ? $this->sectionService->loadSection($contentInfo->sectionId) : null,
+            'section' => $canSeeSection ? $this->sectionService->loadSection($contentInfo->sectionId) : null,
             'contentInfo' => $contentInfo,
             'versionInfo' => $versionInfo,
             'creator' => $creator,
@@ -151,7 +150,8 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
             'objectStates' => $objectStatesDataset->getObjectStates(),
             'sort_field_clause_map' => $this->getSortFieldClauseMap(),
             'form_state_update' => $contentObjectStateUpdateTypeByGroupId,
-            'can_see_section' => $can_see_section,
+            'can_see_section' => $canSeeSection,
+            'can_assign' => $this->canUserAssignObjectState(),
         ];
 
         return $this->twig->render(
@@ -176,5 +176,17 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
             Repository\Values\Content\Location::SORT_FIELD_NODE_ID => 'LocationId',
             Repository\Values\Content\Location::SORT_FIELD_CONTENTOBJECT_ID => 'ContentId',
         ];
+    }
+
+    /**
+     * Specifies if the User has access to assigning a given Object State to Content Info.
+     *
+     * @return bool
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    private function canUserAssignObjectState(): bool
+    {
+        return $this->permissionResolver->hasAccess('state', 'assign') !== false;
     }
 }
