@@ -19,7 +19,7 @@
 
     {% for group in fieldDefinitionsByGroup if group.fieldDefinitions|length > 0 %}
         <section class="ez-fieldgroup container">
-            <h2 class="ez-fieldgroup__name">{{ group.name }}</h2>
+            <h3 class="ez-fieldgroup__name">{{ group.name|capitalize }}</h3>
             {% for fieldDefinition in group.fieldDefinitions %}
                 <div class="ez-content-field">
                     <p class="ez-content-field-name">{{ fieldDefinition.name }}:</p>

@@ -4,7 +4,7 @@
     <div class="ez-data-source__map"></div>
     <div class="ez-data-source__locate-me">
         <div class="form-control-label">{{ 'content.field_type.ezgmaplocation.set_current_location'|trans|desc('Set current location') }}</div>
-        <button class="btn btn-secondary">{{ 'content.field_type.ezgmaplocation.locate_me'|trans|desc('Locate me') }}</button>
+        <button type="button" class="btn btn-secondary">{{ 'content.field_type.ezgmaplocation.locate_me'|trans|desc('Locate me') }}</button>
     </div>
     {{ form_row(form.latitude) }}
     {{ form_row(form.longitude) }}
@@ -14,7 +14,7 @@
         </div>
         <div class="ez-data-source__input-wrapper">
             {{ form_widget(form.address, {'attr': {'class': 'ez-data-source__input'}}) }}
-            <button class="btn btn-secondary btn--search-by-address" title="{{ 'ezgmaplocation.action.search'|trans|desc('Search') }}">
+            <button type="button" class="btn btn-secondary btn--search-by-address" title="{{ 'ezgmaplocation.action.search'|trans|desc('Search') }}">
                 <svg class="ez-icon ez-icon-search">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
                 </svg>
