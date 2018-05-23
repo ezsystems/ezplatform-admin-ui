@@ -6,12 +6,15 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
-use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
+use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Content Edit contextual sidebar menu.
@@ -26,6 +29,45 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
     const ITEM__PREVIEW = 'content_create__sidebar_right__preview';
     const ITEM__CANCEL = 'content_create__sidebar_right__cancel';
 
+    const BTN_TRIGGER_CLASS = 'btn--trigger';
+    const BTN_DISABLED_ATTR = ['disabled' => 'disabled'];
+
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
+
+    /** @var \eZ\Publish\API\Repository\LocationService */
+    private $locationService;
+
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    private $contentTypeService;
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     */
+    public function __construct(
+        MenuItemFactory $factory,
+        EventDispatcherInterface $eventDispatcher,
+        PermissionResolver $permissionResolver,
+        ContentService $contentService,
+        LocationService $locationService,
+        ContentTypeService $contentTypeService
+    ) {
+        parent::__construct($factory, $eventDispatcher);
+
+        $this->permissionResolver = $permissionResolver;
+        $this->contentService = $contentService;
+        $this->locationService = $locationService;
+        $this->contentTypeService = $contentTypeService;
+    }
+
     /**
      * @return string
      */
@@ -37,45 +79,68 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
     /**
      * @param array $options
      *
-     * @return ItemInterface
+     * @return \Knp\Menu\ItemInterface
      *
-     * @throws ApiExceptions\InvalidArgumentException
-     * @throws ApiExceptions\BadStateException
-     * @throws InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var ItemInterface|ItemInterface[] $menu */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Location $parentLocation */
+        $parentLocation = $options['parentLocation'];
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
+        $contentType = $options['content_type'];
+        $parentContentType = $this->contentTypeService->loadContentType($parentLocation->contentInfo->contentTypeId);
+        /** @var \eZ\Publish\API\Repository\Values\Content\Language $language */
+        $language = $options['language'];
+        /** @var \Knp\Menu\ItemInterface|\Knp\Menu\ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
+
+        $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $language->languageCode);
+        $locationCreateStruct = $this->locationService->newLocationCreateStruct($parentLocation->id);
+
+        $canPublish = $this->permissionResolver->canUser('content', 'publish', $contentCreateStruct, [$locationCreateStruct]);
+        $canCreate = $this->permissionResolver->canUser('content', 'create', $contentCreateStruct, [$locationCreateStruct]) && $parentContentType->isContainer;
+        $canPreview = $this->permissionResolver->canUser('content', 'versionread', $contentCreateStruct, [$locationCreateStruct]);
+        $publishAttributes = [
+            'class' => self::BTN_TRIGGER_CLASS,
+            'data-click' => '#ezrepoforms_content_edit_publish',
+        ];
+        $createAttributes = [
+            'class' => self::BTN_TRIGGER_CLASS,
+            'data-click' => '#ezrepoforms_content_edit_saveDraft',
+        ];
+        $previewAttributes = [
+            'class' => self::BTN_TRIGGER_CLASS,
+            'data-click' => '#ezrepoforms_content_edit_preview',
+        ];
 
         $menu->setChildren([
             self::ITEM__PUBLISH => $this->createMenuItem(
                 self::ITEM__PUBLISH,
                 [
-                    'attributes' => [
-                        'class' => 'btn--trigger',
-                        'data-click' => '#ezrepoforms_content_edit_publish',
-                    ],
+                    'attributes' => $canCreate && $canPublish
+                        ? $publishAttributes
+                        : array_merge($publishAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__SAVE_DRAFT => $this->createMenuItem(
                 self::ITEM__SAVE_DRAFT,
                 [
-                    'attributes' => [
-                        'class' => 'btn--trigger',
-                        'data-click' => '#ezrepoforms_content_edit_saveDraft',
-                    ],
+                    'attributes' => $canCreate
+                        ? $createAttributes
+                        : array_merge($createAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => ['icon' => 'save'],
                 ]
             ),
             self::ITEM__PREVIEW => $this->createMenuItem(
                 self::ITEM__PREVIEW,
                 [
-                    'attributes' => [
-                        'class' => 'btn--trigger',
-                        'data-click' => '#ezrepoforms_content_edit_preview',
-                    ],
+                    'attributes' => $canPreview
+                        ? $previewAttributes
+                        : array_merge($previewAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => ['icon' => 'view-desktop'],
                 ]
             ),
@@ -83,7 +148,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                 self::ITEM__CANCEL,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => self::BTN_TRIGGER_CLASS,
                         'data-click' => '#ezrepoforms_content_edit_cancel',
                     ],
                     'extras' => ['icon' => 'circle-close'],
@@ -95,7 +160,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
     }
 
     /**
-     * @return Message[]
+     * @return \JMS\TranslationBundle\Model\Message[]
      */
     public static function getTranslationMessages(): array
     {
