@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\Role;
+use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PoliciesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
@@ -130,6 +131,7 @@ class PolicyController extends Controller
             'role' => $role,
             'pager' => $pagerfanta,
             'route_name' => $routeName,
+            'can_update' => $this->isGranted(new Attribute('role', 'update')),
         ]);
     }
 
@@ -139,16 +141,12 @@ class PolicyController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\LimitationValidationException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      * @throws \InvalidArgumentException
      */
     public function createAction(Request $request, Role $role): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'update'));
         $form = $this->formFactory->createPolicy(
             new PolicyCreateData()
         );
@@ -222,15 +220,13 @@ class PolicyController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\LimitationValidationException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \InvalidArgumentException
      */
     public function updateAction(Request $request, Role $role, Policy $policy): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'update'));
         $limitationTypes = $policy->module
             ? $this->roleService->getLimitationTypesByModuleFunction($policy->module, $policy->function)
             : [];
@@ -300,15 +296,14 @@ class PolicyController extends Controller
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \eZ\Publish\API\Repository\Values\User\Role $role
-     * @param \eZ\Publish\API\Repository\Values\User\PolicyDraft $policyDraft
+     * @param string $policyModule
+     * @param string $policyFunction
      *
      * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
-     * @throws \InvalidArgumentException
      */
     public function createWithLimitationAction(Request $request, Role $role, string $policyModule, string $policyFunction): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'update'));
         $form = $this->formFactory->createPolicyWithLimitation(
             (new PolicyCreateData())->setPolicy([
                 'module' => $policyModule,
@@ -357,13 +352,11 @@ class PolicyController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\LimitationValidationException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \InvalidArgumentException
      */
     public function deleteAction(Request $request, Role $role, Policy $policy): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'update'));
         $form = $this->formFactory->deletePolicy(
             new PolicyDeleteData($policy)
         );
@@ -413,14 +406,12 @@ class PolicyController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\LimitationValidationException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      * @throws \InvalidArgumentException
      */
     public function bulkDeleteAction(Request $request, Role $role): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'update'));
         $form = $this->formFactory->deletePolicies(
             new PoliciesDeleteData()
         );

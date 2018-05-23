@@ -8,14 +8,13 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
-use eZ\Publish\API\Repository\Values\User\Limitation\RoleLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\SubtreeLimitation;
 use eZ\Publish\API\Repository\Values\User\Role;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
+use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
@@ -27,38 +26,34 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use Symfony\Component\Translation\Exception\InvalidArgumentException;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class RoleAssignmentController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var TranslatorInterface */
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var RoleService */
+    /** @var \eZ\Publish\API\Repository\RoleService */
     private $roleService;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
     /** @var int */
     private $defaultPaginationLimit;
 
     /**
-     * PolicyController constructor.
-     *
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
-     * @param RoleService $roleService
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\RoleService $roleService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param int $defaultPaginationLimit
      */
     public function __construct(
@@ -78,22 +73,29 @@ class RoleAssignmentController extends Controller
     }
 
     /**
-     * @param Role $role
+     * @param \eZ\Publish\API\Repository\Values\User\Role $role
      * @param string $routeName
      * @param int $assignmentPage
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listAction(Role $role, string $routeName, int $assignmentPage = 1): Response
     {
+        // If user has no permission to content/read than he should see empty table.
+        try {
+            $assignments = $this->roleService->getRoleAssignments($role);
+        } catch (UnauthorizedException $e) {
+            $assignments = [];
+        }
+
         $pagerfanta = new Pagerfanta(
-            new ArrayAdapter($this->roleService->getRoleAssignments($role))
+            new ArrayAdapter($assignments)
         );
 
         $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
         $pagerfanta->setCurrentPage(min($assignmentPage, $pagerfanta->getNbPages()));
 
-        /** @var RoleAssignment[] $assignments */
+        /** @var \eZ\Publish\API\Repository\Values\User\RoleAssignment[] $assignments */
         $assignments = $pagerfanta->getCurrentPageResults();
 
         $deleteRoleAssignmentsForm = $this->formFactory->deleteRoleAssignments(
@@ -105,11 +107,19 @@ class RoleAssignmentController extends Controller
             'form_role_assignments_delete' => $deleteRoleAssignmentsForm->createView(),
             'pager' => $pagerfanta,
             'route_name' => $routeName,
+            'can_assign' => $this->isGranted(new Attribute('role', 'assign')),
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\User\Role $role
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function createAction(Request $request, Role $role): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'assign'));
         $form = $this->formFactory->createRoleAssignment(new RoleAssignmentCreateData());
         $form->handleRequest($request);
 
@@ -149,8 +159,16 @@ class RoleAssignmentController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\User\Role $role
+     * @param \eZ\Publish\API\Repository\Values\User\RoleAssignment $roleAssignment
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function deleteAction(Request $request, Role $role, RoleAssignment $roleAssignment): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'assign'));
         $form = $this->formFactory->deleteRoleAssignment(
             new RoleAssignmentDeleteData($roleAssignment)
         );
@@ -188,19 +206,14 @@ class RoleAssignmentController extends Controller
     /**
      * Handles removing role assignments based on submitted form.
      *
-     * @param Request $request
-     * @param Role $role
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\User\Role $role
      *
-     * @return Response
-     *
-     * @throws \InvalidArgumentException
-     * @throws InvalidArgumentException
-     * @throws UnauthorizedException
-     * @throws NotFoundException
-     * @throws InvalidOptionsException
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function bulkDeleteAction(Request $request, Role $role): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'assign'));
         $form = $this->formFactory->deleteRoleAssignments(
             new RoleAssignmentsDeleteData()
         );
@@ -238,7 +251,7 @@ class RoleAssignmentController extends Controller
     }
 
     /**
-     * @param RoleAssignment[] $roleAssignments
+     * @param \eZ\Publish\API\Repository\Values\User\RoleAssignment[] $roleAssignments
      *
      * @return array
      */
@@ -250,9 +263,9 @@ class RoleAssignmentController extends Controller
     }
 
     /**
-     * @param RoleAssignmentCreateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData $data
      *
-     * @return RoleLimitation[]
+     * @return \eZ\Publish\API\Repository\Values\User\Limitation\RoleLimitation[]
      */
     private function createLimitations(RoleAssignmentCreateData $data): array
     {
