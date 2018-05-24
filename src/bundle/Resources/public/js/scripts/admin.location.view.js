@@ -87,7 +87,6 @@
             }],
             items,
             contentTypesMap,
-            limit: parseInt(container.dataset.limit, 10),
             totalCount: subItemsList.ChildrenCount
         }), container);
     });

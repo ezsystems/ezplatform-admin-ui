@@ -30,38 +30,38 @@ use eZ\Publish\Core\REST\Common\Output\Generator\Json as JsonOutputGenerator;
  */
 class ContentViewParameterSupplier
 {
-    /** @var Visitor */
+    /** @var \eZ\Publish\Core\REST\Common\Output\Visitor */
     private $outputVisitor;
 
-    /** @var JsonOutputGenerator */
+    /** @var \eZ\Publish\Core\REST\Common\Output\Generator\Json */
     private $outputGenerator;
 
-    /** @var ContentTypeInfoListValueObjectVisitor */
+    /** @var \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentTypeInfoList */
     private $contentTypeInfoListValueObjectVisitor;
 
-    /** @var SubitemsListValueObjectVisitor */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList */
     private $subitemsListValueObjectVisitor;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
     /** @var int */
     private $subitemsLimit;
 
     /**
-     * @param Visitor $outputVisitor
-     * @param JsonOutputGenerator $outputGenerator
-     * @param ContentTypeInfoListValueObjectVisitor $contentTypeInfoListValueObjectVisitor
-     * @param SubitemsListValueObjectVisitor $subitemsListValueObjectVisitor
-     * @param LocationService $locationService
-     * @param ContentService $contentService
-     * @param ContentTypeService $contentTypeService
+     * @param \eZ\Publish\Core\REST\Common\Output\Visitor $outputVisitor
+     * @param \eZ\Publish\Core\REST\Common\Output\Generator\Json $outputGenerator
+     * @param \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentTypeInfoList $contentTypeInfoListValueObjectVisitor
+     * @param \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList $subitemsListValueObjectVisitor
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param int $subitemsLimit
      */
     public function __construct(
@@ -93,11 +93,14 @@ class ContentViewParameterSupplier
      * we are using the same data structure it would use while
      * fetching data from the REST.
      *
-     * @param ContentView $view
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function supply(ContentView $view)
     {
-        /** @var ContentType[] $contentTypes */
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType[] $contentTypes */
         $contentTypes = [];
         $subitemsRows = [];
         $location = $view->getLocation();
@@ -124,6 +127,7 @@ class ContentViewParameterSupplier
         $view->addParameters([
             'subitems_module' => [
                 'items' => $subitemsListJson,
+                /* @deprecated since version 2.2, to be removed in 3.0 */
                 'limit' => $this->subitemsLimit,
                 'content_type_info_list' => $contentTypeInfoListJson,
             ],
@@ -131,11 +135,14 @@ class ContentViewParameterSupplier
     }
 
     /**
-     * @param ContentInfo $contentInfo
-     * @param Location $location
-     * @param ContentType $contentType
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
      *
-     * @return RestContent
+     * @return \eZ\Publish\Core\REST\Server\Values\RestContent
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     private function createRestContent(
         ContentInfo $contentInfo,
@@ -152,9 +159,9 @@ class ContentViewParameterSupplier
     }
 
     /**
-     * @param Location $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      *
-     * @return RestLocation
+     * @return \eZ\Publish\Core\REST\Server\Values\RestLocation
      */
     private function createRestLocation(Location $location): RestLocation
     {
@@ -165,11 +172,14 @@ class ContentViewParameterSupplier
     }
 
     /**
-     * @param Location $location
-     * @param ContentInfo $contentInfo
-     * @param ContentType $contentType
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
      *
-     * @return SubitemsRow
+     * @return \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsRow
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     private function createSubitemsRow(
         Location $location,
@@ -183,11 +193,11 @@ class ContentViewParameterSupplier
     }
 
     /**
-     * @param $subitemsList
+     * @param \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsList $subitemsList
      *
      * @return string
      */
-    private function visitSubitemsList($subitemsList): string
+    private function visitSubitemsList(SubitemsList $subitemsList): string
     {
         $this->outputGenerator->reset();
         $this->outputGenerator->startDocument($subitemsList);
@@ -197,11 +207,11 @@ class ContentViewParameterSupplier
     }
 
     /**
-     * @param $contentTypeInfoList
+     * @param \eZ\Publish\Core\REST\Server\Values\ContentTypeInfoList $contentTypeInfoList
      *
      * @return string
      */
-    private function visitContentTypeInfoList($contentTypeInfoList): string
+    private function visitContentTypeInfoList(ContentTypeInfoList $contentTypeInfoList): string
     {
         $this->outputGenerator->reset();
         $this->outputGenerator->startDocument($contentTypeInfoList);

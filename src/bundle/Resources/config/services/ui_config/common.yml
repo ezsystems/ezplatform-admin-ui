@@ -42,6 +42,10 @@ services:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'universalDiscoveryWidget' }
 
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module\SubItemsList:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'subItems' }
+
     # Custom Tags UI configuration provider
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText\CustomTag:
         tags:
