@@ -40,7 +40,7 @@
 {% endblock %}
 
 {% block right_sidebar %}
-    {% set content_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_create.sidebar_right', [], {'parentLocation': parentLocation, 'content_type': contentType}) %}
+    {% set content_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_create.sidebar_right', [], {'parentLocation': parentLocation, 'content_type': contentType, 'language': language}) %}
     {{ knp_menu_render(content_create_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 

@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -17,6 +18,7 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use eZ\Publish\API\Repository\PermissionResolver;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Content Edit contextual sidebar menu.
@@ -31,17 +33,37 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
     const ITEM__PREVIEW = 'content_edit__sidebar_right__preview';
     const ITEM__CANCEL = 'content_edit__sidebar_right__cancel';
 
+    const BTN_TRIGGER_CLASS = 'btn--trigger';
+    const BTN_DISABLED_ATTR = ['disabled' => 'disabled'];
+
     /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver */
     private $siteaccessResolver;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
+    /** @var \eZ\Publish\API\Repository\LocationService */
+    private $locationService;
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver $siteaccessResolver
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
-        NonAdminSiteaccessResolver $siteaccessResolver
+        NonAdminSiteaccessResolver $siteaccessResolver,
+        PermissionResolver $permissionResolver,
+        LocationService $locationService
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->siteaccessResolver = $siteaccessResolver;
+        $this->permissionResolver = $permissionResolver;
+        $this->locationService = $locationService;
     }
 
     /**
@@ -75,24 +97,39 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         /** @var Location $parentLocation */
         $parentLocation = $options['parent_location'];
 
+        $canPublish = $this->permissionResolver->canUser('content', 'publish', $content);
+        $canEdit = $this->permissionResolver->canUser('content', 'edit', $content);
+        $canDelete = $this->permissionResolver->canUser('content', 'remove', $content);
+
+        $publishAttributes = [
+            'class' => self::BTN_TRIGGER_CLASS,
+            'data-click' => '#ezrepoforms_content_edit_publish',
+        ];
+        $editAttributes = [
+            'class' => self::BTN_TRIGGER_CLASS,
+            'data-click' => '#ezrepoforms_content_edit_saveDraft',
+        ];
+        $deleteAttributes = [
+            'class' => self::BTN_TRIGGER_CLASS,
+            'data-click' => '#ezrepoforms_content_edit_cancel',
+        ];
+
         $items = [
             self::ITEM__PUBLISH => $this->createMenuItem(
                 self::ITEM__PUBLISH,
                 [
-                    'attributes' => [
-                        'class' => 'btn--trigger',
-                        'data-click' => '#ezrepoforms_content_edit_publish',
-                    ],
+                    'attributes' => $canEdit && $canPublish
+                        ? $publishAttributes
+                        : array_merge($publishAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__SAVE_DRAFT => $this->createMenuItem(
                 self::ITEM__SAVE_DRAFT,
                 [
-                    'attributes' => [
-                        'class' => 'btn--trigger',
-                        'data-click' => '#ezrepoforms_content_edit_saveDraft',
-                    ],
+                    'attributes' => $canEdit
+                        ? $editAttributes
+                        : array_merge($editAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => ['icon' => 'save'],
                 ]
             ),
@@ -108,10 +145,9 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         $items[self::ITEM__CANCEL] = $this->createMenuItem(
             self::ITEM__CANCEL,
             [
-                'attributes' => [
-                    'class' => 'btn--trigger',
-                    'data-click' => '#ezrepoforms_content_edit_cancel',
-                ],
+                'attributes' => $canDelete
+                    ? $deleteAttributes
+                    : array_merge($deleteAttributes, self::BTN_DISABLED_ATTR),
                 'extras' => ['icon' => 'circle-close'],
             ]
         );
@@ -141,6 +177,9 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
      * @param \eZ\Publish\API\Repository\Values\Content\Location $parentLocation
      *
      * @return \Knp\Menu\ItemInterface
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     private function getContentPreviewItem(
         ?Location $location,
@@ -162,14 +201,24 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
             $language->languageCode
         );
 
+        $canPreview = $this->permissionResolver->canUser(
+            'content',
+            'versionread',
+            $content,
+            [$location ?? $this->locationService->newLocationCreateStruct($parentLocation->id)]
+        );
+
+        $previewAttributes = [
+            'class' => self::BTN_TRIGGER_CLASS,
+            'data-click' => '#ezrepoforms_content_edit_preview',
+        ];
+
         return $this->createMenuItem(
             self::ITEM__PREVIEW,
             [
-                'attributes' => [
-                    'class' => 'btn--trigger',
-                    'data-click' => '#ezrepoforms_content_edit_preview',
-                    'disabled' => empty($siteaccesses),
-                ],
+                'attributes' => $canPreview && !empty($siteaccesses)
+                    ? $previewAttributes
+                    : array_merge($previewAttributes, self::BTN_DISABLED_ATTR),
                 'extras' => ['icon' => 'view-desktop'],
             ]
         );
