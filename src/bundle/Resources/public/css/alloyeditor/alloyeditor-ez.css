@@ -241,7 +241,7 @@
 
 .ae-ui IE10-PLUS::-ms-reveal,
 .ae-ui [class^=ae-toolbar] {
-  height: 40px;
+  height: auto;
   box-sizing: content-box;
 }
 
