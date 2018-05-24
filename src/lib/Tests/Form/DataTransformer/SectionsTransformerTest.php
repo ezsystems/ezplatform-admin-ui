@@ -62,7 +62,7 @@ class SectionsTransformerTest extends TestCase
         $transformer = new SectionsTransformer($service);
         $result = $transformer->reverseTransform($value);
 
-        $this->assertEquals(null, $result);
+        $this->assertNull($result);
     }
 
     /**

@@ -74,7 +74,7 @@ class SectionTransformerTest extends TestCase
 
         $result = $transformer->reverseTransform(null);
 
-        $this->assertEquals(null, $result);
+        $this->assertNull($result);
     }
 
     public function testReverseTransformWithNotFoundException()
