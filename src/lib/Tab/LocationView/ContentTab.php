@@ -12,40 +12,40 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
-use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
+use EzSystems\EzPlatformAdminUi\Util\FieldDefinitionGroupsUtil;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class ContentTab extends AbstractTab implements OrderedTabInterface
 {
-    /** @var FieldsGroupsList */
-    private $fieldsGroupsListHelper;
+    /** @var \EzSystems\EzPlatformAdminUi\Util\FieldDefinitionGroupsUtil */
+    private $fieldDefinitionGroupsUtil;
 
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
     /** @var array */
     private $siteAccessLanguages;
 
     /**
-     * @param Environment $twig
-     * @param TranslatorInterface $translator
-     * @param FieldsGroupsList $fieldsGroupsListHelper
-     * @param LanguageService $languageService
+     * @param \Twig\Environment $twig
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \EzSystems\EzPlatformAdminUi\Util\FieldDefinitionGroupsUtil $fieldDefinitionGroupsUtil
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
      * @param array $siteAccessLanguages
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
-        FieldsGroupsList $fieldsGroupsListHelper,
+        FieldDefinitionGroupsUtil $fieldDefinitionGroupsUtil,
         LanguageService $languageService,
         array $siteAccessLanguages
     ) {
         parent::__construct($twig, $translator);
 
-        $this->fieldsGroupsListHelper = $fieldsGroupsListHelper;
+        $this->fieldDefinitionGroupsUtil = $fieldDefinitionGroupsUtil;
         $this->languageService = $languageService;
         $this->siteAccessLanguages = $siteAccessLanguages;
     }
@@ -73,7 +73,7 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
         /** @var ContentType $contentType */
         $contentType = $parameters['contentType'];
         $fieldDefinitions = $contentType->getFieldDefinitions();
-        $fieldDefinitionsByGroup = $this->groupFieldDefinitions($fieldDefinitions);
+        $fieldDefinitionsByGroup = $this->fieldDefinitionGroupsUtil->groupFieldDefinitions($fieldDefinitions);
 
         $languages = $this->loadContentLanguages($content);
 
@@ -81,7 +81,9 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
             'EzPlatformAdminUiBundle:content/tab:content.html.twig',
             [
                 'content' => $content,
+                /* @deprecated since version 2.2, to be removed in 3.0 */
                 'fieldDefinitionsByGroup' => $fieldDefinitionsByGroup,
+                'field_definitions_by_group' => $fieldDefinitionsByGroup,
                 'languages' => $languages,
                 'location' => $parameters['location'],
             ]
@@ -89,37 +91,9 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param $fieldDefinitions
-     *
-     * @return mixed
-     */
-    private function groupFieldDefinitions($fieldDefinitions)
-    {
-        $fieldDefinitionsByGroup = [];
-        foreach ($this->fieldsGroupsListHelper->getGroups() as $groupId => $groupName) {
-            $fieldDefinitionsByGroup[$groupId] = [
-                'name' => $groupName,
-                'fieldDefinitions' => [],
-            ];
-        }
-
-        foreach ($fieldDefinitions as $fieldDefinition) {
-            $groupId = $fieldDefinition->fieldGroup;
-            if (!$groupId) {
-                $groupId = $this->fieldsGroupsListHelper->getDefaultGroup();
-            }
-
-            $fieldDefinitionsByGroup[$groupId]['fieldDefinitions'][] = $fieldDefinition;
-            $fieldDefinitionsByGroup[$groupId]['name'] = $fieldDefinitionsByGroup[$groupId]['name'] ?? $groupId;
-        }
-
-        return $fieldDefinitionsByGroup;
-    }
-
-    /**
      * Loads system languages with filtering applied.
      *
-     * @param Content $content
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      *
      * @return array
      */
