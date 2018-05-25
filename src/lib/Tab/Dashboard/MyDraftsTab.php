@@ -11,44 +11,53 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
-class MyDraftsTab extends AbstractTab implements OrderedTabInterface
+class MyDraftsTab extends AbstractTab implements OrderedTabInterface, ConditionalTabInterface
 {
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     protected $contentService;
 
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    protected $permissionResolver;
+
     /**
-     * @param Environment $twig
-     * @param TranslatorInterface $translator
-     * @param ContentService $contentService
-     * @param ContentTypeService $contentTypeService
-     * @param LocationService $locationService
+     * @param \Twig\Environment $twig
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         ContentService $contentService,
         ContentTypeService $contentTypeService,
-        LocationService $locationService
+        LocationService $locationService,
+        PermissionResolver $permissionResolver
     ) {
         parent::__construct($twig, $translator);
 
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->locationService = $locationService;
+        $this->permissionResolver = $permissionResolver;
     }
 
     public function getIdentifier(): string
@@ -67,13 +76,43 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface
         return 100;
     }
 
+    /**
+     * Get information about tab presence.
+     *
+     * @param array $parameters
+     *
+     * @return bool
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    public function evaluate(array $parameters): bool
+    {
+        // hide tab if user has absolutely no access to content/versionread
+        return false !== $this->permissionResolver->hasAccess('content', 'versionread');
+    }
+
+    /**
+     * @param array $parameters
+     *
+     * @return string
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     */
     public function renderView(array $parameters): string
     {
         /** @todo Handle pagination */
         $page = 1;
         $limit = 10;
+        $drafts = [];
 
-        $drafts = $this->contentService->loadContentDrafts();
+        // if user has no access content/versionread for one of versions, exception is caught and draft array is empty
+        try {
+            $drafts = $this->contentService->loadContentDrafts();
+        } catch (UnauthorizedException $e) {
+        }
 
         // ContentService::loadContentDrafts returns unsorted list of VersionInfo.
         // Sort results by modification date, descending.
@@ -89,7 +128,7 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface
         $pager->setCurrentPage($page);
 
         $data = [];
-        /** @var VersionInfo $version */
+        /** @var \eZ\Publish\API\Repository\Values\Content\VersionInfo $version */
         foreach ($pager as $version) {
             $contentInfo = $version->getContentInfo();
             $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);

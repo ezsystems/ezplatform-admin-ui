@@ -66,6 +66,7 @@ class ContentObjectStateUpdateType extends AbstractType
                 'label' => false,
                 'choice_loader' => new CallbackChoiceLoader(function () use ($objectStateGroup, $contentInfo) {
                     $contentState = $this->objectStateService->getContentState($contentInfo, $objectStateGroup);
+
                     return array_filter(
                         $this->objectStateService->loadObjectStates($objectStateGroup),
                         function (ObjectState $objectState) use ($contentInfo, $contentState) {
