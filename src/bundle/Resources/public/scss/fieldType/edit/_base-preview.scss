@@ -12,7 +12,7 @@
     }
 
     .ez-field-edit__data {
-        border-radius: .25rem;
+        border-radius: 0.25rem;
         border: 2px dashed $ez-color-base-pale;
         padding: 1rem;
         text-align: center;
@@ -20,22 +20,22 @@
 
         .ez-data-source__btn-add {
             display: inline-flex;
-            padding: .5rem 1.25rem;
-            border-radius: .25rem;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.25rem;
             text-align: center;
             cursor: pointer;
-            letter-spacing: .5px;
+            letter-spacing: 0.5px;
             color: $ez-white;
             font-size: 1rem;
             font-weight: 700;
             border: 1px solid $ez-color-primary;
             background-color: $ez-color-primary;
-            transition: background .3s $ez-admin-transition;
+            transition: background 0.3s $ez-admin-transition;
             align-items: center;
 
             .ez-icon {
                 margin-top: -2px;
-                margin-right: .5rem;
+                margin-right: 0.5rem;
                 width: 1.5rem;
                 height: 1.5rem;
             }
@@ -54,7 +54,7 @@
         }
 
         .ez-data-source__message--filesize {
-            font-size: .75rem;
+            font-size: 0.75rem;
             line-height: 60px;
         }
     }
@@ -76,27 +76,8 @@
             align-items: center;
         }
 
-        @mixin preview-action {
-            padding: 0;
-            border: 0 none;
-            border-radius: 50%;
-            height: 40px;
-            width: 40px;
-            line-height: 40px;
-            cursor: pointer;
-            transition: background .3s $ez-admin-transition;
-            text-align: center;
-            display: block;
-
-            .ez-icon {
-                margin-top: 7px;
-                height: 1.5rem;
-                width: 1.5rem;
-            }
-        }
-
         &__action--preview {
-            @include preview-action;
+            @include btn-preview-action;
             background: $ez-color-base-medium;
             margin-top: 1.25rem;
 
@@ -107,7 +88,7 @@
         }
 
         &__action--remove {
-            @include preview-action;
+            @include btn-preview-action;
             background: $ez-color-secondary;
 
             .ez-icon {

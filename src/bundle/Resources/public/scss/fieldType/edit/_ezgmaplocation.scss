@@ -9,10 +9,10 @@
         grid-template-columns: 1fr 16px 200px;
         grid-template-rows: repeat(4, minmax(50, auto));
         grid-template-areas:
-            "addr . ."
-            "map . side1"
-            "map . side2"
-            "map . side3";
+            'addr . .'
+            'map . side1'
+            'map . side2'
+            'map . side3';
 
         &__map {
             grid-area: map;
@@ -31,26 +31,13 @@
             }
 
             .ez-data-source__input {
-                border-radius: .25rem 0 0 .25rem;
+                border-radius: 0.25rem 0 0 0.25rem;
                 margin-bottom: 0;
             }
         }
 
         &__locate-me {
             grid-area: side1;
-        }
-
-        @mixin map-invalid-input() {
-            &.is-invalid {
-                .ez-data-source__label {
-                    color: $ez-color-danger;
-                }
-
-                .ez-data-source__input {
-                    border: 1px solid $ez-color-danger;
-                    background: $ez-color-warning-pale;
-                }
-            }
         }
 
         &__field--latitude {
@@ -65,8 +52,8 @@
     }
 
     .btn--search-by-address {
-        border-radius: 0 .25rem .25rem 0;
-        padding: .075rem .5rem;
+        border-radius: 0 0.25rem 0.25rem 0;
+        padding: 0.075rem 0.5rem;
         cursor: pointer;
         align-self: start;
 
