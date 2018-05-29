@@ -2,15 +2,15 @@
     border: 2px solid $ez-color-secondary;
     padding: 4px;
     margin: 0;
-    line-height: .5;
-    border-radius: .25rem;
+    line-height: 0.5;
+    border-radius: 0.25rem;
     position: relative;
     z-index: 1;
     cursor: pointer;
     min-width: 4.6875rem;
 
     &:before {
-        content: "";
+        content: '';
         position: absolute;
         width: 2rem;
         height: 2rem;
@@ -18,26 +18,26 @@
         left: 0;
         background-color: $ez-color-secondary;
         z-index: -1;
-        border-radius: .25rem;
-        transform: translate(calc(100% + .3rem), -50%);
-        transition: all .2s $ez-admin-transition;
+        border-radius: 0.25rem;
+        transform: translate(calc(100% + 0.3rem), -50%);
+        transition: all 0.2s $ez-admin-transition;
     }
 
     .ez-icon {
         fill: $ez-color-secondary;
-        margin: .125rem;
+        margin: 0.125rem;
         height: 1.5rem;
         width: 1.5rem;
     }
 
     .ez-icon + .ez-icon {
         fill: $ez-white;
-        margin: .125rem .125rem .125rem .3125rem;
+        margin: 0.125rem 0.125rem 0.125rem 0.3125rem;
     }
 
     &.is-checked {
         &:before {
-            transform: translate(.15rem, -50%);
+            transform: translate(0.15rem, -50%);
         }
 
         .ez-icon {
@@ -58,9 +58,9 @@
     .ez-data-source__label {
         position: relative;
         width: $size;
-        height: calc(#{$size} + .25rem);
+        height: calc(#{$size} + 0.25rem);
         background-color: $ez-color-base-pale;
-        margin-left: calc((#{$size} + .25rem) / 2);
+        margin-left: calc((#{$size} + 0.25rem) / 2);
         cursor: pointer;
 
         input {
@@ -77,7 +77,7 @@
             position: absolute;
             top: 2px;
             left: 0;
-            transition: all .3s $ez-admin-transition;
+            transition: all 0.3s $ez-admin-transition;
             transform: translateX(-50%);
             cursor: pointer;
             z-index: 1;
@@ -102,8 +102,8 @@
         &:before,
         &:after {
             content: '';
-            height: calc(#{$size} + .25rem);
-            width: calc(#{$size} + .25rem);
+            height: calc(#{$size} + 0.25rem);
+            width: calc(#{$size} + 0.25rem);
             border-radius: 50%;
             position: absolute;
             top: 50%;
@@ -137,13 +137,13 @@
         position: absolute;
         z-index: 2;
         top: 50%;
-        right: .25rem;
+        right: 0.25rem;
         transform: translate(0, -50%);
         background: none;
         border: 0;
         width: 1.5rem;
         height: 1.5rem;
-        line-height: .5rem;
+        line-height: 0.5rem;
         text-align: center;
         padding: 0;
         margin: 0;
@@ -152,7 +152,7 @@
 
         .ez-icon {
             fill: $ez-ground-base-dark;
-            transition: fill .3s $ez-admin-transition;
+            transition: fill 0.3s $ez-admin-transition;
         }
 
         &:hover,
@@ -178,6 +178,38 @@
     &.required {
         &:after {
             content: '*: ';
+        }
+    }
+}
+
+@mixin btn-preview-action {
+    padding: 0;
+    border: 0 none;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    transition: background 0.3s $ez-admin-transition;
+    text-align: center;
+    display: block;
+
+    .ez-icon {
+        margin-top: 7px;
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+}
+
+@mixin map-invalid-input() {
+    &.is-invalid {
+        .ez-data-source__label {
+            color: $ez-color-danger;
+        }
+
+        .ez-data-source__input {
+            border: 1px solid $ez-color-danger;
+            background: $ez-color-warning-pale;
         }
     }
 }
