@@ -22,18 +22,6 @@ use PHPUnit\Framework\Assert;
 class ContentViewContext extends BusinessContext
 {
     /**
-     * @Given I start creating a new Landing Page :name
-     */
-    public function startCreatingNewLandingPage(string $name): void
-    {
-        $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, 'Home');
-        $updatePage = $contentItemPage->startCreatingContent('Landing page');
-
-        $updatePage->contentUpdateForm->fillFieldWithValue('Title', ['value' => $name]);
-        $updatePage->contentUpdateForm->fillFIeldWithValue('Description', ['value' => $name]);
-    }
-
-    /**
      * @Given I start creating a new content :contentType
      */
     public function startCreatingContent(string $contentType): void

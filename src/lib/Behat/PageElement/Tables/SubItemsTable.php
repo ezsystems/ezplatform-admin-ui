@@ -62,7 +62,7 @@ class SubItemsTable extends Table
      */
     public function isElementInTable(string $name, ?string $contentType = null): bool
     {
-        if ($this->context->checkVisibilityByClass($this->fields['noItems'])) {
+        if ($this->context->isElementVisible($this->fields['noItems'])) {
             return false;
         } else {
             $tableHash = $this->getTableHash();
@@ -84,9 +84,9 @@ class SubItemsTable extends Table
         $tableHash = [];
 
         /** @var NodeElement[] $allHeaders */
-        $allHeaders = $this->context->findAllWithWait($this->fields['horizontalHeaders']);
+        $allHeaders = $this->context->findAllElements($this->fields['horizontalHeaders']);
         /** @var NodeElement[] $allRows */
-        $allRows = $this->context->findAllWithWait($this->fields['listRow']);
+        $allRows = $this->context->findAllElements($this->fields['listRow']);
         $j = 0;
         foreach ($allRows as $row) {
             $rowHash = [];

@@ -15,8 +15,6 @@ use WebDriver\Exception\ElementNotVisible;
 
 class UtilityContext extends MinkContext
 {
-    use StudioUtility;
-
     /**
      * Waits until element is visible. If it does not appear throws exception.
      *
@@ -47,7 +45,7 @@ class UtilityContext extends MinkContext
      *
      * @return  NodeElement[]
      */
-    public function findAllWithWait(string $locator, TraversableElement $baseElement = null): array
+    public function findAllElements(string $locator, TraversableElement $baseElement = null): array
     {
         $baseElement = $baseElement ?? $this->getSession()->getPage();
 
@@ -80,7 +78,7 @@ class UtilityContext extends MinkContext
     {
         $baseElement = $baseElement ?? $this->getSession()->getPage();
 
-        $elements = $this->findAllWithWait($selector, $baseElement);
+        $elements = $this->findAllElements($selector, $baseElement);
         foreach ($elements as $element) {
             if ($textSelector !== null) {
                 try {
@@ -113,7 +111,7 @@ class UtilityContext extends MinkContext
     {
         $baseElement = $baseElement ?? $this->getSession()->getPage();
 
-        $elements = $this->findAllWithWait($selector, $baseElement);
+        $elements = $this->findAllElements($selector, $baseElement);
         foreach ($elements as $element) {
             if ($textSelector !== null) {
                 try {
@@ -147,7 +145,7 @@ class UtilityContext extends MinkContext
         $baseElement = $baseElement ?? $this->getSession()->getPage();
         $counter = 0;
 
-        $elements = $this->findAllWithWait($selector, $baseElement);
+        $elements = $this->findAllElements($selector, $baseElement);
         foreach ($elements as $element) {
             ++$counter;
             if ($textSelector !== null) {
@@ -249,7 +247,7 @@ class UtilityContext extends MinkContext
      *
      * @return bool
      */
-    public function checkVisibilityByClass(string $locator, int $timeout = 5): bool
+    public function isElementVisible(string $locator, int $timeout = 5): bool
     {
         try {
             $element = $this->findElement($locator, $timeout);
