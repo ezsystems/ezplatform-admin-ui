@@ -31,11 +31,9 @@
             <div class="row justify-content-center align-items-center mb-3">
                 {{ pagerfanta(draft_pager, 'ez',{
                     'routeName': draft_pagination_params.route_name,
-                    'routeParams': {
+                    'routeParams': draft_pagination_params.route_params|merge({
                         '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\VersionsTab::URI_FRAGMENT'),
-                        'locationId': location.id,
-                        'contentId': content.id,
-                    },
+                    }),
                     'pageParameter': '[page][version_draft]'
                 }) }}
             </div>

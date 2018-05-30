@@ -17,10 +17,9 @@
             'pager': policies_pager,
             'paginatonParams': {
                 'routeName': policies_pagination_params.route_name,
-                'routeParams': {
+                'routeParams': policies_pagination_params.route_params|merge({
                     '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\PoliciesTab::URI_FRAGMENT'),
-                    'locationId': location.id
-                },
+                }),
                 'pageParameter': '[page][policy]'
             }
     }) }}

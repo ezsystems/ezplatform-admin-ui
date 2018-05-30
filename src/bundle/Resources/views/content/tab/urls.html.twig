@@ -18,11 +18,10 @@
             'pager': custom_urls_pager,
             'paginatonParams': {
                 'routeName': custom_urls_pagination_params.route_name,
-                'routeParams': {
+                'routeParams': custom_urls_pagination_params.route_params|merge({
                     '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
-                    'locationId': location.id,
                     'page[system_url]': system_urls_pagination_params.page
-                },
+                }),
                 'pageParameter': '[page][custom_url]'
             }
     }) }}
@@ -45,11 +44,10 @@
         'pager': system_urls_pager,
         'paginatonParams': {
             'routeName': system_urls_pagination_params.route_name,
-            'routeParams': {
+            'routeParams': system_urls_pagination_params.route_params|merge({
                 '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
-                'locationId': location.id,
                 'page[custom_url]': custom_urls_pagination_params.page
-            },
+            }),
             'pageParameter': '[page][system_url]'
         }
     }) }}
