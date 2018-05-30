@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ContentField;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\ContentTypePicker;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
@@ -20,7 +21,7 @@ class ContentItemPage extends Page
     public const PAGE_NAME = 'ContentItemPage';
 
     /** @var RightMenu Element representing the right menu */
-    protected $rightMenu;
+    public $rightMenu;
 
     /** @var SubItemsList */
     public $subItemList;
@@ -51,7 +52,9 @@ class ContentItemPage extends Page
     public function startCreatingContent(string $contentType): ContentUpdateItemPage
     {
         $this->rightMenu->clickButton('Create');
-        $this->context->getElementByText($contentType, '.form-check-label')->click();
+
+        $contentTypePicker = ElementFactory::createElement($this->context, ContentTypePicker::ELEMENT_NAME);
+        $contentTypePicker->select($contentType);
 
         $contentUpdatePage = PageObjectFactory::createPage($this->context, ContentUpdateItemPage::PAGE_NAME, $contentType);
         $contentUpdatePage->verifyIsLoaded();

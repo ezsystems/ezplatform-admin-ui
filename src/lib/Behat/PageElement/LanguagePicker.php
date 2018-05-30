@@ -36,7 +36,7 @@ class LanguagePicker extends Element
     {
         return array_map(function (NodeElement $element) {
             return $element->getText();
-        }, $this->context->findAllWithWait($this->fields['languageSelector']));
+        }, $this->context->findAllElements($this->fields['languageSelector']));
     }
 
     public function isVisible(): bool

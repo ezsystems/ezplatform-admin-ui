@@ -52,7 +52,7 @@ class ContentUpdateForm extends Element
         $this->fields = [
             'formElement' => '[name=ezrepoforms_content_edit]',
             'closeButton' => '.ez-content-edit-container__close',
-            'fieldLabel' => '.ez-field-edit__label-wrapper label, .ez-field-edit__label-wrapper legend',
+            'fieldLabel' => '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend',
             'nthField' => '.ez-field-edit:nth-child(%s)',
             'fieldOfType' => '.ez-field-edit--%s',
         ];

@@ -60,7 +60,7 @@ class UniversalDiscoveryWidget extends Element
         $expectedTabTitles = ['Browse', 'Search'];
 
         $actualTabTitles = [];
-        $tabs = $this->context->findAllWithWait($this->fields['tabSelector']);
+        $tabs = $this->context->findAllElements($this->fields['tabSelector']);
         foreach ($tabs as $tab) {
             $actualTabTitles[] = $tab->getText();
         }

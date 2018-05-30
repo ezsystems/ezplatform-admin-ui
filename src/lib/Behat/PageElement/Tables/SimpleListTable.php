@@ -44,9 +44,9 @@ class SimpleListTable extends Table
         $tableHash = [];
 
         /** @var NodeElement[] $allHeaders */
-        $allHeaders = $this->context->findAllWithWait($this->fields['horizontalHeaders']);
+        $allHeaders = $this->context->findAllElements($this->fields['horizontalHeaders']);
         /** @var NodeElement[] $allRows */
-        $allRows = $this->context->findAllWithWait($this->fields['listRow']);
+        $allRows = $this->context->findAllElements($this->fields['listRow']);
         $j = 0;
         foreach ($allRows as $row) {
             $rowHash = [];

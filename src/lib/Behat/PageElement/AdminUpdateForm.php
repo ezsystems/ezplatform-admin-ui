@@ -156,7 +156,7 @@ class AdminUpdateForm extends Element
      */
     public function clickButton(string $label, int $indexOfButton = 0): void
     {
-        $formButtons = $this->context->findAllWithWait($this->fields['button'], $this->context->findElement($this->fields['mainFormSection']));
+        $formButtons = $this->context->findAllElements($this->fields['button'], $this->context->findElement($this->fields['mainFormSection']));
         $filteredButtons = array_filter($formButtons, function ($element) use ($label) { return $element->getText() === $label; });
 
         $filteredButtons[$indexOfButton]->click();

@@ -33,7 +33,7 @@ class ContentField extends Element
             $this->fields['fieldValue']
         );
 
-        if ($this->context->checkVisibilityByClass($fieldLocator)) {
+        if ($this->context->isElementVisible($fieldLocator)) {
             $fieldDataContainer = $this->context->findElement($fieldLocator);
             Assert::assertEquals(
                 $value,

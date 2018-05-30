@@ -58,6 +58,6 @@ class Notification extends Element
 
     public function isVisible(): bool
     {
-        return $this->context->checkVisibilityByClass($this->fields['alert'], $this->checkVisibilityTimeout);
+        return $this->context->isElementVisible($this->fields['alert'], $this->checkVisibilityTimeout);
     }
 }

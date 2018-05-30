@@ -21,8 +21,9 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SubItemsTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SystemInfoTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\TrashTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\VerticalOrientedTable;
-use EzSystems\FlexWorkflow\Behat\PageElement\OldSendForReviewForm;
-use EzSystems\StudioUIBundle\Tests\Behat\PageElement\ConfirmationPopup;
+use EzSystems\EzPlatformPageBuilder\Tests\Behat\PageElement\PageBuilderActionBar;
+use EzSystems\EzPlatformPageBuilder\Tests\Behat\PageElement\PageBuilderCreatorPopup;
+use EzSystems\EzPlatformPageBuilder\Tests\Behat\PageElement\PageEditorBlock;
 
 class ElementFactory
 {
@@ -32,7 +33,7 @@ class ElementFactory
      * @param UtilityContext $context
      * @param string $elementName Name of the Element to creator
      *
-     * @return AdminList|Dialog|TrashTable|ContentField|DraftConflictDialog|DashboardTable|EzFieldElement|ContentUpdateForm|DefaultFieldElement|SimpleTable|DoubleHeaderTable|SubItemsTable|SimpleListTable|LinkedListTable|VerticalOrientedTable|PreviewNav|SystemInfoTable|RightMenu|UpperMenu|AdminUpdateForm|Breadcrumb|Notification|NavLinkTabs|UniversalDiscoveryWidget|LanguagePicker|OldSendForReviewForm|ConfirmationPopup Element to interact with
+     * @return AdminList|Dialog|TrashTable|ContentField|DraftConflictDialog|DashboardTable|EzFieldElement|ContentUpdateForm|DefaultFieldElement|SimpleTable|DoubleHeaderTable|SubItemsTable|SimpleListTable|LinkedListTable|VerticalOrientedTable|PreviewNav|SystemInfoTable|RightMenu|UpperMenu|AdminUpdateForm|Breadcrumb|Notification|NavLinkTabs|UniversalDiscoveryWidget|LanguagePicker|ContentTypePicker Element to interact with
      */
     public static function createElement(UtilityContext $context, string $elementName, ?string ...$parameters): Element
     {
@@ -97,12 +98,27 @@ class ElementFactory
                 return new DefaultFieldElement($context, $parameters[0], $parameters[1]);
             case LanguagePicker::ELEMENT_NAME:
                 return new LanguagePicker($context);
+            case ContentTypePicker::ELEMENT_NAME:
+                return new ContentTypePicker($context);
             case UniversalDiscoveryWidget::ELEMENT_NAME:
                 return new UniversalDiscoveryWidget($context);
-            case OldSendForReviewForm::ELEMENT_NAME:
-                return new OldSendForReviewForm($context);
-            case ConfirmationPopup::ELEMENT_NAME:
-                return new ConfirmationPopup($context);
+            case PageBuilderCreatorPopup::ELEMENT_NAME:
+                return new PageBuilderCreatorPopup($context);
+            case PageBuilderActionBar::ELEMENT_NAME:
+                return new PageBuilderActionBar($context);
+            case 'Content List':
+            case 'Banner':
+            case 'Embed':
+            case 'Gallery':
+            case 'Keyword':
+            case 'MA Form':
+            case 'Places':
+            case 'RSS':
+            case 'Schedule':
+            case 'Code':
+            case 'Video':
+            case 'Collection':
+                return new PageEditorBlock($context);
             default:
                 throw new \InvalidArgumentException(sprintf('Unrecognized element name: %s', $elementName));
         }
