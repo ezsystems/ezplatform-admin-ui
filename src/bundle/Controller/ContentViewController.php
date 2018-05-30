@@ -63,6 +63,12 @@ class ContentViewController extends Controller
     /** @var int */
     private $defaultPolicyPaginationLimit;
 
+    /** @var int */
+    private $defaultSystemUrlPaginationLimit;
+
+    /** @var int */
+    private $defaultCustomUrlPaginationLimit;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
@@ -75,6 +81,8 @@ class ContentViewController extends Controller
      * @param array $siteAccessLanguages
      * @param int $defaultRolePaginationLimit
      * @param int $defaultPolicyPaginationLimit
+     * @param int $defaultSystemUrlPaginationLimit
+     * @param int $defaultCustomUrlPaginationLimit
      */
     public function __construct(
         ContentTypeService $contentTypeService,
@@ -87,7 +95,9 @@ class ContentViewController extends Controller
         int $defaultPaginationLimit,
         array $siteAccessLanguages,
         int $defaultRolePaginationLimit,
-        int $defaultPolicyPaginationLimit
+        int $defaultPolicyPaginationLimit,
+        int $defaultSystemUrlPaginationLimit,
+        int $defaultCustomUrlPaginationLimit
     ) {
         $this->contentTypeService = $contentTypeService;
         $this->languageService = $languageService;
@@ -100,6 +110,8 @@ class ContentViewController extends Controller
         $this->siteAccessLanguages = $siteAccessLanguages;
         $this->defaultRolePaginationLimit = $defaultRolePaginationLimit;
         $this->defaultPolicyPaginationLimit = $defaultPolicyPaginationLimit;
+        $this->defaultSystemUrlPaginationLimit = $defaultSystemUrlPaginationLimit;
+        $this->defaultCustomUrlPaginationLimit = $defaultCustomUrlPaginationLimit;
     }
 
     /**
@@ -107,6 +119,9 @@ class ContentViewController extends Controller
      * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
      *
      * @return \eZ\Publish\Core\MVC\Symfony\View\ContentView
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function locationViewAction(Request $request, ContentView $view)
     {
@@ -135,6 +150,8 @@ class ContentViewController extends Controller
      * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
      *
      * @return \eZ\Publish\Core\MVC\Symfony\View\ContentView
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function embedViewAction(ContentView $view)
     {
@@ -254,6 +271,7 @@ class ContentViewController extends Controller
         $view->addParameters([
             'draft_pagination_params' => [
                 'route_name' => $request->get('_route'),
+                'route_params' => $request->get('_route_params'),
                 'page' => $page['version_draft'] ?? 1,
                 'limit' => $this->defaultPaginationLimit,
             ],
@@ -271,8 +289,9 @@ class ContentViewController extends Controller
         $view->addParameters([
             'custom_urls_pagination_params' => [
                 'route_name' => $request->get('_route'),
+                'route_params' => $request->get('_route_params'),
                 'page' => $page['custom_url'] ?? 1,
-                'limit' => $this->defaultPaginationLimit,
+                'limit' => $this->defaultCustomUrlPaginationLimit,
             ],
         ]);
     }
@@ -288,8 +307,9 @@ class ContentViewController extends Controller
         $view->addParameters([
             'system_urls_pagination_params' => [
                 'route_name' => $request->get('_route'),
+                'route_params' => $request->get('_route_params'),
                 'page' => $page['system_url'] ?? 1,
-                'limit' => $this->defaultPaginationLimit,
+                'limit' => $this->defaultSystemUrlPaginationLimit,
             ],
         ]);
     }
@@ -305,6 +325,7 @@ class ContentViewController extends Controller
         $view->addParameters([
             'roles_pagination_params' => [
                 'route_name' => $request->get('_route'),
+                'route_params' => $request->get('_route_params'),
                 'page' => $page['role'] ?? 1,
                 'limit' => $this->defaultRolePaginationLimit,
             ],
@@ -322,6 +343,7 @@ class ContentViewController extends Controller
         $view->addParameters([
             'policies_pagination_params' => [
                 'route_name' => $request->get('_route'),
+                'route_params' => $request->get('_route_params'),
                 'page' => $page['policy'] ?? 1,
                 'limit' => $this->defaultPolicyPaginationLimit,
             ],

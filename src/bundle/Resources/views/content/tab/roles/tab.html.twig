@@ -17,10 +17,9 @@
             'pager': roles_pager,
             'paginatonParams': {
                 'routeName': roles_pagination_params.route_name,
-                'routeParams': {
+                'routeParams': roles_pagination_params.route_params|merge({
                     '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\RolesTab::URI_FRAGMENT'),
-                    'locationId': location.id
-                },
+                }),
                 'pageParameter': '[page][role]'
             }
     }) }}

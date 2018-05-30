@@ -50,6 +50,8 @@ class Pagination extends AbstractParser
                     ->scalarNode('content_type_group_limit')->isRequired()->end()
                     ->scalarNode('content_type_limit')->isRequired()->end()
                     ->scalarNode('version_draft_limit')->isRequired()->end()
+                    ->scalarNode('content_system_url_limit')->isRequired()->end()
+                    ->scalarNode('content_custom_url_limit')->isRequired()->end()
                     ->scalarNode('content_role_limit')->isRequired()->end()
                     ->scalarNode('content_policy_limit')->isRequired()->end()
                 ->end()
@@ -77,6 +79,8 @@ class Pagination extends AbstractParser
             'content_type_group_limit',
             'content_type_limit',
             'version_draft_limit',
+            'content_system_url_limit',
+            'content_custom_url_limit',
             'content_role_limit',
             'content_policy_limit',
         ];
