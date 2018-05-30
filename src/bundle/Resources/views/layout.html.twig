@@ -4,7 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="CSRF-Token" content="{{ csrf_token('authenticate') }}" />
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
-        <meta name="CurrentLocationId" content="{{ location.id }}" />
+        {% if location is defined %}
+            <meta name="CurrentLocationId" content="{{ location.id }}" />
+        {% endif %}
         {% block meta %}
         {% endblock %}
         <script>
