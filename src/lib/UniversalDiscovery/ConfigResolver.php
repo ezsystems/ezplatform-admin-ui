@@ -10,11 +10,11 @@ namespace EzSystems\EzPlatformAdminUi\UniversalDiscovery;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ConfigResolver
 {
-    /** @var \Symfony\Component\EventDispatcher\EventDispatcher */
+    /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface */
     protected $eventDispatcher;
 
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
@@ -25,12 +25,12 @@ class ConfigResolver
 
     /**
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
-     * @param \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param array $udwConfiguration
      */
     public function __construct(
         ConfigResolverInterface $configResolver,
-        EventDispatcher $eventDispatcher,
+        EventDispatcherInterface $eventDispatcher,
         array $udwConfiguration
     ) {
         $this->configResolver = $configResolver;
@@ -72,7 +72,7 @@ class ConfigResolver
     protected function mergeConfiguration(array $default, $apply): array
     {
         foreach ($apply as $key => $item) {
-            if (isset($default[$key]) && $this->is_assoc_array($default[$key])) {
+            if (isset($default[$key]) && $this->isAssocArray($default[$key])) {
                 $default[$key] = $this->mergeConfiguration($default[$key], $item);
             } else {
                 $default[$key] = $item;
@@ -89,7 +89,7 @@ class ConfigResolver
      *
      * @return bool
      */
-    private function is_assoc_array($item): bool
+    private function isAssocArray($item): bool
     {
         if (!is_array($item)) {
             // Is not an array at all
