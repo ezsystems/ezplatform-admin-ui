@@ -14,6 +14,8 @@ class Notification extends Element
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Notification';
 
+    private $checkVisibilityTimeout;
+
     public function __construct(UtilityContext $context)
     {
         parent::__construct($context);
@@ -23,6 +25,7 @@ class Notification extends Element
             'failureAlert' => '.alert-danger',
             'closeAlert' => '.alert.show button.close',
         ];
+        $this->checkVisibilityTimeout = 1;
     }
 
     public function verifyVisibility(): void
@@ -48,10 +51,13 @@ class Notification extends Element
     public function closeAlert(): void
     {
         $this->context->findElement($this->fields['closeAlert'])->click();
+        $this->context->waitUntil($this->defaultTimeout, function () {
+            return !$this->isVisible();
+        });
     }
 
     public function isVisible(): bool
     {
-        return $this->context->checkVisibilityByClass($this->fields['alert']);
+        return $this->context->checkVisibilityByClass($this->fields['alert'], $this->checkVisibilityTimeout);
     }
 }
