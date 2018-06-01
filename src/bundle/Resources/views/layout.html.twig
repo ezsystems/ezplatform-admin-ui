@@ -34,6 +34,13 @@
         </script>
         <script src="/bundles/fosjsrouting/js/router.js"></script>
         <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+        {% if app.request.locale == 'ach_UG' %}
+            <script type="text/javascript">
+                var _jipt = [];
+                _jipt.push(['project', 'ezplatform']);
+            </script>
+            <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
+        {% endif %}
         <title>{% block title %}eZ Platform{% endblock %}</title>
         {% stylesheets filter='scssphp'
             'bundles/ezplatformadminui/scss/ezplatform-bootstrap.scss'
