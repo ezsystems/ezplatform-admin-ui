@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="CSRF-Token" content="{{ csrf_token('authenticate') }}" />
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
+        <meta name="LanguageCode" content="{{ language.languageCode }}" />
         {% block meta %}
         {% endblock %}
         <script>
