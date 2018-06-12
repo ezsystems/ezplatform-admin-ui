@@ -55,3 +55,8 @@ services:
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\Notifications:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'notifications' }
+
+    # User Bookmarks
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\UserBookmarks:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'userBookmarks' }
