@@ -6,12 +6,30 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use EzSystems\DateBasedPublisher\Behat\PageElement\DateBasedPublisherPopup;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Authors;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Checkbox;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\ContentRelationMultiple;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\ContentRelationSingle;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Country;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Date;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\DateAndTime;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\DefaultFieldElement;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\EmailAddress;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\EzFieldElement;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\FloatField;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Integer;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\ISBN;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Keywords;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\MapLocation;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\RichText;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Selection;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\TextBlock;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\TextLine;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Time;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\URL;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\UserAccount;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\DashboardTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\DoubleHeaderTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\LinkedListTable;
@@ -32,7 +50,7 @@ class ElementFactory
      * @param UtilityContext $context
      * @param string $elementName Name of the Element to creator
      *
-     * @return AdminList|Dialog|TrashTable|ContentField|DraftConflictDialog|DashboardTable|EzFieldElement|ContentUpdateForm|DefaultFieldElement|SimpleTable|DoubleHeaderTable|SubItemsTable|SimpleListTable|LinkedListTable|VerticalOrientedTable|PreviewNav|SystemInfoTable|RightMenu|UpperMenu|AdminUpdateForm|Breadcrumb|Notification|NavLinkTabs|UniversalDiscoveryWidget|LanguagePicker|OldSendForReviewForm|ConfirmationPopup Element to interact with
+     * @return AdminList|Dialog|DateBasedPublisherPopup|DateAndTimePopup|TrashTable|ContentField|DraftConflictDialog|DashboardTable|EzFieldElement|ContentUpdateForm|DefaultFieldElement|SimpleTable|DoubleHeaderTable|SubItemsTable|SimpleListTable|LinkedListTable|VerticalOrientedTable|PreviewNav|SystemInfoTable|RightMenu|UpperMenu|AdminUpdateForm|Breadcrumb|Notification|NavLinkTabs|UniversalDiscoveryWidget|LanguagePicker|OldSendForReviewForm|ConfirmationPopup Element to interact with
      */
     public static function createElement(UtilityContext $context, string $elementName, ?string ...$parameters): Element
     {
@@ -91,14 +109,52 @@ class ElementFactory
                 return new RichText($context, $parameters[0], $parameters[1]);
             case TextLine::ELEMENT_NAME:
                 return new TextLine($context, $parameters[0], $parameters[1]);
+            case TextBlock::ELEMENT_NAME:
+                return new TextBlock($context, $parameters[0], $parameters[1]);
             case Authors::ELEMENT_NAME:
                 return new Authors($context, $parameters[0], $parameters[1]);
+            case Checkbox::ELEMENT_NAME:
+                return new Checkbox($context, $parameters[0], $parameters[1]);
+            case Country::ELEMENT_NAME:
+                return new Country($context, $parameters[0], $parameters[1]);
+            case Date::ELEMENT_NAME:
+                return new Date($context, $parameters[0], $parameters[1]);
+            case DateAndTime::ELEMENT_NAME:
+                return new DateAndTime($context, $parameters[0], $parameters[1]);
+            case EmailAddress::ELEMENT_NAME:
+                return new EmailAddress($context, $parameters[0], $parameters[1]);
+            case FloatField::ELEMENT_NAME:
+                return new FloatField($context, $parameters[0], $parameters[1]);
+            case Integer::ELEMENT_NAME:
+                return new Integer($context, $parameters[0], $parameters[1]);
+            case ISBN::ELEMENT_NAME:
+                return new ISBN($context, $parameters[0], $parameters[1]);
+            case Keywords::ELEMENT_NAME:
+                return new Keywords($context, $parameters[0], $parameters[1]);
+            case MapLocation::ELEMENT_NAME:
+                return new MapLocation($context, $parameters[0], $parameters[1]);
+            case Selection::ELEMENT_NAME:
+                return new Selection($context, $parameters[0], $parameters[1]);
+            case Time::ELEMENT_NAME:
+                return new Time($context, $parameters[0], $parameters[1]);
+            case URL::ELEMENT_NAME:
+                return new URL($context, $parameters[0], $parameters[1]);
+            case ContentRelationSingle::ELEMENT_NAME:
+                return new ContentRelationSingle($context, $parameters[0], $parameters[1]);
+            case ContentRelationMultiple::ELEMENT_NAME:
+                return new ContentRelationMultiple($context, $parameters[0], $parameters[1]);
+            case UserAccount::ELEMENT_NAME:
+                return new UserAccount($context, $parameters[0], $parameters[1]);
             case DefaultFieldElement::ELEMENT_NAME:
                 return new DefaultFieldElement($context, $parameters[0], $parameters[1]);
             case LanguagePicker::ELEMENT_NAME:
                 return new LanguagePicker($context);
+            case DateAndTimePopup::ELEMENT_NAME:
+                return new DateAndTimePopup($context);
             case UniversalDiscoveryWidget::ELEMENT_NAME:
                 return new UniversalDiscoveryWidget($context);
+            case DateBasedPublisherPopup::ELEMENT_NAME:
+                return new DateBasedPublisherPopup($context);
             case OldSendForReviewForm::ELEMENT_NAME:
                 return new OldSendForReviewForm($context);
             case ConfirmationPopup::ELEMENT_NAME:

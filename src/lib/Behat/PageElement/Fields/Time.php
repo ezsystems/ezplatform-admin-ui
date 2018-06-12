@@ -7,17 +7,19 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\DateAndTimePopup;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use PHPUnit\Framework\Assert;
 
-class TextLine extends EzFieldElement
+class Time extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
-    public const ELEMENT_NAME = 'Text line';
+    public const ELEMENT_NAME = 'Time';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
-        $this->fields['fieldInput'] = 'input';
+        $this->fields['fieldInput'] = '.ez-data-source__input-wrapper input';
     }
 
     public function setValue(array $parameters): void
@@ -28,8 +30,18 @@ class TextLine extends EzFieldElement
 
         Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
 
-        $fieldInput->setValue('');
-        $fieldInput->setValue($parameters['value']);
+        $fieldInput->click();
+
+        $time = explode(':', $parameters['value']);
+
+        $dateAndTimePopup = ElementFactory::createElement($this->context, DateAndTimePopup::ELEMENT_NAME);
+        $dateAndTimePopup->setTime($time[0], $time[1]);
+
+        $expectedTimeValue = $parameters['value'];
+
+        $this->context->waitUntil($this->defaultTimeout, function () use ($expectedTimeValue) {
+            return $this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']))->getValue() === $expectedTimeValue;
+        });
     }
 
     public function getValue(): array
@@ -40,7 +52,7 @@ class TextLine extends EzFieldElement
 
         Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
 
-        return [$fieldInput->getValue()];
+        return [$fieldInput->getText()];
     }
 
     public function verifyValueInItemView(array $values): void

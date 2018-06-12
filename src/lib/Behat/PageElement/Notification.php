@@ -51,6 +51,7 @@ class Notification extends Element
     public function closeAlert(): void
     {
         $this->context->findElement($this->fields['closeAlert'])->click();
+
         $this->context->waitUntil($this->defaultTimeout, function () {
             return !$this->isVisible();
         });

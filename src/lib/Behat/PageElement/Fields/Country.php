@@ -9,15 +9,15 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use PHPUnit\Framework\Assert;
 
-class TextLine extends EzFieldElement
+class Country extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
-    public const ELEMENT_NAME = 'Text line';
+    public const ELEMENT_NAME = 'Country';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
-        $this->fields['fieldInput'] = 'input';
+        $this->fields['fieldInput'] = 'select';
     }
 
     public function setValue(array $parameters): void
@@ -28,8 +28,7 @@ class TextLine extends EzFieldElement
 
         Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
 
-        $fieldInput->setValue('');
-        $fieldInput->setValue($parameters['value']);
+        $fieldInput->selectOption($parameters['value']);
     }
 
     public function getValue(): array

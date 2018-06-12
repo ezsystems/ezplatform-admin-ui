@@ -132,7 +132,7 @@ class ContentViewContext extends BusinessContext
         $hash = $parameters->getHash();
         $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, '');
         foreach ($hash as $field) {
-            $contentItemPage->contentField->verifyFieldHasValue($field['label'], $field['value']);
+            $contentItemPage->contentField->verifyFieldHasValue($field['label'], $field);
         }
     }
 
