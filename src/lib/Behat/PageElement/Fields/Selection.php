@@ -9,33 +9,32 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use PHPUnit\Framework\Assert;
 
-class TextLine extends EzFieldElement
+class Selection extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
-    public const ELEMENT_NAME = 'Text line';
+    public const ELEMENT_NAME = 'Selection';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
-        $this->fields['fieldInput'] = 'input';
+        $this->fields['selectBar'] = '.ez-data-source__selected';
+        $this->fields['selectOption'] = '.ez-data-source__options .option-item';
+        $this->fields['specificOption'] = '[data-value="%s"]';
     }
 
     public function setValue(array $parameters): void
     {
-        $fieldInput = $this->context->findElement(
-            sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput'])
-        );
+        $this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['selectBar']))->click();
 
-        Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
+        $index = $this->context->getElementPositionByText($parameters['value'], $this->fields['selectOption']) - 2;
 
-        $fieldInput->setValue('');
-        $fieldInput->setValue($parameters['value']);
+        $this->context->findElement(sprintf($this->fields['specificOption'], $index))->click();
     }
 
     public function getValue(): array
     {
         $fieldInput = $this->context->findElement(
-            sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput'])
+            sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['selectBar'])
         );
 
         Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));

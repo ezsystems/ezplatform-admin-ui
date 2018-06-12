@@ -9,15 +9,15 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use PHPUnit\Framework\Assert;
 
-class TextLine extends EzFieldElement
+class TextBlock extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
-    public const ELEMENT_NAME = 'Text line';
+    public const ELEMENT_NAME = 'Text block';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
-        $this->fields['fieldInput'] = 'input';
+        $this->fields['fieldInput'] = 'textarea';
     }
 
     public function setValue(array $parameters): void

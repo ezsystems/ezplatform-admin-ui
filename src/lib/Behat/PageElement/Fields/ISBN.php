@@ -9,10 +9,10 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use PHPUnit\Framework\Assert;
 
-class TextLine extends EzFieldElement
+class ISBN extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
-    public const ELEMENT_NAME = 'Text line';
+    public const ELEMENT_NAME = 'ISBN';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {

@@ -28,3 +28,5 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SectionsContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ObjectStatesContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\DashboardContext
+                - EzSystems\RepositoryForms\Features\Context\ContentType
+                - EzSystems\RepositoryForms\Features\Context\FieldTypeFormContext

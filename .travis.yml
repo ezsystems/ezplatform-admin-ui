@@ -5,9 +5,16 @@ matrix:
         - php: 7.1
           env: PHPUNIT_CONFIG='phpunit.xml'
         - php: 7.1
-          env: COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml" BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction" SYMFONY_ENV=behat
+          env:
+          - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
+          - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction"
+          - SYMFONY_ENV=behat
         - php: 7.1
-          env: WEB_HOST="varnish" COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/varnish.yml:doc/docker/redis.yml:doc/docker/selenium.yml" BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction" SYMFONY_ENV=behat
+          env:
+          - WEB_HOST="varnish"
+          - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/varnish.yml:doc/docker/redis.yml:doc/docker/selenium.yml"
+          - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction --tags=~@EZP-29291-excluded"
+          - SYMFONY_ENV=behat
 
 cache:
     directories:

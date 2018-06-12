@@ -12,6 +12,7 @@ use PHPUnit\Framework\Assert;
 class UniversalDiscoveryWidget extends Element
 {
     public const ELEMENT_NAME = 'UDW';
+    private const UDW_TIMEOUT = 20;
 
     public function __construct(UtilityContext $context)
     {
@@ -22,6 +23,8 @@ class UniversalDiscoveryWidget extends Element
             'cancelButton' => '.m-ud__action--cancel',
             'selectContentButton' => '.c-meta-preview__btn--select',
             'elementSelector' => '.c-finder-tree-branch:nth-of-type(%d) .c-finder-tree-leaf',
+            'previewName' => '.c-meta-preview__name',
+            'treeBranch' => '.c-finder-tree-branch:nth-child(%d)',
         ];
     }
 
@@ -33,9 +36,16 @@ class UniversalDiscoveryWidget extends Element
         $pathParts = explode('/', $itemPath);
         $depth = 1;
         foreach ($pathParts as $part) {
+            $this->context->waitUntilElementIsVisible(sprintf($this->fields['treeBranch'], $depth), self::UDW_TIMEOUT);
             $this->context->getElementByText($part, sprintf($this->fields['elementSelector'], $depth))->click();
             ++$depth;
         }
+        $expectedContentName = $pathParts[count($pathParts) - 1];
+        $this->context->waitUntil(
+            self::UDW_TIMEOUT,
+            function () use ($expectedContentName) {
+                return $this->context->findElement($this->fields['previewName'])->getText() === $expectedContentName;
+            });
 
         $this->context->findElement($this->fields['selectContentButton'])->click();
     }

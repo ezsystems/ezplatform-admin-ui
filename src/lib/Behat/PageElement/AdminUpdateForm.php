@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 use Behat\Mink\Element\NodeElement;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\DefaultFieldElement;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\EzFieldElement;
 use PHPUnit\Framework\Assert;
 
 /** Element that describes structures in all update forms */
@@ -18,35 +19,6 @@ class AdminUpdateForm extends Element
     public const ELEMENT_NAME = 'Admin Update Form';
 
     private const NEW_FIELD_TITLE_PATTERN = 'New FieldDefinition (%s)';
-
-    private $fieldTypeMapping = [
-        'Authors' => 'ezauthor',
-        'Checkbox' => 'ezboolean',
-        'Content relation (single)' => 'ezobjectrelation',
-        'Content relations (multiple)' => 'ezobjectrelationlist',
-        'Country' => 'ezcountry',
-        'Date' => 'ezdate',
-        'Date and time' => 'ezdatetime',
-        'E-mail address' => 'ezemail',
-        'File' => 'ezbinaryfile',
-        'Float' => 'ezfloat',
-        'ISBN' => 'ezisbn',
-        'Image' => 'ezimage',
-        'Integer' => 'ezinteger',
-        'Keywords' => 'ezkeyword',
-        'Landing Page' => 'ezlandingpage',
-        'Layout' => 'ezpage',
-        'Map location' => 'ezgmaplocation',
-        'Media' => 'ezmedia',
-        'Rating' => 'ezsrrating',
-        'Rich text' => 'ezrichtext',
-        'Selection' => 'ezselection',
-        'Text block' => 'eztext',
-        'Text line' => 'ezstring',
-        'Time' => 'eztime',
-        'URL' => 'ezurl',
-        'User account' => 'ezuser',
-    ];
 
     public function __construct(UtilityContext $context)
     {
@@ -83,7 +55,7 @@ class AdminUpdateForm extends Element
      */
     public function fillFieldWithValue(string $fieldName, $value, ?string $containerName = null): void
     {
-        $newContainerName = (!$containerName) ? $containerName : sprintf($this::NEW_FIELD_TITLE_PATTERN, $this->fieldTypeMapping[$containerName]);
+        $newContainerName = (!$containerName) ? $containerName : sprintf($this::NEW_FIELD_TITLE_PATTERN, EzFieldElement::getFieldInternalNameByName($containerName));
         $fieldElement = $this->getField($fieldName, $newContainerName);
         $fieldElement->setValue($value);
     }
@@ -142,7 +114,7 @@ class AdminUpdateForm extends Element
      */
     public function verifyNewFieldDefinitionFormExists(string $fieldName): void
     {
-        $form = $this->context->getElementByText(sprintf($this::NEW_FIELD_TITLE_PATTERN, $this->fieldTypeMapping[$fieldName]), $this->fields['fieldDefinitionName']);
+        $form = $this->context->getElementByText(sprintf($this::NEW_FIELD_TITLE_PATTERN, EzFieldElement::getFieldInternalNameByName($fieldName)), $this->fields['fieldDefinitionName']);
         if ($form === null) {
             throw new \Exception('Field definition not added to the form.');
         }
@@ -169,7 +141,7 @@ class AdminUpdateForm extends Element
      */
     public function expandFieldDefinition(string $fieldName): void
     {
-        $container = $this->context->findElement($this->getFieldDefinitionContainerLocator(sprintf($this::NEW_FIELD_TITLE_PATTERN, $this->fieldTypeMapping[$fieldName])));
+        $container = $this->context->findElement($this->getFieldDefinitionContainerLocator(sprintf($this::NEW_FIELD_TITLE_PATTERN, EzFieldElement::getFieldInternalNameByName($fieldName))));
         Assert::assertNotNull($container, sprintf('Definition for field %s not found', $fieldName));
 
         if (strpos($container->getAttribute('class'), $this->fields['fieldCollapsed']) !== false) {

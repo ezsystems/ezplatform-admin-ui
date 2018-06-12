@@ -19,6 +19,7 @@ class Authors extends EzFieldElement
         parent::__construct($context, $locator, $label);
         $this->fields['nameFieldInput'] = '.ez-data-source__field--name input';
         $this->fields['emailFieldInput'] = '.ez-data-source__field--email input';
+        $this->fields['fieldValueInContentItemView'] = '.ez-content-field-value';
     }
 
     public function setValue(array $parameters): void
@@ -61,9 +62,18 @@ class Authors extends EzFieldElement
         );
 
         Assert::assertEquals(
-            $value['name'],
-            $actualFieldValues['name'],
+            $value['email'],
+            $actualFieldValues['email'],
             sprintf('Field %s has wrong value', $value['label'])
+        );
+    }
+
+    public function verifyValueInItemView(array $values): void
+    {
+        Assert::assertEquals(
+            sprintf('%s <%s>', $values['name'], $values['email']),
+            $this->context->findElement($this->fields['fieldContainer'])->getText(),
+            'Field has wrong value'
         );
     }
 }
