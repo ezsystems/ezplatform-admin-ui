@@ -17,35 +17,6 @@ class ContentUpdateForm extends Element
 
     public const FIELD_TYPE_CLASS_REGEX = '/ez-field-edit--ez[a-z]*/';
 
-    private $fieldTypeMapping = [
-        'ezauthor' => 'Authors',
-        'ezboolean' => 'Checkbox',
-        'ezobjectrelation' => 'Content relation (single)',
-        'ezobjectrelationlist' => 'Content relations (multiple)',
-        'ezcountry' => 'Country',
-        'ezdate' => 'Date',
-        'ezdatetime' => 'Date and time',
-        'ezemail' => 'E-mail address',
-        'ezbinaryfile' => 'File',
-        'ezfloat' => 'Float',
-        'ezisbn' => 'ISBN',
-        'ezimage' => 'Image',
-        'ezinteger' => 'Integer',
-        'ezkeyword' => 'Keywords',
-        'ezlandingpage' => 'Landing Page',
-        'ezpage' => 'Layout',
-        'ezgmaplocation' => 'Map location',
-        'ezmedia' => 'Media',
-        'ezsrrating' => 'Rating',
-        'ezrichtext' => 'Rich text',
-        'ezselection' => 'Selection',
-        'eztext' => 'Text block',
-        'ezstring' => 'Text line',
-        'eztime' => 'Time',
-        'ezurl' => 'URL',
-        'ezuser' => 'User account',
-    ];
-
     public function __construct(UtilityContext $context)
     {
         parent::__construct($context);
@@ -93,7 +64,7 @@ class ContentUpdateForm extends Element
         $fieldType = explode('--', $matches[0])[1];
         $fieldLocator = sprintf($this->fields['nthField'], $fieldPosition);
 
-        return ElementFactory::createElement($this->context, $this->fieldTypeMapping[$fieldType], $fieldLocator, $fieldName);
+        return ElementFactory::createElement($this->context, EzFieldElement::getFieldNameByInternalName($fieldType), $fieldLocator, $fieldName);
     }
 
     /**

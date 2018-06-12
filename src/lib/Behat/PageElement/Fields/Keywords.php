@@ -9,10 +9,10 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use PHPUnit\Framework\Assert;
 
-class TextLine extends EzFieldElement
+class Keywords extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
-    public const ELEMENT_NAME = 'Text line';
+    public const ELEMENT_NAME = 'Keywords';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
@@ -46,7 +46,7 @@ class TextLine extends EzFieldElement
     public function verifyValueInItemView(array $values): void
     {
         Assert::assertEquals(
-            $values['value'],
+            str_replace(', ', '', $values['value']),
             $this->context->findElement($this->fields['fieldContainer'])->getText(),
             'Field has wrong value'
         );

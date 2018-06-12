@@ -7,17 +7,22 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\DateAndTimePopup;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use PHPUnit\Framework\Assert;
 
-class TextLine extends EzFieldElement
+class Date extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
-    public const ELEMENT_NAME = 'Text line';
+    public const ELEMENT_NAME = 'Date';
+
+    private const DATE_FORMAT = 'm/d/Y';
+    private const VIEW_DATE_FORMAT = 'd/m/Y';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
-        $this->fields['fieldInput'] = 'input';
+        $this->fields['fieldInput'] = 'input.flatpickr-input.ez-data-source__input';
     }
 
     public function setValue(array $parameters): void
@@ -28,8 +33,10 @@ class TextLine extends EzFieldElement
 
         Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
 
-        $fieldInput->setValue('');
-        $fieldInput->setValue($parameters['value']);
+        $fieldInput->click();
+
+        $dateAndTimePopup = ElementFactory::createElement($this->context, DateAndTimePopup::ELEMENT_NAME);
+        $dateAndTimePopup->setDate(\DateTime::createFromFormat(self::DATE_FORMAT, $parameters['value']), self::DATE_FORMAT);
     }
 
     public function getValue(): array
@@ -40,14 +47,16 @@ class TextLine extends EzFieldElement
 
         Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
 
-        return [$fieldInput->getValue()];
+        return [$fieldInput->getText()];
     }
 
     public function verifyValueInItemView(array $values): void
     {
+        $expectedDateTime = date_format(\DateTime::createFromFormat(self::DATE_FORMAT, $values['value']), self::DATE_FORMAT);
+        $actualDateTime = date_format(\DateTime::createFromFormat(self::VIEW_DATE_FORMAT, $this->context->findElement($this->fields['fieldContainer'])->getText()), self::DATE_FORMAT);
         Assert::assertEquals(
-            $values['value'],
-            $this->context->findElement($this->fields['fieldContainer'])->getText(),
+            $expectedDateTime,
+            $actualDateTime,
             'Field has wrong value'
         );
     }
