@@ -19,10 +19,14 @@ use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use eZ\Publish\Core\MVC\Symfony\View\View;
+use EzSystems\EzPlatformAdminUi\View\ContentTranslateView;
 use EzSystems\RepositoryForms\Content\View\ContentEditView;
 use EzSystems\RepositoryForms\User\View\UserUpdateView;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * @todo It should use ViewEvents::FILTER_VIEW_PARAMETERS event instead.
+ */
 class ViewParametersListener implements EventSubscriberInterface
 {
     /** @var \eZ\Publish\API\Repository\LocationService */
@@ -52,6 +56,7 @@ class ViewParametersListener implements EventSubscriberInterface
             MVCEvents::PRE_CONTENT_VIEW => [
                 ['setContentEditViewTemplateParameters', 10],
                 ['setUserUpdateViewTemplateParameters', 5],
+                ['setContentTranslateViewTemplateParameters', 10],
             ],
         ];
     }
@@ -75,6 +80,43 @@ class ViewParametersListener implements EventSubscriberInterface
         /** @var Content $content */
         $content = $contentView->getParameter('content');
         $location = $contentView->hasParameter('location') ? $contentView->getParameter('location') : null;
+        $isPublished = null !== $content->contentInfo->mainLocationId && $content->contentInfo->published;
+
+        $contentView->addParameters([
+            'parentLocation' => $this->resolveParentLocation($content, $location, $isPublished),
+            'isPublished' => $isPublished,
+        ]);
+
+        if (!$isPublished) {
+            $contentView->addParameters([
+                'parentLocations' => $this->locationService->loadParentLocationsForDraftContent($content->versionInfo),
+            ]);
+        }
+
+        $contentInfo = $content->versionInfo->contentInfo;
+
+        $this->processCreator($contentInfo, $contentView);
+    }
+
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent $event
+     *
+     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    public function setContentTranslateViewTemplateParameters(PreContentViewEvent $event)
+    {
+        $contentView = $event->getContentView();
+
+        if (!$contentView instanceof ContentTranslateView) {
+            return;
+        }
+
+        /** @var Content $content */
+        $content = $contentView->getContent();
+        $location = $contentView->getLocation();
         $isPublished = null !== $content->contentInfo->mainLocationId && $content->contentInfo->published;
 
         $contentView->addParameters([
