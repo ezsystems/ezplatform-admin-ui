@@ -1,14 +1,2 @@
-{% extends 'form_div_layout.html.twig' %}
-
-{% block radio_widget %}
-    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-translation__input')|trim}) %}
-    <div class="radio ez-translation__input-wrapper">
-        <label class="ez-translation__label">
-            {{ parent() }}
-            <svg class="ez-icon">
-                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#checkmark"></use>
-            </svg>
-            {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
-        </label>
-    </div>
-{% endblock %}
+{# This template is deprecated since 2.2 and will be removed in 3.0. Please use below template as a replacement. #}
+{% include '@EzPlatformAdminUi/content/translation_add_form_fields.html.twig' %}
