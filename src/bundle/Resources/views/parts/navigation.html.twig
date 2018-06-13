@@ -1,3 +1,9 @@
+{% set main_menu_context = {
+    'location': location ?? null,
+    'content': content ?? null
+} %}
+{% set main_menu = knp_menu_get('ezplatform_admin_ui.menu.main', [], main_menu_context) %}
+
 <nav class="navbar navbar-expand-sm navbar-light ez-main-nav" style="flex-wrap:wrap;">
     <div class="container-fluid">
         <a href="{{ url('ezplatform.dashboard') }}" class="navbar-brand">
@@ -7,7 +13,6 @@
         </a>
         <div class="collapse navbar-collapse">
             <ul class="nav nav-tabs" role="tablist">
-                {% set main_menu = knp_menu_get('ezplatform_admin_ui.menu.main', [], {'location': location is defined ? location : null, 'content': content is defined ? content : null}) %}
                 {{ knp_menu_render(main_menu, {
                     'depth': 1,
                     'template': '@EzPlatformAdminUi/parts/menu/top_menu.html.twig',
@@ -37,7 +42,7 @@
     </div>
 </nav>
 <nav class="navbar navbar-expand-sm navbar-light ez-main-sub-nav" style="flex-wrap:wrap;">
-    {{ knp_menu_render('ezplatform_admin_ui.menu.main', {
+    {{ knp_menu_render(main_menu, {
         'depth': 2,
         'template': '@EzPlatformAdminUi/parts/menu/top_menu_2nd_level.html.twig',
         'currentClass': 'active',
