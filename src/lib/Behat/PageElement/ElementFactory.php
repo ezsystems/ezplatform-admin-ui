@@ -42,6 +42,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\VerticalOrientedTable;
 use EzSystems\EzPlatformPageBuilder\Tests\Behat\PageElement\PageBuilderActionBar;
 use EzSystems\EzPlatformPageBuilder\Tests\Behat\PageElement\PageBuilderCreatorPopup;
 use EzSystems\EzPlatformPageBuilder\Tests\Behat\PageElement\PageEditorBlock;
+use EzSystems\FlexWorkflow\Behat\PageElement\SendForReviewForm;
 
 class ElementFactory
 {
@@ -158,6 +159,8 @@ class ElementFactory
                 return new UniversalDiscoveryWidget($context);
             case DateBasedPublisherPopup::ELEMENT_NAME:
                 return new DateBasedPublisherPopup($context);
+            case SendForReviewForm::ELEMENT_NAME:
+                return new SendForReviewForm($context);
             case PageBuilderCreatorPopup::ELEMENT_NAME:
                 return new PageBuilderCreatorPopup($context);
             case PageBuilderActionBar::ELEMENT_NAME:
