@@ -192,6 +192,7 @@ class ViewParametersListenerTest extends TestCase
             MVCEvents::PRE_CONTENT_VIEW => [
                 ['setContentEditViewTemplateParameters', 10],
                 ['setUserUpdateViewTemplateParameters', 5],
+                ['setContentTranslateViewTemplateParameters', 10],
             ],
         ];
 
