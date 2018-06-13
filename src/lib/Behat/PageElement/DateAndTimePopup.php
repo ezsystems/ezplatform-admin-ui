@@ -46,7 +46,7 @@ class DateAndTimePopup extends Element
             $this->switchToNextMonth();
         }
 
-        $displayedDays = $this->context->findAllWithWait(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['pickerDaySelector']));
+        $displayedDays = $this->context->findAllElements(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['pickerDaySelector']));
 
         foreach ($displayedDays as $day) {
             $currentValue = DateTime::createFromFormat($dateFormat, $day->getAttribute($this->fields['pickerDayValue']));
