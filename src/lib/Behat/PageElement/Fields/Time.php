@@ -42,6 +42,9 @@ class Time extends EzFieldElement
         $this->context->waitUntil($this->defaultTimeout, function () use ($expectedTimeValue) {
             return $this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']))->getValue() === $expectedTimeValue;
         });
+
+        // This click is closing the date and time picker, to finally ensure that value is set up.
+        $this->context->findElement($this->fields['fieldContainer'])->click();
     }
 
     public function getValue(): array
