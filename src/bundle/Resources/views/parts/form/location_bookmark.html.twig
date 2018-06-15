@@ -1,4 +1,5 @@
 {% trans_default_domain 'locationview' %}
+{% form_theme form _self '@EzPlatformAdminUi/form_fields.html.twig'  %}
 
 <div class="ez-add-to-bookmarks {{ form.vars.data.bookmarked ? 'ez-add-to-bookmarks--checked'}}">
     {{ form_start(form, {'action': path('ezplatform.location.update_bookmark')}) }}

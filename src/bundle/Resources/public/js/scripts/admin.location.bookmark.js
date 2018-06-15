@@ -4,6 +4,8 @@
     const SELECTOR_BOOKMARK_LOCATION_INPUT = '#location_update_bookmark_location';
     const SELECTOR_BOOKMARK_WRAPPER = '.ez-add-to-bookmarks';
 
+    const CLASS_BOOKMARK_CHECKED = 'ez-add-to-bookmarks--checked';
+
     const updateBookmarkLocationInput = doc.querySelector(SELECTOR_BOOKMARK_LOCATION_INPUT);
     const currentLocationId = parseInt(updateBookmarkLocationInput.value, 10);
 
@@ -16,31 +18,26 @@
     const isCurrentLocation = (locationId) => {
         return parseInt(locationId, 10) === currentLocationId;
     };
-    const setBookmarkWrapperCheckedClass = (bookmarked) => {
-        const wrapperClassList = document.querySelector(SELECTOR_BOOKMARK_WRAPPER).classList;
-        const bookmarkCheckedClass = 'ez-add-to-bookmarks--checked';
+    const toggleBookmarkIconState = (isBookmarked) => {
+        const wrapper = doc.querySelector(SELECTOR_BOOKMARK_WRAPPER);
 
-        if (bookmarked) {
-            wrapperClassList.add(bookmarkCheckedClass);
-        } else {
-            wrapperClassList.remove(bookmarkCheckedClass);
-        }
+        wrapper.classList.toggle(CLASS_BOOKMARK_CHECKED, isBookmarked);
     };
     const updateBookmarkForm = (event) => {
         const { bookmarked, locationId } = event.detail;
 
         if (isCurrentLocation(locationId)) {
             updateBookmarkCheckbox(bookmarked);
-            setBookmarkWrapperCheckedClass(bookmarked);
+            toggleBookmarkIconState(bookmarked);
         }
     };
-    const updateBookmarkWrapperClass = (event) => {
+    const updateBookmarkIconState = (event) => {
         const checked = event.target.checked;
 
-        setBookmarkWrapperCheckedClass(checked);
+        toggleBookmarkIconState(checked);
     };
 
     doc.body.addEventListener('ez-bookmark-change', updateBookmarkForm, false);
     doc.querySelector(SELECTOR_BOOKMARK_CHECKBOX).addEventListener('change', submitBookmarkForm, false);
-    doc.querySelector(SELECTOR_BOOKMARK_CHECKBOX).addEventListener('change', updateBookmarkWrapperClass, false);
+    doc.querySelector(SELECTOR_BOOKMARK_CHECKBOX).addEventListener('change', updateBookmarkIconState, false);
 })(window, document);
