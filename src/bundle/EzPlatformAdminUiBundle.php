@@ -6,12 +6,13 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ComponentPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SecurityLoginPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ViewBuilderRegistryPass;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\ContentTranslateView;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\LocationIds;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Module;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Notifications;
@@ -27,26 +28,26 @@ class EzPlatformAdminUiBundle extends Bundle
 {
     public const ADMIN_GROUP_NAME = 'admin_group';
 
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Symfony\Component\DependencyInjection\Exception\LogicException
+     */
     public function build(ContainerBuilder $container)
     {
-        /** @var EzPublishCoreExtension $core */
+        /** @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension $core */
         $core = $container->getExtension('ezpublish');
-        $core->addConfigParser(new LocationIds());
-        $core->addConfigParser(new Module\Subitems());
-        $core->addConfigParser(new Module\UniversalDiscoveryWidget());
-        $core->addConfigParser(new Pagination());
-        $core->addConfigParser(new Security());
-        $core->addConfigParser(new UserIdentifier());
-        $core->addConfigParser(new UserGroupIdentifier());
-        $core->addConfigParser(new SubtreeOperations());
-        $core->addConfigParser(new Notifications());
+
+        $configParsers = $this->getConfigParsers();
+        array_walk($configParsers, [$core, 'addConfigParser']);
+
         $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ezplatform_default_settings.yml']);
 
         $this->addCompilerPasses($container);
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     private function addCompilerPasses(ContainerBuilder $container)
     {
@@ -55,5 +56,25 @@ class EzPlatformAdminUiBundle extends Bundle
         $container->addCompilerPass(new SystemInfoTabGroupPass());
         $container->addCompilerPass(new ComponentPass());
         $container->addCompilerPass(new SecurityLoginPass());
+        $container->addCompilerPass(new ViewBuilderRegistryPass());
+    }
+
+    /**
+     * @return \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ParserInterface[]
+     */
+    private function getConfigParsers(): array
+    {
+        return [
+            new LocationIds(),
+            new Module\Subitems(),
+            new Module\UniversalDiscoveryWidget(),
+            new Pagination(),
+            new Security(),
+            new UserIdentifier(),
+            new UserGroupIdentifier(),
+            new SubtreeOperations(),
+            new Notifications(),
+            new ContentTranslateView(),
+        ];
     }
 }

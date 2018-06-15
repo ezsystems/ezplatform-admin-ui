@@ -2,7 +2,8 @@
     const CLASS_SELECTED = 'ez-translation__label--selected';
     const SELECTOR_WRAPPER = '.ez-translation__language-wrapper';
     const SELECTOR_LABEL = '.ez-translation__label';
-    const updateSelection = event => {
+    const SELECTOR_MODAL = '.ez-modal';
+    const updateSelection = (event) => {
         event.preventDefault();
 
         const radio = event.currentTarget.querySelector('input[type="radio"]');
@@ -18,7 +19,9 @@
         radio[methodName]('checked', checked);
 
         if (radio.name === 'add-translation[language]') {
-            doc.querySelector('.ez-btn--create-translation').removeAttribute('disabled');
+            const modal = event.target.closest(SELECTOR_MODAL);
+
+            modal.querySelector('.ez-btn--create-translation').removeAttribute('disabled');
         }
     };
 

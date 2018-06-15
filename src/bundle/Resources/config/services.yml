@@ -13,8 +13,8 @@ imports:
     - { resource: services/siteaccess.yml }
     - { resource: services/universal_discovery_widget.yml }
     - { resource: services/utils.yml }
-
-parameters:
+    - { resource: services/form_ui_action_mappers.yml }
+    - { resource: services/views.yml }
 
 services:
     _defaults:
