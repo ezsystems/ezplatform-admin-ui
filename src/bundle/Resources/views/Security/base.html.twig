@@ -38,5 +38,12 @@
         %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
+        {% if app.request.locale == 'ach_UG' %}
+            <script type="text/javascript">
+                var _jipt = [];
+                _jipt.push(['project', 'ezplatform']);
+            </script>
+            <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
+        {% endif %}
     </body>
 </html>
