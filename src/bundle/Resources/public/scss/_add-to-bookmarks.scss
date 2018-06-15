@@ -34,7 +34,7 @@
         }
     }
 
-    &__checkbox:checked + &__label {
+    &--checked &__label {
         &::after {
             background-color: #fff;
             animation: background-to-white .25s ease-in;
@@ -49,8 +49,8 @@
         z-index: 2;
     }
 
-    &__checkbox:checked + &__label &__icon-wrapper--add,
-    &__checkbox:not(:checked) + &__label &__icon-wrapper--remove {
+    &--checked &__label &__icon-wrapper--add,
+    &:not(.ez-add-to-bookmarks--checked) &__label &__icon-wrapper--remove {
         opacity: 0;
         transform: scale(0);
     }
