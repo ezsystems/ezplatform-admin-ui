@@ -1,6 +1,6 @@
 {% trans_default_domain 'locationview' %}
 
-<div class="ez-add-to-bookmarks">
+<div class="ez-add-to-bookmarks {{ form.vars.data.bookmarked ? 'ez-add-to-bookmarks--checked'}}">
     {{ form_start(form, {'action': path('ezplatform.location.update_bookmark')}) }}
         {{ form_widget(form.bookmarked, {'attr': {'class': 'ez-add-to-bookmarks__checkbox'}}) }}
         <label class="ez-add-to-bookmarks__label" for="{{ form.bookmarked.vars.id}}">
