@@ -3,7 +3,6 @@
     const SELECTOR_BOOKMARK_CHECKBOX = '#location_update_bookmark_bookmarked';
     const SELECTOR_BOOKMARK_LOCATION_INPUT = '#location_update_bookmark_location';
     const SELECTOR_BOOKMARK_WRAPPER = '.ez-add-to-bookmarks';
-
     const CLASS_BOOKMARK_CHECKED = 'ez-add-to-bookmarks--checked';
 
     const updateBookmarkLocationInput = doc.querySelector(SELECTOR_BOOKMARK_LOCATION_INPUT);
