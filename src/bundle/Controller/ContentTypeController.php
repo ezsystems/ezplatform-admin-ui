@@ -404,7 +404,7 @@ class ContentTypeController extends Controller
         $languageCode = reset($this->languages);
 
         foreach ($this->languages as $prioritizedLanguage) {
-            if (isset($contentType->names[$prioritizedLanguage])) {
+            if (isset($contentTypeDraft->names[$prioritizedLanguage])) {
                 $languageCode = $prioritizedLanguage;
                 break;
             }
