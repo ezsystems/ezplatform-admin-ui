@@ -1,11 +1,11 @@
 {% trans_default_domain 'locationview' %}
 {% import _self as tab %}
-{% form_theme form_content_location_add 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
-{% form_theme form_content_location_remove 'EzPlatformAdminUiBundle:parts/form:flat_widgets.html.twig' %}
+{% form_theme form_content_location_add '@ezdesign/parts/form/flat_widgets.html.twig' %}
+{% form_theme form_content_location_remove '@ezdesign/parts/form/flat_widgets.html.twig' %}
 
 <section>
     {{ form(form_content_location_add, {'action': path('ezplatform.location.add')}) }}
-    {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.locations.content_locations'|trans()|desc('Content locations'), tools: tab.table_header_tools(form_content_location_add, form_content_location_remove) } %}
+    {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.locations.content_locations'|trans()|desc('Content locations'), tools: tab.table_header_tools(form_content_location_add, form_content_location_remove) } %}
     {{ form_start(form_content_location_remove, {
         'action': path('ezplatform.location.remove'),
         'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-locations' }
@@ -28,7 +28,7 @@
                         {{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'disabled': not location.canDelete}}) }}
                     </td>
                     <td class="align-middle">
-                        {% include 'EzPlatformAdminUiBundle:parts:path.html.twig' with {'locations': location.pathLocations} %}
+                        {% include '@ezdesign/parts/path.html.twig' with {'locations': location.pathLocations} %}
                     </td>
                     <td class="align-middle">{{ location.childCount }}</td>
                     <td>
@@ -62,7 +62,7 @@
 
 </section>
 
-{% include 'EzPlatformAdminUiBundle:content/tab/locations:panel_swap.html.twig' with {'form': form_content_location_swap} %}
+{% include '@ezdesign/content/tab/locations/panel_swap.html.twig' with {'form': form_content_location_swap} %}
 
 {% macro table_header_tools(form_add, form_remove) %}
     <button data-udw-config="{{ ez_udw_config('single', {}) }}" class="btn btn-primary btn--udw-add" title="{{ 'tab.locations.action.add'|trans|desc('Add Location') }}">
@@ -80,7 +80,7 @@
                  xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
-    {% include '@EzPlatformAdminUi/bulk_delete_confirmation_modal.html.twig' with {
+    {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {
         'id': modal_data_target,
         'message': 'tab.locations.modal.message'|trans|desc('Do you want to delete Location?'),
         'data_click': '#' ~ form_remove.remove.vars.id,

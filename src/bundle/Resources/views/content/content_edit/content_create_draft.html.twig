@@ -1,7 +1,7 @@
-{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+{% extends '@ezdesign/layout.html.twig' %}
 
 {% trans_default_domain 'content_create_draft' %}
-{% form_theme form with 'EzPlatformAdminUiBundle:content:form_fields.html.twig' %}
+{% form_theme form with '@ezdesign/content/form_fields.html.twig' %}
 
 {% block content %}
     <div class="row align-items-stretch ez-main-row">

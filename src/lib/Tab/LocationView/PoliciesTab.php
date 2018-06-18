@@ -150,7 +150,7 @@ class PoliciesTab extends AbstractTab implements OrderedTabInterface, Conditiona
         ];
 
         return $this->twig->render(
-            'EzPlatformAdminUiBundle:content/tab/policies:tab.html.twig',
+            '@ezdesign/content/tab/policies/tab.html.twig',
             array_merge($viewParameters, $parameters)
         );
     }

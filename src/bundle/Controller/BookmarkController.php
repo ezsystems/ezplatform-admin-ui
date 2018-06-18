@@ -93,7 +93,7 @@ class BookmarkController extends Controller
         );
 
         return $this->render(
-            'EzPlatformAdminUiBundle:admin/bookmark:list.html.twig',
+            '@ezdesign/admin/bookmark/list.html.twig',
             $viewParameters = [
                 'pager' => $pagerfanta,
                 'form_edit' => $editForm->createView(),

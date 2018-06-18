@@ -1,9 +1,9 @@
 {% trans_default_domain 'locationview' %}
 
 {% import _self as tab %}
-{% form_theme form_archived_version_restore '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
-{% form_theme form_version_remove_draft '@EzPlatformAdminUi/form_fields.html.twig' %}
-{% form_theme form_version_remove_archived '@EzPlatformAdminUi/form_fields.html.twig' %}
+{% form_theme form_archived_version_restore '@ezdesign/parts/form/flat_widgets.html.twig' %}
+{% form_theme form_version_remove_draft '@ezdesign/form_fields.html.twig' %}
+{% form_theme form_version_remove_archived '@ezdesign/form_fields.html.twig' %}
 
 {% if draft_pager.currentPageResults is not empty %}
     <section>
@@ -11,8 +11,8 @@
             'action': path('ezplatform.version.remove'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-' ~ form_version_remove_draft.remove.vars.id }
         }) }}
-        {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'), tools: tab.table_header_tools(form_version_remove_draft) } %}
-        {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', {
+        {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'), tools: tab.table_header_tools(form_version_remove_draft) } %}
+        {{ include('@ezdesign/content/tab/versions/table.html.twig', {
             'versions': draft_pager.currentPageResults,
             'is_draft': true,
             'form': form_version_remove_draft,
@@ -39,14 +39,14 @@
             </div>
         {% endif %}
     </section>
-    {% include '@EzPlatformAdminUi/content/modal_version_conflict.html.twig' %}
+    {% include '@ezdesign/content/modal_version_conflict.html.twig' %}
 {% endif %}
 
 {% if published_versions is not empty %}
     <section>
-        {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.versions.published_version'|trans()|desc('Published version') } %}
+        {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.versions.published_version'|trans()|desc('Published version') } %}
         {% if published_versions is not empty %}
-            {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', { 'versions': published_versions }) }}
+            {{ include('@ezdesign/content/tab/versions/table.html.twig', { 'versions': published_versions }) }}
         {% else %}
             <p>
                 {{ 'tab.versions.no_permission'|trans()|desc('You don\'t have access to view the content item\'s versions') }}
@@ -61,9 +61,9 @@
             'action': path('ezplatform.version.remove'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-' ~ form_version_remove_archived.remove.vars.id }
         }) }}
-        {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: 'tab.versions.archived_versions'|trans()|desc('Archived versions'), tools: tab.table_header_tools(form_version_remove_archived) } %}
+        {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.versions.archived_versions'|trans()|desc('Archived versions'), tools: tab.table_header_tools(form_version_remove_archived) } %}
         {% if archived_versions is not empty %}
-            {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', { 'versions': archived_versions, 'form': form_version_remove_archived, 'is_archived': true, 'form_archived_version_restore': form_archived_version_restore }) }}
+            {{ include('@ezdesign/content/tab/versions/table.html.twig', { 'versions': archived_versions, 'form': form_version_remove_archived, 'is_archived': true, 'form_archived_version_restore': form_archived_version_restore }) }}
         {% else %}
             <p>
                 {{ 'tab.versions.no_permission'|trans()|desc('You don\'t have access to view the content item\'s versions') }}
@@ -89,7 +89,7 @@
                  xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
-    {% include '@EzPlatformAdminUi/bulk_delete_confirmation_modal.html.twig' with {
+    {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {
     'id': modal_data_target,
     'message': 'tab.versions.modal.message'|trans|desc('Do you want to delete Versions?'),
     'data_click': '#' ~ form.remove.vars.id,

@@ -291,7 +291,7 @@ class ContentController extends Controller
             );
         }
 
-        return $this->render('@EzPlatformAdminUi/content/content_preview.html.twig', [
+        return $this->render('@ezdesign/content/content_preview.html.twig', [
             'location' => $location,
             'content' => $content,
             'language_code' => $languageCode,

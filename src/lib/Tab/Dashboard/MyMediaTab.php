@@ -83,7 +83,7 @@ class MyMediaTab extends AbstractTab implements OrderedTabInterface
         $pager->setMaxPerPage($limit);
         $pager->setCurrentPage($page);
 
-        return $this->twig->render('EzPlatformAdminUiBundle:dashboard/tab:my_media.html.twig', [
+        return $this->twig->render('@ezdesign/dashboard/tab/my_media.html.twig', [
             'data' => $this->pagerContentToDataMapper->map($pager),
         ]);
     }

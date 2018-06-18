@@ -1,10 +1,10 @@
-{% extends "@EzPlatformAdminUi/admin/base.html.twig" %}
+{% extends "@ezdesign/admin/base.html.twig" %}
 
 {% trans_default_domain 'content_type' %}
-{% form_theme form '@EzPlatformAdminUi/form_fields.html.twig' %}
+{% form_theme form '@ezdesign/form_fields.html.twig' %}
 
 {% block breadcrumbs_admin %}
-    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
         { url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }), value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })|desc('%identifier%') },
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block page_title_admin %}
-    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+    {% include '@ezdesign/parts/page_title.html.twig' with {
         title: 'content_type.view.edit.title'|trans({ '%name%': content_type.name })|desc('Editing Content Type: %name%'),
         iconName: 'content-type'
     } %}
@@ -63,7 +63,7 @@
                         </svg>
                     </button>
 
-                    {% include 'EzPlatformAdminUiBundle:admin/content_type:delete_confirmation_modal.html.twig' with {'form': form} %}
+                    {% include '@ezdesign/admin/content_type/delete_confirmation_modal.html.twig' with {'form': form} %}
                 </div>
             </div>
             <div class="card-body">
@@ -131,7 +131,7 @@
 
 {% block right_sidebar %}
     {% set content_type_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_edit.sidebar_right', [], {'form_view': form, 'content_type': content_type}) %}
-    {{ knp_menu_render(content_type_edit_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(content_type_edit_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
 {% block javascripts %}

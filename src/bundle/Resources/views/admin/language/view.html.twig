@@ -1,13 +1,13 @@
-{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+{% extends "@ezdesign/layout.html.twig" %}
 
-{% form_theme deleteForm '@EzPlatformAdminUi/form_fields.html.twig'  %}
+{% form_theme deleteForm '@ezdesign/form_fields.html.twig'  %}
 
 {% trans_default_domain 'language' %}
 
 {% block body_class %}ez-language-view{% endblock %}
 
 {% block breadcrumbs %}
-    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.language.list'), value: 'language.list'|trans|desc('Languages') },
         { value: 'language.view.identifier'|trans({ '%language%': language.name })|desc('%language%') }
@@ -17,7 +17,7 @@
 {% block title %}{{ 'language.view.title.identifier'|trans({ '%language%': language.name })|desc('Language "%language%"') }}{% endblock %}
 
 {% block page_title %}
-    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+    {% include '@ezdesign/parts/page_title.html.twig' with {
         title: 'language.view.title.identifier'|trans({ '%language%': language.name })|desc('Language "%language%"'),
         iconName: 'languages'
     } %}
@@ -44,7 +44,7 @@
                         </svg>
                     </button>
 
-                    {% include 'EzPlatformAdminUiBundle:admin/language:delete_confirmation_modal.html.twig' with {'deleteForm': deleteForm} %}
+                    {% include '@ezdesign/admin/language/delete_confirmation_modal.html.twig' with {'deleteForm': deleteForm} %}
 
                     {{ form_end(deleteForm) }}
                 {% endif %}

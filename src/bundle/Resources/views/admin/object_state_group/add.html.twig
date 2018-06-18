@@ -1,11 +1,11 @@
-{% extends "@EzPlatformAdminUi/admin/object_state_group/base.html.twig" %}
+{% extends "@ezdesign/admin/object_state_group/base.html.twig" %}
 
-{% form_theme form '@EzPlatformAdminUi/form_fields.html.twig'  %}
+{% form_theme form '@ezdesign/form_fields.html.twig'  %}
 
 {% trans_default_domain 'object_state' %}
 
 {% block breadcrumbs_admin %}
-    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.object_state.groups.list'), value: 'object_state_group.breadcrumb.list'|trans|desc('Object States') },
         { value: 'object_state_group.breadcrumb.add'|trans|desc('Creating a new Object State Group') }
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block page_title_admin %}
-    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+    {% include '@ezdesign/parts/page_title.html.twig' with {
         title: 'object_state_group.view.add.title'|trans|desc('Creating a new Object State Group'),
         iconName: 'object-state'
     } %}
@@ -38,5 +38,5 @@
 
 {% block right_sidebar %}
     {% set object_state_group_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.object_state_group_create.sidebar_right') %}
-    {{ knp_menu_render(object_state_group_create_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(object_state_group_create_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

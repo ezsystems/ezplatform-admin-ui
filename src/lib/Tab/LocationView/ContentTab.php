@@ -78,7 +78,7 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
         $languages = $this->loadContentLanguages($content);
 
         return $this->twig->render(
-            'EzPlatformAdminUiBundle:content/tab:content.html.twig',
+            '@ezdesign/content/tab/content.html.twig',
             [
                 'content' => $content,
                 /* @deprecated since version 2.2, to be removed in 3.0 */

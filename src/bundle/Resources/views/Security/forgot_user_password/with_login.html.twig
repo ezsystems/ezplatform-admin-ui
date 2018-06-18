@@ -1,6 +1,6 @@
-{% extends '@EzPlatformAdminUi/Security/base.html.twig' %}
+{% extends '@ezdesign/Security/base.html.twig' %}
 
-{% form_theme form_forgot_user_password_with_login '@EzPlatformAdminUi/Security/form_fields.html.twig'  %}
+{% form_theme form_forgot_user_password_with_login '@ezdesign/Security/form_fields.html.twig'  %}
 
 {%- block content -%}
     <h2 class="ez-login__header">{{ 'authentication.reset_your_password'|trans|desc('Reset your password') }}</h2>

@@ -1,0 +1,8 @@
+ezdesign:
+    design_list:
+        admin: [admin, standard]
+
+ezpublish:
+    system:
+        admin_group:
+            design: admin

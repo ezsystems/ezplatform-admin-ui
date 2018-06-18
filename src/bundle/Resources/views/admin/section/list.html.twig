@@ -1,21 +1,21 @@
-{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+{% extends '@ezdesign/layout.html.twig' %}
 
-{% form_theme form_sections_delete '@EzPlatformAdminUi/form_fields.html.twig'  %}
-{% form_theme form_section_content_assign '@EzPlatformAdminUi/form_fields.html.twig'  %}
+{% form_theme form_sections_delete '@ezdesign/form_fields.html.twig'  %}
+{% form_theme form_section_content_assign '@ezdesign/form_fields.html.twig'  %}
 
 {% trans_default_domain 'section' %}
 
 {% block body_class %}ez-section-list-view{% endblock %}
 
 {% block breadcrumbs %}
-    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { value: 'section.list.title'|trans|desc('Sections') }
     ]} %}
 {% endblock %}
 
 {% block page_title %}
-    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+    {% include '@ezdesign/parts/page_title.html.twig' with {
         title: 'section.list.title'|trans|desc('Sections'),
         iconName: 'sections'
     } %}
@@ -48,7 +48,7 @@
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
                     </button>
-                    {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+                    {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
                         'id': modal_data_target,
                         'message': 'section.modal.message'|trans|desc('Do you want to delete Section?'),
                         'data_click': '#sections_delete_delete',

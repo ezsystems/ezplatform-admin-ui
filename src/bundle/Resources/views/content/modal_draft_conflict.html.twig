@@ -25,9 +25,9 @@
                         {{ 'draft.conflict.choice'|trans({})|desc('You can either edit any of your existing draft(s) or add a new one.') }}
                     </p>
                 </div>
-                {% include '@EzPlatformAdminUi/parts/table_header.html.twig' with { headerText: null, tools: version_modal_draft_conflict.table_header_tools() } %}
+                {% include '@ezdesign/parts/table_header.html.twig' with { headerText: null, tools: version_modal_draft_conflict.table_header_tools() } %}
                 <div class="ez-scrollable-wrapper">
-                    {{ include('@EzPlatformAdminUi/content/tab/versions/table.html.twig', {
+                    {{ include('@ezdesign/content/tab/versions/table.html.twig', {
                         'versions': conflicted_drafts,
                         'location': location,
                         'is_draft': true,

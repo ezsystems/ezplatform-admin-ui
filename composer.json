@@ -20,6 +20,7 @@
         "ezsystems/repository-forms": "^2.1@dev",
         "ezsystems/ezplatform-admin-ui-modules": "^1.1@dev",
         "ezsystems/ez-support-tools": "^0.2@dev",
+        "ezsystems/ezplatform-design-engine": "^2.0@dev",
         "white-october/pagerfanta-bundle": "^1.1",
         "knplabs/knp-menu-bundle": "^2.1"
     },

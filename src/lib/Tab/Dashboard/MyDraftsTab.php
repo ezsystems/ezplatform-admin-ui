@@ -151,7 +151,7 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
             ];
         }
 
-        return $this->twig->render('EzPlatformAdminUiBundle:dashboard/tab:my_drafts.html.twig', [
+        return $this->twig->render('@ezdesign/dashboard/tab/my_drafts.html.twig', [
             'data' => $data,
         ]);
     }

@@ -1,10 +1,10 @@
-{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+{% extends "@ezdesign/layout.html.twig" %}
 
 {% trans_default_domain 'locationview' %}
-{% form_theme form_location_copy '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
-{% form_theme form_location_move '@EzPlatformAdminUi/parts/form/flat_widgets.html.twig' %}
-{% form_theme form_content_edit '@EzPlatformAdminUi/form_fields.html.twig' %}
-{% form_theme form_content_create '@EzPlatformAdminUi/form_fields.html.twig' %}
+{% form_theme form_location_copy '@ezdesign/parts/form/flat_widgets.html.twig' %}
+{% form_theme form_location_move '@ezdesign/parts/form/flat_widgets.html.twig' %}
+{% form_theme form_content_edit '@ezdesign/form_fields.html.twig' %}
+{% form_theme form_content_create '@ezdesign/form_fields.html.twig' %}
 
 {% block body_class %}ez-content-view{% endblock %}
 
@@ -33,14 +33,14 @@
                         {% endif %}
                     {% endfor %}
                     {% set items = items|merge([{ 'value': content.name }]) %}
-                    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: items } %}
+                    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: items } %}
 
-                    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+                    {% include '@ezdesign/parts/page_title.html.twig' with {
                         title: content.name,
                         iconName: contentType.identifier,
                         contentTypeName: contentType.name
                     } %}
-                    {% include '@EzPlatformAdminUi/parts/form/location_bookmark.html.twig' with {
+                    {% include '@ezdesign/parts/form/location_bookmark.html.twig' with {
                         form: form_location_bookmark
                     } %}
                 </div>
@@ -56,7 +56,7 @@
                         'system_urls_pagination_params': system_urls_pagination_params,
                         'roles_pagination_params': roles_pagination_params,
                         'policies_pagination_params': policies_pagination_params
-                    }, 'EzPlatformAdminUiBundle:parts/tab:locationview.html.twig') }}
+                    }, '@ezdesign/parts/tab/locationview.html.twig') }}
 
                     {% if contentType.isContainer %}
                     {{ form_start(form_subitems_content_edit, { 'action': path('ezplatform.content.edit'), 'attr': { 'hidden': 'hidden' }}) }}
@@ -74,18 +74,18 @@
         <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
             <div class="ez-sticky-container">
                 {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': contentType}) %}
-                {{ knp_menu_render(content_sidebar_right, {'template': '@EzPlatformAdminUi/parts/menu/sidebar_right.html.twig'}) }}
+                {{ knp_menu_render(content_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
 
                 <div class="ez-extra-actions-container">
-                    {% include '@EzPlatformAdminUi/content/widgets/content_create.html.twig' with {'form': form_content_create} only %}
-                    {% include '@EzPlatformAdminUi/content/widgets/content_edit.html.twig' with {'form': form_content_edit} only %}
+                    {% include '@ezdesign/content/widgets/content_create.html.twig' with {'form': form_content_create} only %}
+                    {% include '@ezdesign/content/widgets/content_edit.html.twig' with {'form': form_content_edit} only %}
                 </div>
             </div>
             {%  if form_location_trash is defined %}
-                {% include '@EzPlatformAdminUi/content/modal_location_trash.html.twig' with {'form': form_location_trash} only %}
+                {% include '@ezdesign/content/modal_location_trash.html.twig' with {'form': form_location_trash} only %}
             {% endif %}
             {%  if form_user_delete is defined %}
-                {% include '@EzPlatformAdminUi/content/modal_user_delete.html.twig' with {'form': form_user_delete} only %}
+                {% include '@ezdesign/content/modal_user_delete.html.twig' with {'form': form_user_delete} only %}
             {% endif %}
             {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}
             {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}

@@ -150,7 +150,7 @@ class RolesTab extends AbstractTab implements OrderedTabInterface, ConditionalTa
         ];
 
         return $this->twig->render(
-            'EzPlatformAdminUiBundle:content/tab/roles:tab.html.twig',
+            '@ezdesign/content/tab/roles/tab.html.twig',
             array_merge($viewParameters, $parameters)
         );
     }

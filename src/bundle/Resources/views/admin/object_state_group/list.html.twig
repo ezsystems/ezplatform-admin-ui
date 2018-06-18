@@ -1,13 +1,13 @@
-{% extends "@EzPlatformAdminUi/layout.html.twig" %}
+{% extends "@ezdesign/layout.html.twig" %}
 
-{% form_theme form_state_groups_delete '@EzPlatformAdminUi/form_fields.html.twig'  %}
+{% form_theme form_state_groups_delete '@ezdesign/form_fields.html.twig'  %}
 
 {% trans_default_domain 'object_state' %}
 
 {% block body_class %}ez-object-state-group-list-view{% endblock %}
 
 {% block breadcrumbs %}
-    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { value: 'object_state_group.breadcrumb.list'|trans|desc('Object States') },
     ]} %}
@@ -16,7 +16,7 @@
 {% block title %}{{ 'object_state_group.view.list.title'|trans|desc('Object State Groups') }}{% endblock %}
 
 {% block page_title %}
-    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+    {% include '@ezdesign/parts/page_title.html.twig' with {
         title: 'object_state_group.view.list.title'|trans|desc('Object State Groups'),
         iconName: 'object-state'
     } %}
@@ -49,7 +49,7 @@
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
                     </button>
-                    {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+                    {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
                         'id': modal_data_target,
                         'message': 'object_state_group.modal.message'|trans|desc('Do you want to delete Object State Group?'),
                         'data_click': '#object_state_groups_delete_delete',

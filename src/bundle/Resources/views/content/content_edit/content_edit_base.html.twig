@@ -1,6 +1,6 @@
-{% extends viewbaseLayout is defined ? viewbaseLayout : 'EzPlatformAdminUiBundle::layout.html.twig' %}
+{% extends viewbaseLayout is defined ? viewbaseLayout : '@ezdesign/layout.html.twig' %}
 
-{% set default_form_templates = ['@EzPlatformAdminUi/content/form_fields.html.twig'] %}
+{% set default_form_templates = ['@ezdesign/content/form_fields.html.twig'] %}
 {% set form_templates = form_templates is defined ? form_templates|merge(default_form_templates) : default_form_templates %}
 
 {% trans_default_domain 'content_edit' %}
@@ -54,9 +54,9 @@
 {% endblock %}
 
 {% block javascripts %}
-    {% include 'EzPlatformAdminUiBundle:content/content_edit/parts:javascripts.html.twig' %}
+    {% include '@ezdesign/content/content_edit/parts/javascripts.html.twig' %}
 {% endblock %}
 
 {% block stylesheets %}
-    {% include 'EzPlatformAdminUiBundle:content/content_edit/parts:stylesheets.html.twig' %}
+    {% include '@ezdesign/content/content_edit/parts/stylesheets.html.twig' %}
 {% endblock %}

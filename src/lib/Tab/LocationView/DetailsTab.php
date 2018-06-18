@@ -155,7 +155,7 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
         ];
 
         return $this->twig->render(
-            'EzPlatformAdminUiBundle:content/tab:details.html.twig',
+            '@ezdesign/content/tab/details.html.twig',
             array_merge($viewParameters, $parameters)
         );
     }

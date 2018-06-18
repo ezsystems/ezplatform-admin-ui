@@ -1,4 +1,4 @@
-{% form_theme form_states_delete '@EzPlatformAdminUi/form_fields.html.twig'  %}
+{% form_theme form_states_delete '@ezdesign/form_fields.html.twig'  %}
 
 {% trans_default_domain 'object_state' %}
 
@@ -30,7 +30,7 @@
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
                     </button>
-                    {% include '@EzPlatformAdminUi/admin/bulk_delete_confirmation_modal.html.twig' with {
+                    {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
                         'id': modal_data_target,
                         'message': 'object_state.modal.message'|trans|desc('Do you want to delete Object State?'),
                         'data_click': '#object_states_delete_delete',

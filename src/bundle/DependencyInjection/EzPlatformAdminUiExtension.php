@@ -46,6 +46,7 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $this->prependViews($container);
         $this->prependImageVariations($container);
         $this->prependUniversalDiscoveryWidget($container);
+        $this->prependEzDesignConfiguration($container);
     }
 
     /**
@@ -79,5 +80,17 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $config = Yaml::parse(file_get_contents($udwConfigFile));
         $container->prependExtensionConfig('ezpublish', $config);
         $container->addResource(new FileResource($udwConfigFile));
+    }
+
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    private function prependEzDesignConfiguration(ContainerBuilder $container)
+    {
+        $eZDesignConfigFile = __DIR__ . '/../Resources/config/ezdesign.yml';
+        $config = Yaml::parseFile($eZDesignConfigFile);
+        $container->prependExtensionConfig('ezdesign', $config['ezdesign']);
+        $container->prependExtensionConfig('ezpublish', $config['ezpublish']);
+        $container->addResource(new FileResource($eZDesignConfigFile));
     }
 }

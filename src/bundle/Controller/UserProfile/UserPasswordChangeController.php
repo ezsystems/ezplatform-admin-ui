@@ -103,7 +103,7 @@ class UserPasswordChangeController extends Controller
             }
         }
 
-        return $this->render('@EzPlatformAdminUi/user-profile/change_user_password.html.twig', [
+        return $this->render('@ezdesign/user-profile/change_user_password.html.twig', [
             'form_change_user_password' => $form->createView(),
         ]);
     }
