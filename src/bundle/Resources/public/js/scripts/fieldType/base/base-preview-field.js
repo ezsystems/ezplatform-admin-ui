@@ -179,6 +179,7 @@
             this.fieldContainer.querySelector(SELECTOR_DATA).removeAttribute('hidden');
             this.fieldContainer.querySelector(SELECTOR_PREVIEW).setAttribute('hidden', true);
             this.fieldContainer.classList.remove('is-invalid');
+            [...this.fieldContainer.querySelectorAll('.ez-field-edit__error')].forEach(element => element.remove());
 
             btnRemove.removeEventListener('click', this.handleRemoveFile);
 
