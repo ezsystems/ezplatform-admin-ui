@@ -70,6 +70,14 @@
 
     {% set widget_wrapper_attr = widget_wrapper_attr|default({})|merge({'class': (widget_wrapper_attr.class|default('') ~ ' ez-field-edit__data')|trim}) %}
     {% set wrapper_class = 'ez-field-edit ez-field-edit--' ~ fieldtype_identifier %}
+
+    {# BC: to maintain BC we have to map errors which orginated from compound fieldtypes #}
+    {% for error in form.parent.parent.parent.vars.errors %}
+        {% if error.origin == form.vars.errors.form %}
+            {% set errors = errors|default([])|merge([error]) %}
+        {% endif %}
+    {% endfor %}
+
     {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ez-field-edit--required')|trim %}{% endif %}
     {% if errors|length > 0 %}{% set wrapper_class = (wrapper_class|default('') ~ ' is-invalid')|trim %}{% endif %}
     {% if fieldtype_is_not_translatable %}
@@ -89,7 +97,7 @@
 
     <div {% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
         <div{% with { attr: label_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
-            {{ block('form_label') }}
+            {% with { 'compound': false } %}{{- block('form_label') }}{% endwith %}
             {{ block('form_errors') }}
         </div>
 
@@ -121,3 +129,5 @@
     {%- set type = type|default('number') -%}
     {{ block('form_widget_simple') }}
 {%- endblock number_widget -%}
+
+{% block form_label_errors %}{% endblock %}

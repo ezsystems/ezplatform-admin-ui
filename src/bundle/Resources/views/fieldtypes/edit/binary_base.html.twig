@@ -6,7 +6,15 @@
     {% set wrapper_attr = wrapper_attr|default({})|merge({'class': (wrapper_attr.class|default('') ~ ' ez-field-edit--with-preview')|trim}) %}
     {% set preview_attr = preview_attr|default({})|merge({'class': (preview_attr.class|default('') ~ ' ez-field-edit__preview')|trim}) %}
     {% set widget_wrapper_attr = widget_wrapper_attr|default({})|merge({'class': (widget_wrapper_attr.class|default('') ~ ' ez-field-edit__data')|trim}) %}
-    {% if file_is_empty %}
+
+    {% set has_error = false %}
+    {% for error in form.parent.parent.parent.vars.errors %}
+        {% if error.origin == form.vars.errors.form %}
+            {% set has_error = true %}
+        {% endif %}
+    {% endfor %}
+
+    {% if file_is_empty or has_error %}
         {% set preview_attr = preview_attr|default({})|merge({'hidden': 'hidden'}) %}
     {% else %}
         {% set widget_wrapper_attr = widget_wrapper_attr|merge({'hidden': 'hidden'}) %}
