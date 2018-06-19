@@ -715,3 +715,42 @@ ezplatform.bookmark.remove:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Bookmark:remove'
+
+#
+# Notifications
+#
+notification.controller.notifications:
+    path: /ez/notifications/{page}/{limit}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Notification:getNotifications'
+        limit: 10
+        page: 0
+    methods: [GET]
+    requirements:
+        limit: '\d+'
+        page: '\d+'
+
+notification.controller.notifications.render:
+    path: /notifications/{page}/{limit}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Notification:renderNotifications'
+        limit: 5
+        page: 0
+    methods: [GET]
+    requirements:
+        limit: '\d+'
+        page: '\d+'
+
+notification.controller.count:
+    path: /notifications/count
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Notification:countNotifications'
+    methods: [GET]
+
+notification.controller.markasread:
+    path: /notification/read/{notificationId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Notification:markNotificationAsRead'
+    methods: [GET]
+    requirements:
+        notificationId: '\d+'

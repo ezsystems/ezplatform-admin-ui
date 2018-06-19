@@ -26,6 +26,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     const ITEM_LOGOUT = 'user__content';
     const ITEM_CHANGE_PASSWORD = 'user__change_password';
     const ITEM_BOOKMARK = 'user__bookmark';
+    const ITEM_NOTIFICATION = 'menu.notification';
 
     /** @var TokenStorageInterface */
     private $tokenStorage;
@@ -72,6 +73,17 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout'])
             );
+            $menu->addChild(self::ITEM_NOTIFICATION, [
+                'attributes' => [
+                    'class' => 'ez-user-menu__item--notifications',
+                    'data-toggle' => 'modal',
+                    'data-target' => '#view-notifications',
+                ],
+                'extras' => [
+                    'translation_domain' => 'notifications',
+                    'template' => '@EzPlatformAdminUi/notifications/notifications_modal.html.twig',
+                ],
+            ]);
         }
 
         return $menu;
@@ -86,6 +98,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             (new Message(self::ITEM_LOGOUT, 'menu'))->setDesc('Logout'),
             (new Message(self::ITEM_CHANGE_PASSWORD, 'menu'))->setDesc('Change password'),
             (new Message(self::ITEM_BOOKMARK, 'menu'))->setDesc('Bookmarks'),
+            (new Message(self::ITEM_NOTIFICATION, 'notifications'))->setDesc('View Notifications'),
         ];
     }
 }

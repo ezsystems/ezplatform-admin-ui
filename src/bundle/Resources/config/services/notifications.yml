@@ -1,0 +1,35 @@
+#parameters:
+#    notification.controller.notification.class: EzSystems\NotificationBundle\Controller\NotificationController
+#    notification.signal.notification_signal.class: EzSystems\Notification\Core\SignalSlot\Signal\NotificationSignal
+#    notification.signal.event_notification.class: EzSystems\Notification\Core\SignalSlot\Slot\OnNotificationSlot
+#
+#
+#services:
+#    notification.controller.notification:
+#        class: '%notification.controller.notification.class%'
+#        arguments:
+#            - '@service_container'
+#            - '@notification.service'
+#            - '@notification.renderer.registry'
+#
+#    notification.persistence.handler:
+#        class: '%notification.persistence.handler.class%'
+#        arguments:
+#            - '@notification.persistence.gateway.doctrine'
+#
+#    notification.signal.event_notification:
+#        class: '%notification.signal.event_notification.class%'
+#        arguments:
+#            - '@eZ\Publish\Core\Persistence\Legacy\Notification\Handler'
+#        tags:
+#            - { name: ezpublish.api.slot, signal: '*' }
+#
+#    EzSystems\Notification\Core\Renderer\Registry:
+#        autowire: true
+#        autoconfigure: false
+#        public: false
+#
+#    notification.renderer.registry: '@EzSystems\Notification\Core\Renderer\Registry'
+#
+#    EzSystems\Notification\Strategy:
+#        autowire: true

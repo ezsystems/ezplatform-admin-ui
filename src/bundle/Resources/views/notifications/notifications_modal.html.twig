@@ -1,0 +1,31 @@
+{% trans_default_domain 'notifications' %}
+
+<div class="modal fade n-notifications-modal" id="view-notifications" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ 'notifications'|trans|desc('Notifications') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table data-notifications="{{ path('notification.controller.notifications.render') }}" data-notifications-count="{{ path('notification.controller.count') }}" class="table n-table--notifications">
+                    <thead>
+                    <tr>
+                        <th>{{ 'notification.type'|trans|desc('Type') }}</th>
+                        <th>{{ 'notification.description'|trans|desc('Description') }}</th>
+                        <th>{{ 'notification.date'|trans|desc('Date') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody class="n-table__body">
+                    {{ render(controller('EzPlatformAdminUiBundle:Notification:renderNotifications', {
+                        'limit': 5,
+                        'page': 0,
+                    })) }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
