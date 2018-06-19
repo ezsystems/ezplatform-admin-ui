@@ -5,7 +5,10 @@
 
 <section>
     {{ form(form_content_location_add, {'action': path('ezplatform.location.add')}) }}
-    {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.locations.content_locations'|trans()|desc('Content locations'), tools: tab.table_header_tools(form_content_location_add, form_content_location_remove) } %}
+    {% include '@ezdesign/parts/table_header.html.twig' with {
+        headerText: 'tab.locations.content_locations'|trans()|desc('Content locations'),
+        tools: tab.table_header_tools(form_content_location_add, form_content_location_remove, can_add)
+    } %}
     {{ form_start(form_content_location_remove, {
         'action': path('ezplatform.location.remove'),
         'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-locations' }
@@ -42,13 +45,22 @@
                                 <svg class="ez-icon ez-icon-view-hide">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#view-hide"></use>
                                 </svg>
-                                <input class="ez-checkbox-icon__checkbox" {{ not location.hidden ? 'checked' }} type="checkbox" name="updateVisibility" value="{{ location.id }}">
+                                <input
+                                    class="ez-checkbox-icon__checkbox"
+                                    {{ not location.hidden ? 'checked' }}
+                                    type="checkbox"
+                                    name="updateVisibility"
+                                    value="{{ location.id }}">
                             </label>
                         {% endif %}
                     </td>
                     <td class="align-middle"></td>
                     <td class="align-middle">
-                        <input {{ location.main ? 'checked' }} type="radio" name="updateMainLocation" value="{{ location.id }}">
+                        <input
+                            type="radio"
+                            {{ location.main ? 'checked' }}
+                            name="updateMainLocation"
+                            value="{{ location.id }}">
                     </td>
                 </tr>
             {% endfor %}
@@ -64,20 +76,28 @@
 
 {% include '@ezdesign/content/tab/locations/panel_swap.html.twig' with {'form': form_content_location_swap} %}
 
-{% macro table_header_tools(form_add, form_remove) %}
-    <button data-udw-config="{{ ez_udw_config('single', {}) }}" class="btn btn-primary btn--udw-add" title="{{ 'tab.locations.action.add'|trans|desc('Add Location') }}">
+{% macro table_header_tools(form_add, form_remove, can_add) %}
+    <button
+        data-udw-config="{{ ez_udw_config('single', {}) }}"
+        class="btn btn-primary btn--udw-add"
+        title="{{ 'tab.locations.action.add'|trans|desc('Add Location') }}"
+        {{ not can_add ? 'disabled' }}>
         <svg class="ez-icon ez-icon-create">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
         </svg>
     </button>
 
     {% set modal_data_target = 'delete-content-types-modal' %}
-    <button id="delete-locations" type="button" class="btn btn-danger" disabled data-toggle="modal"
-            data-target="#{{ modal_data_target }}" title="{{ 'tab.locations.action.delete'|trans|desc('Delete Location') }}">
+    <button
+        id="delete-locations"
+        type="button"
+        class="btn btn-danger"
+        disabled
+        data-toggle="modal"
+        data-target="#{{ modal_data_target }}"
+        title="{{ 'tab.locations.action.delete'|trans|desc('Delete Location') }}">
         <svg class="ez-icon ez-icon-trash">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
     {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {
