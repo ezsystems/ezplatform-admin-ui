@@ -62,25 +62,11 @@
             this._setBaseConfig(event);
             this._addEventTargetUdwConfig(event);
             this._wrapOnConfigFunctions();
-            this._setSubItemsSortOrderConfig();
             this._setRestInfoConfig();
         }
 
         _addOpeningButtonsListeners() {
             this.openingButtons.forEach((button) => button.addEventListener('click', this._onOpeningButtonClick, false));
-        }
-
-        _setSubItemsSortOrderConfig() {
-            const sortContainer = doc.querySelector('[data-sort-field][data-sort-order]');
-
-            if (!sortContainer) {
-                return;
-            }
-
-            const sortField = sortContainer.getAttribute('data-sort-field');
-            const sortOrder = sortContainer.getAttribute('data-sort-order');
-
-            this.udwConfig.sortClauses = { [sortField]: sortOrder };
         }
 
         _setRestInfoConfig() {
