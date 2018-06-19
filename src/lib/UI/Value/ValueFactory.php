@@ -175,6 +175,9 @@ class ValueFactory
             'userCanRemove' => $this->permissionResolver->canUser(
                 'content', 'remove', $location->getContentInfo(), [$location]
             ),
+            'userCanEdit' => $this->permissionResolver->canUser(
+                'content', 'edit', $location->getContentInfo(), [$location]
+            ),
             'main' => $location->getContentInfo()->mainLocationId === $location->id,
         ]);
     }
