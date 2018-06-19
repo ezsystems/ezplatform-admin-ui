@@ -74,7 +74,10 @@
 
 </section>
 
-{% include '@ezdesign/content/tab/locations/panel_swap.html.twig' with {'form': form_content_location_swap} %}
+{% include '@ezdesign/content/tab/locations/panel_swap.html.twig' with {
+    'form': form_content_location_swap,
+    'can_swap': can_swap
+} %}
 
 {% macro table_header_tools(form_add, form_remove, can_add) %}
     <button

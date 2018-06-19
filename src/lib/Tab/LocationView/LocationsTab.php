@@ -131,6 +131,9 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
         $canCreate = $this->permissionResolver->canUser(
             'content', 'create', $location->getContentInfo()
         );
+        $canEdit = $this->permissionResolver->canUser(
+            'content', 'edit', $location->getContentInfo()
+        );
 
         $viewParameters = [
             'locations' => $locations,
@@ -139,6 +142,7 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
             'form_content_location_swap' => $formLocationSwap->createView(),
             'form_content_location_update_visibility' => $formLocationUpdateVisibility->createView(),
             'form_content_location_main_update' => $formLocationMainUpdate->createView(),
+            'can_swap' => $canEdit,
             'can_add' => $canManageLocations && $canCreate,
         ];
 
