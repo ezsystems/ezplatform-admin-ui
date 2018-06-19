@@ -158,7 +158,22 @@ class ContentTypeController extends Controller
         $createStruct->mainLanguageCode = $mainLanguageCode;
         $createStruct->names = [$mainLanguageCode => 'New Content Type'];
 
-        $contentTypeDraft = $this->contentTypeService->createContentType($createStruct, [$group]);
+        try {
+            $contentTypeDraft = $this->contentTypeService->createContentType($createStruct, [$group]);
+        } catch (NotFoundException $e) {
+            $this->notificationHandler->error(
+                $this->translator->trans(
+                    /** @Desc("Cannot create Content Type. Could not find 'Language' with identifier '%languageCode%'") */
+                    'content_type.add.missing_language',
+                    ['%languageCode%' => $mainLanguageCode],
+                    'content_type'
+                )
+            );
+
+            return $this->redirectToRoute('ezplatform.content_type_group.view', [
+                'contentTypeGroupId' => $group->id,
+            ]);
+        }
 
         $form = $this->createUpdateForm($group, $contentTypeDraft);
 
