@@ -1,34 +1,21 @@
-(function () {
-    const btns = document.querySelectorAll('.btn--udw-copy');
-    const form = document.querySelector('form[name="location_copy"]');
+(function(global, doc) {
+    const btns = doc.querySelectorAll('.btn--udw-copy');
+    const form = doc.querySelector('form[name="location_copy"]');
     const input = form.querySelector('#location_copy_new_parent_location');
-    const udwContainer = document.getElementById('react-udw');
-    const token = document.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
-    const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
-    const onConfirm = (items) => {
-        closeUDW();
 
+    const onUdwConfirm = (items) => {
         input.value = items[0].id;
         form.submit();
     };
-    const onCancel = () => closeUDW();
-    const openUDW = (event) => {
-        event.preventDefault();
+    const getUdwConfig = (event) => ({
+        confirmLabel: 'Copy to location',
+        title: 'Select location',
+        multiple: false,
+        startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
+        onConfirm: onUdwConfirm,
+        allowContainersOnly: true,
+    });
+    const udwInitializer = global.eZ.UdwInitializer;
 
-        const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
-            onConfirm,
-            onCancel,
-            confirmLabel: 'Copy to location',
-            title: 'Select location',
-            multiple: false,
-            startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
-            restInfo: {token, siteaccess},
-            allowContainersOnly: true
-        }, config)), udwContainer);
-    };
-
-    btns.forEach(btn => btn.addEventListener('click', openUDW, false));
-})();
+    udwInitializer.initialize(btns, getUdwConfig);
+})(window, document);
