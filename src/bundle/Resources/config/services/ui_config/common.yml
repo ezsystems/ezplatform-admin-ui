@@ -19,6 +19,14 @@ services:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'multiFileUpload' }
 
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\SortFieldMappings:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'sortFieldMappings' }
+
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\SortOrderMappings:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'sortOrderMappings' }
+
     ezsystems.ezplatform_admin_ui.ui.config.provider.image_variations:
         class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\Value
         arguments:
