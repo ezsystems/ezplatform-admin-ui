@@ -26,7 +26,7 @@
     {% for version in versions %}
         <tr>
             {% if form is defined %}
-                <td class="ez-checkbox-cell">{{ form_widget(form.versions[version.versionNo]) }}</td>
+                <td class="ez-checkbox-cell">{{ form_widget(form.versions[version.versionNo], {'attr': {'disabled': not version.canDelete}}) }}</td>
             {% endif %}
             <td>
                 {{ version.versionNo }}
