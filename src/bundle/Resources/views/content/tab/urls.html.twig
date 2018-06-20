@@ -56,6 +56,7 @@
 {% include '@ezdesign/content/tab/url/modal_add_custom_url.html.twig' with {'form': form_custom_url_add, 'parent_name': parent_name} only %}
 
 {% macro table_header_tools(form_custom_url_remove) %}
+    {% if can_edit_custom_url %}
     <button class="btn btn-primary ez-btn--prevented" data-toggle="modal" data-target="#ez-modal--custom-url-alias" title="{{ 'tab.urls.action.add'|trans|desc('Add Custom URL') }}">
         <svg class="ez-icon ez-icon-create">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
@@ -75,6 +76,7 @@
         'message': 'tab.urls.modal.message'|trans|desc('Do you want to delete selected Custom URLs?'),
         'data_click': '#' ~ form_custom_url_remove.remove.vars.id,
     }%}
+    {% endif %}
 {% endmacro %}
 
 {% block javascripts %}
