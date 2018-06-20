@@ -2,6 +2,8 @@
     let notificationsCount = 0;
     const SELECTOR_MODAL_ITEM = '.n-notifications-modal__item';
     const SELECTOR_DESC_TEXT = '.description__text';
+    const SELECTOR_TABLE = '.n-table--notifications';
+    const SELECTOR_TABLE_BODY = '.n-table--notifications .n-table__body';
     const CLASS_ELLIPSIS = 'description__text--ellipsis';
     const INTERVAL = 30000;
     const token = document.querySelector('meta[name="CSRF-Token"]').content;
@@ -33,7 +35,7 @@
             return;
         }
 
-        markAsRead(event.target.closest('.n-notifications-modal__item'));
+        markAsRead(event.target.closest(SELECTOR_MODAL_ITEM));
     };
     const getNotificationsStatus = () => {
         const requestOptions = {
@@ -44,7 +46,7 @@
             credentials: 'same-origin'
         };
 
-        fetch(modal.querySelector('.n-table--notifications').dataset.notificationsCount, requestOptions)
+        fetch(modal.querySelector(SELECTOR_TABLE).dataset.notificationsCount, requestOptions)
             .then(response => response.json())
             .then(data => setPendingNotificationCount(data));
     };
@@ -57,9 +59,9 @@
             credentials: 'same-origin'
         };
 
-        fetch(modal.querySelector('.n-table--notifications').dataset.notifications, requestOptions)
+        fetch(modal.querySelector(SELECTOR_TABLE).dataset.notifications, requestOptions)
             .then(response => response.text())
-            .then(notifications => doc.querySelector('.n-table--notifications tbody').innerHTML = notifications);
+            .then(notifications => doc.querySelector(SELECTOR_TABLE_BODY).innerHTML = notifications);
     };
     const setPendingNotificationCount = (notificationsInfo) => {
         const methodName = notificationsInfo.pending ? 'add' : 'remove';
@@ -80,7 +82,7 @@
         return;
     }
 
-    [...modal.querySelectorAll('.n-table--notifications .n-table__body')].forEach(btn => btn.addEventListener('click', handleClick, false));
+    [...modal.querySelectorAll(SELECTOR_TABLE_BODY)].forEach(btn => btn.addEventListener('click', handleClick, false));
 
     getNotificationsStatus();
     window.setInterval(getNotificationsStatus, INTERVAL);

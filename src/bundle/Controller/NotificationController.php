@@ -11,47 +11,38 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use eZ\Publish\API\Repository\NotificationService;
 use eZ\Publish\Core\Notification\Renderer\Registry;
 use eZ\Publish\SPI\Persistence\Notification\Notification;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class NotificationController extends Controller
 {
-    /** @var ContainerInterface $container */
-    protected $container;
-
-    /** @var NotificationService $notificationService */
+    /** @var \eZ\Publish\API\Repository\NotificationService $notificationService */
     protected $notificationService;
 
-    /** @var Registry */
+    /** @var \eZ\Publish\Core\Notification\Renderer\Registry */
     protected $registry;
 
     /**
-     * NotificationController constructor.
-     *
-     * @param ContainerInterface $container
-     * @param NotificationService $notificationService
-     * @param Registry $registry
+     * @param \eZ\Publish\API\Repository\NotificationService $notificationService
+     * @param \eZ\Publish\Core\Notification\Renderer\Registry $registry
      */
     public function __construct(
-        ContainerInterface $container,
         NotificationService $notificationService,
         Registry $registry
     ) {
-        $this->container = $container;
         $this->notificationService = $notificationService;
         $this->registry = $registry;
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $limit Notification count per page
      * @param int $page Notification page to return (routing default: 0)
      *
-     * @return JsonResponse
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function getNotificationsAction(Request $request, $limit, $page)
+    public function getNotificationsAction(Request $request, int $limit, int $page): JsonResponse
     {
         $response = new JsonResponse();
 
@@ -71,7 +62,13 @@ class NotificationController extends Controller
         return $response;
     }
 
-    public function renderNotificationsAction(int $limit, int $page)
+    /**
+     * @param int $limit
+     * @param int $page
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function renderNotificationsAction(int $limit, int $page): Response
     {
         $notifications = $this->notificationService->getUserNotifications($limit, $page);
 
@@ -86,7 +83,10 @@ class NotificationController extends Controller
         return new Response($html);
     }
 
-    public function countNotificationsAction()
+    /**
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function countNotificationsAction(): JsonResponse
     {
         $response = new JsonResponse();
 
@@ -110,12 +110,12 @@ class NotificationController extends Controller
      * server service for websocket connection), so * we need a way to mark notification
      * as read. AJAX call is fine.
      *
-     * @param Request $request
-     * @param int $notificationId Notification to mark as read
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param mixed $notificationId
      *
-     * @return JsonResponse
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function markNotificationAsReadAction(Request $request, $notificationId)
+    public function markNotificationAsReadAction(Request $request, $notificationId): JsonResponse
     {
         $response = new JsonResponse();
 

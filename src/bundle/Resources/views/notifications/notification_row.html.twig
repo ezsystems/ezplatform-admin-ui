@@ -6,7 +6,7 @@
 
 <tr
     data-notification-id="{{ notification.id }}"
-    data-notification-read="{{ path('notification.controller.markasread', { 'notificationId': notification.id }) }}"
+    data-notification-read="{{ path('ezplatform.notifications.mark_as_read', { 'notificationId': notification.id }) }}"
     class="{{ wrapper_class_list ~ (wrapper_additional_classes is defined ? ' ' ~ wrapper_additional_classes) }}">
     <td class="n-notifications-modal__type">
         {% block icon %}

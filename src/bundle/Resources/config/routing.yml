@@ -719,8 +719,8 @@ ezplatform.bookmark.remove:
 #
 # Notifications
 #
-notification.controller.notifications:
-    path: /ez/notifications/{page}/{limit}
+ezplatform.notifications.get:
+    path: /notifications/{page}/{limit}
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Notification:getNotifications'
         limit: 10
@@ -730,8 +730,8 @@ notification.controller.notifications:
         limit: '\d+'
         page: '\d+'
 
-notification.controller.notifications.render:
-    path: /notifications/{page}/{limit}
+ezplatform.notifications.render:
+    path: /notifications/render/{page}/{limit}
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Notification:renderNotifications'
         limit: 5
@@ -741,13 +741,13 @@ notification.controller.notifications.render:
         limit: '\d+'
         page: '\d+'
 
-notification.controller.count:
+ezplatform.notifications.count:
     path: /notifications/count
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Notification:countNotifications'
     methods: [GET]
 
-notification.controller.markasread:
+ezplatform.notifications.mark_as_read:
     path: /notification/read/{notificationId}
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Notification:markNotificationAsRead'
