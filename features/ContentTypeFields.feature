@@ -13,7 +13,7 @@ Feature: Content fields setting and editing
         | label    | <label1> | <label2> | <label3> |
         | Field    | <value1> | <value2> | <value3> |
       And I click on the edit action bar button "Publish"
-    Then I should be on content item page "<ctName>" of type "<fieldName> CT" in "eZ Platform"
+    Then I should be on content item page "<ctName>" of type "<fieldName> CT" in "Home"
       And success notification that "Content published." appears
       And content attributes equal
         | label    | <label1> | <label2> | <label3> |
