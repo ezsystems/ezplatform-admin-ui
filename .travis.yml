@@ -7,21 +7,8 @@ matrix:
         - php: 7.1
           env:
           - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
-          - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform.git"
-          - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction"
-          - SYMFONY_ENV=behat
-        - php: 7.1
-          env:
-          - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
           - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform-demo.git"
           - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction"
-          - SYMFONY_ENV=behat
-        - php: 7.1
-          env:
-          - WEB_HOST="varnish"
-          - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/varnish.yml:doc/docker/redis.yml:doc/docker/selenium.yml"
-          - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform.git"
-          - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction --tags=~@EZP-29291-excluded"
           - SYMFONY_ENV=behat
         - php: 7.1
           env:
@@ -34,22 +21,7 @@ matrix:
           env:
           - SYMFONY_DEBUG=1
           - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
-          - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform.git"
-          - BEHAT_OPTS="--profile=repository-forms --no-interaction"
-          - SYMFONY_ENV=behat
-        - php: 7.1
-          env:
-          - SYMFONY_DEBUG=1
-          - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
           - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform-demo.git"
-          - BEHAT_OPTS="--profile=repository-forms --no-interaction"
-          - SYMFONY_ENV=behat
-        - php: 7.1
-          env:
-          - SYMFONY_DEBUG=1
-          - WEB_HOST="varnish"
-          - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/varnish.yml:doc/docker/redis.yml:doc/docker/selenium.yml"
-          - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform.git"
           - BEHAT_OPTS="--profile=repository-forms --no-interaction"
           - SYMFONY_ENV=behat
         - php: 7.1

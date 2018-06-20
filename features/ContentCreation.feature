@@ -14,8 +14,8 @@ Scenario: Content creation can be cancelled
       | label | value        |
       | Title | Test Article |
     And I click on the edit action bar button "Cancel"
-  Then I should be on content container page "eZ Platform" of type "Folder"
-    And there's no "Test Article" "Article" on "eZ Platform" Sub-items list
+  Then I should be on content container page "Home" of type "Folder"
+    And there's no "Test Article" "Article" on "Home" Sub-items list
 
 @javascript @common
 Scenario: Content creation can be closed
@@ -24,8 +24,8 @@ Scenario: Content creation can be closed
       | label | value        |
       | Title | Test Article |
     And I click on the close button
-  Then I should be on content container page "eZ Platform" of type "Folder"
-    And there's no "Test Article" "Article" on "eZ Platform" Sub-items list
+  Then I should be on content container page "Home" of type "Folder"
+    And there's no "Test Article" "Article" on "Home" Sub-items list
 	
 @javascript @common
 Scenario: Content can be previewed during creation
@@ -33,7 +33,7 @@ Scenario: Content can be previewed during creation
     And I set content fields
       | label | value               |
       | Title | Test Article2       |
-      | Intro | Test article2 intro |
+      | Summary | Test article2 intro |
     And I click on the edit action bar button "Preview"
     And I go to "tablet" view in "Test Article2" preview
     And I go to "mobile" view in "Test Article2" preview
@@ -43,7 +43,7 @@ Scenario: Content can be previewed during creation
     And content fields are set
       | label | value               |
       | Title | Test Article2       |
-      | Intro | Test article2 intro |
+      | Summary | Test article2 intro |
 
 @javascript @common
 Scenario: Content draft can be saved
@@ -51,7 +51,7 @@ Scenario: Content draft can be saved
     And I set content fields
       | label | value              |
       | Title | Test Article       |
-      | Intro | Test article intro |
+      | Summary | Test article intro |
     And I click on the edit action bar button "Save"
   Then I should be on "Content Update" "Test Article" page
     And success notification that "Content draft saved." appears
@@ -62,7 +62,7 @@ Scenario: Content draft can be published
   Given going to dashboard we see there's draft "Test Article2" on list
   When I start editing content draft "Test Article2"
     And I click on the edit action bar button "Publish"
-  Then I should be on content container page "Test Article2" of type "Article" in "eZ Platform"
+  Then I should be on content container page "Test Article2" of type "Article" in "Home"
     And going to dashboard we see there's no draft "Test Article2" on list
 
 @javascript @common
@@ -72,9 +72,9 @@ Scenario: Content draft can be deleted
     And I set content fields
       | label | value                     |
       | Title | Test Article edited       |
-      | Intro | Test article intro edited |
+      | Summary | Test article intro edited |
     And I click on the edit action bar button "Delete draft"
-  Then I should be on content container page "eZ Platform" of type "Folder"
+  Then I should be on content container page "Home" of type "Folder"
     And going to dashboard we see there's no draft "Test Article edited" on list
 
 @javascript @common
@@ -83,14 +83,14 @@ Scenario: Content can be published
     And I set content fields
       | label | value              |
       | Title | Test Article       |
-      | Intro | Test article intro |
+      | Summary | Test article intro |
     And I click on the edit action bar button "Publish"
-  Then I should be on content container page "Test Article" of type "Article" in "eZ Platform"
+  Then I should be on content container page "Test Article" of type "Article" in "Home"
     And success notification that "Content published." appears
     And content attributes equal
       | label | value              |
       | Title | Test Article       |
-      | Intro | Test article intro |
+      | Summary | Test article intro |
 
 @javascript @common
 Scenario: Content edit draft can be deleted
@@ -99,9 +99,9 @@ Scenario: Content edit draft can be deleted
     And I set content fields
       | label | value                     |
       | Title | Test Article edited       |
-      | Intro | Test article intro edited |
+      | Summary | Test article intro edited |
     And I click on the edit action bar button "Delete draft"
-  Then I should be on content container page "Test Article" of type "Article" in "eZ Platform"
+  Then I should be on content container page "Test Article" of type "Article" in "Home"
     And going to dashboard we see there's no draft "Test Article edited" on list
 
 @javascript @common
@@ -111,7 +111,7 @@ Scenario: Content draft can be edited from dashboard
     And I set content fields
       | label | value                     |
       | Title | Test Article edited       |
-      | Intro | Test article intro edited |
+      | Summary | Test article intro edited |
     And I click on the edit action bar button "Save"
     And I click on the close button
     And going to dashboard we see there's draft "Test Article edited" on list
@@ -125,9 +125,9 @@ Scenario: Content draft edition can be closed
     And I set content fields
       | label | value                      |
       | Title | Test Article edited2       |
-      | Intro | Test article intro edited2 |
+      | Summary | Test article intro edited2 |
     And I click on the close button
-  Then I should be on content container page "Test Article" of type "Article" in "eZ Platform"
+  Then I should be on content container page "Test Article" of type "Article" in "Home"
 
 @javascript @common
 Scenario: Content edit draft can be saved
@@ -136,7 +136,7 @@ Scenario: Content edit draft can be saved
     And I set content fields
       | label | value                      |
       | Title | Test Article edited2       |
-      | Intro | Test article intro edited2 |
+      | Summary | Test article intro edited2 |
     And I click on the edit action bar button "Save"
   Then I should be on "Content Update" "Test Article edited2" page
     And success notification that "Content draft saved." appears
@@ -151,12 +151,12 @@ Scenario: Content draft can be created and published through draft list modal
       | label | value                      |
       | Title | Test Article edited3       |
     And I click on the edit action bar button "Publish"
-  Then I should be on content container page "Test Article edited3" of type "Article" in "eZ Platform"
+  Then I should be on content container page "Test Article edited3" of type "Article" in "Home"
     And success notification that "Content published." appears
     And content attributes equal
       | label | value                |
       | Title | Test Article edited3 |
-      | Intro | Test article intro   |
+      | Summary | Test article intro   |
 
 @javascript @common
 Scenario: Content can be previewed during edition
@@ -171,7 +171,7 @@ Scenario: Content can be previewed during edition
     And content fields are set
       | label | value                |
       | Title | Test Article edited3 |
-      | Intro | Test article intro   |
+      | Summary | Test article intro   |
 
 @javascript @common
 Scenario: Content draft from draft list modal can be published
@@ -182,12 +182,12 @@ Scenario: Content draft from draft list modal can be published
       | label | value                      |
       | Title | Test Article edited4       |
     And I click on the edit action bar button "Publish"
-  Then I should be on content container page "Test Article edited4" of type "Article" in "eZ Platform"
+  Then I should be on content container page "Test Article edited4" of type "Article" in "Home"
     And success notification that "Content published." appears
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
-      | Intro | Test article intro   |
+      | Summary | Test article intro   |
 
 @javascript @common
 Scenario: Content moving can be cancelled
@@ -195,12 +195,12 @@ Scenario: Content moving can be cancelled
   When I click on the edit action bar button "Move"
     And I select content "Media/Images" through UDW
     And I close the UDW window
-  Then I should be on content container page "Test Article edited4" of type "Article" in "eZ Platform"
+  Then I should be on content container page "Test Article edited4" of type "Article" in "Home"
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
-      | Intro | Test article intro   |
-    And breadcrumb shows "eZ Platform/Test Article edited4" path
+      | Summary | Test article intro   |
+    And breadcrumb shows "Home/Test Article edited4" path
 
 @javascript @common
 Scenario: Content can be moved
@@ -213,7 +213,7 @@ Scenario: Content can be moved
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
-      | Intro | Test article intro   |
+      | Summary | Test article intro   |
     And breadcrumb shows "Media/Images/Test Article edited4" path
     And going to "Home" there is no "Test Article edited4" "Article" on Sub-items list
 
@@ -221,27 +221,27 @@ Scenario: Content can be moved
 Scenario: Content copying can be cancelled
   Given I navigate to content "Test Article edited4" of type "Article" in "Media/Images"
   When I click on the edit action bar button "Copy"
-    And I select content "eZ Platform" through UDW
+    And I select content "Home" through UDW
     And I close the UDW window
   Then I should be on content container page "Test Article edited4" of type "Article" in "Media/Images"
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
-      | Intro | Test article intro   |
+      | Summary | Test article intro   |
     And going to "Home" there is no "Test Article edited4" "Article" on Sub-items list
 
 @javascript @common
 Scenario: Content can be copied
   Given I navigate to content "Test Article edited4" of type "Article" in "Media/Images"
   When I click on the edit action bar button "Copy"
-    And I select content "eZ Platform" through UDW
+    And I select content "Home" through UDW
     And I confirm the selection in UDW
-  Then I should be on content container page "Test Article edited4" of type "Article" in "eZ Platform"
-    And success notification that "Location 'Test Article edited4' copied to location 'eZ Platform'" appears
+  Then I should be on content container page "Test Article edited4" of type "Article" in "Home"
+    And success notification that "Location 'Test Article edited4' copied to location 'Home'" appears
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
-      | Intro | Test article intro   |
+      | Summary | Test article intro   |
     And going to "Media/Images" there is a "Test Article edited4" "Article" on Sub-items list
 
 @javascript @common
