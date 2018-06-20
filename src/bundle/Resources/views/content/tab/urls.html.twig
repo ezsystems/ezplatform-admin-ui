@@ -57,25 +57,25 @@
 
 {% macro table_header_tools(form_custom_url_remove) %}
     {% if can_edit_custom_url %}
-    <button class="btn btn-primary ez-btn--prevented" data-toggle="modal" data-target="#ez-modal--custom-url-alias" title="{{ 'tab.urls.action.add'|trans|desc('Add Custom URL') }}">
-        <svg class="ez-icon ez-icon-create">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
-        </svg>
-    </button>
+        <button class="btn btn-primary ez-btn--prevented" data-toggle="modal" data-target="#ez-modal--custom-url-alias" title="{{ 'tab.urls.action.add'|trans|desc('Add Custom URL') }}">
+            <svg class="ez-icon ez-icon-create">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+            </svg>
+        </button>
 
-    {% set modal_data_target = 'delete-custom-url-modal' %}
-    <button id="delete-custom-urls" type="button" class="btn btn-danger" disabled data-toggle="modal"
-            data-target="#{{ modal_data_target }}" title="{{ 'tab.urls.action.delete'|trans|desc('Delete Custom URL') }}">
-        <svg class="ez-icon ez-icon-trash">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-        </svg>
-    </button>
-    {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {
-        'id': modal_data_target,
-        'message': 'tab.urls.modal.message'|trans|desc('Do you want to delete selected Custom URLs?'),
-        'data_click': '#' ~ form_custom_url_remove.remove.vars.id,
-    }%}
+        {% set modal_data_target = 'delete-custom-url-modal' %}
+        <button id="delete-custom-urls" type="button" class="btn btn-danger" disabled data-toggle="modal"
+                data-target="#{{ modal_data_target }}" title="{{ 'tab.urls.action.delete'|trans|desc('Delete Custom URL') }}">
+            <svg class="ez-icon ez-icon-trash">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                     xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+            </svg>
+        </button>
+        {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {
+            'id': modal_data_target,
+            'message': 'tab.urls.modal.message'|trans|desc('Do you want to delete selected Custom URLs?'),
+            'data_click': '#' ~ form_custom_url_remove.remove.vars.id,
+        }%}
     {% endif %}
 {% endmacro %}
 

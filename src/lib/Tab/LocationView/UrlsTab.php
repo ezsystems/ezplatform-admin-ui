@@ -142,7 +142,7 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
             'custom_urls_pagination_params' => $customUrlsPaginationParams,
             'system_urls_pager' => $systemUrlPagerfanta,
             'system_urls_pagination_params' => $systemUrlsPaginationParams,
-            'can_edit_custom_url' => $canEditCustomUrl
+            'can_edit_custom_url' => $canEditCustomUrl,
         ];
 
         return $this->twig->render(
