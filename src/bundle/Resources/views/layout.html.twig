@@ -59,12 +59,14 @@
         {% block navigation %}
             {% include '@ezdesign/parts/navigation.html.twig' %}
         {% endblock %}
-        <div class="container-fluid ez-header">
-            <div class="container">
-                {% block breadcrumbs %}{% endblock %}
-                {% block page_title %}{% endblock %}
+        {% block header %}
+            <div class="container-fluid ez-header">
+                <div class="container">
+                    {% block breadcrumbs %}{% endblock %}
+                    {% block page_title %}{% endblock %}
+                </div>
             </div>
-        </div>
+        {% endblock %}
         <div class="container-fluid ez-main-container">
             {% block content %}
 
