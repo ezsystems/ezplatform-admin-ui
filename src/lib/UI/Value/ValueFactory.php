@@ -31,43 +31,43 @@ use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
 
 class ValueFactory
 {
-    /** @var UserService */
+    /** @var \eZ\Publish\API\Repository\UserService */
     protected $userService;
 
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     protected $languageService;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     protected $locationService;
 
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
-    /** @var SearchService */
+    /** @var \eZ\Publish\API\Repository\SearchService */
     protected $searchService;
 
-    /** @var ObjectStateService */
+    /** @var \eZ\Publish\API\Repository\ObjectStateService */
     protected $objectStateService;
 
-    /** @var PermissionResolver */
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;
 
-    /** @var DatasetFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
     protected $datasetFactory;
 
-    /** @var PathService */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Service\PathService */
     protected $pathService;
 
     /**
-     * @param UserService $userService
-     * @param LanguageService $languageService
-     * @param LocationService $locationService
-     * @param ContentTypeService $contentTypeService
-     * @param SearchService $searchService
-     * @param ObjectStateService $objectStateService
-     * @param PermissionResolver $permissionResolver
-     * @param PathService $pathService
-     * @param DatasetFactory $datasetFactory
+     * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\API\Repository\SearchService $searchService
+     * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \EzSystems\EzPlatformAdminUi\UI\Service\PathService $pathService
+     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
      */
     public function __construct(
         UserService $userService,
@@ -92,10 +92,12 @@ class ValueFactory
     }
 
     /**
-     * @param VersionInfo $versionInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo $versionInfo
      *
      * @return UIValue\Content\VersionInfo
      *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function createVersionInfo(VersionInfo $versionInfo): UIValue\Content\VersionInfo
@@ -109,17 +111,20 @@ class ValueFactory
         return new UIValue\Content\VersionInfo($versionInfo, [
             'author' => $author,
             'translations' => $translationsDataset->getTranslations(),
+            'userCanRemove' => $this->permissionResolver->canUser(
+                'content', 'versionremove', $versionInfo
+            ),
         ]);
     }
 
     /**
-     * @param Language $language
-     * @param VersionInfo $versionInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo $versionInfo
      *
      * @return UIValue\Content\Language
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function createLanguage(Language $language, VersionInfo $versionInfo): UIValue\Content\Language
     {
@@ -152,12 +157,12 @@ class ValueFactory
     }
 
     /**
-     * @param Location $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      *
      * @return UIValue\Content\Location
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function createLocation(Location $location): UIValue\Content\Location
     {
@@ -170,18 +175,21 @@ class ValueFactory
             'userCanRemove' => $this->permissionResolver->canUser(
                 'content', 'remove', $location->getContentInfo(), [$location]
             ),
+            'userCanEdit' => $this->permissionResolver->canUser(
+                'content', 'edit', $location->getContentInfo(), [$location]
+            ),
             'main' => $location->getContentInfo()->mainLocationId === $location->id,
         ]);
     }
 
     /**
-     * @param ContentInfo $contentInfo
-     * @param ObjectStateGroup $objectStateGroup
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $objectStateGroup
      *
      * @return UIValue\ObjectState\ObjectState
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function createObjectState(
         ContentInfo $contentInfo,
