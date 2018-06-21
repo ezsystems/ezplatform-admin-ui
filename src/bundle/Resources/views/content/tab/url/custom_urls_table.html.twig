@@ -17,10 +17,18 @@
     <tbody>
     {% for custom_url in custom_urls_pager.currentPageResults %}
         <tr>
-            <td class="ez-checkbox-cell">{{ form_widget(form_custom_url_remove.url_aliases[custom_url.id]) }}</td>
+            <td class="ez-checkbox-cell">
+                {% if can_edit_custom_url %}
+                    {{ form_widget(form_custom_url_remove.url_aliases[custom_url.id]) }}
+                {% else %}
+                    {% do form_custom_url_remove.url_aliases.setRendered %}
+                {% endif %}
+            </td>
             <td>{{ custom_url.path }}</td>
             <td>
-                {% for languageCode in custom_url.languageCodes %}{{ admin_ui_config.languages.mappings[languageCode].name }}<br>{% endfor %}
+                {% for languageCode in custom_url.languageCodes %}
+                    {{ admin_ui_config.languages.mappings[languageCode].name }}<br>
+                {% endfor %}
             </td>
             <td>
                 {% if custom_url.forward %}
