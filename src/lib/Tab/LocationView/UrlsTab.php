@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\URLAliasService;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -39,6 +40,9 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
     /** @var \eZ\Publish\API\Repository\LocationService */
     protected $locationService;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    protected $permissionResolver;
+
     /**
      * @param \Twig\Environment $twig
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
@@ -46,6 +50,7 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
      * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         Environment $twig,
@@ -53,7 +58,8 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
         URLAliasService $urlAliasService,
         FormFactory $formFactory,
         DatasetFactory $datasetFactory,
-        LocationService $locationService
+        LocationService $locationService,
+        PermissionResolver $permissionResolver
     ) {
         parent::__construct($twig, $translator);
 
@@ -61,6 +67,7 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
         $this->formFactory = $formFactory;
         $this->datasetFactory = $datasetFactory;
         $this->locationService = $locationService;
+        $this->permissionResolver = $permissionResolver;
     }
 
     /**
@@ -125,6 +132,8 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
         $customUrlRemoveForm = $this->createCustomUrlRemoveForm($location, $customUrlPagerfanta->getCurrentPageResults());
         $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
 
+        $canEditCustomUrl = $this->permissionResolver->hasAccess('content', 'urltranslator');
+
         $viewParameters = [
             'form_custom_url_add' => $customUrlAddForm->createView(),
             'form_custom_url_remove' => $customUrlRemoveForm->createView(),
@@ -133,6 +142,7 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
             'custom_urls_pagination_params' => $customUrlsPaginationParams,
             'system_urls_pager' => $systemUrlPagerfanta,
             'system_urls_pagination_params' => $systemUrlsPaginationParams,
+            'can_edit_custom_url' => $canEditCustomUrl,
         ];
 
         return $this->twig->render(
