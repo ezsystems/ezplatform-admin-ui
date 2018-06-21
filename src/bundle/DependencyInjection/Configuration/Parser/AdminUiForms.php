@@ -19,9 +19,10 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
  * ```yaml
  * ezpublish:
  *   system:
- *      default: # configuration per SiteAccess or SiteAccess group
+ *      admin_group: # configuration per SiteAccess or SiteAccess group
  *          admin_ui_forms:
- *              content_edit_form_templates: ['template.html.twig']
+ *              content_edit_form_templates:
+ *                  - { template: 'template.html.twig', priority: 0 }
  * ```
  */
 class AdminUiForms extends AbstractParser
@@ -41,7 +42,12 @@ class AdminUiForms extends AbstractParser
                 ->children()
                     ->arrayNode('content_edit_form_templates')
                         ->info('A list of Content Edit (and create) default Twig form templates')
-                        ->scalarPrototype()->end()
+                        ->arrayPrototype()
+                            ->children()
+                                ->scalarNode('template')->end()
+                                ->integerNode('priority')->end()
+                            ->end()
+                        ->end()
                     ->end()
                 ->end()
             ->end();
@@ -50,12 +56,41 @@ class AdminUiForms extends AbstractParser
     /**
      * {@inheritdoc}
      */
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
-    {
+    public function mapConfig(
+        array &$scopeSettings,
+        $currentScope,
+        ContextualizerInterface $contextualizer
+    ): void {
         $contextualizer->setContextualParameter(
             static::FORM_TEMPLATES_PARAM,
             $currentScope,
-            $scopeSettings['admin_ui_forms']['content_edit_form_templates'] ?? []
+            $this->processContentEditFormTemplates(
+                $scopeSettings['admin_ui_forms']['content_edit_form_templates'] ?? []
+            )
         );
+    }
+
+    /**
+     * Processes given prioritized list of templates, sorts them according to their priorities and
+     * returns as a simple list of templates.
+     *
+     * The input list of the templates needs to be in the form of:
+     * <code>
+     *  [
+     *      [ 'template' => '<file_path>', 'priority' => <int> ],
+     *  ],
+     * </code>
+     *
+     * @param array $formTemplates
+     *
+     * @return array ordered list of templates
+     */
+    private function processContentEditFormTemplates(array $formTemplates)
+    {
+        $priorities = array_column($formTemplates, 'priority');
+        array_multisort($priorities, SORT_DESC, $formTemplates);
+
+        // return as a simple list of templates.
+        return array_column($formTemplates, 'template');
     }
 }
