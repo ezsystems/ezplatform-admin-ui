@@ -53,6 +53,13 @@ class Location extends CoreLocation
     protected $userCanRemove;
 
     /**
+     * User can edit.
+     *
+     * @var bool
+     */
+    protected $userCanEdit;
+
+    /**
      * @param APILocation $location
      * @param array $properties
      */
@@ -69,5 +76,15 @@ class Location extends CoreLocation
     public function canDelete(): bool
     {
         return !$this->main && $this->userCanManage && $this->userCanRemove;
+    }
+
+    /**
+     * Can edit location.
+     *
+     * @return bool
+     */
+    public function canEdit(): bool
+    {
+        return $this->userCanEdit;
     }
 }
