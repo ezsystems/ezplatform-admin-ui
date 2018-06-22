@@ -90,19 +90,9 @@
 
 {% block javascripts %}
     {%  javascripts
-        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.js'
         'bundles/ezplatformadminui/js/scripts/button.content.edit.js'
         'bundles/ezplatformadminui/js/scripts/admin.search.filters.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
-
-{% block stylesheets %}
-    {% stylesheets
-        '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.css'
-    %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-{% endblock %}
-
