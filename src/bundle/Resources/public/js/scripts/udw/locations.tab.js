@@ -1,37 +1,26 @@
-(function () {
-    const btns = document.querySelectorAll('.btn--udw-add');
-    const submitButton = document.querySelector('#content_location_add_add');
-    const form = document.querySelector('form[name="content_location_add"]');
+(function(global, doc) {
+    const btns = doc.querySelectorAll('.btn--udw-add');
+    const submitButton = doc.querySelector('#content_location_add_add');
+    const form = doc.querySelector('form[name="content_location_add"]');
     const input = form.querySelector('#content_location_add_new_locations');
-    const udwContainer = document.getElementById('react-udw');
-    const token = document.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
-    const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
-    const onConfirm = (items) => {
-        closeUDW();
 
+    const canSelectContent = ({ item }, callback) => callback(item.ContentInfo.Content.ContentTypeInfo.isContainer);
+    const beforeUdwOpen = (event) => {
+        event.stopPropagation();
+    };
+    const onUdwConfirm = (items) => {
         input.value = items[0].id;
         submitButton.click();
     };
-    const canSelectContent = ({ item }, callback) => callback(item.ContentInfo.Content.ContentTypeInfo.isContainer);
-    const onCancel = () => closeUDW();
-    const openUDW = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
+    const getUdwConfig = () => ({
+        canSelectContent,
+        confirmLabel: 'Add location',
+        title: 'Select location',
+        multiple: false,
+        startingLocationId: global.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+        onConfirm: onUdwConfirm,
+    });
+    const udwInitializer = global.eZ.UdwInitializer;
 
-        const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-
-        window.ReactDOM.render(window.React.createElement(window.eZ.modules.UniversalDiscovery, Object.assign({
-            onConfirm,
-            onCancel,
-            canSelectContent,
-            confirmLabel: 'Add location',
-            title: 'Select location',
-            multiple: false,
-            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-            restInfo: {token, siteaccess}
-        }, config)), udwContainer);
-    };
-
-    btns.forEach(btn => btn.addEventListener('click', openUDW, false));
-})();
+    udwInitializer.initialize(btns, getUdwConfig, beforeUdwOpen);
+})(window, document);
