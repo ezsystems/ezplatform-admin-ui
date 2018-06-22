@@ -60,6 +60,13 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    EzSystems\EzPlatformAdminUi\EventListener\RequestLocaleListener:
+        arguments:
+            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+            $availableTranslations: '%available_translations%'
+        tags:
+            - { name: kernel.event_subscriber }
+
     EzSystems\EzPlatformAdminUi\EventListener\RequestAttributesListener:
         arguments:
             - '%ezpublish.siteaccess.groups%'
