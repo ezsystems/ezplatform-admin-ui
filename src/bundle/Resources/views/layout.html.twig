@@ -45,6 +45,7 @@
         {% stylesheets filter='scssphp'
             'bundles/ezplatformadminui/scss/ezplatform-bootstrap.scss'
             'bundles/ezplatformadminui/scss/ezplatform.scss'
+            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.css'
         %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -94,6 +95,7 @@
             '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/bootstrap/dist/js/bootstrap.min.js'
             '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/create-react-class/create-react-class.min.js'
             '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/prop-types/prop-types.min.js'
+            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
@@ -107,6 +109,7 @@
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/udw/browse.js'
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.user.menu.js'
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.prevent.click.js'
+            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.picker.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
