@@ -101,7 +101,7 @@
         </table>
 
         {% if urls.haveToPaginate %}
-            <div class="row justify-content-center align-items-center">
+            <div class="row justify-content-center align-items-center ez-pagination__spacing mb-5">
                 {{ pagerfanta(urls, 'ez', {'pageParameter': '[search_data][page]'}) }}
             </div>
         {% endif %}

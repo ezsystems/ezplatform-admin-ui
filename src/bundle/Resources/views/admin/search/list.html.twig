@@ -54,10 +54,10 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                    <div class="row justify-content-center align-items-center">
-                        <h6>{{ 'search.viewing'|trans({'%viewing%': pagerfanta.currentPageResults|length, '%total%': pagerfanta.nbResults})|desc('Viewing %viewing% out of %total% sub-items') }}</h6>
+                    <div class="row justify-content-center align-items-center ez-pagination__spacing">
+                        <h6 class="ez-pagination__text">{{ 'search.viewing'|trans({'%viewing%': pagerfanta.currentPageResults|length, '%total%': pagerfanta.nbResults})|desc('Viewing %viewing% out of %total% sub-items') }}</h6>
                     </div>
-                    <div class="row justify-content-center align-items-center">
+                    <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
                         {% if pagerfanta.haveToPaginate %}
                             {{ pagination|raw }}
                         {% endif %}
