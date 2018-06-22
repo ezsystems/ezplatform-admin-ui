@@ -720,26 +720,26 @@ ezplatform.bookmark.remove:
 # Notifications
 #
 ezplatform.notifications.get:
-    path: /notifications/{page}/{limit}
+    path: /notifications/{offset}/{limit}
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Notification:getNotifications'
+        offset: 0
         limit: 10
-        page: 0
     methods: [GET]
     requirements:
+        offset: '\d+'
         limit: '\d+'
-        page: '\d+'
 
 ezplatform.notifications.render:
-    path: /notifications/render/{page}/{limit}
+    path: /notifications/render/{offset}/{limit}
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Notification:renderNotifications'
+        offset: 0
         limit: 5
-        page: 0
     methods: [GET]
     requirements:
+        offset: '\d+'
         limit: '\d+'
-        page: '\d+'
 
 ezplatform.notifications.count:
     path: /notifications/count

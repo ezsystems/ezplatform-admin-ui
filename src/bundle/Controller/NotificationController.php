@@ -10,7 +10,6 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\NotificationService;
 use eZ\Publish\Core\Notification\Renderer\Registry;
-use eZ\Publish\SPI\Persistence\Notification\Notification;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,20 +36,21 @@ class NotificationController extends Controller
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param int $limit Notification count per page
-     * @param int $page Notification page to return (routing default: 0)
+     * @param int $offset
+     * @param int $limit
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function getNotificationsAction(Request $request, int $limit, int $page): JsonResponse
+    public function getNotificationsAction(Request $request, int $offset, int $limit): JsonResponse
     {
         $response = new JsonResponse();
 
         try {
+            $notificationList = $this->notificationService->loadNotifications($offset, $limit);
             $response->setData([
-                'pending' => $this->notificationService->getUserPendingNotificationCount(),
-                'total' => $this->notificationService->getUserNotificationCount(),
-                'notifications' => $this->notificationService->getUserNotifications($limit, $page),
+                'pending' => $this->notificationService->getPendingNotificationCount(),
+                'total' => $notificationList->totalCount,
+                'notifications' => $notificationList->items,
             ]);
         } catch (\Exception $exception) {
             $response->setData([
@@ -63,14 +63,14 @@ class NotificationController extends Controller
     }
 
     /**
+     * @param int $offset
      * @param int $limit
-     * @param int $page
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function renderNotificationsAction(int $limit, int $page): Response
+    public function renderNotificationsAction(int $offset, int $limit): Response
     {
-        $notifications = $this->notificationService->getUserNotifications($limit, $page);
+        $notifications = $this->notificationService->loadNotifications($offset, $limit);
 
         $html = '';
         foreach ($notifications as $notification) {
@@ -92,8 +92,8 @@ class NotificationController extends Controller
 
         try {
             $response->setData([
-                'pending' => $this->notificationService->getUserPendingNotificationCount(),
-                'total' => $this->notificationService->getUserNotificationCount(),
+                'pending' => $this->notificationService->getPendingNotificationCount(),
+                'total' => $this->notificationService->getNotificationCount(),
             ]);
         } catch (\Exception $exception) {
             $response->setData([
@@ -120,10 +120,9 @@ class NotificationController extends Controller
         $response = new JsonResponse();
 
         try {
-            /** @var Notification $notification */
-            $notification = $this->notificationService->getNotification($notificationId);
+            $notification = $this->notificationService->getNotification((int)$notificationId);
 
-            $this->notificationService->markNotificationAsRead($notification->id);
+            $this->notificationService->markNotificationAsRead($notification);
 
             $data = ['status' => 'success'];
 
