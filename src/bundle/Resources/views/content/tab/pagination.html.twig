@@ -1,10 +1,10 @@
-<div class="row justify-content-center align-items-center mb-2">
-    <span>
+<div class="row justify-content-center align-items-center mb-2 ez-pagination__spacing">
+    <span class="ez-pagination__text">
         {{ 'pagination.viewing'|trans({
             '%viewing%': pager.currentPageResults|length,
             '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
     </span>
 </div>
-<div class="row justify-content-center align-items-center mb-3">
+<div class="row justify-content-center align-items-center mb-3 ez-pagination__btn mb-4">
     {{ pagerfanta(pager, 'ez', paginatonParams) }}
 </div>

@@ -1,0 +1,5 @@
+system:
+    admin_group:
+        admin_ui_forms:
+            content_edit_form_templates:
+                - { template: '@ezdesign/content/form_fields.html.twig', priority: 0 }

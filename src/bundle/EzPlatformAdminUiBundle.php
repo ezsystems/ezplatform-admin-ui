@@ -13,6 +13,7 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTab
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ViewBuilderRegistryPass;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\AdminUiForms;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\ContentTranslateView;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\LocationIds;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Module;
@@ -78,6 +79,7 @@ class EzPlatformAdminUiBundle extends Bundle
             new SubtreeOperations(),
             new Notifications(),
             new ContentTranslateView(),
+            new AdminUiForms(),
         ];
     }
 }

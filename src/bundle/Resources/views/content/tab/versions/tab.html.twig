@@ -22,13 +22,13 @@
 
         {% if draft_pager.haveToPaginate %}
             <div class="row justify-content-center align-items-center mb-2">
-                <span>
+                <span class="ez-pagination__text">
                     {{ 'pagination.viewing'|trans({
                         '%viewing%': draft_pager.currentPageResults|length,
                         '%total%': draft_pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
                 </span>
             </div>
-            <div class="row justify-content-center align-items-center mb-3">
+            <div class="row justify-content-center align-items-center ez-pagination__btn mb-4">
                 {{ pagerfanta(draft_pager, 'ez',{
                     'routeName': draft_pagination_params.route_name,
                     'routeParams': draft_pagination_params.route_params|merge({

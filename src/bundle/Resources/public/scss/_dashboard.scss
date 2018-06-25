@@ -1,6 +1,14 @@
 .ez-dashboard__header {
     display: grid;
-    grid-template-columns: auto 6.25rem;
+    grid-template-columns: auto 6.5rem;
+
+    .ez-dashboard__create {
+        .ez-btn--cotf-create {
+            .ez-icon {
+                margin-right: .25rem;
+            }
+        }
+    }
 }
 
 .ez-dashboard__create {

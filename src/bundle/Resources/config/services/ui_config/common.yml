@@ -34,6 +34,13 @@ services:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'imageVariations' }
 
+    ezsystems.ezplatform_admin_ui.ui.config.provider.content_edit_form_templates:
+        class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\Value
+        arguments:
+            $value: '$admin_ui_forms.content_edit_form_templates$'
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'contentEditFormTemplates' }
+
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\User:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'user' }
