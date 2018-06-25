@@ -70,9 +70,6 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_BOOKMARK, ['route' => 'ezplatform.bookmark.list'])
             );
-            $menu->addChild(
-                $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout'])
-            );
             $menu->addChild(self::ITEM_NOTIFICATION, [
                 'attributes' => [
                     'class' => 'ez-user-menu__item--notifications',
@@ -84,6 +81,9 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'template' => '@EzPlatformAdminUi/notifications/notifications_modal.html.twig',
                 ],
             ]);
+            $menu->addChild(
+                $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout'])
+            );
         }
 
         return $menu;
