@@ -1,21 +1,21 @@
 .ez-add-to-bookmarks {
-    width: 3rem;
-    position: absolute;
-    top: 50%;
-    right: 5rem;
-    transform: translateY(-50%);
+    width: 2.25rem;
+    transform: translateY(3%);
+    grid-area: bookmark;
+    justify-self: center;
 
     &__label {
-        width: 3rem;
-        height: 3rem;
+        width: 2.25rem;
+        height: 2.25rem;
         display: block;
         position: relative;
+        margin-bottom: 0;
         border-radius: 50%;
         cursor: pointer;
 
         &::after {
             display: block;
-            margin-left: -1px;
+            margin-top: 1px;
             border-radius: 50%;
             content: "";
             animation: background-to-transparent .25s ease-in;
@@ -27,10 +27,15 @@
         &::after,
         .ez-add-to-bookmarks__icon-wrapper {
             position: absolute;
-            width: 3rem;
-            height: 3rem;
-            padding: .4rem;
+            width: 2.25rem;
+            height: 2.25rem;
+            padding: .25rem;
             transition: all .25s ease-in;
+        }
+
+        .ez-icon--secondary {
+            width: 1.75rem;
+            height: 1.75rem;
         }
     }
 

@@ -1,15 +1,28 @@
 .ez-page-title {
     padding-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    grid-column-gap: 10px;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "content-item bookmark"
+        "content-type-name .";
 
-    h1 {
+    &__content-item {
         margin-bottom: 0;
+        padding-left: 2.25rem;
+        text-indent: -2.4rem;
+        grid-area: content-item;
+        justify-self: start;
     }
 
-    h4 {
-        padding-left: 2.5rem;
+    &__content-type-name {
+        padding-left: 2.25rem;
         font-size: 1.125rem;
         font-weight: 400;
         color: $ez-color-base-light;
+        grid-area: content-type-name;
+        justify-self: start;
+        align-self: start;
     }
-
 }
