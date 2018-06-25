@@ -128,3 +128,16 @@
         </svg>
     </button>
 {%- endblock -%}
+
+{%- block date_time_picker_widget -%}
+    <div class="ez-picker">
+        <input type="text" class="ez-picker__input form-control" readonly="readonly">
+        <button type="button" class="ez-picker__btn--clear-input">
+            <svg class="ez-icon ez-icon--medium">
+                <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#circle-close"></use>
+            </svg>
+        </button>
+        {% set attr = attr|merge({ 'hidden': true, 'class': 'ez-picker__form-input' }) %}
+        {{ block('form_widget') }}
+    </div>
+{%- endblock -%}

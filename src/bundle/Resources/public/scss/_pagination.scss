@@ -1,5 +1,17 @@
 .ez-pagination {
     font-size: $ez-pagination-font-size;
+
+    &__text {
+        font-size: .75rem;
+    }
+
+    &__btn {
+        font-size: 1rem;
+    }
+
+    &__spacing {
+        margin-top: -2rem;
+    }
 }
 
 .page-item {
@@ -25,8 +37,10 @@
 .page-item.prev, .page-item.next {
     &.disabled .page-link {
         color: $ez-white;
-        background-color: $ez-ground-base-medium;
-        border: $ez-ground-base-medium;
+        background-color: $ez-color-secondary;
+        border: $ez-color-secondary;
+        opacity: .3;
+        cursor: not-allowed;
     }
 }
 

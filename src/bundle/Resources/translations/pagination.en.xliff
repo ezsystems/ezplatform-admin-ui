@@ -7,7 +7,7 @@
     </header>
     <body>
       <trans-unit id="0173399db18eb7fe3a297f66fac4bf3a98378733" resname="pagination.next_message">
-        <source>Back</source>
+        <source>Next</source>
         <target state="new">Next</target>
         <note>key: pagination.next_message</note>
       </trans-unit>
