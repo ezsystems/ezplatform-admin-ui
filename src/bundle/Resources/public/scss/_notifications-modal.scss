@@ -7,11 +7,20 @@
 
     .modal-header {
         background-color: $ez-color-base-pale;
+
+        .modal-title {
+            font-size: 1.5rem;
+        }
+
+        .close {
+            margin-top: -0.5625rem;
+        }
     }
 
     .modal-body {
         padding: 2rem;
         background-color: $ez-ground-base-medium;
+        border-radius: 0 0 .25rem .25rem;
     }
 
     .table {
