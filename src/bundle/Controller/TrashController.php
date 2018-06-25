@@ -104,6 +104,12 @@ class TrashController extends Controller
         $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
+    public function performAccessCheck(): void
+    {
+        parent::performAccessCheck();
+        $this->denyAccessUnlessGranted(new Attribute('content', 'restore'));
+    }
+
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
@@ -160,6 +166,7 @@ class TrashController extends Controller
         return $this->render('@ezdesign/admin/trash/list.html.twig', [
             'can_delete' => $this->isGranted(new Attribute('content', 'remove')),
             'can_restore' => $this->isGranted(new Attribute('content', 'restore')),
+            'can_cleantrash' => $this->isGranted(new Attribute('content', 'cleantrash')),
             'trash_items' => $trashItemsList,
             'pager' => $pagerfanta,
             'form_trash_item_restore' => $trashItemRestoreForm->createView(),
@@ -174,13 +181,12 @@ class TrashController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \LogicException
      * @throws \InvalidArgumentException
      */
     public function emptyAction(Request $request): Response
     {
-        if (!$this->isGranted(new Attribute('content', 'remove'))) {
+        if (!$this->isGranted(new Attribute('content', 'cleantrash'))) {
             return $this->redirect($this->generateUrl('ezplatform.trash.list'));
         }
 
@@ -219,7 +225,6 @@ class TrashController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \LogicException
      * @throws \InvalidArgumentException
      */
@@ -278,7 +283,6 @@ class TrashController extends Controller
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \LogicException
      * @throws \InvalidArgumentException
      */
