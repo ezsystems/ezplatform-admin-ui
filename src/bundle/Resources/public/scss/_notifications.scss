@@ -10,10 +10,12 @@
         margin-bottom: 0;
         border-radius: 0;
         transition: opacity 0.3s $ez-admin-transition;
+        padding-right: 10rem;
 
         .close {
             opacity: 1;
-            margin-right: 5rem;
+            padding-top: 0.25rem;
+            margin-right: 5.5rem;
             cursor: pointer;
         }
 
