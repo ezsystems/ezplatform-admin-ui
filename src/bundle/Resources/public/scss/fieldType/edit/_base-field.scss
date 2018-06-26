@@ -16,7 +16,7 @@
     &.is-invalid {
         .ez-field-edit__label-wrapper,
         .ez-field-edit__label {
-            color: $ez-color-danger;
+            color: $ez-color-warning-dark;
         }
 
         .ez-field-edit__data {
@@ -42,7 +42,7 @@
     &__error {
         display: inline-block;
         margin-left: 8px;
-        color: $ez-color-danger;
+        color: $ez-color-warning-dark;
     }
 
     .ez-data-source__input {
