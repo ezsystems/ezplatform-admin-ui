@@ -40,35 +40,44 @@
                                 {% do form_trash_item_restore.location.setRendered %}
                                 {% do form_trash_item_restore.restore.setRendered %}
                             {% endif %}
-                            {% set modal_data_target = 'delete-trash-items-modal' %}
-                            <button id="delete-trash-items" type="button" class="btn btn-danger" disabled data-toggle="modal"
-                                    data-target="#{{ modal_data_target }}" title="{{ 'trash.delete'|trans|desc('Delete') }}">
-                                <svg class="ez-icon ez-icon-trash">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-                                </svg>
-                            </button>
-                            {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
-                                'id': modal_data_target,
-                                'message': 'trash.modal.message'|trans|desc('Do you want to delete selected item(s) from Trash?'),
-                                'data_click': '#trash_item_delete_delete',
-                            }%}
+                            {% if can_delete and form_trash_item_restore.trash_items|length > 0 %}
+                                {% set modal_data_target = 'delete-trash-items-modal' %}
+                                <button
+                                    id="delete-trash-items"
+                                    type="button"
+                                    class="btn btn-danger"
+                                    disabled
+                                    data-toggle="modal"
+                                    data-target="#{{ modal_data_target }}"
+                                    title="{{ 'trash.delete'|trans|desc('Delete') }}">
+                                    <svg class="ez-icon ez-icon-trash">
+                                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                                    </svg>
+                                </button>
+                                {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
+                                    'id': modal_data_target,
+                                    'message': 'trash.modal.message'|trans|desc('Do you want to delete selected item(s) from Trash?'),
+                                    'data_click': '#trash_item_delete_delete',
+                                }%}
+                            {% endif %}
                         </div>
                     </div>
                     <table class="table">
                         <thead>
-                            <tr>
-                                <th></th>
-                                <th>{{ 'trash.name'|trans|desc('Name') }}</th>
-                                <th>{{ 'trash.type'|trans|desc('Type') }}</th>
-                                <th>{{ 'trash.original_location'|trans|desc('Original location') }}</th>
-                            </tr>
+                        <tr>
+                            <th></th>
+                            <th>{{ 'trash.name'|trans|desc('Name') }}</th>
+                            <th>{{ 'trash.type'|trans|desc('Type') }}</th>
+                            <th>{{ 'trash.original_location'|trans|desc('Original location') }}</th>
+                        </tr>
                         </thead>
                         <tbody>
                         {% if trash_items is empty %}
                             <tr>
                                 <td colspan="4">
-                                    <span class="ez-table-no-content mb-0 py-1 pl-0">{{ 'trash.empty'|trans|desc('Trash is empty. Any content item you send to trash will end up here.') }}</span>
+                                    <span class="ez-table-no-content mb-0 py-1 pl-0">
+                                        {{ 'trash.empty'|trans|desc('Trash is empty. Any content item you send to trash will end up here.') }}
+                                    </span>
                                 </td>
                             </tr>
                         {% else %}
@@ -103,7 +112,7 @@
                     'action': path('ezplatform.trash.delete')
                 }) }}
                 {% for key, form in form_trash_item_delete.trash_items %}
-                {% set trash_item = trash_items[key] %}
+                    {% set trash_item = trash_items[key] %}
                     {{ form_widget(form) }}
                 {% endfor %}
                 {{ form_widget(form_trash_item_delete._token) }}
@@ -125,12 +134,14 @@
                 {% include '@ezdesign/admin/trash/empty_trash_confirmation_modal.html.twig' with {'form': form_trash_empty, 'trash_items_count': pager.nbResults} %}
             </section>
         </div>
-        <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
-            <div class="ez-sticky-container">
-                {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
-                {{ knp_menu_render(sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
+        {% if can_cleantrash and form_trash_item_restore.trash_items|length > 0 %}
+            <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
+                <div class="ez-sticky-container">
+                    {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
+                    {{ knp_menu_render(sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}
 

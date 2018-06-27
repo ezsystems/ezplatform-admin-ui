@@ -4,8 +4,11 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
@@ -21,34 +24,40 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainerInterface
 {
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
-    private $configResolver;
-
-    /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
-    private $udwExtension;
-
     /* Menu items */
     const ITEM__SEARCH = 'sidebar_left__search';
     const ITEM__BROWSE = 'sidebar_left__browse';
     const ITEM__BOOKMARK = 'sidebar_left__bookmark';
     const ITEM__TRASH = 'sidebar_left__trash';
 
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
+
+    /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
+    private $udwExtension;
+
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      * @param \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension $udwExtension
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
         ConfigResolverInterface $configResolver,
-        UniversalDiscoveryExtension $udwExtension
+        UniversalDiscoveryExtension $udwExtension,
+        PermissionResolver $permissionResolver
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->configResolver = $configResolver;
         $this->udwExtension = $udwExtension;
+        $this->permissionResolver = $permissionResolver;
     }
 
     /**
@@ -63,12 +72,14 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
      * @param array $options
      *
      * @return \Knp\Menu\ItemInterface
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function createStructure(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 
-        $menu->setChildren([
+        $menuItems = [
             self::ITEM__SEARCH => $this->createMenuItem(
                 self::ITEM__SEARCH,
                 [
@@ -96,14 +107,19 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                     'extras' => ['icon' => 'bookmark-manager'],
                 ]
             ),
-            self::ITEM__TRASH => $this->createMenuItem(
+        ];
+
+        if ($this->permissionResolver->hasAccess('content', 'restore')) {
+            $menuItems[self::ITEM__TRASH] = $this->createMenuItem(
                 self::ITEM__TRASH,
                 [
                     'route' => 'ezplatform.trash.list',
                     'extras' => ['icon' => 'trash'],
                 ]
-            ),
-        ]);
+            );
+        }
+
+        $menu->setChildren($menuItems);
 
         return $menu;
     }

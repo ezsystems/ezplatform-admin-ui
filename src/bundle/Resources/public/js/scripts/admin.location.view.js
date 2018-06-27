@@ -13,7 +13,7 @@
         }),
         parentInfo: {
             contentTypeIdentifier: mfuContainer.dataset.parentContentTypeIdentifier,
-            contentTypeId: mfuContainer.dataset.parentContentTypeId,
+            contentTypeId: parseInt(mfuContainer.dataset.parentContentTypeId, 10),
             locationPath: mfuContainer.dataset.parentLocationPath,
             language: mfuContainer.dataset.parentContentLanguage
         },
@@ -70,7 +70,7 @@
         global.ReactDOM.render(global.React.createElement(global.eZ.modules.SubItems, {
             handleEditItem,
             generateLink,
-            parentLocationId: container.dataset.location,
+            parentLocationId: parseInt(container.dataset.location, 10),
             sortClauses: {[sortField]: sortOrder},
             restInfo: {token, siteaccess},
             extraActions: [{

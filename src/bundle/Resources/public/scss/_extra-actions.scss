@@ -18,7 +18,7 @@
         color: $ez-color-secondary;
         text-decoration: none;
         cursor: pointer;
-        transition: all .2s $ez-admin-transition;
+        transition: all 0.2s $ez-admin-transition;
 
         &:hover,
         &:focus,
@@ -49,7 +49,7 @@
     }
 
     &__content {
-        background: $ez-ground-base;
+        background: $ez-ground-base-dark;
         max-height: 300px;
         overflow: auto;
     }
@@ -76,9 +76,9 @@
             background: $ez-white;
             text-decoration: none;
             cursor: pointer;
-            transition: all .2s $ez-admin-transition;
+            transition: all 0.2s $ez-admin-transition;
             margin-bottom: 0;
-            font-size: .9375rem;
+            font-size: 0.9375rem;
 
             &:hover,
             &:focus {
@@ -92,7 +92,7 @@
             }
 
             &:not(:last-child) {
-                margin-bottom: .5rem;
+                margin-bottom: 0.5rem;
             }
 
             &-label {
@@ -102,7 +102,7 @@
                 cursor: pointer;
             }
 
-            &-input[type="radio"] {
+            &-input[type='radio'] {
                 display: none;
             }
         }
@@ -110,15 +110,15 @@
 
     &__section-header {
         background: $ez-ground-base-dark;
-        padding: .25rem 0 .25rem .5rem;
-        font-size: .9375rem;
+        padding: 0.25rem 0 0.25rem 0.5rem;
+        font-size: 0.9375rem;
         font-weight: 700;
     }
 
     &__section-content {
         background: $ez-white;
-        padding: 1rem .5rem;
-        font-size: .9375rem;
+        padding: 1rem 0.5rem;
+        font-size: 0.9375rem;
 
         select {
             display: inline-block;
@@ -138,7 +138,7 @@
         .form-check {
             cursor: pointer;
             background: $ez-white;
-            transition: all .2s $ez-admin-transition;
+            transition: all 0.2s $ez-admin-transition;
             margin-bottom: 0;
             padding-left: 0;
 
@@ -158,13 +158,13 @@
                 padding-left: 1.5rem;
             }
 
-            &-input[type="radio"] {
+            &-input[type='radio'] {
                 display: none;
             }
         }
 
         button {
-            &[type="submit"] {
+            &[type='submit'] {
                 display: none;
             }
         }
@@ -181,7 +181,6 @@
         z-index: 0;
         background: $ez-color-secondary;
     }
-
 }
 
 .ez-extra-actions-container {
@@ -192,7 +191,7 @@
         opacity: 1;
         transform: translate(calc(-100% - 10px), 0) scaleX(1);
         transform-origin: right center;
-        transition: all .2s $ez-admin-transition;
+        transition: all 0.2s $ez-admin-transition;
 
         &--hidden {
             opacity: 0;
