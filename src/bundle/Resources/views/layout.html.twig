@@ -45,6 +45,8 @@
         {% stylesheets filter='scssphp'
             'bundles/ezplatformadminui/scss/ezplatform-bootstrap.scss'
             'bundles/ezplatformadminui/scss/ezplatform.scss'
+            'bundles/ezplatformadminui/css/browsetree/style.min.css'
+            'bundles/ezplatformadminui/css/admin.icons.browsetree.css'
             '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.css'
         %}
             <link rel="stylesheet" href="{{ asset_url }}" />
@@ -75,6 +77,13 @@
                     <div class="col-sm-1 bg-dark pt-4 ez-side-menu">
                         <div class="ez-sticky-container">
                             {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@ezdesign/parts/menu/sidebar_left.html.twig'}) }}
+
+                            {% if ezpublish.requestStack.currentRequest.attributes.has('locationId') %}
+                                {% set locationId = ezpublish.requestStack.currentRequest.attributes.get('locationId') %}
+                                <div id="ez-extra-actions-container-left" class="ez-extra-actions-left-container">
+                                    {% include '@ezdesign/content/widgets/content_browse_tree.html.twig' with {'locationId': locationId} only %}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 {% endblock left_sidebar %}

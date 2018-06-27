@@ -25,6 +25,10 @@ a {
     background-color: $ez-ground-base-light;
 }
 
+.ez-side-menu {
+    z-index: 2;
+}
+
 .ez-side-menu,
 .ez-context-menu {
     padding-right: 0;

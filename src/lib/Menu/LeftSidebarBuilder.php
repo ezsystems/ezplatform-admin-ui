@@ -16,6 +16,7 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI left sidebar menu.
@@ -26,6 +27,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
 {
     /* Menu items */
     const ITEM__SEARCH = 'sidebar_left__search';
+    const ITEM__BROWSE_TREE = 'sidebar_left__browse_tree';
     const ITEM__BROWSE = 'sidebar_left__browse';
     const ITEM__BOOKMARK = 'sidebar_left__bookmark';
     const ITEM__TRASH = 'sidebar_left__trash';
@@ -39,6 +41,9 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
+    /** @var RequestStack */
+    private $requestStack;
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
@@ -51,13 +56,15 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
         EventDispatcherInterface $eventDispatcher,
         ConfigResolverInterface $configResolver,
         UniversalDiscoveryExtension $udwExtension,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        RequestStack $requestStack
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->configResolver = $configResolver;
         $this->udwExtension = $udwExtension;
         $this->permissionResolver = $permissionResolver;
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -79,35 +86,49 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
     {
         $menu = $this->factory->createItem('root');
 
-        $menuItems = [
-            self::ITEM__SEARCH => $this->createMenuItem(
-                self::ITEM__SEARCH,
+        $menuItems[self::ITEM__SEARCH] = $this->createMenuItem(
+            self::ITEM__SEARCH,
+            [
+                'route' => 'ezplatform.search',
+                'extras' => ['icon' => 'search'],
+            ]
+        );
+
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request->attributes->has('locationId')) {
+            $menuItems[self::ITEM__BROWSE_TREE] = $this->createMenuItem(
+                self::ITEM__BROWSE_TREE,
                 [
-                    'route' => 'ezplatform.search',
-                    'extras' => ['icon' => 'search'],
-                ]
-            ),
-            self::ITEM__BROWSE => $this->createMenuItem(
-                self::ITEM__BROWSE,
-                [
-                    'extras' => ['icon' => 'browse'],
+                    'extras' => ['icon' => 'list'],
                     'attributes' => [
-                        'class' => 'btn--udw-browse',
-                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single'),
-                        'data-starting-location-id' => $this->configResolver->getParameter(
-                            'universal_discovery_widget_module.default_location_id'
-                        ),
+                        'class' => 'ez-btn--extra-actions-left btn--tree-browse',
+                        'data-actions' => 'browse-tree',
                     ],
                 ]
-            ),
-            self::ITEM__BOOKMARK => $this->createMenuItem(
-                self::ITEM__BOOKMARK,
-                [
-                    'route' => 'ezplatform.bookmark.list',
-                    'extras' => ['icon' => 'bookmark-manager'],
-                ]
-            ),
-        ];
+            );
+        }
+
+        $menuItems[self::ITEM__BROWSE] = $this->createMenuItem(
+            self::ITEM__BROWSE,
+            [
+                'extras' => ['icon' => 'browse'],
+                'attributes' => [
+                    'class' => 'btn--udw-browse',
+                    'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single'),
+                    'data-starting-location-id' => $this->configResolver->getParameter(
+                        'universal_discovery_widget_module.default_location_id'
+                    ),
+                ],
+            ]
+        );
+
+        $menuItems[self::ITEM__BOOKMARK] = $this->createMenuItem(
+            self::ITEM__BOOKMARK,
+            [
+                'route' => 'ezplatform.bookmark.list',
+                'extras' => ['icon' => 'bookmark-manager'],
+            ]
+        );
 
         if ($this->permissionResolver->hasAccess('content', 'restore')) {
             $menuItems[self::ITEM__TRASH] = $this->createMenuItem(
@@ -131,6 +152,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
     {
         return [
             (new Message(self::ITEM__SEARCH, 'menu'))->setDesc('Search'),
+            (new Message(self::ITEM__BROWSE_TREE, 'menu'))->setDesc('Browse tree'),
             (new Message(self::ITEM__BROWSE, 'menu'))->setDesc('Browse'),
             (new Message(self::ITEM__TRASH, 'menu'))->setDesc('Trash'),
             (new Message(self::ITEM__BOOKMARK, 'menu'))->setDesc('Bookmarks'),

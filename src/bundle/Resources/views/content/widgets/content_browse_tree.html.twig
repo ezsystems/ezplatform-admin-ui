@@ -1,0 +1,12 @@
+{% trans_default_domain 'locationview' %}
+
+<div id="browsetree-sidebar-widget" class="ez-extra-actions-left ez-extra-actions--browse-tree ez-extra-actions-left--hidden bg-dark"
+     data-action="{{ path('ezplatform.browsetree.init', {'locationId': locationId}) }}"
+     data-locationid="{{ locationId }}"
+     data-actions="browse-tree"
+>
+    <div class="ez-extra-actions-left__header">{{ 'menu.widget.browse_tree'|trans|desc('Browse tree') }}</div>
+    <div class="ez-extra-actions-left__content">
+        <div id="browsetree-view"></div>
+    </div>
+</div>

@@ -715,3 +715,19 @@ ezplatform.bookmark.remove:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Bookmark:remove'
+
+#
+# Browse tree widget
+#
+ezplatform.browsetree.init:
+    path: /browsetree/init/{locationId}
+    methods: [ "GET" ]
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:BrowseTree:init'
+
+ezplatform.browsetree.children:
+    path: /browsetree/children/{locationId}/{offset}
+    methods: [ "GET" ]
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:BrowseTree:children'
+        offset: 0

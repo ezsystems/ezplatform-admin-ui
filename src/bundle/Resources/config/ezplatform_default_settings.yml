@@ -47,3 +47,7 @@ parameters:
 
     # Views
     ezsettings.default.content_translate_view: {}
+
+    # BrowseTree widget
+    ezsettings.default.browse_tree.pagination_children: 25
+    ezsettings.default.browse_tree.exclude_content_types: ~

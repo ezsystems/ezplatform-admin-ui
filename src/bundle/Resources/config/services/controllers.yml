@@ -90,3 +90,9 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.bookmark_limit$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\BrowseTreeController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $paginationChildren: '$browse_tree.pagination_children;ezsettings$'
+            $excludeContentTypes: '$browse_tree.exclude_content_types;ezsettings$'
