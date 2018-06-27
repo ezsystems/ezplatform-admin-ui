@@ -7,11 +7,12 @@ services:
     EzSystems\EzPlatformAdminUi\UI\Action\EventDispatcher: ~
     EzSystems\EzPlatformAdminUi\UI\Action\EventDispatcherInterface: '@EzSystems\EzPlatformAdminUi\UI\Action\EventDispatcher'
 
-    EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMapper: ~
-    EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMapperInterface:
-        alias: '@EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMapper'
+    EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMapper:
         tags:
             - { name: ezplatform.admin_ui.form_ui_action_mapper }
+
+    EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMapperInterface:
+        alias: '@EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMapper'
 
     EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMappingDispatcher:
         arguments:

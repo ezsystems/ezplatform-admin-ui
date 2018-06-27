@@ -73,6 +73,8 @@ services:
         tags:
             - {name: kernel.event_subscriber}
 
+    EzSystems\EzPlatformAdminUi\Form\SubmitHandler: ~
+
     EzSystems\EzPlatformAdminUi\Form\Type\:
         resource: '../../../lib/Form/Type'
 
@@ -91,6 +93,9 @@ services:
         arguments:
             $userContentTypeIdentifier: '$user_content_type_identifier$'
             $userGroupContentTypeIdentifier: '$user_group_content_type_identifier$'
+
+    EzSystems\EzPlatformAdminUi\UI\Service\:
+        resource: '../../../lib/UI/Service'
 
     EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory:
         lazy: true
