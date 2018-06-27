@@ -33,7 +33,6 @@ class SortOrderChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => $this->getSortOrderChoices(),
-            'choices_as_values' => true,
             'translation_domain' => 'content_type',
         ]);
     }

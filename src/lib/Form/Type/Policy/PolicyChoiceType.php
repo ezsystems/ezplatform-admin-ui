@@ -70,7 +70,6 @@ class PolicyChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => $this->policyChoices,
-            'choices_as_values' => true,
         ]);
     }
 
