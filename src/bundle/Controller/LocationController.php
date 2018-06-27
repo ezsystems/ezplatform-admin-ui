@@ -13,7 +13,6 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\TrashService;
-use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationUpdateStruct;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
@@ -476,14 +475,30 @@ class LocationController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
+            /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
             $location = $data->getLocation();
             $hidden = $data->getHidden();
 
             try {
+                /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo */
+                $contentInfo = $location->getContentInfo();
+
                 if ($hidden) {
                     $this->locationService->hideLocation($location);
+                    $message = $this->translator->trans(
+                        /** @Desc("Location '%name%' hidden.") */
+                        'location.update_success.success.hidden',
+                        ['%name%' => $contentInfo->name],
+                        'location'
+                    );
                 } else {
                     $this->locationService->unhideLocation($location);
+                    $message = $this->translator->trans(
+                        /** @Desc("Location '%name%' unhidden.") */
+                        'location.update_success.success.unhidden',
+                        ['%name%' => $contentInfo->name],
+                        'location'
+                    );
                 }
             } catch (APIRepositoryUnauthorizedException $e) {
                 return new JsonResponse(['errors' => [$e->getMessage()]], Response::HTTP_UNAUTHORIZED);
@@ -497,7 +512,7 @@ class LocationController extends Controller
             return new JsonResponse(['errors' => $errors], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        return new JsonResponse();
+        return new JsonResponse(['message' => $message]);
     }
 
     /**
