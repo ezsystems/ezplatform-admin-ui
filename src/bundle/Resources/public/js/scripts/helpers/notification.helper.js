@@ -13,11 +13,9 @@
      * @param {Object} detail
      */
     const showNotification = (detail) => {
-        const event = new CustomEvent('ez-notify', {
-            detail,
-        });
+        const event = new CustomEvent('ez-notify', { detail });
 
-        document.body.dispatchEvent(event);
+        doc.body.dispatchEvent(event);
     };
 
     /**
@@ -26,12 +24,11 @@
      * @function showInfoNotification
      * @param {String} message
      */
-    const showInfoNotification = (message) => {
+    const showInfoNotification = (message) =>
         showNotification({
             message,
             label: NOTIFICATION_INFO_LABEL,
         });
-    };
 
     /**
      * Dispatches success notification event
@@ -39,12 +36,11 @@
      * @function showSuccessNotification
      * @param {String} message
      */
-    const showSuccessNotification = (message) => {
+    const showSuccessNotification = (message) =>
         showNotification({
             message,
             label: NOTIFICATION_SUCCESS_LABEL,
         });
-    };
 
     /**
      * Dispatches warning notification event
@@ -52,12 +48,11 @@
      * @function showWarningNotification
      * @param {String} message
      */
-    const showWarningNotification = (message) => {
+    const showWarningNotification = (message) =>
         showNotification({
             message,
             label: NOTIFICATION_WARNING_LABEL,
         });
-    };
 
     /**
      * Dispatches danger notification event
@@ -65,12 +60,11 @@
      * @function showDangerNotification
      * @param {String} message
      */
-    const showDangerNotification = (message) => {
+    const showDangerNotification = (message) =>
         showNotification({
             message,
             label: NOTIFICATION_DANGER_LABEL,
         });
-    };
 
     /**
      * Dispatches danger notification event
@@ -78,12 +72,10 @@
      * @function showErrorNotification
      * @param {Error} error
      */
-    const showErrorNotification = (error) => {
-        showDangerNotification(error.message);
-    };
+    const showErrorNotification = (error) => showDangerNotification(error.message);
 
-    eZ.services = eZ.services || {};
-    eZ.services.notification = {
+    eZ.helpers = eZ.helpers || {};
+    eZ.helpers.notification = {
         showInfoNotification,
         showSuccessNotification,
         showWarningNotification,
