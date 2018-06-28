@@ -22,9 +22,7 @@ use EzSystems\RepositoryForms\Form\Type\ContentType\ContentTypeUpdateType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use eZ\Publish\API\Repository\Exceptions\BadStateException;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
@@ -32,6 +30,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 
 class ContentTypeController extends Controller
 {
@@ -138,6 +137,9 @@ class ContentTypeController extends Controller
             'form_content_types_delete' => $deleteContentTypesForm->createView(),
             'group' => $group,
             'route_name' => $routeName,
+            'can_create' => $this->isGranted(new Attribute('class', 'create')),
+            'can_update' => $this->isGranted(new Attribute('class', 'update')),
+            'can_delete' => $this->isGranted(new Attribute('class', 'delete')),
         ]);
     }
 
@@ -152,6 +154,7 @@ class ContentTypeController extends Controller
      */
     public function addAction(ContentTypeGroup $group): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('class', 'create'));
         $mainLanguageCode = reset($this->languages);
 
         $createStruct = $this->contentTypeService->newContentTypeCreateStruct('__new__' . md5((string)microtime(true)));
@@ -195,6 +198,7 @@ class ContentTypeController extends Controller
      */
     public function editAction(ContentTypeGroup $group, ContentType $contentType): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('class', 'update'));
         // Kernel does not allow editing the same Content Type simultaneously by more than one user.
         // So we need to catch 'BadStateException' and inform user about another user editing the Content Type
         try {
@@ -302,12 +306,11 @@ class ContentTypeController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
     public function deleteAction(Request $request, ContentTypeGroup $group, ContentType $contentType): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('class', 'delete'));
         $form = $this->createDeleteForm($group, $contentType);
         $form->handleRequest($request);
 
@@ -343,16 +346,13 @@ class ContentTypeController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws BadStateException
      * @throws TranslationInvalidArgumentException
      * @throws InvalidOptionsException
-     * @throws UnauthorizedException
-     * @throws InvalidArgumentException
-     * @throws NotFoundException
      * @throws \InvalidArgumentException
      */
     public function bulkDeleteAction(Request $request, ContentTypeGroup $group): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('class', 'delete'));
         $form = $this->formFactory->deleteContentTypes(
             new ContentTypesDeleteData()
         );
@@ -401,6 +401,7 @@ class ContentTypeController extends Controller
             'content_type_group' => $group,
             'content_type' => $contentType,
             'field_definitions_by_group' => $fieldDefinitionsByGroup,
+            'can_update' => $this->isGranted(new Attribute('class', 'update')),
         ]);
     }
 
@@ -455,7 +456,7 @@ class ContentTypeController extends Controller
     }
 
     /**
-     * @param ContentType[] $contentTypes
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType[] $contentTypes
      *
      * @return array
      */
