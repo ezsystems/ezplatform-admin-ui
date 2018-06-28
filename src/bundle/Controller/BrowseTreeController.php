@@ -19,7 +19,6 @@ use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
@@ -72,7 +71,9 @@ class BrowseTreeController extends Controller
 
     /**
      * @param Location $location
+     *
      * @return Response
+     *
      * @throws InvalidArgumentException
      * @throws NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
@@ -109,7 +110,7 @@ class BrowseTreeController extends Controller
             ];
             $nodeData->a_attr = [
                 'href' => $this->router->generate('_ezpublishLocation', ['locationId' => $parentLocation->id]),
-                'children' => $this->router->generate('ezplatform.browsetree.children', ['locationId' => $parentLocation->id, 'offset' => 0,]),
+                'children' => $this->router->generate('ezplatform.browsetree.children', ['locationId' => $parentLocation->id, 'offset' => 0]),
                 'title' => $nodeData->text,
             ];
             $nodeData->state = ['opened' => true];
@@ -133,6 +134,7 @@ class BrowseTreeController extends Controller
     /**
      * @param Location $location
      * @param int      $offset
+     *
      * @return Response
      */
     public function childrenAction(Location $location, int $offset = 0): Response
@@ -161,7 +163,9 @@ class BrowseTreeController extends Controller
      * @param Node|null $node
      * @param int       $offset
      * @param bool      $init
+     *
      * @return array|null
+     *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     protected function findNodes(Location $location, ?Node $node = null, int $offset = 0, bool $init = false): ?array
@@ -193,7 +197,7 @@ class BrowseTreeController extends Controller
             ];
             $childNode->a_attr = [
                 'href' => $this->router->generate('_ezpublishLocation', ['locationId' => $child->id]),
-                'children' => $this->router->generate('ezplatform.browsetree.children', ['locationId' => $child->id, 'offset' => $offset,]),
+                'children' => $this->router->generate('ezplatform.browsetree.children', ['locationId' => $child->id, 'offset' => $offset]),
                 'title' => $childNode->text,
             ];
 
@@ -217,7 +221,9 @@ class BrowseTreeController extends Controller
      * @param Location $location
      * @param int      $offset
      * @param int      $limit
+     *
      * @return array
+     *
      * @throws NotImplementedException
      */
     protected function loadLocationChildren(Location $location, $offset = 0, $limit = 25): array
@@ -259,7 +265,9 @@ class BrowseTreeController extends Controller
 
     /**
      * @param Location $location
+     *
      * @return int
+     *
      * @throws NotImplementedException
      */
     protected function loadLocationChildrenCount(Location $location): int
