@@ -64,7 +64,7 @@ services:
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentViewController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
-            $defaultPaginationLimit: '$pagination.version_draft_limit$'
+            $defaultDraftPaginationLimit: '$pagination.version_draft_limit$'
             $siteAccessLanguages: '$languages$'
             $defaultRolePaginationLimit: '$pagination.content_role_limit$'
             $defaultPolicyPaginationLimit: '$pagination.content_policy_limit$'
