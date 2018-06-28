@@ -1,0 +1,20 @@
+{% trans_default_domain 'locationview' %}
+
+<div class="ez-add-to-bookmarks {{ location_is_bookmarked ? 'ez-add-to-bookmarks--checked'}}" data-locationid="{{ location.id }}">
+    <div class="ez-add-to-bookmarks__bookmark-icon-wrapper">
+        <div
+            class="ez-add-to-bookmarks__bookmark-icon-wrapper--add"
+            title="{{ 'location.bookmark.add'|trans|desc('Add to Bookmarks') }}">
+            <svg class="ez-icon ez-icon--secondary">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#bookmark"></use>
+            </svg>
+        </div>
+        <div
+            class="ez-add-to-bookmarks__bookmark-icon-wrapper--remove"
+            title="{{ 'location.bookmark.remove'|trans|desc('Remove from Bookmarks') }}">
+            <svg class="ez-icon ez-icon--secondary">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#bookmark-active"></use>
+            </svg>
+        </div>
+    </div>
+</div>
