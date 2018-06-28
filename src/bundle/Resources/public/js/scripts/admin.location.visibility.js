@@ -9,20 +9,20 @@
         target.closest('.ez-checkbox-icon').classList.toggle('is-checked', isVisible);
     };
     const handleUpdateError = global.eZ.helpers.notification.showErrorNotification;
-    const handleUpdateSuccess = ({ message }) => {
+    const handleUpdateSuccess = (event, { message }) => {
+        onVisibilityUpdated(event);
         global.eZ.helpers.notification.showSuccessNotification(message);
     };
-    const handleUpdateResponse = (event, response) => {
+    const handleUpdateResponse = (response) => {
         if (response.status !== 200) {
             throw new Error(response.statusText);
         }
 
-        onVisibilityUpdated(event);
-        response.json().then(handleUpdateSuccess);
+        return response.json();
     };
     const updateVisibility = (event) => {
-        doc.querySelector('#location_update_visibility_data_location').value = event.target.value;
-        doc.querySelector('#location_update_visibility_data_hidden').checked = !event.target.checked;
+        form.querySelector('#location_update_visibility_data_location').value = event.target.value;
+        form.querySelector('#location_update_visibility_data_hidden').checked = !event.target.checked;
 
         const request = new Request(form.action, {
             method: 'POST',
@@ -32,11 +32,12 @@
         });
 
         fetch(request)
-            .then(handleUpdateResponse.bind(null, event))
+            .then(handleUpdateResponse)
+            .then(handleUpdateSuccess.bind(null, event))
             .catch(handleUpdateError);
     };
 
-    for (const checkbox of visibilityCheckboxes) {
+    visibilityCheckboxes.forEach((checkbox) => {
         checkbox.addEventListener('change', updateVisibility, false);
-    }
+    });
 })(window, document);
