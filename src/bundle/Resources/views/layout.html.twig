@@ -104,6 +104,7 @@
         {{ ezplatform_admin_ui_component_group('custom-admin-ui-modules') }}
         {{ ezplatform_admin_ui_component_group('custom-admin-ui-config') }}
         {%  javascripts
+            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/helpers/notification.helper.js'
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.notifications.js'
             '@EzPlatformAdminUiModulesBundle/Resources/public/js/UniversalDiscovery.module.js'
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.trigger.js'
@@ -112,6 +113,7 @@
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.user.menu.js'
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.prevent.click.js'
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.picker.js'
+            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.notifications.modal.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

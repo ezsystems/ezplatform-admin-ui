@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
@@ -19,9 +18,7 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
-use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -105,9 +102,9 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
      */
     public function renderView(array $parameters): string
     {
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $parameters['content'];
-        /** @var Location $location */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
         $location = $parameters['location'];
         $versionInfo = $content->getVersionInfo();
         $contentInfo = $versionInfo->getContentInfo();
@@ -134,6 +131,12 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
         $canEdit = $this->permissionResolver->canUser(
             'content', 'edit', $location->getContentInfo()
         );
+        $canHide = [];
+        foreach ($locations as $location) {
+            $canHide[$location->id] = $this->permissionResolver->canUser(
+                'content', 'hide', $location->getContentInfo(), [$location]
+            );
+        }
 
         $viewParameters = [
             'locations' => $locations,
@@ -144,6 +147,7 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
             'form_content_location_main_update' => $formLocationMainUpdate->createView(),
             'can_swap' => $canEdit,
             'can_add' => $canManageLocations && $canCreate,
+            'can_hide' => $canHide,
         ];
 
         return $this->twig->render(
@@ -153,9 +157,9 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param Location $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function createLocationAddForm(Location $location): FormInterface
     {
@@ -165,10 +169,10 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param Location $location
-     * @param UIValue\Content\Location[] $contentLocations
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param \EzSystems\EzPlatformAdminUi\UI\Value\Content\Location[] $contentLocations
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function createLocationRemoveForm(Location $location, array $contentLocations): FormInterface
     {
@@ -178,7 +182,7 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param UIValue\Content\Location[] $locations
+     * @param \EzSystems\EzPlatformAdminUi\UI\Value\Content\Location[] $locations
      *
      * @return array
      */
@@ -190,9 +194,9 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param Location $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     protected function createLocationSwapForm(Location $location): FormInterface
     {
@@ -202,11 +206,9 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param Location $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      *
-     * @return FormInterface
-     *
-     * @throws InvalidOptionsException
+     * @return \Symfony\Component\Form\FormInterface
      */
     protected function createLocationUpdateVisibilityForm(Location $location): FormInterface
     {
@@ -217,11 +219,9 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
 
     /**
      * @param $contentInfo
-     * @param Location $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      *
-     * @return FormInterface
-     *
-     * @throws InvalidOptionsException
+     * @return \Symfony\Component\Form\FormInterface
      */
     protected function createLocationUpdateMainForm($contentInfo, Location $location): FormInterface
     {

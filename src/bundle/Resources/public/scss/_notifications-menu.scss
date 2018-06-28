@@ -1,0 +1,27 @@
+.n-pending-notifications {
+    &:before {
+        content: attr(data-count);
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background: $ez-color-danger;
+        position: absolute;
+        vertical-align: middle;
+        text-align: center;
+        font-size: .75rem;
+        color: $ez-white;
+    }
+}
+
+.ez-user-menu__item--notifications {
+    position: relative;
+
+    &:before {
+        content: attr(data-count);
+        position: absolute;
+        left: .25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $ez-color-base-light;
+    }
+}

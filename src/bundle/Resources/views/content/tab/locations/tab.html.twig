@@ -37,6 +37,8 @@
                     <td>
                         {% if location.invisible and not location.hidden %}
                             {{ 'tab.locations.hidden_by_superior'|trans()|desc('Hidden by superior') }}
+                        {% elseif not can_hide[location.id] %}
+                            {{ location.hidden ? 'tab.locations.hidden'|trans()|desc('Hidden') : 'tab.locations.visible'|trans()|desc('Visible') }}
                         {% else %}
                             <label class="ez-checkbox-icon {{ not location.hidden ? 'is-checked' }}">
                                 <svg class="ez-icon ez-icon-view">
