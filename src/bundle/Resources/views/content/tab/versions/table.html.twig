@@ -4,7 +4,7 @@
 {% set is_archived = is_archived is defined and is_archived %}
 {% set is_draft_conflict = is_draft_conflict is defined and is_draft_conflict %}
 
-<table class="table {% if is_draft and haveToPaginate %} mb-3 {% endif %} {% if is_draft_conflict %} ez-table__draft-conflict {% endif %}">
+<table class="ez-table table {% if is_draft and haveToPaginate %} mb-3 {% endif %} {% if is_draft_conflict %} ez-table__draft-conflict {% endif %}">
     <thead>
     <tr>
         {% if form is defined %}
@@ -26,15 +26,15 @@
     {% for version in versions %}
         <tr>
             {% if form is defined %}
-                <td class="ez-checkbox-cell">{{ form_widget(form.versions[version.versionNo], {'attr': {'disabled': not version.canDelete}}) }}</td>
+                <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form.versions[version.versionNo], {'attr': {'disabled': not version.canDelete}}) }}</td>
             {% endif %}
-            <td>
+            <td class="ez-table__cell">
                 {{ version.versionNo }}
             </td>
-            <td>
+            <td class="ez-table__cell">
                 {{ admin_ui_config.languages.mappings[version.initialLanguageCode].name }}
             </td>
-            <td>
+            <td class="ez-table__cell">
                 {% if version.author is not empty %}
                     {{ ez_content_name(version.author) }}
                 {% else %}
@@ -42,18 +42,18 @@
                 {% endif %}
             </td>
             {% if not is_draft_conflict %}
-            <td>
+            <td class="ez-table__cell">
                 {{ version.creationDate|localizeddate('medium', 'short', app.request.locale) }}
             </td>
             {% endif %}
-            <td>
+            <td class="ez-table__cell">
                 {{ version.modificationDate|localizeddate('medium', 'short', app.request.locale) }}
             </td>
             {% if is_draft_conflict %}
-                <td>
+                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                     {% set edit_draft_disabled = version.author.id != admin_ui_config.user.user.id %}
                     <a href="{{ path('ez_content_draft_edit', { 'contentId': version.contentInfo.id, 'versionNo': version.versionNo, 'language': version.translations[0].languageCode, 'locationId': location.id }) }}"
-                       class="btn btn-icon {% if edit_draft_disabled %}ez-btn--prevented{% endif %}"
+                       class="btn btn-icon mx-2 {% if edit_draft_disabled %}ez-btn--prevented{% endif %}"
                        title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}"
                        {% if edit_draft_disabled %}disabled{% endif %}>
                         <svg class="ez-icon ez-icon-edit">
@@ -62,7 +62,7 @@
                     </a>
                 </td>
             {% elseif is_draft %}
-                <td>
+                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                     <button
                         data-content-draft-edit-url="{{ path('ez_content_draft_edit', {
                             'contentId': version.contentInfo.id,
@@ -75,7 +75,7 @@
                             'versionNo': version.versionNo,
                             'languageCode': version.translations[0].languageCode
                         }) }}"
-                        class="btn btn-icon ez-btn--content-draft-edit"
+                        class="btn btn-icon mx-2 ez-btn--content-draft-edit"
                         title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}">
                         <svg class="ez-icon ez-icon-edit">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
@@ -84,8 +84,8 @@
                 </td>
             {% endif %}
             {% if is_archived %}
-                <td>
-                    <button class="btn btn-icon ez-btn--content-edit"
+                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    <button class="btn btn-icon mx-2 ez-btn--content-edit"
                             title="{{ 'tab.versions.table.action.archived.edit'|trans|desc('Restore Archived Version') }}"
                             data-content-id="{{ version.contentInfo.id }}"
                             data-version-no="{{ version.versionNo }}"

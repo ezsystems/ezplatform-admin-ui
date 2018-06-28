@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <table class="table mb-3">
+        <table class="ez-table table mb-3">
             <thead>
                 <tr>
                     <th></th>
@@ -74,20 +74,20 @@
             <tbody>
             {% for role in pager.currentPageResults %}
                 <tr>
-                    <td class="ez-checkbox-cell">
+                    <td class="ez-table__cell ez-table__cell--has-checkbox">
                         {% if can_delete %}
                             {{ form_widget(form_roles_delete.roles[role.id]) }}
                         {% else %}
                             {% do form_roles_delete.roles.setRendered %}
                         {% endif %}
                     </td>
-                    <td>
+                    <td class="ez-table__cell">
                         <a href="{{ path('ezplatform.role.view', { roleId: role.id }) }}">
                             {{ role.identifier }}
                         </a>
                     </td>
-                    <td>{{ role.id }}</td>
-                    <td class="text-right">
+                    <td class="ez-table__cell">{{ role.id }}</td>
+                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                         {% if can_assign %}
                             <a
                                 title="{{ 'role.view.list.action.assign_to_users_or_groups'|trans|desc('Assign to Users/Groups') }}"
@@ -102,7 +102,7 @@
                             <a
                                 title="{{ 'role.view.list.action.edit'|trans|desc('Edit') }}"
                                 href="{{ path('ezplatform.role.update', { roleId: role.id }) }}"
-                                class="btn btn-icon mx-3">
+                                class="btn btn-icon mx-2">
                                 <svg class="ez-icon ez-icon-edit">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                                 </svg>

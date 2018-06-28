@@ -41,7 +41,7 @@
         'action': path('ezplatform.role_assignment.bulk_delete', {"roleId": role.id} ),
         'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-role-assignments' }
     }) }}
-    <table class="table">
+    <table class="ez-table table">
         <thead>
         <tr>
             <th></th>
@@ -52,21 +52,21 @@
         <tbody>
         {% for role_assignment in pager.currentPageResults %}
             <tr>
-                <td class="ez-checkbox-cell">
+                <td class="ez-table__cell ez-table__cell--has-checkbox">
                     {% if can_assign %}
                         {{ form_widget(form_role_assignments_delete.role_assignments[role_assignment.id]) }}
                     {% else %}
                         {% do form_role_assignments_delete.role_assignments.setRendered %}
                     {% endif %}
                 </td>
-                <td>
+                <td class="ez-table__cell">
                     {%- if role_assignment.usergroup is defined -%}
                         {{ ez_content_name( role_assignment.usergroup ) }}
                     {%- else -%}
                         {{ ez_content_name( role_assignment.user ) }}
                     {%- endif -%}
                 </td>
-                <td class="ez-limitation-cell">
+                <td class="ez-table__cell ez-table__cell--limitation">
                     {%- set limitation = role_assignment.rolelimitation -%}
                     {%- if limitation -%}
                         <ul class="list-unstyled">

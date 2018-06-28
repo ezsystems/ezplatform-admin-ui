@@ -62,7 +62,7 @@
             'action': path('ezplatform.content_type_group.bulk_delete'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-content-type-groups' }
         }) }}
-        <table class="table">
+        <table class="ez-table table">
             <thead>
                 <tr>
                     <th></th>
@@ -75,23 +75,23 @@
             <tbody>
             {% for content_type_group in pager.currentPageResults %}
                 <tr>
-                    <td class="ez-checkbox-cell">
+                    <td class="ez-table__cell ez-table__cell--has-checkbox">
                         {% if can_delete %}
                             {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id], {"disabled": not deletable[content_type_group.id]}) }}
                         {% else %}
                             {% do form_content_type_groups_delete.content_type_groups.setRendered %}
                         {% endif %}
                     </td>
-                    <td>
+                    <td class="ez-table__cell">
                         {% set view_url = path('ezplatform.content_type_group.view', {
                             contentTypeGroupId: content_type_group.id
                         }) %}
 
                         <a href="{{ view_url }}">{{ content_type_group.identifier }}</a>
                     </td>
-                    <td>{{ content_type_group.id }}</td>
-                    <td>{{ content_types_count[content_type_group.id] }}</td>
-                    <td class="text-right">
+                    <td class="ez-table__cell">{{ content_type_group.id }}</td>
+                    <td class="ez-table__cell">{{ content_types_count[content_type_group.id] }}</td>
+                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                         {% if can_update %}
                             {% set edit_url = path('ezplatform.content_type_group.update', {
                                 contentTypeGroupId: content_type_group.id
@@ -99,7 +99,7 @@
                             <a
                                 title="{{ 'content_type_group.view.list.action.edit'|trans|desc('Edit') }}"
                                 href="{{ edit_url }}"
-                                class="btn btn-icon mx-3">
+                                class="btn btn-icon mx-2">
                                 <svg class="ez-icon ez-icon-edit">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                                 </svg>

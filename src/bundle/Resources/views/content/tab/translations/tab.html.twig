@@ -9,7 +9,7 @@
         'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations' }
     }) }}
     {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.translations.translation_manger'|trans|desc('Translation manager'), tools: tab.table_header_tools(form_translation_remove) } %}
-    <table class="table">
+    <table class="ez-table table">
         <thead>
         <tr>
             <th></th>
@@ -20,9 +20,9 @@
         <tbody>
         {% for translation in translations %}
             <tr>
-                <td class="ez-checkbox-cell">{{ form_widget(form_translation_remove.language_codes[translation.languageCode], {'attr': {'disabled': not translation.canDelete}}) }}</td>
-                <td>{{ translation.name }}</td>
-                <td>{{ translation.languageCode }}</td>
+                <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form_translation_remove.language_codes[translation.languageCode], {'attr': {'disabled': not translation.canDelete}}) }}</td>
+                <td class="ez-table__cell">{{ translation.name }}</td>
+                <td class="ez-table__cell">{{ translation.languageCode }}</td>
             </tr>
         {% endfor %}
         </tbody>

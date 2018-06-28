@@ -62,7 +62,7 @@
                             {% endif %}
                         </div>
                     </div>
-                    <table class="table">
+                    <table class="ez-table table">
                         <thead>
                         <tr>
                             <th></th>
@@ -74,8 +74,8 @@
                         <tbody>
                         {% if trash_items is empty %}
                             <tr>
-                                <td colspan="4">
-                                    <span class="ez-table-no-content mb-0 py-1 pl-0">
+                                <td class="ez-table__cell ez-table__cell--no-content" colspan="4">
+                                    <span class="mb-0 py-1 pl-0">
                                         {{ 'trash.empty'|trans|desc('Trash is empty. Any content item you send to trash will end up here.') }}
                                     </span>
                                 </td>
@@ -85,14 +85,14 @@
                                 {% set trash_item = trash_items[key] %}
                                 {% set is_parent_in_trash = trash_item.parentInTrash %}
                                 <tr>
-                                    <td>
+                                    <td class="ez-table__cell">
                                         {{ form_widget(form, {attr: {
                                             'data-is-parent-in-trash': is_parent_in_trash ? '1': '0'
                                         }}) }}
                                     </td>
-                                    <td>{{ ez_content_name(trash_item.location.contentInfo) }}</td>
-                                    <td>{{ trash_item.contentType.name }}</td>
-                                    <td>
+                                    <td class="ez-table__cell">{{ ez_content_name(trash_item.location.contentInfo) }}</td>
+                                    <td class="ez-table__cell">{{ trash_item.contentType.name }}</td>
+                                    <td class="ez-table__cell">
                                         {% if not is_parent_in_trash %}
                                             {% include '@ezdesign/parts/path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
                                         {% else %}

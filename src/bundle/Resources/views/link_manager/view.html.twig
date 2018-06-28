@@ -20,7 +20,7 @@
 
 {%- block content -%}
     <section class="container mt-5">
-        <table class="table ez-table--list">
+        <table class="ez-table table ez-table--list">
             <thead>
                 <tr>
                    <th colspan="2">
@@ -30,11 +30,11 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ 'url.label.address'|trans }}</td>
-                    <td>
+                    <td class="ez-table__cell">{{ 'url.label.address'|trans }}</td>
+                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                         <a href="{{ url.url }}" target="_blank">{{ url.url }}</a>
                         <a href="{{ path('ezplatform.link_manager.edit', { urlId: url.id }) }}"
-                           class="btn btn-icon float-right "
+                           class="btn btn-icon mx-2 float-right"
                            title="{{ 'url.action.edit'|trans|desc('Edit URL') }}">
                             <svg class="ez-icon ez-icon-edit">
                                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
@@ -43,12 +43,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>{{ 'url.label.status'|trans }}</td>
-                    <td>{{ url.isValid ? 'url.status.valid'|trans : 'url.status.invalid'|trans }}</td>
+                    <td class="ez-table__cell">{{ 'url.label.status'|trans }}</td>
+                    <td class="ez-table__cell">{{ url.isValid ? 'url.status.valid'|trans : 'url.status.invalid'|trans }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'url.label.last_checked'|trans }}</td>
-                    <td>
+                    <td class="ez-table__cell">{{ 'url.label.last_checked'|trans }}</td>
+                    <td class="ez-table__cell">
                         {% if url.lastChecked %}
                             {{ url.lastChecked|localizeddate('medium', 'short') }}
                         {% else %}
@@ -57,12 +57,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>{{ 'url.label.created'|trans }}</td>
-                    <td>{{ url.created|localizeddate('medium', 'short') }}</td>
+                    <td class="ez-table__cell">{{ 'url.label.created'|trans }}</td>
+                    <td class="ez-table__cell">{{ url.created|localizeddate('medium', 'short') }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'url.label.modified'|trans }}</td>
-                    <td>{{ url.modified|localizeddate('medium', 'short') }}</td>
+                    <td class="ez-table__cell">{{ 'url.label.modified'|trans }}</td>
+                    <td class="ez-table__cell">{{ url.modified|localizeddate('medium', 'short') }}</td>
                 </tr>
             </tbody>
         </table>
@@ -74,7 +74,7 @@
                 {{ 'url.tab.usages'|trans({'%count%': usages.nbResults })|desc('Content item(s) using this URL') }}
             </div>
         </div>
-        <table class="table">
+        <table class="ez-table table">
             <thead>
                 <tr>
                     <th>{{ 'url.usages.column.name'|trans|desc('Name') }}</th>
@@ -87,21 +87,21 @@
                     {% set view_url = path('_ez_content_view', { contentId: content.id }) %}
 
                     <tr>
-                        <td>
+                        <td class="ez-table__cell">
                             <a href="{{ view_url }}">
                                 {{ ez_content_name(content) }}
                             </a>
                         </td>
-                        <td>
+                        <td class="ez-table__cell">
                             {% if content.published %}
                                 {{ 'url.usages.content_status.published'|trans|desc('Published') }}
                             {% else %}
                                 {{ 'url.usages.content_status.draft'|trans|desc('Draft') }}
                             {% endif %}
                         </td>
-                        <td class="text-right">
+                        <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                             {% if can_edit %}
-                                <button class="btn btn-icon btn-link ez-btn--content-edit"
+                                <button class="btn btn-icon btn-link mx-2 ez-btn--content-edit"
                                         title="{{ 'url.action.item.edit'|trans|desc('Edit Item') }}"
                                         data-content-id="{{ content.id }}"
                                         data-version-no="{{ content.currentVersionNo }}"

@@ -52,7 +52,7 @@
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'url.list.title'|trans({ '%count%': urls.count })|desc('Links (%count%)') }}</div>
         </div>
-        <table class="table">
+        <table class="ez-table table">
             <thead>
                 <tr>
                     <th>{{ 'url.label.address'|trans }}</th>
@@ -67,22 +67,22 @@
                 {% set edit_url = path('ezplatform.link_manager.edit', {urlId: url.id}) %}
                 {% set view_url = path('ezplatform.link_manager.view', {urlId: url.id}) %}
                 <tr>
-                    <td>
+                    <td class="ez-table__cell">
                         <a href="{{ view_url }}">{{ url.url|truncate(50) }}</a>
                         (<a href="{{ url.url }}" target="_blank">{{ 'url.open'|trans }}</a>)
                     </td>
-                    <td>{{ url.isValid ? 'url.status.valid'|trans : 'url.status.invalid'|trans }}</td>
-                    <td>
+                    <td class="ez-table__cell">{{ url.isValid ? 'url.status.valid'|trans : 'url.status.invalid'|trans }}</td>
+                    <td class="ez-table__cell">
                         {% if url.lastChecked %}
                             {{ url.lastChecked|localizeddate('medium', 'short') }}
                         {% else %}
                             Never
                         {% endif %}
                     </td>
-                    <td>{{ url.modified|localizeddate('medium', 'short') }}</td>
-                    <td class="text-right">
+                    <td class="ez-table__cell">{{ url.modified|localizeddate('medium', 'short') }}</td>
+                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                         {% if can_edit %}
-                            <a href="{{ edit_url }}" class="btn btn-icon" title="{{ 'url.action.edit'|trans|desc('Edit URL') }}">
+                            <a href="{{ edit_url }}" class="btn btn-icon mx-2" title="{{ 'url.action.edit'|trans|desc('Edit URL') }}">
                                 <svg class="ez-icon ez-icon-edit">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                                 </svg>
@@ -92,8 +92,8 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="5">
-                        <p><i>{{ 'url.list.no_urls'|trans }}</i></p>
+                    <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
+                        <span class="mb-0 py-1 pl-0">{{ 'url.list.no_urls'|trans }}</span>
                     </td>
                 </tr>
             {% endfor %}

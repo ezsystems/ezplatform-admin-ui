@@ -1,7 +1,7 @@
 {% trans_default_domain 'dashboard' %}
 
 {% if data|length %}
-    <table class="table">
+    <table class="ez-table table">
         <thead>
         <tr>
             <th>{{ 'dashboard.table.name'|trans|desc('Name') }}</th>
@@ -14,18 +14,18 @@
         <tbody>
         {% for row in data %}
             <tr>
-                <td><a href="{{ url('_ez_content_view', { 'contentId': row.contentId }) }}">{{ row.name }}</a></td>
-                <td>{{ row.type }}</td>
-                <td>
+                <td class="ez-table__cell"><a href="{{ url('_ez_content_view', { 'contentId': row.contentId }) }}">{{ row.name }}</a></td>
+                <td class="ez-table__cell">{{ row.type }}</td>
+                <td class="ez-table__cell">
                     {% if row.contributor is not null %}
                         {{ row.contributor.name }}
                     {% else %}
                         {{ 'dashboard.table.contributor.not_found'|trans|desc('Can’t fetch contributor') }}
                     {% endif %}
                 </td>
-                <td>{{ row.modified|localizeddate('medium', 'short') }}</td>
-                <td class="text-center">
-                    <button class="btn btn-icon ez-btn--content-edit"
+                <td class="ez-table__cell">{{ row.modified|localizeddate('medium', 'short') }}</td>
+                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    <button class="btn btn-icon mx-2 ez-btn--content-edit"
                             title="{{ 'dashboard.table.all.content.edit'|trans|desc('Edit Content') }}"
                             data-content-id="{{ row.contentId }}"
                             data-version-no="{{ row.version }}"

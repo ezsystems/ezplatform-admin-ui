@@ -43,7 +43,7 @@
             </div>
         </header>
 
-        <table class="table">
+        <table class="ez-table table">
             <thead>
             <tr>
                 <th>{{ 'section.name'|trans|desc('Name') }}</th>
@@ -53,15 +53,15 @@
             </tr>
             </thead>
             <tbody>
-            <td>{{ section.name }}</td>
-            <td>{{ section.identifier }}</td>
-            <td>{{ section.id }}</td>
-            <td class="text-right">
+            <td class="ez-table__cell">{{ section.name }}</td>
+            <td class="ez-table__cell">{{ section.identifier }}</td>
+            <td class="ez-table__cell">{{ section.id }}</td>
+            <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                 {% if can_edit %}
                     <a
                         href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
                         title="{{ 'section.edit'|trans|desc('Edit') }}"
-                        class="btn btn-icon mx-3">
+                        class="btn btn-icon mx-2">
                         <svg class="ez-icon ez-icon-edit">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                         </svg>

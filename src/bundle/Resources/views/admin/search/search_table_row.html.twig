@@ -1,11 +1,11 @@
 <tr>
-    <td>
+    <td class="ez-table__cell">
         <a href="{{ url('_ez_content_view', { 'contentId': row.contentId }) }}">{{ row.name }}</a>
     </td>
-    <td>{{ row.modified|localizeddate('medium', 'short') }}</td>
-    <td>{{ row.type }}</td>
-    <td class="text-center">
-        <button class="btn btn-icon ez-btn--content-edit"
+    <td class="ez-table__cell">{{ row.modified|localizeddate('medium', 'short') }}</td>
+    <td class="ez-table__cell">{{ row.type }}</td>
+    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+        <button class="btn btn-icon mx-2 ez-btn--content-edit"
                 data-content-id="{{ row.contentId }}"
                 data-version-no="{{ row.version }}"
                 data-language-code="{{ row.initialLanguageCode }}">

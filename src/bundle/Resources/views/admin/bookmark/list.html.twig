@@ -26,7 +26,7 @@
                          headerText: 'bookmark.table.header'|trans|desc('Bookmarks') ~ ' (' ~ pager.count ~ ')',
                          tools: form_widget(form_remove.remove, {'attr': {'class': 'btn btn-danger', 'disabled': true}})
                      } %}
-                    <table class="table">
+                    <table class="ez-table table">
                         <thead>
                         <tr>
                             <th></th>
@@ -39,17 +39,17 @@
                         <tbody>
                         {% if pager.count is same as(0) %}
                         <tr>
-                            <td colspan="4">
-                                <span class="ez-table-no-content mb-0 py-1 pl-0">{{ 'bookmark.list.empty'|trans|desc('The bookmark list is empty. Any Content item you bookmark will end up here.') }}</span>
+                            <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
+                                <span class="mb-0 py-1 pl-0">{{ 'bookmark.list.empty'|trans|desc('The bookmark list is empty. Any Content item you bookmark will end up here.') }}</span>
                             </td>
                         </tr>
                         {% else %}
                         {% for bookmark in pager.currentPageResults %}
                             <tr>
-                                <td class="ez-checkbox-cell">{{ form_widget(form_remove.bookmarks[bookmark.id]) }}</td>
-                                <td><a href="{{ path('_ezpublishLocation', { 'locationId': bookmark.id }) }}">{{ ez_content_name(bookmark.contentInfo) }}</a></td>
-                                <td>{{ bookmark.contentType.name }}</td>
-                                <td>
+                                <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form_remove.bookmarks[bookmark.id]) }}</td>
+                                <td class="ez-table__cell"><a href="{{ path('_ezpublishLocation', { 'locationId': bookmark.id }) }}">{{ ez_content_name(bookmark.contentInfo) }}</a></td>
+                                <td class="ez-table__cell">{{ bookmark.contentType.name }}</td>
+                                <td class="ez-table__cell">
                                     {% if bookmark.pathLocations|length > 1 %}
                                         {% for location in bookmark.pathLocations %}
                                             {% if loop.revindex > 1 %}
@@ -63,10 +63,10 @@
                                         -
                                     {% endif %}
                                 </td>
-                                <td class="text-right">
+                                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                                     {% if bookmark.userCanEdit %}
                                     <button
-                                        class="btn btn-icon mx-3 ez-btn--content-edit"
+                                        class="btn btn-icon mx-2 ez-btn--content-edit"
                                         title="{{ 'bookmark.list.content.edit'|trans|desc('Edit Content') }}"
                                         data-content-id="{{ bookmark.contentInfo.id }}"
                                         data-version-no="{{ bookmark.contentInfo.currentVersionNo }}"
