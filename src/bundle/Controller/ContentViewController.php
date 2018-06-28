@@ -52,7 +52,7 @@ class ContentViewController extends Controller
     private $bookmarkService;
 
     /** @var int */
-    private $defaultPaginationLimit;
+    private $defaultDraftPaginationLimit;
 
     /** @var array */
     private $siteAccessLanguages;
@@ -77,7 +77,7 @@ class ContentViewController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier $subitemsContentViewParameterSupplier
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\BookmarkService $bookmarkService
-     * @param int $defaultPaginationLimit
+     * @param int $defaultDraftPaginationLimit
      * @param array $siteAccessLanguages
      * @param int $defaultRolePaginationLimit
      * @param int $defaultPolicyPaginationLimit
@@ -92,7 +92,7 @@ class ContentViewController extends Controller
         SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier,
         UserService $userService,
         BookmarkService $bookmarkService,
-        int $defaultPaginationLimit,
+        int $defaultDraftPaginationLimit,
         array $siteAccessLanguages,
         int $defaultRolePaginationLimit,
         int $defaultPolicyPaginationLimit,
@@ -106,7 +106,7 @@ class ContentViewController extends Controller
         $this->subitemsContentViewParameterSupplier = $subitemsContentViewParameterSupplier;
         $this->userService = $userService;
         $this->bookmarkService = $bookmarkService;
-        $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->defaultDraftPaginationLimit = $defaultDraftPaginationLimit;
         $this->siteAccessLanguages = $siteAccessLanguages;
         $this->defaultRolePaginationLimit = $defaultRolePaginationLimit;
         $this->defaultPolicyPaginationLimit = $defaultPolicyPaginationLimit;
@@ -273,7 +273,7 @@ class ContentViewController extends Controller
                 'route_name' => $request->get('_route'),
                 'route_params' => $request->get('_route_params'),
                 'page' => $page['version_draft'] ?? 1,
-                'limit' => $this->defaultPaginationLimit,
+                'limit' => $this->defaultDraftPaginationLimit,
             ],
         ]);
     }
