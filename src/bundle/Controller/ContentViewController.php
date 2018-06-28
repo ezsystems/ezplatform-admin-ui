@@ -227,7 +227,7 @@ class ContentViewController extends Controller
         $bookmarkUpdateType = $this->formFactory->updateBookmarkLocation(
             new LocationUpdateBookmarkData(
                 $location,
-                $this->bookmarkService->isBookmarked($location)
+                $location ? $this->bookmarkService->isBookmarked($location) : false
             )
         );
 
