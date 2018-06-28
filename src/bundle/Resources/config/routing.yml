@@ -717,6 +717,45 @@ ezplatform.bookmark.remove:
         _controller: 'EzPlatformAdminUiBundle:Bookmark:remove'
 
 #
+# Notifications
+#
+ezplatform.notifications.get:
+    path: /notifications/{offset}/{limit}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Notification:getNotifications'
+        offset: 0
+        limit: 10
+    methods: [GET]
+    requirements:
+        offset: '\d+'
+        limit: '\d+'
+
+ezplatform.notifications.render:
+    path: /notifications/render/{offset}/{limit}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Notification:renderNotifications'
+        offset: 0
+        limit: 5
+    methods: [GET]
+    requirements:
+        offset: '\d+'
+        limit: '\d+'
+
+ezplatform.notifications.count:
+    path: /notifications/count
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Notification:countNotifications'
+    methods: [GET]
+
+ezplatform.notifications.mark_as_read:
+    path: /notification/read/{notificationId}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Notification:markNotificationAsRead'
+    methods: [GET]
+    requirements:
+        notificationId: '\d+'
+
+#
 # Browse tree widget
 #
 ezplatform.browsetree.init:
