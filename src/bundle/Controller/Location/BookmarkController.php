@@ -9,16 +9,12 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Controller\Location;
 
 use eZ\Publish\API\Repository\BookmarkService;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateBookmarkData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException as APIRepositoryUnauthorizedException;
 
 class BookmarkController extends Controller
 {
@@ -31,6 +27,11 @@ class BookmarkController extends Controller
     /** @var \eZ\Publish\API\Repository\BookmarkService */
     private $bookmarkService;
 
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
+     * @param \eZ\Publish\API\Repository\BookmarkService $bookmarkService
+     */
     public function __construct(
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
@@ -41,37 +42,42 @@ class BookmarkController extends Controller
         $this->bookmarkService = $bookmarkService;
     }
 
-    public function updateBookmarkAction(Request $request): JsonResponse
+    /**
+     * @deprecated Deprecated in 1.1 and will be removed in 2.0. Please use REST instead.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function updateBookmarkAction(Request $request): Response
     {
         $updateBookmarkForm = $this->formFactory->updateBookmarkLocation();
         $updateBookmarkForm->handleRequest($request);
 
-        if ($updateBookmarkForm->isSubmitted()) {
-            $result = $this->submitHandler->handleAjax($updateBookmarkForm, function (LocationUpdateBookmarkData $data) {
-                $location = $data->getLocation();
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateBookmarkData $data */
+        $data = $updateBookmarkForm->getData();
+        $location = $data->getLocation();
 
-                try {
-                    if ($data->isBookmarked()) {
-                        $this->bookmarkService->createBookmark($location);
-                    } else {
-                        $this->bookmarkService->deleteBookmark($location);
-                    }
-
-                    return new JsonResponse();
-                } catch (APIRepositoryUnauthorizedException $e) {
-                    return new JsonResponse(['errors' => [$e->getMessage()]], Response::HTTP_UNAUTHORIZED);
-                } catch (InvalidArgumentException $e) {
-                    return new JsonResponse(['errors' => [$e->getMessage()]], Response::HTTP_UNPROCESSABLE_ENTITY);
-                } catch (NotFoundException $e) {
-                    return new JsonResponse(['errors' => [$e->getMessage()]], Response::HTTP_NOT_FOUND);
+        if ($updateBookmarkForm->isValid()) {
+            $result = $this->submitHandler->handle($updateBookmarkForm, function (LocationUpdateBookmarkData $data) use ($location) {
+                if ($data->isBookmarked()) {
+                    $this->bookmarkService->createBookmark($location);
+                } else {
+                    $this->bookmarkService->deleteBookmark($location);
                 }
+
+                return $this->redirectToLocation($location);
             });
 
-            if ($result instanceof JsonResponse) {
+            if ($result instanceof Response) {
                 return $result;
             }
         }
 
-        return new JsonResponse([], Response::HTTP_BAD_REQUEST);
+        if ($location) {
+            return $this->redirectToLocation($location);
+        }
+
+        return $this->redirectToRoute('ezplatform.dashboard');
     }
 }

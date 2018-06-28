@@ -16,6 +16,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @deprecated Deprecated in 1.1 and will be removed in 2.0.
+ */
 class LocationUpdateBookmarkType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

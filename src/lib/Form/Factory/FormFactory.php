@@ -1202,6 +1202,8 @@ class FormFactory
     }
 
     /**
+     * @deprecated Deprecated in 1.1 and will be removed in 2.0.
+     *
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateBookmarkData|null $data
      * @param string|null $name
      *

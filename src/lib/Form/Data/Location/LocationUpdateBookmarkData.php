@@ -11,6 +11,9 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data\Location;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @deprecated Deprecated in 1.1 and will be removed in 2.0.
+ */
 class LocationUpdateBookmarkData
 {
     /**

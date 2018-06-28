@@ -123,7 +123,7 @@ class ContentViewController extends Controller
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
-    public function locationViewAction(Request $request, ContentView $view)
+    public function locationViewAction(Request $request, ContentView $view): ContentView
     {
         // We should not cache ContentView because we use forms with CSRF tokens in template
         // JIRA ref: https://jira.ez.no/browse/EZP-28190
@@ -143,6 +143,8 @@ class ContentViewController extends Controller
         $this->supplyRolePagination($view, $request);
         $this->supplyPolicyPagination($view, $request);
 
+        $this->supplyIsLocationBookmarked($view);
+
         return $view;
     }
 
@@ -153,7 +155,7 @@ class ContentViewController extends Controller
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    public function embedViewAction(ContentView $view)
+    public function embedViewAction(ContentView $view): ContentView
     {
         // We should not cache ContentView because we use forms with CSRF tokens in template
         // JIRA ref: https://jira.ez.no/browse/EZP-28190
@@ -363,5 +365,13 @@ class ContentViewController extends Controller
             : null;
 
         return new ContentCreateData(null, $location, $language);
+    }
+
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     */
+    private function supplyIsLocationBookmarked(ContentView $view): void
+    {
+        $view->addParameters(['location_is_bookmarked' => $this->bookmarkService->isBookmarked($view->getLocation())]);
     }
 }

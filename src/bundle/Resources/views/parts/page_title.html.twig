@@ -11,10 +11,8 @@
         {% if contentTypeName is defined %}
             <h4 class="ez-page-title__content-type-name">{{ contentTypeName }}</h4>
         {% endif %}
-        {% if form_location_bookmark is defined %}
-            {% include '@ezdesign/parts/form/location_bookmark.html.twig' with {
-                form: form_location_bookmark
-            } %}
+        {% if location is defined %}
+            {# new template here #}
         {% endif %}
     </div>
 {% endif %}
