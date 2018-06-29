@@ -8,27 +8,36 @@
     <div class="ez-table-header">
         <div class="ez-table-header__headline">{{ 'content_type.view.list.title'|trans({ '%identifier%': content_type_group.identifier })|desc('Content Types in %identifier%') }}</div>
         <div>
-            <a href="{{ path('ezplatform.content_type.add', {contentTypeGroupId: content_type_group.id}) }}"
-               title="{{ 'content_type.view.list.action.add'|trans|desc('Create a Content Type') }}"
-               class="btn btn-primary">
-                <svg class="ez-icon ez-icon-create">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
-                </svg>
-            </a>
-            {% set modal_data_target = 'delete-content-types-modal' %}
-            <button id="delete-content-types" type="button" class="btn btn-danger" disabled data-toggle="modal"
-                    data-target="#{{ modal_data_target }}" title="{{ 'content_type.view.list.action.delete'|trans|desc('Delete Content Type') }}">
-                <svg class="ez-icon ez-icon-trash">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-                </svg>
-            </button>
-            {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
-                'id': modal_data_target,
-                'message': 'content_type.modal.message'|trans|desc('Do you want to delete Content Type?'),
-                'data_click': '#content_types_delete_delete',
-            }%}
+            {% if can_create %}
+                <a
+                    href="{{ path('ezplatform.content_type.add', {contentTypeGroupId: content_type_group.id}) }}"
+                    title="{{ 'content_type.view.list.action.add'|trans|desc('Create a Content Type') }}"
+                    class="btn btn-primary">
+                    <svg class="ez-icon ez-icon-create">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                    </svg>
+                </a>
+            {% endif %}
+            {% if can_delete %}
+                {% set modal_data_target = 'delete-content-types-modal' %}
+                <button
+                    id="delete-content-types"
+                    type="button"
+                    class="btn btn-danger"
+                    disabled
+                    data-toggle="modal"
+                    data-target="#{{ modal_data_target }}"
+                    title="{{ 'content_type.view.list.action.delete'|trans|desc('Delete Content Type') }}">
+                    <svg class="ez-icon ez-icon-trash">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                    </svg>
+                </button>
+                {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
+                    'id': modal_data_target,
+                    'message': 'content_type.modal.message'|trans|desc('Do you want to delete Content Type?'),
+                    'data_click': '#content_types_delete_delete',
+                }%}
+            {% endif %}
         </div>
     </div>
 
@@ -51,7 +60,11 @@
         {% for content_type in pager.currentPageResults %}
             <tr>
                 <td class="ez-checkbox-cell">
-                    {{ form_widget(form_content_types_delete.content_types[content_type.id], {"disabled": not deletable[content_type.id]}) }}
+                    {% if can_delete %}
+                        {{ form_widget(form_content_types_delete.content_types[content_type.id], {"disabled": not deletable[content_type.id]}) }}
+                    {% else %}
+                        {% do form_content_types_delete.content_types.setRendered %}
+                    {% endif %}
                 </td>
                 <td>
                 {% set view_url = path('ezplatform.content_type.view', {
@@ -65,7 +78,9 @@
                 <td>{{ content_type.id }}</td>
                 <td>{{ content_type.modificationDate | date }}</td>
                 <td class="text-right">
-                    {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-3') }}
+                    {% if can_update %}
+                        {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-3') }}
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

@@ -25,27 +25,36 @@
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'content_type_group.view.list.title'|trans|desc('Content Type Groups') }}</div>
             <div>
-                <a title="{{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type Group') }}"
-                   href="{{ path('ezplatform.content_type_group.create') }}"
-                   class="btn btn-primary">
-                    <svg class="ez-icon ez-icon-create">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
-                    </svg>
-                </a>
-                {% set modal_data_target = 'delete-content-type-groups-modal' %}
-                <button id="delete-content-type-groups" type="button" class="btn btn-danger" disabled data-toggle="modal"
-                        data-target="#{{ modal_data_target }}" title="{{ 'content_type_group.view.list.action.delete'|trans|desc('Delete Content Type Group') }}">
-                    <svg class="ez-icon ez-icon-trash">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-                    </svg>
-                </button>
-                {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
-                    'id': modal_data_target,
-                    'message': 'content_type_group.modal.message'|trans|desc('Do you want to delete Content Type Group?'),
-                    'data_click': '#content_type_groups_delete_delete',
-                }%}
+                {% if can_create %}
+                    <a
+                        title="{{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type Group') }}"
+                        href="{{ path('ezplatform.content_type_group.create') }}"
+                        class="btn btn-primary">
+                        <svg class="ez-icon ez-icon-create">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+                {% if can_delete %}
+                    {% set modal_data_target = 'delete-content-type-groups-modal' %}
+                    <button
+                        id="delete-content-type-groups"
+                        type="button"
+                        class="btn btn-danger"
+                        disabled
+                        data-toggle="modal"
+                        data-target="#{{ modal_data_target }}"
+                        title="{{ 'content_type_group.view.list.action.delete'|trans|desc('Delete Content Type Group') }}">
+                        <svg class="ez-icon ez-icon-trash">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        </svg>
+                    </button>
+                    {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
+                        'id': modal_data_target,
+                        'message': 'content_type_group.modal.message'|trans|desc('Do you want to delete Content Type Group?'),
+                        'data_click': '#content_type_groups_delete_delete',
+                    }%}
+                {% endif %}
             </div>
         </div>
 
@@ -67,7 +76,11 @@
             {% for content_type_group in pager.currentPageResults %}
                 <tr>
                     <td class="ez-checkbox-cell">
-                        {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id], {"disabled": not deletable[content_type_group.id]}) }}
+                        {% if can_delete %}
+                            {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id], {"disabled": not deletable[content_type_group.id]}) }}
+                        {% else %}
+                            {% do form_content_type_groups_delete.content_type_groups.setRendered %}
+                        {% endif %}
                     </td>
                     <td>
                         {% set view_url = path('ezplatform.content_type_group.view', {
@@ -79,17 +92,19 @@
                     <td>{{ content_type_group.id }}</td>
                     <td>{{ content_types_count[content_type_group.id] }}</td>
                     <td class="text-right">
-                        {% set edit_url = path('ezplatform.content_type_group.update', {
-                            contentTypeGroupId: content_type_group.id
-                        }) %}
-
-                        <a title="{{ 'content_type_group.view.list.action.edit'|trans|desc('Edit') }}"
-                           href="{{ edit_url }}"
-                           class="btn btn-icon mx-3">
-                            <svg class="ez-icon ez-icon-edit">
-                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-                            </svg>
-                        </a>
+                        {% if can_update %}
+                            {% set edit_url = path('ezplatform.content_type_group.update', {
+                                contentTypeGroupId: content_type_group.id
+                            }) %}
+                            <a
+                                title="{{ 'content_type_group.view.list.action.edit'|trans|desc('Edit') }}"
+                                href="{{ edit_url }}"
+                                class="btn btn-icon mx-3">
+                                <svg class="ez-icon ez-icon-edit">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
