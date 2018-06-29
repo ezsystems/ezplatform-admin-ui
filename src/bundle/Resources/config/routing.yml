@@ -479,12 +479,6 @@ ezplatform.location.update_visibility:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location:updateVisibility'
 
-ezplatform.location.update_bookmark:
-    path: /location/update-bookmark
-    methods: ['POST']
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:Location\Bookmark:updateBookmark'
-
 ezplatform.content.update_main_location:
     path: /content/update-main-location
     methods: ['POST']
