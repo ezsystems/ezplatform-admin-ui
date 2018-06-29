@@ -20,7 +20,6 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateBookmarkData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
@@ -123,7 +122,7 @@ class ContentViewController extends Controller
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
-    public function locationViewAction(Request $request, ContentView $view)
+    public function locationViewAction(Request $request, ContentView $view): ContentView
     {
         // We should not cache ContentView because we use forms with CSRF tokens in template
         // JIRA ref: https://jira.ez.no/browse/EZP-28190
@@ -143,6 +142,8 @@ class ContentViewController extends Controller
         $this->supplyRolePagination($view, $request);
         $this->supplyPolicyPagination($view, $request);
 
+        $this->supplyIsLocationBookmarked($view);
+
         return $view;
     }
 
@@ -153,7 +154,7 @@ class ContentViewController extends Controller
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    public function embedViewAction(ContentView $view)
+    public function embedViewAction(ContentView $view): ContentView
     {
         // We should not cache ContentView because we use forms with CSRF tokens in template
         // JIRA ref: https://jira.ez.no/browse/EZP-28190
@@ -224,13 +225,6 @@ class ContentViewController extends Controller
             new LocationCopySubtreeData($location)
         );
 
-        $bookmarkUpdateType = $this->formFactory->updateBookmarkLocation(
-            new LocationUpdateBookmarkData(
-                $location,
-                $location ? $this->bookmarkService->isBookmarked($location) : false
-            )
-        );
-
         $view->addParameters([
             'form_location_copy' => $locationCopyType->createView(),
             'form_location_move' => $locationMoveType->createView(),
@@ -238,7 +232,6 @@ class ContentViewController extends Controller
             'form_content_create' => $contentCreateType->createView(),
             'form_subitems_content_edit' => $subitemsContentEdit->createView(),
             'form_location_copy_subtree' => $locationCopySubtreeType->createView(),
-            'form_location_bookmark' => $bookmarkUpdateType->createView(),
         ]);
 
         if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
@@ -363,5 +356,13 @@ class ContentViewController extends Controller
             : null;
 
         return new ContentCreateData(null, $location, $language);
+    }
+
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     */
+    private function supplyIsLocationBookmarked(ContentView $view): void
+    {
+        $view->addParameters(['location_is_bookmarked' => $this->bookmarkService->isBookmarked($view->getLocation())]);
     }
 }
