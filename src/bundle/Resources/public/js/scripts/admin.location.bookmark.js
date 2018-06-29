@@ -23,6 +23,7 @@
         if (isUpdatingBookmark) {
             return;
         }
+
         isUpdatingBookmark = true;
 
         const method = addBookmark ? 'POST' : 'DELETE';
