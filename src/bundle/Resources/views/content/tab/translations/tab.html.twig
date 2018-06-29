@@ -36,8 +36,7 @@
     <button class="btn btn-primary ez-btn--prevented ez-btn--add-translation" data-toggle="modal" data-target="#add-translation-modal"
             title="{{ 'tab.translations.action.add'|trans|desc('Add Translation') }}">
         <svg class="ez-icon ez-icon-create">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
         </svg>
     </button>
 
@@ -45,8 +44,7 @@
     <button id="delete-translations" type="button" class="btn btn-danger" disabled data-toggle="modal"
             data-target="#{{ modal_data_target }}" title="{{ 'tab.translations.action.delete'|trans|desc('Delete Translation') }}">
         <svg class="ez-icon ez-icon-trash">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
     {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {
