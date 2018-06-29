@@ -20,7 +20,6 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateBookmarkData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
@@ -226,13 +225,6 @@ class ContentViewController extends Controller
             new LocationCopySubtreeData($location)
         );
 
-        $bookmarkUpdateType = $this->formFactory->updateBookmarkLocation(
-            new LocationUpdateBookmarkData(
-                $location,
-                $location ? $this->bookmarkService->isBookmarked($location) : false
-            )
-        );
-
         $view->addParameters([
             'form_location_copy' => $locationCopyType->createView(),
             'form_location_move' => $locationMoveType->createView(),
@@ -240,7 +232,6 @@ class ContentViewController extends Controller
             'form_content_create' => $contentCreateType->createView(),
             'form_subitems_content_edit' => $subitemsContentEdit->createView(),
             'form_location_copy_subtree' => $locationCopySubtreeType->createView(),
-            'form_location_bookmark' => $bookmarkUpdateType->createView(),
         ]);
 
         if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
