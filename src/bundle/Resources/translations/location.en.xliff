@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="7f616359fa64ad9a44aba2d7eeebfde7aac7f16f" resname="location.copy.success">
-        <source>Location '%name%' copied to location '%location%'</source>
-        <target state="new">Location '%name%' copied to location '%location%'</target>
+        <source>'%name%' copied to '%location%'</source>
+        <target state="new">'%name%' copied to '%location%'</target>
         <note>key: location.copy.success</note>
       </trans-unit>
       <trans-unit id="656c4be212bdf722670400927051cb39593938a5" resname="location.copy_subtree.success">
@@ -27,8 +27,8 @@
         <note>key: location.delete.success</note>
       </trans-unit>
       <trans-unit id="9d5d2fb830ae5b1806bcb908c01f115c93de4eda" resname="location.move.success">
-        <source>Location '%name%' moved to location '%location%'</source>
-        <target state="new">Location '%name%' moved to location '%location%'</target>
+        <source>'%name%' moved to '%location%'</source>
+        <target state="new">'%name%' moved to '%location%'</target>
         <note>key: location.move.success</note>
       </trans-unit>
       <trans-unit id="20dae8cf8c7cf8972d802224728554706e2b4699" resname="location.swap.success">
