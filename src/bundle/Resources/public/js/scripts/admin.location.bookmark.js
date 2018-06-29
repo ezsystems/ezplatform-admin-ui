@@ -5,18 +5,15 @@
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const bookmarkWrapper = doc.querySelector(SELECTOR_BOOKMARK_WRAPPER);
-    const currentLocationId = parseInt(bookmarkWrapper.getAttribute('data-locationid'), 10);
-    const handleRequestError = (response) => {
+    const currentLocationId = parseInt(bookmarkWrapper.getAttribute('data-location-id'), 10);
+    const handleUpdateError = global.eZ.helpers.notification.showErrorNotification;
+    const getResponseStatus = (response) => {
         if (!response.ok) {
             throw Error(response.statusText);
         }
 
-        return response;
+        return response.status;
     };
-    const handleRequestResponseStatus = (response) => {
-        return handleRequestError(response).status;
-    };
-    const handleUpdateError = global.eZ.helpers.notification.showErrorNotification;
     const updateBookmark = (addBookmark) => {
         const method = addBookmark ? 'POST' : 'DELETE';
         const request = new Request(`${ENDPOINT_BOOKMARK}/${currentLocationId}`, {
@@ -30,7 +27,7 @@
         });
 
         fetch(request)
-            .then(handleRequestResponseStatus)
+            .then(getResponseStatus)
             .then(toggleBookmarkIconState.bind(null, addBookmark))
             .catch(handleUpdateError);
     };
@@ -48,10 +45,6 @@
         }
     };
     const checkIsBookmarked = () => {
-        if (!bookmarkWrapper) {
-            return null;
-        }
-
         return bookmarkWrapper.classList.contains(CLASS_BOOKMARK_CHECKED);
     };
     const onBookmarkChange = () => {
@@ -61,5 +54,8 @@
     };
 
     doc.body.addEventListener('ez-bookmark-change', updateBookmarkIconState, false);
-    bookmarkWrapper.addEventListener('click', onBookmarkChange, false);
+
+    if (bookmarkWrapper) {
+        bookmarkWrapper.addEventListener('click', onBookmarkChange, false);
+    }
 })(window, document);
