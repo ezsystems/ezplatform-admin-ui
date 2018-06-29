@@ -7,6 +7,7 @@
     const bookmarkWrapper = doc.querySelector(SELECTOR_BOOKMARK_WRAPPER);
     const currentLocationId = parseInt(bookmarkWrapper.getAttribute('data-location-id'), 10);
     const handleUpdateError = global.eZ.helpers.notification.showErrorNotification;
+    let isUpdatingBookmark = false;
     const getResponseStatus = (response) => {
         if (!response.ok) {
             throw Error(response.statusText);
@@ -14,7 +15,16 @@
 
         return response.status;
     };
+    const onBookmarkUpdated = (isBookmarked) => {
+        toggleBookmarkIconState(isBookmarked);
+        isUpdatingBookmark = false;
+    };
     const updateBookmark = (addBookmark) => {
+        if (isUpdatingBookmark) {
+            return;
+        }
+        isUpdatingBookmark = true;
+
         const method = addBookmark ? 'POST' : 'DELETE';
         const request = new Request(`${ENDPOINT_BOOKMARK}/${currentLocationId}`, {
             method,
@@ -28,7 +38,7 @@
 
         fetch(request)
             .then(getResponseStatus)
-            .then(toggleBookmarkIconState.bind(null, addBookmark))
+            .then(onBookmarkUpdated.bind(null, addBookmark))
             .catch(handleUpdateError);
     };
     const isCurrentLocation = (locationId) => {
