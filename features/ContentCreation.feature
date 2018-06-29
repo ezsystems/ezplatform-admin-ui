@@ -209,7 +209,7 @@ Scenario: Content can be moved
     And I select content "Media/Images" through UDW
     And I confirm the selection in UDW
   Then I should be on content container page "Test Article edited4" of type "Article" in "Media/Images"
-    And success notification that "Location 'Test Article edited4' moved to location 'Images'" appears
+    And success notification that "'Test Article edited4' moved to 'Images'" appears
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
@@ -237,7 +237,7 @@ Scenario: Content can be copied
     And I select content "eZ Platform" through UDW
     And I confirm the selection in UDW
   Then I should be on content container page "Test Article edited4" of type "Article" in "eZ Platform"
-    And success notification that "Location 'Test Article edited4' copied to location 'eZ Platform'" appears
+    And success notification that "'Test Article edited4' copied to 'eZ Platform'" appears
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
