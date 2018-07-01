@@ -99,7 +99,7 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
 
         $canPublish = $this->permissionResolver->canUser('content', 'publish', $content);
         $canEdit = $this->permissionResolver->canUser('content', 'edit', $content);
-        $canDelete = $this->permissionResolver->canUser('content', 'remove', $content);
+        $canRemoveVersion = $this->permissionResolver->canUser('content', 'versionremove', $content->versionInfo);
 
         $publishAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,
@@ -145,7 +145,7 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         $items[self::ITEM__CANCEL] = $this->createMenuItem(
             self::ITEM__CANCEL,
             [
-                'attributes' => $canDelete
+                'attributes' => $canRemoveVersion
                     ? $deleteAttributes
                     : array_merge($deleteAttributes, self::BTN_DISABLED_ATTR),
                 'extras' => ['icon' => 'circle-close'],
