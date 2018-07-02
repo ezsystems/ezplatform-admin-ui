@@ -71,8 +71,7 @@
         <button id="delete-custom-urls" type="button" class="btn btn-danger" disabled data-toggle="modal"
                 data-target="#{{ modal_data_target }}" title="{{ 'tab.urls.action.delete'|trans|desc('Delete Custom URL') }}">
             <svg class="ez-icon ez-icon-trash">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                     xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
             </svg>
         </button>
         {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {

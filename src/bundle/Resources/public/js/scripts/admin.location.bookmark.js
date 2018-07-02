@@ -1,42 +1,72 @@
 (function(global, doc) {
-    const SELECTOR_FORM = 'form[name="location_update_bookmark"]';
-    const SELECTOR_BOOKMARK_CHECKBOX = '#location_update_bookmark_bookmarked';
-    const SELECTOR_BOOKMARK_LOCATION_INPUT = '#location_update_bookmark_location';
+    const ENDPOINT_BOOKMARK = '/api/ezp/v2/bookmark';
     const SELECTOR_BOOKMARK_WRAPPER = '.ez-add-to-bookmarks';
     const CLASS_BOOKMARK_CHECKED = 'ez-add-to-bookmarks--checked';
+    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
+    const bookmarkWrapper = doc.querySelector(SELECTOR_BOOKMARK_WRAPPER);
+    const currentLocationId = parseInt(bookmarkWrapper.getAttribute('data-location-id'), 10);
+    const handleUpdateError = global.eZ.helpers.notification.showErrorNotification;
+    let isUpdatingBookmark = false;
+    const getResponseStatus = (response) => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
 
-    const updateBookmarkLocationInput = doc.querySelector(SELECTOR_BOOKMARK_LOCATION_INPUT);
-    const currentLocationId = parseInt(updateBookmarkLocationInput.value, 10);
+        return response.status;
+    };
+    const onBookmarkUpdated = (isBookmarked) => {
+        toggleBookmarkIconState(isBookmarked);
+        isUpdatingBookmark = false;
+    };
+    const updateBookmark = (addBookmark) => {
+        if (isUpdatingBookmark) {
+            return;
+        }
 
-    const submitBookmarkForm = () => doc.querySelector(SELECTOR_FORM).submit();
-    const updateBookmarkCheckbox = (bookmarked) => {
-        const checkbox = doc.querySelector(SELECTOR_BOOKMARK_CHECKBOX);
+        isUpdatingBookmark = true;
 
-        checkbox.checked = bookmarked;
+        const method = addBookmark ? 'POST' : 'DELETE';
+        const request = new Request(`${ENDPOINT_BOOKMARK}/${currentLocationId}`, {
+            method,
+            headers: {
+                'X-Siteaccess': siteaccess,
+                'X-CSRF-Token': token,
+            },
+            mode: 'same-origin',
+            credentials: 'same-origin',
+        });
+
+        fetch(request)
+            .then(getResponseStatus)
+            .then(onBookmarkUpdated.bind(null, addBookmark))
+            .catch(handleUpdateError);
     };
     const isCurrentLocation = (locationId) => {
         return parseInt(locationId, 10) === currentLocationId;
     };
     const toggleBookmarkIconState = (isBookmarked) => {
-        const wrapper = doc.querySelector(SELECTOR_BOOKMARK_WRAPPER);
-
-        wrapper.classList.toggle(CLASS_BOOKMARK_CHECKED, isBookmarked);
+        bookmarkWrapper.classList.toggle(CLASS_BOOKMARK_CHECKED, isBookmarked);
     };
-    const updateBookmarkForm = (event) => {
-        const { bookmarked, locationId } = event.detail;
+    const updateBookmarkIconState = ({ detail }) => {
+        const { bookmarked, locationId } = detail;
 
         if (isCurrentLocation(locationId)) {
-            updateBookmarkCheckbox(bookmarked);
             toggleBookmarkIconState(bookmarked);
         }
     };
-    const updateBookmarkIconState = (event) => {
-        const checked = event.target.checked;
+    const checkIsBookmarked = () => {
+        return bookmarkWrapper.classList.contains(CLASS_BOOKMARK_CHECKED);
+    };
+    const onBookmarkChange = () => {
+        const addBookmark = !checkIsBookmarked();
 
-        toggleBookmarkIconState(checked);
+        updateBookmark(addBookmark);
     };
 
-    doc.body.addEventListener('ez-bookmark-change', updateBookmarkForm, false);
-    doc.querySelector(SELECTOR_BOOKMARK_CHECKBOX).addEventListener('change', submitBookmarkForm, false);
-    doc.querySelector(SELECTOR_BOOKMARK_CHECKBOX).addEventListener('change', updateBookmarkIconState, false);
+    doc.body.addEventListener('ez-bookmark-change', updateBookmarkIconState, false);
+
+    if (bookmarkWrapper) {
+        bookmarkWrapper.addEventListener('click', onBookmarkChange, false);
+    }
 })(window, document);

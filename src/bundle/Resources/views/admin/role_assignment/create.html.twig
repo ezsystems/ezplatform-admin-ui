@@ -57,8 +57,7 @@
                         <div class="ez-limitations__item-subtree">
                             <button id="role_assignment_create_locations_select_content" data-udw-config="{{ ez_udw_config('multiple', {}) }}" class="btn btn-secondary ez-btn--select-subtree"{% if not form.limitation_type.location.vars.checked %} disabled{% endif %}>
                                 <svg class="ez-icon ez-icon--select-subtree ez-icon--medium ez-icon--light">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#relations"></use>
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#relations"></use>
                                 </svg>
                                 {{ 'locations.select_subtree'|trans|desc('Select Subtree') }}
                             </button>

@@ -22,28 +22,24 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
-use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
 use Symfony\Component\Translation\TranslatorInterface;
+use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 
 class ContentTypeGroupController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var TranslatorInterface */
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
     /** @var array */
@@ -53,13 +49,11 @@ class ContentTypeGroupController extends Controller
     private $defaultPaginationLimit;
 
     /**
-     * ContentTypeGroupController constructor.
-     *
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
-     * @param ContentTypeService $contentTypeService
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param array $languages
      * @param int $defaultPaginationLimit
      */
@@ -82,9 +76,9 @@ class ContentTypeGroupController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listAction(Request $request): Response
     {
@@ -100,7 +94,7 @@ class ContentTypeGroupController extends Controller
         $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
         $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
-        /** @var ContentTypeGroup[] $contentTypeGroupList */
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup[] $contentTypeGroupList */
         $contentTypeGroupList = $pagerfanta->getCurrentPageResults();
 
         $deleteContentTypeGroupsForm = $this->formFactory->deleteContentTypeGroups(
@@ -118,11 +112,20 @@ class ContentTypeGroupController extends Controller
             'form_content_type_groups_delete' => $deleteContentTypeGroupsForm->createView(),
             'deletable' => $deletableContentTypeGroup,
             'content_types_count' => $count,
+            'can_create' => $this->isGranted(new Attribute('class', 'create')),
+            'can_update' => $this->isGranted(new Attribute('class', 'update')),
+            'can_delete' => $this->isGranted(new Attribute('class', 'delete')),
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function createAction(Request $request): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('class', 'create'));
         $form = $this->formFactory->createContentTypeGroup(
             new ContentTypeGroupCreateData()
         );
@@ -159,8 +162,15 @@ class ContentTypeGroupController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function updateAction(Request $request, ContentTypeGroup $group): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('class', 'update'));
         $form = $this->formFactory->updateContentTypeGroup(
             new ContentTypeGroupUpdateData($group)
         );
@@ -199,8 +209,15 @@ class ContentTypeGroupController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function deleteAction(Request $request, ContentTypeGroup $group): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('class', 'delete'));
         $form = $this->formFactory->deleteContentTypeGroup(
             new ContentTypeGroupDeleteData($group)
         );
@@ -232,19 +249,13 @@ class ContentTypeGroupController extends Controller
     /**
      * Handles removing content type groups based on submitted form.
      *
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
-     *
-     * @throws TranslationInvalidArgumentException
-     * @throws InvalidOptionsException
-     * @throws UnauthorizedException
-     * @throws InvalidArgumentException
-     * @throws NotFoundException
-     * @throws \InvalidArgumentException
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function bulkDeleteAction(Request $request): Response
     {
+        $this->denyAccessUnlessGranted(new Attribute('class', 'delete'));
         $form = $this->formFactory->deleteContentTypeGroups(
             new ContentTypeGroupsDeleteData()
         );
@@ -276,11 +287,11 @@ class ContentTypeGroupController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param ContentTypeGroup $group
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
      * @param int $page
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(Request $request, ContentTypeGroup $group, int $page = 1): Response
     {
@@ -292,7 +303,7 @@ class ContentTypeGroupController extends Controller
     }
 
     /**
-     * @param ContentTypeGroup[] $contentTypeGroups
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup[] $contentTypeGroups
      *
      * @return array
      */

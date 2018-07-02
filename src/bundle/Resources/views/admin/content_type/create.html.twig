@@ -7,11 +7,10 @@
 {% block _ezrepoforms_contenttype_update_removeFieldDefinition_widget %}
     <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
         <svg class="ez-icon ez-icon-trash">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                 xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
-{% endblock %}
+{% endblock %} 
 
 {% block breadcrumbs_admin %}
     {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [

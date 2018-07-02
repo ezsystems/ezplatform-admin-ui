@@ -50,7 +50,9 @@
                     <td>{{ content_type.identifier }}</td>
                     <td>{{ content_type.descriptions[language_code]|default('') }}</td>
                     <td class="text-right">
-                        {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-3') }}
+                        {% if can_update %}
+                            {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-3') }}
+                        {% endif %}
                     </td>
                 </tr>
             </tbody>
