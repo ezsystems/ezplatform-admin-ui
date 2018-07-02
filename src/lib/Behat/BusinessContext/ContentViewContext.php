@@ -86,6 +86,19 @@ class ContentViewContext extends BusinessContext
     }
 
     /**
+     * @Then there's no :itemName :itemType on Sub-items list of root
+     */
+    public function verifyThereIsNoItemInSubItemListInRoot(string $itemName, string $itemType): void
+    {
+        $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, ContentItemPage::ROOT_CONTENT_NAME);
+
+        Assert::assertFalse(
+            $contentItemPage->subItemList->table->isElementInTable($itemName, $itemType),
+            sprintf('%s "%s" shouldn\'t be on %s Sub-items list', $itemType, $itemName, ContentItemPage::ROOT_CONTENT_NAME)
+        );
+    }
+
+    /**
      * @Given I should be on content item page :contentName of type :contentType
      * @Given I should be on content item page :contentName of type :contentType in :path
      */
@@ -108,6 +121,33 @@ class ContentViewContext extends BusinessContext
     public function verifyImOnContentContainerPage(string $contentName, string $contentType, ?string $path = null)
     {
         $this->verifyImOnContentItemPage($contentName, $contentType, $path);
+
+        PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName)->verifySubItemListVisibility();
+    }
+
+    /**
+     * @Given I should be on content container page :contentName of type :contentType in root path
+     */
+    public function verifyImOnContentContainerPageInRoot(string $contentName, string $contentType)
+    {
+        $this->verifyImOnContentItemPage($contentName, $contentType, ContentItemPage::ROOT_CONTENT_NAME);
+
+        PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName)->verifySubItemListVisibility();
+    }
+
+    /**
+     * @Given I should be on root container page in Content View
+     */
+    public function verifyImOnRootPage()
+    {
+        $contentName = ContentItemPage::ROOT_CONTENT_NAME;
+        $contentType = ContentItemPage::ROOT_CONTENT_TYPE;
+
+        $contentPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName);
+        $contentPage->verifyIsLoaded();
+        $contentPage->verifyContentType($contentType);
+
+        $this->verifyImOnContentItemPage($contentName, $contentType);
 
         PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName)->verifySubItemListVisibility();
     }

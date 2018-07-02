@@ -99,4 +99,18 @@ class NavigationContext extends BusinessContext
             'Breadcrumb shows invalid path'
         );
     }
+
+    /**
+     * @Then breadcrumb shows :path path under root path
+     */
+    public function verifyIfBreadcrumbShowsPathUnderRoot(string $path): void
+    {
+        $path = sprintf('%s/%s', ContentItemPage::ROOT_CONTENT_NAME, $path);
+        $breadcrumb = ElementFactory::createElement($this->utilityContext, Breadcrumb::ELEMENT_NAME);
+        Assert::assertEquals(
+            str_replace('/', ' ', $path),
+            $breadcrumb->getBreadcrumb(),
+            'Breadcrumb shows invalid path'
+        );
+    }
 }
