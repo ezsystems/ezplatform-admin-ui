@@ -37,7 +37,7 @@ class PageObjectFactory
     /**
      * @param int $installType
      *
-     * @return PlatformPageObjectFactory
+     * @return PlatformPageObjectFactory|EnterprisePageObjectFactory
      *
      * @throws \Exception
      */

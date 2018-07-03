@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
+use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentVariables;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Notification;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentItemPage;
@@ -46,7 +47,7 @@ class NotificationContext extends BusinessContext
         $notification->verifyVisibility();
         $notification->verifyAlertSuccess();
 
-        $expectedMessage = sprintf("'%s' copied to '%s'", $content, ContentItemPage::ROOT_CONTENT_NAME);
+        $expectedMessage = sprintf("'%s' copied to '%s'", $content, EzEnvironmentVariables::get('ROOT_CONTENT_NAME'));
         Assert::assertEquals($expectedMessage, $notification->getMessage());
     }
 

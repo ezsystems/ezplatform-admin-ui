@@ -19,8 +19,6 @@ class ContentItemPage extends Page
 {
     /** @var string Name by which Page is recognised */
     public const PAGE_NAME = 'ContentItemPage';
-    public const ROOT_CONTENT_NAME = 'eZ Platform';
-    public const ROOT_CONTENT_TYPE = 'Folder';
 
     /** @var RightMenu Element representing the right menu */
     public $rightMenu;
