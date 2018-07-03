@@ -16,7 +16,6 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Date;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\DateAndTime;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\DefaultFieldElement;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\EmailAddress;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\EzFieldElement;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\FloatField;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Integer;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\ISBN;
@@ -45,8 +44,8 @@ class PlatformElementFactory extends ElementFactory
      * @param UtilityContext $context
      * @param string $elementName
      * @param null[]|string[] ...$parameters
-     * @return AdminList|AdminUpdateForm|Breadcrumb|ContentField|ContentTypePicker|ContentUpdateForm|DateAndTimePopup|Dialog|DraftConflictDialog|DefaultFieldElement|LanguagePicker|LeftMenu|NavLinkTabs|Notification|PreviewNav|RightMenu|DashboardTable|DoubleHeaderTable|LinkedListTable|SimpleListTable|SimpleTable|SubItemsTable|SystemInfoTable|TrashTable|VerticalOrientedTable|UniversalDiscoveryWidget|UpperMenu
      *
+     * @return AdminList|AdminUpdateForm|Breadcrumb|ContentField|ContentTypePicker|ContentUpdateForm|DateAndTimePopup|Dialog|DraftConflictDialog|DefaultFieldElement|LanguagePicker|LeftMenu|NavLinkTabs|Notification|PreviewNav|RightMenu|DashboardTable|DoubleHeaderTable|LinkedListTable|SimpleListTable|SimpleTable|SubItemsTable|SystemInfoTable|TrashTable|VerticalOrientedTable|UniversalDiscoveryWidget|UpperMenu
      */
     public static function createElement(UtilityContext $context, string $elementName, ?string ...$parameters): Element
     {

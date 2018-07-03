@@ -10,8 +10,6 @@ use Behat\Mink\Element\ElementInterface;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\MinkExtension\Context\MinkContext;
 use Exception;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\NullElement\NullElement;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\NullElement\NullElementException;
 use WebDriver\Exception\ElementNotVisible;
 
 class UtilityContext extends MinkContext
@@ -62,7 +60,7 @@ class UtilityContext extends MinkContext
             }
         );
 
-        return $elements ?? [new NullElement($locator)];
+        return $elements;
     }
 
     /**
@@ -73,9 +71,9 @@ class UtilityContext extends MinkContext
      * @param string $textSelector Extra CSS selector for text of the element
      * @param ElementInterface $baseElement
      *
-     * @return ElementInterface
+     * @return ElementInterface|null
      */
-    public function getElementByText(string $text, string $selector, string $textSelector = null, ElementInterface $baseElement = null): ElementInterface
+    public function getElementByText(string $text, string $selector, string $textSelector = null, ElementInterface $baseElement = null): ?ElementInterface
     {
         $baseElement = $baseElement ?? $this->getSession()->getPage();
 
@@ -95,7 +93,7 @@ class UtilityContext extends MinkContext
             }
         }
 
-        return new NullElement($selector, $text);
+        return null;
     }
 
     /**
@@ -106,9 +104,9 @@ class UtilityContext extends MinkContext
      * @param string $textSelector Extra CSS selector for text of the element
      * @param ElementInterface $baseElement
      *
-     * @return ElementInterface
+     * @return ElementInterface|null
      */
-    public function getElementByTextFragment(string $textFragment, string $selector, string $textSelector = null, ElementInterface $baseElement = null): ElementInterface
+    public function getElementByTextFragment(string $textFragment, string $selector, string $textSelector = null, ElementInterface $baseElement = null): ?ElementInterface
     {
         $baseElement = $baseElement ?? $this->getSession()->getPage();
 
@@ -128,7 +126,7 @@ class UtilityContext extends MinkContext
             }
         }
 
-        return new NullElement($selector, $textFragment);
+        return null;
     }
 
     /**
@@ -222,11 +220,10 @@ class UtilityContext extends MinkContext
         $baseElement = $baseElement ?? $this->getSession()->getPage();
 
         try {
-            $element = $this->waitUntil($timeout,
+            return $this->waitUntil($timeout,
                 function () use ($selector, $baseElement) {
                     return $baseElement->find('css', $selector);
                 });
-            return $element ?? new NullElement($selector);
         } catch (Exception $e) {
             throw new ElementNotFoundException($this->getSession()->getDriver());
         }
@@ -257,10 +254,8 @@ class UtilityContext extends MinkContext
         try {
             $element = $this->findElement($locator, $timeout);
 
-            return $element->isVisible();
+            return isset($element) && $element->isVisible();
         } catch (ElementNotFoundException $e) {
-            return false;
-        } catch (NullElementException $e) {
             return false;
         }
     }
