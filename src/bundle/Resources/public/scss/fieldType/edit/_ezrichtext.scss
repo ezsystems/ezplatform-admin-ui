@@ -6,11 +6,11 @@
     .ez-data-source__richtext {
         background-color: $ez-white;
         min-height: 100px;
-        border: 1px solid rgba(0,0,0,0.15);
-        border-radius: .25rem;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 0.25rem;
         display: inline-block;
         width: 100%;
-        padding: .5rem;
+        padding: 0.5rem;
 
         .is-block-focused,
         .cke_widget_wrapper.cke_widget_focused > .cke_widget_element {
@@ -22,25 +22,29 @@
             background: $ez-color-warning-pale;
             border-color: $ez-color-danger;
         }
+
+        blockquote {
+            margin: 1rem 2.5rem;
+        }
     }
 
-    [data-ezalign="right"] {
+    [data-ezalign='right'] {
         float: right;
     }
 
-    [data-ezalign="left"] {
+    [data-ezalign='left'] {
         float: left;
     }
 
-    [data-ezalign="center"] {
+    [data-ezalign='center'] {
         text-align: center;
     }
 
-    [data-ezelement="ezconfig"] {
+    [data-ezelement='ezconfig'] {
         display: none;
     }
 
-    [data-ezelement="ezembed"] {
+    [data-ezelement='ezembed'] {
         background: $ez-ground-base;
         border: 1px solid $ez-ground-base-dark;
         font-size: 1.1rem;
