@@ -1,4 +1,4 @@
-(function (global) {
+(function(global) {
     const IMAGE_TYPE_CLASS = 'ez-embed-type-image';
     const DATA_ALIGNMENT_ATTR = 'ezalign';
 
@@ -17,30 +17,27 @@
     CKEDITOR.plugins.add('ezembed', {
         requires: 'widget,ezaddcontent',
 
-        init: function (editor) {
+        init: function(editor) {
             editor.ezembed = {
                 canBeAdded: () => {
                     const path = editor.elementPath();
 
                     return !path || path.contains('table', true) === null;
-                }
+                },
             };
 
             editor.widgets.add('ezembed', {
                 defaults: {
-                    href: "ezcontent://",
-                    content: "home",
-                    view: "embed",
+                    href: 'ezcontent://',
+                    content: 'home',
+                    view: 'embed',
                 },
                 draggable: false,
                 template: '<div data-ezelement="ezembed" data-href="{href}" data-ezview="{view}">{content}</div>',
                 requiredContent: 'div',
 
                 upcast: (element) => {
-                    return (
-                        element.name === 'div' &&
-                        element.attributes['data-ezelement'] === 'ezembed'
-                    );
+                    return element.name === 'div' && element.attributes['data-ezelement'] === 'ezembed';
                 },
 
                 /**
@@ -50,7 +47,7 @@
                  *
                  * @method insert
                  */
-                insert: function () {
+                insert: function() {
                     var element = CKEDITOR.dom.element.createFromHtml(this.template.output(this.defaults)),
                         wrapper = editor.widgets.wrapElement(element, this.name),
                         temp = new CKEDITOR.dom.documentFragment(wrapper.getDocument()),
@@ -77,18 +74,28 @@
                  *
                  * @method edit
                  */
-                edit: function () {
+                edit: function() {
                     this.insert();
                 },
 
-                init: function () {
+                init: function() {
                     this.on('focus', this.fireEditorInteraction);
                     this.syncAlignment();
                     this.getEzConfigElement();
                     this.setWidgetContent('');
                     this.cancelEditEvents();
+                    this.disableUndo();
 
                     this.initEditMode();
+                },
+
+                /**
+                 * Disables the undo in CKEditor.
+                 *
+                 * @method disableUndo
+                 */
+                disableUndo: function() {
+                    editor.setKeystroke(CKEDITOR.CTRL + 90, false);
                 },
 
                 /**
@@ -96,7 +103,7 @@
                  *
                  * @method initEditMode
                  */
-                initEditMode: function () {
+                initEditMode: function() {
                     const contentId = this.getHref().replace('ezcontent://', '');
 
                     if (!contentId) {
@@ -112,7 +119,7 @@
                  * @method loadContent
                  * @param {String} contentId The content id
                  */
-                loadContent: function (contentId) {
+                loadContent: function(contentId) {
                     const token = document.querySelector('meta[name="CSRF-Token"]').content;
                     const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
                     const body = JSON.stringify({
@@ -123,29 +130,29 @@
                                 Criteria: {},
                                 FacetBuilders: {},
                                 SortClauses: {},
-                                Filter: {ContentIdCriterion: `${contentId}`},
+                                Filter: { ContentIdCriterion: `${contentId}` },
                                 limit: 1,
-                                offset: 0
-                            }
-                        }
+                                offset: 0,
+                            },
+                        },
                     });
                     const request = new Request('/api/ezp/v2/views', {
                         method: 'POST',
                         headers: {
-                            'Accept':'application/vnd.ez.api.View+json; version=1.1',
-                            'Content-Type':'application/vnd.ez.api.ViewInput+json; version=1.1',
+                            Accept: 'application/vnd.ez.api.View+json; version=1.1',
+                            'Content-Type': 'application/vnd.ez.api.ViewInput+json; version=1.1',
                             'X-Siteaccess': siteaccess,
-                            'X-CSRF-Token': token
+                            'X-CSRF-Token': token,
                         },
                         body,
                         mode: 'cors',
-                        credentials: 'same-origin'
+                        credentials: 'same-origin',
                     });
 
                     fetch(request)
-                        .then(response => response.json())
+                        .then((response) => response.json())
                         .then(this.handleContentLoaded.bind(this))
-                        .catch(error => console.log('error:load:content:info', error));
+                        .catch((error) => console.log('error:load:content:info', error));
                 },
 
                 /**
@@ -154,13 +161,13 @@
                  * @method loadImageVariation
                  * @param {String} variationHref The variation href
                  */
-                loadImageVariation: function (variationHref) {
+                loadImageVariation: function(variationHref) {
                     const token = document.querySelector('meta[name="CSRF-Token"]').content;
                     const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
                     const request = new Request(variationHref, {
                         method: 'GET',
                         headers: {
-                            'Accept': 'application/vnd.ez.api.ContentImageVariation+json',
+                            Accept: 'application/vnd.ez.api.ContentImageVariation+json',
                             'X-Siteaccess': siteaccess,
                             'X-CSRF-Token': token,
                         },
@@ -169,8 +176,8 @@
                     });
 
                     fetch(request)
-                        .then(response => response.json())
-                        .then(imageData => this.renderEmbedImagePreview(imageData.ContentImageVariation.uri));
+                        .then((response) => response.json())
+                        .then((imageData) => this.renderEmbedImagePreview(imageData.ContentImageVariation.uri));
                 },
 
                 /**
@@ -179,12 +186,14 @@
                  * @method handleContentLoaded
                  * @param {Object} hits The result of content search
                  */
-                handleContentLoaded: function (hits) {
+                handleContentLoaded: function(hits) {
                     const isEmbedImage = this.element.$.classList.contains(IMAGE_TYPE_CLASS);
                     const content = hits.View.Result.searchHits.searchHit[0].value.Content;
 
                     if (isEmbedImage) {
-                        const fieldImage = content.CurrentVersion.Version.Fields.field.find(field => field.fieldTypeIdentifier === 'ezimage');
+                        const fieldImage = content.CurrentVersion.Version.Fields.field.find(
+                            (field) => field.fieldTypeIdentifier === 'ezimage'
+                        );
 
                         if (!fieldImage || !fieldImage.fieldValue) {
                             this.renderEmbedPreview(content.Name);
@@ -210,13 +219,13 @@
                  * @param {String} currentVersionHref The current version href
                  * @param {String} contnetName The content name
                  */
-                loadImagePreviewFromCurrentVersion: function (currentVersionHref, contentName) {
+                loadImagePreviewFromCurrentVersion: function(currentVersionHref, contentName) {
                     const token = document.querySelector('meta[name="CSRF-Token"]').content;
                     const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
                     const request = new Request(currentVersionHref, {
                         method: 'GET',
                         headers: {
-                            'Accept': 'application/vnd.ez.api.Version+json',
+                            Accept: 'application/vnd.ez.api.Version+json',
                             'X-Siteaccess': siteaccess,
                             'X-CSRF-Token': token,
                         },
@@ -225,9 +234,9 @@
                     });
 
                     fetch(request)
-                        .then(response => response.json())
-                        .then(data => {
-                            const fieldImage = data.Version.Fields.field.find(field => field.fieldTypeIdentifier === 'ezimage');
+                        .then((response) => response.json())
+                        .then((data) => {
+                            const fieldImage = data.Version.Fields.field.find((field) => field.fieldTypeIdentifier === 'ezimage');
 
                             if (!fieldImage || !fieldImage.fieldValue) {
                                 contentName = contentName ? contentName : '';
@@ -252,7 +261,7 @@
                  * @method renderEmbedPreview
                  * @param {String} title The content title
                  */
-                renderEmbedPreview: function (title) {
+                renderEmbedPreview: function(title) {
                     const elementNode = document.createElement('p');
                     const template = `
                         <svg class="ez-icon">
@@ -273,7 +282,7 @@
                  * @method renderEmbedImagePreview
                  * @param {String} imageUri The image uri
                  */
-                renderEmbedImagePreview: function (imageUri) {
+                renderEmbedImagePreview: function(imageUri) {
                     const elementNode = document.createElement('img');
 
                     elementNode.setAttribute('src', imageUri);
@@ -287,7 +296,7 @@
                  *
                  * @method cancelEditEvents
                  */
-                cancelEditEvents: function () {
+                cancelEditEvents: function() {
                     const cancel = (event) => event.cancel();
 
                     this.on('doubleclick', cancel, null, null, 5);
@@ -300,7 +309,7 @@
                  *
                  * @method syncAlignment
                  */
-                syncAlignment: function () {
+                syncAlignment: function() {
                     const align = this.element.data(DATA_ALIGNMENT_ATTR);
 
                     if (align) {
@@ -318,7 +327,7 @@
                  * @method _setAlignment
                  * @param {String} type
                  */
-                _setAlignment: function (type) {
+                _setAlignment: function(type) {
                     this.wrapper.data(DATA_ALIGNMENT_ATTR, type);
                     this.element.data(DATA_ALIGNMENT_ATTR, type);
                 },
@@ -330,7 +339,7 @@
                  * @method setAlignment
                  * @param {String} type
                  */
-                setAlignment: function (type, fireEvent) {
+                setAlignment: function(type, fireEvent) {
                     this._setAlignment(type);
                     this.fireEditorInteraction('setAlignment' + type);
                 },
@@ -340,7 +349,7 @@
                  *
                  * @method _unsetAlignment
                  */
-                _unsetAlignment: function () {
+                _unsetAlignment: function() {
                     this.wrapper.data(DATA_ALIGNMENT_ATTR, false);
                     this.element.data(DATA_ALIGNMENT_ATTR, false);
                 },
@@ -351,7 +360,7 @@
                  *
                  * @method unsetAlignment
                  */
-                unsetAlignment: function () {
+                unsetAlignment: function() {
                     this._unsetAlignment();
                     this.fireEditorInteraction('unsetAlignment');
                 },
@@ -363,7 +372,7 @@
                  * @param {String} type
                  * @return {Boolean}
                  */
-                isAligned: function (type) {
+                isAligned: function(type) {
                     return this.wrapper.data(DATA_ALIGNMENT_ATTR) === type;
                 },
 
@@ -373,7 +382,7 @@
                  * @method setImageType
                  * @return {CKEDITOR.plugins.widget}
                  */
-                setImageType: function () {
+                setImageType: function() {
                     this.element.addClass(IMAGE_TYPE_CLASS);
 
                     return this;
@@ -385,7 +394,7 @@
                  * @method isImage
                  * @return {Boolean}
                  */
-                isImage: function () {
+                isImage: function() {
                     return this.element.hasClass(IMAGE_TYPE_CLASS);
                 },
 
@@ -397,7 +406,7 @@
                  * @param {String} href
                  * @return {CKEDITOR.plugins.widget}
                  */
-                setHref: function (href) {
+                setHref: function(href) {
                     this.element.data('href', href);
 
                     return this;
@@ -409,7 +418,7 @@
                  * @method getHref
                  * @return {String}
                  */
-                getHref: function () {
+                getHref: function() {
                     return this.element.data('href');
                 },
 
@@ -421,8 +430,9 @@
                  * @param {String|CKEDITOR.dom.node} content
                  * @return {CKEDITOR.plugins.widget}
                  */
-                setWidgetContent: function (content) {
-                    let element = this.element.getFirst(), next;
+                setWidgetContent: function(content) {
+                    let element = this.element.getFirst(),
+                        next;
 
                     while (element) {
                         next = element.getNext();
@@ -449,7 +459,7 @@
                  * @method moveAfter
                  * @param {CKEDITOR.dom.element} element
                  */
-                moveAfter: function (element) {
+                moveAfter: function(element) {
                     this.wrapper.insertAfter(element);
                     this.fireEditorInteraction('moveAfter');
                 },
@@ -462,7 +472,7 @@
                  * @method moveAfter
                  * @param {CKEDITOR.dom.element} element
                  */
-                moveBefore: function (element) {
+                moveBefore: function(element) {
                     this.wrapper.insertBefore(element);
                     this.fireEditorInteraction('moveBefore');
                 },
@@ -475,7 +485,7 @@
                  * @param {String} value
                  * @return {CKEDITOR.plugins.widget}
                  */
-                setConfig: function (key, value) {
+                setConfig: function(key, value) {
                     let valueElement = this.getValueElement(key);
 
                     if (!valueElement) {
@@ -497,7 +507,7 @@
                  * @method getConfig
                  * @return {String}
                  */
-                getConfig: function (key) {
+                getConfig: function(key) {
                     const valueElement = this.getValueElement(key);
 
                     return valueElement ? valueElement.getText() : undefined;
@@ -510,7 +520,7 @@
                  * @param {String} key
                  * @return {CKEDITOR.dom.element}
                  */
-                getValueElement: function (key) {
+                getValueElement: function(key) {
                     return this.element.findOne('[data-ezelement="ezvalue"][data-ezvalue-key="' + key + '"]');
                 },
 
@@ -521,7 +531,7 @@
                  * @method getEzConfigElement
                  * @return {CKEDITOR.dom.element}
                  */
-                getEzConfigElement: function () {
+                getEzConfigElement: function() {
                     let config = this.element.findOne('[data-ezelement="ezconfig"]');
 
                     if (!config) {
@@ -544,16 +554,16 @@
                  * @param {Object|String} evt this initial event info object or
                  * the event name for which the `editorInteraction` is fired.
                  */
-                fireEditorInteraction: function (evt) {
+                fireEditorInteraction: function(evt) {
                     const wrapperRegion = this.getWrapperRegion();
                     const name = evt.name || evt;
                     const event = {
-                            editor: editor,
-                            target: this.element.$,
-                            name: "widget" + name,
-                            pageX: wrapperRegion.left,
-                            pageY: wrapperRegion.top + wrapperRegion.height,
-                        };
+                        editor: editor,
+                        target: this.element.$,
+                        name: 'widget' + name,
+                        pageX: wrapperRegion.left,
+                        pageY: wrapperRegion.top + wrapperRegion.height,
+                    };
 
                     editor.focus();
                     this.focus();
@@ -574,7 +584,7 @@
                  * @private
                  * @return {Object}
                  */
-                getWrapperRegion: function () {
+                getWrapperRegion: function() {
                     const scroll = this.wrapper.getWindow().getScrollPosition();
                     const region = this.wrapper.getClientRect();
 
