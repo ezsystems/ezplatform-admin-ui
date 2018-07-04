@@ -6,10 +6,9 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentVariables;
+use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentItemPage;
 
 class UDWContext extends BusinessContext
 {
@@ -30,7 +29,7 @@ class UDWContext extends BusinessContext
     {
         $udw = ElementFactory::createElement($this->utilityContext, UniversalDiscoveryWidget::ELEMENT_NAME);
         $udw->verifyVisibility();
-        $udw->selectContent(EzEnvironmentVariables::get('ROOT_CONTENT_NAME'));
+        $udw->selectContent(EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
     }
 
     /** @When I close the UDW window */

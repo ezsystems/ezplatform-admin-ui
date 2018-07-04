@@ -7,7 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentVariables;
+use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Breadcrumb;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\DraftConflictDialog;
@@ -91,11 +91,11 @@ class ContentViewContext extends BusinessContext
      */
     public function verifyThereIsNoItemInSubItemListInRoot(string $itemName, string $itemType): void
     {
-        $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, EzEnvironmentVariables::get('ROOT_CONTENT_NAME'));
+        $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
 
         Assert::assertFalse(
             $contentItemPage->subItemList->table->isElementInTable($itemName, $itemType),
-            sprintf('%s "%s" shouldn\'t be on %s Sub-items list', $itemType, $itemName, EzEnvironmentVariables::get('ROOT_CONTENT_NAME'))
+            sprintf('%s "%s" shouldn\'t be on %s Sub-items list', $itemType, $itemName, EzEnvironmentConstants::get('ROOT_CONTENT_NAME'))
         );
     }
 
@@ -131,7 +131,7 @@ class ContentViewContext extends BusinessContext
      */
     public function verifyImOnContentContainerPageInRoot(string $contentName, string $contentType)
     {
-        $this->verifyImOnContentItemPage($contentName, $contentType, EzEnvironmentVariables::get('ROOT_CONTENT_NAME'));
+        $this->verifyImOnContentItemPage($contentName, $contentType, EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
 
         PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName)->verifySubItemListVisibility();
     }
@@ -141,8 +141,8 @@ class ContentViewContext extends BusinessContext
      */
     public function verifyImOnRootPage()
     {
-        $contentName = EzEnvironmentVariables::get('ROOT_CONTENT_NAME');
-        $contentType = EzEnvironmentVariables::get('ROOT_CONTENT_TYPE');
+        $contentName = EzEnvironmentConstants::get('ROOT_CONTENT_NAME');
+        $contentType = EzEnvironmentConstants::get('ROOT_CONTENT_TYPE');
 
         $contentPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName);
         $contentPage->verifyIsLoaded();

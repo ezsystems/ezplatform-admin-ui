@@ -31,7 +31,7 @@ class Hooks extends RawMinkContext
 
         PageObjectFactory::setInstallType($installType);
         ElementFactory::setInstallType($installType);
-        EzEnvironmentVariables::setInstallType($installType);
+        EzEnvironmentConstants::setInstallType($installType);
     }
 
     /** @BeforeScenario @restoreEnvironmentBefore
