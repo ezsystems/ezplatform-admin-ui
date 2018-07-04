@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Translation\Extractor\JavaScriptFileVisitor:
+        tags:
+            - { name: jms_translation.file_visitor }
