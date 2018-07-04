@@ -6,7 +6,8 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\Helper;
 
-use Behat\Mink\Element\ElementInterface;
+use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Element\TraversableElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\MinkExtension\Context\MinkContext;
 use Exception;
@@ -40,11 +41,11 @@ class UtilityContext extends MinkContext
      * to find all element with a given css selector that might still be loading.
      *
      * @param   string      $locator        css selector for the element
-     * @param   ElementInterface $baseElement    base Mink node element from where the find should be called
+     * @param   TraversableElement|null $baseElement    base Mink node element from where the find should be called
      *
-     * @return  ElementInterface[]
+     * @return  NodeElement[]
      */
-    public function findAllElements(string $locator, ElementInterface $baseElement = null): array
+    public function findAllElements(string $locator, TraversableElement $baseElement = null): array
     {
         $baseElement = $baseElement ?? $this->getSession()->getPage();
 
@@ -69,11 +70,11 @@ class UtilityContext extends MinkContext
      * @param string $text Text value of the element
      * @param string $selector CSS selector of the element
      * @param string $textSelector Extra CSS selector for text of the element
-     * @param ElementInterface $baseElement
+     * @param TraversableElement|null $baseElement
      *
-     * @return ElementInterface|null
+     * @return NodeElement|null
      */
-    public function getElementByText(string $text, string $selector, string $textSelector = null, ElementInterface $baseElement = null): ?ElementInterface
+    public function getElementByText(string $text, string $selector, string $textSelector = null, TraversableElement $baseElement = null): ?NodeElement
     {
         $baseElement = $baseElement ?? $this->getSession()->getPage();
 
@@ -102,11 +103,11 @@ class UtilityContext extends MinkContext
      * @param string $text Fragment of text value of the element
      * @param string $selector CSS selector of the element
      * @param string $textSelector Extra CSS selector for text of the element
-     * @param ElementInterface $baseElement
+     * @param TraversableElement|null $baseElement
      *
-     * @return ElementInterface|null
+     * @return NodeElement|null
      */
-    public function getElementByTextFragment(string $textFragment, string $selector, string $textSelector = null, ElementInterface $baseElement = null): ?ElementInterface
+    public function getElementByTextFragment(string $textFragment, string $selector, string $textSelector = null, TraversableElement $baseElement = null): ?NodeElement
     {
         $baseElement = $baseElement ?? $this->getSession()->getPage();
 
@@ -135,11 +136,11 @@ class UtilityContext extends MinkContext
      * @param string $text Text value of the element
      * @param string $selector CSS selector of the element
      * @param string $textSelector Extra CSS selector for text of the element
-     * @param ElementInterface $baseElement
+     * @param TraversableElement|null $baseElement
      *
      * @return int
      */
-    public function getElementPositionByText(string $text, string $selector, string $textSelector = null, ElementInterface $baseElement = null): int
+    public function getElementPositionByText(string $text, string $selector, string $textSelector = null, TraversableElement $baseElement = null): int
     {
         $baseElement = $baseElement ?? $this->getSession()->getPage();
         $counter = 0;
@@ -209,13 +210,13 @@ class UtilityContext extends MinkContext
      *
      * @param string $selector CSS selector for the element
      * @param int $timeout
-     * @param ElementInterface $baseElement Element from which the DOM will be searched
+     * @param TraversableElement|null $baseElement Element from which the DOM will be searched
      *
-     * @return ElementInterface Searched element
+     * @return NodeElement Searched element
      *
      * @throws ElementNotFoundException
      */
-    public function findElement(string $selector, int $timeout = 5, ElementInterface $baseElement = null): ElementInterface
+    public function findElement(string $selector, int $timeout = 5, TraversableElement $baseElement = null): NodeElement
     {
         $baseElement = $baseElement ?? $this->getSession()->getPage();
 
@@ -232,9 +233,9 @@ class UtilityContext extends MinkContext
     /**
      * Filters an array of elements and returns the visible ones.
      *
-     * @param ElementInterface[] $elements
+     * @param NodeElement[] $elements
      *
-     * @return ElementInterface[]
+     * @return NodeElement[]
      */
     public function getVisibleElements(array $elements): array
     {
