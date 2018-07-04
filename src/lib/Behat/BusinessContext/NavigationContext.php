@@ -107,11 +107,6 @@ class NavigationContext extends BusinessContext
     public function verifyIfBreadcrumbShowsPathUnderRoot(string $path): void
     {
         $path = sprintf('%s/%s', EzEnvironmentConstants::get('ROOT_CONTENT_NAME'), $path);
-        $breadcrumb = ElementFactory::createElement($this->utilityContext, Breadcrumb::ELEMENT_NAME);
-        Assert::assertEquals(
-            str_replace('/', ' ', $path),
-            $breadcrumb->getBreadcrumb(),
-            'Breadcrumb shows invalid path'
-        );
+        $this->verifyIfBreadcrumbShowsPath($path);
     }
 }

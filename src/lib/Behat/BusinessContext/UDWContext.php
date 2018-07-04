@@ -27,9 +27,7 @@ class UDWContext extends BusinessContext
      */
     public function iSelectRootNodeContent(): void
     {
-        $udw = ElementFactory::createElement($this->utilityContext, UniversalDiscoveryWidget::ELEMENT_NAME);
-        $udw->verifyVisibility();
-        $udw->selectContent(EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
+        $this->iSelectContent(EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
     }
 
     /** @When I close the UDW window */

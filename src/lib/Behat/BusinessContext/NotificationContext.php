@@ -42,12 +42,8 @@ class NotificationContext extends BusinessContext
      */
     public function copiedToRootAppears(string $content): void
     {
-        $notification = ElementFactory::createElement($this->utilityContext, Notification::ELEMENT_NAME);
-        $notification->verifyVisibility();
-        $notification->verifyAlertSuccess();
-
         $expectedMessage = sprintf("'%s' copied to '%s'", $content, EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
-        Assert::assertEquals($expectedMessage, $notification->getMessage());
+        $this->specificNotificationAppears($expectedMessage);
     }
 
     /**
