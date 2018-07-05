@@ -53,8 +53,8 @@ Scenario: Content draft can be saved
       | Title | Test Article       |
       | Intro | Test article intro |
     And I click on the edit action bar button "Save"
-  Then I should be on "Content Update" "Test Article" page
-    And success notification that "Content draft saved." appears
+  Then success notification that "Content draft saved." appears
+    And I should be on "Content Update" "Test Article" page
     And going to dashboard we see there's draft "Test Article" on list
 
 @javascript @common
@@ -85,8 +85,8 @@ Scenario: Content can be published
       | Title | Test Article       |
       | Intro | Test article intro |
     And I click on the edit action bar button "Publish"
-  Then I should be on content container page "Test Article" of type "Article" in root path
-    And success notification that "Content published." appears
+  Then success notification that "Content published." appears
+    And I should be on content container page "Test Article" of type "Article" in root path
     And content attributes equal
       | label | value              |
       | Title | Test Article       |
@@ -138,8 +138,8 @@ Scenario: Content edit draft can be saved
       | Title | Test Article edited2       |
       | Intro | Test article intro edited2 |
     And I click on the edit action bar button "Save"
-  Then I should be on "Content Update" "Test Article edited2" page
-    And success notification that "Content draft saved." appears
+  Then success notification that "Content draft saved." appears
+    And I should be on "Content Update" "Test Article edited2" page
     And going to dashboard we see there's draft "Test Article edited2" on list
 
 @javascript @common
@@ -151,8 +151,8 @@ Scenario: Content draft can be created and published through draft list modal
       | label | value                      |
       | Title | Test Article edited3       |
     And I click on the edit action bar button "Publish"
-  Then I should be on content container page "Test Article edited3" of type "Article" in root path
-    And success notification that "Content published." appears
+  Then success notification that "Content published." appears
+    And I should be on content container page "Test Article edited3" of type "Article" in root path
     And content attributes equal
       | label | value                |
       | Title | Test Article edited3 |
@@ -182,8 +182,8 @@ Scenario: Content draft from draft list modal can be published
       | label | value                      |
       | Title | Test Article edited4       |
     And I click on the edit action bar button "Publish"
-  Then I should be on content container page "Test Article edited4" of type "Article" in root path
-    And success notification that "Content published." appears
+  Then success notification that "Content published." appears
+    And I should be on content container page "Test Article edited4" of type "Article" in root path
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
@@ -208,8 +208,8 @@ Scenario: Content can be moved
   When I click on the edit action bar button "Move"
     And I select content "Media/Images" through UDW
     And I confirm the selection in UDW
-  Then I should be on content container page "Test Article edited4" of type "Article" in "Media/Images"
-    And success notification that "'Test Article edited4' moved to 'Images'" appears
+  Then success notification that "'Test Article edited4' moved to 'Images'" appears
+    And I should be on content container page "Test Article edited4" of type "Article" in "Media/Images"
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
@@ -236,8 +236,8 @@ Scenario: Content can be copied
   When I click on the edit action bar button "Copy"
     And I select content root node through UDW
     And I confirm the selection in UDW
-  Then I should be on content container page "Test Article edited4" of type "Article" in root path
-    And success notification that "Test Article edited4" has been copied to root node appears
+  Then success notification that "Test Article edited4" has been copied to root node appears
+    And I should be on content container page "Test Article edited4" of type "Article" in root path
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
