@@ -88,6 +88,6 @@ class UniversalDiscoveryWidget extends Element
 
     protected function isVisible(): bool
     {
-        return $this->context->isElementVisible($this->fields['mainWindow']);
+        return $this->context->isElementVisible($this->fields['mainWindow'], self::UDW_DISAPPEAR_TIMEOUT);
     }
 }
