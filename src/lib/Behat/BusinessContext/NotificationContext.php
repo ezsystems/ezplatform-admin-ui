@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
+use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Notification;
 use PHPUnit\Framework\Assert;
@@ -34,6 +35,15 @@ class NotificationContext extends BusinessContext
         $notification->verifyVisibility();
         $notification->verifyAlertSuccess();
         Assert::assertEquals($message, $notification->getMessage());
+    }
+
+    /**
+     * @Then success notification that :content has been copied to root node appears
+     */
+    public function copiedToRootAppears(string $content): void
+    {
+        $expectedMessage = sprintf("'%s' copied to '%s'", $content, EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
+        $this->specificNotificationAppears($expectedMessage);
     }
 
     /**

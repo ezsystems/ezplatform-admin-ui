@@ -8,6 +8,8 @@ namespace EzSystems\EzPlatformAdminUi\Behat\Helper;
 
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelDictionary;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 
 class Hooks extends RawMinkContext
 {
@@ -20,15 +22,27 @@ class Hooks extends RawMinkContext
         $this->getSession()->restart();
     }
 
+    /** @BeforeScenario
+     */
+    public function setInstallTypeBeforeScenario()
+    {
+        $env = new Environment($this->getContainer());
+        $installType = $env->getInstallType();
+
+        PageObjectFactory::setInstallType($installType);
+        ElementFactory::setInstallType($installType);
+        EzEnvironmentConstants::setInstallType($installType);
+    }
+
     /** @BeforeScenario @restoreEnvironmentBefore
      * Restores the database and clears cache for tests marked with @restoreEnvironmentBefore tag
      */
     public function restoreEnvironmentBeforeScenario()
     {
-        $envRestorer = new EnvironmentRestore($this->getContainer());
+        $env = new Environment($this->getContainer());
 
-        $envRestorer->restoreDatabase();
-        $envRestorer->clearCache();
+        $env->restoreDatabase();
+        $env->clearCache();
     }
 
     /** @AfterScenario @restoreEnvironmentAfter
@@ -36,9 +50,9 @@ class Hooks extends RawMinkContext
      */
     public function restoreEnvironmentAfterScenario()
     {
-        $envRestorer = new EnvironmentRestore($this->getContainer());
+        $env = new Environment($this->getContainer());
 
-        $envRestorer->restoreDatabase();
-        $envRestorer->clearCache();
+        $env->restoreDatabase();
+        $env->clearCache();
     }
 }

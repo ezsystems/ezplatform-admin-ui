@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
+use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 
@@ -19,6 +20,14 @@ class UDWContext extends BusinessContext
         $udw = ElementFactory::createElement($this->utilityContext, UniversalDiscoveryWidget::ELEMENT_NAME);
         $udw->verifyVisibility();
         $udw->selectContent($pathToContent);
+    }
+
+    /**
+     * @When I select content root node through UDW
+     */
+    public function iSelectRootNodeContent(): void
+    {
+        $this->iSelectContent(EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
     }
 
     /** @When I close the UDW window */

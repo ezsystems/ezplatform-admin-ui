@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
+use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Breadcrumb;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UpperMenu;
@@ -98,5 +99,14 @@ class NavigationContext extends BusinessContext
             $breadcrumb->getBreadcrumb(),
             'Breadcrumb shows invalid path'
         );
+    }
+
+    /**
+     * @Then breadcrumb shows :path path under root path
+     */
+    public function verifyIfBreadcrumbShowsPathUnderRoot(string $path): void
+    {
+        $path = sprintf('%s/%s', EzEnvironmentConstants::get('ROOT_CONTENT_NAME'), $path);
+        $this->verifyIfBreadcrumbShowsPath($path);
     }
 }

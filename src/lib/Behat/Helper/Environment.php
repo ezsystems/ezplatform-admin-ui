@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
-class EnvironmentRestore
+class Environment
 {
     /** @var \Symfony\Component\DependencyInjection\ContainerInterface Symfony DI service container */
     private $serviceContainer;
@@ -104,22 +104,36 @@ class EnvironmentRestore
      */
     private function getInstallerService(): Installer
     {
+        switch ($this->getInstallType()) {
+            case InstallType::ENTERPRISE_DEMO:
+                return $this->serviceContainer->get($this->installerServices['platform-ee-demo']);
+            case InstallType::ENTERPRISE:
+                return $this->serviceContainer->get($this->installerServices['platform-ee']);
+            case InstallType::PLATFORM_DEMO:
+                return $this->serviceContainer->get($this->installerServices['platform-demo']);
+            case InstallType::PLATFORM:
+                return $this->serviceContainer->get($this->installerServices['platform']);
+            default:
+                throw new ServiceNotFoundException('Installer service not found');
+        }
+    }
+
+    public function getInstallType(): int
+    {
         if ($this->serviceContainer->has($this->installerServices['platform-ee-demo'])) {
-            return $this->serviceContainer->get($this->installerServices['platform-ee-demo']);
+            return InstallType::ENTERPRISE_DEMO;
         }
 
         if ($this->serviceContainer->has($this->installerServices['platform-ee'])) {
-            return $this->serviceContainer->get($this->installerServices['platform-ee']);
+            return InstallType::ENTERPRISE;
         }
 
         if ($this->serviceContainer->has($this->installerServices['platform-demo'])) {
-            return $this->serviceContainer->get($this->installerServices['platform-demo']);
+            return InstallType::PLATFORM_DEMO;
         }
 
         if ($this->serviceContainer->has($this->installerServices['platform'])) {
-            return $this->serviceContainer->get($this->installerServices['platform']);
+            return InstallType::PLATFORM;
         }
-
-        throw new ServiceNotFoundException('Installer service not found');
     }
 }

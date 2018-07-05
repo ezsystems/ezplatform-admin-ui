@@ -41,7 +41,7 @@ class UtilityContext extends MinkContext
      * to find all element with a given css selector that might still be loading.
      *
      * @param   string      $locator        css selector for the element
-     * @param   TraversableElement $baseElement    base Mink node element from where the find should be called
+     * @param   TraversableElement|null $baseElement    base Mink node element from where the find should be called
      *
      * @return  NodeElement[]
      */
@@ -185,6 +185,8 @@ class UtilityContext extends MinkContext
         $start = time();
         $end = $start + $timeoutSeconds;
 
+        $lastInternalExceptionMessage = '';
+
         do {
             try {
                 $result = $callback($this);
@@ -193,12 +195,13 @@ class UtilityContext extends MinkContext
                     return $result;
                 }
             } catch (Exception $e) {
+                $lastInternalExceptionMessage = $e->getMessage();
             }
             usleep(250 * 1000);
         } while (time() < $end);
 
         if ($throwOnFailure) {
-            throw new Exception('Spin function did not return in time');
+            throw new Exception('Spin function did not return in time. Internal exception:' . $lastInternalExceptionMessage);
         }
     }
 
@@ -209,11 +212,11 @@ class UtilityContext extends MinkContext
      * @param int $timeout
      * @param TraversableElement|null $baseElement Element from which the DOM will be searched
      *
-     * @return NodeElement|null Searched element
+     * @return NodeElement Searched element
      *
      * @throws ElementNotFoundException
      */
-    public function findElement(string $selector, int $timeout = 5, TraversableElement $baseElement = null): ?NodeElement
+    public function findElement(string $selector, int $timeout = 5, TraversableElement $baseElement = null): NodeElement
     {
         $baseElement = $baseElement ?? $this->getSession()->getPage();
 
