@@ -13,6 +13,7 @@ class UniversalDiscoveryWidget extends Element
 {
     public const ELEMENT_NAME = 'UDW';
     private const UDW_TIMEOUT = 20;
+    private const UDW_DISAPPEAR_TIMEOUT = 2;
 
     public function __construct(UtilityContext $context)
     {
@@ -54,7 +55,7 @@ class UniversalDiscoveryWidget extends Element
     public function confirm(): void
     {
         $this->context->getElementByText('Confirm', $this->fields['confirmButton'])->click();
-        $this->context->waitUntil($this->defaultTimeout, function () {
+        $this->context->waitUntil(self::UDW_DISAPPEAR_TIMEOUT, function () {
             return !$this->isVisible();
         });
     }
@@ -62,7 +63,7 @@ class UniversalDiscoveryWidget extends Element
     public function cancel(): void
     {
         $this->context->getElementByText('Cancel', $this->fields['cancelButton'])->click();
-        $this->context->waitUntil($this->defaultTimeout, function () {
+        $this->context->waitUntil(self::UDW_DISAPPEAR_TIMEOUT, function () {
             return !$this->isVisible();
         });
     }
