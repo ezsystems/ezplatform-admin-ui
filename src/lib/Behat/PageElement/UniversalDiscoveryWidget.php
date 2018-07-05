@@ -19,6 +19,7 @@ class UniversalDiscoveryWidget extends Element
         parent::__construct($context);
         $this->fields = [
             'tabSelector' => '.c-tab-nav-item',
+            'mainWindow' => '.m-ud',
             'confirmButton' => '.m-ud__action--confirm',
             'cancelButton' => '.m-ud__action--cancel',
             'selectContentButton' => '.c-meta-preview__btn--select',
@@ -53,11 +54,17 @@ class UniversalDiscoveryWidget extends Element
     public function confirm(): void
     {
         $this->context->getElementByText('Confirm', $this->fields['confirmButton'])->click();
+        $this->context->waitUntil($this->defaultTimeout, function () {
+            return !$this->isVisible();
+        });
     }
 
     public function cancel(): void
     {
         $this->context->getElementByText('Cancel', $this->fields['cancelButton'])->click();
+        $this->context->waitUntil($this->defaultTimeout, function () {
+            return !$this->isVisible();
+        });
     }
 
     public function verifyVisibility(): void
@@ -76,5 +83,10 @@ class UniversalDiscoveryWidget extends Element
         }
 
         Assert::assertArraySubset($expectedTabTitles, $actualTabTitles);
+    }
+
+    protected function isVisible(): bool
+    {
+        return $this->context->isElementVisible($this->fields['mainWindow']);
     }
 }
