@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function(global, doc) {
     const btns = doc.querySelectorAll('.ez-btn--cotf-create');
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
@@ -14,18 +14,28 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+        const title = global.Translator.trans(/*@Desc("Create your content")*/ 'title', {}, 'admin_ui_frontend_cotf_create');
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
-            onConfirm,
-            onCancel,
-            title: 'Create your content',
-            activeTab: 'create',
-            visibleTabs: ['create'],
-            multiple: false,
-            startingLocationId: global.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-            restInfo: {token, siteaccess}
-        }, config)), udwContainer);
+        ReactDOM.render(
+            React.createElement(
+                eZ.modules.UniversalDiscovery,
+                Object.assign(
+                    {
+                        onConfirm,
+                        onCancel,
+                        title,
+                        activeTab: 'create',
+                        visibleTabs: ['create'],
+                        multiple: false,
+                        startingLocationId: global.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                        restInfo: { token, siteaccess },
+                    },
+                    config
+                )
+            ),
+            udwContainer
+        );
     };
 
-    btns.forEach(btn => btn.addEventListener('click', openUDW, false));
+    btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
 })(window, document);

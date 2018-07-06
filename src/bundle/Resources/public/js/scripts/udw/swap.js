@@ -1,4 +1,4 @@
-(function () {
+(function() {
     const btns = document.querySelectorAll('.btn--udw-swap');
     const form = document.querySelector('form[name="location_swap"]');
     const input = form.querySelector('#location_swap_new_location');
@@ -17,17 +17,28 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+        const confirmLabel = global.Translator.trans(/*@Desc("Swap location")*/ 'confirm', {}, 'admin_ui_frontend_udw_swap');
+        const title = global.Translator.trans(/*@Desc("Select location to be swapped with")*/ 'title', {}, 'admin_ui_frontend_udw_swap');
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
-            onConfirm,
-            onCancel,
-            confirmLabel: 'Swap location',
-            title: 'Select location to be swapped with',
-            multiple: false,
-            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-            restInfo: {token, siteaccess}
-        }, config)), udwContainer);
+        ReactDOM.render(
+            React.createElement(
+                eZ.modules.UniversalDiscovery,
+                Object.assign(
+                    {
+                        onConfirm,
+                        onCancel,
+                        confirmLabel,
+                        title,
+                        multiple: false,
+                        startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                        restInfo: { token, siteaccess },
+                    },
+                    config
+                )
+            ),
+            udwContainer
+        );
     };
 
-    btns.forEach(btn => btn.addEventListener('click', openUDW, false));
+    btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
 })();

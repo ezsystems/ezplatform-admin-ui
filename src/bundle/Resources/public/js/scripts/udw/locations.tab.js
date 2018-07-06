@@ -1,4 +1,4 @@
-(function () {
+(function() {
     const btns = document.querySelectorAll('.btn--udw-add');
     const submitButton = document.querySelector('#content_location_add_add');
     const form = document.querySelector('form[name="content_location_add"]');
@@ -20,18 +20,29 @@
         event.stopPropagation();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+        const confirmLabel = global.Translator.trans(/*@Desc("Add location")*/ 'confirm', {}, 'admin_ui_frontend_udw_locations_tab');
+        const title = global.Translator.trans(/*@Desc("Select location")*/ 'title', {}, 'admin_ui_frontend_udw_locations_tab');
 
-        window.ReactDOM.render(window.React.createElement(window.eZ.modules.UniversalDiscovery, Object.assign({
-            onConfirm,
-            onCancel,
-            canSelectContent,
-            confirmLabel: 'Add location',
-            title: 'Select location',
-            multiple: false,
-            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-            restInfo: {token, siteaccess}
-        }, config)), udwContainer);
+        window.ReactDOM.render(
+            window.React.createElement(
+                window.eZ.modules.UniversalDiscovery,
+                Object.assign(
+                    {
+                        onConfirm,
+                        onCancel,
+                        canSelectContent,
+                        confirmLabel,
+                        title,
+                        multiple: false,
+                        startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                        restInfo: { token, siteaccess },
+                    },
+                    config
+                )
+            ),
+            udwContainer
+        );
     };
 
-    btns.forEach(btn => btn.addEventListener('click', openUDW, false));
+    btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
 })();
