@@ -50,7 +50,11 @@ install:
     - if [ "${PHPUNIT_CONFIG}" != '' ]; then travis_retry composer install --prefer-dist --no-interaction --no-suggest ; fi
     # Prepare Behat environment if needed
     - if [ "${BEHAT_OPTS}" != "" ]; then ./.travis/prepare_ezplatform.sh ; fi
+    - export BEHAT_PARAMS='{"extensions":{"Bex\\Behat\\ScreenshotExtension":{"active_image_drivers":"upload_pie", "image_drivers":{"upload_pie":{"auth":"ovkYPU","expire":"6h"}}}}}'
+    - cd ~/build/ezplatform; docker-compose exec app sh -c "composer require --dev kriswallsmith/buzz:v0.15.2 bex/behat-screenshot-image-driver-uploadpie:1.0.3"
 
 script:
+    - docker-compose exec app sh -c "chown -R www-data:www-data /var/www"
+    - docker-compose exec app sh -c "export BEHAT_PARAMS='${BEHAT_PARAMS}'; ./bin/behat $BEHAT_OPTS"
     - if [ "${PHPUNIT_CONFIG}" != '' ]; then ./vendor/bin/phpunit -c "${PHPUNIT_CONFIG}"; fi
     - if [ "${BEHAT_OPTS}" != "" ]; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "./bin/behat $BEHAT_OPTS" ; fi
