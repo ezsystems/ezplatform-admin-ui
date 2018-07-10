@@ -28,6 +28,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\TextLine;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Time;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\URL;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\UserAccount;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\ContentRelationTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\DashboardTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\DoubleHeaderTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\LinkedListTable;
@@ -45,7 +46,7 @@ class PlatformElementFactory extends ElementFactory
      * @param string $elementName
      * @param null[]|string[] ...$parameters
      *
-     * @return AdminList|AdminUpdateForm|Breadcrumb|ContentField|ContentTypePicker|ContentUpdateForm|DateAndTimePopup|Dialog|DraftConflictDialog|DefaultFieldElement|LanguagePicker|LeftMenu|NavLinkTabs|Notification|PreviewNav|RightMenu|DashboardTable|DoubleHeaderTable|LinkedListTable|SimpleListTable|SimpleTable|SubItemsTable|SystemInfoTable|TrashTable|VerticalOrientedTable|UniversalDiscoveryWidget|UpperMenu
+     * @return AdminList|AdminUpdateForm|Breadcrumb|ContentField|ContentRelationTable|ContentTypePicker|ContentUpdateForm|DateAndTimePopup|Dialog|DraftConflictDialog|DefaultFieldElement|LanguagePicker|LeftMenu|NavLinkTabs|Notification|PreviewNav|RightMenu|DashboardTable|DoubleHeaderTable|LinkedListTable|SimpleListTable|SimpleTable|SubItemsTable|SystemInfoTable|TrashTable|VerticalOrientedTable|UniversalDiscoveryWidget|UpperMenu
      */
     public static function createElement(UtilityContext $context, string $elementName, ?string ...$parameters): Element
     {
@@ -138,6 +139,8 @@ class PlatformElementFactory extends ElementFactory
                 return new ContentRelationSingle($context, $parameters[0], $parameters[1]);
             case ContentRelationMultiple::ELEMENT_NAME:
                 return new ContentRelationMultiple($context, $parameters[0], $parameters[1]);
+            case ContentRelationTable::ELEMENT_NAME:
+                return new ContentRelationTable($context, $parameters[0]);
             case UserAccount::ELEMENT_NAME:
                 return new UserAccount($context, $parameters[0], $parameters[1]);
             case DefaultFieldElement::ELEMENT_NAME:

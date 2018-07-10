@@ -94,7 +94,7 @@ Scenario: Content can be published
 
 @javascript @common
 Scenario: Content edit draft can be deleted
-  Given I navigate to content "Test Article" of type "Article" in "Home"
+  Given I navigate to content "Test Article" of type "Article" in root path
   When I click on the edit action bar button "Edit"
     And I set content fields
       | label | value                     |
@@ -106,7 +106,7 @@ Scenario: Content edit draft can be deleted
 
 @javascript @common
 Scenario: Content draft can be edited from dashboard
-  Given I navigate to content "Test Article" of type "Article" in "Home"
+  Given I navigate to content "Test Article" of type "Article" in root path
     And I click on the edit action bar button "Edit"
     And I set content fields
       | label | value                     |
@@ -144,7 +144,7 @@ Scenario: Content edit draft can be saved
 
 @javascript @common
 Scenario: Content draft can be created and published through draft list modal
-  Given I navigate to content "Test Article" of type "Article" in "Home"
+  Given I navigate to content "Test Article" of type "Article" in root path
   When I click on the edit action bar button "Edit"
     And I start creating new draft from draft conflict modal
     And I set content fields
@@ -160,7 +160,7 @@ Scenario: Content draft can be created and published through draft list modal
 
 @javascript @common
 Scenario: Content can be previewed during edition
-  Given I navigate to content "Test Article edited3" of type "Article" in "Home"
+  Given I navigate to content "Test Article edited3" of type "Article" in root path
   When I click on the edit action bar button "Edit"
     And I click on the edit action bar button "Preview"
     And I go to "tablet" view in "Test Article edited3" preview
@@ -175,7 +175,7 @@ Scenario: Content can be previewed during edition
 
 @javascript @common
 Scenario: Content draft from draft list modal can be published
-  Given I navigate to content "Test Article edited3" of type "Article" in "Home"
+  Given I navigate to content "Test Article edited3" of type "Article" in root path
   When I click on the edit action bar button "Edit"
     And I start editing draft with ID "4" from draft conflict modal
     And I set content fields
@@ -191,7 +191,7 @@ Scenario: Content draft from draft list modal can be published
 
 @javascript @common
 Scenario: Content moving can be cancelled
-  Given I navigate to content "Test Article edited4" of type "Article" in "Home"
+  Given I navigate to content "Test Article edited4" of type "Article" in root path
   When I click on the edit action bar button "Move"
     And I select content "Media/Images" through UDW
     And I close the UDW window
@@ -204,7 +204,7 @@ Scenario: Content moving can be cancelled
 
 @javascript @common
 Scenario: Content can be moved
-  Given I navigate to content "Test Article edited4" of type "Article" in "Home"
+  Given I navigate to content "Test Article edited4" of type "Article" in root path
   When I click on the edit action bar button "Move"
     And I select content "Media/Images" through UDW
     And I confirm the selection in UDW
@@ -215,7 +215,7 @@ Scenario: Content can be moved
       | Title | Test Article edited4 |
       | Intro | Test article intro   |
     And breadcrumb shows "Media/Images/Test Article edited4" path
-    And going to "Home" there is no "Test Article edited4" "Article" on Sub-items list
+    And going to root path there is no "Test Article edited4" "Article" on Sub-items list
 
 @javascript @common
 Scenario: Content copying can be cancelled
@@ -228,7 +228,7 @@ Scenario: Content copying can be cancelled
       | label | value                |
       | Title | Test Article edited4 |
       | Intro | Test article intro   |
-    And going to "Home" there is no "Test Article edited4" "Article" on Sub-items list
+    And going to root path there is no "Test Article edited4" "Article" on Sub-items list
 
 @javascript @common
 Scenario: Content can be copied
@@ -245,14 +245,20 @@ Scenario: Content can be copied
     And going to "Media/Images" there is a "Test Article edited4" "Article" on Sub-items list
 
 @javascript @common
-Scenario Outline: Content can be moved to trash
-  Given I navigate to content "<itemName>" of type "<itemType>" in "<path>"
+Scenario: Content can be moved to trash from non-root location
+  Given I navigate to content "Test Article edited4" of type "Article" in "Media/Images"
   When I send content to trash
-  Then there's no "<itemType>" "<itemName>" on "<folder>" Sub-items list
+  Then there's no "Article" "Test Article edited4" on "Images" Sub-items list
+    And going to trash there is "Article" "Test Article edited4" on list
+
+  @javascript @common
+  Scenario Outline: Content can be moved to trash from root location
+    Given I navigate to content "<itemName>" of type "<itemType>" in root path
+    When I send content to trash
+    Then there's no "<itemType>" "<itemName>" on Sub-items list of root
     And going to trash there is "<itemType>" "<itemName>" on list
 
-  Examples:
-    | itemName             | itemType | path         | folder |
-    | Test Article edited4 | Article  | Media/Images | Images |
-    | Test Article edited4 | Article  | Home         | Home   |
-    | Test Article2        | Article  | Home         | Home   |
+    Examples:
+      | itemName             | itemType |
+      | Test Article edited4 | Article  |
+      | Test Article2        | Article  |

@@ -89,6 +89,15 @@ class NavigationContext extends BusinessContext
     }
 
     /**
+     * @Given I navigate to content :contentName of type :contentType in root path
+     */
+    public function iNavigateToContentInRoot(string $contentName, string $contentType)
+    {
+        $path = EzEnvironmentConstants::get('ROOT_CONTENT_NAME');
+        $this->iNavigateToContent($contentName, $contentType, $path);
+    }
+
+    /**
      * @Then breadcrumb shows :path path
      */
     public function verifyIfBreadcrumbShowsPath(string $path): void

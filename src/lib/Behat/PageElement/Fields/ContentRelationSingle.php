@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\ContentRelationTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 use PHPUnit\Framework\Assert;
 
@@ -18,14 +19,28 @@ class ContentRelationSingle extends EzFieldElement
 
     public const VIEW_PATTERN = '/Single relation:[\w\/,: ]* %s [\w \/,:]*/';
 
+    /** @var ContentRelationTable */
+    public $contentRelationTable;
+
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
         $this->fields['selectContent'] = '.ez-relations__cta-btn-label';
+
+        $this->contentRelationTable = ElementFactory::createElement($context, ContentRelationTable::ELEMENT_NAME, $this->fields['fieldContainer']);
     }
 
     public function setValue(array $parameters): void
     {
+        if (!$this->isRelationEmpty()) {
+            $itemName = explode('/', $parameters['value'])[substr_count($parameters['value'], '/')];
+            if (!$this->contentRelationTable->isElementInTable($itemName)) {
+                $this->removeActualRelation();
+            } else {
+                return;
+            }
+        }
+
         $selectContent = $this->context->findElement(
             sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['selectContent'])
         );
@@ -39,6 +54,13 @@ class ContentRelationSingle extends EzFieldElement
         $UDW->confirm();
     }
 
+    public function removeActualRelation(): void
+    {
+        $actualItemName = $this->contentRelationTable->getCellValue(1, 2);
+        $this->contentRelationTable->selectListElement($actualItemName);
+        $this->contentRelationTable->clickTrashIcon();
+    }
+
     public function getValue(): array
     {
         $fieldInput = $this->context->findElement(
@@ -47,7 +69,7 @@ class ContentRelationSingle extends EzFieldElement
 
         Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
 
-        return [$fieldInput->getText()];
+        return [$this->contentRelationTable->getCellValue(1, 2)];
     }
 
     public function verifyValueInItemView(array $values): void
@@ -60,5 +82,10 @@ class ContentRelationSingle extends EzFieldElement
             $this->context->findElement($this->fields['fieldContainer'])->getText(),
             'Field has wrong value'
         );
+    }
+
+    public function isRelationEmpty(): bool
+    {
+        return $this->context->isElementVisible(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['selectContent']));
     }
 }

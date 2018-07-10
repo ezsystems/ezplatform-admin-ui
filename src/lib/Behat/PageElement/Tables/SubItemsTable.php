@@ -21,6 +21,7 @@ class SubItemsTable extends Table
         $this->fields['listElementLink'] = $this->fields['list'] . ' .c-table-view-item__link';
         $this->fields['editButton'] = $this->fields['list'] . ' .c-table-view-item__btn--edit';
         $this->fields['noItems'] = $this->fields['list'] . ' .c-no-items';
+        $this->fields['showMoreResults'] = '.c-load-more__btn--load';
     }
 
     public function getTableCellValue(string $header, ?string $secondHeader = null): string
@@ -37,6 +38,11 @@ class SubItemsTable extends Table
         return $this->getCellValue($rowPosition, $columnPosition);
     }
 
+    public function isShowMoreResultsActive(): bool
+    {
+        return !$this->context->findElement($this->fields['showMoreResults'])->hasAttribute('disabled');
+    }
+
     /**
      * Click link element for sub-item with given name.
      *
@@ -44,7 +50,14 @@ class SubItemsTable extends Table
      */
     public function clickListElement(string $name): void
     {
-        Assert::assertTrue($this->isElementInTable($name), sprintf('There\'s no subitem %s on Sub-item list', $name));
+        $isElementInTable = $this->isElementInTable($name);
+        while (!$isElementInTable && $this->isShowMoreResultsActive()) {
+            $this->context->findElement($this->fields['showMoreResults'])->click();
+            $isElementInTable = $this->isElementInTable($name);
+        }
+
+        Assert::assertTrue($isElementInTable, sprintf('There\'s no subitem %s on Sub-item list', $name));
+
         $this->context->getElementByText($name, $this->fields['listElementLink'])->click();
     }
 

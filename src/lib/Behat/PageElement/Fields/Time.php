@@ -15,8 +15,9 @@ class Time extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Time';
+
     private const VIEW_TIME_FORMAT = 'g:i A';
-    private const TIME_FORMAT = 'G:i';
+    private const VALUE_TIME_FORMAT = 'G:i';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
@@ -39,10 +40,12 @@ class Time extends EzFieldElement
         $dateAndTimePopup = ElementFactory::createElement($this->context, DateAndTimePopup::ELEMENT_NAME);
         $dateAndTimePopup->setTime($time[0], $time[1]);
 
-        $expectedTimeValue = $parameters['value'];
+        $expectedTimeValue = date_format(date_create($parameters['value']), self::VALUE_TIME_FORMAT);
 
         $this->context->waitUntil($this->defaultTimeout, function () use ($expectedTimeValue) {
-            return $this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']))->getValue() === $expectedTimeValue;
+            $actualTimeValue = date_format(date_create($this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']))->getValue()), self::VALUE_TIME_FORMAT);
+
+            return $actualTimeValue === $expectedTimeValue;
         });
 
         // This click is closing the date and time picker, to finally ensure that value is set up.
@@ -62,10 +65,11 @@ class Time extends EzFieldElement
 
     public function verifyValueInItemView(array $values): void
     {
-        $actualTime = date_format(\DateTime::createFromFormat(self::VIEW_TIME_FORMAT, $this->context->findElement($this->fields['fieldContainer'])->getText()), self::TIME_FORMAT);
+        $actualTimeValue = date_format(date_create($this->context->findElement($this->fields['fieldContainer'])->getText()), self::VALUE_TIME_FORMAT);
+        $expectedTimeValue = date_format(date_create($values['value']), self::VALUE_TIME_FORMAT);
         Assert::assertEquals(
-            $values['value'],
-            $actualTime,
+            $expectedTimeValue,
+            $actualTimeValue,
             'Field has wrong value'
         );
     }
