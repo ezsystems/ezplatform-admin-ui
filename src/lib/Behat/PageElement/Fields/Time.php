@@ -15,6 +15,8 @@ class Time extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Time';
+    private const VIEW_TIME_FORMAT = 'g:i A';
+    private const TIME_FORMAT = 'G:i';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
@@ -60,9 +62,10 @@ class Time extends EzFieldElement
 
     public function verifyValueInItemView(array $values): void
     {
+        $actualTime = date_format(\DateTime::createFromFormat(self::VIEW_TIME_FORMAT, $this->context->findElement($this->fields['fieldContainer'])->getText()), self::TIME_FORMAT);
         Assert::assertEquals(
             $values['value'],
-            $this->context->findElement($this->fields['fieldContainer'])->getText(),
+            $actualTime,
             'Field has wrong value'
         );
     }
