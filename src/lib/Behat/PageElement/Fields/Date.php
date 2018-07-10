@@ -17,7 +17,7 @@ class Date extends EzFieldElement
     public const ELEMENT_NAME = 'Date';
 
     private const DATE_FORMAT = 'm/d/Y';
-    private const VIEW_DATE_FORMAT = 'd/m/Y';
+    private const VIEW_DATE_FORMAT = 'n/j/y';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {

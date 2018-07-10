@@ -17,7 +17,8 @@ class DateAndTime extends EzFieldElement
     public const ELEMENT_NAME = 'Date and time';
 
     private const DATE_FORMAT = 'm/d/Y';
-    private const VIEW_DATE_FORMAT = 'd/m/Y';
+    private const TIME_FORMAT = 'G:i';
+    private const VIEW_DATE__TIME_FORMAT = 'n/j/y, g:i A';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
@@ -64,9 +65,10 @@ class DateAndTime extends EzFieldElement
 
     public function verifyValueInItemView(array $values): void
     {
-        $expectedDate = date_format(\DateTime::createFromFormat(self::DATE_FORMAT, $values['date']), self::VIEW_DATE_FORMAT);
+        $expectedDate = \DateTime::createFromFormat(sprintf('%s %s', self::DATE_FORMAT, self::TIME_FORMAT), sprintf('%s %s', $values['date'], $values['time']));
+        $expectedDateFormatted = date_format($expectedDate, self::VIEW_DATE__TIME_FORMAT);
         Assert::assertEquals(
-            sprintf('%s %s', $expectedDate, $values['time']),
+            $expectedDateFormatted,
             $this->context->findElement($this->fields['fieldContainer'])->getText(),
             'Field has wrong value'
         );
