@@ -18,7 +18,7 @@ class DateAndTime extends EzFieldElement
 
     private const DATE_FORMAT = 'm/d/Y';
     private const TIME_FORMAT = 'G:i';
-    private const VIEW_DATE__TIME_FORMAT = 'n/j/y, g:i A';
+    private const VIEW_DATE_TIME_FORMAT = 'n/j/y, g:i A';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
@@ -39,13 +39,13 @@ class DateAndTime extends EzFieldElement
         $time = explode(':', $parameters['time']);
 
         $dateAndTimePopup = ElementFactory::createElement($this->context, DateAndTimePopup::ELEMENT_NAME);
-        $dateAndTimePopup->setDate(\DateTime::createFromFormat($this::DATE_FORMAT, $parameters['date']));
+        $dateAndTimePopup->setDate(date_create($parameters['date']));
         $dateAndTimePopup->setTime($time[0], $time[1]);
 
-        $expectedTimeValue = date_format(date_create(sprintf('%s, %s', $parameters['date'], $parameters['time'])), 'm/d/Y, g:i:s A');
+        $expectedDateAndTimeValue = date_format(date_create(sprintf('%s, %s', $parameters['date'], $parameters['time'])), self::VIEW_DATE_TIME_FORMAT);
 
-        $this->context->waitUntil($this->defaultTimeout, function () use ($expectedTimeValue) {
-            return $this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']))->getValue() === $expectedTimeValue;
+        $this->context->waitUntil($this->defaultTimeout, function () use ($expectedDateAndTimeValue) {
+            return date_format(date_create($this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']))->getValue()), self::VIEW_DATE_TIME_FORMAT) === $expectedDateAndTimeValue;
         });
 
         // This click is closing the date and time picker, to finally ensure that value is set up.
@@ -65,11 +65,11 @@ class DateAndTime extends EzFieldElement
 
     public function verifyValueInItemView(array $values): void
     {
-        $expectedDate = \DateTime::createFromFormat(sprintf('%s %s', self::DATE_FORMAT, self::TIME_FORMAT), sprintf('%s %s', $values['date'], $values['time']));
-        $expectedDateFormatted = date_format($expectedDate, self::VIEW_DATE__TIME_FORMAT);
+        $expectedDate = date_format(date_create(sprintf('%s, %s', $values['date'], $values['time'])), self::VIEW_DATE_TIME_FORMAT);
+        $actualDate = date_format(date_create($this->context->findElement($this->fields['fieldContainer'])->getText()), self::VIEW_DATE_TIME_FORMAT);
         Assert::assertEquals(
-            $expectedDateFormatted,
-            $this->context->findElement($this->fields['fieldContainer'])->getText(),
+            $expectedDate,
+            $actualDate,
             'Field has wrong value'
         );
     }

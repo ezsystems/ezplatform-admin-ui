@@ -38,12 +38,14 @@ class ContentField extends Element
 
         $fieldClass = $this->context->findElement(sprintf('%s %s', $fieldLocator, $this->fields['fieldValueContainer']))->getAttribute('class');
 
-        preg_match($this::FIELD_TYPE_CLASS_REGEX, $fieldClass, $matches);
+        if (!$fieldClass) {
+            $fieldType = 'ezboolean';
+        } else {
+            preg_match($this::FIELD_TYPE_CLASS_REGEX, $fieldClass, $matches);
 
-        $fieldType = explode('-', $matches[0])[0];
-
+            $fieldType = explode('-', $matches[0])[0];
+        }
         $fieldElement = ElementFactory::createElement($this->context, EzFieldElement::getFieldNameByInternalName($fieldType), $fieldLocator, $label);
-
         $fieldElement->verifyValueInItemView($value);
     }
 }

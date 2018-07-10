@@ -192,6 +192,14 @@ class ContentViewContext extends BusinessContext
     }
 
     /**
+     * @Then going to root path there is no :contentName :contentType on Sub-items list
+     */
+    public function goingToRootTheresNoSubItem(string $contentName, string $contentType): void
+    {
+        $this->goingToPathTheresNoSubItem(EzEnvironmentConstants::get('ROOT_CONTENT_NAME'), $contentName, $contentType);
+    }
+
+    /**
      * @Then going to :path there is a :contentName :contentType on Sub-items list
      */
     public function goingToPathTheresSubItem(string $path, string $contentName, string $contentType): void
