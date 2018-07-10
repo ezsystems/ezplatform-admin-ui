@@ -20,8 +20,17 @@ class ContentUpdateContext extends BusinessContext
         $updateItemPage = PageObjectFactory::createPage($this->utilityContext, ContentUpdateItemPage::PAGE_NAME, '');
         $hash = $table->getHash();
         foreach ($hash as $row) {
-            $updateItemPage->contentUpdateForm->fillFieldWithValue($row['label'], $row);
+            $values = $this->filterOutNonEmptyValues($row);
+            $updateItemPage->contentUpdateForm->fillFieldWithValue($row['label'], $values);
         }
+    }
+
+    private function filterOutNonEmptyValues(array $parameters): array
+    {
+        $values = $parameters;
+        unset($values['label']);
+
+        return array_filter($values, function ($element) { return !empty($element) || $element === 0;});
     }
 
     /**

@@ -13,11 +13,13 @@ class RichText extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Rich text';
+    private $clearAlloyEditorScript = 'CKEDITOR.instances.%s.setData(\'\')';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
         $this->fields['fieldInput'] = '.ez-data-source__richtext';
+        $this->fields['textarea'] = $this->fields['fieldContainer'] . ' textarea';
     }
 
     public function setValue(array $parameters): void
@@ -28,8 +30,10 @@ class RichText extends EzFieldElement
 
         Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
 
-        $fieldInput->focus();
+        $richtextId = $fieldInput->getAttribute('id');
 
+        $fieldInput->focus();
+        $this->context->getSession()->getDriver()->executeScript(sprintf($this->clearAlloyEditorScript, $richtextId));
         $fieldInput->setValue($parameters['value']);
     }
 

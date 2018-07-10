@@ -36,7 +36,7 @@ class Date extends EzFieldElement
         $fieldInput->click();
 
         $dateAndTimePopup = ElementFactory::createElement($this->context, DateAndTimePopup::ELEMENT_NAME);
-        $dateAndTimePopup->setDate(\DateTime::createFromFormat(self::DATE_FORMAT, $parameters['value']), self::DATE_FORMAT);
+        $dateAndTimePopup->setDate(date_create($parameters['value']), self::DATE_FORMAT);
     }
 
     public function getValue(): array
@@ -52,8 +52,8 @@ class Date extends EzFieldElement
 
     public function verifyValueInItemView(array $values): void
     {
-        $expectedDateTime = date_format(\DateTime::createFromFormat(self::DATE_FORMAT, $values['value']), self::DATE_FORMAT);
-        $actualDateTime = date_format(\DateTime::createFromFormat(self::VIEW_DATE_FORMAT, $this->context->findElement($this->fields['fieldContainer'])->getText()), self::DATE_FORMAT);
+        $expectedDateTime = date_format(date_create($values['value']), self::VIEW_DATE_FORMAT);
+        $actualDateTime = $this->context->findElement($this->fields['fieldContainer'])->getText();
         Assert::assertEquals(
             $expectedDateTime,
             $actualDateTime,

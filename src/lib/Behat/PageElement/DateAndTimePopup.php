@@ -27,6 +27,7 @@ class DateAndTimePopup extends Element
             'minuteSelector' => '.flatpickr-minute',
             'nextMonthSelector' => '.flatpickr-next-month',
             'currentDaySelector' => '.flatpickr-day.today',
+            'selectedDaySelector' => '.flatpickr-day.selected',
         ];
     }
 
@@ -36,9 +37,12 @@ class DateAndTimePopup extends Element
     public function setDate(DateTime $date, string $dateFormat = self::DATETIME_FORMAT): void
     {
         $convertedDate = $date->format('Y-m-d');
-
-        $currentDateElement = $this->context->findElement(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['currentDaySelector']));
-        $currentDate = DateTime::createFromFormat($dateFormat, $currentDateElement->getAttribute($this->fields['pickerDayValue']));
+        if ($this->context->isElementVisible(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['currentDaySelector']))) {
+            $referenceDateElement = $this->context->findElement(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['currentDaySelector']));
+        } else {
+            $referenceDateElement = $this->context->findElement(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['selectedDaySelector']));
+        }
+        $currentDate = DateTime::createFromFormat($dateFormat, $referenceDateElement->getAttribute($this->fields['pickerDayValue']));
         $interval = $date->diff($currentDate);
         $monthsDiff = 12 * $interval->y + $interval->m;
 
