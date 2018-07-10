@@ -33,7 +33,7 @@
         "fix-cs": "@php ./vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
     },
     "extra": {
-        "_ezplatform_branch_for_behat_tests": "2.2",
+        "_ezplatform_branch_for_behat_tests": "master",
         "branch-alias": {
             "dev-tmp_ci_branch": "2.2.x-dev",
             "dev-master": "1.2.x-dev"
