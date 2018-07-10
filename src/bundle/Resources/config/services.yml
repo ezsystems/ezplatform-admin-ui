@@ -15,6 +15,7 @@ imports:
     - { resource: services/utils.yml }
     - { resource: services/form_ui_action_mappers.yml }
     - { resource: services/views.yml }
+    - { resource: services/translation.yml }
 
 services:
     _defaults:

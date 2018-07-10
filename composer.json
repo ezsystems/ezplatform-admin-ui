@@ -22,7 +22,8 @@
         "ezsystems/ez-support-tools": "^0.2@dev",
         "ezsystems/ezplatform-design-engine": "^2.0@dev",
         "white-october/pagerfanta-bundle": "^1.1",
-        "knplabs/knp-menu-bundle": "^2.1"
+        "knplabs/knp-menu-bundle": "^2.1",
+        "mck89/peast": "^1.8"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "~2.7.1",
