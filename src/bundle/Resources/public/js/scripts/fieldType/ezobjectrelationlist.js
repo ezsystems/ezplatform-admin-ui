@@ -1,4 +1,4 @@
-(function(global, React, ReactDOM) {
+(function(global, React, ReactDOM, Translator) {
     const CLASS_FIELD_SINGLE = 'ez-field-edit--ezobjectrelation';
     const SELECTOR_FIELD_MULTIPLE = '.ez-field-edit--ezobjectrelationlist';
     const SELECTOR_FIELD_SINGLE = '.ez-field-edit--ezobjectrelation';
@@ -121,16 +121,12 @@
             event.preventDefault();
 
             const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-            const confirmLabel = global.Translator.trans(
+            const confirmLabel = Translator.trans(
                 /*@Desc("Confirm selection")*/ 'confirm',
                 {},
                 'admin_ui_frontend_field_type_ezobjectrelationlist'
             );
-            const title = global.Translator.trans(
-                /*@Desc("Select content")*/ 'title',
-                {},
-                'admin_ui_frontend_field_type_ezobjectrelationlist'
-            );
+            const title = Translator.trans(/*@Desc("Select content")*/ 'title', {}, 'admin_ui_frontend_field_type_ezobjectrelationlist');
 
             ReactDOM.render(
                 React.createElement(
@@ -272,4 +268,4 @@
 
         global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ? [...global.eZ.fieldTypeValidators, validator] : [validator];
     });
-})(window, window.React, window.ReactDOM);
+})(window, window.React, window.ReactDOM, window.Translator);

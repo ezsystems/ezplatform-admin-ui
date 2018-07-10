@@ -1,4 +1,4 @@
-(function() {
+(function(Translator) {
     const btns = document.querySelectorAll('.btn--udw-browse');
     const udwContainer = document.getElementById('react-udw');
     const token = document.querySelector('meta[name="CSRF-Token"]').content;
@@ -14,8 +14,8 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = global.Translator.trans(/*@Desc("View content")*/ 'confirm', {}, 'admin_ui_frontend_udw_browse');
-        const title = global.Translator.trans(/*@Desc("Browse content")*/ 'title', {}, 'admin_ui_frontend_udw_browse');
+        const confirmLabel = Translator.trans(/*@Desc("View content")*/ 'confirm', {}, 'admin_ui_frontend_udw_browse');
+        const title = Translator.trans(/*@Desc("Browse content")*/ 'title', {}, 'admin_ui_frontend_udw_browse');
 
         ReactDOM.render(
             React.createElement(
@@ -38,4 +38,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})();
+})(window.Translator);

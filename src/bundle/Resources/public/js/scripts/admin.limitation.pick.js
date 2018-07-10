@@ -1,4 +1,4 @@
-(function(global, doc) {
+(function(global, doc, Translator) {
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
@@ -15,8 +15,8 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = global.Translator.trans(/*@Desc("Add locations")*/ 'confirm', {}, 'admin_ui_frontend_admin_limitation_pick');
-        const title = global.Translator.trans(/*@Desc("Choose locations")*/ 'title', {}, 'admin_ui_frontend_admin_limitation_pick');
+        const confirmLabel = Translator.trans(/*@Desc("Add locations")*/ 'confirm', {}, 'admin_ui_frontend_admin_limitation_pick');
+        const title = Translator.trans(/*@Desc("Choose locations")*/ 'title', {}, 'admin_ui_frontend_admin_limitation_pick');
 
         ReactDOM.render(
             React.createElement(
@@ -39,4 +39,4 @@
     };
 
     [...doc.querySelectorAll('.ez-pick-location-limitation-button')].forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window, document);
+})(window, document, window.Translator);

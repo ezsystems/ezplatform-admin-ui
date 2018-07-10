@@ -1,4 +1,4 @@
-(function() {
+(function(Translator) {
     const btns = document.querySelectorAll('.btn--open-udw');
     const udwContainer = document.getElementById('react-udw');
     const token = document.querySelector('meta[name="CSRF-Token"]').content;
@@ -18,8 +18,8 @@
 
         const form = event.target.closest('form[name="trash_item_restore"]');
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = global.Translator.trans(/*@Desc("Restore")*/ 'confirm', {}, 'admin_ui_frontend_admin_trash_list');
-        const title = global.Translator.trans(
+        const confirmLabel = Translator.trans(/*@Desc("Restore")*/ 'confirm', {}, 'admin_ui_frontend_admin_trash_list');
+        const title = Translator.trans(
             /*@Desc("Select a location to restore you content item(s)")*/ 'title',
             {},
             'admin_ui_frontend_admin_trash_list'
@@ -80,4 +80,4 @@
     };
 
     checkboxes.forEach((checkbox) => checkbox.addEventListener('change', enableButtons, false));
-})();
+})(window.Translator);

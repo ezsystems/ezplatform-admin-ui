@@ -1,4 +1,4 @@
-(function() {
+(function(Translator) {
     const btns = document.querySelectorAll('.btn--udw-move');
     const form = document.querySelector('form[name="location_move"]');
     const input = form.querySelector('#location_move_new_parent_location');
@@ -18,8 +18,8 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = global.Translator.trans(/*@Desc("Move to location")*/ 'confirm', {}, 'admin_ui_frontend_udw_move');
-        const title = global.Translator.trans(/*@Desc("Select destination")*/ 'title', {}, 'admin_ui_frontend_udw_move');
+        const confirmLabel = Translator.trans(/*@Desc("Move to location")*/ 'confirm', {}, 'admin_ui_frontend_udw_move');
+        const title = Translator.trans(/*@Desc("Select destination")*/ 'title', {}, 'admin_ui_frontend_udw_move');
 
         window.ReactDOM.render(
             window.React.createElement(
@@ -44,4 +44,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})();
+})(window.Translator);

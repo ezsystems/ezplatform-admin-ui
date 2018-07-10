@@ -1,4 +1,4 @@
-(function(global, doc) {
+(function(global, doc, Translator) {
     [...doc.querySelectorAll('.ez-gmaplocation__map')].forEach((mapLocation) => {
         const latitude = parseFloat(mapLocation.dataset.latitude);
         const longitude = parseFloat(mapLocation.dataset.longitude);
@@ -10,7 +10,7 @@
             tap: false,
             center: [latitude, longitude],
         });
-        const attribution = global.Translator.trans(
+        const attribution = Translator.trans(
             /*@Desc("&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors")*/ 'attribution',
             {},
             'admin_ui_frontend_admin_location_load_map'
@@ -26,4 +26,4 @@
             attribution,
         }).addTo(map);
     });
-})(window, document);
+})(window, document, window.Translator);

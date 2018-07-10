@@ -1,4 +1,4 @@
-(function(global, doc, React, ReactDOM) {
+(function(global, doc, React, ReactDOM, Translator) {
     const btns = [...doc.querySelectorAll('.ez-btn--udw-copy-subtree')];
     const form = doc.querySelector('form[name="location_copy_subtree"]');
     const input = form.querySelector('#location_copy_subtree_new_parent_location');
@@ -16,7 +16,7 @@
     const openUDW = (event) => {
         event.preventDefault();
 
-        const title = global.Translator.trans(/*@Desc("Select location")*/ 'title', {}, 'admin_ui_frontend_udw_copy_subtree');
+        const title = Translator.trans(/*@Desc("Select location")*/ 'title', {}, 'admin_ui_frontend_udw_copy_subtree');
 
         ReactDOM.render(
             React.createElement(global.eZ.modules.UniversalDiscovery, {
@@ -33,4 +33,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window, document, window.React, window.ReactDOM);
+})(window, document, window.React, window.ReactDOM, window.Translator);

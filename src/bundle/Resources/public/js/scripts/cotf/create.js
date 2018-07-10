@@ -1,4 +1,4 @@
-(function(global, doc) {
+(function(global, doc, Translator) {
     const btns = doc.querySelectorAll('.ez-btn--cotf-create');
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
@@ -14,7 +14,7 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const title = global.Translator.trans(/*@Desc("Create your content")*/ 'title', {}, 'admin_ui_frontend_cotf_create');
+        const title = Translator.trans(/*@Desc("Create your content")*/ 'title', {}, 'admin_ui_frontend_cotf_create');
 
         ReactDOM.render(
             React.createElement(
@@ -38,4 +38,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window, document);
+})(window, document, window.Translator);
