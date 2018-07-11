@@ -260,4 +260,15 @@ class UtilityContext extends MinkContext
             return false;
         }
     }
+
+    public function waitUntilElementDisappears(string $cssSelector, int $timeout): void
+    {
+        try {
+            $this->waitUntil($timeout, function () use ($cssSelector, $timeout) {
+                return !$this->isElementVisible($cssSelector, $timeout);
+            });
+        } catch (Exception $e) {
+            throw new Exception(sprintf('Element with selector: %s did not disappear in %d seconds.', $cssSelector, $timeout));
+        }
+    }
 }
