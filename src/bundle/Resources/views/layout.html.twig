@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale|split('_')[0] }}">
     <head>
         <meta charset="UTF-8" />
         <meta name="CSRF-Token" content="{{ csrf_token('authenticate') }}" />
@@ -101,6 +101,15 @@
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
+
+        {% javascripts
+            'bundles/bazingajstranslation/js/translator.min.js'
+            'js/translations/config.js'
+            'js/translations/*.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
         {{ ezplatform_admin_ui_component_group('custom-admin-ui-modules') }}
         {{ ezplatform_admin_ui_component_group('custom-admin-ui-config') }}
         {%  javascripts
