@@ -11,7 +11,7 @@
             center: [latitude, longitude],
         });
         const attribution = Translator.trans(
-            /*@Desc("&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors")*/ 'attribution',
+            'attribution',
             {},
             'admin_ui_frontend_admin_location_load_map'
         );
