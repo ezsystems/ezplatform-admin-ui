@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="eec3b038bd8d1458bd414f844f33cae3cfd44894" resname="attribution">
-        <source>&amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt; contributors&quot;)</source>
-        <target state="new">&amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt; contributors&quot;)</target>
+        <source>attribution</source>
+        <target state="new">attribution</target>
         <note>key: attribution</note>
       </trans-unit>
     </body>
