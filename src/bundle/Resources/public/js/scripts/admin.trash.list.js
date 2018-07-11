@@ -18,11 +18,11 @@
 
         const form = event.target.closest('form[name="trash_item_restore"]');
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = Translator.trans(/*@Desc("Restore")*/ 'confirm', {}, 'admin_ui_frontend_admin_trash_list');
+        const confirmLabel = Translator.trans(/*@Desc("Restore")*/ 'confirm', {}, 'admin_ui_admin_trash_list');
         const title = Translator.trans(
             /*@Desc("Select a location to restore you content item(s)")*/ 'title',
             {},
-            'admin_ui_frontend_admin_trash_list'
+            'admin_ui_admin_trash_list'
         );
 
         ReactDOM.render(

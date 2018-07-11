@@ -17,8 +17,8 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = Translator.trans(/*@Desc("Swap location")*/ 'confirm', {}, 'admin_ui_frontend_udw_swap');
-        const title = Translator.trans(/*@Desc("Select location to be swapped with")*/ 'title', {}, 'admin_ui_frontend_udw_swap');
+        const confirmLabel = Translator.trans(/*@Desc("Swap location")*/ 'confirm', {}, 'admin_ui_udw_swap');
+        const title = Translator.trans(/*@Desc("Select location to be swapped with")*/ 'title', {}, 'admin_ui_udw_swap');
 
         ReactDOM.render(
             React.createElement(

@@ -14,7 +14,7 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const title = Translator.trans(/*@Desc("Create your content")*/ 'title', {}, 'admin_ui_frontend_cotf_create');
+        const title = Translator.trans(/*@Desc("Create your content")*/ 'title', {}, 'admin_ui_cotf_create');
 
         ReactDOM.render(
             React.createElement(

@@ -14,8 +14,8 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = Translator.trans(/*@Desc("View content")*/ 'confirm', {}, 'admin_ui_frontend_udw_browse');
-        const title = Translator.trans(/*@Desc("Browse content")*/ 'title', {}, 'admin_ui_frontend_udw_browse');
+        const confirmLabel = Translator.trans(/*@Desc("View content")*/ 'confirm', {}, 'admin_ui_udw_browse');
+        const title = Translator.trans(/*@Desc("Browse content")*/ 'title', {}, 'admin_ui_udw_browse');
 
         ReactDOM.render(
             React.createElement(

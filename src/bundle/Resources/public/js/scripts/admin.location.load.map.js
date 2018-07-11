@@ -13,7 +13,7 @@
         const attribution = Translator.trans(
             'attribution',
             {},
-            'admin_ui_frontend_admin_location_load_map'
+            'admin_ui_admin_location_load_map'
         );
 
         global.L.marker([latitude, longitude], {
