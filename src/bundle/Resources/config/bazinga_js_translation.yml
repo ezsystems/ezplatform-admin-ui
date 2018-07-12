@@ -1,6 +1,5 @@
 active_domains:
     - 'admin_ui_admin_limitation_pick'
-    - 'admin_ui_admin_location_load_map'
     - 'admin_ui_admin_trash_list'
     - 'admin_ui_cotf_create'
     - 'admin_ui_field_type_ezobjectrelationlist'

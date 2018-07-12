@@ -10,11 +10,6 @@
             tap: false,
             center: [latitude, longitude],
         });
-        const attribution = Translator.trans(
-            'attribution',
-            {},
-            'admin_ui_admin_location_load_map'
-        );
 
         global.L.marker([latitude, longitude], {
             icon: new window.L.Icon.Default({
@@ -23,7 +18,7 @@
         }).addTo(map);
 
         global.L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution,
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
     });
 })(window, document, window.Translator);

@@ -8,12 +8,12 @@
     <body>
       <trans-unit id="d0c4047caa5bbe26ed27248a3fc325cb8b972f6b" resname="confirm">
         <source>Swap location</source>
-        <target state="new">Swap location</target>
+        <target>Swap location</target>
         <note>key: confirm</note>
       </trans-unit>
       <trans-unit id="3c6de1b7dd91465d437ef415f94f36afc1fbc8a8" resname="title">
         <source>Select location to be swapped with</source>
-        <target state="new">Select location to be swapped with</target>
+        <target>Select location to be swapped with</target>
         <note>key: title</note>
       </trans-unit>
     </body>
