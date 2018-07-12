@@ -18,7 +18,7 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = Translator.trans(/*@Desc("Move to location")*/ 'confirm', {}, 'admin_ui_udw_move');
+        const confirmLabel = Translator.trans(/*@Desc("Move to location")*/ 'confirm.label', {}, 'admin_ui_udw_move');
         const title = Translator.trans(/*@Desc("Select destination")*/ 'title', {}, 'admin_ui_udw_move');
 
         window.ReactDOM.render(

@@ -1,4 +1,4 @@
-(function(global, doc, Translator) {
+(function(global, doc) {
     [...doc.querySelectorAll('.ez-gmaplocation__map')].forEach((mapLocation) => {
         const latitude = parseFloat(mapLocation.dataset.latitude);
         const longitude = parseFloat(mapLocation.dataset.longitude);
@@ -18,7 +18,7 @@
         }).addTo(map);
 
         global.L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(map);
     });
-})(window, document, window.Translator);
+})(window, document);

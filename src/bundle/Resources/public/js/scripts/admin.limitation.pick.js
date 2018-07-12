@@ -15,7 +15,7 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = Translator.trans(/*@Desc("Add locations")*/ 'confirm', {}, 'admin_ui_admin_limitation_pick');
+        const confirmLabel = Translator.trans(/*@Desc("Add locations")*/ 'confirm.label', {}, 'admin_ui_admin_limitation_pick');
         const title = Translator.trans(/*@Desc("Choose locations")*/ 'title', {}, 'admin_ui_admin_limitation_pick');
 
         ReactDOM.render(
