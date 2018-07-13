@@ -16,7 +16,7 @@
     const openUDW = (event) => {
         event.preventDefault();
 
-        const title = Translator.trans(/*@Desc("Select location")*/ 'title', {}, 'admin_ui_udw_copy_subtree');
+        const title = Translator.trans(/*@Desc("Select location")*/ 'subtree.title', {}, 'universal_discovery_widget');
 
         ReactDOM.render(
             React.createElement(global.eZ.modules.UniversalDiscovery, {

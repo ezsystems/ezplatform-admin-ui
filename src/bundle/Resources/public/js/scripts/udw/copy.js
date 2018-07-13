@@ -17,8 +17,8 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = Translator.trans(/*@Desc("Copy to location")*/ 'confirm.label', {}, 'admin_ui_udw_copy');
-        const title = Translator.trans(/*@Desc("Select location")*/ 'title', {}, 'admin_ui_udw_copy');
+        const confirmLabel = Translator.trans(/*@Desc("Copy to location")*/ 'copy.confirm.label', {}, 'universal_discovery_widget');
+        const title = Translator.trans(/*@Desc("Select location")*/ 'copy.title', {}, 'universal_discovery_widget');
 
         ReactDOM.render(
             React.createElement(

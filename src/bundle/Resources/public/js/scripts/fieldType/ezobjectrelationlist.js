@@ -122,11 +122,15 @@
 
             const config = JSON.parse(event.currentTarget.dataset.udwConfig);
             const confirmLabel = Translator.trans(
-                /*@Desc("Confirm selection")*/ 'confirm.label',
+                /*@Desc("Confirm selection")*/ 'ezobjectrelationlist.confirm.label',
                 {},
-                'admin_ui_field_type_ezobjectrelationlist'
+                'universal_discovery_widget'
             );
-            const title = Translator.trans(/*@Desc("Select content")*/ 'title', {}, 'admin_ui_field_type_ezobjectrelationlist');
+            const title = Translator.trans(
+                /*@Desc("Select content")*/ 'ezobjectrelationlist.title',
+                {},
+                'universal_discovery_widget'
+            );
 
             ReactDOM.render(
                 React.createElement(

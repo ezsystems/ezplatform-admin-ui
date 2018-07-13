@@ -20,8 +20,8 @@
         event.stopPropagation();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = Translator.trans(/*@Desc("Add location")*/ 'confirm.label', {}, 'admin_ui_udw_locations_tab');
-        const title = Translator.trans(/*@Desc("Select location")*/ 'title', {}, 'admin_ui_udw_locations_tab');
+        const confirmLabel = Translator.trans(/*@Desc("Add location")*/ 'add_location.confirm.label', {}, 'universal_discovery_widget');
+        const title = Translator.trans(/*@Desc("Select location")*/ 'add_location.title', {}, 'universal_discovery_widget');
 
         window.ReactDOM.render(
             window.React.createElement(

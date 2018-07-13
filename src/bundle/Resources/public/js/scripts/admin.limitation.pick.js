@@ -15,8 +15,13 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = Translator.trans(/*@Desc("Add locations")*/ 'confirm.label', {}, 'admin_ui_admin_limitation_pick');
-        const title = Translator.trans(/*@Desc("Choose locations")*/ 'title', {}, 'admin_ui_admin_limitation_pick');
+        const confirmLabel = Translator.trans(
+            /*@Desc("Add locations")*/ 'subtree_limitation.confirm.label', {}, 'universal_discovery_widget');
+        const title = Translator.trans(
+            /*@Desc("Choose locations")*/ 'subtree_limitation.title',
+            {},
+            'universal_discovery_widget'
+        );
 
         ReactDOM.render(
             React.createElement(
