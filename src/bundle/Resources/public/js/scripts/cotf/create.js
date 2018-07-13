@@ -1,4 +1,4 @@
-(function(global, doc, Translator) {
+(function(global, doc, eZ, React, ReactDOM, Translator) {
     const btns = doc.querySelectorAll('.ez-btn--cotf-create');
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
@@ -27,7 +27,7 @@
                         activeTab: 'create',
                         visibleTabs: ['create'],
                         multiple: false,
-                        startingLocationId: global.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                        startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                         restInfo: { token, siteaccess },
                     },
                     config
@@ -38,4 +38,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window, document, window.Translator);
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);

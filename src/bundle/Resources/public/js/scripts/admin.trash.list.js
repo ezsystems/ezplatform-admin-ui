@@ -1,8 +1,8 @@
-(function(Translator) {
-    const btns = document.querySelectorAll('.btn--open-udw');
-    const udwContainer = document.getElementById('react-udw');
-    const token = document.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
+(function(global, doc, eZ, React, ReactDOM, Translator) {
+    const btns = doc.querySelectorAll('.btn--open-udw');
+    const udwContainer = doc.getElementById('react-udw');
+    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (form, content) => {
         const field = form.querySelector('#trash_item_restore_location_location');
@@ -34,7 +34,7 @@
                         onCancel,
                         confirmLabel,
                         title,
-                        startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                        startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                         allowContainersOnly: true,
                         restInfo: { token, siteaccess },
                         multiple: false,
@@ -48,13 +48,13 @@
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
 
-    const checkboxes = [...document.querySelectorAll('form[name="trash_item_restore"] input[type="checkbox"]')];
-    const buttonRestore = document.querySelector('#trash_item_restore_restore');
-    const buttonRestoreUnderNewParent = document.querySelector('#trash_item_restore_location_select_content');
-    const buttonDelete = document.querySelector('#delete-trash-items');
+    const checkboxes = [...doc.querySelectorAll('form[name="trash_item_restore"] input[type="checkbox"]')];
+    const buttonRestore = doc.querySelector('#trash_item_restore_restore');
+    const buttonRestoreUnderNewParent = doc.querySelector('#trash_item_restore_location_select_content');
+    const buttonDelete = doc.querySelector('#delete-trash-items');
 
     const enableButtons = (event) => {
-        const deleteCheckbox = document.querySelector(
+        const deleteCheckbox = doc.querySelector(
             'form[name="trash_item_delete"] input[type="checkbox"][value="' + event.target.value + '"]'
         );
         const isNonEmptySelection = checkboxes.some((el) => el.checked);
@@ -80,4 +80,4 @@
     };
 
     checkboxes.forEach((checkbox) => checkbox.addEventListener('change', enableButtons, false));
-})(window.Translator);
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
