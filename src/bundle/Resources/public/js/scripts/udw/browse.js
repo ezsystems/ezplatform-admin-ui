@@ -1,8 +1,8 @@
-(function(Translator) {
-    const btns = document.querySelectorAll('.btn--udw-browse');
-    const udwContainer = document.getElementById('react-udw');
-    const token = document.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
+(function(global, doc, eZ, React, ReactDOM, Translator) {
+    const btns = doc.querySelectorAll('.btn--udw-browse');
+    const udwContainer = doc.getElementById('react-udw');
+    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (items) => {
         closeUDW();
@@ -38,4 +38,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window.Translator);
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);

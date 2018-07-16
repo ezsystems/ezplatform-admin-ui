@@ -1,4 +1,4 @@
-(function(global, React, ReactDOM, Translator) {
+(function(global, doc, eZ, React, ReactDOM, Translator) {
     const CLASS_FIELD_SINGLE = 'ez-field-edit--ezobjectrelation';
     const SELECTOR_FIELD_MULTIPLE = '.ez-field-edit--ezobjectrelationlist';
     const SELECTOR_FIELD_SINGLE = '.ez-field-edit--ezobjectrelation';
@@ -8,7 +8,7 @@
     const SELECTOR_ROW = '.ez-relations__item';
     const EVENT_CUSTOM = 'validateInput';
 
-    class EzObjectRelationListValidator extends global.eZ.BaseFieldValidator {
+    class EzObjectRelationListValidator extends eZ.BaseFieldValidator {
         /**
          * Validates the input
          *
@@ -27,23 +27,23 @@
 
             if (isRequired && isEmpty) {
                 result.isError = true;
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             } else if (!isEmpty && !hasCorrectValues) {
                 result.isError = true;
-                result.errorMessage = global.eZ.errors.invalidValue.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.invalidValue.replace('{fieldName}', label);
             }
 
             return result;
         }
     }
 
-    const singleObjectRelationFields = document.querySelectorAll(SELECTOR_FIELD_SINGLE);
+    const singleObjectRelationFields = doc.querySelectorAll(SELECTOR_FIELD_SINGLE);
 
     if (singleObjectRelationFields.length) {
         console.warn('EzObjectRelation fieldtype is deprecated. Please, use EzObjectRelationList fieldtype instead.');
     }
 
-    [...document.querySelectorAll(SELECTOR_FIELD_MULTIPLE), ...singleObjectRelationFields].forEach((fieldContainer) => {
+    [...doc.querySelectorAll(SELECTOR_FIELD_MULTIPLE), ...singleObjectRelationFields].forEach((fieldContainer) => {
         const validator = new EzObjectRelationListValidator({
             classInvalid: 'is-invalid',
             fieldContainer,
@@ -63,9 +63,9 @@
                 },
             ],
         });
-        const udwContainer = document.getElementById('react-udw');
-        const token = document.querySelector('meta[name="CSRF-Token"]').content;
-        const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
+        const udwContainer = doc.getElementById('react-udw');
+        const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+        const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
         const sourceInput = fieldContainer.querySelector(SELECTOR_INPUT);
         const relationsContainer = fieldContainer.querySelector('.ez-relations__list');
         const relationsWrapper = fieldContainer.querySelector('.ez-relations__wrapper');
@@ -77,7 +77,7 @@
         const startingLocationId =
             relationsContainer.dataset.defaultLocation !== '0'
                 ? parseInt(relationsContainer.dataset.defaultLocation, 10)
-                : window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId;
+                : eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId;
         const allowedContentTypes = relationsContainer.dataset.allowedContentTypes.split(',').filter((item) => item.length);
         const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
         const renderRows = (items) => items.forEach((...args) => relationsContainer.insertAdjacentHTML('beforeend', renderRow(...args)));
@@ -126,15 +126,11 @@
                 {},
                 'universal_discovery_widget'
             );
-            const title = Translator.trans(
-                /*@Desc("Select content")*/ 'ezobjectrelationlist.title',
-                {},
-                'universal_discovery_widget'
-            );
+            const title = Translator.trans(/*@Desc("Select content")*/ 'ezobjectrelationlist.title', {}, 'universal_discovery_widget');
 
             ReactDOM.render(
                 React.createElement(
-                    global.eZ.modules.UniversalDiscovery,
+                    eZ.modules.UniversalDiscovery,
                     Object.assign(
                         {
                             onConfirm,
@@ -246,7 +242,7 @@
                 frag.appendChild(item.row);
 
                 return frag;
-            }, document.createDocumentFragment());
+            }, doc.createDocumentFragment());
 
             emptyRelationsContainer();
             relationsContainer.appendChild(fragment);
@@ -270,6 +266,6 @@
 
         validator.init();
 
-        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ? [...global.eZ.fieldTypeValidators, validator] : [validator];
+        eZ.fieldTypeValidators = eZ.fieldTypeValidators ? [...eZ.fieldTypeValidators, validator] : [validator];
     });
-})(window, window.React, window.ReactDOM, window.Translator);
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);

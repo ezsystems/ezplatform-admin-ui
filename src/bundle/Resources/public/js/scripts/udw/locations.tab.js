@@ -1,11 +1,11 @@
-(function(Translator) {
-    const btns = document.querySelectorAll('.btn--udw-add');
-    const submitButton = document.querySelector('#content_location_add_add');
-    const form = document.querySelector('form[name="content_location_add"]');
+(function(global, doc, eZ, React, ReactDOM, Translator) {
+    const btns = doc.querySelectorAll('.btn--udw-add');
+    const submitButton = doc.querySelector('#content_location_add_add');
+    const form = doc.querySelector('form[name="content_location_add"]');
     const input = form.querySelector('#content_location_add_new_locations');
-    const udwContainer = document.getElementById('react-udw');
-    const token = document.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
+    const udwContainer = doc.getElementById('react-udw');
+    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (items) => {
         closeUDW();
@@ -23,9 +23,9 @@
         const confirmLabel = Translator.trans(/*@Desc("Add location")*/ 'add_location.confirm.label', {}, 'universal_discovery_widget');
         const title = Translator.trans(/*@Desc("Select location")*/ 'add_location.title', {}, 'universal_discovery_widget');
 
-        window.ReactDOM.render(
-            window.React.createElement(
-                window.eZ.modules.UniversalDiscovery,
+        ReactDOM.render(
+            React.createElement(
+                eZ.modules.UniversalDiscovery,
                 Object.assign(
                     {
                         onConfirm,
@@ -34,7 +34,7 @@
                         confirmLabel,
                         title,
                         multiple: false,
-                        startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                        startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                         restInfo: { token, siteaccess },
                     },
                     config
@@ -45,4 +45,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window.Translator);
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);

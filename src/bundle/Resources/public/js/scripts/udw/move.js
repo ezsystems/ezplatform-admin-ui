@@ -1,10 +1,10 @@
-(function(Translator) {
-    const btns = document.querySelectorAll('.btn--udw-move');
-    const form = document.querySelector('form[name="location_move"]');
+(function(global, doc, eZ, React, ReactDOM, Translator) {
+    const btns = doc.querySelectorAll('.btn--udw-move');
+    const form = doc.querySelector('form[name="location_move"]');
     const input = form.querySelector('#location_move_new_parent_location');
-    const udwContainer = document.getElementById('react-udw');
-    const token = document.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
+    const udwContainer = doc.getElementById('react-udw');
+    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (items) => {
         closeUDW();
@@ -21,9 +21,9 @@
         const confirmLabel = Translator.trans(/*@Desc("Move to location")*/ 'move.confirm.label', {}, 'universal_discovery_widget');
         const title = Translator.trans(/*@Desc("Select destination")*/ 'move.title', {}, 'universal_discovery_widget');
 
-        window.ReactDOM.render(
-            window.React.createElement(
-                window.eZ.modules.UniversalDiscovery,
+        ReactDOM.render(
+            React.createElement(
+                eZ.modules.UniversalDiscovery,
                 Object.assign(
                     {
                         onConfirm,
@@ -44,4 +44,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window.Translator);
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);

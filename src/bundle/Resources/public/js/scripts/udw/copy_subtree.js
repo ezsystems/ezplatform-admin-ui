@@ -1,4 +1,4 @@
-(function(global, doc, React, ReactDOM, Translator) {
+(function(global, doc, eZ, React, ReactDOM, Translator) {
     const btns = [...doc.querySelectorAll('.ez-btn--udw-copy-subtree')];
     const form = doc.querySelector('form[name="location_copy_subtree"]');
     const input = form.querySelector('#location_copy_subtree_new_parent_location');
@@ -33,4 +33,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window, document, window.React, window.ReactDOM, window.Translator);
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
