@@ -9,24 +9,27 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
 use EzSystems\EzPlatformAdminUi\UI\Config\Aggregator;
+use ProxyManager\Factory\LazyLoadingValueHolderFactory;
+use ProxyManager\Proxy\LazyLoadingInterface;
 use Twig\Environment;
 use Twig_Extension;
 use Twig_Extension_GlobalsInterface;
+use EzSystems\EzPlatformAdminUi\UI\Config\ConfigWrapper;
 
 /**
  * Exports `admin_ui_config` providing UI Config as a global Twig variable.
  */
 class UiConfigExtension extends Twig_Extension implements Twig_Extension_GlobalsInterface
 {
-    /** @var Environment */
+    /** @var \Twig\Environment */
     protected $twig;
 
-    /** @var Aggregator */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Config\Aggregator */
     protected $aggregator;
 
     /**
-     * @param Environment $twig
-     * @param Aggregator $aggregator
+     * @param \Twig\Environment $twig
+     * @param \EzSystems\EzPlatformAdminUi\UI\Config\Aggregator $aggregator
      */
     public function __construct(Environment $twig, Aggregator $aggregator)
     {
@@ -39,6 +42,25 @@ class UiConfigExtension extends Twig_Extension implements Twig_Extension_Globals
      */
     public function getGlobals(): array
     {
-        return ['admin_ui_config' => $this->aggregator->getConfig()];
+        return [
+            'admin_ui_config' => $this->createConfigWrapper(),
+        ];
+    }
+
+    /**
+     * Create lazy loaded configuration.
+     *
+     * @return \EzSystems\EzPlatformAdminUi\UI\Config\ConfigWrapper
+     */
+    private function createConfigWrapper(): ConfigWrapper
+    {
+        $factory = new LazyLoadingValueHolderFactory();
+        $initializer = function (& $wrappedObject, LazyLoadingInterface $proxy, $method, array $parameters, & $initializer) {
+            $initializer = null;
+            $wrappedObject = new ConfigWrapper($this->aggregator->getConfig());
+            return true;
+        };
+
+        return $factory->createProxy(ConfigWrapper::class, $initializer);
     }
 }
