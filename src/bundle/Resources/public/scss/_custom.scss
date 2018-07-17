@@ -1,5 +1,5 @@
 // eZ transition function
-$ez-admin-transition: cubic-bezier(.25, .8, .25, 1);
+$ez-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
 
 /* eZ colors */
 $ez-color-primary: #f15a10;
@@ -37,7 +37,7 @@ $ez-ground-primary-inverted: #565e63;
 $ez-color-warning-pale: #fceaec;
 $ez-color-warning-dark: #aa0000;
 
-$ez-alloyeditor-color-hover: #65B6F0;
+$ez-alloyeditor-color-hover: #65b6f0;
 
 $ez-pagination-bg: transparent;
 $ez-pagination-margin: 0.25rem;
@@ -67,7 +67,7 @@ $grays: (
     600: $ez-color-base-pale,
     700: $ez-color-base-light,
     800: $ez-color-base-medium,
-    900: $ez-color-base-dark
+    900: $ez-color-base-dark,
 );
 
 $blue: $ez-color-secondary;
@@ -94,7 +94,7 @@ $colors: (
     indigo: $indigo,
     purple: $purple,
     pink: $pink,
-    cyan: $cyan
+    cyan: $cyan,
 );
 
 $theme-colors: (
@@ -105,10 +105,11 @@ $theme-colors: (
     danger: $ez-color-danger,
     light: $ez-ground-base-pale,
     dark: $ez-color-base-dark,
-    info: $cyan
+    info: $cyan,
 );
 
 // Typography
+$base-font-size: 16px;
 $h1-font-size: 1.75rem !default;
 $h2-font-size: 1.5rem !default;
 $h3-font-size: 1.375rem !default;
@@ -119,7 +120,7 @@ $h6-font-size: 1.0625rem !default;
 $headings-font-weight: 700;
 
 // Fonts
-$font-family-sans-serif: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-sans-serif: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
 
 // Tables
 $table-bg: $white;
