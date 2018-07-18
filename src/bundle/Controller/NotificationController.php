@@ -134,6 +134,7 @@ class NotificationController extends Controller
             'page' => $page,
             'pagination' => $pagination,
             'notifications' => $notifications,
+            'pager' => $pagerfanta,
         ])->getContent());
     }
 

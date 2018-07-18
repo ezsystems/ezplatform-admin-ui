@@ -12,9 +12,20 @@
     </tr>
     </thead>
     <tbody class="n-table__body">
+    {% if pager.count is same as(0) %}
+        <tr>
+            <td colspan="4">
+                <span class="ez-table-no-content mb-0 py-1 pl-0">
+                    {{ 'bookmark.list.empty'|trans|desc('The notification list is empty.') }}
+                </span>
+            </td>
+        </tr>
+    {% else %}
         {{ notifications|raw }}
+    {% endif %}
     </tbody>
 
 </table>
-
-{{ pagination|raw }}
+{% if pager.haveToPaginate %}
+    {{ pagination|raw }}
+{% endif %}
