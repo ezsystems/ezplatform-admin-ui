@@ -16,8 +16,6 @@ class ConfigWrapper implements \ArrayAccess, \JsonSerializable
     private $config;
 
     /**
-     * Config constructor.
-     *
      * @param array $config
      */
     public function __construct(array $config)
@@ -37,12 +35,12 @@ class ConfigWrapper implements \ArrayAccess, \JsonSerializable
 
     public function offsetSet($offset, $value)
     {
-        throw new RuntimeException("Configuration is readonly");
+        throw new RuntimeException('Configuration is readonly');
     }
 
     public function offsetUnset($offset)
     {
-        throw new RuntimeException("Configuration is readonly");
+        throw new RuntimeException('Configuration is readonly');
     }
 
     public function jsonSerialize()

@@ -55,9 +55,10 @@ class UiConfigExtension extends Twig_Extension implements Twig_Extension_Globals
     private function createConfigWrapper(): ConfigWrapper
     {
         $factory = new LazyLoadingValueHolderFactory();
-        $initializer = function (& $wrappedObject, LazyLoadingInterface $proxy, $method, array $parameters, & $initializer) {
+        $initializer = function (&$wrappedObject, LazyLoadingInterface $proxy, $method, array $parameters, &$initializer) {
             $initializer = null;
             $wrappedObject = new ConfigWrapper($this->aggregator->getConfig());
+
             return true;
         };
 
