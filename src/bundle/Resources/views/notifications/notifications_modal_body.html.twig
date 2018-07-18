@@ -1,0 +1,20 @@
+{% trans_default_domain 'notifications' %}
+
+<table
+    data-notifications="{{ path('ezplatform.notifications.render') }}"
+    data-notifications-count="{{ path('ezplatform.notifications.count') }}"
+    class="table n-table--notifications">
+    <thead>
+    <tr>
+        <th>{{ 'notification.type'|trans|desc('Type') }}</th>
+        <th>{{ 'notification.description'|trans|desc('Description') }}</th>
+        <th>{{ 'notification.date'|trans|desc('Date') }}</th>
+    </tr>
+    </thead>
+    <tbody class="n-table__body">
+        {{ notifications|raw }}
+    </tbody>
+
+</table>
+
+{{ pagination|raw }}

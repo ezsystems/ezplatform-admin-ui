@@ -54,6 +54,7 @@ class Pagination extends AbstractParser
                     ->scalarNode('content_custom_url_limit')->isRequired()->end()
                     ->scalarNode('content_role_limit')->isRequired()->end()
                     ->scalarNode('content_policy_limit')->isRequired()->end()
+                    ->scalarNode('notification_limit')->isRequired()->end()
                 ->end()
             ->end();
     }
@@ -83,6 +84,7 @@ class Pagination extends AbstractParser
             'content_custom_url_limit',
             'content_role_limit',
             'content_policy_limit',
+            'notification_limit',
         ];
 
         foreach ($keys as $key) {

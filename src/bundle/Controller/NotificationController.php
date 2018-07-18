@@ -10,9 +10,14 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\NotificationService;
 use eZ\Publish\Core\Notification\Renderer\Registry;
+use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\NotificationAdapter;
+use EzSystems\EzPlatformAdminUiBundle\View\EzPagerfantaView;
+use EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class NotificationController extends Controller
 {
@@ -22,16 +27,28 @@ class NotificationController extends Controller
     /** @var \eZ\Publish\Core\Notification\Renderer\Registry */
     protected $registry;
 
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    protected $translator;
+
+    /** @var int */
+    protected $notificationPaginationLimit;
+
     /**
      * @param \eZ\Publish\API\Repository\NotificationService $notificationService
      * @param \eZ\Publish\Core\Notification\Renderer\Registry $registry
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param int $notificationPaginationLimit
      */
     public function __construct(
         NotificationService $notificationService,
-        Registry $registry
+        Registry $registry,
+        TranslatorInterface $translator,
+        int $notificationPaginationLimit
     ) {
         $this->notificationService = $notificationService;
         $this->registry = $registry;
+        $this->translator = $translator;
+        $this->notificationPaginationLimit = $notificationPaginationLimit;
     }
 
     /**
@@ -81,6 +98,43 @@ class NotificationController extends Controller
         }
 
         return new Response($html);
+    }
+
+    /**
+     * @param int $page
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function renderPaginatedNotificationsAction(int $page): Response
+    {
+        $pagerfanta = new Pagerfanta(
+            new NotificationAdapter($this->notificationService)
+        );
+        $pagerfanta->setAllowOutOfRangePages(true);
+        $pagerfanta->setCurrentPage($page);
+        $pagerfanta->setMaxPerPage($this->notificationPaginationLimit);
+
+        $notifications = '';
+        foreach ($pagerfanta->getCurrentPageResults() as $notification) {
+            if ($this->registry->hasRenderer($notification->type)) {
+                $renderer = $this->registry->getRenderer($notification->type);
+                $notifications .= $renderer->render($notification);
+            }
+        }
+
+        $routeGenerator = function ($page) {
+            return $this->generateUrl('ezplatform.paginated.notifications.render', [
+                'page' => $page,
+            ]);
+        };
+
+        $pagination = (new EzPagerfantaView(new EzPagerfantaTemplate($this->translator)))->render($pagerfanta, $routeGenerator);
+
+        return new Response($this->render('@ezdesign/notifications/notifications_modal_body.html.twig', [
+            'page' => $page,
+            'pagination' => $pagination,
+            'notifications' => $notifications,
+        ])->getContent());
     }
 
     /**

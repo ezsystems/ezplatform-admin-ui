@@ -24,24 +24,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table
-                    data-notifications="{{ path('ezplatform.notifications.render') }}"
-                    data-notifications-count="{{ path('ezplatform.notifications.count') }}"
-                    class="table n-table--notifications">
-                    <thead>
-                    <tr>
-                        <th>{{ 'notification.type'|trans|desc('Type') }}</th>
-                        <th>{{ 'notification.description'|trans|desc('Description') }}</th>
-                        <th>{{ 'notification.date'|trans|desc('Date') }}</th>
-                    </tr>
-                    </thead>
-                    <tbody class="n-table__body">
-                    {{ render(controller('EzPlatformAdminUiBundle:Notification:renderNotifications', {
-                        'limit': 5,
-                        'offset': 0,
-                    })) }}
-                    </tbody>
-                </table>
+                {{ render(controller('EzPlatformAdminUiBundle:Notification:renderPaginatedNotifications', {
+                    'page': 1,
+                })) }}
             </div>
         </div>
     </div>
