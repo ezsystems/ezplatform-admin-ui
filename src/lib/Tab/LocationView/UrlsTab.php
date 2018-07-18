@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\URLAliasService;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -130,20 +131,25 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
 
         $customUrlAddForm = $this->createCustomUrlAddForm($location);
         $customUrlRemoveForm = $this->createCustomUrlRemoveForm($location, $customUrlPagerfanta->getCurrentPageResults());
-        $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
 
         $canEditCustomUrl = $this->permissionResolver->hasAccess('content', 'urltranslator');
 
         $viewParameters = [
             'form_custom_url_add' => $customUrlAddForm->createView(),
             'form_custom_url_remove' => $customUrlRemoveForm->createView(),
-            'parent_name' => $parentLocation->contentInfo->name,
             'custom_urls_pager' => $customUrlPagerfanta,
             'custom_urls_pagination_params' => $customUrlsPaginationParams,
             'system_urls_pager' => $systemUrlPagerfanta,
             'system_urls_pagination_params' => $systemUrlsPaginationParams,
             'can_edit_custom_url' => $canEditCustomUrl,
         ];
+
+        try {
+            $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
+            $viewParameters['parent_name'] = $parentLocation->contentInfo->name;
+        } catch (UnauthorizedException $exception) {
+            $viewParameters['parent_name'] = null;
+        }
 
         return $this->twig->render(
             '@ezdesign/content/tab/urls.html.twig',
