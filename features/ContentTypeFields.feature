@@ -40,9 +40,9 @@ Feature: Content fields setting and editing
       | ezstring             | Text line                    | value     | Lorem ipsum           |            |                       |         |          | Lorem ipsum               |
       | eztime               | Time                         | value     | 14:45                 |            |                       |         |          | 2:45:00 pm                |
       | ezurl                | URL                          | text      | Test URL              | url        | http://www.google.com |         |          | Test URL                  |
-#      | ezmedia              | Media                        | value   | value         |        |                   |        |                   |
-#      | ezimage              | Image                        | value   | value         |        |                   |        |                   |
-#      | ezbinaryfile         | File                         | value   | value         |        |                   |        |                   |
+      | ezmedia              | Media                        | value     | video1.mp4.zip            |            |                       |         |          | video1.mp4                |
+      | ezimage              | Image                        | value     | image1.png.zip            |            |                       |         |          | image1.png                |
+      | ezbinaryfile         | File                         | value     | binary1.txt.zip           |            |                       |         |          | binary1.txt               |
 
   @javascript @common @EZP-29291-excluded
   Scenario Outline: Edit content item with given field
@@ -80,3 +80,6 @@ Feature: Content fields setting and editing
       | Text line                    | value     | Edited Lorem ipsum           |            |                          |         |          | Lorem ipsum               | Edited Lorem ipsum           |
       | Time                         | value     | 15:15                        |            |                          |         |          | 2:45:00 pm                | 3:15:00 pm                   |
       | URL                          | text      | Edited Test URL              | url        | http://www.ez.no         |         |          | Test URL                  | Edited Test URL              |
+      | Media                        | value     | video2.mp4.zip                   |            |                          |         |          | video1.mp4                | video2.mp4                   |
+      | Image                        | value     | image2.png.zip                   |            |                          |         |          | image1.png                | image2.png                   |
+      | File                         | value     | binary2.txt.zip                  |            |                          |         |          | binary1.txt               | binary2.txt                  |
