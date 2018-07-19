@@ -16,11 +16,14 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Date;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\DateAndTime;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\DefaultFieldElement;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\EmailAddress;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\File;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\FloatField;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Image;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Integer;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\ISBN;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Keywords;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\MapLocation;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Media;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\RichText;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Selection;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\TextBlock;
@@ -135,6 +138,12 @@ class PlatformElementFactory extends ElementFactory
                 return new Time($context, $parameters[0], $parameters[1]);
             case URL::ELEMENT_NAME:
                 return new URL($context, $parameters[0], $parameters[1]);
+            case Media::ELEMENT_NAME:
+                return new Media($context, $parameters[0], $parameters[1]);
+            case Image::ELEMENT_NAME:
+                return new Image($context, $parameters[0], $parameters[1]);
+            case File::ELEMENT_NAME:
+                return new File($context, $parameters[0], $parameters[1]);
             case ContentRelationSingle::ELEMENT_NAME:
                 return new ContentRelationSingle($context, $parameters[0], $parameters[1]);
             case ContentRelationMultiple::ELEMENT_NAME:

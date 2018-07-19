@@ -271,4 +271,24 @@ class UtilityContext extends MinkContext
             throw new Exception(sprintf('Element with selector: %s did not disappear in %d seconds.', $cssSelector, $timeout));
         }
     }
+
+    /**
+     * Uploads file from location stored in 'files_path' to the disc on remote browser machine. Mink require uploaded file to be zip archive.
+     *
+     * @param string $localFileName
+     *
+     * @return string
+     */
+    public function uploadFileToRemoteSpace(string $localFileName): string
+    {
+        if (!preg_match('#[\w\\\/\.]*\.zip$#', $localFileName)) {
+            throw new \InvalidArgumentException('Zip archive required to upload to remote browser machine.');
+        }
+
+        $localFile = sprintf('%s%s', $this->getMinkParameter('files_path'), $localFileName);
+
+        return $this->getSession()->getDriver()->getWebDriverSession()->file([
+            'file' => base64_encode(file_get_contents($localFile)),
+        ]);
+    }
 }

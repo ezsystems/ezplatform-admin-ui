@@ -1,5 +1,9 @@
 # This file is meant to be imported from ezplatform's behat.yml.dist.
 # All path are relative to the root ezplatform directory.
+default:
+    extensions:
+        Behat\MinkExtension:
+            files_path: '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/src/lib/Behat/TestFiles/'
 adminui:
     suites:
         adminui:
