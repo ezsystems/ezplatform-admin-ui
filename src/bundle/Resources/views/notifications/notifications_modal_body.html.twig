@@ -1,8 +1,9 @@
 {% trans_default_domain 'notifications' %}
 
 <table
-    data-notifications="{{ path('ezplatform.notifications.render') }}"
+    data-notifications="{{ path('ezplatform.paginated.notifications.render') }}"
     data-notifications-count="{{ path('ezplatform.notifications.count') }}"
+    data-notifications-total="{{ pager.nbResults }}"
     class="table n-table--notifications">
     <thead>
     <tr>
@@ -24,8 +25,16 @@
         {{ notifications|raw }}
     {% endif %}
     </tbody>
-
 </table>
 {% if pager.haveToPaginate %}
-    {{ pagination|raw }}
+    <div class="row justify-content-center align-items-center mb-2 mt-3">
+        <span class="ez-pagination__text">
+            {{ 'pagination.viewing'|trans({
+                '%viewing%': pager.currentPageResults|length,
+                '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+        </span>
+    </div>
+    <div class="row justify-content-center align-items-center ez-pagination__btn">
+        {{ pagination|raw }}
+    </div>
 {% endif %}
