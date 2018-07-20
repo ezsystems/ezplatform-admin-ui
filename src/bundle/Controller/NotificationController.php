@@ -110,9 +110,8 @@ class NotificationController extends Controller
         $pagerfanta = new Pagerfanta(
             new NotificationAdapter($this->notificationService)
         );
-        $pagerfanta->setAllowOutOfRangePages(true);
-        $pagerfanta->setCurrentPage($page);
         $pagerfanta->setMaxPerPage($this->notificationPaginationLimit);
+        $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
         $notifications = '';
         foreach ($pagerfanta->getCurrentPageResults() as $notification) {
