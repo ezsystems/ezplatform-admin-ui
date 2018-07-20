@@ -80,6 +80,8 @@ class NotificationController extends Controller
     }
 
     /**
+     * @deprecated Deprecated in 1.2 and will be removed in 3.0. Please use NotificationController::renderNotificationsPageAction instead.
+     *
      * @param int $offset
      * @param int $limit
      *
@@ -105,7 +107,7 @@ class NotificationController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function renderPaginatedNotificationsAction(int $page): Response
+    public function renderNotificationsPageAction(int $page): Response
     {
         $pagerfanta = new Pagerfanta(
             new NotificationAdapter($this->notificationService)
@@ -122,7 +124,7 @@ class NotificationController extends Controller
         }
 
         $routeGenerator = function ($page) {
-            return $this->generateUrl('ezplatform.paginated.notifications.render', [
+            return $this->generateUrl('ezplatform.notifications.render.page', [
                 'page' => $page,
             ]);
         };

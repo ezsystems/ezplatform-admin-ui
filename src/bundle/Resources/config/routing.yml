@@ -735,10 +735,10 @@ ezplatform.notifications.render:
         offset: '\d+'
         limit: '\d+'
 
-ezplatform.paginated.notifications.render:
-    path: /paginated-notifications/render/{page}
+ezplatform.notifications.render.page:
+    path: /notifications/render/page/{page}
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:Notification:renderPaginatedNotifications'
+        _controller: 'EzPlatformAdminUiBundle:Notification:renderNotificationsPage'
         page: 1
     methods: [GET]
     requirements:
