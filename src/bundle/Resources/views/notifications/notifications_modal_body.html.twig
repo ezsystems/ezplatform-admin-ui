@@ -1,7 +1,7 @@
 {% trans_default_domain 'notifications' %}
 
 <table
-    data-notifications="{{ path('ezplatform.paginated.notifications.render') }}"
+    data-notifications="{{ path('ezplatform.notifications.render.page') }}"
     data-notifications-count="{{ path('ezplatform.notifications.count') }}"
     data-notifications-total="{{ pager.nbResults }}"
     class="table n-table--notifications">

@@ -1,23 +1,21 @@
 (function(global, doc, eZ, React, ReactDOM, Translator) {
     let currentPageLink = null;
-    const SELECTOR_MODAL_ITEM = '.n-notifications-modal__item';
-    const SELECTOR_MODAL_SPINNER = '.n-notifications-modal__spinner';
-    const SELECTOR_MODAL_RESULTS = '.n-notifications-modal__results';
+    const SELECTOR_MODAL_ITEM = '.ez-notifications-modal__item';
+    const SELECTOR_MODAL_RESULTS = '.ez-notifications-modal__results';
     const SELECTOR_DESC_TEXT = '.description__text';
     const SELECTOR_TABLE = '.n-table--notifications';
     const CLASS_ELLIPSIS = 'description__text--ellipsis';
     const CLASS_PAGINATION_LINK = 'page-link';
-    const CLASS_MODAL_SPINNER_INVISIBLE = 'n-notifications-modal__spinner--invisible';
-    const CLASS_MODAL_RESULTS_INVISIBLE = 'n-notifications-modal__results--invisible';
+    const CLASS_MODAL_LOADING = 'ez-notifications-modal--loading';
     const INTERVAL = 30000;
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
-    const modal = doc.querySelector('.n-notifications-modal');
+    const modal = doc.querySelector('.ez-notifications-modal');
     const handleResponseError = eZ.helpers.notification.showErrorNotification;
-    const handleRequestResponseJson = eZ.helpers.request.handleRequestResponseJson;
-    const handleRequestResponseText = eZ.helpers.request.handleRequestResponseText;
-    const onNotificationMarkedAsRead = (notification, response) => {
+    const getJsonFromResponse = eZ.helpers.request.getJsonFromResponse;
+    const getTextFromResponse = eZ.helpers.request.getTextFromResponse;
+    const markAsRead = (notification, response) => {
         if (response.status === 'success') {
-            notification.classList.add('n-notifications-modal__item--read');
+            notification.classList.add('ez-notifications-modal__item--read');
         }
 
         if (response.redirect) {
@@ -25,8 +23,8 @@
         }
     };
     const handleNotificationClick = (notification) => {
-        const notificationsReadLink = notification.dataset.notificationRead;
-        const request = new Request(notificationsReadLink, {
+        const notificationReadLink = notification.dataset.notificationRead;
+        const request = new Request(notificationReadLink, {
             headers: {
                 'X-CSRF-Token': token,
             },
@@ -35,8 +33,8 @@
         });
 
         fetch(request)
-            .then(handleRequestResponseJson)
-            .then(onNotificationMarkedAsRead.bind(null, notification))
+            .then(getJsonFromResponse)
+            .then(markAsRead.bind(null, notification))
             .catch(handleResponseError);
     };
     const handleTableClick = (event) => {
@@ -57,7 +55,7 @@
 
         handleNotificationClick(notification);
     };
-    const updateNotificationsStatus = () => {
+    const getNotificationsStatus = () => {
         const notificationsTable = modal.querySelector(SELECTOR_TABLE);
         const notificationsStatusLink = notificationsTable.dataset.notificationsCount;
         const request = new Request(notificationsStatusLink, {
@@ -69,11 +67,11 @@
         });
 
         fetch(request)
-            .then(handleRequestResponseJson)
+            .then(getJsonFromResponse)
             .then(setPendingNotificationCount)
             .catch(handleResponseError);
     };
-    const updateUserAvatar = (notificationsInfo) => {
+    const updatePendingNotificationsView = (notificationsInfo) => {
         const pendingNotificationsExist = notificationsInfo.pending;
         const userAvatar = doc.querySelector('.ez-user-menu__avatar-wrapper');
 
@@ -83,7 +81,7 @@
         doc.querySelector('.ez-user-menu__item--notifications').dataset.count = `(${notificationsInfo.pending})`;
     };
     const setPendingNotificationCount = (notificationsInfo) => {
-        updateUserAvatar(notificationsInfo);
+        updatePendingNotificationsView(notificationsInfo);
 
         const notificationsTable = modal.querySelector(SELECTOR_TABLE);
         const notificationsTotal = notificationsInfo.total;
@@ -92,28 +90,17 @@
         if (notificationsTotal !== notificationsTotalOld) {
             notificationsTable.dataset.notificationsTotal = notificationsTotal;
 
-            refreshNotificationsPage();
+            fetchNotificationPage(currentPageLink);
         }
     };
-    const setNotificationPage = (pageHtml) => {
+    const showNotificationPage = (pageHtml) => {
         const modalResults = modal.querySelector(SELECTOR_MODAL_RESULTS);
 
         modalResults.innerHTML = pageHtml;
-        toggleLoading(true);
+        toggleLoading(false);
     };
-    const toggleSpinner = (force) => {
-        const spinner = modal.querySelector(SELECTOR_MODAL_SPINNER);
-
-        spinner.classList.toggle(CLASS_MODAL_SPINNER_INVISIBLE, force);
-    };
-    const toggleResults = (force) => {
-        const results = modal.querySelector(SELECTOR_MODAL_RESULTS);
-
-        results.classList.toggle(CLASS_MODAL_RESULTS_INVISIBLE, force);
-    };
-    const toggleLoading = (force) => {
-        toggleSpinner(force);
-        toggleResults(!force);
+    const toggleLoading = (show) => {
+        modal.classList.toggle(CLASS_MODAL_LOADING, show);
     };
     const fetchNotificationPage = (link) => {
         if (!link) {
@@ -130,30 +117,27 @@
         });
 
         currentPageLink = link;
-        toggleLoading(false);
+        toggleLoading(true);
         fetch(request)
-            .then(handleRequestResponseText)
-            .then(setNotificationPage)
+            .then(getTextFromResponse)
+            .then(showNotificationPage)
             .catch(handleResponseError);
     };
-    const refreshNotificationsPage = () => {
-        fetchNotificationPage(currentPageLink);
-    };
     const handleModalResultsClick = (event) => {
-        handleNotificationsPageChange(event);
-        handleTableClick(event);
-    };
-    const handleNotificationsPageChange = (event) => {
-        const { target } = event;
-        const isPaginationBtn = target.classList.contains(CLASS_PAGINATION_LINK);
+        const isPaginationBtn = event.target.classList.contains(CLASS_PAGINATION_LINK);
 
-        if (!isPaginationBtn) {
+        if (isPaginationBtn) {
+            handleNotificationsPageChange(event);
             return;
         }
 
-        const notificationsPageLink = target.href;
-
+        handleTableClick(event);
+    };
+    const handleNotificationsPageChange = (event) => {
         event.preventDefault();
+
+        const notificationsPageLink = event.target.href;
+
         fetchNotificationPage(notificationsPageLink);
     };
 
@@ -166,6 +150,6 @@
 
     modal.querySelectorAll(SELECTOR_MODAL_RESULTS).forEach((link) => link.addEventListener('click', handleModalResultsClick, false));
 
-    updateNotificationsStatus();
-    global.setInterval(updateNotificationsStatus, INTERVAL);
+    getNotificationsStatus();
+    global.setInterval(getNotificationsStatus, INTERVAL);
 })(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);

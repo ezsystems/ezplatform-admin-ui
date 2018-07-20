@@ -4,11 +4,11 @@
     /**
      * Handles request error
      *
-     * @function handleRequestError
+     * @function handleRequest
      * @param {Response} response
      * @returns {Error|Promise}
      */
-    const handleRequestError = (response) => {
+    const handleRequest = (response) => {
         if (!response.ok) {
             throw Error(response.statusText);
         }
@@ -19,40 +19,40 @@
     /**
      * Handles request JSON response
      *
-     * @function handleRequestResponseJson
+     * @function getJsonFromResponse
      * @param {Response} response
      * @returns {Error|Promise}
      */
-    const handleRequestResponseJson = (response) => {
-        return handleRequestError(response).json();
+    const getJsonFromResponse = (response) => {
+        return handleRequest(response).json();
     };
 
     /**
      * Handles request text response
      *
-     * @function handleRequestResponseText
+     * @function getTextFromResponse
      * @param {Response} response
      * @returns {Error|Promise}
      */
-    const handleRequestResponseText = (response) => {
-        return handleRequestError(response).text();
+    const getTextFromResponse = (response) => {
+        return handleRequest(response).text();
     };
 
     /**
      * Handles request response; returns status if response is OK
      *
-     * @function handleRequestResponseStatus
+     * @function getStatusFromResponse
      * @param {Response} response
      * @returns {Error|Promise}
      */
-    const handleRequestResponseStatus = (response) => {
-        return handleRequestError(response).status;
+    const getStatusFromResponse = (response) => {
+        return handleRequest(response).status;
     };
 
     eZ.helpers = eZ.helpers || {};
     eZ.helpers.request = {
-        handleRequestResponseJson,
-        handleRequestResponseText,
-        handleRequestResponseStatus,
+        getJsonFromResponse,
+        getTextFromResponse,
+        getStatusFromResponse,
     };
 })(window, document);

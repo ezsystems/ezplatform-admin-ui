@@ -1,7 +1,7 @@
 {% trans_default_domain 'notifications' %}
 
 <div
-    class="modal fade n-notifications-modal"
+    class="modal fade ez-notifications-modal"
     id="view-notifications"
     tabindex="-1"
     role="dialog">
@@ -24,13 +24,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="n-notifications-modal__spinner n-notifications-modal__spinner--invisible">
+                <div class="ez-notifications-modal__spinner">
                     <svg class="ez-icon ez-spin">
                         <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#spinner"></use>
                     </svg>
                 </div>
-                <div class="n-notifications-modal__results">
-                    {{ render(controller('EzPlatformAdminUiBundle:Notification:renderPaginatedNotifications', {
+                <div class="ez-notifications-modal__results">
+                    {{ render(controller('EzPlatformAdminUiBundle:Notification:renderNotificationsPage', {
                         'page': 1,
                     })) }}
                 </div>

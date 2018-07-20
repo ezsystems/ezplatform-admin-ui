@@ -1,14 +1,14 @@
 {% trans_default_domain 'notifications' %}
 
 {% if wrapper_class_list is not defined %}
-    {% set wrapper_class_list = 'n-notifications-modal__item' ~ (notification.isPending == 0 ? ' n-notifications-modal__item--read') %}
+    {% set wrapper_class_list = 'ez-notifications-modal__item' ~ (notification.isPending == 0 ? ' ez-notifications-modal__item--read') %}
 {% endif %}
 
 <tr
     data-notification-id="{{ notification.id }}"
     data-notification-read="{{ path('ezplatform.notifications.mark_as_read', { 'notificationId': notification.id }) }}"
     class="{{ wrapper_class_list ~ (wrapper_additional_classes is defined ? ' ' ~ wrapper_additional_classes) }}">
-    <td class="n-notifications-modal__type">
+    <td class="ez-notifications-modal__type">
         {% block icon %}
             <span class="type__icon">
                 <svg class="ez-icon">
@@ -22,13 +22,13 @@
         {% endblock %}
     </td>
     {% block message %}
-        <td class="n-notifications-modal__description">
+        <td class="ez-notifications-modal__description">
             <p class="description__title">{{ 'notification.title'|trans|desc('Title:') }} <span class="description__title__item">{{ title }}</span></p>
             <p class="description__text">{{ message }}</p>
         </td>
     {% endblock %}
     {% block date %}
-    <td class="n-notifications-modal__time">
+    <td class="ez-notifications-modal__time">
         {{ notification.created|date }}
     </td>
     {% endblock %}
