@@ -14,8 +14,8 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Bookmark\BookmarkRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\BookmarkAdapter;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
-use Pagerfanta\Adapter\CallbackAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,13 +74,7 @@ class BookmarkController extends Controller
         $page = $request->query->get('page', 1);
 
         $pagerfanta = new Pagerfanta(
-            new CallbackAdapter(function () {
-                return $this->bookmarkService->loadBookmarks()->totalCount;
-            }, function ($offset, $length) {
-                $bookmarkDataset = $this->datasetFactory->bookmarks();
-
-                return $bookmarkDataset->load($offset, $length)->getBookmarks();
-            })
+            new BookmarkAdapter($this->bookmarkService, $this->datasetFactory)
         );
 
         $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
