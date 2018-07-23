@@ -9,9 +9,8 @@
     const CLASS_PAGINATION_LINK = 'page-link';
     const CLASS_MODAL_LOADING = 'ez-notifications-modal--loading';
     const INTERVAL = 30000;
-    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const modal = doc.querySelector('.ez-notifications-modal');
-    const handleResponseError = eZ.helpers.notification.showErrorNotification;
+    const showErrorNotification = eZ.helpers.notification.showErrorNotification;
     const getJsonFromResponse = eZ.helpers.request.getJsonFromResponse;
     const getTextFromResponse = eZ.helpers.request.getTextFromResponse;
     const markAsRead = (notification, response) => {
@@ -26,9 +25,6 @@
     const handleNotificationClick = (notification) => {
         const notificationReadLink = notification.dataset.notificationRead;
         const request = new Request(notificationReadLink, {
-            headers: {
-                'X-CSRF-Token': token,
-            },
             mode: 'cors',
             credentials: 'same-origin',
         });
@@ -36,7 +32,7 @@
         fetch(request)
             .then(getJsonFromResponse)
             .then(markAsRead.bind(null, notification))
-            .catch(handleResponseError);
+            .catch(showErrorNotification);
     };
     const handleTableClick = (event) => {
         if (event.target.classList.contains('description__read-more')) {
@@ -60,9 +56,6 @@
         const notificationsTable = modal.querySelector(SELECTOR_TABLE);
         const notificationsStatusLink = notificationsTable.dataset.notificationsCount;
         const request = new Request(notificationsStatusLink, {
-            headers: {
-                'X-CSRF-Token': token,
-            },
             mode: 'cors',
             credentials: 'same-origin',
         });
@@ -73,13 +66,13 @@
                 setPendingNotificationCount(notificationsInfo);
                 updateModalTitleTotalInfo(notificationsInfo.total);
             })
-            .catch(handleResponseError);
+            .catch(console.error);
     };
     const updateModalTitleTotalInfo = (notificationsCount) => {
         const modalTitle = modal.querySelector(SELECTOR_MODAL_TITLE);
-        
+
         modalTitle.dataset.notificationsTotal = `(${notificationsCount})`;
-    }
+    };
     const updatePendingNotificationsView = (notificationsInfo) => {
         const pendingNotificationsExist = notificationsInfo.pending;
         const userAvatar = doc.querySelector('.ez-user-menu__avatar-wrapper');
@@ -130,7 +123,7 @@
         fetch(request)
             .then(getTextFromResponse)
             .then(showNotificationPage)
-            .catch(handleResponseError);
+            .catch(showErrorNotification);
     };
     const handleModalResultsClick = (event) => {
         const isPaginationBtn = event.target.classList.contains(CLASS_PAGINATION_LINK);
