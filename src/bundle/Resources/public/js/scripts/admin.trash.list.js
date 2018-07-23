@@ -18,7 +18,6 @@
 
         const form = event.target.closest('form[name="trash_item_restore"]');
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = Translator.trans(/*@Desc("Restore")*/ 'restore_under_new_location.confirm.label', {}, 'universal_discovery_widget');
         const title = Translator.trans(
             /*@Desc("Select a location to restore you content item(s)")*/ 'restore_under_new_location.title',
             {},
@@ -32,7 +31,6 @@
                     {
                         onConfirm: onConfirm.bind(this, form),
                         onCancel,
-                        confirmLabel,
                         title,
                         startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                         allowContainersOnly: true,

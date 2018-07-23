@@ -20,7 +20,6 @@
         event.stopPropagation();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = Translator.trans(/*@Desc("Add location")*/ 'add_location.confirm.label', {}, 'universal_discovery_widget');
         const title = Translator.trans(/*@Desc("Select location")*/ 'add_location.title', {}, 'universal_discovery_widget');
 
         ReactDOM.render(
@@ -31,7 +30,6 @@
                         onConfirm,
                         onCancel,
                         canSelectContent,
-                        confirmLabel,
                         title,
                         multiple: false,
                         startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,

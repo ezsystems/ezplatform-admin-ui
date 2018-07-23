@@ -47,14 +47,16 @@ export default class EzBtnEmbed extends EzEmbedDiscoverContentButton {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        const css = 'ae-button ez-btn-ae ez-btn-ae--embed ' + this.getStateClasses(), disabled = this.isDisabled();
+        const css = 'ae-button ez-btn-ae ez-btn-ae--embed ' + this.getStateClasses(),
+            disabled = this.isDisabled();
+        const label = Translator.trans(/*@Desc("Embed")*/ 'embed_btn.label', {}, 'alloy_editor');
 
         return (
             <button className={css} disabled={disabled} onClick={this.chooseContent.bind(this)} tabIndex={this.props.tabIndex}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#tag"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#tag" />
                 </svg>
-                <p className="ez-btn-ae__label">Embed</p>
+                <p className="ez-btn-ae__label">{label}</p>
             </button>
         );
     }
@@ -65,7 +67,7 @@ AlloyEditor.Buttons[EzBtnEmbed.key] = AlloyEditor.EzBtnEmbed = EzBtnEmbed;
 EzBtnEmbed.defaultProps = {
     command: 'ezembed',
     modifiesSelection: true,
-    udwTitle: 'Select a content to embed',
+    udwTitle: Translator.trans(/*@Desc("Select a content to embed")*/ 'embed_btn.udw.title', {}, 'alloy_editor'),
     udwContentDiscoveredMethod: 'addEmbed',
-    udwConfigName: 'richtext_embed'
+    udwConfigName: 'richtext_embed',
 };

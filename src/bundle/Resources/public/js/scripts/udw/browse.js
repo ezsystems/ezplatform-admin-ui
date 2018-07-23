@@ -14,7 +14,6 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = Translator.trans(/*@Desc("View content")*/ 'browse.confirm.label', {}, 'universal_discovery_widget');
         const title = Translator.trans(/*@Desc("Browse content")*/ 'browse.title', {}, 'universal_discovery_widget');
 
         ReactDOM.render(
@@ -24,7 +23,6 @@
                     {
                         onConfirm,
                         onCancel,
-                        confirmLabel,
                         title,
                         multiple: false,
                         startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),

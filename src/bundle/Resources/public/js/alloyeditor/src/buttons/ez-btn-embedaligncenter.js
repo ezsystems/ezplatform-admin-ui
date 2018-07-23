@@ -15,5 +15,5 @@ EzEmbedAlignCenter.defaultProps = {
     alignment: 'center',
     iconName: 'image-center',
     cssClassSuffix: 'embed-center',
-    label: 'Center',
+    label: Translator.trans(/*@Desc("Center")*/ 'embed_align_center_btn.label', {}, 'alloy_editor'),
 };

@@ -29,7 +29,6 @@
         ReactDOM.render(React.createElement(global.eZ.modules.UniversalDiscovery, Object.assign({
             onConfirm: onConfirm.bind(null, event.currentTarget),
             onCancel,
-            confirmLabel: 'Confirm location',
             title: event.currentTarget.dataset.universaldiscoveryTitle,
             multiple: false,
             startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,

@@ -121,11 +121,6 @@
             event.preventDefault();
 
             const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-            const confirmLabel = Translator.trans(
-                /*@Desc("Confirm selection")*/ 'ezobjectrelationlist.confirm.label',
-                {},
-                'universal_discovery_widget'
-            );
             const title = Translator.trans(/*@Desc("Select content")*/ 'ezobjectrelationlist.title', {}, 'universal_discovery_widget');
 
             ReactDOM.render(
@@ -135,7 +130,6 @@
                         {
                             onConfirm,
                             onCancel: closeUDW,
-                            confirmLabel,
                             title,
                             multiple: isSingle ? false : selectedItemsLimit !== 1,
                             selectedItemsLimit,

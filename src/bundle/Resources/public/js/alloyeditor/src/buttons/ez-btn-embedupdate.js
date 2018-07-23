@@ -21,7 +21,7 @@ export default class EzBtnEmbedUpdate extends EzEmbedDiscoverContentButton {
 
         this.setContentInfo(contentId);
         widget.focus();
-        widget.setWidgetContent("");
+        widget.setWidgetContent('');
         widget.renderEmbedPreview(items[0].ContentInfo.Content.Name);
 
         ReactDOM.unmountComponentAtNode(document.querySelector('#react-udw'));
@@ -39,7 +39,7 @@ export default class EzBtnEmbedUpdate extends EzEmbedDiscoverContentButton {
         return (
             <button className={css} onClick={this.chooseContent.bind(this)} tabIndex={this.props.tabIndex}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#tag"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#tag" />
                 </svg>
             </button>
         );
@@ -49,8 +49,8 @@ export default class EzBtnEmbedUpdate extends EzEmbedDiscoverContentButton {
 AlloyEditor.Buttons[EzBtnEmbedUpdate.key] = AlloyEditor.EzBtnEmbedUpdate = EzBtnEmbedUpdate;
 
 EzBtnEmbedUpdate.defaultProps = {
-    udwTitle: 'Select a content to embed',
+    udwTitle: Translator.trans(/*@Desc("Select a content to embed")*/ 'embed_update_btn.udw.title', {}, 'alloy_editor'),
     udwContentDiscoveredMethod: 'updateEmbed',
     udwConfigName: 'richtext_embed',
-    label: 'Select antoher content item',
+    label: Translator.trans(/*@Desc("Select another content item")*/ 'embed_update_btn.label', {}, 'alloy_editor'),
 };

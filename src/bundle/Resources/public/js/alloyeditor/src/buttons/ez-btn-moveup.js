@@ -24,14 +24,17 @@ export default class EzBtnMoveUp extends Component {
      * @return {Object} The content which should be rendered.
      */
     render() {
+        const title = Translator.trans(/*@Desc("Move Up")*/ 'move_up_btn.title', {}, 'alloy_editor');
+
         return (
             <button
                 className="ae-button ez-btn-ae ez-btn-ae--move-up"
                 onClick={this.moveUp.bind(this)}
-                tabIndex={this.props.tabIndex} title="Move Up"
+                tabIndex={this.props.tabIndex}
+                title={title}
             >
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#circle-caret-up"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#circle-caret-up" />
                 </svg>
             </button>
         );

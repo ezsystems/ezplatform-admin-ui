@@ -18,7 +18,6 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const confirmLabel = Translator.trans(/*@Desc("Move to location")*/ 'move.confirm.label', {}, 'universal_discovery_widget');
         const title = Translator.trans(/*@Desc("Select destination")*/ 'move.title', {}, 'universal_discovery_widget');
 
         ReactDOM.render(
@@ -29,7 +28,6 @@
                         onConfirm,
                         onCancel,
                         canSelectContent,
-                        confirmLabel,
                         title,
                         multiple: false,
                         startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),

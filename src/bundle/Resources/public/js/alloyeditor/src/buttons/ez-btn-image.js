@@ -48,14 +48,16 @@ export default class EzBtnImage extends EzEmbedImageButton {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        const css = 'ae-button ez-btn-ae ez-btn-ae--image ' + this.getStateClasses(), disabled = this.isDisabled();
+        const css = 'ae-button ez-btn-ae ez-btn-ae--image ' + this.getStateClasses(),
+            disabled = this.isDisabled();
+        const label = Translator.trans(/*@Desc("Image")*/ 'image_btn.label', {}, 'alloy_editor');
 
         return (
             <button className={css} disabled={disabled} onClick={this.chooseContent.bind(this)} tabIndex={this.props.tabIndex}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#image"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#image" />
                 </svg>
-                <p className="ez-btn-ae__label">Image</p>
+                <p className="ez-btn-ae__label">{label}</p>
             </button>
         );
     }
@@ -66,7 +68,7 @@ AlloyEditor.Buttons[EzBtnImage.key] = AlloyEditor.EzBtnImage = EzBtnImage;
 EzBtnImage.defaultProps = {
     command: 'ezembed',
     modifiesSelection: true,
-    udwTitle: 'Select an image to embed',
+    udwTitle: Translator.trans(/*@Desc("Select an image to embed")*/ 'image_btn.udw.label', {}, 'alloy_editor'),
     udwContentDiscoveredMethod: 'addImage',
     udwConfigName: 'richtext_embed_image',
     udwLoadContent: true,

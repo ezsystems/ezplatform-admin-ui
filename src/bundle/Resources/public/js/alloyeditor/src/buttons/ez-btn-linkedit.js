@@ -79,12 +79,12 @@ export default class EzBtnLinkEdit extends Component {
 
                 ReactDOM.unmountComponentAtNode(udwContainer);
             };
+            const title = Translator.trans(/*@Desc("Select content")*/ 'link_edit_btn.udw.title', {}, 'alloy_editor');
 
             ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
                 onConfirm: udwOnConfirm,
                 onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
-                confirmLabel: 'Select content',
-                title: 'Select content',
+                title,
                 multiple: false,
                 startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                 restInfo: {token, siteaccess},
@@ -156,18 +156,22 @@ export default class EzBtnLinkEdit extends Component {
      * @return {Object} The content which should be rendered.
      */
     renderUDWRow() {
+        const selectContentLabel = Translator.trans(/*@Desc("Select content")*/ 'link_edit_btn.button_row.select_content', {}, 'alloy_editor');
+        const separatorLabel = Translator.trans(/*@Desc("or")*/ 'link_edit_btn.button_row.or', {}, 'alloy_editor');
+        const linkToLabel = Translator.trans(/*@Desc("Link to")*/ 'link_edit_btn.button_row.link_to', {}, 'alloy_editor');
+
         return (
             <div className="ez-ae-edit-link__row">
                 <div className="ez-ae-edit-link__block ez-ae-edit-link__block--udw">
                     <button className="ez-ae-button ez-btn-ae ez-btn-ae--udw btn btn-gray" onClick={this.selectContent.bind(this)}>
-                        Select content
+                        {selectContentLabel}
                     </button>
                 </div>
                 <div className="ez-ae-edit-link__block ez-ae-edit-link__block--separator">
-                    <span className="ez-ae-edit-link__text">or</span>
+                    <span className="ez-ae-edit-link__text">{separatorLabel}</span>
                 </div>
                 <div className="ez-ae-edit-link__block ez-ae-edit-link__block--url">
-                    <label className="ez-ae-edit-link__label">Link to</label>
+                    <label className="ez-ae-edit-link__label">{linkToLabel}</label>
                     <input className="ae-input ez-ae-edit-link__input"
                         onChange={this.setHref.bind(this)} onKeyDown={this.handleKeyDown.bind(this)}
                         placeholder="Type or paste link here"
@@ -190,6 +194,8 @@ export default class EzBtnLinkEdit extends Component {
      */
     renderInfoRow() {
         const target = this.state.linkTarget;
+        const sameTabLabel = Translator.trans(/*@Desc("Same tab")*/ 'link_edit_btn.info_row.same_tab', {}, 'alloy_editor');
+        const newTabLabel = Translator.trans(/*@Desc("New tab")*/ 'link_edit_btn.info_row.new_tab', {}, 'alloy_editor');
 
         return (
             <div className="ez-ae-edit-link__row">
@@ -208,14 +214,14 @@ export default class EzBtnLinkEdit extends Component {
                                 value='' defaultChecked={target === ''}
                                 onChange={this.setTarget.bind(this)}
                             />
-                            <span>Same tab</span>
+                            <span>{sameTabLabel}</span>
                         </label>
                         <label htmlFor="ez-ae-link-target-blank" className="ez-ae-edit-link__label ez-ae-edit-link__label--new-tab">
                             <input type="radio" name="target" id="ez-ae-link-target-blank"
                                 value="_blank" defaultChecked={target === "_blank"}
                                 onChange={this.setTarget.bind(this)}
                             />
-                            <span>New tab</span>
+                            <span>{newTabLabel}</span>
                         </label>
                     </div>
                 </div>
@@ -230,16 +236,19 @@ export default class EzBtnLinkEdit extends Component {
      * @return {Object} The content which should be rendered.
      */
     renderActionRow() {
+        const removeLabel = Translator.trans(/*@Desc("Same tab")*/ 'link_edit_btn.action_row.remove', {}, 'alloy_editor');
+        const saveLabel = Translator.trans(/*@Desc("New tab")*/ 'link_edit_btn.action_row.save', {}, 'alloy_editor');
+
         return (
             <div className="ez-ae-edit-link__row ez-ae-edit-link__row--actions">
                 <div className="ez-ae-edit-link__block ez-ae-edit-link__block--actions">
                     <button className="ez-btn-ae ez-btn-ae--remove-link btn btn-gray"
                         disabled={this.state.isTemporary} onClick={this.removeLink.bind(this)}>
-                        Remove
+                        {removeLabel}
                     </button>
                     <button className="ez-btn-ae ez-btn-ae--save-link btn btn-secondary"
                         disabled={!this.state.linkHref} onClick={this.saveLink.bind(this)}>
-                        Save
+                        {saveLabel}
                     </button>
                 </div>
             </div>

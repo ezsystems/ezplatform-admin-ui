@@ -21,7 +21,6 @@ export default class EzEmbedDiscoverContentButton extends EzWidgetButton {
         ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
             onConfirm: this[this.props.udwContentDiscoveredMethod].bind(this),
             onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
-            confirmLabel: 'Select content',
             title: this.props.udwTitle,
             multiple: false,
             startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
