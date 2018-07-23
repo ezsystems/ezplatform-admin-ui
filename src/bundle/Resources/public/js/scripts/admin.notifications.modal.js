@@ -2,6 +2,7 @@
     let currentPageLink = null;
     const SELECTOR_MODAL_ITEM = '.ez-notifications-modal__item';
     const SELECTOR_MODAL_RESULTS = '.ez-notifications-modal__results';
+    const SELECTOR_MODAL_TITLE = '.modal-title';
     const SELECTOR_DESC_TEXT = '.description__text';
     const SELECTOR_TABLE = '.n-table--notifications';
     const CLASS_ELLIPSIS = 'description__text--ellipsis';
@@ -68,9 +69,17 @@
 
         fetch(request)
             .then(getJsonFromResponse)
-            .then(setPendingNotificationCount)
+            .then((notificationsInfo) => {
+                setPendingNotificationCount(notificationsInfo);
+                updateModalTitleTotalInfo(notificationsInfo.total);
+            })
             .catch(handleResponseError);
     };
+    const updateModalTitleTotalInfo = (notificationsCount) => {
+        const modalTitle = modal.querySelector(SELECTOR_MODAL_TITLE);
+        
+        modalTitle.dataset.notificationsTotal = `(${notificationsCount})`;
+    }
     const updatePendingNotificationsView = (notificationsInfo) => {
         const pendingNotificationsExist = notificationsInfo.pending;
         const userAvatar = doc.querySelector('.ez-user-menu__avatar-wrapper');

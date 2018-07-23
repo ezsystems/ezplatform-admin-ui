@@ -10,7 +10,11 @@
         role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ 'notifications'|trans|desc('Notifications') }}</h5>
+                <h5 
+                    class="modal-title" 
+                    data-notifications-total="">
+                    {{ 'notifications'|trans|desc('Notifications') }} 
+                </h5>
                 <button
                     type="button"
                     class="close"
