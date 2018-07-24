@@ -14,8 +14,8 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Bookmark\BookmarkRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\BookmarkAdapter;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
-use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,17 +68,13 @@ class BookmarkController extends Controller
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function listAction(Request $request): Response
     {
         $page = $request->query->get('page', 1);
-        $bookmarkDataset = $this->datasetFactory->bookmarks();
-        $bookmarkDataset->load();
 
         $pagerfanta = new Pagerfanta(
-            new ArrayAdapter($bookmarkDataset->getBookmarks())
+            new BookmarkAdapter($this->bookmarkService, $this->datasetFactory)
         );
 
         $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
