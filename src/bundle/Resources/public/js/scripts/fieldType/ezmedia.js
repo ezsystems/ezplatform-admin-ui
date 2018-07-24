@@ -45,7 +45,7 @@
             const isEmpty = isNaN(value);
             const isInteger = Number.isInteger(value);
             const isError = (isEmpty && isRequired) || (!isEmpty && !isInteger);
-            const label = input.closest(SELECTOR_INFO_WRAPPER).querySelector('.form-control-label').innerHTML;
+            const label = input.closest(SELECTOR_INFO_WRAPPER).querySelector('.ez-field-edit-preview__label').innerHTML;
             const result = { isError };
 
             if (isEmpty) {
