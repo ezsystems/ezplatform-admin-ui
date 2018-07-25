@@ -23,7 +23,7 @@ cache:
 env:
   global:
     # For acceptance tests
-    - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform.git"
+    - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform-ee-demo.git"
 
 # test only master and stable branches (+ Pull requests)
 branches:
