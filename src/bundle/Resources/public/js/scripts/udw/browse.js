@@ -1,8 +1,8 @@
-(function () {
-    const btns = document.querySelectorAll('.btn--udw-browse');
-    const udwContainer = document.getElementById('react-udw');
-    const token = document.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
+(function(global, doc, eZ, React, ReactDOM, Translator) {
+    const btns = doc.querySelectorAll('.btn--udw-browse');
+    const udwContainer = doc.getElementById('react-udw');
+    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (items) => {
         closeUDW();
@@ -14,17 +14,26 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+        const title = Translator.trans(/*@Desc("Browse content")*/ 'browse.title', {}, 'universal_discovery_widget');
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
-            onConfirm,
-            onCancel,
-            confirmLabel: 'View content',
-            title: 'Browse content',
-            multiple: false,
-            startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
-            restInfo: {token, siteaccess},
-        }, config)), udwContainer);
+        ReactDOM.render(
+            React.createElement(
+                eZ.modules.UniversalDiscovery,
+                Object.assign(
+                    {
+                        onConfirm,
+                        onCancel,
+                        title,
+                        multiple: false,
+                        startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
+                        restInfo: { token, siteaccess },
+                    },
+                    config
+                )
+            ),
+            udwContainer
+        );
     };
 
-    btns.forEach(btn => btn.addEventListener('click', openUDW, false));
-})();
+    btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);

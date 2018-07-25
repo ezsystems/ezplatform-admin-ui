@@ -22,7 +22,7 @@ export default class EzBtnImageUpdate extends EzEmbedImageButton {
 
         this.setContentInfo(contentId);
         widget.focus();
-        widget.setWidgetContent("");
+        widget.setWidgetContent('');
         widget.loadImagePreviewFromCurrentVersion(content.CurrentVersion._href, content.Name);
 
         ReactDOM.unmountComponentAtNode(document.querySelector('#react-udw'));
@@ -40,7 +40,7 @@ export default class EzBtnImageUpdate extends EzEmbedImageButton {
         return (
             <button className={css} onClick={this.chooseContent.bind(this)} tabIndex={this.props.tabIndex}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#image"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#image" />
                 </svg>
             </button>
         );
@@ -50,8 +50,8 @@ export default class EzBtnImageUpdate extends EzEmbedImageButton {
 AlloyEditor.Buttons[EzBtnImageUpdate.key] = AlloyEditor.EzBtnImageUpdate = EzBtnImageUpdate;
 
 EzBtnImageUpdate.defaultProps = {
-    udwTitle: 'Select an image to embed',
+    udwTitle: Translator.trans(/*@Desc("Select an image to embed")*/ 'image_update_btn.udw.title', {}, 'alloy_editor'),
     udwContentDiscoveredMethod: 'updateImage',
     udwConfigName: 'richtext_embed_image',
-    label: 'Select antoher image item',
+    label: Translator.trans(/*@Desc("Select another image item")*/ 'image_update_btn.label', {}, 'alloy_editor'),
 };

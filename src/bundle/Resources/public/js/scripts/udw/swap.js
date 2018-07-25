@@ -1,10 +1,10 @@
-(function () {
-    const btns = document.querySelectorAll('.btn--udw-swap');
-    const form = document.querySelector('form[name="location_swap"]');
+(function(global, doc, eZ, React, ReactDOM, Translator) {
+    const btns = doc.querySelectorAll('.btn--udw-swap');
+    const form = doc.querySelector('form[name="location_swap"]');
     const input = form.querySelector('#location_swap_new_location');
-    const udwContainer = document.getElementById('react-udw');
-    const token = document.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
+    const udwContainer = doc.getElementById('react-udw');
+    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (items) => {
         closeUDW();
@@ -17,17 +17,26 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+        const title = Translator.trans(/*@Desc("Select location to be swapped with")*/ 'swap.title', {}, 'universal_discovery_widget');
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
-            onConfirm,
-            onCancel,
-            confirmLabel: 'Swap location',
-            title: 'Select location to be swapped with',
-            multiple: false,
-            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-            restInfo: {token, siteaccess}
-        }, config)), udwContainer);
+        ReactDOM.render(
+            React.createElement(
+                eZ.modules.UniversalDiscovery,
+                Object.assign(
+                    {
+                        onConfirm,
+                        onCancel,
+                        title,
+                        multiple: false,
+                        startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                        restInfo: { token, siteaccess },
+                    },
+                    config
+                )
+            ),
+            udwContainer
+        );
     };
 
-    btns.forEach(btn => btn.addEventListener('click', openUDW, false));
-})();
+    btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);

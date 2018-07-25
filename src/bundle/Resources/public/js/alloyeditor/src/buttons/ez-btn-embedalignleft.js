@@ -15,5 +15,5 @@ EzEmbedAlignLeft.defaultProps = {
     alignment: 'left',
     iconName: 'image-left',
     cssClassSuffix: 'embed-left',
-    label: 'Left',
+    label: Translator.trans(/*@Desc("Left")*/ 'embed_align_left_btn.label', {}, 'alloy_editor'),
 };

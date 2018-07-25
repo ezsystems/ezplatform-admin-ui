@@ -15,5 +15,5 @@ EzEmbedAlignRight.defaultProps = {
     alignment: 'right',
     iconName: 'image-right',
     cssClassSuffix: 'embed-right',
-    label: 'Right',
+    label: Translator.trans(/*@Desc("Right")*/ 'embed_align_right_btn.label', {}, 'alloy_editor'),
 };

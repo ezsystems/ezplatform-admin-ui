@@ -15,5 +15,5 @@ EzBtnBlockTextAlignLeft.defaultProps = {
     textAlign: 'left',
     iconName: 'align-left',
     cssClassSuffix: 'align-left',
-    label: 'Left',
+    label: Translator.trans(/*@Desc("Left")*/ 'blocktext_align_left_btn.label', {}, 'alloy_editor'),
 };

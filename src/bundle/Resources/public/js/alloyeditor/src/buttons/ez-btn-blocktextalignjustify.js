@@ -15,5 +15,5 @@ EzBtnBlockTextAlignJustify.defaultProps = {
     textAlign: 'justify',
     iconName: 'align-justify',
     cssClassSuffix: 'align-justify',
-    label: 'Justify',
+    label: Translator.trans(/*@Desc("Justify")*/ 'blocktext_align_justify_btn.label', {}, 'alloy_editor'),
 };

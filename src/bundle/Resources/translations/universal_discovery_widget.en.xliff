@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="f3902e2cf1dc7593d56db51492f2c93763e17550" resname="add_location.title">
+        <source>Select location</source>
+        <target state="new">Select location</target>
+        <note>key: add_location.title</note>
+      </trans-unit>
+      <trans-unit id="b03000247ec164f0aca90e64643bd510dce50cfa" resname="browse.title">
+        <source>Browse content</source>
+        <target state="new">Browse content</target>
+        <note>key: browse.title</note>
+      </trans-unit>
+      <trans-unit id="2833f6d1654708301ec537add9ff0b14744c24a3" resname="copy.title">
+        <source>Select location</source>
+        <target state="new">Select location</target>
+        <note>key: copy.title</note>
+      </trans-unit>
+      <trans-unit id="b449a59d74243753a504665c352d161371545f15" resname="dashboard.create.title">
+        <source>Create your content</source>
+        <target state="new">Create your content</target>
+        <note>key: dashboard.create.title</note>
+      </trans-unit>
+      <trans-unit id="005c6256355de38d3f5cb90b08945053ac28cf9e" resname="ezobjectrelationlist.title">
+        <source>Select content</source>
+        <target state="new">Select content</target>
+        <note>key: ezobjectrelationlist.title</note>
+      </trans-unit>
+      <trans-unit id="56faf4ff9f2deaae1d34c1abcecae0413dc24a78" resname="move.title">
+        <source>Select destination</source>
+        <target state="new">Select destination</target>
+        <note>key: move.title</note>
+      </trans-unit>
+      <trans-unit id="0a2b01d9e287d0669cdd89b8067e119bbf749550" resname="restore_under_new_location.title">
+        <source>Select a location to restore you content item(s)</source>
+        <target state="new">Select a location to restore you content item(s)</target>
+        <note>key: restore_under_new_location.title</note>
+      </trans-unit>
+      <trans-unit id="987330c357d2475b80942e5c449e4215b623a459" resname="subtree.title">
+        <source>Select location</source>
+        <target state="new">Select location</target>
+        <note>key: subtree.title</note>
+      </trans-unit>
+      <trans-unit id="5a3a6e5c6a88da5a26a9638e8a796974bd3c8dd7" resname="subtree_limitation.title">
+        <source>Choose locations</source>
+        <target state="new">Choose locations</target>
+        <note>key: subtree_limitation.title</note>
+      </trans-unit>
+      <trans-unit id="7dad0dfeafd90e145f0e9efff5313d2a6040ba4c" resname="swap.title">
+        <source>Select location to be swapped with</source>
+        <target state="new">Select location to be swapped with</target>
+        <note>key: swap.title</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

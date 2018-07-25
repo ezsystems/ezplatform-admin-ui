@@ -15,5 +15,5 @@ EzBtnBlockTextAlignCenter.defaultProps = {
     textAlign: 'center',
     iconName: 'align-center',
     cssClassSuffix: 'align-center',
-    label: 'Center',
+    label: Translator.trans(/*@Desc("Center")*/ 'block_text_align_center_btn.label', {}, 'alloy_editor'),
 };

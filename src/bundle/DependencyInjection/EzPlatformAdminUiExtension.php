@@ -48,6 +48,7 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $this->prependUniversalDiscoveryWidget($container);
         $this->prependEzDesignConfiguration($container);
         $this->prependAdminUiFormsConfiguration($container);
+        $this->prependBazingaJsTranslationConfiguration($container);
     }
 
     /**
@@ -104,5 +105,16 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $config = Yaml::parseFile($adminUiFormsConfigFile);
         $container->prependExtensionConfig('ezpublish', $config);
         $container->addResource(new FileResource($adminUiFormsConfigFile));
+    }
+
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    private function prependBazingaJsTranslationConfiguration(ContainerBuilder $container)
+    {
+        $configFile = __DIR__ . '/../Resources/config/bazinga_js_translation.yml';
+        $config = Yaml::parseFile($configFile);
+        $container->prependExtensionConfig('bazinga_js_translation', $config);
+        $container->addResource(new FileResource($configFile));
     }
 }

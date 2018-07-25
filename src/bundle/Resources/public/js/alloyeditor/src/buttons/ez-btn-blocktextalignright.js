@@ -15,5 +15,5 @@ EzBtnBlockTextAlignRight.defaultProps = {
     textAlign: 'right',
     iconName: 'align-right',
     cssClassSuffix: 'align-right',
-    label: 'Right',
+    label: Translator.trans(/*@Desc("Right")*/ 'blocktext_align_right_btn.label', {}, 'alloy_editor'),
 };

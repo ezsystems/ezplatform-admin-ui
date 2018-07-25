@@ -1,4 +1,4 @@
-(function (global, React, ReactDOM) {
+(function(global, doc, eZ, React, ReactDOM, Translator) {
     const CLASS_FIELD_SINGLE = 'ez-field-edit--ezobjectrelation';
     const SELECTOR_FIELD_MULTIPLE = '.ez-field-edit--ezobjectrelationlist';
     const SELECTOR_FIELD_SINGLE = '.ez-field-edit--ezobjectrelation';
@@ -8,7 +8,7 @@
     const SELECTOR_ROW = '.ez-relations__item';
     const EVENT_CUSTOM = 'validateInput';
 
-    class EzObjectRelationListValidator extends global.eZ.BaseFieldValidator {
+    class EzObjectRelationListValidator extends eZ.BaseFieldValidator {
         /**
          * Validates the input
          *
@@ -17,36 +17,33 @@
          * @returns {Object}
          * @memberof EzObjectRelationListValidator
          */
-        validateInput({currentTarget}) {
+        validateInput({ currentTarget }) {
             const isRequired = currentTarget.required;
             const isEmpty = !currentTarget.value.length;
-            const hasCorrectValues = currentTarget.value.split(',').every(id => !isNaN(parseInt(id, 10)));
+            const hasCorrectValues = currentTarget.value.split(',').every((id) => !isNaN(parseInt(id, 10)));
             const fieldContainer = currentTarget.closest(SELECTOR_FIELD_MULTIPLE) || currentTarget.closest(SELECTOR_FIELD_SINGLE);
             const label = fieldContainer.querySelector('.ez-field-edit__label').innerHTML;
             const result = { isError: false };
 
             if (isRequired && isEmpty) {
                 result.isError = true;
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             } else if (!isEmpty && !hasCorrectValues) {
                 result.isError = true;
-                result.errorMessage = global.eZ.errors.invalidValue.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.invalidValue.replace('{fieldName}', label);
             }
 
             return result;
         }
     }
 
-    const singleObjectRelationFields = document.querySelectorAll(SELECTOR_FIELD_SINGLE);
+    const singleObjectRelationFields = doc.querySelectorAll(SELECTOR_FIELD_SINGLE);
 
     if (singleObjectRelationFields.length) {
         console.warn('EzObjectRelation fieldtype is deprecated. Please, use EzObjectRelationList fieldtype instead.');
     }
 
-    [
-        ...document.querySelectorAll(SELECTOR_FIELD_MULTIPLE),
-        ...singleObjectRelationFields
-    ].forEach(fieldContainer => {
+    [...doc.querySelectorAll(SELECTOR_FIELD_MULTIPLE), ...singleObjectRelationFields].forEach((fieldContainer) => {
         const validator = new EzObjectRelationListValidator({
             classInvalid: 'is-invalid',
             fieldContainer,
@@ -55,20 +52,20 @@
                     selector: SELECTOR_INPUT,
                     eventName: 'blur',
                     callback: 'validateInput',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER]
+                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 },
                 {
                     isValueValidator: false,
                     selector: SELECTOR_INPUT,
                     eventName: EVENT_CUSTOM,
                     callback: 'validateInput',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER]
-                }
-            ]
+                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                },
+            ],
         });
-        const udwContainer = document.getElementById('react-udw');
-        const token = document.querySelector('meta[name="CSRF-Token"]').content;
-        const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
+        const udwContainer = doc.getElementById('react-udw');
+        const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+        const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
         const sourceInput = fieldContainer.querySelector(SELECTOR_INPUT);
         const relationsContainer = fieldContainer.querySelector('.ez-relations__list');
         const relationsWrapper = fieldContainer.querySelector('.ez-relations__wrapper');
@@ -77,10 +74,11 @@
         const trashBtn = fieldContainer.querySelector('.ez-relations__table-action--remove');
         const isSingle = fieldContainer.classList.contains(CLASS_FIELD_SINGLE);
         const selectedItemsLimit = isSingle ? 1 : parseInt(relationsContainer.dataset.limit, 10);
-        const startingLocationId = relationsContainer.dataset.defaultLocation !== '0'
-            ? parseInt(relationsContainer.dataset.defaultLocation, 10)
-            : window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId;
-        const allowedContentTypes = relationsContainer.dataset.allowedContentTypes.split(',').filter(item => item.length);
+        const startingLocationId =
+            relationsContainer.dataset.defaultLocation !== '0'
+                ? parseInt(relationsContainer.dataset.defaultLocation, 10)
+                : eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId;
+        const allowedContentTypes = relationsContainer.dataset.allowedContentTypes.split(',').filter((item) => item.length);
         const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
         const renderRows = (items) => items.forEach((...args) => relationsContainer.insertAdjacentHTML('beforeend', renderRow(...args)));
         const updateInputValue = (items) => {
@@ -93,29 +91,29 @@
             renderRows(items);
             attachRowsEventHandlers();
 
-            selectedItems = [...selectedItems, ...items.map(item => item.ContentInfo.Content._id)];
+            selectedItems = [...selectedItems, ...items.map((item) => item.ContentInfo.Content._id)];
 
             updateInputValue(selectedItems);
             closeUDW();
             updateFieldState();
             updateAddBtnState();
         };
-        const canSelectContent = ({item, itemsCount}, callback) => {
-            const isAllowedContentType = allowedContentTypes.length ?
-                allowedContentTypes.includes(item.ContentInfo.Content.ContentTypeInfo.identifier) :
-                true;
+        const canSelectContent = ({ item, itemsCount }, callback) => {
+            const isAllowedContentType = allowedContentTypes.length
+                ? allowedContentTypes.includes(item.ContentInfo.Content.ContentTypeInfo.identifier)
+                : true;
 
             if (!isAllowedContentType) {
                 return callback(false);
             }
 
-            const isAlreadySelected = !!selectedItems.find(id => id === item.ContentInfo.Content._id);
+            const isAlreadySelected = !!selectedItems.find((id) => id === item.ContentInfo.Content._id);
 
             if (!selectedItemsLimit) {
                 return callback(!isAlreadySelected);
             }
 
-            const canSelect = (selectedItems.length + itemsCount) < selectedItemsLimit && !isAlreadySelected;
+            const canSelect = selectedItems.length + itemsCount < selectedItemsLimit && !isAlreadySelected;
 
             callback(canSelect);
         };
@@ -123,27 +121,35 @@
             event.preventDefault();
 
             const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+            const title = Translator.trans(/*@Desc("Select content")*/ 'ezobjectrelationlist.title', {}, 'universal_discovery_widget');
 
-            ReactDOM.render(React.createElement(global.eZ.modules.UniversalDiscovery, Object.assign({
-                onConfirm,
-                onCancel: closeUDW,
-                confirmLabel: 'Confirm selection',
-                title: 'Select content',
-                multiple: isSingle ? false : selectedItemsLimit !== 1,
-                selectedItemsLimit,
-                startingLocationId,
-                restInfo: { token, siteaccess },
-                canSelectContent
-            }, config)), udwContainer);
+            ReactDOM.render(
+                React.createElement(
+                    eZ.modules.UniversalDiscovery,
+                    Object.assign(
+                        {
+                            onConfirm,
+                            onCancel: closeUDW,
+                            title,
+                            multiple: isSingle ? false : selectedItemsLimit !== 1,
+                            selectedItemsLimit,
+                            startingLocationId,
+                            restInfo: { token, siteaccess },
+                            canSelectContent,
+                        },
+                        config
+                    )
+                ),
+                udwContainer
+            );
         };
         const excludeDuplicatedItems = (items) => {
-            selectedItemsMap = items.reduce((total, item) => Object.assign(
-                {},
-                total,
-                { [item.ContentInfo.Content._id]: item }
-            ), selectedItemsMap);
+            selectedItemsMap = items.reduce(
+                (total, item) => Object.assign({}, total, { [item.ContentInfo.Content._id]: item }),
+                selectedItemsMap
+            );
 
-            return items.filter(item => selectedItemsMap[item.ContentInfo.Content._id]);
+            return items.filter((item) => selectedItemsMap[item.ContentInfo.Content._id]);
         };
         const renderRow = (item, index) => {
             return `
@@ -151,8 +157,10 @@
                     <td><input type="checkbox" value="${item.ContentInfo.Content._id}" /></td>
                     <td class="ez-relations__item-name">${item.ContentInfo.Content.Name}</td>
                     <td>${item.ContentInfo.Content.ContentTypeInfo.names.value[0]['#text']}</td>
-                    <td>${(new Date(item.ContentInfo.Content.publishedDate)).toLocaleString()}</td>
-                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="${selectedItems.length + index + 1}" /></td>
+                    <td>${new Date(item.ContentInfo.Content.publishedDate).toLocaleString()}</td>
+                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="${selectedItems.length +
+                        index +
+                        1}" /></td>
                 </tr>
             `;
         };
@@ -164,7 +172,7 @@
             relationsCTA[ctaMethod]('hidden', true);
         };
         const updateAddBtnState = () => {
-            const methodName = (!selectedItemsLimit || selectedItems.length < selectedItemsLimit) ? 'removeAttribute' : 'setAttribute';
+            const methodName = !selectedItemsLimit || selectedItems.length < selectedItemsLimit ? 'removeAttribute' : 'setAttribute';
 
             addBtn[methodName]('disabled', true);
         };
@@ -173,7 +181,7 @@
                 return;
             }
 
-            const anySelected = findCheckboxes().some(item => item.checked === true);
+            const anySelected = findCheckboxes().some((item) => item.checked === true);
             const methodName = anySelected ? 'removeAttribute' : 'setAttribute';
 
             trashBtn[methodName]('disabled', true);
@@ -183,13 +191,13 @@
 
             const removedItems = [];
 
-            [...relationsContainer.querySelectorAll('input:checked')].forEach(input => {
+            [...relationsContainer.querySelectorAll('input:checked')].forEach((input) => {
                 removedItems.push(parseInt(input.value, 10));
 
                 input.closest('tr').remove();
             });
 
-            selectedItems = selectedItems.filter(item => !removedItems.includes(item));
+            selectedItems = selectedItems.filter((item) => !removedItems.includes(item));
 
             updateInputValue(selectedItems);
             updateFieldState();
@@ -202,7 +210,7 @@
             return [...relationsContainer.querySelectorAll('[type="checkbox"]')];
         };
         const attachRowsEventHandlers = () => {
-            findOrderInputs().forEach(item => item.addEventListener('blur', updateSelectedItemsOrder, false));
+            findOrderInputs().forEach((item) => item.addEventListener('blur', updateSelectedItemsOrder, false));
         };
         const emptyRelationsContainer = () => {
             while (relationsContainer.lastChild) {
@@ -213,10 +221,13 @@
             event.preventDefault();
 
             const inputs = findOrderInputs().reduce((total, input) => {
-                return [...total, {
-                    order: parseInt(input.value, 10),
-                    row: input.closest(SELECTOR_ROW)
-                }];
+                return [
+                    ...total,
+                    {
+                        order: parseInt(input.value, 10),
+                        row: input.closest(SELECTOR_ROW),
+                    },
+                ];
             }, []);
 
             inputs.sort((a, b) => a.order - b.order);
@@ -225,33 +236,30 @@
                 frag.appendChild(item.row);
 
                 return frag;
-            }, document.createDocumentFragment());
+            }, doc.createDocumentFragment());
 
             emptyRelationsContainer();
             relationsContainer.appendChild(fragment);
             attachRowsEventHandlers();
 
-            selectedItems = inputs.map(item => parseInt(item.row.dataset.contentId, 10));
+            selectedItems = inputs.map((item) => parseInt(item.row.dataset.contentId, 10));
             updateInputValue(selectedItems);
         };
-        let selectedItems = [...fieldContainer.querySelectorAll(SELECTOR_ROW)].map(row => parseInt(row.dataset.contentId, 10));
+        let selectedItems = [...fieldContainer.querySelectorAll(SELECTOR_ROW)].map((row) => parseInt(row.dataset.contentId, 10));
         let selectedItemsMap = selectedItems.reduce((total, item) => Object.assign({}, total, { [item]: item }), {});
 
         updateAddBtnState();
         attachRowsEventHandlers();
 
-        [
-            ...fieldContainer.querySelectorAll(SELECTOR_BTN_ADD),
-            ...fieldContainer.querySelectorAll('.ez-relations__cta-btn')
-        ].forEach(btn => btn.addEventListener('click', openUDW, false));
+        [...fieldContainer.querySelectorAll(SELECTOR_BTN_ADD), ...fieldContainer.querySelectorAll('.ez-relations__cta-btn')].forEach(
+            (btn) => btn.addEventListener('click', openUDW, false)
+        );
 
         trashBtn.addEventListener('click', removeItem, false);
         relationsContainer.addEventListener('change', updateTrashBtnState, false);
 
         validator.init();
 
-        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-            [...global.eZ.fieldTypeValidators, validator] :
-            [validator];
+        eZ.fieldTypeValidators = eZ.fieldTypeValidators ? [...eZ.fieldTypeValidators, validator] : [validator];
     });
-})(window, window.React, window.ReactDOM);
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);

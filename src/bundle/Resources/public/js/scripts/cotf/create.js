@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function(global, doc, eZ, React, ReactDOM, Translator) {
     const btns = doc.querySelectorAll('.ez-btn--cotf-create');
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
@@ -14,18 +14,28 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+        const title = Translator.trans(/*@Desc("Create your content")*/ 'dashboard.create.title', {}, 'universal_discovery_widget');
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
-            onConfirm,
-            onCancel,
-            title: 'Create your content',
-            activeTab: 'create',
-            visibleTabs: ['create'],
-            multiple: false,
-            startingLocationId: global.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-            restInfo: {token, siteaccess}
-        }, config)), udwContainer);
+        ReactDOM.render(
+            React.createElement(
+                eZ.modules.UniversalDiscovery,
+                Object.assign(
+                    {
+                        onConfirm,
+                        onCancel,
+                        title,
+                        activeTab: 'create',
+                        visibleTabs: ['create'],
+                        multiple: false,
+                        startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                        restInfo: { token, siteaccess },
+                    },
+                    config
+                )
+            ),
+            udwContainer
+        );
     };
 
-    btns.forEach(btn => btn.addEventListener('click', openUDW, false));
-})(window, document);
+    btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);

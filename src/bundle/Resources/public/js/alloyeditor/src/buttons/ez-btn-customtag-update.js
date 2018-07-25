@@ -150,6 +150,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * @return {Object} The content which should be rendered.
      */
     render() {
+        const saveLabel = Translator.trans(/*@Desc("Save")*/ 'custom_tag_update_btn.save_btn.label', {}, 'alloy_editor');
         const attrs = Object.keys(this.attributes);
         const isValid = this.isValid();
 
@@ -160,7 +161,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     className="ez-btn-ae btn btn-secondary ez-btn-ae--custom-tag float-right"
                     onClick={this.saveCustomTag.bind(this)}
                     disabled={!isValid}
-                >Save</button>
+                >{saveLabel}</button>
             </div>
         );
     }
