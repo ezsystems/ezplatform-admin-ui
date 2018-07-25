@@ -92,13 +92,13 @@
         <note>key: image_update_btn.udw.title</note>
       </trans-unit>
       <trans-unit id="15e27e2548df7ace117c1dd3b119db5798d34e9a" resname="link_edit_btn.action_row.remove">
-        <source>Same tab</source>
-        <target state="new">Same tab</target>
+        <source>Remove</source>
+        <target state="new">Remove</target>
         <note>key: link_edit_btn.action_row.remove</note>
       </trans-unit>
       <trans-unit id="fa01ff4261c8fc5a5835ee5e5d48ffd8c79155fd" resname="link_edit_btn.action_row.save">
-        <source>New tab</source>
-        <target state="new">New tab</target>
+        <source>Save</source>
+        <target state="new">Save</target>
         <note>key: link_edit_btn.action_row.save</note>
       </trans-unit>
       <trans-unit id="a09126ebd2c27b8a83c1e9a5377ef7db6045b4d8" resname="link_edit_btn.button_row.block.placeholder.text">
