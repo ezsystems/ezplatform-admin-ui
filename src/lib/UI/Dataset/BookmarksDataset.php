@@ -34,17 +34,20 @@ class BookmarksDataset
     }
 
     /**
+     * @param int $offset
+     * @param int $limit
+     *
      * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\BookmarksDataset
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    public function load(): self
+    public function load(int $offset = 0, int $limit = 25): self
     {
         $this->data = array_map(
             function (Location $location) {
                 return $this->valueFactory->createBookmark($location);
             },
-            $this->bookmarkService->loadBookmarks()->items
+            $this->bookmarkService->loadBookmarks($offset, $limit)->items
         );
 
         return $this;

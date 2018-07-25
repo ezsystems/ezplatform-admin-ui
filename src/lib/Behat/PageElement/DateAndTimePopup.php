@@ -43,7 +43,10 @@ class DateAndTimePopup extends Element
             $referenceDateElement = $this->context->findElement(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['selectedDaySelector']));
         }
         $currentDate = DateTime::createFromFormat($dateFormat, $referenceDateElement->getAttribute($this->fields['pickerDayValue']));
-        $interval = $date->diff($currentDate);
+
+        $dateToDiff = $this->deleteDayFromDate($date);
+        $currentDateToDiff = $this->deleteDayFromDate($currentDate);
+        $interval = $dateToDiff->diff($currentDateToDiff);
         $monthsDiff = 12 * $interval->y + $interval->m;
 
         for ($i = 0; $i < $monthsDiff; ++$i) {
@@ -62,6 +65,11 @@ class DateAndTimePopup extends Element
                 return;
             }
         }
+    }
+
+    public function deleteDayFromDate(DateTime $dateTime): DateTime
+    {
+        return DateTime::createFromFormat('Y-m', $dateTime->format('Y-m'));
     }
 
     public function switchToNextMonth(): void
