@@ -18,6 +18,7 @@ export default class EzBtnTable extends Component {
             return <AlloyEditor.ButtonTableEdit {...this.props} />;
         }
 
+        const label = Translator.trans(/*@Desc("Table")*/ 'table_btn.label', {}, 'alloy_editor');
         const css = 'ae-button ez-btn-ae ez-btn-ae--table';
 
         return (
@@ -25,7 +26,7 @@ export default class EzBtnTable extends Component {
                 <svg className="ez-icon ez-btn-ae__icon">
                     <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#table-add"></use>
                 </svg>
-                <p className="ez-btn-ae__label">Table</p>
+                <p className="ez-btn-ae__label">{label}</p>
             </button>
         );
     }

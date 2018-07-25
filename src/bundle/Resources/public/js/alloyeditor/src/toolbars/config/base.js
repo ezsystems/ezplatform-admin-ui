@@ -60,18 +60,21 @@ export default class EzConfigBase {
     }
 
     getStyles() {
+        const headingLabel = Translator.trans(/*@Desc("Heading")*/ 'toolbar_config_base.heading_label', {}, 'alloy_editor');
+        const paragraphLabel = Translator.trans(/*@Desc("Paragraph")*/ 'toolbar_config_base.paragraph_label', {}, 'alloy_editor');
+
         return {
             name: 'styles',
             cfg: {
                 showRemoveStylesItem: false,
                 styles: [
-                    {name: 'Heading 1', style: {element: 'h1'}},
-                    {name: 'Heading 2', style: {element: 'h2'}},
-                    {name: 'Heading 3', style: {element: 'h3'}},
-                    {name: 'Heading 4', style: {element: 'h4'}},
-                    {name: 'Heading 5', style: {element: 'h5'}},
-                    {name: 'Heading 6', style: {element: 'h6'}},
-                    {name: 'Paragraph', style: {element: 'p'}},
+                    {name: `${headingLabel} 1`, style: {element: 'h1'}},
+                    {name: `${headingLabel} 2`, style: {element: 'h2'}},
+                    {name: `${headingLabel} 3`, style: {element: 'h3'}},
+                    {name: `${headingLabel} 4`, style: {element: 'h4'}},
+                    {name: `${headingLabel} 5`, style: {element: 'h5'}},
+                    {name: `${headingLabel} 6`, style: {element: 'h6'}},
+                    {name: paragraphLabel, style: {element: 'p'}},
                 ]
             }
         };

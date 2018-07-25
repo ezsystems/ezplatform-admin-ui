@@ -30,6 +30,7 @@ export default class EzBtnUnorderedList extends EzButton {
      * @return {Object} The content which should be rendered.
      */
     render() {
+        const label = Translator.trans(/*@Desc("List")*/ 'unordered_list_btn.label', {}, 'alloy_editor');
         const css = 'ae-button ez-btn-ae ez-btn-ae--unordered-list ' + this.getStateClasses();
 
         return (
@@ -37,7 +38,7 @@ export default class EzBtnUnorderedList extends EzButton {
                 <svg className="ez-icon ez-btn-ae__icon">
                     <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#list"></use>
                 </svg>
-                <p className="ez-btn-ae__label">List</p>
+                <p className="ez-btn-ae__label">{label}</p>
             </button>
         );
     }

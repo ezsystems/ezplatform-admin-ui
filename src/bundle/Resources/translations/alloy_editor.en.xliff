@@ -26,6 +26,11 @@
         <target state="new">Right</target>
         <note>key: blocktext_align_right_btn.label</note>
       </trans-unit>
+      <trans-unit id="3b4cdbba9b4d4209e8c826b072589dab7497fa46" resname="custom_tag_update_btn.save_btn.label">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: custom_tag_update_btn.save_btn.label</note>
+      </trans-unit>
       <trans-unit id="ac0f20994b177772319ac51d8f9b3389ea74de7c" resname="embed_align_center_btn.label">
         <source>Center</source>
         <target state="new">Center</target>
@@ -96,30 +101,45 @@
         <target state="new">New tab</target>
         <note>key: link_edit_btn.action_row.save</note>
       </trans-unit>
+      <trans-unit id="a09126ebd2c27b8a83c1e9a5377ef7db6045b4d8" resname="link_edit_btn.button_row.block.placeholder.text">
+        <source>Type or paste link here</source>
+        <target state="new">Type or paste link here</target>
+        <note>key: link_edit_btn.button_row.block.placeholder.text</note>
+      </trans-unit>
       <trans-unit id="d9139bdb7978ed01bb6a7fd7f2ba31bfee633de2" resname="link_edit_btn.button_row.link_to">
         <source>Link to</source>
         <target state="new">Link to</target>
         <note>key: link_edit_btn.button_row.link_to</note>
-      </trans-unit>
-      <trans-unit id="c978f0429e1ded02f0d4eeb1044019da9600006a" resname="link_edit_btn.button_row.or">
-        <source>or</source>
-        <target state="new">or</target>
-        <note>key: link_edit_btn.button_row.or</note>
       </trans-unit>
       <trans-unit id="415a1b131ab0d9c6656a74d93f7f557bb26a184a" resname="link_edit_btn.button_row.select_content">
         <source>Select content</source>
         <target state="new">Select content</target>
         <note>key: link_edit_btn.button_row.select_content</note>
       </trans-unit>
+      <trans-unit id="13030ee0ffb15cd01456325b86c523d60b732d0c" resname="link_edit_btn.button_row.separator">
+        <source>or</source>
+        <target state="new">or</target>
+        <note>key: link_edit_btn.button_row.separator</note>
+      </trans-unit>
       <trans-unit id="616ed4fdb7520ef3a604ff51d7de46f1a5e285a0" resname="link_edit_btn.info_row.new_tab">
         <source>New tab</source>
         <target state="new">New tab</target>
         <note>key: link_edit_btn.info_row.new_tab</note>
       </trans-unit>
+      <trans-unit id="dbdabcab7ac96a4b93bf58ba620cf382e0ca94db" resname="link_edit_btn.info_row.open_in.label">
+        <source>Open in:</source>
+        <target state="new">Open in:</target>
+        <note>key: link_edit_btn.info_row.open_in.label</note>
+      </trans-unit>
       <trans-unit id="9941fb5145e7aa08983780c1f86c00ecdce0d44e" resname="link_edit_btn.info_row.same_tab">
         <source>Same tab</source>
         <target state="new">Same tab</target>
         <note>key: link_edit_btn.info_row.same_tab</note>
+      </trans-unit>
+      <trans-unit id="706afc3b545461082f7d1d7c14ef5c2a25b5cc97" resname="link_edit_btn.info_row.title">
+        <source>Title</source>
+        <target state="new">Title</target>
+        <note>key: link_edit_btn.info_row.title</note>
       </trans-unit>
       <trans-unit id="a506b0b999be9efcb8217c745cdab751cbb1ac37" resname="link_edit_btn.udw.title">
         <source>Select content</source>
@@ -135,6 +155,41 @@
         <source>Move Up</source>
         <target state="new">Move Up</target>
         <note>key: move_up_btn.title</note>
+      </trans-unit>
+      <trans-unit id="37870b74e43bad51e49f69d41625b29a5ef65458" resname="ordered_list_btn.label">
+        <source>List</source>
+        <target state="new">List</target>
+        <note>key: ordered_list_btn.label</note>
+      </trans-unit>
+      <trans-unit id="76d14e18928d2f58ee195c720e54ae4735bd2026" resname="paragraph_btn.label">
+        <source>Paragraph</source>
+        <target state="new">Paragraph</target>
+        <note>key: paragraph_btn.label</note>
+      </trans-unit>
+      <trans-unit id="289fdecb2d66f81c13dc96c04253ab84f14c0561" resname="remove_block_btn.title">
+        <source>Remove block</source>
+        <target state="new">Remove block</target>
+        <note>key: remove_block_btn.title</note>
+      </trans-unit>
+      <trans-unit id="e51c80180acbd8d90c95344dbdfb0f6a3ada456e" resname="table_btn.label">
+        <source>Table</source>
+        <target state="new">Table</target>
+        <note>key: table_btn.label</note>
+      </trans-unit>
+      <trans-unit id="1b32cb64237c5fe23f10ffe217a76c9d33487c4e" resname="toolbar_config_base.heading_label">
+        <source>Heading</source>
+        <target state="new">Heading</target>
+        <note>key: toolbar_config_base.heading_label</note>
+      </trans-unit>
+      <trans-unit id="5261ce3329c2fa8448f25a0ea609a8d57ebf9953" resname="toolbar_config_base.paragraph_label">
+        <source>Paragraph</source>
+        <target state="new">Paragraph</target>
+        <note>key: toolbar_config_base.paragraph_label</note>
+      </trans-unit>
+      <trans-unit id="f5aa82a917683c8bcd6a800a75a086822a209f77" resname="unordered_list_btn.label">
+        <source>List</source>
+        <target state="new">List</target>
+        <note>key: unordered_list_btn.label</note>
       </trans-unit>
     </body>
   </file>

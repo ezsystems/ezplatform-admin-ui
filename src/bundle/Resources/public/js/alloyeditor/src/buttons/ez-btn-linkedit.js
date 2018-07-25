@@ -157,8 +157,9 @@ export default class EzBtnLinkEdit extends Component {
      */
     renderUDWRow() {
         const selectContentLabel = Translator.trans(/*@Desc("Select content")*/ 'link_edit_btn.button_row.select_content', {}, 'alloy_editor');
-        const separatorLabel = Translator.trans(/*@Desc("or")*/ 'link_edit_btn.button_row.or', {}, 'alloy_editor');
+        const separatorLabel = Translator.trans(/*@Desc("or")*/ 'link_edit_btn.button_row.separator', {}, 'alloy_editor');
         const linkToLabel = Translator.trans(/*@Desc("Link to")*/ 'link_edit_btn.button_row.link_to', {}, 'alloy_editor');
+        const blockPlaceholderText = Translator.trans(/*@Desc("Type or paste link here")*/ 'link_edit_btn.button_row.block.placeholder.text', {}, 'alloy_editor'); 
 
         return (
             <div className="ez-ae-edit-link__row">
@@ -174,7 +175,7 @@ export default class EzBtnLinkEdit extends Component {
                     <label className="ez-ae-edit-link__label">{linkToLabel}</label>
                     <input className="ae-input ez-ae-edit-link__input"
                         onChange={this.setHref.bind(this)} onKeyDown={this.handleKeyDown.bind(this)}
-                        placeholder="Type or paste link here"
+                        placeholder={blockPlaceholderText}
                         type="text" value={this.state.linkHref}
                     ></input>
                     <button aria-label={AlloyEditor.Strings.clearInput}
@@ -194,20 +195,22 @@ export default class EzBtnLinkEdit extends Component {
      */
     renderInfoRow() {
         const target = this.state.linkTarget;
+        const title = Translator.trans(/*@Desc("Title")*/ 'link_edit_btn.info_row.title', {}, 'alloy_editor');
+        const openInLabel = Translator.trans(/*@Desc("Open in:")*/ 'link_edit_btn.info_row.open_in.label', {}, 'alloy_editor'); 
         const sameTabLabel = Translator.trans(/*@Desc("Same tab")*/ 'link_edit_btn.info_row.same_tab', {}, 'alloy_editor');
         const newTabLabel = Translator.trans(/*@Desc("New tab")*/ 'link_edit_btn.info_row.new_tab', {}, 'alloy_editor');
 
         return (
             <div className="ez-ae-edit-link__row">
                 <div className="ez-ae-edit-link__block ez-ae-edit-link__block--title">
-                    <label className="ez-ae-edit-link__label">Title</label>
+                    <label className="ez-ae-edit-link__label">{title}</label>
                     <input type="text"
                         className="ae-input ez-ae-edit-link__input" onChange={this.setTitle.bind(this)}
                         value={this.state.linkTitle}
                     ></input>
                 </div>
                 <div className="ez-ae-edit-link__block ez-ae-edit-link__block--target">
-                    <span className="ez-ae-edit-link__text">Open in:</span>
+                    <span className="ez-ae-edit-link__text">{openInLabel}</span>
                     <div className="ez-ae-edit-link__choice">
                         <label htmlFor="ez-ae-link-target-same" className="ez-ae-edit-link__label ez-ae-edit-link__label--same-tab">
                             <input type="radio" name="target" id="ez-ae-link-target-same"
@@ -236,8 +239,8 @@ export default class EzBtnLinkEdit extends Component {
      * @return {Object} The content which should be rendered.
      */
     renderActionRow() {
-        const removeLabel = Translator.trans(/*@Desc("Same tab")*/ 'link_edit_btn.action_row.remove', {}, 'alloy_editor');
-        const saveLabel = Translator.trans(/*@Desc("New tab")*/ 'link_edit_btn.action_row.save', {}, 'alloy_editor');
+        const removeLabel = Translator.trans(/*@Desc("Remove")*/ 'link_edit_btn.action_row.remove', {}, 'alloy_editor');
+        const saveLabel = Translator.trans(/*@Desc("Save")*/ 'link_edit_btn.action_row.save', {}, 'alloy_editor');
 
         return (
             <div className="ez-ae-edit-link__row ez-ae-edit-link__row--actions">
