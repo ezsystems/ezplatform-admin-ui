@@ -16,3 +16,8 @@ services:
         public: true
         arguments:
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+
+    EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content\UrlRedirectProcessor:
+        public: true
+        arguments:
+            $siteaccessGroups: '%ezpublish.siteaccess.groups%'
