@@ -1,5 +1,5 @@
 form:not(.form-inline) {
-    .form-control-label {
+    .ez-field-edit__label {
         font-weight: 700;
         font-size: 14px;
         color: $ez-color-base-dark;
@@ -46,7 +46,7 @@ form:not(.form-inline) {
 
     .col-form-label,
     .form-control,
-    .form-control-label {
+    .ez-field-edit__label {
         margin-right: .5rem;
     }
 }

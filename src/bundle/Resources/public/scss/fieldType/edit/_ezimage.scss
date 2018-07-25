@@ -39,7 +39,7 @@
     .ez-data-source__field--alternativeText {
         &.is-invalid {
             .ez-data-source__label-wrapper,
-            .ez-data-source__label-wrapper .form-control-label {
+            .ez-data-source__label-wrapper .ez-field-edit__label {
                 color: $ez-color-danger;
             }
 
