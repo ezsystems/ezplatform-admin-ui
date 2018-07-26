@@ -71,6 +71,46 @@
         <target state="new">%width%px Width - %height%px Height</target>
         <note>key: ezimage.width_and_height</note>
       </trans-unit>
+      <trans-unit id="85038ddf9e38bbf3da26c38adff609012d65a53a" resname="ezimageasset.alternative_text">
+        <source>Alternative text</source>
+        <target state="new">Alternative text</target>
+        <note>key: ezimageasset.alternative_text</note>
+      </trans-unit>
+      <trans-unit id="6ccdfa3f93ea5a6c0c17a7a9f6fe8fac4d5b6926" resname="ezimageasset.file_name">
+        <source>File name</source>
+        <target state="new">File name</target>
+        <note>key: ezimageasset.file_name</note>
+      </trans-unit>
+      <trans-unit id="776e01f9a87ec54ddd743494a906d859643aca68" resname="ezimageasset.image_file_properties">
+        <source>Image file properties</source>
+        <target state="new">Image file properties</target>
+        <note>key: ezimageasset.image_file_properties</note>
+      </trans-unit>
+      <trans-unit id="dd0de6b207b703b96d015f309ffa8d53d32f64bf" resname="ezimageasset.master_dimensions">
+        <source>Master dimensions</source>
+        <target state="new">Master dimensions</target>
+        <note>key: ezimageasset.master_dimensions</note>
+      </trans-unit>
+      <trans-unit id="c63a925d645b5365654bfaa2e5ac129280388bc0" resname="ezimageasset.not_available">
+        <source>Image asset is not available (related content has been deleted or insufficient permissions)</source>
+        <target>Image asset is not available (related content has been deleted or insufficient permissions)</target>
+        <note>key: ezimageasset.not_available</note>
+      </trans-unit>
+      <trans-unit id="9d8611731543740ff64e9e1a69f9c18812301879" resname="ezimageasset.ratio">
+        <source>Ratio</source>
+        <target state="new">Ratio</target>
+        <note>key: ezimageasset.ratio</note>
+      </trans-unit>
+      <trans-unit id="b79e2f923b29d82c28e5eaff5475d2edee6d7826" resname="ezimageasset.size">
+        <source>Size</source>
+        <target state="new">Size</target>
+        <note>key: ezimageasset.size</note>
+      </trans-unit>
+      <trans-unit id="06c54d9e5476af34defb52323b7b1ebacce6a38c" resname="ezimageasset.width_and_height">
+        <source>%width%px Width - %height%px Height</source>
+        <target state="new">%width%px Width - %height%px Height</target>
+        <note>key: ezimageasset.width_and_height</note>
+      </trans-unit>
       <trans-unit id="e371d4573dda857ef4a58cebd2420f87992b8864" resname="ezmedia.auto_play">
         <source>Auto play</source>
         <target state="new">Auto play</target>

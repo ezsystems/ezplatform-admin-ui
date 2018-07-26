@@ -778,3 +778,11 @@ ezplatform.notifications.mark_as_read:
     methods: [GET]
     requirements:
         notificationId: '\d+'
+
+ezplatform.asset.upload_image:
+    path: /asset/image
+    options:
+        expose: true
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Asset:uploadImage'
+    methods: [POST]

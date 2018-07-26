@@ -18,7 +18,8 @@
         text-align: center;
         position: relative;
 
-        .ez-data-source__btn-add {
+        .ez-data-source__btn-add,
+        .ez-data-source__btn-select {
             display: inline-flex;
             padding: 0.5rem 1.25rem;
             border-radius: 0.25rem;
@@ -42,7 +43,9 @@
         }
 
         .ez-data-source__btn-add:hover,
-        .ez-data-source__btn-add:focus {
+        .ez-data-source__btn-add:focus,
+        .ez-data-source__btn-select:hover,
+        .ez-data-source__btn-select:focus {
             background: $ez-color-primary-hover;
         }
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="dc2dfb4a937fee7119e733e0b6715a09320d5078" resname="ezimageasset.create.message.error">
+        <source>Error while creating image asset: %error%</source>
+        <target state="new">Error while creating image asset: %error%</target>
+        <note>key: ezimageasset.create.message.error</note>
+      </trans-unit>
+      <trans-unit id="56d1cc1d279fa173f9f73ab42a61df985aeb5b0c" resname="ezimageasset.create.message.success">
+        <source>Image has been published and can now be reused</source>
+        <target state="new">Image has been published and can now be reused</target>
+        <note>key: ezimageasset.create.message.success</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

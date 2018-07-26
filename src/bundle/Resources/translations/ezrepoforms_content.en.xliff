@@ -21,6 +21,11 @@
         <target state="new">Image stored in field '%label%'</target>
         <note>key: content.field_type.ezimage.img_alt</note>
       </trans-unit>
+      <trans-unit id="03ebd0d1e50c8323be782f1095d9d4d7f9edffa4" resname="content.field_type.ezimageasset.img_alt">
+        <source>Image stored in field '%label%'</source>
+        <target state="new">Image stored in field '%label%'</target>
+        <note>key: content.field_type.ezimageasset.img_alt</note>
+      </trans-unit>
       <trans-unit id="093c498e82bd382a4732e4bb8356c7d88b671f25" resname="content.field_type.ezmedia.player_settings">
         <source>Player settings</source>
         <target state="new">Player settings</target>
@@ -95,6 +100,16 @@
         <source>Upload file</source>
         <target state="new">Upload file</target>
         <note>key: fieldtype.binary_base.upload_file</note>
+      </trans-unit>
+      <trans-unit id="dcf8a820f28bd6b955d76c6d3b95a2661d2b7540" resname="fieldtype.ezimageasset.select.label">
+        <source>Select from your repository</source>
+        <target state="new">Select from your repository</target>
+        <note>key: fieldtype.ezimageasset.select.label</note>
+      </trans-unit>
+      <trans-unit id="bf1b649ad290a62f1192ee5b4fb58f7bdfc8e50d" resname="fieldtype.ezimageasset.upload.label">
+        <source>Upload image</source>
+        <target state="new">Upload image</target>
+        <note>key: fieldtype.ezimageasset.upload.label</note>
       </trans-unit>
     </body>
   </file>

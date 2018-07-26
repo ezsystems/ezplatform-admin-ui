@@ -70,6 +70,10 @@ services:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'richTextCustomTags' }
 
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\ImageAsset\Mapping:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'imageAssetMapping' }
+
     # Notifications
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\Notifications:
         tags:

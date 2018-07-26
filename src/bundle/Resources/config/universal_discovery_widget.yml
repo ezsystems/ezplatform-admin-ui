@@ -37,3 +37,6 @@ system:
                     multiple: false
                     content_on_the_fly:
                         allowed_content_types: ['image']
+                image_asset:
+                    multiple: false
+                    visible_tabs: ['browse', 'search', 'bookmarks']

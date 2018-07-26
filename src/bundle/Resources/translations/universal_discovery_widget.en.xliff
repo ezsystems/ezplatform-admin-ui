@@ -26,6 +26,11 @@
         <target state="new">Create your content</target>
         <note>key: dashboard.create.title</note>
       </trans-unit>
+      <trans-unit id="bc4850e9ccff0c6effc58a089fe148c16689d8ee" resname="ezimageasset.title">
+        <source>Select Image Asset</source>
+        <target state="new">Select Image Asset</target>
+        <note>key: ezimageasset.title</note>
+      </trans-unit>
       <trans-unit id="005c6256355de38d3f5cb90b08945053ac28cf9e" resname="ezobjectrelationlist.title">
         <source>Select content</source>
         <target state="new">Select content</target>
