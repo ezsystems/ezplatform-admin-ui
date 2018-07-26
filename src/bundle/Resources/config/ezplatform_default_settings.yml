@@ -47,3 +47,43 @@ parameters:
 
     # Views
     ezsettings.default.content_translate_view: {}
+
+
+    ezsettings.default.multifile_upload_module.location_mappings: []
+
+    ezsettings.default.multifile_upload_module.default_mappings:
+        # Image
+        - mime_types:
+            - image/jpeg
+            - image/jpg
+            - image/pjpeg
+            - image/pjpg
+            - image/png
+            - image/bmp
+            - image/gif
+            - image/tiff
+            - image/x-icon
+            - image/webp
+          content_type_identifier: image
+          content_field_identifier: image
+          name_field_identifier: name
+        # File
+        - mime_types:
+            - image/svg+xml
+            - application/msword
+            - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+            - application/vnd.ms-excel
+            - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+            - application/vnd.ms-powerpoint
+            - application/vnd.openxmlformats-officedocument.presentationml.presentation
+            - application/pdf
+          content_type_identifier: file
+          content_field_identifier: file
+          name_field_identifier: name
+
+    ezsettings.default.multifile_upload_module.fallback_content_type:
+        content_type_identifier: file
+        content_field_identifier: file
+        name_field_identifier: name
+
+    ezsettings.default.multifile_upload_module.max_file_size: 5242880
