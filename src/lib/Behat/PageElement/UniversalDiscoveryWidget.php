@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use PHPUnit\Framework\Assert;
 
@@ -24,7 +25,7 @@ class UniversalDiscoveryWidget extends Element
             'mainWindow' => '.m-ud',
             'confirmButton' => '.m-ud__action--confirm',
             'cancelButton' => '.m-ud__action--cancel',
-            'selectContentButton' => '.c-meta-preview__btn--select',
+            'selectContentButton' => '.c-select-content-button',
             'elementSelector' => '.c-finder-tree-branch:nth-of-type(%d) .c-finder-tree-leaf',
             'branchLoadingSelector' => '.c-finder-tree-leaf--loading',
             'previewName' => '.c-meta-preview__name',
@@ -38,13 +39,13 @@ class UniversalDiscoveryWidget extends Element
     public function selectContent(string $itemPath): void
     {
         $pathParts = explode('/', $itemPath);
-        $depth = 1;
+        $depth = 0;
         foreach ($pathParts as $part) {
+            ++$depth;
+
             $this->context->waitUntilElementIsVisible(sprintf($this->fields['treeBranch'], $depth), self::UDW_TIMEOUT);
             $this->context->getElementByText($part, sprintf($this->fields['elementSelector'], $depth))->click();
             $this->context->waitUntilElementDisappears($this->fields['branchLoadingSelector'], self::UDW_BRANCH_LOADING_TIMEOUT);
-
-            ++$depth;
         }
         $expectedContentName = $pathParts[count($pathParts) - 1];
         $this->context->waitUntil(
@@ -53,7 +54,11 @@ class UniversalDiscoveryWidget extends Element
                 return $this->context->findElement($this->fields['previewName'])->getText() === $expectedContentName;
             });
 
-        $this->context->findElement($this->fields['selectContentButton'])->click();
+        if ($this->isMultiSelect()) {
+            $itemToSelect = $this->context->getElementByText($expectedContentName, sprintf($this->fields['elementSelector'], $depth));
+            $itemToSelect->mouseOver();
+            $this->context->findElement($this->fields['selectContentButton'], self::UDW_BRANCH_LOADING_TIMEOUT, $itemToSelect)->click();
+        }
     }
 
     public function confirm(): void
@@ -93,5 +98,14 @@ class UniversalDiscoveryWidget extends Element
     protected function isVisible(): bool
     {
         return $this->context->isElementVisible($this->fields['mainWindow'], self::UDW_DISAPPEAR_TIMEOUT);
+    }
+
+    protected function isMultiSelect(): bool
+    {
+        try {
+            return $this->context->findElement($this->fields['selectContentButton'], self::UDW_BRANCH_LOADING_TIMEOUT) !== null;
+        } catch (ElementNotFoundException $e) {
+            return false;
+        }
     }
 }
