@@ -28,7 +28,13 @@
                 <span class="ez-modal--custom-url-alias__label">{{ 'tab.urls.add.site_root'|trans|desc('Place alias at the site root') }}</span>
                 {{ form_widget(form.site_root) }}
                 <div class="ez-modal--custom-url-alias__info-text">{{ 'tab.urls.add.site_root.helper.checked'|trans|desc('Checked will create the alias at the site root.') }}</div>
-                <div class="ez-modal--custom-url-alias__info-text">{{ 'tab.urls.add.site_root.helper.unchecked'|trans({'%parent_name%': parent_name})|desc('Unchecked will create the new alias under %parent_name%') }}</div>
+                <div class="ez-modal--custom-url-alias__info-text">
+                    {% if parent_name is not null %}
+                        {{ 'tab.urls.add.site_root.helper.unchecked'|trans({'%parent_name%': parent_name})|desc('Unchecked will create the new alias under %parent_name%') }}
+                    {% else %}
+                        {{ 'tab.urls.add.site_root.helper.no_parent_name'|trans|desc('Unchecked will create the new alias under the parent of this location') }}
+                    {% endif %}
+                </div>
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-dark" data-dismiss="modal">
