@@ -24,7 +24,7 @@
                     {% include '@ezdesign/parts/table_header.html.twig' with {
                          ground: 'mt-3',
                          headerText: 'bookmark.table.header'|trans|desc('Bookmarks') ~ ' (' ~ pager.count ~ ')',
-                         tools: form_widget(form_remove.remove, {'attr': {'class': 'btn btn-primary', 'disabled': true}})
+                         tools: form_widget(form_remove.remove, {'attr': {'class': 'btn btn-danger', 'disabled': true}})
                      } %}
                     <table class="table">
                         <thead>
