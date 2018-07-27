@@ -363,6 +363,8 @@ class ContentViewController extends Controller
      */
     private function supplyIsLocationBookmarked(ContentView $view): void
     {
-        $view->addParameters(['location_is_bookmarked' => $this->bookmarkService->isBookmarked($view->getLocation())]);
+        $locationIsBookmarked = $view->getLocation() ? $this->bookmarkService->isBookmarked($view->getLocation()) : false;
+
+        $view->addParameters(['location_is_bookmarked' => $locationIsBookmarked]);
     }
 }
