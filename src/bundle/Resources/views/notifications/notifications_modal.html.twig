@@ -1,7 +1,7 @@
 {% trans_default_domain 'notifications' %}
 
 <div
-    class="modal fade n-notifications-modal"
+    class="modal fade ez-notifications-modal"
     id="view-notifications"
     tabindex="-1"
     role="dialog">
@@ -10,7 +10,11 @@
         role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ 'notifications'|trans|desc('Notifications') }}</h5>
+                <h5 
+                    class="modal-title" 
+                    data-notifications-total="">
+                    {{ 'notifications'|trans|desc('Notifications') }} 
+                </h5>
                 <button
                     type="button"
                     class="close"
@@ -24,24 +28,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table
-                    data-notifications="{{ path('ezplatform.notifications.render') }}"
-                    data-notifications-count="{{ path('ezplatform.notifications.count') }}"
-                    class="table n-table--notifications">
-                    <thead>
-                    <tr>
-                        <th>{{ 'notification.type'|trans|desc('Type') }}</th>
-                        <th>{{ 'notification.description'|trans|desc('Description') }}</th>
-                        <th>{{ 'notification.date'|trans|desc('Date') }}</th>
-                    </tr>
-                    </thead>
-                    <tbody class="n-table__body">
-                    {{ render(controller('EzPlatformAdminUiBundle:Notification:renderNotifications', {
-                        'limit': 5,
-                        'offset': 0,
+                <div class="ez-notifications-modal__spinner">
+                    <svg class="ez-icon ez-spin">
+                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#spinner"></use>
+                    </svg>
+                </div>
+                <div class="ez-notifications-modal__results">
+                    {{ render(controller('EzPlatformAdminUiBundle:Notification:renderNotificationsPage', {
+                        'page': 1,
                     })) }}
-                    </tbody>
-                </table>
+                </div>
             </div>
         </div>
     </div>

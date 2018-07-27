@@ -1,4 +1,4 @@
-.n-notifications-modal {
+.ez-notifications-modal {
     cursor: auto;
 
     .modal-dialog {
@@ -10,6 +10,10 @@
 
         .modal-title {
             font-size: 1.5rem;
+
+            &::after {
+                content: attr(data-notifications-total);
+            }
         }
 
         .close {
@@ -20,7 +24,7 @@
     .modal-body {
         padding: 2rem;
         background-color: $ez-ground-base-medium;
-        border-radius: 0 0 .25rem .25rem;
+        border-radius: 0 0 0.25rem 0.25rem;
     }
 
     .table {
@@ -110,6 +114,31 @@
                     cursor: pointer;
                 }
             }
+        }
+    }
+
+    &--loading {
+        .ez-notifications-modal__spinner {
+            display: block;
+        }
+
+        .ez-notifications-modal__results {
+            visibility: hidden;
+        }
+    }
+
+    &__spinner {
+        width: 2rem;
+        height: 2rem;
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+
+        .ez-icon {
+            width: 2rem;
+            height: 2rem;
         }
     }
 }

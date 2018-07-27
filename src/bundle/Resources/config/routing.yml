@@ -735,6 +735,15 @@ ezplatform.notifications.render:
         offset: '\d+'
         limit: '\d+'
 
+ezplatform.notifications.render.page:
+    path: /notifications/render/page/{page}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Notification:renderNotificationsPage'
+        page: 1
+    methods: [GET]
+    requirements:
+        page: '\d+'
+
 ezplatform.notifications.count:
     path: /notifications/count
     defaults:
