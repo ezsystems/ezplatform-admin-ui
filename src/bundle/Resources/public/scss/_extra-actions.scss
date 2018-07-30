@@ -54,6 +54,7 @@
         overflow: auto;
     }
 
+    &--edit-user,
     &--edit {
         #{$block}__content {
             padding: 8px;

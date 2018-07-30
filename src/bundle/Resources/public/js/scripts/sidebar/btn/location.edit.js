@@ -1,8 +1,9 @@
 (function (global, doc, $) {
-    const editActions = doc.querySelector('.ez-extra-actions--edit');
+    const editActions = doc.querySelector('.ez-extra-actions--edit') || doc.querySelector('.ez-extra-actions--edit-user') ;
     const btns = [...editActions.querySelectorAll('.form-check [type="radio"]')];
     const form = editActions.querySelector('form');
-    const contentId = form.querySelector('#content_edit_content_info').value;
+    const contentIdSelector = form.querySelector('#content_edit_content_info') || form.querySelector('#user_edit_content_info');
+    const contentId = contentIdSelector.value;
     const checkVersionDraftLink = global.Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId });
     const resetRadioButtons = () => btns.forEach(btn => btn.checked = false);
     const addDraft = () => {
@@ -14,7 +15,10 @@
         const showModal = (modalHtml) => {
             const wrapper = doc.querySelector('.ez-modal-wrapper');
             wrapper.innerHTML = modalHtml;
-            wrapper.querySelector('.ez-btn--add-draft').addEventListener('click', addDraft, false);
+            const addDraftButton = wrapper.querySelector('.ez-btn--add-draft');
+            if (addDraftButton) {
+                addDraftButton.addEventListener('click', addDraft, false);
+            }
             [...wrapper.querySelectorAll('.ez-btn--prevented')].forEach(btn => btn.addEventListener('click', event => event.preventDefault(), false));
             $('#version-draft-conflict-modal').modal('show').on('hidden.bs.modal', resetRadioButtons);
         };

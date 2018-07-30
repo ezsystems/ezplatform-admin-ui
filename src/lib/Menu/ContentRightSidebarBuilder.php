@@ -144,6 +144,18 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'class' => 'ez-btn--extra-actions ez-btn--edit',
             'data-actions' => 'edit',
         ];
+        $editUserAttributes = [
+            'class' => 'ez-btn--extra-actions ez-btn--edit-user',
+            'data-actions' => 'edit-user',
+        ];
+        $deleteAttributes = [
+            'data-toggle' => 'modal',
+            'data-target' => '#delete-user-modal',
+        ];
+        $sendToTrashAttributes = [
+            'data-toggle' => 'modal',
+            'data-target' => '#trash-location-modal',
+        ];
         $copySubtreeAttributes = [
             'class' => 'ez-btn--udw-copy-subtree',
             'data-root-location' => $this->configResolver->getParameter(
@@ -159,6 +171,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $this->searchService
         ))->and((new IsRoot())->not())->isSatisfiedBy($location);
 
+        $contentIsUser = (new ContentIsUser($this->userService))->isSatisfiedBy($content);
+
         $menu->setChildren([
             self::ITEM__CREATE => $this->createMenuItem(
                 self::ITEM__CREATE,
@@ -169,16 +183,36 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                         : array_merge($createAttributes, ['disabled' => 'disabled']),
                 ]
             ),
-            self::ITEM__EDIT => $this->createMenuItem(
-                self::ITEM__EDIT,
-                [
-                    'extras' => ['icon' => 'edit'],
-                    'attributes' => $canEdit
-                        ? $editAttributes
-                        : array_merge($editAttributes, ['disabled' => 'disabled']),
-                ]
-            ),
-            self::ITEM__MOVE => $this->createMenuItem(
+        ]);
+
+        if ($contentIsUser) {
+            $menu->addChild(
+                $this->createMenuItem(
+                    self::ITEM__EDIT,
+                    [
+                        'extras' => ['icon' => 'edit'],
+                        'attributes' => $canEdit
+                            ? $editUserAttributes
+                            : array_merge($editUserAttributes, ['disabled' => 'disabled']),
+                    ]
+                )
+            );
+        } else {
+            $menu->addChild(
+                $this->createMenuItem(
+                    self::ITEM__EDIT,
+                    [
+                        'extras' => ['icon' => 'edit'],
+                        'attributes' => $canEdit
+                            ? $editAttributes
+                            : array_merge($editAttributes, ['disabled' => 'disabled']),
+                    ]
+                )
+            );
+        }
+
+        $menu->addChild(
+            $this->createMenuItem(
                 self::ITEM__MOVE,
                 [
                     'extras' => ['icon' => 'move'],
@@ -190,8 +224,11 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                         ),
                     ],
                 ]
-            ),
-            self::ITEM__COPY => $this->createMenuItem(
+            )
+        );
+
+        $menu->addChild(
+            $this->createMenuItem(
                 self::ITEM__COPY,
                 [
                     'extras' => ['icon' => 'copy'],
@@ -203,8 +240,11 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                         ),
                     ],
                 ]
-            ),
-            self::ITEM__COPY_SUBTREE => $this->createMenuItem(
+            )
+        );
+
+        $menu->addChild(
+            $this->createMenuItem(
                 self::ITEM__COPY_SUBTREE,
                 [
                     'extras' => ['icon' => 'copy-subtree'],
@@ -212,10 +252,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                         ? $copySubtreeAttributes
                         : array_merge($copySubtreeAttributes, ['disabled' => 'disabled']),
                 ]
-            ),
-        ]);
+            )
+        );
 
-        $contentIsUser = (new ContentIsUser($this->userService))->isSatisfiedBy($content);
         if ($contentIsUser && $canDelete) {
             $menu->addChild(
                 $this->createMenuItem(

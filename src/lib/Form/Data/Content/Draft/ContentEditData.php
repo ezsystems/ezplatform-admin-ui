@@ -21,11 +21,7 @@ class ContentEditData
     /** @var Location|null */
     protected $location;
 
-    /**
-     * @deprecated Deprecated in 1.1 and will be removed in 2.0. Please use ContentEditData::$location instead.
-     *
-     * @var ContentInfo|null
-     * */
+    /** @var ContentInfo|null */
     protected $contentInfo;
 
     /** @var VersionInfo|null */
@@ -71,8 +67,6 @@ class ContentEditData
     }
 
     /**
-     * @deprecated Deprecated in 1.1 and will be removed in 2.0. Please use ContentEditData::getLocation instead.
-     *
      * @return ContentInfo|null
      */
     public function getContentInfo(): ?ContentInfo
@@ -81,8 +75,6 @@ class ContentEditData
     }
 
     /**
-     * @deprecated Deprecated in 1.1 and will be removed in 2.0. Please use ContentEditData::setLocation instead.
-     *
      * @param ContentInfo|null $contentInfo
      *
      * @return self

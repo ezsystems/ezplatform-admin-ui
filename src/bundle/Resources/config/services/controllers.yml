@@ -8,6 +8,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $siteaccessResolver: '@EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver'
+            $userContentTypeIdentifier: '$user_content_type_identifier$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
