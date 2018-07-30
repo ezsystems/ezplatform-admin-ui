@@ -8,12 +8,16 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content;
 
+use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\URLAliasService;
+use eZ\Publish\API\Repository\Values\Content\URLAlias;
+use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 use EzSystems\RepositoryForms\Event\FormActionEvent;
 use EzSystems\RepositoryForms\Event\RepositoryFormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -22,24 +26,30 @@ class UrlRedirectProcessor implements EventSubscriberInterface
     /** @var \Symfony\Component\Routing\RouterInterface */
     private $router;
 
-    /** @var \Symfony\Component\HttpFoundation\RequestStack */
-    private $requestStack;
+    /** @var \eZ\Publish\API\Repository\URLAliasService */
+    private $urlAliasService;
+
+    /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess */
+    private $siteaccess;
 
     /** @var array */
     private $siteaccessGroups;
 
     /**
      * @param \Symfony\Component\Routing\RouterInterface $router
-     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+     * @param \eZ\Publish\API\Repository\URLAliasService $urlAliasService
+     * @param \eZ\Publish\Core\MVC\Symfony\SiteAccess $siteaccess
      * @param array $siteaccessGroups
      */
     public function __construct(
         RouterInterface $router,
-        RequestStack $requestStack,
+        URLAliasService $urlAliasService,
+        SiteAccess $siteaccess,
         array $siteaccessGroups
     ) {
         $this->router = $router;
-        $this->requestStack = $requestStack;
+        $this->urlAliasService = $urlAliasService;
+        $this->siteaccess = $siteaccess;
         $this->siteaccessGroups = $siteaccessGroups;
     }
 
@@ -61,46 +71,22 @@ class UrlRedirectProcessor implements EventSubscriberInterface
      */
     public function processRedirectAfterPublish(FormActionEvent $event): void
     {
-        if (!$this->isAdminSiteAccess()) {
-            return;
-        }
-
-        if (null === $event->getLocationToRedirect()) {
-            return;
-        }
-
         if ($event->getForm()['redirectUrlAfterPublish']->getData()) {
             return;
         }
 
-        $targetLocation = $event->getLocationToRedirect();
-        $response = new RedirectResponse($this->router->generate(
-            '_ezpublishLocation',
-            ['locationId' => $targetLocation->id],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        ));
-        $event->setResponse($response);
+        $this->resolveAdminSiteaccessRedirect($event);
     }
 
     /**
      * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
      *
      * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function processRedirectAfterCancel(FormActionEvent $event): void
     {
-        if (!$this->isAdminSiteAccess()) {
-            return;
-        }
-
-        /** @var \eZ\Publish\API\Repository\Values\Content\Location $targetLocation */
-        $targetLocation = $event->getLocationToRedirect();
-        $response = new RedirectResponse($this->router->generate(
-            '_ezpublishLocation',
-            ['locationId' => $targetLocation->id],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        ));
-        $event->setResponse($response);
+        $this->resolveAdminSiteaccessRedirect($event);
     }
 
     /**
@@ -108,10 +94,49 @@ class UrlRedirectProcessor implements EventSubscriberInterface
      *
      * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
-    protected function isAdminSiteAccess(): bool
+    protected function isAdminSiteaccess(): bool
     {
-        $siteaccess = $this->requestStack->getCurrentRequest()->attributes->get('siteaccess');
+        return (new IsAdmin($this->siteaccessGroups))->isSatisfiedBy($this->siteaccess);
+    }
 
-        return (new IsAdmin($this->siteaccessGroups))->isSatisfiedBy($siteaccess);
+    /**
+     * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
+     *
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
+     */
+    private function resolveAdminSiteaccessRedirect(FormActionEvent $event): void
+    {
+        if (!$this->isAdminSiteaccess()) {
+            return;
+        }
+
+        /** @var \Symfony\Component\HttpFoundation\RedirectResponse $response */
+        $response = $event->getResponse();
+
+        if (!$response instanceof RedirectResponse) {
+            return;
+        }
+
+        /* If target URL was set to something else than Location, do nothing */
+        try {
+            $targetUrlAlias = $this->urlAliasService->lookup(
+                $response->getTargetUrl()
+            );
+        } catch (InvalidArgumentException $e) {
+            return;
+        } catch (NotFoundException $e) {
+            return;
+        }
+
+        if ($targetUrlAlias->type !== URLAlias::LOCATION) {
+            return;
+        }
+
+        $response = new RedirectResponse($this->router->generate(
+            '_ezpublishLocation',
+            ['locationId' => $targetUrlAlias->destination],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        ));
+        $event->setResponse($response);
     }
 }
