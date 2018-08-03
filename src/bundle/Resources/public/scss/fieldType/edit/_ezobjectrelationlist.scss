@@ -47,7 +47,7 @@
 
             .btn {
                 line-height: .85;
-                padding: .5rem .55rem;
+                padding: calculateRem(8px) calculateRem(5px) calculateRem(8px) calculateRem(10px);
                 margin-left: .15rem;
                 margin-right: 0;
             }
