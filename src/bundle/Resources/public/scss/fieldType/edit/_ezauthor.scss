@@ -1,7 +1,11 @@
 .ez-field-edit--ezauthor {
     .ez-data-source__author {
         background-color: $ez-ground-base;
-        padding: 1rem;
+        padding: 1rem 1rem 1.25rem 1rem;
+
+        &.form-row {
+            align-items: flex-end;
+        }
     }
 
     .ez-data-source__label-wrapper {
@@ -10,10 +14,15 @@
         }
     }
 
+    .ez-data-source__input-wrapper {
+        .form-control {
+            margin-bottom: 0;
+        }
+    }
+
     .ez-data-source__actions {
         display: flex;
         align-items: center;
-        padding-top: 2.5rem;
 
         button {
             margin: 0 .35rem;
