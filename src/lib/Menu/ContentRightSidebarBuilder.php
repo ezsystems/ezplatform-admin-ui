@@ -144,14 +144,6 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'class' => 'ez-btn--extra-actions ez-btn--edit',
             'data-actions' => 'edit',
         ];
-        $deleteAttributes = [
-            'data-toggle' => 'modal',
-            'data-target' => '#delete-user-modal',
-        ];
-        $sendToTrashAttributes = [
-            'data-toggle' => 'modal',
-            'data-target' => '#trash-location-modal',
-        ];
         $copySubtreeAttributes = [
             'class' => 'ez-btn--udw-copy-subtree',
             'data-root-location' => $this->configResolver->getParameter(
@@ -223,34 +215,38 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             ),
         ]);
 
-        if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
+        $contentIsUser = (new ContentIsUser($this->userService))->isSatisfiedBy($content);
+        if ($contentIsUser && $canDelete) {
             $menu->addChild(
                 $this->createMenuItem(
                     self::ITEM__DELETE,
                     [
                         'extras' => ['icon' => 'trash'],
-                        'attributes' => $canDelete
-                            ? $deleteAttributes
-                            : array_merge($deleteAttributes, ['disabled' => 'disabled']),
+                        'attributes' => [
+                            'data-toggle' => 'modal',
+                            'data-target' => '#delete-user-modal',
+                        ],
                     ]
                 )
             );
-        } else {
+        }
+
+        if (!$contentIsUser && 1 !== $location->depth && $canTrashLocation) {
             $menu->addChild(
                 $this->createMenuItem(
                     self::ITEM__SEND_TO_TRASH,
                     [
                         'extras' => ['icon' => 'trash-send'],
-                        'attributes' => $canTrashLocation ?
-                            $sendToTrashAttributes
-                            : array_merge($sendToTrashAttributes, ['disabled' => 'disabled']),
+                        'attributes' => [
+                            'data-toggle' => 'modal',
+                            'data-target' => '#trash-location-modal',
+                        ],
                     ]
                 )
             );
         }
 
         if (1 === $location->depth) {
-            $menu[self::ITEM__SEND_TO_TRASH]->setAttribute('disabled', 'disabled');
             $menu[self::ITEM__MOVE]->setAttribute('disabled', 'disabled');
         }
 
