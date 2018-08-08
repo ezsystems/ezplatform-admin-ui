@@ -418,6 +418,12 @@ ezplatform.location.copy_subtree:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location:copySubtree'
 
+ezplatform.location.trash_with_asset:
+    path: /location/trash-with-asset
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Location\TrashLocationWithAsset:trash'
+
 # LocationView / Translation tab
 
 ezplatform.translation.add:

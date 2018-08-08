@@ -112,3 +112,9 @@ form:not(.form-inline) {
         color: $ez-color-danger;
     }
 }
+
+.ez-trash-with-asset-checkbox-list {
+    .form-check-input {
+        position: absolute;
+    }
+}
