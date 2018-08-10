@@ -4,13 +4,13 @@
     const NOTIFICATION_INFO_LABEL = 'info';
     const NOTIFICATION_SUCCESS_LABEL = 'success';
     const NOTIFICATION_WARNING_LABEL = 'warning';
-    const NOTIFICATION_DANGER_LABEL = 'danger';
+    const NOTIFICATION_ERROR_LABEL = 'danger';
 
     /**
      * Dispatches notification event
      *
      * @function showNotification
-     * @param {Object} detail
+     * @param {{message: string, label: string}} detail
      */
     const showNotification = (detail) => {
         const event = new CustomEvent('ez-notify', { detail });
@@ -60,22 +60,33 @@
      * @function showDangerNotification
      * @param {String} message
      */
-    const showDangerNotification = (message) =>
-        showNotification({
-            message,
-            label: NOTIFICATION_DANGER_LABEL,
-        });
+    const showDangerNotification = (message) => {
+        console.warn('[DEPRECATED] showDangerNotification is deprecated');
+        console.warn('[DEPRECATED] it will be removed from ezplatform-admin-ui 2.0');
+        console.warn('[DEPRECATED] use showErrorNotification instead');
+
+        showErrorNotification(message);
+    };
 
     /**
-     * Dispatches danger notification event
+     * Dispatches error notification event
      *
      * @function showErrorNotification
-     * @param {Error} error
+     * @param {(string | Error)} error
      */
-    const showErrorNotification = (error) => showDangerNotification(error.message);
+    const showErrorNotification = (error) => {
+        const isErrorObj = error instanceof Error;
+        const message = isErrorObj ? error.message : error;
+
+        showNotification({
+            message,
+            label: NOTIFICATION_ERROR_LABEL,
+        });
+    };
 
     eZ.helpers = eZ.helpers || {};
     eZ.helpers.notification = {
+        showNotification,
         showInfoNotification,
         showSuccessNotification,
         showWarningNotification,
