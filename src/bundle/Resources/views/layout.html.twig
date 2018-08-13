@@ -12,15 +12,8 @@
                     const objectString = '[object Object]';
                     const setValue = (newValue, oldValue) => {
                         if (shouldMerge) {
-                            const isOldValueArray = Array.isArray(oldValue);
-                            const isNewValueArray = Array.isArray(newValue);
-
-                            if (isOldValueArray && isNewValueArray) {
+                            if (Array.isArray(oldValue) && Array.isArray(newValue)) {
                                 return [...oldValue, ...newValue];
-                            }
-
-                            if (isOldValueArray && !isNewValueArray) {
-                                return [...oldValue, newValue];
                             }
 
                             if (oldValue.toString() === objectString && newValue.toString() === objectString) {
