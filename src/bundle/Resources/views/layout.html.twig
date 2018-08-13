@@ -9,19 +9,21 @@
                 addConfig: (path, value, shouldMerge = false) => {
                     const keys = path.split('.');
                     const lastIndex = keys.length - 1;
-                    const objectString = '[object Object]';
+                    const objectConstructorName = 'Object';
                     const setValue = (newValue, oldValue) => {
-                        if (shouldMerge) {
-                            if (Array.isArray(oldValue) && Array.isArray(newValue)) {
-                                return [...oldValue, ...newValue];
-                            }
+                        const hasValue = newValue && !!newValue.constructor;
 
-                            if (oldValue.toString() === objectString && newValue.toString() === objectString) {
-                                return  { ...oldValue, ...newValue };
-                            }
+                        if (!shouldMerge || !hasValue) {
+                            return newValue;
                         }
 
-                        return newValue;
+                        if (Array.isArray(oldValue) && Array.isArray(newValue)) {
+                            return [...oldValue, ...newValue];
+                        }
+
+                        if (oldValue.constructor.name === objectConstructorName && newValue.constructor.name === objectConstructorName) {
+                            return { ...oldValue, ...newValue };
+                        }
                     };
 
                     keys.reduce((a, b, index) => {
@@ -35,7 +37,7 @@
 
                         return a[b];
                     }, window.eZ);
-                }
+                },
             };
         </script>
         {% block meta %}
