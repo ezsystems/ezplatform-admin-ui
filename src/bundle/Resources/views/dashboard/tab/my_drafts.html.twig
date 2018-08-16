@@ -19,7 +19,7 @@
                 <td>{{ row.type }}</td>
                 <td>{{ admin_ui_config.languages.mappings[row.language].name }}</td>
                 <td>{{ row.version }}</td>
-                <td>{{ row.modified|date('M d, Y h:iA') }}</td>
+                <td>{{ row.modified|localizeddate('medium', 'short') }}</td>
                 <td class="text-center">
                     <button class="btn btn-icon ez-btn--content-draft-edit"
                             title="{{ 'dashboard.table.draft.edit'|trans|desc('Edit Draft') }}"

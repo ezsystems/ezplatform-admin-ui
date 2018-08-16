@@ -15,7 +15,7 @@
             <tr>
                 <td><a href="{{ url('_ez_content_view', { 'contentId': row.contentId }) }}">{{ row.name }}</a></td>
                 <td>{{ row.type }}</td>
-                <td>{{ row.modified|date('M d, Y h:iA') }}</td>
+                <td>{{ row.modified|localizeddate('medium', 'short') }}</td>
                 <td class="text-center">
                     <button class="btn btn-icon ez-btn--content-edit"
                             title="{{ 'dashboard.table.content.edit'|trans|desc('Edit Content') }}"
