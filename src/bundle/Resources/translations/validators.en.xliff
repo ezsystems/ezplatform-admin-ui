@@ -107,13 +107,13 @@
         <note>key: js.error.out_of_range_value</note>
       </trans-unit>
       <trans-unit id="fff2e4db98c86a312a0a3fd9861781e511d24d79" resname="js.error.provide_latitude_value">
-        <source>Please, provide latitude value in the Latitude field</source>
-        <target state="new">Please, provide latitude value in the Latitude field</target>
+        <source>Provide latitude value in the Latitude field</source>
+        <target state="new">Provide latitude value in the Latitude field</target>
         <note>key: js.error.provide_latitude_value</note>
       </trans-unit>
       <trans-unit id="ed724243af56a0ff1a761c6ac10bffee055c7a47" resname="js.error.provide_longitude_value">
-        <source>Please, provide longitude value in the Longitude field</source>
-        <target state="new">Please, provide longitude value in the Longitude field</target>
+        <source>Provide longitude value in the Longitude field</source>
+        <target state="new">Provide longitude value in the Longitude field</target>
         <note>key: js.error.provide_longitude_value</note>
       </trans-unit>
       <trans-unit id="4486bc31f8e72bc3452052da1b3e7b1f6ccd7f6b" resname="js.error.too_long">
