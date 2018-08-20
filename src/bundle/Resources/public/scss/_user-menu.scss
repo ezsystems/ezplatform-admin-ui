@@ -1,6 +1,7 @@
 .ez-user-menu {
     position: relative;
     cursor: pointer;
+    z-index: 1050;
 
     &__name-wrapper {
         padding: .5rem 2rem .5rem 0;
@@ -44,7 +45,6 @@
         background-color: $ez-white;
         border-radius: 5px;
         box-shadow: 0 0 10px 0 rgba(0,0,0,.25);
-        z-index: 1050;
         height: auto;
         transform-origin: top center;
         transition: all .2s $ez-admin-transition;
@@ -52,7 +52,6 @@
         &--hidden {
             height: 0;
             overflow: hidden;
-            z-index: initial;
         }
     }
 
