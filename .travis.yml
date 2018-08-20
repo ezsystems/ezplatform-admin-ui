@@ -56,4 +56,4 @@ script:
     - if [ "${BEHAT_OPTS}" != "" ]; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "./bin/behat $BEHAT_OPTS" ; fi
 
 git:
-  depth: 99999
+  depth: false
