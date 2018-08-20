@@ -23,7 +23,7 @@
                         {{ 'dashboard.table.contributor.not_found'|trans|desc('Can’t fetch contributor') }}
                     {% endif %}
                 </td>
-                <td>{{ row.modified|date('M d, Y h:iA') }}</td>
+                <td>{{ row.modified|localizeddate('medium', 'short') }}</td>
                 <td class="text-center">
                     <button class="btn btn-icon ez-btn--content-edit"
                             title="{{ 'dashboard.table.all.media.edit'|trans|desc('Edit Media') }}"

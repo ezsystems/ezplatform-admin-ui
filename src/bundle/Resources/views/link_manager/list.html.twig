@@ -74,12 +74,12 @@
                     <td>{{ url.isValid ? 'url.status.valid'|trans : 'url.status.invalid'|trans }}</td>
                     <td>
                         {% if url.lastChecked %}
-                            {{ url.lastChecked | date('M d, Y h:i:sA') }}
+                            {{ url.lastChecked|localizeddate('medium', 'short') }}
                         {% else %}
                             Never
                         {% endif %}
                     </td>
-                    <td>{{ url.modified | date('M d, Y h:i:sA') }}</td>
+                    <td>{{ url.modified|localizeddate('medium', 'short') }}</td>
                     <td class="text-right">
                         {% if can_edit %}
                             <a href="{{ edit_url }}" class="btn btn-icon" title="{{ 'url.action.edit'|trans|desc('Edit URL') }}">
