@@ -50,7 +50,7 @@
                     <td>{{ 'url.label.last_checked'|trans }}</td>
                     <td>
                         {% if url.lastChecked %}
-                            {{ url.lastChecked | localizeddate('medium', 'short') }}
+                            {{ url.lastChecked|localizeddate('medium', 'short') }}
                         {% else %}
                             {{ 'url.label.last_checked.never'|trans|desc('This URL has not been checked') }}
                         {% endif %}
@@ -58,11 +58,11 @@
                 </tr>
                 <tr>
                     <td>{{ 'url.label.created'|trans }}</td>
-                    <td>{{ url.created | localizeddate('medium', 'short') }}</td>
+                    <td>{{ url.created|localizeddate('medium', 'short') }}</td>
                 </tr>
                 <tr>
                     <td>{{ 'url.label.modified'|trans }}</td>
-                    <td>{{ url.modified | localizeddate('medium', 'short') }}</td>
+                    <td>{{ url.modified|localizeddate('medium', 'short') }}</td>
                 </tr>
             </tbody>
         </table>
