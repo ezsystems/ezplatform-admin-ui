@@ -1,10 +1,10 @@
 import EzConfigBase from './base';
 
-export default class EzHeadingConfig extends EzConfigBase {
+export default class EzCustomStyleConfig extends EzConfigBase {
     constructor(config) {
         super(config);
 
-        this.name = 'heading';
+        this.name = 'custom-style';
         this.buttons = [
             'ezmoveup',
             'ezmovedown',
@@ -17,10 +17,19 @@ export default class EzHeadingConfig extends EzConfigBase {
         ];
     }
 
+    getStyles(customStyles = []) {
+        return {
+            name: 'styles',
+            cfg: {
+                showRemoveStylesItem: false,
+                styles: [...customStyles],
+            },
+        };
+    }
+
     /**
-     * Tests whether the `paragraph` toolbar should be visible. It is
-     * visible when the selection is empty and when the caret is inside a
-     * paragraph.
+     * Tests whether the `custom style` toolbar should be visible. It is
+     * visible when an existing custom style gets the focus.
      *
      * @method test
      * @param {Object} payload
@@ -34,6 +43,12 @@ export default class EzHeadingConfig extends EzConfigBase {
         const nativeEditor = payload.editor.get('nativeEditor');
         const path = nativeEditor.elementPath();
 
-        return (nativeEditor.isSelectionEmpty() && path && path.contains(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']));
+        return (
+            nativeEditor.isSelectionEmpty() &&
+            path &&
+            path.contains(function(el) {
+                return el.hasAttribute('data-ezstyle');
+            })
+        );
     }
 }
