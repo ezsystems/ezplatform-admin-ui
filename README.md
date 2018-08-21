@@ -1,4 +1,4 @@
-# platform-admin-ui
+# ezplatform-admin-ui
 Repository dedicated to the Platform Admin UI Bundle. Back-end interface that handles specific parts of the application.
 
 How to extend Admin UI:
