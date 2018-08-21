@@ -6,11 +6,13 @@ matrix:
           env: PHPUNIT_CONFIG='phpunit.xml'
         - php: 7.1
           env:
+          - PHP_IMAGE=ezsystems/php:7.1-v1
           - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
           - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction -vv"
           - SYMFONY_ENV=behat
         - php: 7.1
           env:
+          - PHP_IMAGE=ezsystems/php:7.1-v1
           - WEB_HOST="varnish"
           - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/varnish.yml:doc/docker/redis.yml:doc/docker/selenium.yml"
           - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction --tags=~@EZP-29291-excluded"
