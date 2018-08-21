@@ -15,6 +15,11 @@ matrix:
           - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
           - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction -vv --dry-run"
           - SYMFONY_ENV=behat
+        - php: 7.2
+          env:
+          - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
+          - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction -vv --dry-run"
+          - SYMFONY_ENV=behat
 
 cache:
     directories:
