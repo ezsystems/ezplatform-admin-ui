@@ -4,31 +4,65 @@
         <meta charset="UTF-8" />
         <meta name="CSRF-Token" content="{{ csrf_token('authenticate') }}" />
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
+        <script>
+            window.eZ = {
+                addConfig: (path, value, shouldMerge = false) => {
+                    const keys = path.split('.');
+                    const lastIndex = keys.length - 1;
+                    const objectConstructorName = 'Object';
+                    const setValue = (newValue, oldValue) => {
+                        const hasValue = newValue && !!newValue.constructor;
+
+                        if (!shouldMerge || !hasValue) {
+                            return newValue;
+                        }
+
+                        if (Array.isArray(oldValue) && Array.isArray(newValue)) {
+                            return [...oldValue, ...newValue];
+                        }
+
+                        if (oldValue.constructor.name === objectConstructorName && newValue.constructor.name === objectConstructorName) {
+                            return { ...oldValue, ...newValue };
+                        }
+                    };
+
+                    keys.reduce((a, b, index) => {
+                        if (!a[b]) {
+                            a[b] = {};
+                        }
+
+                        if (index === lastIndex) {
+                            a[b] = setValue(value, a[b]);
+                        }
+
+                        return a[b];
+                    }, window.eZ);
+                },
+            };
+        </script>
         {% block meta %}
         {% endblock %}
         <script>
-            window.eZ = {
-                adminUiConfig: {{ admin_ui_config|json_encode|raw }},
-                errors: {
-                    emailRegexp: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    emptyField: '{{ 'js.error.empty.field'|trans({}, 'validators')|desc('{fieldName} field is required') }}',
-                    invalidEmail: '{{ 'js.error.invalid_email'|trans({}, 'validators')|desc('A valid email address is required') }}',
-                    invalidUrl: '{{ 'js.error.invalid_url'|trans({}, 'validators')|desc('A valid URL is required') }}',
-                    tooLong: '{{ 'js.error.too_long'|trans({}, 'validators')|desc('{fieldName} value should be less than or equal to {maxLength} characters') }}',
-                    tooShort: '{{ 'js.error.too_short'|trans({}, 'validators')|desc('{fieldName} value should be greater than or equal to {minLength} characters') }}',
-                    isNotInteger: '{{ 'js.error.is_not_integer'|trans({}, 'validators')|desc('{fieldName} value should be an integer') }}',
-                    isNotFloat: '{{ 'js.error.is_not_float'|trans({}, 'validators')|desc('{fieldName} value should be a float number') }}',
-                    isLess: '{{ 'js.error.is_less'|trans({}, 'validators')|desc('{fieldName} value should be greater than or equal to {minValue}') }}',
-                    isGreater: '{{ 'js.error.is_greater'|trans({}, 'validators')|desc('{fieldName} value should be less than or equal to {maxValue}') }}',
-                    invalidFileSize: '{{ 'js.error.invalid_file_size'|trans({}, 'validators')|desc('{fieldName}: Cannot upload. File exceeds file size limit.') }}',
-                    provideLatitudeValue: '{{ 'js.error.provide_latitude_value'|trans({}, 'validators')|desc('Please, provide latitude value in the Latitude field') }}',
-                    provideLongitudeValue: '{{ 'js.error.provide_longitude_value'|trans({}, 'validators')|desc('Please, provide longitude value in the Longitude field') }}',
-                    addressNotFound: '{{ 'js.error.address_not_found'|trans({}, 'validators')|desc('Provided address does not exist') }}',
-                    notSamePasswords: '{{ 'js.error.not_same_passwords'|trans({}, 'validators')|desc('Passwords do not match') }}',
-                    invalidValue: '{{ 'js.error.invalid_value'|trans({}, 'validators')|desc('{fieldName} field has invalid values') }}',
-                    outOfRangeValue: '{{ 'js.error.out_of_range_value'|trans({}, 'validators')|desc('{fieldName} field value is out of range. The value has to be between {min} and {max}') }}'
-                },
-            };
+            window.eZ.addConfig('adminUiConfig', {{ admin_ui_config|json_encode|raw }});
+            window.eZ.addConfig('errors', {
+                emailRegexp: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                emptyField: '{{ 'js.error.empty.field'|trans({}, 'validators')|desc('{fieldName} field is required') }}',
+                invalidEmail: '{{ 'js.error.invalid_email'|trans({}, 'validators')|desc('A valid email address is required') }}',
+                invalidUrl: '{{ 'js.error.invalid_url'|trans({}, 'validators')|desc('A valid URL is required') }}',
+                tooLong: '{{ 'js.error.too_long'|trans({}, 'validators')|desc('{fieldName} value should be less than or equal to {maxLength} characters') }}',
+                tooShort: '{{ 'js.error.too_short'|trans({}, 'validators')|desc('{fieldName} value should be greater than or equal to {minLength} characters') }}',
+                isNotInteger: '{{ 'js.error.is_not_integer'|trans({}, 'validators')|desc('{fieldName} value should be an integer') }}',
+                isNotFloat: '{{ 'js.error.is_not_float'|trans({}, 'validators')|desc('{fieldName} value should be a float number') }}',
+                isLess: '{{ 'js.error.is_less'|trans({}, 'validators')|desc('{fieldName} value should be greater than or equal to {minValue}') }}',
+                isGreater: '{{ 'js.error.is_greater'|trans({}, 'validators')|desc('{fieldName} value should be less than or equal to {maxValue}') }}',
+                invalidFileSize: '{{ 'js.error.invalid_file_size'|trans({}, 'validators')|desc('{fieldName}: Cannot upload. File exceeds file size limit.') }}',
+                provideLatitudeValue: '{{ 'js.error.provide_latitude_value'|trans({}, 'validators')|desc('Provide latitude value in the Latitude field') }}',
+                provideLongitudeValue: '{{ 'js.error.provide_longitude_value'|trans({}, 'validators')|desc('Provide longitude value in the Longitude field') }}',
+                addressNotFound: '{{ 'js.error.address_not_found'|trans({}, 'validators')|desc('Provided address does not exist') }}',
+                notSamePasswords: '{{ 'js.error.not_same_passwords'|trans({}, 'validators')|desc('Passwords do not match') }}',
+                invalidValue: '{{ 'js.error.invalid_value'|trans({}, 'validators')|desc('{fieldName} field has invalid values') }}',
+                outOfRangeValue: '{{ 'js.error.out_of_range_value'|trans({}, 'validators')|desc('{fieldName} field value is out of range. The value has to be between {min} and {max}') }}'
+            });
 
             window.CKEDITOR_BASEPATH = window.ALLOYEDITOR_BASEPATH = "/bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/";
         </script>
