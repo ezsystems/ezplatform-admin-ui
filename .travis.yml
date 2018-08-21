@@ -6,14 +6,19 @@ matrix:
           env: PHPUNIT_CONFIG='phpunit.xml'
         - php: 7.1
           env:
+          - PHP_IMAGE=ezsystems/php:7.1-v1
           - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
-          - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction -vv"
+          - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction -vv --dry-run"
           - SYMFONY_ENV=behat
         - php: 7.1
           env:
-          - WEB_HOST="varnish"
-          - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/varnish.yml:doc/docker/redis.yml:doc/docker/selenium.yml"
-          - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction --tags=~@EZP-29291-excluded"
+          - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
+          - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction -vv --dry-run"
+          - SYMFONY_ENV=behat
+        - php: 7.2
+          env:
+          - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
+          - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction -vv --dry-run"
           - SYMFONY_ENV=behat
 
 cache:
@@ -54,3 +59,6 @@ install:
 script:
     - if [ "${PHPUNIT_CONFIG}" != '' ]; then ./vendor/bin/phpunit -c "${PHPUNIT_CONFIG}"; fi
     - if [ "${BEHAT_OPTS}" != "" ]; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "./bin/behat $BEHAT_OPTS" ; fi
+
+# git:
+#   depth: false
