@@ -63,7 +63,7 @@ class PolicyEditRightSidebarBuilder extends AbstractBuilder implements Translati
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#%s', $saveId),
                     ],
-                    'extras' => ['icon' => 'save'],
+                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
