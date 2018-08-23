@@ -42,8 +42,10 @@ class ElementFactory
     {
         switch ($installType) {
             case InstallType::PLATFORM:
+            case InstallType::PLATFORM_DEMO:
                 return new PlatformElementFactory();
             case InstallType::ENTERPRISE:
+            case InstallType::ENTERPRISE_DEMO:
                 return new EnterpriseElementFactory();
             default:
                 throw new \Exception('Unrecognised install type');

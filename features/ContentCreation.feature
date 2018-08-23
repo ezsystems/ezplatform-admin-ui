@@ -33,7 +33,7 @@ Scenario: Content can be previewed during creation
     And I set content fields
       | label | value               |
       | Title | Test Article2       |
-      | Intro | Test article2 intro |
+    And I set article main content field to "Test article2 intro"
     And I click on the edit action bar button "Preview"
     And I go to "tablet" view in "Test Article2" preview
     And I go to "mobile" view in "Test Article2" preview
@@ -43,7 +43,7 @@ Scenario: Content can be previewed during creation
     And content fields are set
       | label | value               |
       | Title | Test Article2       |
-      | Intro | Test article2 intro |
+    And article main content field is set to "Test article2 intro"
 
 @javascript @common
 Scenario: Content draft can be saved
@@ -51,7 +51,7 @@ Scenario: Content draft can be saved
     And I set content fields
       | label | value              |
       | Title | Test Article       |
-      | Intro | Test article intro |
+    And I set article main content field to "Test article intro"
     And I click on the edit action bar button "Save"
   Then success notification that "Content draft saved." appears
     And I should be on "Content Update" "Test Article" page
@@ -72,7 +72,7 @@ Scenario: Content draft can be deleted
     And I set content fields
       | label | value                     |
       | Title | Test Article edited       |
-      | Intro | Test article intro edited |
+    And I set article main content field to "Test article intro edited"
     And I click on the edit action bar button "Delete draft"
   Then I should be on root container page in Content View
     And going to dashboard we see there's no draft "Test Article edited" on list
@@ -83,14 +83,14 @@ Scenario: Content can be published
     And I set content fields
       | label | value              |
       | Title | Test Article       |
-      | Intro | Test article intro |
+    And I set article main content field to "Test article intro"
     And I click on the edit action bar button "Publish"
   Then success notification that "Content published." appears
     And I should be on content container page "Test Article" of type "Article" in root path
     And content attributes equal
       | label | value              |
       | Title | Test Article       |
-      | Intro | Test article intro |
+    And article main content field equals "Test article intro"
 
 @javascript @common
 Scenario: Content edit draft can be deleted
@@ -99,7 +99,7 @@ Scenario: Content edit draft can be deleted
     And I set content fields
       | label | value                     |
       | Title | Test Article edited       |
-      | Intro | Test article intro edited |
+    And I set article main content field to "Test article intro edited"
     And I click on the edit action bar button "Delete draft"
   Then I should be on content container page "Test Article" of type "Article" in root path
     And going to dashboard we see there's no draft "Test Article edited" on list
@@ -111,7 +111,7 @@ Scenario: Content draft can be edited from dashboard
     And I set content fields
       | label | value                     |
       | Title | Test Article edited       |
-      | Intro | Test article intro edited |
+    And I set article main content field to "Test article intro edited"
     And I click on the edit action bar button "Save"
     And I click on the close button
     And going to dashboard we see there's draft "Test Article edited" on list
@@ -125,7 +125,7 @@ Scenario: Content draft edition can be closed
     And I set content fields
       | label | value                      |
       | Title | Test Article edited2       |
-      | Intro | Test article intro edited2 |
+    And I set article main content field to "Test article intro edited2"
     And I click on the close button
   Then I should be on content container page "Test Article" of type "Article" in root path
 
@@ -136,7 +136,7 @@ Scenario: Content edit draft can be saved
     And I set content fields
       | label | value                      |
       | Title | Test Article edited2       |
-      | Intro | Test article intro edited2 |
+    And I set article main content field to "Test article intro edited2"
     And I click on the edit action bar button "Save"
   Then success notification that "Content draft saved." appears
     And I should be on "Content Update" "Test Article edited2" page
@@ -156,7 +156,7 @@ Scenario: Content draft can be created and published through draft list modal
     And content attributes equal
       | label | value                |
       | Title | Test Article edited3 |
-      | Intro | Test article intro   |
+    And article main content field equals "Test article intro"
 
 @javascript @common
 Scenario: Content can be previewed during edition
@@ -171,7 +171,7 @@ Scenario: Content can be previewed during edition
     And content fields are set
       | label | value                |
       | Title | Test Article edited3 |
-      | Intro | Test article intro   |
+  And article main content field is set to "Test article intro"
 
 @javascript @common
 Scenario: Content draft from draft list modal can be published
@@ -187,7 +187,7 @@ Scenario: Content draft from draft list modal can be published
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
-      | Intro | Test article intro   |
+    And article main content field equals "Test article intro"
 
 @javascript @common
 Scenario: Content moving can be cancelled
@@ -199,7 +199,7 @@ Scenario: Content moving can be cancelled
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
-      | Intro | Test article intro   |
+    And article main content field equals "Test article intro"
     And breadcrumb shows "Test Article edited4" path under root path
 
 @javascript @common
@@ -213,7 +213,7 @@ Scenario: Content can be moved
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
-      | Intro | Test article intro   |
+    And article main content field equals "Test article intro"
     And breadcrumb shows "Media/Images/Test Article edited4" path
     And going to root path there is no "Test Article edited4" "Article" on Sub-items list
 
@@ -227,7 +227,7 @@ Scenario: Content copying can be cancelled
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
-      | Intro | Test article intro   |
+    And article main content field equals "Test article intro"
     And going to root path there is no "Test Article edited4" "Article" on Sub-items list
 
 @javascript @common
@@ -241,7 +241,7 @@ Scenario: Content can be copied
     And content attributes equal
       | label | value                |
       | Title | Test Article edited4 |
-      | Intro | Test article intro   |
+    And article main content field equals "Test article intro"
     And going to "Media/Images" there is a "Test Article edited4" "Article" on Sub-items list
 
 @javascript @common

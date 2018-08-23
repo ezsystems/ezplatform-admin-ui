@@ -45,8 +45,10 @@ class PageObjectFactory
     {
         switch ($installType) {
             case InstallType::PLATFORM:
+            case InstallType::PLATFORM_DEMO:
                 return new PlatformPageObjectFactory();
             case InstallType::ENTERPRISE:
+            case InstallType::ENTERPRISE_DEMO:
                 return new EnterprisePageObjectFactory();
             default:
                 throw new \Exception('Unrecognised install type');

@@ -16,6 +16,9 @@ class PlatformEnvironmentConstants
         $this->values = [
             'ROOT_CONTENT_NAME' => 'eZ Platform',
             'ROOT_CONTENT_TYPE' => 'Folder',
+            'ARTICLE_MAIN_FIELD_NAME' => 'Intro',
+            'CREATE_REGISTRATION_ROLE_POLICIES' => 'user/login,content/read',
+            'REGISTRATION_CONFIRMATION_MESSAGE' => 'Your account has been created',
         ];
     }
 }

@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
+use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentUpdateItemPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 
@@ -52,5 +53,25 @@ class ContentUpdateContext extends BusinessContext
     {
         $updateItemPage = PageObjectFactory::createPage($this->utilityContext, ContentUpdateItemPage::PAGE_NAME, '');
         $updateItemPage->contentUpdateForm->closeUpdateForm();
+    }
+
+    /**
+     * @When I set article main content field to :intro
+     */
+    public function iSetArticleMainContentField(string $intro): void
+    {
+        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, ContentUpdateItemPage::PAGE_NAME, '');
+        $fieldName = EzEnvironmentConstants::get('ARTICLE_MAIN_FIELD_NAME');
+        $updateItemPage->contentUpdateForm->fillFieldWithValue($fieldName, ['value' => $intro]);
+    }
+
+    /**
+     * @Then article main content field is set to :intro
+     */
+    public function verifyArticleMainContentFieldIsSet(string $intro): void
+    {
+        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, ContentUpdateItemPage::PAGE_NAME, '');
+        $fieldName = EzEnvironmentConstants::get('ARTICLE_MAIN_FIELD_NAME');
+        $updateItemPage->contentUpdateForm->verifyFieldHasValue(['label' => $fieldName, 'value' => $intro]);
     }
 }
