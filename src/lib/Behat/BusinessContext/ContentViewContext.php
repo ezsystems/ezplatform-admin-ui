@@ -161,6 +161,16 @@ class ContentViewContext extends BusinessContext
     }
 
     /**
+     * @Then article main content field equals :intro
+     */
+    public function articleMainContentFieldEquals(string $intro): void
+    {
+        $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, '');
+        $fieldName = EzEnvironmentConstants::get('ARTICLE_MAIN_FIELD_NAME');
+        $contentItemPage->contentField->verifyFieldHasValue($fieldName, ['value' => $intro]);
+    }
+
+    /**
      * @When I start creating new draft from draft conflict modal
      */
     public function startCreatingNewDraftFromDraftConflictModal(): void

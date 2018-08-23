@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\Helper;
 
 use EzSystems\EzPlatformPageBuilder\Tests\Behat\Environment\EnterpriseEnvironmentConstants;
+use Tests\AppBundle\Behat\PlatformDemoEnvironmentConstants;
 
 class EzEnvironmentConstants
 {
@@ -24,13 +25,22 @@ class EzEnvironmentConstants
         return $env->values[$key];
     }
 
+    public static function getInstallType(): string
+    {
+        return self::$installType;
+    }
+
     private static function getProperEnvironment(int $installType)
     {
         switch ($installType) {
             case InstallType::PLATFORM:
                 return new PlatformEnvironmentConstants();
+            case InstallType::PLATFORM_DEMO:
+                return new PlatformDemoEnvironmentConstants();
             case InstallType::ENTERPRISE:
                 return new EnterpriseEnvironmentConstants();
+            case InstallType::ENTERPRISE_DEMO:
+                return new EnterpriseDemoEnvironmentConstants();
             default:
                 throw new \Exception('Unrecognised install type');
         }
