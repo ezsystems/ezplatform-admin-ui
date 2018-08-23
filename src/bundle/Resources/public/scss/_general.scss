@@ -12,6 +12,10 @@ a {
     transition: color 0.3s $ez-admin-transition;
 }
 
+.ez-scroll-disabled {
+    overflow: hidden;
+}
+
 .ez-main-row {
     min-height: calc(100vh - 60px);
 }
