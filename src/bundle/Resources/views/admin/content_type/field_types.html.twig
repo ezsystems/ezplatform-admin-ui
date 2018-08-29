@@ -8,6 +8,12 @@
 
 {# @var data \EzSystems\RepositoryForms\Data\FieldDefinitionData #}
 {# @var form \Symfony\Component\Form\FormView #}
+{% block ezauthor_field_definition_edit %}
+    <div class="ezauthor-settings default-type{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_row(form.defaultAuthor, {'label_attr': {'class': 'radio-inline'}}) -}}
+    </div>
+{% endblock %}
+
 {% block ezbinaryfile_field_definition_edit %}
     <div class="ezbinaryfile-validator max-file-size{% if group_class is not empty %} {{ group_class }}{% endif %}">
         {{- form_row(form.maxSize) -}}
