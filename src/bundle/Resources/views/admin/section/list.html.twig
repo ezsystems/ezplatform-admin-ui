@@ -61,7 +61,7 @@
             'action': path('ezplatform.section.bulk_delete'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-sections' }
         }) }}
-        <table class="table mb-3">
+        <table class="ez-table table mb-3">
             <thead>
                 <tr>
                     <th></th>
@@ -75,18 +75,18 @@
             <tbody>
             {% for section in pager.currentPageResults %}
                 <tr>
-                    <td class="ez-checkbox-cell">
+                    <td class="ez-table__cell ez-table__cell--has-checkbox">
                         {% if can_edit %}
                             {{ form_widget(form_sections_delete.sections[section.id], {"disabled": not deletable[section.id]}) }}
                         {% else %}
                             {% do form_sections_delete.sections.setRendered %}
                         {% endif %}
                     </td>
-                    <td><a href="{{ path( 'ezplatform.section.view', {'sectionId': section.id} ) }}">{{ section.name }}</a></td>
-                    <td>{{ section.identifier }}</td>
-                    <td>{{ section.id }}</td>
-                    <td>{{ content_count[section.id] }}</td>
-                    <td class="text-right">
+                    <td class="ez-table__cell"><a href="{{ path( 'ezplatform.section.view', {'sectionId': section.id} ) }}">{{ section.name }}</a></td>
+                    <td class="ez-table__cell">{{ section.identifier }}</td>
+                    <td class="ez-table__cell">{{ section.id }}</td>
+                    <td class="ez-table__cell">{{ content_count[section.id] }}</td>
+                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                         {% if assignable[section.id] %}
                             <a
                                 title="{{ 'section.assign_content'|trans|desc('Assign content') }}"
@@ -103,7 +103,7 @@
                         {% if can_edit %}
                             <a title="{{ 'section.edit'|trans|desc('Edit') }}"
                                href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
-                               class="btn btn-icon mx-3">
+                               class="btn btn-icon mx-2">
                                 <svg class="ez-icon ez-icon-edit">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                                 </svg>

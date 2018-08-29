@@ -51,7 +51,7 @@
             </div>
         </header>
 
-        <table class="table">
+        <table class="ez-table table">
             <thead>
                 <tr>
                     <th>{{ 'language.name.label'|trans|desc('Name') }}</th>
@@ -63,21 +63,21 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ language.name }}</td>
-                    <td>{{ language.languageCode }}</td>
-                    <td>{{ language.id }}</td>
-                    <td>
+                    <td class="ez-table__cell">{{ language.name }}</td>
+                    <td class="ez-table__cell">{{ language.languageCode }}</td>
+                    <td class="ez-table__cell">{{ language.id }}</td>
+                    <td class="ez-table__cell">
                         <input
                             type="checkbox"
                             title="{{ language.enabled ? 'language.enabled'|trans|desc('Enabled') : 'language.enabled'|trans|desc('Enabled') }}"
                             disabled
                             {% if language.enabled %}checked{% endif %}>
                     </td>
-                    <td class="text-center">
+                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                         {% if can_administrate %}
                             <a
                                 href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
-                                class="btn btn-icon"
+                                class="btn btn-icon mx-2"
                                 title="{{ 'language.edit'|trans|desc('Edit') }}">
                                 <svg class="ez-icon ez-icon-edit">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>

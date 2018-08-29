@@ -20,6 +20,26 @@
         &--field-definitions-head {
             width: calc(100% / 3);
         }
+
+        .table &--has-action-btns {
+            padding-right: 1.25rem;
+        }
+
+        &--has-checkbox {
+            width: 5%;
+        }
+
+        &--no-content {
+            margin-bottom: 3rem;
+            padding: 0.75rem 1rem;
+            background-color: $ez-white;
+            font-style: italic;
+            color: $ez-color-base-dark;
+        }
+
+        &--limitation {
+            width: 70%;
+        }
     }
 }
 

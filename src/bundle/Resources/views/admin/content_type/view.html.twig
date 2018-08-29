@@ -35,7 +35,7 @@
             <div class="ez-table__headline">{{ "content_type.content_type"|trans|desc("Content Type") }}</div>
         </header>
 
-        <table class="table mb-3">
+        <table class="ez-table table mb-3">
             <thead>
             <tr>
                 <th>{{ "content_type.name"|trans|desc("Name") }}</th>
@@ -46,52 +46,52 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ content_type.name }}</td>
-                    <td>{{ content_type.identifier }}</td>
-                    <td>{{ content_type.descriptions[language_code]|default('') }}</td>
-                    <td class="text-right">
+                    <td class="ez-table__cell">{{ content_type.name }}</td>
+                    <td class="ez-table__cell">{{ content_type.identifier }}</td>
+                    <td class="ez-table__cell">{{ content_type.descriptions[language_code]|default('') }}</td>
+                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                         {% if can_update %}
-                            {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-3') }}
+                            {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-2') }}
                         {% endif %}
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <table class="table ez-table--list">
+        <table class="ez-table table ez-table--list">
             <tbody>
                 <tr>
-                    <td>{{ "content_type.name_schema"|trans|desc("Content name pattern") }}</td>
-                    <td>{{ content_type.nameSchema }}</td>
+                    <td class="ez-table__cell">{{ "content_type.name_schema"|trans|desc("Content name pattern") }}</td>
+                    <td class="ez-table__cell">{{ content_type.nameSchema }}</td>
                 </tr>
                 <tr>
-                    <td>{{ "content_type.url_alias_schema"|trans|desc("URL alias name pattern") }}</td>
-                    <td>{{ content_type.urlAliasSchema }}</td>
+                    <td class="ez-table__cell">{{ "content_type.url_alias_schema"|trans|desc("URL alias name pattern") }}</td>
+                    <td class="ez-table__cell">{{ content_type.urlAliasSchema }}</td>
                 </tr>
                 <tr>
-                    <td>{{ "content_type.container"|trans|desc("Container") }}</td>
-                    <td>{{ 'yes_no'|transchoice(content_type.isContainer)|desc("{0}No|{1}Yes") }}</td>
+                    <td class="ez-table__cell">{{ "content_type.container"|trans|desc("Container") }}</td>
+                    <td class="ez-table__cell">{{ 'yes_no'|transchoice(content_type.isContainer)|desc("{0}No|{1}Yes") }}</td>
                 </tr>
                 <tr>
-                    <td>{{ "content_type.default_children_sorting"|trans|desc("Default field for sorting children") }}</td>
-                    <td>
+                    <td class="ez-table__cell">{{ "content_type.default_children_sorting"|trans|desc("Default field for sorting children") }}</td>
+                    <td class="ez-table__cell">
                         {{ ("content_type.sort_field." ~ content_type.defaultSortField)|trans(domain="ezrepoforms_content_type") }} / {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="ezrepoforms_content_type") }}
                     </td>
                 </tr>
                 <tr>
-                    <td>{{ "content_type.default_sort"|trans|desc("Default sort order") }}</td>
-                    <td>
+                    <td class="ez-table__cell">{{ "content_type.default_sort"|trans|desc("Default sort order") }}</td>
+                    <td class="ez-table__cell">
                         {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="ezrepoforms_content_type") }}
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="ez-table__cell">
                         {{ "content_type.default_availability"|trans|desc('Default content availability') }}
                         <p class="text-secondary small">
                             {{ "content_type.default_availability.help"|trans|desc("Default availability in primary language, if translation is absent") }}
                         </p>
                     </td>
-                    <td>{{ 'content_type.default_availability.value'|transchoice(content_type.defaultAlwaysAvailable)|desc("{0} Not available|{1} Available") }}</td>
+                    <td class="ez-table__cell">{{ 'content_type.default_availability.value'|transchoice(content_type.defaultAlwaysAvailable)|desc("{0} Not available|{1} Available") }}</td>
                 </tr>
             </tbody>
         </table>

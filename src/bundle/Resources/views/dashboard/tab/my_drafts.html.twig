@@ -1,7 +1,7 @@
 {% trans_default_domain 'dashboard' %}
 
 {% if data|length %}
-    <table class="table">
+    <table class="ez-table table">
         <thead>
         <tr>
             <th>{{ 'dashboard.table.name'|trans|desc('Name') }}</th>
@@ -15,13 +15,13 @@
         <tbody>
         {% for row in data %}
             <tr>
-                <td>{{ row.name }}</td>
-                <td>{{ row.type }}</td>
-                <td>{{ admin_ui_config.languages.mappings[row.language].name }}</td>
-                <td>{{ row.version }}</td>
-                <td>{{ row.modified|localizeddate('medium', 'short') }}</td>
-                <td class="text-center">
-                    <button class="btn btn-icon ez-btn--content-draft-edit"
+                <td class="ez-table__cell">{{ row.name }}</td>
+                <td class="ez-table__cell">{{ row.type }}</td>
+                <td class="ez-table__cell">{{ admin_ui_config.languages.mappings[row.language].name }}</td>
+                <td class="ez-table__cell">{{ row.version }}</td>
+                <td class="ez-table__cell">{{ row.modified|localizeddate('medium', 'short') }}</td>
+                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    <button class="btn btn-icon mx-2 ez-btn--content-draft-edit"
                             title="{{ 'dashboard.table.draft.edit'|trans|desc('Edit Draft') }}"
                             data-content-draft-edit-url="{{ path('ez_content_draft_edit', {
                                 'contentId': row.contentId,

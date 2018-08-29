@@ -62,7 +62,7 @@
             'action': path('ezplatform.object_state.group.bulk_delete'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-object-state-groups' }
         }) }}
-        <table class="table">
+        <table class="ez-table table">
             <thead>
                 <tr>
                     <th></th>
@@ -75,29 +75,29 @@
             <tbody>
             {% if object_state_groups is empty %}
                 <tr>
-                    <td colspan="4">
-                        <span class="ez-table-no-content mb-0 py-1 pl-0">{{ 'object_state_group.list.empty'|trans|desc('No Object State Group configured. Object State Groups you\'ll create will appear here.') }}</span>
+                    <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
+                        <span class="mb-0 py-1 pl-0">{{ 'object_state_group.list.empty'|trans|desc('No Object State Group configured. Object State Groups you\'ll create will appear here.') }}</span>
                     </td>
                 </tr>
             {% else %}
                 {% for object_state_group in object_state_groups %}
                     <tr>
-                        <td class="ez-checkbox-cell">
+                        <td class="ez-table__cell ez-table__cell--has-checkbox">
                             {% if can_administrate %}
                                 {{ form_widget(form_state_groups_delete.objectStateGroups[object_state_group.id]) }}
                             {% else %}
                                 {% do form_state_groups_delete.objectStateGroups.setRendered %}
                             {% endif %}
                         </td>
-                        <td><a href="{{ path( 'ezplatform.object_state.group.view', {'objectStateGroupId': object_state_group.id} ) }}">{{ object_state_group.name }}</a></td>
-                        <td>{{ object_state_group.identifier }}</td>
-                        <td>{{ object_state_group.id }}</td>
-                        <td class="text-right">
+                        <td class="ez-table__cell"><a href="{{ path( 'ezplatform.object_state.group.view', {'objectStateGroupId': object_state_group.id} ) }}">{{ object_state_group.name }}</a></td>
+                        <td class="ez-table__cell">{{ object_state_group.identifier }}</td>
+                        <td class="ez-table__cell">{{ object_state_group.id }}</td>
+                        <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                             {% if can_administrate %}
                                 <a
                                     title="{{ 'object_state_group.view.list.action.edit'|trans|desc('Edit') }}"
                                     href="{{ path('ezplatform.object_state.group.update', {'objectStateGroupId': object_state_group.id}) }}"
-                                    class="btn btn-icon mx-3">
+                                    class="btn btn-icon mx-2">
                                     <svg class="ez-icon ez-icon-edit">
                                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                                     </svg>

@@ -26,7 +26,7 @@
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'object_state_group.view.information.title'|trans|desc('Object State Group Information') }}</div>
         </div>
-        <table class="table">
+        <table class="ez-table table">
             <thead>
             <tr>
                 <th>{{ 'object_state_group.name'|trans|desc('Object state group name') }}</th>
@@ -37,14 +37,14 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ object_state_group.name }}</td>
-                    <td>{{ object_state_group.identifier }}</td>
-                    <td>{{ object_state_group.id }}</td>
-                    <td class="text-right">
+                    <td class="ez-table__cell">{{ object_state_group.name }}</td>
+                    <td class="ez-table__cell">{{ object_state_group.identifier }}</td>
+                    <td class="ez-table__cell">{{ object_state_group.id }}</td>
+                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                         {% if can_administrate %}
                             <a title="{{ 'object_state_group.view.list.action.edit'|trans|desc('Edit') }}"
                                href="{{ path('ezplatform.object_state.group.update', {'objectStateGroupId': object_state_group.id}) }}"
-                               class="btn btn-icon mx-3">
+                               class="btn btn-icon mx-2">
                                 <svg class="ez-icon ez-icon-edit">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                                 </svg>

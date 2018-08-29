@@ -18,7 +18,7 @@ class SimpleListTable extends Table
     {
         parent::__construct($context, $containerLocator);
         $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .ez-table-header + form thead th';
-        $this->fields['listElement'] = $this->fields['list'] . ' .ez-checkbox-cell+ td';
+        $this->fields['listElement'] = $this->fields['list'] . ' .ez-table__cell--has-checkbox+ td.ez-table__cell';
         $this->fields['checkboxInput'] = ' .form-check-input';
     }
 
