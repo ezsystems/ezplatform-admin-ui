@@ -60,7 +60,7 @@ class ObjectStateEditRightSidebarBuilder extends AbstractBuilder implements Tran
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#%s', $saveId),
                     ],
-                    'extras' => ['icon' => 'publish'],
+                    'extras' => ['icon' => 'save'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
