@@ -26,7 +26,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     {{ 'trash.delete.button.cancel'|trans|desc('Cancel') }}
                 </button>
-                {{ form_widget(form.empty, {'attr': {'class': 'btn-danger'}}) }}
+                {{ form_widget(form.empty, {'attr': {'class': 'btn-danger font-weight-bold'}}) }}
                 {{ form_widget(form.empty_trash, {'label_attr': {'class': 'checkbox-inline'}, 'attr': {'hidden': true}}) }}
                 {{ form_end(form) }}
             </div>
