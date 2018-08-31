@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -25,16 +24,17 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 {
     const ITEM_LOGOUT = 'user__content';
     const ITEM_CHANGE_PASSWORD = 'user__change_password';
+    const ITEM_USER_SETTINGS = 'user__settings';
     const ITEM_BOOKMARK = 'user__bookmark';
     const ITEM_NOTIFICATION = 'menu.notification';
 
-    /** @var TokenStorageInterface */
+    /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
     private $tokenStorage;
 
     /**
      * @param MenuItemFactory $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param TokenStorageInterface $tokenStorage
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
      */
     public function __construct(
         MenuItemFactory $factory,
@@ -46,6 +46,9 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         $this->tokenStorage = $tokenStorage;
     }
 
+    /**
+     * @return string
+     */
     protected function getConfigureEventName(): string
     {
         return ConfigureMenuEvent::USER_MENU;
@@ -54,9 +57,9 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     /**
      * @param array $options
      *
-     * @return ItemInterface
+     * @return \Knp\Menu\ItemInterface
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function createStructure(array $options): ItemInterface
     {
@@ -66,6 +69,9 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         if (null !== $token && is_object($token->getUser())) {
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_CHANGE_PASSWORD, ['route' => 'ezplatform.user_profile.change_password'])
+            );
+            $menu->addChild(
+                $this->createMenuItem(self::ITEM_USER_SETTINGS, ['route' => 'ezplatform.user_settings.list'])
             );
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_BOOKMARK, ['route' => 'ezplatform.bookmark.list'])
@@ -97,6 +103,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         return [
             (new Message(self::ITEM_LOGOUT, 'menu'))->setDesc('Logout'),
             (new Message(self::ITEM_CHANGE_PASSWORD, 'menu'))->setDesc('Change password'),
+            (new Message(self::ITEM_USER_SETTINGS, 'menu'))->setDesc('User Settings'),
             (new Message(self::ITEM_BOOKMARK, 'menu'))->setDesc('Bookmarks'),
             (new Message(self::ITEM_NOTIFICATION, 'notifications'))->setDesc('View Notifications'),
         ];
