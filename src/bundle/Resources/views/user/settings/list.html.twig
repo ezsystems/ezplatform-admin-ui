@@ -1,0 +1,118 @@
+{% extends "@ezdesign/layout.html.twig" %}
+
+{% trans_default_domain 'user_settings' %}
+
+{% block breadcrumbs %}
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'list.title'|trans|desc('User Settings') }
+    ]} %}
+{% endblock %}
+
+{% block page_title %}
+    {% include '@ezdesign/parts/page_title.html.twig' with {
+        title: 'list.title'|trans|desc('User Settings'),
+        iconName: 'user'
+    } %}
+    <ul class="nav nav-tabs ez-nav-tabs--role px-4 ez-tabs" role="tablist">
+        <li role="presentation" class="nav-item">
+            <a href="#my-preferences" class="nav-link active" role="tab" data-toggle="tab">
+                {{ 'section.my_preferences'|trans|desc('My Preferences') }}
+            </a>
+        </li>
+        <li role="presentation" class="nav-item">
+            <a href="#my-account-settings" class="nav-link" role="tab" data-toggle="tab">
+                {{ 'section.my_account_settings'|trans|desc('My Account Settings') }}
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block body_class %}ez-user-settings-list-view{% endblock %}
+
+{% block content %}
+    <section class="container mt-4 px-5 tab-content">
+        <div role="tabpanel" class="tab-pane active" id="my-preferences">
+
+            {% for user_setting in pager %}
+                <div class="ez-table-header">
+                    <div class="ez-table-header__headline">{{ user_setting.name }}</div>
+                </div>
+
+                <table class="table mb-3">
+                    {% if user_setting.description is not empty %}
+                        <thead>
+                            <tr>
+                                <th colspan="2">{{ user_setting.description }}</th>
+                            </tr>
+                        </thead>
+                    {% endif %}
+                    <tbody>
+                        <tr>
+                            <td>
+                                {{ user_setting.value|raw }}
+                            </td>
+                            <td class="text-right">
+                                <a
+                                    title="{{ 'list.action.edit'|trans|desc('Edit') }}"
+                                    href="{{ path('ezplatform.user_settings.update', { 'identifier': user_setting.identifier }) }}"
+                                    class="btn btn-icon mx-3">
+                                    <svg class="ez-icon ez-icon-edit">
+                                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endfor %}
+
+            {% if pager.haveToPaginate %}
+                <div class="row justify-content-center align-items-center ez-pagination__spacing mb-2">
+                <span class="ez-pagination__text">
+                    {{ 'pagination.viewing'|trans({
+                        '%viewing%': pager.currentPageResults|length,
+                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                </span>
+                </div>
+                <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
+                    {{ pagerfanta(pager, 'ez') }}
+                </div>
+            {% endif %}
+        </div>
+        <div role="tabpanel" class="tab-pane" id="my-account-settings">
+            <div class="ez-table-header">
+                <div class="ez-table-header__headline">{{ 'my_account_settings.password.title'|trans|desc('Password') }}</div>
+            </div>
+
+            <table class="table mb-3">
+                <tbody>
+                <tr>
+                    <td>
+                        {{ 'my_account_settings.password.description'|trans|desc('Current password') }}
+                    </td>
+                    <td class="text-right">
+                        <a title="{{ 'my_account_settings.password.action.edit'|trans|desc('Edit') }}"
+                           href="{{ path('ezplatform.user_profile.change_password') }}"
+                           class="btn btn-icon mx-3">
+                            <svg class="ez-icon ez-icon-edit">
+                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+    {%  javascripts
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.content.edit.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

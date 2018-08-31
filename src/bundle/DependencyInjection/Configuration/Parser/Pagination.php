@@ -25,6 +25,7 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
  *              trash_limit: 10
  *              section_limit: 10
  *              language_limit: 10
+ *              user_settings_limit: 10
  * ```
  */
 class Pagination extends AbstractParser
@@ -55,6 +56,7 @@ class Pagination extends AbstractParser
                     ->scalarNode('content_role_limit')->isRequired()->end()
                     ->scalarNode('content_policy_limit')->isRequired()->end()
                     ->scalarNode('notification_limit')->isRequired()->end()
+                    ->scalarNode('user_settings_limit')->isRequired()->end()
                 ->end()
             ->end();
     }
@@ -85,6 +87,7 @@ class Pagination extends AbstractParser
             'content_role_limit',
             'content_policy_limit',
             'notification_limit',
+            'user_settings_limit',
         ];
 
         foreach ($keys as $key) {
