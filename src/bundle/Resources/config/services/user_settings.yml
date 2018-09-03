@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService: ~
+    EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionRegistry: ~
+    EzSystems\EzPlatformAdminUi\UserSetting\FormMapperRegistry: ~
+
+    #
+    # User Settings Implementations
+    #
+    EzSystems\EzPlatformAdminUi\UserSetting\Setting\Timezone:
+        tags:
+            - { name: ezplatform.admin_ui.user_setting.value, identifier: timezone }
+            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: timezone }

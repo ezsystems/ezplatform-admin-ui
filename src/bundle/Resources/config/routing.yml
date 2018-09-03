@@ -575,6 +575,25 @@ ezplatform.user.reset_password:
         _controller: 'EzPlatformAdminUiBundle:User\UserForgotPassword:userResetPassword'
 
 #
+# User Settings
+#
+
+ezplatform.user_settings.list:
+    path: /user/settings/list/{page}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:User\UserSettings:list'
+        page: 1
+    requirements:
+        page: \d+
+
+ezplatform.user_settings.update:
+    path: /user/settings/update/{identifier}
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:User\UserSettings:update'
+    requirements:
+        identifier: .+
+
+#
 # Profile
 #
 
@@ -698,6 +717,7 @@ ezplatform.udw.preselected_location.data:
 #
 # Bookmark manager
 #
+
 ezplatform.bookmark.list:
     path: /bookmark/list
     methods: ['GET']
@@ -713,6 +733,7 @@ ezplatform.bookmark.remove:
 #
 # Notifications
 #
+
 ezplatform.notifications.get:
     path: /notifications/{offset}/{limit}
     defaults:

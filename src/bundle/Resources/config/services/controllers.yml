@@ -95,3 +95,8 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $notificationPaginationLimit: '$pagination.notification_limit$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserSettingsController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $defaultPaginationLimit: '$pagination.user_settings_limit$'

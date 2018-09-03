@@ -1,0 +1,37 @@
+{% extends '@ezdesign/admin/base.html.twig' %}
+
+{% trans_default_domain 'user_settings' %}
+
+{% block breadcrumbs_admin %}
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'list.title'|trans|desc('User Settings') }
+    ]} %}
+{% endblock %}
+
+{% block page_title_admin %}
+    {% include '@ezdesign/parts/page_title.html.twig' with {
+        title: 'list.title'|trans|desc('User Settings'),
+        iconName: 'user'
+    } %}
+{% endblock %}
+
+{% block body_class %}ez-user-settings-update-view{% endblock %}
+
+{% block form %}
+    {% form_theme form '@ezdesign/form_fields.html.twig' %}
+    {{ form_start(form) }}
+    {{ form_widget(form.identifier, {'attr': {'hidden': 'hidden'}}) }}
+    <div class="ez-table-header ground-base">
+        <div class="ez-table-header__headline">{{ user_setting.name }}</div>
+    </div>
+    <div class="bg-white p-4">
+        {{ form_row(form.value) }}
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block right_sidebar %}
+    {% set user_setting_update_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.user_setting_update.sidebar_right', [], {'user_setting': user_setting}) %}
+    {{ knp_menu_render(user_setting_update_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
+{% endblock %}
