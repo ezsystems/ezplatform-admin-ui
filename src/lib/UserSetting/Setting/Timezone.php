@@ -80,8 +80,11 @@ class Timezone implements ValueDefinitionInterface, FormMapperInterface
      */
     private function getTranslatedName(): string
     {
-        return /** @Desc("Time Zone") */
-            $this->translator->trans('settings.timezone.value.title', [], 'user_settings');
+        return $this->translator->trans(
+            /** @Desc("Time Zone") */ 'settings.timezone.value.title',
+            [],
+            'user_settings'
+        );
     }
 
     /**
@@ -89,7 +92,10 @@ class Timezone implements ValueDefinitionInterface, FormMapperInterface
      */
     private function getTranslatedDescription(): string
     {
-        return /** @Desc("Time Zone in use for displaying Date & Time") */
-            $this->translator->trans('settings.timezone.value.description', [], 'user_settings');
+        return $this->translator->trans(
+            /** @Desc("Time Zone in use for displaying Date & Time") */ 'settings.timezone.value.description',
+            [],
+            'user_settings'
+        );
     }
 }
