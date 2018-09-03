@@ -92,13 +92,10 @@ class UserSettingService
 
     /**
      * @return int
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function countUserSettings(): int
     {
-        // @todo fix as soon as UserPreferenceService has appropriate method
-        return $this->userPreferenceService->loadUserPreferences(0, 1)->totalCount;
+        return $this->userPreferenceService->getUserPreferenceCount();
     }
 
     /**
