@@ -149,3 +149,5 @@ services:
     EzSystems\EzPlatformAdminUi\EventListener\MenuPermissionsListener:
         tags:
             - {name: kernel.event_subscriber, priority: -250}
+
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UserPreferencesGlobalExtension: ~

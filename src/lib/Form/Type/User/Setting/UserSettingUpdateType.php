@@ -11,9 +11,10 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\User\Setting;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\Setting\UserSettingUpdateData;
 use EzSystems\EzPlatformAdminUi\UserSetting\FormMapperRegistry;
 use EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionRegistry;
+use RuntimeException;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -48,10 +49,14 @@ class UserSettingUpdateType extends AbstractType
         $valueDefinition = $this->valueDefinitionRegistry->getValueDefinition($options['user_setting_identifier']);
 
         $builder
-            ->add('identifier', TextType::class, [])
+            ->add('identifier', HiddenType::class, [])
             ->add($formMapper->mapFieldForm($builder, $valueDefinition))
             ->add('update', SubmitType::class, [])
         ;
+
+        if (!$builder->has('value')) {
+            throw new RuntimeException("FormMapper should create 'value' field");
+        }
     }
 
     /**
@@ -66,6 +71,7 @@ class UserSettingUpdateType extends AbstractType
             ->setDefaults([
                 'data_class' => UserSettingUpdateData::class,
                 'translation_domain' => 'forms',
-            ]);
+            ])
+        ;
     }
 }

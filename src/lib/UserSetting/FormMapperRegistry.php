@@ -63,12 +63,4 @@ class FormMapperRegistry
     {
         return $this->formMappers;
     }
-
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\UserSetting\FormMapperInterface[] $formMappers
-     */
-    public function setFormMappers(array $formMappers): void
-    {
-        $this->formMappers = $formMappers;
-    }
 }

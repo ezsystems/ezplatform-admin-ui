@@ -49,7 +49,7 @@ class ValueDefinitionRegistry
         if (!isset($this->valueDefinitions[$identifier])) {
             throw new InvalidArgumentException(
                 '$identifier',
-                sprintf('There is no User Setting Value registered for \'%s\' identifier', $identifier)
+                sprintf('There is no ValueDefinition service registered for \'%s\' identifier', $identifier)
             );
         }
 
@@ -72,13 +72,5 @@ class ValueDefinitionRegistry
     public function getValueDefinitions(): array
     {
         return $this->valueDefinitions;
-    }
-
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionInterface[] $valueDefinitions
-     */
-    public function setValueDefinitions(array $valueDefinitions): void
-    {
-        $this->valueDefinitions = $valueDefinitions;
     }
 }

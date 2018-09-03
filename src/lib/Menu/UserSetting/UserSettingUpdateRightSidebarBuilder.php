@@ -10,13 +10,12 @@ namespace EzSystems\EzPlatformAdminUi\Menu\UserSetting;
 
 use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 
 /**
- * KnpMenuBundle Menu Builder service implementation for AdminUI Section Edit contextual sidebar menu.
+ * KnpMenuBundle Menu Builder service implementation for User Setting Edit contextual sidebar menu.
  *
  * @see https://symfony.com/doc/current/bundles/KnpMenuBundle/menu_builder_service.html
  */
@@ -37,9 +36,9 @@ class UserSettingUpdateRightSidebarBuilder extends AbstractBuilder implements Tr
     /**
      * @param array $options
      *
-     * @return ItemInterface
+     * @return \Knp\Menu\ItemInterface
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function createStructure(array $options): ItemInterface
     {
@@ -70,7 +69,7 @@ class UserSettingUpdateRightSidebarBuilder extends AbstractBuilder implements Tr
     }
 
     /**
-     * @return Message[]
+     * @return \JMS\TranslationBundle\Model\Message[]
      */
     public static function getTranslationMessages(): array
     {

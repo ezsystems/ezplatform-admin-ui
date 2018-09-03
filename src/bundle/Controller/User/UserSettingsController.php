@@ -14,6 +14,7 @@ use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\UserSettingsAdapter;
 use EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService;
+use EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionRegistry;
 use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -35,6 +36,9 @@ class UserSettingsController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService */
     private $userSettingService;
 
+    /** @var \EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionRegistry */
+    private $valueDefinitionRegistry;
+
     /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
 
@@ -46,6 +50,7 @@ class UserSettingsController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
      * @param \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService $userSettingService
+     * @param \EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionRegistry $valueDefinitionRegistry
      * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
      * @param int $defaultPaginationLimit
      */
@@ -54,6 +59,7 @@ class UserSettingsController extends Controller
         SubmitHandler $submitHandler,
         TranslatorInterface $translator,
         UserSettingService $userSettingService,
+        ValueDefinitionRegistry $valueDefinitionRegistry,
         NotificationHandlerInterface $notificationHandler,
         int $defaultPaginationLimit
     ) {
@@ -61,6 +67,7 @@ class UserSettingsController extends Controller
         $this->submitHandler = $submitHandler;
         $this->translator = $translator;
         $this->userSettingService = $userSettingService;
+        $this->valueDefinitionRegistry = $valueDefinitionRegistry;
         $this->notificationHandler = $notificationHandler;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
@@ -81,6 +88,7 @@ class UserSettingsController extends Controller
 
         return $this->render('@ezdesign/user/settings/list.html.twig', [
             'pager' => $pagerfanta,
+            'value_definitions' => $this->valueDefinitionRegistry->getValueDefinitions(),
         ]);
     }
 
@@ -90,7 +98,6 @@ class UserSettingsController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */

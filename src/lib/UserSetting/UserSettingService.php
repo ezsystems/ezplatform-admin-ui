@@ -11,7 +11,6 @@ namespace EzSystems\EzPlatformAdminUi\UserSetting;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\UserPreferenceService;
 use eZ\Publish\API\Repository\Values\UserPreference\UserPreferenceSetStruct;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 /**
  * @internal
@@ -57,29 +56,16 @@ class UserSettingService
      *
      * @return \EzSystems\EzPlatformAdminUi\UserSetting\UserSetting
      *
-     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function getUserSetting(string $identifier): UserSetting
     {
-        if (!$this->valueRegistry->hasValueDefinition($identifier)) {
-            throw new InvalidArgumentException(
-                '$identifier',
-                sprintf("There is no ValueDefinition for '%s'. Did you register the service?", $identifier)
-            );
-        }
+        $valueDefinition = $this->valueRegistry->getValueDefinition($identifier);
 
-        $value = $this->valueRegistry->getValueDefinition($identifier);
+        $userPreferenceValue = $this->getUserSettingValue($identifier, $valueDefinition);
 
-        try {
-            $userPreference = $this->userPreferenceService->getUserPreference($identifier);
-            $userPreferenceValue = $userPreference->value;
-        } catch (NotFoundException $e) {
-            $userPreferenceValue = $value->getDefaultValue();
-        }
-
-        return $this->createUserSetting($identifier, $value, $userPreferenceValue);
+        return $this->createUserSetting($identifier, $valueDefinition, $userPreferenceValue);
     }
 
     /**
@@ -98,13 +84,7 @@ class UserSettingService
 
         $userPreferences = [];
         foreach ($slice as $identifier => $userSettingDefinition) {
-            try {
-                $userPreference = $this->userPreferenceService->getUserPreference($identifier);
-                $userPreferenceValue = $userPreference->value;
-            } catch (NotFoundException $e) {
-                $userPreferenceValue = $userSettingDefinition->getDefaultValue();
-            }
-            $userPreferences[$identifier] = $userPreferenceValue;
+            $userPreferences[$identifier] = $this->getUserSettingValue($identifier, $userSettingDefinition);
         }
 
         return $this->createUserSettings($values, $userPreferences);
@@ -154,7 +134,27 @@ class UserSettingService
             'identifier' => $identifier,
             'name' => $value->getName(),
             'description' => $value->getDescription(),
-            'value' => $value->getDisplayValue($userPreferenceValue),
+            'value' => $userPreferenceValue,
         ]);
+    }
+
+    /**
+     * @param string $identifier
+     * @param \EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionInterface $value
+     *
+     * @return string
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    private function getUserSettingValue(string $identifier, ValueDefinitionInterface $value): string
+    {
+        try {
+            $userPreference = $this->userPreferenceService->getUserPreference($identifier);
+            $userPreferenceValue = $userPreference->value;
+        } catch (NotFoundException $e) {
+            $userPreferenceValue = $value->getDefaultValue();
+        }
+
+        return $userPreferenceValue;
     }
 }

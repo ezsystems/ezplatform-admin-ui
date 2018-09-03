@@ -10,10 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data\User\Setting;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @property-read string $identifier
- * @property-read string $value
- */
 class UserSettingUpdateData
 {
     /**
