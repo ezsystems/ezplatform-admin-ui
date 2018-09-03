@@ -19,7 +19,7 @@
                 <td class="ez-table__cell">{{ row.type }}</td>
                 <td class="ez-table__cell">{{ admin_ui_config.languages.mappings[row.language].name }}</td>
                 <td class="ez-table__cell">{{ row.version }}</td>
-                <td class="ez-table__cell">{{ row.modified|localizeddate('medium', 'short') }}</td>
+                <td class="ez-table__cell">{{ row.modified|localizeddate('medium', 'short', null, ez_user_settings['timezone']) }}</td>
                 <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                     <button class="btn btn-icon mx-2 ez-btn--content-draft-edit"
                             title="{{ 'dashboard.table.draft.edit'|trans|desc('Edit Draft') }}"
