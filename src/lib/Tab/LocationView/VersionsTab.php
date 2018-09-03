@@ -9,10 +9,12 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
 use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
@@ -42,6 +44,9 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface, Conditiona
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;
 
+    /** @var \eZ\Publish\API\Repository\UserService */
+    private $userService;
+
     /**
      * @param \Twig\Environment $twig
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
@@ -49,6 +54,7 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface, Conditiona
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \eZ\Publish\API\Repository\UserService $userService
      */
     public function __construct(
         Environment $twig,
@@ -56,7 +62,8 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface, Conditiona
         DatasetFactory $datasetFactory,
         FormFactory $formFactory,
         UrlGeneratorInterface $urlGenerator,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        UserService $userService
     ) {
         parent::__construct($twig, $translator);
 
@@ -64,6 +71,7 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface, Conditiona
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
         $this->permissionResolver = $permissionResolver;
+        $this->userService = $userService;
     }
 
     /**
@@ -164,6 +172,7 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface, Conditiona
             'form_archived_version_restore' => $archivedVersionRestoreForm->createView(),
             'draft_pager' => $draftPagerfanta,
             'draft_pagination_params' => $draftPaginationParams,
+            'content_is_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content)
         ];
 
         return $this->twig->render(

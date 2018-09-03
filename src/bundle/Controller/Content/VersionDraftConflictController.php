@@ -76,7 +76,7 @@ class VersionDraftConflictController extends Controller
             $modalContent = $this->renderView('@ezdesign/content/modal_draft_conflict.html.twig', [
                 'conflicted_drafts' => $conflictedDrafts,
                 'location' => $location,
-                'is_content_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content),
+                'content_is_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content),
             ]);
 
             return new Response($modalContent, Response::HTTP_CONFLICT);

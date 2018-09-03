@@ -126,7 +126,7 @@ class ContentController extends Controller
                 $parentLocation = $data->getParentLocation();
 
                 if ((new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType)) {
-                    return $this->redirectToRoute('ez_user_create_parameters', [
+                    return $this->redirectToRoute('ez_user_create', [
                         'contentTypeIdentifier' => $contentType->identifier,
                         'language' => $language->languageCode,
                         'parentLocationId' => $parentLocation->id,
@@ -176,7 +176,7 @@ class ContentController extends Controller
 
                 $content = $this->contentService->loadContent($contentInfo->id);
                 if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
-                    return $this->redirectToRoute('ez_user_edit', [
+                    return $this->redirectToRoute('ez_user_update', [
                         'contentId' => $contentInfo->id,
                         'versionNo' => $versionNo,
                         'language' => $language->languageCode,

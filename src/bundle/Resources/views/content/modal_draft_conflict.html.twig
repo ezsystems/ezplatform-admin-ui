@@ -22,14 +22,14 @@
                         ) }}
                     </p>
                     <p class="ez-modal-body__main-content">
-                        {% if is_content_user %}
+                        {% if content_is_user %}
                             {{ 'draft.conflict.choice_content_is_user'|trans({})|desc('You can edit any of your existing draft(s)') }}
                         {% else %}
                             {{ 'draft.conflict.choice'|trans({})|desc('You can either edit any of your existing draft(s) or add a new one.') }}
                         {% endif %}
                     </p>
                 </div>
-                {% set show_add_draft_button = (is_content_user != true) %}
+                {% set show_add_draft_button = (content_is_user != true) %}
                 {% include '@ezdesign/parts/table_header.html.twig' with { headerText: null, tools: version_modal_draft_conflict.table_header_tools(show_add_draft_button) } %}
                 <div class="ez-scrollable-wrapper">
                     {{ include('@ezdesign/content/tab/versions/table.html.twig', {
@@ -38,6 +38,7 @@
                         'is_draft': true,
                         'haveToPaginate': false,
                         'is_draft_conflict': true,
+                        'content_is_user': content_is_user
                     }) }}
                 </div>
             </div>

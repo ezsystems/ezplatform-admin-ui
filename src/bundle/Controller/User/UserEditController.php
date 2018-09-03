@@ -51,7 +51,7 @@ class UserEditController extends Controller
                 $contentInfo = $data->getContentInfo();
                 $language = $data->getLanguage();
 
-                return $this->redirectToRoute('ez_user_edit', [
+                return $this->redirectToRoute('ez_user_update', [
                     'contentId' => $contentInfo->id,
                     'versionNo' => $versionInfo->versionNo,
                     'language' => $language->languageCode,
