@@ -172,7 +172,7 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface, Conditiona
             'form_archived_version_restore' => $archivedVersionRestoreForm->createView(),
             'draft_pager' => $draftPagerfanta,
             'draft_pagination_params' => $draftPaginationParams,
-            'content_is_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content)
+            'content_is_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content),
         ];
 
         return $this->twig->render(
