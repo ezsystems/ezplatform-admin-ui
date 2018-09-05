@@ -4,6 +4,7 @@ default:
     extensions:
         Behat\MinkExtension:
             files_path: '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/src/lib/Behat/TestFiles/'
+
 adminui:
     suites:
         adminui:
@@ -11,6 +12,37 @@ adminui:
                 - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features'
             filters:
                 tags: "@common"
+            contexts:
+                - EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext
+                - EzSystems\EzPlatformAdminUi\Behat\Helper\Hooks
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AuthenticationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NavigationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AdministrationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentViewContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AdminUpdateContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentUpdateContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentPreviewContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RightMenuContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\LeftMenuContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\TrashContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentTypeContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RolesContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SystemInfoContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SectionsContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ObjectStatesContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\DashboardContext
+                - EzSystems\RepositoryForms\Behat\Context\ContentTypeContext
+                - EzSystems\RepositoryForms\Behat\Context\FieldTypeFormContext
+                
+adminuimodules:
+    suites:
+        default:
+            paths:
+                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features'
+            filters:
+                tags: "@fieldTypes"
             contexts:
                 - EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext
                 - EzSystems\EzPlatformAdminUi\Behat\Helper\Hooks
