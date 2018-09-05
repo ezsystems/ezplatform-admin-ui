@@ -3,7 +3,7 @@ Feature: Content fields setting and editing
   In order to manage content on my site
   I want to set, edit, copy and move content items.
 
-  @javascript @common @EZP-29291-excluded
+  @javascript @common @EZP-29291-excluded @fieldTypes
   Scenario Outline: Create content item with given field
     Given a Content Type "<fieldName> CT" with an "<fieldInternalName>" field definition
       And I am logged as "admin"
@@ -44,7 +44,7 @@ Feature: Content fields setting and editing
       | ezimage              | Image                        | value     | image1.png.zip            |            |                       |         |          | image1.png                |
       | ezbinaryfile         | File                         | value     | binary1.txt.zip           |            |                       |         |          | binary1.txt               |
 
-  @javascript @common @EZP-29291-excluded
+  @javascript @common @EZP-29291-excluded @fieldTypes
   Scenario Outline: Edit content item with given field
     Given I am logged as "admin"
       And I navigate to content "<oldContentItemName>" of type "<fieldName> CT" in root path
