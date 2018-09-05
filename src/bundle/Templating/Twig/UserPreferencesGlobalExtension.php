@@ -9,6 +9,9 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
 use EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService;
+use EzSystems\EzPlatformAdminUi\UI\Config\ConfigWrapper;
+use ProxyManager\Factory\LazyLoadingValueHolderFactory;
+use ProxyManager\Proxy\LazyLoadingInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 
@@ -41,8 +44,26 @@ class UserPreferencesGlobalExtension extends AbstractExtension implements Global
     public function getGlobals(): array
     {
         return [
-            'ez_user_settings' => $this->getUserSettings(),
+            'ez_user_settings' => $this->createConfigWrapper(),
         ];
+    }
+
+    /**
+     * Create lazy loaded configuration.
+     *
+     * @return \EzSystems\EzPlatformAdminUi\UI\Config\ConfigWrapper
+     */
+    private function createConfigWrapper(): ConfigWrapper
+    {
+        $factory = new LazyLoadingValueHolderFactory();
+        $initializer = function (&$wrappedObject, LazyLoadingInterface $proxy, $method, array $parameters, &$initializer) {
+            $initializer = null;
+            $wrappedObject = new ConfigWrapper($this->getUserSettings());
+
+            return true;
+        };
+
+        return $factory->createProxy(ConfigWrapper::class, $initializer);
     }
 
     /**
