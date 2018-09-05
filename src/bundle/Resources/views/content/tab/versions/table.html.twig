@@ -3,7 +3,7 @@
 {% set is_draft = is_draft is defined and is_draft %}
 {% set is_archived = is_archived is defined and is_archived %}
 {% set is_draft_conflict = is_draft_conflict is defined and is_draft_conflict %}
-{% set edit_url = content_is_user is defined and content_is_user ? 'ez_user_update' : 'ez_content_draft_edit' %}
+
 <table class="table {% if is_draft and haveToPaginate %} mb-3 {% endif %} {% if is_draft_conflict %} ez-table__draft-conflict {% endif %}">
     <thead>
     <tr>
@@ -24,6 +24,20 @@
     </thead>
     <tbody>
     {% for version in versions %}
+
+        {% set edit_url = content_is_user is defined and content_is_user ?
+            path('ez_user_update', {
+            'contentId': version.contentInfo.id,
+            'versionNo': version.versionNo,
+            'language': version.translations[0].languageCode,
+        }) : path('ez_content_draft_edit', {
+            'contentId': version.contentInfo.id,
+            'versionNo': version.versionNo,
+            'language': version.translations[0].languageCode,
+            'locationId': location.id
+        })
+        %}
+
         <tr>
             {% if form is defined %}
                 <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form.versions[version.versionNo], {'attr': {'disabled': not version.canDelete}}) }}</td>
@@ -52,7 +66,7 @@
             {% if is_draft_conflict %}
                 <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                     {% set edit_draft_disabled = version.author.id != admin_ui_config.user.user.id %}
-                    <a href="{{ path(edit_url, { 'contentId': version.contentInfo.id, 'versionNo': version.versionNo, 'language': version.translations[0].languageCode, 'locationId': location.id }) }}"
+                    <a href="{{ edit_url }}"
                        class="btn btn-icon {% if edit_draft_disabled %}ez-btn--prevented{% endif %}"
                        title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}"
                        {% if edit_draft_disabled %}disabled{% endif %}>
@@ -64,12 +78,7 @@
             {% elseif is_draft %}
                 <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                     <button
-                        data-content-draft-edit-url="{{ path(edit_url, {
-                            'contentId': version.contentInfo.id,
-                            'versionNo': version.versionNo,
-                            'language': version.translations[0].languageCode,
-                            'locationId': location.id
-                        }) }}"
+                        data-content-draft-edit-url="{{ edit_url }}"
                         data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
                             'contentId': version.contentInfo.id,
                             'versionNo': version.versionNo,

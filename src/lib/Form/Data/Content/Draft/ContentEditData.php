@@ -18,23 +18,23 @@ use eZ\Publish\API\Repository\Values\Content\VersionInfo;
  */
 class ContentEditData
 {
-    /** @var Location|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
     protected $location;
 
-    /** @var ContentInfo|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo|null */
     protected $contentInfo;
 
-    /** @var VersionInfo|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\VersionInfo|null */
     protected $versionInfo;
 
-    /** @var Language|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Language|null */
     protected $language;
 
     /**
-     * @param ContentInfo|null $contentInfo
-     * @param VersionInfo|null $versionInfo
-     * @param Language|null $language
-     * @param Location|null $location
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo|null $versionInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
      */
     public function __construct(
         ?ContentInfo $contentInfo = null,
@@ -49,7 +49,7 @@ class ContentEditData
     }
 
     /**
-     * @return Location|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
      */
     public function getLocation(): ?Location
     {
@@ -57,7 +57,9 @@ class ContentEditData
     }
 
     /**
-     * @param Location|null $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
+     *
+     * @return self
      */
     public function setLocation(Location $location): self
     {
@@ -67,7 +69,7 @@ class ContentEditData
     }
 
     /**
-     * @return ContentInfo|null
+     * @return \eZ\Publish\API\Repository\Values\Content\ContentInfo|null
      */
     public function getContentInfo(): ?ContentInfo
     {
@@ -75,7 +77,7 @@ class ContentEditData
     }
 
     /**
-     * @param ContentInfo|null $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
      *
      * @return self
      */
@@ -87,7 +89,7 @@ class ContentEditData
     }
 
     /**
-     * @return VersionInfo|null
+     * @return \eZ\Publish\API\Repository\Values\Content\VersionInfo|null
      */
     public function getVersionInfo(): ?VersionInfo
     {
@@ -95,7 +97,7 @@ class ContentEditData
     }
 
     /**
-     * @param VersionInfo|null $versionInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo|null $versionInfo
      *
      * @return self
      */
@@ -107,7 +109,7 @@ class ContentEditData
     }
 
     /**
-     * @return Language|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Language|null
      */
     public function getLanguage(): ?Language
     {
@@ -115,7 +117,7 @@ class ContentEditData
     }
 
     /**
-     * @param Language|null $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
      *
      * @return self
      */

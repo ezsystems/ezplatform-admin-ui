@@ -14,7 +14,17 @@
         </thead>
         <tbody>
         {% for row in data %}
-            {% set edit_url = content_is_user is defined and content_is_user ? 'ez_user_update' : 'ez_content_draft_edit' %}
+            {% set edit_url = content_is_user is defined and content_is_user ?
+                path('ez_user_update', {
+                'contentId': row.contentId,
+                'versionNo': row.version,
+                'language': row.language
+            }) : path('ez_content_draft_edit', {
+                'contentId': row.contentId,
+                'versionNo': row.version,
+                'language': row.language
+            })
+            %}
             <tr>
                 <td class="ez-table__cell">{{ row.name }}</td>
                 <td class="ez-table__cell">{{ row.type }}</td>
@@ -24,11 +34,7 @@
                 <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                     <button class="btn btn-icon mx-2 ez-btn--content-draft-edit"
                             title="{{ 'dashboard.table.draft.edit'|trans|desc('Edit Draft') }}"
-                            data-content-draft-edit-url="{{ path(edit_url, {
-                                'contentId': row.contentId,
-                                'versionNo': row.version,
-                                'language': row.language
-                            }) }}"
+                            data-content-draft-edit-url="{{ edit_url }}"
                             data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
                                 'contentId': row.contentId,
                                 'versionNo': row.version,

@@ -23,12 +23,23 @@
             $('#version-draft-conflict-modal').modal('show').on('hidden.bs.modal', resetRadioButtons);
         };
 
+        const changeFormActionUrl = () => {
+            if (!form.querySelector('#user_edit_version_info')) {
+                return;
+            }
+            const versionNo = form.querySelector('#user_edit_version_info_version_no').value;
+            const language = btns.filter(btn => btn.checked = true)[0].value;
+
+            form.action = global.Routing.generate('ez_user_update', { contentId, versionNo, language });
+        };
+
         fetch(checkVersionDraftLink, {
             credentials: 'same-origin'
         }).then(function (response) {
             if (response.status === 409) {
                 response.text().then(showModal);
             } else if (response.status === 200) {
+                changeFormActionUrl();
                 form.submit();
             }
         });

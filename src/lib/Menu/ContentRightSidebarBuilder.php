@@ -140,22 +140,6 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'data-actions' => 'create',
             'data-focus-element' => '.ez-instant-filter__input',
         ];
-        $editAttributes = [
-            'class' => 'ez-btn--extra-actions ez-btn--edit',
-            'data-actions' => 'edit',
-        ];
-        $editUserAttributes = [
-            'class' => 'ez-btn--extra-actions ez-btn--edit-user',
-            'data-actions' => 'edit-user',
-        ];
-        $deleteAttributes = [
-            'data-toggle' => 'modal',
-            'data-target' => '#delete-user-modal',
-        ];
-        $sendToTrashAttributes = [
-            'data-toggle' => 'modal',
-            'data-target' => '#trash-location-modal',
-        ];
         $copySubtreeAttributes = [
             'class' => 'ez-btn--udw-copy-subtree',
             'data-root-location' => $this->configResolver->getParameter(
@@ -185,31 +169,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             ),
         ]);
 
-        if ($contentIsUser) {
-            $menu->addChild(
-                $this->createMenuItem(
-                    self::ITEM__EDIT,
-                    [
-                        'extras' => ['icon' => 'edit'],
-                        'attributes' => $canEdit
-                            ? $editUserAttributes
-                            : array_merge($editUserAttributes, ['disabled' => 'disabled']),
-                    ]
-                )
-            );
-        } else {
-            $menu->addChild(
-                $this->createMenuItem(
-                    self::ITEM__EDIT,
-                    [
-                        'extras' => ['icon' => 'edit'],
-                        'attributes' => $canEdit
-                            ? $editAttributes
-                            : array_merge($editAttributes, ['disabled' => 'disabled']),
-                    ]
-                )
-            );
-        }
+        $this->addEditMenuItem($menu, $contentIsUser, $canEdit);
 
         $menu->addChild(
             $this->createMenuItem(
@@ -306,5 +266,48 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             (new Message(self::ITEM__MOVE, 'menu'))->setDesc('Move'),
             (new Message(self::ITEM__DELETE, 'menu'))->setDesc('Delete'),
         ];
+    }
+
+    /**
+     * @param \Knp\Menu\ItemInterface $menu
+     * @param bool $contentIsUser
+     * @param bool $canEdit
+     */
+    private function addEditMenuItem(ItemInterface $menu, bool $contentIsUser, bool $canEdit): void
+    {
+        $editAttributes = [
+            'class' => 'ez-btn--extra-actions ez-btn--edit',
+            'data-actions' => 'edit',
+        ];
+        $editUserAttributes = [
+            'class' => 'ez-btn--extra-actions ez-btn--edit-user',
+            'data-actions' => 'edit-user',
+        ];
+
+        if ($contentIsUser) {
+            $menu->addChild(
+                $this->createMenuItem(
+                    self::ITEM__EDIT,
+                    [
+                        'extras' => ['icon' => 'edit'],
+                        'attributes' => $canEdit
+                            ? $editUserAttributes
+                            : array_merge($editUserAttributes, ['disabled' => 'disabled']),
+                    ]
+                )
+            );
+        } else {
+            $menu->addChild(
+                $this->createMenuItem(
+                    self::ITEM__EDIT,
+                    [
+                        'extras' => ['icon' => 'edit'],
+                        'attributes' => $canEdit
+                            ? $editAttributes
+                            : array_merge($editAttributes, ['disabled' => 'disabled']),
+                    ]
+                )
+            );
+        }
     }
 }
