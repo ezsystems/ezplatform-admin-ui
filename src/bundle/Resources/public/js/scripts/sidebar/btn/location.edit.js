@@ -27,7 +27,7 @@
             const versionNo = form.querySelector('#user_edit_version_info_version_no').value;
             const language = btns.find(btn => btn.checked).value;
 
-            window.location.replace(global.Routing.generate('ez_user_update', { contentId, versionNo, language }));
+            window.location.href = global.Routing.generate('ez_user_update', { contentId, versionNo, language });
         };
 
         fetch(checkVersionDraftLink, {
