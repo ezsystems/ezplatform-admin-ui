@@ -3,11 +3,7 @@
     const languageRadioOption = doc.querySelector('.ez-extra-actions--edit-user.ez-extra-actions--prevent-show [type="radio"]');
     const editActions = doc.querySelector('.ez-extra-actions--edit-user');
 
-    if (!editActions) {
-        return;
-    }
-
-    if (!languageRadioOption) {
+    if (!editActions || !languageRadioOption) {
         return;
     }
 
