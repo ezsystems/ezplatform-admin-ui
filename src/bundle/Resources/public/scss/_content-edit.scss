@@ -42,3 +42,31 @@
         }
     }
 }
+
+.ez-content-edit {
+    .ez-field-edit {
+        margin: calculateRem(24px) 0;
+
+        &__label-wrapper {
+            .ez-field-edit {
+                &__label {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &--ezdate,
+        &--eztime,
+        &--ezdatetime {
+            .ez-field-edit__data {
+                .form-control {
+                    margin-bottom: calculateRem(-8px);
+                }
+            }
+        }
+    }
+
+    .card-body {
+        padding: 0 calculateRem(20px);
+    }
+}
