@@ -86,6 +86,7 @@ class TabExtension extends Twig_Extension
         $tabs = [];
         foreach ($tabGroupEvent->getData()->getTabs() as $tab) {
             $tabEvent = $this->dispatchTabPreRenderEvent($tab, $parameters);
+            $parameters = array_merge($parameters, $tabGroupEvent->getParameters(), $tabEvent->getParameters());
             $tabs[] = $this->composeTabParameters($tabEvent->getData(), $parameters);
         }
 
