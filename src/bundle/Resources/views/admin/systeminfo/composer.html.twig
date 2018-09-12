@@ -5,7 +5,7 @@
 <table class="table ez-table--list">
     <thead>
         <tr>
-            <th colspan="2">
+            <th class="ez-table__cell ez-table__cell--header" colspan="2">
                 {% if info.packages is empty %}
                     {{ 'packages.empty'|trans|desc('No packages installed.') }}
                 {% else %}
@@ -15,9 +15,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>{{ 'composer.minimum_stability'|trans|desc('Minimum stability') }}</td>
-            <td>{{ info.minimumStability }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'composer.minimum_stability'|trans|desc('Minimum stability') }}</td>
+            <td class="ez-table__cell">{{ info.minimumStability }}</td>
         </tr>
     </tbody>
 </table>
