@@ -4,8 +4,9 @@
     position: absolute;
     max-width: 34rem;
     background: $ez-ground-base-dark;
-    padding: 1rem;
+    padding: calculateRem(16px) calculateRem(24px);
     border-radius: 5px;
+    box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba(0, 0, 0, 0.45);
     transform: scaleY(1);
     transform-origin: top center;
     transition: transition .2s $ez-admin-transition;
@@ -26,6 +27,14 @@
     &__item {
         flex-basis: 33%;
         display: flex;
+
+        .form-check-inline {
+            margin: calculateRem(4px);
+
+            .form-check-label {
+                font-size: calculateRem(14px);
+            }
+        }
     }
 
     &__group-title {
@@ -73,6 +82,12 @@
 
             #{$selector}__group-title:after {
                 transform: translate(2px, -50%) rotate(-45deg);
+            }
+        }
+
+        &:last-of-type {
+            .ez-content-type-selector__list {
+                margin-bottom: calculateRem(8px);
             }
         }
     }
