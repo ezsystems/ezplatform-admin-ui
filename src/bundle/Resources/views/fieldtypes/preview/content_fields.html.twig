@@ -379,7 +379,6 @@
                 <td>{{ 'ezimage.ratio'|trans|desc('Ratio') }}:</td>
                 <td>{{ (field.value.width/field.value.height)|round(2) }}</td>
             </tr>
-
         </tbody>
     </table>
     <div class="ez-field-preview__actions-wrapper">
@@ -390,6 +389,26 @@
         </a>
     </div>
 </div>
+{% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block ezimageasset_field %}
+{% spaceless %}
+{% if not ez_is_field_empty( content, field ) and parameters.available %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezimageasset')|trim}) %}
+    <div {{ block( 'field_attributes' ) }}>
+        {{ render(controller('ez_content:viewAction', {
+            contentId: field.value.destinationContentId,
+            viewType: 'preview_ezimageasset',
+            noLayout: true,
+            params: {
+                parameters: parameters|default({})
+            }
+        }))}}
+    </div>
+{% else %}
+    <em>{{ 'ezimageasset.not_available'|trans|desc('Image asset is not available (related content has been deleted or insufficient permissions)') }}</em>
 {% endif %}
 {% endspaceless %}
 {% endblock %}

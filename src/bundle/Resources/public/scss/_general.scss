@@ -42,7 +42,8 @@ a {
     }
 }
 
-.ezimage-field img {
+.ezimage-field img,
+.ezimageasset-field img {
     display: inline-block;
     max-width: 100%;
     width: auto;

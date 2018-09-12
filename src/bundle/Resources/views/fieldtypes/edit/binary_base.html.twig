@@ -1,7 +1,9 @@
 {% trans_default_domain 'ezrepoforms_content' %}
 
 {% block binary_base_row %}
-    {% set file_is_empty = form.parent.vars.value.value.fileName is null or form.parent.vars.value.value.fileSize is null %}
+    {% if not file_is_empty is defined %}
+        {% set file_is_empty = form.parent.vars.value.value.fileName is null or form.parent.vars.value.value.fileSize is null %}
+    {% endif %}
     {% set attr = attr|merge({'data-max-file-size': max_file_size}) %}
     {% set wrapper_attr = wrapper_attr|default({})|merge({'class': (wrapper_attr.class|default('') ~ ' ez-field-edit--with-preview')|trim}) %}
     {% set preview_attr = preview_attr|default({})|merge({'class': (preview_attr.class|default('') ~ ' ez-field-edit__preview')|trim}) %}
@@ -20,7 +22,10 @@
         {% set widget_wrapper_attr = widget_wrapper_attr|merge({'hidden': 'hidden'}) %}
     {% endif %}
 
-    {% set widget_container_block = block('binary_base_widget_container') %}
+    {% if not widget_container_block_name is defined %}
+        {% set widget_container_block_name = 'binary_base_widget_container' %}
+    {% endif %}
+    {% set widget_container_block = block(widget_container_block_name) %}
 
     {{ block('form_row_fieldtype') }}
 {% endblock %}

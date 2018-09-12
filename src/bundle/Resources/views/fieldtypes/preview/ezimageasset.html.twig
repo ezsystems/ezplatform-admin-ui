@@ -1,0 +1,59 @@
+{% trans_default_domain 'fieldtypes_preview' %}
+
+{% set field = ez_field(content, ez_image_asset_content_field_identifier()) %}
+{% set versionInfo = content.versionInfo  %}
+
+{% if not ez_is_field_empty(content, field) %}
+    {% set imageAlias = ez_image_alias( field, versionInfo, parameters.alias|default( 'original' ) ) %}
+    {% set src = imageAlias ? asset( imageAlias.uri ) : "//:0" %}
+
+    <div class="ez-field-preview__image-wrapper">
+        <img src="{{ src }}">
+    </div>
+    <table class="ez-field-preview__image-meta">
+        <thead>
+            <tr>
+                <th>{{ 'ezimageasset.image_file_properties'|trans|desc('Image file properties') }}:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ 'ezimageasset.file_name'|trans|desc('File name') }}:</td>
+                <td>{{ field.value.fileName }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'ezimageasset.size'|trans|desc('Size') }}:</td>
+                <td>{{ field.value.fileSize|ez_file_size(1) }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'ezimageasset.alternative_text'|trans|desc('Alternative text') }}:</td>
+                <td>{{ field.value.alternativeText }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'ezimageasset.master_dimensions'|trans|desc('Master dimensions') }}:</td>
+                <td>
+                    {{ 'ezimageasset.width_and_height'|trans({
+                        '%width%': field.value.width,
+                        '%height%': field.value.height})|desc('%width%px Width - %height%px Height')
+                    }}
+                </td>
+            </tr>
+            <tr>
+                <td>{{ 'ezimageasset.ratio'|trans|desc('Ratio') }}:</td>
+                <td>{{ (field.value.width/field.value.height)|round(2) }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <div class="ez-field-preview__actions-wrapper">
+        <a class="ez-field-preview__action ez-field-preview__action--preview" href="{{ field.value.uri }}" target="_blank">
+            <svg class="ez-icon ez-icon--medium ez-icon--light">
+                <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab"></use>
+            </svg>
+        </a>
+    </div>
+{% else %}
+    <a href="{{ path('_ezpublishLocation', { 'locationId': content.contentInfo.mainLocationId }) }}" target="_blank">
+        {{ ez_content_name(content) }}
+    </a>
+{% endif %}
