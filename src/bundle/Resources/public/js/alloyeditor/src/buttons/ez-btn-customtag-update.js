@@ -8,7 +8,8 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         super(props);
 
         this.state = {
-            values: props.values
+            values: props.values,
+            content: props.content,
         };
     }
 
@@ -124,6 +125,26 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         );
     }
 
+    renderEzContent() {
+        let value = this.state.content;
+
+        if (value) {
+            value = value.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        }
+
+        return (
+            <div className="attribute__wrapper">
+                <label className="attribute__label form-control-label">Content</label>
+                <textarea
+                    className="ezcontent__input form-control"
+                    value={value}
+                    onChange={this.updateContent.bind(this)}
+                />
+            </div>
+        );
+
+    }
+
     /**
      * Renders the attribute.
      *
@@ -156,6 +177,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
 
         return (
             <div className="ez-ae-custom-tag">
+                {this.renderEzContent()}
                 {attrs.map(this.renderAttribute.bind(this))}
                 <button
                     className="ez-btn-ae btn btn-secondary ez-btn-ae--custom-tag float-right"
@@ -193,7 +215,11 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
 
         widget.setFocused(true);
         widget.setName(this.customTagName);
-        widget.setWidgetContent(this.createContent());
+        if (this.state.content) {
+            widget.setWidgetContent(this.state.content);
+        } else {
+            widget.setWidgetContent(this.createContent());
+        }
         widget.clearConfig();
 
         Object.keys(this.attributes).forEach(key => {
@@ -225,6 +251,18 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
 
         this.setState({
             values: values
+        });
+    }
+
+    /**
+     * Updates the custom tag's main content.
+     *
+     * @method updateContent
+     * @param {Object} event
+     */
+    updateContent(event) {
+        this.setState({
+            content: event.target.value,
         });
     }
 

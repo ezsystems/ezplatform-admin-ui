@@ -18,6 +18,7 @@ export default class EzBtnCustomTag extends EzWidgetButton {
             return <ButtonComponent
                 createNewTag="true"
                 values={this.values}
+                content={this.content}
                 {...this.props}
             />;
         }

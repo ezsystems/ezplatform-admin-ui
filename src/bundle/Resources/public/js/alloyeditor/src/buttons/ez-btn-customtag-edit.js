@@ -25,6 +25,16 @@ export default class EzBtnCustomTagEdit extends EzWidgetButton {
     }
 
     /**
+     * Gets the tag's ezcontent from the DOM.
+     *
+     * @method getContent
+     * @return {Object} The tag's content.
+     */
+    getContent() {
+        return this.getWidget().getContent();
+    }
+
+    /**
      * Lifecycle. Renders the UI of the button.
      *
      * @method render
@@ -37,6 +47,7 @@ export default class EzBtnCustomTagEdit extends EzWidgetButton {
 
             return <ButtonComponent
                 values={this.getValues()}
+                content={this.getContent()}
                 {...this.props}
             />;
         }

@@ -225,6 +225,12 @@
                     }
                 },
 
+                getContent: function (key) {
+                    const contentElement = this.getEzContentElement();
+
+                    return contentElement ? contentElement.getText() : '';
+                },
+
                 /**
                  * Returns the Element holding the config under `key`
                  *
