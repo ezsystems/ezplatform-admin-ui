@@ -1,14 +1,14 @@
 import EzConfigBase from './base';
 
 export default class EzParagraphConfig extends EzConfigBase {
-    constructor() {
-        super();
+    constructor(config) {
+        super(config);
 
         this.name = 'paragraph';
         this.buttons = [
             'ezmoveup',
             'ezmovedown',
-            this.getStyles(),
+            this.getStyles(config.customStyles),
             'ezblocktextalignleft',
             'ezblocktextaligncenter',
             'ezblocktextalignright',
