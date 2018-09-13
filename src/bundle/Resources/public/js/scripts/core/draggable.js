@@ -107,6 +107,8 @@
             this.itemsContainer.addEventListener('drop', this[onDrop], false);
 
             this.itemsContainer.querySelectorAll(this.selectorItem).forEach(this[attachEventHandlersToItem]);
+
+            this.afterInit();
         }
 
         reinit() {
