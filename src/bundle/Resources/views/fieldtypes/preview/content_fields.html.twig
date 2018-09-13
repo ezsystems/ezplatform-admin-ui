@@ -403,7 +403,7 @@
             viewType: 'preview_ezimageasset',
             noLayout: true,
             params: {
-                parameters: parameters|default({})
+                parameters: parameters|default({})|merge({ alternativeText: field.value.alternativeText })
             }
         }))}}
     </div>
