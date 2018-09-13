@@ -11,6 +11,9 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
             values: props.values,
             content: props.content,
         };
+
+        this.updateValues = this.updateValues.bind(this);
+        this.updateContent = this.updateContent.bind(this);
     }
 
     /**
@@ -31,7 +34,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     required={config.required}
                     className="attribute__input form-control"
                     value={this.state.values[attrName].value}
-                    onChange={this.updateValues.bind(this)}
+                    onChange={this.updateValues}
                     data-attr-name={attrName}
                 ></input>
             </div>
@@ -56,7 +59,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     required={config.required}
                     className="attribute__input form-control"
                     checked={this.state.values[attrName].value}
-                    onChange={this.updateValues.bind(this)}
+                    onChange={this.updateValues}
                     data-attr-name={attrName}
                 ></input>
             </div>
@@ -81,7 +84,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     required={config.required}
                     className="attribute__input form-control"
                     value={this.state.values[attrName].value}
-                    onChange={this.updateValues.bind(this)}
+                    onChange={this.updateValues}
                     data-attr-name={attrName}
                 ></input>
             </div>
@@ -103,7 +106,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                 <select
                     className="attribute__input form-control"
                     value={this.state.values[attrName].value}
-                    onChange={this.updateValues.bind(this)}
+                    onChange={this.updateValues}
                     data-attr-name={attrName}
                 >
                     {config.choices.map(this.renderChoice.bind(this))}
@@ -138,7 +141,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                 <textarea
                     className="ezcontent__input form-control"
                     value={value}
-                    onChange={this.updateContent.bind(this)}
+                    onChange={this.updateContent}
                 />
             </div>
         );
