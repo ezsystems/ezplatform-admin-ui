@@ -1,27 +1,45 @@
-.n-pending-notifications {
-    &:before {
-        content: attr(data-count);
-        width: 1rem;
-        height: 1rem;
-        border-radius: 50%;
-        background: $ez-color-danger;
-        position: absolute;
-        vertical-align: middle;
-        text-align: center;
-        font-size: .75rem;
-        color: $ez-white;
-    }
-}
+.ez-main-nav {    
+    .ez-user-menu {
 
-.ez-user-menu__item--notifications {
-    position: relative;
+        &__name-wrapper {
+            .n-pending-notifications {
+                &:before {
+                    content: attr(data-count);
+                    width: 1rem;
+                    height: 1rem;
+                    border-radius: 50%;
+                    background: $ez-color-danger;
+                    position: absolute;
+                    vertical-align: middle;
+                    text-align: center;
+                    font-size: calculateRem(12px);
+                    color: $ez-white;
+                }
+            }
+        }
 
-    &:before {
-        content: attr(data-count);
-        position: absolute;
-        left: .25rem;
-        top: 50%;
-        transform: translateY(-50%);
-        color: $ez-color-base-light;
+        &__item {
+            
+            &--notifications {
+                position: relative;
+
+                &:before {
+                    content: attr(data-count);
+                    position: absolute;
+                    left: .35rem;
+                    top: 48%;
+                    transform: translateY(-50%);
+                    font-size: calculateRem(14px);
+                    color: $ez-black;
+                }
+
+                &:hover {
+
+                    &:before {
+                        color: $ez-black;
+                    }
+                }
+            }
+        }
     }
 }
