@@ -5,17 +5,17 @@
 <table class="table ez-table--list">
     <thead>
         <tr>
-            <th colspan="2">{{ 'symfony_kernel'|trans|desc('Symfony Kernel') }}</th>
+            <th  class="ez-table__cell ez-table__cell--header"colspan="2">{{ 'symfony_kernel'|trans|desc('Symfony Kernel') }}</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>{{ 'symfony_kernel.environment'|trans|desc('Environment') }}</td>
-            <td>{{ info.environment }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'symfony_kernel.environment'|trans|desc('Environment') }}</td>
+            <td class="ez-table__cell">{{ info.environment }}</td>
         </tr>
-        <tr>
-            <td>{{ 'symfony_kernel.debugMode'|trans|desc('Debug mode') }}</td>
-            <td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'symfony_kernel.debugMode'|trans|desc('Debug mode') }}</td>
+            <td class="ez-table__cell">
                 {% if info.debugMode %}
                     {{ 'symfony_kernel.debugMode.enabled'|trans|desc('Enabled') }}
                 {% else %}
@@ -23,29 +23,29 @@
                 {% endif %}
             </td>
         </tr>
-        <tr>
-            <td>{{ 'symfony_kernel.version'|trans|desc('Version') }}</td>
-            <td>{{ info.version }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'symfony_kernel.version'|trans|desc('Version') }}</td>
+            <td class="ez-table__cell">{{ info.version }}</td>
         </tr>
-        <tr>
-            <td>{{ 'symfony_kernel.name'|trans|desc('Name') }}</td>
-            <td>{{ info.name }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'symfony_kernel.name'|trans|desc('Name') }}</td>
+            <td class="ez-table__cell">{{ info.name }}</td>
         </tr>
-        <tr>
-            <td>{{ 'symfony_kernel.rootDir'|trans|desc('Root directory') }}</td>
-            <td>{{ info.rootDir }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'symfony_kernel.rootDir'|trans|desc('Root directory') }}</td>
+            <td class="ez-table__cell">{{ info.rootDir }}</td>
         </tr>
-        <tr>
-            <td>{{ 'symfony_kernel.cacheDir'|trans|desc('Cache directory') }}</td>
-            <td>{{ info.cacheDir }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'symfony_kernel.cacheDir'|trans|desc('Cache directory') }}</td>
+            <td class="ez-table__cell">{{ info.cacheDir }}</td>
         </tr>
-        <tr>
-            <td>{{ 'symfony_kernel.logDir'|trans|desc('Log directory') }}</td>
-            <td>{{ info.logDir }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'symfony_kernel.logDir'|trans|desc('Log directory') }}</td>
+            <td class="ez-table__cell">{{ info.logDir }}</td>
         </tr>
-        <tr>
-            <td>{{ 'symfony_kernel.charset'|trans|desc('Character set') }}</td>
-            <td>{{ info.charset }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'symfony_kernel.charset'|trans|desc('Character set') }}</td>
+            <td class="ez-table__cell">{{ info.charset }}</td>
         </tr>
     </tbody>
 </table>

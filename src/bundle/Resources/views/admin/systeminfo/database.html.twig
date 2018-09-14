@@ -5,25 +5,25 @@
 <table class="table ez-table--list">
     <thead>
         <tr>
-            <th colspan="2">{{ 'database'|trans|desc('Database') }}</th>
+            <th class="ez-table__cell ez-table__cell--header" colspan="2">{{ 'database'|trans|desc('Database') }}</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>{{ 'database.type'|trans|desc('Type') }}</td>
-            <td>{{ info.type }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'database.type'|trans|desc('Type') }}</td>
+            <td class="ez-table__cell">{{ info.type }}</td>
         </tr>
-        <tr>
-            <td>{{ 'database.name'|trans|desc('Name') }}</td>
-            <td>{{ info.name }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'database.name'|trans|desc('Name') }}</td>
+            <td class="ez-table__cell">{{ info.name }}</td>
         </tr>
-        <tr>
-            <td>{{ 'database.host'|trans|desc('Host') }}</td>
-            <td>{{ info.host }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'database.host'|trans|desc('Host') }}</td>
+            <td class="ez-table__cell">{{ info.host }}</td>
         </tr>
-        <tr>
-            <td>{{ 'database.username'|trans|desc('Username') }}</td>
-            <td>{{ info.username }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'database.username'|trans|desc('Username') }}</td>
+            <td class="ez-table__cell">{{ info.username }}</td>
         </tr>
     </tbody>
 </table>
