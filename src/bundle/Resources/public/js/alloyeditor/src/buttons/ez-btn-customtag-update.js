@@ -132,7 +132,13 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         let value = this.state.content;
 
         if (value) {
-            value = value.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+            let customTagEvent = new CustomEvent(
+                'getCustomTagContent',
+                {detail: {editor: this.props.editor, name: name, content: value}}
+            );
+
+            dispatchEvent(customTagEvent);
+            value = customTagEvent.detail.content;
         }
 
         return (
@@ -219,7 +225,14 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         widget.setFocused(true);
         widget.setName(this.customTagName);
         if (this.state.content) {
-            widget.setWidgetContent(this.state.content);
+            let customTagEvent = new CustomEvent(
+                'setCustomTagContent',
+                {detail: {editor: this.props.editor, name: name, content: this.state.content}}
+            );
+
+            dispatchEvent(customTagEvent);
+
+            widget.setWidgetContent(customTagEvent.detail.content);
         } else {
             widget.setWidgetContent(this.createContent());
         }
