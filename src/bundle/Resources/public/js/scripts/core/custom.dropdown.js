@@ -44,7 +44,7 @@
         }
 
         [selectFirstItem]() {
-            const firstItem = this.itemsContainer.querySelector(SELECTOR_ITEM);
+            const firstItem = this.itemsContainer.querySelector(`${SELECTOR_ITEM}:not([disabled])`);
 
             firstItem.classList.add(CLASS_ITEM_SELECTED);
 
@@ -130,7 +130,7 @@
 
             this.container.querySelector(SELECTOR_SELECTION_INFO).addEventListener('click', this[onInputClick], false);
             this.itemsContainer
-                .querySelectorAll(SELECTOR_ITEM)
+                .querySelectorAll(`${SELECTOR_ITEM}:not([disabled])`)
                 .forEach((option) => option.addEventListener('click', this[onOptionClick], false));
         }
     }
