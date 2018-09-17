@@ -22,7 +22,7 @@
                         }
 
                         if (oldValue.constructor.name === objectConstructorName && newValue.constructor.name === objectConstructorName) {
-                            return { ...oldValue, ...newValue };
+                            return Object.assign({}, oldValue, newValue);
                         }
                     };
 
