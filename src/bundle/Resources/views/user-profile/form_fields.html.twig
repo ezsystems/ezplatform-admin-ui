@@ -19,7 +19,7 @@
     {% if errors|length > 0 %}{% set wrapper_class = (wrapper_class|default('') ~ ' is-invalid')|trim %}{% endif %}
 
     {% set label_wrapper_attr = label_wrapper_attr|default({})|merge({'class': (label_wrapper_attr.class|default('') ~ 'ez-field__label-wrapper')|trim}) %}
-    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ez-field__label')|trim}) %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ez-field__label ez-label')|trim}) %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-data-source__input')|trim}) %}
     {% set wrapper_attr = wrapper_attr|default({})|merge({'class': (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
 
