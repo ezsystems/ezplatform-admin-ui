@@ -49,7 +49,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                {{ user_setting.value|raw }}
+                                {{ value_definitions[user_setting.identifier].getDisplayValue(user_setting.value)|raw }}
                             </td>
                             <td class="text-right">
                                 <a

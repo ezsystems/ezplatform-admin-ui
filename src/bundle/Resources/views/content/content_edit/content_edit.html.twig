@@ -23,7 +23,7 @@
         <div class="small">
             {{ contentType.name }} /
             {% if creator is not null %}{{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }} /{% endif %}
-            {{ content.versionInfo.contentInfo.publishedDate|localizeddate('medium', 'medium', app.request.locale) }} /
+            {{ content.versionInfo.contentInfo.publishedDate|localizeddate('medium', 'medium', app.request.locale, ez_user_settings['timezone']) }} /
             {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }},
             {% if isPublished == false %}
                 {{ 'parent_location_id'|trans({'%locationId%': parentLocation.id})|desc('Parent Location ID: %locationId%') }}

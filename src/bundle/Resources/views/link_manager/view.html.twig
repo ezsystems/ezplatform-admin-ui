@@ -50,7 +50,7 @@
                     <td class="ez-table__cell">{{ 'url.label.last_checked'|trans }}</td>
                     <td class="ez-table__cell">
                         {% if url.lastChecked %}
-                            {{ url.lastChecked|localizeddate('medium', 'short') }}
+                            {{ url.lastChecked|localizeddate('medium', 'short', null, ez_user_settings['timezone']) }}
                         {% else %}
                             {{ 'url.label.last_checked.never'|trans|desc('This URL has not been checked') }}
                         {% endif %}
@@ -58,11 +58,11 @@
                 </tr>
                 <tr class="ez-table__row">
                     <td class="ez-table__cell">{{ 'url.label.created'|trans }}</td>
-                    <td class="ez-table__cell">{{ url.created|localizeddate('medium', 'short') }}</td>
+                    <td class="ez-table__cell">{{ url.created|localizeddate('medium', 'short', null, ez_user_settings['timezone']) }}</td>
                 </tr>
                 <tr class="ez-table__row">
                     <td class="ez-table__cell">{{ 'url.label.modified'|trans }}</td>
-                    <td class="ez-table__cell">{{ url.modified|localizeddate('medium', 'short') }}</td>
+                    <td class="ez-table__cell">{{ url.modified|localizeddate('medium', 'short', null, ez_user_settings['timezone']) }}</td>
                 </tr>
             </tbody>
         </table>
