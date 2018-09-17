@@ -61,13 +61,26 @@ class AdminUiForms extends AbstractParser
         $currentScope,
         ContextualizerInterface $contextualizer
     ): void {
+        if (!empty($scopeSettings['admin_ui_forms']['content_edit_form_templates'])) {
+            $scopeSettings['admin_ui_forms.content_edit_form_templates'] = $this->processContentEditFormTemplates(
+                $scopeSettings['admin_ui_forms']['content_edit_form_templates']
+            );
+            unset($scopeSettings['admin_ui_forms']['content_edit_form_templates']);
+        }
+
         $contextualizer->setContextualParameter(
             static::FORM_TEMPLATES_PARAM,
             $currentScope,
-            $this->processContentEditFormTemplates(
-                $scopeSettings['admin_ui_forms']['content_edit_form_templates'] ?? []
-            )
+            $scopeSettings['admin_ui_forms.content_edit_form_templates'] ?? []
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function postMap(array $config, ContextualizerInterface $contextualizer)
+    {
+        $contextualizer->mapConfigArray('admin_ui_forms.content_edit_form_templates', $config);
     }
 
     /**
