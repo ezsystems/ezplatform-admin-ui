@@ -132,7 +132,11 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         let value = this.state.content;
 
         if (value) {
-            value = value.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+            value = value
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&amp;/g, '&');
         }
 
         return (
@@ -219,7 +223,12 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         widget.setFocused(true);
         widget.setName(this.customTagName);
         if (this.state.content) {
-            widget.setWidgetContent(this.state.content);
+            let content = this.state.content
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+            widget.setWidgetContent(content);
         } else {
             widget.setWidgetContent(this.createContent());
         }
