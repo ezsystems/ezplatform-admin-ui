@@ -70,6 +70,11 @@ services:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'richTextCustomTags' }
 
+    # Custom Style UI configuration provider
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText\CustomStyle:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'richTextCustomStyles' }
+
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\ImageAsset\Mapping:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'imageAssetMapping' }
@@ -78,3 +83,13 @@ services:
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\Notifications:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'notifications' }
+
+    # Date related configuration
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\Timezone:
+        class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\Timezone
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'timezone' }
+
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\DateFormat:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'dateFormat' }

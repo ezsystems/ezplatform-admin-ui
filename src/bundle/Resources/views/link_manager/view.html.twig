@@ -23,13 +23,13 @@
         <table class="ez-table table ez-table--list">
             <thead>
                 <tr>
-                   <th colspan="2">
+                   <th class="ez-table__cell ez-table__cell--header" colspan="2">
                        {{ 'url.tab.information'|trans|desc('Details') }}
                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr class="ez-table__row">
                     <td class="ez-table__cell">{{ 'url.label.address'|trans }}</td>
                     <td class="ez-table__cell ez-table__cell--has-action-btns">
                         <a href="{{ url.url }}" target="_blank">{{ url.url }}</a>
@@ -42,27 +42,27 @@
                         </a>
                     </td>
                 </tr>
-                <tr>
+                <tr class="ez-table__row">
                     <td class="ez-table__cell">{{ 'url.label.status'|trans }}</td>
                     <td class="ez-table__cell">{{ url.isValid ? 'url.status.valid'|trans : 'url.status.invalid'|trans }}</td>
                 </tr>
-                <tr>
+                <tr class="ez-table__row">
                     <td class="ez-table__cell">{{ 'url.label.last_checked'|trans }}</td>
                     <td class="ez-table__cell">
                         {% if url.lastChecked %}
-                            {{ url.lastChecked|localizeddate('medium', 'short') }}
+                            {{ url.lastChecked|localizeddate('medium', 'short', null, ez_user_settings['timezone']) }}
                         {% else %}
                             {{ 'url.label.last_checked.never'|trans|desc('This URL has not been checked') }}
                         {% endif %}
                     </td>
                 </tr>
-                <tr>
+                <tr class="ez-table__row">
                     <td class="ez-table__cell">{{ 'url.label.created'|trans }}</td>
-                    <td class="ez-table__cell">{{ url.created|localizeddate('medium', 'short') }}</td>
+                    <td class="ez-table__cell">{{ url.created|localizeddate('medium', 'short', null, ez_user_settings['timezone']) }}</td>
                 </tr>
-                <tr>
+                <tr class="ez-table__row">
                     <td class="ez-table__cell">{{ 'url.label.modified'|trans }}</td>
-                    <td class="ez-table__cell">{{ url.modified|localizeddate('medium', 'short') }}</td>
+                    <td class="ez-table__cell">{{ url.modified|localizeddate('medium', 'short', null, ez_user_settings['timezone']) }}</td>
                 </tr>
             </tbody>
         </table>

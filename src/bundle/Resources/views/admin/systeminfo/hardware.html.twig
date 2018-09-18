@@ -5,24 +5,24 @@
 <table class="table ez-table--list">
     <thead>
         <tr>
-            <th colspan="2">
+            <th class="ez-table__cell ez-table__cell--header" colspan="2">
                 {{ 'hardware'|trans|desc('Hardware') }}
             </th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>{{ 'cpu'|trans|desc('CPU') }}</td>
-            <td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'cpu'|trans|desc('CPU') }}</td>
+            <td class="ez-table__cell">
                 {{ info.cpuType }}
                 {% if info.cpuSpeed %}
                     ({{ info.cpuCount }}x{{ info.cpuSpeed }}&nbsp;{{ 'mhz'|trans|desc('mhz') }})
                 {% endif %}
             </td>
         </tr>
-        <tr>
-            <td>{{ 'memory'|trans|desc('Memory') }}</td>
-            <td>{{ info.memorySize|ez_file_size( 1 ) }}</td>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell">{{ 'memory'|trans|desc('Memory') }}</td>
+            <td class="ez-table__cell">{{ info.memorySize|ez_file_size( 1 ) }}</td>
         </tr>
     </tbody>
 </table>

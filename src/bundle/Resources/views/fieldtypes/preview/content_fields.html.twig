@@ -209,7 +209,7 @@
             </svg>
             {{ field.value.fileName }}
             {{ field.value.fileSize|ez_file_size( 1 ) }}
-            <a href="{{ path( route_reference ) }}">
+            <a download href="{{ path( route_reference ) }}">
                 <svg class="ez-icon ez-icon--download ez-icon--light">
                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#download"></use>
                 </svg>

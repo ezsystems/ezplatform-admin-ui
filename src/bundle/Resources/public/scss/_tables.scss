@@ -117,46 +117,44 @@
     color: $ez-color-base-dark;
 }
 
-.ez-info-view,
-.ez-link-manager-view,
-.ez-content-type-view {
-    .ez-table {
-        &--list {
-            background: none;
-            margin-bottom: 3rem;
+.ez-table {
+    &--list {
+        background: none;
+        margin-bottom: calculateRem(48px);
 
-            th, td {
+        .ez-table {
+            &__row:last-child {
+                .ez-table__cell:first-child {
+                    border-radius: 0 0 0 calculateRem(5px);
+                }
+                .ez-table__cell:last-child {
+                    border-radius: 0 0 calculateRem(5px) 0;
+                }
+            }
+
+            &__cell {
+                font-size: calculateRem(15px);
                 border: none;
-            }
-
-            th {
-                color: $ez-color-secondary-hover;
-                background: $ez-color-base-pale;
-                border-radius: .3rem .3rem 0 0;
-            }
-
-            td {
-                font-size: .9375rem;
 
                 &:first-child {
                     font-weight: bold;
-                    background: $ez-ground-base-medium;
-                    width: 33.33%;
+                    background: $ez-ground-base-dark;
+                    width: calc(100% / 3);
                 }
 
                 &:last-child {
                     font-weight: normal;
                     background: $ez-white;
-                    width: 66.67%;
+                    width: (calc(100% / 3) * 2);
                 }
-            }
 
-            tr:last-child td:first-child {
-                border-radius: 0 0 0 .3rem;
-            }
-
-            tr:last-child td:last-child {
-                border-radius: 0 0 .3rem 0;
+                &--header:first-child,
+                &--header:last-child {
+                    color: $ez-color-secondary-hover;
+                    background: $ez-color-base-pale;
+                    border-radius: calculateRem(5px) calculateRem(5px) 0 0;
+                    border-bottom: none;
+                }
             }
         }
     }

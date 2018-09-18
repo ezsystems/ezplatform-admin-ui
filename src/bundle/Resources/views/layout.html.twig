@@ -22,7 +22,7 @@
                         }
 
                         if (oldValue.constructor.name === objectConstructorName && newValue.constructor.name === objectConstructorName) {
-                            return { ...oldValue, ...newValue };
+                            return Object.assign({}, oldValue, newValue);
                         }
                     };
 
@@ -132,9 +132,14 @@
             '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/create-react-class/create-react-class.min.js'
             '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/prop-types/prop-types.min.js'
             '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.js'
+            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/moment/min/moment.min.js'
+            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/moment-timezone/builds/moment-timezone-with-data.min.js'
+            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.format.date.js'
             '@BazingaJsTranslationBundle/Resources/public/js/translator.min.js'
             'js/translations/config.js'
             'js/translations/*.js'
+            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/core/draggable.js'
+            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/core/custom.dropdown.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
@@ -144,6 +149,7 @@
         {%  javascripts
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/helpers/request.helper.js'
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/helpers/notification.helper.js'
+            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/helpers/timezone.helper.js'
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.notifications.js'
             '@EzPlatformAdminUiModulesBundle/Resources/public/js/UniversalDiscovery.module.js'
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.trigger.js'

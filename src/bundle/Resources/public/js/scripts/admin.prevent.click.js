@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function(global, doc) {
     global.onbeforeunload = function() {
         doc.querySelector('body').classList.add('ez-prevent-click');
 

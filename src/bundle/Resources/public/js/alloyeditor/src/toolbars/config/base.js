@@ -59,7 +59,7 @@ export default class EzConfigBase {
         return true;
     }
 
-    getStyles() {
+    getStyles(customStyles = []) {
         const headingLabel = Translator.trans(/*@Desc("Heading")*/ 'toolbar_config_base.heading_label', {}, 'alloy_editor');
         const paragraphLabel = Translator.trans(/*@Desc("Paragraph")*/ 'toolbar_config_base.paragraph_label', {}, 'alloy_editor');
 
@@ -75,6 +75,7 @@ export default class EzConfigBase {
                     {name: `${headingLabel} 5`, style: {element: 'h5'}},
                     {name: `${headingLabel} 6`, style: {element: 'h6'}},
                     {name: paragraphLabel, style: {element: 'p'}},
+                    ...customStyles
                 ]
             }
         };
