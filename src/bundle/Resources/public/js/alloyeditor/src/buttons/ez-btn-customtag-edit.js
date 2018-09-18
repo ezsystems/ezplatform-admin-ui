@@ -31,7 +31,8 @@ export default class EzBtnCustomTagEdit extends EzWidgetButton {
      * @return {Object} The tag's content.
      */
     getContent() {
-        return this.getWidget().getContent();
+        // the test is a workaround for a crash when getWidget() is null
+        return this.getWidget ? this.getWidget().getContent() : '';
     }
 
     /**
