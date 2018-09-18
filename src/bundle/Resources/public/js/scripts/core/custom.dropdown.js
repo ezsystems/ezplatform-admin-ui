@@ -44,17 +44,13 @@
         }
 
         [selectFirstItem]() {
-            const firstItem = this.itemsContainer.querySelector(`${SELECTOR_ITEM}:not([disabled])`);
+            const firstItem = this.itemsContainer.querySelector(`${SELECTOR_ITEM}`);
 
             firstItem.classList.add(CLASS_ITEM_SELECTED);
 
-            if (!firstItem.dataset.value) {
-                return;
-            }
-
             this.container
                 .querySelector(SELECTOR_SELECTION_INFO)
-                .insertAdjacentHTML('beforeend', createSelectedItem(firstItem.dataset.value, firstItem.innerHTML));
+                .insertAdjacentHTML('beforeend', this[createSelectedItem](firstItem.dataset.value, firstItem.innerHTML));
         }
 
         [clearCurrentSelection]() {
