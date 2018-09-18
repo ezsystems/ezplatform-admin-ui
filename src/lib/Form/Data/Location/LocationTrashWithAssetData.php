@@ -43,7 +43,7 @@ class LocationTrashWithAssetData
     /**
      * @param Location|null $location
      */
-    public function setLocation(?Location $location)
+    public function setLocation(?Location $location): void
     {
         $this->location = $location;
     }

@@ -36,6 +36,13 @@ class TrashLocationWithAssetController extends Controller
     /** @var \eZ\Publish\API\Repository\TrashService */
     private $trashService;
 
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\TrashService $trashService
+     */
     public function __construct(
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
@@ -54,6 +61,7 @@ class TrashLocationWithAssetController extends Controller
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function trashAction(Request $request): Response
     {

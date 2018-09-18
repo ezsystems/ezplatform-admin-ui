@@ -164,8 +164,10 @@ class FormFactory
     private $contentTypeService;
 
     /**
-     * @param FormFactoryInterface $formFactory
-     * @param UrlGeneratorInterface $urlGenerator
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      */
     public function __construct(
         FormFactoryInterface $formFactory,
@@ -1280,6 +1282,7 @@ class FormFactory
      * @param string|null $name
      *
      * @return \Symfony\Component\Form\FormInterface
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function trashLocationWithAsset(
         LocationTrashWithAssetData $data = null,

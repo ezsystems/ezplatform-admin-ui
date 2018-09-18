@@ -19,6 +19,9 @@ class ContentHaveAssetRelation extends AbstractSpecification
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
+    /**
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     */
     public function __construct(ContentService $contentService)
     {
         $this->contentService = $contentService;

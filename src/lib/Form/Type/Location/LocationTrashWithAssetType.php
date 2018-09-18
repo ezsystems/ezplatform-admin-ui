@@ -21,6 +21,10 @@ class LocationTrashWithAssetType extends AbstractType
     const RADIO_SELECT_TRASH_WITH_ASSETS = 'trash_with_assets';
     const RADIO_SELECT_DEFAULT_TRASH = 'trash_default';
 
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -45,6 +49,9 @@ class LocationTrashWithAssetType extends AbstractType
             );
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
