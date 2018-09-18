@@ -23,6 +23,7 @@
             this.container = config.container;
             this.sourceInput = config.sourceInput;
             this.itemsContainer = config.itemsContainer;
+            this.hasDefaultSelection = config.hasDefaultSelection || false;
 
             this[canSelectOnlyOne] = !config.sourceInput.multiple;
             this[createSelectedItem] = this[createSelectedItem].bind(this);
@@ -44,17 +45,13 @@
         }
 
         [selectFirstItem]() {
-            const firstItem = this.itemsContainer.querySelector(`${SELECTOR_ITEM}:not([disabled])`);
+            const firstItem = this.itemsContainer.querySelector(`${SELECTOR_ITEM}`);
 
             firstItem.classList.add(CLASS_ITEM_SELECTED);
 
-            if (!firstItem.dataset.value) {
-                return;
-            }
-
             this.container
                 .querySelector(SELECTOR_SELECTION_INFO)
-                .insertAdjacentHTML('beforeend', createSelectedItem(firstItem.dataset.value, firstItem.innerHTML));
+                .insertAdjacentHTML('beforeend', this[createSelectedItem](firstItem.dataset.value, firstItem.innerHTML));
         }
 
         [clearCurrentSelection]() {
@@ -87,7 +84,7 @@
                 this.container.querySelector(`${SELECTOR_SELECTION_INFO} [data-value="${value}"]`).remove();
             }
 
-            if (this[canSelectOnlyOne] && !selected) {
+            if (this[canSelectOnlyOne] && !selected && this.hasDefaultSelection) {
                 this[hideOptions]();
                 this[selectFirstItem]();
             }
@@ -124,14 +121,14 @@
         init() {
             const isEmpty = !this.container.querySelectorAll(SELECTOR_SELECTED_ITEM).length;
 
-            if (isEmpty && this[canSelectOnlyOne]) {
+            if (isEmpty && this[canSelectOnlyOne] && this.hasDefaultSelection) {
                 this[selectFirstItem]();
             }
 
-            this.container.querySelector(SELECTOR_SELECTION_INFO).addEventListener('click', this[onInputClick], false);
+            this.container.querySelector(SELECTOR_SELECTION_INFO).onclick = this[onInputClick];
             this.itemsContainer
                 .querySelectorAll(`${SELECTOR_ITEM}:not([disabled])`)
-                .forEach((option) => option.addEventListener('click', this[onOptionClick], false));
+                .forEach((option) => (option.onclick = this[onOptionClick]));
         }
     }
 
