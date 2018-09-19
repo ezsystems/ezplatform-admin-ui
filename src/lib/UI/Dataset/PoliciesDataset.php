@@ -84,8 +84,8 @@ class PoliciesDataset
     public function load(Location $location): self
     {
         $roleAssignments = [];
-        $content = $this->contentService->loadContentByContentInfo($location->contentInfo);
-        $contentType = $this->contentTypeService->loadContentType($content->contentInfo->contentTypeId);
+        $content = $location->getContent();
+        $contentType = $content->getContentType();
 
         if ((new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType)) {
             $user = $this->userService->loadUser($content->id);

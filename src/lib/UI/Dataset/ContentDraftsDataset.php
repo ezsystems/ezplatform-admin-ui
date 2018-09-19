@@ -13,6 +13,7 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
+use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\User\User;
 use EzSystems\EzPlatformAdminUi\UI\Value\Content\VersionId;
 
@@ -60,16 +61,18 @@ class ContentDraftsDataset
         }
 
         $contentDrafts = array_filter($contentDrafts, function (VersionInfo $version) {
-            $contentInfo = $version->getContentInfo();
-
-            if (null === $contentInfo->mainLocationId) {
-                $locations = $this->locationService->loadParentLocationsForDraftContent($version);
-                // empty locations here means Location has been trashed and Draft should be ignored
-                return !empty($locations);
-            }
-
-            return true;
+            // Filter out content that has been sent to trash
+            return !$version->getContentInfo()->isTrashed();
         });
+
+        $contentTypes = $contentTypeIds = [];
+        foreach ($contentDrafts as $contentDraft) {
+            $contentTypeIds[] = $contentDraft->getContentInfo()->contentTypeId;
+        }
+
+        if (!empty($contentTypeIds)) {
+            $contentTypes = $this->contentTypeService->loadContentTypeList(array_unique($contentTypeIds));
+        }
 
         // ContentService::loadContentDrafts returns unsorted list of VersionInfo.
         // Sort results by modification date, descending.
@@ -78,8 +81,11 @@ class ContentDraftsDataset
         });
 
         $this->data = array_map(
-            function (VersionInfo $versionInfo) {
-                return $this->mapContentDraft($versionInfo);
+            function (VersionInfo $versionInfo) use ($contentTypes) {
+                return $this->mapContentDraft(
+                    $versionInfo,
+                    $contentTypes[$versionInfo->getContentInfo()->contentTypeId]
+                );
             },
             $contentDrafts
         );
@@ -102,12 +108,9 @@ class ContentDraftsDataset
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    private function mapContentDraft(VersionInfo $draft): array
+    private function mapContentDraft(VersionInfo $draft, ContentType $contentType): array
     {
         $contentInfo = $draft->getContentInfo();
-        $contentType = $this->contentTypeService->loadContentType(
-            $contentInfo->contentTypeId
-        );
 
         return [
             'id' => new VersionId(

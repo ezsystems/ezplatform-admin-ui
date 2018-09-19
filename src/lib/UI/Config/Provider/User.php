@@ -70,12 +70,7 @@ class User implements ProviderInterface
      */
     private function resolveProfilePictureField(ApiUser $user): ?Field
     {
-        try {
-            $contentType = $this->contentTypeService->loadContentType($user->contentInfo->contentTypeId);
-        } catch (\Exception $e) {
-            return null;
-        }
-
+        $contentType = $user->getContentType();
         foreach ($user->getFields() as $field) {
             $fieldDef = $contentType->getFieldDefinition($field->fieldDefIdentifier);
 

@@ -145,7 +145,7 @@ class TrashController extends Controller
 
         /** @var \eZ\Publish\API\Repository\Values\Content\TrashItem $item */
         foreach ($pagerfanta->getCurrentPageResults() as $item) {
-            $contentType = $this->contentTypeService->loadContentType($item->contentInfo->contentTypeId);
+            $contentType = $item->getContent()->getContentType();
             $ancestors = $this->uiPathService->loadPathLocations($item);
 
             $trashItemsList[] = new TrashItemData($item, $contentType, $ancestors);

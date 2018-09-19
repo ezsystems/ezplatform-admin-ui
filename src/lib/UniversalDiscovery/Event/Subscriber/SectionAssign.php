@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber;
 
 use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
 use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
@@ -87,19 +86,18 @@ class SectionAssign implements EventSubscriberInterface
      */
     private function getRestrictedContentTypes(array $hasAccess): array
     {
-        $restrictedContentTypes = [];
         $restrictedContentTypesIds = $this->permissionChecker->getRestrictions($hasAccess, ContentTypeLimitation::class);
-
-        foreach ($restrictedContentTypesIds as $restrictedContentTypeId) {
-            // TODO: Change to `contentTypeService->loadContentTypeList($restrictedContentTypesIds)` after #2444 will be merged
-            try {
-                $identifier = $this->contentTypeService->loadContentType($restrictedContentTypeId)->identifier;
-                $restrictedContentTypes[] = $identifier;
-            } catch (NotFoundException $e) {
-            }
+        if (empty($restrictedContentTypesIds)) {
+            return [];
         }
 
-        return $restrictedContentTypes;
+        $restrictedContentTypesIdentifiers = [];
+        $restrictedContentTypes = $this->contentTypeService->loadContentTypeList($restrictedContentTypesIds);
+        foreach ($restrictedContentTypes as $restrictedContentType) {
+            $restrictedContentTypesIdentifiers[] = $restrictedContentType->identifier;
+        }
+
+        return $restrictedContentTypesIdentifiers;
     }
 
     /**

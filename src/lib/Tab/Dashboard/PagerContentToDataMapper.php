@@ -51,7 +51,7 @@ class PagerContentToDataMapper
         $data = [];
 
         foreach ($pager as $content) {
-            $contentInfo = $this->contentService->loadContentInfo($content->id);
+            $contentInfo = $content->getVersionInfo()->getContentInfo();
 
             $contributor = (new UserExists($this->userService))->isSatisfiedBy($contentInfo->ownerId)
                 ? $this->userService->loadUser($contentInfo->ownerId) : null;
@@ -62,7 +62,7 @@ class PagerContentToDataMapper
                 'language' => $contentInfo->mainLanguageCode,
                 'contributor' => $contributor,
                 'version' => $content->versionInfo->versionNo,
-                'type' => $this->contentTypeService->loadContentType($contentInfo->contentTypeId)->getName(),
+                'type' => $content->getContentType()->getName(),
                 'modified' => $content->versionInfo->modificationDate,
                 'initialLanguageCode' => $content->versionInfo->initialLanguageCode,
                 'content_is_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content),
