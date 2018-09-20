@@ -1282,6 +1282,7 @@ class FormFactory
      * @param string|null $name
      *
      * @return \Symfony\Component\Form\FormInterface
+     *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function trashLocationWithAsset(

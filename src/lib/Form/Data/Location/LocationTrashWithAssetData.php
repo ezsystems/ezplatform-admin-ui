@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Location;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashWithAssetType;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints as AdminUiAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class LocationTrashWithAssetData
 {
@@ -20,16 +20,20 @@ class LocationTrashWithAssetData
      */
     private $location;
 
-    /** @var string */
+    /**
+     * @var string|null
+     * @Assert\NotBlank()
+     */
     private $trashAssets;
 
     /**
      * @param Location|null $location
+     * @param string|null $trashAssets
      */
-    public function __construct(?Location $location = null)
+    public function __construct(?Location $location = null, ?string $trashAssets = null)
     {
         $this->location = $location;
-        $this->trashAssets = LocationTrashWithAssetType::RADIO_SELECT_DEFAULT_TRASH;
+        $this->trashAssets = $trashAssets;
     }
 
     /**
@@ -49,17 +53,17 @@ class LocationTrashWithAssetData
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTrashAssets(): string
+    public function getTrashAssets(): ?string
     {
         return $this->trashAssets;
     }
 
     /**
-     * @param string $trashAssets
+     * @param string|null $trashAssets
      */
-    public function setTrashAssets(string $trashAssets): void
+    public function setTrashAssets(?string $trashAssets): void
     {
         $this->trashAssets = $trashAssets;
     }

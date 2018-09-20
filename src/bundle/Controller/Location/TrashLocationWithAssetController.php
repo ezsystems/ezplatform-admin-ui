@@ -61,6 +61,7 @@ class TrashLocationWithAssetController extends Controller
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function trashAction(Request $request): Response
