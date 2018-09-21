@@ -3,7 +3,12 @@
 {% trans_default_domain 'locationview' %}
 {% form_theme form_location_copy '@ezdesign/parts/form/flat_widgets.html.twig' %}
 {% form_theme form_location_move '@ezdesign/parts/form/flat_widgets.html.twig' %}
-{% form_theme form_content_edit '@ezdesign/form_fields.html.twig' %}
+{% if form_content_edit is defined %}
+    {% form_theme form_content_edit '@ezdesign/form_fields.html.twig' %}
+{% endif %}
+{% if form_user_edit is defined %}
+    {% form_theme form_user_edit '@ezdesign/form_fields.html.twig' %}
+{% endif %}
 {% form_theme form_content_create '@ezdesign/form_fields.html.twig' %}
 
 {% block body_class %}ez-content-view{% endblock %}
@@ -75,7 +80,12 @@
 
                 <div class="ez-extra-actions-container">
                     {% include '@ezdesign/content/widgets/content_create.html.twig' with {'form': form_content_create} only %}
-                    {% include '@ezdesign/content/widgets/content_edit.html.twig' with {'form': form_content_edit} only %}
+                    {% if form_content_edit is defined %}
+                        {% include '@ezdesign/content/widgets/content_edit.html.twig' with {'form': form_content_edit} only %}
+                    {% endif %}
+                    {% if form_user_edit is defined %}
+                        {% include '@ezdesign/content/widgets/user_edit.html.twig' with {'form': form_user_edit} only %}
+                    {% endif %}
                 </div>
             </div>
             {%  if form_location_trash is defined %}
@@ -124,6 +134,7 @@
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/udw/locations.tab.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/extra.actions.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/btn/location.edit.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/btn/user.edit.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/btn/location.create.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/instant.filter.js'
         '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/leaflet/dist/leaflet.js'

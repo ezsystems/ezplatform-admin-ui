@@ -63,6 +63,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
+use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\Setting\UserSettingUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
@@ -100,6 +101,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupsDeleteTyp
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStatesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateWithLimitationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserEditType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\Setting\UserSettingUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordChangeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType;
@@ -1236,5 +1238,24 @@ class FormFactory
             $data,
             ['user_setting_identifier' => $userSettingIdentifier]
         );
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData|null $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function editUser(
+        UserEditData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserEditType::class);
+        $data = $data ?? new UserEditData();
+        $options = null !== $data->getVersionInfo()
+            ? ['language_codes' => $data->getVersionInfo()->languageCodes]
+            : [];
+
+        return $this->formFactory->createNamed($name, UserEditType::class, $data, $options);
     }
 }

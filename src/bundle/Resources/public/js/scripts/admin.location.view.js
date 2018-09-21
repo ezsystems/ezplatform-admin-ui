@@ -36,7 +36,10 @@
             const wrapper = doc.querySelector('.ez-modal-wrapper');
 
             wrapper.innerHTML = modalHtml;
-            wrapper.querySelector('.ez-btn--add-draft').addEventListener('click', addDraft, false);
+            const addDraftButton = wrapper.querySelector('.ez-btn--add-draft');
+            if (addDraftButton) {
+                addDraftButton.addEventListener('click', addDraft, false);
+            }
             [...wrapper.querySelectorAll('.ez-btn--prevented')].forEach(btn => btn.addEventListener('click', event => event.preventDefault(), false));
             $('#version-draft-conflict-modal').modal('show');
         };

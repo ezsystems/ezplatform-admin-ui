@@ -11,6 +11,11 @@
         <target state="new">You can either edit any of your existing draft(s) or add a new one.</target>
         <note>key: draft.conflict.choice</note>
       </trans-unit>
+      <trans-unit id="051e6a67518db4bc613d03a2cbfc5516c539ad8f" resname="draft.conflict.choice_content_is_user">
+        <source>You can edit any of your existing draft(s)</source>
+        <target state="new">You can edit any of your existing draft(s)</target>
+        <note>key: draft.conflict.choice_content_is_user</note>
+      </trans-unit>
       <trans-unit id="57ae8e493adef8a884a3f0c5e9e4501b7f2ec395" resname="draft.conflict.header">
         <source>Draft conflict when editing</source>
         <target state="new">Draft conflict when editing</target>

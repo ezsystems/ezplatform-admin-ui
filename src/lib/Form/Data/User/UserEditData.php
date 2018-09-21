@@ -6,36 +6,27 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft;
+namespace EzSystems\EzPlatformAdminUi\Form\Data\User;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 
-/**
- * @todo Add validation. $language have to be validated that $versionInfo indeed has this language
- */
-class ContentEditData
+class UserEditData
 {
-    /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
-    protected $location;
-
     /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo|null */
-    protected $contentInfo;
+    private $contentInfo;
 
     /** @var \eZ\Publish\API\Repository\Values\Content\VersionInfo|null */
-    protected $versionInfo;
+    private $versionInfo;
 
     /** @var \eZ\Publish\API\Repository\Values\Content\Language|null */
-    protected $language;
+    private $language;
 
-    /**
-     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
-     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo|null $versionInfo
-     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
-     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
-     */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
+    private $location;
+
     public function __construct(
         ?ContentInfo $contentInfo = null,
         ?VersionInfo $versionInfo = null,
@@ -49,26 +40,6 @@ class ContentEditData
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
-     */
-    public function getLocation(): ?Location
-    {
-        return $this->location;
-    }
-
-    /**
-     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
-     *
-     * @return self
-     */
-    public function setLocation(Location $location): self
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    /**
      * @return \eZ\Publish\API\Repository\Values\Content\ContentInfo|null
      */
     public function getContentInfo(): ?ContentInfo
@@ -78,14 +49,10 @@ class ContentEditData
 
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
-     *
-     * @return self
      */
-    public function setContentInfo(?ContentInfo $contentInfo): self
+    public function setContentInfo(?ContentInfo $contentInfo): void
     {
         $this->contentInfo = $contentInfo;
-
-        return $this;
     }
 
     /**
@@ -98,14 +65,10 @@ class ContentEditData
 
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo|null $versionInfo
-     *
-     * @return self
      */
-    public function setVersionInfo(?VersionInfo $versionInfo): self
+    public function setVersionInfo(?VersionInfo $versionInfo): void
     {
         $this->versionInfo = $versionInfo;
-
-        return $this;
     }
 
     /**
@@ -118,13 +81,25 @@ class ContentEditData
 
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
-     *
-     * @return self
      */
-    public function setLanguage(?Language $language): self
+    public function setLanguage(?Language $language): void
     {
         $this->language = $language;
+    }
 
-        return $this;
+    /**
+     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
+     */
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
+     */
+    public function setLocation(?Location $location): void
+    {
+        $this->location = $location;
     }
 }

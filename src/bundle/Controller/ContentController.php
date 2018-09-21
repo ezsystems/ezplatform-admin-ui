@@ -10,6 +10,7 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions as ApiException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
@@ -22,6 +23,8 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface;
+use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
+use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,15 +60,23 @@ class ContentController extends Controller
     /** @var LocationService */
     private $locationService;
 
+    /** @var \eZ\Publish\API\Repository\UserService */
+    private $userService;
+
+    /** @var array */
+    private $userContentTypeIdentifier;
+
     /**
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param ContentService $contentService
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
-     * @param TranslatorInterface $translator
-     * @param ContentMainLocationUpdateMapper $contentMetadataUpdateMapper
-     * @param SiteaccessResolverInterface $siteaccessResolver
-     * @param LocationService $locationService
+     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper $contentMetadataUpdateMapper
+     * @param \EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface $siteaccessResolver
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param array $userContentTypeIdentifier
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -75,7 +86,9 @@ class ContentController extends Controller
         TranslatorInterface $translator,
         ContentMainLocationUpdateMapper $contentMetadataUpdateMapper,
         SiteaccessResolverInterface $siteaccessResolver,
-        LocationService $locationService
+        LocationService $locationService,
+        UserService $userService,
+        array $userContentTypeIdentifier
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->contentService = $contentService;
@@ -85,6 +98,8 @@ class ContentController extends Controller
         $this->contentMainLocationUpdateMapper = $contentMetadataUpdateMapper;
         $this->siteaccessResolver = $siteaccessResolver;
         $this->locationService = $locationService;
+        $this->userService = $userService;
+        $this->userContentTypeIdentifier = $userContentTypeIdentifier;
     }
 
     /**
@@ -109,6 +124,14 @@ class ContentController extends Controller
                 $contentType = $data->getContentType();
                 $language = $data->getLanguage();
                 $parentLocation = $data->getParentLocation();
+
+                if ((new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType)) {
+                    return $this->redirectToRoute('ez_user_create', [
+                        'contentTypeIdentifier' => $contentType->identifier,
+                        'language' => $language->languageCode,
+                        'parentLocationId' => $parentLocation->id,
+                    ]);
+                }
 
                 return $this->redirectToRoute('ez_content_create_no_draft', [
                     'contentTypeIdentifier' => $contentType->identifier,
@@ -150,6 +173,15 @@ class ContentController extends Controller
                 $language = $data->getLanguage();
                 $versionNo = $versionInfo->versionNo;
                 $location = $data->getLocation();
+
+                $content = $this->contentService->loadContent($contentInfo->id);
+                if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
+                    return $this->redirectToRoute('ez_user_update', [
+                        'contentId' => $contentInfo->id,
+                        'versionNo' => $versionNo,
+                        'language' => $language->languageCode,
+                    ]);
+                }
 
                 if (!$versionInfo->isDraft()) {
                     $contentDraft = $this->contentService->createContentDraft($contentInfo, $versionInfo);
