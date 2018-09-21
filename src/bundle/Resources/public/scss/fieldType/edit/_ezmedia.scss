@@ -1,6 +1,6 @@
 .ez-field-edit--ezmedia {
     .ez-field-edit-preview {
-        padding: 1.25rem 0 1.25rem 1.25rem;
+        padding: 1.25rem 0 .75rem 1.25rem;
 
         &__media {
             max-width: 100%;
@@ -37,16 +37,28 @@
 
         &__info {
             & + .ez-field-edit-preview__info {
-                margin-top: 1.25rem;
+                margin-top: 1rem;
             }
         }
 
         &__dimensions {
             display: flex;
+            margin-top: 1.25rem;
 
             .ez-field-edit-preview__info {
                 margin-right: 1.25rem;
                 margin-top: 0;
+
+                .ez-field-edit-preview__label {
+                    margin-bottom: 0;
+                    font-size: calculateRem(14px);
+                    font-weight: 700;
+                    color: $ez-black;
+
+                    &:after {
+                        content: ': ';
+                    }
+                }
 
                 .ez-field-edit-preview__input {
                     width: 10ch;
@@ -56,9 +68,17 @@
 
         &__settings {
             @include checkbox-switcher(1rem);
+            margin-top: 1rem;
 
             .ez-field-edit-preview__section-title {
-                margin-bottom: .625rem;
+                margin-bottom: .25rem;
+                font-size: calculateRem(14px);
+                font-weight: 700;
+                color: $ez-black;
+
+                &:after {
+                    content: ': ';
+                }
             }
 
             .ez-field-edit-preview__input-wrapper {
