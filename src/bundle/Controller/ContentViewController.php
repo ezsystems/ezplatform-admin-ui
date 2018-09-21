@@ -21,6 +21,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
@@ -208,10 +209,6 @@ class ContentViewController extends Controller
             new LocationMoveData($location)
         );
 
-        $contentEditType = $this->formFactory->contentEdit(
-            new ContentEditData($content->contentInfo, $versionInfo, null, $location)
-        );
-
         $subitemsContentEdit = $this->formFactory->contentEdit(
             null,
             'form_subitems_content_edit'
@@ -228,7 +225,6 @@ class ContentViewController extends Controller
         $view->addParameters([
             'form_location_copy' => $locationCopyType->createView(),
             'form_location_move' => $locationMoveType->createView(),
-            'form_content_edit' => $contentEditType->createView(),
             'form_content_create' => $contentCreateType->createView(),
             'form_subitems_content_edit' => $subitemsContentEdit->createView(),
             'form_location_copy_subtree' => $locationCopySubtreeType->createView(),
@@ -238,17 +234,25 @@ class ContentViewController extends Controller
             $userDeleteType = $this->formFactory->deleteUser(
                 new UserDeleteData($content->contentInfo)
             );
+            $userEditType = $this->formFactory->editUser(
+                new UserEditData($content->contentInfo, $versionInfo, null, $location)
+            );
 
             $view->addParameters([
                 'form_user_delete' => $userDeleteType->createView(),
+                'form_user_edit' => $userEditType->createView(),
             ]);
         } else {
             $locationTrashType = $this->formFactory->trashLocation(
                 new LocationTrashData($location)
             );
+            $contentEditType = $this->formFactory->contentEdit(
+                new ContentEditData($content->contentInfo, $versionInfo, null, $location)
+            );
 
             $view->addParameters([
                 'form_location_trash' => $locationTrashType->createView(),
+                'form_content_edit' => $contentEditType->createView(),
             ]);
         }
     }

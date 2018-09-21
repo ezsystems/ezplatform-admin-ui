@@ -16,7 +16,8 @@
             'versions': draft_pager.currentPageResults,
             'is_draft': true,
             'form': form_version_remove_draft,
-            'haveToPaginate': draft_pager.haveToPaginate
+            'haveToPaginate': draft_pager.haveToPaginate,
+            'content_is_user': content_is_user
         }) }}
         {{ form_end(form_version_remove_draft) }}
 
@@ -63,7 +64,13 @@
         }) }}
         {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.versions.archived_versions'|trans()|desc('Archived versions'), tools: tab.table_header_tools(form_version_remove_archived) } %}
         {% if archived_versions is not empty %}
-            {{ include('@ezdesign/content/tab/versions/table.html.twig', { 'versions': archived_versions, 'form': form_version_remove_archived, 'is_archived': true, 'form_archived_version_restore': form_archived_version_restore }) }}
+            {{ include('@ezdesign/content/tab/versions/table.html.twig', {
+                'versions': archived_versions,
+                'form': form_version_remove_archived,
+                'is_archived': true,
+                'form_archived_version_restore': form_archived_version_restore,
+                'content_is_user': content_is_user
+            }) }}
         {% else %}
             <p>
                 {{ 'tab.versions.no_permission'|trans()|desc('You don\'t have access to view the content item\'s versions') }}

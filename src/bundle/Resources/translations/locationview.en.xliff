@@ -456,6 +456,11 @@
         <target state="new">Close</target>
         <note>key: translation.modal_close</note>
       </trans-unit>
+      <trans-unit id="c285bc654712e44ed56cd6f18262a2d6485f4fb9" resname="user.edit.select_language">
+        <source>Select language</source>
+        <target state="new">Select language</target>
+        <note>key: user.edit.select_language</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

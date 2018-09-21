@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\UserService;
+use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use Pagerfanta\Pagerfanta;
 
@@ -64,6 +65,7 @@ class PagerContentToDataMapper
                 'type' => $this->contentTypeService->loadContentType($contentInfo->contentTypeId)->getName(),
                 'modified' => $content->versionInfo->modificationDate,
                 'initialLanguageCode' => $content->versionInfo->initialLanguageCode,
+                'content_is_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content),
             ];
         }
 

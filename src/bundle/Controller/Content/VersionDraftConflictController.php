@@ -10,7 +10,9 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller\Content;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\UserService;
 use EzSystems\EzPlatformAdminUi\Specification\Content\ContentDraftHasConflict;
+use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,19 +28,25 @@ class VersionDraftConflictController extends Controller
     /** @var DatasetFactory */
     private $datasetFactory;
 
+    /** @var \eZ\Publish\API\Repository\UserService */
+    private $userService;
+
     /**
-     * @param LocationService $locationService
-     * @param ContentService $contentService
-     * @param DatasetFactory $datasetFactory
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
+     * @param \eZ\Publish\API\Repository\UserService $userService
      */
     public function __construct(
         LocationService $locationService,
         ContentService $contentService,
-        DatasetFactory $datasetFactory
+        DatasetFactory $datasetFactory,
+        UserService $userService
     ) {
         $this->locationService = $locationService;
         $this->contentService = $contentService;
         $this->datasetFactory = $datasetFactory;
+        $this->userService = $userService;
     }
 
     /**
@@ -68,6 +76,7 @@ class VersionDraftConflictController extends Controller
             $modalContent = $this->renderView('@ezdesign/content/modal_draft_conflict.html.twig', [
                 'conflicted_drafts' => $conflictedDrafts,
                 'location' => $location,
+                'content_is_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content),
             ]);
 
             return new Response($modalContent, Response::HTTP_CONFLICT);

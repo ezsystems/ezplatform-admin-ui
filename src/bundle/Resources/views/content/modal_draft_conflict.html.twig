@@ -22,10 +22,15 @@
                         ) }}
                     </p>
                     <p class="ez-modal-body__main-content">
-                        {{ 'draft.conflict.choice'|trans({})|desc('You can either edit any of your existing draft(s) or add a new one.') }}
+                        {% if content_is_user %}
+                            {{ 'draft.conflict.choice_content_is_user'|trans({})|desc('You can edit any of your existing draft(s)') }}
+                        {% else %}
+                            {{ 'draft.conflict.choice'|trans({})|desc('You can either edit any of your existing draft(s) or add a new one.') }}
+                        {% endif %}
                     </p>
                 </div>
-                {% include '@ezdesign/parts/table_header.html.twig' with { headerText: null, tools: version_modal_draft_conflict.table_header_tools() } %}
+                {% set show_add_draft_button = (not content_is_user) %}
+                {% include '@ezdesign/parts/table_header.html.twig' with { headerText: null, tools: version_modal_draft_conflict.table_header_tools(show_add_draft_button) } %}
                 <div class="ez-scrollable-wrapper">
                     {{ include('@ezdesign/content/tab/versions/table.html.twig', {
                         'versions': conflicted_drafts,
@@ -33,6 +38,7 @@
                         'is_draft': true,
                         'haveToPaginate': false,
                         'is_draft_conflict': true,
+                        'content_is_user': content_is_user
                     }) }}
                 </div>
             </div>
@@ -40,11 +46,13 @@
     </div>
 </div>
 
-{% macro table_header_tools() %}
-    <button type="button" class="btn btn-primary ez-btn--add-draft"
-            title="{{ 'tab.versions.action.delete'|trans|desc('Add draft') }}">
-        <svg class="ez-icon ez-icon-create">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
-        </svg>
-    </button>
+{% macro table_header_tools(show_add_button) %}
+    {% if show_add_button %}
+        <button type="button" class="btn btn-primary ez-btn--add-draft"
+                title="{{ 'tab.versions.action.delete'|trans|desc('Add draft') }}">
+            <svg class="ez-icon ez-icon-create">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+            </svg>
+        </button>
+    {% endif %}
 {% endmacro %}

@@ -1,0 +1,17 @@
+{% trans_default_domain 'locationview' %}
+
+<div class="ez-extra-actions ez-extra-actions--edit-user ez-extra-actions--hidden bg-secondary
+    {% if form.language.vars.choices|length == 1 %} ez-extra-actions--prevent-show {% endif %}"
+    data-actions="edit-user">
+    <div class="ez-extra-actions__header">{{ 'user.edit.select_language'|trans|desc('Select language') }}</div>
+    <div class="ez-extra-actions__content">
+        {{ form_start(form) }}
+        {{ form_widget(form.content_info) }}
+        {{ form_widget(form.location) }}
+        {{ form_widget(form.version_info) }}
+        {{ form_widget(form.language, { 'attr': {
+            'class': 'ez-extra-actions__form-values'
+        } }) }}
+        {{ form_end(form) }}
+    </div>
+</div>

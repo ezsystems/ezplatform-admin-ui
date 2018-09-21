@@ -27,7 +27,7 @@
             </tr>
             <tr>
                 <td>{{ 'ezimageasset.alternative_text'|trans|desc('Alternative text') }}:</td>
-                <td>{{ field.value.alternativeText }}</td>
+                <td>{{ parameters.alternativeText|default(field.value.alternativeText) }}</td>
             </tr>
             <tr>
                 <td>{{ 'ezimageasset.master_dimensions'|trans|desc('Master dimensions') }}:</td>
