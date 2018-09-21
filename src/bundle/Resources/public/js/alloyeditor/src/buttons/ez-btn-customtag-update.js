@@ -134,7 +134,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         if (value) {
             let customTagEvent = new CustomEvent(
                 'getCustomTagContent',
-                {detail: {editor: this.props.editor, name: name, content: value}}
+                {detail: {editor: this.props.editor, name: this.customTagName, content: value, attributes: this.props.values}}
             );
 
             dispatchEvent(customTagEvent);
@@ -227,7 +227,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         if (this.state.content) {
             let customTagEvent = new CustomEvent(
                 'setCustomTagContent',
-                {detail: {editor: this.props.editor, name: name, content: this.state.content}}
+                {detail: {editor: this.props.editor, name: this.customTagName, content: this.state.content, attributes: this.props.values}}
             );
 
             dispatchEvent(customTagEvent);
