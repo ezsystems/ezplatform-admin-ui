@@ -120,15 +120,23 @@ class UrlRedirectProcessor implements EventSubscriberInterface
         /* If target URL was set to something else than Location, do nothing */
         try {
             $targetUrlAlias = $this->urlAliasService->lookup(
-                $response->getTargetUrl()
+                $response->getTargetUrl(),
+                null,
+                true
             );
-        } catch (InvalidArgumentException $e) {
-            return;
-        } catch (NotFoundException $e) {
+        } catch (InvalidArgumentException | NotFoundException $e) {
+            $event->setResponse(new RedirectResponse($this->router->generate(
+                'ezplatform.dashboard',
+                [],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            )));
+
             return;
         }
 
         if ($targetUrlAlias->type !== URLAlias::LOCATION) {
+            $event->setResponse(new RedirectResponse($targetUrlAlias->destination));
+
             return;
         }
 
