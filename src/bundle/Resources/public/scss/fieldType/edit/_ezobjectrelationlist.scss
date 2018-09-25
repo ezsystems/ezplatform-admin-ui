@@ -37,7 +37,7 @@
             th {
                 vertical-align: middle;
                 padding: .25rem .75rem;
-                font-size: $h5-font-size;
+                font-size: calculateRem(17px);;
             }
         }
 

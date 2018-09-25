@@ -58,3 +58,22 @@
         }
     }
 }
+
+.ez-content-edit {
+    .ez-field-edit {
+        &__label-wrapper {
+            .ez-field-edit__label {
+                font-size: 1rem;
+                font-weight: 700;
+                color: $ez-black;
+            }
+        }
+
+        .ez-data-source__label {
+            margin-bottom: 0;
+            font-size: calculateRem(14px);
+            font-weight: 700;
+            color: $ez-black;
+        }
+    }
+}
