@@ -7,6 +7,6 @@
             </svg>
         </button>
     </div>
-    {% set attr = attr|merge({'class': 'ez-visually-hidden ez-data-source__input'}) %}
+    {% set attr = attr|merge({'class': 'ez-data-source__input', 'hidden': 'hidden'}) %}
     {{ block('form_widget') }}
 {% endblock %}
