@@ -1290,25 +1290,7 @@ class FormFactory
         ?string $name = null
     ): FormInterface {
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationTrashWithAssetType::class);
-        $location = $data->getLocation();
-        $options = [];
-        if (null !== $location) {
-            $contentName = $location->getContent()->getName();
-            $contentType = $this->contentTypeService
-                ->loadContentType(
-                    $location->getContentInfo()->contentTypeId)
-                ->getName(
-                    $location->getContentInfo()->mainLanguageCode
-            );
-            $translatorParameters = ['%content_name%' => $contentName, '%content_type%' => $contentType];
-            $options['trashAssetsOptions'] = [
-                /** @Desc("Delete only %content_name% (%content_type%)") */
-                $this->translator->trans('location_trash_form.default_trash', $translatorParameters, 'forms') => LocationTrashWithAssetType::RADIO_SELECT_DEFAULT_TRASH,
-                /** @Desc("Delete %content_name% (%content_type%) and its related image assets") */
-                $this->translator->trans('location_trash_form.trash_with_asset', $translatorParameters, 'forms') => LocationTrashWithAssetType::RADIO_SELECT_TRASH_WITH_ASSETS,
-            ];
-        }
 
-        return $this->formFactory->createNamed($name, LocationTrashWithAssetType::class, $data, $options);
+        return $this->formFactory->createNamed($name, LocationTrashWithAssetType::class, $data);
     }
 }

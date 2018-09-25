@@ -150,7 +150,7 @@
 
 .ez-modal--trash-with-asset {
     .modal-dialog {
-        max-width: 800px;
+        max-width: calculateRem(800px);
     }
 
     .modal-header {
@@ -158,21 +158,21 @@
         border-bottom: none;
 
         .modal-title {
-            font-size: 1.5rem;
+            font-size: calculateRem(24px);
         }
 
         .close {
-            margin-top: -.5625rem;
+            margin-top: calculateRem(-9px);
         }
     }
 
     .modal-body {
-        padding: 2rem;
+        padding: calculateRem(32px);
         background-color: $ez-ground-base-medium;
-        border-radius: 0 0 .25rem .25rem;
+        border-radius: 0 0 calculateRem(4px) calculateRem(4px);
 
         .ez-modal-body__main {
-            margin-bottom: 1.5rem;
+            margin-bottom: calculateRem(24px);
 
             .ez-modal-body__main-content {
                 margin-bottom: 0;
@@ -186,7 +186,7 @@
 
         .form-check {
             margin-bottom: 0;
-            margin-left: 50px;
+            margin-left: calculateRem(50px);
         }
     }
 

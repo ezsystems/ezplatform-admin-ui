@@ -44,7 +44,7 @@ class ContentHaveAssetRelation extends AbstractSpecification
         $relations = $this->contentService->loadRelations($item->versionInfo);
 
         foreach ($relations as $relation) {
-            if ($relation->type === Relation::ASSET) {
+            if (Relation::ASSET === $relation->type) {
                 return true;
             }
         }

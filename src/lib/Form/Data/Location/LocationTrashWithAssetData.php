@@ -16,12 +16,14 @@ class LocationTrashWithAssetData
 {
     /**
      * @var Location|null
+     *
      * @AdminUiAssert\LocationHaveUniqueAssetRelation()
      */
     private $location;
 
     /**
      * @var string|null
+     *
      * @Assert\NotBlank()
      */
     private $trashAssets;

@@ -44,7 +44,7 @@ class ContentHaveUniqueRelation extends AbstractSpecification
         $relations = $this->contentService->loadRelations($item->versionInfo);
 
         foreach ($relations as $relation) {
-            if ($relation->type === Relation::ASSET) {
+            if (Relation::ASSET === $relation->type) {
                 $relationsFromAssetSide = $this->contentService->loadReverseRelations($relation->destinationContentInfo);
 
                 if (count($relationsFromAssetSide) > 1) {
