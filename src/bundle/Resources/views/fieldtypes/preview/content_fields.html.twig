@@ -201,7 +201,7 @@
 {% block ezbinaryfile_field %}
 {% spaceless %}
     {% if not ez_is_field_empty( content, field ) %}
-        {% set route_reference = ez_route( 'ez_content_download', { 'content': content, 'fieldIdentifier': field.fieldDefIdentifier } ) %}
+        {% set route_reference = ez_route( 'ez_content_download', { 'content': content, 'fieldIdentifier': field.fieldDefIdentifier, 'inLanguage': content.prioritizedFieldLanguageCode } ) %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezbinaryfile')|trim}) %}
         <div {{ block( 'field_attributes' ) }}>
             <svg class="ez-icon ez-icon--file">
