@@ -62,10 +62,11 @@
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
                     </button>
-
-                    {% include '@ezdesign/admin/content_type/delete_confirmation_modal.html.twig' with {'form': form} %}
                 </div>
             </div>
+
+            {% include '@ezdesign/admin/content_type/delete_confirmation_modal.html.twig' with {'form': form} %}
+            
             <div class="card-body">
                 {% set language_code = content_type.mainLanguageCode %}
                 {% for field_definition in form.fieldDefinitionsData %}

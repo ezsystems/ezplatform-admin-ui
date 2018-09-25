@@ -27,11 +27,13 @@
         }
 
         &--sticky-top {
+            // -webkit-sticky fixes bug for Safari 12.0
+            position: -webkit-sticky;
             position: sticky;
             top: 0;
             padding: .25rem 1.25rem;
             justify-content: space-between;
-            z-index: 9999;
+            z-index: 1040;
 
             .form-inline {
                 .btn-danger {
