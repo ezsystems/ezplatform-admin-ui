@@ -989,6 +989,10 @@
   line-height: 18px;
 }
 
+.ez-embed-type-image img {
+  max-width: 100%;
+}
+
 [class*="ae-icon-"],
 [class*=" ae-icon-"] {
   font-size: 14px;
