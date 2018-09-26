@@ -12,5 +12,5 @@
     {{ contentType.getName() }}
 </td>
 <td>
-    {{ content.versionInfo.creationDate|localizeddate( 'short', 'medium' ) }}
+    {{ content.versionInfo.creationDate|localizeddate( 'short', 'medium', null, ez_user_settings['timezone'] ) }}
 </td>
