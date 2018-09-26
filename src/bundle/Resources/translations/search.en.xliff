@@ -71,10 +71,10 @@
         <target state="new">To:</target>
         <note>key: search.date.to</note>
       </trans-unit>
-      <trans-unit id="9db82102d1da5efb63380ca328a83d13732a02ee" resname="search.filter">
-        <source>Filter</source>
-        <target state="new">Filter</target>
-        <note>key: search.filter</note>
+      <trans-unit id="bf24ae2c9083c948931ad1b4d4405b6261eb9bc6" resname="search.filters">
+        <source>Filters</source>
+        <target state="new">Filters</target>
+        <note>key: search.filters</note>
       </trans-unit>
       <trans-unit id="0ec8148d681b43e87a6d0751fff188517be1ea26" resname="search.header">
         <source>Search results (%total%)</source>
