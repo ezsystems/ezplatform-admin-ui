@@ -3,7 +3,6 @@
         position: relative;
         color: $ez-color-base-dark;
         font-weight: 700;
-        cursor: pointer;
     }
 
     &__selection-info {
@@ -20,6 +19,7 @@
         display: flex;
         align-items: center;
         flex-wrap: wrap;
+        cursor: pointer;
 
         &:before {
             content: '';
