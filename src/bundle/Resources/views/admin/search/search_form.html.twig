@@ -3,23 +3,23 @@
 {% trans_default_domain 'search' %}
 
 {{ form_start(form) }}
-<div class="input-group">
+<div class="input-group pl-4">
     {{ form_widget(form.query) }}
 
     <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary">
-            <svg class="ez-icon ez-icon-search-button">
+        <button type="submit" class="btn btn-primary font-weight-bold ez-btn--search">
+            <svg class="ez-icon ez-icon--medium ez-icon--light">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
             </svg>
-            {{ 'search.perform'|trans|desc('Search') }}</button>
+            <span class="ez-btn ez-btn--search-label">{{ 'search.perform'|trans|desc('Search') }}</span></button>
         <button type="submit" class="btn btn-dark ez-btn--filter ml-4">
-            <svg class="ez-icon ez-icon--small ez-icon--light ez-icon-filters">
+            <svg class="ez-icon ez-icon--medium ez-icon--light ez-icon-filters">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#filters"></use>
             </svg>
-            {{ 'search.filter'|trans|desc('Filter') }}</button>
+            <span class="ez-btn ez-btn--filter-label">{{ 'search.filters'|trans|desc('Filters') }}</span></button>
     </span>
 </div>
-<div class="ez-filters mt-4 pt-2{% if not filters_expanded %} ez-filters--collapsed{% endif %}">
+<div class="ez-filters mt-4 ml-4 pt-2{% if not filters_expanded %} ez-filters--collapsed{% endif %}">
     <div class="ez-filters__item ez-filters__item--content-type">
         <label class="ez-filters__item-label">{{ 'search.content.type'|trans|desc('Content Type:') }}</label>
         <select class="form-control ez-filters__select ez-filters__select--content-type">
@@ -58,7 +58,7 @@
     <div class="ez-filters__btns">
         <button class="btn btn-dark ez-btn-clear">
             {{ 'search.clear'|trans|desc('Clear') }}</button>
-        <button type="submit" class="btn btn-secondary ez-btn-apply" disabled>
+        <button type="submit" class="btn btn-secondary ez-btn-apply font-weight-bold" disabled>
             {{ 'search.apply'|trans|desc('Apply') }}</button>
     </div>
 </div>
@@ -90,7 +90,7 @@
                 <button type="button" class="btn btn-dark" data-dismiss="modal">
                     {{ 'modal.cancel'|trans|desc('Cancel') }}
                 </button>
-                <button class="btn btn-secondary ez-btn--select" data-dismiss="modal" disabled>
+                <button class="btn btn-secondary ez-btn--select font-weight-bold" data-dismiss="modal" disabled>
                     {{ 'modal.select'|trans|desc('Select') }}
                 </button>
             </div>
@@ -122,7 +122,7 @@
                 <button type="button" class="btn btn-dark" data-dismiss="modal">
                     {{ 'modal.cancel'|trans|desc('Cancel') }}
                 </button>
-                <button class="btn btn-secondary ez-btn--select" data-dismiss="modal" disabled>
+                <button class="btn btn-secondary ez-btn--select font-weight-bold" data-dismiss="modal" disabled>
                     {{ 'modal.select'|trans|desc('Select') }}
                 </button>
             </div>
