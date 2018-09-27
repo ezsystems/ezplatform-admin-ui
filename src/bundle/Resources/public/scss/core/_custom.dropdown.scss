@@ -27,7 +27,7 @@
             height: 0;
             border-style: solid;
             border-width: calculateRem(10px) calculateRem(5px) 0 calculateRem(5px);
-            border-color: $ez-white $ez-black $ez-black $ez-black;
+            border-color: $ez-white $ez-color-secondary $ez-color-secondary $ez-color-secondary;
             position: absolute;
             z-index: 1;
             right: calculateRem(16px);
