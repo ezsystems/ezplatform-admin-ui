@@ -8,25 +8,11 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\CustomTag;
 
-use Symfony\Component\Translation\TranslatorInterface;
-
 /**
  * Map RichText Custom Tag attribute of any type to proper UI config.
  */
 class CommonAttributeMapper implements AttributeMapper
 {
-    /** @var TranslatorInterface */
-    protected $translator;
-
-    /** @var string */
-    protected $translationDomain;
-
-    public function __construct(TranslatorInterface $translator, string $translationDomain)
-    {
-        $this->translator = $translator;
-        $this->translationDomain = $translationDomain;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -44,15 +30,7 @@ class CommonAttributeMapper implements AttributeMapper
         array $customTagAttributeProperties
     ): array {
         return [
-            'label' => $this->translator->trans(
-                sprintf(
-                    'ezrichtext.custom_tags.%s.attributes.%s.label',
-                    $tagName,
-                    $attributeName
-                ),
-                [],
-                $this->translationDomain
-            ),
+            'label' => "ezrichtext.custom_tags.{$tagName}.attributes.{$attributeName}.label",
             'type' => $customTagAttributeProperties['type'],
             'required' => $customTagAttributeProperties['required'],
             'defaultValue' => $customTagAttributeProperties['default_value'],

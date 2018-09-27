@@ -5,8 +5,6 @@ services:
     # RichText Custom Tags UI config attribute type mappers
     EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\CustomTag\CommonAttributeMapper:
         autowire: true
-        arguments:
-            $translationDomain: '%ezplatform.field_type.ezrichtext.custom_tags.translation_domain%'
         tags:
             - { name: ezplatform.admin_ui.richtext_custom_tag_attribute_mapper, priority: 0 }
 

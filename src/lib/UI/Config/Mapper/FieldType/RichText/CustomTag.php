@@ -77,20 +77,8 @@ class CustomTag
                 );
             }
 
-            $config[$tagName]['label'] = $this->translator->trans(
-                sprintf('ezrichtext.custom_tags.%s.label', $tagName),
-                [],
-                $this->translationDomain
-            );
-            $config[$tagName]['description'] = $this->translator->trans(
-                sprintf(
-                    'ezrichtext.custom_tags.%s.description',
-                    $tagName
-                ),
-                [],
-                $this->translationDomain
-            );
-
+            $config[$tagName]['label'] = "ezrichtext.custom_tags.{$tagName}.label";
+            $config[$tagName]['description'] = "ezrichtext.custom_tags.{$tagName}.description";
             foreach ($customTagConfiguration['attributes'] as $attributeName => $properties) {
                 $typeMapper = $this->getAttributeTypeMapper(
                     $tagName,
@@ -105,7 +93,7 @@ class CustomTag
             }
         }
 
-        return $config;
+        return $this->translateLabels($config);
     }
 
     /**
@@ -136,5 +124,45 @@ class CustomTag
         throw new RuntimeException(
             "RichText Custom Tag configuration: unsupported attribute type '{$attributeType}' of '{$attributeName}' attribute of '{$tagName}' Custom Tag"
         );
+    }
+
+    /**
+     * Process Custom Tags config and translate labels for UI.
+     *
+     * @param array $config
+     *
+     * @return array processed Custom Tags config with translated labels
+     */
+    private function translateLabels(array $config): array
+    {
+        foreach ($config as $tagName => $tagConfig) {
+            $config[$tagName]['label'] = $this->translator->trans(
+                /** @Ignore */
+                $tagConfig['label'],
+                [],
+                $this->translationDomain
+            );
+            $config[$tagName]['description'] = $this->translator->trans(
+                /** @Ignore */
+                $tagConfig['description'],
+                [],
+                $this->translationDomain
+            );
+
+            if (empty($tagConfig['attributes'])) {
+                continue;
+            }
+
+            foreach ($tagConfig['attributes'] as $attributeName => $attributeConfig) {
+                $config[$tagName]['attributes'][$attributeName]['label'] = $this->translator->trans(
+                    /** @Ignore */
+                    $attributeConfig['label'],
+                    [],
+                    $this->translationDomain
+                );
+            }
+        }
+
+        return $config;
     }
 }
