@@ -7,33 +7,33 @@
     </header>
     <body>
       <trans-unit id="e03e262fad0802fdee49aac136644b35450e1eab" resname="field_definition.ezobjectrelation.selection_root_udw_button">
-        <source>field_definition.ezobjectrelation.selection_root_udw_button</source>
-        <target state="new">field_definition.ezobjectrelation.selection_root_udw_button</target>
+        <source>Select item</source>
+        <target state="new">Select item</target>
         <note>key: field_definition.ezobjectrelation.selection_root_udw_button</note>
       </trans-unit>
       <trans-unit id="d892163a41d816c03db3c4a04e35550f02169c11" resname="field_definition.ezobjectrelation.selection_root_udw_title">
-        <source>field_definition.ezobjectrelation.selection_root_udw_title</source>
-        <target state="new">field_definition.ezobjectrelation.selection_root_udw_title</target>
+        <source>Select a starting location for browsing for relation</source>
+        <target state="new">Select a starting location for browsing for relation</target>
         <note>key: field_definition.ezobjectrelation.selection_root_udw_title</note>
       </trans-unit>
       <trans-unit id="1592c36df8d445c3154d1f639027f97a90739856" resname="field_definition.ezobjectrelationlist.selection_root_udw_button">
-        <source>field_definition.ezobjectrelationlist.selection_root_udw_button</source>
-        <target state="new">field_definition.ezobjectrelationlist.selection_root_udw_button</target>
+        <source>Select location</source>
+        <target state="new">Select location</target>
         <note>key: field_definition.ezobjectrelationlist.selection_root_udw_button</note>
       </trans-unit>
       <trans-unit id="17d8f3e8bbd5b5f0f5b4b02ddaeaf2af82b0d222" resname="field_definition.ezobjectrelationlist.selection_root_udw_title">
-        <source>field_definition.ezobjectrelationlist.selection_root_udw_title</source>
-        <target state="new">field_definition.ezobjectrelationlist.selection_root_udw_title</target>
+        <source>Select a starting location for browsing for relations</source>
+        <target state="new">Select a starting location for browsing for relations</target>
         <note>key: field_definition.ezobjectrelationlist.selection_root_udw_title</note>
       </trans-unit>
       <trans-unit id="14a95e986cd6b94301e0f44fd5ef2d5e7cdf90a4" resname="field_definition.ezselection.add_option">
-        <source>field_definition.ezselection.add_option</source>
-        <target state="new">field_definition.ezselection.add_option</target>
+        <source>Add an option</source>
+        <target state="new">Add an option</target>
         <note>key: field_definition.ezselection.add_option</note>
       </trans-unit>
       <trans-unit id="c8017c71074191e0e6ebe4eb1a3a278eecbcc874" resname="field_definition.ezselection.remove_selected_options">
-        <source>field_definition.ezselection.remove_selected_options</source>
-        <target state="new">field_definition.ezselection.remove_selected_options</target>
+        <source>Remove selected options</source>
+        <target state="new">Remove selected options</target>
         <note>key: field_definition.ezselection.remove_selected_options</note>
       </trans-unit>
     </body>
