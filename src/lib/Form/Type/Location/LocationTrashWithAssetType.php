@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Location;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashWithAssetData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use Symfony\Component\Form\AbstractType;
@@ -17,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -38,7 +40,8 @@ class LocationTrashWithAssetType extends AbstractType
     public function __construct(
         TranslatorInterface $translator,
         ContentTypeService $contentTypeService
-    ) {
+    )
+    {
         $this->translator = $translator;
         $this->contentTypeService = $contentTypeService;
     }
@@ -66,38 +69,21 @@ class LocationTrashWithAssetType extends AbstractType
             ->add(
                 'trash',
                 SubmitType::class,
-                ['label' => /** @Desc("Send to Trash") */ 'location_trash_form.trash']
+                ['label' => /** @Desc("Send to Trash") */
+                    'location_trash_form.trash']
             );
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $formEvent) {
-            /** @var \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashWithAssetData $data */
-            $data = $formEvent->getData();
-            $form = $formEvent->getForm();
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $this->addTrashAssetField(
+                $event->getForm(),
+                $event->getData()->getLocation()
+            );
+        });
 
-            $location = $data->getLocation();
-            $contentName = $location->getContent()->getName();
-
-            $contentType = $this->contentTypeService
-                ->loadContentType(
-                    $location->getContentInfo()->contentTypeId)
-                ->getName(
-                    $location->getContentInfo()->mainLanguageCode
-                );
-
-            $translatorParameters = ['%content_name%' => $contentName, '%content_type%' => $contentType];
-            $form->add(
-                'trashAssets',
-                ChoiceType::class,
-                [
-                    'expanded' => true,
-                    'multiple' => false,
-                    'choices' => [
-                        /** @Desc("Delete only %content_name% (%content_type%)") */
-                        $this->translator->trans('location_trash_form.default_trash', $translatorParameters, 'forms') => LocationTrashWithAssetType::RADIO_SELECT_DEFAULT_TRASH,
-                        /** @Desc("Delete %content_name% (%content_type%) and its related image assets") */
-                        $this->translator->trans('location_trash_form.trash_with_asset', $translatorParameters, 'forms') => LocationTrashWithAssetType::RADIO_SELECT_TRASH_WITH_ASSETS,
-                    ],
-                ]
+        $builder->get('location')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            $this->addTrashAssetField(
+                $event->getForm()->getParent(),
+                $event->getForm()->getData()
             );
         });
     }
@@ -110,6 +96,41 @@ class LocationTrashWithAssetType extends AbstractType
         $resolver->setDefaults([
             'data_class' => LocationTrashWithAssetData::class,
             'translation_domain' => 'forms',
+        ]);
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormInterface $form
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     */
+    private function addTrashAssetField(FormInterface $form, Location $location = null): void
+    {
+        if ($location === null) {
+            return;
+        }
+
+        $contentType = $this->contentTypeService->loadContentType(
+            $location->getContentInfo()->contentTypeId
+        );
+
+        $translatorParameters = [
+            '%content_name%' => $location->getContent()->getName(),
+            '%content_type%' => $contentType->getName(
+                $location->getContentInfo()->mainLanguageCode
+            )
+        ];
+
+        $form->add('trashAssets', ChoiceType::class, [
+            'expanded' => true,
+            'multiple' => false,
+            'choices' => [
+                /** @Desc("Delete only %content_name% (%content_type%)") */
+                $this->translator->trans('location_trash_form.default_trash', $translatorParameters, 'forms') => LocationTrashWithAssetType::RADIO_SELECT_DEFAULT_TRASH,
+                /** @Desc("Delete %content_name% (%content_type%) and its related image assets") */
+                $this->translator->trans('location_trash_form.trash_with_asset', $translatorParameters, 'forms') => LocationTrashWithAssetType::RADIO_SELECT_TRASH_WITH_ASSETS,
+            ],
         ]);
     }
 }
