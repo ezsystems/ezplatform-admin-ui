@@ -1,0 +1,21 @@
+.ez-label {
+    margin-bottom: 0;
+    font-weight: 700;
+
+    &:after {
+        content: ': ';
+    }
+
+    &.checkbox-inline,
+    &.form-check-label {
+        margin-bottom: .0625rem;
+
+        &:after {
+            content: '';
+        }
+    }
+
+    &.form-check-label:not(.checkbox-inline) {
+        font-weight: 400;
+    }
+}
