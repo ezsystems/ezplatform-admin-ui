@@ -52,6 +52,10 @@
         background: $ez-ground-base-dark;
         max-height: 300px;
         overflow: auto;
+
+        .form-group {
+            margin-bottom: 0;
+        }
     }
 
     &--edit-user,
