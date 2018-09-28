@@ -1,0 +1,9 @@
+.ez-content-type-view {
+    .ez-main-container {
+        margin-bottom: calculateRem(48px);
+
+        .table:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
