@@ -77,8 +77,10 @@ class CustomTag
                 );
             }
 
-            $config[$tagName]['label'] = "ezrichtext.custom_tags.{$tagName}.label";
-            $config[$tagName]['description'] = "ezrichtext.custom_tags.{$tagName}.description";
+            $config[$tagName] = [
+                'label' => "ezrichtext.custom_tags.{$tagName}.label",
+                'description' => "ezrichtext.custom_tags.{$tagName}.description",
+            ];
             foreach ($customTagConfiguration['attributes'] as $attributeName => $properties) {
                 $typeMapper = $this->getAttributeTypeMapper(
                     $tagName,
