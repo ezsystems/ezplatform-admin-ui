@@ -40,8 +40,7 @@ class LocationTrashWithAssetType extends AbstractType
     public function __construct(
         TranslatorInterface $translator,
         ContentTypeService $contentTypeService
-    )
-    {
+    ) {
         $this->translator = $translator;
         $this->contentTypeService = $contentTypeService;
     }
@@ -70,7 +69,7 @@ class LocationTrashWithAssetType extends AbstractType
                 'trash',
                 SubmitType::class,
                 ['label' => /** @Desc("Send to Trash") */
-                    'location_trash_form.trash']
+                    'location_trash_form.trash', ]
             );
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
@@ -119,7 +118,7 @@ class LocationTrashWithAssetType extends AbstractType
             '%content_name%' => $location->getContent()->getName(),
             '%content_type%' => $contentType->getName(
                 $location->getContentInfo()->mainLanguageCode
-            )
+            ),
         ];
 
         $form->add('trashAssets', ChoiceType::class, [
