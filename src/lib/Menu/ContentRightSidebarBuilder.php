@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
+use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
@@ -16,6 +17,7 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsRoot;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
@@ -60,6 +62,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
     private $udwExtension;
 
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
@@ -69,6 +74,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\SearchService $searchService
      * @param \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension $udwExtension
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
      */
     public function __construct(
         MenuItemFactory $factory,
@@ -78,7 +84,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         UserService $userService,
         ContentTypeService $contentTypeService,
         SearchService $searchService,
-        UniversalDiscoveryExtension $udwExtension
+        UniversalDiscoveryExtension $udwExtension,
+        ContentService $contentService
     ) {
         parent::__construct($factory, $eventDispatcher);
 
@@ -88,6 +95,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $this->contentTypeService = $contentTypeService;
         $this->searchService = $searchService;
         $this->udwExtension = $udwExtension;
+        $this->contentService = $contentService;
     }
 
     /**
@@ -140,6 +148,14 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'data-actions' => 'create',
             'data-focus-element' => '.ez-instant-filter__input',
         ];
+        $editAttributes = [
+            'class' => 'ez-btn--extra-actions ez-btn--edit',
+            'data-actions' => 'edit',
+        ];
+        $sendToTrashAttributes = [
+            'data-toggle' => 'modal',
+            'data-target' => '#trash-location-modal',
+        ];
         $copySubtreeAttributes = [
             'class' => 'ez-btn--udw-copy-subtree',
             'data-root-location' => $this->configResolver->getParameter(
@@ -154,6 +170,10 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $copyLimit,
             $this->searchService
         ))->and((new IsRoot())->not())->isSatisfiedBy($location);
+
+        if ((new ContentHaveAssetRelation($this->contentService))->isSatisfiedBy($content)) {
+            $sendToTrashAttributes['data-target'] = '#trash-with-asset-modal';
+        }
 
         $contentIsUser = (new ContentIsUser($this->userService))->isSatisfiedBy($content);
 
@@ -236,10 +256,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__SEND_TO_TRASH,
                     [
                         'extras' => ['icon' => 'trash-send'],
-                        'attributes' => [
-                            'data-toggle' => 'modal',
-                            'data-target' => '#trash-location-modal',
-                        ],
+                        'attributes' => $sendToTrashAttributes,
                     ]
                 )
             );

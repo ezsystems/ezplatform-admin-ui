@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\BookmarkService;
+use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -20,9 +21,12 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashWithAssetData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
+use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveUniqueRelation;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
@@ -69,6 +73,9 @@ class ContentViewController extends Controller
     /** @var int */
     private $defaultCustomUrlPaginationLimit;
 
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
@@ -77,6 +84,7 @@ class ContentViewController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier $subitemsContentViewParameterSupplier
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\BookmarkService $bookmarkService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param int $defaultDraftPaginationLimit
      * @param array $siteAccessLanguages
      * @param int $defaultRolePaginationLimit
@@ -92,6 +100,7 @@ class ContentViewController extends Controller
         SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier,
         UserService $userService,
         BookmarkService $bookmarkService,
+        ContentService $contentService,
         int $defaultDraftPaginationLimit,
         array $siteAccessLanguages,
         int $defaultRolePaginationLimit,
@@ -112,6 +121,7 @@ class ContentViewController extends Controller
         $this->defaultPolicyPaginationLimit = $defaultPolicyPaginationLimit;
         $this->defaultSystemUrlPaginationLimit = $defaultSystemUrlPaginationLimit;
         $this->defaultCustomUrlPaginationLimit = $defaultCustomUrlPaginationLimit;
+        $this->contentService = $contentService;
     }
 
     /**
@@ -230,7 +240,27 @@ class ContentViewController extends Controller
             'form_location_copy_subtree' => $locationCopySubtreeType->createView(),
         ]);
 
-        if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
+        $contentHaveAssetRelation = new ContentHaveAssetRelation($this->contentService);
+        if ($contentHaveAssetRelation
+            ->and(new ContentHaveUniqueRelation($this->contentService))
+            ->isSatisfiedBy($content)
+        ) {
+            $trashWithAssetType = $this->formFactory->trashLocationWithAsset(
+                new LocationTrashWithAssetData($location)
+            );
+
+            $view->addParameters([
+                'form_location_trash_with_single_asset' => $trashWithAssetType->createView(),
+            ]);
+        } elseif ($contentHaveAssetRelation->isSatisfiedBy($content)) {
+            $locationTrashType = $this->formFactory->trashLocation(
+                new LocationTrashData($location)
+            );
+
+            $view->addParameters([
+                'form_location_trash_with_asset' => $locationTrashType->createView(),
+            ]);
+        } elseif ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
             $userDeleteType = $this->formFactory->deleteUser(
                 new UserDeleteData($content->contentInfo)
             );

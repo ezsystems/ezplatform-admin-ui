@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 
+use eZ\Publish\API\Repository\ContentTypeService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Bookmark\BookmarkRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
@@ -31,6 +32,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashWithAssetData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
@@ -94,6 +96,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopySubtreeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashWithAssetType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
@@ -144,23 +147,38 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class FormFactory
 {
-    /** @var FormFactoryInterface */
+    /** @var \Symfony\Component\Form\FormFactoryInterface */
     protected $formFactory;
 
-    /** @var UrlGeneratorInterface */
+    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     protected $urlGenerator;
 
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    private $translator;
+
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    private $contentTypeService;
+
     /**
-     * @param FormFactoryInterface $formFactory
-     * @param UrlGeneratorInterface $urlGenerator
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      */
-    public function __construct(FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator)
-    {
+    public function __construct(
+        FormFactoryInterface $formFactory,
+        UrlGeneratorInterface $urlGenerator,
+        TranslatorInterface $translator,
+        ContentTypeService $contentTypeService
+    ) {
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
+        $this->translator = $translator;
+        $this->contentTypeService = $contentTypeService;
     }
 
     /**
@@ -1257,5 +1275,22 @@ class FormFactory
             : [];
 
         return $this->formFactory->createNamed($name, UserEditType::class, $data, $options);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashWithAssetData|null $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     */
+    public function trashLocationWithAsset(
+        LocationTrashWithAssetData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationTrashWithAssetType::class);
+
+        return $this->formFactory->createNamed($name, LocationTrashWithAssetType::class, $data);
     }
 }

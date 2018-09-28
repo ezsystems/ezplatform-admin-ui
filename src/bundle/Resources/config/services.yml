@@ -106,7 +106,6 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory: ~
 
-
     EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler: ~
 
     EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler'

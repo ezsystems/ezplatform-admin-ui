@@ -146,10 +146,20 @@
         <target state="new">Move</target>
         <note>key: location_move.move</note>
       </trans-unit>
+      <trans-unit id="4b7b2b4de853db0d1fb1851e07f3ccc51e5713fc" resname="location_trash_form.default_trash">
+        <source>Delete only %content_name% (%content_type%)</source>
+        <target state="new">Delete only %content_name% (%content_type%)</target>
+        <note>key: location_trash_form.default_trash</note>
+      </trans-unit>
       <trans-unit id="796f8196b2bc086fe788e6689a6189c79b8e047e" resname="location_trash_form.trash">
         <source>Send to Trash</source>
         <target state="new">Send to Trash</target>
         <note>key: location_trash_form.trash</note>
+      </trans-unit>
+      <trans-unit id="2598fe0050f38f3c02014a404ed14aee248e27d1" resname="location_trash_form.trash_with_asset">
+        <source>Delete %content_name% (%content_type%) and its related image assets</source>
+        <target state="new">Delete %content_name% (%content_type%) and its related image assets</target>
+        <note>key: location_trash_form.trash_with_asset</note>
       </trans-unit>
       <trans-unit id="f86cd366867d370b0706e250355f605e2b783229" resname="policies_delete_form.delete">
         <source>Delete policies</source>
