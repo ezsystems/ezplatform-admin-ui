@@ -1,5 +1,5 @@
-(function (global, doc) {
-    const eZ = global.eZ = global.eZ || {};
+(function(global, doc) {
+    const eZ = (global.eZ = global.eZ || {});
 
     eZ.BaseFieldValidator = class BaseFieldValidator {
         constructor(config) {
@@ -9,6 +9,10 @@
             this.fieldContainer = config.fieldContainer;
             this.fieldsToValidate = [];
             this.isValid = this.isValid.bind(this);
+        }
+
+        getFieldTypeContainer(fallback) {
+            return this.fieldContainer ? this.fieldContainer : fallback;
         }
 
         /**
@@ -21,15 +25,15 @@
          * @memberof BaseFieldValidator
          */
         attachEvent(config) {
-            const container = this.fieldContainer ? this.fieldContainer : doc;
+            const container = this.getFieldTypeContainer(doc);
 
-            [...container.querySelectorAll(config.selector)].forEach(item => {
+            container.querySelectorAll(config.selector).forEach((item) => {
                 const isValueValidator = typeof config.isValueValidator !== 'undefined' ? config.isValueValidator : true;
 
                 this.fieldsToValidate.push({
                     item,
                     isValueValidator,
-                    callback: config.validateField
+                    callback: config.validateField,
                 });
 
                 item.addEventListener(config.eventName, config.validateField, false);
@@ -47,12 +51,12 @@
          * @memberof BaseFieldValidator
          */
         removeEvent(eventName, selector, callback) {
-            const container = this.fieldContainer ? this.fieldContainer : doc;
-
-            [...container.querySelectorAll(selector)].forEach(item => {
-                item.removeEventListener('checkIsValid', this.isValid, false);
-                item.removeEventListener(eventName, callback, false);
-            });
+            this.getFieldTypeContainer(doc)
+                .querySelectorAll(selector)
+                .forEach((item) => {
+                    item.removeEventListener('checkIsValid', this.isValid, false);
+                    item.removeEventListener(eventName, callback, false);
+                });
         }
 
         /**
@@ -79,14 +83,14 @@
          * @memberof BaseFieldValidator
          */
         toggleInvalidState(isError, config, input) {
-            const fieldNode = this.fieldContainer ? this.fieldContainer : input.closest(this.fieldSelector);
+            const container = this.getFieldTypeContainer(input.closest(this.fieldSelector));
             const methodName = isError ? 'add' : 'remove';
-            const nodes = this.findValidationStateNodes(fieldNode, input, config.invalidStateSelectors);
+            const nodes = this.findValidationStateNodes(container, input, config.invalidStateSelectors);
 
-            fieldNode.classList[methodName](this.classInvalid);
+            container.classList[methodName](this.classInvalid);
             input.classList[methodName](this.classInvalid);
 
-            nodes.forEach(el => el.classList[methodName](this.classInvalid));
+            nodes.forEach((el) => el.classList[methodName](this.classInvalid));
         }
 
         /**
@@ -144,17 +148,17 @@
          * @memberof BaseFieldValidator
          */
         toggleErrorMessage(validationResult, config, input) {
-            const fieldNode = this.fieldContainer ? this.fieldContainer : input.closest(this.fieldSelector);
-            const nodes = this.findErrorContainers(fieldNode, input, config.errorNodeSelectors);
-            const existingErrorSelectors = config.errorNodeSelectors.map(selector => selector + ' .ez-field-edit__error');
-            const existingErrorNodes = this.findExistingErrorNodes(fieldNode, input, existingErrorSelectors);
+            const container = this.getFieldTypeContainer(input.closest(this.fieldSelector));
+            const nodes = this.findErrorContainers(container, input, config.errorNodeSelectors);
+            const existingErrorSelectors = config.errorNodeSelectors.map((selector) => selector + ' .ez-field-edit__error');
+            const existingErrorNodes = this.findExistingErrorNodes(container, input, existingErrorSelectors);
 
-            existingErrorNodes.forEach(el => el.remove());
+            existingErrorNodes.forEach((el) => el.remove());
 
             if (validationResult.isError) {
                 const errorNode = this.createErrorNode(validationResult.errorMessage);
 
-                nodes.forEach(el => el.append(errorNode));
+                nodes.forEach((el) => el.append(errorNode));
             }
         }
 
@@ -187,7 +191,7 @@
          */
         init() {
             this.fieldsToValidate = [];
-            this.eventsMap.forEach(eventConfig => {
+            this.eventsMap.forEach((eventConfig) => {
                 eventConfig.validateField = this.validateField.bind(this, eventConfig);
 
                 this.attachEvent(eventConfig);
@@ -201,7 +205,7 @@
          * @memberof BaseFieldValidator
          */
         reinit() {
-            this.eventsMap.forEach(({eventName, selector, validateField}) => this.removeEvent(eventName, selector, validateField));
+            this.eventsMap.forEach(({ eventName, selector, validateField }) => this.removeEvent(eventName, selector, validateField));
             this.init();
         }
 
@@ -228,16 +232,18 @@
 
             const results = [];
 
-            this.fieldsToValidate.forEach(field => {
+            this.fieldsToValidate.forEach((field) => {
                 if (field.isValueValidator) {
-                    results.push(field.callback({
-                        target: field.item,
-                        currentTarget: field.item
-                    }));
+                    results.push(
+                        field.callback({
+                            target: field.item,
+                            currentTarget: field.item,
+                        })
+                    );
                 }
             });
 
-            return results.every(result => result && !result.isError);
+            return results.every((result) => result && !result.isError);
         }
     };
 })(window, document);
