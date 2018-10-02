@@ -2,7 +2,7 @@
 
 {% block ezobjectrelation_base_widget %}
     {% set limit = limit|default(0) %}
-    {% set default_location = default_location|default(0) %}
+    {% set default_location = default_location|default(1) %}
     {% set has_relations = relations|length > 0 %}
     <div class="ez-relations__wrapper" {% if not has_relations %}hidden="true"{% endif %}>
         <table class="table ez-relations__table">
