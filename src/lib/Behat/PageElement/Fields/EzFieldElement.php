@@ -22,7 +22,7 @@ abstract class EzFieldElement extends Element
         'ezcountry' => 'Country',
         'ezdate' => 'Date',
         'ezdatetime' => 'Date and time',
-        'ezemail' => 'E-mail address',
+        'ezemail' => 'Email address',
         'ezbinaryfile' => 'File',
         'ezfloat' => 'Float',
         'ezisbn' => 'ISBN',

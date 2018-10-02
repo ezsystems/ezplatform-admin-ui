@@ -30,7 +30,7 @@ Feature: Content fields setting and editing
       | ezcountry            | Country                      | value     | Poland                |            |                       |         |          | Poland                    |
       | ezdate               | Date                         | value     | 11/23/2019            |            |                       |         |          | Saturday 23 November 2019 |
       | ezdatetime           | Date and time                | date      | 11/23/2019            | time       | 14:45                 |         |          | Sat 2019-23-11 14:45:00   |
-      | ezemail              | E-mail address               | value     | email@example.com     |            |                       |         |          | email@example.com         |
+      | ezemail              | Email address               | value     | email@example.com     |            |                       |         |          | email@example.com         |
       | ezfloat              | Float                        | value     | 11.11                 |            |                       |         |          | 11.11                     |
       | ezisbn               | ISBN                         | value     | 978-3-16-148410-0     |            |                       |         |          | 978-3-16-148410-0         |
       | ezinteger            | Integer                      | value     | 1111                  |            |                       |         |          | 1111                      |
@@ -70,7 +70,7 @@ Feature: Content fields setting and editing
       | Country                      | value     | Sweden                       |            |                          |         |          | Poland                    | Sweden                       |
       | Date                         | value     | 12/30/2019                   |            |                          |         |          | Saturday 23 November 2019 | Monday 30 December 2019      |
       | Date and time                | date      | 12/30/2019                   | time       | 15:15                    |         |          | Sat 2019-23-11 14:45:00   | Mon 2019-30-12 15:15:00      |
-      | E-mail address               | value     | edited.email@example.com     |            |                          |         |          | email@example.com         | edited.email@example.com     |
+      | Email address               | value     | edited.email@example.com     |            |                          |         |          | email@example.com         | edited.email@example.com     |
       | Float                        | value     | 12.34                        |            |                          |         |          | 11.11                     | 12.34                        |
       | ISBN                         | value     | 0-13-048257-9                |            |                          |         |          | 978-3-16-148410-0         | 0-13-048257-9                |
       | Integer                      | value     | 1234                         |            |                          |         |          | 1111                      | 1234                         |
