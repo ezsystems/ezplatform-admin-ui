@@ -21,6 +21,11 @@
         <target state="new">Editing - %contentType%</target>
         <note>key: editing</note>
       </trans-unit>
+      <trans-unit id="669edeb37bec7cf4ec99288b90b02ba65e84b4cf" resname="errors.in.the.form">
+        <source>Looks that something went wrong. Please, check for required fields, or maybe errors and correct them</source>
+        <target state="new">Looks that something went wrong. Please, check for required fields, or maybe errors and correct them</target>
+        <note>key: errors.in.the.form</note>
+      </trans-unit>
       <trans-unit id="876d7bdba03c72251ec4c2dc827fc54af7889091" resname="location_id">
         <source>Location ID: %locationId%</source>
         <target state="new">Location ID: %locationId%</target>

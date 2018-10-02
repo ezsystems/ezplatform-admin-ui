@@ -164,7 +164,7 @@
     }
 
     .flatpickr-input {
-        &.is-invalid {
+        &.is-invalid.form-control[readonly] {
             background: $ez-color-warning-pale;
         }
     }

@@ -18,6 +18,9 @@
     <div class="small">
         {{ contentType.name }} / Parent Location ID: {{ parentLocation.id }}
     </div>
+    <div class="ez-content-item__errors-wrapper" hidden>
+        {{ 'errors.in.the.form'|trans|desc('Looks that something went wrong. Please, check for required fields, or maybe errors and correct them') }}
+    </div>
     {# @todo remove if statement once getDescription() bug is resolved in kernel #}
     {% if contentType.descriptions is not empty %}
         <div class="small text-muted">{{ contentType.description }}</div>

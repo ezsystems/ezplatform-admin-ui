@@ -11,6 +11,11 @@
         <target state="new">Creating - %contentType%</target>
         <note>key: creating</note>
       </trans-unit>
+      <trans-unit id="669edeb37bec7cf4ec99288b90b02ba65e84b4cf" resname="errors.in.the.form">
+        <source>Looks that something went wrong. Please, check for required fields, or maybe errors and correct them</source>
+        <target state="new">Looks that something went wrong. Please, check for required fields, or maybe errors and correct them</target>
+        <note>key: errors.in.the.form</note>
+      </trans-unit>
       <trans-unit id="256aa0fda9b1de1a73ee0b7106b95efada81b5d6" resname="group_id">
         <source>Group ID: %groupId%</source>
         <target state="new">Group ID: %groupId%</target>

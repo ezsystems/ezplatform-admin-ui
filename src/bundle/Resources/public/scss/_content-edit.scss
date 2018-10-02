@@ -1,5 +1,5 @@
 .ez-content-item-status {
-    font-size: 1.125rem;
+    font-size: calculateRem(18px);
     color: $ez-color-base-light;
 }
 
@@ -10,18 +10,18 @@
         position: absolute;
         left: 0;
         top: 0;
-        font-size: 2rem;
+        font-size: calculateRem(32px);
         color: $ez-black;
-        width: 2rem;
-        height: 2rem;
-        margin-left: .5rem;
-        padding: 1rem;
+        width: calculateRem(32px);
+        height: calculateRem(32px);
+        margin-left: calculateRem(8px);
+        padding: calculateRem(16px);
 
         &:before,
         &:after {
-            content: "";
-            width: 2rem;
-            height: 2px;
+            content: '';
+            width: calculateRem(32px);
+            height: calculateRem(2px);
             position: absolute;
             background-color: $ez-black;
             top: 50%;
@@ -69,4 +69,10 @@
     .card-body {
         padding: 0 calculateRem(20px);
     }
+}
+
+.ez-content-item__errors-wrapper {
+    font-style: italic;
+    color: $ez-color-danger;
+    font-size: calculateRem(12px);
 }
