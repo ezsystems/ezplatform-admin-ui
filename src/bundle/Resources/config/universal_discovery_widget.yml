@@ -37,3 +37,7 @@ system:
                     multiple: false
                     content_on_the_fly:
                         allowed_content_types: ['image']
+                object_relation_single:
+                    multiple: false
+                object_relation_multiple:
+                    multiple: true

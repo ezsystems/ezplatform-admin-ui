@@ -17,9 +17,9 @@
                 <th class="ez-relations__table-actions">
                     <button
                         {% if limit == 1 %}
-                            data-udw-config="{{ ez_udw_config('single', {}) }}"
+                            data-udw-config="{{ ez_udw_config('object_relation_single', {'starting_location_id' : default_location}) }}"
                         {% else %}
-                            data-udw-config="{{ ez_udw_config('multiple', {}) }}"
+                            data-udw-config="{{ ez_udw_config('object_relation_multiple', {'starting_location_id' : default_location} ) }}"
                         {% endif %}
                         type="button"
                         class="ez-relations__table-action--create btn btn-primary"
@@ -65,9 +65,9 @@
         </p>
         <button
                 {% if limit == 1 %}
-                    data-udw-config="{{ ez_udw_config('single', {}) }}"
+                    data-udw-config="{{ ez_udw_config('object_relation_single', {'starting_location_id' : default_location}) }}"
                 {% else %}
-                    data-udw-config="{{ ez_udw_config('multiple', {}) }}"
+                    data-udw-config="{{ ez_udw_config('object_relation_multiple', {'starting_location_id' : default_location} ) }}"
                 {% endif %}
                 class="ez-relations__cta-btn btn btn-primary"
                 type="button">
