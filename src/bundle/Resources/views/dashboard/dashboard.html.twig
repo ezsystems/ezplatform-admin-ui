@@ -34,6 +34,7 @@
         {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
         {{ form_end(form_edit) }}
     </div>
+    {% include '@ezdesign/content/modal_version_conflict.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}
