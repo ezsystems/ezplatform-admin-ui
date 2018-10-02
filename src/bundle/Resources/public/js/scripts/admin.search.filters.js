@@ -77,8 +77,12 @@
 
         toggleContentTypeSelectorVisibility();
     };
-    const toggleContentTypeSelectorVisibility = () => {
-        const methodName = contentTypeSelector.classList.contains('ez-content-type-selector--collapsed') ? 'addEventListener' : 'removeEventListener';
+    const toggleContentTypeSelectorVisibility = (event) => {
+        event.preventDefault();
+
+        const methodName = contentTypeSelector.classList.contains('ez-content-type-selector--collapsed')
+            ? 'addEventListener'
+            : 'removeEventListener';
 
         contentTypeSelector.classList.toggle('ez-content-type-selector--collapsed');
         doc.querySelector('body')[methodName]('click', handleClickOutside, false);
@@ -262,7 +266,7 @@
 
     clearBtn.addEventListener('click', clearFilters, false);
     filterBtn.addEventListener('click', toggleFiltersVisibility, false);
-    contentTypeSelect.addEventListener('click', toggleContentTypeSelectorVisibility, false);
+    contentTypeSelect.addEventListener('mousedown', toggleContentTypeSelectorVisibility, false);
 
     if (sectionSelect) {
         sectionSelect.addEventListener('change', toggleDisabledStateOnApplyBtn, false);
