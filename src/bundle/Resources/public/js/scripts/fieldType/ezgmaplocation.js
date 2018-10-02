@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function(global, doc, eZ, Leaflet) {
     const SELECTOR_FIELD = '.ez-field-edit--ezgmaplocation';
     const SELECTOR_ADDRESS_INPUT = '.ez-data-source__field--address .ez-data-source__input';
     const SELECTOR_LAT_FIELD = '.ez-data-source__field--latitude';
@@ -14,7 +14,7 @@
     const VALIDATE_LONGITUDE = 'validateLongitude';
     const VALIDATE_LATITUDE = 'validateLatitude';
 
-    class EzGMapLocationValidator extends global.eZ.BaseFieldValidator {
+    class EzGMapLocationValidator extends eZ.BaseFieldValidator {
         /**
          * Validates latitude/longitude input value
          *
@@ -36,7 +36,7 @@
 
             if (isNumber && !isInRange) {
                 result.isError = true;
-                result.errorMessage = global.eZ.errors.outOfRangeValue
+                result.errorMessage = eZ.errors.outOfRangeValue
                     .replace('{fieldName}', label)
                     .replace('{min}', min)
                     .replace('{max}', max);
@@ -46,7 +46,7 @@
 
             if (input.required && !isNumber) {
                 result.isError = true;
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             }
 
             return result;
@@ -134,10 +134,10 @@
             let invalidInputType = null;
 
             if (lonInputFilledlatInputEmpty) {
-                errorMessage = global.eZ.errors.provideLatitudeValue;
+                errorMessage = eZ.errors.provideLatitudeValue;
                 invalidInputType = POSITION_TYPE_LATITUDE;
             } else if (latInputFilledlonInputEmpty) {
-                errorMessage = global.eZ.errors.provideLongitudeValue;
+                errorMessage = eZ.errors.provideLongitudeValue;
                 invalidInputType = POSITION_TYPE_LONGITUDE;
             }
 
@@ -205,7 +205,7 @@
          * @returns {Object}
          */
         showNotFoundError() {
-            return { isError: true, errorMessage: global.eZ.errors.addressNotFound };
+            return { isError: true, errorMessage: eZ.errors.addressNotFound };
         }
 
         /**
@@ -225,7 +225,7 @@
             }
 
             if (!latInput.value.trim().length || !lonInput.value.trim().length) {
-                return { isError: true, errorMessage: global.eZ.errors.addressNotFound };
+                return { isError: true, errorMessage: eZ.errors.addressNotFound };
             }
 
             return { isError: false };
@@ -462,7 +462,7 @@
             zoom: areCoordsSet ? 15 : 1,
             center: areCoordsSet ? [parseFloat(latitudeInput.value), parseFloat(longitudeInput.value)] : [0, 0],
         };
-        const map = global.L.map(field.querySelector('.ez-data-source__map'), mapConfig);
+        const map = Leaflet.map(field.querySelector('.ez-data-source__map'), mapConfig);
 
         /**
          * Updates map state to show location with provided coordinates
@@ -472,7 +472,7 @@
          * @param {Number} lon
          */
         const updateMapState = (lat, lon) => {
-            map.setView(global.L.latLng(lat, lon), 15);
+            map.setView(Leaflet.latLng(lat, lon), 15);
 
             longitudeInput.value = lon;
             latitudeInput.value = lat;
@@ -481,8 +481,8 @@
                 map.removeLayer(locationMarker);
             }
 
-            locationMarker = global.L.marker([lat, lon], {
-                icon: new global.L.Icon.Default({
+            locationMarker = Leaflet.marker([lat, lon], {
+                icon: new Leaflet.Icon.Default({
                     imagePath: '/bundles/ezplatformadminuiassets/vendors/leaflet/dist/images/',
                 }),
             }).addTo(map);
@@ -591,7 +591,7 @@
         };
         let locationMarker;
 
-        global.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(map);
 
@@ -616,5 +616,5 @@
         }
     });
 
-    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ? [...global.eZ.fieldTypeValidators, validator] : [validator];
-})(window, window.document, window.eZ);
+    eZ.fieldTypeValidators = eZ.fieldTypeValidators ? [...eZ.fieldTypeValidators, validator] : [validator];
+})(window, window.document, window.eZ, window.L);
