@@ -28,13 +28,17 @@ class ObjectRelationStartingLocationId implements EventSubscriberInterface
      */
     public function onUdwConfigResolve(ConfigResolveEvent $event): void
     {
-        $eventName = $event->getConfigName();
-        if ('object_relation_single' !== $eventName && 'object_relation_multiple' !== $eventName) {
+        $configName = $event->getConfigName();
+        if ('single' !== $configName && 'multiple' !== $configName) {
             return;
         }
 
         $context = $event->getContext();
-        if (!isset($context['starting_location_id'])) {
+        if (
+            !isset($context['type'])
+            || 'object_relation' !== $context['type']
+            || !isset($context['starting_location_id'])
+        ) {
             return;
         }
 
