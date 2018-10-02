@@ -13,6 +13,7 @@
     const POSITION_TYPE_LATITUDE = 'latitude';
     const VALIDATE_LONGITUDE = 'validateLongitude';
     const VALIDATE_LATITUDE = 'validateLatitude';
+    const VALIDATE_ADDRESS = 'validateAddress';
 
     class EzGMapLocationValidator extends eZ.BaseFieldValidator {
         /**
@@ -236,7 +237,6 @@
          *
          * @method validateLatitudeOnDemand
          * @returns {Object} hash with 'result' and 'config' keys
-         * @memberof BaseFieldValidator
          */
         validateLatitudeOnDemand() {
             const container = this.getFieldTypeContainer(doc);
@@ -255,11 +255,10 @@
          *
          * @method validateLongitudeOnDemand
          * @returns {Object} hash with 'result' and 'config' keys
-         * @memberof BaseFieldValidator
          */
         validateLongitudeOnDemand() {
             const container = this.getFieldTypeContainer(doc);
-            const longitudeInputConfig = this.eventsMap.find((eventConfig) => eventConfig.callback === VALIDATE_LATITUDE);
+            const longitudeInputConfig = this.eventsMap.find((eventConfig) => eventConfig.callback === VALIDATE_LONGITUDE);
 
             return {
                 result: this.validateLongitude({
@@ -270,52 +269,82 @@
         }
 
         /**
+         * Creates a hash with fields validation results and invalid state selectors
+         *
+         * @method buildCoordFieldsValidationHash
+         * @param {Array} fieldsData
+         * @returns {Object}
+         */
+        buildCoordFieldsValidationHash(fieldsData) {
+            return {
+                validationResults: fieldsData.map((field) => field.result),
+                invalidStateSelectors: fieldsData.reduce((total, field) => [...total, ...field.config.invalidStateSelectors], []),
+            };
+        }
+
+        /**
          * Validates the field
          *
          * @method validateField
          * @param {Object} config
          * @param {Event} event
-         * @memberof BaseFieldValidator
          */
         validateField(config, event) {
             const validationResult = this[config.callback](event);
-            const isNotLongitudeField = config.callback !== VALIDATE_LONGITUDE;
-            const isNotLatitudeField = config.callback !== VALIDATE_LATITUDE;
-            let coordFieldsValidationResults = [];
-            let coordFieldInvalidStateSelectors = [];
-
-            if (isNotLongitudeField && isNotLatitudeField) {
-                const longitudeValidationData = this.validateLongitudeOnDemand();
-                const latitudeValidationData = this.validateLatitudeOnDemand();
-
-                coordFieldsValidationResults = [longitudeValidationData.result, latitudeValidationData.result];
-                coordFieldInvalidStateSelectors = [
-                    ...longitudeValidationData.config.invalidStateSelectors,
-                    ...latitudeValidationData.config.invalidStateSelectors,
-                ];
-            }
 
             if (!validationResult) {
                 return;
             }
 
+            const isLongitudeField = config.callback === VALIDATE_LONGITUDE;
+            const isLatitudeField = config.callback === VALIDATE_LATITUDE;
+            const areNotCoordFields = !isLongitudeField && !isLatitudeField;
+            const isInvalidLatCoordField = isLatitudeField && validationResult.isError;
+            const isInvalidLonCoordField = isLongitudeField && validationResult.isError;
+            let coordFieldsValidationResults = [];
+            let coordFieldInvalidStateSelectors = [];
+
+            if (areNotCoordFields || isInvalidLatCoordField || isInvalidLonCoordField) {
+                const coordFieldsData = this.buildCoordFieldsValidationHash([
+                    this.validateLongitudeOnDemand(),
+                    this.validateLatitudeOnDemand(),
+                ]);
+
+                coordFieldsValidationResults = coordFieldsData.validationResults;
+                coordFieldInvalidStateSelectors = coordFieldsData.invalidStateSelectors;
+            } else if (isLongitudeField && !validationResult.isError) {
+                const coordFieldsData = this.buildCoordFieldsValidationHash([this.validateLatitudeOnDemand()]);
+
+                coordFieldsValidationResults = coordFieldsData.validationResults;
+                coordFieldInvalidStateSelectors = coordFieldsData.invalidStateSelectors;
+            } else if (isLatitudeField && !validationResult.isError) {
+                const coordFieldsData = this.buildCoordFieldsValidationHash([this.validateLongitudeOnDemand()]);
+
+                coordFieldsValidationResults = coordFieldsData.validationResults;
+                coordFieldInvalidStateSelectors = coordFieldsData.invalidStateSelectors;
+            } else {
+                this.toggleInvalidState(validationResult.isError, config, event.target);
+                this.toggleErrorMessage(validationResult, config, event.target);
+
+                return validationResult;
+            }
+
             const coordFieldsWithError = coordFieldsValidationResults.filter((field) => field.isError);
             const isCoordFieldError = !!coordFieldsWithError.length;
-            const areCoordFieldsInvalidOnly = !validationResult.isError && isCoordFieldError;
             const isError = validationResult.isError || isCoordFieldError;
             const allFieldsResult = { isError, errorMessage: coordFieldsWithError.map((field) => field.errorMessage).join('<br/>') };
 
-            if (areCoordFieldsInvalidOnly) {
-                config.errorNodeSelectors = [SELECTOR_LABEL_WRAPPER];
-                config.invalidStateSelectors = coordFieldInvalidStateSelectors;
-            }
+            config.errorNodeSelectors = [SELECTOR_LABEL_WRAPPER];
+            config.invalidStateSelectors = coordFieldInvalidStateSelectors;
 
             this.toggleInvalidState(isError, config, event.target);
             this.toggleErrorMessage(allFieldsResult, config, event.target);
 
-            if (areCoordFieldsInvalidOnly) {
-                event.target.classList.remove(this.classInvalid);
-            }
+            const container = this.getFieldTypeContainer(doc);
+            const addressInputConfig = this.eventsMap.find((eventConfig) => eventConfig.callback === VALIDATE_ADDRESS);
+            const addressInput = container.querySelector(addressInputConfig.selector);
+
+            addressInput.classList.remove(this.classInvalid);
 
             return validationResult;
         }
@@ -325,6 +354,26 @@
         classInvalid: 'is-invalid',
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
+            {
+                isValueValidator: false,
+                selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
+                eventName: 'addressNotFound',
+                callback: 'showNotFoundError',
+                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+            },
+            {
+                isValueValidator: false,
+                selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
+                eventName: EVENT_CANCEL_ERRORS,
+                callback: 'cancelErrors',
+                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+            },
+            {
+                selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
+                eventName: 'checkValidity',
+                callback: VALIDATE_ADDRESS,
+                errorNodeSelectors: ['.ez-data-source__field--address .ez-data-source__label-wrapper'],
+            },
             {
                 selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
                 positionType: POSITION_TYPE_LONGITUDE,
@@ -372,26 +421,6 @@
                 callback: 'cancelErrors',
                 errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 invalidStateSelectors: [SELECTOR_LAT_FIELD],
-            },
-            {
-                isValueValidator: false,
-                selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
-                eventName: 'addressNotFound',
-                callback: 'showNotFoundError',
-                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-            },
-            {
-                isValueValidator: false,
-                selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
-                eventName: EVENT_CANCEL_ERRORS,
-                callback: 'cancelErrors',
-                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-            },
-            {
-                selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
-                eventName: 'checkValidity',
-                callback: 'validateAddress',
-                errorNodeSelectors: ['.ez-data-source__field--address .ez-data-source__label-wrapper'],
             },
         ],
     });

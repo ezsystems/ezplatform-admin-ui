@@ -26,22 +26,22 @@
                 content: '!';
                 position: absolute;
                 top: 0;
-                left: calculateRem(-20px);
-                width: calculateRem(20px);
+                left: -20px;
+                width: 20px;
 
                 background: $ez-color-warning-dark;
                 color: $ez-white;
                 text-align: center;
-                font-size: calculateRem(24px);
-                border-top-left-radius: calculateRem(5px);
-                border-bottom-left-radius: calculateRem(5px);
+                font-size: 24px;
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
             }
         }
     }
 
     &__error {
         display: inline-block;
-        margin-left: calculateRem(8px);
+        margin-left: 8px;
         color: $ez-color-warning-dark;
     }
 
@@ -63,7 +63,7 @@
     .ez-field-edit {
         &__label-wrapper {
             .ez-field-edit__label {
-                font-size: calculateRem(16px);
+                font-size: 16px;
                 font-weight: 700;
                 color: $ez-black;
             }
@@ -71,7 +71,7 @@
 
         .ez-data-source__label {
             margin-bottom: 0;
-            font-size: calculateRem(14px);
+            font-size: 14px;
             font-weight: 700;
             color: $ez-black;
         }
