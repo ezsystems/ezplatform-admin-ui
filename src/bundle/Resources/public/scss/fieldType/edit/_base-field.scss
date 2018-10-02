@@ -9,7 +9,7 @@
     }
 
     &--nontranslatable {
-        opacity: .4;
+        opacity: 0.4;
         pointer-events: none;
     }
 
@@ -23,16 +23,16 @@
             position: relative;
 
             &:before {
-                content : '!';
+                content: '!';
                 position: absolute;
                 top: 0;
                 left: -20px;
                 width: 20px;
 
-                background: red;
-                color: white;
+                background: $ez-color-warning-dark;
+                color: $ez-white;
                 text-align: center;
-                font-size: 1.5rem;
+                font-size: 24px;
                 border-top-left-radius: 5px;
                 border-bottom-left-radius: 5px;
             }
@@ -55,6 +55,25 @@
     .ez-data-source__label {
         &.is-invalid {
             color: $ez-color-danger;
+        }
+    }
+}
+
+.ez-content-edit {
+    .ez-field-edit {
+        &__label-wrapper {
+            .ez-field-edit__label {
+                font-size: 16px;
+                font-weight: 700;
+                color: $ez-black;
+            }
+        }
+
+        .ez-data-source__label {
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 700;
+            color: $ez-black;
         }
     }
 }
