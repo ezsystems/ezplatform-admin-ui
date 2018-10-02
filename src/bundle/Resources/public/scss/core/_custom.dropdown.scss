@@ -46,6 +46,11 @@
             right: 0;
             top: 0;
         }
+
+        &.is-invalid {
+            border-color: $ez-color-warning-dark;
+            background: $ez-color-warning-pale;
+        }
     }
 
     &__selected-item {
@@ -121,6 +126,14 @@
         &--selected,
         &--selected:hover {
             background: $ez-ground-primary;
+        }
+    }
+
+    &.is-invalid {
+        .ez-custom-dropdown {
+            &__selection-info {
+                border-color: $ez-color-warning-dark;
+            }
         }
     }
 }

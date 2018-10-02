@@ -9,7 +9,7 @@
     }
 
     &--nontranslatable {
-        opacity: .4;
+        opacity: 0.4;
         pointer-events: none;
     }
 
@@ -23,25 +23,25 @@
             position: relative;
 
             &:before {
-                content : '!';
+                content: '!';
                 position: absolute;
                 top: 0;
-                left: -20px;
-                width: 20px;
+                left: calculateRem(-20px);
+                width: calculateRem(20px);
 
-                background: red;
-                color: white;
+                background: $ez-color-warning-dark;
+                color: $ez-white;
                 text-align: center;
-                font-size: 1.5rem;
-                border-top-left-radius: 5px;
-                border-bottom-left-radius: 5px;
+                font-size: calculateRem(24px);
+                border-top-left-radius: calculateRem(5px);
+                border-bottom-left-radius: calculateRem(5px);
             }
         }
     }
 
     &__error {
         display: inline-block;
-        margin-left: 8px;
+        margin-left: calculateRem(8px);
         color: $ez-color-warning-dark;
     }
 
@@ -63,7 +63,7 @@
     .ez-field-edit {
         &__label-wrapper {
             .ez-field-edit__label {
-                font-size: 1rem;
+                font-size: calculateRem(16px);
                 font-weight: 700;
                 color: $ez-black;
             }
