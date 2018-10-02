@@ -1,11 +1,11 @@
-(function (global, doc, $) {
+(function(global, doc, $) {
     let getUsersTimeout;
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const filterBtn = doc.querySelector('.ez-btn--filter');
     const filters = doc.querySelector('.ez-filters');
     const clearBtn = filters.querySelector('.ez-btn-clear');
-    const applyBtn = filters.querySelector('.ez-btn-apply')
+    const applyBtn = filters.querySelector('.ez-btn-apply');
     const selectBtns = [...doc.querySelectorAll('.ez-btn--select')];
     const dateFields = [...doc.querySelectorAll('.ez-date-select')];
     const contentTypeSelector = doc.querySelector('.ez-content-type-selector');
@@ -32,7 +32,7 @@
         const lastCreatedEnd = doc.querySelector(lastCreatedModal.dataset.endSelector);
 
         option.innerHTML = defaultText;
-        contentTypeCheckboxes.forEach(checkbox => {
+        contentTypeCheckboxes.forEach((checkbox) => {
             checkbox.removeAttribute('checked');
             checkbox.checked = false;
         });
@@ -107,8 +107,8 @@
         event.currentTarget.closest('.ez-content-type-selector__group').classList.toggle('ez-content-type-selector__group--collapsed');
     };
     const filterByContentType = () => {
-        const selectedCheckboxes = contentTypeCheckboxes.filter(checkbox => checkbox.checked);
-        const contentTypesText = selectedCheckboxes.map(checkbox => checkbox.dataset.name).join(', ');
+        const selectedCheckboxes = contentTypeCheckboxes.filter((checkbox) => checkbox.checked);
+        const contentTypesText = selectedCheckboxes.map((checkbox) => checkbox.dataset.name).join(', ');
         const option = contentTypeSelect[0];
         const defaultText = option.dataset.default;
 
@@ -117,11 +117,11 @@
         toggleDisabledStateOnApplyBtn();
     };
     const dateConfig = {
-        formatDate: (date) => (new Date(date)).toLocaleDateString()
+        formatDate: (date) => new Date(date).toLocaleDateString(),
     };
     const checkSelectFieldsFilled = (modal) => {
         const inputs = [...modal.querySelectorAll('.ez-date-select')];
-        const isFilled = inputs.every(input => !!doc.querySelector(input.dataset.targetSelector).value.trim());
+        const isFilled = inputs.every((input) => !!doc.querySelector(input.dataset.targetSelector).value.trim());
         const methodName = isFilled ? 'removeAttribute' : 'setAttribute';
 
         modal.querySelector('.ez-btn--select')[methodName]('disabled', !isFilled);
@@ -167,10 +167,13 @@
             defaultDate = new Date(sourceInput.value * 1000);
         }
 
-        global.flatpickr(flatPickrInput, Object.assign({}, dateConfig, {
-            onChange: updateSourceInputValue.bind(null, sourceInput),
-            defaultDate
-        }));
+        global.flatpickr(
+            flatPickrInput,
+            Object.assign({}, dateConfig, {
+                onChange: updateSourceInputValue.bind(null, sourceInput),
+                defaultDate,
+            })
+        );
     };
     const getUsersList = (value) => {
         const body = JSON.stringify({
@@ -183,31 +186,32 @@
                     SortClauses: {},
                     Query: {
                         FullTextCriterion: `${value}*`,
-                        ContentTypeIdentifierCriterion: creatorInput.dataset.contentTypeIdentifiers
+                        ContentTypeIdentifierCriterion: creatorInput.dataset.contentTypeIdentifiers,
                     },
                     limit: 50,
-                    offset: 0
-                }
-            }
+                    offset: 0,
+                },
+            },
         });
         const request = new Request('/api/ezp/v2/views', {
             method: 'POST',
             headers: {
-                'Accept': 'application/vnd.ez.api.View+json; version=1.1',
+                Accept: 'application/vnd.ez.api.View+json; version=1.1',
                 'Content-Type': 'application/vnd.ez.api.ViewInput+json; version=1.1',
                 'X-Siteaccess': siteaccess,
-                'X-CSRF-Token': token
+                'X-CSRF-Token': token,
             },
             body,
             mode: 'same-origin',
-            credentials: 'same-origin'
+            credentials: 'same-origin',
         });
 
         fetch(request)
-            .then(response => response.json())
+            .then((response) => response.json())
             .then(showUsersList);
     };
-    const createUsersListItem = (user) => `<li data-id="${user._id}" data-name="${user.Name}" class="ez-filters__user-item">${user.Name}</li>`;
+    const createUsersListItem = (user) =>
+        `<li data-id="${user._id}" data-name="${user.Name}" class="ez-filters__user-item">${user.Name}</li>`;
     const showUsersList = (data) => {
         const hits = data.View.Result.searchHits.searchHit;
         const users = hits.reduce((total, hit) => total + createUsersListItem(hit.value.Content), '');
@@ -277,7 +281,7 @@
     creatorInput.addEventListener('keyup', handleTyping, false);
     usersList.addEventListener('click', handleSelectUser, false);
     resetCreatorBtn.addEventListener('click', handleResetUser, false);
-    listGroupsTitle.forEach(group => group.addEventListener('click', toggleGroupState, false));
-    contentTypeCheckboxes.forEach(checkbox => checkbox.addEventListener('change', filterByContentType, false));
-    selectBtns.forEach(btn => btn.addEventListener('click', setSelectedDateRange, false));
+    listGroupsTitle.forEach((group) => group.addEventListener('click', toggleGroupState, false));
+    contentTypeCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', filterByContentType, false));
+    selectBtns.forEach((btn) => btn.addEventListener('click', setSelectedDateRange, false));
 })(window, document, window.jQuery);
