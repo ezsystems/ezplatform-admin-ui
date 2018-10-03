@@ -163,6 +163,7 @@
                 data-relation-root-input-selector="#{{ form.selectionDefaultLocation.vars.id }}"
                 data-relation-selected-root-name-selector="#{{ form.selectionDefaultLocation.vars.id }}-selected-root-name"
                 data-starting-location-id="{{ admin_ui_config.universalDiscoveryWidget.startingLocationId|default(1) }}"
+                data-udw-config="{{ ez_udw_config('single_container', {}) }}"
             >{{ "field_definition.ezobjectrelationlist.selection_root_udw_button"
                 |trans({}, "ezrepoforms_content_type")
                 |desc("Select location") }}</button>
