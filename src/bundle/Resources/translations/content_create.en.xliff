@@ -11,11 +11,6 @@
         <target state="new">Creating - %contentTypeName% in %languageName%</target>
         <note>key: creating_in_language</note>
       </trans-unit>
-      <trans-unit id="669edeb37bec7cf4ec99288b90b02ba65e84b4cf" resname="errors.in.the.form">
-        <source>Looks that something went wrong. Please, check for required fields, or maybe errors and correct them</source>
-        <target state="new">Looks that something went wrong. Please, check for required fields, or maybe errors and correct them</target>
-        <note>key: errors.in.the.form</note>
-      </trans-unit>
       <trans-unit id="32d50c07b2eacd6fa72742ff1c1f5963c26a251d" resname="new_content_item">
         <source>New %contentType%</source>
         <target state="new">New %contentType%</target>
