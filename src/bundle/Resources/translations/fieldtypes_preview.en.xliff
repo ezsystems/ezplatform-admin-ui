@@ -202,8 +202,8 @@
         <note>key: ezobjectrelationlist.name</note>
       </trans-unit>
       <trans-unit id="eb451c657d2bd24b90aaea1619ba0ffb33ba52cc" resname="ezuser.email">
-        <source>E-mail</source>
-        <target state="new">E-mail</target>
+        <source>Email</source>
+        <target state="new">Email</target>
         <note>key: ezuser.email</note>
       </trans-unit>
       <trans-unit id="09acf9d3220515cf63f284525c54ed3f88b7a396" resname="ezuser.enabled">
