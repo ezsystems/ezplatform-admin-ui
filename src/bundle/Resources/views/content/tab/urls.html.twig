@@ -57,19 +57,34 @@
     }) }}
 {% endif %}
 
-{% include '@ezdesign/content/tab/url/modal_add_custom_url.html.twig' with {'form': form_custom_url_add, 'parent_name': parent_name} only %}
+{% if can_edit_custom_url %}
+    {% include '@ezdesign/content/tab/url/modal_add_custom_url.html.twig' with {
+        'form': form_custom_url_add,
+        'parent_name': parent_name
+    } only %}
+{% endif %}
 
 {% macro table_header_tools(form_custom_url_remove, can_edit_custom_url) %}
     {% if can_edit_custom_url %}
-        <button class="btn btn-primary ez-btn--prevented" data-toggle="modal" data-target="#ez-modal--custom-url-alias" title="{{ 'tab.urls.action.add'|trans|desc('Add Custom URL') }}">
+        <button
+            class="btn btn-primary ez-btn--prevented"
+            data-toggle="modal"
+            data-target="#ez-modal--custom-url-alias"
+            title="{{ 'tab.urls.action.add'|trans|desc('Add Custom URL') }}">
             <svg class="ez-icon ez-icon-create">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
             </svg>
         </button>
 
         {% set modal_data_target = 'delete-custom-url-modal' %}
-        <button id="delete-custom-urls" type="button" class="btn btn-danger" disabled data-toggle="modal"
-                data-target="#{{ modal_data_target }}" title="{{ 'tab.urls.action.delete'|trans|desc('Delete Custom URL') }}">
+        <button
+            id="delete-custom-urls"
+            type="button"
+            class="btn btn-danger"
+            disabled
+            data-toggle="modal"
+            data-target="#{{ modal_data_target }}"
+            title="{{ 'tab.urls.action.delete'|trans|desc('Delete Custom URL') }}">
             <svg class="ez-icon ez-icon-trash">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
             </svg>
