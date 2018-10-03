@@ -1,7 +1,7 @@
 .ez-field-edit--ezauthor {
     .ez-data-source__author {
         background-color: $ez-ground-base-medium;
-        padding: 1rem 1rem 1.25rem 1rem;
+        padding: calculateRem(16px) calculateRem(16px) calculateRem(20px) calculateRem(16px);
 
         &.form-row {
             align-items: flex-end;
@@ -19,14 +19,14 @@
         align-items: center;
 
         button {
-            margin: 0 .35rem;
-            height: 2.5rem;
-            width: 2.5rem;
-            padding-top: .25rem;
+            margin: 0 calculateRem(6px);
+            height: calculateRem(40px);
+            width: calculateRem(40px);
+            padding-top: calculateRem(4px);
 
             .ez-icon {
-                width: 1.5rem;
-                height: 1.5rem;
+                width: calculateRem(24px);
+                height: calculateRem(24px);
             }
         }
     }
@@ -34,7 +34,7 @@
     &.is-invalid {
         .ez-data-source__field {
             &.is-invalid {
-                color: $ez-color-danger;
+                color: $ez-color-warning-dark;
             }
         }
 
@@ -49,17 +49,17 @@
 
             &.is-invalid {
                 &:before {
-                    content : '!';
+                    content: '!';
                     position: absolute;
                     top: 0;
-                    left: -20px;
-                    width: 20px;
-                    background: red;
-                    color: white;
+                    left: calculateRem(-20px);
+                    width: calculateRem(20px);
+                    background: $ez-color-warning-dark;
+                    color: $ez-white;
                     text-align: center;
-                    font-size: 1.5rem;
-                    border-top-left-radius: 5px;
-                    border-bottom-left-radius: 5px;
+                    font-size: calculateRem(24px);
+                    border-top-left-radius: calculateRem(5px);
+                    border-bottom-left-radius: calculateRem(5px);
                 }
             }
         }

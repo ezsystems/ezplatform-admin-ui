@@ -46,6 +46,11 @@
         <target state="new">The password fields must match.</target>
         <note>key: ezplatform.reset_user_password.passwords_must_match</note>
       </trans-unit>
+      <trans-unit id="dcdb0ac04fad96ebe26ca71df1c731e6228ff14f" resname="ezplatform.trash.have_used_assets">
+        <source>Selected Location have assets that can't be removed.</source>
+        <target state="new">Selected Location have assets that can't be removed.</target>
+        <note>key: ezplatform.trash.have_used_assets</note>
+      </trans-unit>
       <trans-unit id="cf558f546b83d94f1272929f81c64bd33d2997bc" resname="js.error.address_not_found">
         <source>Provided address does not exist</source>
         <target state="new">Provided address does not exist</target>

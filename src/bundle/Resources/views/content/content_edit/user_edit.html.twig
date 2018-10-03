@@ -18,6 +18,9 @@
             {{ user.versionInfo.contentInfo.publishedDate|localizeddate('medium', 'medium', app.request.locale, ez_user_settings['timezone']) }} /
             {{ 'content_id'|trans({'%contentId%': user.id})|desc('Content ID: %contentId%') }}{% if user.versionInfo.contentInfo.mainLocationId %}, {{ 'location_id'|trans({'%locationId%': user.versionInfo.contentInfo.mainLocationId})|desc('Location ID: %locationId%') }}{% endif %}
         </div>
+        <div class="ez-content-item__errors-wrapper" hidden>
+            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Looks like something went wrong. Please check for required fields or errors and correct them') }}
+        </div>
         {# @todo remove if statement once getDescription() bug is resolved in kernel #}
         {% if contentType.descriptions is not empty %}
             <div class="small text-muted">{{ contentType.description }}</div>

@@ -15,6 +15,9 @@
         <div class="small">
             {{ contentType.name }} / {{ 'group_id'|trans({'%groupId%': parentGroup.id})|desc('Group ID: %groupId%') }}
         </div>
+        <div class="ez-content-item__errors-wrapper" hidden>
+            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Looks like something went wrong. Please check for required fields or errors and correct them') }}
+        </div>
         {# @todo remove if statement once getDescription() bug is resolved in kernel #}
         {% if contentType.descriptions is not empty %}
             <div class="small text-muted">{{ contentType.description }}</div>
