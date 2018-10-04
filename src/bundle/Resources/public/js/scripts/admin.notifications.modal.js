@@ -40,7 +40,8 @@
     const getNotificationsStatus = () => {
         const requestOptions = {
             headers: {
-                'X-CSRF-Token': token
+                'X-CSRF-Token': token,
+                'X-Requested-With' : 'XMLHttpRequest'
             },
             mode: 'cors',
             credentials: 'same-origin'
