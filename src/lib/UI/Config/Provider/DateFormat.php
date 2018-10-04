@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
 
-use DateTime;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 
 /**
@@ -23,6 +22,9 @@ class DateFormat implements ProviderInterface
      */
     public function getConfig()
     {
-        return DateTime::RFC2822;
+        return [
+            'full' => 'M j, Y g:i A',
+            'short' => 'd.m.Y g:i A',
+        ];
     }
 }
