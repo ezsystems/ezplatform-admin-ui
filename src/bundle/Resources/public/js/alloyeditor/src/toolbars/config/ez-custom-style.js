@@ -47,8 +47,10 @@ export default class EzCustomStyleConfig extends EzConfigBase {
             nativeEditor.isSelectionEmpty() &&
             path &&
             path.contains(function(el) {
+                const ezElement = el.getAttribute('data-ezelement');
+
                 return (
-                    (el.getAttribute('data-ezelement') === 'eztemplate' || el.getAttribute('data-ezelement') === 'eztemplateinline') &&
+                    (ezElement === 'eztemplate' || ezElement === 'eztemplateinline') &&
                     el.getAttribute('data-eztype') === 'style'
                 );
             })
