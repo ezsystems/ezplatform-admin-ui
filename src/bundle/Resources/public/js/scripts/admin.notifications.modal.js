@@ -58,6 +58,9 @@
         const request = new Request(notificationsStatusLink, {
             mode: 'cors',
             credentials: 'same-origin',
+            headers: {
+                'X-Requested-With' : 'XMLHttpRequest'
+            },
         });
 
         fetch(request)
