@@ -48,8 +48,8 @@ export default class EzCustomStyleConfig extends EzConfigBase {
             path &&
             path.contains(function(el) {
                 return (
-                    el.hasAttribute('data-ezelement') &&
-                    (el.getAttribute('data-ezelement') === 'ezstyle' || el.getAttribute('data-ezelement') === 'ezstyleinline')
+                    (el.getAttribute('data-ezelement') === 'eztemplate' || el.getAttribute('data-ezelement') === 'eztemplateinline') &&
+                    el.getAttribute('data-eztype') === 'style'
                 );
             })
         );

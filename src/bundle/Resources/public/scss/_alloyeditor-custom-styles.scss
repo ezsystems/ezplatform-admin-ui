@@ -2,8 +2,7 @@
 .ae-editable {
     div[class^='ezstyle-'],
     div[class*=' ezstyle-'],
-    div[data-ezelement='ezstyleinline'],
-    div[data-ezelement='ezstyle'] {
+    div[data-ezelement='eztemplate'][data-eztype='style'] {
         margin-top: 0;
         margin-bottom: 1rem;
         padding: 0.5rem;
@@ -15,8 +14,7 @@
 
     span[class^='ezstyle-'],
     span[class*=' style-'],
-    span[data-ezelement='ezstyleinline'],
-    span[data-ezelement='ezstyle'] {
+    span[data-ezelement='eztemplateinline'][data-eztype='style'] {
         background-color: #e5e3e3;
         padding: 0 0.25rem;
         font-family: courier, monospace;
