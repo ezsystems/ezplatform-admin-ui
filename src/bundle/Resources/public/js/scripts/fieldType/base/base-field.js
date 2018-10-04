@@ -24,7 +24,7 @@
          */
         attachEvent(config) {
             const container = this.getFieldTypeContainer(doc);
-            const elements = config.element || container.querySelectorAll(config.selector);
+            const elements = config.elements || container.querySelectorAll(config.selector);
 
             elements.forEach(this.attachEventToElement.bind(this, config));
         }
