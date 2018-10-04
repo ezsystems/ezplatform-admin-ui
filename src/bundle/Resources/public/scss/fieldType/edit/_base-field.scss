@@ -20,22 +20,7 @@
         }
 
         .ez-field-edit__data {
-            position: relative;
-
-            &:before {
-                content: '!';
-                position: absolute;
-                top: 0;
-                left: calculateRem(-20px);
-                width: calculateRem(20px);
-
-                background: $ez-color-warning-dark;
-                color: $ez-white;
-                text-align: center;
-                font-size: calculateRem(24px);
-                border-top-left-radius: calculateRem(5px);
-                border-bottom-left-radius: calculateRem(5px);
-            }
+            @include exclamation-mark-error();
         }
     }
 

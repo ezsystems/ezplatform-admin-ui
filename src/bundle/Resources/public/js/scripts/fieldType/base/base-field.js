@@ -16,29 +16,34 @@
         }
 
         /**
-         * Attaches event to given selector
+         * Attaches event to elements found with a selector provided by field config
          *
          * @method attachEvent
-         * @param {String} eventName
-         * @param {String} selector
-         * @param {Function} validateField
+         * @param {Object} config
          * @memberof BaseFieldValidator
          */
         attachEvent(config) {
             const container = this.getFieldTypeContainer(doc);
+            const elements = config.elements || container.querySelectorAll(config.selector);
 
-            container.querySelectorAll(config.selector).forEach((item) => {
-                const isValueValidator = typeof config.isValueValidator !== 'undefined' ? config.isValueValidator : true;
+            elements.forEach(this.attachEventToElement.bind(this, config));
+        }
 
-                this.fieldsToValidate.push({
-                    item,
-                    isValueValidator,
-                    callback: config.validateField,
-                });
+        /**
+         * Attaches event to elements found with a selector provided by field config
+         *
+         * @method attachEventToElement
+         * @param {Object} config
+         * @param {HTMLElement} item
+         * @memberof BaseFieldValidator
+         */
+        attachEventToElement(config, item) {
+            const isValueValidator = typeof config.isValueValidator !== 'undefined' ? config.isValueValidator : true;
 
-                item.addEventListener(config.eventName, config.validateField, false);
-                item.addEventListener('checkIsValid', this.isValid, false);
-            });
+            this.fieldsToValidate.push({ item, isValueValidator, callback: config.validateField });
+
+            item.addEventListener(config.eventName, config.validateField, false);
+            item.addEventListener('checkIsValid', this.isValid, false);
         }
 
         /**
@@ -156,9 +161,11 @@
             existingErrorNodes.forEach((el) => el.remove());
 
             if (validationResult.isError) {
-                const errorNode = this.createErrorNode(validationResult.errorMessage);
+                nodes.forEach((el) => {
+                    const errorNode = this.createErrorNode(validationResult.errorMessage);
 
-                nodes.forEach((el) => el.append(errorNode));
+                    el.append(errorNode);
+                });
             }
         }
 
@@ -234,12 +241,7 @@
 
             this.fieldsToValidate.forEach((field) => {
                 if (field.isValueValidator) {
-                    results.push(
-                        field.callback({
-                            target: field.item,
-                            currentTarget: field.item,
-                        })
-                    );
+                    results.push(field.callback({ target: field.item, currentTarget: field.item }));
                 }
             });
 
