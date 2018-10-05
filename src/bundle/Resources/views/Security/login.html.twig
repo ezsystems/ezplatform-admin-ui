@@ -4,7 +4,7 @@
     <form action="{{ path( 'login_check' ) }}" method="post" role="form">
         <fieldset>
             {% if error %}
-                <span>{{ error.message }}</span>
+                <span>{{ error.message|trans }}</span>
             {% endif %}
             <div class="form-group{% if error %} has-error{% endif %}">
                 <label class="ez-login__form-label" for="username">{{ 'authentication.username'|trans|desc('Username') }}:</label>
