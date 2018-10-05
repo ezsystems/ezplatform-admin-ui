@@ -13,7 +13,6 @@ form:not(.form-inline) {
         &:not(.ez-data-source__label) {
             @include label-required();
         }
-
     }
 
     .col-form-legend {
@@ -47,7 +46,7 @@ form:not(.form-inline) {
     .col-form-label,
     .form-control,
     .ez-field-edit__label {
-        margin-right: .5rem;
+        margin-right: 0.5rem;
     }
 }
 
@@ -56,22 +55,6 @@ form:not(.form-inline) {
         display: flex;
         flex-flow: row wrap;
         justify-content: flex-start;
-    }
-}
-
-.form-check {
-    margin-bottom: 0;
-
-    &-label {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0;
-    }
-
-    &-input {
-        position: initial;
-        margin-bottom: .25rem;
-        margin-right: .5rem;
     }
 }
 
@@ -90,7 +73,7 @@ form:not(.form-inline) {
             position: relative;
 
             &:before {
-                content : '!';
+                content: '!';
                 position: absolute;
                 top: 0;
                 left: -20px;
