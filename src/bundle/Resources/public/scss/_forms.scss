@@ -61,18 +61,12 @@ form:not(.form-inline) {
 
 .form-check {
     margin-bottom: 0;
+}
 
-    &-label {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0;
-    }
-
-    &-input {
-        position: initial;
-        margin-bottom: .25rem;
-        margin-right: .5rem;
-    }
+.form-check-input {
+    position: initial;
+    margin-bottom: .25rem;
+    margin-right: .5rem;
 }
 
 .ez-field {
