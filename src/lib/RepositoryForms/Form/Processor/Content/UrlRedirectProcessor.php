@@ -8,10 +8,8 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content;
 
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\URLAliasService;
-use eZ\Publish\API\Repository\Values\Content\URLAlias;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 use EzSystems\RepositoryForms\Event\FormActionEvent;
@@ -117,34 +115,22 @@ class UrlRedirectProcessor implements EventSubscriberInterface
             return;
         }
 
-        /* If target URL was set to something else than Location, do nothing */
-        try {
-            $targetUrlAlias = $this->urlAliasService->lookup(
-                $response->getTargetUrl(),
-                null,
-                true
-            );
-        } catch (InvalidArgumentException | NotFoundException $e) {
-            $event->setResponse(new RedirectResponse($this->router->generate(
+        $location = $event->getOption('referrerLocation');
+
+        $targetUrl = $location instanceof Location
+            ? $this->router->generate(
+                '_ezpublishLocation',
+                [
+                    'locationId' => $location->getContentInfo()->mainLocationId,
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            )
+            : $this->router->generate(
                 'ezplatform.dashboard',
                 [],
                 UrlGeneratorInterface::ABSOLUTE_URL
-            )));
+            );
 
-            return;
-        }
-
-        if ($targetUrlAlias->type !== URLAlias::LOCATION) {
-            $event->setResponse(new RedirectResponse($targetUrlAlias->destination));
-
-            return;
-        }
-
-        $response = new RedirectResponse($this->router->generate(
-            '_ezpublishLocation',
-            ['locationId' => $targetUrlAlias->destination],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        ));
-        $event->setResponse($response);
+        $event->setResponse(new RedirectResponse($targetUrl));
     }
 }
