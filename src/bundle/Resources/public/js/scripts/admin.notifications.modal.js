@@ -1,5 +1,6 @@
 (function(global, doc, eZ, React, ReactDOM, Translator) {
     let currentPageLink = null;
+    let getNotificationsStatusErrorShowed = false;
     const SELECTOR_MODAL_ITEM = '.ez-notifications-modal__item';
     const SELECTOR_MODAL_RESULTS = '.ez-notifications-modal__results';
     const SELECTOR_MODAL_TITLE = '.modal-title';
@@ -10,9 +11,8 @@
     const CLASS_MODAL_LOADING = 'ez-notifications-modal--loading';
     const INTERVAL = 30000;
     const modal = doc.querySelector('.ez-notifications-modal');
-    const showErrorNotification = eZ.helpers.notification.showErrorNotification;
-    const getJsonFromResponse = eZ.helpers.request.getJsonFromResponse;
-    const getTextFromResponse = eZ.helpers.request.getTextFromResponse;
+    const { showErrorNotification, showWarningNotification } = eZ.helpers.notification;
+    const { getJsonFromResponse, getTextFromResponse } = eZ.helpers.request;
     const markAsRead = (notification, response) => {
         if (response.status === 'success') {
             notification.classList.add('ez-notifications-modal__item--read');
@@ -65,8 +65,28 @@
             .then((notificationsInfo) => {
                 setPendingNotificationCount(notificationsInfo);
                 updateModalTitleTotalInfo(notificationsInfo.total);
+                getNotificationsStatusErrorShowed = false;
             })
-            .catch(console.error);
+            .catch(onGetNotificationsStatusFailure);
+    };
+
+    /**
+     * Handle a failure while getting notifications status
+     *
+     * @method onGetNotificationsStatusFailure
+     */
+    const onGetNotificationsStatusFailure = (error) => {
+        const message = Translator.trans(
+            /* @Desc("Cannot update notifications count") */ 'notifications.modal.message.error',
+            { error: error.message },
+            'notifications'
+        );
+
+        if (!getNotificationsStatusErrorShowed) {
+            showWarningNotification(message);
+        }
+
+        getNotificationsStatusErrorShowed = true;
     };
     const updateModalTitleTotalInfo = (notificationsCount) => {
         const modalTitle = modal.querySelector(SELECTOR_MODAL_TITLE);
