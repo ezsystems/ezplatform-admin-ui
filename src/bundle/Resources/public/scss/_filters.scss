@@ -66,12 +66,12 @@
 
     &:before {
         border-color: $ez-color-secondary transparent;
-        top: calculateRem(-10px);
+        top: calculateRem(-11px);
     }
 
     &:after {
         border-color: $ez-ground-base-light transparent;
-        top: calculateRem(-9px);
+        top: calculateRem(-10px);
     }
 
     &__btns {
