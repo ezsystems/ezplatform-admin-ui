@@ -157,7 +157,11 @@ class PlatformElementFactory extends ElementFactory
             case LanguagePicker::ELEMENT_NAME:
                 return new LanguagePicker($context);
             case DateAndTimePopup::ELEMENT_NAME:
-                return new DateAndTimePopup($context);
+                if (!array_key_exists(0, $parameters)) {
+                    return new DateAndTimePopup($context);
+                }
+
+                return new DateAndTimePopup($context, $parameters[0]);
             case ContentTypePicker::ELEMENT_NAME:
                 return new ContentTypePicker($context);
             case UniversalDiscoveryWidget::ELEMENT_NAME:
