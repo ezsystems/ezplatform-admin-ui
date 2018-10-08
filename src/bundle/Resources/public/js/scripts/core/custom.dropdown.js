@@ -81,7 +81,11 @@
                     .querySelector(SELECTOR_SELECTION_INFO)
                     .insertAdjacentHTML('beforeend', this[createSelectedItem](value, element.innerHTML));
             } else {
-                this.container.querySelector(`${SELECTOR_SELECTION_INFO} [data-value="${value}"]`).remove();
+                const valueNode = this.container.querySelector(`${SELECTOR_SELECTION_INFO} [data-value="${value}"]`);
+
+                if (valueNode) {
+                    valueNode.remove();
+                }
             }
 
             if (this[canSelectOnlyOne] && !selected && this.hasDefaultSelection) {
