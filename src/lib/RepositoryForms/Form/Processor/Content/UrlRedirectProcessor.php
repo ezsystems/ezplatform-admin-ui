@@ -8,15 +8,14 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content;
 
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\URLAliasService;
-use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 use EzSystems\RepositoryForms\Event\FormActionEvent;
 use EzSystems\RepositoryForms\Event\RepositoryFormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class UrlRedirectProcessor implements EventSubscriberInterface
@@ -30,6 +29,9 @@ class UrlRedirectProcessor implements EventSubscriberInterface
     /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess */
     private $siteaccess;
 
+    /** @var \eZ\Publish\API\Repository\LocationService */
+    private $locationService;
+
     /** @var array */
     private $siteaccessGroups;
 
@@ -37,17 +39,20 @@ class UrlRedirectProcessor implements EventSubscriberInterface
      * @param \Symfony\Component\Routing\RouterInterface $router
      * @param \eZ\Publish\API\Repository\URLAliasService $urlAliasService
      * @param \eZ\Publish\Core\MVC\Symfony\SiteAccess $siteaccess
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param array $siteaccessGroups
      */
     public function __construct(
         RouterInterface $router,
         URLAliasService $urlAliasService,
         SiteAccess $siteaccess,
+        LocationService $locationService,
         array $siteaccessGroups
     ) {
         $this->router = $router;
         $this->urlAliasService = $urlAliasService;
         $this->siteaccess = $siteaccess;
+        $this->locationService = $locationService;
         $this->siteaccessGroups = $siteaccessGroups;
     }
 
@@ -66,6 +71,8 @@ class UrlRedirectProcessor implements EventSubscriberInterface
      * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
      *
      * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function processRedirectAfterPublish(FormActionEvent $event): void
     {
@@ -73,18 +80,19 @@ class UrlRedirectProcessor implements EventSubscriberInterface
             return;
         }
 
-        $this->resolveAdminSiteaccessRedirect($event);
+        $this->resolveNonAdminSiteaccessRedirect($event);
     }
 
     /**
      * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
      *
      * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function processRedirectAfterCancel(FormActionEvent $event): void
     {
-        $this->resolveAdminSiteaccessRedirect($event);
+        $this->resolveNonAdminSiteaccessRedirect($event);
     }
 
     /**
@@ -101,10 +109,12 @@ class UrlRedirectProcessor implements EventSubscriberInterface
      * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
      *
      * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
-    private function resolveAdminSiteaccessRedirect(FormActionEvent $event): void
+    private function resolveNonAdminSiteaccessRedirect(FormActionEvent $event): void
     {
-        if (!$this->isAdminSiteaccess()) {
+        if ($this->isAdminSiteaccess()) {
             return;
         }
 
@@ -115,22 +125,14 @@ class UrlRedirectProcessor implements EventSubscriberInterface
             return;
         }
 
-        $location = $event->getOption('referrerLocation');
+        $params = $this->router->match($response->getTargetUrl());
 
-        $targetUrl = $location instanceof Location
-            ? $this->router->generate(
-                '_ezpublishLocation',
-                [
-                    'locationId' => $location->id,
-                ],
-                UrlGeneratorInterface::ABSOLUTE_URL
-            )
-            : $this->router->generate(
-                'ezplatform.dashboard',
-                [],
-                UrlGeneratorInterface::ABSOLUTE_URL
-            );
+        if (!in_array('locationId', $params)) {
+            return;
+        }
 
-        $event->setResponse(new RedirectResponse($targetUrl));
+        $location = $this->locationService->loadLocation($params['locationId']);
+
+        $event->setResponse(new RedirectResponse($this->urlAliasService->reverseLookup($location)->path));
     }
 }
