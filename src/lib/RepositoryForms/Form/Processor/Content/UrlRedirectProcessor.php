@@ -8,51 +8,36 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content;
 
-use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\API\Repository\URLAliasService;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 use EzSystems\RepositoryForms\Event\FormActionEvent;
 use EzSystems\RepositoryForms\Event\RepositoryFormEvents;
+use EzSystems\RepositoryForms\Form\Processor\SystemUrlRedirectProcessor;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\RouterInterface;
 
 class UrlRedirectProcessor implements EventSubscriberInterface
 {
-    /** @var \Symfony\Component\Routing\RouterInterface */
-    private $router;
-
-    /** @var \eZ\Publish\API\Repository\URLAliasService */
-    private $urlAliasService;
-
     /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess */
     private $siteaccess;
 
-    /** @var \eZ\Publish\API\Repository\LocationService */
-    private $locationService;
+    /** @var \EzSystems\RepositoryForms\Form\Processor\SystemUrlRedirectProcessor */
+    private $systemUrlRedirectProcessor;
 
     /** @var array */
     private $siteaccessGroups;
 
     /**
-     * @param \Symfony\Component\Routing\RouterInterface $router
-     * @param \eZ\Publish\API\Repository\URLAliasService $urlAliasService
      * @param \eZ\Publish\Core\MVC\Symfony\SiteAccess $siteaccess
-     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \EzSystems\RepositoryForms\Form\Processor\SystemUrlRedirectProcessor $systemUrlRedirectProcessor
      * @param array $siteaccessGroups
      */
     public function __construct(
-        RouterInterface $router,
-        URLAliasService $urlAliasService,
         SiteAccess $siteaccess,
-        LocationService $locationService,
+        SystemUrlRedirectProcessor $systemUrlRedirectProcessor,
         array $siteaccessGroups
     ) {
-        $this->router = $router;
-        $this->urlAliasService = $urlAliasService;
         $this->siteaccess = $siteaccess;
-        $this->locationService = $locationService;
+        $this->systemUrlRedirectProcessor = $systemUrlRedirectProcessor;
         $this->siteaccessGroups = $siteaccessGroups;
     }
 
@@ -80,7 +65,11 @@ class UrlRedirectProcessor implements EventSubscriberInterface
             return;
         }
 
-        $this->resolveNonAdminSiteaccessRedirect($event);
+        if ($this->isAdminSiteaccess()) {
+            return;
+        }
+
+        $this->systemUrlRedirectProcessor->processRedirectAfterPublish($event);
     }
 
     /**
@@ -92,7 +81,11 @@ class UrlRedirectProcessor implements EventSubscriberInterface
      */
     public function processRedirectAfterCancel(FormActionEvent $event): void
     {
-        $this->resolveNonAdminSiteaccessRedirect($event);
+        if ($this->isAdminSiteaccess()) {
+            return;
+        }
+
+        $this->systemUrlRedirectProcessor->processRedirectAfterCancel($event);
     }
 
     /**
@@ -103,36 +96,5 @@ class UrlRedirectProcessor implements EventSubscriberInterface
     protected function isAdminSiteaccess(): bool
     {
         return (new IsAdmin($this->siteaccessGroups))->isSatisfiedBy($this->siteaccess);
-    }
-
-    /**
-     * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
-     *
-     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
-    private function resolveNonAdminSiteaccessRedirect(FormActionEvent $event): void
-    {
-        if ($this->isAdminSiteaccess()) {
-            return;
-        }
-
-        /** @var \Symfony\Component\HttpFoundation\RedirectResponse $response */
-        $response = $event->getResponse();
-
-        if (!$response instanceof RedirectResponse) {
-            return;
-        }
-
-        $params = $this->router->match($response->getTargetUrl());
-
-        if (!in_array('locationId', $params)) {
-            return;
-        }
-
-        $location = $this->locationService->loadLocation($params['locationId']);
-
-        $event->setResponse(new RedirectResponse($this->urlAliasService->reverseLookup($location)->path));
     }
 }
