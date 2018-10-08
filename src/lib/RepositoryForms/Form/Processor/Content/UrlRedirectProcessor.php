@@ -121,7 +121,7 @@ class UrlRedirectProcessor implements EventSubscriberInterface
             ? $this->router->generate(
                 '_ezpublishLocation',
                 [
-                    'locationId' => $location->getContentInfo()->mainLocationId,
+                    'locationId' => $location->id,
                 ],
                 UrlGeneratorInterface::ABSOLUTE_URL
             )
