@@ -25,7 +25,13 @@
                         {%- endblock content -%}
                     </div>
                     <div class="ez-login__footer">
-                        <span>eZ Platform ©1999-{{ "now"|date("Y") }} <a href="http://ez.no">eZ Systems AS</a> and others.</span>
+                        <span>{{ 'base.footer_copyright'|trans({
+                                '%ez_link_open%': '<a href="http://ez.no">',
+                                '%ez_link_close%': '</a>',
+                                '%current_year%': "now"|date("Y")
+                            })
+                            |desc('eZ Platform ©1999-%current_year% %ez_link_open%eZ Systems AS%ez_link_close% and others.')|raw }}
+                        </span>
                     </div>
                 </div>
             </div>
