@@ -186,6 +186,11 @@
         <target state="new">Paragraph</target>
         <note>key: toolbar_config_base.paragraph_label</note>
       </trans-unit>
+      <trans-unit id="d21ab2c3773d0f5d2e35790b90ac7de1c2bd9b83" resname="toolbar_config_base.formatted_label">
+        <source>Formatted</source>
+        <target state="new">Formatted</target>
+        <note>key: toolbar_config_base.formatted_label</note>
+      </trans-unit>
       <trans-unit id="f5aa82a917683c8bcd6a800a75a086822a209f77" resname="unordered_list_btn.label">
         <source>List</source>
         <target state="new">List</target>

@@ -140,6 +140,7 @@
                         new window.eZ.ezAlloyEditor.ezLinkConfig(),
                         new window.eZ.ezAlloyEditor.ezTextConfig({ customStyles: customStylesConfigurations }),
                         new window.eZ.ezAlloyEditor.ezParagraphConfig({ customStyles: customStylesConfigurations }),
+                        new window.eZ.ezAlloyEditor.ezFormattedConfig({ customStyles: customStylesConfigurations }),
                         new window.eZ.ezAlloyEditor.ezCustomStyleConfig({ customStyles: customStylesConfigurations }),
                         new window.eZ.ezAlloyEditor.ezHeadingConfig({ customStyles: customStylesConfigurations }),
                         new window.eZ.ezAlloyEditor.ezTableConfig(),
