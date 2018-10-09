@@ -4,11 +4,12 @@ export default class EzFormattedConfig extends EzConfigBase {
     constructor(config) {
         super(config);
 
-        this.name = 'paragraph';
+        this.name = 'formatted';
         this.buttons = [
             'ezmoveup',
             'ezmovedown',
             this.getStyles(config.customStyles),
+            // NOTE: alignment currently not supported on <pre> so skipping buttons for that
             'ezblockremove',
         ];
     }
