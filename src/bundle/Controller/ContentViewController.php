@@ -13,6 +13,9 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\VersionInfo;
+use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
@@ -31,6 +34,7 @@ use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Form;
 
 class ContentViewController extends Controller
 {
@@ -248,17 +252,21 @@ class ContentViewController extends Controller
             $trashWithAssetType = $this->formFactory->trashLocationWithAsset(
                 new LocationTrashWithAssetData($location)
             );
+            $contentEditType = $this->createContentEditForm($content->contentInfo, $versionInfo, null, $location);
 
             $view->addParameters([
                 'form_location_trash_with_single_asset' => $trashWithAssetType->createView(),
+                'form_content_edit' => $contentEditType->createView(),
             ]);
         } elseif ($contentHaveAssetRelation->isSatisfiedBy($content)) {
             $locationTrashType = $this->formFactory->trashLocation(
                 new LocationTrashData($location)
             );
+            $contentEditType = $this->createContentEditForm($content->contentInfo, $versionInfo, null, $location);
 
             $view->addParameters([
                 'form_location_trash_with_asset' => $locationTrashType->createView(),
+                'form_content_edit' => $contentEditType->createView(),
             ]);
         } elseif ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
             $userDeleteType = $this->formFactory->deleteUser(
@@ -276,15 +284,32 @@ class ContentViewController extends Controller
             $locationTrashType = $this->formFactory->trashLocation(
                 new LocationTrashData($location)
             );
-            $contentEditType = $this->formFactory->contentEdit(
-                new ContentEditData($content->contentInfo, $versionInfo, null, $location)
-            );
+            $contentEditType = $this->createContentEditForm($content->contentInfo, $versionInfo, null, $location);
 
             $view->addParameters([
                 'form_location_trash' => $locationTrashType->createView(),
                 'form_content_edit' => $contentEditType->createView(),
             ]);
         }
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo|null $versionInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
+     *
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData
+     */
+    private function createContentEditForm(
+        ?ContentInfo $contentInfo = null,
+        ?VersionInfo $versionInfo = null,
+        ?Language $language = null,
+        ?Location $location = null
+    ): Form {
+        return $this->formFactory->contentEdit(
+            new ContentEditData($contentInfo, $versionInfo, $language, $location)
+        );
     }
 
     /**
