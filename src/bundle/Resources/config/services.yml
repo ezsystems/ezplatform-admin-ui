@@ -17,6 +17,7 @@ imports:
     - { resource: services/views.yml }
     - { resource: services/translation.yml }
     - { resource: services/user_settings.yml }
+    - { resource: services/rest.yml }
 
 services:
     _defaults:
