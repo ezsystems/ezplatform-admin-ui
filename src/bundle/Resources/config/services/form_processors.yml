@@ -19,5 +19,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content\UrlRedirectProcessor:
         public: true
+        decorates: EzSystems\RepositoryForms\Form\Processor\SystemUrlRedirectProcessor
         arguments:
             $siteaccessGroups: '%ezpublish.siteaccess.groups%'
+            $systemUrlRedirectProcessor: '@EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content\UrlRedirectProcessor.inner'
