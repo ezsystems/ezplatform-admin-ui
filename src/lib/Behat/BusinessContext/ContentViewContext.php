@@ -31,8 +31,8 @@ class ContentViewContext extends BusinessContext
     }
 
     /**
-     * @given I start editing the content
-     * @Given I start editing the content in :language language
+     * @Given I start editing the current content
+     * @Given I start editing the current content in :language language
      */
     public function startEditingContent(string $language = null): void
     {
