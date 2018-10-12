@@ -3,6 +3,8 @@
 {% trans_default_domain 'content_type' %}
 {% form_theme form '@ezdesign/form_fields.html.twig' %}
 
+{% block body_class %}ez-admin-edit{% endblock %}
+
 {% block breadcrumbs_admin %}
     {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
@@ -28,15 +30,15 @@
                 {{ 'content_type.view.edit.global_properties'|trans|desc('Global properties') }}
             </div>
             <div class="card-body">
-                {{ form_row(form.name) }}
-                {{ form_row(form.identifier) }}
-                {{ form_row(form.description) }}
-                {{ form_row(form.nameSchema) }}
-                {{ form_row(form.urlAliasSchema) }}
-                {{ form_row(form.isContainer, {'label_attr': {'class': 'checkbox-inline'}}) }}
-                {{ form_row(form.defaultSortField) }}
-                {{ form_row(form.defaultSortOrder) }}
-                {{ form_row(form.defaultAlwaysAvailable, {'label_attr': {'class': 'checkbox-inline'}}) }}
+                {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.description, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.nameSchema, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.urlAliasSchema, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.isContainer, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
+                {{ form_row(form.defaultSortField, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.defaultSortOrder, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.defaultAlwaysAvailable, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
             </div>
         </div>
     </section>
@@ -62,10 +64,11 @@
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
                     </button>
-
-                    {% include '@ezdesign/admin/content_type/delete_confirmation_modal.html.twig' with {'form': form} %}
                 </div>
             </div>
+
+            {% include '@ezdesign/admin/content_type/delete_confirmation_modal.html.twig' with {'form': form} %}
+            
             <div class="card-body">
                 {% set language_code = content_type.mainLanguageCode %}
                 {% for field_definition in form.fieldDefinitionsData %}
@@ -88,14 +91,14 @@
                         </div>
 
                         <div class="ez-card__body">
-                            {{ form_row(field_definition.name) }}
-                            {{ form_row(field_definition.identifier) }}
-                            {{ form_row(field_definition.position) }}
-                            {{ form_row(field_definition.description) }}
-                            {{ form_row(field_definition.isRequired, {'label_attr': {'class': 'checkbox-inline'}}) }}
-                            {{ form_row(field_definition.isSearchable, {'label_attr': {'class': 'checkbox-inline'}}) }}
-                            {{ form_row(field_definition.isTranslatable, {'label_attr': {'class': 'checkbox-inline'}}) }}
-                            {{ form_row(field_definition.fieldGroup) }}
+                            {{ form_row(field_definition.name, {'label_attr': {'class': 'ez-label'}}) }}
+                            {{ form_row(field_definition.identifier, {'label_attr': {'class': 'ez-label'}}) }}
+                            {{ form_row(field_definition.position, {'label_attr': {'class': 'ez-label'}}) }}
+                            {{ form_row(field_definition.description, {'label_attr': {'class': 'ez-label'}}) }}
+                            {{ form_row(field_definition.isRequired, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
+                            {{ form_row(field_definition.isSearchable, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
+                            {{ form_row(field_definition.isTranslatable, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
+                            {{ form_row(field_definition.fieldGroup, {'label_attr': {'class': 'ez-label'}}) }}
 
                             {# Field type specific fields below #}
                             {{ ez_render_fielddefinition_edit(value, {

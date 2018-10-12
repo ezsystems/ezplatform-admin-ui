@@ -12,7 +12,7 @@ use PHPUnit\Framework\Assert;
 class EmailAddress extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
-    public const ELEMENT_NAME = 'E-mail address';
+    public const ELEMENT_NAME = 'Email address';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {

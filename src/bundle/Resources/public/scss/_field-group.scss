@@ -50,4 +50,16 @@
             border-radius: 0 0 5px 5px;
         }
     }
+
+    .ez-field-preview--ezobjectrelationlist {
+        .table {
+            margin-bottom: 0;
+        }
+    }
+
+    .ez-content-field-value {
+        .ezcountry-field {
+            margin-bottom: 0;
+        }
+    }
 }

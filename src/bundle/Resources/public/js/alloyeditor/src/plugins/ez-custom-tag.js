@@ -28,7 +28,8 @@
                 upcast: (element) => {
                     return (
                         element.name === 'div' &&
-                        element.attributes['data-ezelement'] === 'eztemplate'
+                        element.attributes['data-ezelement'] === 'eztemplate' &&
+                        !element.attributes['data-eztype']
                     );
                 },
 

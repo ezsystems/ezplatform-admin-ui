@@ -164,7 +164,7 @@
     }
 
     .flatpickr-input {
-        &.is-invalid {
+        &.is-invalid.form-control[readonly] {
             background: $ez-color-warning-pale;
         }
     }
@@ -211,5 +211,25 @@
             border: 1px solid $ez-color-danger;
             background: $ez-color-warning-pale;
         }
+    }
+}
+
+@mixin exclamation-mark-error {
+    position: relative;
+
+    &:before {
+        content: '!';
+        position: absolute;
+        top: 0;
+        left: calculateRem(-20px);
+        background: $ez-color-warning-dark;
+        color: $ez-white;
+        text-align: center;
+        font-size: calculateRem(24px);
+        border-top-left-radius: calculateRem(5px);
+        border-bottom-left-radius: calculateRem(5px);
+        width: calculateRem(20px);
+        height: calculateRem(36px);
+        line-height: calculateRem(36px);
     }
 }

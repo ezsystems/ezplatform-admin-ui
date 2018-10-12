@@ -109,17 +109,26 @@
     }
 }
 
+.ez-modal--trash-with-asset {
+    .modal-footer {
+        .btn-secondary {
+            background-color: $ez-color-base-medium;
+            border-color: $ez-color-base-medium;
+
+            &:hover {
+                background-color: $ez-color-base-medium-hover;
+                border-color: $ez-color-base-medium-hover;
+            }
+        }
+    }
+}
+
 .ez-content-view,
 .ez-trash-list-view {
     .ez-modal--send-to-trash {
         .modal-footer {
             .form-check-inline {
                 margin-right: 0;
-
-                .btn {
-                    font-size: 1rem;
-                    padding-bottom: .5rem;
-                }
 
                 .btn-danger {
                     margin-right: 0;
@@ -136,4 +145,24 @@
 
 .ez-btn--cotf-create {
     display: flex;
+}
+
+.ez-search-view {
+    .input-group-btn {
+        display: flex;
+
+        .ez-btn--search,
+        .ez-btn--filter {
+            display: flex;
+            align-items: center;
+
+            .ez-icon {
+                margin-right: calculateRem(4px);
+            }
+        }
+
+        .ez-btn--search {
+            border-radius: 0 calculateRem(4px) calculateRem(4px) 0;
+        }
+    }
 }

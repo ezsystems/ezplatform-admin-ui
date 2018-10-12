@@ -31,6 +31,9 @@
                 {{ 'location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
             {% endif %}
         </div>
+        <div class="ez-content-item__errors-wrapper" hidden>
+            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Looks like something went wrong. Please check for required fields or errors and correct them') }}
+        </div>
         {# @todo remove if statement once getDescription() bug is resolved in kernel #}
         {% if contentType.descriptions is not empty %}
             <div class="small text-muted">{{ contentType.description }}</div>
@@ -39,7 +42,7 @@
 {% endblock %}
 
 {% block form_fields %}
-    <section class="container mt-4 px-5">
+    <section class="container mt-4 px-5 mb-5">
         <div class="card ez-card">
             <div class="card-body">
                 {{ parent() }}

@@ -56,6 +56,11 @@
         <target state="new">Notifications</target>
         <note>key: notifications</note>
       </trans-unit>
+      <trans-unit id="79036b8a9fecbed5d0c14a94c5639d611c6ab6d1" resname="notifications.modal.message.error">
+        <source>Cannot update notifications count</source>
+        <target state="new">Cannot update notifications count</target>
+        <note>key: notifications.modal.message.error</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

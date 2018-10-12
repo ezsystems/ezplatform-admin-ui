@@ -2,8 +2,9 @@
 
 {% block ezobjectrelation_base_widget %}
     {% set limit = limit|default(0) %}
-    {% set default_location = default_location|default(0) %}
+    {% set default_location = default_location|default(1) %}
     {% set has_relations = relations|length > 0 %}
+    {% set allowed_content_types = form.parent.vars.value.fieldDefinition.fieldSettings.selectionContentTypes %}
     <div class="ez-relations__wrapper" {% if not has_relations %}hidden="true"{% endif %}>
         <table class="table ez-relations__table">
             <thead>
@@ -17,9 +18,17 @@
                 <th class="ez-relations__table-actions">
                     <button
                         {% if limit == 1 %}
-                            data-udw-config="{{ ez_udw_config('single', {}) }}"
+                            data-udw-config="{{ ez_udw_config('single', {
+                                'type': 'object_relation',
+                                'starting_location_id' : default_location,
+                                'allowed_content_types': allowed_content_types
+                            }) }}"
                         {% else %}
-                            data-udw-config="{{ ez_udw_config('multiple', {}) }}"
+                            data-udw-config="{{ ez_udw_config('multiple', {
+                                'type': 'object_relation',
+                                'starting_location_id' : default_location,
+                                'allowed_content_types': allowed_content_types
+                            }) }}"
                         {% endif %}
                         type="button"
                         class="ez-relations__table-action--create btn btn-primary"
@@ -65,9 +74,17 @@
         </p>
         <button
                 {% if limit == 1 %}
-                    data-udw-config="{{ ez_udw_config('single', {}) }}"
+                    data-udw-config="{{ ez_udw_config('single', {
+                        'type': 'object_relation',
+                        'starting_location_id' : default_location,
+                        'allowed_content_types': allowed_content_types
+                    }) }}"
                 {% else %}
-                    data-udw-config="{{ ez_udw_config('multiple', {}) }}"
+                    data-udw-config="{{ ez_udw_config('multiple', {
+                        'type': 'object_relation',
+                        'starting_location_id' : default_location,
+                        'allowed_content_types': allowed_content_types
+                    }) }}"
                 {% endif %}
                 class="ez-relations__cta-btn btn btn-primary"
                 type="button">

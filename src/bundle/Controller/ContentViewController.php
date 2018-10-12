@@ -9,9 +9,13 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\BookmarkService;
+use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\VersionInfo;
+use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
@@ -20,13 +24,17 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashWithAssetData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
+use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveUniqueRelation;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Form;
 
 class ContentViewController extends Controller
 {
@@ -69,6 +77,9 @@ class ContentViewController extends Controller
     /** @var int */
     private $defaultCustomUrlPaginationLimit;
 
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
@@ -77,6 +88,7 @@ class ContentViewController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier $subitemsContentViewParameterSupplier
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\BookmarkService $bookmarkService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param int $defaultDraftPaginationLimit
      * @param array $siteAccessLanguages
      * @param int $defaultRolePaginationLimit
@@ -92,6 +104,7 @@ class ContentViewController extends Controller
         SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier,
         UserService $userService,
         BookmarkService $bookmarkService,
+        ContentService $contentService,
         int $defaultDraftPaginationLimit,
         array $siteAccessLanguages,
         int $defaultRolePaginationLimit,
@@ -112,6 +125,7 @@ class ContentViewController extends Controller
         $this->defaultPolicyPaginationLimit = $defaultPolicyPaginationLimit;
         $this->defaultSystemUrlPaginationLimit = $defaultSystemUrlPaginationLimit;
         $this->defaultCustomUrlPaginationLimit = $defaultCustomUrlPaginationLimit;
+        $this->contentService = $contentService;
     }
 
     /**
@@ -230,7 +244,31 @@ class ContentViewController extends Controller
             'form_location_copy_subtree' => $locationCopySubtreeType->createView(),
         ]);
 
-        if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
+        $contentHaveAssetRelation = new ContentHaveAssetRelation($this->contentService);
+        if ($contentHaveAssetRelation
+            ->and(new ContentHaveUniqueRelation($this->contentService))
+            ->isSatisfiedBy($content)
+        ) {
+            $trashWithAssetType = $this->formFactory->trashLocationWithAsset(
+                new LocationTrashWithAssetData($location)
+            );
+            $contentEditType = $this->createContentEditForm($content->contentInfo, $versionInfo, null, $location);
+
+            $view->addParameters([
+                'form_location_trash_with_single_asset' => $trashWithAssetType->createView(),
+                'form_content_edit' => $contentEditType->createView(),
+            ]);
+        } elseif ($contentHaveAssetRelation->isSatisfiedBy($content)) {
+            $locationTrashType = $this->formFactory->trashLocation(
+                new LocationTrashData($location)
+            );
+            $contentEditType = $this->createContentEditForm($content->contentInfo, $versionInfo, null, $location);
+
+            $view->addParameters([
+                'form_location_trash_with_asset' => $locationTrashType->createView(),
+                'form_content_edit' => $contentEditType->createView(),
+            ]);
+        } elseif ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
             $userDeleteType = $this->formFactory->deleteUser(
                 new UserDeleteData($content->contentInfo)
             );
@@ -246,15 +284,32 @@ class ContentViewController extends Controller
             $locationTrashType = $this->formFactory->trashLocation(
                 new LocationTrashData($location)
             );
-            $contentEditType = $this->formFactory->contentEdit(
-                new ContentEditData($content->contentInfo, $versionInfo, null, $location)
-            );
+            $contentEditType = $this->createContentEditForm($content->contentInfo, $versionInfo, null, $location);
 
             $view->addParameters([
                 'form_location_trash' => $locationTrashType->createView(),
                 'form_content_edit' => $contentEditType->createView(),
             ]);
         }
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo|null $versionInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
+     *
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData
+     */
+    private function createContentEditForm(
+        ?ContentInfo $contentInfo = null,
+        ?VersionInfo $versionInfo = null,
+        ?Language $language = null,
+        ?Location $location = null
+    ): Form {
+        return $this->formFactory->contentEdit(
+            new ContentEditData($contentInfo, $versionInfo, $language, $location)
+        );
     }
 
     /**

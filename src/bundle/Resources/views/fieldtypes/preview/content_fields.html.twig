@@ -68,9 +68,9 @@
 {% spaceless %}
     {% if not ez_is_field_empty( content, field ) %}
         {% if fieldSettings.useSeconds %}
-            {% set field_value = field.value.value|localizeddate( 'short', 'medium', parameters.locale ) %}
+            {% set field_value = field.value.value|localizeddate('short', 'medium', null, ez_user_settings['timezone']) %}
         {% else %}
-            {% set field_value = field.value.value|localizeddate( 'short', 'short', parameters.locale ) %}
+            {% set field_value = field.value.value|localizeddate('short', 'short', null, ez_user_settings['timezone']) %}
         {% endif %}
         {{ block( 'simple_block_field' ) }}
     {% endif %}
@@ -186,7 +186,7 @@
             <td>{{ field.value.login }}</td>
         </tr>
         <tr>
-            <td class="ez-user__type">{{ 'ezuser.email'|trans|desc('E-mail') }}:</td>
+            <td class="ez-user__type">{{ 'ezuser.email'|trans|desc('Email') }}:</td>
             <td><a href="mailto:{{ field.value.email|escape( 'url' ) }}">{{ field.value.email }}</a></td>
         </tr>
         <tr>
@@ -201,7 +201,7 @@
 {% block ezbinaryfile_field %}
 {% spaceless %}
     {% if not ez_is_field_empty( content, field ) %}
-        {% set route_reference = ez_route( 'ez_content_download', { 'content': content, 'fieldIdentifier': field.fieldDefIdentifier } ) %}
+        {% set route_reference = ez_route( 'ez_content_download', { 'content': content, 'fieldIdentifier': field.fieldDefIdentifier, 'inLanguage': content.prioritizedFieldLanguageCode } ) %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezbinaryfile')|trim}) %}
         <div {{ block( 'field_attributes' ) }}>
             <svg class="ez-icon ez-icon--file">

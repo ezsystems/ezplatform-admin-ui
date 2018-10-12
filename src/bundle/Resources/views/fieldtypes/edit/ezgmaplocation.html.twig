@@ -10,7 +10,7 @@
     {{ form_row(form.longitude) }}
     <div class="ez-data-source__field ez-data-source__field--address">
         <div class="ez-data-source__label-wrapper">
-            {{ form_label(form.address) }}
+            {{ form_label(form.address, form.address.vars.label, {'label_attr': {'class': 'ez-data-source__label'}}) }}
         </div>
         <div class="ez-data-source__input-wrapper">
             {{ form_widget(form.address, {'attr': {'class': 'ez-data-source__input'}}) }}

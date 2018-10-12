@@ -6,6 +6,7 @@
     transform-origin: top center;
     transition: all 0.2s $ez-admin-transition;
     flex-wrap: wrap;
+    position: relative;
 
     &--collapsed {
         transform: scaleY(0);
@@ -17,6 +18,11 @@
 
         &-label {
             margin-bottom: 0;
+            font-weight: 700;
+
+            &--date-range {
+                flex-basis: 45%;
+            }
         }
 
         &--creator {
@@ -44,6 +50,28 @@
                 }
             }
         }
+    }
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        left: 93.75%;
+        border-style: solid;
+        border-width: 0 calculateRem(10px) calculateRem(10px);
+        display: block;
+        width: 0;
+        z-index: 1;
+    }
+
+    &:before {
+        border-color: $ez-color-secondary transparent;
+        top: calculateRem(-11px);
+    }
+
+    &:after {
+        border-color: $ez-ground-base-light transparent;
+        top: calculateRem(-10px);
     }
 
     &__btns {

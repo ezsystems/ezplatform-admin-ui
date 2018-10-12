@@ -1,6 +1,6 @@
 .ez-field-edit--ezimage {
     .ez-field-edit-preview {
-        padding: 1.25rem 0 1.25rem 1.25rem;
+        padding: 1.25rem 0 .75rem 1.25rem;
 
         &__media {
             max-width: 100%;
@@ -13,6 +13,10 @@
             color: $ez-color-base-light;
             font-size: .75rem;
             padding-top: .5rem;
+        }
+
+        .ez-field-edit-preview__image-alt {
+            margin-top: .5rem;
         }
     }
 

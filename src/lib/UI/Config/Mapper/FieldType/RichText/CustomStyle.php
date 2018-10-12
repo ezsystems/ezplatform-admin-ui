@@ -61,6 +61,7 @@ class CustomStyle
             $customStyleConfiguration = $this->customStylesConfiguration[$styleName];
             $config[$styleName]['inline'] = $customStyleConfiguration['inline'];
             $config[$styleName]['label'] = $this->translator->trans(
+                /** @Ignore */
                 sprintf('ezrichtext.custom_styles.%s.label', $styleName),
                 [],
                 $this->translationDomain

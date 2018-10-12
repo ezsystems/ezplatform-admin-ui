@@ -41,6 +41,11 @@
         <target state="new">Editing - %contentName% in %languageName% based on %baseLanguageName%</target>
         <note>key: editing_in_language_based_on</note>
       </trans-unit>
+      <trans-unit id="669edeb37bec7cf4ec99288b90b02ba65e84b4cf" resname="errors.in.the.form">
+        <source>Looks like something went wrong. Please check for required fields or errors and correct them</source>
+        <target state="new">Looks like something went wrong. Please check for required fields or errors and correct them</target>
+        <note>key: errors.in.the.form</note>
+      </trans-unit>
       <trans-unit id="009667fab56f0bec66634f009a75ffd9425f2987" resname="fieldtype.translation_is_disabled">
         <source>Translation for %fieldName% is disabled</source>
         <target state="new">Translation for %fieldName% is disabled</target>

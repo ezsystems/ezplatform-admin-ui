@@ -16,11 +16,12 @@ class DateAndTimePopup extends Element
 
     private const DATETIME_FORMAT = 'm/d/Y, g:i:s a';
 
-    public function __construct(UtilityContext $context)
+    public function __construct(UtilityContext $context, bool $isInline = false)
     {
         parent::__construct($context);
+        $calendarSelector = $isInline ? '.flatpickr-calendar.inline' : '.flatpickr-calendar.open';
         $this->fields = [
-            'openedCalendar' => '.flatpickr-calendar.open',
+            'openedCalendar' => $calendarSelector,
             'pickerDaySelector' => '.flatpickr-day:not(.prevMonthDay):not(.nextMonthDay)',
             'pickerDayValue' => 'aria-label',
             'hourSelector' => '.flatpickr-hour',

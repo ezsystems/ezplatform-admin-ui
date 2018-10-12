@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\Helper;
 
 use EzSystems\EzPlatformPageBuilder\Tests\Behat\Environment\EnterpriseEnvironmentConstants;
 use Tests\AppBundle\Behat\PlatformDemoEnvironmentConstants;
+use Tests\AppBundle\Behat\EnterpriseDemoEnvironmentConstants;
 
 class EzEnvironmentConstants
 {

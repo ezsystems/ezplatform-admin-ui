@@ -94,6 +94,18 @@
             {%  if form_user_delete is defined %}
                 {% include '@ezdesign/content/modal_user_delete.html.twig' with {'form': form_user_delete} only %}
             {% endif %}
+            {%  if form_location_trash_with_asset is defined %}
+                {% include '@ezdesign/content/modal_location_trash_with_asset.html.twig' with {
+                    'form': form_location_trash_with_asset
+                } only %}
+            {% endif %}
+            {%  if form_location_trash_with_single_asset is defined %}
+                {% include '@ezdesign/content/modal_location_trash_with_single_asset.html.twig' with {
+                    'form': form_location_trash_with_single_asset,
+                    'content_name': content.name,
+                    'content_type': contentType.name
+                } only %}
+            {% endif %}
             {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}
             {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}
             {{ form(form_location_copy_subtree, {'action': path('ezplatform.location.copy_subtree')}) }}

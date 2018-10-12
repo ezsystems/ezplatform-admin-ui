@@ -26,8 +26,8 @@
     <section class="container mt-4 px-5">
         <div class="card ez-card">
             <div class="card-body">
-                {{ form_row(form.name) }}
-                {{ form_row(form.identifier) }}
+                {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}}) }}
             </div>
         </div>
     </section>

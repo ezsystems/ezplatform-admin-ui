@@ -17,6 +17,7 @@
         .ez-modal-body__main,
         .ez-modal-body__explanation {
             margin-bottom: 0;
+            color: $ez-black;
         }
     }
 
@@ -111,6 +112,7 @@
     
     .modal-footer  {
         border-top: none;
+        justify-content: center;
     }
 }
 
@@ -145,5 +147,52 @@
         .ez-table__draft-conflict {
             margin-bottom: 0;
         }
+    }
+}
+
+.ez-modal--trash-with-asset {
+    .modal-dialog {
+        max-width: calculateRem(800px);
+    }
+
+    .modal-header {
+        background: $ez-color-base-pale;
+        border-bottom: none;
+
+        .modal-title {
+            font-size: calculateRem(24px);
+        }
+
+        .close {
+            margin-top: calculateRem(-9px);
+        }
+    }
+
+    .modal-body {
+        padding: calculateRem(32px);
+        background-color: $ez-ground-base-medium;
+        border-radius: 0 0 calculateRem(4px) calculateRem(4px);
+
+        .ez-modal-body__main {
+            margin-bottom: calculateRem(24px);
+
+            .ez-modal-body__main-content {
+                margin-bottom: 0;
+            }
+        }
+
+        .ez-table-header,
+        .ez-table__draft-conflict {
+            margin-bottom: 0;
+        }
+
+        .form-check {
+            margin-bottom: 0;
+            margin-left: calculateRem(50px);
+        }
+    }
+
+    .modal-footer  {
+        justify-content: center;
     }
 }

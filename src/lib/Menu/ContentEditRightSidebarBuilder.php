@@ -99,7 +99,7 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
 
         $canPublish = $this->permissionResolver->canUser('content', 'publish', $content);
         $canEdit = $this->permissionResolver->canUser('content', 'edit', $content);
-        $canDelete = $this->permissionResolver->canUser('content', 'remove', $content);
+        $canDelete = $this->permissionResolver->canUser('content', 'versionremove', $content);
 
         $publishAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,

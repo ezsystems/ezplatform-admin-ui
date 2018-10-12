@@ -45,7 +45,7 @@
                 <td><a href="{{ package.homepage }}" target="_blank">{{ package.name }}</a></td>
             {% endif %}
             <td>{{ package.version }} {{ package.stability }}
-                <span>({{ package.dateTime|localizeddate( 'short', 'short', app.request.locale ) }}
+                <span>({{ package.dateTime|localizeddate('medium', 'short', null, ez_user_settings['timezone']) }}
                     , {{ package.reference | slice(0, 5) }})
                 </span>
             </td>

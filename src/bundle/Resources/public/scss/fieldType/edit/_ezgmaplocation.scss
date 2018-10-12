@@ -1,6 +1,6 @@
 .ez-field-edit--ezgmaplocation {
     .ez-field-edit__data {
-        padding: 16px;
+        padding: 16px 16px 20px 16px;
         background: $ez-ground-base-medium;
     }
 
@@ -38,16 +38,28 @@
 
         &__locate-me {
             grid-area: side1;
+
+            .form-control-label {
+                font-size:  calculateRem(14px);
+                font-weight: 700;
+                color: $ez-black;
+
+                &:after {
+                    content: ': ';
+                }
+            }
         }
 
         &__field--latitude {
             grid-area: side2;
             @include map-invalid-input();
+            margin-top: .75rem;
         }
 
         &__field--longitude {
             grid-area: side3;
             @include map-invalid-input();
+            margin-top: 0;
         }
     }
 

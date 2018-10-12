@@ -13,7 +13,9 @@
     <table class="ez-field-preview__image-meta">
         <thead>
             <tr>
-                <th>{{ 'ezimageasset.image_file_properties'|trans|desc('Image file properties') }}:</th>
+                <th colspan="2">
+                    {{ 'ezimageasset.image_file_properties'|trans|desc('Image file properties') }}:
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -42,11 +44,13 @@
                 <td>{{ 'ezimageasset.ratio'|trans|desc('Ratio') }}:</td>
                 <td>{{ (field.value.width/field.value.height)|round(2) }}</td>
             </tr>
-
         </tbody>
     </table>
     <div class="ez-field-preview__actions-wrapper">
-        <a class="ez-field-preview__action ez-field-preview__action--preview" href="{{ field.value.uri }}" target="_blank">
+        <a
+            class="ez-field-preview__action ez-field-preview__action--preview"
+            href="{{ field.value.uri }}"
+            target="_blank">
             <svg class="ez-icon ez-icon--medium ez-icon--light">
                 <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab"></use>
             </svg>
