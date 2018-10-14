@@ -26,6 +26,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     const ITEM_CHANGE_PASSWORD = 'user__change_password';
     const ITEM_USER_SETTINGS = 'user__settings';
     const ITEM_BOOKMARK = 'user__bookmark';
+    const ITEM_DRAFTS = 'user__drafts';
     const ITEM_NOTIFICATION = 'menu.notification';
 
     /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
@@ -76,6 +77,11 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_BOOKMARK, ['route' => 'ezplatform.bookmark.list'])
             );
+            $menu->addChild(
+                $this->createMenuItem(self::ITEM_DRAFTS, [
+                    'route' => 'ezplatform.content_draft.list',
+                ])
+            );
             $menu->addChild(self::ITEM_NOTIFICATION, [
                 'attributes' => [
                     'class' => 'ez-user-menu__item--notifications',
@@ -105,6 +111,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             (new Message(self::ITEM_CHANGE_PASSWORD, 'menu'))->setDesc('Change password'),
             (new Message(self::ITEM_USER_SETTINGS, 'menu'))->setDesc('User Settings'),
             (new Message(self::ITEM_BOOKMARK, 'menu'))->setDesc('Bookmarks'),
+            (new Message(self::ITEM_DRAFTS, 'menu'))->setDesc('Drafts'),
             (new Message(self::ITEM_NOTIFICATION, 'notifications'))->setDesc('View Notifications'),
         ];
     }

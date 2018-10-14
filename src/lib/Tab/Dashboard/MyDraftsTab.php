@@ -12,18 +12,20 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\Values\Content\VersionInfo;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
+use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class MyDraftsTab extends AbstractTab implements OrderedTabInterface, ConditionalTabInterface
 {
+    private const PAGINATION_PARAM_NAME = 'mydrafts-page';
+
     /** @var \eZ\Publish\API\Repository\ContentService */
     protected $contentService;
 
@@ -36,6 +38,15 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;
 
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
+    protected $datasetFactory;
+
+    /** @var \Symfony\Component\HttpFoundation\RequestStack */
+    private $requestStack;
+
+    /** @var int */
+    private $defaultPaginationLimit;
+
     /**
      * @param \Twig\Environment $twig
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
@@ -43,6 +54,9 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
+     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+     * @param int $defaultPaginationLimit
      */
     public function __construct(
         Environment $twig,
@@ -50,7 +64,10 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
         ContentService $contentService,
         ContentTypeService $contentTypeService,
         LocationService $locationService,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        DatasetFactory $datasetFactory,
+        RequestStack $requestStack,
+        int $defaultPaginationLimit
     ) {
         parent::__construct($twig, $translator);
 
@@ -58,19 +75,31 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
         $this->contentTypeService = $contentTypeService;
         $this->locationService = $locationService;
         $this->permissionResolver = $permissionResolver;
+        $this->datasetFactory = $datasetFactory;
+        $this->requestStack = $requestStack;
+        $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getIdentifier(): string
     {
         return 'my-drafts';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return /** @Desc("Drafts") */
             $this->translator->trans('tab.name.my_drafts', [], 'dashboard');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getOrder(): int
     {
         return 100;
@@ -99,60 +128,28 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function renderView(array $parameters): string
     {
-        /** @todo Handle pagination */
-        $page = 1;
-        $limit = 10;
-        $drafts = [];
-
-        // if user has no access content/versionread for one of versions, exception is caught and draft array is empty
-        try {
-            $drafts = $this->contentService->loadContentDrafts();
-        } catch (UnauthorizedException $e) {
-        }
-
-        // ContentService::loadContentDrafts returns unsorted list of VersionInfo.
-        // Sort results by modification date, descending.
-        usort($drafts, function (VersionInfo $a, VersionInfo $b) {
-            return $b->modificationDate <=> $a->modificationDate;
-        });
-
-        $pager = new Pagerfanta(
-            new ArrayAdapter($drafts)
+        $currentPage = $this->requestStack->getCurrentRequest()->query->getInt(
+            self::PAGINATION_PARAM_NAME, 1
         );
 
-        $pager->setMaxPerPage($limit);
-        $pager->setCurrentPage($page);
+        $contentDraftsDataset = $this->datasetFactory->contentDrafts();
+        $contentDraftsDataset->load();
 
-        $data = [];
-        /** @var \eZ\Publish\API\Repository\Values\Content\VersionInfo $version */
-        foreach ($pager as $version) {
-            $contentInfo = $version->getContentInfo();
-            $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);
-
-            if (null === $contentInfo->mainLocationId) {
-                $locations = $this->locationService->loadParentLocationsForDraftContent($version);
-                // empty Locations here means Location has been trashed and Draft should be ignored
-                if (empty($locations)) {
-                    continue;
-                }
-            }
-
-            $data[] = [
-                'contentId' => $contentInfo->id,
-                'name' => $version->getName(),
-                'type' => $contentType->getName(),
-                'language' => $version->initialLanguageCode,
-                'version' => $version->versionNo,
-                'modified' => $version->modificationDate,
-            ];
-        }
+        $pagination = new Pagerfanta(
+            new ArrayAdapter($contentDraftsDataset->getContentDrafts())
+        );
+        $pagination->setMaxPerPage($this->defaultPaginationLimit);
+        $pagination->setCurrentPage(min(max($currentPage, 1), $pagination->getNbPages()));
 
         return $this->twig->render('@ezdesign/dashboard/tab/my_drafts.html.twig', [
-            'data' => $data,
+            'data' => $pagination->getCurrentPageResults(),
+            'pager' => $pagination,
+            'pager_options' => [
+                'pageParameter' => '[' . self::PAGINATION_PARAM_NAME . ']',
+            ],
         ]);
     }
 }

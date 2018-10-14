@@ -14,6 +14,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
@@ -78,6 +79,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentEditType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentMainLocationUpdateType;
@@ -1292,5 +1294,20 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationTrashWithAssetType::class);
 
         return $this->formFactory->createNamed($name, LocationTrashWithAssetType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentRemoveData|null $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function removeContentDraft(
+        ContentRemoveData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentRemoveType::class);
+
+        return $this->formFactory->createNamed($name, ContentRemoveType::class, $data);
     }
 }

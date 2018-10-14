@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="f261167093447f7940efd1484b40e362028a728c" resname="drafts.list">
+        <source>Drafts</source>
+        <target state="new">Drafts</target>
+        <note>key: drafts.list</note>
+      </trans-unit>
+      <trans-unit id="7a00fa1045089ab6b05a30314644f3f53477ecbf" resname="drafts.list.action.edit">
+        <source>Edit Draft</source>
+        <target state="new">Edit Draft</target>
+        <note>key: drafts.list.action.edit</note>
+      </trans-unit>
+      <trans-unit id="887b9056de68ebd1c33c43af14093c2cafb38c5d" resname="drafts.list.action.remove">
+        <source>Remove</source>
+        <target state="new">Remove</target>
+        <note>key: drafts.list.action.remove</note>
+      </trans-unit>
+      <trans-unit id="7e9e5a5a2374b6f20dd6ffc35334073627778d62" resname="drafts.list.action.remove.confirmation.text">
+        <source>Are you sure you wont permanently delete the selected draft(s)?</source>
+        <target state="new">Are you sure you wont permanently delete the selected draft(s)?</target>
+        <note>key: drafts.list.action.remove.confirmation.text</note>
+      </trans-unit>
+      <trans-unit id="61be4cf21a9d454b832543ae2ecb5b2b10f94583" resname="drafts.list.action.remove.confirmation.title">
+        <source>Delete selected drafts</source>
+        <target state="new">Delete selected drafts</target>
+        <note>key: drafts.list.action.remove.confirmation.title</note>
+      </trans-unit>
+      <trans-unit id="b62c11ec52c71a7923851340a98932ed8ac8704b" resname="drafts.list.content_type">
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
+        <note>key: drafts.list.content_type</note>
+      </trans-unit>
+      <trans-unit id="1b21c0ebc62c6a9d0c320a08a9ca807231fab739" resname="drafts.list.empty">
+        <source>The draft list is empty. Any Content draft you create will end up here.</source>
+        <target state="new">The draft list is empty. Any Content draft you create will end up here.</target>
+        <note>key: drafts.list.empty</note>
+      </trans-unit>
+      <trans-unit id="3cdd0ca8cb41c22f9120de646cc5734f7cad7ffb" resname="drafts.list.last_saved">
+        <source>Last Saved</source>
+        <target state="new">Last Saved</target>
+        <note>key: drafts.list.last_saved</note>
+      </trans-unit>
+      <trans-unit id="8c65a0cd673fa4c18f7e730f672579ed65debd3c" resname="drafts.list.modified_language">
+        <source>Modified Language</source>
+        <target state="new">Modified Language</target>
+        <note>key: drafts.list.modified_language</note>
+      </trans-unit>
+      <trans-unit id="575dff6addd6d92ef7e8699d89b21cba7915ad7c" resname="drafts.list.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: drafts.list.name</note>
+      </trans-unit>
+      <trans-unit id="7823f25f5779e3071253a6a8296aad7b23d4a241" resname="drafts.list.version">
+        <source>Version</source>
+        <target state="new">Version</target>
+        <note>key: drafts.list.version</note>
+      </trans-unit>
+      <trans-unit id="8db5ed41af83e43b26fd95de8c718eef14b2c239" resname="drafts.table.header">
+        <source>Drafts</source>
+        <target state="new">Drafts</target>
+        <note>key: drafts.table.header</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
