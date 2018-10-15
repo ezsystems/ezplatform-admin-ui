@@ -84,11 +84,9 @@ class AdministrationContext extends BusinessContext
      */
     public function isElementOnTheList(string $listElementName, string $page, ?string $parameter = null): void
     {
-        $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page, $parameter)
-            ->adminList->table->isElementInTable($listElementName);
-
-        if (!$isElementOnTheList) {
-            Assert::fail(sprintf('Element "%s" is not on the %s list.', $listElementName, $page));
+        $pageElement = PageObjectFactory::createPage($this->utilityContext, $page, $parameter);
+        if (!$this->findElementOnTheList($pageElement, $listElementName)) {
+            Assert::fail(sprintf('Element "%s" is on the %s list.', $listElementName, $page));
         }
     }
 
@@ -98,10 +96,8 @@ class AdministrationContext extends BusinessContext
      */
     public function isElementNotOnTheList(string $listElementName, string $page, string $parameter = null): void
     {
-        $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page, $parameter)
-            ->adminList->table->isElementInTable($listElementName);
-
-        if ($isElementOnTheList) {
+        $pageElement = PageObjectFactory::createPage($this->utilityContext, $page, $parameter);
+        if ($this->findElementOnTheList($pageElement, $listElementName)) {
             Assert::fail(sprintf('Element "%s" is on the %s list.', $listElementName, $page));
         }
     }
@@ -165,8 +161,12 @@ class AdministrationContext extends BusinessContext
      */
     public function iGoToListItem(string $itemName, string $itemType, string $itemContainer = null): void
     {
-        PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer)
-            ->adminList->table->clickListElement($itemName);
+        $pageElement = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer);
+        if ($this->findElementOnTheList($pageElement, $itemName)) {
+            $pageElement->adminList->table->clickListElement($itemName);
+        } else {
+            Assert::fail(sprintf('Element %s is not on the list.', $itemName));
+        }
     }
 
     /**
@@ -277,5 +277,25 @@ class AdministrationContext extends BusinessContext
     {
         $pageObject = PageObjectFactory::createPage($this->utilityContext, $itemType, $itemName);
         $pageObject->verifyListIsEmpty($listName);
+    }
+
+    public function findElementOnTheList(Page $pageElement, string $listElementName): bool
+    {
+        $isElementOnTheList = false;
+        while (true) {
+            $isElementOnTheListPage = $pageElement->adminList->table->isElementInTable($listElementName);
+            if ($isElementOnTheListPage) {
+                $isElementOnTheList = $isElementOnTheListPage;
+                break;
+            }
+
+            if ($pageElement->adminList->isPaginationNextButtonActive()) {
+                $pageElement->adminList->clickPaginationNextButton();
+            } else {
+                break;
+            }
+        }
+
+        return $isElementOnTheList;
     }
 }

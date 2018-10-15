@@ -199,8 +199,8 @@ Feature: Object States management
     When  I delete Object State from "Test Object State Group edited2"
         | item                |
         | Test Object State 2 |
-    Then there's no "Test Object State 2" on "Test Object State Group edited2" Object States list
-      And notification that "Object state" "TestObjectStateIdentifier2" is deleted appears
+    Then notification that "Object state" "TestObjectStateIdentifier2" is deleted appears
+      And there's no "Test Object State 2" on "Test Object State Group edited2" Object States list
 
   @javascript @common
   Scenario: Object State Group can be deleted
@@ -208,5 +208,5 @@ Feature: Object States management
     When I delete "Object State Group"
       | item                            |
       | Test Object State Group edited2 |
-    Then there's no "Test Object State Group edited2" on "Object State Groups" list
-      And notification that "Object state type group" "TestObjectStateGroupIdentifier" is deleted appears
+    Then notification that "Object state type group" "TestObjectStateGroupIdentifier" is deleted appears
+      And there's no "Test Object State Group edited2" on "Object State Groups" list

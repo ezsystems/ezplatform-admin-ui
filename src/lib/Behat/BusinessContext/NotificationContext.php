@@ -24,6 +24,7 @@ class NotificationContext extends BusinessContext
         $notification->verifyAlertSuccess();
         $msg = !$itemName ? sprintf('%s %s.', $itemType, $action) : sprintf('%s \'%s\' %s.', $itemType, $itemName, $action);
         Assert::assertEquals($msg, $notification->getMessage());
+        $notification->closeAlert();
     }
 
     /**
@@ -35,6 +36,7 @@ class NotificationContext extends BusinessContext
         $notification->verifyVisibility();
         $notification->verifyAlertSuccess();
         Assert::assertEquals($message, $notification->getMessage());
+        $notification->closeAlert();
     }
 
     /**
@@ -55,5 +57,6 @@ class NotificationContext extends BusinessContext
         $notification->verifyVisibility();
         $notification->verifyAlertFailure();
         Assert::assertContains($message, $notification->getMessage());
+        $notification->closeAlert();
     }
 }
