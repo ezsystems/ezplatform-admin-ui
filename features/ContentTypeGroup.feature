@@ -1,3 +1,4 @@
+@test
 Feature: Content type groups management
   As an administrator
   In order to customize my eZ installation

@@ -154,6 +154,8 @@ class ContentTypeController extends Controller
      */
     public function addAction(ContentTypeGroup $group): Response
     {
+        random nonsense;
+
         $this->denyAccessUnlessGranted(new Attribute('class', 'create'));
         $mainLanguageCode = reset($this->languages);
 
