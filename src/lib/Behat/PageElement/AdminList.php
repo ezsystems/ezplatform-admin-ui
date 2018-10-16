@@ -75,4 +75,21 @@ class AdminList extends Element
     {
         $this->context->findElement($this->fields['paginationNextButton'])->click();
     }
+
+    public function isElementOnTheList(string $listElementName): bool
+    {
+        while (true) {
+            if ($this->table->isElementInTable($listElementName)) {
+                return true;
+            }
+
+            if ($this->isPaginationNextButtonActive()) {
+                $this->clickPaginationNextButton();
+            } else {
+                break;
+            }
+        }
+
+        return false;
+    }
 }
