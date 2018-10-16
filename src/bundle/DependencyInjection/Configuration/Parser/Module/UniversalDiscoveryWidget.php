@@ -34,6 +34,7 @@ class UniversalDiscoveryWidget extends AbstractParser
                     ->end()
                     ->arrayNode('configuration')
                         ->isRequired()
+                        ->useAttributeAsKey('scope_name')
                         ->variablePrototype()
                     ->end()
                 ->end()
