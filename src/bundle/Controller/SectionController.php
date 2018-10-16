@@ -395,6 +395,8 @@ class SectionController extends Controller
      */
     public function createAction(Request $request): Response
     {
+        throw new Exception('Test error');
+
         $this->denyAccessUnlessGranted(new Attribute('section', 'edit'));
         $form = $this->formFactory->createSection(
             new SectionCreateData()
