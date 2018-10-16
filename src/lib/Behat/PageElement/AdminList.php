@@ -33,6 +33,7 @@ class AdminList extends Element
             'plusButton' => '.ez-icon-create',
             'trashButton' => '.ez-icon-trash,button[title^="Delete"]',
             'mainAssignButton' => '.ez-table-header [title^=Assign]',
+            'paginationNextButton' => '.ez-pagination a.page-link[rel="next"]',
         ];
         $this->listContainer = $this->context->findElement($containerLocator);
         $this->table = ElementFactory::createElement($context, $tableName, $containerLocator);
@@ -63,5 +64,32 @@ class AdminList extends Element
         } else {
             $this->table->clickAssignButton($listItemName);
         }
+    }
+
+    public function isPaginationNextButtonActive(): bool
+    {
+        return $this->context->isElementVisible($this->fields['paginationNextButton']);
+    }
+
+    public function clickPaginationNextButton(): void
+    {
+        $this->context->findElement($this->fields['paginationNextButton'])->click();
+    }
+
+    public function isElementOnTheList(string $listElementName): bool
+    {
+        while (true) {
+            if ($this->table->isElementInTable($listElementName)) {
+                return true;
+            }
+
+            if ($this->isPaginationNextButtonActive()) {
+                $this->clickPaginationNextButton();
+            } else {
+                break;
+            }
+        }
+
+        return false;
     }
 }

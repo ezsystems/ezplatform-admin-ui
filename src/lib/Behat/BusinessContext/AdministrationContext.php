@@ -82,13 +82,11 @@ class AdministrationContext extends BusinessContext
      * @Then there's :listElementName on :page list
      * @Then there's :listElementName on :parameter :page list
      */
-    public function isElementOnTheList(string $listElementName, string $page, ?string $parameter = null): void
+    public function verifyElementOnTheList(string $listElementName, string $page, ?string $parameter = null): void
     {
-        $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page, $parameter)
-            ->adminList->table->isElementInTable($listElementName);
-
-        if (!$isElementOnTheList) {
-            Assert::fail(sprintf('Element "%s" is not on the %s list.', $listElementName, $page));
+        $pageElement = PageObjectFactory::createPage($this->utilityContext, $page, $parameter);
+        if (!$pageElement->adminList->isElementOnTheList($listElementName)) {
+            Assert::fail(sprintf('Element "%s" is on the %s list.', $listElementName, $page));
         }
     }
 
@@ -96,12 +94,10 @@ class AdministrationContext extends BusinessContext
      * @Then there's no :listElementName on :page list
      * @Then there's no :listElementName on :parameter :page list
      */
-    public function isElementNotOnTheList(string $listElementName, string $page, string $parameter = null): void
+    public function verifyElementNotOnTheList(string $listElementName, string $page, string $parameter = null): void
     {
-        $isElementOnTheList = PageObjectFactory::createPage($this->utilityContext, $page, $parameter)
-            ->adminList->table->isElementInTable($listElementName);
-
-        if ($isElementOnTheList) {
+        $pageElement = PageObjectFactory::createPage($this->utilityContext, $page, $parameter);
+        if ($pageElement->adminList->isElementOnTheList($listElementName)) {
             Assert::fail(sprintf('Element "%s" is on the %s list.', $listElementName, $page));
         }
     }
@@ -165,8 +161,12 @@ class AdministrationContext extends BusinessContext
      */
     public function iGoToListItem(string $itemName, string $itemType, string $itemContainer = null): void
     {
-        PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer)
-            ->adminList->table->clickListElement($itemName);
+        $pageElement = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer);
+        if ($pageElement->adminList->isElementOnTheList($itemName)) {
+            $pageElement->adminList->table->clickListElement($itemName);
+        } else {
+            Assert::fail(sprintf('Element %s is not on the list.', $itemName));
+        }
     }
 
     /**

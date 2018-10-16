@@ -101,6 +101,6 @@ Feature: Languages management
     When I delete "Language"
       | item           |
       | Edited Deutsch |
-    Then there's no "Edited Deutsch" on "Languages" list
-      And notification that "Language" "Edited Deutsch" is removed appears
+    Then notification that "Language" "Edited Deutsch" is removed appears
+      And there's no "Edited Deutsch" on "Languages" list
 

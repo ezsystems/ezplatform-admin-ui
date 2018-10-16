@@ -195,5 +195,5 @@ Feature: Roles management
     When I delete "Role"
       | item             |
       | Test Role edited |
-    Then there's no "Test Role edited" on "Roles" list
-      And notification that "Role" "Test Role edited" is removed appears
+    Then notification that "Role" "Test Role edited" is removed appears
+      And there's no "Test Role edited" on "Roles" list

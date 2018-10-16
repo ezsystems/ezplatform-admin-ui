@@ -62,8 +62,8 @@ Feature: Content type groups management
     When I delete "Content Type Group"
       | item            |
       | Test Content Type Group edited |
-    Then there's no "Test Content Type Group edited" on "Content Type Groups" list
-      And notification that "Content type group" "Test Content Type Group edited" is deleted appears
+    Then notification that "Content type group" "Test Content Type Group edited" is deleted appears
+      And there's no "Test Content Type Group edited" on "Content Type Groups" list
 
   @javascript @common
   Scenario: Non-empty Content type group cannot be deleted

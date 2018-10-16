@@ -128,8 +128,8 @@ Feature: Sections management
     When I delete "Section"
       | item                 |
       | Test Section edited2 |
-    Then there's no "Test Section edited2" on "Sections" list
-      And notification that "Section" "Test Section edited2" is removed appears
+    Then notification that "Section" "Test Section edited2" is removed appears
+      And there's no "Test Section edited2" on "Sections" list
 
   @javascript @common
   Scenario: Section can be deleted from section details
@@ -142,5 +142,5 @@ Feature: Sections management
       And I delete "Section" from details page
         | item   |
         | Test Section |
-    Then there's no "Test Section" on "Sections" list
-      And notification that "Section" "Test Section" is removed appears
+    Then notification that "Section" "Test Section" is removed appears
+      And there's no "Test Section" on "Sections" list
