@@ -87,5 +87,5 @@ Feature: Content types management
     When I delete "Content Type" from "Content"
       | item                     |
       | Test Content Type edited |
-    Then there's no "Test Content Type edited" on "Content" "Content Type Group" list
-      And notification that "Content type" "Test Content Type edited" is deleted appears
+    Then notification that "Content type" "Test Content Type edited" is deleted appears
+      And there's no "Test Content Type edited" on "Content" "Content Type Group" list
