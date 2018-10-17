@@ -104,15 +104,19 @@ class SectionPage extends Page
 
     public function verifyContentItem(string $name, string $contentType, string $path): void
     {
-        Assert::assertEquals(
-            $contentType,
-            $this->adminLists['Content items']->table->getTableCellValue('Content Type', $name),
-            sprintf('Content item "%s" has wrong "Content Type".', $name)
-        );
-        Assert::assertEquals(
-            $path,
-            $this->adminLists['Content items']->table->getTableCellValue('Path', $name),
-            sprintf('Content item "%s" has wrong "Path".', $name)
-        );
+        if ($this->adminLists['Content items']->isElementOnTheList($name)) {
+            Assert::assertEquals(
+                $contentType,
+                $this->adminLists['Content items']->table->getTableCellValue('Content Type', $name),
+                sprintf('Content item "%s" has wrong "Content Type".', $name)
+            );
+            Assert::assertEquals(
+                $path,
+                $this->adminLists['Content items']->table->getTableCellValue('Path', $name),
+                sprintf('Content item "%s" has wrong "Path".', $name)
+            );
+        } else {
+            Assert::fail(sprintf('There is no "%s" content item on the list.', $name));
+        }
     }
 }
