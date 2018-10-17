@@ -1,15 +1,15 @@
 .ez-icon {
-    width: 2rem;
-    height: 2rem;
+    width: calculateRem(32px);
+    height: calculateRem(32px);
 
     &--small {
-        width: 1rem;
-        height: 1rem;
+        width: calculateRem(16px);
+        height: calculateRem(16px);
     }
 
     &--medium {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: calculateRem(24px);
+        height: calculateRem(24px);
     }
 
     &--light {
@@ -23,8 +23,8 @@
 
 .btn-icon {
     .ez-icon {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: calculateRem(24px);
+        height: calculateRem(24px);
         fill: $ez-color-primary;
 
         &--secondary {
@@ -37,34 +37,38 @@
     .btn-icon {
         .ez-icon {
             fill: $ez-white;
-            width: 1rem;
-            height: 1rem;
+            width: calculateRem(16px);
+            height: calculateRem(16px);
         }
     }
 }
 
 .ez-main-nav {
     .ez-icon {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: calculateRem(24px);
+        height: calculateRem(24px);
     }
 }
 
 .ez-side-menu,
 .ez-context-menu {
+    .ez-icon {
+        fill: $white;
+    }
+
     .ez-sticky-container {
         .ez-icon {
-            width: 1.875rem;
-            height: 1.875rem;
-            margin-bottom: 0.1875rem;
+            width: calculateRem(30px);
+            height: calculateRem(30px);
+            margin-bottom: calculateRem(3px);
         }
     }
 }
 
 .ez-table-header {
     .ez-icon {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: calculateRem(24px);
+        height: calculateRem(24px);
         fill: $white;
     }
 }
@@ -73,8 +77,8 @@
     .form-inline {
         .btn-danger {
             .ez-icon {
-                width: 1.2rem;
-                height: 1.2rem;
+                width: calculateRem(20px);
+                height: calculateRem(20px);
                 fill: $white;
             }
         }
@@ -95,8 +99,8 @@
     }
 
     .ez-icon {
-        width: 1.25rem;
-        height: 1.25rem;
+        width: calculateRem(24px);
+        height: calculateRem(24px);
         fill: $ez-black;
     }
 
@@ -111,8 +115,8 @@
     [data-ezelement='ezembed'] {
         .ez-embed-content {
             .ez-icon {
-                width: 1.5rem;
-                height: 1.5rem;
+                width: calculateRem(24px);
+                height: calculateRem(24px);
                 vertical-align: middle;
             }
         }
@@ -129,8 +133,8 @@
 .ez-field-edit--with-preview {
     .ez-icon {
         fill: $ez-white;
-        height: 1rem;
-        width: 1rem;
+        height: calculateRem(16px);
+        width: calculateRem(16px);
     }
 }
 
@@ -140,8 +144,8 @@
             &__file-icon {
                 .ez-icon {
                     fill: $ez-color-base-dark;
-                    height: 2rem;
-                    width: 2rem;
+                    height: calculateRem(32px);
+                    width: calculateRem(32px);
                 }
             }
         }
@@ -150,8 +154,8 @@
 
 .ez-preview__action {
     .ez-icon {
-        width: 1rem;
-        height: 1rem;
+        width: calculateRem(16px);
+        height: calculateRem(16px);
     }
 
     &.ez-preview__action--selected {
@@ -166,8 +170,8 @@
 .ez-field-edit--eztime {
     .ez-data-source__btn--clear-input {
         .ez-icon {
-            width: 1rem;
-            height: 1rem;
+            width: calculateRem(16px);
+            height: calculateRem(16px);
         }
     }
 }
@@ -176,8 +180,8 @@
     .btn--search-by-address {
         .ez-icon {
             fill: $ez-white;
-            width: 1rem;
-            height: 1rem;
+            width: calculateRem(16px);
+            height: calculateRem(16px);
         }
     }
 }
@@ -187,16 +191,16 @@
     .ez-relations__cta-btn {
         .ez-icon {
             fill: $ez-white;
-            width: 1rem;
-            height: 1rem;
+            width: calculateRem(16px);
+            height: calculateRem(16px);
         }
     }
 
     [class*='ez-relations__table-action--'] {
         .ez-icon {
             fill: $ez-white;
-            width: 1rem;
-            height: 1rem;
+            width: calculateRem(16px);
+            height: calculateRem(16px);
         }
     }
 }

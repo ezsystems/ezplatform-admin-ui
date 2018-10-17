@@ -12,6 +12,17 @@ a {
     transition: color 0.3s $ez-admin-transition;
 }
 
+button {
+    background: none;
+}
+
+img {
+    display: inline-block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+
 .ez-scroll-disabled {
     overflow: hidden;
 }
@@ -30,34 +41,10 @@ a {
     background-color: $ez-ground-base-light;
 }
 
-.ez-side-menu,
-.ez-context-menu {
-    padding-right: 0;
-    padding-left: 0;
-
-    .ez-icon {
-        display: block;
-        margin: 0 auto;
-        fill: $white;
-    }
-}
-
-.ezimage-field img,
-.ezimageasset-field img {
-    display: inline-block;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-}
-
 .btn {
     white-space: normal;
     cursor: pointer;
     transition: opacity 0.3s $ez-admin-transition, background 0.3s $ez-admin-transition;
-}
-
-button {
-    background: none;
 }
 
 .ez-field-edit {
@@ -143,6 +130,10 @@ button {
     position: -webkit-sticky;
     position: sticky;
     top: calculateRem(16px);
+
+    .ez-icon {
+        margin-bottom: calculateRem(3px);
+    }
 }
 
 .ez-dashboard-row {
