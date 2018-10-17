@@ -66,4 +66,24 @@ class SimpleTable extends Table
 
         return $tableHash;
     }
+
+    /**
+     * Check if list contains link element with given name.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function isElementInTable(string $name): bool
+    {
+        $tableHash = $this->getTableHash();
+
+        foreach ($tableHash as $item) {
+            if ($item['Name'] == $name) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
