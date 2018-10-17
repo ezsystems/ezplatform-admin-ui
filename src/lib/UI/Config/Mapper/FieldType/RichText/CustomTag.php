@@ -71,16 +71,17 @@ class CustomTag
 
             $customTagConfiguration = $this->customTagsConfiguration[$tagName];
 
+            $config[$tagName] = [
+                'label' => "ezrichtext.custom_tags.{$tagName}.label",
+                'description' => "ezrichtext.custom_tags.{$tagName}.description",
+            ];
+
             if (!empty($customTagConfiguration['icon'])) {
                 $config[$tagName]['icon'] = $this->packages->getUrl(
                     $customTagConfiguration['icon']
                 );
             }
 
-            $config[$tagName] = [
-                'label' => "ezrichtext.custom_tags.{$tagName}.label",
-                'description' => "ezrichtext.custom_tags.{$tagName}.description",
-            ];
             foreach ($customTagConfiguration['attributes'] as $attributeName => $properties) {
                 $typeMapper = $this->getAttributeTypeMapper(
                     $tagName,
