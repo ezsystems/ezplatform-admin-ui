@@ -34,4 +34,33 @@ class PermissionUtil
 
         return !empty($languages) ? array_unique(array_merge(...$languages)) : $languages;
     }
+
+    /**
+     * This method should only be used for very specific use cases. It should be used in a content cases
+     * where assignment limitations are not relevant.
+     *
+     * @param array $hasAccess
+     *
+     * @return array
+     */
+    public function flattenArrayOfLimitations(array $hasAccess): array
+    {
+        $limitations = [];
+        foreach ($hasAccess as $permissionSet) {
+            if ($permissionSet['limitation'] !== null) {
+                $limitations[] = $permissionSet['limitation'];
+            }
+            /** @var \eZ\Publish\API\Repository\Values\User\Policy $policy */
+            foreach ($permissionSet['policies'] as $policy) {
+                $policyLimitations = $policy->getLimitations();
+                if (!empty($policyLimitations)) {
+                    foreach ($policyLimitations as $policyLimitation) {
+                        $limitations[] = $policyLimitation;
+                    }
+                }
+            }
+        }
+
+        return $limitations;
+    }
 }
