@@ -107,9 +107,14 @@
         <note>key: link_edit_btn.button_row.block.placeholder.text</note>
       </trans-unit>
       <trans-unit id="d9139bdb7978ed01bb6a7fd7f2ba31bfee633de2" resname="link_edit_btn.button_row.link_to">
-        <source>Link to</source>
-        <target state="new">Link to</target>
+        <source>Link to:</source>
+        <target state="new">Link to:</target>
         <note>key: link_edit_btn.button_row.link_to</note>
+      </trans-unit>
+      <trans-unit id="a991483d5f7bd5a316147ce89b1529eab8142921" resname="link_edit_btn.button_row.select">
+        <source>Select:</source>
+        <target state="new">Select:</target>
+        <note>key: link_edit_btn.button_row.select</note>
       </trans-unit>
       <trans-unit id="415a1b131ab0d9c6656a74d93f7f557bb26a184a" resname="link_edit_btn.button_row.select_content">
         <source>Select content</source>
@@ -137,8 +142,8 @@
         <note>key: link_edit_btn.info_row.same_tab</note>
       </trans-unit>
       <trans-unit id="706afc3b545461082f7d1d7c14ef5c2a25b5cc97" resname="link_edit_btn.info_row.title">
-        <source>Title</source>
-        <target state="new">Title</target>
+        <source>Title:</source>
+        <target state="new">Title:</target>
         <note>key: link_edit_btn.info_row.title</note>
       </trans-unit>
       <trans-unit id="a506b0b999be9efcb8217c745cdab751cbb1ac37" resname="link_edit_btn.udw.title">

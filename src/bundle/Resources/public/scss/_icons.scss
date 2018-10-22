@@ -28,7 +28,7 @@
         fill: $ez-color-primary;
 
         &--secondary {
-            fill: $ez-color-secondary
+            fill: $ez-color-secondary;
         }
     }
 }
@@ -56,7 +56,7 @@
         .ez-icon {
             width: 1.875rem;
             height: 1.875rem;
-            margin-bottom: .1875rem;
+            margin-bottom: 0.1875rem;
         }
     }
 }
@@ -93,15 +93,22 @@
             fill: $ez-alloyeditor-color-hover;
         }
     }
+
     .ez-icon {
-        width: 1.5rem;
-        height: 1.5rem;
-        fill: $ez-white;
+        width: 1.25rem;
+        height: 1.25rem;
+        fill: $ez-black;
+    }
+
+    &.ae-button-pressed {
+        .ez-icon {
+            fill: $ez-white;
+        }
     }
 }
 
 .ez-field-edit--ezrichtext {
-    [data-ezelement="ezembed"] {
+    [data-ezelement='ezembed'] {
         .ez-embed-content {
             .ez-icon {
                 width: 1.5rem;
@@ -185,7 +192,7 @@
         }
     }
 
-    [class*="ez-relations__table-action--"] {
+    [class*='ez-relations__table-action--'] {
         .ez-icon {
             fill: $ez-white;
             width: 1rem;
@@ -196,7 +203,7 @@
 
 .ez-btn--select-subtree {
     .ez-icon {
-        margin-right: .5rem;
+        margin-right: 0.5rem;
     }
 }
 

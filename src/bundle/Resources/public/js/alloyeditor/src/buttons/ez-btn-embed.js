@@ -52,11 +52,15 @@ export default class EzBtnEmbed extends EzEmbedDiscoverContentButton {
         const label = Translator.trans(/*@Desc("Embed")*/ 'embed_btn.label', {}, 'alloy_editor');
 
         return (
-            <button className={css} disabled={disabled} onClick={this.chooseContent.bind(this)} tabIndex={this.props.tabIndex}>
+            <button
+                className={css}
+                disabled={disabled}
+                onClick={this.chooseContent.bind(this)}
+                tabIndex={this.props.tabIndex}
+                title={label}>
                 <svg className="ez-icon ez-btn-ae__icon">
                     <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#tag" />
                 </svg>
-                <p className="ez-btn-ae__label">{label}</p>
             </button>
         );
     }

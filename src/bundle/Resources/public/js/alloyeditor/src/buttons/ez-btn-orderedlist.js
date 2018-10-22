@@ -33,11 +33,10 @@ export default class EzBtnOrderedList extends EzButton {
         const css = 'ae-button ez-btn-ae ez-btn-ae--ordered-list ' + this.getStateClasses();
 
         return (
-            <button className={css} onClick={this.addList.bind(this)} tabIndex={this.props.tabIndex}>
+            <button className={css} onClick={this.addList.bind(this)} tabIndex={this.props.tabIndex} title={label}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#list-numbered"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#list-numbered" />
                 </svg>
-                <p className="ez-btn-ae__label">{label}</p>
             </button>
         );
     }
