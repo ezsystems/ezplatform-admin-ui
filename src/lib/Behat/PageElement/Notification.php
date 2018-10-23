@@ -20,10 +20,10 @@ class Notification extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'alert' => '.alert',
-            'successAlert' => '.alert-success',
-            'failureAlert' => '.alert-danger',
-            'closeAlert' => '.alert.show button.close',
+            'alert' => '.ez-notifications-container .alert',
+            'successAlert' => '.ez-notifications-container .alert-success',
+            'failureAlert' => '.ez-notifications-container .alert-danger',
+            'closeAlert' => '.ez-notifications-container .alert.show button.close',
         ];
         $this->checkVisibilityTimeout = 1;
     }
