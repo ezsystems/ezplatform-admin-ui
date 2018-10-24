@@ -60,7 +60,7 @@
                         {% do form_policies_delete.policies.setRendered %}
                     {% endif %}
                 </td>
-                <td class="ez-table__cell">{{ policy.module|capitalize }}</td>
+                <td class="ez-table__cell">{{ ('role.policy.' ~ policy.module)|trans({}, 'forms') }}</td>
                 <td class="ez-table__cell">{{ policy.function|capitalize }}</td>
                 <td class="ez-table__cell">
                     {%- if policy.limitations is not empty -%}

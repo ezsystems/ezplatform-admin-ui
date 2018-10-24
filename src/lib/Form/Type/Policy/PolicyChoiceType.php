@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
 
+use EzSystems\EzPlatformAdminUi\Translation\Extractor\PolicyTranslationExtractor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -28,7 +29,7 @@ class PolicyChoiceType extends AbstractType
      */
     public function __construct(TranslatorInterface $translator, array $policyMap)
     {
-        $this->policyChoices = $this->buildPolicyChoicesFromMap($translator, $policyMap);
+        $this->policyChoices = $this->buildPolicyChoicesFromMap($policyMap);
     }
 
     /**
@@ -83,56 +84,34 @@ class PolicyChoiceType extends AbstractType
 
     /**
      * Returns a usable hash for the policy choice widget.
-     * Key is the humanized "module" name.
-     * Value is a hash with "<module>|<function"> as key and humanized "function" name as value.
+     * Key is the translation key based on "module" name.
+     * Value is a hash with translation key based on "module" and "function as a key and "<module>|<function"> as a value.
      *
-     * @param TranslatorInterface $translator
      * @param array $policyMap
      *
      * @return array
      */
-    private function buildPolicyChoicesFromMap(TranslatorInterface $translator, array $policyMap): array
+    private function buildPolicyChoicesFromMap(array $policyMap): array
     {
-        $allModules = $translator->trans(/** @Desc("All modules") */'role.policy.all_modules', [], 'ezrepoforms_role');
-        $allFunctions = $translator->trans(/** @Desc("All functions") */'role.policy.all_functions', [], 'ezrepoforms_role');
-        $allModulesAndFunctions = $translator->trans(/** @Desc("All modules / All functions") */'role.policy.all_modules_all_functions', [], 'ezrepoforms_role');
-
         $policyChoices = [
-             $allModules => [
-                 $allModulesAndFunctions => '*|*',
+            PolicyTranslationExtractor::MESSAGE_ID_PREFIX . PolicyTranslationExtractor::ALL_MODULES => [
+                PolicyTranslationExtractor::MESSAGE_ID_PREFIX . PolicyTranslationExtractor::ALL_MODULES_ALL_FUNCTIONS => '*|*',
              ],
         ];
 
         foreach ($policyMap as $module => $functionList) {
-            $humanizedModule = $this->humanize($module);
+            $moduleKey = PolicyTranslationExtractor::MESSAGE_ID_PREFIX . $module;
             // For each module, add possibility to grant access to all functions.
-            $policyChoices[$humanizedModule] = [
-                "$humanizedModule / " . $allFunctions => "$module|*",
+            $policyChoices[$moduleKey] = [
+                $moduleKey . '.' . PolicyTranslationExtractor::ALL_FUNCTIONS => "$module|*",
             ];
 
             foreach ($functionList as $function => $limitationList) {
-                $policyChoices[$humanizedModule][$humanizedModule . ' / ' . $this->humanize($function)] = "$module|$function";
+                $moduleFunctionKey = PolicyTranslationExtractor::MESSAGE_ID_PREFIX . "{$module}.{$function}";
+                $policyChoices[$moduleKey][$moduleFunctionKey] = "$module|$function";
             }
         }
 
         return $policyChoices;
-    }
-
-    /**
-     * Makes a technical name human readable.
-     *
-     * Sequences of underscores are replaced by single spaces. The first letter
-     * of the resulting string is capitalized, while all other letters are
-     * turned to lowercase.
-     *
-     * @see \Symfony\Component\Form\FormRenderer::humanize()
-     *
-     * @param string $text the text to humanize
-     *
-     * @return string the humanized text
-     */
-    private function humanize(string $text): string
-    {
-        return ucfirst(trim(strtolower(preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $text))));
     }
 }

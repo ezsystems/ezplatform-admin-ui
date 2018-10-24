@@ -126,7 +126,7 @@ Feature: Roles management
     Given there's "Test Role edited" on "Roles" list
       And I go to "Test Role edited" "Role" page
     When I start creating new "Policy" in "Test Role edited"
-      And I select policy "Class / All functions"
+      And I select policy "Content Type / All functions"
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Role" "Test Role edited" page
       And "Policies" list in "Role" "Test Role edited" is empty
@@ -139,7 +139,7 @@ Feature: Roles management
     When I start creating new "Policy" in "Test Role edited"
       And I select policy "Content / Read"
       And I click on the edit action bar button "Create"
-      And I select options from "Class"
+      And I select options from "Content Type"
         | option  |
         | File |
       And I click on the edit action bar button "Update"
@@ -163,7 +163,7 @@ Feature: Roles management
     Given there's "Test Role edited" on "Roles" list
       And I go to "Test Role edited" "Role" page
     When I start editing "Policy" "Content" from "Test Role edited"
-      And I select options from "Class"
+      And I select options from "Content Type"
         | option  |
         | Article |
         | Folder  |

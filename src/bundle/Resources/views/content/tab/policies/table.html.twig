@@ -26,7 +26,7 @@
                 {%- endif -%}
             </td>
             <td>
-                {{ policy.module|capitalize }}
+                {{ ('role.policy.' ~ policy.module)|trans({}, 'forms') }}
             </td>
             <td>
                 {{ policy.function|capitalize }}
