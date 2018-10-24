@@ -46,11 +46,11 @@
 
     {% if pager.haveToPaginate %}
         <div class="row justify-content-center align-items-center mb-2 mt-2 ez-pagination__spacing">
-                <span class="ez-pagination__text">
-                    {{ 'pagination.viewing'|trans({
-                        '%viewing%': pager.currentPageResults|length,
-                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
-                </span>
+            <span class="ez-pagination__text">
+                {{ 'pagination.viewing'|trans({
+                    '%viewing%': pager.currentPageResults|length,
+                    '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+            </span>
         </div>
         <div class="row justify-content-center align-items-center ez-pagination__btn">
             {{ pagerfanta(pager, 'ez', pager_options|merge({

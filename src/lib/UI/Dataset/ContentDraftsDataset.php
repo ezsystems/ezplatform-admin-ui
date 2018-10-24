@@ -14,6 +14,7 @@ use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\User\User;
+use EzSystems\EzPlatformAdminUi\UI\Value\Content\VersionId;
 
 class ContentDraftsDataset
 {
@@ -109,10 +110,10 @@ class ContentDraftsDataset
         );
 
         return [
-            'id' => implode(':', [
+            'id' => new VersionId(
                 $contentInfo->id,
-                $draft->versionNo,
-            ]),
+                $draft->versionNo
+            ),
             'contentId' => $contentInfo->id,
             'name' => $draft->getName(),
             'type' => $contentType->getName(),

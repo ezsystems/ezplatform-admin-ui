@@ -13,6 +13,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use EzSystems\EzPlatformAdminUi\UI\Value\Content\VersionId;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,8 +50,8 @@ class ContentDraftController extends Controller
         DatasetFactory $datasetFactory,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        int $defaultPaginationLimit)
-    {
+        int $defaultPaginationLimit
+    ) {
         $this->contentService = $contentService;
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
@@ -74,15 +75,15 @@ class ContentDraftController extends Controller
             new ArrayAdapter($contentDraftsDataset->getContentDrafts())
         );
         $pagination->setMaxPerPage($this->defaultPaginationLimit);
-        $pagination->setCurrentPage(min(max($currentPage, 1), $pagination->getNbPages()));
+        $pagination->setCurrentPage(min($currentPage, $pagination->getNbPages()));
 
-        $form_remove = $this->formFactory->removeContentDraft(
+        $removeContentDraftForm = $this->formFactory->removeContentDraft(
             $this->createContentRemoveData($pagination)
         );
 
         return $this->render('@ezdesign/admin/content_draft/list.html.twig', [
             'pager' => $pagination,
-            'form_remove' => $form_remove->createView(),
+            'form_remove' => $removeContentDraftForm->createView(),
         ]);
     }
 
@@ -99,13 +100,14 @@ class ContentDraftController extends Controller
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentRemoveData $data) {
                 foreach (array_keys($data->getVersions()) as $version) {
-                    list($contentId, $versionNo) = explode(':', $version);
+                    $versionId = VersionId::fromString($version);
 
-                    $versionInfo = $this->contentService->loadVersionInfoById(
-                        $contentId, $versionNo
+                    $this->contentService->deleteVersion(
+                        $this->contentService->loadVersionInfoById(
+                            $versionId->getContentId(),
+                            $versionId->getVersionNo()
+                        )
                     );
-
-                    $this->contentService->deleteVersion($versionInfo);
                 }
 
                 return $this->redirectToRoute('ezplatform.content_draft.list');

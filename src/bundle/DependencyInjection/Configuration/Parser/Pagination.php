@@ -89,7 +89,7 @@ class Pagination extends AbstractParser
             'content_policy_limit',
             'notification_limit',
             'user_settings_limit',
-            'my_drafts_limit',
+            'content_draft_limit',
         ];
 
         foreach ($keys as $key) {
