@@ -158,3 +158,7 @@ services:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.user_setting_update.sidebar_right }
+
+    EzSystems\EzPlatformAdminUi\Menu\Admin\ReorderMenuListener:
+        tags:
+        - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: moveAdminToLast, priority: -50 }
