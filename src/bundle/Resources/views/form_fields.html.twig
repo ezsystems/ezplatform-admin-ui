@@ -153,3 +153,14 @@
         {{ block('form_widget') }}
     </div>
 {%- endblock -%}
+
+{%- block richtext_widget -%}
+    {% set attr = attr|merge({ 'hidden': true }) %}
+
+    <div class="ez-data-source">
+        <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+        <div class="ez-data-source__richtext" id="{{ form.vars.id }}__editable"></div>
+        <div class="hidden" data-udw-config-name="richtext_embed" data-udw-config="{{ ez_udw_config('richtext_embed', udw_context) }}"></div>
+        <div class="hidden" data-udw-config-name="richtext_embed_image" data-udw-config="{{ ez_udw_config('richtext_embed_image', udw_context) }}"></div>
+    </div>
+{%- endblock -%}

@@ -78,24 +78,24 @@ export default class EzBtnLinkEdit extends Component {
             const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
             const config = JSON.parse(document.querySelector(`[data-udw-config-name="richtext_embed"]`).dataset.udwConfig);
             const title = Translator.trans(/*@Desc("Select content")*/ 'link_edit_btn.udw.title', {}, 'alloy_editor');
-
-            ReactDOM.render(
-                React.createElement(
-                    eZ.modules.UniversalDiscovery,
-                    Object.assign(
-                        {
-                            onConfirm: this.udwOnConfirm.bind(this, udwContainer),
-                            onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
-                            title,
-                            multiple: false,
-                            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-                            restInfo: { token, siteaccess },
-                        },
-                        config
-                    )
-                ),
-                udwContainer
+            const alloyEditorCallbacks = eZ.ezAlloyEditor.callbacks;
+            const mergedConfig = Object.assign(
+                {
+                    onConfirm: this.udwOnConfirm.bind(this, udwContainer),
+                    onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
+                    title,
+                    multiple: false,
+                    startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                    restInfo: { token, siteaccess },
+                },
+                config
             );
+
+            if (alloyEditorCallbacks && typeof alloyEditorCallbacks.openUdw === 'function') {
+                alloyEditorCallbacks.openUdw(mergedConfig);
+            } else {
+                ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, mergedConfig), udwContainer);
+            }
         };
 
         this.setState(

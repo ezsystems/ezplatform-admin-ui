@@ -34,6 +34,10 @@ class RichTextAllowedLanguages implements EventSubscriberInterface
 
         $context = $event->getContext();
 
+        if (empty($context['languageCode'])) {
+            return;
+        }
+
         $config = $event->getConfig();
         $config['content_on_the_fly']['allowed_languages'] = [$context['languageCode']];
 
