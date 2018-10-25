@@ -22,11 +22,10 @@ export default class EzBtnTable extends Component {
         const css = 'ae-button ez-btn-ae ez-btn-ae--table';
 
         return (
-            <button className={css} onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex}>
+            <button className={css} onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex} title={label}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#table-add"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#table-add" />
                 </svg>
-                <p className="ez-btn-ae__label">{label}</p>
             </button>
         );
     }

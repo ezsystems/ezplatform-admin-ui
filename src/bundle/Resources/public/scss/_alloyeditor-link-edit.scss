@@ -1,96 +1,135 @@
 .ez-ae-edit-link {
-    display: flex;
-    flex-direction: column;
-    padding: .5rem;
+    display: grid;
+    padding: calculateRem(8px);
+    column-gap: calculateRem(16px);
+    grid-template-areas:
+        'udw actions'
+        'info actions';
 
     &__row {
         display: flex;
         align-items: flex-end;
 
-        &:not(:last-child) {
-            margin-bottom: 1rem;
+        &:first-child {
+            margin-bottom: calculateRem(8px);
         }
 
-        &.ez-ae-edit-link__row--actions {
-            justify-content: flex-end;
+        &--udw {
+            grid-area: udw;
+        }
+
+        &--info {
+            grid-area: info;
+        }
+
+        &--actions {
+            grid-area: actions;
+            padding: 0 0 0 calculateRem(14px);
+            border-left: calculateRem(2px) solid $ez-ground-base-dark;
         }
     }
 
-    .ez-ae-edit-link__block {
-        &.ez-ae-edit-link__block--url {
+    &__block {
+        &--udw {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &--url {
             position: relative;
             display: flex;
             flex-direction: column;
             width: 25rem;
         }
 
-        &.ez-ae-edit-link__block--title,
-        &.ez-ae-edit-link__block--target {
+        &--title,
+        &--target {
             display: flex;
             flex-direction: column;
 
             .ez-ae-edit-link__text {
-                margin-bottom: 0.3rem;
+                font-weight: bold;
             }
         }
 
-        &.ez-ae-edit-link__block--title {
-            width: 24rem;
-            margin-right: 1rem;
+        &--title {
+            width: calculateRem(464px);
+            margin-right: calculateRem(16px);
         }
 
-        &.ez-ae-edit-link__block--target {
+        &--target {
             .ez-ae-edit-link__choice {
-                height: 2.25rem;
+                border: calculateRem(2px) solid $ez-color-secondary;
+                padding: calculateRem(2px);
+                border-radius: calculateRem(4px);
 
                 .ez-ae-edit-link__label {
                     margin-bottom: 0;
 
-                    span {
-                        background-color: $ez-color-base-dark;
-                        height: 2.25rem;
-                        padding: .7rem .5rem;
-                        display: block;
-                        color: $ez-black;
+                    &:not(:last-child) {
+                        .ez-btn-ae__icon-wrapper {
+                            margin-right: calculateRem(8px);
+                        }
                     }
 
-                    input:checked + span {
-                        background-color: $ez-color-base-light;
-                        color: $ez-white;
+                    .ez-icon {
+                        fill: $ez-color-secondary;
+                        width: calculateRem(20px);
+                        height: calculateRem(20px);
                     }
 
-                    [type="radio"] {
+                    .ez-btn-ae__icon-wrapper {
+                        padding: calculateRem(4px);
+                        border-radius: calculateRem(4px);
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    input:checked + .ez-btn-ae__icon-wrapper {
+                        background: $ez-color-secondary;
+
+                        .ez-icon {
+                            background-color: $ez-color-secondary;
+                            fill: $ez-white;
+                        }
+                    }
+
+                    [type='radio'] {
                         display: none;
-                    }
-
-                    &.ez-ae-edit-link__label--same-tab {
-                        span {
-                            border-top-left-radius: 5px;
-                            border-bottom-left-radius: 5px;
-                        }
-                    }
-
-                    &.ez-ae-edit-link__label--new-tab {
-                        span {
-                            border-top-right-radius: 5px;
-                            border-bottom-right-radius: 5px;
-                        }
                     }
                 }
             }
         }
 
-        &.ez-ae-edit-link__block--separator {
+        &--separator {
             line-height: 2.25rem;
-            padding: 0 .5rem;
+            padding: 0 0.5rem;
+        }
+
+        &--actions {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 100%;
+
+            .ez-btn-ae {
+                &__icon {
+                    fill: $ez-white;
+                }
+            }
         }
 
         .ez-ae-edit-link__label {
-            margin-bottom: .3rem;
+            margin-bottom: 0.3rem;
+            font-weight: bold;
         }
 
         .ez-ae-edit-link__input {
-            height: 2.25rem;
+            height: calculateRem(36px);
+            border: calculateRem(1px) solid $ez-ground-base-dark;
+            border-radius: calculateRem(4px);
         }
     }
 }

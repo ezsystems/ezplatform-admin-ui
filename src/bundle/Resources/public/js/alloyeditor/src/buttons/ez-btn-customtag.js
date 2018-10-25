@@ -15,21 +15,16 @@ export default class EzBtnCustomTag extends EzWidgetButton {
             const buttonName = `ezBtn${this.customTagName.charAt(0).toUpperCase() + this.customTagName.slice(1)}Update`;
             const ButtonComponent = AlloyEditor[buttonName];
 
-            return <ButtonComponent
-                createNewTag="true"
-                values={this.values}
-                {...this.props}
-            />;
+            return <ButtonComponent createNewTag="true" values={this.values} {...this.props} />;
         }
 
         const css = `ae-button ez-btn-ae ez-btn-ae--${this.customTagName}`;
 
         return (
-            <button className={css} onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex}>
+            <button className={css} onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex} title={this.label}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref={this.icon}></use>
+                    <use xlinkHref={this.icon} />
                 </svg>
-                <p className="ez-btn-ae__label">{this.label}</p>
             </button>
         );
     }

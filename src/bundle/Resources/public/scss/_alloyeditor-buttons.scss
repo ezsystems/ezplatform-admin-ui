@@ -8,13 +8,10 @@
             &.ez-btn-ae {
                 width: auto;
                 height: auto;
-                margin: .3rem .8rem;
-
-                .ez-btn-ae__label {
-                    font-size: .85rem;
-                    margin-bottom: 0;
-                    margin-top: .2rem;
-                }
+                margin: 0.3rem 0.8rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
     }
@@ -24,7 +21,7 @@
             .ez-btn-ae {
                 color: $ez-white;
 
-                &.ez-btn-ae--clear-link {
+                &--clear-link {
                     position: absolute;
                     bottom: 0;
                     right: 0;
@@ -33,19 +30,29 @@
                     display: none;
                 }
 
-                &.ez-btn-ae--remove-link {
-                    margin-right: 1rem;
-                    background-color: $ez-color-base-light;
+                &--remove-link,
+                &--save-link {
+                    border-radius: 50%;
+                    width: calculateRem(40px);
+                    height: calculateRem(40px);
+                    padding: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
 
-                &.ez-btn-ae--udw {
-                    background-color: $ez-color-base-light;
+                &--remove-link {
+                    background-color: $ez-color-base-dark;
+                }
+
+                &--save-link {
+                    background-color: $ez-color-positive;
                 }
             }
 
             &.is-linked {
                 .ez-btn-ae {
-                    &.ez-btn-ae--clear-link {
+                    &--clear-link {
                         display: block;
                     }
                 }

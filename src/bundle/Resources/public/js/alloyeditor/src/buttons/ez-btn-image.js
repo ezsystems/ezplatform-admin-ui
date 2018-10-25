@@ -53,11 +53,15 @@ export default class EzBtnImage extends EzEmbedImageButton {
         const label = Translator.trans(/*@Desc("Image")*/ 'image_btn.label', {}, 'alloy_editor');
 
         return (
-            <button className={css} disabled={disabled} onClick={this.chooseContent.bind(this)} tabIndex={this.props.tabIndex}>
+            <button
+                className={css}
+                disabled={disabled}
+                onClick={this.chooseContent.bind(this)}
+                tabIndex={this.props.tabIndex}
+                title={label}>
                 <svg className="ez-icon ez-btn-ae__icon">
                     <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#image" />
                 </svg>
-                <p className="ez-btn-ae__label">{label}</p>
             </button>
         );
     }

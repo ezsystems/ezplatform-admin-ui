@@ -31,11 +31,10 @@ export default class EzBtnParagraph extends EzButton {
         const css = 'ae-button ez-btn-ae ez-btn-ae--paragraph ' + this.getStateClasses();
 
         return (
-            <button className={css} onClick={this.addParagraph.bind(this)} tabIndex={this.props.tabIndex}>
+            <button className={css} onClick={this.addParagraph.bind(this)} tabIndex={this.props.tabIndex} title={label}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#paragraph"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#paragraph-add" />
                 </svg>
-                <p className="ez-btn-ae__label">{label}</p>
             </button>
         );
     }

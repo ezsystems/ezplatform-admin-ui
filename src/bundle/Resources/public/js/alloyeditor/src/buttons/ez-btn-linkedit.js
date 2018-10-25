@@ -6,14 +6,14 @@ export default class EzBtnLinkEdit extends Component {
     constructor(props) {
         super(props);
 
-        this.state = this.getInitialState()
+        this.state = this.getInitialState();
     }
 
     static get key() {
         return 'ezlinkedit';
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         this.setState(this.getInitialState());
     }
 
@@ -30,11 +30,11 @@ export default class EzBtnLinkEdit extends Component {
      * @method getInitialState
      */
     getInitialState() {
-        const linkUtils = new CKEDITOR.Link(this.props.editor.get('nativeEditor'), {appendProtocol: false});
+        const linkUtils = new CKEDITOR.Link(this.props.editor.get('nativeEditor'), { appendProtocol: false });
         let link = linkUtils.getFromSelection();
         let href = '';
         let target = '';
-        let title = ''
+        let title = '';
         let isTemporary = false;
 
         if (link) {
@@ -43,7 +43,7 @@ export default class EzBtnLinkEdit extends Component {
             title = link.getAttribute('title');
             isTemporary = link.hasAttribute('data-ez-temporary-link');
         } else {
-            linkUtils.create(href, {"data-ez-temporary-link": true});
+            linkUtils.create(href, { 'data-ez-temporary-link': true });
             link = linkUtils.getFromSelection();
             isTemporary = true;
         }
@@ -72,28 +72,38 @@ export default class EzBtnLinkEdit extends Component {
             const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
             const config = JSON.parse(document.querySelector(`[data-udw-config-name="richtext_embed"]`).dataset.udwConfig);
             const udwOnConfirm = (items) => {
-                this.state.element.setAttribute(
-                    'href', 'ezlocation://' + items[0].id
-                );
+                this.state.element.setAttribute('href', 'ezlocation://' + items[0].id);
                 this.focusEditedLink();
 
                 ReactDOM.unmountComponentAtNode(udwContainer);
             };
             const title = Translator.trans(/*@Desc("Select content")*/ 'link_edit_btn.udw.title', {}, 'alloy_editor');
 
-            ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
-                onConfirm: udwOnConfirm,
-                onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
-                title,
-                multiple: false,
-                startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-                restInfo: {token, siteaccess},
-            }, config)), udwContainer);
+            ReactDOM.render(
+                React.createElement(
+                    eZ.modules.UniversalDiscovery,
+                    Object.assign(
+                        {
+                            onConfirm: udwOnConfirm,
+                            onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
+                            title,
+                            multiple: false,
+                            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                            restInfo: { token, siteaccess },
+                        },
+                        config
+                    )
+                ),
+                udwContainer
+            );
         };
 
-        this.setState({
-            discoveringContent: true,
-        }, openUDW.bind(this));
+        this.setState(
+            {
+                discoveringContent: true,
+            },
+            openUDW.bind(this)
+        );
     }
 
     /**
@@ -125,8 +135,8 @@ export default class EzBtnLinkEdit extends Component {
             editor: this.props.editor,
             selectionData: {
                 element: this.state.element,
-                region: this.getRegion()
-            }
+                region: this.getRegion(),
+            },
         });
     }
 
@@ -156,15 +166,25 @@ export default class EzBtnLinkEdit extends Component {
      * @return {Object} The content which should be rendered.
      */
     renderUDWRow() {
-        const selectContentLabel = Translator.trans(/*@Desc("Select content")*/ 'link_edit_btn.button_row.select_content', {}, 'alloy_editor');
+        const selectContentLabel = Translator.trans(
+            /*@Desc("Select content")*/ 'link_edit_btn.button_row.select_content',
+            {},
+            'alloy_editor'
+        );
         const separatorLabel = Translator.trans(/*@Desc("or")*/ 'link_edit_btn.button_row.separator', {}, 'alloy_editor');
-        const linkToLabel = Translator.trans(/*@Desc("Link to")*/ 'link_edit_btn.button_row.link_to', {}, 'alloy_editor');
-        const blockPlaceholderText = Translator.trans(/*@Desc("Type or paste link here")*/ 'link_edit_btn.button_row.block.placeholder.text', {}, 'alloy_editor'); 
+        const linkToLabel = Translator.trans(/*@Desc("Link to:")*/ 'link_edit_btn.button_row.link_to', {}, 'alloy_editor');
+        const selectLabel = Translator.trans(/*@Desc("Select:")*/ 'link_edit_btn.button_row.select', {}, 'alloy_editor');
+        const blockPlaceholderText = Translator.trans(
+            /*@Desc("Type or paste link here")*/ 'link_edit_btn.button_row.block.placeholder.text',
+            {},
+            'alloy_editor'
+        );
 
         return (
-            <div className="ez-ae-edit-link__row">
+            <div className="ez-ae-edit-link__row ez-ae-edit-link__row--udw">
                 <div className="ez-ae-edit-link__block ez-ae-edit-link__block--udw">
-                    <button className="ez-ae-button ez-btn-ae ez-btn-ae--udw btn btn-gray" onClick={this.selectContent.bind(this)}>
+                    <label className="ez-ae-edit-link__label">{selectLabel}</label>
+                    <button className="ez-ae-button ez-btn-ae ez-btn-ae--udw btn btn-secondary" onClick={this.selectContent.bind(this)}>
                         {selectContentLabel}
                     </button>
                 </div>
@@ -173,15 +193,20 @@ export default class EzBtnLinkEdit extends Component {
                 </div>
                 <div className="ez-ae-edit-link__block ez-ae-edit-link__block--url">
                     <label className="ez-ae-edit-link__label">{linkToLabel}</label>
-                    <input className="ae-input ez-ae-edit-link__input"
-                        onChange={this.setHref.bind(this)} onKeyDown={this.handleKeyDown.bind(this)}
+                    <input
+                        className="ae-input ez-ae-edit-link__input"
+                        onChange={this.setHref.bind(this)}
+                        onKeyDown={this.handleKeyDown.bind(this)}
                         placeholder={blockPlaceholderText}
-                        type="text" value={this.state.linkHref}
-                    ></input>
-                    <button aria-label={AlloyEditor.Strings.clearInput}
+                        type="text"
+                        value={this.state.linkHref}
+                    />
+                    <button
+                        aria-label={AlloyEditor.Strings.clearInput}
                         className="ez-btn-ae ez-btn-ae--clear-link ae-button ae-icon-remove"
-                        onClick={this.clearLink.bind(this)} title={AlloyEditor.Strings.clear}
-                    ></button>
+                        onClick={this.clearLink.bind(this)}
+                        title={AlloyEditor.Strings.clear}
+                    />
                 </div>
             </div>
         );
@@ -195,36 +220,60 @@ export default class EzBtnLinkEdit extends Component {
      */
     renderInfoRow() {
         const target = this.state.linkTarget;
-        const title = Translator.trans(/*@Desc("Title")*/ 'link_edit_btn.info_row.title', {}, 'alloy_editor');
-        const openInLabel = Translator.trans(/*@Desc("Open in:")*/ 'link_edit_btn.info_row.open_in.label', {}, 'alloy_editor'); 
+        const title = Translator.trans(/*@Desc("Title:")*/ 'link_edit_btn.info_row.title', {}, 'alloy_editor');
+        const openInLabel = Translator.trans(/*@Desc("Open in:")*/ 'link_edit_btn.info_row.open_in.label', {}, 'alloy_editor');
         const sameTabLabel = Translator.trans(/*@Desc("Same tab")*/ 'link_edit_btn.info_row.same_tab', {}, 'alloy_editor');
         const newTabLabel = Translator.trans(/*@Desc("New tab")*/ 'link_edit_btn.info_row.new_tab', {}, 'alloy_editor');
 
         return (
-            <div className="ez-ae-edit-link__row">
+            <div className="ez-ae-edit-link__row ez-ae-edit-link__row--info">
                 <div className="ez-ae-edit-link__block ez-ae-edit-link__block--title">
                     <label className="ez-ae-edit-link__label">{title}</label>
-                    <input type="text"
-                        className="ae-input ez-ae-edit-link__input" onChange={this.setTitle.bind(this)}
+                    <input
+                        type="text"
+                        className="ae-input ez-ae-edit-link__input"
+                        onChange={this.setTitle.bind(this)}
                         value={this.state.linkTitle}
-                    ></input>
+                    />
                 </div>
                 <div className="ez-ae-edit-link__block ez-ae-edit-link__block--target">
                     <span className="ez-ae-edit-link__text">{openInLabel}</span>
                     <div className="ez-ae-edit-link__choice">
-                        <label htmlFor="ez-ae-link-target-same" className="ez-ae-edit-link__label ez-ae-edit-link__label--same-tab">
-                            <input type="radio" name="target" id="ez-ae-link-target-same"
-                                value='' defaultChecked={target === ''}
+                        <label
+                            htmlFor="ez-ae-link-target-same"
+                            className="ez-ae-edit-link__label ez-ae-edit-link__label--same-tab"
+                            title={sameTabLabel}>
+                            <input
+                                type="radio"
+                                name="target"
+                                id="ez-ae-link-target-same"
+                                value=""
+                                defaultChecked={target === ''}
                                 onChange={this.setTarget.bind(this)}
                             />
-                            <span>{sameTabLabel}</span>
+                            <div className="ez-btn-ae__icon-wrapper">
+                                <svg className="ez-icon ez-btn-ae__icon">
+                                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#open-sametab" />
+                                </svg>
+                            </div>
                         </label>
-                        <label htmlFor="ez-ae-link-target-blank" className="ez-ae-edit-link__label ez-ae-edit-link__label--new-tab">
-                            <input type="radio" name="target" id="ez-ae-link-target-blank"
-                                value="_blank" defaultChecked={target === "_blank"}
+                        <label
+                            htmlFor="ez-ae-link-target-blank"
+                            className="ez-ae-edit-link__label ez-ae-edit-link__label--new-tab"
+                            title={newTabLabel}>
+                            <input
+                                type="radio"
+                                name="target"
+                                id="ez-ae-link-target-blank"
+                                value="_blank"
+                                defaultChecked={target === '_blank'}
                                 onChange={this.setTarget.bind(this)}
                             />
-                            <span>{newTabLabel}</span>
+                            <div className="ez-btn-ae__icon-wrapper">
+                                <svg className="ez-icon ez-btn-ae__icon">
+                                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab" />
+                                </svg>
+                            </div>
                         </label>
                     </div>
                 </div>
@@ -245,13 +294,23 @@ export default class EzBtnLinkEdit extends Component {
         return (
             <div className="ez-ae-edit-link__row ez-ae-edit-link__row--actions">
                 <div className="ez-ae-edit-link__block ez-ae-edit-link__block--actions">
-                    <button className="ez-btn-ae ez-btn-ae--remove-link btn btn-gray"
-                        disabled={this.state.isTemporary} onClick={this.removeLink.bind(this)}>
-                        {removeLabel}
+                    <button
+                        className="ez-btn-ae ez-btn-ae--remove-link btn"
+                        disabled={this.state.isTemporary}
+                        onClick={this.removeLink.bind(this)}
+                        title={removeLabel}>
+                        <svg className="ez-icon ez-btn-ae__icon">
+                            <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#link-remove" />
+                        </svg>
                     </button>
-                    <button className="ez-btn-ae ez-btn-ae--save-link btn btn-secondary"
-                        disabled={!this.state.linkHref} onClick={this.saveLink.bind(this)}>
-                        {saveLabel}
+                    <button
+                        className="ez-btn-ae ez-btn-ae--save-link btn"
+                        disabled={!this.state.linkHref}
+                        onClick={this.saveLink.bind(this)}
+                        title={saveLabel}>
+                        <svg className="ez-icon ez-btn-ae__icon">
+                            <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#link" />
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -289,7 +348,7 @@ export default class EzBtnLinkEdit extends Component {
      * @method clearLink
      */
     clearLink() {
-        this.setState({linkHref: ''});
+        this.setState({ linkHref: '' });
     }
 
     /**
@@ -306,7 +365,7 @@ export default class EzBtnLinkEdit extends Component {
             event.preventDefault();
         }
 
-        if (event.keyCode === 13 && event.target.value ) {
+        if (event.keyCode === 13 && event.target.value) {
             this.saveLink();
         } else if (event.keyCode === 27) {
             const editor = this.props.editor.get('nativeEditor');
@@ -323,7 +382,7 @@ export default class EzBtnLinkEdit extends Component {
      * @param {SyntheticEvent} event The change event.
      */
     setHref(event) {
-        this.setState({linkHref: event.target.value});
+        this.setState({ linkHref: event.target.value });
     }
 
     /**
@@ -333,7 +392,7 @@ export default class EzBtnLinkEdit extends Component {
      * @param {SyntheticEvent} event The change event.
      */
     setTitle(event) {
-        this.setState({linkTitle: event.target.value});
+        this.setState({ linkTitle: event.target.value });
     }
 
     /**
@@ -343,7 +402,7 @@ export default class EzBtnLinkEdit extends Component {
      * @param {SyntheticEvent} event The change event.
      */
     setTarget(event) {
-        this.setState({linkTarget: event.target.value});
+        this.setState({ linkTarget: event.target.value });
     }
 
     /**
@@ -357,7 +416,7 @@ export default class EzBtnLinkEdit extends Component {
         const selection = editor.getSelection();
         const bookmarks = selection.createBookmarks();
 
-        linkUtils.remove(this.state.element, {advance: true});
+        linkUtils.remove(this.state.element, { advance: true });
 
         selection.selectBookmarks(bookmarks);
 
@@ -372,9 +431,12 @@ export default class EzBtnLinkEdit extends Component {
      * @method saveLink
      */
     saveLink() {
-        this.setState({
-            isTemporary: false,
-        }, () => this.updateLink());
+        this.setState(
+            {
+                isTemporary: false,
+            },
+            () => this.updateLink()
+        );
     }
 
     /**
@@ -390,9 +452,9 @@ export default class EzBtnLinkEdit extends Component {
         const linkAttrs = {
             target: this.state.linkTarget,
             title: this.state.linkTitle,
-            "data-ez-temporary-link": this.state.isTemporary ? true : null,
+            'data-ez-temporary-link': this.state.isTemporary ? true : null,
         };
-        const modifySelection = {advance: true};
+        const modifySelection = { advance: true };
 
         if (this.state.linkHref) {
             linkAttrs.href = this.state.linkHref;
