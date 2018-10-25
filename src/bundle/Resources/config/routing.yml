@@ -406,6 +406,12 @@ ezplatform.location.trash:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location:trash'
 
+ezplatform.location.trash_container:
+    path: /location/trash_container
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Location:trashContainer'
+
 ezplatform.location.update:
     path: /location/update
     methods: ['POST']

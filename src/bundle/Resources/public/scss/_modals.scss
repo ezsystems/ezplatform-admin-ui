@@ -150,7 +150,8 @@
     }
 }
 
-.ez-modal--trash-with-asset {
+.ez-modal--trash-with-asset,
+.ez-modal--trash-container {
     .modal-dialog {
         max-width: calculateRem(800px);
     }

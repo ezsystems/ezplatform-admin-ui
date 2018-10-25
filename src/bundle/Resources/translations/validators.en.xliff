@@ -51,6 +51,11 @@
         <target state="new">Selected Location have assets that can't be removed.</target>
         <note>key: ezplatform.trash.have_used_assets</note>
       </trans-unit>
+      <trans-unit id="50f88ff616406e9f9474c6f78937aadb1303868e" resname="ezplatform.trash.location_has_no_children">
+        <source>Selected Location has no children locations.</source>
+        <target state="new">Selected Location has no children locations.</target>
+        <note>key: ezplatform.trash.location_has_no_children</note>
+      </trans-unit>
       <trans-unit id="cf558f546b83d94f1272929f81c64bd33d2997bc" resname="js.error.address_not_found">
         <source>Provided address does not exist</source>
         <target state="new">Provided address does not exist</target>
