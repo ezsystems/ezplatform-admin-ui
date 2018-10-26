@@ -737,6 +737,22 @@ ezplatform.bookmark.remove:
         _controller: 'EzPlatformAdminUiBundle:Bookmark:remove'
 
 #
+# Drafts
+#
+
+ezplatform.content_draft.list:
+    path: /contentdraft/list
+    methods: ['GET']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentDraft:list'
+
+ezplatform.content_draft.remove:
+    path: /contentdraft/remove
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentDraft:remove'
+
+#
 # Notifications
 #
 

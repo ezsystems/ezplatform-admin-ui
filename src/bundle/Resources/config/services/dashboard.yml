@@ -2,6 +2,8 @@ services:
     EzSystems\EzPlatformAdminUi\Tab\Dashboard\MyDraftsTab:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         public: false
+        arguments:
+            $defaultPaginationLimit: '$pagination.content_draft_limit$'
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 

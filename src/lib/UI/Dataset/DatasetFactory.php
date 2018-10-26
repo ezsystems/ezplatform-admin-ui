@@ -189,4 +189,16 @@ class DatasetFactory
             $this->valueFactory
         );
     }
+
+    /**
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\ContentDraftsDataset
+     */
+    public function contentDrafts(): ContentDraftsDataset
+    {
+        return new ContentDraftsDataset(
+            $this->contentService,
+            $this->contentTypeService,
+            $this->locationService
+        );
+    }
 }

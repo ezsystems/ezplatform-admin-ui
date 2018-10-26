@@ -104,3 +104,8 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.user_settings_limit$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\ContentDraftController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $defaultPaginationLimit: '$pagination.content_draft_limit$'

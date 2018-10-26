@@ -110,7 +110,7 @@
     {{ block('form_widget_simple') }}
 {%- endblock number_widget -%}
 
-{%- block _bookmark_remove_remove_widget -%}
+{%- block table_header_tool_btn -%}
     {%- set type = type|default('submit') -%}
     {%- if label is not same as(false) and label is empty -%}
         {%- if label_format is not empty -%}
@@ -122,11 +122,23 @@
             {% set label = name|humanize %}
         {%- endif -%}
     {%- endif -%}
-    <button type="{{ type }}" {{ block('button_attributes') }} title="{{'bookmark.button.remove'|trans({},'bookmark')|desc('Remove') }}">
+    <button type="{{ type }}" {{ block('button_attributes') }} title="{{ title|default('') }}">
         <svg class="ez-icon">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ icon|default('') }}"></use>
         </svg>
     </button>
+{%- endblock table_header_tool_btn -%}
+
+{%- block _bookmark_remove_remove_widget -%}
+    {%- set title = 'bookmark.button.remove'|trans({},'bookmark')|desc('Remove') -%}
+    {%- set icon = 'trash' -%}
+    {{ block('table_header_tool_btn') }}
+{%- endblock -%}
+
+{%- block _content_remove_remove_widget -%}
+    {%- set title = 'drafts.list.action.remove'|trans({},'drafts')|desc('Remove') -%}
+    {%- set icon = 'trash' -%}
+    {{ block('table_header_tool_btn') }}
 {%- endblock -%}
 
 {%- block date_time_picker_widget -%}
