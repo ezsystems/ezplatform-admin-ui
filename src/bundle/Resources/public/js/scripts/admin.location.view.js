@@ -69,6 +69,7 @@
 
             return total;
         }, {});
+        const udwConfigMove = JSON.parse(container.dataset.udwConfigMove);
 
         global.ReactDOM.render(global.React.createElement(global.eZ.modules.SubItems, {
             handleEditItem,
@@ -90,7 +91,8 @@
             }],
             items,
             contentTypesMap,
-            totalCount: subItemsList.ChildrenCount
+            totalCount: subItemsList.ChildrenCount,
+            udwConfigMove,
         }), container);
     });
 })(window, window.document, window.jQuery);
