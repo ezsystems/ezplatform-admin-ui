@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
+use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
@@ -32,19 +33,25 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
     private $tokenStorage;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
     /**
      * @param MenuItemFactory $factory
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        PermissionResolver $permissionResolver
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->tokenStorage = $tokenStorage;
+        $this->permissionResolver = $permissionResolver;
     }
 
     /**
@@ -71,17 +78,23 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_CHANGE_PASSWORD, ['route' => 'ezplatform.user_profile.change_password'])
             );
+
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_USER_SETTINGS, ['route' => 'ezplatform.user_settings.list'])
             );
+
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_BOOKMARK, ['route' => 'ezplatform.bookmark.list'])
             );
-            $menu->addChild(
-                $this->createMenuItem(self::ITEM_DRAFTS, [
-                    'route' => 'ezplatform.content_draft.list',
-                ])
-            );
+
+            if ($this->permissionResolver->hasAccess('content', 'versionread') !== false) {
+                $menu->addChild(
+                    $this->createMenuItem(self::ITEM_DRAFTS, [
+                        'route' => 'ezplatform.content_draft.list',
+                    ])
+                );
+            }
+
             $menu->addChild(self::ITEM_NOTIFICATION, [
                 'attributes' => [
                     'class' => 'ez-user-menu__item--notifications',
@@ -93,6 +106,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'template' => '@EzPlatformAdminUi/notifications/notifications_modal.html.twig',
                 ],
             ]);
+
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout'])
             );

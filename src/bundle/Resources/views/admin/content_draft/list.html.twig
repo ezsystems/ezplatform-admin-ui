@@ -117,6 +117,8 @@
             {% endif %}
         </section>
     </div>
+
+    {% include '@ezdesign/content/modal_version_conflict.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}
@@ -148,7 +150,7 @@
 
     {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {
         'id': modal_data_target,
-        'message': 'drafts.list.action.remove.confirmation.text'|trans|desc('Are you sure you wont permanently delete the selected draft(s)?'),
+        'message': 'drafts.list.action.remove.confirmation.text'|trans|desc('Are you sure you want to permanently delete the selected draft(s)?'),
         'data_click': '#' ~ form.remove.vars.id,
     } %}
 {% endmacro %}

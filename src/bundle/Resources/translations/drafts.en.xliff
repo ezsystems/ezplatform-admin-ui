@@ -22,8 +22,8 @@
         <note>key: drafts.list.action.remove</note>
       </trans-unit>
       <trans-unit id="7e9e5a5a2374b6f20dd6ffc35334073627778d62" resname="drafts.list.action.remove.confirmation.text">
-        <source>Are you sure you wont permanently delete the selected draft(s)?</source>
-        <target state="new">Are you sure you wont permanently delete the selected draft(s)?</target>
+        <source>Are you sure you wont to permanently delete the selected draft(s)?</source>
+        <target state="new">Are you sure you wont to permanently delete the selected draft(s)?</target>
         <note>key: drafts.list.action.remove.confirmation.text</note>
       </trans-unit>
       <trans-unit id="61be4cf21a9d454b832543ae2ecb5b2b10f94583" resname="drafts.list.action.remove.confirmation.title">
