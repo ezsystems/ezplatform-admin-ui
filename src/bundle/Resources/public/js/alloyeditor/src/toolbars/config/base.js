@@ -6,7 +6,7 @@ export default class EzConfigBase {
         const outlineWidth = parseInt(block.getComputedStyle('outline-width'), 10);
 
         if (isNaN(outlineOffset)) {
-            // Edge does not support offset-offset yet
+            // Older Edge versions (12-14) did not support outline-offset
             // 1 comes from the stylesheet, see theme/alloyeditor/content.css
             outlineOffset = 1;
         }
@@ -35,8 +35,9 @@ export default class EzConfigBase {
             }
 
             const range = document.createRange();
+            const sl = parseInt(block.$.scrollLeft, 10);
             range.selectNodeContents(positionReference.$);
-            left = range.getBoundingClientRect().left;
+            left = range.getBoundingClientRect().left + sl;
 
             if (empty) {
                 positionReference.remove();

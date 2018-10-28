@@ -63,11 +63,9 @@
     pre {
         padding: 9.5px;
         line-height: 1.4;
-        // Becasue of toolbar position bug in Alloy 1.4 we need to use wrapping instead of normal <pre> no wrap behavour
-        white-space: pre-wrap;
-        // With wrapping, add indication for this if supported (! none atm: https://caniuse.com/#search=text-indent)
-        text-indent: 1.1em hanging each-line;
-        // For browsers that suppoirt it specify width of tabs (https://caniuse.com/#search=tab-width)
+        // NOTE: If you see it as an issue that scrollbars hide on MacOs, consider changing to wrapped:
+        //white-space: pre-wrap;
+        //text-indent: 1.1em hanging each-line;
         tab-width: 4;
         // Set a slightly different style then embed so it's easy to distinguish
         background-color: $ez-ground-base-pale;
