@@ -69,7 +69,7 @@
 
             return total;
         }, {});
-        const udwConfigMove = JSON.parse(container.dataset.udwConfigMove);
+        const udwConfigBulkMoveItems = JSON.parse(container.dataset.udwConfigBulkMoveItems);
 
         global.ReactDOM.render(global.React.createElement(global.eZ.modules.SubItems, {
             handleEditItem,
@@ -92,7 +92,7 @@
             items,
             contentTypesMap,
             totalCount: subItemsList.ChildrenCount,
-            udwConfigMove,
+            udwConfigBulkMoveItems,
         }), container);
     });
 })(window, window.document, window.jQuery);
