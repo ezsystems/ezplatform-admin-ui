@@ -63,18 +63,22 @@
     pre {
         padding: 9.5px;
         line-height: 1.4;
+        // Make sure this is set to inital value as Safari inherits this one from other css and wraps the text
+        word-wrap: initial;
         // NOTE: If you see it as an issue that scrollbars hide on MacOs, consider changing to wrapped:
         //white-space: pre-wrap;
+        //word-wrap: normal;
+        //overflow-wrap: normal;
         //text-indent: 1.1em hanging each-line;
         tab-width: 4;
         // Set a slightly different style then embed so it's easy to distinguish
         background-color: $ez-ground-base-pale;
         border: 1px solid $ez-ground-base-medium;
-    }
 
-    pre:empty:before {
-        // On empty pre avoid broken styling
-        content: "\00a0";
-        // TODO: This does not avoid the wrong location of the toolbar problem..
+        // On empty pre avoid broken styling, so insert a "<>" in grey color when empty
+        &:empty:after {
+            content: "\00a0\003c\003e";
+            color: $ez-color-base-pale;
+        }
     }
 }

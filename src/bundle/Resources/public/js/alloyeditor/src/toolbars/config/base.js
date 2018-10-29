@@ -14,9 +14,32 @@ export default class EzConfigBase {
     }
 
     static isEmpty(block) {
-        const count = block.$.childNodes.length;
+        const node = block.$;
+        let count = node.childNodes.length;
+        let child = node.firstChild;
 
-        return (count === 0 || (count === 1 && block.$.childNodes.item(0).localName === 'br'));
+        // Special case 1: Safari/Firefox/? puts a <br> (and somtimes also empty text) when you empty <pre>
+        if ((count === 1 || count === 2) && node.localName === 'pre' && child.nodeType === 1 && child.localName === 'br') {
+            node.removeChild(child);
+            if (count === 2) {
+                child = node.firstChild;
+                count = 1;
+            } else {
+                node.appendChild(child = document.createTextNode(''));
+            }
+        }
+
+        if (count === 1) {
+            // Special case 2: Safari (12.0) puts 7 ZERO WIDTH SPACE characters when changing to formatted (<pre>)
+            if (node.localName === 'pre' && child.nodeType === 3 && child.length === 7 && child.data.replace(/\u200B/g, '').length === 0) {
+                child.textContent = '';
+            }
+
+            // Considered empty: Tag with <br> (used in <p>) or with empty text node (used among others in <pre>)
+            return (child.nodeType === 1 && child.localName === 'br') || (child.nodeType === 3 && child.data === '');
+        }
+
+        return count === 0;
     }
 
     static setPositionFor(block, editor) {
