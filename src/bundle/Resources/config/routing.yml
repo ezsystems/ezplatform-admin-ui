@@ -808,3 +808,11 @@ ezplatform.asset.upload_image:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Asset:uploadImage'
     methods: [POST]
+
+ezplatform.bulk_operation:
+    path: /api/bulk
+    options:
+        expose: true
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:BulkOperation\BulkOperation:bulk'
+    methods: [POST]
