@@ -93,7 +93,7 @@
                                 href="#"
                                 data-section-id="{{ section.id }}"
                                 data-form-action="{{ path("ezplatform.section.assign_content", {"sectionId": section.id}) }}"
-                                data-udw-config="{{ ez_udw_config('multiple', {}) }}"
+                                data-udw-config="{{ ez_udw_config('multiple', {'type': 'section_assign'}) }}"
                                 class="btn btn-icon mx-3">
                                 <svg class="ez-icon ez-icon-relations ez-icon--secondary btn--open-udw">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-section"></use>

@@ -15,9 +15,11 @@ use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\Content\Section;
+use eZ\Publish\API\Repository\Values\User\Limitation\NewSectionLimitation;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use eZ\Publish\API\Repository\SearchService;
+use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
@@ -29,6 +31,7 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
+use EzSystems\EzPlatformAdminUi\Util\PermissionUtil;
 use EzSystems\EzPlatformAdminUiBundle\View\EzPagerfantaView;
 use EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate;
 use Pagerfanta\Adapter\ArrayAdapter;
@@ -74,6 +77,12 @@ class SectionController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\UI\Service\PathService */
     private $pathService;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
+    /** @var \EzSystems\EzPlatformAdminUi\Util\PermissionUtil */
+    private $permissionUtil;
+
     /** @var int */
     private $defaultPaginationLimit;
 
@@ -89,6 +98,8 @@ class SectionController extends Controller
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \EzSystems\EzPlatformAdminUi\UI\Service\PathService $pathService
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \EzSystems\EzPlatformAdminUi\Util\PermissionUtil $permissionUtil
      * @param int $defaultPaginationLimit
      */
     public function __construct(
@@ -103,6 +114,8 @@ class SectionController extends Controller
         ContentTypeService $contentTypeService,
         LocationService $locationService,
         PathService $pathService,
+        PermissionResolver $permissionResolver,
+        PermissionUtil $permissionUtil,
         int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
@@ -117,6 +130,8 @@ class SectionController extends Controller
         $this->locationService = $locationService;
         $this->pathService = $pathService;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->permissionResolver = $permissionResolver;
+        $this->permissionUtil = $permissionUtil;
     }
 
     public function performAccessCheck(): void
@@ -130,6 +145,7 @@ class SectionController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function listAction(Request $request): Response
@@ -160,7 +176,7 @@ class SectionController extends Controller
         foreach ($sectionList as $section) {
             $contentCountBySectionId[$section->id] = $this->sectionService->countAssignedContents($section);
             $deletableSections[$section->id] = !$this->sectionService->isSectionUsed($section);
-            $assignableSections[$section->id] = $this->canUserAssignSectionToAnyContent($section);
+            $assignableSections[$section->id] = $this->canUserAssignSectionToSomeContent($section);
         }
 
         return $this->render('@ezdesign/admin/section/list.html.twig', [
@@ -205,6 +221,7 @@ class SectionController extends Controller
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function viewSectionContentAction(Section $section, int $page = 1, int $limit = 10): Response
     {
@@ -249,7 +266,7 @@ class SectionController extends Controller
             'assigned_content' => $assignedContent,
             'pagerfanta' => $pagerfanta,
             'pagination' => $pagination,
-            'can_assign' => $this->canUserAssignSectionToAnyContent($section),
+            'can_assign' => $this->canUserAssignSectionToSomeContent($section),
         ]);
     }
 
@@ -341,7 +358,7 @@ class SectionController extends Controller
      */
     public function assignContentAction(Request $request, Section $section): Response
     {
-        if (!$this->isGranted(new Attribute('section', 'assign', ['valueObject' => new ContentInfo(), 'targets' => $section]))) {
+        if (!$this->canUserAssignSectionToSomeContent($section)) {
             $exception = $this->createAccessDeniedException();
             $exception->setAttributes('state');
             $exception->setSubject('assign');
@@ -490,9 +507,42 @@ class SectionController extends Controller
      * @param \eZ\Publish\API\Repository\Values\Content\Section $section
      *
      * @return bool
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    private function canUserAssignSectionToAnyContent(Section $section): bool
+    private function canUserAssignSectionToSomeContent(Section $section): bool
     {
-        return $this->isGranted(new Attribute('section', 'assign', ['valueObject' => new ContentInfo(), 'targets' => $section]));
+        $hasAccess = $this->permissionResolver->hasAccess('section', 'assign');
+
+        if (is_bool($hasAccess)) {
+            return $hasAccess;
+        }
+
+        if (!empty($restrictedNewSections = $this->getRestrictedNewSectionsIds($hasAccess))) {
+            return in_array($section->id, $restrictedNewSections, true);
+        }
+
+        // If a user has other limitation than NewSectionLimitation, then a decision will be taken later, based on selected Content.
+        return true;
+    }
+
+    /**
+     * @param array $hasAccess
+     *
+     * @return int[]
+     */
+    private function getRestrictedNewSectionsIds(array $hasAccess): array
+    {
+        $restrictedSectionsIds = [];
+
+        foreach ($this->permissionUtil->flattenArrayOfLimitations($hasAccess) as $limitation) {
+            if ($limitation instanceof NewSectionLimitation) {
+                foreach ($limitation->limitationValues as $sectionsId) {
+                    $restrictedSectionsIds[] = (int)$sectionsId;
+                }
+            }
+        }
+
+        return array_unique($restrictedSectionsIds);
     }
 }
