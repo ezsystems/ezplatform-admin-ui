@@ -47,6 +47,7 @@ class DateAndTimePopup extends Element
 
         $dateToDiff = $this->deleteDayFromDate($date);
         $currentDateToDiff = $this->deleteDayFromDate($currentDate);
+        $dateToDiff->modify('+1 day');
         $interval = $dateToDiff->diff($currentDateToDiff);
         $monthsDiff = 12 * $interval->y + $interval->m;
 
@@ -70,7 +71,7 @@ class DateAndTimePopup extends Element
 
     public function deleteDayFromDate(DateTime $dateTime): DateTime
     {
-        return DateTime::createFromFormat('Y-m', $dateTime->format('Y-m'));
+        return DateTime::createFromFormat('!Y-m', $dateTime->format('Y-m'));
     }
 
     public function switchToNextMonth(): void
