@@ -83,7 +83,7 @@ class ContentOnTheFlyController extends Controller
         ]);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $form->getClickedButton()) {
             $this->contentActionDispatcher->dispatchFormAction($form, $data, $form->getClickedButton()->getName());
             if ($response = $this->contentActionDispatcher->getResponse()) {
                 return $response;

@@ -54,13 +54,15 @@
 {% block form_before %}
     {{ ezplatform_admin_ui_component_group('content-create-form-before', {
         'parentLocation': parentLocation,
-        'contentType': contentType
+        'contentType': contentType,
+        'language': language
     }) }}
 {% endblock %}
 
 {% block form_after %}
     {{ ezplatform_admin_ui_component_group('content-create-form-after', {
         'parentLocation': parentLocation,
-        'contentType': contentType
+        'contentType': contentType,
+        'language': language
     }) }}
 {% endblock %}
