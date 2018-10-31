@@ -8,10 +8,7 @@
         'action': path('ezplatform.translation.remove'),
         'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations' }
     }) }}
-    {% include '@ezdesign/parts/table_header.html.twig' with {
-        headerText: 'tab.translations.translation_manger'|trans|desc('Translation manager'),
-        tools: tab.table_header_tools(form_translation_remove, can_translate)
-    } %}
+    {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.translations.translation_manger'|trans|desc('Translation manager'), tools: tab.table_header_tools(form_translation_remove) } %}
     <table class="ez-table table">
         <thead>
         <tr>
@@ -35,13 +32,9 @@
     {% include '@ezdesign/content/tab/translations/modal_add_translation.html.twig' with {'form': form_translation_add} only %}
 </section>
 
-{% macro table_header_tools(form_translation_remove, can_translate) %}
-    <button
-        class="btn btn-primary ez-btn--prevented ez-btn--add-translation"
-        data-toggle="modal"
-        data-target="#add-translation-modal"
-        {% if not can_translate %} disabled {% endif %}
-        title="{{ 'tab.translations.action.add'|trans|desc('Add Translation') }}">
+{% macro table_header_tools(form_translation_remove) %}
+    <button class="btn btn-primary ez-btn--prevented ez-btn--add-translation" data-toggle="modal" data-target="#add-translation-modal"
+            title="{{ 'tab.translations.action.add'|trans|desc('Add Translation') }}">
         <svg class="ez-icon ez-icon-create">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
         </svg>

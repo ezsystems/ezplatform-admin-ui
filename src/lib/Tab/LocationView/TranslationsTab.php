@@ -10,14 +10,12 @@ namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
-use EzSystems\EzPlatformAdminUi\Util\PermissionUtil;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -28,46 +26,34 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-location-view-translations';
 
-    /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
+    /** @var DatasetFactory */
     protected $datasetFactory;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
+    /** @var FormFactory */
     protected $formFactory;
 
-    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
+    /** @var UrlGeneratorInterface */
     protected $urlGenerator;
 
-    /** @var \eZ\Publish\API\Repository\PermissionResolver */
-    protected $permissionResolver;
-
-    /** @var \EzSystems\EzPlatformAdminUi\Util\PermissionUtil */
-    private $permissionUtil;
-
     /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
-     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\Util\PermissionUtil $permissionUtil
+     * @param Environment $twig
+     * @param TranslatorInterface $translator
+     * @param DatasetFactory $datasetFactory
+     * @param FormFactory $formFactory
+     * @param UrlGeneratorInterface $urlGenerator
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         DatasetFactory $datasetFactory,
         FormFactory $formFactory,
-        UrlGeneratorInterface $urlGenerator,
-        PermissionResolver $permissionResolver,
-        PermissionUtil $permissionUtil
+        UrlGeneratorInterface $urlGenerator
     ) {
         parent::__construct($twig, $translator);
 
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
-        $this->permissionResolver = $permissionResolver;
-        $this->permissionUtil = $permissionUtil;
     }
 
     public function getIdentifier(): string
@@ -86,16 +72,6 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
         return 600;
     }
 
-    /**
-     * @param array $parameters
-     *
-     * @return string
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     */
     public function renderView(array $parameters): string
     {
         /** @var Location $location */
@@ -105,13 +81,6 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
         $versionInfo = $content->getVersionInfo();
         $translationsDataset = $this->datasetFactory->translations();
         $translationsDataset->load($versionInfo);
-
-        $canTranslate = $this->permissionResolver->hasAccess('content', 'translate');
-
-        if (is_array($canTranslate)) {
-            $limitationLanguageCodes = $this->permissionUtil->getLimitationLanguageCodes($canTranslate);
-            $canTranslate = empty($limitationLanguageCodes) ? true : array_diff($limitationLanguageCodes, $translationsDataset->getLanguageCodes());
-        }
 
         $translationAddForm = $this->createTranslationAddForm($location);
 
@@ -124,7 +93,6 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
             'translations' => $translationsDataset->getTranslations(),
             'form_translation_add' => $translationAddForm->createView(),
             'form_translation_remove' => $translationDeleteForm->createView(),
-            'can_translate' => $canTranslate,
         ];
 
         return $this->twig->render(
@@ -137,6 +105,8 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
      * @param Location $location
      *
      * @return FormInterface
+     *
+     * @throws InvalidOptionsException
      */
     private function createTranslationAddForm(Location $location): FormInterface
     {
