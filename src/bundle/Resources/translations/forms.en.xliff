@@ -156,6 +156,11 @@
         <target state="new">Send to Trash</target>
         <note>key: location_trash_form.trash</note>
       </trans-unit>
+      <trans-unit id="f9887d04de58202b07207b1521880373c00c8201" resname="location_trash_form.trash_container">
+        <source>%children_count% content items under location %content_name%</source>
+        <target state="new">%children_count% content items under location %content_name%</target>
+        <note>key: location_trash_form.trash_container</note>
+      </trans-unit>
       <trans-unit id="2598fe0050f38f3c02014a404ed14aee248e27d1" resname="location_trash_form.trash_with_asset">
         <source>Delete %content_name% (%content_type%) and its related image assets</source>
         <target state="new">Delete %content_name% (%content_type%) and its related image assets</target>

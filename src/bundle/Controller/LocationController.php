@@ -21,6 +21,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -327,26 +328,12 @@ class LocationController extends Controller
         $form = $this->formFactory->trashLocation(
             new LocationTrashData()
         );
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (LocationTrashData $data) {
-                $location = $data->getLocation();
-                $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
-                $this->trashService->trash($location);
-
-                $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Location '%name%' moved to trash.") */
-                        'location.trash.success',
-                        ['%name%' => $location->getContentInfo()->name],
-                        'location'
-                    )
-                );
-
-                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
-                    'locationId' => $parentLocation->id,
-                ]));
+                return $this->handleTrashLocationForm($data);
             });
 
             if ($result instanceof Response) {
@@ -355,6 +342,60 @@ class LocationController extends Controller
         }
 
         return $this->redirect($this->generateUrl('ezplatform.trash.list'));
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function trashContainerAction(Request $request): Response
+    {
+        $form = $this->formFactory->trashContainerLocation(
+            new LocationTrashContainerData()
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (LocationTrashContainerData $data) {
+                return $this->handleTrashLocationForm($data);
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirect($this->generateUrl('ezplatform.trash.list'));
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData|\EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData $data
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    private function handleTrashLocationForm($data): RedirectResponse
+    {
+        $location = $data->getLocation();
+        $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
+        $this->trashService->trash($location);
+
+        $this->notificationHandler->success(
+            $this->translator->trans(
+                /** @Desc("Location '%name%' moved to trash.") */
+                'location.trash.success',
+                ['%name%' => $location->getContentInfo()->name],
+                'location'
+            )
+        );
+
+        return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $parentLocation->id,
+        ]));
     }
 
     /**

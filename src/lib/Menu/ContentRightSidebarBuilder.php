@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -19,6 +20,7 @@ use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
+use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsRoot;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsWithinCopySubtreeLimit;
@@ -65,6 +67,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
+    /** @var \eZ\Publish\API\Repository\LocationService */
+    private $locationService;
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
@@ -75,6 +80,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
      * @param \eZ\Publish\API\Repository\SearchService $searchService
      * @param \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension $udwExtension
      * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
      */
     public function __construct(
         MenuItemFactory $factory,
@@ -85,7 +91,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         ContentTypeService $contentTypeService,
         SearchService $searchService,
         UniversalDiscoveryExtension $udwExtension,
-        ContentService $contentService
+        ContentService $contentService,
+        LocationService $locationService
     ) {
         parent::__construct($factory, $eventDispatcher);
 
@@ -96,6 +103,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $this->searchService = $searchService;
         $this->udwExtension = $udwExtension;
         $this->contentService = $contentService;
+        $this->locationService = $locationService;
     }
 
     /**
@@ -148,10 +156,6 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'data-actions' => 'create',
             'data-focus-element' => '.ez-instant-filter__input',
         ];
-        $editAttributes = [
-            'class' => 'ez-btn--extra-actions ez-btn--edit',
-            'data-actions' => 'edit',
-        ];
         $sendToTrashAttributes = [
             'data-toggle' => 'modal',
             'data-target' => '#trash-location-modal',
@@ -173,6 +177,12 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
         if ((new ContentHaveAssetRelation($this->contentService))->isSatisfiedBy($content)) {
             $sendToTrashAttributes['data-target'] = '#trash-with-asset-modal';
+        }
+
+        $hasChildren = (new HasChildren($this->locationService))->isSatisfiedBy($location);
+
+        if ($contentType->isContainer && $hasChildren) {
+            $sendToTrashAttributes['data-target'] = '#trash-container-modal';
         }
 
         $contentIsUser = (new ContentIsUser($this->userService))->isSatisfiedBy($content);
