@@ -6,3 +6,6 @@ services:
 
     EzSystems\EzPlatformAdminUi\Util\:
         resource: "../../../lib/Util"
+
+    EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface:
+        alias: EzSystems\EzPlatformAdminUi\Util\PermissionUtil

@@ -31,7 +31,7 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
-use EzSystems\EzPlatformAdminUi\Util\PermissionUtil;
+use EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface;
 use EzSystems\EzPlatformAdminUiBundle\View\EzPagerfantaView;
 use EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate;
 use Pagerfanta\Adapter\ArrayAdapter;
@@ -80,7 +80,7 @@ class SectionController extends Controller
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Util\PermissionUtil */
+    /** @var \EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface */
     private $permissionUtil;
 
     /** @var int */
@@ -99,7 +99,7 @@ class SectionController extends Controller
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \EzSystems\EzPlatformAdminUi\UI\Service\PathService $pathService
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\Util\PermissionUtil $permissionUtil
+     * @param \EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface $permissionUtil
      * @param int $defaultPaginationLimit
      */
     public function __construct(
@@ -115,7 +115,7 @@ class SectionController extends Controller
         LocationService $locationService,
         PathService $pathService,
         PermissionResolver $permissionResolver,
-        PermissionUtil $permissionUtil,
+        PermissionUtilInterface $permissionUtil,
         int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;

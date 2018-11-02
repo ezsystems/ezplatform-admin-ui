@@ -84,13 +84,14 @@ services:
     EzSystems\EzPlatformAdminUi\Form\DataMapper\:
         resource: '../../../lib/Form/DataMapper'
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType:
-        arguments:
-            $siteAccessLanguages: '$languages$'
-
     EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyChoiceType:
         arguments:
             $policyMap: "%ezpublish.api.role.policy_map%"
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType:
+        arguments:
+            $choiceListProvider: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\PermissionAwareContentTypeChoiceListProvider'
+            $languageChoiceListProvider: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\PermissionAwareLanguageChoiceListProvider'
 
     EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory:
         arguments:
@@ -151,3 +152,23 @@ services:
             - {name: kernel.event_subscriber, priority: -250}
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UserPreferencesGlobalExtension: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ContentTypeChoiceListProvider: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\LanguageChoiceListProvider:
+        arguments:
+            $siteAccessLanguages: '$languages$'
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\PermissionAwareContentTypeChoiceListProvider:
+        arguments:
+            $decorated: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ContentTypeChoiceListProvider'
+            $module: 'content'
+            $function: 'create'
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\PermissionAwareLanguageChoiceListProvider:
+        arguments:
+            $decorated: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\LanguageChoiceListProvider'
+            $module: 'content'
+            $function: 'create'
+
+

@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ContentTypeChoiceListProvider;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,15 +20,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ContentTypeChoiceType extends AbstractType
 {
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ContentTypeChoiceListProvider */
+    private $contentTypeChoiceListProvider;
+
     /**
-     * @param ContentTypeService $contentTypeService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ContentTypeChoiceListProvider $contentTypeChoiceListProvider
      */
-    public function __construct(ContentTypeService $contentTypeService)
-    {
+    public function __construct(
+        ContentTypeService $contentTypeService,
+        ContentTypeChoiceListProvider $contentTypeChoiceListProvider
+    ) {
         $this->contentTypeService = $contentTypeService;
+        $this->contentTypeChoiceListProvider = $contentTypeChoiceListProvider;
     }
 
     public function getParent()
@@ -39,15 +47,7 @@ class ContentTypeChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choice_loader' => new CallbackChoiceLoader(function () {
-                    $contentTypes = [];
-                    $contentTypeGroups = $this->contentTypeService->loadContentTypeGroups();
-                    foreach ($contentTypeGroups as $contentTypeGroup) {
-                        $contentTypes[$contentTypeGroup->identifier] = $this->contentTypeService->loadContentTypes($contentTypeGroup);
-                    }
-
-                    return $contentTypes;
-                }),
+                'choice_loader' => new CallbackChoiceLoader([$this->contentTypeChoiceListProvider, 'getChoiceList']),
                 'choice_label' => 'name',
                 'choice_name' => 'identifier',
                 'choice_value' => 'identifier',

@@ -10,25 +10,40 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft;
 
 use eZ\Publish\API\Repository\LanguageService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ChoiceListProviderInterface;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContentCreateType extends AbstractType
 {
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     protected $languageService;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ChoiceListProviderInterface */
+    private $choiceListProvider;
+
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ChoiceListProviderInterface */
+    private $languageChoiceListProvider;
+
     /**
-     * @param LanguageService $languageService
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ChoiceListProviderInterface $choiceListProvider
+     * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ChoiceListProviderInterface $languageChoiceListProvider
      */
-    public function __construct(LanguageService $languageService)
-    {
+    public function __construct(
+        LanguageService $languageService,
+        ChoiceListProviderInterface $choiceListProvider,
+        ChoiceListProviderInterface $languageChoiceListProvider
+    ) {
         $this->languageService = $languageService;
+        $this->choiceListProvider = $choiceListProvider;
+        $this->languageChoiceListProvider = $languageChoiceListProvider;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -41,6 +56,7 @@ class ContentCreateType extends AbstractType
                     'label' => false,
                     'multiple' => false,
                     'expanded' => true,
+                    'choice_loader' => new CallbackChoiceLoader([$this->choiceListProvider, 'getChoiceList']),
                 ]
             )
             ->add(
@@ -55,6 +71,7 @@ class ContentCreateType extends AbstractType
                     'label' => false,
                     'multiple' => false,
                     'expanded' => false,
+                    'choice_loader' => new CallbackChoiceLoader([$this->languageChoiceListProvider, 'getChoiceList']),
                 ]
             )
             ->add(

@@ -11,25 +11,34 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use eZ\Publish\API\Repository\PermissionResolver;
+use Symfony\Component\HttpFoundation\Response;
 
 class DashboardController extends Controller
 {
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     protected $formFactory;
 
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
     /**
-     * @param \EzSystems\EzplatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      */
-    public function __construct(FormFactory $formFactory, PermissionResolver $permissionResolver)
-    {
+    public function __construct(
+        FormFactory $formFactory,
+        PermissionResolver $permissionResolver
+    ) {
         $this->formFactory = $formFactory;
         $this->permissionResolver = $permissionResolver;
     }
 
-    public function dashboardAction()
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    public function dashboardAction(): Response
     {
         $editForm = $this->formFactory->contentEdit(
             new ContentEditData()

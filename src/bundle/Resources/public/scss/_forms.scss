@@ -31,6 +31,7 @@ form:not(.form-inline) {
 
     .form-control[readonly] {
         background-color: $ez-white;
+        pointer-events: none;
     }
 
     .form-control:focus {
