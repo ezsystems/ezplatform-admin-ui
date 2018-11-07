@@ -59,4 +59,11 @@
             margin-bottom: 0;
         }
     }
+
+    pre {
+        padding: calculateRem(10px);
+        min-height: calculateRem(43px);
+        background-color: $ez-ground-base-pale;
+        border: calculateRem(1px) solid $ez-ground-base-medium;
+    }
 }
