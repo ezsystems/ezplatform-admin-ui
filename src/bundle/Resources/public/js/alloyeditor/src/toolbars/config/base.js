@@ -17,8 +17,9 @@ export default class EzConfigBase {
         const nodes = [...block.$.childNodes];
         const count = nodes.length;
         const areAllTextNodesEmpty = !!count && nodes.every((node) => node.nodeName === '#text' && !node.data);
+        const isOnlyBreakLine = count === 1 && block.$.childNodes.item(0).localName === 'br';
 
-        return count === 0 || (count === 1 && block.$.childNodes.item(0).localName === 'br') || areAllTextNodesEmpty;
+        return count === 0 || isOnlyBreakLine || areAllTextNodesEmpty;
     }
 
     static setPositionFor(block, editor) {
