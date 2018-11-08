@@ -170,6 +170,8 @@ class PlatformElementFactory extends ElementFactory
                 return new ContentTypePicker($context);
             case UniversalDiscoveryWidget::ELEMENT_NAME:
                 return new UniversalDiscoveryWidget($context);
+            case Pagination::ELEMENT_NAME:
+                return new Pagination($context);
             default:
                 throw new \InvalidArgumentException(sprintf('Unrecognized element name: %s', $elementName));
         }
