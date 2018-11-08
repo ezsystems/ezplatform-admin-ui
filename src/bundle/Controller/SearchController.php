@@ -108,6 +108,7 @@ class SearchController extends Controller
         $contentTypes = [];
         $lastModified = $search['last_modified'] ?? [];
         $created = $search['created'] ?? [];
+        $subtree = $search['subtree'] ?? null;
 
         if (!empty($search['section'])) {
             $section = $this->sectionService->loadSection($search['section']);
@@ -119,7 +120,7 @@ class SearchController extends Controller
         }
 
         $form = $this->formFactory->createSearchForm(
-            new SearchData($limit, $page, $query, $section, $contentTypes, $lastModified, $created, $creator),
+            new SearchData($limit, $page, $query, $section, $contentTypes, $lastModified, $created, $creator, $subtree),
             'search',
             [
                 'method' => Request::METHOD_GET,
@@ -139,6 +140,7 @@ class SearchController extends Controller
                 $lastModified = $data->getLastModified();
                 $created = $data->getCreated();
                 $creator = $data->getCreator();
+                $subtree = $data->getSubtree();
                 $query = new Query();
                 $criteria = [];
 
@@ -171,6 +173,9 @@ class SearchController extends Controller
                         Criterion\Operator::EQ,
                         $creator->id
                     );
+                }
+                if (null !== $subtree) {
+                    $criteria[] = new Criterion\Subtree($subtree);
                 }
                 if (!empty($criteria)) {
                     $query->filter = new Criterion\LogicalAnd($criteria);

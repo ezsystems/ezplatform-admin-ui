@@ -55,6 +55,29 @@
         </svg>
         <ul class="ez-filters__user-list ez-filters__user-list--hidden"></ul>
     </div>
+    <div class="ez-filters__item ez-filters__item--subtree">
+        <label class="ez-filters__item-label">{{ 'search.subtree'|trans|desc('Subtree:') }}</label>
+        {% set subtree = form.vars.data.subtree %}
+        <button data-universal-discovery-title="{{'search.udw.select_content'|trans|desc('Select Content')}}"
+                class="ez-button-tree pure-button ez-font-icon ez-button btn btn-secondary ez-btn--udw-select-location"
+                data-location-path-input-selector="#{{form.subtree.vars.id}}"
+                data-selected-content-name-selector="#{{form.subtree.vars.id}}-selected-content-name"
+                data-udw-config="{{ ez_udw_config('single_container', {}) }}"
+                data-display-wrapper=".ez-filters__item--subtree"
+        >{{'search.select_content'|trans|desc('Select Content')}}</button>
+        <div id="{{form.subtree.vars.id}}-selected-content-name">
+            <span class="{{form.subtree.vars.id}}-selected-content-name">
+                {% if form.subtree.vars.value is not empty %}
+                    {% set locationList = ez_path_string_to_locations(form.subtree.vars.value) %}
+                    {% for location in locationList %}
+                        {{ ez_content_name(location.contentInfo) }}
+                        {% if loop.revindex > 1 %}/{% endif %}
+                    {% endfor %}
+                {% endif %}
+            </span>
+        </div>
+        {{ form_widget(form.subtree) }}
+    </div>
     <div class="ez-filters__btns">
         <button class="btn btn-dark ez-btn-clear">
             {{ 'search.clear'|trans|desc('Clear') }}</button>

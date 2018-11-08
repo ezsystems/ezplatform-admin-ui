@@ -64,6 +64,9 @@ class SearchType extends AbstractType
                 'placeholder' => /** @Desc("Any time") */ 'search.any_time',
                 'mapped' => false,
             ])
+            ->add('subtree', HiddenType::class, [
+                'required' => false,
+            ])
         ;
 
         if ($this->permissionResolver->hasAccess('section', 'view')) {
