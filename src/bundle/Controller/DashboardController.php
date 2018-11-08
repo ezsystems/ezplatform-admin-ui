@@ -10,14 +10,23 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use eZ\Publish\API\Repository\PermissionResolver;
 
 class DashboardController extends Controller
 {
     protected $formFactory;
 
-    public function __construct(FormFactory $formFactory)
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
+    /**
+     * @param \EzSystems\EzplatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     */
+    public function __construct(FormFactory $formFactory, PermissionResolver $permissionResolver)
     {
         $this->formFactory = $formFactory;
+        $this->permissionResolver = $permissionResolver;
     }
 
     public function dashboardAction()
@@ -28,6 +37,7 @@ class DashboardController extends Controller
 
         return $this->render('@ezdesign/dashboard/dashboard.html.twig', [
             'form_edit' => $editForm->createView(),
+            'can_create_content' => $this->permissionResolver->hasAccess('content', 'create'),
         ]);
     }
 }

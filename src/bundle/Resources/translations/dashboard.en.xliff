@@ -106,6 +106,11 @@
         <target state="new">Me</target>
         <note>key: me</note>
       </trans-unit>
+      <trans-unit id="013cb5f0c7391fd9db25ef277f72bd0d3b62a0e3" resname="my.dashboard">
+        <source>My dashboard</source>
+        <target state="new">My dashboard</target>
+        <note>key: my.dashboard</note>
+      </trans-unit>
       <trans-unit id="c4d3f17636317e532c589f3008d82c263ab5c39d" resname="tab.name.everyone_content">
         <source>Content</source>
         <target state="new">Content</target>
