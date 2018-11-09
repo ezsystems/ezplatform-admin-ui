@@ -1,4 +1,5 @@
 (function(global, doc, $, React, ReactDOM, eZ, Routing) {
+    const SELECTOR_BULK_OPERATION_FAILED_MODAL = '.ez-bulk-operation-failed-modal';
     const listContainers = [...doc.querySelectorAll('.ez-sil')];
     const mfuContainer = doc.querySelector('#ez-mfu');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
@@ -48,7 +49,7 @@
         };
         fetch(checkVersionDraftLink, {
             credentials: 'same-origin',
-        }).then(function(response) {
+        }).then((response) => {
             // Status 409 means that a draft conflict has occurred and the modal must be displayed.
             // Otherwise we can go to Content Item edit page.
             if (response.status === 409) {
@@ -59,6 +60,47 @@
         });
     };
     const generateLink = (locationId) => Routing.generate('_ezpublishLocation', { locationId });
+    const setModalTableTitle = (title) => {
+        const modalTableTitleNode = doc.querySelector(
+            `${SELECTOR_BULK_OPERATION_FAILED_MODAL} .ez-table-header .ez-table-header__headline`
+        );
+
+        modalTableTitleNode.innerHTML = title;
+    };
+    const setModalTableBody = (failedItemsData) => {
+        const modal = doc.querySelector(SELECTOR_BULK_OPERATION_FAILED_MODAL);
+        const table = modal.querySelector('.ez-bulk-operation-failed-modal__table');
+        const tableBody = table.querySelector('.ez-bulk-operation-failed-modal__table-body');
+        const tableRowTemplate = table.dataset.tableRowTemplate;
+        const fragment = doc.createDocumentFragment();
+
+        failedItemsData.forEach(({ contentName, contentTypeName }) => {
+            const container = doc.createElement('tbody');
+            const renderedItem = tableRowTemplate
+                .replace('{{ content_name }}', contentName)
+                .replace('{{ content_type_name }}', contentTypeName);
+
+            container.insertAdjacentHTML('beforeend', renderedItem);
+
+            const tableRowNode = container.querySelector('tr');
+
+            fragment.append(tableRowNode);
+        });
+
+        removeNodeChildren(tableBody);
+        tableBody.append(fragment);
+    };
+    const removeNodeChildren = (node) => {
+        while (node.firstChild) {
+            node.removeChild(node.firstChild);
+        }
+    };
+    const showBulkOperationFailedModal = (tableTitle, failedItemsData) => {
+        setModalTableBody(failedItemsData);
+        setModalTableTitle(tableTitle);
+
+        $(SELECTOR_BULK_OPERATION_FAILED_MODAL).modal('show');
+    };
 
     listContainers.forEach((container) => {
         const subItemsList = JSON.parse(container.dataset.items).SubitemsList;
@@ -94,6 +136,7 @@
                 contentTypesMap,
                 totalCount: subItemsList.ChildrenCount,
                 udwConfigBulkMoveItems,
+                onShowBulkOperationFailedModal: showBulkOperationFailedModal,
             }),
             container
         );

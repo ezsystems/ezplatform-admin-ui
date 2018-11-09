@@ -6,6 +6,16 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="daca600efcef0e9c24f518274291c0e8d2d5769f" resname="bulk_operation.failed.modal.content_name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: bulk_operation.failed.modal.content_name</note>
+      </trans-unit>
+      <trans-unit id="f881d9090d95a8498724eb3e86563ef395d95bfa" resname="bulk_operation.failed.modal.content_type_name">
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
+        <note>key: bulk_operation.failed.modal.content_type_name</note>
+      </trans-unit>
       <trans-unit id="a4b9e9b4898dd285237fc60130970ce7ed988871" resname="content.create.choose_content_type">
         <source>Create your content</source>
         <target state="new">Create your content</target>
@@ -30,6 +40,11 @@
         <source>Sub-items</source>
         <target state="new">Sub-items</target>
         <note>key: content.view.subitems</note>
+      </trans-unit>
+      <trans-unit id="4c21761c3ccdd6d9b33f9877528e9ab4c6fe3f67" resname="content.view.subitems.bulk_operation.limited_permissions">
+        <source>Limited user permissions</source>
+        <target state="new">Limited user permissions</target>
+        <note>key: content.view.subitems.bulk_operation.limited_permissions</note>
       </trans-unit>
       <trans-unit id="eeb49235f0e3b40e651725430b85a2885174bd2b" resname="location.bookmark.add">
         <source>Add to Bookmarks</source>

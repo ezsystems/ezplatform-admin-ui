@@ -10,7 +10,10 @@
      * Dispatches notification event
      *
      * @function showNotification
-     * @param {{message: string, label: string}} detail
+     * @param {Object} detail
+     * @param {String} detail.message
+     * @param {String} detail.label
+     * @param {Function} [detail.callback] Called after notification Node was added
      */
     const showNotification = (detail) => {
         const event = new CustomEvent('ez-notify', { detail });
@@ -23,11 +26,13 @@
      *
      * @function showInfoNotification
      * @param {String} message
+     * @param {Function} [callback] Called after notification Node was added
      */
-    const showInfoNotification = (message) =>
+    const showInfoNotification = (message, callback) =>
         showNotification({
             message,
             label: NOTIFICATION_INFO_LABEL,
+            callback,
         });
 
     /**
@@ -35,11 +40,13 @@
      *
      * @function showSuccessNotification
      * @param {String} message
+     * @param {Function} [callback] Called after notification Node was added
      */
-    const showSuccessNotification = (message) =>
+    const showSuccessNotification = (message, callback) =>
         showNotification({
             message,
             label: NOTIFICATION_SUCCESS_LABEL,
+            callback,
         });
 
     /**
@@ -47,11 +54,13 @@
      *
      * @function showWarningNotification
      * @param {String} message
+     * @param {Function} [callback] Called after notification Node was added
      */
-    const showWarningNotification = (message) =>
+    const showWarningNotification = (message, callback) =>
         showNotification({
             message,
             label: NOTIFICATION_WARNING_LABEL,
+            callback,
         });
 
     /**
@@ -73,14 +82,16 @@
      *
      * @function showErrorNotification
      * @param {(string | Error)} error
+     * @param {Function} [callback] Called after notification Node was added
      */
-    const showErrorNotification = (error) => {
+    const showErrorNotification = (error, callback) => {
         const isErrorObj = error instanceof Error;
         const message = isErrorObj ? error.message : error;
 
         showNotification({
             message,
             label: NOTIFICATION_ERROR_LABEL,
+            callback,
         });
     };
 
