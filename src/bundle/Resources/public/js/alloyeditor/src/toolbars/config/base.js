@@ -16,7 +16,7 @@ export default class EzConfigBase {
     static isEmpty(block) {
         const nodes = [...block.$.childNodes];
         const count = nodes.length;
-        const areAllTextNodesEmpty = !!count && nodes.every((node) => node.nodeName === '#text' && !node.data);
+        const areAllTextNodesEmpty = !!count && nodes.every((node) => node.nodeName === '#text' && !node.data.replace(/\u200B/g, ''));
         const isOnlyBreakLine = count === 1 && block.$.childNodes.item(0).localName === 'br';
 
         return count === 0 || isOnlyBreakLine || areAllTextNodesEmpty;
