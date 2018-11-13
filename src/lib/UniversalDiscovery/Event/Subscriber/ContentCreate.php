@@ -13,7 +13,7 @@ use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
 use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
-use EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface;
+use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ContentCreate implements EventSubscriberInterface
@@ -21,26 +21,26 @@ class ContentCreate implements EventSubscriberInterface
     /** @var array */
     private $restrictedContentTypesIdentifiers;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface */
-    private $permissionUtil;
+    /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
+    private $permissionChecker;
 
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
     /**
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface $permissionUtil
+     * @param \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface $permissionChecker
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function __construct(
         PermissionResolver $permissionResolver,
-        PermissionUtilInterface $permissionUtil,
+        PermissionCheckerInterface $permissionChecker,
         ContentTypeService $contentTypeService
     ) {
         $this->contentTypeService = $contentTypeService;
-        $this->permissionUtil = $permissionUtil;
+        $this->permissionChecker = $permissionChecker;
 
         $hasAccess = $permissionResolver->hasAccess('content', 'create');
         $this->restrictedContentTypesIdentifiers = $this->getRestrictedContentTypesIdentifiers($hasAccess);
@@ -92,7 +92,7 @@ class ContentCreate implements EventSubscriberInterface
             return [];
         }
 
-        $restrictedContentTypesIds = $this->permissionUtil->getRestrictions($hasAccess, ContentTypeLimitation::class);
+        $restrictedContentTypesIds = $this->permissionChecker->getRestrictions($hasAccess, ContentTypeLimitation::class);
 
         if (empty($restrictedContentTypesIds)) {
             return [];

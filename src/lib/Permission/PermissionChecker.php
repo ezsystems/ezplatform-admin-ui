@@ -6,63 +6,43 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Util;
+namespace EzSystems\EzPlatformAdminUi\Permission;
 
 use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\User\Limitation\LocationLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\ParentContentTypeLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\ParentDepthLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\ParentOwnerLimitation;
+use eZ\Publish\API\Repository\Values\User\Limitation\ParentUserGroupLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\SubtreeLimitation;
+use eZ\Publish\API\Repository\Values\User\User;
 
-class PermissionUtil implements PermissionUtilInterface
+class PermissionChecker implements PermissionCheckerInterface
 {
+    private const USER_GROUPS_LIMIT = 1;
+
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
+    /** @var \eZ\Publish\API\Repository\UserService */
+    private $userService;
+
+    /** @var array */
     private $flattenArrayOfLimitations;
 
     /**
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \eZ\Publish\API\Repository\UserService $userService
      */
     public function __construct(
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        UserService $userService
     ) {
         $this->permissionResolver = $permissionResolver;
-    }
-
-    /**
-     * This method should only be used for very specific use cases. It should be used in a content cases
-     * where assignment limitations are not relevant.
-     *
-     * @param array $hasAccess
-     *
-     * @return array
-     */
-    public function flattenArrayOfLimitations(array $hasAccess): array
-    {
-        if (is_array($this->flattenArrayOfLimitations)) {
-            return $this->flattenArrayOfLimitations;
-        }
-        $limitations = [];
-        foreach ($hasAccess as $permissionSet) {
-            if ($permissionSet['limitation'] !== null) {
-                $limitations[] = $permissionSet['limitation'];
-            }
-            /** @var \eZ\Publish\API\Repository\Values\User\Policy $policy */
-            foreach ($permissionSet['policies'] as $policy) {
-                $policyLimitations = $policy->getLimitations();
-                if (!empty($policyLimitations)) {
-                    foreach ($policyLimitations as $policyLimitation) {
-                        $limitations[$policy->id][] = $policyLimitation;
-                    }
-                }
-            }
-        }
-
-        return $this->flattenArrayOfLimitations = $limitations;
+        $this->userService = $userService;
     }
 
     /**
@@ -75,7 +55,8 @@ class PermissionUtil implements PermissionUtilInterface
     {
         $restrictions = [];
         $oneOfPoliciesHasNoLimitation = false;
-        foreach ($this->flattenArrayOfLimitations($hasAccess) as $policy => $limitations) {
+
+        foreach ($this->flattenArrayOfLimitationsForCurrentUser($hasAccess) as $policy => $limitations) {
             $policyHasLimitation = false;
             foreach ($limitations as $limitation) {
                 if ($limitation instanceof $class) {
@@ -131,6 +112,11 @@ class PermissionUtil implements PermissionUtilInterface
             ? true
             : in_array($location->contentInfo->sectionId, array_map('intval', $restrictedSections), true);
 
+        $restrictedParentUserGroups = $this->getRestrictions($hasAccess, ParentUserGroupLimitation::class);
+        $canCreateInParentUserGroup = empty($restrictedParentUserGroups)
+            ? true
+            : $this->hasSameParentUserGroup($location);
+
         $restrictedSubtrees = $this->getRestrictions($hasAccess, SubtreeLimitation::class);
         $canCreateInSubtree = empty($restrictedSubtrees)
             ? true
@@ -143,6 +129,86 @@ class PermissionUtil implements PermissionUtilInterface
             && $canCreateInParentDepth
             && $canCreateInParentOwner
             && $canCreateInSection
-            && $canCreateInSubtree;
+            && $canCreateInSubtree
+            && $canCreateInParentUserGroup;
+    }
+
+    /**
+     * This method should only be used for very specific use cases. It should be used in a content cases
+     * where assignment limitations are not relevant.
+     *
+     * @param array $hasAccess
+     *
+     * @return array
+     */
+    private function flattenArrayOfLimitationsForCurrentUser(array $hasAccess): array
+    {
+        $currentUserId = $this->permissionResolver->getCurrentUserReference()->getUserId();
+
+        if (is_array($this->flattenArrayOfLimitations[$currentUserId])) {
+            return $this->flattenArrayOfLimitations[$currentUserId];
+        }
+
+        $limitations = [];
+        foreach ($hasAccess as $permissionSet) {
+            if ($permissionSet['limitation'] !== null) {
+                $limitations[] = $permissionSet['limitation'];
+            }
+            /** @var \eZ\Publish\API\Repository\Values\User\Policy $policy */
+            foreach ($permissionSet['policies'] as $policy) {
+                $policyLimitations = $policy->getLimitations();
+                if (!empty($policyLimitations)) {
+                    foreach ($policyLimitations as $policyLimitation) {
+                        $limitations[$policy->id][] = $policyLimitation;
+                    }
+                }
+            }
+        }
+
+        return $this->flattenArrayOfLimitations[$currentUserId] = $limitations;
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     *
+     * @return bool
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    private function hasSameParentUserGroup(Location $location): bool
+    {
+        $currentUserId = $this->permissionResolver->getCurrentUserReference()->getUserId();
+        $currentUser = $this->userService->loadUser($currentUserId);
+        $currentUserGroups = $this->loadAllUserGroupsIdsOfUser($currentUser);
+
+        $locationOwnerId = $location->contentInfo->ownerId;
+        $locationOwner = $this->userService->loadUser($locationOwnerId);
+        $locationOwnerGroups = $this->loadAllUserGroupsIdsOfUser($locationOwner);
+
+        return !empty(array_intersect($currentUserGroups, $locationOwnerGroups));
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\User\User $user
+     *
+     * @return int[]
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    private function loadAllUserGroupsIdsOfUser(User $user): array
+    {
+        $allUserGroups = [];
+        $offset = 0;
+
+        do {
+            $userGroups = $this->userService->loadUserGroupsOfUser($user, $offset, self::USER_GROUPS_LIMIT);
+            foreach ($userGroups as $userGroup) {
+                $allUserGroups[] = $userGroup->contentInfo->id;
+            }
+            $offset += self::USER_GROUPS_LIMIT;
+        } while (count($userGroups) === self::USER_GROUPS_LIMIT);
+
+        return $allUserGroups;
     }
 }

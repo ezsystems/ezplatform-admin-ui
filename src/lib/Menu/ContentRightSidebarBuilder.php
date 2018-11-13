@@ -22,7 +22,7 @@ use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsRoot;
-use EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface;
+use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsWithinCopySubtreeLimit;
 use JMS\TranslationBundle\Model\Message;
@@ -71,8 +71,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface */
-    private $permissionUtil;
+    /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
+    private $permissionChecker;
 
     /**
      * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
@@ -85,7 +85,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
      * @param \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension $udwExtension
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\API\Repository\LocationService $locationService
-     * @param \EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface $permissionUtil
+     * @param \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface $permissionChecker
      */
     public function __construct(
         MenuItemFactory $factory,
@@ -98,7 +98,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         UniversalDiscoveryExtension $udwExtension,
         ContentService $contentService,
         LocationService $locationService,
-        PermissionUtilInterface $permissionUtil
+        PermissionCheckerInterface $permissionChecker
     ) {
         parent::__construct($factory, $eventDispatcher);
 
@@ -110,7 +110,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $this->udwExtension = $udwExtension;
         $this->contentService = $contentService;
         $this->locationService = $locationService;
-        $this->permissionUtil = $permissionUtil;
+        $this->permissionChecker = $permissionChecker;
     }
 
     /**
@@ -141,7 +141,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $menu = $this->factory->createItem('root');
 
         $hasAccess = $this->permissionResolver->hasAccess('content', 'create');
-        $canCreateInLocation = $this->permissionUtil->canCreateInLocation($location, $hasAccess);
+        $canCreateInLocation = $this->permissionChecker->canCreateInLocation($location, $hasAccess);
 
         $canCreate = $canCreateInLocation && $contentType->isContainer;
         $canEdit = $this->permissionResolver->canUser(

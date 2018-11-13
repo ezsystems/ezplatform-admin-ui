@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider;
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
-use EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface;
+use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 
 class PermissionAwareContentTypeChoiceListProvider implements ChoiceListProviderInterface
@@ -21,8 +21,8 @@ class PermissionAwareContentTypeChoiceListProvider implements ChoiceListProvider
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface */
-    private $permissionUtil;
+    /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
+    private $permissionChecker;
 
     /** @var string */
     private $module;
@@ -32,21 +32,21 @@ class PermissionAwareContentTypeChoiceListProvider implements ChoiceListProvider
 
     /**
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface $permissionUtil
+     * @param \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface $permissionChecker
      * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ContentTypeChoiceListProvider $decorated
      * @param string $module
      * @param string $function
      */
     public function __construct(
         PermissionResolver $permissionResolver,
-        PermissionUtilInterface $permissionUtil,
+        PermissionCheckerInterface $permissionChecker,
         ContentTypeChoiceListProvider $decorated,
         string $module,
         string $function
     ) {
         $this->decorated = $decorated;
         $this->permissionResolver = $permissionResolver;
-        $this->permissionUtil = $permissionUtil;
+        $this->permissionChecker = $permissionChecker;
         $this->module = $module;
         $this->function = $function;
     }
@@ -60,7 +60,7 @@ class PermissionAwareContentTypeChoiceListProvider implements ChoiceListProvider
     {
         $hasAccess = $this->permissionResolver->hasAccess($this->module, $this->function);
         if (!is_bool($hasAccess)) {
-            $restrictedContentTypesIds = $this->permissionUtil->getRestrictions($hasAccess, ContentTypeLimitation::class);
+            $restrictedContentTypesIds = $this->permissionChecker->getRestrictions($hasAccess, ContentTypeLimitation::class);
         }
 
         $contentTypesGroups = $this->decorated->getChoiceList();

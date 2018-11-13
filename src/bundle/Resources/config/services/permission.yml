@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Permission\:
+        resource: "../../../lib/Permission"
+
+    EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface:
+        alias: EzSystems\EzPlatformAdminUi\Permission\PermissionChecker

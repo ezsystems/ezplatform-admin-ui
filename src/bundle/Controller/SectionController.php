@@ -31,7 +31,7 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
-use EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface;
+use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformAdminUiBundle\View\EzPagerfantaView;
 use EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate;
 use Pagerfanta\Adapter\ArrayAdapter;
@@ -80,8 +80,8 @@ class SectionController extends Controller
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface */
-    private $permissionUtil;
+    /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
+    private $permissionChecker;
 
     /** @var int */
     private $defaultPaginationLimit;
@@ -99,7 +99,7 @@ class SectionController extends Controller
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \EzSystems\EzPlatformAdminUi\UI\Service\PathService $pathService
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface $permissionUtil
+     * @param \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface $permissionChecker
      * @param int $defaultPaginationLimit
      */
     public function __construct(
@@ -115,7 +115,7 @@ class SectionController extends Controller
         LocationService $locationService,
         PathService $pathService,
         PermissionResolver $permissionResolver,
-        PermissionUtilInterface $permissionUtil,
+        PermissionCheckerInterface $permissionChecker,
         int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
@@ -131,7 +131,7 @@ class SectionController extends Controller
         $this->pathService = $pathService;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
         $this->permissionResolver = $permissionResolver;
-        $this->permissionUtil = $permissionUtil;
+        $this->permissionChecker = $permissionChecker;
     }
 
     public function performAccessCheck(): void
@@ -518,7 +518,7 @@ class SectionController extends Controller
             return $hasAccess;
         }
 
-        $restrictedNewSections = $this->permissionUtil->getRestrictions($hasAccess, NewSectionLimitation::class);
+        $restrictedNewSections = $this->permissionChecker->getRestrictions($hasAccess, NewSectionLimitation::class);
         if (!empty($restrictedNewSections)) {
             return in_array($section->id, array_map('intval', $restrictedNewSections), true);
         }

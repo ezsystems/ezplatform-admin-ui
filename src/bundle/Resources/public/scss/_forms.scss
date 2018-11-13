@@ -31,7 +31,6 @@ form:not(.form-inline) {
 
     .form-control[readonly] {
         background-color: $ez-white;
-        pointer-events: none;
     }
 
     .form-control:focus {
@@ -101,4 +100,8 @@ form:not(.form-inline) {
     .form-check-input {
         position: absolute;
     }
+}
+
+.ez-content-create[readonly] {
+    pointer-events: none;
 }

@@ -13,7 +13,7 @@ use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
 use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
-use EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface;
+use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SectionAssign implements EventSubscriberInterface
@@ -21,25 +21,25 @@ class SectionAssign implements EventSubscriberInterface
     /** @var array */
     private $restrictedContentTypes;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface */
-    private $permissionUtil;
+    /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
+    private $permissionChecker;
 
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
     /**
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\Util\PermissionUtilInterface $permissionUtil
+     * @param \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface $permissionChecker
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function __construct(
         PermissionResolver $permissionResolver,
-        PermissionUtilInterface $permissionUtil,
+        PermissionCheckerInterface $permissionChecker,
         ContentTypeService $contentTypeService
     ) {
-        $this->permissionUtil = $permissionUtil;
+        $this->permissionChecker = $permissionChecker;
         $this->contentTypeService = $contentTypeService;
         $hasAccess = $permissionResolver->hasAccess('section', 'assign');
         $this->restrictedContentTypes = is_array($hasAccess) ? $this->getRestrictedContentTypes($hasAccess) : [];
@@ -88,7 +88,7 @@ class SectionAssign implements EventSubscriberInterface
     private function getRestrictedContentTypes(array $hasAccess): array
     {
         $restrictedContentTypes = [];
-        $restrictedContentTypesIds = $this->permissionUtil->getRestrictions($hasAccess, ContentTypeLimitation::class);
+        $restrictedContentTypesIds = $this->permissionChecker->getRestrictions($hasAccess, ContentTypeLimitation::class);
 
         foreach ($restrictedContentTypesIds as $restrictedContentTypeId) {
             // TODO: Change to `contentTypeService->loadContentTypeList($restrictedContentTypesIds)` after #2444 will be merged
