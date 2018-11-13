@@ -518,31 +518,12 @@ class SectionController extends Controller
             return $hasAccess;
         }
 
-        if (!empty($restrictedNewSections = $this->getRestrictedNewSectionsIds($hasAccess))) {
-            return in_array($section->id, $restrictedNewSections, true);
+        $restrictedNewSections = $this->permissionUtil->getRestrictions($hasAccess, NewSectionLimitation::class);
+        if (!empty($restrictedNewSections)) {
+            return in_array($section->id, array_map('intval', $restrictedNewSections), true);
         }
 
         // If a user has other limitation than NewSectionLimitation, then a decision will be taken later, based on selected Content.
         return true;
-    }
-
-    /**
-     * @param array $hasAccess
-     *
-     * @return int[]
-     */
-    private function getRestrictedNewSectionsIds(array $hasAccess): array
-    {
-        $restrictedSectionsIds = [];
-
-        foreach ($this->permissionUtil->flattenArrayOfLimitations($hasAccess) as $limitation) {
-            if ($limitation instanceof NewSectionLimitation) {
-                foreach ($limitation->limitationValues as $sectionsId) {
-                    $restrictedSectionsIds[] = (int)$sectionsId;
-                }
-            }
-        }
-
-        return array_unique($restrictedSectionsIds);
     }
 }

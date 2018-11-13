@@ -88,19 +88,8 @@ class SectionAssign implements EventSubscriberInterface
     private function getRestrictedContentTypes(array $hasAccess): array
     {
         $restrictedContentTypes = [];
-        $restrictedContentTypesIds = [];
+        $restrictedContentTypesIds = $this->permissionUtil->getRestrictions($hasAccess, ContentTypeLimitation::class);
 
-        foreach ($this->permissionUtil->flattenArrayOfLimitations($hasAccess) as $limitation) {
-            if ($limitation instanceof ContentTypeLimitation) {
-                $restrictedContentTypesIds[] = $limitation->limitationValues;
-            }
-        }
-
-        if (empty($restrictedContentTypesIds)) {
-            return $restrictedContentTypes;
-        }
-
-        $restrictedContentTypesIds = array_unique(array_merge(...$restrictedContentTypesIds));
         foreach ($restrictedContentTypesIds as $restrictedContentTypeId) {
             // TODO: Change to `contentTypeService->loadContentTypeList($restrictedContentTypesIds)` after #2444 will be merged
             try {
