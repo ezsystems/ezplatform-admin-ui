@@ -9,9 +9,8 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
 
 use eZ\Publish\API\Repository\ContentTypeService;
-use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ContentTypeChoiceListProvider;
+use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,19 +22,19 @@ class ContentTypeChoiceType extends AbstractType
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ContentTypeChoiceListProvider */
-    private $contentTypeChoiceListProvider;
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader */
+    private $contentTypeChoiceLoader;
 
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ContentTypeChoiceListProvider $contentTypeChoiceListProvider
+     * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader $contentTypeChoiceLoader
      */
     public function __construct(
         ContentTypeService $contentTypeService,
-        ContentTypeChoiceListProvider $contentTypeChoiceListProvider
+        ContentTypeChoiceLoader $contentTypeChoiceLoader
     ) {
         $this->contentTypeService = $contentTypeService;
-        $this->contentTypeChoiceListProvider = $contentTypeChoiceListProvider;
+        $this->contentTypeChoiceLoader = $contentTypeChoiceLoader;
     }
 
     public function getParent()
@@ -47,7 +46,7 @@ class ContentTypeChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choice_loader' => new CallbackChoiceLoader([$this->contentTypeChoiceListProvider, 'getChoiceList']),
+                'choice_loader' => $this->contentTypeChoiceLoader,
                 'choice_label' => 'name',
                 'choice_name' => 'identifier',
                 'choice_value' => 'identifier',

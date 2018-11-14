@@ -18,7 +18,8 @@ imports:
     - { resource: services/translation.yml }
     - { resource: services/user_settings.yml }
     - { resource: services/rest.yml }
-    - { resource: services/permission.yml }
+    - { resource: services/permissions.yml }
+    - { resource: services/forms.yml }
 
 services:
     _defaults:
@@ -77,23 +78,6 @@ services:
         tags:
             - {name: kernel.event_subscriber}
 
-    EzSystems\EzPlatformAdminUi\Form\SubmitHandler: ~
-
-    EzSystems\EzPlatformAdminUi\Form\Type\:
-        resource: '../../../lib/Form/Type'
-
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\:
-        resource: '../../../lib/Form/DataMapper'
-
-    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyChoiceType:
-        arguments:
-            $policyMap: "%ezpublish.api.role.policy_map%"
-
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType:
-        arguments:
-            $choiceListProvider: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\PermissionAwareContentTypeChoiceListProvider'
-            $languageChoiceListProvider: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\PermissionAwareLanguageChoiceListProvider'
-
     EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory:
         arguments:
             $userContentTypeIdentifier: '$user_content_type_identifier$'
@@ -107,15 +91,9 @@ services:
         tags:
             - { name: form.type }
 
-    EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory: ~
-
     EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler: ~
 
     EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler'
-
-    EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
-        tags:
-            - { name: form.type_extension, extended_type: EzSystems\RepositoryForms\Form\Type\Content\ContentEditType }
 
     EzSystems\EzPlatformAdminUi\RepositoryForms\View\ViewParametersListener:
         public: true
@@ -141,9 +119,6 @@ services:
         tags:
             - { name: knp_menu.voter }
 
-    EzSystems\EzPlatformAdminUi\Form\EventListener\:
-        resource: '../../../lib/Form/EventListener'
-
     EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\ContentOnTheFlyDispatcher:
         calls:
             - [setEventDispatcher, ["@event_dispatcher"]]
@@ -153,23 +128,3 @@ services:
             - {name: kernel.event_subscriber, priority: -250}
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UserPreferencesGlobalExtension: ~
-
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ContentTypeChoiceListProvider: ~
-
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\LanguageChoiceListProvider:
-        arguments:
-            $siteAccessLanguages: '$languages$'
-
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\PermissionAwareContentTypeChoiceListProvider:
-        arguments:
-            $decorated: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ContentTypeChoiceListProvider'
-            $module: 'content'
-            $function: 'create'
-
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\PermissionAwareLanguageChoiceListProvider:
-        arguments:
-            $decorated: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\LanguageChoiceListProvider'
-            $module: 'content'
-            $function: 'create'
-
-

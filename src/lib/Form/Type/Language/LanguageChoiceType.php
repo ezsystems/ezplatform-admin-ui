@@ -8,9 +8,8 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
 
-use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\LanguageChoiceListProvider;
+use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,15 +20,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class LanguageChoiceType extends AbstractType
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\LanguageChoiceListProvider */
-    private $languageChoiceListProvider;
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader */
+    private $languageChoiceLoader;
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\LanguageChoiceListProvider $languageChoiceListProvider
+     * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader $languageChoiceLoader
      */
-    public function __construct(LanguageChoiceListProvider $languageChoiceListProvider)
+    public function __construct(LanguageChoiceLoader $languageChoiceLoader)
     {
-        $this->languageChoiceListProvider = $languageChoiceListProvider;
+        $this->languageChoiceLoader = $languageChoiceLoader;
     }
 
     public function getParent()
@@ -41,7 +40,7 @@ class LanguageChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choice_loader' => new CallbackChoiceLoader([$this->languageChoiceListProvider, 'getChoiceList']),
+                'choice_loader' => $this->languageChoiceLoader,
                 'choice_label' => 'name',
                 'choice_name' => 'languageCode',
                 'choice_value' => 'languageCode',

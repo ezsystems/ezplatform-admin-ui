@@ -6,16 +6,18 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
+use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 
-class PermissionAwareContentTypeChoiceListProvider implements ChoiceListProviderInterface
+class PermissionAwareContentTypeChoiceLoader implements ChoiceLoaderInterface
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ChoiceListProviderInterface */
+    /** @var \Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface */
     private $decorated;
 
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
@@ -33,14 +35,14 @@ class PermissionAwareContentTypeChoiceListProvider implements ChoiceListProvider
     /**
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface $permissionChecker
-     * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider\ContentTypeChoiceListProvider $decorated
+     * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader $decorated
      * @param string $module
      * @param string $function
      */
     public function __construct(
         PermissionResolver $permissionResolver,
         PermissionCheckerInterface $permissionChecker,
-        ContentTypeChoiceListProvider $decorated,
+        ContentTypeChoiceLoader $decorated,
         string $module,
         string $function
     ) {
@@ -52,21 +54,18 @@ class PermissionAwareContentTypeChoiceListProvider implements ChoiceListProvider
     }
 
     /**
-     * @return array
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * {@inheritdoc}
      */
-    public function getChoiceList(): array
+    public function loadChoiceList($value = null)
     {
         $hasAccess = $this->permissionResolver->hasAccess($this->module, $this->function);
         if (!is_bool($hasAccess)) {
             $restrictedContentTypesIds = $this->permissionChecker->getRestrictions($hasAccess, ContentTypeLimitation::class);
         }
-
         $contentTypesGroups = $this->decorated->getChoiceList();
 
         if (empty($restrictedContentTypesIds)) {
-            return $contentTypesGroups;
+            return new ArrayChoiceList($contentTypesGroups, $value);
         }
 
         foreach ($contentTypesGroups as $group => $contentTypes) {
@@ -75,6 +74,44 @@ class PermissionAwareContentTypeChoiceListProvider implements ChoiceListProvider
             });
         }
 
-        return $contentTypesGroups;
+        return new ArrayChoiceList($contentTypesGroups, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function loadChoicesForValues(array $values, $value = null)
+    {
+        // Optimize
+        $values = array_filter($values);
+        if (empty($values)) {
+            return [];
+        }
+
+        // If no callable is set, values are the same as choices
+        if (null === $value) {
+            return $values;
+        }
+
+        return $this->loadChoiceList($value)->getChoicesForValues($values);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function loadValuesForChoices(array $choices, $value = null)
+    {
+        // Optimize
+        $choices = array_filter($choices);
+        if (empty($choices)) {
+            return [];
+        }
+
+        // If no callable is set, choices are the same as values
+        if (null === $value) {
+            return $choices;
+        }
+
+        return $this->loadChoiceList($value)->getValuesForChoices($choices);
     }
 }

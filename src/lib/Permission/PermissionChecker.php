@@ -22,7 +22,7 @@ use eZ\Publish\API\Repository\Values\User\User;
 
 class PermissionChecker implements PermissionCheckerInterface
 {
-    private const USER_GROUPS_LIMIT = 1;
+    private const USER_GROUPS_LIMIT = 25;
 
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
@@ -81,6 +81,9 @@ class PermissionChecker implements PermissionCheckerInterface
      * @param array|bool $hasAccess
      *
      * @return bool
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function canCreateInLocation(Location $location, $hasAccess): bool
     {
@@ -90,32 +93,56 @@ class PermissionChecker implements PermissionCheckerInterface
         $restrictedLocations = $this->getRestrictions($hasAccess, LocationLimitation::class);
         $canCreateInLocation = empty($restrictedLocations)
             ? true
-            : in_array($location->id, array_map('intval', $restrictedLocations), true);
+            : \in_array($location->id, array_map('intval', $restrictedLocations), true);
+
+        if (false === $canCreateInLocation) {
+            return false;
+        }
 
         $restrictedParentContentTypes = $this->getRestrictions($hasAccess, ParentContentTypeLimitation::class);
         $canCreateInParentContentType = empty($restrictedParentContentTypes)
             ? true
-            : in_array($location->contentInfo->contentTypeId, array_map('intval', $restrictedParentContentTypes), true);
+            : \in_array($location->contentInfo->contentTypeId, array_map('intval', $restrictedParentContentTypes), true);
+
+        if (false === $canCreateInParentContentType) {
+            return false;
+        }
 
         $restrictedParentDepths = $this->getRestrictions($hasAccess, ParentDepthLimitation::class);
         $canCreateInParentDepth = empty($restrictedParentDepths)
             ? true
-            : in_array($location->depth, array_map('intval', $restrictedParentDepths), true);
+            : \in_array($location->depth, array_map('intval', $restrictedParentDepths), true);
+
+        if (false === $canCreateInParentDepth) {
+            return false;
+        }
 
         $restrictedParentOwner = $this->getRestrictions($hasAccess, ParentOwnerLimitation::class);
         $canCreateInParentOwner = empty($restrictedParentOwner)
             ? true
             : $location->contentInfo->ownerId === $this->permissionResolver->getCurrentUserReference()->getUserId();
 
+        if (false === $canCreateInParentOwner) {
+            return false;
+        }
+
         $restrictedSections = $this->getRestrictions($hasAccess, SectionLimitation::class);
         $canCreateInSection = empty($restrictedSections)
             ? true
-            : in_array($location->contentInfo->sectionId, array_map('intval', $restrictedSections), true);
+            : \in_array($location->contentInfo->sectionId, array_map('intval', $restrictedSections), true);
+
+        if (false === $canCreateInSection) {
+            return false;
+        }
 
         $restrictedParentUserGroups = $this->getRestrictions($hasAccess, ParentUserGroupLimitation::class);
         $canCreateInParentUserGroup = empty($restrictedParentUserGroups)
             ? true
             : $this->hasSameParentUserGroup($location);
+
+        if (false === $canCreateInParentUserGroup) {
+            return false;
+        }
 
         $restrictedSubtrees = $this->getRestrictions($hasAccess, SubtreeLimitation::class);
         $canCreateInSubtree = empty($restrictedSubtrees)
@@ -124,13 +151,11 @@ class PermissionChecker implements PermissionCheckerInterface
                 return strpos($location->pathString, $restrictedSubtree) === 0;
             }));
 
-        return $canCreateInParentContentType
-            && $canCreateInLocation
-            && $canCreateInParentDepth
-            && $canCreateInParentOwner
-            && $canCreateInSection
-            && $canCreateInSubtree
-            && $canCreateInParentUserGroup;
+        if (false === $canCreateInSubtree) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -145,7 +170,7 @@ class PermissionChecker implements PermissionCheckerInterface
     {
         $currentUserId = $this->permissionResolver->getCurrentUserReference()->getUserId();
 
-        if (is_array($this->flattenArrayOfLimitations[$currentUserId])) {
+        if (\is_array($this->flattenArrayOfLimitations[$currentUserId])) {
             return $this->flattenArrayOfLimitations[$currentUserId];
         }
 
@@ -207,7 +232,7 @@ class PermissionChecker implements PermissionCheckerInterface
                 $allUserGroups[] = $userGroup->contentInfo->id;
             }
             $offset += self::USER_GROUPS_LIMIT;
-        } while (count($userGroups) === self::USER_GROUPS_LIMIT);
+        } while (\count($userGroups) === self::USER_GROUPS_LIMIT);
 
         return $allUserGroups;
     }

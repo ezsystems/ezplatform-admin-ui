@@ -6,16 +6,18 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Provider;
+namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
 
 use eZ\Publish\API\Repository\LanguageService;
+use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
+use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 
-class LanguageChoiceListProvider implements ChoiceListProviderInterface
+class LanguageChoiceLoader implements ChoiceLoaderInterface
 {
     /** @var \eZ\Publish\API\Repository\LanguageService */
     protected $languageService;
 
-    /** @var array */
+    /** @var string[] */
     protected $siteAccessLanguages;
 
     /**
@@ -29,7 +31,7 @@ class LanguageChoiceListProvider implements ChoiceListProviderInterface
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getChoiceList(): array
     {
@@ -52,5 +54,53 @@ class LanguageChoiceListProvider implements ChoiceListProviderInterface
         }
 
         return array_merge($saLanguages, array_values($languagesByCode));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function loadChoiceList($value = null)
+    {
+        $choices = $this->getChoiceList();
+
+        return new ArrayChoiceList($choices, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function loadChoicesForValues(array $values, $value = null)
+    {
+        // Optimize
+        $values = array_filter($values);
+        if (empty($values)) {
+            return [];
+        }
+
+        // If no callable is set, values are the same as choices
+        if (null === $value) {
+            return $values;
+        }
+
+        return $this->loadChoiceList($value)->getChoicesForValues($values);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function loadValuesForChoices(array $choices, $value = null)
+    {
+        // Optimize
+        $choices = array_filter($choices);
+        if (empty($choices)) {
+            return [];
+        }
+
+        // If no callable is set, choices are the same as values
+        if (null === $value) {
+            return $choices;
+        }
+
+        return $this->loadChoiceList($value)->getValuesForChoices($choices);
     }
 }

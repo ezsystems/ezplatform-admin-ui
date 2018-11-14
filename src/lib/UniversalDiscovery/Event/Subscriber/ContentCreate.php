@@ -12,6 +12,7 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
+use eZ\Publish\API\Repository\Values\User\Limitation\LanguageLimitation;
 use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,6 +21,9 @@ class ContentCreate implements EventSubscriberInterface
 {
     /** @var array */
     private $restrictedContentTypesIdentifiers;
+
+    /** @var array */
+    private $restrictedLanguagesCodes;
 
     /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
     private $permissionChecker;
@@ -44,10 +48,11 @@ class ContentCreate implements EventSubscriberInterface
 
         $hasAccess = $permissionResolver->hasAccess('content', 'create');
         $this->restrictedContentTypesIdentifiers = $this->getRestrictedContentTypesIdentifiers($hasAccess);
+        $this->restrictedLanguagesCodes = $this->getRestrictedLanguagesCodes($hasAccess);
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents(): array
     {
@@ -77,6 +82,12 @@ class ContentCreate implements EventSubscriberInterface
         if ($this->hasContentTypeRestrictions()) {
             $config = $event->getConfig();
             $config['content_on_the_fly']['allowed_content_types'] = $this->restrictedContentTypesIdentifiers;
+            $event->setConfig($config);
+        }
+
+        if ($this->hasLanguagesRestrictions()) {
+            $config = $event->getConfig();
+            $config['content_on_the_fly']['allowed_languages'] = $this->restrictedLanguagesCodes;
             $event->setConfig($config);
         }
     }
@@ -117,5 +128,33 @@ class ContentCreate implements EventSubscriberInterface
     private function hasContentTypeRestrictions(): bool
     {
         return !empty($this->restrictedContentTypesIdentifiers);
+    }
+
+    /**
+     * @param $hasAccess
+     *
+     * @return string[]
+     */
+    private function getRestrictedLanguagesCodes($hasAccess): array
+    {
+        if (!\is_array($hasAccess)) {
+            return [];
+        }
+
+        $restrictedLanguagesCodes = $this->permissionChecker->getRestrictions($hasAccess, LanguageLimitation::class);
+
+        if (empty($restrictedLanguagesCodes)) {
+            return [];
+        }
+
+        return $restrictedLanguagesCodes;
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasLanguagesRestrictions(): bool
+    {
+        return !empty($this->restrictedLanguagesCodes);
     }
 }

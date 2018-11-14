@@ -4,8 +4,7 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\Permission\:
-        resource: "../../../lib/Permission"
+    EzSystems\EzPlatformAdminUi\Permission\PermissionChecker: ~
 
     EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface:
         alias: EzSystems\EzPlatformAdminUi\Permission\PermissionChecker
