@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function(global, doc) {
     const SELECTOR_FIELD = '.ez-field-edit--ezrichtext';
     const SELECTOR_INPUT = '.ez-data-source__richtext';
 
@@ -33,7 +33,7 @@
     }
 
     const customTags = Object.keys(global.eZ.adminUiConfig.richTextCustomTags);
-    const customTagsToolbars = customTags.map(customTag => {
+    const customTagsToolbars = customTags.map((customTag) => {
         const alloyEditorConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
 
         return new global.eZ.ezAlloyEditor.ezCustomTagConfig({
@@ -42,7 +42,7 @@
         });
     });
 
-    customTags.forEach(customTag => {
+    customTags.forEach((customTag) => {
         const tagConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
         const className = `ezBtn${customTag.charAt(0).toUpperCase() + customTag.slice(1)}`;
         const editClassName = `${className}Edit`;
@@ -54,9 +54,9 @@
 
                 const values = {};
 
-                Object.keys(tagConfig.attributes).forEach(attr => {
+                Object.keys(tagConfig.attributes).forEach((attr) => {
                     values[attr] = {
-                        value: tagConfig.attributes[attr].defaultValue
+                        value: tagConfig.attributes[attr].defaultValue,
                     };
                 });
 
@@ -118,7 +118,7 @@
         }
     );
 
-    [...doc.querySelectorAll(`${SELECTOR_FIELD} ${SELECTOR_INPUT}`)].forEach(container => {
+    [...doc.querySelectorAll(`${SELECTOR_FIELD} ${SELECTOR_INPUT}`)].forEach((container) => {
         const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
             toolbars: {
                 ezadd: {
@@ -140,28 +140,25 @@
                         new window.eZ.ezAlloyEditor.ezLinkConfig(),
                         new window.eZ.ezAlloyEditor.ezTextConfig({ customStyles: customStylesConfigurations }),
                         new window.eZ.ezAlloyEditor.ezParagraphConfig({ customStyles: customStylesConfigurations }),
+                        new window.eZ.ezAlloyEditor.ezFormattedConfig({ customStyles: customStylesConfigurations }),
                         new window.eZ.ezAlloyEditor.ezCustomStyleConfig({ customStyles: customStylesConfigurations }),
                         new window.eZ.ezAlloyEditor.ezHeadingConfig({ customStyles: customStylesConfigurations }),
                         new window.eZ.ezAlloyEditor.ezTableConfig(),
                         new window.eZ.ezAlloyEditor.ezEmbedImageConfig(),
                         new window.eZ.ezAlloyEditor.ezEmbedConfig(),
                     ],
-                    tabIndex: 1
+                    tabIndex: 1,
                 },
             },
-            extraPlugins: AlloyEditor.Core.ATTRS.extraPlugins.value + ',' + [
-                'ezaddcontent',
-                'ezmoveelement',
-                'ezremoveblock',
-                'ezembed',
-                'ezfocusblock',
-                'ezcustomtag',
-            ].join(','),
+            extraPlugins:
+                AlloyEditor.Core.ATTRS.extraPlugins.value +
+                ',' +
+                ['ezaddcontent', 'ezmoveelement', 'ezremoveblock', 'ezembed', 'ezfocusblock', 'ezcustomtag'].join(','),
         });
-        const getHTMLDocumentFragment = function (data) {
+        const getHTMLDocumentFragment = function(data) {
             const fragment = document.createDocumentFragment();
             const root = fragment.ownerDocument.createElement('div');
-            const doc = (new DOMParser()).parseFromString(data, 'text/xml');
+            const doc = new DOMParser().parseFromString(data, 'text/xml');
             const importChildNodes = (parent, element, skipElement) => {
                 let i;
                 let newElement;
@@ -211,16 +208,16 @@
 
         alloyEditor.get('nativeEditor').setData(section.innerHTML);
 
-        container.addEventListener('blur', event => {
+        container.addEventListener('blur', (event) => {
             const data = alloyEditor.get('nativeEditor').getData();
             const doc = document.createDocumentFragment();
             const root = document.createElement('div');
             const ezNamespace = 'http://ez.no/namespaces/ezpublish5/xhtml5/edit';
             const xhtmlNamespace = 'http://www.w3.org/1999/xhtml';
-            const emptyEmbed = function (embedNode) {
+            const emptyEmbed = function(embedNode) {
                 let element = embedNode.firstChild;
                 let next;
-                let removeClass = function () {};
+                let removeClass = function() {};
 
                 while (element) {
                     next = element.nextSibling;
@@ -230,11 +227,11 @@
                     element = next;
                 }
 
-                embedNode.classList.forEach(function (cl) {
+                embedNode.classList.forEach(function(cl) {
                     let prevRemoveClass = removeClass;
 
                     if (cl.indexOf('is-embed-') === 0) {
-                        removeClass = function () {
+                        removeClass = function() {
                             embedNode.classList.remove(cl);
                             prevRemoveClass();
                         };
@@ -242,9 +239,9 @@
                 });
                 removeClass();
             };
-            const xhtmlify = function (data) {
+            const xhtmlify = function(data) {
                 const doc = document.implementation.createDocument(xhtmlNamespace, 'html', null);
-                const htmlDoc =  document.implementation.createHTMLDocument("");
+                const htmlDoc = document.implementation.createHTMLDocument('');
                 const section = htmlDoc.createElement('section');
                 let body = htmlDoc.createElement('body');
 
@@ -262,7 +259,10 @@
             [...doc.querySelectorAll('[data-ezelement="ezembed"]')].forEach(emptyEmbed);
             [...doc.querySelectorAll('[data-ezelement="ezcustomtag"]')].forEach(emptyEmbed);
 
-            event.target.closest('.ez-data-source').querySelector('textarea').value = xhtmlify(root.innerHTML).replace(xhtmlNamespace, ezNamespace);
+            event.target.closest('.ez-data-source').querySelector('textarea').value = xhtmlify(root.innerHTML).replace(
+                xhtmlNamespace,
+                ezNamespace
+            );
         });
 
         const validator = new EzRichTextValidator({
@@ -287,8 +287,6 @@
 
         validator.init();
 
-        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-            [...global.eZ.fieldTypeValidators, validator] :
-            [validator];
+        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ? [...global.eZ.fieldTypeValidators, validator] : [validator];
     });
 })(window, document);

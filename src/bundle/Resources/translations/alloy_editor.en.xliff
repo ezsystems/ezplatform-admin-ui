@@ -181,6 +181,11 @@
         <target state="new">Table</target>
         <note>key: table_btn.label</note>
       </trans-unit>
+      <trans-unit id="0c10a4feb5cd5308daca6d6528a12cc7be825def" resname="toolbar_config_base.formatted_label">
+        <source>Formatted</source>
+        <target state="new">Formatted</target>
+        <note>key: toolbar_config_base.formatted_label</note>
+      </trans-unit>
       <trans-unit id="1b32cb64237c5fe23f10ffe217a76c9d33487c4e" resname="toolbar_config_base.heading_label">
         <source>Heading</source>
         <target state="new">Heading</target>
