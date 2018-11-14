@@ -14,9 +14,12 @@ export default class EzConfigBase {
     }
 
     static isEmpty(block) {
-        const count = block.$.childNodes.length;
+        const nodes = [...block.$.childNodes];
+        const count = nodes.length;
+        const areAllTextNodesEmpty = !!count && nodes.every((node) => node.nodeName === '#text' && !node.data.replace(/\u200B/g, ''));
+        const isOnlyBreakLine = count === 1 && block.$.childNodes.item(0).localName === 'br';
 
-        return (count === 0 || (count === 1 && block.$.childNodes.item(0).localName === 'br'));
+        return count === 0 || isOnlyBreakLine || areAllTextNodesEmpty;
     }
 
     static setPositionFor(block, editor) {
@@ -35,8 +38,9 @@ export default class EzConfigBase {
             }
 
             const range = document.createRange();
+            const scrollLeft = parseInt(block.$.scrollLeft, 10);
             range.selectNodeContents(positionReference.$);
-            left = range.getBoundingClientRect().left;
+            left = range.getBoundingClientRect().left + scrollLeft;
 
             if (empty) {
                 positionReference.remove();
@@ -52,8 +56,8 @@ export default class EzConfigBase {
         const domElement = new CKEDITOR.dom.element(ReactDOM.findDOMNode(this));
         domElement.addClass('ae-toolbar-transition');
         domElement.setStyles({
-            left: (left - outlineWidth) + 'px',
-            top: xy[1] + 'px'
+            left: left - outlineWidth + 'px',
+            top: xy[1] + 'px',
         });
 
         return true;
@@ -62,22 +66,24 @@ export default class EzConfigBase {
     getStyles(customStyles = []) {
         const headingLabel = Translator.trans(/*@Desc("Heading")*/ 'toolbar_config_base.heading_label', {}, 'alloy_editor');
         const paragraphLabel = Translator.trans(/*@Desc("Paragraph")*/ 'toolbar_config_base.paragraph_label', {}, 'alloy_editor');
+        const formattedLabel = Translator.trans(/*@Desc("Formatted")*/ 'toolbar_config_base.formatted_label', {}, 'alloy_editor');
 
         return {
             name: 'styles',
             cfg: {
                 showRemoveStylesItem: false,
                 styles: [
-                    {name: `${headingLabel} 1`, style: {element: 'h1'}},
-                    {name: `${headingLabel} 2`, style: {element: 'h2'}},
-                    {name: `${headingLabel} 3`, style: {element: 'h3'}},
-                    {name: `${headingLabel} 4`, style: {element: 'h4'}},
-                    {name: `${headingLabel} 5`, style: {element: 'h5'}},
-                    {name: `${headingLabel} 6`, style: {element: 'h6'}},
-                    {name: paragraphLabel, style: {element: 'p'}},
-                    ...customStyles
-                ]
-            }
+                    { name: `${headingLabel} 1`, style: { element: 'h1' } },
+                    { name: `${headingLabel} 2`, style: { element: 'h2' } },
+                    { name: `${headingLabel} 3`, style: { element: 'h3' } },
+                    { name: `${headingLabel} 4`, style: { element: 'h4' } },
+                    { name: `${headingLabel} 5`, style: { element: 'h5' } },
+                    { name: `${headingLabel} 6`, style: { element: 'h6' } },
+                    { name: paragraphLabel, style: { element: 'p' } },
+                    { name: formattedLabel, style: { element: 'pre' } },
+                    ...customStyles,
+                ],
+            },
         };
     }
 
