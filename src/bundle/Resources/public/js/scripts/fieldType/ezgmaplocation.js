@@ -493,6 +493,9 @@
         };
         const map = Leaflet.map(field.querySelector('.ez-data-source__map'), mapConfig);
 
+        longitudeInput.value = longitudeInput.dataset.value.replace(',', '.');
+        latitudeInput.value = latitudeInput.dataset.value.replace(',', '.');
+
         /**
          * Updates map state to show location with provided coordinates
          *

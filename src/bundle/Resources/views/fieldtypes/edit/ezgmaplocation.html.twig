@@ -6,8 +6,8 @@
         <div class="form-control-label">{{ 'content.field_type.ezgmaplocation.set_current_location'|trans|desc('Set current location') }}</div>
         <button type="button" class="btn btn-secondary">{{ 'content.field_type.ezgmaplocation.locate_me'|trans|desc('Locate me') }}</button>
     </div>
-    {{ form_row(form.latitude) }}
-    {{ form_row(form.longitude) }}
+    {{ form_row(form.latitude, { 'attr': { 'data-value': form.latitude.vars.value }}) }}
+    {{ form_row(form.longitude, { 'attr': { 'data-value': form.longitude.vars.value }}) }}
     <div class="ez-data-source__field ez-data-source__field--address">
         <div class="ez-data-source__label-wrapper">
             {{ form_label(form.address, form.address.vars.label, {'label_attr': {'class': 'ez-data-source__label'}}) }}
