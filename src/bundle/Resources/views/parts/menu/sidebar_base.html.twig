@@ -20,7 +20,7 @@
             {{ block('element') }}
         {%- endif %}
         {%- if item.extras.template is defined -%}
-            {% include(item.extras.template)  %}
+            {% include item.extras.template with item.extras.template_parameters|default({}) %}
         {%- endif -%}
     {%- endif -%}
 {%- endblock %}
