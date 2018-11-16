@@ -25,7 +25,7 @@ class PathStringExtension extends Twig_Extension
     /**
      * @return array
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new Twig_SimpleFunction(
@@ -35,6 +35,14 @@ class PathStringExtension extends Twig_Extension
         ];
     }
 
+    /**
+     * @param string $pathString
+     *
+     * @return array
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
     public function getLocationList(string $pathString): array
     {
         $pathStringParts = explode('/', trim($pathString, '/'));

@@ -63,7 +63,7 @@
         const isModifiedSelected = !!lastModifiedSelect.value;
         const isCreatedSelected = !!lastCreatedSelect.value;
         const isCreatorSelected = !!searchCreatorInput.value;
-        const isSubtreeSelected = !!subtreeInput.value;
+        const isSubtreeSelected = !!subtreeInput.value.trim().length;
         const isEnabled = isContentTypeSelected || isSectionSelected || isModifiedSelected || isCreatedSelected || isCreatorSelected || isSubtreeSelected;
         const methodName = isEnabled ? 'removeAttribute' : 'setAttribute';
 

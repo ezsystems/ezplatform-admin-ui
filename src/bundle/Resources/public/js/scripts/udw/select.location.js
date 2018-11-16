@@ -3,7 +3,6 @@
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
-
     const findLocationsByIdList = (idList, callback) => {
         const body = JSON.stringify({
             ViewInput: {
@@ -35,8 +34,8 @@
         });
 
         const errorMessage = Translator.trans(
-            /*@Desc("Cannot find children locations with given id list")*/ 'select_location.error',
-            {},
+            /*@Desc("Cannot find children locations with given id - %idList%")*/ 'select_location.error',
+            { idList: idList.join(',') },
             'universal_discovery_widget'
         );
         fetch(request)
@@ -44,11 +43,16 @@
             .then((json) => callback(json))
             .catch(() => window.eZ.helpers.notification.showErrorNotification(errorMessage));
     };
-
     const removeRootFromPathString = (pathString) => {
         const pathArray = pathString.split('/').filter((val) => val);
 
         return pathArray.splice(1, pathArray.length - 1);
+    };
+    const buildBreadCrumbsString = (viewData) => {
+        const searchHitList = viewData.View.Result.searchHits.searchHit;
+        return searchHitList.map((searchHit) => {
+            return searchHit.value.Location.ContentInfo.Content.Name;
+        }).join(' / ');
     };
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (btn, items) => {
@@ -66,12 +70,7 @@
         }
 
         findLocationsByIdList(removeRootFromPathString(pathString), (data) => {
-            const searchHitList = data.View.Result.searchHits.searchHit;
-            const pathStringNames = searchHitList.map((searchHit) => {
-                return searchHit.value.Location.ContentInfo.Content.Name;
-            }).join(' / ');
-
-            displayWrapper.querySelector(btn.dataset.selectedContentNameSelector).innerHTML = pathStringNames;
+            displayWrapper.querySelector(btn.dataset.selectedContentNameSelector).innerHTML = buildBreadCrumbsString(data);
         });
     };
     const onCancel = () => closeUDW();

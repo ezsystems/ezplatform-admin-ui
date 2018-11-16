@@ -47,8 +47,8 @@
         <note>key: restore_under_new_location.title</note>
       </trans-unit>
       <trans-unit id="5b8a9a5fceb4991b77b50983c34df8a18a900a09" resname="select_location.error">
-        <source>Cannot find children locations with given id list</source>
-        <target state="new">Cannot find children locations with given id list</target>
+        <source>Cannot find children locations with given id - %idList%</source>
+        <target state="new">Cannot find children locations with given id - %idList%</target>
         <note>key: select_location.error</note>
       </trans-unit>
       <trans-unit id="987330c357d2475b80942e5c449e4215b623a459" resname="subtree.title">
