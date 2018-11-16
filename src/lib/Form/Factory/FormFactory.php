@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Values\User\User;
 use EzSystems\EzPlatformAdminUi\Form\Data\Bookmark\BookmarkRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
@@ -967,6 +968,7 @@ class FormFactory
     /**
      * @param UserPasswordChangeData $data
      * @param null|string $name
+     * @param User $options
      *
      * @return FormInterface
      *
@@ -974,11 +976,14 @@ class FormFactory
      */
     public function changeUserPassword(
         UserPasswordChangeData $data = null,
-        ?string $name = null
+        ?string $name = null,
+        ?User $user = null
     ): FormInterface {
         $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordChangeType::class);
 
-        return $this->formFactory->createNamed($name, UserPasswordChangeType::class, $data);
+        return $this->formFactory->createNamed($name, UserPasswordChangeType::class, $data, [
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -1018,6 +1023,7 @@ class FormFactory
     /**
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData $data
      * @param null|string $name
+     * @param null|User $user
      *
      * @return \Symfony\Component\Form\FormInterface
      *
@@ -1025,11 +1031,14 @@ class FormFactory
      */
     public function resetUserPassword(
         UserPasswordResetData $data = null,
-        ?string $name = null
+        ?string $name = null,
+        ?User $user = null
     ): FormInterface {
         $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordResetType::class);
 
-        return $this->formFactory->createNamed($name, UserPasswordResetType::class, $data);
+        return $this->formFactory->createNamed($name, UserPasswordResetType::class, $data, [
+            'user' => $user,
+        ]);
     }
 
     /**

@@ -170,30 +170,28 @@ class UserForgotPasswordController extends Controller
         $response->headers->set('X-Robots-Tag', 'noindex');
 
         try {
-            $this->userService->loadUserByToken($hashKey);
+            $user = $this->userService->loadUserByToken($hashKey);
         } catch (NotFoundException $e) {
             return $this->render('@ezdesign/Security/reset_user_password/invalid_link.html.twig', [], $response);
         }
 
-        $form = $this->formFactory->resetUserPassword();
+        $form = $this->formFactory->resetUserPassword(null, null, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $user = $this->userService->loadUserByToken($hashKey);
-                $currentUser = $this->permissionResolver->getCurrentUserReference();
-                $this->permissionResolver->setCurrentUserReference($user);
-            } catch (NotFoundException $e) {
-                return $this->render('@ezdesign/Security/reset_user_password/invalid_link.html.twig', [], $response);
-            }
-
             $data = $form->getData();
 
             try {
+                $currentUser = $this->permissionResolver->getCurrentUserReference();
+
+                $this->permissionResolver->setCurrentUserReference($user);
+
                 $userUpdateStruct = $this->userService->newUserUpdateStruct();
                 $userUpdateStruct->password = $data->getNewPassword();
+
                 $this->userService->updateUser($user, $userUpdateStruct);
                 $this->userService->expireUserToken($hashKey);
+
                 $this->permissionResolver->setCurrentUserReference($currentUser);
 
                 return $this->render('@ezdesign/Security/reset_user_password/success.html.twig', [], $response);
