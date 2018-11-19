@@ -34,12 +34,11 @@ class ContentIsUser implements ContentSpecification
      */
     public function isSatisfiedBy(Content $content): bool
     {
-        try {
-            $this->userService->loadUser($content->id);
-
-            return true;
-        } catch (NotFoundException $e) {
-            return false;
+        if (method_exists($this->userService, 'isUser')) {
+            return $this->userService->isUser($content);
         }
+
+        // @deprecated As of 2.4 UserService should be able to tell us this above
+        return $content->getVersionInfo()->getContentInfo()->contentTypeId === 4;
     }
 }
