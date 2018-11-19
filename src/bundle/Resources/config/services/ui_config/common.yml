@@ -29,6 +29,7 @@ services:
 
     ezsystems.ezplatform_admin_ui.ui.config.provider.image_variations:
         class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\Value
+        lazy: true
         arguments:
             $value: '$image_variations$'
         tags:
@@ -36,6 +37,7 @@ services:
 
     ezsystems.ezplatform_admin_ui.ui.config.provider.content_edit_form_templates:
         class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\Value
+        lazy: true
         arguments:
             $value: '$admin_ui_forms.content_edit_form_templates$'
         tags:
