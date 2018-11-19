@@ -20,7 +20,6 @@
     const listGroupsTitle = [...doc.querySelectorAll('.ez-content-type-selector__group-title')];
     const contentTypeCheckboxes = [...doc.querySelectorAll('.ez-content-type-selector__item [type="checkbox"]')];
     const subtreeInput = doc.querySelector('#search_subtree');
-
     const clearFilters = (event) => {
         event.preventDefault();
 

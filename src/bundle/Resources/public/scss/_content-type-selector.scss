@@ -1,31 +1,16 @@
 .ez-content-type-selector {
     $selector: '.ez-content-type-selector';
-
-    position: absolute;
-    max-width: 34rem;
-    background: $ez-ground-base-dark;
     padding: calculateRem(16px) calculateRem(24px);
-    border-radius: 5px;
-    box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba(0, 0, 0, 0.45);
-    transform: scaleY(1);
-    transform-origin: top center;
-    transition: transition .2s $ez-admin-transition;
-    z-index: 3;
-
-    &--collapsed {
-        transform: scaleY(0);
-        height: 0;
-    }
 
     &__list {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 150px);
+        justify-content: space-between;
         list-style: none;
         padding: 0;
     }
 
     &__item {
-        flex-basis: 33%;
         display: flex;
 
         .form-check-inline {
@@ -73,15 +58,16 @@
         &--collapsed {
             #{$selector}__list {
                 transform: scaleY(0);
+                opacity: 0;
                 height: 0;
             }
 
             #{$selector}__group-title:before {
-                transform: translate(-3px, -50%) rotate(45deg);
+                transform: translate(-3px, -20%) rotate(45deg);
             }
 
             #{$selector}__group-title:after {
-                transform: translate(2px, -50%) rotate(-45deg);
+                transform: translate(-3px, -80%) rotate(-45deg);
             }
         }
 

@@ -1,4 +1,4 @@
-(function (global, doc, React, ReactDOM, Translator) {
+(function(global, doc, React, ReactDOM, Translator) {
     const btns = doc.querySelectorAll('.ez-btn--udw-select-location');
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
@@ -18,26 +18,25 @@
                 },
             },
         });
-
         const request = new Request('/api/ezp/v2/views', {
             method: 'POST',
             headers: {
                 Accept: 'application/vnd.ez.api.View+json; version=1.1',
                 'Content-Type': 'application/vnd.ez.api.ViewInput+json; version=1.1',
-                'X-Requested-With' : 'XMLHttpRequest',
+                'X-Requested-With': 'XMLHttpRequest',
                 'X-Siteaccess': siteaccess,
-                'X-CSRF-Token': token
+                'X-CSRF-Token': token,
             },
             body,
             mode: 'same-origin',
             credentials: 'same-origin',
         });
-
         const errorMessage = Translator.trans(
             /*@Desc("Cannot find children locations with given id - %idList%")*/ 'select_location.error',
             { idList: idList.join(',') },
             'universal_discovery_widget'
         );
+
         fetch(request)
             .then(window.eZ.helpers.request.getJsonFromResponse)
             .then((json) => callback(json))
@@ -50,28 +49,46 @@
     };
     const buildBreadCrumbsString = (viewData) => {
         const searchHitList = viewData.View.Result.searchHits.searchHit;
-        return searchHitList.map((searchHit) => {
-            return searchHit.value.Location.ContentInfo.Content.Name;
-        }).join(' / ');
+
+        return searchHitList.map((searchHit) => searchHit.value.Location.ContentInfo.Content.Name).join(' / ');
+    };
+    const toggleVisibility = (btn, pathString) => {
+        btn.hidden = !!pathString;
+
+        const contentNameWrapper = doc.querySelector(btn.dataset.selectedContentNameSelector);
+
+        if (contentNameWrapper) {
+            contentNameWrapper.hidden = !pathString;
+        }
+    };
+    const setPath = (btn, pathString) => {
+        const pathStringInput = doc.querySelector(btn.dataset.locationPathInputSelector);
+
+        pathStringInput.value = pathString;
+        pathStringInput.dispatchEvent(new Event('change'));
+
+        const contentNameContainer = doc.querySelector(`${btn.dataset.selectedContentNameSelector} span`);
+
+        if (!contentNameContainer) {
+            return;
+        }
+
+        if (!pathString) {
+            contentNameContainer.innerHTML = '';
+        } else {
+            findLocationsByIdList(removeRootFromPathString(pathString), (data) => {
+                contentNameContainer.innerHTML = buildBreadCrumbsString(data);
+            });
+        }
     };
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (btn, items) => {
         closeUDW();
 
         const pathString = items[0].pathString;
-        const displayWrapper = doc.querySelector(btn.dataset.displayWrapper);
-        const pathStringInput = doc.querySelector(btn.dataset.locationPathInputSelector);
 
-        pathStringInput.value = pathString;
-        pathStringInput.dispatchEvent(new Event('change'));
-
-        if (!displayWrapper) {
-            return;
-        }
-
-        findLocationsByIdList(removeRootFromPathString(pathString), (data) => {
-            displayWrapper.querySelector(btn.dataset.selectedContentNameSelector).innerHTML = buildBreadCrumbsString(data);
-        });
+        setPath(btn, pathString);
+        toggleVisibility(btn, pathString);
     };
     const onCancel = () => closeUDW();
     const openUDW = (event) => {
@@ -79,15 +96,36 @@
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
 
-        ReactDOM.render(React.createElement(global.eZ.modules.UniversalDiscovery, Object.assign({
-            onConfirm: onConfirm.bind(null, event.currentTarget),
-            onCancel,
-            title: event.currentTarget.dataset.universalDiscoveryTitle,
-            multiple: false,
-            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-            restInfo: { token, siteaccess }
-        }, config)), udwContainer);
+        ReactDOM.render(
+            React.createElement(
+                global.eZ.modules.UniversalDiscovery,
+                Object.assign(
+                    {
+                        onConfirm: onConfirm.bind(null, event.currentTarget),
+                        onCancel,
+                        title: event.currentTarget.dataset.universalDiscoveryTitle,
+                        multiple: false,
+                        startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                        restInfo: { token, siteaccess },
+                    },
+                    config
+                )
+            ),
+            udwContainer
+        );
+    };
+    const clearValue = (btn) => {
+        setPath(btn, '');
+        toggleVisibility(btn, '');
     };
 
-    btns.forEach(btn => btn.addEventListener('click', openUDW, false));
+    btns.forEach((btn) => {
+        btn.addEventListener('click', openUDW, false);
+
+        const clearBtn = doc.querySelector(btn.dataset.clearBtnSelector);
+
+        if (clearBtn) {
+            clearBtn.addEventListener('click', clearValue.bind(null, btn), false);
+        }
+    });
 })(window, window.document, window.React, window.ReactDOM, window.Translator);
