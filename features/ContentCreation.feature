@@ -1,3 +1,4 @@
+@richtext
 Feature: Content items creation
   As an administrator
   In order to menage content to my site
