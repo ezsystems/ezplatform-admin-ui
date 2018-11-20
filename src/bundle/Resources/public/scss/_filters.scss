@@ -73,21 +73,23 @@
     }
 
     &__subtree {
-        height: calculateRem(38px);
         border-radius: calculateRem(4px);
-        background: #dbdbdb;
-        padding: calculateRem(8px);
-        padding-right: calculateRem(48px);
+        background: $ez-color-base-pale;
+        padding: calculateRem(8px) calculateRem(48px) calculateRem(8px)  calculateRem(8px);
         display: inline-block;
         position: relative;
 
         .ez-icon--reset {
             display: block;
             position: absolute;
-            bottom: calculateRem(7px);
+            top: calculateRem(7px);
             right: calculateRem(6px);
             cursor: pointer;
-            fill: #333;
+            fill: $ez-black;
+        }
+
+        &__breadcrumbs {
+            line-height: calculateRem(22px);
         }
     }
 

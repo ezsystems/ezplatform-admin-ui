@@ -1,4 +1,4 @@
-(function(global, doc, React, ReactDOM, Translator) {
+(function(global, doc, eZ, React, ReactDOM, Translator){
     const btns = doc.querySelectorAll('.ez-btn--udw-select-location');
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
@@ -47,7 +47,7 @@
 
         return pathArray.splice(1, pathArray.length - 1);
     };
-    const buildBreadCrumbsString = (viewData) => {
+    const buildBreadcrumbsString = (viewData) => {
         const searchHitList = viewData.View.Result.searchHits.searchHit;
 
         return searchHitList.map((searchHit) => searchHit.value.Location.ContentInfo.Content.Name).join(' / ');
@@ -55,7 +55,7 @@
     const toggleVisibility = (btn, pathString) => {
         btn.hidden = !!pathString;
 
-        const contentNameWrapper = doc.querySelector(btn.dataset.selectedContentNameSelector);
+        const contentNameWrapper = doc.querySelector(btn.dataset.contentBreadcrumbsSelector);
 
         if (contentNameWrapper) {
             contentNameWrapper.hidden = !pathString;
@@ -67,7 +67,7 @@
         pathStringInput.value = pathString;
         pathStringInput.dispatchEvent(new Event('change'));
 
-        const contentNameContainer = doc.querySelector(`${btn.dataset.selectedContentNameSelector} span`);
+        const contentNameContainer = doc.querySelector(`${btn.dataset.contentBreadcrumbsSelector} div`);
 
         if (!contentNameContainer) {
             return;
@@ -77,7 +77,7 @@
             contentNameContainer.innerHTML = '';
         } else {
             findLocationsByIdList(removeRootFromPathString(pathString), (data) => {
-                contentNameContainer.innerHTML = buildBreadCrumbsString(data);
+                contentNameContainer.innerHTML = buildBreadcrumbsString(data);
             });
         }
     };
@@ -105,7 +105,7 @@
                         onCancel,
                         title: event.currentTarget.dataset.universalDiscoveryTitle,
                         multiple: false,
-                        startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                        startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                         restInfo: { token, siteaccess },
                     },
                     config
@@ -128,4 +128,4 @@
             clearBtn.addEventListener('click', clearValue.bind(null, btn), false);
         }
     });
-})(window, window.document, window.React, window.ReactDOM, window.Translator);
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
