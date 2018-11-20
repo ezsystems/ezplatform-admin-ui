@@ -8,9 +8,8 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
 
-use eZ\Publish\API\Repository\LanguageService;
+use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,20 +20,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class LanguageChoiceType extends AbstractType
 {
-    /** @var LanguageService */
-    protected $languageService;
-
-    /** @var array */
-    protected $siteAccessLanguages;
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader */
+    private $languageChoiceLoader;
 
     /**
-     * @param LanguageService $languageService
-     * @param array $siteAccessLanguages
+     * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader $languageChoiceLoader
      */
-    public function __construct(LanguageService $languageService, array $siteAccessLanguages)
+    public function __construct(LanguageChoiceLoader $languageChoiceLoader)
     {
-        $this->languageService = $languageService;
-        $this->siteAccessLanguages = $siteAccessLanguages;
+        $this->languageChoiceLoader = $languageChoiceLoader;
     }
 
     public function getParent()
@@ -46,27 +40,7 @@ class LanguageChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choice_loader' => new CallbackChoiceLoader(function () {
-                    $saLanguages = [];
-                    $languagesByCode = [];
-
-                    foreach ($this->languageService->loadLanguages() as $language) {
-                        if ($language->enabled) {
-                            $languagesByCode[$language->languageCode] = $language;
-                        }
-                    }
-
-                    foreach ($this->siteAccessLanguages as $languageCode) {
-                        if (!isset($languagesByCode[$languageCode])) {
-                            continue;
-                        }
-
-                        $saLanguages[] = $languagesByCode[$languageCode];
-                        unset($languagesByCode[$languageCode]);
-                    }
-
-                    return array_merge($saLanguages, array_values($languagesByCode));
-                }),
+                'choice_loader' => $this->languageChoiceLoader,
                 'choice_label' => 'name',
                 'choice_name' => 'languageCode',
                 'choice_value' => 'languageCode',

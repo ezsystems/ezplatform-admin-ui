@@ -101,3 +101,7 @@ form:not(.form-inline) {
         position: absolute;
     }
 }
+
+.ez-content-create[readonly] {
+    pointer-events: none;
+}

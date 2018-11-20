@@ -1,0 +1,49 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Form\SubmitHandler: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory: ~
+
+    EzSystems\EzPlatformAdminUi\Form\DataMapper\:
+        resource: '../../../lib/Form/DataMapper'
+
+    EzSystems\EzPlatformAdminUi\Form\Type\:
+        resource: '../../../lib/Form/Type'
+
+    EzSystems\EzPlatformAdminUi\Form\EventListener\:
+        resource: '../../../lib/Form/EventListener'
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: EzSystems\RepositoryForms\Form\Type\Content\ContentEditType }
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyChoiceType:
+        arguments:
+            $policyMap: "%ezpublish.api.role.policy_map%"
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType:
+        arguments:
+            $contentTypeChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\PermissionAwareContentTypeChoiceLoader'
+            $languageChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\PermissionAwareLanguageChoiceLoader'
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader:
+        arguments:
+            $siteAccessLanguages: '$languages$'
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\PermissionAwareContentTypeChoiceLoader:
+        arguments:
+            $decorated: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader'
+            $module: 'content'
+            $function: 'create'
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\PermissionAwareLanguageChoiceLoader:
+        arguments:
+            $decorated: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader'
+            $module: 'content'
+            $function: 'create'

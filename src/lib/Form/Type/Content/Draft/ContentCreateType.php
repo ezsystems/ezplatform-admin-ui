@@ -14,21 +14,35 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContentCreateType extends AbstractType
 {
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     protected $languageService;
 
+    /** @var \Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface */
+    private $contentTypeChoiceLoader;
+
+    /** @var \Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface */
+    private $languageChoiceLoader;
+
     /**
-     * @param LanguageService $languageService
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
+     * @param \Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface $contentTypeChoiceLoader
+     * @param \Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface $languageChoiceLoader
      */
-    public function __construct(LanguageService $languageService)
-    {
+    public function __construct(
+        LanguageService $languageService,
+        ChoiceLoaderInterface $contentTypeChoiceLoader,
+        ChoiceLoaderInterface $languageChoiceLoader
+    ) {
         $this->languageService = $languageService;
+        $this->contentTypeChoiceLoader = $contentTypeChoiceLoader;
+        $this->languageChoiceLoader = $languageChoiceLoader;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -41,6 +55,7 @@ class ContentCreateType extends AbstractType
                     'label' => false,
                     'multiple' => false,
                     'expanded' => true,
+                    'choice_loader' => $this->contentTypeChoiceLoader,
                 ]
             )
             ->add(
@@ -55,6 +70,7 @@ class ContentCreateType extends AbstractType
                     'label' => false,
                     'multiple' => false,
                     'expanded' => false,
+                    'choice_loader' => $this->languageChoiceLoader,
                 ]
             )
             ->add(

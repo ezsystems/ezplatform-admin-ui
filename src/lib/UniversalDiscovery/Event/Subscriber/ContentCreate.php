@@ -12,14 +12,18 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
+use eZ\Publish\API\Repository\Values\User\Limitation\LanguageLimitation;
 use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class SectionAssign implements EventSubscriberInterface
+class ContentCreate implements EventSubscriberInterface
 {
     /** @var array */
-    private $restrictedContentTypes;
+    private $restrictedContentTypesIdentifiers;
+
+    /** @var array */
+    private $restrictedLanguagesCodes;
 
     /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
     private $permissionChecker;
@@ -39,14 +43,16 @@ class SectionAssign implements EventSubscriberInterface
         PermissionCheckerInterface $permissionChecker,
         ContentTypeService $contentTypeService
     ) {
-        $this->permissionChecker = $permissionChecker;
         $this->contentTypeService = $contentTypeService;
-        $hasAccess = $permissionResolver->hasAccess('section', 'assign');
-        $this->restrictedContentTypes = is_array($hasAccess) ? $this->getRestrictedContentTypes($hasAccess) : [];
+        $this->permissionChecker = $permissionChecker;
+
+        $hasAccess = $permissionResolver->hasAccess('content', 'create');
+        $this->restrictedContentTypesIdentifiers = $this->getRestrictedContentTypesIdentifiers($hasAccess);
+        $this->restrictedLanguagesCodes = $this->getRestrictedLanguagesCodes($hasAccess);
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents(): array
     {
@@ -61,45 +67,59 @@ class SectionAssign implements EventSubscriberInterface
     public function onUdwConfigResolve(ConfigResolveEvent $event): void
     {
         $configName = $event->getConfigName();
-        if ('multiple' !== $configName) {
+        if ('create' !== $configName && 'single' !== $configName) {
             return;
         }
 
         $context = $event->getContext();
         if (
             !isset($context['type'])
-            || 'section_assign' !== $context['type']
+            || 'content_create' !== $context['type']
         ) {
             return;
         }
 
         if ($this->hasContentTypeRestrictions()) {
             $config = $event->getConfig();
-            $config['content_on_the_fly']['allowed_content_types'] = $this->restrictedContentTypes;
+            $config['content_on_the_fly']['allowed_content_types'] = $this->restrictedContentTypesIdentifiers;
+            $event->setConfig($config);
+        }
+
+        if ($this->hasLanguagesRestrictions()) {
+            $config = $event->getConfig();
+            $config['content_on_the_fly']['allowed_languages'] = $this->restrictedLanguagesCodes;
             $event->setConfig($config);
         }
     }
 
     /**
-     * @param array $hasAccess
+     * @param array|bool $hasAccess
      *
      * @return array
      */
-    private function getRestrictedContentTypes(array $hasAccess): array
+    private function getRestrictedContentTypesIdentifiers($hasAccess): array
     {
-        $restrictedContentTypes = [];
+        if (!is_array($hasAccess)) {
+            return [];
+        }
+
         $restrictedContentTypesIds = $this->permissionChecker->getRestrictions($hasAccess, ContentTypeLimitation::class);
 
+        if (empty($restrictedContentTypesIds)) {
+            return [];
+        }
+
+        $restrictedContentTypesIdentifiers = [];
         foreach ($restrictedContentTypesIds as $restrictedContentTypeId) {
             // TODO: Change to `contentTypeService->loadContentTypeList($restrictedContentTypesIds)` after #2444 will be merged
             try {
                 $identifier = $this->contentTypeService->loadContentType($restrictedContentTypeId)->identifier;
-                $restrictedContentTypes[] = $identifier;
+                $restrictedContentTypesIdentifiers[] = $identifier;
             } catch (NotFoundException $e) {
             }
         }
 
-        return $restrictedContentTypes;
+        return $restrictedContentTypesIdentifiers;
     }
 
     /**
@@ -107,6 +127,34 @@ class SectionAssign implements EventSubscriberInterface
      */
     private function hasContentTypeRestrictions(): bool
     {
-        return !empty($this->restrictedContentTypes);
+        return !empty($this->restrictedContentTypesIdentifiers);
+    }
+
+    /**
+     * @param $hasAccess
+     *
+     * @return string[]
+     */
+    private function getRestrictedLanguagesCodes($hasAccess): array
+    {
+        if (!\is_array($hasAccess)) {
+            return [];
+        }
+
+        $restrictedLanguagesCodes = $this->permissionChecker->getRestrictions($hasAccess, LanguageLimitation::class);
+
+        if (empty($restrictedLanguagesCodes)) {
+            return [];
+        }
+
+        return $restrictedLanguagesCodes;
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasLanguagesRestrictions(): bool
+    {
+        return !empty($this->restrictedLanguagesCodes);
     }
 }
