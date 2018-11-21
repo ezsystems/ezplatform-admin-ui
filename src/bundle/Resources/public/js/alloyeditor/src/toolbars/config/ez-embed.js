@@ -5,15 +5,7 @@ export default class EzEmbedConfig extends EzConfigBase {
         super();
 
         this.name = 'embed';
-        this.buttons = [
-            'ezmoveup',
-            'ezmovedown',
-            'ezembedupdate',
-            'ezembedleft',
-            'ezembedcenter',
-            'ezembedright',
-            'ezblockremove',
-        ];
+        this.buttons = ['ezmoveup', 'ezmovedown', 'ezembedupdate', 'ezembedleft', 'ezembedcenter', 'ezembedright', 'ezblockremove'];
     }
 
     /**
@@ -30,6 +22,11 @@ export default class EzEmbedConfig extends EzConfigBase {
      */
     test(payload) {
         const nativeEvent = payload.data.nativeEvent;
+
+        if (!nativeEvent) {
+            return false;
+        }
+
         const target = new CKEDITOR.dom.element(nativeEvent.target);
         const widget = payload.editor.get('nativeEditor').widgets.getByElement(target);
 
