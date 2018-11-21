@@ -1,21 +1,11 @@
 import EzConfigBase from './base';
 
-export default class EzEmbedImageConfig extends EzConfigBase {
+export default class EzEmbedImageLinkConfig extends EzConfigBase {
     constructor() {
         super();
 
-        this.name = 'embedimage';
-        this.buttons = [
-            'ezmoveup',
-            'ezmovedown',
-            'ezimageupdate',
-            'ezimagevariation',
-            'ezimagelink',
-            'ezembedleft',
-            'ezembedcenter',
-            'ezembedright',
-            'ezblockremove',
-        ];
+        this.name = 'embedimagelink';
+        this.buttons = ['ezimagelink'];
     }
 
     /**
@@ -32,14 +22,9 @@ export default class EzEmbedImageConfig extends EzConfigBase {
      */
     test(payload) {
         const nativeEvent = payload.data.nativeEvent;
-
-        if (!nativeEvent) {
-            return false;
-        }
-
         const target = new CKEDITOR.dom.element(nativeEvent.target);
         const widget = payload.editor.get('nativeEditor').widgets.getByElement(target);
 
-        return !!(widget && widget.name === 'ezembed' && widget.isImage());
+        return !!(widget && widget.name === 'ezembed' && widget.isImage() && widget.isEditingLink());
     }
 }

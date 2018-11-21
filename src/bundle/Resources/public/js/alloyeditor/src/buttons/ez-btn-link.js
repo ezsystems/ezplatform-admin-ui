@@ -19,19 +19,19 @@ export default class EzBtnLink extends AlloyEditor.ButtonLink {
         if (this.props.renderExclusive) {
             const props = this.mergeButtonCfgProps();
 
-            return (<AlloyEditor.ButtonLinkEdit {...props} />);
+            return <AlloyEditor.ButtonLinkEdit {...props} />;
         }
 
         return (
             <button
                 aria-label={AlloyEditor.Strings.link}
-                className={cssClass} data-type="button-link"
+                className={cssClass}
+                data-type="button-link"
                 onClick={this._requestExclusive}
                 tabIndex={this.props.tabIndex}
-                title={AlloyEditor.Strings.link}
-            >
+                title={AlloyEditor.Strings.link}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#link"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#link" />
                 </svg>
             </button>
         );

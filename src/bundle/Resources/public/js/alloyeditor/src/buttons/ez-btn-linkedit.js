@@ -57,6 +57,13 @@ export default class EzBtnLinkEdit extends Component {
         };
     }
 
+    udwOnConfirm(udwContainer, items) {
+        this.state.element.setAttribute('href', 'ezlocation://' + items[0].id);
+        this.focusEditedLink();
+
+        ReactDOM.unmountComponentAtNode(udwContainer);
+    }
+
     /**
      * Runs the Universal Discovery Widget so that the user can pick a
      * Content.
@@ -66,17 +73,10 @@ export default class EzBtnLinkEdit extends Component {
      */
     selectContent() {
         const openUDW = () => {
-            const selectable = this.props.udwIsSelectableMethod;
             const udwContainer = document.querySelector('#react-udw');
             const token = document.querySelector('meta[name="CSRF-Token"]').content;
             const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
             const config = JSON.parse(document.querySelector(`[data-udw-config-name="richtext_embed"]`).dataset.udwConfig);
-            const udwOnConfirm = (items) => {
-                this.state.element.setAttribute('href', 'ezlocation://' + items[0].id);
-                this.focusEditedLink();
-
-                ReactDOM.unmountComponentAtNode(udwContainer);
-            };
             const title = Translator.trans(/*@Desc("Select content")*/ 'link_edit_btn.udw.title', {}, 'alloy_editor');
 
             ReactDOM.render(
@@ -84,7 +84,7 @@ export default class EzBtnLinkEdit extends Component {
                     eZ.modules.UniversalDiscovery,
                     Object.assign(
                         {
-                            onConfirm: udwOnConfirm,
+                            onConfirm: this.udwOnConfirm.bind(this, udwContainer),
                             onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
                             title,
                             multiple: false,
