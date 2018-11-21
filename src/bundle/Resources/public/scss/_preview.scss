@@ -4,7 +4,7 @@
         align-items: center;
         justify-content: space-between;
         background-color: $ez-ground-primary;
-        padding: .2rem 1rem;
+        padding: calculateRem(4px) calculateRem(16px);
 
         .ez-preview__item {
             flex-basis: 45%;
@@ -19,17 +19,19 @@
 
             &--actions {
                 display: flex;
-                justify-content: center;
-                border: 1px solid $ez-color-base-medium;
-                border-radius: 5px;
-                padding: .1rem;
+                justify-content: space-around;
+                align-items: center;
+                width: calculateRem(118px);
+                height: calculateRem(44px);
+                border: calculateRem(2px) solid $ez-color-base-medium;
+                border-radius: calculateRem(4px);
                 background: $ez-white;
-                flex-basis: 5%;
-                margin-right: 2rem;
+                flex-basis: 9.5%;
+                margin-right: calculateRem(32px);
             }
 
             &--description {
-                flex-basis: 75%;
+                flex-basis: 70.5%;
                 display: flex;
                 align-items: center;
             }
@@ -40,8 +42,8 @@
 
             &-label {
                 display: inline-block;
-                margin-right: .5rem;
-                font-size: .8rem;
+                margin-right: calculateRem(8px);
+                font-size: calculateRem(13px);
             }
 
             &-text {
@@ -54,14 +56,25 @@
             }
 
             .ez-preview__action {
-                line-height: 0;
-                display: block;
-                padding: .5rem;
-                border: none;
-                border-radius: initial;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex: 0 0 34px;
+                margin: 0;
+                width: calculateRem(34px);
+                height: calculateRem(34px);
+                padding: 0;
+                border: 0;
                 cursor: pointer;
-                border-radius: 5px;
+                border-radius: calculateRem(4px);
                 background: none;
+                transition: background 0.2s $ez-admin-transition;
+
+                &:hover,
+                &:focus {
+                    background-color: darken($ez-color-base-medium, 15%);
+                    outline: none;
+                }
 
                 &.ez-preview__action--selected {
                     background-color: $ez-color-base-medium;
@@ -76,32 +89,31 @@
             height: calc(100vh - 45px);
             display: block;
             margin: 0 auto;
-            transition: all .2s $ez-admin-transition;
+            transition: all 0.2s $ez-admin-transition;
         }
 
         &--tablet {
             background: url('/bundles/ezplatformadminui/img/preview-tablet.png') top center no-repeat;
-            height: 1250px;
-            margin-top: 1rem;
+            height: calculateRem(1250px);
+            margin-top: calculateRem(16px);
 
             iframe {
-                width: 769px;
-                height: 1157px;
-                padding-top: 129px;
+                width: calculateRem(769px);
+                height: calculateRem(1157px);
+                padding-top: calculateRem(129px);
             }
         }
 
         &--mobile {
             background: url('/bundles/ezplatformadminui/img/preview-mobile.png') top center no-repeat;
-            height: 900px;
-            margin-top: 1rem;
+            height: calculateRem(900px);
+            margin-top: calculateRem(16px);
 
             iframe {
-                width: 375px;
-                height: 792px;
-                padding-top: 123px;
+                width: calculateRem(375px);
+                height: calculateRem(792px);
+                padding-top: calculateRem(123px);
             }
         }
     }
 }
-
