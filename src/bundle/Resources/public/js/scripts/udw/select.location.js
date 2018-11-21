@@ -55,10 +55,10 @@
     const toggleVisibility = (btn, pathString) => {
         btn.hidden = !!pathString;
 
-        const contentNameWrapper = doc.querySelector(btn.dataset.contentBreadcrumbsSelector);
+        const contentBreadcrumbsWrapper = doc.querySelector(btn.dataset.contentBreadcrumbsSelector);
 
-        if (contentNameWrapper) {
-            contentNameWrapper.hidden = !pathString;
+        if (contentBreadcrumbsWrapper) {
+            contentBreadcrumbsWrapper.hidden = !pathString;
         }
     };
     const setPath = (btn, pathString) => {
@@ -67,17 +67,17 @@
         pathStringInput.value = pathString;
         pathStringInput.dispatchEvent(new Event('change'));
 
-        const contentNameContainer = doc.querySelector(`${btn.dataset.contentBreadcrumbsSelector} div`);
+        const contentBreadcrumbsContainer = doc.querySelector(`${btn.dataset.contentBreadcrumbsSelector} ez-filters__subtree__breadcrumbs`);
 
-        if (!contentNameContainer) {
+        if (!contentBreadcrumbsContainer) {
             return;
         }
 
         if (!pathString) {
-            contentNameContainer.innerHTML = '';
+            contentBreadcrumbsContainer.innerHTML = '';
         } else {
             findLocationsByIdList(removeRootFromPathString(pathString), (data) => {
-                contentNameContainer.innerHTML = buildBreadcrumbsString(data);
+                contentBreadcrumbsContainer.innerHTML = buildBreadcrumbsString(data);
             });
         }
     };
