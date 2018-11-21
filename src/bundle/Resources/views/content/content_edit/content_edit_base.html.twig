@@ -1,7 +1,7 @@
 {% extends viewbaseLayout is defined ? viewbaseLayout : '@ezdesign/layout.html.twig' %}
 
 {% set default_form_templates = admin_ui_config.contentEditFormTemplates %}
-{% set form_templates = form_templates is defined ? form_templates|merge(default_form_templates) : default_form_templates %}
+{% set form_templates = form_templates is defined ? default_form_templates|merge(form_templates) : default_form_templates %}
 
 {% trans_default_domain 'content_edit' %}
 {% form_theme form with form_templates %}
