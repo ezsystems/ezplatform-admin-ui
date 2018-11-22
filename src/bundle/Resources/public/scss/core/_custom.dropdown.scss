@@ -1,14 +1,22 @@
 .ez-custom-dropdown {
+    *,
+    *:after,
+    *:before {
+        box-sizing: border-box;
+        font-family: $font-family-sans-serif;
+    }
+
     &__wrapper {
         position: relative;
         color: $ez-color-base-dark;
         font-weight: 700;
+        padding-top: calculateRem(16px);
     }
 
     &__selection-info {
         list-style: none;
         padding-left: 0;
-        margin-bottom: 0;
+        margin: 0;
         width: 50%;
         border: calculateRem(1px) solid $ez-color-base-pale;
         padding: calculateRem(2px) calculateRem(32px) calculateRem(2px) calculateRem(2px);
@@ -56,22 +64,23 @@
     &__selected-item {
         background: $ez-color-secondary;
         width: auto;
-        display: inline-block;
+        display: inline-flex;
         padding: calculateRem(5px) calculateRem(36px) calculateRem(5px) calculateRem(8px);
         margin: calculateRem(3px);
         border-radius: calculateRem(4px);
         position: relative;
         color: $ez-white;
         min-height: calculateRem(34px);
+        align-items: center;
     }
 
     &__remove-selection {
-        width: calculateRem(16px);
-        height: calculateRem(16px);
+        width: calculateRem(34px);
+        height: calculateRem(34px);
         display: inherit;
         position: absolute;
         top: 50%;
-        right: calculateRem(8px);
+        right: 0;
         transform: translateY(-50%);
 
         &:before,
@@ -97,17 +106,18 @@
     &__items {
         list-style: none;
         padding-left: 0;
-        margin-bottom: 0;
+        margin: 0;
         position: absolute;
         top: 100%;
         transform: scaleY(1);
         transform-origin: top center;
         transition: all 0.2s $ez-admin-transition;
         width: 50%;
-        border: 1px solid $ez-ground-primary;
+        border: calculateRem(1px) solid $ez-ground-primary;
         background: $ez-white;
         color: $ez-black;
         z-index: 2;
+        border-radius: calculateRem(4px);
 
         &--hidden {
             transform: scaleY(0);
@@ -124,8 +134,19 @@
         }
 
         &--selected,
-        &--selected:hover {
+        &--selected:hover,
+        &&--selected[disabled],
+        &&--selected[disabled]:hover {
             background: $ez-ground-primary;
+        }
+
+        &[disabled] {
+            color: $ez-color-base-pale;
+
+            &:hover {
+                background: inherit;
+                cursor: not-allowed;
+            }
         }
     }
 
