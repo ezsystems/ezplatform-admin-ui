@@ -7,3 +7,9 @@ services:
     EzSystems\EzPlatformAdminUi\Translation\Extractor\JavaScriptFileVisitor:
         tags:
             - { name: jms_translation.file_visitor }
+
+    EzSystems\EzPlatformAdminUi\Translation\Extractor\PolicyTranslationExtractor:
+        arguments:
+            - '%ezpublish.api.role.policy_map%'
+        tags:
+            - { name: jms_translation.extractor, alias: ez_policy }
