@@ -13,6 +13,7 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
@@ -39,6 +40,7 @@ use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier 
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings;
 
 class ContentViewController extends Controller
 {
@@ -87,6 +89,12 @@ class ContentViewController extends Controller
     /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings */
+    private $contentTypeMappings;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
@@ -97,6 +105,8 @@ class ContentViewController extends Controller
      * @param \eZ\Publish\API\Repository\BookmarkService $bookmarkService
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings $contentTypeMappings
      * @param int $defaultDraftPaginationLimit
      * @param array $siteAccessLanguages
      * @param int $defaultRolePaginationLimit
@@ -114,6 +124,8 @@ class ContentViewController extends Controller
         BookmarkService $bookmarkService,
         ContentService $contentService,
         LocationService $locationService,
+        PermissionResolver $permissionResolver,
+        ContentTypeMappings $contentTypeMappings,
         int $defaultDraftPaginationLimit,
         array $siteAccessLanguages,
         int $defaultRolePaginationLimit,
@@ -136,6 +148,8 @@ class ContentViewController extends Controller
         $this->defaultPolicyPaginationLimit = $defaultPolicyPaginationLimit;
         $this->defaultSystemUrlPaginationLimit = $defaultSystemUrlPaginationLimit;
         $this->defaultCustomUrlPaginationLimit = $defaultCustomUrlPaginationLimit;
+        $this->permissionResolver = $permissionResolver;
+        $this->contentTypeMappings = $contentTypeMappings;
     }
 
     /**
@@ -144,6 +158,9 @@ class ContentViewController extends Controller
      *
      * @return \eZ\Publish\Core\MVC\Symfony\View\ContentView
      *
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
@@ -168,6 +185,7 @@ class ContentViewController extends Controller
         $this->supplyPolicyPagination($view, $request);
 
         $this->supplyIsLocationBookmarked($view);
+        $this->supplyContentCreatePermissionsForMFU($view);
 
         return $view;
     }
@@ -214,7 +232,9 @@ class ContentViewController extends Controller
     /**
      * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
      *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     private function supplyContentActionForms(ContentView $view): void
     {
@@ -431,7 +451,7 @@ class ContentViewController extends Controller
     private function getContentCreateData(?Location $location): ContentCreateData
     {
         $languages = $this->languageService->loadLanguages();
-        $language = 1 === count($languages)
+        $language = 1 === \count($languages)
             ? array_shift($languages)
             : null;
 
@@ -446,5 +466,42 @@ class ContentViewController extends Controller
         $locationIsBookmarked = $view->getLocation() ? $this->bookmarkService->isBookmarked($view->getLocation()) : false;
 
         $view->addParameters(['location_is_bookmarked' => $locationIsBookmarked]);
+    }
+
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     */
+    private function supplyContentCreatePermissionsForMFU(ContentView $view): void
+    {
+        $location = $view->getLocation();
+        $content = $view->getContent();
+        $createPermissionsInMfu = [];
+
+        $hasAccess = $this->permissionResolver->hasAccess('content', 'create');
+        $defaultContentTypeIdentifiers = array_column($this->contentTypeMappings->getConfig()['defaultMappings'], 'contentTypeIdentifier');
+        $defaultContentTypeIdentifiers[] = $this->contentTypeMappings->getConfig()['fallbackContentType']['contentTypeIdentifier'];
+        $contentTypeIdentifiers = array_unique($defaultContentTypeIdentifiers);
+
+        if (\is_bool($hasAccess)) {
+            foreach ($contentTypeIdentifiers as $contentTypeIdentifier) {
+                $createPermissionsInMfu[$contentTypeIdentifier] = $hasAccess;
+            }
+        } else {
+            $locationCreateStruct = $this->locationService->newLocationCreateStruct($location->id);
+            foreach ($contentTypeIdentifiers as $contentTypeIdentifier) {
+                // TODO: Change to `contentTypeService->loadContentTypeList($restrictedContentTypesIds)` after #2444 will be merged
+                $contentType = $this->contentTypeService->loadContentTypeByIdentifier($contentTypeIdentifier);
+                $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $content->contentInfo->mainLanguageCode);
+                $createPermissionsInMfu[$contentTypeIdentifier] = $this->permissionResolver->canUser('content', 'create', $contentCreateStruct, [$locationCreateStruct]);
+            }
+        }
+
+        $view->addParameters([
+            'content_create_permissions_for_mfu' => $createPermissionsInMfu,
+        ]);
     }
 }
