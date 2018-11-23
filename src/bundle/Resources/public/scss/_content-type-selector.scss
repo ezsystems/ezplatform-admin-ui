@@ -26,6 +26,7 @@
         color: $ez-color-secondary;
         position: relative;
         cursor: pointer;
+        padding-right: calculateRem(24px);
 
         &:before,
         &:after {
@@ -40,11 +41,11 @@
         }
 
         &:before {
-            transform: translate(-3px, -50%) rotate(135deg);
+            transform: translate(-27px, -50%) rotate(135deg);
         }
 
         &:after {
-            transform: translate(2px, -50%) rotate(45deg);
+            transform: translate(-22px, -50%) rotate(45deg);
         }
     }
 
@@ -63,11 +64,11 @@
             }
 
             #{$selector}__group-title:before {
-                transform: translate(-3px, -20%) rotate(45deg);
+                transform: translate(-27px, -20%) rotate(45deg);
             }
 
             #{$selector}__group-title:after {
-                transform: translate(-3px, -80%) rotate(-45deg);
+                transform: translate(-27px, -80%) rotate(-45deg);
             }
         }
 

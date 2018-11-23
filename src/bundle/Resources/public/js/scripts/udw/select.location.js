@@ -1,4 +1,4 @@
-(function(global, doc, eZ, React, ReactDOM, Translator){
+(function(global, doc, eZ, React, ReactDOM, Translator) {
     const btns = doc.querySelectorAll('.ez-btn--udw-select-location');
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
@@ -38,9 +38,9 @@
         );
 
         fetch(request)
-            .then(window.eZ.helpers.request.getJsonFromResponse)
-            .then((json) => callback(json))
-            .catch(() => window.eZ.helpers.notification.showErrorNotification(errorMessage));
+            .then(eZ.helpers.request.getJsonFromResponse)
+            .then(callback)
+            .catch(() => eZ.helpers.notification.showErrorNotification(errorMessage));
     };
     const removeRootFromPathString = (pathString) => {
         const pathArray = pathString.split('/').filter((val) => val);
@@ -52,22 +52,23 @@
 
         return searchHitList.map((searchHit) => searchHit.value.Location.ContentInfo.Content.Name).join(' / ');
     };
-    const toggleVisibility = (btn, pathString) => {
-        btn.hidden = !!pathString;
-
+    const toggleVisibility = (btn, isLocationSelected) => {
         const contentBreadcrumbsWrapper = doc.querySelector(btn.dataset.contentBreadcrumbsSelector);
 
+        btn.hidden = isLocationSelected;
+
         if (contentBreadcrumbsWrapper) {
-            contentBreadcrumbsWrapper.hidden = !pathString;
+            contentBreadcrumbsWrapper.hidden = !isLocationSelected;
         }
     };
     const setPath = (btn, pathString) => {
         const pathStringInput = doc.querySelector(btn.dataset.locationPathInputSelector);
+        const contentBreadcrumbsContainer = doc.querySelector(
+            `${btn.dataset.contentBreadcrumbsSelector} .ez-filters__subtree__breadcrumbs`
+        );
 
         pathStringInput.value = pathString;
         pathStringInput.dispatchEvent(new Event('change'));
-
-        const contentBreadcrumbsContainer = doc.querySelector(`${btn.dataset.contentBreadcrumbsSelector} ez-filters__subtree__breadcrumbs`);
 
         if (!contentBreadcrumbsContainer) {
             return;
@@ -88,7 +89,7 @@
         const pathString = items[0].pathString;
 
         setPath(btn, pathString);
-        toggleVisibility(btn, pathString);
+        toggleVisibility(btn, !!pathString);
     };
     const onCancel = () => closeUDW();
     const openUDW = (event) => {
@@ -98,7 +99,7 @@
 
         ReactDOM.render(
             React.createElement(
-                global.eZ.modules.UniversalDiscovery,
+                eZ.modules.UniversalDiscovery,
                 Object.assign(
                     {
                         onConfirm: onConfirm.bind(null, event.currentTarget),
@@ -116,7 +117,7 @@
     };
     const clearValue = (btn) => {
         setPath(btn, '');
-        toggleVisibility(btn, '');
+        toggleVisibility(btn, false);
     };
 
     btns.forEach((btn) => {
