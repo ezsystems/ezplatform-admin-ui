@@ -64,7 +64,7 @@
     const setLocationPath = (btn, pathString) => {
         const pathStringInput = doc.querySelector(btn.dataset.locationPathInputSelector);
         const contentBreadcrumbsContainer = doc.querySelector(
-            `${btn.dataset.contentBreadcrumbsSelector} .ez-filters__subtree__breadcrumbs`
+            `${btn.dataset.contentBreadcrumbsSelector} .ez-filters__breadcrumbs`
         );
 
         pathStringInput.value = pathString;

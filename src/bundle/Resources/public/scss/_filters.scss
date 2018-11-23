@@ -78,6 +78,7 @@
         padding: calculateRem(8px) calculateRem(48px) calculateRem(8px)  calculateRem(8px);
         display: inline-block;
         position: relative;
+        height: calculateRem(38px);
 
         .ez-icon--reset {
             display: block;
@@ -87,10 +88,10 @@
             cursor: pointer;
             fill: $ez-black;
         }
+    }
 
-        &__breadcrumbs {
-            line-height: calculateRem(22px);
-        }
+    &__breadcrumbs {
+        line-height: calculateRem(22px);
     }
 
     &:before,
