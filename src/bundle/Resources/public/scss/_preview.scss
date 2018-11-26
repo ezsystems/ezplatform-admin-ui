@@ -21,7 +21,7 @@
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
-                width: calculateRem(118px);
+                max-width: calculateRem(118px);
                 height: calculateRem(44px);
                 border: calculateRem(2px) solid $ez-color-base-medium;
                 border-radius: calculateRem(4px);
@@ -59,8 +59,8 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                flex: 0 0 34px;
-                margin: 0;
+                flex: 0 0 calculateRem(34px);
+                margin: calculateRem(2px);
                 width: calculateRem(34px);
                 height: calculateRem(34px);
                 padding: 0;
