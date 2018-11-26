@@ -61,7 +61,7 @@
             contentBreadcrumbsWrapper.hidden = !isLocationSelected;
         }
     };
-    const setLocationPath = (btn, pathString) => {
+    const updateBreadcrumbsState = (btn, pathString) => {
         const pathStringInput = doc.querySelector(btn.dataset.locationPathInputSelector);
         const contentBreadcrumbsContainer = doc.querySelector(
             `${btn.dataset.contentBreadcrumbsSelector} .ez-filters__breadcrumbs`
@@ -88,7 +88,7 @@
 
         const pathString = items[0].pathString;
 
-        setLocationPath(btn, pathString);
+        updateBreadcrumbsState(btn, pathString);
         toggleVisibility(btn, !!pathString);
     };
     const onCancel = () => closeUDW();
@@ -116,7 +116,7 @@
         );
     };
     const clearSelection = (btn) => {
-        setLocationPath(btn, '');
+        updateBreadcrumbsState(btn, '');
         toggleVisibility(btn, false);
     };
 
