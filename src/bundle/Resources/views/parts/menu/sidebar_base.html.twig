@@ -10,6 +10,7 @@
     {%- if item.displayed -%}
         {%- set attributes = item.attributes|merge({'class': (item.attributes.class|default('') ~ ' ' ~ default_classes|default('btn btn-dark btn-block'))|trim}) -%}
         {%- set attributes = attributes|merge({'id': item.name ~ '-tab'}) -%}
+        {%- set attributes = attributes|merge({'title': block('label')}) -%}
 
         {%- if item.uri is not empty %}
             {% set attributes = attributes|merge({'href': item.uri}) %}
@@ -29,15 +30,14 @@
     {% import 'knp_menu.html.twig' as macros %}
     {% set element = element|default('a') %}
     <{{ element }}{{ macros.attributes(attributes) }}>
-    {{ block('label') }}
+        {{ block('icon') }}
     </{{ element }}>
 {% endblock %}
 
-{% block label %}
+{% block icon %}
     {% if item.extras.icon is defined and item.extras.icon != '' %}
         <svg class="ez-icon ez-icon-{{ item.extras.icon }}">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ item.extras.icon }}"></use>
         </svg>
     {% endif %}
-    {{ parent() }}
 {% endblock %}
