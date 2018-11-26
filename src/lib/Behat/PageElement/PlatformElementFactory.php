@@ -161,13 +161,25 @@ class PlatformElementFactory extends ElementFactory
                     return new DateAndTimePopup($context);
                 }
 
-                return new DateAndTimePopup($context, $parameters[0]);
+                if (!array_key_exists(1, $parameters)) {
+                    return new DateAndTimePopup($context, $parameters[0]);
+                }
+
+                return new DateAndTimePopup($context, $parameters[0], $parameters[1]);
             case ContentTypePicker::ELEMENT_NAME:
                 return new ContentTypePicker($context);
             case UniversalDiscoveryWidget::ELEMENT_NAME:
                 return new UniversalDiscoveryWidget($context);
             default:
                 throw new \InvalidArgumentException(sprintf('Unrecognized element name: %s', $elementName));
+        }
+    }
+
+    public static function getPreviewType(string $elementName)
+    {
+        switch ($elementName) {
+            default:
+                throw new \InvalidArgumentException(sprintf('Unrecognized preview for element name: %s', $elementName));
         }
     }
 }

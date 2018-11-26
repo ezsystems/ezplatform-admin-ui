@@ -56,8 +56,20 @@ class PlatformPageObjectFactory extends PageObjectFactory
                 return new ContentPreviewPage($context, $parameters[0]);
             case TrashPage::PAGE_NAME:
                 return new TrashPage($context);
+            case FolderPreview::PAGE_NAME:
+                return new FolderPreview($context);
             default:
                 throw new \InvalidArgumentException(sprintf('Unrecognised page name: %s', $pageName));
+        }
+    }
+
+    public static function getPreviewType(string $contentType): string
+    {
+        switch ($contentType) {
+            case FolderPreview::CONTENT_TYPE:
+                return FolderPreview::PAGE_NAME;
+            default:
+                throw new \InvalidArgumentException(sprintf('Unrecognised preview for content type: %s', $contentType));
         }
     }
 }

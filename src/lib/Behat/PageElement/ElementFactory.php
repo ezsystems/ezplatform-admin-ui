@@ -33,12 +33,20 @@ class ElementFactory
         self::$installType = $installType;
     }
 
+    public static function getPreviewType(string $contentType)
+    {
+        /* Note: no return type to enable type-hinting */
+        $factory = self::getFactory(self::$installType);
+
+        return $factory::getPreviewType($contentType);
+    }
+
     /**
      * @param int $installType
      *
      * @return EnterpriseElementFactory|PlatformElementFactory
      */
-    private static function getFactory(int $installType): ElementFactory
+    private static function getFactory(int $installType): PlatformElementFactory
     {
         switch ($installType) {
             case InstallType::PLATFORM:

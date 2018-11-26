@@ -34,6 +34,14 @@ class PageObjectFactory
         self::$installType = $installType;
     }
 
+    public static function getPreviewType(string $contentType)
+    {
+        /* Note: no return type to enable type-hinting */
+        $factory = self::getFactory(self::$installType);
+
+        return $factory::getPreviewType($contentType);
+    }
+
     /**
      * @param int $installType
      *

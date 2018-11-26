@@ -16,12 +16,12 @@ class DateAndTimePopup extends Element
 
     private const DATETIME_FORMAT = 'm/d/Y, g:i:s a';
 
-    public function __construct(UtilityContext $context, bool $isInline = false)
+    public function __construct(UtilityContext $context, bool $isInline = false, $containerSelector = '')
     {
         parent::__construct($context);
         $calendarSelector = $isInline ? '.flatpickr-calendar.inline' : '.flatpickr-calendar.open';
         $this->fields = [
-            'openedCalendar' => $calendarSelector,
+            'openedCalendar' => sprintf('%s %s', $containerSelector, $calendarSelector),
             'pickerDaySelector' => '.flatpickr-day:not(.prevMonthDay):not(.nextMonthDay)',
             'pickerDayValue' => 'aria-label',
             'hourSelector' => '.flatpickr-hour',
@@ -43,6 +43,7 @@ class DateAndTimePopup extends Element
         } else {
             $referenceDateElement = $this->context->findElement(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['selectedDaySelector']));
         }
+
         $currentDate = DateTime::createFromFormat($dateFormat, $referenceDateElement->getAttribute($this->fields['pickerDayValue']));
 
         $dateToDiff = $this->deleteDayFromDate($date);
