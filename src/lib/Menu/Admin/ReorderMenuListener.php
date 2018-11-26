@@ -21,6 +21,9 @@ class ReorderMenuListener
     {
         $menu = $event->getMenu();
 
+        if (!$menu->getChild(MainMenuBuilder::ITEM_ADMIN)) {
+            return;
+        }
         $manipulator = new MenuManipulator();
         $manipulator->moveToLastPosition($menu[MainMenuBuilder::ITEM_ADMIN]);
     }
