@@ -20,26 +20,26 @@ Feature: Content fields setting and editing
         | Field    | <value1> | <value2> | <value3> |
 
     Examples:
-      | fieldInternalName    | fieldName                    | label1    | value1                | label2     | value2                | label3  | value3   | contentItemName           |
-      | ezselection          | Selection                    | value     | Test-value            |            |                       |         |          | Test-value                |
-      | ezgmaplocation       | Map location                 | latitude  | 32                    | longitude  | 132                   | address | Acapulco | Acapulco                  |
-      | ezauthor             | Authors                      | name      | Test Name             | email      | email@example.com     |         |          | Test Name                 |
-      | ezboolean            | Checkbox                     | value     | true                  |            |                       |         |          | 1                         |
-      | ezobjectrelation     | Content relation (single)    | value     | Media/Images          |            |                       |         |          | Images                    |
-      | ezobjectrelationlist | Content relations (multiple) | firstItem | Media/Images          | secondItem | Media/Files           |         |          | Images Files              |
-      | ezcountry            | Country                      | value     | Poland                |            |                       |         |          | Poland                    |
-      | ezdate               | Date                         | value     | 11/23/2019            |            |                       |         |          | Saturday 23 November 2019 |
-      | ezdatetime           | Date and time                | date      | 11/23/2019            | time       | 14:45                 |         |          | Sat 2019-23-11 14:45:00   |
-      | ezemail              | Email address               | value     | email@example.com     |            |                       |         |          | email@example.com         |
-      | ezfloat              | Float                        | value     | 11.11                 |            |                       |         |          | 11.11                     |
-      | ezisbn               | ISBN                         | value     | 978-3-16-148410-0     |            |                       |         |          | 978-3-16-148410-0         |
-      | ezinteger            | Integer                      | value     | 1111                  |            |                       |         |          | 1111                      |
-      | ezkeyword            | Keywords                     | value     | first keyword, second |            |                       |         |          | first keyword, second     |
-      | ezrichtext           | Rich text                    | value     | Lorem ipsum dolor sit |            |                       |         |          | Lorem ipsum dolor sit     |
-      | eztext               | Text block                   | value     | Lorem ipsum dolor     |            |                       |         |          | Lorem ipsum dolor         |
-      | ezstring             | Text line                    | value     | Lorem ipsum           |            |                       |         |          | Lorem ipsum               |
-      | eztime               | Time                         | value     | 14:45                 |            |                       |         |          | 2:45:00 pm                |
-      | ezurl                | URL                          | text      | Test URL              | url        | http://www.google.com |         |          | Test URL                  |
+      | fieldInternalName    | fieldName                    | label1    | value1                    | label2     | value2                | label3  | value3   | contentItemName           |
+      | ezselection          | Selection                    | value     | Test-value                |            |                       |         |          | Test-value                |
+      | ezgmaplocation       | Map location                 | latitude  | 32                        | longitude  | 132                   | address | Acapulco | Acapulco                  |
+      | ezauthor             | Authors                      | name      | Test Name                 | email      | email@example.com     |         |          | Test Name                 |
+      | ezboolean            | Checkbox                     | value     | true                      |            |                       |         |          | 1                         |
+      | ezobjectrelation     | Content relation (single)    | value     | Media/Images              |            |                       |         |          | Images                    |
+      | ezobjectrelationlist | Content relations (multiple) | firstItem | Media/Images              | secondItem | Media/Files           |         |          | Images Files              |
+      | ezcountry            | Country                      | value     | Poland                    |            |                       |         |          | Poland                    |
+      | ezdate               | Date                         | value     | 11/23/2019                |            |                       |         |          | Saturday 23 November 2019 |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 14:45                 |         |          | Sat 2019-23-11 14:45:00   |
+      | ezemail              | Email address                | value     | email@example.com         |            |                       |         |          | email@example.com         |
+      | ezfloat              | Float                        | value     | 11.11                     |            |                       |         |          | 11.11                     |
+      | ezisbn               | ISBN                         | value     | 978-3-16-148410-0         |            |                       |         |          | 978-3-16-148410-0         |
+      | ezinteger            | Integer                      | value     | 1111                      |            |                       |         |          | 1111                      |
+      | ezkeyword            | Keywords                     | value     | first keyword, second     |            |                       |         |          | first keyword, second     |
+      | ezrichtext           | Rich text                    | value     | Lorem ipsum dolor sit     |            |                       |         |          | Lorem ipsum dolor sit     |
+      | eztext               | Text block                   | value     | Lorem ipsum dolor         |            |                       |         |          | Lorem ipsum dolor         |
+      | ezstring             | Text line                    | value     | Lorem ipsum               |            |                       |         |          | Lorem ipsum               |
+      | eztime               | Time                         | value     | 14:45                     |            |                       |         |          | 2:45:00 pm                |
+      | ezurl                | URL                          | text      | Test URL                  | url        | http://www.google.com |         |          | Test URL                  |
       | ezmedia              | Media                        | value     | video1.mp4.zip            |            |                       |         |          | video1.mp4                |
       | ezimage              | Image                        | value     | image1.png.zip            |            |                       |         |          | image1.png                |
       | ezbinaryfile         | File                         | value     | binary1.txt.zip           |            |                       |         |          | binary1.txt               |

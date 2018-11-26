@@ -226,7 +226,7 @@ class UtilityContext extends MinkContext
                     return $baseElement->find('css', $selector);
                 });
         } catch (Exception $e) {
-            throw new ElementNotFoundException($this->getSession()->getDriver());
+            throw new ElementNotFoundException($this->getSession()->getDriver(), null, 'css', $selector);
         }
     }
 
@@ -290,5 +290,31 @@ class UtilityContext extends MinkContext
         return $this->getSession()->getDriver()->getWebDriverSession()->file([
             'file' => base64_encode(file_get_contents($localFile)),
         ]);
+    }
+
+    private function isDraggingLibraryLoaded(): bool
+    {
+        return $this->getSession()->getDriver()->evaluateScript("typeof(dragMock) !== 'undefined'");
+    }
+
+    public function moveWithHover(string $startExpression, string $hoverExpression, string $placeholderExpression): void
+    {
+        $this->loadDraggingLibrary();
+
+        $movingScript = sprintf('dragMock.dragStart(%s).dragOver(%s).delay(100).drop(%s);', $startExpression, $hoverExpression, $placeholderExpression);
+        $this->getSession()->getDriver()->executeScript($movingScript);
+    }
+
+    private function loadDraggingLibrary(): void
+    {
+        if ($this->isDraggingLibraryLoaded()) {
+            return;
+        }
+
+        $script = file_get_contents(__DIR__ . '/../lib/drag-mock.js');
+        $this->getSession()->getDriver()->executeScript($script);
+        $this->waitUntil(10, function () {
+            return $this->isDraggingLibraryLoaded();
+        });
     }
 }
