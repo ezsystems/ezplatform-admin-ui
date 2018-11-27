@@ -61,7 +61,13 @@
         }
 
         removePlaceholderOption() {
-            this.itemsContainer.querySelector('[data-value=""]').selected = false;
+            const placeholderItem = this.itemsContainer.querySelector('[data-value=""]');
+
+            if (!placeholderItem) {
+                return;
+            }
+
+            placeholderItem.selected = false;
         }
 
         onSelect(element, selected) {
