@@ -60,7 +60,7 @@
             return this.itemsContainer.classList.add(CLASS_ITEMS_HIDDEN);
         }
 
-        removePlaceholderOption() {
+        deselectPlaceholderOption() {
             const placeholderItem = this.itemsContainer.querySelector('[data-value=""]');
 
             if (!placeholderItem) {
@@ -79,7 +79,7 @@
                 this.clearCurrentSelection();
             }
 
-            this.removePlaceholderOption();
+            this.deselectPlaceholderOption();
 
             if (value) {
                 this.sourceInput.querySelector(`[value="${value}"]`).selected = selected;
