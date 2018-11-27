@@ -55,7 +55,9 @@ class RoleEditRightSidebarBuilder extends AbstractBuilder implements Translation
             self::ITEM__SAVE => $this->createMenuItem(
                 self::ITEM__SAVE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__SAVE,
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#update-role-%d_save', $role->id),
                     ],
@@ -66,6 +68,10 @@ class RoleEditRightSidebarBuilder extends AbstractBuilder implements Translation
                 self::ITEM__CANCEL,
                 [
                     'route' => 'ezplatform.role.list',
+                    'label' => false,
+                    'attributes' => [
+                        'title' => self::ITEM__CANCEL,
+                    ],
                     'extras' => ['icon' => 'circle-close'],
                 ]
             ),

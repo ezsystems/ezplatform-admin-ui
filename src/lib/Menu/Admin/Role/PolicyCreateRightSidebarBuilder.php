@@ -55,7 +55,9 @@ class PolicyCreateRightSidebarBuilder extends AbstractBuilder implements Transla
             self::ITEM__CREATE => $this->createMenuItem(
                 self::ITEM__CREATE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__CREATE,
                         'class' => 'btn--trigger',
                         'data-click' => '#policy_create_save',
                     ],
@@ -68,6 +70,10 @@ class PolicyCreateRightSidebarBuilder extends AbstractBuilder implements Transla
                     'route' => 'ezplatform.role.view',
                     'routeParameters' => [
                         'roleId' => $role->id,
+                    ],
+                    'label' => false,
+                    'attributes' => [
+                        'title' => self::ITEM__CANCEL,
                     ],
                     'extras' => ['icon' => 'circle-close'],
                 ]

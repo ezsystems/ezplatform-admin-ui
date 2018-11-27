@@ -51,7 +51,9 @@ class LanguageCreateRightSidebarBuilder extends AbstractBuilder implements Trans
             self::ITEM__CREATE => $this->createMenuItem(
                 self::ITEM__CREATE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__CREATE,
                         'class' => 'btn--trigger',
                         'data-click' => '#language_create_save',
                     ],
@@ -62,6 +64,10 @@ class LanguageCreateRightSidebarBuilder extends AbstractBuilder implements Trans
                 self::ITEM__CANCEL,
                 [
                     'route' => 'ezplatform.language.list',
+                    'label' => false,
+                    'attributes' => [
+                        'title' => self::ITEM__CANCEL,
+                    ],
                     'extras' => ['icon' => 'circle-close'],
                 ]
             ),

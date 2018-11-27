@@ -50,7 +50,9 @@ class UserCreateRightSidebarBuilder extends AbstractBuilder implements Translati
             self::ITEM__CREATE => $this->createMenuItem(
                 self::ITEM__CREATE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__CREATE,
                         'class' => 'btn--trigger',
                         'data-click' => '#ezrepoforms_user_create_create',
                     ],
@@ -60,7 +62,9 @@ class UserCreateRightSidebarBuilder extends AbstractBuilder implements Translati
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__CANCEL,
                         'class' => 'btn--trigger',
                         'data-click' => '#ezrepoforms_user_create_cancel',
                     ],

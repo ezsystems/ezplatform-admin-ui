@@ -50,7 +50,9 @@ class SectionCreateRightSidebarBuilder extends AbstractBuilder implements Transl
             self::ITEM__CREATE => $this->createMenuItem(
                 self::ITEM__CREATE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__CREATE,
                         'class' => 'btn--trigger',
                         'data-click' => '#section_create_create',
                     ],
@@ -61,6 +63,10 @@ class SectionCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                 self::ITEM__CANCEL,
                 [
                     'route' => 'ezplatform.section.list',
+                    'label' => false,
+                    'attributes' => [
+                        'title' => self::ITEM__CANCEL,
+                    ],
                     'extras' => ['icon' => 'circle-close'],
                 ]
             ),

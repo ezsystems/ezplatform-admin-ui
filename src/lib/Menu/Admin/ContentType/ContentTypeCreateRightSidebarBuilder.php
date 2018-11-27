@@ -57,7 +57,9 @@ class ContentTypeCreateRightSidebarBuilder extends AbstractBuilder implements Tr
             self::ITEM__SAVE => $this->createMenuItem(
                 self::ITEM__SAVE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__SAVE,
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#%s', $saveId),
                     ],
@@ -70,6 +72,10 @@ class ContentTypeCreateRightSidebarBuilder extends AbstractBuilder implements Tr
                     'route' => 'ezplatform.content_type_group.view',
                     'routeParameters' => [
                         'contentTypeGroupId' => $group->id,
+                    ],
+                    'label' => false,
+                    'attributes' => [
+                        'title' => self::ITEM__CANCEL,
                     ],
                     'extras' => ['icon' => 'circle-close'],
                 ]

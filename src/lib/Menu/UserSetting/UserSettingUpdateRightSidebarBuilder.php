@@ -49,7 +49,9 @@ class UserSettingUpdateRightSidebarBuilder extends AbstractBuilder implements Tr
             self::ITEM__SAVE => $this->createMenuItem(
                 self::ITEM__SAVE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__SAVE,
                         'class' => 'btn--trigger',
                         'data-click' => '#user_setting_update_update',
                     ],
@@ -60,6 +62,10 @@ class UserSettingUpdateRightSidebarBuilder extends AbstractBuilder implements Tr
                 self::ITEM__CANCEL,
                 [
                     'route' => 'ezplatform.user_settings.list',
+                    'label' => false,
+                    'attributes' => [
+                        'title' => self::ITEM__CANCEL,
+                    ],
                     'extras' => ['icon' => 'circle-close'],
                 ]
             ),

@@ -55,7 +55,9 @@ class RoleAssignmentCreateRightSidebarBuilder extends AbstractBuilder implements
             self::ITEM__SAVE => $this->createMenuItem(
                 self::ITEM__SAVE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__SAVE,
                         'class' => 'btn--trigger',
                         'data-click' => '#role_assignment_create_save',
                     ],
@@ -68,6 +70,10 @@ class RoleAssignmentCreateRightSidebarBuilder extends AbstractBuilder implements
                     'route' => 'ezplatform.role.view',
                     'routeParameters' => [
                         'roleId' => $role->id,
+                    ],
+                    'label' => false,
+                    'attributes' => [
+                        'title' => self::ITEM__CANCEL,
                     ],
                     'extras' => ['icon' => 'circle-close'],
                 ]

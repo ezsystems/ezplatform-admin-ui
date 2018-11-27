@@ -162,15 +162,18 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         );
 
         $createAttributes = [
+            'title' => self::ITEM__CREATE,
             'class' => 'ez-btn--extra-actions ez-btn--create',
             'data-actions' => 'create',
             'data-focus-element' => '.ez-instant-filter__input',
         ];
         $sendToTrashAttributes = [
+            'title' => self::ITEM__SEND_TO_TRASH,
             'data-toggle' => 'modal',
             'data-target' => '#trash-location-modal',
         ];
         $copySubtreeAttributes = [
+            'title' => self::ITEM__COPY_SUBTREE,
             'class' => 'ez-btn--udw-copy-subtree',
             'data-root-location' => $this->configResolver->getParameter(
                 'universal_discovery_widget_module.default_location_id'
@@ -202,6 +205,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 self::ITEM__CREATE,
                 [
                     'extras' => ['icon' => 'create'],
+                    'label' => false,
                     'attributes' => $canCreate
                         ? $createAttributes
                         : array_merge($createAttributes, ['disabled' => 'disabled']),
@@ -216,7 +220,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 self::ITEM__MOVE,
                 [
                     'extras' => ['icon' => 'move'],
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__MOVE,
                         'class' => 'btn--udw-move',
                         'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
                         'data-root-location' => $this->configResolver->getParameter(
@@ -232,7 +238,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 self::ITEM__COPY,
                 [
                     'extras' => ['icon' => 'copy'],
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__COPY,
                         'class' => 'btn--udw-copy',
                         'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
                         'data-root-location' => $this->configResolver->getParameter(
@@ -248,6 +256,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 self::ITEM__COPY_SUBTREE,
                 [
                     'extras' => ['icon' => 'copy-subtree'],
+                    'label' => false,
                     'attributes' => $canCopySubtree
                         ? $copySubtreeAttributes
                         : array_merge($copySubtreeAttributes, ['disabled' => 'disabled']),
@@ -261,7 +270,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__DELETE,
                     [
                         'extras' => ['icon' => 'trash'],
+                        'label' => false,
                         'attributes' => [
+                            'title' => self::ITEM__DELETE,
                             'data-toggle' => 'modal',
                             'data-target' => '#delete-user-modal',
                         ],
@@ -276,6 +287,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__SEND_TO_TRASH,
                     [
                         'extras' => ['icon' => 'trash-send'],
+                        'label' => false,
                         'attributes' => $sendToTrashAttributes,
                     ]
                 )
@@ -313,10 +325,12 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     private function addEditMenuItem(ItemInterface $menu, bool $contentIsUser, bool $canEdit): void
     {
         $editAttributes = [
+            'title' => self::ITEM__EDIT,
             'class' => 'ez-btn--extra-actions ez-btn--edit',
             'data-actions' => 'edit',
         ];
         $editUserAttributes = [
+            'title' => self::ITEM__EDIT,
             'class' => 'ez-btn--extra-actions ez-btn--edit-user',
             'data-actions' => 'edit-user',
         ];
@@ -327,6 +341,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__EDIT,
                     [
                         'extras' => ['icon' => 'edit'],
+                        'label' => false,
                         'attributes' => $canEdit
                             ? $editUserAttributes
                             : array_merge($editUserAttributes, ['disabled' => 'disabled']),
@@ -339,6 +354,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__EDIT,
                     [
                         'extras' => ['icon' => 'edit'],
+                        'label' => false,
                         'attributes' => $canEdit
                             ? $editAttributes
                             : array_merge($editAttributes, ['disabled' => 'disabled']),

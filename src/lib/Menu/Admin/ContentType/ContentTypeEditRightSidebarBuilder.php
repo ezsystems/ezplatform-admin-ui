@@ -55,7 +55,9 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
             self::ITEM__SAVE => $this->createMenuItem(
                 self::ITEM__SAVE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__SAVE,
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#%s', $contentTypeEditFormView['publishContentType']->vars['id']),
                     ],
@@ -65,7 +67,9 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__CANCEL,
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#%s', $contentTypeEditFormView['removeDraft']->vars['id']),
                     ],

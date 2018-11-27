@@ -102,14 +102,17 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         $canDelete = $this->permissionResolver->canUser('content', 'versionremove', $content);
 
         $publishAttributes = [
+            'title' => self::ITEM__PUBLISH,
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezrepoforms_content_edit_publish',
         ];
         $editAttributes = [
+            'title' => self::ITEM__SAVE_DRAFT,
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezrepoforms_content_edit_saveDraft',
         ];
         $deleteAttributes = [
+            'title' => self::ITEM__CANCEL,
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezrepoforms_content_edit_cancel',
         ];
@@ -118,6 +121,7 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
             self::ITEM__PUBLISH => $this->createMenuItem(
                 self::ITEM__PUBLISH,
                 [
+                    'label' => false,
                     'attributes' => $canEdit && $canPublish
                         ? $publishAttributes
                         : array_merge($publishAttributes, self::BTN_DISABLED_ATTR),
@@ -127,6 +131,7 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
             self::ITEM__SAVE_DRAFT => $this->createMenuItem(
                 self::ITEM__SAVE_DRAFT,
                 [
+                    'label' => false,
                     'attributes' => $canEdit
                         ? $editAttributes
                         : array_merge($editAttributes, self::BTN_DISABLED_ATTR),
@@ -145,6 +150,7 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         $items[self::ITEM__CANCEL] = $this->createMenuItem(
             self::ITEM__CANCEL,
             [
+                'label' => false,
                 'attributes' => $canDelete
                     ? $deleteAttributes
                     : array_merge($deleteAttributes, self::BTN_DISABLED_ATTR),
@@ -209,6 +215,7 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         );
 
         $previewAttributes = [
+            'title' => self::ITEM__PREVIEW,
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezrepoforms_content_edit_preview',
         ];
@@ -216,6 +223,7 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         return $this->createMenuItem(
             self::ITEM__PREVIEW,
             [
+                'label' => false,
                 'attributes' => $canPreview && !empty($siteaccesses)
                     ? $previewAttributes
                     : array_merge($previewAttributes, self::BTN_DISABLED_ATTR),

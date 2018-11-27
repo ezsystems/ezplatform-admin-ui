@@ -54,7 +54,9 @@ class SectionEditRightSidebarBuilder extends AbstractBuilder implements Translat
             self::ITEM__SAVE => $this->createMenuItem(
                 self::ITEM__SAVE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__SAVE,
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#update-section-%d_update', $section->id),
                     ],
@@ -65,6 +67,10 @@ class SectionEditRightSidebarBuilder extends AbstractBuilder implements Translat
                 self::ITEM__CANCEL,
                 [
                     'route' => 'ezplatform.section.list',
+                    'label' => false,
+                    'attributes' => [
+                        'title' => self::ITEM__CANCEL,
+                    ],
                     'extras' => ['icon' => 'circle-close'],
                 ]
             ),

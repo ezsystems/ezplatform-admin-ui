@@ -52,7 +52,9 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
             self::ITEM__UPDATE => $this->createMenuItem(
                 self::ITEM__UPDATE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__UPDATE,
                         'class' => 'btn--trigger',
                         'data-click' => '#user_password_change_change',
                     ],
@@ -63,6 +65,10 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
                 self::ITEM__CANCEL,
                 [
                     'route' => 'ezplatform.dashboard',
+                    'label' => false,
+                    'attributes' => [
+                        'title' => self::ITEM__CANCEL,
+                    ],
                     'extras' => ['icon' => 'circle-close'],
                 ]
             ),

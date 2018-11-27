@@ -104,14 +104,17 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
         $canCreate = $this->permissionResolver->canUser('content', 'create', $contentCreateStruct, [$locationCreateStruct]) && $parentContentType->isContainer;
         $canPreview = $this->permissionResolver->canUser('content', 'versionread', $contentCreateStruct, [$locationCreateStruct]);
         $publishAttributes = [
+            'title' => self::ITEM__PUBLISH,
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezrepoforms_content_edit_publish',
         ];
         $createAttributes = [
+            'title' => self::ITEM__SAVE_DRAFT,
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezrepoforms_content_edit_saveDraft',
         ];
         $previewAttributes = [
+            'title' => self::ITEM__PREVIEW,
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezrepoforms_content_edit_preview',
         ];
@@ -120,6 +123,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
             self::ITEM__PUBLISH => $this->createMenuItem(
                 self::ITEM__PUBLISH,
                 [
+                    'label' => false,
                     'attributes' => $canCreate && $canPublish
                         ? $publishAttributes
                         : array_merge($publishAttributes, self::BTN_DISABLED_ATTR),
@@ -129,6 +133,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
             self::ITEM__SAVE_DRAFT => $this->createMenuItem(
                 self::ITEM__SAVE_DRAFT,
                 [
+                    'label' => false,
                     'attributes' => $canCreate
                         ? $createAttributes
                         : array_merge($createAttributes, self::BTN_DISABLED_ATTR),
@@ -138,6 +143,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
             self::ITEM__PREVIEW => $this->createMenuItem(
                 self::ITEM__PREVIEW,
                 [
+                    'label' => false,
                     'attributes' => $canPreview
                         ? $previewAttributes
                         : array_merge($previewAttributes, self::BTN_DISABLED_ATTR),
@@ -147,7 +153,9 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__CANCEL,
                         'class' => self::BTN_TRIGGER_CLASS,
                         'data-click' => '#ezrepoforms_content_edit_cancel',
                     ],

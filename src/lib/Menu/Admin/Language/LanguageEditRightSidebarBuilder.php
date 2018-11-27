@@ -55,7 +55,9 @@ class LanguageEditRightSidebarBuilder extends AbstractBuilder implements Transla
             self::ITEM__SAVE => $this->createMenuItem(
                 self::ITEM__SAVE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__SAVE,
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#%s', $saveId),
                     ],
@@ -66,6 +68,10 @@ class LanguageEditRightSidebarBuilder extends AbstractBuilder implements Transla
                 self::ITEM__CANCEL,
                 [
                     'route' => 'ezplatform.language.list',
+                    'label' => false,
+                    'attributes' => [
+                        'title' => self::ITEM__CANCEL,
+                    ],
                     'extras' => ['icon' => 'circle-close'],
                 ]
             ),

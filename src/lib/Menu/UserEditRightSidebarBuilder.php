@@ -50,7 +50,9 @@ class UserEditRightSidebarBuilder extends AbstractBuilder implements Translation
             self::ITEM__UPDATE => $this->createMenuItem(
                 self::ITEM__UPDATE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__UPDATE,
                         'class' => 'btn--trigger',
                         'data-click' => '#ezrepoforms_user_update_update',
                     ],
@@ -60,7 +62,9 @@ class UserEditRightSidebarBuilder extends AbstractBuilder implements Translation
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__CANCEL,
                         'class' => 'btn--trigger',
                         'data-click' => '#ezrepoforms_user_update_cancel',
                     ],

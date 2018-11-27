@@ -35,7 +35,9 @@ class URLEditRightSidebarBuilder extends AbstractBuilder implements TranslationC
             self::ITEM__SAVE => $this->createMenuItem(
                 self::ITEM__SAVE,
                 [
+                    'label' => false,
                     'attributes' => [
+                        'title' => self::ITEM__SAVE,
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#url-update', $url->id),
                     ],
@@ -46,6 +48,10 @@ class URLEditRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 self::ITEM__CANCEL,
                 [
                     'route' => 'ezplatform.link_manager.list',
+                    'label' => false,
+                    'attributes' => [
+                        'title' => self::ITEM__CANCEL,
+                    ],
                     'extras' => ['icon' => 'circle-close'],
                 ]
             ),
