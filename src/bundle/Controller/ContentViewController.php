@@ -495,7 +495,7 @@ class ContentViewController extends Controller
             foreach ($contentTypeIdentifiers as $contentTypeIdentifier) {
                 // TODO: Change to `contentTypeService->loadContentTypeList($restrictedContentTypesIds)` after #2444 will be merged
                 $contentType = $this->contentTypeService->loadContentTypeByIdentifier($contentTypeIdentifier);
-                $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $content->contentInfo->mainLanguageCode);
+                $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $content->versionInfo->initialLanguageCode);
                 $createPermissionsInMfu[$contentTypeIdentifier] = $this->permissionResolver->canUser('content', 'create', $contentCreateStruct, [$locationCreateStruct]);
             }
         }
