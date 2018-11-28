@@ -63,22 +63,26 @@
     };
     const updateBreadcrumbsState = (btn, pathString) => {
         const pathStringInput = doc.querySelector(btn.dataset.locationPathInputSelector);
-        const contentBreadcrumbsContainer = doc.querySelector(
-            `${btn.dataset.contentBreadcrumbsSelector} .ez-filters__breadcrumbs`
-        );
+        const contentBreadcrumbs = doc.querySelector(btn.dataset.contentBreadcrumbsSelector);
+        const contentBreadcrumbsContainer = contentBreadcrumbs.querySelector('.ez-filters__breadcrumbs');
+        const contentBreadcrumbsSpinner = contentBreadcrumbs.querySelector('.ez-filters__breadcrumbs-spinner');
 
         pathStringInput.value = pathString;
         pathStringInput.dispatchEvent(new Event('change'));
 
-        if (!contentBreadcrumbsContainer) {
+        if (!contentBreadcrumbsContainer || !contentBreadcrumbsSpinner) {
             return;
         }
 
         if (!pathString) {
             contentBreadcrumbsContainer.innerHTML = '';
+            contentBreadcrumbsContainer.hidden = true;
         } else {
+            contentBreadcrumbsSpinner.hidden = false;
             findLocationsByIdList(removeRootFromPathString(pathString), (data) => {
                 contentBreadcrumbsContainer.innerHTML = buildBreadcrumbsString(data);
+                contentBreadcrumbsSpinner.hidden = true;
+                contentBreadcrumbsContainer.hidden = false;
             });
         }
     };

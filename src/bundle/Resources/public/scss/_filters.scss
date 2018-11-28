@@ -94,6 +94,12 @@
         line-height: calculateRem(22px);
     }
 
+    &__breadcrumbs-spinner {
+        .ez-icon {
+            fill: $ez-black;
+        }
+    }
+
     &:before,
     &:after {
         content: '';
