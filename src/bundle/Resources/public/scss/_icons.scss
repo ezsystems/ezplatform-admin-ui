@@ -154,8 +154,16 @@
 
 .ez-preview__action {
     .ez-icon {
-        width: calculateRem(16px);
-        height: calculateRem(16px);
+        width: calculateRem(24px);
+        height: calculateRem(24px);
+        fill: $ez-color-base-medium;
+    }
+
+    &:hover,
+    &:focus {
+        .ez-icon {
+            fill: $ez-white;
+        }
     }
 
     &.ez-preview__action--selected {
