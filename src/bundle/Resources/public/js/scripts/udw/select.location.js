@@ -63,26 +63,26 @@
     };
     const updateBreadcrumbsState = (btn, pathString) => {
         const pathStringInput = doc.querySelector(btn.dataset.locationPathInputSelector);
-        const contentBreadcrumbs = doc.querySelector(btn.dataset.contentBreadcrumbsSelector);
-        const contentBreadcrumbsContainer = contentBreadcrumbs.querySelector('.ez-filters__breadcrumbs');
-        const contentBreadcrumbsSpinner = contentBreadcrumbs.querySelector('.ez-filters__breadcrumbs-spinner');
+        const contentBreadcrumbsContainer = doc.querySelector(btn.dataset.contentBreadcrumbsSelector);
+        const contentBreadcrumbs = contentBreadcrumbsContainer.querySelector('.ez-filters__breadcrumbs');
+        const contentBreadcrumbsSpinner = contentBreadcrumbsContainer.querySelector('.ez-filters__breadcrumbs-spinner');
 
         pathStringInput.value = pathString;
         pathStringInput.dispatchEvent(new Event('change'));
 
-        if (!contentBreadcrumbsContainer || !contentBreadcrumbsSpinner) {
+        if (!contentBreadcrumbs || !contentBreadcrumbsSpinner) {
             return;
         }
 
         if (!pathString) {
-            contentBreadcrumbsContainer.innerHTML = '';
-            contentBreadcrumbsContainer.hidden = true;
+            contentBreadcrumbs.innerHTML = '';
+            contentBreadcrumbs.hidden = true;
         } else {
             contentBreadcrumbsSpinner.hidden = false;
             findLocationsByIdList(removeRootFromPathString(pathString), (data) => {
-                contentBreadcrumbsContainer.innerHTML = buildBreadcrumbsString(data);
+                contentBreadcrumbs.innerHTML = buildBreadcrumbsString(data);
                 contentBreadcrumbsSpinner.hidden = true;
-                contentBreadcrumbsContainer.hidden = false;
+                contentBreadcrumbs.hidden = false;
             });
         }
     };
