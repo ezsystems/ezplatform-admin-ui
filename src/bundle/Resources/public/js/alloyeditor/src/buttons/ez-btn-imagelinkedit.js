@@ -58,6 +58,7 @@ export default class EzBtnImageLinkEdit extends EzBtnLinkEdit {
         link.remove();
 
         this.widget.removeLinkEditState();
+        this.widget.removeIsLinkedState();
         this.widget.setFocused(true);
 
         this.props.cancelExclusive();
@@ -75,6 +76,7 @@ export default class EzBtnImageLinkEdit extends EzBtnLinkEdit {
 
         this.widget.removeEzLinkAttribute('data-ez-temporary-link');
         this.widget.removeLinkEditState();
+        this.widget.setIsLinkedState();
 
         this.widget.setFocused(true);
 

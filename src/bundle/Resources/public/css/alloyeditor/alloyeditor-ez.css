@@ -1027,6 +1027,19 @@
   max-width: 100%;
 }
 
+.ez-embed-type-image.is-linked {
+  position: relative;
+}
+
+.ez-embed__icon-wrapper {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #106d95;
+  border-radius: 50%;
+  padding: 4px;
+}
+
 [class*='ae-icon-'],
 [class*=' ae-icon-'] {
   font-size: 14px;

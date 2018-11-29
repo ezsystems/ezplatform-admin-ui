@@ -1,5 +1,6 @@
 (function(global) {
     const IMAGE_TYPE_CLASS = 'ez-embed-type-image';
+    const IS_LINKED_CLASS = 'is-linked';
     const EDIT_LINK_STATE_ATTR = 'data-ez-is-in-edit-link';
     const DATA_ALIGNMENT_ATTR = 'ezalign';
 
@@ -279,6 +280,10 @@
                     elementNode.setAttribute('src', imageUri);
 
                     this.setWidgetContent(elementNode);
+
+                    if (this.element.hasClass(IS_LINKED_CLASS)) {
+                        this.renderLinkedIcon();
+                    }
                 },
 
                 /**
@@ -619,6 +624,64 @@
                  */
                 isEditingLink: function() {
                     return this.element.hasAttribute(EDIT_LINK_STATE_ATTR);
+                },
+
+                /**
+                 * Sets the is linked state
+                 *
+                 * @method setIsLinkedState
+                 */
+                setIsLinkedState: function() {
+                    this.element.$.classList.add(IS_LINKED_CLASS);
+
+                    this.renderLinkedIcon();
+                },
+
+                /**
+                 * Removes the is linked state
+                 *
+                 * @method removeIsLinkedState
+                 */
+                removeIsLinkedState: function() {
+                    this.element.$.classList.remove(IS_LINKED_CLASS);
+
+                    this.removeLinkedIcon();
+                },
+
+                /**
+                 * Renders the linked icon
+                 *
+                 * @method renderLinkedIcon
+                 */
+                renderLinkedIcon: function() {
+                    const iconWrapper = new CKEDITOR.dom.element('span');
+                    const icon = `
+                        <svg class="ez-icon ez-icon--medium ez-icon--light">
+                            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#link"></use>
+                        </svg>
+                    `;
+
+                    if (this.element.findOne('.ez-embed__icon-wrapper')) {
+                        return;
+                    }
+
+                    iconWrapper.$.classList.add('ez-embed__icon-wrapper');
+                    iconWrapper.$.innerHTML = icon;
+
+                    this.element.append(iconWrapper);
+                },
+
+                /**
+                 * Removes the linked icon
+                 *
+                 * @method removeLinkedIcon
+                 */
+                removeLinkedIcon: function() {
+                    const iconWrapper = this.element.findOne('.ez-embed__icon-wrapper');
+
+                    if (iconWrapper) {
+                        iconWrapper.remove();
+                    }
                 },
 
                 /**
