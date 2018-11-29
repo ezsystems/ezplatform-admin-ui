@@ -80,11 +80,14 @@ class NavigationContext extends BusinessContext
 
     /**
      * @Given I navigate to content :contentName of type :contentType in :path
+     * @Given I navigate to content :contentName of type :contentType
      */
-    public function iNavigateToContent(string $contentName, string $contentType, string $path)
+    public function iNavigateToContent(string $contentName, string $contentType, string $path = null)
     {
         $contentPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName);
-        $contentPage->navigateToPath($path);
+        if ($path !== null) {
+            $contentPage->navigateToPath($path);
+        }
         $contentPage->goToSubItem($contentName, $contentType);
     }
 
