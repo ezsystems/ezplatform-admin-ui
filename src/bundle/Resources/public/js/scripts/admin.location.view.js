@@ -86,7 +86,7 @@
                         component: eZ.modules.MultiFileUpload,
                         attrs: Object.assign({}, mfuAttrs, {
                             onPopupClose: (itemsUploaded) => itemsUploaded.length && global.location.reload(true),
-                            contentCreatePermissionsConfig: JSON.parse(container.dataset.mfuCanCreate),
+                            contentCreatePermissionsConfig: JSON.parse(container.dataset.mfuCreatePermissionsConfig),
                         }),
                     },
                 ],
