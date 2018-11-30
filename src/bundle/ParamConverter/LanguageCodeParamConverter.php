@@ -15,10 +15,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInte
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class LanguageParamConverter implements ParamConverterInterface
+class LanguageCodeParamConverter implements ParamConverterInterface
 {
-    const PARAMETER_LANGUAGE_ID = 'languageId';
-    const PARAMETER_LANGUAGE_CODE = 'languageCode';
+    const PARAMETER_LANGUAGE_CODE_TO = 'toLanguageCode';
+    const PARAMETER_LANGUAGE_CODE_FROM = 'fromLanguageCode';
 
     /** @var LanguageService */
     private $languageService;
@@ -38,25 +38,15 @@ class LanguageParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
-        if (!$request->get(self::PARAMETER_LANGUAGE_ID) && !$request->get(self::PARAMETER_LANGUAGE_CODE)) {
+        if ($request->get(self::PARAMETER_LANGUAGE_CODE_TO) && 'language' === $configuration->getName()) {
+            $languageCode = $request->get(self::PARAMETER_LANGUAGE_CODE_TO);
+        } elseif ($request->get(self::PARAMETER_LANGUAGE_CODE_FROM) && 'baseLanguage' === $configuration->getName()) {
+            $languageCode = $request->get(self::PARAMETER_LANGUAGE_CODE_FROM);
+        } else {
             return false;
         }
 
-        if ($request->get(self::PARAMETER_LANGUAGE_ID)) {
-            $id = (int)$request->get(self::PARAMETER_LANGUAGE_ID);
-
-            $language = $this->languageService->loadLanguageById($id);
-        } elseif ($request->get(self::PARAMETER_LANGUAGE_CODE)) {
-            $languageCode = $request->get(self::PARAMETER_LANGUAGE_CODE);
-
-            $language = $this->languageService->loadLanguage($languageCode);
-        }
-
-        if (!$language) {
-            throw new NotFoundHttpException("Language $id not found!");
-        }
-
-        $request->attributes->set($configuration->getName(), $language);
+        $request->attributes->set($configuration->getName(), $this->getLanguage($languageCode));
 
         return true;
     }
@@ -67,5 +57,15 @@ class LanguageParamConverter implements ParamConverterInterface
     public function supports(ParamConverter $configuration)
     {
         return Language::class === $configuration->getClass();
+    }
+
+    private function getLanguage(string $languageCode): Language
+    {
+        $language = $this->languageService->loadLanguage($languageCode);
+        if (!$language) {
+            throw new NotFoundHttpException("Language $languageCode not found!");
+        }
+
+        return $language;
     }
 }

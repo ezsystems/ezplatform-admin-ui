@@ -21,7 +21,10 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddDat
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData as ContentTypeTranslationAddData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupsDeleteData;
@@ -87,7 +90,10 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemove
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentMainLocationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeEditType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypesDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation\TranslationAddType as ContentTypeTranslationAddType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation\TranslationRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupsDeleteType;
@@ -1335,5 +1341,50 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationTrashContainerType::class);
 
         return $this->formFactory->createNamed($name, LocationTrashContainerType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData|null $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addContentTypeTranslation(
+        ContentTypeTranslationAddData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('add-translation');
+
+        return $this->formFactory->createNamed($name, ContentTypeTranslationAddType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData|null $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function removeContentTypeTranslation(
+        TranslationRemoveData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('delete-translations');
+
+        return $this->formFactory->createNamed($name, TranslationRemoveType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData|null $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function contentTypeEdit(
+        ContentTypeEditData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentTypeEditType::class);
+
+        return $this->formFactory->createNamed($name, ContentTypeEditType::class, $data);
     }
 }

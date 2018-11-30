@@ -1,5 +1,6 @@
 imports:
     - { resource: tabs/locationview.yml }
+    - { resource: tabs/content_type.yml }
 
 services:
     _defaults:

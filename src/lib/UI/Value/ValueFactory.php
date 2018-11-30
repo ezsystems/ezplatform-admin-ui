@@ -22,6 +22,7 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Relation;
 use eZ\Publish\API\Repository\Values\Content\URLAlias;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
+use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
@@ -254,5 +255,24 @@ class ValueFactory
                 'userCanEdit' => $this->permissionResolver->canUser('content', 'edit', $location->contentInfo),
             ]
         );
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     *
+     * @return \EzSystems\EzPlatformAdminUi\UI\Value\Content\Language
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    public function createLanguageFromContentType(
+        Language $language,
+        ContentType $contentType
+    ): UIValue\Content\Language {
+        return new UIValue\Content\Language($language, [
+            'userCanRemove' => $this->permissionResolver->canUser('class', 'update', $contentType),
+            'main' => $language->languageCode === $contentType->mainLanguageCode,
+        ]);
     }
 }
