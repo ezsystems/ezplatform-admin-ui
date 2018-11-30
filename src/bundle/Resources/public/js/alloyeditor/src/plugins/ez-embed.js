@@ -1,7 +1,7 @@
-(function(global) {
+(function(global, doc, eZ) {
     const IMAGE_TYPE_CLASS = 'ez-embed-type-image';
     const IS_LINKED_CLASS = 'is-linked';
-    const EDIT_LINK_STATE_ATTR = 'data-ez-is-in-edit-link';
+    const SHOW_EDIT_LINK_TOOLBAR_ATTR = 'data-show-edit-link-toolbar';
     const DATA_ALIGNMENT_ATTR = 'ezalign';
 
     if (CKEDITOR.plugins.get('ezembed')) {
@@ -144,7 +144,7 @@
                     fetch(request)
                         .then((response) => response.json())
                         .then(this.handleContentLoaded.bind(this))
-                        .catch((error) => console.log('error:load:content:info', error));
+                        .catch((error) => eZ.helpers.notification.showErrorNotification(error));
                 },
 
                 /**
@@ -173,6 +173,16 @@
                 },
 
                 /**
+                 * Finds the ezimage field.
+                 *
+                 * @method findEzimageField
+                 * @returns {Object}
+                 */
+                findEzimageField(fields) {
+                    return fields.find((field) => field.fieldTypeIdentifier === 'ezimage');
+                },
+
+                /**
                  * Handles loading the content info.
                  *
                  * @method handleContentLoaded
@@ -183,9 +193,7 @@
                     const content = hits.View.Result.searchHits.searchHit[0].value.Content;
 
                     if (isEmbedImage) {
-                        const fieldImage = content.CurrentVersion.Version.Fields.field.find(
-                            (field) => field.fieldTypeIdentifier === 'ezimage'
-                        );
+                        const fieldImage = this.findEzimageField(content.CurrentVersion.Version.Fields.field);
 
                         if (!fieldImage || !fieldImage.fieldValue) {
                             this.renderEmbedPreview(content.Name);
@@ -228,7 +236,7 @@
                     fetch(request)
                         .then((response) => response.json())
                         .then((data) => {
-                            const fieldImage = data.Version.Fields.field.find((field) => field.fieldTypeIdentifier === 'ezimage');
+                            const fieldImage = this.findEzimageField(data.Version.Fields.field);
 
                             if (!fieldImage || !fieldImage.fieldValue) {
                                 contentName = contentName ? contentName : '';
@@ -604,7 +612,7 @@
                  * @method setLinkEditState
                  */
                 setLinkEditState: function() {
-                    this.element.setAttribute(EDIT_LINK_STATE_ATTR, true);
+                    this.element.setAttribute(SHOW_EDIT_LINK_TOOLBAR_ATTR, true);
                 },
 
                 /**
@@ -613,7 +621,7 @@
                  * @method removeLinkEditState
                  */
                 removeLinkEditState: function() {
-                    this.element.removeAttribute(EDIT_LINK_STATE_ATTR);
+                    this.element.removeAttribute(SHOW_EDIT_LINK_TOOLBAR_ATTR);
                 },
 
                 /**
@@ -623,7 +631,7 @@
                  * @return {Boolean}
                  */
                 isEditingLink: function() {
-                    return this.element.hasAttribute(EDIT_LINK_STATE_ATTR);
+                    return this.element.hasAttribute(SHOW_EDIT_LINK_TOOLBAR_ATTR);
                 },
 
                 /**
@@ -740,4 +748,4 @@
             });
         },
     });
-})(window);
+})(window, window.document, window.eZ);
