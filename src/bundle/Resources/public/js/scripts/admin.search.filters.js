@@ -19,6 +19,7 @@
     const resetCreatorBtn = doc.querySelector('.ez-filters__item--creator .ez-icon--reset');
     const listGroupsTitle = [...doc.querySelectorAll('.ez-content-type-selector__group-title')];
     const contentTypeCheckboxes = [...doc.querySelectorAll('.ez-content-type-selector__item [type="checkbox"]')];
+    const subtreeInput = doc.querySelector('#search_subtree');
     const clearFilters = (event) => {
         event.preventDefault();
 
@@ -48,6 +49,7 @@
         lastModifiedEnd.value = '';
         lastCreatedPeriod.value = '';
         lastCreatedEnd.value = '';
+        subtreeInput.value = '';
 
         handleResetUser();
 
@@ -60,7 +62,8 @@
         const isModifiedSelected = !!lastModifiedSelect.value;
         const isCreatedSelected = !!lastCreatedSelect.value;
         const isCreatorSelected = !!searchCreatorInput.value;
-        const isEnabled = isContentTypeSelected || isSectionSelected || isModifiedSelected || isCreatedSelected || isCreatorSelected;
+        const isSubtreeSelected = !!subtreeInput.value.trim().length;
+        const isEnabled = isContentTypeSelected || isSectionSelected || isModifiedSelected || isCreatedSelected || isCreatorSelected || isSubtreeSelected;
         const methodName = isEnabled ? 'removeAttribute' : 'setAttribute';
 
         applyBtn[methodName]('disabled', !isEnabled);
@@ -276,6 +279,7 @@
         sectionSelect.addEventListener('change', toggleDisabledStateOnApplyBtn, false);
     }
 
+    subtreeInput.addEventListener('change', toggleDisabledStateOnApplyBtn, false);
     lastModifiedSelect.addEventListener('change', toggleModalVisibility, false);
     lastCreatedSelect.addEventListener('change', toggleModalVisibility, false);
     creatorInput.addEventListener('keyup', handleTyping, false);

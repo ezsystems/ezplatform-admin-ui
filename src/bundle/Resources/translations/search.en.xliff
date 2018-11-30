@@ -136,6 +136,16 @@
         <target state="new">Section:</target>
         <note>key: search.section</note>
       </trans-unit>
+      <trans-unit id="1ac4d5da88d06451590cade73ec7e2c4a8b98c2e" resname="search.select_content">
+        <source>Select Content</source>
+        <target state="new">Select Content</target>
+        <note>key: search.select_content</note>
+      </trans-unit>
+      <trans-unit id="b484be9d33f5cd9961f4ddd89c628f2cbca2a6a1" resname="search.subtree">
+        <source>Subtree:</source>
+        <target state="new">Subtree:</target>
+        <note>key: search.subtree</note>
+      </trans-unit>
       <trans-unit id="777cc1ef279096d5a978aa3553e9434d828f8248" resname="search.tips.check_spelling">
         <source>Check spelling of keywords.</source>
         <target state="new">Check spelling of keywords.</target>
@@ -165,6 +175,11 @@
         <source>Content Type</source>
         <target state="new">Content Type</target>
         <note>key: search.type</note>
+      </trans-unit>
+      <trans-unit id="c33e03cc28d02c59ac241dba3a1bb3ea0ab1f358" resname="search.udw.select_content">
+        <source>Select Content</source>
+        <target state="new">Select Content</target>
+        <note>key: search.udw.select_content</note>
       </trans-unit>
       <trans-unit id="fe647ff0e12d67501403559464217be468dba3d8" resname="search.viewing">
         <source>Viewing %viewing% out of %total% sub-items</source>

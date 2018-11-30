@@ -44,6 +44,9 @@ class SearchData
     /** @var \eZ\Publish\API\Repository\Values\User\User */
     private $creator;
 
+    /** @var string|null */
+    private $subtree;
+
     /**
      * SimpleSearchData constructor.
      *
@@ -55,6 +58,7 @@ class SearchData
      * @param array $lastModified
      * @param array $created
      * @param \eZ\Publish\API\Repository\Values\User\User|null $creator
+     * @param string|null $subtree
      */
     public function __construct(
         int $limit = 10,
@@ -64,7 +68,8 @@ class SearchData
         array $contentTypes = [],
         array $lastModified = [],
         array $created = [],
-        ?User $creator = null
+        ?User $creator = null,
+        ?string $subtree = null
     ) {
         $this->limit = $limit;
         $this->page = $page;
@@ -74,6 +79,7 @@ class SearchData
         $this->lastModified = $lastModified;
         $this->created = $created;
         $this->creator = $creator;
+        $this->subtree = $subtree;
     }
 
     /**
@@ -221,6 +227,22 @@ class SearchData
     }
 
     /**
+     * @return string|null
+     */
+    public function getSubtree(): ?string
+    {
+        return $this->subtree;
+    }
+
+    /**
+     * @param string|null $subtree
+     */
+    public function setSubtree(?string $subtree): void
+    {
+        $this->subtree = $subtree;
+    }
+
+    /**
      * @return bool
      */
     public function isFiltered(): bool
@@ -230,7 +252,14 @@ class SearchData
         $lastModified = $this->getLastModified();
         $created = $this->getCreated();
         $creator = $this->getCreator();
+        $subtree = $this->getSubtree();
 
-        return !empty($contentTypes) || null !== $section || !empty($lastModified) || !empty($created) || !empty($creator);
+        return
+            !empty($contentTypes) ||
+            null !== $section ||
+            !empty($lastModified) ||
+            !empty($created) ||
+            !empty($creator) ||
+            null !== $subtree;
     }
 }

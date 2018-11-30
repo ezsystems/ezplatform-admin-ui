@@ -37,10 +37,10 @@
 {%- endblock -%}
 
 {%- block _search_content_types_widget -%}
-    <div class="ez-content-type-selector ez-content-type-selector--collapsed">
+    <div class="ez-content-type-selector">
     {%- set options = choices -%}
     {%- for group_label, choice in options -%}
-        <div class="ez-content-type-selector__group">
+        <div class="ez-content-type-selector__group {% if not loop.first %}ez-content-type-selector__group--collapsed{% endif %}">
             <span class="ez-content-type-selector__group-title">
                 {{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }}
             </span>
