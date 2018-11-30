@@ -20,6 +20,7 @@ export default class EzBtnImageLinkEdit extends EzBtnLinkEdit {
         }
 
         this.widget.removeLinkEditState();
+        this.props.cancelExclusive();
     }
 
     getInitialState() {

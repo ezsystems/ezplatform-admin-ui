@@ -7,11 +7,6 @@ export default class EzBtnImageLink extends AlloyEditor.ButtonLink {
         super(props);
 
         this.requestExclusive = this.requestExclusive.bind(this);
-        this.cancelExclusive = this.cancelExclusive.bind(this);
-
-        this.state = {
-            renderExclusive: this.getWidget().isEditingLink(),
-        };
     }
 
     static get key() {
@@ -30,12 +25,6 @@ export default class EzBtnImageLink extends AlloyEditor.ButtonLink {
 
         widget.setLinkEditState();
         widget.setFocused(true);
-
-        this.setState(() => ({ renderExclusive: true }));
-    }
-
-    cancelExclusive() {
-        this.setState(() => ({ renderExclusive: false }), this.props.cancelExclusive);
     }
 
     /**
@@ -47,10 +36,10 @@ export default class EzBtnImageLink extends AlloyEditor.ButtonLink {
     render() {
         const cssClass = 'ae-button ez-btn-ae ' + this.getStateClasses();
 
-        if (this.state.renderExclusive) {
+        if (this.getWidget().isEditingLink()) {
             const props = this.mergeButtonCfgProps();
 
-            return <AlloyEditor.EzBtnImageLinkEdit {...props} cancelExclusive={this.cancelExclusive} />;
+            return <AlloyEditor.EzBtnImageLinkEdit {...props} />;
         }
 
         return (
