@@ -71,6 +71,7 @@ export default class EzBtnImageLinkEdit extends EzBtnLinkEdit {
         const titleMethodName = linkTitle === '' ? 'removeEzLinkAttribute' : 'setEzLinkAttribute';
 
         this.widget[hrefMethodName]('href', linkHref);
+        this.widget[hrefMethodName]('data-cke-saved-href', linkHref);
         this.widget[targetMethodName]('target', linkTarget);
         this.widget[titleMethodName]('title', linkTitle);
 
