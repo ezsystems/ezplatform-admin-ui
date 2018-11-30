@@ -15,18 +15,19 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
+use EzSystems\EzPlatformAdminUi\Tab\EventDispatchingAbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
-class VersionsTab extends AbstractTab implements OrderedTabInterface, ConditionalTabInterface
+class VersionsTab extends EventDispatchingAbstractTab implements OrderedTabInterface, ConditionalTabInterface
 {
     public const FORM_REMOVE_DRAFT = 'version_remove_draft';
     public const FORM_REMOVE_ARCHIVED = 'version_remove_archived';
@@ -55,6 +56,7 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface, Conditiona
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         Environment $twig,
@@ -63,9 +65,10 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface, Conditiona
         FormFactory $formFactory,
         UrlGeneratorInterface $urlGenerator,
         PermissionResolver $permissionResolver,
-        UserService $userService
+        UserService $userService,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
@@ -115,22 +118,24 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface, Conditiona
     }
 
     /**
-     * @param array $parameters
-     *
-     * @return string
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * {@inheritdoc}
      */
-    public function renderView(array $parameters): string
+    public function getTemplate(): string
+    {
+        return '@ezdesign/content/tab/versions/tab.html.twig';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
-        $content = $parameters['content'];
+        $content = $contextParameters['content'];
         /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
-        $location = $parameters['location'];
+        $location = $contextParameters['location'];
 
-        $draftPaginationParams = $parameters['draft_pagination_params'];
+        $draftPaginationParams = $contextParameters['draft_pagination_params'];
 
         $versionInfo = $content->getVersionInfo();
         $contentInfo = $versionInfo->getContentInfo();
@@ -164,7 +169,8 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface, Conditiona
             'archived_version_restore'
         );
 
-        $viewParameters = [
+        $parameters = [
+            'versions_dataset' => $versionsDataset,
             'published_versions' => $versionsDataset->getPublishedVersions(),
             'archived_versions' => $archivedVersions,
             'form_version_remove_draft' => $removeVersionDraftForm->createView(),
@@ -175,10 +181,7 @@ class VersionsTab extends AbstractTab implements OrderedTabInterface, Conditiona
             'content_is_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content),
         ];
 
-        return $this->twig->render(
-            '@ezdesign/content/tab/versions/tab.html.twig',
-            array_merge($viewParameters, $parameters)
-        );
+        return array_replace($contextParameters, $parameters);
     }
 
     /**
