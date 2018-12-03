@@ -1,12 +1,14 @@
 (function(global, doc) {
     const CLASS_CUSTOM_DROPDOWN = 'ez-custom-dropdown';
+    const CLASS_CUSTOM_DROPDOWN_ITEM = 'ez-custom-dropdown__item';
     const CLASS_ITEMS_HIDDEN = 'ez-custom-dropdown__items--hidden';
     const CLASS_REMOVE_SELECTION = 'ez-custom-dropdown__remove-selection';
-    const CLASS_ITEM_SELECTED = 'ez-custom-dropdown__item--selected';
-    const SELECTOR_ITEMS = '.ez-custom-dropdown__items';
+    const CLASS_ITEM_SELECTED_IN_LIST = 'ez-custom-dropdown__item--selected';
     const SELECTOR_ITEM = '.ez-custom-dropdown__item';
-    const SELECTOR_SELECTED_ITEM = '.ez-custom-dropdown__selected-item';
+    const SELECTOR_SELECTED_ITEM_IN_LABEL = '.ez-custom-dropdown__selected-item';
+    const SELECTOR_SELECTED_ITEM_IN_LIST = '.ez-custom-dropdown__item--selected';
     const SELECTOR_SELECTION_INFO = '.ez-custom-dropdown__selection-info';
+    const SELECTOR_PLACEHOLDER = '[data-value=""]';
     const EVENT_VALUE_CHANGED = 'valueChanged';
 
     class CustomDropdown {
@@ -32,6 +34,7 @@
             this.onClickOutside = this.onClickOutside.bind(this);
             this.onInputClick = this.onInputClick.bind(this);
             this.onOptionClick = this.onOptionClick.bind(this);
+            this.fireValueChangedEvent = this.fireValueChangedEvent.bind(this);
         }
 
         createSelectedItem(value, label) {
@@ -42,8 +45,8 @@
             const items = this.itemsContainer.querySelectorAll(`${SELECTOR_ITEM}`);
             const firstItem = items[0];
 
-            items.forEach((item) => item.classList.remove(CLASS_ITEM_SELECTED));
-            firstItem.classList.add(CLASS_ITEM_SELECTED);
+            items.forEach((item) => item.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
+            firstItem.classList.add(CLASS_ITEM_SELECTED_IN_LIST);
 
             this.container
                 .querySelector(SELECTOR_SELECTION_INFO)
@@ -52,22 +55,14 @@
 
         clearCurrentSelection() {
             this.sourceInput.querySelectorAll('option').forEach((option) => (option.selected = false));
-            this.itemsContainer.querySelectorAll(SELECTOR_ITEM).forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED));
+            this.itemsContainer.querySelectorAll(SELECTOR_ITEM).forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
             this.container.querySelector(SELECTOR_SELECTION_INFO).innerHTML = '';
         }
 
         hideOptions() {
+            doc.body.removeEventListener('click', this.onClickOutside);
+
             return this.itemsContainer.classList.add(CLASS_ITEMS_HIDDEN);
-        }
-
-        deselectPlaceholderOption() {
-            const placeholderItem = this.itemsContainer.querySelector('[data-value=""]');
-
-            if (!placeholderItem) {
-                return;
-            }
-
-            placeholderItem.selected = false;
         }
 
         onSelect(element, selected) {
@@ -79,46 +74,59 @@
                 this.clearCurrentSelection();
             }
 
-            this.deselectPlaceholderOption();
-
             if (value) {
                 this.sourceInput.querySelector(`[value="${value}"]`).selected = selected;
             }
 
-            this.itemsContainer.querySelector(`[data-value="${value}"]`).classList[cssMethodName](CLASS_ITEM_SELECTED);
+            this.itemsContainer.querySelector(`[data-value="${value}"]`).classList[cssMethodName](CLASS_ITEM_SELECTED_IN_LIST);
+
+            const selectedItemsList = this.container.querySelector(SELECTOR_SELECTION_INFO);
 
             if (selected && value) {
-                this.container
-                    .querySelector(SELECTOR_SELECTION_INFO)
-                    .insertAdjacentHTML('beforeend', this.createSelectedItem(value, element.innerHTML));
+                const placeholder = selectedItemsList.querySelector(SELECTOR_PLACEHOLDER);
+
+                if (placeholder) {
+                    placeholder.remove();
+
+                    this.itemsContainer.querySelector(SELECTOR_PLACEHOLDER).classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
+                }
+
+                selectedItemsList.insertAdjacentHTML('beforeend', this.createSelectedItem(value, element.innerHTML));
             } else {
-                const valueNode = this.container.querySelector(`${SELECTOR_SELECTION_INFO} [data-value="${value}"]`);
+                const valueNode = selectedItemsList.querySelector(`[data-value="${value}"]`);
 
                 if (valueNode) {
                     valueNode.remove();
                 }
             }
 
-            if (this.canSelectOnlyOne && !selected && this.hasDefaultSelection) {
-                this.hideOptions();
+            if (
+                !selected &&
+                this.hasDefaultSelection &&
+                (this.canSelectOnlyOne || !selectedItemsList.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LABEL).length)
+            ) {
                 this.selectFirstItem();
             }
 
-            this.sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
+            this.fireValueChangedEvent();
         }
 
         onClickOutside(event) {
-            if (event.target.closest(SELECTOR_SELECTION_INFO) || event.target.closest(SELECTOR_ITEMS)) {
+            if (this.container.contains(event.target)) {
                 return;
             }
 
             this.hideOptions();
+            this.fireValueChangedEvent();
+        }
+
+        fireValueChangedEvent() {
             this.sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
         }
 
         onInputClick(event) {
             if (event.target.classList.contains(CLASS_REMOVE_SELECTION)) {
-                this.onSelect(event.target.closest(SELECTOR_SELECTED_ITEM), false);
+                this.deselectOption(event.target.closest(SELECTOR_SELECTED_ITEM_IN_LABEL));
 
                 return;
             }
@@ -126,21 +134,46 @@
             const methodName = this.itemsContainer.classList.contains(CLASS_ITEMS_HIDDEN) ? 'addEventListener' : 'removeEventListener';
 
             this.itemsContainer.classList.toggle(CLASS_ITEMS_HIDDEN);
-            doc.querySelector('body')[methodName]('click', this.onClickOutside, false);
+            doc.body[methodName]('click', this.onClickOutside, false);
         }
 
-        onOptionClick(event) {
-            return this.onSelect(event.target, !event.target.classList.contains(CLASS_ITEM_SELECTED));
+        onOptionClick({ target }) {
+            const option = target.classList.contains(CLASS_CUSTOM_DROPDOWN_ITEM) ? target : target.closest(SELECTOR_ITEM);
+
+            return this.onSelect(option, !option.classList.contains(CLASS_ITEM_SELECTED_IN_LIST));
+        }
+
+        deselectOption(option) {
+            const value = option.dataset.value;
+            const optionSelect = this.sourceInput.querySelector(`[value="${value}"]`);
+
+            this.itemsContainer.querySelector(`[data-value="${value}"]`).classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
+
+            if (optionSelect) {
+                optionSelect.selected = false;
+            }
+
+            option.remove();
+
+            if (!this.itemsContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length && this.hasDefaultSelection) {
+                this.hideOptions();
+                this.clearCurrentSelection();
+                this.selectFirstItem();
+            }
+
+            this.fireValueChangedEvent();
         }
 
         init() {
-            const isEmpty = !this.container.querySelectorAll(SELECTOR_SELECTED_ITEM).length;
+            const isEmpty = !this.container.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LABEL).length;
 
             this.container.classList.add(CLASS_CUSTOM_DROPDOWN);
 
             if (isEmpty && this.hasDefaultSelection) {
                 this.selectFirstItem();
             }
+
+            this.hideOptions();
 
             this.container.querySelector(SELECTOR_SELECTION_INFO).onclick = this.onInputClick;
             this.itemsContainer
