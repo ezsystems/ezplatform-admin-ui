@@ -54,6 +54,7 @@ export default class EzConfigBase {
         );
 
         const domElement = new CKEDITOR.dom.element(ReactDOM.findDOMNode(this));
+
         domElement.addClass('ae-toolbar-transition');
         domElement.setStyles({
             left: left - outlineWidth + 'px',
@@ -115,10 +116,13 @@ export default class EzConfigBase {
      */
     setPosition(payload) {
         const editor = payload.editor.get('nativeEditor');
+        const nativeEvent = payload.editorEvent.data.nativeEvent;
+        const targetElement = nativeEvent ? new CKEDITOR.dom.element(payload.editorEvent.data.nativeEvent.target) : null;
+        const isWidgetElement = targetElement ? editor.widgets.getByElement(targetElement) : false;
         let block = editor.elementPath().block;
 
-        if (!block) {
-            block = new CKEDITOR.dom.element(payload.editorEvent.data.nativeEvent.target);
+        if (!block || isWidgetElement) {
+            block = targetElement;
         }
 
         return EzConfigBase.setPositionFor.call(this, block, editor);

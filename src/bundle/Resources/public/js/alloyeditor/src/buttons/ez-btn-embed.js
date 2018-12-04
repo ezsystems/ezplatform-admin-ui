@@ -47,8 +47,8 @@ export default class EzBtnEmbed extends EzEmbedDiscoverContentButton {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        const css = 'ae-button ez-btn-ae ez-btn-ae--embed ' + this.getStateClasses(),
-            disabled = this.isDisabled();
+        const css = 'ae-button ez-btn-ae ez-btn-ae--embed ' + this.getStateClasses();
+        const disabled = this.isDisabled();
         const label = Translator.trans(/*@Desc("Embed")*/ 'embed_btn.label', {}, 'alloy_editor');
 
         return (

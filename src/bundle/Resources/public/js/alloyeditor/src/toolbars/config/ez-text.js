@@ -1,6 +1,6 @@
 import AlloyEditor from 'alloyeditor';
 
-export default class EzTextConfig  {
+export default class EzTextConfig {
     constructor(config) {
         this.name = 'text';
         this.buttons = [

@@ -9,6 +9,7 @@ export default class EzHeadingConfig extends EzConfigBase {
             'ezmoveup',
             'ezmovedown',
             this.getStyles(config.customStyles),
+            'ezembedinline',
             'ezblocktextalignleft',
             'ezblocktextaligncenter',
             'ezblocktextalignright',
@@ -34,6 +35,6 @@ export default class EzHeadingConfig extends EzConfigBase {
         const nativeEditor = payload.editor.get('nativeEditor');
         const path = nativeEditor.elementPath();
 
-        return (nativeEditor.isSelectionEmpty() && path && path.contains(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']));
+        return nativeEditor.isSelectionEmpty() && path && path.contains(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']);
     }
 }
