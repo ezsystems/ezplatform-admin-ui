@@ -117,11 +117,7 @@ class LocationController extends Controller
                 $location = $data->getLocation();
                 $newParentLocation = $data->getNewParentLocation();
 
-                $newParentContentType = $this->contentTypeService->loadContentType(
-                    $newParentLocation->getContentInfo()->contentTypeId
-                );
-
-                if (!$newParentContentType->isContainer) {
+                if (!$newParentLocation->getContent()->getContentType()->isContainer) {
                     throw new InvalidArgumentException(
                         '$newParentLocation',
                         'Cannot move location to a parent that is not a container'
@@ -173,11 +169,7 @@ class LocationController extends Controller
                 $location = $data->getLocation();
                 $newParentLocation = $data->getNewParentLocation();
 
-                $newParentContentType = $this->contentTypeService->loadContentType(
-                    $newParentLocation->getContentInfo()->contentTypeId
-                );
-
-                if (!$newParentContentType->isContainer) {
+                if (!$newParentLocation->getContent()->getContentType()->isContainer) {
                     throw new InvalidArgumentException(
                         '$newParentLocation',
                         'Cannot copy location to a parent that is not a container'
@@ -283,7 +275,7 @@ class LocationController extends Controller
                 $newLocation = $data->getNewLocation();
 
                 $childCount = $this->locationService->getLocationChildCount($currentLocation);
-                $contentType = $this->contentTypeService->loadContentType($newLocation->getContentInfo()->contentTypeId);
+                $contentType = $newLocation->getContent()->getContentType();
 
                 if (!$contentType->isContainer && $childCount) {
                     throw new \InvalidArgumentException(

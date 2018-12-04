@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
-use eZ\Publish\API\Repository\Values\Content\VersionInfo;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
 
@@ -47,16 +47,16 @@ class RelationsDataset
      *
      * @throws UnauthorizedException
      */
-    public function load(VersionInfo $versionInfo): self
+    public function load(Content $content): self
     {
-        $contentInfo = $versionInfo->getContentInfo();
+        $versionInfo = $content->getVersionInfo();
 
         foreach ($this->contentService->loadRelations($versionInfo) as $relation) {
-            $this->relations[] = $this->valueFactory->createRelation($relation, $contentInfo);
+            $this->relations[] = $this->valueFactory->createRelation($relation, $content);
         }
 
         foreach ($this->contentService->loadReverseRelations($versionInfo->getContentInfo()) as $reverseRelation) {
-            $this->reverseRelations[] = $this->valueFactory->createRelation($reverseRelation, $contentInfo);
+            $this->reverseRelations[] = $this->valueFactory->createRelation($reverseRelation, $content);
         }
 
         return $this;

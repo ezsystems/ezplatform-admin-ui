@@ -92,7 +92,7 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
             $request->attributes->get('contentId'),
             null !== $baseLanguageCode ? [$baseLanguageCode] : null
         );
-        $contentType = $this->contentTypeService->loadContentType($content->contentInfo->contentTypeId);
+        $contentType = $content->getContentType();
 
         $toLanguage = $this->languageService->loadLanguage($languageCode);
         $fromLanguage = $baseLanguageCode ? $this->languageService->loadLanguage($baseLanguageCode) : null;

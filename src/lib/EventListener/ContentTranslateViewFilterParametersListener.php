@@ -53,9 +53,8 @@ class ContentTranslateViewFilterParametersListener implements EventSubscriberInt
         }
 
         $contentInfo = $view->getContent()->contentInfo;
-        $contentType = $this->contentTypeService->loadContentType(
-            $contentInfo->contentTypeId
-        );
+        $contentType = $view->getContent()->getContentType();
+
         $event->getParameterBag()->add([
             'form' => $view->getFormView(),
             'location' => $view->getLocation(),

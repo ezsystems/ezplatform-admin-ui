@@ -8,8 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\Validator\Constraint;
 
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationIsContainer;
@@ -19,9 +18,6 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class LocationIsContainerValidatorTest extends TestCase
 {
-    /** @var \eZ\Publish\API\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject */
-    private $contentTypeService;
-
     /** @var \Symfony\Component\Validator\Context\ExecutionContextInterface */
     private $executionContext;
 
@@ -31,29 +27,35 @@ class LocationIsContainerValidatorTest extends TestCase
     /** @var \eZ\Publish\API\Repository\Values\Content\Location|\PHPUnit\Framework\MockObject\MockObject */
     private $location;
 
+    /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType|\PHPUnit\Framework\MockObject\MockObject */
+    private $contentType;
+
     protected function setUp()
     {
-        $this->contentTypeService = $this->createMock(ContentTypeService::class);
         $this->executionContext = $this->createMock(ExecutionContextInterface::class);
-        $this->validator = new LocationIsContainerValidator($this->contentTypeService);
+        $this->validator = new LocationIsContainerValidator();
         $this->validator->initialize($this->executionContext);
+
+        $content = $this->createMock(Content::class);
+
         $this->location = $this->createMock(Location::class);
         $this->location
-            ->method('getContentInfo')
-            ->willReturn(
-                $this->createMock(ContentInfo::class)
-            );
+            ->method('getContent')
+            ->willReturn($content);
+
+        $this->contentType = $this->createMock(ContentType::class);
+
+        $content
+            ->method('getContentType')
+            ->willReturn($this->contentType);
     }
 
     public function testValid()
     {
-        $contentType = $this
-                ->getMockBuilder(ContentType::class)
-                ->setMethodsExcept(['__get'])
-                ->setConstructorArgs([['isContainer' => true]])
-                ->getMock();
-
-        $this->contentTypeService->method('loadContentType')->willReturn($contentType);
+        $this->contentType
+            ->method('__get')
+            ->with('isContainer')
+            ->willReturn(true);
 
         $this->executionContext
             ->expects($this->never())
@@ -64,13 +66,10 @@ class LocationIsContainerValidatorTest extends TestCase
 
     public function testInvalid()
     {
-        $contentType = $this
-            ->getMockBuilder(ContentType::class)
-            ->setMethodsExcept(['__get'])
-            ->setConstructorArgs([['isContainer' => false]])
-            ->getMock();
-
-        $this->contentTypeService->method('loadContentType')->willReturn($contentType);
+        $this->contentType
+            ->method('__get')
+            ->with('isContainer')
+            ->willReturn(false);
 
         $this->executionContext
             ->expects($this->once())

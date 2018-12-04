@@ -15,6 +15,7 @@ use eZ\Publish\API\Repository\ObjectStateService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -136,23 +137,23 @@ class ValueFactory
 
     /**
      * @param Relation $relation
-     * @param ContentInfo $contentInfo
+     * @param Content $content
      *
      * @return UIValue\Content\Relation
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
-    public function createRelation(Relation $relation, ContentInfo $contentInfo): UIValue\Content\Relation
+    public function createRelation(Relation $relation, Content $content): UIValue\Content\Relation
     {
-        $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);
+        $contentType = $content->getContentType();
         $fieldDefinition = $contentType->getFieldDefinition($relation->sourceFieldDefinitionIdentifier);
 
         return new UIValue\Content\Relation($relation, [
             'relationFieldDefinitionName' => $fieldDefinition ? $fieldDefinition->getName() : '',
             'relationContentTypeName' => $contentType->getName(),
-            'relationLocation' => $this->locationService->loadLocation($contentInfo->mainLocationId),
-            'relationName' => $contentInfo->name,
+            'relationLocation' => $this->locationService->loadLocation($content->contentInfo->mainLocationId),
+            'relationName' => $content->getName(),
         ]);
     }
 
@@ -248,10 +249,8 @@ class ValueFactory
         return new UIValue\Location\Bookmark(
             $location,
             [
-                'contentType' => $this->contentTypeService->loadContentType($location->contentInfo->contentTypeId),
-                'pathLocations' => $this->pathService->loadPathLocations(
-                    $this->locationService->loadLocation($location->contentInfo->mainLocationId)
-                ),
+                'contentType' => $location->getContent()->getContentType(),
+                'pathLocations' => $this->pathService->loadPathLocations($location),
                 'userCanEdit' => $this->permissionResolver->canUser('content', 'edit', $location->contentInfo),
             ]
         );

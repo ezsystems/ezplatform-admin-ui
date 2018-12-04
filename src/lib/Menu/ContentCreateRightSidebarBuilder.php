@@ -91,7 +91,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
         $parentLocation = $options['parentLocation'];
         /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $options['content_type'];
-        $parentContentType = $this->contentTypeService->loadContentType($parentLocation->contentInfo->contentTypeId);
+        $parentContentType = $parentLocation->getContent()->getContentType();
         /** @var \eZ\Publish\API\Repository\Values\Content\Language $language */
         $language = $options['language'];
         /** @var \Knp\Menu\ItemInterface|\Knp\Menu\ItemInterface[] $menu */

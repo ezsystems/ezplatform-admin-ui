@@ -106,22 +106,17 @@ class RelationsTab extends AbstractTab implements OrderedTabInterface, Condition
     {
         /** @var Content $content */
         $content = $parameters['content'];
-        $versionInfo = $content->getVersionInfo();
         $relationsDataset = $this->datasetFactory->relations();
-        $relationsDataset->load($versionInfo);
+        $relationsDataset->load($content);
 
-        $contentTypes = [];
+        $contentTypeIds = [];
 
         $relations = $relationsDataset->getRelations();
 
         $viewParameters = [];
 
         foreach ($relations as $relation) {
-            $contentTypeId = $relation->getDestinationContentInfo()->contentTypeId;
-
-            if (!isset($contentTypes[$contentTypeId])) {
-                $contentTypes[$contentTypeId] = $this->contentTypeService->loadContentType($contentTypeId);
-            }
+            $contentTypeIds[] = $relation->getDestinationContentInfo()->contentTypeId;
         }
 
         $viewParameters['relations'] = $relations;
@@ -130,17 +125,17 @@ class RelationsTab extends AbstractTab implements OrderedTabInterface, Condition
             $reverseRelations = $relationsDataset->getReverseRelations();
 
             foreach ($reverseRelations as $relation) {
-                $contentTypeId = $relation->getSourceContentInfo()->contentTypeId;
-
-                if (!isset($contentTypes[$contentTypeId])) {
-                    $contentTypes[$contentTypeId] = $this->contentTypeService->loadContentType($contentTypeId);
-                }
+                $contentTypeIds[] = $relation->getSourceContentInfo()->contentTypeId;
             }
 
             $viewParameters['reverse_relations'] = $reverseRelations;
         }
 
-        $viewParameters['contentTypes'] = $contentTypes;
+        if (!empty($contentTypeIds)) {
+            $viewParameters['contentTypes'] = $this->contentTypeService->loadContentTypeList(array_unique($contentTypeIds));
+        } else {
+            $viewParameters['contentTypes'] = [];
+        }
 
         return $this->twig->render(
             '@ezdesign/content/tab/relations/tab.html.twig',

@@ -11,7 +11,6 @@ namespace EzSystems\EzPlatformAdminUi\UI\Module\Subitems;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
@@ -108,14 +107,13 @@ class ContentViewParameterSupplier
 
         $locationChildren = $this->locationService->loadLocationChildren($location, 0, $this->subitemsLimit);
         foreach ($locationChildren->locations as $locationChild) {
-            $contentInfo = $locationChild->getContentInfo();
-            $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);
+            $contentType = $locationChild->getContent()->getContentType();
 
             if (!isset($contentTypes[$contentType->identifier])) {
                 $contentTypes[$contentType->identifier] = $contentType;
             }
 
-            $subitemsRows[] = $this->createSubitemsRow($locationChild, $contentInfo, $contentType);
+            $subitemsRows[] = $this->createSubitemsRow($locationChild, $contentType);
         }
 
         $subitemsList = new SubitemsList($subitemsRows, $childrenCount);
@@ -135,7 +133,6 @@ class ContentViewParameterSupplier
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
      * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
      *
@@ -145,14 +142,13 @@ class ContentViewParameterSupplier
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     private function createRestContent(
-        ContentInfo $contentInfo,
         Location $location,
         ContentType $contentType
     ): RestContent {
         return new RestContent(
-            $contentInfo,
+            $location->getContentInfo(),
             $location,
-            $this->contentService->loadContentByContentInfo($contentInfo),
+            $location->getContent(),
             $contentType,
             []
         );
@@ -173,7 +169,6 @@ class ContentViewParameterSupplier
 
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\Location $location
-     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
      *
      * @return \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsRow
@@ -183,11 +178,10 @@ class ContentViewParameterSupplier
      */
     private function createSubitemsRow(
         Location $location,
-        ContentInfo $contentInfo,
         ContentType $contentType
     ): SubitemsRow {
         $restLocation = $this->createRestLocation($location);
-        $restContent = $this->createRestContent($contentInfo, $location, $contentType);
+        $restContent = $this->createRestContent($location, $contentType);
 
         return new SubitemsRow($restLocation, $restContent);
     }

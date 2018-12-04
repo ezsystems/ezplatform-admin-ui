@@ -244,7 +244,7 @@ class SectionController extends Controller
             $assignedContent[] = [
                 'id' => $content->id,
                 'name' => $content->getName(),
-                'type' => $this->contentTypeService->loadContentType($content->contentInfo->contentTypeId)->getName(),
+                'type' => $content->getContentType()->getName(),
                 'path' => $this->pathService->loadPathLocations(
                     $this->locationService->loadLocation($content->contentInfo->mainLocationId)
                 ),

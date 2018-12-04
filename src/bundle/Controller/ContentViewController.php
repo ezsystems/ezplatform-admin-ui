@@ -208,10 +208,7 @@ class ContentViewController extends Controller
      */
     private function supplyContentType(ContentView $view): void
     {
-        $content = $view->getContent();
-        $contentType = $this->contentTypeService->loadContentType($content->contentInfo->contentTypeId, $this->siteAccessLanguages);
-
-        $view->addParameters(['contentType' => $contentType]);
+        $view->addParameters(['contentType' => $view->getContent()->getContentType()]);
     }
 
     /**

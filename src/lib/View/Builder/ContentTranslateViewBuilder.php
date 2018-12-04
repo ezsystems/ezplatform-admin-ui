@@ -12,7 +12,6 @@ use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\MVC\Symfony\View\Builder\ViewBuilder;
 use eZ\Publish\Core\MVC\Symfony\View\Configurator;
@@ -79,10 +78,10 @@ class ContentTranslateViewBuilder implements ViewBuilder
 
         $fromLanguage = $this->resolveFromLanguage($parameters);
         $toLanguage = $this->resolveToLanguage($parameters);
-        $location = $this->resolveLocation($parameters);
+        $location = $this->resolveLocation($parameters, $fromLanguage);
         $content = $this->resolveContent($parameters, $location, $fromLanguage);
         $contentInfo = $content->contentInfo;
-        $contentType = $this->loadContentType($contentInfo->contentTypeId);
+        $contentType = $content->getContentType();
         /** @var \Symfony\Component\Form\FormInterface $form */
         $form = $parameters['form'];
 
@@ -141,15 +140,16 @@ class ContentTranslateViewBuilder implements ViewBuilder
      * Loads a visible Location.
      *
      * @param int $locationId
+     * @param array|null $languages
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Location
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    private function loadLocation(int $locationId): Location
+    private function loadLocation(int $locationId, array $languages = null): Location
     {
-        return $this->repository->getLocationService()->loadLocation($locationId);
+        return $this->repository->getLocationService()->loadLocation($locationId, $languages);
     }
 
     /**
@@ -164,20 +164,6 @@ class ContentTranslateViewBuilder implements ViewBuilder
     private function loadLanguage(string $languageCode): Language
     {
         return $this->repository->getContentLanguageService()->loadLanguage($languageCode);
-    }
-
-    /**
-     * Loads ContentType with id $contentTypeId.
-     *
-     * @param int $contentTypeId
-     *
-     * @return \eZ\Publish\API\Repository\Values\ContentType\ContentType
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     */
-    private function loadContentType(int $contentTypeId): ContentType
-    {
-        return $this->repository->getContentTypeService()->loadContentType($contentTypeId);
     }
 
     /**
@@ -241,13 +227,11 @@ class ContentTranslateViewBuilder implements ViewBuilder
     {
         if (isset($parameters['content'])) {
             return $parameters['content'];
+        } elseif (null !== $location) {
+            return $location->getContent();
         }
 
-        if (isset($parameters['contentId'])) {
-            $contentId = $parameters['contentId'];
-        } elseif (null !== $location) {
-            $contentId = $location->contentId;
-        } else {
+        if (!isset($parameters['contentId'])) {
             throw new InvalidArgumentException(
                 'Content',
                 'No content could be loaded from parameters'
@@ -255,27 +239,31 @@ class ContentTranslateViewBuilder implements ViewBuilder
         }
 
         return $this->loadContent(
-            (int) $contentId,
+            (int) $parameters['contentId'],
             null !== $language ? [$language->languageCode] : []
         );
     }
 
     /**
      * @param array $parameters
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Location|null
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    private function resolveLocation(array $parameters): ?Location
+    private function resolveLocation(array $parameters, ?Language $language): ?Location
     {
         if (isset($parameters['location'])) {
             return $parameters['location'];
         }
 
         if (isset($parameters['locationId'])) {
-            return $this->loadLocation((int) $parameters['locationId']);
+            return $this->loadLocation(
+                (int) $parameters['locationId'],
+                null !== $language ? [$language->languageCode] : null
+            );
         }
 
         return null;

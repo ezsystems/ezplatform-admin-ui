@@ -83,9 +83,10 @@ class RolesDataset
     public function load(Location $location): self
     {
         $roleAssignment = [];
-        $content = $this->contentService->loadContentByContentInfo($location->contentInfo);
-        $contentType = $this->contentTypeService->loadContentType($content->contentInfo->contentTypeId);
+        $content = $location->getContent();
+        $contentType = $content->getContentType();
 
+        // @todo $content should just have been instance of User or UserGroup direclty so we don't need to re-load data
         if ((new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType)) {
             $user = $this->userService->loadUser($content->id);
             $roleAssignment = $this->roleService->getRoleAssignmentsForUser($user, true);
