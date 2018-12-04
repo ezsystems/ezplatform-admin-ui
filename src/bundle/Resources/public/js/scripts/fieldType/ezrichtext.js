@@ -144,6 +144,7 @@
                         new window.eZ.ezAlloyEditor.ezCustomStyleConfig({ customStyles: customStylesConfigurations }),
                         new window.eZ.ezAlloyEditor.ezHeadingConfig({ customStyles: customStylesConfigurations }),
                         new window.eZ.ezAlloyEditor.ezTableConfig(),
+                        new window.eZ.ezAlloyEditor.ezEmbedImageLinkConfig(),
                         new window.eZ.ezAlloyEditor.ezEmbedImageConfig(),
                         new window.eZ.ezAlloyEditor.ezEmbedConfig(),
                     ],
