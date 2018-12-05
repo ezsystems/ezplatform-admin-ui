@@ -88,6 +88,7 @@ class DateAndTimePopup extends Element
     {
         $this->context->waitUntilElementIsVisible(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['hourSelector']));
         $visibleHour = $this->context->findElement(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['hourSelector']));
+
         $visibleHour->setValue($hour);
 
         $visibleMinute = $this->context->findElement(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['minuteSelector']));
