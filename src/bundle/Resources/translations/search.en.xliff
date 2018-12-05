@@ -51,11 +51,6 @@
         <target state="new">Creator:</target>
         <note>key: search.creator</note>
       </trans-unit>
-      <trans-unit id="3d9f547776de4846ff54fcd1cd173ac5937e5a46" resname="search.creator_input.placeholder">
-        <source>Type creator</source>
-        <target state="new">Type creator</target>
-        <note>key: search.creator_input.placeholder</note>
-      </trans-unit>
       <trans-unit id="a18d7835f5b4a97ac94331f82e729abcb698be41" resname="search.custom_range">
         <source>Custom range</source>
         <target state="new">Custom range</target>
