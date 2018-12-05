@@ -111,18 +111,6 @@
     }
 }
 
-.ez-field-edit--ezrichtext {
-    [data-ezelement='ezembed'] {
-        .ez-embed-content {
-            .ez-icon {
-                width: calculateRem(24px);
-                height: calculateRem(24px);
-                vertical-align: middle;
-            }
-        }
-    }
-}
-
 .ez-icon--logo {
     width: 10rem;
     height: 7rem;

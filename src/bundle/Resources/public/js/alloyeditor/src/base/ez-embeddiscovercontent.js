@@ -17,17 +17,26 @@ export default class EzEmbedDiscoverContentButton extends EzWidgetButton {
         const languageCode = document.querySelector('meta[name="LanguageCode"]').content;
         const udwConfigName = this.props.udwConfigName;
         const config = JSON.parse(document.querySelector(`[data-udw-config-name="${udwConfigName}"]`).dataset.udwConfig);
+        const alloyEditorCallbacks = eZ.ezAlloyEditor.callbacks;
+        const mergedConfig = Object.assign(
+            {
+                onConfirm: this[this.props.udwContentDiscoveredMethod].bind(this),
+                onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
+                title: this.props.udwTitle,
+                multiple: false,
+                startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                restInfo: { token, siteaccess },
+                canSelectContent: selectable,
+                cotfAllowedLanguages: [languageCode],
+            },
+            config
+        );
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
-            onConfirm: this[this.props.udwContentDiscoveredMethod].bind(this),
-            onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
-            title: this.props.udwTitle,
-            multiple: false,
-            startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-            restInfo: {token, siteaccess},
-            canSelectContent: selectable,
-            cotfAllowedLanguages: [languageCode]
-        }, config)), udwContainer);
+        if (alloyEditorCallbacks && typeof alloyEditorCallbacks.openUdw === 'function') {
+            alloyEditorCallbacks.openUdw(mergedConfig);
+        } else {
+            ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, mergedConfig), udwContainer);
+        }
     }
 
     /**

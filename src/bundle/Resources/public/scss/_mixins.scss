@@ -233,3 +233,104 @@
         line-height: calculateRem(36px);
     }
 }
+
+@mixin richtext-field {
+    .ez-data-source__richtext {
+        background-color: $ez-white;
+        min-height: calculateRem(100px);
+        border: calculateRem(1px) solid rgba(0, 0, 0, 0.15);
+        border-radius: calculateRem(4px);
+        display: inline-block;
+        width: 100%;
+        padding: calculateRem(8px);
+
+        .is-block-focused,
+        .cke_widget_wrapper.cke_widget_focused > .cke_widget_element {
+            outline: calculateRem(2px) dashed $ez-ground-base-dark;
+            outline-offset: calculateRem(1px);
+        }
+
+        &.is-invalid {
+            background: $ez-color-warning-pale;
+            border-color: $ez-color-danger;
+        }
+
+        blockquote {
+            margin: calculateRem(16px) calculateRem(40px);
+        }
+    }
+
+    [data-ezalign='right'] {
+        float: right;
+    }
+
+    [data-ezalign='left'] {
+        float: left;
+    }
+
+    [data-ezalign='center'] {
+        text-align: center;
+    }
+
+    [data-ezelement='ezconfig'] {
+        display: none;
+    }
+
+    [data-ezelement='ezembed'] {
+        background: $ez-ground-base;
+        border: calculateRem(1px) solid $ez-ground-base-dark;
+        font-size: calculateRem(18px);
+        display: inline-block;
+        margin: calculateRem(8px) calculateRem(5px);
+        padding: calculateRem(5px);
+        box-sizing: border-box;
+        line-height: 1;
+        min-height: auto;
+
+        .ez-embed-content {
+            margin-bottom: 0;
+
+            .ez-icon {
+                width: calculateRem(24px);
+                height: calculateRem(24px);
+                vertical-align: middle;
+            }
+        }
+    }
+
+    pre {
+        padding: calculateRem(10px);
+        min-height: calculateRem(43px);
+        background-color: $ez-ground-base-pale;
+        border: calculateRem(1px) solid $ez-ground-base-medium;
+        word-wrap: initial;
+    }
+
+    p {
+        min-height: calculateRem(24px);
+    }
+
+    h1 {
+        min-height: calculateRem(33px);
+    }
+
+    h2 {
+        min-height: calculateRem(28px);
+    }
+
+    h3 {
+        min-height: calculateRem(26px);
+    }
+
+    h4 {
+        min-height: calculateRem(24px);
+    }
+
+    h5 {
+        min-height: calculateRem(21px);
+    }
+
+    h6 {
+        min-height: calculateRem(20px);
+    }
+}

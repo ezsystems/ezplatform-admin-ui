@@ -47,3 +47,8 @@ services:
             $decorated: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader'
             $module: 'content'
             $function: 'create'
+
+    EzSystems\EzPlatformAdminUi\Form\Extension\RichTextTypeExtension:
+        public: true
+        tags:
+            - { name: form.type_extension, extended_type: EzSystems\EzPlatformRichText\Form\Type\RichTextType }
