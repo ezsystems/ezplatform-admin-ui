@@ -66,25 +66,17 @@ class AdminList extends Element
         }
     }
 
-    public function isPaginationNextButtonActive(): bool
-    {
-        return $this->context->isElementVisible($this->fields['paginationNextButton']);
-    }
-
-    public function clickPaginationNextButton(): void
-    {
-        $this->context->findElement($this->fields['paginationNextButton'])->click();
-    }
-
     public function isElementOnTheList(string $listElementName): bool
     {
+        $pagination = ElementFactory::createElement($this->context, Pagination::ELEMENT_NAME);
+
         while (true) {
             if ($this->table->isElementInTable($listElementName)) {
                 return true;
             }
 
-            if ($this->isPaginationNextButtonActive()) {
-                $this->clickPaginationNextButton();
+            if ($pagination->isNextButtonActive()) {
+                $pagination->clickNextButton();
             } else {
                 break;
             }

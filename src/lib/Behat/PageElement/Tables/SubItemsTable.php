@@ -8,6 +8,8 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 
 use Behat\Mink\Element\NodeElement;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Pagination;
 use PHPUnit\Framework\Assert;
 
 class SubItemsTable extends Table
@@ -21,7 +23,6 @@ class SubItemsTable extends Table
         $this->fields['listElementLink'] = $this->fields['list'] . ' .c-table-view-item__link';
         $this->fields['editButton'] = $this->fields['list'] . ' .c-table-view-item__btn--edit';
         $this->fields['noItems'] = $this->fields['list'] . ' .c-no-items';
-        $this->fields['showMoreResults'] = '.c-load-more__btn--load';
     }
 
     public function getTableCellValue(string $header, ?string $secondHeader = null): string
@@ -38,11 +39,6 @@ class SubItemsTable extends Table
         return $this->getCellValue($rowPosition, $columnPosition);
     }
 
-    public function isShowMoreResultsActive(): bool
-    {
-        return !$this->context->findElement($this->fields['showMoreResults'])->hasAttribute('disabled');
-    }
-
     /**
      * Click link element for sub-item with given name.
      *
@@ -50,9 +46,11 @@ class SubItemsTable extends Table
      */
     public function clickListElement(string $name): void
     {
+        $pagination = ElementFactory::createElement($this->context, Pagination::ELEMENT_NAME);
+
         $isElementInTable = $this->isElementInTable($name);
-        while (!$isElementInTable && $this->isShowMoreResultsActive()) {
-            $this->context->findElement($this->fields['showMoreResults'])->click();
+        while (!$isElementInTable && $pagination->isNextButtonActive()) {
+            $pagination->clickNextButton();
             $isElementInTable = $this->isElementInTable($name);
         }
 
