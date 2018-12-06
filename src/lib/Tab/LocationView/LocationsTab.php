@@ -15,16 +15,17 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemove
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 use eZ\Publish\API\Repository\PermissionResolver;
 
-class LocationsTab extends AbstractTab implements OrderedTabInterface
+class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-location-view-locations';
 
@@ -47,6 +48,7 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         Environment $twig,
@@ -54,9 +56,10 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
         DatasetFactory $datasetFactory,
         FormFactory $formFactory,
         UrlGeneratorInterface $urlGenerator,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
@@ -90,22 +93,22 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param array $parameters
-     *
-     * @return string
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * {@inheritdoc}
      */
-    public function renderView(array $parameters): string
+    public function getTemplate(): string
+    {
+        return '@ezdesign/content/tab/locations/tab.html.twig';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
-        $content = $parameters['content'];
+        $content = $contextParameters['content'];
         /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
-        $location = $parameters['location'];
+        $location = $contextParameters['location'];
         $versionInfo = $content->getVersionInfo();
         $contentInfo = $versionInfo->getContentInfo();
         $locations = [];
@@ -150,10 +153,7 @@ class LocationsTab extends AbstractTab implements OrderedTabInterface
             'can_hide' => $canHide,
         ];
 
-        return $this->twig->render(
-            '@ezdesign/content/tab/locations/tab.html.twig',
-            array_merge($viewParameters, $parameters)
-        );
+        return array_replace($contextParameters, $viewParameters);
     }
 
     /**

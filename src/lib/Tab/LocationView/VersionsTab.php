@@ -16,7 +16,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
-use EzSystems\EzPlatformAdminUi\Tab\EventDispatchingAbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Adapter\ArrayAdapter;
@@ -27,7 +27,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
-class VersionsTab extends EventDispatchingAbstractTab implements OrderedTabInterface, ConditionalTabInterface
+class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInterface, ConditionalTabInterface
 {
     public const FORM_REMOVE_DRAFT = 'version_remove_draft';
     public const FORM_REMOVE_ARCHIVED = 'version_remove_archived';

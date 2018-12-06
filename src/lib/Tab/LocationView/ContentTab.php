@@ -12,13 +12,14 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\Util\FieldDefinitionGroupsUtil;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
-class ContentTab extends AbstractTab implements OrderedTabInterface
+class ContentTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
     /** @var \EzSystems\EzPlatformAdminUi\Util\FieldDefinitionGroupsUtil */
     private $fieldDefinitionGroupsUtil;
@@ -35,15 +36,17 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
      * @param \EzSystems\EzPlatformAdminUi\Util\FieldDefinitionGroupsUtil $fieldDefinitionGroupsUtil
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
      * @param array $siteAccessLanguages
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         FieldDefinitionGroupsUtil $fieldDefinitionGroupsUtil,
         LanguageService $languageService,
-        array $siteAccessLanguages
+        array $siteAccessLanguages,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->fieldDefinitionGroupsUtil = $fieldDefinitionGroupsUtil;
         $this->languageService = $languageService;
@@ -66,28 +69,36 @@ class ContentTab extends AbstractTab implements OrderedTabInterface
         return 100;
     }
 
-    public function renderView(array $parameters): string
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplate(): string
+    {
+        return '@ezdesign/content/tab/content.html.twig';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var Content $content */
-        $content = $parameters['content'];
+        $content = $contextParameters['content'];
         /** @var ContentType $contentType */
-        $contentType = $parameters['contentType'];
+        $contentType = $contextParameters['contentType'];
         $fieldDefinitions = $contentType->getFieldDefinitions();
         $fieldDefinitionsByGroup = $this->fieldDefinitionGroupsUtil->groupFieldDefinitions($fieldDefinitions);
 
         $languages = $this->loadContentLanguages($content);
 
-        return $this->twig->render(
-            '@ezdesign/content/tab/content.html.twig',
-            [
-                'content' => $content,
-                /* @deprecated since version 2.2, to be removed in 3.0 */
-                'fieldDefinitionsByGroup' => $fieldDefinitionsByGroup,
-                'field_definitions_by_group' => $fieldDefinitionsByGroup,
-                'languages' => $languages,
-                'location' => $parameters['location'],
-            ]
-        );
+        return array_replace($contextParameters, [
+            'content' => $content,
+            /* @deprecated since version 2.2, to be removed in 3.0 */
+            'fieldDefinitionsByGroup' => $fieldDefinitionsByGroup,
+            'field_definitions_by_group' => $fieldDefinitionsByGroup,
+            'languages' => $languages,
+            'location' => $contextParameters['location'],
+        ]);
     }
 
     /**

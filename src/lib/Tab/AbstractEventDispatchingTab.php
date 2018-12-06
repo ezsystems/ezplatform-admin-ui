@@ -19,7 +19,7 @@ use Twig\Environment;
  *
  * It extends AbstractTab by adding Event Dispatching before rendering view.
  */
-abstract class EventDispatchingAbstractTab extends AbstractTab
+abstract class AbstractEventDispatchingTab extends AbstractTab
 {
     /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface */
     protected $eventDispatcher;

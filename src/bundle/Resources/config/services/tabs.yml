@@ -25,7 +25,7 @@ services:
         abstract: true
         lazy: true
 
-    EzSystems\EzPlatformAdminUi\Tab\EventDispatchingAbstractTab:
+    EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         abstract: true
         autowire: true

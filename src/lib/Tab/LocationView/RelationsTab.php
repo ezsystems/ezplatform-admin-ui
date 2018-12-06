@@ -11,14 +11,15 @@ namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
-class RelationsTab extends AbstractTab implements OrderedTabInterface, ConditionalTabInterface
+class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInterface, ConditionalTabInterface
 {
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;
@@ -35,15 +36,17 @@ class RelationsTab extends AbstractTab implements OrderedTabInterface, Condition
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         PermissionResolver $permissionResolver,
         DatasetFactory $datasetFactory,
-        ContentTypeService $contentTypeService
+        ContentTypeService $contentTypeService,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
         $this->datasetFactory = $datasetFactory;
@@ -91,21 +94,20 @@ class RelationsTab extends AbstractTab implements OrderedTabInterface, Condition
     }
 
     /**
-     * @param array $parameters
-     *
-     * @return string
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * {@inheritdoc}
      */
-    public function renderView(array $parameters): string
+    public function getTemplate(): string
+    {
+        return '@ezdesign/content/tab/relations/tab.html.twig';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var Content $content */
-        $content = $parameters['content'];
+        $content = $contextParameters['content'];
         $relationsDataset = $this->datasetFactory->relations();
         $relationsDataset->load($content);
 
@@ -137,9 +139,6 @@ class RelationsTab extends AbstractTab implements OrderedTabInterface, Condition
             $viewParameters['contentTypes'] = [];
         }
 
-        return $this->twig->render(
-            '@ezdesign/content/tab/relations/tab.html.twig',
-            array_merge($viewParameters, $parameters)
-        );
+        return array_replace($contextParameters, $viewParameters);
     }
 }

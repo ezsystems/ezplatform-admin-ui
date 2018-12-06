@@ -10,22 +10,23 @@ namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\URLAliasService;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
-class UrlsTab extends AbstractTab implements OrderedTabInterface
+class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-location-view-urls';
 
@@ -52,6 +53,7 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         Environment $twig,
@@ -60,9 +62,10 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
         FormFactory $formFactory,
         DatasetFactory $datasetFactory,
         LocationService $locationService,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->urlAliasService = $urlAliasService;
         $this->formFactory = $formFactory;
@@ -97,20 +100,23 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param array $parameters
-     *
-     * @return string
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * {@inheritdoc}
      */
-    public function renderView(array $parameters): string
+    public function getTemplate(): string
+    {
+        return '@ezdesign/content/tab/urls.html.twig';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
-        $location = $parameters['location'];
+        $location = $contextParameters['location'];
 
-        $customUrlsPaginationParams = $parameters['custom_urls_pagination_params'];
-        $systemUrlsPaginationParams = $parameters['system_urls_pagination_params'];
+        $customUrlsPaginationParams = $contextParameters['custom_urls_pagination_params'];
+        $systemUrlsPaginationParams = $contextParameters['system_urls_pagination_params'];
 
         $customUrlsDataset = $this->datasetFactory->customUrls();
         $customUrlsDataset->load($location);
@@ -120,17 +126,20 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
         );
 
         $customUrlPagerfanta->setMaxPerPage($customUrlsPaginationParams['limit']);
-        $customUrlPagerfanta->setCurrentPage(min($customUrlsPaginationParams['page'], $customUrlPagerfanta->getNbPages()));
+        $customUrlPagerfanta->setCurrentPage(min($customUrlsPaginationParams['page'],
+            $customUrlPagerfanta->getNbPages()));
 
         $systemUrlPagerfanta = new Pagerfanta(
             new ArrayAdapter($this->urlAliasService->listLocationAliases($location, false))
         );
 
         $systemUrlPagerfanta->setMaxPerPage($systemUrlsPaginationParams['limit']);
-        $systemUrlPagerfanta->setCurrentPage(min($systemUrlsPaginationParams['page'], $systemUrlPagerfanta->getNbPages()));
+        $systemUrlPagerfanta->setCurrentPage(min($systemUrlsPaginationParams['page'],
+            $systemUrlPagerfanta->getNbPages()));
 
         $customUrlAddForm = $this->createCustomUrlAddForm($location);
-        $customUrlRemoveForm = $this->createCustomUrlRemoveForm($location, $customUrlPagerfanta->getCurrentPageResults());
+        $customUrlRemoveForm = $this->createCustomUrlRemoveForm($location,
+            $customUrlPagerfanta->getCurrentPageResults());
 
         $canEditCustomUrl = $this->permissionResolver->hasAccess('content', 'urltranslator');
 
@@ -151,10 +160,7 @@ class UrlsTab extends AbstractTab implements OrderedTabInterface
             $viewParameters['parent_name'] = null;
         }
 
-        return $this->twig->render(
-            '@ezdesign/content/tab/urls.html.twig',
-            array_merge($viewParameters, $parameters)
-        );
+        return array_replace($contextParameters, $viewParameters);
     }
 
     /**
