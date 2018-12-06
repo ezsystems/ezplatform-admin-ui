@@ -345,6 +345,7 @@ class ContentViewController extends Controller
                 'route_name' => $request->get('_route'),
                 'route_params' => $request->get('_route_params'),
                 'page' => $page['version_draft'] ?? 1,
+                'pages_map' => $page,
                 'limit' => $this->defaultDraftPaginationLimit,
             ],
         ]);
