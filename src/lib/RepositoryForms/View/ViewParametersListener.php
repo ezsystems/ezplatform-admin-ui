@@ -20,6 +20,7 @@ use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use eZ\Publish\Core\MVC\Symfony\View\View;
 use EzSystems\EzPlatformAdminUi\View\ContentTranslateView;
+use EzSystems\RepositoryForms\Content\View\ContentCreateView;
 use EzSystems\RepositoryForms\Content\View\ContentEditView;
 use EzSystems\RepositoryForms\User\View\UserUpdateView;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -57,6 +58,7 @@ class ViewParametersListener implements EventSubscriberInterface
                 ['setContentEditViewTemplateParameters', 10],
                 ['setUserUpdateViewTemplateParameters', 5],
                 ['setContentTranslateViewTemplateParameters', 10],
+                ['setContentCreateViewTemplateParameters', 10],
             ],
         ];
     }
@@ -69,7 +71,7 @@ class ViewParametersListener implements EventSubscriberInterface
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    public function setContentEditViewTemplateParameters(PreContentViewEvent $event)
+    public function setContentEditViewTemplateParameters(PreContentViewEvent $event): void
     {
         $contentView = $event->getContentView();
 
@@ -106,7 +108,7 @@ class ViewParametersListener implements EventSubscriberInterface
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    public function setContentTranslateViewTemplateParameters(PreContentViewEvent $event)
+    public function setContentTranslateViewTemplateParameters(PreContentViewEvent $event): void
     {
         $contentView = $event->getContentView();
 
@@ -138,7 +140,7 @@ class ViewParametersListener implements EventSubscriberInterface
     /**
      * @param \eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent $event
      */
-    public function setUserUpdateViewTemplateParameters(PreContentViewEvent $event)
+    public function setUserUpdateViewTemplateParameters(PreContentViewEvent $event): void
     {
         $contentView = $event->getContentView();
 
@@ -154,10 +156,26 @@ class ViewParametersListener implements EventSubscriberInterface
     }
 
     /**
+     * @param \eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent $event
+     */
+    public function setContentCreateViewTemplateParameters(PreContentViewEvent $event): void
+    {
+        $contentView = $event->getContentView();
+
+        if (!$contentView instanceof ContentCreateView) {
+            return;
+        }
+
+        $contentView->addParameters([
+            'content_create_struct' => $contentView->getForm()->getData(),
+        ]);
+    }
+
+    /**
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
      * @param \eZ\Publish\Core\MVC\Symfony\View\View $contentView
      */
-    private function processCreator(ContentInfo $contentInfo, View $contentView)
+    private function processCreator(ContentInfo $contentInfo, View $contentView): void
     {
         try {
             $creator = $this->userService->loadUser($contentInfo->ownerId);

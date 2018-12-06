@@ -193,10 +193,11 @@ class ViewParametersListenerTest extends TestCase
                 ['setContentEditViewTemplateParameters', 10],
                 ['setUserUpdateViewTemplateParameters', 5],
                 ['setContentTranslateViewTemplateParameters', 10],
+                ['setContentCreateViewTemplateParameters', 10],
             ],
         ];
 
-        $this->assertSame($expectedSubscribedEvents, $viewParametersListener::getSubscribedEvents());
+        $this->assertArraySubset($expectedSubscribedEvents, $viewParametersListener::getSubscribedEvents());
     }
 
     /**
