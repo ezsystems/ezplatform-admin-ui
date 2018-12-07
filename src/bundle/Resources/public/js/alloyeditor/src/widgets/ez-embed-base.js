@@ -29,17 +29,16 @@ const embedBaseDefinition = {
      * @method insert
      */
     insert: function() {
-        var element = CKEDITOR.dom.element.createFromHtml(this.template.output(this.defaults)),
-            wrapper = this.editor.widgets.wrapElement(element, this.name),
-            temp = new CKEDITOR.dom.documentFragment(wrapper.getDocument()),
-            instance;
+        const element = CKEDITOR.dom.element.createFromHtml(this.template.output(this.defaults));
+        const wrapper = this.editor.widgets.wrapElement(element, this.name);
+        const temp = new CKEDITOR.dom.documentFragment(wrapper.getDocument());
 
         temp.append(wrapper);
         this.editor.widgets.initOn(element, this.name);
 
         this.insertWrapper(wrapper);
 
-        instance = this.editor.widgets.getByElement(wrapper);
+        const instance = this.editor.widgets.getByElement(wrapper);
         instance.ready = true;
         instance.fire('ready');
         instance.focus();
@@ -117,7 +116,7 @@ const embedBaseDefinition = {
                 'X-CSRF-Token': token,
             },
             body,
-            mode: 'cors',
+            mode: 'same-origin',
             credentials: 'same-origin',
         });
 
@@ -144,7 +143,7 @@ const embedBaseDefinition = {
                 'X-CSRF-Token': token,
             },
             credentials: 'same-origin',
-            mode: 'cors',
+            mode: 'same-origin',
         });
 
         fetch(request)
@@ -210,7 +209,7 @@ const embedBaseDefinition = {
                 'X-CSRF-Token': token,
             },
             credentials: 'same-origin',
-            mode: 'cors',
+            mode: 'same-origin',
         });
 
         fetch(request)
@@ -544,6 +543,7 @@ const embedBaseDefinition = {
      */
     getEzLinkElement: function() {
         let link = this.element.findOne('[data-ezelement="ezlink"]');
+
         if (!link) {
             link = new CKEDITOR.dom.element('a');
             link.$.innerHTML = ' ';
@@ -551,6 +551,7 @@ const embedBaseDefinition = {
             link.setAttribute('data-ez-temporary-link', true);
             this.element.append(link);
         }
+
         return link;
     },
 
@@ -563,6 +564,7 @@ const embedBaseDefinition = {
      */
     getEzLinkAttribute: function(attribute) {
         const link = this.getEzLinkElement();
+
         return link.getAttribute(attribute);
     },
 
@@ -575,6 +577,7 @@ const embedBaseDefinition = {
      */
     setEzLinkAttribute: function(attribute, value) {
         const link = this.getEzLinkElement();
+
         link.setAttribute(attribute, value);
     },
 
@@ -586,6 +589,7 @@ const embedBaseDefinition = {
      */
     removeEzLinkAttribute: function(attribute) {
         const link = this.getEzLinkElement();
+
         link.removeAttribute(attribute);
     },
 
@@ -649,11 +653,14 @@ const embedBaseDefinition = {
                 <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#link"></use>
             </svg>
         `;
+
         if (this.element.findOne('.ez-embed__icon-wrapper')) {
             return;
         }
+
         iconWrapper.$.classList.add('ez-embed__icon-wrapper');
         iconWrapper.$.innerHTML = icon;
+
         this.element.append(iconWrapper);
     },
 
@@ -664,6 +671,7 @@ const embedBaseDefinition = {
      */
     removeLinkedIcon: function() {
         const iconWrapper = this.element.findOne('.ez-embed__icon-wrapper');
+
         if (iconWrapper) {
             iconWrapper.remove();
         }

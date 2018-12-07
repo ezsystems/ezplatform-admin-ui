@@ -1,8 +1,10 @@
 import EzConfigBase from './base';
 
+const EMBED_INLINE_NAME = 'ezembedinline';
+
 export default class EzEmbedInlineConfig extends EzConfigBase {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.name = 'embedinline';
         this.buttons = ['ezembedupdate', 'ezblockremove'];
@@ -30,6 +32,6 @@ export default class EzEmbedInlineConfig extends EzConfigBase {
         const target = new CKEDITOR.dom.element(nativeEvent.target);
         const widget = payload.editor.get('nativeEditor').widgets.getByElement(target);
 
-        return !!(widget && widget.name === 'ezembedinline');
+        return !!(widget && widget.name === EMBED_INLINE_NAME);
     }
 }
