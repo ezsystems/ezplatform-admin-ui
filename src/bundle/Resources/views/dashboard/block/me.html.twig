@@ -2,6 +2,80 @@
 
 <div class="card border-light my-4">
     <div class="card-body">
+        <h2 class="mb-3">Me</h2>
+        <ul class="nav nav-tabs ez-tabs" role="tablist" id="ez-tab-list-dashboard-my-flow">
+            <li class="nav-item">
+                <a class="nav-link active" id="ez-tab-label-dashboard-my-flow" data-toggle="tab" href="#ez-tab-dashboard-my-workflow" role="tab" aria-controls="ez-tab-dashboard-my-workflow" aria-expanded="1">Drafts under review</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="ez-tab-list-content-dashboard-my-flow">
+            <div class="tab-pane active" id="ez-tab-dashboard-my-workflow" role="tabpanel" aria-labelledby="ez-tab-label-dashboard-my">
+                <table class="ez-table table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Content Type</th>
+                            <th>Modified language</th>
+                            <th>Activity</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ez-table__cell"><a href="http://ezstudio.v2.prod.local/admin/view/content/249">i-dont-believe-you.gif</a></td>
+                            <td class="ez-table__cell">Design</td>
+                            <td class="ez-table__cell">Image</td>
+                            <td class="ez-table__cell">English (United Kingdom)</td>
+                            <td class="ez-table__cell">Edited by Yura 10 minutes ago</td>
+                            <td class="ez-table__cell ez-table__cell--has-action-btns">
+                                <button class="ez-btn ez-btn--workflow-chart btn btn-icon mx-2" title="Edit Content" data-content-id="249" data-version-no="1" data-language-code="eng-GB">
+                                    <svg class="ez-icon ez-icon-edit">
+                                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#comment"></use>
+                                    </svg>
+                                </button>
+                                {% include '@ezdesign/workflow/workflow.popup.html.twig' with { contentId: '249', versionNo: '1' }%}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ez-table__cell"><a href="http://ezstudio.v2.prod.local/admin/view/content/248">pozdr-dla-kumatych.gif</a></td>
+                            <td class="ez-table__cell">Proofread</td>
+                            <td class="ez-table__cell">Article</td>
+                            <td class="ez-table__cell">Polish</td>
+                            <td class="ez-table__cell">Saved by Admin 1 day ago</td>
+                            <td class="ez-table__cell ez-table__cell--has-action-btns">
+                                <button class="btn btn-icon mx-2 ez-btn ez-btn--workflow-chart" title="Edit Content" data-content-id="248" data-version-no="1" data-language-code="eng-GB">
+                                    <svg class="ez-icon ez-icon-edit">
+                                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#comment"></use>
+                                    </svg>
+                                </button>
+                                {% include '@ezdesign/workflow/workflow.popup.html.twig' with { contentId: '248', versionNo: '1' } %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ez-table__cell"><a href="http://ezstudio.v2.prod.local/admin/view/content/247">o-kurla.jpg</a></td>
+                            <td class="ez-table__cell">Ready for publish</td>
+                            <td class="ez-table__cell">Blog post</td>
+                            <td class="ez-table__cell">Spanish</td>
+                            <td class="ez-table__cell"></td>
+                            <td class="ez-table__cell ez-table__cell--has-action-btns">
+                                <button class="btn btn-icon mx-2 ez-btn ez-btn--workflow-chart" title="Edit Content" data-content-id="247" data-version-no="1" data-language-code="eng-GB">
+                                    <svg class="ez-icon ez-icon-edit">
+                                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#comment"></use>
+                                    </svg>
+                                </button>
+                                {% include '@ezdesign/workflow/workflow.popup.html.twig' with { contentId: '247', versionNo: '1' } %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card border-light my-4">
+    <div class="card-body">
         <h2 class="mb-3">{{ 'me'|trans|desc('Me') }}</h2>
         {{ ez_platform_tabs('dashboard-my', []) }}
     </div>
