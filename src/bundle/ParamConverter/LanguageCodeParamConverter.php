@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -61,11 +62,12 @@ class LanguageCodeParamConverter implements ParamConverterInterface
 
     private function getLanguage(string $languageCode): Language
     {
-        $language = $this->languageService->loadLanguage($languageCode);
-        if (!$language) {
+        try {
+            $language = $this->languageService->loadLanguage($languageCode);
+        } catch (NotFoundException $e) {
             throw new NotFoundHttpException("Language $languageCode not found!");
         }
-
+        
         return $language;
     }
 }

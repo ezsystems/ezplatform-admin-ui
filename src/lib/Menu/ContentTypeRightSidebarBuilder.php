@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use eZ\Publish\API\Repository\UserService;
 
 /**
- * KnpMenuBundle Menu Builder service implementation for AdminUI Location View contextual sidebar menu.
+ * KnpMenuBundle Menu Builder service implementation for AdminUI Content Type View contextual sidebar menu.
  *
  * @see https://symfony.com/doc/current/bundles/KnpMenuBundle/menu_builder_service.html
  */

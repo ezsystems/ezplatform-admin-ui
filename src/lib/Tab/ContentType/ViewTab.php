@@ -10,23 +10,10 @@ namespace EzSystems\EzPlatformAdminUi\Tab\ContentType;
 
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
-use Symfony\Component\Translation\TranslatorInterface;
-use Twig\Environment;
 
 class ViewTab extends AbstractTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-content-type-view-details';
-
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     */
-    public function __construct(
-        Environment $twig,
-        TranslatorInterface $translator
-    ) {
-        parent::__construct($twig, $translator);
-    }
 
     public function getIdentifier(): string
     {

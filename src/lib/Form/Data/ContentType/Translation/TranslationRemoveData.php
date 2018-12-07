@@ -19,21 +19,21 @@ class TranslationRemoveData
      *
      * @var \eZ\Publish\API\Repository\Values\ContentType\ContentType|null
      */
-    protected $contentType;
+    private $contentType;
 
     /**
      * @Assert\NotBlank()
      *
      * @var \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup|null
      */
-    protected $contentTypeGroup;
+    private $contentTypeGroup;
 
     /**
      * @Assert\NotBlank()
      *
      * @var \eZ\Publish\API\Repository\Values\Content\Language[]
      */
-    protected $languageCodes;
+    private $languageCodes;
 
     /**
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType|null $contentType

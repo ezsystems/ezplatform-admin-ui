@@ -15,13 +15,13 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 class ContentTypeEditData
 {
     /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType|null */
-    protected $contentType;
+    private $contentType;
 
     /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup|null */
-    protected $contentTypeGroup;
+    private $contentTypeGroup;
 
     /** @var \eZ\Publish\API\Repository\Values\Content\Language|null */
-    protected $language;
+    private $language;
 
     /**
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType|null $contentType
