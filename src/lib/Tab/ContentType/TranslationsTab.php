@@ -45,22 +45,41 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
         $this->formFactory = $formFactory;
     }
 
+    /**
+     * @return string
+     */
     public function getIdentifier(): string
     {
         return 'translations';
     }
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         /** @Desc("Translations") */
         return $this->translator->trans('tab.name.translations', [], 'content_type');
     }
 
+    /**
+     * @return int
+     */
     public function getOrder(): int
     {
         return 200;
     }
 
+    /**
+     * @param array $parameters
+     *
+     * @return string
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     */
     public function renderView(array $parameters): string
     {
         /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */

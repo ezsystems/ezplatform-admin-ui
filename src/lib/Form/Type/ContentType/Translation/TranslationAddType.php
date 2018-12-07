@@ -49,6 +49,10 @@ class TranslationAddType extends AbstractType
         $this->contentTypeService = $contentTypeService;
     }
 
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -77,6 +81,9 @@ class TranslationAddType extends AbstractType
             ->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit']);
     }
 
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

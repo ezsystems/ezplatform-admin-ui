@@ -21,13 +21,11 @@ class LanguageParamConverter implements ParamConverterInterface
     const PARAMETER_LANGUAGE_ID = 'languageId';
     const PARAMETER_LANGUAGE_CODE = 'languageCode';
 
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
     /**
-     * LanguageParamConverter constructor.
-     *
-     * @param LanguageService $languageService
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
      */
     public function __construct(LanguageService $languageService)
     {

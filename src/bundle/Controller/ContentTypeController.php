@@ -200,6 +200,11 @@ class ContentTypeController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function addTranslationAction(Request $request): Response
     {
         $form = $this->formFactory->addContentTypeTranslation(
@@ -257,6 +262,11 @@ class ContentTypeController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function removeTranslationAction(Request $request): Response
     {
         $form = $this->formFactory->removeContentTypeTranslation(
@@ -382,6 +392,17 @@ class ContentTypeController extends Controller
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft $contentTypeDraft
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $baseLanguage
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     */
     public function updateAction(
         Request $request,
         ContentTypeGroup $group,

@@ -15,22 +15,40 @@ class ViewTab extends AbstractTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-content-type-view-details';
 
+    /**
+     * @return string
+     */
     public function getIdentifier(): string
     {
         return 'view';
     }
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         /** @Desc("View") */
         return $this->translator->trans('tab.name.view', [], 'content_type');
     }
 
+    /**
+     * @return int
+     */
     public function getOrder(): int
     {
         return 100;
     }
 
+    /**
+     * @param array $parameters
+     *
+     * @return string
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function renderView(array $parameters): string
     {
         return $this->twig->render(

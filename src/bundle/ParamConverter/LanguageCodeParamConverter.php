@@ -21,13 +21,11 @@ class LanguageCodeParamConverter implements ParamConverterInterface
     const PARAMETER_LANGUAGE_CODE_TO = 'toLanguageCode';
     const PARAMETER_LANGUAGE_CODE_FROM = 'fromLanguageCode';
 
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
     /**
-     * LanguageParamConverter constructor.
-     *
-     * @param LanguageService $languageService
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
      */
     public function __construct(LanguageService $languageService)
     {
@@ -60,6 +58,11 @@ class LanguageCodeParamConverter implements ParamConverterInterface
         return Language::class === $configuration->getClass();
     }
 
+    /**
+     * @param string $languageCode
+     *
+     * @return \eZ\Publish\API\Repository\Values\Content\Language
+     */
     private function getLanguage(string $languageCode): Language
     {
         try {
@@ -67,7 +70,7 @@ class LanguageCodeParamConverter implements ParamConverterInterface
         } catch (NotFoundException $e) {
             throw new NotFoundHttpException("Language $languageCode not found!");
         }
-        
+
         return $language;
     }
 }
