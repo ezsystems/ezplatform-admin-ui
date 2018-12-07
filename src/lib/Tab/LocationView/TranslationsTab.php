@@ -13,16 +13,17 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
-class TranslationsTab extends AbstractTab implements OrderedTabInterface
+class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-location-view-translations';
 
@@ -41,15 +42,17 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
      * @param DatasetFactory $datasetFactory
      * @param FormFactory $formFactory
      * @param UrlGeneratorInterface $urlGenerator
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         DatasetFactory $datasetFactory,
         FormFactory $formFactory,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
@@ -72,12 +75,23 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
         return 600;
     }
 
-    public function renderView(array $parameters): string
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplate(): string
+    {
+        return '@ezdesign/content/tab/translations/tab.html.twig';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var Location $location */
-        $location = $parameters['location'];
+        $location = $contextParameters['location'];
         /** @var Content $content */
-        $content = $parameters['content'];
+        $content = $contextParameters['content'];
         $versionInfo = $content->getVersionInfo();
         $translationsDataset = $this->datasetFactory->translations();
         $translationsDataset->load($versionInfo);
@@ -95,10 +109,7 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
             'form_translation_remove' => $translationDeleteForm->createView(),
         ];
 
-        return $this->twig->render(
-            '@ezdesign/content/tab/translations/tab.html.twig',
-            array_merge($viewParameters, $parameters)
-        );
+        return array_replace($contextParameters, $viewParameters);
     }
 
     /**

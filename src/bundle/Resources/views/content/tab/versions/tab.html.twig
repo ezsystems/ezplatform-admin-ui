@@ -5,87 +5,98 @@
 {% form_theme form_version_remove_draft '@ezdesign/form_fields.html.twig' %}
 {% form_theme form_version_remove_archived '@ezdesign/form_fields.html.twig' %}
 
-{% if draft_pager.currentPageResults is not empty %}
-    <section>
-        {{ form_start(form_version_remove_draft, {
-            'action': path('ezplatform.version.remove'),
-            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-' ~ form_version_remove_draft.remove.vars.id }
-        }) }}
-        {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'), tools: tab.table_header_tools(form_version_remove_draft) } %}
-        {{ include('@ezdesign/content/tab/versions/table.html.twig', {
-            'versions': draft_pager.currentPageResults,
-            'is_draft': true,
-            'form': form_version_remove_draft,
-            'haveToPaginate': draft_pager.haveToPaginate,
-            'content_is_user': content_is_user
-        }) }}
-        {{ form_end(form_version_remove_draft) }}
+{% set table_template_path = table_template_path|default('@ezdesign/content/tab/versions/table.html.twig') %}
+{% set show_drafts_table = show_drafts_table|default(draft_pager.currentPageResults is not empty) %}
 
-        {% if draft_pager.haveToPaginate %}
-            <div class="row justify-content-center align-items-center mb-2">
-                <span class="ez-pagination__text">
-                    {{ 'pagination.viewing'|trans({
-                        '%viewing%': draft_pager.currentPageResults|length,
-                        '%total%': draft_pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
-                </span>
-            </div>
-            <div class="row justify-content-center align-items-center ez-pagination__btn mb-4">
-                {{ pagerfanta(draft_pager, 'ez',{
-                    'routeName': draft_pagination_params.route_name,
-                    'routeParams': draft_pagination_params.route_params|merge({
-                        '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\VersionsTab::URI_FRAGMENT'),
-                    }),
-                    'pageParameter': '[page][version_draft]'
+{% block tab_content %}
+    {% block table_wrapper_drafts %}
+        {% if show_drafts_table %}
+            <section>
+                {{ form_start(form_version_remove_draft, {
+                    'action': path('ezplatform.version.remove'),
+                    'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-' ~ form_version_remove_draft.remove.vars.id }
                 }) }}
-            </div>
-        {% endif %}
-    </section>
-    {% include '@ezdesign/content/modal_version_conflict.html.twig' %}
-{% endif %}
+                {% block table_drafts %}
+                    {% include '@ezdesign/parts/table_header.html.twig' with {
+                        'headerText': 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'),
+                        'tools': tab.table_header_tools(form_version_remove_draft)
+                    } %}
+                    {% include table_template_path with {
+                        'versions': draft_pager.currentPageResults,
+                        'is_draft': true,
+                        'form': form_version_remove_draft,
+                        'haveToPaginate': draft_pager.haveToPaginate,
+                        'content_is_user': content_is_user
+                    } %}
 
-{% if published_versions is not empty %}
-    <section>
-        {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.versions.published_version'|trans()|desc('Published version') } %}
+                    {% if draft_pager.haveToPaginate %}
+                        <div class="row justify-content-center align-items-center mb-2">
+                            <span class="ez-pagination__text">
+                                {{ 'pagination.viewing'|trans({ '%viewing%': draft_pager.currentPageResults|length, '%total%': draft_pager.nbResults }, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                            </span>
+                        </div>
+                        <div class="row justify-content-center align-items-center ez-pagination__btn mb-4">
+                            {{ pagerfanta(draft_pager, 'ez', {
+                                'routeName': draft_pagination_params.route_name,
+                                'routeParams': draft_pagination_params.route_params|merge({
+                                    '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\VersionsTab::URI_FRAGMENT'),
+                                }),
+                                'pageParameter': '[page][version_draft]'
+                            }) }}
+                        </div>
+                    {% endif %}
+                {% endblock %}
+                {{ form_end(form_version_remove_draft) }}
+            </section>
+            {% include '@ezdesign/content/modal_version_conflict.html.twig' %}
+        {% endif %}
+    {% endblock %}
+
+    {% block table_wrapper_published %}
         {% if published_versions is not empty %}
-            {{ include('@ezdesign/content/tab/versions/table.html.twig', { 'versions': published_versions }) }}
-        {% else %}
-            <p>
-                {{ 'tab.versions.no_permission'|trans()|desc('You don\'t have access to view the content item\'s versions') }}
-            </p>
+            <section>
+                {% block table_published %}
+                    {% include '@ezdesign/parts/table_header.html.twig' with {
+                        'headerText': 'tab.versions.published_version'|trans()|desc('Published version')
+                    } %}
+                    {% include table_template_path with { 'versions': published_versions } %}
+                {% endblock %}
+            </section>
         {% endif %}
-    </section>
-{% endif %}
+    {% endblock %}
 
-{% if archived_versions is not empty %}
-    <section>
-        {{ form_start(form_version_remove_archived, {
-            'action': path('ezplatform.version.remove'),
-            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-' ~ form_version_remove_archived.remove.vars.id }
-        }) }}
-        {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.versions.archived_versions'|trans()|desc('Archived versions'), tools: tab.table_header_tools(form_version_remove_archived) } %}
+    {% block table_wrapper_archived %}
         {% if archived_versions is not empty %}
-            {{ include('@ezdesign/content/tab/versions/table.html.twig', {
-                'versions': archived_versions,
-                'form': form_version_remove_archived,
-                'is_archived': true,
-                'form_archived_version_restore': form_archived_version_restore,
-                'content_is_user': content_is_user
-            }) }}
-        {% else %}
-            <p>
-                {{ 'tab.versions.no_permission'|trans()|desc('You don\'t have access to view the content item\'s versions') }}
-            </p>
+            <section>
+                {{ form_start(form_version_remove_archived, {
+                    'action': path('ezplatform.version.remove'),
+                    'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-' ~ form_version_remove_archived.remove.vars.id }
+                }) }}
+                {% block table_archived %}
+                    {% include '@ezdesign/parts/table_header.html.twig' with {
+                        'headerText': 'tab.versions.archived_versions'|trans()|desc('Archived versions'),
+                        'tools': tab.table_header_tools(form_version_remove_archived)
+                    } %}
+                    {% include table_template_path with {
+                        'versions': archived_versions,
+                        'form': form_version_remove_archived,
+                        'is_archived': true,
+                        'form_archived_version_restore': form_archived_version_restore,
+                        'content_is_user': content_is_user
+                    } %}
+                {% endblock %}
+                {{ form_end(form_version_remove_archived) }}
+            </section>
         {% endif %}
-        {{ form_end(form_version_remove_archived) }}
-    </section>
-{% endif %}
 
-{{ form_start(form_archived_version_restore, {
-    'action': path('ezplatform.content.edit'),
-    'attr': { 'class': 'ez-edit-content-form'}
-}) }}
-{{ form_widget(form_archived_version_restore.language, {'attr': {'hidden': 'hidden'}}) }}
-{{ form_end(form_archived_version_restore) }}
+        {{ form_start(form_archived_version_restore, {
+            'action': path('ezplatform.content.edit'),
+            'attr': { 'class': 'ez-edit-content-form'}
+        }) }}
+        {{ form_widget(form_archived_version_restore.language, {'attr': {'hidden': 'hidden'}}) }}
+        {{ form_end(form_archived_version_restore) }}
+    {% endblock %}
+{% endblock %}
 
 {% macro table_header_tools(form) %}
     {% set modal_data_target = 'modal-' ~ form.remove.vars.id %}

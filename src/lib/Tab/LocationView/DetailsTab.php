@@ -15,16 +15,17 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
 
-class DetailsTab extends AbstractTab implements OrderedTabInterface
+class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-location-view-details';
 
@@ -54,6 +55,7 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         Environment $twig,
@@ -62,9 +64,10 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
         UserService $userService,
         DatasetFactory $datasetFactory,
         FormFactory $formFactory,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->sectionService = $sectionService;
         $this->userService = $userService;
@@ -99,27 +102,26 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param array $parameters
-     *
-     * @return string
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * {@inheritdoc}
      */
-    public function renderView(array $parameters): string
+    public function getTemplate(): string
+    {
+        return '@ezdesign/content/tab/details.html.twig';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
-        $content = $parameters['content'];
+        $content = $contextParameters['content'];
         $versionInfo = $content->getVersionInfo();
         $contentInfo = $versionInfo->getContentInfo();
         $translationsDataset = $this->datasetFactory->translations();
         $translationsDataset->load($versionInfo);
         $locationUpdateType = $this->formFactory->updateLocation(
-            new LocationUpdateData($parameters['location'])
+            new LocationUpdateData($contextParameters['location'])
         );
         $objectStatesDataset = $this->datasetFactory->objectStates();
         $objectStatesDataset->load($contentInfo);
@@ -154,10 +156,7 @@ class DetailsTab extends AbstractTab implements OrderedTabInterface
             'can_assign' => $this->canUserAssignObjectState(),
         ];
 
-        return $this->twig->render(
-            '@ezdesign/content/tab/details.html.twig',
-            array_merge($viewParameters, $parameters)
-        );
+        return array_replace($contextParameters, $viewParameters);
     }
 
     /**

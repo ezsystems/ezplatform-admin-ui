@@ -11,17 +11,18 @@ namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUserGroup;
 use EzSystems\EzPlatformAdminUi\Specification\OrSpecification;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 use eZ\Publish\API\Repository\PermissionResolver;
 
-class RolesTab extends AbstractTab implements OrderedTabInterface, ConditionalTabInterface
+class RolesTab extends AbstractEventDispatchingTab implements OrderedTabInterface, ConditionalTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-location-view-roles';
 
@@ -44,6 +45,7 @@ class RolesTab extends AbstractTab implements OrderedTabInterface, ConditionalTa
      * @param array $userContentTypeIdentifier
      * @param array $userGroupContentTypeIdentifier
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         Environment $twig,
@@ -51,9 +53,10 @@ class RolesTab extends AbstractTab implements OrderedTabInterface, ConditionalTa
         DatasetFactory $datasetFactory,
         array $userContentTypeIdentifier,
         array $userGroupContentTypeIdentifier,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->datasetFactory = $datasetFactory;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
@@ -115,24 +118,22 @@ class RolesTab extends AbstractTab implements OrderedTabInterface, ConditionalTa
     }
 
     /**
-     * @param array $parameters
-     *
-     * @return string
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
-     * @throws \Twig_Error_Syntax
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Loader
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * {@inheritdoc}
      */
-    public function renderView(array $parameters): string
+    public function getTemplate(): string
+    {
+        return '@ezdesign/content/tab/roles/tab.html.twig';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
-        $location = $parameters['location'];
+        $location = $contextParameters['location'];
 
-        $rolesPaginationParams = $parameters['roles_pagination_params'];
+        $rolesPaginationParams = $contextParameters['roles_pagination_params'];
 
         $rolesDataset = $this->datasetFactory->roles();
         $rolesDataset->load($location);
@@ -149,9 +150,6 @@ class RolesTab extends AbstractTab implements OrderedTabInterface, ConditionalTa
             'roles_pagination_params' => $rolesPaginationParams,
         ];
 
-        return $this->twig->render(
-            '@ezdesign/content/tab/roles/tab.html.twig',
-            array_merge($viewParameters, $parameters)
-        );
+        return array_replace($contextParameters, $viewParameters);
     }
 }

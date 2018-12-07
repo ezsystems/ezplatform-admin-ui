@@ -24,4 +24,11 @@ class TabEvents
      * Happens just before rendering tab.
      */
     const TAB_PRE_RENDER = 'ezplatform.tab.pre_render';
+
+    /**
+     * Is dispatched on tabs extending AbstractEventDispatchingTab.
+     *
+     * Allows to manipulate template path and parameters before rendering by Twig.
+     */
+    const TAB_RENDER = 'ezplatform.tab.render';
 }

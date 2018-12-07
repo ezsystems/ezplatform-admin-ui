@@ -12,6 +12,7 @@
         {% endif %}
         <th>{{ 'tab.versions.table.version'|trans()|desc('Version') }}</th>
         <th>{{ 'tab.versions.table.modified_language'|trans()|desc('Modified language') }}</th>
+        {% block custom_column_headers %}{% endblock %}
         <th>{{ 'tab.versions.table.contributor'|trans()|desc('Contributor') }}</th>
         {% if not is_draft_conflict %}
         <th>{{ 'tab.versions.table.created'|trans()|desc('Created') }}</th>
@@ -48,6 +49,7 @@
             <td class="ez-table__cell">
                 {{ admin_ui_config.languages.mappings[version.initialLanguageCode].name }}
             </td>
+            {% block custom_columns %}{% endblock %}
             <td class="ez-table__cell">
                 {% if version.author is not empty %}
                     {{ ez_content_name(version.author) }}
