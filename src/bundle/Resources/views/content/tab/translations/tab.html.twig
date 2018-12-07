@@ -3,12 +3,18 @@
 {% form_theme form_translation_remove '@ezdesign/parts/form/flat_widgets.html.twig' %}
 
 {% import _self as tab %}
+{% set can_translate = can_translate is defined ? can_translate : true %}
 <section>
-    {{ form_start(form_translation_remove, {
-        'action': path('ezplatform.translation.remove'),
-        'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations' }
-    }) }}
-    {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.translations.translation_manger'|trans|desc('Translation manager'), tools: tab.table_header_tools(form_translation_remove) } %}
+    {% if can_translate %}
+        {{ form_start(form_translation_remove, {
+            'action': path('ezplatform.content_type.remove_translation'),
+            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations' }
+        }) }}
+    {% endif %}
+    {% include '@ezdesign/parts/table_header.html.twig' with {
+        headerText: 'tab.translations.translation_manger'|trans|desc('Translation manager'),
+        tools: tab.table_header_tools(form_translation_remove, can_translate)
+    } %}
     <table class="ez-table table">
         <thead>
         <tr>
@@ -20,44 +26,53 @@
         <tbody>
         {% for translation in translations %}
             <tr>
-                <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form_translation_remove.language_codes[translation.languageCode], {'attr': {'disabled': not translation.canDelete}}) }}</td>
+                <td class="ez-table__cell ez-table__cell--has-checkbox">
+                    {% if can_translate %}
+                        {{ form_widget(form_translation_remove.language_codes[translation.languageCode], {'attr': {'disabled': not translation.canDelete}}) }}
+                    {% endif %}
+                </td>
                 <td class="ez-table__cell">{{ translation.name }}</td>
                 <td class="ez-table__cell">{{ translation.languageCode }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    {{ form_end(form_translation_remove) }}
+    {% if can_translate %}
+        {{ form_end(form_translation_remove) }}
+        {% include '@ezdesign/admin/content_type/modal_add_translation.html.twig' with {'form': form_translation_add} only %}
+    {% endif %}
 
-    {% include '@ezdesign/content/tab/translations/modal_add_translation.html.twig' with {'form': form_translation_add} only %}
 </section>
 
-{% macro table_header_tools(form_translation_remove) %}
-    <button class="btn btn-primary ez-btn--prevented ez-btn--add-translation" data-toggle="modal" data-target="#add-translation-modal"
-            title="{{ 'tab.translations.action.add'|trans|desc('Add Translation') }}">
-        <svg class="ez-icon ez-icon-create">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
-        </svg>
-    </button>
+{% macro table_header_tools(form_translation_remove, can_translate) %}
+    {% if can_translate %}
+        <button class="btn btn-primary ez-btn--prevented ez-btn--add-translation" data-toggle="modal" data-target="#add-translation-modal"
+                title="{{ 'tab.translations.action.add'|trans|desc('Add Translation') }}">
+            <svg class="ez-icon ez-icon-create">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+            </svg>
+        </button>
 
-    {% set modal_data_target = 'delete-translations-modal' %}
-    <button id="delete-translations" type="button" class="btn btn-danger" disabled data-toggle="modal"
-            data-target="#{{ modal_data_target }}" title="{{ 'tab.translations.action.delete'|trans|desc('Delete Translation') }}">
-        <svg class="ez-icon ez-icon-trash">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-        </svg>
-    </button>
-    {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {
-        'id': modal_data_target,
-        'message': 'tab.translations.modal.message'|trans|desc('Do you want to delete Translation?'),
-        'data_click': '#' ~ form_translation_remove.remove.vars.id,
-    }%}
+        {% set modal_data_target = 'delete-translations-modal' %}
+        <button id="delete-translations" type="button" class="btn btn-danger" disabled data-toggle="modal"
+                data-target="#{{ modal_data_target }}" title="{{ 'tab.translations.action.delete'|trans|desc('Delete Translation') }}">
+            <svg class="ez-icon ez-icon-trash">
+                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+            </svg>
+        </button>
+        {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {
+            'id': modal_data_target,
+            'message': 'tab.translations.modal.message'|trans|desc('Do you want to delete Translation?'),
+            'data_click': '#' ~ form_translation_remove.remove.vars.id,
+        }%}
+    {% endif %}
 {% endmacro %}
 
 {% block javascripts %}
     {% javascripts
-    '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.add.translation.js'
     %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
+        <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

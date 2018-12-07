@@ -7,8 +7,9 @@
     }
 
     editButton.addEventListener('click', () => {
-        languageRadioOption.checked = true;
         const form = doc.querySelector('.ez-extra-actions--edit form');
+
+        languageRadioOption.checked = true;
         form.submit();
     }, false);
 })(window, document);

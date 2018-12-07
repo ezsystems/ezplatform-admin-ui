@@ -401,6 +401,16 @@
         <target state="new">Delete</target>
         <note>key: modal.delete</note>
       </trans-unit>
+      <trans-unit id="0b83b391386f47130b2d3ac1869fe27aa8c45fb7" resname="tab.name.translations">
+        <source>Translations</source>
+        <target state="new">Translations</target>
+        <note>key: tab.name.translations</note>
+      </trans-unit>
+      <trans-unit id="eb3b504a0281951f15692e888226579aa99bb512" resname="tab.name.view">
+        <source>View</source>
+        <target state="new">View</target>
+        <note>key: tab.name.view</note>
+      </trans-unit>
       <trans-unit id="3e9deeb426f08a404990a6926d70558955272593" resname="yes_no">
         <source>{0}No|{1}Yes</source>
         <target state="new">{0}No|{1}Yes</target>
