@@ -1,4 +1,4 @@
-(function (global) {
+(function(global) {
     if (CKEDITOR.plugins.get('ezmoveelement')) {
         return;
     }
@@ -25,13 +25,17 @@
     };
 
     const moveUpCommand = {
-        exec: function (editor, data) {
+        exec: function(editor, data) {
             let focused = editor.elementPath().block;
             let widget;
 
             if (!focused) {
                 widget = editor.widgets.focused;
                 focused = widget.wrapper;
+            }
+
+            if (focused.is('li')) {
+                focused = focused.getParent();
             }
 
             const previous = focused.getPrevious();
@@ -49,13 +53,17 @@
     };
 
     const moveDownCommand = {
-        exec: function (editor, data) {
+        exec: function(editor, data) {
             let focused = editor.elementPath().block;
             let widget;
 
             if (!focused) {
                 widget = editor.widgets.focused;
                 focused = widget.wrapper;
+            }
+
+            if (focused.is('li')) {
+                focused = focused.getParent();
             }
 
             const next = focused.getNext();
@@ -83,7 +91,7 @@
     CKEDITOR.plugins.add('ezmoveelement', {
         requires: ['ezcaret'],
 
-        init: function (editor) {
+        init: function(editor) {
             editor.addCommand('eZMoveUp', moveUpCommand);
             editor.addCommand('eZMoveDown', moveDownCommand);
         },

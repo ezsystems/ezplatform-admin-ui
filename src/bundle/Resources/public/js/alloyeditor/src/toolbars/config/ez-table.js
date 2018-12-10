@@ -7,6 +7,7 @@ export default class EzTableConfig {
             'ezmoveup',
             'ezmovedown',
             'tableHeading',
+            'ezembedinline',
             'eztablerow',
             'eztablecolumn',
             'eztablecell',

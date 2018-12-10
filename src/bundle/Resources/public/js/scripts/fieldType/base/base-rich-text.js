@@ -155,6 +155,8 @@
                             new window.eZ.ezAlloyEditor.ezFormattedConfig({ customStyles: this.customStylesConfigurations }),
                             new window.eZ.ezAlloyEditor.ezCustomStyleConfig({ customStyles: this.customStylesConfigurations }),
                             new window.eZ.ezAlloyEditor.ezHeadingConfig({ customStyles: this.customStylesConfigurations }),
+                            new window.eZ.ezAlloyEditor.ezListConfig({ customStyles: this.customStylesConfigurations }),
+                            new window.eZ.ezAlloyEditor.ezEmbedInlineConfig(),
                             new window.eZ.ezAlloyEditor.ezTableConfig(),
                             new window.eZ.ezAlloyEditor.ezEmbedImageLinkConfig(),
                             new window.eZ.ezAlloyEditor.ezEmbedImageConfig(),
@@ -166,7 +168,7 @@
                 extraPlugins:
                     AlloyEditor.Core.ATTRS.extraPlugins.value +
                     ',' +
-                    ['ezaddcontent', 'ezmoveelement', 'ezremoveblock', 'ezembed', 'ezfocusblock', 'ezcustomtag'].join(','),
+                    ['ezaddcontent', 'ezmoveelement', 'ezremoveblock', 'ezembed', 'ezembedinline', 'ezfocusblock', 'ezcustomtag'].join(','),
             });
 
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ez-data-source').querySelector('textarea').value);
@@ -186,7 +188,10 @@
                 root.innerHTML = data;
                 doc.appendChild(root);
 
-                [...doc.querySelectorAll('[data-ezelement="ezembed"]')].forEach(this.emptyEmbed);
+                [
+                    ...doc.querySelectorAll('[data-ezelement="ezembed"]'),
+                    ...doc.querySelectorAll('[data-ezelement="ezembedinline"]'),
+                ].forEach(this.emptyEmbed);
                 [...doc.querySelectorAll('[data-ezelement="eztemplate"]:not([data-eztype="style"])')].forEach(this.clearCustomTag);
 
                 event.target.closest('.ez-data-source').querySelector('textarea').value = this.xhtmlify(root.innerHTML).replace(
