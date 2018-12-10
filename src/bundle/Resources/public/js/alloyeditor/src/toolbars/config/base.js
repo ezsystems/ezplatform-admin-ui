@@ -125,6 +125,10 @@ export default class EzConfigBase {
             block = targetElement;
         }
 
+        if (block.is('li')) {
+            block = block.getParent();
+        }
+
         return EzConfigBase.setPositionFor.call(this, block, editor);
     }
 }

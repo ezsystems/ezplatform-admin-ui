@@ -64,15 +64,6 @@ import embedBaseDefinition from '../widgets/ez-embed-base';
                 createEmbedPreviewNode: function() {
                     return document.createElement('span');
                 },
-
-                createEmbedPreview: function(title) {
-                    return `
-                        <svg class="ez-icon ez-icon--small ez-icon--secondary">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#tag"></use>
-                        </svg>
-                        <span class="ez-embed-content__title">${title}</span>
-                    `;
-                },
             });
 
             editor.widgets.add('ezembedinline', embedInlineDefinition);

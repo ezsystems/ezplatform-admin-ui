@@ -1,5 +1,9 @@
-export default class EzListConfig {
+import EzConfigBase from './base';
+
+export default class EzListConfig extends EzConfigBase {
     constructor(config) {
+        super(config);
+
         this.name = 'list';
         this.buttons = ['ezmoveup', 'ezmovedown', this.getStyles(config.customStyles), 'ezembedinline', 'ezblockremove'];
     }

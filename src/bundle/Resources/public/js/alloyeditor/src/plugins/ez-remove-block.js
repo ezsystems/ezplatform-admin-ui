@@ -1,4 +1,4 @@
-(function (global) {
+(function(global) {
     if (CKEDITOR.plugins.get('ezremoveblock')) {
         return;
     }
@@ -11,7 +11,7 @@
          * @param {CKEDITOR.editor} editor
          * @param {CKEDITOR.dom.element} element
          */
-        moveCaretToElement: function (editor, element) {
+        moveCaretToElement: function(editor, element) {
             const caretElement = editor.eZ.findCaretElement(element);
 
             editor.eZ.moveCaretToElement(editor, caretElement);
@@ -27,7 +27,7 @@
          * @param {CKEDITOR.dom.element} removedElement
          * @param {CKEDITOR.dom.element} newFocus
          */
-        fireEditorInteraction: function (editor, newFocus) {
+        fireEditorInteraction: function(editor, newFocus) {
             const event = {
                 editor: editor,
                 target: newFocus.$,
@@ -49,7 +49,7 @@
          * @protected
          * @method changeFocus
          */
-        changeFocus: function (editor, newFocus) {
+        changeFocus: function(editor, newFocus) {
             const widget = editor.widgets.getByElement(newFocus);
 
             if (widget) {
@@ -57,16 +57,14 @@
             } else {
                 this.moveCaretToElement(editor, newFocus);
             }
-       },
+        },
 
-        exec: function (editor, data) {
-            let toRemove = editor.elementPath().block;
+        exec: function(editor, data) {
+            let toRemove = editor.widgets.focused ? editor.widgets.focused.wrapper : editor.elementPath().block;
             let newFocus;
 
-            if (!toRemove) {
-                // path.block is null when a widget is focused so the element to
-                // remove is the focused widget wrapper.
-                toRemove = editor.widgets.focused.wrapper;
+            if (toRemove.is('li')) {
+                toRemove = toRemove.getParent();
             }
 
             newFocus = toRemove.getNext();
@@ -77,6 +75,10 @@
                 // are forced to manually check if newFocus is this element
                 // see https://jira.ez.no/browse/EZP-26016
                 newFocus = toRemove.getPrevious();
+            }
+
+            if (newFocus && newFocus.type === CKEDITOR.NODE_TEXT) {
+                newFocus = newFocus.getParent();
             }
 
             toRemove.remove();
@@ -102,4 +104,3 @@
         init: (editor) => editor.addCommand('eZRemoveBlock', removeBlockCommand),
     });
 })(window);
-

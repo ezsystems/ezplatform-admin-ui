@@ -31,10 +31,10 @@ export default class EzBtnBlockRemove extends EzButton {
             <button
                 className="ae-button ez-btn-ae ez-btn-ae--remove-block"
                 onClick={this.removeBlock.bind(this)}
-                tabIndex={this.props.tabIndex} title={title}
-            >
+                tabIndex={this.props.tabIndex}
+                title={title}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#trash" />
                 </svg>
             </button>
         );
