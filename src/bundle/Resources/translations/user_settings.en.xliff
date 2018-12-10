@@ -41,6 +41,26 @@
         <target state="new">My Preferences</target>
         <note>key: section.my_preferences</note>
       </trans-unit>
+      <trans-unit id="9168385babd54c4c04f7a322ceb2d75769cab6f1" resname="settings.characters_counter.value.description">
+        <source><![CDATA[Displays count of characters typed in Online Editor]]></source>
+        <target state="new"><![CDATA[Displays count of characters typed in Online Editor]]></target>
+        <note>key: settings.characters_counter.value.description</note>
+      </trans-unit>
+      <trans-unit id="b3936bd1f02c5c7704f72e8afa2a6096dacbf4ad" resname="settings.characters_counter.value.enabled">
+        <source>enabled</source>
+        <target state="new">enabled</target>
+        <note>key: settings.characters_counter.value.enabled</note>
+      </trans-unit>
+      <trans-unit id="5122bc753d4d4e665de276d8798656b0573d5078" resname="settings.characters_counter.value.disabled">
+        <source>disabled</source>
+        <target state="new">disabled</target>
+        <note>key: settings.characters_counter.value.disabled</note>
+      </trans-unit>
+      <trans-unit id="590e07504a931ad88e8f7431d2ddb30f6ecef89d" resname="settings.characters_counter.value.title">
+        <source>Characters counter</source>
+        <target state="new">Characters counter</target>
+        <note>key: settings.characters_counter.value.title</note>
+      </trans-unit>
       <trans-unit id="dac7ffb84bac8bc5a682388098bded0f8f49d841" resname="settings.timezone.value.description">
         <source><![CDATA[Time Zone in use for displaying Date & Time]]></source>
         <target state="new"><![CDATA[Time Zone in use for displaying Date & Time]]></target>

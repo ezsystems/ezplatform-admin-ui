@@ -15,3 +15,7 @@ services:
         tags:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: timezone }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: timezone }
+    EzSystems\EzPlatformAdminUi\UserSetting\Setting\CharactersCounter:
+        tags:
+            - { name: ezplatform.admin_ui.user_setting.value, identifier: characters_counter }
+            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: characters_counter }

@@ -8,4 +8,8 @@
     <div class="hidden" data-udw-config-name="richtext_embed" data-udw-config="{{ ez_udw_config('richtext_embed', udw_context) }}"></div>
     <div class="hidden" data-udw-config-name="richtext_embed_image" data-udw-config="{{ ez_udw_config('richtext_embed_image', udw_context) }}"></div>
     <div class="ez-data-source__richtext" id="{{ form.vars.id }}__editable"></div>
+    <div class="ez-data-source__richtext" id="{{ form.vars.id }}__editable"></div>
+    {% if ez_user_settings['characters_counter'] == 'enabled' %}
+        <div class="ez-characters-counter">0</div>
+    {% endif %}
 {%- endblock -%}

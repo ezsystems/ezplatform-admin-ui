@@ -158,7 +158,7 @@
                 extraPlugins:
                     AlloyEditor.Core.ATTRS.extraPlugins.value +
                     ',' +
-                    ['ezaddcontent', 'ezmoveelement', 'ezremoveblock', 'ezembed', 'ezfocusblock', 'ezcustomtag'].join(','),
+                    ['ezaddcontent', 'ezmoveelement', 'ezremoveblock', 'ezembed', 'ezfocusblock', 'ezcustomtag', 'ezcountchars'].join(','),
             });
 
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ez-data-source').querySelector('textarea').value);

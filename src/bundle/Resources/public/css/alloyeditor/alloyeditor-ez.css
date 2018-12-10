@@ -1044,3 +1044,15 @@
   font-size: 14px;
   line-height: 1;
 }
+
+.ez-characters-counter {
+  position: relative;
+  color: #fff;
+  background-color: #106d95;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.3rem;
+  border-radius: 0.25rem;
+  margin-right: 0;
+  float: right;
+  margin-top: -1.4rem;
+}
