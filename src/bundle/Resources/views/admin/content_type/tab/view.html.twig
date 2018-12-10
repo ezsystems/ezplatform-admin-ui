@@ -8,7 +8,7 @@
             <h2 class="ez-fieldgroup__name">{{ "content_type.global_properties"|trans|desc("Global properties") }}</h2>
         </section>
         {% set current_language = app.request.get('languageCode') ?: language_code %}
-        {% if languages|length > 1  %}
+        {% if languages|length > 1 %}
             <form class="form-inline justify-content-end mb-4">
                 <select class="form-control ez-location-language-change">
                     {% for language in languages %}
