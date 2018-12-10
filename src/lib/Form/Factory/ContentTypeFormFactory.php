@@ -42,7 +42,7 @@ class ContentTypeFormFactory
         TranslationAddData $data = null,
         ?string $name = null
     ): FormInterface {
-        $name = $name ?: sprintf('add-translation');
+        $name = $name ?: 'add-translation';
 
         return $this->formFactory->createNamed($name, TranslationAddType::class, $data);
     }
