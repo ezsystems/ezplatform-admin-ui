@@ -723,7 +723,7 @@ class ContentTypeController extends Controller
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
-    private function tryToCreateContentTypeDraft(ContentType $contentType)
+    private function tryToCreateContentTypeDraft(ContentType $contentType): ContentTypeDraft
     {
         try {
             $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentType->id);
