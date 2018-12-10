@@ -966,9 +966,9 @@ class FormFactory
     }
 
     /**
-     * @param UserPasswordChangeData $data
-     * @param null|string $name
-     * @param User $options
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData $data
+     * @param string|null $name
+     * @param \eZ\Publish\API\Repository\Values\User\User|null $user
      *
      * @return FormInterface
      *
@@ -988,7 +988,7 @@ class FormFactory
 
     /**
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotData $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return \Symfony\Component\Form\FormInterface
      *
@@ -1005,7 +1005,7 @@ class FormFactory
 
     /**
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotWithLoginData $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return \Symfony\Component\Form\FormInterface
      *
@@ -1022,8 +1022,8 @@ class FormFactory
 
     /**
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData $data
-     * @param null|string $name
-     * @param null|User $user
+     * @param string|null $name
+     * @param \eZ\Publish\API\Repository\Values\User\User|null $user
      *
      * @return \Symfony\Component\Form\FormInterface
      *

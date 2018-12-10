@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\User;
 
-use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\User\User;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData;
 use Symfony\Component\Form\AbstractType;
@@ -21,25 +20,11 @@ use EzSystems\RepositoryForms\Validator\Constraints\Password as NewPassword;
 
 class UserPasswordResetType extends AbstractType
 {
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    private $contentTypeService;
-
-    /**
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     */
-    public function __construct(ContentTypeService $contentTypeService)
-    {
-        $this->contentTypeService = $contentTypeService;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $contentType = null;
         if ($options['user'] instanceof User) {
-            // TODO: Refactor to use $user->getContentType() when https://jira.ez.no/browse/EZP-29613 will be merged
-            $contentType = $this->contentTypeService->loadContentType(
-                $options['user']->contentInfo->contentTypeId
-            );
+            $contentType = $options['user']->getContentType();
         }
 
         $builder
