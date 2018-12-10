@@ -144,6 +144,8 @@ class ContentViewController extends Controller
      *
      * @return \eZ\Publish\Core\MVC\Symfony\View\ContentView
      *
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
@@ -214,7 +216,9 @@ class ContentViewController extends Controller
     /**
      * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
      *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     private function supplyContentActionForms(ContentView $view): void
     {
@@ -431,7 +435,7 @@ class ContentViewController extends Controller
     private function getContentCreateData(?Location $location): ContentCreateData
     {
         $languages = $this->languageService->loadLanguages();
-        $language = 1 === count($languages)
+        $language = 1 === \count($languages)
             ? array_shift($languages)
             : null;
 

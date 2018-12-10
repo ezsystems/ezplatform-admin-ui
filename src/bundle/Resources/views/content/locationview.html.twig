@@ -67,8 +67,9 @@
                         <section class="ez-fieldgroup">
                             <h2 class="ez-fieldgroup__name">{{ 'content.view.subitems'|trans|desc('Sub-items') }}</h2>
                             <div class="ez-sil" 
-                                data-location="{{ location.id }}" 
-                                data-items="{{ subitems_module.items }}" 
+                                data-location="{{ location.id }}"
+                                data-mfu-create-permissions-config="{{ subitems_module.content_create_permissions_for_mfu|json_encode() }}"
+                                data-items="{{ subitems_module.items }}"
                                 data-content-types="{{ subitems_module.content_type_info_list }}"
                                 data-udw-config-bulk-move-items="{{ ez_udw_config('single_container', {}) }}"
                             ></div>
