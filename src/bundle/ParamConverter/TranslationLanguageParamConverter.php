@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInte
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class LanguageCodeParamConverter implements ParamConverterInterface
+class TranslationLanguageParamConverter implements ParamConverterInterface
 {
     const PARAMETER_LANGUAGE_CODE_TO = 'toLanguageCode';
     const PARAMETER_LANGUAGE_CODE_FROM = 'fromLanguageCode';

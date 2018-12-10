@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\ContentType;
 
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 
-class ViewTab extends AbstractTab implements OrderedTabInterface
+class ViewTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-content-type-view-details';
 
@@ -41,26 +41,20 @@ class ViewTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param array $parameters
-     *
      * @return string
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
-    public function renderView(array $parameters): string
+    public function getTemplate(): string
     {
-        return $this->twig->render(
-            '@ezdesign/admin/content_type/tab/view.html.twig',
-            [
-                'content_type' => $parameters['content_type'],
-                'content_type_group' => $parameters['content_type_group'],
-                'field_definitions_by_group' => $parameters['field_definitions_by_group'],
-                'language_code' => $parameters['language_code'],
-                'can_update' => $parameters['can_update'],
-                'languages' => $parameters['languages'],
-            ]
-        );
+        return '@ezdesign/admin/content_type/tab/view.html.twig';
+    }
+
+    /**
+     * @param mixed[] $contextParameters
+     *
+     * @return mixed[]
+     */
+    public function getTemplateParameters(array $contextParameters = []): array
+    {
+        return $contextParameters;
     }
 }

@@ -10,36 +10,39 @@ namespace EzSystems\EzPlatformAdminUi\Tab\ContentType;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory;
+use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
-class TranslationsTab extends AbstractTab implements OrderedTabInterface
+class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-content-type-view-translations';
 
     /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
     protected $datasetFactory;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory */
     protected $formFactory;
 
     /**
      * @param \Twig\Environment $twig
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory $formFactory
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        EventDispatcherInterface $eventDispatcher,
         DatasetFactory $datasetFactory,
-        FormFactory $formFactory
+        ContentTypeFormFactory $formFactory
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
@@ -71,20 +74,25 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
     }
 
     /**
-     * @param array $parameters
-     *
      * @return string
+     */
+    public function getTemplate(): string
+    {
+        return '@ezdesign/admin/content_type/tab/translations.html.twig';
+    }
+
+    /**
+     * @param mixed[] $contextParameters
      *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @return mixed[]
+     *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    public function renderView(array $parameters): string
+    public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
-        $contentType = $parameters['content_type'];
-        $contentTypeGroup = $parameters['content_type_group'];
+        $contentType = $contextParameters['content_type'];
+        $contentTypeGroup = $contextParameters['content_type_group'];
 
         $translationsDataset = $this->datasetFactory->translations();
         $translationsDataset->loadFromContentType($contentType);
@@ -105,15 +113,12 @@ class TranslationsTab extends AbstractTab implements OrderedTabInterface
         );
 
         $viewParameters = [
-            'can_translate' => $parameters['can_update'],
+            'can_translate' => $contextParameters['can_update'],
             'translations' => $translationsDataset->getTranslations(),
             'form_translation_add' => $translationAddForm->createView(),
             'form_translation_remove' => $translationRemoveForm->createView(),
         ];
 
-        return $this->twig->render(
-            '@ezdesign/admin/content_type/tab/translations.html.twig',
-            array_merge($viewParameters, $parameters)
-        );
+        return array_replace($contextParameters, $viewParameters);
     }
 }

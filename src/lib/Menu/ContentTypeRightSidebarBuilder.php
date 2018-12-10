@@ -11,7 +11,6 @@ namespace EzSystems\EzPlatformAdminUi\Menu;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
@@ -97,10 +96,10 @@ class ContentTypeRightSidebarBuilder extends AbstractBuilder implements Translat
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var ContentType $contentType */
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $options['content_type'];
 
-        /** @var ItemInterface|ItemInterface[] $menu */
+        /** @var \Knp\Menu\ItemInterface $menu */
         $menu = $this->factory->createItem('root');
 
         $editAttributes = [

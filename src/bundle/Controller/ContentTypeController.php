@@ -18,6 +18,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
@@ -71,6 +72,9 @@ class ContentTypeController extends Controller
     /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory */
+    private $contentTypeFormFactory;
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
@@ -82,6 +86,7 @@ class ContentTypeController extends Controller
      * @param int $defaultPaginationLimit
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory $contentTypeFormFactory
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -93,7 +98,8 @@ class ContentTypeController extends Controller
         array $languages,
         int $defaultPaginationLimit,
         UserService $userService,
-        LanguageService $languageService
+        LanguageService $languageService,
+        ContentTypeFormFactory $contentTypeFormFactory
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -105,6 +111,7 @@ class ContentTypeController extends Controller
         $this->defaultPaginationLimit = $defaultPaginationLimit;
         $this->userService = $userService;
         $this->languageService = $languageService;
+        $this->contentTypeFormFactory = $contentTypeFormFactory;
     }
 
     /**
@@ -207,7 +214,7 @@ class ContentTypeController extends Controller
      */
     public function addTranslationAction(Request $request): Response
     {
-        $form = $this->formFactory->addContentTypeTranslation(
+        $form = $this->contentTypeFormFactory->addContentTypeTranslation(
             new TranslationAddData()
         );
         $form->handleRequest($request);
@@ -269,7 +276,7 @@ class ContentTypeController extends Controller
      */
     public function removeTranslationAction(Request $request): Response
     {
-        $form = $this->formFactory->removeContentTypeTranslation(
+        $form = $this->contentTypeFormFactory->removeContentTypeTranslation(
             new TranslationRemoveData()
         );
         $form->handleRequest($request);
@@ -364,8 +371,10 @@ class ContentTypeController extends Controller
             }
         }
 
-        $form = $this->formFactory->contentTypeEdit(
-            new ContentTypeEditData()
+        $form = $this->contentTypeFormFactory->contentTypeEdit(
+            new ContentTypeEditData(),
+            null,
+            ['contentType' => $contentType]
         );
         $form->handleRequest($request);
 
@@ -578,11 +587,13 @@ class ContentTypeController extends Controller
             $languages[] = $this->languageService->loadLanguage($languageCode);
         }
 
-        $contentTypeEdit = $this->formFactory->contentTypeEdit(
+        $contentTypeEdit = $this->contentTypeFormFactory->contentTypeEdit(
             new ContentTypeEditData(
                 $contentType,
                 $group
-            )
+            ),
+            null,
+            ['contentType' => $contentType]
         );
 
         return $this->render('@ezdesign/admin/content_type/view.html.twig', [

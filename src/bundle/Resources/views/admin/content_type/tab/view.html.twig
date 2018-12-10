@@ -18,7 +18,7 @@
                             'languageCode': language.languageCode,
                             '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\ContentType\\ViewTab::URI_FRAGMENT'),
                         }) }}"
-                                {% if current_language == language.languageCode %} selected="selected" {% endif %}
+                        {% if current_language == language.languageCode %} selected="selected" {% endif %}
                         >{{ language.name }}</option>
                     {% endfor %}
                 </select>

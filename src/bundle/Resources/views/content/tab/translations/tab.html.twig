@@ -39,11 +39,9 @@
     </table>
     {% if can_translate %}
         {{ form_end(form_translation_remove) }}
-        {% if (is_content_type_translate is defined and is_content_type_translate ) %}
-            {% include '@ezdesign/admin/content_type/modal_add_translation.html.twig' with {'form': form_translation_add} only %}
-        {% else %}
+        {% block modal_add_translation %}
             {% include '@ezdesign/content/tab/translations/modal_add_translation.html.twig' with {'form': form_translation_add} only %}
-        {% endif %}
+        {% endblock %}
     {% endif %}
 
 </section>

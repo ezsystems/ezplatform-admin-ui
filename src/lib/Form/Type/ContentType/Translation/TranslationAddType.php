@@ -12,12 +12,12 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LanguageService;
-use eZ\Publish\API\Repository\Values\Content\Language;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
+use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\AvailableTranslationLanguageChoiceLoader;
+use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\BaseTranslationLanguageChoiceLoader;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentTypeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Exception\AlreadySubmittedException;
 use Symfony\Component\Form\Exception\LogicException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -186,13 +186,7 @@ class TranslationAddType extends AbstractType
                     'required' => true,
                     'multiple' => false,
                     'expanded' => true,
-                    'choice_loader' => new CallbackChoiceLoader(function () use ($contentLanguages) {
-                        return $this->loadLanguages(
-                            function (Language $language) use ($contentLanguages) {
-                                return $language->enabled && !in_array($language->languageCode, $contentLanguages, true);
-                            }
-                        );
-                    }),
+                    'choice_loader' => new AvailableTranslationLanguageChoiceLoader($this->languageService, $contentLanguages),
                     'choice_value' => 'languageCode',
                     'choice_label' => 'name',
                 ]
@@ -205,13 +199,7 @@ class TranslationAddType extends AbstractType
                     'placeholder' => false,
                     'multiple' => false,
                     'expanded' => true,
-                    'choice_loader' => new CallbackChoiceLoader(function () use ($contentLanguages) {
-                        return $this->loadLanguages(
-                            function (Language $language) use ($contentLanguages) {
-                                return $language->enabled && in_array($language->languageCode, $contentLanguages, true);
-                            }
-                        );
-                    }),
+                    'choice_loader' => new BaseTranslationLanguageChoiceLoader($this->languageService, $contentLanguages),
                     'choice_value' => 'languageCode',
                     'choice_label' => 'name',
                 ]
