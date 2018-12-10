@@ -701,8 +701,8 @@ class ContentTypeController extends Controller
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    private function getDefaultLanguage(ContentTypeDraft $contentTypeDraft
-    ): Language {
+    private function getDefaultLanguage(ContentTypeDraft $contentTypeDraft): Language
+    {
         $languageCode = reset($this->languages);
 
         foreach ($this->languages as $prioritizedLanguage) {
