@@ -51,31 +51,31 @@
     const buttonRestoreUnderNewParent = doc.querySelector('#trash_item_restore_location_select_content');
     const buttonDelete = doc.querySelector('#delete-trash-items');
 
-    const enableButtons = (event) => {
-        const deleteCheckbox = doc.querySelector(
-            'form[name="trash_item_delete"] input[type="checkbox"][value="' + event.target.value + '"]'
-        );
-        const isNonEmptySelection = checkboxes.some((el) => el.checked);
+    const enableButtons = () => {
+        const isEmptySelection = checkboxes.every((el) => !el.checked);
         const isMissingParent = checkboxes.some((el) => el.checked && parseInt(el.dataset.isParentInTrash, 10) === 1);
 
-        if (deleteCheckbox) {
-            deleteCheckbox.checked = event.target.checked;
-        }
-
-        if (isNonEmptySelection && !isMissingParent) {
-            buttonRestore.removeAttribute('disabled');
-        } else {
-            buttonRestore.setAttribute('disabled', true);
-        }
-
-        if (isNonEmptySelection) {
-            buttonRestoreUnderNewParent.removeAttribute('disabled');
-            buttonDelete.removeAttribute('disabled');
-        } else {
-            buttonRestoreUnderNewParent.setAttribute('disabled', true);
-            buttonDelete.setAttribute('disabled', true);
-        }
+        buttonRestore.disabled = isEmptySelection || isMissingParent;
+        buttonDelete.disabled = isEmptySelection;
+        buttonRestoreUnderNewParent.disabled = isEmptySelection;
     };
+    const updateTrashForm = (checkboxes) => {
+        checkboxes.forEach((checkbox) => {
+            const trashFormCheckbox = doc.querySelector(
+                'form[name="trash_item_delete"] input[type="checkbox"][value="' + checkbox.value + '"]'
+            );
 
-    checkboxes.forEach((checkbox) => checkbox.addEventListener('change', enableButtons, false));
+            if (trashFormCheckbox) {
+                trashFormCheckbox.checked = checkbox.checked;
+            }
+        });
+    };
+    const handleCheckboxChange = (event) => {
+        updateTrashForm([event.target])
+        enableButtons();
+    }; 
+
+    updateTrashForm(checkboxes);
+    enableButtons()
+    checkboxes.forEach((checkbox) => checkbox.addEventListener('change', handleCheckboxChange, false));
 })(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
