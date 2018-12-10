@@ -122,6 +122,14 @@
             return body.innerHTML;
         }
 
+        clearCustomTag(customTag) {
+            const attributesNodes = [...customTag.querySelectorAll('[data-ezelement="ezattributes"]')];
+            const headers = [...customTag.querySelectorAll('.ez-custom-tag__header')];
+
+            attributesNodes.forEach((attributesNode) => attributesNode.remove());
+            headers.forEach((header) => header.remove());
+        }
+
         init(container) {
             const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
                 toolbars: {
@@ -179,7 +187,7 @@
                 doc.appendChild(root);
 
                 [...doc.querySelectorAll('[data-ezelement="ezembed"]')].forEach(this.emptyEmbed);
-                [...doc.querySelectorAll('[data-ezelement="ezcustomtag"]')].forEach(this.emptyEmbed);
+                [...doc.querySelectorAll('[data-ezelement="eztemplate"]:not([data-eztype="style"])')].forEach(this.clearCustomTag);
 
                 event.target.closest('.ez-data-source').querySelector('textarea').value = this.xhtmlify(root.innerHTML).replace(
                     this.xhtmlNamespace,
