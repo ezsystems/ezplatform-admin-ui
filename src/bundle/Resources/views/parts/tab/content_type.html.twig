@@ -23,7 +23,7 @@
                 <div>
                     <div class="row ez-header pt-3">
                         <div class="container">
-                            <ul class="nav nav-tabs ez-tabs nav-tabs-{{ group }} px-4" role="tablist" id="ez-tab-list-{{ group }}">
+                            <ul class="nav nav-tabs ez-tabs ez-nav-tabs--{{ group }} px-4" role="tablist" id="ez-tab-list-{{ group }}">
                                 {% for tab in tabs %}
                                     {% set id = group ~ '-' ~ tab.identifier %}
                                     {% set active = loop.first %}
