@@ -16,7 +16,7 @@ class DashboardPage extends Page
     /** @var string Name by which Page is recognised */
     public const PAGE_NAME = 'Dashboard';
 
-    public const TABLE_CONTAINER = '.card:nth-child(1) .tab-pane.active';
+    public const TABLE_CONTAINER = '#ez-tab-list-content-dashboard-my .tab-pane.active';
 
     /** @var NavLinkTabs */
     public $navLinkTabs;
