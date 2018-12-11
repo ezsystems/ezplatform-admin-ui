@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use PHPUnit\Framework\Assert;
 
 /** Element that describes user notification bar, that appears on the bottom of the screen */
 class Notification extends Element
@@ -15,50 +16,82 @@ class Notification extends Element
     public const ELEMENT_NAME = 'Notification';
 
     private $checkVisibilityTimeout;
+    private $notificationElement;
 
     public function __construct(UtilityContext $context)
     {
         parent::__construct($context);
         $this->fields = [
-            'alert' => '.ez-notifications-container .alert',
-            'successAlert' => '.ez-notifications-container .alert-success',
-            'failureAlert' => '.ez-notifications-container .alert-danger',
-            'closeAlert' => '.ez-notifications-container .alert.show button.close',
+            'alert' => '.ez-notifications-container .alert.show',
+            'successAlert' => 'alert-success',
+            'failureAlert' => 'alert-danger',
+            'closeAlert' => 'button.close',
         ];
         $this->checkVisibilityTimeout = 1;
     }
 
     public function verifyVisibility(): void
     {
-        $this->context->waitUntilElementIsVisible($this->fields['alert'], $this->defaultTimeout);
+        $this->context->waitUntil($this->defaultTimeout, function () {
+            return $this->isVisible();
+        });
+
+        $this->setAlertElement();
     }
 
     public function verifyAlertSuccess(): void
     {
-        $this->context->assertElementOnPage($this->fields['successAlert']);
+        $this->setAlertElement();
+
+        Assert::assertTrue(
+            $this->notificationElement->hasClass($this->fields['successAlert']),
+            'Success alert not found.'
+        );
     }
 
     public function verifyAlertFailure(): void
     {
-        $this->context->assertElementOnPage($this->fields['failureAlert']);
+        $this->setAlertElement();
+
+        Assert::assertTrue(
+            $this->notificationElement->hasClass($this->fields['failureAlert']),
+            'Success alert not found.'
+        );
     }
 
     public function getMessage(): string
     {
-        return $this->context->findElement($this->fields['alert'])->getText();
+        $this->setAlertElement();
+
+        try {
+            return $this->notificationElement->getText();
+        } catch (\Exception $e) {
+            Assert::fail('Notification alert not found, no message can be fetched.');
+        }
     }
 
     public function closeAlert(): void
     {
-        $this->context->findElement($this->fields['closeAlert'])->click();
+        if ($this->isVisible()) {
+            $this->setAlertElement();
 
-        $this->context->waitUntil($this->defaultTimeout, function () {
-            return !$this->isVisible();
-        });
+            $this->notificationElement->find('css', $this->fields['closeAlert'])->click();
+
+            $this->context->waitUntil($this->defaultTimeout, function () {
+                return !$this->isVisible();
+            });
+        }
     }
 
     public function isVisible(): bool
     {
         return $this->context->isElementVisible($this->fields['alert'], $this->checkVisibilityTimeout);
+    }
+
+    private function setAlertElement(): void
+    {
+        if (!isset($this->notificationElement)) {
+            $this->notificationElement = $this->context->findElement($this->fields['alert']);
+        }
     }
 }
