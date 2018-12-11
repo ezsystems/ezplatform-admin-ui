@@ -17,7 +17,7 @@ class Pagination extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'nextButton' => '.pagination .page-item.next',
+            'nextButton' => '.pagination .page-item.next:not(.disabled)',
             'spinner' => '.m-sub-items__spinner-wrapper',
         ];
     }
