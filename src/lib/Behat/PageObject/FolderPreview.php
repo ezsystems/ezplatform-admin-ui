@@ -22,4 +22,9 @@ class FolderPreview extends PreviewPage
     public function verifyElements(): void
     {
     }
+
+    public function getDefaultPreviewData(): ?array
+    {
+        return null;
+    }
 }
