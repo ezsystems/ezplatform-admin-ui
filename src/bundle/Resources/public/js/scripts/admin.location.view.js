@@ -1,6 +1,6 @@
 (function(global, doc, $, React, ReactDOM, eZ, Routing) {
-    const SELECTOR_BULK_OPERATION_FAILED_MODAL = '.ez-bulk-operation-failed-modal';
-    const listContainers = [...doc.querySelectorAll('.ez-sil')];
+    const SELECTOR_MODAL_BULK_ACTION_FAIL = '#bulk-action-failed-modal';
+    const listContainers = doc.querySelectorAll('.ez-sil');
     const mfuContainer = doc.querySelector('#ez-mfu');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
@@ -61,16 +61,14 @@
     };
     const generateLink = (locationId) => Routing.generate('_ezpublishLocation', { locationId });
     const setModalTableTitle = (title) => {
-        const modalTableTitleNode = doc.querySelector(
-            `${SELECTOR_BULK_OPERATION_FAILED_MODAL} .ez-table-header .ez-table-header__headline`
-        );
+        const modalTableTitleNode = doc.querySelector(`${SELECTOR_MODAL_BULK_ACTION_FAIL} .ez-table-header__headline`);
 
         modalTableTitleNode.innerHTML = title;
     };
     const setModalTableBody = (failedItemsData) => {
-        const modal = doc.querySelector(SELECTOR_BULK_OPERATION_FAILED_MODAL);
-        const table = modal.querySelector('.ez-bulk-operation-failed-modal__table');
-        const tableBody = table.querySelector('.ez-bulk-operation-failed-modal__table-body');
+        const modal = doc.querySelector(SELECTOR_MODAL_BULK_ACTION_FAIL);
+        const table = modal.querySelector('.ez-bulk-action-failed-modal__table');
+        const tableBody = table.querySelector('.ez-bulk-action-failed-modal__table-body');
         const tableRowTemplate = table.dataset.tableRowTemplate;
         const fragment = doc.createDocumentFragment();
 
@@ -95,11 +93,11 @@
             node.removeChild(node.firstChild);
         }
     };
-    const showBulkOperationFailedModal = (tableTitle, failedItemsData) => {
+    const showBulkActionFailedModal = (tableTitle, failedItemsData) => {
         setModalTableBody(failedItemsData);
         setModalTableTitle(tableTitle);
 
-        $(SELECTOR_BULK_OPERATION_FAILED_MODAL).modal('show');
+        $(SELECTOR_MODAL_BULK_ACTION_FAIL).modal('show');
     };
 
     listContainers.forEach((container) => {
@@ -136,7 +134,7 @@
                 contentTypesMap,
                 totalCount: subItemsList.ChildrenCount,
                 udwConfigBulkMoveItems,
-                onShowBulkOperationFailedModal: showBulkOperationFailedModal,
+                showBulkActionFailedModal,
             }),
             container
         );

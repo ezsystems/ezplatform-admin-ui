@@ -1,18 +1,18 @@
 .ez-modal--send-to-trash {
     .modal-dialog {
         background-color: $ez-ground-base-medium;
-        border-radius: .25rem;
+        border-radius: calculateRem(4px);
     }
 
     .modal-header {
         border-bottom: none;
-        padding: 15px 15px 0 15px;
+        padding: calculateRem(15px) calculateRem(15px) 0 calculateRem(15px);
         position: relative;
-        min-height: 2.5rem;
+        min-height: calculateRem(40px);
     }
 
     .modal-body {
-        padding: 15px 30px;
+        padding: calculateRem(15px) calculateRem(30px);
 
         .ez-modal-body__main,
         .ez-modal-body__explanation {
@@ -34,7 +34,7 @@
             }
 
             .ez-modal-body__explanation {
-                font-size: .9375rem;
+                font-size: calculateRem(15px);
             }
         }
     }
@@ -62,32 +62,32 @@
         background: $ez-color-base-pale;
 
         .close {
-            padding-top: 1.25rem;
+            padding-top: calculateRem(20px);
         }
     }
 
     .modal-body {
-        padding: 2rem;
+        padding: calculateRem(32px);
     }
 
     &__label {
-        font-size: 14px;
+        font-size: calculateRem(14px);
         font-weight: 700;
         display: block;
-        margin-top: 1.5rem;
+        margin-top: calculateRem(24px);
 
         @include label-required();
     }
 
     &__info-text {
-        font-size: 14px;
+        font-size: calculateRem(14px);
     }
 }
 
 .ez-modal--select-modified-range,
 .ez-modal--select-created-range {
     .modal-dialog {
-        border-radius: .25rem;
+        border-radius: calculateRem(4px);
         background-color: $ez-ground-base-medium;
     }
 
@@ -96,21 +96,21 @@
         border-bottom: none;
 
         .modal-title {
-            font-size: 1.5rem;
+            font-size: calculateRem(24px);
         }
 
         .close {
-            margin-top: -.5625rem;
+            margin-top: calculateRem(-9px);
         }
     }
 
     .modal-body {
         display: flex;
-        padding: 2rem;
+        padding: calculateRem(32px);
         justify-content: space-between;
     }
-    
-    .modal-footer  {
+
+    .modal-footer {
         border-top: none;
         justify-content: center;
     }
@@ -122,21 +122,21 @@
         border-bottom: none;
 
         .modal-title {
-            font-size: 1.5rem;
+            font-size: calculateRem(24px);
         }
 
         .close {
-            margin-top: -.5625rem;
+            margin-top: calculateRem(-9px);
         }
     }
 
     .modal-body {
         padding: 2rem;
         background-color: $ez-ground-base-medium;
-        border-radius: 0 0 .25rem .25rem;
+        border-radius: 0 0 calculateRem(4px) calculateRem(4px);
 
         .ez-modal-body__main {
-            margin-bottom: 1.5rem;
+            margin-bottom: calculateRem(24px);
 
             .ez-modal-body__main-content {
                 margin-bottom: 0;
@@ -150,6 +150,7 @@
     }
 }
 
+.ez-modal--bulk-action-failed,
 .ez-modal--trash-with-asset,
 .ez-modal--trash-container {
     .modal-dialog {
@@ -193,7 +194,7 @@
         }
     }
 
-    .modal-footer  {
+    .modal-footer {
         justify-content: center;
     }
 }

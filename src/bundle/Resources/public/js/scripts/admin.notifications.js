@@ -3,7 +3,7 @@
     const notifications = JSON.parse(notificationsContainer.dataset.notifications);
     const template = notificationsContainer.dataset.template;
     const addNotification = ({ detail }) => {
-        const { callback, label, message } = detail;
+        const { onShow, label, message } = detail;
         // @TODO: Unify 'error' and 'danger' label in 3.0.
         const configKey = label === 'danger' ? 'error' : label;
         const config = eZ.adminUiConfig.notifications[configKey];
@@ -21,8 +21,8 @@
             global.setTimeout(() => $(notificationNode).alert('close'), timeout);
         }
 
-        if (typeof callback === 'function') {
-            callback(notificationNode);
+        if (typeof onShow === 'function') {
+            onShow(notificationNode);
         }
     };
 
