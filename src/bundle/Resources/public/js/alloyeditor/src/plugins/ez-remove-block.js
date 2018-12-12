@@ -59,32 +59,44 @@
             }
         },
 
-        exec: function(editor, data) {
-            let toRemove = editor.widgets.focused ? editor.widgets.focused.wrapper : editor.elementPath().block;
-            let newFocus;
+        getElementToRemove(editor) {
+            const toRemove = editor.widgets.focused ? editor.widgets.focused.wrapper : editor.elementPath().block;
 
-            if (toRemove.is('li')) {
-                toRemove = toRemove.getParent();
+            return toRemove.is('li') ? toRemove.getParent() : toRemove;
+        },
+
+        getElementToFocus(elementToRemove) {
+            let elementToFocus = elementToRemove.getNext();
+
+            if (!elementToFocus || elementToFocus.type === CKEDITOR.NODE_TEXT || elementToFocus.hasAttribute('data-cke-temp')) {
+                elementToFocus = elementToRemove.getPrevious();
             }
 
-            newFocus = toRemove.getNext();
-
-            if (!newFocus || newFocus.type === CKEDITOR.NODE_TEXT || newFocus.hasAttribute('data-cke-temp')) {
-                // the data-cke-temp element is added by the Widget plugin for
-                // internal purposes but it exposes no API to handle it, so we
-                // are forced to manually check if newFocus is this element
-                // see https://jira.ez.no/browse/EZP-26016
-                newFocus = toRemove.getPrevious();
+            if (elementToFocus && elementToFocus.type === CKEDITOR.NODE_TEXT) {
+                elementToFocus = elementToFocus.getParent();
             }
 
-            if (newFocus && newFocus.type === CKEDITOR.NODE_TEXT) {
-                newFocus = newFocus.getParent();
+            if (!elementToFocus) {
+                elementToFocus = elementToRemove.getParent();
             }
 
-            toRemove.remove();
+            return elementToFocus;
+        },
 
-            if (newFocus) {
-                this.changeFocus(editor, newFocus);
+        exec: function(editor) {
+            const elementToRemove = this.getElementToRemove(editor);
+            let elementToFocus = this.getElementToFocus(elementToRemove);
+
+            elementToRemove.remove();
+
+            if (elementToFocus) {
+                if (elementToFocus.hasClass('ez-data-source__richtext')) {
+                    elementToFocus = new CKEDITOR.dom.element('p');
+
+                    editor.insertElement(elementToFocus);
+                }
+
+                this.changeFocus(editor, elementToFocus);
             }
         },
     };
