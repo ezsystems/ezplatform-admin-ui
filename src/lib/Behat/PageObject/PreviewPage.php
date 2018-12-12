@@ -12,4 +12,6 @@ abstract class PreviewPage extends Page
     {
         $this->pageTitle = $title;
     }
+
+    abstract public function getDefaultPreviewData(): ?array;
 }
