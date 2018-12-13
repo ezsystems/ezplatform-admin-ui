@@ -37,4 +37,9 @@
             color: $ez-white;
         }
     }
+
+    a.ez-notification-btn {
+        cursor: pointer;
+        color: $ez-color-hyperlink;
+    }
 }
