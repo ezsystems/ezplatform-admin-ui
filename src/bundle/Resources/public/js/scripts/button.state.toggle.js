@@ -3,9 +3,14 @@
 
     toggleForms.forEach((toggleForm) => {
         const checkboxes = [...toggleForm.querySelectorAll('.ez-table__cell.ez-table__cell--has-checkbox input[type="checkbox"]')];
+        const buttonRemove = doc.querySelector(toggleForm.dataset.toggleButtonId);
+
+        if (!buttonRemove) {
+            return;
+        }
+
         const toggleButtonState = () => {
             const isAnythingSelected = checkboxes.some((el) => el.checked);
-            const buttonRemove = doc.querySelector(toggleForm.dataset.toggleButtonId);
 
             buttonRemove.disabled = !isAnythingSelected;
         };
