@@ -74,17 +74,18 @@ class UserPasswordChangeController extends Controller
      */
     public function userPasswordChangeAction(Request $request): Response
     {
-        $form = $this->formFactory->changeUserPassword();
+        /** @var \eZ\Publish\API\Repository\Values\User\User $user */
+        $user = $this->tokenStorage->getToken()->getUser()->getAPIUser();
+
+        $form = $this->formFactory->changeUserPassword(null, null, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
             try {
-                $newPassword = $data->getNewPassword();
                 $userUpdateStruct = $this->userService->newUserUpdateStruct();
-                $userUpdateStruct->password = $newPassword;
-                $user = $this->tokenStorage->getToken()->getUser()->getAPIUser();
+                $userUpdateStruct->password = $data->getNewPassword();
 
                 $this->userService->updateUser($user, $userUpdateStruct);
 
