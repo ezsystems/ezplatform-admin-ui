@@ -1,5 +1,7 @@
 import embedBaseDefinition from '../widgets/ez-embed-base';
 
+const ZERO_WIDTH_SPACE = '&#8203;';
+
 (function(global) {
     if (CKEDITOR.plugins.get('ezembed') && CKEDITOR.plugins.get('ezembedinline')) {
         return;
@@ -58,6 +60,7 @@ import embedBaseDefinition from '../widgets/ez-embed-base';
                 },
 
                 insertWrapper: function(wrapper) {
+                    this.editor.insertHtml(ZERO_WIDTH_SPACE);
                     this.editor.insertElement(wrapper);
                 },
 
