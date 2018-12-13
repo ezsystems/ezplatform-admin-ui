@@ -1,5 +1,6 @@
 (function(global, doc) {
     const eZ = (global.eZ = global.eZ || {});
+    const SELECTOR_ERROR_CONTAINER = '.ez-field-edit__error';
 
     eZ.BaseFieldValidator = class BaseFieldValidator {
         constructor(config) {
@@ -155,7 +156,7 @@
         toggleErrorMessage(validationResult, config, input) {
             const container = this.getFieldTypeContainer(input.closest(this.fieldSelector));
             const nodes = this.findErrorContainers(container, input, config.errorNodeSelectors);
-            const existingErrorSelectors = config.errorNodeSelectors.map((selector) => selector + ' .ez-field-edit__error');
+            const existingErrorSelectors = config.errorNodeSelectors.map((selector) => `${selector} .ez-field-edit__error`);
             const existingErrorNodes = this.findExistingErrorNodes(container, input, existingErrorSelectors);
 
             existingErrorNodes.forEach((el) => el.remove());
@@ -164,6 +165,7 @@
                 nodes.forEach((el) => {
                     const errorNode = this.createErrorNode(validationResult.errorMessage);
 
+                    el.querySelectorAll(SELECTOR_ERROR_CONTAINER).forEach((el) => el.remove());
                     el.append(errorNode);
                 });
             }
