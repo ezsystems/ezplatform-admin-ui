@@ -1,3 +1,7 @@
+{% if form_content_type_edit is defined %}
+    {% form_theme form_content_type_edit '@ezdesign/form_fields.html.twig' %}
+{% endif %}
+
 <div class="row align-items-stretch ez-main-row">
     <div class="col-sm-11 px-0 pb-4">
         <div class="ez-header">

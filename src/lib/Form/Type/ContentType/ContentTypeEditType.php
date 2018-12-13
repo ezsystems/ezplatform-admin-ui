@@ -83,6 +83,7 @@ class ContentTypeEditType extends AbstractType
                 'add',
                 SubmitType::class,
                 [
+                    'attr' => ['hidden' => true],
                     'label' => /** @Desc("Create") */ 'content_translation_add_form.add',
                 ]
             );
