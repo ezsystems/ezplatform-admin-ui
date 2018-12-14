@@ -31,9 +31,7 @@ const embedBaseDefinition = {
     insert: function() {
         const element = CKEDITOR.dom.element.createFromHtml(this.template.output(this.defaults));
         const wrapper = this.editor.widgets.wrapElement(element, this.name);
-        const temp = new CKEDITOR.dom.documentFragment(wrapper.getDocument());
 
-        temp.append(wrapper);
         this.editor.widgets.initOn(element, this.name);
 
         this.insertWrapper(wrapper);
