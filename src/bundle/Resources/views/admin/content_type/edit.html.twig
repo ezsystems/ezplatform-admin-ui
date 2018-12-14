@@ -23,7 +23,11 @@
 
 {% block form %}
     {{ form_start(form) }}
+    {% set language_code = language_code|default(content_type.mainLanguageCode) %}
 
+    {% if language_code != content_type.mainLanguageCode %}
+        {% include '@admin/admin/content_type/parts/nontranslatable_fields_disabled.html.twig' %}
+    {% endif %}
     <section class="container mt-4 px-5">
         <div class="card ez-card">
             <div class="ez-card__header ez-card__header--secondary">
@@ -72,7 +76,6 @@
             {% include '@ezdesign/admin/content_type/delete_confirmation_modal.html.twig' with {'form': form} %}
             
             <div class="card-body">
-                {% set language_code = language_code|default(content_type.mainLanguageCode) %}
                 {% for field_definition in form.fieldDefinitionsData %}
                     {% set value = field_definition.vars.value %}
 

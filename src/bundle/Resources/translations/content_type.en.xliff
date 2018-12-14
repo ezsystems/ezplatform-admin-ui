@@ -86,6 +86,11 @@
         <target state="new">Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'</target>
         <note>key: content_type.edit.error.already_exists</note>
       </trans-unit>
+      <trans-unit id="f0338ef34826caa021c41ff85413e48601af30b7" resname="content_type.edit.select_language">
+        <source>Select language</source>
+        <target state="new">Select language</target>
+        <note>key: content_type.edit.select_language</note>
+      </trans-unit>
       <trans-unit id="9eb89a2f51954babc5ff51f9060cbcda91dcf408" resname="content_type.field_definitions.modal.message">
         <source>Do you want to delete selected field definitions?</source>
         <target state="new">Do you want to delete selected field definitions?</target>
@@ -215,6 +220,11 @@
         <source>Global properties</source>
         <target state="new">Global properties</target>
         <note>key: content_type.view.edit.global_properties</note>
+      </trans-unit>
+      <trans-unit id="36fb0205d165f72c996205435b5a06ba42695bb6" resname="content_type.view.edit.notranslatable_fields_disabled">
+        <source>Some of the fields are disabled when translating a Content Type. To modify them, please edit the Content Type in the main language</source>
+        <target state="new">Some of the fields are disabled when translating a Content Type. To modify them, please edit the Content Type in the main language</target>
+        <note>key: content_type.view.edit.notranslatable_fields_disabled</note>
       </trans-unit>
       <trans-unit id="7eee653a60490713df6bcf4b847853020b79a1ee" resname="content_type.view.edit.title">
         <source>Editing Content Type: %name%</source>
