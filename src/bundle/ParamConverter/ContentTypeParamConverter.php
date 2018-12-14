@@ -44,13 +44,20 @@ class ContentTypeParamConverter implements ParamConverterInterface
         if (!$request->get(self::PARAMETER_CONTENT_TYPE_ID) && !$request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER)) {
             return false;
         }
+        $prioritizedLanguages = $this->siteAccessLanguages;
+        if ($request->get(LanguageParamConverter::PARAMETER_LANGUAGE_CODE)) {
+            array_unshift(
+                $prioritizedLanguages,
+                $request->get(LanguageParamConverter::PARAMETER_LANGUAGE_CODE)
+            );
+        }
 
         if ($request->get(self::PARAMETER_CONTENT_TYPE_ID)) {
             $id = (int)$request->get(self::PARAMETER_CONTENT_TYPE_ID);
-            $contentType = $this->contentTypeService->loadContentType($id, $this->siteAccessLanguages);
+            $contentType = $this->contentTypeService->loadContentType($id, $prioritizedLanguages);
         } elseif ($request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER)) {
             $identifier = $request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER);
-            $contentType = $this->contentTypeService->loadContentTypeByIdentifier($identifier, $this->siteAccessLanguages);
+            $contentType = $this->contentTypeService->loadContentTypeByIdentifier($identifier, $prioritizedLanguages);
         }
 
         if (!$contentType) {
