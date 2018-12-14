@@ -3,8 +3,13 @@
 
     toggleForms.forEach((toggleForm) => {
         const radioInputs = [...toggleForm.querySelectorAll('input[type="radio"]')];
+        const button = doc.querySelector(toggleForm.dataset.toggleButtonId);
+
+        if (!button) {
+            return;
+        }
+
         const toggleButtonState = () => {
-            const button = doc.querySelector(toggleForm.dataset.toggleButtonId);
             const isAnythingSelected = radioInputs.some((el) => el.checked);
 
             button.disabled = !isAnythingSelected;
