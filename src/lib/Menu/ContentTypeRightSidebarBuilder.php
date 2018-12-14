@@ -110,7 +110,7 @@ class ContentTypeRightSidebarBuilder extends AbstractBuilder implements Translat
             'class',
             'update',
             $contentType
-        );
+        ) && $this->permissionResolver->hasAccess('class', 'create') ;
 
         $menu->addChild(
             $this->createMenuItem(

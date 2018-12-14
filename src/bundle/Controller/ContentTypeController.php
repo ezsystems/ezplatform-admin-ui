@@ -596,11 +596,14 @@ class ContentTypeController extends Controller
             ['contentType' => $contentType]
         );
 
+        $canUpdate = $this->isGranted(new Attribute('class', 'update')) &&
+            $this->isGranted(new Attribute('class', 'create'));
+
         return $this->render('@ezdesign/admin/content_type/view.html.twig', [
             'content_type_group' => $group,
             'content_type' => $contentType,
             'field_definitions_by_group' => $fieldDefinitionsByGroup,
-            'can_update' => $this->isGranted(new Attribute('class', 'update')),
+            'can_update' => $canUpdate,
             'languages' => $languages,
             'form_content_type_edit' => $contentTypeEdit->createView(),
         ]);
