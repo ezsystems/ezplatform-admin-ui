@@ -637,6 +637,7 @@ class ContentTypeController extends Controller
                 'toLanguageCode' => $language->languageCode,
             ]),
             'languageCode' => $language->languageCode,
+            'mainLanguageCode' => $contentTypeDraft->mainLanguageCode
         ]);
     }
 
