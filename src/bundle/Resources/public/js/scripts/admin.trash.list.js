@@ -55,9 +55,17 @@
         const isEmptySelection = checkboxes.every((el) => !el.checked);
         const isMissingParent = checkboxes.some((el) => el.checked && parseInt(el.dataset.isParentInTrash, 10) === 1);
 
-        buttonRestore.disabled = isEmptySelection || isMissingParent;
-        buttonDelete.disabled = isEmptySelection;
-        buttonRestoreUnderNewParent.disabled = isEmptySelection;
+        if (buttonRestore) {
+            buttonRestore.disabled = isEmptySelection || isMissingParent;
+        }
+
+        if (buttonDelete) {
+            buttonDelete.disabled = isEmptySelection;
+        }
+
+        if (buttonRestoreUnderNewParent) {
+            buttonRestoreUnderNewParent.disabled = isEmptySelection;
+        }
     };
     const updateTrashForm = (checkboxes) => {
         checkboxes.forEach((checkbox) => {
@@ -71,11 +79,11 @@
         });
     };
     const handleCheckboxChange = (event) => {
-        updateTrashForm([event.target])
+        updateTrashForm([event.target]);
         enableButtons();
-    }; 
+    };
 
     updateTrashForm(checkboxes);
-    enableButtons()
+    enableButtons();
     checkboxes.forEach((checkbox) => checkbox.addEventListener('change', handleCheckboxChange, false));
 })(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
