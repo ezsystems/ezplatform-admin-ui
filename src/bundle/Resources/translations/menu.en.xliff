@@ -81,6 +81,11 @@
         <target state="new">Save</target>
         <note>key: content_edit__sidebar_right__save_draft</note>
       </trans-unit>
+      <trans-unit id="3b59d1cdd9c85ff781a3a442345bb648cc49dd31" resname="content_type__sidebar_right__edit">
+        <source>Edit</source>
+        <target state="new">Edit</target>
+        <note>key: content_type__sidebar_right__edit</note>
+      </trans-unit>
       <trans-unit id="750939fc55f9a3143db99bed66680e8646e029a0" resname="content_type_create__sidebar_right__cancel">
         <source>Discard changes</source>
         <target state="new">Discard changes</target>

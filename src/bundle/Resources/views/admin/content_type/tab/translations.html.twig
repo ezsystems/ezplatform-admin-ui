@@ -1,0 +1,8 @@
+{% block modal_add_translation %}
+    {% include '@ezdesign/admin/content_type/modal_add_translation.html.twig' with {'form': form_translation_add} only %}
+{% endblock %}
+
+{% include '@ezdesign/content/tab/translations/tab.html.twig' with {
+    can_translate : can_translate
+} %}
+

@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 
-use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\User\User;
 use EzSystems\EzPlatformAdminUi\Form\Data\Bookmark\BookmarkRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
@@ -165,9 +164,6 @@ class FormFactory
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    private $contentTypeService;
-
     /**
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
@@ -177,13 +173,11 @@ class FormFactory
     public function __construct(
         FormFactoryInterface $formFactory,
         UrlGeneratorInterface $urlGenerator,
-        TranslatorInterface $translator,
-        ContentTypeService $contentTypeService
+        TranslatorInterface $translator
     ) {
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
         $this->translator = $translator;
-        $this->contentTypeService = $contentTypeService;
     }
 
     /**

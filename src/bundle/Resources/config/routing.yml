@@ -346,17 +346,19 @@ ezplatform.content_type.add:
 
 ezplatform.content_type.edit:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/edit
-    methods: ['GET']
+    methods: ['GET', 'POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentType:edit'
     requirements:
         contentTypeGroupId: \d+
 
 ezplatform.content_type.update:
-    path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/update
+    path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/update/{toLanguageCode}/{fromLanguageCode}
     methods: ['GET', 'POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentType:update'
+        toLanguageCode: ~
+        fromLanguageCode: ~
     requirements:
         contentTypeGroupId: \d+
 
@@ -377,12 +379,25 @@ ezplatform.content_type.bulk_delete:
         contentTypeGroupId: \d+
 
 ezplatform.content_type.view:
-    path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}
+    path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/{languageCode}
     methods: ['GET']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentType:view'
+        languageCode: null
     requirements:
         contentTypeGroupId: \d+
+
+ezplatform.content_type.add_translation:
+    path: /content-type/translation/add
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentType:addTranslation'
+
+ezplatform.content_type.remove_translation:
+    path: /content-type/translation/remove
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentType:removeTranslation'
 
 #
 # Location View
