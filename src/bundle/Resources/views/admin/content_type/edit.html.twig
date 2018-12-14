@@ -26,7 +26,7 @@
     {% set language_code = language_code|default(content_type.mainLanguageCode) %}
 
     {% if language_code != content_type.mainLanguageCode %}
-        {% include '@admin/admin/content_type/parts/nontranslatable_fields_disabled.html.twig' %}
+        {% include '@ezdesign/admin/content_type/parts/nontranslatable_fields_disabled.html.twig' %}
     {% endif %}
     <section class="container mt-4 px-5">
         <div class="card ez-card">

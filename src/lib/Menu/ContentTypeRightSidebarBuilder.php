@@ -8,17 +8,12 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
-use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\SearchService;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use eZ\Publish\API\Repository\UserService;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Content Type View contextual sidebar menu.
@@ -33,49 +28,19 @@ class ContentTypeRightSidebarBuilder extends AbstractBuilder implements Translat
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
-    private $configResolver;
-
-    /** @var \eZ\Publish\API\Repository\UserService */
-    private $userService;
-
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    private $contentTypeService;
-
-    /** @var \eZ\Publish\API\Repository\SearchService */
-    private $searchService;
-
-    /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
-    private $udwExtension;
-
     /**
      * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
-     * @param \eZ\Publish\API\Repository\UserService $userService
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension $udwExtension
      */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
-        PermissionResolver $permissionResolver,
-        ConfigResolverInterface $configResolver,
-        UserService $userService,
-        ContentTypeService $contentTypeService,
-        SearchService $searchService,
-        UniversalDiscoveryExtension $udwExtension
+        PermissionResolver $permissionResolver
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
-        $this->configResolver = $configResolver;
-        $this->userService = $userService;
-        $this->contentTypeService = $contentTypeService;
-        $this->searchService = $searchService;
-        $this->udwExtension = $udwExtension;
     }
 
     /**
