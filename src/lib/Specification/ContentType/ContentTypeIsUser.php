@@ -39,7 +39,7 @@ class ContentTypeIsUser extends AbstractSpecification
     public function isSatisfiedBy($contentType): bool
     {
         if (!$contentType instanceof ContentType) {
-            throw new InvalidArgumentException($contentType, sprintf('Must be instance of %s', ContentType::class));
+            throw new InvalidArgumentException('$contentType', sprintf('Must be instance of %s', ContentType::class));
         }
 
         if (in_array($contentType->identifier, $this->userContentTypeIdentifier, true)) {
