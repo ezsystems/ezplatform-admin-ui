@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function(global, doc) {
     const SELECTOR_REMOVE_AUTHOR = '.ez-btn--remove-author';
     const SELECTOR_AUTHOR = '.ez-data-source__author';
     const SELECTOR_FIELD = '.ez-field-edit--ezauthor';
@@ -62,7 +62,7 @@
          * @memberof EzAuthorValidator
          */
         setIndex(parentNode, template) {
-            return template.replace(/__index__/g, parentNode.querySelectorAll(SELECTOR_AUTHOR).length)
+            return template.replace(/__index__/g, parentNode.querySelectorAll(SELECTOR_AUTHOR).length);
         }
 
         /**
@@ -75,7 +75,7 @@
         updateDisabledState(parentNode) {
             const isEnabled = parentNode.querySelectorAll(SELECTOR_AUTHOR).length > 1;
 
-            [...parentNode.querySelectorAll(SELECTOR_REMOVE_AUTHOR)].forEach(btn => {
+            [...parentNode.querySelectorAll(SELECTOR_REMOVE_AUTHOR)].forEach((btn) => {
                 if (isEnabled) {
                     btn.removeAttribute('disabled');
                 } else {
@@ -130,10 +130,7 @@
          */
         findValidationStateNodes(fieldNode, input, selectors) {
             const authorRow = input.closest(SELECTOR_AUTHOR);
-            const nodes = [
-                fieldNode,
-                authorRow
-            ];
+            const nodes = [fieldNode, authorRow];
 
             return selectors.reduce((total, selector) => total.concat([...authorRow.querySelectorAll(selector)]), nodes);
         }
@@ -150,12 +147,8 @@
          */
         findErrorContainers(fieldNode, input, selectors) {
             const authorRow = input.closest(SELECTOR_AUTHOR);
-            const nodes = [
-                fieldNode,
-                authorRow
-            ];
 
-            return selectors.reduce((total, selector) => total.concat([...authorRow.querySelectorAll(selector)]), nodes);
+            return selectors.reduce((total, selector) => total.concat([...authorRow.querySelectorAll(selector)]), []);
         }
 
         /**
@@ -181,7 +174,7 @@
         init() {
             super.init();
 
-            [...doc.querySelectorAll(this.fieldSelector)].forEach(field => this.updateDisabledState(field));
+            [...doc.querySelectorAll(this.fieldSelector)].forEach((field) => this.updateDisabledState(field));
         }
     }
 
@@ -196,8 +189,7 @@
                 invalidStateSelectors: [
                     SELECTOR_FIELD_NAME,
                     `${SELECTOR_FIELD_NAME} .ez-data-source__input`,
-                    `${SELECTOR_FIELD_NAME} .ez-data-source__label`
-
+                    `${SELECTOR_FIELD_NAME} .ez-data-source__label`,
                 ],
                 errorNodeSelectors: [`${SELECTOR_FIELD_NAME} .ez-data-source__label-wrapper`],
             },
@@ -208,7 +200,7 @@
                 invalidStateSelectors: [
                     SELECTOR_FIELD_EMAIL,
                     `${SELECTOR_FIELD_EMAIL} .ez-data-source__input`,
-                    `${SELECTOR_FIELD_EMAIL} .ez-data-source__label`
+                    `${SELECTOR_FIELD_EMAIL} .ez-data-source__label`,
                 ],
                 errorNodeSelectors: [`${SELECTOR_FIELD_EMAIL} .ez-data-source__label-wrapper`],
             },
@@ -229,7 +221,5 @@
 
     validator.init();
 
-    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-        [...global.eZ.fieldTypeValidators, validator] :
-        [validator];
+    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ? [...global.eZ.fieldTypeValidators, validator] : [validator];
 })(window, document);
