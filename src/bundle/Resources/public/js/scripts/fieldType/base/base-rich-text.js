@@ -170,19 +170,10 @@
                     ',' +
                     ['ezaddcontent', 'ezmoveelement', 'ezremoveblock', 'ezembed', 'ezembedinline', 'ezfocusblock', 'ezcustomtag'].join(','),
             });
-
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ez-data-source').querySelector('textarea').value);
             const section = wrapper.childNodes[0];
-
-            if (!section.hasChildNodes()) {
-                section.appendChild(document.createElement('p'));
-            }
-
             const nativeEditor = alloyEditor.get('nativeEditor');
-
-            nativeEditor.setData(section.innerHTML);
-
-            nativeEditor.on('change', () => {
+            const saveRichText = () => {
                 const data = alloyEditor.get('nativeEditor').getData();
                 const doc = document.createDocumentFragment();
                 const root = document.createElement('div');
@@ -200,7 +191,17 @@
                     this.xhtmlNamespace,
                     this.ezNamespace
                 );
-            });
+            };
+
+            if (!section.hasChildNodes()) {
+                section.appendChild(document.createElement('p'));
+            }
+
+            nativeEditor.setData(section.innerHTML);
+
+            nativeEditor.on('blur', saveRichText);
+            nativeEditor.on('change', saveRichText);
+            nativeEditor.on('editorInteraction', saveRichText);
 
             return alloyEditor;
         }
