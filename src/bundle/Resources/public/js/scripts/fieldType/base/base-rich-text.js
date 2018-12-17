@@ -182,7 +182,7 @@
 
             nativeEditor.setData(section.innerHTML);
 
-            nativeEditor.on('blur', () => {
+            nativeEditor.on('change', () => {
                 const data = alloyEditor.get('nativeEditor').getData();
                 const doc = document.createDocumentFragment();
                 const root = document.createElement('div');
