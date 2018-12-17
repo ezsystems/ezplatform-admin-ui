@@ -170,17 +170,10 @@
                     ',' +
                     ['ezaddcontent', 'ezmoveelement', 'ezremoveblock', 'ezembed', 'ezembedinline', 'ezfocusblock', 'ezcustomtag'].join(','),
             });
-
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ez-data-source').querySelector('textarea').value);
             const section = wrapper.childNodes[0];
-
-            if (!section.hasChildNodes()) {
-                section.appendChild(document.createElement('p'));
-            }
-
-            alloyEditor.get('nativeEditor').setData(section.innerHTML);
-
-            container.addEventListener('blur', (event) => {
+            const nativeEditor = alloyEditor.get('nativeEditor');
+            const saveRichText = () => {
                 const data = alloyEditor.get('nativeEditor').getData();
                 const doc = document.createDocumentFragment();
                 const root = document.createElement('div');
@@ -194,11 +187,21 @@
                 ].forEach(this.emptyEmbed);
                 [...doc.querySelectorAll('[data-ezelement="eztemplate"]:not([data-eztype="style"])')].forEach(this.clearCustomTag);
 
-                event.target.closest('.ez-data-source').querySelector('textarea').value = this.xhtmlify(root.innerHTML).replace(
+                container.closest('.ez-data-source').querySelector('textarea').value = this.xhtmlify(root.innerHTML).replace(
                     this.xhtmlNamespace,
                     this.ezNamespace
                 );
-            });
+            };
+
+            if (!section.hasChildNodes()) {
+                section.appendChild(document.createElement('p'));
+            }
+
+            nativeEditor.setData(section.innerHTML);
+
+            nativeEditor.on('blur', saveRichText);
+            nativeEditor.on('change', saveRichText);
+            nativeEditor.on('editorInteraction', saveRichText);
 
             return alloyEditor;
         }
