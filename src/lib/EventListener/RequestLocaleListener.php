@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class RequestLocaleListener implements EventSubscriberInterface
 {
@@ -23,16 +24,22 @@ class RequestLocaleListener implements EventSubscriberInterface
     /** @var array */
     private $availableTranslations;
 
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    private $translator;
+
     /**
      * @param array $siteAccessGroups
      * @param array $availableTranslations
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
      */
     public function __construct(
         array $siteAccessGroups,
-        array $availableTranslations
+        array $availableTranslations,
+        TranslatorInterface $translator
     ) {
         $this->siteAccessGroups = $siteAccessGroups;
         $this->availableTranslations = $availableTranslations;
+        $this->translator = $translator;
     }
 
     /**
@@ -59,19 +66,20 @@ class RequestLocaleListener implements EventSubscriberInterface
         }
 
         $preferableLocales = $this->getPreferredLocales($request);
+        $locale = null;
 
-        $locale = false;
         foreach ($preferableLocales as $preferableLocale) {
-            if (in_array($preferableLocale, $this->availableTranslations)) {
+            if (\in_array($preferableLocale, $this->availableTranslations)) {
                 $locale = $preferableLocale;
                 break;
             }
         }
-
-        if (false !== $locale) {
-            $request->setLocale($locale);
-            $request->attributes->set('_locale', $locale);
-        }
+        $locale = $locale ?? reset($preferableLocales);
+        $request->setLocale($locale);
+        $request->attributes->set('_locale', $locale);
+        // Set of the current locale on the translator service is needed because RequestLocaleListener has lower
+        // priority than LocaleListener and messages are not translated on login, forgot and reset password pages.
+        $this->translator->setLocale($locale);
     }
 
     /**
