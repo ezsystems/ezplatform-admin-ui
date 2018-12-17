@@ -178,9 +178,11 @@
                 section.appendChild(document.createElement('p'));
             }
 
-            alloyEditor.get('nativeEditor').setData(section.innerHTML);
+            const nativeEditor = alloyEditor.get('nativeEditor');
 
-            container.addEventListener('blur', (event) => {
+            nativeEditor.setData(section.innerHTML);
+
+            nativeEditor.on('blur', () => {
                 const data = alloyEditor.get('nativeEditor').getData();
                 const doc = document.createDocumentFragment();
                 const root = document.createElement('div');
@@ -194,7 +196,7 @@
                 ].forEach(this.emptyEmbed);
                 [...doc.querySelectorAll('[data-ezelement="eztemplate"]:not([data-eztype="style"])')].forEach(this.clearCustomTag);
 
-                event.target.closest('.ez-data-source').querySelector('textarea').value = this.xhtmlify(root.innerHTML).replace(
+                container.closest('.ez-data-source').querySelector('textarea').value = this.xhtmlify(root.innerHTML).replace(
                     this.xhtmlNamespace,
                     this.ezNamespace
                 );
