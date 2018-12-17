@@ -7,6 +7,8 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
     constructor(props) {
         super(props);
 
+        this.widget = this.getWidget();
+
         this.state = {
             values: props.values,
         };
@@ -182,7 +184,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
             this.execCommand();
         }
 
-        const widget = this.getWidget();
+        const widget = this.getWidget() || this.widget;
         const configValues = Object.assign({}, this.state.values);
 
         widget.setFocused(true);
