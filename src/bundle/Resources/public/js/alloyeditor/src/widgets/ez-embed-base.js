@@ -259,10 +259,6 @@ const embedBaseDefinition = {
         elementNode.innerHTML = template;
 
         this.setWidgetContent(elementNode);
-
-        if (this.element.hasClass(IS_LINKED_CLASS)) {
-            this.renderLinkedIcon();
-        }
     },
 
     /**
@@ -277,6 +273,10 @@ const embedBaseDefinition = {
         elementNode.setAttribute('src', imageUri);
 
         this.setWidgetContent(elementNode);
+
+        if (this.element.hasClass(IS_LINKED_CLASS)) {
+            this.renderLinkedIcon();
+        }
     },
 
     /**
