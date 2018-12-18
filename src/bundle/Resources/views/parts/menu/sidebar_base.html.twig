@@ -36,7 +36,7 @@
 {% block label %}
     {% set icon_path = null %}
     {% set icon_class = (item_class|default('ez-icon ') ~ item.extras.icon_class|default(''))|trim %}
-    {% if item.extras.icon_path is defined and item.extras.icon_path is not empty %}
+    {% if item.extras.icon_path|default %}
         {% set icon_path = item.extras.icon_path %}
     {% elseif item.extras.icon is defined and item.extras.icon is not empty %}
         {% set icon_path = asset('bundles/ezplatformadminui/img/ez-icons.svg') ~ '#' ~ item.extras.icon %}
