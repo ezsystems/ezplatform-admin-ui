@@ -5,17 +5,7 @@ export default class EzListConfig extends EzConfigBase {
         super(config);
 
         this.name = 'list';
-        this.buttons = ['ezmoveup', 'ezmovedown', this.getStyles(config.customStyles), 'ezembedinline', 'ezblockremove'];
-    }
-
-    getStyles(customStyles = []) {
-        return {
-            name: 'styles',
-            cfg: {
-                showRemoveStylesItem: true,
-                styles: [...customStyles],
-            },
-        };
+        this.buttons = ['ezmoveup', 'ezmovedown', 'ezembedinline', 'ezblockremove'];
     }
 
     /**
