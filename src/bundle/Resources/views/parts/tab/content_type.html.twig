@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
+    <div class="col-sm-1 pt-4 px-0 bg-secondary ez-context-menu">
         <div class="ez-sticky-container">
             {% set content_type_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type.sidebar_right', [], {'content_type': content_type}) %}
             {{ knp_menu_render(content_type_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}

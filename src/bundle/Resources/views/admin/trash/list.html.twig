@@ -135,7 +135,7 @@
             </section>
         </div>
         {% if can_cleantrash and form_trash_item_restore.trash_items|length > 0 %}
-            <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
+            <div class="col-sm-1 pt-4 px-0 bg-secondary ez-context-menu">
                 <div class="ez-sticky-container">
                     {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
                     {{ knp_menu_render(sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}

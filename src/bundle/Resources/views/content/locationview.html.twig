@@ -66,7 +66,7 @@
                     <div class="container px-5">
                         <section class="ez-fieldgroup">
                             <h2 class="ez-fieldgroup__name">{{ 'content.view.subitems'|trans|desc('Sub-items') }}</h2>
-                            <div class="ez-sil" 
+                            <div class="ez-sil"
                                 data-location="{{ location.id }}"
                                 data-mfu-create-permissions-config="{{ subitems_module.content_create_permissions_for_mfu|json_encode() }}"
                                 data-items="{{ subitems_module.items }}"
@@ -80,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
+        <div class="col-sm-1 pt-4 px-0 bg-secondary ez-context-menu">
             <div class="ez-sticky-container">
                 {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': contentType}) %}
                 {{ knp_menu_render(content_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
