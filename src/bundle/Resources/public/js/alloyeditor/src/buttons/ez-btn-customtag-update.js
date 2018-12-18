@@ -9,6 +9,8 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
 
         this.widget = this.getWidget();
 
+        props.editor.get('nativeEditor').lockSelection();
+
         this.state = {
             values: props.values,
         };
@@ -180,7 +182,11 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * @method saveCustomTag
      */
     saveCustomTag() {
-        if (this.props.createNewTag) {
+        const { createNewTag, editor } = this.props;
+
+        editor.get('nativeEditor').unlockSelection(true);
+
+        if (createNewTag) {
             this.execCommand();
         }
 
