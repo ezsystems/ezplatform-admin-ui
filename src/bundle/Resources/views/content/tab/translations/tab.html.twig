@@ -7,7 +7,7 @@
 <section>
     {% if can_translate %}
         {{ form_start(form_translation_remove, {
-            'action': path('ezplatform.content_type.remove_translation'),
+            'action': form_translation_remove_action|default(path('ezplatform.translation.remove')),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations' }
         }) }}
     {% endif %}
