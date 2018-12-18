@@ -4,25 +4,45 @@ import PropTypes from 'prop-types';
 import EzWidgetButton from './ez-widgetbutton';
 
 export default class EzEmbedDiscoverContentButton extends EzWidgetButton {
+    constructor(props) {
+        super(props);
+
+        this.confirmHandler = this.confirmHandler.bind(this);
+    }
+
+    confirmHandler() {
+        const { editor, udwContentDiscoveredMethod } = this.props;
+
+        editor.get('nativeEditor').unlockSelection(true);
+
+        this[udwContentDiscoveredMethod].apply(this, arguments);
+    }
+
+    cancelHandler(udwContainer) {
+        this.props.editor.get('nativeEditor').unlockSelection(true);
+
+        ReactDOM.unmountComponentAtNode(udwContainer);
+    }
+
     /**
      * Triggers the UDW to choose the content to embed.
      *
      * @method chooseContent
      */
     chooseContent() {
-        const selectable = this.props.udwIsSelectableMethod ? this[this.props.udwIsSelectableMethod] : (item, callback) => callback(true);
+        const { udwIsSelectableMethod, udwConfigName, udwTitle, editor } = this.props;
+        const selectable = udwIsSelectableMethod ? this[udwIsSelectableMethod] : (item, callback) => callback(true);
         const udwContainer = document.querySelector('#react-udw');
         const token = document.querySelector('meta[name="CSRF-Token"]').content;
         const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
         const languageCode = document.querySelector('meta[name="LanguageCode"]').content;
-        const udwConfigName = this.props.udwConfigName;
         const config = JSON.parse(document.querySelector(`[data-udw-config-name="${udwConfigName}"]`).dataset.udwConfig);
         const alloyEditorCallbacks = eZ.ezAlloyEditor.callbacks;
         const mergedConfig = Object.assign(
             {
-                onConfirm: this[this.props.udwContentDiscoveredMethod].bind(this),
-                onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
-                title: this.props.udwTitle,
+                onConfirm: this.confirmHandler,
+                onCancel: this.cancelHandler.bind(this, udwContainer),
+                title: udwTitle,
                 multiple: false,
                 startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                 restInfo: { token, siteaccess },
@@ -31,6 +51,8 @@ export default class EzEmbedDiscoverContentButton extends EzWidgetButton {
             },
             config
         );
+
+        editor.get('nativeEditor').lockSelection();
 
         if (alloyEditorCallbacks && typeof alloyEditorCallbacks.openUdw === 'function') {
             alloyEditorCallbacks.openUdw(mergedConfig);
