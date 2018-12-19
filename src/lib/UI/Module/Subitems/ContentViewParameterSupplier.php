@@ -26,6 +26,7 @@ use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsLi
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsList;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsRow;
 use eZ\Publish\Core\REST\Common\Output\Generator\Json as JsonOutputGenerator;
+use EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService;
 
 /**
  * @internal
@@ -59,8 +60,8 @@ class ContentViewParameterSupplier
     /** @var \EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings */
     private $contentTypeMappings;
 
-    /** @var int */
-    private $subitemsLimit;
+    /** @var \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService */
+    private $userSettingService;
 
     /**
      * @param \eZ\Publish\Core\REST\Common\Output\Visitor $outputVisitor
@@ -72,7 +73,7 @@ class ContentViewParameterSupplier
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings $contentTypeMappings
-     * @param int $subitemsLimit
+     * @param \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService $userSettingService
      */
     public function __construct(
         Visitor $outputVisitor,
@@ -84,7 +85,7 @@ class ContentViewParameterSupplier
         ContentTypeService $contentTypeService,
         PermissionResolver $permissionResolver,
         ContentTypeMappings $contentTypeMappings,
-        int $subitemsLimit
+        UserSettingService $userSettingService
     ) {
         $this->outputVisitor = $outputVisitor;
         $this->outputGenerator = $outputGenerator;
@@ -95,7 +96,7 @@ class ContentViewParameterSupplier
         $this->contentTypeService = $contentTypeService;
         $this->permissionResolver = $permissionResolver;
         $this->contentTypeMappings = $contentTypeMappings;
-        $this->subitemsLimit = $subitemsLimit;
+        $this->userSettingService = $userSettingService;
     }
 
     /**
@@ -122,7 +123,9 @@ class ContentViewParameterSupplier
         $location = $view->getLocation();
         $childrenCount = $this->locationService->getLocationChildCount($location);
 
-        $locationChildren = $this->locationService->loadLocationChildren($location, 0, $this->subitemsLimit);
+        $subitemsLimit = (int)$this->userSettingService->getUserSetting('subitems_limit')->value;
+
+        $locationChildren = $this->locationService->loadLocationChildren($location, 0, $subitemsLimit);
         foreach ($locationChildren->locations as $locationChild) {
             $contentType = $locationChild->getContent()->getContentType();
 
@@ -143,7 +146,7 @@ class ContentViewParameterSupplier
             'subitems_module' => [
                 'items' => $subitemsListJson,
                 /* @deprecated since version 2.2, to be removed in 3.0 */
-                'limit' => $this->subitemsLimit,
+                'limit' => $subitemsLimit,
                 'content_type_info_list' => $contentTypeInfoListJson,
                 'content_create_permissions_for_mfu' => $this->getContentCreatePermissionsForMFU($view->getLocation(), $view->getContent()),
             ],
