@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\EventListener;
 
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
+use EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -27,19 +28,25 @@ class RequestLocaleListener implements EventSubscriberInterface
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider */
+    private $userLanguagePreferenceProvider;
+
     /**
      * @param array $siteAccessGroups
      * @param array $availableTranslations
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider $userLanguagePreferenceProvider
      */
     public function __construct(
         array $siteAccessGroups,
         array $availableTranslations,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        UserLanguagePreferenceProvider $userLanguagePreferenceProvider
     ) {
         $this->siteAccessGroups = $siteAccessGroups;
         $this->availableTranslations = $availableTranslations;
         $this->translator = $translator;
+        $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
     }
 
     /**
@@ -65,7 +72,7 @@ class RequestLocaleListener implements EventSubscriberInterface
             return;
         }
 
-        $preferableLocales = $this->getPreferredLocales($request);
+        $preferableLocales = $this->userLanguagePreferenceProvider->getPreferredLocales($request);
         $locale = null;
 
         foreach ($preferableLocales as $preferableLocale) {
@@ -92,28 +99,5 @@ class RequestLocaleListener implements EventSubscriberInterface
     protected function isAdminSiteAccess(Request $request): bool
     {
         return (new IsAdmin($this->siteAccessGroups))->isSatisfiedBy($request->attributes->get('siteaccess'));
-    }
-
-    /**
-     * Return array of preferred user locales.
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return array
-     */
-    protected function getPreferredLocales(Request $request): array
-    {
-        $preferredLocales = $request->headers->get('Accept-Language') ?? '';
-        $preferredLocales = array_reduce(
-            explode(',', $preferredLocales),
-            function ($res, $el) {
-                [$l, $q] = array_merge(explode(';q=', $el), [1]);
-                $res[$l] = (float) $q;
-
-                return $res;
-            }, []);
-        arsort($preferredLocales);
-
-        return array_keys($preferredLocales);
     }
 }
