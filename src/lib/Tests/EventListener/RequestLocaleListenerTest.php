@@ -11,7 +11,9 @@ namespace EzSystems\EzPlatformAdminUi\Tests\EventListener;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\EventListener\RequestLocaleListener;
+use EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -64,8 +66,12 @@ class RequestLocaleListenerTest extends TestCase
             $request,
             HttpKernelInterface::MASTER_REQUEST
         );
-
-        $requestLocaleListener = new RequestLocaleListener(['admin_group' => [self::ADMIN_SITEACCESS]], [], $translator);
+        $requestLocaleListener = new RequestLocaleListener(
+            ['admin_group' => [self::ADMIN_SITEACCESS]],
+            [],
+            $translator,
+            $this->buildUserLanguagePreferenceProvider()
+        );
 
         $requestLocaleListener->onKernelRequest($event);
     }
@@ -84,7 +90,12 @@ class RequestLocaleListenerTest extends TestCase
             HttpKernelInterface::SUB_REQUEST
         );
 
-        $requestLocaleListener = new RequestLocaleListener([], [], $translator);
+        $requestLocaleListener = new RequestLocaleListener(
+            [],
+            [],
+            $translator,
+            $this->buildUserLanguagePreferenceProvider()
+        );
 
         $requestLocaleListener->onKernelRequest($event);
     }
@@ -114,7 +125,8 @@ class RequestLocaleListenerTest extends TestCase
         $requestLocaleListener = new RequestLocaleListener(
             ['admin_group' => [self::ADMIN_SITEACCESS]],
             $availableTranslations,
-            $this->translator
+            $this->translator,
+            $this->buildUserLanguagePreferenceProvider()
         );
 
         $requestLocaleListener->onKernelRequest($event);
@@ -144,7 +156,8 @@ class RequestLocaleListenerTest extends TestCase
         $requestLocaleListener = new RequestLocaleListener(
             ['admin_group' => [self::ADMIN_SITEACCESS]],
             $availableTranslations,
-            $this->translator
+            $this->translator,
+            $this->buildUserLanguagePreferenceProvider()
         );
 
         $requestLocaleListener->onKernelRequest($event);
@@ -152,7 +165,12 @@ class RequestLocaleListenerTest extends TestCase
 
     public function testSubscribedEvents(): void
     {
-        $requestLocaleListener = new RequestLocaleListener(['admin_group' => [self::ADMIN_SITEACCESS]], [], $this->translator);
+        $requestLocaleListener = new RequestLocaleListener(
+            ['admin_group' => [self::ADMIN_SITEACCESS]],
+            [],
+            $this->translator,
+            $this->buildUserLanguagePreferenceProvider()
+        );
 
         $this->assertSame([KernelEvents::REQUEST => ['onKernelRequest', 6]], $requestLocaleListener::getSubscribedEvents());
     }
@@ -170,7 +188,12 @@ class RequestLocaleListenerTest extends TestCase
             HttpKernelInterface::MASTER_REQUEST
         );
 
-        $requestLocaleListener = new RequestLocaleListener(['admin_group' => [self::ADMIN_SITEACCESS]], [], $this->translator);
+        $requestLocaleListener = new RequestLocaleListener(
+            ['admin_group' => [self::ADMIN_SITEACCESS]],
+            [],
+            $this->translator,
+            $this->buildUserLanguagePreferenceProvider()
+        );
 
         $requestLocaleListener->onKernelRequest($event);
     }
@@ -202,5 +225,16 @@ class RequestLocaleListenerTest extends TestCase
             ->method('setLocale');
 
         return $request;
+    }
+
+    /**
+     * @return \EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider
+     */
+    protected function buildUserLanguagePreferenceProvider(): UserLanguagePreferenceProvider
+    {
+        $requestStack = new RequestStack();
+        $requestStack->push($this->request);
+
+        return new UserLanguagePreferenceProvider($requestStack, []);
     }
 }
