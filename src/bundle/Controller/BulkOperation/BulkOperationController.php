@@ -47,8 +47,6 @@ class BulkOperationController extends Controller
      */
     public function bulkAction(Request $request): BulkOperationResponse
     {
-        $request->attributes->set('is_rest_request', true);
-
         /** @var \EzSystems\EzPlatformAdminUi\REST\Value\BulkOperation $operationList */
         $operationList = $this->inputDispatcher->parse(
             new Message(
