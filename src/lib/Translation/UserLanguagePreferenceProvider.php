@@ -61,9 +61,10 @@ class UserLanguagePreferenceProvider
     {
         $languageCodes = [];
         foreach ($this->getPreferredLocales() as $locale) {
+            $locale = strtolower($locale);
             if (isset($this->languageCodesMap[$locale])) {
                 $languageCodes = array_merge($languageCodes, $this->languageCodesMap[$locale]);
-            } elseif (preg_match('/^([a-z]{3})-([a-z]{2})$/i', $locale, $matches)) {
+            } elseif (preg_match('/^([a-z]{3})-([a-z]{2})$/', $locale, $matches)) {
                 // if the given locale is already in the eZ format
                 $languageCodes[] = strtolower($matches[1]) . '-' . strtoupper($matches[2]);
             }
