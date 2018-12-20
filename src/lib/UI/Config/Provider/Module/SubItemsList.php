@@ -8,42 +8,35 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
+use EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService;
 
 /**
  * Provides information about current setting for sub-items list.
  */
 class SubItemsList implements ProviderInterface
 {
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
-    private $configResolver;
+    /** @var \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService */
+    private $userSettingService;
 
     /**
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService $userSettingService
      */
-    public function __construct(ConfigResolverInterface $configResolver)
+    public function __construct(UserSettingService $userSettingService)
     {
-        $this->configResolver = $configResolver;
+        $this->userSettingService = $userSettingService;
     }
 
     /**
      * @return array
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function getConfig(): array
     {
         return [
-            'limit' => $this->getSubItemsListLimit(),
+            'limit' => (int)$this->userSettingService->getUserSetting('subitems_limit')->value,
         ];
-    }
-
-    /**
-     * @return int
-     */
-    protected function getSubItemsListLimit(): int
-    {
-        return $this->configResolver->getParameter(
-            'subitems_module.limit'
-        );
     }
 }
