@@ -19,8 +19,9 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
-use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
+use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
+use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUserGroup;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsRoot;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
@@ -29,7 +30,6 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use eZ\Publish\API\Repository\UserService;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Location View contextual sidebar menu.
@@ -53,9 +53,6 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
-    /** @var \eZ\Publish\API\Repository\UserService */
-    private $userService;
-
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
@@ -74,43 +71,52 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
     private $permissionChecker;
 
+    /** @var array */
+    private $userContentTypeIdentifier;
+
+    /** @var array */
+    private $userGroupContentTypeIdentifier;
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
-     * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\SearchService $searchService
      * @param \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension $udwExtension
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface $permissionChecker
+     * @param array $userContentTypeIdentifier
+     * @param array $userGroupContentTypeIdentifier
      */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
         PermissionResolver $permissionResolver,
         ConfigResolverInterface $configResolver,
-        UserService $userService,
         ContentTypeService $contentTypeService,
         SearchService $searchService,
         UniversalDiscoveryExtension $udwExtension,
         ContentService $contentService,
         LocationService $locationService,
-        PermissionCheckerInterface $permissionChecker
+        PermissionCheckerInterface $permissionChecker,
+        array $userContentTypeIdentifier,
+        array $userGroupContentTypeIdentifier
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
-        $this->userService = $userService;
         $this->contentTypeService = $contentTypeService;
         $this->searchService = $searchService;
         $this->udwExtension = $udwExtension;
         $this->contentService = $contentService;
         $this->locationService = $locationService;
         $this->permissionChecker = $permissionChecker;
+        $this->userContentTypeIdentifier = $userContentTypeIdentifier;
+        $this->userGroupContentTypeIdentifier = $userGroupContentTypeIdentifier;
     }
 
     /**
@@ -195,7 +201,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $sendToTrashAttributes['data-target'] = '#trash-container-modal';
         }
 
-        $contentIsUser = (new ContentIsUser($this->userService))->isSatisfiedBy($content);
+        $contentIsUser = (new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType);
+        $contentIsUserGroup = (new ContentTypeIsUserGroup($this->userGroupContentTypeIdentifier))->isSatisfiedBy($contentType);
 
         $menu->setChildren([
             self::ITEM__CREATE => $this->createMenuItem(
@@ -226,34 +233,35 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 ]
             )
         );
+        if (!$contentIsUser && !$contentIsUserGroup) {
+            $menu->addChild(
+                $this->createMenuItem(
+                    self::ITEM__COPY,
+                    [
+                        'extras' => ['icon' => 'copy'],
+                        'attributes' => [
+                            'class' => 'btn--udw-copy',
+                            'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
+                            'data-root-location' => $this->configResolver->getParameter(
+                                'universal_discovery_widget_module.default_location_id'
+                            ),
+                        ],
+                    ]
+                )
+            );
 
-        $menu->addChild(
-            $this->createMenuItem(
-                self::ITEM__COPY,
-                [
-                    'extras' => ['icon' => 'copy'],
-                    'attributes' => [
-                        'class' => 'btn--udw-copy',
-                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-                        'data-root-location' => $this->configResolver->getParameter(
-                            'universal_discovery_widget_module.default_location_id'
-                        ),
-                    ],
-                ]
-            )
-        );
-
-        $menu->addChild(
-            $this->createMenuItem(
-                self::ITEM__COPY_SUBTREE,
-                [
-                    'extras' => ['icon' => 'copy-subtree'],
-                    'attributes' => $canCopySubtree
-                        ? $copySubtreeAttributes
-                        : array_merge($copySubtreeAttributes, ['disabled' => 'disabled']),
-                ]
-            )
-        );
+            $menu->addChild(
+                $this->createMenuItem(
+                    self::ITEM__COPY_SUBTREE,
+                    [
+                        'extras' => ['icon' => 'copy-subtree'],
+                        'attributes' => $canCopySubtree
+                            ? $copySubtreeAttributes
+                            : array_merge($copySubtreeAttributes, ['disabled' => 'disabled']),
+                    ]
+                )
+            );
+        }
 
         if ($contentIsUser && $canDelete) {
             $menu->addChild(
