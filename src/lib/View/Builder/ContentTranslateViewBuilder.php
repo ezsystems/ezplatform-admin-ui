@@ -13,6 +13,7 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider;
 use eZ\Publish\Core\MVC\Symfony\View\Builder\ViewBuilder;
 use eZ\Publish\Core\MVC\Symfony\View\Configurator;
 use eZ\Publish\Core\MVC\Symfony\View\ParametersInjector;
@@ -39,16 +40,21 @@ class ContentTranslateViewBuilder implements ViewBuilder
     /** @var \EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface */
     private $contentActionDispatcher;
 
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider */
+    private $languagePreferenceProvider;
+
     public function __construct(
         Repository $repository,
         Configurator $viewConfigurator,
         ParametersInjector $viewParametersInjector,
-        ActionDispatcherInterface $contentActionDispatcher
+        ActionDispatcherInterface $contentActionDispatcher,
+        UserLanguagePreferenceProvider $languagePreferenceProvider
     ) {
         $this->repository = $repository;
         $this->viewConfigurator = $viewConfigurator;
         $this->viewParametersInjector = $viewParametersInjector;
         $this->contentActionDispatcher = $contentActionDispatcher;
+        $this->languagePreferenceProvider = $languagePreferenceProvider;
     }
 
     /**
@@ -81,7 +87,10 @@ class ContentTranslateViewBuilder implements ViewBuilder
         $location = $this->resolveLocation($parameters, $fromLanguage);
         $content = $this->resolveContent($parameters, $location, $fromLanguage);
         $contentInfo = $content->contentInfo;
-        $contentType = $content->getContentType();
+        $contentType = $this->repository->getContentTypeService()->loadContentType(
+            $content->getContentType()->id,
+            $this->languagePreferenceProvider->getPreferredLanguages()
+        );
         /** @var \Symfony\Component\Form\FormInterface $form */
         $form = $parameters['form'];
 
