@@ -18,6 +18,7 @@ use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
@@ -87,6 +88,9 @@ class ContentViewController extends Controller
     /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
+    private $userLanguagePreferenceProvider;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
@@ -97,6 +101,7 @@ class ContentViewController extends Controller
      * @param \eZ\Publish\API\Repository\BookmarkService $bookmarkService
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      * @param int $defaultDraftPaginationLimit
      * @param array $siteAccessLanguages
      * @param int $defaultRolePaginationLimit
@@ -114,6 +119,7 @@ class ContentViewController extends Controller
         BookmarkService $bookmarkService,
         ContentService $contentService,
         LocationService $locationService,
+        UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
         int $defaultDraftPaginationLimit,
         array $siteAccessLanguages,
         int $defaultRolePaginationLimit,
@@ -136,6 +142,7 @@ class ContentViewController extends Controller
         $this->defaultPolicyPaginationLimit = $defaultPolicyPaginationLimit;
         $this->defaultSystemUrlPaginationLimit = $defaultSystemUrlPaginationLimit;
         $this->defaultCustomUrlPaginationLimit = $defaultCustomUrlPaginationLimit;
+        $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
     }
 
     /**
@@ -210,7 +217,11 @@ class ContentViewController extends Controller
      */
     private function supplyContentType(ContentView $view): void
     {
-        $view->addParameters(['contentType' => $view->getContent()->getContentType()]);
+        $contentType = $this->contentTypeService->loadContentType(
+            $view->getContent()->contentInfo->contentTypeId,
+            $this->userLanguagePreferenceProvider->getPreferredLanguages()
+        );
+        $view->addParameters(['contentType' => $contentType]);
     }
 
     /**
