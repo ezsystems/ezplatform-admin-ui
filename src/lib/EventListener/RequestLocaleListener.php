@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\EventListener;
 
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
-use EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -28,14 +28,14 @@ class RequestLocaleListener implements EventSubscriberInterface
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider */
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider */
     private $userLanguagePreferenceProvider;
 
     /**
      * @param array $siteAccessGroups
      * @param array $availableTranslations
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider $userLanguagePreferenceProvider
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider $userLanguagePreferenceProvider
      */
     public function __construct(
         array $siteAccessGroups,

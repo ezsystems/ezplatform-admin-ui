@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\EventListener;
 
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\EventListener\RequestLocaleListener;
-use EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -228,7 +228,7 @@ class RequestLocaleListenerTest extends TestCase
     }
 
     /**
-     * @return \EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider
+     * @return \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider
      */
     protected function buildUserLanguagePreferenceProvider(): UserLanguagePreferenceProvider
     {

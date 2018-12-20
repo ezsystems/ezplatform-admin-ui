@@ -7,7 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
 
 use eZ\Publish\API\Repository\ContentTypeService;
-use EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 
 class ContentTypes implements ProviderInterface
@@ -15,12 +15,12 @@ class ContentTypes implements ProviderInterface
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider */
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider */
     private $userLanguagePreferenceProvider;
 
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider $userLanguagePreferenceProvider
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider $userLanguagePreferenceProvider
      */
     public function __construct(ContentTypeService $contentTypeService, UserLanguagePreferenceProvider $userLanguagePreferenceProvider)
     {

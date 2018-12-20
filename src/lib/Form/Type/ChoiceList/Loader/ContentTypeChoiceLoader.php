@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
 
 use eZ\Publish\API\Repository\ContentTypeService;
-use EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 
@@ -18,11 +18,12 @@ class ContentTypeChoiceLoader implements ChoiceLoaderInterface
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Translation\UserLanguagePreferenceProvider */
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider */
     private $userLanguagePreferenceProvider;
 
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider $userLanguagePreferenceProvider
      */
     public function __construct(ContentTypeService $contentTypeService, UserLanguagePreferenceProvider $userLanguagePreferenceProvider)
     {
