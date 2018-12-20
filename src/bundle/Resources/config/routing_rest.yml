@@ -1,0 +1,7 @@
+ezplatform.bulk_operation:
+    path: /bulk
+    options:
+      expose: true
+    defaults:
+      _controller: 'EzPlatformAdminUiBundle:BulkOperation\BulkOperation:bulk'
+    methods: [POST]

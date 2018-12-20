@@ -13,8 +13,3 @@ services:
       parent: ezpublish_rest.output.value_object_visitor.base
       tags:
         - { name: ezpublish_rest.output.value_object_visitor, type: EzSystems\EzPlatformAdminUi\REST\Value\BulkOperationResponse }
-
-  ezpublish_rest.request_listener:
-      class: EzSystems\EzPlatformAdminUi\EventListener\ApiRequestListener
-      tags:
-        - { name: kernel.event_subscriber }
