@@ -26,6 +26,7 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
@@ -60,6 +61,9 @@ class ValueFactory
     /** @var \EzSystems\EzPlatformAdminUi\UI\Service\PathService */
     protected $pathService;
 
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
+    private $userLanguagePreferenceProvider;
+
     /**
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
@@ -70,6 +74,7 @@ class ValueFactory
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \EzSystems\EzPlatformAdminUi\UI\Service\PathService $pathService
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      */
     public function __construct(
         UserService $userService,
@@ -80,7 +85,8 @@ class ValueFactory
         ObjectStateService $objectStateService,
         PermissionResolver $permissionResolver,
         PathService $pathService,
-        DatasetFactory $datasetFactory
+        DatasetFactory $datasetFactory,
+        UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
     ) {
         $this->userService = $userService;
         $this->languageService = $languageService;
@@ -91,6 +97,7 @@ class ValueFactory
         $this->permissionResolver = $permissionResolver;
         $this->pathService = $pathService;
         $this->datasetFactory = $datasetFactory;
+        $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
     }
 
     /**
@@ -250,7 +257,10 @@ class ValueFactory
         return new UIValue\Location\Bookmark(
             $location,
             [
-                'contentType' => $location->getContent()->getContentType(),
+                'contentType' => $this->contentTypeService->loadContentType(
+                    $location->getContentInfo()->contentTypeId,
+                    $this->userLanguagePreferenceProvider->getPreferredLanguages()
+                ),
                 'pathLocations' => $this->pathService->loadPathLocations($location),
                 'userCanEdit' => $this->permissionResolver->canUser('content', 'edit', $location->contentInfo),
             ]
