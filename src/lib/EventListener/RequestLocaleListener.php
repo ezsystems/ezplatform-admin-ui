@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\EventListener;
 
-use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,20 +28,20 @@ class RequestLocaleListener implements EventSubscriberInterface
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider */
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
     private $userLanguagePreferenceProvider;
 
     /**
      * @param array $siteAccessGroups
      * @param array $availableTranslations
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider $userLanguagePreferenceProvider
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      */
     public function __construct(
         array $siteAccessGroups,
         array $availableTranslations,
         TranslatorInterface $translator,
-        UserLanguagePreferenceProvider $userLanguagePreferenceProvider
+        UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
     ) {
         $this->siteAccessGroups = $siteAccessGroups;
         $this->availableTranslations = $availableTranslations;

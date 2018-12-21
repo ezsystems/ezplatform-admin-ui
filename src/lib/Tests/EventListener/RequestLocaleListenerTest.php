@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\EventListener;
 
-use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\EventListener\RequestLocaleListener;
@@ -37,6 +37,9 @@ class RequestLocaleListenerTest extends TestCase
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
+    private $userLanguagePreferenceProvider;
+
     protected function setUp()
     {
         parent::setUp();
@@ -51,6 +54,14 @@ class RequestLocaleListenerTest extends TestCase
         $this->request->attributes->set('siteaccess', new SiteAccess(self::ADMIN_SITEACCESS));
 
         $this->httpKernel = $this->createMock(HttpKernelInterface::class);
+
+        $requestStack = new RequestStack();
+        $requestStack->push($this->request);
+
+        $this->userLanguagePreferenceProvider = $this
+            ->getMockBuilder(UserLanguagePreferenceProviderInterface::class)
+            ->setConstructorArgs([$requestStack])
+            ->getMock();
     }
 
     public function testLocaleIsNotSetOnNonAdminSiteaccess(): void
@@ -70,7 +81,7 @@ class RequestLocaleListenerTest extends TestCase
             ['admin_group' => [self::ADMIN_SITEACCESS]],
             [],
             $translator,
-            $this->buildUserLanguagePreferenceProvider()
+            $this->userLanguagePreferenceProvider
         );
 
         $requestLocaleListener->onKernelRequest($event);
@@ -94,7 +105,7 @@ class RequestLocaleListenerTest extends TestCase
             [],
             [],
             $translator,
-            $this->buildUserLanguagePreferenceProvider()
+            $this->userLanguagePreferenceProvider
         );
 
         $requestLocaleListener->onKernelRequest($event);
@@ -116,6 +127,10 @@ class RequestLocaleListenerTest extends TestCase
 
         $this->request->headers->set('Accept-Language', 'en-US,en;q=0.5');
 
+        $this->userLanguagePreferenceProvider
+            ->method('getPreferredLocales')
+            ->willReturn(['en-US', 'en']);
+
         $event = new GetResponseEvent(
             $this->httpKernel,
             $this->request,
@@ -126,7 +141,7 @@ class RequestLocaleListenerTest extends TestCase
             ['admin_group' => [self::ADMIN_SITEACCESS]],
             $availableTranslations,
             $this->translator,
-            $this->buildUserLanguagePreferenceProvider()
+            $this->userLanguagePreferenceProvider
         );
 
         $requestLocaleListener->onKernelRequest($event);
@@ -147,6 +162,10 @@ class RequestLocaleListenerTest extends TestCase
 
         $this->request->headers->set('Accept-Language', 'en-US,en;q=0.5,de-CH;q=0.4');
 
+        $this->userLanguagePreferenceProvider
+            ->method('getPreferredLocales')
+            ->willReturn(['en-US', 'en', 'de-CH']);
+
         $event = new GetResponseEvent(
             $this->httpKernel,
             $this->request,
@@ -157,7 +176,7 @@ class RequestLocaleListenerTest extends TestCase
             ['admin_group' => [self::ADMIN_SITEACCESS]],
             $availableTranslations,
             $this->translator,
-            $this->buildUserLanguagePreferenceProvider()
+            $this->userLanguagePreferenceProvider
         );
 
         $requestLocaleListener->onKernelRequest($event);
@@ -169,7 +188,7 @@ class RequestLocaleListenerTest extends TestCase
             ['admin_group' => [self::ADMIN_SITEACCESS]],
             [],
             $this->translator,
-            $this->buildUserLanguagePreferenceProvider()
+            $this->userLanguagePreferenceProvider
         );
 
         $this->assertSame([KernelEvents::REQUEST => ['onKernelRequest', 6]], $requestLocaleListener::getSubscribedEvents());
@@ -192,7 +211,7 @@ class RequestLocaleListenerTest extends TestCase
             ['admin_group' => [self::ADMIN_SITEACCESS]],
             [],
             $this->translator,
-            $this->buildUserLanguagePreferenceProvider()
+            $this->userLanguagePreferenceProvider
         );
 
         $requestLocaleListener->onKernelRequest($event);
@@ -225,16 +244,5 @@ class RequestLocaleListenerTest extends TestCase
             ->method('setLocale');
 
         return $request;
-    }
-
-    /**
-     * @return \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider
-     */
-    protected function buildUserLanguagePreferenceProvider(): UserLanguagePreferenceProvider
-    {
-        $requestStack = new RequestStack();
-        $requestStack->push($this->request);
-
-        return new UserLanguagePreferenceProvider($requestStack, []);
     }
 }
