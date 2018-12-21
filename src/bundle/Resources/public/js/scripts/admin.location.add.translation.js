@@ -5,6 +5,10 @@
     const SELECTOR_MODAL = '.ez-modal';
     const resetSelection = () => {
         doc.querySelectorAll(`${SELECTOR_LABEL} .ez-translation__input`).forEach((input) => {
+            if (input.closest('[hidden]')) {
+                return;
+            }
+
             input.checked = false;
         });
     };
