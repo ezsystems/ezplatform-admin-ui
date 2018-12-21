@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,17 +24,19 @@ class ContentTypeParamConverter implements ParamConverterInterface
     /** @var ContentTypeService */
     private $contentTypeService;
 
-    /** @var array */
-    private $siteAccessLanguages;
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider */
+    private $languagePreferenceProvider;
 
     /**
      * @param ContentTypeService $contentTypeGroupService
-     * @param array $siteAccessLanguages
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProvider $languagePreferenceProvider
      */
-    public function __construct(ContentTypeService $contentTypeGroupService, array $siteAccessLanguages)
-    {
+    public function __construct(
+        ContentTypeService $contentTypeGroupService,
+        UserLanguagePreferenceProvider $languagePreferenceProvider
+    ) {
         $this->contentTypeService = $contentTypeGroupService;
-        $this->siteAccessLanguages = $siteAccessLanguages;
+        $this->languagePreferenceProvider = $languagePreferenceProvider;
     }
 
     /**
@@ -44,13 +47,8 @@ class ContentTypeParamConverter implements ParamConverterInterface
         if (!$request->get(self::PARAMETER_CONTENT_TYPE_ID) && !$request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER)) {
             return false;
         }
-        $prioritizedLanguages = $this->siteAccessLanguages;
-        if ($request->get(LanguageParamConverter::PARAMETER_LANGUAGE_CODE)) {
-            array_unshift(
-                $prioritizedLanguages,
-                $request->get(LanguageParamConverter::PARAMETER_LANGUAGE_CODE)
-            );
-        }
+
+        $prioritizedLanguages = $this->languagePreferenceProvider->getPreferredLanguages();
 
         if ($request->get(self::PARAMETER_CONTENT_TYPE_ID)) {
             $id = (int)$request->get(self::PARAMETER_CONTENT_TYPE_ID);
