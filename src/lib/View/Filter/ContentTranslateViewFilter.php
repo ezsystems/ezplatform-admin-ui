@@ -99,8 +99,10 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
             $request->attributes->get('contentId'),
             null !== $baseLanguageCode ? [$baseLanguageCode] : null
         );
-        $contentType = $content->getContentType();
-
+        $contentType = $this->contentTypeService->loadContentType(
+            $content->getContentType()->id,
+            $this->languagePreferenceProvider->getPreferredLanguages()
+        );
         $toLanguage = $this->languageService->loadLanguage($languageCode);
         $fromLanguage = $baseLanguageCode ? $this->languageService->loadLanguage($baseLanguageCode) : null;
 
@@ -113,8 +115,7 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
         $form = $this->resolveContentTranslateForm(
             $contentTranslateData,
             $toLanguage,
-            $content,
-            $this->languagePreferenceProvider->getPreferredLanguages()
+            $content
         );
 
         $event->getParameters()->add(['form' => $form->handleRequest($request)]);
@@ -157,15 +158,13 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
      * @param \EzSystems\EzPlatformAdminUi\RepositoryForms\Data\ContentTranslationData $contentUpdate
      * @param \eZ\Publish\API\Repository\Values\Content\Language $toLanguage
      * @param \eZ\Publish\API\Repository\Values\Content\Content $content
-     * @param array $preferredLanguages
      *
      * @return \Symfony\Component\Form\FormInterface
      */
     private function resolveContentTranslateForm(
         ContentTranslationData $contentUpdate,
         Language $toLanguage,
-        Content $content,
-        array $preferredLanguages
+        Content $content
     ): FormInterface {
         return $this->formFactory->create(
             ContentEditType::class,
@@ -173,7 +172,6 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
             [
                 'languageCode' => $toLanguage->languageCode,
                 'mainLanguageCode' => $content->contentInfo->mainLanguageCode,
-                'formLanguageCodes' => $preferredLanguages,
                 'drafts_enabled' => true,
             ]
         );
