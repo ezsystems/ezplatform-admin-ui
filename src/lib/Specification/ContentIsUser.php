@@ -10,7 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\Specification;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 class ContentIsUser implements ContentSpecification
 {

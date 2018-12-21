@@ -72,7 +72,7 @@ class Languages implements ProviderInterface
      * Next: fallback languages of siteaccesses.
      * Last: languages defined but not used in siteaccesses.
      *
-     * @param array $languagesMap Data from call to getLanguagesMap().
+     * @param array $languagesMap data from call to getLanguagesMap()
      *
      * @return array
      */

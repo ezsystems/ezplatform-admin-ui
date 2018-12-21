@@ -11,7 +11,7 @@ use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 
 /**
- * @deprecated Please move to use ContentTypes so we don't have to load the same data several times.
+ * @deprecated please move to use ContentTypes so we don't have to load the same data several times
  */
 class ContentTypeNames implements ProviderInterface
 {
