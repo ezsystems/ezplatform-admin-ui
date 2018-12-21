@@ -109,6 +109,13 @@ img {
     cursor: not-allowed;
 }
 
+select {
+    &.form-control:disabled,
+    &.form-control[disabled] {
+        opacity: 0.3;
+    }
+}
+
 .ez-info-view,
 .ez-content-view,
 .ez-content-type-view,
