@@ -6,11 +6,6 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="da39a3ee5e6b4b0d3255bfef95601890afd80709" resname="base.footer_copyright">
-        <source>eZ Platform ©1999-%current_year% %ez_link_open%eZ Systems AS%ez_link_close% and others.</source>
-        <target state="new">eZ Platform ©1999-%current_year% %ez_link_open%eZ Systems AS%ez_link_close% and others.</target>
-        <note>key: base.footer_copyright</note>
-      </trans-unit>
       <trans-unit id="bb7c5bc498a649c6ec116abc12e7b8be1d4f7b92" resname="alert.close">
         <source>Close</source>
         <target state="new">Close</target>
@@ -41,6 +36,11 @@
         <target state="new">Username</target>
         <note>key: authentication.username</note>
       </trans-unit>
+      <trans-unit id="b1b04388859d233f757e4f6376af3fc317d4baa6" resname="base.footer_copyright">
+        <source>eZ Platform ©1999-%current_year% %ez_link_open%eZ Systems AS%ez_link_close% and others.</source>
+        <target state="new">eZ Platform ©1999-%current_year% %ez_link_open%eZ Systems AS%ez_link_close% and others.</target>
+        <note>key: base.footer_copyright</note>
+      </trans-unit>
       <trans-unit id="d21d07085caa55b0fee2fc054a6878bbdb24ae78" resname="breadcrumb.admin">
         <source>Admin</source>
         <target state="new">Admin</target>
@@ -55,6 +55,26 @@
         <source>In Trash</source>
         <target state="new">In Trash</target>
         <note>key: content.in_trash</note>
+      </trans-unit>
+      <trans-unit id="5626938e64bdad8be0c090d0018c868960859d0a" resname="content_type.breadcrumb.view">
+        <source>%identifier%</source>
+        <target state="new">%identifier%</target>
+        <note>key: content_type.breadcrumb.view</note>
+      </trans-unit>
+      <trans-unit id="dc7335e54d834bb6a342bf0bcb113850de4b69f9" resname="content_type.view.view.title">
+        <source>%name%</source>
+        <target state="new">%name%</target>
+        <note>key: content_type.view.view.title</note>
+      </trans-unit>
+      <trans-unit id="83a16866c8ff14a4966553088657aafbb9db8edb" resname="content_type_group.breadcrumb.list">
+        <source>Content Types</source>
+        <target state="new">Content Types</target>
+        <note>key: content_type_group.breadcrumb.list</note>
+      </trans-unit>
+      <trans-unit id="541e02854f7e561d84637ce99ec6fd6e8404bce4" resname="content_type_group.breadcrumb.view">
+        <source>%identifier%</source>
+        <target state="new">%identifier%</target>
+        <note>key: content_type_group.breadcrumb.view</note>
       </trans-unit>
       <trans-unit id="fe1c876b1a9bcde155f03227bce4ae4fbd54c24f" resname="custom_url_alias_add_form.add">
         <source>Create</source>

@@ -26,11 +26,6 @@
         <target state="new">%identifier%</target>
         <note>key: content_type.breadcrumb.edit</note>
       </trans-unit>
-      <trans-unit id="5626938e64bdad8be0c090d0018c868960859d0a" resname="content_type.breadcrumb.view">
-        <source>%identifier%</source>
-        <target state="new">%identifier%</target>
-        <note>key: content_type.breadcrumb.view</note>
-      </trans-unit>
       <trans-unit id="a9206d413d4ca7266dace54fde2e1f8d85a4d557" resname="content_type.container">
         <source>Container</source>
         <target state="new">Container</target>
@@ -265,11 +260,6 @@
         <source>Content Types in %identifier%</source>
         <target state="new">Content Types in %identifier%</target>
         <note>key: content_type.view.list.title</note>
-      </trans-unit>
-      <trans-unit id="dc7335e54d834bb6a342bf0bcb113850de4b69f9" resname="content_type.view.view.title">
-        <source>%name%</source>
-        <target state="new">%name%</target>
-        <note>key: content_type.view.view.title</note>
       </trans-unit>
       <trans-unit id="d74d01091280ceabfb457980ddd459dc841ad957" resname="content_type_group.breadcrumb.add">
         <source>Creating a new Content Type Group</source>
