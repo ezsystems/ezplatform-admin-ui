@@ -33,6 +33,10 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader: ~
 
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\AvailableLocaleChoiceLoader:
+        arguments:
+            $availableTranslations: '%available_translations%'
+
     EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader:
         arguments:
             $siteAccessLanguages: '$languages$'
