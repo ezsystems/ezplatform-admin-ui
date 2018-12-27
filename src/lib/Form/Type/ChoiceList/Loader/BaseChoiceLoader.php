@@ -14,13 +14,20 @@ use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 abstract class BaseChoiceLoader implements ChoiceLoaderInterface
 {
     /**
+     * Returns list of available choices.
+     *
+     * Introduced for simplify decoration.
+     *
+     * @return array
+     */
+    abstract public function getChoiceList(): array;
+
+    /**
      * {@inheritdoc}
      */
     public function loadChoiceList($value = null)
     {
-        $choices = $this->getChoiceList();
-
-        return new ArrayChoiceList($choices, $value);
+        return new ArrayChoiceList($this->getChoiceList(), $value);
     }
 
     /**
