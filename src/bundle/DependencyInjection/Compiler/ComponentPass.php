@@ -13,8 +13,6 @@ use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\Exception;
 
 class ComponentPass implements CompilerPassInterface
 {
@@ -25,10 +23,10 @@ class ComponentPass implements CompilerPassInterface
     /**
      * @param ContainerBuilder $container
      *
-     * @throws Exception\InvalidArgumentException When a tag is missing 'group' attribute.
-     * @throws InvalidArgumentException In ContainerBuilder::findTaggedServiceIds() when a service is abstract.
+     * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException When a service is abstract
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException When a tag is missing 'group' attribute
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition(Registry::class)) {
             return;
