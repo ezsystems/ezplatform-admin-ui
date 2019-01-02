@@ -140,7 +140,7 @@
                 locationId: destinationLocationId
             });
 
-            previewImg.setAttribute('src', image ? image.uri : '://0');
+            previewImg.setAttribute('src', image ? image.uri : '//:0');
             previewImg.classList.toggle('d-none', image === null);
             previewAlt.value = image.alternativeText;
             previewActionPreview.setAttribute('href', destinationLocationUrl);
