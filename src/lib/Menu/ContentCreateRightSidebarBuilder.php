@@ -10,6 +10,10 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\Values\Content\ContentCreateStruct;
+use eZ\Publish\API\Repository\Values\Content\Language;
+use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
@@ -97,12 +101,13 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
         /** @var \Knp\Menu\ItemInterface|\Knp\Menu\ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
-        $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $language->languageCode);
+        $contentCreateStruct = $this->createContentCreateStruct($parentLocation, $contentType, $language);
         $locationCreateStruct = $this->locationService->newLocationCreateStruct($parentLocation->id);
 
         $canPublish = $this->permissionResolver->canUser('content', 'publish', $contentCreateStruct, [$locationCreateStruct]);
         $canCreate = $this->permissionResolver->canUser('content', 'create', $contentCreateStruct, [$locationCreateStruct]) && $parentContentType->isContainer;
         $canPreview = $this->permissionResolver->canUser('content', 'versionread', $contentCreateStruct, [$locationCreateStruct]);
+
         $publishAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezrepoforms_content_edit_publish',
@@ -170,5 +175,20 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
             (new Message(self::ITEM__PREVIEW, 'menu'))->setDesc('Preview'),
             (new Message(self::ITEM__CANCEL, 'menu'))->setDesc('Cancel'),
         ];
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
+     *
+     * @return \eZ\Publish\API\Repository\Values\Content\ContentCreateStruct
+     */
+    private function createContentCreateStruct(Location $location, ContentType $contentType, Language $language): ContentCreateStruct
+    {
+        $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $language->languageCode);
+        $contentCreateStruct->sectionId = $location->contentInfo->sectionId;
+
+        return $contentCreateStruct;
     }
 }
