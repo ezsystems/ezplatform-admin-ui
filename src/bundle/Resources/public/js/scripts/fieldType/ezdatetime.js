@@ -1,11 +1,11 @@
-(function (global) {
+(function(global, doc, eZ, flatpickr) {
     const SELECTOR_FIELD = '.ez-field-edit--ezdatetime';
     const SELECTOR_INPUT = '.ez-data-source__input[data-seconds]';
     const SELECTOR_FLATPICKR_INPUT = '.flatpickr-input';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const EVENT_VALUE_CHANGED = 'valueChanged';
 
-    class EzDateTimeValidator extends global.eZ.BaseFieldValidator {
+    class EzDateTimeValidator extends eZ.BaseFieldValidator {
         /**
          * Validates the input
          *
@@ -24,15 +24,15 @@
 
             if (isRequired && isEmpty) {
                 isError = true;
-                errorMessage = window.eZ.errors.emptyField.replace('{fieldName}', label);
+                errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             }
 
             return {
                 isError,
-                errorMessage
+                errorMessage,
             };
         }
-    };
+    }
 
     const validator = new EzDateTimeValidator({
         classInvalid: 'is-invalid',
@@ -57,15 +57,13 @@
 
     validator.init();
 
-    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-        [...global.eZ.fieldTypeValidators, validator] :
-        [validator];
+    eZ.fieldTypeValidators = eZ.fieldTypeValidators ? [...eZ.fieldTypeValidators, validator] : [validator];
 
-    const datetimeFields = [...document.querySelectorAll(SELECTOR_FIELD)];
+    const datetimeFields = [...doc.querySelectorAll(SELECTOR_FIELD)];
     const datetimeConfig = {
         enableTime: true,
         time_24hr: true,
-        formatDate: (date) => (new Date(date)).toLocaleString()
+        formatDate: (date) => new Date(date).toLocaleString(),
     };
     const updateInputValue = (sourceInput, date) => {
         const event = new CustomEvent(EVENT_VALUE_CHANGED);
@@ -92,20 +90,26 @@
             defaultDate = new Date(sourceInput.value * 1000);
         }
 
-        btnClear.addEventListener('click', (event) => {
-            event.preventDefault();
+        btnClear.addEventListener(
+            'click',
+            (event) => {
+                event.preventDefault();
 
-            flatPickrInput.value = '';
-            sourceInput.value = '';
+                flatPickrInput._flatpickr.clear();
 
-            sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
-        }, false);
+                sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
+            },
+            false
+        );
 
-        window.flatpickr(flatPickrInput, Object.assign({}, datetimeConfig, {
-            onChange: updateInputValue.bind(null, sourceInput),
-            defaultDate,
-            enableSeconds: !!parseInt(sourceInput.dataset.seconds, 10),
-        }));
+        flatpickr(
+            flatPickrInput,
+            Object.assign({}, datetimeConfig, {
+                onChange: updateInputValue.bind(null, sourceInput),
+                defaultDate,
+                enableSeconds: !!parseInt(sourceInput.dataset.seconds, 10),
+            })
+        );
 
         if (sourceInput.hasAttribute('required')) {
             flatPickrInput.setAttribute('required', true);
@@ -113,4 +117,4 @@
     };
 
     datetimeFields.forEach(initFlatPickr);
-})(window);
+})(window, window.document, window.eZ, window.flatpickr);
