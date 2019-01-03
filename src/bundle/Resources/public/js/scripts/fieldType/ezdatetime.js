@@ -84,6 +84,7 @@
         const sourceInput = field.querySelector(SELECTOR_INPUT);
         const flatPickrInput = field.querySelector(SELECTOR_FLATPICKR_INPUT);
         const btnClear = field.querySelector('.ez-data-source__btn--clear-input');
+        let flatpickrInstance = null;
         let defaultDate;
 
         if (sourceInput.value) {
@@ -95,14 +96,18 @@
             (event) => {
                 event.preventDefault();
 
-                flatPickrInput._flatpickr.clear();
+                if (!flatpickrInstance) {
+                    return;
+                }
+
+                flatpickrInstance.clear();
 
                 sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
             },
             false
         );
 
-        flatpickr(
+        flatpickrInstance = flatpickr(
             flatPickrInput,
             Object.assign({}, datetimeConfig, {
                 onChange: updateInputValue.bind(null, sourceInput),
