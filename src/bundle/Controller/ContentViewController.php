@@ -315,7 +315,7 @@ class ContentViewController extends Controller
             ]);
         }
 
-        $isContainer = new IsContainer($this->contentTypeService);
+        $isContainer = new IsContainer();
         $hasChildren = new HasChildren($this->locationService);
 
         if ($isContainer->and($hasChildren)->isSatisfiedBy($location)) {
