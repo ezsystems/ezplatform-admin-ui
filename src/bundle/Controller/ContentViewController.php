@@ -165,10 +165,10 @@ class ContentViewController extends Controller
         if (!$view->getContent()->contentInfo->isTrashed()) {
             $this->supplyPathLocations($view);
             $this->subitemsContentViewParameterSupplier->supply($view);
+            $this->supplyContentActionForms($view);
         }
 
         $this->supplyContentType($view);
-        $this->supplyContentActionForms($view);
 
         $this->supplyDraftPagination($view, $request);
         $this->supplyCustomUrlPagination($view, $request);
