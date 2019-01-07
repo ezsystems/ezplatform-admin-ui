@@ -121,9 +121,9 @@
 {% endblock %}
 
 {% block ezobjectrelation_field_definition_edit %}
+    {% set is_translation = is_translation ?? false %}
     <div class="ezobjectrelation-settings selection-root">
         {{- form_row(form.selectionRoot) -}}
-
         <div class="mt-1">
             <button
                 data-universaldiscovery-title="{{ "field_definition.ezobjectrelation.selection_root_udw_title"
@@ -134,6 +134,7 @@
                 data-relation-selected-root-name-selector="#{{ form.selectionRoot.vars.id }}-selected-root-name"
                 data-starting-location-id="{{ admin_ui_config.universalDiscoveryWidget.startingLocationId|default(1) }}"
                 data-udw-config="{{ ez_udw_config('single', {}) }}"
+                {{ is_translation ? 'disabled' : '' }}
             >{{ "field_definition.ezobjectrelation.selection_root_udw_button"
                 |trans({}, "ezrepoforms_content_type")
                 |desc("Select item") }}</button>
@@ -151,6 +152,7 @@
 {% endblock %}
 
 {% block ezobjectrelationlist_field_definition_edit %}
+    {% set is_translation = is_translation ?? false %}
     <div class="ezobjectrelationlist-settings selection-default-location">
         {{- form_row(form.selectionDefaultLocation) -}}
 
@@ -164,6 +166,7 @@
                 data-relation-selected-root-name-selector="#{{ form.selectionDefaultLocation.vars.id }}-selected-root-name"
                 data-starting-location-id="{{ admin_ui_config.universalDiscoveryWidget.startingLocationId|default(1) }}"
                 data-udw-config="{{ ez_udw_config('single_container', {}) }}"
+                {{ is_translation ? 'disabled' : '' }}
             >{{ "field_definition.ezobjectrelationlist.selection_root_udw_button"
                 |trans({}, "ezrepoforms_content_type")
                 |desc("Select location") }}</button>

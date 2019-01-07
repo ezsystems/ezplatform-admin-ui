@@ -24,8 +24,8 @@
 {% block form %}
     {{ form_start(form) }}
     {% set language_code = language_code|default(content_type.mainLanguageCode) %}
-
-    {% if language_code != content_type.mainLanguageCode %}
+    {% set is_translation = form.vars.data.languageCode != content_type.mainLanguageCode %}
+    {% if is_translation %}
         {% include '@ezdesign/admin/content_type/parts/nontranslatable_fields_disabled.html.twig' %}
     {% endif %}
     <section class="container mt-4 px-5">
@@ -110,7 +110,8 @@
                             {{ ez_render_fielddefinition_edit(value, {
                                 'languageCode': language_code,
                                 'form': field_definition,
-                                'group_class': value.group_class|default('')
+                                'group_class': value.group_class|default(''),
+                                'is_translation': is_translation,
                             }) }}
 
                             {# Default rendering #}
