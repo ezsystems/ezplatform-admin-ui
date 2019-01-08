@@ -79,40 +79,27 @@
         sourceInput.value = Math.floor(date.getTime() / 1000);
         sourceInput.dispatchEvent(event);
     };
+    const clearValue = (sourceInput, flatpickrInstance, event) => {
+        event.preventDefault();
+
+        flatpickrInstance.clear();
+
+        sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
+    };
     const initFlatPickr = (field) => {
         const sourceInput = field.querySelector(SELECTOR_INPUT);
         const flatPickrInput = field.querySelector(SELECTOR_FLATPICKR_INPUT);
         const btnClear = field.querySelector('.ez-data-source__btn--clear-input');
-        let flatpickrInstance = null;
-        let defaultDate;
-
-        if (sourceInput.value) {
-            defaultDate = new Date(sourceInput.value * 1000);
-        }
-
-        btnClear.addEventListener(
-            'click',
-            (event) => {
-                event.preventDefault();
-
-                if (!flatpickrInstance) {
-                    return;
-                }
-
-                flatpickrInstance.clear();
-
-                sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
-            },
-            false
-        );
-
-        flatpickrInstance = flatpickr(
+        const defaultDate = sourceInput.value ? new Date(sourceInput.value * 1000) : null;
+        const flatpickrInstance = flatpickr(
             flatPickrInput,
             Object.assign({}, dateConfig, {
                 onChange: updateInputValue.bind(null, sourceInput),
                 defaultDate,
             })
         );
+
+        btnClear.addEventListener('click', clearValue.bind(null, sourceInput, flatpickrInstance), false);
 
         if (sourceInput.hasAttribute('required')) {
             flatPickrInput.setAttribute('required', true);
