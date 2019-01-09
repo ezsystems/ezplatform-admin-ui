@@ -5,9 +5,9 @@
         <meta name="CSRF-Token" content="{{ csrf_token('authenticate') }}" />
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
         <script>
-            const ua = navigator.userAgent.toLowerCase();
+            const userAgent = navigator.userAgent.toLowerCase();
 
-            if (ua.indexOf('chrome') < 0 && ua.indexOf('safari') >= 0) {
+            if (userAgent.indexOf('chrome') < 0 && userAgent.indexOf('safari') >= 0) {
                 window.onpageshow = (event) => {
                     if (event.persisted) {
                         document.body.classList.remove('ez-prevent-click');
