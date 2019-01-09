@@ -1,0 +1,38 @@
+.c-progress-bar {
+    background: #d8d8d8;
+    height: 6px;
+    width: 100%;
+    border-radius: 4px;
+    position: relative;
+}
+
+.c-progress-bar__progress-value {
+    height: 100%;
+    background: #f15a10;
+    border-radius: 4px;
+    transition: width 0.2s linear;
+}
+
+.c-progress-bar__progress-label,
+.c-progress-bar__progress-uploaded {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 0 6px;
+    line-height: 1;
+    text-align: center;
+    width: 100%;
+}
+
+.c-progress-bar__progress-label {
+    transform: translate(-50%, -100%);
+}
+
+.c-progress-bar__progress-uploaded {
+    margin-top: -7px;
+    transform: translate(-50%, 150%);
+    font-weight: 400;
+    font-size: 10px;
+}

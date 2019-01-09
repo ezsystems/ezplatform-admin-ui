@@ -1,0 +1,49 @@
+.c-drop-area {
+    padding: 0 calculateRem(16px);
+    text-align: center;
+}
+
+.c-drop-area__btn--select {
+    display: inline-flex;
+    padding: 0 calculateRem(20px);
+    border-radius: calculateRem(4px);
+    text-align: center;
+    cursor: pointer;
+    color: $ez-white;
+    font-size: calculateRem(16px);
+    font-weight: bold;
+    border: calculateRem(1px) solid $ez-color-primary;
+    background-color: $ez-color-primary;
+    transition: background 0.3s $ez-admin-transition;
+    align-items: center;
+}
+
+.c-drop-area__btn--select:hover,
+.c-drop-area__btn--select:focus {
+    background: $ez-color-primary-hover;
+}
+
+.c-drop-area__message--main {
+    box-sizing: border-box;
+    cursor: auto;
+    font-size: calculateRem(16px);
+    font-weight: 700;
+    line-height: calculateRem(60px);
+    margin: 0;
+}
+
+.c-drop-area__input--hidden {
+    display: none;
+}
+
+.c-drop-area .ez-icon {
+    fill: $ez-white;
+    width: calculateRem(20px);
+    height: calculateRem(20px);
+    margin-right: calculateRem(8px);
+}
+
+.c-drop-area__message--filesize {
+    font-size: calculateRem(12px);
+    line-height: calculateRem(60px);
+}

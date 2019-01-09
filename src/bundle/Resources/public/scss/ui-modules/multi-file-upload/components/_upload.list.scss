@@ -1,0 +1,11 @@
+.c-upload-list__title {
+    background: $ez-ground-primary;
+    font-weight: 700;
+    line-height: calculateRem(50px);
+    padding: 0 calculateRem(16px);
+    border-radius: calculateRem(4px) calculateRem(4px) 0 0;
+}
+
+.c-upload-list .c-upload-list-item + .c-upload-list-item {
+    border-top: calculateRem(1px) solid $ez-ground-primary;
+}
