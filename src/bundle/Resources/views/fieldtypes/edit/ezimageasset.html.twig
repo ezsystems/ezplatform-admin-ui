@@ -74,7 +74,7 @@
 {% block ezimageasset_preview %}
     {% form_theme form '@ezdesign/fieldtypes/edit/binary_base_fields.html.twig' %}
 
-    {% set destination_content_url = '://0' %}
+    {% set destination_content_url = '//:0' %}
     {% set destination_content_name = '' %}
     {% set image_uri = '' %}
 
@@ -92,7 +92,7 @@
             <div class="ez-field-edit-preview__media-wrapper">
                 <img
                     class="ez-field-edit-preview__media {{ image_uri ? '' : 'd-none' }}"
-                    src="{{ image_uri|default('://0') }}"
+                    src="{{ image_uri|default('//:0') }}"
                     alt="{{ 'content.field_type.ezimageasset.img_alt'|trans({'%label%': form.vars.label})|desc("Image stored in field '%label%'") }}"/>
             </div>
             <div class="ez-field-edit-preview__details">
