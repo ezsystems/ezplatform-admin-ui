@@ -5,6 +5,17 @@
         <meta name="CSRF-Token" content="{{ csrf_token('authenticate') }}" />
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
         <script>
+            const userAgent = navigator.userAgent.toLowerCase();
+
+            if (userAgent.indexOf('chrome') < 0 && userAgent.indexOf('safari') >= 0) {
+                window.onpageshow = (event) => {
+                    if (event.persisted) {
+                        document.body.classList.remove('ez-prevent-click');
+                    }
+                };
+            }
+        </script>
+        <script>
             window.eZ = {
                 addConfig: (path, value, shouldMerge = false) => {
                     const keys = path.split('.');
