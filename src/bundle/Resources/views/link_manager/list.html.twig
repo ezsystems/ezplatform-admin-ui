@@ -103,9 +103,5 @@
 {%- endblock -%}
 
 {% block javascripts %}
-    {%  javascripts
-        'bundles/ezplatformadminui/js/scripts/admin.linkmanager.list.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-link-manager-list-js', null, 'ezplatform') }}
 {% endblock %}

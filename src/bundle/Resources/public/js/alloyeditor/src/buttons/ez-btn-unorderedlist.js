@@ -44,6 +44,7 @@ export default class EzBtnUnorderedList extends EzButton {
 }
 
 AlloyEditor.Buttons[EzBtnUnorderedList.key] = AlloyEditor.EzBtnUnorderedList = EzBtnUnorderedList;
+eZ.addConfig('ezAlloyEditor.ezBtnUnorderedList', EzBtnUnorderedList);
 
 EzBtnUnorderedList.propTypes = {
     command: PropTypes.string,

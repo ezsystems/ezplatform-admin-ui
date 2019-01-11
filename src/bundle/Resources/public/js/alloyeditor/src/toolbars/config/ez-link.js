@@ -3,9 +3,7 @@ import AlloyEditor from 'alloyeditor';
 export default class EzLinkConfig {
     constructor() {
         this.name = 'link';
-        this.buttons = [
-            'ezlinkedit',
-        ];
+        this.buttons = ['ezlinkedit'];
 
         this.test = AlloyEditor.SelectionTest.link;
     }
@@ -39,14 +37,13 @@ export default class EzLinkConfig {
     setPosition(payload) {
         const domElement = new CKEDITOR.dom.element(ReactDOM.findDOMNode(this));
         const region = payload.selectionData.region;
-        const xy = this.getWidgetXYPoint(
-            region.left, region.top,
-            CKEDITOR.SELECTION_BOTTOM_TO_TOP
-        );
+        const xy = this.getWidgetXYPoint(region.left, region.top, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
 
         domElement.addClass('ae-toolbar-transition');
-        domElement.setStyles({left: xy[0] + 'px', top: xy[1] + 'px'});
+        domElement.setStyles({ left: xy[0] + 'px', top: xy[1] + 'px' });
 
         return true;
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezLinkConfig', EzLinkConfig);

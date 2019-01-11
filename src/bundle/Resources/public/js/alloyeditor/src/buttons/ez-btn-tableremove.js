@@ -15,10 +15,9 @@ export default class EzBtnTableRemove extends AlloyEditor.ButtonTableRemove {
                 data-type="button-table-remove"
                 onClick={this._removeTable}
                 tabIndex={this.props.tabIndex}
-                title={AlloyEditor.Strings.deleteTable}
-            >
+                title={AlloyEditor.Strings.deleteTable}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#trash" />
                 </svg>
             </button>
         );
@@ -26,3 +25,4 @@ export default class EzBtnTableRemove extends AlloyEditor.ButtonTableRemove {
 }
 
 AlloyEditor.Buttons[EzBtnTableRemove.key] = AlloyEditor.EzBtnTableRemove = EzBtnTableRemove;
+eZ.addConfig('ezAlloyEditor.ezBtnTableRemove', EzBtnTableRemove);

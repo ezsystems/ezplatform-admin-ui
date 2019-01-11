@@ -30,6 +30,8 @@ export default class EzBtnCustomTag extends EzWidgetButton {
     }
 }
 
+eZ.addConfig('ezAlloyEditor.ezBtnCustomTag', EzBtnCustomTag);
+
 EzBtnCustomTag.propTypes = {
     editor: PropTypes.object.isRequired,
     label: PropTypes.string.isRequired,

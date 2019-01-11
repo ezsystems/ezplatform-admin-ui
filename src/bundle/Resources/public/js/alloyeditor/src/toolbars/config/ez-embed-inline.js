@@ -35,3 +35,5 @@ export default class EzEmbedInlineConfig extends EzConfigBase {
         return !!(widget && widget.name === EMBED_INLINE_NAME);
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezEmbedInlineConfig', EzEmbedInlineConfig);

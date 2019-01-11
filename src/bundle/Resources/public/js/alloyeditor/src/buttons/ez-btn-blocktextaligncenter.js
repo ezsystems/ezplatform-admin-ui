@@ -10,6 +10,7 @@ export default class EzBtnBlockTextAlignCenter extends EzBlockTextAlign {
 }
 
 AlloyEditor.Buttons[EzBtnBlockTextAlignCenter.key] = AlloyEditor.EzBtnBlockTextAlignCenter = EzBtnBlockTextAlignCenter;
+eZ.addConfig('ezAlloyEditor.ezBtnBlockTextAlignCenter', EzBtnBlockTextAlignCenter);
 
 EzBtnBlockTextAlignCenter.defaultProps = {
     textAlign: 'center',

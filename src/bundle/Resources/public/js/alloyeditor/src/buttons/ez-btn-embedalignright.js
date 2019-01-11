@@ -10,6 +10,7 @@ export default class EzEmbedAlignRight extends EzEmbedAlign {
 }
 
 AlloyEditor.Buttons[EzEmbedAlignRight.key] = AlloyEditor.EzEmbedAlignRight = EzEmbedAlignRight;
+eZ.addConfig('ezAlloyEditor.ezEmbedAlignRight', EzEmbedAlignRight);
 
 EzEmbedAlignRight.defaultProps = {
     alignment: 'right',

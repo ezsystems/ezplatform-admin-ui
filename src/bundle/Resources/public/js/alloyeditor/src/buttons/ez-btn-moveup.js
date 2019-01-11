@@ -31,8 +31,7 @@ export default class EzBtnMoveUp extends Component {
                 className="ae-button ez-btn-ae ez-btn-ae--move-up"
                 onClick={this.moveUp.bind(this)}
                 tabIndex={this.props.tabIndex}
-                title={title}
-            >
+                title={title}>
                 <svg className="ez-icon ez-btn-ae__icon">
                     <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#circle-caret-up" />
                 </svg>
@@ -42,3 +41,4 @@ export default class EzBtnMoveUp extends Component {
 }
 
 AlloyEditor.Buttons[EzBtnMoveUp.key] = AlloyEditor.EzBtnMoveUp = EzBtnMoveUp;
+eZ.addConfig('ezAlloyEditor.ezBtnMoveUp', EzBtnMoveUp);

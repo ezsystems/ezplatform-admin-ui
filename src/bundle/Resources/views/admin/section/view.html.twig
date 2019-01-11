@@ -79,9 +79,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    {% javascripts
-        'bundles/ezplatformadminui/js/scripts/admin.section.view.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-section-view-js', null, 'ezplatform') }}
 {% endblock %}

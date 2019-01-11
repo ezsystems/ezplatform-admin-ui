@@ -74,6 +74,7 @@ export default class EzBtnEmbed extends EzEmbedDiscoverContentButton {
 }
 
 AlloyEditor.Buttons[EzBtnEmbed.key] = AlloyEditor.EzBtnEmbed = EzBtnEmbed;
+eZ.addConfig('ezAlloyEditor.ezBtnEmbed', EzBtnEmbed);
 
 EzBtnEmbed.defaultProps = {
     command: 'ezembed',
