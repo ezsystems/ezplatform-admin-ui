@@ -18,6 +18,11 @@
     }
 
     &--large {
+        width: calculateRem(48px);
+        height: calculateRem(48px);
+    }
+
+    &--extra-large {
         width: calculateRem(64px);
         height: calculateRem(64px);
     }
