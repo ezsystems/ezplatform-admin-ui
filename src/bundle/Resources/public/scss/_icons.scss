@@ -7,6 +7,11 @@
         height: calculateRem(16px);
     }
 
+    &--small-medium {
+        width: calculateRem(20px);
+        height: calculateRem(20px);
+    }
+
     &--medium {
         width: calculateRem(24px);
         height: calculateRem(24px);
