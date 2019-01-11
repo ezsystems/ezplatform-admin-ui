@@ -3,12 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>eZ Platform</title>
-        {% stylesheets filter='scssphp'
-            'bundles/ezplatformadminui/scss/ezplatform-bootstrap.scss'
-            'bundles/ezplatformadminui/scss/ezplatform.scss'
-        %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        {{ encore_entry_link_tags('ezplatform-admin-ui-security-base-css', null, 'ezplatform') }}
         <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/img/favicon.ico') }}" />
     </head>
     <body class="ez-login-view">
@@ -37,13 +32,10 @@
             </div>
         </div>
 
-        {% javascripts
-            'bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js'
-            'bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js'
-            'bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js'
-        %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
         {% if app.request.locale == 'ach_UG' %}
             <script type="text/javascript">
                 var _jipt = [];

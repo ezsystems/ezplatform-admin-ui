@@ -48,6 +48,7 @@ export default class EzBtnImageUpdate extends EzEmbedImageButton {
 }
 
 AlloyEditor.Buttons[EzBtnImageUpdate.key] = AlloyEditor.EzBtnImageUpdate = EzBtnImageUpdate;
+eZ.addConfig('ezAlloyEditor.ezBtnImageUpdate', EzBtnImageUpdate);
 
 EzBtnImageUpdate.defaultProps = {
     udwTitle: Translator.trans(/*@Desc("Select an image to embed")*/ 'image_update_btn.udw.title', {}, 'alloy_editor'),

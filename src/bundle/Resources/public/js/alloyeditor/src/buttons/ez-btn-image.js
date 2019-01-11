@@ -76,6 +76,7 @@ export default class EzBtnImage extends EzEmbedImageButton {
 }
 
 AlloyEditor.Buttons[EzBtnImage.key] = AlloyEditor.EzBtnImage = EzBtnImage;
+eZ.addConfig('ezAlloyEditor.ezBtnImage', EzBtnImage);
 
 EzBtnImage.defaultProps = {
     command: 'ezembed',

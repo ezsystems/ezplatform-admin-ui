@@ -43,3 +43,5 @@ export default class EzEmbedImageConfig extends EzConfigBase {
         return !!(widget && widget.name === 'ezembed' && widget.isImage());
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezEmbedImageConfig', EzEmbedImageConfig);

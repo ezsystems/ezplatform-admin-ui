@@ -168,7 +168,7 @@
                 &:last-child {
                     font-weight: normal;
                     background: $ez-white;
-                    width: (calc(100% / 3) * 2);
+                    width: (calc((100% / 3) * 2));
                 }
 
                 &--header:first-child,

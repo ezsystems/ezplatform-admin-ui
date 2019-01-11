@@ -40,3 +40,5 @@ export default class EzCustomTagConfig extends EzConfigBase {
         return !!(element && element.$.dataset.ezname === this.name);
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezCustomTagConfig', EzCustomTagConfig);

@@ -87,18 +87,25 @@
             <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
         {% endif %}
         <title>{% block title %}eZ Platform{% endblock %}</title>
-        {% stylesheets filter='scssphp'
-            'bundles/ezplatformadminui/scss/ezplatform-bootstrap.scss'
-            'bundles/ezplatformadminui/scss/ezplatform.scss'
-            'bundles/ezplatformadminuimodules/scss/ezplatform-modules.scss'
-            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.css'
-        %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        {{ encore_entry_link_tags('ezplatform-admin-ui-layout-css', null, 'ezplatform') }}
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/img/favicon.ico') }}" />
         {{ ezplatform_admin_ui_component_group('stylesheet-head') }}
         {{ ezplatform_admin_ui_component_group('script-head') }}
+
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react/umd/react.production.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react-dom/umd/react-dom.production.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/create-react-class/create-react-class.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/prop-types/prop-types.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/flatpickr/dist/flatpickr.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/moment/min/moment.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/moment-timezone/builds/moment-timezone-with-data.min.js') }}"></script>
+        <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+        <script src="{{ asset('js/translations/config.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/alloy-editor-no-react-min.js') }}"></script>
     </head>
     <body class="{% block body_class %}{% endblock %}">
         <div id="react-udw"></div>
@@ -135,54 +142,13 @@
                 message: '{{ message }}'
             })|e('html_attr')  }}"></div>
         <div class="ez-modal-wrapper"></div>
-        {%  javascripts
-            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/react/umd/react.production.min.js'
-            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/react-dom/umd/react-dom.production.min.js'
-            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/jquery/dist/jquery.min.js'
-            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/popper.js/dist/umd/popper.min.js'
-            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/bootstrap/dist/js/bootstrap.min.js'
-            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/create-react-class/create-react-class.min.js'
-            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/prop-types/prop-types.min.js'
-            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.js'
-            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/moment/min/moment.min.js'
-            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/moment-timezone/builds/moment-timezone-with-data.min.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.format.date.js'
-            '@BazingaJsTranslationBundle/Resources/public/js/translator.min.js'
-            'js/translations/config.js'
-            'js/translations/*.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/core/draggable.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/core/custom.dropdown.js'
-        %}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
 
         {{ ezplatform_admin_ui_component_group('custom-admin-ui-modules') }}
         {{ ezplatform_admin_ui_component_group('custom-admin-ui-config') }}
-        {%  javascripts
-            '@EzPlatformAdminUiModulesBundle/Resources/public/js/UniversalDiscovery.module.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/helpers/request.helper.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/helpers/notification.helper.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/helpers/timezone.helper.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/helpers/content.type.helper.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.notifications.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.trigger.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.prevent.default.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/udw/browse.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.user.menu.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.prevent.click.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.picker.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.notifications.modal.js'
-            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.add.translation.js'
-        %}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-        {# CKEditor is not compatible with 'use strict' mode, React 16 force 'use strict' on the entire file.
-           CKEditor and React 16 cannot be compiled into one file by assetic #}
-        {%  javascripts
-            '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/alloyeditor/dist/alloy-editor/alloy-editor-no-react-min.js'
-        %}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
+
+        {{ encore_entry_script_tags('ezplatform-admin-ui-modules-udw-js', null, 'ezplatform') }}
+        {{ encore_entry_script_tags('ezplatform-admin-ui-layout-js', null, 'ezplatform') }}
+
         {% block react_modules %}{% endblock %}
         {% block javascripts %}{% endblock %}
         {{ ezplatform_admin_ui_component_group('stylesheet-body') }}

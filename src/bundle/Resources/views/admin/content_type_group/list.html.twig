@@ -128,9 +128,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    {% javascripts
-    '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-content-type-group-list-js', null, 'ezplatform') }}
 {% endblock %}

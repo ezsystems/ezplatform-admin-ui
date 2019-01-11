@@ -38,3 +38,5 @@ export default class EzHeadingConfig extends EzConfigBase {
         return nativeEditor.isSelectionEmpty() && path && path.contains(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']);
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezHeadingConfig', EzHeadingConfig);

@@ -13,11 +13,14 @@ export default class EzBtnTableColumn extends AlloyEditor.ButtonTableColumn {
 
         if (this.props.expanded) {
             buttonCommandsListId = 'tableColumnList';
-            buttonCommandsList = <AlloyEditor.ButtonCommandsList
-                commands={this._getCommands()}
-                editor={this.props.editor}
-                listId={buttonCommandsListId}
-                onDismiss={this.props.toggleDropdown} />
+            buttonCommandsList = (
+                <AlloyEditor.ButtonCommandsList
+                    commands={this._getCommands()}
+                    editor={this.props.editor}
+                    listId={buttonCommandsListId}
+                    onDismiss={this.props.toggleDropdown}
+                />
+            );
         }
 
         return (
@@ -30,10 +33,9 @@ export default class EzBtnTableColumn extends AlloyEditor.ButtonTableColumn {
                     onClick={this.props.toggleDropdown}
                     role="listbox"
                     tabIndex={this.props.tabIndex}
-                    title={AlloyEditor.Strings.column}
-                >
+                    title={AlloyEditor.Strings.column}>
                     <svg className="ez-icon ez-btn-ae__icon">
-                        <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#table-column"></use>
+                        <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#table-column" />
                     </svg>
                 </button>
                 {buttonCommandsList}
@@ -43,3 +45,4 @@ export default class EzBtnTableColumn extends AlloyEditor.ButtonTableColumn {
 }
 
 AlloyEditor.Buttons[EzBtnTableColumn.key] = AlloyEditor.EzBtnTableColumn = EzBtnTableColumn;
+eZ.addConfig('ezAlloyEditor.ezBtnTableColumn', EzBtnTableColumn);

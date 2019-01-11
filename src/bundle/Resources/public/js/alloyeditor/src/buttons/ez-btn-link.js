@@ -39,3 +39,4 @@ export default class EzBtnLink extends AlloyEditor.ButtonLink {
 }
 
 AlloyEditor.Buttons[EzBtnLink.key] = AlloyEditor.EzBtnLink = EzBtnLink;
+eZ.addConfig('ezAlloyEditor.ezBtnLink', EzBtnLink);

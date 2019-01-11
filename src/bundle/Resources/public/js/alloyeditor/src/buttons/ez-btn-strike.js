@@ -20,12 +20,13 @@ export default class EzBtnStrike extends AlloyEditor.ButtonStrike {
             <button
                 aria-label={AlloyEditor.Strings.strike}
                 aria-pressed={cssClass.indexOf('pressed') !== -1}
-                className={cssClass} data-type="button-strike"
-                onClick={this.execCommand} tabIndex={this.props.tabIndex}
-                title={AlloyEditor.Strings.strike}
-            >
+                className={cssClass}
+                data-type="button-strike"
+                onClick={this.execCommand}
+                tabIndex={this.props.tabIndex}
+                title={AlloyEditor.Strings.strike}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#strikethrough"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#strikethrough" />
                 </svg>
             </button>
         );
@@ -33,3 +34,4 @@ export default class EzBtnStrike extends AlloyEditor.ButtonStrike {
 }
 
 AlloyEditor.Buttons[EzBtnStrike.key] = AlloyEditor.EzBtnStrike = EzBtnStrike;
+eZ.addConfig('ezAlloyEditor.ezBtnStrike', EzBtnStrike);

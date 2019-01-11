@@ -18,7 +18,7 @@ export default class EzBtnCustomTagEdit extends EzWidgetButton {
                 value = value === 'true';
             }
 
-            total[attr] = {value};
+            total[attr] = { value };
 
             return total;
         }, {});
@@ -35,10 +35,7 @@ export default class EzBtnCustomTagEdit extends EzWidgetButton {
             const buttonName = `ezBtn${this.customTagName.charAt(0).toUpperCase() + this.customTagName.slice(1)}Update`;
             const ButtonComponent = AlloyEditor[buttonName];
 
-            return <ButtonComponent
-                values={this.getValues()}
-                {...this.props}
-            />;
+            return <ButtonComponent values={this.getValues()} {...this.props} />;
         }
 
         const css = `ae-button ez-btn-ae ez-btn-ae--${this.customTagName}-edit`;
@@ -46,12 +43,14 @@ export default class EzBtnCustomTagEdit extends EzWidgetButton {
         return (
             <button className={css} onClick={this.props.requestExclusive} tabIndex={this.props.tabIndex}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#edit"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#edit" />
                 </svg>
             </button>
         );
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezBtnCustomTagEdit', EzBtnCustomTagEdit);
 
 EzBtnCustomTagEdit.propTypes = {
     editor: PropTypes.object.isRequired,
