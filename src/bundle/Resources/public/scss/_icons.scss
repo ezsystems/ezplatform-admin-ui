@@ -17,6 +17,11 @@
         height: calculateRem(24px);
     }
 
+    &--large {
+        width: calculateRem(64px);
+        height: calculateRem(64px);
+    }
+
     &--light {
         fill: $ez-white;
     }
