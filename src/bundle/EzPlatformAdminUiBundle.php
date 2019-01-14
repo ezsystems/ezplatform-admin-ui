@@ -16,6 +16,7 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProvi
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ViewBuilderRegistryPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\AdminUiForms;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\ContentTranslateView;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\ContentType;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\LocationIds;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Module;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Notifications;
@@ -83,6 +84,7 @@ class EzPlatformAdminUiBundle extends Bundle
             new Notifications(),
             new ContentTranslateView(),
             new AdminUiForms(),
+            new ContentType(),
         ];
     }
 }
