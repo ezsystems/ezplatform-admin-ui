@@ -1,3 +1,7 @@
+parameters:
+    # default content type icon
+    ezsystems.ezplatform_admin_ui.default_content_type_thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#file'
+
 services:
     _defaults:
         autowire: true
@@ -59,6 +63,17 @@ services:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'contentTypeNames' }
 
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeIcons:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'contentTypeIcons' }
+
+    ezsystems.ezplatform_admin_ui.ui.config.provider.default_content_type_icon:
+        class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\Value
+        arguments:
+            $value: '%ezsystems.ezplatform_admin_ui.default_content_type_thumbnail%'
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'defaultContentTypeIcon' }
+
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module\UniversalDiscoveryWidget:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'universalDiscoveryWidget' }
@@ -97,3 +112,7 @@ services:
             - { name: ezplatform.admin_ui.config_provider, key: 'dateFormat' }
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\PathStringExtension: ~
+
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ContentTypeIconExtension:
+        arguments:
+            $defaultThumbnail: '%ezsystems.ezplatform_admin_ui.default_content_type_thumbnail%'
