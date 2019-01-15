@@ -10,6 +10,7 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions as ApiException;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\Values\Content\ContentCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
@@ -118,7 +119,7 @@ class ContentOnTheFlyController extends Controller
         $response = new JsonResponse();
 
         try {
-            $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $languageCode);
+            $contentCreateStruct = $this->createContentCreateStruct($parentLocation, $contentType, $languageCode);
             $locationCreateStruct = $this->locationService->newLocationCreateStruct($parentLocation->id);
 
             $permissionResolver = $this->container->get('ezpublish.api.repository')->getPermissionResolver();
@@ -158,5 +159,23 @@ class ContentOnTheFlyController extends Controller
         }
 
         return $response;
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     * @param string $language
+     *
+     * @return \eZ\Publish\API\Repository\Values\Content\ContentCreateStruct
+     */
+    private function createContentCreateStruct(
+        Location $location,
+        ContentType $contentType,
+        string $language
+    ): ContentCreateStruct {
+        $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $language);
+        $contentCreateStruct->sectionId = $location->contentInfo->sectionId;
+
+        return $contentCreateStruct;
     }
 }
