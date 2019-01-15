@@ -28,6 +28,10 @@
         height: calculateRem(64px);
     }
 
+    &--dark {
+        fill: $ez-black;
+    }
+
     &--light {
         fill: $ez-white;
     }
