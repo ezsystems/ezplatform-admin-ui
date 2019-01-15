@@ -9,26 +9,23 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 use DateTime;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Time;
+use PHPUnit\Framework\Assert;
 
 class DateAndTimePopup extends Element
 {
     public const ELEMENT_NAME = 'Date and time popup';
 
-    private const DATETIME_FORMAT = 'm/d/Y, g:i:s a';
+    private const DATETIME_FORMAT = 'd/m/Y';
+
+    private const SETTING_SCRIPT_FORMAT = "document.querySelector('%s %s')._flatpickr.setDate('%s', true, '%s')";
 
     public function __construct(UtilityContext $context, bool $isInline = false, $containerSelector = '')
     {
         parent::__construct($context);
-        $calendarSelector = $isInline ? '.flatpickr-calendar.inline' : '.flatpickr-calendar.open';
         $this->fields = [
-            'openedCalendar' => sprintf('%s %s', $containerSelector, $calendarSelector),
-            'pickerDaySelector' => '.flatpickr-day:not(.prevMonthDay):not(.nextMonthDay)',
-            'pickerDayValue' => 'aria-label',
-            'hourSelector' => '.flatpickr-hour',
-            'minuteSelector' => '.flatpickr-minute',
-            'nextMonthSelector' => '.flatpickr-next-month',
-            'currentDaySelector' => '.flatpickr-day.today',
-            'selectedDaySelector' => '.flatpickr-day.selected',
+            'containerSelector' => $containerSelector,
+            'calendarSelector' => $isInline? '.flatpickr-calendar' : '.flatpickr-calendar.inline',
+            'flatpickrSelector' => '.flatpickr',
         ];
     }
 
@@ -37,47 +34,8 @@ class DateAndTimePopup extends Element
      */
     public function setDate(DateTime $date, string $dateFormat = self::DATETIME_FORMAT): void
     {
-        $convertedDate = $date->format('Y-m-d');
-        if ($this->context->isElementVisible(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['currentDaySelector']))) {
-            $referenceDateElement = $this->context->findElement(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['currentDaySelector']));
-        } else {
-            $referenceDateElement = $this->context->findElement(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['selectedDaySelector']));
-        }
-
-        $currentDate = DateTime::createFromFormat($dateFormat, $referenceDateElement->getAttribute($this->fields['pickerDayValue']));
-
-        $dateToDiff = $this->deleteDayFromDate($date);
-        $currentDateToDiff = $this->deleteDayFromDate($currentDate);
-        $dateToDiff->modify('+1 day');
-        $interval = $dateToDiff->diff($currentDateToDiff);
-        $monthsDiff = 12 * $interval->y + $interval->m;
-
-        for ($i = 0; $i < $monthsDiff; ++$i) {
-            $this->switchToNextMonth();
-        }
-
-        $displayedDays = $this->context->findAllElements(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['pickerDaySelector']));
-
-        foreach ($displayedDays as $day) {
-            $currentValue = DateTime::createFromFormat($dateFormat, $day->getAttribute($this->fields['pickerDayValue']));
-            $currentValue = $currentValue->format('Y-m-d');
-
-            if ($currentValue === $convertedDate && $day->isVisible()) {
-                $day->click();
-
-                return;
-            }
-        }
-    }
-
-    public function deleteDayFromDate(DateTime $dateTime): DateTime
-    {
-        return DateTime::createFromFormat('!Y-m', $dateTime->format('Y-m'));
-    }
-
-    public function switchToNextMonth(): void
-    {
-        $this->context->findElement(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['nextMonthSelector']))->click();
+        $dateScript = sprintf(self::SETTING_SCRIPT_FORMAT, $this->fields['containerSelector'], $this->fields['flatpickrSelector'], $date->format($dateFormat), $dateFormat);
+        $this->context->getSession()->getDriver()->executeScript($dateScript);
     }
 
     /**
@@ -86,12 +44,18 @@ class DateAndTimePopup extends Element
      */
     public function setTime(string $hour, string $minute): void
     {
-        $this->context->waitUntilElementIsVisible(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['hourSelector']));
-        $visibleHour = $this->context->findElement(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['hourSelector']));
+        $isTimeOnly = $this->context->isElementVisible('.flatpickr-calendar.noCalendar');
 
-        $visibleHour->setValue($hour);
+        if (!$isTimeOnly) {
+            // get current date as it's not possible to set time without setting date
+            $currentDateScript = sprintf('document.querySelector("%s .flatpickr")._flatpickr.formatDate(document.querySelector("%s .flatpickr")._flatpickr.selectedDates, "Y-m-d")', $this->fields['containerSelector'], $this->fields['containerSelector']);
+            $currentDate = $this->context->getSession()->getDriver()->evaluateScript($currentDateScript);
+        }
 
-        $visibleMinute = $this->context->findElement(sprintf('%s %s', $this->fields['openedCalendar'], $this->fields['minuteSelector']));
-        $visibleMinute->setValue($minute);
+        $valueToSet = $isTimeOnly ? sprintf('%s:%s:00', $hour, $minute) : sprintf('%s, %s:%s:00', explode(',', $currentDate)[0], $hour, $minute);
+        $format = $isTimeOnly ? 'H:i:S' : 'm/d/Y, H:i:S';
+
+        $timeScript = sprintf(self::SETTING_SCRIPT_FORMAT, $this->fields['containerSelector'], $this->fields['flatpickrSelector'], $valueToSet, $format);
+        $this->context->getSession()->getDriver()->executeScript($timeScript);
     }
 }

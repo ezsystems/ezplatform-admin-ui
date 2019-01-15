@@ -28,12 +28,8 @@ class DateAndTime extends EzFieldElement
 
     public function setValue(array $parameters): void
     {
-        $fieldInput = $this->context->findElement(
-            sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput'])
-        );
-
-        Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
-
+        $fieldInput = $this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']));
+        Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));    
         $fieldInput->click();
 
         $time = explode(':', $parameters['time']);
@@ -42,14 +38,13 @@ class DateAndTime extends EzFieldElement
         $dateAndTimePopup->setDate(date_create($parameters['date']));
         $dateAndTimePopup->setTime($time[0], $time[1]);
 
-        $expectedDateAndTimeValue = date_format(date_create(sprintf('%s, %s', $parameters['date'], $parameters['time'])), self::VIEW_DATE_TIME_FORMAT);
-
-        $this->context->waitUntil($this->defaultTimeout, function () use ($expectedDateAndTimeValue) {
-            return date_format(date_create($this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']))->getValue()), self::VIEW_DATE_TIME_FORMAT) === $expectedDateAndTimeValue;
-        });
-
         // This click is closing the date and time picker, to finally ensure that value is set up.
         $this->context->findElement($this->fields['fieldContainer'])->click();
+
+        $expectedDateAndTimeValue = date_format(date_create(sprintf('%s, %s', $parameters['date'], $parameters['time'])), self::VIEW_DATE_TIME_FORMAT);
+        $actualTimeValue = date_format(date_create($this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']))->getValue()), self::VIEW_DATE_TIME_FORMAT);
+
+        Assert::assertEquals($expectedDateAndTimeValue, $actualTimeValue);
     }
 
     public function getValue(): array

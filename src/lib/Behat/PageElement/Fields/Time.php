@@ -27,12 +27,8 @@ class Time extends EzFieldElement
 
     public function setValue(array $parameters): void
     {
-        $fieldInput = $this->context->findElement(
-            sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput'])
-        );
-
-        Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
-
+        $fieldInput = $this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']));
+        Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));    
         $fieldInput->click();
 
         $time = explode(':', $parameters['value']);
@@ -40,16 +36,13 @@ class Time extends EzFieldElement
         $dateAndTimePopup = ElementFactory::createElement($this->context, DateAndTimePopup::ELEMENT_NAME);
         $dateAndTimePopup->setTime($time[0], $time[1]);
 
-        $expectedTimeValue = date_format(date_create($parameters['value']), self::VALUE_TIME_FORMAT);
-
-        $this->context->waitUntil($this->defaultTimeout, function () use ($expectedTimeValue) {
-            $actualTimeValue = date_format(date_create($this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']))->getValue()), self::VALUE_TIME_FORMAT);
-
-            return $actualTimeValue === $expectedTimeValue;
-        });
-
         // This click is closing the date and time picker, to finally ensure that value is set up.
         $this->context->findElement($this->fields['fieldContainer'])->click();
+
+        $expectedTimeValue = date_format(date_create($parameters['value']), self::VALUE_TIME_FORMAT);
+        $actualTimeValue = date_format(date_create($this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']))->getValue()), self::VALUE_TIME_FORMAT);
+
+        Assert::assertEquals($expectedTimeValue, $actualTimeValue);
     }
 
     public function getValue(): array

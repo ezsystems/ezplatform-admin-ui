@@ -3,7 +3,7 @@ Feature: Content fields setting and editing
   In order to manage content on my site
   I want to set, edit, copy and move content items.
 
-  @javascript @common @EZP-29291-excluded @fieldTypes
+  @javascript @common @EZP-29291-excluded @fieldTypes @testRun
   Scenario Outline: Create content item with given field
     Given a Content Type "<fieldName> CT" with an "<fieldInternalName>" field definition
       And I am logged as "admin"
@@ -43,6 +43,62 @@ Feature: Content fields setting and editing
       | ezmedia              | Media                        | value     | video1.mp4.zip            |            |                       |         |          | video1.mp4                |
       | ezimage              | Image                        | value     | image1.png.zip            |            |                       |         |          | image1.png                |
       | ezbinaryfile         | File                         | value     | binary1.txt.zip           |            |                       |         |          | binary1.txt               |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 10:45                 |         |          | Sat 2019-23-11 10:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 11:45                 |         |          | Sat 2019-23-11 11:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 12:45                 |         |          | Sat 2019-23-11 12:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 13:45                 |         |          | Sat 2019-23-11 13:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 14:45                 |         |          | Sat 2019-23-11 14:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 15:45                 |         |          | Sat 2019-23-11 15:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 16:45                 |         |          | Sat 2019-23-11 16:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 17:45                 |         |          | Sat 2019-23-11 17:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 18:45                 |         |          | Sat 2019-23-11 18:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 19:45                 |         |          | Sat 2019-23-11 19:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 20:45                 |         |          | Sat 2019-23-11 20:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 21:45                 |         |          | Sat 2019-23-11 21:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 22:45                 |         |          | Sat 2019-23-11 22:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 23:45                 |         |          | Sat 2019-23-11 23:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 10:45                 |         |          | Sat 2019-23-11 10:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 11:45                 |         |          | Sat 2019-23-11 11:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 12:45                 |         |          | Sat 2019-23-11 12:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 13:45                 |         |          | Sat 2019-23-11 13:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 14:45                 |         |          | Sat 2019-23-11 14:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 15:45                 |         |          | Sat 2019-23-11 15:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 16:45                 |         |          | Sat 2019-23-11 16:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 17:45                 |         |          | Sat 2019-23-11 17:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 18:45                 |         |          | Sat 2019-23-11 18:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 19:45                 |         |          | Sat 2019-23-11 19:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 20:45                 |         |          | Sat 2019-23-11 20:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 21:45                 |         |          | Sat 2019-23-11 21:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 22:45                 |         |          | Sat 2019-23-11 22:45:00   |
+      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 23:45                 |         |          | Sat 2019-23-11 23:45:00   |
+      | eztime               | Time                         | value     | 10:45                     |            |                       |         |          | 10:45:00 am               |
+      | eztime               | Time                         | value     | 11:45                     |            |                       |         |          | 11:45:00 am               |
+      | eztime               | Time                         | value     | 12:45                     |            |                       |         |          | 12:45:00 pm               |
+      | eztime               | Time                         | value     | 13:45                     |            |                       |         |          | 1:45:00 pm                |
+      | eztime               | Time                         | value     | 14:45                     |            |                       |         |          | 2:45:00 pm                |
+      | eztime               | Time                         | value     | 15:45                     |            |                       |         |          | 3:45:00 pm                |
+      | eztime               | Time                         | value     | 16:45                     |            |                       |         |          | 4:45:00 pm                |
+      | eztime               | Time                         | value     | 17:45                     |            |                       |         |          | 5:45:00 pm                |
+      | eztime               | Time                         | value     | 18:45                     |            |                       |         |          | 6:45:00 pm                |
+      | eztime               | Time                         | value     | 19:45                     |            |                       |         |          | 7:45:00 pm                |
+      | eztime               | Time                         | value     | 20:45                     |            |                       |         |          | 8:45:00 pm                |
+      | eztime               | Time                         | value     | 21:45                     |            |                       |         |          | 9:45:00 pm                |
+      | eztime               | Time                         | value     | 22:45                     |            |                       |         |          | 10:45:00 pm               |
+      | eztime               | Time                         | value     | 23:45                     |            |                       |         |          | 11:45:00 pm               |
+      | eztime               | Time                         | value     | 10:45                     |            |                       |         |          | 10:45:00 am               |
+      | eztime               | Time                         | value     | 11:45                     |            |                       |         |          | 11:45:00 am               |
+      | eztime               | Time                         | value     | 12:45                     |            |                       |         |          | 12:45:00 pm               |
+      | eztime               | Time                         | value     | 13:45                     |            |                       |         |          | 1:45:00 pm                |
+      | eztime               | Time                         | value     | 14:45                     |            |                       |         |          | 2:45:00 pm                |
+      | eztime               | Time                         | value     | 15:45                     |            |                       |         |          | 3:45:00 pm                |
+      | eztime               | Time                         | value     | 16:45                     |            |                       |         |          | 4:45:00 pm                |
+      | eztime               | Time                         | value     | 17:45                     |            |                       |         |          | 5:45:00 pm                |
+      | eztime               | Time                         | value     | 18:45                     |            |                       |         |          | 6:45:00 pm                |
+      | eztime               | Time                         | value     | 19:45                     |            |                       |         |          | 7:45:00 pm                |
+      | eztime               | Time                         | value     | 20:45                     |            |                       |         |          | 8:45:00 pm                |
+      | eztime               | Time                         | value     | 21:45                     |            |                       |         |          | 9:45:00 pm                |
+      | eztime               | Time                         | value     | 22:45                     |            |                       |         |          | 10:45:00 pm               |
+      | eztime               | Time                         | value     | 23:45                     |            |                       |         |          | 11:45:00 pm               |
 
   @javascript @common @EZP-29291-excluded @fieldTypes
   Scenario Outline: Edit content item with given field
