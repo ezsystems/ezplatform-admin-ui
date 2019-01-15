@@ -9,9 +9,11 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
 use eZ\Publish\API\Repository;
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\UserService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
@@ -21,9 +23,6 @@ use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
-use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\API\Repository\Values\Content\Location;
 
 class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
@@ -141,6 +140,10 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
 
         $canSeeSection = $this->permissionResolver->hasAccess('section', 'view');
 
+        $assignSectionForm = $this->formFactory->assignSubtreeSectionForm(
+            new LocationAssignSubtreeData(null, $contextParameters['location'])
+        )->createView();
+
         $viewParameters = [
             'section' => $canSeeSection ? $this->sectionService->loadSection($contentInfo->sectionId) : null,
             'contentInfo' => $contentInfo,
@@ -154,6 +157,7 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
             'form_state_update' => $contentObjectStateUpdateTypeByGroupId,
             'can_see_section' => $canSeeSection,
             'can_assign' => $this->canUserAssignObjectState(),
+            'form_assign_section' => $assignSectionForm,
         ];
 
         return array_replace($contextParameters, $viewParameters);

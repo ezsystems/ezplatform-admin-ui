@@ -15,9 +15,9 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentRemoveData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
@@ -29,15 +29,16 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguagesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashWithAssetData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashWithAssetData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateDeleteData;
@@ -51,9 +52,9 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PoliciesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RolesDeleteData;
@@ -67,10 +68,10 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
-use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\Setting\UserSettingUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
+use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotWithLoginData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData;
@@ -99,28 +100,24 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopySubtreeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashWithAssetType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashContainerType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashWithAssetType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupsDeleteType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStatesDeleteType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateWithLimitationType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemDeleteType;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\UserEditType;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\Setting\UserSettingUpdateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordChangeType;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationAssignSectionType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupsDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStatesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PoliciesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateWithLimitationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType;
@@ -137,7 +134,12 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionsDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\Setting\UserSettingUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserEditType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordChangeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordForgotType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordForgotWithLoginType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordResetType;
@@ -562,6 +564,21 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(SectionContentAssignType::class);
 
         return $this->formFactory->createNamed($name, SectionContentAssignType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData|null $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function assignSubtreeSectionForm(
+        LocationAssignSubtreeData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(SectionContentAssignType::class);
+
+        return $this->formFactory->createNamed($name, LocationAssignSectionType::class, $data);
     }
 
     /**
