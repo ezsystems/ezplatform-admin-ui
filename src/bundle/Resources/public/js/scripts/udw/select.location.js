@@ -64,8 +64,8 @@
     const updateBreadcrumbsState = (btn, pathString) => {
         const pathStringInput = doc.querySelector(btn.dataset.locationPathInputSelector);
         const contentBreadcrumbsContainer = doc.querySelector(btn.dataset.contentBreadcrumbsSelector);
-        const contentBreadcrumbs = contentBreadcrumbsContainer.querySelector('.ez-filters__breadcrumbs');
-        const contentBreadcrumbsSpinner = contentBreadcrumbsContainer.querySelector('.ez-filters__breadcrumbs-spinner');
+        const contentBreadcrumbs = contentBreadcrumbsContainer.querySelector('.ez-tag__content');
+        const contentBreadcrumbsSpinner = contentBreadcrumbsContainer.querySelector('.ez-tag__spinner');
 
         pathStringInput.value = pathString;
         pathStringInput.dispatchEvent(new Event('change'));
