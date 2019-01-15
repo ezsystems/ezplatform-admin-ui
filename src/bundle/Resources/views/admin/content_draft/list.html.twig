@@ -16,7 +16,7 @@
             {{ parent() }}
         {% endblock left_sidebar %}
 
-        <div class="col-sm-10 px-0">
+        <div class="px-0 ez-content-container">
             <section class="container mt-5">
                 {% include '@ezdesign/parts/page_title.html.twig' with {
                     title: 'drafts.list'|trans|desc('Drafts'),
