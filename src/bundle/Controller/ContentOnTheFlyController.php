@@ -162,14 +162,17 @@ class ContentOnTheFlyController extends Controller
     }
 
     /**
-     * @param Location $location
-     * @param ContentType $contentType
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
      * @param string $language
      *
-     * @return ContentCreateStruct
+     * @return \eZ\Publish\API\Repository\Values\Content\ContentCreateStruct
      */
-    private function createContentCreateStruct(Location $location, ContentType $contentType, string $language): ContentCreateStruct
-    {
+    private function createContentCreateStruct(
+        Location $location,
+        ContentType $contentType,
+        string $language
+    ): ContentCreateStruct {
         $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $language);
         $contentCreateStruct->sectionId = $location->contentInfo->sectionId;
 
