@@ -1,15 +1,31 @@
 .ez-icon {
     width: calculateRem(32px);
     height: calculateRem(32px);
+    transition: fill 0.3s $ez-admin-transition;
 
     &--small {
         width: calculateRem(16px);
         height: calculateRem(16px);
     }
 
+    &--small-medium {
+        width: calculateRem(20px);
+        height: calculateRem(20px);
+    }
+
     &--medium {
         width: calculateRem(24px);
         height: calculateRem(24px);
+    }
+
+    &--large {
+        width: calculateRem(48px);
+        height: calculateRem(48px);
+    }
+
+    &--extra-large {
+        width: calculateRem(64px);
+        height: calculateRem(64px);
     }
 
     &--light {
