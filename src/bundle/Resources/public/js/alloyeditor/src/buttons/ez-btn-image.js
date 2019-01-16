@@ -30,6 +30,7 @@ export default class EzBtnImage extends EzEmbedImageButton {
 
         if (navigator.userAgent.indexOf('Chrome') > -1) {
             const scrollY = window.pageYOffset;
+
             this.execCommand();
             window.scroll(window.pageXOffset, scrollY);
         } else {

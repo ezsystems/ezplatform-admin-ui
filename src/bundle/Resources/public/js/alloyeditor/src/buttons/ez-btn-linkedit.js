@@ -414,6 +414,7 @@ export default class EzBtnLinkEdit extends Component {
     invokeWithFixedScrollbar(callback) {
         if (navigator.userAgent.indexOf('Chrome') > -1) {
             const scrollY = window.pageYOffset;
+
             callback();
             window.scroll(window.pageXOffset, scrollY);
         } else {
