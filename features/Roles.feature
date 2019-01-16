@@ -7,7 +7,7 @@ Feature: Roles management
     Given I am logged as "admin"
       And I go to "Roles" in "Admin" tab
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Changes can be discarded while creating Role
     When I start creating new "Role"
       And I set fields
@@ -17,7 +17,7 @@ Feature: Roles management
     Then I should be on "Roles" page
       And there's no "Test Role" on "Roles" list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: New Role can be created
     When I start creating new "Role"
       And I set fields
@@ -28,13 +28,13 @@ Feature: Roles management
       And "Policies" list in "Role" "Test Role" is empty
       And "Assignments" list in "Role" "Test Role" is empty
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: I can navigate to Roles through breadcrumb
     Given I go to "Test Role" "Role" page
     When I click on "Roles" on breadcrumb
     Then I should be on "Roles" page
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Changes can be discarded while editing Role
     Given there's "Test Role" on "Roles" list
     When I start editing "Role" "Test Role"
@@ -46,7 +46,7 @@ Feature: Roles management
       And there's "Test Role" on "Roles" list
       And there's no "Test Role edited" on "Roles" list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Role can be edited
     Given there's "Test Role" on "Roles" list
     When I start editing "Role" "Test Role"
@@ -58,7 +58,7 @@ Feature: Roles management
       And "Policies" list in "Role" "Test Role" is empty
       And "Assignments" list in "Role" "Test Role" is empty
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: User assignation can be discarded
     Given there's "Test Role edited" on "Roles" list
     When I start assigning to "Test Role edited" from "Roles" page
@@ -73,7 +73,7 @@ Feature: Roles management
       And "Policies" list in "Role" "Test Role edited" is empty
       And "Assignments" list in "Role" "Test Role edited" is empty
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: User can be assigned to role from the Roles list
     Given there's "Test Role edited" on "Roles" list
     When I start assigning to "Test Role edited" from "Roles" page
@@ -87,12 +87,12 @@ Feature: Roles management
     Then I should be on "Role" "Test Role edited" page
       And "Policies" list in "Role" "Test Role edited" is empty
       And there are assignments on the "Test Role edited" assignments list
-      | user/group          | limitation                         |
-      | Administrator User  | Subtree of Location: /Media/Images |
-      | Anonymous User      | Subtree of Location: /Media/Images |
-      | Editors             | Subtree of Location: /Media/Images |
+        | user/group          | limitation                         |
+        | Administrator User  | Subtree of Location: /Media/Images |
+        | Anonymous User      | Subtree of Location: /Media/Images |
+        | Editors             | Subtree of Location: /Media/Images |
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: User can be assigned to role from the Role details view
     Given there's "Test Role edited" on "Roles" list
       And I go to "Test Role edited" "Role" page
@@ -108,7 +108,7 @@ Feature: Roles management
       | Anonymous User      | Subtree of Location: /Media/Images |
       | Users	            | None                               |
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: Assignment can be deleted from role
     Given there's "Test Role edited" on "Roles" list
       And I go to "Test Role edited" "Role" page
@@ -121,7 +121,7 @@ Feature: Roles management
       And "Policies" list in "Role" "Test Role edited" is empty
       And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Adding policy can be discarded
     Given there's "Test Role edited" on "Roles" list
       And I go to "Test Role edited" "Role" page
@@ -132,7 +132,7 @@ Feature: Roles management
       And "Policies" list in "Role" "Test Role edited" is empty
       And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Policies can be added to role
     Given there's "Test Role edited" on "Roles" list
       And I go to "Test Role edited" "Role" page
@@ -147,7 +147,7 @@ Feature: Roles management
       And there is a policy "Content/Read" with "Content Type: File" limitation on the "Test Role edited" policies list
       And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Policies without limitations can be added to role
     Given there's "Test Role edited" on "Roles" list
       And I go to "Test Role edited" "Role" page
@@ -158,7 +158,7 @@ Feature: Roles management
       And there is a policy "User/Password" with "None" limitation on the "Test Role edited" policies list
       And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
-  @javascript @common
+  @javascript @common @parallel-wait
   Scenario: Policies can be edited
     Given there's "Test Role edited" on "Roles" list
       And I go to "Test Role edited" "Role" page
@@ -172,10 +172,10 @@ Feature: Roles management
       And I click on the edit action bar button "Update"
     Then I should be on "Role" "Test Role edited" page
       And there are policies on the "Test Role edited" policies list
-      | policy       | limitation                                  |
-      | Content/Read | Content Type: Article, Folder               |
-      | Content/Read | Subtree of Location: /Users/Anonymous Users |
-      | Content/Read | State: Lock:Locked                          |
+        | policy       | limitation                                  |
+        | Content/Read | Content Type: Article, Folder               |
+        | Content/Read | Subtree of Location: /Users/Anonymous Users |
+        | Content/Read | State: Lock:Locked                          |
       And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common

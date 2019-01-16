@@ -7,7 +7,7 @@ Feature: Object States management
     Given I am logged as "admin"
       And I go to "Object States" in "Admin" tab
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Changes can be discarded while creating Object State Group
     When I start creating new "Object State Group"
       And I set fields
@@ -18,7 +18,7 @@ Feature: Object States management
     Then I should be on "Object State Groups" page
       And there's no "Test Object State Group" on "Object State Groups" list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: New Object State Group can be added
     When I start creating new "Object State Group"
       And I set fields
@@ -34,13 +34,13 @@ Feature: Object States management
         | Identifier              | TestObjectStateGroupIdentifier |
       And notification that "Object state type group" "Test Object State Group" is created appears
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: I can navigate to Admin / Object State Groups through breadcrumb
     Given I go to "Test Object State Group" "Object State Group" page
     When I click on "Object States" on breadcrumb
     Then I should be on "Object State Groups" page
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Changes can be discarded while editing Object State Groups
     Given there's "Test Object State Group" on "Object State Groups" list
     When I start editing "Object State Group" "Test Object State Group"
@@ -52,7 +52,7 @@ Feature: Object States management
       And there's "Test Object State Group" on "Object State Groups" list
       And there's no "Test Object State Group edited" on "Object State Groups" list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Object State Group can be edited
     Given there's "Test Object State Group" on "Object State Groups" list
     When I start editing "Object State Group" "Test Object State Group"
@@ -63,7 +63,7 @@ Feature: Object States management
     Then I should be on "Object State Group" "Test Object State Group edited" page
       And notification that "Object state group" "TestObjectStateGroupIdentifier" is updated appears
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: Changes can be discarded while editing Object State Group from group details
     Given I go to "Test Object State Group edited" "Object State Group" page
     When I start editing "Object State Group" "Test Object State Group edited" from details page
@@ -75,7 +75,7 @@ Feature: Object States management
       And there's "Test Object State Group edited" on "Object State Groups" list
       And there's no "Test Object State Group edited2" on "Object State Groups" list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Object State Group can be edited from group details
     Given I go to "Test Object State Group edited" "Object State Group" page
     When I start editing "Object State Group" "Test Object State Group edited" from details page
@@ -86,7 +86,7 @@ Feature: Object States management
     Then I should be on "Object State Group" "Test Object State Group edited2" page
       And notification that "Object state group" "TestObjectStateGroupIdentifier" is updated appears
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: Object State creation can be discarded
     Given I go to "Test Object State Group edited2" "Object State Group" page
     When I start creating new "Object State" in "Test Object State Group edited2"
@@ -98,7 +98,7 @@ Feature: Object States management
     Then I should be on "Object State Group" "Test Object State Group edited2" page
       And there's no "Test Object State" on "Test Object State Group edited2" Object States list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: New Object State can be added
     Given I go to "Test Object State Group edited2" "Object State Group" page
     When I start creating new "Object State" in "Test Object State Group edited2"
@@ -114,14 +114,14 @@ Feature: Object States management
         | Identifier        | TestObjectStateIdentifier |
       And notification that "Object state" "Test Object State" is created appears
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: I can navigate to Object State Group page through breadcrumb
     Given I go to "Test Object State Group edited2" "Object State Group" page
       And I go to "Test Object State" Object State page from "Test Object State Group edited2"
     When I click on "Object State Group: Test Object State Group edited2" on breadcrumb
     Then I should be on "Object State Group" "Test Object State Group edited2" page
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Changes can be discarded while editing Object State
     Given I go to "Test Object State Group edited2" "Object State Group" page
     When I start editing "Object State" "Test Object State" from "Test Object State Group edited2"
@@ -133,7 +133,7 @@ Feature: Object States management
       And there's "Test Object State" on "Test Object State Group edited2" Object States list
       And there's no "Test Object State edited" on "Test Object State Group edited2" Object States list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Object State can be edited
     Given I go to "Test Object State Group edited2" "Object State Group" page
     When I start editing "Object State" "Test Object State" from "Test Object State Group edited2"
@@ -148,7 +148,7 @@ Feature: Object States management
         | Object state name | Test Object State edited  |
         | Identifier        | TestObjectStateIdentifier |
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: Changes can be discarded while editing Object State from state details
     Given I go to "Test Object State Group edited2" "Object State Group" page
       And I go to "Test Object State edited" Object State page from "Test Object State Group edited2"
@@ -161,7 +161,7 @@ Feature: Object States management
       And there's "Test Object State edited" on "Test Object State Group edited2" Object States list
       And there's no "Test Object State edited2" on "Test Object State Group edited2" Object States list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Object State can be edited from state details
     Given I go to "Test Object State Group edited2" "Object State Group" page
       And I go to "Test Object State edited" Object State page from "Test Object State Group edited2"
@@ -177,7 +177,7 @@ Feature: Object States management
         | Object state name | Test Object State edited2 |
         | Identifier        | TestObjectStateIdentifier |
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Second object state can be created
     Given I go to "Test Object State Group edited2" "Object State Group" page
     When I start creating new "Object State" in "Test Object State Group edited2"
@@ -197,8 +197,8 @@ Feature: Object States management
   Scenario: Object state can be deleted
     Given I go to "Test Object State Group edited2" "Object State Group" page
     When  I delete Object State from "Test Object State Group edited2"
-        | item                |
-        | Test Object State 2 |
+      | item                |
+      | Test Object State 2 |
     Then notification that "Object state" "TestObjectStateIdentifier2" is deleted appears
       And there's no "Test Object State 2" on "Test Object State Group edited2" Object States list
 

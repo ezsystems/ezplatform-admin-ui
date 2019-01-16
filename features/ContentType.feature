@@ -8,7 +8,7 @@ Feature: Content types management
       And I go to "Content Types" in "Admin" tab
       And I go to "Content" "Content Type Group" page
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Changes can be discarded while creating Content Type
     When I start creating new "Content Type" in "Content"
       And I set fields
@@ -19,7 +19,7 @@ Feature: Content types management
     Then I should be on "Content Type Group" "Content" page
       And there's no "Test Content Type" on "Content" "Content Type Group" list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: New Content Type can be added to Content Type Group
     When I start creating new "Content Type" in "Content"
       And I set fields
@@ -41,13 +41,13 @@ Feature: Content types management
         | CountryField   | ezcountry |
       And notification that "Content type" "Test Content Type" is updated appears
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: I can navigate to Content Type Group through breadcrumb
     Given I go to "Test Content Type" "Content Type" page from "Content"
     When I click on "Content" on breadcrumb
     Then I should be on "Content Type Group" "Content" page
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Changes can be discarded while editing Content type
     Given there's "Test Content Type" on "Content" "Content Type Group" list
     When I start editing "Content Type" "Test Content Type" from "Content"
@@ -59,7 +59,7 @@ Feature: Content types management
       And there's "Test Content Type" on "Content" "Content Type Group" list
       And there's no "Test Content Type edited" on "Content" "Content Type Group" list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: New Field can be added while editing Content Type
     Given there's "Test Content Type" on "Content" "Content Type Group" list
     When I start editing "Content Type" "Test Content Type" from "Content"

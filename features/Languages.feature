@@ -7,7 +7,7 @@ Feature: Languages management
     Given I am logged as "admin"
       And I go to "Languages" in "Admin" tab
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Changes can be discarded while creating new Language
     When I start creating new "Language"
       And I set fields
@@ -18,7 +18,7 @@ Feature: Languages management
     Then I should be on "Languages" page
       And there's no "Deutsch" on "Languages" list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: New Language can be added
     When I start creating new "Language"
       And I set fields
@@ -33,7 +33,7 @@ Feature: Languages management
         | Language code | de-DE    |
         | Enabled       | true     |
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: New Language with existing language code cannot be added
     When I start creating new "Language"
       And I set fields
@@ -43,13 +43,13 @@ Feature: Languages management
       And I click on the edit action bar button "Create"
     Then error notification that "language with specified language code already exists" appears
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: I can navigate to Admin / Languages through breadcrumb
     Given I go to "Deutsch" "Language" page
     When I click on "Languages" on breadcrumb
     Then I should be on "Languages" page
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Changes can be discarded while editing Language
     Given there's "Deutsch" on "Languages" list
     When I start editing "Language" "Deutsch"
@@ -61,7 +61,7 @@ Feature: Languages management
       And there's "Deutsch" on "Languages" list
       And there's no "Edited Deutsch" on "Languages" list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Language can be disabled
     Given there's "Deutsch" on "Languages" list
     When I start editing "Language" "Deutsch"

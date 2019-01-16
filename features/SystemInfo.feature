@@ -7,7 +7,7 @@ Feature: System info verification
     Given I am logged as "admin"
       And I go to "System Information" in "Admin" tab
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Check Composer System Information
     When I go to "Composer" tab in System Information
     Then I see "Composer" system information table
@@ -23,22 +23,22 @@ Feature: System info verification
         | ezsystems/ezpublish-kernel              |
         | ezsystems/repository-forms              |
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Check Database System Information
     When I go to "Database" tab in System Information
     Then I see "Database" system information table
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Check Hardware System Information
     When I go to "Hardware" tab in System Information
     Then I see "Hardware" system information table
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Check PHP System Information
     When I go to "PHP" tab in System Information
     Then I see "PHP" system information table
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Check Symfony Kernel System Information
     When I go to "Symfony Kernel" tab in System Information
     Then I see "Symfony Kernel" system information table

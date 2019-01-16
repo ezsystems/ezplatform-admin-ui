@@ -92,7 +92,7 @@ Feature: Content items creation
         | Title | Test Article       |
       And article main content field equals "Test article intro"
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: Content edit draft can be deleted
     Given I navigate to content "Test Article" of type "Article" in root path
     When I click on the edit action bar button "Edit"
@@ -104,7 +104,7 @@ Feature: Content items creation
     Then I should be on content container page "Test Article" of type "Article" in root path
       And going to dashboard we see there's no draft "Test Article edited" on list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Content draft can be edited from dashboard
     Given I navigate to content "Test Article" of type "Article" in root path
       And I click on the edit action bar button "Edit"
@@ -118,7 +118,7 @@ Feature: Content items creation
     When I start editing content draft "Test Article edited"
     Then I should be on "Content Update" "Test Article edited" page
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: Content draft edition can be closed
     Given going to dashboard we see there's draft "Test Article edited" on list
     When I start editing content draft "Test Article edited"
@@ -129,7 +129,7 @@ Feature: Content items creation
       And I click on the close button
     Then I should be on content container page "Test Article" of type "Article" in root path
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Content edit draft can be saved
     Given going to dashboard we see there's draft "Test Article edited" on list
     When I start editing content draft "Test Article edited"
@@ -142,7 +142,7 @@ Feature: Content items creation
       And I should be on "Content Update" "Test Article edited2" page
       And going to dashboard we see there's draft "Test Article edited2" on list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Content draft can be created and published through draft list modal
     Given I navigate to content "Test Article" of type "Article" in root path
     When I click on the edit action bar button "Edit"
@@ -158,7 +158,7 @@ Feature: Content items creation
         | Title | Test Article edited3 |
       And article main content field equals "Test article intro"
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: Content can be previewed during edition
     Given I navigate to content "Test Article edited3" of type "Article" in root path
     When I click on the edit action bar button "Edit"
@@ -173,7 +173,7 @@ Feature: Content items creation
         | Title | Test Article edited3 |
       And article main content field is set to "Test article intro"
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Content draft from draft list modal can be published
     Given I navigate to content "Test Article edited3" of type "Article" in root path
     When I click on the edit action bar button "Edit"
@@ -189,7 +189,34 @@ Feature: Content items creation
         | Title | Test Article edited4 |
       And article main content field equals "Test article intro"
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
+  Scenario: Content can be copied
+    Given I navigate to content "Test Article edited4" of type "Article" in "Media/Images"
+    When I click on the edit action bar button "Copy"
+      And I select content root node through UDW
+      And I confirm the selection in UDW
+    Then success notification that "Test Article edited4" has been copied to root node appears
+      And I should be on content container page "Test Article edited4" of type "Article" in root path
+      And content attributes equal
+        | label | value                |
+        | Title | Test Article edited4 |
+      And article main content field equals "Test article intro"
+      And going to "Media/Images" there is a "Test Article edited4" "Article" on Sub-items list
+
+  @javascript @common @parallel-scenario
+  Scenario: Content copying can be cancelled
+    Given I navigate to content "Test Article edited4" of type "Article" in "Media/Images"
+    When I click on the edit action bar button "Copy"
+      And I select content root node through UDW
+      And I close the UDW window
+    Then I should be on content container page "Test Article edited4" of type "Article" in "Media/Images"
+      And content attributes equal
+        | label | value                |
+        | Title | Test Article edited4 |
+      And article main content field equals "Test article intro"
+      And going to root path there is no "Test Article edited4" "Article" on Sub-items list
+
+  @javascript @common @parallel-scenario
   Scenario: Content moving can be cancelled
     Given I navigate to content "Test Article edited4" of type "Article" in root path
     When I click on the edit action bar button "Move"
@@ -202,7 +229,7 @@ Feature: Content items creation
       And article main content field equals "Test article intro"
       And breadcrumb shows "Test Article edited4" path under root path
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Content can be moved
     Given I navigate to content "Test Article edited4" of type "Article" in root path
     When I click on the edit action bar button "Move"
@@ -217,41 +244,14 @@ Feature: Content items creation
       And breadcrumb shows "Media/Images/Test Article edited4" path
       And going to root path there is no "Test Article edited4" "Article" on Sub-items list
 
-  @javascript @common
-  Scenario: Content copying can be cancelled
-    Given I navigate to content "Test Article edited4" of type "Article" in "Media/Images"
-    When I click on the edit action bar button "Copy"
-      And I select content root node through UDW
-      And I close the UDW window
-    Then I should be on content container page "Test Article edited4" of type "Article" in "Media/Images"
-      And content attributes equal
-        | label | value                |
-        | Title | Test Article edited4 |
-      And article main content field equals "Test article intro"
-      And going to root path there is no "Test Article edited4" "Article" on Sub-items list
-
-  @javascript @common
-  Scenario: Content can be copied
-    Given I navigate to content "Test Article edited4" of type "Article" in "Media/Images"
-    When I click on the edit action bar button "Copy"
-      And I select content root node through UDW
-      And I confirm the selection in UDW
-    Then success notification that "Test Article edited4" has been copied to root node appears
-      And I should be on content container page "Test Article edited4" of type "Article" in root path
-      And content attributes equal
-        | label | value                |
-        | Title | Test Article edited4 |
-      And article main content field equals "Test article intro"
-      And going to "Media/Images" there is a "Test Article edited4" "Article" on Sub-items list
-
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: Content can be moved to trash from non-root location
     Given I navigate to content "Test Article edited4" of type "Article" in "Media/Images"
     When I send content to trash
     Then there's no "Article" "Test Article edited4" on "Images" Sub-items list
       And going to trash there is "Article" "Test Article edited4" on list
 
-  @javascript @common
+  @javascript @common @parallel-scenario @parallel-examples
   Scenario Outline: Content can be moved to trash from root location
     Given I navigate to content "<itemName>" of type "<itemType>" in root path
     When I send content to trash

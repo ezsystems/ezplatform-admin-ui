@@ -7,7 +7,7 @@ Feature: Content type groups management
     Given I am logged as "admin"
       And I go to "Content Types" in "Admin" tab
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Changes can be discarded while creating new Content Type Group
     When I start creating new "Content Type Group"
       And I set fields
@@ -17,7 +17,7 @@ Feature: Content type groups management
     Then I should be on "Content Type Groups" page
       And there's no "Test Content Type Group" on "Content Type Groups" list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: New Content Type Group can be added
     When I start creating new "Content Type Group"
       And I set fields
@@ -27,13 +27,13 @@ Feature: Content type groups management
     Then I should be on "Content Type Group" "Test Content Type Group" page
       And "Content Types" list in "Content Type Group" "Test Content Type Group" is empty
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: I can navigate to Admin / Content Types through breadcrumb
     Given I go to "Test Content Type Group" "Content Type Group" page
     When I click on "Content Types" on breadcrumb
     Then I should be on "Content Type Groups" page
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Changes can be discarded while editing Content Type Group
     Given there's "Test Content Type Group" on "Content Type Groups" list
     When I start editing "Content Type Group" "Test Content Type Group"
@@ -45,7 +45,7 @@ Feature: Content type groups management
       And there's "Test Content Type Group" on "Content Type Groups" list
       And there's no "Test Content Type Group edited" on "Content Type Groups" list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Content Type Group can be edited
     Given there's "Test Content Type Group" on "Content Type Groups" list
     When I start editing "Content Type Group" "Test Content Type Group"
@@ -56,7 +56,7 @@ Feature: Content type groups management
     Then I should be on "Content Type Group" "Test Content Type Group edited" page
       And notification that "Content type group" "Test Content Type Group" is updated appears
 
-  @javascript @common
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: Content type group can be deleted
     Given there's empty "Test Content Type Group edited" on "Content Type Groups" list
     When I delete "Content Type Group"
@@ -65,7 +65,7 @@ Feature: Content type groups management
     Then notification that "Content type group" "Test Content Type Group edited" is deleted appears
       And there's no "Test Content Type Group edited" on "Content Type Groups" list
 
-  @javascript @common
+  @javascript @common @parallel-scenario
   Scenario: Non-empty Content type group cannot be deleted
     Given there's non-empty "Content" on "Content Type Groups" list
     Then "Content Type Group" "Content" cannot be selected
