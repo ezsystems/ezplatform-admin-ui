@@ -28,7 +28,14 @@ export default class EzBtnImage extends EzEmbedImageButton {
     addImage(items) {
         const content = items[0].ContentInfo.Content;
 
-        this.execCommand();
+        if (navigator.userAgent.indexOf('Chrome') > -1) {
+            const scrollY = window.pageYOffset;
+            this.execCommand();
+            window.scroll(window.pageXOffset, scrollY);
+        } else {
+            this.execCommand();
+        }
+
         this.setContentInfo(content._id);
 
         const widget = this.getWidget()
