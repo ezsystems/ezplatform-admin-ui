@@ -52,7 +52,7 @@ class ContentType extends AbstractParser
                 ->useAttributeAsKey('identifier')
                 ->arrayPrototype()
                     ->children()
-                        ->scalarNode('thumbnail')->end()
+                        ->scalarNode('thumbnail')->defaultNull()->end()
                     ->end()
                 ->end()
             ->end();

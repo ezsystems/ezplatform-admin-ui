@@ -1,7 +1,3 @@
-parameters:
-    # default content type icon
-    ezsystems.ezplatform_admin_ui.default_content_type_thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#file'
-
 services:
     _defaults:
         autowire: true
@@ -103,7 +99,3 @@ services:
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\PathStringExtension: ~
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ContentTypeIconExtension: ~
-
-    EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver:
-        arguments:
-            $defaultThumbnail: '%ezsystems.ezplatform_admin_ui.default_content_type_thumbnail%'
