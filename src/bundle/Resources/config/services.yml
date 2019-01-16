@@ -21,6 +21,10 @@ imports:
     - { resource: services/permissions.yml }
     - { resource: services/forms.yml }
 
+parameters:
+    # default content type icon
+    ezsystems.ezplatform_admin_ui.default_content_type_thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#file'
+
 services:
     _defaults:
         autowire: true
@@ -126,3 +130,7 @@ services:
             - {name: kernel.event_subscriber, priority: -250}
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UserPreferencesGlobalExtension: ~
+
+    EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver:
+        arguments:
+            $defaultThumbnail: '%ezsystems.ezplatform_admin_ui.default_content_type_thumbnail%'

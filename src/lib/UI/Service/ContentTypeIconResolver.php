@@ -11,7 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Service;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 
-final class ContentTypeIconResolver
+class ContentTypeIconResolver
 {
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
@@ -23,7 +23,7 @@ final class ContentTypeIconResolver
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      * @param string|null $defaultThumbnail
      */
-    public function __construct(ConfigResolverInterface $configResolver, ?string $defaultThumbnail = null)
+    public function __construct(ConfigResolverInterface $configResolver, string $defaultThumbnail)
     {
         $this->configResolver = $configResolver;
         $this->defaultThumbnail = $defaultThumbnail;
@@ -46,7 +46,8 @@ final class ContentTypeIconResolver
         }
 
         $config = $this->configResolver->getParameter('content_type');
-        if (isset($config[$contentType])) {
+
+        if (isset($config[$contentType]) && !empty($config[$contentType]['thumbnail'])) {
             return $config[$contentType]['thumbnail'];
         }
 
