@@ -63,17 +63,6 @@ services:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'contentTypeNames' }
 
-    EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeIcons:
-        tags:
-            - { name: ezplatform.admin_ui.config_provider, key: 'contentTypeIcons' }
-
-    ezsystems.ezplatform_admin_ui.ui.config.provider.default_content_type_icon:
-        class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\Value
-        arguments:
-            $value: '%ezsystems.ezplatform_admin_ui.default_content_type_thumbnail%'
-        tags:
-            - { name: ezplatform.admin_ui.config_provider, key: 'defaultContentTypeIcon' }
-
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module\UniversalDiscoveryWidget:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'universalDiscoveryWidget' }
@@ -113,6 +102,8 @@ services:
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\PathStringExtension: ~
 
-    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ContentTypeIconExtension:
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ContentTypeIconExtension: ~
+
+    EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver:
         arguments:
             $defaultThumbnail: '%ezsystems.ezplatform_admin_ui.default_content_type_thumbnail%'
