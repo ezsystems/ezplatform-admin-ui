@@ -421,66 +421,6 @@
         <target>State / Assign</target>
         <note>key: role.policy.state.assign</note>
       </trans-unit>
-      <trans-unit id="cc6e4acc0dcae1afe8db5b49f7dd5edaae630335" resname="role.policy.tags">
-        <source>Tags</source>
-        <target>Tags</target>
-        <note>key: role.policy.tags</note>
-      </trans-unit>
-      <trans-unit id="ca1d76800f0e9c6cfea814cf8bbeabf3590b2ac8" resname="role.policy.tags.add">
-        <source>Tags / Add</source>
-        <target>Tags / Add</target>
-        <note>key: role.policy.tags.add</note>
-      </trans-unit>
-      <trans-unit id="56d80e83a34bbb49279f87e859bcc6c373441efa" resname="role.policy.tags.addsynonym">
-        <source>Tags / Addsynonym</source>
-        <target>Tags / Addsynonym</target>
-        <note>key: role.policy.tags.addsynonym</note>
-      </trans-unit>
-      <trans-unit id="11b1aa1907d3d53ea146cf0962f682a6633f23c7" resname="role.policy.tags.all_functions">
-        <source>Tags / All functions</source>
-        <target>Tags / All functions</target>
-        <note>key: role.policy.tags.all_functions</note>
-      </trans-unit>
-      <trans-unit id="5e33e3a7f52fcd097194954c2d1d2f00ace41e44" resname="role.policy.tags.delete">
-        <source>Tags / Delete</source>
-        <target>Tags / Delete</target>
-        <note>key: role.policy.tags.delete</note>
-      </trans-unit>
-      <trans-unit id="c450d479f5ed11440f687f3890c34295178cc9a7" resname="role.policy.tags.deletesynonym">
-        <source>Tags / Deletesynonym</source>
-        <target>Tags / Deletesynonym</target>
-        <note>key: role.policy.tags.deletesynonym</note>
-      </trans-unit>
-      <trans-unit id="8679a6a742e070e6360c2e585980fb96e83b8f99" resname="role.policy.tags.edit">
-        <source>Tags / Edit</source>
-        <target>Tags / Edit</target>
-        <note>key: role.policy.tags.edit</note>
-      </trans-unit>
-      <trans-unit id="175b4314d607847438e116547f5f39c2e2fb5441" resname="role.policy.tags.editsynonym">
-        <source>Tags / Editsynonym</source>
-        <target>Tags / Editsynonym</target>
-        <note>key: role.policy.tags.editsynonym</note>
-      </trans-unit>
-      <trans-unit id="9eb5003211c69c4c0402439346315b5cebb5436f" resname="role.policy.tags.makesynonym">
-        <source>Tags / Makesynonym</source>
-        <target>Tags / Makesynonym</target>
-        <note>key: role.policy.tags.makesynonym</note>
-      </trans-unit>
-      <trans-unit id="b758f24f4755be446abab7d86f202a307da36197" resname="role.policy.tags.merge">
-        <source>Tags / Merge</source>
-        <target>Tags / Merge</target>
-        <note>key: role.policy.tags.merge</note>
-      </trans-unit>
-      <trans-unit id="f23b48237c0715a19920b381e4d377f101b1fba7" resname="role.policy.tags.read">
-        <source>Tags / Read</source>
-        <target>Tags / Read</target>
-        <note>key: role.policy.tags.read</note>
-      </trans-unit>
-      <trans-unit id="17b759a5f08287ad7a9262be471033da5b080ca9" resname="role.policy.tags.view">
-        <source>Tags / View</source>
-        <target>Tags / View</target>
-        <note>key: role.policy.tags.view</note>
-      </trans-unit>
       <trans-unit id="d3c70d265ab037db5ade02a8b738b5981353c7ac" resname="role.policy.type">
         <source>Type</source>
         <target state="new">Type</target>
