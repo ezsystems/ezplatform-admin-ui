@@ -26,6 +26,20 @@ parameters:
                 match:
                     SystemInfo\Identifier: 'symfony_kernel'
 
+    ezsettings.default.content_type:
+        article:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#article'
+        folder:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#folder'
+        user:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#user'
+        user_group:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#user_group'
+        file:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#file'
+        image:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#image'
+
     ezplatform.content_view.tabs.default_template: '@@ezdesign/parts/tab/default.html.twig'
 
     ezplatform.multifile_upload.location.mappings: []
