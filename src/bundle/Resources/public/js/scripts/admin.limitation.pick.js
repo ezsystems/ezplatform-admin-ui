@@ -74,11 +74,9 @@
     };
     const addLocationsToInput = (limitationBtn, newlySelectedItems) => {
         const input = doc.querySelector(limitationBtn.dataset.locationInputSelector);
-        const alreadySelectedLocationsIds = input.value ? input.value.split(IDS_SEPARATOR) : [];
-        const newlySelectedLocationsIds = newlySelectedItems.map((item) => item.id);
-        const allSelectedLocationsIds = [...alreadySelectedLocationsIds, ...newlySelectedLocationsIds].join(IDS_SEPARATOR);
+        const newlySelectedLocationsIds = newlySelectedItems.map((item) => item.id).join(IDS_SEPARATOR);
 
-        input.value = allSelectedLocationsIds;
+        input.value = input.value ? `${input.value}${IDS_SEPARATOR}${newlySelectedLocationsIds}` : newlySelectedLocationsIds;
     };
     const removeLocationFromInput = (limitationBtn, removedLocationId) => {
         const input = doc.querySelector(limitationBtn.dataset.locationInputSelector);
@@ -92,10 +90,9 @@
         const fragment = doc.createDocumentFragment();
 
         newlySelectedItems.forEach((location) => {
-            const contentName = location.ContentInfo.Content.Name;
             const locationId = location.id;
             const container = doc.createElement('ul');
-            const renderedItem = tagTemplate.replace('{{ contentBreadcrumbs }}', contentName).replace('{{ locationId }}', locationId);
+            const renderedItem = tagTemplate.replace('{{ location_id }}', locationId);
 
             container.insertAdjacentHTML('beforeend', renderedItem);
 

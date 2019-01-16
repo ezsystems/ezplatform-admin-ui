@@ -14,10 +14,16 @@
     }
 
     &__remove-btn {
-        display: block;
         position: absolute;
         top: calculateRem(7px);
         right: calculateRem(6px);
         cursor: pointer;
+        border: 0;
+        padding: 0;
+        outline: none;
+    }
+
+    &__remove-btn:focus {
+        outline: none;
     }
 }

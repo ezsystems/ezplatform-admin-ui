@@ -11,9 +11,9 @@
         data-selected-location-list-selector="#{{ form.limitationValues.vars.id }}-selected-location"
         data-udw-config="{{ ez_udw_config('multiple', {}) }}"
         data-value-template="{{ include('@ezdesign/Limitation/udw_limitation_value_tag.html.twig', {
-            'contentBreadcrumbs': '{{ contentBreadcrumbs }}',
-            'locationId': '{{ locationId }}',
-            'isLoadingState': true
+            'content_breadcrumbs': '',
+            'location_id': '{{ location_id }}',
+            'is_loading_state': true
         })|e('html_attr') }}">
         {{ "role.policy.limitation.location.udw_button"|trans({}, "ezrepoforms_role")|desc("Select locations") }}
     </button>
@@ -22,19 +22,19 @@
         class="list-unstyled">
         {% for limitationValue in form.limitationValues.vars.data %}
             {% if limitationValue is not empty %}
-                {% set pathLocations = ez_path_string_to_locations(limitationValue.pathString) %}
-                {% set contentBreadcrumbs = '' %}
-                {% for location in pathLocations %}
-                    {% set contentBreadcrumbs = contentBreadcrumbs ~ ez_content_name(location.contentInfo) %}
+                {% set path_locations = ez_path_string_to_locations(limitationValue.pathString) %}
+                {% set content_breadcrumbs = '' %}
+                {% for location in path_locations %}
+                    {% set content_breadcrumbs = content_breadcrumbs ~ ez_content_name(location.contentInfo) %}
                     {% if loop.revindex > 1 %}
-                        {% set contentBreadcrumbs = contentBreadcrumbs ~ ' / ' %}
+                        {% set content_breadcrumbs = content_breadcrumbs ~ ' / ' %}
                     {% endif %}
                 {% endfor %}
                 
                 {{ include('@ezdesign/Limitation/udw_limitation_value_tag.html.twig', { 
-                    'contentBreadcrumbs': contentBreadcrumbs,
-                    'locationId': limitationValue.id,
-                    'isLoadingState': false
+                    'content_breadcrumbs': content_breadcrumbs,
+                    'location_id': limitationValue.id,
+                    'is_loading_state': false
                 }) }}
             {% endif %}
         {% endfor %}
