@@ -48,12 +48,13 @@
     <table class="ez-table table">
         <thead>
             <tr>
-                <th></th>
-                <th>{{ 'content_type.view.list.column.name'|trans|desc('Name') }}</th>
-                <th>{{ 'content_type.view.list.column.identifier'|trans|desc('Identifier') }}</th>
-                <th>{{ 'content_type.view.list.column.id'|trans|desc('ID') }}</th>
-                <th>{{ 'content_type.view.list.column.modification_date'|trans|desc('Modification date') }}</th>
-                <th></th>
+                <th class="ez-table__header-cell"></th>
+                <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
+                <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'content_type.view.list.column.name'|trans|desc('Name') }}</th>
+                <th class="ez-table__header-cell">{{ 'content_type.view.list.column.identifier'|trans|desc('Identifier') }}</th>
+                <th class="ez-table__header-cell">{{ 'content_type.view.list.column.id'|trans|desc('ID') }}</th>
+                <th class="ez-table__header-cell">{{ 'content_type.view.list.column.modification_date'|trans|desc('Modification date') }}</th>
+                <th class="ez-table__header-cell"></th>
             </tr>
         </thead>
         <tbody>
@@ -66,7 +67,12 @@
                         {% do form_content_types_delete.content_types.setRendered %}
                     {% endif %}
                 </td>
-                <td class="ez-table__cell">
+                <td class="ez-table__cell ez-table__cell--has-icon">
+                    <svg class="ez-icon ez-icon--medium">
+                        <use xlink:href="{{ ezplatform_admin_ui_content_type_icon(content_type) }}"></use>
+                    </svg>
+                </td>
+                <td class="ez-table__cell ez-table__cell--after-icon">
                 {% set view_url = path('ezplatform.content_type.view', {
                         'contentTypeGroupId': content_type_group.id,
                         'contentTypeId': content_type.id

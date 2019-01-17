@@ -127,6 +127,7 @@
                         attrs: Object.assign({}, mfuAttrs, {
                             onPopupClose: (itemsUploaded) => itemsUploaded.length && global.location.reload(true),
                             contentCreatePermissionsConfig: JSON.parse(container.dataset.mfuCreatePermissionsConfig),
+                            contentTypesMap,
                         }),
                     },
                 ],

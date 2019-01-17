@@ -1,9 +1,9 @@
 .ez-extra-actions {
     $block: '.ez-extra-actions';
 
-    border-radius: 8px;
-    border: 6px solid $ez-color-secondary;
-    width: 300px;
+    border-radius: calculateRem(8px);
+    border: calculateRem(6px) solid $ez-color-secondary;
+    width: calculateRem(300px);
 
     &__action {
         display: block;
@@ -11,9 +11,9 @@
         border: 0 none;
         width: 100%;
         text-align: left;
-        border-radius: 4px;
-        padding: 0 16px;
-        line-height: 45px;
+        border-radius: calculateRem(4px);
+        padding: 0 calculateRem(16px);
+        line-height: calculateRem(45px);
         background: $ez-white;
         color: $ez-color-secondary;
         text-decoration: none;
@@ -38,19 +38,19 @@
     }
 
     &__action + &__action {
-        margin-top: 8px;
+        margin-top: calculateRem(8px);
     }
 
     &__header {
-        line-height: 45px;
+        line-height: calculateRem(45px);
         color: $ez-white;
-        padding: 0 8px;
+        padding: 0 calculateRem(8px);
         font-weight: 700;
     }
 
     &__content {
         background: $ez-ground-base-dark;
-        max-height: 300px;
+        max-height: calculateRem(300px);
         overflow: auto;
 
         .form-group {
@@ -61,11 +61,11 @@
     &--edit-user,
     &--edit {
         #{$block}__content {
-            padding: 8px;
+            padding: calculateRem(8px);
         }
 
         #{$block}__form-values {
-            max-height: 150px;
+            max-height: calculateRem(150px);
             overflow: auto;
         }
 
@@ -75,15 +75,15 @@
             border: 0 none;
             width: 100%;
             text-align: left;
-            border-radius: 4px;
-            padding: 0 16px;
-            line-height: 45px;
+            border-radius: calculateRem(4px);
+            padding: 0 calculateRem(16px);
+            line-height: calculateRem(45px);
             background: $ez-white;
             text-decoration: none;
             cursor: pointer;
             transition: all 0.2s $ez-admin-transition;
             margin-bottom: 0;
-            font-size: 0.9375rem;
+            font-size: calculateRem(15px);
 
             &:hover,
             &:focus {
@@ -97,7 +97,7 @@
             }
 
             &:not(:last-child) {
-                margin-bottom: 0.5rem;
+                margin-bottom: calculateRem(8px);
             }
 
             &-label {
@@ -115,15 +115,15 @@
 
     &__section-header {
         background: $ez-ground-base-dark;
-        padding: 0.25rem 0 0.25rem 0.5rem;
-        font-size: 0.9375rem;
+        padding: calculateRem(4px) 0 calculateRem(4px) calculateRem(8px);
+        font-size: calculateRem(15px);
         font-weight: 700;
     }
 
     &__section-content {
         background: $ez-white;
-        padding: 1rem 0.5rem;
-        font-size: 0.9375rem;
+        padding: 1rem calculateRem(8px);
+        font-size: calculateRem(15px);
 
         select {
             display: inline-block;
@@ -160,7 +160,7 @@
             &-label {
                 margin: 0;
                 display: block;
-                padding-left: 1.5rem;
+                padding-left: calculateRem(40px);
             }
 
             &-input[type='radio'] {
@@ -178,10 +178,10 @@
     &::after {
         content: '';
         position: absolute;
-        height: 40px;
-        width: 10px;
-        top: 30px;
-        right: -6px;
+        height: calculateRem(40px);
+        width: calculateRem(10px);
+        top: calculateRem(30px);
+        right: calculateRem(-6px);
         transform: translate(100%, -50%);
         z-index: 0;
         background: $ez-color-secondary;
@@ -194,13 +194,13 @@
         left: 0;
         z-index: 2;
         opacity: 1;
-        transform: translate(calc(-100% - 10px), 0) scaleX(1);
+        transform: translate(calc(-100% - #{calculateRem(10px)}), 0) scaleX(1);
         transform-origin: right center;
         transition: all 0.2s $ez-admin-transition;
 
         &--hidden {
             opacity: 0;
-            transform: translate(calc(-100% - 15px), 0) scaleX(0);
+            transform: translate(calc(-100% - #{calculateRem(15px)}), 0) scaleX(0);
         }
     }
 }
