@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr calculateRem(80px);
     grid-template-rows: auto;
-    grid-template-areas: "ez-content-container ez-context-menu";
+    grid-template-areas: 'ez-content-container ez-context-menu';
 
     .ez-content-container {
         grid-area: ez-content-container;
@@ -11,18 +11,20 @@
     .ez-context-menu {
         grid-area: ez-context-menu;
     }
-}
 
-.ez-content-view,
-.ez-bookmark-list-view,
-.ez-trash-list-view,
-.ez-drafts-list-view {
-    .ez-main-row {
-        grid-template-columns: calculateRem(80px) 1fr calculateRem(80px);
-        grid-template-areas: "ez-side-menu ez-content-container ez-context-menu";
+    .ez-has-two-sidebars & {
+            grid-template-columns: calculateRem(80px) 1fr calculateRem(80px);
+            grid-template-areas: 'ez-side-menu ez-content-container ez-context-menu';
 
-        .ez-side-menu {
-            grid-area: ez-side-menu;
+            .ez-side-menu {
+                grid-area: ez-side-menu;
+            }
+        }
+    }
+
+    .ez-dashboard {
+            grid-template-columns: 1fr;
+            grid-template-areas: 'ez-content-container';
         }
     }
 }

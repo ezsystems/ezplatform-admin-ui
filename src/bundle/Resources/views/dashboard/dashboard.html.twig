@@ -7,8 +7,8 @@
 {% block content %}
     <div class="row align-items-stretch ez-main-row ez-dashboard-row">
         {% block left_sidebar %}{% endblock left_sidebar %}
-        <div class="container-fluid ez-header">
-            <div class="col-sm-12">
+        <div class="ez-content-container">
+            <div class="container-fluid ez-header">
                 <div class="container ez-dashboard__header">
                     <h1 class="py-3">{{ 'my.dashboard'|trans|desc('My dashboard') }}</h1>
                     <div class="ez-dashboard__create">
@@ -24,8 +24,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12">
             <div class="container">
                 {{ ezplatform_admin_ui_component_group('dashboard-blocks') }}
             </div>
