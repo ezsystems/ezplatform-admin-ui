@@ -11,7 +11,7 @@ adminui:
             paths:
                 - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features'
             filters:
-                tags: "@testRun"
+                tags: "@common"
             contexts:
                 - EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext
                 - EzSystems\EzPlatformAdminUi\Behat\Helper\Hooks
