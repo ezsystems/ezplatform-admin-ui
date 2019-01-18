@@ -39,7 +39,7 @@ export default class EzBtnEmbedUpdate extends EzEmbedDiscoverContentButton {
         return (
             <button className={css} onClick={this.chooseContent.bind(this)} tabIndex={this.props.tabIndex}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#tag" />
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#embed" />
                 </svg>
             </button>
         );
