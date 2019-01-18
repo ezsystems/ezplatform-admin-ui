@@ -11,37 +11,40 @@ namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
 use EzSystems\EzPlatformAdminUi\Component\Registry;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\Exception;
 
 class ComponentPass implements CompilerPassInterface
 {
+    use PriorityTaggedServiceTrait;
+
     const TAG_NAME = 'ezplatform.admin_ui.component';
 
     /**
      * @param ContainerBuilder $container
      *
-     * @throws Exception\InvalidArgumentException
-     * @throws Exception\ServiceNotFoundException
-     * @throws InvalidArgumentException
+     * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException When a service is abstract
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException When a tag is missing 'group' attribute
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition(Registry::class)) {
             return;
         }
 
         $registryDefinition = $container->getDefinition(Registry::class);
-        $taggedServiceIds = $container->findTaggedServiceIds(self::TAG_NAME);
+        $services = $this->findAndSortTaggedServices(self::TAG_NAME, $container);
 
-        foreach ($taggedServiceIds as $taggedServiceId => $tags) {
+        foreach ($services as $serviceReference) {
+            $id = (string)$serviceReference;
+            $definition = $container->getDefinition($id);
+            $tags = $definition->getTag(static::TAG_NAME);
+
             foreach ($tags as $tag) {
                 if (!isset($tag['group'])) {
-                    throw new InvalidArgumentException($taggedServiceId, 'Tag ' . self::TAG_NAME . ' must contain "group" argument.');
+                    throw new InvalidArgumentException($id, 'Tag ' . self::TAG_NAME . ' must contain "group" argument.');
                 }
-
-                $registryDefinition->addMethodCall('addComponent', [$tag['group'], $taggedServiceId, new Reference($taggedServiceId)]);
+                $registryDefinition->addMethodCall('addComponent', [$tag['group'], $id, $serviceReference]);
             }
         }
     }
