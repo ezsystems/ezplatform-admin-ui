@@ -33,7 +33,7 @@ class ContentTypes implements ProviderInterface
      */
     public function getConfig()
     {
-        $contentTypeGroups = ['_types' => []];
+        $contentTypeGroups = [];
 
         $preferredLanguages = $this->userLanguagePreferenceProvider->getPreferredLanguages();
         $loadedContentTypeGroups = $this->contentTypeService->loadContentTypeGroups(
@@ -49,7 +49,6 @@ class ContentTypes implements ProviderInterface
                     'identifier' => $contentType->identifier,
                     'name' => $contentType->getName(),
                 ];
-                $contentTypeGroups['_types'][$contentType->identifier] = $contentType->getName();
             }
         }
 
