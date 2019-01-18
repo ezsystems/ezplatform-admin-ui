@@ -9,7 +9,6 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 use DateTime;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Time;
-use PHPUnit\Framework\Assert;
 
 class DateAndTimePopup extends Element
 {
@@ -24,7 +23,7 @@ class DateAndTimePopup extends Element
         parent::__construct($context);
         $this->fields = [
             'containerSelector' => $containerSelector,
-            'calendarSelector' => $isInline? '.flatpickr-calendar' : '.flatpickr-calendar.inline',
+            'calendarSelector' => $isInline ? '.flatpickr-calendar' : '.flatpickr-calendar.inline',
             'flatpickrSelector' => '.flatpickr',
         ];
     }

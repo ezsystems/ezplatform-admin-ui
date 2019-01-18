@@ -29,7 +29,7 @@ class DateAndTime extends EzFieldElement
     public function setValue(array $parameters): void
     {
         $fieldInput = $this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']));
-        Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));    
+        Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
         $fieldInput->click();
 
         $time = explode(':', $parameters['time']);
