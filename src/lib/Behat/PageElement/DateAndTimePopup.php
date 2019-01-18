@@ -24,7 +24,7 @@ class DateAndTimePopup extends Element
         $this->fields = [
             'containerSelector' => $containerSelector,
             'calendarSelector' => $isInline ? '.flatpickr-calendar' : '.flatpickr-calendar.inline',
-            'flatpickrSelector' => '.flatpickr',
+            'flatpickrSelector' => '.flatpickr-input',
         ];
     }
 
@@ -47,7 +47,11 @@ class DateAndTimePopup extends Element
 
         if (!$isTimeOnly) {
             // get current date as it's not possible to set time without setting date
-            $currentDateScript = sprintf('document.querySelector("%s .flatpickr")._flatpickr.formatDate(document.querySelector("%s .flatpickr")._flatpickr.selectedDates, "Y-m-d")', $this->fields['containerSelector'], $this->fields['containerSelector']);
+            $currentDateScript = sprintf('document.querySelector("%s %s")._flatpickr.formatDate(document.querySelector("%s %s")._flatpickr.selectedDates, "Y-m-d")',
+                $this->fields['containerSelector'],
+                $this->fields['flatpickrSelector'],
+                $this->fields['containerSelector'],
+                $this->fields['flatpickrSelector']);
             $currentDate = $this->context->getSession()->getDriver()->evaluateScript($currentDateScript);
         }
 
