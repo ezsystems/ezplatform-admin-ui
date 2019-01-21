@@ -24,12 +24,12 @@
      * @returns {String|null} href to icon
      */
     const getContentTypeIcon = (contentTypeIdentifier) => {
-        if (!contentTypeIdentifier) {
-            null;
-        }
-
         if (!contentTypesDataMap) {
             contentTypesDataMap = createContentTypeDataMap();
+        }
+
+        if (!contentTypeIdentifier || !contentTypesDataMap[contentTypeIdentifier]) {
+            return null;
         }
 
         const iconHref = contentTypesDataMap[contentTypeIdentifier].thumbnail;
