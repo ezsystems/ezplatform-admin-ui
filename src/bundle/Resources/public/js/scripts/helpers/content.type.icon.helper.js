@@ -3,7 +3,8 @@
 
     /**
      * Creates map with content types identifiers as keys for faster lookup
-     *
+     * 
+     * @function createContentTypeDataMap
      * @returns {Object} contentTypesDataMap
      */
     const createContentTypeDataMap = () =>
@@ -18,7 +19,7 @@
     /**
      * Returns href to content type icon
      *
-     * @function showNotification
+     * @function getContentTypeIcon
      * @param {String} contentTypeIdentifier
      * @returns {String|null} href to icon
      */
