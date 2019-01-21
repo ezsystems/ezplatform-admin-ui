@@ -27,18 +27,38 @@ parameters:
                     SystemInfo\Identifier: 'symfony_kernel'
 
     ezsettings.default.content_type:
+        about:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#about'
         article:
             thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#article'
+        blog:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#blog'
+        blog_post:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#blog_post'
         folder:
             thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#folder'
+        form:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#form'
+        place:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#place'
+        product:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#product'
+        field:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#field'
         user:
             thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#user'
         user_group:
             thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#user_group'
         file:
             thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#file'
+        gallery:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#gallery'
         image:
             thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#image'
+        video:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#video'
+        landing_page:
+            thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#landing_page'
 
     ezplatform.content_view.tabs.default_template: '@@ezdesign/parts/tab/default.html.twig'
 
