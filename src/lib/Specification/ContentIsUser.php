@@ -10,7 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\Specification;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 class ContentIsUser implements ContentSpecification
 {
@@ -34,12 +33,6 @@ class ContentIsUser implements ContentSpecification
      */
     public function isSatisfiedBy(Content $content): bool
     {
-        try {
-            $this->userService->loadUser($content->id);
-
-            return true;
-        } catch (NotFoundException $e) {
-            return false;
-        }
+        return $this->userService->isUser($content);
     }
 }
