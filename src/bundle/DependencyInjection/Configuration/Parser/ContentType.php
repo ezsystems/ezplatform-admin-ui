@@ -39,7 +39,9 @@ class ContentType extends AbstractParser
             return;
         }
 
-        $contextualizer->setContextualParameter('content_type', $currentScope, $scopeSettings['content_type']);
+        foreach ($scopeSettings['content_type'] as $identifier => $config) {
+            $contextualizer->setContextualParameter("content_type.$identifier", $currentScope, $config);
+        }
     }
 
     /**

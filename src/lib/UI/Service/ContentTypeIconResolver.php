@@ -10,22 +10,28 @@ namespace EzSystems\EzPlatformAdminUi\UI\Service;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use Symfony\Component\Asset\Packages;
 
 class ContentTypeIconResolver
 {
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
+    /** @var \Symfony\Component\Asset\Packages */
+    private $packages;
+
     /** @var string|null */
     private $defaultThumbnail;
 
     /**
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \Symfony\Component\Asset\Packages $packages
      * @param string|null $defaultThumbnail
      */
-    public function __construct(ConfigResolverInterface $configResolver, string $defaultThumbnail)
+    public function __construct(ConfigResolverInterface $configResolver, Packages $packages, string $defaultThumbnail)
     {
         $this->configResolver = $configResolver;
+        $this->packages = $packages;
         $this->defaultThumbnail = $defaultThumbnail;
     }
 
@@ -45,12 +51,34 @@ class ContentTypeIconResolver
             $contentType = $contentType->identifier;
         }
 
-        $config = $this->configResolver->getParameter('content_type');
+        $thumbnail = null;
 
-        if (isset($config[$contentType]) && !empty($config[$contentType]['thumbnail'])) {
-            return $config[$contentType]['thumbnail'];
+        $parameterName = $this->getConfigParameterName($contentType);
+        if ($this->configResolver->hasParameter($parameterName)) {
+            $thumbnail = $this->configResolver->getParameter($parameterName)['thumbnail'];
         }
 
-        return $this->defaultThumbnail;
+        if (empty($thumbnail)) {
+            $thumbnail = $this->defaultThumbnail;
+        }
+
+        $fragment = null;
+        if (strpos($thumbnail, '#') !== false) {
+            list($thumbnail, $fragment) = explode('#', $thumbnail);
+        }
+
+        return $this->packages->getUrl($thumbnail) . ($fragment ? '#' . $fragment : '');
+    }
+
+    /**
+     * Return configuration parameter name for given content type identifier.
+     *
+     * @param string $identifier
+     *
+     * @return string
+     */
+    private function getConfigParameterName(string $identifier): string
+    {
+        return "content_type.$identifier";
     }
 }

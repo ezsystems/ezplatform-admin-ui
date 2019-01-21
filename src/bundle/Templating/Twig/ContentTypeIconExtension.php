@@ -32,7 +32,7 @@ class ContentTypeIconExtension extends Twig_Extension
     {
         return [
             new Twig_SimpleFunction(
-                'ezplatform_admin_ui_content_type_icon',
+                'ez_content_type_icon',
                 [$this->contentTypeIconResolver, 'getContentTypeIcon'],
                 [
                     'is_safe' => ['html'],
