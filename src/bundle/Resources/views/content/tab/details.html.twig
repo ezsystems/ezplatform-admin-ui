@@ -3,7 +3,6 @@
 {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.content_details'|trans()|desc('Content details') } %}
 
 {% form_theme form_location_update '@ezdesign/form_fields.html.twig' %}
-{% form_theme form_assign_section '@ezdesign/form_fields.html.twig' %}
 
 <table class="table">
     <thead>
@@ -80,12 +79,16 @@
             <td>{{ section.identifier }}</td>
             <td>{{ section.id }}</td>
             <td>
-                {{ form(form_assign_section, {
-                    'action': path('ezplatform.location.assign_section'),
-                    'attr': {
-                        'class': 'form-inline ez-form-inline'
-                    }
-                }) }}
+                {% if form_assign_section %}
+                    {% form_theme form_assign_section '@ezdesign/form_fields.html.twig' %}
+
+                    {{ form(form_assign_section, {
+                        'action': path('ezplatform.location.assign_section'),
+                        'attr': {
+                            'class': 'form-inline ez-form-inline'
+                        }
+                    }) }}
+                {% endif %}
             </td>
         </tr>
         </tbody>

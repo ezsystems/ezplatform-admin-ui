@@ -138,14 +138,22 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
         $lastContributor = (new UserExists($this->userService))->isSatisfiedBy($versionInfo->creatorId)
             ? $this->userService->loadUser($versionInfo->creatorId) : null;
 
-        $canSeeSection = $this->permissionResolver->hasAccess('section', 'view');
+        $section = null;
+        $canSeeSection = $this->permissionResolver->hasAccess('section', 'view') !== false;
+        if ($canSeeSection) {
+            $section = $this->sectionService->loadSection($contentInfo->sectionId);
+        }
 
-        $assignSectionForm = $this->formFactory->assignSubtreeSectionForm(
-            new LocationAssignSubtreeData(null, $contextParameters['location'])
-        )->createView();
+        $canAssignSection = $this->permissionResolver->hasAccess('section', 'assign') !== false;
+        $assignSectionForm = null;
+        if ($canSeeSection && $canAssignSection) {
+            $assignSectionForm = $this->formFactory->assignSubtreeSectionForm(
+                new LocationAssignSubtreeData($section, $contextParameters['location'])
+            )->createView();
+        }
 
         $viewParameters = [
-            'section' => $canSeeSection ? $this->sectionService->loadSection($contentInfo->sectionId) : null,
+            'section' => $section,
             'contentInfo' => $contentInfo,
             'versionInfo' => $versionInfo,
             'creator' => $creator,
