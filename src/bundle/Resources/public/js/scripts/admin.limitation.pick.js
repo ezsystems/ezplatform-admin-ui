@@ -55,7 +55,7 @@
                             Criteria: {},
                             FacetBuilders: {},
                             SortClauses: { SectionIdentifier: 'ascending' },
-                            Filter: { LocationIdCriterion: pathArray.join(',') },
+                            Filter: { LocationIdCriterion: pathArray.join(IDS_SEPARATOR) },
                             limit: 50,
                             offset: 0,
                         },
@@ -78,8 +78,8 @@
 
         input.value = input.value ? `${input.value}${IDS_SEPARATOR}${newlySelectedLocationsIds}` : newlySelectedLocationsIds;
     };
-    const removeLocationFromInput = (limitationBtn, removedLocationId) => {
-        const input = doc.querySelector(limitationBtn.dataset.locationInputSelector);
+    const removeLocationFromInput = (locationInputSelector, removedLocationId) => {
+        const input = doc.querySelector(locationInputSelector);
         const locationsIdsWithoutRemoved = input.value.split(IDS_SEPARATOR).filter((locationId) => locationId !== removedLocationId);
 
         input.value = locationsIdsWithoutRemoved.join(IDS_SEPARATOR);
@@ -126,8 +126,7 @@
             });
         });
     };
-    const getLocationPathArray = (location) => {
-        const { pathString } = location;
+    const getLocationPathArray = ({ pathString }) => {
         const pathArray = pathStringToPathArray(pathString);
         const pathArrayWithoutRoot = removeRootLocation(pathArray);
 
@@ -135,8 +134,9 @@
     };
     const handleTagRemove = (limitationBtn, tag) => {
         const removedLocationId = tag.dataset.locationId;
+        const locationInputSelector = limitationBtn.dataset.locationInputSelector;
 
-        removeLocationFromInput(limitationBtn, removedLocationId);
+        removeLocationFromInput(locationInputSelector, removedLocationId);
         tag.remove();
     };
     const attachTagEventHandlers = (limitationBtn, tag) => {
@@ -145,11 +145,7 @@
         removeTagBtn.addEventListener('click', handleTagRemove.bind(null, limitationBtn, tag), false);
     };
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
-    const handleUdwConfirm = (limitationBtn, selectedItems) => {
-        const input = doc.querySelector(limitationBtn.dataset.locationInputSelector);
-        const alreadySelectedLocationsIds = input.value.split(IDS_SEPARATOR).map((idString) => parseInt(idString, 10));
-        const newlySelectedItems = selectedItems.filter((item) => !alreadySelectedLocationsIds.includes(item.id));
-
+    const handleUdwConfirm = (limitationBtn, newlySelectedItems) => {
         if (newlySelectedItems.length) {
             addLocationsToInput(limitationBtn, newlySelectedItems);
             addLocationsTags(limitationBtn, newlySelectedItems);
@@ -160,6 +156,9 @@
     const openUDW = (event) => {
         event.preventDefault();
 
+        const limitationBtn = event.currentTarget;
+        const input = doc.querySelector(limitationBtn.dataset.locationInputSelector);
+        const selectedLocationsIds = input.value.split(IDS_SEPARATOR).map((idString) => parseInt(idString, 10));
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
         const title = Translator.trans(/*@Desc("Choose locations")*/ 'subtree_limitation.title', {}, 'universal_discovery_widget');
 
@@ -174,6 +173,11 @@
                         startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                         multiple: true,
                         restInfo: { token, siteaccess },
+                        canSelectContent: ({ item }, callback) => {
+                            const itemId = parseInt(item.id, 10);
+
+                            callback(!selectedLocationsIds.includes(itemId));
+                        },
                     },
                     config
                 )

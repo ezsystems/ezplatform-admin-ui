@@ -1,0 +1,20 @@
+ <div class="ez-tag" 
+    {% for attribute_name, attribute_value in tag_attributes %}
+        {% if attribute_value != false %}
+            {{ attribute_name }}="{{ attribute_value }}"
+        {% endif %}
+    {% endfor %}>
+    <div class="ez-tag__content" {% if is_loading_state %} hidden {% endif %}>
+        {{ content }}
+    </div>
+    <div class="ez-tag__spinner" {% if not is_loading_state %} hidden {% endif %}>
+        <svg class="ez-icon ez-icon--medium ez-icon--dark ez-spin">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#spinner"></use>
+        </svg>
+    </div>
+    <button type="button" class="ez-tag__remove-btn">
+        <svg class="ez-icon ez-icon--medium ez-icon--dark">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#circle-close"></use>
+        </svg>
+    </button>
+</div>

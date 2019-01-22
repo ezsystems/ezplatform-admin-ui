@@ -127,7 +127,8 @@
     btns.forEach((btn) => {
         btn.addEventListener('click', openUDW, false);
 
-        const clearBtn = doc.querySelector(btn.dataset.clearBtnSelector);
+        const tag = doc.querySelector(btn.dataset.contentBreadcrumbsSelector);
+        const clearBtn = tag.querySelector('.ez-tag__remove-btn');
 
         if (clearBtn) {
             clearBtn.addEventListener('click', clearSelection.bind(null, btn), false);
