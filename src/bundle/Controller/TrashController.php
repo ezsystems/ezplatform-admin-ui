@@ -13,6 +13,7 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\API\Repository\Values\Content\Query;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData;
@@ -62,6 +63,9 @@ class TrashController extends Controller
     /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     private $urlGenerator;
 
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
+    private $userLanguagePreferenceProvider;
+
     /** @var int */
     private $defaultPaginationLimit;
 
@@ -76,6 +80,7 @@ class TrashController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      * @param int $defaultPaginationLimit
      */
     public function __construct(
@@ -89,6 +94,7 @@ class TrashController extends Controller
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
         UrlGeneratorInterface $urlGenerator,
+        UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
         int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
@@ -102,6 +108,7 @@ class TrashController extends Controller
         $this->submitHandler = $submitHandler;
         $this->urlGenerator = $urlGenerator;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
     }
 
     public function performAccessCheck(): void
@@ -145,7 +152,10 @@ class TrashController extends Controller
 
         /** @var \eZ\Publish\API\Repository\Values\Content\TrashItem $item */
         foreach ($pagerfanta->getCurrentPageResults() as $item) {
-            $contentType = $item->getContent()->getContentType();
+            $contentType = $this->contentTypeService->loadContentType(
+                $item->getContentInfo()->contentTypeId,
+                $this->userLanguagePreferenceProvider->getPreferredLanguages()
+            );
             $ancestors = $this->uiPathService->loadPathLocations($item);
 
             $trashItemsList[] = new TrashItemData($item, $contentType, $ancestors);
