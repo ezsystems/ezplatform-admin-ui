@@ -11,12 +11,12 @@ Feature: Languages management
   Scenario: Changes can be discarded while creating new Language
     When I start creating new "Language"
       And I set fields
-        | label         | value   |
-        | Name          | Deutsch |
-        | Language code | de-DE   |
+        | label         | value    |
+        | Name          | Francais |
+        | Language code | fra-FR   |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Languages" page
-      And there's no "Deutsch" on "Languages" list
+      And there's no "Francais" on "Languages" list
 
   @javascript @common @parallel-scenario
   Scenario: New Language can be added
@@ -33,7 +33,19 @@ Feature: Languages management
         | Language code | de-DE    |
         | Enabled       | true     |
 
-  @javascript @common @parallel-wait @parallel-scenario
+  @javascript @common @parallel-wait
+  Scenario: Changes can be discarded while editing Language
+    Given there's "Deutsch" on "Languages" list
+    When I start editing "Language" "Deutsch"
+    And I set fields
+      | label | value          |
+      | Name  | Edited Deutsch |
+    And I click on the edit action bar button "Discard changes"
+    Then I should be on "Languages" page
+    And there's "Deutsch" on "Languages" list
+    And there's no "Edited Deutsch" on "Languages" list
+
+  @javascript @common @parallel-scenario
   Scenario: New Language with existing language code cannot be added
     When I start creating new "Language"
       And I set fields
@@ -48,18 +60,6 @@ Feature: Languages management
     Given I go to "Deutsch" "Language" page
     When I click on "Languages" on breadcrumb
     Then I should be on "Languages" page
-
-  @javascript @common @parallel-scenario
-  Scenario: Changes can be discarded while editing Language
-    Given there's "Deutsch" on "Languages" list
-    When I start editing "Language" "Deutsch"
-      And I set fields
-        | label | value          |
-        | Name  | Edited Deutsch |
-      And I click on the edit action bar button "Discard changes"
-    Then I should be on "Languages" page
-      And there's "Deutsch" on "Languages" list
-      And there's no "Edited Deutsch" on "Languages" list
 
   @javascript @common @parallel-scenario
   Scenario: Language can be disabled

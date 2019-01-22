@@ -11,11 +11,11 @@ Feature: Roles management
   Scenario: Changes can be discarded while creating Role
     When I start creating new "Role"
       And I set fields
-        | label | value     |
-        | Name  | Test Role |
+        | label | value       |
+        | Name  | Test Role 2 |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Roles" page
-      And there's no "Test Role" on "Roles" list
+      And there's no "Test Role 2" on "Roles" list
 
   @javascript @common @parallel-scenario
   Scenario: New Role can be created
@@ -103,9 +103,6 @@ Feature: Roles management
       And "Policies" list in "Role" "Test Role edited" is empty
       And there are assignments on the "Test Role edited" assignments list
       | user/group          | limitation                         |
-      | Administrator User  | Subtree of Location: /Media/Images |
-      | Editors             | Subtree of Location: /Media/Images |
-      | Anonymous User      | Subtree of Location: /Media/Images |
       | Users	            | None                               |
 
   @javascript @common @parallel-wait @parallel-scenario

@@ -11,12 +11,12 @@ Feature: Object States management
   Scenario: Changes can be discarded while creating Object State Group
     When I start creating new "Object State Group"
       And I set fields
-        | label                | value                          |
-        | Name                 | Test Object State Group        |
-        | Identifier           | TestObjectStateGroupIdentifier |
+        | label                | value                           |
+        | Name                 | Test Object State Group 2       |
+        | Identifier           | TestObjectStateGroupIdentifier2 |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Object State Groups" page
-      And there's no "Test Object State Group" on "Object State Groups" list
+      And there's no "Test Object State Group 2" on "Object State Groups" list
 
   @javascript @common @parallel-scenario
   Scenario: New Object State Group can be added
@@ -69,11 +69,11 @@ Feature: Object States management
     When I start editing "Object State Group" "Test Object State Group edited" from details page
       And I set fields
         | label | value                           |
-        | Name  | Test Object State Group edited2 |
+        | Name  | Test Object State Group edited3 |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Object State Groups" page
       And there's "Test Object State Group edited" on "Object State Groups" list
-      And there's no "Test Object State Group edited2" on "Object State Groups" list
+      And there's no "Test Object State Group edited3" on "Object State Groups" list
 
   @javascript @common @parallel-scenario
   Scenario: Object State Group can be edited from group details
@@ -155,11 +155,10 @@ Feature: Object States management
     When I start editing "Object State" "Test Object State edited" from details page
       And I set fields
         | label | value                     |
-        | Name  | Test Object State edited2 |
+        | Name  | Test Object State edited3 |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Object State Group" "Test Object State Group edited2" page
-      And there's "Test Object State edited" on "Test Object State Group edited2" Object States list
-      And there's no "Test Object State edited2" on "Test Object State Group edited2" Object States list
+      And there's no "Test Object State edited3" on "Test Object State Group edited2" Object States list
 
   @javascript @common @parallel-scenario
   Scenario: Object State can be edited from state details

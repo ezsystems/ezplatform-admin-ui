@@ -12,11 +12,11 @@ Feature: Sections management
     When I start creating new "Section"
       And I set fields
         | label      | value                  |
-        | Name       | Test Section           |
-        | Identifier | TestSectionIdentifier  |
+        | Name       | Test Section 2         |
+        | Identifier | TestSectionIdentifier2 |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Sections" page
-      And there's no "Test Section" on "Sections" list
+      And there's no "Test Section 2" on "Sections" list
 
   @javascript @common @parallel-scenario
   Scenario: New Section can be added
@@ -73,6 +73,17 @@ Feature: Sections management
       And there's no "Test Section edited" on "Sections" list
 
   @javascript @common @parallel-wait @parallel-scenario
+  Scenario: Changes can be discarded while editing Section from section details
+    Given I go to "Test Section" "Section" page
+    When I start editing "Section" "Test Section" from details page
+      And I set fields
+        | label | value                 |
+        | Name  | Test Section edited 2 |
+      And I click on the edit action bar button "Discard changes"
+    Then I should be on "Sections" page
+      And there's no "Test Section edited 2" on "Sections" list
+
+  @javascript @common @parallel-scenario
   Scenario: Section can be edited
     Given there's "Test Section" on "Sections" list
     When I start editing "Section" "Test Section"
@@ -82,18 +93,6 @@ Feature: Sections management
       And I click on the edit action bar button "Save"
     Then I should be on "Section" "Test Section edited" page
       And notification that "Section" "Test Section edited" is updated appears
-
-  @javascript @common @parallel-scenario
-  Scenario: Changes can be discarded while editing Section from section details
-    Given I go to "Test Section edited" "Section" page
-    When I start editing "Section" "Test Section edited" from details page
-      And I set fields
-        | label | value                |
-        | Name  | Test Section edited2 |
-      And I click on the edit action bar button "Discard changes"
-    Then I should be on "Sections" page
-      And there's "Test Section edited" on "Sections" list
-      And there's no "Test Section edited2" on "Sections" list
 
   @javascript @common @parallel-scenario
   Scenario: Section can be edited from section details
@@ -108,10 +107,10 @@ Feature: Sections management
 
   @javascript @common @parallel-scenario
   Scenario: Non-empty section cannot be deleted
-    Given there's non-empty "Test Section edited2" on "Sections" list
-    Then "Section" "Test Section edited2" cannot be selected
+    Given there's non-empty "Users" on "Sections" list
+    Then "Section" "Users" cannot be selected
 
-  @javascript @common @parallel-scenario
+  @javascript @common @parallel-wait
   Scenario: Content item can be reassigned to section from the Sections details
     Given I go to "Media" "Section" page
     When I start assigning to "Media" from "Section" page
@@ -124,7 +123,7 @@ Feature: Sections management
         | Images | Folder       | Media |
       And Going to sections list we see there's empty "Test Section edited2" on list
 
-  @javascript @common @parallel-wait @parallel-scenario
+  @javascript @common @parallel-scenario
   Scenario: Empty section can be deleted
     Given there's empty "Test Section edited2" on "Sections" list
     When I delete "Section"

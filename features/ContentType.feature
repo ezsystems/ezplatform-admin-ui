@@ -13,11 +13,11 @@ Feature: Content types management
     When I start creating new "Content Type" in "Content"
       And I set fields
       | label      | value                     |
-      | Name       | Test Content Type         |
-      | Identifier | TestContentTypeIdentifier |
+      | Name       | Test Content Type 2       |
+      | Identifier | TestContentTypeIdentifier2 |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Content Type Group" "Content" page
-      And there's no "Test Content Type" on "Content" "Content Type Group" list
+      And there's no "Test Content Type 2" on "Content" "Content Type Group" list
 
   @javascript @common @parallel-scenario
   Scenario: New Content Type can be added to Content Type Group
@@ -41,23 +41,23 @@ Feature: Content types management
         | CountryField   | ezcountry |
       And notification that "Content type" "Test Content Type" is updated appears
 
-  @javascript @common @parallel-wait @parallel-scenario
+  @javascript @common @parallel-wait
+  Scenario: Changes can be discarded while editing Content type
+    Given there's "Test Content Type" on "Content" "Content Type Group" list
+    When I start editing "Content Type" "Test Content Type" from "Content"
+    And I set fields
+      | label | value                    |
+      | Name  | Test Content Type edited |
+    And I click on the edit action bar button "Discard changes"
+    Then I should be on "Content Type Group" "Content" page
+    And there's "Test Content Type" on "Content" "Content Type Group" list
+    And there's no "Test Content Type edited" on "Content" "Content Type Group" list
+
+  @javascript @common @parallel-scenario
   Scenario: I can navigate to Content Type Group through breadcrumb
     Given I go to "Test Content Type" "Content Type" page from "Content"
     When I click on "Content" on breadcrumb
     Then I should be on "Content Type Group" "Content" page
-
-  @javascript @common @parallel-scenario
-  Scenario: Changes can be discarded while editing Content type
-    Given there's "Test Content Type" on "Content" "Content Type Group" list
-    When I start editing "Content Type" "Test Content Type" from "Content"
-      And I set fields
-        | label | value                    |
-        | Name  | Test Content Type edited |
-      And I click on the edit action bar button "Discard changes"
-    Then I should be on "Content Type Group" "Content" page
-      And there's "Test Content Type" on "Content" "Content Type Group" list
-      And there's no "Test Content Type edited" on "Content" "Content Type Group" list
 
   @javascript @common @parallel-scenario
   Scenario: New Field can be added while editing Content Type

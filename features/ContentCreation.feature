@@ -98,8 +98,8 @@ Feature: Content items creation
     When I click on the edit action bar button "Edit"
       And I set content fields
         | label | value                     |
-        | Title | Test Article edited       |
-      And I set article main content field to "Test article intro edited"
+        | Title | Test Article edited 2     |
+      And I set article main content field to "Test article intro edited 2"
       And I click on the edit action bar button "Delete draft"
     Then I should be on content container page "Test Article" of type "Article" in root path
       And going to dashboard we see there's no draft "Test Article edited" on list
