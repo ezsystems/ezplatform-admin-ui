@@ -45,12 +45,11 @@ Feature: Object States management
     Given there's "Test Object State Group" on "Object State Groups" list
     When I start editing "Object State Group" "Test Object State Group"
       And I set fields
-        | label | value                          |
-        | Name  | Test Object State Group edited |
+        | label | value                            |
+        | Name  | Test Object State Group edited 2 |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Object State Groups" page
-      And there's "Test Object State Group" on "Object State Groups" list
-      And there's no "Test Object State Group edited" on "Object State Groups" list
+      And there's no "Test Object State Group edited 2" on "Object State Groups" list
 
   @javascript @common @parallel-scenario
   Scenario: Object State Group can be edited
@@ -91,12 +90,12 @@ Feature: Object States management
     Given I go to "Test Object State Group edited2" "Object State Group" page
     When I start creating new "Object State" in "Test Object State Group edited2"
       And I set fields
-        | label      | value                     |
-        | Name       | Test Object State         |
-        | Identifier | TestObjectStateIdentifier |
+        | label      | value                      |
+        | Name       | Test Object State 2        |
+        | Identifier | TestObjectStateIdentifier2 |
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Object State Group" "Test Object State Group edited2" page
-      And there's no "Test Object State" on "Test Object State Group edited2" Object States list
+      And there's no "Test Object State 2" on "Test Object State Group edited2" Object States list
 
   @javascript @common @parallel-scenario
   Scenario: New Object State can be added

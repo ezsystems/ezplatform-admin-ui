@@ -29,6 +29,21 @@ Feature: Roles management
       And "Assignments" list in "Role" "Test Role" is empty
 
   @javascript @common @parallel-wait @parallel-scenario
+  Scenario: User assignation can be discarded
+    Given there's "Test Role" on "Roles" list
+    When I start assigning to "Test Role" from "Roles" page
+    And I select "Administrator User" from "User"
+    And I select options from "Group"
+      | option  |
+      | Editors |
+      | Users   |
+    And I select "Media" from Sections as role assignment limitation
+    And I click on the edit action bar button "Discard changes"
+    Then I should be on "Role" "Test Role" page
+    And "Policies" list in "Role" "Test Role" is empty
+    And "Assignments" list in "Role" "Test Role" is empty
+
+  @javascript @common @parallel-scenario
   Scenario: I can navigate to Roles through breadcrumb
     Given I go to "Test Role" "Role" page
     When I click on "Roles" on breadcrumb
@@ -59,21 +74,6 @@ Feature: Roles management
       And "Assignments" list in "Role" "Test Role" is empty
 
   @javascript @common @parallel-wait @parallel-scenario
-  Scenario: User assignation can be discarded
-    Given there's "Test Role edited" on "Roles" list
-    When I start assigning to "Test Role edited" from "Roles" page
-      And I select "Administrator User" from "User"
-      And I select options from "Group"
-        | option  |
-        | Editors |
-        | Users   |
-      And I select "Media" from Sections as role assignment limitation
-      And I click on the edit action bar button "Discard changes"
-    Then I should be on "Role" "Test Role edited" page
-      And "Policies" list in "Role" "Test Role edited" is empty
-      And "Assignments" list in "Role" "Test Role edited" is empty
-
-  @javascript @common @parallel-scenario
   Scenario: User can be assigned to role from the Roles list
     Given there's "Test Role edited" on "Roles" list
     When I start assigning to "Test Role edited" from "Roles" page

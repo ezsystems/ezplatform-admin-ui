@@ -102,7 +102,7 @@ Feature: Content items creation
       And I set article main content field to "Test article intro edited 2"
       And I click on the edit action bar button "Delete draft"
     Then I should be on content container page "Test Article" of type "Article" in root path
-      And going to dashboard we see there's no draft "Test Article edited" on list
+      And going to dashboard we see there's no draft "Test Article edited 2" on list
 
   @javascript @common @parallel-scenario
   Scenario: Content draft can be edited from dashboard
