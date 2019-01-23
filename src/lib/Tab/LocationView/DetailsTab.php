@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
+use ArrayObject;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\UserService;
@@ -126,10 +127,10 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
         $versionInfo = $content->getVersionInfo();
         $contentInfo = $versionInfo->getContentInfo();
 
-        $viewParameters = [
+        $viewParameters = new ArrayObject([
             'contentInfo' => $contentInfo,
             'versionInfo' => $versionInfo,
-        ];
+        ]);
 
         $this->supplySectionParameters($viewParameters, $contentInfo, $location);
         $this->supplyObjectStateParameters($viewParameters, $contentInfo);
@@ -139,13 +140,13 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
         $this->supplyLastContributor($viewParameters, $versionInfo);
         $this->supplySortFieldClauseMap($viewParameters);
 
-        return array_replace($contextParameters, $viewParameters);
+        return array_replace($contextParameters, $viewParameters->getArrayCopy());
     }
 
     /**
-     * @param array $parameters
+     * @param \ArrayObject $parameters
      */
-    private function supplySortFieldClauseMap(array &$parameters): void
+    private function supplySortFieldClauseMap(ArrayObject $parameters): void
     {
         $parameters['sort_field_clause_map'] = [
             Location::SORT_FIELD_PATH => 'LocationPath',
@@ -161,10 +162,10 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     }
 
     /**
-     * @param array $parameters
+     * @param \ArrayObject $parameters
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
      */
-    private function supplyCreator(array &$parameters, ContentInfo $contentInfo): void
+    private function supplyCreator(ArrayObject $parameters, ContentInfo $contentInfo): void
     {
         $parameters['creator'] = null;
         if ((new UserExists($this->userService))->isSatisfiedBy($contentInfo->ownerId)) {
@@ -173,10 +174,10 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     }
 
     /**
-     * @param array $parameters
+     * @param \ArrayObject $parameters
      * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo $versionInfo
      */
-    private function supplyLastContributor(array &$parameters, VersionInfo $versionInfo): void
+    private function supplyLastContributor(ArrayObject $parameters, VersionInfo $versionInfo): void
     {
         $parameters['lastContributor'] = null;
         if ((new UserExists($this->userService))->isSatisfiedBy($versionInfo->creatorId)) {
@@ -185,10 +186,10 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     }
 
     /**
-     * @param array $parameters
+     * @param \ArrayObject $parameters
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
      */
-    private function supplyObjectStateParameters(array &$parameters, ContentInfo $contentInfo): void
+    private function supplyObjectStateParameters(ArrayObject &$parameters, ContentInfo $contentInfo): void
     {
         $objectStatesDataset = $this->datasetFactory->objectStates();
         $objectStatesDataset->load($contentInfo);
@@ -227,11 +228,11 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     }
 
     /**
-     * @param array $parameters
+     * @param \ArrayObject $parameters
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
      * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      */
-    private function supplySectionParameters(array &$parameters, ContentInfo $contentInfo, Location $location): void
+    private function supplySectionParameters(ArrayObject $parameters, ContentInfo $contentInfo, Location $location): void
     {
         $canSeeSection = $this->permissionResolver->hasAccess('section', 'view');
 
@@ -258,10 +259,10 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     }
 
     /**
-     * @param array $parameters
+     * @param \ArrayObject $parameters
      * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      */
-    private function supplyFormLocationUpdate(array &$parameters, Location $location): void
+    private function supplyFormLocationUpdate(ArrayObject $parameters, Location $location): void
     {
         $parameters['form_location_update'] = $this->formFactory->create(
             LocationUpdateType::class,
@@ -270,10 +271,10 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     }
 
     /**
-     * @param array $parameters
+     * @param \ArrayObject $parameters
      * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo $versionInfo
      */
-    private function supplyTranslations(array &$parameters, VersionInfo $versionInfo): void
+    private function supplyTranslations(ArrayObject $parameters, VersionInfo $versionInfo): void
     {
         $translationsDataset = $this->datasetFactory->translations();
         $translationsDataset->load($versionInfo);
