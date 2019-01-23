@@ -89,18 +89,6 @@
     }
 }
 
-.ez-card__header {
-    .form-inline {
-        .btn-danger {
-            .ez-icon {
-                width: calculateRem(20px);
-                height: calculateRem(20px);
-                fill: $white;
-            }
-        }
-    }
-}
-
 .ez-btn--extra-actions {
     .ez-icon {
         pointer-events: none;
