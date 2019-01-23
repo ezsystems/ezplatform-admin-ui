@@ -13,8 +13,7 @@ use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\Content\Section;
-use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
+use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
@@ -27,7 +26,6 @@ use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
@@ -122,66 +120,34 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $contextParameters['content'];
+        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
+        $location = $contextParameters['location'];
+
         $versionInfo = $content->getVersionInfo();
         $contentInfo = $versionInfo->getContentInfo();
-        $translationsDataset = $this->datasetFactory->translations();
-        $translationsDataset->load($versionInfo);
-        $locationUpdateType = $this->createUpdateLocationForm($contextParameters['location']);
-        $objectStatesDataset = $this->datasetFactory->objectStates();
-        $objectStatesDataset->load($contentInfo);
-
-        $contentObjectStateUpdateTypeByGroupId = [];
-        foreach ($objectStatesDataset->getObjectStates() as $objectState) {
-            $contentObjectStateUpdateTypeByGroupId[$objectState->objectStateGroup->id] = $this
-                ->createUpdateContentObjectStateForm($contentInfo, $objectState)
-                ->createView();
-        }
-
-        $creator = (new UserExists($this->userService))->isSatisfiedBy($contentInfo->ownerId)
-            ? $this->userService->loadUser($contentInfo->ownerId) : null;
-
-        $lastContributor = (new UserExists($this->userService))->isSatisfiedBy($versionInfo->creatorId)
-            ? $this->userService->loadUser($versionInfo->creatorId) : null;
-
-        $section = null;
-        $canSeeSection = $this->permissionResolver->hasAccess('section', 'view');
-        if ($canSeeSection) {
-            $section = $this->sectionService->loadSection($contentInfo->sectionId);
-        }
-
-        $canAssignSection = $this->permissionResolver->hasAccess('section', 'assign');
-        $assignSectionForm = null;
-        if ($canSeeSection && $canAssignSection) {
-            $assignSectionForm = $this->createLocationAssignSectionTypeForm(
-                $contextParameters['location'], $section
-            )->createView();
-        }
 
         $viewParameters = [
-            'section' => $section,
             'contentInfo' => $contentInfo,
             'versionInfo' => $versionInfo,
-            'creator' => $creator,
-            'lastContributor' => $lastContributor,
-            'translations' => $translationsDataset->getTranslations(),
-            'form_location_update' => $locationUpdateType->createView(),
-            'objectStates' => $objectStatesDataset->getObjectStates(),
-            'sort_field_clause_map' => $this->getSortFieldClauseMap(),
-            'form_state_update' => $contentObjectStateUpdateTypeByGroupId,
-            'can_see_section' => $canSeeSection,
-            'can_assign' => $this->canUserAssignObjectState(),
-            'form_assign_section' => $assignSectionForm,
         ];
+
+        $this->supplySectionParameters($viewParameters, $contentInfo, $location);
+        $this->supplyObjectStateParameters($viewParameters, $contentInfo);
+        $this->supplyTranslations($viewParameters, $versionInfo);
+        $this->supplyFormLocationUpdate($viewParameters, $location);
+        $this->supplyCreator($viewParameters, $contentInfo);
+        $this->supplyLastContributor($viewParameters, $versionInfo);
+        $this->supplySortFieldClauseMap($viewParameters);
 
         return array_replace($contextParameters, $viewParameters);
     }
 
     /**
-     * @return array
+     * @param array $parameters
      */
-    private function getSortFieldClauseMap(): array
+    private function supplySortFieldClauseMap(array &$parameters): void
     {
-        return [
+        $parameters['sort_field_clause_map'] = [
             Location::SORT_FIELD_PATH => 'LocationPath',
             Location::SORT_FIELD_PUBLISHED => 'DatePublished',
             Location::SORT_FIELD_MODIFIED => 'DateModified',
@@ -192,6 +158,60 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
             Location::SORT_FIELD_NODE_ID => 'LocationId',
             Location::SORT_FIELD_CONTENTOBJECT_ID => 'ContentId',
         ];
+    }
+
+    /**
+     * @param array $parameters
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
+     */
+    private function supplyCreator(array &$parameters, ContentInfo $contentInfo): void
+    {
+        $parameters['creator'] = null;
+        if ((new UserExists($this->userService))->isSatisfiedBy($contentInfo->ownerId)) {
+            $parameters['creator'] = $this->userService->loadUser($contentInfo->ownerId);
+        }
+    }
+
+    /**
+     * @param array $parameters
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo $versionInfo
+     */
+    private function supplyLastContributor(array &$parameters, VersionInfo $versionInfo): void
+    {
+        $parameters['lastContributor'] = null;
+        if ((new UserExists($this->userService))->isSatisfiedBy($versionInfo->creatorId)) {
+            $parameters['lastContributor'] = $this->userService->loadUser($versionInfo->creatorId);
+        }
+    }
+
+    /**
+     * @param array $parameters
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
+     */
+    private function supplyObjectStateParameters(array &$parameters, ContentInfo $contentInfo): void
+    {
+        $objectStatesDataset = $this->datasetFactory->objectStates();
+        $objectStatesDataset->load($contentInfo);
+
+        $canAssignObjectState = $this->canUserAssignObjectState();
+
+        $parameters['objectStates'] = $objectStatesDataset->getObjectStates();
+        $parameters['can_assign'] = $canAssignObjectState;
+        $parameters['form_state_update'] = [];
+
+        if ($canAssignObjectState) {
+            foreach ($objectStatesDataset->getObjectStates() as $objectState) {
+                $objectStateGroup = $objectState->objectStateGroup;
+                $objectStateUpdateForm = $this->formFactory->create(
+                    ContentObjectStateUpdateType::class,
+                    new ContentObjectStateUpdateData(
+                        $contentInfo, $objectStateGroup, $objectState
+                    )
+                )->createView();
+
+                $parameters['form_state_update'][$objectStateGroup->id] = $objectStateUpdateForm;
+            }
+        }
     }
 
     /**
@@ -207,49 +227,57 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     }
 
     /**
+     * @param array $parameters
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
-     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectState $objectState
-     *
-     * @return \Symfony\Component\Form\FormInterface
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      */
-    private function createUpdateContentObjectStateForm(ContentInfo $contentInfo, ObjectState $objectState): FormInterface
+    private function supplySectionParameters(array &$parameters, ContentInfo $contentInfo, Location $location): void
     {
-        return $this->formFactory->create(
-            ContentObjectStateUpdateType::class,
-            new ContentObjectStateUpdateData(
-                $contentInfo, $objectState->objectStateGroup, $objectState
-            )
-        );
+        $canSeeSection = $this->permissionResolver->hasAccess('section', 'view');
+
+        $parameters['section'] = null;
+        $parameters['can_see_section'] = $canSeeSection;
+        $parameters['form_assign_section'] = null;
+
+        if ($canSeeSection) {
+            $section = $this->sectionService->loadSection($contentInfo->sectionId);
+            $parameters['section'] = $section;
+
+            $canAssignSection = $this->permissionResolver->hasAccess('section', 'assign');
+            if ($canAssignSection) {
+                $assignSectionToSubtreeForm = $this->formFactory->create(
+                    LocationAssignSectionType::class,
+                    new LocationAssignSubtreeData(
+                        $section, $location
+                    )
+                )->createView();
+
+                $parameters['form_assign_section'] = $assignSectionToSubtreeForm;
+            }
+        }
     }
 
     /**
+     * @param array $parameters
      * @param \eZ\Publish\API\Repository\Values\Content\Location $location
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
-    private function createUpdateLocationForm(Location $location): FormInterface
+    private function supplyFormLocationUpdate(array &$parameters, Location $location): void
     {
-        return $this->formFactory->create(
+        $parameters['form_location_update'] = $this->formFactory->create(
             LocationUpdateType::class,
             new LocationUpdateData($location)
-        );
+        )->createView();
     }
 
     /**
-     * Creates assign section to subtree form.
-     *
-     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
-     * @param \eZ\Publish\API\Repository\Values\Content\Section $section
-     *
-     * @return \Symfony\Component\Form\FormInterface
+     * @param array $parameters
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo $versionInfo
      */
-    private function createLocationAssignSectionTypeForm(Location $location, Section $section): FormInterface
+    private function supplyTranslations(array &$parameters, VersionInfo $versionInfo): void
     {
-        return $this->formFactory->create(
-            LocationAssignSectionType::class,
-            new LocationAssignSubtreeData(
-                $section, $location
-            )
-        );
+        $translationsDataset = $this->datasetFactory->translations();
+        $translationsDataset->load($versionInfo);
+
+        $parameters['translations'] = $translationsDataset->getTranslations();
     }
 }
