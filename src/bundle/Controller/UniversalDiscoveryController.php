@@ -10,11 +10,13 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\SearchService;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\Core\REST\Common\Output\Visitor;
+use EzSystems\EzPlatformAdminUi\UniversalDiscovery\CotfPermissionChecker;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UniversalDiscoveryController extends Controller
@@ -28,19 +30,40 @@ class UniversalDiscoveryController extends Controller
     /** @var \eZ\Publish\Core\REST\Common\Output\Visitor */
     protected $visitor;
 
+    /** @var \EzSystems\EzPlatformAdminUi\UniversalDiscovery\CotfPermissionChecker */
+    private $permissionChecker;
+
     /**
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\SearchService $searchService
      * @param \eZ\Publish\Core\REST\Common\Output\Visitor $visitor
+     * @param \EzSystems\EzPlatformAdminUi\UniversalDiscovery\CotfPermissionChecker $permissionChecker
      */
     public function __construct(
         LocationService $locationService,
         SearchService $searchService,
-        Visitor $visitor
+        Visitor $visitor,
+        CotfPermissionChecker $permissionChecker
     ) {
         $this->searchService = $searchService;
         $this->locationService = $locationService;
         $this->visitor = $visitor;
+        $this->permissionChecker = $permissionChecker;
+    }
+
+    /**
+     * @param Location $location
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    public function canCreateAction(Location $location): JsonResponse
+    {
+        $createRestriction = $this->permissionChecker->getCreateRestrictions($location);
+
+        return new JsonResponse($createRestriction->toArray());
     }
 
     /**

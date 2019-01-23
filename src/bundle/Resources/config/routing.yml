@@ -741,6 +741,13 @@ ezplatform.udw.preselected_location.data:
         limit: 50
         _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:preselectedLocationData'
 
+ezplatform.udw.can_create:
+    path: /udw/can_create/{locationId}
+    options:
+        expose: true
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:canCreate'
+
 #
 # Bookmark manager
 #
