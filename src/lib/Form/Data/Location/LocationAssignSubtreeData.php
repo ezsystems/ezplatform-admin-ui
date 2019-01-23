@@ -10,13 +10,22 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data\Location;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Section;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class LocationAssignSubtreeData
 {
-    /** @var \eZ\Publish\API\Repository\Values\Content\Section|null */
+    /**
+     * @var \eZ\Publish\API\Repository\Values\Content\Section|null
+     *
+     * @Assert\NotBlank()
+     */
     protected $section;
 
-    /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
+    /**
+     * @var \eZ\Publish\API\Repository\Values\Content\Location|null
+     *
+     * @Assert\NotBlank()
+     */
     protected $location;
 
     public function __construct(?Section $section = null, ?Location $location = null)
