@@ -75,7 +75,9 @@ export default class EzBtnLinkEdit extends Component {
                 this.state.element.setAttribute(
                     'href', 'ezlocation://' + items[0].id
                 );
-                this.focusEditedLink();
+                this.invokeWithFixedScrollbar(() => {
+                    this.focusEditedLink();
+                });
 
                 ReactDOM.unmountComponentAtNode(udwContainer);
             };
@@ -311,7 +313,10 @@ export default class EzBtnLinkEdit extends Component {
         } else if (event.keyCode === 27) {
             const editor = this.props.editor.get('nativeEditor');
             new CKEDITOR.Link(editor).advanceSelection();
-            editor.fire('actionPerformed', this);
+
+            this.invokeWithFixedScrollbar(() => {
+                editor.fire('actionPerformed', this);
+            });
         }
     }
 
@@ -363,7 +368,9 @@ export default class EzBtnLinkEdit extends Component {
 
         this.props.cancelExclusive();
 
-        editor.fire('actionPerformed', this);
+        this.invokeWithFixedScrollbar(() => {
+            editor.fire('actionPerformed', this);
+        });
     }
 
     /**
@@ -398,13 +405,33 @@ export default class EzBtnLinkEdit extends Component {
             linkAttrs.href = this.state.linkHref;
             linkUtils.update(linkAttrs, this.state.element, modifySelection);
 
-            editor.fire('actionPerformed', this);
+            this.invokeWithFixedScrollbar(() => {
+                editor.fire('actionPerformed', this);
+            });
         }
 
         // We need to cancelExclusive with the bound parameters in case the
         // button is used inside another component in exclusive mode (such
         // is the case of the link button)
         this.props.cancelExclusive();
+    }
+
+    /**
+     * Saves current scrollbar position, invokes callback function and scrolls
+     * to the saved position afterward.
+     *
+     * @method invokeWithFixedScrollbar
+     * @param {Function} callback invoked after saving current scrollbar position
+     */
+    invokeWithFixedScrollbar(callback) {
+        if (navigator.userAgent.indexOf('Chrome') > -1) {
+            const scrollY = window.pageYOffset;
+
+            callback();
+            window.scroll(window.pageXOffset, scrollY);
+        } else {
+            callback();
+        }
     }
 }
 

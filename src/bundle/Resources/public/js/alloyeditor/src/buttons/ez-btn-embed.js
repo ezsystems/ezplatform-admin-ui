@@ -28,7 +28,14 @@ export default class EzBtnEmbed extends EzEmbedDiscoverContentButton {
     addEmbed(items) {
         const contentInfo = items[0].ContentInfo.Content._id;
 
-        this.execCommand();
+        if (navigator.userAgent.indexOf('Chrome') > -1) {
+            const scrollY = window.pageYOffset;
+
+            this.execCommand();
+            window.scroll(window.pageXOffset, scrollY);
+        } else {
+            this.execCommand();
+        }
         this.setContentInfo(contentInfo);
 
         const widget = this.getWidget();

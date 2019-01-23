@@ -15,7 +15,7 @@
             contentInfoInput.value = contentId;
             versionInfoContentInfoInput.value = contentId;
             versionInfoVersionNoInput.value = versionNo;
-            languageInput.setAttribute('checked', true);
+            languageInput.checked = true;
             versionEditForm.submit();
         };
         const addDraft = () => {
