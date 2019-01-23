@@ -29,6 +29,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationAssignSectionType;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\DetailsTab;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\LocationsTab;
@@ -612,11 +613,9 @@ class LocationController extends Controller
      */
     public function assignSectionAction(Request $request): Response
     {
-        $form = $this->formFactory->assignSubtreeSectionForm(
-            new LocationAssignSubtreeData()
-        );
-
+        $form = $this->createForm(LocationAssignSectionType::class, new LocationAssignSubtreeData());
         $form->handleRequest($request);
+
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (LocationAssignSubtreeData $data) {
                 $section = $data->getSection();
