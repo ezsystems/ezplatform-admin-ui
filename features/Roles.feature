@@ -61,7 +61,7 @@ Feature: Roles management
       And there's "Test Role" on "Roles" list
       And there's no "Test Role edited" on "Roles" list
 
-  @javascript @common @parallel-scenario
+  @javascript @common
   Scenario: Role can be edited
     Given there's "Test Role" on "Roles" list
     When I start editing "Role" "Test Role"
@@ -73,7 +73,7 @@ Feature: Roles management
       And "Policies" list in "Role" "Test Role" is empty
       And "Assignments" list in "Role" "Test Role" is empty
 
-  @javascript @common @parallel-wait @parallel-scenario
+  @javascript @common @parallel-scenario
   Scenario: User can be assigned to role from the Roles list
     Given there's "Test Role edited" on "Roles" list
     When I start assigning to "Test Role edited" from "Roles" page
