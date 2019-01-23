@@ -64,9 +64,8 @@
                             class="btn btn-danger"
                             data-toggle="modal"
                             data-target="#delete-content-type-modal"
-                            {% if form.addFieldDefinition.vars.disabled %}disabled{% endif %}
-                    >
-                        <svg class="ez-icon">
+                            {% if form.addFieldDefinition.vars.disabled %} disabled {% endif %}>
+                        <svg class="ez-icon ez-icon--medium ez-icon--light">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
                     </button>
