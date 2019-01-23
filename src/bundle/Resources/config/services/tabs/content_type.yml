@@ -1,0 +1,7 @@
+services:
+    EzSystems\EzPlatformAdminUi\Tab\ContentType\:
+        resource: "../../../lib/Tab/ContentType/*"
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab
+        public: true
+        tags:
+            - { name: ezplatform.tab, group: content-type }

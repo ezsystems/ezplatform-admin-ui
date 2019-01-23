@@ -52,8 +52,8 @@ class Date extends EzFieldElement
 
     public function verifyValueInItemView(array $values): void
     {
-        $expectedDateTime = date_format(date_create($values['value']), self::VIEW_DATE_FORMAT);
-        $actualDateTime = $this->context->findElement($this->fields['fieldContainer'])->getText();
+        $expectedDateTime = date_create($values['value']);
+        $actualDateTime = date_create($this->context->findElement($this->fields['fieldContainer'])->getText());
         Assert::assertEquals(
             $expectedDateTime,
             $actualDateTime,

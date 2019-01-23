@@ -41,6 +41,16 @@
         <target state="new">My Preferences</target>
         <note>key: section.my_preferences</note>
       </trans-unit>
+      <trans-unit id="18f788ade37f54e5d52f0e3ddacb39a5558190b5" resname="settings.subitems_limit.value.description">
+        <source>Number of items displayed in the table</source>
+        <target state="new">Number of items displayed in the table</target>
+        <note>key: settings.subitems_limit.value.description</note>
+      </trans-unit>
+      <trans-unit id="67329191003095f24d2ca7d2182ecb00d5a85e36" resname="settings.subitems_limit.value.title">
+        <source>Sub-items</source>
+        <target state="new">Sub-items</target>
+        <note>key: settings.subitems_limit.value.title</note>
+      </trans-unit>
       <trans-unit id="9168385babd54c4c04f7a322ceb2d75769cab6f1" resname="settings.characters_counter.value.description">
         <source><![CDATA[Displays count of characters typed in Online Editor]]></source>
         <target state="new"><![CDATA[Displays count of characters typed in Online Editor]]></target>

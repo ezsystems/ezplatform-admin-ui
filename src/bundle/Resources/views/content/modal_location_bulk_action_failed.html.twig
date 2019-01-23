@@ -1,0 +1,39 @@
+{% trans_default_domain 'locationview' %}
+
+<div
+    class="modal fade ez-modal--bulk-action-failed ez-bulk-action-failed-modal"
+    id="bulk-action-failed-modal"
+    tabindex="-1"
+    role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ 'content.view.subitems.bulk_action.limited_permissions'|trans|desc('Limited user permissions') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg class="ez-icon ez-icon--medium" aria-hidden="true">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="ez-table-header">
+                    <div class="ez-table-header__headline"></div>
+                </div>
+                <table
+                    data-table-row-template="{{ include('@ezdesign/content/modal_location_bulk_action_failed_row.html.twig', {
+                        'content_name': '{{ content_name }}',
+                        'content_type_name': '{{ content_type_name }}'
+                    })|e('html_attr') }}"
+                    class="table ez-bulk-action-failed-modal__table mb-0">
+                    <thead>
+                        <tr>
+                            <th>{{ 'bulk_action.failed.modal.content_name'|trans|desc('Name') }}</th>
+                            <th>{{ 'bulk_action.failed.modal.content_type_name'|trans|desc('Content Type') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="ez-bulk-action-failed-modal__table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

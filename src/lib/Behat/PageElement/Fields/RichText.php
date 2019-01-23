@@ -35,6 +35,7 @@ class RichText extends EzFieldElement
         $fieldInput->focus();
         $this->context->getSession()->getDriver()->executeScript(sprintf($this->clearAlloyEditorScript, $richtextId));
         $fieldInput->setValue($parameters['value']);
+        $fieldInput->blur();
     }
 
     public function getValue(): array

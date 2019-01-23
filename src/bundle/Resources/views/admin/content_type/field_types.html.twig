@@ -121,9 +121,9 @@
 {% endblock %}
 
 {% block ezobjectrelation_field_definition_edit %}
+    {% set is_translation = is_translation ?? false %}
     <div class="ezobjectrelation-settings selection-root">
         {{- form_row(form.selectionRoot) -}}
-
         <div class="mt-1">
             <button
                 data-universaldiscovery-title="{{ "field_definition.ezobjectrelation.selection_root_udw_title"
@@ -134,6 +134,7 @@
                 data-relation-selected-root-name-selector="#{{ form.selectionRoot.vars.id }}-selected-root-name"
                 data-starting-location-id="{{ admin_ui_config.universalDiscoveryWidget.startingLocationId|default(1) }}"
                 data-udw-config="{{ ez_udw_config('single', {}) }}"
+                {{ is_translation ? 'disabled' : '' }}
             >{{ "field_definition.ezobjectrelation.selection_root_udw_button"
                 |trans({}, "ezrepoforms_content_type")
                 |desc("Select item") }}</button>
@@ -151,6 +152,7 @@
 {% endblock %}
 
 {% block ezobjectrelationlist_field_definition_edit %}
+    {% set is_translation = is_translation ?? false %}
     <div class="ezobjectrelationlist-settings selection-default-location">
         {{- form_row(form.selectionDefaultLocation) -}}
 
@@ -164,6 +166,7 @@
                 data-relation-selected-root-name-selector="#{{ form.selectionDefaultLocation.vars.id }}-selected-root-name"
                 data-starting-location-id="{{ admin_ui_config.universalDiscoveryWidget.startingLocationId|default(1) }}"
                 data-udw-config="{{ ez_udw_config('single_container', {}) }}"
+                {{ is_translation ? 'disabled' : '' }}
             >{{ "field_definition.ezobjectrelationlist.selection_root_udw_button"
                 |trans({}, "ezrepoforms_content_type")
                 |desc("Select location") }}</button>
@@ -191,6 +194,7 @@
 {% endblock %}
 
 {% block ezselection_field_definition_edit %}
+    {% set is_translation = is_translation ?? false %}
     <div class="ezselection-settings is-multiple{% if group_class is not empty %} {{ group_class }}{% endif %}">
         {{- form_row(form.isMultiple, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
     </div>
@@ -203,7 +207,10 @@
             data-selection-buttons=".ezselection-settings-option-remove">
             {% for option in form.options %}
                 <li class="ezselection-settings-option-value ez-selection-table-row mb-2 d-flex align-items-center">
-                    <input type="checkbox" class="ezselection-settings-option-checkbox ez-selection-table-checkbox">
+                    <input
+                        type="checkbox"
+                        class="ezselection-settings-option-checkbox ez-selection-table-checkbox"
+                        {{ is_translation ? 'disabled' : '' }}>
                     {{ form_errors(option) }}
                     {{ form_widget(option, { 'attr': { 'class': 'form-control ml-1 mb-0'}}) }}
                 </li>
@@ -222,7 +229,8 @@
         <div class="ezselection-settings-toolbar">
             <button
                 type="button"
-                class="ezselection-settings-option-add ez-font-icon ez-button btn btn-secondary ez-button-add pure-button">
+                class="ezselection-settings-option-add ez-font-icon ez-button btn btn-secondary ez-button-add pure-button"
+                {{ is_translation ? 'disabled' : '' }}>
                 {{ "field_definition.ezselection.add_option"|trans({}, "ezrepoforms_content_type")|desc("Add an option") }}
             </button>
             <button
@@ -252,5 +260,29 @@
 {% block eztext_field_definition_edit %}
     <div class="eztext-settings text-rows{% if group_class is not empty %} {{ group_class }}{% endif %}">
         {{- form_row(form.textRows, {'label_attr': {'class': 'ez-label'}}) -}}
+    </div>
+{% endblock %}
+
+{% block ezuser_field_definition_edit %}
+    <div class="ez-field ez-field--user ez-user">
+        <div class="ez-user__settings {% if group_class is not empty %} {{ group_class }}{% endif %}">
+            {{- form_row(form.requireAtLeastOneUpperCaseCharacter, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+        </div>
+
+        <div class="ez-user__settings {% if group_class is not empty %} {{ group_class }}{% endif %}">
+            {{- form_row(form.requireAtLeastOneLowerCaseCharacter, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+        </div>
+
+        <div class="ez-user__settings {% if group_class is not empty %} {{ group_class }}{% endif %}">
+            {{- form_row(form.requireAtLeastOneNumericCharacter, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+        </div>
+
+        <div class="ez-user__settings {% if group_class is not empty %} {{ group_class }}{% endif %}">
+            {{- form_row(form.requireAtLeastOneNonAlphanumericCharacter, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+        </div>
+
+        <div class="ez-user__settings text-rows{% if group_class is not empty %} {{ group_class }}{% endif %}">
+            {{- form_row(form.minLength, {'label_attr': {'class': 'ez-label'}}) -}}
+        </div>
     </div>
 {% endblock %}

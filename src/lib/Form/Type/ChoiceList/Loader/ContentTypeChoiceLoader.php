@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 
@@ -17,12 +18,17 @@ class ContentTypeChoiceLoader implements ChoiceLoaderInterface
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
+    private $userLanguagePreferenceProvider;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      */
-    public function __construct(ContentTypeService $contentTypeService)
+    public function __construct(ContentTypeService $contentTypeService, UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider)
     {
         $this->contentTypeService = $contentTypeService;
+        $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
     }
 
     /**
@@ -31,9 +37,10 @@ class ContentTypeChoiceLoader implements ChoiceLoaderInterface
     public function getChoiceList(): array
     {
         $contentTypes = [];
-        $contentTypeGroups = $this->contentTypeService->loadContentTypeGroups();
+        $preferredLanguages = $this->userLanguagePreferenceProvider->getPreferredLanguages();
+        $contentTypeGroups = $this->contentTypeService->loadContentTypeGroups($preferredLanguages);
         foreach ($contentTypeGroups as $contentTypeGroup) {
-            $contentTypes[$contentTypeGroup->identifier] = $this->contentTypeService->loadContentTypes($contentTypeGroup);
+            $contentTypes[$contentTypeGroup->identifier] = $this->contentTypeService->loadContentTypes($contentTypeGroup, $preferredLanguages);
         }
 
         return $contentTypes;

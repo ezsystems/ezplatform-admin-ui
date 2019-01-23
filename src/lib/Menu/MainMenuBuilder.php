@@ -179,6 +179,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                         'policy_update' => 'ezplatform.policy.update',
                         'policy_list' => 'ezplatform.policy.list',
                         'policy_create' => 'ezplatform.policy.create',
+                        'policy_create_with_limitation' => 'ezplatform.policy.create_with_limitation',
                     ],
                 ]]
             );

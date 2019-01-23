@@ -66,19 +66,21 @@
                     <div class="container px-5">
                         <section class="ez-fieldgroup">
                             <h2 class="ez-fieldgroup__name">{{ 'content.view.subitems'|trans|desc('Sub-items') }}</h2>
-                            <div class="ez-sil" 
-                                data-location="{{ location.id }}" 
-                                data-items="{{ subitems_module.items }}" 
+                            <div class="ez-sil"
+                                data-location="{{ location.id }}"
+                                data-mfu-create-permissions-config="{{ subitems_module.content_create_permissions_for_mfu|json_encode() }}"
+                                data-items="{{ subitems_module.items }}"
                                 data-content-types="{{ subitems_module.content_type_info_list }}"
                                 data-udw-config-bulk-move-items="{{ ez_udw_config('single_container', {}) }}"
                             ></div>
                         </section>
+                        {% include '@ezdesign/content/modal_location_bulk_action_failed.html.twig' only %}
                     </div>
                     {% endif %}
                 </div>
             </div>
         </div>
-        <div class="col-sm-1 pt-4 bg-secondary ez-context-menu">
+        <div class="col-sm-1 pt-4 px-0 bg-secondary ez-context-menu">
             <div class="ez-sticky-container">
                 {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': contentType}) %}
                 {{ knp_menu_render(content_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
@@ -150,7 +152,6 @@
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.tab.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.visibility.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.update.js'
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.add.translation.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.content.edit.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/udw/move.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/udw/copy.js'

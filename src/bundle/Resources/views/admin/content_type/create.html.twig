@@ -6,7 +6,7 @@
 
 {% block _ezrepoforms_contenttype_update_removeFieldDefinition_widget %}
     <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
-        <svg class="ez-icon ez-icon-trash">
+        <svg class="ez-icon ez-icon--medium ez-icon--light">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
@@ -53,7 +53,7 @@
     <section class="container mt-4 px-5">
         <div class="card ez-card">
             <div class="ez-card__header ez-card__header--secondary d-flex justify-content-between">
-                <div class="p-2">
+                <div class="p-3">
                     {{ 'content_type.view.create.content_field_definitions'|trans|desc('Content field definitions') }}
                 </div>
                 <div class="form-inline">

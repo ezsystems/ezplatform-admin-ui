@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -18,14 +19,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class LanguageParamConverter implements ParamConverterInterface
 {
     const PARAMETER_LANGUAGE_ID = 'languageId';
+    const PARAMETER_LANGUAGE_CODE = 'languageCode';
 
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
     /**
-     * LanguageParamConverter constructor.
-     *
-     * @param LanguageService $languageService
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
      */
     public function __construct(LanguageService $languageService)
     {
@@ -37,15 +37,26 @@ class LanguageParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
-        if (!$request->get(self::PARAMETER_LANGUAGE_ID)) {
+        if (!$request->get(self::PARAMETER_LANGUAGE_ID) && !$request->get(self::PARAMETER_LANGUAGE_CODE)) {
             return false;
         }
 
-        $id = (int)$request->get(self::PARAMETER_LANGUAGE_ID);
+        if ($request->get(self::PARAMETER_LANGUAGE_ID)) {
+            $id = (int)$request->get(self::PARAMETER_LANGUAGE_ID);
 
-        $language = $this->languageService->loadLanguageById($id);
-        if (!$language) {
-            throw new NotFoundHttpException("Language $id not found!");
+            try {
+                $language = $this->languageService->loadLanguageById($id);
+            } catch (NotFoundException $e) {
+                throw new NotFoundHttpException("Language $id not found!");
+            }
+        } elseif ($request->get(self::PARAMETER_LANGUAGE_CODE)) {
+            $languageCode = $request->get(self::PARAMETER_LANGUAGE_CODE);
+
+            try {
+                $language = $this->languageService->loadLanguage($languageCode);
+            } catch (NotFoundException $e) {
+                throw new NotFoundHttpException("Language $languageCode not found!");
+            }
         }
 
         $request->attributes->set($configuration->getName(), $language);

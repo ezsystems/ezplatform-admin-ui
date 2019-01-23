@@ -34,15 +34,12 @@
             padding: .25rem 1.25rem;
             justify-content: space-between;
             z-index: 1040;
+        }
 
-            .form-inline {
-                .btn-danger {
-                    .ez-icon {
-                        width: 1.5rem;
-                        height: 1.5rem;
-                        margin-top: 5px;
-                    }
-                }
+        .form-inline {
+            .btn-danger {
+                display: flex;
+                height: calculateRem(48px);
             }
         }
     }

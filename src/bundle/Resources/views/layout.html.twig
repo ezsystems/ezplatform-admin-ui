@@ -5,6 +5,17 @@
         <meta name="CSRF-Token" content="{{ csrf_token('authenticate') }}" />
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
         <script>
+            const userAgent = navigator.userAgent.toLowerCase();
+
+            if (userAgent.indexOf('chrome') < 0 && userAgent.indexOf('safari') >= 0) {
+                window.onpageshow = (event) => {
+                    if (event.persisted) {
+                        document.body.classList.remove('ez-prevent-click');
+                    }
+                };
+            }
+        </script>
+        <script>
             window.eZ = {
                 addConfig: (path, value, shouldMerge = false) => {
                     const keys = path.split('.');
@@ -79,6 +90,7 @@
         {% stylesheets filter='scssphp'
             'bundles/ezplatformadminui/scss/ezplatform-bootstrap.scss'
             'bundles/ezplatformadminui/scss/ezplatform.scss'
+            'bundles/ezplatformadminuimodules/scss/ezplatform-modules.scss'
             '@EzPlatformAdminUiAssetsBundle/Resources/public/vendors/flatpickr/dist/flatpickr.min.css'
         %}
             <link rel="stylesheet" href="{{ asset_url }}" />
@@ -106,7 +118,7 @@
             {% block content %}
 
                 {% block left_sidebar %}
-                    <div class="col-sm-1 bg-dark pt-4 ez-side-menu">
+                    <div class="col-sm-1 bg-dark pt-4 px-0 ez-side-menu">
                         <div class="ez-sticky-container">
                             {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@ezdesign/parts/menu/sidebar_left.html.twig'}) }}
                         </div>
@@ -159,6 +171,7 @@
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.prevent.click.js'
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.picker.js'
             '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.notifications.modal.js'
+            '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.add.translation.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

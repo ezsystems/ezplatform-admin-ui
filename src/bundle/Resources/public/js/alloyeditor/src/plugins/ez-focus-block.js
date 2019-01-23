@@ -1,4 +1,4 @@
-(function (global) {
+(function(global) {
     const FOCUSED_CLASS = 'is-block-focused';
 
     if (CKEDITOR.plugins.get('ezfocusblock')) {
@@ -37,7 +37,7 @@
      * @param {Event} event the event object
      */
     const updateFocusedBlock = (event) => {
-        const block = findNewFocusedBlock(event.data.path)
+        const block = findNewFocusedBlock(event.data.path);
         const oldBlock = findFocusedBlock(event.editor);
 
         if (oldBlock && (!block || block.$ !== oldBlock.$)) {
@@ -101,7 +101,7 @@
      * @constructor
      */
     CKEDITOR.plugins.add('ezfocusblock', {
-        init: function (editor) {
+        init: function(editor) {
             editor.on('selectionChange', updateFocusedBlock);
             editor.on('blur', clearFocusedBlock);
             editor.on('getData', clearFocusedBlockFromData);

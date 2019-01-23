@@ -1,4 +1,4 @@
-(function (global) {
+(function(global) {
     if (global.CKEDITOR.plugins.get('ezaddcontent')) {
         return;
     }
@@ -13,10 +13,10 @@
         const element = doc.createElement(tagName);
 
         element.setAttributes(attributes);
-        element.setHtml(content ? content : "<br>");
+        element.setHtml(content ? content : '<br>');
 
         return element;
-    }
+    };
 
     /**
      * Fires the `editorInteraction` event this is done to make sure the
@@ -35,7 +35,9 @@
             nativeEvent: event,
             selectionData: editor.getSelectionData(),
         });
-    }
+    };
+
+    const isCustomTag = (el) => !!el.findOne('[data-ezelement="eztemplate"]');
 
     /**
      * Appends the element to the editor content. Depending on the editor's
@@ -57,17 +59,18 @@
 
         if (elementPath && elementPath.block) {
             const elements = elementPath.elements;
+            const insertIndex = !elementPath.contains(isCustomTag, true) ? elements.length - 2 : 0;
 
-            element.insertAfter(elements[elements.length - 2]);
+            element.insertAfter(elements[insertIndex]);
         } else if (editor.widgets && editor.widgets.focused) {
             element.insertAfter(editor.widgets.focused.wrapper);
         } else {
             editor.insertElement(element);
         }
-    }
+    };
 
     const addContentCommand = {
-        exec: function (editor, data) {
+        exec: function(editor, data) {
             const element = createElement(editor.document, data.tagName, data.content, data.attributes);
             let focusElement = element;
 
@@ -95,7 +98,7 @@
     global.CKEDITOR.plugins.add('ezaddcontent', {
         requires: ['ezcaret'],
 
-        init: function (editor) {
+        init: function(editor) {
             editor.eZ = editor.eZ || {};
             editor.eZ.appendElement = appendElement.bind(editor, editor);
             editor.addCommand('eZAddContent', addContentCommand);

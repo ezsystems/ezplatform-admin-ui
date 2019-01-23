@@ -1,4 +1,4 @@
-(function (global) {
+(function(global) {
     if (CKEDITOR.plugins.get('ezremoveblock')) {
         return;
     }
@@ -11,7 +11,7 @@
          * @param {CKEDITOR.editor} editor
          * @param {CKEDITOR.dom.element} element
          */
-        moveCaretToElement: function (editor, element) {
+        moveCaretToElement: function(editor, element) {
             const caretElement = editor.eZ.findCaretElement(element);
 
             editor.eZ.moveCaretToElement(editor, caretElement);
@@ -27,7 +27,7 @@
          * @param {CKEDITOR.dom.element} removedElement
          * @param {CKEDITOR.dom.element} newFocus
          */
-        fireEditorInteraction: function (editor, newFocus) {
+        fireEditorInteraction: function(editor, newFocus) {
             const event = {
                 editor: editor,
                 target: newFocus.$,
@@ -49,7 +49,7 @@
          * @protected
          * @method changeFocus
          */
-        changeFocus: function (editor, newFocus) {
+        changeFocus: function(editor, newFocus) {
             const widget = editor.widgets.getByElement(newFocus);
 
             if (widget) {
@@ -57,32 +57,46 @@
             } else {
                 this.moveCaretToElement(editor, newFocus);
             }
-       },
+        },
 
-        exec: function (editor, data) {
-            let toRemove = editor.elementPath().block;
-            let newFocus;
+        getElementToRemove(editor) {
+            const toRemove = editor.widgets.focused ? editor.widgets.focused.wrapper : editor.elementPath().block;
 
-            if (!toRemove) {
-                // path.block is null when a widget is focused so the element to
-                // remove is the focused widget wrapper.
-                toRemove = editor.widgets.focused.wrapper;
+            return toRemove.is('li') ? toRemove.getParent() : toRemove;
+        },
+
+        getElementToFocus(elementToRemove) {
+            let elementToFocus = elementToRemove.getNext();
+
+            if (!elementToFocus || elementToFocus.type === CKEDITOR.NODE_TEXT || elementToFocus.hasAttribute('data-cke-temp')) {
+                elementToFocus = elementToRemove.getPrevious();
             }
 
-            newFocus = toRemove.getNext();
-
-            if (!newFocus || newFocus.type === CKEDITOR.NODE_TEXT || newFocus.hasAttribute('data-cke-temp')) {
-                // the data-cke-temp element is added by the Widget plugin for
-                // internal purposes but it exposes no API to handle it, so we
-                // are forced to manually check if newFocus is this element
-                // see https://jira.ez.no/browse/EZP-26016
-                newFocus = toRemove.getPrevious();
+            if (elementToFocus && elementToFocus.type === CKEDITOR.NODE_TEXT) {
+                elementToFocus = elementToFocus.getParent();
             }
 
-            toRemove.remove();
+            if (!elementToFocus) {
+                elementToFocus = elementToRemove.getParent();
+            }
 
-            if (newFocus) {
-                this.changeFocus(editor, newFocus);
+            return elementToFocus;
+        },
+
+        exec: function(editor) {
+            const elementToRemove = this.getElementToRemove(editor);
+            let elementToFocus = this.getElementToFocus(elementToRemove);
+
+            elementToRemove.remove();
+
+            if (elementToFocus) {
+                if (elementToFocus.hasClass('ez-data-source__richtext')) {
+                    elementToFocus = new CKEDITOR.dom.element('p');
+
+                    editor.insertElement(elementToFocus);
+                }
+
+                this.changeFocus(editor, elementToFocus);
             }
         },
     };
@@ -102,4 +116,3 @@
         init: (editor) => editor.addCommand('eZRemoveBlock', removeBlockCommand),
     });
 })(window);
-

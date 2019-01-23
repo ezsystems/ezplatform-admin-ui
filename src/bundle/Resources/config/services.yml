@@ -48,8 +48,6 @@ services:
 
     EzSystems\EzPlatformAdminUiBundle\ParamConverter\ContentTypeParamConverter:
         public: true
-        arguments:
-            $siteAccessLanguages: '$languages$'
         tags:
             - { name: 'request.param_converter' }
 

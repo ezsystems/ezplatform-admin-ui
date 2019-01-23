@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Tests\ParamConverter;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\ContentTypeParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
@@ -28,7 +29,8 @@ class ContentTypeParamConverterTest extends AbstractParamConverterTest
     {
         $this->serviceMock = $this->createMock(ContentTypeService::class);
 
-        $this->converter = new ContentTypeParamConverter($this->serviceMock, []);
+        $userLanguagePreferenceProvider = $this->createMock(UserLanguagePreferenceProviderInterface::class);
+        $this->converter = new ContentTypeParamConverter($this->serviceMock, $userLanguagePreferenceProvider);
     }
 
     public function testApplyId()

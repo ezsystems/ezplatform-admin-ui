@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 
 class ContentTypes implements ProviderInterface
@@ -14,12 +15,17 @@ class ContentTypes implements ProviderInterface
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
+    private $userLanguagePreferenceProvider;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      */
-    public function __construct(ContentTypeService $contentTypeService)
+    public function __construct(ContentTypeService $contentTypeService, UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider)
     {
         $this->contentTypeService = $contentTypeService;
+        $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
     }
 
     /**
@@ -29,8 +35,16 @@ class ContentTypes implements ProviderInterface
     {
         $contentTypeGroups = [];
 
-        foreach ($this->contentTypeService->loadContentTypeGroups() as $contentTypeGroup) {
-            foreach ($this->contentTypeService->loadContentTypes($contentTypeGroup) as $contentType) {
+        $preferredLanguages = $this->userLanguagePreferenceProvider->getPreferredLanguages();
+        $loadedContentTypeGroups = $this->contentTypeService->loadContentTypeGroups(
+            $preferredLanguages
+        );
+        foreach ($loadedContentTypeGroups as $contentTypeGroup) {
+            $contentTypes = $this->contentTypeService->loadContentTypes(
+                $contentTypeGroup,
+                $preferredLanguages
+            );
+            foreach ($contentTypes as $contentType) {
                 $contentTypeGroups[$contentTypeGroup->identifier][] = [
                     'identifier' => $contentType->identifier,
                     'name' => $contentType->getName(),

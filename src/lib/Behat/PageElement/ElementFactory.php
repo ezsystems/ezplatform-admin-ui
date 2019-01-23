@@ -9,10 +9,13 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\InstallType;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformPageBuilder\Tests\Behat\PageElement\EnterpriseElementFactory;
+use Tests\AppBundle\Behat\PageElement\DemoEnterpriseElementFactory;
 
 class ElementFactory
 {
     private static $installType;
+
+    private static $factory;
 
     /**
      * Creates a Element object based on given Element Name.
@@ -23,9 +26,12 @@ class ElementFactory
     public static function createElement(UtilityContext $context, string $elementName, ?string ...$parameters)
     {
         /* Note: no return type to enable type-hinting */
-        $factory = self::getFactory(self::$installType);
 
-        return $factory::createElement($context, $elementName, ...$parameters);
+        if (self::$factory === null) {
+            self::$factory = self::getFactory(self::$installType);
+        }
+
+        return self::$factory::createElement($context, $elementName, ...$parameters);
     }
 
     public static function setInstallType(int $installType)
@@ -36,9 +42,12 @@ class ElementFactory
     public static function getPreviewType(string $contentType)
     {
         /* Note: no return type to enable type-hinting */
-        $factory = self::getFactory(self::$installType);
 
-        return $factory::getPreviewType($contentType);
+        if (self::$factory === null) {
+            self::$factory = self::getFactory(self::$installType);
+        }
+
+        return self::$factory::getPreviewType($contentType);
     }
 
     /**
@@ -53,8 +62,9 @@ class ElementFactory
             case InstallType::PLATFORM_DEMO:
                 return new PlatformElementFactory();
             case InstallType::ENTERPRISE:
-            case InstallType::ENTERPRISE_DEMO:
                 return new EnterpriseElementFactory();
+            case InstallType::ENTERPRISE_DEMO:
+                return new DemoEnterpriseElementFactory();
             default:
                 throw new \Exception('Unrecognised install type');
         }

@@ -14,6 +14,7 @@ use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewBuilderParametersEvent;
 use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\ContentTranslationData;
@@ -40,22 +41,28 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
     /** @var \Symfony\Component\Form\FormFactoryInterface */
     private $formFactory;
 
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
+    private $languagePreferenceProvider;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $languagePreferenceProvider
      */
     public function __construct(
         ContentService $contentService,
         LanguageService $languageService,
         ContentTypeService $contentTypeService,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        UserLanguagePreferenceProviderInterface $languagePreferenceProvider
     ) {
         $this->contentService = $contentService;
         $this->languageService = $languageService;
         $this->contentTypeService = $contentTypeService;
         $this->formFactory = $formFactory;
+        $this->languagePreferenceProvider = $languagePreferenceProvider;
     }
 
     public static function getSubscribedEvents()
@@ -92,8 +99,10 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
             $request->attributes->get('contentId'),
             null !== $baseLanguageCode ? [$baseLanguageCode] : null
         );
-        $contentType = $content->getContentType();
-
+        $contentType = $this->contentTypeService->loadContentType(
+            $content->getContentType()->id,
+            $this->languagePreferenceProvider->getPreferredLanguages()
+        );
         $toLanguage = $this->languageService->loadLanguage($languageCode);
         $fromLanguage = $baseLanguageCode ? $this->languageService->loadLanguage($baseLanguageCode) : null;
 
@@ -103,7 +112,11 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
             $fromLanguage,
             $contentType
         );
-        $form = $this->resolveContentTranslateForm($contentTranslateData, $toLanguage, $content);
+        $form = $this->resolveContentTranslateForm(
+            $contentTranslateData,
+            $toLanguage,
+            $content
+        );
 
         $event->getParameters()->add(['form' => $form->handleRequest($request)]);
     }
@@ -147,8 +160,6 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
      * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      *
      * @return \Symfony\Component\Form\FormInterface
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     private function resolveContentTranslateForm(
         ContentTranslationData $contentUpdate,

@@ -8,12 +8,14 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\EventListener;
 
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class RequestLocaleListener implements EventSubscriberInterface
 {
@@ -23,16 +25,28 @@ class RequestLocaleListener implements EventSubscriberInterface
     /** @var array */
     private $availableTranslations;
 
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    private $translator;
+
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
+    private $userLanguagePreferenceProvider;
+
     /**
      * @param array $siteAccessGroups
      * @param array $availableTranslations
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      */
     public function __construct(
         array $siteAccessGroups,
-        array $availableTranslations
+        array $availableTranslations,
+        TranslatorInterface $translator,
+        UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
     ) {
         $this->siteAccessGroups = $siteAccessGroups;
         $this->availableTranslations = $availableTranslations;
+        $this->translator = $translator;
+        $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
     }
 
     /**
@@ -58,20 +72,21 @@ class RequestLocaleListener implements EventSubscriberInterface
             return;
         }
 
-        $preferableLocales = $this->getPreferredLocales($request);
+        $preferableLocales = $this->userLanguagePreferenceProvider->getPreferredLocales($request);
+        $locale = null;
 
-        $locale = false;
         foreach ($preferableLocales as $preferableLocale) {
-            if (in_array($preferableLocale, $this->availableTranslations)) {
+            if (\in_array($preferableLocale, $this->availableTranslations)) {
                 $locale = $preferableLocale;
                 break;
             }
         }
-
-        if (false !== $locale) {
-            $request->setLocale($locale);
-            $request->attributes->set('_locale', $locale);
-        }
+        $locale = $locale ?? reset($preferableLocales);
+        $request->setLocale($locale);
+        $request->attributes->set('_locale', $locale);
+        // Set of the current locale on the translator service is needed because RequestLocaleListener has lower
+        // priority than LocaleListener and messages are not translated on login, forgot and reset password pages.
+        $this->translator->setLocale($locale);
     }
 
     /**
@@ -84,28 +99,5 @@ class RequestLocaleListener implements EventSubscriberInterface
     protected function isAdminSiteAccess(Request $request): bool
     {
         return (new IsAdmin($this->siteAccessGroups))->isSatisfiedBy($request->attributes->get('siteaccess'));
-    }
-
-    /**
-     * Return array of preferred user locales.
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return array
-     */
-    protected function getPreferredLocales(Request $request): array
-    {
-        $preferredLocales = $request->headers->get('Accept-Language') ?? '';
-        $preferredLocales = array_reduce(
-            explode(',', $preferredLocales),
-            function ($res, $el) {
-                [$l, $q] = array_merge(explode(';q=', $el), [1]);
-                $res[$l] = (float) $q;
-
-                return $res;
-            }, []);
-        arsort($preferredLocales);
-
-        return array_keys($preferredLocales);
     }
 }

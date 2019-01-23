@@ -28,7 +28,14 @@ export default class EzBtnEmbed extends EzEmbedDiscoverContentButton {
     addEmbed(items) {
         const contentInfo = items[0].ContentInfo.Content._id;
 
-        this.execCommand();
+        if (navigator.userAgent.indexOf('Chrome') > -1) {
+            const scrollY = window.pageYOffset;
+
+            this.execCommand();
+            window.scroll(window.pageXOffset, scrollY);
+        } else {
+            this.execCommand();
+        }
         this.setContentInfo(contentInfo);
 
         const widget = this.getWidget();
@@ -47,8 +54,8 @@ export default class EzBtnEmbed extends EzEmbedDiscoverContentButton {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        const css = 'ae-button ez-btn-ae ez-btn-ae--embed ' + this.getStateClasses(),
-            disabled = this.isDisabled();
+        const css = 'ae-button ez-btn-ae ez-btn-ae--embed ' + this.getStateClasses();
+        const disabled = this.isDisabled();
         const label = Translator.trans(/*@Desc("Embed")*/ 'embed_btn.label', {}, 'alloy_editor');
 
         return (
@@ -59,7 +66,7 @@ export default class EzBtnEmbed extends EzEmbedDiscoverContentButton {
                 tabIndex={this.props.tabIndex}
                 title={label}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#tag" />
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#embed" />
                 </svg>
             </button>
         );

@@ -7,8 +7,12 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
     constructor(props) {
         super(props);
 
+        this.widget = this.getWidget();
+
+        props.editor.get('nativeEditor').lockSelection();
+
         this.state = {
-            values: props.values
+            values: props.values,
         };
     }
 
@@ -32,7 +36,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     value={this.state.values[attrName].value}
                     onChange={this.updateValues.bind(this)}
                     data-attr-name={attrName}
-                ></input>
+                />
             </div>
         );
     }
@@ -57,7 +61,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     checked={this.state.values[attrName].value}
                     onChange={this.updateValues.bind(this)}
                     data-attr-name={attrName}
-                ></input>
+                />
             </div>
         );
     }
@@ -82,7 +86,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     value={this.state.values[attrName].value}
                     onChange={this.updateValues.bind(this)}
                     data-attr-name={attrName}
-                ></input>
+                />
             </div>
         );
     }
@@ -103,8 +107,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     className="attribute__input form-control"
                     value={this.state.values[attrName].value}
                     onChange={this.updateValues.bind(this)}
-                    data-attr-name={attrName}
-                >
+                    data-attr-name={attrName}>
                     {config.choices.map(this.renderChoice.bind(this))}
                 </select>
             </div>
@@ -119,9 +122,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * @return {Object} The rendered option.
      */
     renderChoice(choice) {
-        return (
-            <option value={choice}>{choice}</option>
-        );
+        return <option value={choice}>{choice}</option>;
     }
 
     /**
@@ -136,11 +137,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         const renderMethods = this.getAttributeRenderMethods();
         const methodName = renderMethods[attributeConfig.type];
 
-        return (
-            <div className="ez-ae-custom-tag__attributes">
-                {this[methodName](attributeConfig, attribute)}
-            </div>
-        );
+        return <div className="ez-ae-custom-tag__attributes">{this[methodName](attributeConfig, attribute)}</div>;
     }
 
     /**
@@ -160,8 +157,9 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                 <button
                     className="ez-btn-ae btn btn-secondary ez-btn-ae--custom-tag float-right"
                     onClick={this.saveCustomTag.bind(this)}
-                    disabled={!isValid}
-                >{saveLabel}</button>
+                    disabled={!isValid}>
+                    {saveLabel}
+                </button>
             </div>
         );
     }
@@ -173,7 +171,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * @return {Boolean} are values valid
      */
     isValid() {
-        return Object.keys(this.attributes).every(attr => {
+        return Object.keys(this.attributes).every((attr) => {
             return this.attributes[attr].required ? !!this.state.values[attr].value : true;
         });
     }
@@ -184,31 +182,39 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * @method saveCustomTag
      */
     saveCustomTag() {
-        if (this.props.createNewTag) {
+        const { createNewTag, editor } = this.props;
+
+        editor.get('nativeEditor').unlockSelection(true);
+
+        if (createNewTag) {
             this.execCommand();
         }
 
-        const widget = this.getWidget();
+        const widget = this.getWidget() || this.widget;
         const configValues = Object.assign({}, this.state.values);
 
         widget.setFocused(true);
         widget.setName(this.customTagName);
-        widget.setWidgetContent(this.createContent());
+        widget.setWidgetAttributes(this.createAttributes());
+        widget.renderHeader();
         widget.clearConfig();
 
-        Object.keys(this.attributes).forEach(key => {
+        Object.keys(this.attributes).forEach((key) => {
             widget.setConfig(key, configValues[key].value);
         });
     }
 
     /**
-     * Creates a content.
+     * Creates attributes.
      *
-     * @method createContent
-     * @return {String} the ezcontent
+     * @method createAttributes
+     * @return {String} the ezattributes
      */
-    createContent() {
-        return Object.keys(this.attributes).reduce((total, attr) => `${total}<p>${this.attributes[attr].label}: ${this.state.values[attr].value}</p>`,'');
+    createAttributes() {
+        return Object.keys(this.attributes).reduce(
+            (total, attr) => `${total}<p>${this.attributes[attr].label}: ${this.state.values[attr].value}</p>`,
+            ''
+        );
     }
 
     /**
@@ -224,7 +230,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         values[event.target.dataset.attrName].value = value;
 
         this.setState({
-            values: values
+            values: values,
         });
     }
 
@@ -239,8 +245,8 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
             string: 'renderString',
             boolean: 'renderCheckbox',
             number: 'renderNumber',
-            choice: 'renderSelect'
-        }
+            choice: 'renderSelect',
+        };
     }
 }
 

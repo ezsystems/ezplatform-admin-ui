@@ -6,7 +6,8 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\SubmitHandler: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory: ~
+    EzSystems\EzPlatformAdminUi\Form\Factory\:
+        resource: '../../../lib/Form/Factory'
 
     EzSystems\EzPlatformAdminUi\Form\DataMapper\:
         resource: '../../../lib/Form/DataMapper'

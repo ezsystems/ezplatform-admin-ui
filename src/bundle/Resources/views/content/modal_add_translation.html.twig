@@ -4,7 +4,8 @@
 
 <div class="modal fade ez-modal ez-translation" id="add-translation-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        {{ form_start(form, {'action': path('ezplatform.translation.add')}) }}
+        {% set action = action is defined ? action : path('ezplatform.translation.add') %}
+        {{ form_start(form, {'action': action}) }}
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ 'tab.translations.add.title'|trans|desc('Create new translation') }}</h5>

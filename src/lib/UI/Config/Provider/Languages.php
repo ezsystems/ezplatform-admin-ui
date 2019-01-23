@@ -41,8 +41,8 @@ class Languages implements ProviderInterface
     public function getConfig(): array
     {
         return [
-            'mappings' => $this->getLanguagesMap(),
-            'priority' => $this->getLanguagesPriority(),
+            'mappings' => $languagesMap = $this->getLanguagesMap(),
+            'priority' => $this->getLanguagesPriority($languagesMap),
         ];
     }
 
@@ -72,9 +72,11 @@ class Languages implements ProviderInterface
      * Next: fallback languages of siteaccesses.
      * Last: languages defined but not used in siteaccesses.
      *
+     * @param array $languagesMap data from call to getLanguagesMap()
+     *
      * @return array
      */
-    protected function getLanguagesPriority(): array
+    protected function getLanguagesPriority(array $languagesMap): array
     {
         $priority = [];
         $fallback = [];
@@ -88,7 +90,6 @@ class Languages implements ProviderInterface
 
         // Append fallback languages at the end of priority language list
         $languageCodes = array_unique(array_merge($priority, $fallback));
-        $languagesMap = $this->getLanguagesMap();
 
         $languages = array_filter(array_values($languageCodes), function ($languageCode) use ($languagesMap) {
             // Get only Languages defined and enabled in Admin

@@ -56,6 +56,12 @@
         padding-top: 0.5rem;
         padding-bottom: 0.375rem;
         font-size: 0.8125rem;
+        border-radius: 0;
+
+        &:hover,
+        &:focus {
+            outline: none;
+        }
     }
 
     .ez-icon {

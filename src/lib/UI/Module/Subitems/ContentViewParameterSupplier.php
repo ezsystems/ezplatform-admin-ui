@@ -11,7 +11,9 @@ namespace EzSystems\EzPlatformAdminUi\UI\Module\Subitems;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use eZ\Publish\Core\REST\Common\Output\Visitor;
@@ -19,10 +21,12 @@ use eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentTypeInfoList as
 use eZ\Publish\Core\REST\Server\Values\ContentTypeInfoList;
 use eZ\Publish\Core\REST\Server\Values\RestContent;
 use eZ\Publish\Core\REST\Server\Values\RestLocation;
+use EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList as SubitemsListValueObjectVisitor;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsList;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsRow;
 use eZ\Publish\Core\REST\Common\Output\Generator\Json as JsonOutputGenerator;
+use EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService;
 
 /**
  * @internal
@@ -50,8 +54,14 @@ class ContentViewParameterSupplier
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var int */
-    private $subitemsLimit;
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings */
+    private $contentTypeMappings;
+
+    /** @var \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService */
+    private $userSettingService;
 
     /**
      * @param \eZ\Publish\Core\REST\Common\Output\Visitor $outputVisitor
@@ -61,7 +71,9 @@ class ContentViewParameterSupplier
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param int $subitemsLimit
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings $contentTypeMappings
+     * @param \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService $userSettingService
      */
     public function __construct(
         Visitor $outputVisitor,
@@ -71,7 +83,9 @@ class ContentViewParameterSupplier
         LocationService $locationService,
         ContentService $contentService,
         ContentTypeService $contentTypeService,
-        int $subitemsLimit
+        PermissionResolver $permissionResolver,
+        ContentTypeMappings $contentTypeMappings,
+        UserSettingService $userSettingService
     ) {
         $this->outputVisitor = $outputVisitor;
         $this->outputGenerator = $outputGenerator;
@@ -80,7 +94,9 @@ class ContentViewParameterSupplier
         $this->locationService = $locationService;
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
-        $this->subitemsLimit = $subitemsLimit;
+        $this->permissionResolver = $permissionResolver;
+        $this->contentTypeMappings = $contentTypeMappings;
+        $this->userSettingService = $userSettingService;
     }
 
     /**
@@ -94,6 +110,8 @@ class ContentViewParameterSupplier
      *
      * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
      *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
@@ -105,7 +123,9 @@ class ContentViewParameterSupplier
         $location = $view->getLocation();
         $childrenCount = $this->locationService->getLocationChildCount($location);
 
-        $locationChildren = $this->locationService->loadLocationChildren($location, 0, $this->subitemsLimit);
+        $subitemsLimit = (int)$this->userSettingService->getUserSetting('subitems_limit')->value;
+
+        $locationChildren = $this->locationService->loadLocationChildren($location, 0, $subitemsLimit);
         foreach ($locationChildren->locations as $locationChild) {
             $contentType = $locationChild->getContent()->getContentType();
 
@@ -126,8 +146,9 @@ class ContentViewParameterSupplier
             'subitems_module' => [
                 'items' => $subitemsListJson,
                 /* @deprecated since version 2.2, to be removed in 3.0 */
-                'limit' => $this->subitemsLimit,
+                'limit' => $subitemsLimit,
                 'content_type_info_list' => $contentTypeInfoListJson,
+                'content_create_permissions_for_mfu' => $this->getContentCreatePermissionsForMFU($view->getLocation(), $view->getContent()),
             ],
         ]);
     }
@@ -212,5 +233,42 @@ class ContentViewParameterSupplier
         $this->contentTypeInfoListValueObjectVisitor->visit($this->outputVisitor, $this->outputGenerator, $contentTypeInfoList);
 
         return $this->outputGenerator->endDocument($contentTypeInfoList);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
+     *
+     * @return array
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     */
+    private function getContentCreatePermissionsForMFU(Location $location, Content $content): array
+    {
+        $createPermissionsInMfu = [];
+
+        $hasAccess = $this->permissionResolver->hasAccess('content', 'create');
+        $defaultContentTypeIdentifiers = array_column($this->contentTypeMappings->getConfig()['defaultMappings'], 'contentTypeIdentifier');
+        $defaultContentTypeIdentifiers[] = $this->contentTypeMappings->getConfig()['fallbackContentType']['contentTypeIdentifier'];
+        $contentTypeIdentifiers = array_unique($defaultContentTypeIdentifiers);
+
+        if (\is_bool($hasAccess)) {
+            foreach ($contentTypeIdentifiers as $contentTypeIdentifier) {
+                $createPermissionsInMfu[$contentTypeIdentifier] = $hasAccess;
+            }
+        } else {
+            $locationCreateStruct = $this->locationService->newLocationCreateStruct($location->id);
+            foreach ($contentTypeIdentifiers as $contentTypeIdentifier) {
+                // TODO: Change to `contentTypeService->loadContentTypeList($restrictedContentTypesIds)` after #2444 will be merged
+                $contentType = $this->contentTypeService->loadContentTypeByIdentifier($contentTypeIdentifier);
+                $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $content->versionInfo->initialLanguageCode);
+                $contentCreateStruct->sectionId = $location->contentInfo->sectionId;
+                $createPermissionsInMfu[$contentTypeIdentifier] = $this->permissionResolver->canUser('content', 'create', $contentCreateStruct, [$locationCreateStruct]);
+            }
+        }
+
+        return $createPermissionsInMfu;
     }
 }

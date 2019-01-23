@@ -15,6 +15,14 @@ services:
         tags:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: timezone }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: timezone }
+
+    EzSystems\EzPlatformAdminUi\UserSetting\Setting\SubitemsLimit:
+        arguments:
+            $subitemsLimit: '$subitems_module.limit$'
+        tags:
+            - { name: ezplatform.admin_ui.user_setting.value, identifier: subitems_limit }
+            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: subitems_limit }
+
     EzSystems\EzPlatformAdminUi\UserSetting\Setting\CharactersCounter:
         tags:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: characters_counter }
