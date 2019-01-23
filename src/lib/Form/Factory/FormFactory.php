@@ -29,7 +29,6 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguagesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
@@ -105,7 +104,6 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashWithAssetType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationAssignSectionType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateDeleteType;
@@ -564,21 +562,6 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(SectionContentAssignType::class);
 
         return $this->formFactory->createNamed($name, SectionContentAssignType::class, $data);
-    }
-
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData|null $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function assignSubtreeSectionForm(
-        LocationAssignSubtreeData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(SectionContentAssignType::class);
-
-        return $this->formFactory->createNamed($name, LocationAssignSectionType::class, $data);
     }
 
     /**
