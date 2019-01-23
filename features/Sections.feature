@@ -72,6 +72,17 @@ Feature: Sections management
       And there's "Test Section" on "Sections" list
       And there's no "Test Section edited" on "Sections" list
 
+  @javascript @common @parallel-wait @parallel-scenario
+  Scenario: Changes can be discarded while editing Section from section details
+    Given I go to "Test Section" "Section" page
+    When I start editing "Section" "Test Section" from details page
+    And I set fields
+      | label | value                 |
+      | Name  | Test Section edited 2 |
+    And I click on the edit action bar button "Discard changes"
+    Then I should be on "Sections" page
+    And there's no "Test Section edited 2" on "Sections" list
+
   @javascript @common @parallel-scenario
   Scenario: Section can be edited
     Given there's "Test Section" on "Sections" list
@@ -82,17 +93,6 @@ Feature: Sections management
     And I click on the edit action bar button "Save"
     Then I should be on "Section" "Test Section edited" page
     And notification that "Section" "Test Section edited" is updated appears
-
-  @javascript @common @parallel-wait @parallel-scenario
-  Scenario: Changes can be discarded while editing Section from section details
-    Given I go to "Test Section edited" "Section" page
-    When I start editing "Section" "Test Section edited" from details page
-      And I set fields
-        | label | value                 |
-        | Name  | Test Section edited 2 |
-      And I click on the edit action bar button "Discard changes"
-    Then I should be on "Sections" page
-      And there's no "Test Section edited 2" on "Sections" list
 
   @javascript @common @parallel-scenario
   Scenario: Section can be edited from section details

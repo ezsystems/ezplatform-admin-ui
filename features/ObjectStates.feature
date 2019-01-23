@@ -132,7 +132,7 @@ Feature: Object States management
       And there's "Test Object State" on "Test Object State Group edited2" Object States list
       And there's no "Test Object State edited" on "Test Object State Group edited2" Object States list
 
-  @javascript @common @parallel-scenario
+  @javascript @common @parallel-wait @parallel-scenario
   Scenario: Object State can be edited
     Given I go to "Test Object State Group edited2" "Object State Group" page
     When I start editing "Object State" "Test Object State" from "Test Object State Group edited2"

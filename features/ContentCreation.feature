@@ -177,7 +177,7 @@ Feature: Content items creation
   Scenario: Content draft from draft list modal can be published
     Given I navigate to content "Test Article edited3" of type "Article" in root path
     When I click on the edit action bar button "Edit"
-      And I start editing draft with ID "4" from draft conflict modal
+      And I start editing draft with ID "5" from draft conflict modal
       And I set content fields
         | label | value                      |
         | Title | Test Article edited4       |
