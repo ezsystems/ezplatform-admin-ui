@@ -111,7 +111,6 @@
     </thead>
     <tbody>
     {% for objectState in objectStates %}
-        {% form_theme form_state_update[objectState.objectStateGroup.id] '@ezdesign/form_fields.html.twig' %}
         <tr>
             <td>{{ objectState.objectStateGroup.name }}</td>
             <td>{{ objectState.objectStateGroup.identifier }}</td>
@@ -121,6 +120,7 @@
             <td>{{ objectState.id }}</td>
             <td>
                 {% if can_assign and form_state_update[objectState.objectStateGroup.id].objectState.vars.choices|length != 0 %}
+                    {% form_theme form_state_update[objectState.objectStateGroup.id] '@ezdesign/form_fields.html.twig' %}
                     {{ form_start(form_state_update[objectState.objectStateGroup.id], {
                         'method': 'POST',
                         'action': path('ezplatform.object_state.contentstate.update', {
