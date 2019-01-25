@@ -17,13 +17,13 @@
         }, {});
 
     /**
-     * Returns href to content type icon
+     * Returns an URL to a content type icon
      *
      * @function getContentTypeIcon
      * @param {String} contentTypeIdentifier
-     * @returns {String|null} href to icon
+     * @returns {String|null} url to icon
      */
-    const getContentTypeIcon = (contentTypeIdentifier) => {
+    const getContentTypeIconUrl = (contentTypeIdentifier) => {
         if (!contentTypesDataMap) {
             contentTypesDataMap = createContentTypeDataMap();
         }
@@ -32,12 +32,12 @@
             return null;
         }
 
-        const iconHref = contentTypesDataMap[contentTypeIdentifier].thumbnail;
+        const iconUrl = contentTypesDataMap[contentTypeIdentifier].thumbnail;
 
-        return iconHref;
+        return iconUrl;
     };
 
     eZ.addConfig('helpers.contentType', {
-        getContentTypeIcon,
+        getContentTypeIconUrl,
     });
 })(window, document, window.eZ);
