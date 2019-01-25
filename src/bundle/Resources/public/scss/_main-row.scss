@@ -13,18 +13,16 @@
     }
 
     .ez-has-two-sidebars & {
-            grid-template-columns: calculateRem(80px) 1fr calculateRem(80px);
-            grid-template-areas: 'ez-side-menu ez-content-container ez-context-menu';
+        grid-template-columns: calculateRem(80px) 1fr calculateRem(80px);
+        grid-template-areas: 'ez-side-menu ez-content-container ez-context-menu';
 
-            .ez-side-menu {
-                grid-area: ez-side-menu;
-            }
+        .ez-side-menu {
+            grid-area: ez-side-menu;
         }
     }
 
     .ez-dashboard {
-            grid-template-columns: 1fr;
-            grid-template-areas: 'ez-content-container';
-        }
+        grid-template-columns: 1fr;
+        grid-template-areas: 'ez-content-container';
     }
 }
