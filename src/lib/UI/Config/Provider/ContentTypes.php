@@ -57,7 +57,7 @@ class ContentTypes implements ProviderInterface
                 $contentTypeGroups[$contentTypeGroup->identifier][] = [
                     'identifier' => $contentType->identifier,
                     'name' => $contentType->getName(),
-                    'thumbnail' => $this->contentTypeIconResolver->getContentTypeIcon($contentType),
+                    'thumbnail' => $this->contentTypeIconResolver->getContentTypeIcon($contentType->identifier),
                 ];
             }
         }

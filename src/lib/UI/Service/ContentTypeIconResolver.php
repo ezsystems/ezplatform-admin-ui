@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Service;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Asset\Packages;
 
@@ -28,7 +27,7 @@ class ContentTypeIconResolver
      * @param \Symfony\Component\Asset\Packages $packages
      * @param string|null $defaultThumbnail
      */
-    public function __construct(ConfigResolverInterface $configResolver, Packages $packages, string $defaultThumbnail)
+    public function __construct(ConfigResolverInterface $configResolver, Packages $packages, ?string $defaultThumbnail)
     {
         $this->configResolver = $configResolver;
         $this->packages = $packages;
@@ -41,16 +40,12 @@ class ContentTypeIconResolver
      * Path is resolved based on configuration (ezpublish.system.<SCOPE>.content_type). If there isn't coresponding
      * entry for given content type, then path to default icon will be returned.
      *
-     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType|string $contentType
+     * @param string $contentType
      *
      * @return string|null
      */
-    public function getContentTypeIcon($contentType): ?string
+    public function getContentTypeIcon(string $contentType): ?string
     {
-        if ($contentType instanceof ContentType) {
-            $contentType = $contentType->identifier;
-        }
-
         $thumbnail = null;
 
         $parameterName = $this->getConfigParameterName($contentType);
