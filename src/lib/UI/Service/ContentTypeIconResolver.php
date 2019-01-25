@@ -40,15 +40,15 @@ class ContentTypeIconResolver
      * Path is resolved based on configuration (ezpublish.system.<SCOPE>.content_type). If there isn't coresponding
      * entry for given content type, then path to default icon will be returned.
      *
-     * @param string $contentType
+     * @param string $identifier
      *
      * @return string|null
      */
-    public function getContentTypeIcon(string $contentType): ?string
+    public function getContentTypeIcon(string $identifier): ?string
     {
         $thumbnail = null;
 
-        $parameterName = $this->getConfigParameterName($contentType);
+        $parameterName = $this->getConfigParameterName($identifier);
         if ($this->configResolver->hasParameter($parameterName)) {
             $thumbnail = $this->configResolver->getParameter($parameterName)['thumbnail'];
         }
