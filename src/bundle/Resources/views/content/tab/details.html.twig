@@ -82,12 +82,19 @@
                 {% if form_assign_section %}
                     {% form_theme form_assign_section '@ezdesign/form_fields.html.twig' %}
 
-                    {{ form(form_assign_section, {
+                    {{ form_start(form_assign_section, {
                         'action': path('ezplatform.location.assign_section'),
                         'attr': {
                             'class': 'form-inline ez-form-inline'
                         }
                     }) }}
+                        {{ form_row(form_assign_section.section) }}
+                        {{ form_row(form_assign_section.assign, {
+                            'attr': {
+                                'class': 'btn-secondary'
+                            }
+                        }) }}
+                    {{ form_end(form_assign_section) }}
                 {% endif %}
             </td>
         </tr>
