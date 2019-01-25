@@ -21,7 +21,7 @@
         }
     }
 
-    .ez-dashboard {
+    &.ez-dashboard-row {
         grid-template-columns: 1fr;
         grid-template-areas: 'ez-content-container';
     }
