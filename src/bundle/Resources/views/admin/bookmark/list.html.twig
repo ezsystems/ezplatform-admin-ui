@@ -4,7 +4,7 @@
 
 {% form_theme form_remove '@ezdesign/form_fields.html.twig' %}
 
-{% block body_class %}ez-bookmark-list-view{% endblock %}
+{% block body_class %}ez-bookmark-list-view ez-has-two-sidebars{% endblock %}
 
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
@@ -13,7 +13,7 @@
             {{ parent() }}
         {% endblock left_sidebar %}
 
-        <div class="col-sm-10 px-0">
+        <div class="px-0 ez-content-container">
             <section class="container mt-5">
                 {% include '@ezdesign/parts/page_title.html.twig' with { title: 'bookmark.headline'|trans|desc('Bookmarks'), iconName: 'bookmark-manager' } %}
                 <div class="px-4">
