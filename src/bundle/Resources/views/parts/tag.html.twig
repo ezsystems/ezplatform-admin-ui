@@ -1,11 +1,12 @@
 {% set tag_attributes = tag_attributes|default({})|merge({'class': (tag_attributes.class|default('') ~ ' ez-tag')|trim}) %}
 
 <div {% for attribute_name, attribute_value in tag_attributes %}
-        {% set is_boolean = attribute_value is same as(false) or attribute_value is same as(true) %}
-        {% if not is_boolean %}
-            {{ attribute_name }}="{{ attribute_value }}"
-        {% elseif attribute_value != false %}
-            {{ attribute_name }}
+        {% if attribute_value is not same as(false) %}
+            {% if attribute_value is not same as(true) %}
+                    {{ attribute_name }}="{{ attribute_value }}"
+            {% else %}
+                    {{ attribute_name }}
+            {% endif %}
         {% endif %}
     {% endfor %}>
     <div class="ez-tag__content" {% if is_loading_state %} hidden {% endif %}>
