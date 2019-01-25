@@ -1,6 +1,6 @@
  <div class="ez-tag" 
     {% for attribute_name, attribute_value in tag_attributes %}
-        {% if attribute_value != false %}
+        {% if attribute_value is not false %}
             {{ attribute_name }}="{{ attribute_value }}"
         {% endif %}
     {% endfor %}>
