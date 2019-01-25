@@ -26,7 +26,7 @@
                 {% set content_breadcrumbs = '' %}
                 {% for location in path_locations %}
                     {% set content_breadcrumbs = content_breadcrumbs ~ ez_content_name(location.contentInfo) %}
-                    {% if loop.revindex > 1 %}
+                    {% if not loop.last %}
                         {% set content_breadcrumbs = content_breadcrumbs ~ ' / ' %}
                     {% endif %}
                 {% endfor %}
