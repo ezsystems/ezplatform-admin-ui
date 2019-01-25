@@ -17,7 +17,7 @@ class Selection extends EzFieldElement
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
-        $this->fields['selectBar'] = '.ez-data-source';
+        $this->fields['selectBar'] = '.ez-custom-dropdown__selection-info';
         $this->fields['selectOption'] = '.ez-custom-dropdown__item';
         $this->fields['specificOption'] = '.ez-custom-dropdown__item:nth-child(%s)';
     }
