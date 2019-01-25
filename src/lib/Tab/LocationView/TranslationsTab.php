@@ -9,7 +9,9 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -103,10 +105,17 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
             $translationsDataset->getLanguageCodes()
         );
 
+        $mainTranslationUpdateForm = $this->createMainLanguageUpdateForm(
+            $versionInfo->contentInfo,
+            $versionInfo->contentInfo->mainLanguageCode
+        );
+
         $viewParameters = [
             'translations' => $translationsDataset->getTranslations(),
             'form_translation_add' => $translationAddForm->createView(),
             'form_translation_remove' => $translationDeleteForm->createView(),
+            'form_translation_remove' => $translationDeleteForm->createView(),
+            'form_main_translation_update' => $mainTranslationUpdateForm->createView(),
         ];
 
         return array_replace($contextParameters, $viewParameters);
@@ -142,5 +151,20 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
         );
 
         return $this->formFactory->deleteTranslation($translationDeleteData);
+    }
+
+    /**
+     * @param ContentInfo $contentInfo
+     * @param string $languageCode
+     *
+     * @return FormInterface
+     *
+     * @throws InvalidOptionsException
+     */
+    private function createMainLanguageUpdateForm(ContentInfo $contentInfo, string $languageCode): FormInterface
+    {
+        return $this->formFactory->updateMainTranslation(
+            new MainTranslationUpdateData($contentInfo, $languageCode)
+        );
     }
 }

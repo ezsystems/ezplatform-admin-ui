@@ -18,7 +18,9 @@ use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInval
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper;
+use EzSystems\EzPlatformAdminUi\Form\DataMapper\MainTranslationUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
@@ -330,5 +332,58 @@ class ContentController extends Controller
             'siteaccesses' => $siteaccesses,
             'versionNo' => $versionNo ?? $content->getVersionInfo()->versionNo,
         ]);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws AdminInvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws TranslationInvalidArgumentException
+     * @throws APIRepositoryInvalidArgumentException
+     * @throws UnauthorizedException
+     * @throws InvalidOptionsException
+     */
+    public function updateMainTranslationAction(Request $request): Response
+    {
+        $form = $this->formFactory->updateMainTranslation();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $result = $this->submitHandler->handle($form, function (MainTranslationUpdateData $data) {
+                $contentInfo = $data->getContentInfo();
+                $mapper = new MainTranslationUpdateMapper();
+                $contentMetadataUpdateStruct = $mapper->reverseMap($data);
+                $this->contentService->updateContentMetadata($contentInfo, $contentMetadataUpdateStruct);
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Main language for '%name%' updated.") */
+                        'content.main_language_update.success',
+                        ['%name%' => $contentInfo->name],
+                        'content'
+                    )
+                );
+
+                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                    'locationId' => $contentInfo->mainLocationId,
+                    '_fragment' => 'ez-tab-location-view-translations',
+                ]));
+            });
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+        /** @var ContentDraftCreateData $data */
+        $data = $form->getData();
+        $contentInfo = $data->getContentInfo();
+        if (null !== $contentInfo) {
+            return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                'locationId' => $contentInfo->mainLocationId,
+                '_fragment' => 'ez-tab-location-view-translations',
+            ]));
+        }
+
+        return $this->redirectToRoute('ezplatform.dashboard');
     }
 }

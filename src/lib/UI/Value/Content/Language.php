@@ -31,6 +31,11 @@ class Language extends APILanguage
     protected $userCanRemove;
 
     /**
+     * @var bool
+     */
+    protected $userCanEdit = false;
+
+    /**
      * @param APILanguage $language
      * @param array $properties
      */
@@ -47,5 +52,13 @@ class Language extends APILanguage
     public function canDelete(): bool
     {
         return !$this->main && $this->userCanRemove;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canEdit(): bool
+    {
+        return $this->userCanEdit;
     }
 }

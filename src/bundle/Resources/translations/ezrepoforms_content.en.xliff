@@ -111,6 +111,11 @@
         <target state="new">Upload image</target>
         <note>key: fieldtype.ezimageasset.upload.label</note>
       </trans-unit>
+      <trans-unit id="d773dd487e4e5467fd20fc4fc4987eba33eaf1b7" resname="content.main_language_update.success">
+        <source>Main language for '%name%' updated.</source>
+        <target state="new">Main language for '%name%' updated.</target>
+        <note>key: content.main_language_update.success</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

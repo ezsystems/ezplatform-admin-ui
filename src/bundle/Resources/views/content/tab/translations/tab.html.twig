@@ -21,6 +21,7 @@
             <th></th>
             <th>{{ 'tab.translations.language_name'|trans|desc('Language name') }}</th>
             <th>{{ 'tab.translations.language_code'|trans|desc('Language code') }}</th>
+            <th>{{ 'tab.translations.main_language'|trans|desc('Main language') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +34,14 @@
                 </td>
                 <td class="ez-table__cell">{{ translation.name }}</td>
                 <td class="ez-table__cell">{{ translation.languageCode }}</td>
+                <td class="ez-table__cell align-middle">
+                    <input
+                        type="radio"
+                        {{ translation.main ? 'checked' }}
+                        {{ not translation.canEdit ? 'disabled' }}
+                        name="updateMainTranslation"
+                        value="{{ translation.languageCode }}">
+                </td>
             </tr>
         {% endfor %}
         </tbody>
@@ -43,6 +52,8 @@
             {% include '@ezdesign/content/tab/translations/modal_add_translation.html.twig' with {'form': form_translation_add} only %}
         {% endblock %}
     {% endif %}
+
+    {{ form(form_main_translation_update, {'action': path('ezplatform.content.update_main_translation')})}}
 
 </section>
 

@@ -139,6 +139,7 @@ class ValueFactory
     {
         return new UIValue\Content\Language($language, [
             'userCanRemove' => $this->permissionResolver->canUser('content', 'remove', $versionInfo),
+            'userCanEdit' => $this->permissionResolver->canUser('content', 'edit', $versionInfo->getContentInfo()),
             'main' => $language->languageCode === $versionInfo->getContentInfo()->mainLanguageCode,
         ]);
     }
