@@ -1,0 +1,10 @@
+<li class="mt-2">
+    {{ include('@ezdesign/parts/tag.html.twig', { 
+        'content': content_breadcrumbs,
+        'location_id': location_id,
+        'is_loading_state': is_loading_state,
+        'tag_attributes': {
+            'data-location-id': location_id,
+        }
+    }) }}
+</li>
