@@ -66,7 +66,7 @@
             return operations;
         }, {});
     const removeRootLocation = (pathArray) => pathArray.slice(1);
-    const pathStringToPathArray = (pathString) => pathString.slice(1, -1).split('/');
+    const pathStringToPathArray = (pathString) => pathString.split('/').filter((el) => el);
     const buildContentBreadcrumbs = (viewData) => {
         const searchHitList = viewData.View.Result.searchHits.searchHit;
 

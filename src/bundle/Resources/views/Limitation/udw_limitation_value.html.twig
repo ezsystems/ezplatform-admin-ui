@@ -18,8 +18,7 @@
         {{ "role.policy.limitation.location.udw_button"|trans({}, "ezrepoforms_role")|desc("Select locations") }}
     </button>
 
-    <ul id="{{ form.limitationValues.vars.id }}-selected-location"
-        class="list-unstyled">
+    <ul class="list-unstyled" id="{{ form.limitationValues.vars.id }}-selected-location">
         {% for limitationValue in form.limitationValues.vars.data %}
             {% if limitationValue is not empty %}
                 {% set path_locations = ez_path_string_to_locations(limitationValue.pathString) %}
