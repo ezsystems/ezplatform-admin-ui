@@ -70,6 +70,7 @@
             <th>{{ 'tab.details.section_name'|trans()|desc('Section name') }}</th>
             <th>{{ 'tab.details.section_identifier'|trans()|desc('Section identifier') }}</th>
             <th>{{ 'tab.details.section_id'|trans()|desc('Section ID') }}</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -77,6 +78,25 @@
             <td>{{ section.name }}</td>
             <td>{{ section.identifier }}</td>
             <td>{{ section.id }}</td>
+            <td>
+                {% if form_assign_section %}
+                    {% form_theme form_assign_section '@ezdesign/form_fields.html.twig' %}
+
+                    {{ form_start(form_assign_section, {
+                        'action': path('ezplatform.location.assign_section'),
+                        'attr': {
+                            'class': 'form-inline ez-form-inline'
+                        }
+                    }) }}
+                        {{ form_row(form_assign_section.section) }}
+                        {{ form_row(form_assign_section.assign, {
+                            'attr': {
+                                'class': 'btn-secondary'
+                            }
+                        }) }}
+                    {{ form_end(form_assign_section) }}
+                {% endif %}
+            </td>
         </tr>
         </tbody>
     </table>
@@ -98,7 +118,6 @@
     </thead>
     <tbody>
     {% for objectState in objectStates %}
-        {% form_theme form_state_update[objectState.objectStateGroup.id] '@ezdesign/form_fields.html.twig' %}
         <tr>
             <td>{{ objectState.objectStateGroup.name }}</td>
             <td>{{ objectState.objectStateGroup.identifier }}</td>
@@ -108,6 +127,7 @@
             <td>{{ objectState.id }}</td>
             <td>
                 {% if can_assign and form_state_update[objectState.objectStateGroup.id].objectState.vars.choices|length != 0 %}
+                    {% form_theme form_state_update[objectState.objectStateGroup.id] '@ezdesign/form_fields.html.twig' %}
                     {{ form_start(form_state_update[objectState.objectStateGroup.id], {
                         'method': 'POST',
                         'action': path('ezplatform.object_state.contentstate.update', {

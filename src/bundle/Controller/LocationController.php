@@ -10,8 +10,10 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException as APIRepositoryUnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\API\Repository\Values\Content\LocationUpdateStruct;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
@@ -24,8 +26,10 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationAssignSectionType;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\DetailsTab;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\LocationsTab;
@@ -34,7 +38,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException as APIRepositoryUnauthorizedException;
 
 class LocationController extends Controller
 {
@@ -56,6 +59,9 @@ class LocationController extends Controller
     /** @var \eZ\Publish\API\Repository\TrashService */
     private $trashService;
 
+    /** @var \eZ\Publish\API\Repository\SectionService */
+    private $sectionService;
+
     /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
@@ -72,6 +78,7 @@ class LocationController extends Controller
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\API\Repository\TrashService $trashService
+     * @param \eZ\Publish\API\Repository\SectionService $sectionService
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
@@ -83,6 +90,7 @@ class LocationController extends Controller
         ContentTypeService $contentTypeService,
         ContentService $contentService,
         TrashService $trashService,
+        SectionService $sectionService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
         PermissionResolver $permissionResolver
@@ -93,6 +101,7 @@ class LocationController extends Controller
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->trashService = $trashService;
+        $this->sectionService = $sectionService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
         $this->permissionResolver = $permissionResolver;
@@ -593,5 +602,48 @@ class LocationController extends Controller
             'locationId' => $location->getContentInfo()->mainLocationId,
             '_fragment' => DetailsTab::URI_FRAGMENT,
         ]));
+    }
+
+    /**
+     * Handles assigning section to subtree.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function assignSectionAction(Request $request): Response
+    {
+        $form = $this->createForm(LocationAssignSectionType::class, new LocationAssignSubtreeData());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (LocationAssignSubtreeData $data) {
+                $section = $data->getSection();
+                $location = $data->getLocation();
+
+                $this->sectionService->assignSectionToSubtree($location, $section);
+
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Section '%name%' has been assigned to subtree") */
+                        'location.assign_section.success',
+                        ['%name%' => $section->name],
+                        'location'
+                    )
+                );
+
+                return $this->redirectToLocation($location, DetailsTab::URI_FRAGMENT);
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        if (($location = $form->getData()->getLocation()) !== null) {
+            return $this->redirectToLocation($location, DetailsTab::URI_FRAGMENT);
+        }
+
+        return $this->redirectToRoute('ezplatform.dashboard');
     }
 }

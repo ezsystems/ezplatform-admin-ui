@@ -506,6 +506,12 @@ ezplatform.location.update_visibility:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location:updateVisibility'
 
+ezplatform.location.assign_section:
+    path: /location/assign-section
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Location:assignSection'
+
 ezplatform.content.update_main_location:
     path: /content/update-main-location
     methods: ['POST']
