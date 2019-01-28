@@ -116,6 +116,7 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
             'form_translation_remove' => $translationDeleteForm->createView(),
             'form_translation_remove' => $translationDeleteForm->createView(),
             'form_main_translation_update' => $mainTranslationUpdateForm->createView(),
+            'main_translation_switch' => true,
         ];
 
         return array_replace($contextParameters, $viewParameters);

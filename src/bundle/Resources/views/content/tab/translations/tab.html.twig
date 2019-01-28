@@ -21,7 +21,9 @@
             <th></th>
             <th>{{ 'tab.translations.language_name'|trans|desc('Language name') }}</th>
             <th>{{ 'tab.translations.language_code'|trans|desc('Language code') }}</th>
-            <th>{{ 'tab.translations.main_language'|trans|desc('Main language') }}</th>
+            {% if main_translation_switch %}
+                <th>{{ 'tab.translations.main_language'|trans|desc('Main language') }}</th>
+            {% endif %}
         </tr>
         </thead>
         <tbody>
@@ -34,6 +36,7 @@
                 </td>
                 <td class="ez-table__cell">{{ translation.name }}</td>
                 <td class="ez-table__cell">{{ translation.languageCode }}</td>
+                {% if main_translation_switch %}
                 <td class="ez-table__cell align-middle">
                     <input
                         type="radio"
@@ -42,6 +45,7 @@
                         name="updateMainTranslation"
                         value="{{ translation.languageCode }}">
                 </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
@@ -53,7 +57,9 @@
         {% endblock %}
     {% endif %}
 
-    {{ form(form_main_translation_update, {'action': path('ezplatform.content.update_main_translation')})}}
+    {% if main_translation_switch %}
+        {{ form(form_main_translation_update, {'action': path('ezplatform.content.update_main_translation')})}}
+    {% endif %}
 
 </section>
 
