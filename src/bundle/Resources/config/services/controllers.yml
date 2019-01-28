@@ -109,3 +109,13 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.content_draft_limit$'
+
+    #
+    # REST
+    #
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\Content\ContentTreeController:
+        parent: ezpublish_rest.controller.base
+        tags: ['controller.service_arguments']
+        autowire: true
+        autoconfigure: false
