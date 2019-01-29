@@ -58,6 +58,8 @@ parameters:
         thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#video'
     ezsettings.default.content_type.landing_page:
         thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#landing_page'
+    ezsettings.default.content_type.default-config:
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#file'
 
     ezplatform.content_view.tabs.default_template: '@@ezdesign/parts/tab/default.html.twig'
 

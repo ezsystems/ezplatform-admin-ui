@@ -11,58 +11,72 @@ namespace EzSystems\EzPlatformAdminUi\UI\Service;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Asset\Packages;
 
-class ContentTypeIconResolver
+final class ContentTypeIconResolver
 {
+    private const DEFAULT_IDENTIFIER = 'default-config';
+    private const PARAM_NAME_FORMAT = 'content_type.%s';
+
+    private const ICON_KEY = 'thumbnail';
+
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     /** @var \Symfony\Component\Asset\Packages */
     private $packages;
 
-    /** @var string|null */
-    private $defaultThumbnail;
-
     /**
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      * @param \Symfony\Component\Asset\Packages $packages
-     * @param string|null $defaultThumbnail
      */
-    public function __construct(ConfigResolverInterface $configResolver, Packages $packages, ?string $defaultThumbnail)
+    public function __construct(ConfigResolverInterface $configResolver, Packages $packages)
     {
         $this->configResolver = $configResolver;
         $this->packages = $packages;
-        $this->defaultThumbnail = $defaultThumbnail;
     }
 
     /**
      * Returns path to content type icon.
      *
-     * Path is resolved based on configuration (ezpublish.system.<SCOPE>.content_type). If there isn't coresponding
-     * entry for given content type, then path to default icon will be returned.
+     * Path is resolved based on configuration (ezpublish.system.<SCOPE>.content_type.<IDENTIFIER>). If there isn't
+     * corresponding entry for given content type, then path to default icon will be returned.
      *
      * @param string $identifier
      *
-     * @return string|null
+     * @return string
      */
-    public function getContentTypeIcon(string $identifier): ?string
+    public function getContentTypeIcon(string $identifier): string
     {
-        $thumbnail = null;
+        $icon = $this->resolveIcon($identifier);
+
+        $fragment = null;
+        if (strpos($icon, '#') !== false) {
+            list($icon, $fragment) = explode('#', $icon);
+        }
+
+        return $this->packages->getUrl($icon) . ($fragment ? '#' . $fragment : '');
+    }
+
+    /**
+     * @param string $identifier
+     *
+     * @return string
+     */
+    private function resolveIcon(string $identifier): string
+    {
+        $config = null;
 
         $parameterName = $this->getConfigParameterName($identifier);
         if ($this->configResolver->hasParameter($parameterName)) {
-            $thumbnail = $this->configResolver->getParameter($parameterName)['thumbnail'];
+            $config = $this->configResolver->getParameter($parameterName);
         }
 
-        if (empty($thumbnail)) {
-            $thumbnail = $this->defaultThumbnail;
+        if ($config === null || empty($config[self::ICON_KEY])) {
+            $config = $this->configResolver->getParameter(
+                $this->getConfigParameterName(self::DEFAULT_IDENTIFIER)
+            );
         }
 
-        $fragment = null;
-        if (strpos($thumbnail, '#') !== false) {
-            list($thumbnail, $fragment) = explode('#', $thumbnail);
-        }
-
-        return $this->packages->getUrl($thumbnail) . ($fragment ? '#' . $fragment : '');
+        return $config[self::ICON_KEY];
     }
 
     /**
@@ -74,6 +88,6 @@ class ContentTypeIconResolver
      */
     private function getConfigParameterName(string $identifier): string
     {
-        return "content_type.$identifier";
+        return sprintf(self::PARAM_NAME_FORMAT, $identifier);
     }
 }
