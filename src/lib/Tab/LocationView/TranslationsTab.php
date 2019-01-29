@@ -15,10 +15,13 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpd
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\MainTranslationUpdateType;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -32,8 +35,11 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
     /** @var DatasetFactory */
     protected $datasetFactory;
 
-    /** @var FormFactory */
-    protected $formFactory;
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
+    protected $adminUIFormFactory;
+
+    /** @var \Symfony\Component\Form\FormFactoryInterface */
+    private $formFactory;
 
     /** @var UrlGeneratorInterface */
     protected $urlGenerator;
@@ -42,21 +48,24 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
      * @param Environment $twig
      * @param TranslatorInterface $translator
      * @param DatasetFactory $datasetFactory
-     * @param FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $adminUIFormFactory
      * @param UrlGeneratorInterface $urlGenerator
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         DatasetFactory $datasetFactory,
-        FormFactory $formFactory,
+        FormFactory $adminUIFormFactory,
         UrlGeneratorInterface $urlGenerator,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->datasetFactory = $datasetFactory;
+        $this->adminUIFormFactory = $adminUIFormFactory;
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
     }
@@ -133,7 +142,7 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
     {
         $translationAddData = new TranslationAddData($location);
 
-        return $this->formFactory->addTranslation($translationAddData);
+        return $this->adminUIFormFactory->addTranslation($translationAddData);
     }
 
     /**
@@ -151,7 +160,7 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
             array_combine($languageCodes, array_fill_keys($languageCodes, false))
         );
 
-        return $this->formFactory->deleteTranslation($translationDeleteData);
+        return $this->adminUIFormFactory->deleteTranslation($translationDeleteData);
     }
 
     /**
@@ -164,8 +173,9 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
      */
     private function createMainLanguageUpdateForm(ContentInfo $contentInfo, string $languageCode): FormInterface
     {
-        return $this->formFactory->updateMainTranslation(
-            new MainTranslationUpdateData($contentInfo, $languageCode)
-        );
+        $name = StringUtil::fqcnToBlockPrefix(MainTranslationUpdateType::class);
+        $data = new MainTranslationUpdateData($contentInfo, $languageCode);
+
+        return $this->formFactory->createNamed($name, MainTranslationUpdateType::class, $data);
     }
 }

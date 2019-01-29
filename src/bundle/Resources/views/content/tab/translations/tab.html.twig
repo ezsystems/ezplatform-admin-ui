@@ -37,14 +37,14 @@
                 <td class="ez-table__cell">{{ translation.name }}</td>
                 <td class="ez-table__cell">{{ translation.languageCode }}</td>
                 {% if main_translation_switch %}
-                <td class="ez-table__cell align-middle">
-                    <input
-                        type="radio"
-                        {{ translation.main ? 'checked' }}
-                        {{ not translation.canEdit ? 'disabled' }}
-                        name="updateMainTranslation"
-                        value="{{ translation.languageCode }}">
-                </td>
+                    <td class="ez-table__cell align-middle">
+                        <input
+                            type="radio"
+                            {{ translation.main ? 'checked' }}
+                            {{ not translation.canEdit ? 'disabled' }}
+                            name="updateMainTranslation"
+                            value="{{ translation.languageCode }}">
+                    </td>
                 {% endif %}
             </tr>
         {% endfor %}

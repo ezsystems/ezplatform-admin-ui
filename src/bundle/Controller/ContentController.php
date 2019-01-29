@@ -23,6 +23,7 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\MainTranslationUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\MainTranslationUpdateType;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
@@ -335,22 +336,16 @@ class ContentController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
-     *
-     * @throws AdminInvalidArgumentException
-     * @throws \InvalidArgumentException
-     * @throws TranslationInvalidArgumentException
-     * @throws APIRepositoryInvalidArgumentException
-     * @throws UnauthorizedException
-     * @throws InvalidOptionsException
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function updateMainTranslationAction(Request $request): Response
     {
-        $form = $this->formFactory->updateMainTranslation();
+        $form = $this->createForm(MainTranslationUpdateType::class, new MainTranslationUpdateData());
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (MainTranslationUpdateData $data) {
                 $contentInfo = $data->getContentInfo();
                 $mapper = new MainTranslationUpdateMapper();
@@ -374,7 +369,7 @@ class ContentController extends Controller
                 return $result;
             }
         }
-        /** @var ContentDraftCreateData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData $data */
         $data = $form->getData();
         $contentInfo = $data->getContentInfo();
         if (null !== $contentInfo) {

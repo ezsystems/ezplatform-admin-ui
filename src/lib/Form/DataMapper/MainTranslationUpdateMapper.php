@@ -11,20 +11,17 @@ use eZ\Publish\API\Repository\Values\ValueObject;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData;
 
-/**
- * Maps between ContentMetadataUpdateStruct and ContentMetadataUpdateData objects.
- */
 class MainTranslationUpdateMapper implements DataMapperInterface
 {
     /**
-     * @param ContentMetadataUpdateStruct|ValueObject $value
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentMetadataUpdateStruct|\eZ\Publish\API\Repository\Values\ValueObject $value
      *
-     * @return ContentMainLocationUpdateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData
      */
     public function map(ValueObject $value)
     {
         if (!$value instanceof ContentMetadataUpdateStruct) {
-            throw new InvalidArgumentException('value', 'must be an instance of ' . ContentMetadataUpdateStruct::class);
+            throw new InvalidArgumentException('value', sprintf('must be an instance of %s', ContentMetadataUpdateStruct::class));
         }
 
         $data = new MainTranslationUpdateData();
@@ -34,14 +31,14 @@ class MainTranslationUpdateMapper implements DataMapperInterface
     }
 
     /**
-     * @param MainTranslationUpdateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData $data
      *
-     * @return ContentMetadataUpdateStruct
+     * @return \eZ\Publish\API\Repository\Values\Content\ContentMetadataUpdateStruct
      */
     public function reverseMap($data)
     {
         if (!$data instanceof MainTranslationUpdateData) {
-            throw new InvalidArgumentException('data', 'must be an instance of ' . MainTranslationUpdateData::class);
+            throw new InvalidArgumentException('value', sprintf('must be an instance of %s', MainTranslationUpdateData::class));
         }
 
         return new ContentMetadataUpdateStruct([

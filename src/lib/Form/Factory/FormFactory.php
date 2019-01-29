@@ -20,7 +20,6 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddDat
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupDeleteData;
@@ -87,7 +86,6 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemove
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentMainLocationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationDeleteType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\MainTranslationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType;
@@ -1331,27 +1329,5 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationTrashContainerType::class);
 
         return $this->formFactory->createNamed($name, LocationTrashContainerType::class, $data);
-    }
-
-    /**
-     * @param MainTranslationUpdateData|null $data
-     * @param string|null $name
-     *
-     * @return FormInterface
-     *
-     * @throws InvalidOptionsException
-     */
-    public function updateMainTranslation(
-        ?MainTranslationUpdateData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(MainTranslationUpdateType::class);
-        $data = $data ?? new MainTranslationUpdateData();
-
-        return $this->formFactory->createNamed(
-            $name,
-            MainTranslationUpdateType::class,
-            $data
-        );
     }
 }
