@@ -26,57 +26,60 @@
         {% endblock left_sidebar %}
 
         <div class="px-0 pb-4 ez-content-container">
-            <div class="ez-header">
-                <div class="container">
-                    {% set items = [] %}
-                    {% for pathLocation in pathLocations %}
-                        {% if not loop.last %}
-                            {% set items = items|merge([{
-                                'value': pathLocation.contentInfo.name,
-                                'url': path('_ezpublishLocation', {'locationId': pathLocation.id})
-                            }]) %}
-                        {% endif %}
-                    {% endfor %}
-                    {% set items = items|merge([{ 'value': content.name }]) %}
-                    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: items } %}
+            <div class="ez-content-tree-container"></div>
+            <div class="ez-location-view-container">
+                <div class="ez-header">
+                    <div class="container">
+                        {% set items = [] %}
+                        {% for pathLocation in pathLocations %}
+                            {% if not loop.last %}
+                                {% set items = items|merge([{
+                                    'value': pathLocation.contentInfo.name,
+                                    'url': path('_ezpublishLocation', {'locationId': pathLocation.id})
+                                }]) %}
+                            {% endif %}
+                        {% endfor %}
+                        {% set items = items|merge([{ 'value': content.name }]) %}
+                        {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: items } %}
 
-                    {% include '@ezdesign/parts/page_title.html.twig' with {
-                        title: content.name,
-                        iconName: contentType.identifier,
-                        contentTypeName: contentType.name
-                    } %}
-                </div>
-            </div>
-            <div class="panel panel-primary">
-                <div class="panel-body">
-                    {{ ez_platform_tabs('location-view', {
-                        'content': content,
-                        'location': location,
-                        'contentType': contentType,
-                        'draft_pagination_params': draft_pagination_params,
-                        'custom_urls_pagination_params': custom_urls_pagination_params,
-                        'system_urls_pagination_params': system_urls_pagination_params,
-                        'roles_pagination_params': roles_pagination_params,
-                        'policies_pagination_params': policies_pagination_params
-                    }, '@ezdesign/parts/tab/locationview.html.twig') }}
-
-                    {% if contentType.isContainer %}
-                    {{ form_start(form_subitems_content_edit, { 'action': path('ezplatform.content.edit'), 'attr': { 'hidden': 'hidden' }}) }}
-                    {{ form_end(form_subitems_content_edit) }}
-                    <div class="container px-5">
-                        <section class="ez-fieldgroup">
-                            <h2 class="ez-fieldgroup__name">{{ 'content.view.subitems'|trans|desc('Sub-items') }}</h2>
-                            <div class="ez-sil"
-                                data-location="{{ location.id }}"
-                                data-mfu-create-permissions-config="{{ subitems_module.content_create_permissions_for_mfu|json_encode() }}"
-                                data-items="{{ subitems_module.items }}"
-                                data-content-types="{{ subitems_module.content_type_info_list }}"
-                                data-udw-config-bulk-move-items="{{ ez_udw_config('single_container', {}) }}"
-                            ></div>
-                        </section>
-                        {% include '@ezdesign/content/modal_location_bulk_action_failed.html.twig' only %}
+                        {% include '@ezdesign/parts/page_title.html.twig' with {
+                            title: content.name,
+                            iconName: contentType.identifier,
+                            contentTypeName: contentType.name
+                        } %}
                     </div>
-                    {% endif %}
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        {{ ez_platform_tabs('location-view', {
+                            'content': content,
+                            'location': location,
+                            'contentType': contentType,
+                            'draft_pagination_params': draft_pagination_params,
+                            'custom_urls_pagination_params': custom_urls_pagination_params,
+                            'system_urls_pagination_params': system_urls_pagination_params,
+                            'roles_pagination_params': roles_pagination_params,
+                            'policies_pagination_params': policies_pagination_params
+                        }, '@ezdesign/parts/tab/locationview.html.twig') }}
+
+                        {% if contentType.isContainer %}
+                        {{ form_start(form_subitems_content_edit, { 'action': path('ezplatform.content.edit'), 'attr': { 'hidden': 'hidden' }}) }}
+                        {{ form_end(form_subitems_content_edit) }}
+                        <div class="container px-5">
+                            <section class="ez-fieldgroup">
+                                <h2 class="ez-fieldgroup__name">{{ 'content.view.subitems'|trans|desc('Sub-items') }}</h2>
+                                <div class="ez-sil"
+                                    data-location="{{ location.id }}"
+                                    data-mfu-create-permissions-config="{{ subitems_module.content_create_permissions_for_mfu|json_encode() }}"
+                                    data-items="{{ subitems_module.items }}"
+                                    data-content-types="{{ subitems_module.content_type_info_list }}"
+                                    data-udw-config-bulk-move-items="{{ ez_udw_config('single_container', {}) }}"
+                                ></div>
+                            </section>
+                            {% include '@ezdesign/content/modal_location_bulk_action_failed.html.twig' only %}
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -148,6 +151,7 @@
 {% block javascripts %}
     {%  javascripts
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.change.language.js'
+        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.content.tree.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.view.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.tab.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.visibility.js'
@@ -170,6 +174,7 @@
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.version.edit.conflict.js'
         '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.bookmark.js'
+        '@EzPlatformAdminUiModulesBundle/Resources/public/js/ContentTree.module.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
