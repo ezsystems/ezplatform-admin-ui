@@ -126,3 +126,5 @@ services:
             - {name: kernel.event_subscriber, priority: -250}
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UserPreferencesGlobalExtension: ~
+
+    EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver: ~

@@ -98,3 +98,5 @@ services:
             - { name: ezplatform.admin_ui.config_provider, key: 'dateFormat' }
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\PathStringExtension: ~
+
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ContentTypeIconExtension: ~
