@@ -4,7 +4,6 @@
         doc.querySelector('form[name="main_translation_update"]').submit();
     };
 
-    [...doc.querySelectorAll('input[name="updateMainTranslation"]')].forEach((input) =>
-        input.addEventListener('change', updateMainTranslation, false)
-    );
+    const inputs = doc.querySelectorAll('input[name="main_translation_update"]');
+    inputs.forEach((input) => input.addEventListener('change', updateMainTranslation, false));
 })(window, document);

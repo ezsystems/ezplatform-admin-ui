@@ -20,7 +20,6 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationDeleteT
 use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
-use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -168,9 +167,8 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
      */
     private function createMainLanguageUpdateForm(ContentInfo $contentInfo, string $languageCode): FormInterface
     {
-        $name = StringUtil::fqcnToBlockPrefix(MainTranslationUpdateType::class);
         $data = new MainTranslationUpdateData($contentInfo, $languageCode);
 
-        return $this->formFactory->createNamed($name, MainTranslationUpdateType::class, $data);
+        return $this->formFactory->create(MainTranslationUpdateType::class, $data);
     }
 }
