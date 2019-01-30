@@ -7,7 +7,7 @@
             </svg>
         {% elseif contentType is defined %}
             <svg class="ez-icon ez-icon-{{ contentType }}">
-                <use xlink:href="{{ ezplatform_admin_ui_content_type_icon(contentType) }}"></use>
+                <use xlink:href="{{ ez_content_type_icon(contentType.identifier) }}"></use>
             </svg>
         {% endif %}
         {{ title }}
