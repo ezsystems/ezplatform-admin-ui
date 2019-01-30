@@ -1,0 +1,14 @@
+.ez-content-view {
+    .ez-content-container {
+        display: flex;
+    }
+
+    .ez-content-tree-container {
+        min-width: calculateRem(250px);
+        color: inherit;
+    }
+
+    .ez-location-view-container {
+        flex: 1 1 auto;
+    }
+}
