@@ -132,12 +132,12 @@
         <note>key: tab.details.state_group_name</note>
       </trans-unit>
       <trans-unit id="69dea878e2926e6a40b3d4e79b1f723d0aa801c7" resname="tab.details.state_name">
-        <source>Name</source>
+        <source>Current object state</source>
         <target state="new">Current object state</target>
         <note>key: tab.details.state_name</note>
       </trans-unit>
       <trans-unit id="5c08278a7b80c4aae97e5683688b5b55b5f5b37e" resname="tab.details.change_state">
-        <source>Name</source>
+        <source>Change state</source>
         <target state="new">Change state</target>
         <note>key: tab.details.change_state</note>
       </trans-unit>
