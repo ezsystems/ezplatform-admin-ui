@@ -17,7 +17,7 @@
 {% block page_title_admin %}
     {% include '@ezdesign/parts/page_title.html.twig' with {
         title: 'content_type.view.edit.title'|trans({ '%name%': content_type.name })|desc('Editing Content Type: %name%'),
-        contentType: content_type.identifier
+        content_type_identifier: content_type.identifier
     } %}
 {% endblock %}
 

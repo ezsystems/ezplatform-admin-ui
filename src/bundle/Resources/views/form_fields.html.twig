@@ -32,7 +32,7 @@
             <div class="ez-instant-filter__group-item">
                 {{ form_widget(form[choice.value]) }}
                 <svg class="ez-icon ez-icon--medium">
-                    <use xlink:href="{{ ez_content_type_icon(choice.value.identifier) }}"></use>
+                    <use xlink:href="{{ ez_content_type_icon(choice.value) }}"></use>
                 </svg>
             </div>
         {%- endif -%}
