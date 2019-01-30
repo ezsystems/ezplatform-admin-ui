@@ -19,6 +19,7 @@ matrix:
           - SYMFONY_DEBUG=1
 
 cache:
+    yarn: true
     directories:
       - $HOME/.composer/cache
 
@@ -40,6 +41,11 @@ notifications:
     on_success: change
     on_failure: always
     on_pull_requests: false
+
+before_install:
+    - nvm install 10
+    - node -v
+    - yarn -v
 
 install:
     # Disable XDebug for performance
