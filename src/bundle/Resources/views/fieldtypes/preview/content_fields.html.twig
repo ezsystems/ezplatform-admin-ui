@@ -157,16 +157,24 @@
 
 {% block ezselection_field %}
 {% spaceless %}
+    {% set options = fieldSettings.options %}
+
+    {% if fieldSettings.multilingualOptions[field.languageCode] is defined %}
+        {% set options = fieldSettings.multilingualOptions[field.languageCode] %}
+    {% elseif fieldSettings.multilingualOptions[contentInfo.mainLanguageCode] is defined %}
+        {% set options = fieldSettings.multilingualOptions[contentInfo.mainLanguageCode] %}
+    {% endif %}
+
     {% if fieldSettings.isMultiple and field.value.selection|length() > 0  %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezselection-multiple')|trim}) %}
         <ul {{ block( 'field_attributes' ) }}>
         {% for selectedIndex in field.value.selection %}
-            <li class="ez-selection__item">{{ fieldSettings.options[field.languageCode][selectedIndex] }}</li>
+            <li class="ez-selection__item">{{ options[selectedIndex] }}</li>
         {% endfor %}
         </ul>
     {% elseif not fieldSettings.isMultiple %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezselection-single')|trim}) %}
-        {% set field_value = fieldSettings.options[field.languageCode][field.value.selection.0] %}
+        {% set field_value = options[field.value.selection.0] %}
         {{ block( 'simple_block_field' ) }}
     {% endif %}
 {% endspaceless %}

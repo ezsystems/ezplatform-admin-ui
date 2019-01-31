@@ -199,13 +199,14 @@
         {{- form_row(form.isMultiple, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
     </div>
 
+    {% set formOptions = form.multilingualOptions ?? form.options %}
     <div class="ezselection-settings options{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{ form_label(form.options, 'Options', {'label_attr': {'class': 'ez-label'}}) }}
-        {{ form_errors(form.options) }}
+        {{ form_label(formOptions, 'Options', {'label_attr': {'class': 'ez-label'}}) }}
+        {{ form_errors(formOptions) }}
         <ul
             class="ezselection-settings-option-list ez-selection-table list-unstyled"
             data-selection-buttons=".ezselection-settings-option-remove">
-            {% for option in form.options %}
+            {% for option in formOptions %}
                 <li class="ezselection-settings-option-value ez-selection-table-row mb-2 d-flex align-items-center">
                     <input
                         type="checkbox"
@@ -218,11 +219,11 @@
         </ul>
         <script
             type="text/template" class="ezselection-settings-option-value-prototype"
-            data-ezselection-option-input-name="{{ form.options.vars.prototype.vars.full_name }}"
-            data-ezselection-option-input-id="{{ form.options.vars.prototype.vars.id }}">
+            data-ezselection-option-input-name="{{ formOptions.vars.prototype.vars.full_name }}"
+            data-ezselection-option-input-id="{{ formOptions.vars.prototype.vars.id }}">
             <li class="ezselection-settings-option-value ez-selection-table-row mb-2 d-flex align-items-center">
                 <input type="checkbox" class="ezselection-settings-option-checkbox ez-selection-table-checkbox">
-                {{ form_widget(form.options.vars.prototype, { 'attr': { 'class': 'form-control ml-1 mb-0'}}) }}
+                {{ form_widget(formOptions.vars.prototype, { 'attr': { 'class': 'form-control ml-1 mb-0'}}) }}
             </li>
         </script>
 
