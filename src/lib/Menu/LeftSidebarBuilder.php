@@ -107,7 +107,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
             self::ITEM__TREE => $this->createMenuItem(
                 self::ITEM__TREE,
                 [
-                    'extras' => ['icon' => 'copy-subtree'],
+                    'extras' => ['icon' => 'content-tree'],
                     'attributes' => [
                         'type' => 'button',
                         'class' => 'btn---show-content-tree',
