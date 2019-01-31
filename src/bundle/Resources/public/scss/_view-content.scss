@@ -5,10 +5,18 @@
 
     .ez-content-tree-container {
         min-width: calculateRem(250px);
-        color: inherit;
+        max-width: 33vw;
+        position: relative;
+        background: $ez-white;
     }
 
     .ez-location-view-container {
         flex: 1 1 auto;
+    }
+
+    &.ez-is-tree-resizing {
+        .ez-location-view-container {
+            pointer-events: none;
+        }
     }
 }
