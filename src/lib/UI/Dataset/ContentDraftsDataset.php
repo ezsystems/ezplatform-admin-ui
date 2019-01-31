@@ -118,7 +118,7 @@ class ContentDraftsDataset
             ),
             'contentId' => $contentInfo->id,
             'name' => $draft->getName(),
-            'type' => $contentType->identifier,
+            'type' => $contentType->getName(),
             'content_type' => $contentType,
             'language' => $draft->initialLanguageCode,
             'version' => $draft->versionNo,
