@@ -119,7 +119,7 @@ class ContentController extends Controller
         $form = $this->formFactory->createContent();
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentCreateData $data) {
                 $contentType = $data->getContentType();
                 $language = $data->getLanguage();
@@ -166,7 +166,7 @@ class ContentController extends Controller
         $form = $this->formFactory->contentEdit(null, $formName);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentEditData $data) {
                 $contentInfo = $data->getContentInfo();
                 $versionInfo = $data->getVersionInfo();
@@ -242,7 +242,7 @@ class ContentController extends Controller
         $form = $this->formFactory->updateContentMainLocation();
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentMainLocationUpdateData $data) {
                 $contentInfo = $data->getContentInfo();
 

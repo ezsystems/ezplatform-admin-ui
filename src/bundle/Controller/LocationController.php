@@ -562,7 +562,7 @@ class LocationController extends Controller
 
         $location = $form->getData()->getLocation();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (LocationUpdateData $data) {
                 $location = $data->getLocation();
 
