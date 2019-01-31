@@ -70,7 +70,7 @@ class ContentObjectStateUpdateType extends AbstractType
                     return array_filter(
                         $this->objectStateService->loadObjectStates($objectStateGroup),
                         function (ObjectState $objectState) use ($contentInfo, $contentState) {
-                            return $this->permissionResolver->canUser('state', 'assign', $contentInfo, [$objectState]) && $contentState->id !== $objectState->id;
+                            return $this->permissionResolver->canUser('state', 'assign', $contentInfo, [$objectState]);
                         }
                     );
                 }),

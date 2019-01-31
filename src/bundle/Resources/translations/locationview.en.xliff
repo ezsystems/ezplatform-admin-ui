@@ -111,55 +111,35 @@
         <target state="new">Section details</target>
         <note>key: tab.details.section_details</note>
       </trans-unit>
-      <trans-unit id="67ff5cca435b058142e77b820d5d72090fa26346" resname="tab.details.section_id">
-        <source>Section ID</source>
-        <target state="new">Section ID</target>
-        <note>key: tab.details.section_id</note>
-      </trans-unit>
-      <trans-unit id="0ab2029f0a194849d3f90531f03e37780491d1a6" resname="tab.details.section_identifier">
-        <source>Section identifier</source>
-        <target state="new">Section identifier</target>
-        <note>key: tab.details.section_identifier</note>
-      </trans-unit>
       <trans-unit id="30775f4a9e0512f181cf857fb0f0ea23fe79320d" resname="tab.details.section_name">
         <source>Section name</source>
         <target state="new">Section name</target>
         <note>key: tab.details.section_name</note>
+      </trans-unit>
+      <trans-unit id="a054d7cf662185bfc90a799a19758f4ce7b6e33d" resname="tab.details.change_section">
+        <source>Change section</source>
+        <target state="new">Change section</target>
+        <note>key: tab.details.change_section</note>
       </trans-unit>
       <trans-unit id="6ba61ac8194e021eb1515cc2d3d33ff006e2d55d" resname="tab.details.state_details">
         <source>State details</source>
         <target state="new">State details</target>
         <note>key: tab.details.state_details</note>
       </trans-unit>
-      <trans-unit id="bbbd7d6b2d1c59cedd3012f3d4375ade8cc50c15" resname="tab.details.state_group_id">
-        <source>Group ID</source>
-        <target state="new">Group ID</target>
-        <note>key: tab.details.state_group_id</note>
-      </trans-unit>
-      <trans-unit id="b4e137dd1267dc4e70e23e289313c9340f065634" resname="tab.details.state_group_identifier">
-        <source>Group identifier</source>
-        <target state="new">Group identifier</target>
-        <note>key: tab.details.state_group_identifier</note>
-      </trans-unit>
       <trans-unit id="131730e5ecef276336a53300cdd891e0689023f4" resname="tab.details.state_group_name">
         <source>Group name</source>
         <target state="new">Group name</target>
         <note>key: tab.details.state_group_name</note>
       </trans-unit>
-      <trans-unit id="0ae393a967d866426ebdb62c810ea218c011ea5f" resname="tab.details.state_id">
-        <source>State ID</source>
-        <target state="new">State ID</target>
-        <note>key: tab.details.state_id</note>
-      </trans-unit>
-      <trans-unit id="e185e68f61ce9867e2cafcf406650e12c3a81d05" resname="tab.details.state_identifier">
-        <source>Identifier</source>
-        <target state="new">Identifier</target>
-        <note>key: tab.details.state_identifier</note>
-      </trans-unit>
       <trans-unit id="69dea878e2926e6a40b3d4e79b1f723d0aa801c7" resname="tab.details.state_name">
-        <source>Name</source>
-        <target state="new">Name</target>
+        <source>Current object state</source>
+        <target state="new">Current object state</target>
         <note>key: tab.details.state_name</note>
+      </trans-unit>
+      <trans-unit id="5c08278a7b80c4aae97e5683688b5b55b5f5b37e" resname="tab.details.change_state">
+        <source>Change state</source>
+        <target state="new">Change state</target>
+        <note>key: tab.details.change_state</note>
       </trans-unit>
       <trans-unit id="8ddd1c9e60bd352b4395e1753ede6534db2aac8b" resname="tab.details.sub_items_listing_by.in">
         <source>in</source>
