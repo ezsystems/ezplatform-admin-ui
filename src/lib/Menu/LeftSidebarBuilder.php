@@ -110,7 +110,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                     'extras' => ['icon' => 'content-tree'],
                     'attributes' => [
                         'type' => 'button',
-                        'class' => 'btn--show-content-tree',
+                        'class' => 'btn--toggle-content-tree',
                     ],
                 ]
             ),
