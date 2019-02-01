@@ -7,7 +7,7 @@ matrix:
         - php: 7.1
           env:
           - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
-          - BEHAT_OPTS="--suite=adminui1 --no-interaction -vv & bin/behat --suite=adminui2 --no-interaction -vv & bin/behat --suite=adminui3 --no-interaction -vv"
+          - BEHAT_OPTS="--suite=adminui3 --no-interaction -vv & bin/behat --suite=adminui2 --no-interaction -vv & bin/behat --suite=adminui1 --no-interaction -vv"
           - SYMFONY_ENV=behat
           - SYMFONY_DEBUG=1
         - php: 7.1
