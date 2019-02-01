@@ -8,18 +8,18 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
 
-use eZ\Publish\Core\Repository\LocationService;
+use eZ\Publish\API\Repository\LocationService;
 use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class LocationHasChildrenValidator extends ConstraintValidator
 {
-    /** @var \eZ\Publish\Core\Repository\LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
     /**
-     * @param \eZ\Publish\Core\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
      */
     public function __construct(LocationService $locationService)
     {
