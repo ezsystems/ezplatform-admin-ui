@@ -140,11 +140,11 @@ class SearchController extends Controller
                 $created = $data->getCreated();
                 $creator = $data->getCreator();
                 $query = new Query();
-                $fullText = null;
                 $criteria = [];
 
-                $query->query = new Criterion\FullText($queryString);
-
+                if (null !== $queryString) {
+                    $query->query = new Criterion\FullText($queryString);
+                }
                 if (null !== $section) {
                     $criteria[] = new Criterion\SectionId($section->id);
                 }
