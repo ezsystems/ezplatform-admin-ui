@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
+use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use eZ\Publish\API\Repository\SearchService;
@@ -142,9 +143,8 @@ class SearchController extends Controller
                 $fullText = null;
                 $criteria = [];
 
-                if (null !== $queryString) {
-                    $fullText = new Criterion\FullText($queryString);
-                }
+                $query->query = new Criterion\FullText($queryString);
+
                 if (null !== $section) {
                     $criteria[] = new Criterion\SectionId($section->id);
                 }
@@ -175,8 +175,9 @@ class SearchController extends Controller
                 if (!empty($criteria)) {
                     $query->filter = new Criterion\LogicalAnd($criteria);
                 }
-                if (null !== $fullText) {
-                    $query->query = $fullText;
+
+                if (!$this->searchService->supports(SearchService::CAPABILITY_SCORING)) {
+                    $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
                 }
 
                 $pagerfanta = new Pagerfanta(
