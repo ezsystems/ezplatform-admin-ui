@@ -366,6 +366,11 @@
         <target state="new">Language name</target>
         <note>key: tab.translations.language_name</note>
       </trans-unit>
+      <trans-unit id="c5d8ba580b9dd86b38986590b338816e3193c857" resname="tab.translations.main_language">
+        <source>Main language</source>
+        <target state="new">Main language</target>
+        <note>key: tab.translations.main_language</note>
+      </trans-unit>
       <trans-unit id="e8d52c9e980661178d301e925ac8c74661b4350d" resname="tab.translations.modal.message">
         <source>Do you want to delete Translation?</source>
         <target state="new">Do you want to delete Translation?</target>

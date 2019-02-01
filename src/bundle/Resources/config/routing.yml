@@ -459,6 +459,12 @@ ezplatform.translation.remove:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Translation:remove'
 
+ezplatform.content.update_main_translation:
+    path: /content/update-main-translation
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Content:updateMainTranslation'
+
 # LocationView / Versions tab
 
 ezplatform.version.remove:
