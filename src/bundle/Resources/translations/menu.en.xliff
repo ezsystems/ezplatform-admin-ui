@@ -336,6 +336,11 @@
         <target state="new">Trash</target>
         <note>key: sidebar_left__trash</note>
       </trans-unit>
+      <trans-unit id="af4736ff799291d6658545d0afb52240d7250cf3" resname="sidebar_left__tree">
+        <source>Content Tree</source>
+        <target state="new">Content Tree</target>
+        <note>key: sidebar_left__tree</note>
+      </trans-unit>
       <trans-unit id="ae876d2c3fdb4f08383aefae6106b69dfe124b38" resname="trash__sidebar_right__empty_trash">
         <source>Empty Trash</source>
         <target state="new">Empty Trash</target>
