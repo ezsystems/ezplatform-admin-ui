@@ -325,7 +325,7 @@ class SectionController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (SectionsDeleteData $data) {
                 foreach ($data->getSections() as $sectionId => $selected) {
                     $section = $this->sectionService->loadSection($sectionId);

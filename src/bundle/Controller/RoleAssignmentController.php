@@ -174,7 +174,7 @@ class RoleAssignmentController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (RoleAssignmentDeleteData $data) use ($role) {
                 $roleAssignment = $data->getRoleAssignment();
                 $this->roleService->removeRoleAssignment($roleAssignment);
@@ -219,7 +219,7 @@ class RoleAssignmentController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (RoleAssignmentsDeleteData $data) use ($role) {
                 foreach ($data->getRoleAssignments() as $roleAssignmentId => $selected) {
                     $roleAssignment = $this->roleService->loadRoleAssignment($roleAssignmentId);

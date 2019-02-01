@@ -224,7 +224,7 @@ class ContentTypeController extends Controller
         $contentType = $data->getContentType();
         $contentTypeGroup = $data->getContentTypeGroup();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (TranslationAddData $data) {
                 $contentType = $data->getContentType();
                 $language = $data->getLanguage();
@@ -286,7 +286,7 @@ class ContentTypeController extends Controller
         $contentType = $data->getContentType();
         $contentTypeGroup = $data->getContentTypeGroup();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (TranslationRemoveData $data) {
                 $contentType = $data->getContentType();
                 $languageCodes = $data->getLanguageCodes();
@@ -378,7 +378,7 @@ class ContentTypeController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentTypeEditData $data) use ($contentTypeDraft) {
                 $contentTypeGroup = $data->getContentTypeGroup();
                 $language = $data->getLanguage();
@@ -426,7 +426,7 @@ class ContentTypeController extends Controller
         $form = $this->createUpdateForm($group, $contentTypeDraft, $language, $baseLanguage);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function () use (
                 $form,
                 $group,
@@ -542,7 +542,7 @@ class ContentTypeController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentTypesDeleteData $data) {
                 foreach ($data->getContentTypes() as $contentTypeId => $selected) {
                     $contentType = $this->contentTypeService->loadContentType($contentTypeId);
