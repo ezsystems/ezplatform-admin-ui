@@ -19,9 +19,14 @@ use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStatesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateCreateType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStatesDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateUpdateType;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -37,7 +42,7 @@ class ObjectStateController extends Controller
     /** @var \eZ\Publish\API\Repository\ObjectStateService */
     private $objectStateService;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
+    /** @var \Symfony\Component\Form\FormFactoryInterface */
     private $formFactory;
 
     /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
@@ -53,7 +58,7 @@ class ObjectStateController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param array $languages
@@ -62,7 +67,7 @@ class ObjectStateController extends Controller
         NotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
         ObjectStateService $objectStateService,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         SubmitHandler $submitHandler,
         PermissionResolver $permissionResolver,
         array $languages
@@ -86,7 +91,8 @@ class ObjectStateController extends Controller
         /** @var ObjectState[] $objectStates */
         $objectStates = $this->objectStateService->loadObjectStates($objectStateGroup);
 
-        $deleteObjectStatesForm = $this->formFactory->deleteObjectStates(
+        $deleteObjectStatesForm = $this->formFactory->create(
+            ObjectStatesDeleteType::class,
             new ObjectStatesDeleteData($this->getObjectStatesIds($objectStates))
         );
 
@@ -112,7 +118,8 @@ class ObjectStateController extends Controller
      */
     public function viewAction(ObjectState $objectState): Response
     {
-        $deleteForm = $this->formFactory->deleteObjectState(
+        $deleteForm = $this->formFactory->create(
+            ObjectStateDeleteType::class,
             new ObjectStateDeleteData($objectState)
         )->createView();
 
@@ -135,7 +142,8 @@ class ObjectStateController extends Controller
         $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
         $defaultLanguageCode = reset($this->languages);
 
-        $form = $this->formFactory->createObjectState(
+        $form = $this->formFactory->create(
+            ObjectStateCreateType::class,
             new ObjectStateCreateData()
         );
         $form->handleRequest($request);
@@ -183,7 +191,8 @@ class ObjectStateController extends Controller
     public function deleteAction(Request $request, ObjectState $objectState): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
-        $form = $this->formFactory->deleteObjectState(
+        $form = $this->formFactory->create(
+            ObjectStateDeleteType::class,
             new ObjectStateDeleteData($objectState)
         );
         $form->handleRequest($request);
@@ -224,7 +233,8 @@ class ObjectStateController extends Controller
     public function bulkDeleteAction(Request $request, int $objectStateGroupId): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
-        $form = $this->formFactory->deleteObjectStates(
+        $form = $this->formFactory->create(
+            ObjectStatesDeleteType::class,
             new ObjectStatesDeleteData()
         );
         $form->handleRequest($request);
@@ -265,7 +275,8 @@ class ObjectStateController extends Controller
     public function updateAction(Request $request, ObjectState $objectState): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
-        $form = $this->formFactory->updateObjectState(
+        $form = $this->formFactory->create(
+            ObjectStateUpdateType::class,
             new ObjectStateUpdateData($objectState)
         );
         $form->handleRequest($request);
@@ -327,7 +338,8 @@ class ObjectStateController extends Controller
             throw $exception;
         }
 
-        $form = $this->formFactory->updateContentObjectState(
+        $form = $this->formFactory->create(
+            ContentObjectStateUpdateType::class,
             new ContentObjectStateUpdateData($contentInfo, $objectStateGroup)
         );
         $form->handleRequest($request);

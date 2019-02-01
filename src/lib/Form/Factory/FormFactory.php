@@ -1136,6 +1136,8 @@ class FormFactory
      * @param null|string $name
      *
      * @return FormInterface
+     *
+     * @deprecated since version 2.2, to be removed in 3.0. Use Use \Symfony\Component\Form\FormFactoryInterface::create directly instead.
      */
     public function createObjectState(
         ?ObjectStateCreateData $data = null,
@@ -1155,6 +1157,8 @@ class FormFactory
      * @param null|string $name
      *
      * @return FormInterface
+     *
+     * @deprecated since version 2.2, to be removed in 3.0. Use Use \Symfony\Component\Form\FormFactoryInterface::create directly instead.
      */
     public function deleteObjectState(
         ObjectStateDeleteData $data = null,
@@ -1172,6 +1176,8 @@ class FormFactory
      * @return FormInterface
      *
      * @throws InvalidOptionsException
+     *
+     * @deprecated since version 2.2, to be removed in 3.0. Use Use \Symfony\Component\Form\FormFactoryInterface::create directly instead.
      */
     public function deleteObjectStates(
         ObjectStatesDeleteData $data = null,
@@ -1187,6 +1193,8 @@ class FormFactory
      * @param null|string $name
      *
      * @return FormInterface
+     *
+     * @deprecated since version 2.2, to be removed in 3.0. Use Use \Symfony\Component\Form\FormFactoryInterface::create directly instead.
      */
     public function updateObjectState(
         ObjectStateUpdateData $data = null,
@@ -1202,6 +1210,8 @@ class FormFactory
      * @param null|string $name
      *
      * @return FormInterface
+     *
+     * @deprecated since version 2.2, to be removed in 3.0. Use Use \Symfony\Component\Form\FormFactoryInterface::create directly instead.
      */
     public function updateContentObjectState(
         ContentObjectStateUpdateData $data,
