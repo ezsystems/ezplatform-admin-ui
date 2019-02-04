@@ -354,7 +354,7 @@ class LocationController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('ezplatform.trash.list'));
+        return $this->redirectToLocation($form->getData()->getLocation());
     }
 
     /**
