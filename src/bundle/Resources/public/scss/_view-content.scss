@@ -4,10 +4,17 @@
     }
 
     .ez-content-tree-container {
-        min-width: calculateRem(250px);
-        max-width: 33vw;
+        max-width: 0;
         position: relative;
         background: $ez-white;
+        overflow: auto;
+        color: inherit;
+        transition: max-width 0.2s $ez-admin-transition;
+
+        &--expanded {
+            min-width: calculateRem(250px);
+            max-width: 33vw;
+        }
     }
 
     .ez-location-view-container {

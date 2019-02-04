@@ -228,3 +228,15 @@
         }
     }
 }
+
+.ez-btn--content-tree-expanded {
+    .ez-icon {
+        fill: $ez-black;
+    }
+
+    &:hover {
+        .ez-icon {
+            fill: $ez-white;
+        }
+    }
+}

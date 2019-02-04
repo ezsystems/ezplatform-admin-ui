@@ -1,5 +1,22 @@
-(function(doc, React, ReactDOM, eZ) {
+(function(doc, React, ReactDOM, eZ, localStorage) {
+    const KEY_CONTENT_TREE_EXPANDED = 'ez-content-tree-expanded';
+    const CLASS_CONTENT_TREE_EXPANDED = 'ez-content-tree-container--expanded';
+    const CLASS_BTN_CONTENT_TREE_EXPANDED = 'ez-btn--content-tree-expanded';
     const contentTreeContainer = doc.querySelector('.ez-content-tree-container');
+    const btn = doc.querySelector('.ez-btn--toggle-content-tree');
+    const toggleContentTreePanel = () => {
+        contentTreeContainer.classList.toggle(CLASS_CONTENT_TREE_EXPANDED);
+        btn.classList.toggle(CLASS_BTN_CONTENT_TREE_EXPANDED);
+
+        localStorage.setItem(KEY_CONTENT_TREE_EXPANDED, contentTreeContainer.classList.contains(CLASS_CONTENT_TREE_EXPANDED));
+    };
 
     ReactDOM.render(React.createElement(eZ.modules.ContentTree, {}), contentTreeContainer);
-})(window.document, window.React, window.ReactDOM, window.eZ);
+
+    btn.addEventListener('click', toggleContentTreePanel, false);
+
+    if (localStorage.getItem(KEY_CONTENT_TREE_EXPANDED) === 'true') {
+        contentTreeContainer.classList.add(CLASS_CONTENT_TREE_EXPANDED);
+        btn.classList.add(CLASS_BTN_CONTENT_TREE_EXPANDED);
+    }
+})(window.document, window.React, window.ReactDOM, window.eZ, window.localStorage);
