@@ -10,6 +10,7 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 use EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ContentTypes implements ProviderInterface
 {
@@ -22,19 +23,25 @@ class ContentTypes implements ProviderInterface
     /** @var \EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver */
     private $contentTypeIconResolver;
 
+    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
+    private $urlGenerator;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      * @param \EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver $contentTypeIconResolver
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      */
     public function __construct(
         ContentTypeService $contentTypeService,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
-        ContentTypeIconResolver $contentTypeIconResolver
+        ContentTypeIconResolver $contentTypeIconResolver,
+        UrlGeneratorInterface $urlGenerator
     ) {
         $this->contentTypeService = $contentTypeService;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
         $this->contentTypeIconResolver = $contentTypeIconResolver;
+        $this->urlGenerator = $urlGenerator;
     }
 
     /**
@@ -58,6 +65,9 @@ class ContentTypes implements ProviderInterface
                     'identifier' => $contentType->identifier,
                     'name' => $contentType->getName(),
                     'thumbnail' => $this->contentTypeIconResolver->getContentTypeIcon($contentType->identifier),
+                    'href' => $this->urlGenerator->generate('ezpublish_rest_loadContentType', [
+                        'contentTypeId' => $contentType->id,
+                    ]),
                 ];
             }
         }

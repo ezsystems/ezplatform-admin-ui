@@ -4,16 +4,26 @@
         justify-content: space-between;
         background-color: $ez-ground-primary;
         align-items: center;
-        padding: 0 1.25rem;
-        min-height: 50px;
-        border-radius: .25rem .25rem 0 0;
+        padding: 0 calculateRem(20px);
+        min-height: calculateRem(50px);
+        border-radius: calculateRem(4px) calculateRem(4px) 0 0;
     }
 
     &__headline {
-        font-size: 1.0625rem;
+        font-size: calculateRem(17px);
         margin-bottom: 0;
         font-weight: bold;
         color: $ez-black;
+    }
+
+    &__header-cell {
+        .table &--has-icon {
+            padding: 0;
+        }
+
+        .table &--after-icon {
+            padding-left: 0;
+        }
     }
 
     &__cell {
@@ -22,16 +32,28 @@
         }
 
         .table &--has-action-btns {
-            padding-right: 1.25rem;
+            padding-right: calculateRem(20px);
         }
 
         &--has-checkbox {
             width: 5%;
         }
 
+        .table &--has-icon {
+            padding: 0 calculateRem(8px);
+            width: calculateRem(24px);
+            text-align: right;
+            vertical-align: middle;
+            line-height: 0;
+        }
+
+        .table &--after-icon {
+            padding-left: 0;
+        }
+
         &--no-content {
-            margin-bottom: 3rem;
-            padding: 0.75rem 1rem;
+            margin-bottom: calculateRem(48px);
+            padding: calculateRem(12px) calculateRem(16px);
             background-color: $ez-white;
             font-style: italic;
             color: $ez-color-base-dark;
@@ -48,12 +70,12 @@
     justify-content: space-between;
     background-color: $ez-ground-primary;
     align-items: center;
-    padding: 0 1.25rem;
-    min-height: 50px;
-    border-radius: .25rem .25rem 0 0;
+    padding: 0 calculateRem(20px);
+    min-height: calculateRem(50px);
+    border-radius: calculateRem(4px) calculateRem(4px) 0 0;
 
     &__headline {
-        font-size: 1.0625rem;
+        font-size: calculateRem(17px);
         margin-bottom: 0;
         font-weight: bold;
         color: $ez-black;
@@ -65,20 +87,21 @@
 }
 
 .table {
-    margin-bottom: 3rem;
+    margin-bottom: calculateRem(48px);
 
-    th, td {
-        padding: .7rem 1.4rem;
-        line-height: 20px;
+    th,
+    td {
+        padding: calculateRem(11px) calculateRem(22px);
+        line-height: calculateRem(20px);
     }
 
     thead th {
-        font-size: .9375rem;
+        font-size: calculateRem(15px);
         vertical-align: top;
     }
 
     td {
-        font-size: .875rem;
+        font-size: calculateRem(14px);
         vertical-align: middle;
 
         .checkbox label {
@@ -109,11 +132,11 @@
 }
 
 .ez-table-no-content {
-    margin-bottom: 3rem;
-    padding: 0.75rem 1rem;
+    margin-bottom: calculateRem(48px);
+    padding: calculateRem(12px) calculateRem(16px);
     background-color: $ez-white;
     font-style: italic;
-    font-size: .875rem;
+    font-size: calculateRem(14px);
     color: $ez-color-base-dark;
 }
 

@@ -17,7 +17,7 @@
                 {% block page_title %}
                     {% include '@ezdesign/parts/page_title.html.twig' with {
                         title: 'content_type.view.view.title'|trans({ '%name%': content_type.name })|desc('%name%'),
-                        iconName: 'content-type'
+                        content_type_identifier: content_type.identifier
                     } %}
                 {% endblock %}
             </div>

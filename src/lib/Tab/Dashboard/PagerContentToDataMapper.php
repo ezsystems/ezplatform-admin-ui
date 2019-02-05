@@ -76,6 +76,7 @@ class PagerContentToDataMapper
                 'language' => $contentInfo->mainLanguageCode,
                 'contributor' => $contributor,
                 'version' => $content->versionInfo->versionNo,
+                'content_type' => $content->getContentType(),
                 'modified' => $content->versionInfo->modificationDate,
                 'initialLanguageCode' => $content->versionInfo->initialLanguageCode,
                 'content_is_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content),

@@ -113,6 +113,13 @@
             return total;
         }, {});
         const udwConfigBulkMoveItems = JSON.parse(container.dataset.udwConfigBulkMoveItems);
+        const mfuContentTypesMap = Object.values(eZ.adminUiConfig.contentTypes).reduce((contentTypeDataMap, contentTypeGroup) => {
+            for (const contentTypeData of contentTypeGroup) {
+                contentTypeDataMap[contentTypeData.href] = contentTypeData;
+            }
+
+            return contentTypeDataMap;
+        }, {});
 
         ReactDOM.render(
             React.createElement(eZ.modules.SubItems, {
@@ -127,6 +134,7 @@
                         attrs: Object.assign({}, mfuAttrs, {
                             onPopupClose: (itemsUploaded) => itemsUploaded.length && global.location.reload(true),
                             contentCreatePermissionsConfig: JSON.parse(container.dataset.mfuCreatePermissionsConfig),
+                            contentTypesMap: mfuContentTypesMap,
                         }),
                     },
                 ],

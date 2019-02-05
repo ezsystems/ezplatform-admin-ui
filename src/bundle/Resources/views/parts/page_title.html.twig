@@ -5,6 +5,10 @@
             <svg class="ez-icon ez-icon-{{ iconName }}">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ iconName }}"></use>
             </svg>
+        {% elseif content_type_identifier is defined %}
+            <svg class="ez-icon ez-icon-{{ content_type_identifier }}">
+                <use xlink:href="{{ ez_content_type_icon(content_type_identifier) }}"></use>
+            </svg>
         {% endif %}
         {{ title }}
         </h1>
