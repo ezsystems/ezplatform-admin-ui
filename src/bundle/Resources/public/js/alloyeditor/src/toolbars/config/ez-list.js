@@ -5,7 +5,7 @@ export default class EzListConfig extends EzConfigBase {
         super(config);
 
         this.name = 'list';
-        this.buttons = ['ezmoveup', 'ezmovedown', 'ezembedinline', 'ezblockremove'];
+        this.buttons = ['ezmoveup', 'ezmovedown', 'ezembedinline', 'ezanchor', 'ezblockremove'];
     }
 
     /**

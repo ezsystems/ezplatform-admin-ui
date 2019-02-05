@@ -10,6 +10,7 @@ export default class EzHeadingConfig extends EzConfigBase {
             'ezmovedown',
             this.getStyles(config.customStyles),
             'ezembedinline',
+            'ezanchor',
             'ezblocktextalignleft',
             'ezblocktextaligncenter',
             'ezblocktextalignright',

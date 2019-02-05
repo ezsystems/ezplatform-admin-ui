@@ -9,6 +9,7 @@ export default class EzCustomStyleConfig extends EzConfigBase {
             'ezmoveup',
             'ezmovedown',
             this.getStyles(config.customStyles),
+            'ezanchor',
             'ezblocktextalignleft',
             'ezblocktextaligncenter',
             'ezblocktextalignright',
