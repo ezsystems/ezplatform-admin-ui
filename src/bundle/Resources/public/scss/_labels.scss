@@ -2,9 +2,7 @@
     margin-bottom: 0;
     font-weight: 700;
 
-    &:after {
-        content: ': ';
-    }
+    @include label-required();
 
     &.checkbox-inline,
     &.form-check-label {
