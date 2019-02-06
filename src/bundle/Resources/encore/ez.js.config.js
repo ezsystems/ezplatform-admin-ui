@@ -152,7 +152,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.section.list.js'),
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
         ])
-        .addEntry('ezplatform-admin-ui-section-view-js', [path.resolve(__dirname, '../public/js/scripts/admin.section.list.js')])
+        .addEntry('ezplatform-admin-ui-section-view-js', [path.resolve(__dirname, '../public/js/scripts/admin.section.view.js')])
         .addEntry('ezplatform-admin-ui-trash-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.list.js')])
         .addEntry('ezplatform-admin-ui-content-preview-js', [path.resolve(__dirname, '../public/js/scripts/admin.preview.js')])
         .addEntry('ezplatform-admin-ui-location-view-js', [
