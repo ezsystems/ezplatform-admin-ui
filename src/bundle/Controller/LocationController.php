@@ -354,6 +354,7 @@ class LocationController extends Controller
             }
         }
 
+        // in case of error when processing form ($result === null) redirect to the same Location
         return $this->redirectToLocation($form->getData()->getLocation());
     }
 
