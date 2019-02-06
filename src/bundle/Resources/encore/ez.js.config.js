@@ -189,9 +189,6 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-modal-location-trash-single-asset-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.radio.toggle.js'),
         ])
-        .addEntry('ezplatform-admin-ui-locations-tab-js', [path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js')])
-        .addEntry('ezplatform-admin-ui-translations-tab-js', [path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js')])
-        .addEntry('ezplatform-admin-ui-urls-tab-js', [path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js')])
         .addEntry('ezplatform-admin-ui-dashboard-js', [
             path.resolve(__dirname, '../public/js/scripts/udw/browse.js'),
             path.resolve(__dirname, '../public/js/scripts/cotf/create.js'),
