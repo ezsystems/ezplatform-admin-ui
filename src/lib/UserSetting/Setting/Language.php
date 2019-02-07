@@ -21,8 +21,8 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var string */
-    private $preferredLocale;
+    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
+    private $userLanguagePreferenceProvider;
 
     /** @var \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\AvailableLocaleChoiceLoader */
     private $availableLocaleChoiceLoader;
@@ -38,8 +38,7 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
         AvailableLocaleChoiceLoader $availableLocaleChoiceLoader
     ) {
         $this->translator = $translator;
-        $preferredLocales = $userLanguagePreferenceProvider->getPreferredLocales();
-        $this->preferredLocale = reset($preferredLocales);
+        $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
         $this->availableLocaleChoiceLoader = $availableLocaleChoiceLoader;
     }
 
@@ -72,7 +71,9 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
      */
     public function getDefaultValue(): string
     {
-        return $this->preferredLocale;
+        $preferredLocales = $this->userLanguagePreferenceProvider->getPreferredLocales();
+
+        return reset($preferredLocales);
     }
 
     /**
