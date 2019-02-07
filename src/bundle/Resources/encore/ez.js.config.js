@@ -122,6 +122,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.location.change.language.js'),
             path.resolve(__dirname, '../public/js/scripts/sidebar/extra.actions.js'),
             path.resolve(__dirname, '../public/js/scripts/sidebar/btn/contenttype.edit.js'),
+            path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-group-list-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
