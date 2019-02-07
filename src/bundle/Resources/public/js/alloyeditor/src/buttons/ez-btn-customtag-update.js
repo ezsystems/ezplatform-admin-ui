@@ -202,8 +202,6 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         Object.keys(this.attributes).forEach((key) => {
             widget.setConfig(key, configValues[key].value);
         });
-
-        widget.fireEditorInteraction('change');
     }
 
     /**
