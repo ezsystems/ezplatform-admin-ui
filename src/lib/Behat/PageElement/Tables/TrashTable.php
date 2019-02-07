@@ -17,8 +17,7 @@ class TrashTable extends Table
     public function __construct(UtilityContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
-        $this->fields['horizontalHeaders'] = $this->fields['list'] . ' thead th';
-        $this->fields['listElement'] = $this->fields['list'] . ' tbody td:nth-child(2)';
+        $this->fields['listElement'] = $this->fields['list'] . ' tbody .ez-table__cell--after-icon';
         $this->fields['checkboxInput'] = $this->fields['list'] . ' tbody td input';
     }
 
@@ -77,17 +76,5 @@ class TrashTable extends Table
     public function clickEditButton(string $listItemName): void
     {
         $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
-    }
-
-    /**
-     * Check if list contains link element with given name.
-     *
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function isElementInTable(string $name): bool
-    {
-        return $this->context->getElementByText($name, $this->fields['listElement']) !== null;
     }
 }

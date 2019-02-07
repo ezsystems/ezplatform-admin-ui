@@ -16,7 +16,6 @@ class SystemInfoTable extends Table
     public function __construct(UtilityContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
-        $this->fields['horizontalHeaders'] = $this->fields['list'] . ' thead th';
         $this->fields['listElement'] = $this->fields['list'] . ' td:nth-child(1)';
     }
 

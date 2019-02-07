@@ -34,6 +34,8 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\UserAccount;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\ContentRelationTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\DashboardTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\DoubleHeaderTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\DraftConflictTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\IconLinkedListTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\LinkedListTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SimpleListTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SimpleTable;
@@ -49,7 +51,7 @@ class PlatformElementFactory extends ElementFactory
      * @param string $elementName
      * @param null[]|string[] ...$parameters
      *
-     * @return AdminList|AdminUpdateForm|Breadcrumb|ContentField|ContentRelationTable|ContentTypePicker|ContentUpdateForm|DateAndTimePopup|Dialog|DraftConflictDialog|DefaultFieldElement|LanguagePicker|LeftMenu|NavLinkTabs|Notification|PreviewNav|RightMenu|DashboardTable|DoubleHeaderTable|LinkedListTable|SimpleListTable|SimpleTable|SubItemsTable|SystemInfoTable|TrashTable|VerticalOrientedTable|UniversalDiscoveryWidget|UpperMenu
+     * @return AdminList|AdminUpdateForm|Breadcrumb|ContentField|DraftConflictDialog|ContentRelationTable|ContentTypePicker|ContentUpdateForm|DateAndTimePopup|Dialog|DraftConflictDialog|DefaultFieldElement|LanguagePicker|LeftMenu|NavLinkTabs|Notification|PreviewNav|RightMenu|DashboardTable|DoubleHeaderTable|LinkedListTable|IconLinkedListTable|SimpleListTable|SimpleTable|SubItemsTable|SystemInfoTable|TrashTable|VerticalOrientedTable|UniversalDiscoveryWidget|UpperMenu
      */
     public static function createElement(UtilityContext $context, string $elementName, ?string ...$parameters): Element
     {
@@ -86,8 +88,12 @@ class PlatformElementFactory extends ElementFactory
                 return new SimpleListTable($context, $parameters[0]);
             case DashboardTable::ELEMENT_NAME:
                 return new DashboardTable($context, $parameters[0]);
+            case DraftConflictTable::ELEMENT_NAME:
+                return new DraftConflictTable($context, $parameters[0]);
             case LinkedListTable::ELEMENT_NAME:
                 return new LinkedListTable($context, $parameters[0]);
+            case IconLinkedListTable::ELEMENT_NAME:
+                return new IconLinkedListTable($context, $parameters[0]);
             case VerticalOrientedTable::ELEMENT_NAME:
                 return new VerticalOrientedTable($context, $parameters[0]);
             case DoubleHeaderTable::ELEMENT_NAME:
