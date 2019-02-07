@@ -19,6 +19,7 @@ abstract class Table extends Element
             'tableCell' => $containerLocator . ' tr:nth-child(%d) td:nth-child(%d)',
             'editButton' => $containerLocator . ' tr:nth-child(%s) .ez-icon-edit',
             'listRow' => $containerLocator . ' tbody tr',
+            'horizontalHeaders' => $containerLocator . ' thead th',
         ];
     }
 
@@ -64,5 +65,17 @@ abstract class Table extends Element
     {
         $position = $this->context->getElementPositionByText($listItemName, $locator);
         $this->context->findElement(sprintf($this->fields['editButton'], $position))->click();
+    }
+
+    /**
+     * Check if list contains list element with given name.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function isElementInTable(string $name): bool
+    {
+        return $this->context->getElementByText($name, $this->fields['listElement']) !== null;
     }
 }

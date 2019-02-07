@@ -187,7 +187,7 @@ class ContentViewContext extends BusinessContext
     {
         $draftConflictModal = ElementFactory::createElement($this->utilityContext, DraftConflictDialog::ELEMENT_NAME);
         $draftConflictModal->verifyVisibility();
-        $draftConflictModal->dashboardTable->clickEditButton($draftID);
+        $draftConflictModal->draftConflictTable->clickEditButton($draftID);
     }
 
     /**

@@ -9,7 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\LinkedListTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\IconLinkedListTable;
 
 class ContentTypeGroupPage extends Page
 {
@@ -28,7 +28,7 @@ class ContentTypeGroupPage extends Page
         parent::__construct($context);
         $this->route = '/admin/contenttypegroup/';
         $this->groupName = $groupName;
-        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, sprintf('Content Types in %s', $this->groupName), LinkedListTable::ELEMENT_NAME);
+        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, sprintf('Content Types in %s', $this->groupName), IconLinkedListTable::ELEMENT_NAME);
         $this->pageTitle = $groupName;
         $this->pageTitleLocator = '.ez-header h1';
     }
