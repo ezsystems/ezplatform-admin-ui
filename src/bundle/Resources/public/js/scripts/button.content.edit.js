@@ -45,7 +45,7 @@
             if (response.status === 409) {
                 response.text().then(showModal);
             } else if (response.status === 403) {
-                response.text().then((error) => showErrorNotification(error));
+                response.text().then(showErrorNotification);
             } else if (response.status === 200) {
                 submitVersionEditForm();
             }
