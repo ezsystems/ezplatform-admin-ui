@@ -1,9 +1,20 @@
 .ez-field-preview--ezgmaplocation {
     display: flex;
+    flex-wrap: wrap;
+
+    .ez-field-preview {
+        &__map-wrapper {
+            flex: 1 1 calculateRem(300px);
+            height: calculateRem(320px);
+            margin-right: calculateRem(32px);
+        }
+
+        &__map-meta {
+            overflow: auto;
+        }
+    }
 
     .ez-gmaplocation__map {
-        width: 50%;
-        height: 20rem;
-        margin-right: 2rem;
+        height: 100%;
     }
 }

@@ -1,0 +1,49 @@
+@mixin image-preview() {
+    display: flex;
+
+    .ez-field-preview {
+        &__image-wrapper {
+            flex: 1 1 auto;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+        }
+
+        &__image {
+            flex: 1 1 calculateRem(200px);
+            margin-right: calculateRem(32px);
+        }
+
+        &__image-meta {
+            overflow: auto;
+        }
+
+        &__actions-wrapper {
+            flex: 0 0 calculateRem(40px);
+        }
+
+        &__action {
+            &--preview {
+                border: none;
+                border-radius: 50%;
+                height: 40px;
+                width: 40px;
+                line-height: 40px;
+                cursor: pointer;
+                transition: background 0.3s $ez-admin-transition;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                display: block;
+                margin-top: 0;
+                background: $ez-color-base-medium;
+
+                &:hover,
+                &:focus {
+                    background: darken($ez-color-base-medium, 15%);
+                }
+            }
+        }
+    }
+}

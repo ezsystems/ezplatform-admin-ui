@@ -5,40 +5,42 @@
     'action': path('ezplatform.custom_url.remove'),
     'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-custom-urls' }
 }) }}
-<table class="ez-table table">
-    <thead>
-    <tr>
-        <th></th>
-        <th>{{ 'tab.urls.url'|trans|desc('URL') }}</th>
-        <th>{{ 'tab.urls.language'|trans|desc('Language') }}</th>
-        <th>{{ 'tab.urls.type'|trans|desc('Type') }}</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for custom_url in custom_urls_pager.currentPageResults %}
+<div class="ez-scrollable-table-wrapper">
+    <table class="ez-table table">
+        <thead>
         <tr>
-            <td class="ez-table__cell ez-table__cell--has-checkbox">
-                {% if can_edit_custom_url %}
-                    {{ form_widget(form_custom_url_remove.url_aliases[custom_url.id]) }}
-                {% else %}
-                    {% do form_custom_url_remove.url_aliases.setRendered %}
-                {% endif %}
-            </td>
-            <td class="ez-table__cell">{{ custom_url.path }}</td>
-            <td class="ez-table__cell">
-                {% for languageCode in custom_url.languageCodes %}
-                    {{ admin_ui_config.languages.mappings[languageCode].name }}<br>
-                {% endfor %}
-            </td>
-            <td class="ez-table__cell">
-                {% if custom_url.forward %}
-                    {{ 'tab.urls.type.redirect'|trans|desc('Redirect') }}
-                {% else %}
-                    {{ 'tab.urls.type.direct'|trans|desc('Direct') }}
-                {% endif %}
-            </td>
+            <th></th>
+            <th>{{ 'tab.urls.url'|trans|desc('URL') }}</th>
+            <th>{{ 'tab.urls.language'|trans|desc('Language') }}</th>
+            <th>{{ 'tab.urls.type'|trans|desc('Type') }}</th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        {% for custom_url in custom_urls_pager.currentPageResults %}
+            <tr>
+                <td class="ez-table__cell ez-table__cell--has-checkbox">
+                    {% if can_edit_custom_url %}
+                        {{ form_widget(form_custom_url_remove.url_aliases[custom_url.id]) }}
+                    {% else %}
+                        {% do form_custom_url_remove.url_aliases.setRendered %}
+                    {% endif %}
+                </td>
+                <td class="ez-table__cell">{{ custom_url.path }}</td>
+                <td class="ez-table__cell">
+                    {% for languageCode in custom_url.languageCodes %}
+                        {{ admin_ui_config.languages.mappings[languageCode].name }}<br>
+                    {% endfor %}
+                </td>
+                <td class="ez-table__cell">
+                    {% if custom_url.forward %}
+                        {{ 'tab.urls.type.redirect'|trans|desc('Redirect') }}
+                    {% else %}
+                        {{ 'tab.urls.type.direct'|trans|desc('Direct') }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {{ form_end(form_custom_url_remove) }}

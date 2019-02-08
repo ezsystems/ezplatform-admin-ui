@@ -2,30 +2,32 @@
 
 {% import _self as macros %}
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>{{ 'tab.relations.table.name'|trans()|desc('Name') }}</th>
-        <th>{{ 'tab.relations.table.content_type'|trans()|desc('Content type') }}</th>
-        <th>{{ 'tab.relations.table.relation_type'|trans()|desc('Relation type') }}</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for relation in relations %}
-        {% set source = relation.sourceContentInfo %}
+<div class="ez-scrollable-table-wrapper">
+    <table class="table">
+        <thead>
         <tr>
-            <td><a href="{{ path('_ezpublishLocation', { 'locationId': source.mainLocationId }) }}">{{ source.name }}</a></td>
-            <td>{{ contentTypes[source.contentTypeId].name }}</td>
-            <td>
-                {{ macros.relation_type(relation) }}
-                {% if (relation.relationFieldDefinitionName) %}
-                    ({{ relation.relationFieldDefinitionName }})
-                {% endif %}
-            </td>
+            <th>{{ 'tab.relations.table.name'|trans()|desc('Name') }}</th>
+            <th>{{ 'tab.relations.table.content_type'|trans()|desc('Content type') }}</th>
+            <th>{{ 'tab.relations.table.relation_type'|trans()|desc('Relation type') }}</th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        {% for relation in relations %}
+            {% set source = relation.sourceContentInfo %}
+            <tr>
+                <td><a href="{{ path('_ezpublishLocation', { 'locationId': source.mainLocationId }) }}">{{ source.name }}</a></td>
+                <td>{{ contentTypes[source.contentTypeId].name }}</td>
+                <td>
+                    {{ macros.relation_type(relation) }}
+                    {% if (relation.relationFieldDefinitionName) %}
+                        ({{ relation.relationFieldDefinitionName }})
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% macro relation_type(relation) %}
     {% if relation.type == constant('eZ\\Publish\\API\\Repository\\Values\\Content\\Relation::COMMON') %}

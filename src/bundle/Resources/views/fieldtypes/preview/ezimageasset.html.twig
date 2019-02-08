@@ -8,44 +8,48 @@
     {% set src = imageAlias ? asset( imageAlias.uri ) : "//:0" %}
 
     <div class="ez-field-preview__image-wrapper">
-        <img src="{{ src }}">
+        <div class="ez-field-preview__image">
+            <img src="{{ src }}">
+        </div>
+        <div class="ez-field-preview__image-meta">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">
+                            {{ 'ezimageasset.image_file_properties'|trans|desc('Image file properties') }}:
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ 'ezimageasset.file_name'|trans|desc('File name') }}:</td>
+                        <td>{{ field.value.fileName }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezimageasset.size'|trans|desc('Size') }}:</td>
+                        <td>{{ field.value.fileSize|ez_file_size(1) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezimageasset.alternative_text'|trans|desc('Alternative text') }}:</td>
+                        <td>{{ parameters.alternativeText|default(field.value.alternativeText) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezimageasset.master_dimensions'|trans|desc('Master dimensions') }}:</td>
+                        <td>
+                            {{ 'ezimageasset.width_and_height'|trans({
+                                '%width%': field.value.width,
+                                '%height%': field.value.height})|desc('%width%px Width - %height%px Height')
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezimageasset.ratio'|trans|desc('Ratio') }}:</td>
+                        <td>{{ (field.value.width/field.value.height)|round(2) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <table class="ez-field-preview__image-meta">
-        <thead>
-            <tr>
-                <th colspan="2">
-                    {{ 'ezimageasset.image_file_properties'|trans|desc('Image file properties') }}:
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ 'ezimageasset.file_name'|trans|desc('File name') }}:</td>
-                <td>{{ field.value.fileName }}</td>
-            </tr>
-            <tr>
-                <td>{{ 'ezimageasset.size'|trans|desc('Size') }}:</td>
-                <td>{{ field.value.fileSize|ez_file_size(1) }}</td>
-            </tr>
-            <tr>
-                <td>{{ 'ezimageasset.alternative_text'|trans|desc('Alternative text') }}:</td>
-                <td>{{ parameters.alternativeText|default(field.value.alternativeText) }}</td>
-            </tr>
-            <tr>
-                <td>{{ 'ezimageasset.master_dimensions'|trans|desc('Master dimensions') }}:</td>
-                <td>
-                    {{ 'ezimageasset.width_and_height'|trans({
-                        '%width%': field.value.width,
-                        '%height%': field.value.height})|desc('%width%px Width - %height%px Height')
-                    }}
-                </td>
-            </tr>
-            <tr>
-                <td>{{ 'ezimageasset.ratio'|trans|desc('Ratio') }}:</td>
-                <td>{{ (field.value.width/field.value.height)|round(2) }}</td>
-            </tr>
-        </tbody>
-    </table>
     <div class="ez-field-preview__actions-wrapper">
         <a
             class="ez-field-preview__action ez-field-preview__action--preview"
