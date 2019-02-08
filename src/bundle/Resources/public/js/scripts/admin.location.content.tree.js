@@ -11,7 +11,12 @@
         localStorage.setItem(KEY_CONTENT_TREE_EXPANDED, contentTreeContainer.classList.contains(CLASS_CONTENT_TREE_EXPANDED));
     };
 
-    ReactDOM.render(React.createElement(eZ.modules.ContentTree, {}), contentTreeContainer);
+    ReactDOM.render(
+        React.createElement(eZ.modules.ContentTree, {
+            currentLocationId: parseInt(contentTreeContainer.dataset.currentLocationId, 10),
+        }),
+        contentTreeContainer
+    );
 
     btn.addEventListener('click', toggleContentTreePanel, false);
 
