@@ -31,6 +31,11 @@
                         selector: '[data-ezelement="ezcontent"]',
                     },
                 },
+                setNameFireEditorInteractionTimeout: null,
+                setAlignmentFireEditorInteractionTimeout: null,
+                unsetAlignmentFireEditorInteractionTimeout: null,
+                setConfigFireEditorInteractionTimeout: null,
+                clearConfigFireEditorInteractionTimeout: null,
 
                 upcast: (element) => {
                     return (
@@ -211,7 +216,7 @@
                 setName: function(name) {
                     this.element.data('ezname', name);
                     window.clearTimeout(this.setNameFireEditorInteractionTimeout);
-                    this.setNameFireEditorInteractionTimeout = window.setTimeout(this.fireEditorInteraction.bind(this,'nameUpdated'), 50);
+                    this.setNameFireEditorInteractionTimeout = window.setTimeout(this.fireEditorInteraction.bind(this, 'nameUpdated'), 50);
 
                     return this;
                 },
@@ -266,7 +271,10 @@
                     this.wrapper.data(DATA_ALIGNMENT_ATTR, type);
                     this.element.data(DATA_ALIGNMENT_ATTR, type);
                     window.clearTimeout(this.setAlignmentFireEditorInteractionTimeout);
-                    this.setAlignmentFireEditorInteractionTimeout = window.setTimeout(this.fireEditorInteraction.bind(this,'aligmentUpdated'), 50);
+                    this.setAlignmentFireEditorInteractionTimeout = window.setTimeout(
+                        this.fireEditorInteraction.bind(this, 'aligmentUpdated'),
+                        50
+                    );
                 },
 
                 /**
@@ -279,7 +287,10 @@
                     this.wrapper.data(DATA_ALIGNMENT_ATTR, false);
                     this.element.data(DATA_ALIGNMENT_ATTR, false);
                     window.clearTimeout(this.unsetAlignmentFireEditorInteractionTimeout);
-                    this.unsetAlignmentFireEditorInteractionTimeout = window.setTimeout(this.fireEditorInteraction.bind(this,'aligmentRemoved'), 50);
+                    this.unsetAlignmentFireEditorInteractionTimeout = window.setTimeout(
+                        this.fireEditorInteraction.bind(this, 'aligmentRemoved'),
+                        50
+                    );
                 },
 
                 /**
@@ -340,7 +351,10 @@
 
                     valueElement.setText(value);
                     window.clearTimeout(this.setConfigFireEditorInteractionTimeout);
-                    this.setConfigFireEditorInteractionTimeout = window.setTimeout(this.fireEditorInteraction.bind(this,'configUpdated'), 50);
+                    this.setConfigFireEditorInteractionTimeout = window.setTimeout(
+                        this.fireEditorInteraction.bind(this, 'configUpdated'),
+                        50
+                    );
 
                     return this;
                 },
@@ -393,7 +407,10 @@
                     }
 
                     window.clearTimeout(this.clearConfigFireEditorInteractionTimeout);
-                    this.clearConfigFireEditorInteractionTimeout = window.setTimeout(this.fireEditorInteraction.bind(this,'configCleared'), 50);
+                    this.clearConfigFireEditorInteractionTimeout = window.setTimeout(
+                        this.fireEditorInteraction.bind(this, 'configCleared'),
+                        50
+                    );
                 },
 
                 /**
