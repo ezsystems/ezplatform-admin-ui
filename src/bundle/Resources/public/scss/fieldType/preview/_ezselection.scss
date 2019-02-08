@@ -8,18 +8,18 @@
 
     .ez-selection__item {
         display: inline-block;
-        padding: .5rem 1rem;
+        padding: calculateRem(8px) calculateRem(16px);
         background: $ez-ground-primary;
-        border-radius: 5px;
-        margin: .25rem;
-        min-height: 40px;
+        border-radius: calculateRem(4px);
+        margin: calculateRem(4px);
+        min-height: calculateRem(40px);
     }
 }
 
 .ez-field-preview--ezselection-single {
     display: inline-block;
-    padding: .5rem 1rem;
+    padding: calculateRem(8px) calculateRem(16px);
     background: $ez-ground-primary;
-    border-radius: 5px;
-    margin: .25rem;
+    border-radius: calculateRem(4px);
+    margin: calculateRem(4px);
 }
