@@ -21,6 +21,16 @@
         }
     }
 
+    .ez-has-no-sidebars & {
+        grid-template-columns: 1fr;
+        grid-template-areas: 'ez-content-container';
+
+        .ez-context-menu,
+        .ez-side-menu {
+            display: none;
+        }
+    }
+
     &.ez-dashboard-row {
         grid-template-columns: 1fr;
         grid-template-areas: 'ez-content-container';
