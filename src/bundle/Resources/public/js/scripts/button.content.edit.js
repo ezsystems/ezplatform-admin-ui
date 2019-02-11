@@ -1,5 +1,6 @@
-(function (global, doc, $) {
+(function (global, doc, $, eZ) {
     const FORM_EDIT = 'form.ez-edit-content-form';
+    const showErrorNotification = eZ.helpers.notification.showErrorNotification;
     const editVersion = (event) => {
         const versionEditForm = doc.querySelector(FORM_EDIT);
         const versionEditFormName = versionEditForm.name;
@@ -43,6 +44,8 @@
             // Otherwise we can go to Content Item edit page.
             if (response.status === 409) {
                 response.text().then(showModal);
+            } else if (response.status === 403) {
+                response.text().then(showErrorNotification);
             } else if (response.status === 200) {
                 submitVersionEditForm();
             }
@@ -50,4 +53,4 @@
     };
 
     [...doc.querySelectorAll('.ez-btn--content-edit')].forEach(button => button.addEventListener('click', editVersion, false));
-})(window, document, window.jQuery);
+})(window, document, window.jQuery, window.eZ);
