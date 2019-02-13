@@ -80,7 +80,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             );
 
             $menu->addChild(
-                $this->createMenuItem(self::ITEM_USER_SETTINGS, ['route' => 'ezplatform.user_settings.list'])
+                $this->createMenuItem(self::ITEM_USER_SETTINGS, ['route' => 'ezplatform.user.settings_list'])
             );
 
             $menu->addChild(

@@ -614,34 +614,6 @@ ezplatform.user.reset_password:
         _controller: 'EzPlatformAdminUiBundle:User\UserForgotPassword:userResetPassword'
 
 #
-# User Settings
-#
-
-ezplatform.user_settings.list:
-    path: /user/settings/list/{page}
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:User\UserSettings:list'
-        page: 1
-    requirements:
-        page: \d+
-
-ezplatform.user_settings.update:
-    path: /user/settings/update/{identifier}
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:User\UserSettings:update'
-    requirements:
-        identifier: .+
-
-#
-# Profile
-#
-
-ezplatform.user_profile.change_password:
-    path: /user/change-password
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:UserProfile\UserPasswordChange:userPasswordChange'
-
-#
 # Custom URL alias
 #
 
