@@ -41,7 +41,18 @@
 
         <tr>
             {% if form is defined %}
-                <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form.versions[version.versionNo], {'attr': {'disabled': not version.canDelete}}) }}</td>
+                <td class="ez-table__cell ez-table__cell--has-checkbox">
+                    {# https://jira.ez.no/browse/EZP-30135 #}
+                    {# 
+                    # If form.versions[version.versionNo] is not defined :
+                    # > Type error: Argument 1 passed to Symfony\Component\Form\FormRenderer::searchAndRenderBlock() must be an instance of Symfony\Component\Form\FormView, null given, called in .../cache/.../twig/.../....php on line 131
+                    #}
+                    {% if form.versions[version.versionNo] is defined %}
+                        {{  form_widget(form.versions[version.versionNo], {'a ttr': {'disabled': not version.canDelete}}) }}
+                    {% else %}
+                        <span style="color:red">La version {{ version.versionNo }} est buguée</span>
+                    {% endif %}
+                </td>
             {% endif %}
             <td class="ez-table__cell">
                 {{ version.versionNo }}
