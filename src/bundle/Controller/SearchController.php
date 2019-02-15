@@ -143,7 +143,7 @@ class SearchController extends Controller
                 $criteria = [];
 
                 if (null !== $queryString) {
-                    $criteria[] = new Criterion\FullText($queryString);
+                    $query->query = new Criterion\FullText($queryString);
                 }
                 if (null !== $section) {
                     $criteria[] = new Criterion\SectionId($section->id);
@@ -176,7 +176,9 @@ class SearchController extends Controller
                     $query->filter = new Criterion\LogicalAnd($criteria);
                 }
 
-                $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
+                if (!$this->searchService->supports(SearchService::CAPABILITY_SCORING)) {
+                    $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
+                }
 
                 $pagerfanta = new Pagerfanta(
                     new ContentSearchAdapter($query, $this->searchService)
