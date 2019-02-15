@@ -1,20 +1,11 @@
 import EzConfigBase from './base';
 
-export default class EzCustomTagConfig extends EzConfigBase {
+export default class EzInlineCustomTagConfig extends EzConfigBase {
     constructor(config) {
         super(config);
 
         const editButton = !!config.alloyEditor.attributes ? `${config.name}edit` : '';
-        const defaultButtons = [
-            'ezmoveup',
-            'ezmovedown',
-            editButton,
-            'ezanchor',
-            'ezembedleft',
-            'ezembedcenter',
-            'ezembedright',
-            'ezblockremove',
-        ];
+        const defaultButtons = [editButton, 'ezblockremove'];
         const customButtons = config.alloyEditor.toolbarButtons;
         const buttons = customButtons && customButtons.length ? customButtons : defaultButtons;
 
@@ -25,8 +16,8 @@ export default class EzCustomTagConfig extends EzConfigBase {
     }
 
     /**
-     * Tests whether the `embed` toolbar should be visible, it is visible
-     * when an ezembed widget gets the focus.
+     * Tests whether the `inline custom tag` toolbar should be visible, it is visible
+     * when an ezinlinecustomtag widget gets the focus.
      *
      * @method test
      * @param {Object} payload
@@ -38,9 +29,13 @@ export default class EzCustomTagConfig extends EzConfigBase {
      */
     test(payload) {
         const element = payload.data.selectionData.element;
+        const path = payload.editor.get('nativeEditor').elementPath();
+        const isInlineCustomTag = path.contains(
+            (element) => element.$.dataset.ezelement === 'eztemplateinline' && element.$.dataset.ezname === this.name
+        );
 
-        return !!(element && element.$.dataset.ezname === this.name);
+        return !!((element && element.$.dataset.ezname === this.name) || isInlineCustomTag);
     }
 }
 
-eZ.addConfig('ezAlloyEditor.ezCustomTagConfig', EzCustomTagConfig);
+eZ.addConfig('ezAlloyEditor.ezInlineCustomTagConfig', EzInlineCustomTagConfig);

@@ -5,11 +5,24 @@
         constructor() {
             this.ezNamespace = 'http://ez.no/namespaces/ezpublish5/xhtml5/edit';
             this.xhtmlNamespace = 'http://www.w3.org/1999/xhtml';
-            this.customTags = Object.keys(global.eZ.adminUiConfig.richTextCustomTags);
+            this.customTags = Object.keys(global.eZ.adminUiConfig.richTextCustomTags).filter(
+                (key) => !global.eZ.adminUiConfig.richTextCustomTags[key].isInline
+            );
+            this.inlineCustomTags = Object.keys(global.eZ.adminUiConfig.richTextCustomTags).filter(
+                (key) => global.eZ.adminUiConfig.richTextCustomTags[key].isInline
+            );
             this.customTagsToolbars = this.customTags.map((customTag) => {
                 const alloyEditorConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
 
                 return new global.eZ.ezAlloyEditor.ezCustomTagConfig({
+                    name: customTag,
+                    alloyEditor: alloyEditorConfig,
+                });
+            });
+            this.inlineCustomTagsToolbars = this.inlineCustomTags.map((customTag) => {
+                const alloyEditorConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
+
+                return new global.eZ.ezAlloyEditor.ezInlineCustomTagConfig({
                     name: customTag,
                     alloyEditor: alloyEditorConfig,
                 });
@@ -134,6 +147,12 @@
             icon.remove();
         }
 
+        clearInlineCustomTag(inlineCustomTag) {
+            const icons = [...inlineCustomTag.querySelectorAll('.ez-custom-tag__icon-wrapper')];
+
+            icons.forEach((icon) => icon.remove());
+        }
+
         init(container) {
             const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
                 toolbars: {
@@ -154,7 +173,11 @@
                         selections: [
                             ...this.customTagsToolbars,
                             new window.eZ.ezAlloyEditor.ezLinkConfig(),
-                            new window.eZ.ezAlloyEditor.ezTextConfig({ customStyles: this.customStylesConfigurations }),
+                            new window.eZ.ezAlloyEditor.ezTextConfig({
+                                customStyles: this.customStylesConfigurations,
+                                inlineCustomTags: this.inlineCustomTags,
+                            }),
+                            ...this.inlineCustomTagsToolbars,
                             new window.eZ.ezAlloyEditor.ezParagraphConfig({ customStyles: this.customStylesConfigurations }),
                             new window.eZ.ezAlloyEditor.ezFormattedConfig({ customStyles: this.customStylesConfigurations }),
                             new window.eZ.ezAlloyEditor.ezCustomStyleConfig({ customStyles: this.customStylesConfigurations }),
@@ -172,7 +195,16 @@
                 extraPlugins:
                     AlloyEditor.Core.ATTRS.extraPlugins.value +
                     ',' +
-                    ['ezaddcontent', 'ezmoveelement', 'ezremoveblock', 'ezembed', 'ezembedinline', 'ezfocusblock', 'ezcustomtag'].join(','),
+                    [
+                        'ezaddcontent',
+                        'ezmoveelement',
+                        'ezremoveblock',
+                        'ezembed',
+                        'ezembedinline',
+                        'ezfocusblock',
+                        'ezcustomtag',
+                        'ezinlinecustomtag',
+                    ].join(','),
             });
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ez-data-source').querySelector('textarea').value);
             const section = wrapper.childNodes[0];
@@ -191,6 +223,9 @@
                 ].forEach(this.emptyEmbed);
                 [...doc.querySelectorAll('[data-ezelement="eztemplate"]:not([data-eztype="style"])')].forEach(this.clearCustomTag);
                 [...doc.querySelectorAll('.ez-icon--anchor')].forEach(this.clearAnchorIcon);
+                [...doc.querySelectorAll('[data-ezelement="eztemplateinline"]:not([data-eztype="style"])')].forEach(
+                    this.clearInlineCustomTag
+                );
 
                 container.closest('.ez-data-source').querySelector('textarea').value = this.xhtmlify(root.innerHTML).replace(
                     this.xhtmlNamespace,

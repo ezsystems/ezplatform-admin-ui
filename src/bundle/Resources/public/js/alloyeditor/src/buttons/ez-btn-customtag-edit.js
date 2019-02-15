@@ -24,6 +24,10 @@ export default class EzBtnCustomTagEdit extends EzWidgetButton {
         }, {});
     }
 
+    getUpdateBtnName() {
+        return `ezBtn${this.customTagName.charAt(0).toUpperCase() + this.customTagName.slice(1)}Update`;
+    }
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -32,7 +36,7 @@ export default class EzBtnCustomTagEdit extends EzWidgetButton {
      */
     render() {
         if (this.props.renderExclusive) {
-            const buttonName = `ezBtn${this.customTagName.charAt(0).toUpperCase() + this.customTagName.slice(1)}Update`;
+            const buttonName = this.getUpdateBtnName();
             const ButtonComponent = AlloyEditor[buttonName];
 
             return <ButtonComponent values={this.getValues()} {...this.props} />;

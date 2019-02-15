@@ -64,7 +64,18 @@
 
     &--content-visible {
         & > [data-ezelement='ezcontent'] {
-            display: block;
+            display: inherit;
+        }
+
+        &[data-ezelement='eztemplateinline'] {
+            padding: 0 calculateRem(8px);
+            margin: 0 calculateRem(4px);
+            background-color: $ez-color-base-pale;
+            border: none;
+
+            & > [data-ezelement='ezcontent'] {
+                padding: 0;
+            }
         }
 
         & > .ez-custom-tag__header {

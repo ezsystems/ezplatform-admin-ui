@@ -16,6 +16,12 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         };
     }
 
+    componentDidMount() {
+        if (!Object.keys(this.attributes).length) {
+            this.saveCustomTag();
+        }
+    }
+
     /**
      * Renders the text input.
      *

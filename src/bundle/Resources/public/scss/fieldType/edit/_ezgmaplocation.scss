@@ -40,7 +40,7 @@
             grid-area: side1;
 
             .form-control-label {
-                font-size:  calculateRem(14px);
+                font-size: calculateRem(14px);
                 font-weight: 700;
                 color: $ez-black;
 
@@ -53,7 +53,7 @@
         &__field--latitude {
             grid-area: side2;
             @include map-invalid-input();
-            margin-top: .75rem;
+            margin-top: 0.75rem;
         }
 
         &__field--longitude {

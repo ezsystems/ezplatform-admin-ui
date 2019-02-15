@@ -60,7 +60,12 @@
         },
 
         getElementToRemove(editor) {
-            const toRemove = editor.widgets.focused ? editor.widgets.focused.wrapper : editor.elementPath().block;
+            const path = editor.elementPath();
+            let toRemove = editor.widgets.focused ? editor.widgets.focused.wrapper : path.block;
+
+            if (!toRemove) {
+                toRemove = path.elements.find((element) => element.$.dataset.ezelement === 'eztemplateinline');
+            }
 
             return toRemove.is('li') ? toRemove.getParent() : toRemove;
         },

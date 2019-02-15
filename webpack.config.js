@@ -45,6 +45,9 @@ module.exports = {
         ezBtnCustomTag: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-customtag.js',
         ezBtnCustomTagEdit: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-customtag-edit.js',
         ezBtnCustomTagUpdate: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-customtag-update.js',
+        ezBtnInlineCustomTag: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-inlinecustomtag.js',
+        ezBtnInlineCustomTagEdit: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-inlinecustomtag-edit.js',
+        ezBtnInlineCustomTagUpdate: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-inlinecustomtag-update.js',
         ezToolbarAdd: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/ez-add.js',
         ezPluginAddContent: './src/bundle/Resources/public/js/alloyeditor/src/plugins/ez-add-content.js',
         ezPluginMoveElement: './src/bundle/Resources/public/js/alloyeditor/src/plugins/ez-move-element.js',
@@ -65,6 +68,7 @@ module.exports = {
         ezEmbedImageConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-image.js',
         ezEmbedImageLinkConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-image-link.js',
         ezCustomTagConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-custom-tag.js',
+        ezInlineCustomTagConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-inline-custom-tag.js',
         ezCustomStyleConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-custom-style.js',
     },
     output: {
