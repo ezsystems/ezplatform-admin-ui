@@ -43,7 +43,12 @@
 {% endblock %}
 
 {% block right_sidebar %}
-    {% set content_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_create.sidebar_right', [], {'parentLocation': parentLocation, 'content_type': contentType, 'language': language}) %}
+    {% set content_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_create.sidebar_right', [], {
+        'parentLocation': parentLocation,
+        'content_type': contentType,
+        'language': language,
+        'content_create_struct': content_create_struct
+    }) %}
     {{ knp_menu_render(content_create_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
