@@ -29,7 +29,7 @@
     {% endblock %}
     {% block date %}
     <td class="ez-notifications-modal__time">
-        {{ notification.created|localizeddate('medium', 'short', null, ez_user_settings['timezone']) }}
+        {{ notification.created|ez_full_datetime }}
     </td>
     {% endblock %}
 </tr>

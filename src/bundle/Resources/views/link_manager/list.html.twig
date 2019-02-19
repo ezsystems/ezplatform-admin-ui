@@ -68,12 +68,12 @@
                     <td class="ez-table__cell">{{ url.isValid ? 'url.status.valid'|trans : 'url.status.invalid'|trans }}</td>
                     <td class="ez-table__cell">
                         {% if url.lastChecked %}
-                            {{ url.lastChecked|localizeddate('medium', 'short', null, ez_user_settings['timezone']) }}
+                            {{ url.lastChecked|ez_full_datetime }}
                         {% else %}
                             Never
                         {% endif %}
                     </td>
-                    <td class="ez-table__cell">{{ url.modified|localizeddate('medium', 'short', null, ez_user_settings['timezone']) }}</td>
+                    <td class="ez-table__cell">{{ url.modified|ez_full_datetime }}</td>
                     <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                         {% if can_edit %}
                             <a href="{{ edit_url }}" class="btn btn-icon mx-2" title="{{ 'url.action.edit'|trans|desc('Edit URL') }}">

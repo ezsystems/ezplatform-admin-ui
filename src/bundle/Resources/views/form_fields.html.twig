@@ -1,5 +1,10 @@
 {% extends 'bootstrap_4_layout.html.twig' %}
 
+{% block form_label -%}
+    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' ez-label')|trim}) -%}
+    {{ parent() }}
+{%- endblock form_label %}
+
 {% block ezsystems_ezplatform_type_udw_widget %}
     {{ form_widget(form.location) }}
     {{ form_widget(form.select_content) }}

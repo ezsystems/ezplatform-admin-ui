@@ -1,6 +1,36 @@
 (function(moment) {
-    const formatEx = /[dDjlNSwzWFmMntLoYyaABgGhHisueIOPTZcrU]/g;
-    const formatMap = {
+    const formatICUEx = /[GdayLqDeEc]+/g;
+    const formatICUMap = {
+        dd: 'DD',
+        d: 'D',
+        a: 'A',
+        y: 'Y',
+        yy: 'YY',
+        yyyy: 'YYYY',
+        LLLL: 'MMMM',
+        LLL: 'MMM',
+        LL: 'MM',
+        L: 'M',
+        q: 'Q',
+        D: 'DDD',
+        eeeeee: 'dd',
+        eeee: 'dddd',
+        eee: 'ddd',
+        ee: 'E',
+        e: 'E',
+        EEEEEE: 'dd',
+        EEEE: 'dddd',
+        EEE: 'ddd',
+        EE: 'ddd',
+        E: 'ddd',
+        cccccc: 'dd',
+        cccc: 'dddd',
+        ccc: 'ddd',
+        cc: 'E',
+        c: 'E',
+    };
+    const formatPHPEx = /[dDjlNSwzWFmMntLoYyaABgGhHisueIOPTZcrU]/g;
+    const formatPHPMap = {
         d: 'DD',
         D: 'ddd',
         j: 'D',
@@ -57,10 +87,21 @@
     };
 
     moment.fn.formatPHP = function(format) {
+        console.warn('[DEPRECATED] formatPHP function is deprecated');
+        console.warn('[DEPRECATED] it will be removed from ezplatform-admin-ui 2.0');
+        console.warn('[DEPRECATED] use formatICU instead');
         return this.format(
-            format.replace(formatEx, (phpStr) => {
-                return typeof formatMap[phpStr] === 'function' ? formatMap[phpStr].call(this) : formatMap[phpStr];
+            format.replace(formatPHPEx, (phpStr) => {
+                return typeof formatPHPMap[phpStr] === 'function' ? formatPHPMap[phpStr].call(this) : formatPHPMap[phpStr];
             })
         );
+    };
+
+    moment.fn.formatICU = function(format) {
+        const form = format.replace(formatICUEx, (icuStr) => {
+            return typeof formatICUMap[icuStr] === 'function' ? formatICUMap[icuStr].call(this) : formatICUMap[icuStr];
+        });
+
+        return this.format(form);
     };
 })(window.moment);

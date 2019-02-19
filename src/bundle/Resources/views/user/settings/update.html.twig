@@ -25,7 +25,7 @@
         <div class="ez-table-header__headline">{{ user_setting.name }}</div>
     </div>
     <div class="bg-white p-4">
-        {{ form_row(form.value, {'label_attr': {'class': 'ez-label'}}) }}
+        {{ form_row(form.value) }}
     </div>
     {{ form_widget(form.update, {'attr': {'hidden': 'hidden'}}) }}
     {{ form_end(form) }}

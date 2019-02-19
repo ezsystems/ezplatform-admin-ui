@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta;
 
-use EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService;
+use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
 use Pagerfanta\Adapter\AdapterInterface;
 
 /**

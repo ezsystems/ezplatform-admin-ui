@@ -60,11 +60,11 @@
                 </td>
                 {% if not is_draft_conflict %}
                 <td class="ez-table__cell">
-                    {{ version.creationDate|localizeddate('medium', 'short', app.request.locale, ez_user_settings['timezone']) }}
+                    {{ version.creationDate|ez_full_datetime }}
                 </td>
                 {% endif %}
                 <td class="ez-table__cell">
-                    {{ version.modificationDate|localizeddate('medium', 'short', app.request.locale, ez_user_settings['timezone']) }}
+                    {{ version.modificationDate|ez_full_datetime }}
                 </td>
                 {% if is_draft_conflict %}
                     <td class="ez-table__cell ez-table__cell--has-action-btns text-right">

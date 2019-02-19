@@ -21,6 +21,7 @@
         "ezsystems/ezplatform-admin-ui-modules": "^1.4@dev",
         "ezsystems/ez-support-tools": "^1.0@dev",
         "ezsystems/ezplatform-design-engine": "^2.0@dev",
+        "ezsystems/ezplatform-user": "^1.0@dev",
         "white-october/pagerfanta-bundle": "^1.1",
         "knplabs/knp-menu-bundle": "^2.1",
         "mck89/peast": "^1.8",

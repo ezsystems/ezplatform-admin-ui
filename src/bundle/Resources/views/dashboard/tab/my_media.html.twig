@@ -21,7 +21,7 @@
                 </td>
                 <td class="ez-table__cell ez-table__cell--after-icon"><a href="{{ url('_ez_content_view', { 'contentId': row.contentId }) }}">{{ row.name }}</a></td>
                 <td class="ez-table__cell">{{ row.type }}</td>
-                <td class="ez-table__cell">{{ row.modified|localizeddate('medium', 'short', null, ez_user_settings['timezone']) }}</td>
+                <td class="ez-table__cell">{{ row.modified|ez_full_datetime }}</td>
                 <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                     <button class="btn btn-icon mx-2 ez-btn--content-edit"
                             title="{{ 'dashboard.table.media.edit'|trans|desc('Edit Media') }}"
