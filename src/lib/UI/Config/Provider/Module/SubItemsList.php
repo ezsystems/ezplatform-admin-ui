@@ -9,18 +9,18 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module;
 
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
-use EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService;
+use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
 
 /**
  * Provides information about current setting for sub-items list.
  */
 class SubItemsList implements ProviderInterface
 {
-    /** @var \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService */
+    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
     private $userSettingService;
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService $userSettingService
+     * @param \EzSystems\EzPlatformUser\UserSetting\UserSettingService $userSettingService
      */
     public function __construct(UserSettingService $userSettingService)
     {

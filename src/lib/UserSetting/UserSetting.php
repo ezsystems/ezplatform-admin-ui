@@ -8,19 +8,9 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UserSetting;
 
-use eZ\Publish\API\Repository\Values\ValueObject;
-
-class UserSetting extends ValueObject
+/**
+ * @deprecated since 1.5, to be removed in 2.0. Use \EzSystems\EzPlatformUser\UserSetting\UserSetting instead.
+ */
+class UserSetting extends \EzSystems\EzPlatformUser\UserSetting\UserSetting
 {
-    /** @var string */
-    protected $identifier;
-
-    /** @var string */
-    protected $name;
-
-    /** @var string */
-    protected $description;
-
-    /** @var string */
-    protected $value;
 }

@@ -1,29 +1,23 @@
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: false
-
-    EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService: ~
-    EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionRegistry: ~
-    EzSystems\EzPlatformAdminUi\UserSetting\FormMapperRegistry: ~
-
     #
     # User Settings Implementations
     #
     EzSystems\EzPlatformAdminUi\UserSetting\Setting\Timezone:
-        tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: timezone }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: timezone }
+        parent: EzSystems\EzPlatformUser\UserSetting\Setting\Timezone
 
     EzSystems\EzPlatformAdminUi\UserSetting\Setting\SubitemsLimit:
-        arguments:
-            $subitemsLimit: '$subitems_module.limit$'
-        tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: subitems_limit }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: subitems_limit }
+        parent: EzSystems\EzPlatformUser\UserSetting\Setting\SubitemsLimit
+
+    #
+    # UpdateFormType
+    #
+    EzSystems\EzPlatformAdminUi\Form\Type\User\Setting\UserSettingUpdateType:
+        parent: EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType
 
     EzSystems\EzPlatformAdminUi\UserSetting\Setting\Language:
+        autowire: true
+        autoconfigure: true
+        public: false
         arguments:
             $availableLocaleChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\AvailableLocaleChoiceLoader'
         tags:

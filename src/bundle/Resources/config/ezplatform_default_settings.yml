@@ -50,8 +50,8 @@ parameters:
 
     # Views
     ezsettings.default.content_translate_view: {}
-    ezsettings.default.user_settings.templates.list: "EzPlatformAdminUiBundle:user/settings:list.html.twig"
-    ezsettings.default.user_settings.templates.update: "EzPlatformAdminUiBundle:user/settings:update.html.twig"
+    ezsettings.admin.user_settings.templates.list: "EzPlatformAdminUiBundle:user/settings:list.html.twig"
+    ezsettings.admin.user_settings.templates.update: "EzPlatformAdminUiBundle:user/settings:update.html.twig"
 
     # Additional translations e.g. ['en_US', 'nb_NO']
     ezsettings.default.user_preferences.additional_translations: []

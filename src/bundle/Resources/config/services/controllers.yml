@@ -4,6 +4,15 @@ services:
         exclude: "../../Controller/{Controller}"
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
 
+    EzSystems\EzPlatformAdminUiBundle\Controller\UserProfile\UserPasswordChangeController:
+        parent: EzSystems\EzPlatformUserBundle\Controller\PasswordChangeController
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserSettingsController:
+        parent: EzSystems\EzPlatformUserBundle\Controller\UserSettingsController
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserForgotPasswordController:
+        parent: EzSystems\EzPlatformUserBundle\Controller\PasswordResetController
+
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
@@ -99,11 +108,6 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $notificationPaginationLimit: '$pagination.notification_limit$'
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserSettingsController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        arguments:
-            $defaultPaginationLimit: '$pagination.user_settings_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentDraftController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller

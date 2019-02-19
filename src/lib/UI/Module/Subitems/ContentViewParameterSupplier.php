@@ -26,7 +26,7 @@ use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsLi
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsList;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsRow;
 use eZ\Publish\Core\REST\Common\Output\Generator\Json as JsonOutputGenerator;
-use EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService;
+use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
 
 /**
  * @internal
@@ -60,7 +60,7 @@ class ContentViewParameterSupplier
     /** @var \EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings */
     private $contentTypeMappings;
 
-    /** @var \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService */
+    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
     private $userSettingService;
 
     /**
@@ -73,7 +73,7 @@ class ContentViewParameterSupplier
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings $contentTypeMappings
-     * @param \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService $userSettingService
+     * @param \EzSystems\EzPlatformUser\UserSetting\UserSettingService $userSettingService
      */
     public function __construct(
         Visitor $outputVisitor,

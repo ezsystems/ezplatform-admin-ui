@@ -598,21 +598,6 @@ ezplatform.user.delete:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:User\UserDelete:userDelete'
 
-ezplatform.user.forgot_password:
-    path: /user/forgot-password
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:User\UserForgotPassword:userForgotPassword'
-
-ezplatform.user.forgot_password.login:
-    path: /user/forgot-password/login
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:User\UserForgotPassword:userForgotPasswordLogin'
-
-ezplatform.user.reset_password:
-    path: /user/reset-password/{hashKey}
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:User\UserForgotPassword:userResetPassword'
-
 #
 # Custom URL alias
 #
