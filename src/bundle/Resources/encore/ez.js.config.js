@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const translationsPath = path.resolve('./web/js/translations/');
+const translationsPath = path.resolve('./web/assets/translations/');
 const fieldTypesPath = path.resolve(__dirname, '../public/js/scripts/fieldType/');
 const layout = [
     path.resolve(__dirname, '../public/js/scripts/helpers/request.helper.js'),
