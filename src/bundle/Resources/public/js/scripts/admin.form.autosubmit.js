@@ -1,11 +1,10 @@
-(function (global, doc) {
-
-    const autosubmit = event => {
-        let form  = event.target.closest('form');
+(function(global, doc) {
+    const autosubmit = (event) => {
+        const form = event.target.closest('form');
+        
         form.submit();
     };
+    const items = doc.querySelectorAll('.ez-form-autosubmit');
 
-    const items = doc.querySelectorAll('.ez_form_autosubmit');
-    items.forEach(item => item.addEventListener('change', autosubmit, false));
-
+    items.forEach((item) => item.addEventListener('change', autosubmit, false));
 })(window, document);
