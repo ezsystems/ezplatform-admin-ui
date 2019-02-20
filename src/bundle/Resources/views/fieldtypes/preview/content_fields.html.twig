@@ -174,7 +174,7 @@
         </ul>
     {% elseif not fieldSettings.isMultiple %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezselection-single')|trim}) %}
-        {% set field_value = options[field.value.selection.0] %}
+        {% set field_value = options[field.value.selection|first] %}
         {{ block( 'simple_block_field' ) }}
     {% endif %}
 {% endspaceless %}
