@@ -126,8 +126,7 @@
                     }) }}
                         {{ form_row(form_state_update[objectState.objectStateGroup.id].contentInfo) }}
                         {{ form_row(form_state_update[objectState.objectStateGroup.id].objectStateGroup) }}
-                        {{ form_row(form_state_update[objectState.objectStateGroup.id].objectState) }}
-                        {{ form_row(form_state_update[objectState.objectStateGroup.id].set, { 'attr': {'class': 'btn-secondary'} }) }}
+                        {{ form_row(form_state_update[objectState.objectStateGroup.id].objectState, { 'attr': {'class': 'ez_form_autosubmit'} }) }}
                     {{ form_end(form_state_update[objectState.objectStateGroup.id]) }}
                 {% endif %}
             </td>

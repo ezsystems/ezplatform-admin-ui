@@ -19,6 +19,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/admin.picker.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.notifications.modal.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.location.add.translation.js'),
+    path.resolve(__dirname, '../public/js/scripts/admin.form.autosubmit.js'),
 ];
 const alloyEditor = [
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-paragraph.js'),
