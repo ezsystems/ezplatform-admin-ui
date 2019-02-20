@@ -10,6 +10,7 @@ export default class EzBtnBlockTextAlignJustify extends EzBlockTextAlign {
 }
 
 AlloyEditor.Buttons[EzBtnBlockTextAlignJustify.key] = AlloyEditor.EzBtnBlockTextAlignJustify = EzBtnBlockTextAlignJustify;
+eZ.addConfig('ezAlloyEditor.ezBtnBlockTextAlignJustify', EzBtnBlockTextAlignJustify);
 
 EzBtnBlockTextAlignJustify.defaultProps = {
     textAlign: 'justify',

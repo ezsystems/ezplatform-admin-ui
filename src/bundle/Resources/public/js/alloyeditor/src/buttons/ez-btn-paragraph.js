@@ -41,6 +41,7 @@ export default class EzBtnParagraph extends EzButton {
 }
 
 AlloyEditor.Buttons[EzBtnParagraph.key] = AlloyEditor.EzBtnParagraph = EzBtnParagraph;
+eZ.addConfig('ezAlloyEditor.ezBtnParagraph', EzBtnParagraph);
 
 EzBtnParagraph.propTypes = {
     command: PropTypes.string,

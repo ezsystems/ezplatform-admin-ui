@@ -20,13 +20,13 @@ export default class EzBtnItalic extends AlloyEditor.ButtonItalic {
             <button
                 aria-label={AlloyEditor.Strings.italic}
                 aria-pressed={cssClass.indexOf('pressed') !== -1}
-                className={cssClass} data-type="button-italic"
+                className={cssClass}
+                data-type="button-italic"
                 onClick={this.execCommand}
                 tabIndex={this.props.tabIndex}
-                title={AlloyEditor.Strings.italic}
-            >
+                title={AlloyEditor.Strings.italic}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#italic"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#italic" />
                 </svg>
             </button>
         );
@@ -34,3 +34,4 @@ export default class EzBtnItalic extends AlloyEditor.ButtonItalic {
 }
 
 AlloyEditor.Buttons[EzBtnItalic.key] = AlloyEditor.EzBtnItalic = EzBtnItalic;
+eZ.addConfig('ezAlloyEditor.ezBtnItalic', EzBtnItalic);

@@ -499,3 +499,4 @@ export default class EzBtnLinkEdit extends Component {
 }
 
 AlloyEditor.Buttons[EzBtnLinkEdit.key] = AlloyEditor.ButtonLinkEdit = EzBtnLinkEdit;
+eZ.addConfig('ezAlloyEditor.ezBtnLinkEdit', EzBtnLinkEdit);

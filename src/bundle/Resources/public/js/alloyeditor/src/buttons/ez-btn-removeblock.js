@@ -42,6 +42,7 @@ export default class EzBtnBlockRemove extends EzButton {
 }
 
 AlloyEditor.Buttons[EzBtnBlockRemove.key] = AlloyEditor.EzBtnBlockRemove = EzBtnBlockRemove;
+eZ.addConfig('ezAlloyEditor.ezBtnBlockRemove', EzBtnBlockRemove);
 
 EzBtnBlockRemove.propTypes = {
     command: PropTypes.string,

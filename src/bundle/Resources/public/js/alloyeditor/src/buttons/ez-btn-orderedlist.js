@@ -43,6 +43,7 @@ export default class EzBtnOrderedList extends EzButton {
 }
 
 AlloyEditor.Buttons[EzBtnOrderedList.key] = AlloyEditor.EzBtnOrderedList = EzBtnOrderedList;
+eZ.addConfig('ezAlloyEditor.ezBtnOrderedList', EzBtnOrderedList);
 
 EzBtnOrderedList.propTypes = {
     command: PropTypes.string,

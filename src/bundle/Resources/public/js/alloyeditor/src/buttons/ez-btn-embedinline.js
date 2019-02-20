@@ -29,6 +29,7 @@ export default class EzBtnEmbedInline extends EzBtnEmbed {
 }
 
 AlloyEditor.Buttons[EzBtnEmbedInline.key] = AlloyEditor.EzBtnEmbedInline = EzBtnEmbedInline;
+eZ.addConfig('ezAlloyEditor.ezBtnEmbedInline', EzBtnEmbedInline);
 
 EzBtnEmbedInline.defaultProps = {
     command: 'ezembedinline',

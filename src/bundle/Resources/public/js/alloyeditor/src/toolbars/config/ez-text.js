@@ -28,3 +28,5 @@ export default class EzTextConfig {
         };
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezTextConfig', EzTextConfig);

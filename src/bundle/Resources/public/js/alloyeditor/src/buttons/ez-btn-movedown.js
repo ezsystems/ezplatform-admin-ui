@@ -31,8 +31,7 @@ export default class EzBtnMoveDown extends Component {
                 className="ae-button ez-btn-ae ez-btn-ae--move-down"
                 onClick={this.moveDown.bind(this)}
                 tabIndex={this.props.tabIndex}
-                title={title}
-            >
+                title={title}>
                 <svg className="ez-icon ez-btn-ae__icon">
                     <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#circle-caret-down" />
                 </svg>
@@ -42,3 +41,4 @@ export default class EzBtnMoveDown extends Component {
 }
 
 AlloyEditor.Buttons[EzBtnMoveDown.key] = AlloyEditor.EzBtnMoveDown = EzBtnMoveDown;
+eZ.addConfig('ezAlloyEditor.ezBtnMoveDown', EzBtnMoveDown);

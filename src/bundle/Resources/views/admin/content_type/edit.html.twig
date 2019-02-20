@@ -73,7 +73,7 @@
             </div>
 
             {% include '@ezdesign/admin/content_type/delete_confirmation_modal.html.twig' with {'form': form} %}
-            
+
             <div class="card-body">
                 {% for field_definition in form.fieldDefinitionsData %}
                     {% set value = field_definition.vars.value %}
@@ -144,11 +144,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    {%  javascripts
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.contenttype.selection.js'
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.contenttype.fieldtype.js'
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.contenttype.relation.default.location.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-content-type-edit-js', null, 'ezplatform') }}
 {% endblock %}

@@ -40,6 +40,7 @@ export default class EzBtnHeading extends EzButton {
 }
 
 AlloyEditor.Buttons[EzBtnHeading.key] = AlloyEditor.EzBtnHeading = EzBtnHeading;
+eZ.addConfig('ezAlloyEditor.ezBtnHeading', EzBtnHeading);
 
 EzBtnHeading.propTypes = {
     command: PropTypes.string,

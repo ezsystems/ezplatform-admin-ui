@@ -28,3 +28,5 @@ export default class EzFormattedConfig extends EzConfigBase {
         return nativeEditor.isSelectionEmpty() && path && path.contains('pre');
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezFormattedConfig', EzFormattedConfig);
