@@ -18,7 +18,7 @@ class Image extends EzFieldElement
     {
         parent::__construct($context, $locator, $label);
         $this->fields['fieldInput'] = 'input[type=file]';
-        $this->fields['image'] = '.ez-image__wrapper .ez-field-preview__image img';
+        $this->fields['image'] = '.ez-field-preview__image-wrapper .ez-field-preview__image img';
     }
 
     public function setValue(array $parameters): void
