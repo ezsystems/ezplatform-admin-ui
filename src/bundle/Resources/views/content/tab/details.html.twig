@@ -84,12 +84,7 @@
                             'class': 'form-inline ez-form-inline ez-form-inline--align-left'
                         }
                     }) }}
-                        {{ form_row(form_assign_section.section) }}
-                        {{ form_row(form_assign_section.assign, {
-                            'attr': {
-                                'class': 'btn-secondary'
-                            }
-                        }) }}
+                    {{ form_row(form_assign_section.section, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
                     {{ form_end(form_assign_section) }}
                 {% endif %}
             </td>
@@ -147,13 +142,11 @@
         'attr': {'class': 'form-inline ez-form-inline justify-content-start'}
         }) }}
 
-        {{ form_label(form_location_update.sort_field, 'tab.details.sub_items_listing_by.order_by'|trans|desc('Order by')) }}
-        {{ form_widget(form_location_update.sort_field) }}
+    {{ form_label(form_location_update.sort_field, 'tab.details.sub_items_listing_by.order_by'|trans|desc('Order by')) }}
+    {{ form_widget(form_location_update.sort_field, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
 
-        {{ form_label(form_location_update.sort_order, 'tab.details.sub_items_listing_by.in'|trans|desc('in')) }}
-        {{ form_widget(form_location_update.sort_order) }}
-
-        {{ form_widget(form_location_update.update, { 'label': 'tab.details.sub_items_listing_by_set'|trans|desc('Set'), 'translation_domain': false, 'attr': {'class': 'btn-secondary'} }) }}
+    {{ form_label(form_location_update.sort_order, 'tab.details.sub_items_listing_by.in'|trans|desc('in')) }}
+    {{ form_widget(form_location_update.sort_order, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
 
     {{ form_end(form_location_update) }}
 </div>

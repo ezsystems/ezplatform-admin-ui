@@ -601,11 +601,6 @@
         <target state="new">Name</target>
         <note>key: section_form.name</note>
       </trans-unit>
-      <trans-unit id="c33da889af5b91c7a19b0b6e522757d65b81a40d" resname="section_subtree_assign_form.assign">
-        <source>Change section</source>
-        <target state="new">Change section</target>
-        <note>key: section_subtree_assign_form.assign</note>
-      </trans-unit>
       <trans-unit id="ecaa9ee7b46159c99796726b8e14693d821e5500" resname="section_update_form.update">
         <source>Update</source>
         <target state="new">Update</target>

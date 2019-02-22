@@ -386,11 +386,6 @@
         <target state="new">Sort order</target>
         <note>key: location_update_form.sort_order</note>
       </trans-unit>
-      <trans-unit id="2bb23a852a2a16458d2dad6931debc447564dff2" resname="location_update_form.update">
-        <source>Update</source>
-        <target state="new">Update</target>
-        <note>key: location_update_form.update</note>
-      </trans-unit>
       <trans-unit id="7fe072f41348fb097b6bb018eec4f1b1bc9cffc3" resname="modal.cancel">
         <source>Cancel</source>
         <target state="new">Cancel</target>
