@@ -250,6 +250,8 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
     }
 }
 
+eZ.addConfig('ezAlloyEditor.ezBtnCustomTagUpdate', EzBtnCustomTagUpdate);
+
 EzBtnCustomTagUpdate.defaultProps = {
     command: 'ezcustomtag',
     modifiesSelection: true,

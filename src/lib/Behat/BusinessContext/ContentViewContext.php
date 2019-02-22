@@ -176,6 +176,7 @@ class ContentViewContext extends BusinessContext
     public function startCreatingNewDraftFromDraftConflictModal(): void
     {
         $draftConflictModal = ElementFactory::createElement($this->utilityContext, DraftConflictDialog::ELEMENT_NAME);
+        $draftConflictModal->verifyVisibility();
         $draftConflictModal->createNewDraft();
     }
 
@@ -185,7 +186,8 @@ class ContentViewContext extends BusinessContext
     public function startEditingDraftFromDraftConflictModal(string $draftID): void
     {
         $draftConflictModal = ElementFactory::createElement($this->utilityContext, DraftConflictDialog::ELEMENT_NAME);
-        $draftConflictModal->dashboardTable->clickEditButton($draftID);
+        $draftConflictModal->verifyVisibility();
+        $draftConflictModal->draftConflictTable->clickEditButton($draftID);
     }
 
     /**

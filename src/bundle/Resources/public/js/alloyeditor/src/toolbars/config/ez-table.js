@@ -19,3 +19,5 @@ export default class EzTableConfig {
         this.test = AlloyEditor.SelectionTest.table;
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezTableConfig', EzTableConfig);

@@ -15,7 +15,6 @@ use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateDa
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -50,9 +49,6 @@ class ContentObjectStateUpdateType extends AbstractType
             ])
             ->add('objectStateGroup', ObjectStateGroupType::class, [
                 'label' => false,
-            ])
-            ->add('set', SubmitType::class, [
-                'label' => /** @Desc("Set") */ 'object_state.button.set',
             ]);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
@@ -70,7 +66,7 @@ class ContentObjectStateUpdateType extends AbstractType
                     return array_filter(
                         $this->objectStateService->loadObjectStates($objectStateGroup),
                         function (ObjectState $objectState) use ($contentInfo, $contentState) {
-                            return $this->permissionResolver->canUser('state', 'assign', $contentInfo, [$objectState]) && $contentState->id !== $objectState->id;
+                            return $this->permissionResolver->canUser('state', 'assign', $contentInfo, [$objectState]);
                         }
                     );
                 }),

@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\Location;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\Core\Repository\LocationService;
+use eZ\Publish\API\Repository\LocationService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
@@ -40,7 +40,7 @@ class LocationTrashContainerType extends AbstractType
 
     /**
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\Core\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      */
     public function __construct(

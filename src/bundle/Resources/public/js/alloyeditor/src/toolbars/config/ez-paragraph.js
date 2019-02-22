@@ -38,3 +38,5 @@ export default class EzParagraphConfig extends EzConfigBase {
         return nativeEditor.isSelectionEmpty() && path && path.contains('p');
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezParagraphConfig', EzParagraphConfig);

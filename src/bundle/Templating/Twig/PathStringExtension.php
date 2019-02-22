@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
-use eZ\Publish\Core\Repository\LocationService;
+use eZ\Publish\API\Repository\LocationService;
 use Twig_Extension;
 use Twig_SimpleFunction;
 

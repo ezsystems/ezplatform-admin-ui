@@ -16,8 +16,7 @@ class DashboardTable extends Table
     public function __construct(UtilityContext $context, string $containerLocator)
     {
         parent::__construct($context, $containerLocator);
-        $this->fields['horizontalHeaders'] = $this->fields['list'] . ' thead th';
-        $this->fields['listElement'] = $this->fields['list'] . ' tbody td:nth-child(1)';
+        $this->fields['listElement'] = $this->fields['list'] . ' .ez-table__cell--after-icon';
         $this->fields['editButton'] = $this->fields['list'] . ' tr:nth-child(%s) .ez-icon-edit';
     }
 
@@ -33,18 +32,6 @@ class DashboardTable extends Table
         );
 
         return $this->getCellValue($rowPosition, $columnPosition);
-    }
-
-    /**
-     * Check if list contains draft with given name.
-     *
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function isElementInTable(string $name): bool
-    {
-        return $this->context->getElementByText($name, $this->fields['listElement']) !== null;
     }
 
     public function clickEditButton(string $listItemName): void

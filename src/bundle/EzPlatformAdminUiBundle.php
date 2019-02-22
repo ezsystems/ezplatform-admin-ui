@@ -14,16 +14,7 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTab
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ViewBuilderRegistryPass;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\AdminUiForms;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\ContentTranslateView;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\LocationIds;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Module;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Notifications;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Pagination;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\Security;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\SubtreeOperations;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\UserGroupIdentifier;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\UserIdentifier;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -72,17 +63,19 @@ class EzPlatformAdminUiBundle extends Bundle
     private function getConfigParsers(): array
     {
         return [
-            new LocationIds(),
-            new Module\Subitems(),
-            new Module\UniversalDiscoveryWidget(),
-            new Pagination(),
-            new Security(),
-            new UserIdentifier(),
-            new UserGroupIdentifier(),
-            new SubtreeOperations(),
-            new Notifications(),
-            new ContentTranslateView(),
-            new AdminUiForms(),
+            new Parser\LocationIds(),
+            new Parser\Module\Subitems(),
+            new Parser\Module\UniversalDiscoveryWidget(),
+            new Parser\Pagination(),
+            new Parser\Security(),
+            new Parser\UserIdentifier(),
+            new Parser\UserGroupIdentifier(),
+            new Parser\SubtreeOperations(),
+            new Parser\Notifications(),
+            new Parser\ContentTranslateView(),
+            new Parser\AdminUiForms(),
+            new Parser\UserPreferences(),
+            new Parser\ContentType(),
         ];
     }
 }

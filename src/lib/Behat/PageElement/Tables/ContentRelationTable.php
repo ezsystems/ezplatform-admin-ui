@@ -76,18 +76,6 @@ class ContentRelationTable extends Table
     }
 
     /**
-     * Check if list contains link element with given name.
-     *
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function isElementInTable(string $name): bool
-    {
-        return $this->context->getElementByText($name, $this->fields['listElement']) !== null;
-    }
-
-    /**
      * Click trash icon in table header.
      */
     public function clickTrashIcon(): void

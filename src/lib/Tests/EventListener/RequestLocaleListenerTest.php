@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\EventListener;
 
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
@@ -40,6 +41,9 @@ class RequestLocaleListenerTest extends TestCase
     /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
     private $userLanguagePreferenceProvider;
 
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject */
+    private $configResolver;
+
     protected function setUp()
     {
         parent::setUp();
@@ -62,6 +66,11 @@ class RequestLocaleListenerTest extends TestCase
             ->getMockBuilder(UserLanguagePreferenceProviderInterface::class)
             ->setConstructorArgs([$requestStack])
             ->getMock();
+
+        $this->configResolver = $this->createMock(ConfigResolverInterface::class);
+        $this->configResolver
+            ->method('getParameter')
+            ->willReturn([]);
     }
 
     public function testLocaleIsNotSetOnNonAdminSiteaccess(): void
@@ -77,11 +86,13 @@ class RequestLocaleListenerTest extends TestCase
             $request,
             HttpKernelInterface::MASTER_REQUEST
         );
+
         $requestLocaleListener = new RequestLocaleListener(
             ['admin_group' => [self::ADMIN_SITEACCESS]],
             [],
             $translator,
-            $this->userLanguagePreferenceProvider
+            $this->userLanguagePreferenceProvider,
+            $this->configResolver
         );
 
         $requestLocaleListener->onKernelRequest($event);
@@ -105,31 +116,24 @@ class RequestLocaleListenerTest extends TestCase
             [],
             [],
             $translator,
-            $this->userLanguagePreferenceProvider
+            $this->userLanguagePreferenceProvider,
+            $this->configResolver
         );
 
         $requestLocaleListener->onKernelRequest($event);
     }
 
-    public function testLocaleIsSetWithoutAvailableTranslations(): void
+    public function testLocaleIsSet(): void
     {
-        $availableTranslations = ['de-CH'];
-
         $this->translator
             ->expects($this->once())
             ->method('setLocale')
-            ->with('en-US');
+            ->with('en_US');
 
         $this->request
             ->expects($this->once())
             ->method('setLocale')
-            ->with('en-US');
-
-        $this->request->headers->set('Accept-Language', 'en-US,en;q=0.5');
-
-        $this->userLanguagePreferenceProvider
-            ->method('getPreferredLocales')
-            ->willReturn(['en-US', 'en']);
+            ->with('en_US');
 
         $event = new GetResponseEvent(
             $this->httpKernel,
@@ -137,34 +141,32 @@ class RequestLocaleListenerTest extends TestCase
             HttpKernelInterface::MASTER_REQUEST
         );
 
+        $this->userLanguagePreferenceProvider
+            ->method('getPreferredLocales')
+            ->willReturn(['en_US']);
+
         $requestLocaleListener = new RequestLocaleListener(
             ['admin_group' => [self::ADMIN_SITEACCESS]],
-            $availableTranslations,
+            ['en_GB', 'en_US'],
             $this->translator,
-            $this->userLanguagePreferenceProvider
+            $this->userLanguagePreferenceProvider,
+            $this->configResolver
         );
 
         $requestLocaleListener->onKernelRequest($event);
     }
 
-    public function testLocaleIsSetWithAvailableTranslations(): void
+    public function testLocaleIsSetWithoutAvailableTranslation(): void
     {
-        $availableTranslations = ['de-CH'];
         $this->translator
             ->expects($this->once())
             ->method('setLocale')
-            ->with('de-CH');
+            ->with('en_US');
 
         $this->request
             ->expects($this->once())
             ->method('setLocale')
-            ->with('de-CH');
-
-        $this->request->headers->set('Accept-Language', 'en-US,en;q=0.5,de-CH;q=0.4');
-
-        $this->userLanguagePreferenceProvider
-            ->method('getPreferredLocales')
-            ->willReturn(['en-US', 'en', 'de-CH']);
+            ->with('en_US');
 
         $event = new GetResponseEvent(
             $this->httpKernel,
@@ -172,11 +174,16 @@ class RequestLocaleListenerTest extends TestCase
             HttpKernelInterface::MASTER_REQUEST
         );
 
+        $this->userLanguagePreferenceProvider
+            ->method('getPreferredLocales')
+            ->willReturn(['en_US']);
+
         $requestLocaleListener = new RequestLocaleListener(
             ['admin_group' => [self::ADMIN_SITEACCESS]],
-            $availableTranslations,
+            [],
             $this->translator,
-            $this->userLanguagePreferenceProvider
+            $this->userLanguagePreferenceProvider,
+            $this->configResolver
         );
 
         $requestLocaleListener->onKernelRequest($event);
@@ -188,7 +195,8 @@ class RequestLocaleListenerTest extends TestCase
             ['admin_group' => [self::ADMIN_SITEACCESS]],
             [],
             $this->translator,
-            $this->userLanguagePreferenceProvider
+            $this->userLanguagePreferenceProvider,
+            $this->configResolver
         );
 
         $this->assertSame([KernelEvents::REQUEST => ['onKernelRequest', 6]], $requestLocaleListener::getSubscribedEvents());
@@ -211,7 +219,8 @@ class RequestLocaleListenerTest extends TestCase
             ['admin_group' => [self::ADMIN_SITEACCESS]],
             [],
             $this->translator,
-            $this->userLanguagePreferenceProvider
+            $this->userLanguagePreferenceProvider,
+            $this->configResolver
         );
 
         $requestLocaleListener->onKernelRequest($event);

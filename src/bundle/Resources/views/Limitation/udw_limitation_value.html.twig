@@ -1,27 +1,41 @@
-<div>
+<div class="ez-limitation-picker">
     {{ form_label(form.limitationValues) }}
     {{ form_errors(form.limitationValues) }}
     {{ form_widget(form.limitationValues) }}
 
-    <div>
-        <button
-            data-universaldiscovery-title="{{ "role.policy.limitation.location.udw_title"
-            |trans({}, "ezrepoforms_role")
-            |desc("Select locations to use as policy limitation") }}"
-            class="ez-button-tree pure-button ez-font-icon ez-button btn btn-secondary ez-pick-location-limitation-button"
-            data-location-input-selector="#{{ form.limitationValues.vars.id }}"
-            data-selected-location-list-selector="#{{ form.limitationValues.vars.id }}-selected-location"
-            data-udw-config="{{ ez_udw_config('multiple', {}) }}"
-        >{{ "role.policy.limitation.location.udw_button"|trans({}, "ezrepoforms_role")|desc("Select locations") }}</button>
-    </div>
-</div>
+    <button type="button" data-universaldiscovery-title="{{ "role.policy.limitation.location.udw_title"
+        |trans({}, "ezrepoforms_role")
+        |desc("Select locations to use as policy limitation") }}"
+        class="btn btn-secondary d-block ez-pick-location-limitation-button"
+        data-location-input-selector="#{{ form.limitationValues.vars.id }}"
+        data-selected-location-list-selector="#{{ form.limitationValues.vars.id }}-selected-location"
+        data-udw-config="{{ ez_udw_config('multiple', {}) }}"
+        data-value-template="{{ include('@ezdesign/Limitation/udw_limitation_value_list_item.html.twig', {
+            'content_breadcrumbs': '',
+            'location_id': '{{ location_id }}',
+            'is_loading_state': true
+        })|e('html_attr') }}">
+        {{ "role.policy.limitation.location.udw_button"|trans({}, "ezrepoforms_role")|desc("Select locations") }}
+    </button>
 
-<ul id="{{ form.limitationValues.vars.id }}-selected-location">
-    {% for limitationValue in form.limitationValues.vars.value|split(',') %}
-        {% if limitationValue is not empty %}
-            <li>
-                {{ render( controller( "ez_content:viewAction", {'locationId': limitationValue, 'viewType': '_platformui_content_name'} ) ) }}
-            </li>
-        {% endif %}
-    {% endfor %}
-</ul>
+    <ul class="list-unstyled" id="{{ form.limitationValues.vars.id }}-selected-location">
+        {% for limitationValue in form.limitationValues.vars.data %}
+            {% if limitationValue is not empty %}
+                {% set path_locations = ez_path_string_to_locations(limitationValue.pathString) %}
+                {% set content_breadcrumbs = '' %}
+                {% for location in path_locations %}
+                    {% set content_breadcrumbs = content_breadcrumbs ~ ez_content_name(location.contentInfo) %}
+                    {% if not loop.last %}
+                        {% set content_breadcrumbs = content_breadcrumbs ~ ' / ' %}
+                    {% endif %}
+                {% endfor %}
+                
+                {{ include('@ezdesign/Limitation/udw_limitation_value_list_item.html.twig', { 
+                    'content_breadcrumbs': content_breadcrumbs,
+                    'location_id': limitationValue.id,
+                    'is_loading_state': false
+                }) }}
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>

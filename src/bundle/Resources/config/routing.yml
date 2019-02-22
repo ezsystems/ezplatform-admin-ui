@@ -459,6 +459,12 @@ ezplatform.translation.remove:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Translation:remove'
 
+ezplatform.content.update_main_translation:
+    path: /content/update-main-translation
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Content:updateMainTranslation'
+
 # LocationView / Versions tab
 
 ezplatform.version.remove:
@@ -505,6 +511,12 @@ ezplatform.location.update_visibility:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location:updateVisibility'
+
+ezplatform.location.assign_section:
+    path: /location/assign-section
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Location:assignSection'
 
 ezplatform.content.update_main_location:
     path: /content/update-main-location

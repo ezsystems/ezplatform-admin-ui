@@ -477,6 +477,7 @@ export default class EzBtnLinkEdit extends Component {
         // button is used inside another component in exclusive mode (such
         // is the case of the link button)
         this.props.cancelExclusive();
+        this.showUI();
     }
 
     /**
@@ -499,3 +500,4 @@ export default class EzBtnLinkEdit extends Component {
 }
 
 AlloyEditor.Buttons[EzBtnLinkEdit.key] = AlloyEditor.ButtonLinkEdit = EzBtnLinkEdit;
+eZ.addConfig('ezAlloyEditor.ezBtnLinkEdit', EzBtnLinkEdit);

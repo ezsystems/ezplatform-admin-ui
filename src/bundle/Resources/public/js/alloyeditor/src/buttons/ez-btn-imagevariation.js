@@ -32,7 +32,11 @@ export default class EzBtnImageVariation extends EzEmbedImageButton {
      * @return Array
      */
     getImageVariationOptions() {
-        return Object.keys(eZ.adminUiConfig.imageVariations).map(variation => (<option key={variation} value={variation}>{variation}</option>));
+        return Object.keys(eZ.adminUiConfig.imageVariations).map((variation) => (
+            <option key={variation} value={variation}>
+                {variation}
+            </option>
+        ));
     }
 
     /**
@@ -43,11 +47,7 @@ export default class EzBtnImageVariation extends EzEmbedImageButton {
      */
     render() {
         return (
-            <select
-                defaultValue={this.getWidget().getConfig('size')}
-                onChange={this.updateImage.bind(this)}
-                tabIndex={this.props.tabIndex}
-            >
+            <select defaultValue={this.getWidget().getConfig('size')} onChange={this.updateImage.bind(this)} tabIndex={this.props.tabIndex}>
                 {this.getImageVariationOptions()}
             </select>
         );
@@ -55,3 +55,4 @@ export default class EzBtnImageVariation extends EzEmbedImageButton {
 }
 
 AlloyEditor.Buttons[EzBtnImageVariation.key] = AlloyEditor.EzBtnImageVariation = EzBtnImageVariation;
+eZ.addConfig('ezAlloyEditor.ezBtnImageVariation', EzBtnImageVariation);

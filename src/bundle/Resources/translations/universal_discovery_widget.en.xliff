@@ -36,6 +36,11 @@
         <target state="new">Select content</target>
         <note>key: ezobjectrelationlist.title</note>
       </trans-unit>
+      <trans-unit id="2d4febe56a341671c069ff47b6e6adfd2bba005c" resname="limitation.pick.error">
+        <source>Failed to fetch content names</source>
+        <target state="new">Failed to fetch content names</target>
+        <note>key: limitation.pick.error</note>
+      </trans-unit>
       <trans-unit id="56faf4ff9f2deaae1d34c1abcecae0413dc24a78" resname="move.title">
         <source>Select destination</source>
         <target state="new">Select destination</target>

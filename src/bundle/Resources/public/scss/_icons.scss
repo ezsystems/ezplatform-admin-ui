@@ -28,6 +28,10 @@
         height: calculateRem(64px);
     }
 
+    &--dark {
+        fill: $ez-black;
+    }
+
     &--light {
         fill: $ez-white;
     }
@@ -74,8 +78,8 @@
 
     .ez-sticky-container {
         .ez-icon {
-            width: calculateRem(30px);
-            height: calculateRem(30px);
+            width: calculateRem(28px);
+            height: calculateRem(28px);
             margin-bottom: calculateRem(3px);
         }
     }
@@ -221,6 +225,18 @@
     .modal-header {
         .ez-icon {
             fill: $ez-black;
+        }
+    }
+}
+
+.ez-btn--content-tree-expanded {
+    .ez-icon {
+        fill: $ez-black;
+    }
+
+    &:hover {
+        .ez-icon {
+            fill: $ez-white;
         }
     }
 }

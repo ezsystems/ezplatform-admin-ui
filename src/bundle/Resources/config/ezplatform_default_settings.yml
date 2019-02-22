@@ -50,3 +50,6 @@ parameters:
 
     # Views
     ezsettings.default.content_translate_view: {}
+
+    # Additional translations e.g. ['en_US', 'nb_NO']
+    ezsettings.default.user_preferences.additional_translations: []

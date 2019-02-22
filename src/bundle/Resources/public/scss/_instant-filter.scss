@@ -8,21 +8,33 @@
 .ez-extra-actions--create {
     .ez-instant-filter {
         &__group-name {
-            padding-left: .5rem;
+            padding-left: calculateRem(8px);
         }
 
         &__input-wrapper {
-            padding: 1rem .5rem;
+            padding: calculateRem(16px) calculateRem(8px);
         }
 
         &__group-item {
+            position: relative;
+
             label {
                 cursor: pointer;
+            }
+
+            .ez-icon {
+                fill: $ez-black;
+                position: absolute;
+                top: 0;
+                left: calculateRem(20px);
+                width: calculateRem(16px);
+                height: calculateRem(16px);
+                margin-top: calculateRem(3px);
             }
         }
 
         &__items {
-            max-height: 200px;
+            max-height: calculateRem(200px);
             overflow: auto;
         }
     }

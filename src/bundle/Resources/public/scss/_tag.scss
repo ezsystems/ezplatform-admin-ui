@@ -1,0 +1,25 @@
+.ez-tag {
+    border-radius: calculateRem(4px);
+    background: $ez-color-base-pale;
+    padding: calculateRem(8px) calculateRem(48px) calculateRem(8px) calculateRem(8px);
+    display: inline-block;
+    position: relative;
+
+    &__content {
+        line-height: calculateRem(22px);
+    }
+
+    &__spinner {
+        height: calculateRem(22px);
+    }
+
+    &__remove-btn {
+        position: absolute;
+        top: calc(50% - #{calculateRem(12px)});
+        right: calculateRem(6px);
+        cursor: pointer;
+        border: 0;
+        padding: 0;
+        outline: none;
+    }
+}

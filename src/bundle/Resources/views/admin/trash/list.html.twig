@@ -7,7 +7,7 @@
 {% form_theme form_trash_item_restore '@ezdesign/form_fields.html.twig' %}
 {% form_theme form_trash_item_delete '@ezdesign/form_fields.html.twig' %}
 
-{% block body_class %}ez-trash-list-view{% endblock %}
+{% block body_class %}ez-trash-list-view ez-has-two-sidebars{% endblock %}
 
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
@@ -16,7 +16,7 @@
             {{ parent() }}
         {% endblock left_sidebar %}
 
-        <div class="col-sm-10 px-0">
+        <div class="px-0 ez-content-container">
             <section class="container mt-5">
                 {% include '@ezdesign/parts/page_title.html.twig' with { title: 'trash.headline'|trans|desc('Trash'), iconName: 'trash' } %}
                 {{ form_start(form_trash_item_restore, {'action': path('ezplatform.trash.restore')}) }}
@@ -65,10 +65,11 @@
                     <table class="ez-table table">
                         <thead>
                         <tr>
-                            <th></th>
-                            <th>{{ 'trash.name'|trans|desc('Name') }}</th>
-                            <th>{{ 'trash.type'|trans|desc('Type') }}</th>
-                            <th>{{ 'trash.original_location'|trans|desc('Original location') }}</th>
+                            <th class="ez-table__header-cell"></th>
+                            <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
+                            <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'trash.name'|trans|desc('Name') }}</th>
+                            <th class="ez-table__header-cell">{{ 'trash.type'|trans|desc('Type') }}</th>
+                            <th class="ez-table__header-cell">{{ 'trash.original_location'|trans|desc('Original location') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -90,7 +91,12 @@
                                             'data-is-parent-in-trash': is_parent_in_trash ? '1': '0'
                                         }}) }}
                                     </td>
-                                    <td class="ez-table__cell">{{ ez_content_name(trash_item.location.contentInfo) }}</td>
+                                    <td class="ez-table__cell ez-table__cell--has-icon">
+                                        <svg class="ez-icon ez-icon--medium">
+                                            <use xlink:href="{{ ez_content_type_icon(trash_item.contentType.identifier) }}"></use>
+                                        </svg>
+                                    </td>
+                                    <td class="ez-table__cell ez-table__cell--after-icon">{{ ez_content_name(trash_item.location.contentInfo) }}</td>
                                     <td class="ez-table__cell">{{ trash_item.contentType.name }}</td>
                                     <td class="ez-table__cell">
                                         {% if not is_parent_in_trash %}
@@ -135,7 +141,7 @@
             </section>
         </div>
         {% if can_cleantrash and form_trash_item_restore.trash_items|length > 0 %}
-            <div class="col-sm-1 pt-4 px-0 bg-secondary ez-context-menu">
+            <div class="pt-4 px-0 bg-secondary ez-context-menu">
                 <div class="ez-sticky-container">
                     {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
                     {{ knp_menu_render(sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
@@ -146,11 +152,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    {%  javascripts
-        'bundles/ezplatformadminui/js/scripts/admin.trash.list.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-trash-list-js', null, 'ezplatform') }}
 {% endblock %}
 
 {% block title %}{{ 'trash'|trans|desc('Trash') }}{% endblock %}

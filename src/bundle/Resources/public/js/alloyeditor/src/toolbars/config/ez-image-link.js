@@ -28,3 +28,5 @@ export default class EzEmbedImageLinkConfig extends EzConfigBase {
         return !!(widget && widget.name === 'ezembed' && widget.isImage() && widget.isEditingLink());
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezEmbedImageLinkConfig', EzEmbedImageLinkConfig);

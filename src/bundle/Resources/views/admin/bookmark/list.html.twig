@@ -4,7 +4,7 @@
 
 {% form_theme form_remove '@ezdesign/form_fields.html.twig' %}
 
-{% block body_class %}ez-bookmark-list-view{% endblock %}
+{% block body_class %}ez-bookmark-list-view ez-has-two-sidebars{% endblock %}
 
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
@@ -13,7 +13,7 @@
             {{ parent() }}
         {% endblock left_sidebar %}
 
-        <div class="col-sm-10 px-0">
+        <div class="px-0 ez-content-container">
             <section class="container mt-5">
                 {% include '@ezdesign/parts/page_title.html.twig' with { title: 'bookmark.headline'|trans|desc('Bookmarks'), iconName: 'bookmark-manager' } %}
                 <div class="px-4">
@@ -29,11 +29,12 @@
                     <table class="ez-table table">
                         <thead>
                         <tr>
-                            <th></th>
-                            <th>{{ 'bookmark.list.name'|trans|desc('Name') }}</th>
-                            <th>{{ 'bookmark.list.content_type'|trans|desc('Content Type') }}</th>
-                            <th>{{ 'bookmark.list.path'|trans|desc('Path') }}</th>
-                            <th></th>
+                            <th class="ez-table__header-cell"></th>
+                            <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
+                            <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'bookmark.list.name'|trans|desc('Name') }}</th>
+                            <th class="ez-table__header-cell">{{ 'bookmark.list.content_type'|trans|desc('Content Type') }}</th>
+                            <th class="ez-table__header-cell">{{ 'bookmark.list.path'|trans|desc('Path') }}</th>
+                            <th class="ez-table__header-cell"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -47,7 +48,12 @@
                         {% for bookmark in pager.currentPageResults %}
                             <tr>
                                 <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form_remove.bookmarks[bookmark.id]) }}</td>
-                                <td class="ez-table__cell"><a href="{{ path('_ezpublishLocation', { 'locationId': bookmark.id }) }}">{{ ez_content_name(bookmark.contentInfo) }}</a></td>
+                                <td class="ez-table__cell ez-table__cell--has-icon">
+                                    <svg class="ez-icon ez-icon--medium">
+                                        <use xlink:href="{{ ez_content_type_icon(bookmark.contentType.identifier) }}"></use>
+                                    </svg>
+                                </td>
+                                <td class="ez-table__cell ez-table__cell--after-icon"><a href="{{ path('_ezpublishLocation', { 'locationId': bookmark.id }) }}">{{ ez_content_name(bookmark.contentInfo) }}</a></td>
                                 <td class="ez-table__cell">{{ bookmark.contentType.name }}</td>
                                 <td class="ez-table__cell">
                                     {% if bookmark.pathLocations|length > 1 %}
@@ -110,11 +116,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    {%  javascripts
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.toggle.js'
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.content.edit.js'
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.version.edit.conflict.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-bookmark-list-js', null, 'ezplatform') }}
 {% endblock %}

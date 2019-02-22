@@ -43,10 +43,5 @@
 </div>
 
 {% block javascripts %}
-    {% javascripts
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/button.state.checkbox.toggle.js'
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.trash.container.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-modal-location-trash-container-js', null, 'ezplatform') }}
 {% endblock %}

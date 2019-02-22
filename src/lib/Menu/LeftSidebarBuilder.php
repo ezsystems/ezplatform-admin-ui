@@ -29,6 +29,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
     const ITEM__BROWSE = 'sidebar_left__browse';
     const ITEM__BOOKMARK = 'sidebar_left__bookmark';
     const ITEM__TRASH = 'sidebar_left__trash';
+    const ITEM__TREE = 'sidebar_left__tree';
 
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
@@ -92,6 +93,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                 [
                     'extras' => ['icon' => 'browse'],
                     'attributes' => [
+                        'type' => 'button',
                         'class' => 'btn--udw-browse',
                         'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single', [
                             'type' => 'content_create',
@@ -99,6 +101,16 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                         'data-starting-location-id' => $this->configResolver->getParameter(
                             'universal_discovery_widget_module.default_location_id'
                         ),
+                    ],
+                ]
+            ),
+            self::ITEM__TREE => $this->createMenuItem(
+                self::ITEM__TREE,
+                [
+                    'extras' => ['icon' => 'content-tree'],
+                    'attributes' => [
+                        'type' => 'button',
+                        'class' => 'ez-btn ez-btn--toggle-content-tree',
                     ],
                 ]
             ),
@@ -134,6 +146,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
         return [
             (new Message(self::ITEM__SEARCH, 'menu'))->setDesc('Search'),
             (new Message(self::ITEM__BROWSE, 'menu'))->setDesc('Browse'),
+            (new Message(self::ITEM__TREE, 'menu'))->setDesc('Content Tree'),
             (new Message(self::ITEM__TRASH, 'menu'))->setDesc('Trash'),
             (new Message(self::ITEM__BOOKMARK, 'menu'))->setDesc('Bookmarks'),
         ];

@@ -10,6 +10,7 @@ export default class EzBtnBlockTextAlignLeft extends EzBlockTextAlign {
 }
 
 AlloyEditor.Buttons[EzBtnBlockTextAlignLeft.key] = AlloyEditor.EzBtnBlockTextAlignLeft = EzBtnBlockTextAlignLeft;
+eZ.addConfig('ezAlloyEditor.ezBtnBlockTextAlignLeft', EzBtnBlockTextAlignLeft);
 
 EzBtnBlockTextAlignLeft.defaultProps = {
     textAlign: 'left',

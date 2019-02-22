@@ -78,16 +78,4 @@ class SimpleListTable extends Table
     {
         $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
     }
-
-    /**
-     * Check if list contains link element with given name.
-     *
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function isElementInTable(string $name): bool
-    {
-        return $this->context->getElementByText($name, $this->fields['listElement']) !== null;
-    }
 }

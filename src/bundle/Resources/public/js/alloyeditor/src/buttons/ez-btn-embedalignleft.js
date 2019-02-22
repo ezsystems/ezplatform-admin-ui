@@ -10,6 +10,7 @@ export default class EzEmbedAlignLeft extends EzEmbedAlign {
 }
 
 AlloyEditor.Buttons[EzEmbedAlignLeft.key] = AlloyEditor.EzEmbedAlignLeft = EzEmbedAlignLeft;
+eZ.addConfig('ezAlloyEditor.ezEmbedAlignLeft', EzEmbedAlignLeft);
 
 EzEmbedAlignLeft.defaultProps = {
     alignment: 'left',

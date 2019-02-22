@@ -20,12 +20,13 @@ export default class EzBtnQuote extends AlloyEditor.ButtonQuote {
             <button
                 aria-label={AlloyEditor.Strings.quote}
                 aria-pressed={cssClass.indexOf('pressed') !== -1}
-                className={cssClass} data-type="button-quote"
-                onClick={this.execCommand} tabIndex={this.props.tabIndex}
-                title={AlloyEditor.Strings.quote}
-            >
+                className={cssClass}
+                data-type="button-quote"
+                onClick={this.execCommand}
+                tabIndex={this.props.tabIndex}
+                title={AlloyEditor.Strings.quote}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#quote"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#quote" />
                 </svg>
             </button>
         );
@@ -33,3 +34,4 @@ export default class EzBtnQuote extends AlloyEditor.ButtonQuote {
 }
 
 AlloyEditor.Buttons[EzBtnQuote.key] = AlloyEditor.EzBtnQuote = EzBtnQuote;
+eZ.addConfig('ezAlloyEditor.ezBtnQuote', EzBtnQuote);

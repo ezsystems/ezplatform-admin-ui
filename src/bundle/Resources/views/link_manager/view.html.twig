@@ -135,9 +135,5 @@
 {% block title %}{{ 'url.view'|trans({ '%url%': url.url|truncate(60) }) }}{% endblock %}
 
 {% block javascripts %}
-    {%  javascripts
-        'bundles/ezplatformadminui/js/scripts/button.content.edit.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-link-manager-view-js', null, 'ezplatform') }}
 {% endblock %}

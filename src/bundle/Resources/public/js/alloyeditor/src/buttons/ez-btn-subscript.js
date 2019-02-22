@@ -20,12 +20,13 @@ export default class EzBtnSubscript extends AlloyEditor.ButtonSubscript {
             <button
                 aria-label={AlloyEditor.Strings.subscript}
                 aria-pressed={cssClass.indexOf('pressed') !== -1}
-                className={cssClass} data-type="button-subscript"
-                onClick={this.execCommand} tabIndex={this.props.tabIndex}
-                title={AlloyEditor.Strings.subscript}
-            >
+                className={cssClass}
+                data-type="button-subscript"
+                onClick={this.execCommand}
+                tabIndex={this.props.tabIndex}
+                title={AlloyEditor.Strings.subscript}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#subscript"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#subscript" />
                 </svg>
             </button>
         );
@@ -33,3 +34,4 @@ export default class EzBtnSubscript extends AlloyEditor.ButtonSubscript {
 }
 
 AlloyEditor.Buttons[EzBtnSubscript.key] = AlloyEditor.EzBtnSubscript = EzBtnSubscript;
+eZ.addConfig('ezAlloyEditor.ezBtnSubscript', EzBtnSubscript);

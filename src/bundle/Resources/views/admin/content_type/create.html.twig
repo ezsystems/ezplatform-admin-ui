@@ -10,7 +10,7 @@
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
-{% endblock %} 
+{% endblock %}
 
 {% block breadcrumbs_admin %}
     {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
@@ -37,7 +37,7 @@
                 {{ 'content_type.view.create.global_properties'|trans|desc('Global properties') }}
             </div>
             <div class="card-body">
-                {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}, 'attr': {'autofocus': 'autofocus'}}) }}
                 {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}}) }}
                 {{ form_row(form.description, {'label_attr': {'class': 'ez-label'}}) }}
                 {{ form_row(form.nameSchema, {'label_attr': {'class': 'ez-label'}}) }}
@@ -133,10 +133,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    {%  javascripts
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.contenttype.selection.js'
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.contenttype.fieldtype.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-content-type-create-js', null, 'ezplatform') }}
 {% endblock %}

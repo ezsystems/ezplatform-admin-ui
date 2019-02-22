@@ -49,11 +49,10 @@ export default class EzCustomStyleConfig extends EzConfigBase {
             path.contains(function(el) {
                 const ezElement = el.getAttribute('data-ezelement');
 
-                return (
-                    (ezElement === 'eztemplate' || ezElement === 'eztemplateinline') &&
-                    el.getAttribute('data-eztype') === 'style'
-                );
+                return (ezElement === 'eztemplate' || ezElement === 'eztemplateinline') && el.getAttribute('data-eztype') === 'style';
             })
         );
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezCustomStyleConfig', EzCustomStyleConfig);

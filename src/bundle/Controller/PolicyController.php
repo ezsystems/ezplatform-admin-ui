@@ -417,7 +417,7 @@ class PolicyController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (PoliciesDeleteData $data) use ($role) {
                 $roleDraft = $this->roleService->createRoleDraft($role);
 

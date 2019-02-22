@@ -27,7 +27,7 @@
     <section class="container mt-4 px-5">
         <div class="card ez-card">
             <div class="card-body">
-                {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}, 'attr': {'autofocus': 'autofocus'}}) }}
                 {{ form_row(form.languageCode, {'label_attr': {'class': 'ez-label'}}) }}
                 {{ form_row(form.enabled, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
             </div>
