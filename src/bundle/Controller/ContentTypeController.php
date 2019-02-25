@@ -75,6 +75,9 @@ class ContentTypeController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory */
     private $contentTypeFormFactory;
 
+    /** @var \EzSystems\RepositoryForms\Data\Mapper\ContentTypeDraftMapper */
+    private $contentTypeDraftMapper;
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
@@ -99,7 +102,8 @@ class ContentTypeController extends Controller
         int $defaultPaginationLimit,
         UserService $userService,
         LanguageService $languageService,
-        ContentTypeFormFactory $contentTypeFormFactory
+        ContentTypeFormFactory $contentTypeFormFactory,
+        ContentTypeDraftMapper $contentTypeDraftMapper
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -112,6 +116,7 @@ class ContentTypeController extends Controller
         $this->userService = $userService;
         $this->languageService = $languageService;
         $this->contentTypeFormFactory = $contentTypeFormFactory;
+        $this->contentTypeDraftMapper = $contentTypeDraftMapper;
     }
 
     /**
@@ -623,7 +628,7 @@ class ContentTypeController extends Controller
         Language $language = null,
         ?Language $baseLanguage = null
     ): FormInterface {
-        $contentTypeData = (new ContentTypeDraftMapper())->mapToFormData(
+        $contentTypeData = $this->contentTypeDraftMapper->mapToFormData(
             $contentTypeDraft,
             [
                 'language' => $language,

@@ -194,7 +194,6 @@
 {% endblock %}
 
 {% block ezselection_field_definition_edit %}
-    {% set is_translation = is_translation ?? false %}
     <div class="ezselection-settings is-multiple{% if group_class is not empty %} {{ group_class }}{% endif %}">
         {{- form_row(form.isMultiple, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
     </div>
@@ -209,8 +208,7 @@
                 <li class="ezselection-settings-option-value ez-selection-table-row mb-2 d-flex align-items-center">
                     <input
                         type="checkbox"
-                        class="ezselection-settings-option-checkbox ez-selection-table-checkbox"
-                        {{ is_translation ? 'disabled' : '' }}>
+                        class="ezselection-settings-option-checkbox ez-selection-table-checkbox">
                     {{ form_errors(option) }}
                     {{ form_widget(option, { 'attr': { 'class': 'form-control ml-1 mb-0'}}) }}
                 </li>
@@ -229,8 +227,7 @@
         <div class="ezselection-settings-toolbar">
             <button
                 type="button"
-                class="ezselection-settings-option-add ez-font-icon ez-button btn btn-secondary ez-button-add pure-button"
-                {{ is_translation ? 'disabled' : '' }}>
+                class="ezselection-settings-option-add ez-font-icon ez-button btn btn-secondary ez-button-add pure-button">
                 {{ "field_definition.ezselection.add_option"|trans({}, "ezrepoforms_content_type")|desc("Add an option") }}
             </button>
             <button
