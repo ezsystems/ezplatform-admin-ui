@@ -22,7 +22,9 @@
             margin: 0 calculateRem(6px);
             height: calculateRem(40px);
             width: calculateRem(40px);
-            padding-top: calculateRem(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             .ez-icon {
                 width: calculateRem(24px);
