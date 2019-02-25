@@ -127,6 +127,7 @@
                         {{ form_row(form_state_update[objectState.objectStateGroup.id].contentInfo) }}
                         {{ form_row(form_state_update[objectState.objectStateGroup.id].objectStateGroup) }}
                         {{ form_row(form_state_update[objectState.objectStateGroup.id].objectState, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
+                        {% do form_state_update[objectState.objectStateGroup.id].set.setRendered %}
                     {{ form_end(form_state_update[objectState.objectStateGroup.id]) }}
                 {% endif %}
             </td>
