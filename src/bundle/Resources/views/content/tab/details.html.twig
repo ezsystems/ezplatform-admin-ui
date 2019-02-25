@@ -85,6 +85,7 @@
                         }
                     }) }}
                     {{ form_row(form_assign_section.section, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
+                    {% do form_assign_section.assign.setRendered() %}
                     {{ form_end(form_assign_section) }}
                 {% endif %}
             </td>
@@ -148,5 +149,6 @@
     {{ form_label(form_location_update.sort_order, 'tab.details.sub_items_listing_by.in'|trans|desc('in')) }}
     {{ form_widget(form_location_update.sort_order, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
 
+    {% do form_location_update.update.setRendered() %}
     {{ form_end(form_location_update) }}
 </div>

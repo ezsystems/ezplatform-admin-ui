@@ -12,6 +12,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,7 +28,10 @@ class LocationAssignSectionType extends AbstractType
                 'label' => false,
                 'multiple' => false,
             ])
-            ->add('location', LocationType::class);
+            ->add('location', LocationType::class)
+            ->add('assign', SubmitType::class, [
+                'label' => /** @Desc("Change section") */ 'section_subtree_assign_form.assign',
+            ]);
     }
 
     /**

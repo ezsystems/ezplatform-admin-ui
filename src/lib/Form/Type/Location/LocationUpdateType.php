@@ -13,6 +13,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortFieldChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortOrderChoiceType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -35,6 +36,11 @@ class LocationUpdateType extends AbstractType
                 'sort_order',
                 SortOrderChoiceType::class,
                 ['label' => /** @Desc("Sort order") */ 'location_update_form.sort_order']
+            )
+            ->add(
+                'update',
+                SubmitType::class,
+                ['label' => /** @Desc("Update") */ 'location_update_form.update']
             )
         ;
     }
