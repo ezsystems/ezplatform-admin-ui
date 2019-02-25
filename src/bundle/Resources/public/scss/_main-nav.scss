@@ -7,7 +7,7 @@
     }
 
     .navbar-brand {
-        margin-top: .3125rem;
+        padding-top: 0;
     }
 
     .nav-tabs {
@@ -19,10 +19,10 @@
             padding: 1rem 2rem;
             color: $ez-black;
             display: flex;
-            transition: all .3s $ez-admin-transition;
+            transition: all 0.3s $ez-admin-transition;
 
             .ez-icon {
-                margin-right: .5rem;
+                margin-right: 0.5rem;
             }
 
             &:hover {
@@ -42,11 +42,11 @@
 .ez-main-sub-nav {
     background-color: $white;
     padding: 0;
-    font-size: .875rem;
+    font-size: 0.875rem;
 
     .navbar-nav {
         .nav-link {
-            padding: .625rem 1rem;
+            padding: 0.625rem 1rem;
             color: $ez-black;
 
             &.active {

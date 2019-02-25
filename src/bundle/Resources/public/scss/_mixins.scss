@@ -192,10 +192,11 @@
     cursor: pointer;
     transition: background 0.3s $ez-admin-transition;
     text-align: center;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .ez-icon {
-        margin-top: 7px;
         height: 1.5rem;
         width: 1.5rem;
     }
