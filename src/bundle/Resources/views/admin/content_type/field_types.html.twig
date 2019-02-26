@@ -139,7 +139,7 @@
                 |desc("Select item") }}</button>
         </div>
         <div id="{{ form.selectionRoot.vars.id }}-selected-root-name">
-            {% if form.selectionRoot.vars.value is not empty %}
+            {% if form.selectionRoot.vars.destination_location is not null %}
                 {{ render( controller( "ez_content:viewLocation", {'locationId': form.selectionRoot.vars.value, 'viewType': '_platformui_content_name'} ) ) }}
             {% endif %}
         </div>
@@ -169,7 +169,7 @@
                 |desc("Select location") }}</button>
         </div>
         <div id="{{ form.selectionDefaultLocation.vars.id }}-selected-root-name">
-            {% if form.selectionDefaultLocation.vars.value is not empty %}
+            {% if form.selectionDefaultLocation.vars.destination_location is not null %}
                 {{ render( controller( "ez_content:viewLocation", {'locationId': form.selectionDefaultLocation.vars.value, 'viewType': '_platformui_content_name'} ) ) }}
             {% endif %}
         </div>
