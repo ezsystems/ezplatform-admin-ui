@@ -312,7 +312,7 @@ export default class EzBtnLinkEdit extends Component {
                         onClick={this.saveLink.bind(this)}
                         title={saveLabel}>
                         <svg className="ez-icon ez-btn-ae__icon">
-                            <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#link" />
+                            <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#checkmark" />
                         </svg>
                     </button>
                 </div>

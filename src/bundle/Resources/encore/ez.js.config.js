@@ -22,6 +22,8 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/admin.form.autosubmit.js'),
 ];
 const alloyEditor = [
+    path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-anchor.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-anchoredit.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-paragraph.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-heading.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-movedown.js'),

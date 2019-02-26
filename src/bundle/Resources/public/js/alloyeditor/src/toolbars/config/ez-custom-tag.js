@@ -8,6 +8,7 @@ export default class EzCustomTagConfig extends EzConfigBase {
             'ezmoveup',
             'ezmovedown',
             `${config.name}edit`,
+            'ezanchor',
             'ezembedleft',
             'ezembedcenter',
             'ezembedright',

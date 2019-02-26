@@ -130,6 +130,10 @@
             headers.forEach((header) => header.remove());
         }
 
+        clearAnchorIcon(icon) {
+            icon.remove();
+        }
+
         init(container) {
             const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
                 toolbars: {
@@ -186,6 +190,7 @@
                     ...doc.querySelectorAll('[data-ezelement="ezembedinline"]'),
                 ].forEach(this.emptyEmbed);
                 [...doc.querySelectorAll('[data-ezelement="eztemplate"]:not([data-eztype="style"])')].forEach(this.clearCustomTag);
+                [...doc.querySelectorAll('.ez-icon--anchor')].forEach(this.clearAnchorIcon);
 
                 container.closest('.ez-data-source').querySelector('textarea').value = this.xhtmlify(root.innerHTML).replace(
                     this.xhtmlNamespace,
@@ -197,10 +202,20 @@
                 section.appendChild(document.createElement('p'));
             }
 
+            section.querySelectorAll('.ez-has-anchor').forEach((element) => {
+                const icon = `
+                    <svg class="ez-icon ez-icon--small ez-icon--secondary ez-icon--anchor">
+                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#link-anchor"></use>
+                    </svg>`;
+
+                element.insertAdjacentHTML('afterbegin', icon);
+            });
+
             nativeEditor.setData(section.innerHTML);
 
             nativeEditor.on('blur', saveRichText);
             nativeEditor.on('change', saveRichText);
+            nativeEditor.on('customUpdate', saveRichText);
             nativeEditor.on('editorInteraction', saveRichText);
 
             return alloyEditor;

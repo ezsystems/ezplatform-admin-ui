@@ -11,6 +11,7 @@ export default class EzEmbedImageConfig extends EzConfigBase {
             'ezimageupdate',
             'ezimagevariation',
             'ezimagelink',
+            'ezanchor',
             'ezembedleft',
             'ezembedcenter',
             'ezembedright',
