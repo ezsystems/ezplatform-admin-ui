@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Module\ContentTree;
 
+use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
@@ -110,8 +111,8 @@ final class NodeFactory
             $contentType->identifier,
             $contentType->isContainer,
             $location->invisible,
-            $totalChildrenCount,
             $numberOfSubitemsToLoad,
+            $totalChildrenCount,
             $children
         );
     }
@@ -151,6 +152,12 @@ final class NodeFactory
 
         $searchQuery->limit = $limit;
         $searchQuery->offset = $offset;
+
+        try {
+            $searchQuery->sortClauses = $parentLocation->getSortClauses();
+        } catch (NotImplementedException $e) {
+            $searchQuery->sortClauses = []; // rely on storage engine default sorting
+        }
 
         return $this->searchService->findLocations($searchQuery);
     }

@@ -20,20 +20,17 @@ class LoadSubtreeRequest extends BaseParser
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): LoadSubtreeRequestValue
     {
-        if (!array_key_exists('elements', $data) || !is_array($data['elements'])) {
+        if (!array_key_exists('nodes', $data) || !is_array($data['nodes'])) {
             throw new Exceptions\Parser(
-                sprintf("Missing or invalid 'elements' property for %s.", self::class)
+                sprintf("Missing or invalid 'nodes' property for %s.", self::class)
             );
         }
 
-        $elements = [];
-        foreach ($data['elements'] as $element) {
-            $elements[] = $parsingDispatcher->parse(
-                $element,
-                'application/vnd.ez.api.internal.ContentTree.LoadSubtreeRequestNode'
-            );
+        $nodes = [];
+        foreach ($data['nodes'] as $node) {
+            $nodes[] = $parsingDispatcher->parse($node, $data['_media-type']);
         }
 
-        return new LoadSubtreeRequestValue($elements);
+        return new LoadSubtreeRequestValue($nodes);
     }
 }

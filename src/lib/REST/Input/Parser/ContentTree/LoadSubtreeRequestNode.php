@@ -41,7 +41,7 @@ class LoadSubtreeRequestNode extends BaseParser
 
         $children = array_map(
             function (array $child) use ($parsingDispatcher): LoadSubtreeRequestNodeValue {
-                return $parsingDispatcher->parse($child, 'application/vnd.ez.api.internal.ContentTree.LoadSubtreeRequestNode');
+                return $parsingDispatcher->parse($child, $child['_media-type']);
             },
             $data['children']
         );

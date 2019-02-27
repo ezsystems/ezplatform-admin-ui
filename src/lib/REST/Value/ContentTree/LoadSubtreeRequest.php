@@ -13,13 +13,13 @@ use eZ\Publish\Core\REST\Common\Value as RestValue;
 class LoadSubtreeRequest extends RestValue
 {
     /** @var \EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode[] */
-    public $elements;
+    public $nodes;
 
     /**
-     * @param array $elements
+     * @param array $nodes
      */
-    public function __construct(array $elements = [])
+    public function __construct(array $nodes = [])
     {
-        $this->elements = $elements;
+        $this->nodes = $nodes;
     }
 }
