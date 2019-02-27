@@ -2,6 +2,8 @@
     const KEY_CONTENT_TREE_EXPANDED = 'ez-content-tree-expanded';
     const CLASS_CONTENT_TREE_EXPANDED = 'ez-content-tree-container--expanded';
     const CLASS_BTN_CONTENT_TREE_EXPANDED = 'ez-btn--content-tree-expanded';
+    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const contentTreeContainer = doc.querySelector('.ez-content-tree-container');
     const btn = doc.querySelector('.ez-btn--toggle-content-tree');
     const toggleContentTreePanel = () => {
@@ -14,6 +16,7 @@
     ReactDOM.render(
         React.createElement(eZ.modules.ContentTree, {
             currentLocationId: parseInt(contentTreeContainer.dataset.currentLocationId, 10),
+            restInfo: { token, siteaccess },
         }),
         contentTreeContainer
     );
