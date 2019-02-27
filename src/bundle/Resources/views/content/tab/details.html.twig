@@ -4,133 +4,142 @@
 
 {% form_theme form_location_update '@ezdesign/form_fields.html.twig' %}
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>{{ 'tab.details.creator'|trans()|desc('Creator') }}</th>
-        <th>{{ 'tab.details.last_contributor'|trans()|desc('Last contributor') }}</th>
-        <th>{{ 'tab.details.published_version'|trans()|desc('Published version') }}</th>
-        <th>{{ 'tab.details.translations'|trans()|desc('Translations') }}</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-            {% if creator is not empty %}
-                {{ ez_content_name(creator) }}
-            {% else %}
-                {{ 'tab.details.creator.not_found'|trans|desc('Can’t fetch creator') }}
-            {% endif %}
-            ({{ contentInfo.publishedDate|localizeddate('medium', 'short', app.request.locale, ez_user_settings['timezone']) }})
-        </td>
-        <td>
-            {% if lastContributor is not empty %}
-                {{ ez_content_name(lastContributor) }}
-            {% else %}
-                {{ 'tab.details.last_contributor.not_found'|trans|desc('Can’t fetch last contributor') }}
-            {% endif %}
-            ({{ versionInfo.modificationDate|localizeddate('medium', 'short', app.request.locale, ez_user_settings['timezone']) }})
-        </td>
-        <td>{{ versionInfo.versionNo }}</td>
-        <td>
-            {% for translation in translations %}
-                {{ translation.name }}<br>
-            {% endfor %}
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.technical_details'|trans()|desc('Technical details') } %}
-
-<table class="table">
-    <thead>
-    <tr>
-        <th>{{ 'tab.details.content_id'|trans()|desc('Content ID') }}</th>
-        <th>{{ 'tab.details.location_id'|trans()|desc('Location ID') }}</th>
-        <th>{{ 'tab.details.content_remote_id'|trans()|desc('Content remote ID') }}</th>
-        <th>{{ 'tab.details.location_remote_id'|trans()|desc('Location remote ID') }}</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>{{ contentInfo.id }}</td>
-        <td>{{ location.id }}</td>
-        <td>{{ contentInfo.remoteId }}</td>
-        <td>{{ location.remoteId }}</td>
-    </tr>
-    </tbody>
-</table>
-{% if can_see_section %}
-    {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.section_details'|trans()|desc('Section details') } %}
-
+<div class="ez-scrollable-table-wrapper">
     <table class="table">
         <thead>
         <tr>
-            <th>{{ 'tab.details.section_name'|trans()|desc('Section name') }}</th>
-            <th>{{ 'tab.details.change_section'|trans()|desc('Change section') }}</th>
+            <th>{{ 'tab.details.creator'|trans()|desc('Creator') }}</th>
+            <th>{{ 'tab.details.last_contributor'|trans()|desc('Last contributor') }}</th>
+            <th>{{ 'tab.details.published_version'|trans()|desc('Published version') }}</th>
+            <th>{{ 'tab.details.translations'|trans()|desc('Translations') }}</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>{{ section.name }}</td>
             <td>
-                {% if form_assign_section %}
-                    {% form_theme form_assign_section '@ezdesign/form_fields.html.twig' %}
-
-                    {{ form_start(form_assign_section, {
-                        'action': path('ezplatform.location.assign_section'),
-                        'attr': {
-                            'class': 'form-inline ez-form-inline ez-form-inline--align-left'
-                        }
-                    }) }}
-                    {{ form_row(form_assign_section.section, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
-                    {% do form_assign_section.assign.setRendered() %}
-                    {{ form_end(form_assign_section) }}
+                {% if creator is not empty %}
+                    {{ ez_content_name(creator) }}
+                {% else %}
+                    {{ 'tab.details.creator.not_found'|trans|desc('Can’t fetch creator') }}
                 {% endif %}
+                ({{ contentInfo.publishedDate|localizeddate('medium', 'short', app.request.locale, ez_user_settings['timezone']) }})
+            </td>
+            <td>
+                {% if lastContributor is not empty %}
+                    {{ ez_content_name(lastContributor) }}
+                {% else %}
+                    {{ 'tab.details.last_contributor.not_found'|trans|desc('Can’t fetch last contributor') }}
+                {% endif %}
+                ({{ versionInfo.modificationDate|localizeddate('medium', 'short', app.request.locale, ez_user_settings['timezone']) }})
+            </td>
+            <td>{{ versionInfo.versionNo }}</td>
+            <td>
+                {% for translation in translations %}
+                    {{ translation.name }}<br>
+                {% endfor %}
             </td>
         </tr>
         </tbody>
     </table>
+</div>
+
+{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.technical_details'|trans()|desc('Technical details') } %}
+
+<div class="ez-scrollable-table-wrapper">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>{{ 'tab.details.content_id'|trans()|desc('Content ID') }}</th>
+            <th>{{ 'tab.details.location_id'|trans()|desc('Location ID') }}</th>
+            <th>{{ 'tab.details.content_remote_id'|trans()|desc('Content remote ID') }}</th>
+            <th>{{ 'tab.details.location_remote_id'|trans()|desc('Location remote ID') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ contentInfo.id }}</td>
+            <td>{{ location.id }}</td>
+            <td>{{ contentInfo.remoteId }}</td>
+            <td>{{ location.remoteId }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+{% if can_see_section %}
+    {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.section_details'|trans()|desc('Section details') } %}
+
+    <div class="ez-scrollable-table-wrapper">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>{{ 'tab.details.section_name'|trans()|desc('Section name') }}</th>
+                <th>{{ 'tab.details.change_section '|trans()|desc('Change section') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ section.name }}</td>
+                <td>
+                    {% if form_assign_section %}
+                        {% form_theme form_assign_section '@ezdesign/form_fields.html.twig' %}
+
+                        {{ form_start(form_assign_section, {
+                            'action': path('ezplatform.location.assign_section'),
+                            'attr': {
+                                'class': 'form-inline ez-form-inline ez-form-inline--align-left'
+                            }
+                        }) }}
+                        {{ form_row(form_assign_section.section, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
+                        {% do form_assign_section.assign.setRendered() %}
+                        {{ form_end(form_assign_section) }}
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 {% endif %}
 
 {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.state_details'|trans()|desc('State details') } %}
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>{{ 'tab.details.state_group_name'|trans()|desc('Group name') }}</th>
-        <th>{{ 'tab.details.state_name'|trans()|desc('Current object state') }}</th>
-        <th>{{ 'tab.details.change_state'|trans()|desc('Change state') }}</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for objectState in objectStates %}
+<div class="ez-scrollable-table-wrapper">
+    <table class="table">
+        <thead>
         <tr>
-            <td>{{ objectState.objectStateGroup.name }}</td>
-            <td>{{ objectState.name }}</td>
-            <td>
-                {% if can_assign and form_state_update[objectState.objectStateGroup.id].objectState.vars.choices|length != 0 %}
-                    {% form_theme form_state_update[objectState.objectStateGroup.id] '@ezdesign/form_fields.html.twig' %}
-                    {{ form_start(form_state_update[objectState.objectStateGroup.id], {
-                        'method': 'POST',
-                        'action': path('ezplatform.object_state.contentstate.update', {
-                            'contentInfoId': contentInfo.id,
-                            'objectStateGroupId': objectState.objectStateGroup.id
-                        }),
-                        'attr': {'class': 'form-inline ez-form-inline ez-form-inline--align-left'}
-                    }) }}
-                        {{ form_row(form_state_update[objectState.objectStateGroup.id].contentInfo) }}
-                        {{ form_row(form_state_update[objectState.objectStateGroup.id].objectStateGroup) }}
-                        {{ form_row(form_state_update[objectState.objectStateGroup.id].objectState, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
-                        {% do form_state_update[objectState.objectStateGroup.id].set.setRendered %}
-                    {{ form_end(form_state_update[objectState.objectStateGroup.id]) }}
-                {% endif %}
-            </td>
+            <th>{{ 'tab.details.state_group_name'|trans()|desc('Group name') }}</th>
+            <th>{{ 'tab.details.state_name'|trans()|desc('Current object state') }}</th>
+            <th>{{ 'tab.details.change_state'|trans()|desc('Change state') }}</th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        {% for objectState in objectStates %}
+            <tr>
+                <td>{{ objectState.objectStateGroup.name }}</td>
+                <td>{{ objectState.name }}</td>
+                <td>
+                    {% if can_assign and form_state_update[objectState.objectStateGroup.id].objectState.vars.choices|length != 0 %}
+                        {% form_theme form_state_update[objectState.objectStateGroup.id] '@ezdesign/form_fields.html.twig' %}
+                        {{ form_start(form_state_update[objectState.objectStateGroup.id], {
+                            'method': 'POST',
+                            'action': path('ezplatform.object_state.contentstate.update', {
+                                'contentInfoId': contentInfo.id,
+                                'objectStateGroupId': objectState.objectStateGroup.id
+                            }),
+                            'attr': {'class': 'form-inline ez-form-inline ez-form-inline--align-left'}
+                        }) }}
+                            {{ form_row(form_state_update[objectState.objectStateGroup.id].contentInfo) }}
+                            {{ form_row(form_state_update[objectState.objectStateGroup.id].objectStateGroup) }}
+                            {{ form_row(form_state_update[objectState.objectStateGroup.id].objectState, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
+                            {% do form_state_update[objectState.objectStateGroup.id].set.setRendered %}
+                        {{ form_end(form_state_update[objectState.objectStateGroup.id]) }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% include '@ezdesign/parts/table_header.html.twig' with {
     headerText: 'tab.details.sub_items_sorting_order'|trans|desc('Sub-items sorting order'),

@@ -187,22 +187,24 @@
 {% block ezuser_field %}
 {% spaceless %}
 {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezuser')|trim}) %}
-<table {{ block( 'field_attributes' ) }}>
-    <tbody>
-        <tr>
-            <td class="ez-user__type">{{ 'ezuser.username'|trans|desc('Username') }}:</td>
-            <td>{{ field.value.login }}</td>
-        </tr>
-        <tr>
-            <td class="ez-user__type">{{ 'ezuser.email'|trans|desc('Email') }}:</td>
-            <td><a href="mailto:{{ field.value.email|escape( 'url' ) }}">{{ field.value.email }}</a></td>
-        </tr>
-        <tr>
-            <td class="ez-user__type">{{ 'ezuser.enabled'|trans|desc('Enabled') }}:</td>
-            <td>{{ field.value.enabled ? 'ezuser.yes'|trans|desc('Yes') : 'ezuser.no'|trans|desc('No') }}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="ez-scrollable-table-wrapper mb-0">
+    <table {{ block( 'field_attributes' ) }}>
+        <tbody>
+            <tr>
+                <td class="ez-user__type">{{ 'ezuser.username'|trans|desc('Username') }}:</td>
+                <td>{{ field.value.login }}</td>
+            </tr>
+            <tr>
+                <td class="ez-user__type">{{ 'ezuser.email'|trans|desc('Email') }}:</td>
+                <td><a href="mailto:{{ field.value.email|escape( 'url' ) }}">{{ field.value.email }}</a></td>
+            </tr>
+            <tr>
+                <td class="ez-user__type">{{ 'ezuser.enabled'|trans|desc('Enabled') }}:</td>
+                <td>{{ field.value.enabled ? 'ezuser.yes'|trans|desc('Yes') : 'ezuser.no'|trans|desc('No') }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endspaceless %}
 {% endblock %}
 
@@ -244,42 +246,48 @@
         or type == "quick_time"
         or type == "windows_media_player"
         or type == "real_player" %}
-        <video src="{{ download }}" width="50%" height="100%" controls>
-            {{ 'ezmedia.browser_does_not_support_html5_video'|trans|desc('Your browser does not support HTML5 video') }}
-        </video>
-        <table>
-            <thead>
-                <tr>
-                    <th>{{ 'ezmedia.video_file_properties'|trans|desc('Video file properties') }}:</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ 'ezmedia.file_name'|trans|desc('File name') }}:</td>
-                    <td>{{ value.fileName }}</td>
-                </tr>
-                <tr>
-                    <td>{{ 'ezmedia.type'|trans|desc('Type') }}:</td>
-                    <td>{{ value.mimeType }}</td>
-                </tr>
-                <tr>
-                    <td>{{ 'ezmedia.size'|trans|desc('Size') }}:</td>
-                    <td>{{ value.fileSize|ez_file_size( 1 ) }}</td>
-                </tr>
-                <tr>
-                    <td>{{ 'ezmedia.display_controls'|trans|desc('Display controls') }}:</td>
-                    <td>{{hasController}}</td>
-                </tr>
-                <tr>
-                    <td>{{ 'ezmedia.auto_play'|trans|desc('Auto play') }}:</td>
-                    <td>{{autoplay}}</td>
-                </tr>
-                <tr>
-                    <td>{{ 'ezmedia.loop'|trans|desc('Loop') }}:</td>
-                    <td>{{loop}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="ez-field-preview__media">
+            <div class="ez-field-preview__video-wrapper">
+                <video src="{{ download }}" width="100%" controls>
+                    {{ 'ezmedia.browser_does_not_support_html5_video'|trans|desc('Your browser does not support HTML5 video') }}
+                </video>
+            </div>
+        </div>
+        <div class="ez-field-preview__media-meta">
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{ 'ezmedia.video_file_properties'|trans|desc('Video file properties') }}:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ 'ezmedia.file_name'|trans|desc('File name') }}:</td>
+                        <td>{{ value.fileName }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezmedia.type'|trans|desc('Type') }}:</td>
+                        <td>{{ value.mimeType }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezmedia.size'|trans|desc('Size') }}:</td>
+                        <td>{{ value.fileSize|ez_file_size( 1 ) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezmedia.display_controls'|trans|desc('Display controls') }}:</td>
+                        <td>{{hasController}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezmedia.auto_play'|trans|desc('Auto play') }}:</td>
+                        <td>{{autoplay}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezmedia.loop'|trans|desc('Loop') }}:</td>
+                        <td>{{loop}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     {% endif %}
     {% endautoescape %}
     </div>
@@ -295,20 +303,22 @@
         <div class="ez-table-header ">
             <div class="ez-table-header__headline">{{ 'ezobjectrelationlist.multiple_relations'|trans|desc('Multiple relations') }}:</div>
         </div>
-        <table class="table">
-            <thead>
+        <div class="ez-scrollable-table-wrapper mb-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>{{ 'ezobjectrelationlist.name'|trans|desc('Name') }}</th>
+                        <th>{{ 'ezobjectrelationlist.content_type'|trans|desc('Content Type') }}</th>
+                        <th>{{ 'ezobjectrelationlist.created'|trans|desc('Created') }}</th>
+                    </tr>
+                </thead>
+                {% for contentId in field.value.destinationContentIds %}
                 <tr>
-                    <th>{{ 'ezobjectrelationlist.name'|trans|desc('Name') }}</th>
-                    <th>{{ 'ezobjectrelationlist.content_type'|trans|desc('Content Type') }}</th>
-                    <th>{{ 'ezobjectrelationlist.created'|trans|desc('Created') }}</th>
+                    {{ render(controller('ez_content:viewAction', {'contentId': contentId, 'viewType': 'preview_ezobjectrelationlist_row', 'layout': false})) }}
                 </tr>
-            </thead>
-            {% for contentId in field.value.destinationContentIds %}
-            <tr>
-                {{ render(controller('ez_content:viewAction', {'contentId': contentId, 'viewType': 'preview_ezobjectrelationlist_row', 'layout': false})) }}
-            </tr>
-            {% endfor %}
-        </table>
+                {% endfor %}
+            </table>
+        </div>
     </div>
     {% endif %}
 {% endspaceless %}
@@ -322,28 +332,32 @@
     {% set longitude = field.value.longitude %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezgmaplocation')|trim}) %}
     <div {{ block( 'field_attributes' ) }}>
-        <div class="ez-gmaplocation__map"  data-longitude="{{ longitude }}" data-latitude="{{ latitude }}"></div>
-        <table>
-            <thead>
-                <tr>
-                    <th>{{ 'ezgmaplocation.location_properties'|trans|desc('Location properties') }}:</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ 'ezgmaplocation.address'|trans|desc('Address') }}:</td>
-                    <td>{{ field.value.address }}</td>
-                </tr>
-                <tr>
-                    <td>{{ 'ezgmaplocation.latitude'|trans|desc('Latitude') }}:</td>
-                    <td>{{ field.value.latitude }}</td>
-                </tr>
-                <tr>
-                    <td>{{ 'ezgmaplocation.longitude'|trans|desc('Longitude') }}:</td>
-                    <td>{{ field.value.longitude }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="ez-field-preview__map-wrapper">
+            <div class="ez-gmaplocation__map"  data-longitude="{{ longitude }}" data-latitude="{{ latitude }}"></div>
+        </div>
+        <div class="ez-field-preview__map-meta">
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{ 'ezgmaplocation.location_properties'|trans|desc('Location properties') }}:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ 'ezgmaplocation.address'|trans|desc('Address') }}:</td>
+                        <td>{{ field.value.address }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezgmaplocation.latitude'|trans|desc('Latitude') }}:</td>
+                        <td>{{ field.value.latitude }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezgmaplocation.longitude'|trans|desc('Longitude') }}:</td>
+                        <td>{{ field.value.longitude }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 {% endif %}
@@ -357,38 +371,42 @@
 {% set src = imageAlias ? asset( imageAlias.uri ) : "//:0" %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezimage')|trim}) %}
 <div {{ block( 'field_attributes' ) }}>
-    <div class="ez-image__wrapper">
-        <img src="{{ src }}">
+    <div class="ez-field-preview__image-wrapper">
+        <div class="ez-field-preview__image">
+            <img src="{{ src }}">
+        </div>
+        <div class="ez-field-preview__image-meta">
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{ 'ezimage.image_file_properties'|trans|desc('Image file properties') }}:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ 'ezimage.file_name'|trans|desc('File name') }}:</td>
+                        <td>{{ field.value.fileName }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezimage.size'|trans|desc('Size') }}:</td>
+                        <td>{{ field.value.fileSize|ez_file_size( 1 ) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezimage.alternative_text'|trans|desc('Alternative text') }}:</td>
+                        <td>{{ field.value.alternativeText }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezimage.master_dimensions'|trans|desc('Master dimensions') }}:</td>
+                        <td>{{ 'ezimage.width_and_height'|trans({'%width%': field.value.width, '%height%': field.value.height})|desc('%width%px Width - %height%px Height') }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'ezimage.ratio'|trans|desc('Ratio') }}:</td>
+                        <td>{{ (field.value.width/field.value.height)|round(2) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <table class="ez-field-preview__image-meta">
-        <thead>
-            <tr>
-                <th>{{ 'ezimage.image_file_properties'|trans|desc('Image file properties') }}:</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ 'ezimage.file_name'|trans|desc('File name') }}:</td>
-                <td>{{ field.value.fileName }}</td>
-            </tr>
-            <tr>
-                <td>{{ 'ezimage.size'|trans|desc('Size') }}:</td>
-                <td>{{ field.value.fileSize|ez_file_size( 1 ) }}</td>
-            </tr>
-            <tr>
-                <td>{{ 'ezimage.alternative_text'|trans|desc('Alternative text') }}:</td>
-                <td>{{ field.value.alternativeText }}</td>
-            </tr>
-            <tr>
-                <td>{{ 'ezimage.master_dimensions'|trans|desc('Master dimensions') }}:</td>
-                <td>{{ 'ezimage.width_and_height'|trans({'%width%': field.value.width, '%height%': field.value.height})|desc('%width%px Width - %height%px Height') }}</td>
-            </tr>
-            <tr>
-                <td>{{ 'ezimage.ratio'|trans|desc('Ratio') }}:</td>
-                <td>{{ (field.value.width/field.value.height)|round(2) }}</td>
-            </tr>
-        </tbody>
-    </table>
     <div class="ez-field-preview__actions-wrapper">
         <a class="ez-field-preview__action ez-field-preview__action--preview" href="{{ field.value.uri }}" target="_blank">
             <svg class="ez-icon ez-icon--medium ez-icon--light">
@@ -429,18 +447,20 @@
         <div class="ez-table-header ">
             <div class="ez-table-header__headline">{{ 'ezobjectrelation.single_relation'|trans|desc('Single relation') }}:</div>
         </div>
-        <table class="table">
-            <thead>
+        <div class="ez-scrollable-table-wrapper mb-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>{{ 'ezobjectrelation.name'|trans|desc('Name') }}</th>
+                        <th>{{ 'ezobjectrelation.content_type'|trans|desc('Content Type') }}</th>
+                        <th>{{ 'ezobjectrelation.created'|trans|desc('Created') }}</th>
+                    </tr>
+                </thead>
                 <tr>
-                    <th>{{ 'ezobjectrelation.name'|trans|desc('Name') }}</th>
-                    <th>{{ 'ezobjectrelation.content_type'|trans|desc('Content Type') }}</th>
-                    <th>{{ 'ezobjectrelation.created'|trans|desc('Created') }}</th>
+                    {{ render(controller('ez_content:viewAction', {'contentId': field.value.destinationContentId, 'viewType': 'preview_ezobjectrelationlist_row', 'layout': false})) }}
                 </tr>
-            </thead>
-            <tr>
-                {{ render(controller('ez_content:viewAction', {'contentId': field.value.destinationContentId, 'viewType': 'preview_ezobjectrelationlist_row', 'layout': false})) }}
-            </tr>
-        </table>
+            </table>
+        </div>
     </div>
 {% endif %}
 {% endspaceless %}

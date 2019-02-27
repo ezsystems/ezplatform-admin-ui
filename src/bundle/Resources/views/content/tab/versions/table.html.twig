@@ -4,110 +4,112 @@
 {% set is_archived = is_archived is defined and is_archived %}
 {% set is_draft_conflict = is_draft_conflict is defined and is_draft_conflict %}
 
-<table class="table {% if is_draft and haveToPaginate %} mb-3 {% endif %} {% if is_draft_conflict %} ez-table__draft-conflict {% endif %}">
-    <thead>
-    <tr>
-        {% if form is defined %}
-            <th></th>
-        {% endif %}
-        <th>{{ 'tab.versions.table.version'|trans()|desc('Version') }}</th>
-        <th>{{ 'tab.versions.table.modified_language'|trans()|desc('Modified language') }}</th>
-        {% block custom_column_headers %}{% endblock %}
-        <th>{{ 'tab.versions.table.contributor'|trans()|desc('Contributor') }}</th>
-        {% if not is_draft_conflict %}
-        <th>{{ 'tab.versions.table.created'|trans()|desc('Created') }}</th>
-        {% endif %}
-        <th>{{ 'tab.versions.table.last_saved'|trans()|desc('Last saved') }}</th>
-        {% if is_draft or is_archived %}
-            <th></th>
-        {% endif %}
-    </tr>
-    </thead>
-    <tbody>
-    {% for version in versions %}
-
-        {% set edit_url = content_is_user is defined and content_is_user ?
-            path('ez_user_update', {
-            'contentId': version.contentInfo.id,
-            'versionNo': version.versionNo,
-            'language': version.translations[0].languageCode,
-        }) : path('ez_content_draft_edit', {
-            'contentId': version.contentInfo.id,
-            'versionNo': version.versionNo,
-            'language': version.translations[0].languageCode,
-            'locationId': location.id
-        })
-        %}
-
+<div class="ez-scrollable-table-wrapper">
+    <table class="table {% if is_draft and haveToPaginate %} mb-3 {% endif %} {% if is_draft_conflict %} ez-table__draft-conflict {% endif %}">
+        <thead>
         <tr>
             {% if form is defined %}
-                <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form.versions[version.versionNo], {'attr': {'disabled': not version.canDelete}}) }}</td>
+                <th></th>
             {% endif %}
-            <td class="ez-table__cell">
-                {{ version.versionNo }}
-            </td>
-            <td class="ez-table__cell">
-                {{ admin_ui_config.languages.mappings[version.initialLanguageCode].name }}
-            </td>
-            {% block custom_columns %}{% endblock %}
-            <td class="ez-table__cell">
-                {% if version.author is not empty %}
-                    {{ ez_content_name(version.author) }}
-                {% else %}
-                    {{ 'tab.versions.table.author.not_found'|trans|desc('Can’t fetch contributor') }}
-                {% endif %}
-            </td>
+            <th>{{ 'tab.versions.table.version'|trans()|desc('Version') }}</th>
+            <th>{{ 'tab.versions.table.modified_language'|trans()|desc('Modified language') }}</th>
+            {% block custom_column_headers %}{% endblock %}
+            <th>{{ 'tab.versions.table.contributor'|trans()|desc('Contributor') }}</th>
             {% if not is_draft_conflict %}
-            <td class="ez-table__cell">
-                {{ version.creationDate|localizeddate('medium', 'short', app.request.locale, ez_user_settings['timezone']) }}
-            </td>
+            <th>{{ 'tab.versions.table.created'|trans()|desc('Created') }}</th>
             {% endif %}
-            <td class="ez-table__cell">
-                {{ version.modificationDate|localizeddate('medium', 'short', app.request.locale, ez_user_settings['timezone']) }}
-            </td>
-            {% if is_draft_conflict %}
-                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
-                    {% set edit_draft_disabled = version.author.id != admin_ui_config.user.user.id %}
-                    <a href="{{ edit_url }}"
-                       class="btn btn-icon {% if edit_draft_disabled %}ez-btn--prevented{% endif %}"
-                       title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}"
-                       {% if edit_draft_disabled %}disabled{% endif %}>
-                        <svg class="ez-icon ez-icon-edit">
-                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-                        </svg>
-                    </a>
-                </td>
-            {% elseif is_draft %}
-                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
-                    <button
-                        data-content-draft-edit-url="{{ edit_url }}"
-                        data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
-                            'contentId': version.contentInfo.id,
-                            'versionNo': version.versionNo,
-                            'languageCode': version.translations[0].languageCode
-                        }) }}"
-                        class="btn btn-icon mx-2 ez-btn--content-draft-edit"
-                        title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}">
-                        <svg class="ez-icon ez-icon-edit">
-                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-                        </svg>
-                    </button>
-                </td>
-            {% endif %}
-            {% if is_archived %}
-                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
-                    <button class="btn btn-icon mx-2 ez-btn--content-edit"
-                            title="{{ 'tab.versions.table.action.archived.edit'|trans|desc('Restore Archived Version') }}"
-                            data-content-id="{{ version.contentInfo.id }}"
-                            data-version-no="{{ version.versionNo }}"
-                            data-language-code="{{ version.initialLanguageCode }}">
-                        <svg class="ez-icon ez-icon-edit">
-                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#archive-restore"></use>
-                        </svg>
-                    </button>
-                </td>
+            <th>{{ 'tab.versions.table.last_saved'|trans()|desc('Last saved') }}</th>
+            {% if is_draft or is_archived %}
+                <th></th>
             {% endif %}
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        {% for version in versions %}
+
+            {% set edit_url = content_is_user is defined and content_is_user ?
+                path('ez_user_update', {
+                'contentId': version.contentInfo.id,
+                'versionNo': version.versionNo,
+                'language': version.translations[0].languageCode,
+            }) : path('ez_content_draft_edit', {
+                'contentId': version.contentInfo.id,
+                'versionNo': version.versionNo,
+                'language': version.translations[0].languageCode,
+                'locationId': location.id
+            })
+            %}
+
+            <tr>
+                {% if form is defined %}
+                    <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form.versions[version.versionNo], {'attr': {'disabled': not version.canDelete}}) }}</td>
+                {% endif %}
+                <td class="ez-table__cell">
+                    {{ version.versionNo }}
+                </td>
+                <td class="ez-table__cell">
+                    {{ admin_ui_config.languages.mappings[version.initialLanguageCode].name }}
+                </td>
+                {% block custom_columns %}{% endblock %}
+                <td class="ez-table__cell">
+                    {% if version.author is not empty %}
+                        {{ ez_content_name(version.author) }}
+                    {% else %}
+                        {{ 'tab.versions.table.author.not_found'|trans|desc('Can’t fetch contributor') }}
+                    {% endif %}
+                </td>
+                {% if not is_draft_conflict %}
+                <td class="ez-table__cell">
+                    {{ version.creationDate|localizeddate('medium', 'short', app.request.locale, ez_user_settings['timezone']) }}
+                </td>
+                {% endif %}
+                <td class="ez-table__cell">
+                    {{ version.modificationDate|localizeddate('medium', 'short', app.request.locale, ez_user_settings['timezone']) }}
+                </td>
+                {% if is_draft_conflict %}
+                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                        {% set edit_draft_disabled = version.author.id != admin_ui_config.user.user.id %}
+                        <a href="{{ edit_url }}"
+                            class="btn btn-icon {% if edit_draft_disabled %}ez-btn--prevented{% endif %}"
+                            title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}"
+                            {% if edit_draft_disabled %}disabled{% endif %}>
+                            <svg class="ez-icon ez-icon-edit">
+                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                            </svg>
+                        </a>
+                    </td>
+                {% elseif is_draft %}
+                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                        <button
+                            data-content-draft-edit-url="{{ edit_url }}"
+                            data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
+                                'contentId': version.contentInfo.id,
+                                'versionNo': version.versionNo,
+                                'languageCode': version.translations[0].languageCode
+                            }) }}"
+                            class="btn btn-icon mx-2 ez-btn--content-draft-edit"
+                            title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}">
+                            <svg class="ez-icon ez-icon-edit">
+                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                            </svg>
+                        </button>
+                    </td>
+                {% endif %}
+                {% if is_archived %}
+                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                        <button class="btn btn-icon mx-2 ez-btn--content-edit"
+                                title="{{ 'tab.versions.table.action.archived.edit'|trans|desc('Restore Archived Version') }}"
+                                data-content-id="{{ version.contentInfo.id }}"
+                                data-version-no="{{ version.versionNo }}"
+                                data-language-code="{{ version.initialLanguageCode }}">
+                            <svg class="ez-icon ez-icon-edit">
+                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#archive-restore"></use>
+                            </svg>
+                        </button>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

@@ -1,9 +1,11 @@
 .ez-content-view {
     .ez-content-container {
         display: flex;
+        min-width: 0;
     }
 
     .ez-content-tree-container {
+        flex: 0 0 auto;
         max-width: 0;
         position: relative;
         background: $ez-white;
@@ -19,6 +21,7 @@
 
     .ez-location-view-container {
         flex: 1 1 auto;
+        min-width: 0;
     }
 
     &.ez-is-tree-resizing {

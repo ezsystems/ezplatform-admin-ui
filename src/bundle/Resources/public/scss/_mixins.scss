@@ -1,3 +1,5 @@
+@import 'mixins/image-preview';
+
 @mixin checkbox-icon() {
     border: 2px solid $ez-color-secondary;
     padding: 4px;
