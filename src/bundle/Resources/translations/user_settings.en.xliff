@@ -61,25 +61,35 @@
         <target state="new">Sub-items</target>
         <note>key: settings.subitems_limit.value.title</note>
       </trans-unit>
-      <trans-unit id="9168385babd54c4c04f7a322ceb2d75769cab6f1" resname="settings.characters_counter.value.description">
-        <source><![CDATA[Displays count of characters typed in Online Editor]]></source>
-        <target state="new"><![CDATA[Displays count of characters typed in Online Editor]]></target>
-        <note>key: settings.characters_counter.value.description</note>
+      <trans-unit id="98400a7e546231a994f6fea03dce3ebd52c1c33d" resname="settings.character_counter.value.description">
+        <source><![CDATA[Display character count for Online Editor]]></source>
+        <target state="new"><![CDATA[Display character count for Online Editor]]></target>
+        <note>key: settings.character_counter.value.description</note>
       </trans-unit>
-      <trans-unit id="b3936bd1f02c5c7704f72e8afa2a6096dacbf4ad" resname="settings.characters_counter.value.enabled">
+      <trans-unit id="fd6ba122727aeacdb3e8c1c02d3e9ae023ca2174" resname="settings.character_counter.value.enabled">
         <source>enabled</source>
-        <target state="new">enabled</target>
-        <note>key: settings.characters_counter.value.enabled</note>
+        <target state="new">Enabled</target>
+        <note>key: settings.character_counter.value.enabled</note>
       </trans-unit>
-      <trans-unit id="5122bc753d4d4e665de276d8798656b0573d5078" resname="settings.characters_counter.value.disabled">
+      <trans-unit id="3d03b64f879f2c57cb9395f31c7691ecb7cc2807" resname="settings.character_counter.value.disabled">
         <source>disabled</source>
-        <target state="new">disabled</target>
-        <note>key: settings.characters_counter.value.disabled</note>
+        <target state="new">Disabled</target>
+        <note>key: settings.character_counter.value.disabled</note>
       </trans-unit>
-      <trans-unit id="590e07504a931ad88e8f7431d2ddb30f6ecef89d" resname="settings.characters_counter.value.title">
-        <source>Characters counter</source>
-        <target state="new">Characters counter</target>
-        <note>key: settings.characters_counter.value.title</note>
+      <trans-unit id="ca8c3eac8ffed6fed1ee9e028be185741f33bfec" resname="settings.character_counter.value.title">
+        <source>character counter</source>
+        <target state="new">Character counter</target>
+        <note>key: settings.character_counter.value.title</note>
+      </trans-unit>
+      <trans-unit id="4e0e12004096ce400ace603bc7177c044159b57b" resname="character_counter.words">
+        <source>words</source>
+        <target state="new">words</target>
+        <note>key: character_counter.words</note>
+      </trans-unit>
+      <trans-unit id="d69d746270269a4b3ff2a3ddca0a74086ef48ae6" resname="character_counter.characters">
+        <source>characters</source>
+        <target state="new">characters</target>
+        <note>key: character_counter.characters</note>
       </trans-unit>
       <trans-unit id="dac7ffb84bac8bc5a682388098bded0f8f49d841" resname="settings.timezone.value.description">
         <source><![CDATA[Time Zone in use for displaying Date & Time]]></source>

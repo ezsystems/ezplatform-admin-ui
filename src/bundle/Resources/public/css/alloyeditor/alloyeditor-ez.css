@@ -1059,14 +1059,17 @@ pre.ez-has-anchor > .ez-icon {
     line-height: 1;
 }
 
-.ez-characters-counter {
-  position: relative;
-  color: #fff;
-  background-color: #106d95;
-  font-size: 0.7rem;
-  padding: 0.2rem 0.3rem;
-  border-radius: 0.25rem;
-  margin-right: 0;
-  float: right;
-  margin-top: -1.4rem;
+.ez-character-counter {
+    position: relative;
+    width: 99.8%;
+    color: #696969;
+    background-color: #EDEDED;
+    font-size: 0.7rem;
+    margin: -1.54em auto 0 auto;
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.ez-character-counter span {
+    margin-left: 1em;
 }

@@ -23,7 +23,14 @@ services:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: subitems_limit }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: subitems_limit }
 
-    EzSystems\EzPlatformAdminUi\UserSetting\Setting\CharactersCounter:
+    EzSystems\EzPlatformAdminUi\UserSetting\Setting\Language:
+        arguments:
+            $availableLocaleChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\AvailableLocaleChoiceLoader'
         tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: characters_counter }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: characters_counter }
+            - { name: ezplatform.admin_ui.user_setting.value, identifier: language }
+            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: language }
+
+    EzSystems\EzPlatformAdminUi\UserSetting\Setting\CharacterCounter:
+        tags:
+            - { name: ezplatform.admin_ui.user_setting.value, identifier: character_counter }
+            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: character_counter }

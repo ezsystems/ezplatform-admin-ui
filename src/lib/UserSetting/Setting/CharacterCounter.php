@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class CharactersCounter implements ValueDefinitionInterface, FormMapperInterface
+class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
 {
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
@@ -87,8 +87,8 @@ class CharactersCounter implements ValueDefinitionInterface, FormMapperInterface
     private function getTranslatedName(): string
     {
         return $this->translator->trans(
-            /** @Desc("Characters counter") */
-            'settings.characters_counter.value.title',
+            /** @Desc("Character counter") */
+            'settings.character_counter.value.title',
             [],
             'user_settings'
         );
@@ -101,7 +101,7 @@ class CharactersCounter implements ValueDefinitionInterface, FormMapperInterface
     {
         return $this->translator->trans(
             /** @Desc("Displays count of characters typed in Online Editor") */
-            'settings.characters_counter.value.description',
+            'settings.character_counter.value.description',
             [],
             'user_settings'
         );
@@ -114,7 +114,7 @@ class CharactersCounter implements ValueDefinitionInterface, FormMapperInterface
     {
         return $this->translator->trans(
             /** @Desc("enabled") */
-            'settings.characters_counter.value.enabled',
+            'settings.character_counter.value.enabled',
             [],
             'user_settings'
         );
@@ -127,7 +127,7 @@ class CharactersCounter implements ValueDefinitionInterface, FormMapperInterface
     {
         return $this->translator->trans(
             /** @Desc("disabled") */
-            'settings.characters_counter.value.disabled',
+            'settings.character_counter.value.disabled',
             [],
             'user_settings'
         );

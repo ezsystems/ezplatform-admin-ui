@@ -84,7 +84,6 @@ final class NodeFactory
             ? $loadSubtreeRequestNode->offset
             : 0;
 
-
         $children = [];
         if ($depth < $this->maxDepth && $loadChildren) {
             $searchResult = $this->findSubitems($location, $limit, $offset);
