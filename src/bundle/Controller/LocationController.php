@@ -33,6 +33,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException as APIRepositoryUnauthorizedException;
 
@@ -359,7 +360,12 @@ class LocationController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('ezplatform.trash.list'));
+        if (empty($form->getData()->getLocation())) {
+            throw new BadRequestHttpException();
+        }
+
+        // in case of error when processing form ($result === null) redirect to the same Location
+        return $this->redirectToLocation($form->getData()->getLocation());
     }
 
     /**
