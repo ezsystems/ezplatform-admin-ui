@@ -4,6 +4,8 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: {
+        ezBtnAnchor: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-anchor.js',
+        ezBtnAnchorEdit: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-anchoredit.js',
         ezBtnParagraph: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-paragraph.js',
         ezBtnHeading: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-heading.js',
         ezBtnMoveDown: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-movedown.js',

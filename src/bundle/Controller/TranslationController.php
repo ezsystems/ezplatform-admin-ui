@@ -71,7 +71,7 @@ class TranslationController extends Controller
         $data = $form->getData();
         $location = $data->getLocation();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (TranslationAddData $data) {
                 $location = $data->getLocation();
                 $contentInfo = $location->getContentInfo();

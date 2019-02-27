@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="80667bf788ad872d935d0f450ea556ad631010f4" resname="location.assign_section.success">
+        <source>Section '%name%' has been assigned to subtree</source>
+        <target state="new">Section '%name%' has been assigned to subtree</target>
+        <note>key: location.assign_section.success</note>
+      </trans-unit>
       <trans-unit id="7f616359fa64ad9a44aba2d7eeebfde7aac7f16f" resname="location.copy.success">
         <source>'%name%' copied to '%location%'</source>
         <target state="new">'%name%' copied to '%location%'</target>

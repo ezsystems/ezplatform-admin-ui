@@ -1,28 +1,26 @@
-<div>
-    <div class="ez-header px-4">
-        <div class="container">
-            <ul class="nav nav-tabs ez-tabs" role="tablist" id="ez-tab-list-{{ group }}">
-                {% for tab in tabs %}
-                    {% set id = group ~ '-' ~ tab.identifier %}
-                    {% set active = loop.first %}
-                    <li class="nav-item">
-                        <a class="nav-link{% if active %} active{% endif %}" id="ez-tab-label-{{ group }}"
-                           data-toggle="tab" href="#ez-tab-{{ id }}" role="tab" aria-controls="ez-tab-{{ id }}"
-                           aria-expanded="{{ active }}">{{ tab.name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+<div class="ez-header px-4">
+    <div class="container">
+        <ul class="nav nav-tabs ez-tabs" role="tablist" id="ez-tab-list-{{ group }}">
+            {% for tab in tabs %}
+                {% set id = group ~ '-' ~ tab.identifier %}
+                {% set active = loop.first %}
+                <li class="nav-item">
+                    <a class="nav-link{% if active %} active{% endif %}" id="ez-tab-label-{{ group }}"
+                        data-toggle="tab" href="#ez-tab-{{ id }}" role="tab" aria-controls="ez-tab-{{ id }}"
+                        aria-expanded="{{ active }}">{{ tab.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
-    <div class="tab-content container mt-4 px-5" id="ez-tab-list-content-{{ group }}">
-        {% for tab in tabs %}
-            {% set id = group ~ '-' ~ tab.identifier %}
-            {% set active = loop.first %}
+</div>
+<div class="tab-content container mt-4 px-5" id="ez-tab-list-content-{{ group }}">
+    {% for tab in tabs %}
+        {% set id = group ~ '-' ~ tab.identifier %}
+        {% set active = loop.first %}
 
-            <div class="tab-pane{% if active %} active{% endif %}" id="ez-tab-{{ id }}" role="tabpanel"
-                 aria-labelledby="ez-tab-label-{{ group }}">
-                {{ tab.view|raw }}
-            </div>
-        {% endfor %}
-    </div>
+        <div class="tab-pane{% if active %} active{% endif %}" id="ez-tab-{{ id }}" role="tabpanel"
+                aria-labelledby="ez-tab-label-{{ group }}">
+            {{ tab.view|raw }}
+        </div>
+    {% endfor %}
 </div>

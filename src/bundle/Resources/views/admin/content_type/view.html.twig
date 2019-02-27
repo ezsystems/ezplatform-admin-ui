@@ -19,11 +19,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    {%  javascripts
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/admin.location.change.language.js'
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/extra.actions.js'
-        '@EzPlatformAdminUiBundle/Resources/public/js/scripts/sidebar/btn/contenttype.edit.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-content-type-view-js', null, 'ezplatform') }}
 {% endblock %}

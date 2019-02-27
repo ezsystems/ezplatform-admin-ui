@@ -68,15 +68,27 @@
         <thead>
         <tr>
             <th>{{ 'tab.details.section_name'|trans()|desc('Section name') }}</th>
-            <th>{{ 'tab.details.section_identifier'|trans()|desc('Section identifier') }}</th>
-            <th>{{ 'tab.details.section_id'|trans()|desc('Section ID') }}</th>
+            <th>{{ 'tab.details.change_section'|trans()|desc('Change section') }}</th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td>{{ section.name }}</td>
-            <td>{{ section.identifier }}</td>
-            <td>{{ section.id }}</td>
+            <td>
+                {% if form_assign_section %}
+                    {% form_theme form_assign_section '@ezdesign/form_fields.html.twig' %}
+
+                    {{ form_start(form_assign_section, {
+                        'action': path('ezplatform.location.assign_section'),
+                        'attr': {
+                            'class': 'form-inline ez-form-inline ez-form-inline--align-left'
+                        }
+                    }) }}
+                    {{ form_row(form_assign_section.section, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
+                    {% do form_assign_section.assign.setRendered() %}
+                    {{ form_end(form_assign_section) }}
+                {% endif %}
+            </td>
         </tr>
         </tbody>
     </table>
@@ -88,38 +100,30 @@
     <thead>
     <tr>
         <th>{{ 'tab.details.state_group_name'|trans()|desc('Group name') }}</th>
-        <th>{{ 'tab.details.state_group_identifier'|trans()|desc('Group identifier') }}</th>
-        <th>{{ 'tab.details.state_group_id'|trans()|desc('Group ID') }}</th>
-        <th>{{ 'tab.details.state_name'|trans()|desc('Name') }}</th>
-        <th>{{ 'tab.details.state_identifier'|trans()|desc('Identifier') }}</th>
-        <th>{{ 'tab.details.state_id'|trans()|desc('State ID') }}</th>
-        <th></th>
+        <th>{{ 'tab.details.state_name'|trans()|desc('Current object state') }}</th>
+        <th>{{ 'tab.details.change_state'|trans()|desc('Change state') }}</th>
     </tr>
     </thead>
     <tbody>
     {% for objectState in objectStates %}
-        {% form_theme form_state_update[objectState.objectStateGroup.id] '@ezdesign/form_fields.html.twig' %}
         <tr>
             <td>{{ objectState.objectStateGroup.name }}</td>
-            <td>{{ objectState.objectStateGroup.identifier }}</td>
-            <td>{{ objectState.objectStateGroup.id }}</td>
             <td>{{ objectState.name }}</td>
-            <td>{{ objectState.identifier }}</td>
-            <td>{{ objectState.id }}</td>
             <td>
                 {% if can_assign and form_state_update[objectState.objectStateGroup.id].objectState.vars.choices|length != 0 %}
+                    {% form_theme form_state_update[objectState.objectStateGroup.id] '@ezdesign/form_fields.html.twig' %}
                     {{ form_start(form_state_update[objectState.objectStateGroup.id], {
                         'method': 'POST',
                         'action': path('ezplatform.object_state.contentstate.update', {
                             'contentInfoId': contentInfo.id,
                             'objectStateGroupId': objectState.objectStateGroup.id
                         }),
-                        'attr': {'class': 'form-inline ez-form-inline'}
+                        'attr': {'class': 'form-inline ez-form-inline ez-form-inline--align-left'}
                     }) }}
                         {{ form_row(form_state_update[objectState.objectStateGroup.id].contentInfo) }}
                         {{ form_row(form_state_update[objectState.objectStateGroup.id].objectStateGroup) }}
-                        {{ form_row(form_state_update[objectState.objectStateGroup.id].objectState) }}
-                        {{ form_row(form_state_update[objectState.objectStateGroup.id].set) }}
+                        {{ form_row(form_state_update[objectState.objectStateGroup.id].objectState, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
+                        {% do form_state_update[objectState.objectStateGroup.id].set.setRendered %}
                     {{ form_end(form_state_update[objectState.objectStateGroup.id]) }}
                 {% endif %}
             </td>
@@ -140,13 +144,12 @@
         'attr': {'class': 'form-inline ez-form-inline justify-content-start'}
         }) }}
 
-        {{ form_label(form_location_update.sort_field, 'tab.details.sub_items_listing_by.order_by'|trans|desc('Order by')) }}
-        {{ form_widget(form_location_update.sort_field) }}
+    {{ form_label(form_location_update.sort_field, 'tab.details.sub_items_listing_by.order_by'|trans|desc('Order by')) }}
+    {{ form_widget(form_location_update.sort_field, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
 
-        {{ form_label(form_location_update.sort_order, 'tab.details.sub_items_listing_by.in'|trans|desc('in')) }}
-        {{ form_widget(form_location_update.sort_order) }}
+    {{ form_label(form_location_update.sort_order, 'tab.details.sub_items_listing_by.in'|trans|desc('in')) }}
+    {{ form_widget(form_location_update.sort_order, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
 
-        {{ form_widget(form_location_update.update, { 'label': 'tab.details.sub_items_listing_by_set'|trans|desc('Set'), 'translation_domain': false, 'attr': {'class': 'btn-secondary'} }) }}
-
+    {% do form_location_update.update.setRendered() %}
     {{ form_end(form_location_update) }}
 </div>

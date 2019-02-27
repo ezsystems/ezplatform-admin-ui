@@ -198,7 +198,7 @@ class LanguageController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (LanguagesDeleteData $data) {
                 foreach ($data->getLanguages() as $languageId => $selected) {
                     $language = $this->languageService->loadLanguageById($languageId);
@@ -228,7 +228,7 @@ class LanguageController extends Controller
         $form = $this->formFactory->createLanguage();
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (LanguageCreateData $data) {
                 $languageCreateStruct = $this->languageCreateMapper->reverseMap($data);
                 $language = $this->languageService->createLanguage($languageCreateStruct);
@@ -265,7 +265,7 @@ class LanguageController extends Controller
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (LanguageUpdateData $data) use ($language) {
                 $this->languageService->updateLanguageName($language, $data->getName());
 

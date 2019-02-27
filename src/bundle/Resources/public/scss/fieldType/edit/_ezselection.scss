@@ -3,5 +3,22 @@
         position: relative;
         color: $ez-color-base-dark;
         font-weight: bold;
+
+        .ez-custom-dropdown {
+            &__items {
+                border: none;
+                box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba(0, 0, 0, 0.45);
+            }
+
+            &__item {
+                font-weight: 400;
+
+                &--selected {
+                    font-weight: 400;
+                    background-color: $ez-secondary-ground;
+                    color: $ez-white;
+                }
+            }
+        }
     }
 }

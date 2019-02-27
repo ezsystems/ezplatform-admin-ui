@@ -134,8 +134,8 @@
 
         &--selected,
         &--selected:hover,
-        &&--selected[disabled],
-        &&--selected[disabled]:hover {
+        &--selected[disabled],
+        &--selected[disabled]:hover {
             background: $ez-ground-primary;
         }
 

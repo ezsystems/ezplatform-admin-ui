@@ -8,6 +8,7 @@ imports:
     - { resource: services/components.yml }
     - { resource: services/dashboard.yml }
     - { resource: services/modules/subitems.yml }
+    - { resource: services/modules/content_tree.yml }
     - { resource: services/form_processors.yml }
     - { resource: services/validators.yml }
     - { resource: services/siteaccess.yml }
@@ -126,3 +127,5 @@ services:
             - {name: kernel.event_subscriber, priority: -250}
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UserPreferencesGlobalExtension: ~
+
+    EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver: ~

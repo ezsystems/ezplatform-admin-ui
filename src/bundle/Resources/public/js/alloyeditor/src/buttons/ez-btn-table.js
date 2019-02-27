@@ -32,6 +32,7 @@ export default class EzBtnTable extends Component {
 }
 
 AlloyEditor.Buttons[EzBtnTable.key] = AlloyEditor.EzBtnTable = EzBtnTable;
+eZ.addConfig('ezAlloyEditor.ezBtnTable', EzBtnTable);
 
 EzBtnTable.propTypes = {
     editor: PropTypes.object.isRequired,

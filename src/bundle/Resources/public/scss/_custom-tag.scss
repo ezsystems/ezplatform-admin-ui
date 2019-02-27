@@ -43,7 +43,7 @@
     & > [data-ezelement='ezattributes'],
     & > [data-ezelement='ezcontent'] {
         display: none;
-        padding: calculateRem(8px);
+        padding: calculateRem(8px) calculateRem(24px);
     }
 
     &--attributes-visible {

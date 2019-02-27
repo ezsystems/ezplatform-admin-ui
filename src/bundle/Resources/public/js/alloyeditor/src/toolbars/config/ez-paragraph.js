@@ -10,6 +10,7 @@ export default class EzParagraphConfig extends EzConfigBase {
             'ezmovedown',
             this.getStyles(config.customStyles),
             'ezembedinline',
+            'ezanchor',
             'ezblocktextalignleft',
             'ezblocktextaligncenter',
             'ezblocktextalignright',
@@ -38,3 +39,5 @@ export default class EzParagraphConfig extends EzConfigBase {
         return nativeEditor.isSelectionEmpty() && path && path.contains('p');
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezParagraphConfig', EzParagraphConfig);

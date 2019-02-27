@@ -5,7 +5,16 @@ export default class EzEmbedConfig extends EzConfigBase {
         super();
 
         this.name = 'embed';
-        this.buttons = ['ezmoveup', 'ezmovedown', 'ezembedupdate', 'ezembedleft', 'ezembedcenter', 'ezembedright', 'ezblockremove'];
+        this.buttons = [
+            'ezmoveup',
+            'ezmovedown',
+            'ezembedupdate',
+            'ezanchor',
+            'ezembedleft',
+            'ezembedcenter',
+            'ezembedright',
+            'ezblockremove',
+        ];
     }
 
     /**
@@ -33,3 +42,5 @@ export default class EzEmbedConfig extends EzConfigBase {
         return !!(widget && widget.name === 'ezembed');
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezEmbedConfig', EzEmbedConfig);

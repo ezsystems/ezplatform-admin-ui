@@ -64,3 +64,4 @@ export default class EzToolbarAdd extends AlloyEditor.Toolbars.add {
 }
 
 AlloyEditor.Toolbars[EzToolbarAdd.key] = EzToolbarAdd;
+eZ.addConfig('ezAlloyEditor.ezToolbarAdd', EzToolbarAdd);

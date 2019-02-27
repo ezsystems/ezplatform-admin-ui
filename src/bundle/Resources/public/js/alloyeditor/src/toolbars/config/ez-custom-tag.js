@@ -8,6 +8,7 @@ export default class EzCustomTagConfig extends EzConfigBase {
             'ezmoveup',
             'ezmovedown',
             `${config.name}edit`,
+            'ezanchor',
             'ezembedleft',
             'ezembedcenter',
             'ezembedright',
@@ -40,3 +41,5 @@ export default class EzCustomTagConfig extends EzConfigBase {
         return !!(element && element.$.dataset.ezname === this.name);
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezCustomTagConfig', EzCustomTagConfig);

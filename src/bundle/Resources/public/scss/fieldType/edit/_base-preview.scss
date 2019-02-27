@@ -94,10 +94,6 @@
             @include btn-preview-action;
             background: $ez-color-secondary;
 
-            .ez-icon {
-                margin-top: 8px;
-            }
-
             &:hover,
             &:focus {
                 background: $ez-color-secondary-hover;

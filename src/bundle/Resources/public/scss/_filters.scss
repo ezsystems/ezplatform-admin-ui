@@ -72,33 +72,6 @@
         }
     }
 
-    &__subtree {
-        border-radius: calculateRem(4px);
-        background: $ez-color-base-pale;
-        padding: calculateRem(8px) calculateRem(48px) calculateRem(8px)  calculateRem(8px);
-        display: inline-block;
-        position: relative;
-
-        .ez-icon--reset {
-            display: block;
-            position: absolute;
-            top: calculateRem(7px);
-            right: calculateRem(6px);
-            cursor: pointer;
-            fill: $ez-black;
-        }
-    }
-
-    &__breadcrumbs {
-        line-height: calculateRem(22px);
-    }
-
-    &__breadcrumbs-spinner {
-        .ez-icon {
-            fill: $ez-black;
-        }
-    }
-
     &:before,
     &:after {
         content: '';

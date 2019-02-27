@@ -64,8 +64,8 @@
     const updateBreadcrumbsState = (btn, pathString) => {
         const pathStringInput = doc.querySelector(btn.dataset.locationPathInputSelector);
         const contentBreadcrumbsContainer = doc.querySelector(btn.dataset.contentBreadcrumbsSelector);
-        const contentBreadcrumbs = contentBreadcrumbsContainer.querySelector('.ez-filters__breadcrumbs');
-        const contentBreadcrumbsSpinner = contentBreadcrumbsContainer.querySelector('.ez-filters__breadcrumbs-spinner');
+        const contentBreadcrumbs = contentBreadcrumbsContainer.querySelector('.ez-tag__content');
+        const contentBreadcrumbsSpinner = contentBreadcrumbsContainer.querySelector('.ez-tag__spinner');
 
         pathStringInput.value = pathString;
         pathStringInput.dispatchEvent(new Event('change'));
@@ -127,7 +127,8 @@
     btns.forEach((btn) => {
         btn.addEventListener('click', openUDW, false);
 
-        const clearBtn = doc.querySelector(btn.dataset.clearBtnSelector);
+        const tag = doc.querySelector(btn.dataset.contentBreadcrumbsSelector);
+        const clearBtn = tag.querySelector('.ez-tag__remove-btn');
 
         if (clearBtn) {
             clearBtn.addEventListener('click', clearSelection.bind(null, btn), false);

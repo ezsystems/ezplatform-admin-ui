@@ -47,6 +47,7 @@ export default class EzBtnEmbedUpdate extends EzEmbedDiscoverContentButton {
 }
 
 AlloyEditor.Buttons[EzBtnEmbedUpdate.key] = AlloyEditor.EzBtnEmbedUpdate = EzBtnEmbedUpdate;
+eZ.addConfig('ezAlloyEditor.ezBtnEmbedUpdate', EzBtnEmbedUpdate);
 
 EzBtnEmbedUpdate.defaultProps = {
     udwTitle: Translator.trans(/*@Desc("Select a content to embed")*/ 'embed_update_btn.udw.title', {}, 'alloy_editor'),

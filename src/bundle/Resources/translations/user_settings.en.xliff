@@ -41,6 +41,16 @@
         <target state="new">My Preferences</target>
         <note>key: section.my_preferences</note>
       </trans-unit>
+      <trans-unit id="3a4946ea2a7aaa360112cf1e657617e7ce7c7d9b" resname="settings.language.value.description">
+        <source>The language of the administration panel</source>
+        <target state="new">The language of the administration panel</target>
+        <note>key: settings.language.value.description</note>
+      </trans-unit>
+      <trans-unit id="593fb98cf76c44e48e00ce4ee027a6e54b6625fd" resname="settings.language.value.title">
+        <source>Language</source>
+        <target state="new">Language</target>
+        <note>key: settings.language.value.title</note>
+      </trans-unit>
       <trans-unit id="18f788ade37f54e5d52f0e3ddacb39a5558190b5" resname="settings.subitems_limit.value.description">
         <source>Number of items displayed in the table</source>
         <target state="new">Number of items displayed in the table</target>

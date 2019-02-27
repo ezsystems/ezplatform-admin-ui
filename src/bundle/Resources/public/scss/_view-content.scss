@@ -1,0 +1,29 @@
+.ez-content-view {
+    .ez-content-container {
+        display: flex;
+    }
+
+    .ez-content-tree-container {
+        max-width: 0;
+        position: relative;
+        background: $ez-white;
+        overflow: auto;
+        color: inherit;
+        transition: max-width 0.2s $ez-admin-transition;
+
+        &--expanded {
+            min-width: calculateRem(250px);
+            max-width: 33vw;
+        }
+    }
+
+    .ez-location-view-container {
+        flex: 1 1 auto;
+    }
+
+    &.ez-is-tree-resizing {
+        .ez-location-view-container {
+            pointer-events: none;
+        }
+    }
+}

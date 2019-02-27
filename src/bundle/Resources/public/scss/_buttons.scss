@@ -1,5 +1,4 @@
 @import 'extra-actions';
-@import 'alloyeditor-buttons';
 
 .btn-icon {
     padding: 0;
@@ -53,10 +52,10 @@
 .ez-side-menu,
 .ez-context-menu {
     .btn {
-        padding-top: 0.5rem;
-        padding-bottom: 0.375rem;
-        font-size: 0.8125rem;
+        padding: calculateRem(8px) calculateRem(5px);
+        font-size: calculateRem(11px);
         border-radius: 0;
+        line-height: 1.4;
 
         &:hover,
         &:focus {
@@ -180,4 +179,10 @@
             border-radius: 0 calculateRem(4px) calculateRem(4px) 0;
         }
     }
+}
+
+.ez-btn--content-tree-expanded {
+    background: $ez-white;
+    border-color: $ez-white;
+    color: $ez-black;
 }

@@ -20,13 +20,13 @@ export default class EzBtnBold extends AlloyEditor.ButtonBold {
             <button
                 aria-label={AlloyEditor.Strings.bold}
                 aria-pressed={cssClass.indexOf('pressed') !== -1}
-                className={cssClass} data-type="button-bold"
+                className={cssClass}
+                data-type="button-bold"
                 onClick={this.execCommand}
                 tabIndex={this.props.tabIndex}
-                title={AlloyEditor.Strings.bold}
-            >
+                title={AlloyEditor.Strings.bold}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#bold"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#bold" />
                 </svg>
             </button>
         );
@@ -34,3 +34,4 @@ export default class EzBtnBold extends AlloyEditor.ButtonBold {
 }
 
 AlloyEditor.Buttons[EzBtnBold.key] = AlloyEditor.EzBtnBold = EzBtnBold;
+eZ.addConfig('ezAlloyEditor.ezBtnBold', EzBtnBold);

@@ -20,13 +20,13 @@ export default class EzBtnUnderline extends AlloyEditor.ButtonUnderline {
             <button
                 aria-label={AlloyEditor.Strings.underline}
                 aria-pressed={cssClass.indexOf('pressed') !== -1}
-                className={cssClass} data-type="button-underline"
+                className={cssClass}
+                data-type="button-underline"
                 onClick={this.execCommand}
                 tabIndex={this.props.tabIndex}
-                title={AlloyEditor.Strings.underline}
-            >
+                title={AlloyEditor.Strings.underline}>
                 <svg className="ez-icon ez-btn-ae__icon">
-                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#underscore"></use>
+                    <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#underscore" />
                 </svg>
             </button>
         );
@@ -34,3 +34,4 @@ export default class EzBtnUnderline extends AlloyEditor.ButtonUnderline {
 }
 
 AlloyEditor.Buttons[EzBtnUnderline.key] = AlloyEditor.EzBtnUnderline = EzBtnUnderline;
+eZ.addConfig('ezAlloyEditor.ezBtnUnderline', EzBtnUnderline);

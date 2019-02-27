@@ -1,0 +1,25 @@
+{% set tag_attributes = tag_attributes|default({})|merge({'class': (tag_attributes.class|default('') ~ ' ez-tag')|trim}) %}
+
+<div {% for attribute_name, attribute_value in tag_attributes %}
+        {% if attribute_value is not same as(false) %}
+            {% if attribute_value is not same as(true) %}
+                    {{ attribute_name }}="{{ attribute_value }}"
+            {% else %}
+                    {{ attribute_name }}
+            {% endif %}
+        {% endif %}
+    {% endfor %}>
+    <div class="ez-tag__content" {% if is_loading_state %} hidden {% endif %}>
+        {{ content }}
+    </div>
+    <div class="ez-tag__spinner" {% if not is_loading_state %} hidden {% endif %}>
+        <svg class="ez-icon ez-icon--medium ez-icon--dark ez-spin">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#spinner"></use>
+        </svg>
+    </div>
+    <button type="button" class="ez-tag__remove-btn">
+        <svg class="ez-icon ez-icon--medium ez-icon--dark">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#circle-close"></use>
+        </svg>
+    </button>
+</div>

@@ -103,10 +103,9 @@ class ContentDraftsDataset
 
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo $draft
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
      *
      * @return array
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     private function mapContentDraft(VersionInfo $draft, ContentType $contentType): array
     {
@@ -120,6 +119,7 @@ class ContentDraftsDataset
             'contentId' => $contentInfo->id,
             'name' => $draft->getName(),
             'type' => $contentType->getName(),
+            'content_type' => $contentType,
             'language' => $draft->initialLanguageCode,
             'version' => $draft->versionNo,
             'modified' => $draft->modificationDate,

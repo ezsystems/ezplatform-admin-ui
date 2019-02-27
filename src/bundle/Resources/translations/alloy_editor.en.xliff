@@ -6,6 +6,26 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="2fec67b71cd77563c4e494477e691ba9661d95fe" resname="anchor_btn.label">
+        <source>Anchor</source>
+        <target state="new">Anchor</target>
+        <note>key: anchor_btn.label</note>
+      </trans-unit>
+      <trans-unit id="5589654c944d02946eaf80e23a84c5e2515be297" resname="anchor_edit.btn.remove.title">
+        <source>Remove</source>
+        <target state="new">Remove</target>
+        <note>key: anchor_edit.btn.remove.title</note>
+      </trans-unit>
+      <trans-unit id="e3cac876bf40ad24c9f0a7c272ca0564c2d6c901" resname="anchor_edit.btn.save.title">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: anchor_edit.btn.save.title</note>
+      </trans-unit>
+      <trans-unit id="3adb317c25d79d7a5d63fbfe1d7f5f2ad91c0268" resname="anchor_edit.input.label">
+        <source>Name:</source>
+        <target state="new">Name:</target>
+        <note>key: anchor_edit.input.label</note>
+      </trans-unit>
       <trans-unit id="babf94a4044ba933a0ebe008c0f027745402c989" resname="block_text_align_center_btn.label">
         <source>Center</source>
         <target state="new">Center</target>

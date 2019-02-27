@@ -5,7 +5,7 @@ export default class EzListConfig extends EzConfigBase {
         super(config);
 
         this.name = 'list';
-        this.buttons = ['ezmoveup', 'ezmovedown', 'ezembedinline', 'ezblockremove'];
+        this.buttons = ['ezmoveup', 'ezmovedown', 'ezembedinline', 'ezanchor', 'ezblockremove'];
     }
 
     /**
@@ -28,3 +28,5 @@ export default class EzListConfig extends EzConfigBase {
         return nativeEditor.isSelectionEmpty() && path && (path.contains('ul') || path.contains('ol'));
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezListConfig', EzListConfig);

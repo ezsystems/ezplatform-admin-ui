@@ -8,6 +8,7 @@ export default class EzTableConfig {
             'ezmovedown',
             'tableHeading',
             'ezembedinline',
+            'ezanchor',
             'eztablerow',
             'eztablecolumn',
             'eztablecell',
@@ -19,3 +20,5 @@ export default class EzTableConfig {
         this.test = AlloyEditor.SelectionTest.table;
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezTableConfig', EzTableConfig);

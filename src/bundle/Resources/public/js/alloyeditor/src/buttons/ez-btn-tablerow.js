@@ -13,11 +13,14 @@ export default class EzBtnTableRow extends AlloyEditor.ButtonTableRow {
 
         if (this.props.expanded) {
             buttonCommandsListId = 'tableRowList';
-            buttonCommandsList = <AlloyEditor.ButtonCommandsList
-                commands={this._getCommands()}
-                editor={this.props.editor}
-                listId={buttonCommandsListId}
-                onDismiss={this.props.toggleDropdown} />
+            buttonCommandsList = (
+                <AlloyEditor.ButtonCommandsList
+                    commands={this._getCommands()}
+                    editor={this.props.editor}
+                    listId={buttonCommandsListId}
+                    onDismiss={this.props.toggleDropdown}
+                />
+            );
         }
 
         return (
@@ -30,10 +33,9 @@ export default class EzBtnTableRow extends AlloyEditor.ButtonTableRow {
                     onClick={this.props.toggleDropdown}
                     role="combobox"
                     tabIndex={this.props.tabIndex}
-                    title={AlloyEditor.Strings.row}
-                >
+                    title={AlloyEditor.Strings.row}>
                     <svg className="ez-icon ez-btn-ae__icon">
-                        <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#table-row"></use>
+                        <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#table-row" />
                     </svg>
                 </button>
                 {buttonCommandsList}
@@ -43,3 +45,4 @@ export default class EzBtnTableRow extends AlloyEditor.ButtonTableRow {
 }
 
 AlloyEditor.Buttons[EzBtnTableRow.key] = AlloyEditor.EzBtnTableRow = EzBtnTableRow;
+eZ.addConfig('ezAlloyEditor.ezBtnTableRow', EzBtnTableRow);

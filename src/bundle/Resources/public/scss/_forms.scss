@@ -43,6 +43,10 @@ form:not(.form-inline) {
     flex-flow: row wrap;
     justify-content: flex-end;
 
+    &--align-left {
+        justify-content: flex-start;
+    }
+
     .col-form-label,
     .form-control,
     .ez-field-edit__label {

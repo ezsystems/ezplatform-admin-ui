@@ -11,6 +11,16 @@
         <target state="new">New Version Draft for '%name%' created.</target>
         <note>key: content.create_draft.success</note>
       </trans-unit>
+      <trans-unit id="d773dd487e4e5467fd20fc4fc4987eba33eaf1b7" resname="content.main_language_update.success">
+        <source>Main language for '%name%' updated.</source>
+        <target state="new">Main language for '%name%' updated.</target>
+        <note>key: content.main_language_update.success</note>
+      </trans-unit>
+      <trans-unit id="1ea2690f8ebd8fc99115a6f94ac56b8b93e46afe" resname="content.draft.conflict.error">
+        <source>Cannot check if the draft has no conflict with other drafts. %error%. </source>
+        <target state="new">Cannot check if the draft has no conflict with other drafts. %error%. </target>
+        <note>key: content.draft.conflict.error</note>
+      </trans-unit>
       <trans-unit id="5f36fd5bb4e6938a731079f403467900e0396ed2" resname="content.main_location_update.success">
         <source>Main location for '%name%' updated.</source>
         <target state="new">Main location for '%name%' updated.</target>

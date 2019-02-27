@@ -83,9 +83,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    {%  javascripts
-        'bundles/ezplatformadminui/js/scripts/admin.role_assignment.add.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-role-assignment-create-js', null, 'ezplatform') }}
 {% endblock %}

@@ -5,7 +5,7 @@ export default class EzFormattedConfig extends EzConfigBase {
         super(config);
 
         this.name = 'formatted';
-        this.buttons = ['ezmoveup', 'ezmovedown', this.getStyles(config.customStyles), 'ezblockremove'];
+        this.buttons = ['ezmoveup', 'ezmovedown', this.getStyles(config.customStyles), 'ezanchor', 'ezblockremove'];
     }
 
     /**
@@ -28,3 +28,5 @@ export default class EzFormattedConfig extends EzConfigBase {
         return nativeEditor.isSelectionEmpty() && path && path.contains('pre');
     }
 }
+
+eZ.addConfig('ezAlloyEditor.ezFormattedConfig', EzFormattedConfig);

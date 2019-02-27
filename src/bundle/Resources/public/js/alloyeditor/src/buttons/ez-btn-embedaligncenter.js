@@ -10,6 +10,7 @@ export default class EzEmbedAlignCenter extends EzEmbedAlign {
 }
 
 AlloyEditor.Buttons[EzEmbedAlignCenter.key] = AlloyEditor.EzEmbedAlignCenter = EzEmbedAlignCenter;
+eZ.addConfig('ezAlloyEditor.ezEmbedAlignCenter', EzEmbedAlignCenter);
 
 EzEmbedAlignCenter.defaultProps = {
     alignment: 'center',
