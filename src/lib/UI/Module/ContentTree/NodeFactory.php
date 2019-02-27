@@ -79,11 +79,15 @@ final class NodeFactory
         $content = $location->getContent();
         $contentType = $content->getContentType();
 
-        $numberOfSubitemsToLoad = $this->resolveLoadLimit($loadSubtreeRequestNode);
+        $limit = $this->resolveLoadLimit($loadSubtreeRequestNode);
+        $offset = null !== $loadSubtreeRequestNode
+            ? $loadSubtreeRequestNode->offset
+            : 0;
+
 
         $children = [];
         if ($depth < $this->maxDepth && $loadChildren) {
-            $searchResult = $this->findSubitems($location, $numberOfSubitemsToLoad);
+            $searchResult = $this->findSubitems($location, $limit, $offset);
             $totalChildrenCount = $searchResult->totalCount;
 
             /** @var \eZ\Publish\API\Repository\Values\Content\Location $childLocation */
@@ -111,7 +115,7 @@ final class NodeFactory
             $contentType->identifier,
             $contentType->isContainer,
             $location->invisible,
-            $numberOfSubitemsToLoad,
+            $limit,
             $totalChildrenCount,
             $children
         );
