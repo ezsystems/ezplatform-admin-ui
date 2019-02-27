@@ -21,13 +21,13 @@ services:
   EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree\LoadSubtreeRequestNode:
     parent: ezpublish_rest.input.parser
     tags:
-      - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTree.LoadSubtreeRequestNode }
+      - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTreeLoadSubtreeRequestNode }
 
   EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree\LoadSubtreeRequest:
     parent: ezpublish_rest.input.parser
     tags:
-      - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTree.LoadSubtreeRequest }
-      -
+      - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTreeLoadSubtreeRequest }
+
   EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\ContentTree\Node:
       parent: ezpublish_rest.output.value_object_visitor.base
       tags:
