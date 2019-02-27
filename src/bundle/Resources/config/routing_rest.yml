@@ -1,7 +1,37 @@
+#
+# Bulk Operation
+#
+
 ezplatform.bulk_operation:
     path: /bulk
     options:
-      expose: true
+        expose: true
     defaults:
-      _controller: 'EzPlatformAdminUiBundle:BulkOperation\BulkOperation:bulk'
-    methods: [POST]
+        _controller: 'EzPlatformAdminUiBundle:BulkOperation\BulkOperation:bulk'
+    methods: ['POST']
+
+#
+# Location Tree
+#
+
+ezplatform.location.tree.load_children:
+    # @todo change name to content tree
+    path: /location/tree/load-subitems/{parentLocationId}/{limit}/{offset}
+    methods: ['GET']
+    options:
+        expose: true
+    requirements:
+        parentLocationId: \d+
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Content/ContentTree:loadChildren'
+        limit: 10
+        offset: 0
+
+ezplatform.location.tree.load_subtree:
+    # @todo change name to content tree
+    path: /location/tree/load-subtree
+    methods: ['POST']
+    options:
+        expose: true
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Content/ContentTree:loadSubtree'

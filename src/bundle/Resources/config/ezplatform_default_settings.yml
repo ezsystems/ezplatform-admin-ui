@@ -53,3 +53,10 @@ parameters:
 
     # Additional translations e.g. ['en_US', 'nb_NO']
     ezsettings.default.user_preferences.additional_translations: []
+
+    # Content Tree Module
+    ezsettings.default.content_tree_module.load_more_limit: 30
+    ezsettings.default.content_tree_module.children_load_max_limit: 200
+    ezsettings.default.content_tree_module.tree_max_depth: 10
+    ezsettings.default.content_tree_module.content_type_ignore_list: []
+

@@ -66,6 +66,7 @@ class EzPlatformAdminUiBundle extends Bundle
             new Parser\LocationIds(),
             new Parser\Module\Subitems(),
             new Parser\Module\UniversalDiscoveryWidget(),
+            new Parser\Module\ContentTree(),
             new Parser\Pagination(),
             new Parser\Security(),
             new Parser\UserIdentifier(),

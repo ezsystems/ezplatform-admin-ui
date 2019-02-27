@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    EzSystems\EzPlatformAdminUi\UI\Module\ContentTree\NodeFactory:
+        arguments:
+            $displayLimit: '$content_tree_module.load_more_limit$'
+            $childrenLoadMaxLimit: '$content_tree_module.children_load_max_limit$'
+            $maxDepth: '$content_tree_module.tree_max_depth$'
+            $contentTypeIdentifierIgnoreList: '$content_tree_module.content_type_ignore_list$'
