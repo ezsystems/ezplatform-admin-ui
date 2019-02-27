@@ -5,6 +5,7 @@
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const contentTreeContainer = doc.querySelector('.ez-content-tree-container');
+    const contentTreeContainerContent = doc.querySelector('.ez-content-tree-container__content');
     const btn = doc.querySelector('.ez-btn--toggle-content-tree');
     const toggleContentTreePanel = () => {
         contentTreeContainer.classList.toggle(CLASS_CONTENT_TREE_EXPANDED);
@@ -12,13 +13,18 @@
 
         localStorage.setItem(KEY_CONTENT_TREE_EXPANDED, contentTreeContainer.classList.contains(CLASS_CONTENT_TREE_EXPANDED));
     };
+    const updateContentTreeContentHeight = () => {
+        const height = Math.min(window.innerHeight - contentTreeContainer.getBoundingClientRect().top, window.innerHeight);
+
+        contentTreeContainerContent.style.height = `${height}px`;
+    };
 
     ReactDOM.render(
         React.createElement(eZ.modules.ContentTree, {
             currentLocationId: parseInt(contentTreeContainer.dataset.currentLocationId, 10),
             restInfo: { token, siteaccess },
         }),
-        contentTreeContainer
+        contentTreeContainerContent
     );
 
     btn.addEventListener('click', toggleContentTreePanel, false);
@@ -27,4 +33,9 @@
         contentTreeContainer.classList.add(CLASS_CONTENT_TREE_EXPANDED);
         btn.classList.add(CLASS_BTN_CONTENT_TREE_EXPANDED);
     }
+
+    updateContentTreeContentHeight();
+
+    doc.addEventListener('scroll', updateContentTreeContentHeight, false);
+    window.addEventListener('resize', updateContentTreeContentHeight, false);
 })(window.document, window.React, window.ReactDOM, window.eZ, window.localStorage);
