@@ -28,7 +28,7 @@ class LoadSubtreeRequest extends BaseParser
 
         $nodes = [];
         foreach ($data['nodes'] as $node) {
-            $nodes[] = $parsingDispatcher->parse($node, $data['_media-type']);
+            $nodes[] = $parsingDispatcher->parse($node, $node['_media-type']);
         }
 
         return new LoadSubtreeRequestValue($nodes);

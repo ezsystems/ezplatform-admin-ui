@@ -76,9 +76,12 @@ class ContentTreeController extends RestController
             )
         );
 
+        $locationIdList = array_column($loadSubtreeRequest->nodes, 'locationId');
+        $locations = $this->locationService->loadLocationList($locationIdList);
+
         $elements = [];
         foreach ($loadSubtreeRequest->nodes as $childLoadSubtreeRequestNode) {
-            $location = $this->locationService->loadLocation($childLoadSubtreeRequestNode->locationId);
+            $location = $locations[$childLoadSubtreeRequestNode->locationId];
             $elements[] = $this->contentTreeNodeFactory->createNode(
                 $location,
                 $childLoadSubtreeRequestNode,

@@ -9,21 +9,25 @@ services:
       tags:
         - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.internal.Operation }
 
-  EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree\LoadSubtreeRequestNode:
-      parent: ezpublish_rest.input.parser
-      tags:
-          - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.internal.ContentTree.LoadSubtreeRequestNode }
-
-  EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree\LoadSubtreeRequest:
-      parent: ezpublish_rest.input.parser
-      tags:
-          - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.internal.ContentTree.LoadSubtreeRequest }
-
   EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\BulkOperationResponse:
       parent: ezpublish_rest.output.value_object_visitor.base
       tags:
         - { name: ezpublish_rest.output.value_object_visitor, type: EzSystems\EzPlatformAdminUi\REST\Value\BulkOperationResponse }
 
+  #
+  # Content Tree
+  #
+
+  EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree\LoadSubtreeRequestNode:
+    parent: ezpublish_rest.input.parser
+    tags:
+      - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTree.LoadSubtreeRequestNode }
+
+  EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree\LoadSubtreeRequest:
+    parent: ezpublish_rest.input.parser
+    tags:
+      - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTree.LoadSubtreeRequest }
+      -
   EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\ContentTree\Node:
       parent: ezpublish_rest.output.value_object_visitor.base
       tags:

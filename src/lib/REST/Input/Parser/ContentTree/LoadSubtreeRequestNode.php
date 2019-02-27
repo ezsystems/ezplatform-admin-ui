@@ -39,12 +39,10 @@ class LoadSubtreeRequestNode extends BaseParser
                 self::class));
         }
 
-        $children = array_map(
-            function (array $child) use ($parsingDispatcher): LoadSubtreeRequestNodeValue {
-                return $parsingDispatcher->parse($child, $child['_media-type']);
-            },
-            $data['children']
-        );
+        $children = [];
+        foreach ($data['children'] as $child) {
+            $children[] = $parsingDispatcher->parse($child, $child['_media-type']);
+        }
 
         return new LoadSubtreeRequestNodeValue(
             (int) $data['locationId'],
