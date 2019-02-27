@@ -18,7 +18,7 @@
             {% set content_draft_edit_url = content_is_user|default(false) ? 'ez_user_update' : 'ez_content_draft_edit' %}
             <tr>
                 <td class="ez-table__cell ez-table__cell--has-icon">
-                    <svg class="ez-icon ez-icon--medium">
+                    <svg class="ez-icon ez-icon--small">
                         <use xlink:href="{{ ez_content_type_icon(row.content_type.identifier) }}"></use>
                     </svg>
                 </td>
