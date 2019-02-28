@@ -249,6 +249,11 @@
         <target state="new">Content</target>
         <note>key: tab.view.content</note>
       </trans-unit>
+      <trans-unit id="fd2350c1f97fb7a3bd77d158fcf6dfbd5845a9a0" resname="tab.view.preview">
+        <source>Preview</source>
+        <target state="new">Preview</target>
+        <note>key: tab.view.preview</note>
+      </trans-unit>
       <trans-unit id="4e7901a215220faba4d546cd3fb63f3e2a64e849" resname="trash.delete.all.confirm">
         <source>Are you sure you want to permanently delete %trashItemsCount% item(s)?</source>
         <target state="new">Are you sure you want to permanently delete %trashItemsCount% item(s)?</target>
