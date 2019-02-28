@@ -181,6 +181,8 @@ module.exports = (Encore) => {
             path.resolve('./vendor/ezsystems/ezplatform-admin-ui-assets/Resources/public/vendors/leaflet/dist/leaflet.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.load.map.js'),
             path.resolve(__dirname, '../public/js/scripts/sidebar/btn/content.edit.js'),
+            path.resolve(__dirname, '../public/js/scripts/sidebar/btn/content.hide.js'),
+            path.resolve(__dirname, '../public/js/scripts/sidebar/btn/content.reveal.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.add.custom_url.js'),
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),

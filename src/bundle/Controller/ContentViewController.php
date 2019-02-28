@@ -31,6 +31,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentType;
 use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
 use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveUniqueRelation;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
@@ -38,6 +39,8 @@ use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsContainer;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentData;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -91,6 +94,9 @@ class ContentViewController extends Controller
     /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
     private $userLanguagePreferenceProvider;
 
+    /** @var FormFactoryInterface */
+    private $sfFormFactory;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
@@ -114,6 +120,7 @@ class ContentViewController extends Controller
         LanguageService $languageService,
         PathService $pathService,
         FormFactory $formFactory,
+        FormFactoryInterface $sfFormFactory,
         SubitemsContentViewParameterSupplier $subitemsContentViewParameterSupplier,
         UserService $userService,
         BookmarkService $bookmarkService,
@@ -131,6 +138,7 @@ class ContentViewController extends Controller
         $this->languageService = $languageService;
         $this->pathService = $pathService;
         $this->formFactory = $formFactory;
+        $this->sfFormFactory = $sfFormFactory;
         $this->subitemsContentViewParameterSupplier = $subitemsContentViewParameterSupplier;
         $this->userService = $userService;
         $this->bookmarkService = $bookmarkService;
@@ -177,6 +185,8 @@ class ContentViewController extends Controller
         $this->supplyPolicyPagination($view, $request);
 
         $this->supplyIsLocationBookmarked($view);
+
+        $this->supplyContentReverseRelations($view);
 
         return $view;
     }
@@ -258,10 +268,13 @@ class ContentViewController extends Controller
             new LocationCopySubtreeData($location)
         );
 
+        $contentTypeForm = $this->sfFormFactory->create(ContentType::class, new ContentData($location->contentInfo, $location));
+
         $view->addParameters([
             'form_location_copy' => $locationCopyType->createView(),
             'form_location_move' => $locationMoveType->createView(),
             'form_content_create' => $contentCreateType->createView(),
+            'form_content' => $contentTypeForm->createView(),
             'form_subitems_content_edit' => $subitemsContentEdit->createView(),
             'form_location_copy_subtree' => $locationCopySubtreeType->createView(),
         ]);
@@ -461,5 +474,16 @@ class ContentViewController extends Controller
         $locationIsBookmarked = $view->getLocation() ? $this->bookmarkService->isBookmarked($view->getLocation()) : false;
 
         $view->addParameters(['location_is_bookmarked' => $locationIsBookmarked]);
+    }
+
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     */
+    private function supplyContentReverseRelations(ContentView $view)
+    {
+        $contentInfo = $view->getLocation()->getContentInfo();
+        $relations = $this->contentService->loadReverseRelations($contentInfo);
+
+        $view->addParameters(['contentHasReverseRelations' => (bool)count($relations)]);
     }
 }

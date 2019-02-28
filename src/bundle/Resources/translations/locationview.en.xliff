@@ -186,11 +186,6 @@
         <target state="new">Content locations</target>
         <note>key: tab.locations.content_locations</note>
       </trans-unit>
-      <trans-unit id="2f3aa22262d10e0dcbc4ccfacbf060f9e98fcb05" resname="tab.locations.hidden">
-        <source>Hidden</source>
-        <target state="new">Hidden</target>
-        <note>key: tab.locations.hidden</note>
-      </trans-unit>
       <trans-unit id="cd57f6ee339fa6c35e2a75cc760f391676fca490" resname="tab.locations.hidden_by_superior">
         <source>Hidden by superior</source>
         <target state="new">Hidden by superior</target>
@@ -455,6 +450,36 @@
         <source>Select language</source>
         <target state="new">Select language</target>
         <note>key: user.edit.select_language</note>
+      </trans-unit>
+      <trans-unit id="e136be672df8eb27dc4eb2f1ce0650096090bf81" resname="content.hidden.message">
+        <source>This content item is hidden and is not publicly available</source>
+        <target state="new">This content item is hidden and is not publicly available</target>
+        <note>key: content.hidden.message</note>
+      </trans-unit>
+      <trans-unit id="7932e7fd6d6b90a8264cf5805586cab3294290ed" resname="content.hide.modal.title">
+        <source>Conflict when hiding content item</source>
+        <target state="new">Conflict when hiding content item</target>
+        <note>key: content.hide.modal.title</note>
+      </trans-unit>
+      <trans-unit id="196a68068ffbbae92e11642f8023b84d4fbfe0f5" resname="content.hide.modal.message1">
+        <source>This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</source>
+        <target state="new">This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</target>
+        <note>key: content.hide.modal.message1</note>
+      </trans-unit>
+      <trans-unit id="18a23d2908ed55a685f4a268d25aedc7efcc9dd6" resname="content.hide.modal.message2">
+        <source>If you wish to continue, please click on Confirm.</source>
+        <target state="new">If you wish to continue, please click on Confirm.</target>
+        <note>key: content.hide.modal.message2</note>
+      </trans-unit>
+      <trans-unit id="22d5072ec8766c24df085f05aaeda403f02ec585" resname="content.hide.modal.cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: content.hide.modal.cancel</note>
+      </trans-unit>
+      <trans-unit id="f54a1428411237311ec31c21d9d1932d0fce992f" resname="content.hide.modal.confirm">
+        <source>Confirm</source>
+        <target state="new">Confirm</target>
+        <note>key: content.hide.modal.confirm</note>
       </trans-unit>
     </body>
   </file>

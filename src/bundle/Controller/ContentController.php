@@ -23,6 +23,7 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\MainTranslationUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\MainTranslationUpdateType;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface;
@@ -31,6 +32,7 @@ use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -380,5 +382,79 @@ class ContentController extends Controller
         }
 
         return $this->redirectToRoute('ezplatform.dashboard');
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function hideAction(Request $request): Response
+    {
+        $form = $this->createForm(ContentType::class);
+        $form->handleRequest($request);
+
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            throw new BadRequestHttpException();
+        }
+
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentData $contentData */
+        $contentData = $form->getData();
+        $contentInfo = $contentData->getContentInfo();
+        $location = $contentData->getLocation();
+
+        if ($contentInfo->isHidden) {
+            throw new BadRequestHttpException();
+        }
+
+        $this->contentService->hideContent($contentInfo);
+
+        $this->notificationHandler->success(
+            $this->translator->trans(
+                /** @Desc("Content '%name%' has been hidden.") */
+                'content.hide.success',
+                ['%name%' => $contentInfo->name],
+                'content'
+            )
+        );
+
+        return $this->redirectToLocation($location);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function revealAction(Request $request): Response
+    {
+        $form = $this->createForm(ContentType::class);
+        $form->handleRequest($request);
+
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            throw new BadRequestHttpException();
+        }
+
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentData $contentData */
+        $contentData = $form->getData();
+        $contentInfo = $contentData->getContentInfo();
+        $location = $contentData->getLocation();
+
+        if (!$contentInfo->isHidden) {
+            throw new BadRequestHttpException();
+        }
+
+        $this->contentService->revealContent($contentInfo);
+
+        $this->notificationHandler->success(
+            $this->translator->trans(
+                /** @Desc("Content '%name%' has been revealed.") */
+                'content.reveal.success',
+                ['%name%' => $contentInfo->name],
+                'content'
+            )
+        );
+
+        return $this->redirectToLocation($location);
     }
 }
