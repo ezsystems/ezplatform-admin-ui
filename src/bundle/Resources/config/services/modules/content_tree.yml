@@ -10,3 +10,7 @@ services:
             $childrenLoadMaxLimit: '$content_tree_module.children_load_max_limit$'
             $maxDepth: '$content_tree_module.tree_max_depth$'
             $contentTypeIdentifierIgnoreList: '$content_tree_module.content_type_ignore_list$'
+
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module\ContentTree:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'contentTree' }

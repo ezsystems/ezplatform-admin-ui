@@ -54,11 +54,7 @@ class ContentTree extends AbstractParser
                     ->end()
                     ->arrayNode('content_type_ignore_list')
                         ->info('List of content type identifiers to ignore in Content Tree')
-                        ->arrayPrototype()
-                            ->children()
-                                ->scalarNode('content_type_identifier')
-                            ->end()
-                        ->end()
+                        ->scalarPrototype()->end()
                     ->end()
                 ->end()
             ->end();
