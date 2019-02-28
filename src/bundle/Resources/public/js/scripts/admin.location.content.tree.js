@@ -32,7 +32,7 @@
 
     ReactDOM.render(
         React.createElement(eZ.modules.ContentTree, {
-            currentLocationId: parseInt(contentTreeContainer.dataset.currentLocationId, 10),
+            currentLocationPath: contentTreeContainer.dataset.currentLocationPath,
             restInfo: { token, siteaccess },
         }),
         contentTreeWrapper
