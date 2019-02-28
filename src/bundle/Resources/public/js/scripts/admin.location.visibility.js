@@ -10,8 +10,16 @@
     };
     const handleUpdateError = global.eZ.helpers.notification.showErrorNotification;
     const handleUpdateSuccess = (event, { message }) => {
+        const visibilityChangeEvent = new CustomEvent('ezLocationVisibilityChanged', {
+            detail: {
+                locationId: parseInt(event.target.value, 10),
+                isInvisible: !event.target.checked,
+            },
+        });
+
         onVisibilityUpdated(event);
         global.eZ.helpers.notification.showSuccessNotification(message);
+        doc.body.dispatchEvent(visibilityChangeEvent);
     };
     const handleUpdateResponse = (response) => {
         if (response.status !== 200) {
