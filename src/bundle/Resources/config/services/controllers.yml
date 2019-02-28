@@ -4,6 +4,18 @@ services:
         exclude: "../../Controller/{Controller}"
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
 
+    EzSystems\EzPlatformAdminUiBundle\Controller\UserProfile\UserPasswordChangeController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        deprecated: '"%service_id%" is deprecated since 1.5 and will be removed in 2.0. Please use \EzSystems\EzPlatformUserBundle\Controller\PasswordChangeController instead.'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserSettingsController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        deprecated: '"%service_id%" is deprecated since in 1.5 and will be removed in 2.0. Please use \EzSystems\EzPlatformUserBundle\Controller\UserSettingsController instead.'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserForgotPasswordController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        deprecated: '"%service_id%" is deprecated since in 1.5 and will be removed in 2.0. Please use \EzSystems\EzPlatformUserBundle\Controller\PasswordResetController instead.'
+
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
@@ -99,11 +111,6 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $notificationPaginationLimit: '$pagination.notification_limit$'
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserSettingsController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        arguments:
-            $defaultPaginationLimit: '$pagination.user_settings_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentDraftController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller

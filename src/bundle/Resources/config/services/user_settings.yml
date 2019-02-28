@@ -4,24 +4,23 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService: ~
-    EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionRegistry: ~
-    EzSystems\EzPlatformAdminUi\UserSetting\FormMapperRegistry: ~
+    EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService:
+        deprecated: '"%service_id%" is deprecated since 1.5 and will be removed in 2.0. Please use \EzSystems\EzPlatformUser\UserSetting\UserSettingService instead.'
 
     #
     # User Settings Implementations
     #
     EzSystems\EzPlatformAdminUi\UserSetting\Setting\Timezone:
-        tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: timezone }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: timezone }
+        deprecated: '"%service_id%" is deprecated since 1.5, to be removed in 2.0. Use \EzSystems\EzPlatformUser\UserSetting\Setting\Timezone instead.'
 
     EzSystems\EzPlatformAdminUi\UserSetting\Setting\SubitemsLimit:
-        arguments:
-            $subitemsLimit: '$subitems_module.limit$'
-        tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: subitems_limit }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: subitems_limit }
+        deprecated: '"%service_id%" is deprecated since 1.5, to be removed in 2.0. Use \EzSystems\EzPlatformUser\UserSetting\Setting\SubitemsLimit instead.'
+
+    #
+    # UpdateFormType
+    #
+    EzSystems\EzPlatformAdminUi\Form\Type\User\Setting\UserSettingUpdateType:
+        deprecated: '"%service_id%" is deprecated since 1.5, to be removed in 2.0. Use \EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType instead.'
 
     EzSystems\EzPlatformAdminUi\UserSetting\Setting\Language:
         arguments:

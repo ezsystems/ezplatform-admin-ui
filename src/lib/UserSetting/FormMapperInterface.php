@@ -10,6 +10,9 @@ namespace EzSystems\EzPlatformAdminUi\UserSetting;
 
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * @deprecated since 1.5, to be removed in 2.0. Use \EzSystems\EzPlatformUser\UserSetting\FormMapperInterface instead.
+ */
 interface FormMapperInterface
 {
     /**

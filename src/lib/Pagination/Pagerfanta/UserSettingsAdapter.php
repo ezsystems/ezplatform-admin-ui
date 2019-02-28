@@ -11,9 +11,12 @@ namespace EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta;
 use EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService;
 use Pagerfanta\Adapter\AdapterInterface;
 
+/**
+ * @deprecated Deprecated in 1.5 and will be removed in 2.0. Please use \EzSystems\EzPlatformUser\Pagination\Pagerfanta\UserSettingsAdapter instead.
+ */
 class UserSettingsAdapter implements AdapterInterface
 {
-    /** @var \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService */
+    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
     private $userSettingService;
 
     /**

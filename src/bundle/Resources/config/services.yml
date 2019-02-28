@@ -34,13 +34,6 @@ services:
             - [setContainer, ["@service_container"]]
             - [performAccessCheck, []]
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserForgotPasswordController:
-        tags: [controller.service_arguments]
-        calls:
-            - [setContainer, ['@service_container']]
-        arguments:
-            $tokenIntervalSpec: '$security.token_interval_spec$'
-
     EzSystems\EzPlatformAdminUiBundle\ParamConverter\:
         resource: "../../ParamConverter/*"
         public: true

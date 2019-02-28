@@ -6,7 +6,6 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle;
 
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UserSetting;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\AdminThemePathPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ComponentPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SecurityLoginPass;
@@ -52,8 +51,6 @@ class EzPlatformAdminUiBundle extends Bundle
         $container->addCompilerPass(new ComponentPass());
         $container->addCompilerPass(new SecurityLoginPass());
         $container->addCompilerPass(new ViewBuilderRegistryPass());
-        $container->addCompilerPass(new UserSetting\ValueDefinitionPass());
-        $container->addCompilerPass(new UserSetting\FormMapperPass());
         $container->addCompilerPass(new AdminThemePathPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1);
     }
 

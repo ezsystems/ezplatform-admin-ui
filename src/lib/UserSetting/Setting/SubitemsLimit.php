@@ -8,101 +8,71 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UserSetting\Setting;
 
-use EzSystems\EzPlatformAdminUi\UserSetting\FormMapperInterface;
-use EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionInterface;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
+use EzSystems\EzPlatformUser\UserSetting\FormMapperInterface;
+use EzSystems\EzPlatformUser\UserSetting\Setting\SubitemsLimit as BaseSubitemsLimit;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
+/**
+ * @deprecated Deprecated since 1.5, to be removed in 2.0. Use \EzSystems\EzPlatformUser\UserSetting\Setting\SubitemsLimit instead.
+ */
 class SubitemsLimit implements ValueDefinitionInterface, FormMapperInterface
 {
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
-    private $translator;
-
-    /** @var int */
+    /** @var \EzSystems\EzPlatformUser\UserSetting\Setting\SubitemsLimit */
     private $subitemsLimit;
 
     /**
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param int $subitemsLimit
+     * @param \EzSystems\EzPlatformUser\UserSetting\Setting\SubitemsLimit $subitemsLimit
      */
-    public function __construct(TranslatorInterface $translator, int $subitemsLimit)
+    public function __construct(BaseSubitemsLimit $subitemsLimit)
     {
-        $this->translator = $translator;
         $this->subitemsLimit = $subitemsLimit;
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getName(): string
     {
-        return $this->getTranslatedName();
+        return $this->subitemsLimit->getName();
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getDescription(): string
     {
-        return $this->getTranslatedDescription();
+        return $this->subitemsLimit->getDescription();
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $storageValue
+     *
+     * @return string
      */
     public function getDisplayValue(string $storageValue): string
     {
-        return $storageValue;
+        return $this->subitemsLimit->getDisplayValue($storageValue);
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getDefaultValue(): string
     {
-        return (string)$this->subitemsLimit;
+        return $this->subitemsLimit->getDefaultValue();
     }
 
     /**
-     * {@inheritdoc}
+     * @param \Symfony\Component\Form\FormBuilderInterface $formBuilder
+     * @param \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface $value
+     *
+     * @return \Symfony\Component\Form\FormBuilderInterface
      */
-    public function mapFieldForm(FormBuilderInterface $formBuilder, ValueDefinitionInterface $value): FormBuilderInterface
-    {
-        return $formBuilder->create(
-            'value',
-            NumberType::class,
-            [
-                'attr' => ['min' => 1],
-                'required' => true,
-                'label' => $this->getTranslatedDescription(),
-            ]
-        );
-    }
-
-    /**
-     * @return string
-     */
-    private function getTranslatedName(): string
-    {
-        return $this->translator->trans(
-            /** @Desc("Sub-items") */
-            'settings.subitems_limit.value.title',
-            [],
-            'user_settings'
-        );
-    }
-
-    /**
-     * @return string
-     */
-    private function getTranslatedDescription(): string
-    {
-        return $this->translator->trans(
-            /** @Desc("Number of items displayed in the table") */
-            'settings.subitems_limit.value.description',
-            [],
-            'user_settings'
-        );
+    public function mapFieldForm(
+        FormBuilderInterface $formBuilder,
+        \EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionInterface $value
+    ): FormBuilderInterface {
+        return $this->subitemsLimit->mapFieldForm($formBuilder, $value);
     }
 }

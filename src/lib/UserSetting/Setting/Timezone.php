@@ -8,96 +8,71 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UserSetting\Setting;
 
-use EzSystems\EzPlatformAdminUi\UserSetting\FormMapperInterface;
-use EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionInterface;
-use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
+use EzSystems\EzPlatformUser\UserSetting\FormMapperInterface;
+use EzSystems\EzPlatformUser\UserSetting\Setting\Timezone as BaseTimezone;
+use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
+/**
+ * @deprecated Deprecated since 1.5, to be removed in 2.0. Use \EzSystems\EzPlatformUser\UserSetting\Setting\Timezone instead.
+ */
 class Timezone implements ValueDefinitionInterface, FormMapperInterface
 {
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
-    private $translator;
+    /** @var \EzSystems\EzPlatformUser\UserSetting\Setting\Timezone */
+    private $timezone;
 
     /**
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \EzSystems\EzPlatformUser\UserSetting\Setting\Timezone $timezone
      */
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(BaseTimezone $timezone)
     {
-        $this->translator = $translator;
+        $this->timezone = $timezone;
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getName(): string
     {
-        return $this->getTranslatedName();
+        return $this->timezone->getName();
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getDescription(): string
     {
-        return $this->getTranslatedDescription();
+        return $this->timezone->getDescription();
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $storageValue
+     *
+     * @return string
      */
     public function getDisplayValue(string $storageValue): string
     {
-        return $storageValue;
+        return $this->timezone->getDisplayValue($storageValue);
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getDefaultValue(): string
     {
-        return date_default_timezone_get();
+        return $this->timezone->getDefaultValue();
     }
 
     /**
-     * {@inheritdoc}
+     * @param \Symfony\Component\Form\FormBuilderInterface $formBuilder
+     * @param \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface $value
+     *
+     * @return \Symfony\Component\Form\FormBuilderInterface
      */
-    public function mapFieldForm(FormBuilderInterface $formBuilder, ValueDefinitionInterface $value): FormBuilderInterface
-    {
-        return $formBuilder->create(
-            'value',
-            TimezoneType::class,
-            [
-                'multiple' => false,
-                'required' => true,
-                'label' => $this->getTranslatedDescription(),
-            ]
-        );
-    }
-
-    /**
-     * @return string
-     */
-    private function getTranslatedName(): string
-    {
-        return $this->translator->trans(
-            /** @Desc("Time Zone") */
-            'settings.timezone.value.title',
-            [],
-            'user_settings'
-        );
-    }
-
-    /**
-     * @return string
-     */
-    private function getTranslatedDescription(): string
-    {
-        return $this->translator->trans(
-            /** @Desc("Time Zone in use for displaying Date & Time") */
-            'settings.timezone.value.description',
-            [],
-            'user_settings'
-        );
+    public function mapFieldForm(
+        FormBuilderInterface $formBuilder,
+        \EzSystems\EzPlatformAdminUi\UserSetting\ValueDefinitionInterface $value
+    ): FormBuilderInterface {
+        return $this->timezone->mapFieldForm($formBuilder, $value);
     }
 }

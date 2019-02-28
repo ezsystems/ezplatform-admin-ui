@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
-use EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService;
+use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
 use EzSystems\EzPlatformAdminUi\UI\Config\ConfigWrapper;
 use ProxyManager\Factory\LazyLoadingValueHolderFactory;
 use ProxyManager\Proxy\LazyLoadingInterface;
@@ -22,11 +22,11 @@ use Twig\Extension\GlobalsInterface;
  */
 class UserPreferencesGlobalExtension extends AbstractExtension implements GlobalsInterface
 {
-    /** @var \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService */
+    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
     protected $userSettingService;
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService $userSettingService
+     * @param \EzSystems\EzPlatformUser\UserSetting\UserSettingService $userSettingService
      */
     public function __construct(
         UserSettingService $userSettingService

@@ -13,6 +13,8 @@ namespace EzSystems\EzPlatformAdminUi\UserSetting;
  *
  * User Preferences are not displayed by default unless
  * ValueDefinitionInterface implementation is provided.
+ *
+ * @deprecated since 1.5, to be removed in 2.0. Use \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface instead.
  */
 interface ValueDefinitionInterface
 {
