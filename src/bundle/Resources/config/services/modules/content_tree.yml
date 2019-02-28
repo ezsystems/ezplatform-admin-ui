@@ -9,7 +9,8 @@ services:
             $displayLimit: '$content_tree_module.load_more_limit$'
             $childrenLoadMaxLimit: '$content_tree_module.children_load_max_limit$'
             $maxDepth: '$content_tree_module.tree_max_depth$'
-            $contentTypeIdentifierIgnoreList: '$content_tree_module.content_type_ignore_list$'
+            $allowedContentTypes: '$content_tree_module.allowed_content_types$'
+            $ignoredContentTypes: '$content_tree_module.ignored_content_types$'
 
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module\ContentTree:
         tags:

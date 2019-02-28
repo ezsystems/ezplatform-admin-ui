@@ -32,7 +32,8 @@ class ContentTree implements ProviderInterface
             'loadMoreLimit' => $this->configResolver->getParameter('content_tree_module.load_more_limit'),
             'childrenLoadMaxLimit' => $this->configResolver->getParameter('content_tree_module.children_load_max_limit'),
             'treeMaxDepth' => $this->configResolver->getParameter('content_tree_module.tree_max_depth'),
-            'contentTypeIgnoreList' => $this->configResolver->getParameter('content_tree_module.content_type_ignore_list'),
+            'allowedContentTypes' => $this->configResolver->getParameter('content_tree_module.allowed_content_types'),
+            'ignoredContentTypes' => $this->configResolver->getParameter('content_tree_module.ignored_content_types'),
         ];
     }
 }
