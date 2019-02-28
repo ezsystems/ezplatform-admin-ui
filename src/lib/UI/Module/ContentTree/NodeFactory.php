@@ -83,7 +83,12 @@ final class NodeFactory
         int $depth = 0
     ): Node {
         $content = $location->getContent();
-        $contentType = $content->getContentType();
+        $contentInfo = $location->getContentInfo();
+
+        // Top Level Location (id = 1) does not have a Content Type
+        $contentType = $location->depth > 0
+            ? $content->getContentType()
+            : null;
 
         $limit = $this->resolveLoadLimit($loadSubtreeRequestNode);
         $offset = null !== $loadSubtreeRequestNode
@@ -116,9 +121,9 @@ final class NodeFactory
             $depth,
             $location->id,
             $location->contentId,
-            $content->getName(),
-            $contentType->identifier,
-            $contentType->isContainer,
+            $contentInfo->name,
+            $contentType ? $contentType->identifier : '',
+            $contentType ? $contentType->isContainer : true,
             $location->invisible,
             $limit,
             $totalChildrenCount,

@@ -52,6 +52,13 @@ class ContentTree extends AbstractParser
                         ->isRequired()
                         ->defaultValue(10)
                     ->end()
+                    ->integerNode('tree_root_location_id')
+                        ->info(
+                            'Location that will be used as a tree root. User won\'t be able to see ancestors of this location.' . "\n\n"
+                            . 'When set to \'null\' SiteAccess \'content.tree_root.location_id\' setting will be used.'
+                        )
+                        ->defaultValue(null)
+                    ->end()
                     ->arrayNode('allowed_content_types')
                         ->beforeNormalization()
                             ->ifString()
@@ -110,11 +117,11 @@ class ContentTree extends AbstractParser
             );
         }
 
-        if (array_key_exists('ignored_content_types', $settings)) {
+        if (array_key_exists('tree_root_location_id', $settings)) {
             $contextualizer->setContextualParameter(
-                'content_tree_module.ignored_content_types',
+                'content_tree_module.tree_root_location_id',
                 $currentScope,
-                $settings['ignored_content_types']
+                $settings['tree_root_location_id']
             );
         }
 
@@ -123,6 +130,14 @@ class ContentTree extends AbstractParser
                 'content_tree_module.allowed_content_types',
                 $currentScope,
                 $settings['allowed_content_types']
+            );
+        }
+
+        if (array_key_exists('ignored_content_types', $settings)) {
+            $contextualizer->setContextualParameter(
+                'content_tree_module.ignored_content_types',
+                $currentScope,
+                $settings['ignored_content_types']
             );
         }
     }

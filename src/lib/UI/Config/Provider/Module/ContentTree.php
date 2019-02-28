@@ -28,12 +28,15 @@ class ContentTree implements ProviderInterface
      */
     public function getConfig(): array
     {
+        $rootLocationId = $this->configResolver->getParameter('content_tree_module.tree_root_location_id');
+
         return [
             'loadMoreLimit' => $this->configResolver->getParameter('content_tree_module.load_more_limit'),
             'childrenLoadMaxLimit' => $this->configResolver->getParameter('content_tree_module.children_load_max_limit'),
             'treeMaxDepth' => $this->configResolver->getParameter('content_tree_module.tree_max_depth'),
             'allowedContentTypes' => $this->configResolver->getParameter('content_tree_module.allowed_content_types'),
             'ignoredContentTypes' => $this->configResolver->getParameter('content_tree_module.ignored_content_types'),
+            'treeRootLocationId' => $rootLocationId ?? $this->configResolver->getParameter('content.tree_root.location_id'),
         ];
     }
 }
