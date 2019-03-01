@@ -29,8 +29,3 @@ services:
         tags:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: language }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: language }
-
-    EzSystems\EzPlatformAdminUi\UserSetting\Setting\CharacterCounter:
-        tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: character_counter }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: character_counter }

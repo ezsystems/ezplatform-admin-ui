@@ -172,7 +172,7 @@
                 extraPlugins:
                     AlloyEditor.Core.ATTRS.extraPlugins.value +
                     ',' +
-                    ['ezaddcontent', 'ezmoveelement', 'ezremoveblock', 'ezembed', 'ezembedinline', 'ezfocusblock', 'ezcustomtag', 'ezcountchars'].join(','),
+                    ['ezaddcontent', 'ezmoveelement', 'ezremoveblock', 'ezembed', 'ezembedinline', 'ezfocusblock', 'ezcustomtag'].join(','),
             });
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ez-data-source').querySelector('textarea').value);
             const section = wrapper.childNodes[0];
@@ -196,6 +196,8 @@
                     this.xhtmlNamespace,
                     this.ezNamespace
                 );
+
+                this.countWordsCharacters(container, data);
             };
 
             if (!section.hasChildNodes()) {
@@ -219,6 +221,44 @@
             nativeEditor.on('editorInteraction', saveRichText);
 
             return alloyEditor;
+        }
+
+        countWordsCharacters(container, editorHtml) {
+            let counterWrapper = container.parentElement.getElementsByClassName('ez-character-counter');
+
+            if (counterWrapper.length) {
+                let wordCharacterWrappers = counterWrapper[0].getElementsByTagName('span');
+                let characterCount = 0;
+                let wordCount = 0;
+                let countableTags = this.fetchCountableTags(editorHtml);
+
+                countableTags.forEach((tag) => {
+                    let sanitizedText = this.cleanWhiteCharacters(tag.innerText);
+
+                    wordCount += sanitizedText ? sanitizedText.split(' ').length : 0;
+                    characterCount += sanitizedText.length;
+                });
+
+                wordCharacterWrappers[0].innerText = wordCount;
+                wordCharacterWrappers[1].innerText = characterCount;
+            }
+        }
+
+        fetchCountableTags(html) {
+            const allowedTags = ['p:not(.ez-embed-content)', 'li', 'h1', 'h2', 'h3', 'h4', 'h5' , 'h6', 'th', 'td'];
+            const notCustomTagSelector = ':not([data-ezelement=ezattributes]) > ';
+
+            let allowedSelectors = allowedTags.map((item) => {
+                return notCustomTagSelector.concat(item);
+            });
+
+            return new DOMParser()
+                .parseFromString(html, 'text/html')
+                .querySelectorAll(allowedSelectors.join(','));
+        }
+
+        cleanWhiteCharacters(text) {
+            return text.replace(/\s\r?\n/g, ' ').trim();
         }
     };
 

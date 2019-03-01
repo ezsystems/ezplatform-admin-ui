@@ -53,7 +53,6 @@ module.exports = {
         ezPluginEmbed: './src/bundle/Resources/public/js/alloyeditor/src/plugins/ez-embed.js',
         ezPluginFocusBlock: './src/bundle/Resources/public/js/alloyeditor/src/plugins/ez-focus-block.js',
         ezPluginCustomTag: './src/bundle/Resources/public/js/alloyeditor/src/plugins/ez-custom-tag.js',
-        ezPluginCountChars: './src/bundle/Resources/public/js/alloyeditor/src/plugins/ez-count-chars.js',
         ezParagraphConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-paragraph.js',
         ezFormattedConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-formatted.js',
         ezTextConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-text.js',

@@ -77,7 +77,6 @@ class UserPreferencesGlobalExtension extends AbstractExtension implements Global
     {
         return [
             'timezone' => $this->getTimezoneValue(),
-            'character_counter' => $this->getCharacterCounterValue(),
         ];
     }
 
@@ -91,16 +90,5 @@ class UserPreferencesGlobalExtension extends AbstractExtension implements Global
     private function getTimezoneValue(): string
     {
         return $this->userSettingService->getUserSetting('timezone')->value;
-    }
-
-    /**
-     * @return string
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
-    private function getCharacterCounterValue(): string
-    {
-        return $this->userSettingService->getUserSetting('character_counter')->value;
     }
 }
