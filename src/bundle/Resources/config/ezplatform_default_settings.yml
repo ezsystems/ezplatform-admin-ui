@@ -52,6 +52,14 @@ parameters:
     ezsettings.default.content_translate_view: {}
     ezsettings.admin_group.user_settings.templates.list: "EzPlatformAdminUiBundle:user/settings:list.html.twig"
     ezsettings.admin_group.user_settings.templates.update: "EzPlatformAdminUiBundle:user/settings:update.html.twig"
+    ezsettings.admin_group.user_change_password.templates.form: "EzPlatformAdminUiBundle:user-profile:change_user_password.html.twig"
+    ezsettings.admin_group.user_forgot_password.templates.form: "EzPlatformAdminUiBundle:Security/forgot_user_password:index.html.twig"
+    ezsettings.admin_group.user_forgot_password_success.templates.form: "EzPlatformAdminUiBundle:Security/forgot_user_password:success.html.twig"
+    ezsettings.admin_group.user_forgot_password_login.templates.form: "EzPlatformAdminUiBundle:Security/forgot_user_password:with_login.html.twig"
+    ezsettings.admin_group.user_forgot_password.templates.mail: "EzPlatformAdminUiBundle:Security/mail:forgot_user_password.html.twig"
+    ezsettings.admin_group.user_reset_password.templates.form: "EzPlatformAdminUiBundle:Security/reset_user_password:index.html.twig"
+    ezsettings.admin_group.user_reset_password.templates.invalid_link: "EzPlatformAdminUiBundle:Security/reset_user_password:invalid_link.html.twig"
+    ezsettings.admin_group.user_reset_password.templates.success: "EzPlatformAdminUiBundle:Security/reset_user_password:success.html.twig"
 
     # Additional translations e.g. ['en_US', 'nb_NO']
     ezsettings.default.user_preferences.additional_translations: []
