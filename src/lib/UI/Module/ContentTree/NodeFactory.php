@@ -35,27 +35,33 @@ final class NodeFactory
     private $maxDepth;
 
     /** @var string[] */
-    private $contentTypeIdentifierIgnoreList;
+    private $allowedContentTypes;
+
+    /** @var string[] */
+    private $ignoredContentTypes;
 
     /**
      * @param \eZ\Publish\API\Repository\SearchService $searchService
      * @param int $displayLimit
      * @param int $childrenLoadMaxLimit
      * @param int $maxDepth
-     * @param array $contentTypeIdentifierIgnoreList
+     * @param array $allowedContentTypes
+     * @param array $ignoredContentTypes
      */
     public function __construct(
         SearchService $searchService,
         int $displayLimit = 20,
         int $childrenLoadMaxLimit = 100,
         int $maxDepth = 10,
-        array $contentTypeIdentifierIgnoreList = []
+        array $allowedContentTypes = [],
+        array $ignoredContentTypes = []
     ) {
         $this->searchService = $searchService;
         $this->displayLimit = $displayLimit;
         $this->childrenLoadMaxLimit = $childrenLoadMaxLimit;
         $this->maxDepth = $maxDepth;
-        $this->contentTypeIdentifierIgnoreList = $contentTypeIdentifierIgnoreList;
+        $this->allowedContentTypes = $allowedContentTypes;
+        $this->ignoredContentTypes = $ignoredContentTypes;
     }
 
     /**
@@ -77,7 +83,12 @@ final class NodeFactory
         int $depth = 0
     ): Node {
         $content = $location->getContent();
-        $contentType = $content->getContentType();
+        $contentInfo = $location->getContentInfo();
+
+        // Top Level Location (id = 1) does not have a Content Type
+        $contentType = $location->depth > 0
+            ? $content->getContentType()
+            : null;
 
         $limit = $this->resolveLoadLimit($loadSubtreeRequestNode);
         $offset = null !== $loadSubtreeRequestNode
@@ -110,9 +121,9 @@ final class NodeFactory
             $depth,
             $location->id,
             $location->contentId,
-            $content->getName(),
-            $contentType->identifier,
-            $contentType->isContainer,
+            $contentInfo->name,
+            $contentType ? $contentType->identifier : '',
+            $contentType ? $contentType->isContainer : true,
             $location->invisible,
             $limit,
             $totalChildrenCount,
@@ -175,13 +186,20 @@ final class NodeFactory
         $searchQuery = new LocationQuery();
         $searchQuery->filter = new Criterion\ParentLocationId($parentLocation->id);
 
-        if (!empty($this->contentTypeIdentifierIgnoreList)) {
-            $searchQuery->filter = new Criterion\LogicalAnd([
-                $searchQuery->filter,
-                new Criterion\LogicalNot(
-                    new Criterion\ContentTypeIdentifier($this->contentTypeIdentifierIgnoreList)
-                ),
-            ]);
+        $contentTypeCriterion = null;
+
+        if (!empty($this->allowedContentTypes)) {
+            $contentTypeCriterion = new Criterion\ContentTypeIdentifier($this->allowedContentTypes);
+        }
+
+        if (empty($this->allowedContentTypes) && !empty($this->ignoredContentTypes)) {
+            $contentTypeCriterion = new Criterion\LogicalNot(
+                new Criterion\ContentTypeIdentifier($this->ignoredContentTypes)
+            );
+        }
+
+        if (null !== $contentTypeCriterion) {
+            $searchQuery->filter = new Criterion\LogicalAnd([$searchQuery->filter, $contentTypeCriterion]);
         }
 
         return $searchQuery;

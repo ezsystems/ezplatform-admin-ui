@@ -52,13 +52,31 @@ class ContentTree extends AbstractParser
                         ->isRequired()
                         ->defaultValue(10)
                     ->end()
-                    ->arrayNode('content_type_ignore_list')
-                        ->info('List of content type identifiers to ignore in Content Tree')
-                        ->arrayPrototype()
-                            ->children()
-                                ->scalarNode('content_type_identifier')
-                            ->end()
+                    ->integerNode('tree_root_location_id')
+                        ->info(
+                            'Location that will be used as a tree root. User won\'t be able to see ancestors of this location.' . "\n\n"
+                            . 'When set to \'null\' SiteAccess \'content.tree_root.location_id\' setting will be used.'
+                        )
+                        ->defaultValue(null)
+                    ->end()
+                    ->arrayNode('allowed_content_types')
+                        ->beforeNormalization()
+                            ->ifString()
+                            ->thenEmptyArray()
                         ->end()
+                        ->info(
+                            'List of content type identifiers to show in Content Tree. ' . "\n\n"
+                            . 'Use string value \'*\' to display all content types. '
+                            . 'Empty array also means all content types will be displayed.'
+                        )
+                        ->scalarPrototype()->end()
+                    ->end()
+                    ->arrayNode('ignored_content_types')
+                        ->info(
+                            'List of content type identifiers to ignore in Content Tree.' . "\n\n"
+                            . 'This option is only useful when used with \'allowed_content_types = *\'.'
+                        )
+                        ->scalarPrototype()->end()
                     ->end()
                 ->end()
             ->end();
@@ -99,11 +117,27 @@ class ContentTree extends AbstractParser
             );
         }
 
-        if (array_key_exists('content_type_ignore_list', $settings)) {
+        if (array_key_exists('tree_root_location_id', $settings)) {
             $contextualizer->setContextualParameter(
-                'content_tree_module.content_type_ignore_list',
+                'content_tree_module.tree_root_location_id',
                 $currentScope,
-                $settings['content_type_ignore_list']
+                $settings['tree_root_location_id']
+            );
+        }
+
+        if (array_key_exists('allowed_content_types', $settings)) {
+            $contextualizer->setContextualParameter(
+                'content_tree_module.allowed_content_types',
+                $currentScope,
+                $settings['allowed_content_types']
+            );
+        }
+
+        if (array_key_exists('ignored_content_types', $settings)) {
+            $contextualizer->setContextualParameter(
+                'content_tree_module.ignored_content_types',
+                $currentScope,
+                $settings['ignored_content_types']
             );
         }
     }
