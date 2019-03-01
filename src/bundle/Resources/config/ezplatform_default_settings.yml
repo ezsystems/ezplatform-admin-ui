@@ -70,4 +70,5 @@ parameters:
     ezsettings.default.content_tree_module.tree_max_depth: 10
     ezsettings.default.content_tree_module.allowed_content_types: []
     ezsettings.default.content_tree_module.ignored_content_types: []
+    ezsettings.default.content_tree_module.tree_root_location_id: ~
 
