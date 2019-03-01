@@ -24,6 +24,9 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
  *              load_more_limit: 30
  *              children_load_max_limit: 200
  *              tree_max_depth: 10
+ *              tree_root_location_id: ~ # use tree root location from SA
+ *              allowed_content_types: '*'
+ *              ignored_content_types: [article, post]
  * ```
  */
 class ContentTree extends AbstractParser
