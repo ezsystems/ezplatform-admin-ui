@@ -51,6 +51,11 @@
         }
     }
 
+    &.disabled {
+        cursor: inherit;
+        opacity: 0.5;
+    }
+
     .ez-checkbox-icon__checkbox {
         display: none;
     }

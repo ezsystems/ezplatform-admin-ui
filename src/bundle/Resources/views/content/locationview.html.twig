@@ -44,6 +44,15 @@
                         {% set items = items|merge([{ 'value': content.name }]) %}
                         {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: items } %}
 
+                        {% if location.contentInfo.isHidden %}
+                            <div class="ez-alert ez-alert--info">
+                                <svg class="ez-icon ez-icon--small">
+                                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#hide"></use>
+                                </svg>
+                                {{ 'content.hidden.message'|trans()|desc('This content item is hidden and is not publicly available') }}
+                            </div>
+                        {% endif %}
+
                         {% include '@ezdesign/parts/page_title.html.twig' with {
                             title: content.name,
                             iconName: contentType.identifier,
@@ -129,8 +138,13 @@
                     'has_unique_asset': form_location_trash_with_single_asset is defined
                 } only %}
             {% endif %}
+            {{ form(form_content_visibility_update, {'action': path('ezplatform.content.update_visibility')}) }}
         </div>
     </div>
+    {% if content_has_reverse_relations and not location.contentInfo.isHidden %}
+        {% include '@ezdesign/content/modal_content_hide_confirmation.html.twig' %}
+    {% endif %}
+
 {% endblock %}
 
 {% block stylesheets %}

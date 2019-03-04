@@ -116,6 +116,13 @@
     }
 }
 
+.ez-modal--content-hide-confirmation {
+    .modal-header {
+        background: $ez-color-base-pale;
+        border-bottom: none;
+    }
+}
+
 .ez-modal--version-draft-conflict {
     .modal-header {
         background: $ez-color-base-pale;

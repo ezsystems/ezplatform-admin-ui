@@ -46,6 +46,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     const ITEM__COPY_SUBTREE = 'content__sidebar_right__copy_subtree';
     const ITEM__MOVE = 'content__sidebar_right__move';
     const ITEM__DELETE = 'content__sidebar_right__delete';
+    const ITEM__HIDE = 'content__sidebar_right__hide';
+    const ITEM__REVEAL = 'content__sidebar_right__reveal';
 
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
@@ -263,6 +265,12 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             );
         }
 
+        if ($content->getVersionInfo()->getContentInfo()->isHidden) {
+            $this->addRevealMenuItem($menu);
+        } else {
+            $this->addHideMenuItem($menu);
+        }
+
         if ($contentIsUser && $canDelete) {
             $menu->addChild(
                 $this->createMenuItem(
@@ -310,6 +318,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             (new Message(self::ITEM__COPY_SUBTREE, 'menu'))->setDesc('Copy Subtree'),
             (new Message(self::ITEM__MOVE, 'menu'))->setDesc('Move'),
             (new Message(self::ITEM__DELETE, 'menu'))->setDesc('Delete'),
+            (new Message(self::ITEM__HIDE, 'menu'))->setDesc('Hide'),
+            (new Message(self::ITEM__REVEAL, 'menu'))->setDesc('Reveal'),
         ];
     }
 
@@ -354,5 +364,43 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 )
             );
         }
+    }
+
+    /**
+     * @param \Knp\Menu\ItemInterface $menu
+     */
+    private function addRevealMenuItem(ItemInterface $menu): void
+    {
+        $menu->addChild(
+            $this->createMenuItem(
+                self::ITEM__REVEAL,
+                [
+                    'extras' => ['icon' => 'reveal'],
+                    'attributes' => [
+                        'data-actions' => 'reveal',
+                        'class' => 'ez-btn--reveal',
+                    ],
+                ]
+            )
+        );
+    }
+
+    /**
+     * @param \Knp\Menu\ItemInterface $menu
+     */
+    private function addHideMenuItem(ItemInterface $menu): void
+    {
+        $menu->addChild(
+            $this->createMenuItem(
+                self::ITEM__HIDE,
+                [
+                    'extras' => ['icon' => 'hide'],
+                    'attributes' => [
+                        'data-actions' => 'hide',
+                        'class' => 'ez-btn--hide',
+                    ],
+                ]
+            )
+        );
     }
 }

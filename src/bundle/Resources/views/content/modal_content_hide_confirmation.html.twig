@@ -1,0 +1,26 @@
+<div class="modal fade ez-modal ez-modal--content-hide-confirmation" id="hide-content-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ 'content.hide.modal.title'|trans()|desc('Conflict when hiding content item') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg class="ez-icon ez-icon--medium" aria-hidden="true">
+                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="ez-modal-body__main">
+                    <p>
+                        {{ 'content.hide.modal.warning_content_used_by_other_content'|trans()|desc('This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.') }}<br/>
+                        {{ 'content.hide.modal.please_confirm_to_continue'|trans()|desc('If you wish to continue, please click on Confirm.') }}
+                    </p>
+                </div>
+                <div class="float-right">
+                    <button class="btn btn-dark btn-cancel" data-dismiss="modal">{{ 'content.hide.modal.cancel'|trans()|desc('Cancel') }}</button>
+                    <button class="btn btn-primary btn-confirm">{{ 'content.hide.modal.confirm'|trans()|desc('Confirm') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

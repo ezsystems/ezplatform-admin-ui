@@ -138,7 +138,7 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         foreach ($locations as $location) {
             $canHide[$location->id] = $this->permissionResolver->canUser(
                 'content', 'hide', $location->getContentInfo(), [$location]
-            );
+            ) && !$location->getContentInfo()->isHidden;
         }
 
         $viewParameters = [

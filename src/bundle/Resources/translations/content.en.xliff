@@ -31,6 +31,26 @@
         <target state="new">User with login '%login%' deleted.</target>
         <note>key: user.delete.success</note>
       </trans-unit>
+      <trans-unit id="7a80db58ea3f3bef5b9f07c4565d715efdacda99" resname="content.hide.success">
+        <source>Content '%name%' has been hidden.</source>
+        <target state="new">Content '%name%' has been hidden.</target>
+        <note>key: content.hide.success</note>
+      </trans-unit>
+      <trans-unit id="56c081f0ee65c4b44e231b9e616e9613e93e4f97" resname="content.reveal.success">
+        <source>Content '%name%' has been revealed.</source>
+        <target state="new">Content '%name%' has been revealed.</target>
+        <note>key: content.reveal.success</note>
+      </trans-unit>
+      <trans-unit id="fbc24757e92f52997d730762e004765425845995" resname="content.hide.already_hidden">
+        <source>Content '%name%' was already hidden.</source>
+        <target state="new">Content '%name%' has been hidden.</target>
+        <note>key: content.hide.already_hidden</note>
+      </trans-unit>
+      <trans-unit id="d906dd66ce60bd64f6ba3ccc4ecf3fa443ff9e83" resname="content.reveal.already_visible">
+        <source>Content '%name%' was already visible.</source>
+        <target state="new">Content '%name%' was already visible.</target>
+        <note>key: content.reveal.already_visible</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>
