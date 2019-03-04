@@ -396,11 +396,12 @@ class ContentController extends Controller
         $result = null;
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (ContentVisibilityUpdateData $data, Request $request) {
+            $result = $this->submitHandler->handle($form, function (ContentVisibilityUpdateData $data) {
                 $contentInfo = $data->getContentInfo();
-                $newValue = $data->getVisible();
+                $desiredVisibility = $data->getVisible();
+                $location = $data->getLocation();
 
-                if ($contentInfo->isHidden && $newValue === false) {
+                if ($contentInfo->isHidden && $desiredVisibility === false) {
                     $this->notificationHandler->success(
                         $this->translator->trans(
                             /** @Desc("Content '%name%' was already hidden.") */
@@ -411,7 +412,7 @@ class ContentController extends Controller
                     );
                 }
 
-                if (!$contentInfo->isHidden && $newValue === true) {
+                if (!$contentInfo->isHidden && $desiredVisibility === true) {
                     $this->notificationHandler->success(
                         $this->translator->trans(
                             /** @Desc("Content '%name%' was already visible.") */
@@ -422,7 +423,7 @@ class ContentController extends Controller
                     );
                 }
 
-                if (!$contentInfo->isHidden && $newValue === false) {
+                if (!$contentInfo->isHidden && $desiredVisibility === false) {
                     $this->contentService->hideContent($contentInfo);
 
                     $this->notificationHandler->success(
@@ -435,7 +436,7 @@ class ContentController extends Controller
                     );
                 }
 
-                if ($contentInfo->isHidden && $newValue === true) {
+                if ($contentInfo->isHidden && $desiredVisibility === true) {
                     $this->contentService->revealContent($contentInfo);
 
                     $this->notificationHandler->success(
@@ -448,10 +449,10 @@ class ContentController extends Controller
                     );
                 }
 
-                return $this->redirectBack($request);
+                return $location === null ? $this->redirectToRoute('ezplatform.dashboard') : $this->redirectToLocation($location);
             });
         }
 
-        return $result instanceof Response ? $result : $this->redirectBack($request);
+        return $result instanceof Response ? $result : $this->redirectToRoute('ezplatform.dashboard');
     }
 }

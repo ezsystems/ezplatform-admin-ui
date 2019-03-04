@@ -9,7 +9,6 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 abstract class Controller extends BaseController
 {
@@ -30,24 +29,5 @@ abstract class Controller extends BaseController
             'locationId' => $location->id,
             '_fragment' => $uriFragment,
         ]);
-    }
-
-    /**
-     * Redirects to the previous URL or to the dashboard if referer is different host.
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function redirectBack(Request $request): RedirectResponse
-    {
-        $referer = $request->headers->get('referer');
-        $host = $request->getSchemeAndHttpHost();
-
-        if (strpos($referer, $host) === 0) {
-            return $this->redirect($referer);
-        }
-
-        return $this->redirect($this->generateUrl('ezplatform.dashboard'));
     }
 }

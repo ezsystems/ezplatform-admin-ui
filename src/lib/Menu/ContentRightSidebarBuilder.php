@@ -367,7 +367,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     }
 
     /**
-     * @param ItemInterface $menu
+     * @param \Knp\Menu\ItemInterface $menu
      */
     private function addRevealMenuItem(ItemInterface $menu): void
     {
@@ -386,7 +386,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     }
 
     /**
-     * @param ItemInterface $menu
+     * @param \Knp\Menu\ItemInterface $menu
      */
     private function addHideMenuItem(ItemInterface $menu): void
     {

@@ -28,6 +28,11 @@ class ContentVisibilityUpdateType extends AbstractType
                 ['label' => false, 'attr' => ['hidden' => true]]
             )
             ->add(
+                'location',
+                LocationType::class,
+                ['label' => false, 'attr' => ['hidden' => true]]
+            )
+            ->add(
                 'visible',
                 HiddenType::class
             );

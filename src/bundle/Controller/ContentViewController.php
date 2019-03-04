@@ -270,7 +270,11 @@ class ContentViewController extends Controller
 
         $contentVisibilityUpdateForm = $this->sfFormFactory->create(
             ContentVisibilityUpdateType::class,
-            new ContentVisibilityUpdateData($location->contentInfo, $location->getContentInfo()->isHidden)
+            new ContentVisibilityUpdateData(
+                $location->getContentInfo(),
+                $location,
+                $location->getContentInfo()->isHidden
+            )
         );
 
         $view->addParameters([

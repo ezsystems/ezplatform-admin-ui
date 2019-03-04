@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Content;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\Location;
 
 class ContentVisibilityUpdateData
 {
@@ -19,15 +20,23 @@ class ContentVisibilityUpdateData
     private $visible;
 
     /**
+     * @var \eZ\Publish\API\Repository\Values\Content\Location|null
+     */
+    private $location;
+
+    /**
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
      * @param bool|null $visible
      */
     public function __construct(
         ContentInfo $contentInfo = null,
+        Location $location = null,
         bool $visible = null
     ) {
         $this->contentInfo = $contentInfo;
         $this->visible = $visible;
+        $this->location = $location;
     }
 
     /**
@@ -60,5 +69,21 @@ class ContentVisibilityUpdateData
     public function setVisible(bool $visible): void
     {
         $this->visible = $visible;
+    }
+
+    /**
+     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
+     */
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
+     */
+    public function setLocation(?Location $location): void
+    {
+        $this->location = $location;
     }
 }
