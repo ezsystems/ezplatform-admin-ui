@@ -4,6 +4,10 @@ import AlloyEditor from 'alloyeditor';
 import EzWidgetButton from '../base/ez-widgetbutton';
 
 export default class EzBtnCustomTag extends EzWidgetButton {
+    getUpdateBtnName() {
+        return `ezBtn${this.customTagName.charAt(0).toUpperCase() + this.customTagName.slice(1)}Update`;
+    }
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -12,7 +16,7 @@ export default class EzBtnCustomTag extends EzWidgetButton {
      */
     render() {
         if (this.props.renderExclusive) {
-            const buttonName = `ezBtn${this.customTagName.charAt(0).toUpperCase() + this.customTagName.slice(1)}Update`;
+            const buttonName = this.getUpdateBtnName();
             const ButtonComponent = AlloyEditor[buttonName];
 
             return <ButtonComponent createNewTag="true" values={this.values} {...this.props} />;

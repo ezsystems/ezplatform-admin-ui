@@ -1,21 +1,30 @@
 (function(global, doc) {
-    Object.keys(global.eZ.adminUiConfig.richTextCustomTags).forEach((customTag) => {
-        const tagConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
+    Object.entries(global.eZ.adminUiConfig.richTextCustomTags).forEach(([customTag, tagConfig]) => {
+        const isInline = tagConfig.isInline;
         const componentClassName = `ezBtn${customTag.charAt(0).toUpperCase() + customTag.slice(1)}`;
         const editComponentClassName = `${componentClassName}Edit`;
         const updateComponentClassName = `${componentClassName}Update`;
+        const buttonCustomTagBaseClass = isInline ? global.eZ.ezAlloyEditor.ezBtnInlineCustomTag : global.eZ.ezAlloyEditor.ezBtnCustomTag;
+        const buttonCustomTagEditBaseClass = isInline
+            ? global.eZ.ezAlloyEditor.ezBtnInlineCustomTagEdit
+            : global.eZ.ezAlloyEditor.ezBtnCustomTagEdit;
+        const buttonCustomTagUpdateBaseClass = isInline
+            ? global.eZ.ezAlloyEditor.ezBtnInlineCustomTagUpdate
+            : global.eZ.ezAlloyEditor.ezBtnCustomTagUpdate;
 
-        class ButtonCustomTag extends global.eZ.ezAlloyEditor.ezBtnCustomTag {
+        class ButtonCustomTag extends buttonCustomTagBaseClass {
             constructor(props) {
                 super(props);
 
                 const values = {};
 
-                Object.entries(tagConfig.attributes).forEach(([attr, value]) => {
-                    values[attr] = {
-                        value: value.defaultValue,
-                    };
-                });
+                if (tagConfig.attributes) {
+                    Object.entries(tagConfig.attributes).forEach(([attr, value]) => {
+                        values[attr] = {
+                            value: value.defaultValue,
+                        };
+                    });
+                }
 
                 this.label = tagConfig.label;
                 this.icon = tagConfig.icon || '/bundles/ezplatformadminui/img/ez-icons.svg#tag';
@@ -28,12 +37,12 @@
             }
         }
 
-        class ButtonCustomTagEdit extends global.eZ.ezAlloyEditor.ezBtnCustomTagEdit {
+        class ButtonCustomTagEdit extends buttonCustomTagEditBaseClass {
             constructor(props) {
                 super(props);
 
                 this.customTagName = customTag;
-                this.attributes = tagConfig.attributes;
+                this.attributes = tagConfig.attributes || {};
             }
 
             static get key() {
@@ -41,12 +50,12 @@
             }
         }
 
-        class ButtonCustomTagUpdate extends global.eZ.ezAlloyEditor.ezBtnCustomTagUpdate {
+        class ButtonCustomTagUpdate extends buttonCustomTagUpdateBaseClass {
             constructor(props) {
                 super(props);
 
                 this.customTagName = customTag;
-                this.attributes = tagConfig.attributes;
+                this.attributes = tagConfig.attributes || {};
             }
 
             static get key() {

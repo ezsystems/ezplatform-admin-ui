@@ -15,7 +15,7 @@ export default class EzBtnEmbedInline extends EzBtnEmbed {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        const css = 'ae-button ez-btn-ae ez-btn-ae--embed';
+        const css = 'ae-button ez-btn-ae ez-btn-ae--embed-inline';
         const label = Translator.trans(/*@Desc("Embed")*/ 'embed_btn.label', {}, 'alloy_editor');
 
         return (

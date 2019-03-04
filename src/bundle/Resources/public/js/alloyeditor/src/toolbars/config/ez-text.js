@@ -13,6 +13,7 @@ export default class EzTextConfig {
             'ezquote',
             'ezstrike',
             'ezlink',
+            ...config.inlineCustomTags,
         ];
 
         this.test = AlloyEditor.SelectionTest.text;

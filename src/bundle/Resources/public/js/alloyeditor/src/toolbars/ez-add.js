@@ -39,9 +39,11 @@ export default class EzToolbarAdd extends AlloyEditor.Toolbars.add {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        const selectionData = this.props.selectionData;
+        const { selectionData, editor } = this.props;
+        const path = editor.get('nativeEditor').elementPath();
+        const isInlineCustomTag = path && path.contains((element) => element.$.dataset.ezelement === 'eztemplateinline');
 
-        if (selectionData && selectionData.text) {
+        if ((selectionData && selectionData.text) || isInlineCustomTag) {
             return null;
         }
 

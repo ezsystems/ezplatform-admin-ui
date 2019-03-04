@@ -74,6 +74,7 @@ class CustomTag
             $config[$tagName] = [
                 'label' => "ezrichtext.custom_tags.{$tagName}.label",
                 'description' => "ezrichtext.custom_tags.{$tagName}.description",
+                'isInline' => $customTagConfiguration['is_inline'],
             ];
 
             if (!empty($customTagConfiguration['icon'])) {
