@@ -393,14 +393,15 @@ class ContentController extends Controller
     {
         $form = $this->createForm(ContentVisibilityUpdateType::class);
         $form->handleRequest($request);
+        $result = null;
 
         if ($form->isSubmitted()) {
-            $this->submitHandler->handle($form, function (ContentVisibilityUpdateData $data) {
+            $result = $this->submitHandler->handle($form, function (ContentVisibilityUpdateData $data, Request $request) {
                 $contentInfo = $data->getContentInfo();
                 $newValue = $data->getVisible();
 
                 if ($contentInfo->isHidden && $newValue === false) {
-                    return $this->notificationHandler->success(
+                    $this->notificationHandler->success(
                         $this->translator->trans(
                             /** @Desc("Content '%name%' was already hidden.") */
                             'content.hide.already_hidden',
@@ -411,7 +412,7 @@ class ContentController extends Controller
                 }
 
                 if (!$contentInfo->isHidden && $newValue === true) {
-                    return $this->notificationHandler->success(
+                    $this->notificationHandler->success(
                         $this->translator->trans(
                             /** @Desc("Content '%name%' was already visible.") */
                             'content.reveal.already_visible',
@@ -421,10 +422,10 @@ class ContentController extends Controller
                     );
                 }
 
-                if ($newValue === false) {
+                if (!$contentInfo->isHidden && $newValue === false) {
                     $this->contentService->hideContent($contentInfo);
 
-                    return $this->notificationHandler->success(
+                    $this->notificationHandler->success(
                         $this->translator->trans(
                             /** @Desc("Content '%name%' has been hidden.") */
                             'content.hide.success',
@@ -434,10 +435,10 @@ class ContentController extends Controller
                     );
                 }
 
-                if ($newValue === true) {
+                if ($contentInfo->isHidden && $newValue === true) {
                     $this->contentService->revealContent($contentInfo);
 
-                    return $this->notificationHandler->success(
+                    $this->notificationHandler->success(
                         $this->translator->trans(
                             /** @Desc("Content '%name%' has been revealed.") */
                             'content.reveal.success',
@@ -446,9 +447,11 @@ class ContentController extends Controller
                         )
                     );
                 }
+
+                return $this->redirectBack($request);
             });
         }
 
-        return $this->redirectBack($request);
+        return $result instanceof Response ? $result : $this->redirectBack($request);
     }
 }
