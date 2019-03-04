@@ -51,6 +51,41 @@
         <target state="new">User Preferences</target>
         <note>key: breadcrumb.user_preferences</note>
       </trans-unit>
+      <trans-unit id="d23f0200b4769a69d2414de6d96117fed4601326" resname="character_counter.characters">
+        <source>characters</source>
+        <target state="new">characters</target>
+        <note>key: character_counter.characters</note>
+      </trans-unit>
+      <trans-unit id="b3640cba0a21cf24519f469dc0bf31c036efdc28" resname="character_counter.words">
+        <source>words</source>
+        <target state="new">words</target>
+        <note>key: character_counter.words</note>
+      </trans-unit>
+      <trans-unit id="22d5072ec8766c24df085f05aaeda403f02ec585" resname="content.hide.modal.cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: content.hide.modal.cancel</note>
+      </trans-unit>
+      <trans-unit id="0d905b86763ff15a40c8c15f0960d6038bdfd008" resname="content.hide.modal.confirm">
+        <source>Confirm</source>
+        <target state="new">Confirm</target>
+        <note>key: content.hide.modal.confirm</note>
+      </trans-unit>
+      <trans-unit id="5c48055acad8df653edc1f8f65130d784fed3d88" resname="content.hide.modal.please_confirm_to_continue">
+        <source>If you wish to continue, please click on Confirm.</source>
+        <target state="new">If you wish to continue, please click on Confirm.</target>
+        <note>key: content.hide.modal.please_confirm_to_continue</note>
+      </trans-unit>
+      <trans-unit id="7932e7fd6d6b90a8264cf5805586cab3294290ed" resname="content.hide.modal.title">
+        <source>Conflict when hiding content item</source>
+        <target state="new">Conflict when hiding content item</target>
+        <note>key: content.hide.modal.title</note>
+      </trans-unit>
+      <trans-unit id="0f260745fb36618170e86bd6407bb2facd3a05a1" resname="content.hide.modal.warning_content_used_by_other_content">
+        <source>This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</source>
+        <target state="new">This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</target>
+        <note>key: content.hide.modal.warning_content_used_by_other_content</note>
+      </trans-unit>
       <trans-unit id="fb19ae886e63bac3aa3b851ac00aae8a3b777992" resname="content.in_trash">
         <source>In Trash</source>
         <target state="new">In Trash</target>
@@ -244,12 +279,7 @@
         <target state="new">Swap the content item at this location with another</target>
         <note>key: tab.locations.swap_with_another</note>
       </trans-unit>
-      <trans-unit id="ebe1352e4bc48c8ec1a4e5f7352c0d20f3d0a18f" resname="tab.view.content">
-        <source>Content</source>
-        <target state="new">Content</target>
-        <note>key: tab.view.content</note>
-      </trans-unit>
-      <trans-unit id="fd2350c1f97fb7a3bd77d158fcf6dfbd5845a9a0" resname="tab.view.preview">
+      <trans-unit id="1246bcf8752e249bdec2067d43cfae2a5103bc5f" resname="tab.view.preview">
         <source>Preview</source>
         <target state="new">Preview</target>
         <note>key: tab.view.preview</note>
