@@ -35,9 +35,9 @@ abstract class Controller extends BaseController
     /**
      * Redirects to the previous URL or to the dashboard if referer is different host.
      *
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function redirectBack(Request $request): RedirectResponse
     {

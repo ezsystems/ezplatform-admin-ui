@@ -385,9 +385,9 @@ class ContentController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function updateVisibilityAction(Request $request): Response
     {
