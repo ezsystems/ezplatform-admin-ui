@@ -31,22 +31,22 @@
         <target state="new">Edit</target>
         <note>key: content__sidebar_right__edit</note>
       </trans-unit>
-      <trans-unit id="522a7eb05659ac849a762954effc22db818b8323" resname="content__sidebar_right__move">
-        <source>Move</source>
-        <target state="new">Move</target>
-        <note>key: content__sidebar_right__move</note>
-      </trans-unit>
       <trans-unit id="4edbd819e96b4bea94ad02f9ce655c2f81f1b4d0" resname="content__sidebar_right__hide">
         <source>Hide</source>
         <target state="new">Hide</target>
         <note>key: content__sidebar_right__hide</note>
       </trans-unit>
-      <trans-unit id="522a7eb05659ac849a762954effc22db818b8323" resname="content__sidebar_right__reveal">
+      <trans-unit id="522a7eb05659ac849a762954effc22db818b8323" resname="content__sidebar_right__move">
+        <source>Move</source>
+        <target state="new">Move</target>
+        <note>key: content__sidebar_right__move</note>
+      </trans-unit>
+      <trans-unit id="bbf7b43821e5ac0ce57d977a3ce156baf9a9d7b7" resname="content__sidebar_right__reveal">
         <source>Reveal</source>
         <target state="new">Reveal</target>
         <note>key: content__sidebar_right__reveal</note>
       </trans-unit>
-      <trans-unit id="bbf7b43821e5ac0ce57d977a3ce156baf9a9d7b7" resname="content__sidebar_right__send_to_trash">
+      <trans-unit id="9445b360492505d3a8d7be4c316e2cc62f381e03" resname="content__sidebar_right__send_to_trash">
         <source>Send to Trash</source>
         <target state="new">Send to Trash</target>
         <note>key: content__sidebar_right__send_to_trash</note>

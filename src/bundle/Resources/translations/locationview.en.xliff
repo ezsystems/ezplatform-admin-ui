@@ -36,6 +36,11 @@
         <target state="new">Select language</target>
         <note>key: content.edit.select_language</note>
       </trans-unit>
+      <trans-unit id="e136be672df8eb27dc4eb2f1ce0650096090bf81" resname="content.hidden.message">
+        <source>This content item is hidden and is not publicly available</source>
+        <target state="new">This content item is hidden and is not publicly available</target>
+        <note>key: content.hidden.message</note>
+      </trans-unit>
       <trans-unit id="9c91d85bc7658ec7dc6bbb07b720979177c0846a" resname="content.view.subitems">
         <source>Sub-items</source>
         <target state="new">Sub-items</target>
@@ -55,6 +60,16 @@
         <source>Remove from Bookmarks</source>
         <target state="new">Remove from Bookmarks</target>
         <note>key: location.bookmark.remove</note>
+      </trans-unit>
+      <trans-unit id="4fd9a40170cf4bc5acff719c14eaf2d15fc9942d" resname="tab.details.change_section ">
+        <source>Change section</source>
+        <target state="new">Change section</target>
+        <note>key: tab.details.change_section </note>
+      </trans-unit>
+      <trans-unit id="5c08278a7b80c4aae97e5683688b5b55b5f5b37e" resname="tab.details.change_state">
+        <source>Change state</source>
+        <target state="new">Change state</target>
+        <note>key: tab.details.change_state</note>
       </trans-unit>
       <trans-unit id="c0b36efcf0ebbe2ac0f9861cae35e12e668cbcc0" resname="tab.details.content_details">
         <source>Content details</source>
@@ -116,11 +131,6 @@
         <target state="new">Section name</target>
         <note>key: tab.details.section_name</note>
       </trans-unit>
-      <trans-unit id="a054d7cf662185bfc90a799a19758f4ce7b6e33d" resname="tab.details.change_section">
-        <source>Change section</source>
-        <target state="new">Change section</target>
-        <note>key: tab.details.change_section</note>
-      </trans-unit>
       <trans-unit id="6ba61ac8194e021eb1515cc2d3d33ff006e2d55d" resname="tab.details.state_details">
         <source>State details</source>
         <target state="new">State details</target>
@@ -136,11 +146,6 @@
         <target state="new">Current object state</target>
         <note>key: tab.details.state_name</note>
       </trans-unit>
-      <trans-unit id="5c08278a7b80c4aae97e5683688b5b55b5f5b37e" resname="tab.details.change_state">
-        <source>Change state</source>
-        <target state="new">Change state</target>
-        <note>key: tab.details.change_state</note>
-      </trans-unit>
       <trans-unit id="8ddd1c9e60bd352b4395e1753ede6534db2aac8b" resname="tab.details.sub_items_listing_by.in">
         <source>in</source>
         <target state="new">in</target>
@@ -150,11 +155,6 @@
         <source>Order by</source>
         <target state="new">Order by</target>
         <note>key: tab.details.sub_items_listing_by.order_by</note>
-      </trans-unit>
-      <trans-unit id="fe4321b1de5be805ed8224c8cf442a89e9fa38b4" resname="tab.details.sub_items_listing_by_set">
-        <source>Set</source>
-        <target state="new">Set</target>
-        <note>key: tab.details.sub_items_listing_by_set</note>
       </trans-unit>
       <trans-unit id="03aa9832291905ed83ba60081ebffe5786d92418" resname="tab.details.sub_items_sorting_order">
         <source>Sub-items sorting order</source>
@@ -215,11 +215,6 @@
         <source>Visibility</source>
         <target state="new">Visibility</target>
         <note>key: tab.locations.visibility</note>
-      </trans-unit>
-      <trans-unit id="775b3ea314e2c1d999a586f85fab657c30deaac3" resname="tab.locations.visible">
-        <source>Visible</source>
-        <target state="new">Visible</target>
-        <note>key: tab.locations.visible</note>
       </trans-unit>
       <trans-unit id="5d92b84a6c78bd443010f172c47d01ce0dacacd7" resname="tab.name.details">
         <source>Details</source>
@@ -450,36 +445,6 @@
         <source>Select language</source>
         <target state="new">Select language</target>
         <note>key: user.edit.select_language</note>
-      </trans-unit>
-      <trans-unit id="e136be672df8eb27dc4eb2f1ce0650096090bf81" resname="content.hidden.message">
-        <source>This content item is hidden and is not publicly available</source>
-        <target state="new">This content item is hidden and is not publicly available</target>
-        <note>key: content.hidden.message</note>
-      </trans-unit>
-      <trans-unit id="7932e7fd6d6b90a8264cf5805586cab3294290ed" resname="content.hide.modal.title">
-        <source>Conflict when hiding content item</source>
-        <target state="new">Conflict when hiding content item</target>
-        <note>key: content.hide.modal.title</note>
-      </trans-unit>
-      <trans-unit id="0f260745fb36618170e86bd6407bb2facd3a05a1" resname="content.hide.modal.warning_content_used_by_other_content">
-        <source>This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</source>
-        <target state="new">This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</target>
-        <note>key: content.hide.modal.warning_content_used_by_other_content</note>
-      </trans-unit>
-      <trans-unit id="5c48055acad8df653edc1f8f65130d784fed3d88" resname="content.hide.modal.please_confirm_to_continue">
-        <source>If you wish to continue, please click on Confirm.</source>
-        <target state="new">If you wish to continue, please click on Confirm.</target>
-        <note>key: content.hide.modal.please_confirm_to_continue</note>
-      </trans-unit>
-      <trans-unit id="22d5072ec8766c24df085f05aaeda403f02ec585" resname="content.hide.modal.cancel">
-        <source>Cancel</source>
-        <target state="new">Cancel</target>
-        <note>key: content.hide.modal.cancel</note>
-      </trans-unit>
-      <trans-unit id="f54a1428411237311ec31c21d9d1932d0fce992f" resname="content.hide.modal.confirm">
-        <source>Confirm</source>
-        <target state="new">Confirm</target>
-        <note>key: content.hide.modal.confirm</note>
       </trans-unit>
     </body>
   </file>
