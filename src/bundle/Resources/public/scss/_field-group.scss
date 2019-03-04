@@ -1,31 +1,76 @@
 .ez-view-rawcontentview {
-
     .ez-raw-content-title {
-        border-bottom: 1px solid $ez-color-secondary;
+        border-bottom: calculateRem(1px) solid $ez-color-secondary;
         color: $ez-color-secondary;
 
         h2 {
-            margin-top: 1rem;
+            margin-top: calculateRem(16px);
             margin-bottom: 0;
-            padding-bottom: .5rem;
-            font-size: 1.125rem;
-            font-weight: 400;  
+            padding-bottom: calculateRem(8px);
+            font-size: calculateRem(18px);
+            font-weight: 400;
+        }
+
+        .ez-content-preview-toggle {
+            color: $ez-color-secondary;
+            position: relative;
+            padding-right: calculateRem(24px);
+            display: inline-block;
+
+            &:hover {
+                text-decoration: none;
+            }
+
+            &:before,
+            &:after {
+                content: '';
+                width: calculateRem(1px);
+                height: calculateRem(7px);
+                background-color: $ez-color-secondary;
+                position: absolute;
+                top: 50%;
+                right: calculateRem(-16px);
+                transition: all 0.2s $ez-admin-transition;
+            }
+
+            &:before {
+                transform: translate(calculateRem(-27px), -50%) rotate(135deg);
+            }
+
+            &:after {
+                transform: translate(calculateRem(-22px), -50%) rotate(45deg);
+            }
+
+            &.collapsed {
+                &:before {
+                    transform: translate(calculateRem(-27px), -20%) rotate(45deg);
+                }
+
+                &:after {
+                    transform: translate(calculateRem(-27px), -80%) rotate(-45deg);
+                }
+            }
         }
 
         .form-inline {
-            padding-bottom: .25rem;
+            padding-bottom: calculateRem(4px);
+
+            &.collapsing {
+                -webkit-transition: none;
+                transition: none;
+                display: none;
+            }
         }
-    }    
+    }
 }
 
 .ez-fieldgroup {
-
     &__name {
         color: $ez-color-secondary;
-        border-bottom: 1px solid $ez-color-secondary;
-        padding-bottom: .5rem;
+        border-bottom: calculateRem(1px) solid $ez-color-secondary;
+        padding-bottom: calculateRem(8px);
         font-weight: 400;
-        font-size: 1.125rem;
+        font-size: calculateRem(18px);
     }
 
     .ez-content-field-name {
@@ -33,21 +78,21 @@
     }
 
     .ez-content-field {
-        padding: 0 1rem;
-        margin-bottom: 1.5rem;
+        padding: 0 calculateRem(16px);
+        margin-bottom: calculateRem(24px);
 
         .ez-content-field-name {
             background-color: $ez-color-base-pale;
             margin-bottom: 0;
-            padding: .5rem 1.5rem;
-            border-radius: 5px 5px 0 0;
+            padding: calculateRem(8px) calculateRem(24px);
+            border-radius: calculateRem(5px) calculateRem(5px) 0 0;
             font-weight: 700;
         }
 
         .ez-content-field-value {
             background-color: $ez-white;
-            padding: 1rem 1.5rem;
-            border-radius: 0 0 5px 5px;
+            padding: calculateRem(16px) calculateRem(24px);
+            border-radius: 0 0 calculateRem(5px) calculateRem(5px);
         }
     }
 
