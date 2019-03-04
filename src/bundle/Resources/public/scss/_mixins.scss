@@ -243,7 +243,7 @@
         border-radius: calculateRem(4px);
         display: inline-block;
         width: 100%;
-        padding: calculateRem(8px) calculateRem(24px);
+        padding: calculateRem(8px) calculateRem(24px) calculateRem(24px) calculateRem(24px);
 
         .is-block-focused,
         .cke_widget_wrapper.cke_widget_focused > .cke_widget_element {

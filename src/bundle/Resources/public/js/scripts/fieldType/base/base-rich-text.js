@@ -197,7 +197,7 @@
                     this.ezNamespace
                 );
 
-                this.countWordsCharacters(container, data);
+                this.countWordsCharacters(container, doc);
             };
 
             if (!section.hasChildNodes()) {
@@ -224,37 +224,36 @@
         }
 
         countWordsCharacters(container, editorHtml) {
-            let counterWrapper = container.parentElement.getElementsByClassName('ez-character-counter');
+            const counterWrapper = container.parentElement.querySelector('.ez-character-counter');
 
-            if (counterWrapper.length) {
-                let wordCharacterWrappers = counterWrapper[0].getElementsByTagName('span');
+            if (counterWrapper) {
+                const countableTags = this.getCountableTags(editorHtml);
+                const wordWrapper = counterWrapper.querySelector('span.ez-character-counter__word-count');
+                const charactersWrapper = counterWrapper.querySelector('span.ez-character-counter__character-count');
+
                 let characterCount = 0;
                 let wordCount = 0;
-                let countableTags = this.fetchCountableTags(editorHtml);
 
                 countableTags.forEach((tag) => {
-                    let sanitizedText = this.cleanWhiteCharacters(tag.innerText);
+                    const sanitizedText = this.cleanWhiteCharacters(tag.innerText);
 
                     wordCount += sanitizedText ? sanitizedText.split(' ').length : 0;
                     characterCount += sanitizedText.length;
                 });
 
-                wordCharacterWrappers[0].innerText = wordCount;
-                wordCharacterWrappers[1].innerText = characterCount;
+                wordWrapper.innerText = wordCount;
+                charactersWrapper.innerText = characterCount;
             }
         }
 
-        fetchCountableTags(html) {
+        getCountableTags(html) {
             const allowedTags = ['p:not(.ez-embed-content)', 'li', 'h1', 'h2', 'h3', 'h4', 'h5' , 'h6', 'th', 'td'];
             const notCustomTagSelector = ':not([data-ezelement=ezattributes]) > ';
-
-            let allowedSelectors = allowedTags.map((item) => {
+            const allowedSelectors = allowedTags.map((item) => {
                 return notCustomTagSelector.concat(item);
             });
 
-            return new DOMParser()
-                .parseFromString(html, 'text/html')
-                .querySelectorAll(allowedSelectors.join(','));
+            return html.querySelectorAll(allowedSelectors.join(','));
         }
 
         cleanWhiteCharacters(text) {

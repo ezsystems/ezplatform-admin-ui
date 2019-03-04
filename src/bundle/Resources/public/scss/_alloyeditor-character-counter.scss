@@ -1,0 +1,15 @@
+.ez-character-counter {
+  position: relative;
+  background-color: $ez-ground-base-medium;
+  color: $ez-black;
+  font-size: calculateRem(10px);
+  margin: calculateRem(-16px) calculateRem(1px) 0 auto;
+  border-bottom-left-radius: calculateRem(5px);
+  border-bottom-right-radius: calculateRem(5px);
+  width: calc(100% - 2px);
+
+  &__word-count,
+  &__character-count {
+    margin-left: calculateRem(16px);
+  }
+}
