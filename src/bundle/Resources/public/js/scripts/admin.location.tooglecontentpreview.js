@@ -4,7 +4,7 @@
     const getContentPreviewToggleState = () => {
         const value = localStorage.getItem(CONTENT_PREVIEW_TOGGLE_STATE_KEY);
 
-        return value !== null ? JSON.parse(value) : false;
+        return !!JSON.parse(value);
     };
     const setContentPreviewToggleState = (value) => {
         localStorage.setItem(CONTENT_PREVIEW_TOGGLE_STATE_KEY, value);
