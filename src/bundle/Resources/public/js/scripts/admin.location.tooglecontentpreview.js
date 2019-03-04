@@ -3,11 +3,8 @@
     const CONTENT_PREVIEW_TOGGLE_STATE_KEY = 'ez-content-preview-collapsed';
     const getContentPreviewToggleState = () => {
         const value = localStorage.getItem(CONTENT_PREVIEW_TOGGLE_STATE_KEY);
-        if (value !== null) {
-            return JSON.parse(value);
-        }
 
-        return false;
+        return value !== null ? JSON.parse(value) : false;
     };
     const setContentPreviewToggleState = (value) => {
         localStorage.setItem(CONTENT_PREVIEW_TOGGLE_STATE_KEY, value);
