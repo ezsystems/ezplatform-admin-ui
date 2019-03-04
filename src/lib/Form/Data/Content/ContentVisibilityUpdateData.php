@@ -9,28 +9,25 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Content;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\API\Repository\Values\Content\Location;
 
-class ContentData
+class ContentVisibilityUpdateData
 {
-    /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo */
+    /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo|null */
     private $contentInfo;
 
-    /** @var \eZ\Publish\API\Repository\Values\Content\Location */
-    private $location;
+    /** @var bool|null */
+    private $visible;
 
     /**
-     * ContentData constructor.
-     *
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
-     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
+     * @param bool|null $visible
      */
     public function __construct(
         ContentInfo $contentInfo = null,
-        Location $location = null
+        bool $visible = null
     ) {
         $this->contentInfo = $contentInfo;
-        $this->location = $location;
+        $this->visible = $visible;
     }
 
     /**
@@ -42,11 +39,11 @@ class ContentData
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
+     * @return bool|null
      */
-    public function getLocation(): ?Location
+    public function getVisible(): ?bool
     {
-        return $this->location;
+        return $this->visible;
     }
 
     /**
@@ -58,10 +55,10 @@ class ContentData
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param bool $visible
      */
-    public function setLocation(Location $location): void
+    public function setVisible(bool $visible): void
     {
-        $this->location = $location;
+        $this->visible = $visible;
     }
 }

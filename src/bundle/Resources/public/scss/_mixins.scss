@@ -49,30 +49,11 @@
         .ez-icon + .ez-icon {
             fill: $ez-color-secondary;
         }
-
-        &.disabled {
-            &:before {
-                background-color: $ez-ground-primary;
-            }
-            .ez-icon + .ez-icon {
-                fill: $ez-ground-primary;
-            }
-        }
     }
 
     &.disabled {
         cursor: inherit;
-        border-color: $ez-ground-primary;
-        &:before {
-            background-color: $ez-ground-primary;
-        }
-        .ez-icon {
-            fill: $ez-ground-primary;
-        }
-
-        .ez-icon + .ez-icon {
-            fill: $ez-white;
-        }
+        opacity: 0.5;
     }
 
     .ez-checkbox-icon__checkbox {

@@ -8,12 +8,13 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Content;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ContentType extends AbstractType
+class ContentVisibilityUpdateType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -27,9 +28,8 @@ class ContentType extends AbstractType
                 ['label' => false, 'attr' => ['hidden' => true]]
             )
             ->add(
-                'location',
-                LocationType::class,
-                ['label' => false, 'attr' => ['hidden' => true]]
+                'visible',
+                HiddenType::class
             );
     }
 
@@ -39,7 +39,7 @@ class ContentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ContentData::class,
+            'data_class' => ContentVisibilityUpdateData::class,
         ]);
     }
 }

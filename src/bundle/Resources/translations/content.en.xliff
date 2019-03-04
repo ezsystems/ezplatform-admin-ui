@@ -41,6 +41,16 @@
         <target state="new">Content '%name%' has been revealed.</target>
         <note>key: content.reveal.success</note>
       </trans-unit>
+      <trans-unit id="fbc24757e92f52997d730762e004765425845995" resname="content.hide.already_hidden">
+        <source>Content '%name%' was already hidden.</source>
+        <target state="new">Content '%name%' has been hidden.</target>
+        <note>key: content.hide.already_hidden</note>
+      </trans-unit>
+      <trans-unit id="d906dd66ce60bd64f6ba3ccc4ecf3fa443ff9e83" resname="content.reveal.already_visible">
+        <source>Content '%name%' was already visible.</source>
+        <target state="new">Content '%name%' was already visible.</target>
+        <note>key: content.reveal.already_visible</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

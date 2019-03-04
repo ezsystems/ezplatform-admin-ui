@@ -20,6 +20,7 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
@@ -31,7 +32,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentVisibilityUpdateType;
 use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
 use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveUniqueRelation;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
@@ -39,7 +40,6 @@ use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsContainer;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentData;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -94,7 +94,7 @@ class ContentViewController extends Controller
     /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
     private $userLanguagePreferenceProvider;
 
-    /** @var FormFactoryInterface */
+    /** @var \Symfony\Component\Form\FormFactoryInterface */
     private $sfFormFactory;
 
     /**
@@ -268,13 +268,13 @@ class ContentViewController extends Controller
             new LocationCopySubtreeData($location)
         );
 
-        $contentTypeForm = $this->sfFormFactory->create(ContentType::class, new ContentData($location->contentInfo, $location));
+        $contentVisibilityUpdateForm = $this->sfFormFactory->create(ContentVisibilityUpdateType::class, new ContentVisibilityUpdateData($location->contentInfo, $location->getContentInfo()->isHidden));
 
         $view->addParameters([
             'form_location_copy' => $locationCopyType->createView(),
             'form_location_move' => $locationMoveType->createView(),
             'form_content_create' => $contentCreateType->createView(),
-            'form_content' => $contentTypeForm->createView(),
+            'form_content_visibility_update' => $contentVisibilityUpdateForm->createView(),
             'form_subitems_content_edit' => $subitemsContentEdit->createView(),
             'form_location_copy_subtree' => $locationCopySubtreeType->createView(),
         ]);
@@ -479,11 +479,11 @@ class ContentViewController extends Controller
     /**
      * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
      */
-    private function supplyContentReverseRelations(ContentView $view)
+    private function supplyContentReverseRelations(ContentView $view): void
     {
         $contentInfo = $view->getLocation()->getContentInfo();
         $relations = $this->contentService->loadReverseRelations($contentInfo);
 
-        $view->addParameters(['contentHasReverseRelations' => (bool)count($relations)]);
+        $view->addParameters(['content_has_reverse_relations' => count($relations) > 0]);
     }
 }

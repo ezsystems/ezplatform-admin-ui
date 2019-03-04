@@ -461,15 +461,15 @@
         <target state="new">Conflict when hiding content item</target>
         <note>key: content.hide.modal.title</note>
       </trans-unit>
-      <trans-unit id="196a68068ffbbae92e11642f8023b84d4fbfe0f5" resname="content.hide.modal.message1">
+      <trans-unit id="0f260745fb36618170e86bd6407bb2facd3a05a1" resname="content.hide.modal.warning_content_used_by_other_content">
         <source>This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</source>
         <target state="new">This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</target>
-        <note>key: content.hide.modal.message1</note>
+        <note>key: content.hide.modal.warning_content_used_by_other_content</note>
       </trans-unit>
-      <trans-unit id="18a23d2908ed55a685f4a268d25aedc7efcc9dd6" resname="content.hide.modal.message2">
+      <trans-unit id="5c48055acad8df653edc1f8f65130d784fed3d88" resname="content.hide.modal.please_confirm_to_continue">
         <source>If you wish to continue, please click on Confirm.</source>
         <target state="new">If you wish to continue, please click on Confirm.</target>
-        <note>key: content.hide.modal.message2</note>
+        <note>key: content.hide.modal.please_confirm_to_continue</note>
       </trans-unit>
       <trans-unit id="22d5072ec8766c24df085f05aaeda403f02ec585" resname="content.hide.modal.cancel">
         <source>Cancel</source>

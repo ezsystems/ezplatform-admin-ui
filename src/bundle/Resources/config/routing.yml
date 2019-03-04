@@ -465,17 +465,11 @@ ezplatform.content.update_main_translation:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Content:updateMainTranslation'
 
-ezplatform.content.hide:
-    path: /content/hide
+ezplatform.content.update_visibility:
+    path: /content/update-visibility
     methods: ['POST']
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:Content:hide'
-
-ezplatform.content.reveal:
-    path: /content/reveal
-    methods: ['POST']
-    defaults:
-        _controller: 'EzPlatformAdminUiBundle:Content:reveal'
+        _controller: 'EzPlatformAdminUiBundle:Content:updateVisibility'
 
 # LocationView / Versions tab
 

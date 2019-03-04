@@ -214,15 +214,17 @@
         margin-right: 0.5rem;
     }
 }
+
 .ez-alert--icon {
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.3rem;
+    width: calculateRem(16px);
+    height: calculateRem(16px);
+    margin-right: calculateRem(4px);
 }
 
 .ez-alert--info {
     fill: currentColor;
     vertical-align: middle;
+
     .ez-icon-warning {
         fill: $ez-secondary-ground-medium;
     }
