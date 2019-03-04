@@ -268,7 +268,10 @@ class ContentViewController extends Controller
             new LocationCopySubtreeData($location)
         );
 
-        $contentVisibilityUpdateForm = $this->sfFormFactory->create(ContentVisibilityUpdateType::class, new ContentVisibilityUpdateData($location->contentInfo, $location->getContentInfo()->isHidden));
+        $contentVisibilityUpdateForm = $this->sfFormFactory->create(
+            ContentVisibilityUpdateType::class,
+            new ContentVisibilityUpdateData($location->contentInfo, $location->getContentInfo()->isHidden)
+        );
 
         $view->addParameters([
             'form_location_copy' => $locationCopyType->createView(),

@@ -47,23 +47,23 @@
                                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#view-hide"></use>
                                     </svg>
                                     <input
-                                            class="ez-checkbox-icon__checkbox"
-                                            {{ not location.hidden ? 'checked' }}
-                                            type="checkbox"
-                                            name="updateVisibility"
-                                            {% if not can_hide[location.id] %} disabled="disabled"{% endif %}
-                                            value="{{ location.id }}" />
+                                        class="ez-checkbox-icon__checkbox"
+                                        {{ not location.hidden ? 'checked' }}
+                                        type="checkbox"
+                                        name="updateVisibility"
+                                        {% if not can_hide[location.id] %} disabled="disabled"{% endif %}
+                                        value="{{ location.id }}"/>
                                 </label>
                             {% endif %}
                         </td>
                         <td class="ez-table__cell align-middle"></td>
                         <td class="ez-table__cell align-middle">
                             <input
-                                    type="radio"
-                                    {{ location.main ? 'checked' }}
-                                    {{ not location.canEdit ? 'disabled' }}
-                                    name="updateMainLocation"
-                                    value="{{ location.id }}" />
+                                type="radio"
+                                {{ location.main ? 'checked' }}
+                                {{ not location.canEdit ? 'disabled' }}
+                                name="updateMainLocation"
+                                value="{{ location.id }}"/>
                         </td>
                     </tr>
                 {% endfor %}
