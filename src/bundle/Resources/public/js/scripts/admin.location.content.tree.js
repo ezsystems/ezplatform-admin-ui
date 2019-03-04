@@ -8,6 +8,7 @@
     const contentTreeContainer = doc.querySelector('.ez-content-tree-container');
     const contentTreeWrapper = doc.querySelector('.ez-content-tree-container__wrapper');
     const btn = doc.querySelector('.ez-btn--toggle-content-tree');
+    const { currentLocationPath, userId } = contentTreeContainer.dataset;
     let onViewportChangeTimeout = null;
     const toggleContentTreePanel = () => {
         contentTreeContainer.classList.toggle(CLASS_CONTENT_TREE_EXPANDED);
@@ -32,7 +33,8 @@
 
     ReactDOM.render(
         React.createElement(eZ.modules.ContentTree, {
-            currentLocationPath: contentTreeContainer.dataset.currentLocationPath,
+            userId,
+            currentLocationPath,
             restInfo: { token, siteaccess },
         }),
         contentTreeWrapper
