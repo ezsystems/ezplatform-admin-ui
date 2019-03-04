@@ -61,6 +61,36 @@
         <target state="new">Sub-items</target>
         <note>key: settings.subitems_limit.value.title</note>
       </trans-unit>
+      <trans-unit id="98400a7e546231a994f6fea03dce3ebd52c1c33d" resname="settings.character_counter.value.description">
+        <source><![CDATA[Display character count for Online Editor]]></source>
+        <target state="new"><![CDATA[Display character count for Online Editor]]></target>
+        <note>key: settings.character_counter.value.description</note>
+      </trans-unit>
+      <trans-unit id="fd6ba122727aeacdb3e8c1c02d3e9ae023ca2174" resname="settings.character_counter.value.enabled">
+        <source>enabled</source>
+        <target state="new">Enabled</target>
+        <note>key: settings.character_counter.value.enabled</note>
+      </trans-unit>
+      <trans-unit id="3d03b64f879f2c57cb9395f31c7691ecb7cc2807" resname="settings.character_counter.value.disabled">
+        <source>disabled</source>
+        <target state="new">Disabled</target>
+        <note>key: settings.character_counter.value.disabled</note>
+      </trans-unit>
+      <trans-unit id="ca8c3eac8ffed6fed1ee9e028be185741f33bfec" resname="settings.character_counter.value.title">
+        <source>character counter</source>
+        <target state="new">Character counter</target>
+        <note>key: settings.character_counter.value.title</note>
+      </trans-unit>
+      <trans-unit id="4e0e12004096ce400ace603bc7177c044159b57b" resname="character_counter.words">
+        <source>words</source>
+        <target state="new">words</target>
+        <note>key: character_counter.words</note>
+      </trans-unit>
+      <trans-unit id="d69d746270269a4b3ff2a3ddca0a74086ef48ae6" resname="character_counter.characters">
+        <source>characters</source>
+        <target state="new">characters</target>
+        <note>key: character_counter.characters</note>
+      </trans-unit>
       <trans-unit id="dac7ffb84bac8bc5a682388098bded0f8f49d841" resname="settings.timezone.value.description">
         <source><![CDATA[Time Zone in use for displaying Date & Time]]></source>
         <target state="new"><![CDATA[Time Zone in use for displaying Date & Time]]></target>

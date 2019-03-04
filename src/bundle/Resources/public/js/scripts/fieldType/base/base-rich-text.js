@@ -231,6 +231,8 @@
                     this.xhtmlNamespace,
                     this.ezNamespace
                 );
+
+                this.countWordsCharacters(container, doc);
             };
 
             if (!section.hasChildNodes()) {
@@ -254,6 +256,42 @@
             nativeEditor.on('editorInteraction', saveRichText);
 
             return alloyEditor;
+        }
+
+        countWordsCharacters(container, editorHtml) {
+            const counterWrapper = container.parentElement.querySelector('.ez-character-counter');
+
+            if (counterWrapper) {
+                const countableTags = this.getCountableTags(editorHtml);
+                const wordWrapper = counterWrapper.querySelector('.ez-character-counter__word-count');
+                const charactersWrapper = counterWrapper.querySelector('.ez-character-counter__character-count');
+                let characterCount = 0;
+                let wordCount = 0;
+
+                countableTags.forEach((tag) => {
+                    const sanitizedText = this.cleanWhiteCharacters(tag.innerText);
+
+                    wordCount += sanitizedText ? sanitizedText.split(' ').length : 0;
+                    characterCount += sanitizedText.length;
+                });
+
+                wordWrapper.innerText = wordCount;
+                charactersWrapper.innerText = characterCount;
+            }
+        }
+
+        getCountableTags(html) {
+            const allowedTags = ['p:not(.ez-embed-content)', 'li', 'h1', 'h2', 'h3', 'h4', 'h5' , 'h6', 'th', 'td'];
+            const notCustomTagSelector = ':not([data-ezelement=ezattributes]) > ';
+            const allowedSelectors = allowedTags.map((item) => {
+                return notCustomTagSelector.concat(item);
+            });
+
+            return html.querySelectorAll(allowedSelectors.join(','));
+        }
+
+        cleanWhiteCharacters(text) {
+            return text.replace(/\s\r?\n/g, ' ').trim();
         }
     };
 
