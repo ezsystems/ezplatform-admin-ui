@@ -228,9 +228,8 @@
 
             if (counterWrapper) {
                 const countableTags = this.getCountableTags(editorHtml);
-                const wordWrapper = counterWrapper.querySelector('span.ez-character-counter__word-count');
-                const charactersWrapper = counterWrapper.querySelector('span.ez-character-counter__character-count');
-
+                const wordWrapper = counterWrapper.querySelector('.ez-character-counter__word-count');
+                const charactersWrapper = counterWrapper.querySelector('.ez-character-counter__character-count');
                 let characterCount = 0;
                 let wordCount = 0;
 
