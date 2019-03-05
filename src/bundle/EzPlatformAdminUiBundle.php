@@ -72,7 +72,6 @@ class EzPlatformAdminUiBundle extends Bundle
             new Parser\Notifications(),
             new Parser\ContentTranslateView(),
             new Parser\AdminUiForms(),
-            new Parser\UserPreferences(),
             new Parser\ContentType(),
         ];
     }

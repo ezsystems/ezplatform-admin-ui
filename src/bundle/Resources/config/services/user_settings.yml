@@ -21,10 +21,3 @@ services:
     #
     EzSystems\EzPlatformAdminUi\Form\Type\User\Setting\UserSettingUpdateType:
         deprecated: '"%service_id%" is deprecated since 1.5, to be removed in 2.0. Use \EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType instead.'
-
-    EzSystems\EzPlatformAdminUi\UserSetting\Setting\Language:
-        arguments:
-            $availableLocaleChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\AvailableLocaleChoiceLoader'
-        tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: language }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: language }
