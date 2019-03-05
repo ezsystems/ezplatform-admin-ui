@@ -57,6 +57,7 @@ class CustomTagTest extends TestCase
                     'ezyoutube' => [
                         'template' => '@ezdesign/fields/ezrichtext/custom_tags/ezyoutube.html.twig',
                         'icon' => '/bundles/ezplatformadminui/img/ez-icons.svg#video',
+                        'is_inline' => false,
                         'attributes' => [
                             'width' => [
                                 'type' => 'number',
@@ -78,6 +79,7 @@ class CustomTagTest extends TestCase
                     'eztwitter' => [
                         'template' => '@ezdesign/fields/ezrichtext/custom_tags/eztwitter.html.twig',
                         'icon' => '/bundles/ezplatformadminui/img/ez-icons.svg#twitter',
+                        'is_inline' => false,
                         'attributes' => [
                             'tweet_url' => [
                                 'type' => 'string',
@@ -102,6 +104,7 @@ class CustomTagTest extends TestCase
                         'label' => 'ezrichtext.custom_tags.ezyoutube.label',
                         'description' => 'ezrichtext.custom_tags.ezyoutube.description',
                         'icon' => '/bundles/ezplatformadminui/img/ez-icons.svg#video',
+                        'isInline' => false,
                         'attributes' => [
                             'width' => [
                                 'label' => 'ezrichtext.custom_tags.ezyoutube.attributes.width.label',
@@ -127,6 +130,7 @@ class CustomTagTest extends TestCase
                         'label' => 'ezrichtext.custom_tags.eztwitter.label',
                         'description' => 'ezrichtext.custom_tags.eztwitter.description',
                         'icon' => '/bundles/ezplatformadminui/img/ez-icons.svg#twitter',
+                        'isInline' => false,
                         'attributes' => [
                             'tweet_url' => [
                                 'label' => 'ezrichtext.custom_tags.eztwitter.attributes.tweet_url.label',
