@@ -17,128 +17,138 @@
         {% endblock left_sidebar %}
 
         <div class="px-0 ez-content-container">
-            <section class="container mt-5">
-                {% include '@ezdesign/parts/page_title.html.twig' with { title: 'trash.headline'|trans|desc('Trash'), iconName: 'trash' } %}
-                {{ form_start(form_trash_item_restore, {'action': path('ezplatform.trash.restore')}) }}
-                <div class="px-4">
-                    <div class="ez-table-header mt-3">
-                        <div class="ez-table-header__headline">{{ 'trash.table.header'|trans|desc('Trash') }}</div>
-                        <div>
-                            {% if can_restore and form_trash_item_restore.trash_items is not empty %}
-                                {% set restore_under_new_parent_button_attr = form_trash_item_restore.location.select_content.vars.attr|merge({
-                                    'attr': {
-                                        'data-udw-config': ez_udw_config('single_container', {}),
-                                        'class': (form_trash_item_restore.location.select_content.vars.attr.class|default('') ~ ' d-inline-block btn btn-secondary')|trim,
-                                        'disabled': true
-                                    }
-                                }) %}
-                                {{ form_widget(form_trash_item_restore.location.select_content, restore_under_new_parent_button_attr) }}
-                                {{ form_widget(form_trash_item_restore.location.location) }}
-                                {% do form_trash_item_restore.location.setRendered %}
-                                {{ form_widget(form_trash_item_restore.restore, {'attr': {'class': 'btn btn-primary', 'disabled': true}}) }}
-                            {% else %}
-                                {% do form_trash_item_restore.location.setRendered %}
-                                {% do form_trash_item_restore.restore.setRendered %}
-                            {% endif %}
-                            {% if can_delete and form_trash_item_restore.trash_items|length > 0 %}
-                                {% set modal_data_target = 'delete-trash-items-modal' %}
-                                <button
-                                    id="delete-trash-items"
-                                    type="button"
-                                    class="btn btn-danger"
-                                    disabled
-                                    data-toggle="modal"
-                                    data-target="#{{ modal_data_target }}"
-                                    title="{{ 'trash.delete'|trans|desc('Delete') }}">
-                                    <svg class="ez-icon ez-icon-trash">
-                                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
-                                    </svg>
-                                </button>
-                                {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
-                                    'id': modal_data_target,
-                                    'message': 'trash.modal.message'|trans|desc('Do you want to delete selected item(s) from Trash?'),
-                                    'data_click': '#trash_item_delete_delete',
-                                }%}
-                            {% endif %}
-                        </div>
-                    </div>
-                    <table class="ez-table table">
-                        <thead>
-                        <tr>
-                            <th class="ez-table__header-cell"></th>
-                            <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
-                            <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'trash.name'|trans|desc('Name') }}</th>
-                            <th class="ez-table__header-cell">{{ 'trash.type'|trans|desc('Type') }}</th>
-                            <th class="ez-table__header-cell">{{ 'trash.original_location'|trans|desc('Original location') }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% if trash_items is empty %}
-                            <tr>
-                                <td class="ez-table__cell ez-table__cell--no-content" colspan="4">
-                                    <span class="mb-0 py-1 pl-0">
-                                        {{ 'trash.empty'|trans|desc('Trash is empty. Any content item you send to trash will end up here.') }}
-                                    </span>
-                                </td>
-                            </tr>
-                        {% else %}
-                            {% for key, form in form_trash_item_restore.trash_items %}
-                                {% set trash_item = trash_items[key] %}
-                                {% set is_parent_in_trash = trash_item.parentInTrash %}
-                                <tr>
-                                    <td class="ez-table__cell">
-                                        {{ form_widget(form, {attr: {
-                                            'data-is-parent-in-trash': is_parent_in_trash ? '1': '0'
-                                        }}) }}
-                                    </td>
-                                    <td class="ez-table__cell ez-table__cell--has-icon">
-                                        <svg class="ez-icon ez-icon--small">
-                                            <use xlink:href="{{ ez_content_type_icon(trash_item.contentType.identifier) }}"></use>
+            <div class="ez-content-tree-container"
+                data-user-id="{{ admin_ui_config.user.user.id }}"
+                data-tree-root-location-id="{{ admin_ui_config['contentTree']['treeRootLocationId'] }}"
+                data-current-location-path="">
+                <div class="ez-content-tree-container__wrapper"></div>
+            </div>
+            <div class="ez-view-container">
+                <section class="container mt-5">
+                    {% include '@ezdesign/parts/page_title.html.twig' with { title: 'trash.headline'|trans|desc('Trash'), iconName: 'trash' } %}
+                    {{ form_start(form_trash_item_restore, {'action': path('ezplatform.trash.restore')}) }}
+                    <div class="px-4">
+                        <div class="ez-table-header mt-3">
+                            <div class="ez-table-header__headline">{{ 'trash.table.header'|trans|desc('Trash') }}</div>
+                            <div>
+                                {% if can_restore and form_trash_item_restore.trash_items is not empty %}
+                                    {% set restore_under_new_parent_button_attr = form_trash_item_restore.location.select_content.vars.attr|merge({
+                                        'attr': {
+                                            'data-udw-config': ez_udw_config('single_container', {}),
+                                            'class': (form_trash_item_restore.location.select_content.vars.attr.class|default('') ~ ' d-inline-block btn btn-secondary')|trim,
+                                            'disabled': true
+                                        }
+                                    }) %}
+                                    {{ form_widget(form_trash_item_restore.location.select_content, restore_under_new_parent_button_attr) }}
+                                    {{ form_widget(form_trash_item_restore.location.location) }}
+                                    {% do form_trash_item_restore.location.setRendered %}
+                                    {{ form_widget(form_trash_item_restore.restore, {'attr': {'class': 'btn btn-primary', 'disabled': true}}) }}
+                                {% else %}
+                                    {% do form_trash_item_restore.location.setRendered %}
+                                    {% do form_trash_item_restore.restore.setRendered %}
+                                {% endif %}
+                                {% if can_delete and form_trash_item_restore.trash_items|length > 0 %}
+                                    {% set modal_data_target = 'delete-trash-items-modal' %}
+                                    <button
+                                        id="delete-trash-items"
+                                        type="button"
+                                        class="btn btn-danger"
+                                        disabled
+                                        data-toggle="modal"
+                                        data-target="#{{ modal_data_target }}"
+                                        title="{{ 'trash.delete'|trans|desc('Delete') }}">
+                                        <svg class="ez-icon ez-icon-trash">
+                                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                                         </svg>
-                                    </td>
-                                    <td class="ez-table__cell ez-table__cell--after-icon">{{ ez_content_name(trash_item.location.contentInfo) }}</td>
-                                    <td class="ez-table__cell">{{ trash_item.contentType.name }}</td>
-                                    <td class="ez-table__cell">
-                                        {% if not is_parent_in_trash %}
-                                            {% include '@ezdesign/parts/path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
-                                        {% else %}
-                                            <em>{{ 'trash.item.ancesor_in_trash'|trans|desc('Ancestor is in the Trash') }}</em>
-                                        {% endif %}
-                                    </td>
+                                    </button>
+                                    {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
+                                        'id': modal_data_target,
+                                        'message': 'trash.modal.message'|trans|desc('Do you want to delete selected item(s) from Trash?'),
+                                        'data_click': '#trash_item_delete_delete',
+                                    }%}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="ez-scrollable-table-wrapper">
+                            <table class="ez-table table">
+                                <thead>
+                                <tr>
+                                    <th class="ez-table__header-cell"></th>
+                                    <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
+                                    <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'trash.name'|trans|desc('Name') }}</th>
+                                    <th class="ez-table__header-cell">{{ 'trash.type'|trans|desc('Type') }}</th>
+                                    <th class="ez-table__header-cell">{{ 'trash.original_location'|trans|desc('Original location') }}</th>
                                 </tr>
-                            {% endfor %}
-                        {% endif %}
-                        </tbody>
-                    </table>
-                    {{ form_widget(form_trash_item_restore._token) }}
-                    {{ form_end(form_trash_item_restore, { 'render_rest': false }) }}
-                </div>
-
-                {{ form_start(form_trash_item_delete, {
-                    'action': path('ezplatform.trash.delete')
-                }) }}
-                {% for key, form in form_trash_item_delete.trash_items %}
-                    {% set trash_item = trash_items[key] %}
-                    {{ form_widget(form) }}
-                {% endfor %}
-                {{ form_widget(form_trash_item_delete._token) }}
-                {{ form_widget(form_trash_item_delete.delete) }}
-                {{ form_end(form_trash_item_delete, { 'render_rest': false }) }}
-
-                {% if pager.haveToPaginate %}
-                    <div class="row justify-content-center align-items-center mb-2 ez-pagination__spacing">
-                        <span class="ez-pagination__text">
-                            {{ 'pagination.viewing'|trans({
-                                '%viewing%': pager.currentPageResults|length,
-                                '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
-                        </span>
+                                </thead>
+                                <tbody>
+                                {% if trash_items is empty %}
+                                    <tr>
+                                        <td class="ez-table__cell ez-table__cell--no-content" colspan="4">
+                                            <span class="mb-0 py-1 pl-0">
+                                                {{ 'trash.empty'|trans|desc('Trash is empty. Any content item you send to trash will end up here.') }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    {% for key, form in form_trash_item_restore.trash_items %}
+                                        {% set trash_item = trash_items[key] %}
+                                        {% set is_parent_in_trash = trash_item.parentInTrash %}
+                                        <tr>
+                                            <td class="ez-table__cell">
+                                                {{ form_widget(form, {attr: {
+                                                    'data-is-parent-in-trash': is_parent_in_trash ? '1': '0'
+                                                }}) }}
+                                            </td>
+                                            <td class="ez-table__cell ez-table__cell--has-icon">
+                                                <svg class="ez-icon ez-icon--small">
+                                                    <use xlink:href="{{ ez_content_type_icon(trash_item.contentType.identifier) }}"></use>
+                                                </svg>
+                                            </td>
+                                            <td class="ez-table__cell ez-table__cell--after-icon">{{ ez_content_name(trash_item.location.contentInfo) }}</td>
+                                            <td class="ez-table__cell">{{ trash_item.contentType.name }}</td>
+                                            <td class="ez-table__cell">
+                                                {% if not is_parent_in_trash %}
+                                                    {% include '@ezdesign/parts/path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
+                                                {% else %}
+                                                    <em>{{ 'trash.item.ancesor_in_trash'|trans|desc('Ancestor is in the Trash') }}</em>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {{ form_widget(form_trash_item_restore._token) }}
+                        {{ form_end(form_trash_item_restore, { 'render_rest': false }) }}
                     </div>
-                    <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
-                        {{ pagerfanta(pager, 'ez') }}
-                    </div>
-                {% endif %}
-                {% include '@ezdesign/admin/trash/empty_trash_confirmation_modal.html.twig' with {'form': form_trash_empty, 'trash_items_count': pager.nbResults} %}
-            </section>
+
+                    {{ form_start(form_trash_item_delete, {
+                        'action': path('ezplatform.trash.delete')
+                    }) }}
+                    {% for key, form in form_trash_item_delete.trash_items %}
+                        {% set trash_item = trash_items[key] %}
+                        {{ form_widget(form) }}
+                    {% endfor %}
+                    {{ form_widget(form_trash_item_delete._token) }}
+                    {{ form_widget(form_trash_item_delete.delete) }}
+                    {{ form_end(form_trash_item_delete, { 'render_rest': false }) }}
+
+                    {% if pager.haveToPaginate %}
+                        <div class="row justify-content-center align-items-center mb-2 ez-pagination__spacing">
+                            <span class="ez-pagination__text">
+                                {{ 'pagination.viewing'|trans({
+                                    '%viewing%': pager.currentPageResults|length,
+                                    '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                            </span>
+                        </div>
+                        <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
+                            {{ pagerfanta(pager, 'ez') }}
+                        </div>
+                    {% endif %}
+                    {% include '@ezdesign/admin/trash/empty_trash_confirmation_modal.html.twig' with {'form': form_trash_empty, 'trash_items_count': pager.nbResults} %}
+                </section>
+            </div>
         </div>
         {% if can_cleantrash and form_trash_item_restore.trash_items|length > 0 %}
             <div class="pt-4 px-0 bg-secondary ez-context-menu">
@@ -149,6 +159,10 @@
             </div>
         {% endif %}
     </div>
+{% endblock %}
+
+{% block react_modules %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-modules-content-tree-js', null, 'ezplatform') }}
 {% endblock %}
 
 {% block javascripts %}

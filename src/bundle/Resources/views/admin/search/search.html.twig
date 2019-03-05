@@ -16,51 +16,59 @@
         {% endblock left_sidebar %}
 
         <div class="px-0 ez-content-container">
-            <section class="container mt-5">
-                {% include '@ezdesign/parts/page_title.html.twig' with { title: 'search.headline'|trans|desc('Search'), iconName: 'search' } %}
-                {% include '@ezdesign/admin/search/search_form.html.twig' with { form: form } %}
+            <div class="ez-content-tree-container"
+                data-user-id="{{ admin_ui_config.user.user.id }}"
+                data-tree-root-location-id="{{ admin_ui_config['contentTree']['treeRootLocationId'] }}"
+                data-current-location-path="">
+                <div class="ez-content-tree-container__wrapper"></div>
+            </div>
+            <div class="ez-view-container">
+                <section class="container mt-5">
+                    {% include '@ezdesign/parts/page_title.html.twig' with { title: 'search.headline'|trans|desc('Search'), iconName: 'search' } %}
+                    {% include '@ezdesign/admin/search/search_form.html.twig' with { form: form } %}
 
-                {% if results is defined %}
+                    {% if results is defined %}
 
-                    <div class="ez-table-header mt-3 ml-4">
-                        <div class="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
-                    </div>
-
-                    {% if results is empty %}
-                        <div class="ml-4">
-                            <table class="table">
-                                <tr>
-                                    <td colspan="4">
-                                        <span>{{ 'search.no_result'|trans({'%query%': form.vars.value.query})|desc('Sorry, no results were found for "%query%".') }}</span>
-                                    </td>
-                                </tr>
-                            </table>
-                            <h6>{{ 'search.tips.headline'|trans|desc('Some helpful search tips:') }}</h6>
-                            <ul>
-                                <li>{{ 'search.tips.check_spelling'|trans|desc('Check spelling of keywords.') }}</li>
-                                <li>{{ 'search.tips.different_keywords'|trans|desc('Try different keywords.') }}</li>
-                                <li>{{ 'search.tips.more_general_keywords'|trans|desc('Try more general keywords.') }}</li>
-                                <li>{{ 'search.tips.fewer_keywords'|trans|desc('Try fewer keywords. Reducing keywords result in more matches.') }}</li>
-                            </ul>
+                        <div class="ez-table-header mt-3 ml-4">
+                            <div class="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
                         </div>
-                    {% else %}
-                        <div class="mr-4">
-                            <table class="table mx-4">
-                                <thead>
-                                <tr>
-                                    <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
-                                    <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'search.name'|trans|desc('Name') }}</th>
-                                    <th class="ez-table__header-cell">{{ 'search.modified'|trans|desc('Modified') }}</th>
-                                    <th class="ez-table__header-cell">{{ 'search.type'|trans|desc('Content Type') }}</th>
-                                    <th class="ez-table__header-cell"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for row in results %}
-                                    {% include '@ezdesign/admin/search/search_table_row.html.twig' with { row: row } %}
-                                {% endfor %}
-                                </tbody>
-                            </table>
+
+                        {% if results is empty %}
+                            <div class="ml-4">
+                                <table class="table">
+                                    <tr>
+                                        <td colspan="4">
+                                            <span>{{ 'search.no_result'|trans({'%query%': form.vars.value.query})|desc('Sorry, no results were found for "%query%".') }}</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <h6>{{ 'search.tips.headline'|trans|desc('Some helpful search tips:') }}</h6>
+                                <ul>
+                                    <li>{{ 'search.tips.check_spelling'|trans|desc('Check spelling of keywords.') }}</li>
+                                    <li>{{ 'search.tips.different_keywords'|trans|desc('Try different keywords.') }}</li>
+                                    <li>{{ 'search.tips.more_general_keywords'|trans|desc('Try more general keywords.') }}</li>
+                                    <li>{{ 'search.tips.fewer_keywords'|trans|desc('Try fewer keywords. Reducing keywords result in more matches.') }}</li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <div class="ez-scrollable-table-wrapper ml-4">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
+                                        <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'search.name'|trans|desc('Name') }}</th>
+                                        <th class="ez-table__header-cell">{{ 'search.modified'|trans|desc('Modified') }}</th>
+                                        <th class="ez-table__header-cell">{{ 'search.type'|trans|desc('Content Type') }}</th>
+                                        <th class="ez-table__header-cell"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for row in results %}
+                                        {% include '@ezdesign/admin/search/search_table_row.html.twig' with { row: row } %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
 
                             {% if pager.haveToPaginate %}
                                 <div class="row justify-content-center align-items-center mb-2 ml-4 ez-pagination__spacing">
@@ -74,21 +82,25 @@
                                     {{ pagerfanta(pager, 'ez', {'pageParameter': '[search][page]'}) }}
                                 </div>
                             {% endif %}
-                        </div>
+                        {% endif %}
+
+                        {% form_theme form_edit '@ezdesign/parts/form/flat_widgets.html.twig' %}
+
+                        {{ form_start(form_edit, {
+                            'action': path('ezplatform.content.edit'),
+                            'attr': { 'class': 'ez-edit-content-form'}
+                        }) }}
+                        {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
+                        {{ form_end(form_edit) }}
                     {% endif %}
-
-                    {% form_theme form_edit '@ezdesign/parts/form/flat_widgets.html.twig' %}
-
-                    {{ form_start(form_edit, {
-                        'action': path('ezplatform.content.edit'),
-                        'attr': { 'class': 'ez-edit-content-form'}
-                    }) }}
-                    {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
-                    {{ form_end(form_edit) }}
-                {% endif %}
-            </section>
+                </section>
+            </div>
         </div>
     </div>
+{% endblock %}
+
+{% block react_modules %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-modules-content-tree-js', null, 'ezplatform') }}
 {% endblock %}
 
 {% block javascripts %}

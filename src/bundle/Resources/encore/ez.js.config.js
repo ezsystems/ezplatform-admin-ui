@@ -109,6 +109,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
             path.resolve(__dirname, '../public/js/scripts/button.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.content.tree.js'),
         ])
         .addEntry('ezplatform-admin-ui-content-draft-list-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
@@ -155,17 +156,21 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/button.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.search.filters.js'),
             path.resolve(__dirname, '../public/js/scripts/udw/select.location.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.content.tree.js'),
         ])
         .addEntry('ezplatform-admin-ui-section-list-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.section.list.js'),
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
         ])
         .addEntry('ezplatform-admin-ui-section-view-js', [path.resolve(__dirname, '../public/js/scripts/admin.section.view.js')])
-        .addEntry('ezplatform-admin-ui-trash-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.list.js')])
+        .addEntry('ezplatform-admin-ui-trash-list-js', [
+            path.resolve(__dirname, '../public/js/scripts/admin.trash.list.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.content.tree.js'),
+        ])
         .addEntry('ezplatform-admin-ui-content-preview-js', [path.resolve(__dirname, '../public/js/scripts/admin.preview.js')])
         .addEntry('ezplatform-admin-ui-location-view-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.location.change.language.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.location.content.tree.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.content.tree.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.view.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.visibility.js'),

@@ -14,97 +14,107 @@
         {% endblock left_sidebar %}
 
         <div class="px-0 ez-content-container">
-            <section class="container mt-5">
-                {% include '@ezdesign/parts/page_title.html.twig' with { title: 'bookmark.headline'|trans|desc('Bookmarks'), iconName: 'bookmark-manager' } %}
-                <div class="px-4">
-                    {{ form_start(form_remove, {
-                        'action': path('ezplatform.bookmark.remove'),
-                        'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#bookmark_remove_remove' }
-                    }) }}
-                    {% include '@ezdesign/parts/table_header.html.twig' with {
-                         ground: 'mt-3',
-                         headerText: 'bookmark.table.header'|trans|desc('Bookmarks') ~ ' (' ~ pager.count ~ ')',
-                         tools: form_widget(form_remove.remove, {'attr': {'class': 'btn btn-danger', 'disabled': true}})
-                     } %}
-                    <table class="ez-table table">
-                        <thead>
-                        <tr>
-                            <th class="ez-table__header-cell"></th>
-                            <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
-                            <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'bookmark.list.name'|trans|desc('Name') }}</th>
-                            <th class="ez-table__header-cell">{{ 'bookmark.list.content_type'|trans|desc('Content Type') }}</th>
-                            <th class="ez-table__header-cell">{{ 'bookmark.list.path'|trans|desc('Path') }}</th>
-                            <th class="ez-table__header-cell"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% if pager.count is same as(0) %}
-                        <tr>
-                            <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
-                                <span class="mb-0 py-1 pl-0">{{ 'bookmark.list.empty'|trans|desc('The bookmark list is empty. Any Content item you bookmark will end up here.') }}</span>
-                            </td>
-                        </tr>
-                        {% else %}
-                        {% for bookmark in pager.currentPageResults %}
-                            <tr>
-                                <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form_remove.bookmarks[bookmark.id]) }}</td>
-                                <td class="ez-table__cell ez-table__cell--has-icon">
-                                    <svg class="ez-icon ez-icon--small">
-                                        <use xlink:href="{{ ez_content_type_icon(bookmark.contentType.identifier) }}"></use>
-                                    </svg>
-                                </td>
-                                <td class="ez-table__cell ez-table__cell--after-icon"><a href="{{ path('_ezpublishLocation', { 'locationId': bookmark.id }) }}">{{ ez_content_name(bookmark.contentInfo) }}</a></td>
-                                <td class="ez-table__cell">{{ bookmark.contentType.name }}</td>
-                                <td class="ez-table__cell">
-                                    {% if bookmark.pathLocations|length > 1 %}
-                                        {% for location in bookmark.pathLocations %}
-                                            {% if loop.revindex > 1 %}
-                                                <a href="{{ path('_ezpublishLocation', {'locationId': location.id}) }}">
-                                                    {{ ez_content_name(location.contentInfo) }}
-                                                </a>
-                                                {% if loop.revindex > 2 %}/{% endif %}
+            <div class="ez-content-tree-container"
+                data-user-id="{{ admin_ui_config.user.user.id }}"
+                data-tree-root-location-id="{{ admin_ui_config['contentTree']['treeRootLocationId'] }}"
+                data-current-location-path="">
+                <div class="ez-content-tree-container__wrapper"></div>
+            </div>
+            <div class="ez-view-container">
+                <section class="container mt-5">
+                    {% include '@ezdesign/parts/page_title.html.twig' with { title: 'bookmark.headline'|trans|desc('Bookmarks'), iconName: 'bookmark-manager' } %}
+                    <div class="px-4">
+                        {{ form_start(form_remove, {
+                            'action': path('ezplatform.bookmark.remove'),
+                            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#bookmark_remove_remove' }
+                        }) }}
+                        {% include '@ezdesign/parts/table_header.html.twig' with {
+                            ground: 'mt-3',
+                            headerText: 'bookmark.table.header'|trans|desc('Bookmarks') ~ ' (' ~ pager.count ~ ')',
+                            tools: form_widget(form_remove.remove, {'attr': {'class': 'btn btn-danger', 'disabled': true}})
+                        } %}
+                        <div class="ez-scrollable-table-wrapper">
+                            <table class="ez-table table">
+                                <thead>
+                                <tr>
+                                    <th class="ez-table__header-cell"></th>
+                                    <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
+                                    <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'bookmark.list.name'|trans|desc('Name') }}</th>
+                                    <th class="ez-table__header-cell">{{ 'bookmark.list.content_type'|trans|desc('Content Type') }}</th>
+                                    <th class="ez-table__header-cell">{{ 'bookmark.list.path'|trans|desc('Path') }}</th>
+                                    <th class="ez-table__header-cell"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% if pager.count is same as(0) %}
+                                <tr>
+                                    <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
+                                        <span class="mb-0 py-1 pl-0">{{ 'bookmark.list.empty'|trans|desc('The bookmark list is empty. Any Content item you bookmark will end up here.') }}</span>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                {% for bookmark in pager.currentPageResults %}
+                                    <tr>
+                                        <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form_remove.bookmarks[bookmark.id]) }}</td>
+                                        <td class="ez-table__cell ez-table__cell--has-icon">
+                                            <svg class="ez-icon ez-icon--small">
+                                                <use xlink:href="{{ ez_content_type_icon(bookmark.contentType.identifier) }}"></use>
+                                            </svg>
+                                        </td>
+                                        <td class="ez-table__cell ez-table__cell--after-icon"><a href="{{ path('_ezpublishLocation', { 'locationId': bookmark.id }) }}">{{ ez_content_name(bookmark.contentInfo) }}</a></td>
+                                        <td class="ez-table__cell">{{ bookmark.contentType.name }}</td>
+                                        <td class="ez-table__cell">
+                                            {% if bookmark.pathLocations|length > 1 %}
+                                                {% for location in bookmark.pathLocations %}
+                                                    {% if loop.revindex > 1 %}
+                                                        <a href="{{ path('_ezpublishLocation', {'locationId': location.id}) }}">
+                                                            {{ ez_content_name(location.contentInfo) }}
+                                                        </a>
+                                                        {% if loop.revindex > 2 %}/{% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% else %}
+                                                -
                                             {% endif %}
-                                        {% endfor %}
-                                    {% else %}
-                                        -
-                                    {% endif %}
-                                </td>
-                                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
-                                    {% if bookmark.userCanEdit %}
-                                    <button
-                                        class="btn btn-icon mx-2 ez-btn--content-edit"
-                                        title="{{ 'bookmark.list.content.edit'|trans|desc('Edit Content') }}"
-                                        data-content-id="{{ bookmark.contentInfo.id }}"
-                                        data-version-no="{{ bookmark.contentInfo.currentVersionNo }}"
-                                        data-language-code="{{ bookmark.contentInfo.mainLanguageCode }}">
-                                        <svg class="ez-icon ez-icon-edit">
-                                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-                                        </svg>
-                                    </button>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        {% endif %}
-                        </tbody>
-                    </table>
-                    {{ form_end(form_remove) }}
+                                        </td>
+                                        <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                                            {% if bookmark.userCanEdit %}
+                                            <button
+                                                class="btn btn-icon mx-2 ez-btn--content-edit"
+                                                title="{{ 'bookmark.list.content.edit'|trans|desc('Edit Content') }}"
+                                                data-content-id="{{ bookmark.contentInfo.id }}"
+                                                data-version-no="{{ bookmark.contentInfo.currentVersionNo }}"
+                                                data-language-code="{{ bookmark.contentInfo.mainLanguageCode }}">
+                                                <svg class="ez-icon ez-icon-edit">
+                                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                                </svg>
+                                            </button>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {{ form_end(form_remove) }}
 
 
-                {% if pager.haveToPaginate %}
-                    <div class="row justify-content-center align-items-center ez-pagination__spacing mb-2">
-                        <span class="ez-pagination__text">
-                            {{ 'pagination.viewing'|trans({
-                                '%viewing%': pager.currentPageResults|length,
-                                '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
-                        </span>
+                    {% if pager.haveToPaginate %}
+                        <div class="row justify-content-center align-items-center ez-pagination__spacing mb-2">
+                            <span class="ez-pagination__text">
+                                {{ 'pagination.viewing'|trans({
+                                    '%viewing%': pager.currentPageResults|length,
+                                    '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                            </span>
+                        </div>
+                        <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
+                            {{ pagerfanta(pager, 'ez') }}
+                        </div>
+                    {% endif %}
                     </div>
-                    <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
-                        {{ pagerfanta(pager, 'ez') }}
-                    </div>
-                {% endif %}
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
         {{ form_start(form_edit, {
             'action': path('ezplatform.content.edit'),
@@ -113,6 +123,10 @@
         {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
         {{ form_end(form_edit) }}
     </div>
+{% endblock %}
+
+{% block react_modules %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-modules-content-tree-js', null, 'ezplatform') }}
 {% endblock %}
 
 {% block javascripts %}
