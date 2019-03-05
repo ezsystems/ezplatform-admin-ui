@@ -8,100 +8,38 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
-use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
-use EzSystems\EzPlatformAdminUi\UI\Config\ConfigWrapper;
-use ProxyManager\Factory\LazyLoadingValueHolderFactory;
-use ProxyManager\Proxy\LazyLoadingInterface;
+use EzSystems\EzPlatformUser\UserSetting\UserSettingArrayAccessor;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 
 /**
  * @internal
  *
- * @todo provide extensibility to map selected settings
+ * @todo should be moved to ezplatform-user
  */
 class UserPreferencesGlobalExtension extends AbstractExtension implements GlobalsInterface
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
-    protected $userSettingService;
+    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingArrayAccessor */
+    protected $userSettingArrayAccessor;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\UserSettingService $userSettingService
+     * @param \EzSystems\EzPlatformUser\UserSetting\UserSettingArrayAccessor $userSettingArrayAccessor
      */
     public function __construct(
-        UserSettingService $userSettingService
+        UserSettingArrayAccessor $userSettingArrayAccessor
     ) {
-        $this->userSettingService = $userSettingService;
+        $this->userSettingArrayAccessor = $userSettingArrayAccessor;
     }
 
     /**
      * @return array
-     *
-     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function getGlobals(): array
     {
+        // has to use \ArrayAccess object due to BC promise
+
         return [
-            'ez_user_settings' => $this->createConfigWrapper(),
+            'ez_user_settings' => $this->userSettingArrayAccessor,
         ];
-    }
-
-    /**
-     * Create lazy loaded configuration.
-     *
-     * @return \EzSystems\EzPlatformAdminUi\UI\Config\ConfigWrapper
-     */
-    private function createConfigWrapper(): ConfigWrapper
-    {
-        $factory = new LazyLoadingValueHolderFactory();
-        $initializer = function (&$wrappedObject, LazyLoadingInterface $proxy, $method, array $parameters, &$initializer) {
-            $initializer = null;
-            $wrappedObject = new ConfigWrapper($this->getUserSettings());
-
-            return true;
-        };
-
-        return $factory->createProxy(ConfigWrapper::class, $initializer);
-    }
-
-    /**
-     * @return array
-     *
-     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
-    private function getUserSettings(): array
-    {
-        return [
-            'timezone' => $this->getTimezoneValue(),
-            'character_counter' => $this->getCharacterCounterValue(),
-        ];
-    }
-
-    /**
-     * @return string
-     *
-     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
-    private function getTimezoneValue(): string
-    {
-        return $this->userSettingService->getUserSetting('timezone')->value;
-    }
-
-    /**
-     * @return string
-     *
-     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
-    private function getCharacterCounterValue(): string
-    {
-        return $this->userSettingService->getUserSetting('character_counter')->value;
     }
 }
