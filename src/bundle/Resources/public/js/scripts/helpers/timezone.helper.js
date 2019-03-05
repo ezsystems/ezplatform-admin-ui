@@ -7,16 +7,16 @@
         return moment(date).tz(timezone);
     };
     const formatDate = (date, format = userPreferedFullDateFormat) => {
-        return moment(date).formatPHP(format);
-    };
-    const formatShortDate = (date, format = userPreferedShortDateFormat) => {
-        return moment(date).formatPHP(format);
+        return moment(date).formatICU(format);
     };
     const formatDateWithTimezone = (date, timezone = userPreferedTimezone, format = userPreferedFullDateFormat) => {
         return formatDate(convertDateToTimezone(date, timezone), format);
     };
+    const formatShortDate = (date, format = userPreferedShortDateFormat) => {
+        return formatDate(date, format);
+    };
     const formatShortDateWithTimezone = (date, timezone = userPreferedTimezone, format = userPreferedShortDateFormat) => {
-        return formatDate(convertDateToTimezone(date, timezone), format);
+        return formatDateWithTimezone(date, timezone, format);
     };
 
     eZ.addConfig('helpers.timezone', {

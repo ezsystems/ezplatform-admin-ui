@@ -15,7 +15,7 @@
         <div class="small">
             {{ contentType.name }} /
             {% if creator is not null %}{{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }} /{% endif %}
-            {{ user.versionInfo.contentInfo.publishedDate|localizeddate('medium', 'medium', app.request.locale, ez_user_settings['timezone']) }} /
+            {{ user.versionInfo.contentInfo.publishedDate|ez_full_datetime }} /
             {{ 'content_id'|trans({'%contentId%': user.id})|desc('Content ID: %contentId%') }}{% if user.versionInfo.contentInfo.mainLocationId %}, {{ 'location_id'|trans({'%locationId%': user.versionInfo.contentInfo.mainLocationId})|desc('Location ID: %locationId%') }}{% endif %}
         </div>
         <div class="ez-content-item__errors-wrapper" hidden>

@@ -22,7 +22,7 @@
                 {% else %}
                     {{ 'tab.details.creator.not_found'|trans|desc('Can’t fetch creator') }}
                 {% endif %}
-                ({{ contentInfo.publishedDate|localizeddate('medium', 'short', app.request.locale, ez_user_settings['timezone']) }})
+                ({{ contentInfo.publishedDate|ez_full_datetime }})
             </td>
             <td>
                 {% if lastContributor is not empty %}
@@ -30,7 +30,7 @@
                 {% else %}
                     {{ 'tab.details.last_contributor.not_found'|trans|desc('Can’t fetch last contributor') }}
                 {% endif %}
-                ({{ versionInfo.modificationDate|localizeddate('medium', 'short', app.request.locale, ez_user_settings['timezone']) }})
+                ({{ versionInfo.modificationDate|ez_full_datetime }})
             </td>
             <td>{{ versionInfo.versionNo }}</td>
             <td>

@@ -9,22 +9,45 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
 
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
+use EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService;
+use EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer;
 
-/**
- * @todo Will be refactored once DateFormat becomes a User Setting in 2.4
- */
 class DateFormat implements ProviderInterface
 {
+    /** @var \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService */
+    protected $userSettingService;
+
+    /** @var \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer */
+    protected $dateTimeFormatSerializer;
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService $userSettingService
+     * @param \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer $dateTimeFormatSerializer
+     */
+    public function __construct(UserSettingService $userSettingService, DateTimeFormatSerializer $dateTimeFormatSerializer)
+    {
+        $this->userSettingService = $userSettingService;
+        $this->dateTimeFormatSerializer = $dateTimeFormatSerializer;
+    }
+
     /**
      * {@inheritdoc}
      *
-     * @return mixed
+     * @return array
      */
-    public function getConfig()
+    public function getConfig(): array
     {
+        $fullDateTimeFormat = $this->dateTimeFormatSerializer->deserialize(
+            $this->userSettingService->getUserSetting('full_datetime_format')->value
+        );
+
+        $shortDateTimeFormat = $this->dateTimeFormatSerializer->deserialize(
+            $this->userSettingService->getUserSetting('short_datetime_format')->value
+        );
+
         return [
-            'full' => 'M j, Y g:i A',
-            'short' => 'd.m.Y g:i A',
+            'full' => (string)$fullDateTimeFormat,
+            'short' => (string)$shortDateTimeFormat,
         ];
     }
 }
