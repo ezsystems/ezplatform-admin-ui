@@ -13,6 +13,7 @@
     const toggleContentTreePanel = () => {
         contentTreeContainer.classList.toggle(CLASS_CONTENT_TREE_EXPANDED);
         btn.classList.toggle(CLASS_BTN_CONTENT_TREE_EXPANDED);
+        updateContentTreeWrapperHeight();
 
         localStorage.setItem(KEY_CONTENT_TREE_EXPANDED, contentTreeContainer.classList.contains(CLASS_CONTENT_TREE_EXPANDED));
     };
