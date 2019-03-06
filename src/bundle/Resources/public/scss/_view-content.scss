@@ -31,10 +31,4 @@
         flex: 1 1 auto;
         min-width: 0;
     }
-
-    &.ez-is-tree-resizing {
-        .ez-location-view-container {
-            pointer-events: none;
-        }
-    }
 }

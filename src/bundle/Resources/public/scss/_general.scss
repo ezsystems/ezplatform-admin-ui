@@ -156,3 +156,10 @@ select {
 .ez-prevent-click * {
     pointer-events: none !important;
 }
+
+.ez-is-tree-resizing {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
