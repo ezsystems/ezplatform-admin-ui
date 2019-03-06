@@ -281,7 +281,7 @@
         }
 
         getCountableTags(html) {
-            const allowedTags = ['p:not(.ez-embed-content)', 'li', 'h1', 'h2', 'h3', 'h4', 'h5' , 'h6', 'th', 'td'];
+            const allowedTags = ['p:not(.ez-embed-content)', 'li', 'h1', 'h2', 'h3', 'h4', 'h5' , 'h6', 'th', 'td', 'pre'];
             const notCustomTagSelector = ':not([data-ezelement=ezattributes]) > ';
             const allowedSelectors = allowedTags.map((item) => {
                 return notCustomTagSelector.concat(item);
