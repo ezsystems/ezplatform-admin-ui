@@ -3,7 +3,6 @@
 .ez-search-view,
 .ez-trash-list-view {
     .ez-content-container {
-        display: flex;
         min-width: 0;
     }
 
@@ -32,11 +31,5 @@
     .ez-view-container {
         flex: 1 1 auto;
         min-width: 0;
-    }
-}
-
-.ez-content-view {
-    .ez-content-tree-container {
-        margin-bottom: calculateRem(-24px);
     }
 }

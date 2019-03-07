@@ -1,3 +1,5 @@
+{% set location_path = location.pathString %}
+
 {% extends "@ezdesign/layout.html.twig" %}
 
 {% trans_default_domain 'locationview' %}
@@ -19,17 +21,13 @@
          data-parent-location-path="{{ location.pathString }}"
          data-parent-content-type-identifier="{{ contentType.identifier }}"
          data-parent-content-type-id="{{ contentType.id }}"></div>
-    <div class="row align-items-stretch ez-main-row">
 
+    <div class="row align-items-stretch ez-main-row">
         {% block left_sidebar %}
             {{ parent() }}
         {% endblock left_sidebar %}
 
         <div class="px-0 pb-4 ez-content-container">
-            <div class="ez-content-tree-container" data-user-id="{{ admin_ui_config.user.user.id }}" data-tree-root-location-id="{{ admin_ui_config['contentTree']['treeRootLocationId'] }}" data-current-location-path="{{ location.pathString }}">
-                <div class="ez-content-tree-container__wrapper"></div>
-            </div>
-            <div class="ez-view-container">
                 <div class="ez-header">
                     <div class="container">
                         {% set items = [] %}
@@ -92,7 +90,6 @@
                         {% endif %}
                     </div>
                 </div>
-            </div>
         </div>
         <div class="pt-4 px-0 bg-secondary ez-context-menu">
             <div class="ez-sticky-container">

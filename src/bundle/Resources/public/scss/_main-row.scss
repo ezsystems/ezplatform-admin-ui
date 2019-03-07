@@ -1,38 +1,13 @@
 .ez-main-row {
-    display: grid;
-    grid-template-columns: 1fr calculateRem(80px);
-    grid-template-rows: auto;
-    grid-template-areas: 'ez-content-container ez-context-menu';
+    display: flex;
+    flex-wrap: nowrap;
+
+    .ez-side-menu,
+    .ez-context-menu {
+        flex: 0 0 90px;
+    }
 
     .ez-content-container {
-        grid-area: ez-content-container;
-    }
-
-    .ez-context-menu {
-        grid-area: ez-context-menu;
-    }
-
-    .ez-has-two-sidebars & {
-        grid-template-columns: calculateRem(80px) 1fr calculateRem(80px);
-        grid-template-areas: 'ez-side-menu ez-content-container ez-context-menu';
-
-        .ez-side-menu {
-            grid-area: ez-side-menu;
-        }
-    }
-
-    .ez-has-no-sidebars & {
-        grid-template-columns: 1fr;
-        grid-template-areas: 'ez-content-container';
-
-        .ez-context-menu,
-        .ez-side-menu {
-            display: none;
-        }
-    }
-
-    &.ez-dashboard-row {
-        grid-template-columns: 1fr;
-        grid-template-areas: 'ez-content-container';
+        flex: 1 1 auto;
     }
 }
