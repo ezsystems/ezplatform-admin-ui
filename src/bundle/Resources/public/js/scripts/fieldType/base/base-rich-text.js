@@ -248,6 +248,7 @@
                 element.insertAdjacentHTML('afterbegin', icon);
             });
 
+            this.countWordsCharacters(container, section);
             nativeEditor.setData(section.innerHTML);
 
             nativeEditor.on('blur', saveRichText);
