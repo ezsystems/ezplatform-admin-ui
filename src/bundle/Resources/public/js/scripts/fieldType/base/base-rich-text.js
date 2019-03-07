@@ -292,7 +292,9 @@
         }
 
         cleanWhiteCharacters(text) {
-            return text.replace(/\s\r?\n/g, ' ').trim();
+            return text
+                .replace(/[\u200B-\u200D\uFEFF]/g, '')  //zero-width characters
+                .replace(/\s\r?\n/g, ' ').trim();       //white characters
         }
     };
 
