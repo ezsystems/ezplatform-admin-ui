@@ -152,11 +152,16 @@
             return items.filter((item) => selectedItemsMap[item.ContentInfo.Content._id]);
         };
         const renderRow = (item, index) => {
+            const { escapeHTML } = eZ.helpers.text;
+            const contentTypeName = eZ.adminUiConfig.contentTypeNames[item.ContentInfo.Content.ContentTypeInfo.identifier];
+            const contentName = escapeHTML(item.ContentInfo.Content.Name);
+            const contentId = escapeHTML(item.ContentInfo.Content._id);
+
             return `
-                <tr class="ez-relations__item" data-content-id="${item.ContentInfo.Content._id}">
-                    <td><input type="checkbox" value="${item.ContentInfo.Content._id}" /></td>
-                    <td class="ez-relations__item-name">${item.ContentInfo.Content.Name}</td>
-                    <td>${item.ContentInfo.Content.ContentTypeInfo.names.value[0]['#text']}</td>
+                <tr class="ez-relations__item" data-content-id="${contentId}">
+                    <td><input type="checkbox" value="${contentId}" /></td>
+                    <td class="ez-relations__item-name">${contentName}</td>
+                    <td>${contentTypeName}</td>
                     <td>${new Date(item.ContentInfo.Content.publishedDate).toLocaleString()}</td>
                     <td colspan="2"><input class="ez-relations__order-input" type="number" value="${selectedItems.length +
                         index +

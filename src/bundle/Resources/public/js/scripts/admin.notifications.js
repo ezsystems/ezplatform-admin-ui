@@ -1,4 +1,4 @@
-(function (global, doc, eZ, $) {
+(function(global, doc, eZ, $) {
     const notificationsContainer = doc.querySelector('.ez-notifications-container');
     const notifications = JSON.parse(notificationsContainer.dataset.notifications);
     const template = notificationsContainer.dataset.template;
@@ -8,7 +8,8 @@
         const config = eZ.adminUiConfig.notifications[configKey];
         const timeout = config ? config.timeout : 0;
         const container = doc.createElement('div');
-        const notification = template.replace('{{ label }}', detail.label).replace('{{ message }}', detail.message);
+        const escapedMessage = eZ.helpers.text.escapeHTML(detail.message);
+        const notification = template.replace('{{ label }}', detail.label).replace('{{ message }}', escapedMessage);
 
         container.insertAdjacentHTML('beforeend', notification);
 
@@ -21,8 +22,8 @@
         }
     };
 
-    Object.entries(notifications).forEach(([ label, messages ]) => {
-        messages.forEach(message => addNotification({ detail: { label, message }}));
+    Object.entries(notifications).forEach(([label, messages]) => {
+        messages.forEach((message) => addNotification({ detail: { label, message } }));
     });
 
     doc.body.addEventListener('ez-notify', addNotification, false);
