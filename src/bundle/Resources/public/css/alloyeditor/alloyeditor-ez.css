@@ -1044,3 +1044,7 @@
   font-size: 14px;
   line-height: 1;
 }
+
+.ae-toolbar-styles {
+  z-index: 1;
+}
