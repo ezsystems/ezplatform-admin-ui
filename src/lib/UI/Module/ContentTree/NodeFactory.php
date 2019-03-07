@@ -110,7 +110,7 @@ final class NodeFactory
                     $childLocation,
                     $childLoadSubtreeRequestNode,
                     null !== $childLoadSubtreeRequestNode,
-                    $depth++
+                    $depth + 1
                 );
             }
         } else {
