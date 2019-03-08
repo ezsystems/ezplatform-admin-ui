@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller\User;
 
-use EzSystems\EzPlatformUser\View\UserSettings\ListView;
 use EzSystems\EzPlatformUserBundle\Controller\UserSettingsController as BaseUserSettingsController;
 use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,41 +17,30 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class UserSettingsController extends Controller
 {
-    /** @var \EzSystems\EzPlatformUserBundle\Controller\UserSettingsController */
-    private $userSettingsController;
-
-    /**
-     * @param \EzSystems\EzPlatformUserBundle\Controller\UserSettingsController $userSettingsController
-     */
-    public function __construct(BaseUserSettingsController $userSettingsController)
-    {
-        $this->userSettingsController = $userSettingsController;
-    }
-
     /**
      * @param int $page
      *
-     * @return \EzSystems\EzPlatformUser\View\UserSettings\ListView
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
      */
-    public function listAction(int $page = 1): ListView
+    public function listAction(int $page = 1)
     {
-        return $this->userSettingsController->listAction($page);
+        return $this->forward(BaseUserSettingsController::class . '::listAction', [
+            'page' => $page,
+        ]);
     }
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param string $identifier
      *
-     * @return \EzSystems\EzPlatformUser\View\UserSettings\UpdateView|null|\Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, string $identifier)
     {
-        return $this->userSettingsController->updateAction($request, $identifier);
+        return $this->forward(BaseUserSettingsController::class . '::updateAction', [
+            'identifier' => $identifier,
+        ]);
     }
 }
