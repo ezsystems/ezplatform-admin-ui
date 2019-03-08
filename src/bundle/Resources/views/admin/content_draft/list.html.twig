@@ -8,7 +8,7 @@
 
 {% block title %}{{ 'drafts.list'|trans|desc('Drafts') }} - {{ parent() }}{% endblock %}
 
-{% block body_class %}ez-drafts-list-view ez-has-two-sidebars{% endblock %}
+{% block body_class %}ez-drafts-list-view{% endblock %}
 
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
@@ -125,6 +125,10 @@
     </div>
 
     {% include '@ezdesign/content/modal_version_conflict.html.twig' %}
+{% endblock %}
+
+{% block react_modules %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-modules-content-tree-js', null, 'ezplatform') }}
 {% endblock %}
 
 {% block javascripts %}
