@@ -270,9 +270,11 @@
                 let wordCount = 0;
 
                 countableTags.forEach((tag) => {
-                    const sanitizedText = this.cleanWhiteCharacters(tag.innerText);
+                    const cleanedTag = this.cleanZeroWidthCharacters(tag);
+                    const strippedText = this.stripInlineFormatting(cleanedTag);
+                    const sanitizedText = this.cleanWhiteCharacters(strippedText);
 
-                    wordCount += sanitizedText ? sanitizedText.split(' ').length : 0;
+                    wordCount += sanitizedText ? this.splitIntoWords(sanitizedText).length : 0;
                     characterCount += sanitizedText.length;
                 });
 
@@ -282,7 +284,7 @@
         }
 
         getCountableTags(html) {
-            const allowedTags = ['p:not(.ez-embed-content)', 'li', 'h1', 'h2', 'h3', 'h4', 'h5' , 'h6', 'th', 'td', 'pre'];
+            const allowedTags = ['p:not(.ez-embed-content)', 'li', 'h1', 'h2', 'h3', 'h4', 'h5' , 'h6', 'th', 'td', 'pre', '[data-ezelement=eztemplate]'];
             const notCustomTagSelector = ':not([data-ezelement=ezattributes]) > ';
             const allowedSelectors = allowedTags.map((item) => {
                 return notCustomTagSelector.concat(item);
@@ -291,10 +293,36 @@
             return html.querySelectorAll(allowedSelectors.join(','));
         }
 
+        cleanZeroWidthCharacters(tag) {
+            tag.innerHTML = tag.innerHTML.replace(/[\u200B-\u200D\uFEFF\u00A0]/g, '');
+            return tag;
+        }
+
+        stripInlineFormatting(html) {
+            const extractables = ['[data-ezelement=ezcontent]'];
+            const removables = ['[data-ezelement=ezconfig]'];
+
+            html.querySelectorAll(extractables.join(','))
+                .forEach((node) => {
+                    node.replaceWith(node.innerText);
+                });
+
+            html.querySelectorAll(removables.join(','))
+                .forEach((node) => {
+                    node.remove();
+                });
+
+            return html.innerText.replace(/  +/g, ' '); //making sure that there are no additional entities after nodes removal
+        }
+
         cleanWhiteCharacters(text) {
             return text
-                .replace(/[\u200B-\u200D\uFEFF]/g, '')  //zero-width characters
-                .replace(/\s\r?\n/g, ' ').trim();       //white characters
+                .replace(/\s\r?\n/g, ' ')
+                .trim();
+        }
+
+        splitIntoWords(text) {
+            return text.match(/\b(\w+)\b/g);
         }
     };
 
