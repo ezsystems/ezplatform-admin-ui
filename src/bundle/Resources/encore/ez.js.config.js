@@ -228,5 +228,8 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-preview-field.js'),
             ...fieldTypes,
             path.resolve(__dirname, '../public/js/scripts/sidebar/extra.actions.js'),
+        ])
+        .addEntry('ezplatform-admin-ui-settings-datetime-format-update-js', [
+            path.resolve(__dirname, '../public/js/scripts/admin.settings.datetimeformat.update.js'),
         ]);
 };
