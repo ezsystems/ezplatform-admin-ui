@@ -1,6 +1,9 @@
-.ez-content-view {
+.ez-content-view,
+.ez-bookmark-list-view,
+.ez-search-view,
+.ez-trash-list-view,
+.ez-drafts-list-view {
     .ez-content-container {
-        display: flex;
         min-width: 0;
     }
 
@@ -12,7 +15,6 @@
         background: $ez-white;
         color: inherit;
         transition: max-width 0.2s $ez-admin-transition;
-        margin-bottom: calculateRem(-24px);
 
         &--expanded {
             display: initial;
@@ -27,7 +29,7 @@
         }
     }
 
-    .ez-location-view-container {
+    .ez-view-container {
         flex: 1 1 auto;
         min-width: 0;
     }

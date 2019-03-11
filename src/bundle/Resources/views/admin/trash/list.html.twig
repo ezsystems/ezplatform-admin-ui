@@ -62,54 +62,56 @@
                             {% endif %}
                         </div>
                     </div>
-                    <table class="ez-table table">
-                        <thead>
-                        <tr>
-                            <th class="ez-table__header-cell"></th>
-                            <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
-                            <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'trash.name'|trans|desc('Name') }}</th>
-                            <th class="ez-table__header-cell">{{ 'trash.type'|trans|desc('Type') }}</th>
-                            <th class="ez-table__header-cell">{{ 'trash.original_location'|trans|desc('Original location') }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% if trash_items is empty %}
+                    <div class="ez-scrollable-table-wrapper">
+                        <table class="ez-table table">
+                            <thead>
                             <tr>
-                                <td class="ez-table__cell ez-table__cell--no-content" colspan="4">
-                                    <span class="mb-0 py-1 pl-0">
-                                        {{ 'trash.empty'|trans|desc('Trash is empty. Any content item you send to trash will end up here.') }}
-                                    </span>
-                                </td>
+                                <th class="ez-table__header-cell"></th>
+                                <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
+                                <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'trash.name'|trans|desc('Name') }}</th>
+                                <th class="ez-table__header-cell">{{ 'trash.type'|trans|desc('Type') }}</th>
+                                <th class="ez-table__header-cell">{{ 'trash.original_location'|trans|desc('Original location') }}</th>
                             </tr>
-                        {% else %}
-                            {% for key, form in form_trash_item_restore.trash_items %}
-                                {% set trash_item = trash_items[key] %}
-                                {% set is_parent_in_trash = trash_item.parentInTrash %}
+                            </thead>
+                            <tbody>
+                            {% if trash_items is empty %}
                                 <tr>
-                                    <td class="ez-table__cell">
-                                        {{ form_widget(form, {attr: {
-                                            'data-is-parent-in-trash': is_parent_in_trash ? '1': '0'
-                                        }}) }}
-                                    </td>
-                                    <td class="ez-table__cell ez-table__cell--has-icon">
-                                        <svg class="ez-icon ez-icon--small">
-                                            <use xlink:href="{{ ez_content_type_icon(trash_item.contentType.identifier) }}"></use>
-                                        </svg>
-                                    </td>
-                                    <td class="ez-table__cell ez-table__cell--after-icon">{{ ez_content_name(trash_item.location.contentInfo) }}</td>
-                                    <td class="ez-table__cell">{{ trash_item.contentType.name }}</td>
-                                    <td class="ez-table__cell">
-                                        {% if not is_parent_in_trash %}
-                                            {% include '@ezdesign/parts/path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
-                                        {% else %}
-                                            <em>{{ 'trash.item.ancesor_in_trash'|trans|desc('Ancestor is in the Trash') }}</em>
-                                        {% endif %}
+                                    <td class="ez-table__cell ez-table__cell--no-content" colspan="4">
+                                        <span class="mb-0 py-1 pl-0">
+                                            {{ 'trash.empty'|trans|desc('Trash is empty. Any content item you send to trash will end up here.') }}
+                                        </span>
                                     </td>
                                 </tr>
-                            {% endfor %}
-                        {% endif %}
-                        </tbody>
-                    </table>
+                            {% else %}
+                                {% for key, form in form_trash_item_restore.trash_items %}
+                                    {% set trash_item = trash_items[key] %}
+                                    {% set is_parent_in_trash = trash_item.parentInTrash %}
+                                    <tr>
+                                        <td class="ez-table__cell">
+                                            {{ form_widget(form, {attr: {
+                                                'data-is-parent-in-trash': is_parent_in_trash ? '1': '0'
+                                            }}) }}
+                                        </td>
+                                        <td class="ez-table__cell ez-table__cell--has-icon">
+                                            <svg class="ez-icon ez-icon--small">
+                                                <use xlink:href="{{ ez_content_type_icon(trash_item.contentType.identifier) }}"></use>
+                                            </svg>
+                                        </td>
+                                        <td class="ez-table__cell ez-table__cell--after-icon">{{ ez_content_name(trash_item.location.contentInfo) }}</td>
+                                        <td class="ez-table__cell">{{ trash_item.contentType.name }}</td>
+                                        <td class="ez-table__cell">
+                                            {% if not is_parent_in_trash %}
+                                                {% include '@ezdesign/parts/path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
+                                            {% else %}
+                                                <em>{{ 'trash.item.ancesor_in_trash'|trans|desc('Ancestor is in the Trash') }}</em>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
                     {{ form_widget(form_trash_item_restore._token) }}
                     {{ form_end(form_trash_item_restore, { 'render_rest': false }) }}
                 </div>
@@ -149,6 +151,10 @@
             </div>
         {% endif %}
     </div>
+{% endblock %}
+
+{% block react_modules %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-modules-content-tree-js', null, 'ezplatform') }}
 {% endblock %}
 
 {% block javascripts %}

@@ -22,12 +22,12 @@
 
                 {% if results is defined %}
 
-                    <div class="ez-table-header mt-3 ml-4">
+                    <div class="ez-table-header mt-3 mx-4">
                         <div class="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
                     </div>
 
                     {% if results is empty %}
-                        <div class="ml-4">
+                        <div class="mx-4">
                             <table class="table">
                                 <tr>
                                     <td colspan="4">
@@ -44,8 +44,8 @@
                             </ul>
                         </div>
                     {% else %}
-                        <div class="mr-4">
-                            <table class="table mx-4">
+                        <div class="ez-scrollable-table-wrapper mx-4">
+                            <table class="table">
                                 <thead>
                                 <tr>
                                     <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
@@ -61,20 +61,20 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
-
-                            {% if pager.haveToPaginate %}
-                                <div class="row justify-content-center align-items-center mb-2 ml-4 ez-pagination__spacing">
-                                    <span class="ez-pagination__text">
-                                        {{ 'pagination.viewing'|trans({
-                                            '%viewing%': pager.currentPageResults|length,
-                                            '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
-                                    </span>
-                                </div>
-                                <div class="row justify-content-center align-items-center ez-pagination__btn mb-5 ml-4">
-                                    {{ pagerfanta(pager, 'ez', {'pageParameter': '[search][page]'}) }}
-                                </div>
-                            {% endif %}
                         </div>
+
+                        {% if pager.haveToPaginate %}
+                            <div class="row justify-content-center align-items-center mb-2 ml-4 ez-pagination__spacing">
+                                <span class="ez-pagination__text">
+                                    {{ 'pagination.viewing'|trans({
+                                        '%viewing%': pager.currentPageResults|length,
+                                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                                </span>
+                            </div>
+                            <div class="row justify-content-center align-items-center ez-pagination__btn mb-5 mx-4">
+                                {{ pagerfanta(pager, 'ez', {'pageParameter': '[search][page]'}) }}
+                            </div>
+                        {% endif %}
                     {% endif %}
 
                     {% form_theme form_edit '@ezdesign/parts/form/flat_widgets.html.twig' %}
@@ -89,6 +89,10 @@
             </section>
         </div>
     </div>
+{% endblock %}
+
+{% block react_modules %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-modules-content-tree-js', null, 'ezplatform') }}
 {% endblock %}
 
 {% block javascripts %}
