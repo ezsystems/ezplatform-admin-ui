@@ -1,4 +1,4 @@
-(function(global, doc, eZ, flatpickr) {
+(function(global, doc, eZ, moment, flatpickr) {
     const SELECTOR_FIELD = '.ez-field-edit--ezdatetime';
     const SELECTOR_INPUT = '.ez-data-source__input[data-seconds]';
     const SELECTOR_FLATPICKR_INPUT = '.flatpickr-input';
@@ -65,19 +65,21 @@
         time_24hr: true,
         formatDate: (date) => new Date(date).toLocaleString(),
     };
-    const updateInputValue = (sourceInput, date) => {
+    const updateInputValue = (sourceInput, dates) => {
         const event = new CustomEvent(EVENT_VALUE_CHANGED);
 
-        if (!date.length) {
+        if (!dates.length) {
             sourceInput.value = '';
             sourceInput.dispatchEvent(event);
 
             return;
         }
 
-        date = new Date(date[0]);
-        sourceInput.value = Math.floor(date.getTime() / 1000);
+        const selectedDate = moment(dates[0]);
+        const selectedDateWithUserTimezone = selectedDate.tz(eZ.adminUiConfig.timezone, true);
+        const timestamp = Math.floor(selectedDateWithUserTimezone.valueOf() / 1000);
 
+        sourceInput.value = timestamp;
         sourceInput.dispatchEvent(event);
     };
     const clearValue = (sourceInput, flatpickrInstance, event) => {
@@ -91,7 +93,8 @@
         const sourceInput = field.querySelector(SELECTOR_INPUT);
         const flatPickrInput = field.querySelector(SELECTOR_FLATPICKR_INPUT);
         const btnClear = field.querySelector('.ez-data-source__btn--clear-input');
-        const defaultDate = sourceInput.value ? new Date(sourceInput.value * 1000) : null;
+        const defaultDateWithUserTimezone = eZ.helpers.timezone.convertDateToTimezone(sourceInput.value * 1000);
+        const defaultDate = sourceInput.value ? new Date(defaultDateWithUserTimezone.format('YYYY-MM-DD HH:mm:ss')) : null;
         const flatpickrInstance = flatpickr(
             flatPickrInput,
             Object.assign({}, datetimeConfig, {
@@ -109,4 +112,4 @@
     };
 
     datetimeFields.forEach(initFlatPickr);
-})(window, window.document, window.eZ, window.flatpickr);
+})(window, window.document, window.eZ, window.moment, window.flatpickr);
