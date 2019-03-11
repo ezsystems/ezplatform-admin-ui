@@ -124,7 +124,7 @@ final class NodeFactory
             $contentInfo->name,
             $contentType ? $contentType->identifier : '',
             $contentType ? $contentType->isContainer : true,
-            $location->invisible,
+            $location->invisible || $location->hidden,
             $limit,
             $totalChildrenCount,
             $children
