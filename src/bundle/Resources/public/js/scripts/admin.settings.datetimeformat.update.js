@@ -1,10 +1,10 @@
 (function(global, doc, moment) {
-    const DATE_FORMAT_SELECTOR = '#user_setting_update_value_date_format';
-    const TIME_FORMAT_SELECTOR = '#user_setting_update_value_time_format';
-    const VALUE_PREVIEW_SELECTOR = '.ez-datetime-format-preview-value';
-    const valuePreview = doc.querySelector(VALUE_PREVIEW_SELECTOR);
-    const dateFormatSelect = doc.querySelector(DATE_FORMAT_SELECTOR);
-    const timeFormatSelect = doc.querySelector(TIME_FORMAT_SELECTOR);
+    const SELECTOR_DATE_FORMAT = '#user_setting_update_value_date_format';
+    const SELECTOR_TIME_FORMAT = '#user_setting_update_value_time_format';
+    const SELECTOR_VALUE_PREVIEW = '.ez-datetime-format-preview-value';
+    const valuePreview = doc.querySelector(SELECTOR_VALUE_PREVIEW);
+    const dateFormatSelect = doc.querySelector(SELECTOR_DATE_FORMAT);
+    const timeFormatSelect = doc.querySelector(SELECTOR_TIME_FORMAT);
     const updateDateTimeFormatPreview = () => {
         valuePreview.innerHTML = moment().formatICU(
             dateFormatSelect.value + ' ' + timeFormatSelect.value
