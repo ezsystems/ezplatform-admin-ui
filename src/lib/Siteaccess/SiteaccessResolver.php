@@ -14,61 +14,58 @@ use eZ\Publish\Core\MVC\ConfigResolverInterface;
 
 class SiteaccessResolver implements SiteaccessResolverInterface
 {
-    /** @var ConfigResolverInterface */
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessPreviewVoterInterface[] */
+    private $siteaccessPreviewVoters;
+
     /**
-     * @param ConfigResolverInterface $configResolver
-     * @param ContentService $contentService
+     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param iterable $siteaccessPreviewVoters
      */
-    public function __construct(ConfigResolverInterface $configResolver, ContentService $contentService)
-    {
+    public function __construct(
+        ConfigResolverInterface $configResolver,
+        ContentService $contentService,
+        iterable $siteaccessPreviewVoters
+    ) {
         $this->configResolver = $configResolver;
         $this->contentService = $contentService;
+        $this->siteaccessPreviewVoters = $siteaccessPreviewVoters;
     }
 
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param int|null $versionNo
+     * @param string|null $languageCode
+     *
+     * @return array
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
     public function getSiteaccessesForLocation(
         Location $location,
         int $versionNo = null,
         string $languageCode = null
     ): array {
         $contentInfo = $location->getContentInfo();
-        $languageCode = $languageCode ?? $contentInfo->mainLanguageCode;
         $versionInfo = $this->contentService->loadVersionInfo($contentInfo, $versionNo);
-        $contentLanguages = $versionInfo->languageCodes;
+        $languageCode = $languageCode ?? $contentInfo->mainLanguageCode;
 
         $eligibleSiteaccesses = [];
         foreach ($this->getSiteaccesses() as $siteaccess) {
-            $rootLocationId = $this->configResolver->getParameter(
-                'content.tree_root.location_id',
-                null,
-                $siteaccess
-            );
-            if (!in_array($rootLocationId, $location->path)) {
-                continue;
+            $context = new SiteaccessPreviewVoterContext($location, $versionInfo, $siteaccess, $languageCode);
+            foreach ($this->siteaccessPreviewVoters as $siteaccessPreviewVoter) {
+                if ($siteaccessPreviewVoter->vote($context)) {
+                    $eligibleSiteaccesses[] = $siteaccess;
+                    break;
+                }
             }
-
-            $siteaccessLanguages = $this->configResolver->getParameter(
-                'languages',
-                null,
-                $siteaccess
-            );
-            if (!in_array($languageCode, $siteaccessLanguages)) {
-                continue;
-            }
-
-            $primarySiteaccessLanguage = reset($siteaccessLanguages);
-            if (
-                $languageCode !== $primarySiteaccessLanguage
-                && in_array($primarySiteaccessLanguage, $contentLanguages)
-            ) {
-                continue;
-            }
-
-            $eligibleSiteaccesses[] = $siteaccess;
         }
 
         return $eligibleSiteaccesses;
