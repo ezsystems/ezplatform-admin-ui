@@ -128,9 +128,9 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         $canManageLocations = $this->permissionResolver->canUser(
             'content', 'manage_locations', $location->getContentInfo()
         );
-        $canCreate = $this->permissionResolver->canUser(
-            'content', 'create', $location->getContentInfo()
-        );
+        // We grant access to choose a valid Location from UDW. Now it is not possible to filter locations
+        // and show only those which user has access to
+        $canCreate = false !== $this->permissionResolver->hasAccess('content', 'create');
         $canEdit = $this->permissionResolver->canUser(
             'content', 'edit', $location->getContentInfo()
         );
