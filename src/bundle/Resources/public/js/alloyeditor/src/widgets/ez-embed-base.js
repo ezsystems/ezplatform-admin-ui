@@ -253,7 +253,8 @@ const embedBaseDefinition = {
      */
     renderEmbedPreview: function(title) {
         const elementNode = this.createEmbedPreviewNode();
-        const template = this.createEmbedPreview(title);
+        const escapedTitle = eZ.helpers.text.escapeHTML(title);
+        const template = this.createEmbedPreview(escapedTitle);
 
         elementNode.classList.add('ez-embed-content');
         elementNode.innerHTML = template;

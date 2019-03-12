@@ -9,7 +9,8 @@
         const config = eZ.adminUiConfig.notifications[configKey];
         const timeout = config ? config.timeout : 0;
         const container = doc.createElement('div');
-        const notification = template.replace('{{ label }}', label).replace('{{ message }}', message);
+        const escapedMessage = eZ.helpers.text.escapeHTML(message);
+        const notification = template.replace('{{ label }}', label).replace('{{ message }}', escapedMessage);
 
         container.insertAdjacentHTML('beforeend', notification);
 
