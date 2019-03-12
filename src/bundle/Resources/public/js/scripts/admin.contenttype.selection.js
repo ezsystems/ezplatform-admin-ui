@@ -20,7 +20,7 @@
                 return 0;
             }
             const lastInput = container.querySelector(SELECTOR_OPTIONS_LIST).lastElementChild.querySelector('input[type="text"]');
-            const lastId = parseInt(lastInput.name.match(/.+\[(\d)]$/)[1]);
+            const lastId = lastInput.dataset.ezselectionOptionId;
 
             return lastId + 1;
         };
