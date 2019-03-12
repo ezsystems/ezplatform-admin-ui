@@ -15,12 +15,21 @@
 
             container.querySelector(SELECTOR_BTN_REMOVE)[methodName]('disabled', disabledState);
         };
+        const getNextId = () => {
+            if (countExistingOptions() === 0) {
+                return 0;
+            }
+            const lastInput = container.querySelector(SELECTOR_OPTIONS_LIST).lastElementChild.querySelector('input[type="text"]');
+            const lastId = parseInt(lastInput.name.match(/.+\[(\d)]$/)[1]);
+
+            return lastId + 1;
+        };
         const addOption = () => {
             const template = container.querySelector(SELECTOR_TEMPLATE).innerHTML;
 
             container
                 .querySelector(SELECTOR_OPTIONS_LIST)
-                .insertAdjacentHTML('beforeend', template.replace(NUMBER_PLACEHOLDER, countExistingOptions()));
+                .insertAdjacentHTML('beforeend', template.replace(NUMBER_PLACEHOLDER, getNextId()));
         };
         const removeOptions = () => {
             findCheckedOptions().forEach(element => element.closest(SELECTOR_OPTION).remove());
