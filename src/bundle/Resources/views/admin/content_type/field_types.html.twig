@@ -204,7 +204,8 @@
         {{ form_errors(form.options) }}
         <ul
             class="ezselection-settings-option-list ez-selection-table list-unstyled"
-            data-selection-buttons=".ezselection-settings-option-remove">
+            data-selection-buttons=".ezselection-settings-option-remove"
+            data-next-option-id="{{ form.options.vars.value is empty ? 0 : max(form.options.vars.value|keys) + 1 }}">
             {% for option in form.options %}
                 <li class="ezselection-settings-option-value ez-selection-table-row mb-2 d-flex align-items-center">
                     <input
@@ -212,10 +213,7 @@
                         class="ezselection-settings-option-checkbox ez-selection-table-checkbox"
                         {{ is_translation ? 'disabled' : '' }}>
                     {{ form_errors(option) }}
-                    {{ form_widget(option, { 'attr': {
-                        'class': 'form-control ml-1 mb-0',
-                        'data-ezselection-option-id': option.vars.name }})
-                    }}
+                    {{ form_widget(option, { 'attr': { 'class': 'form-control ml-1 mb-0'}}) }}
                 </li>
             {% endfor %}
         </ul>
@@ -225,10 +223,7 @@
             data-ezselection-option-input-id="{{ form.options.vars.prototype.vars.id }}">
             <li class="ezselection-settings-option-value ez-selection-table-row mb-2 d-flex align-items-center">
                 <input type="checkbox" class="ezselection-settings-option-checkbox ez-selection-table-checkbox">
-                {{ form_widget(form.options.vars.prototype, { 'attr': {
-                    'class': 'form-control ml-1 mb-0',
-                    'data-ezselection-option-id': form.options.vars.prototype.vars.name
-                }}) }}
+                {{ form_widget(form.options.vars.prototype, { 'attr': { 'class': 'form-control ml-1 mb-0'}}) }}
             </li>
         </script>
 
