@@ -204,7 +204,8 @@
         {{ form_errors(form.options) }}
         <ul
             class="ezselection-settings-option-list ez-selection-table list-unstyled"
-            data-selection-buttons=".ezselection-settings-option-remove">
+            data-selection-buttons=".ezselection-settings-option-remove"
+            data-next-option-id="{{ form.options.vars.value is empty ? 0 : max(form.options.vars.value|keys) + 1 }}">
             {% for option in form.options %}
                 <li class="ezselection-settings-option-value ez-selection-table-row mb-2 d-flex align-items-center">
                     <input
