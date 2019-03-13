@@ -7,7 +7,6 @@
     const NUMBER_PLACEHOLDER = /__number__/g;
 
     [...doc.querySelectorAll('.ezselection-settings.options')].forEach(container => {
-        const countExistingOptions = () => container.querySelectorAll(SELECTOR_OPTION).length;
         const findCheckedOptions = () => [...container.querySelectorAll('.ezselection-settings-option-checkbox:checked')];
         const toggleDisableState = () => {
             const disabledState = !!findCheckedOptions().length;
@@ -17,10 +16,11 @@
         };
         const addOption = () => {
             const template = container.querySelector(SELECTOR_TEMPLATE).innerHTML;
+            const optionsList = container.querySelector(SELECTOR_OPTIONS_LIST);
+            const nextId = parseInt(optionsList.dataset.nextOptionId, 10);
 
-            container
-                .querySelector(SELECTOR_OPTIONS_LIST)
-                .insertAdjacentHTML('beforeend', template.replace(NUMBER_PLACEHOLDER, countExistingOptions()));
+            optionsList.dataset.nextOptionId = nextId + 1;
+            optionsList.insertAdjacentHTML('beforeend', template.replace(NUMBER_PLACEHOLDER, nextId));
         };
         const removeOptions = () => {
             findCheckedOptions().forEach(element => element.closest(SELECTOR_OPTION).remove());
