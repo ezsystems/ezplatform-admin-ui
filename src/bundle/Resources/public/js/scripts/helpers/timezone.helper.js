@@ -3,8 +3,8 @@
     const userPreferedFullDateFormat = eZ.adminUiConfig.dateFormat.full;
     const userPreferedShortDateFormat = eZ.adminUiConfig.dateFormat.short;
 
-    const convertDateToTimezone = (date, timezone = userPreferedTimezone) => {
-        return moment(date).tz(timezone);
+    const convertDateToTimezone = (date, timezone = userPreferedTimezone, forceSameTime = false) => {
+        return moment(date).tz(timezone, forceSameTime);
     };
     const formatDate = (date, format = userPreferedFullDateFormat) => {
         return moment(date).formatPHP(format);
