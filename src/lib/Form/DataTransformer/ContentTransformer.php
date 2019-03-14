@@ -28,13 +28,13 @@ class ContentTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms a domain specific ContentInfo object into a Content's ID.
+     * Transforms a domain specific Content object into a Content's ID.
      *
      * @param \eZ\Publish\API\Repository\Values\Content\Content|null $value
      *
      * @return int|null
      */
-    public function transform($value)
+    public function transform($value): ?int
     {
         if (null === $value) {
             return null;
@@ -62,7 +62,7 @@ class ContentTransformer implements DataTransformerInterface
             return null;
         }
 
-        if (!is_numeric($value)) {
+        if (!filter_var($value, FILTER_VALIDATE_INT)) {
             throw new TransformationFailedException('Expected a numeric string.');
         }
 

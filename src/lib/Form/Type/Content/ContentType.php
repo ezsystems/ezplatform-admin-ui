@@ -27,11 +27,17 @@ class ContentType extends AbstractType
         $this->contentService = $contentService;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->addViewTransformer(new ContentTransformer($this->contentService));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent(): ?string
     {
         return HiddenType::class;
