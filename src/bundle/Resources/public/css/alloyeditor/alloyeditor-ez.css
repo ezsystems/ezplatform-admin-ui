@@ -1059,6 +1059,10 @@ pre.ez-has-anchor > .ez-icon {
     line-height: 1;
 }
 
+.ae-toolbar-styles {
+    z-index: 1;
+}
+
 .ae-ui .ae-toolbar-floating--fixed {
     position: fixed;
 }
