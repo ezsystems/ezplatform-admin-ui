@@ -24,8 +24,12 @@ export default class EzBtnInlineCustomTagUpdate extends EzBtnCustomTagUpdate {
         widget.setFocused(true);
 
         if (createNewTag) {
+            const firstChild = selection.getFirst();
+            const isNodeElement = firstChild.type === CKEDITOR.NODE_ELEMENT;
+            const content = isNodeElement && firstChild.is('table') ? selection.$.textContent : selection.getHtml();
+
             widget.setName(this.customTagName);
-            widget.setWidgetContent(selection.getHtml());
+            widget.setWidgetContent(content);
             widget.renderIcon();
         }
 
