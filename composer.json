@@ -25,8 +25,7 @@
         "white-october/pagerfanta-bundle": "^1.1",
         "knplabs/knp-menu-bundle": "^2.1",
         "mck89/peast": "^1.8",
-        "willdurand/js-translation-bundle": "^2.6.6",
-        "ezsystems/ezplatform-user": "^1.0@dev"
+        "willdurand/js-translation-bundle": "^2.6.6"
     },
     "require-dev": {
         "behat/behat": "^3.5.0",
