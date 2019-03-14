@@ -263,61 +263,47 @@
             const counterWrapper = container.parentElement.querySelector('.ez-character-counter');
 
             if (counterWrapper) {
-                const countableTags = this.getCountableTags(editorHtml);
                 const wordWrapper = counterWrapper.querySelector('.ez-character-counter__word-count');
                 const charactersWrapper = counterWrapper.querySelector('.ez-character-counter__character-count');
-                let characterCount = 0;
-                let wordCount = 0;
+                let characters = this.getTextNodeValues(editorHtml).join(' ');
 
-                countableTags.forEach((tag) => {
-                    const cleanedTag = this.cleanZeroWidthCharacters(tag);
-                    const strippedText = this.stripInlineFormatting(cleanedTag);
-                    const sanitizedText = this.cleanWhiteCharacters(strippedText);
-
-                    wordCount += sanitizedText ? this.splitIntoWords(sanitizedText).length : 0;
-                    characterCount += sanitizedText.length;
-                });
-
-                wordWrapper.innerText = wordCount;
-                charactersWrapper.innerText = characterCount;
+                wordWrapper.innerText = characters ? this.splitIntoWords(characters).length : 0;
+                charactersWrapper.innerText = characters ? characters.length : 0;
             }
         }
 
-        getCountableTags(html) {
-            const allowedTags = ['p:not(.ez-embed-content)', 'li', 'h1', 'h2', 'h3', 'h4', 'h5' , 'h6', 'th', 'td', 'pre', '[data-ezelement=eztemplate]'];
-            const notCustomTagSelector = ':not([data-ezelement=ezattributes]) > ';
-            const allowedSelectors = allowedTags.map((item) => {
-                return notCustomTagSelector.concat(item);
-            });
+        getTextNodeValues(node) {
+            const TEXT_NODE = 3;
+            const notAllowedAttributes = ['ezconfig', 'ezvalue'];
+            let values = [];
 
-            return html.querySelectorAll(allowedSelectors.join(','));
+            const pushValue = (node) => {
+                if (node.nodeType === TEXT_NODE &&
+                    !notAllowedAttributes.includes(node.parentNode.getAttribute('data-ezelement'))
+                ) {
+                    values.push(this.cleanWhiteCharacters(node.nodeValue));
+                }
+            }
+
+            this.iterateThroughChildNodes(node, pushValue);
+
+            return values;
         }
 
-        cleanZeroWidthCharacters(tag) {
-            tag.innerHTML = tag.innerHTML.replace(/[\u200B-\u200D\uFEFF\u00A0]/g, '');
-            return tag;
-        }
+        iterateThroughChildNodes(node, callback) {
+            callback(node);
+            node = node.firstChild;
 
-        stripInlineFormatting(html) {
-            const extractables = ['[data-ezelement=ezcontent]'];
-            const removables = ['[data-ezelement=ezconfig]'];
-
-            html.querySelectorAll(extractables.join(','))
-                .forEach((node) => {
-                    node.replaceWith(node.innerText);
-                });
-
-            html.querySelectorAll(removables.join(','))
-                .forEach((node) => {
-                    node.remove();
-                });
-
-            return html.innerText.replace(/  +/g, ' '); //making sure that there are no additional entities after nodes removal
+            while (node) {
+                this.iterateThroughChildNodes(node, callback);
+                node = node.nextSibling;
+            }
         }
 
         cleanWhiteCharacters(text) {
             return text
-                .replace(/\s\r?\n/g, ' ')
+                .replace(/[\u200B-\u200D\uFEFF]/g, '')  //zero-width characters
+                .replace(/\s\r?\n/g, '')                //white characters
                 .trim();
         }
 
