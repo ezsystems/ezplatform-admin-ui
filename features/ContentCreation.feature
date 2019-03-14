@@ -256,7 +256,7 @@ Scenario: Content can be moved to trash from non-root location
   Scenario Outline: Content can be moved to trash from root location
     Given I navigate to content "<itemName>" of type "<itemType>" in root path
     When I send content to trash
-    Then there's no "<itemType>" "<itemName>" on Sub-items list of root
+    Then I should be redirected to root in default view
     And going to trash there is "<itemType>" "<itemName>" on list
 
     Examples:

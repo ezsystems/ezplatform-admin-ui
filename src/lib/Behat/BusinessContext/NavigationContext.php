@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
+use EzSystems\EzPlatformPageBuilder\Tests\Behat\PageObject\PageBuilderEditor;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Breadcrumb;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UpperMenu;
@@ -120,5 +121,22 @@ class NavigationContext extends BusinessContext
     {
         $path = sprintf('%s/%s', EzEnvironmentConstants::get('ROOT_CONTENT_NAME'), $path);
         $this->verifyIfBreadcrumbShowsPath($path);
+    }
+
+    /**
+     * @Then I should be redirected to root in default view
+     */
+    public function iShouldBeRedirectedToRootInDefaultView(): void
+    {
+        if (EzEnvironmentConstants::get('ROOT_CONTENT_TYPE') === 'Landing page') {
+            $previewType = PageObjectFactory::getPreviewType(EzEnvironmentConstants::get('ROOT_CONTENT_TYPE'));
+            $pageEditor = PageObjectFactory::createPage($this->utilityContext, PageBuilderEditor::PAGE_NAME, $previewType);
+            $pageEditor->pagePreview->setTitle(EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
+            $pageEditor->waitUntilLoaded();
+            $pageEditor->verifyIsLoaded();
+        } else {
+            $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
+            $contentItemPage->verifyIsLoaded();
+        }
     }
 }

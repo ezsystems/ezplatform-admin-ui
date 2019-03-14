@@ -37,4 +37,9 @@ class LeftMenu extends Element
     {
         Assert::assertTrue($this->context->findElement($this->fields['menuSelector'])->isVisible());
     }
+
+    public function isVisible(): bool
+    {
+        return $this->context->isElementVisible($this->fields['menuSelector']);
+    }
 }
