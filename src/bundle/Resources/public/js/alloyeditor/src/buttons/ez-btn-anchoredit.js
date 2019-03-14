@@ -36,7 +36,7 @@ export default class EzBtnAnchorEdit extends Component {
 
     findBlock() {
         const nativeEditor = this.props.editor.get('nativeEditor');
-        const focused = nativeEditor.widgets.focused;
+        const selected = nativeEditor.widgets.selected[0];
         const path = nativeEditor.elementPath();
         let block = path.block;
 
@@ -44,8 +44,8 @@ export default class EzBtnAnchorEdit extends Component {
             return this.block;
         }
 
-        if (!block && focused) {
-            block = focused.element;
+        if (!block && selected) {
+            block = selected.element;
         }
 
         if (block && block.is('li')) {
