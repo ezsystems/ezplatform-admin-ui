@@ -89,6 +89,8 @@
 
         if (sourceInput.value) {
             defaultDate = new Date(sourceInput.value * 1000);
+
+            defaultDate.setTime(defaultDate.getTime() + defaultDate.getTimezoneOffset() * 60 * 1000);
         }
 
         btnClear.addEventListener('click', (event) => {
