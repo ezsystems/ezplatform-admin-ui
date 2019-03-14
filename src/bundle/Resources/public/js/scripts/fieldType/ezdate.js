@@ -90,7 +90,14 @@
         const sourceInput = field.querySelector(SELECTOR_INPUT);
         const flatPickrInput = field.querySelector(SELECTOR_FLATPICKR_INPUT);
         const btnClear = field.querySelector('.ez-data-source__btn--clear-input');
-        const defaultDate = sourceInput.value ? new Date(sourceInput.value * 1000) : null;
+        let defaultDate = null;
+
+        if (sourceInput.value) {
+            defaultDate = new Date(sourceInput.value * 1000);
+
+            defaultDate.setTime(defaultDate.getTime() + defaultDate.getTimezoneOffset() * 60 * 1000);
+        }
+
         const flatpickrInstance = flatpickr(
             flatPickrInput,
             Object.assign({}, dateConfig, {
