@@ -17,13 +17,6 @@ class Hooks extends RawMinkContext
 
     /** @BeforeScenario
      */
-    public function restartSessionBeforeScenario()
-    {
-        $this->getSession()->restart();
-    }
-
-    /** @BeforeScenario
-     */
     public function setInstallTypeBeforeScenario()
     {
         $env = new Environment($this->getContainer());
