@@ -426,9 +426,15 @@ const embedBaseDefinition = {
 
         while (element) {
             next = element.getNext();
-            if (!element.data || !element.data('ezelement')) {
+
+            const isEzElement = element.data && element.data('ezelement');
+            const isAnchorIcon = element.$.classList && element.$.classList.contains('ez-icon--anchor');
+            const shouldRemove = !(isEzElement || isAnchorIcon);
+
+            if (shouldRemove) {
                 element.remove();
             }
+
             element = next;
         }
 
