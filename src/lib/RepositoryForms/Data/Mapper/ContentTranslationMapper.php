@@ -50,7 +50,7 @@ class ContentTranslationMapper implements FormDataMapperInterface
         /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $params['contentType'];
 
-        $data = new ContentTranslationData(['content' => $content]);
+        $data = new ContentTranslationData(['content' => $content, 'contentType' => $contentType]);
         $data->initialLanguageCode = $language->languageCode;
 
         foreach ($content->getFieldsByLanguage() as $field) {
