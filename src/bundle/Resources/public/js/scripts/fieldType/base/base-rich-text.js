@@ -1,5 +1,6 @@
 (function(global) {
     const eZ = (global.eZ = global.eZ || {});
+    const TEXT_NODE = 3;
 
     const BaseRichText = class BaseRichText {
         constructor() {
@@ -265,23 +266,21 @@
             if (counterWrapper) {
                 const wordWrapper = counterWrapper.querySelector('.ez-character-counter__word-count');
                 const charactersWrapper = counterWrapper.querySelector('.ez-character-counter__character-count');
-                let characters = this.getTextNodeValues(editorHtml).join(' ');
+                const words = this.getTextNodeValues(editorHtml);
 
-                wordWrapper.innerText = characters ? this.splitIntoWords(characters).length : 0;
-                charactersWrapper.innerText = characters ? characters.length : 0;
+                wordWrapper.innerText = words.length;
+                charactersWrapper.innerText = words.join(' ').length;
             }
         }
 
         getTextNodeValues(node) {
-            const TEXT_NODE = 3;
-            const notAllowedAttributes = ['ezconfig', 'ezvalue'];
             let values = [];
 
             const pushValue = (node) => {
-                if (node.nodeType === TEXT_NODE &&
-                    !notAllowedAttributes.includes(node.parentNode.getAttribute('data-ezelement'))
-                ) {
-                    values.push(this.cleanWhiteCharacters(node.nodeValue));
+                if (node.nodeType === TEXT_NODE) {
+                    const nodeValue = this.sanitize(node.nodeValue);
+
+                    values = values.concat(this.splitIntoWords(nodeValue));
                 }
             }
 
@@ -291,6 +290,9 @@
         }
 
         iterateThroughChildNodes(node, callback) {
+            if (typeof node.getAttribute === 'function' && node.getAttribute('data-ezelement') === 'ezconfig') {
+                return;
+            }
             callback(node);
             node = node.firstChild;
 
@@ -300,15 +302,12 @@
             }
         }
 
-        cleanWhiteCharacters(text) {
-            return text
-                .replace(/[\u200B-\u200D\uFEFF]/g, '')  //zero-width characters
-                .replace(/\s\r?\n/g, '')                //white characters
-                .trim();
+        sanitize(text) {
+            return text.replace(/[\u200B-\u200D\uFEFF]/g, '');
         }
 
         splitIntoWords(text) {
-            return text.match(/\b(\w+)\b/g);
+            return text.split(' ').filter((word) => word.trim());
         }
     };
 
