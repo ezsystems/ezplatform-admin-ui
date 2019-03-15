@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation;
 
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class MainTranslationUpdateData
@@ -16,9 +16,9 @@ class MainTranslationUpdateData
     /**
      * @Assert\NotBlank()
      *
-     * @var \eZ\Publish\API\Repository\Values\Content\ContentInfo|null
+     * @var \eZ\Publish\API\Repository\Values\Content\Content|null
      */
-    public $contentInfo;
+    public $content;
 
     /**
      * @Assert\NotBlank()
@@ -28,31 +28,31 @@ class MainTranslationUpdateData
     public $languageCode;
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\Content|null $content
      * @param string|null $languageCode
      */
     public function __construct(
-        ?ContentInfo $contentInfo = null,
+        ?Content $content = null,
         ?string $languageCode = null
     ) {
-        $this->contentInfo = $contentInfo;
+        $this->content = $content;
         $this->languageCode = $languageCode;
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\Content\ContentInfo|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Content|null
      */
-    public function getContentInfo(): ?ContentInfo
+    public function getContent(): ?Content
     {
-        return $this->contentInfo;
+        return $this->content;
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\Content|null $contentInfo
      */
-    public function setContentInfo(?ContentInfo $contentInfo = null)
+    public function setContent(?Content $contentInfo = null)
     {
-        $this->contentInfo = $contentInfo;
+        $this->content = $contentInfo;
     }
 
     /**

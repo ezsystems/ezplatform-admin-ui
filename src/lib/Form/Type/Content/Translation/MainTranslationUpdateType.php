@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,8 +26,8 @@ class MainTranslationUpdateType extends AbstractType
     {
         $builder
             ->add(
-                'content_info',
-                ContentInfoType::class,
+                'content',
+                ContentType::class,
                 ['label' => false]
             )
             ->add(

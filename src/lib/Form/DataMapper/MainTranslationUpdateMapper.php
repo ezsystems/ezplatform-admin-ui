@@ -43,6 +43,7 @@ class MainTranslationUpdateMapper implements DataMapperInterface
 
         return new ContentMetadataUpdateStruct([
             'mainLanguageCode' => $data->getLanguageCode(),
+            'name' => $data->getContent()->getName($data->getLanguageCode()),
         ]);
     }
 }

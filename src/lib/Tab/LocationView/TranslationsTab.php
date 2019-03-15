@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
@@ -109,14 +108,13 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
         );
 
         $mainTranslationUpdateForm = $this->createMainLanguageUpdateForm(
-            $versionInfo->contentInfo,
+            $content,
             $versionInfo->contentInfo->mainLanguageCode
         );
 
         $viewParameters = [
             'translations' => $translationsDataset->getTranslations(),
             'form_translation_add' => $translationAddForm->createView(),
-            'form_translation_remove' => $translationDeleteForm->createView(),
             'form_translation_remove' => $translationDeleteForm->createView(),
             'form_main_translation_update' => $mainTranslationUpdateForm->createView(),
             'main_translation_switch' => true,
@@ -158,16 +156,14 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
     }
 
     /**
-     * @param ContentInfo $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      * @param string $languageCode
      *
-     * @return FormInterface
-     *
-     * @throws InvalidOptionsException
+     * @return \Symfony\Component\Form\FormInterface
      */
-    private function createMainLanguageUpdateForm(ContentInfo $contentInfo, string $languageCode): FormInterface
+    private function createMainLanguageUpdateForm(Content $content, string $languageCode): FormInterface
     {
-        $data = new MainTranslationUpdateData($contentInfo, $languageCode);
+        $data = new MainTranslationUpdateData($content, $languageCode);
 
         return $this->formFactory->create(MainTranslationUpdateType::class, $data);
     }

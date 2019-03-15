@@ -349,7 +349,8 @@ class ContentController extends Controller
 
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (MainTranslationUpdateData $data) {
-                $contentInfo = $data->getContentInfo();
+                $content = $data->getContent();
+                $contentInfo = $content->contentInfo;
                 $mapper = new MainTranslationUpdateMapper();
                 $contentMetadataUpdateStruct = $mapper->reverseMap($data);
                 $this->contentService->updateContentMetadata($contentInfo, $contentMetadataUpdateStruct);
