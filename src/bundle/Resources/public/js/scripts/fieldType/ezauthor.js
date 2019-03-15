@@ -62,7 +62,7 @@
          * @memberof EzAuthorValidator
          */
         setIndex(parentNode, template) {
-            return template.replace(/__index__/g, parentNode.querySelectorAll(SELECTOR_AUTHOR).length);
+            return template.replace(/__index__/g, parentNode.dataset.nextAuthorId);
         }
 
         /**
@@ -113,6 +113,7 @@
             const node = event.target.closest('.ez-field-edit__data .ez-data-source');
 
             node.insertAdjacentHTML('beforeend', this.setIndex(authorNode, template));
+            authorNode.dataset.nextAuthorId++;
 
             this.reinit();
             this.updateDisabledState(authorNode);
