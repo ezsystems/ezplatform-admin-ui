@@ -1,6 +1,6 @@
-import EzConfigBase from './base';
+import EzConfgiFixedBase from './base-fixed';
 
-export default class EzParagraphConfig extends EzConfigBase {
+export default class EzParagraphConfig extends EzConfgiFixedBase {
     constructor(config) {
         super(config);
 

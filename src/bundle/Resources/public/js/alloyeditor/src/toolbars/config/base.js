@@ -22,7 +22,7 @@ export default class EzConfigBase {
         return count === 0 || isOnlyBreakLine || areAllTextNodesEmpty;
     }
 
-    static setPositionFor(block, editor) {
+    static setPositionFor(block, editor, getTopPosition) {
         const blockRect = block.getClientRect();
         const outlineWidth = EzConfigBase.outlineTotalWidth(block);
         const empty = EzConfigBase.isEmpty(block);
@@ -47,21 +47,47 @@ export default class EzConfigBase {
             }
         }
 
-        const xy = this.getWidgetXYPoint(
-            blockRect.left - outlineWidth,
-            blockRect.top + block.getWindow().getScrollPosition().y - outlineWidth,
-            CKEDITOR.SELECTION_BOTTOM_TO_TOP
-        );
+        const topPosition = getTopPosition(block, editor);
 
         const domElement = new CKEDITOR.dom.element(ReactDOM.findDOMNode(this));
 
         domElement.addClass('ae-toolbar-transition');
         domElement.setStyles({
             left: left - outlineWidth + 'px',
-            top: xy[1] + 'px',
+            top: topPosition + 'px',
         });
 
         return true;
+    }
+
+    static getTopPosition(block, editor) {
+        const blockRect = block.getClientRect();
+        const outlineWidth = EzConfigBase.outlineTotalWidth(block);
+        const xy = this.getWidgetXYPoint(
+            blockRect.left - outlineWidth,
+            blockRect.top + block.getWindow().getScrollPosition().y - outlineWidth,
+            CKEDITOR.SELECTION_BOTTOM_TO_TOP
+        );
+
+        return xy[1];
+    }
+
+    static getBlockElement(payload) {
+        const editor = payload.editor.get('nativeEditor');
+        const nativeEvent = payload.editorEvent.data.nativeEvent;
+        const targetElement = nativeEvent ? new CKEDITOR.dom.element(payload.editorEvent.data.nativeEvent.target) : null;
+        const isWidgetElement = targetElement ? editor.widgets.getByElement(targetElement) : false;
+        let block = editor.elementPath().block;
+
+        if (!block || isWidgetElement) {
+            block = targetElement;
+        }
+
+        if (block.is('li')) {
+            block = block.getParent();
+        }
+
+        return block;
     }
 
     getStyles(customStyles = []) {
@@ -116,19 +142,8 @@ export default class EzConfigBase {
      */
     setPosition(payload) {
         const editor = payload.editor.get('nativeEditor');
-        const nativeEvent = payload.editorEvent.data.nativeEvent;
-        const targetElement = nativeEvent ? new CKEDITOR.dom.element(payload.editorEvent.data.nativeEvent.target) : null;
-        const isWidgetElement = targetElement ? editor.widgets.getByElement(targetElement) : false;
-        let block = editor.elementPath().block;
+        const block = EzConfigBase.getBlockElement(payload);
 
-        if (!block || isWidgetElement) {
-            block = targetElement;
-        }
-
-        if (block.is('li')) {
-            block = block.getParent();
-        }
-
-        return EzConfigBase.setPositionFor.call(this, block, editor);
+        return EzConfigBase.setPositionFor.call(this, block, editor, EzConfigBase.getTopPosition.bind(this));
     }
 }

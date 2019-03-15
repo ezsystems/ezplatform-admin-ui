@@ -1058,3 +1058,15 @@ pre.ez-has-anchor > .ez-icon {
     font-size: 14px;
     line-height: 1;
 }
+
+.ae-toolbar-styles {
+    z-index: 1;
+}
+
+.ae-ui .ae-toolbar-floating--fixed {
+    position: fixed;
+}
+
+.ae-ui .ae-toolbar-floating.ae-toolbar-transition {
+    transition: none;
+}
