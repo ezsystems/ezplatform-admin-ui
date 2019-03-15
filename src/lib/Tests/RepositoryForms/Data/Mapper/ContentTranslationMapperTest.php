@@ -58,12 +58,24 @@ class ContentTranslationMapperTest extends TestCase
         $content_with_1_field = $this->getCompleteContent([$field1]);
         $content_with_3_fields = $this->getCompleteContent([$field1, $field2, $field3]);
 
+        $contentTypeTranslatable = $this->getContentType([
+            $this->getFieldDefinition($field1->fieldDefIdentifier, true),
+        ]);
+        $contentType = $this->getContentType([
+            $this->getFieldDefinition(),
+        ]);
+        $contentTypeThreeFields = $this->getContentType([
+            $this->getFieldDefinition($field1->fieldDefIdentifier),
+            $this->getFieldDefinition($field2->fieldDefIdentifier),
+            $this->getFieldDefinition($field3->fieldDefIdentifier),
+        ]);
+
         return [
             'no_base_language' => [
                 $content_with_1_field,
                 [
                     'language' => $language,
-                    'contentType' => $this->getContentType([$this->getFieldDefinition($field1->fieldDefIdentifier, true)]),
+                    'contentType' => $contentTypeTranslatable,
                     'baseLanguage' => null,
                 ],
                 new ContentTranslationData([
@@ -76,13 +88,14 @@ class ContentTranslationMapperTest extends TestCase
                             'value' => 'default_value',
                         ]),
                     ],
+                    'contentType' => $contentTypeTranslatable,
                 ]),
             ],
             'one_field' => [
                 $content_with_1_field,
                 [
                     'language' => $language,
-                    'contentType' => $this->getContentType([$this->getFieldDefinition()]),
+                    'contentType' => $contentType,
                     'baseLanguage' => $language,
                 ],
                 new ContentTranslationData([
@@ -95,17 +108,14 @@ class ContentTranslationMapperTest extends TestCase
                             'value' => 'string_value',
                         ]),
                     ],
+                    'contentType' => $contentType,
                 ]),
             ],
             'tree_fields' => [
                 $content_with_3_fields,
                 [
                     'language' => $language,
-                    'contentType' => $this->getContentType([
-                        $this->getFieldDefinition($field1->fieldDefIdentifier),
-                        $this->getFieldDefinition($field2->fieldDefIdentifier),
-                        $this->getFieldDefinition($field3->fieldDefIdentifier),
-                    ]),
+                    'contentType' => $contentTypeThreeFields,
                     'baseLanguage' => $language,
                 ],
                 new ContentTranslationData([
@@ -128,6 +138,7 @@ class ContentTranslationMapperTest extends TestCase
                             'value' => 'string_value',
                         ]),
                     ],
+                    'contentType' => $contentTypeThreeFields,
                 ]),
             ],
         ];
