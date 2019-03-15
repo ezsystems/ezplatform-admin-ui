@@ -7,8 +7,8 @@
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Data;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\Core\Repository\Values\Content\ContentUpdateStruct;
 use EzSystems\RepositoryForms\Data\Content\FieldData;
+use EzSystems\RepositoryForms\Data\ContentTranslationData as BaseContentTranslationData;
 use EzSystems\RepositoryForms\Data\NewnessCheckable;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @property FieldData[] $fieldsData
  * @property Content $content
  */
-class ContentTranslationData extends ContentUpdateStruct implements NewnessCheckable
+class ContentTranslationData extends BaseContentTranslationData implements NewnessCheckable
 {
     /**
      * @var \EzSystems\RepositoryForms\Data\Content\FieldData[]
@@ -31,6 +31,8 @@ class ContentTranslationData extends ContentUpdateStruct implements NewnessCheck
     }
 
     protected $content;
+
+    protected $contentType;
 
     public function isNew()
     {
