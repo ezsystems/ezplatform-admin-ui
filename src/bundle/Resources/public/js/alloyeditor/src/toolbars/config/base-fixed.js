@@ -1,9 +1,8 @@
 import EzConfigBase from './base';
 
 const TOOLBAR_OFFSET = 10;
-let editorialInteractionListener = null;
-let blurListener = null;
 let isScrollEventAdded = false;
+let originalComponentWillUnmount = null;
 
 export default class EzConfgiFixedBase extends EzConfigBase {
     static getTopPosition(block, editor) {
@@ -20,16 +19,11 @@ export default class EzConfgiFixedBase extends EzConfigBase {
         return top;
     }
 
-    static eventHandler() {
-        if (document.querySelector('.ae-toolbar-floating')) {
-            return;
+    static componentWillUnmount() {
+        if (typeof originalComponentWillUnmount === 'function') {
+            originalComponentWillUnmount();
         }
 
-        editorialInteractionListener.removeListener();
-        blurListener.removeListener();
-
-        editorialInteractionListener = null;
-        blurListener = null;
         isScrollEventAdded = false;
 
         window.removeEventListener('scroll', this._updatePosition, false);
@@ -42,20 +36,14 @@ export default class EzConfgiFixedBase extends EzConfigBase {
     setPosition(payload) {
         const editor = payload.editor.get('nativeEditor');
         const block = EzConfgiFixedBase.getBlockElement(payload);
-        const eventHandler = EzConfgiFixedBase.eventHandler.bind(this);
 
         if (!isScrollEventAdded) {
-            window.addEventListener('scroll', this._updatePosition, false);
+            originalComponentWillUnmount = this.componentWillUnmount.bind(this);
+            this.componentWillUnmount = EzConfgiFixedBase.componentWillUnmount.bind(this);
 
             isScrollEventAdded = true;
-        }
 
-        if (!editorialInteractionListener) {
-            editorialInteractionListener = editor.on('editorInteraction', eventHandler);
-        }
-
-        if (!blurListener) {
-            blurListener = editor.on('blur', eventHandler);
+            window.addEventListener('scroll', this._updatePosition, false);
         }
 
         return EzConfgiFixedBase.setPositionFor.call(this, block, editor, EzConfgiFixedBase.getTopPosition.bind(this));
