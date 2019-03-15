@@ -1,6 +1,9 @@
 {% block ezplatform_fieldtype_ezauthor_row %}
     {% if form.authors.vars.prototype is defined %}
-        {%- set wrapper_attr = attr|merge({'data-template': form_row(form.authors.vars.prototype) }) -%}
+        {%- set wrapper_attr = attr|merge({
+            'data-template': form_row(form.authors.vars.prototype),
+            'data-next-author-id': form.authors.vars.value is empty ? 0 : max(form.authors.vars.value|keys) + 1
+        }) -%}
     {% endif %}
     {{ block('form_row_fieldtype') }}
 {% endblock %}
