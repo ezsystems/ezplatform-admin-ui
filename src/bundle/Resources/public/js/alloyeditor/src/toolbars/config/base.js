@@ -77,10 +77,15 @@ export default class EzConfigBase {
         const nativeEvent = payload.editorEvent.data.nativeEvent;
         const targetElement = nativeEvent ? new CKEDITOR.dom.element(payload.editorEvent.data.nativeEvent.target) : null;
         const isWidgetElement = targetElement ? editor.widgets.getByElement(targetElement) : false;
-        let block = editor.elementPath().block;
+        const path = editor.elementPath();
+        let block = path.block;
 
         if (!block || isWidgetElement) {
             block = targetElement;
+        }
+
+        if (!block) {
+            block = path.elements.find((element) => element.$.dataset.ezelement === 'eztemplateinline');
         }
 
         if (block.is('li')) {
