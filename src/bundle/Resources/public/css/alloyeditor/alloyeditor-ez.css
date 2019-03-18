@@ -1070,3 +1070,7 @@ pre.ez-has-anchor > .ez-icon {
 .ae-ui .ae-toolbar-floating.ae-toolbar-transition {
     transition: none;
 }
+
+.alloy-editor-visible {
+  z-index: 1;
+}
