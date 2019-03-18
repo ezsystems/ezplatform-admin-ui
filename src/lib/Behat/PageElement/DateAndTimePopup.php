@@ -47,9 +47,7 @@ class DateAndTimePopup extends Element
 
         if (!$isTimeOnly) {
             // get current date as it's not possible to set time without setting date
-            $currentDateScript = sprintf('document.querySelector("%s %s")._flatpickr.formatDate(document.querySelector("%s %s")._flatpickr.selectedDates, "Y-m-d")',
-                $this->fields['containerSelector'],
-                $this->fields['flatpickrSelector'],
+            $currentDateScript = sprintf('document.querySelector("%s %s")._flatpickr.selectedDates[0].toLocaleString()',
                 $this->fields['containerSelector'],
                 $this->fields['flatpickrSelector']);
             $currentDate = $this->context->getSession()->getDriver()->evaluateScript($currentDateScript);
