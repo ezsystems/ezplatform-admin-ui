@@ -57,6 +57,7 @@ class UniversalDiscoveryExtension extends Twig_Extension
             'selectedItemsLimit' => $config['selected_items_limit'],
             'startingLocationId' => $config['starting_location_id'],
             'searchResultsPerPage' => $config['search']['results_per_page'],
+            'searchResultsLimit' => $config['search']['limit'],
             'allowContainersOnly' => $config['containers_only'],
             'cotfPreselectedLanguage' => $config['content_on_the_fly']['preselected_language'],
             'cotfAllowedLanguages' => $config['content_on_the_fly']['allowed_languages'],

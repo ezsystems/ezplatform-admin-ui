@@ -19,6 +19,7 @@ system:
                         preselected_location: null
                     search:
                         results_per_page: 10
+                        limit: 50
                 create:
                     active_tab: 'create'
                     visible_tabs: ['create']
