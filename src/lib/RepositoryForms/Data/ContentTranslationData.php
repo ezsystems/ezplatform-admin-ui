@@ -34,7 +34,7 @@ class ContentTranslationData extends BaseContentTranslationData implements Newne
 
     protected $contentType;
 
-    public function isNew()
+    public function isNew(): bool
     {
         return false;
     }
