@@ -240,13 +240,15 @@
                 section.appendChild(document.createElement('p'));
             }
 
-            section.querySelectorAll('.ez-has-anchor').forEach((element) => {
-                const icon = `
-                    <svg class="ez-icon ez-icon--small ez-icon--secondary ez-icon--anchor">
-                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#link-anchor"></use>
-                    </svg>`;
+            nativeEditor.once('dataReady', () => {
+                container.querySelectorAll('.ez-has-anchor').forEach((element) => {
+                    const icon = `
+                        <svg class="ez-icon ez-icon--small ez-icon--secondary ez-icon--anchor">
+                            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#link-anchor"></use>
+                        </svg>`;
 
-                element.insertAdjacentHTML('afterbegin', icon);
+                    element.insertAdjacentHTML('afterbegin', icon);
+                });
             });
 
             this.countWordsCharacters(container, section);
@@ -282,7 +284,7 @@
 
                     values = values.concat(this.splitIntoWords(nodeValue));
                 }
-            }
+            };
 
             this.iterateThroughChildNodes(node, pushValue);
 
