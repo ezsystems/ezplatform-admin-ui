@@ -47,6 +47,7 @@
             height: auto;
             transform-origin: top center;
             transition: all .2s $ez-admin-transition;
+            white-space: nowrap;
 
             &--hidden {
                 height: 0;
