@@ -81,11 +81,9 @@ export default class EzConfigBase {
         let block = path.block;
 
         if (!block || isWidgetElement) {
-            block = targetElement;
-        }
+            const inlineCustomTag = path.elements.find((element) => element.$.dataset.ezelement === 'eztemplateinline');
 
-        if (!block) {
-            block = path.elements.find((element) => element.$.dataset.ezelement === 'eztemplateinline');
+            block = inlineCustomTag || targetElement;
         }
 
         if (block.is('li')) {
