@@ -4,6 +4,8 @@
     const SELECTOR_FLATPICKR_INPUT = '.flatpickr-input';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const EVENT_VALUE_CHANGED = 'valueChanged';
+    const { convertDateToTimezone } = eZ.helpers.timezone;
+    const userTimezone = eZ.adminUiConfig.timezone;
 
     class EzDateTimeValidator extends eZ.BaseFieldValidator {
         /**
@@ -63,21 +65,22 @@
     const datetimeConfig = {
         enableTime: true,
         time_24hr: true,
-        formatDate: (date) => new Date(date).toLocaleString(),
     };
-    const updateInputValue = (sourceInput, date) => {
+    const updateInputValue = (sourceInput, dates) => {
         const event = new CustomEvent(EVENT_VALUE_CHANGED);
 
-        if (!date.length) {
+        if (!dates.length) {
             sourceInput.value = '';
             sourceInput.dispatchEvent(event);
 
             return;
         }
 
-        date = new Date(date[0]);
-        sourceInput.value = Math.floor(date.getTime() / 1000);
+        const selectedDate = dates[0];
+        const selectedDateWithUserTimezone = convertDateToTimezone(selectedDate, userTimezone, true);
+        const timestamp = Math.floor(selectedDateWithUserTimezone.valueOf() / 1000);
 
+        sourceInput.value = timestamp;
         sourceInput.dispatchEvent(event);
     };
     const clearValue = (sourceInput, flatpickrInstance, event) => {
@@ -91,13 +94,24 @@
         const sourceInput = field.querySelector(SELECTOR_INPUT);
         const flatPickrInput = field.querySelector(SELECTOR_FLATPICKR_INPUT);
         const btnClear = field.querySelector('.ez-data-source__btn--clear-input');
-        const defaultDate = sourceInput.value ? new Date(sourceInput.value * 1000) : null;
+        const secondsEnabled = sourceInput.dataset.seconds === '1';
+        const formatDate = secondsEnabled ? (date) => date.toLocaleString() : (date) => eZ.helpers.timezone.formatDate(date);
+        let defaultDate = null;
+
+        if (sourceInput.value) {
+            const defaultDateWithUserTimezone = convertDateToTimezone(sourceInput.value * 1000);
+            const browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+            defaultDate = new Date(convertDateToTimezone(defaultDateWithUserTimezone, browserTimezone, true));
+        }
+
         const flatpickrInstance = flatpickr(
             flatPickrInput,
             Object.assign({}, datetimeConfig, {
                 onChange: updateInputValue.bind(null, sourceInput),
                 defaultDate,
-                enableSeconds: !!parseInt(sourceInput.dataset.seconds, 10),
+                enableSeconds: secondsEnabled,
+                formatDate,
             })
         );
 
