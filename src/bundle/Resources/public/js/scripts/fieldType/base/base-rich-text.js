@@ -1,5 +1,6 @@
 (function(global) {
     const eZ = (global.eZ = global.eZ || {});
+    const TEXT_NODE = 3;
 
     const BaseRichText = class BaseRichText {
         constructor() {
@@ -263,38 +264,50 @@
             const counterWrapper = container.parentElement.querySelector('.ez-character-counter');
 
             if (counterWrapper) {
-                const countableTags = this.getCountableTags(editorHtml);
                 const wordWrapper = counterWrapper.querySelector('.ez-character-counter__word-count');
                 const charactersWrapper = counterWrapper.querySelector('.ez-character-counter__character-count');
-                let characterCount = 0;
-                let wordCount = 0;
+                const words = this.getTextNodeValues(editorHtml);
 
-                countableTags.forEach((tag) => {
-                    const sanitizedText = this.cleanWhiteCharacters(tag.innerText);
-
-                    wordCount += sanitizedText ? sanitizedText.split(' ').length : 0;
-                    characterCount += sanitizedText.length;
-                });
-
-                wordWrapper.innerText = wordCount;
-                charactersWrapper.innerText = characterCount;
+                wordWrapper.innerText = words.length;
+                charactersWrapper.innerText = words.join(' ').length;
             }
         }
 
-        getCountableTags(html) {
-            const allowedTags = ['p:not(.ez-embed-content)', 'li', 'h1', 'h2', 'h3', 'h4', 'h5' , 'h6', 'th', 'td', 'pre'];
-            const notCustomTagSelector = ':not([data-ezelement=ezattributes]) > ';
-            const allowedSelectors = allowedTags.map((item) => {
-                return notCustomTagSelector.concat(item);
-            });
+        getTextNodeValues(node) {
+            let values = [];
 
-            return html.querySelectorAll(allowedSelectors.join(','));
+            const pushValue = (node) => {
+                if (node.nodeType === TEXT_NODE) {
+                    const nodeValue = this.sanitize(node.nodeValue);
+
+                    values = values.concat(this.splitIntoWords(nodeValue));
+                }
+            }
+
+            this.iterateThroughChildNodes(node, pushValue);
+
+            return values;
         }
 
-        cleanWhiteCharacters(text) {
-            return text
-                .replace(/[\u200B-\u200D\uFEFF]/g, '')  //zero-width characters
-                .replace(/\s\r?\n/g, ' ').trim();       //white characters
+        iterateThroughChildNodes(node, callback) {
+            if (typeof node.getAttribute === 'function' && node.getAttribute('data-ezelement') === 'ezconfig') {
+                return;
+            }
+            callback(node);
+            node = node.firstChild;
+
+            while (node) {
+                this.iterateThroughChildNodes(node, callback);
+                node = node.nextSibling;
+            }
+        }
+
+        sanitize(text) {
+            return text.replace(/[\u200B-\u200D\uFEFF]/g, '');
+        }
+
+        splitIntoWords(text) {
+            return text.split(' ').filter((word) => word.trim());
         }
     };
 
