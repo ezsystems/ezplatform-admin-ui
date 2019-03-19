@@ -3,7 +3,7 @@ Feature: Content fields setting and editing
   In order to manage content on my site
   I want to set, edit, copy and move content items.
 
-  @javascript @common @EZP-29291-excluded @fieldTypes
+  @javascript @common @fieldTypes
   Scenario Outline: Create content item with given field
     Given a Content Type "<fieldName> CT" with an "<fieldInternalName>" field definition
       And I am logged as "admin"
@@ -44,7 +44,7 @@ Feature: Content fields setting and editing
       | ezimage              | Image                        | value     | image1.png.zip            |            |                       |         |          | image1.png                |
       | ezbinaryfile         | File                         | value     | binary1.txt.zip           |            |                       |         |          | binary1.txt               |
 
-  @javascript @common @EZP-29291-excluded @fieldTypes
+  @javascript @common @fieldTypes
   Scenario Outline: Edit content item with given field
     Given I am logged as "admin"
       And I navigate to content "<oldContentItemName>" of type "<fieldName> CT" in root path
@@ -70,7 +70,7 @@ Feature: Content fields setting and editing
       | Country                      | value     | Sweden                       |            |                          |         |          | Poland                    | Sweden                       |
       | Date                         | value     | 12/30/2019                   |            |                          |         |          | Saturday 23 November 2019 | Monday 30 December 2019      |
       | Date and time                | date      | 12/30/2019                   | time       | 15:15                    |         |          | Sat 2019-23-11 14:45:00   | Mon 2019-30-12 15:15:00      |
-      | Email address               | value     | edited.email@example.com     |            |                          |         |          | email@example.com         | edited.email@example.com     |
+      | Email address                | value     | edited.email@example.com     |            |                          |         |          | email@example.com         | edited.email@example.com     |
       | Float                        | value     | 12.34                        |            |                          |         |          | 11.11                     | 12.34                        |
       | ISBN                         | value     | 0-13-048257-9                |            |                          |         |          | 978-3-16-148410-0         | 0-13-048257-9                |
       | Integer                      | value     | 1234                         |            |                          |         |          | 1111                      | 1234                         |
@@ -80,6 +80,6 @@ Feature: Content fields setting and editing
       | Text line                    | value     | Edited Lorem ipsum           |            |                          |         |          | Lorem ipsum               | Edited Lorem ipsum           |
       | Time                         | value     | 15:15                        |            |                          |         |          | 2:45:00 pm                | 3:15:00 pm                   |
       | URL                          | text      | Edited Test URL              | url        | http://www.ez.no         |         |          | Test URL                  | Edited Test URL              |
-      | Media                        | value     | video2.mp4.zip                   |            |                          |         |          | video1.mp4                | video2.mp4                   |
-      | Image                        | value     | image2.png.zip                   |            |                          |         |          | image1.png                | image2.png                   |
-      | File                         | value     | binary2.txt.zip                  |            |                          |         |          | binary1.txt               | binary2.txt                  |
+      | Media                        | value     | video2.mp4.zip               |            |                          |         |          | video1.mp4                | video2.mp4                   |
+      | Image                        | value     | image2.png.zip               |            |                          |         |          | image1.png                | image2.png                   |
+      | File                         | value     | binary2.txt.zip              |            |                          |         |          | binary1.txt               | binary2.txt                  |
