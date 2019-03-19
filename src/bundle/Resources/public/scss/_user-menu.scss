@@ -38,15 +38,16 @@
         }
 
         &__items {
+            display: block;
             position: absolute;
             top: 100%;
             right: 0;
-            min-width: 100%;
             background-color: $ez-white;
             box-shadow: 0 2px 4px 0 rgba(0,0,0,.45);
             height: auto;
             transform-origin: top center;
             transition: all .2s $ez-admin-transition;
+            white-space: nowrap;
 
             &--hidden {
                 height: 0;
@@ -57,7 +58,7 @@
         &__item {
             width: 100%;
             cursor: pointer;
-            padding-left: 1.5rem;
+            padding: 0 1.5rem;
 
             .nav-link {
                 color: $ez-black;
