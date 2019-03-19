@@ -42,7 +42,7 @@ CKEDITOR.dtd.$editable.span = 1;
 
                 init: function() {
                     this.on('focus', this.fireEditorInteraction);
-                    this.syncAlignment();
+                    this.syncAlignment(true);
                     this.getEzConfigElement();
                     this.cancelEditEvents();
                     this.renderIcon();

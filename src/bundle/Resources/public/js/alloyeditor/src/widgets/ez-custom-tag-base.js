@@ -66,7 +66,7 @@ const customTagBaseDefinition = {
 
     init: function() {
         this.on('focus', this.fireEditorInteraction);
-        this.syncAlignment();
+        this.syncAlignment(true);
         this.renderAttributes();
         this.renderHeader();
         this.getEzContentElement();
@@ -229,14 +229,15 @@ const customTagBaseDefinition = {
      * is aligned.
      *
      * @method syncAlignment
+     * @param {Boolean} fireEditorInteractionPrevented
      */
-    syncAlignment: function() {
+    syncAlignment: function(fireEditorInteractionPrevented) {
         const align = this.element.data(DATA_ALIGNMENT_ATTR);
 
         if (align) {
-            this.setAlignment(align);
+            this.setAlignment(align, fireEditorInteractionPrevented);
         } else {
-            this.unsetAlignment();
+            this.unsetAlignment(fireEditorInteractionPrevented);
         }
     },
 
@@ -246,13 +247,16 @@ const customTagBaseDefinition = {
      *
      * @method setAlignment
      * @param {String} type
+     * @param {Boolean} fireEditorInteractionPrevented
      */
-    setAlignment: function(type) {
+    setAlignment: function(type, fireEditorInteractionPrevented) {
         this.wrapper.data(DATA_ALIGNMENT_ATTR, type);
         this.element.data(DATA_ALIGNMENT_ATTR, type);
 
-        window.clearTimeout(this.setAlignmentFireEditorInteractionTimeout);
-        this.setAlignmentFireEditorInteractionTimeout = window.setTimeout(this.fireEditorInteraction.bind(this, 'aligmentUpdated'), 50);
+        if (!fireEditorInteractionPrevented) {
+            window.clearTimeout(this.setAlignmentFireEditorInteractionTimeout);
+            this.setAlignmentFireEditorInteractionTimeout = window.setTimeout(this.fireEditorInteraction.bind(this, 'aligmentUpdated'), 50);
+        }
     },
 
     /**
@@ -260,13 +264,19 @@ const customTagBaseDefinition = {
      * corresponding `editorInteraction` event.
      *
      * @method unsetAlignment
+     * @param {Boolean} fireEditorInteractionPrevented
      */
-    unsetAlignment: function() {
+    unsetAlignment: function(fireEditorInteractionPrevented) {
         this.wrapper.data(DATA_ALIGNMENT_ATTR, false);
         this.element.data(DATA_ALIGNMENT_ATTR, false);
 
-        window.clearTimeout(this.unsetAlignmentFireEditorInteractionTimeout);
-        this.unsetAlignmentFireEditorInteractionTimeout = window.setTimeout(this.fireEditorInteraction.bind(this, 'aligmentRemoved'), 50);
+        if (!fireEditorInteractionPrevented) {
+            window.clearTimeout(this.unsetAlignmentFireEditorInteractionTimeout);
+            this.unsetAlignmentFireEditorInteractionTimeout = window.setTimeout(
+                this.fireEditorInteraction.bind(this, 'aligmentRemoved'),
+                50
+            );
+        }
     },
 
     /**
