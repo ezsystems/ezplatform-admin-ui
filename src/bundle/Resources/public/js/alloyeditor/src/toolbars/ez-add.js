@@ -21,7 +21,13 @@ export default class EzToolbarAdd extends AlloyEditor.Toolbars.add {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        const { selectionData } = this.props;
+
         this._updatePosition();
+
+        if (selectionData && !selectionData.region.top) {
+            this.setTopPosition();
+        }
 
         // In case of exclusive rendering, focus the first descendant (button)
         // so the user will be able to start interacting with the buttons immediately.
@@ -30,6 +36,21 @@ export default class EzToolbarAdd extends AlloyEditor.Toolbars.add {
 
             this._animate(this.setPosition);
         }
+    }
+
+    setTopPosition() {
+        const { editor } = this.props;
+        const domNode = ReactDOM.findDOMNode(this);
+        const path = editor.get('nativeEditor').elementPath();
+        const table = path.elements.find((element) => element.is('table'));
+
+        if (!table) {
+            return;
+        }
+
+        const rect = table.$.getBoundingClientRect();
+
+        new CKEDITOR.dom.element(domNode).setStyles({ top: `${rect.top}px` });
     }
 
     /**
