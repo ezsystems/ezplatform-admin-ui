@@ -40,6 +40,12 @@
         }
     }
 
+    &__icon-wrapper {
+        white-space: initial;
+        display: flex;
+        align-items: center;
+    }
+
     & > [data-ezelement='ezattributes'],
     & > [data-ezelement='ezcontent'] {
         display: none;
@@ -72,6 +78,8 @@
             margin: 0 calculateRem(4px);
             background-color: $ez-color-base-pale;
             border: none;
+            display: inline-flex;
+            max-width: none;
 
             & > [data-ezelement='ezcontent'] {
                 padding: 0;
