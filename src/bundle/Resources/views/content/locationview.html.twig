@@ -48,12 +48,12 @@
                             contentTypeName: contentType.name
                         } %}
 
-                        {% if location.contentInfo.isHidden %}
+                        {% if location.hidden or location.invisible %}
                             <div class="ez-alert ez-alert--info mb-4">
                                 <svg class="ez-icon ez-icon--small">
                                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#hide"></use>
                                 </svg>
-                                {{ 'content.hidden.message'|trans()|desc('This content item is hidden and is not publicly available') }}
+                                {{ 'content.hidden.message'|trans()|desc('The content item or its location is hidden. It will no longer be publicly available.') }}
                             </div>
                         {% endif %}
                     </div>
