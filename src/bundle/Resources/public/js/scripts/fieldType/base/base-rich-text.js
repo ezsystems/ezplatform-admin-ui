@@ -144,8 +144,14 @@
             headers.forEach((header) => header.remove());
         }
 
-        clearAnchorIcon(icon) {
-            icon.remove();
+        clearAnchor(element) {
+            const icon = element.querySelector('.ez-icon--anchor');
+
+            if (icon) {
+                icon.remove();
+            } else {
+                element.classList.remove('ez-has-anchor');
+            }
         }
 
         clearInlineCustomTag(inlineCustomTag) {
@@ -223,7 +229,7 @@
                     ...doc.querySelectorAll('[data-ezelement="ezembedinline"]'),
                 ].forEach(this.emptyEmbed);
                 [...doc.querySelectorAll('[data-ezelement="eztemplate"]:not([data-eztype="style"])')].forEach(this.clearCustomTag);
-                [...doc.querySelectorAll('.ez-icon--anchor')].forEach(this.clearAnchorIcon);
+                [...doc.querySelectorAll('.ez-has-anchor')].forEach(this.clearAnchor);
                 [...doc.querySelectorAll('[data-ezelement="eztemplateinline"]:not([data-eztype="style"])')].forEach(
                     this.clearInlineCustomTag
                 );
