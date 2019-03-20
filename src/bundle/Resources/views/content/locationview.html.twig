@@ -42,20 +42,20 @@
                         {% set items = items|merge([{ 'value': content.name }]) %}
                         {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: items } %}
 
+                        {% include '@ezdesign/parts/page_title.html.twig' with {
+                            title: content.name,
+                            iconName: contentType.identifier,
+                            contentTypeName: contentType.name
+                        } %}
+
                         {% if location.contentInfo.isHidden %}
-                            <div class="ez-alert ez-alert--info">
+                            <div class="ez-alert ez-alert--info mb-4">
                                 <svg class="ez-icon ez-icon--small">
                                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#hide"></use>
                                 </svg>
                                 {{ 'content.hidden.message'|trans()|desc('This content item is hidden and is not publicly available') }}
                             </div>
                         {% endif %}
-
-                        {% include '@ezdesign/parts/page_title.html.twig' with {
-                            title: content.name,
-                            iconName: contentType.identifier,
-                            contentTypeName: contentType.name
-                        } %}
                     </div>
                 </div>
                 <div class="panel panel-primary">
