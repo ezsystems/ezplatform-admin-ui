@@ -37,8 +37,8 @@
         <note>key: content.edit.select_language</note>
       </trans-unit>
       <trans-unit id="e136be672df8eb27dc4eb2f1ce0650096090bf81" resname="content.hidden.message">
-        <source>This content item is hidden and is not publicly available</source>
-        <target state="new">This content item is hidden and is not publicly available</target>
+        <source>The content item or its location is hidden. It will no longer be publicly available.</source>
+        <target state="new">The content item or its location is hidden. It will no longer be publicly available.</target>
         <note>key: content.hidden.message</note>
       </trans-unit>
       <trans-unit id="9c91d85bc7658ec7dc6bbb07b720979177c0846a" resname="content.view.subitems">
