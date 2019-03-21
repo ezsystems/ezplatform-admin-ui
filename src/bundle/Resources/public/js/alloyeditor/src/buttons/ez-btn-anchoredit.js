@@ -20,14 +20,16 @@ export default class EzBtnAnchorEdit extends Component {
 
         this.state = {
             value: '',
+            isValueUnique: false,
         };
     }
 
     componentDidMount() {
         const block = this.findBlock();
         const value = block.getId();
+        const isValueUnique = this.isValueUnique(value);
 
-        this.setState(() => ({ value }));
+        this.setState(() => ({ value, isValueUnique }));
     }
 
     static get key() {
@@ -69,8 +71,29 @@ export default class EzBtnAnchorEdit extends Component {
 
     updateValue({ nativeEvent }) {
         const value = nativeEvent.target.value;
+        const isValueUnique = this.isValueUnique(value);
 
-        this.setState(() => ({ value }));
+        this.setState(() => ({ value, isValueUnique }));
+    }
+
+    isValueUnique(value) {
+        const block = this.findBlock();
+
+        return Object.values(CKEDITOR.instances).every((editor) => {
+            const data = editor.getData();
+            const container = document.createElement('div');
+
+            container.insertAdjacentHTML('afterbegin', data);
+
+            return (
+                value &&
+                [...container.querySelectorAll(`#${value}`)].every((element) => {
+                    const ckeditorElement = new CKEDITOR.dom.element(element);
+
+                    return ckeditorElement.isIdentical(block);
+                })
+            );
+        });
     }
 
     fireCustomUpdateEvent() {
@@ -131,6 +154,22 @@ export default class EzBtnAnchorEdit extends Component {
         block.append(svg, true);
     }
 
+    renderError() {
+        const { value, isValueUnique } = this.state;
+
+        if (!value || isValueUnique) {
+            return null;
+        }
+
+        const errorMessage = Translator.trans(
+            /*@Desc("This anchor already exists on the page. Anchor name must be unique.")*/ 'anchor_btn.error.unique',
+            {},
+            'alloy_editor'
+        );
+
+        return <em className="ez-ae-anchor-edit__error">{errorMessage}</em>;
+    }
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -141,8 +180,9 @@ export default class EzBtnAnchorEdit extends Component {
         const nameLabel = Translator.trans(/*@Desc("Name:")*/ 'anchor_edit.input.label', {}, 'alloy_editor');
         const removeBtnTitle = Translator.trans(/*@Desc("Remove")*/ 'anchor_edit.btn.remove.title', {}, 'alloy_editor');
         const saveBtnTitle = Translator.trans(/*@Desc("Save")*/ 'anchor_edit.btn.save.title', {}, 'alloy_editor');
-        const { value } = this.state;
-        const isDisabled = !value;
+        const { value, isValueUnique } = this.state;
+        const isRemoveBtnDisabled = !value;
+        const isSaveBtnDisabled = !value || !isValueUnique;
 
         return (
             <div className="ez-ae-anchor-edit">
@@ -156,7 +196,7 @@ export default class EzBtnAnchorEdit extends Component {
                         title={removeBtnTitle}
                         className="ez-ae-anchor-edit__btn ez-ae-anchor-edit__btn--trash"
                         onClick={this.removeAnchor}
-                        disabled={isDisabled}>
+                        disabled={isRemoveBtnDisabled}>
                         <svg className="ez-icon ez-icon--light ez-icon--medium ez-btn-ae__icon">
                             <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#trash" />
                         </svg>
@@ -166,12 +206,13 @@ export default class EzBtnAnchorEdit extends Component {
                         title={saveBtnTitle}
                         className="ez-ae-anchor-edit__btn ez-ae-anchor-edit__btn--save"
                         onClick={this.saveAnchor}
-                        disabled={isDisabled}>
+                        disabled={isSaveBtnDisabled}>
                         <svg className="ez-icon ez-icon--light ez-icon--medium ez-btn-ae__icon">
                             <use xlinkHref="/bundles/ezplatformadminui/img/ez-icons.svg#checkmark" />
                         </svg>
                     </button>
                 </div>
+                {this.renderError()}
             </div>
         );
     }
