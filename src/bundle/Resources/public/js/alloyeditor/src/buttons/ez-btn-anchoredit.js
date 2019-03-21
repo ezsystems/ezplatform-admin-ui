@@ -118,12 +118,17 @@ export default class EzBtnAnchorEdit extends Component {
 
     renderIcon() {
         const block = this.findBlock();
+        const container = document.createElement('div');
         const icon = `
             <svg class="ez-icon ez-icon--small ez-icon--secondary ${CLASS_ICON_ANCHOR}">
                 <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#link-anchor"></use>
             </svg>`;
 
-        block.$.insertAdjacentHTML('afterbegin', icon);
+        container.insertAdjacentHTML('afterbegin', icon);
+
+        const svg = new CKEDITOR.dom.element(container.querySelector('svg'));
+
+        block.append(svg, true);
     }
 
     /**

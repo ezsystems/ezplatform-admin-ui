@@ -154,6 +154,21 @@
             }
         }
 
+        appendAnchorIcon(element) {
+            const container = document.createElement('div');
+            const icon = `
+                <svg class="ez-icon ez-icon--small ez-icon--secondary ez-icon--anchor">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#link-anchor"></use>
+                </svg>`;
+
+            container.insertAdjacentHTML('afterbegin', icon);
+
+            const svg = new CKEDITOR.dom.element(container.querySelector('svg'));
+            const ckeditorElement = new CKEDITOR.dom.element(element);
+
+            ckeditorElement.append(svg, true);
+        }
+
         clearInlineCustomTag(inlineCustomTag) {
             const icons = [...inlineCustomTag.querySelectorAll('.ez-custom-tag__icon-wrapper')];
 
@@ -246,16 +261,7 @@
                 section.appendChild(document.createElement('p'));
             }
 
-            nativeEditor.once('dataReady', () => {
-                container.querySelectorAll('.ez-has-anchor').forEach((element) => {
-                    const icon = `
-                        <svg class="ez-icon ez-icon--small ez-icon--secondary ez-icon--anchor">
-                            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#link-anchor"></use>
-                        </svg>`;
-
-                    element.insertAdjacentHTML('afterbegin', icon);
-                });
-            });
+            nativeEditor.once('dataReady', () => container.querySelectorAll('.ez-has-anchor').forEach(this.appendAnchorIcon));
 
             this.countWordsCharacters(container, section);
             nativeEditor.setData(section.innerHTML);
