@@ -16,6 +16,11 @@
         <target state="new">yes</target>
         <note>key: ezboolean.yes</note>
       </trans-unit>
+      <trans-unit id="a871dec7f18c06b9061bc2aae9af1aafe1ad1600" resname="ezdatetime.useseconds.enabled">
+        <source>`The date format is based on your user preferences and does not include seconds even if the field allows it`</source>
+        <target state="new">`The date format is based on your user preferences and does not include seconds even if the field allows it`</target>
+        <note>key: ezdatetime.useseconds.enabled</note>
+      </trans-unit>
       <trans-unit id="bf1525899659fa5ea6c18aa4bf63d596fecbf97e" resname="ezgmaplocation.address">
         <source>Address</source>
         <target state="new">Address</target>
