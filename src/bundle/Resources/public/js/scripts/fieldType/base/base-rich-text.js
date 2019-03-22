@@ -201,6 +201,7 @@
 
             nativeEditor.on('blur', saveRichText);
             nativeEditor.on('change', saveRichText);
+            nativeEditor.on('customUpdate', saveRichText);
             nativeEditor.on('editorInteraction', saveRichText);
 
             return alloyEditor;
