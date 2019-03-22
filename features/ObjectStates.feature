@@ -199,7 +199,7 @@ Feature: Object States management
     When  I delete Object State from "Test Object State Group edited2"
         | item                |
         | Test Object State 2 |
-    Then notification that "Object state" "Test Object State edited2" is deleted appears
+    Then notification that "Object state" "Test Object State 2" is deleted appears
       And there's no "Test Object State 2" on "Test Object State Group edited2" Object States list
 
   @javascript @common
