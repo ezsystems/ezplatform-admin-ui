@@ -4,7 +4,7 @@
     const form = doc.querySelector(SELECTOR_VISIBILITY_FORM);
     const visibilityCheckboxes = doc.querySelectorAll(SELECTOR_VISIBILITY_CHECKBOXES);
     const refreshContentTree = () => {
-        doc.body.dispatchEvent(new CustomEvent('ctRefresh'));
+        doc.body.dispatchEvent(new CustomEvent('ez-content-tree-refresh'));
     };
     const onVisibilityUpdated = ({ target }) => {
         const { checked: isVisible } = target;
