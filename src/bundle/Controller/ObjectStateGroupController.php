@@ -181,7 +181,7 @@ class ObjectStateGroupController extends Controller
                     $this->translator->trans(
                         /** @Desc("Object state type group '%name%' deleted.") */
                         'object_state_group.delete.success',
-                        ['%name%' => $group->identifier],
+                        ['%name%' => $group->getName()],
                         'object_state'
                     )
                 );
@@ -220,7 +220,7 @@ class ObjectStateGroupController extends Controller
                         $this->translator->trans(
                             /** @Desc("Object state type group '%name%' deleted.") */
                             'object_state_group.delete.success',
-                            ['%name%' => $objectStateGroup->identifier],
+                            ['%name%' => $objectStateGroup->getName()],
                             'object_state'
                         )
                     );
@@ -256,13 +256,13 @@ class ObjectStateGroupController extends Controller
                 $updateStruct->identifier = $data->getIdentifier();
                 $updateStruct->names[$group->mainLanguageCode] = $data->getName();
 
-                $this->objectStateService->updateObjectStateGroup($group, $updateStruct);
+                $updatedGroup = $this->objectStateService->updateObjectStateGroup($group, $updateStruct);
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
                         /** @Desc("Object state group '%name%' updated.") */
                         'object_state_group.update.success',
-                        ['%name%' => $group->identifier],
+                        ['%name%' => $updatedGroup->getName()],
                         'object_state'
                     )
                 );
