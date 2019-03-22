@@ -61,7 +61,7 @@ Feature: Object States management
         | Name  | Test Object State Group edited |
       And I click on the edit action bar button "Save"
     Then I should be on "Object State Group" "Test Object State Group edited" page
-      And notification that "Object state group" "TestObjectStateGroupIdentifier" is updated appears
+      And notification that "Object state group" "Test Object State Group edited" is updated appears
 
   @javascript @common
   Scenario: Changes can be discarded while editing Object State Group from group details
@@ -84,7 +84,7 @@ Feature: Object States management
         | Name  | Test Object State Group edited2 |
       And I click on the edit action bar button "Save"
     Then I should be on "Object State Group" "Test Object State Group edited2" page
-      And notification that "Object state group" "TestObjectStateGroupIdentifier" is updated appears
+      And notification that "Object state group" "Test Object State Group edited2" is updated appears
 
   @javascript @common
   Scenario: Object State creation can be discarded
@@ -142,7 +142,7 @@ Feature: Object States management
         | Name  | Test Object State edited |
       And I click on the edit action bar button "Save"
     Then I should be on "Object State" "Test Object State edited" page
-      And notification that "Object state" "TestObjectStateIdentifier" is updated appears
+      And notification that "Object state" "Test Object State edited" is updated appears
       And "Object State" "Test Object State edited" has proper attributes
         | label             | value                     |
         | Object state name | Test Object State edited  |
@@ -171,7 +171,7 @@ Feature: Object States management
         | Name  | Test Object State edited2 |
       And I click on the edit action bar button "Save"
     Then I should be on "Object State" "Test Object State edited2" page
-      And notification that "Object state" "TestObjectStateIdentifier" is updated appears
+      And notification that "Object state" "Test Object State edited2" is updated appears
       And "Object State" "Test Object State edited" has proper attributes
         | label             | value                     |
         | Object state name | Test Object State edited2 |
@@ -199,7 +199,7 @@ Feature: Object States management
     When  I delete Object State from "Test Object State Group edited2"
         | item                |
         | Test Object State 2 |
-    Then notification that "Object state" "TestObjectStateIdentifier2" is deleted appears
+    Then notification that "Object state" "Test Object State edited2" is deleted appears
       And there's no "Test Object State 2" on "Test Object State Group edited2" Object States list
 
   @javascript @common
@@ -208,5 +208,5 @@ Feature: Object States management
     When I delete "Object State Group"
       | item                            |
       | Test Object State Group edited2 |
-    Then notification that "Object state type group" "TestObjectStateGroupIdentifier" is deleted appears
+    Then notification that "Object state type group" "Test Object State Group edited2" is deleted appears
       And there's no "Test Object State Group edited2" on "Object State Groups" list
