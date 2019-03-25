@@ -206,7 +206,7 @@ class ObjectStateController extends Controller
                     $this->translator->trans(
                         /** @Desc("Object state '%name%' deleted.") */
                         'object_state.delete.success',
-                        ['%name%' => $objectState->identifier],
+                        ['%name%' => $objectState->getName()],
                         'object_state'
                     )
                 );
@@ -249,7 +249,7 @@ class ObjectStateController extends Controller
                         $this->translator->trans(
                             /** @Desc("Object state '%name%' deleted.") */
                             'object_state.delete.success',
-                            ['%name%' => $objectState->identifier],
+                            ['%name%' => $objectState->getName()],
                             'object_state'
                         )
                     );
@@ -288,13 +288,13 @@ class ObjectStateController extends Controller
                 $updateStruct->identifier = $data->getIdentifier();
                 $updateStruct->names[$objectState->mainLanguageCode] = $data->getName();
 
-                $this->objectStateService->updateObjectState($objectState, $updateStruct);
+                $updatedObjectState = $this->objectStateService->updateObjectState($objectState, $updateStruct);
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
                         /** @Desc("Object state '%name%' updated.") */
                         'object_state.update.success',
-                        ['%name%' => $objectState->identifier],
+                        ['%name%' => $updatedObjectState->getName()],
                         'object_state'
                     )
                 );
@@ -355,7 +355,7 @@ class ObjectStateController extends Controller
                     $this->translator->trans(
                         /** @Desc("Content object state '%name%' updated.") */
                         'content_object_state.update.success',
-                        ['%name%' => $objectState->identifier],
+                        ['%name%' => $objectState->getName()],
                         'object_state'
                     )
                 );

@@ -180,6 +180,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         ];
         $copySubtreeAttributes = [
             'class' => 'ez-btn--udw-copy-subtree',
+            'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
             'data-root-location' => $this->configResolver->getParameter(
                 'universal_discovery_widget_module.default_location_id'
             ),
