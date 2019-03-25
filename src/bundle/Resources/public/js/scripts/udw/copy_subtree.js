@@ -17,17 +17,24 @@
         event.preventDefault();
 
         const title = Translator.trans(/*@Desc("Select location")*/ 'subtree.title', {}, 'universal_discovery_widget');
+        const config = JSON.parse(event.currentTarget.dataset.udwConfig);
 
         ReactDOM.render(
-            React.createElement(global.eZ.modules.UniversalDiscovery, {
-                onConfirm,
-                onCancel,
-                title,
-                multiple: false,
-                startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
-                restInfo: { token, siteaccess },
-                allowContainersOnly: true,
-            }),
+            React.createElement(
+                global.eZ.modules.UniversalDiscovery,
+                Object.assign(
+                    {
+                        onConfirm,
+                        onCancel,
+                        title,
+                        multiple: false,
+                        startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
+                        restInfo: {token, siteaccess},
+                        allowContainersOnly: true,
+                    },
+                    config
+                ),
+            ),
             udwContainer
         );
     };
