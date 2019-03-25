@@ -46,6 +46,7 @@ export default class EzBlockTextAlign extends Component {
         }
 
         editor.fire('actionPerformed', this);
+        editor.fire('customUpdate');
     }
 
     /**
