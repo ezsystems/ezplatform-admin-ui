@@ -90,6 +90,8 @@ export default class EzBtnAnchorEdit extends Component {
                 [...container.querySelectorAll(`#${value}`)].every((element) => {
                     const ckeditorElement = new CKEDITOR.dom.element(element);
 
+                    block.removeClass('is-block-focused');
+
                     return ckeditorElement.isIdentical(block);
                 })
             );
