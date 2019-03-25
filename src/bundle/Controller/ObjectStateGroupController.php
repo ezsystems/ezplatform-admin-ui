@@ -136,7 +136,7 @@ class ObjectStateGroupController extends Controller
 
                     $this->notificationHandler->success(
                         $this->translator->trans(
-                            /** @Desc("Object state type group '%name%' created.") */
+                            /** @Desc("Object state group '%name%' created.") */
                             'object_state_group.create.success',
                             ['%name%' => $data->getName()],
                             'object_state'
@@ -179,7 +179,7 @@ class ObjectStateGroupController extends Controller
 
                 $this->notificationHandler->success(
                     $this->translator->trans(
-                        /** @Desc("Object state type group '%name%' deleted.") */
+                        /** @Desc("Object state group '%name%' deleted.") */
                         'object_state_group.delete.success',
                         ['%name%' => $group->getName()],
                         'object_state'
@@ -218,7 +218,7 @@ class ObjectStateGroupController extends Controller
 
                     $this->notificationHandler->success(
                         $this->translator->trans(
-                            /** @Desc("Object state type group '%name%' deleted.") */
+                            /** @Desc("Object state group '%name%' deleted.") */
                             'object_state_group.delete.success',
                             ['%name%' => $objectStateGroup->getName()],
                             'object_state'

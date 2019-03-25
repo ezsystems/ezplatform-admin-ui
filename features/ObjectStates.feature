@@ -32,7 +32,7 @@ Feature: Object States management
         | label                   | value                          |
         | Object state group name | Test Object State Group        |
         | Identifier              | TestObjectStateGroupIdentifier |
-      And notification that "Object state type group" "Test Object State Group" is created appears
+      And notification that "Object state group" "Test Object State Group" is created appears
 
   @javascript @common
   Scenario: I can navigate to Admin / Object State Groups through breadcrumb
@@ -208,5 +208,5 @@ Feature: Object States management
     When I delete "Object State Group"
       | item                            |
       | Test Object State Group edited2 |
-    Then notification that "Object state type group" "Test Object State Group edited2" is deleted appears
+    Then notification that "Object state group" "Test Object State Group edited2" is deleted appears
       And there's no "Test Object State Group edited2" on "Object State Groups" list
