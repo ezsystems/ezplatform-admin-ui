@@ -46,6 +46,7 @@ export default class EzBlockTextAlign extends Component {
         }
 
         editor.fire('actionPerformed', this);
+        editor.fire('customUpdate');
     }
 
     /**
@@ -59,10 +60,9 @@ export default class EzBlockTextAlign extends Component {
         const icon = '/bundles/ezplatformadminui/img/ez-icons.svg#' + this.props.iconName;
 
         return (
-            <button className={cssClass} onClick={this.applyStyle.bind(this)}
-                tabIndex={this.props.tabIndex} title={this.props.label}>
-                <svg className='ez-icon ez-btn-ae__icon'>
-                    <use xlinkHref={icon}></use>
+            <button className={cssClass} onClick={this.applyStyle.bind(this)} tabIndex={this.props.tabIndex} title={this.props.label}>
+                <svg className="ez-icon ez-btn-ae__icon">
+                    <use xlinkHref={icon} />
                 </svg>
             </button>
         );
