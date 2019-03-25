@@ -24,20 +24,33 @@
         });
     };
 
+    const findElements = (editor) => {
+        const path = editor.elementPath();
+        let focused = path.block;
+        let widget;
+
+        if (!focused) {
+            widget = editor.widgets.focused;
+            focused = widget ? widget.wrapper : null;
+        }
+
+        if (!focused && path.contains('table')) {
+            focused = path.elements.find((element) => element.is('table'));
+        }
+
+        if (focused.is('li')) {
+            focused = focused.getParent();
+        }
+
+        return {
+            focused,
+            widget,
+        };
+    };
+
     const moveUpCommand = {
         exec: function(editor, data) {
-            let focused = editor.elementPath().block;
-            let widget;
-
-            if (!focused) {
-                widget = editor.widgets.focused;
-                focused = widget.wrapper;
-            }
-
-            if (focused.is('li')) {
-                focused = focused.getParent();
-            }
-
+            const { focused, widget } = findElements(editor);
             const previous = focused.getPrevious();
 
             if (previous) {
@@ -54,18 +67,7 @@
 
     const moveDownCommand = {
         exec: function(editor, data) {
-            let focused = editor.elementPath().block;
-            let widget;
-
-            if (!focused) {
-                widget = editor.widgets.focused;
-                focused = widget.wrapper;
-            }
-
-            if (focused.is('li')) {
-                focused = focused.getParent();
-            }
-
+            const { focused, widget } = findElements(editor);
             const next = focused.getNext();
 
             if (next) {
