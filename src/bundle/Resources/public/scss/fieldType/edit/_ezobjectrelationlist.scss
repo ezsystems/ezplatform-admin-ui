@@ -1,61 +1,65 @@
 .ez-field-edit--ezobjectrelation,
 .ez-field-edit--ezobjectrelationlist {
-    .ez-relations__cta {
-        background: $ez-ground-base-dark;
-        padding: 2rem 0;
-        text-align: center;
-    }
-
-    .btn {
-        padding: .4rem 1.25rem;
-        font-weight: bold;
-
-        .ez-icon {
-            margin-top: .1rem;
-            margin-right: .25rem;
-            width: 1.5rem;
-            height: 1.5rem;
+    .ez-relations {
+        &__wrapper {
+            border-radius: calculateRem(4px);
+            overflow: hidden;
         }
 
-        .ez-relations__cta-btn-label {
-            display: inline-block;
-            vertical-align: 25%;
+        &__cta {
+            background: $ez-ground-base-dark;
+            padding: calculateRem(32px) 0;
+            border-radius: calculateRem(4px);
+            text-align: center;
         }
-    }
 
-    .ez-relations__order-input {
-        width: 6ch;
-        text-align: center;
-    }
+        &__cta-text {
+            width: 100%;
+        }
 
-    .ez-relations__table {
-        margin-bottom: 0;
-        word-break: break-all;
+        &__order-input {
+            width: 6ch;
+            text-align: center;
+        }
 
-        &-header {
+        &__table {
+            margin-bottom: 0;
+            word-break: break-all;
+        }
+
+        &__table-header {
             background-color: $ez-ground-primary;
 
             th {
                 vertical-align: middle;
-                padding: .25rem .75rem;
-                font-size: calculateRem(17px);;
+                padding: calculateRem(4px) calculateRem(12px);
+                font-size: calculateRem(17px);
             }
         }
 
-        &-actions {
-            width: 170px;
+        &__table-actions {
+            width: calculateRem(170px);
             text-align: right;
 
             .btn {
-                line-height: .85;
+                line-height: 0.85;
                 padding: calculateRem(8px) calculateRem(5px) calculateRem(8px) calculateRem(10px);
-                margin-left: .15rem;
+                margin-left: calculateRem(2px);
                 margin-right: 0;
             }
         }
+
+        &__item-name {
+            max-width: 25vw;
+        }
     }
 
-    .ez-relations__item-name {
-        max-width: 25vw;
+    .btn {
+        padding: calculateRem(6px) calculateRem(20px);
+        font-weight: bold;
+
+        .ez-icon {
+            margin-right: calculateRem(4px);
+        }
     }
 }
