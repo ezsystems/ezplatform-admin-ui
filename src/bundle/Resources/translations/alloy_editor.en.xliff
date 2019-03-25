@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="a31bc2d766bef988d3d4e2e0892c79b64d2aadd9" resname="anchor_btn.error.unique">
+        <source>This anchor already exists on the page. Anchor name must be unique.</source>
+        <target state="new">This anchor already exists on the page. Anchor name must be unique.</target>
+        <note>key: anchor_btn.error.unique</note>
+      </trans-unit>
       <trans-unit id="2fec67b71cd77563c4e494477e691ba9661d95fe" resname="anchor_btn.label">
         <source>Anchor</source>
         <target state="new">Anchor</target>

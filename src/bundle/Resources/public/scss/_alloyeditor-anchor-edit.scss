@@ -1,6 +1,8 @@
 .ez-ae-anchor-edit {
     display: flex;
     padding: calculateRem(8px) 0 calculateRem(8px) calculateRem(8px);
+    flex-wrap: wrap;
+    max-width: calculateRem(528px);
 
     &__input-wrapper {
         margin-right: calculateRem(10px);
@@ -19,6 +21,11 @@
         align-items: flex-end;
         justify-content: space-around;
         width: calculateRem(110px);
+    }
+
+    & &__error {
+        color: $ez-color-warning-dark;
+        margin-top: calculateRem(8px);
     }
 
     &__btn {
