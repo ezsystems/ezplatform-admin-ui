@@ -2,7 +2,7 @@
     .ez-data-source__taggify {
         display: flex;
         flex-wrap: wrap;
-        padding-bottom: 0;
+        height: auto;
 
         &.ez-data-source__taggify--focused {
             border-color: $ez-color-secondary;
@@ -25,7 +25,6 @@
         display: block;
         outline: none;
         min-width: 100px;
-        padding-bottom: 8px;
         background: transparent;
     }
 
@@ -37,22 +36,22 @@
 
     .taggify__tag {
         background: $ez-color-secondary;
-        padding: 4px 0 4px 8px;
+        padding: calculateRem(4px) 0 calculateRem(4px) calculateRem(8px);
         color: $ez-white;
-        margin: 0 8px 8px 0;
-        border-radius: .25rem;
+        margin: 0 calculateRem(8px) 0 0;
+        border-radius: calculateRem(4px);
     }
 
     .taggify__btn--remove {
         color: $ez-white;
         background: none;
         border: 0 none;
-        margin-left: .375rem;
+        margin-left: calculateRem(6px);
     }
 
     &.is-invalid {
         .ez-data-source__taggify {
-            border: 1px solid $ez-color-danger;
+            border: calculateRem(1px) solid $ez-color-danger;
             background: $ez-color-warning-pale;
         }
     }

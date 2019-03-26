@@ -180,35 +180,6 @@
     }
 }
 
-.ez-field-edit--ezgmaplocation {
-    .btn--search-by-address {
-        .ez-icon {
-            fill: $ez-white;
-            width: calculateRem(16px);
-            height: calculateRem(16px);
-        }
-    }
-}
-
-.ez-field-edit--ezobjectrelation,
-.ez-field-edit--ezobjectrelationlist {
-    .ez-relations__cta-btn {
-        .ez-icon {
-            fill: $ez-white;
-            width: calculateRem(16px);
-            height: calculateRem(16px);
-        }
-    }
-
-    [class*='ez-relations__table-action--'] {
-        .ez-icon {
-            fill: $ez-white;
-            width: calculateRem(16px);
-            height: calculateRem(16px);
-        }
-    }
-}
-
 .ez-btn--select-subtree {
     .ez-icon {
         margin-right: 0.5rem;

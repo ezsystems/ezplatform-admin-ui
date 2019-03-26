@@ -64,15 +64,9 @@
     }
 
     .btn--search-by-address {
-        border-radius: 0 0.25rem 0.25rem 0;
-        padding: 0.075rem 0.5rem;
-        cursor: pointer;
-        align-self: start;
-
-        .ez-icon {
-            width: 1.4rem;
-            height: 1.4rem;
-            margin-top: 5px;
-        }
+        border-radius: 0 calculateRem(4px) calculateRem(4px) 0;
+        padding: calculateRem(1px) calculateRem(8px);
+        height: calculateRem(38px);
+        display: flex;
     }
 }
