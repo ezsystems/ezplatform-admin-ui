@@ -3,3 +3,4 @@ active_domains:
     - 'alloy_editor'
     - 'fieldtypes_edit'
     - 'notifications'
+    - 'search'
