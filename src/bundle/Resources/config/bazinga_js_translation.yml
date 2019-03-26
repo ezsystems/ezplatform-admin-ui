@@ -4,3 +4,4 @@ active_domains:
     - 'fieldtypes_edit'
     - 'notifications'
     - 'search'
+    - 'content'

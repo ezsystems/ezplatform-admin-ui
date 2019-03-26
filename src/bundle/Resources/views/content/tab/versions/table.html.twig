@@ -87,6 +87,8 @@
                                 'versionNo': version.versionNo,
                                 'languageCode': version.initialLanguageCode
                             }) }}"
+                            data-content-id="{{ version.contentInfo.id }}"
+                            data-language-code="{{ version.initialLanguageCode }}"
                             class="btn btn-icon mx-2 ez-btn--content-draft-edit"
                             title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}">
                             <svg class="ez-icon ez-icon-edit">

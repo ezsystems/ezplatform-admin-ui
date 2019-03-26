@@ -136,6 +136,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function createStructure(array $options): ItemInterface
     {
@@ -150,7 +151,6 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
         $hasAccess = $this->permissionResolver->hasAccess('content', 'create');
         $canCreateInLocation = $this->permissionChecker->canCreateInLocation($location, $hasAccess);
-
         $canCreate = $canCreateInLocation && $contentType->isContainer;
         $canEdit = $this->permissionResolver->canUser(
             'content',

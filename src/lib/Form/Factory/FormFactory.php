@@ -183,6 +183,7 @@ class FormFactory
     /**
      * @param ContentEditData|null $data
      * @param string|null $name
+     * @param array $options
      *
      * @return FormInterface
      *
@@ -190,13 +191,15 @@ class FormFactory
      */
     public function contentEdit(
         ?ContentEditData $data = null,
-        ?string $name = null
+        ?string $name = null,
+        array $options = []
     ): FormInterface {
         $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentEditType::class);
         $data = $data ?? new ContentEditData();
-        $options = null !== $data->getVersionInfo()
-            ? ['language_codes' => $data->getVersionInfo()->languageCodes]
-            : [];
+
+        if (empty($options['language_codes']) && null !== $data->getVersionInfo()) {
+            $options['language_codes'] = $data->getVersionInfo()->languageCodes;
+        }
 
         return $this->formFactory->createNamed(
             $name,

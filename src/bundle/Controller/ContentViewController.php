@@ -35,7 +35,9 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentEditTranslationChoiceLoader;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentVisibilityUpdateType;
+use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
 use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
 use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveUniqueRelation;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
@@ -91,6 +93,9 @@ class ContentViewController extends Controller
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer */
+    private $lookupLimitationsTransformer;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
@@ -106,6 +111,7 @@ class ContentViewController extends Controller
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      * @param \eZ\Publish\API\Repository\Repository $repository
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer $lookupLimitationsTransformer
      */
     public function __construct(
         ContentTypeService $contentTypeService,
@@ -121,7 +127,8 @@ class ContentViewController extends Controller
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
         ConfigResolverInterface $configResolver,
         Repository $repository,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        LookupLimitationsTransformer $lookupLimitationsTransformer
     ) {
         $this->contentTypeService = $contentTypeService;
         $this->languageService = $languageService;
@@ -135,8 +142,9 @@ class ContentViewController extends Controller
         $this->locationService = $locationService;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
         $this->configResolver = $configResolver;
-        $this->repository = $repository;
         $this->permissionResolver = $permissionResolver;
+        $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
+        $this->repository = $repository;
     }
 
     /**
@@ -347,8 +355,20 @@ class ContentViewController extends Controller
         ?Language $language = null,
         ?Location $location = null
     ): FormInterface {
+        $languageCodes = $versionInfo->languageCodes ?? [];
+
         return $this->formFactory->contentEdit(
-            new ContentEditData($contentInfo, $versionInfo, $language, $location)
+            new ContentEditData($contentInfo, $versionInfo, $language, $location),
+            null,
+            [
+                'choice_loader' => new ContentEditTranslationChoiceLoader(
+                    $this->languageService,
+                    $this->permissionResolver,
+                    $contentInfo,
+                    $this->lookupLimitationsTransformer,
+                    $languageCodes
+                ),
+            ]
         );
     }
 

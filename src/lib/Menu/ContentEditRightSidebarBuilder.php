@@ -11,6 +11,7 @@ use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\SPI\Limitation\Target;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver;
 use InvalidArgumentException;
@@ -97,8 +98,9 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         /** @var Location $parentLocation */
         $parentLocation = $options['parent_location'];
 
-        $canPublish = $this->permissionResolver->canUser('content', 'publish', $content);
-        $canEdit = $this->permissionResolver->canUser('content', 'edit', $content);
+        $target = (new Target\Builder\VersionBuilder())->translateToAnyLanguageOf([$language->languageCode])->build();
+        $canPublish = $this->permissionResolver->canUser('content', 'publish', $content, [$target]);
+        $canEdit = $this->permissionResolver->canUser('content', 'edit', $content, [$target]);
         $canDelete = $this->permissionResolver->canUser('content', 'versionremove', $content);
 
         $publishAttributes = [

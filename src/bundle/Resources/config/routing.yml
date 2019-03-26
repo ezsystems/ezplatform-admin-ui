@@ -561,6 +561,14 @@ ezplatform.content.translate:
         _controller: 'EzPlatformAdminUiBundle:ContentEdit:translate'
         fromLanguageCode: ~
 
+ezplatform.content.check_edit_permission:
+    path: /content/{contentId}/check-edit-permission/{languageCode}
+    options:
+        expose: true
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Content:checkEditPermission'
+        languageCode: ~
+
 #
 # Search
 #

@@ -39,7 +39,9 @@
                                 'contentId': row.contentId,
                                 'versionNo': row.version,
                                 'languageCode': row.language
-                            }) }}">
+                            }) }}"
+                            data-content-id="{{ row.contentId }}"
+                            data-language-code="{{ row.language }}">
                         <svg class="ez-icon ez-icon-edit">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                         </svg>
