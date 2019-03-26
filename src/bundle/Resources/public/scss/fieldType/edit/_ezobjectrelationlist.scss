@@ -1,15 +1,9 @@
 .ez-field-edit--ezobjectrelation,
 .ez-field-edit--ezobjectrelationlist {
     .ez-relations {
-        &__wrapper {
-            border-radius: calculateRem(4px);
-            overflow: hidden;
-        }
-
         &__cta {
             background: $ez-ground-base-dark;
             padding: calculateRem(32px) 0;
-            border-radius: calculateRem(4px);
             text-align: center;
         }
 
