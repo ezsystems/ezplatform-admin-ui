@@ -39,6 +39,7 @@ class ContentTree extends AbstractParser
         $nodeBuilder
             ->arrayNode('content_tree_module')
                 ->info('Content Tree module configuration')
+                ->addDefaultsIfNotSet()
                 ->children()
                     ->integerNode('load_more_limit')
                         ->info('Number of children to load in expand and load more operations')
@@ -61,6 +62,18 @@ class ContentTree extends AbstractParser
                             . 'When set to \'null\' SiteAccess \'content.tree_root.location_id\' setting will be used.'
                         )
                         ->defaultValue(null)
+                    ->end()
+                    ->arrayNode('contextual_tree_root_location_ids')
+                        ->info(
+                            'List of Location IDs overriding \'tree_root_location_id\' setting.' . "\n\n"
+                            . 'Tree Root is overriden when previewing those Locations in AdminUI.'
+                        )
+                        ->example([
+                            '2 # Home',
+                            '5 # Users',
+                            '43 # Media',
+                        ])
+                        ->integerPrototype()->end()
                     ->end()
                     ->arrayNode('allowed_content_types')
                         ->beforeNormalization()
@@ -125,6 +138,14 @@ class ContentTree extends AbstractParser
                 'content_tree_module.tree_root_location_id',
                 $currentScope,
                 $settings['tree_root_location_id']
+            );
+        }
+
+        if (array_key_exists('contextual_tree_root_location_ids', $settings)) {
+            $contextualizer->setContextualParameter(
+                'content_tree_module.contextual_tree_root_location_ids',
+                $currentScope,
+                $settings['contextual_tree_root_location_ids']
             );
         }
 

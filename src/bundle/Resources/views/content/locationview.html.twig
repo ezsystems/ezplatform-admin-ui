@@ -24,6 +24,10 @@
 
     <div class="row align-items-stretch ez-main-row">
         {% block left_sidebar %}
+            {% if location.id in admin_ui_config['contentTree']['contextualTreeRootLocationIds'] %}
+                {% set content_tree_module_root = location.id %}
+            {% endif %}
+
             {{ parent() }}
         {% endblock left_sidebar %}
 
