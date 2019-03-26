@@ -3,14 +3,19 @@
     const notifications = JSON.parse(notificationsContainer.dataset.notifications);
     const template = notificationsContainer.dataset.template;
     const addNotification = ({ detail }) => {
-        const { onShow, label, message } = detail;
+        const { onShow, label, message, rawPlaceholdersMap } = detail;
         // @TODO: Unify 'error' and 'danger' label in 3.0.
         const configKey = label === 'danger' ? 'error' : label;
         const config = eZ.adminUiConfig.notifications[configKey];
         const timeout = config ? config.timeout : 0;
         const container = doc.createElement('div');
-        const escapedMessage = eZ.helpers.text.escapeHTML(message);
-        const notification = template.replace('{{ label }}', label).replace('{{ message }}', escapedMessage);
+        let finalMessage = eZ.helpers.text.escapeHTML(message);
+
+        Object.entries(rawPlaceholdersMap).forEach(([placeholder, rawText]) => {
+            finalMessage = finalMessage.replace(`{{ ${placeholder} }}`, rawText);
+        });
+
+        const notification = template.replace('{{ label }}', label).replace('{{ message }}', finalMessage);
 
         container.insertAdjacentHTML('beforeend', notification);
 
