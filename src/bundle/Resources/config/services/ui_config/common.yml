@@ -78,6 +78,11 @@ services:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'richTextCustomStyles' }
 
+    # Editor Plugins UI configuration provider
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText\EditorPlugins:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'editorPlugins' }
+
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\ImageAsset\Mapping:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'imageAssetMapping' }

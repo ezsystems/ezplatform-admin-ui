@@ -43,6 +43,7 @@
                     };
                 }
             );
+            this.editorPlugins = global.eZ.adminUiConfig.editorPlugins;
 
             this.xhtmlify = this.xhtmlify.bind(this);
         }
@@ -226,6 +227,7 @@
                         'ezfocusblock',
                         'ezcustomtag',
                         'ezinlinecustomtag',
+                        ...this.editorPlugins
                     ].join(','),
             });
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ez-data-source').querySelector('textarea').value);
