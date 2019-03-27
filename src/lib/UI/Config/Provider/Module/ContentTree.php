@@ -37,6 +37,7 @@ class ContentTree implements ProviderInterface
             'allowedContentTypes' => $this->configResolver->getParameter('content_tree_module.allowed_content_types'),
             'ignoredContentTypes' => $this->configResolver->getParameter('content_tree_module.ignored_content_types'),
             'treeRootLocationId' => $rootLocationId ?? $this->configResolver->getParameter('content.tree_root.location_id'),
+            'contextualTreeRootLocationIds' => $this->configResolver->getParameter('content_tree_module.contextual_tree_root_location_ids'),
         ];
     }
 }

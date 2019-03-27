@@ -18,6 +18,7 @@ use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
@@ -67,24 +68,6 @@ class ContentViewController extends Controller
     /** @var \eZ\Publish\API\Repository\BookmarkService */
     private $bookmarkService;
 
-    /** @var int */
-    private $defaultDraftPaginationLimit;
-
-    /** @var array */
-    private $siteAccessLanguages;
-
-    /** @var int */
-    private $defaultRolePaginationLimit;
-
-    /** @var int */
-    private $defaultPolicyPaginationLimit;
-
-    /** @var int */
-    private $defaultSystemUrlPaginationLimit;
-
-    /** @var int */
-    private $defaultCustomUrlPaginationLimit;
-
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
@@ -97,23 +80,22 @@ class ContentViewController extends Controller
     /** @var \Symfony\Component\Form\FormFactoryInterface */
     private $sfFormFactory;
 
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
      * @param \EzSystems\EzPlatformAdminUi\UI\Service\PathService $pathService
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \Symfony\Component\Form\FormFactoryInterface $sfFormFactory
      * @param \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier $subitemsContentViewParameterSupplier
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\BookmarkService $bookmarkService
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
-     * @param int $defaultDraftPaginationLimit
-     * @param array $siteAccessLanguages
-     * @param int $defaultRolePaginationLimit
-     * @param int $defaultPolicyPaginationLimit
-     * @param int $defaultSystemUrlPaginationLimit
-     * @param int $defaultCustomUrlPaginationLimit
+     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      */
     public function __construct(
         ContentTypeService $contentTypeService,
@@ -127,12 +109,7 @@ class ContentViewController extends Controller
         ContentService $contentService,
         LocationService $locationService,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
-        int $defaultDraftPaginationLimit,
-        array $siteAccessLanguages,
-        int $defaultRolePaginationLimit,
-        int $defaultPolicyPaginationLimit,
-        int $defaultSystemUrlPaginationLimit,
-        int $defaultCustomUrlPaginationLimit
+        ConfigResolverInterface $configResolver
     ) {
         $this->contentTypeService = $contentTypeService;
         $this->languageService = $languageService;
@@ -144,13 +121,8 @@ class ContentViewController extends Controller
         $this->bookmarkService = $bookmarkService;
         $this->contentService = $contentService;
         $this->locationService = $locationService;
-        $this->defaultDraftPaginationLimit = $defaultDraftPaginationLimit;
-        $this->siteAccessLanguages = $siteAccessLanguages;
-        $this->defaultRolePaginationLimit = $defaultRolePaginationLimit;
-        $this->defaultPolicyPaginationLimit = $defaultPolicyPaginationLimit;
-        $this->defaultSystemUrlPaginationLimit = $defaultSystemUrlPaginationLimit;
-        $this->defaultCustomUrlPaginationLimit = $defaultCustomUrlPaginationLimit;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -177,17 +149,15 @@ class ContentViewController extends Controller
         }
 
         $this->supplyContentType($view);
-
         $this->supplyDraftPagination($view, $request);
         $this->supplyCustomUrlPagination($view, $request);
         $this->supplySystemUrlPagination($view, $request);
         $this->supplyRolePagination($view, $request);
         $this->supplyPolicyPagination($view, $request);
-
         $this->supplyIsLocationBookmarked($view);
         $this->supplyIsLocationInvisible($view);
-
         $this->supplyContentReverseRelations($view);
+        $this->supplyContentTreeParameters($view);
 
         return $view;
     }
@@ -382,7 +352,7 @@ class ContentViewController extends Controller
                 'route_params' => $request->get('_route_params'),
                 'page' => $page['version_draft'] ?? 1,
                 'pages_map' => $page,
-                'limit' => $this->defaultDraftPaginationLimit,
+                'limit' => $this->configResolver->getParameter('pagination.version_draft_limit'),
             ],
         ]);
     }
@@ -400,7 +370,7 @@ class ContentViewController extends Controller
                 'route_name' => $request->get('_route'),
                 'route_params' => $request->get('_route_params'),
                 'page' => $page['custom_url'] ?? 1,
-                'limit' => $this->defaultCustomUrlPaginationLimit,
+                'limit' => $this->configResolver->getParameter('pagination.content_custom_url_limit'),
             ],
         ]);
     }
@@ -418,7 +388,7 @@ class ContentViewController extends Controller
                 'route_name' => $request->get('_route'),
                 'route_params' => $request->get('_route_params'),
                 'page' => $page['system_url'] ?? 1,
-                'limit' => $this->defaultSystemUrlPaginationLimit,
+                'limit' => $this->configResolver->getParameter('pagination.content_system_url_limit'),
             ],
         ]);
     }
@@ -436,7 +406,7 @@ class ContentViewController extends Controller
                 'route_name' => $request->get('_route'),
                 'route_params' => $request->get('_route_params'),
                 'page' => $page['role'] ?? 1,
-                'limit' => $this->defaultRolePaginationLimit,
+                'limit' => $this->configResolver->getParameter('pagination.content_role_limit'),
             ],
         ]);
     }
@@ -454,8 +424,32 @@ class ContentViewController extends Controller
                 'route_name' => $request->get('_route'),
                 'route_params' => $request->get('_route_params'),
                 'page' => $page['policy'] ?? 1,
-                'limit' => $this->defaultPolicyPaginationLimit,
+                'limit' => $this->configResolver->getParameter('pagination.content_policy_limit'),
             ],
+        ]);
+    }
+
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     */
+    private function supplyContentTreeParameters(ContentView $view): void
+    {
+        $location = $view->getLocation();
+
+        $contentTreeRootLocationId = $this->configResolver->getParameter('content_tree_module.tree_root_location_id');
+        $contextualContentTreeRootLocationIds = $this->configResolver->getParameter('content_tree_module.contextual_tree_root_location_ids');
+
+        $possibleContentTreeRoots = array_intersect($location->path, $contextualContentTreeRootLocationIds);
+        if (
+            null !== $location
+            && !empty($possibleContentTreeRoots)
+        ) {
+            // use the outermost ancestor
+            $contentTreeRootLocationId = reset($possibleContentTreeRoots);
+        }
+
+        $view->addParameters([
+            'content_tree_module_root' => $contentTreeRootLocationId,
         ]);
     }
 

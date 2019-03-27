@@ -74,16 +74,6 @@ services:
         arguments:
             $defaultPaginationLimit: '$pagination.policy_limit$'
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\ContentViewController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        arguments:
-            $defaultDraftPaginationLimit: '$pagination.version_draft_limit$'
-            $siteAccessLanguages: '$languages$'
-            $defaultRolePaginationLimit: '$pagination.content_role_limit$'
-            $defaultPolicyPaginationLimit: '$pagination.content_policy_limit$'
-            $defaultSystemUrlPaginationLimit: '$pagination.content_system_url_limit$'
-            $defaultCustomUrlPaginationLimit: '$pagination.content_custom_url_limit$'
-
     EzSystems\EzPlatformAdminUiBundle\Controller\ObjectStateController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:

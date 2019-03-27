@@ -132,7 +132,7 @@
                     </div>
                     <div class="ez-content-tree-container"
                         data-user-id="{{ admin_ui_config.user.user.id }}"
-                        data-tree-root-location-id="{{ admin_ui_config['contentTree']['treeRootLocationId'] }}"
+                        data-tree-root-location-id="{{ content_tree_module_root|default(admin_ui_config['contentTree']['treeRootLocationId']) }}"
                         data-current-location-path="{{ location_path|default('') }}">
                         <div class="ez-content-tree-container__wrapper"></div>
                     </div>
