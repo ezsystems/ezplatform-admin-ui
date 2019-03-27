@@ -141,7 +141,7 @@
         </div>
         <div id="{{ form.selectionRoot.vars.id }}-selected-root-name">
             {% if form.selectionRoot.vars.destination_location is not null %}
-                {{ render( controller( "ez_content:viewLocation", {'locationId': form.selectionRoot.vars.value, 'viewType': '_platformui_content_name'} ) ) }}
+                {{ form.selectionRoot.vars.destination_location.ContentInfo.name }}
             {% endif %}
         </div>
     </div>
