@@ -64,7 +64,7 @@
         enableTime: true,
         noCalendar: true,
         time_24hr: true,
-        formatDate: (date) => eZ.helpers.timezone.formatFullDateTime(date, null, eZ.adminUiConfig.dateFormat.full_time),
+        formatDate: (date) => eZ.helpers.timezone.formatFullDateTime(date, null, eZ.adminUiConfig.dateFormat.fullTime),
     };
     const updateInputValue = (sourceInput, date) => {
         const event = new CustomEvent(EVENT_VALUE_CHANGED);

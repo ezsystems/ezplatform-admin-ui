@@ -46,12 +46,12 @@ class DateFormat implements ProviderInterface
         );
 
         return [
-            'full_datetime' => (string)$fullDateTimeFormat,
-            'full_date' => $fullDateTimeFormat->getDateFormat(),
-            'full_time' => $fullDateTimeFormat->getTimeFormat(),
-            'short_datetime' => (string)$shortDateTimeFormat,
-            'short_date' => $shortDateTimeFormat->getDateFormat(),
-            'short_time' => $shortDateTimeFormat->getTimeFormat(),
+            'fullDateTime' => (string)$fullDateTimeFormat,
+            'fullDate' => $fullDateTimeFormat->getDateFormat(),
+            'fullTime' => $fullDateTimeFormat->getTimeFormat(),
+            'shortDateTime' => (string)$shortDateTimeFormat,
+            'shortDate' => $shortDateTimeFormat->getDateFormat(),
+            'shortTime' => $shortDateTimeFormat->getTimeFormat(),
             /** @deprecated  */
             'full' => (string)$fullDateTimeFormat,
             /** @deprecated  */

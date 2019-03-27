@@ -1,16 +1,12 @@
 (function(global, doc, eZ, moment) {
     const userPreferedTimezone = eZ.adminUiConfig.timezone;
-    const userPreferedFullDateTimeFormat = eZ.adminUiConfig.dateFormat.full_datetime;
-    const userPreferedFullDateFormat = eZ.adminUiConfig.dateFormat.full_date;
-    const userPreferedFullTimeFormat = eZ.adminUiConfig.dateFormat.full_time;
-    const userPreferedShortDateTimeFormat = eZ.adminUiConfig.dateFormat.short_datetime;
-    const userPreferedShortDateFormat = eZ.adminUiConfig.dateFormat.short_date;
-    const userPreferedShortTimeFormat = eZ.adminUiConfig.dateFormat.short_time;
+    const userPreferedFullDateTimeFormat = eZ.adminUiConfig.dateFormat.fullDateTime;
+    const userPreferedShortDateTimeFormat = eZ.adminUiConfig.dateFormat.shortDateTime;
 
     const convertDateToTimezone = (date, timezone = userPreferedTimezone, forceSameTime = false) => {
         return moment(date).tz(timezone, forceSameTime);
     };
-    const formatDate = (date, format, timezone = null) => {
+    const formatDate = (date, timezone = null, format) => {
         if (timezone) {
             date = convertDateToTimezone(date, timezone);
         }
@@ -18,22 +14,10 @@
         return moment(date).formatICU(format);
     };
     const formatFullDateTime = (date, timezone = null, format = userPreferedFullDateTimeFormat) => {
-        return formatDate(date, format, timezone);
-    };
-    const formatFullDate = (date, timezone = null, format = userPreferedFullDateFormat) => {
-        return formatDate(date, format, timezone);
-    };
-    const formatFullTime = (date, timezone = null, format = userPreferedFullTimeFormat) => {
-        return formatDate(date, format, timezone);
+        return formatDate(date, timezone, format);
     };
     const formatShortDateTime = (date, timezone = null, format = userPreferedShortDateTimeFormat) => {
-        return formatDate(date, format, timezone);
-    };
-    const formatShortDate = (date, timezone = null, format = userPreferedShortDateFormat) => {
-        return formatDate(date, format, timezone);
-    };
-    const formatShortTime = (date, timezone = null, format = userPreferedShortimeFormat) => {
-        return formatDate(date, format, timezone);
+        return formatDate(date, timezone, format);
     };
 
     const deprecatedFormatDate = (date, format = userPreferedFullDateTimeFormat) => {
@@ -50,14 +34,14 @@
 
         return formatShortDateTime(date, null, format);
     };
-    const deprecatedFormatDateWithTimezone = (date, timezone, format) => {
+    const deprecatedFormatDateWithTimezone = (date, timezone = userPreferedTimezone, format = userPreferedFullDateTimeFormat) => {
         console.warn('[DEPRECATED] formatDateWithTimezone function is deprecated');
         console.warn('[DEPRECATED] it will be removed from ezplatform-admin-ui 2.0');
         console.warn('[DEPRECATED] use formatFullDateTime instead');
 
         return formatFullDateTime(date, timezone, format);
     };
-    const deprecatedFormatShortDateWithTimezone = (date, timezone, format) => {
+    const deprecatedFormatShortDateWithTimezone = (date, timezone = userPreferedTimezone, format = userPreferedShortDateTimeFormat) => {
         console.warn('[DEPRECATED] formatShortDateWithTimezone function is deprecated');
         console.warn('[DEPRECATED] it will be removed from ezplatform-admin-ui 2.0');
         console.warn('[DEPRECATED] use formatShortDateTime instead');
