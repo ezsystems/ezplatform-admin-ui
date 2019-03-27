@@ -3,7 +3,7 @@
     const notifications = JSON.parse(notificationsContainer.dataset.notifications);
     const template = notificationsContainer.dataset.template;
     const addNotification = ({ detail }) => {
-        const { onShow, label, message, rawPlaceholdersMap } = detail;
+        const { onShow, label, message, rawPlaceholdersMap = {} } = detail;
         // @TODO: Unify 'error' and 'danger' label in 3.0.
         const configKey = label === 'danger' ? 'error' : label;
         const config = eZ.adminUiConfig.notifications[configKey];
