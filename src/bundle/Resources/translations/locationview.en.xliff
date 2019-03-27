@@ -186,10 +186,10 @@
         <target state="new">Content locations</target>
         <note>key: tab.locations.content_locations</note>
       </trans-unit>
-      <trans-unit id="cd57f6ee339fa6c35e2a75cc760f391676fca490" resname="tab.locations.hidden_by_superior">
-        <source>Hidden by superior</source>
-        <target state="new">Hidden by superior</target>
-        <note>key: tab.locations.hidden_by_superior</note>
+      <trans-unit id="c663ca1446263b6964290f8df3c409d33601d21b" resname="tab.locations.hidden_content_or_superior">
+        <source>Content or superior is hidden</source>
+        <target state="new">Content or superior is hidden</target>
+        <note>key: tab.locations.hidden_content_or_superior</note>
       </trans-unit>
       <trans-unit id="64554d66c71f33e7d3ac52c75b17717c334ef9dd" resname="tab.locations.main">
         <source>Main</source>

@@ -185,6 +185,7 @@ class ContentViewController extends Controller
         $this->supplyPolicyPagination($view, $request);
 
         $this->supplyIsLocationBookmarked($view);
+        $this->supplyIsLocationInvisible($view);
 
         $this->supplyContentReverseRelations($view);
 
@@ -492,5 +493,18 @@ class ContentViewController extends Controller
         $relations = $this->contentService->loadReverseRelations($contentInfo);
 
         $view->addParameters(['content_has_reverse_relations' => count($relations) > 0]);
+    }
+
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     */
+    private function supplyIsLocationInvisible(ContentView $view)
+    {
+        $location = $view->getLocation();
+        $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
+        $isLocationVisible = !($parentLocation->hidden || $parentLocation->invisible);
+
+        // Location is invisible when parent location is not visible.
+        $view->addParameters(['is_location_visible' => $isLocationVisible]);
     }
 }
