@@ -21,7 +21,7 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
  *              - plugin2
  * ```
  */
-class EditorPlugin extends AbstractParser
+class AlloyEditor extends AbstractParser
 {
     /**
      * Adds semantic configuration definition.
@@ -31,10 +31,14 @@ class EditorPlugin extends AbstractParser
     public function addSemanticConfig(NodeBuilder $nodeBuilder)
     {
         $nodeBuilder
-            ->arrayNode('editor_plugins')
-                ->info('Additional RichText editor plugins.')
-                ->example(['plugin1', 'plugin2'])
-                ->prototype('scalar')->end()
+            ->arrayNode('alloy_editor')
+                ->info('Alloy Editor configuration settings.')
+                ->children()
+                    ->arrayNode('custom_plugins')
+                        ->example(['plugin1', 'plugin2'])
+                        ->prototype('scalar')->end()
+                    ->end()
+                ->end()
             ->end();
     }
 
@@ -43,14 +47,14 @@ class EditorPlugin extends AbstractParser
      */
     public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
     {
-        if (empty($scopeSettings['editor_plugins'])) {
+        if (empty($scopeSettings['alloy_editor'])) {
             return;
         }
 
         $contextualizer->setContextualParameter(
-            'editor_plugins',
+            'alloy_editor',
             $currentScope,
-            $scopeSettings['editor_plugins']
+            $scopeSettings['alloy_editor']
         );
     }
 }

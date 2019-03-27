@@ -43,7 +43,7 @@
                     };
                 }
             );
-            this.editorPlugins = global.eZ.adminUiConfig.editorPlugins;
+            this.alloyEditorCustomPlugins = global.eZ.adminUiConfig.alloyEditor.customPlugins;
 
             this.xhtmlify = this.xhtmlify.bind(this);
         }
@@ -227,7 +227,7 @@
                         'ezfocusblock',
                         'ezcustomtag',
                         'ezinlinecustomtag',
-                        ...this.editorPlugins
+                        ...this.alloyEditorCustomPlugins
                     ].join(','),
             });
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ez-data-source').querySelector('textarea').value);

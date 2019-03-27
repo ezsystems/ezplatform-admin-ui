@@ -7,7 +7,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 
-class EditorPlugins implements ProviderInterface
+class AlloyEditor implements ProviderInterface
 {
     /** @var ConfigResolverInterface */
     private $configResolver;
@@ -20,12 +20,25 @@ class EditorPlugins implements ProviderInterface
     }
 
     /**
-     * @return array RichText Editor Plugins
+     * @return array AlloyEditor config
      */
     public function getConfig(): array
     {
-        if ($this->configResolver->hasParameter('editor_plugins')) {
-            return $this->configResolver->getParameter('editor_plugins');
+        return [
+            'customPlugins' => $this->getCustomPlugins()
+        ];
+    }
+
+    /**
+     * @return array Custom plugins
+     */
+    protected function getCustomPlugins(): array
+    {
+        if ($this->configResolver->hasParameter('alloy_editor')) {
+            $param = $this->configResolver->getParameter('alloy_editor');
+            if (isset($param['custom_plugins'])) {
+                return $param['custom_plugins'];
+            }
         }
 
         return [];
