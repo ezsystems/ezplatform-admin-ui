@@ -81,6 +81,11 @@ class ContentTreeController extends RestController
 
         $elements = [];
         foreach ($loadSubtreeRequest->nodes as $childLoadSubtreeRequestNode) {
+            // avoid errors caused by i.e. permissions change
+            if (!array_key_exists($childLoadSubtreeRequestNode->locationId, $locations)) {
+                continue;
+            }
+
             $location = $locations[$childLoadSubtreeRequestNode->locationId];
             $elements[] = $this->contentTreeNodeFactory->createNode(
                 $location,
