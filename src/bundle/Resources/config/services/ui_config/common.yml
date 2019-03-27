@@ -80,6 +80,8 @@ services:
 
     # AlloyEditor configuration provider
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText\AlloyEditor:
+        arguments:
+            $alloyEditorConfiguration: '%ezplatform.ezrichtext.alloy_editor%'
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'alloyEditor' }
 

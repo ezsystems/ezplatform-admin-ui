@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 
 class AlloyEditor implements ProviderInterface
 {
-    /** @var ConfigResolverInterface */
-    private $configResolver;
+    /** @var array */
+    private $alloyEditorConfiguration;
 
     /**
-     * @param ConfigResolverInterface $configResolver
+     * @param array $alloyEditorConfiguration
      */
-    public function __construct(ConfigResolverInterface $configResolver) {
-        $this->configResolver = $configResolver;
+    public function __construct(array $alloyEditorConfiguration) {
+        $this->alloyEditorConfiguration = $alloyEditorConfiguration;
     }
 
     /**
@@ -25,20 +24,17 @@ class AlloyEditor implements ProviderInterface
     public function getConfig(): array
     {
         return [
-            'customPlugins' => $this->getCustomPlugins()
+            'extraPlugins' => $this->getExtraPlugins()
         ];
     }
 
     /**
      * @return array Custom plugins
      */
-    protected function getCustomPlugins(): array
+    protected function getExtraPlugins(): array
     {
-        if ($this->configResolver->hasParameter('alloy_editor')) {
-            $param = $this->configResolver->getParameter('alloy_editor');
-            if (isset($param['custom_plugins'])) {
-                return $param['custom_plugins'];
-            }
+        if (isset($this->alloyEditorConfiguration['extra_plugins'])) {
+            return $this->alloyEditorConfiguration['extra_plugins'];
         }
 
         return [];
