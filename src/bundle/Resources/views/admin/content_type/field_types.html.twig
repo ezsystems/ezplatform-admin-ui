@@ -173,7 +173,7 @@
         </div>
         <div id="{{ form.selectionDefaultLocation.vars.id }}-selected-root-name">
             {% if form.selectionDefaultLocation.vars.destination_location is not null %}
-                {{ render( controller( "ez_content:viewLocation", {'locationId': form.selectionDefaultLocation.vars.value, 'viewType': '_platformui_content_name'} ) ) }}
+                {{ ez_content_name(form.selectionDefaultLocation.vars.destination_location.contentInfo) }}
             {% endif %}
         </div>
     </div>
