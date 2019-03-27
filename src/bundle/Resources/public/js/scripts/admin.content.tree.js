@@ -15,7 +15,9 @@
         btn.classList.toggle(CLASS_BTN_CONTENT_TREE_EXPANDED);
         updateContentTreeWrapperHeight();
 
-        localStorage.setItem(KEY_CONTENT_TREE_EXPANDED, contentTreeContainer.classList.contains(CLASS_CONTENT_TREE_EXPANDED));
+        const isContentTreeExpanded = contentTreeContainer.classList.contains(CLASS_CONTENT_TREE_EXPANDED);
+
+        saveContentTreeExpandedState(userId, isContentTreeExpanded);
     };
     const updateContentTreeWrapperHeight = () => {
         const height = Math.min(window.innerHeight - contentTreeContainer.getBoundingClientRect().top, window.innerHeight);
@@ -31,6 +33,22 @@
         window.clearTimeout(onViewportChangeTimeout);
         onViewportChangeTimeout = window.setTimeout(updateContentTreeWrapperHeight, VIEWPORT_CHANGE_TIMEOUT);
     };
+    const saveContentTreeExpandedState = (userId, isExpanded) => {
+        let expandedState = JSON.parse(localStorage.getItem(KEY_CONTENT_TREE_EXPANDED));
+
+        if (!(expandedState instanceof Object)) {
+            expandedState = {};
+        }
+
+        expandedState[userId] = isExpanded;
+
+        localStorage.setItem(KEY_CONTENT_TREE_EXPANDED, JSON.stringify(expandedState));
+    };
+    const isContentTreeExpanded = (userId) => {
+        const expandedState = JSON.parse(localStorage.getItem(KEY_CONTENT_TREE_EXPANDED));
+
+        return expandedState && expandedState[userId];
+    };
 
     ReactDOM.render(
         React.createElement(eZ.modules.ContentTree, {
@@ -43,7 +61,7 @@
 
     btn.addEventListener('click', toggleContentTreePanel, false);
 
-    if (localStorage.getItem(KEY_CONTENT_TREE_EXPANDED) === 'true') {
+    if (isContentTreeExpanded(userId)) {
         contentTreeContainer.classList.add(CLASS_CONTENT_TREE_EXPANDED);
         btn.classList.add(CLASS_BTN_CONTENT_TREE_EXPANDED);
     }
