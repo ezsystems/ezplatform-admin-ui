@@ -53,7 +53,7 @@
                             </label>
                             {% if location.contentInfo.isHidden or not is_location_visible %}
                                 <span class="ml-2">
-                                    {{ 'tab.locations.hidden_by_superior'|trans()|desc('Hidden by superior') }}
+                                    {{ 'tab.locations.hidden_content_or_superior'|trans()|desc('Content or superior is hidden') }}
                                 </span>
                             {% endif %}
                         </td>
