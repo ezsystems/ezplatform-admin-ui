@@ -65,6 +65,7 @@
     const datetimeConfig = {
         enableTime: true,
         time_24hr: true,
+        formatDate: (date) => eZ.helpers.timezone.formatFullDateTime(date, null),
     };
     const updateInputValue = (sourceInput, dates) => {
         const event = new CustomEvent(EVENT_VALUE_CHANGED);
@@ -95,7 +96,6 @@
         const flatPickrInput = field.querySelector(SELECTOR_FLATPICKR_INPUT);
         const btnClear = field.querySelector('.ez-data-source__btn--clear-input');
         const secondsEnabled = sourceInput.dataset.seconds === '1';
-        const formatDate = secondsEnabled ? (date) => date.toLocaleString() : (date) => eZ.helpers.timezone.formatDate(date);
         let defaultDate = null;
 
         if (sourceInput.value) {
@@ -111,7 +111,6 @@
                 onChange: updateInputValue.bind(null, sourceInput),
                 defaultDate,
                 enableSeconds: secondsEnabled,
-                formatDate,
             })
         );
 
