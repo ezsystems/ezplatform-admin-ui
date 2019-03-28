@@ -1,4 +1,4 @@
-(function (global) {
+(function(global) {
     const SELECTOR_FIELD = '.ez-field-edit--eztime';
     const SELECTOR_INPUT = '.ez-data-source__input:not(.flatpickr-input)';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
@@ -29,7 +29,7 @@
 
             return {
                 isError,
-                errorMessage
+                errorMessage,
             };
         }
     }
@@ -57,15 +57,14 @@
 
     validator.init();
 
-    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-        [...global.eZ.fieldTypeValidators, validator] :
-        [validator];
+    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ? [...global.eZ.fieldTypeValidators, validator] : [validator];
 
     const timeFields = [...document.querySelectorAll(SELECTOR_FIELD)];
     const timeConfig = {
         enableTime: true,
         noCalendar: true,
-        time_24hr: true
+        time_24hr: true,
+        formatDate: (date) => eZ.helpers.timezone.formatFullDateTime(date, null, eZ.adminUiConfig.dateFormat.fullTime),
     };
     const updateInputValue = (sourceInput, date) => {
         const event = new CustomEvent(EVENT_VALUE_CHANGED);
@@ -78,7 +77,7 @@
         }
 
         date = new Date(date[0]);
-        sourceInput.value = (date.getHours() * 3600) + (date.getMinutes() * 60) + date.getSeconds();
+        sourceInput.value = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
 
         sourceInput.dispatchEvent(event);
     };
@@ -94,27 +93,33 @@
             const date = new Date();
 
             date.setHours(Math.floor(value / 3600));
-            date.setMinutes(Math.floor(value % 3600 / 60));
-            date.setSeconds(Math.floor(value % 3600 % 60));
+            date.setMinutes(Math.floor((value % 3600) / 60));
+            date.setSeconds(Math.floor((value % 3600) % 60));
 
             defaultDate = date;
         }
 
-        btnClear.addEventListener('click', (event) => {
-            event.preventDefault();
+        btnClear.addEventListener(
+            'click',
+            (event) => {
+                event.preventDefault();
 
-            flatPickrInput.value = '';
-            sourceInput.value = '';
+                flatPickrInput.value = '';
+                sourceInput.value = '';
 
-            sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
-        }, false);
+                sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
+            },
+            false
+        );
 
-        window.flatpickr(flatPickrInput, Object.assign({}, timeConfig, {
-            enableSeconds,
-            onChange: updateInputValue.bind(null, sourceInput),
-            dateFormat: enableSeconds ? 'H:i:S' : 'H:i',
-            defaultDate
-        }));
+        window.flatpickr(
+            flatPickrInput,
+            Object.assign({}, timeConfig, {
+                enableSeconds,
+                onChange: updateInputValue.bind(null, sourceInput),
+                defaultDate,
+            })
+        );
 
         if (sourceInput.hasAttribute('required')) {
             flatPickrInput.setAttribute('required', true);
