@@ -13,10 +13,10 @@
 
         return moment(date).formatICU(format);
     };
-    const formatFullDateTime = (date, timezone = null, format = userPreferedFullDateTimeFormat) => {
+    const formatFullDateTime = (date, timezone = userPreferedTimezone, format = userPreferedFullDateTimeFormat) => {
         return formatDate(date, timezone, format);
     };
-    const formatShortDateTime = (date, timezone = null, format = userPreferedShortDateTimeFormat) => {
+    const formatShortDateTime = (date, timezone = userPreferedTimezone, format = userPreferedShortDateTimeFormat) => {
         return formatDate(date, timezone, format);
     };
 
