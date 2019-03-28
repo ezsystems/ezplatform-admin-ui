@@ -14,6 +14,7 @@
      * @param {String} detail.message
      * @param {String} detail.label
      * @param {Function} [detail.onShow] to be called after notification Node was added
+     * @param {Object} detail.rawPlaceholdersMap
      */
     const showNotification = (detail) => {
         const event = new CustomEvent('ez-notify', { detail });
@@ -27,12 +28,14 @@
      * @function showInfoNotification
      * @param {String} message
      * @param {Function} [onShow] to be called after notification Node was added
+     * @param {Object} rawPlaceholdersMap
      */
-    const showInfoNotification = (message, onShow) =>
+    const showInfoNotification = (message, onShow, rawPlaceholdersMap = {}) =>
         showNotification({
             message,
             label: NOTIFICATION_INFO_LABEL,
             onShow,
+            rawPlaceholdersMap
         });
 
     /**
@@ -41,12 +44,14 @@
      * @function showSuccessNotification
      * @param {String} message
      * @param {Function} [onShow] to be called after notification Node was added
+     * @param {Object} rawPlaceholdersMap
      */
-    const showSuccessNotification = (message, onShow) =>
+    const showSuccessNotification = (message, onShow, rawPlaceholdersMap = {}) =>
         showNotification({
             message,
             label: NOTIFICATION_SUCCESS_LABEL,
             onShow,
+            rawPlaceholdersMap
         });
 
     /**
@@ -55,12 +60,14 @@
      * @function showWarningNotification
      * @param {String} message
      * @param {Function} [onShow] to be called after notification Node was added
+     * @param {Object} rawPlaceholdersMap
      */
-    const showWarningNotification = (message, onShow) =>
+    const showWarningNotification = (message, onShow, rawPlaceholdersMap = {}) =>
         showNotification({
             message,
             label: NOTIFICATION_WARNING_LABEL,
             onShow,
+            rawPlaceholdersMap
         });
 
     /**
@@ -83,8 +90,9 @@
      * @function showErrorNotification
      * @param {(string | Error)} error
      * @param {Function} [onShow] to be called after notification Node was added
+     * @param {Object} rawPlaceholdersMap
      */
-    const showErrorNotification = (error, onShow) => {
+    const showErrorNotification = (error, onShow, rawPlaceholdersMap = {}) => {
         const isErrorObj = error instanceof Error;
         const message = isErrorObj ? error.message : error;
 
@@ -92,6 +100,7 @@
             message,
             label: NOTIFICATION_ERROR_LABEL,
             onShow,
+            rawPlaceholdersMap
         });
     };
 
