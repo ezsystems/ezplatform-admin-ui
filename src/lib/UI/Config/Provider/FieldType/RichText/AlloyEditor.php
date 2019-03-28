@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText;
@@ -14,7 +18,8 @@ class AlloyEditor implements ProviderInterface
     /**
      * @param array $alloyEditorConfiguration
      */
-    public function __construct(array $alloyEditorConfiguration) {
+    public function __construct(array $alloyEditorConfiguration)
+    {
         $this->alloyEditorConfiguration = $alloyEditorConfiguration;
     }
 
@@ -24,7 +29,7 @@ class AlloyEditor implements ProviderInterface
     public function getConfig(): array
     {
         return [
-            'extraPlugins' => $this->getExtraPlugins()
+            'extraPlugins' => $this->getExtraPlugins(),
         ];
     }
 
