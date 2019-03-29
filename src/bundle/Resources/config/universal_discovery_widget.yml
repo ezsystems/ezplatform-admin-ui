@@ -10,6 +10,7 @@ system:
                     visible_tabs: []
                     selected_items_limit: 0
                     containers_only: false
+                    allowed_content_types: []
                     content_on_the_fly:
                         allowed_languages: []
                         allowed_content_types: []
