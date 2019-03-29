@@ -89,6 +89,7 @@ const alloyEditor = [
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-custom-tag.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-inline-custom-tag.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-custom-style.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/core/table.js'),
 ];
 const fieldTypes = [];
 
