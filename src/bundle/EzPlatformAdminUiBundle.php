@@ -72,6 +72,7 @@ class EzPlatformAdminUiBundle extends Bundle
             new LocationIds(),
             new Module\Subitems(),
             new Module\UniversalDiscoveryWidget(),
+            new Module\MultiFileUpload(),
             new Pagination(),
             new Security(),
             new UserIdentifier(),

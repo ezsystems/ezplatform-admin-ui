@@ -12,10 +12,10 @@ services:
 
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings:
         arguments:
-            $locationMappings: '%ezplatform.multifile_upload.location.mappings%'
-            $defaultMappings: '%ezplatform.multifile_upload.location.default_mappings%'
-            $fallbackContentType: '%ezplatform.multifile_upload.fallback_content_type%'
-            $maxFileSize: '%ez_systems.multifile_upload.max_file_size%'
+            $locationMappings: '$multifile_upload_module.location_mappings$'
+            $defaultMappings: '$multifile_upload_module.default_mappings$'
+            $fallbackContentType: '$multifile_upload_module.fallback_content_type$'
+            $maxFileSize: '$multifile_upload_module.max_file_size$'
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'multiFileUpload' }
 
