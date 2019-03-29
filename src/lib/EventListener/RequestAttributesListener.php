@@ -62,7 +62,7 @@ class RequestAttributesListener implements EventSubscriberInterface
 
         $parameterBag = $event->getParameters();
 
-        if ($parameterBag->has('locationId')) {
+        if ($parameterBag->has('locationId') && null !== $parameterBag->get('locationId')) {
             $location = $this->loadLocation($parameterBag->get('locationId'));
             $parameterBag->set('location', $location);
         }
