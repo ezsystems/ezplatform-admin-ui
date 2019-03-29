@@ -65,6 +65,7 @@ class UniversalDiscoveryExtension extends Twig_Extension
             'cotfAllowedContentTypes' => $config['content_on_the_fly']['allowed_content_types'],
             'cotfPreselectedLocation' => $config['content_on_the_fly']['preselected_location'],
             'cotfAllowedLocations' => $config['content_on_the_fly']['allowed_locations'],
+            'allowedContentTypes' => $config['allowed_content_types'],
         ];
 
         return json_encode($udwConfig);
