@@ -64,6 +64,7 @@ module.exports = {
         ezEmbedImageLinkConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-image-link.js',
         ezCustomTagConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-custom-tag.js',
         ezCustomStyleConfig: './src/bundle/Resources/public/js/alloyeditor/src/toolbars/config/ez-custom-style.js',
+        ezCoreTable: './src/bundle/Resources/public/js/alloyeditor/src/core/table.js',
     },
     output: {
         filename: '[name].js',
