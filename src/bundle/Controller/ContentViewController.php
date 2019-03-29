@@ -13,6 +13,8 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
@@ -83,6 +85,12 @@ class ContentViewController extends Controller
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
+    /** @var \eZ\Publish\API\Repository\Repository */
+    private $repository;
+
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
@@ -96,6 +104,8 @@ class ContentViewController extends Controller
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \eZ\Publish\API\Repository\Repository $repository
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         ContentTypeService $contentTypeService,
@@ -109,7 +119,9 @@ class ContentViewController extends Controller
         ContentService $contentService,
         LocationService $locationService,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        Repository $repository,
+        PermissionResolver $permissionResolver
     ) {
         $this->contentTypeService = $contentTypeService;
         $this->languageService = $languageService;
@@ -123,6 +135,8 @@ class ContentViewController extends Controller
         $this->locationService = $locationService;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
         $this->configResolver = $configResolver;
+        $this->repository = $repository;
+        $this->permissionResolver = $permissionResolver;
     }
 
     /**
@@ -484,7 +498,12 @@ class ContentViewController extends Controller
     private function supplyContentReverseRelations(ContentView $view): void
     {
         $contentInfo = $view->getLocation()->getContentInfo();
-        $relations = $this->contentService->loadReverseRelations($contentInfo);
+        $relations = $this->permissionResolver->sudo(
+            function (Repository $repository) use ($contentInfo) {
+                return $repository->getContentService()->loadReverseRelations($contentInfo);
+            },
+            $this->repository
+        );
 
         $view->addParameters(['content_has_reverse_relations' => count($relations) > 0]);
     }
