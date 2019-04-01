@@ -1,7 +1,7 @@
 import AlloyEditor from 'alloyeditor';
 
 export default class EzTableConfig {
-    constructor() {
+    constructor(config) {
         this.name = 'table';
         this.buttons = [
             'ezmoveup',
@@ -13,6 +13,7 @@ export default class EzTableConfig {
             'eztablecolumn',
             'eztablecell',
             'eztableremove',
+            ...config.extraButtons[this.name]
         ];
 
         this.getArrowBoxClasses = AlloyEditor.SelectionGetArrowBoxClasses.table;

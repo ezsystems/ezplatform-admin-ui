@@ -12,12 +12,20 @@
             this.inlineCustomTags = Object.keys(global.eZ.adminUiConfig.richTextCustomTags).filter(
                 (key) => global.eZ.adminUiConfig.richTextCustomTags[key].isInline
             );
+            this.alloyEditorExtraButtons = {
+                'ezadd': [],
+                'link': [],
+                'text': [],
+                'table': [],
+                ...global.eZ.adminUiConfig.alloyEditor.extraButtons
+            };
             this.customTagsToolbars = this.customTags.map((customTag) => {
                 const alloyEditorConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
 
                 return new global.eZ.ezAlloyEditor.ezCustomTagConfig({
                     name: customTag,
                     alloyEditor: alloyEditorConfig,
+                    extraButtons: this.alloyEditorExtraButtons,
                 });
             });
             this.inlineCustomTagsToolbars = this.inlineCustomTags.map((customTag) => {
@@ -26,6 +34,7 @@
                 return new global.eZ.ezAlloyEditor.ezInlineCustomTagConfig({
                     name: customTag,
                     alloyEditor: alloyEditorConfig,
+                    extraButtons: this.alloyEditorExtraButtons,
                 });
             });
             this.customStylesConfigurations = Object.entries(global.eZ.adminUiConfig.richTextCustomStyles).map(
@@ -177,6 +186,7 @@
         }
 
         init(container) {
+            const toolbarProps = {extraButtons: this.alloyEditorExtraButtons};
             const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
                 toolbars: {
                     ezadd: {
@@ -189,28 +199,30 @@
                             'ezembed',
                             'eztable',
                             ...this.customTags,
+                            ...this.alloyEditorExtraButtons['ezadd'],
                         ],
                         tabIndex: 2,
                     },
                     styles: {
                         selections: [
                             ...this.customTagsToolbars,
-                            new window.eZ.ezAlloyEditor.ezLinkConfig(),
+                            new window.eZ.ezAlloyEditor.ezLinkConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezTextConfig({
                                 customStyles: this.customStylesConfigurations,
                                 inlineCustomTags: this.inlineCustomTags,
+                                ...toolbarProps
                             }),
                             ...this.inlineCustomTagsToolbars,
-                            new window.eZ.ezAlloyEditor.ezParagraphConfig({ customStyles: this.customStylesConfigurations }),
-                            new window.eZ.ezAlloyEditor.ezFormattedConfig({ customStyles: this.customStylesConfigurations }),
-                            new window.eZ.ezAlloyEditor.ezCustomStyleConfig({ customStyles: this.customStylesConfigurations }),
-                            new window.eZ.ezAlloyEditor.ezHeadingConfig({ customStyles: this.customStylesConfigurations }),
-                            new window.eZ.ezAlloyEditor.ezListConfig({ customStyles: this.customStylesConfigurations }),
-                            new window.eZ.ezAlloyEditor.ezEmbedInlineConfig(),
-                            new window.eZ.ezAlloyEditor.ezTableConfig(),
-                            new window.eZ.ezAlloyEditor.ezEmbedImageLinkConfig(),
-                            new window.eZ.ezAlloyEditor.ezEmbedImageConfig(),
-                            new window.eZ.ezAlloyEditor.ezEmbedConfig(),
+                            new window.eZ.ezAlloyEditor.ezParagraphConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
+                            new window.eZ.ezAlloyEditor.ezFormattedConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
+                            new window.eZ.ezAlloyEditor.ezCustomStyleConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
+                            new window.eZ.ezAlloyEditor.ezHeadingConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
+                            new window.eZ.ezAlloyEditor.ezListConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
+                            new window.eZ.ezAlloyEditor.ezEmbedInlineConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezTableConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezEmbedImageLinkConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezEmbedImageConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezEmbedConfig(toolbarProps),
                         ],
                         tabIndex: 1,
                     },

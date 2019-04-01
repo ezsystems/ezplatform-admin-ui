@@ -117,6 +117,12 @@ export default class EzConfigBase {
         };
     }
 
+    addExtraButtons(extraButtons = []) {
+        if (extraButtons[this.name]) {
+            this.buttons = [...this.buttons, ...extraButtons[this.name]];
+        }
+    }
+
     /**
      * Returns the arrow box classes for the toolbar. The toolbar is
      * always positioned above its related block and has a special class to

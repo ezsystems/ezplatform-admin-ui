@@ -16,6 +16,8 @@ export default class EzCustomStyleConfig extends EzConfigBase {
             'ezblocktextalignjustify',
             'ezblockremove',
         ];
+
+        this.addExtraButtons(config.extraButtons);
     }
 
     getStyles(customStyles = []) {

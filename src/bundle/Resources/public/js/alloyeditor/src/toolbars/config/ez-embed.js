@@ -1,8 +1,8 @@
 import EzConfigBase from './base';
 
 export default class EzEmbedConfig extends EzConfigBase {
-    constructor() {
-        super();
+    constructor(config) {
+        super(config);
 
         this.name = 'embed';
         this.buttons = [
@@ -15,6 +15,8 @@ export default class EzEmbedConfig extends EzConfigBase {
             'ezembedright',
             'ezblockremove',
         ];
+
+        this.addExtraButtons(config.extraButtons);
     }
 
     /**

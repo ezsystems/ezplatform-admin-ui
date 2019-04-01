@@ -30,6 +30,7 @@ class AlloyEditor implements ProviderInterface
     {
         return [
             'extraPlugins' => $this->getExtraPlugins(),
+            'extraButtons' => $this->getExtraButtons(),
         ];
     }
 
@@ -40,6 +41,18 @@ class AlloyEditor implements ProviderInterface
     {
         if (isset($this->alloyEditorConfiguration['extra_plugins'])) {
             return $this->alloyEditorConfiguration['extra_plugins'];
+        }
+
+        return [];
+    }
+
+    /**
+     * @return array Custom plugins
+     */
+    protected function getExtraButtons(): array
+    {
+        if (isset($this->alloyEditorConfiguration['extra_buttons'])) {
+            return $this->alloyEditorConfiguration['extra_buttons'];
         }
 
         return [];

@@ -1,8 +1,8 @@
 import EzConfigBase from './base';
 
 export default class EzEmbedImageConfig extends EzConfigBase {
-    constructor() {
-        super();
+    constructor(config) {
+        super(config);
 
         this.name = 'embedimage';
         this.buttons = [
@@ -17,6 +17,8 @@ export default class EzEmbedImageConfig extends EzConfigBase {
             'ezembedright',
             'ezblockremove',
         ];
+
+        this.addExtraButtons(config.extraButtons);
     }
 
     /**

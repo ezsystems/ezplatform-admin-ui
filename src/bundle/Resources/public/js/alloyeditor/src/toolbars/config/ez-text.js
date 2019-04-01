@@ -14,6 +14,7 @@ export default class EzTextConfig {
             'ezstrike',
             'ezlink',
             ...config.inlineCustomTags,
+            ...config.extraButtons[this.name],
         ];
 
         this.test = AlloyEditor.SelectionTest.text;
