@@ -47,6 +47,10 @@ class AlloyEditor implements ProviderInterface
     }
 
     /**
+     * This will be deprecated in eZ Platform 3.x.
+     * The alternative and more flexible solution will be introduced.
+     * So you will need to update Online Editor Extra Buttons as part of eZ Platform 3.x upgrade.
+     *
      * @return array Custom plugins
      */
     protected function getExtraButtons(): array
