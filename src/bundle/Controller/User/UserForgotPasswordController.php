@@ -215,7 +215,7 @@ class UserForgotPasswordController extends Controller
     private function updateUserToken(User $user): string
     {
         $struct = new UserTokenUpdateStruct();
-        $struct->hashKey = md5($user->email . microtime(true));
+        $struct->hashKey = bin2hex(random_bytes(16));
         $date = new DateTime();
         $date->add(new DateInterval($this->tokenIntervalSpec));
         $struct->time = $date;
