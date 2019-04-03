@@ -117,7 +117,7 @@ export default class EzConfigBase {
         };
     }
 
-    addExtraButtons(extraButtons = []) {
+    addExtraButtons(extraButtons = {}) {
         if (extraButtons[this.name]) {
             this.buttons = [...this.buttons, ...extraButtons[this.name]];
         }
