@@ -3,13 +3,13 @@
 {% trans_default_domain 'user_settings' %}
 
 {% block breadcrumbs %}
-    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/part/breadcrumbs.html.twig' with { items: [
         { value: 'list.title'|trans|desc('User Settings') }
     ]} %}
 {% endblock %}
 
 {% block page_title %}
-    {% include '@ezdesign/parts/page_title.html.twig' with {
+    {% include '@ezdesign/part/page_title.html.twig' with {
         title: 'list.title'|trans|desc('User Settings'),
         iconName: 'user'
     } %}

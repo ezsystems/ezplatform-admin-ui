@@ -17,7 +17,7 @@
 
         <div class="px-0 ez-content-container">
             <section class="container mt-5">
-                {% include '@ezdesign/parts/page_title.html.twig' with { title: 'search.headline'|trans|desc('Search'), iconName: 'search' } %}
+                {% include '@ezdesign/part/page_title.html.twig' with { title: 'search.headline'|trans|desc('Search'), iconName: 'search' } %}
                 {% include '@ezdesign/admin/search/search_form.html.twig' with { form: form } %}
 
                 {% if results is defined %}
@@ -77,7 +77,7 @@
                         {% endif %}
                     {% endif %}
 
-                    {% form_theme form_edit '@ezdesign/parts/form/flat_widgets.html.twig' %}
+                    {% form_theme form_edit '@ezdesign/part/form/flat_widgets.html.twig' %}
 
                     {{ form_start(form_edit, {
                         'action': path('ezplatform.content.edit'),

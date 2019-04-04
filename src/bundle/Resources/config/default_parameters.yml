@@ -6,23 +6,23 @@ parameters:
     ezsettings.global.system_info_view:
         pjax_tab:
             composer:
-                template: '@@ezdesign/admin/systeminfo/composer.html.twig'
+                template: '@@ezdesign/admin/system_info/composer.html.twig'
                 match:
                     SystemInfo\Identifier: 'composer'
             database:
-                template: '@@ezdesign/admin/systeminfo/database.html.twig'
+                template: '@@ezdesign/admin/system_info/database.html.twig'
                 match:
                     SystemInfo\Identifier: 'database'
             hardware:
-                template: '@@ezdesign/admin/systeminfo/hardware.html.twig'
+                template: '@@ezdesign/admin/system_info/hardware.html.twig'
                 match:
                     SystemInfo\Identifier: 'hardware'
             php:
-                template: '@@ezdesign/admin/systeminfo/php.html.twig'
+                template: '@@ezdesign/admin/system_info/php.html.twig'
                 match:
                     SystemInfo\Identifier: 'php'
             symfony_kernel:
-                template: '@@ezdesign/admin/systeminfo/symfony_kernel.html.twig'
+                template: '@@ezdesign/admin/system_info/symfony_kernel.html.twig'
                 match:
                     SystemInfo\Identifier: 'symfony_kernel'
 
@@ -61,7 +61,7 @@ parameters:
     ezsettings.default.content_type.default-config:
         thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#file'
 
-    ezplatform.content_view.tabs.default_template: '@@ezdesign/parts/tab/default.html.twig'
+    ezplatform.content_view.tabs.default_template: '@@ezdesign/part/tab/default.html.twig'
 
     ezplatform.multifile_upload.location.mappings: []
 

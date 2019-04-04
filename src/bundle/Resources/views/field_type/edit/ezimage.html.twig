@@ -1,0 +1,44 @@
+{% trans_default_domain 'ezrepoforms_content' %}
+
+{% use '@ezdesign/field_type/edit/binary_base.html.twig' %}
+
+{%- block ezplatform_fieldtype_ezimage_row -%}
+    {% set preview_block_name = 'ezimage_preview' %}
+    {% set max_file_size = min(form.parent.vars.value.fieldDefinition.validatorConfiguration.FileSizeValidator.maxFileSize * 1024 * 1024, max_upload_size|round) %}
+    {% set attr = attr|merge({'accept': 'image/*'}) %}
+    {{ block('binary_base_row') }}
+{%- endblock -%}
+
+{% block ezimage_preview %}
+    {% form_theme form '@ezdesign/field_type/edit/binary_base_fields.html.twig' %}
+
+    <div class="ez-field-edit-preview">
+        <div class="ez-field-edit-preview__visual">
+            <div class="ez-field-edit-preview__media-wrapper">
+                <img
+                    class="ez-field-edit-preview__media"
+                    src="{{ form.parent.vars.value.value.uri }}"
+                    alt="{{ 'content.field_type.ezimage.img_alt'|trans({'%label%': form.vars.label})|desc("Image stored in field '%label%'") }}" />
+            </div>
+            <div class="ez-field-edit-preview__details">
+                <span class="ez-field-edit-preview__file-name">{{ form.parent.vars.value.value.fileName }}</span>
+                <span class="ez-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</span>
+            </div>
+            <div class="ez-field-edit-preview__image-alt">
+                {{ form_row(form.alternativeText) }}
+            </div>
+        </div>
+        <div class="ez-field-edit-preview__actions">
+            <button type="button" class="ez-field-edit-preview__action--remove">
+                <svg class="ez-icon">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
+                </svg>
+            </button>
+            <a class="ez-field-edit-preview__action--preview" href="{{ form.parent.vars.value.value.uri }}" target="_blank">
+                <svg class="ez-icon">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab"></use>
+                </svg>
+            </a>
+        </div>
+    </div>
+{% endblock %}

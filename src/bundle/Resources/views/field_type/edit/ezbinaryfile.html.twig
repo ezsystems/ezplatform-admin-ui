@@ -1,0 +1,32 @@
+{% trans_default_domain 'ezrepoforms_content' %}
+
+{% use '@ezdesign/field_type/edit/binary_base.html.twig' %}
+
+{%- block ezplatform_fieldtype_ezbinaryfile_row -%}
+    {% set preview_block_name = 'ezbinaryfile_preview' %}
+    {% set max_file_size = min(form.parent.vars.value.fieldDefinition.validatorConfiguration.FileSizeValidator.maxFileSize * 1024 * 1024, max_upload_size)|round %}
+    {{ block('binary_base_row') }}
+{%- endblock -%}
+
+{% block ezbinaryfile_preview %}
+    <div class="ez-field-edit-preview">
+        <div class="ez-field-edit-preview__visual">
+            <div class="ez-field-edit-preview__file-icon"></div>
+            <div class="ez-field-edit-preview__file-name">{{ form.parent.vars.value.value.fileName }}</div>
+            <div class="ez-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</div>
+        </div>
+        <div class="ez-field-edit-preview__actions">
+            <a class="ez-field-edit-preview__action--preview" href="{{ form.parent.vars.value.value.uri }}"
+               title="{{ 'ezbinaryfile.action.preview'|trans|desc('Preview') }}" download>
+                <svg class="ez-icon">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#download"></use>
+                </svg>
+            </a>
+            <button type="button" class="ez-field-edit-preview__action--remove" title="{{ 'ezbinaryfile.action.remove'|trans|desc('Remove') }}">
+                <svg class="ez-icon">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+{% endblock %}

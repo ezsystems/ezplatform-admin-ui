@@ -5,7 +5,7 @@
 {% trans_default_domain 'role' %}
 
 {% block breadcrumbs_admin %}
-    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/part/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans|desc('Roles') },
         { value: 'role.breadcrumb.edit'|trans({'%identifier%': role.identifier })|desc('Editing Role: %identifier%') }
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block page_title_admin %}
-    {% include '@ezdesign/parts/page_title.html.twig' with {
+    {% include '@ezdesign/part/page_title.html.twig' with {
         title: 'role.view.edit.title'|trans({'%identifier%': role.identifier})|desc('Editing Role: %identifier%'),
         iconName: 'roles'
     } %}
@@ -37,5 +37,5 @@
 
 {% block right_sidebar %}
     {% set role_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.role_edit.sidebar_right', [], {'role': role}) %}
-    {{ knp_menu_render(role_edit_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(role_edit_sidebar_right, {'template': '@ezdesign/part/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

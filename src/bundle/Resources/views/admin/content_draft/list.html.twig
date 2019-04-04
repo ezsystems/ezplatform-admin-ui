@@ -18,7 +18,7 @@
 
         <div class="px-0 ez-content-container">
             <section class="container mt-5">
-                {% include '@ezdesign/parts/page_title.html.twig' with {
+                {% include '@ezdesign/part/page_title.html.twig' with {
                     title: 'drafts.list'|trans|desc('Drafts'),
                     iconName: 'content-draft'
                 } %}
@@ -32,7 +32,7 @@
                         }
                     }) }}
 
-                    {% include '@ezdesign/parts/table_header.html.twig' with {
+                    {% include '@ezdesign/part/table_header.html.twig' with {
                         ground: 'mt-3',
                         headerText: 'drafts.table.header'|trans|desc('Drafts') ~ ' (' ~ pager.count ~ ')',
                         tools: macros.table_header_tools(form_remove)
