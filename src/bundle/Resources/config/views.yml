@@ -12,12 +12,12 @@ system:
             preview_ezobjectrelationlist_row:
                 default:
                     controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
-                    template: '@ezdesign\fieldtypes\preview\ezobjectrelationlist_row.html.twig'
+                    template: '@ezdesign\field_type\preview\ezobjectrelationlist_row.html.twig'
                     match: true
             preview_ezimageasset:
                 default:
                     controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
-                    template: '@ezdesign\fieldtypes\preview\ezimageasset.html.twig'
+                    template: '@ezdesign\field_type\preview\ezimageasset.html.twig'
                     match: true
 
         content_edit_view:
