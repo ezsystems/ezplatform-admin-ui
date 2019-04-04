@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block breadcrumbs_admin %}
-    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/part/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
         { url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }), value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })|desc('%identifier%') },
@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block page_title_admin %}
-    {% include '@ezdesign/parts/page_title.html.twig' with {
+    {% include '@ezdesign/part/page_title.html.twig' with {
         title: 'content_type.view.create.title'|trans|desc('Creating a new Content Type'),
         iconName: 'content-type'
     } %}
@@ -129,7 +129,7 @@
 
 {% block right_sidebar %}
     {% set content_type_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_create.sidebar_right', [], {'save_id': form.publishContentType.vars.id, 'group': content_type_group}) %}
-    {{ knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/part/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
 {% block javascripts %}

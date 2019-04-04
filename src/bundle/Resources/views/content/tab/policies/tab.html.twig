@@ -1,6 +1,6 @@
 {% trans_default_domain 'policy' %}
 {% import _self as tab %}
-{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.policies.policies'|trans|desc('Policies') } %}
+{% include '@ezdesign/part/table_header.html.twig' with { headerText: 'tab.policies.policies'|trans|desc('Policies') } %}
 
 {% if policies_pager.currentPageResults is not empty %}
     {{  include('@ezdesign/content/tab/policies/table.html.twig', {

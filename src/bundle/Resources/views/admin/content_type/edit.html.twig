@@ -6,7 +6,7 @@
 {% block body_class %}ez-admin-edit{% endblock %}
 
 {% block breadcrumbs_admin %}
-    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/part/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
         { url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }), value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })|desc('%identifier%') },
@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block page_title_admin %}
-    {% include '@ezdesign/parts/page_title.html.twig' with {
+    {% include '@ezdesign/part/page_title.html.twig' with {
         title: 'content_type.view.edit.title'|trans({ '%name%': content_type.name })|desc('Editing Content Type: %name%'),
         content_type_identifier: content_type.identifier
     } %}
@@ -26,7 +26,7 @@
     {% set language_code = language_code|default(content_type.mainLanguageCode) %}
     {% set is_translation = form.vars.data.languageCode != content_type.mainLanguageCode %}
     {% if is_translation %}
-        {% include '@ezdesign/admin/content_type/parts/nontranslatable_fields_disabled.html.twig' %}
+        {% include '@ezdesign/admin/content_type/part/nontranslatable_fields_disabled.html.twig' %}
     {% endif %}
     <section class="container mt-4 px-5">
         <div class="card ez-card">
@@ -140,7 +140,7 @@
 
 {% block right_sidebar %}
     {% set content_type_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_edit.sidebar_right', [], {'form_view': form, 'content_type': content_type}) %}
-    {{ knp_menu_render(content_type_edit_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(content_type_edit_sidebar_right, {'template': '@ezdesign/part/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
 {% block javascripts %}

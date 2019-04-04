@@ -1,4 +1,4 @@
 parameters:
     # Limitation mappers
-    ezrepoforms.limitation.null.template: "@@ezdesign/Limitation/null_limitation_values.html.twig"
-    ezrepoforms.limitation.udw.template: "@@ezdesign/Limitation/udw_limitation_value.html.twig"
+    ezrepoforms.limitation.null.template: "@@ezdesign/limitation/null_limitation_values.html.twig"
+    ezrepoforms.limitation.udw.template: "@@ezdesign/limitation/udw_limitation_value.html.twig"

@@ -7,13 +7,13 @@
 {% block title %}{{ 'url.list'|trans }}{% endblock %}
 
 {%- block breadcrumbs -%}
-    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/part/breadcrumbs.html.twig' with { items: [
         { value: 'url.list'|trans|desc('Link manager') }
     ]} %}
 {%- endblock -%}
 
 {%- block page_title -%}
-    {% include '@ezdesign/parts/page_title.html.twig' with {
+    {% include '@ezdesign/part/page_title.html.twig' with {
         title: 'url.list'|trans|desc('Link manager'),
         iconName: 'link'
     } %}

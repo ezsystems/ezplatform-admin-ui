@@ -1,0 +1,23 @@
+{% extends "@ezdesign/layout.html.twig" %}
+
+{% trans_default_domain 'systeminfo' %}
+
+{% block body_class %}ez-info-view{% endblock %}
+
+{% block breadcrumbs %}
+    {% include '@ezdesign/part/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { value: 'systeminfo'|trans|desc('System Information') }
+    ]} %}
+{% endblock %}
+
+{% block page_title %}
+    {% include '@ezdesign/part/page_title.html.twig' with {
+        title: 'systeminfo'|trans|desc('System Information'),
+        iconName: 'information'
+    } %}
+{% endblock %}
+
+{% block content %}
+    {{ ez_platform_tabs('systeminfo', {}, '@ezdesign/part/tab/system_info.html.twig') }}
+{% endblock %}

@@ -1,6 +1,6 @@
 {% trans_default_domain 'locationview' %}
 
-{% form_theme form_translation_remove '@ezdesign/parts/form/flat_widgets.html.twig' %}
+{% form_theme form_translation_remove '@ezdesign/part/form/flat_widgets.html.twig' %}
 
 {% import _self as tab %}
 {% set can_translate = can_translate is defined ? can_translate : true %}
@@ -11,7 +11,7 @@
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations' }
         }) }}
     {% endif %}
-    {% include '@ezdesign/parts/table_header.html.twig' with {
+    {% include '@ezdesign/part/table_header.html.twig' with {
         headerText: 'tab.translations.translation_manger'|trans|desc('Translation manager'),
         tools: tab.table_header_tools(form_translation_remove, can_translate)
     } %}

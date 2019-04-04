@@ -7,7 +7,7 @@ system:
             full:
                 default:
                     controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
-                    template: '@ezdesign/content/locationview.html.twig'
+                    template: '@ezdesign/content/location_view.html.twig'
                     match: true
             preview_ezobjectrelationlist_row:
                 default:

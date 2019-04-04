@@ -7,7 +7,7 @@
 {% block body_class %}ez-language-view{% endblock %}
 
 {% block breadcrumbs %}
-    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/part/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.language.list'), value: 'language.list'|trans|desc('Languages') },
         { value: 'language.view.identifier'|trans({ '%language%': language.name })|desc('%language%') }
@@ -17,7 +17,7 @@
 {% block title %}{{ 'language.view.title.identifier'|trans({ '%language%': language.name })|desc('Language "%language%"') }}{% endblock %}
 
 {% block page_title %}
-    {% include '@ezdesign/parts/page_title.html.twig' with {
+    {% include '@ezdesign/part/page_title.html.twig' with {
         title: 'language.view.title.identifier'|trans({ '%language%': language.name })|desc('Language "%language%"'),
         iconName: 'languages'
     } %}

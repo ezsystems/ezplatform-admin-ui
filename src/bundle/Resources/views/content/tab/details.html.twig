@@ -1,6 +1,6 @@
 {% trans_default_domain 'locationview' %}
 
-{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.content_details'|trans()|desc('Content details') } %}
+{% include '@ezdesign/part/table_header.html.twig' with { headerText: 'tab.details.content_details'|trans()|desc('Content details') } %}
 
 {% form_theme form_location_update '@ezdesign/form_fields.html.twig' %}
 
@@ -43,7 +43,7 @@
     </table>
 </div>
 
-{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.technical_details'|trans()|desc('Technical details') } %}
+{% include '@ezdesign/part/table_header.html.twig' with { headerText: 'tab.details.technical_details'|trans()|desc('Technical details') } %}
 
 <div class="ez-scrollable-table-wrapper">
     <table class="table">
@@ -67,7 +67,7 @@
 </div>
 
 {% if can_see_section %}
-    {% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.section_details'|trans()|desc('Section details') } %}
+    {% include '@ezdesign/part/table_header.html.twig' with { headerText: 'tab.details.section_details'|trans()|desc('Section details') } %}
 
     <div class="ez-scrollable-table-wrapper">
         <table class="table">
@@ -101,7 +101,7 @@
     </div>
 {% endif %}
 
-{% include '@ezdesign/parts/table_header.html.twig' with { headerText: 'tab.details.state_details'|trans()|desc('State details') } %}
+{% include '@ezdesign/part/table_header.html.twig' with { headerText: 'tab.details.state_details'|trans()|desc('State details') } %}
 
 <div class="ez-scrollable-table-wrapper">
     <table class="table">
@@ -141,7 +141,7 @@
     </table>
 </div>
 
-{% include '@ezdesign/parts/table_header.html.twig' with {
+{% include '@ezdesign/part/table_header.html.twig' with {
     headerText: 'tab.details.sub_items_sorting_order'|trans|desc('Sub-items sorting order'),
     ground: 'ground-base'
 } %}
