@@ -206,6 +206,17 @@ class UtilityContext extends MinkContext
     }
 
     /**
+     * There are the cases, when page is loaded, so Selenium build-in wait passes, but there still is some JS processing.
+     * If at the same time there is no specific thing to wait for after taking action, then we need this last resort.
+     *
+     * @param int $timeoutSeconds Timeout
+     */
+    public function waitForAjax(int $timeoutSeconds): void
+    {
+        $this->getSession()->wait($timeoutSeconds, '(0 === jQuery.active)');
+    }
+
+    /**
      * Adopted Mink find function to find one element that might still be loading.
      *
      * @param string $selector CSS selector for the element
