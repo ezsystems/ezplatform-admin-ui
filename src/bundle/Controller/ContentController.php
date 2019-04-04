@@ -516,6 +516,13 @@ class ContentController extends Controller
             'editLanguagesLimitationValues' => $canEdit ? $editLanguagesLimitationValues : [],
         ]);
 
+        // Disable HTTP cache
+        $response->setPrivate();
+        $response->setMaxAge(0);
+        $response->setSharedMaxAge(0);
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->headers->addCacheControlDirective('no-store', true);
+
         return $response;
     }
 
