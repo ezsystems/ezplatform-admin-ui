@@ -30,6 +30,7 @@ class AlloyEditor implements ProviderInterface
     {
         return [
             'extraPlugins' => $this->getExtraPlugins(),
+            'extraButtons' => $this->getExtraButtons(),
         ];
     }
 
@@ -38,10 +39,22 @@ class AlloyEditor implements ProviderInterface
      */
     protected function getExtraPlugins(): array
     {
-        if (isset($this->alloyEditorConfiguration['extra_plugins'])) {
-            return $this->alloyEditorConfiguration['extra_plugins'];
-        }
+        return $this->alloyEditorConfiguration['extra_plugins'] ?? [];
+    }
 
-        return [];
+    /**
+     * @deprecated 3.0.0 The alternative and more flexible solution will be introduced.
+     * @deprecated 3.0.0 So you will need to update Online Editor Extra Buttons as part of eZ Platform 3.x upgrade.
+     *
+     * @return array Custom buttons
+     */
+    protected function getExtraButtons(): array
+    {
+        trigger_error(
+            '"ezrichtext.alloy_editor.extra_buttons" is deprecated since v2.5.1. There will be new and more flexible solution to manage buttons in Online Editor in 3.0.0',
+            E_USER_DEPRECATED
+        );
+
+        return $this->alloyEditorConfiguration['extra_buttons'] ?? [];
     }
 }

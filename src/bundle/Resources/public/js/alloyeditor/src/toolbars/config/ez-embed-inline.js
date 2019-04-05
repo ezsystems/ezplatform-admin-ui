@@ -3,11 +3,13 @@ import EzConfigBase from './base';
 const EMBED_INLINE_NAME = 'ezembedinline';
 
 export default class EzEmbedInlineConfig extends EzConfigBase {
-    constructor(props) {
-        super(props);
+    constructor(config) {
+        super(config);
 
         this.name = 'embedinline';
         this.buttons = ['ezembedupdate', 'ezblockremove'];
+
+        this.addExtraButtons(config.extraButtons);
     }
 
     /**

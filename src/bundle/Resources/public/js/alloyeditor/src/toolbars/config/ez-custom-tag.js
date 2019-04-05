@@ -21,6 +21,8 @@ export default class EzCustomTagConfig extends EzConfigBase {
         this.name = config.name;
         this.buttons = buttons;
 
+        this.addExtraButtons(config.extraButtons);
+
         this.test = this.test.bind(this);
     }
 

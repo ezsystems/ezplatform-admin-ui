@@ -17,6 +17,8 @@ export default class EzParagraphConfig extends EzConfgiFixedBase {
             'ezblocktextalignjustify',
             'ezblockremove',
         ];
+
+        this.addExtraButtons(config.extraButtons);
     }
 
     /**

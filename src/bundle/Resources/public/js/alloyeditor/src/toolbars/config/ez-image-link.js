@@ -1,11 +1,13 @@
 import EzConfigBase from './base';
 
 export default class EzEmbedImageLinkConfig extends EzConfigBase {
-    constructor() {
-        super();
+    constructor(config) {
+        super(config);
 
         this.name = 'embedimagelink';
         this.buttons = ['ezimagelink'];
+
+        this.addExtraButtons(config.extraButtons);
     }
 
     /**
