@@ -11,6 +11,7 @@
 
     &__spinner {
         height: calculateRem(22px);
+        line-height: 0;
     }
 
     &__remove-btn {
@@ -21,5 +22,6 @@
         border: 0;
         padding: 0;
         outline: none;
+        line-height: 0;
     }
 }

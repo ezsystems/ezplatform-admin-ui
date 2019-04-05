@@ -42,3 +42,13 @@ system:
                 image_asset:
                     multiple: false
                     visible_tabs: ['browse', 'search', 'bookmarks']
+                single_user:
+                    multiple: false
+                multiple_user:
+                    multiple: true
+                single_user_group:
+                    allowed_content_types: ['user_group']
+                    multiple: false
+                multiple_user_group:
+                    allowed_content_types: ['user_group']
+                    multiple: true

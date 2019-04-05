@@ -251,6 +251,16 @@
         <target state="new">Limitations</target>
         <note>key: role_assignment.view.add.panel.limitations.title</note>
       </trans-unit>
+      <trans-unit id="1ee375a8da2c2fe9b5b0a9c6b12bba981dfdb895" resname="role_assignment.view.add.panel.users_and_groups.select_groups_btn.label">
+        <source>Select groups</source>
+        <target state="new">Select groups</target>
+        <note>key: role_assignment.view.add.panel.users_and_groups.select_groups_btn.label</note>
+      </trans-unit>
+      <trans-unit id="f26210f27528dbbea87cf71c5479a0afd713bece" resname="role_assignment.view.add.panel.users_and_groups.select_users_btn.label">
+        <source>Select users</source>
+        <target state="new">Select users</target>
+        <note>key: role_assignment.view.add.panel.users_and_groups.select_users_btn.label</note>
+      </trans-unit>
       <trans-unit id="f9465b09774c22747e887ffe9e6300fd02420546" resname="role_assignment.view.add.panel.users_and_groups.title">
         <source>Users and Groups</source>
         <target state="new">Users and Groups</target>
