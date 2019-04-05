@@ -18,6 +18,7 @@
             locationPath: mfuContainer.dataset.parentLocationPath,
             language: mfuContainer.dataset.parentContentLanguage,
         },
+        currentLanguage: mfuContainer.dataset.currentLanguage,
     };
     const handleEditItem = (content) => {
         const contentId = content._id;
