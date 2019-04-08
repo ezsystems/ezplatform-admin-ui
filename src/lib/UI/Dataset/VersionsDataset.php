@@ -73,15 +73,18 @@ class VersionsDataset
 
     /**
      * @param int $currentVersionNo
+     * @param string $languageCode
      *
      * @return array
      */
-    public function getConflictedDraftVersions(int $currentVersionNo): array
+    public function getConflictedDraftVersions(int $currentVersionNo, string $languageCode): array
     {
         return $this->filterVersions(
             $this->data,
-            function (VersionInfo $versionInfo) use ($currentVersionNo) {
-                return $versionInfo->isDraft() && $versionInfo->versionNo > $currentVersionNo;
+            function (VersionInfo $versionInfo) use ($currentVersionNo, $languageCode) {
+                return $versionInfo->isDraft()
+                    && $versionInfo->versionNo > $currentVersionNo
+                    && $versionInfo->initialLanguageCode === $languageCode;
             }
         );
     }

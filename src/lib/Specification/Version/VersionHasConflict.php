@@ -15,15 +15,20 @@ use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
 
 class VersionHasConflict extends AbstractSpecification
 {
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
+    /** @var string */
+    private $languageCode;
+
     /**
-     * @param ContentService $contentService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param string $languageCode
      */
-    public function __construct(ContentService $contentService)
+    public function __construct(ContentService $contentService, string $languageCode)
     {
         $this->contentService = $contentService;
+        $this->languageCode = $languageCode;
     }
 
     /**
@@ -40,7 +45,10 @@ class VersionHasConflict extends AbstractSpecification
         $versions = $this->contentService->loadVersions($versionInfo->getContentInfo());
 
         foreach ($versions as $checkedVersionInfo) {
-            if ($checkedVersionInfo->versionNo > $versionInfo->versionNo && $checkedVersionInfo->isPublished()) {
+            if ($checkedVersionInfo->versionNo > $versionInfo->versionNo
+                && $checkedVersionInfo->isPublished()
+                && $checkedVersionInfo->initialLanguageCode === $this->languageCode
+            ) {
                 return true;
             }
         }

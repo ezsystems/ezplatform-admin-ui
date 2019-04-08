@@ -10,26 +10,30 @@ namespace EzSystems\EzPlatformAdminUi\Specification\Content;
 
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
 
 class ContentDraftHasConflict extends AbstractSpecification
 {
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
+    /** @var string */
+    private $languageCode;
+
     /**
-     * @param ContentService $contentService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param string $languageCode
      */
-    public function __construct(ContentService $contentService)
+    public function __construct(ContentService $contentService, string $languageCode)
     {
         $this->contentService = $contentService;
+        $this->languageCode = $languageCode;
     }
 
     /**
      * Checks if Content has draft conflict.
      *
-     * @param ContentInfo $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
      *
      * @return bool
      *
@@ -40,7 +44,10 @@ class ContentDraftHasConflict extends AbstractSpecification
         $versions = $this->contentService->loadVersions($contentInfo);
 
         foreach ($versions as $checkedVersionInfo) {
-            if ($checkedVersionInfo->isDraft() && $checkedVersionInfo->versionNo > $contentInfo->currentVersionNo) {
+            if ($checkedVersionInfo->isDraft()
+                && $checkedVersionInfo->versionNo > $contentInfo->currentVersionNo
+                && $checkedVersionInfo->initialLanguageCode === $this->languageCode
+            ) {
                 return true;
             }
         }

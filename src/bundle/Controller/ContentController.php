@@ -12,6 +12,7 @@ use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
@@ -190,6 +191,7 @@ class ContentController extends Controller
 
                 if (!$versionInfo->isDraft()) {
                     $contentDraft = $this->contentService->createContentDraft($contentInfo, $versionInfo);
+                    $this->updateDraftInitialLanguage($contentDraft, $language);
                     $versionNo = $contentDraft->getVersionInfo()->versionNo;
 
                     $this->notificationHandler->success(
@@ -455,5 +457,31 @@ class ContentController extends Controller
         }
 
         return $result instanceof Response ? $result : $this->redirectToRoute('ezplatform.dashboard');
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $contentDraft
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException
+     * @throws \eZ\Publish\API\Repository\Exceptions\ContentValidationException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    private function updateDraftInitialLanguage(
+        Content $contentDraft,
+        Language $language
+    ): void {
+        if ($language->languageCode === $contentDraft->versionInfo->initialLanguageCode) {
+            return;
+        }
+
+        $contentUpdateStruct = $this->contentService->newContentUpdateStruct();
+
+        $contentUpdateStruct->initialLanguageCode = $language->languageCode;
+        $contentUpdateStruct->creatorId = $contentDraft->versionInfo->creatorId;
+
+        $this->contentService->updateContent($contentDraft->versionInfo, $contentUpdateStruct);
     }
 }

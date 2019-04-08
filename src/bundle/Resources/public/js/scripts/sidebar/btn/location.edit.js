@@ -4,7 +4,6 @@
     const form = editActions.querySelector('form');
     const contentIdInput = form.querySelector('#content_edit_content_info') || form.querySelector('#user_edit_content_info');
     const contentId = contentIdInput.value;
-    const checkVersionDraftLink = global.Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId });
     const resetRadioButtons = () =>
         btns.forEach((btn) => {
             btn.checked = false;
@@ -49,6 +48,10 @@
         attachModalListeners(wrapper);
     };
     const changeHandler = () => {
+        const checkedBtn = btns.find((btn) => btn.checked);
+        const languageCode = checkedBtn.value;
+        const checkVersionDraftLink = global.Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode });
+
         fetch(checkVersionDraftLink, {
             credentials: 'same-origin',
         }).then((response) => {

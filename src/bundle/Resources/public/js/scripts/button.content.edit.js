@@ -15,7 +15,7 @@
             'input[name="' + versionEditFormName + '[version_info][version_no]"]'
         );
         const languageInput = versionEditForm.querySelector('#' + versionEditFormName + '_language_' + languageCode);
-        const checkVersionDraftLink = global.Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId });
+        const checkVersionDraftLink = global.Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode });
         const submitVersionEditForm = () => {
             contentInfoInput.value = contentId;
             versionInfoContentInfoInput.value = contentId;
