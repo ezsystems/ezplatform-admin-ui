@@ -62,9 +62,8 @@ class RequestAttributesListener implements EventSubscriberInterface
 
         $parameterBag = $event->getParameters();
 
-        if ($parameterBag->has('locationId') && $request->get('_route') === '_ezpublishLocation') {
+        if ($parameterBag->has('locationId') && null !== $parameterBag->get('locationId')) {
             $location = $this->loadLocation($parameterBag->get('locationId'));
-            $parameterBag->remove('locationId');
             $parameterBag->set('location', $location);
         }
 
