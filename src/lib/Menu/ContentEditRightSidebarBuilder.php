@@ -121,7 +121,10 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
                     'attributes' => $canEdit && $canPublish
                         ? $publishAttributes
                         : array_merge($publishAttributes, self::BTN_DISABLED_ATTR),
-                    'extras' => ['icon' => 'publish'],
+                    'extras' => [
+                        'icon' => 'publish',
+                        'orderNumber' => 1,
+                    ],
                 ]
             ),
             self::ITEM__SAVE_DRAFT => $this->createMenuItem(
@@ -130,7 +133,10 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
                     'attributes' => $canEdit
                         ? $editAttributes
                         : array_merge($editAttributes, self::BTN_DISABLED_ATTR),
-                    'extras' => ['icon' => 'save'],
+                    'extras' => [
+                        'icon' => 'save',
+                        'orderNumber' => 40,
+                    ],
                 ]
             ),
         ];
@@ -148,7 +154,10 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
                 'attributes' => $canDelete
                     ? $deleteAttributes
                     : array_merge($deleteAttributes, self::BTN_DISABLED_ATTR),
-                'extras' => ['icon' => 'circle-close'],
+                'extras' => [
+                    'icon' => 'circle-close',
+                    'orderNumber' => 60,
+                ],
             ]
         );
 
@@ -219,7 +228,10 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
                 'attributes' => $canPreview && !empty($siteaccesses)
                     ? $previewAttributes
                     : array_merge($previewAttributes, self::BTN_DISABLED_ATTR),
-                'extras' => ['icon' => 'view-desktop'],
+                'extras' => [
+                    'icon' => 'view-desktop',
+                    'orderNumber' => 50,
+                ],
             ]
         );
     }
