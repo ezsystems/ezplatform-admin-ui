@@ -74,16 +74,39 @@ class ContentViewContext extends BusinessContext
     }
 
     /**
-     * @Then there's no :itemName :itemType on :folder Sub-items list
+     * Check if item has or not sub-item, according to $itemShouldExist param.
+     *
+     * @param string $itemName
+     * @param string $itemType
+     * @param string $containerName
+     * @param bool $itemShouldExist
      */
-    public function verifyThereIsNoItemInSubItemList(string $itemName, string $itemType, string $folder): void
+    private function verifyItemExistenceInSubItemList(string $itemName, string $itemType, string $containerName, bool $itemShouldExist): void
     {
-        $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $folder);
+        $isItemInTable = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $containerName)
+            ->subItemList->table->isElementInTable($itemName, $itemType);
 
-        Assert::assertFalse(
-            $contentItemPage->subItemList->table->isElementInTable($itemName, $itemType),
-            sprintf('%s "%s" shouldn\'t be on %s Sub-items list', $itemType, $itemName, $folder)
-        );
+        $itemShouldExistString = $itemShouldExist ? '' : 'n\'t';
+
+        if ($isItemInTable !== $itemShouldExist) {
+            Assert::fail(sprintf('%s "%s" should%s be on %s Sub-items list', $itemType, $itemName, $itemShouldExistString, $containerName));
+        }
+    }
+
+    /**
+     * @Then there's :itemName :itemType on :containerName Sub-items list
+     */
+    public function verifyThereIsItemInSubItemList(string $itemName, string $itemType, string $containerName): void
+    {
+        $this->verifyItemExistenceInSubitemList($itemName, $itemType, $containerName, true);
+    }
+
+    /**
+     * @Then there's no :itemName :itemType on :containerName Sub-items list
+     */
+    public function verifyThereIsNoItemInSubItemList(string $itemName, string $itemType, string $containerName): void
+    {
+        $this->verifyItemExistenceInSubitemList($itemName, $itemType, $containerName, false);
     }
 
     /**

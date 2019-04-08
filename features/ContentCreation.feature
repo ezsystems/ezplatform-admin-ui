@@ -245,6 +245,26 @@ Scenario: Content can be copied
     And article main content field equals "Test article intro"
     And going to "Media/Images" there is a "Test Article edited4" "Article" on Sub-items list
 
+@javascript @common 
+Scenario: Subtree copying can be cancelled
+  Given I navigate to content "Images" of type "Folder" in "Media"
+  When I click on the edit action bar button "Copy Subtree"
+    And I select content "Media/Files" through UDW
+    And I close the UDW window
+  Then I should be on content container page "Images" of type "Folder" in "Media"
+    And going to "Media/Files" there is no "Images" "Folder" on Sub-items list
+
+
+@javascript @common
+Scenario: Subtree can be copied
+  Given I navigate to content "Images" of type "Folder" in "Media"
+  When I click on the edit action bar button "Copy Subtree"
+    And I select content "Media/Files" through UDW
+    And I confirm the selection in UDW
+  Then success notification that "Subtree 'Images' copied to location 'Files'" appears
+    And I should be on content container page "Images" of type "Folder" in "Media/Files"
+    And there's "Test Article edited4" "Article" on "Images" Sub-items list
+
 @javascript @common
 Scenario: Content can be moved to trash from non-root location
   Given I navigate to content "Test Article edited4" of type "Article" in "Media/Images"
