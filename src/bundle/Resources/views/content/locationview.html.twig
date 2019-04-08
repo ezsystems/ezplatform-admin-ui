@@ -17,10 +17,12 @@
 
 {% block content %}
     <div id="ez-mfu"
-         data-parent-content-language="{{ content.versionInfo.initialLanguageCode }}"
-         data-parent-location-path="{{ location.pathString }}"
-         data-parent-content-type-identifier="{{ contentType.identifier }}"
-         data-parent-content-type-id="{{ contentType.id }}"></div>
+        data-parent-content-language="{{ content.versionInfo.initialLanguageCode }}"
+        data-parent-location-path="{{ location.pathString }}"
+        data-parent-content-type-identifier="{{ contentType.identifier }}"
+        data-parent-content-type-id="{{ contentType.id }}"
+        data-current-language="{{ app.request.get('languageCode') ?: content.prioritizedFieldLanguageCode }}"></div>
+    <div class="row align-items-stretch ez-main-row">
 
     <div class="row align-items-stretch ez-main-row">
         {% block left_sidebar %}
