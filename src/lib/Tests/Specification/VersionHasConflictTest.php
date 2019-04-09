@@ -30,7 +30,7 @@ class VersionHasConflictTest extends TestCase
                 $this->createVersionInfo(true, 4),
             ]);
 
-        $versionHasConflict = new VersionHasConflict($contentServiceMock);
+        $versionHasConflict = new VersionHasConflict($contentServiceMock, 'eng-GB');
 
         self::assertFalse($versionHasConflict->isSatisfiedBy($this->createVersionInfo(false, 5)));
     }
@@ -47,9 +47,25 @@ class VersionHasConflictTest extends TestCase
                 $this->createVersionInfo(true, 4),
             ]);
 
-        $versionHasConflict = new VersionHasConflict($contentServiceMock);
+        $versionHasConflict = new VersionHasConflict($contentServiceMock, 'eng-GB');
 
         self::assertTrue($versionHasConflict->isSatisfiedBy($this->createVersionInfo(false, 2)));
+    }
+
+    public function testVersionWithStatusDraftAndVersionConflictWithAnotherLanguageCode()
+    {
+        $contentServiceMock = $this->createMock(ContentService::class);
+        $contentServiceMock
+            ->method('loadVersions')
+            ->willReturn([
+                $this->createVersionInfo(false, 1, 'pol-PL'),
+                $this->createVersionInfo(false, 3, 'pol-PL'),
+                $this->createVersionInfo(true, 4, 'pol-PL'),
+            ]);
+
+        $versionHasConflict = new VersionHasConflict($contentServiceMock, 'eng-GB');
+
+        self::assertFalse($versionHasConflict->isSatisfiedBy($this->createVersionInfo(false, 2, 'eng-GB')));
     }
 
     /**
@@ -57,17 +73,40 @@ class VersionHasConflictTest extends TestCase
      *
      * @param bool $isPublished
      * @param int $versionNo
+     * @param string $languageCode
      *
      * @return VersionInfo|MockObject
      */
-    private function createVersionInfo(bool $isPublished = false, int $versionNo = 1): VersionInfo
+    private function createVersionInfo(bool $isPublished = false, int $versionNo = 1, string $languageCode = 'eng-GB'): VersionInfo
     {
         $contentInfo = $this->createMock(ContentInfo::class);
 
-        $versionInfo = $this->getMockForAbstractClass(VersionInfo::class, [], '', true, true, true, ['isPublished', '__get', 'getContentInfo']);
-        $versionInfo->method('isPublished')->willReturn($isPublished);
-        $versionInfo->method('__get')->with($this->equalTo('versionNo'))->willReturn($versionNo);
-        $versionInfo->method('getContentInfo')->willReturn($contentInfo);
+        $versionInfo = $this->getMockForAbstractClass(
+            VersionInfo::class,
+            [],
+            '',
+            true,
+            true,
+            true,
+            ['isPublished', '__get', 'getContentInfo']
+        );
+
+        $versionInfo
+            ->method('isPublished')
+            ->willReturn($isPublished);
+
+        $versionInfo
+            ->method('__get')
+            ->will($this->returnValueMap(
+                [
+                    ['initialLanguageCode', $languageCode],
+                    ['versionNo', $versionNo],
+                ]
+            ));
+
+        $versionInfo
+            ->method('getContentInfo')
+            ->willReturn($contentInfo);
 
         return $versionInfo;
     }
