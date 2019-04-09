@@ -28,6 +28,8 @@
     }
 
     .table {
+        table-layout: fixed;
+        white-space: normal;
         margin-bottom: 0;
 
         th {
@@ -41,6 +43,7 @@
             cursor: pointer;
 
             td {
+                vertical-align: top;
                 border-top: 1px solid $ez-color-base-dark;
             }
         }
@@ -95,12 +98,17 @@
         }
 
         .description__text {
+            width: 100%;
             margin-bottom: 0;
             max-width: 50ch;
             float: left;
 
             + .description__read-more {
                 display: none;
+
+                &::after {
+                    content: ' \00BB';
+                }
             }
 
             &--ellipsis {
