@@ -17,6 +17,7 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
 use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
@@ -155,7 +156,12 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $canEdit = $this->permissionResolver->canUser(
             'content',
             'edit',
-            $location->getContentInfo()
+            $location->getContentInfo(),
+            [
+                (new VersionBuilder())
+                    ->translateToAnyLanguageOf($content->getVersionInfo()->languageCodes)
+                    ->build(),
+            ]
         );
         $canDelete = $this->permissionResolver->canUser(
             'content',
