@@ -130,7 +130,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                         : array_merge($publishAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => [
                         'icon' => 'publish',
-                        'orderNumber' => 1,
+                        'orderNumber' => 10,
                     ],
                 ]
             ),
@@ -142,7 +142,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                         : array_merge($createAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => [
                         'icon' => 'save',
-                        'orderNumber' => 40,
+                        'orderNumber' => 50,
                     ],
                 ]
             ),
@@ -154,7 +154,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                         : array_merge($previewAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => [
                         'icon' => 'view-desktop',
-                        'orderNumber' => 50,
+                        'orderNumber' => 60,
                     ],
                 ]
             ),
@@ -167,7 +167,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                     ],
                     'extras' => [
                         'icon' => 'circle-close',
-                        'orderNumber' => 60,
+                        'orderNumber' => 70,
                     ],
                 ]
             ),
