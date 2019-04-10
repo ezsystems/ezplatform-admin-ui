@@ -18,6 +18,19 @@ class DateAndTimePopup extends Element
 
     private const SETTING_SCRIPT_FORMAT = "document.querySelector('%s %s')._flatpickr.setDate('%s', true, '%s')";
 
+    private const ADD_CALLBACK_TO_DATEPICKER_SCRIPT_FORMAT = 'var fi = document.querySelector(\'%s .flatpickr-input\');
+                const onChangeOld = fi._flatpickr.config.onChange;
+                const onChangeNew = (dates, dateString, flatpickInstance) => {
+                flatpickInstance.input.classList.add("date-set");
+            };
+        if (onChangeOld instanceof Array) {
+                fi._flatpickr.config.onChange = [...onChangeOld, onChangeNew];
+        } else if (onChangeOld) {
+                fi._flatpickr.config.onChange = [onChangeOld, onChangeNew];
+            } else {
+                fi._flatpickr.config.onChange = onChangeNew;
+            }';
+
     public function __construct(UtilityContext $context, bool $isInline = false, $containerSelector = '')
     {
         parent::__construct($context);
@@ -25,6 +38,7 @@ class DateAndTimePopup extends Element
             'containerSelector' => $containerSelector,
             'calendarSelector' => $isInline ? '.flatpickr-calendar' : '.flatpickr-calendar.inline',
             'flatpickrSelector' => '.flatpickr-input',
+            'dateSet' => '.date-set',
         ];
     }
 
@@ -33,8 +47,12 @@ class DateAndTimePopup extends Element
      */
     public function setDate(DateTime $date, string $dateFormat = self::DATETIME_FORMAT): void
     {
+        $this->context->getSession()->executeScript(sprintf(self::ADD_CALLBACK_TO_DATEPICKER_SCRIPT_FORMAT, $this->fields['containerSelector']));
+
         $dateScript = sprintf(self::SETTING_SCRIPT_FORMAT, $this->fields['containerSelector'], $this->fields['flatpickrSelector'], $date->format($dateFormat), $dateFormat);
         $this->context->getSession()->getDriver()->executeScript($dateScript);
+
+        $this->context->waitUntilElementIsVisible($this->fields['dateSet']);
     }
 
     /**
