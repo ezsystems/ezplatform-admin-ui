@@ -64,7 +64,7 @@
                 {
                     isValueValidator: false,
                     selector: `input[type="file"]`,
-                    eventName: 'invalidFileSize',
+                    eventName: 'ez-invalid-file-size',
                     callback: 'showFileSizeError',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 },

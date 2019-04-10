@@ -43,7 +43,7 @@
             sizeContainer.title = fileSize;
 
             preview.querySelector('.ez-field-edit-preview__action--preview').href = URL.createObjectURL(files[0]);
-            this.fieldContainer.querySelector(SELECTOR_INPUT_ALT).dispatchEvent(new CustomEvent('cancelErrors'));
+            this.fieldContainer.querySelector(SELECTOR_INPUT_ALT).dispatchEvent(new CustomEvent('ez-cancel-errors'));
         }
     }
 
@@ -92,14 +92,14 @@
                 {
                     isValueValidator: false,
                     selector: `${SELECTOR_INPUT_FILE}`,
-                    eventName: 'invalidFileSize',
+                    eventName: 'ez-invalid-file-size',
                     callback: 'showFileSizeError',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 },
                 {
                     isValueValidator: false,
                     selector: SELECTOR_INPUT_ALT,
-                    eventName: 'cancelErrors',
+                    eventName: 'ez-cancel-errors',
                     callback: 'cancelErrors',
                     invalidStateSelectors: ['.ez-data-source__field--alternativeText'],
                     errorNodeSelectors: [`${SELECTOR_ALT_WRAPPER} .ez-data-source__label-wrapper`],

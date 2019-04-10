@@ -97,7 +97,7 @@
          * @method showFileSizeError
          */
         showFileSizeError() {
-            this.inputField.dispatchEvent(new CustomEvent('invalidFileSize'));
+            this.inputField.dispatchEvent(new CustomEvent('ez-invalid-file-size'));
         }
 
         /**
