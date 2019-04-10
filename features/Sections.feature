@@ -43,7 +43,7 @@ Feature: Sections management
   Scenario: Content item assignation can be discarded
     Given there's "Test Section" on "Sections" list
     When I start assigning to "Test Section" from "Sections" page
-      And I select content "Media/Files" through UDW
+      And I select content "Media/Images" through UDW
       And I close the UDW window
     Then I should be on "Sections" page
       And there's empty "Test Section" on "Sections" list
@@ -52,13 +52,13 @@ Feature: Sections management
   Scenario: Content item can be assigned to section from the Sections list
     Given there's "Test Section" on "Sections" list
     When I start assigning to "Test Section" from "Sections" page
-      And I select content "Media/Files" through UDW
+      And I select content "Media/Images" through UDW
       And I confirm the selection in UDW
     Then success notification that "1 content items were assigned to 'Test Section'" appears
       And I should be on "Section" "Test Section" page
       And content items list in section "Test Section" contains items
         | Name   | Content Type | Path  |
-        | Files  | Folder       | Media |
+        | Images | Folder       | Media |
 
   @javascript @common
   Scenario: Changes can be discarded while editing Section
@@ -115,13 +115,13 @@ Feature: Sections management
   Scenario: Content item can be reassigned to section from the Sections details
     Given I go to "Media" "Section" page
     When I start assigning to "Media" from "Section" page
-      And I select content "Media/Files" through UDW
+      And I select content "Media/Images" through UDW
       And I confirm the selection in UDW
     Then success notification that "1 content items were assigned to 'Media'" appears
       And I should be on "Section" "Media" page
       And content items list in section "Media" contains items
         | Name   | Content Type | Path  |
-        | Files  | Folder       | Media |
+        | Images | Folder       | Media |
       And Going to sections list we see there's empty "Test Section edited2" on list
 
   @javascript @common
