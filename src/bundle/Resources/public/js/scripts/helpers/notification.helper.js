@@ -4,7 +4,7 @@
     const NOTIFICATION_INFO_LABEL = 'info';
     const NOTIFICATION_SUCCESS_LABEL = 'success';
     const NOTIFICATION_WARNING_LABEL = 'warning';
-    const NOTIFICATION_ERROR_LABEL = 'danger';
+    const NOTIFICATION_ERROR_LABEL = 'error';
 
     /**
      * Dispatches notification event
@@ -71,20 +71,6 @@
         });
 
     /**
-     * Dispatches danger notification event
-     *
-     * @function showDangerNotification
-     * @param {String} message
-     */
-    const showDangerNotification = (message) => {
-        console.warn('[DEPRECATED] showDangerNotification is deprecated');
-        console.warn('[DEPRECATED] it will be removed from ezplatform-admin-ui 2.0');
-        console.warn('[DEPRECATED] use showErrorNotification instead');
-
-        showErrorNotification(message);
-    };
-
-    /**
      * Dispatches error notification event
      *
      * @function showErrorNotification
@@ -110,7 +96,6 @@
         showInfoNotification,
         showSuccessNotification,
         showWarningNotification,
-        showDangerNotification,
         showErrorNotification,
     };
 })(window, document);
