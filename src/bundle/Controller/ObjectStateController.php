@@ -25,19 +25,15 @@ use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStatesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateUpdateType;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class ObjectStateController extends Controller
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
-
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
-    private $translator;
 
     /** @var \eZ\Publish\API\Repository\ObjectStateService */
     private $objectStateService;
@@ -55,7 +51,7 @@ class ObjectStateController extends Controller
     private $languages;
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
@@ -64,8 +60,7 @@ class ObjectStateController extends Controller
      * @param array $languages
      */
     public function __construct(
-        NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator,
+        TranslatableNotificationHandlerInterface $notificationHandler,
         ObjectStateService $objectStateService,
         FormFactoryInterface $formFactory,
         SubmitHandler $submitHandler,
@@ -73,7 +68,6 @@ class ObjectStateController extends Controller
         array $languages
     ) {
         $this->notificationHandler = $notificationHandler;
-        $this->translator = $translator;
         $this->objectStateService = $objectStateService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
@@ -159,12 +153,10 @@ class ObjectStateController extends Controller
                     $objectState = $this->objectStateService->createObjectState($objectStateGroup, $createStruct);
 
                     $this->notificationHandler->success(
-                        $this->translator->trans(
                             /** @Desc("Object state '%name%' created.") */
                             'object_state.create.success',
                             ['%name%' => $data->getName()],
                             'object_state'
-                        )
                     );
 
                     return $this->redirectToRoute('ezplatform.object_state.state.view', [
@@ -203,12 +195,10 @@ class ObjectStateController extends Controller
                 $this->objectStateService->deleteObjectState($objectState);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Object state '%name%' deleted.") */
-                        'object_state.delete.success',
-                        ['%name%' => $objectState->getName()],
-                        'object_state'
-                    )
+                    /** @Desc("Object state '%name%' deleted.") */
+                    'object_state.delete.success',
+                    ['%name%' => $objectState->getName()],
+                    'object_state'
                 );
             });
 
@@ -246,12 +236,10 @@ class ObjectStateController extends Controller
                     $this->objectStateService->deleteObjectState($objectState);
 
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Object state '%name%' deleted.") */
-                            'object_state.delete.success',
-                            ['%name%' => $objectState->getName()],
-                            'object_state'
-                        )
+                        /** @Desc("Object state '%name%' deleted.") */
+                        'object_state.delete.success',
+                        ['%name%' => $objectState->getName()],
+                        'object_state'
                     );
                 }
             });
@@ -291,12 +279,10 @@ class ObjectStateController extends Controller
                 $updatedObjectState = $this->objectStateService->updateObjectState($objectState, $updateStruct);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Object state '%name%' updated.") */
-                        'object_state.update.success',
-                        ['%name%' => $updatedObjectState->getName()],
-                        'object_state'
-                    )
+                    /** @Desc("Object state '%name%' updated.") */
+                    'object_state.update.success',
+                    ['%name%' => $updatedObjectState->getName()],
+                    'object_state'
                 );
 
                 return $this->redirectToRoute('ezplatform.object_state.state.view', [
@@ -352,12 +338,10 @@ class ObjectStateController extends Controller
                 $this->objectStateService->setContentState($contentInfo, $objectStateGroup, $objectState);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Content object state '%name%' updated.") */
-                        'content_object_state.update.success',
-                        ['%name%' => $objectState->getName()],
-                        'object_state'
-                    )
+                    /** @Desc("Content object state '%name%' updated.") */
+                    'content_object_state.update.success',
+                    ['%name%' => $objectState->getName()],
+                    'object_state'
                 );
             });
 

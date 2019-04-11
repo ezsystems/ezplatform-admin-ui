@@ -17,18 +17,14 @@ use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupsDeleteDat
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class ObjectStateGroupController extends Controller
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
-
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
-    private $translator;
 
     /** @var \eZ\Publish\API\Repository\ObjectStateService */
     private $objectStateService;
@@ -43,23 +39,20 @@ class ObjectStateGroupController extends Controller
     private $languages;
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
      * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param array $languages
      */
     public function __construct(
-        NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator,
+        TranslatableNotificationHandlerInterface $notificationHandler,
         ObjectStateService $objectStateService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
         array $languages
     ) {
         $this->notificationHandler = $notificationHandler;
-        $this->translator = $translator;
         $this->objectStateService = $objectStateService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
@@ -135,12 +128,10 @@ class ObjectStateGroupController extends Controller
                     $group = $this->objectStateService->createObjectStateGroup($createStruct);
 
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Object state group '%name%' created.") */
-                            'object_state_group.create.success',
-                            ['%name%' => $data->getName()],
-                            'object_state'
-                        )
+                        /** @Desc("Object state group '%name%' created.") */
+                        'object_state_group.create.success',
+                        ['%name%' => $data->getName()],
+                        'object_state'
                     );
 
                     return $this->redirectToRoute('ezplatform.object_state.group.view', [
@@ -178,12 +169,10 @@ class ObjectStateGroupController extends Controller
                 $this->objectStateService->deleteObjectStateGroup($group);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Object state group '%name%' deleted.") */
-                        'object_state_group.delete.success',
-                        ['%name%' => $group->getName()],
-                        'object_state'
-                    )
+                    /** @Desc("Object state group '%name%' deleted.") */
+                    'object_state_group.delete.success',
+                    ['%name%' => $group->getName()],
+                    'object_state'
                 );
             });
 
@@ -217,12 +206,10 @@ class ObjectStateGroupController extends Controller
                     $this->objectStateService->deleteObjectStateGroup($objectStateGroup);
 
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Object state group '%name%' deleted.") */
-                            'object_state_group.delete.success',
-                            ['%name%' => $objectStateGroup->getName()],
-                            'object_state'
-                        )
+                        /** @Desc("Object state group '%name%' deleted.") */
+                        'object_state_group.delete.success',
+                        ['%name%' => $objectStateGroup->getName()],
+                        'object_state'
                     );
                 }
             });
@@ -259,12 +246,10 @@ class ObjectStateGroupController extends Controller
                 $updatedGroup = $this->objectStateService->updateObjectStateGroup($group, $updateStruct);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Object state group '%name%' updated.") */
-                        'object_state_group.update.success',
-                        ['%name%' => $updatedGroup->getName()],
-                        'object_state'
-                    )
+                    /** @Desc("Object state group '%name%' updated.") */
+                    'object_state_group.update.success',
+                    ['%name%' => $updatedGroup->getName()],
+                    'object_state'
                 );
 
                 return $this->redirectToRoute('ezplatform.object_state.group.view', [

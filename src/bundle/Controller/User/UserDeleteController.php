@@ -11,19 +11,18 @@ use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
-use Symfony\Component\Translation\TranslatorInterface;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\LocationService;
 
 class UserDeleteController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
     /** @var FormFactory */
@@ -32,9 +31,6 @@ class UserDeleteController extends Controller
     /** @var SubmitHandler */
     private $submitHandler;
 
-    /** @var TranslatorInterface */
-    private $translator;
-
     /** @var UserService */
     private $userService;
 
@@ -42,25 +38,22 @@ class UserDeleteController extends Controller
     private $locationService;
 
     /**
-     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatableNotificationHandlerInterface $notificationHandler
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
-     * @param TranslatorInterface $translator
      * @param UserService $userService
      * @param LocationService $locationService
      */
     public function __construct(
-        NotificationHandlerInterface $notificationHandler,
+        TranslatableNotificationHandlerInterface $notificationHandler,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        TranslatorInterface $translator,
         UserService $userService,
         LocationService $locationService
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
-        $this->translator = $translator;
         $this->userService = $userService;
         $this->locationService = $locationService;
     }
@@ -92,12 +85,10 @@ class UserDeleteController extends Controller
                 $this->userService->deleteUser($user);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("User with login '%login%' deleted.") */
-                        'user.delete.success',
-                        ['%login%' => $user->login],
-                        'content'
-                    )
+                    /** @Desc("User with login '%login%' deleted.") */
+                    'user.delete.success',
+                    ['%login%' => $user->login],
+                    'content'
                 );
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [

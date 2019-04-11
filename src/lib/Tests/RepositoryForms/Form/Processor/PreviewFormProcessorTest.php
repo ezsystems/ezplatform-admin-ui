@@ -15,13 +15,12 @@ use EzSystems\RepositoryForms\Data\Content\FieldData;
 use PHPUnit\Framework\TestCase;
 use eZ\Publish\API\Repository\ContentService;
 use EzSystems\EzPlatformAdminUi\Form\Event\ContentEditEvents;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\RepositoryForms\Data\Content\ContentCreateData;
 use EzSystems\RepositoryForms\Event\FormActionEvent;
 use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Form\FormInterface;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
@@ -38,11 +37,8 @@ class PreviewFormProcessorTest extends TestCase
     /** @var UrlGeneratorInterface $urlGenerator */
     private $urlGenerator;
 
-    /** @var NotificationHandlerInterface $notificationHandler */
+    /** @var TranslatableNotificationHandlerInterface $notificationHandler */
     private $notificationHandler;
-
-    /** @var TranslatorInterface $translator */
-    private $translator;
 
     /** @var LocationService $locationService */
     private $locationService;
@@ -51,16 +47,14 @@ class PreviewFormProcessorTest extends TestCase
     {
         $this->contentService = $this->createMock(ContentService::class);
         $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $this->notificationHandler = $this->createMock(NotificationHandlerInterface::class);
-        $this->translator = $this->createMock(TranslatorInterface::class);
+        $this->notificationHandler = $this->createMock(TranslatableNotificationHandlerInterface::class);
         $this->locationService = $this->createMock(LocationService::class);
     }
 
     /**
      * @param ContentService|null $contentService
      * @param UrlGeneratorInterface|null $urlGenerator
-     * @param NotificationHandlerInterface|null $notificationHandler
-     * @param TranslatorInterface|null $translator
+     * @param TranslatableNotificationHandlerInterface|null $notificationHandler
      * @param \eZ\Publish\API\Repository\LocationService|null $locationService
      *
      * @return PreviewFormProcessor
@@ -68,15 +62,13 @@ class PreviewFormProcessorTest extends TestCase
     private function createPreviewFormProcessor(
         ContentService $contentService = null,
         UrlGeneratorInterface $urlGenerator = null,
-        NotificationHandlerInterface $notificationHandler = null,
-        TranslatorInterface $translator = null,
+        TranslatableNotificationHandlerInterface $notificationHandler = null,
         LocationService $locationService = null
     ): PreviewFormProcessor {
         return new PreviewFormProcessor(
             $contentService ?? $this->contentService,
             $urlGenerator ?? $this->urlGenerator,
             $notificationHandler ?? $this->notificationHandler,
-            $translator ?? $this->translator,
             $locationService ?? $this->locationService
         );
     }
@@ -99,17 +91,12 @@ class PreviewFormProcessorTest extends TestCase
         $contentService = $this->generateContentServiceMock($contentStruct, $contentDraft);
         $urlGenerator = $this->generateUrlGeneratorMock($contentDraft, $languageCode, $url, $locationId);
 
-        $this->translator
-            ->method('trans')
-            ->with('error.preview', [], 'content_preview')
-            ->willReturn('Cannot save content draft.');
-
         $config = $this->generateConfigMock($languageCode);
         $form = $this->generateFormMock($config);
 
         $event = new FormActionEvent($form, $contentStruct, 'fooAction');
 
-        $previewFormProcessor = $this->createPreviewFormProcessor($contentService, $urlGenerator, $this->notificationHandler, $this->translator);
+        $previewFormProcessor = $this->createPreviewFormProcessor($contentService, $urlGenerator, $this->notificationHandler);
         $previewFormProcessor->processPreview($event);
 
         $this->assertEquals(new RedirectResponse($url), $event->getResponse());
@@ -142,12 +129,7 @@ class PreviewFormProcessorTest extends TestCase
 
         $urlGenerator = $this->generateUrlGeneratorForContentEditUrlMock($contentDraft, $languageCode, $url);
 
-        $translator = $this->createMock(TranslatorInterface::class);
-        $translator
-            ->method('trans')
-            ->willReturn('string');
-
-        $previewFormProcessor = $this->createPreviewFormProcessor($contentService, $urlGenerator, $this->notificationHandler, $translator);
+        $previewFormProcessor = $this->createPreviewFormProcessor($contentService, $urlGenerator, $this->notificationHandler);
 
         $previewFormProcessor->processPreview($event);
 

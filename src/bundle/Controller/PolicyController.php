@@ -20,22 +20,18 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyCreateMapper;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Translation\TranslatorInterface;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 class PolicyController extends Controller
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
-
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
-    private $translator;
 
     /** @var \eZ\Publish\API\Repository\RoleService */
     private $roleService;
@@ -56,8 +52,7 @@ class PolicyController extends Controller
     private $defaultPaginationLimit;
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
      * @param \eZ\Publish\API\Repository\RoleService $roleService
      * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyCreateMapper $policyCreateMapper
      * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper $policyUpdateMapper
@@ -66,8 +61,7 @@ class PolicyController extends Controller
      * @param int $defaultPaginationLimit
      */
     public function __construct(
-        NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator,
+        TranslatableNotificationHandlerInterface $notificationHandler,
         RoleService $roleService,
         PolicyCreateMapper $policyCreateMapper,
         PolicyUpdateMapper $policyUpdateMapper,
@@ -76,7 +70,6 @@ class PolicyController extends Controller
         int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
-        $this->translator = $translator;
         $this->roleService = $roleService;
         $this->policyCreateMapper = $policyCreateMapper;
         $this->policyUpdateMapper = $policyUpdateMapper;
@@ -164,12 +157,10 @@ class PolicyController extends Controller
 
                 if ($isEditable) {
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Now you can set limitations for the policy.") */
-                            'policy.add.set_limitation',
-                            ['%role%' => $role->identifier],
-                            'role'
-                        )
+                        /** @Desc("Now you can set limitations for the policy.") */
+                        'policy.add.set_limitation',
+                        ['%role%' => $role->identifier],
+                        'role'
                     );
 
                     return new RedirectResponse($this->generateUrl('ezplatform.policy.create_with_limitation', [
@@ -189,12 +180,10 @@ class PolicyController extends Controller
                 $this->roleService->publishRoleDraft($roleDraft);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("New policies in role '%role%' created.") */
-                        'policy.add.success',
-                        ['%role%' => $role->identifier],
-                        'role'
-                    )
+                    /** @Desc("New policies in role '%role%' created.") */
+                    'policy.add.success',
+                    ['%role%' => $role->identifier],
+                    'role'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
@@ -235,12 +224,10 @@ class PolicyController extends Controller
 
         if (!$isEditable) {
             $this->notificationHandler->error(
-                $this->translator->trans(
-                    /** @Desc("Policy type '%policy%' does not contain limitations.") */
-                    'policy.edit.no_limitations',
-                    ['%policy%' => $policy->module . '/' . $policy->function],
-                    'role'
-                )
+                /** @Desc("Policy type '%policy%' does not contain limitations.") */
+                'policy.edit.no_limitations',
+                ['%policy%' => $policy->module . '/' . $policy->function],
+                'role'
             );
 
             return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
@@ -268,12 +255,10 @@ class PolicyController extends Controller
                 }
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Policies in role '%role%' updated.") */
-                        'policy.update.success',
-                        ['%role%' => $role->identifier],
-                        'role'
-                    )
+                    /** @Desc("Policies in role '%role%' updated.") */
+                    'policy.update.success',
+                    ['%role%' => $role->identifier],
+                    'role'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
@@ -320,12 +305,10 @@ class PolicyController extends Controller
                 $this->roleService->publishRoleDraft($roleDraft);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("New policies in role '%role%' created.") */
-                        'policy.add.success',
-                        ['%role%' => $role->identifier],
-                        'role'
-                    )
+                    /** @Desc("New policies in role '%role%' created.") */
+                    'policy.add.success',
+                    ['%role%' => $role->identifier],
+                    'role'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
@@ -374,12 +357,10 @@ class PolicyController extends Controller
                 }
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Policies in role '%role%' removed.") */
-                        'policy.delete.success',
-                        ['%role%' => $role->identifier],
-                        'role'
-                    )
+                    /** @Desc("Policies in role '%role%' removed.") */
+                    'policy.delete.success',
+                    ['%role%' => $role->identifier],
+                    'role'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
@@ -432,12 +413,10 @@ class PolicyController extends Controller
                 $this->roleService->publishRoleDraft($roleDraft);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Policies in role '%role%' removed.") */
-                        'policy.delete.success',
-                        ['%role%' => $role->identifier],
-                        'role'
-                    )
+                    /** @Desc("Policies in role '%role%' removed.") */
+                    'policy.delete.success',
+                    ['%role%' => $role->identifier],
+                    'role'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.role.view', [

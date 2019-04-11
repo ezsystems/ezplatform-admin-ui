@@ -113,7 +113,7 @@
       </trans-unit>
       <trans-unit id="9ff98d02d294a164470b9491cabfa3526f2f63f6" resname="url.update.success">
         <source>URL updated</source>
-        <target>URL updated</target>
+        <target state="new">URL updated</target>
         <note>key: url.update.success</note>
       </trans-unit>
       <trans-unit id="8fe54f2938f83a529ad5d7aa94d4e2fc9934bac1" resname="url.usages.column.name">

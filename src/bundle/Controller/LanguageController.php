@@ -16,7 +16,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -27,15 +27,11 @@ use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class LanguageController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var TranslatableNotificationHandlerInterface */
     private $notificationHandler;
-
-    /** @var TranslatorInterface */
-    private $translator;
 
     /** @var LanguageService */
     private $languageService;
@@ -53,8 +49,7 @@ class LanguageController extends Controller
     private $defaultPaginationLimit;
 
     /**
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
+     * @param TranslatableNotificationHandlerInterface $notificationHandler
      * @param LanguageService $languageService
      * @param LanguageCreateMapper $languageCreateMapper
      * @param SubmitHandler $submitHandler
@@ -62,8 +57,7 @@ class LanguageController extends Controller
      * @param int $defaultPaginationLimit
      */
     public function __construct(
-        NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator,
+        TranslatableNotificationHandlerInterface $notificationHandler,
         LanguageService $languageService,
         LanguageCreateMapper $languageCreateMapper,
         SubmitHandler $submitHandler,
@@ -71,7 +65,6 @@ class LanguageController extends Controller
         int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
-        $this->translator = $translator;
         $this->languageService = $languageService;
         $this->languageCreateMapper = $languageCreateMapper;
         $this->submitHandler = $submitHandler;
@@ -160,12 +153,10 @@ class LanguageController extends Controller
                 $this->languageService->deleteLanguage($language);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Language '%name%' removed.") */
-                        'language.delete.success',
-                        ['%name%' => $language->name],
-                        'language'
-                    )
+                    /** @Desc("Language '%name%' removed.") */
+                    'language.delete.success',
+                    ['%name%' => $language->name],
+                    'language'
                 );
             });
 
@@ -205,12 +196,10 @@ class LanguageController extends Controller
                     $this->languageService->deleteLanguage($language);
 
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Language '%name%' removed.") */
-                            'language.delete.success',
-                            ['%name%' => $language->name],
-                            'language'
-                        )
+                        /** @Desc("Language '%name%' removed.") */
+                        'language.delete.success',
+                        ['%name%' => $language->name],
+                        'language'
                     );
                 }
             });
@@ -234,12 +223,10 @@ class LanguageController extends Controller
                 $language = $this->languageService->createLanguage($languageCreateStruct);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Language '%name%' created.") */
-                        'language.create.success',
-                        ['%name%' => $language->name],
-                        'language'
-                    )
+                    /** @Desc("Language '%name%' created.") */
+                    'language.create.success',
+                    ['%name%' => $language->name],
+                    'language'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.language.view', [
@@ -274,12 +261,10 @@ class LanguageController extends Controller
                     : $this->languageService->disableLanguage($language);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Language '%name%' updated.") */
-                        'language.update.success',
-                        ['%name%' => $language->name],
-                        'language'
-                    )
+                    /** @Desc("Language '%name%' updated.") */
+                    'language.update.success',
+                    ['%name%' => $language->name],
+                    'language'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.language.view', [

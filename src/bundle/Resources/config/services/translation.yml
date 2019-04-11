@@ -13,3 +13,7 @@ services:
             - '%ezpublish.api.role.policy_map%'
         tags:
             - { name: jms_translation.extractor, alias: ez_policy }
+
+    EzSystems\EzPlatformAdminUi\Translation\Extractor\NotificationTranslationExtractor:
+        tags:
+            - { name: jms_translation.file_visitor }

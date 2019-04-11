@@ -9,21 +9,17 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor;
 
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\RepositoryForms\Event\FormActionEvent;
 use EzSystems\RepositoryForms\Event\RepositoryFormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class ContentEditNotificationFormProcessor implements EventSubscriberInterface
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
-
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
-    private $translator;
 
     /** @var \Symfony\Component\HttpFoundation\RequestStack */
     private $requestStack;
@@ -32,19 +28,16 @@ class ContentEditNotificationFormProcessor implements EventSubscriberInterface
     private $siteAccessGroups;
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
      * @param array $siteAccessGroups
      */
     public function __construct(
-        NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator,
+        TranslatableNotificationHandlerInterface $notificationHandler,
         RequestStack $requestStack,
         array $siteAccessGroups
     ) {
         $this->notificationHandler = $notificationHandler;
-        $this->translator = $translator;
         $this->requestStack = $requestStack;
         $this->siteAccessGroups = $siteAccessGroups;
     }
@@ -71,12 +64,10 @@ class ContentEditNotificationFormProcessor implements EventSubscriberInterface
             return;
         }
         $this->notificationHandler->success(
-            $this->translator->trans(
-                /** @Desc("Content published.") */
-                'content.published.success',
-                [],
-                'content_edit'
-            )
+            /** @Desc("Content published.") */
+            'content.published.success',
+            [],
+            'content_edit'
         );
     }
 
@@ -91,12 +82,10 @@ class ContentEditNotificationFormProcessor implements EventSubscriberInterface
             return;
         }
         $this->notificationHandler->success(
-            $this->translator->trans(
-                /** @Desc("Content draft saved.") */
-                'content.draft_saved.success',
-                [],
-                'content_edit'
-            )
+            /** @Desc("Content draft saved.") */
+            'content.draft_saved.success',
+            [],
+            'content_edit'
         );
     }
 
