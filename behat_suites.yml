@@ -5,6 +5,7 @@ default:
         Behat\MinkExtension:
             files_path: '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/src/lib/Behat/TestFiles/'
 
+adminui:
     suites:
         adminui:
             paths:
