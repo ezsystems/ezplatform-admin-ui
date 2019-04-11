@@ -7,7 +7,7 @@ matrix:
         - php: 7.1
           env:
           - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
-          - BEHAT_OPTS="--profile=adminui --suite=adminui --no-interaction -vv"
+          - TEST_CMD="./bin/.travis/get_behat_features.sh adminui | bin/fastest -o -v \"bin/behat {} --suite=adminui --no-interaction -vv --strict\""
           - SYMFONY_ENV=behat
           - SYMFONY_DEBUG=1
 
@@ -44,8 +44,8 @@ install:
     # Install packages if needed
     - if [ "${PHPUNIT_CONFIG}" != '' ]; then travis_retry composer install --prefer-dist --no-interaction --no-suggest ; fi
     # Prepare Behat environment if needed
-    - if [ "${BEHAT_OPTS}" != "" ]; then ./.travis/prepare_ezplatform.sh ; fi
+    - if [ "${TEST_CMD}" != "" ]; then ./.travis/prepare_ezplatform.sh ; fi
 
 script:
     - if [ "${PHPUNIT_CONFIG}" != '' ]; then ./vendor/bin/phpunit -c "${PHPUNIT_CONFIG}"; fi
-    - if [ "${BEHAT_OPTS}" != "" ]; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "./bin/behat $BEHAT_OPTS" ; fi
+    - if [ "${TEST_CMD}" != "" ]; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "${TEST_CMD}" ; fi
