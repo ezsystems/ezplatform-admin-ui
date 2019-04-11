@@ -18,7 +18,9 @@ class SubItemsTable extends Table
     {
         parent::__construct($context, $containerLocator);
         $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .c-table-view__cell--head';
-        $this->fields['listElementLink'] = $this->fields['list'] . ' .c-table-view-item__link';
+        $this->fields['listElement'] = $this->fields['list'] . ' .c-table-view-item__link';
+        $this->fields['nthListElement'] = $this->fields['list'] . ' tr:nth-child(%d) .c-table-view-item__link';
+        $this->fields['listElementType'] = $this->fields['list'] . ' tr:nth-child(%d) .c-table-view-item__cell--content-type';
         $this->fields['editButton'] = $this->fields['list'] . ' .c-table-view-item__btn--edit';
         $this->fields['noItems'] = $this->fields['list'] . ' .c-no-items';
         $this->fields['showMoreResults'] = '.c-load-more__btn--load';
@@ -32,7 +34,7 @@ class SubItemsTable extends Table
         );
         $rowPosition = $this->context->getElementPositionByText(
             $secondHeader,
-            $this->fields['listElementLink']
+            $this->fields['listElement']
         );
 
         return $this->getCellValue($rowPosition, $columnPosition);
@@ -48,22 +50,54 @@ class SubItemsTable extends Table
      *
      * @param string $name
      */
-    public function clickListElement(string $name): void
+    public function clickListElement(string $name, ?string $contentType = null): void
     {
-        $isElementInTable = $this->isElementInTable($name);
+        $elementPositionInTable = $this->getElementPositionInTable($name, $contentType);
+        $isElementInTable = (bool) $elementPositionInTable;
+
         while (!$isElementInTable && $this->isShowMoreResultsActive()) {
             $this->context->findElement($this->fields['showMoreResults'])->click();
-            $isElementInTable = $this->isElementInTable($name);
+            $elementPositionInTable = $this->getElementPositionInTable($name, $contentType);
+            $isElementInTable = (bool) $elementPositionInTable;
         }
 
         Assert::assertTrue($isElementInTable, sprintf('There\'s no subitem %s on Sub-item list', $name));
 
-        $this->context->getElementByText($name, $this->fields['listElementLink'])->click();
+        $this->context->findElement(sprintf($this->fields['nthListElement'], $elementPositionInTable))->click();
     }
 
     public function clickEditButton(string $listItemName): void
     {
-        $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElementLink']);
+        $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
+    }
+
+    /**
+     * Check if list contains link element with given name.
+     *
+     * @param string $name
+     *
+     * @return int index of element, with '1' for first element, and '0' for 'not found'
+     */
+    protected function getElementPositionInTable(string $name, ?string $contentType = null): int
+    {
+        if ($this->context->isElementVisible($this->fields['noItems'])) {
+            return 0;
+        }
+
+        $isElementNamePresentInTable = strpos($this->context->findElement($this->fields['list'])->getText(), $name) !== false;
+        if (!$isElementNamePresentInTable) {
+            return 0;
+        }
+
+        $matchingListElementsPositions = $this->getAllElementsPositionsByText($name, $this->fields['listElement']);
+        $matchingCount = count($matchingListElementsPositions);
+        for ($i = 0; $i < $matchingCount; ++$i) {
+            if ($contentType === null || $this->context->findElement(sprintf($this->fields['listElementType'], $matchingListElementsPositions[$i]))->getText() === $contentType) {
+                return $matchingListElementsPositions[$i];
+            }
+        }
+
+        return 0;
     }
 
     /**
@@ -75,18 +109,7 @@ class SubItemsTable extends Table
      */
     public function isElementInTable(string $name, ?string $contentType = null): bool
     {
-        if ($this->context->isElementVisible($this->fields['noItems'])) {
-            return false;
-        } else {
-            $tableHash = $this->getTableHash();
-            foreach ($tableHash as $row) {
-                if (($row['Name'] === $name) && (($row['Content type'] === $contentType) || ($contentType === null))) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return (bool) $this->getElementPositionInTable($name, $contentType);
     }
 
     /**
@@ -98,6 +121,11 @@ class SubItemsTable extends Table
 
         /** @var NodeElement[] $allHeaders */
         $allHeaders = $this->context->findAllElements($this->fields['horizontalHeaders']);
+        $headersCount = count($allHeaders);
+        $allHeadersText = [];
+        for ($i = 0; $i < $headersCount; ++$i) {
+            $allHeadersText[$i] = $allHeaders[$i]->getText();
+        }
         /** @var NodeElement[] $allRows */
         $allRows = $this->context->findAllElements($this->fields['listRow']);
         $j = 0;
@@ -107,7 +135,7 @@ class SubItemsTable extends Table
             $allCells = $row->findAll('css', 'td');
             $headersCount = count($allHeaders);
             for ($i = 0; $i < $headersCount; ++$i) {
-                $rowHash[$allHeaders[$i]->getText()] = $allCells[$i]->getText();
+                $rowHash[$allHeadersText[$i]] = $allCells[$i]->getText();
             }
             $tableHash[$j] = $rowHash;
             ++$j;
