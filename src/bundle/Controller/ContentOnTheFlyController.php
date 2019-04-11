@@ -56,7 +56,7 @@ class ContentOnTheFlyController extends Controller
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\ContentOnTheFlyDispatcher $contentActionDispatcher
      * @param \EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\UserOnTheFlyDispatcher $userActionDispatcher
-     * @param array $userContentTypeIdentifier
+     * @param string[] $userContentTypeIdentifier
      */
     public function __construct(
         ContentService $contentService,
@@ -100,16 +100,16 @@ class ContentOnTheFlyController extends Controller
         $language = $this->languageService->loadLanguage($languageCode);
 
         $data = (new ContentCreateMapper())->mapToFormData($contentType, [
-                'mainLanguageCode' => $language->languageCode,
-                'parentLocation' => $this->locationService->newLocationCreateStruct($parentLocation->id),
-            ]);
+            'mainLanguageCode' => $language->languageCode,
+            'parentLocation' => $this->locationService->newLocationCreateStruct($parentLocation->id),
+        ]);
 
         $form = $this->createForm(ContentEditType::class, $data, [
-                'languageCode' => $language->languageCode,
-                'mainLanguageCode' => $language->languageCode,
-                'drafts_enabled' => true,
-                'intent' => 'create',
-            ]);
+            'languageCode' => $language->languageCode,
+            'mainLanguageCode' => $language->languageCode,
+            'drafts_enabled' => false,
+            'intent' => 'create',
+        ]);
 
         $form->handleRequest($request);
 
@@ -138,12 +138,12 @@ class ContentOnTheFlyController extends Controller
         $parentGroup = $this->userService->loadUserGroup($parentLocation->contentId);
 
         $data = (new UserCreateMapper())->mapToFormData($contentType, [$parentGroup], [
-                'mainLanguageCode' => $language->languageCode,
-            ]);
+            'mainLanguageCode' => $language->languageCode,
+        ]);
         $form = $this->createForm(UserCreateType::class, $data, [
-                'languageCode' => $language->languageCode,
-                'mainLanguageCode' => $language->languageCode,
-            ]);
+            'languageCode' => $language->languageCode,
+            'mainLanguageCode' => $language->languageCode,
+         ]);
 
         $form->handleRequest($request);
 

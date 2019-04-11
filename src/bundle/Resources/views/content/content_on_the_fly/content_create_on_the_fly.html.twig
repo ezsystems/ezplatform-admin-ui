@@ -31,7 +31,7 @@
     {{ parent() }}
     {% if form.publish is defined %}{{ form_widget(form.publish, {'attr': {'hidden': 'hidden'}}) }}{% endif %}
     {% if form.saveDraft is defined %}{{ form_widget(form.saveDraft, {'attr': {'hidden': 'hidden'}}) }}{% endif %}
-    {{ form_widget(form.cancel, {'attr': {'hidden': 'hidden'}}) }}
+    {% if form.cancel is defined %}{% do form.cancel.setRendered() %}{% endif %}
     {% if form.create is defined %}{{ form_widget(form.create, {'attr': {'hidden': 'hidden'}}) }}{% endif %}
 
 {% endblock %}
