@@ -85,7 +85,7 @@ class ContentItemPage extends Page
     public function goToSubItem(string $contentName, string $contentType): void
     {
         $contentPage = PageObjectFactory::createPage($this->context, self::PAGE_NAME, $contentName);
-        $contentPage->subItemList->table->clickListElement($contentName);
+        $contentPage->subItemList->table->clickListElement($contentName, $contentType);
         $contentPage->verifyIsLoaded();
         $contentPage->verifyContentType($contentType);
     }
