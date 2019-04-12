@@ -95,7 +95,7 @@ Scenario: Content can be previewed during edition
 Scenario: Content moving can be cancelled
   Given I navigate to content "Test Article edited" of type "Article" in root path
   When I click on the edit action bar button "Move"
-    And I select content "Media/Images" through UDW
+    And I select content "Media/Files" through UDW
     And I close the UDW window
   Then I should be on content container page "Test Article edited" of type "Article" in root path
     And content attributes equal
@@ -108,24 +108,24 @@ Scenario: Content moving can be cancelled
 Scenario: Content can be moved
   Given I navigate to content "Test Article edited" of type "Article" in root path
   When I click on the edit action bar button "Move"
-    And I select content "Media/Images" through UDW
+    And I select content "Media/Files" through UDW
     And I confirm the selection in UDW
-  Then success notification that "'Test Article edited' moved to 'Images'" appears
-    And I should be on content container page "Test Article edited" of type "Article" in "Media/Images"
+  Then success notification that "'Test Article edited' moved to 'Files'" appears
+    And I should be on content container page "Test Article edited" of type "Article" in "Media/Files"
     And content attributes equal
       | label | value               |
       | Title | Test Article edited |
     And article main content field equals "Test Article intro edited"
-    And breadcrumb shows "Media/Images/Test Article edited" path
+    And breadcrumb shows "Media/Files/Test Article edited" path
     And going to root path there is no "Test Article edited" "Article" on Sub-items list
 
 @javascript @common
 Scenario: Content copying can be cancelled
-  Given I navigate to content "Test Article edited" of type "Article" in "Media/Images"
+  Given I navigate to content "Test Article edited" of type "Article" in "Media/Files"
   When I click on the edit action bar button "Copy"
     And I select content root node through UDW
     And I close the UDW window
-  Then I should be on content container page "Test Article edited" of type "Article" in "Media/Images"
+  Then I should be on content container page "Test Article edited" of type "Article" in "Media/Files"
     And content attributes equal
       | label | value               |
       | Title | Test Article edited |
@@ -134,7 +134,7 @@ Scenario: Content copying can be cancelled
 
 @javascript @common
 Scenario: Content can be copied
-  Given I navigate to content "Test Article edited" of type "Article" in "Media/Images"
+  Given I navigate to content "Test Article edited" of type "Article" in "Media/Files"
   When I click on the edit action bar button "Copy"
     And I select content root node through UDW
     And I confirm the selection in UDW
@@ -144,7 +144,26 @@ Scenario: Content can be copied
       | label | value                |
       | Title | Test Article edited |
     And article main content field equals "Test Article intro edited"
-    And going to "Media/Images" there is a "Test Article edited" "Article" on Sub-items list
+    And going to "Media/Files" there is a "Test Article edited" "Article" on Sub-items list
+
+@javascript @common
+Scenario: Subtree copying can be cancelled
+  Given I navigate to content "Files" of type "Folder" in "Media"
+  When I click on the edit action bar button "Copy Subtree"
+    And I select content "Media/Images" through UDW
+    And I close the UDW window
+  Then I should be on content container page "Files" of type "Folder" in "Media"
+    And going to "Media/Images" there is no "Files" "Folder" on Sub-items list
+
+@javascript @common
+Scenario: Subtree can be copied
+  Given I navigate to content "Files" of type "Folder" in "Media"
+  When I click on the edit action bar button "Copy Subtree"
+    And I select content "Media/Images" through UDW
+    And I confirm the selection in UDW
+  Then success notification that "Subtree 'Files' copied to location 'Images'" appears
+    And I should be on content container page "Files" of type "Folder" in "Media/Images"
+    And there's "Test Article edited" "Article" on "Files" Sub-items list
 
 @javascript @common
 Scenario: Content can be moved to trash from non-root location
