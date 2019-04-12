@@ -167,9 +167,9 @@ Scenario: Subtree can be copied
 
 @javascript @common
 Scenario: Content can be moved to trash from non-root location
-  Given I navigate to content "Test Article edited" of type "Article" in "Media/Images"
+  Given I navigate to content "Test Article edited" of type "Article" in "Media/Files"
   When I send content to trash
-  Then there's no "Article" "Test Article edited" on "Images" Sub-items list
+  Then there's no "Article" "Test Article edited" on "Files" Sub-items list
     And going to trash there is "Article" "Test Article edited" on list
 
 @javascript @common
