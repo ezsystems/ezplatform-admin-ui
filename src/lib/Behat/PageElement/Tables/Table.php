@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 
+use Behat\Mink\Element\TraversableElement;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Element;
 
@@ -64,5 +65,42 @@ abstract class Table extends Element
     {
         $position = $this->context->getElementPositionByText($listItemName, $locator);
         $this->context->findElement(sprintf($this->fields['editButton'], $position))->click();
+    }
+
+    /**
+     * Finds all HTML elements by class and the text value and returns array with their's positions in order. Search can be narrowed to children of baseElement.
+     *
+     * @param string $text Text value of the element
+     * @param string $selector CSS selector of the element
+     * @param string $textSelector Extra CSS selector for text of the element
+     * @param TraversableElement|null $baseElement
+     *
+     * @return array
+     */
+    protected function getAllElementsPositionsByText(string $text, string $selector, string $textSelector = null, TraversableElement $baseElement = null): array
+    {
+        $baseElement = $baseElement ?? $this->context->getSession()->getPage();
+        $counter = 0;
+
+        $elementsPositions = [];
+
+        $elements = $this->context->findAllElements($selector, $baseElement);
+        foreach ($elements as $element) {
+            ++$counter;
+            if ($textSelector !== null) {
+                try {
+                    $elementText = $this->context->findElement($textSelector, 10, $element)->getText();
+                } catch (\Exception $e) {
+                    continue;
+                }
+            } else {
+                $elementText = $element->getText();
+            }
+            if ($elementText === $text) {
+                $elementsPositions[] = $counter;
+            }
+        }
+
+        return $elementsPositions;
     }
 }
