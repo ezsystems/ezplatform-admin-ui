@@ -9,7 +9,7 @@ adminui:
     suites:
         adminui:
             paths:
-                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features'
+              - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features'
             filters:
                 tags: "@common"
             contexts:
@@ -35,10 +35,8 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\DashboardContext
                 - EzSystems\RepositoryForms\Behat\Context\ContentTypeContext
                 - EzSystems\RepositoryForms\Behat\Context\FieldTypeFormContext
-                
-adminuimodules:
-    suites:
-        default:
+
+        adminuimodules:
             paths:
                 - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features'
             filters:
