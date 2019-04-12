@@ -120,3 +120,9 @@ services:
         tags: ['controller.service_arguments']
         autowire: true
         autoconfigure: false
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation\BulkOperationController:
+        parent: ezpublish_rest.controller.base
+        tags: ['controller.service_arguments']
+        autowire: true
+        autoconfigure: false
