@@ -4,6 +4,16 @@ services:
         autoconfigure: true
         public: true
 
+    #
+    # @todo: Get rid of all aliases:
+    #        a) use direct alias injection instead of autowiring,
+    #        b) move those aliases to bundles they come from.
+    #
+    # Why using these is bad for you? When working on external bundle you can easily fall into trap
+    # that these are available but guess not... these are not. You can use autowiring for these services
+    # only because you have EzPlatformAdminUiBundle enabled.
+    #
+
     # Kernel
     eZ\Publish\API\Repository\Repository: '@ezpublish.api.repository'
     eZ\Publish\API\Repository\ContentService: '@ezpublish.api.service.content'
@@ -25,6 +35,8 @@ services:
 
     eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList: '@ezpublish.fields_groups.list'
     eZ\Publish\Core\MVC\ConfigResolverInterface: '@ezpublish.config.resolver'
+
+    eZ\Publish\Core\MVC\Symfony\SiteAccess: '@ezpublish.siteaccess'
 
     # Repository Forms
     EzSystems\RepositoryForms\Form\Type\Role\LimitationType: '@ezrepoforms.policy.limitation.form'
