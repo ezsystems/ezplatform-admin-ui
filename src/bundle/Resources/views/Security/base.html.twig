@@ -31,10 +31,17 @@
                 </div>
             </div>
         </div>
+        <div class="ez-notifications-container"
+             data-notifications="{{ app.flashes|json_encode() }}"
+             data-template="{{ include('@ezdesign/parts/notification.html.twig', {
+                 label: '{{ label }}',
+                 message: '{{ message }}'
+             })|e('html_attr')  }}"></div>
 
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        {{ encore_entry_script_tags('ezplatform-admin-ui-security-base-js', null, 'ezplatform') }}
 
         {% if app.request.locale == 'ach_UG' %}
             <script type="text/javascript">

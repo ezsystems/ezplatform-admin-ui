@@ -6,10 +6,10 @@
         const { onShow, label, message, rawPlaceholdersMap = {} } = detail;
         // @TODO: Unify 'error' and 'danger' label in 3.0.
         const configKey = label === 'danger' ? 'error' : label;
-        const config = eZ.adminUiConfig.notifications[configKey];
+        const config = eZ.adminUiConfig ? eZ.adminUiConfig.notifications[configKey] : null;
         const timeout = config ? config.timeout : 0;
         const container = doc.createElement('div');
-        let finalMessage = eZ.helpers.text.escapeHTML(message);
+        let finalMessage = eZ.helpers.text ? eZ.helpers.text.escapeHTML(message) : message;
 
         Object.entries(rawPlaceholdersMap).forEach(([placeholder, rawText]) => {
             finalMessage = finalMessage.replace(`{{ ${placeholder} }}`, rawText);

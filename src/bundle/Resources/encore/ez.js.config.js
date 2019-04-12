@@ -233,5 +233,9 @@ module.exports = (Encore) => {
         ])
         .addEntry('ezplatform-admin-ui-settings-datetime-format-update-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.settings.datetimeformat.update.js'),
+        ])
+        .addEntry('ezplatform-admin-ui-security-base-js', [
+            path.resolve(__dirname, '../public/js/scripts/helpers/notification.helper.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.notifications.js'),
         ]);
 };
