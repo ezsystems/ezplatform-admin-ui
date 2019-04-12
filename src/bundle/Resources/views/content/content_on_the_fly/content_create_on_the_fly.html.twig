@@ -29,10 +29,10 @@
 
 {% block form_fields %}
     {{ parent() }}
-    {% if form.publish is defined %}{{ form_widget(form.publish, {'attr': {'hidden': 'hidden'}}) }}{% endif %}
+    {% if form.publish is defined %}{{ form_widget(form.publish, {'attr': {'hidden': 'hidden', 'data-action': 'submit'}}) }}{% endif %}
     {% if form.saveDraft is defined %}{{ form_widget(form.saveDraft, {'attr': {'hidden': 'hidden'}}) }}{% endif %}
     {% if form.cancel is defined %}{% do form.cancel.setRendered() %}{% endif %}
-    {% if form.create is defined %}{{ form_widget(form.create, {'attr': {'hidden': 'hidden'}}) }}{% endif %}
+    {% if form.create is defined %}{{ form_widget(form.create, {'attr': {'hidden': 'hidden', 'data-action': 'submit'}}) }}{% endif %}
 
 {% endblock %}
 
