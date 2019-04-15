@@ -1,7 +1,7 @@
-(function (global) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezstring';
 
-    class EzStringValidator extends global.eZ.BaseFieldValidator {
+    class EzStringValidator extends eZ.BaseFieldValidator {
         /**
          * Validates the input
          *
@@ -17,19 +17,19 @@
             const isTooLong = event.target.value.length > parseInt(event.target.dataset.max, 10);
             const isError = (isEmpty && isRequired) || isTooShort || isTooLong;
             const label = event.target.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
-            const result = {isError};
+            const result = { isError };
 
             if (isEmpty) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             } else if (isTooShort) {
-                result.errorMessage = global.eZ.errors.tooShort.replace('{fieldName}', label).replace('{minLength}', event.target.dataset.min);
+                result.errorMessage = eZ.errors.tooShort.replace('{fieldName}', label).replace('{minLength}', event.target.dataset.min);
             } else if (isTooLong) {
-                result.errorMessage = global.eZ.errors.tooLong.replace('{fieldName}', label).replace('{maxLength}', event.target.dataset.max);
+                result.errorMessage = eZ.errors.tooLong.replace('{fieldName}', label).replace('{maxLength}', event.target.dataset.max);
             }
 
             return result;
         }
-    };
+    }
 
     const validator = new EzStringValidator({
         classInvalid: 'is-invalid',
@@ -40,14 +40,12 @@
                 eventName: 'blur',
                 callback: 'validateInput',
                 errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
-                invalidStateSelectors: ['.ez-data-source__input']
+                invalidStateSelectors: ['.ez-data-source__input'],
             },
         ],
     });
 
     validator.init();
 
-    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-        [...global.eZ.fieldTypeValidators, validator] :
-        [validator];
-})(window);
+    eZ.addConfig('fieldTypeValidators', [validator], true);
+})(window, document, window.eZ);

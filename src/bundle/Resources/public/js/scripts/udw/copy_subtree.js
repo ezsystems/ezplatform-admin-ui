@@ -1,5 +1,5 @@
 (function(global, doc, eZ, React, ReactDOM, Translator) {
-    const btns = [...doc.querySelectorAll('.ez-btn--udw-copy-subtree')];
+    const btns = doc.querySelectorAll('.ez-btn--udw-copy-subtree');
     const form = doc.querySelector('form[name="location_copy_subtree"]');
     const input = form.querySelector('#location_copy_subtree_new_parent_location');
     const udwContainer = doc.querySelector('#react-udw');
@@ -21,7 +21,7 @@
 
         ReactDOM.render(
             React.createElement(
-                global.eZ.modules.UniversalDiscovery,
+                eZ.modules.UniversalDiscovery,
                 Object.assign(
                     {
                         onConfirm,
@@ -29,11 +29,11 @@
                         title,
                         multiple: false,
                         startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
-                        restInfo: {token, siteaccess},
+                        restInfo: { token, siteaccess },
                         allowContainersOnly: true,
                     },
                     config
-                ),
+                )
             ),
             udwContainer
         );

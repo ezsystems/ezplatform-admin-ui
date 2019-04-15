@@ -1,4 +1,4 @@
-(function(global, doc, $, eZ) {
+(function(global, doc, $, eZ, Translator, Routing) {
     const FORM_EDIT = 'form.ez-edit-content-form';
     const showErrorNotification = eZ.helpers.notification.showErrorNotification;
     const editVersion = (event) => {
@@ -13,8 +13,8 @@
         );
         const versionInfoVersionNoInput = versionEditForm.querySelector(`input[name="${versionEditFormName}[version_info][version_no]"]`);
         const languageInput = versionEditForm.querySelector(`#${versionEditFormName}_language_${languageCode}`);
-        const checkVersionDraftLink = global.Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode });
-        const checkEditPermissionLink = global.Routing.generate('ezplatform.content.check_edit_permission', { contentId, languageCode });
+        const checkVersionDraftLink = Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode });
+        const checkEditPermissionLink = Routing.generate('ezplatform.content.check_edit_permission', { contentId, languageCode });
         const errorMessage = Translator.trans(
             /*@Desc("You don't have permission to edit the content")*/ 'content.edit.permission.error',
             {},
@@ -35,13 +35,16 @@
             const wrapper = doc.querySelector('.ez-modal-wrapper');
 
             wrapper.innerHTML = modalHtml;
+
             const addDraftButton = wrapper.querySelector('.ez-btn--add-draft');
+
             if (addDraftButton) {
                 addDraftButton.addEventListener('click', addDraft, false);
             }
-            [...wrapper.querySelectorAll('.ez-btn--prevented')].forEach((btn) =>
-                btn.addEventListener('click', (event) => event.preventDefault(), false)
-            );
+
+            wrapper
+                .querySelectorAll('.ez-btn--prevented')
+                .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
             $('#version-draft-conflict-modal').modal('show');
         };
         const handleCanEditCheck = (response) => {
@@ -72,5 +75,5 @@
             .catch(showErrorNotification);
     };
 
-    [...doc.querySelectorAll('.ez-btn--content-edit')].forEach((button) => button.addEventListener('click', editVersion, false));
-})(window, document, window.jQuery, window.eZ);
+    doc.querySelectorAll('.ez-btn--content-edit').forEach((button) => button.addEventListener('click', editVersion, false));
+})(window, document, window.jQuery, window.eZ, window.Translator, window.Routing);

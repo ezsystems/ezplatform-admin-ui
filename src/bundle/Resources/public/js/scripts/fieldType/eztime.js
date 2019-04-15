@@ -1,11 +1,11 @@
-(function(global) {
+(function(global, doc, eZ, flatpickr) {
     const SELECTOR_FIELD = '.ez-field-edit--eztime';
     const SELECTOR_INPUT = '.ez-data-source__input:not(.flatpickr-input)';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const SELECTOR_FLATPICKR_INPUT = '.flatpickr-input';
     const EVENT_VALUE_CHANGED = 'valueChanged';
 
-    class EzTimeValidator extends global.eZ.BaseFieldValidator {
+    class EzTimeValidator extends eZ.BaseFieldValidator {
         /**
          * Validates the input
          *
@@ -24,7 +24,7 @@
 
             if (isRequired && isEmpty) {
                 isError = true;
-                errorMessage = window.eZ.errors.emptyField.replace('{fieldName}', label);
+                errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             }
 
             return {
@@ -57,9 +57,9 @@
 
     validator.init();
 
-    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ? [...global.eZ.fieldTypeValidators, validator] : [validator];
+    eZ.addConfig('fieldTypeValidators', [validator], true);
 
-    const timeFields = [...document.querySelectorAll(SELECTOR_FIELD)];
+    const timeFields = doc.querySelectorAll(SELECTOR_FIELD);
     const timeConfig = {
         enableTime: true,
         noCalendar: true,
@@ -112,7 +112,7 @@
             false
         );
 
-        window.flatpickr(
+        flatpickr(
             flatPickrInput,
             Object.assign({}, timeConfig, {
                 enableSeconds,
@@ -127,4 +127,4 @@
     };
 
     timeFields.forEach(initFlatPickr);
-})(window);
+})(window, document, window.eZ, window.flatpickr);

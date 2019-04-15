@@ -37,4 +37,4 @@
     });
 
     doc.body.addEventListener('ez-notify', addNotification, false);
-})(window, window.document, window.eZ, window.jQuery);
+})(window, document, window.eZ, window.jQuery);

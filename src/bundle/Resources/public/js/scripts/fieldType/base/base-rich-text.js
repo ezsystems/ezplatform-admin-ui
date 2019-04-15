@@ -1,43 +1,42 @@
-(function(global) {
-    const eZ = (global.eZ = global.eZ || {});
+(function(global, doc, eZ, CKEDITOR, AlloyEditor) {
     const TEXT_NODE = 3;
 
-    const BaseRichText = class BaseRichText {
+    class BaseRichText {
         constructor() {
             this.ezNamespace = 'http://ez.no/namespaces/ezpublish5/xhtml5/edit';
             this.xhtmlNamespace = 'http://www.w3.org/1999/xhtml';
-            this.customTags = Object.keys(global.eZ.adminUiConfig.richTextCustomTags).filter(
-                (key) => !global.eZ.adminUiConfig.richTextCustomTags[key].isInline
+            this.customTags = Object.keys(eZ.adminUiConfig.richTextCustomTags).filter(
+                (key) => !eZ.adminUiConfig.richTextCustomTags[key].isInline
             );
-            this.inlineCustomTags = Object.keys(global.eZ.adminUiConfig.richTextCustomTags).filter(
-                (key) => global.eZ.adminUiConfig.richTextCustomTags[key].isInline
+            this.inlineCustomTags = Object.keys(eZ.adminUiConfig.richTextCustomTags).filter(
+                (key) => eZ.adminUiConfig.richTextCustomTags[key].isInline
             );
             this.alloyEditorExtraButtons = {
-                'ezadd': [],
-                'link': [],
-                'text': [],
-                'table': [],
-                ...global.eZ.adminUiConfig.alloyEditor.extraButtons
+                ezadd: [],
+                link: [],
+                text: [],
+                table: [],
+                ...eZ.adminUiConfig.alloyEditor.extraButtons,
             };
             this.customTagsToolbars = this.customTags.map((customTag) => {
-                const alloyEditorConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
+                const alloyEditorConfig = eZ.adminUiConfig.richTextCustomTags[customTag];
 
-                return new global.eZ.ezAlloyEditor.ezCustomTagConfig({
+                return new eZ.ezAlloyEditor.ezCustomTagConfig({
                     name: customTag,
                     alloyEditor: alloyEditorConfig,
                     extraButtons: this.alloyEditorExtraButtons,
                 });
             });
             this.inlineCustomTagsToolbars = this.inlineCustomTags.map((customTag) => {
-                const alloyEditorConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
+                const alloyEditorConfig = eZ.adminUiConfig.richTextCustomTags[customTag];
 
-                return new global.eZ.ezAlloyEditor.ezInlineCustomTagConfig({
+                return new eZ.ezAlloyEditor.ezInlineCustomTagConfig({
                     name: customTag,
                     alloyEditor: alloyEditorConfig,
                     extraButtons: this.alloyEditorExtraButtons,
                 });
             });
-            this.customStylesConfigurations = Object.entries(global.eZ.adminUiConfig.richTextCustomStyles).map(
+            this.customStylesConfigurations = Object.entries(eZ.adminUiConfig.richTextCustomStyles).map(
                 ([customStyleName, customStyleConfig]) => {
                     return {
                         name: customStyleConfig.label,
@@ -52,13 +51,13 @@
                     };
                 }
             );
-            this.alloyEditorExtraPlugins = global.eZ.adminUiConfig.alloyEditor.extraPlugins;
+            this.alloyEditorExtraPlugins = eZ.adminUiConfig.alloyEditor.extraPlugins;
 
             this.xhtmlify = this.xhtmlify.bind(this);
         }
 
         getHTMLDocumentFragment(data) {
-            const fragment = document.createDocumentFragment();
+            const fragment = doc.createDocumentFragment();
             const root = fragment.ownerDocument.createElement('div');
             const parsedHTML = new DOMParser().parseFromString(data, 'text/xml');
             const importChildNodes = (parent, element, skipElement) => {
@@ -109,7 +108,7 @@
         emptyEmbed(embedNode) {
             let element = embedNode.firstChild;
             let next;
-            let removeClass = function() {};
+            let removeClass = () => {};
 
             while (element) {
                 next = element.nextSibling;
@@ -119,11 +118,11 @@
                 element = next;
             }
 
-            embedNode.classList.forEach(function(cl) {
+            embedNode.classList.forEach((cl) => {
                 let prevRemoveClass = removeClass;
 
                 if (cl.indexOf('is-embed-') === 0) {
-                    removeClass = function() {
+                    removeClass = () => {
                         embedNode.classList.remove(cl);
                         prevRemoveClass();
                     };
@@ -133,22 +132,22 @@
         }
 
         xhtmlify(data) {
-            const doc = document.implementation.createDocument(this.xhtmlNamespace, 'html', null);
-            const htmlDoc = document.implementation.createHTMLDocument('');
+            const xmlDocument = doc.implementation.createDocument(this.xhtmlNamespace, 'html', null);
+            const htmlDoc = doc.implementation.createHTMLDocument('');
             const section = htmlDoc.createElement('section');
             let body = htmlDoc.createElement('body');
 
             section.innerHTML = data;
             body.appendChild(section);
-            body = doc.importNode(body, true);
-            doc.documentElement.appendChild(body);
+            body = xmlDocument.importNode(body, true);
+            xmlDocument.documentElement.appendChild(body);
 
             return body.innerHTML;
         }
 
         clearCustomTag(customTag) {
-            const attributesNodes = [...customTag.querySelectorAll('[data-ezelement="ezattributes"]')];
-            const headers = [...customTag.querySelectorAll('.ez-custom-tag__header')];
+            const attributesNodes = customTag.querySelectorAll('[data-ezelement="ezattributes"]');
+            const headers = customTag.querySelectorAll('.ez-custom-tag__header');
 
             attributesNodes.forEach((attributesNode) => attributesNode.remove());
             headers.forEach((header) => header.remove());
@@ -165,7 +164,7 @@
         }
 
         appendAnchorIcon(element) {
-            const container = document.createElement('div');
+            const container = doc.createElement('div');
             const icon = `
                 <svg class="ez-icon ez-icon--small ez-icon--secondary ez-icon--anchor">
                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#link-anchor"></use>
@@ -180,14 +179,14 @@
         }
 
         clearInlineCustomTag(inlineCustomTag) {
-            const icons = [...inlineCustomTag.querySelectorAll('.ez-custom-tag__icon-wrapper')];
+            const icons = inlineCustomTag.querySelectorAll('.ez-custom-tag__icon-wrapper');
 
             icons.forEach((icon) => icon.remove());
         }
 
         init(container) {
-            const toolbarProps = {extraButtons: this.alloyEditorExtraButtons};
-            const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
+            const toolbarProps = { extraButtons: this.alloyEditorExtraButtons };
+            const alloyEditor = AlloyEditor.editable(container.getAttribute('id'), {
                 toolbars: {
                     ezadd: {
                         buttons: [
@@ -206,23 +205,32 @@
                     styles: {
                         selections: [
                             ...this.customTagsToolbars,
-                            new window.eZ.ezAlloyEditor.ezLinkConfig(toolbarProps),
-                            new window.eZ.ezAlloyEditor.ezTextConfig({
+                            new eZ.ezAlloyEditor.ezLinkConfig(toolbarProps),
+                            new eZ.ezAlloyEditor.ezTextConfig({
                                 customStyles: this.customStylesConfigurations,
                                 inlineCustomTags: this.inlineCustomTags,
-                                ...toolbarProps
+                                ...toolbarProps,
                             }),
                             ...this.inlineCustomTagsToolbars,
-                            new window.eZ.ezAlloyEditor.ezParagraphConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
-                            new window.eZ.ezAlloyEditor.ezFormattedConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
-                            new window.eZ.ezAlloyEditor.ezCustomStyleConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
-                            new window.eZ.ezAlloyEditor.ezHeadingConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
-                            new window.eZ.ezAlloyEditor.ezListConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
-                            new window.eZ.ezAlloyEditor.ezEmbedInlineConfig(toolbarProps),
-                            new window.eZ.ezAlloyEditor.ezTableConfig(toolbarProps),
-                            new window.eZ.ezAlloyEditor.ezEmbedImageLinkConfig(toolbarProps),
-                            new window.eZ.ezAlloyEditor.ezEmbedImageConfig(toolbarProps),
-                            new window.eZ.ezAlloyEditor.ezEmbedConfig(toolbarProps),
+                            new eZ.ezAlloyEditor.ezParagraphConfig({
+                                customStyles: this.customStylesConfigurations,
+                                ...toolbarProps,
+                            }),
+                            new eZ.ezAlloyEditor.ezFormattedConfig({
+                                customStyles: this.customStylesConfigurations,
+                                ...toolbarProps,
+                            }),
+                            new eZ.ezAlloyEditor.ezCustomStyleConfig({
+                                customStyles: this.customStylesConfigurations,
+                                ...toolbarProps,
+                            }),
+                            new eZ.ezAlloyEditor.ezHeadingConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
+                            new eZ.ezAlloyEditor.ezListConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
+                            new eZ.ezAlloyEditor.ezEmbedInlineConfig(toolbarProps),
+                            new eZ.ezAlloyEditor.ezTableConfig(toolbarProps),
+                            new eZ.ezAlloyEditor.ezEmbedImageLinkConfig(toolbarProps),
+                            new eZ.ezAlloyEditor.ezEmbedImageConfig(toolbarProps),
+                            new eZ.ezAlloyEditor.ezEmbedConfig(toolbarProps),
                         ],
                         tabIndex: 1,
                     },
@@ -239,7 +247,7 @@
                         'ezfocusblock',
                         'ezcustomtag',
                         'ezinlinecustomtag',
-                        ...this.alloyEditorExtraPlugins
+                        ...this.alloyEditorExtraPlugins,
                     ].join(','),
             });
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ez-data-source').querySelector('textarea').value);
@@ -247,32 +255,30 @@
             const nativeEditor = alloyEditor.get('nativeEditor');
             const saveRichText = () => {
                 const data = alloyEditor.get('nativeEditor').getData();
-                const doc = document.createDocumentFragment();
-                const root = document.createElement('div');
+                const documentFragment = doc.createDocumentFragment();
+                const root = doc.createElement('div');
 
                 root.innerHTML = data;
-                doc.appendChild(root);
+                documentFragment.appendChild(root);
 
-                [
-                    ...doc.querySelectorAll('[data-ezelement="ezembed"]'),
-                    ...doc.querySelectorAll('[data-ezelement="ezembedinline"]'),
-                ].forEach(this.emptyEmbed);
-                [...doc.querySelectorAll('[data-ezelement="eztemplate"]:not([data-eztype="style"])')].forEach(this.clearCustomTag);
-                [...doc.querySelectorAll('.ez-has-anchor')].forEach(this.clearAnchor);
-                [...doc.querySelectorAll('[data-ezelement="eztemplateinline"]:not([data-eztype="style"])')].forEach(
-                    this.clearInlineCustomTag
-                );
+                documentFragment.querySelectorAll('[data-ezelement="ezembed"]').forEach(this.emptyEmbed);
+                documentFragment.querySelectorAll('[data-ezelement="ezembedinline"]').forEach(this.emptyEmbed);
+                documentFragment.querySelectorAll('[data-ezelement="eztemplate"]:not([data-eztype="style"])').forEach(this.clearCustomTag);
+                documentFragment.querySelectorAll('.ez-has-anchor').forEach(this.clearAnchor);
+                documentFragment
+                    .querySelectorAll('[data-ezelement="eztemplateinline"]:not([data-eztype="style"])')
+                    .forEach(this.clearInlineCustomTag);
 
                 container.closest('.ez-data-source').querySelector('textarea').value = this.xhtmlify(root.innerHTML).replace(
                     this.xhtmlNamespace,
                     this.ezNamespace
                 );
 
-                this.countWordsCharacters(container, doc);
+                this.countWordsCharacters(container, documentFragment);
             };
 
             if (!section.hasChildNodes()) {
-                section.appendChild(document.createElement('p'));
+                section.appendChild(doc.createElement('p'));
             }
 
             nativeEditor.once('dataReady', () => container.querySelectorAll('.ez-has-anchor').forEach(this.appendAnchorIcon));
@@ -337,7 +343,7 @@
         splitIntoWords(text) {
             return text.split(' ').filter((word) => word.trim());
         }
-    };
+    }
 
-    eZ.BaseRichText = BaseRichText;
-})(window);
+    eZ.addConfig('BaseRichText', BaseRichText);
+})(window, document, window.eZ, window.CKEDITOR, window.AlloyEditor);

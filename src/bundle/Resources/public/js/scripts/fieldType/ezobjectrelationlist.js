@@ -196,7 +196,7 @@
 
             const removedItems = [];
 
-            [...relationsContainer.querySelectorAll('input:checked')].forEach((input) => {
+            relationsContainer.querySelectorAll('input:checked').forEach((input) => {
                 removedItems.push(parseInt(input.value, 10));
 
                 input.closest('tr').remove();
@@ -265,6 +265,6 @@
 
         validator.init();
 
-        eZ.fieldTypeValidators = eZ.fieldTypeValidators ? [...eZ.fieldTypeValidators, validator] : [validator];
+        eZ.addConfig('fieldTypeValidators', [validator], true);
     });
 })(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);

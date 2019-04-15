@@ -3,7 +3,7 @@
 
     /**
      * Creates map with content types identifiers as keys for faster lookup
-     * 
+     *
      * @function createContentTypeDataMap
      * @returns {Object} contentTypesDataMap
      */

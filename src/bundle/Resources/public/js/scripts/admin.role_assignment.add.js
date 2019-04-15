@@ -1,11 +1,11 @@
 (function(global, doc, eZ, React, ReactDOM) {
     const udwContainer = doc.getElementById('react-udw');
-    const limitationsRadio = [...doc.querySelectorAll('.ez-limitations__radio')];
+    const limitationsRadio = doc.querySelectorAll('.ez-limitations__radio');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const selectSubtreeConfirm = (data) => {
-        const selectedItems = data.reduce((total, item) => total + `<li>${item.ContentInfo.Content.Name}</li>`, '');
+        const selectedItems = data.reduce((total, item) => `${total}<li>${item.ContentInfo.Content.Name}</li>`, '');
 
         doc.querySelector('#role_assignment_create_locations').value = data.map((item) => item.id).join();
         doc.querySelector('.ez-limitations__selected-subtree').innerHTML = selectedItems;
@@ -25,7 +25,7 @@
                         onConfirm: selectSubtreeConfirm.bind(this),
                         onCancel: closeUDW,
                         multiple: true,
-                        startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                        startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                         restInfo: { token, siteaccess },
                     },
                     config

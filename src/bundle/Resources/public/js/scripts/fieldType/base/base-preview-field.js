@@ -1,10 +1,9 @@
-(function(global) {
-    const eZ = (global.eZ = global.eZ || {});
+(function(global, doc, eZ) {
     const SELECTOR_DATA = '.ez-field-edit__data';
     const SELECTOR_PREVIEW = '.ez-field-edit__preview';
     const SELECTOR_BTN_REMOVE = '.ez-field-edit-preview__action--remove';
 
-    eZ.BasePreviewField = class BasePreviewField {
+    class BasePreviewField {
         constructor({ fieldContainer, allowedFileTypes, fileTypeAccept, validator }) {
             this.fieldContainer = fieldContainer || null;
             this.allowedFileTypes = allowedFileTypes || [];
@@ -44,7 +43,10 @@
 
             decimalUnits = unitIndex < 1 ? 0 : 1;
 
-            return size.toFixed(size >= 10 || decimalUnits) + ' ' + units[unitIndex];
+            const sizeFixed = size.toFixed(size >= 10 || decimalUnits);
+            const unit = units[unitIndex];
+
+            return `${sizeFixed} ${unit}`;
         }
 
         /**
@@ -143,7 +145,7 @@
          * Displays a file preview
          *
          * @method showPreview
-         * @param {Event} event
+         * @param {Event} [event]
          */
         showPreview(event) {
             const btnRemove = this.fieldContainer.querySelector(SELECTOR_BTN_REMOVE);
@@ -182,7 +184,7 @@
             this.fieldContainer.querySelector(SELECTOR_DATA).removeAttribute('hidden');
             this.fieldContainer.querySelector(SELECTOR_PREVIEW).setAttribute('hidden', true);
             this.fieldContainer.classList.remove('is-invalid');
-            [...this.fieldContainer.querySelectorAll('.ez-field-edit__error')].forEach((element) => element.remove());
+            this.fieldContainer.querySelectorAll('.ez-field-edit__error').forEach((element) => element.remove());
 
             btnRemove.removeEventListener('click', this.handleRemoveFile);
 
@@ -273,5 +275,7 @@
 
             this.validator.init();
         }
-    };
-})(window);
+    }
+
+    eZ.addConfig('BasePreviewField', BasePreviewField);
+})(window, document, window.eZ);

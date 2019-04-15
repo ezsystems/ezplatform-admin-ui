@@ -1,4 +1,4 @@
-(function(global, doc) {
+(function(global, doc, eZ) {
     const CLASS_CUSTOM_DROPDOWN = 'ez-custom-dropdown';
     const CLASS_CUSTOM_DROPDOWN_ITEM = 'ez-custom-dropdown__item';
     const CLASS_ITEMS_HIDDEN = 'ez-custom-dropdown__items--hidden';
@@ -24,8 +24,8 @@
                 data-value="{{value}}">
                     {{label}}<span class="${CLASS_REMOVE_SELECTION}"></span>
             </li>`;
-
             this.canSelectOnlyOne = !config.sourceInput.multiple;
+
             this.createSelectedItem = this.createSelectedItem.bind(this);
             this.selectFirstItem = this.selectFirstItem.bind(this);
             this.clearCurrentSelection = this.clearCurrentSelection.bind(this);
@@ -182,5 +182,5 @@
         }
     }
 
-    global.eZ.addConfig('core.CustomDropdown', CustomDropdown);
-})(window, window.document);
+    eZ.addConfig('core.CustomDropdown', CustomDropdown);
+})(window, document, window.eZ);

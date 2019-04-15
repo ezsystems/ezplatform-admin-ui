@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function(global, doc, eZ) {
     const form = doc.querySelector('form[name="user_password_change"]');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
     const oldPasswordInput = form.querySelector('#user_password_change_oldPassword');
@@ -7,7 +7,7 @@
     const SELECTOR_FIELD = '.ez-field';
     const SELECTOR_LABEL = '.ez-field__label';
     const SELECTOR_LABEL_WRAPPER = '.ez-field__label-wrapper';
-    const CLASS_INVALID ='is-invalid';
+    const CLASS_INVALID = 'is-invalid';
 
     /**
      * Creates an error node
@@ -37,12 +37,12 @@
         const methodName = isError ? 'add' : 'remove';
         const field = target.closest(SELECTOR_FIELD);
         const labelWrapper = field.querySelector(SELECTOR_LABEL_WRAPPER);
-        const errorNodes = [...labelWrapper.querySelectorAll('.ez-field__error')];
+        const errorNodes = labelWrapper.querySelectorAll('.ez-field__error');
 
         field.classList[methodName](CLASS_INVALID);
         target.classList[methodName](CLASS_INVALID);
 
-        errorNodes.forEach(el => el.remove());
+        errorNodes.forEach((el) => el.remove());
 
         if (isError) {
             labelWrapper.append(createErrorNode(message));
@@ -60,7 +60,7 @@
         const confirmPassword = confirmPasswordInput.value.trim();
         const isNotEmptyPassword = checkIsNotEmpty(newPasswordInput) && checkIsNotEmpty(confirmPasswordInput);
         const passwordMatch = newPassword === confirmPassword;
-        const message = global.eZ.errors.notSamePasswords;
+        const message = eZ.errors.notSamePasswords;
 
         if (!passwordMatch) {
             toggleError(!passwordMatch, message, confirmPasswordInput);
@@ -79,9 +79,9 @@
     const checkIsNotEmpty = (target) => {
         const isRequired = target.required;
         const isEmpty = !target.value.trim();
-        const isError = (isRequired && isEmpty);
+        const isError = isRequired && isEmpty;
         const fieldContainer = target.closest(SELECTOR_FIELD);
-        const message = global.eZ.errors.emptyField.replace('{fieldName}', fieldContainer.querySelector(SELECTOR_LABEL).innerHTML);
+        const message = eZ.errors.emptyField.replace('{fieldName}', fieldContainer.querySelector(SELECTOR_LABEL).innerHTML);
 
         toggleError(isError, message, target);
 
@@ -90,13 +90,13 @@
 
     form.setAttribute('novalidate', true);
 
-    submitBtns.forEach(btn => {
+    submitBtns.forEach((btn) => {
         const clickHandler = (event) => {
             if (!parseInt(btn.dataset.isFormValid, 10)) {
                 event.preventDefault();
 
                 const requiredFields = [...form.querySelectorAll('.ez-field input[required]')];
-                const isFormValid = requiredFields.map(checkIsNotEmpty).every(result => result) && comparePasswords();
+                const isFormValid = requiredFields.map(checkIsNotEmpty).every((result) => result) && comparePasswords();
 
                 if (isFormValid) {
                     btn.dataset.isFormValid = 1;
@@ -115,4 +115,4 @@
     newPasswordInput.addEventListener('blur', (event) => checkIsNotEmpty(event.currentTarget), false);
     confirmPasswordInput.addEventListener('blur', (event) => checkIsNotEmpty(event.currentTarget), false);
     confirmPasswordInput.addEventListener('blur', comparePasswords, false);
-})(window, document);
+})(window, document, window.eZ);

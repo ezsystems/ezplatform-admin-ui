@@ -1,7 +1,5 @@
-(function(global, doc) {
-    const eZ = (global.eZ = global.eZ || {});
-
-    eZ.BaseFieldValidator = class BaseFieldValidator {
+(function(global, doc, eZ) {
+    class BaseFieldValidator {
         constructor(config) {
             this.classInvalid = config.classInvalid;
             this.eventsMap = config.eventsMap;
@@ -155,7 +153,7 @@
         toggleErrorMessage(validationResult, config, input) {
             const container = this.getFieldTypeContainer(input.closest(this.fieldSelector));
             const nodes = this.findErrorContainers(container, input, config.errorNodeSelectors);
-            const existingErrorSelectors = config.errorNodeSelectors.map((selector) => selector + ' .ez-field-edit__error');
+            const existingErrorSelectors = config.errorNodeSelectors.map((selector) => `${selector} .ez-field-edit__error`);
             const existingErrorNodes = this.findExistingErrorNodes(container, input, existingErrorSelectors);
 
             existingErrorNodes.forEach((el) => el.remove());
@@ -247,5 +245,7 @@
 
             return results.every((result) => result && !result.isError);
         }
-    };
-})(window, document);
+    }
+
+    eZ.addConfig('BaseFieldValidator', BaseFieldValidator);
+})(window, document, window.eZ);

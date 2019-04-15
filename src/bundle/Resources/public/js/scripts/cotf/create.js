@@ -1,4 +1,4 @@
-(function(global, doc, eZ, React, ReactDOM, Translator) {
+(function(global, doc, eZ, React, ReactDOM, Translator, Routing) {
     const btns = doc.querySelectorAll('.ez-btn--cotf-create');
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
@@ -7,7 +7,7 @@
     const onConfirm = (items) => {
         closeUDW();
 
-        window.location.href = window.Routing.generate('_ezpublishLocation', { locationId: items[0].id });
+        global.location.href = Routing.generate('_ezpublishLocation', { locationId: items[0].id });
     };
     const onCancel = () => closeUDW();
     const openUDW = (event) => {
@@ -38,4 +38,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
+})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator, window.Routing);

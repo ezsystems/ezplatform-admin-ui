@@ -69,9 +69,7 @@
     };
     const updateTrashForm = (checkboxes) => {
         checkboxes.forEach((checkbox) => {
-            const trashFormCheckbox = doc.querySelector(
-                'form[name="trash_item_delete"] input[type="checkbox"][value="' + checkbox.value + '"]'
-            );
+            const trashFormCheckbox = doc.querySelector(`form[name="trash_item_delete"] input[type="checkbox"][value="${checkbox.value}"]`);
 
             if (trashFormCheckbox) {
                 trashFormCheckbox.checked = checkbox.checked;

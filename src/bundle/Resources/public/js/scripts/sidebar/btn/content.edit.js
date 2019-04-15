@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function(global, doc) {
     const editButton = doc.querySelector('.ez-btn--edit');
     const languageRadioOption = doc.querySelector('.ez-extra-actions--edit.ez-extra-actions--prevent-show [type="radio"]');
 
@@ -6,8 +6,12 @@
         return;
     }
 
-    editButton.addEventListener('click', () => {
-        languageRadioOption.checked = true;
-        languageRadioOption.dispatchEvent(new CustomEvent('change'))
-    }, false);
+    editButton.addEventListener(
+        'click',
+        () => {
+            languageRadioOption.checked = true;
+            languageRadioOption.dispatchEvent(new CustomEvent('change'));
+        },
+        false
+    );
 })(window, document);

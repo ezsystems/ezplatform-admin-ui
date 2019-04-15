@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function(global, doc, $) {
     const toggleForm = doc.querySelector('form[name="location_trash_container"]');
     const hasAsset = toggleForm.dataset.hasAsset;
     const hasUniqueAsset = toggleForm.dataset.hasUniqueAsset;
@@ -15,4 +15,4 @@
     };
 
     toggleForm.addEventListener('submit', openTrashImageAssetModal, false);
-})(window, document);
+})(window, document, window.jQuery);

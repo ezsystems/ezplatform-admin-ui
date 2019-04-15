@@ -1,4 +1,4 @@
-(function(global, doc) {
+(function(global, doc, eZ) {
     const SELECTOR_PLACEHOLDER = '.ez-draggable__placeholder';
     const TIMEOUT_REMOVE_PLACEHOLDERS = 500;
     const DEFAULTS = {
@@ -118,5 +118,5 @@
         }
     }
 
-    global.eZ.addConfig('core.Draggable', Draggable);
-})(window, window.document);
+    eZ.addConfig('core.Draggable', Draggable);
+})(window, document, window.eZ);

@@ -1,4 +1,4 @@
-(function(global, doc) {
+(function(global, doc, eZ) {
     const ENDPOINT_BOOKMARK = '/api/ezp/v2/bookmark';
     const SELECTOR_BOOKMARK_WRAPPER = '.ez-add-to-bookmarks';
     const CLASS_BOOKMARK_CHECKED = 'ez-add-to-bookmarks--checked';
@@ -6,7 +6,7 @@
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const bookmarkWrapper = doc.querySelector(SELECTOR_BOOKMARK_WRAPPER);
     const currentLocationId = parseInt(bookmarkWrapper.getAttribute('data-location-id'), 10);
-    const handleUpdateError = global.eZ.helpers.notification.showErrorNotification;
+    const handleUpdateError = eZ.helpers.notification.showErrorNotification;
     let isUpdatingBookmark = false;
     const getResponseStatus = (response) => {
         if (!response.ok) {
@@ -69,4 +69,4 @@
     if (bookmarkWrapper) {
         bookmarkWrapper.addEventListener('click', onBookmarkChange, false);
     }
-})(window, document);
+})(window, document, window.eZ);

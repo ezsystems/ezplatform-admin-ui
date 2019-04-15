@@ -1,4 +1,4 @@
-(function(global, doc, eZ, React, ReactDOM, Translator) {
+(function(global, doc, eZ, Translator) {
     let currentPageLink = null;
     let getNotificationsStatusErrorShowed = false;
     const SELECTOR_MODAL_ITEM = '.ez-notifications-modal__item';
@@ -19,7 +19,7 @@
         }
 
         if (response.redirect) {
-            window.location = response.redirect;
+            global.location = response.redirect;
         }
     };
     const handleNotificationClick = (notification) => {
@@ -59,7 +59,7 @@
             mode: 'cors',
             credentials: 'same-origin',
             headers: {
-                'X-Requested-With' : 'XMLHttpRequest'
+                'X-Requested-With': 'XMLHttpRequest',
             },
         });
 
@@ -177,4 +177,4 @@
 
     getNotificationsStatus();
     global.setInterval(getNotificationsStatus, INTERVAL);
-})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
+})(window, document, window.eZ, window.Translator);

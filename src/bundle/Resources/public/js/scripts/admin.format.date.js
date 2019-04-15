@@ -37,7 +37,7 @@
         l: 'dddd',
         N: 'E',
         S: function() {
-            return '[' + this.format('Do').replace(/\d*/g, '') + ']';
+            return `[${this.format('Do').replace(/\d*/g, '')}]`;
         },
         w: 'd',
         z: function() {

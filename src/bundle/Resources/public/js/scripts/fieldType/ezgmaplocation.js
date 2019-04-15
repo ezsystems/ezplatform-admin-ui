@@ -22,7 +22,7 @@
          * @method validateCoordInput
          * @param {HTMLElement} input
          * @param {Object} range of coord input
-         * @returns {Boolean}
+         * @returns {Object}
          */
         validateCoordInput(input, { min, max }) {
             const value = parseFloat(input.value.replace(',', '.'));
@@ -122,7 +122,7 @@
          *
          * @method checkAllFieldsEmptyOrFilled
          * @param {HTMLElement} latInput latitude input DOM node
-         * @param {HTLMElement} lonInput longitude input DOM node
+         * @param {HTMLElement} lonInput longitude input DOM node
          * @returns {Object}
          */
         checkAllFieldsEmptyOrFilled(latInput, lonInput) {
@@ -445,7 +445,7 @@
                     notFoundCallback();
                 }
             })
-            .catch((error) => eZ.helpers.notification.showErrorNotification(error));
+            .catch(eZ.helpers.notification.showErrorNotification);
     };
 
     /**
@@ -480,7 +480,7 @@
      */
     const correctNotation = (event) => (event.currentTarget.value = event.currentTarget.value.replace(',', '.'));
 
-    [...doc.querySelectorAll(SELECTOR_FIELD)].forEach((field) => {
+    doc.querySelectorAll(SELECTOR_FIELD).forEach((field) => {
         const addressInput = field.querySelector(SELECTOR_ADDRESS_INPUT);
         const longitudeInput = field.querySelector(SELECTOR_LON_INPUT);
         const latitudeInput = field.querySelector(SELECTOR_LAT_INPUT);
@@ -648,5 +648,5 @@
         }
     });
 
-    eZ.fieldTypeValidators = eZ.fieldTypeValidators ? [...eZ.fieldTypeValidators, validator] : [validator];
-})(window, window.document, window.eZ, window.L);
+    eZ.addConfig('fieldTypeValidators', [validator], true);
+})(window, document, window.eZ, window.L);

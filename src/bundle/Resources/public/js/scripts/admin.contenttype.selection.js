@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function(global, doc) {
     const SELECTOR_TEMPLATE = '.ezselection-settings-option-value-prototype';
     const SELECTOR_OPTION = '.ezselection-settings-option-value';
     const SELECTOR_OPTIONS_LIST = '.ezselection-settings-option-list';
@@ -6,8 +6,8 @@
     const SELECTOR_BTN_ADD = '.ezselection-settings-option-add';
     const NUMBER_PLACEHOLDER = /__number__/g;
 
-    [...doc.querySelectorAll('.ezselection-settings.options')].forEach(container => {
-        const findCheckedOptions = () => [...container.querySelectorAll('.ezselection-settings-option-checkbox:checked')];
+    doc.querySelectorAll('.ezselection-settings.options').forEach((container) => {
+        const findCheckedOptions = () => container.querySelectorAll('.ezselection-settings-option-checkbox:checked');
         const toggleDisableState = () => {
             const disabledState = !!findCheckedOptions().length;
             const methodName = disabledState ? 'removeAttribute' : 'setAttribute';
@@ -23,7 +23,7 @@
             optionsList.insertAdjacentHTML('beforeend', template.replace(NUMBER_PLACEHOLDER, nextId));
         };
         const removeOptions = () => {
-            findCheckedOptions().forEach(element => element.closest(SELECTOR_OPTION).remove());
+            findCheckedOptions().forEach((element) => element.closest(SELECTOR_OPTION).remove());
             toggleDisableState();
         };
 

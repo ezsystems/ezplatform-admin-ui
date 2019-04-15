@@ -1,7 +1,7 @@
-(function (global) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezinteger';
 
-    class EzIntegerValidator extends global.eZ.BaseFieldValidator {
+    class EzIntegerValidator extends eZ.BaseFieldValidator {
         /**
          * Validates the input
          *
@@ -13,24 +13,24 @@
         validateInteger(event) {
             const isRequired = event.target.required;
             const value = +event.target.value;
-            const isEmpty =  !event.target.value && event.target.value !== '0';
+            const isEmpty = !event.target.value && event.target.value !== '0';
             const isInteger = Number.isInteger(value);
             const isLess = value < parseInt(event.target.getAttribute('min'), 10);
             const isGreater = value > parseInt(event.target.getAttribute('max'), 10);
             const isError = (isEmpty && isRequired) || !isInteger || isLess || isGreater;
             const label = event.target.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
-            const result = {isError};
+            const result = { isError };
 
             if (isEmpty) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             } else if (!isInteger) {
-                result.errorMessage = global.eZ.errors.isNotInteger.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.isNotInteger.replace('{fieldName}', label);
             } else if (isLess) {
-                result.errorMessage = global.eZ.errors.isLess
+                result.errorMessage = eZ.errors.isLess
                     .replace('{fieldName}', label)
                     .replace('{minValue}', event.target.getAttribute('min'));
             } else if (isGreater) {
-                result.errorMessage = global.eZ.errors.isGreater
+                result.errorMessage = eZ.errors.isGreater
                     .replace('{fieldName}', label)
                     .replace('{maxValue}', event.target.getAttribute('max'));
             }
@@ -54,7 +54,5 @@
 
     validator.init();
 
-    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-        [...global.eZ.fieldTypeValidators, validator] :
-        [validator];
-})(window);
+    eZ.addConfig('fieldTypeValidators', [validator], true);
+})(window, document, window.eZ);

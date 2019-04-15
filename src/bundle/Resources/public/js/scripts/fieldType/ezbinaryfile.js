@@ -1,8 +1,8 @@
-(function (global) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezbinaryfile';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
 
-    class EzBinaryFilePreviewField extends global.eZ.BasePreviewField {
+    class EzBinaryFilePreviewField extends eZ.BasePreviewField {
         /**
          * Gets an icon according to a file type
          *
@@ -50,8 +50,8 @@
         }
     }
 
-    [...document.querySelectorAll(SELECTOR_FIELD)].forEach(fieldContainer => {
-        const validator = new global.eZ.BaseFileFieldValidator({
+    doc.querySelectorAll(SELECTOR_FIELD).forEach((fieldContainer) => {
+        const validator = new eZ.BaseFileFieldValidator({
             classInvalid: 'is-invalid',
             fieldContainer,
             eventsMap: [
@@ -72,13 +72,11 @@
         });
         const previewField = new EzBinaryFilePreviewField({
             validator,
-            fieldContainer
+            fieldContainer,
         });
 
         previewField.init();
 
-        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-            [...global.eZ.fieldTypeValidators, validator] :
-            [validator];
-    })
-})(window);
+        eZ.addConfig('fieldTypeValidators', [validator], true);
+    });
+})(window, document, window.eZ);

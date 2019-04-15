@@ -1,7 +1,7 @@
-(function (global) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezcountry';
 
-    class EzCountryValidator extends global.eZ.BaseFieldValidator {
+    class EzCountryValidator extends eZ.BaseFieldValidator {
         /**
          * Validates the select box value
          *
@@ -13,12 +13,12 @@
         validateSelection(event) {
             const isRequired = event.target.required;
             const isEmpty = !event.target.value.trim().length;
-            const isError = (isEmpty && isRequired);
+            const isError = isEmpty && isRequired;
             const label = event.target.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
             const result = { isError };
 
             if (isError) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             }
 
             return result;
@@ -28,17 +28,17 @@
     const validator = new EzCountryValidator({
         classInvalid: 'is-invalid',
         fieldSelector: SELECTOR_FIELD,
-        eventsMap: [{
-            selector: `${SELECTOR_FIELD} .ez-data-source__input`,
-            eventName: 'blur',
-            callback: 'validateSelection',
-            errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
-        }],
+        eventsMap: [
+            {
+                selector: `${SELECTOR_FIELD} .ez-data-source__input`,
+                eventName: 'blur',
+                callback: 'validateSelection',
+                errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+            },
+        ],
     });
 
     validator.init();
 
-    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-        [...global.eZ.fieldTypeValidators, validator] :
-        [validator];
-})(window);
+    eZ.addConfig('fieldTypeValidators', [validator], true);
+})(window, document, window.eZ);

@@ -59,9 +59,9 @@
 
     validator.init();
 
-    eZ.fieldTypeValidators = eZ.fieldTypeValidators ? [...eZ.fieldTypeValidators, validator] : [validator];
+    eZ.addConfig('fieldTypeValidators', [validator], true);
 
-    const datetimeFields = [...doc.querySelectorAll(SELECTOR_FIELD)];
+    const datetimeFields = doc.querySelectorAll(SELECTOR_FIELD);
     const datetimeConfig = {
         enableTime: true,
         time_24hr: true,
@@ -122,4 +122,4 @@
     };
 
     datetimeFields.forEach(initFlatPickr);
-})(window, window.document, window.eZ, window.flatpickr);
+})(window, document, window.eZ, window.flatpickr);

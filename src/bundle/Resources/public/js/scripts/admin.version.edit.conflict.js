@@ -1,11 +1,11 @@
-(function (global, doc, $, eZ, Translator) {
+(function(global, doc, $, eZ, Translator, Routing) {
     const editVersion = (event) => {
         const showErrorNotification = eZ.helpers.notification.showErrorNotification;
         const contentDraftEditUrl = event.currentTarget.dataset.contentDraftEditUrl;
         const versionHasConflictUrl = event.currentTarget.dataset.versionHasConflictUrl;
         const contentId = event.currentTarget.dataset.contentId;
         const languageCode = event.currentTarget.dataset.languageCode;
-        const checkEditPermissionLink = global.Routing.generate('ezplatform.content.check_edit_permission', { contentId, languageCode });
+        const checkEditPermissionLink = Routing.generate('ezplatform.content.check_edit_permission', { contentId, languageCode });
         const errorMessage = Translator.trans(
             /*@Desc("You don't have permission to edit the content")*/ 'content.edit.permission.error',
             {},
@@ -25,9 +25,11 @@
                 doc.querySelector('#edit-conflicted-draft').href = contentDraftEditUrl;
                 $('#version-conflict-modal').modal('show');
             }
+
             if (response.status === 403) {
                 response.text().then(showErrorNotification);
             }
+
             if (response.status === 200) {
                 global.location.href = contentDraftEditUrl;
             }
@@ -43,4 +45,4 @@
     };
 
     doc.querySelectorAll('.ez-btn--content-draft-edit').forEach((button) => button.addEventListener('click', editVersion, false));
-})(window, document, window.jQuery, window.eZ, window.Translator);
+})(window, document, window.jQuery, window.eZ, window.Translator, window.Routing);

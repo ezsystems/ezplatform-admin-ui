@@ -68,4 +68,4 @@
 
     doc.addEventListener('scroll', handleViewportChange, { capture: false, passive: true });
     window.addEventListener('resize', handleViewportChange, { capture: false, passive: true });
-})(window.document, window.React, window.ReactDOM, window.eZ, window.localStorage);
+})(document, window.React, window.ReactDOM, window.eZ, window.localStorage);

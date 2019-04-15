@@ -1,10 +1,10 @@
-(function (global) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezurl';
     const SELECTOR_FIELD_LINK = '.ez-data-source__field--link';
     const SELECTOR_LINK_INPUT = `${SELECTOR_FIELD_LINK} .ez-data-source__input`;
     const SELECTOR_LABEL = '.ez-data-source__label';
 
-    class EzUrlValidator extends global.eZ.BaseFieldValidator {
+    class EzUrlValidator extends eZ.BaseFieldValidator {
         validateUrl(event) {
             const input = event.currentTarget;
             const isRequired = input.required;
@@ -14,7 +14,7 @@
             const result = { isError };
 
             if (isRequired && isEmpty) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             }
 
             return result;
@@ -29,11 +29,7 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_LINK_INPUT}`,
                 eventName: 'blur',
                 callback: 'validateUrl',
-                invalidStateSelectors: [
-                    SELECTOR_LINK_INPUT,
-                    `${SELECTOR_FIELD_LINK} ${SELECTOR_LABEL}`
-
-                ],
+                invalidStateSelectors: [SELECTOR_LINK_INPUT, `${SELECTOR_FIELD_LINK} ${SELECTOR_LABEL}`],
                 errorNodeSelectors: [`${SELECTOR_FIELD_LINK} .ez-data-source__label-wrapper`],
             },
         ],
@@ -41,7 +37,5 @@
 
     validator.init();
 
-    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-        [...global.eZ.fieldTypeValidators, validator] :
-        [validator];
-})(window);
+    eZ.addConfig('fieldTypeValidators', [validator], true);
+})(window, document, window.eZ);

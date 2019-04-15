@@ -1,6 +1,6 @@
 (function(global, doc) {
     const changeLocationLanguage = (event) => {
-        window.location = event.currentTarget.value;
+        global.location = event.currentTarget.value;
     };
     const locationLanguageSwitchers = doc.querySelectorAll('.ez-location-language-change');
 
