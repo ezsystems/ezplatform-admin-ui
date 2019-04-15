@@ -49,6 +49,7 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $this->prependEzDesignConfiguration($container);
         $this->prependAdminUiFormsConfiguration($container);
         $this->prependBazingaJsTranslationConfiguration($container);
+        $this->prependJMSTranslation($container);
     }
 
     /**
@@ -116,5 +117,25 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $config = Yaml::parseFile($configFile);
         $container->prependExtensionConfig('bazinga_js_translation', $config);
         $container->addResource(new FileResource($configFile));
+    }
+
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    private function prependJMSTranslation(ContainerBuilder $container): void
+    {
+        $container->prependExtensionConfig('jms_translation', [
+            'configs' => [
+                'ezplatform_admin_ui' => [
+                    'dirs' => [
+                        __DIR__ . '/../../../src/',
+                    ],
+                    'output_dir' => __DIR__ . '/../Resources/translations/',
+                    'output_format' => 'xliff',
+                    'excluded_dirs' => ['Behat', 'Tests', 'node_modules'],
+                    'extractors' => ['ez_policy'],
+                ],
+            ],
+        ]);
     }
 }
