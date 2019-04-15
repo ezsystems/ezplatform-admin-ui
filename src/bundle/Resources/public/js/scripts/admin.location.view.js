@@ -1,4 +1,4 @@
-(function(global, doc, $, React, ReactDOM, eZ, Routing) {
+(function(global, doc, $, React, ReactDOM, eZ, Routing, Translator) {
     const SELECTOR_MODAL_BULK_ACTION_FAIL = '#bulk-action-failed-modal';
     const listContainers = doc.querySelectorAll('.ez-sil');
     const mfuContainer = doc.querySelector('#ez-mfu');
@@ -49,17 +49,36 @@
             );
             $('#version-draft-conflict-modal').modal('show');
         };
-        fetch(checkVersionDraftLink, {
-            credentials: 'same-origin',
-        }).then((response) => {
-            // Status 409 means that a draft conflict has occurred and the modal must be displayed.
-            // Otherwise we can go to Content Item edit page.
-            if (response.status === 409) {
-                response.text().then(showModal);
-            } else if (response.status === 200) {
-                submitVersionEditForm();
-            }
+        const checkEditPermissionLink = Routing.generate('ezplatform.content.check_edit_permission', {
+            contentId,
+            languageCode: content.mainLanguageCode,
         });
+        const errorMessage = Translator.trans(
+            /*@Desc("You don't have permission to edit the content")*/ 'content.edit.permission.error',
+            {},
+            'content'
+        );
+        const handleCanEditCheck = (response) => {
+            if (response.canEdit) {
+                return fetch(checkVersionDraftLink, { mode: 'same-origin', credentials: 'same-origin' });
+            }
+
+            throw new Error(errorMessage);
+        };
+
+        fetch(checkEditPermissionLink, { mode: 'same-origin', credentials: 'same-origin' })
+            .then(eZ.helpers.request.getJsonFromResponse)
+            .then(handleCanEditCheck)
+            .then((response) => {
+                // Status 409 means that a draft conflict has occurred and the modal must be displayed.
+                // Otherwise we can go to Content Item edit page.
+                if (response.status === 409) {
+                    response.text().then(showModal);
+                } else if (response.status === 200) {
+                    submitVersionEditForm();
+                }
+            })
+            .catch(eZ.helpers.notification.showErrorNotification);
     };
     const generateLink = (locationId) => Routing.generate('_ezpublishLocation', { locationId });
     const setModalTableTitle = (title) => {
@@ -149,4 +168,4 @@
             container
         );
     });
-})(window, window.document, window.jQuery, window.React, window.ReactDOM, window.eZ, window.Routing);
+})(window, window.document, window.jQuery, window.React, window.ReactDOM, window.eZ, window.Routing, window.Translator);

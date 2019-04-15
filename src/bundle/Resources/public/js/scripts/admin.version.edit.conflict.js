@@ -1,4 +1,4 @@
-(function (global, doc, $, eZ) {
+(function (global, doc, $, eZ, Translator) {
     const editVersion = (event) => {
         const showErrorNotification = eZ.helpers.notification.showErrorNotification;
         const contentDraftEditUrl = event.currentTarget.dataset.contentDraftEditUrl;
@@ -43,4 +43,4 @@
     };
 
     doc.querySelectorAll('.ez-btn--content-draft-edit').forEach((button) => button.addEventListener('click', editVersion, false));
-})(window, document, window.jQuery, window.eZ);
+})(window, document, window.jQuery, window.eZ, window.Translator);
