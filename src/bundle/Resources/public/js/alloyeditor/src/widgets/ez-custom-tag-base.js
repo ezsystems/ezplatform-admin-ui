@@ -173,7 +173,7 @@ const customTagBaseDefinition = {
     renderAttributes: function() {
         const customTagConfig = global.eZ.adminUiConfig.richTextCustomTags[this.getName()];
 
-        if (!customTagConfig) {
+        if (!customTagConfig || !customTagConfig.attributes) {
             return;
         }
         const attributes = Object.keys(customTagConfig.attributes).reduce((total, attr) => {
