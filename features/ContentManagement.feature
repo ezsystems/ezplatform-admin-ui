@@ -176,6 +176,6 @@ Scenario: Content can be moved to trash from non-root location
 Scenario: Content can be moved to trash from root location
   Given I navigate to content "Test Article edited" of type "Article" in root path
   When I send content to trash
-  Then there's no "Article" "Test Article edited" on Sub-items list of root
+  Then I should be redirected to root in default view
     And going to trash there is "Article" "Test Article edited" on list
 
