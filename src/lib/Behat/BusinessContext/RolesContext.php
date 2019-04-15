@@ -167,4 +167,18 @@ class RolesContext extends BusinessContext
             ->adminUpdateForm->fillFieldWithValue('Sections', 'true');
         $this->utilityContext->selectOption($this->fields['newPolicyAssignmentLimitation'], $limitationName);
     }
+
+    /**
+     * @When I assign :itemType to role
+     */
+    public function iAssignToRole(string $itemType, TableNode $itemPaths): void
+    {
+        $rolePage = PageObjectFactory::createPage($this->utilityContext, RolePage::PAGE_NAME);
+
+        $parsedItems = [];
+        foreach ($itemPaths->getHash() as $item) {
+            $parsedItems[] = $item['path'];
+        }
+        $rolePage->assignToRole($itemType, $parsedItems);
+    }
 }

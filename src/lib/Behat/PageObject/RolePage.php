@@ -12,6 +12,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\NavLinkTabs;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SimpleListTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 use PHPUnit\Framework\Assert;
 
 class RolePage extends Page
@@ -43,6 +44,8 @@ class RolePage extends Page
      */
     public $navLinkTabs;
 
+    private $assignTypeLabelMap = ['users' => 'Select users', 'groups' => 'Select groups'];
+
     public function __construct(UtilityContext $context, string $roleName)
     {
         parent::__construct($context);
@@ -55,6 +58,9 @@ class RolePage extends Page
         $this->dialog = ElementFactory::createElement($this->context, Dialog::ELEMENT_NAME);
         $this->pageTitle = sprintf('Role "%s"', $roleName);
         $this->pageTitleLocator = '.ez-header h1';
+        $this->fields = [
+            'assignButton' => '.btn-secondary',
+        ];
     }
 
     /**
@@ -103,6 +109,20 @@ class RolePage extends Page
 
         $this->navLinkTabs->goToTab('Assignments');
         $this->adminLists['Assignments']->clickAssignButton();
+    }
+
+    public function assignToRole(string $type, array $items): void
+    {
+        $this->context->getElementByText($this->assignTypeLabelMap[$type], $this->fields['assignButton'])->click();
+
+        $udw = ElementFactory::createElement($this->context, UniversalDiscoveryWidget::ELEMENT_NAME);
+        $udw->verifyVisibility();
+
+        foreach ($items as $item) {
+            $udw->selectContent($item);
+        }
+
+        $udw->confirm();
     }
 
     /**
