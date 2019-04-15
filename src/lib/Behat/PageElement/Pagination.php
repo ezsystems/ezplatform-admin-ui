@@ -30,6 +30,6 @@ class Pagination extends Element
     public function clickNextButton(): void
     {
         $this->context->findElement($this->fields['nextButton'])->click();
-        $this->context->waitUntilElementDisappears($this->fields['spinner'], 5);
+        $this->context->waitUntilElementDisappears($this->fields['spinner'], 10);
     }
 }
