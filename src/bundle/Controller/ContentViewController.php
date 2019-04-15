@@ -160,6 +160,9 @@ class ContentViewController extends Controller
             $this->supplyPathLocations($view);
             $this->subitemsContentViewParameterSupplier->supply($view);
             $this->supplyContentActionForms($view);
+            $this->supplyIsLocationInvisible($view);
+            $this->supplyContentReverseRelations($view);
+            $this->supplyContentTreeParameters($view);
         }
 
         $this->supplyContentType($view);
@@ -169,9 +172,6 @@ class ContentViewController extends Controller
         $this->supplyRolePagination($view, $request);
         $this->supplyPolicyPagination($view, $request);
         $this->supplyIsLocationBookmarked($view);
-        $this->supplyIsLocationInvisible($view);
-        $this->supplyContentReverseRelations($view);
-        $this->supplyContentTreeParameters($view);
 
         return $view;
     }
