@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Translation\Extractor;
 
-use JMS\TranslationBundle\Exception\RuntimeException;
 use Doctrine\Common\Annotations\DocParser;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Annotation\Meaning;
@@ -24,7 +23,11 @@ use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor;
 use PhpParser\Node\Scalar\String_;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
+/**
+ * Extracts translations from TranslatableNotificationHandler::{info,success,warning,error} method calls.
+ */
 class NotificationTranslationExtractor implements LoggerAwareInterface, FileVisitorInterface, NodeVisitor
 {
     /** @var \JMS\TranslationBundle\Translation\FileSourceFactory */
@@ -66,6 +69,7 @@ class NotificationTranslationExtractor implements LoggerAwareInterface, FileVisi
         $this->fileSourceFactory = $fileSourceFactory;
         $this->traverser = new NodeTraverser();
         $this->traverser->addVisitor($this);
+        $this->logger = new NullLogger();
     }
 
     public function setLogger(LoggerInterface $logger)
@@ -90,7 +94,7 @@ class NotificationTranslationExtractor implements LoggerAwareInterface, FileVisi
         $ignore = false;
         $desc = $meaning = null;
 
-        if (null !== $docComment = $this->getDocCommentForNode($node)) {
+        if (null !== ($docComment = $this->getDocCommentForNode($node))) {
             if ($docComment instanceof Doc) {
                 $docComment = $docComment->getText();
             }
@@ -115,13 +119,7 @@ class NotificationTranslationExtractor implements LoggerAwareInterface, FileVisi
 
             $message = sprintf('Can only extract the translation id from a scalar string, but got "%s". Please refactor your code to make it extractable, or add the doc comment /** @Ignore */ to this code element (in %s on line %d).', get_class($node->args[0]->value), $this->file, $node->args[0]->value->getLine());
 
-            if ($this->logger) {
-                $this->logger->error($message);
-
-                return;
-            }
-
-            throw new RuntimeException($message);
+            $this->logger->error($message);
         }
 
         $id = $node->args[0]->value->value;
@@ -135,13 +133,7 @@ class NotificationTranslationExtractor implements LoggerAwareInterface, FileVisi
 
                 $message = sprintf('Can only extract the translation domain from a scalar string, but got "%s". Please refactor your code to make it extractable, or add the doc comment /** @Ignore */ to this code element (in %s on line %d).', get_class($node->args[$index]->value), $this->file, $node->args[$index]->value->getLine());
 
-                if ($this->logger) {
-                    $this->logger->error($message);
-
-                    return;
-                }
-
-                throw new RuntimeException($message);
+                $this->logger->error($message);
             }
 
             $domain = $node->args[$index]->value->value;

@@ -84,10 +84,10 @@ services:
             - { name: form.type }
 
     EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler: ~
-    EzSystems\EzPlatformAdminUi\Notification\TranslatableFlashBagNotificationHandler: ~
+    EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandler: ~
 
     EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler'
-    EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\TranslatableFlashBagNotificationHandler'
+    EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandler'
 
     EzSystems\EzPlatformAdminUi\RepositoryForms\View\ViewParametersListener:
         public: true
