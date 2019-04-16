@@ -169,11 +169,11 @@ class RolesContext extends BusinessContext
     }
 
     /**
-     * @When I assign :itemType to role
+     * @When I assign :itemType to role :roleName
      */
-    public function iAssignToRole(string $itemType, TableNode $itemPaths): void
+    public function iAssignToRole(string $itemType, string $roleName, TableNode $itemPaths): void
     {
-        $rolePage = PageObjectFactory::createPage($this->utilityContext, RolePage::PAGE_NAME);
+        $rolePage = PageObjectFactory::createPage($this->utilityContext, RolePage::PAGE_NAME, $roleName);
 
         $parsedItems = [];
         foreach ($itemPaths->getHash() as $item) {
