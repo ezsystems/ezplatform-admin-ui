@@ -27,7 +27,7 @@ Feature: Content fields setting and editing
       | ezboolean            | Checkbox                     | value     | true                      |            |                       |         |          | 1                         |
       | ezobjectrelation     | Content relation (single)    | value     | Media/Images              |            |                       |         |          | Images                    |
       | ezobjectrelationlist | Content relations (multiple) | firstItem | Media/Images              | secondItem | Media/Files           |         |          | Images Files              |
-      | ezcountry            | Country                      | value     | Poland                    |            |                       |         |          | Poland                    |
+      | ezcountry            | Country                      | value     | Poland1                   |            |                       |         |          | Poland                    |
       | ezdate               | Date                         | value     | 11/23/2019                |            |                       |         |          | Saturday 23 November 2019 |
       | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 14:45                 |         |          | Sat 2019-23-11 14:45:00   |
       | ezemail              | Email address                | value     | email@example.com         |            |                       |         |          | email@example.com         |
