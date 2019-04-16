@@ -62,10 +62,10 @@ Feature: Roles management
   Scenario: User assignation can be discarded
     Given there's "Test Role edited" on "Roles" list
     When I start assigning to "Test Role edited" from "Roles" page
-      And I assign users to role "Test Role edited"
+      And I assign users to role
         | path                                         |
         | Users/Administrator users/Administrator User |
-      And I assign groups to role "Test Role edited"
+      And I assign groups to role
         | path          |
         | Users/Editors |
         | Users         |
@@ -79,10 +79,11 @@ Feature: Roles management
   Scenario: User can be assigned to role from the Roles list
     Given there's "Test Role edited" on "Roles" list
     When I start assigning to "Test Role edited" from "Roles" page
-      And I assign users to role "Test Role edited"
-        | path                                 |
-        | Users/Anonymous users/Anonymous User |
-      And I assign groups to role "Test Role edited"
+      And I assign users to role
+        | path                                         |
+        | Users/Anonymous Users/Anonymous User         |
+        | Users/Administrator users/Administrator User |
+      And I assign groups to role
         | path          |
         | Users/Editors |
       And I select limitation "Media/Images" for assignment through UDW
@@ -100,7 +101,7 @@ Feature: Roles management
     Given there's "Test Role edited" on "Roles" list
       And I go to "Test Role edited" "Role" page
     When I start assigning users and groups to "Test Role edited" from role page
-      And I assign groups to role "Test Role edited"
+      And I assign groups to role
         | path  |
         | Users |
     And I click on the edit action bar button "Save"

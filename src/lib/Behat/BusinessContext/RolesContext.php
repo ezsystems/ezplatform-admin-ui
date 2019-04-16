@@ -21,6 +21,11 @@ class RolesContext extends BusinessContext
         'assignment' => 'Assignments',
     ];
 
+    private $itemTypeToLabelMapping = [
+        'users' => 'Select users',
+        'groups' => 'Select groups',
+    ];
+
     private $fields = [
         'newPolicySelectList' => 'policy_create_policy',
         'newPolicyAssignmentLimitation' => 'role_assignment_create_sections',
@@ -169,16 +174,20 @@ class RolesContext extends BusinessContext
     }
 
     /**
-     * @When I assign :itemType to role :roleName
+     * @When I assign :itemType to role
      */
-    public function iAssignToRole(string $itemType, string $roleName, TableNode $itemPaths): void
+    public function iAssignToRole(string $itemType, TableNode $items): void
     {
-        $rolePage = PageObjectFactory::createPage($this->utilityContext, RolePage::PAGE_NAME, $roleName);
+        $pageObject = PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME);
+        $pageObject->adminUpdateForm->clickButton($this->itemTypeToLabelMapping[$itemType]);
 
-        $parsedItems = [];
-        foreach ($itemPaths->getHash() as $item) {
-            $parsedItems[] = $item['path'];
+        $udw = ElementFactory::createElement($this->utilityContext, UniversalDiscoveryWidget::ELEMENT_NAME);
+        $udw->verifyVisibility();
+
+        foreach ($items->getHash() as $item) {
+            $udw->selectContent($item['path']);
         }
-        $rolePage->assignToRole($itemType, $parsedItems);
+
+        $udw->confirm();
     }
 }
