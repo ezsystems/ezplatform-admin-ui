@@ -12,6 +12,13 @@ matrix:
           - TEST_CMD="./bin/.travis/get_behat_features.sh -p adminui -s adminui | bin/fastest -o -v \"bin/behat {} --profile=adminui --suite=adminui --no-interaction -vv --strict\""
           - SYMFONY_ENV=behat
           - SYMFONY_DEBUG=1
+        - php: 7.1
+          env:
+          - WEB_HOST="varnish"
+          - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/varnish.yml:doc/docker/redis.yml:doc/docker/selenium.yml"
+          - TEST_CMD="./bin/.travis/get_behat_features.sh -p adminui -s adminui | bin/fastest -o -v \"bin/behat {} --profile=adminui --suite=adminui --no-interaction -vv --strict\""
+          - SYMFONY_ENV=behat
+          - SYMFONY_DEBUG=1
 
 cache:
     directories:
@@ -20,7 +27,7 @@ cache:
 env:
   global:
     # For acceptance tests
-    - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform.git"
+    - EZPLATFORM_REPO="https://github.com/mnocon/ezplatform.git"
 
 # test only master and stable branches (+ Pull requests)
 branches:
