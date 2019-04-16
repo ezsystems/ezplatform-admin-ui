@@ -25,48 +25,27 @@ use PhpParser\NodeVisitor;
 use PhpParser\Node\Scalar\String_;
 use Psr\Log\LoggerInterface;
 
-/**
- * This parser can extract translation information from PHP files.
- *
- * It parses all calls that are made to a method named "trans".
- *
- * @author Johannes M. Schmitt <schmittjoh@gmail.com>
- */
 class NotificationTranslationExtractor implements LoggerAwareInterface, FileVisitorInterface, NodeVisitor
 {
-    /**
-     * @var FileSourceFactory
-     */
+    /** @var \JMS\TranslationBundle\Translation\FileSourceFactory */
     private $fileSourceFactory;
 
-    /**
-     * @var NodeTraverser
-     */
+    /** @var \PhpParser\NodeTraverser */
     private $traverser;
 
-    /**
-     * @var MessageCatalogue
-     */
+    /** @var \JMS\TranslationBundle\Model\MessageCatalogue */
     private $catalogue;
 
-    /**
-     * @var \SplFileInfo
-     */
+    /** @var \SplFileInfo */
     private $file;
 
-    /**
-     * @var DocParser
-     */
+    /** @var \Doctrine\Common\Annotations\DocParser */
     private $docParser;
 
-    /**
-     * @var LoggerInterface
-     */
+    /** @var \Psr\Log\LoggerInterface */
     private $logger;
 
-    /**
-     * @var Node
-     */
+    /** @var \PhpParser\Node */
     private $previousNode;
 
     /**
@@ -81,12 +60,6 @@ class NotificationTranslationExtractor implements LoggerAwareInterface, FileVisi
         'error' => 2,
     ];
 
-    /**
-     * DefaultPhpFileExtractor constructor.
-     *
-     * @param DocParser $docParser
-     * @param FileSourceFactory $fileSourceFactory
-     */
     public function __construct(DocParser $docParser, FileSourceFactory $fileSourceFactory)
     {
         $this->docParser = $docParser;
@@ -95,17 +68,11 @@ class NotificationTranslationExtractor implements LoggerAwareInterface, FileVisi
         $this->traverser->addVisitor($this);
     }
 
-    /**
-     * @param LoggerInterface $logger
-     */
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
-    /**
-     * @param Node $node
-     */
     public function enterNode(Node $node)
     {
         $methodCallNodeName = null;
@@ -189,11 +156,6 @@ class NotificationTranslationExtractor implements LoggerAwareInterface, FileVisi
         $this->catalogue->add($message);
     }
 
-    /**
-     * @param \SplFileInfo $file
-     * @param MessageCatalogue $catalogue
-     * @param array $ast
-     */
     public function visitPhpFile(\SplFileInfo $file, MessageCatalogue $catalogue, array $ast)
     {
         $this->file = $file;
@@ -201,50 +163,27 @@ class NotificationTranslationExtractor implements LoggerAwareInterface, FileVisi
         $this->traverser->traverse($ast);
     }
 
-    /**
-     * @param array $nodes
-     */
     public function beforeTraverse(array $nodes)
     {
     }
 
-    /**
-     * @param Node $node
-     */
     public function leaveNode(Node $node)
     {
     }
 
-    /**
-     * @param array $nodes
-     */
     public function afterTraverse(array $nodes)
     {
     }
 
-    /**
-     * @param \SplFileInfo $file
-     * @param MessageCatalogue $catalogue
-     */
     public function visitFile(\SplFileInfo $file, MessageCatalogue $catalogue)
     {
     }
 
-    /**
-     * @param \SplFileInfo $file
-     * @param MessageCatalogue $catalogue
-     * @param \Twig_Node $ast
-     */
     public function visitTwigFile(\SplFileInfo $file, MessageCatalogue $catalogue, \Twig_Node $ast)
     {
     }
 
-    /**
-     * @param Node $node
-     *
-     * @return null|string
-     */
-    private function getDocCommentForNode(Node $node)
+    private function getDocCommentForNode(Node $node): ?string
     {
         // check if there is a doc comment for the ID argument
         // ->trans(/** @Desc("FOO") */ 'my.id')
