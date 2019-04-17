@@ -80,6 +80,7 @@ Scenario: Content can be edited
 Scenario: Content can be previewed during edition
   Given I navigate to content "Test Article edited" of type "Article" in root path
   When I click on the edit action bar button "Edit"
+    And I should be on "Content Update" "Test Article edited" page
     And I click on the edit action bar button "Preview"
     And I go to "tablet" view in "Test Article edited" preview
     And I go to "mobile" view in "Test Article edited" preview
