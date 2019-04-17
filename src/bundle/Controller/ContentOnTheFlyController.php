@@ -10,14 +10,19 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions as ApiException;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\ContentCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\ContentOnTheFlyDispatcher;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\UserOnTheFlyDispatcher;
+use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\View\ContentCreateOnTheFlyView;
 use EzSystems\RepositoryForms\Data\Mapper\ContentCreateMapper;
+use EzSystems\RepositoryForms\Data\Mapper\UserCreateMapper;
 use EzSystems\RepositoryForms\Form\Type\Content\ContentEditType;
+use EzSystems\RepositoryForms\Form\Type\User\UserCreateType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -35,22 +40,40 @@ class ContentOnTheFlyController extends Controller
     /** @var ContentOnTheFlyDispatcher */
     private $contentActionDispatcher;
 
+    /** @var \eZ\Publish\API\Repository\UserService */
+    private $userService;
+
+    /** @var \EzSystems\RepositoryForms\Form\ActionDispatcher\UserDispatcher */
+    private $userActionDispatcher;
+
+    /** @var array */
+    private $userContentTypeIdentifier;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
      * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\ContentOnTheFlyDispatcher $contentActionDispatcher
+     * @param \EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\UserOnTheFlyDispatcher $userActionDispatcher
+     * @param string[] $userContentTypeIdentifier
      */
     public function __construct(
         ContentService $contentService,
         LanguageService $languageService,
         LocationService $locationService,
-        ContentOnTheFlyDispatcher $contentActionDispatcher
+        UserService $userService,
+        ContentOnTheFlyDispatcher $contentActionDispatcher,
+        UserOnTheFlyDispatcher $userActionDispatcher,
+        array $userContentTypeIdentifier
     ) {
         $this->contentService = $contentService;
         $this->locationService = $locationService;
         $this->languageService = $languageService;
+        $this->userService = $userService;
         $this->contentActionDispatcher = $contentActionDispatcher;
+        $this->userActionDispatcher = $userActionDispatcher;
+        $this->userContentTypeIdentifier = $userContentTypeIdentifier;
     }
 
     /**
@@ -70,6 +93,10 @@ class ContentOnTheFlyController extends Controller
         ContentType $contentType,
         Location $parentLocation
     ) {
+        if ((new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType)) {
+            return $this->createUserAction($request, $languageCode, $contentType, $parentLocation);
+        }
+
         $language = $this->languageService->loadLanguage($languageCode);
 
         $data = (new ContentCreateMapper())->mapToFormData($contentType, [
@@ -80,8 +107,10 @@ class ContentOnTheFlyController extends Controller
         $form = $this->createForm(ContentEditType::class, $data, [
             'languageCode' => $language->languageCode,
             'mainLanguageCode' => $language->languageCode,
-            'drafts_enabled' => true,
+            'drafts_enabled' => false,
+            'intent' => 'create',
         ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $form->getClickedButton()) {
@@ -92,6 +121,40 @@ class ContentOnTheFlyController extends Controller
         }
 
         return new ContentCreateOnTheFlyView('@ezdesign/content/content_on_the_fly/content_create_on_the_fly.html.twig', [
+            'form' => $form->createView(),
+            'language' => $language,
+            'contentType' => $contentType,
+            'parentLocation' => $parentLocation,
+        ]);
+    }
+
+    public function createUserAction(
+        Request $request,
+        string $languageCode,
+        ContentType $contentType,
+        Location $parentLocation
+    ) {
+        $language = $this->languageService->loadLanguage($languageCode);
+        $parentGroup = $this->userService->loadUserGroup($parentLocation->contentId);
+
+        $data = (new UserCreateMapper())->mapToFormData($contentType, [$parentGroup], [
+            'mainLanguageCode' => $language->languageCode,
+        ]);
+        $form = $this->createForm(UserCreateType::class, $data, [
+            'languageCode' => $language->languageCode,
+            'mainLanguageCode' => $language->languageCode,
+         ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid() && $form->getClickedButton()) {
+            $this->userActionDispatcher->dispatchFormAction($form, $data, $form->getClickedButton()->getName());
+            if ($response = $this->userActionDispatcher->getResponse()) {
+                return $response;
+            }
+        }
+
+        return new ContentCreateOnTheFlyView('@ezdesign/content/content_on_the_fly/user_create_on_the_fly.html.twig', [
             'form' => $form->createView(),
             'language' => $language,
             'contentType' => $contentType,
