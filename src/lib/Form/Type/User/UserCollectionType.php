@@ -10,7 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\User;
 
 use eZ\Publish\API\Repository\UserService;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\UserCollectionTransformer;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\UserTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
