@@ -57,7 +57,7 @@ class UniversalDiscoveryWidget extends Element
         if ($this->isMultiSelect()) {
             $itemToSelect = $this->context->getElementByText($expectedContentName, sprintf($this->fields['elementSelector'], $depth));
             $itemToSelect->mouseOver();
-            $this->context->findElement($this->fields['selectContentButton'], self::UDW_BRANCH_LOADING_TIMEOUT, $itemToSelect)->click();
+            $this->context->findElement($this->fields['selectContentButton'], self::UDW_TIMEOUT, $itemToSelect)->click();
         }
     }
 

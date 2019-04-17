@@ -39,6 +39,7 @@ Feature: Content items creation
         | Title | Test Article draft |
       And I set article main content field to "Test Article draft intro"
       And I click on the edit action bar button "Save"
+      And I should be on "Content Update" "Test Article draft" page
       And I click on the edit action bar button "Publish"
     Then I should be on content container page "Test Article draft" of type "Article" in root path
       And going to dashboard we see there's no draft "Test Article draft" on list
