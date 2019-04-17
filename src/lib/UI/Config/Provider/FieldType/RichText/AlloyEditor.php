@@ -50,7 +50,7 @@ class AlloyEditor implements ProviderInterface
      */
     protected function getExtraButtons(): array
     {
-        trigger_error(
+        @trigger_error(
             '"ezrichtext.alloy_editor.extra_buttons" is deprecated since v2.5.1. There will be new and more flexible solution to manage buttons in Online Editor in 3.0.0',
             E_USER_DEPRECATED
         );
