@@ -8,3 +8,5 @@ services:
 
     EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface:
         alias: EzSystems\EzPlatformAdminUi\Permission\PermissionChecker
+
+    EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer: ~

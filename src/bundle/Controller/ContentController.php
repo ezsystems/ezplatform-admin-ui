@@ -10,11 +10,14 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions as ApiException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
+use eZ\Publish\SPI\Limitation\Target;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
@@ -28,9 +31,11 @@ use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentVisibilityUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\MainTranslationUpdateType;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
 use EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -69,6 +74,12 @@ class ContentController extends Controller
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
+    /** @var \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer */
+    private $lookupLimitationsTransformer;
+
     /** @var array */
     private $userContentTypeIdentifier;
 
@@ -82,6 +93,8 @@ class ContentController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface $siteaccessResolver
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer $lookupLimitationsTransformer
      * @param array $userContentTypeIdentifier
      */
     public function __construct(
@@ -94,6 +107,8 @@ class ContentController extends Controller
         SiteaccessResolverInterface $siteaccessResolver,
         LocationService $locationService,
         UserService $userService,
+        PermissionResolver $permissionResolver,
+        LookupLimitationsTransformer $lookupLimitationsTransformer,
         array $userContentTypeIdentifier
     ) {
         $this->notificationHandler = $notificationHandler;
@@ -106,6 +121,8 @@ class ContentController extends Controller
         $this->locationService = $locationService;
         $this->userService = $userService;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
+        $this->permissionResolver = $permissionResolver;
+        $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
     }
 
     /**
@@ -340,7 +357,7 @@ class ContentController extends Controller
     }
 
     /**
-     * @param Symfony\Component\HttpFoundation\Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -388,7 +405,7 @@ class ContentController extends Controller
     }
 
     /**
-     * @param Symfony\Component\HttpFoundation\Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -457,6 +474,56 @@ class ContentController extends Controller
         }
 
         return $result instanceof Response ? $result : $this->redirectToRoute('ezplatform.dashboard');
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
+     * @param string|null $languageCode
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    public function checkEditPermissionAction(Content $content, ?string $languageCode): JsonResponse
+    {
+        $targets = [];
+
+        if (null !== $languageCode) {
+            $targets[] = (new Target\Builder\VersionBuilder())->translateToAnyLanguageOf([$languageCode])->build();
+        }
+
+        $canEdit = $this->permissionResolver->canUser(
+            'content',
+            'edit',
+            $content,
+            $targets
+        );
+
+        $lookupLimitations = $this->permissionResolver->lookupLimitations(
+            'content',
+            'edit',
+            $content,
+            $targets,
+            [Limitation::LANGUAGE]
+        );
+
+        $editLanguagesLimitationValues = $this->lookupLimitationsTransformer->getFlattenedLimitationsValues($lookupLimitations);
+
+        $response = new JsonResponse();
+        $response->setData([
+            'canEdit' => $canEdit,
+            'editLanguagesLimitationValues' => $canEdit ? $editLanguagesLimitationValues : [],
+        ]);
+
+        // Disable HTTP cache
+        $response->setPrivate();
+        $response->setMaxAge(0);
+        $response->setSharedMaxAge(0);
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->headers->addCacheControlDirective('no-store', true);
+
+        return $response;
     }
 
     /**

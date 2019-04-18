@@ -8,8 +8,11 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
+use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\SPI\Limitation\Target;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
@@ -40,6 +43,12 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
     /** @var UrlGeneratorInterface */
     protected $urlGenerator;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
+    /** @var \eZ\Publish\API\Repository\LanguageService */
+    private $languageService;
+
     /**
      * @param Environment $twig
      * @param TranslatorInterface $translator
@@ -47,6 +56,7 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
      * @param UrlGeneratorInterface $urlGenerator
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         Environment $twig,
@@ -54,13 +64,17 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
         DatasetFactory $datasetFactory,
         UrlGeneratorInterface $urlGenerator,
         EventDispatcherInterface $eventDispatcher,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        PermissionResolver $permissionResolver,
+        LanguageService $languageService
     ) {
         parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
+        $this->permissionResolver = $permissionResolver;
+        $this->languageService = $languageService;
     }
 
     public function getIdentifier(): string
@@ -112,12 +126,22 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
             $versionInfo->contentInfo->mainLanguageCode
         );
 
+        $languagesCodes = array_column($this->languageService->loadLanguages(), 'languageCode');
+
+        $canTranslate = $this->permissionResolver->canUser(
+            'content',
+            'edit',
+            $location->getContentInfo(),
+            [(new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build()]
+        );
+
         $viewParameters = [
             'translations' => $translationsDataset->getTranslations(),
             'form_translation_add' => $translationAddForm->createView(),
             'form_translation_remove' => $translationDeleteForm->createView(),
             'form_main_translation_update' => $mainTranslationUpdateForm->createView(),
             'main_translation_switch' => true,
+            'can_translate' => $canTranslate,
         ];
 
         return array_replace($contextParameters, $viewParameters);

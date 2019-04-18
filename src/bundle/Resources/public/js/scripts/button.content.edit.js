@@ -7,15 +7,19 @@
         const contentId = event.currentTarget.dataset.contentId;
         const versionNo = event.currentTarget.dataset.versionNo;
         const languageCode = event.currentTarget.dataset.languageCode;
-        const contentInfoInput = versionEditForm.querySelector('input[name="' + versionEditFormName + '[content_info]"]');
+        const contentInfoInput = versionEditForm.querySelector(`input[name="${versionEditFormName}[content_info]"]`);
         const versionInfoContentInfoInput = versionEditForm.querySelector(
-            'input[name="' + versionEditFormName + '[version_info][content_info]"]'
+            `input[name="${versionEditFormName}[version_info][content_info]"]`
         );
-        const versionInfoVersionNoInput = versionEditForm.querySelector(
-            'input[name="' + versionEditFormName + '[version_info][version_no]"]'
-        );
-        const languageInput = versionEditForm.querySelector('#' + versionEditFormName + '_language_' + languageCode);
+        const versionInfoVersionNoInput = versionEditForm.querySelector(`input[name="${versionEditFormName}[version_info][version_no]"]`);
+        const languageInput = versionEditForm.querySelector(`#${versionEditFormName}_language_${languageCode}`);
         const checkVersionDraftLink = global.Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode });
+        const checkEditPermissionLink = global.Routing.generate('ezplatform.content.check_edit_permission', { contentId, languageCode });
+        const errorMessage = Translator.trans(
+            /*@Desc("You don't have permission to edit the content")*/ 'content.edit.permission.error',
+            {},
+            'content'
+        );
         const submitVersionEditForm = () => {
             contentInfoInput.value = contentId;
             versionInfoContentInfoInput.value = contentId;
@@ -40,12 +44,14 @@
             );
             $('#version-draft-conflict-modal').modal('show');
         };
+        const handleCanEditCheck = (response) => {
+            if (response.canEdit) {
+                return fetch(checkVersionDraftLink, { mode: 'same-origin', credentials: 'same-origin' });
+            }
 
-        event.preventDefault();
-
-        fetch(checkVersionDraftLink, {
-            credentials: 'same-origin',
-        }).then(function(response) {
+            throw new Error(errorMessage);
+        };
+        const handleDraftConflict = (response) => {
             // Status 409 means that a draft conflict has occurred and the modal must be displayed.
             // Otherwise we can go to Content Item edit page.
             if (response.status === 409) {
@@ -55,7 +61,15 @@
             } else if (response.status === 200) {
                 submitVersionEditForm();
             }
-        });
+        };
+
+        event.preventDefault();
+
+        fetch(checkEditPermissionLink, { mode: 'same-origin', credentials: 'same-origin' })
+            .then(eZ.helpers.request.getJsonFromResponse)
+            .then(handleCanEditCheck)
+            .then(handleDraftConflict)
+            .catch(showErrorNotification);
     };
 
     [...doc.querySelectorAll('.ez-btn--content-edit')].forEach((button) => button.addEventListener('click', editVersion, false));

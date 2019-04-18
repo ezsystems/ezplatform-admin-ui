@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft;
 
 use eZ\Publish\API\Repository\LanguageService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
+use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\VersionInfoType;
@@ -22,15 +23,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContentEditType extends AbstractType
 {
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     protected $languageService;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader */
+    private $languageChoiceLoader;
+
     /**
-     * @param LanguageService $languageService
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader $languageChoiceLoader
      */
-    public function __construct(LanguageService $languageService)
-    {
+    public function __construct(
+        LanguageService $languageService,
+        LanguageChoiceLoader $languageChoiceLoader
+    ) {
         $this->languageService = $languageService;
+        $this->languageChoiceLoader = $languageChoiceLoader;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -74,6 +82,7 @@ class ContentEditType extends AbstractType
                 'data_class' => ContentEditData::class,
                 'translation_domain' => 'forms',
                 'language_codes' => false,
+                'choice_loader' => $this->languageChoiceLoader,
             ])
             ->setAllowedTypes('language_codes', ['bool', 'array']);
     }
@@ -89,9 +98,10 @@ class ContentEditType extends AbstractType
             'label' => false,
             'multiple' => false,
             'expanded' => true,
+            'choice_loader' => $options['choice_loader'],
         ];
 
-        if (is_array($options['language_codes'])) {
+        if ($options['choice_loader'] instanceof LanguageChoiceLoader && is_array($options['language_codes'])) {
             $languageOptions['choice_loader'] = new CallbackChoiceLoader(function () use ($options) {
                 return array_map([$this->languageService, 'loadLanguage'], $options['language_codes']);
             });

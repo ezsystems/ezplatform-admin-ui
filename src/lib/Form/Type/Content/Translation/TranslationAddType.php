@@ -13,9 +13,14 @@ use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
+use eZ\Publish\API\Repository\Values\User\Limitation;
+use eZ\Publish\SPI\Limitation\Target;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
+use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Exception\AlreadySubmittedException;
@@ -31,25 +36,40 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TranslationAddType extends AbstractType
 {
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     protected $languageService;
 
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     protected $contentService;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     protected $locationService;
 
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
+    /** @var \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer */
+    private $lookupLimitationsTransformer;
+
     /**
-     * @param LanguageService $langaugeService
-     * @param ContentService $contentService
-     * @param LocationService $locationService
+     * @param \eZ\Publish\API\Repository\LanguageService $langaugeService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer $lookupLimitationsTransformer
      */
-    public function __construct(LanguageService $langaugeService, ContentService $contentService, LocationService $locationService)
-    {
+    public function __construct(
+        LanguageService $langaugeService,
+        ContentService $contentService,
+        LocationService $locationService,
+        PermissionResolver $permissionResolver,
+        LookupLimitationsTransformer $lookupLimitationsTransformer
+    ) {
         $this->languageService = $langaugeService;
         $this->contentService = $contentService;
         $this->locationService = $locationService;
+        $this->permissionResolver = $permissionResolver;
+        $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -92,6 +112,7 @@ class TranslationAddType extends AbstractType
      */
     public function onPreSetData(FormEvent $event)
     {
+        $contentInfo = null;
         $contentLanguages = [];
         $form = $event->getForm();
         $data = $event->getData();
@@ -103,7 +124,7 @@ class TranslationAddType extends AbstractType
             $contentLanguages = $versionInfo->languageCodes;
         }
 
-        $this->addLanguageFields($form, $contentLanguages);
+        $this->addLanguageFields($form, $contentLanguages, $contentInfo);
     }
 
     /**
@@ -119,6 +140,7 @@ class TranslationAddType extends AbstractType
      */
     public function onPreSubmit(FormEvent $event)
     {
+        $contentInfo = null;
         $contentLanguages = [];
         $form = $event->getForm();
         $data = $event->getData();
@@ -137,7 +159,7 @@ class TranslationAddType extends AbstractType
             }
         }
 
-        $this->addLanguageFields($form, $contentLanguages);
+        $this->addLanguageFields($form, $contentLanguages, $contentInfo);
     }
 
     /**
@@ -160,13 +182,28 @@ class TranslationAddType extends AbstractType
      *
      * @param FormInterface $form
      * @param string[] $contentLanguages
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
      *
-     * @throws AlreadySubmittedException
-     * @throws LogicException
-     * @throws UnexpectedTypeException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    public function addLanguageFields(FormInterface $form, array $contentLanguages): void
+    public function addLanguageFields(FormInterface $form, array $contentLanguages, ?ContentInfo $contentInfo): void
     {
+        $languagesCodes = array_column($this->languageService->loadLanguages(), 'languageCode');
+
+        $limitationLanguageCodes = [];
+        if (null !== $contentInfo) {
+            $lookupLimitations = $this->permissionResolver->lookupLimitations(
+                'content',
+                'edit',
+                $contentInfo,
+                [(new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build()],
+                [Limitation::LANGUAGE]
+            );
+
+            $limitationLanguageCodes = $this->lookupLimitationsTransformer->getFlattenedLimitationsValues($lookupLimitations);
+        }
+
         $form
             ->add(
                 'language',
@@ -175,10 +212,12 @@ class TranslationAddType extends AbstractType
                     'required' => true,
                     'multiple' => false,
                     'expanded' => true,
-                    'choice_loader' => new CallbackChoiceLoader(function () use ($contentLanguages) {
+                    'choice_loader' => new CallbackChoiceLoader(function () use ($contentLanguages, $limitationLanguageCodes) {
                         return $this->loadLanguages(
-                            function (Language $language) use ($contentLanguages) {
-                                return $language->enabled && !in_array($language->languageCode, $contentLanguages, true);
+                            function (Language $language) use ($contentLanguages, $limitationLanguageCodes) {
+                                return $language->enabled
+                                    && !in_array($language->languageCode, $contentLanguages, true)
+                                    && (empty($limitationLanguageCodes) || in_array($language->languageCode, $limitationLanguageCodes, true));
                             }
                         );
                     }),
