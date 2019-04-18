@@ -128,7 +128,10 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                     'attributes' => $canCreate && $canPublish
                         ? $publishAttributes
                         : array_merge($publishAttributes, self::BTN_DISABLED_ATTR),
-                    'extras' => ['icon' => 'publish'],
+                    'extras' => [
+                        'icon' => 'publish',
+                        'orderNumber' => 10,
+                    ],
                 ]
             ),
             self::ITEM__SAVE_DRAFT => $this->createMenuItem(
@@ -137,7 +140,10 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                     'attributes' => $canCreate
                         ? $createAttributes
                         : array_merge($createAttributes, self::BTN_DISABLED_ATTR),
-                    'extras' => ['icon' => 'save'],
+                    'extras' => [
+                        'icon' => 'save',
+                        'orderNumber' => 50,
+                    ],
                 ]
             ),
             self::ITEM__PREVIEW => $this->createMenuItem(
@@ -146,7 +152,10 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                     'attributes' => $canPreview
                         ? $previewAttributes
                         : array_merge($previewAttributes, self::BTN_DISABLED_ATTR),
-                    'extras' => ['icon' => 'view-desktop'],
+                    'extras' => [
+                        'icon' => 'view-desktop',
+                        'orderNumber' => 60,
+                    ],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
@@ -156,7 +165,10 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                         'class' => self::BTN_TRIGGER_CLASS,
                         'data-click' => '#ezrepoforms_content_edit_cancel',
                     ],
-                    'extras' => ['icon' => 'circle-close'],
+                    'extras' => [
+                        'icon' => 'circle-close',
+                        'orderNumber' => 70,
+                    ],
                 ]
             ),
         ]);
