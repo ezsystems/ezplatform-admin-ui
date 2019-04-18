@@ -486,7 +486,7 @@ ezplatform.version.has_no_conflict:
         languageCode: ~
 
 ezplatform.version_draft.has_no_conflict:
-    path: /version-draft/has-no-conflict/{contentId}
+    path: /version-draft/has-no-conflict/{contentId}/{languageCode}
     options:
         expose: true
     defaults:

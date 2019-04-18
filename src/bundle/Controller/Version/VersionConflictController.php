@@ -36,15 +36,15 @@ class VersionConflictController extends Controller
      *
      * @param int $contentId
      * @param int $versionNo
+     * @param string $languageCode
      *
      * @return Response
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\Core\Base\Exceptions\BadStateException
      */
-    public function versionHasNoConflictAction(int $contentId, int $versionNo): Response
+    public function versionHasNoConflictAction(int $contentId, int $versionNo, string $languageCode): Response
     {
         $versionInfo = $this->contentService->loadVersionInfoById($contentId, $versionNo);
 
@@ -52,7 +52,7 @@ class VersionConflictController extends Controller
             throw new BadStateException('Version status', 'status is not draft');
         }
 
-        if ((new VersionHasConflict($this->contentService))->isSatisfiedBy($versionInfo)) {
+        if ((new VersionHasConflict($this->contentService, $languageCode))->isSatisfiedBy($versionInfo)) {
             return new Response('', Response::HTTP_CONFLICT);
         }
 

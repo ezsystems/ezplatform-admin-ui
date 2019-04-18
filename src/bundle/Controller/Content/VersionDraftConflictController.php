@@ -59,24 +59,21 @@ class VersionDraftConflictController extends Controller
 
     /**
      * @param int $contentId
-     * @param int|null $locationId
+     * @param string $languageCode
      *
      * @return Response
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
-    public function draftHasNoConflictAction(int $contentId, ?int $locationId = null): Response
+    public function draftHasNoConflictAction(int $contentId, string $languageCode): Response
     {
         $content = $this->contentService->loadContent($contentId);
-        $location = $this->locationService->loadLocation(
-            $locationId ?? $content->contentInfo->mainLocationId
-        );
+        $location = $this->locationService->loadLocation($content->contentInfo->mainLocationId);
         $contentInfo = $content->contentInfo;
 
         try {
-            $contentDraftHasConflict = (new ContentDraftHasConflict($this->contentService))->isSatisfiedBy($contentInfo);
+            $contentDraftHasConflict = (new ContentDraftHasConflict($this->contentService, $languageCode))->isSatisfiedBy($contentInfo);
         } catch (UnauthorizedException $e) {
             $error = $this->translator->trans(
                 /** @Desc("Cannot check if the draft has no conflict with other drafts. %error%. ") */
@@ -91,7 +88,7 @@ class VersionDraftConflictController extends Controller
         if ($contentDraftHasConflict) {
             $versionsDataset = $this->datasetFactory->versions();
             $versionsDataset->load($contentInfo);
-            $conflictedDrafts = $versionsDataset->getConflictedDraftVersions($contentInfo->currentVersionNo);
+            $conflictedDrafts = $versionsDataset->getConflictedDraftVersions($contentInfo->currentVersionNo, $languageCode);
 
             $modalContent = $this->renderView('@ezdesign/content/modal_draft_conflict.html.twig', [
                 'conflicted_drafts' => $conflictedDrafts,

@@ -4,7 +4,6 @@
     const form = editActions.querySelector('form');
     const contentIdInput = form.querySelector('#content_edit_content_info') || form.querySelector('#user_edit_content_info');
     const contentId = contentIdInput.value;
-    const checkVersionDraftLink = global.Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId });
     const resetRadioButtons = () =>
         btns.forEach((btn) => {
             btn.checked = false;
@@ -13,12 +12,10 @@
         form.submit();
         $('#version-draft-conflict-modal').modal('hide');
     };
-    const redirectToUserEdit = () => {
+    const redirectToUserEdit = (languageCode) => {
         const versionNo = form.querySelector('#user_edit_version_info_version_no').value;
-        const checkedBtn = btns.find((btn) => btn.checked);
-        const language = checkedBtn.value;
 
-        window.location.href = global.Routing.generate('ez_user_update', { contentId, versionNo, language });
+        window.location.href = global.Routing.generate('ez_user_update', { contentId, versionNo, language: languageCode });
     };
     const onModalHidden = () => {
         resetRadioButtons();
@@ -48,7 +45,11 @@
         wrapper.innerHTML = modalHtml;
         attachModalListeners(wrapper);
     };
-    const changeHandler = () => {
+    const changeHandler = (event) => {
+        const checkedBtn = event.currentTarget;
+        const languageCode = checkedBtn.value;
+        const checkVersionDraftLink = global.Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode });
+
         fetch(checkVersionDraftLink, {
             credentials: 'same-origin',
         }).then((response) => {
@@ -56,7 +57,7 @@
                 response.text().then(showModal);
             } else if (response.status === 200) {
                 if (form.querySelector('#user_edit_version_info')) {
-                    redirectToUserEdit();
+                    redirectToUserEdit(languageCode);
 
                     return;
                 }
