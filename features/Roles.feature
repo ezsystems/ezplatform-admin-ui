@@ -62,11 +62,13 @@ Feature: Roles management
   Scenario: User assignation can be discarded
     Given there's "Test Role edited" on "Roles" list
     When I start assigning to "Test Role edited" from "Roles" page
-      And I select "Administrator User" from "User"
-      And I select options from "Group"
-        | option  |
-        | Editors |
-        | Users   |
+      And I assign users to role
+        | path                                         |
+        | Users/Administrator users/Administrator User |
+      And I assign groups to role
+        | path          |
+        | Users/Editors |
+        | Users         |
       And I select "Media" from Sections as role assignment limitation
       And I click on the edit action bar button "Discard changes"
     Then I should be on "Role" "Test Role edited" page
@@ -77,11 +79,13 @@ Feature: Roles management
   Scenario: User can be assigned to role from the Roles list
     Given there's "Test Role edited" on "Roles" list
     When I start assigning to "Test Role edited" from "Roles" page
-      And I select options from "User"
-        | option             |
-        | Administrator User |
-        | Anonymous User     |
-      And I select "Editors" from "Group"
+      And I assign users to role
+        | path                                         |
+        | Users/Anonymous Users/Anonymous User         |
+        | Users/Administrator users/Administrator User |
+      And I assign groups to role
+        | path          |
+        | Users/Editors |
       And I select limitation "Media/Images" for assignment through UDW
       And I click on the edit action bar button "Save"
     Then I should be on "Role" "Test Role edited" page
@@ -97,8 +101,10 @@ Feature: Roles management
     Given there's "Test Role edited" on "Roles" list
       And I go to "Test Role edited" "Role" page
     When I start assigning users and groups to "Test Role edited" from role page
-      And I select "Users" from "Group"
-      And I click on the edit action bar button "Save"
+      And I assign groups to role
+        | path  |
+        | Users |
+    And I click on the edit action bar button "Save"
     Then I should be on "Role" "Test Role edited" page
       And "Policies" list in "Role" "Test Role edited" is empty
       And there are assignments on the "Test Role edited" assignments list

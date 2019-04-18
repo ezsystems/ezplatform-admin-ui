@@ -12,7 +12,6 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\NavLinkTabs;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SimpleListTable;
-use PHPUnit\Framework\Assert;
 
 class RolePage extends Page
 {
@@ -55,6 +54,9 @@ class RolePage extends Page
         $this->dialog = ElementFactory::createElement($this->context, Dialog::ELEMENT_NAME);
         $this->pageTitle = sprintf('Role "%s"', $roleName);
         $this->pageTitleLocator = '.ez-header h1';
+        $this->fields = [
+            'assignButton' => '.btn-secondary',
+        ];
     }
 
     /**
@@ -91,18 +93,6 @@ class RolePage extends Page
     {
         $this->navLinkTabs->goToTab('Policies');
         $this->adminLists['Policies']->clickPlusButton();
-    }
-
-    public function startAssigningToItem(string $roleName): void
-    {
-        Assert::assertEquals(
-            $roleName,
-            $this->roleName,
-            'Wrong role page'
-        );
-
-        $this->navLinkTabs->goToTab('Assignments');
-        $this->adminLists['Assignments']->clickAssignButton();
     }
 
     /**

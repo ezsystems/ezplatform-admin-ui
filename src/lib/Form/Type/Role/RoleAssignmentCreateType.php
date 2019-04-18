@@ -11,8 +11,8 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\Role;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
-use EzSystems\EzPlatformAdminUi\Form\Type\UserChoiceType;
-use EzSystems\EzPlatformAdminUi\Form\Type\UserGroupChoiceType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserCollectionType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserGroupCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -25,18 +25,14 @@ class RoleAssignmentCreateType extends AbstractType
     {
         $builder
             ->add('groups',
-                UserGroupChoiceType::class,
+                UserGroupCollectionType::class,
                 [
-                    'required' => false,
-                    'multiple' => true,
                     'label' => /** @Desc("Group") */ 'role_assignment.groups',
                 ]
             )
             ->add('users',
-                UserChoiceType::class,
+                UserCollectionType::class,
                 [
-                    'required' => false,
-                    'multiple' => true,
                     'label' => /** @Desc("User") */ 'role_assignment.users',
                 ]
             )

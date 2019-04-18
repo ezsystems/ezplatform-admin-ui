@@ -29,8 +29,66 @@
                     {{ 'role_assignment.view.add.panel.users_and_groups.title'|trans|desc('Users and Groups') }}
                 </div>
                 <div class="card-body">
-                    {{ form_row(form.users) }}
-                    {{ form_row(form.groups) }}
+                    {{ form_label(form.users) }}
+                    {{ form_errors(form.users) }}
+                    {{ form_widget(form.users) }}
+
+                    <button type="button" data-universaldiscovery-title="{{ "role_assignment.view.add.panel.users_and_groups.users.udw_title"
+                        |trans({}, "role")
+                        |desc("Select users for role assignment") }}"
+                        data-tag-template="{{ include('@ezdesign/admin/role_assignment/create_tag_list_item.html.twig', {
+                            'content_name': '{{ content_name }}',
+                            'content_id': '{{ content_id }}'
+                        })|e('html_attr') }}"
+                        class="btn btn-secondary d-block"
+                        id="{{ form.users.vars.id }}__btn"
+                        data-input-selector="#{{ form.users.vars.id }}"
+                        data-selected-content-list-selector="#{{ form.users.vars.id }}-selected-content"
+                        data-udw-config="{{ ez_udw_config('multiple_user', {}) }}">
+                        {{ 'role_assignment.view.add.panel.users_and_groups.select_users_btn.label'|trans|desc('Select users') }}
+                    </button>
+
+                    <ul class="list-unstyled" id="{{ form.users.vars.id }}-selected-content">
+                        {% for user in form.users.vars.data %}
+                            {% if user is not empty %}
+                                {% set content_name = user.content.versionInfo.contentInfo.name %}
+                                {{ include('@ezdesign/admin/role_assignment/create_tag_list_item.html.twig', { 
+                                    'content_name': content_name,
+                                    'content_id': user.content.versionInfo.contentInfo.id
+                                }) }}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {{ form_label(form.groups) }}
+                    {{ form_errors(form.groups) }}
+                    {{ form_widget(form.groups) }}
+
+                    <button type="button" data-universaldiscovery-title="{{ "role_assignment.view.add.panel.users_and_groups.groups.udw_title"
+                        |trans({}, "role")
+                        |desc("Select groups for role assignment") }}"
+                        data-tag-template="{{ include('@ezdesign/admin/role_assignment/create_tag_list_item.html.twig', {
+                            'content_name': '{{ content_name }}',
+                            'content_id': '{{ content_id }}'
+                        })|e('html_attr') }}"
+                        class="btn btn-secondary d-block"
+                        id="{{ form.groups.vars.id }}__btn"
+                        data-input-selector="#{{ form.groups.vars.id }}"
+                        data-selected-content-list-selector="#{{ form.groups.vars.id }}-selected-content"
+                        data-udw-config="{{ ez_udw_config('multiple_user_group', {}) }}">
+                        {{ 'role_assignment.view.add.panel.users_and_groups.select_groups_btn.label'|trans|desc('Select groups') }}
+                    </button>
+
+                    <ul class="list-unstyled" id="{{ form.groups.vars.id }}-selected-content">
+                        {% for group in form.groups.vars.data %}
+                            {% if group is not empty %}
+                                {% set content_name = group.content.versionInfo.contentInfo.name %}
+                                {{ include('@ezdesign/admin/role_assignment/create_tag_list_item.html.twig', { 
+                                    'content_name': content_name,
+                                    'content_id': group.content.versionInfo.contentInfo.id
+                                }) }}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </section>

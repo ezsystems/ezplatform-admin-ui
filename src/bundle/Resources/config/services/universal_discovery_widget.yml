@@ -16,3 +16,9 @@ services:
     EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver:
         arguments:
             $udwConfiguration: '$universal_discovery_widget_module.configuration$'
+
+    EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber\UserSelectionAllowedContentTypes:
+        arguments:
+            $userContentTypeIdentifier: '$user_content_type_identifier$'
+        tags:
+            - { name: kernel.event_subscriber }

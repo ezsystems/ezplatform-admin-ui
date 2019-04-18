@@ -21,6 +21,11 @@ class RolesContext extends BusinessContext
         'assignment' => 'Assignments',
     ];
 
+    private $itemTypeToLabelMapping = [
+        'users' => 'Select users',
+        'groups' => 'Select groups',
+    ];
+
     private $fields = [
         'newPolicySelectList' => 'policy_create_policy',
         'newPolicyAssignmentLimitation' => 'role_assignment_create_sections',
@@ -166,5 +171,23 @@ class RolesContext extends BusinessContext
         PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME)
             ->adminUpdateForm->fillFieldWithValue('Sections', 'true');
         $this->utilityContext->selectOption($this->fields['newPolicyAssignmentLimitation'], $limitationName);
+    }
+
+    /**
+     * @When I assign :itemType to role
+     */
+    public function iAssignToRole(string $itemType, TableNode $items): void
+    {
+        $pageObject = PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME);
+        $pageObject->adminUpdateForm->clickButton($this->itemTypeToLabelMapping[$itemType]);
+
+        $udw = ElementFactory::createElement($this->utilityContext, UniversalDiscoveryWidget::ELEMENT_NAME);
+        $udw->verifyVisibility();
+
+        foreach ($items->getHash() as $item) {
+            $udw->selectContent($item['path']);
+        }
+
+        $udw->confirm();
     }
 }
