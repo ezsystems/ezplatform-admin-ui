@@ -1,26 +1,26 @@
 imports:
-    - { resource: services/service_aliases.yml }
-    - { resource: services/controllers.yml }
-    - { resource: services/tabs.yml }
-    - { resource: services/menu.yml }
-    - { resource: services/pagination.yml }
+    - { resource: services/service_aliases.yaml }
+    - { resource: services/controllers.yaml }
+    - { resource: services/tabs.yaml }
+    - { resource: services/menu.yaml }
+    - { resource: services/pagination.yaml }
     - { resource: services/ui_config/* }
-    - { resource: services/components.yml }
-    - { resource: services/dashboard.yml }
-    - { resource: services/modules/subitems.yml }
-    - { resource: services/modules/content_tree.yml }
-    - { resource: services/form_processors.yml }
-    - { resource: services/validators.yml }
-    - { resource: services/siteaccess.yml }
-    - { resource: services/universal_discovery_widget.yml }
-    - { resource: services/utils.yml }
-    - { resource: services/form_ui_action_mappers.yml }
-    - { resource: services/views.yml }
-    - { resource: services/translation.yml }
-    - { resource: services/user_settings.yml }
-    - { resource: services/rest.yml }
-    - { resource: services/permissions.yml }
-    - { resource: services/forms.yml }
+    - { resource: services/components.yaml }
+    - { resource: services/dashboard.yaml }
+    - { resource: services/modules/subitems.yaml }
+    - { resource: services/modules/content_tree.yaml }
+    - { resource: services/form_processors.yaml }
+    - { resource: services/validators.yaml }
+    - { resource: services/siteaccess.yaml }
+    - { resource: services/universal_discovery_widget.yaml }
+    - { resource: services/utils.yaml }
+    - { resource: services/form_ui_action_mappers.yaml }
+    - { resource: services/views.yaml }
+    - { resource: services/translation.yaml }
+    - { resource: services/user_settings.yaml }
+    - { resource: services/rest.yaml }
+    - { resource: services/permissions.yaml }
+    - { resource: services/forms.yaml }
 
 services:
     _defaults:
