@@ -62,7 +62,7 @@
                 {% set view_url = path('ezplatform.link_manager.view', {urlId: url.id}) %}
                 <tr>
                     <td class="ez-table__cell">
-                        <a href="{{ view_url }}">{{ url.url|truncate(50) }}</a>
+                        <a href="{{ view_url }}">{{ url.url|truncate(50) }}</a> {# @todo use CSS instead of |truncate #}
                         (<a href="{{ url.url }}" target="_blank">{{ 'url.open'|trans }}</a>)
                     </td>
                     <td class="ez-table__cell">{{ url.isValid ? 'url.status.valid'|trans : 'url.status.invalid'|trans }}</td>
