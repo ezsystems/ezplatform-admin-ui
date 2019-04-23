@@ -55,7 +55,7 @@
     {% if can_translate %}
         {{ form_end(form_translation_remove) }}
         {% block modal_add_translation %}
-            {% include '@ezdesign/content/modal_add_translation.html.twig' with {'form': form_translation_add} only %}
+            {% include '@ezdesign/content/modal/add_translation.html.twig' with {'form': form_translation_add} only %}
         {% endblock %}
     {% endif %}
 

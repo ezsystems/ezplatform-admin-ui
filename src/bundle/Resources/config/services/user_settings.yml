@@ -2,7 +2,7 @@ parameters:
     ezsettings.admin_group.user_settings_update_view_defaults:
         full:
             default:
-                template: "@@ezdesign/user/settings/update.html.twig"
+                template: "@@ezdesign/account/settings/update.html.twig"
                 match: []
 
 services:

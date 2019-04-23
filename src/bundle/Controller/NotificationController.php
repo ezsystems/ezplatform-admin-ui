@@ -131,7 +131,7 @@ class NotificationController extends Controller
 
         $pagination = (new EzPagerfantaView(new EzPagerfantaTemplate($this->translator)))->render($pagerfanta, $routeGenerator);
 
-        return new Response($this->render('@ezdesign/notifications/notifications_modal_body.html.twig', [
+        return new Response($this->render('@ezdesign/account/notifications/list.html.twig', [
             'page' => $page,
             'pagination' => $pagination,
             'notifications' => $notifications,

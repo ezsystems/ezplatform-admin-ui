@@ -56,7 +56,7 @@
     <div class="pt-4 px-0 bg-secondary ez-context-menu">
         <div class="ez-sticky-container">
             {% set content_type_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type.sidebar_right', [], {'content_type': content_type}) %}
-            {{ knp_menu_render(content_type_sidebar_right, {'template': '@ezdesign/part/menu/sidebar_right.html.twig'}) }}
+            {{ knp_menu_render(content_type_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 
             <div class="ez-extra-actions-container">
                 {% include '@ezdesign/admin/content_type/widget/content_type_edit.html.twig' with {

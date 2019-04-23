@@ -1,0 +1,24 @@
+{% extends '@EzPlatformAdminUi/account/notifications/list_item.html.twig' %}
+
+{% trans_default_domain 'notifications' %}
+
+{% block icon %}
+    <span class="type__icon">
+        <svg class="ez-icon">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+        </svg>
+    </span>
+{% endblock %}
+
+{% block notification_type %}
+    <span class="type__text">
+        {{ 'notification.trashed'|trans|desc('Publication sent to trash')}}
+    </span>
+{% endblock %}
+
+{% block message %}
+    <td class="ez-notifications-modal__description">
+        <p class="description__title">{{ 'notification.title'|trans|desc('Title:') }} <span class="description__title__item">{{ title }}</span></p>
+        <p class="description__text">{{ message }}</p>
+    </td>
+{% endblock %}

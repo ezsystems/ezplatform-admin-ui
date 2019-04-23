@@ -1,0 +1,6 @@
+{% extends '@ezdesign/ui/menu/sidebar_base.html.twig' %}
+
+{% block item -%}
+    {%- set default_classes = 'btn btn-dark btn-block' -%}
+    {{ parent() }}
+{%- endblock %}

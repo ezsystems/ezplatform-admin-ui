@@ -40,5 +40,5 @@
 
 {% block right_sidebar %}
     {% set language_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.language_edit.sidebar_right', [], {'save_id': form.save.vars.id}) %}
-    {{ knp_menu_render(language_edit_sidebar_right, {'template': '@ezdesign/part/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(language_edit_sidebar_right, {'template': '@ezdesign/part/ui/sidebar_right.html.twig'}) }}
 {% endblock %}

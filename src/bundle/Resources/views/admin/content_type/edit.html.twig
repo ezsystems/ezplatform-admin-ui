@@ -140,7 +140,7 @@
 
 {% block right_sidebar %}
     {% set content_type_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_edit.sidebar_right', [], {'form_view': form, 'content_type': content_type}) %}
-    {{ knp_menu_render(content_type_edit_sidebar_right, {'template': '@ezdesign/part/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(content_type_edit_sidebar_right, {'template': '@ezdesign/part/ui/sidebar_right.html.twig'}) }}
 {% endblock %}
 
 {% block javascripts %}

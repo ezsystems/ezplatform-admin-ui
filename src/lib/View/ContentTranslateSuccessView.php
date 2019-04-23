@@ -21,7 +21,7 @@ class ContentTranslateSuccessView extends BaseView
      */
     public function __construct(Response $response)
     {
-        parent::__construct('@ezdesign/http/no_content.html.twig');
+        parent::__construct('@ezdesign/common/no_content.html.twig');
 
         $this->setResponse($response);
         $this->setControllerReference(new ControllerReference('EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::translationSuccessAction'));

@@ -37,5 +37,5 @@
 
 {% block right_sidebar %}
     {% set role_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.role_edit.sidebar_right', [], {'role': role}) %}
-    {{ knp_menu_render(role_edit_sidebar_right, {'template': '@ezdesign/part/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(role_edit_sidebar_right, {'template': '@ezdesign/part/ui/sidebar_right.html.twig'}) }}
 {% endblock %}

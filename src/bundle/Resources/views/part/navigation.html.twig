@@ -15,7 +15,7 @@
             <ul class="nav nav-tabs" role="tablist">
                 {{ knp_menu_render(main_menu, {
                     'depth': 1,
-                    'template': '@ezdesign/part/menu/top_menu.html.twig',
+                    'template': '@ezdesign/ui/menu/top_menu.html.twig',
                     'currentClass': 'active',
                     'ancestorClass': 'active'
                 }) }}
@@ -35,7 +35,7 @@
                 </div>
                 {{ knp_menu_render('ezplatform_admin_ui.menu.user', {
                     'depth': 1,
-                    'template': '@ezdesign/part/menu/user_menu.html.twig'
+                    'template': '@ezdesign/ui/menu/user_menu.html.twig'
                 }) }}
             </div>
         </div>
@@ -44,7 +44,7 @@
 <nav class="navbar navbar-expand-sm navbar-light ez-main-sub-nav" style="flex-wrap:wrap;">
     {{ knp_menu_render(main_menu, {
         'depth': 2,
-        'template': '@ezdesign/part/menu/top_menu_2nd_level.html.twig',
+        'template': '@ezdesign/ui/menu/top_menu_2nd_level.html.twig',
         'currentClass': 'active',
         'ancestorClass': 'active'
     }) }}

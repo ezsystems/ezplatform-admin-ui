@@ -1,7 +1,7 @@
 system:
     admin_group:
         user:
-            login_template: '@ezdesign/Security/login.html.twig'
+            login_template: '@ezdesign/account/login/index.html.twig'
 
         content_view:
             full:
@@ -47,7 +47,7 @@ system:
         user_settings_update_view:
             full:
                 ezplatform_admin_ui_datetime_format:
-                    template: '@ezdesign/user/settings/update_datetime_format.html.twig'
+                    template: '@ezdesign/account/settings/update_datetime_format.html.twig'
                     match:
                         Identifier: [full_datetime_format, short_datetime_format]
 

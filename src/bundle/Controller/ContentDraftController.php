@@ -81,7 +81,7 @@ class ContentDraftController extends Controller
             $this->createContentRemoveData($pagination)
         );
 
-        return $this->render('@ezdesign/admin/content_draft/list.html.twig', [
+        return $this->render('@ezdesign/content/draft/list.html.twig', [
             'pager' => $pagination,
             'form_remove' => $removeContentDraftForm->createView(),
         ]);

@@ -42,7 +42,7 @@
 
 {% block right_sidebar %}
     {% set user_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.user_edit.sidebar_right', [], {'user': user, 'content_type': contentType}) %}
-    {{ knp_menu_render(user_edit_sidebar_right, {'template': '@ezdesign/part/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(user_edit_sidebar_right, {'template': '@ezdesign/part/ui/sidebar_right.html.twig'}) }}
 {% endblock %}
 
 {% block close_button %}

@@ -86,13 +86,13 @@ class AdminExceptionListener
 
         switch ($code) {
             case 404:
-                $content = $this->twig->render('@ezdesign/error/404.html.twig');
+                $content = $this->twig->render('@ezdesign/common/error_page/404.html.twig');
                 break;
             case 403:
-                $content = $this->twig->render('@ezdesign/error/403.html.twig');
+                $content = $this->twig->render('@ezdesign/common/error_page/403.html.twig');
                 break;
             default:
-                $content = $this->twig->render('@ezdesign/error/error.html.twig');
+                $content = $this->twig->render('@ezdesign/common/error_page/unknown.html.twig');
                 break;
         }
 

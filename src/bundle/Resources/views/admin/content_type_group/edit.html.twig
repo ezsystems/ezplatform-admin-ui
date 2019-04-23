@@ -37,5 +37,5 @@
 
 {% block right_sidebar %}
     {% set content_type_group_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_group_edit.sidebar_right', [], {'save_id': form.update.vars.id}) %}
-    {{ knp_menu_render(content_type_group_edit_sidebar_right, {'template': '@ezdesign/part/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(content_type_group_edit_sidebar_right, {'template': '@ezdesign/part/ui/sidebar_right.html.twig'}) }}
 {% endblock %}

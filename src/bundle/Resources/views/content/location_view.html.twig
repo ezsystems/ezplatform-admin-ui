@@ -87,7 +87,7 @@
                                     data-udw-config-bulk-move-items="{{ ez_udw_config('single_container', {}) }}"
                                 ></div>
                             </section>
-                            {% include '@ezdesign/content/modal_location_bulk_action_failed.html.twig' only %}
+                            {% include '@ezdesign/content/modal/location_bulk_action_failed.html.twig' only %}
                         </div>
                         {% endif %}
                     </div>
@@ -96,7 +96,7 @@
         <div class="pt-4 px-0 bg-secondary ez-context-menu">
             <div class="ez-sticky-container">
                 {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': contentType}) %}
-                {{ knp_menu_render(content_sidebar_right, {'template': '@ezdesign/part/menu/sidebar_right.html.twig'}) }}
+                {{ knp_menu_render(content_sidebar_right, {'template': '@ezdesign/part/ui/sidebar_right.html.twig'}) }}
 
                 <div class="ez-extra-actions-container">
                     {% include '@ezdesign/content/widget/content_create.html.twig' with {'form': form_content_create} only %}
@@ -109,18 +109,18 @@
                 </div>
             </div>
             {%  if form_location_trash is defined and form_location_trash_container is not defined %}
-                {% include '@ezdesign/content/modal_location_trash.html.twig' with {'form': form_location_trash} only %}
+                {% include '@ezdesign/content/modal/location_trash.html.twig' with {'form': form_location_trash} only %}
             {% endif %}
             {%  if form_user_delete is defined %}
-                {% include '@ezdesign/content/modal_user_delete.html.twig' with {'form': form_user_delete} only %}
+                {% include '@ezdesign/content/modal/user_delete.html.twig' with {'form': form_user_delete} only %}
             {% endif %}
             {%  if form_location_trash_with_asset is defined %}
-                {% include '@ezdesign/content/modal_location_trash_with_asset.html.twig' with {
+                {% include '@ezdesign/content/modal/location_trash_with_asset.html.twig' with {
                     'form': form_location_trash_with_asset
                 } only %}
             {% endif %}
             {%  if form_location_trash_with_single_asset is defined %}
-                {% include '@ezdesign/content/modal_location_trash_with_single_asset.html.twig' with {
+                {% include '@ezdesign/content/modal/location_trash_with_single_asset.html.twig' with {
                     'form': form_location_trash_with_single_asset,
                     'content_name': content.name,
                     'content_type': contentType.name
@@ -130,7 +130,7 @@
             {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}
             {{ form(form_location_copy_subtree, {'action': path('ezplatform.location.copy_subtree')}) }}
             {%  if form_location_trash_container is defined %}
-                {% include '@ezdesign/content/modal_location_trash_container.html.twig' with {
+                {% include '@ezdesign/content/modal/location_trash_container.html.twig' with {
                     'form': form_location_trash_container,
                     'content_name': content.name,
                     'has_asset': form_location_trash_with_asset is defined,
@@ -141,7 +141,7 @@
         </div>
     </div>
     {% if content_has_reverse_relations and not location.contentInfo.isHidden %}
-        {% include '@ezdesign/content/modal_content_hide_confirmation.html.twig' %}
+        {% include '@ezdesign/content/modal/hide_confirmation.html.twig' %}
     {% endif %}
 
 {% endblock %}
