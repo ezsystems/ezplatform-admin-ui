@@ -6,13 +6,19 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\Helper;
 
+use Behat\Behat\Hook\Scope\AfterStepScope;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelDictionary;
+use Behat\Testwork\Tester\Result\TestResult;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use WebDriver\LogType;
 
 class Hooks extends RawMinkContext
 {
+    private const CONSOLE_LOGS_LIMIT = 10;
+
     use KernelDictionary;
 
     /** @BeforeScenario
@@ -47,5 +53,38 @@ class Hooks extends RawMinkContext
 
         $env->restoreDatabase();
         $env->clearCache();
+    }
+
+    /** @AfterStep */
+    public function getBrowserLogAfterFailedStep(AfterStepScope $scope)
+    {
+        if ($scope->getTestResult()->getResultCode() !== TestResult::FAILED) {
+            return;
+        }
+
+        $driver = $this->getSession()->getDriver();
+        if ($driver instanceof Selenium2Driver) {
+            $logEntries = $driver->getWebDriverSession()->log(LogType::BROWSER);
+
+            if (empty($logEntries)) {
+                return;
+            }
+
+            $this->print('JS console errors:');
+            $counter = 0;
+            foreach ($logEntries as $entry) {
+                if ($counter >= self::CONSOLE_LOGS_LIMIT) {
+                    return;
+                }
+
+                $this->print($entry['message']);
+                ++$counter;
+            }
+        }
+    }
+
+    private function print(string $message): void
+    {
+        echo sprintf('%s%s', $message, PHP_EOL);
     }
 }
