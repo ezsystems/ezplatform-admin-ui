@@ -65,21 +65,29 @@ class Hooks extends RawMinkContext
         $driver = $this->getSession()->getDriver();
         if ($driver instanceof Selenium2Driver) {
             $logEntries = $driver->getWebDriverSession()->log(LogType::BROWSER);
+            $this->displayLogErrors($logEntries);
+        }
+    }
 
-            if (empty($logEntries)) {
+    private function displayLogErrors($logEntries): void
+    {
+        $filter = new BrowserLogFilter();
+        $errorMessages = array_column($logEntries, 'message');
+        $errorMessages = $filter->filter($errorMessages);
+
+        if (empty($errorMessages)) {
+            return;
+        }
+
+        $this->print('JS console errors:');
+        $counter = 0;
+        foreach ($errorMessages as $message) {
+            if ($counter >= self::CONSOLE_LOGS_LIMIT) {
                 return;
             }
 
-            $this->print('JS console errors:');
-            $counter = 0;
-            foreach ($logEntries as $entry) {
-                if ($counter >= self::CONSOLE_LOGS_LIMIT) {
-                    return;
-                }
-
-                $this->print($entry['message']);
-                ++$counter;
-            }
+            $this->print($message);
+            ++$counter;
         }
     }
 
