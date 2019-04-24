@@ -32,7 +32,7 @@ class Notification extends Element
 
     public function verifyVisibility(): void
     {
-        $this->context->waitUntil($this->defaultTimeout, function () {
+        $this->context->waitUntil(10, function () {
             return $this->isVisible();
         });
 

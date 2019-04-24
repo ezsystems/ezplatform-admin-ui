@@ -23,11 +23,13 @@ class UtilityContext extends MinkContext
      *
      * @throws Exception when element not found or is not visible
      */
-    public function waitUntilElementIsVisible(string $cssSelector, int $timeout = 5): void
+    public function waitUntilElementIsVisible(string $cssSelector, int $timeout = 5, TraversableElement $baseElement = null): void
     {
+        $baseElement = $baseElement ?? $this->getSession()->getPage();
+
         try {
-            $this->waitUntil($timeout, function () use ($cssSelector) {
-                $element = $this->getSession()->getPage()->find('css', $cssSelector);
+            $this->waitUntil($timeout, function () use ($cssSelector, $baseElement) {
+                $element = $baseElement->find('css', $cssSelector);
 
                 return isset($element) && $element->isVisible();
             });
