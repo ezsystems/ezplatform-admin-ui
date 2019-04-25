@@ -1,8 +1,8 @@
-{% extends "@ezdesign/layout.html.twig" %}
+{% extends "@ezdesign/ui/layout.html.twig" %}
 
 {% trans_default_domain 'drafts' %}
 
-{% form_theme form_remove '@ezdesign/form_fields.html.twig' %}
+{% form_theme form_remove '@ezdesign/ui/form_fields.html.twig' %}
 
 {% import _self as macros %}
 
@@ -18,7 +18,7 @@
 
         <div class="px-0 ez-content-container">
             <section class="container mt-5">
-                {% include '@ezdesign/part/page_title.html.twig' with {
+                {% include '@ezdesign/ui/page_title.html.twig' with {
                     title: 'drafts.list'|trans|desc('Drafts'),
                     iconName: 'content-draft'
                 } %}
@@ -32,7 +32,7 @@
                         }
                     }) }}
 
-                    {% include '@ezdesign/part/table_header.html.twig' with {
+                    {% include '@ezdesign/ui/table_header.html.twig' with {
                         ground: 'mt-3',
                         headerText: 'drafts.table.header'|trans|desc('Drafts') ~ ' (' ~ pager.count ~ ')',
                         tools: macros.table_header_tools(form_remove)
@@ -156,7 +156,7 @@
         </svg>
     </button>
 
-    {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {
+    {% include '@ezdesign/common/modal/bulk_delete_confirmation.html.twig' with {
         'id': modal_data_target,
         'message': 'drafts.list.action.remove.confirmation.text'|trans|desc('Are you sure you want to permanently delete the selected draft(s)?'),
         'data_click': '#' ~ form.remove.vars.id,

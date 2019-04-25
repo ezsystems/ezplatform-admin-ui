@@ -1,8 +1,8 @@
-{% extends "@ezdesign/layout.html.twig" %}
+{% extends "@ezdesign/ui/layout.html.twig" %}
 
 {% trans_default_domain 'bookmark' %}
 
-{% form_theme form_remove '@ezdesign/form_fields.html.twig' %}
+{% form_theme form_remove '@ezdesign/ui/form_fields.html.twig' %}
 
 {% block body_class %}ez-bookmark-list-view ez-has-two-sidebars{% endblock %}
 
@@ -15,13 +15,13 @@
 
         <div class="px-0 ez-content-container">
             <section class="container mt-5">
-                {% include '@ezdesign/part/page_title.html.twig' with { title: 'bookmark.headline'|trans|desc('Bookmarks'), iconName: 'bookmark-manager' } %}
+                {% include '@ezdesign/ui/page_title.html.twig' with { title: 'bookmark.headline'|trans|desc('Bookmarks'), iconName: 'bookmark-manager' } %}
                 <div class="px-4">
                     {{ form_start(form_remove, {
                         'action': path('ezplatform.bookmark.remove'),
                         'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#bookmark_remove_remove' }
                     }) }}
-                    {% include '@ezdesign/part/table_header.html.twig' with {
+                    {% include '@ezdesign/ui/table_header.html.twig' with {
                         ground: 'mt-3',
                         headerText: 'bookmark.table.header'|trans|desc('Bookmarks') ~ ' (' ~ pager.count ~ ')',
                         tools: form_widget(form_remove.remove, {'attr': {'class': 'btn btn-danger', 'disabled': true}})

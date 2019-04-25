@@ -1,0 +1,76 @@
+{% trans_default_domain 'section' %}
+
+{% form_theme form_section_content_assign '@ezdesign/ui/form_fields.html.twig' '@ezdesign/common/form/assign_section_widget.html.twig'  %}
+
+<section class="container mt-4 px-5">
+    <div class="ez-table-header">
+        <div class="ez-table-header__headline">
+            {{ 'section.assigned_content.header'|trans({
+                '%name%': section.name,
+                '%count%': pagerfanta.nbResults
+            } )|desc('Content items in %name% (%count%)') }}
+        </div>
+        {% if can_assign %}
+            {{ form_start(form_section_content_assign, {
+                'action': path("ezplatform.section.assign_content", {"sectionId": section.id}),
+                'attr': {'class': 'd-inline-block'}
+            }) }}
+                {{ form_widget(form_section_content_assign.locations.location) }}
+                {{ form_widget(form_section_content_assign.locations.select_content,
+                    {'attr': {
+                        'class': 'btn btn-secondary btn--open-udw',
+                        'data-udw-config': ez_udw_config('multiple', {'type': 'section_assign'})
+                    }}
+                ) }}
+            {{ form_end(form_section_content_assign) }}
+        {% endif %}
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ 'section.assigned_content.name'|trans|desc('Name') }}</th>
+                <th>{{ 'section.assigned_content.type'|trans|desc('Content Type') }}</th>
+                <th>{{ 'section.assigned_content.path'|trans|desc('Path') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for content in assigned_content %}
+            {% set view_url = path('_ez_content_view', { 'contentId': content.id }) %}
+            <tr>
+                <td><a href="{{ view_url }}">{{ content.name }}</a></td>
+                <td>{{ content.type }}</td>
+                <td>
+                    {% if content.path|length > 1 %}
+                        {% for location in content.path %}
+                            {% if loop.revindex > 1 %}
+                                <a href="{{ path('_ezpublishLocation', {'locationId': location.id}) }}">
+                                    {{ ez_content_name(location.contentInfo) }}
+                                </a>
+
+                                {% if loop.revindex > 2 %}/{% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">
+                    <p class="ez-table-no-content mb-0 pl-0 py-1">
+                        {{ 'section.assigned_content.empty'|trans|desc('No content items.') }}
+                        {{ 'section.assigned_content.empty_desc'|trans|desc('Content items you assign to this section will appear here.') }}
+                    </p>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="row justify-content-center align-items-center ez-pagination__spacing mb-5">
+        {% if pagerfanta.haveToPaginate %}
+            {{ pagination|raw }}
+        {% endif %}
+    </div>
+</section>

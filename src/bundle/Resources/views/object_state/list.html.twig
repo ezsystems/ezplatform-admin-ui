@@ -1,0 +1,99 @@
+{% form_theme form_states_delete '@ezdesign/ui/form_fields.html.twig'  %}
+
+{% trans_default_domain 'object_state' %}
+
+{% block content %}
+    <section class="container mt-4 px-5">
+        <div class="ez-table-header">
+            <div class="ez-table-header__headline">{{ 'object_state.view.list.title'|trans({'%count%': object_states|length})|desc('Object States (%count%)') }}</div>
+            <div>
+                {% if can_administrate %}
+                    <a
+                        title="{{ 'object_state.new'|trans|desc('Create a new Object State ') }}"
+                        href="{{ path('ezplatform.object_state.state.add', {'objectStateGroupId': object_state_group.id}) }}"
+                        class="btn btn-primary">
+                        <svg class="ez-icon ez-icon-create">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                        </svg>
+                    </a>
+
+                    {% set modal_data_target = 'delete-object-state-modal' %}
+                    <button
+                        id="delete-object-state"
+                        type="button"
+                        class="btn btn-danger"
+                        disabled
+                        data-toggle="modal"
+                        data-target="#{{ modal_data_target }}"
+                        title="{{ 'object_state.delete.bulk_delete.submit'|trans|desc('Delete Object State') }}">
+                        <svg class="ez-icon ez-icon-trash">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        </svg>
+                    </button>
+                    {% include '@ezdesign/common/modal/bulk_delete_confirmation.html.twig' with {
+                        'id': modal_data_target,
+                        'message': 'object_state.modal.message'|trans|desc('Do you want to delete Object State?'),
+                        'data_click': '#object_states_delete_delete',
+                    }%}
+                {% endif %}
+            </div>
+        </div>
+
+        {{ form_start(form_states_delete, {
+            'action': path('ezplatform.object_state.state.bulk_delete', {'objectStateGroupId': object_state_group.id}),
+            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-object-state' }
+        }) }}
+        <table class="ez-table table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>{{ 'object_state.name'|trans|desc('Object state name') }}</th>
+                <th>{{ 'object_state.identifier'|trans|desc('Identifier') }}</th>
+                <th>{{ 'object_state.id'|trans|desc('ID') }}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if object_states is empty %}
+            <tr>
+                <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
+                    <span class="mb-0 py-1 pl-0">{{ 'object_state.list.empty'|trans|desc('No Object State configured. Object States you\'ll create will appear here.') }}</span>
+                </td>
+            </tr>
+            {% else %}
+                {% for object_state in object_states %}
+                    <tr>
+                        <td class="ez-table__cell ez-table__cell--has-checkbox">
+                            {% if can_administrate %}
+                                {{ form_widget(form_states_delete.objectStates[object_state.id]) }}
+                            {% else %}
+                                {% do form_states_delete.objectStates.setRendered %}
+                            {% endif %}
+                        </td>
+                        <td class="ez-table__cell"><a href="{{ path( 'ezplatform.object_state.state.view', {'objectStateId': object_state.id} ) }}">{{ object_state.name }}</a></td>
+                        <td class="ez-table__cell">{{ object_state.identifier }}</td>
+                        <td class="ez-table__cell">{{ object_state.id }}</td>
+                        <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                            {% if can_administrate %}
+                                <a
+                                    title="{{ 'object_state.view.list.action.edit'|trans|desc('Edit') }}"
+                                    href="{{ path('ezplatform.object_state.state.update', {'objectStateId': object_state.id}) }}"
+                                    class="btn btn-icon mx-2">
+                                    <svg class="ez-icon ez-icon-edit">
+                                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                    </svg>
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+        {{ form_end(form_states_delete) }}
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-object-state-list-js', null, 'ezplatform') }}
+{% endblock %}

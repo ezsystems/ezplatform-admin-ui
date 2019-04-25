@@ -1,0 +1,100 @@
+{% extends "@ezdesign/ui/layout.html.twig" %}
+
+{% trans_default_domain 'search' %}
+
+{% block page_title %}{% endblock %}
+
+{% block body_class %}ez-search-view ez-has-two-sidebars{% endblock %}
+
+{% block title %}{{ 'search'|trans|desc('Search') }}{% endblock %}
+
+{% block content %}
+    <div class="row align-items-stretch ez-main-row">
+
+        {% block left_sidebar %}
+            {{ parent() }}
+        {% endblock left_sidebar %}
+
+        <div class="px-0 ez-content-container">
+            <section class="container mt-5">
+                {% include '@ezdesign/ui/page_title.html.twig' with { title: 'search.headline'|trans|desc('Search'), iconName: 'search' } %}
+                {% include '@ezdesign/ui/search/search.html.twig' with { form: form } %}
+
+                {% if results is defined %}
+
+                    <div class="ez-table-header mt-3 mx-4">
+                        <div class="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
+                    </div>
+
+                    {% if results is empty %}
+                        <div class="mx-4">
+                            <table class="table">
+                                <tr>
+                                    <td colspan="4">
+                                        <span>{{ 'search.no_result'|trans({'%query%': form.vars.value.query})|desc('Sorry, no results were found for "%query%".') }}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <h6>{{ 'search.tips.headline'|trans|desc('Some helpful search tips:') }}</h6>
+                            <ul>
+                                <li>{{ 'search.tips.check_spelling'|trans|desc('Check spelling of keywords.') }}</li>
+                                <li>{{ 'search.tips.different_keywords'|trans|desc('Try different keywords.') }}</li>
+                                <li>{{ 'search.tips.more_general_keywords'|trans|desc('Try more general keywords.') }}</li>
+                                <li>{{ 'search.tips.fewer_keywords'|trans|desc('Try fewer keywords. Reducing keywords result in more matches.') }}</li>
+                            </ul>
+                        </div>
+                    {% else %}
+                        <div class="ez-scrollable-table-wrapper mx-4">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
+                                    <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'search.name'|trans|desc('Name') }}</th>
+                                    <th class="ez-table__header-cell">{{ 'search.modified'|trans|desc('Modified') }}</th>
+                                    <th class="ez-table__header-cell">{{ 'search.type'|trans|desc('Content Type') }}</th>
+                                    <th class="ez-table__header-cell"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for row in results %}
+                                    {% include '@ezdesign/ui/search/list_item.html.twig' with { row: row } %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {% if pager.haveToPaginate %}
+                            <div class="row justify-content-center align-items-center mb-2 ml-4 ez-pagination__spacing">
+                                <span class="ez-pagination__text">
+                                    {{ 'pagination.viewing'|trans({
+                                        '%viewing%': pager.currentPageResults|length,
+                                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                                </span>
+                            </div>
+                            <div class="row justify-content-center align-items-center ez-pagination__btn mb-5 mx-4">
+                                {{ pagerfanta(pager, 'ez', {'pageParameter': '[search][page]'}) }}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    {% form_theme form_edit '@ezdesign/common/form/flat_widgets.html.twig' %}
+
+                    {{ form_start(form_edit, {
+                        'action': path('ezplatform.content.edit'),
+                        'attr': { 'class': 'ez-edit-content-form'}
+                    }) }}
+                    {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
+                    {{ form_end(form_edit) }}
+                {% endif %}
+            </section>
+        </div>
+    </div>
+{% endblock %}
+
+{% block react_modules %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-modules-content-tree-js', null, 'ezplatform') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-search-js', null, 'ezplatform') }}
+{% endblock %}

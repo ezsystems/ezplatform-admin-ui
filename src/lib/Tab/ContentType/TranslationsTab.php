@@ -78,7 +78,7 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
      */
     public function getTemplate(): string
     {
-        return '@ezdesign/admin/content_type/tab/translations.html.twig';
+        return '@ezdesign/content_type/tab/translations.html.twig';
     }
 
     /**

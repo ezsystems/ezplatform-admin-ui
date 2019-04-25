@@ -72,7 +72,7 @@ class PreviewUnavailableTwigComponent implements Renderable
 
         if (empty($siteaccesses)) {
             return $this->twig->render(
-                '@ezdesign/content/content_edit/component/preview_unavailable.html.twig'
+                '@ezdesign/ui/component/preview_unavailable.html.twig'
             );
         }
 

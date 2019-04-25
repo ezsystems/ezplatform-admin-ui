@@ -1,0 +1,44 @@
+{% trans_default_domain 'dashboard' %}
+
+{% import "@ezdesign/ui/dashboard/macros.html.twig" as macros %}
+
+{% if data|length %}
+    <table class="ez-table table">
+        <thead>
+        <tr>
+            <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
+            <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'dashboard.table.name'|trans|desc('Name') }}</th>
+            <th class="ez-table__header-cell">{{ 'dashboard.table.content_type'|trans|desc('Content Type') }}</th>
+            <th class="ez-table__header-cell">{{ 'dashboard.table.contributor'|trans|desc('Contributor') }}</th>
+            <th class="ez-table__header-cell">{{ 'dashboard.table.last_saved'|trans|desc('Last Saved') }}</th>
+            <th class="ez-table__header-cell"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in data %}
+            <tr>
+                <td class="ez-table__cell ez-table__cell--has-icon">
+                    <svg class="ez-icon ez-icon--small">
+                        <use xlink:href="{{ ez_content_type_icon(row.content_type.identifier) }}"></use>
+                    </svg>
+                </td>
+                <td class="ez-table__cell ez-table__cell--after-icon"><a href="{{ url('_ez_content_view', { 'contentId': row.contentId }) }}">{{ row.name }}</a></td>
+                <td class="ez-table__cell">{{ row.type }}</td>
+                <td class="ez-table__cell">
+                    {% if row.contributor is not null %}
+                        {{ row.contributor.name }}
+                    {% else %}
+                        {{ 'dashboard.table.contributor.not_found'|trans|desc('Can’t fetch contributor') }}
+                    {% endif %}
+                </td>
+                <td class="ez-table__cell">{{ row.modified|ez_full_datetime }}</td>
+                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    {{ macros.edit_content_button(row, 'dashboard.table.all.content.edit'|trans|desc('Edit Content')) }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="ez-table-no-content mb-0 py-0">{{ 'dashboard.tab.all_content.empty'|trans|desc('No content items. Content items you create will appear here') }}</p>
+{% endif %}

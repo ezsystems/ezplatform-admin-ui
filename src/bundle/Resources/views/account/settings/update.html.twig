@@ -1,15 +1,15 @@
-{% extends '@ezdesign/admin/base.html.twig' %}
+{% extends '@ezdesign/ui/base.html.twig' %}
 
 {% trans_default_domain 'user_settings' %}
 
 {% block breadcrumbs_admin %}
-    {% include '@ezdesign/part/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
         { value: 'list.title'|trans|desc('User Settings') }
     ]} %}
 {% endblock %}
 
 {% block page_title_admin %}
-    {% include '@ezdesign/part/page_title.html.twig' with {
+    {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'list.title'|trans|desc('User Settings'),
         iconName: 'user'
     } %}
@@ -18,7 +18,7 @@
 {% block body_class %}ez-user-settings-update-view{% endblock %}
 
 {% block form %}
-    {% form_theme form '@ezdesign/form_fields.html.twig' %}
+    {% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
     {{ form_start(form) }}
     {{ form_widget(form.identifier, {'attr': {'hidden': 'hidden'}}) }}
     <div class="ez-table-header ground-base">
@@ -34,5 +34,5 @@
 
 {% block right_sidebar %}
     {% set user_setting_update_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.user_setting_update.sidebar_right', [], {'user_setting': user_setting}) %}
-    {{ knp_menu_render(user_setting_update_sidebar_right, {'template': '@ezdesign/part/ui/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(user_setting_update_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

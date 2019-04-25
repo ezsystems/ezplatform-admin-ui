@@ -1,16 +1,16 @@
-{% extends '@ezdesign/layout.html.twig' %}
+{% extends '@ezdesign/ui/layout.html.twig' %}
 
 {% trans_default_domain "linkmanager" %}
 
 {%- block breadcrumbs -%}
-    {% include '@ezdesign/part/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
         { value: 'url.list'|trans, url: path('ezplatform.link_manager.list') },
         { value: 'url.detail'|trans|desc('Link detail')}
     ]} %}
 {%- endblock -%}
 
 {%- block page_title -%}
-    {% include '@ezdesign/part/page_title.html.twig' with {
+    {% include '@ezdesign/ui/page_title.html.twig' with {
         title: url.url|truncate(60),
         iconName: 'link'
     } %}

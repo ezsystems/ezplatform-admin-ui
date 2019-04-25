@@ -155,7 +155,7 @@ class ContentTypeController extends Controller
             $deletableTypes[$type->id] = !$this->contentTypeService->isContentTypeUsed($type);
         }
 
-        return $this->render('@ezdesign/admin/content_type/list.html.twig', [
+        return $this->render('@ezdesign/content_type/list.html.twig', [
             'content_type_group' => $group,
             'pager' => $pagerfanta,
             'deletable' => $deletableTypes,
@@ -203,7 +203,7 @@ class ContentTypeController extends Controller
         $language = $this->languageService->loadLanguage($mainLanguageCode);
         $form = $this->createUpdateForm($group, $contentTypeDraft, $language);
 
-        return $this->render('@ezdesign/admin/content_type/create.html.twig', [
+        return $this->render('@ezdesign/content_type/create.html.twig', [
             'content_type_group' => $group,
             'content_type' => $contentTypeDraft,
             'form' => $form->createView(),
@@ -470,7 +470,7 @@ class ContentTypeController extends Controller
             }
         }
 
-        return $this->render('@ezdesign/admin/content_type/edit.html.twig', [
+        return $this->render('@ezdesign/content_type/edit.html.twig', [
             'content_type_group' => $group,
             'content_type' => $contentTypeDraft,
             'form' => $form->createView(),
@@ -590,7 +590,7 @@ class ContentTypeController extends Controller
         $canUpdate = $this->isGranted(new Attribute('class', 'update')) &&
             $this->isGranted(new Attribute('class', 'create'));
 
-        return $this->render('@ezdesign/admin/content_type/view.html.twig', [
+        return $this->render('@ezdesign/content_type/index.html.twig', [
             'content_type_group' => $group,
             'content_type' => $contentType,
             'field_definitions_by_group' => $fieldDefinitionsByGroup,

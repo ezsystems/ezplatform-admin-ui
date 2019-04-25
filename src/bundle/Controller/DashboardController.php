@@ -44,7 +44,7 @@ class DashboardController extends Controller
             new ContentEditData()
         );
 
-        return $this->render('@ezdesign/dashboard/dashboard.html.twig', [
+        return $this->render('@ezdesign/ui/dashboard/dashboard.html.twig', [
             'form_edit' => $editForm->createView(),
             'can_create_content' => $this->permissionResolver->hasAccess('content', 'create'),
         ]);

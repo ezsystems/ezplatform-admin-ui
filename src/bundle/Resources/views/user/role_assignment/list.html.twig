@@ -1,0 +1,106 @@
+{% form_theme form_role_assignments_delete '@ezdesign/ui/form_fields.html.twig'  %}
+
+{% trans_default_domain 'role' %}
+
+<section class="container mt-4 px-5">
+    <div class="ez-table-header">
+        <div class="ez-table-header__headline">{{ 'role_assignment.view.list.header'|trans|desc('Users and Groups') }}</div>
+        <div>
+            {% if can_assign %}
+                <a
+                    href="{{ path('ezplatform.role_assignment.create', {roleId: role.id}) }}"
+                    title="{{ 'role_assignment.view.list.action.add'|trans|desc('Assign users/groups') }}"
+                    class="btn btn-secondary">
+                    <svg class="ez-icon ez-icon-relations ez-icon--secondary">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-user"></use>
+                    </svg>
+
+                </a>
+                {% set modal_data_target = 'delete-role-assignments-modal' %}
+                <button
+                    id="delete-role-assignments"
+                    type="button"
+                    class="btn btn-danger"
+                    disabled
+                    data-toggle="modal"
+                    data-target="#{{ modal_data_target }}"
+                    title="{{ 'role_assignment.view.list.action.delete'|trans|desc('Delete Assignment') }}">
+                    <svg class="ez-icon ez-icon-trash">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                    </svg>
+                </button>
+                {% include '@ezdesign/common/modal/bulk_delete_confirmation.html.twig' with {
+                    'id': modal_data_target,
+                    'message': 'role_assignments.modal.message'|trans|desc('Do you want to delete Role Assignments?'),
+                    'data_click': '#role_assignments_delete_delete',
+                }%}
+            {% endif %}
+        </div>
+    </div>
+    {{ form_start(form_role_assignments_delete, {
+        'action': path('ezplatform.role_assignment.bulk_delete', {"roleId": role.id} ),
+        'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-role-assignments' }
+    }) }}
+    <table class="ez-table table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>{{ 'role_assignment.view.list.panel.assignments.column.user_group'|trans|desc('User/Group') }}</th>
+            <th>{{ 'role_assignment.view.list.panel.assignments.column.limitation'|trans|desc('Limitation') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for role_assignment in pager.currentPageResults %}
+            <tr>
+                <td class="ez-table__cell ez-table__cell--has-checkbox">
+                    {% if can_assign %}
+                        {{ form_widget(form_role_assignments_delete.role_assignments[role_assignment.id]) }}
+                    {% else %}
+                        {% do form_role_assignments_delete.role_assignments.setRendered %}
+                    {% endif %}
+                </td>
+                <td class="ez-table__cell">
+                    {%- if role_assignment.usergroup is defined -%}
+                        {{ ez_content_name( role_assignment.usergroup ) }}
+                    {%- else -%}
+                        {{ ez_content_name( role_assignment.user ) }}
+                    {%- endif -%}
+                </td>
+                <td class="ez-table__cell ez-table__cell--limitation">
+                    {%- set limitation = role_assignment.rolelimitation -%}
+                    {%- if limitation -%}
+                        <ul class="list-unstyled">
+                            <li>
+                                <span class="font-weight-bold" title="{{ 'policy.limitation.identifier_tooltip' | trans({'%identifier%': limitation.identifier})|desc('"%identifier%" Limitation') }}">
+                                    {{ ('policy.limitation.identifier.' ~ limitation.identifier|lower)|trans({'%identifier%': limitation.identifier}, 'ezrepoforms_policies')|desc('%identifier%') }}:
+                                </span>
+                                {{ ez_render_limitation_value(limitation) }}
+                            </li>
+                        </ul>
+                    {%- else -%}
+                        {{- 'policy.limitation.none'|trans|desc('None') -}}
+                    {%- endif -%}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ form_end(form_role_assignments_delete) }}
+
+    {% if pager.haveToPaginate %}
+        <div class="row justify-content-center align-items-center mb-2 ez-pagination__spacing">
+                <span class="ez-pagination__text">
+                    {{ 'pagination.viewing'|trans({
+                        '%viewing%': pager.currentPageResults|length,
+                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                </span>
+        </div>
+        <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
+            {{ pagerfanta(pager, 'ez',{
+                'routeName': route_name,
+                'routeParams': {'_fragment': 'users-and-groups', 'roleId': role.id},
+                'pageParameter': '[assignmentPage]',
+            }) }}
+        </div>
+    {% endif %}
+</section>

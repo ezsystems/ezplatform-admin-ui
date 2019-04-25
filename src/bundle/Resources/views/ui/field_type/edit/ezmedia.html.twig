@@ -1,0 +1,57 @@
+{% trans_default_domain 'ezrepoforms_content' %}
+
+{% use '@ezdesign/ui/field_type/edit/binary_base.html.twig' %}
+
+{%- block ezplatform_fieldtype_ezmedia_row -%}
+    {% set preview_block_name = 'ezmedia_preview' %}
+    {% set max_file_size = min(form.parent.vars.value.fieldDefinition.validatorConfiguration.FileSizeValidator.maxFileSize * 1024 * 1024, max_upload_size)|round %}
+    {{ block('binary_base_row') }}
+{%- endblock -%}
+
+{% block ezmedia_preview %}
+    {% form_theme form '@ezdesign/ui/field_type/edit/binary_base_fields.html.twig' %}
+
+    <div class="ez-field-edit-preview">
+        <div class="ez-field-edit-preview__visual">
+            <div class="ez-field-edit-preview__media-wrapper ez-field-edit-preview__media-wrapper--loading">
+                <svg class="ez-field-edit-preview__spinner ez-icon ez-spin">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#spinner"></use>
+                </svg>
+                <video
+                    class="ez-field-edit-preview__media"
+                    src="{{ form.parent.vars.value.value.uri }}"
+                    preload="metadata"
+                    controls>
+                </video>
+            </div>
+            <div class="ez-field-edit-preview__details">
+                <span class="ez-field-edit-preview__file-name">{{ form.parent.vars.value.value.fileName }}</span>
+                <span class="ez-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</span>
+            </div>
+            <div class="ez-field-edit-preview__settings">
+                <div class="ez-field-edit-preview__section-title form-control-label">{{ 'content.field_type.ezmedia.player_settings'|trans({}, 'ezrepoforms_content')|desc('Player settings') }}</div>
+                <div class="ez-field-edit-preview__toggles">
+                    {{ form_row(form.hasController, {'label_attr': {'class': 'checkbox-inline'}}) }}
+                    {{ form_row(form.autoplay, {'label_attr': {'class': 'checkbox-inline'}}) }}
+                    {{ form_row(form.loop, {'label_attr': {'class': 'checkbox-inline'}}) }}
+                </div>
+                <div class="ez-field-edit-preview__dimensions">
+                    {{ form_row(form.width, {'label_attr': {'class': 'ez-field-edit-preview__label'}}) }}
+                    {{ form_row(form.height, {'label_attr': {'class': 'ez-field-edit-preview__label'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="ez-field-edit-preview__actions">
+            <button type="button" class="ez-field-edit-preview__action--remove">
+                <svg class="ez-icon">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
+                </svg>
+            </button>
+            <a class="ez-field-edit-preview__action--preview" href="{{ form.parent.vars.value.value.uri }}" target="_blank">
+                <svg class="ez-icon">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab"></use>
+                </svg>
+            </a>
+        </div>
+    </div>
+{% endblock %}

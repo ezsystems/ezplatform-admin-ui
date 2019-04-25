@@ -1,6 +1,6 @@
-{% extends '@ezdesign/layout.html.twig' %}
+{% extends '@ezdesign/ui/layout.html.twig' %}
 
-{% form_theme form '@ezdesign/form_fields.html.twig'  %}
+{% form_theme form '@ezdesign/ui/form_fields.html.twig'  %}
 
 {% trans_default_domain "linkmanager" %}
 
@@ -9,12 +9,12 @@
         <div class="px-0 pb-4 ez-content-container">
             <div class="ez-header">
                 <div class="container">
-                    {% include '@ezdesign/part/breadcrumbs.html.twig' with { items: [
+                    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
                         { value: 'url.list'|trans, url: path('ezplatform.link_manager.list') },
                         { value: 'url.edit'|trans }
                     ]} %}
 
-                    {% include '@ezdesign/part/page_title.html.twig' with {
+                    {% include '@ezdesign/ui/page_title.html.twig' with {
                         title: 'url.editing'|trans({'%url%': url.url|truncate(50) }),
                         iconName: 'link'
                     } %}
@@ -40,7 +40,7 @@
             {% set url_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.url_edit.sidebar_right', [], {'url': url}) %}
 
             {{ knp_menu_render(url_create_sidebar_right, {
-                'template': '@ezdesign/part/ui/sidebar_right.html.twig'
+                'template': '@ezdesign/ui/menu/sidebar_right.html.twig'
             }) }}
         </div>
     </div>

@@ -80,7 +80,7 @@ class MyContentTab extends AbstractTab implements OrderedTabInterface
         $pager->setMaxPerPage($limit);
         $pager->setCurrentPage($page);
 
-        return $this->twig->render('@ezdesign/dashboard/tab/my_content.html.twig', [
+        return $this->twig->render('@ezdesign/ui/dashboard/tab/my_content.html.twig', [
             'data' => $this->pagerContentToDataMapper->map($pager),
         ]);
     }

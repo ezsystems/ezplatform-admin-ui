@@ -1,9 +1,9 @@
 {% trans_default_domain 'locationview' %}
 
 {% import _self as tab %}
-{% form_theme form_archived_version_restore '@ezdesign/part/form/flat_widgets.html.twig' %}
-{% form_theme form_version_remove_draft '@ezdesign/form_fields.html.twig' %}
-{% form_theme form_version_remove_archived '@ezdesign/form_fields.html.twig' %}
+{% form_theme form_archived_version_restore '@ezdesign/common/form/flat_widgets.html.twig' %}
+{% form_theme form_version_remove_draft '@ezdesign/ui/form_fields.html.twig' %}
+{% form_theme form_version_remove_archived '@ezdesign/ui/form_fields.html.twig' %}
 
 {% set table_template_path = table_template_path|default('@ezdesign/content/tab/versions/table.html.twig') %}
 {% set show_drafts_table = show_drafts_table|default(draft_pager.currentPageResults is not empty) %}
@@ -17,7 +17,7 @@
                     'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-' ~ form_version_remove_draft.remove.vars.id }
                 }) }}
                 {% block table_drafts %}
-                    {% include '@ezdesign/part/table_header.html.twig' with {
+                    {% include '@ezdesign/ui/table_header.html.twig' with {
                         'headerText': 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'),
                         'tools': tab.table_header_tools(form_version_remove_draft)
                     } %}
@@ -56,7 +56,7 @@
         {% if published_versions is not empty %}
             <section>
                 {% block table_published %}
-                    {% include '@ezdesign/part/table_header.html.twig' with {
+                    {% include '@ezdesign/ui/table_header.html.twig' with {
                         'headerText': 'tab.versions.published_version'|trans()|desc('Published version')
                     } %}
                     {% include table_template_path with { 'versions': published_versions } %}
@@ -73,7 +73,7 @@
                     'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-' ~ form_version_remove_archived.remove.vars.id }
                 }) }}
                 {% block table_archived %}
-                    {% include '@ezdesign/part/table_header.html.twig' with {
+                    {% include '@ezdesign/ui/table_header.html.twig' with {
                         'headerText': 'tab.versions.archived_versions'|trans()|desc('Archived versions'),
                         'tools': tab.table_header_tools(form_version_remove_archived)
                     } %}
@@ -106,7 +106,7 @@
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
-    {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {
+    {% include '@ezdesign/common/modal/bulk_delete_confirmation.html.twig' with {
     'id': modal_data_target,
     'message': 'tab.versions.modal.message'|trans|desc('Do you want to delete Versions?'),
     'data_click': '#' ~ form.remove.vars.id,

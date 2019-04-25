@@ -1,0 +1,48 @@
+{% extends '@ezdesign/content/edit/base.html.twig' %}
+
+{% trans_default_domain 'user_create' %}
+
+{% block details %}
+    <div class="container mt-5 px-5">
+        <h4 class="ez-content-item-status">{{ 'creating'|trans({'%contentType%': contentType.name})|desc('Creating - %contentType%') }}</h4>
+        <h1>
+            <svg class="ez-icon ez-icon-{{ contentType.identifier }}">
+                <use xlink:href="{{ ez_content_type_icon(contentType.identifier) }}"></use>
+            </svg>
+            {{ 'new_content_item'|trans({'%contentType%': contentType.name})|desc('New %contentType%') }}
+        </h1>
+
+        <div class="small">
+            {{ contentType.name }} / {{ 'group_id'|trans({'%groupId%': parentGroup.id})|desc('Group ID: %groupId%') }}
+        </div>
+        <div class="ez-content-item__errors-wrapper" hidden>
+            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Looks like something went wrong. Please check for required fields or errors and correct them') }}
+        </div>
+        {# @todo remove if statement once getDescription() bug is resolved in kernel #}
+        {% if contentType.descriptions is not empty %}
+            <div class="small text-muted">{{ contentType.description }}</div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block form_fields %}
+    <section class="container mt-4 mb-5 px-5">
+        <div class="card ez-card">
+            <div class="card-body">
+                {{ parent() }}
+                {{ form_widget(form.create, {'attr': {'hidden': 'hidden'}}) }}
+                {{ form_widget(form.cancel, {'attr': {'hidden': 'hidden'}}) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block right_sidebar %}
+    {% set user_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.user_create.sidebar_right', [], {'parent_group': parentGroup, 'content_type': contentType}) %}
+    {{ knp_menu_render(user_create_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
+{% endblock %}
+
+{% block close_button %}
+    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': parentGroup.content.versionInfo.contentInfo.mainLocationId}) }}"></a>
+{% endblock %}
+

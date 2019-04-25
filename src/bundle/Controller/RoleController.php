@@ -108,7 +108,7 @@ class RoleController extends Controller
 
         $rolesDeleteForm = $this->formFactory->deleteRoles($rolesDeleteData);
 
-        return $this->render('@ezdesign/admin/role/list.html.twig', [
+        return $this->render('@ezdesign/user/role/list.html.twig', [
             'form_roles_delete' => $rolesDeleteForm->createView(),
             'pager' => $pagerfanta,
             'can_create' => $this->isGranted(new Attribute('role', 'create')),
@@ -139,7 +139,7 @@ class RoleController extends Controller
             $assignments = [];
         }
 
-        return $this->render('@ezdesign/admin/role/view.html.twig', [
+        return $this->render('@ezdesign/user/role/index.html.twig', [
             'role' => $role,
             'assignments' => $assignments,
             'delete_form' => $deleteForm->createView(),
@@ -183,7 +183,7 @@ class RoleController extends Controller
             }
         }
 
-        return $this->render('@ezdesign/admin/role/add.html.twig', [
+        return $this->render('@ezdesign/user/role/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -229,7 +229,7 @@ class RoleController extends Controller
             }
         }
 
-        return $this->render('@ezdesign/admin/role/edit.html.twig', [
+        return $this->render('@ezdesign/user/role/edit.html.twig', [
             'role' => $role,
             'form' => $form->createView(),
         ]);

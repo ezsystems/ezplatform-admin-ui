@@ -1,0 +1,35 @@
+{% form_theme form '@ezdesign/ui/form_fields.html.twig'  %}
+
+<div class="modal fade ez-modal ez-modal--send-to-trash" id="confirmEmptyTrash" tabindex="-1" role="dialog" aria-labelledby="confirmEmptyTrash"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg class="ez-icon ez-icon--medium" aria-hidden="true">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="ez-modal-body__main">
+                    {{ 'trash.delete.all.confirm'|trans({'%trashItemsCount%': trash_items_count})|desc('Are you sure you want to permanently delete %trashItemsCount% item(s)?') }}
+                </p>
+                <p class="ez-modal-body__explanation">
+                    {{ 'trash.delete.all.info'|trans|desc('This action cannot be reversed') }}
+                </p>
+            </div>
+            <div class="modal-footer">
+                {{ form_start(form, {
+                    'action': path('ezplatform.trash.empty')
+                }) }}
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    {{ 'trash.delete.button.cancel'|trans|desc('Cancel') }}
+                </button>
+                {{ form_widget(form.empty, {'attr': {'class': 'btn-danger font-weight-bold'}}) }}
+                {{ form_widget(form.empty_trash, {'label_attr': {'class': 'checkbox-inline'}, 'attr': {'hidden': true}}) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
