@@ -96,8 +96,8 @@
         {{ ezplatform_admin_ui_component_group('stylesheet-head') }}
         {{ ezplatform_admin_ui_component_group('script-head') }}
 
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react/umd/react.production.min.js') }}"></script>
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react-dom/umd/react-dom.production.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react/umd/react.development.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react-dom/umd/react-dom.development.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -156,6 +156,10 @@
         {{ ezplatform_admin_ui_component_group('custom-admin-ui-config') }}
 
         {{ encore_entry_script_tags('ezplatform-admin-ui-modules-udw-js', null, 'ezplatform') }}
+        {{ encore_entry_script_tags('ezplatform-admin-ui-modules-udw-v2-js', null, 'ezplatform') }}
+        {{ encore_entry_script_tags('ezplatform-admin-ui-modules-udw-v2-tab-browse-js', null, 'ezplatform') }}
+        {{ encore_entry_script_tags('ezplatform-admin-ui-modules-udw-v2-tab-search-js', null, 'ezplatform') }}
+        {{ encore_entry_script_tags('ezplatform-admin-ui-modules-udw-v2-tab-create-js', null, 'ezplatform') }}
         {{ encore_entry_script_tags('ezplatform-admin-ui-layout-js', null, 'ezplatform') }}
 
         {% block react_modules %}{% endblock %}

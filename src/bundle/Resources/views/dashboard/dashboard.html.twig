@@ -25,6 +25,8 @@
                 </div>
             </div>
             <div class="container">
+                <button type="button" id="udw2-btn" class="btn btn-secondary" data-starting-location-id="{{ admin_ui_config.universalDiscoveryWidget.startingLocationId|default(1) }}">Open new UDW</button>
+                <div id="udw2-container"></div>
                 {{ ezplatform_admin_ui_component_group('dashboard-blocks') }}
             </div>
         </div>

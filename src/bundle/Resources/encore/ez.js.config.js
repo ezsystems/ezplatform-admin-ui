@@ -209,6 +209,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/button.state.radio.toggle.js'),
         ])
         .addEntry('ezplatform-admin-ui-dashboard-js', [
+            path.resolve(__dirname, '../public/js/scripts/admin.dashboard.js'),
             path.resolve(__dirname, '../public/js/scripts/udw/browse.js'),
             path.resolve(__dirname, '../public/js/scripts/cotf/create.js'),
             path.resolve(__dirname, '../public/js/scripts/button.content.edit.js'),
