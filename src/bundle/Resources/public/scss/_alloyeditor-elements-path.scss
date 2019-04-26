@@ -1,0 +1,12 @@
+.ez-elements-path {
+    list-style: none;
+    display: flex;
+    margin-bottom: 0;
+    padding-left: 0;
+    font-weight: bold;
+    flex-wrap: wrap;
+
+    &__item:not(:last-child) {
+        margin-right: calculateRem(16px);
+    }
+}

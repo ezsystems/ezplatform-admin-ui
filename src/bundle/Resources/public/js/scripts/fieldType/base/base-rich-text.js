@@ -13,12 +13,16 @@
                 (key) => global.eZ.adminUiConfig.richTextCustomTags[key].isInline
             );
             this.alloyEditorExtraButtons = {
-                'ezadd': [],
-                'link': [],
-                'text': [],
-                'table': [],
-                ...global.eZ.adminUiConfig.alloyEditor.extraButtons
+                ezadd: [],
+                link: [],
+                text: [],
+                table: [],
+                tr: [],
+                td: [],
+                ...global.eZ.adminUiConfig.alloyEditor.extraButtons,
             };
+            this.attributes = global.eZ.adminUiConfig.alloyEditor.attributes;
+            this.classes = global.eZ.adminUiConfig.alloyEditor.classes;
             this.customTagsToolbars = this.customTags.map((customTag) => {
                 const alloyEditorConfig = global.eZ.adminUiConfig.richTextCustomTags[customTag];
 
@@ -186,7 +190,7 @@
         }
 
         init(container) {
-            const toolbarProps = {extraButtons: this.alloyEditorExtraButtons};
+            const toolbarProps = { extraButtons: this.alloyEditorExtraButtons, attributes: this.attributes, classes: this.classes };
             const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
                 toolbars: {
                     ezadd: {
@@ -210,16 +214,38 @@
                             new window.eZ.ezAlloyEditor.ezTextConfig({
                                 customStyles: this.customStylesConfigurations,
                                 inlineCustomTags: this.inlineCustomTags,
-                                ...toolbarProps
+                                ...toolbarProps,
                             }),
                             ...this.inlineCustomTagsToolbars,
-                            new window.eZ.ezAlloyEditor.ezParagraphConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
-                            new window.eZ.ezAlloyEditor.ezFormattedConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
-                            new window.eZ.ezAlloyEditor.ezCustomStyleConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
+                            new window.eZ.ezAlloyEditor.ezParagraphConfig({
+                                customStyles: this.customStylesConfigurations,
+                                ...toolbarProps,
+                            }),
+                            new window.eZ.ezAlloyEditor.ezFormattedConfig({
+                                customStyles: this.customStylesConfigurations,
+                                ...toolbarProps,
+                            }),
+                            new window.eZ.ezAlloyEditor.ezCustomStyleConfig({
+                                customStyles: this.customStylesConfigurations,
+                                ...toolbarProps,
+                            }),
                             new window.eZ.ezAlloyEditor.ezHeadingConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
-                            new window.eZ.ezAlloyEditor.ezListConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
+                            new window.eZ.ezAlloyEditor.ezListOrderedConfig({
+                                customStyles: this.customStylesConfigurations,
+                                ...toolbarProps,
+                            }),
+                            new window.eZ.ezAlloyEditor.ezListUnorderedConfig({
+                                customStyles: this.customStylesConfigurations,
+                                ...toolbarProps,
+                            }),
+                            new window.eZ.ezAlloyEditor.ezListItemConfig({
+                                customStyles: this.customStylesConfigurations,
+                                ...toolbarProps,
+                            }),
                             new window.eZ.ezAlloyEditor.ezEmbedInlineConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezTableConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezTableRowConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezTableCellConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezEmbedImageLinkConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezEmbedImageConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezEmbedConfig(toolbarProps),
@@ -239,7 +265,8 @@
                         'ezfocusblock',
                         'ezcustomtag',
                         'ezinlinecustomtag',
-                        ...this.alloyEditorExtraPlugins
+                        'ezelementspath',
+                        ...this.alloyEditorExtraPlugins,
                     ].join(','),
             });
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ez-data-source').querySelector('textarea').value);

@@ -67,6 +67,8 @@ const alloyEditor = [
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-inlinecustomtag.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-inlinecustomtag-edit.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-inlinecustomtag-update.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-attributes-edit.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-attributes-update.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/ez-add.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/plugins/ez-add-content.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/plugins/ez-move-element.js'),
@@ -75,11 +77,16 @@ const alloyEditor = [
     path.resolve(__dirname, '../public/js/alloyeditor/src/plugins/ez-embed.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/plugins/ez-focus-block.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/plugins/ez-custom-tag.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/plugins/ez-elements-path.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-paragraph.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-formatted.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-text.js'),
-    path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-list.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-list-ordered.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-list-unordered.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-list-item.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-table.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-table-row.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-table-cell.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-link.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-heading.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/toolbars/config/ez-embed.js'),
@@ -219,8 +226,9 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-change-user-password-js', [path.resolve(__dirname, '../public/js/scripts/user_password.change.js')])
         .addEntry('ezplatform-admin-ui-alloyeditor-js', [
             ...alloyEditor,
-            path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-rich-text.js'),
             path.resolve(__dirname, '../public/js/scripts/fieldType/alloyeditor/custom.tags.js'),
+            path.resolve(__dirname, '../public/js/scripts/fieldType/alloyeditor/attributes.js'),
+            path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-rich-text.js'),
         ])
         .addEntry('ezplatform-admin-ui-content-edit-parts-js', [
             path.resolve('./vendor/ezsystems/ezplatform-admin-ui-assets/Resources/public/vendors/leaflet/dist/leaflet.js'),

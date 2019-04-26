@@ -5,7 +5,14 @@ export default class EzFormattedConfig extends EzConfigBase {
         super(config);
 
         this.name = 'formatted';
-        this.buttons = ['ezmoveup', 'ezmovedown', this.getStyles(config.customStyles), 'ezanchor', 'ezblockremove'];
+        this.buttons = [
+            'ezmoveup',
+            'ezmovedown',
+            this.getEditAttributesButton(config),
+            this.getStyles(config.customStyles),
+            'ezanchor',
+            'ezblockremove',
+        ];
 
         this.addExtraButtons(config.extraButtons);
     }

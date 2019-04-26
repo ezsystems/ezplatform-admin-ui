@@ -8,6 +8,7 @@ export default class EzHeadingConfig extends EzConfgiFixedBase {
         this.buttons = [
             'ezmoveup',
             'ezmovedown',
+            this.getEditAttributesButton(config),
             this.getStyles(config.customStyles),
             'ezembedinline',
             'ezanchor',

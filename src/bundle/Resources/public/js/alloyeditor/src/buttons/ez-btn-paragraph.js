@@ -18,6 +18,11 @@ export default class EzBtnParagraph extends EzButton {
             tagName: 'p',
             content: '<br>',
         });
+
+        const block = this.findSelectedBlock();
+
+        this.setDefaultClasses(block);
+        this.setDefaultAttributes(block);
     }
 
     /**
