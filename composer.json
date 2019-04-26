@@ -12,6 +12,8 @@
     "autoload-dev": {
         "psr-4": { "EzSystems\\EzPlatformAdminUi\\Tests\\": "src/lib/Tests" }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=7.1",
         "symfony/symfony": "^3.4",
