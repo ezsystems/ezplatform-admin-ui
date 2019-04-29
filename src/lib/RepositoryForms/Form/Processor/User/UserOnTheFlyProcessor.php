@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\User;
 
+use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\UserService;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\UserOnTheFlyDispatcher;
 use EzSystems\RepositoryForms\Data\User\UserCreateData;
@@ -21,16 +23,28 @@ class UserOnTheFlyProcessor implements EventSubscriberInterface
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
+
+    /** @var \eZ\Publish\API\Repository\LocationService */
+    private $locationService;
+
     /** @var Environment */
     private $twig;
 
     /**
-     * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \Twig\Environment $twig
      */
-    public function __construct(UserService $userService, Environment $twig)
-    {
+    public function __construct(
+        UserService $userService,
+        ContentService $contentService,
+        LocationService $locationService,
+        Environment $twig
+    ) {
         $this->userService = $userService;
+        $this->contentService = $contentService;
+        $this->locationService = $locationService;
         $this->twig = $twig;
     }
 
@@ -68,7 +82,12 @@ class UserOnTheFlyProcessor implements EventSubscriberInterface
         $languageCode = $form->getConfig()->getOption('languageCode');
 
         $this->setContentFields($data, $languageCode);
-        $user = $this->userService->createUser($data, $data->getParentGroups());
+        $user = $this->contentService->createContent(
+            $data,
+            $this->createLocationCreateStructsFromUserGroups(
+                $data->getParentGroups()
+            )
+        );
 
         $event->setResponse(
             new Response(
@@ -79,6 +98,21 @@ class UserOnTheFlyProcessor implements EventSubscriberInterface
         );
     }
 
+    private function createLocationCreateStructsFromUserGroups(array $userGroups): array
+    {
+        $locationCreateStructs = [];
+        foreach ($userGroups as $parentGroup) {
+            $parentGroup = $this->userService->loadUserGroup($parentGroup->id);
+            if ($parentGroup->getVersionInfo()->getContentInfo()->mainLocationId !== null) {
+                $locationCreateStructs[] = $this->locationService->newLocationCreateStruct(
+                    $parentGroup->getVersionInfo()->getContentInfo()->mainLocationId
+                );
+            }
+        }
+
+        return $locationCreateStructs;
+    }
+
     /**
      * @param \EzSystems\RepositoryForms\Data\User\UserCreateData $data
      * @param string $languageCode
@@ -86,10 +120,6 @@ class UserOnTheFlyProcessor implements EventSubscriberInterface
     private function setContentFields(UserCreateData $data, string $languageCode): void
     {
         foreach ($data->fieldsData as $fieldDefIdentifier => $fieldData) {
-            if ('ezuser' === $fieldData->getFieldTypeIdentifier()) {
-                continue;
-            }
-
             $data->setField($fieldDefIdentifier, $fieldData->value, $languageCode);
         }
     }

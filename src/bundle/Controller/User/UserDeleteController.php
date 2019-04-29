@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller\User;
 
+use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
@@ -17,7 +18,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
-use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\LocationService;
 
 class UserDeleteController extends Controller
@@ -31,8 +31,8 @@ class UserDeleteController extends Controller
     /** @var SubmitHandler */
     private $submitHandler;
 
-    /** @var UserService */
-    private $userService;
+    /** @var ContentService */
+    private $contentService;
 
     /** @var LocationService */
     private $locationService;
@@ -41,20 +41,20 @@ class UserDeleteController extends Controller
      * @param TranslatableNotificationHandlerInterface $notificationHandler
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
-     * @param UserService $userService
+     * @param ContentService $contentService
      * @param LocationService $locationService
      */
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        UserService $userService,
+        ContentService $contentService,
         LocationService $locationService
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
-        $this->userService = $userService;
+        $this->contentService = $contentService;
         $this->locationService = $locationService;
     }
 
@@ -80,14 +80,14 @@ class UserDeleteController extends Controller
 
                 $location = $this->locationService->loadLocation($contentInfo->mainLocationId);
 
-                $user = $this->userService->loadUser($contentInfo->id);
+                $user = $this->contentService->loadContent($contentInfo->id);
 
-                $this->userService->deleteUser($user);
+                $this->contentService->deleteContent($user->contentInfo);
 
                 $this->notificationHandler->success(
                     /** @Desc("User with login '%login%' deleted.") */
                     'user.delete.success',
-                    ['%login%' => $user->login],
+                    ['%login%' => $user->contentInfo->name],
                     'content'
                 );
 
