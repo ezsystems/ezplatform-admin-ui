@@ -3,17 +3,24 @@
     const udw2Container = doc.querySelector('#udw2-container');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
+    const title = Translator.trans(/*@Desc("Browse content")*/ 'browse.title', {}, 'universal_discovery_widget');
     const openUDW = (event) => {
         event.preventDefault();
 
         const config = {
+            title,
+            restInfo: { token, siteaccess },
             tabs: [
                 {
                     id: 'browse',
                     title: 'Browse',
                     panel: eZ.udwTabs.Browse,
                     active: true,
-                    attrs: {},
+                    attrs: {
+                        multiple: true,
+                        selectedItemsLimit: 2,
+                        startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
+                    },
                 },
                 {
                     id: 'search',
@@ -31,34 +38,9 @@
                 },
             ],
         };
-        const onConfirm = () => {
-            console.log('onConfirm');
-        };
-        const onCancel = () => {
-            console.log('onCancel');
-        };
-        const title = Translator.trans(/*@Desc("Browse content")*/ 'browse.title', {}, 'universal_discovery_widget');
 
-        ReactDOM.render(
-            React.createElement(
-                eZ.modules.UDW,
-                Object.assign(
-                    {
-                        onConfirm,
-                        onCancel,
-                        title,
-                        multiple: false,
-                        startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
-                        restInfo: { token, siteaccess },
-                    },
-                    config
-                )
-            ),
-            udw2Container
-        );
+        ReactDOM.render(React.createElement(eZ.modules.UDW, config), udw2Container);
     };
-
-    console.log({ token, siteaccess });
 
     udw2Btn.addEventListener('click', openUDW, false);
 })(window, window.document, window.eZ, window.Translator, window.React, window.ReactDOM);
