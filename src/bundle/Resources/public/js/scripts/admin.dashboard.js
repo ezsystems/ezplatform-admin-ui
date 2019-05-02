@@ -4,6 +4,7 @@
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const title = Translator.trans(/*@Desc("Browse content")*/ 'browse.title', {}, 'universal_discovery_widget');
+    const closeUDW = () => ReactDOM.unmountComponentAtNode(udw2Container);
     const openUDW = (event) => {
         event.preventDefault();
 
@@ -20,6 +21,11 @@
                         multiple: true,
                         selectedItemsLimit: 2,
                         startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
+                        onConfirm: (items) => {
+                            console.log('onConfirm', JSON.stringify(items));
+                            closeUDW();
+                        },
+                        onCancel: closeUDW,
                     },
                 },
                 {
