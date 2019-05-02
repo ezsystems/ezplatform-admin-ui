@@ -534,6 +534,10 @@ class ContentViewController extends Controller
     private function supplyIsLocationInvisible(ContentView $view)
     {
         $location = $view->getLocation();
+        if ($location->parentLocationId === 1) {
+            $view->addParameters(['is_location_visible' => true]);
+            return true;
+        }
         $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
         $isLocationVisible = !($parentLocation->hidden || $parentLocation->invisible);
 
