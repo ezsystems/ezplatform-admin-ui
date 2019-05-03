@@ -23,16 +23,22 @@ class Languages implements ProviderInterface
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
+    /** @var string[] */
+    private $siteAccesses;
+
     /**
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param string[]
      */
     public function __construct(
         LanguageService $languageService,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        array $siteAccesses
     ) {
         $this->languageService = $languageService;
         $this->configResolver = $configResolver;
+        $this->siteAccesses = $siteAccesses;
     }
 
     /**
@@ -80,9 +86,8 @@ class Languages implements ProviderInterface
     {
         $priority = [];
         $fallback = [];
-        $siteAccesses = $this->configResolver->getParameter('list', 'ezpublish', 'siteaccess');
 
-        foreach ($siteAccesses as $siteAccess) {
+        foreach ($this->siteAccesses as $siteAccess) {
             $siteAccessLanguages = $this->configResolver->getParameter('languages', null, $siteAccess);
             $priority[] = array_shift($siteAccessLanguages);
             $fallback = array_merge($fallback, $siteAccessLanguages);
