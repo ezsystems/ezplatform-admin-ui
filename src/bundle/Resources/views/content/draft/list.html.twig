@@ -20,7 +20,7 @@
             <section class="container mt-5">
                 {% include '@ezdesign/ui/page_title.html.twig' with {
                     title: 'drafts.list'|trans|desc('Drafts'),
-                    iconName: 'content-draft'
+                    icon_name: 'content-draft'
                 } %}
 
                 <div class="px-4">
@@ -34,7 +34,7 @@
 
                     {% include '@ezdesign/ui/table_header.html.twig' with {
                         ground: 'mt-3',
-                        headerText: 'drafts.table.header'|trans|desc('Drafts') ~ ' (' ~ pager.count ~ ')',
+                        header_text: 'drafts.table.header'|trans|desc('Drafts') ~ ' (' ~ pager.count ~ ')',
                         tools: macros.table_header_tools(form_remove)
                      } %}
                     <div class="ez-scrollable-table-wrapper">

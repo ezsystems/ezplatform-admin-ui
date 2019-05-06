@@ -1,4 +1,4 @@
-{% extends viewbaseLayout is defined ? viewbaseLayout : '@ezdesign/ui/layout.html.twig' %}
+{% extends view_base_layout is defined ? view_base_layout : '@ezdesign/ui/layout.html.twig' %}
 
 {% set default_form_templates = admin_ui_config.contentEditFormTemplates %}
 {% set form_templates = form_templates is defined ? default_form_templates|merge(form_templates) : default_form_templates %}

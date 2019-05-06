@@ -26,7 +26,7 @@ system:
                     template: '@ezdesign/content/edit/edit.html.twig'
                     match: true
                     params:
-                        viewbaseLayout: '@ezdesign/ui/layout.html.twig'
+                        view_base_layout: '@ezdesign/ui/layout.html.twig'
 
         content_create_view:
             full:
@@ -34,7 +34,7 @@ system:
                     template: '@ezdesign/content/create/create.html.twig'
                     match: true
                     params:
-                        viewbaseLayout: '@ezdesign/ui/layout.html.twig'
+                        view_base_layout: '@ezdesign/ui/layout.html.twig'
 
         content_translate_view:
             full:
@@ -42,7 +42,7 @@ system:
                     template: '@ezdesign/content/edit/edit.html.twig'
                     match: true
                     params:
-                        viewbaseLayout: '@ezdesign/ui/layout.html.twig'
+                        view_base_layout: '@ezdesign/ui/layout.html.twig'
 
         user_settings_update_view:
             full:
