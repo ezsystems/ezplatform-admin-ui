@@ -85,13 +85,13 @@ class ViewParametersListener implements EventSubscriberInterface
         $isPublished = null !== $content->contentInfo->mainLocationId && $content->contentInfo->published;
 
         $contentView->addParameters([
-            'parentLocation' => $this->resolveParentLocation($content, $location, $isPublished),
-            'isPublished' => $isPublished,
+            'parent_location' => $this->resolveParentLocation($content, $location, $isPublished),
+            'is_published' => $isPublished,
         ]);
 
         if (!$isPublished) {
             $contentView->addParameters([
-                'parentLocations' => $this->locationService->loadParentLocationsForDraftContent($content->versionInfo),
+                'parent_locations' => $this->locationService->loadParentLocationsForDraftContent($content->versionInfo),
             ]);
         }
 
@@ -122,13 +122,13 @@ class ViewParametersListener implements EventSubscriberInterface
         $isPublished = null !== $content->contentInfo->mainLocationId && $content->contentInfo->published;
 
         $contentView->addParameters([
-            'parentLocation' => $this->resolveParentLocation($content, $location, $isPublished),
-            'isPublished' => $isPublished,
+            'parent_location' => $this->resolveParentLocation($content, $location, $isPublished),
+            'is_published' => $isPublished,
         ]);
 
         if (!$isPublished) {
             $contentView->addParameters([
-                'parentLocations' => $this->locationService->loadParentLocationsForDraftContent($content->versionInfo),
+                'parent_locations' => $this->locationService->loadParentLocationsForDraftContent($content->versionInfo),
             ]);
         }
 

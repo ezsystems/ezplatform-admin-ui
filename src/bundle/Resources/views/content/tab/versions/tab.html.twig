@@ -18,7 +18,7 @@
                 }) }}
                 {% block table_drafts %}
                     {% include '@ezdesign/ui/table_header.html.twig' with {
-                        'headerText': 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'),
+                        'header_text': 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'),
                         'tools': tab.table_header_tools(form_version_remove_draft)
                     } %}
                     {% include table_template_path with {
@@ -57,7 +57,7 @@
             <section>
                 {% block table_published %}
                     {% include '@ezdesign/ui/table_header.html.twig' with {
-                        'headerText': 'tab.versions.published_version'|trans()|desc('Published version')
+                        'header_text': 'tab.versions.published_version'|trans()|desc('Published version')
                     } %}
                     {% include table_template_path with { 'versions': published_versions } %}
                 {% endblock %}
@@ -74,7 +74,7 @@
                 }) }}
                 {% block table_archived %}
                     {% include '@ezdesign/ui/table_header.html.twig' with {
-                        'headerText': 'tab.versions.archived_versions'|trans()|desc('Archived versions'),
+                        'header_text': 'tab.versions.archived_versions'|trans()|desc('Archived versions'),
                         'tools': tab.table_header_tools(form_version_remove_archived)
                     } %}
                     {% include table_template_path with {
