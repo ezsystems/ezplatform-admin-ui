@@ -163,19 +163,14 @@
             };
 
             ReactDOM.render(
-                React.createElement(
-                    eZ.modules.UniversalDiscovery,
-                    Object.assign(
-                        {
-                            onConfirm,
-                            onCancel,
-                            canSelectContent,
-                            title,
-                            restInfo: { token, siteaccess },
-                        },
-                        config
-                    )
-                ),
+                React.createElement(eZ.modules.UniversalDiscovery, {
+                    onConfirm,
+                    onCancel,
+                    canSelectContent,
+                    title,
+                    restInfo: { token, siteaccess },
+                    config,
+                }),
                 udwContainer
             );
         }
@@ -260,4 +255,4 @@
 
         eZ.addConfig('fieldTypeValidators', [validator], true);
     });
-})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator, window.Routing);
+})(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator, window.Routing);

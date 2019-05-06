@@ -119,4 +119,4 @@
     }
 
     eZ.addConfig('core.Draggable', Draggable);
-})(window, document, window.eZ);
+})(window, window.document, window.eZ);

@@ -44,4 +44,4 @@
     visibilityCheckboxes.forEach((checkbox) => {
         checkbox.addEventListener('change', updateVisibility, false);
     });
-})(window, document, window.eZ);
+})(window, window.document, window.eZ);

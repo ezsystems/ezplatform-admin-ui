@@ -59,4 +59,4 @@
         btn.dataset.isFormValid = 0;
         btn.addEventListener('click', clickHandler, false);
     });
-})(window, document, window.eZ);
+})(window, window.document, window.eZ);

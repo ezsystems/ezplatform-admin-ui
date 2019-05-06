@@ -649,4 +649,4 @@
     });
 
     eZ.addConfig('fieldTypeValidators', [validator], true);
-})(window, document, window.eZ, window.L);
+})(window, window.document, window.eZ, window.L);

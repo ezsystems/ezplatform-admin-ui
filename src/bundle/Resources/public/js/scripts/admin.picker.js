@@ -34,16 +34,14 @@
             defaultDate = new Date(formInput.value * 1000);
         }
 
-        const flatpickrInstance = flatpickr(
-            pickerInput,
-            Object.assign({}, pickerConfig, {
-                onChange: updateInputValue.bind(null, formInput),
-                defaultDate,
-            })
-        );
+        const flatpickrInstance = flatpickr(pickerInput, {
+            ...pickerConfig,
+            onChange: updateInputValue.bind(null, formInput),
+            defaultDate,
+        });
 
         btnClear.addEventListener('click', onClearBtnClick.bind(null, flatpickrInstance), false);
     };
 
     pickers.forEach(initFlatPickr);
-})(window, document, window.flatpickr);
+})(window, window.document, window.flatpickr);

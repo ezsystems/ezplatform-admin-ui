@@ -13,4 +13,4 @@
     timeFormatSelect.addEventListener('change', updateDateTimeFormatPreview);
 
     updateDateTimeFormatPreview();
-})(window, document, window.moment);
+})(window, window.document, window.moment);

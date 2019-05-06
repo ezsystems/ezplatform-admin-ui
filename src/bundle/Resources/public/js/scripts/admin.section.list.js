@@ -24,21 +24,16 @@
         doc.querySelector('#section_content_assign_section').value = btn.dataset.sectionId;
 
         ReactDOM.render(
-            React.createElement(
-                eZ.modules.UniversalDiscovery,
-                Object.assign(
-                    {
-                        onConfirm: onConfirm.bind(this, form),
-                        onCancel,
-                        startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-                        restInfo: { token, siteaccess },
-                    },
-                    config
-                )
-            ),
+            React.createElement(eZ.modules.UniversalDiscovery, {
+                onConfirm: onConfirm.bind(this, form),
+                onCancel,
+                startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                restInfo: { token, siteaccess },
+                config,
+            }),
             udwContainer
         );
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window, document, window.eZ, window.React, window.ReactDOM);
+})(window, window.document, window.eZ, window.React, window.ReactDOM);

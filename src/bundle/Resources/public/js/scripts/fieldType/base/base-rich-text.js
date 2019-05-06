@@ -346,4 +346,4 @@
     }
 
     eZ.addConfig('BaseRichText', BaseRichText);
-})(window, document, window.eZ, window.CKEDITOR, window.AlloyEditor);
+})(window, window.document, window.eZ, window.CKEDITOR, window.AlloyEditor);

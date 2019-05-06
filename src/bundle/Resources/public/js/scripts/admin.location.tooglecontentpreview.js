@@ -1,4 +1,4 @@
-(function(doc, localStorage, $) {
+(function(global, doc, localStorage, $) {
     const CONTENT_PREVIEW_COLLAPSE_SELECTOR = '.ez-content-preview-collapse';
     const CONTENT_PREVIEW_TOGGLE_STATE_KEY = 'ez-content-preview-collapsed';
     const getContentPreviewToggleState = () => {
@@ -18,4 +18,4 @@
         collapsable.on('hide.bs.collapse', () => setContentPreviewToggleState(true));
         collapsable.on('show.bs.collapse', () => setContentPreviewToggleState(false));
     });
-})(document, window.localStorage, window.jQuery);
+})(window, window.document, window.localStorage, window.jQuery);

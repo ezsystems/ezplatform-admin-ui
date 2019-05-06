@@ -8,10 +8,11 @@
     const sortField = sortContainer.getAttribute('data-sort-field');
     const sortOrder = sortContainer.getAttribute('data-sort-order');
     const mfuAttrs = {
-        adminUiConfig: Object.assign({}, eZ.adminUiConfig, {
+        adminUiConfig: {
+            ...eZ.adminUiConfig,
             token,
             siteaccess,
-        }),
+        },
         parentInfo: {
             contentTypeIdentifier: mfuContainer.dataset.parentContentTypeIdentifier,
             contentTypeId: parseInt(mfuContainer.dataset.parentContentTypeId, 10),
@@ -152,11 +153,12 @@
                 extraActions: [
                     {
                         component: eZ.modules.MultiFileUpload,
-                        attrs: Object.assign({}, mfuAttrs, {
+                        attrs: {
+                            ...mfuAttrs,
                             onPopupClose: (itemsUploaded) => itemsUploaded.length && global.location.reload(true),
                             contentCreatePermissionsConfig: JSON.parse(container.dataset.mfuCreatePermissionsConfig),
                             contentTypesMap: mfuContentTypesMap,
-                        }),
+                        },
                     },
                 ],
                 items,
@@ -168,4 +170,4 @@
             container
         );
     });
-})(window, document, window.jQuery, window.React, window.ReactDOM, window.eZ, window.Routing, window.Translator);
+})(window, window.document, window.jQuery, window.React, window.ReactDOM, window.eZ, window.Routing, window.Translator);

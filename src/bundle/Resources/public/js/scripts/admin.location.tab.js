@@ -5,4 +5,4 @@
     $('.ez-tabs a').on('shown.bs.tab', (event) => {
         global.location.hash = `${event.target.hash}#tab`;
     });
-})(window, document, window.jQuery);
+})(window, window.document, window.jQuery);

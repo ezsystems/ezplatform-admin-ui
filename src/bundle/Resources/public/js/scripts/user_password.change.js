@@ -115,4 +115,4 @@
     newPasswordInput.addEventListener('blur', (event) => checkIsNotEmpty(event.currentTarget), false);
     confirmPasswordInput.addEventListener('blur', (event) => checkIsNotEmpty(event.currentTarget), false);
     confirmPasswordInput.addEventListener('blur', comparePasswords, false);
-})(window, document, window.eZ);
+})(window, window.document, window.eZ);

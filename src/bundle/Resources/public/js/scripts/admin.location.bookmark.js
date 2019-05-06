@@ -69,4 +69,4 @@
     if (bookmarkWrapper) {
         bookmarkWrapper.addEventListener('click', onBookmarkChange, false);
     }
-})(window, document, window.eZ);
+})(window, window.document, window.eZ);

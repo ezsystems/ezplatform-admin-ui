@@ -177,4 +177,4 @@
 
     getNotificationsStatus();
     global.setInterval(getNotificationsStatus, INTERVAL);
-})(window, document, window.eZ, window.Translator);
+})(window, window.document, window.eZ, window.Translator);

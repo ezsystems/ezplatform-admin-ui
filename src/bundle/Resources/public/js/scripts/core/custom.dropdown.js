@@ -183,4 +183,4 @@
     }
 
     eZ.addConfig('core.CustomDropdown', CustomDropdown);
-})(window, document, window.eZ);
+})(window, window.document, window.eZ);

@@ -41,4 +41,4 @@
     validator.init();
 
     eZ.addConfig('fieldTypeValidators', [validator], true);
-})(window, document, window.eZ);
+})(window, window.document, window.eZ);

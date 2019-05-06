@@ -65,4 +65,4 @@
         AlloyEditor.Buttons[ButtonCustomTagEdit.key] = AlloyEditor[editComponentClassName] = ButtonCustomTagEdit;
         AlloyEditor.Buttons[ButtonCustomTagUpdate.key] = AlloyEditor[updateComponentClassName] = ButtonCustomTagUpdate;
     });
-})(window, document, window.eZ, window.AlloyEditor);
+})(window, window.document, window.eZ, window.AlloyEditor);

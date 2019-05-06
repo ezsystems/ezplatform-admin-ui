@@ -112,14 +112,12 @@
             false
         );
 
-        flatpickr(
-            flatPickrInput,
-            Object.assign({}, timeConfig, {
-                enableSeconds,
-                onChange: updateInputValue.bind(null, sourceInput),
-                defaultDate,
-            })
-        );
+        flatpickr(flatPickrInput, {
+            ...timeConfig,
+            enableSeconds,
+            onChange: updateInputValue.bind(null, sourceInput),
+            defaultDate,
+        });
 
         if (sourceInput.hasAttribute('required')) {
             flatPickrInput.setAttribute('required', true);
@@ -127,4 +125,4 @@
     };
 
     timeFields.forEach(initFlatPickr);
-})(window, document, window.eZ, window.flatpickr);
+})(window, window.document, window.eZ, window.flatpickr);

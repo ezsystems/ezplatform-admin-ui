@@ -110,4 +110,4 @@
         showDangerNotification,
         showErrorNotification,
     });
-})(window, document, window.eZ);
+})(window, window.document, window.eZ);

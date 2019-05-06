@@ -40,4 +40,4 @@
     eZ.addConfig('helpers.contentType', {
         getContentTypeIconUrl,
     });
-})(window, document, window.eZ);
+})(window, window.document, window.eZ);

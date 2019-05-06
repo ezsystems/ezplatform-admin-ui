@@ -76,4 +76,4 @@
     };
 
     doc.querySelectorAll('.ez-btn--content-edit').forEach((button) => button.addEventListener('click', editVersion, false));
-})(window, document, window.jQuery, window.eZ, window.Translator, window.Routing);
+})(window, window.document, window.jQuery, window.eZ, window.Translator, window.Routing);

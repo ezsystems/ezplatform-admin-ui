@@ -25,21 +25,16 @@
         );
 
         ReactDOM.render(
-            React.createElement(
-                eZ.modules.UniversalDiscovery,
-                Object.assign(
-                    {
-                        onConfirm: onConfirm.bind(this, form),
-                        onCancel,
-                        title,
-                        startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-                        allowContainersOnly: true,
-                        restInfo: { token, siteaccess },
-                        multiple: false,
-                    },
-                    config
-                )
-            ),
+            React.createElement(eZ.modules.UniversalDiscovery, {
+                onConfirm: onConfirm.bind(this, form),
+                onCancel,
+                title,
+                startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                allowContainersOnly: true,
+                restInfo: { token, siteaccess },
+                multiple: false,
+                ...config,
+            }),
             udwContainer
         );
     };
@@ -84,4 +79,4 @@
     updateTrashForm(checkboxes);
     enableButtons();
     checkboxes.forEach((checkbox) => checkbox.addEventListener('change', handleCheckboxChange, false));
-})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
+})(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator);

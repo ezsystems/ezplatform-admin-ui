@@ -278,4 +278,4 @@
     }
 
     eZ.addConfig('BasePreviewField', BasePreviewField);
-})(window, document, window.eZ);
+})(window, window.document, window.eZ);

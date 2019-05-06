@@ -102,20 +102,15 @@
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
 
         ReactDOM.render(
-            React.createElement(
-                eZ.modules.UniversalDiscovery,
-                Object.assign(
-                    {
-                        onConfirm: onConfirm.bind(null, event.currentTarget),
-                        onCancel,
-                        title: event.currentTarget.dataset.universalDiscoveryTitle,
-                        multiple: false,
-                        startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-                        restInfo: { token, siteaccess },
-                    },
-                    config
-                )
-            ),
+            React.createElement(eZ.modules.UniversalDiscovery, {
+                onConfirm: onConfirm.bind(null, event.currentTarget),
+                onCancel,
+                title: event.currentTarget.dataset.universalDiscoveryTitle,
+                multiple: false,
+                startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                restInfo: { token, siteaccess },
+                ...config,
+            }),
             udwContainer
         );
     };
@@ -134,4 +129,4 @@
             clearBtn.addEventListener('click', clearSelection.bind(null, btn), false);
         }
     });
-})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
+})(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator);

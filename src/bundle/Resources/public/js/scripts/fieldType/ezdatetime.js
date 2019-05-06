@@ -105,14 +105,12 @@
             defaultDate = new Date(convertDateToTimezone(defaultDateWithUserTimezone, browserTimezone, true));
         }
 
-        const flatpickrInstance = flatpickr(
-            flatPickrInput,
-            Object.assign({}, datetimeConfig, {
-                onChange: updateInputValue.bind(null, sourceInput),
-                defaultDate,
-                enableSeconds: secondsEnabled,
-            })
-        );
+        const flatpickrInstance = flatpickr(flatPickrInput, {
+            ...datetimeConfig,
+            onChange: updateInputValue.bind(null, sourceInput),
+            defaultDate,
+            enableSeconds: secondsEnabled,
+        });
 
         btnClear.addEventListener('click', clearValue.bind(null, sourceInput, flatpickrInstance), false);
 
@@ -122,4 +120,4 @@
     };
 
     datetimeFields.forEach(initFlatPickr);
-})(window, document, window.eZ, window.flatpickr);
+})(window, window.document, window.eZ, window.flatpickr);

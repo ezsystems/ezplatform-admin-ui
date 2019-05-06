@@ -171,13 +171,11 @@
             defaultDate = new Date(sourceInput.value * 1000);
         }
 
-        flatpickr(
-            flatPickrInput,
-            Object.assign({}, dateConfig, {
-                onChange: updateSourceInputValue.bind(null, sourceInput),
-                defaultDate,
-            })
-        );
+        flatpickr(flatPickrInput, {
+            ...dateConfig,
+            onChange: updateSourceInputValue.bind(null, sourceInput),
+            defaultDate,
+        });
     };
     const getUsersList = (value) => {
         const body = JSON.stringify({
@@ -289,4 +287,4 @@
     listGroupsTitle.forEach((group) => group.addEventListener('click', toggleGroupState, false));
     contentTypeCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', filterByContentType, false));
     selectBtns.forEach((btn) => btn.addEventListener('click', setSelectedDateRange, false));
-})(window, document, window.jQuery, window.flatpickr);
+})(window, window.document, window.jQuery, window.flatpickr);

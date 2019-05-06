@@ -248,4 +248,4 @@
     }
 
     eZ.addConfig('BaseFieldValidator', BaseFieldValidator);
-})(window, document, window.eZ);
+})(window, window.document, window.eZ);

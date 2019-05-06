@@ -68,4 +68,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('change', changeHandler, false));
-})(window, document, window.jQuery, window.Routing);
+})(window, window.document, window.jQuery, window.Routing);

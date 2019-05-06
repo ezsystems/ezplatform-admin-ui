@@ -20,24 +20,19 @@
         const title = Translator.trans(/*@Desc("Select location")*/ 'copy.title', {}, 'universal_discovery_widget');
 
         ReactDOM.render(
-            React.createElement(
-                eZ.modules.UniversalDiscovery,
-                Object.assign(
-                    {
-                        onConfirm,
-                        onCancel,
-                        title,
-                        multiple: false,
-                        startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
-                        restInfo: { token, siteaccess },
-                        allowContainersOnly: true,
-                    },
-                    config
-                )
-            ),
+            React.createElement(eZ.modules.UniversalDiscovery, {
+                onConfirm,
+                onCancel,
+                title,
+                multiple: false,
+                startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
+                restInfo: { token, siteaccess },
+                allowContainersOnly: true,
+                ...config,
+            }),
             udwContainer
         );
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
+})(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator);
