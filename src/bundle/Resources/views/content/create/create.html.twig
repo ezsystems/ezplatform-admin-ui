@@ -23,8 +23,8 @@
             {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Looks like something went wrong. Please check for required fields or errors and correct them') }}
         </div>
         {# @todo remove if statement once getDescription() bug is resolved in kernel #}
-        {% if content_type.descriptions is not empty %}
-            <div class="small text-muted">{{ content_type.description }}</div>
+        {% if contentType.descriptions is not empty %}
+            <div class="small text-muted">{{ contentType.description }}</div>
         {% endif %}
     </div>
 {% endblock %}
