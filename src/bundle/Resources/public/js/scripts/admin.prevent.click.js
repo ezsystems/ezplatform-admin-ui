@@ -4,4 +4,4 @@
 
         return null;
     };
-})(window, document);
+})(window, window.document);

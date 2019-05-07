@@ -7,4 +7,4 @@
     };
 
     togglers.forEach((btn) => btn.addEventListener('click', toggleFieldTypeView, false));
-})(window, document);
+})(window, window.document);

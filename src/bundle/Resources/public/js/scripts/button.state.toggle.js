@@ -18,4 +18,4 @@
         toggleButtonState();
         checkboxes.forEach((checkbox) => checkbox.addEventListener('change', toggleButtonState, false));
     });
-})(window, document);
+})(window, window.document);

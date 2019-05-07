@@ -4,4 +4,4 @@
     const form = createActions.querySelector('form');
 
     btns.forEach((btn) => btn.addEventListener('change', () => form.submit(), false));
-})(window, document);
+})(window, window.document);

@@ -7,4 +7,4 @@
     doc.querySelectorAll('input[name="updateMainLocation"]').forEach((input) =>
         input.addEventListener('change', updateMainLocation, false)
     );
-})(window, document);
+})(window, window.document);

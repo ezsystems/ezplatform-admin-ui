@@ -24,4 +24,4 @@
     doc.querySelectorAll(SELECTOR_PREVIEW_SITEACCESS_SELECT).forEach((select) =>
         select.addEventListener('change', changePreviewSiteaccess, false)
     );
-})(window, document);
+})(window, window.document);

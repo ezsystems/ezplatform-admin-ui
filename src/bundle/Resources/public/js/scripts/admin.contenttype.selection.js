@@ -31,4 +31,4 @@
         container.querySelector(SELECTOR_BTN_ADD).addEventListener('click', addOption, false);
         container.querySelector(SELECTOR_BTN_REMOVE).addEventListener('click', removeOptions, false);
     });
-})(window, document);
+})(window, window.document);

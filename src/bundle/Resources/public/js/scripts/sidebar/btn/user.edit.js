@@ -15,4 +15,4 @@
         },
         false
     );
-})(window, document);
+})(window, window.document);

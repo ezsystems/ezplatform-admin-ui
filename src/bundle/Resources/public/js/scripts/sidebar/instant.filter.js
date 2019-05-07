@@ -44,4 +44,4 @@
     };
 
     filters.forEach(initFilter);
-})(window, document);
+})(window, window.document);

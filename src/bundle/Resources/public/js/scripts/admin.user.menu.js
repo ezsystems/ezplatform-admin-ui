@@ -23,4 +23,4 @@
     if (userMenu) {
         userMenu.addEventListener('click', toggleMenuItems, false);
     }
-})(window, document);
+})(window, window.document);

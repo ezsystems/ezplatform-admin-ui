@@ -7,4 +7,4 @@
     locationLanguageSwitchers.forEach((locationLanguageSwitcher) => {
         locationLanguageSwitcher.addEventListener('change', changeLocationLanguage, false);
     });
-})(window, document);
+})(window, window.document);

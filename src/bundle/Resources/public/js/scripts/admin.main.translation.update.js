@@ -6,4 +6,4 @@
     const inputs = doc.querySelectorAll('input[name="main_translation_update"]');
 
     inputs.forEach((input) => input.addEventListener('change', updateMainTranslation, false));
-})(window, document);
+})(window, window.document);

@@ -27,4 +27,4 @@
         checkboxes.forEach((checkbox) => checkbox.addEventListener('change', toggleCheckbox, false));
         discardBtns.forEach((btn) => btn.addEventListener('click', clearValues, false));
     }
-})(window, document);
+})(window, window.document);

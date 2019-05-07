@@ -25,4 +25,4 @@
             input.addEventListener('change', toggleButtonState.bind(input, button, validateCheckboxStatus), false)
         );
     });
-})(window, document);
+})(window, window.document);

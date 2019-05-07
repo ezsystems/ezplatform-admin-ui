@@ -18,4 +18,4 @@
         toggleButtonState();
         radioInputs.forEach((radioInput) => radioInput.addEventListener('change', toggleButtonState, false));
     });
-})(window, document);
+})(window, window.document);

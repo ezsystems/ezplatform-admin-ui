@@ -7,4 +7,4 @@
     const items = doc.querySelectorAll('.ez-form-autosubmit');
 
     items.forEach((item) => item.addEventListener('change', autosubmit, false));
-})(window, document);
+})(window, window.document);

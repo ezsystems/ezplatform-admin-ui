@@ -38,4 +38,4 @@
 
     resetSelection();
     doc.querySelectorAll(SELECTOR_LABEL).forEach((input) => input.addEventListener('click', updateSelection, false));
-})(window, document);
+})(window, window.document);

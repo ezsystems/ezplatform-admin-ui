@@ -5,4 +5,4 @@
     };
 
     doc.querySelectorAll('input[name="setMainLocation"]').forEach((input) => input.addEventListener('change', updateMainLocation, false));
-})(window, document);
+})(window, window.document);

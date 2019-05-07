@@ -5,6 +5,7 @@
     const btns = editActions.querySelectorAll('.form-check [type="radio"]');
     const changeHandler = () => {
         const form = doc.querySelector('.ez-extra-actions--edit form');
+
         form.submit();
     };
 
@@ -22,4 +23,4 @@
         },
         false
     );
-})(window, document);
+})(window, window.document);
