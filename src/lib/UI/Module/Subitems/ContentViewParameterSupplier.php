@@ -16,7 +16,7 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
-use eZ\Publish\Core\REST\Common\Output\Visitor;
+use EzSystems\EzPlatformRestCommon\Output\Visitor;
 use eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentTypeInfoList as ContentTypeInfoListValueObjectVisitor;
 use eZ\Publish\Core\REST\Server\Values\ContentTypeInfoList;
 use eZ\Publish\Core\REST\Server\Values\RestContent;
@@ -25,7 +25,7 @@ use EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList as SubitemsListValueObjectVisitor;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsList;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsRow;
-use eZ\Publish\Core\REST\Common\Output\Generator\Json as JsonOutputGenerator;
+use EzSystems\EzPlatformRestCommon\Output\Generator\Json as JsonOutputGenerator;
 use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
 
 /**
@@ -33,10 +33,10 @@ use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
  */
 class ContentViewParameterSupplier
 {
-    /** @var \eZ\Publish\Core\REST\Common\Output\Visitor */
+    /** @var \EzSystems\EzPlatformRestCommon\Output\Visitor */
     private $outputVisitor;
 
-    /** @var \eZ\Publish\Core\REST\Common\Output\Generator\Json */
+    /** @var \EzSystems\EzPlatformRestCommon\Output\Generator\Json */
     private $outputGenerator;
 
     /** @var \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentTypeInfoList */
@@ -64,8 +64,8 @@ class ContentViewParameterSupplier
     private $userSettingService;
 
     /**
-     * @param \eZ\Publish\Core\REST\Common\Output\Visitor $outputVisitor
-     * @param \eZ\Publish\Core\REST\Common\Output\Generator\Json $outputGenerator
+     * @param \EzSystems\EzPlatformRestCommon\Output\Visitor $outputVisitor
+     * @param \EzSystems\EzPlatformRestCommon\Output\Generator\Json $outputGenerator
      * @param \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentTypeInfoList $contentTypeInfoListValueObjectVisitor
      * @param \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList $subitemsListValueObjectVisitor
      * @param \eZ\Publish\API\Repository\LocationService $locationService

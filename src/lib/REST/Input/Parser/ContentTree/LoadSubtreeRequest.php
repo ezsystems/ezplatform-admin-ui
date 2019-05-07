@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree;
 
-use eZ\Publish\Core\REST\Common\Exceptions;
-use eZ\Publish\Core\REST\Common\Input\BaseParser;
-use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
+use EzSystems\EzPlatformRestCommon\Exceptions;
+use EzSystems\EzPlatformRestCommon\Input\BaseParser;
+use EzSystems\EzPlatformRestCommon\Input\ParsingDispatcher;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequest as LoadSubtreeRequestValue;
 
 class LoadSubtreeRequest extends BaseParser

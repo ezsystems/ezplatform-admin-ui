@@ -14,7 +14,7 @@ use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
 use eZ\Publish\API\Repository\Values\ValueObject;
-use eZ\Publish\Core\REST\Common\Output\Visitor;
+use EzSystems\EzPlatformRestCommon\Output\Visitor;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UniversalDiscoveryController extends Controller
@@ -25,13 +25,13 @@ class UniversalDiscoveryController extends Controller
     /** @var \eZ\Publish\API\Repository\SearchService */
     protected $searchService;
 
-    /** @var \eZ\Publish\Core\REST\Common\Output\Visitor */
+    /** @var \EzSystems\EzPlatformRestCommon\Output\Visitor */
     protected $visitor;
 
     /**
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param \eZ\Publish\Core\REST\Common\Output\Visitor $visitor
+     * @param \EzSystems\EzPlatformRestCommon\Output\Visitor $visitor
      */
     public function __construct(
         LocationService $locationService,

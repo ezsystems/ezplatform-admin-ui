@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\REST\Value;
 
-use eZ\Publish\Core\REST\Common\Value as RestValue;
+use EzSystems\EzPlatformRestCommon\Value as RestValue;
 
 class BulkOperationResponse extends RestValue
 {

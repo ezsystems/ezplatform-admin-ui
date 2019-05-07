@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor;
 
-use eZ\Publish\Core\REST\Common\Output\Generator;
-use eZ\Publish\Core\REST\Common\Output\ValueObjectVisitor;
-use eZ\Publish\Core\REST\Common\Output\Visitor;
+use EzSystems\EzPlatformRestCommon\Output\Generator;
+use EzSystems\EzPlatformRestCommon\Output\ValueObjectVisitor;
+use EzSystems\EzPlatformRestCommon\Output\Visitor;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsList as SubitemsListValue;
 
 class SubitemsList extends ValueObjectVisitor

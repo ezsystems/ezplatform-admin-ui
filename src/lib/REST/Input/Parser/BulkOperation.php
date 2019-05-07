@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\REST\Input\Parser;
 
-use eZ\Publish\Core\REST\Common\Input\BaseParser;
-use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
-use eZ\Publish\Core\REST\Common\Exceptions;
+use EzSystems\EzPlatformRestCommon\Input\BaseParser;
+use EzSystems\EzPlatformRestCommon\Input\ParsingDispatcher;
+use EzSystems\EzPlatformRestCommon\Exceptions;
 use EzSystems\EzPlatformAdminUi\REST\Value\BulkOperation as BulkOperationValue;
 
 class BulkOperation extends BaseParser
@@ -19,7 +19,7 @@ class BulkOperation extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \eZ\Publish\Core\REST\Common\Input\ParsingDispatcher $parsingDispatcher
+     * @param \EzSystems\EzPlatformRestCommon\Input\ParsingDispatcher $parsingDispatcher
      *
      * @return \EzSystems\EzPlatformAdminUi\REST\Value\BulkOperation
      */
