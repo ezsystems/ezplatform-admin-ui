@@ -28,8 +28,8 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType:
         arguments:
-            $contentTypeChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\PermissionAwareContentTypeChoiceLoader'
-            $languageChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\PermissionAwareLanguageChoiceLoader'
+            $contentTypeChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader'
+            $languageChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader'
 
     EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader: ~
 

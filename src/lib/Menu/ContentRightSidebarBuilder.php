@@ -135,8 +135,10 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
      *
      * @return \Knp\Menu\ItemInterface
      *
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function createStructure(array $options): ItemInterface
@@ -150,9 +152,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         /** @var ItemInterface|ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
-        $hasAccess = $this->permissionResolver->hasAccess('content', 'create');
-        $canCreateInLocation = $this->permissionChecker->canCreateInLocation($location, $hasAccess);
-        $canCreate = $canCreateInLocation && $contentType->isContainer;
+        $lookupLimitationsResult = $this->permissionChecker->getContentCreateLimitations($location);
+        $canCreate = $lookupLimitationsResult->hasAccess && $contentType->isContainer;
         $canEdit = $this->permissionResolver->canUser(
             'content',
             'edit',

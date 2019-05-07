@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Permission;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Values\User\LookupLimitationResult;
 
 interface PermissionCheckerInterface
 {
@@ -25,4 +26,17 @@ interface PermissionCheckerInterface
      * @return bool
      */
     public function canCreateInLocation(Location $location, $hasAccess): bool;
+
+    /**
+     * @internal
+     *
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $parentLocation
+     *
+     * @return \eZ\Publish\API\Repository\Values\User\LookupLimitationResult
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     */
+    public function getContentCreateLimitations(Location $parentLocation): LookupLimitationResult;
 }

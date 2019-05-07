@@ -15,6 +15,9 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 
+/**
+ * @deprecated since version 2.5, to be removed in 3.0. Use '\EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentCreateContentTypeChoiceLoader' instead.
+ */
 class PermissionAwareContentTypeChoiceLoader implements ChoiceLoaderInterface
 {
     /** @var \Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface */
