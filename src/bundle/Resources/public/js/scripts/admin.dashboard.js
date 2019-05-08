@@ -16,15 +16,12 @@
                     id: 'browse',
                     title: 'Browse',
                     panel: eZ.udwTabs.Browse,
-                    active: true,
+                    active: false,
                     attrs: {
                         multiple: true,
                         selectedItemsLimit: 2,
                         startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
-                        onConfirm: (items) => {
-                            console.log('onConfirm', JSON.stringify(items));
-                            closeUDW();
-                        },
+                        onConfirm: (items) => closeUDW(),
                         onCancel: closeUDW,
                     },
                 },
@@ -32,8 +29,14 @@
                     id: 'search',
                     title: 'Search',
                     panel: eZ.udwTabs.Search,
-                    active: false,
-                    attrs: {},
+                    active: true,
+                    attrs: {
+                        selectedItemsLimit: 2,
+                        searchResultsPerPage: 10,
+                        searchResultsLimit: 50,
+                        onConfirm: (items) => closeUDW(),
+                        onCancel: closeUDW,
+                    },
                 },
                 {
                     id: 'create',
