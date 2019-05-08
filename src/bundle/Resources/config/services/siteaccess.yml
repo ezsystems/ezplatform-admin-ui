@@ -5,9 +5,15 @@ services:
         public: false
 
     EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface: '@EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolver'
+
     EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolver:
         arguments:
             $siteaccessPreviewVoters: !tagged ezplatform.admin_ui.siteaccess_preview_voter
-    EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver: ~
+            $siteAccesses: '%ezpublish.siteaccess.list%'
+
+    EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver:
+        arguments:
+            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+
     EzSystems\EzPlatformAdminUi\Siteaccess\AdminSiteaccessPreviewVoter:
         tags: ['ezplatform.admin_ui.siteaccess_preview_voter']
