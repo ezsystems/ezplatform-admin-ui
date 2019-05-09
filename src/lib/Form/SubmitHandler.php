@@ -79,11 +79,11 @@ class SubmitHandler
                     return $event->getResponse();
                 }
             } catch (Exception $e) {
-                $this->notificationHandler->error($e->getMessage());
+                $this->notificationHandler->error(/** @Ignore */ $e->getMessage());
             }
         } else {
             foreach ($form->getErrors(true, true) as $formError) {
-                $this->notificationHandler->warning($formError->getMessage());
+                $this->notificationHandler->warning(/** @Ignore */ $formError->getMessage());
             }
         }
 

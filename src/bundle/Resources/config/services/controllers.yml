@@ -37,7 +37,6 @@ services:
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeGroupController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
-            $languages: '$languages$'
             $defaultPaginationLimit: '$pagination.content_type_group_limit$'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\SearchController:

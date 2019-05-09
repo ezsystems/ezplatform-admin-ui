@@ -19,7 +19,7 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -28,15 +28,11 @@ use Symfony\Component\HttpFoundation\Response;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class RoleController extends Controller
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
-
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
-    private $translator;
 
     /** @var \eZ\Publish\API\Repository\RoleService */
     private $roleService;
@@ -57,8 +53,7 @@ class RoleController extends Controller
     private $defaultPaginationLimit;
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
      * @param \eZ\Publish\API\Repository\RoleService $roleService
      * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper $roleCreateMapper
      * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper $roleUpdateMapper
@@ -67,8 +62,7 @@ class RoleController extends Controller
      * @param int $defaultPaginationLimit
      */
     public function __construct(
-        NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator,
+        TranslatableNotificationHandlerInterface $notificationHandler,
         RoleService $roleService,
         RoleCreateMapper $roleCreateMapper,
         RoleUpdateMapper $roleUpdateMapper,
@@ -77,7 +71,6 @@ class RoleController extends Controller
         int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
-        $this->translator = $translator;
         $this->roleService = $roleService;
         $this->roleCreateMapper = $roleCreateMapper;
         $this->roleUpdateMapper = $roleUpdateMapper;
@@ -174,12 +167,10 @@ class RoleController extends Controller
                 $this->roleService->publishRoleDraft($roleDraft);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Role '%role%' created.") */
-                        'role.create.success',
-                        ['%role%' => $roleDraft->identifier],
-                        'role'
-                    )
+                    /** @Desc("Role '%role%' created.") */
+                    'role.create.success',
+                    ['%role%' => $roleDraft->identifier],
+                    'role'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
@@ -222,12 +213,10 @@ class RoleController extends Controller
                 $this->roleService->publishRoleDraft($roleDraft);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Role '%role%' updated.") */
-                        'role.update.success',
-                        ['%role%' => $role->identifier],
-                        'role'
-                    )
+                    /** @Desc("Role '%role%' updated.") */
+                    'role.update.success',
+                    ['%role%' => $role->identifier],
+                    'role'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
@@ -266,12 +255,10 @@ class RoleController extends Controller
                 $this->roleService->deleteRole($role);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Role '%role%' removed.") */
-                        'role.delete.success',
-                        ['%role%' => $role->identifier],
-                        'role'
-                    )
+                    /** @Desc("Role '%role%' removed.") */
+                    'role.delete.success',
+                    ['%role%' => $role->identifier],
+                    'role'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.role.list'));
@@ -313,12 +300,10 @@ class RoleController extends Controller
                     $this->roleService->deleteRole($role);
 
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Role '%role%' removed.") */
-                            'role.delete.success',
-                            ['%role%' => $role->identifier],
-                            'role'
-                        )
+                        /** @Desc("Role '%role%' removed.") */
+                        'role.delete.success',
+                        ['%role%' => $role->identifier],
+                        'role'
                     );
                 }
 

@@ -10,17 +10,17 @@ namespace EzSystems\EzPlatformAdminUi\Notification;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class FlashBagNotificationHandler implements NotificationHandlerInterface
+final class FlashBagNotificationHandler implements NotificationHandlerInterface
 {
-    const TYPE_INFO = 'info';
-    const TYPE_SUCCESS = 'success';
-    const TYPE_WARNING = 'warning';
-    const TYPE_ERROR = 'danger';
+    private const TYPE_INFO = 'info';
+    private const TYPE_SUCCESS = 'success';
+    private const TYPE_WARNING = 'warning';
+    private const TYPE_ERROR = 'danger';
 
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
-    protected $session;
+    private $session;
 
     /**
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session

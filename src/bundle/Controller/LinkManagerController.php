@@ -9,12 +9,11 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\API\Repository\URLService;
-use eZ\Publish\API\Repository\Values\URL\Query\Criterion as Criterion;
-use eZ\Publish\API\Repository\Values\URL\Query\SortClause as SortClause;
-use eZ\Publish\API\Repository\Values\URL\URL;
+use eZ\Publish\API\Repository\Values\URL\Query\Criterion;
+use eZ\Publish\API\Repository\Values\URL\Query\SortClause;
 use eZ\Publish\API\Repository\Values\URL\URLQuery;
 use EzSystems\RepositoryForms\Data\URL\URLListData;
 use EzSystems\RepositoryForms\Data\URL\URLUpdateData;
@@ -24,7 +23,6 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class LinkManagerController extends Controller
 {
@@ -39,11 +37,8 @@ class LinkManagerController extends Controller
     /** @var SubmitHandler */
     private $submitHandler;
 
-    /** @var NotificationHandlerInterface */
+    /** @var TranslatableNotificationHandlerInterface */
     private $notificationHandler;
-
-    /** @var TranslatorInterface */
-    private $translator;
 
     /**
      * EzPlatformLinkManagerController constructor.
@@ -51,21 +46,18 @@ class LinkManagerController extends Controller
      * @param URLService $urlService
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
+     * @param TranslatableNotificationHandlerInterface $notificationHandler
      */
     public function __construct(
         URLService $urlService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator)
-    {
+        TranslatableNotificationHandlerInterface $notificationHandler
+    ) {
         $this->urlService = $urlService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
         $this->notificationHandler = $notificationHandler;
-        $this->translator = $translator;
     }
 
     /**
@@ -124,7 +116,10 @@ class LinkManagerController extends Controller
             $result = $this->submitHandler->handle($form, function (URLUpdateData $data) use ($url) {
                 $this->urlService->updateUrl($url, $data);
                 $this->notificationHandler->success(
-                    $this->translator->trans('url.update.success', [], 'linkmanager')
+                    /** @Desc("URL updated") */
+                    'url.update.success',
+                    [],
+                    'linkmanager'
                 );
 
                 return $this->redirectToRoute('ezplatform.link_manager.list');

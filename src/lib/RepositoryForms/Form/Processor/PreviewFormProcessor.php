@@ -20,7 +20,7 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentStruct;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Event\ContentEditEvents;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\RepositoryForms\Data\Content\ContentCreateData;
 use EzSystems\RepositoryForms\Data\Content\ContentUpdateData;
 use EzSystems\RepositoryForms\Data\NewnessCheckable;
@@ -32,7 +32,6 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Listens for and processes RepositoryForm events.
@@ -45,11 +44,8 @@ class PreviewFormProcessor implements EventSubscriberInterface
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var NotificationHandlerInterface */
+    /** @var TranslatableNotificationHandlerInterface */
     private $notificationHandler;
-
-    /** @var TranslatorInterface */
-    private $translator;
 
     /** @var LocationService */
     private $locationService;
@@ -57,21 +53,18 @@ class PreviewFormProcessor implements EventSubscriberInterface
     /**
      * @param ContentService $contentService
      * @param UrlGeneratorInterface $urlGenerator
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
+     * @param TranslatableNotificationHandlerInterface $notificationHandler
      * @param LocationService $locationService
      */
     public function __construct(
         ContentService $contentService,
         UrlGeneratorInterface $urlGenerator,
-        NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator,
+        TranslatableNotificationHandlerInterface $notificationHandler,
         LocationService $locationService
     ) {
         $this->contentService = $contentService;
         $this->urlGenerator = $urlGenerator;
         $this->notificationHandler = $notificationHandler;
-        $this->translator = $translator;
         $this->locationService = $locationService;
     }
 
@@ -110,7 +103,9 @@ class PreviewFormProcessor implements EventSubscriberInterface
         } catch (Exception $e) {
             $this->notificationHandler->error(
                 /** @Desc("Cannot save content draft.") */
-                $this->translator->trans('error.preview', [], 'content_preview')
+                'error.preview',
+                [],
+                'content_preview'
             );
             $url = $this->getContentEditUrl($data, $languageCode);
         }

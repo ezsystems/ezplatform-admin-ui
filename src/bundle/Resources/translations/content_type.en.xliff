@@ -67,8 +67,8 @@
         <note>key: content_type.default_sort</note>
       </trans-unit>
       <trans-unit id="5ecc210ad42274409db7ec4e56ba286b487639c6" resname="content_type.delete.success">
-        <source>Content type '%name%' deleted.</source>
-        <target state="new">Content type '%name%' deleted.</target>
+        <source>Content Type '%name%' deleted.</source>
+        <target state="new">Content Type '%name%' deleted.</target>
         <note>key: content_type.delete.success</note>
       </trans-unit>
       <trans-unit id="f2a3cc77cdadcff8883b0022e006e24918307687" resname="content_type.description">
@@ -172,8 +172,8 @@
         <note>key: content_type.sort_field.section_identifier</note>
       </trans-unit>
       <trans-unit id="48d3eb66c0f8928777189eab11eae254866852b2" resname="content_type.update.success">
-        <source>Content type '%name%' updated.</source>
-        <target state="new">Content type '%name%' updated.</target>
+        <source>Content Type '%name%' updated.</source>
+        <target state="new">Content Type '%name%' updated.</target>
         <note>key: content_type.update.success</note>
       </trans-unit>
       <trans-unit id="6ab7362c77b22ff8bc0d14eeaae8514b0a683473" resname="content_type.url_alias_schema">

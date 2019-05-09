@@ -30,7 +30,7 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentVisibilityUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\MainTranslationUpdateType;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
 use EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
@@ -41,13 +41,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
-use Symfony\Component\Translation\TranslatorInterface;
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException as APIRepositoryInvalidArgumentException;
 use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
 
 class ContentController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
     /** @var ContentService */
@@ -58,9 +57,6 @@ class ContentController extends Controller
 
     /** @var SubmitHandler */
     private $submitHandler;
-
-    /** @var TranslatorInterface */
-    private $translator;
 
     /** @var ContentMainLocationUpdateMapper */
     private $contentMainLocationUpdateMapper;
@@ -84,11 +80,10 @@ class ContentController extends Controller
     private $userContentTypeIdentifier;
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
      * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper $contentMetadataUpdateMapper
      * @param \EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface $siteaccessResolver
      * @param \eZ\Publish\API\Repository\LocationService $locationService
@@ -98,11 +93,10 @@ class ContentController extends Controller
      * @param array $userContentTypeIdentifier
      */
     public function __construct(
-        NotificationHandlerInterface $notificationHandler,
+        TranslatableNotificationHandlerInterface $notificationHandler,
         ContentService $contentService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        TranslatorInterface $translator,
         ContentMainLocationUpdateMapper $contentMetadataUpdateMapper,
         SiteaccessResolverInterface $siteaccessResolver,
         LocationService $locationService,
@@ -115,7 +109,6 @@ class ContentController extends Controller
         $this->contentService = $contentService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
-        $this->translator = $translator;
         $this->contentMainLocationUpdateMapper = $contentMetadataUpdateMapper;
         $this->siteaccessResolver = $siteaccessResolver;
         $this->locationService = $locationService;
@@ -212,12 +205,10 @@ class ContentController extends Controller
                     $versionNo = $contentDraft->getVersionInfo()->versionNo;
 
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("New Version Draft for '%name%' created.") */
-                            'content.create_draft.success',
-                            ['%name%' => $contentInfo->name],
-                            'content'
-                        )
+                        /** @Desc("New Version Draft for '%name%' created.") */
+                        'content.create_draft.success',
+                        ['%name%' => $contentInfo->name],
+                        'content'
                     );
                 }
 
@@ -275,12 +266,10 @@ class ContentController extends Controller
                 $this->contentService->updateContentMetadata($contentInfo, $contentMetadataUpdateStruct);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Main location for '%name%' updated.") */
-                        'content.main_location_update.success',
-                        ['%name%' => $contentInfo->name],
-                        'content'
-                    )
+                    /** @Desc("Main location for '%name%' updated.") */
+                    'content.main_location_update.success',
+                    ['%name%' => $contentInfo->name],
+                    'content'
                 );
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
@@ -374,12 +363,10 @@ class ContentController extends Controller
                 $contentMetadataUpdateStruct = $mapper->reverseMap($data);
                 $this->contentService->updateContentMetadata($contentInfo, $contentMetadataUpdateStruct);
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Main language for '%name%' updated.") */
-                        'content.main_language_update.success',
-                        ['%name%' => $contentInfo->name],
-                        'content'
-                    )
+                    /** @Desc("Main language for '%name%' updated.") */
+                    'content.main_language_update.success',
+                    ['%name%' => $contentInfo->name],
+                    'content'
                 );
 
                 return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
@@ -423,23 +410,19 @@ class ContentController extends Controller
 
                 if ($contentInfo->isHidden && $desiredVisibility === false) {
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Content '%name%' was already hidden.") */
-                            'content.hide.already_hidden',
-                            ['%name%' => $contentInfo->name],
-                            'content'
-                        )
+                        /** @Desc("Content '%name%' was already hidden.") */
+                        'content.hide.already_hidden',
+                        ['%name%' => $contentInfo->name],
+                        'content'
                     );
                 }
 
                 if (!$contentInfo->isHidden && $desiredVisibility === true) {
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Content '%name%' was already visible.") */
-                            'content.reveal.already_visible',
-                            ['%name%' => $contentInfo->name],
-                            'content'
-                        )
+                        /** @Desc("Content '%name%' was already visible.") */
+                        'content.reveal.already_visible',
+                        ['%name%' => $contentInfo->name],
+                        'content'
                     );
                 }
 
@@ -447,12 +430,10 @@ class ContentController extends Controller
                     $this->contentService->hideContent($contentInfo);
 
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Content '%name%' has been hidden.") */
-                            'content.hide.success',
-                            ['%name%' => $contentInfo->name],
-                            'content'
-                        )
+                        /** @Desc("Content '%name%' has been hidden.") */
+                        'content.hide.success',
+                        ['%name%' => $contentInfo->name],
+                        'content'
                     );
                 }
 
@@ -460,12 +441,10 @@ class ContentController extends Controller
                     $this->contentService->revealContent($contentInfo);
 
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Content '%name%' has been revealed.") */
-                            'content.reveal.success',
-                            ['%name%' => $contentInfo->name],
-                            'content'
-                        )
+                        /** @Desc("Content '%name%' has been revealed.") */
+                        'content.reveal.success',
+                        ['%name%' => $contentInfo->name],
+                        'content'
                     );
                 }
 

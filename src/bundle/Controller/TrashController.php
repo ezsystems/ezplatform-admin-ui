@@ -21,23 +21,19 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
 use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\TrashItemAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService as UiPathService;
 
 class TrashController extends Controller
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
-
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
-    private $translator;
 
     /** @var \eZ\Publish\API\Repository\TrashService */
     private $trashService;
@@ -70,8 +66,7 @@ class TrashController extends Controller
     private $defaultPaginationLimit;
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
      * @param \eZ\Publish\API\Repository\TrashService $trashService
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\ContentService $contentService
@@ -84,8 +79,7 @@ class TrashController extends Controller
      * @param int $defaultPaginationLimit
      */
     public function __construct(
-        NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator,
+        TranslatableNotificationHandlerInterface $notificationHandler,
         TrashService $trashService,
         LocationService $locationService,
         ContentService $contentService,
@@ -98,7 +92,6 @@ class TrashController extends Controller
         int $defaultPaginationLimit
     ) {
         $this->notificationHandler = $notificationHandler;
-        $this->translator = $translator;
         $this->trashService = $trashService;
         $this->locationService = $locationService;
         $this->contentService = $contentService;
@@ -210,12 +203,10 @@ class TrashController extends Controller
                 $this->trashService->emptyTrash();
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Trash empty.") */
-                        'trash.empty.success',
-                        [],
-                        'trash'
-                    )
+                    /** @Desc("Trash empty.") */
+                    'trash.empty.success',
+                    [],
+                    'trash'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.trash.list'));
@@ -257,21 +248,17 @@ class TrashController extends Controller
 
                 if (null === $newParentLocation) {
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Items restored under their original location.") */
-                            'trash.restore_original_location.success',
-                            [],
-                            'trash'
-                        )
+                        /** @Desc("Items restored under their original location.") */
+                        'trash.restore_original_location.success',
+                        [],
+                        'trash'
                     );
                 } else {
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Items restored under '%location%' location.") */
-                            'trash.restore_new_location.success',
-                            ['%location%' => $newParentLocation->getContentInfo()->name],
-                            'trash'
-                        )
+                        /** @Desc("Items restored under '%location%' location.") */
+                        'trash.restore_new_location.success',
+                        ['%location%' => $newParentLocation->getContentInfo()->name],
+                        'trash'
                     );
                 }
 
@@ -312,12 +299,10 @@ class TrashController extends Controller
                 }
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Deleted selected trash items.") */
-                        'trash.deleted.success',
-                        [],
-                        'trash'
-                    )
+                    /** @Desc("Deleted selected trash items.") */
+                    'trash.deleted.success',
+                    [],
+                    'trash'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.trash.list'));

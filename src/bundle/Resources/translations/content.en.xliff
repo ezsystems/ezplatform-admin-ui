@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="fbc24757e92f52997d730762e004765425845995" resname="content.hide.already_hidden">
         <source>Content '%name%' was already hidden.</source>
-        <target state="new">Content '%name%' has been hidden.</target>
+        <target state="new">Content '%name%' was already hidden.</target>
         <note>key: content.hide.already_hidden</note>
       </trans-unit>
       <trans-unit id="7a80db58ea3f3bef5b9f07c4565d715efdacda99" resname="content.hide.success">

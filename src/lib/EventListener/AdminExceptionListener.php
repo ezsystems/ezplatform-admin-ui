@@ -82,7 +82,7 @@ class AdminExceptionListener
 
         $code = $response->getStatusCode();
 
-        $this->notificationHandler->error($this->getNotificationMessage($exception));
+        $this->notificationHandler->error(/** @Ignore */ $this->getNotificationMessage($exception));
 
         switch ($code) {
             case 404:

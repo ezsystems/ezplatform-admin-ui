@@ -12,20 +12,16 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\TranslationsTab;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class TranslationController extends Controller
 {
-    /** @var NotificationHandlerInterface */
+    /** @var TranslatableNotificationHandlerInterface */
     private $notificationHandler;
-
-    /** @var TranslatorInterface */
-    private $translator;
 
     /** @var ContentService */
     private $contentService;
@@ -37,21 +33,18 @@ class TranslationController extends Controller
     private $submitHandler;
 
     /**
-     * @param NotificationHandlerInterface $notificationHandler
-     * @param TranslatorInterface $translator
+     * @param TranslatableNotificationHandlerInterface $notificationHandler
      * @param ContentService $contentService
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
      */
     public function __construct(
-        NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator,
+        TranslatableNotificationHandlerInterface $notificationHandler,
         ContentService $contentService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler
     ) {
         $this->notificationHandler = $notificationHandler;
-        $this->translator = $translator;
         $this->contentService = $contentService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
@@ -118,12 +111,10 @@ class TranslationController extends Controller
                     $this->contentService->deleteTranslation($contentInfo, $languageCode);
 
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Translation '%languageCode%' removed from content '%name%'.") */
-                            'translation.remove.success',
-                            ['%languageCode%' => $languageCode, '%name%' => $contentInfo->name],
-                            'translation'
-                        )
+                        /** @Desc("Translation '%languageCode%' removed from content '%name%'.") */
+                        'translation.remove.success',
+                        ['%languageCode%' => $languageCode, '%name%' => $contentInfo->name],
+                        'translation'
                     );
                 }
 

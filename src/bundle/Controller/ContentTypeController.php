@@ -21,7 +21,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRem
 use EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\ContentType\TranslationsTab;
 use EzSystems\RepositoryForms\Data\Mapper\ContentTypeDraftMapper;
 use EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface;
@@ -42,7 +42,7 @@ use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 
 class ContentTypeController extends Controller
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
     /** @var \Symfony\Component\Translation\TranslatorInterface */
@@ -79,7 +79,7 @@ class ContentTypeController extends Controller
     private $contentTypeDraftMapper;
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface $contentTypeActionDispatcher
@@ -92,7 +92,7 @@ class ContentTypeController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory $contentTypeFormFactory
      */
     public function __construct(
-        NotificationHandlerInterface $notificationHandler,
+        TranslatableNotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
         ContentTypeService $contentTypeService,
         ActionDispatcherInterface $contentTypeActionDispatcher,
@@ -190,12 +190,10 @@ class ContentTypeController extends Controller
             $contentTypeDraft = $this->contentTypeService->createContentType($createStruct, [$group]);
         } catch (NotFoundException $e) {
             $this->notificationHandler->error(
-                $this->translator->trans(
-                    /** @Desc("Cannot create Content Type. Could not find 'Language' with identifier '%languageCode%'") */
-                    'content_type.add.missing_language',
-                    ['%languageCode%' => $mainLanguageCode],
-                    'content_type'
-                )
+                /** @Desc("Cannot create Content Type. Could not find 'Language' with identifier '%languageCode%'") */
+                'content_type.add.missing_language',
+                ['%languageCode%' => $mainLanguageCode],
+                'content_type'
             );
 
             return $this->redirectToRoute('ezplatform.content_type_group.view', [
@@ -241,12 +239,10 @@ class ContentTypeController extends Controller
                 } catch (BadStateException $e) {
                     $userId = $contentType->modifierId;
                     $this->notificationHandler->error(
-                        $this->translator->trans(
-                            /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
-                            'content_type.edit.error.already_exists',
-                            ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($userId)],
-                            'content_type'
-                        )
+                        /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
+                        'content_type.edit.error.already_exists',
+                        ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($userId)],
+                        'content_type'
                     );
 
                     return $this->redirectToRoute('ezplatform.content_type.view', [
@@ -301,12 +297,10 @@ class ContentTypeController extends Controller
                 } catch (BadStateException $e) {
                     $userId = $contentType->modifierId;
                     $this->notificationHandler->error(
-                        $this->translator->trans(
-                            /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
-                            'content_type.edit.error.already_exists',
-                            ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($userId)],
-                            'content_type'
-                        )
+                        /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
+                        'content_type.edit.error.already_exists',
+                        ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($userId)],
+                        'content_type'
                     );
 
                     return $this->redirectToRoute('ezplatform.content_type.view', [
@@ -361,12 +355,10 @@ class ContentTypeController extends Controller
             } catch (BadStateException $e) {
                 $userId = $contentType->modifierId;
                 $this->notificationHandler->error(
-                    $this->translator->trans(
-                        /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
-                        'content_type.edit.error.already_exists',
-                        ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($userId)],
-                        'content_type'
-                    )
+                    /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
+                    'content_type.edit.error.already_exists',
+                    ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($userId)],
+                    'content_type'
                 );
 
                 return $this->redirectToRoute('ezplatform.content_type.view', [
@@ -451,12 +443,10 @@ class ContentTypeController extends Controller
                 }
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Content Type '%name%' updated.") */
-                        'content_type.update.success',
-                        ['%name%' => $contentTypeDraft->getName()],
-                        'content_type'
-                    )
+                    /** @Desc("Content Type '%name%' updated.") */
+                    'content_type.update.success',
+                    ['%name%' => $contentTypeDraft->getName()],
+                    'content_type'
                 );
 
                 if ('publishContentType' === $form->getClickedButton()->getName()) {
@@ -508,12 +498,10 @@ class ContentTypeController extends Controller
                 $this->contentTypeService->deleteContentType($contentType);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Content Type '%name%' deleted.") */
-                        'content_type.delete.success',
-                        ['%name%' => $contentType->getName()],
-                        'content_type'
-                    )
+                    /** @Desc("Content Type '%name%' deleted.") */
+                    'content_type.delete.success',
+                    ['%name%' => $contentType->getName()],
+                    'content_type'
                 );
             });
 
@@ -555,12 +543,10 @@ class ContentTypeController extends Controller
                     $this->contentTypeService->deleteContentType($contentType);
 
                     $this->notificationHandler->success(
-                        $this->translator->trans(
-                            /** @Desc("Content Type '%name%' deleted.") */
-                            'content_type.delete.success',
-                            ['%name%' => $contentType->getName()],
-                            'content_type'
-                        )
+                        /** @Desc("Content Type '%name%' deleted.") */
+                        'content_type.delete.success',
+                        ['%name%' => $contentType->getName()],
+                        'content_type'
                     );
                 }
             });
