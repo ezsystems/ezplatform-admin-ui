@@ -39,7 +39,7 @@ Feature: Content types management
       And Content Type "Test Content Type" has proper fields
         | fieldName      | fieldType |
         | CountryField   | ezcountry |
-      And notification that "Content type" "Test Content Type" is updated appears
+      And notification that "Content Type" "Test Content Type" is updated appears
 
   @javascript @common
   Scenario: I can navigate to Content Type Group through breadcrumb
@@ -79,7 +79,7 @@ Feature: Content types management
         | fieldName      | fieldType |
         | CountryField   | ezcountry |
         | DateField      | ezdate    |
-      And notification that "Content type" "Test Content Type edited" is updated appears
+      And notification that "Content Type" "Test Content Type edited" is updated appears
 
   @javascript @common
   Scenario: Content type can be deleted from Content Type Group
@@ -87,5 +87,5 @@ Feature: Content types management
     When I delete "Content Type" from "Content"
       | item                     |
       | Test Content Type edited |
-    Then notification that "Content type" "Test Content Type edited" is deleted appears
+    Then notification that "Content Type" "Test Content Type edited" is deleted appears
       And there's no "Test Content Type edited" on "Content" "Content Type Group" list
