@@ -37,6 +37,7 @@ const customTagBaseDefinition = {
      */
     insert: function() {
         const element = CKEDITOR.dom.element.createFromHtml(this.template.output(this.defaults));
+
         const wrapper = this.editor.widgets.wrapElement(element, this.name);
 
         this.editor.widgets.initOn(element, this.name);
@@ -65,6 +66,11 @@ const customTagBaseDefinition = {
     },
 
     init: function() {
+        // Converted from eZ XML custom tags might miss some required classes
+        if (this.element.hasClass('ez-custom-tag') === false) {
+            this.element.addClass('ez-custom-tag');
+        }
+
         this.on('focus', this.fireEditorInteraction);
         this.syncAlignment(true);
         this.renderAttributes();
