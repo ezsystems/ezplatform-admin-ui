@@ -243,7 +243,7 @@
             updateInputValue(selectedItems);
         };
         let selectedItems = [...fieldContainer.querySelectorAll(SELECTOR_ROW)].map((row) => parseInt(row.dataset.contentId, 10));
-        let selectedItemsMap = selectedItems.reduce((total, item) => ({ ...total, [item]: item }));
+        let selectedItemsMap = selectedItems.reduce((total, item) => ({ ...total, [item]: item }), {});
 
         updateAddBtnState();
         attachRowsEventHandlers();
