@@ -1,10 +1,10 @@
-(function (global) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezkeyword';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const SELECTOR_TAGGIFY = '.ez-data-source__taggify';
     const CLASS_TAGGIFY_FOCUS = 'ez-data-source__taggify--focused';
 
-    class EzKeywordValidator extends global.eZ.BaseFieldValidator {
+    class EzKeywordValidator extends eZ.BaseFieldValidator {
         /**
          * Validates the keywords input
          *
@@ -18,12 +18,12 @@
             const input = fieldContainer.querySelector('.ez-data-source__input-wrapper .ez-data-source__input');
             const label = fieldContainer.querySelector('.ez-field-edit__label').innerHTML;
             const isRequired = input.required;
-            const isEmpty = !(input.value.trim().length);
-            const isError = (isEmpty && isRequired);
+            const isEmpty = !input.value.trim().length;
+            const isError = isEmpty && isRequired;
             const result = { isError };
 
             if (isError) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             }
 
             return result;
@@ -38,12 +38,12 @@
      * @param {Event} event
      */
     const updateValue = (input, event) => {
-        input.value = event.detail.tags.map(tag => tag.label).join();
+        input.value = event.detail.tags.map((tag) => tag.label).join();
 
         input.dispatchEvent(new Event('change'));
     };
 
-    [...document.querySelectorAll(SELECTOR_FIELD)].forEach(field => {
+    doc.querySelectorAll(SELECTOR_FIELD).forEach((field) => {
         const taggifyContainer = field.querySelector(SELECTOR_TAGGIFY);
         const validator = new EzKeywordValidator({
             classInvalid: 'is-invalid',
@@ -63,15 +63,15 @@
                     callback: 'validateKeywords',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                     invalidStateSelectors: [SELECTOR_TAGGIFY],
-                }
+                },
             ],
         });
-        const taggify = new window.Taggify({
+        const taggify = new global.Taggify({
             containerNode: taggifyContainer,
             displayLabel: false,
             displayInputValues: false,
             // The "," key code
-            hotKeys: [188]
+            hotKeys: [188],
         });
         const keywordInput = field.querySelector('.ez-data-source__input-wrapper .ez-data-source__input.form-control');
         const updateKeywords = updateValue.bind(this, keywordInput);
@@ -86,10 +86,12 @@
         validator.init();
 
         if (keywordInput.value.length) {
-            taggify.updateTags(keywordInput.value.split(',').map(item => ({
-                id: Math.floor((1 + Math.random()) * 0x10000).toString(16),
-                label: item
-            })));
+            taggify.updateTags(
+                keywordInput.value.split(',').map((item) => ({
+                    id: Math.floor((1 + Math.random()) * 0x10000).toString(16),
+                    label: item,
+                }))
+            );
         }
 
         taggifyContainer.addEventListener('tagsCreated', updateKeywords, false);
@@ -97,8 +99,6 @@
         taggifyInput.addEventListener('focus', addFocusState, false);
         taggifyInput.addEventListener('blur', removeFocusState, false);
 
-        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-            [...global.eZ.fieldTypeValidators, validator] :
-            [validator];
+        eZ.addConfig('fieldTypeValidators', [validator], true);
     });
-})(window);
+})(window, window.document, window.eZ);

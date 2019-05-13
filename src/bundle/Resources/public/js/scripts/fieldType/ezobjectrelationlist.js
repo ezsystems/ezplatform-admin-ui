@@ -124,30 +124,22 @@
             const title = Translator.trans(/*@Desc("Select content")*/ 'ezobjectrelationlist.title', {}, 'universal_discovery_widget');
 
             ReactDOM.render(
-                React.createElement(
-                    eZ.modules.UniversalDiscovery,
-                    Object.assign(
-                        {
-                            onConfirm,
-                            onCancel: closeUDW,
-                            title,
-                            multiple: isSingle ? false : selectedItemsLimit !== 1,
-                            selectedItemsLimit,
-                            startingLocationId,
-                            restInfo: { token, siteaccess },
-                            canSelectContent,
-                        },
-                        config
-                    )
-                ),
+                React.createElement(eZ.modules.UniversalDiscovery, {
+                    onConfirm,
+                    onCancel: closeUDW,
+                    title,
+                    multiple: isSingle ? false : selectedItemsLimit !== 1,
+                    selectedItemsLimit,
+                    startingLocationId,
+                    restInfo: { token, siteaccess },
+                    canSelectContent,
+                    ...config,
+                }),
                 udwContainer
             );
         };
         const excludeDuplicatedItems = (items) => {
-            selectedItemsMap = items.reduce(
-                (total, item) => Object.assign({}, total, { [item.ContentInfo.Content._id]: item }),
-                selectedItemsMap
-            );
+            selectedItemsMap = items.reduce((total, item) => ({ ...total, [item.ContentInfo.Content._id]: item }), selectedItemsMap);
 
             return items.filter((item) => selectedItemsMap[item.ContentInfo.Content._id]);
         };
@@ -196,7 +188,7 @@
 
             const removedItems = [];
 
-            [...relationsContainer.querySelectorAll('input:checked')].forEach((input) => {
+            relationsContainer.querySelectorAll('input:checked').forEach((input) => {
                 removedItems.push(parseInt(input.value, 10));
 
                 input.closest('tr').remove();
@@ -251,7 +243,7 @@
             updateInputValue(selectedItems);
         };
         let selectedItems = [...fieldContainer.querySelectorAll(SELECTOR_ROW)].map((row) => parseInt(row.dataset.contentId, 10));
-        let selectedItemsMap = selectedItems.reduce((total, item) => Object.assign({}, total, { [item]: item }), {});
+        let selectedItemsMap = selectedItems.reduce((total, item) => ({ ...total, [item]: item }), {});
 
         updateAddBtnState();
         attachRowsEventHandlers();
@@ -265,6 +257,6 @@
 
         validator.init();
 
-        eZ.fieldTypeValidators = eZ.fieldTypeValidators ? [...eZ.fieldTypeValidators, validator] : [validator];
+        eZ.addConfig('fieldTypeValidators', [validator], true);
     });
-})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
+})(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator);

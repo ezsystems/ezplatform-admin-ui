@@ -8,10 +8,11 @@
     const sortField = sortContainer.getAttribute('data-sort-field');
     const sortOrder = sortContainer.getAttribute('data-sort-order');
     const mfuAttrs = {
-        adminUiConfig: Object.assign({}, eZ.adminUiConfig, {
+        adminUiConfig: {
+            ...eZ.adminUiConfig,
             token,
             siteaccess,
-        }),
+        },
         parentInfo: {
             contentTypeIdentifier: mfuContainer.dataset.parentContentTypeIdentifier,
             contentTypeId: parseInt(mfuContainer.dataset.parentContentTypeId, 10),
@@ -44,9 +45,9 @@
             if (addDraftButton) {
                 addDraftButton.addEventListener('click', addDraft, false);
             }
-            [...wrapper.querySelectorAll('.ez-btn--prevented')].forEach((btn) =>
-                btn.addEventListener('click', (event) => event.preventDefault(), false)
-            );
+            wrapper
+                .querySelectorAll('.ez-btn--prevented')
+                .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
             $('#version-draft-conflict-modal').modal('show');
         };
         const checkEditPermissionLink = Routing.generate('ezplatform.content.check_edit_permission', {
@@ -152,11 +153,12 @@
                 extraActions: [
                     {
                         component: eZ.modules.MultiFileUpload,
-                        attrs: Object.assign({}, mfuAttrs, {
+                        attrs: {
+                            ...mfuAttrs,
                             onPopupClose: (itemsUploaded) => itemsUploaded.length && global.location.reload(true),
                             contentCreatePermissionsConfig: JSON.parse(container.dataset.mfuCreatePermissionsConfig),
                             contentTypesMap: mfuContentTypesMap,
-                        }),
+                        },
                     },
                 ],
                 items,

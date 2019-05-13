@@ -1,4 +1,4 @@
-(function(doc, React, ReactDOM, eZ, localStorage) {
+(function(global, doc, React, ReactDOM, eZ, localStorage) {
     const KEY_CONTENT_TREE_EXPANDED = 'ez-content-tree-expanded';
     const CLASS_CONTENT_TREE_EXPANDED = 'ez-content-tree-container--expanded';
     const CLASS_BTN_CONTENT_TREE_EXPANDED = 'ez-btn--content-tree-expanded';
@@ -68,4 +68,4 @@
 
     doc.addEventListener('scroll', handleViewportChange, { capture: false, passive: true });
     window.addEventListener('resize', handleViewportChange, { capture: false, passive: true });
-})(window.document, window.React, window.ReactDOM, window.eZ, window.localStorage);
+})(window, window.document, window.React, window.ReactDOM, window.eZ, window.localStorage);

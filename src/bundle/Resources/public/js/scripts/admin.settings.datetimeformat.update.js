@@ -6,13 +6,11 @@
     const dateFormatSelect = doc.querySelector(SELECTOR_DATE_FORMAT);
     const timeFormatSelect = doc.querySelector(SELECTOR_TIME_FORMAT);
     const updateDateTimeFormatPreview = () => {
-        valuePreview.innerHTML = moment().formatICU(
-            dateFormatSelect.value + ' ' + timeFormatSelect.value
-        );
+        valuePreview.innerHTML = moment().formatICU(`${dateFormatSelect.value} ${timeFormatSelect.value}`);
     };
 
     dateFormatSelect.addEventListener('change', updateDateTimeFormatPreview);
     timeFormatSelect.addEventListener('change', updateDateTimeFormatPreview);
 
     updateDateTimeFormatPreview();
-}) (window, window.document, window.moment);
+})(window, window.document, window.moment);

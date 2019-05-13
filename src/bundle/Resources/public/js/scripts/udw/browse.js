@@ -1,4 +1,4 @@
-(function(global, doc, eZ, React, ReactDOM, Translator) {
+(function(global, doc, eZ, React, ReactDOM, Translator, Routing) {
     const btns = doc.querySelectorAll('.btn--udw-browse');
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
@@ -7,7 +7,7 @@
     const onConfirm = (items) => {
         closeUDW();
 
-        window.location.href = window.Routing.generate('_ezpublishLocation', { locationId: items[0].id });
+        global.location.href = Routing.generate('_ezpublishLocation', { locationId: items[0].id });
     };
     const onCancel = () => closeUDW();
     const openUDW = (event) => {
@@ -17,23 +17,18 @@
         const title = Translator.trans(/*@Desc("Browse content")*/ 'browse.title', {}, 'universal_discovery_widget');
 
         ReactDOM.render(
-            React.createElement(
-                eZ.modules.UniversalDiscovery,
-                Object.assign(
-                    {
-                        onConfirm,
-                        onCancel,
-                        title,
-                        multiple: false,
-                        startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
-                        restInfo: { token, siteaccess },
-                    },
-                    config
-                )
-            ),
+            React.createElement(eZ.modules.UniversalDiscovery, {
+                onConfirm,
+                onCancel,
+                title,
+                multiple: false,
+                startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
+                restInfo: { token, siteaccess },
+                ...config,
+            }),
             udwContainer
         );
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
+})(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator, window.Routing);

@@ -23,30 +23,33 @@
                     const objectConstructorName = 'Object';
                     const setValue = (newValue, oldValue) => {
                         const hasValue = newValue && !!newValue.constructor;
+                        const oldHasValue = oldValue && !!oldValue.constructor;
 
-                        if (!shouldMerge || !hasValue) {
+                        if (!shouldMerge || !hasValue || !oldHasValue) {
                             return newValue;
                         }
 
-                        if (Array.isArray(oldValue) && Array.isArray(newValue)) {
+                        if (Array.isArray(newValue)) {
                             return [...oldValue, ...newValue];
                         }
 
-                        if (oldValue.constructor.name === objectConstructorName && newValue.constructor.name === objectConstructorName) {
+                        if (newValue.constructor.name === objectConstructorName) {
                             return Object.assign({}, oldValue, newValue);
                         }
                     };
 
-                    keys.reduce((a, b, index) => {
-                        if (!a[b]) {
-                            a[b] = {};
+                    keys.reduce((currentObj, nextKey, index) => {
+                        const isLastIndex = index === lastIndex;
+
+                        if (!currentObj[nextKey] && !isLastIndex) {
+                            currentObj[nextKey] = {};
                         }
 
-                        if (index === lastIndex) {
-                            a[b] = setValue(value, a[b]);
+                        if (isLastIndex) {
+                            currentObj[nextKey] = setValue(value, currentObj[nextKey]);
                         }
 
-                        return a[b];
+                        return currentObj[nextKey];
                     }, window.eZ);
                 },
             };

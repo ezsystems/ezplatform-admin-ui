@@ -1,4 +1,4 @@
-(function(global, doc) {
+(function(global, doc, eZ) {
     const SELECTOR_VISIBILITY_CHECKBOXES = '#ez-tab-location-view-locations .ez-checkbox-icon__checkbox';
     const SELECTOR_VISIBILITY_FORM = 'form[name="location_update_visibility_data"]';
     const form = doc.querySelector(SELECTOR_VISIBILITY_FORM);
@@ -11,10 +11,10 @@
 
         target.closest('.ez-checkbox-icon').classList.toggle('is-checked', isVisible);
     };
-    const handleUpdateError = global.eZ.helpers.notification.showErrorNotification;
+    const handleUpdateError = eZ.helpers.notification.showErrorNotification;
     const handleUpdateSuccess = (event, { message }) => {
         onVisibilityUpdated(event);
-        global.eZ.helpers.notification.showSuccessNotification(message);
+        eZ.helpers.notification.showSuccessNotification(message);
         refreshContentTree();
     };
     const handleUpdateResponse = (response) => {
@@ -44,4 +44,4 @@
     visibilityCheckboxes.forEach((checkbox) => {
         checkbox.addEventListener('change', updateVisibility, false);
     });
-})(window, document);
+})(window, window.document, window.eZ);

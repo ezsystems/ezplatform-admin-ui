@@ -18,9 +18,10 @@
         const radio = event.currentTarget.querySelector('input[type="radio"]');
         const checked = !(radio.checked && radio.name === 'add-translation[base_language]');
 
-        [...event.target.closest(SELECTOR_WRAPPER).querySelectorAll(SELECTOR_LABEL)].forEach((label) =>
-            label.classList.remove(CLASS_SELECTED)
-        );
+        event.target
+            .closest(SELECTOR_WRAPPER)
+            .querySelectorAll(SELECTOR_LABEL)
+            .forEach((label) => label.classList.remove(CLASS_SELECTED));
 
         if (checked) {
             event.currentTarget.classList.add(CLASS_SELECTED);
@@ -36,5 +37,5 @@
     };
 
     resetSelection();
-    [...doc.querySelectorAll(SELECTOR_LABEL)].forEach((input) => input.addEventListener('click', updateSelection, false));
-})(window, document);
+    doc.querySelectorAll(SELECTOR_LABEL).forEach((input) => input.addEventListener('click', updateSelection, false));
+})(window, window.document);

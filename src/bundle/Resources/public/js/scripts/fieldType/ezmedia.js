@@ -1,4 +1,4 @@
-(function (global) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezmedia';
     const SELECTOR_PREVIEW = '.ez-field-edit__preview';
     const SELECTOR_MEDIA = '.ez-field-edit-preview__media';
@@ -8,7 +8,7 @@
     const SELECTOR_INPUT_FILE = 'input[type="file"]';
     const CLASS_MEDIA_WRAPPER_LOADING = 'ez-field-edit-preview__media-wrapper--loading';
 
-    class EzMediaValidator extends global.eZ.BaseFileFieldValidator {
+    class EzMediaValidator extends eZ.BaseFileFieldValidator {
         /**
          * Updates the state of checkbox indicator.
          *
@@ -49,9 +49,9 @@
             const result = { isError };
 
             if (isEmpty) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             } else if (!isInteger) {
-                result.errorMessage = global.eZ.errors.isNotInteger.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.isNotInteger.replace('{fieldName}', label);
             }
 
             if (!input.closest('.ez-field-edit__preview').hasAttribute('hidden')) {
@@ -62,7 +62,7 @@
         }
     }
 
-    class EzMediaPreviewField extends global.eZ.BasePreviewField {
+    class EzMediaPreviewField extends eZ.BasePreviewField {
         /**
          * Loads dropped file preview
          *
@@ -97,7 +97,7 @@
             const videoUrl = URL.createObjectURL(file);
 
             preview.querySelector('.ez-field-edit-preview__action--preview').href = videoUrl;
-            preview.querySelector(SELECTOR_MEDIA).setAttribute('src', videoUrl)
+            preview.querySelector(SELECTOR_MEDIA).setAttribute('src', videoUrl);
         }
 
         /**
@@ -149,7 +149,7 @@
         }
     }
 
-    [...document.querySelectorAll(SELECTOR_FIELD)].forEach(fieldContainer => {
+    doc.querySelectorAll(SELECTOR_FIELD).forEach((fieldContainer) => {
         const validator = new EzMediaValidator({
             classInvalid: 'is-invalid',
             fieldContainer,
@@ -159,35 +159,36 @@
                     eventName: 'change',
                     callback: 'validateInput',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-                }, {
+                },
+                {
                     isValueValidator: false,
                     selector: `${SELECTOR_INFO_WRAPPER}`,
                     eventName: 'click',
                     callback: 'updateState',
-                }, {
+                },
+                {
                     isValueValidator: false,
                     selector: SELECTOR_INPUT_FILE,
                     eventName: 'invalidFileSize',
                     callback: 'showFileSizeError',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-                }, {
+                },
+                {
                     selector: '.ez-field-edit-preview__dimensions .form-control',
                     eventName: 'blur',
                     callback: 'validateDimensions',
                     errorNodeSelectors: [`${SELECTOR_INFO_WRAPPER} .ez-field-edit-preview__label-wrapper`],
-                }
+                },
             ],
         });
         const previewField = new EzMediaPreviewField({
             validator,
             fieldContainer,
-            fileTypeAccept: fieldContainer.querySelector(SELECTOR_INPUT_FILE).accept
+            fileTypeAccept: fieldContainer.querySelector(SELECTOR_INPUT_FILE).accept,
         });
 
         previewField.init();
 
-        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-            [...global.eZ.fieldTypeValidators, validator] :
-            [validator];
-    })
-})(window);
+        eZ.addConfig('fieldTypeValidators', [validator], true);
+    });
+})(window, window.document, window.eZ);

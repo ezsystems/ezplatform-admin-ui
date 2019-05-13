@@ -58,4 +58,4 @@
         formatDateWithTimezone: deprecatedFormatDateWithTimezone,
         formatShortDateWithTimezone: deprecatedFormatShortDateWithTimezone,
     });
-})(window, document, window.eZ, window.moment);
+})(window, window.document, window.eZ, window.moment);

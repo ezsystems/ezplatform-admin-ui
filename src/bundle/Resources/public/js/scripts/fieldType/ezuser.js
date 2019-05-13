@@ -1,4 +1,4 @@
-(function (global) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezuser';
     const SELECTOR_INNER_FIELD = '.ez-data-source__field';
     const SELECTOR_LABEL = '.ez-data-source__label';
@@ -9,7 +9,7 @@
     const SELECTOR_FIELD_EMAIL = '.ez-data-source__field--email';
     const SELECTOR_INPUT = '.ez-data-source__input';
 
-    class EzUserValidator extends global.eZ.BaseFieldValidator {
+    class EzUserValidator extends eZ.BaseFieldValidator {
         /**
          * Updates the state of checkbox indicator.
          *
@@ -32,15 +32,15 @@
          * @returns {Object}
          * @memberof EzUserValidator
          */
-        validateInput({target}) {
+        validateInput({ target }) {
             const fieldContainer = target.closest(SELECTOR_INNER_FIELD);
             const label = fieldContainer.querySelector(SELECTOR_LABEL).innerHTML;
             const isError = target.required && !target.value.trim().length;
-            const errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+            const errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
 
             return {
                 isError,
-                errorMessage
+                errorMessage,
             };
         }
 
@@ -52,18 +52,18 @@
          * @returns {Object}
          * @memberof EzUserValidator
          */
-        validateEmailInput({target}) {
+        validateEmailInput({ target }) {
             const isRequired = target.required;
             const isEmpty = !target.value.trim();
-            const isValid = global.eZ.errors.emailRegexp.test(target.value);
+            const isValid = eZ.errors.emailRegexp.test(target.value);
             const isError = (isRequired && isEmpty) || !isValid;
             const fieldContainer = target.closest(SELECTOR_INNER_FIELD);
-            const result = {isError};
+            const result = { isError };
 
             if (isEmpty) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', fieldContainer.querySelector(SELECTOR_LABEL).innerHTML);
+                result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', fieldContainer.querySelector(SELECTOR_LABEL).innerHTML);
             } else if (!isValid) {
-                result.errorMessage = global.eZ.errors.invalidEmail;
+                result.errorMessage = eZ.errors.invalidEmail;
             }
 
             return result;
@@ -77,8 +77,8 @@
          * @returns {Object}
          * @memberof EzUserValidator
          */
-        comparePasswords({target}) {
-            const validationResults = this.validateInput({target});
+        comparePasswords({ target }) {
+            const validationResults = this.validateInput({ target });
 
             if (validationResults.isError) {
                 return validationResults;
@@ -97,12 +97,12 @@
 
             if (requiredNotMatch || notRequiredNotMatch) {
                 isError = true;
-                errorMessage = global.eZ.errors.notSamePasswords;
+                errorMessage = eZ.errors.notSamePasswords;
             }
 
             return {
                 isError,
-                errorMessage
+                errorMessage,
             };
         }
     }
@@ -138,18 +138,17 @@
                 callback: 'validateEmailInput',
                 invalidStateSelectors: [`${SELECTOR_FIELD_EMAIL} ${SELECTOR_LABEL}`],
                 errorNodeSelectors: [`${SELECTOR_FIELD_EMAIL} ${SELECTOR_LABEL_WRAPPER}`],
-            }, {
+            },
+            {
                 isValueValidator: false,
                 selector: `.ez-data-source__input[type="checkbox"]`,
                 eventName: 'change',
                 callback: 'updateState',
             },
-        ]
+        ],
     });
 
     validator.init();
 
-    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-        [...global.eZ.fieldTypeValidators, validator] :
-        [validator];
-})(window);
+    eZ.addConfig('fieldTypeValidators', [validator], true);
+})(window, window.document, window.eZ);

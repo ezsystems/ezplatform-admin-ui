@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function(global, doc) {
     const CLASS_HIDDEN = 'ez-user-menu__items--hidden';
     const SELECTOR_MENU_ITEMS = '.ez-user-menu__items';
     const SELECTOR_NAME_WRAPPER = '.ez-user-menu__name-wrapper';
@@ -23,4 +23,4 @@
     if (userMenu) {
         userMenu.addEventListener('click', toggleMenuItems, false);
     }
-})(window, document);
+})(window, window.document);

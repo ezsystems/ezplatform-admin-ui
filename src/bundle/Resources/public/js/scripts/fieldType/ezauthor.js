@@ -1,4 +1,4 @@
-(function(global, doc) {
+(function(global, doc, eZ) {
     const SELECTOR_REMOVE_AUTHOR = '.ez-btn--remove-author';
     const SELECTOR_AUTHOR = '.ez-data-source__author';
     const SELECTOR_FIELD = '.ez-field-edit--ezauthor';
@@ -6,7 +6,7 @@
     const SELECTOR_FIELD_EMAIL = '.ez-data-source__field--email';
     const SELECTOR_FIELD_NAME = '.ez-data-source__field--name';
 
-    class EzAuthorValidator extends global.eZ.BaseFieldValidator {
+    class EzAuthorValidator extends eZ.BaseFieldValidator {
         /**
          * Validates the 'name' input field value
          *
@@ -18,7 +18,7 @@
         validateName(event) {
             const isError = !event.target.value.trim() && event.target.required;
             const fieldNode = event.target.closest(SELECTOR_FIELD_NAME);
-            const errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', fieldNode.querySelector(SELECTOR_LABEL).innerHTML);
+            const errorMessage = eZ.errors.emptyField.replace('{fieldName}', fieldNode.querySelector(SELECTOR_LABEL).innerHTML);
 
             return {
                 isError: isError,
@@ -38,15 +38,15 @@
             const input = event.currentTarget;
             const isRequired = input.required;
             const isEmpty = !input.value.trim();
-            const isValid = global.eZ.errors.emailRegexp.test(input.value);
+            const isValid = eZ.errors.emailRegexp.test(input.value);
             const isError = (isRequired && isEmpty) || (!isEmpty && !isValid);
             const label = input.closest(SELECTOR_FIELD_EMAIL).querySelector(SELECTOR_LABEL).innerHTML;
             const result = { isError };
 
             if (isRequired && isEmpty) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             } else if (!isEmpty && !isValid) {
-                result.errorMessage = global.eZ.errors.invalidEmail;
+                result.errorMessage = eZ.errors.invalidEmail;
             }
 
             return result;
@@ -75,7 +75,7 @@
         updateDisabledState(parentNode) {
             const isEnabled = parentNode.querySelectorAll(SELECTOR_AUTHOR).length > 1;
 
-            [...parentNode.querySelectorAll(SELECTOR_REMOVE_AUTHOR)].forEach((btn) => {
+            parentNode.querySelectorAll(SELECTOR_REMOVE_AUTHOR).forEach((btn) => {
                 if (isEnabled) {
                     btn.removeAttribute('disabled');
                 } else {
@@ -175,7 +175,7 @@
         init() {
             super.init();
 
-            [...doc.querySelectorAll(this.fieldSelector)].forEach((field) => this.updateDisabledState(field));
+            doc.querySelectorAll(this.fieldSelector).forEach((field) => this.updateDisabledState(field));
         }
     }
 
@@ -222,5 +222,5 @@
 
     validator.init();
 
-    global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ? [...global.eZ.fieldTypeValidators, validator] : [validator];
-})(window, document);
+    eZ.addConfig('fieldTypeValidators', [validator], true);
+})(window, window.document, window.eZ);

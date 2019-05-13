@@ -1,8 +1,8 @@
-(function(global, doc) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezrichtext';
     const SELECTOR_INPUT = '.ez-data-source__richtext';
 
-    class EzRichTextValidator extends global.eZ.BaseFieldValidator {
+    class EzRichTextValidator extends eZ.BaseFieldValidator {
         constructor(config) {
             super(config);
 
@@ -25,15 +25,15 @@
             const result = { isError };
 
             if (isError) {
-                result.errorMessage = global.eZ.errors.emptyField.replace('{fieldName}', label);
+                result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             }
 
             return result;
         }
     }
 
-    [...doc.querySelectorAll(`${SELECTOR_FIELD} ${SELECTOR_INPUT}`)].forEach((container) => {
-        const richtext = new global.eZ.BaseRichText();
+    doc.querySelectorAll(`${SELECTOR_FIELD} ${SELECTOR_INPUT}`).forEach((container) => {
+        const richtext = new eZ.BaseRichText();
         const alloyEditor = richtext.init(container);
 
         const validator = new EzRichTextValidator({
@@ -58,6 +58,6 @@
 
         validator.init();
 
-        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ? [...global.eZ.fieldTypeValidators, validator] : [validator];
+        eZ.addConfig('fieldTypeValidators', [validator], true);
     });
-})(window, document);
+})(window, window.document, window.eZ);

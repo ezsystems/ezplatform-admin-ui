@@ -59,9 +59,9 @@
 
     validator.init();
 
-    eZ.fieldTypeValidators = eZ.fieldTypeValidators ? [...eZ.fieldTypeValidators, validator] : [validator];
+    eZ.addConfig('fieldTypeValidators', [validator], true);
 
-    const datetimeFields = [...doc.querySelectorAll(SELECTOR_FIELD)];
+    const datetimeFields = doc.querySelectorAll(SELECTOR_FIELD);
     const datetimeConfig = {
         enableTime: true,
         time_24hr: true,
@@ -105,14 +105,12 @@
             defaultDate = new Date(convertDateToTimezone(defaultDateWithUserTimezone, browserTimezone, true));
         }
 
-        const flatpickrInstance = flatpickr(
-            flatPickrInput,
-            Object.assign({}, datetimeConfig, {
-                onChange: updateInputValue.bind(null, sourceInput),
-                defaultDate,
-                enableSeconds: secondsEnabled,
-            })
-        );
+        const flatpickrInstance = flatpickr(flatPickrInput, {
+            ...datetimeConfig,
+            onChange: updateInputValue.bind(null, sourceInput),
+            defaultDate,
+            enableSeconds: secondsEnabled,
+        });
 
         btnClear.addEventListener('click', clearValue.bind(null, sourceInput, flatpickrInstance), false);
 

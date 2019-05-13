@@ -1,6 +1,4 @@
-(function(global, doc) {
-    const eZ = (global.eZ = global.eZ || {});
-
+(function(global, doc, eZ) {
     const NOTIFICATION_INFO_LABEL = 'info';
     const NOTIFICATION_SUCCESS_LABEL = 'success';
     const NOTIFICATION_WARNING_LABEL = 'warning';
@@ -35,7 +33,7 @@
             message,
             label: NOTIFICATION_INFO_LABEL,
             onShow,
-            rawPlaceholdersMap
+            rawPlaceholdersMap,
         });
 
     /**
@@ -51,7 +49,7 @@
             message,
             label: NOTIFICATION_SUCCESS_LABEL,
             onShow,
-            rawPlaceholdersMap
+            rawPlaceholdersMap,
         });
 
     /**
@@ -67,7 +65,7 @@
             message,
             label: NOTIFICATION_WARNING_LABEL,
             onShow,
-            rawPlaceholdersMap
+            rawPlaceholdersMap,
         });
 
     /**
@@ -86,16 +84,15 @@
             message,
             label: NOTIFICATION_ERROR_LABEL,
             onShow,
-            rawPlaceholdersMap
+            rawPlaceholdersMap,
         });
     };
 
-    eZ.helpers = eZ.helpers || {};
-    eZ.helpers.notification = {
+    eZ.addConfig('helpers.notification', {
         showNotification,
         showInfoNotification,
         showSuccessNotification,
         showWarningNotification,
         showErrorNotification,
-    };
-})(window, document);
+    });
+})(window, window.document, window.eZ);

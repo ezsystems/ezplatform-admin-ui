@@ -3,7 +3,7 @@
 
     /**
      * Creates map with content types identifiers as keys for faster lookup
-     * 
+     *
      * @function createContentTypeDataMap
      * @returns {Object} contentTypesDataMap
      */
@@ -40,4 +40,4 @@
     eZ.addConfig('helpers.contentType', {
         getContentTypeIconUrl,
     });
-})(window, document, window.eZ);
+})(window, window.document, window.eZ);

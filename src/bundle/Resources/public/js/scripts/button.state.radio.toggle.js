@@ -1,5 +1,5 @@
 (function(global, doc) {
-    const toggleForms = [...doc.querySelectorAll('.ez-toggle-btn-state-radio')];
+    const toggleForms = doc.querySelectorAll('.ez-toggle-btn-state-radio');
 
     toggleForms.forEach((toggleForm) => {
         const radioInputs = [...toggleForm.querySelectorAll('input[type="radio"]')];
@@ -18,4 +18,4 @@
         toggleButtonState();
         radioInputs.forEach((radioInput) => radioInput.addEventListener('change', toggleButtonState, false));
     });
-})(window, document);
+})(window, window.document);

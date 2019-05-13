@@ -1,12 +1,10 @@
-(function(global, doc) {
-    const eZ = (global.eZ = global.eZ || {});
-
+(function(global, doc, eZ) {
     /**
      * Handles request error
      *
      * @function handleRequest
      * @param {Response} response
-     * @returns {Error|Promise}
+     * @returns {Error|Response}
      */
     const handleRequest = (response) => {
         if (!response.ok) {
@@ -49,10 +47,9 @@
         return handleRequest(response).status;
     };
 
-    eZ.helpers = eZ.helpers || {};
-    eZ.helpers.request = {
+    eZ.addConfig('helpers.request', {
         getJsonFromResponse,
         getTextFromResponse,
         getStatusFromResponse,
-    };
-})(window, document);
+    });
+})(window, window.document, window.eZ);

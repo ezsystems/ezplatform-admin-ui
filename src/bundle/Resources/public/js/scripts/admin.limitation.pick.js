@@ -163,25 +163,20 @@
         const title = Translator.trans(/*@Desc("Choose locations")*/ 'subtree_limitation.title', {}, 'universal_discovery_widget');
 
         ReactDOM.render(
-            React.createElement(
-                eZ.modules.UniversalDiscovery,
-                Object.assign(
-                    {
-                        onConfirm: handleUdwConfirm.bind(this, event.target),
-                        onCancel: closeUDW,
-                        title,
-                        startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-                        multiple: true,
-                        restInfo: { token, siteaccess },
-                        canSelectContent: ({ item }, callback) => {
-                            const itemId = parseInt(item.id, 10);
+            React.createElement(eZ.modules.UniversalDiscovery, {
+                onConfirm: handleUdwConfirm.bind(this, event.target),
+                onCancel: closeUDW,
+                title,
+                startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
+                multiple: true,
+                restInfo: { token, siteaccess },
+                canSelectContent: ({ item }, callback) => {
+                    const itemId = parseInt(item.id, 10);
 
-                            callback(!selectedLocationsIds.includes(itemId));
-                        },
-                    },
-                    config
-                )
-            ),
+                    callback(!selectedLocationsIds.includes(itemId));
+                },
+                ...config,
+            }),
             udwContainer
         );
     };
@@ -193,4 +188,4 @@
         tags.forEach(attachTagEventHandlers.bind(null, limitationBtn));
         limitationBtn.addEventListener('click', openUDW, false);
     });
-})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
+})(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator);

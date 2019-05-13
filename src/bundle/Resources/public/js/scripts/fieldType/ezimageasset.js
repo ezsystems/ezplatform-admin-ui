@@ -1,4 +1,4 @@
-(function(global, doc, eZ, React, ReactDOM, Translator) {
+(function(global, doc, eZ, React, ReactDOM, Translator, Routing) {
     const SELECTOR_FIELD = '.ez-field-edit--ezimageasset';
     const SELECTOR_INPUT_FILE = 'input[type="file"]';
     const SELECTOR_INPUT_DESTINATION_CONTENT_ID = '.ez-data-source__destination-content-id';
@@ -10,21 +10,6 @@
     const getJsonFromResponse = eZ.helpers.request.getJsonFromResponse;
     const imageAssetMapping = eZ.adminUiConfig.imageAssetMapping;
 
-    /**
-     * Handles response status
-     *
-     * @function handleResponseStatus
-     * @param {Response} response
-     * @returns {Error|Promise}
-     */
-    const handleResponseStatus = (response) => {
-        if (response.status === 'failed') {
-            throw new Error(response.error);
-        }
-
-        return response;
-    };
-
     class EzImageAssetPreviewField extends eZ.BasePreviewField {
         /**
          * Creates a new Image Asset
@@ -34,7 +19,7 @@
          * @param {String} languageCode
          */
         createAsset(file, languageCode) {
-            const assetCreateUri = global.Routing.generate('ezplatform.asset.upload_image');
+            const assetCreateUri = Routing.generate('ezplatform.asset.upload_image');
             const form = new FormData();
 
             form.append('languageCode', languageCode);
@@ -55,7 +40,7 @@
 
             fetch(assetCreateUri, options)
                 .then(getJsonFromResponse)
-                .then(handleResponseStatus)
+                .then(eZ.helpers.request.handleRequest)
                 .then(this.onAssetCreateSuccess.bind(this))
                 .catch(this.onAssetCreateFailure.bind(this));
         }
@@ -136,8 +121,8 @@
             const previewAlt = preview.querySelector('.ez-field-edit-preview__image-alt input');
             const previewActionPreview = preview.querySelector('.ez-field-edit-preview__action--preview');
             const assetNameContainer = preview.querySelector('.ez-field-edit-preview__asset-name a');
-            const destinationLocationUrl = global.Routing.generate('_ezpublishLocation', {
-                locationId: destinationLocationId
+            const destinationLocationUrl = Routing.generate('_ezpublishLocation', {
+                locationId: destinationLocationId,
             });
 
             previewImg.setAttribute('src', image ? image.uri : '//:0');
@@ -178,19 +163,14 @@
             };
 
             ReactDOM.render(
-                React.createElement(
-                    eZ.modules.UniversalDiscovery,
-                    Object.assign(
-                        {
-                            onConfirm,
-                            onCancel,
-                            canSelectContent,
-                            title,
-                            restInfo: { token, siteaccess },
-                        },
-                        config
-                    )
-                ),
+                React.createElement(eZ.modules.UniversalDiscovery, {
+                    onConfirm,
+                    onCancel,
+                    canSelectContent,
+                    title,
+                    restInfo: { token, siteaccess },
+                    config,
+                }),
                 udwContainer
             );
         }
@@ -273,6 +253,6 @@
 
         previewField.init();
 
-        eZ.fieldTypeValidators = eZ.fieldTypeValidators ? [...eZ.fieldTypeValidators, validator] : [validator];
+        eZ.addConfig('fieldTypeValidators', [validator], true);
     });
-})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
+})(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator, window.Routing);

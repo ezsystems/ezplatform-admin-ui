@@ -10,7 +10,7 @@
     };
     const fields = doc.querySelectorAll('.ez-field-edit');
     const focusOnFirstError = () => {
-        const invalidFields = [...doc.querySelectorAll('.ez-field-edit.is-invalid')];
+        const invalidFields = doc.querySelectorAll('.ez-field-edit.is-invalid');
 
         fields.forEach((field) => field.removeAttribute('tabindex'));
         invalidFields.forEach((field) => field.setAttribute('tabindex', '-1'));
@@ -38,11 +38,13 @@
             window.setTimeout(() => btn.click(), 0);
         } else {
             btn.dataset.validatorsWithErrors = Array.from(
-                validationResults.filter((result) => !result.isValid).reduce((total, result) => {
-                    total.add(result.validatorName);
+                validationResults
+                    .filter((result) => !result.isValid)
+                    .reduce((total, result) => {
+                        total.add(result.validatorName);
 
-                    return total;
-                }, new Set())
+                        return total;
+                    }, new Set())
             ).join();
 
             fields.forEach((field) => field.removeAttribute('id'));

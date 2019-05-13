@@ -1,5 +1,5 @@
 (function(global, doc, eZ, React, ReactDOM, Translator) {
-    const btns = [...doc.querySelectorAll('.ez-btn--udw-copy-subtree')];
+    const btns = doc.querySelectorAll('.ez-btn--udw-copy-subtree');
     const form = doc.querySelector('form[name="location_copy_subtree"]');
     const input = form.querySelector('#location_copy_subtree_new_parent_location');
     const udwContainer = doc.querySelector('#react-udw');
@@ -20,24 +20,19 @@
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
 
         ReactDOM.render(
-            React.createElement(
-                global.eZ.modules.UniversalDiscovery,
-                Object.assign(
-                    {
-                        onConfirm,
-                        onCancel,
-                        title,
-                        multiple: false,
-                        startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
-                        restInfo: {token, siteaccess},
-                        allowContainersOnly: true,
-                    },
-                    config
-                ),
-            ),
+            React.createElement(eZ.modules.UniversalDiscovery, {
+                onConfirm,
+                onCancel,
+                title,
+                multiple: false,
+                startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
+                restInfo: { token, siteaccess },
+                allowContainersOnly: true,
+                ...config,
+            }),
             udwContainer
         );
     };
 
     btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
-})(window, document, window.eZ, window.React, window.ReactDOM, window.Translator);
+})(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator);

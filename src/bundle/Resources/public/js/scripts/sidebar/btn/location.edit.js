@@ -1,4 +1,4 @@
-(function(global, doc, $) {
+(function(global, doc, $, Routing) {
     const editActions = doc.querySelector('.ez-extra-actions--edit') || doc.querySelector('.ez-extra-actions--edit-user');
     const btns = [...editActions.querySelectorAll('.form-check [type="radio"]')];
     const form = editActions.querySelector('form');
@@ -15,7 +15,7 @@
     const redirectToUserEdit = (languageCode) => {
         const versionNo = form.querySelector('#user_edit_version_info_version_no').value;
 
-        window.location.href = global.Routing.generate('ez_user_update', { contentId, versionNo, language: languageCode });
+        window.location.href = Routing.generate('ez_user_update', { contentId, versionNo, language: languageCode });
     };
     const onModalHidden = () => {
         resetRadioButtons();
@@ -31,9 +31,9 @@
             addDraftButton.addEventListener('click', addDraft, false);
         }
 
-        [...wrapper.querySelectorAll('.ez-btn--prevented')].forEach((btn) =>
-            btn.addEventListener('click', (event) => event.preventDefault(), false)
-        );
+        wrapper
+            .querySelectorAll('.ez-btn--prevented')
+            .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
 
         $('#version-draft-conflict-modal')
             .modal('show')
@@ -48,7 +48,7 @@
     const changeHandler = (event) => {
         const checkedBtn = event.currentTarget;
         const languageCode = checkedBtn.value;
-        const checkVersionDraftLink = global.Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode });
+        const checkVersionDraftLink = Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode });
 
         fetch(checkVersionDraftLink, {
             credentials: 'same-origin',
@@ -68,4 +68,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('change', changeHandler, false));
-})(window, document, window.jQuery);
+})(window, window.document, window.jQuery, window.Routing);
