@@ -18,8 +18,17 @@ class TrashTable extends Table
     {
         parent::__construct($context, $containerLocator);
         $this->fields['horizontalHeaders'] = $this->fields['list'] . ' thead th';
+        $this->fields['tableTrash'] = '[name=trash_item_restore]';
         $this->fields['listElement'] = $this->fields['list'] . ' tbody td:nth-child(2)';
-        $this->fields['checkboxInput'] = $this->fields['list'] . ' tbody td input';
+        $this->fields['checkboxInput'] = ' input';
+        $this->fields['trashButton'] = '[id=delete-trash-items]';
+        $this->fields['restoreButton'] = '[id=trash_item_restore_restore]';
+        $this->fields['restoreUnderNewLocationButton'] = '[id=trash_item_restore_location_select_content]';
+    }
+
+    public function verifyVisibility(): void
+    {
+        $this->context->waitUntilElementIsVisible($this->fields['tableTrash']);
     }
 
     public function getTableCellValue(string $header, ?string $secondHeader = null): string
@@ -79,15 +88,18 @@ class TrashTable extends Table
         $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
     }
 
-    /**
-     * Check if list contains link element with given name.
-     *
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function isElementInTable(string $name): bool
+    public function clickTrashButton(): void
     {
-        return $this->context->getElementByText($name, $this->fields['listElement']) !== null;
+        $this->context->findElement($this->fields['trashButton'], $this->defaultTimeout)->click();
+    }
+
+    public function clickRestoreButton(): void
+    {
+        $this->context->findElement($this->fields['restoreButton'], $this->defaultTimeout)->click();
+    }
+
+    public function clickRestoreUnderNewLocationButton(): void
+    {
+        $this->context->findElement($this->fields['restoreUnderNewLocationButton'], $this->defaultTimeout)->click();
     }
 }
