@@ -134,9 +134,9 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         }
 
         if (!empty($contentTypeIds)) {
-            $viewParameters['contentTypes'] = $this->contentTypeService->loadContentTypeList(array_unique($contentTypeIds));
+            $viewParameters['content_types'] = $this->contentTypeService->loadContentTypeList(array_unique($contentTypeIds));
         } else {
-            $viewParameters['contentTypes'] = [];
+            $viewParameters['content_types'] = [];
         }
 
         return array_replace($contextParameters, $viewParameters);

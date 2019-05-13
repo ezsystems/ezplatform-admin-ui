@@ -15,7 +15,7 @@
 {% if policies_pager.haveToPaginate %}
     {{  include('@ezdesign/content/tab/pagination.html.twig', {
             'pager': policies_pager,
-            'paginatonParams': {
+            'paginaton_params': {
                 'routeName': policies_pagination_params.route_name,
                 'routeParams': policies_pagination_params.route_params|merge({
                     '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\PoliciesTab::URI_FRAGMENT'),

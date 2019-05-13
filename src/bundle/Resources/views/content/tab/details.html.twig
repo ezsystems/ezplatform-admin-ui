@@ -22,17 +22,17 @@
                 {% else %}
                     {{ 'tab.details.creator.not_found'|trans|desc('Can’t fetch creator') }}
                 {% endif %}
-                ({{ contentInfo.publishedDate|ez_full_datetime }})
+                ({{ content_info.publishedDate|ez_full_datetime }})
             </td>
             <td>
-                {% if lastContributor is not empty %}
-                    {{ ez_content_name(lastContributor) }}
+                {% if last_contributor is not empty %}
+                    {{ ez_content_name(last_contributor) }}
                 {% else %}
                     {{ 'tab.details.last_contributor.not_found'|trans|desc('Can’t fetch last contributor') }}
                 {% endif %}
-                ({{ versionInfo.modificationDate|ez_full_datetime }})
+                ({{ version_info.modificationDate|ez_full_datetime }})
             </td>
-            <td>{{ versionInfo.versionNo }}</td>
+            <td>{{ version_info.versionNo }}</td>
             <td>
                 {% for translation in translations %}
                     {{ translation.name }}<br>
@@ -57,9 +57,9 @@
         </thead>
         <tbody>
         <tr>
-            <td>{{ contentInfo.id }}</td>
+            <td>{{ content_info.id }}</td>
             <td>{{ location.id }}</td>
-            <td>{{ contentInfo.remoteId }}</td>
+            <td>{{ content_info.remoteId }}</td>
             <td>{{ location.remoteId }}</td>
         </tr>
         </tbody>
@@ -113,26 +113,26 @@
         </tr>
         </thead>
         <tbody>
-        {% for objectState in objectStates %}
+        {% for object_state in object_states %}
             <tr>
-                <td>{{ objectState.objectStateGroup.name }}</td>
-                <td>{{ objectState.name }}</td>
+                <td>{{ object_state.objectStateGroup.name }}</td>
+                <td>{{ object_state.name }}</td>
                 <td>
-                    {% if can_assign and form_state_update[objectState.objectStateGroup.id].objectState.vars.choices|length != 0 %}
-                        {% form_theme form_state_update[objectState.objectStateGroup.id] '@ezdesign/ui/form_fields.html.twig' %}
-                        {{ form_start(form_state_update[objectState.objectStateGroup.id], {
+                    {% if can_assign and form_state_update[object_state.objectStateGroup.id].objectState.vars.choices|length != 0 %}
+                        {% form_theme form_state_update[object_state.objectStateGroup.id] '@ezdesign/ui/form_fields.html.twig' %}
+                        {{ form_start(form_state_update[object_state.objectStateGroup.id], {
                             'method': 'POST',
                             'action': path('ezplatform.object_state.contentstate.update', {
-                                'contentInfoId': contentInfo.id,
-                                'objectStateGroupId': objectState.objectStateGroup.id
+                                'contentInfoId': content_info.id,
+                                'objectStateGroupId': object_state.objectStateGroup.id
                             }),
                             'attr': {'class': 'form-inline ez-form-inline ez-form-inline--align-left'}
                         }) }}
-                            {{ form_row(form_state_update[objectState.objectStateGroup.id].contentInfo) }}
-                            {{ form_row(form_state_update[objectState.objectStateGroup.id].objectStateGroup) }}
-                            {{ form_row(form_state_update[objectState.objectStateGroup.id].objectState, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
-                            {% do form_state_update[objectState.objectStateGroup.id].set.setRendered %}
-                        {{ form_end(form_state_update[objectState.objectStateGroup.id]) }}
+                            {{ form_row(form_state_update[object_state.objectStateGroup.id].contentInfo) }}
+                            {{ form_row(form_state_update[object_state.objectStateGroup.id].objectStateGroup) }}
+                            {{ form_row(form_state_update[object_state.objectStateGroup.id].objectState, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
+                            {% do form_state_update[object_state.objectStateGroup.id].set.setRendered %}
+                        {{ form_end(form_state_update[object_state.objectStateGroup.id]) }}
                     {% endif %}
                 </td>
             </tr>

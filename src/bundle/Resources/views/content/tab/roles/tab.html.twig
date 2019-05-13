@@ -15,7 +15,7 @@
 {% if roles_pager.haveToPaginate %}
     {{  include('@ezdesign/content/tab/pagination.html.twig', {
             'pager': roles_pager,
-            'paginatonParams': {
+            'paginaton_params': {
                 'routeName': roles_pagination_params.route_name,
                 'routeParams': roles_pagination_params.route_params|merge({
                     '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\RolesTab::URI_FRAGMENT'),
