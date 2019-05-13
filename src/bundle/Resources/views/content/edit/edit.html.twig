@@ -8,25 +8,21 @@
 
 {% block details %}
     <div class="container mt-5 px-5">
-        {% if base_language is defined and baseLanguage is not null %}
-            <h2 class="ez-content-item-status">{{ 'editing_in_language_based_on'|trans({'%contentName%': content.name, '%languageName%': language.name, '%baseLanguageName%': baseLanguage.name})|desc('Editing - %contentName% in %languageName% based on %baseLanguageName%') }}</h2>
-        {% else %}
-            <h2 class="ez-content-item-status">{{ 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing - %contentName% in %languageName%') }}</h2>
-        {% endif %}
+        <h2 class="ez-content-item-status">{{ 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing - %contentName% in %languageName%') }}</h2>
         <h1>
-            <svg class="ez-icon ez-icon-{{ contentType.identifier }}">
-                <use xlink:href="{{ ez_content_type_icon(contentType.identifier) }}"></use>
+            <svg class="ez-icon ez-icon-{{ content_type.identifier }}">
+                <use xlink:href="{{ ez_content_type_icon(content_type.identifier) }}"></use>
             </svg>
             {{ content.name }}
         </h1>
 
         <div class="small">
-            {{ contentType.name }} /
+            {{ content_type.name }} /
             {% if creator is not null %}{{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }} /{% endif %}
             {{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }} /
             {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }},
             {% if is_published == false %}
-                {{ 'parent_location_id'|trans({'%locationId%': parentLocation.id})|desc('Parent Location ID: %locationId%') }}
+                {{ 'parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
             {% else %}
                 {{ 'location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
             {% endif %}
@@ -35,8 +31,8 @@
             {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Looks like something went wrong. Please check for required fields or errors and correct them') }}
         </div>
         {# @todo remove if statement once getDescription() bug is resolved in kernel #}
-        {% if contentType.descriptions is not empty %}
-            <div class="small text-muted">{{ contentType.description }}</div>
+        {% if content_type.descriptions is not empty %}
+            <div class="small text-muted">{{ content_type.description }}</div>
         {% endif %}
     </div>
 {% endblock %}
@@ -66,14 +62,14 @@
 {% endblock %}
 
 {% block close_button %}
-    {% set referrerLocation = is_published ? location : parentLocation %}
-    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': referrerLocation.id }) }}"></a>
+    {% set referrer_location = is_published ? location : parent_location %}
+    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': referrer_location.id }) }}"></a>
 {% endblock %}
 
 {% block form_before %}
     {{ ezplatform_admin_ui_component_group('content-edit-form-before', {
         'content': content,
-        'content_type': contentType,
+        'content_type': content_type,
         'location': location,
         'parent_location': parent_location,
         'language': language
@@ -83,7 +79,7 @@
 {% block form_after %}
     {{ ezplatform_admin_ui_component_group('content-edit-form-after', {
         'content': content,
-        'content_type': contentType,
+        'content_type': content_type,
         'location': location,
         'parent_location': parent_location,
         'language': language

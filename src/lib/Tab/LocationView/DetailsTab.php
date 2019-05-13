@@ -128,8 +128,8 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
         $contentInfo = $versionInfo->getContentInfo();
 
         $viewParameters = new ArrayObject([
-            'contentInfo' => $contentInfo,
-            'versionInfo' => $versionInfo,
+            'content_info' => $contentInfo,
+            'version_info' => $versionInfo,
         ]);
 
         $this->supplySectionParameters($viewParameters, $contentInfo, $location);
@@ -179,9 +179,9 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
      */
     private function supplyLastContributor(ArrayObject $parameters, VersionInfo $versionInfo): void
     {
-        $parameters['lastContributor'] = null;
+        $parameters['last_contributor'] = null;
         if ((new UserExists($this->userService))->isSatisfiedBy($versionInfo->creatorId)) {
-            $parameters['lastContributor'] = $this->userService->loadUser($versionInfo->creatorId);
+            $parameters['last_contributor'] = $this->userService->loadUser($versionInfo->creatorId);
         }
     }
 
@@ -196,7 +196,7 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
 
         $canAssignObjectState = $this->canUserAssignObjectState();
 
-        $parameters['objectStates'] = $objectStatesDataset->getObjectStates();
+        $parameters['object_states'] = $objectStatesDataset->getObjectStates();
         $parameters['can_assign'] = $canAssignObjectState;
         $parameters['form_state_update'] = [];
 

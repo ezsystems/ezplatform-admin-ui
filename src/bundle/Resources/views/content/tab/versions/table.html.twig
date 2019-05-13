@@ -5,7 +5,7 @@
 {% set is_draft_conflict = is_draft_conflict is defined and is_draft_conflict %}
 
 <div class="ez-scrollable-table-wrapper">
-    <table class="table {% if is_draft and haveToPaginate %} mb-3 {% endif %} {% if is_draft_conflict %} ez-table__draft-conflict {% endif %}">
+    <table class="table {% if is_draft and have_to_paginate %} mb-3 {% endif %} {% if is_draft_conflict %} ez-table__draft-conflict {% endif %}">
         <thead>
         <tr>
             {% if form is defined %}

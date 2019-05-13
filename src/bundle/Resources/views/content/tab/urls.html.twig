@@ -20,7 +20,7 @@
 {% if custom_urls_pager.haveToPaginate %}
     {{  include('@ezdesign/content/tab/pagination.html.twig', {
             'pager': custom_urls_pager,
-            'paginatonParams': {
+            'paginaton_params': {
                 'routeName': custom_urls_pagination_params.route_name,
                 'routeParams': custom_urls_pagination_params.route_params|merge({
                     '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
@@ -46,7 +46,7 @@
 {% if system_urls_pager.haveToPaginate %}
     {{  include('@ezdesign/content/tab/pagination.html.twig', {
         'pager': system_urls_pager,
-        'paginatonParams': {
+        'paginaton_params': {
             'routeName': system_urls_pagination_params.route_name,
             'routeParams': system_urls_pagination_params.route_params|merge({
                 '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
