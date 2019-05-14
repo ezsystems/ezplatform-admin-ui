@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformRestCommon\Value as RestValue;
+use EzSystems\EzPlatformRest\Value as RestValue;
 
 class ContentTypeRemoteIdList extends RestValue
 {

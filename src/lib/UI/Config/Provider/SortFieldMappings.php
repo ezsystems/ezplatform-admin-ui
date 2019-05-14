@@ -13,7 +13,7 @@ use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 /**
  * Provides information about mapping between serialized sort field and the value accepted by sort clause.
  *
- * @see \EzSystems\EzPlatformRestCommon\Output\ValueObjectVisitor::serializeSortField
+ * @see \EzSystems\EzPlatformRest\Output\ValueObjectVisitor::serializeSortField
  */
 class SortFieldMappings implements ProviderInterface
 {

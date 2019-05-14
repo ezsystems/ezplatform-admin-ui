@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values;
 
-use EzSystems\EzPlatformRestCommon\Value as RestValue;
+use EzSystems\EzPlatformRest\Value as RestValue;
 use eZ\Publish\Core\REST\Server\Values\RestContent;
 use eZ\Publish\Core\REST\Server\Values\RestLocation;
 

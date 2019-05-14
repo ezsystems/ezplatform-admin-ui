@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation;
 
-use EzSystems\EzPlatformRestCommon\Input\Dispatcher;
-use EzSystems\EzPlatformRestCommon\Message;
+use EzSystems\EzPlatformRest\Input\Dispatcher;
+use EzSystems\EzPlatformRest\Message;
 use EzSystems\EzPlatformAdminUi\REST\Value\BulkOperationResponse;
 use EzSystems\EzPlatformAdminUi\REST\Value\Operation;
 use EzSystems\EzPlatformAdminUi\REST\Value\OperationResponse;
@@ -20,14 +20,14 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class BulkOperationController extends Controller
 {
-    /** @var \EzSystems\EzPlatformRestCommon\Input\Dispatcher */
+    /** @var \EzSystems\EzPlatformRest\Input\Dispatcher */
     private $inputDispatcher;
 
     /** @var \Symfony\Component\HttpKernel\HttpKernel */
     private $httpKernel;
 
     /**
-     * @param \EzSystems\EzPlatformRestCommon\Input\Dispatcher $inputDispatcher
+     * @param \EzSystems\EzPlatformRest\Input\Dispatcher $inputDispatcher
      * @param \Symfony\Component\HttpKernel\HttpKernel $httpKernel
      */
     public function __construct(
