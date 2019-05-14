@@ -34,7 +34,7 @@ class ContentRelationSingle extends EzFieldElement
     {
         if (!$this->isRelationEmpty()) {
             $itemName = explode('/', $parameters['value'])[substr_count($parameters['value'], '/')];
-            if (!$this->contentRelationTable->isElementInTable($itemName)) {
+            if (!$this->contentRelationTable->isElementOnCurrentPage($itemName)) {
                 $this->removeActualRelation();
             } else {
                 return;

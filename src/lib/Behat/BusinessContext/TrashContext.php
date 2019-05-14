@@ -6,10 +6,12 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
+use Behat\Gherkin\Node\TableNode;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\LeftMenu;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UpperMenu;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
@@ -62,6 +64,72 @@ class TrashContext extends BusinessContext
         $leftMenu->clickButton('Trash');
 
         $trash = PageObjectFactory::createPage($this->utilityContext, TrashPage::PAGE_NAME);
-        $trash->verifyIfItemInTrash($itemType, $itemName);
+        $trash->verifyIfItemInTrash($itemType, $itemName, true);
+    }
+
+    /**
+     * @When I delete item from trash list
+     */
+    public function iDeleteItemFromTrash(TableNode $itemsTable): void
+    {
+        $trashPage = PageObjectFactory::createPage($this->utilityContext, TrashPage::PAGE_NAME);
+
+        foreach ($itemsTable->getHash() as $itemTable) {
+            $trashPage->trashTable->selectListElement($itemTable['item']);
+        }
+
+        $trashPage->trashTable->clickTrashButton();
+        $trashPage->dialog->verifyVisibility();
+        $trashPage->dialog->confirm();
+    }
+
+    /**
+     * @When I restore item from trash
+     */
+    public function iRestoreItemFromTrash(TableNode $itemsTable): void
+    {
+        $trashPage = PageObjectFactory::createPage($this->utilityContext, TrashPage::PAGE_NAME);
+
+        foreach ($itemsTable->getHash() as $itemTable) {
+            $trashPage->trashTable->selectListElement($itemTable['item']);
+        }
+
+        $trashPage->trashTable->clickRestoreButton();
+    }
+
+    /**
+     * @When I restore item from trash under new location :pathToContent
+     */
+    public function iRestoreItemFromTrashUnderNewLocation(TableNode $itemsTable, string $pathToContent): void
+    {
+        $trashPage = PageObjectFactory::createPage($this->utilityContext, TrashPage::PAGE_NAME);
+
+        foreach ($itemsTable->getHash() as $itemTable) {
+            $trashPage->trashTable->selectListElement($itemTable['item']);
+        }
+
+        $trashPage->trashTable->clickRestoreUnderNewLocationButton();
+        $udw = ElementFactory::createElement($this->utilityContext, UniversalDiscoveryWidget::ELEMENT_NAME);
+        $udw->verifyVisibility();
+        $udw->selectContent($pathToContent);
+        $udw->confirm();
+    }
+
+    /**
+     * @Then there is :itemType :itemName on trash list
+     */
+    public function thereIsItemOnTrashList(string $itemType, string $itemName): void
+    {
+        $trashPage = PageObjectFactory::createPage($this->utilityContext, TrashPage::PAGE_NAME);
+        $trashPage->verifyIfItemInTrash($itemType, $itemName, true);
+    }
+
+    /**
+     * @Then there is no :itemType :itemName on trash list
+     */
+    public function thereIsNoItemOnTrashList(string $itemType, string $itemName): void
+    {
+        $trashPage = PageObjectFactory::createPage($this->utilityContext, TrashPage::PAGE_NAME);
+        $trashPage->verifyIfItemInTrash($itemType, $itemName, false);
     }
 }

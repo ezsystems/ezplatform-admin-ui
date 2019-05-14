@@ -17,7 +17,7 @@ class LinkedListTable extends Table
     {
         parent::__construct($context, $containerLocator);
         $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .ez-table-header + .table thead th, .ez-table-header + form thead th';
-        $this->fields['listElementLink'] = $this->fields['list'] . ' .ez-table__cell--has-checkbox+ td.ez-table__cell a';
+        $this->fields['listElement'] = $this->fields['list'] . ' .ez-table__cell--has-checkbox+ td.ez-table__cell a';
         $this->fields['checkboxInput'] = ' .form-check-input';
         $this->fields['assignButton'] = $this->fields['list'] . ' tr:nth-child(%s) a[title*=Assign]';
     }
@@ -26,7 +26,7 @@ class LinkedListTable extends Table
     {
         $rowPosition = $this->context->getElementPositionByText(
             $header,
-            $this->fields['listElementLink']
+            $this->fields['listElement']
         );
         $columnPosition = $this->context->getElementPositionByText(
             $secondHeader,
@@ -43,7 +43,7 @@ class LinkedListTable extends Table
      */
     public function clickListElement(string $name): void
     {
-        $this->context->getElementByText($name, $this->fields['listElementLink'])->click();
+        $this->context->getElementByText($name, $this->fields['listElement'])->click();
     }
 
     /**
@@ -53,7 +53,7 @@ class LinkedListTable extends Table
      */
     public function selectListElement(string $name): void
     {
-        $this->selectElement($name, $this->fields['listElementLink']);
+        $this->selectElement($name, $this->fields['listElement']);
     }
 
     /**
@@ -65,7 +65,7 @@ class LinkedListTable extends Table
      */
     public function isElementInTable(string $name): bool
     {
-        return $this->context->getElementByText($name, $this->fields['listElementLink']) !== null;
+        return $this->context->getElementByText($name, $this->fields['listElement']) !== null;
     }
 
     /**
@@ -77,7 +77,7 @@ class LinkedListTable extends Table
      */
     public function isElementSelectable(string $name): bool
     {
-        $position = $this->context->getElementPositionByText($name, $this->fields['listElementLink']);
+        $position = $this->context->getElementPositionByText($name, $this->fields['listElement']);
         $checkbox = $this->context->findElement(sprintf($this->fields['tableCell'], $position, 1) . $this->fields['checkboxInput'])->getAttribute('disabled');
 
         return $checkbox !== 'disabled';
@@ -85,12 +85,12 @@ class LinkedListTable extends Table
 
     public function clickEditButton(string $listItemName): void
     {
-        $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElementLink']);
+        $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
     }
 
     public function clickAssignButton(?string $listItemName = null): void
     {
-        $position = $this->context->getElementPositionByText($listItemName, $this->fields['listElementLink']);
+        $position = $this->context->getElementPositionByText($listItemName, $this->fields['listElement']);
         $this->context->findElement(sprintf($this->fields['assignButton'], $position))->click();
     }
 }
