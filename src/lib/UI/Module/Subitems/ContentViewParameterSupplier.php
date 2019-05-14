@@ -17,10 +17,10 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use EzSystems\EzPlatformRest\Output\Visitor;
-use eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentTypeInfoList as ContentTypeInfoListValueObjectVisitor;
-use eZ\Publish\Core\REST\Server\Values\ContentTypeInfoList;
-use eZ\Publish\Core\REST\Server\Values\RestContent;
-use eZ\Publish\Core\REST\Server\Values\RestLocation;
+use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentTypeInfoList as ContentTypeInfoListValueObjectVisitor;
+use EzSystems\EzPlatformRest\Server\Values\ContentTypeInfoList;
+use EzSystems\EzPlatformRest\Server\Values\RestContent;
+use EzSystems\EzPlatformRest\Server\Values\RestLocation;
 use EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList as SubitemsListValueObjectVisitor;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsList;
@@ -39,7 +39,7 @@ class ContentViewParameterSupplier
     /** @var \EzSystems\EzPlatformRest\Output\Generator\Json */
     private $outputGenerator;
 
-    /** @var \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentTypeInfoList */
+    /** @var \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentTypeInfoList */
     private $contentTypeInfoListValueObjectVisitor;
 
     /** @var \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList */
@@ -66,7 +66,7 @@ class ContentViewParameterSupplier
     /**
      * @param \EzSystems\EzPlatformRest\Output\Visitor $outputVisitor
      * @param \EzSystems\EzPlatformRest\Output\Generator\Json $outputGenerator
-     * @param \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentTypeInfoList $contentTypeInfoListValueObjectVisitor
+     * @param \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentTypeInfoList $contentTypeInfoListValueObjectVisitor
      * @param \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList $subitemsListValueObjectVisitor
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\ContentService $contentService
@@ -157,7 +157,7 @@ class ContentViewParameterSupplier
      * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
      *
-     * @return \eZ\Publish\Core\REST\Server\Values\RestContent
+     * @return \EzSystems\EzPlatformRest\Server\Values\RestContent
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
@@ -178,7 +178,7 @@ class ContentViewParameterSupplier
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      *
-     * @return \eZ\Publish\Core\REST\Server\Values\RestLocation
+     * @return \EzSystems\EzPlatformRest\Server\Values\RestLocation
      */
     private function createRestLocation(Location $location): RestLocation
     {
@@ -222,7 +222,7 @@ class ContentViewParameterSupplier
     }
 
     /**
-     * @param \eZ\Publish\Core\REST\Server\Values\ContentTypeInfoList $contentTypeInfoList
+     * @param \EzSystems\EzPlatformRest\Server\Values\ContentTypeInfoList $contentTypeInfoList
      *
      * @return string
      */
