@@ -8,7 +8,8 @@
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const EVENT_BLUR = 'blur';
     const EVENT_KEYUP = 'keyup';
-    const EVENT_CANCEL_ERRORS = 'cancelErrors';
+    const EVENT_CANCEL_ERRORS = 'ez-cancel-errors';
+    const EVENT_ADDRESS_NOT_FOUND = 'ez-address-not-found';
     const POSITION_TYPE_LONGITUDE = 'longitude';
     const POSITION_TYPE_LATITUDE = 'latitude';
     const VALIDATE_LONGITUDE = 'validateLongitude';
@@ -357,7 +358,7 @@
             {
                 isValueValidator: false,
                 selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
-                eventName: 'addressNotFound',
+                eventName: EVENT_ADDRESS_NOT_FOUND,
                 callback: 'showNotFoundError',
                 errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
             },
@@ -529,7 +530,7 @@
          *
          * @function showAddressNotFoundError
          */
-        const showAddressNotFoundError = () => addressInput.dispatchEvent(new CustomEvent('addressNotFound'));
+        const showAddressNotFoundError = () => addressInput.dispatchEvent(new CustomEvent(EVENT_ADDRESS_NOT_FOUND));
 
         /**
          * Handles address input actions

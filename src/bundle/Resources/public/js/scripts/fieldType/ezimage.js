@@ -4,6 +4,7 @@
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const SELECTOR_ALT_WRAPPER = '.ez-field-edit-preview__image-alt';
     const SELECTOR_INPUT_ALT = '.ez-field-edit-preview__image-alt .ez-data-source__input';
+    const EVENT_CANCEL_ERROR = 'ez-cancel-errors';
 
     class EzImageFilePreviewField extends eZ.BasePreviewField {
         /**
@@ -43,7 +44,7 @@
             sizeContainer.title = fileSize;
 
             preview.querySelector('.ez-field-edit-preview__action--preview').href = URL.createObjectURL(files[0]);
-            this.fieldContainer.querySelector(SELECTOR_INPUT_ALT).dispatchEvent(new CustomEvent('cancelErrors'));
+            this.fieldContainer.querySelector(SELECTOR_INPUT_ALT).dispatchEvent(new CustomEvent(EVENT_CANCEL_ERROR));
         }
     }
 
@@ -92,14 +93,14 @@
                 {
                     isValueValidator: false,
                     selector: `${SELECTOR_INPUT_FILE}`,
-                    eventName: 'invalidFileSize',
+                    eventName: 'ez-invalid-file-size',
                     callback: 'showFileSizeError',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
                 },
                 {
                     isValueValidator: false,
                     selector: SELECTOR_INPUT_ALT,
-                    eventName: 'cancelErrors',
+                    eventName: EVENT_CANCEL_ERROR,
                     callback: 'cancelErrors',
                     invalidStateSelectors: ['.ez-data-source__field--alternativeText'],
                     errorNodeSelectors: [`${SELECTOR_ALT_WRAPPER} .ez-data-source__label-wrapper`],
