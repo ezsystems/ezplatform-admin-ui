@@ -1,16 +1,20 @@
 (function(global, doc, eZ, Translator, React, ReactDOM) {
     const udw2Btn = doc.querySelector('#udw2-btn');
     const udw2Container = doc.querySelector('#udw2-container');
-    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const title = Translator.trans(/*@Desc("Browse content")*/ 'browse.title', {}, 'universal_discovery_widget');
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udw2Container);
+    const handleOnConfirm = (items) => {
+        console.log('onConfirm', items);
+
+        closeUDW();
+    };
     const openUDW = (event) => {
         event.preventDefault();
 
+        const udwConfig = JSON.parse(event.currentTarget.dataset.udwConfig);
         const config = {
             title,
-            restInfo: { token, siteaccess },
+            onClose: closeUDW,
             tabs: [
                 {
                     id: 'browse',
@@ -21,29 +25,33 @@
                         multiple: true,
                         selectedItemsLimit: 2,
                         startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
-                        onConfirm: (items) => closeUDW(),
+                        onConfirm: handleOnConfirm,
                         onCancel: closeUDW,
                     },
                 },
-                {
-                    id: 'search',
-                    title: 'Search',
-                    panel: eZ.udwTabs.Search,
-                    active: true,
-                    attrs: {
-                        selectedItemsLimit: 2,
-                        searchResultsPerPage: 10,
-                        searchResultsLimit: 50,
-                        onConfirm: (items) => closeUDW(),
-                        onCancel: closeUDW,
-                    },
-                },
+                // {
+                //     id: 'search',
+                //     title: 'Search',
+                //     panel: eZ.udwTabs.Search,
+                //     active: true,
+                //     attrs: {
+                //         selectedItemsLimit: 2,
+                //         searchResultsPerPage: 10,
+                //         searchResultsLimit: 50,
+                //         onConfirm: handleOnConfirm,
+                //         onCancel: closeUDW,
+                //     },
+                // },
                 {
                     id: 'create',
                     title: 'Create',
                     panel: eZ.udwTabs.Create,
-                    active: false,
-                    attrs: {},
+                    active: true,
+                    attrs: {
+                        onConfirm: handleOnConfirm,
+                        onCancel: closeUDW,
+                        ...udwConfig,
+                    },
                 },
             ],
         };
