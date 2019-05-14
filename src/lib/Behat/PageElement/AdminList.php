@@ -71,7 +71,7 @@ class AdminList extends Element
         $pagination = ElementFactory::createElement($this->context, Pagination::ELEMENT_NAME);
 
         while (true) {
-            if ($this->table->isElementInTable($listElementName)) {
+            if ($this->table->isElementOnCurrentPage($listElementName)) {
                 return true;
             }
 

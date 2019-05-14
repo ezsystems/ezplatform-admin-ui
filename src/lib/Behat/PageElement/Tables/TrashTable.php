@@ -17,8 +17,18 @@ class TrashTable extends Table
     public function __construct(UtilityContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
+        $this->fields['horizontalHeaders'] = $this->fields['list'] . ' thead th';
+        $this->fields['tableTrash'] = '[name=trash_item_restore]';
         $this->fields['listElement'] = $this->fields['list'] . ' tbody .ez-table__cell--after-icon';
-        $this->fields['checkboxInput'] = $this->fields['list'] . ' tbody td input';
+        $this->fields['checkboxInput'] = ' input';
+        $this->fields['trashButton'] = '[id=delete-trash-items]';
+        $this->fields['restoreButton'] = '[id=trash_item_restore_restore]';
+        $this->fields['restoreUnderNewLocationButton'] = '[id=trash_item_restore_location_select_content]';
+    }
+
+    public function verifyVisibility(): void
+    {
+        $this->context->waitUntilElementIsVisible($this->fields['tableTrash']);
     }
 
     public function getTableCellValue(string $header, ?string $secondHeader = null): string
@@ -76,5 +86,20 @@ class TrashTable extends Table
     public function clickEditButton(string $listItemName): void
     {
         $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
+    }
+
+    public function clickTrashButton(): void
+    {
+        $this->context->findElement($this->fields['trashButton'], $this->defaultTimeout)->click();
+    }
+
+    public function clickRestoreButton(): void
+    {
+        $this->context->findElement($this->fields['restoreButton'], $this->defaultTimeout)->click();
+    }
+
+    public function clickRestoreUnderNewLocationButton(): void
+    {
+        $this->context->findElement($this->fields['restoreUnderNewLocationButton'], $this->defaultTimeout)->click();
     }
 }

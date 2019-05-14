@@ -84,7 +84,7 @@ class ContentViewContext extends BusinessContext
     private function verifyItemExistenceInSubItemList(string $itemName, string $itemType, string $containerName, bool $itemShouldExist): void
     {
         $isItemInTable = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $containerName)
-            ->subItemList->table->isElementInTable($itemName, $itemType);
+            ->subItemList->table->isElementInTable($itemName);
 
         $itemShouldExistString = $itemShouldExist ? '' : 'n\'t';
 
@@ -248,9 +248,17 @@ class ContentViewContext extends BusinessContext
         $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $explodedPath[$pathSize - 1]);
 
         Assert::assertTrue(
-            $contentItemPage->subItemList->table->isElementInTable($contentName, $contentType),
+            $contentItemPage->subItemList->table->isElementInTable($contentName),
             sprintf('%s "%s" shouldn\'t be on %s Sub-items list', $contentType, $contentName, $explodedPath[$pathSize - 1])
         );
+    }
+
+    /**
+     * @Then going to root path there is :contentName :contentType on Sub-items list
+     */
+    public function goingToRootTheresSubItem(string $contentName, string $contentType): void
+    {
+        $this->goingToPathTheresSubItem(EzEnvironmentConstants::get('ROOT_CONTENT_NAME'), $contentName, $contentType);
     }
 
     /**

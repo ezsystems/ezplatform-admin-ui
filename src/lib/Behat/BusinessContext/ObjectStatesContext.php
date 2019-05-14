@@ -22,7 +22,7 @@ class ObjectStatesContext extends BusinessContext
     {
         $objectStateGroupPage = PageObjectFactory::createPage($this->utilityContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
         $objectStateGroupPage->verifyIsLoaded();
-        $objectStateExists = $objectStateGroupPage->adminLists['Object States']->table->isElementInTable($objectStateName);
+        $objectStateExists = $objectStateGroupPage->adminLists['Object States']->table->isElementOnCurrentPage($objectStateName);
 
         Assert::assertTrue(
             $objectStateExists,
@@ -38,7 +38,7 @@ class ObjectStatesContext extends BusinessContext
         $objectStateGroupPage = PageObjectFactory::createPage($this->utilityContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
         $objectStateGroupPage->verifyIsLoaded();
         if (!$objectStateGroupPage->isListEmpty('Object States')) {
-            $objectStateExists = $objectStateGroupPage->adminLists['Object States']->table->isElementInTable($objectStateName);
+            $objectStateExists = $objectStateGroupPage->adminLists['Object States']->table->isElementOnCurrentPage($objectStateName);
 
             Assert::assertFalse(
                 $objectStateExists,
