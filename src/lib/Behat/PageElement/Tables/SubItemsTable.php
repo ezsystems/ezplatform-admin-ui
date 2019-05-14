@@ -104,7 +104,7 @@ class SubItemsTable extends Table
      *
      * @return bool
      */
-    public function isElementInTable(string $name, ?string $contentType = null): bool
+    public function isElementOnCurrentPage(string $name, ?string $contentType = null): bool
     {
         return (bool) $this->getElementPositionInTable($name, $contentType);
     }

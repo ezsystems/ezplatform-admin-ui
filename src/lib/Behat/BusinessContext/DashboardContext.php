@@ -63,6 +63,6 @@ class DashboardContext extends BusinessContext
             return false;
         }
 
-        return $dashboardPage->dashboardTable->isElementInTable($draftName);
+        return $dashboardPage->dashboardTable->isElementOnCurrentPage($draftName);
     }
 }

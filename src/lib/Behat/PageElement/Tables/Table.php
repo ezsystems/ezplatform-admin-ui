@@ -9,6 +9,8 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 use Behat\Mink\Element\TraversableElement;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Element;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Pagination;
 
 abstract class Table extends Element
 {
@@ -112,8 +114,27 @@ abstract class Table extends Element
      *
      * @return bool
      */
-    public function isElementInTable(string $name): bool
+    public function isElementOnCurrentPage(string $name): bool
     {
         return $this->context->getElementByText($name, $this->fields['listElement']) !== null;
+    }
+
+    public function isElementInTable(string $contentName): bool
+    {
+        $pagination = ElementFactory::createElement($this->context, Pagination::ELEMENT_NAME);
+
+        while (true) {
+            if ($this->isElementOnCurrentPage($contentName)) {
+                return true;
+            }
+
+            if ($pagination->isNextButtonActive()) {
+                $pagination->clickNextButton();
+            } else {
+                break;
+            }
+        }
+
+        return false;
     }
 }
