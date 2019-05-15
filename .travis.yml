@@ -1,32 +1,34 @@
+dist: trusty
 language: php
-
-matrix:
-    include:
-        - name: "Code Style Check"
-          env: CHECK_CS=1
-        - php: 7.1
-          env: PHPUNIT_CONFIG='phpunit.xml'
-        - php: 7.1
-          env:
-          - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
-          - TEST_CMD="./bin/.travis/get_behat_features.sh -p adminui -s adminui | bin/fastest -o -v \"bin/behat {} --profile=adminui --suite=adminui --no-interaction -vv --strict\""
-          - SYMFONY_ENV=behat
-          - SYMFONY_DEBUG=1
-
-cache:
-    directories:
-      - $HOME/.composer/cache
+php:
+  - 7.1
 
 env:
   global:
-    # For acceptance tests
     - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform.git"
+    - SYMFONY_ENV=behat
+    - SYMFONY_DEBUG=1
+
+cache:
+  directories:
+    - $HOME/.composer/cache
 
 # test only master and stable branches (+ Pull requests)
 branches:
-    only:
-        - master
-        - /^\d+\.\d+$/
+  only:
+    - master
+    - /^\d+\.\d+$/
+
+matrix:
+  include:
+    - name: "Code Style Check"
+      env: CHECK_CS=1
+    - name: "Unit tests"
+      env: PHPUNIT_CONFIG='phpunit.xml'
+    - name: "Admin-UI tests on Clean P"
+      env:
+      - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
+      - BEHAT_OPTS="--profile=adminui --suite=adminui"
 
 notifications:
   slack:
@@ -36,19 +38,21 @@ notifications:
     on_failure: always
     on_pull_requests: false
 
+before_install:
+  # Disable XDebug for performance
+  - phpenv config-rm xdebug.ini
+  # Get latest composer build
+  - travis_retry composer selfupdate
+  # Avoid memory issues on composer install
+  - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+
 install:
-    # Disable XDebug for performance
-    - phpenv config-rm xdebug.ini
-    # Get latest composer build
-    - travis_retry composer selfupdate
-    # Avoid memory issues on composer install
-    - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-    # Install packages if needed
-    - if [ "${CHECK_CS}" == "1" -o "${PHPUNIT_CONFIG}" != "" ]; then travis_retry composer install --prefer-dist --no-interaction --no-suggest ; fi
-    # Prepare Behat environment if needed
-    - if [ "${TEST_CMD}" != "" ]; then ./.travis/prepare_ezplatform.sh ; fi
+  # Install packages if needed
+  - if [ "${CHECK_CS}" == "1" -o "${PHPUNIT_CONFIG}" != "" ]; then travis_retry composer install --prefer-dist --no-interaction --no-suggest ; fi
+  # Prepare whole environment if needed
+  - if [ "${BEHAT_OPTS}" != "" ]; then ./.travis/prepare_ezplatform.sh ${INSTALL_EZ_INSTALL_TYPE}; fi
 
 script:
-    - if [ "${PHPUNIT_CONFIG}" != '' ]; then ./vendor/bin/phpunit -c "${PHPUNIT_CONFIG}"; fi
-    - if [ "${CHECK_CS}" == "1" ] ; then ./vendor/bin/php-cs-fixer fix -v --dry-run --show-progress=estimating ; fi
-    - if [ "${TEST_CMD}" != "" ]; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "${TEST_CMD}" ; fi
+  - if [ "${CHECK_CS}" == "1" ] ; then ./vendor/bin/php-cs-fixer fix -v --dry-run --show-progress=estimating ; fi
+  - if [ "${PHPUNIT_CONFIG}" != '' ]; then ./vendor/bin/phpunit -c "${PHPUNIT_CONFIG}"; fi
+  - if [ "${BEHAT_OPTS}" != "" ]; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "bin/ezbehat ${BEHAT_OPTS}" ; fi
