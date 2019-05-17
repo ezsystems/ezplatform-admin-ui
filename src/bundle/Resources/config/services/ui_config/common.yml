@@ -48,6 +48,8 @@ services:
             - { name: ezplatform.admin_ui.config_provider, key: 'user' }
 
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\Languages:
+        arguments:
+            $siteAccesses: '%ezpublish.siteaccess.list%'
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'languages' }
 

@@ -10,27 +10,26 @@ namespace EzSystems\EzPlatformAdminUi\Siteaccess;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 
 /**
  * Decorator for SiteaccessResolverInterface filtering out all non admin siteaccesses.
  */
 class NonAdminSiteaccessResolver implements SiteaccessResolverInterface
 {
-    /** @var SiteaccessResolver */
+    /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolver */
     private $siteaccessResolver;
 
-    /** @var ConfigResolverInterface */
-    private $configResolver;
+    /** @var string[] */
+    private $siteAccessGroups;
 
     /**
-     * @param SiteaccessResolver $siteaccessResolver
-     * @param ConfigResolverInterface $configResolver
+     * @param \EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolver $siteaccessResolver
+     * @param string[] $siteAccessGroups
      */
-    public function __construct(SiteaccessResolver $siteaccessResolver, ConfigResolverInterface $configResolver)
+    public function __construct(SiteaccessResolver $siteaccessResolver, array $siteAccessGroups)
     {
         $this->siteaccessResolver = $siteaccessResolver;
-        $this->configResolver = $configResolver;
+        $this->siteAccessGroups = $siteAccessGroups;
     }
 
     public function getSiteaccessesForLocation(
@@ -48,21 +47,15 @@ class NonAdminSiteaccessResolver implements SiteaccessResolverInterface
         return $this->filter($this->siteaccessResolver->getSiteaccesses());
     }
 
-    private function filter(array $siteaccesses)
+    private function filter(array $siteaccesses): array
     {
-        $siteaccessGroups = $this->configResolver->getParameter(
-            'groups',
-            'ezpublish',
-            'siteaccess'
-        );
-
-        if (!array_key_exists('admin_group', $siteaccessGroups)) {
+        if (!array_key_exists('admin_group', $this->siteAccessGroups)) {
             throw new BadStateException(
                 'siteaccess',
                 'Siteaccess group `admin_group` not found.'
             );
         }
 
-        return array_diff($siteaccesses, $siteaccessGroups['admin_group']);
+        return array_diff($siteaccesses, $this->siteAccessGroups['admin_group']);
     }
 }
