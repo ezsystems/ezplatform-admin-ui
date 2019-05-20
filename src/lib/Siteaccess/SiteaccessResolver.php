@@ -10,32 +10,31 @@ namespace EzSystems\EzPlatformAdminUi\Siteaccess;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 
 class SiteaccessResolver implements SiteaccessResolverInterface
 {
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
-    private $configResolver;
-
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
     /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessPreviewVoterInterface[] */
     private $siteaccessPreviewVoters;
 
+    /** @var string[] */
+    private $siteAccesses;
+
     /**
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param iterable $siteaccessPreviewVoters
+     * @param array $siteAccesses
      */
     public function __construct(
-        ConfigResolverInterface $configResolver,
         ContentService $contentService,
-        iterable $siteaccessPreviewVoters
+        iterable $siteaccessPreviewVoters,
+        array $siteAccesses
     ) {
-        $this->configResolver = $configResolver;
         $this->contentService = $contentService;
         $this->siteaccessPreviewVoters = $siteaccessPreviewVoters;
+        $this->siteAccesses = $siteAccesses;
     }
 
     /**
@@ -73,6 +72,6 @@ class SiteaccessResolver implements SiteaccessResolverInterface
 
     public function getSiteaccesses(): array
     {
-        return $this->configResolver->getParameter('list', 'ezpublish', 'siteaccess');
+        return $this->siteAccesses;
     }
 }
