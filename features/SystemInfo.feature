@@ -51,7 +51,7 @@ Feature: System info verification
         | EzPublishCoreBundle                       |
         | EzPublishIOBundle                         |
         | EzPublishLegacySearchEngineBundle         |
-        | EzPublishRestBundle                       |
+        | EzPlatformRestBundle                      |
         | EzSystemsEzPlatformSolrSearchEngineBundle |
         | EzSystemsEzSupportToolsBundle             |
         | EzSystemsPlatformHttpCacheBundle          |
