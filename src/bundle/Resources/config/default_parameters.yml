@@ -6,23 +6,23 @@ parameters:
     ezsettings.global.system_info_view:
         pjax_tab:
             composer:
-                template: '@@ezdesign/system_info//composer.html.twig'
+                template: '@@ezdesign/system_info/composer.html.twig'
                 match:
                     SystemInfo\Identifier: 'composer'
             database:
-                template: '@@ezdesign/system_info//database.html.twig'
+                template: '@@ezdesign/system_info/database.html.twig'
                 match:
                     SystemInfo\Identifier: 'database'
             hardware:
-                template: '@@ezdesign/system_info//hardware.html.twig'
+                template: '@@ezdesign/system_info/hardware.html.twig'
                 match:
                     SystemInfo\Identifier: 'hardware'
             php:
-                template: '@@ezdesign/system_info//php.html.twig'
+                template: '@@ezdesign/system_info/php.html.twig'
                 match:
                     SystemInfo\Identifier: 'php'
             symfony_kernel:
-                template: '@@ezdesign/system_info//symfony_kernel.html.twig'
+                template: '@@ezdesign/system_info/symfony_kernel.html.twig'
                 match:
                     SystemInfo\Identifier: 'symfony_kernel'
 
