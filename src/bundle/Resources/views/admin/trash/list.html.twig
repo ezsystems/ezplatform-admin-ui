@@ -18,7 +18,7 @@
 
         <div class="px-0 ez-content-container">
             <section class="container mt-5">
-                {% include '@ezdesign/parts/page_title.html.twig' with { title: 'trash.headline'|trans|desc('Trash'), iconName: 'trash' } %}
+                {% include '@ezdesign/part/page_title.html.twig' with { title: 'trash.headline'|trans|desc('Trash'), iconName: 'trash' } %}
                 {{ form_start(form_trash_item_restore, {'action': path('ezplatform.trash.restore')}) }}
                 <div class="px-4">
                     <div class="ez-table-header mt-3">
@@ -101,7 +101,7 @@
                                         <td class="ez-table__cell">{{ trash_item.contentType.name }}</td>
                                         <td class="ez-table__cell">
                                             {% if not is_parent_in_trash %}
-                                                {% include '@ezdesign/parts/path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
+                                                {% include '@ezdesign/part/path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
                                             {% else %}
                                                 <em>{{ 'trash.item.ancesor_in_trash'|trans|desc('Ancestor is in the Trash') }}</em>
                                             {% endif %}
@@ -146,7 +146,7 @@
             <div class="pt-4 px-0 bg-secondary ez-context-menu">
                 <div class="ez-sticky-container">
                     {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
-                    {{ knp_menu_render(sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
+                    {{ knp_menu_render(sidebar_right, {'template': '@ezdesign/part/menu/sidebar_right.html.twig'}) }}
                 </div>
             </div>
         {% endif %}
