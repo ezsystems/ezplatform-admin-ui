@@ -49,7 +49,7 @@
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
                     </button>
-                    {% include '@ezdesign/common/modal/bulk_delete_confirmation.html.twig' with {
+                    {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
                         'id': modal_data_target,
                         'message': 'content_type_group.modal.message'|trans|desc('Do you want to delete Content Type Group?'),
                         'data_click': '#content_type_groups_delete_delete',

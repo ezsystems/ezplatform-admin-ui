@@ -1,7 +1,7 @@
 {% trans_default_domain 'locationview' %}
 {% import _self as tab %}
-{% form_theme form_content_location_add '@ezdesign/common/form/flat_widgets.html.twig' %}
-{% form_theme form_content_location_remove '@ezdesign/common/form/flat_widgets.html.twig' %}
+{% form_theme form_content_location_add '@ezdesign/ui/form/flat_widgets.html.twig' %}
+{% form_theme form_content_location_remove '@ezdesign/ui/form/flat_widgets.html.twig' %}
 
 <section>
     {{ form(form_content_location_add, {'action': path('ezplatform.location.add')}) }}
@@ -108,7 +108,7 @@
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
-    {% include '@ezdesign/common/modal/bulk_delete_confirmation.html.twig' with {
+    {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
         'id': modal_data_target,
         'message': 'tab.locations.modal.message'|trans|desc('Do you want to delete Location?'),
         'data_click': '#' ~ form_remove.remove.vars.id,

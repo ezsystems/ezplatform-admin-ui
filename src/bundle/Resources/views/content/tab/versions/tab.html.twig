@@ -1,7 +1,7 @@
 {% trans_default_domain 'locationview' %}
 
 {% import _self as tab %}
-{% form_theme form_archived_version_restore '@ezdesign/common/form/flat_widgets.html.twig' %}
+{% form_theme form_archived_version_restore '@ezdesign/ui/form/flat_widgets.html.twig' %}
 {% form_theme form_version_remove_draft '@ezdesign/ui/form_fields.html.twig' %}
 {% form_theme form_version_remove_archived '@ezdesign/ui/form_fields.html.twig' %}
 
@@ -106,7 +106,7 @@
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
-    {% include '@ezdesign/common/modal/bulk_delete_confirmation.html.twig' with {
+    {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
     'id': modal_data_target,
     'message': 'tab.versions.modal.message'|trans|desc('Do you want to delete Versions?'),
     'data_click': '#' ~ form.remove.vars.id,

@@ -3,8 +3,8 @@
 {% extends "@ezdesign/ui/layout.html.twig" %}
 
 {% trans_default_domain 'locationview' %}
-{% form_theme form_location_copy '@ezdesign/common/form/flat_widgets.html.twig' %}
-{% form_theme form_location_move '@ezdesign/common/form/flat_widgets.html.twig' %}
+{% form_theme form_location_copy '@ezdesign/ui/form/flat_widgets.html.twig' %}
+{% form_theme form_location_move '@ezdesign/ui/form/flat_widgets.html.twig' %}
 {% if form_content_edit is defined %}
     {% form_theme form_content_edit '@ezdesign/ui/form_fields.html.twig' %}
 {% endif %}

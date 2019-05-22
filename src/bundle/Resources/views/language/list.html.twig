@@ -49,7 +49,7 @@
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
                     </button>
-                    {% include '@ezdesign/common/modal/bulk_delete_confirmation.html.twig' with {
+                    {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
                         'id': modal_data_target,
                         'message': 'language.modal.message'|trans|desc('Do you want to delete Language?'),
                         'data_click': '#languages_delete_delete',

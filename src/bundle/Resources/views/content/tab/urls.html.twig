@@ -89,7 +89,7 @@
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
             </svg>
         </button>
-        {% include '@ezdesign/common/modal/bulk_delete_confirmation.html.twig' with {
+        {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
             'id': modal_data_target,
             'message': 'tab.urls.modal.message'|trans|desc('Do you want to delete selected Custom URLs?'),
             'data_click': '#' ~ form_custom_url_remove.remove.vars.id,
