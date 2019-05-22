@@ -30,7 +30,11 @@ class ChoiceAttributeMapper extends CommonAttributeMapper implements AttributeMa
         array $customTagAttributeProperties
     ): array {
         $parentConfig = parent::mapConfig($tagName, $attributeName, $customTagAttributeProperties);
-        $parentConfig['choices'] = $customTagAttributeProperties['choices'];
+
+        $parentConfig['choices'] = [];
+        foreach ($customTagAttributeProperties['choices'] as $choice) {
+            $parentConfig['choices'][$choice] = "ezrichtext.custom_tags.{$tagName}.attributes.{$attributeName}.choices.{$choice}.label";
+        }
 
         return $parentConfig;
     }
