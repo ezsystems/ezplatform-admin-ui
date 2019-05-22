@@ -31,15 +31,20 @@ class RoleAssignmentParamConverterTest extends AbstractParamConverterTest
         $this->converter = new RoleAssignmentParamConverter($this->serviceMock);
     }
 
-    public function testApply()
+    /**
+     * @dataProvider dataProvider
+     *
+     * @param mixed $roleAssignmentId The role assignment identifier fetched from the request
+     * @param int $roleAssignmentIdToLoad The role assignment identifier used to load the role assignment
+     */
+    public function testApply($roleAssignmentId, int $roleAssignmentIdToLoad)
     {
-        $roleAssignmentId = 42;
         $valueObject = $this->createMock(RoleAssignment::class);
 
         $this->serviceMock
             ->expects($this->once())
             ->method('loadRoleAssignment')
-            ->with($roleAssignmentId)
+            ->with($roleAssignmentIdToLoad)
             ->willReturn($valueObject);
 
         $requestAttributes = [
@@ -49,8 +54,7 @@ class RoleAssignmentParamConverterTest extends AbstractParamConverterTest
         $request = new Request([], [], $requestAttributes);
         $config = $this->createConfiguration(self::SUPPORTED_CLASS, self::PARAMETER_NAME);
 
-        $this->converter->apply($request, $config);
-
+        $this->assertTrue($this->converter->apply($request, $config));
         $this->assertInstanceOf(self::SUPPORTED_CLASS, $request->attributes->get(self::PARAMETER_NAME));
     }
 
@@ -88,5 +92,14 @@ class RoleAssignmentParamConverterTest extends AbstractParamConverterTest
         $config = $this->createConfiguration(self::SUPPORTED_CLASS, self::PARAMETER_NAME);
 
         $this->converter->apply($request, $config);
+    }
+
+    public function dataProvider(): array
+    {
+        return [
+            'integer' => [42, 42],
+            'number_as_string' => ['42', 42],
+            'string' => ['42k', 42],
+        ];
     }
 }

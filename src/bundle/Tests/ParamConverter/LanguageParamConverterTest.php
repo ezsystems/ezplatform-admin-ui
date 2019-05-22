@@ -33,16 +33,20 @@ class LanguageParamConverterTest extends AbstractParamConverterTest
 
     /**
      * @covers \EzSystems\EzPlatformAdminUiBundle\ParamConverter\LanguageParamConverter::apply
+     *
+     * @dataProvider dataProvider
+     *
+     * @param mixed $languageId The language identifier fetched from the request
+     * @param int $languageIdToLoad The language identifier used to load the language
      */
-    public function testApplyForLanguageId()
+    public function testApplyForLanguageId($languageId, int $languageIdToLoad)
     {
-        $languageId = 42;
         $valueObject = $this->createMock(Language::class);
 
         $this->serviceMock
             ->expects($this->once())
             ->method('loadLanguageById')
-            ->with($languageId)
+            ->with($languageIdToLoad)
             ->willReturn($valueObject);
 
         $requestAttributes = [
@@ -52,8 +56,7 @@ class LanguageParamConverterTest extends AbstractParamConverterTest
         $request = new Request([], [], $requestAttributes);
         $config = $this->createConfiguration(self::SUPPORTED_CLASS, self::PARAMETER_NAME);
 
-        $this->converter->apply($request, $config);
-
+        $this->assertTrue($this->converter->apply($request, $config));
         $this->assertInstanceOf(self::SUPPORTED_CLASS, $request->attributes->get(self::PARAMETER_NAME));
     }
 
@@ -176,6 +179,15 @@ class LanguageParamConverterTest extends AbstractParamConverterTest
             [
                 [],
             ],
+        ];
+    }
+
+    public function dataProvider(): array
+    {
+        return [
+            'integer' => [42, 42],
+            'number_as_string' => ['42', 42],
+            'string' => ['42k', 42],
         ];
     }
 }

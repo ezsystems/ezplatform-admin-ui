@@ -31,15 +31,20 @@ class ContentTypeGroupParamConverterTest extends AbstractParamConverterTest
         $this->converter = new ContentTypeGroupParamConverter($this->serviceMock);
     }
 
-    public function testApply()
+    /**
+     * @dataProvider dataProvider
+     *
+     * @param mixed $contentTypeGroupId The identifier fetched from the request
+     * @param int $contentTypeGroupIdToLoad The identifier used to load the Content Type Group
+     */
+    public function testApply($contentTypeGroupId, int $contentTypeGroupIdToLoad)
     {
-        $contentTypeGroupId = 42;
         $valueObject = $this->createMock(ContentTypeGroup::class);
 
         $this->serviceMock
             ->expects($this->once())
             ->method('loadContentTypeGroup')
-            ->with($contentTypeGroupId)
+            ->with($contentTypeGroupIdToLoad)
             ->willReturn($valueObject);
 
         $requestAttributes = [
@@ -49,8 +54,7 @@ class ContentTypeGroupParamConverterTest extends AbstractParamConverterTest
         $request = new Request([], [], $requestAttributes);
         $config = $this->createConfiguration(self::SUPPORTED_CLASS, self::PARAMETER_NAME);
 
-        $this->converter->apply($request, $config);
-
+        $this->assertTrue($this->converter->apply($request, $config));
         $this->assertInstanceOf(self::SUPPORTED_CLASS, $request->attributes->get(self::PARAMETER_NAME));
     }
 
@@ -88,5 +92,14 @@ class ContentTypeGroupParamConverterTest extends AbstractParamConverterTest
         $config = $this->createConfiguration(self::SUPPORTED_CLASS, self::PARAMETER_NAME);
 
         $this->converter->apply($request, $config);
+    }
+
+    public function dataProvider(): array
+    {
+        return [
+            'integer' => [42, 42],
+            'number_as_string' => ['42', 42],
+            'string' => ['42k', 42],
+        ];
     }
 }
