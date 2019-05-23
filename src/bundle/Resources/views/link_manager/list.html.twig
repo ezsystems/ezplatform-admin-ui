@@ -1,19 +1,19 @@
-{% extends '@ezdesign/layout.html.twig' %}
+{% extends '@ezdesign/ui/layout.html.twig' %}
 
-{% form_theme form '@ezdesign/form_fields.html.twig'  %}
+{% form_theme form '@ezdesign/ui/form_fields.html.twig'  %}
 
 {% trans_default_domain "linkmanager" %}
 
 {% block title %}{{ 'url.list'|trans }}{% endblock %}
 
 {%- block breadcrumbs -%}
-    {% include '@ezdesign/part/breadcrumbs.html.twig' with { items: [
+    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
         { value: 'url.list'|trans|desc('Link manager') }
     ]} %}
 {%- endblock -%}
 
 {%- block page_title -%}
-    {% include '@ezdesign/part/page_title.html.twig' with {
+    {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'url.list'|trans|desc('Link manager'),
         iconName: 'link'
     } %}

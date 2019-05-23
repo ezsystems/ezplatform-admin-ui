@@ -1,7 +1,7 @@
 system:
     admin_group:
         user:
-            login_template: '@ezdesign/Security/login.html.twig'
+            login_template: '@ezdesign/account/login/index.html.twig'
 
         content_view:
             full:
@@ -12,44 +12,44 @@ system:
             preview_ezobjectrelationlist_row:
                 default:
                     controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
-                    template: '@ezdesign\field_type\preview\ezobjectrelationlist_row.html.twig'
+                    template: '@ezdesign\ui\field_type\preview\ezobjectrelationlist_row.html.twig'
                     match: true
             preview_ezimageasset:
                 default:
                     controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
-                    template: '@ezdesign\field_type\preview\ezimageasset.html.twig'
+                    template: '@ezdesign\ui\field_type\preview\ezimageasset.html.twig'
                     match: true
 
         content_edit_view:
             full:
                 ezplatform_admin_ui:
-                    template: '@ezdesign/content/content_edit/content_edit.html.twig'
+                    template: '@ezdesign/content/edit/edit.html.twig'
                     match: true
                     params:
-                        viewbaseLayout: '@ezdesign/layout.html.twig'
+                        viewbaseLayout: '@ezdesign/ui/layout.html.twig'
 
         content_create_view:
             full:
                 ezplatform_admin_ui:
-                    template: '@ezdesign/content/content_edit/content_create.html.twig'
+                    template: '@ezdesign/content/create/create.html.twig'
                     match: true
                     params:
-                        viewbaseLayout: '@ezdesign/layout.html.twig'
+                        viewbaseLayout: '@ezdesign/ui/layout.html.twig'
 
         content_translate_view:
             full:
                 ezplatform_admin_ui:
-                    template: '@ezdesign/content/content_edit/content_edit.html.twig'
+                    template: '@ezdesign/content/edit/edit.html.twig'
                     match: true
                     params:
-                        viewbaseLayout: '@ezdesign/layout.html.twig'
+                        viewbaseLayout: '@ezdesign/ui/layout.html.twig'
 
         user_settings_update_view:
             full:
                 ezplatform_admin_ui_datetime_format:
-                    template: '@ezdesign/user/settings/update_datetime_format.html.twig'
+                    template: '@ezdesign/account/settings/update_datetime_format.html.twig'
                     match:
                         Identifier: [full_datetime_format, short_datetime_format]
 
         fielddefinition_edit_templates:
-            - { template: '@ezdesign/admin/content_type/field_types.html.twig', priority: 10 }
+            - { template: '@ezdesign/content_type/field_types.html.twig', priority: 10 }

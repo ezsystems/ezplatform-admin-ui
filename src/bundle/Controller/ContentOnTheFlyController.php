@@ -120,7 +120,7 @@ class ContentOnTheFlyController extends Controller
             }
         }
 
-        return new ContentCreateOnTheFlyView('@ezdesign/content/content_on_the_fly/content_create_on_the_fly.html.twig', [
+        return new ContentCreateOnTheFlyView('@ezdesign/ui/on_the_fly/content_create_on_the_fly.html.twig', [
             'form' => $form->createView(),
             'language' => $language,
             'contentType' => $contentType,

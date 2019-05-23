@@ -38,13 +38,13 @@ services:
     ezplatform.adminui.dashboard.me:
         parent: EzSystems\EzPlatformAdminUi\Component\TwigComponent
         arguments:
-            $template: '@@ezdesign/dashboard/block/me.html.twig'
+            $template: '@@ezdesign/ui/dashboard/block/me.html.twig'
         tags:
             - { name: ezplatform.admin_ui.component, group: 'dashboard-blocks' }
 
     ezplatform.adminui.dashboard.all:
         parent: EzSystems\EzPlatformAdminUi\Component\TwigComponent
         arguments:
-            $template: '@@ezdesign/dashboard/block/all.html.twig'
+            $template: '@@ezdesign/ui/dashboard/block/all.html.twig'
         tags:
             - { name: ezplatform.admin_ui.component, group: 'dashboard-blocks' }

@@ -1,0 +1,60 @@
+{% extends "@ezdesign/user/policy/base.html.twig" %}
+
+{% form_theme form '@ezdesign/ui/form_fields.html.twig'  %}
+
+{% trans_default_domain 'role' %}
+
+{% block breadcrumbs_admin %}
+    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans|desc('Roles') },
+        { url: path('ezplatform.role.view', {roleId: role.id}), value: 'role.breadcrumb.view.identifier'|trans({ '%identifier%': role.identifier })|desc('Role "%identifier%"') },
+        { value: 'policy.breadcrumb.edit'|trans()|desc('Edit limitations') }
+    ]} %}
+{% endblock %}
+
+{% block page_title_admin %}
+    {% include '@ezdesign/ui/page_title.html.twig' with {
+        title: 'policy.view.edit.title'|trans()|desc('Edit limitations'),
+        iconName: 'roles'
+    } %}
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form) }}
+    <section class="container mt-4 px-5">
+        <div class="card ez-card">
+            <div class="ez-card__header">
+                <h5>{{ 'policy.add.policy.title'|trans|desc('Adding - Policy type') }}</h5>
+            </div>
+            <div class="ez-card__body">
+                {{ form.vars.value.module|capitalize ~ ' / ' ~ form.vars.value.function|capitalize }}
+                {{ form_widget(form.policy, {"attr": {"hidden": "hidden"}}) }}
+            </div>
+        </div>
+
+        <div class="card ez-adminsection-edit mt-4 ez-card">
+            <div class="card-header">
+                <h2>{{ 'policy.view.limitations.title'|trans|desc('Edit limitations') }}</h2>
+            </div>
+            <div class="card-body">
+                {% for limitation_form in form.limitations %}
+                    {{ include(limitation_form.vars.template, {form: limitation_form}, with_context = false) }}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {{ form_widget(form.save, {"attr": {"hidden": "hidden"}}) }}
+
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block right_sidebar %}
+    {% set policy_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.policy_edit.sidebar_right', [], {'role': role, 'save_id': form.save.vars.id}) %}
+    {{ knp_menu_render(policy_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-policy-create-with-limitation-js', null, 'ezplatform') }}
+{% endblock %}

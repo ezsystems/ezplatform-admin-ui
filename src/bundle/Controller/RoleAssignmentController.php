@@ -95,7 +95,7 @@ class RoleAssignmentController extends Controller
             new RoleAssignmentsDeleteData($role, $this->getRoleAssignmentsNumbers($assignments))
         );
 
-        return $this->render('@ezdesign/admin/role_assignment/list.html.twig', [
+        return $this->render('@ezdesign/user/role_assignment/list.html.twig', [
             'role' => $role,
             'form_role_assignments_delete' => $deleteRoleAssignmentsForm->createView(),
             'pager' => $pagerfanta,
@@ -144,7 +144,7 @@ class RoleAssignmentController extends Controller
             }
         }
 
-        return $this->render('@ezdesign/admin/role_assignment/create.html.twig', [
+        return $this->render('@ezdesign/user/role_assignment/create.html.twig', [
             'role' => $role,
             'form' => $form->createView(),
         ]);

@@ -1,0 +1,83 @@
+{% extends '@ezdesign/ui/layout.html.twig' %}
+
+{% trans_default_domain 'section' %}
+
+{% block body_class %}ez-section-view{% endblock %}
+
+{% block breadcrumbs %}
+    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.section.list'), value: 'section.list'|trans|desc('Sections') },
+        { value: 'section.view.title.identifier'|trans({ '%identifier%': section.name })|desc('Section: %identifier%') }
+    ]} %}
+{% endblock %}
+
+{% block page_title %}
+    {% include '@ezdesign/ui/page_title.html.twig' with {
+        title: 'section.view.title.identifier'|trans({ '%identifier%': section.name })|desc('Section: %identifier%'),
+        iconName: 'sections'
+    } %}
+{% endblock %}
+
+{% block content %}
+    <section class="container mt-4 px-5">
+        <header class="ez-table-header">
+            <div class="ez-table-header__headline">{{ 'section.information.header'|trans|desc('Section information') }}</div>
+
+            <div>
+                {% if can_edit %}
+                    {% set modalDataAttributes = deletable ? 'data-toggle=modal data-target=#delete-section-modal' : '' %}
+                    <button
+                        type="button"
+                        class="btn btn-danger {% if not deletable %}disabled{% endif %}"
+                        {{ modalDataAttributes }}
+                        title="{{ 'section.action.delete'|trans|desc('Delete Section') }}">
+                        <svg class="ez-icon">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        </svg>
+                    </button>
+                    {% if deletable %}
+                        {% include '@ezdesign/section/modal/delete_confirmation.html.twig' with {'form': form_section_delete} %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </header>
+
+        <table class="ez-table table">
+            <thead>
+            <tr>
+                <th>{{ 'section.name'|trans|desc('Name') }}</th>
+                <th>{{ 'section.identifier'|trans|desc('Identifier') }}</th>
+                <th>{{ 'section.id'|trans|desc('ID') }}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <td class="ez-table__cell">{{ section.name }}</td>
+            <td class="ez-table__cell">{{ section.identifier }}</td>
+            <td class="ez-table__cell">{{ section.id }}</td>
+            <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                {% if can_edit %}
+                    <a
+                        href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
+                        title="{{ 'section.edit'|trans|desc('Edit') }}"
+                        class="btn btn-icon mx-2">
+                        <svg class="ez-icon ez-icon-edit">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+            </td>
+            </tbody>
+        </table>
+    </section>
+
+    {{ render(controller('EzPlatformAdminUiBundle:Section:viewSectionContent', {
+        'section': section,
+        'page': app.request.query.getInt('page', 1)
+    })) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-section-view-js', null, 'ezplatform') }}
+{% endblock %}

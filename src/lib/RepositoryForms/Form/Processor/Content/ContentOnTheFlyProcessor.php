@@ -78,7 +78,7 @@ class ContentOnTheFlyProcessor implements EventSubscriberInterface
 
         $event->setResponse(
             new Response(
-                $this->twig->render('@ezdesign/content/content_on_the_fly/content_create_response.html.twig', [
+                $this->twig->render('@ezdesign/ui/on_the_fly/content_create_response.html.twig', [
                     'locationId' => $content->contentInfo->mainLocationId,
                 ])
             )

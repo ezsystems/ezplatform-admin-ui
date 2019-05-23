@@ -1,11 +1,11 @@
 {% trans_default_domain 'locationview' %}
 {% import _self as tab %}
-{% form_theme form_content_location_add '@ezdesign/part/form/flat_widgets.html.twig' %}
-{% form_theme form_content_location_remove '@ezdesign/part/form/flat_widgets.html.twig' %}
+{% form_theme form_content_location_add '@ezdesign/ui/form/flat_widgets.html.twig' %}
+{% form_theme form_content_location_remove '@ezdesign/ui/form/flat_widgets.html.twig' %}
 
 <section>
     {{ form(form_content_location_add, {'action': path('ezplatform.location.add')}) }}
-    {% include '@ezdesign/part/table_header.html.twig' with {
+    {% include '@ezdesign/ui/table_header.html.twig' with {
         headerText: 'tab.locations.content_locations'|trans()|desc('Content locations'),
         tools: tab.table_header_tools(form_content_location_add, form_content_location_remove, can_add)
     } %}
@@ -32,7 +32,7 @@
                             {{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'disabled': not location.canDelete}}) }}
                         </td>
                         <td class="ez-table__cell align-middle">
-                            {% include '@ezdesign/part/path.html.twig' with {'locations': location.pathLocations} %}
+                            {% include '@ezdesign/ui/location_path.html.twig' with {'locations': location.pathLocations} %}
                         </td>
                         <td class="ez-table__cell align-middle">{{ location.childCount }}</td>
                         <td class="ez-table__cell">
@@ -108,7 +108,7 @@
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
-    {% include '@ezdesign/bulk_delete_confirmation_modal.html.twig' with {
+    {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
         'id': modal_data_target,
         'message': 'tab.locations.modal.message'|trans|desc('Do you want to delete Location?'),
         'data_click': '#' ~ form_remove.remove.vars.id,

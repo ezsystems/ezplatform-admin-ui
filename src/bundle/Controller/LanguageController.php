@@ -97,7 +97,7 @@ class LanguageController extends Controller
             new LanguagesDeleteData($this->getLanguagesNumbers($languageList))
         );
 
-        return $this->render('@ezdesign/admin/language/list.html.twig', [
+        return $this->render('@ezdesign/language/list.html.twig', [
             'pager' => $pagerfanta,
             'form_languages_delete' => $deleteLanguagesForm->createView(),
             /* @deprecated since version 2.2, to be removed in 3.0. Use 'can_administrate' instead. */
@@ -121,7 +121,7 @@ class LanguageController extends Controller
             new LanguageDeleteData($language)
         );
 
-        return $this->render('@ezdesign/admin/language/view.html.twig', [
+        return $this->render('@ezdesign/language/index.html.twig', [
             'language' => $language,
             'deleteForm' => $deleteForm->createView(),
             /* @deprecated since version 2.2, to be removed in 3.0. Use 'can_administrate' instead. */
@@ -239,7 +239,7 @@ class LanguageController extends Controller
             }
         }
 
-        return $this->render('@ezdesign/admin/language/create.html.twig', [
+        return $this->render('@ezdesign/language/create.html.twig', [
             'form' => $form->createView(),
             'actionUrl' => $this->generateUrl('ezplatform.language.create'),
         ]);
@@ -277,7 +277,7 @@ class LanguageController extends Controller
             }
         }
 
-        return $this->render('@ezdesign/admin/language/edit.html.twig', [
+        return $this->render('@ezdesign/language/edit.html.twig', [
             'form' => $form->createView(),
             'actionUrl' => $this->generateUrl('ezplatform.language.edit', ['languageId' => $language->id]),
             'language' => $language,

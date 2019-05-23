@@ -118,7 +118,7 @@ class PolicyController extends Controller
             new PoliciesDeleteData($role, $this->getPoliciesNumbers($policies))
         );
 
-        return $this->render('@ezdesign/admin/policy/list.html.twig', [
+        return $this->render('@ezdesign/user/policy/list.html.twig', [
             'form_policies_delete' => $deletePoliciesForm->createView(),
             'is_editable' => $isEditable,
             'role' => $role,
@@ -196,7 +196,7 @@ class PolicyController extends Controller
             }
         }
 
-        return $this->render('@ezdesign/admin/policy/add.html.twig', [
+        return $this->render('@ezdesign/user/policy/add.html.twig', [
             'role' => $role,
             'form' => $form->createView(),
         ]);
@@ -271,7 +271,7 @@ class PolicyController extends Controller
             }
         }
 
-        return $this->render('@ezdesign/admin/policy/edit.html.twig', [
+        return $this->render('@ezdesign/user/policy/edit.html.twig', [
             'role' => $role,
             'policy' => $policy,
             'form' => $form->createView(),
@@ -321,7 +321,7 @@ class PolicyController extends Controller
             }
         }
 
-        return $this->render('@ezdesign/admin/policy/create_with_limitation.html.twig', [
+        return $this->render('@ezdesign/user/policy/create_with_limitation.html.twig', [
             'role' => $role,
             'form' => $form->createView(),
         ]);

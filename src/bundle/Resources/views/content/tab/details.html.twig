@@ -1,8 +1,8 @@
 {% trans_default_domain 'locationview' %}
 
-{% include '@ezdesign/part/table_header.html.twig' with { headerText: 'tab.details.content_details'|trans()|desc('Content details') } %}
+{% include '@ezdesign/ui/table_header.html.twig' with { headerText: 'tab.details.content_details'|trans()|desc('Content details') } %}
 
-{% form_theme form_location_update '@ezdesign/form_fields.html.twig' %}
+{% form_theme form_location_update '@ezdesign/ui/form_fields.html.twig' %}
 
 <div class="ez-scrollable-table-wrapper">
     <table class="table">
@@ -43,7 +43,7 @@
     </table>
 </div>
 
-{% include '@ezdesign/part/table_header.html.twig' with { headerText: 'tab.details.technical_details'|trans()|desc('Technical details') } %}
+{% include '@ezdesign/ui/table_header.html.twig' with { headerText: 'tab.details.technical_details'|trans()|desc('Technical details') } %}
 
 <div class="ez-scrollable-table-wrapper">
     <table class="table">
@@ -67,7 +67,7 @@
 </div>
 
 {% if can_see_section %}
-    {% include '@ezdesign/part/table_header.html.twig' with { headerText: 'tab.details.section_details'|trans()|desc('Section details') } %}
+    {% include '@ezdesign/ui/table_header.html.twig' with { headerText: 'tab.details.section_details'|trans()|desc('Section details') } %}
 
     <div class="ez-scrollable-table-wrapper">
         <table class="table">
@@ -82,7 +82,7 @@
                 <td>{{ section.name }}</td>
                 <td>
                     {% if form_assign_section %}
-                        {% form_theme form_assign_section '@ezdesign/form_fields.html.twig' %}
+                        {% form_theme form_assign_section '@ezdesign/ui/form_fields.html.twig' %}
 
                         {{ form_start(form_assign_section, {
                             'action': path('ezplatform.location.assign_section'),
@@ -101,7 +101,7 @@
     </div>
 {% endif %}
 
-{% include '@ezdesign/part/table_header.html.twig' with { headerText: 'tab.details.state_details'|trans()|desc('State details') } %}
+{% include '@ezdesign/ui/table_header.html.twig' with { headerText: 'tab.details.state_details'|trans()|desc('State details') } %}
 
 <div class="ez-scrollable-table-wrapper">
     <table class="table">
@@ -119,7 +119,7 @@
                 <td>{{ objectState.name }}</td>
                 <td>
                     {% if can_assign and form_state_update[objectState.objectStateGroup.id].objectState.vars.choices|length != 0 %}
-                        {% form_theme form_state_update[objectState.objectStateGroup.id] '@ezdesign/form_fields.html.twig' %}
+                        {% form_theme form_state_update[objectState.objectStateGroup.id] '@ezdesign/ui/form_fields.html.twig' %}
                         {{ form_start(form_state_update[objectState.objectStateGroup.id], {
                             'method': 'POST',
                             'action': path('ezplatform.object_state.contentstate.update', {
@@ -141,7 +141,7 @@
     </table>
 </div>
 
-{% include '@ezdesign/part/table_header.html.twig' with {
+{% include '@ezdesign/ui/table_header.html.twig' with {
     headerText: 'tab.details.sub_items_sorting_order'|trans|desc('Sub-items sorting order'),
     ground: 'ground-base'
 } %}

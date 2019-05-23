@@ -166,7 +166,7 @@ class TrashController extends Controller
             new TrashEmptyData(true)
         );
 
-        return $this->render('@ezdesign/admin/trash/list.html.twig', [
+        return $this->render('@ezdesign/trash/list.html.twig', [
             'can_delete' => $this->isGranted(new Attribute('content', 'remove')),
             'can_restore' => $this->isGranted(new Attribute('content', 'restore')),
             'can_cleantrash' => $this->isGranted(new Attribute('content', 'cleantrash')),

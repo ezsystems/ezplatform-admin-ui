@@ -1,0 +1,62 @@
+{% extends viewbaseLayout is defined ? viewbaseLayout : '@ezdesign/ui/layout.html.twig' %}
+
+{% set default_form_templates = admin_ui_config.contentEditFormTemplates %}
+{% set form_templates = form_templates is defined ? default_form_templates|merge(form_templates) : default_form_templates %}
+
+{% trans_default_domain 'content_edit' %}
+{% form_theme form with form_templates %}
+
+{% block body_class %}ez-standalone-page ez-content-edit{% endblock %}
+
+{% block navigation %}{% endblock %}
+
+{% block content %}
+    <div class="row align-items-stretch ez-main-row">
+        {% block left_sidebar %}{% endblock left_sidebar %}
+        <div class="container px-0 pb-4 mt-3 ez-content-edit-container">
+            {% block close_button %}{% endblock %}
+            {% block details %}{% endblock %}
+
+            {% block form_before %}{% endblock %}
+
+            {% block form %}
+                {{ form_start(form, {'attr': {'class': 'ez-form-validate'}}) }}
+
+                {% block form_fields %}
+                    {% for field in form.fieldsData if not field.rendered -%}
+                        {% if field.value is defined %}
+                            {{- form_widget(field) -}}
+                        {% else %}
+                            <div>
+                                {{- form_label(field) -}}
+                                <p class="non-editable">
+                                    {{ "content.field.non_editable"|trans|desc('Field type is not editable') }}
+                                </p>
+                                {% do field.setRendered() %}
+                            </div>
+                        {% endif %}
+                    {%- endfor %}
+                {% endblock %}
+
+                {{ form_end(form) }}
+            {% endblock %}
+
+            {% block form_after %}{% endblock %}
+        </div>
+        {% block right_sidebar_wrapper %}
+            <div class="pt-4 px-0 bg-secondary ez-context-menu">
+                <div class="ez-sticky-container">
+                    {% block right_sidebar %}{% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {% include '@ezdesign/content/edit/javascripts.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {% include '@ezdesign/content/edit/stylesheets.html.twig' %}
+{% endblock %}

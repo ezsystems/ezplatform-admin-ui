@@ -1,0 +1,47 @@
+{% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
+
+<div class="modal fade ez-modal ez-modal--trash-container" id="trash-container-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ 'trash_container.modal.header'|trans|desc('Deleting content') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg class="ez-icon ez-icon--medium" aria-hidden="true">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="ez-modal-body__main">
+                    {{ 'trash_container.modal.message_main'|trans({'%content_name%': content_name})|desc('Deleting %content_name% will also delete its sub-items, under its location(s). To confirm, please check below') }}
+                </p>
+                {{ form_start(form, {
+                    'action': path('ezplatform.location.trash_container'),
+                    'attr' : {
+                        'class' : 'ez-toggle-btn-state-checkbox',
+                        'data-toggle-button-id' : '#location_trash_container_trash',
+                        'data-has-asset': has_asset,
+                        'data-has-unique-asset': has_unique_asset
+                    },
+                }) }}
+                {{ form_widget(form.trashContainer) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark btn--no" data-dismiss="modal">
+                    {{ 'trash.form.cancel'|trans|desc('Cancel') }}
+                </button>
+                {{ form_widget(form.trash, {
+                    'attr': {
+                        'class': 'btn-danger',
+                        'disabled' : 'disabled'
+                    }
+                }) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-modal-location-trash-container-js', null, 'ezplatform') }}
+{% endblock %}
