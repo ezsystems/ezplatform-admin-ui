@@ -8,9 +8,15 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Permission;
 
+use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\LocationLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\ParentContentTypeLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\ParentDepthLimitation;
@@ -18,7 +24,9 @@ use eZ\Publish\API\Repository\Values\User\Limitation\ParentOwnerLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\ParentUserGroupLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\SubtreeLimitation;
+use eZ\Publish\API\Repository\Values\User\LookupLimitationResult;
 use eZ\Publish\API\Repository\Values\User\User;
+use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
 
 class PermissionChecker implements PermissionCheckerInterface
 {
@@ -33,16 +41,40 @@ class PermissionChecker implements PermissionCheckerInterface
     /** @var array */
     private $flattenArrayOfLimitations;
 
+    /** @var \eZ\Publish\API\Repository\LocationService */
+    private $locationService;
+
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    private $contentTypeService;
+
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
+
+    /** @var \eZ\Publish\API\Repository\LanguageService */
+    private $languageService;
+
     /**
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
      */
     public function __construct(
         PermissionResolver $permissionResolver,
-        UserService $userService
+        UserService $userService,
+        LocationService $locationService,
+        ContentService $contentService,
+        ContentTypeService $contentTypeService,
+        LanguageService $languageService
     ) {
         $this->permissionResolver = $permissionResolver;
         $this->userService = $userService;
+        $this->locationService = $locationService;
+        $this->contentTypeService = $contentTypeService;
+        $this->contentService = $contentService;
+        $this->languageService = $languageService;
     }
 
     /**
@@ -159,6 +191,27 @@ class PermissionChecker implements PermissionCheckerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getContentCreateLimitations(Location $parentLocation): LookupLimitationResult
+    {
+        $contentType = $this->contentTypeService->loadContentType($parentLocation->contentInfo->contentTypeId);
+        $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $parentLocation->contentInfo->mainLanguageCode);
+        $contentCreateStruct->sectionId = $parentLocation->contentInfo->sectionId;
+        $locationCreateStruct = $this->locationService->newLocationCreateStruct($parentLocation->id);
+
+        $versionBuilder = new VersionBuilder();
+        $versionBuilder->translateToAnyLanguageOf($this->getActiveLanguageCodes());
+        $versionBuilder->createFromAnyContentTypeOf($this->getContentTypeIds());
+
+        return $this->permissionResolver->lookupLimitations('content', 'create',
+            $contentCreateStruct,
+            [$versionBuilder->build(), $locationCreateStruct],
+            [Limitation::CONTENTTYPE, Limitation::LANGUAGE]
+        );
+    }
+
+    /**
      * This method should only be used for very specific use cases. It should be used in a content cases
      * where assignment limitations are not relevant.
      *
@@ -235,5 +288,38 @@ class PermissionChecker implements PermissionCheckerInterface
         } while (\count($userGroups) === self::USER_GROUPS_LIMIT);
 
         return $allUserGroups;
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getActiveLanguageCodes(): array
+    {
+        $filter = array_filter(
+            $this->languageService->loadLanguages(),
+            function (Language $language) {
+                return $language->enabled;
+            }
+        );
+
+        return array_column($filter, 'languageCode');
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getContentTypeIds(): array
+    {
+        $contentTypeIds = [];
+
+        $contentTypeGroups = $this->contentTypeService->loadContentTypeGroups();
+        foreach ($contentTypeGroups as $contentTypeGroup) {
+            $contentTypes = $this->contentTypeService->loadContentTypes($contentTypeGroup);
+            foreach ($contentTypes as $contentType) {
+                $contentTypeIds[] = $contentType->id;
+            }
+        }
+
+        return $contentTypeIds;
     }
 }
