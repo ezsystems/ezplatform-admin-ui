@@ -18,14 +18,10 @@ class AlloyEditor implements ProviderInterface
     /** @var array */
     private $alloyEditorConfiguration;
 
-    /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
-    /**
-     * @var \EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\OnlineEditorConfigMapper
-     */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\OnlineEditorConfigMapper */
     private $onlineEditorConfigMapper;
 
     /**

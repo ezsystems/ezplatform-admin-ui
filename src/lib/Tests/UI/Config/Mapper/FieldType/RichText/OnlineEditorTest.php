@@ -14,9 +14,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class OnlineEditorTest extends TestCase
 {
-    /**
-     * @var \EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\OnlineEditorConfigMapper
-     */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\OnlineEditorConfigMapper */
     private $mapper;
 
     public function setUp()

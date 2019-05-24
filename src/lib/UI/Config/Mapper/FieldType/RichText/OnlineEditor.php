@@ -15,14 +15,10 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class OnlineEditor implements OnlineEditorConfigMapper
 {
-    /**
-     * @var \Symfony\Component\Translation\TranslatorInterface
-     */
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $translationDomain;
 
     /**
