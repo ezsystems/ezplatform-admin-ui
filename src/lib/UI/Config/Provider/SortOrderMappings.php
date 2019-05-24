@@ -14,7 +14,7 @@ use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 /**
  * Provides information about mapping between serialized sort order and the value accepted by sort clause.
  *
- * @see \eZ\Publish\Core\REST\Common\Output\ValueObjectVisitor::serializeSortOrder
+ * @see \EzSystems\EzPlatformRest\Output\ValueObjectVisitor::serializeSortOrder
  */
 class SortOrderMappings implements ProviderInterface
 {

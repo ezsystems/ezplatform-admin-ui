@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\REST\Value\ContentTree;
 
-use eZ\Publish\Core\REST\Common\Value as RestValue;
+use EzSystems\EzPlatformRest\Value as RestValue;
 
 class LoadSubtreeRequestNode extends RestValue
 {

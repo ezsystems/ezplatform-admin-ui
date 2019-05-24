@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Controller\Content;
 
 use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\Core\REST\Common\Message;
-use eZ\Publish\Core\REST\Server\Controller as RestController;
+use EzSystems\EzPlatformRest\Message;
+use EzSystems\EzPlatformRest\Server\Controller as RestController;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Root;

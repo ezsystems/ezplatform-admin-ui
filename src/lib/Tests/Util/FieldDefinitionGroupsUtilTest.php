@@ -7,7 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Tests\Util;
 
 use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
-use eZ\Publish\Core\REST\Client\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use EzSystems\EzPlatformAdminUi\Util\FieldDefinitionGroupsUtil;
 use PHPUnit\Framework\TestCase;
 

@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values;
 
-use eZ\Publish\Core\REST\Common\Value as RestValue;
-use eZ\Publish\Core\REST\Server\Values\RestContent;
-use eZ\Publish\Core\REST\Server\Values\RestLocation;
+use EzSystems\EzPlatformRest\Value as RestValue;
+use EzSystems\EzPlatformRest\Server\Values\RestContent;
+use EzSystems\EzPlatformRest\Server\Values\RestLocation;
 
 class SubitemsRow extends RestValue
 {
