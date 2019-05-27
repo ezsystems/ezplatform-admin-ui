@@ -32,11 +32,11 @@
                 <div class="ez-header">
                     <div class="container">
                         {% set items = [] %}
-                        {% for pathLocation in pathLocations %}
+                        {% for path_location in path_locations %}
                             {% if not loop.last %}
                                 {% set items = items|merge([{
-                                    'value': pathLocation.contentInfo.name,
-                                    'url': path('_ezpublishLocation', {'locationId': pathLocation.id})
+                                    'value': path_location.contentInfo.name,
+                                    'url': path('_ezpublishLocation', {'locationId': path_location.id})
                                 }]) %}
                             {% endif %}
                         {% endfor %}
