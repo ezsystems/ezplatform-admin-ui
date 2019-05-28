@@ -106,6 +106,8 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * @return {Object} The rendered select.
      */
     renderSelect(config, attrName) {
+        this.choicesLabel = config.choicesLabel;
+
         return (
             <div className="attribute__wrapper">
                 <label className="attribute__label form-control-label">{config.label}</label>
@@ -114,7 +116,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                     value={this.state.values[attrName].value}
                     onChange={this.updateValues.bind(this)}
                     data-attr-name={attrName}>
-                    {Object.entries(config.choices).map(this.renderChoice.bind(this))}
+                    {config.choices.map(this.renderChoice.bind(this))}
                 </select>
             </div>
         );
@@ -124,11 +126,11 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * Renders the option.
      *
      * @method renderChoice
-     * @param {Array} choice
+     * @param {String} choice
      * @return {Object} The rendered option.
      */
-    renderChoice([value, label]) {
-        return <option value={value}>{label}</option>;
+    renderChoice(choice) {
+        return <option value={choice}>{this.choicesLabel[choice]}</option>;
     }
 
     /**
