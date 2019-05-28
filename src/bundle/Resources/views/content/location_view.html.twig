@@ -45,8 +45,8 @@
 
                         {% include '@ezdesign/ui/page_title.html.twig' with {
                             title: content.name,
-                            icon_name: contentType.identifier,
-                            content_type_name: contentType.name
+                            icon_name: content_type.identifier,
+                            content_type_name: content_type.name
                         } %}
 
                         {% if location.hidden or location.invisible %}
@@ -64,7 +64,7 @@
                         {{ ez_platform_tabs('location-view', {
                             'content': content,
                             'location': location,
-                            'contentType': contentType,
+                            'contentType': content_type,
                             'draft_pagination_params': draft_pagination_params,
                             'custom_urls_pagination_params': custom_urls_pagination_params,
                             'system_urls_pagination_params': system_urls_pagination_params,
@@ -73,7 +73,7 @@
                             'is_location_visible': is_location_visible,
                         }, '@ezdesign/ui/tab/location_view.html.twig') }}
 
-                        {% if contentType.isContainer %}
+                        {% if content_type.isContainer %}
                         {{ form_start(form_subitems_content_edit, { 'action': path('ezplatform.content.edit'), 'attr': { 'hidden': 'hidden' }}) }}
                         {{ form_end(form_subitems_content_edit) }}
                         <div class="container px-5">
@@ -95,7 +95,7 @@
         </div>
         <div class="pt-4 px-0 bg-secondary ez-context-menu">
             <div class="ez-sticky-container">
-                {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': contentType}) %}
+                {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': content_type}) %}
                 {{ knp_menu_render(content_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 
                 <div class="ez-extra-actions-container">
@@ -123,7 +123,7 @@
                 {% include '@ezdesign/content/modal/location_trash_with_single_asset.html.twig' with {
                     'form': form_location_trash_with_single_asset,
                     'content_name': content.name,
-                    'content_type': contentType.name
+                    'content_type': content_type.name
                 } only %}
             {% endif %}
             {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}

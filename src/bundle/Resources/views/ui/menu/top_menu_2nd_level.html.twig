@@ -1,10 +1,10 @@
 {% extends '@ezdesign/ui/menu/top_menu_base.html.twig' %}
 
 {% block root %}
-    {% set listAttributes = item.childrenAttributes %}
-    {% set currentItem = item %}
+    {% set list_attributes = item.childrenAttributes %}
+    {% set current_item = item %}
     <div class="tab-content mx-4">
-        {% for child in currentItem.children %}
+        {% for child in current_item.children %}
             <div role="tabpanel"
                  class="tab-pane fade{{ matcher.isAncestor(child, options.matchingDepth) ? ' show active' }}"
                  id="{{ child.name }}">
@@ -24,12 +24,12 @@
 
 {% block linkElement %}
     {% import 'knp_menu.html.twig' as knp_menu %}
-    {% set linkAttributes = item.linkAttributes|merge({
+    {% set link_attributes = item.linkAttributes|merge({
         'href': item.uri,
         'aria-controls': item.name,
         'class': ('nav-link' ~ (matcher.isCurrent(item) ? ' ' ~ options.currentClass|trim)) ~ (item.linkAttributes.class is defined ?  ' ' ~ item.linkAttributes.class|trim)
     }) %}
-    <a{{ knp_menu.attributes(linkAttributes) }}>
+    <a{{ knp_menu.attributes(link_attributes) }}>
         {{ block('label') }}
     </a>
 {% endblock %}
