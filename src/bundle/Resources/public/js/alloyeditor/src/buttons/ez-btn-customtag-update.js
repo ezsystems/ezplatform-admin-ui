@@ -127,8 +127,8 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * @param {Array} choice
      * @return {Object} The rendered option.
      */
-    renderChoice(choice) {
-        return <option value={choice[0]}>{choice[1]}</option>;
+    renderChoice([value, label]) {
+        return <option value={value}>{label}</option>;
     }
 
     /**
