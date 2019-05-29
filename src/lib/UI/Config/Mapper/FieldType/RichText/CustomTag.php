@@ -157,6 +157,7 @@ class CustomTag
                 continue;
             }
 
+            $transCatalogue = $this->translator->getCatalogue();
             foreach ($tagConfig['attributes'] as $attributeName => $attributeConfig) {
                 $config[$tagName]['attributes'][$attributeName]['label'] = $this->translator->trans(
                     /** @Ignore */
@@ -167,15 +168,11 @@ class CustomTag
 
                 if (isset($config[$tagName]['attributes'][$attributeName]['choicesLabel'])) {
                     foreach ($config[$tagName]['attributes'][$attributeName]['choicesLabel'] as $choice => $label) {
-                        $translatedLabel = $this->translator->trans(
-                            /** @Ignore */
-                            $label,
-                            [],
-                            $this->translationDomain
-                        );
-                        $hasTranslation = $translatedLabel !== $label;
+                        $translatedLabel = $transCatalogue->has($label, $this->translationDomain)
+                            ? $this->translator->trans($label, [], $this->translationDomain)
+                            : $choice;
 
-                        $config[$tagName]['attributes'][$attributeName]['choicesLabel'][$choice] = $hasTranslation ? $translatedLabel : $choice;
+                        $config[$tagName]['attributes'][$attributeName]['choicesLabel'][$choice] = $translatedLabel;
                     }
                 }
             }
