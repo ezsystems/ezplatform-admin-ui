@@ -124,7 +124,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * Renders the option.
      *
      * @method renderChoice
-     * @param {Array} labels
+     * @param {Object} labels
      * @param {String} choice
      * @return {Object} The rendered option.
      */
