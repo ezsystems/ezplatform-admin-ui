@@ -74,7 +74,8 @@ class ContentOnTheFlyProcessor implements EventSubscriberInterface
         }
 
         $draft = $this->contentService->createContent($data, $data->getLocationStructs());
-        $content = $this->contentService->publishVersion($draft->versionInfo);
+        $versionInfo = $draft->versionInfo;
+        $content = $this->contentService->publishVersion($versionInfo, [$versionInfo->initialLanguageCode]);
 
         $event->setResponse(
             new Response(
