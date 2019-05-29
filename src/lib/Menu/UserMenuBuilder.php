@@ -103,7 +103,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                 ],
                 'extras' => [
                     'translation_domain' => 'notifications',
-                    'template' => '@EzPlatformAdminUi/account/notifications/modal.html.twig',
+                    'template' => '@ezdesign/account/notifications/modal.html.twig',
                 ],
             ]);
 
