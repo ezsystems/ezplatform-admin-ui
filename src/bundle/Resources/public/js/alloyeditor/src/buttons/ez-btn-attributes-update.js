@@ -148,7 +148,7 @@ export default class EzBtnAttributesUpdate extends EzWidgetButton {
         const { editor, cancelExclusive } = this.props;
 
         Object.entries(attributesValues).forEach(([attribute, attributeData]) => {
-            block.setAttribute(`data-ez-attribute-${attribute}`, attributeData.value);
+            block.setAttribute(`data-ezattribute-${attribute}`, attributeData.value);
         });
 
         this.clearClasses();

@@ -64,7 +64,7 @@ export default class EzBtnAttributesEdit extends EzWidgetButton {
 
     setDefaultAttributes(block) {
         Object.entries(this.attributes).forEach(([attributeName, config]) => {
-            const attributeValue = block.getAttribute(`data-ez-attribute-${attributeName}`);
+            const attributeValue = block.getAttribute(`data-ezattribute-${attributeName}`);
 
             if (attributeValue !== null) {
                 return;
@@ -83,33 +83,33 @@ export default class EzBtnAttributesEdit extends EzWidgetButton {
     }
 
     setDefaultAttributesOnBlock(block, attributeName, value) {
-        block.setAttribute(`data-ez-attribute-${attributeName}`, value);
+        block.setAttribute(`data-ezattribute-${attributeName}`, value);
     }
 
     setDefaultAttributesOnTableRows(block, attributeName, value) {
         const rows = block.$.closest('table').querySelectorAll('tr');
 
-        rows.forEach((row) => row.setAttribute(`data-ez-attribute-${attributeName}`, value));
+        rows.forEach((row) => row.setAttribute(`data-ezattribute-${attributeName}`, value));
     }
 
     setDefaultAttributesOnTableCells(block, attributeName, value) {
         const cells = block.$.closest('table').querySelectorAll('td');
 
-        cells.forEach((cell) => cell.setAttribute(`data-ez-attribute-${attributeName}`, value));
+        cells.forEach((cell) => cell.setAttribute(`data-ezattribute-${attributeName}`, value));
     }
 
     setDefaultAttributesOnListItems(block, attributeName, value) {
         const list = block.$.closest('ul') || block.$.closest('ol');
         const listItems = list.querySelectorAll('li');
 
-        listItems.forEach((listItem) => listItem.setAttribute(`data-ez-attribute-${attributeName}`, value));
+        listItems.forEach((listItem) => listItem.setAttribute(`data-ezattribute-${attributeName}`, value));
     }
 
     getAttributesValues() {
         return Object.entries(this.attributes).reduce((total, [attributeName, config]) => {
             const block = this.findSelectedBlock();
             const defaultValue = config.defaultValue;
-            let value = block.getAttribute(`data-ez-attribute-${attributeName}`);
+            let value = block.getAttribute(`data-ezattribute-${attributeName}`);
             const isValueDefined = value !== null;
 
             if (!isValueDefined && defaultValue !== undefined) {
