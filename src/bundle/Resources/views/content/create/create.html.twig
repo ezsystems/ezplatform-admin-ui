@@ -17,7 +17,7 @@
         </h1>
 
         <div class="small">
-            {{ content_type.name }} / Parent Location ID: {{ location.id }}
+            {{ content_type.name }} / Parent Location ID: {{ parent_location.id }}
         </div>
         <div class="ez-content-item__errors-wrapper" hidden>
             {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Looks like something went wrong. Please check for required fields or errors and correct them') }}
@@ -45,7 +45,7 @@
 
 {% block right_sidebar %}
     {% set content_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_create.sidebar_right', [], {
-        'parent_location': location,
+        'parent_location': parent_location,
         'content_type': content_type,
         'language': language,
         'content_create_struct': content_create_struct
@@ -54,12 +54,12 @@
 {% endblock %}
 
 {% block close_button %}
-    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': location.id}) }}"></a>
+    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': parent_location.id}) }}"></a>
 {% endblock %}
 
 {% block form_before %}
     {{ ezplatform_admin_ui_component_group('content-create-form-before', {
-        'parent_location': location,
+        'parent_location': parent_location,
         'content_type': content_type,
         'language': language
     }) }}
@@ -67,7 +67,7 @@
 
 {% block form_after %}
     {{ ezplatform_admin_ui_component_group('content-create-form-after', {
-        'parent_location': location,
+        'parent_location': parent_location,
         'content_type': content_type,
         'language': language
     }) }}
