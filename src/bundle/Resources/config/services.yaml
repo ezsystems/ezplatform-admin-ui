@@ -21,6 +21,7 @@ imports:
     - { resource: services/rest.yaml }
     - { resource: services/permissions.yaml }
     - { resource: services/forms.yaml }
+    - { resource: services/strategies.yaml }
 
 services:
     _defaults:
