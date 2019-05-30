@@ -16,5 +16,8 @@ services:
 
     EzSystems\EzPlatformAdminUi\Translation\Extractor\NotificationTranslationExtractor:
         parent: jms_translation.extractor.file.default_php_extractor
+        autowire: false
+        autoconfigure: false
+        public: false
         tags:
             - { name: jms_translation.file_visitor }
