@@ -17,7 +17,7 @@ class Environment
     private $serviceContainer;
 
     /** @var array Directories expected in directory where database restoring script can be run - root directory */
-    private $expectedDirectories = ['vendor', 'var', 'web', 'src', 'bin'];
+    private $expectedDirectories = ['vendor', 'var', 'public', 'src', 'bin'];
 
     /** @var array Names of available installer services in Studio */
     private $installerServices = ['platform' => 'ezplatform.installer.clean_installer',
