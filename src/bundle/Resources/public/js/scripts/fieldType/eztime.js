@@ -112,6 +112,7 @@
         window.flatpickr(flatPickrInput, Object.assign({}, timeConfig, {
             enableSeconds,
             onChange: updateInputValue.bind(null, sourceInput),
+            onClose: updateInputValue.bind(null, sourceInput),
             dateFormat: enableSeconds ? 'H:i:S' : 'H:i',
             defaultDate
         }));
