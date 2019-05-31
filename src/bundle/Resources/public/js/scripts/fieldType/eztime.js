@@ -116,6 +116,7 @@
             ...timeConfig,
             enableSeconds,
             onChange: updateInputValue.bind(null, sourceInput),
+            onClose: updateInputValue.bind(null, sourceInput),
             defaultDate,
         });
 
