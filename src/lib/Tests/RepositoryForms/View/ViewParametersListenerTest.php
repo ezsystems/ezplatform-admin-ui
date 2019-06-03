@@ -68,7 +68,7 @@ class ViewParametersListenerTest extends TestCase
         $viewParametersListener = new ViewParametersListener($locationService, $userService);
         $viewParametersListener->setContentEditViewTemplateParameters($event);
 
-        $this->assertSame($locations, $contentView->getParameter('parentLocations'));
+        $this->assertSame($locations, $contentView->getParameter('parent_locations'));
     }
 
     /**
@@ -97,7 +97,7 @@ class ViewParametersListenerTest extends TestCase
         $contentView->setParameters([
             'content' => $content,
             'location' => $location,
-            'parentLocations' => [],
+            'parent_locations' => [],
         ]);
 
         $event = new PreContentViewEvent($contentView);
@@ -117,8 +117,8 @@ class ViewParametersListenerTest extends TestCase
         $viewParametersListener = new ViewParametersListener($locationService, $userService);
         $viewParametersListener->setContentEditViewTemplateParameters($event);
 
-        $this->assertSame([], $contentView->getParameter('parentLocations'));
-        $this->assertSame(reset($parentLocations), $contentView->getParameter('parentLocation'));
+        $this->assertSame([], $contentView->getParameter('parent_locations'));
+        $this->assertSame(reset($parentLocations), $contentView->getParameter('parent_location'));
     }
 
     public function testSetViewTemplateParametersWithoutContentEditViewInstance()

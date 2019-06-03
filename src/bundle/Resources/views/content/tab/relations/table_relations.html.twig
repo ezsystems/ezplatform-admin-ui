@@ -16,7 +16,7 @@
             {% set destination = relation.destinationContentInfo %}
             <tr>
                 <td><a href="{{ path('_ezpublishLocation', { 'locationId': destination.mainLocationId }) }}">{{ destination.name }}</a></td>
-                <td>{{ contentTypes[destination.contentTypeId].name }}</td>
+                <td>{{ content_types[destination.contentTypeId].name }}</td>
                 <td>
                     {{ macros.relation_type(relation) }}
                     {% if (relation.relationFieldDefinitionName) %}

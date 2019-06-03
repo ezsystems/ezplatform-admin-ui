@@ -92,7 +92,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
     public function createStructure(array $options): ItemInterface
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\Location $parentLocation */
-        $parentLocation = $options['parentLocation'];
+        $parentLocation = $options['parent_location'];
         /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $options['content_type'];
         $parentContentType = $parentLocation->getContent()->getContentType();

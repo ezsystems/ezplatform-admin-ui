@@ -7,23 +7,23 @@
 {% endblock %}
 
 {% block details %}
-    <h2 class="ez-content-item-status">{{ 'creating_in_language'|trans({'%contentTypeName%': contentType.name, '%languageName%': language.name})|desc('Creating - %contentTypeName% in %languageName%') }}</h2>
+    <h2 class="ez-content-item-status">{{ 'creating_in_language'|trans({'%contentTypeName%': content_type.name, '%languageName%': language.name})|desc('Creating - %contentTypeName% in %languageName%') }}</h2>
     <h1>
-        <svg class="ez-icon ez-icon-{{ contentType.identifier }}">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ contentType.identifier }}"></use>
+        <svg class="ez-icon ez-icon-{{ content_type.identifier }}">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ content_type.identifier }}"></use>
         </svg>
-        {{ 'new_content_item'|trans({'%contentType%': contentType.name})|desc('New %contentType%') }}
+        {{ 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') }}
     </h1>
 
     <div class="small">
-        {{ contentType.name }} / Parent Location ID: {{ parentLocation.id }}
+        {{ content_type.name }} / Parent Location ID: {{ parent_location.id }}
     </div>
     <div class="ez-content-item__errors-wrapper" hidden>
         {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Looks like something went wrong. Please check for required fields or errors and correct them') }}
     </div>
     {# @todo remove if statement once getDescription() bug is resolved in kernel #}
-    {% if contentType.descriptions is not empty %}
-        <div class="small text-muted">{{ contentType.description }}</div>
+    {% if content_type.descriptions is not empty %}
+        <div class="small text-muted">{{ content_type.description }}</div>
     {% endif %}
 {% endblock %}
 
@@ -34,16 +34,16 @@
 
 {% block form_before %}
     {{ ezplatform_admin_ui_component_group('content-create-form-before', {
-        'parentLocation': parentLocation,
-        'contentType': contentType,
+        'parent_location': parent_location,
+        'content_type': content_type,
         'language': language
     }) }}
 {% endblock %}
 
 {% block form_after %}
     {{ ezplatform_admin_ui_component_group('content-create-form-after', {
-        'parentLocation': parentLocation,
-        'contentType': contentType,
+        'parent_location': parent_location,
+        'content_type': content_type,
         'language': language
     }) }}
 {% endblock %}

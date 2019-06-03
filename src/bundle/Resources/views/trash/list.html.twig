@@ -18,7 +18,7 @@
 
         <div class="px-0 ez-content-container">
             <section class="container mt-5">
-                {% include '@ezdesign/ui/page_title.html.twig' with { title: 'trash.headline'|trans|desc('Trash'), iconName: 'trash' } %}
+                {% include '@ezdesign/ui/page_title.html.twig' with { title: 'trash.headline'|trans|desc('Trash'), icon_name: 'trash' } %}
                 {{ form_start(form_trash_item_restore, {'action': path('ezplatform.trash.restore')}) }}
                 <div class="px-4">
                     <div class="ez-table-header mt-3">

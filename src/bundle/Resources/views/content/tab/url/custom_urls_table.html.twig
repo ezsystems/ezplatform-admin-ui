@@ -27,8 +27,8 @@
                 </td>
                 <td class="ez-table__cell">{{ custom_url.path }}</td>
                 <td class="ez-table__cell">
-                    {% for languageCode in custom_url.languageCodes %}
-                        {{ admin_ui_config.languages.mappings[languageCode].name }}<br>
+                    {% for language_code in custom_url.languageCodes %}
+                        {{ admin_ui_config.languages.mappings[language_code].name }}<br>
                     {% endfor %}
                 </td>
                 <td class="ez-table__cell">

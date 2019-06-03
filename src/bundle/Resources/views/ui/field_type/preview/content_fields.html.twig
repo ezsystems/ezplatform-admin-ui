@@ -431,7 +431,7 @@
         {{ render(controller('ez_content:viewAction', {
             contentId: field.value.destinationContentId,
             viewType: 'preview_ezimageasset',
-            noLayout: true,
+            no_layout: true,
             params: {
                 parameters: parameters|default({})|merge({ alternativeText: field.value.alternativeText })
             }

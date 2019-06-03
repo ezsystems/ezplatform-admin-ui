@@ -341,7 +341,7 @@ class ContentController extends Controller
             'content' => $content,
             'language_code' => $languageCode,
             'siteaccesses' => $siteaccesses,
-            'versionNo' => $versionNo ?? $content->getVersionInfo()->versionNo,
+            'version_no' => $versionNo ?? $content->getVersionInfo()->versionNo,
         ]);
     }
 

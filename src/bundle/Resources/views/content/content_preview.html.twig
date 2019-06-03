@@ -2,7 +2,7 @@
 
 {% trans_default_domain 'content_preview' %}
 
-{% set isPublished = content.contentInfo.published and content.contentInfo.mainLocationId is not null %}
+{% set is_published = content.contentInfo.published and content.contentInfo.mainLocationId is not null %}
 
 {% block body_class %}ez-content-preview{% endblock %}
 
@@ -11,7 +11,7 @@
     <div class="ez-preview">
         <div class="ez-preview__nav">
             <div class="ez-preview__item ez-preview__item--back">
-                <a href="{{ url('ez_content_draft_edit', {'contentId': content.id, 'versionNo': versionNo, 'language': language_code, 'locationId': isPublished ? location.id : null}) }}" >
+                <a href="{{ url('ez_content_draft_edit', {'contentId': content.id, 'versionNo': version_no, 'language': language_code, 'locationId': is_published ? location.id : null}) }}" >
                     <svg class="ez-icon ez-icon-back">
                         <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#caret-back"></use>
                     </svg>
@@ -41,15 +41,15 @@
             {% if siteaccesses|length > 1 %}
                 <div class="ez-preview__item ez-preview__item--siteaccess">
                     <select class="form-control">
-                        {% for previewSiteaccess in siteaccesses %}
-                            <option value="{{ path('_ezpublishPreviewContent', {'contentId': content.id, 'versionNo': versionNo, 'language': language_code, 'siteAccessName': previewSiteaccess}) }}">{{ previewSiteaccess|trans({}, 'ezplatform_siteaccess') ~ ' (' ~ previewSiteaccess ~ ')' }}</option>
+                        {% for preview_siteaccess in siteaccesses %}
+                            <option value="{{ path('_ezpublishPreviewContent', {'contentId': content.id, 'versionNo': version_no, 'language': language_code, 'siteAccessName': preview_siteaccess}) }}">{{ preview_siteaccess|trans({}, 'ezplatform_siteaccess') ~ ' (' ~ preview_siteaccess ~ ')' }}</option>
                         {% endfor %}
                     </select>
                 </div>
             {% endif %}
         </div>
         <div class="ez-preview__iframe ez-preview__iframe--desktop">
-            <iframe src="{{ url('_ezpublishPreviewContent', {'contentId': content.id, 'versionNo': versionNo, 'language': language_code, 'siteAccessName': siteaccesses|first}) }}" frameborder="0"></iframe>
+            <iframe src="{{ url('_ezpublishPreviewContent', {'contentId': content.id, 'versionNo': version_no, 'language': language_code, 'siteAccessName': siteaccesses|first}) }}" frameborder="0"></iframe>
         </div>
     </div>
 {% endblock %}

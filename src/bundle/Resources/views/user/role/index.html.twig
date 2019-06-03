@@ -15,7 +15,7 @@
 {% block page_title %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'role.view.view.title'|trans({'%identifier%': role.identifier})|desc('Role "%identifier%"'),
-        iconName: 'roles'
+        icon_name: 'roles'
     } %}
 
     <ul class="nav nav-tabs ez-nav-tabs--role px-4 ez-tabs" role="tablist">
@@ -37,14 +37,14 @@
         <div role="tabpanel" class="tab-pane active" id="policies">
             {{ render(controller('EzPlatformAdminUiBundle:Policy:list', {
                 roleId: role.id,
-                policyPage: policyPage,
+                policyPage: policy_page,
                 routeName: route_name
             })) }}
         </div>
         <div role="tabpanel" class="tab-pane" id="users-and-groups">
             {{ render(controller('EzPlatformAdminUiBundle:RoleAssignment:list', {
                 roleId: role.id,
-                assignmentPage: assignmentPage,
+                assignmentPage: assignment_page,
                 routeName: route_name
             })) }}
         </div>
