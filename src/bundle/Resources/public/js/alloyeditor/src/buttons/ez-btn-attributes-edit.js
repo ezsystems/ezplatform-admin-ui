@@ -19,11 +19,74 @@ export default class EzBtnAttributesEdit extends EzWidgetButton {
             li: this.setDefaultClassesOnListItems,
         };
     }
+
     componentDidMount() {
         const block = this.findSelectedBlock();
 
+        if (!block.$.getAttribute('data-ez-node-initialized')) {
+            this.removeClasses(block);
+            this.removeAttributes(block);
+        }
+
         this.setDefaultClasses(block);
         this.setDefaultAttributes(block);
+
+        block.$.setAttribute('data-ez-node-initialized', true);
+
+        this.beforeCommandExecHandler = this.props.editor
+            .get('nativeEditor')
+            .on('beforeCommandExec', this.toggleNodeInitialized.bind(this, block, false));
+        this.afterCommandExecHandler = this.props.editor.get('nativeEditor').on('afterCommandExec', (event) => {
+            const block = this.findSelectedBlock();
+
+            if (event.data.name !== 'removeFormat') {
+                this.toggleNodeInitialized(block, true);
+            }
+        });
+    }
+
+    toggleNodeInitialized(block, add) {
+        const methodName = add ? 'setAttribute' : 'removeAttribute';
+
+        block.$[methodName]('data-ez-node-initialized', true);
+    }
+
+    componentDidUpdate() {
+        this.block = null;
+
+        const block = this.findSelectedBlock();
+
+        if (!block.$.getAttribute('data-ez-node-initialized')) {
+            this.removeClasses(block);
+            this.removeAttributes(block);
+            this.setDefaultClasses(block);
+            this.setDefaultAttributes(block);
+
+            block.$.setAttribute('data-ez-node-initialized', true);
+        }
+    }
+
+    componentWillUnmount() {
+        this.beforeCommandExecHandler.removeListener();
+        this.afterCommandExecHandler.removeListener();
+    }
+
+    removeClasses(block) {
+        const classes = [...block.$.classList];
+
+        classes.forEach((className) => {
+            if (className !== 'is-block-focused') {
+                block.$.classList.remove(className);
+            }
+        });
+    }
+
+    removeAttributes(block) {
+        Object.values(block.$.attributes).forEach((attribute) => {
+            if (attribute.name.startsWith('data-ezattribute')) {
+                block.removeAttribute(attribute.name);
+            }
+        });
     }
 
     setDefaultClasses(block) {
@@ -128,8 +191,16 @@ export default class EzBtnAttributesEdit extends EzWidgetButton {
 
     getClassesValue() {
         const block = this.findSelectedBlock();
+        let value = block.$.classList.value
+            .split(' ')
+            .filter((className) => this.classes.choices.includes(className))
+            .join();
 
-        return block.$.classList.value.split(' ').join();
+        if (!value && !this.classes.multiple) {
+            value = this.classes.choices[0];
+        }
+
+        return value;
     }
 
     getUpdateBtnName() {

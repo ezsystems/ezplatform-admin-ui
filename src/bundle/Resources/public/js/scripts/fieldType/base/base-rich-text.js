@@ -1,5 +1,6 @@
 (function(global) {
     const eZ = (global.eZ = global.eZ || {});
+    const HTML_NODE = 1;
     const TEXT_NODE = 3;
 
     const BaseRichText = class BaseRichText {
@@ -290,6 +291,8 @@
                     this.clearInlineCustomTag
                 );
 
+                this.iterateThroughChildNodes(doc, this.removeNodeInitializedState);
+
                 container.closest('.ez-data-source').querySelector('textarea').value = this.xhtmlify(root.innerHTML).replace(
                     this.xhtmlNamespace,
                     this.ezNamespace
@@ -304,6 +307,7 @@
 
             nativeEditor.once('dataReady', () => container.querySelectorAll('.ez-has-anchor').forEach(this.appendAnchorIcon));
 
+            this.iterateThroughChildNodes(section, this.setNodeInitializedState);
             this.countWordsCharacters(container, section);
             nativeEditor.setData(section.innerHTML);
 
@@ -313,6 +317,18 @@
             nativeEditor.on('editorInteraction', saveRichText);
 
             return alloyEditor;
+        }
+
+        setNodeInitializedState(node) {
+            if (node.nodeType === HTML_NODE) {
+                node.setAttribute('data-ez-node-initialized', true);
+            }
+        }
+
+        removeNodeInitializedState(node) {
+            if (node.nodeType === HTML_NODE) {
+                node.removeAttribute('data-ez-node-initialized');
+            }
         }
 
         countWordsCharacters(container, editorHtml) {
