@@ -13,9 +13,9 @@ use PHPUnit\Framework\Assert;
 class UniversalDiscoveryWidget extends Element
 {
     public const ELEMENT_NAME = 'UDW';
-    private const UDW_TIMEOUT = 20;
-    private const UDW_DISAPPEAR_TIMEOUT = 1;
-    private const UDW_BRANCH_LOADING_TIMEOUT = 5;
+    private const UDW_LONG_TIMEOUT = 20;
+    private const UDW_SHORT_TIMEOUT = 2;
+    private const UDW_BRANCH_LOADING_TIMEOUT = 10;
 
     public function __construct(UtilityContext $context)
     {
@@ -43,31 +43,40 @@ class UniversalDiscoveryWidget extends Element
         foreach ($pathParts as $part) {
             ++$depth;
 
-            $this->context->waitUntilElementIsVisible(sprintf($this->fields['treeBranch'], $depth), self::UDW_TIMEOUT);
+            $this->context->waitUntilElementIsVisible(sprintf($this->fields['treeBranch'], $depth), self::UDW_LONG_TIMEOUT);
             $this->context->getElementByText($part, sprintf($this->fields['elementSelector'], $depth))->click();
             $this->context->waitUntilElementDisappears($this->fields['branchLoadingSelector'], self::UDW_BRANCH_LOADING_TIMEOUT);
         }
         $expectedContentName = $pathParts[count($pathParts) - 1];
         $this->context->waitUntil(
-            self::UDW_TIMEOUT,
+            self::UDW_LONG_TIMEOUT,
             function () use ($expectedContentName) {
                 return $this->context->findElement($this->fields['previewName'])->getText() === $expectedContentName;
             });
 
         if ($this->isMultiSelect()) {
-            $itemToSelect = $this->context->getElementByText($expectedContentName, sprintf($this->fields['elementSelector'], $depth));
+            for ($i = 0; $i < 3; ++$i) {
+                try {
+                    $itemToSelect = $this->context->getElementByText($expectedContentName, sprintf($this->fields['elementSelector'], $depth));
 
-            $this->context->findElement($this->fields['tabSelector'])->mouseOver();
-            $itemToSelect->mouseOver();
-            $this->context->waitUntilElementIsVisible($this->fields['selectContentButton'], $this->defaultTimeout, $itemToSelect);
-            $this->context->findElement($this->fields['selectContentButton'], $this->defaultTimeout, $itemToSelect)->click();
+                    $this->context->findElement($this->fields['tabSelector'])->mouseOver();
+                    $itemToSelect->mouseOver();
+                    $this->context->waitUntilElementIsVisible($this->fields['selectContentButton'], $this->defaultTimeout, $itemToSelect);
+                    $this->context->findElement($this->fields['selectContentButton'], $this->defaultTimeout, $itemToSelect)->click();
+                    break;
+                } catch (\Exception $e) {
+                    if ($i === 2) {
+                        throw $e;
+                    }
+                }
+            }
         }
     }
 
     public function confirm(): void
     {
         $this->context->getElementByText('Confirm', $this->fields['confirmButton'])->click();
-        $this->context->waitUntil(self::UDW_DISAPPEAR_TIMEOUT, function () {
+        $this->context->waitUntil(self::UDW_SHORT_TIMEOUT, function () {
             return !$this->isVisible();
         });
     }
@@ -75,7 +84,7 @@ class UniversalDiscoveryWidget extends Element
     public function cancel(): void
     {
         $this->context->getElementByText('Cancel', $this->fields['cancelButton'])->click();
-        $this->context->waitUntil(self::UDW_DISAPPEAR_TIMEOUT, function () {
+        $this->context->waitUntil(self::UDW_SHORT_TIMEOUT, function () {
             return !$this->isVisible();
         });
     }
@@ -100,13 +109,13 @@ class UniversalDiscoveryWidget extends Element
 
     protected function isVisible(): bool
     {
-        return $this->context->isElementVisible($this->fields['mainWindow'], self::UDW_DISAPPEAR_TIMEOUT);
+        return $this->context->isElementVisible($this->fields['mainWindow'], self::UDW_SHORT_TIMEOUT);
     }
 
     protected function isMultiSelect(): bool
     {
         try {
-            return $this->context->findElement($this->fields['selectContentButton'], self::UDW_BRANCH_LOADING_TIMEOUT) !== null;
+            return $this->context->findElement($this->fields['selectContentButton'], self::UDW_SHORT_TIMEOUT) !== null;
         } catch (ElementNotFoundException $e) {
             return false;
         }

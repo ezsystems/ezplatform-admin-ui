@@ -30,7 +30,8 @@ Feature: Content types management
       And I add field "Country" to Content Type definition
       And I set "Name" in "Country" to "CountryField"
       And I click on the edit action bar button "Save"
-    Then I should be on "Content Type" "Test Content Type" page
+    Then notification that "Content type" "Test Content Type" is updated appears
+      And I should be on "Content Type" "Test Content Type" page
       And Content Type has proper Global properties
         | label                | value                     |
         | Name                 | Test Content Type         |
@@ -39,7 +40,6 @@ Feature: Content types management
       And Content Type "Test Content Type" has proper fields
         | fieldName      | fieldType |
         | CountryField   | ezcountry |
-      And notification that "Content type" "Test Content Type" is updated appears
 
   @javascript @common
   Scenario: I can navigate to Content Type Group through breadcrumb
@@ -69,7 +69,8 @@ Feature: Content types management
       And I add field "Date" to Content Type definition
       And I set "Name" in "Date" to "DateField"
       And I click on the edit action bar button "Save"
-    Then I should be on "Content Type" "Test Content Type edited" page
+    Then notification that "Content type" "Test Content Type edited" is updated appears
+      And I should be on "Content Type" "Test Content Type edited" page
       And Content Type has proper Global properties
         | label                | value                     |
         | Name                 | Test Content Type edited  |
@@ -79,7 +80,6 @@ Feature: Content types management
         | fieldName      | fieldType |
         | CountryField   | ezcountry |
         | DateField      | ezdate    |
-      And notification that "Content type" "Test Content Type edited" is updated appears
 
   @javascript @common
   Scenario: Content type can be deleted from Content Type Group
