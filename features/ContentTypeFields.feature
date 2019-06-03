@@ -13,8 +13,8 @@ Feature: Content fields setting and editing
         | label    | <label1> | <label2> | <label3> |
         | Field    | <value1> | <value2> | <value3> |
       And I click on the edit action bar button "Publish"
-    Then I should be on content item page "<contentItemName>" of type "<fieldName> CT" in root path
-      And success notification that "Content published." appears
+    Then success notification that "Content published." appears
+      And I should be on content item page "<contentItemName>" of type "<fieldName> CT" in root path
       And content attributes equal
         | label    | <label1> | <label2> | <label3> |
         | Field    | <value1> | <value2> | <value3> |
@@ -53,8 +53,8 @@ Feature: Content fields setting and editing
         | label    | <label1> | <label2> | <label3> |
         | Field    | <value1> | <value2> | <value3> |
       And I click on the edit action bar button "Publish"
-    Then I should be on content item page "<newContentItemName>" of type "<fieldName> CT" in root path
-      And success notification that "Content published." appears
+    Then success notification that "Content published." appears
+      And I should be on content item page "<newContentItemName>" of type "<fieldName> CT" in root path
       And content attributes equal
         | label    | <label1> | <label2> | <label3> |
         | Field    | <value1> | <value2> | <value3> |
