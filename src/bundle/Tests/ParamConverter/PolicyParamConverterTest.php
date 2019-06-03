@@ -33,19 +33,25 @@ class PolicyParamConverterTest extends AbstractParamConverterTest
         $this->converter = new PolicyParamConverter($this->serviceMock);
     }
 
-    public function testApply()
+    /**
+     * @dataProvider dataProvider
+     *
+     * @param mixed $policyId The policy identifier fetched from the request
+     * @param mixed $roleId The role identifier fetched from the request
+     * @param int $roleIdToLoad The role identifier used to load the role
+     */
+    public function testApply($policyId, $roleId, int $roleIdToLoad)
     {
-        $roleId = 42;
-        $policyId = 53;
+        $matchingPolicyId = 53;
         $valueObject = $this->createMock(Role::class);
         $valueObject->expects(self::once())
             ->method('getPolicies')
-            ->willReturn([new UserPolicy(['id' => $policyId])]);
+            ->willReturn([new UserPolicy(['id' => $matchingPolicyId]), new UserPolicy(['id' => 444])]);
 
         $this->serviceMock
             ->expects($this->once())
             ->method('loadRole')
-            ->with($roleId)
+            ->with($roleIdToLoad)
             ->willReturn($valueObject);
 
         $requestAttributes = [
@@ -56,9 +62,10 @@ class PolicyParamConverterTest extends AbstractParamConverterTest
         $request = new Request([], [], $requestAttributes);
         $config = $this->createConfiguration(self::SUPPORTED_CLASS, self::PARAMETER_NAME);
 
-        $this->converter->apply($request, $config);
-
-        $this->assertInstanceOf(self::SUPPORTED_CLASS, $request->attributes->get(self::PARAMETER_NAME));
+        $this->assertTrue($this->converter->apply($request, $config));
+        $policy = $request->attributes->get(self::PARAMETER_NAME);
+        $this->assertInstanceOf(self::SUPPORTED_CLASS, $policy);
+        $this->assertSame($matchingPolicyId, $policy->id);
     }
 
     /**
@@ -144,6 +151,15 @@ class PolicyParamConverterTest extends AbstractParamConverterTest
         return [
             'empty_role_id' => [null, 53],
             'empty_policy_id' => [42, null],
+        ];
+    }
+
+    public function dataProvider(): array
+    {
+        return [
+            'integer' => [53, 42, 42],
+            'number_as_string' => ['53', '42', 42],
+            'string' => ['53k', '42k', 42],
         ];
     }
 }
