@@ -31,15 +31,20 @@ class SectionParamConverterTest extends AbstractParamConverterTest
         $this->converter = new SectionParamConverter($this->serviceMock);
     }
 
-    public function testApply()
+    /**
+     * @dataProvider dataProvider
+     *
+     * @param mixed $sectionId The section identifier fetched from the request
+     * @param int $sectionIdToLoad The section identifier used to load the section
+     */
+    public function testApply($sectionId, int $sectionIdToLoad)
     {
-        $sectionId = 42;
         $valueObject = $this->createMock(Section::class);
 
         $this->serviceMock
             ->expects($this->once())
             ->method('loadSection')
-            ->with($sectionId)
+            ->with($sectionIdToLoad)
             ->willReturn($valueObject);
 
         $requestAttributes = [
@@ -49,8 +54,7 @@ class SectionParamConverterTest extends AbstractParamConverterTest
         $request = new Request([], [], $requestAttributes);
         $config = $this->createConfiguration(self::SUPPORTED_CLASS, self::PARAMETER_NAME);
 
-        $this->converter->apply($request, $config);
-
+        $this->assertTrue($this->converter->apply($request, $config));
         $this->assertInstanceOf(self::SUPPORTED_CLASS, $request->attributes->get(self::PARAMETER_NAME));
     }
 
@@ -88,5 +92,14 @@ class SectionParamConverterTest extends AbstractParamConverterTest
         $config = $this->createConfiguration(self::SUPPORTED_CLASS, self::PARAMETER_NAME);
 
         $this->converter->apply($request, $config);
+    }
+
+    public function dataProvider(): array
+    {
+        return [
+            'integer' => [42, 42],
+            'number_as_string' => ['42', 42],
+            'string' => ['42k', 42],
+        ];
     }
 }

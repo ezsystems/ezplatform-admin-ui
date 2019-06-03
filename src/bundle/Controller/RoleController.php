@@ -144,8 +144,8 @@ class RoleController extends Controller
             'assignments' => $assignments,
             'delete_form' => $deleteForm->createView(),
             'route_name' => $request->get('_route'),
-            'policyPage' => $policyPage,
-            'assignmentPage' => $assignmentPage,
+            'policy_page' => $policyPage,
+            'assignment_page' => $assignmentPage,
         ]);
     }
 

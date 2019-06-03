@@ -51,21 +51,15 @@ class PolicyParamConverter implements ParamConverterInterface
 
         $policyId = (int)$request->get(self::PARAMETER_POLICY_ID);
 
-        $policy = null;
         foreach ($role->getPolicies() as $item) {
             if ($item->id === $policyId) {
-                $policy = $item;
-                break;
+                $request->attributes->set($configuration->getName(), $item);
+
+                return true;
             }
         }
 
-        if (!$policy) {
-            throw new NotFoundHttpException("Policy $policyId not found!");
-        }
-
-        $request->attributes->set($configuration->getName(), $policy);
-
-        return true;
+        throw new NotFoundHttpException("Policy $policyId not found!");
     }
 
     /**

@@ -52,7 +52,7 @@ class ContentParamConverter implements ParamConverterInterface
             return false;
         }
 
-        $content = $this->contentService->loadContent($contentId, (array) $languageCode, $versionNo);
+        $content = $this->contentService->loadContent($contentId, $languageCode, $versionNo);
 
         $request->attributes->set($configuration->getName(), $content);
 

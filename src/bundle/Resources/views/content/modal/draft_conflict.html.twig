@@ -30,13 +30,13 @@
                     </p>
                 </div>
                 {% set show_add_draft_button = (not content_is_user) %}
-                {% include '@ezdesign/ui/table_header.html.twig' with { headerText: null, tools: version_modal_draft_conflict.table_header_tools(show_add_draft_button) } %}
+                {% include '@ezdesign/ui/table_header.html.twig' with { header_text: null, tools: version_modal_draft_conflict.table_header_tools(show_add_draft_button) } %}
                 <div class="ez-scrollable-wrapper">
                     {{ include('@ezdesign/content/tab/versions/table.html.twig', {
                         'versions': conflicted_drafts,
                         'location': location,
                         'is_draft': true,
-                        'haveToPaginate': false,
+                        'have_to_paginate': false,
                         'is_draft_conflict': true,
                         'content_is_user': content_is_user
                     }) }}

@@ -18,14 +18,14 @@
 {% block page_title %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'language.list'|trans|desc('Languages'),
-        iconName: 'languages'
+        icon_name: 'languages'
     } %}
 {% endblock %}
 
 {% block content %}
     <section class="container mt-4 px-5">
         <div class="ez-table-header">
-            <div class="ez-table-header__headline">{{ 'language.list'|trans|desc('Languages') }}</div ="ez-table-header__headline">
+            <div class="ez-table-header__headline">{{ 'language.list'|trans|desc('Languages') }}</div>
             <div>
                 {% if can_administrate %}
                     <a

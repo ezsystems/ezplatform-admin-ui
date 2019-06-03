@@ -30,15 +30,20 @@ class ContentTypeDraftParamConverterTest extends AbstractParamConverterTest
         $this->converter = new ContentTypeDraftParamConverter($this->contentTypeServiceMock);
     }
 
-    public function testApply()
+    /**
+     * @dataProvider dataProvider
+     *
+     * @param mixed $contentTypeId The content type identifier fetched from the request
+     * @param int $contentTypeIdToLoad The content type identifier used to load the Content Type draft
+     */
+    public function testApply($contentTypeId, int $contentTypeIdToLoad)
     {
-        $contentTypeId = 42;
         $valueObject = $this->createMock(ContentTypeDraft::class);
 
         $this->contentTypeServiceMock
             ->expects($this->once())
             ->method('loadContentTypeDraft')
-            ->with($contentTypeId)
+            ->with($contentTypeIdToLoad)
             ->willReturn($valueObject);
 
         $requestAttributes = [
@@ -48,8 +53,7 @@ class ContentTypeDraftParamConverterTest extends AbstractParamConverterTest
         $request = new Request([], [], $requestAttributes);
         $config = $this->createConfiguration(self::SUPPORTED_CLASS, self::PARAMETER_NAME);
 
-        $this->converter->apply($request, $config);
-
+        $this->assertTrue($this->converter->apply($request, $config));
         $this->assertInstanceOf(self::SUPPORTED_CLASS, $request->attributes->get(self::PARAMETER_NAME));
     }
 
@@ -64,5 +68,14 @@ class ContentTypeDraftParamConverterTest extends AbstractParamConverterTest
 
         $this->assertFalse($this->converter->apply($request, $config));
         $this->assertNull($request->attributes->get(self::PARAMETER_NAME));
+    }
+
+    public function dataProvider(): array
+    {
+        return [
+            'integer' => [42, 42],
+            'number_as_string' => ['42', 42],
+            'string' => ['42k', 42],
+        ];
     }
 }

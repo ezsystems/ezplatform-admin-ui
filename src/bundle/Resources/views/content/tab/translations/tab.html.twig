@@ -12,7 +12,7 @@
         }) }}
     {% endif %}
     {% include '@ezdesign/ui/table_header.html.twig' with {
-        headerText: 'tab.translations.translation_manger'|trans|desc('Translation manager'),
+        header_text: 'tab.translations.translation_manger'|trans|desc('Translation manager'),
         tools: tab.table_header_tools(form_translation_remove, can_translate)
     } %}
     <div class="ez-scrollable-table-wrapper">

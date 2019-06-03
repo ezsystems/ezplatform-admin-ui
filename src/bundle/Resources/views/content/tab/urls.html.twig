@@ -1,7 +1,7 @@
 {% trans_default_domain 'content_url' %}
 {% import _self as tab %}
 {% include '@ezdesign/ui/table_header.html.twig' with {
-    headerText: 'tab.urls.custom_url_aliases'|trans({'%contentName%' : ez_content_name(content)})|desc('Custom URL aliases for %contentName%'),
+    header_text: 'tab.urls.custom_url_aliases'|trans({'%contentName%' : ez_content_name(content)})|desc('Custom URL aliases for %contentName%'),
     tools: tab.table_header_tools(form_custom_url_remove, can_edit_custom_url)
 } %}
 
@@ -20,7 +20,7 @@
 {% if custom_urls_pager.haveToPaginate %}
     {{  include('@ezdesign/content/tab/pagination.html.twig', {
             'pager': custom_urls_pager,
-            'paginatonParams': {
+            'paginaton_params': {
                 'routeName': custom_urls_pagination_params.route_name,
                 'routeParams': custom_urls_pagination_params.route_params|merge({
                     '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
@@ -31,7 +31,7 @@
     }) }}
 {% endif %}
 
-{% include '@ezdesign/ui/table_header.html.twig' with { headerText: 'tab.urls.system.title'|trans|desc('System URL') } %}
+{% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.urls.system.title'|trans|desc('System URL') } %}
 
 {% if system_urls_pager.currentPageResults is not empty %}
     {{  include('@ezdesign/content/tab/url/system_urls_table.html.twig', {
@@ -46,7 +46,7 @@
 {% if system_urls_pager.haveToPaginate %}
     {{  include('@ezdesign/content/tab/pagination.html.twig', {
         'pager': system_urls_pager,
-        'paginatonParams': {
+        'paginaton_params': {
             'routeName': system_urls_pagination_params.route_name,
             'routeParams': system_urls_pagination_params.route_params|merge({
                 '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
