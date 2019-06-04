@@ -13,7 +13,7 @@ use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAw
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
 /**
- * Configuration parser for location ids declaration.
+ * Configuration parser for pagination limits.
  *
  * Example configuration:
  * ```yaml
