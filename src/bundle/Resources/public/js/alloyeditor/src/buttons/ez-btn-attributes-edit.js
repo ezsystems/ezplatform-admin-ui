@@ -37,11 +37,16 @@ export default class EzBtnAttributesEdit extends EzWidgetButton {
             .get('nativeEditor')
             .on('beforeCommandExec', this.toggleNodeInitialized.bind(this, block, false));
         this.afterCommandExecHandler = this.props.editor.get('nativeEditor').on('afterCommandExec', (event) => {
-            const block = this.findSelectedBlock();
+            let add = true;
 
-            if (event.data.name !== 'removeFormat') {
-                this.toggleNodeInitialized(block, true);
+            if (event.data.name === 'removeFormat') {
+                this.toggleNodeInitialized(block, add);
+
+                add = false;
+                this.block = null;
             }
+
+            this.toggleNodeInitialized(this.findSelectedBlock(), add);
         });
     }
 
@@ -109,20 +114,20 @@ export default class EzBtnAttributesEdit extends EzWidgetButton {
     setDefaultClassesOnTableRows(block, value) {
         const rows = block.$.closest('table').querySelectorAll('tr');
 
-        rows.forEach((row) => row.$.classList.add(...value));
+        rows.forEach((row) => row.classList.add(...value));
     }
 
     setDefaultClassesOnTableCells(block, value) {
         const cells = block.$.closest('table').querySelectorAll('td');
 
-        cells.forEach((cell) => cell.$.classList.add(...value));
+        cells.forEach((cell) => cell.classList.add(...value));
     }
 
     setDefaultClassesOnListItems(block, value) {
         const list = block.$.closest('ul') || block.$.closest('ol');
         const listItems = list.querySelectorAll('li');
 
-        listItems.forEach((listItem) => listItem.$.classList.add(...value));
+        listItems.forEach((listItem) => listItem.classList.add(...value));
     }
 
     setDefaultAttributes(block) {
@@ -135,7 +140,7 @@ export default class EzBtnAttributesEdit extends EzWidgetButton {
 
             const defaultValue = config.defaultValue;
 
-            if (defaultValue !== undefined) {
+            if (defaultValue !== undefined && defaultValue !== null) {
                 const setDefaultAttributesMethod = this.setDefaultAttributesMethods[this.toolbarName]
                     ? this.setDefaultAttributesMethods[this.toolbarName]
                     : this.setDefaultAttributesOnBlock;
@@ -175,7 +180,11 @@ export default class EzBtnAttributesEdit extends EzWidgetButton {
             let value = block.getAttribute(`data-ezattribute-${attributeName}`);
             const isValueDefined = value !== null;
 
-            if (!isValueDefined && defaultValue !== undefined) {
+            if (config.type === 'choice' && !isValueDefined && !config.multiple) {
+                value = config.choices[0];
+            }
+
+            if (!isValueDefined && defaultValue !== undefined && defaultValue !== null) {
                 value = defaultValue;
             }
 
