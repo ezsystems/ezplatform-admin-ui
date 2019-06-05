@@ -146,6 +146,7 @@ export default class EzBtnAttributesUpdate extends EzWidgetButton {
         const block = this.findSelectedBlock();
         const { attributesValues, classesValue } = this.state;
         const { editor, cancelExclusive } = this.props;
+        const nativeEditor = editor.get('nativeEditor');
 
         Object.entries(attributesValues).forEach(([attribute, attributeData]) => {
             block.setAttribute(`data-ezattribute-${attribute}`, attributeData.value);
@@ -157,7 +158,9 @@ export default class EzBtnAttributesUpdate extends EzWidgetButton {
             block.$.classList.add(...classesValue.split(','), 'ez-classes-added');
         }
 
-        editor.get('nativeEditor').unlockSelection(true);
+        nativeEditor.unlockSelection(true);
+        nativeEditor.fire('customUpdate');
+
         cancelExclusive();
     }
 
