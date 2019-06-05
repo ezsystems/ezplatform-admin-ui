@@ -11,7 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText;
 use EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\CustomTag\AttributeMapper;
 use RuntimeException;
 use Symfony\Component\Asset\Packages;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Translation\Translator;
 use Traversable;
 
 /**
@@ -22,7 +22,7 @@ class CustomTag
     /** @var array */
     private $customTagsConfiguration;
 
-    /** @var TranslatorInterface */
+    /** @var Translator */
     private $translator;
 
     /** @var Packages */
@@ -37,9 +37,21 @@ class CustomTag
     /** @var string */
     private $translationDomain;
 
+    /**
+     * CustomTag configuration mapper constructor.
+     *
+     * Note: type-hinting Translator to have an instance which implements
+     * both TranslatorInterface and TranslatorBagInterface.
+     *
+     * @param array $customTagsConfiguration
+     * @param \Symfony\Component\Translation\Translator $translator
+     * @param string $translationDomain
+     * @param \Symfony\Component\Asset\Packages $packages
+     * @param \Traversable $customTagAttributeMappers
+     */
     public function __construct(
         array $customTagsConfiguration,
-        TranslatorInterface $translator,
+        Translator $translator,
         string $translationDomain,
         Packages $packages,
         Traversable $customTagAttributeMappers
