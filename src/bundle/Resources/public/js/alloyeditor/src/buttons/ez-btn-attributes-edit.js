@@ -78,9 +78,10 @@ export default class EzBtnAttributesEdit extends EzWidgetButton {
 
     removeClasses(block) {
         const classes = [...block.$.classList];
+        const classesToRemain = ['is-block-focused', 'ez-embed-type-image', 'is-linked'];
 
         classes.forEach((className) => {
-            if (className !== 'is-block-focused') {
+            if (!classesToRemain.includes(className)) {
                 block.$.classList.remove(className);
             }
         });
