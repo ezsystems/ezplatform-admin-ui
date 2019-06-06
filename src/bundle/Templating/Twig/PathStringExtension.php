@@ -9,10 +9,10 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
 use eZ\Publish\API\Repository\LocationService;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class PathStringExtension extends Twig_Extension
+class PathStringExtension extends AbstractExtension
 {
     private $locationService;
 
@@ -28,7 +28,7 @@ class PathStringExtension extends Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'ez_path_to_locations',
                 [$this, 'getLocationList']
             ),

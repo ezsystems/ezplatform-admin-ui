@@ -9,10 +9,10 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
 use EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class ContentTypeIconExtension extends Twig_Extension
+class ContentTypeIconExtension extends AbstractExtension
 {
     /** @var \EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver */
     private $contentTypeIconResolver;
@@ -31,7 +31,7 @@ class ContentTypeIconExtension extends Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'ez_content_type_icon',
                 [$this->contentTypeIconResolver, 'getContentTypeIcon'],
                 [

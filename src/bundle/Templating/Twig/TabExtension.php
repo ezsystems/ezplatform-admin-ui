@@ -16,10 +16,10 @@ use EzSystems\EzPlatformAdminUi\Tab\TabGroup;
 use EzSystems\EzPlatformAdminUi\Tab\TabInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class TabExtension extends Twig_Extension
+class TabExtension extends AbstractExtension
 {
     /** @var Environment */
     protected $twig;
@@ -54,7 +54,7 @@ class TabExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'ez_render_tab_group',
                 [$this, 'renderTabGroup'],
                 ['is_safe' => ['html']]

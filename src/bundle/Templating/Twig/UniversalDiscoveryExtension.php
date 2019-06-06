@@ -9,10 +9,10 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
 use EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class UniversalDiscoveryExtension extends Twig_Extension
+class UniversalDiscoveryExtension extends AbstractExtension
 {
     /** @var \EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver */
     protected $udwConfigResolver;
@@ -32,7 +32,7 @@ class UniversalDiscoveryExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'ez_udw_config',
                 [$this, 'renderUniversalDiscoveryWidgetConfig'],
                 ['is_safe' => ['json']]

@@ -10,10 +10,10 @@ namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
 use EzSystems\EzPlatformAdminUi\Component\Registry as ComponentRegistry;
 use EzSystems\EzPlatformAdminUi\Component\Renderer\RendererInterface;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class ComponentExtension extends Twig_Extension
+class ComponentExtension extends AbstractExtension
 {
     protected $registry;
 
@@ -30,12 +30,12 @@ class ComponentExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'ez_render_component_group',
                 [$this, 'renderComponentGroup'],
                 ['is_safe' => ['html']]
             ),
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'ez_render_component',
                 [$this, 'renderComponent'],
                 ['is_safe' => ['html']]
