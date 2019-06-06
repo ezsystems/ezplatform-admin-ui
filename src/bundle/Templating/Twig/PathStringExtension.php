@@ -29,7 +29,7 @@ class PathStringExtension extends Twig_Extension
     {
         return [
             new Twig_SimpleFunction(
-                'ez_path_string_to_locations',
+                'ez_path_to_locations',
                 [$this, 'getLocationList']
             ),
         ];

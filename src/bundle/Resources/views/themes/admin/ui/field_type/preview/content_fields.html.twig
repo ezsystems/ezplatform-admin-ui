@@ -35,7 +35,7 @@
 {% endblock %}
 
 {% block ezrichtext_field %}
-    {%- set field_value = field.value.xml|richtext_to_html5 -%}
+    {%- set field_value = field.value.xml|ez_richtext_to_html5 -%}
     {{ block( 'simple_block_field' ) }}
 {% endblock %}
 
@@ -66,7 +66,7 @@
 
 {% block ezdatetime_field %}
 {% spaceless %}
-    {% if not ez_is_field_empty( content, field ) %}
+    {% if not ez_field_is_empty( content, field ) %}
         {% set field_value = field.value.value|ez_full_datetime %}
         {{ block( 'simple_block_field' ) }}
         {% if fieldSettings.useSeconds %}
@@ -80,7 +80,7 @@
 
 {% block ezdate_field %}
 {% spaceless %}
-    {% if not ez_is_field_empty( content, field ) %}
+    {% if not ez_field_is_empty( content, field ) %}
         {% set field_value = field.value.date|ez_full_date('UTC') %}
         {{ block( 'simple_block_field' ) }}
     {% endif %}
@@ -89,7 +89,7 @@
 
 {% block eztime_field %}
 {% spaceless %}
-    {% if not ez_is_field_empty( content, field ) %}
+    {% if not ez_field_is_empty( content, field ) %}
         {% set field_value = field.value.time|ez_full_time('UTC') %}
         {{ block( 'simple_block_field' ) }}
         {% if fieldSettings.useSeconds %}
@@ -103,7 +103,7 @@
 
 {% block ezemail_field %}
 {% spaceless %}
-    {% if not ez_is_field_empty( content, field ) %}
+    {% if not ez_field_is_empty( content, field ) %}
         {% set field_value = field.value.email %}
         <a href="mailto:{{ field.value.email|escape( 'url' ) }}" {{ block( 'field_attributes' ) }}>{{ field.value.email }}</a>
     {% endif %}
@@ -112,7 +112,7 @@
 
 {% block ezinteger_field %}
 {% spaceless %}
-    {% if not ez_is_field_empty( content, field ) %}
+    {% if not ez_field_is_empty( content, field ) %}
         {% set field_value = field.value.value %}
         {{ block( 'simple_inline_field' ) }}
     {% endif %}
@@ -121,7 +121,7 @@
 
 {% block ezfloat_field %}
 {% spaceless %}
-    {% if not ez_is_field_empty( content, field ) %}
+    {% if not ez_field_is_empty( content, field ) %}
         {% set field_value = field.value.value %}
         {{ block( 'simple_inline_field' ) }}
     {% endif %}
@@ -130,7 +130,7 @@
 
 {% block ezurl_field %}
 {% spaceless %}
-    {% if not ez_is_field_empty( content, field ) %}
+    {% if not ez_field_is_empty( content, field ) %}
         <a href="{{ field.value.link }}"
             {{ block( 'field_attributes' ) }}>{{ field.value.text ? field.value.text : field.value.link }}</a>
     {% endif %}
@@ -146,7 +146,7 @@
 
 {% block ezkeyword_field %}
 {% spaceless %}
-    {% if not ez_is_field_empty( content, field ) %}
+    {% if not ez_field_is_empty( content, field ) %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezkeyword')|trim}) %}
         <ul {{ block( 'field_attributes' ) }}>
         {% for keyword in field.value.values %}
@@ -214,7 +214,7 @@
 
 {% block ezbinaryfile_field %}
 {% spaceless %}
-    {% if not ez_is_field_empty( content, field ) %}
+    {% if not ez_field_is_empty( content, field ) %}
         {% set route_reference = ez_route( 'ez_content_download', { 'content': content, 'fieldIdentifier': field.fieldDefIdentifier, 'inLanguage': content.prioritizedFieldLanguageCode } ) %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezbinaryfile')|trim}) %}
         <div {{ block( 'field_attributes' ) }}>
@@ -234,7 +234,7 @@
 {% endblock %}
 
 {% block ezmedia_field %}
-{% if not ez_is_field_empty( content, field ) %}
+{% if not ez_field_is_empty( content, field ) %}
 {% spaceless %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezmedia')|trim}) %}
     {% set type = fieldSettings.mediaType %}
@@ -301,7 +301,7 @@
 
 {% block ezobjectrelationlist_field %}
 {% spaceless %}
-    {% if not ez_is_field_empty( content, field ) %}
+    {% if not ez_field_is_empty( content, field ) %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezobjectrelationlist')|trim}) %}
     <div {{ block( 'field_attributes' ) }}>
         <div class="ez-table-header ">
@@ -370,7 +370,7 @@
 
 {% block ezimage_field %}
 {% spaceless %}
-{% if not ez_is_field_empty( content, field ) %}
+{% if not ez_field_is_empty( content, field ) %}
 {% set imageAlias = ez_image_alias( field, versionInfo, parameters.alias|default( 'original' ) ) %}
 {% set src = imageAlias ? asset( imageAlias.uri ) : "//:0" %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezimage')|trim}) %}
@@ -425,7 +425,7 @@
 
 {% block ezimageasset_field %}
 {% spaceless %}
-{% if not ez_is_field_empty( content, field ) and parameters.available %}
+{% if not ez_field_is_empty( content, field ) and parameters.available %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezimageasset')|trim}) %}
     <div {{ block( 'field_attributes' ) }}>
         {{ render(controller('ez_content:viewAction', {
@@ -445,7 +445,7 @@
 
 {% block ezobjectrelation_field %}
 {% spaceless %}
-{% if not ez_is_field_empty( content, field ) %}
+{% if not ez_field_is_empty( content, field ) %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezobjectrelationlist')|trim}) %}
     <div {{ block( 'field_attributes' ) }}>
         <div class="ez-table-header ">
@@ -473,7 +473,7 @@
 {# pageService is exposed under parameters.pageService thanks to Page\ParameterProvider #}
 {% block ezpage_field %}
 {% spaceless %}
-{% if not ez_is_field_empty( content, field ) %}
+{% if not ez_field_is_empty( content, field ) %}
     {% set layout = field.value.page.layout %}
     {% set template = parameters.pageService.getLayoutTemplate( layout ) %}
     {% include template with { 'zones': field.value.page.zones, 'zone_layout': layout, 'pageService': parameters.pageService } %}

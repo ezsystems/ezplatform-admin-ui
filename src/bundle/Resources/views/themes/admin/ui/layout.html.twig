@@ -57,7 +57,7 @@
         {% block meta %}
         {% endblock %}
         <script>
-            window.eZ.addConfig('adminUiConfig', {{ admin_ui_config|json_encode|raw }});
+            window.eZ.addConfig('adminUiConfig', {{ ez_ui_config|json_encode|raw }});
             window.eZ.addConfig('errors', {
                 emailRegexp: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 emptyField: '{{ 'js.error.empty.field'|trans({}, 'validators')|desc('{fieldName} field is required') }}',
@@ -93,8 +93,8 @@
         {{ encore_entry_link_tags('ezplatform-admin-ui-layout-css', null, 'ezplatform') }}
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/img/favicon.ico') }}" />
-        {{ ezplatform_admin_ui_component_group('stylesheet-head') }}
-        {{ ezplatform_admin_ui_component_group('script-head') }}
+        {{ ez_render_component_group('stylesheet-head') }}
+        {{ ez_render_component_group('script-head') }}
 
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react/umd/react.production.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react-dom/umd/react-dom.production.min.js') }}"></script>
@@ -134,8 +134,8 @@
                         </div>
                     </div>
                     <div class="ez-content-tree-container"
-                        data-user-id="{{ admin_ui_config.user.user.id }}"
-                        data-tree-root-location-id="{{ content_tree_module_root|default(admin_ui_config['contentTree']['treeRootLocationId']) }}"
+                        data-user-id="{{ ez_ui_config.user.user.id }}"
+                        data-tree-root-location-id="{{ content_tree_module_root|default(ez_ui_config['contentTree']['treeRootLocationId']) }}"
                         data-current-location-path="{{ location_path|default('') }}">
                         <div class="ez-content-tree-container__wrapper"></div>
                     </div>
@@ -152,15 +152,15 @@
             })|e('html_attr')  }}"></div>
         <div class="ez-modal-wrapper"></div>
 
-        {{ ezplatform_admin_ui_component_group('custom-admin-ui-modules') }}
-        {{ ezplatform_admin_ui_component_group('custom-admin-ui-config') }}
+        {{ ez_render_component_group('custom-admin-ui-modules') }}
+        {{ ez_render_component_group('custom-admin-ui-config') }}
 
         {{ encore_entry_script_tags('ezplatform-admin-ui-modules-udw-js', null, 'ezplatform') }}
         {{ encore_entry_script_tags('ezplatform-admin-ui-layout-js', null, 'ezplatform') }}
 
         {% block react_modules %}{% endblock %}
         {% block javascripts %}{% endblock %}
-        {{ ezplatform_admin_ui_component_group('stylesheet-body') }}
-        {{ ezplatform_admin_ui_component_group('script-body') }}
+        {{ ez_render_component_group('stylesheet-body') }}
+        {{ ez_render_component_group('script-body') }}
     </body>
 </html>

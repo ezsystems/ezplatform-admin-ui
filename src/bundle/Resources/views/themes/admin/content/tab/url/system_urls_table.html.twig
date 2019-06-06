@@ -13,7 +13,7 @@
             <tr>
                 <td>{{ system_url.path }}</td>
                 <td>
-                    {% for language_code in system_url.languageCodes %}{{ admin_ui_config.languages.mappings[language_code].name }}<br>{% endfor %}
+                    {% for language_code in system_url.languageCodes %}{{ ez_ui_config.languages.mappings[language_code].name }}<br>{% endfor %}
                 </td>
             </tr>
         {% endfor %}

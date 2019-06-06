@@ -96,7 +96,7 @@
                             {{ form_row(field_definition.fieldGroup, {'label_attr': {'class': 'ez-label'}}) }}
 
                             {# Field type specific fields below #}
-                            {{ ez_render_fielddefinition_edit(value, {
+                            {{ ez_render_field_definition_edit(value, {
                                 'languageCode': language_code,
                                 'form': field_definition,
                                 'group_class': value.group_class|default('')

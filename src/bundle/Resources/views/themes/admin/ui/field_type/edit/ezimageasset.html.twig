@@ -84,7 +84,7 @@
             locationId: destination_content.contentInfo.mainLocationId
         }) %}
 
-        {% set image_uri = ez_field_value(destination_content, ez_image_asset_content_field_identifier()).uri %}
+        {% set image_uri = ez_field_value(destination_content, ez_content_field_identifier_image_asset()).uri %}
     {% endif %}
 
     <div class="ez-field-edit-preview">
