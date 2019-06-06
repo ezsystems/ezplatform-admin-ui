@@ -12,7 +12,8 @@ use ArrayObject;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Asset\Packages;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Translation\MessageCatalogueInterface;
+use Symfony\Component\Translation\Translator;
 
 /**
  * UI Config Mapper test for RichText Custom Tags configuration.
@@ -147,6 +148,10 @@ class CustomTagTest extends TestCase
                                     '',
                                     'hidden',
                                 ],
+                                'choicesLabel' => [
+                                    '' => '',
+                                    'hidden' => 'hidden',
+                                ],
                             ],
                         ],
                     ],
@@ -160,7 +165,21 @@ class CustomTagTest extends TestCase
      */
     private function getTranslatorMock(): MockObject
     {
-        $translatorMock = $this->createMock(TranslatorInterface::class);
+        $catalogueMock = $this->createMock(MessageCatalogueInterface::class);
+        $catalogueMock
+            ->expects($this->any())
+            ->method('has')
+            ->withAnyParameters()
+            ->willReturn(false);
+
+        $translatorMock = $this->createMock(Translator::class);
+        $translatorMock
+            ->expects($this->any())
+            ->method('getCatalogue')
+            ->willReturn(
+                $catalogueMock
+            );
+
         $translatorMock
             ->expects($this->any())
             ->method('trans')
