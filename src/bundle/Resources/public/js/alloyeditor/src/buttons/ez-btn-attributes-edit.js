@@ -203,10 +203,10 @@ export default class EzBtnAttributesEdit extends EzWidgetButton {
         const block = this.findSelectedBlock();
         let value = block.$.classList.value
             .split(' ')
-            .filter((className) => this.classes.choices.includes(className))
+            .filter((className) => Array.isArray(this.classes.choices) && this.classes.choices.includes(className))
             .join();
 
-        if (!value && !this.classes.multiple) {
+        if (!value && !this.classes.multiple && Array.isArray(this.classes.choices)) {
             value = this.classes.choices[0];
         }
 
