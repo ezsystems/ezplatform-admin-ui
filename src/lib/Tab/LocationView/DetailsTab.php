@@ -27,7 +27,7 @@ use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
@@ -54,7 +54,7 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
 
     /**
      * @param \Twig\Environment $twig
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\SectionService $sectionService
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory

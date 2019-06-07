@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab;
 
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 /**

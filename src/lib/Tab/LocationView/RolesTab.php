@@ -18,7 +18,7 @@ use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 use eZ\Publish\API\Repository\PermissionResolver;
 
@@ -40,7 +40,7 @@ class RolesTab extends AbstractEventDispatchingTab implements OrderedTabInterfac
 
     /**
      * @param \Twig\Environment $twig
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
      * @param array $userContentTypeIdentifier
      * @param array $userGroupContentTypeIdentifier

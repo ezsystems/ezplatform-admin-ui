@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Tab\SystemInfo;
 
 use Symfony\Bridge\Twig\Extension\HttpKernelRuntime;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class TabFactory

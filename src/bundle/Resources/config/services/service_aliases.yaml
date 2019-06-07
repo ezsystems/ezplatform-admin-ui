@@ -47,5 +47,5 @@ services:
     EzSystems\EzSupportToolsBundle\SystemInfo\SystemInfoCollectorRegistry: '@support_tools.system_info.collector_registry'
 
     # Symfony
-    Symfony\Component\Translation\TranslatorInterface: '@translator'
+    Symfony\Contracts\Translation\TranslatorInterface: '@translator'
 

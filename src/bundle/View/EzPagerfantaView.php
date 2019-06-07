@@ -8,7 +8,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\View;
 
 use EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate;
 use Pagerfanta\View\DefaultView;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * View to render Pagerfanta pagination.

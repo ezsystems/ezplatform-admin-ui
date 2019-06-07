@@ -24,7 +24,7 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInterface, ConditionalTabInterface
@@ -50,7 +50,7 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
 
     /**
      * @param \Twig\Environment $twig
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator

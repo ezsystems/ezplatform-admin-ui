@@ -151,7 +151,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FormFactory
 {
@@ -161,13 +161,13 @@ class FormFactory
     /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     protected $urlGenerator;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     /**
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      */
     public function __construct(

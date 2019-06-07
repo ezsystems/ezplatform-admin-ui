@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RequestLocaleListener implements EventSubscriberInterface
 {
@@ -26,7 +26,7 @@ class RequestLocaleListener implements EventSubscriberInterface
     /** @var array */
     private $availableTranslations;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
@@ -38,7 +38,7 @@ class RequestLocaleListener implements EventSubscriberInterface
     /**
      * @param array $siteAccessGroups
      * @param array $availableTranslations
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      */

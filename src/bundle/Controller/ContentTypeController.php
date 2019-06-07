@@ -36,7 +36,7 @@ use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 
@@ -45,7 +45,7 @@ class ContentTypeController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
@@ -80,7 +80,7 @@ class ContentTypeController extends Controller
 
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface $contentTypeActionDispatcher
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory

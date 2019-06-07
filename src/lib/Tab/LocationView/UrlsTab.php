@@ -23,7 +23,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
@@ -47,7 +47,7 @@ class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 
     /**
      * @param \Twig\Environment $twig
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\URLAliasService $urlAliasService
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory

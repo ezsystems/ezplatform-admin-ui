@@ -52,7 +52,7 @@ class ObjectStateController extends Controller
 
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler

@@ -23,13 +23,13 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LocationTrashContainerType extends AbstractType
 {
     const TRASH_WITH_CHILDREN = 'trash_with_children';
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     /** @var \eZ\Publish\API\Repository\LocationService */
@@ -39,7 +39,7 @@ class LocationTrashContainerType extends AbstractType
     private $contentTypeService;
 
     /**
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      */

@@ -39,7 +39,7 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Exception;
 
 class SectionController extends Controller
@@ -47,7 +47,7 @@ class SectionController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     /** @var \eZ\Publish\API\Repository\SectionService */
@@ -88,7 +88,7 @@ class SectionController extends Controller
 
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\SectionService $sectionService
      * @param \eZ\Publish\API\Repository\SearchService $searchService
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory

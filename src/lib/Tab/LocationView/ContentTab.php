@@ -16,7 +16,7 @@ use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\Util\FieldDefinitionGroupsUtil;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class ContentTab extends AbstractEventDispatchingTab implements OrderedTabInterface
@@ -32,7 +32,7 @@ class ContentTab extends AbstractEventDispatchingTab implements OrderedTabInterf
 
     /**
      * @param \Twig\Environment $twig
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \EzSystems\EzPlatformAdminUi\Util\FieldDefinitionGroupsUtil $fieldDefinitionGroupsUtil
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
      * @param array $siteAccessLanguages
