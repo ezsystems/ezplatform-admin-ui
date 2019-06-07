@@ -78,7 +78,11 @@ export default class EzBtnAttributesUpdate extends EzWidgetButton {
                 <select
                     className="ez-ae-attribute__input form-control"
                     value={config.multiple ? value.split(',') : value}
-                    defaultValue={config.multiple ? [config.defaultValue.split(',')] : config.defaultValue}
+                    defaultValue={
+                        config.multiple && config.defaultValue !== null && config.defaultValue !== undefined
+                            ? [config.defaultValue.split(',')]
+                            : config.defaultValue
+                    }
                     onChange={updateValue}
                     data-attr-name={attrName}
                     multiple={config.multiple}>
