@@ -30,10 +30,10 @@ class SystemInfoTabGroupListenerTest extends TestCase
     /** @var HttpKernelInterface|MockObject */
     private $httpKernel;
 
-    /** @var TabRegistry|MockObject */
+    /** @var MockObject|TabRegistry */
     private $tabRegistry;
 
-    /** @var TabFactory|MockObject */
+    /** @var MockObject|TabFactory */
     private $tabFactory;
 
     protected function setUp(): void

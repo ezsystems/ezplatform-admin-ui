@@ -149,7 +149,7 @@ class TabRegistryTest extends TestCase
      *
      * @param string $name
      * @param Environment|MockObject $twig
-     * @param TranslatorInterface|MockObject $translator
+     * @param MockObject|TranslatorInterface $translator
      *
      * @return TabInterface
      */

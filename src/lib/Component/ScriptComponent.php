@@ -21,16 +21,16 @@ class ScriptComponent implements Renderable
     /** @var string */
     protected $type;
 
-    /** @var null|string */
+    /** @var string|null */
     protected $async;
 
-    /** @var null|string */
+    /** @var string|null */
     protected $defer;
 
-    /** @var null|string */
+    /** @var string|null */
     protected $crossorigin;
 
-    /** @var null|string */
+    /** @var string|null */
     protected $integrity;
 
     /**

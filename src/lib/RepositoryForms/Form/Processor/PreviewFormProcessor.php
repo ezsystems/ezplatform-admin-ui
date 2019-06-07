@@ -119,7 +119,7 @@ class PreviewFormProcessor implements EventSubscriberInterface
      * Saves content draft corresponding to $data.
      * Depending on the nature of $data (create or update data), the draft will either be created or simply updated.
      *
-     * @param ContentStruct|ContentCreateData|ContentUpdateData $data
+     * @param ContentCreateData|ContentStruct|ContentUpdateData $data
      * @param string $languageCode
      *
      * @return Content
@@ -178,7 +178,7 @@ class PreviewFormProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param ContentUpdateData|ContentCreateData|NewnessChecker $data
+     * @param ContentCreateData|ContentUpdateData|NewnessChecker $data
      *
      * @return string
      */

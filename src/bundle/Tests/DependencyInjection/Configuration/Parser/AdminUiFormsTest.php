@@ -23,7 +23,7 @@ class AdminUiFormsTest extends TestCase
     private $parser;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface
+     * @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $contextualizer;
 

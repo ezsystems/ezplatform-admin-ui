@@ -14,14 +14,12 @@ use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\EventListener\RequestLocaleListener;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Translation\Translator;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class RequestLocaleListenerTest extends TestCase
@@ -33,7 +31,7 @@ class RequestLocaleListenerTest extends TestCase
     /** @var \Symfony\Component\HttpFoundation\Request */
     private $request;
 
-    /** @var \Symfony\Component\HttpKernel\HttpKernelInterface|MockObject */
+    /** @var MockObject|\Symfony\Component\HttpKernel\HttpKernelInterface */
     private $httpKernel;
 
     /** @var \Symfony\Contracts\Translation\TranslatorInterface */

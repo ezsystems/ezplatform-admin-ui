@@ -11,7 +11,7 @@ use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 class PlatformPageObjectFactory extends PageObjectFactory
 {
     /**
-     * @return LoginPage|TrashPage|ContentPreviewPage|ObjectStateGroupsPage|ObjectStateGroupPage|ObjectStatePage|SystemInfoPage|DashboardPage|ContentItemPage|ContentTypeGroupsPage|SectionPage|SectionsPage|ContentUpdateItemPage|AdminUpdateItemPage|ContentTypePage|LanguagesPage|LanguagePage|RolesPage|RolePage
+     * @return AdminUpdateItemPage|ContentItemPage|ContentPreviewPage|ContentTypeGroupsPage|ContentTypePage|ContentUpdateItemPage|DashboardPage|LanguagePage|LanguagesPage|LoginPage|ObjectStateGroupPage|ObjectStateGroupsPage|ObjectStatePage|RolePage|RolesPage|SectionPage|SectionsPage|SystemInfoPage|TrashPage
      */
     public static function createPage(UtilityContext $context, string $pageName, ?string ...$parameters): Page
     {

@@ -203,7 +203,7 @@ class PreviewFormProcessorTest extends TestCase
     /**
      * @param $config
      *
-     * @return MockObject|FormInterface
+     * @return FormInterface|MockObject
      */
     private function generateFormMock($config): MockObject
     {

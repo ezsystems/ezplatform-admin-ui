@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation;
 
-use EzSystems\EzPlatformRest\Input\Dispatcher;
 use EzSystems\EzPlatformRest\Message;
 use EzSystems\EzPlatformAdminUi\REST\Value\BulkOperationResponse;
 use EzSystems\EzPlatformAdminUi\REST\Value\Operation;

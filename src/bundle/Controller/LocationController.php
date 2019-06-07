@@ -371,7 +371,7 @@ class LocationController extends Controller
     }
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData|\EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData|\EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData $data
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *

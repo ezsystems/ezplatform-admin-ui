@@ -59,7 +59,7 @@ class TrashItemAdapterTest extends TestCase
             ->expects($this->once())
             ->method('findTrashItems')
             ->with($this->equalTo($countQuery))
-            ->will($this->returnValue($searchResult));
+            ->willReturn($searchResult);
 
         $adapter = $this->getAdapter($query, $this->trashService);
         $this->assertSame($nbResults, $adapter->getNbResults());
@@ -99,7 +99,7 @@ class TrashItemAdapterTest extends TestCase
             ->expects($this->once())
             ->method('findTrashItems')
             ->with($this->equalTo($searchQuery))
-            ->will($this->returnValue($searchResult));
+            ->willReturn($searchResult);
 
         $adapter = $this->getAdapter($query, $this->trashService);
 

@@ -51,7 +51,7 @@ class PlatformElementFactory extends ElementFactory
      * @param string $elementName
      * @param null[]|string[] ...$parameters
      *
-     * @return AdminList|AdminUpdateForm|Breadcrumb|ContentField|DraftConflictDialog|ContentRelationTable|ContentTypePicker|ContentUpdateForm|DateAndTimePopup|Dialog|DraftConflictDialog|DefaultFieldElement|LanguagePicker|LeftMenu|NavLinkTabs|Notification|PreviewNav|RightMenu|DashboardTable|DoubleHeaderTable|LinkedListTable|IconLinkedListTable|SimpleListTable|SimpleTable|SubItemsTable|SystemInfoTable|TrashTable|VerticalOrientedTable|UniversalDiscoveryWidget|UpperMenu
+     * @return AdminList|AdminUpdateForm|Breadcrumb|ContentField|ContentRelationTable|ContentTypePicker|ContentUpdateForm|DashboardTable|DateAndTimePopup|DefaultFieldElement|Dialog|DoubleHeaderTable|DraftConflictDialog|DraftConflictDialog|IconLinkedListTable|LanguagePicker|LeftMenu|LinkedListTable|NavLinkTabs|Notification|PreviewNav|RightMenu|SimpleListTable|SimpleTable|SubItemsTable|SystemInfoTable|TrashTable|UniversalDiscoveryWidget|UpperMenu|VerticalOrientedTable
      */
     public static function createElement(UtilityContext $context, string $elementName, ?string ...$parameters): Element
     {

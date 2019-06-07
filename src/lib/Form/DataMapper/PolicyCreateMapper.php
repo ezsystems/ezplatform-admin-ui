@@ -19,7 +19,7 @@ class PolicyCreateMapper implements DataMapperInterface
     /**
      * Maps given PolicyCreateStruct object to a PolicyCreateData object.
      *
-     * @param ValueObject|PolicyCreateStruct $value
+     * @param PolicyCreateStruct|ValueObject $value
      *
      * @return PolicyCreateData
      *
