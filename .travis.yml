@@ -1,13 +1,13 @@
 dist: trusty
 language: php
 php:
-  - 7.1
+  - 7.3
 
 env:
   global:
     - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform.git"
-    - SYMFONY_ENV=behat
-    - SYMFONY_DEBUG=1
+    - APP_ENV=behat
+    - APP_DEBUG=1
 
 cache:
   directories:
