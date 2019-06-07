@@ -18,7 +18,7 @@
         <div class="px-0 ez-content-container">
             <section class="container mt-5">
                 {% include '@ezdesign/ui/page_title.html.twig' with { title: 'search.headline'|trans|desc('Search'), icon_name: 'search' } %}
-                {% include '@ezdesign/ui/search/search.html.twig' with { form: form } %}
+                {% include '@ezdesign/ui/search/form.html.twig' with { form: form } %}
 
                 {% if results is defined %}
 
