@@ -10,7 +10,7 @@ use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\VersionInfoParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use eZ\Publish\API\Repository\ContentService;
 
 class VersionInfoParamConverterTest extends AbstractParamConverterTest
@@ -23,6 +23,13 @@ class VersionInfoParamConverterTest extends AbstractParamConverterTest
 
     /** @var MockObject */
     protected $serviceMock;
+
+    protected function setUp(): void
+    {
+        $this->serviceMock = $this->createMock(ContentService::class);
+
+        $this->converter = new VersionInfoParamConverter($this->serviceMock);
+    }
 
     /**
      * @dataProvider dataProvider
@@ -62,13 +69,6 @@ class VersionInfoParamConverterTest extends AbstractParamConverterTest
 
         $this->assertTrue($this->converter->apply($request, $config));
         $this->assertInstanceOf(self::SUPPORTED_CLASS, $request->attributes->get(self::PARAMETER_NAME));
-    }
-
-    public function setUp()
-    {
-        $this->serviceMock = $this->createMock(ContentService::class);
-
-        $this->converter = new VersionInfoParamConverter($this->serviceMock);
     }
 
     /**

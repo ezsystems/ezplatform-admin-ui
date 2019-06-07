@@ -10,7 +10,7 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\ContentTypeDraftParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ContentTypeDraftParamConverterTest extends AbstractParamConverterTest
 {
@@ -23,7 +23,7 @@ class ContentTypeDraftParamConverterTest extends AbstractParamConverterTest
     /** @var MockObject */
     protected $contentTypeServiceMock;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 

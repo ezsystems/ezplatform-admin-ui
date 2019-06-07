@@ -18,11 +18,11 @@ use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
 class TrashItemAdapterTest extends TestCase
 {
     /**
-     * @var \eZ\Publish\API\Repository\TrashService|\PHPUnit_Framework_MockObject_MockObject
+     * @var \eZ\Publish\API\Repository\TrashService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $trashService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->trashService = $this->createMock(TrashService::class);

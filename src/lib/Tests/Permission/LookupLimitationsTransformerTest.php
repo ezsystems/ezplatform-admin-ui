@@ -35,7 +35,7 @@ class LookupLimitationsTransformerTest extends TestCase
 
         $flattenedLimitationsValues = (new LookupLimitationsTransformer())->getFlattenedLimitationsValues($lookupLimitations);
 
-        $this->assertEquals([1, 2, 3], $flattenedLimitationsValues, '', 0.0, 10, true);
+        $this->assertEqualsCanonicalizing([1, 2, 3], $flattenedLimitationsValues, '');
     }
 
     public function testGetGroupedLimitationValues(): void

@@ -30,7 +30,7 @@ class LocationIsContainerValidatorTest extends TestCase
     /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType|\PHPUnit\Framework\MockObject\MockObject */
     private $contentType;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->executionContext = $this->createMock(ExecutionContextInterface::class);
         $this->validator = new LocationIsContainerValidator();

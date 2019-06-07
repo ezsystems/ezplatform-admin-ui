@@ -34,7 +34,7 @@ class LocationIsWithinCopySubtreeLimitValidatorTest extends TestCase
     /** @var \eZ\Publish\API\Repository\Values\Content\Location|\PHPUnit\Framework\MockObject\MockObject */
     private $location;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->copyLimit = 10;
         $this->searchService = $this->createMock(SearchService::class);

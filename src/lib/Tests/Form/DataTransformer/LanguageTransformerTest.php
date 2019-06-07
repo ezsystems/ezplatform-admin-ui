@@ -14,7 +14,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class LanguageTransformerTest extends TestCase
 {

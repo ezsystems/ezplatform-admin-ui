@@ -12,14 +12,14 @@ use EzSystems\EzPlatformAdminUi\Tab\TabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\TabRegistry;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class TabRegistryTest extends TestCase
 {
     private $groupName;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->groupName = 'group_name';

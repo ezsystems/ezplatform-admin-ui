@@ -19,8 +19,9 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
-use Symfony\Component\Translation\TranslatorInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Component\Translation\Translator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class RequestLocaleListenerTest extends TestCase
@@ -35,7 +36,7 @@ class RequestLocaleListenerTest extends TestCase
     /** @var \Symfony\Component\HttpKernel\HttpKernelInterface|MockObject */
     private $httpKernel;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
@@ -44,11 +45,11 @@ class RequestLocaleListenerTest extends TestCase
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $configResolver;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
-        $this->translator = $this->createMock(TranslatorInterface::class);
+        $this->translator = $this->createMock(Translator::class);
 
         $this->request = $this
             ->getMockBuilder(Request::class)
@@ -59,12 +60,8 @@ class RequestLocaleListenerTest extends TestCase
 
         $this->httpKernel = $this->createMock(HttpKernelInterface::class);
 
-        $requestStack = new RequestStack();
-        $requestStack->push($this->request);
-
         $this->userLanguagePreferenceProvider = $this
             ->getMockBuilder(UserLanguagePreferenceProviderInterface::class)
-            ->setConstructorArgs([$requestStack])
             ->getMock();
 
         $this->configResolver = $this->createMock(ConfigResolverInterface::class);
@@ -227,11 +224,13 @@ class RequestLocaleListenerTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Translation\TranslatorInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Contracts\Translation\TranslatorInterface
+     *
+     * @throws \ReflectionException
      */
     private function translatorWithSetLocaleExpectsNever(): MockObject
     {
-        $translator = $this->createMock(TranslatorInterface::class);
+        $translator = $this->createMock(Translator::class);
         $translator
             ->expects($this->never())
             ->method('setLocale');

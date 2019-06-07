@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use PHPUnit\Framework\TestCase;
 use EzSystems\EzPlatformAdminUi\EventListener\RequestListener;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class RequestListenerTest extends TestCase
 {
@@ -30,7 +30,7 @@ class RequestListenerTest extends TestCase
     /** @var HttpKernelInterface|MockObject */
     private $httpKernel;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

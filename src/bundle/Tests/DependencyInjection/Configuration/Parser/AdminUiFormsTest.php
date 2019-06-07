@@ -27,7 +27,7 @@ class AdminUiFormsTest extends TestCase
      */
     private $contextualizer;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->parser = new AdminUiForms();
         $this->contextualizer = $this->createMock(ContextualizerInterface::class);

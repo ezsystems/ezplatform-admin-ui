@@ -161,7 +161,7 @@ class CustomTagTest extends TestCase
     }
 
     /**
-     * @return \Symfony\Component\Translation\TranslatorInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Symfony\Contracts\Translation\TranslatorInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function getTranslatorMock(): MockObject
     {

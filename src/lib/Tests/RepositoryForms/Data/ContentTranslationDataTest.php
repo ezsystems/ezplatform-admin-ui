@@ -16,7 +16,7 @@ class ContentTranslationDataTest extends TestCase
     /** @var ContentTranslationData */
     private $contentTranslationData;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->contentTranslationData = new ContentTranslationData();
     }

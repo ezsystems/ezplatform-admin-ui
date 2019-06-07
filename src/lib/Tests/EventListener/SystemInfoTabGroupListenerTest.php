@@ -17,7 +17,7 @@ use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;
 use EzSystems\EzPlatformAdminUi\Tab\SystemInfo\TabFactory;
 use EzSystems\EzPlatformAdminUi\Tab\TabRegistry;
 use EzSystems\EzSupportToolsBundle\SystemInfo\SystemInfoCollectorRegistry;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class SystemInfoTabGroupListenerTest extends TestCase
 {
@@ -36,7 +36,7 @@ class SystemInfoTabGroupListenerTest extends TestCase
     /** @var TabFactory|MockObject */
     private $tabFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

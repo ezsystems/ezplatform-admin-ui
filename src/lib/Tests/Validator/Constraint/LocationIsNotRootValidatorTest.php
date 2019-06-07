@@ -22,7 +22,7 @@ class LocationIsNotRootValidatorTest extends TestCase
     /** @var \EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationIsContainerValidator */
     private $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->executionContext = $this->createMock(ExecutionContextInterface::class);
         $this->validator = new LocationIsNotRootValidator();

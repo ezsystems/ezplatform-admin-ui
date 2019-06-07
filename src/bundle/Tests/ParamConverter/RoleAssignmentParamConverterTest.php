@@ -10,7 +10,7 @@ use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\RoleAssignmentParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RoleAssignmentParamConverterTest extends AbstractParamConverterTest
@@ -24,7 +24,7 @@ class RoleAssignmentParamConverterTest extends AbstractParamConverterTest
     /** @var MockObject */
     protected $serviceMock;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->serviceMock = $this->createMock(RoleService::class);
 

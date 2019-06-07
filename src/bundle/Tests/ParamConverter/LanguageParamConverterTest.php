@@ -25,7 +25,7 @@ class LanguageParamConverterTest extends AbstractParamConverterTest
     /** @var \eZ\Publish\API\Repository\LanguageService|\PHPUnit\Framework\MockObject\MockObject */
     protected $serviceMock;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->serviceMock = $this->createMock(LanguageService::class);
         $this->converter = new LanguageParamConverter($this->serviceMock);

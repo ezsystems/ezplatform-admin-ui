@@ -14,14 +14,14 @@ use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\ContentInfoTransformer;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ContentInfoTransformerTest extends TestCase
 {
     /** @var ContentInfoTransformer */
     private $contentInfoTransformer;
 
-    public function setUp()
+    protected function setUp(): void
     {
         /** @var ContentService|MockObject $contentService */
         $contentService = $this->createMock(ContentService::class);

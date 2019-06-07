@@ -19,14 +19,14 @@ class PolicyUpdateMapperTest extends TestCase
     /** @var PolicyUpdateMapper */
     private $mapper;
 
-    public function setUp()
+    protected function setUp(): void
     {
         /* TODO - test skipped, because tested class need to be improved */
         $this->markTestSkipped();
         $this->mapper = new PolicyUpdateMapper();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->mapper);
     }

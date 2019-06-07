@@ -24,7 +24,7 @@ class ContentTypeIconResolverTest extends TestCase
     /** @var \EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver */
     private $contentTypeIconResolver;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->configResolver = $this->createMock(ConfigResolverInterface::class);
         $this->packages = $this->createMock(Packages::class);

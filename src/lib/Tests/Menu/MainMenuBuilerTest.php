@@ -30,7 +30,7 @@ class MainMenuBuilerTest extends TestCase
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $knpFactory = $this->createMock(\Knp\Menu\FactoryInterface::class);
 
@@ -55,7 +55,7 @@ class MainMenuBuilerTest extends TestCase
         $this->permissionResolver = $this->createMock(PermissionResolver::class);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->factory, $this->eventDispatcher, $this->configResolver, $this->permissionResolver);
     }

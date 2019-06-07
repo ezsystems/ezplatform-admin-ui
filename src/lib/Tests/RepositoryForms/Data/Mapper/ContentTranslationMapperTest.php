@@ -28,7 +28,7 @@ class ContentTranslationMapperTest extends TestCase
     /** @var ContentTranslationMapper */
     private $mapper;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->mapper = new ContentTranslationMapper();
     }
