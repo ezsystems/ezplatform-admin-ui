@@ -18,6 +18,8 @@ use WebDriver\LogType;
 class Hooks extends RawMinkContext
 {
     private const CONSOLE_LOGS_LIMIT = 10;
+    private const APPLICATION_LOGS_LIMIT = 10;
+    private const LOG_FILE_NAME = 'travis_test.log';
 
     use KernelDictionary;
 
@@ -56,7 +58,7 @@ class Hooks extends RawMinkContext
     }
 
     /** @AfterStep */
-    public function getBrowserLogAfterFailedStep(AfterStepScope $scope)
+    public function getLogsAfterFailedStep(AfterStepScope $scope)
     {
         if ($scope->getTestResult()->getResultCode() !== TestResult::FAILED) {
             return;
@@ -64,35 +66,63 @@ class Hooks extends RawMinkContext
 
         $driver = $this->getSession()->getDriver();
         if ($driver instanceof Selenium2Driver) {
-            $logEntries = $driver->getWebDriverSession()->log(LogType::BROWSER);
-            $this->displayLogErrors($logEntries);
+            $browserLogEntries = $this->parseBrowserLogs($driver->getWebDriverSession()->log(LogType::BROWSER));
+            $this->displayLogEntries('JS console errors:', $browserLogEntries);
         }
+
+        $applicationLogEntries = $this->parseApplicationlogs();
+        $this->displayLogEntries('Application errors:', $applicationLogEntries);
     }
 
-    private function displayLogErrors($logEntries): void
+    private function parseApplicationlogs(): array
+    {
+        $logEntries = [];
+        $counter = 0;
+
+        $file = @fopen(sprintf('%s/%s', $this->getKernel()->getLogDir(), self::LOG_FILE_NAME), 'r');
+
+        if ($file === false) {
+            return $logEntries;
+        }
+
+        while (!feof($file)) {
+            if ($counter >= self::APPLICATION_LOGS_LIMIT) {
+                break;
+            }
+
+            $logEntries[] = fgets($file);
+            ++$counter;
+        }
+
+        fclose($file);
+
+        return $logEntries;
+    }
+
+    private function parseBrowserLogs($logEntries): array
     {
         $filter = new BrowserLogFilter();
+
+        if (empty($logEntries)) {
+            return [];
+        }
+
         $errorMessages = array_column($logEntries, 'message');
         $errorMessages = $filter->filter($errorMessages);
 
-        if (empty($errorMessages)) {
+        return \array_slice($errorMessages, 0, self::CONSOLE_LOGS_LIMIT);
+    }
+
+    private function displayLogEntries($sectionName, $logEntries)
+    {
+        if (empty($logEntries)) {
             return;
         }
 
-        $this->print('JS console errors:');
-        $counter = 0;
-        foreach ($errorMessages as $message) {
-            if ($counter >= self::CONSOLE_LOGS_LIMIT) {
-                return;
-            }
+        echo sprintf('%s' . PHP_EOL, $sectionName);
 
-            $this->print($message);
-            ++$counter;
+        foreach ($logEntries as $logEntry) {
+            echo sprintf('%s' . PHP_EOL, $logEntry);
         }
-    }
-
-    private function print(string $message): void
-    {
-        echo sprintf('%s%s', $message, PHP_EOL);
     }
 }
