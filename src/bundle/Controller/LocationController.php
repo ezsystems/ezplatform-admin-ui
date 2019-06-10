@@ -38,14 +38,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LocationController extends Controller
 {
     /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     /** @var \eZ\Publish\API\Repository\ContentService */
@@ -74,7 +74,7 @@ class LocationController extends Controller
 
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\ContentService $contentService
@@ -371,7 +371,7 @@ class LocationController extends Controller
     }
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData|\EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData|\EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData $data
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *

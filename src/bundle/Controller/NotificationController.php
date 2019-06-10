@@ -17,7 +17,7 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NotificationController extends Controller
 {
@@ -27,7 +27,7 @@ class NotificationController extends Controller
     /** @var \eZ\Publish\Core\Notification\Renderer\Registry */
     protected $registry;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     protected $translator;
 
     /** @var int */
@@ -36,7 +36,7 @@ class NotificationController extends Controller
     /**
      * @param \eZ\Publish\API\Repository\NotificationService $notificationService
      * @param \eZ\Publish\Core\Notification\Renderer\Registry $registry
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param int $notificationPaginationLimit
      */
     public function __construct(

@@ -19,12 +19,12 @@ class PolicyCreateMapperTest extends TestCase
     /** @var PolicyCreateMapper */
     private $mapper;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->mapper = new PolicyCreateMapper();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->mapper);
     }

@@ -8,14 +8,14 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Notification;
 
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class TranslatableNotificationHandler implements TranslatableNotificationHandlerInterface
 {
     /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     public function __construct(

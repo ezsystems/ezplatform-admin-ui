@@ -18,11 +18,11 @@ use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
 class TrashItemAdapterTest extends TestCase
 {
     /**
-     * @var \eZ\Publish\API\Repository\TrashService|\PHPUnit_Framework_MockObject_MockObject
+     * @var \eZ\Publish\API\Repository\TrashService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $trashService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->trashService = $this->createMock(TrashService::class);
@@ -59,7 +59,7 @@ class TrashItemAdapterTest extends TestCase
             ->expects($this->once())
             ->method('findTrashItems')
             ->with($this->equalTo($countQuery))
-            ->will($this->returnValue($searchResult));
+            ->willReturn($searchResult);
 
         $adapter = $this->getAdapter($query, $this->trashService);
         $this->assertSame($nbResults, $adapter->getNbResults());
@@ -99,7 +99,7 @@ class TrashItemAdapterTest extends TestCase
             ->expects($this->once())
             ->method('findTrashItems')
             ->with($this->equalTo($searchQuery))
-            ->will($this->returnValue($searchResult));
+            ->willReturn($searchResult);
 
         $adapter = $this->getAdapter($query, $this->trashService);
 

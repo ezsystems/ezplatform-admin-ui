@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class UiConfigProviderPassTest extends AbstractCompilerPassTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->setDefinition(Aggregator::class, new Definition());
@@ -25,7 +25,7 @@ class UiConfigProviderPassTest extends AbstractCompilerPassTestCase
     /**
      * @param ContainerBuilder $container
      */
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new UiConfigProviderPass());
     }

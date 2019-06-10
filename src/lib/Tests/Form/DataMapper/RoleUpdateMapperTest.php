@@ -19,12 +19,12 @@ class RoleUpdateMapperTest extends TestCase
     /** @var RoleUpdateMapper */
     private $mapper;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->mapper = new RoleUpdateMapper();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->mapper);
     }

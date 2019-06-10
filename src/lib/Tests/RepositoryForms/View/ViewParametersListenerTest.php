@@ -27,7 +27,7 @@ class ViewParametersListenerTest extends TestCase
     /** @var PreContentViewEvent */
     private $event;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $contentInfo = $this->generateContentInfo();
 
@@ -197,7 +197,13 @@ class ViewParametersListenerTest extends TestCase
             ],
         ];
 
-        $this->assertArraySubset($expectedSubscribedEvents, $viewParametersListener::getSubscribedEvents());
+        $actualSubscribedEvents = $viewParametersListener::getSubscribedEvents();
+
+        $this->assertCount(count($actualSubscribedEvents), $expectedSubscribedEvents);
+        foreach ($expectedSubscribedEvents as $key => $value) {
+            $this->assertArrayHasKey($key, $actualSubscribedEvents);
+            $this->assertSame($value, $actualSubscribedEvents[$key]);
+        }
     }
 
     /**

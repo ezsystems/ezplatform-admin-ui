@@ -11,7 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\SystemInfo;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractControllerBasedTab;
 use Symfony\Bridge\Twig\Extension\HttpKernelRuntime;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class SystemInfoTab extends AbstractControllerBasedTab

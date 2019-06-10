@@ -23,11 +23,11 @@ class AdminUiFormsTest extends TestCase
     private $parser;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface
+     * @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $contextualizer;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->parser = new AdminUiForms();
         $this->contextualizer = $this->createMock(ContextualizerInterface::class);

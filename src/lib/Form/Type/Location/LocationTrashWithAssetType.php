@@ -20,21 +20,21 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LocationTrashWithAssetType extends AbstractType
 {
     const RADIO_SELECT_TRASH_WITH_ASSETS = 'trash_with_assets';
     const RADIO_SELECT_DEFAULT_TRASH = 'trash_default';
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
     /**
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      */
     public function __construct(

@@ -230,7 +230,7 @@ class AdministrationContext extends BusinessContext
     }
 
     /**
-     * @param ContentTypeGroupsPage|SectionPage|SectionsPage|LanguagesPage|RolesPage|RolePage $page
+     * @param ContentTypeGroupsPage|LanguagesPage|RolePage|RolesPage|SectionPage|SectionsPage $page
      */
     private function performDeletion(Page $page)
     {

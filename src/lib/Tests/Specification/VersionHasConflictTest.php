@@ -75,7 +75,7 @@ class VersionHasConflictTest extends TestCase
      * @param int $versionNo
      * @param string $languageCode
      *
-     * @return VersionInfo|MockObject
+     * @return MockObject|VersionInfo
      */
     private function createVersionInfo(bool $isPublished = false, int $versionNo = 1, string $languageCode = 'eng-GB'): VersionInfo
     {
@@ -97,12 +97,12 @@ class VersionHasConflictTest extends TestCase
 
         $versionInfo
             ->method('__get')
-            ->will($this->returnValueMap(
+            ->willReturnMap(
                 [
                     ['initialLanguageCode', $languageCode],
                     ['versionNo', $versionNo],
                 ]
-            ));
+            );
 
         $versionInfo
             ->method('getContentInfo')

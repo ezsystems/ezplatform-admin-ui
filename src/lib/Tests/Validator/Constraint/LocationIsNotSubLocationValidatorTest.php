@@ -23,7 +23,7 @@ class LocationIsNotSubLocationValidatorTest extends TestCase
     /** @var \EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationIsNotSubLocationValidator */
     private $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->executionContext = $this->createMock(ExecutionContextInterface::class);
         $this->validator = new LocationIsNotSubLocationValidator();

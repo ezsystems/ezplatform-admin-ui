@@ -51,7 +51,7 @@ class LocationUpdateData
     }
 
     /**
-     * @param null|int $sortField
+     * @param int|null $sortField
      *
      * @return LocationUpdateData
      */
@@ -63,7 +63,7 @@ class LocationUpdateData
     }
 
     /**
-     * @return null|int
+     * @return int|null
      */
     public function getSortField(): ?int
     {
@@ -71,7 +71,7 @@ class LocationUpdateData
     }
 
     /**
-     * @param null|int $sortOrder
+     * @param int|null $sortOrder
      *
      * @return LocationUpdateData
      */
@@ -83,7 +83,7 @@ class LocationUpdateData
     }
 
     /**
-     * @return null|int
+     * @return int|null
      */
     public function getSortOrder(): ?int
     {

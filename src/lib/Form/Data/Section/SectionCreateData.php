@@ -34,8 +34,8 @@ class SectionCreateData
     protected $name;
 
     /**
-     * @param null|string $identifier
-     * @param null|string $name
+     * @param string|null $identifier
+     * @param string|null $name
      */
     public function __construct(?string $identifier = null, ?string $name = null)
     {
@@ -44,7 +44,7 @@ class SectionCreateData
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getIdentifier(): ?string
     {
@@ -52,7 +52,7 @@ class SectionCreateData
     }
 
     /**
-     * @param null|string $identifier
+     * @param string|null $identifier
      *
      * @return SectionCreateData
      */
@@ -64,7 +64,7 @@ class SectionCreateData
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getName(): ?string
     {
@@ -72,7 +72,7 @@ class SectionCreateData
     }
 
     /**
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return SectionCreateData
      */

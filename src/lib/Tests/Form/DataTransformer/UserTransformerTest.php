@@ -23,7 +23,7 @@ class UserTransformerTest extends TestCase
     /** @var \EzSystems\EzPlatformAdminUi\Form\DataTransformer\UserTransformer */
     private $userTransformer;
 
-    public function setUp()
+    protected function setUp(): void
     {
         /** @var \eZ\Publish\API\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject $userService */
         $userService = $this->createMock(UserService::class);

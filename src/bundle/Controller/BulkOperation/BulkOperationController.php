@@ -8,33 +8,25 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation;
 
-use EzSystems\EzPlatformRest\Input\Dispatcher;
 use EzSystems\EzPlatformRest\Message;
 use EzSystems\EzPlatformAdminUi\REST\Value\BulkOperationResponse;
 use EzSystems\EzPlatformAdminUi\REST\Value\Operation;
 use EzSystems\EzPlatformAdminUi\REST\Value\OperationResponse;
-use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
+use EzSystems\EzPlatformRest\Server\Controller as RestController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class BulkOperationController extends Controller
+class BulkOperationController extends RestController
 {
-    /** @var \EzSystems\EzPlatformRest\Input\Dispatcher */
-    private $inputDispatcher;
-
-    /** @var \Symfony\Component\HttpKernel\HttpKernel */
+    /** @var \Symfony\Component\HttpKernel\HttpKernelInterface */
     private $httpKernel;
 
     /**
-     * @param \EzSystems\EzPlatformRest\Input\Dispatcher $inputDispatcher
-     * @param \Symfony\Component\HttpKernel\HttpKernel $httpKernel
+     * @param \Symfony\Component\HttpKernel\HttpKernelInterface $httpKernel
      */
     public function __construct(
-        Dispatcher $inputDispatcher,
-        HttpKernel $httpKernel
+        HttpKernelInterface $httpKernel
     ) {
-        $this->inputDispatcher = $inputDispatcher;
         $this->httpKernel = $httpKernel;
     }
 

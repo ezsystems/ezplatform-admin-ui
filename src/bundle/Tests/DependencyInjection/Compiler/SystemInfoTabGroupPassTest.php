@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class SystemInfoTabGroupPassTest extends AbstractCompilerPassTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->setDefinition(TabRegistry::class, new Definition());
@@ -25,7 +25,7 @@ class SystemInfoTabGroupPassTest extends AbstractCompilerPassTestCase
     /**
      * @param ContainerBuilder $container
      */
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new SystemInfoTabGroupPass());
     }

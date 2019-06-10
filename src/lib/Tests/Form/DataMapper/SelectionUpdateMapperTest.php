@@ -20,12 +20,12 @@ class SelectionUpdateMapperTest extends TestCase
     /** @var SectionUpdateMapper */
     private $mapper;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->mapper = new SectionUpdateMapper();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->mapper);
     }

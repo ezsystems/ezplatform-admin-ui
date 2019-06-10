@@ -3,113 +3,182 @@ services:
         resource: "../../Controller/*"
         exclude: "../../Controller/{Controller}"
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\UserProfile\UserPasswordChangeController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         deprecated: '"%service_id%" is deprecated since 1.5 and will be removed in 2.0. Please use \EzSystems\EzPlatformUserBundle\Controller\PasswordChangeController instead.'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\User\UserSettingsController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         deprecated: '"%service_id%" is deprecated since in 1.5 and will be removed in 2.0. Please use \EzSystems\EzPlatformUserBundle\Controller\UserSettingsController instead.'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\User\UserForgotPasswordController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         deprecated: '"%service_id%" is deprecated since in 1.5 and will be removed in 2.0. Please use \EzSystems\EzPlatformUserBundle\Controller\PasswordResetController instead.'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $siteaccessResolver: '@EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver'
             $userContentTypeIdentifier: '$user_content_type_identifier$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentOnTheFlyController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $userContentTypeIdentifier: '$user_content_type_identifier$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $contentTypeActionDispatcher: '@ezrepoforms.action_dispatcher.content_type'
             $languages: '$languages$'
             $defaultPaginationLimit: '$pagination.content_type_limit$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeGroupController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $defaultPaginationLimit: '$pagination.content_type_group_limit$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\SearchController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $defaultPaginationLimit: '$pagination.search_limit$'
             $userContentTypeIdentifier: '$user_content_type_identifier$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\User\UserDeleteController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\TrashController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $defaultPaginationLimit: '$pagination.trash_limit$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\SectionController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $defaultPaginationLimit: '$pagination.section_limit$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\LanguageController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $defaultPaginationLimit: '$pagination.language_limit$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\RoleController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $defaultPaginationLimit: '$pagination.role_limit$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\RoleAssignmentController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $defaultPaginationLimit: '$pagination.role_assignment_limit$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\PolicyController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $defaultPaginationLimit: '$pagination.policy_limit$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ObjectStateController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $languages: '$languages$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ObjectStateGroupController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $languages: '$languages$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $visitor: '@ezpublish_rest.output.visitor.json'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\BookmarkController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $defaultPaginationLimit: '$pagination.bookmark_limit$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\AssetController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\NotificationController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $notificationPaginationLimit: '$pagination.notification_limit$'
+        tags:
+            - controller.service_arguments
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentDraftController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
             $defaultPaginationLimit: '$pagination.content_draft_limit$'
+        tags:
+            - controller.service_arguments
 
     #
     # REST
@@ -119,4 +188,8 @@ services:
         parent: ezpublish_rest.controller.base
         tags: ['controller.service_arguments']
         autowire: true
-        autoconfigure: false
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation\BulkOperationController:
+        parent: ezpublish_rest.controller.base
+        tags: ['controller.service_arguments']
+        autowire: true

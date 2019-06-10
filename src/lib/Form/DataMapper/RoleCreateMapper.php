@@ -19,7 +19,7 @@ class RoleCreateMapper implements DataMapperInterface
     /**
      * Maps given RoleCreateStruct object to a RoleCreateData object.
      *
-     * @param ValueObject|RoleCreateStruct $value
+     * @param RoleCreateStruct|ValueObject $value
      *
      * @return RoleCreateData
      *

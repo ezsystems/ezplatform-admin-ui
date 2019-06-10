@@ -161,7 +161,7 @@ class CustomTagTest extends TestCase
     }
 
     /**
-     * @return \Symfony\Component\Translation\TranslatorInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Contracts\Translation\TranslatorInterface
      */
     private function getTranslatorMock(): MockObject
     {
@@ -190,7 +190,7 @@ class CustomTagTest extends TestCase
     }
 
     /**
-     * @return \Symfony\Component\Asset\Packages|\PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Asset\Packages
      */
     private function getPackagesMock(): MockObject
     {

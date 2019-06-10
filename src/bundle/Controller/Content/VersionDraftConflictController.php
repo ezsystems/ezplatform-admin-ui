@@ -17,7 +17,7 @@ use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class VersionDraftConflictController extends Controller
 {
@@ -33,7 +33,7 @@ class VersionDraftConflictController extends Controller
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     /**
@@ -41,7 +41,7 @@ class VersionDraftConflictController extends Controller
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
      * @param \eZ\Publish\API\Repository\UserService $userService
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      */
     public function __construct(
         LocationService $locationService,

@@ -12,7 +12,7 @@ use eZ\Publish\Core\Repository\Values\User\Policy as UserPolicy;
 use eZ\Publish\API\Repository\Values\User\Role;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\PolicyParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PolicyParamConverterTest extends AbstractParamConverterTest
@@ -26,7 +26,7 @@ class PolicyParamConverterTest extends AbstractParamConverterTest
     /** @var MockObject */
     protected $serviceMock;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->serviceMock = $this->createMock(RoleService::class);
 

@@ -18,13 +18,13 @@ class ContentTypeIconResolverTest extends TestCase
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $configResolver;
 
-    /** @var \Symfony\Component\Asset\Packages|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Asset\Packages */
     private $packages;
 
     /** @var \EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver */
     private $contentTypeIconResolver;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->configResolver = $this->createMock(ConfigResolverInterface::class);
         $this->packages = $this->createMock(Packages::class);

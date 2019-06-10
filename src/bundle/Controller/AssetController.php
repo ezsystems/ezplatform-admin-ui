@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -37,14 +37,14 @@ class AssetController extends Controller
     /** @var \eZ\Publish\Core\FieldType\ImageAsset\AssetMapper */
     private $imageAssetMapper;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     /**
      * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
      * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrfTokenManager
      * @param \eZ\Publish\Core\FieldType\ImageAsset\AssetMapper $imageAssetMapper
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      */
     public function __construct(
         ValidatorInterface $validator,

@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText;
 
 use RuntimeException;
 use Symfony\Component\Asset\Packages;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * RichText Custom Style configuration mapper.

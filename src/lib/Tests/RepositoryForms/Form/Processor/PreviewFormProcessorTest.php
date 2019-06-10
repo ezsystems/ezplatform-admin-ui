@@ -43,7 +43,7 @@ class PreviewFormProcessorTest extends TestCase
     /** @var LocationService $locationService */
     private $locationService;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->contentService = $this->createMock(ContentService::class);
         $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
@@ -203,7 +203,7 @@ class PreviewFormProcessorTest extends TestCase
     /**
      * @param $config
      *
-     * @return MockObject|FormInterface
+     * @return FormInterface|MockObject
      */
     private function generateFormMock($config): MockObject
     {

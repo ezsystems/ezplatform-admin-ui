@@ -19,12 +19,12 @@ class LanguageCreateMapperTest extends TestCase
     /** @var LanguageCreateMapper */
     private $mapper;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->mapper = new LanguageCreateMapper();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->mapper);
     }

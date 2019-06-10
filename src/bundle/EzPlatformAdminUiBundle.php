@@ -33,7 +33,7 @@ class EzPlatformAdminUiBundle extends Bundle
         $configParsers = $this->getConfigParsers();
         array_walk($configParsers, [$core, 'addConfigParser']);
 
-        $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ezplatform_default_settings.yml']);
+        $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ezplatform_default_settings.yaml']);
 
         $this->addCompilerPasses($container);
     }

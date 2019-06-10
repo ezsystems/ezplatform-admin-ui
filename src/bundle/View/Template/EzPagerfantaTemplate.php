@@ -8,7 +8,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\View\Template;
 
 use Pagerfanta\View\Template\TwitterBootstrap4Template;
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Template to customize Pagerfanta pagination.

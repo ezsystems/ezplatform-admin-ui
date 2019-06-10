@@ -22,7 +22,7 @@ class ContentTranslationMapper implements FormDataMapperInterface
      * Maps a ValueObject from eZ content repository to a data usable as underlying form data (e.g. create/update
      * struct).
      *
-     * @param \eZ\Publish\API\Repository\Values\ValueObject|\eZ\Publish\API\Repository\Values\Content\Content $content
+     * @param \eZ\Publish\API\Repository\Values\Content\Content|\eZ\Publish\API\Repository\Values\ValueObject $content
      * @param array $params
      *
      * @return \EzSystems\EzPlatformAdminUi\RepositoryForms\Data\ContentTranslationData

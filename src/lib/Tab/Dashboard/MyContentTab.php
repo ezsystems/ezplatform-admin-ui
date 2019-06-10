@@ -14,7 +14,7 @@ use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use Pagerfanta\Pagerfanta;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class MyContentTab extends AbstractTab implements OrderedTabInterface

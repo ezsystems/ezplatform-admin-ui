@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab;
 
 use Symfony\Bridge\Twig\Extension\HttpKernelRuntime;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 /**
