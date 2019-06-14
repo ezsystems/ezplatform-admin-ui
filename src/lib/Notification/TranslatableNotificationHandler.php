@@ -26,7 +26,7 @@ final class TranslatableNotificationHandler implements TranslatableNotificationH
         $this->translator = $translator;
     }
 
-    public function info(string $message, array $parameters, ?string $domain = null, ?string $locale = null): void
+    public function info(string $message, array $parameters = [], ?string $domain = null, ?string $locale = null): void
     {
         $translatedMessage = $this->translator->trans(
             /** @Ignore */
@@ -38,7 +38,7 @@ final class TranslatableNotificationHandler implements TranslatableNotificationH
         $this->notificationHandler->info(/** @Ignore */ $translatedMessage);
     }
 
-    public function success(string $message, array $parameters, ?string $domain = null, ?string $locale = null): void
+    public function success(string $message, array $parameters = [], ?string $domain = null, ?string $locale = null): void
     {
         $translatedMessage = $this->translator->trans(
             /** @Ignore */
@@ -50,7 +50,7 @@ final class TranslatableNotificationHandler implements TranslatableNotificationH
         $this->notificationHandler->success(/** @Ignore */ $translatedMessage);
     }
 
-    public function warning(string $message, array $parameters, ?string $domain = null, ?string $locale = null): void
+    public function warning(string $message, array $parameters = [], ?string $domain = null, ?string $locale = null): void
     {
         $translatedMessage = $this->translator->trans(
             /** @Ignore */
@@ -62,7 +62,7 @@ final class TranslatableNotificationHandler implements TranslatableNotificationH
         $this->notificationHandler->warning(/** @Ignore */ $translatedMessage);
     }
 
-    public function error(string $message, array $parameters, ?string $domain = null, ?string $locale = null): void
+    public function error(string $message, array $parameters = [], ?string $domain = null, ?string $locale = null): void
     {
         $translatedMessage = $this->translator->trans(
             /** @Ignore */
