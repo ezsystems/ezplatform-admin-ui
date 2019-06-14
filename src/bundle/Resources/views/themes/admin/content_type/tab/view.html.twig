@@ -64,7 +64,7 @@
         </tr>
         <tr class="ez-table__row">
             <td class="ez-table__cell">{{ "content_type.container"|trans|desc("Container") }}</td>
-            <td class="ez-table__cell">{{ 'yes_no'|transchoice(content_type.isContainer)|desc("{0}No|{1}Yes") }}</td>
+            <td class="ez-table__cell">{{ 'yes_no'|transchoice(content_type.isContainer|number_format)|desc("{0}No|{1}Yes") }}</td>
         </tr>
         <tr class="ez-table__row">
             <td class="ez-table__cell">{{ "content_type.default_children_sorting"|trans|desc("Default field for sorting children") }}</td>
@@ -85,7 +85,7 @@
                     {{ "content_type.default_availability.help"|trans|desc("Default availability in primary language, if translation is absent") }}
                 </p>
             </td>
-            <td class="ez-table__cell">{{ 'content_type.default_availability.value'|transchoice(content_type.defaultAlwaysAvailable)|desc("{0} Not available|{1} Available") }}</td>
+            <td class="ez-table__cell">{{ 'content_type.default_availability.value'|transchoice(content_type.defaultAlwaysAvailable|number_format)|desc("{0} Not available|{1} Available") }}</td>
         </tr>
         </tbody>
     </table>
