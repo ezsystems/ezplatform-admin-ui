@@ -81,6 +81,10 @@ const customTagBaseDefinition = {
         });
     },
 
+    getIdentifier() {
+        return 'ezcustomtag';
+    },
+
     /**
      * Clear the node.
      *

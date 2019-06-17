@@ -117,6 +117,10 @@ export default class EzConfigBase {
         };
     }
 
+    getEditAttributesButton(config) {
+        return config.attributes[this.name] || config.classes[this.name] ? `${this.name}edit` : '';
+    }
+
     addExtraButtons(extraButtons = {}) {
         if (extraButtons[this.name]) {
             this.buttons = [...this.buttons, ...extraButtons[this.name]];

@@ -1,8 +1,8 @@
 import EzConfigTableBase from './base-table';
 
-export default class EzTableConfig extends EzConfigTableBase {
+export default class EzTableCellConfig extends EzConfigTableBase {
     getConfigName() {
-        return 'table';
+        return 'td';
     }
 
     test(payload) {
@@ -10,8 +10,8 @@ export default class EzTableConfig extends EzConfigTableBase {
         const path = nativeEditor.elementPath();
         const lastElement = path.lastElement;
 
-        return lastElement.is('table');
+        return lastElement.is('td');
     }
 }
 
-eZ.addConfig('ezAlloyEditor.ezTableConfig', EzTableConfig);
+eZ.addConfig('ezAlloyEditor.ezTableCellConfig', EzTableCellConfig);

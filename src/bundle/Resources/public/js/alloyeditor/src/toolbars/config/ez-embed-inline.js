@@ -7,7 +7,7 @@ export default class EzEmbedInlineConfig extends EzConfigBase {
         super(config);
 
         this.name = 'embedinline';
-        this.buttons = ['ezembedupdate', 'ezblockremove'];
+        this.buttons = [this.getEditAttributesButton(config), 'ezembedupdate', 'ezblockremove'];
 
         this.addExtraButtons(config.extraButtons);
     }
