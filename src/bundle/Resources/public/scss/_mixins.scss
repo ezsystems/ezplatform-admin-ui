@@ -252,6 +252,10 @@
         width: 100%;
         padding: calculateRem(8px) calculateRem(24px) calculateRem(24px) calculateRem(24px);
 
+        &:focus {
+            outline: none;
+        }
+
         .is-block-focused,
         .cke_widget_wrapper.cke_widget_focused > .cke_widget_element {
             outline: calculateRem(2px) dashed $ez-ground-base-dark;

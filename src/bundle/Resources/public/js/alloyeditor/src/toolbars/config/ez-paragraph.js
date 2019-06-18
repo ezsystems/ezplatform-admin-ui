@@ -5,9 +5,13 @@ export default class EzParagraphConfig extends EzConfgiFixedBase {
         super(config);
 
         this.name = 'paragraph';
+
+        const editAttributesButton = this.getEditAttributesButton(config);
+
         this.buttons = [
             'ezmoveup',
             'ezmovedown',
+            editAttributesButton,
             this.getStyles(config.customStyles),
             'ezembedinline',
             'ezanchor',

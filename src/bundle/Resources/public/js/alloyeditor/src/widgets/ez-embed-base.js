@@ -67,6 +67,10 @@ const embedBaseDefinition = {
         this.initEditMode();
     },
 
+    getIdentifier() {
+        return this.isImage() ? 'ezembedimage' : 'ezembed';
+    },
+
     /**
      * Initializes the edit mode.
      *

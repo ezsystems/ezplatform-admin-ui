@@ -1,4 +1,5 @@
 (function(global, doc, eZ, CKEDITOR, AlloyEditor) {
+    const HTML_NODE = 1;
     const TEXT_NODE = 3;
 
     class BaseRichText {
@@ -16,8 +17,12 @@
                 link: [],
                 text: [],
                 table: [],
+                tr: [],
+                td: [],
                 ...eZ.adminUiConfig.alloyEditor.extraButtons,
             };
+            this.attributes = global.eZ.adminUiConfig.alloyEditor.attributes;
+            this.classes = global.eZ.adminUiConfig.alloyEditor.classes;
             this.customTagsToolbars = this.customTags.map((customTag) => {
                 const alloyEditorConfig = eZ.adminUiConfig.richTextCustomTags[customTag];
 
@@ -185,7 +190,7 @@
         }
 
         init(container) {
-            const toolbarProps = { extraButtons: this.alloyEditorExtraButtons };
+            const toolbarProps = { extraButtons: this.alloyEditorExtraButtons , attributes: this.attributes, classes: this.classes };
             const alloyEditor = AlloyEditor.editable(container.getAttribute('id'), {
                 toolbars: {
                     ezadd: {
@@ -212,25 +217,38 @@
                                 ...toolbarProps,
                             }),
                             ...this.inlineCustomTagsToolbars,
-                            new eZ.ezAlloyEditor.ezParagraphConfig({
+                            new window.eZ.ezAlloyEditor.ezParagraphConfig({
                                 customStyles: this.customStylesConfigurations,
                                 ...toolbarProps,
                             }),
-                            new eZ.ezAlloyEditor.ezFormattedConfig({
+                            new window.eZ.ezAlloyEditor.ezFormattedConfig({
                                 customStyles: this.customStylesConfigurations,
                                 ...toolbarProps,
                             }),
-                            new eZ.ezAlloyEditor.ezCustomStyleConfig({
+                            new window.eZ.ezAlloyEditor.ezCustomStyleConfig({
                                 customStyles: this.customStylesConfigurations,
                                 ...toolbarProps,
                             }),
-                            new eZ.ezAlloyEditor.ezHeadingConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
-                            new eZ.ezAlloyEditor.ezListConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
-                            new eZ.ezAlloyEditor.ezEmbedInlineConfig(toolbarProps),
-                            new eZ.ezAlloyEditor.ezTableConfig(toolbarProps),
-                            new eZ.ezAlloyEditor.ezEmbedImageLinkConfig(toolbarProps),
-                            new eZ.ezAlloyEditor.ezEmbedImageConfig(toolbarProps),
-                            new eZ.ezAlloyEditor.ezEmbedConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezHeadingConfig({ customStyles: this.customStylesConfigurations, ...toolbarProps }),
+                            new window.eZ.ezAlloyEditor.ezListOrderedConfig({
+                                customStyles: this.customStylesConfigurations,
+                                ...toolbarProps,
+                            }),
+                            new window.eZ.ezAlloyEditor.ezListUnorderedConfig({
+                                customStyles: this.customStylesConfigurations,
+                                ...toolbarProps,
+                            }),
+                            new window.eZ.ezAlloyEditor.ezListItemConfig({
+                                customStyles: this.customStylesConfigurations,
+                                ...toolbarProps,
+                            }),
+                            new window.eZ.ezAlloyEditor.ezEmbedInlineConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezTableConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezTableRowConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezTableCellConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezEmbedImageLinkConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezEmbedImageConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezEmbedConfig(toolbarProps),
                         ],
                         tabIndex: 1,
                     },
@@ -247,6 +265,7 @@
                         'ezfocusblock',
                         'ezcustomtag',
                         'ezinlinecustomtag',
+                        'ezelementspath',
                         ...this.alloyEditorExtraPlugins,
                     ].join(','),
             });
@@ -269,6 +288,8 @@
                     .querySelectorAll('[data-ezelement="eztemplateinline"]:not([data-eztype="style"])')
                     .forEach(this.clearInlineCustomTag);
 
+                this.iterateThroughChildNodes(documentFragment, this.removeNodeInitializedState);
+
                 container.closest('.ez-data-source').querySelector('textarea').value = this.xhtmlify(root.innerHTML).replace(
                     this.xhtmlNamespace,
                     this.ezNamespace
@@ -283,6 +304,7 @@
 
             nativeEditor.once('dataReady', () => container.querySelectorAll('.ez-has-anchor').forEach(this.appendAnchorIcon));
 
+            this.iterateThroughChildNodes(section, this.setNodeInitializedState);
             this.countWordsCharacters(container, section);
             nativeEditor.setData(section.innerHTML);
 
@@ -292,6 +314,18 @@
             nativeEditor.on('editorInteraction', saveRichText);
 
             return alloyEditor;
+        }
+
+        setNodeInitializedState(node) {
+            if (node.nodeType === HTML_NODE) {
+                node.setAttribute('data-ez-node-initialized', true);
+            }
+        }
+
+        removeNodeInitializedState(node) {
+            if (node.nodeType === HTML_NODE) {
+                node.removeAttribute('data-ez-node-initialized');
+            }
         }
 
         countWordsCharacters(container, editorHtml) {

@@ -1,6 +1,7 @@
 parameters:
     ezplatform.field_type.ezrichtext.custom_tags.translation_domain: 'custom_tags'
     ezplatform.field_type.ezrichtext.custom_styles.translation_domain: 'custom_styles'
+    ezplatform.field_type.ezrichtext.online_editor.translation_domain: 'online_editor'
 
 services:
     # RichText Custom Tags UI config attribute type mappers
@@ -28,3 +29,10 @@ services:
         arguments:
             $customStylesConfiguration: '%ezplatform.ezrichtext.custom_styles%'
             $translationDomain: '%ezplatform.field_type.ezrichtext.custom_styles.translation_domain%'
+
+    EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\OnlineEditorConfigMapper: '@EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\OnlineEditor'
+
+    EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\OnlineEditor:
+        autowire: true
+        arguments:
+            $translationDomain: '%ezplatform.field_type.ezrichtext.online_editor.translation_domain%'

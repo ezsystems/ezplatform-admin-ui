@@ -59,6 +59,10 @@ const ZERO_WIDTH_SPACE = '&#8203;';
                     return element.name === 'span' && element.attributes['data-ezelement'] === 'ezembedinline';
                 },
 
+                getIdentifier() {
+                    return 'ezembedinline';
+                },
+
                 insertWrapper: function(wrapper) {
                     this.editor.insertHtml(ZERO_WIDTH_SPACE);
                     this.editor.insertElement(wrapper);

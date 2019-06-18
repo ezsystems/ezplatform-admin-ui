@@ -8,6 +8,7 @@ export default class EzEmbedConfig extends EzConfigBase {
         this.buttons = [
             'ezmoveup',
             'ezmovedown',
+            this.getEditAttributesButton(config),
             'ezembedupdate',
             'ezanchor',
             'ezembedleft',

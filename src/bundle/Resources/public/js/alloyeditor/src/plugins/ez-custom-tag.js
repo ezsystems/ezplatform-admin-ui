@@ -48,6 +48,10 @@ CKEDITOR.dtd.$editable.span = 1;
                     this.renderIcon();
                 },
 
+                getIdentifier() {
+                    return 'ezinlinecustomtag';
+                },
+
                 insertWrapper: function(wrapper) {
                     this.editor.insertElement(wrapper);
                 },

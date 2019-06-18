@@ -8,19 +8,35 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText;
 
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\OnlineEditorConfigMapper;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
+use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText;
 
 class AlloyEditor implements ProviderInterface
 {
     /** @var array */
     private $alloyEditorConfiguration;
 
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
+
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\OnlineEditorConfigMapper */
+    private $onlineEditorConfigMapper;
+
     /**
      * @param array $alloyEditorConfiguration
+     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\OnlineEditorConfigMapper $onlineEditorConfigMapper
      */
-    public function __construct(array $alloyEditorConfiguration)
-    {
+    public function __construct(
+        array $alloyEditorConfiguration,
+        ConfigResolverInterface $configResolver,
+        OnlineEditorConfigMapper $onlineEditorConfigMapper
+    ) {
         $this->alloyEditorConfiguration = $alloyEditorConfiguration;
+        $this->configResolver = $configResolver;
+        $this->onlineEditorConfigMapper = $onlineEditorConfigMapper;
     }
 
     /**
@@ -31,6 +47,8 @@ class AlloyEditor implements ProviderInterface
         return [
             'extraPlugins' => $this->getExtraPlugins(),
             'extraButtons' => $this->getExtraButtons(),
+            'classes' => $this->getCssClasses(),
+            'attributes' => $this->getDataAttributes(),
         ];
     }
 
@@ -56,5 +74,43 @@ class AlloyEditor implements ProviderInterface
         );
 
         return $this->alloyEditorConfiguration['extra_buttons'] ?? [];
+    }
+
+    /**
+     * Get custom CSS classes defined by the SiteAccess-aware configuration.
+     *
+     * @return array
+     */
+    private function getCssClasses(): array
+    {
+        return $this->onlineEditorConfigMapper->mapCssClassesConfiguration(
+            $this->getSiteAccessConfigArray(RichText::CLASSES_SA_SETTINGS_ID)
+        );
+    }
+
+    /**
+     * Get custom data attributes defined by the SiteAccess-aware configuration.
+     *
+     * @return array
+     */
+    private function getDataAttributes(): array
+    {
+        return $this->onlineEditorConfigMapper->mapDataAttributesConfiguration(
+            $this->getSiteAccessConfigArray(RichText::ATTRIBUTES_SA_SETTINGS_ID)
+        );
+    }
+
+    /**
+     * Get configuration array from the SiteAccess-aware configuration, checking first for its existence.
+     *
+     * @param string $paramName
+     *
+     * @return array
+     */
+    private function getSiteAccessConfigArray(string $paramName): array
+    {
+        return $this->configResolver->hasParameter($paramName)
+            ? $this->configResolver->getParameter($paramName)
+            : [];
     }
 }
