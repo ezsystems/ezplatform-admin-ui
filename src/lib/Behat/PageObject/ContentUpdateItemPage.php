@@ -6,9 +6,10 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Page\Page;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ContentUpdateForm;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
 use PHPUnit\Framework\Assert;
 
@@ -30,7 +31,7 @@ class ContentUpdateItemPage extends Page
      */
     public $rightMenu;
 
-    public function __construct(UtilityContext $context, string $contentItemName)
+    public function __construct(BrowserContext $context, string $contentItemName)
     {
         parent::__construct($context);
         $this->contentUpdateForm = ElementFactory::createElement($this->context, ContentUpdateForm::ELEMENT_NAME);

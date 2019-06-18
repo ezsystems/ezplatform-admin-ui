@@ -6,8 +6,8 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\ContentRelationTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 use PHPUnit\Framework\Assert;
@@ -22,7 +22,7 @@ class ContentRelationSingle extends EzFieldElement
     /** @var ContentRelationTable */
     public $contentRelationTable;
 
-    public function __construct(UtilityContext $context, string $locator, string $label)
+    public function __construct(BrowserContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
         $this->fields['selectContent'] = '.ez-relations__cta-btn-label';

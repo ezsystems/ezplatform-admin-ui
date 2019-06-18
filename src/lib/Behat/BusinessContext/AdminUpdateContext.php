@@ -7,9 +7,9 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Notification;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\AdminUpdateItemPage;
 
 /** Context for common actions for creating and updating */
@@ -20,7 +20,7 @@ class AdminUpdateContext extends BusinessContext
      */
     public function iSetFields(TableNode $table): void
     {
-        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME);
+        $updateItemPage = PageObjectFactory::createPage($this->browserContext, AdminUpdateItemPage::PAGE_NAME);
         $hash = $table->getHash();
         foreach ($hash as $row) {
             $updateItemPage->adminUpdateForm->fillFieldWithValue($row['label'], $row['value']);
@@ -32,7 +32,7 @@ class AdminUpdateContext extends BusinessContext
      */
     public function verifyFieldsAreSet(TableNode $table): void
     {
-        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME);
+        $updateItemPage = PageObjectFactory::createPage($this->browserContext, AdminUpdateItemPage::PAGE_NAME);
         $hash = $table->getHash();
         foreach ($hash as $row) {
             $updateItemPage->adminUpdateForm->verifyFieldHasValue($row['label'], $row['value']);
@@ -44,11 +44,11 @@ class AdminUpdateContext extends BusinessContext
      */
     public function iAddField(string $fieldName): void
     {
-        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME);
+        $updateItemPage = PageObjectFactory::createPage($this->browserContext, AdminUpdateItemPage::PAGE_NAME);
         $updateItemPage->adminUpdateForm->selectFieldDefinition($fieldName);
         $updateItemPage->adminUpdateForm->clickAddFieldDefinition();
         $updateItemPage->adminUpdateForm->verifyNewFieldDefinitionFormExists($fieldName);
-        $notification = ElementFactory::createElement($this->utilityContext, Notification::ELEMENT_NAME);
+        $notification = ElementFactory::createElement($this->browserContext, Notification::ELEMENT_NAME);
         $notification->verifyVisibility();
         $notification->verifyAlertSuccess();
         $notification->closeAlert();
@@ -59,7 +59,7 @@ class AdminUpdateContext extends BusinessContext
      */
     public function iSetFieldInContainer(string $field, string $containerName, string $value): void
     {
-        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME);
+        $updateItemPage = PageObjectFactory::createPage($this->browserContext, AdminUpdateItemPage::PAGE_NAME);
         $updateItemPage->adminUpdateForm->expandFieldDefinition($containerName);
         $updateItemPage->adminUpdateForm->fillFieldWithValue($field, $value, $containerName);
     }
@@ -70,9 +70,9 @@ class AdminUpdateContext extends BusinessContext
     public function iSelectOptionsFrom(string $selectName, TableNode $options): void
     {
         $optionsHash = $options->getHash();
-        $this->utilityContext->selectOption($selectName, $optionsHash[0]['option']);
+        $this->browserContext->selectOption($selectName, $optionsHash[0]['option']);
         for ($i = 1; $i < count($optionsHash); ++$i) {
-            $this->utilityContext->additionallySelectOption($selectName, $optionsHash[$i]['option']);
+            $this->browserContext->additionallySelectOption($selectName, $optionsHash[$i]['option']);
         }
     }
 }

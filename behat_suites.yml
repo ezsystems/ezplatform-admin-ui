@@ -13,8 +13,8 @@ adminui:
             filters:
                 tags: "@common"
             contexts:
-                - EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext
-                - EzSystems\EzPlatformAdminUi\Behat\Helper\Hooks
+                - EzSystems\Behat\Browser\Context\BrowserContext
+                - EzSystems\Behat\Browser\Context\Hooks
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AuthenticationContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NavigationContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AdministrationContext
@@ -42,8 +42,8 @@ adminui:
             filters:
                 tags: "@common"
             contexts:
-                - EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext
-                - EzSystems\EzPlatformAdminUi\Behat\Helper\Hooks
+                - EzSystems\Behat\Browser\Context\BrowserContext
+                - EzSystems\Behat\Browser\Context\Hooks
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AuthenticationContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NavigationContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentViewContext
@@ -61,8 +61,8 @@ adminui:
             filters:
                 tags: "@common"
             contexts:
-                - EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext
-                - EzSystems\EzPlatformAdminUi\Behat\Helper\Hooks
+                - EzSystems\Behat\Browser\Context\BrowserContext
+                - EzSystems\Behat\Browser\Context\Hooks
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AuthenticationContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NavigationContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentViewContext

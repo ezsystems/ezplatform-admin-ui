@@ -6,9 +6,9 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\DateAndTimePopup;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use PHPUnit\Framework\Assert;
 
 class DateAndTime extends EzFieldElement
@@ -20,7 +20,7 @@ class DateAndTime extends EzFieldElement
     private const TIME_FORMAT = 'G:i';
     private const VIEW_DATE_TIME_FORMAT = 'n/j/y, g:i A';
 
-    public function __construct(UtilityContext $context, string $locator, string $label)
+    public function __construct(BrowserContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
         $this->fields['fieldInput'] = '.flatpickr-input.ez-data-source__input';

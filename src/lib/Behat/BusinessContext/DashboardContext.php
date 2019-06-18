@@ -7,7 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\DashboardPage;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 use PHPUnit\Framework\Assert;
 
 class DashboardContext extends BusinessContext
@@ -39,7 +39,7 @@ class DashboardContext extends BusinessContext
      */
     public function startEditingContentDraft(string $contentDraftName): void
     {
-        $dashboardPage = PageObjectFactory::createPage($this->utilityContext, DashboardPage::PAGE_NAME);
+        $dashboardPage = PageObjectFactory::createPage($this->browserContext, DashboardPage::PAGE_NAME);
         $dashboardPage->dashboardTable->clickEditButton($contentDraftName);
     }
 
@@ -52,13 +52,13 @@ class DashboardContext extends BusinessContext
 
     private function goToDashboard(): void
     {
-        $dashboardPage = PageObjectFactory::createPage($this->utilityContext, DashboardPage::PAGE_NAME);
+        $dashboardPage = PageObjectFactory::createPage($this->browserContext, DashboardPage::PAGE_NAME);
         $dashboardPage->open();
     }
 
     private function isDraftOnList(string $draftName): bool
     {
-        $dashboardPage = PageObjectFactory::createPage($this->utilityContext, DashboardPage::PAGE_NAME);
+        $dashboardPage = PageObjectFactory::createPage($this->browserContext, DashboardPage::PAGE_NAME);
         if ($dashboardPage->isListEmpty()) {
             return false;
         }

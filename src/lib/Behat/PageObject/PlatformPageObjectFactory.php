@@ -6,14 +6,17 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
+use EzSystems\Behat\Browser\Page\Page;
+use EzSystems\Behat\Browser\Page\Preview\FolderPreview;
 
 class PlatformPageObjectFactory extends PageObjectFactory
 {
     /**
-     * @return AdminUpdateItemPage|ContentItemPage|ContentPreviewPage|ContentTypeGroupsPage|ContentTypePage|ContentUpdateItemPage|DashboardPage|LanguagePage|LanguagesPage|LoginPage|ObjectStateGroupPage|ObjectStateGroupsPage|ObjectStatePage|RolePage|RolesPage|SectionPage|SectionsPage|SystemInfoPage|TrashPage
+     * @return AdminUpdateItemPage|ContentItemPage|ContentPreviewPage|ContentTypeGroupPage|ContentTypeGroupsPage|ContentTypePage|ContentUpdateItemPage|DashboardPage|LanguagePage|LanguagesPage|LoginPage|ObjectStateGroupPage|ObjectStateGroupsPage|ObjectStatePage|Page|RolePage|RolesPage|SectionPage|SectionsPage|SystemInfoPage|TrashPage
      */
-    public static function createPage(UtilityContext $context, string $pageName, ?string ...$parameters): Page
+    public static function createPage(BrowserContext $context, string $pageName, ?string ...$parameters): Page
     {
         switch ($pageName) {
             case LoginPage::PAGE_NAME:

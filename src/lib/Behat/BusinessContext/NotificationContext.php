@@ -6,8 +6,8 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Core\Environment\EnvironmentConstants;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Notification;
 use PHPUnit\Framework\Assert;
 
@@ -19,7 +19,7 @@ class NotificationContext extends BusinessContext
      */
     public function notificationAppears(string $itemType, ?string $itemName = null, string $action): void
     {
-        $notification = ElementFactory::createElement($this->utilityContext, Notification::ELEMENT_NAME);
+        $notification = ElementFactory::createElement($this->browserContext, Notification::ELEMENT_NAME);
         $notification->verifyVisibility();
         $notification->verifyAlertSuccess();
         $msg = !$itemName ? sprintf('%s %s.', $itemType, $action) : sprintf('%s \'%s\' %s.', $itemType, $itemName, $action);
@@ -32,7 +32,7 @@ class NotificationContext extends BusinessContext
      */
     public function specificNotificationAppears(string $message): void
     {
-        $notification = ElementFactory::createElement($this->utilityContext, Notification::ELEMENT_NAME);
+        $notification = ElementFactory::createElement($this->browserContext, Notification::ELEMENT_NAME);
         $notification->verifyVisibility();
         $notification->verifyAlertSuccess();
         Assert::assertEquals($message, $notification->getMessage());
@@ -44,7 +44,7 @@ class NotificationContext extends BusinessContext
      */
     public function copiedToRootAppears(string $content): void
     {
-        $expectedMessage = sprintf("'%s' copied to '%s'", $content, EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
+        $expectedMessage = sprintf("'%s' copied to '%s'", $content, EnvironmentConstants::get('ROOT_CONTENT_NAME'));
         $this->specificNotificationAppears($expectedMessage);
     }
 
@@ -53,7 +53,7 @@ class NotificationContext extends BusinessContext
      */
     public function specificErrorNotificationAppears(string $message): void
     {
-        $notification = ElementFactory::createElement($this->utilityContext, Notification::ELEMENT_NAME);
+        $notification = ElementFactory::createElement($this->browserContext, Notification::ELEMENT_NAME);
         $notification->verifyVisibility();
         $notification->verifyAlertFailure();
         Assert::assertContains($message, $notification->getMessage());

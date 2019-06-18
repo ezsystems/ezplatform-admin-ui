@@ -6,7 +6,8 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Element\Element;
 use PHPUnit\Framework\Assert;
 
 /** Element that describes user notification bar, that appears on the bottom of the screen */
@@ -18,7 +19,7 @@ class Notification extends Element
     private $checkVisibilityTimeout;
     private $notificationElement;
 
-    public function __construct(UtilityContext $context)
+    public function __construct(BrowserContext $context)
     {
         parent::__construct($context);
         $this->fields = [

@@ -6,7 +6,8 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Authors;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Checkbox;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\ContentRelationMultiple;
@@ -47,13 +48,13 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\VerticalOrientedTable;
 class PlatformElementFactory extends ElementFactory
 {
     /**
-     * @param UtilityContext $context
+     * @param BrowserContext $context
      * @param string $elementName
      * @param null[]|string[] ...$parameters
      *
-     * @return AdminList|AdminUpdateForm|Breadcrumb|ContentField|ContentRelationTable|ContentTypePicker|ContentUpdateForm|DashboardTable|DateAndTimePopup|DefaultFieldElement|Dialog|DoubleHeaderTable|DraftConflictDialog|DraftConflictDialog|IconLinkedListTable|LanguagePicker|LeftMenu|LinkedListTable|NavLinkTabs|Notification|PreviewNav|RightMenu|SimpleListTable|SimpleTable|SubItemsTable|SystemInfoTable|TrashTable|UniversalDiscoveryWidget|UpperMenu|VerticalOrientedTable
+     * @return AdminList|AdminUpdateForm|Breadcrumb|ContentField|ContentRelationTable|ContentTypePicker|ContentUpdateForm|DashboardTable|DateAndTimePopup|DefaultFieldElement|Dialog|DoubleHeaderTable|DraftConflictDialog|DraftConflictTable|Element|IconLinkedListTable|LanguagePicker|LeftMenu|LinkedListTable|NavLinkTabs|Notification|Pagination|PreviewNav|RightMenu|SimpleListTable|SimpleTable|SubItemsList|SubItemsTable|SystemInfoTable|TrashTable|UniversalDiscoveryWidget|UpperMenu|VerticalOrientedTable
      */
-    public static function createElement(UtilityContext $context, string $elementName, ?string ...$parameters): Element
+    public static function createElement(BrowserContext $context, string $elementName, ?string ...$parameters)
     {
         switch ($elementName) {
             case AdminList::ELEMENT_NAME:

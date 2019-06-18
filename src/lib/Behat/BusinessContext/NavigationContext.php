@@ -6,13 +6,13 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
+use EzSystems\Behat\Core\Environment\EnvironmentConstants;
 use EzSystems\EzPlatformPageBuilder\Tests\Behat\PageObject\PageBuilderEditor;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Breadcrumb;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UpperMenu;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentItemPage;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 use PHPUnit\Framework\Assert;
 
 /** Context for general navigation actions */
@@ -23,7 +23,7 @@ class NavigationContext extends BusinessContext
      */
     public function openPage(string $pageName): void
     {
-        $page = PageObjectFactory::createPage($this->utilityContext, $pageName);
+        $page = PageObjectFactory::createPage($this->browserContext, $pageName);
         $page->open();
     }
 
@@ -32,7 +32,7 @@ class NavigationContext extends BusinessContext
      */
     public function iGoToDashboard(): void
     {
-        $upperMenu = ElementFactory::createElement($this->utilityContext, UpperMenu::ELEMENT_NAME);
+        $upperMenu = ElementFactory::createElement($this->browserContext, UpperMenu::ELEMENT_NAME);
         $upperMenu->goToDashboard();
     }
 
@@ -41,7 +41,7 @@ class NavigationContext extends BusinessContext
      */
     public function tryToOpenPage(string $pageName): void
     {
-        $page = PageObjectFactory::createPage($this->utilityContext, $pageName);
+        $page = PageObjectFactory::createPage($this->browserContext, $pageName);
         $page->open(false);
     }
 
@@ -51,7 +51,7 @@ class NavigationContext extends BusinessContext
      */
     public function iAmOnPage(string $pageName, string $itemName = null): void
     {
-        $page = PageObjectFactory::createPage($this->utilityContext, $pageName, $itemName);
+        $page = PageObjectFactory::createPage($this->browserContext, $pageName, $itemName);
         $page->verifyIsLoaded();
     }
 
@@ -61,7 +61,7 @@ class NavigationContext extends BusinessContext
      */
     public function iGoToTab(string $tabName, string $subTab = null): void
     {
-        $upperMenu = ElementFactory::createElement($this->utilityContext, UpperMenu::ELEMENT_NAME);
+        $upperMenu = ElementFactory::createElement($this->browserContext, UpperMenu::ELEMENT_NAME);
         $upperMenu->goToTab($tabName);
 
         if ($subTab !== null) {
@@ -74,7 +74,7 @@ class NavigationContext extends BusinessContext
      */
     public function iClickOnBreadcrumbLink(string $element): void
     {
-        $breadcrumb = ElementFactory::createElement($this->utilityContext, Breadcrumb::ELEMENT_NAME);
+        $breadcrumb = ElementFactory::createElement($this->browserContext, Breadcrumb::ELEMENT_NAME);
         $breadcrumb->verifyVisibility();
         $breadcrumb->clickBreadcrumbItem($element);
     }
@@ -85,7 +85,7 @@ class NavigationContext extends BusinessContext
      */
     public function iNavigateToContent(string $contentName, string $contentType, string $path = null)
     {
-        $contentPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName);
+        $contentPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $contentName);
         if ($path !== null) {
             $contentPage->navigateToPath($path);
         }
@@ -97,7 +97,7 @@ class NavigationContext extends BusinessContext
      */
     public function iNavigateToContentInRoot(string $contentName, string $contentType)
     {
-        $path = EzEnvironmentConstants::get('ROOT_CONTENT_NAME');
+        $path = EnvironmentConstants::get('ROOT_CONTENT_NAME');
         $this->iNavigateToContent($contentName, $contentType, $path);
     }
 
@@ -106,7 +106,7 @@ class NavigationContext extends BusinessContext
      */
     public function verifyIfBreadcrumbShowsPath(string $path): void
     {
-        $breadcrumb = ElementFactory::createElement($this->utilityContext, Breadcrumb::ELEMENT_NAME);
+        $breadcrumb = ElementFactory::createElement($this->browserContext, Breadcrumb::ELEMENT_NAME);
         Assert::assertEquals(
             str_replace('/', ' ', $path),
             $breadcrumb->getBreadcrumb(),
@@ -119,7 +119,7 @@ class NavigationContext extends BusinessContext
      */
     public function verifyIfBreadcrumbShowsPathUnderRoot(string $path): void
     {
-        $path = sprintf('%s/%s', EzEnvironmentConstants::get('ROOT_CONTENT_NAME'), $path);
+        $path = sprintf('%s/%s', EnvironmentConstants::get('ROOT_CONTENT_NAME'), $path);
         $this->verifyIfBreadcrumbShowsPath($path);
     }
 
@@ -128,14 +128,14 @@ class NavigationContext extends BusinessContext
      */
     public function iShouldBeRedirectedToRootInDefaultView(): void
     {
-        if (EzEnvironmentConstants::get('ROOT_CONTENT_TYPE') === 'Landing page') {
-            $previewType = PageObjectFactory::getPreviewType(EzEnvironmentConstants::get('ROOT_CONTENT_TYPE'));
-            $pageEditor = PageObjectFactory::createPage($this->utilityContext, PageBuilderEditor::PAGE_NAME, $previewType);
-            $pageEditor->pagePreview->setTitle(EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
+        if (EnvironmentConstants::get('ROOT_CONTENT_TYPE') === 'Landing page') {
+            $previewType = PageObjectFactory::getPreviewType(EnvironmentConstants::get('ROOT_CONTENT_TYPE'));
+            $pageEditor = PageObjectFactory::createPage($this->browserContext, PageBuilderEditor::PAGE_NAME, $previewType);
+            $pageEditor->pagePreview->setTitle(EnvironmentConstants::get('ROOT_CONTENT_NAME'));
             $pageEditor->waitUntilLoaded();
             $pageEditor->verifyIsLoaded();
         } else {
-            $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, EzEnvironmentConstants::get('ROOT_CONTENT_NAME'));
+            $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, EnvironmentConstants::get('ROOT_CONTENT_NAME'));
             $contentItemPage->verifyIsLoaded();
         }
     }

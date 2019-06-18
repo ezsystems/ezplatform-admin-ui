@@ -7,9 +7,9 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
+use EzSystems\Behat\Core\Environment\EnvironmentConstants;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentUpdateItemPage;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 
 class ContentUpdateContext extends BusinessContext
 {
@@ -18,7 +18,7 @@ class ContentUpdateContext extends BusinessContext
      */
     public function iSetFields(TableNode $table): void
     {
-        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, ContentUpdateItemPage::PAGE_NAME, '');
+        $updateItemPage = PageObjectFactory::createPage($this->browserContext, ContentUpdateItemPage::PAGE_NAME, '');
         $hash = $table->getHash();
         foreach ($hash as $row) {
             $values = $this->filterOutNonEmptyValues($row);
@@ -39,7 +39,7 @@ class ContentUpdateContext extends BusinessContext
      */
     public function verifyFieldsAreSet(TableNode $table): void
     {
-        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, ContentUpdateItemPage::PAGE_NAME, '');
+        $updateItemPage = PageObjectFactory::createPage($this->browserContext, ContentUpdateItemPage::PAGE_NAME, '');
         $hash = $table->getHash();
         foreach ($hash as $row) {
             $updateItemPage->contentUpdateForm->verifyFieldHasValue($row);
@@ -51,7 +51,7 @@ class ContentUpdateContext extends BusinessContext
      */
     public function iClickCloseButton(): void
     {
-        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, ContentUpdateItemPage::PAGE_NAME, '');
+        $updateItemPage = PageObjectFactory::createPage($this->browserContext, ContentUpdateItemPage::PAGE_NAME, '');
         $updateItemPage->contentUpdateForm->closeUpdateForm();
     }
 
@@ -60,8 +60,8 @@ class ContentUpdateContext extends BusinessContext
      */
     public function iSetArticleMainContentField(string $intro): void
     {
-        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, ContentUpdateItemPage::PAGE_NAME, '');
-        $fieldName = EzEnvironmentConstants::get('ARTICLE_MAIN_FIELD_NAME');
+        $updateItemPage = PageObjectFactory::createPage($this->browserContext, ContentUpdateItemPage::PAGE_NAME, '');
+        $fieldName = EnvironmentConstants::get('ARTICLE_MAIN_FIELD_NAME');
         $updateItemPage->contentUpdateForm->fillFieldWithValue($fieldName, ['value' => $intro]);
     }
 
@@ -70,8 +70,8 @@ class ContentUpdateContext extends BusinessContext
      */
     public function verifyArticleMainContentFieldIsSet(string $intro): void
     {
-        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, ContentUpdateItemPage::PAGE_NAME, '');
-        $fieldName = EzEnvironmentConstants::get('ARTICLE_MAIN_FIELD_NAME');
+        $updateItemPage = PageObjectFactory::createPage($this->browserContext, ContentUpdateItemPage::PAGE_NAME, '');
+        $fieldName = EnvironmentConstants::get('ARTICLE_MAIN_FIELD_NAME');
         $updateItemPage->contentUpdateForm->verifyFieldHasValue(['label' => $fieldName, 'value' => $intro]);
     }
 }

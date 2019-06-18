@@ -6,7 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\LeftMenu;
 
 class LeftMenuContext extends BusinessContext
@@ -16,7 +16,7 @@ class LeftMenuContext extends BusinessContext
      */
     public function iClickLeftMenuBarButton(string $buttonName): void
     {
-        $leftMenu = ElementFactory::createElement($this->utilityContext, LeftMenu::ELEMENT_NAME);
+        $leftMenu = ElementFactory::createElement($this->browserContext, LeftMenu::ELEMENT_NAME);
         $leftMenu->clickButton($buttonName);
     }
 }

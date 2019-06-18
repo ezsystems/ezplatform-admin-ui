@@ -6,14 +6,15 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use Behat\Mink\Element\NodeElement;
+use EzSystems\Behat\Browser\Context\BrowserContext;
 
 class ContentRelationTable extends Table
 {
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Content Relation Table';
 
-    public function __construct(UtilityContext $context, $containerLocator)
+    public function __construct(BrowserContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
         $this->fields['horizontalHeaders'] = $this->fields['list'] . ' thead tr:nth-child(2) th';

@@ -7,14 +7,14 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 
 use Behat\Mink\Element\TraversableElement;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\Element;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Element\Element;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Pagination;
 
 abstract class Table extends Element
 {
-    public function __construct(UtilityContext $context, string $containerLocator)
+    public function __construct(BrowserContext $context, string $containerLocator)
     {
         parent::__construct($context);
         $this->fields = [

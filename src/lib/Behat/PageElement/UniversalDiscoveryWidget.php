@@ -7,7 +7,8 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Element\Element;
 use PHPUnit\Framework\Assert;
 
 class UniversalDiscoveryWidget extends Element
@@ -17,7 +18,7 @@ class UniversalDiscoveryWidget extends Element
     private const UDW_SHORT_TIMEOUT = 2;
     private const UDW_BRANCH_LOADING_TIMEOUT = 10;
 
-    public function __construct(UtilityContext $context)
+    public function __construct(BrowserContext $context)
     {
         parent::__construct($context);
         $this->fields = [

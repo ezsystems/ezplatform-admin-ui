@@ -7,17 +7,17 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
+use EzSystems\Behat\Browser\Page\Page;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ObjectStateGroupPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ObjectStateGroupsPage;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\Page;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\RolePage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\RolesPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypeGroupPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypeGroupsPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\LanguagesPage;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\SectionPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\SectionsPage;
 use PHPUnit\Framework\Assert;
@@ -50,7 +50,7 @@ class AdministrationContext extends BusinessContext
      */
     public function iSeeList(string $pageName, string $parameter = null): void
     {
-        $contentTypeGroupsPage = PageObjectFactory::createPage($this->utilityContext, $pageName, $parameter);
+        $contentTypeGroupsPage = PageObjectFactory::createPage($this->browserContext, $pageName, $parameter);
         $contentTypeGroupsPage->verifyElements();
     }
 
@@ -65,7 +65,7 @@ class AdministrationContext extends BusinessContext
         if (!array_key_exists($newItemType, $this->itemCreateMapping)) {
             throw new \InvalidArgumentException(sprintf('Unrecognized item type name: %s', $newItemType));
         }
-        PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$newItemType], $containerItem)
+        PageObjectFactory::createPage($this->browserContext, $this->itemCreateMapping[$newItemType], $containerItem)
             ->startCreatingItem();
     }
 
@@ -74,7 +74,7 @@ class AdministrationContext extends BusinessContext
      */
     public function iStartAssigningTo(string $itemName, string $pageType): void
     {
-        $pageObject = PageObjectFactory::createPage($this->utilityContext, $pageType, $itemName);
+        $pageObject = PageObjectFactory::createPage($this->browserContext, $pageType, $itemName);
         $pageObject->startAssigningToItem($itemName);
     }
 
@@ -84,7 +84,7 @@ class AdministrationContext extends BusinessContext
      */
     public function verifyElementOnTheList(string $listElementName, string $page, ?string $parameter = null): void
     {
-        $pageElement = PageObjectFactory::createPage($this->utilityContext, $page, $parameter);
+        $pageElement = PageObjectFactory::createPage($this->browserContext, $page, $parameter);
         if (!$pageElement->adminList->isElementOnTheList($listElementName)) {
             Assert::fail(sprintf('Element "%s" is on the %s list.', $listElementName, $page));
         }
@@ -96,7 +96,7 @@ class AdministrationContext extends BusinessContext
      */
     public function verifyElementNotOnTheList(string $listElementName, string $page, string $parameter = null): void
     {
-        $pageElement = PageObjectFactory::createPage($this->utilityContext, $page, $parameter);
+        $pageElement = PageObjectFactory::createPage($this->browserContext, $page, $parameter);
         if ($pageElement->adminList->isElementOnTheList($listElementName)) {
             Assert::fail(sprintf('Element "%s" is on the %s list.', $listElementName, $page));
         }
@@ -113,7 +113,7 @@ class AdministrationContext extends BusinessContext
     {
         $emptyContainerCellValue = '0';
 
-        $contentsCount = PageObjectFactory::createPage($this->utilityContext, $page)
+        $contentsCount = PageObjectFactory::createPage($this->browserContext, $page)
             ->adminList->table->getTableCellValue($itemName, $this->emptyHeaderMapping[$page]);
 
         $msg = '';
@@ -147,7 +147,7 @@ class AdministrationContext extends BusinessContext
      */
     public function itemCannotBeSelected(string $itemType, string $itemName): void
     {
-        $isListElementSelectable = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType])
+        $isListElementSelectable = PageObjectFactory::createPage($this->browserContext, $this->itemCreateMapping[$itemType])
             ->adminList->table->isElementSelectable($itemName);
 
         if ($isListElementSelectable) {
@@ -161,7 +161,7 @@ class AdministrationContext extends BusinessContext
      */
     public function iGoToListItem(string $itemName, string $itemType, string $itemContainer = null): void
     {
-        $pageElement = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $itemContainer);
+        $pageElement = PageObjectFactory::createPage($this->browserContext, $this->itemCreateMapping[$itemType], $itemContainer);
         if ($pageElement->adminList->isElementOnTheList($itemName)) {
             $pageElement->adminList->table->clickListElement($itemName);
         } else {
@@ -175,7 +175,7 @@ class AdministrationContext extends BusinessContext
      */
     public function iStartEditingItem(string $itemType, string $itemName, ?string $containerName = null): void
     {
-        PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $containerName)
+        PageObjectFactory::createPage($this->browserContext, $this->itemCreateMapping[$itemType], $containerName)
             ->startEditingItem($itemName);
     }
 
@@ -184,7 +184,7 @@ class AdministrationContext extends BusinessContext
      */
     public function iStartEditingItemFromDetails(string $itemType, string $itemName): void
     {
-        PageObjectFactory::createPage($this->utilityContext, $itemType, $itemName)
+        PageObjectFactory::createPage($this->browserContext, $itemType, $itemName)
             ->startEditingSelf($itemName);
     }
 
@@ -195,7 +195,7 @@ class AdministrationContext extends BusinessContext
     {
         $hash = $settings->getHash();
 
-        $page = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType]);
+        $page = PageObjectFactory::createPage($this->browserContext, $this->itemCreateMapping[$itemType]);
         foreach ($hash as $setting) {
             $page->adminList->table->selectListElement($setting['item']);
         }
@@ -210,7 +210,7 @@ class AdministrationContext extends BusinessContext
     {
         $hash = $settings->getHash();
 
-        $page = PageObjectFactory::createPage($this->utilityContext, $this->itemCreateMapping[$itemType], $containerName);
+        $page = PageObjectFactory::createPage($this->browserContext, $this->itemCreateMapping[$itemType], $containerName);
         foreach ($hash as $setting) {
             $page->adminList->table->selectListElement($setting['item']);
         }
@@ -225,7 +225,7 @@ class AdministrationContext extends BusinessContext
     {
         $hash = $settings->getHash();
 
-        $page = PageObjectFactory::createPage($this->utilityContext, $itemType, $hash[0]['item']);
+        $page = PageObjectFactory::createPage($this->browserContext, $itemType, $hash[0]['item']);
         $this->performDeletion($page);
     }
 
@@ -235,7 +235,7 @@ class AdministrationContext extends BusinessContext
     private function performDeletion(Page $page)
     {
         $page->adminList->clickTrashButton();
-        $dialog = ElementFactory::createElement($this->utilityContext, Dialog::ELEMENT_NAME);
+        $dialog = ElementFactory::createElement($this->browserContext, Dialog::ELEMENT_NAME);
         $dialog->verifyVisibility();
         $dialog->confirm();
     }
@@ -245,7 +245,7 @@ class AdministrationContext extends BusinessContext
      */
     public function itemHasProperAttribute(string $itemType, string $itemName, string $attributeName, string $value)
     {
-        $pageObject = PageObjectFactory::createPage($this->utilityContext, $itemType, $itemName);
+        $pageObject = PageObjectFactory::createPage($this->browserContext, $itemType, $itemName);
 
         $pageObject->verifyItemAttribute($attributeName, $value);
     }
@@ -255,7 +255,7 @@ class AdministrationContext extends BusinessContext
      */
     public function linkItemHasProperAttribute(string $itemName, string $pageName, string $attributeName, string $value)
     {
-        $pageObject = PageObjectFactory::createPage($this->utilityContext, $pageName);
+        $pageObject = PageObjectFactory::createPage($this->browserContext, $pageName);
         $pageObject->verifyItemAttribute($attributeName, $value, $itemName);
     }
 
@@ -275,7 +275,7 @@ class AdministrationContext extends BusinessContext
      */
     public function listIsEmpty(string $listName, string $itemType, string $itemName): void
     {
-        $pageObject = PageObjectFactory::createPage($this->utilityContext, $itemType, $itemName);
+        $pageObject = PageObjectFactory::createPage($this->browserContext, $itemType, $itemName);
         $pageObject->verifyListIsEmpty($listName);
     }
 }

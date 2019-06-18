@@ -7,7 +7,8 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use Behat\Mink\Element\NodeElement;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Element\Element;
 use WebDriver\Exception\ElementNotVisible;
 
 class LanguagePicker extends Element
@@ -17,7 +18,7 @@ class LanguagePicker extends Element
 
     private $loadingTimeout;
 
-    public function __construct(UtilityContext $context)
+    public function __construct(BrowserContext $context)
     {
         parent::__construct($context);
         $this->fields = [

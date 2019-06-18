@@ -6,7 +6,10 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\API\ContentData\FieldTypeNameConverter;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
+use EzSystems\Behat\Browser\Element\Element;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\EzFieldElement;
 use PHPUnit\Framework\Assert;
 
@@ -17,7 +20,7 @@ class ContentUpdateForm extends Element
 
     public const FIELD_TYPE_CLASS_REGEX = '/ez-field-edit--ez[a-z]*/';
 
-    public function __construct(UtilityContext $context)
+    public function __construct(BrowserContext $context)
     {
         parent::__construct($context);
         $this->fields = [
@@ -64,7 +67,7 @@ class ContentUpdateForm extends Element
         $fieldType = explode('--', $matches[0])[1];
         $fieldLocator = sprintf($this->fields['nthField'], $fieldPosition);
 
-        return ElementFactory::createElement($this->context, EzFieldElement::getFieldNameByInternalName($fieldType), $fieldLocator, $fieldName);
+        return ElementFactory::createElement($this->context, FieldTypeNameConverter::getFieldTypeNameByIdentifier($fieldType), $fieldLocator, $fieldName);
     }
 
     /**

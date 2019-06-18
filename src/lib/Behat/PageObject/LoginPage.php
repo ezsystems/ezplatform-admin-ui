@@ -6,6 +6,8 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
+use EzSystems\Behat\Browser\Page\Page;
+
 class LoginPage extends Page
 {
     /** @var string Route under which the Page is available */

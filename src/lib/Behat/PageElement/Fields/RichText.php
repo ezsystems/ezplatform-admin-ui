@@ -6,7 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
 use PHPUnit\Framework\Assert;
 
 class RichText extends EzFieldElement
@@ -15,7 +15,7 @@ class RichText extends EzFieldElement
     public const ELEMENT_NAME = 'Rich text';
     private $clearAlloyEditorScript = 'CKEDITOR.instances.%s.setData(\'\')';
 
-    public function __construct(UtilityContext $context, string $locator, string $label)
+    public function __construct(BrowserContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
         $this->fields['fieldInput'] = '.ez-data-source__richtext';

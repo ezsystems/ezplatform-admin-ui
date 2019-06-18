@@ -6,9 +6,9 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\DateAndTimePopup;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use PHPUnit\Framework\Assert;
 
 class Time extends EzFieldElement
@@ -19,7 +19,7 @@ class Time extends EzFieldElement
     private const VIEW_TIME_FORMAT = 'g:i A';
     private const VALUE_TIME_FORMAT = 'G:i';
 
-    public function __construct(UtilityContext $context, string $locator, string $label)
+    public function __construct(BrowserContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
         $this->fields['fieldInput'] = '.ez-data-source__input-wrapper input';
