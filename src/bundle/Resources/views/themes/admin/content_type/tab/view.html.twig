@@ -64,7 +64,7 @@
         </tr>
         <tr class="ez-table__row">
             <td class="ez-table__cell">{{ "content_type.container"|trans|desc("Container") }}</td>
-            <td class="ez-table__cell">{{ 'yes_no'|transchoice(content_type.isContainer|number_format)|desc("{0}No|{1}Yes") }}</td>
+            <td class="ez-table__cell">{{ 'yes_no'|transchoice(content_type.isContainer ? 1 : 0)|desc("{0}No|{1}Yes") }}</td>
         </tr>
         <tr class="ez-table__row">
             <td class="ez-table__cell">{{ "content_type.default_children_sorting"|trans|desc("Default field for sorting children") }}</td>
