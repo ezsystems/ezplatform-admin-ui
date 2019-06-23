@@ -7,27 +7,6 @@ services:
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\UserProfile\UserPasswordChangeController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
-        deprecated: '"%service_id%" is deprecated since 1.5 and will be removed in 2.0. Please use \EzSystems\EzPlatformUserBundle\Controller\PasswordChangeController instead.'
-        tags:
-            - controller.service_arguments
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserSettingsController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
-        deprecated: '"%service_id%" is deprecated since in 1.5 and will be removed in 2.0. Please use \EzSystems\EzPlatformUserBundle\Controller\UserSettingsController instead.'
-        tags:
-            - controller.service_arguments
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserForgotPasswordController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
-        deprecated: '"%service_id%" is deprecated since in 1.5 and will be removed in 2.0. Please use \EzSystems\EzPlatformUserBundle\Controller\PasswordResetController instead.'
-        tags:
-            - controller.service_arguments
-
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
