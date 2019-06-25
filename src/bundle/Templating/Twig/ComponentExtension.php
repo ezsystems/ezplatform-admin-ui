@@ -31,12 +31,12 @@ class ComponentExtension extends Twig_Extension
     {
         return [
             new Twig_SimpleFunction(
-                'ezplatform_admin_ui_component_group',
+                'ez_render_component_group',
                 [$this, 'renderComponentGroup'],
                 ['is_safe' => ['html']]
             ),
             new Twig_SimpleFunction(
-                'ezplatform_admin_ui_component',
+                'ez_render_component',
                 [$this, 'renderComponent'],
                 ['is_safe' => ['html']]
             ),

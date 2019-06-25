@@ -22,11 +22,11 @@
             </ul>
             <div class="ez-user-menu ml-md-auto">
                 <div class='ez-user-menu__name-wrapper'>
-                    {% set user = admin_ui_config.user.user%}
+                    {% set user = ez_admin_ui_config.user.user%}
                     <span class="ez-user-menu__name">{{ user.name }}</span>
 
-                    {% if admin_ui_config.user.profile_picture_field is not null and admin_ui_config.user.profile_picture_field.value.uri is not null %}
-                        {% set imageVariation = ez_image_alias(admin_ui_config.user.profile_picture_field, user.versionInfo, 'ezplatform_admin_ui_profile_picture_user_menu') %}
+                    {% if ez_admin_ui_config.user.profile_picture_field is not null and ez_admin_ui_config.user.profile_picture_field.value.uri is not null %}
+                        {% set imageVariation = ez_image_alias(ez_admin_ui_config.user.profile_picture_field, user.versionInfo, 'ezplatform_admin_ui_profile_picture_user_menu') %}
                         {% set src = imageVariation ? asset(imageVariation.uri) : asset('bundles/ezplatformadminui/img/default-profile-picture.png') %}
                         <span class="ez-user-menu__avatar-wrapper"><img class="ez-user-menu__avatar" src="{{ src }}" alt="{{ user.name }}"></span>
                     {% else %}

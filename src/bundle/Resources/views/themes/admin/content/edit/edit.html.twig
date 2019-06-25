@@ -67,7 +67,7 @@
 {% endblock %}
 
 {% block form_before %}
-    {{ ezplatform_admin_ui_component_group('content-edit-form-before', {
+    {{ ez_render_component_group('content-edit-form-before', {
         'content': content,
         'content_type': content_type,
         'location': location,
@@ -77,7 +77,7 @@
 {% endblock %}
 
 {% block form_after %}
-    {{ ezplatform_admin_ui_component_group('content-edit-form-after', {
+    {{ ez_render_component_group('content-edit-form-after', {
         'content': content,
         'content_type': content_type,
         'location': location,

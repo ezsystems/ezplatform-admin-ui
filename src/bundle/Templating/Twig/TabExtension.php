@@ -55,7 +55,7 @@ class TabExtension extends Twig_Extension
     {
         return [
             new Twig_SimpleFunction(
-                'ez_platform_tabs',
+                'ez_render_tab_group',
                 [$this, 'renderTabGroup'],
                 ['is_safe' => ['html']]
             ),

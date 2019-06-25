@@ -1,9 +1,9 @@
 {% trans_default_domain 'fieldtypes_preview' %}
 
-{% set field = ez_field(content, ez_image_asset_content_field_identifier()) %}
+{% set field = ez_field(content, ez_content_field_identifier_image_asset()) %}
 {% set versionInfo = content.versionInfo  %}
 
-{% if not ez_is_field_empty(content, field) %}
+{% if not ez_field_is_empty(content, field) %}
     {% set imageAlias = ez_image_alias( field, versionInfo, parameters.alias|default( 'original' ) ) %}
     {% set src = imageAlias ? asset( imageAlias.uri ) : "//:0" %}
 

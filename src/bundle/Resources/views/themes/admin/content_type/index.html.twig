@@ -7,7 +7,7 @@
 {% set language_code = content_type.mainLanguageCode %}
 
 {% block content %}
-    {{ ez_platform_tabs('content-type', {
+    {{ ez_render_tab_group('content-type', {
         'content_type': content_type,
         'content_type_group': content_type_group,
         'field_definitions_by_group': field_definitions_by_group,

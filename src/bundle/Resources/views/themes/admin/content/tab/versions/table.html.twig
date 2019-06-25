@@ -48,7 +48,7 @@
                     {{ version.versionNo }}
                 </td>
                 <td class="ez-table__cell">
-                    {{ admin_ui_config.languages.mappings[version.initialLanguageCode].name }}
+                    {{ ez_admin_ui_config.languages.mappings[version.initialLanguageCode].name }}
                 </td>
                 {% block custom_columns %}{% endblock %}
                 <td class="ez-table__cell">
@@ -68,7 +68,7 @@
                 </td>
                 {% if is_draft_conflict %}
                     <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
-                        {% set edit_draft_disabled = version.author.id != admin_ui_config.user.user.id %}
+                        {% set edit_draft_disabled = version.author.id != ez_admin_ui_config.user.user.id %}
                         <a href="{{ edit_url }}"
                             class="btn btn-icon {% if edit_draft_disabled %}ez-btn--prevented{% endif %}"
                             title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}"
