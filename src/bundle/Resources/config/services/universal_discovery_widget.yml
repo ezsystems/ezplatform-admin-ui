@@ -14,6 +14,7 @@ services:
         tags: ['kernel.event_subscriber']
 
     EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver:
+        lazy: true
         arguments:
             $udwConfiguration: '$universal_discovery_widget_module.configuration$'
 
