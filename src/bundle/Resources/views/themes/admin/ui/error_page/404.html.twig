@@ -1,7 +1,7 @@
 {% extends '@ezdesign/ui/layout.html.twig' %}
 
 {% block navigation %}
-    {% if ez_ui_config.user.user is not empty %}
+    {% if ez_admin_ui_config.user.user is not empty %}
         {{ parent() }}
     {% endif %}
 {% endblock %}

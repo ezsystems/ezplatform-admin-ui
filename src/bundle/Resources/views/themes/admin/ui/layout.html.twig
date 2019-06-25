@@ -57,7 +57,7 @@
         {% block meta %}
         {% endblock %}
         <script>
-            window.eZ.addConfig('adminUiConfig', {{ ez_ui_config|json_encode|raw }});
+            window.eZ.addConfig('adminUiConfig', {{ ez_admin_ui_config|json_encode|raw }});
             window.eZ.addConfig('errors', {
                 emailRegexp: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 emptyField: '{{ 'js.error.empty.field'|trans({}, 'validators')|desc('{fieldName} field is required') }}',
@@ -134,8 +134,8 @@
                         </div>
                     </div>
                     <div class="ez-content-tree-container"
-                        data-user-id="{{ ez_ui_config.user.user.id }}"
-                        data-tree-root-location-id="{{ content_tree_module_root|default(ez_ui_config['contentTree']['treeRootLocationId']) }}"
+                        data-user-id="{{ ez_admin_ui_config.user.user.id }}"
+                        data-tree-root-location-id="{{ content_tree_module_root|default(ez_admin_ui_config['contentTree']['treeRootLocationId']) }}"
                         data-current-location-path="{{ location_path|default('') }}">
                         <div class="ez-content-tree-container__wrapper"></div>
                     </div>

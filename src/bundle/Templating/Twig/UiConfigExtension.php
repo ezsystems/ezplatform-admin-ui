@@ -17,7 +17,7 @@ use Twig_Extension_GlobalsInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ConfigWrapper;
 
 /**
- * Exports `ez_ui_config` providing UI Config as a global Twig variable.
+ * Exports `ez_admin_ui_config` providing UI Config as a global Twig variable.
  */
 class UiConfigExtension extends Twig_Extension implements Twig_Extension_GlobalsInterface
 {
@@ -43,7 +43,7 @@ class UiConfigExtension extends Twig_Extension implements Twig_Extension_Globals
     public function getGlobals(): array
     {
         return [
-            'ez_ui_config' => $this->createConfigWrapper(),
+            'ez_admin_ui_config' => $this->createConfigWrapper(),
         ];
     }
 
