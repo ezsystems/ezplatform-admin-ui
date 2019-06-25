@@ -123,6 +123,7 @@ services:
         tags:
             - {name: kernel.event_subscriber, priority: -250}
 
-    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UserPreferencesGlobalExtension: ~
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UserPreferencesGlobalExtension:
+        lazy: true
 
     EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver: ~
