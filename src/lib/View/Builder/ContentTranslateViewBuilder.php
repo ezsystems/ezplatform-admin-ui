@@ -106,7 +106,7 @@ class ContentTranslateViewBuilder implements ViewBuilder
             $location = $this->loadLocation((int) $contentInfo->mainLocationId);
         }
 
-        if ($form->isValid() && null !== $form->getClickedButton()) {
+        if ($form->isSubmitted() && $form->isValid() && null !== $form->getClickedButton()) {
             $this->contentActionDispatcher->dispatchFormAction(
                 $form,
                 $form->getData(),
