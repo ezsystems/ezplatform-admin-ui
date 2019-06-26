@@ -13,10 +13,7 @@ services:
         public: true
         tags: ['kernel.event_subscriber']
 
-    EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver:
-        lazy: true
-        arguments:
-            $udwConfiguration: '$universal_discovery_widget_module.configuration$'
+    EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver: ~
 
     EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber\UserSelectionAllowedContentTypes:
         arguments:
