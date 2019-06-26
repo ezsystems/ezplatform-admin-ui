@@ -30,9 +30,6 @@ parameters:
     # Subitems Module
     ezsettings.default.subitems_module.limit: 10
 
-    # Universal Discovery Widget Module
-    ezsettings.default.universal_discovery_widget_module.default_location_id: 1
-
     # User identifier
     ezsettings.default.user_content_type_identifier: ['user']
 

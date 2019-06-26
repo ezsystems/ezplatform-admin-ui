@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
 use JMS\TranslationBundle\Model\Message;
@@ -31,7 +31,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
     const ITEM__TRASH = 'sidebar_left__trash';
     const ITEM__TREE = 'sidebar_left__tree';
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver */
     private $configResolver;
 
     /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
@@ -43,14 +43,14 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
     /**
      * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver $configResolver
      * @param \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension $udwExtension
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
-        ConfigResolverInterface $configResolver,
+        ConfigResolver $configResolver,
         UniversalDiscoveryExtension $udwExtension,
         PermissionResolver $permissionResolver
     ) {
@@ -98,9 +98,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                         'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single', [
                             'type' => 'content_create',
                         ]),
-                        'data-starting-location-id' => $this->configResolver->getParameter(
-                            'universal_discovery_widget_module.default_location_id'
-                        ),
+                        'data-starting-location-id' => $this->configResolver->getConfig('default')['starting_location_id'],
                     ],
                 ]
             ),
