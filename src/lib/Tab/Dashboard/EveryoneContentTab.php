@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
+use eZ\Publish\Core\QueryType\QueryType;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use Pagerfanta\Pagerfanta;
@@ -18,28 +19,34 @@ use Twig\Environment;
 
 class EveryoneContentTab extends AbstractTab implements OrderedTabInterface
 {
-    /** @var PagerContentToDataMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper */
     protected $pagerContentToDataMapper;
 
-    /** @var SearchService */
+    /** @var \eZ\Publish\API\Repository\SearchService */
     protected $searchService;
 
+    /** @var \eZ\Publish\Core\QueryType\QueryType */
+    private $contentSubtreeQueryType;
+
     /**
-     * @param Environment $twig
-     * @param TranslatorInterface $translator
-     * @param PagerContentToDataMapper $pagerContentToDataMapper
-     * @param SearchService $searchService
+     * @param \Twig\Environment $twig
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper $pagerContentToDataMapper
+     * @param \eZ\Publish\API\Repository\SearchService $searchService
+     * @param \eZ\Publish\Core\QueryType\QueryType $contentSubtreeQueryType
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         PagerContentToDataMapper $pagerContentToDataMapper,
-        SearchService $searchService
+        SearchService $searchService,
+        QueryType $contentSubtreeQueryType
     ) {
         parent::__construct($twig, $translator);
 
         $this->pagerContentToDataMapper = $pagerContentToDataMapper;
         $this->searchService = $searchService;
+        $this->contentSubtreeQueryType = $contentSubtreeQueryType;
     }
 
     public function getIdentifier(): string
@@ -64,10 +71,9 @@ class EveryoneContentTab extends AbstractTab implements OrderedTabInterface
         $page = 1;
         $limit = 10;
 
-        /** @todo subtree shouldn't be hardcoded! */
         $pager = new Pagerfanta(
             new ContentSearchAdapter(
-                new SubtreeQuery('/1/2/'),
+                $this->contentSubtreeQueryType->getQuery(),
                 $this->searchService
             )
         );
