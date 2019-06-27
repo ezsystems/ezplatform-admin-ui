@@ -21,6 +21,7 @@ imports:
     - { resource: services/rest.yml }
     - { resource: services/permissions.yml }
     - { resource: services/forms.yml }
+    - { resource: services/query_types.yaml }
 
 services:
     _defaults:

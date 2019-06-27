@@ -10,24 +10,32 @@ services:
     EzSystems\EzPlatformAdminUi\Tab\Dashboard\MyContentTab:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         public: false
+        arguments:
+            $contentSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\ContentSubtreeQueryType'
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 
     EzSystems\EzPlatformAdminUi\Tab\Dashboard\MyMediaTab:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         public: false
+        arguments:
+            $mediaSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\MediaSubtreeQueryType'
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 
     EzSystems\EzPlatformAdminUi\Tab\Dashboard\EveryoneMediaTab:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         public: false
+        arguments:
+            $mediaSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\MediaSubtreeQueryType'
         tags:
             - { name: ezplatform.tab, group: dashboard-everyone }
 
     EzSystems\EzPlatformAdminUi\Tab\Dashboard\EveryoneContentTab:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         public: false
+        arguments:
+            $contentSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\ContentSubtreeQueryType'
         tags:
             - { name: ezplatform.tab, group: dashboard-everyone }
 
