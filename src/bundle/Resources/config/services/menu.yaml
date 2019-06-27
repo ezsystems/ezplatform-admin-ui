@@ -31,6 +31,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\Menu\ContentRightSidebarBuilder:
         public: true
+        lazy: true
         arguments:
             $userContentTypeIdentifier: '$user_content_type_identifier$'
             $userGroupContentTypeIdentifier: '$user_group_content_type_identifier$'

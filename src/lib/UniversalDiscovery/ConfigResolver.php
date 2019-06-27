@@ -14,28 +14,24 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ConfigResolver
 {
+    private const UDW_CONFIG_PARAM_NAME = 'universal_discovery_widget_module.configuration';
+
     /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface */
     protected $eventDispatcher;
 
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     protected $configResolver;
 
-    /** @var array */
-    protected $udwConfiguration;
-
     /**
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     * @param array $udwConfiguration
      */
     public function __construct(
         ConfigResolverInterface $configResolver,
-        EventDispatcherInterface $eventDispatcher,
-        array $udwConfiguration
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->configResolver = $configResolver;
         $this->eventDispatcher = $eventDispatcher;
-        $this->udwConfiguration = $udwConfiguration;
     }
 
     /**
@@ -46,8 +42,8 @@ class ConfigResolver
      */
     public function getConfig(string $configName, array $context = []): array
     {
-        $config = $this->udwConfiguration[$configName] ?? [];
-        $defaults = $this->udwConfiguration['default'] ?? [];
+        $config = $this->getUDWConfiguration($configName);
+        $defaults = $this->getUDWConfiguration('default');
 
         $config = $this->mergeConfiguration($defaults, $config);
 
@@ -103,5 +99,23 @@ class ConfigResolver
 
         // Check if keys are equal to sequence of 0 .. n-1
         return array_keys($item) !== range(0, count($item) - 1);
+    }
+
+    /**
+     * Get UDW configuration from ConfigResolver.
+     *
+     * It's intentionally not cached as a scope changes dynamically.
+     *
+     * @param string $configName
+     *
+     * @return array
+     */
+    private function getUDWConfiguration(string $configName): array
+    {
+        $udwConfiguration = $this->configResolver->hasParameter(self::UDW_CONFIG_PARAM_NAME)
+            ? $this->configResolver->getParameter(self::UDW_CONFIG_PARAM_NAME)
+            : [];
+
+        return $udwConfiguration[$configName] ?? [];
     }
 }

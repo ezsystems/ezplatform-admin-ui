@@ -66,6 +66,7 @@ services:
     EzSystems\EzPlatformAdminUiBundle\Controller\SearchController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
+        lazy: true
         arguments:
             $defaultPaginationLimit: '$pagination.search_limit$'
             $userContentTypeIdentifier: '$user_content_type_identifier$'

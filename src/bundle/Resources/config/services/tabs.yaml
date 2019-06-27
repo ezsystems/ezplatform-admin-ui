@@ -14,7 +14,9 @@ services:
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ClassTwigExtension: ~
 
-    EzSystems\EzPlatformAdminUi\Tab\TabRegistry: ~
+    EzSystems\EzPlatformAdminUi\Tab\TabRegistry:
+        lazy: true
+
     EzSystems\EzPlatformAdminUi\Tab\SystemInfo\TabFactory:
         arguments:
             $httpKernelRuntime: '@twig.runtime.httpkernel'
