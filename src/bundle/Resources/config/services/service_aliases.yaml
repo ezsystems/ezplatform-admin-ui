@@ -31,6 +31,10 @@ services:
     eZ\Publish\API\Repository\BookmarkService: '@ezpublish.api.service.bookmark'
 
     eZ\Publish\API\Repository\PermissionResolver:
+        # passing class as workaround for missing sudo on the interface
+        class: eZ\Publish\Core\Repository\Permission\PermissionResolver
+        # making it lazy to avoid resolving dynamic (SiteAccess) settings too early
+        lazy: true
         factory: 'eZ\Publish\API\Repository\Repository:getPermissionResolver'
 
     eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList: '@ezpublish.fields_groups.list'
