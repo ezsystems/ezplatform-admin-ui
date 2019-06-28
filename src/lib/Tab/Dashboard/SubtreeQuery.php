@@ -10,6 +10,9 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
 use eZ\Publish\API\Repository\Values\Content\Query;
 
+/**
+ * @deprecated since version 2.5, to be removed in 3.0. Use '\EzSystems\EzPlatformAdminUi\QueryType\SubtreeQueryType' instead.
+ */
 class SubtreeQuery extends Query
 {
     /**

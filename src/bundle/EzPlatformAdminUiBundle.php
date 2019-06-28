@@ -70,6 +70,7 @@ class EzPlatformAdminUiBundle extends Bundle
             new Parser\ContentTranslateView(),
             new Parser\AdminUiForms(),
             new Parser\ContentType(),
+            new Parser\SubtreePath(),
         ];
     }
 }

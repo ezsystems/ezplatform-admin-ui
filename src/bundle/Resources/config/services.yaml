@@ -22,6 +22,7 @@ imports:
     - { resource: services/permissions.yaml }
     - { resource: services/forms.yaml }
     - { resource: services/strategies.yaml }
+    - { resource: services/query_types.yaml }
 
 services:
     _defaults:
