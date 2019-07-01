@@ -169,7 +169,7 @@
                     canSelectContent,
                     title,
                     restInfo: { token, siteaccess },
-                    config,
+                    ...config,
                 }),
                 udwContainer
             );
