@@ -1,6 +1,6 @@
 .ez-field-edit--ezimageasset {
     .ez-field-edit-preview {
-        padding: 1.25rem 0 .75rem 1.25rem;
+        padding: calculateRem(20px) 0 calculateRem(12px) calculateRem(20px);
 
         &__media {
             max-width: 100%;
@@ -11,12 +11,12 @@
 
         &__details {
             color: $ez-color-base-light;
-            font-size: 0.75rem;
-            padding-top: 0.5rem;
+            font-size: calculateRem(12px);
+            padding-top: calculateRem(8px);
         }
 
         &__image-alt {
-            margin-top: .5rem;
+            margin-top: calculateRem(8px);
         }
     }
 
@@ -28,21 +28,21 @@
                 content: '!';
                 position: absolute;
                 top: 0;
-                left: -20px;
-                width: 20px;
+                left: calculateRem(-20px);
+                width: calculateRem(20px);
                 background: red;
                 color: white;
                 text-align: center;
-                font-size: 1.5rem;
-                border-top-left-radius: 5px;
-                border-bottom-left-radius: 5px;
+                font-size: calculateRem(24px);
+                border-top-left-radius: calculateRem(5px);
+                border-bottom-left-radius: calculateRem(5px);
             }
         }
     }
 
     .ez-field-edit-spinner {
-        width: 2rem;
-        height: 2rem;
+        width: calculateRem(32px);
+        height: calculateRem(32px);
         position: absolute;
         bottom: 50%;
         left: 50%;
@@ -50,9 +50,9 @@
         display: none;
 
         .ez-icon {
-            width: 2rem;
-            height: 2rem;
-            fill: #333;
+            width: calculateRem(32px);
+            height: calculateRem(32px);
+            fill: $ez-black;
         }
     }
 }

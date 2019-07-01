@@ -6,9 +6,14 @@
         box-sizing: border-box;
     }
 
-    .form-control-file {
+    .form-control-file,
+    .custom-file-input {
         opacity: 0;
         height: 1px;
+    }
+
+    .custom-file {
+        display: none;
     }
 
     .ez-field-edit__data {
