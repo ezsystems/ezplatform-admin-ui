@@ -8,7 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentTypePage;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 use PHPUnit\Framework\Assert;
 
 class ContentTypeContext extends BusinessContext
@@ -21,7 +21,7 @@ class ContentTypeContext extends BusinessContext
     public function contentTypeHasProperGlobalProperties(TableNode $table): void
     {
         $hash = $table->getHash();
-        $contentTypePage = PageObjectFactory::createPage($this->utilityContext, ContentTypePage::PAGE_NAME, $hash[0]['value']);
+        $contentTypePage = PageObjectFactory::createPage($this->browserContext, ContentTypePage::PAGE_NAME, $hash[0]['value']);
         foreach ($hash as $row) {
             if (in_array($row['label'], $this->contentTypeTableHeaders)) {
                 $actualValue = $contentTypePage->contentTypeAdminList->table->getTableCellValue($row['label']);
@@ -42,7 +42,7 @@ class ContentTypeContext extends BusinessContext
      */
     public function contentTypeHasField(string $contentTypeName, string $fieldName, string $fieldType): void
     {
-        $actualFieldType = PageObjectFactory::createPage($this->utilityContext, ContentTypePage::PAGE_NAME, $contentTypeName)
+        $actualFieldType = PageObjectFactory::createPage($this->browserContext, ContentTypePage::PAGE_NAME, $contentTypeName)
             ->fieldsAdminList->table->getTableCellValue('Type', $fieldName);
 
         if ($actualFieldType !== $fieldType) {

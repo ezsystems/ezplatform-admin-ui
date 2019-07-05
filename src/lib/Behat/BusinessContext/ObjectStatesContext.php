@@ -8,9 +8,9 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ObjectStateGroupPage;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 use PHPUnit\Framework\Assert;
 
 class ObjectStatesContext extends BusinessContext
@@ -20,7 +20,7 @@ class ObjectStatesContext extends BusinessContext
      */
     public function verfyObjectStateIsOnList(string $objectStateName, string $objectStateGroupName): void
     {
-        $objectStateGroupPage = PageObjectFactory::createPage($this->utilityContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
+        $objectStateGroupPage = PageObjectFactory::createPage($this->browserContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
         $objectStateGroupPage->verifyIsLoaded();
         $objectStateExists = $objectStateGroupPage->adminLists['Object States']->table->isElementOnCurrentPage($objectStateName);
 
@@ -35,7 +35,7 @@ class ObjectStatesContext extends BusinessContext
      */
     public function verifyObjectStateIsNotOnList(string $objectStateName, string $objectStateGroupName): void
     {
-        $objectStateGroupPage = PageObjectFactory::createPage($this->utilityContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
+        $objectStateGroupPage = PageObjectFactory::createPage($this->browserContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
         $objectStateGroupPage->verifyIsLoaded();
         if (!$objectStateGroupPage->isListEmpty('Object States')) {
             $objectStateExists = $objectStateGroupPage->adminLists['Object States']->table->isElementOnCurrentPage($objectStateName);
@@ -52,7 +52,7 @@ class ObjectStatesContext extends BusinessContext
      */
     public function iGoToObjectState(string $objectStateName, string $objectStateGroupName): void
     {
-        $objectStateGroupPage = PageObjectFactory::createPage($this->utilityContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
+        $objectStateGroupPage = PageObjectFactory::createPage($this->browserContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
         $objectStateGroupPage->verifyIsLoaded();
         $objectStateGroupPage->adminLists['Object States']->table->clickListElement($objectStateName);
     }
@@ -63,13 +63,13 @@ class ObjectStatesContext extends BusinessContext
     public function iDeleteObjecStatesFromGroup(string $objectStateGroupName, TableNode $settings): void
     {
         $hash = $settings->getHash();
-        $objectStateGroupPage = PageObjectFactory::createPage($this->utilityContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
+        $objectStateGroupPage = PageObjectFactory::createPage($this->browserContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
         foreach ($hash as $setting) {
             $objectStateGroupPage->adminLists['Object States']->table->selectListElement($setting['item']);
         }
 
         $objectStateGroupPage->adminLists['Object States']->clickTrashButton();
-        $dialog = ElementFactory::createElement($this->utilityContext, Dialog::ELEMENT_NAME);
+        $dialog = ElementFactory::createElement($this->browserContext, Dialog::ELEMENT_NAME);
         $dialog->verifyVisibility();
         $dialog->confirm();
     }

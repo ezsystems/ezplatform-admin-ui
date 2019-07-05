@@ -8,12 +8,12 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
 
 abstract class BusinessContext implements Context
 {
-    /** @var UtilityContext */
-    protected $utilityContext;
+    /** @var BrowserContext */
+    protected $browserContext;
 
     /** @BeforeScenario
      * @param BeforeScenarioScope $scope Behat scope
@@ -21,6 +21,6 @@ abstract class BusinessContext implements Context
     public function getUtilityContext(BeforeScenarioScope $scope): void
     {
         $environment = $scope->getEnvironment();
-        $this->utilityContext = $environment->getContext(UtilityContext::class);
+        $this->browserContext = $environment->getContext(BrowserContext::class);
     }
 }

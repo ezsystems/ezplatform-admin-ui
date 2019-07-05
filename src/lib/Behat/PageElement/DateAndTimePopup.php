@@ -7,7 +7,8 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use DateTime;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Element\Element;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Time;
 
 class DateAndTimePopup extends Element
@@ -31,7 +32,7 @@ class DateAndTimePopup extends Element
                 fi._flatpickr.config.onChange = onChangeNew;
             }';
 
-    public function __construct(UtilityContext $context, bool $isInline = false, $containerSelector = '')
+    public function __construct(BrowserContext $context, bool $isInline = false, $containerSelector = '')
     {
         parent::__construct($context);
         $this->fields = [

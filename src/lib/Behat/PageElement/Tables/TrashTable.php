@@ -7,14 +7,14 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 
 use Behat\Mink\Element\NodeElement;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
 
 class TrashTable extends Table
 {
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Trash Table';
 
-    public function __construct(UtilityContext $context, $containerLocator)
+    public function __construct(BrowserContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
         $this->fields['horizontalHeaders'] = $this->fields['list'] . ' thead th';

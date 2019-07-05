@@ -6,10 +6,11 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Page\Page;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\DoubleHeaderTable;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SimpleTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SystemInfoTable;
 
@@ -40,7 +41,7 @@ class ContentTypePage extends Page
      */
     public $contentTypeAdminList;
 
-    public function __construct(UtilityContext $context, string $contentTypeName)
+    public function __construct(BrowserContext $context, string $contentTypeName)
     {
         parent::__construct($context);
         $this->groupName = $contentTypeName;

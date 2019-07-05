@@ -6,14 +6,14 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
 
 class DashboardTable extends Table
 {
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Dashboard Table';
 
-    public function __construct(UtilityContext $context, string $containerLocator)
+    public function __construct(BrowserContext $context, string $containerLocator)
     {
         parent::__construct($context, $containerLocator);
         $this->fields['listElement'] = $this->fields['list'] . ' .ez-table__cell--after-icon';

@@ -7,7 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\SystemInfoPage;
 
 class SystemInfoContext extends BusinessContext
@@ -22,7 +22,7 @@ class SystemInfoContext extends BusinessContext
      */
     public function iGoToTabInSYstemInfo(string $tabName): void
     {
-        $systemInfoPage = PageObjectFactory::createPage($this->utilityContext, SystemInfoPage::PAGE_NAME);
+        $systemInfoPage = PageObjectFactory::createPage($this->browserContext, SystemInfoPage::PAGE_NAME);
         $systemInfoPage->verifyIsLoaded();
         $systemInfoPage->navLinkTabs->goToTab($tabName);
     }
@@ -32,7 +32,7 @@ class SystemInfoContext extends BusinessContext
      */
     public function iSeeSystemInformationTable(string $tabName): void
     {
-        $systemInfoPage = PageObjectFactory::createPage($this->utilityContext, SystemInfoPage::PAGE_NAME);
+        $systemInfoPage = PageObjectFactory::createPage($this->browserContext, SystemInfoPage::PAGE_NAME);
         $systemInfoPage->verifySystemInfoTable($tabName);
     }
 
@@ -41,7 +41,7 @@ class SystemInfoContext extends BusinessContext
      */
     public function iSeeRecordsInSystemInformation(string $tableName, TableNode $records): void
     {
-        $systemInfoPage = PageObjectFactory::createPage($this->utilityContext, SystemInfoPage::PAGE_NAME);
+        $systemInfoPage = PageObjectFactory::createPage($this->browserContext, SystemInfoPage::PAGE_NAME);
         $systemInfoPage->navLinkTabs->goToTab($this->systemInfoTableMapping[$tableName]);
 
         $hash = $records->getHash();

@@ -6,7 +6,9 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
+use EzSystems\Behat\Browser\Element\Element;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\Table;
 use PHPUnit\Framework\Assert;
 
@@ -22,7 +24,7 @@ class AdminList extends Element
     /** @var Table */
     public $table;
 
-    public function __construct(UtilityContext $context, string $listHeader, string $tableName, ?string $containerLocator = 'section')
+    public function __construct(BrowserContext $context, string $listHeader, string $tableName, ?string $containerLocator = 'section')
     {
         parent::__construct($context);
         $containerLocator = !$containerLocator ? 'section' : $containerLocator;

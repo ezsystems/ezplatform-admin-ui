@@ -6,7 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
 use PHPUnit\Framework\Assert;
 
 class Selection extends EzFieldElement
@@ -14,7 +14,7 @@ class Selection extends EzFieldElement
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Selection';
 
-    public function __construct(UtilityContext $context, string $locator, string $label)
+    public function __construct(BrowserContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
         $this->fields['selectBar'] = '.ez-custom-dropdown__selection-info';

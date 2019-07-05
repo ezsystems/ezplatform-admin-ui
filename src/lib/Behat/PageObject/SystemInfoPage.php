@@ -6,9 +6,10 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Page\Page;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\NavLinkTabs;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SimpleTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SystemInfoTable;
@@ -33,7 +34,7 @@ class SystemInfoPage extends Page
      */
     public $systemInfoTable;
 
-    public function __construct(UtilityContext $context)
+    public function __construct(BrowserContext $context)
     {
         parent::__construct($context);
         $this->adminLists['Packages'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Packages', SimpleTable::ELEMENT_NAME, '.ez-main-container .tab-pane.active');

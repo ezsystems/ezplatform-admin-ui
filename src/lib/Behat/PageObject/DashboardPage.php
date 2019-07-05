@@ -6,8 +6,9 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
+use EzSystems\Behat\Browser\Page\Page;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\NavLinkTabs;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\DashboardTable;
 
@@ -25,7 +26,7 @@ class DashboardPage extends Page
 
     public $fields;
 
-    public function __construct(UtilityContext $context)
+    public function __construct(BrowserContext $context)
     {
         parent::__construct($context);
         $this->route = '/admin/dashboard';

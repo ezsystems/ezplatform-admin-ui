@@ -6,12 +6,14 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
+use EzSystems\Behat\Browser\Page\Page;
+use EzSystems\Behat\Core\Environment\EnvironmentConstants;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ContentField;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ContentTypePicker;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\SubItemsList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UpperMenu;
 use PHPUnit\Framework\Assert;
@@ -33,7 +35,7 @@ class ContentItemPage extends Page
     /** @var string */
     public $contentTypeLocator;
 
-    public function __construct(UtilityContext $context, string $contentName)
+    public function __construct(BrowserContext $context, string $contentName)
     {
         parent::__construct($context);
         $this->route = '/admin/content/location';
@@ -93,7 +95,7 @@ class ContentItemPage extends Page
     public function navigateToPath(string $path): void
     {
         $pathArray = explode('/', $path);
-        $menuTab = ($pathArray[0] === EzEnvironmentConstants::get('ROOT_CONTENT_NAME')) ? 'Content structure' : $pathArray[0];
+        $menuTab = ($pathArray[0] === EnvironmentConstants::get('ROOT_CONTENT_NAME')) ? 'Content structure' : $pathArray[0];
 
         $upperMenu = ElementFactory::createElement($this->context, UpperMenu::ELEMENT_NAME);
         $upperMenu->goToTab('Content');

@@ -6,8 +6,10 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\EzFieldElement;
+use EzSystems\Behat\API\ContentData\FieldTypeNameConverter;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
+use EzSystems\Behat\Browser\Element\Element;
 
 class ContentField extends Element
 {
@@ -16,7 +18,7 @@ class ContentField extends Element
 
     public const FIELD_TYPE_CLASS_REGEX = '/ez[a-z]*-field/';
 
-    public function __construct(UtilityContext $context)
+    public function __construct(BrowserContext $context)
     {
         parent::__construct($context);
         $this->fields = [
@@ -45,7 +47,7 @@ class ContentField extends Element
 
             $fieldType = explode('-', $matches[0])[0];
         }
-        $fieldElement = ElementFactory::createElement($this->context, EzFieldElement::getFieldNameByInternalName($fieldType), $fieldLocator, $label);
+        $fieldElement = ElementFactory::createElement($this->context, FieldTypeNameConverter::getFieldTypeNameByIdentifier($fieldType), $fieldLocator, $label);
         $fieldElement->verifyValueInItemView($value);
     }
 }

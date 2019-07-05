@@ -7,8 +7,8 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 
 use Behat\Mink\Element\NodeElement;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Pagination;
 use PHPUnit\Framework\Assert;
 
@@ -16,7 +16,7 @@ class SubItemsTable extends Table
 {
     public const ELEMENT_NAME = 'Sub-items Table';
 
-    public function __construct(UtilityContext $context, $containerLocator)
+    public function __construct(BrowserContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
         $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .c-table-view__cell--head';

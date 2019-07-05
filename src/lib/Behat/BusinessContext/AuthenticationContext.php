@@ -7,7 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\LoginPage;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 use OutOfBoundsException;
 
 /** Context for authentication actions */
@@ -26,7 +26,7 @@ class AuthenticationContext extends BusinessContext
      */
     public function iLoginAs(string $username, string $password): void
     {
-        $loginPage = PageObjectFactory::createPage($this->utilityContext, LoginPage::PAGE_NAME);
+        $loginPage = PageObjectFactory::createPage($this->browserContext, LoginPage::PAGE_NAME);
         $loginPage->login($username, $password);
     }
 
@@ -35,7 +35,7 @@ class AuthenticationContext extends BusinessContext
      */
     public function iAmLoggedAs(string $username): void
     {
-        $loginPage = PageObjectFactory::createPage($this->utilityContext, LoginPage::PAGE_NAME);
+        $loginPage = PageObjectFactory::createPage($this->browserContext, LoginPage::PAGE_NAME);
         $loginPage->open();
 
         if (!\array_key_exists($username, $this->userCredentials)) {

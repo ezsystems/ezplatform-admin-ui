@@ -6,14 +6,14 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
 
 class VerticalOrientedTable extends Table
 {
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Vertical Oriented Table';
 
-    public function __construct(UtilityContext $context, $containerLocator)
+    public function __construct(BrowserContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
         $this->fields['verticalHeaders'] = $this->fields['list'] . ' colgroup+ tbody th';

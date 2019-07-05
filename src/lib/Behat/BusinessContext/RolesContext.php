@@ -7,9 +7,9 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
-use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\RolePage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\AdminUpdateItemPage;
 use PHPUnit\Framework\Exception;
@@ -36,7 +36,7 @@ class RolesContext extends BusinessContext
      */
     public function iStartAssigningTo(string $roleName): void
     {
-        $pageObject = PageObjectFactory::createPage($this->utilityContext, 'Role', $roleName);
+        $pageObject = PageObjectFactory::createPage($this->browserContext, 'Role', $roleName);
         $pageObject->navLinkTabs->goToTab($this->tabMapping['assignment']);
         $pageObject->adminLists[$this->tabMapping['assignment']]->clickAssignButton();
     }
@@ -51,7 +51,7 @@ class RolesContext extends BusinessContext
         $buttonNo = 0;
 
         if ('assignment' === $tabName) {
-            PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME)
+            PageObjectFactory::createPage($this->browserContext, AdminUpdateItemPage::PAGE_NAME)
                 ->adminUpdateForm->fillFieldWithValue('Subtree', 'true');
             $buttonLabel = 'Select Subtree';
         }
@@ -60,10 +60,10 @@ class RolesContext extends BusinessContext
             $buttonNo = 1;
         }
 
-        $pageObject = PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME);
+        $pageObject = PageObjectFactory::createPage($this->browserContext, AdminUpdateItemPage::PAGE_NAME);
         $pageObject->adminUpdateForm->clickButton($buttonLabel, $buttonNo);
 
-        $udw = ElementFactory::createElement($this->utilityContext, UniversalDiscoveryWidget::ELEMENT_NAME);
+        $udw = ElementFactory::createElement($this->browserContext, UniversalDiscoveryWidget::ELEMENT_NAME);
         $udw->verifyVisibility();
         $udw->selectContent($itemPath);
         $udw->confirm();
@@ -74,7 +74,7 @@ class RolesContext extends BusinessContext
      */
     public function iDeleteManyFromRole(string $itemType, string $roleName, TableNode $settings): void
     {
-        $rolePage = PageObjectFactory::createPage($this->utilityContext, RolePage::PAGE_NAME, $roleName);
+        $rolePage = PageObjectFactory::createPage($this->browserContext, RolePage::PAGE_NAME, $roleName);
         $rolePage->navLinkTabs->goToTab($this->tabMapping[$itemType]);
         $adminList = $rolePage->adminLists[$this->tabMapping[$itemType]];
 
@@ -93,7 +93,7 @@ class RolesContext extends BusinessContext
      */
     public function thereIsAPolicy(string $moduleAndFunction, string $limitation, string $roleName): void
     {
-        $rolePage = PageObjectFactory::createPage($this->utilityContext, RolePage::PAGE_NAME, $roleName);
+        $rolePage = PageObjectFactory::createPage($this->browserContext, RolePage::PAGE_NAME, $roleName);
 
         if (!$rolePage->isRoleWithLimitationPresent($this->tabMapping['policy'], $moduleAndFunction, $limitation)) {
             throw new Exception(sprintf('Policy "%s" with limitation "%s" not found on the "%s" policies list.', $moduleAndFunction, $limitation, $roleName));
@@ -105,7 +105,7 @@ class RolesContext extends BusinessContext
      */
     public function thereIsNoPolicy(string $moduleAndFunction, string $limitation, string $roleName): void
     {
-        $rolePage = PageObjectFactory::createPage($this->utilityContext, RolePage::PAGE_NAME, $roleName);
+        $rolePage = PageObjectFactory::createPage($this->browserContext, RolePage::PAGE_NAME, $roleName);
 
         if ($rolePage->isRoleWithLimitationPresent($this->tabMapping['policy'], $moduleAndFunction, $limitation)) {
             throw new Exception(sprintf('Policy "%s" with limitation "%s" found on the "%s" policies list.', $moduleAndFunction, $limitation, $roleName));
@@ -117,7 +117,7 @@ class RolesContext extends BusinessContext
      */
     public function thereIsAnAssignment(string $limitation, string $userOrGroup, string $roleName): void
     {
-        $rolePage = PageObjectFactory::createPage($this->utilityContext, RolePage::PAGE_NAME, $roleName);
+        $rolePage = PageObjectFactory::createPage($this->browserContext, RolePage::PAGE_NAME, $roleName);
         $rolePage->navLinkTabs->goToTab($this->tabMapping['assignment']);
         $adminList = $rolePage->adminLists[$this->tabMapping['assignment']];
         $actualAssignmentList = $adminList->table->getTableHash();
@@ -160,7 +160,7 @@ class RolesContext extends BusinessContext
      */
     public function iSelectPolicy(string $policyName): void
     {
-        $this->utilityContext->selectOption($this->fields['newPolicySelectList'], $policyName);
+        $this->browserContext->selectOption($this->fields['newPolicySelectList'], $policyName);
     }
 
     /**
@@ -168,9 +168,9 @@ class RolesContext extends BusinessContext
      */
     public function iSelectSectionLimitation(string $limitationName): void
     {
-        PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME)
+        PageObjectFactory::createPage($this->browserContext, AdminUpdateItemPage::PAGE_NAME)
             ->adminUpdateForm->fillFieldWithValue('Sections', 'true');
-        $this->utilityContext->selectOption($this->fields['newPolicyAssignmentLimitation'], $limitationName);
+        $this->browserContext->selectOption($this->fields['newPolicyAssignmentLimitation'], $limitationName);
     }
 
     /**
@@ -178,10 +178,10 @@ class RolesContext extends BusinessContext
      */
     public function iAssignToRole(string $itemType, TableNode $items): void
     {
-        $pageObject = PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME);
+        $pageObject = PageObjectFactory::createPage($this->browserContext, AdminUpdateItemPage::PAGE_NAME);
         $pageObject->adminUpdateForm->clickButton($this->itemTypeToLabelMapping[$itemType]);
 
-        $udw = ElementFactory::createElement($this->utilityContext, UniversalDiscoveryWidget::ELEMENT_NAME);
+        $udw = ElementFactory::createElement($this->browserContext, UniversalDiscoveryWidget::ELEMENT_NAME);
         $udw->verifyVisibility();
 
         foreach ($items->getHash() as $item) {

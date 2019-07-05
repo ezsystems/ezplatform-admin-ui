@@ -6,10 +6,11 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Page\Page;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\NavLinkTabs;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SimpleListTable;
 
@@ -42,7 +43,7 @@ class RolePage extends Page
      */
     public $navLinkTabs;
 
-    public function __construct(UtilityContext $context, string $roleName)
+    public function __construct(BrowserContext $context, string $roleName)
     {
         parent::__construct($context);
         $this->route = '/admin/role/';
