@@ -21,9 +21,7 @@ const ZERO_WIDTH_SPACE = '&#8203;';
         init: function(editor) {
             editor.ezembed = {
                 canBeAdded: () => {
-                    const path = editor.elementPath();
-
-                    return !path || path.contains('table', true) === null;
+                    return true;
                 },
             };
 
