@@ -97,8 +97,8 @@
         {{ ez_render_component_group('stylesheet-head') }}
         {{ ez_render_component_group('script-head') }}
 
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react/umd/react.production.min.js') }}"></script>
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react-dom/umd/react-dom.production.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react/umd/react.development.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react-dom/umd/react-dom.development.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -153,9 +153,7 @@
             })|e('html_attr')  }}"></div>
         <div class="ez-modal-wrapper"></div>
 
-        {{ ez_render_component_group('custom-admin-ui-modules') }}
-        {{ ez_render_component_group('custom-admin-ui-config') }}
-
+        {{ encore_entry_script_tags('ezplatform-admin-ui-modules-udw-tabs-js', null, 'ezplatform') }}
         {{ encore_entry_script_tags('ezplatform-admin-ui-modules-udw-js', null, 'ezplatform') }}
         {{ encore_entry_script_tags('ezplatform-admin-ui-layout-js', null, 'ezplatform') }}
 
