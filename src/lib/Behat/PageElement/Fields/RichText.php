@@ -13,7 +13,7 @@ class RichText extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Rich text';
-    private $clearAlloyEditorScript = 'CKEDITOR.instances.%s.setData(\'\')';
+    private $setAlloyEditorValueScript = 'CKEDITOR.instances.%s.setData(\'%s\')';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
@@ -33,8 +33,8 @@ class RichText extends EzFieldElement
         $richtextId = $fieldInput->getAttribute('id');
 
         $fieldInput->focus();
-        $this->context->getSession()->getDriver()->executeScript(sprintf($this->clearAlloyEditorScript, $richtextId));
-        $fieldInput->setValue($parameters['value']);
+        $this->context->getSession()->getDriver()->executeScript(sprintf($this->setAlloyEditorValueScript, $richtextId, ''));
+        $this->context->getSession()->getDriver()->executeScript(sprintf($this->setAlloyEditorValueScript, $richtextId, $parameters['value']));
         $fieldInput->blur();
     }
 

@@ -13,6 +13,7 @@ class Keywords extends EzFieldElement
 {
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Keywords';
+    private $setKeywordsValueScript = 'document.getElementById(\'%s\').value = \'%s\';';
 
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
@@ -28,8 +29,11 @@ class Keywords extends EzFieldElement
 
         Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
 
-        $fieldInput->setValue('');
-        $fieldInput->setValue($parameters['value']);
+        $keywordInputId = $fieldInput->getAttribute('id');
+        $fieldInput->focus();
+        $this->context->getSession()->getDriver()->executeScript(sprintf($this->setKeywordsValueScript, $keywordInputId, ''));
+        $this->context->getSession()->getDriver()->executeScript(sprintf($this->setKeywordsValueScript, $keywordInputId, $parameters['value']));
+        $fieldInput->blur();
     }
 
     public function getValue(): array
