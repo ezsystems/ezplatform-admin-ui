@@ -21,6 +21,8 @@ const ZERO_WIDTH_SPACE = '&#8203;';
         init: function(editor) {
             editor.ezembed = {
                 canBeAdded: () => {
+                    console.warn('[DEPRECATED] canBeAdded method is deprecated');
+                    console.warn('[DEPRECATED] it will be removed from ezplatform-admin-ui 2.0');
                     return true;
                 },
             };
