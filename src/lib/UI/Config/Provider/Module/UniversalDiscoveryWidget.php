@@ -36,6 +36,6 @@ class UniversalDiscoveryWidget implements ProviderInterface
 
     protected function getStartingLocationId(): ?int
     {
-        return $this->configResolver->getConfig('default')['starting_location_id'];
+        return $this->configResolver->getConfig(ConfigResolver::DEFAULT_CONFIGURATION_KEY)['starting_location_id'];
     }
 }

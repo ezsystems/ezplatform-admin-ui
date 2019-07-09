@@ -1,9 +1,8 @@
 (function(global, doc, eZ, React, ReactDOM) {
     const udwContainer = doc.getElementById('react-udw');
     const limitationsRadio = doc.querySelectorAll('.ez-limitations__radio');
-    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
+    let selectedLocationsIds = [];
     const selectSubtreeConfirm = (data) => {
         const selectedItems = data.reduce((total, item) => `${total}<li>${item.ContentInfo.Content.TranslatedName}</li>`, '');
 
@@ -22,8 +21,6 @@
                 onConfirm: selectSubtreeConfirm.bind(this),
                 onCancel: closeUDW,
                 multiple: true,
-                startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-                restInfo: { token, siteaccess },
                 ...config,
             }),
             udwContainer
@@ -43,11 +40,11 @@
     doc.querySelector('.ez-btn--select-subtree').addEventListener('click', selectSubtree, false);
     limitationsRadio.forEach((radio) => radio.addEventListener('change', toggleDisabledState, false));
 
-    const addContentToInput = (selectBtn, newlySelectedItems) => {
+    const addContentToInput = (selectBtn, selectedItems) => {
         const input = doc.querySelector(selectBtn.dataset.inputSelector);
-        const newlySelectedContentIds = newlySelectedItems.map((item) => item.ContentInfo.Content._id).join(',');
+        const selectedContentIds = selectedItems.map((item) => item.ContentInfo.Content._id).join(',');
 
-        input.value = input.value ? `${input.value},${newlySelectedContentIds}` : newlySelectedContentIds;
+        input.value = selectedContentIds;
     };
     const removeContentFromInput = (selectBtn, removedContentId) => {
         const input = doc.querySelector(selectBtn.dataset.inputSelector);
@@ -55,12 +52,12 @@
 
         input.value = contentIdsWithoutRemoved.join(',');
     };
-    const addContentTags = (selectBtn, newlySelectedItems) => {
+    const addContentTags = (selectBtn, selectedItems) => {
         const tagsList = doc.querySelector(selectBtn.dataset.selectedContentListSelector);
         const tagTemplate = selectBtn.dataset.tagTemplate;
         const fragment = doc.createDocumentFragment();
 
-        newlySelectedItems.forEach((location) => {
+        selectedItems.forEach((location) => {
             const { _id: contentId, Name: contentName } = location.ContentInfo.Content;
             const container = doc.createElement('ul');
             const renderedItem = tagTemplate.replace('{{ content_id }}', contentId).replace('{{ content_name }}', contentName);
@@ -74,6 +71,7 @@
             fragment.append(listItemNode);
         });
 
+        tagsList.innerHTML = '';
         tagsList.append(fragment);
     };
     const handleTagRemove = (selectBtn, tag) => {
@@ -87,10 +85,11 @@
 
         removeTagBtn.addEventListener('click', () => handleTagRemove(selectBtn, tag), false);
     };
-    const handleUdwConfirm = (selectBtn, newlySelectedItems) => {
-        if (newlySelectedItems.length) {
-            addContentToInput(selectBtn, newlySelectedItems);
-            addContentTags(selectBtn, newlySelectedItems);
+    const handleUdwConfirm = (selectBtn, selectedItems) => {
+        if (selectedItems.length) {
+            addContentToInput(selectBtn, selectedItems);
+            addContentTags(selectBtn, selectedItems);
+            selectedLocationsIds = selectedItems.map((item) => item.id);
         }
 
         closeUDW();
@@ -107,16 +106,10 @@
             React.createElement(eZ.modules.UniversalDiscovery, {
                 onConfirm: handleUdwConfirm.bind(this, selectBtn),
                 onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
-                startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                 title: selectBtn.dataset.universaldiscoveryTitle,
                 multiple: true,
-                restInfo: { token, siteaccess },
-                canSelectContent: ({ item }, callback) => {
-                    const itemId = parseInt(item.ContentInfo.Content._id, 10);
-
-                    callback(!selectedContentIds.includes(itemId));
-                },
-                config,
+                selectedLocations: selectedLocationsIds,
+                ...config,
             }),
             udwContainer
         );

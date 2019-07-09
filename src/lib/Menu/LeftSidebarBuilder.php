@@ -95,7 +95,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                     'attributes' => [
                         'type' => 'button',
                         'class' => 'btn--udw-browse',
-                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single', [
+                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('browse', [
                             'type' => 'content_create',
                         ]),
                         'data-starting-location-id' => $this->configResolver->getConfig('default')['starting_location_id'],

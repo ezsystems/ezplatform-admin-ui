@@ -92,3 +92,7 @@ services:
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\UserContentTypes:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'userContentTypes' }
+
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\Sections:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'sections' }

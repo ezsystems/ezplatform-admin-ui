@@ -5,3 +5,7 @@ services:
         public: false
 
     EzSystems\EzPlatformAdminUi\Strategy\NotificationTwigStrategy: ~
+
+    EzSystems\EzPlatformAdminUi\Strategy\ContentTypeThumbnailStrategy:
+        tags:
+            - { name: ezplatform.spi.content.thumbnail_strategy, priority: -100 }

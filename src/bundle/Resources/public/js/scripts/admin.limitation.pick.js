@@ -72,11 +72,11 @@
 
         return searchHitList.map((searchHit) => searchHit.value.Location.ContentInfo.Content.TranslatedName).join(' / ');
     };
-    const addLocationsToInput = (limitationBtn, newlySelectedItems) => {
+    const addLocationsToInput = (limitationBtn, selectedItems) => {
         const input = doc.querySelector(limitationBtn.dataset.locationInputSelector);
-        const newlySelectedLocationsIds = newlySelectedItems.map((item) => item.id).join(IDS_SEPARATOR);
+        const selectedLocationsIds = selectedItems.map((item) => item.id).join(IDS_SEPARATOR);
 
-        input.value = input.value ? `${input.value}${IDS_SEPARATOR}${newlySelectedLocationsIds}` : newlySelectedLocationsIds;
+        input.value = selectedLocationsIds;
     };
     const removeLocationFromInput = (locationInputSelector, removedLocationId) => {
         const input = doc.querySelector(locationInputSelector);
@@ -84,12 +84,12 @@
 
         input.value = locationsIdsWithoutRemoved.join(IDS_SEPARATOR);
     };
-    const addLocationsTags = (limitationBtn, newlySelectedItems) => {
+    const addLocationsTags = (limitationBtn, selectedItems) => {
         const tagsList = doc.querySelector(limitationBtn.dataset.selectedLocationListSelector);
         const tagTemplate = limitationBtn.dataset.valueTemplate;
         const fragment = doc.createDocumentFragment();
 
-        newlySelectedItems.forEach((location) => {
+        selectedItems.forEach((location) => {
             const locationId = location.id;
             const container = doc.createElement('ul');
             const renderedItem = tagTemplate.replace('{{ location_id }}', locationId);
@@ -103,12 +103,13 @@
             fragment.append(listItemNode);
         });
 
+        tagsList.innerHTML = '';
         tagsList.append(fragment);
 
-        setTagsBreadcrumbs(tagsList, newlySelectedItems);
+        setTagsBreadcrumbs(tagsList, selectedItems);
     };
-    const setTagsBreadcrumbs = (tagsList, newlySelectedItems) => {
-        const pathArraysWithoutRoot = newlySelectedItems.map(getLocationPathArray);
+    const setTagsBreadcrumbs = (tagsList, selectedItems) => {
+        const pathArraysWithoutRoot = selectedItems.map(getLocationPathArray);
 
         findLocationsByIdList(pathArraysWithoutRoot, (response) => {
             const { operations } = response.BulkOperationResponse;
@@ -145,10 +146,10 @@
         removeTagBtn.addEventListener('click', () => handleTagRemove(limitationBtn, tag), false);
     };
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
-    const handleUdwConfirm = (limitationBtn, newlySelectedItems) => {
-        if (newlySelectedItems.length) {
-            addLocationsToInput(limitationBtn, newlySelectedItems);
-            addLocationsTags(limitationBtn, newlySelectedItems);
+    const handleUdwConfirm = (limitationBtn, selectedItems) => {
+        if (selectedItems.length) {
+            addLocationsToInput(limitationBtn, selectedItems);
+            addLocationsTags(limitationBtn, selectedItems);
         }
 
         closeUDW();
@@ -167,14 +168,8 @@
                 onConfirm: handleUdwConfirm.bind(this, event.target),
                 onCancel: closeUDW,
                 title,
-                startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
                 multiple: true,
-                restInfo: { token, siteaccess },
-                canSelectContent: ({ item }, callback) => {
-                    const itemId = parseInt(item.id, 10);
-
-                    callback(!selectedLocationsIds.includes(itemId));
-                },
+                selectedLocations: selectedLocationsIds,
                 ...config,
             }),
             udwContainer

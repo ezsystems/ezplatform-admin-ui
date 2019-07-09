@@ -1,8 +1,6 @@
 (function(global, doc, eZ, React, ReactDOM) {
     const btns = doc.querySelectorAll('.btn--udw-relation-default-location');
     const udwContainer = doc.getElementById('react-udw');
-    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (btn, items) => {
         closeUDW();
@@ -32,8 +30,6 @@
                 onCancel,
                 title: event.currentTarget.dataset.universaldiscoveryTitle,
                 multiple: false,
-                startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-                restInfo: { token, siteaccess },
                 ...config,
             }),
             udwContainer
