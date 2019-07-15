@@ -8,18 +8,18 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 
 class UserContentTypes implements ProviderInterface
 {
-    /** @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver */
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     /**
-     * @param \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver $configResolver
+     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      */
-    public function __construct(ConfigResolver $configResolver)
+    public function __construct(ConfigResolverInterface $configResolver)
     {
         $this->configResolver = $configResolver;
     }
