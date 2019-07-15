@@ -110,3 +110,7 @@ services:
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\PathStringExtension: ~
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ContentTypeIconExtension: ~
+
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\UserContentTypes:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'userContentTypes' }
