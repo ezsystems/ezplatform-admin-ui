@@ -24,6 +24,7 @@ use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUserGroup;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsRoot;
+use EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsWithinCopySubtreeLimit;
@@ -56,6 +57,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
+    /** @var \EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver */
+    private $udwConfigResolver;
+
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
@@ -84,6 +88,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
      * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver $udwConfigResolver
      * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\SearchService $searchService
@@ -98,6 +103,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
         PermissionResolver $permissionResolver,
+        ConfigResolver $udwConfigResolver,
         ConfigResolverInterface $configResolver,
         ContentTypeService $contentTypeService,
         SearchService $searchService,
@@ -112,6 +118,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
+        $this->udwConfigResolver = $udwConfigResolver;
         $this->contentTypeService = $contentTypeService;
         $this->searchService = $searchService;
         $this->udwExtension = $udwExtension;
@@ -151,6 +158,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $content = $options['content'];
         /** @var ItemInterface|ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
+        $startingLocationId = $this->udwConfigResolver->getConfig('default')['starting_location_id'];
 
         $lookupLimitationsResult = $this->permissionChecker->getContentCreateLimitations($location);
         $canCreate = $lookupLimitationsResult->hasAccess && $contentType->isContainer;
@@ -188,9 +196,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $copySubtreeAttributes = [
             'class' => 'ez-btn--udw-copy-subtree',
             'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-            'data-root-location' => $this->configResolver->getParameter(
-                'universal_discovery_widget_module.default_location_id'
-            ),
+            'data-root-location' => $startingLocationId,
         ];
 
         $copyLimit = $this->configResolver->getParameter(
@@ -236,9 +242,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'attributes' => [
                         'class' => 'btn--udw-move',
                         'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-                        'data-root-location' => $this->configResolver->getParameter(
-                            'universal_discovery_widget_module.default_location_id'
-                        ),
+                        'data-root-location' => $startingLocationId,
                     ],
                 ]
             )
@@ -252,9 +256,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                         'attributes' => [
                             'class' => 'btn--udw-copy',
                             'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-                            'data-root-location' => $this->configResolver->getParameter(
-                                'universal_discovery_widget_module.default_location_id'
-                            ),
+                            'data-root-location' => $startingLocationId,
                         ],
                     ]
                 )

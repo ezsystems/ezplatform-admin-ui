@@ -6,43 +6,26 @@
  */
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module;
 
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\LanguageService;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
+use EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver;
 
 /**
- * Provides information about current user with resolved profile picture.
+ * Provides information about the id of starting Location for the Universal Discovery Widget.
  */
 class UniversalDiscoveryWidget implements ProviderInterface
 {
-    /** @var ConfigResolverInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver */
     private $configResolver;
 
-    /** @var LanguageService */
-    private $languageService;
-
-    /** @var ContentTypeService */
-    private $contentTypeService;
-
     /**
-     * @param ConfigResolverInterface $configResolver
-     * @param LanguageService $languageService
-     * @param ContentTypeService $contentTypeService
+     * @param \EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver $configResolver
      */
     public function __construct(
-        ConfigResolverInterface $configResolver,
-        LanguageService $languageService,
-        ContentTypeService $contentTypeService
+        ConfigResolver $configResolver
     ) {
         $this->configResolver = $configResolver;
-        $this->languageService = $languageService;
-        $this->contentTypeService = $contentTypeService;
     }
 
-    /**
-     * @return array
-     */
     public function getConfig(): array
     {
         /* config structure has to reflect UDW module's config structure */
@@ -51,13 +34,8 @@ class UniversalDiscoveryWidget implements ProviderInterface
         ];
     }
 
-    /**
-     * @return int|null
-     */
     protected function getStartingLocationId(): ?int
     {
-        return $this->configResolver->getParameter(
-            'universal_discovery_widget_module.default_location_id'
-        );
+        return $this->configResolver->getConfig('default')['starting_location_id'];
     }
 }

@@ -28,10 +28,6 @@ class UniversalDiscoveryWidget extends AbstractParser
             ->arrayNode('universal_discovery_widget_module')
                 ->info('UDW module configuration')
                 ->children()
-                    ->scalarNode('default_location_id')
-                        ->setDeprecated('Use configuration.default.starting_location_id instead.')
-                        ->isRequired()
-                    ->end()
                     ->arrayNode('configuration')
                         ->isRequired()
                         ->useAttributeAsKey('scope_name')
@@ -51,16 +47,6 @@ class UniversalDiscoveryWidget extends AbstractParser
         }
 
         $settings = $scopeSettings['universal_discovery_widget_module'];
-
-        if (!isset($settings['default_location_id']) || empty($settings['default_location_id'])) {
-            return;
-        }
-
-        $contextualizer->setContextualParameter(
-            'universal_discovery_widget_module.default_location_id',
-            $currentScope,
-            $settings['default_location_id']
-        );
 
         $contextualizer->setContextualParameter(
             'universal_discovery_widget_module.configuration',

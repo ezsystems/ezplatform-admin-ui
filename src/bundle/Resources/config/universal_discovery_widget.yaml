@@ -1,7 +1,6 @@
 system:
     default:
         universal_discovery_widget_module:
-            default_location_id: 1
             configuration:
                 default:
                     multiple: true
