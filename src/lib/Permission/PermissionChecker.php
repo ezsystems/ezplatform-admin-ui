@@ -229,15 +229,15 @@ class PermissionChecker implements PermissionCheckerInterface
 
         $limitations = [];
         foreach ($hasAccess as $permissionSet) {
-            if ($permissionSet['limitation'] !== null) {
-                $limitations[] = $permissionSet['limitation'];
-            }
             /** @var \eZ\Publish\API\Repository\Values\User\Policy $policy */
             foreach ($permissionSet['policies'] as $policy) {
                 $policyLimitations = $policy->getLimitations();
                 if (!empty($policyLimitations)) {
                     foreach ($policyLimitations as $policyLimitation) {
                         $limitations[$policy->id][] = $policyLimitation;
+                        if ($permissionSet['limitation'] !== null) {
+                            $limitations[$policy->id][] = $permissionSet['limitation'];
+                        }
                     }
                 }
             }
