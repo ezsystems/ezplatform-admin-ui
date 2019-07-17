@@ -119,7 +119,7 @@ class PermissionChecker implements PermissionCheckerInterface
      */
     public function canCreateInLocation(Location $location, $hasAccess): bool
     {
-        if (is_bool($hasAccess)) {
+        if (\is_bool($hasAccess)) {
             return $hasAccess;
         }
         $restrictedLocations = $this->getRestrictions($hasAccess, LocationLimitation::class);
@@ -235,10 +235,10 @@ class PermissionChecker implements PermissionCheckerInterface
                 if (!empty($policyLimitations)) {
                     foreach ($policyLimitations as $policyLimitation) {
                         $limitations[$policy->id][] = $policyLimitation;
-                        if ($permissionSet['limitation'] !== null) {
-                            $limitations[$policy->id][] = $permissionSet['limitation'];
-                        }
                     }
+                }
+                if ($permissionSet['limitation'] !== null) {
+                    $limitations[$policy->id][] = $permissionSet['limitation'];
                 }
             }
         }
