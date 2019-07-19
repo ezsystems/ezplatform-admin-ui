@@ -23,6 +23,7 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface;
 
 class SearchController extends Controller
 {
@@ -47,6 +48,9 @@ class SearchController extends Controller
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
+    /** @var \Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface */
+    private $entrypointLookupCollection;
+
     /** @var int */
     private $defaultPaginationLimit;
 
@@ -61,6 +65,7 @@ class SearchController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param \eZ\Publish\API\Repository\SectionService $sectionService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface $entrypointLookupCollection
      * @param int $defaultPaginationLimit
      * @param array $userContentTypeIdentifier
      */
@@ -72,6 +77,7 @@ class SearchController extends Controller
         SubmitHandler $submitHandler,
         SectionService $sectionService,
         ContentTypeService $contentTypeService,
+        EntrypointLookupCollectionInterface $entrypointLookupCollection,
         int $defaultPaginationLimit,
         array $userContentTypeIdentifier
     ) {
@@ -84,6 +90,7 @@ class SearchController extends Controller
         $this->contentTypeService = $contentTypeService;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
+        $this->entrypointLookupCollection = $entrypointLookupCollection;
     }
 
     /**
@@ -209,6 +216,7 @@ class SearchController extends Controller
             if ($result instanceof Response) {
                 return $result;
             }
+            $this->entrypointLookupCollection->getEntrypointLookup('ezplatform')->reset();
         }
 
         return $this->render('@ezdesign/admin/search/search.html.twig', [
