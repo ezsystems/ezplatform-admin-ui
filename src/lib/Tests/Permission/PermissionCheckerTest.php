@@ -48,7 +48,7 @@ class PermissionCheckerTest extends TestCase
     /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionChecker */
     private $permissionChecker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->permissionResolver = $this->createMock(PermissionResolver::class);
         $this->permissionResolver
