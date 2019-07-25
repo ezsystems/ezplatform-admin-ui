@@ -343,29 +343,26 @@ class ContentTypeController extends Controller
     public function editAction(Request $request, ContentTypeGroup $group, ContentType $contentType): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('class', 'update'));
-        // Kernel does not allow editing the same Content Type simultaneously by more than one user.
-        // So we need to catch 'BadStateException' and inform user about another user editing the Content Type
         try {
-            $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentType->id);
-            $this->contentTypeService->deleteContentType($contentTypeDraft);
-            $contentTypeDraft = $this->contentTypeService->createContentTypeDraft($contentType);
+            $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentType->id, true);
         } catch (NotFoundException $e) {
-            try {
-                $contentTypeDraft = $this->contentTypeService->createContentTypeDraft($contentType);
-            } catch (BadStateException $e) {
-                $userId = $contentType->modifierId;
-                $this->notificationHandler->error(
+            $contentTypeDraft = $this->contentTypeService->createContentTypeDraft($contentType);
+        }
+
+        if ($contentTypeDraft->modifierId !== $this->getUser()->getAPIUser()->getUserId()) {
+            $this->notificationHandler->error(
+                $this->translator->trans(
                     /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
                     'content_type.edit.error.already_exists',
-                    ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($userId)],
+                    ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($contentTypeDraft->modifierId)],
                     'content_type'
-                );
+                )
+            );
 
-                return $this->redirectToRoute('ezplatform.content_type.view', [
-                    'contentTypeGroupId' => $group->id,
-                    'contentTypeId' => $contentType->id,
-                ]);
-            }
+            return $this->redirectToRoute('ezplatform.content_type.view', [
+                'contentTypeGroupId' => $group->id,
+                'contentTypeId' => $contentType->id,
+            ]);
         }
 
         $form = $this->contentTypeFormFactory->contentTypeEdit(
