@@ -66,30 +66,31 @@ class ContentCreate implements EventSubscriberInterface
      */
     public function onUdwConfigResolve(ConfigResolveEvent $event): void
     {
-        $configName = $event->getConfigName();
-        if ('create' !== $configName && 'single' !== $configName) {
-            return;
-        }
+        $config = $event->getConfig();
 
-        $context = $event->getContext();
-        if (
-            !isset($context['type'])
-            || 'content_create' !== $context['type']
-        ) {
+        if (!$this->hasCreateTab($config)) {
             return;
         }
 
         if ($this->hasContentTypeRestrictions()) {
-            $config = $event->getConfig();
             $config['content_on_the_fly']['allowed_content_types'] = $this->restrictedContentTypesIdentifiers;
             $event->setConfig($config);
         }
 
         if ($this->hasLanguagesRestrictions()) {
-            $config = $event->getConfig();
             $config['content_on_the_fly']['allowed_languages'] = $this->restrictedLanguagesCodes;
             $event->setConfig($config);
         }
+    }
+
+    /**
+     * @param array $config
+     *
+     * @return bool
+     */
+    private function hasCreateTab(array $config): bool
+    {
+        return empty($config['visible_tabs']) || \in_array('create', $config['visible_tabs'], true);
     }
 
     /**
@@ -99,7 +100,7 @@ class ContentCreate implements EventSubscriberInterface
      */
     private function getRestrictedContentTypesIdentifiers($hasAccess): array
     {
-        if (!is_array($hasAccess)) {
+        if (!\is_array($hasAccess)) {
             return [];
         }
 
