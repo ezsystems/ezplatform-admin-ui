@@ -87,6 +87,10 @@ class SearchType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SearchData::class,
+            'error_mapping' => [
+                'created' => 'created_select',
+                'last_modified' => 'last_modified_select',
+            ],
         ]);
     }
 
