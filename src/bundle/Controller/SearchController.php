@@ -130,90 +130,85 @@ class SearchController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (SearchData $data) use ($form) {
-                $limit = $data->getLimit();
-                $page = $data->getPage();
-                $queryString = $data->getQuery();
-                $section = $data->getSection();
-                $contentTypes = $data->getContentTypes();
-                $lastModified = $data->getLastModified();
-                $created = $data->getCreated();
-                $creator = $data->getCreator();
-                $subtree = $data->getSubtree();
-                $query = new Query();
-                $criteria = [];
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $limit = $data->getLimit();
+            $page = $data->getPage();
+            $queryString = $data->getQuery();
+            $section = $data->getSection();
+            $contentTypes = $data->getContentTypes();
+            $lastModified = $data->getLastModified();
+            $created = $data->getCreated();
+            $creator = $data->getCreator();
+            $subtree = $data->getSubtree();
+            $query = new Query();
+            $criteria = [];
 
-                if (null !== $queryString) {
-                    $query->query = new Criterion\FullText($queryString);
-                }
-                if (null !== $section) {
-                    $criteria[] = new Criterion\SectionId($section->id);
-                }
-                if (!empty($contentTypes)) {
-                    $criteria[] = new Criterion\ContentTypeId(array_column($contentTypes, 'id'));
-                }
-                if (!empty($lastModified)) {
-                    $criteria[] = new Criterion\DateMetadata(
-                        Criterion\DateMetadata::MODIFIED,
-                        Criterion\Operator::BETWEEN,
-                        [$lastModified['start_date'], $lastModified['end_date']]
-                    );
-                }
-                if (!empty($created)) {
-                    $criteria[] = new Criterion\DateMetadata(
-                        Criterion\DateMetadata::CREATED,
-                        Criterion\Operator::BETWEEN,
-                        [$created['start_date'], $created['end_date']]
-                    );
-                }
-                if ($creator instanceof User) {
-                    $criteria[] = new Criterion\UserMetadata(
-                        Criterion\UserMetadata::OWNER,
-                        Criterion\Operator::EQ,
-                        $creator->id
-                    );
-                }
-                if (null !== $subtree) {
-                    $criteria[] = new Criterion\Subtree($subtree);
-                }
-                if (!empty($criteria)) {
-                    $query->filter = new Criterion\LogicalAnd($criteria);
-                }
-
-                if (!$this->searchService->supports(SearchService::CAPABILITY_SCORING)) {
-                    $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
-                }
-
-                $pagerfanta = new Pagerfanta(
-                    new ContentSearchAdapter($query, $this->searchService)
-                );
-
-                $pagerfanta->setMaxPerPage($limit);
-                $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
-
-                $editForm = $this->formFactory->contentEdit(
-                    new ContentEditData()
-                );
-
-                return $this->render('@ezdesign/admin/search/search.html.twig', [
-                    'results' => $this->pagerContentToDataMapper->map($pagerfanta),
-                    'form' => $form->createView(),
-                    'pager' => $pagerfanta,
-                    'form_edit' => $editForm->createView(),
-                    'filters_expanded' => $data->isFiltered(),
-                    'user_content_type_identifier' => $this->userContentTypeIdentifier,
-                ]);
-            });
-
-            if ($result instanceof Response) {
-                return $result;
+            if (null !== $queryString) {
+                $query->query = new Criterion\FullText($queryString);
             }
+            if (null !== $section) {
+                $criteria[] = new Criterion\SectionId($section->id);
+            }
+            if (!empty($contentTypes)) {
+                $criteria[] = new Criterion\ContentTypeId(array_column($contentTypes, 'id'));
+            }
+            if (!empty($lastModified)) {
+                $criteria[] = new Criterion\DateMetadata(
+                    Criterion\DateMetadata::MODIFIED,
+                    Criterion\Operator::BETWEEN,
+                    [$lastModified['start_date'], $lastModified['end_date']]
+                );
+            }
+            if (!empty($created)) {
+                $criteria[] = new Criterion\DateMetadata(
+                    Criterion\DateMetadata::CREATED,
+                    Criterion\Operator::BETWEEN,
+                    [$created['start_date'], $created['end_date']]
+                );
+            }
+            if ($creator instanceof User) {
+                $criteria[] = new Criterion\UserMetadata(
+                    Criterion\UserMetadata::OWNER,
+                    Criterion\Operator::EQ,
+                    $creator->id
+                );
+            }
+            if (null !== $subtree) {
+                $criteria[] = new Criterion\Subtree($subtree);
+            }
+            if (!empty($criteria)) {
+                $query->filter = new Criterion\LogicalAnd($criteria);
+            }
+
+            if (!$this->searchService->supports(SearchService::CAPABILITY_SCORING)) {
+                $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
+            }
+
+            $pagerfanta = new Pagerfanta(
+                new ContentSearchAdapter($query, $this->searchService)
+            );
+
+            $pagerfanta->setMaxPerPage($limit);
+            $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
+
+            $editForm = $this->formFactory->contentEdit(
+                new ContentEditData()
+            );
+
+            return $this->render('@ezdesign/admin/search/search.html.twig', [
+                'results' => $this->pagerContentToDataMapper->map($pagerfanta),
+                'form' => $form->createView(),
+                'pager' => $pagerfanta,
+                'form_edit' => $editForm->createView(),
+                'filters_expanded' => $data->isFiltered(),
+                'user_content_type_identifier' => $this->userContentTypeIdentifier,
+            ]);
         }
 
         return $this->render('@ezdesign/admin/search/search.html.twig', [
             'form' => $form->createView(),
-            'filters_expanded' => false,
+            'filters_expanded' => $form->isSubmitted() && !$form->isValid(),
             'user_content_type_identifier' => $this->userContentTypeIdentifier,
         ]);
     }
