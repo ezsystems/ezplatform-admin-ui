@@ -88,7 +88,6 @@ class Pagination extends AbstractParser
             'content_role_limit',
             'content_policy_limit',
             'notification_limit',
-            'user_settings_limit',
             'content_draft_limit',
         ];
 
