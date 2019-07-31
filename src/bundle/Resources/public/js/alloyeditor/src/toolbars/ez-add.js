@@ -42,8 +42,11 @@ export default class EzToolbarAdd extends AlloyEditor.Toolbars.add {
         const { editor } = this.props;
         const domNode = ReactDOM.findDOMNode(this);
         const path = editor.get('nativeEditor').elementPath();
-        const table = path.elements.find((element) => element.is('table'));
+        if (!path) {
+            return;
+        }
 
+        const table = path.elements.find((element) => element.is('table'));
         if (!table) {
             return;
         }
