@@ -45,7 +45,6 @@ export default class EzToolbarAdd extends AlloyEditor.Toolbars.add {
         const path = nativeEditor.elementPath();
         const table = path && path.elements.find((element) => element.is('table'));
         const element = table || nativeEditor.element;
-
         const rect = element.$.getBoundingClientRect();
 
         new CKEDITOR.dom.element(domNode).setStyles({ top: `${rect.top}px` });
