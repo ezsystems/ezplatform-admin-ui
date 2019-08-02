@@ -11,6 +11,7 @@ export default class EzToolbarAdd extends AlloyEditor.Toolbars.add {
         super(props);
 
         this.setPosition = this.setPosition.bind(this);
+        this.setTopPosition = this.setTopPosition.bind(this);
     }
 
     setPosition() {
@@ -21,18 +22,22 @@ export default class EzToolbarAdd extends AlloyEditor.Toolbars.add {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { selectionData } = this.props;
+        const { selectionData, renderExclusive } = this.props;
 
         this._updatePosition();
 
-        if (selectionData && !selectionData.region.top) {
+        if (!renderExclusive && selectionData && !selectionData.region.top) {
             this.setTopPosition();
         }
 
         // In case of exclusive rendering, focus the first descendant (button)
         // so the user will be able to start interacting with the buttons immediately.
-        if (this.props.renderExclusive) {
+        if (renderExclusive) {
             this.focus();
+
+            if (selectionData && !selectionData.region.top) {
+                this._animate(this.setTopPosition);
+            }
 
             this._animate(this.setPosition);
         }
