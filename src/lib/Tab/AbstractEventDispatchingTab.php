@@ -49,7 +49,7 @@ abstract class AbstractEventDispatchingTab extends AbstractTab
             $this->getTemplate(),
             $this->getTemplateParameters($parameters)
         );
-        $this->eventDispatcher->dispatch(TabEvents::TAB_RENDER, $event);
+        $this->eventDispatcher->dispatch($event, TabEvents::TAB_RENDER);
 
         return $this->twig->render(
             $event->getTemplate(),

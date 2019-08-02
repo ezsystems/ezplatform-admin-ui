@@ -30,14 +30,8 @@ class EventDispatcher implements EventDispatcherInterface
     {
         $action = $event->getName();
 
-        $this->eventDispatcher->dispatch(EventDispatcherInterface::EVENT_NAME_PREFIX, $event);
-        $this->eventDispatcher->dispatch(
-            sprintf('%s.%s', EventDispatcherInterface::EVENT_NAME_PREFIX, $action),
-            $event
-        );
-        $this->eventDispatcher->dispatch(
-            sprintf('%s.%s.%s', EventDispatcherInterface::EVENT_NAME_PREFIX, $action, $event->getType()),
-            $event
-        );
+        $this->eventDispatcher->dispatch($event, EventDispatcherInterface::EVENT_NAME_PREFIX);
+        $this->eventDispatcher->dispatch($event, sprintf('%s.%s', EventDispatcherInterface::EVENT_NAME_PREFIX, $action));
+        $this->eventDispatcher->dispatch($event, sprintf('%s.%s.%s', EventDispatcherInterface::EVENT_NAME_PREFIX, $action, $event->getType()));
     }
 }
