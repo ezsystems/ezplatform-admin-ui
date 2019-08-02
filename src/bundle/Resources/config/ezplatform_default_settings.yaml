@@ -5,45 +5,45 @@ parameters:
     ezsettings.default.location_ids.users: 5
 
     # Pagination limits
-    ezsettings.default.pagination.search_limit: 10
-    ezsettings.default.pagination.trash_limit: 10
-    ezsettings.default.pagination.section_limit: 10
-    ezsettings.default.pagination.language_limit: 10
-    ezsettings.default.pagination.role_limit: 10
-    ezsettings.default.pagination.content_type_group_limit: 10
-    ezsettings.default.pagination.content_type_limit: 10
-    ezsettings.default.pagination.role_assignment_limit: 10
-    ezsettings.default.pagination.policy_limit: 10
-    ezsettings.default.pagination.version_draft_limit: 5
-    ezsettings.default.pagination.content_system_url_limit: 5
-    ezsettings.default.pagination.content_custom_url_limit: 5
-    ezsettings.default.pagination.content_role_limit: 5
-    ezsettings.default.pagination.content_policy_limit: 5
-    ezsettings.default.pagination.bookmark_limit: 10
-    ezsettings.default.pagination.notification_limit: 5
+    ezsettings.admin_group.pagination.search_limit: 10
+    ezsettings.admin_group.pagination.trash_limit: 10
+    ezsettings.admin_group.pagination.section_limit: 10
+    ezsettings.admin_group.pagination.language_limit: 10
+    ezsettings.admin_group.pagination.role_limit: 10
+    ezsettings.admin_group.pagination.content_type_group_limit: 10
+    ezsettings.admin_group.pagination.content_type_limit: 10
+    ezsettings.admin_group.pagination.role_assignment_limit: 10
+    ezsettings.admin_group.pagination.policy_limit: 10
+    ezsettings.admin_group.pagination.version_draft_limit: 5
+    ezsettings.admin_group.pagination.content_system_url_limit: 5
+    ezsettings.admin_group.pagination.content_custom_url_limit: 5
+    ezsettings.admin_group.pagination.content_role_limit: 5
+    ezsettings.admin_group.pagination.content_policy_limit: 5
+    ezsettings.admin_group.pagination.bookmark_limit: 10
+    ezsettings.admin_group.pagination.notification_limit: 5
     ezsettings.admin_group.pagination.user_settings_limit: 10
-    ezsettings.default.pagination.content_draft_limit: 10
+    ezsettings.admin_group.pagination.content_draft_limit: 10
 
     # Security
-    ezsettings.default.security.token_interval_spec: PT1H
+    ezsettings.admin_group.security.token_interval_spec: PT1H
 
     # Subitems Module
     ezsettings.default.subitems_module.limit: 10
 
     # User identifier
-    ezsettings.default.user_content_type_identifier: ['user']
+    ezsettings.admin_group.user_content_type_identifier: ['user']
 
     # User Group identifier
-    ezsettings.default.user_group_content_type_identifier: ['user_group']
+    ezsettings.admin_group.user_group_content_type_identifier: ['user_group']
 
     # Subtree Operations
-    ezsettings.default.subtree_operations.copy_subtree.limit: 100
+    ezsettings.admin_group.subtree_operations.copy_subtree.limit: 100
 
     # Notifications
-    ezsettings.default.notifications.error.timeout: 0
-    ezsettings.default.notifications.warning.timeout: 0
-    ezsettings.default.notifications.success.timeout: 5000
-    ezsettings.default.notifications.info.timeout: 0
+    ezsettings.admin_group.notifications.error.timeout: 0
+    ezsettings.admin_group.notifications.warning.timeout: 0
+    ezsettings.admin_group.notifications.success.timeout: 5000
+    ezsettings.admin_group.notifications.info.timeout: 0
 
     # Views
     ezsettings.default.content_translate_view: {}
@@ -59,10 +59,10 @@ parameters:
     ezsettings.admin_group.user_reset_password.templates.success: "@@ezdesign/account/reset_password/confirmation_page.html.twig"
 
     # Content Tree Module
-    ezsettings.default.content_tree_module.load_more_limit: 30
-    ezsettings.default.content_tree_module.children_load_max_limit: 200
-    ezsettings.default.content_tree_module.tree_max_depth: 10
-    ezsettings.default.content_tree_module.allowed_content_types: []
-    ezsettings.default.content_tree_module.ignored_content_types: []
-    ezsettings.default.content_tree_module.tree_root_location_id: ~
+    ezsettings.admin_group.content_tree_module.load_more_limit: 30
+    ezsettings.admin_group.content_tree_module.children_load_max_limit: 200
+    ezsettings.admin_group.content_tree_module.tree_max_depth: 10
+    ezsettings.admin_group.content_tree_module.allowed_content_types: []
+    ezsettings.admin_group.content_tree_module.ignored_content_types: []
+    ezsettings.admin_group.content_tree_module.tree_root_location_id: ~
 
