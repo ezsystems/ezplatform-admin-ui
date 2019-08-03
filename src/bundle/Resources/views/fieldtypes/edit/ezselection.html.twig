@@ -5,11 +5,13 @@
     <div class="ez-custom-dropdown__wrapper">
 
         <ul class="ez-custom-dropdown__selection-info">
-            {% for choice in choices if choice is selectedchoice(value) %}
-                <li class="ez-custom-dropdown__selected-item" data-value="{{ choice.value }}">
-                    {{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
-                    <span class="ez-custom-dropdown__remove-selection"></span>
-                </li>
+            {% for choice in choices %}
+                {% if choice is selectedchoice(value) %}
+                    <li class="ez-custom-dropdown__selected-item" data-value="{{ choice.value }}">
+                        {{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
+                        <span class="ez-custom-dropdown__remove-selection"></span>
+                    </li>
+                {% endif %}
             {% endfor %}
         </ul>
         <ul class="ez-custom-dropdown__items ez-custom-dropdown__items--hidden">
