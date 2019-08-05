@@ -9,19 +9,19 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
 
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
-use EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService;
 use EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer;
+use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
 
 class DateFormat implements ProviderInterface
 {
-    /** @var \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService */
+    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
     protected $userSettingService;
 
     /** @var \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer */
     protected $dateTimeFormatSerializer;
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\UserSetting\UserSettingService $userSettingService
+     * @param \EzSystems\EzPlatformUser\UserSetting\UserSettingService $userSettingService
      * @param \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer $dateTimeFormatSerializer
      */
     public function __construct(UserSettingService $userSettingService, DateTimeFormatSerializer $dateTimeFormatSerializer)
