@@ -23,17 +23,19 @@
                 {{ form_start(form, {'attr': {'class': 'ez-form-validate'}}) }}
 
                 {% block form_fields %}
-                    {% for field in form.fieldsData if not field.rendered -%}
-                        {% if field.value is defined %}
-                            {{- form_widget(field) -}}
-                        {% else %}
-                            <div>
-                                {{- form_label(field) -}}
-                                <p class="non-editable">
-                                    {{ "content.field.non_editable"|trans|desc('Field type is not editable') }}
-                                </p>
-                                {% do field.setRendered() %}
-                            </div>
+                    {% for field in form.fieldsData %}
+                        {% if not field.rendered %}
+                            {% if field.value is defined %}
+                                {{- form_widget(field) -}}
+                            {% else %}
+                                <div>
+                                    {{- form_label(field) -}}
+                                    <p class="non-editable">
+                                        {{ "content.field.non_editable"|trans|desc('Field type is not editable') }}
+                                    </p>
+                                    {% do field.setRendered() %}
+                                </div>
+                            {% endif %}
                         {% endif %}
                     {%- endfor %}
                 {% endblock %}
