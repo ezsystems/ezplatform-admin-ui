@@ -13,17 +13,9 @@ services:
     # that these are available but guess not... these are not. You can use autowiring for these services
     # only because you have EzPlatformAdminUiBundle enabled.
     #
-
-    eZ\Publish\API\Repository\PermissionResolver:
-        # passing class as workaround for missing sudo on the interface
-        class: eZ\Publish\Core\Repository\Permission\PermissionResolver
-        # making it lazy to avoid resolving dynamic (SiteAccess) settings too early
-        lazy: true
-        factory: 'eZ\Publish\API\Repository\Repository:getPermissionResolver'
-
+    
     eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList: '@ezpublish.fields_groups.list'
     eZ\Publish\Core\MVC\ConfigResolverInterface: '@ezpublish.config.resolver'
-
     eZ\Publish\Core\MVC\Symfony\SiteAccess: '@ezpublish.siteaccess'
 
     # Repository Forms
@@ -36,4 +28,3 @@ services:
 
     # Symfony
     Symfony\Contracts\Translation\TranslatorInterface: '@translator'
-
