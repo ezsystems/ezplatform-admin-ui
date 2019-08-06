@@ -14,22 +14,6 @@ services:
     # only because you have EzPlatformAdminUiBundle enabled.
     #
 
-    # Kernel
-    eZ\Publish\API\Repository\Repository: '@ezpublish.api.repository'
-    eZ\Publish\API\Repository\ContentService: '@ezpublish.api.service.content'
-    eZ\Publish\API\Repository\ContentTypeService: '@ezpublish.api.service.content_type'
-    eZ\Publish\API\Repository\LanguageService: '@ezpublish.api.service.language'
-    eZ\Publish\API\Repository\LocationService: '@ezpublish.api.service.location'
-    eZ\Publish\API\Repository\ObjectStateService: '@ezpublish.api.service.object_state'
-    eZ\Publish\API\Repository\RoleService: '@ezpublish.api.service.role'
-    eZ\Publish\API\Repository\SearchService: '@ezpublish.api.service.search'
-    eZ\Publish\API\Repository\SectionService: '@ezpublish.api.service.section'
-    eZ\Publish\API\Repository\UserService: '@ezpublish.api.service.user'
-    eZ\Publish\API\Repository\URLService: '@ezpublish.api.service.url'
-    eZ\Publish\API\Repository\URLAliasService: '@ezpublish.api.service.url_alias'
-    eZ\Publish\API\Repository\TrashService: '@ezpublish.api.service.trash'
-    eZ\Publish\API\Repository\BookmarkService: '@ezpublish.api.service.bookmark'
-
     eZ\Publish\API\Repository\PermissionResolver:
         # passing class as workaround for missing sudo on the interface
         class: eZ\Publish\Core\Repository\Permission\PermissionResolver
