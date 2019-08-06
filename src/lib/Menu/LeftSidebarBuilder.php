@@ -112,9 +112,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                         'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single', [
                             'type' => 'content_create',
                         ]),
-                        'data-starting-location-id' => $this->configResolver->getParameter(
-                            'universal_discovery_widget_module.default_location_id'
-                        ),
+                        'data-starting-location-id' => $this->configResolver->getConfig('default')['starting_location_id'],
                     ],
                 ]
             ),
