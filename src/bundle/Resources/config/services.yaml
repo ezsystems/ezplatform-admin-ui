@@ -102,6 +102,8 @@ services:
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
             $kernelRootDir: '%kernel.root_dir%'
             $kernelEnvironment: '%kernel.environment%'
+            $encoreTagRenderer: '@webpack_encore.tag_renderer'
+            $entrypointLookupCollection: '@webpack_encore.entrypoint_lookup_collection'
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
