@@ -10,26 +10,28 @@
 
     {% block fields %}
         <div class="ez-content-preview-collapse collapse show">
-            {% for group in field_definitions_by_group if group.fieldDefinitions|length > 0 %}
-                <section class="ez-fieldgroup container">
-                    <h3 class="ez-fieldgroup__name">{{ group.name|capitalize }}</h3>
-                    {% for field_definition in group.fieldDefinitions %}
-                        {% block field %}
-                            <div class="ez-content-field">
-                                <p class="ez-content-field-name">{{ field_definition.name }}:</p>
-                                <div class="ez-content-field-value">
-                                    {% if ez_field_is_empty(content, field_definition.identifier) %}
-                                        <em>{{ 'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty') }}</em>
-                                    {% else %}
-                                        {{ ez_render_field(content, field_definition.identifier, {
-                                            'template': '@ezdesign/ui/field_type/preview/content_fields.html.twig'
-                                        }) }}
-                                    {% endif %}
+            {% for group in field_definitions_by_group %}
+                {% if group.fieldDefinitions|length > 0 %}
+                    <section class="ez-fieldgroup container">
+                        <h3 class="ez-fieldgroup__name">{{ group.name|capitalize }}</h3>
+                        {% for field_definition in group.fieldDefinitions %}
+                            {% block field %}
+                                <div class="ez-content-field">
+                                    <p class="ez-content-field-name">{{ field_definition.name }}:</p>
+                                    <div class="ez-content-field-value">
+                                        {% if ez_field_is_empty(content, field_definition.identifier) %}
+                                            <em>{{ 'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty') }}</em>
+                                        {% else %}
+                                            {{ ez_render_field(content, field_definition.identifier, {
+                                                'template': '@ezdesign/ui/field_type/preview/content_fields.html.twig'
+                                            }) }}
+                                        {% endif %}
+                                    </div>
                                 </div>
-                            </div>
-                        {% endblock %}
-                    {% endfor %}
-                </section>
+                            {% endblock %}
+                        {% endfor %}
+                    </section>
+                {% endif %}
             {% endfor %}
         </div>
     {% endblock %}
