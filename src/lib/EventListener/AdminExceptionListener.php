@@ -24,10 +24,10 @@ use Twig\Error\RuntimeError;
 
 class AdminExceptionListener
 {
-    /** @var NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     protected $notificationHandler;
 
-    /** @var Environment */
+    /** @var \Twig\Environment */
     protected $twig;
 
     /** @var \Symfony\WebpackEncoreBundle\Asset\TagRenderer */
@@ -46,8 +46,10 @@ class AdminExceptionListener
     protected $kernelEnvironment;
 
     /**
-     * @param Environment $twig
-     * @param NotificationHandlerInterface $notificationHandler
+     * @param \Twig\Environment $twig
+     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \Symfony\WebpackEncoreBundle\Asset\TagRenderer $encoreTagRenderer
+     * @param \Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface $entrypointLookupCollection
      * @param array $siteAccessGroups
      * @param string $kernelRootDir
      * @param string $kernelEnvironment
