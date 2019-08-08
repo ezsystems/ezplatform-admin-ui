@@ -54,7 +54,7 @@ class ConfigResolver
         $configResolveEvent->setConfig($config);
 
         /** @var ConfigResolveEvent $event */
-        $event = $this->eventDispatcher->dispatch(ConfigResolveEvent::NAME, $configResolveEvent);
+        $event = $this->eventDispatcher->dispatch($configResolveEvent, ConfigResolveEvent::NAME);
 
         return $event->getConfig();
     }

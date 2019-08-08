@@ -51,7 +51,7 @@ abstract class AbstractBuilder
      */
     protected function dispatchMenuEvent(string $name, Event $event): void
     {
-        $this->eventDispatcher->dispatch($name, $event);
+        $this->eventDispatcher->dispatch($event, $name);
     }
 
     /**

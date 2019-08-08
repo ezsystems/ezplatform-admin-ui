@@ -28,11 +28,11 @@ class DefaultRenderer implements RendererInterface
 
     public function renderGroup(string $groupName, array $parameters = []): array
     {
-        $this->eventDispatcher->dispatch(RenderGroupEvent::NAME, new RenderGroupEvent(
+        $this->eventDispatcher->dispatch(new RenderGroupEvent(
             $this->registry,
             $groupName,
             $parameters
-        ));
+        ), RenderGroupEvent::NAME);
 
         $components = $this->registry->getComponents($groupName);
 
@@ -46,12 +46,12 @@ class DefaultRenderer implements RendererInterface
 
     public function renderSingle(string $name, $groupName, array $parameters = []): string
     {
-        $this->eventDispatcher->dispatch(RenderSingleEvent::NAME, new RenderSingleEvent(
+        $this->eventDispatcher->dispatch(new RenderSingleEvent(
             $this->registry,
             $groupName,
             $name,
             $parameters
-        ));
+        ), RenderSingleEvent::NAME);
 
         $group = $this->registry->getComponents($groupName);
 

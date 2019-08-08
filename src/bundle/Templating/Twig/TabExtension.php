@@ -79,9 +79,9 @@ class TabExtension extends AbstractExtension
         $tabGroupEvent->setData($tabGroup);
         $tabGroupEvent->setParameters($parameters);
 
-        $this->eventDispatcher->dispatch(TabEvents::TAB_GROUP_INITIALIZE, $tabGroupEvent);
+        $this->eventDispatcher->dispatch($tabGroupEvent, TabEvents::TAB_GROUP_INITIALIZE);
 
-        $this->eventDispatcher->dispatch(TabEvents::TAB_GROUP_PRE_RENDER, $tabGroupEvent);
+        $this->eventDispatcher->dispatch($tabGroupEvent, TabEvents::TAB_GROUP_PRE_RENDER);
 
         $tabs = [];
         foreach ($tabGroupEvent->getData()->getTabs() as $tab) {
@@ -108,7 +108,7 @@ class TabExtension extends AbstractExtension
         $tabEvent->setData($tab);
         $tabEvent->setParameters($parameters);
 
-        $this->eventDispatcher->dispatch(TabEvents::TAB_PRE_RENDER, $tabEvent);
+        $this->eventDispatcher->dispatch($tabEvent, TabEvents::TAB_PRE_RENDER);
 
         return $tabEvent;
     }
