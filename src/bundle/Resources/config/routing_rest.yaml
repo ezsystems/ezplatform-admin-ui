@@ -7,7 +7,7 @@ ezplatform.bulk_operation:
     options:
         expose: true
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:BulkOperation\BulkOperation:bulk'
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation\BulkOperationController::bulkAction'
     methods: ['POST']
 
 #
@@ -23,7 +23,7 @@ ezplatform.location.tree.load_children:
     requirements:
         parentLocationId: \d+
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:Content/ContentTree:loadChildren'
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\Content\ContentTreeController::loadChildrenAction'
         limit: 10
         offset: 0
 
@@ -34,4 +34,4 @@ ezplatform.location.tree.load_subtree:
     options:
         expose: true
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:Content/ContentTree:loadSubtree'
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\Content\ContentTreeController::loadSubtreeAction'
