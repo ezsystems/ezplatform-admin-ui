@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Tab\Event;
 
 use EzSystems\EzPlatformAdminUi\Tab\TabInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class TabEvent extends Event
 {

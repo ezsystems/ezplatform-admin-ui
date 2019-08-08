@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Tab\Event;
 
 use EzSystems\EzPlatformAdminUi\Tab\TabGroup;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class TabGroupEvent extends Event
 {

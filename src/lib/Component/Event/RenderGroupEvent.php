@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Component\Event;
 
 use EzSystems\EzPlatformAdminUi\Component\Registry;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class RenderGroupEvent extends Event
 {
