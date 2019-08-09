@@ -112,7 +112,7 @@
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/alloy-editor-no-react-min.js') }}"></script>
     </head>
     <body class="{% block body_class %}{% endblock %}">
-        <div id="react-udw"></div>
+        <div id="react-udw" data-filter-subtree-udw-config="{{ ez_udw_config('single_container', {}) }}"></div>
 
         {% block navigation %}
             {% include '@ezdesign/ui/menu/top_navigation.html.twig' %}
