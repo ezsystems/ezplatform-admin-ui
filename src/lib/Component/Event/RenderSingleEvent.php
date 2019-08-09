@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Component\Event;
 
 use EzSystems\EzPlatformAdminUi\Component\Registry;
 use EzSystems\EzPlatformAdminUi\Component\Renderable;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class RenderSingleEvent extends Event
 {
