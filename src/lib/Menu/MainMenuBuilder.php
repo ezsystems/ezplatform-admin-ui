@@ -155,7 +155,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             );
         }
 
-        if ($this->permissionResolver->hasAccess('section', 'view')) {
+        if ($this->permissionResolver->hasAccess('section', 'view') !== false) {
             $menuItems[self::ITEM_ADMIN__SECTIONS] = $this->createMenuItem(
                 self::ITEM_ADMIN__SECTIONS,
                 ['route' => 'ezplatform.section.list', 'extras' => [

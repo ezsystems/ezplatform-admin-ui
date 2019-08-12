@@ -234,7 +234,7 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
      */
     private function supplySectionParameters(ArrayObject $parameters, ContentInfo $contentInfo, Location $location): void
     {
-        $canSeeSection = $this->permissionResolver->hasAccess('section', 'view');
+        $canSeeSection = $this->permissionResolver->canUser('section', 'view', $contentInfo);
 
         $parameters['section'] = null;
         $parameters['can_see_section'] = $canSeeSection;
