@@ -64,7 +64,6 @@ const ZERO_WIDTH_SPACE = '&#8203;';
                 },
 
                 insertWrapper: function(wrapper) {
-                    this.editor.insertHtml(ZERO_WIDTH_SPACE);
                     this.editor.insertElement(wrapper);
                 },
 
