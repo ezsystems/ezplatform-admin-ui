@@ -8,9 +8,8 @@ export default class EzTableRowConfig extends EzConfigTableBase {
     test(payload) {
         const nativeEditor = payload.editor.get('nativeEditor');
         const path = nativeEditor.elementPath();
-        const lastElement = path.lastElement;
 
-        return lastElement.is('tr');
+        return path && path.lastElement.is('tr');
     }
 }
 

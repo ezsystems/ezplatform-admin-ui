@@ -11,6 +11,7 @@ export default class EzToolbarAdd extends AlloyEditor.Toolbars.add {
         super(props);
 
         this.setPosition = this.setPosition.bind(this);
+        this.setTopPosition = this.setTopPosition.bind(this);
     }
 
     setPosition() {
@@ -21,18 +22,22 @@ export default class EzToolbarAdd extends AlloyEditor.Toolbars.add {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { selectionData } = this.props;
+        const { selectionData, renderExclusive } = this.props;
 
         this._updatePosition();
 
-        if (selectionData && !selectionData.region.top) {
+        if (!renderExclusive && selectionData && !selectionData.region.top) {
             this.setTopPosition();
         }
 
         // In case of exclusive rendering, focus the first descendant (button)
         // so the user will be able to start interacting with the buttons immediately.
-        if (this.props.renderExclusive) {
+        if (renderExclusive) {
             this.focus();
+
+            if (selectionData && !selectionData.region.top) {
+                this._animate(this.setTopPosition);
+            }
 
             this._animate(this.setPosition);
         }
@@ -41,16 +46,18 @@ export default class EzToolbarAdd extends AlloyEditor.Toolbars.add {
     setTopPosition() {
         const { editor } = this.props;
         const domNode = ReactDOM.findDOMNode(this);
-        const path = editor.get('nativeEditor').elementPath();
-        const table = path.elements.find((element) => element.is('table'));
+        const nativeEditor = editor.get('nativeEditor');
+        const path = nativeEditor.elementPath();
+        const table = path && path.elements.find((element) => element.is('table'));
+        const element = table || nativeEditor.element;
+        const rect = element.$.getBoundingClientRect();
+        let topPosition = rect.top;
 
         if (!table) {
-            return;
+            topPosition += window.pageYOffset;
         }
 
-        const rect = table.$.getBoundingClientRect();
-
-        new CKEDITOR.dom.element(domNode).setStyles({ top: `${rect.top}px` });
+        new CKEDITOR.dom.element(domNode).setStyles({ top: `${topPosition}px` });
     }
 
     /**
