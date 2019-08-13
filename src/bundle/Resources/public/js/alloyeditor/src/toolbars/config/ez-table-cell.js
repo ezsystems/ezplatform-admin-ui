@@ -8,9 +8,8 @@ export default class EzTableCellConfig extends EzConfigTableBase {
     test(payload) {
         const nativeEditor = payload.editor.get('nativeEditor');
         const path = nativeEditor.elementPath();
-        const lastElement = path.lastElement;
 
-        return lastElement.is('td');
+        return path && path.lastElement.is('td');
     }
 }
 
