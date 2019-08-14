@@ -176,7 +176,6 @@ const embedBaseDefinition = {
             this.renderEmbedPreview(title);
             
             return;
-            return;
         }
 
         const isEmbedImage = this.element.$.classList.contains(IMAGE_TYPE_CLASS);
