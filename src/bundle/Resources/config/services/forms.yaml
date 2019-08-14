@@ -20,7 +20,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
         tags:
-            - { name: form.type_extension, extended_type: EzSystems\RepositoryForms\Form\Type\Content\ContentEditType }
+            - { name: form.type_extension }
 
     EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyChoiceType:
         arguments:
@@ -52,4 +52,4 @@ services:
     EzSystems\EzPlatformAdminUi\Form\Extension\RichTextTypeExtension:
         public: true
         tags:
-            - { name: form.type_extension, extended_type: EzSystems\EzPlatformRichText\Form\Type\RichTextType }
+            - { name: form.type_extension }

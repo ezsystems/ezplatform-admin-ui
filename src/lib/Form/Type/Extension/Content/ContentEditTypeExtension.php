@@ -31,11 +31,8 @@ class ContentEditTypeExtension extends AbstractTypeExtension
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getExtendedType(): string
+    public static function getExtendedTypes(): iterable
     {
-        return ContentEditType::class;
+        return [ContentEditType::class];
     }
 }
