@@ -22,7 +22,7 @@ class CustomTag
     /** @var array */
     private $customTagsConfiguration;
 
-    /** @var Translator */
+    /** @var TranslatorInterface */
     private $translator;
 
     /** @var Packages */
