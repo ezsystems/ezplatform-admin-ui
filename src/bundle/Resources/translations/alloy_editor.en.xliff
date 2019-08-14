@@ -231,6 +231,11 @@
         <target state="new">List</target>
         <note>key: unordered_list_btn.label</note>
       </trans-unit>
+      <trans-unit id="d5a182a917683c8ecd6a8efa75a086321a209f52" resname="removed_content.label">
+        <source>Removed</source>
+        <target state="new">Removed</target>
+        <note>key: removed_content.label</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

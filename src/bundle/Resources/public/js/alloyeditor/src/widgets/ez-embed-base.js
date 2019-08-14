@@ -170,6 +170,12 @@ const embedBaseDefinition = {
      * @param {Object} hits The result of content search
      */
     handleContentLoaded: function(hits) {
+        if (hits.View.Result.searchHits.searchHit.length === 0) {
+            const title = Translator.trans(/*@Desc("Removed")*/ 'removed_content.label', {}, 'alloy_editor');
+            //this.renderEmbedPreview(title);
+            //return;
+        }
+
         const isEmbedImage = this.element.$.classList.contains(IMAGE_TYPE_CLASS);
         const content = hits.View.Result.searchHits.searchHit[0].value.Content;
 
