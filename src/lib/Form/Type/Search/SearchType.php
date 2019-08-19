@@ -69,7 +69,7 @@ class SearchType extends AbstractType
             ])
         ;
 
-        if ($this->permissionResolver->hasAccess('section', 'view')) {
+        if ($this->permissionResolver->hasAccess('section', 'view') !== false) {
             $builder->add('section', SectionChoiceType::class, [
                 'required' => false,
                 'multiple' => false,
