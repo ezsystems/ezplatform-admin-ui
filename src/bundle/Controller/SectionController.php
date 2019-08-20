@@ -178,14 +178,18 @@ class SectionController extends Controller
             $assignableSections[$section->id] = $this->canUserAssignSectionToSomeContent($section);
         }
 
-        // User can add Section only if he has access to view without any limitation because he must see newly created Section.
         $canView = $this->permissionResolver->hasAccess('section', 'view') === true;
-        $canEdit = $this->isGranted(new Attribute('section', 'edit'));
+        $canEdit = $this->permissionResolver->hasAccess('section', 'edit');
+        $canAssign = $this->permissionResolver->hasAccess('section', 'assign');
+
+        // User can add Section only if he has access to edit and view.
+        // View Policy must be without any limitation because the user must see newly created Section.
+        $canAdd = $canView && $canEdit;
 
         return $this->render('@ezdesign/admin/section/list.html.twig', [
-            'can_add' => $canView && $canEdit,
+            'can_add' => $canAdd,
             'can_edit' => $canEdit,
-            'can_assign' => $this->isGranted(new Attribute('section', 'assign')),
+            'can_assign' => $canAssign,
             'pager' => $pagerfanta,
             'content_count' => $contentCountBySectionId,
             'deletable' => $deletableSections,
