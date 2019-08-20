@@ -71,23 +71,6 @@ services:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'subItems' }
 
-    # Custom Tags UI configuration provider
-    EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText\CustomTag:
-        tags:
-            - { name: ezplatform.admin_ui.config_provider, key: 'richTextCustomTags' }
-
-    # Custom Style UI configuration provider
-    EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText\CustomStyle:
-        tags:
-            - { name: ezplatform.admin_ui.config_provider, key: 'richTextCustomStyles' }
-
-    # AlloyEditor configuration provider
-    EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\RichText\AlloyEditor:
-        arguments:
-            $alloyEditorConfiguration: '%ezplatform.ezrichtext.alloy_editor%'
-        tags:
-            - { name: ezplatform.admin_ui.config_provider, key: 'alloyEditor' }
-
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\ImageAsset\Mapping:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'imageAssetMapping' }
