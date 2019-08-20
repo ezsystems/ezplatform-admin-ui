@@ -8,18 +8,18 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use Exception;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\SectionService;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\Content\Section;
 use eZ\Publish\API\Repository\Values\User\Limitation\NewSectionLimitation;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
-use eZ\Publish\API\Repository\SearchService;
-use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
@@ -30,8 +30,8 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
+use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
 use EzSystems\EzPlatformAdminUiBundle\View\EzPagerfantaView;
 use EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate;
 use Pagerfanta\Adapter\ArrayAdapter;
@@ -40,7 +40,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
-use Exception;
 
 class SectionController extends Controller
 {
@@ -179,9 +178,18 @@ class SectionController extends Controller
             $assignableSections[$section->id] = $this->canUserAssignSectionToSomeContent($section);
         }
 
+        $canEdit = $this->permissionResolver->hasAccess('section', 'edit');
+        $canAssign = $this->permissionResolver->hasAccess('section', 'assign');
+
+        // User can add Section only if he has access to edit and view.
+        // View Policy must be without any limitation because the user must see newly created Section.
+        $canAdd = $this->permissionResolver->hasAccess('section', 'view') === true
+            && $this->permissionResolver->hasAccess('section', 'edit') === true;
+
         return $this->render('@ezdesign/admin/section/list.html.twig', [
-            'can_edit' => $this->isGranted(new Attribute('section', 'edit')),
-            'can_assign' => $this->isGranted(new Attribute('section', 'assign')),
+            'can_add' => $canAdd,
+            'can_edit' => $canEdit,
+            'can_assign' => $canAssign,
             'pager' => $pagerfanta,
             'content_count' => $contentCountBySectionId,
             'deletable' => $deletableSections,
@@ -385,7 +393,7 @@ class SectionController extends Controller
                     $this->translator->trans(
                         /** @Desc("%contentItemsCount% content items were assigned to '%name%'") */
                         'section.assign_content.success',
-                        ['%name%' => $section->name, '%contentItemsCount%' => count($contentInfos)],
+                        ['%name%' => $section->name, '%contentItemsCount%' => \count($contentInfos)],
                         'section'
                     )
                 );
@@ -514,13 +522,13 @@ class SectionController extends Controller
     {
         $hasAccess = $this->permissionResolver->hasAccess('section', 'assign');
 
-        if (is_bool($hasAccess)) {
+        if (\is_bool($hasAccess)) {
             return $hasAccess;
         }
 
         $restrictedNewSections = $this->permissionChecker->getRestrictions($hasAccess, NewSectionLimitation::class);
         if (!empty($restrictedNewSections)) {
-            return in_array($section->id, array_map('intval', $restrictedNewSections), true);
+            return \in_array($section->id, array_map('intval', $restrictedNewSections), true);
         }
 
         // If a user has other limitation than NewSectionLimitation, then a decision will be taken later, based on selected Content.
