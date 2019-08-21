@@ -20,9 +20,10 @@ services:
     ezplatform.admin_ui.view.content_translate.matcher_factory:
         class: '%ezpublish.view.matcher_factory.class%'
         arguments:
-            $relativeNamespace: 'eZ\Publish\Core\MVC\Symfony\Matcher\ContentBased'
+            - '@eZ\Bundle\EzPublishCoreBundle\Matcher\ViewMatcherRegistry'
+            - '@ezpublish.api.repository'
+            - 'eZ\Publish\Core\MVC\Symfony\Matcher\ContentBased'
         calls:
-            - [setContainer, ['@service_container']]
             - [setMatchConfig, ['$content_translate_view$']]
 
     EzSystems\EzPlatformAdminUi\View\Filter\ContentTranslateViewFilter:
