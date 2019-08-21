@@ -26,7 +26,7 @@
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'section.list.title'|trans|desc('Sections') }}</div>
             <div>
-                {% if can_edit %}
+                {% if can_add %}
                     <a
                         title="{{ 'section.new'|trans|desc('Create a new Section') }}"
                         href="{{ path('ezplatform.section.create') }}"
@@ -35,6 +35,8 @@
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                         </svg>
                     </a>
+                {% endif %}
+                {% if can_edit %}
                     {% set modal_data_target = 'delete-sections-modal' %}
                     <button
                         id="delete-sections"
