@@ -17,7 +17,9 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
-use eZ\Publish\API\Repository\Values\ValueObject;
+use eZ\Publish\API\Repository\Values\User\Limitation;
+use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
+use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformRest\Output\Visitor;
 use EzSystems\EzPlatformRest\Server\Values\Version;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,6 +29,7 @@ class UniversalDiscoveryController extends Controller
     /** @var \eZ\Publish\API\Repository\LocationService */
     protected $locationService;
 
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
     /** @var \eZ\Publish\API\Repository\SearchService */
@@ -37,10 +40,15 @@ class UniversalDiscoveryController extends Controller
 
     /** @var \eZ\Publish\API\Repository\BookmarkService */
     private $bookmarkService;
-    /**
-     * @var \eZ\Publish\API\Repository\ContentService
-     */
+
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
+
+    /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
+    private $permissionChecker;
+
+    /** @var \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer */
+    private $lookupLimitationsTransformer;
 
     public function __construct(
         LocationService $locationService,
@@ -48,7 +56,9 @@ class UniversalDiscoveryController extends Controller
         SearchService $searchService,
         BookmarkService $bookmarkService,
         ContentService $contentService,
-        Visitor $visitor
+        Visitor $visitor,
+        PermissionCheckerInterface $permissionChecker,
+        LookupLimitationsTransformer $lookupLimitationsTransformer
     ) {
         $this->searchService = $searchService;
         $this->contentTypeService = $contentTypeService;
@@ -56,99 +66,185 @@ class UniversalDiscoveryController extends Controller
         $this->visitor = $visitor;
         $this->bookmarkService = $bookmarkService;
         $this->contentService = $contentService;
+        $this->permissionChecker = $permissionChecker;
+        $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
     }
 
-    public function browseLocationAction(
+    public function locationAction(
         Location $location
     ): JsonResponse {
-        $subitems = $this->searchService->findLocations(
-            new LocationQuery([
-                'filter' => new Query\Criterion\ParentLocationId($location->id),
-            ])
+        return new JsonResponse(
+            $this->getLocationData($location)
         );
-        $content = $this->contentService->loadContentByContentInfo($location->getContentInfo());
-        $contentType = $this->contentTypeService->loadContentType($location->getContentInfo()->contentTypeId);
+    }
+
+    public function locationGridViewAction(
+        Location $location
+    ): JsonResponse {
+        return new JsonResponse(
+            $this->getLocationGridViewData($location)
+        );
+    }
+
+    public function getParentLocationPath(Location $location): array
+    {
+        $parentPath = array_slice($location->path, 0, -1);
+
+        return array_map(static function ($locationId) {
+            return (int)$locationId;
+        }, $parentPath);
+    }
+
+    public function accordionAction(
+        Location $location
+    ): JsonResponse {
+        $breadcrumbLocations = $this->getBreadcrumbLocations($location);
+
+        $columnLocations = array_filter([
+            reset($breadcrumbLocations),
+            end($breadcrumbLocations),
+        ]);
+
+        foreach ($columnLocations as $columnLocation) {
+            if (!isset($columns[$columnLocation->id])) {
+                $columns[$columnLocation->id] = [
+                    'location' => $this->getRestFormat($columnLocation),
+                    'subitems' => [
+                        'locations' => $this->getSubitemLocations($columnLocation),
+                    ],
+                ];
+            }
+        }
+
+        $columns[$location->id] = $this->getLocationData($location);
 
         return new JsonResponse([
-            'location' => $this->getRestFormat($location),
-            'bookmark' => $this->bookmarkService->isBookmarked($location),
-            'version' => $this->getRestFormat(new Version(
-                $content,
-                $contentType,
-                [],
-            )),
-            'subitems' => [
-                'locations' => array_map(function (SearchHit $searchHit) {
-                    return $this->getRestFormat($searchHit->valueObject);
-                }, $subitems->searchHits),
-                'totalCount' => $subitems->totalCount,
+            'breadcrumb' => array_map(
+                function (Location $location) {
+                    return $this->getRestFormat($location);
+                },
+                $breadcrumbLocations
+            ),
+            'columns' => $columns,
+        ]);
+    }
+
+    public function accordionGridViewAction(
+        Location $location
+    ): JsonResponse {
+        return new JsonResponse([
+            'breadcrumb' => array_map(
+                function (Location $location) {
+                    return $this->getRestFormat($location);
+                },
+                $this->getBreadcrumbLocations($location)
+            ),
+            'columns' => [
+                $location->id => $this->getLocationGridViewData($location),
             ],
         ]);
     }
 
-    /**
-     * @param int $startingLocationId
-     * @param int $locationId
-     * @param int $limit
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
-    public function preselectedLocationDataAction(int $startingLocationId, int $locationId, int $limit = 50): JsonResponse
+    private function getBreadcrumbLocations(Location $location): array
     {
-        $location = $this->locationService->loadLocation($locationId);
-
-        $subitemsLocationIds = array_unique([
-            $startingLocationId,
-            $location->parentLocationId,
-            $location->id,
-        ]);
-
-        $relativeLocationPath = array_slice(
-            $location->path,
-            array_search($startingLocationId, $location->path)
-        );
-
-        $locations = $this->searchService->findLocations(
+        $searchResult = $this->searchService->findLocations(
             new LocationQuery([
-                'filter' => new Query\Criterion\LocationId($relativeLocationPath),
+                'filter' => new Query\Criterion\LocationId($this->getParentLocationPath($location)),
             ])
         );
 
-        $result = [];
-
-        foreach ($locations->searchHits as $location) {
-            $result['locations'][$location->valueObject->id] = $this->getRestFormat($location->valueObject);
-        }
-
-        foreach ($subitemsLocationIds as $id) {
-            $subitems = $this->searchService->findLocations(
-                new LocationQuery([
-                    'filter' => new Query\Criterion\ParentLocationId($id),
-                    'limit' => $limit,
-                ])
-            );
-
-            $result['subitems'][$id] = [
-                'totalCount' => $subitems->totalCount,
-                'locations' => array_map(function (SearchHit $searchHit) {
-                    return $this->getRestFormat($searchHit->valueObject);
-                }, $subitems->searchHits),
-            ];
-        }
-
-        return new JsonResponse($result);
+        return array_map(
+            function (SearchHit $searchHit) {
+                return $searchHit->valueObject;
+            }, $searchResult->searchHits
+        );
     }
 
-    /**
-     * @param \eZ\Publish\API\Repository\Values\ValueObject $valueObject
-     *
-     * @return array
-     */
-    protected function getRestFormat($valueObject): array
+    private function getLocationPermissionRestrictions(Location $location): array
+    {
+        $lookupLimitationsResult = $this->permissionChecker->getContentCreateLimitations($location);
+        $limitationsValues = $this->lookupLimitationsTransformer->getGroupedLimitationValues(
+            $lookupLimitationsResult,
+            [Limitation::CONTENTTYPE, Limitation::LANGUAGE]
+        );
+
+        return [
+            'hasAccess' => $lookupLimitationsResult->hasAccess,
+            'restrictedContentTypeIds' => $limitationsValues[Limitation::CONTENTTYPE],
+            'restrictedLanguageCodes' => $limitationsValues[Limitation::LANGUAGE],
+        ];
+    }
+
+    private function getSubitemContents(Location $location): array
+    {
+        $searchResult = $this->searchService->findContent(
+            new LocationQuery([
+                'filter' => new Query\Criterion\ParentLocationId($location->id),
+            ])
+        );
+
+        return array_map(
+            function (SearchHit $searchHit) {
+                /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
+                $content = $searchHit->valueObject;
+                return $this->getRestFormat(
+                    new Version($content, $content->getContentType(), [])
+                );
+            },
+            $searchResult->searchHits
+        );
+    }
+
+    private function getSubitemLocations(Location $location): array
+    {
+        $searchResult = $this->searchService->findLocations(
+            new LocationQuery([
+                'filter' => new Query\Criterion\ParentLocationId($location->id),
+            ])
+        );
+
+        return array_map(
+            function (SearchHit $searchHit) {
+                return $this->getRestFormat($searchHit->valueObject);
+            },
+            $searchResult->searchHits
+        );
+    }
+
+    private function getLocationData(Location $location): array
+    {
+        $content = $this->contentService->loadContentByContentInfo($location->getContentInfo());
+        $contentType = $this->contentTypeService->loadContentType($location->getContentInfo()->contentTypeId);
+
+        return [
+            'location' => $this->getRestFormat($location),
+            'bookmark' => $this->bookmarkService->isBookmarked($location),
+            'permissions' => $this->getLocationPermissionRestrictions($location),
+            'version' => $this->getRestFormat(new Version($content, $contentType, [])),
+            'subitems' => [
+                'locations' => $this->getSubitemLocations($location),
+            ],
+        ];
+    }
+
+    private function getLocationGridViewData(Location $location): array
+    {
+        $content = $this->contentService->loadContentByContentInfo($location->getContentInfo());
+        $contentType = $this->contentTypeService->loadContentType($location->getContentInfo()->contentTypeId);
+
+        return [
+            'location' => $this->getRestFormat($location),
+            'bookmark' => $this->bookmarkService->isBookmarked($location),
+            'permissions' => $this->getLocationPermissionRestrictions($location),
+            'version' => $this->getRestFormat(new Version($content, $contentType, [])),
+            'subitems' => [
+                'locations' => $this->getSubitemLocations($location),
+                'versions' => $this->getSubitemContents($location),
+            ],
+        ];
+    }
+
+    private function getRestFormat($valueObject): array
     {
         return json_decode(
             $this->visitor->visit($valueObject)->getContent(),
