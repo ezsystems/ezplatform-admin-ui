@@ -74,6 +74,13 @@
                             'is_location_visible': is_location_visible,
                         }) }}
 
+                        <div class="container px-5">
+                            <section class="ez-fieldgroup">
+                                <h2 class="ez-fieldgroup__name">Thumbnail</h2>
+                                <img src="{{ content.thumbnail }}" style="width: 100px;" alt="" />
+                            </section>
+                        </div>
+
                         {% if content_type.isContainer %}
                         {{ form_start(form_subitems_content_edit, { 'action': path('ezplatform.content.edit'), 'attr': { 'hidden': 'hidden' }}) }}
                         {{ form_end(form_subitems_content_edit) }}

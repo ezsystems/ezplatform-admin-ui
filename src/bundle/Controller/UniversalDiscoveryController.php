@@ -8,13 +8,18 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use eZ\Publish\API\Repository\BookmarkService;
+use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\SearchService;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use EzSystems\EzPlatformRest\Output\Visitor;
+use EzSystems\EzPlatformRest\Server\Values\Version;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UniversalDiscoveryController extends Controller
@@ -22,25 +27,63 @@ class UniversalDiscoveryController extends Controller
     /** @var \eZ\Publish\API\Repository\LocationService */
     protected $locationService;
 
+    protected $contentTypeService;
+
     /** @var \eZ\Publish\API\Repository\SearchService */
     protected $searchService;
 
     /** @var \EzSystems\EzPlatformRest\Output\Visitor */
     protected $visitor;
 
+    /** @var \eZ\Publish\API\Repository\BookmarkService */
+    private $bookmarkService;
     /**
-     * @param \eZ\Publish\API\Repository\LocationService $locationService
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param \EzSystems\EzPlatformRest\Output\Visitor $visitor
+     * @var \eZ\Publish\API\Repository\ContentService
      */
+    private $contentService;
+
     public function __construct(
         LocationService $locationService,
+        ContentTypeService $contentTypeService,
         SearchService $searchService,
+        BookmarkService $bookmarkService,
+        ContentService $contentService,
         Visitor $visitor
     ) {
         $this->searchService = $searchService;
+        $this->contentTypeService = $contentTypeService;
         $this->locationService = $locationService;
         $this->visitor = $visitor;
+        $this->bookmarkService = $bookmarkService;
+        $this->contentService = $contentService;
+    }
+
+    public function browseLocationAction(
+        Location $location
+    ): JsonResponse {
+        $subitems = $this->searchService->findLocations(
+            new LocationQuery([
+                'filter' => new Query\Criterion\ParentLocationId($location->id),
+            ])
+        );
+        $content = $this->contentService->loadContentByContentInfo($location->getContentInfo());
+        $contentType = $this->contentTypeService->loadContentType($location->getContentInfo()->contentTypeId);
+
+        return new JsonResponse([
+            'location' => $this->getRestFormat($location),
+            'bookmark' => $this->bookmarkService->isBookmarked($location),
+            'version' => $this->getRestFormat(new Version(
+                $content,
+                $contentType,
+                [],
+            )),
+            'subitems' => [
+                'locations' => array_map(function (SearchHit $searchHit) {
+                    return $this->getRestFormat($searchHit->valueObject);
+                }, $subitems->searchHits),
+                'totalCount' => $subitems->totalCount,
+            ],
+        ]);
     }
 
     /**
@@ -105,7 +148,7 @@ class UniversalDiscoveryController extends Controller
      *
      * @return array
      */
-    protected function getRestFormat(ValueObject $valueObject): array
+    protected function getRestFormat($valueObject): array
     {
         return json_decode(
             $this->visitor->visit($valueObject)->getContent(),

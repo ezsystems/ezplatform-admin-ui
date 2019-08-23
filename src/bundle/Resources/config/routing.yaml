@@ -760,6 +760,13 @@ ezplatform.udw.preselected_location.data:
         limit: 50
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController::preselectedLocationDataAction'
 
+ezplatform.udw.location.data:
+    path: /module/universal-discovery/location/{locationId}
+    options:
+        expose: true
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:browseLocation'
+
 #
 # Bookmark manager
 #
