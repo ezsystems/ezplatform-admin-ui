@@ -64,7 +64,7 @@
             const isCurrentElementList = element.getName() == 'ul' || element.getName() == 'ol';
 
             let insertIndex = insideTableCell || insideCustomTag ? 0 : elements.length - 2;
-            if (elementPath.lastElement.getName() == 'li' && isCurrentElementList && insertIndex == 0) {
+            if (elementPath.lastElement.getName() == 'li') {
                 insertIndex++;
             }
 
