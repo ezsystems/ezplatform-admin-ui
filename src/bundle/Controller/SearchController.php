@@ -6,14 +6,11 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
-use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\Core\QueryType\QueryType;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -47,6 +44,9 @@ class SearchController extends Controller
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
+    /** @var \EzSystems\EzPlatformAdminUi\QueryType\SearchQueryType */
+    private $searchQueryType;
+
     /** @var int */
     private $defaultPaginationLimit;
 
@@ -61,6 +61,7 @@ class SearchController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param \eZ\Publish\API\Repository\SectionService $sectionService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\Core\QueryType\QueryType $searchQueryType
      * @param int $defaultPaginationLimit
      * @param array $userContentTypeIdentifier
      */
@@ -72,6 +73,7 @@ class SearchController extends Controller
         SubmitHandler $submitHandler,
         SectionService $sectionService,
         ContentTypeService $contentTypeService,
+        QueryType $searchQueryType,
         int $defaultPaginationLimit,
         array $userContentTypeIdentifier
     ) {
@@ -82,6 +84,7 @@ class SearchController extends Controller
         $this->submitHandler = $submitHandler;
         $this->sectionService = $sectionService;
         $this->contentTypeService = $contentTypeService;
+        $this->searchQueryType = $searchQueryType;
         $this->defaultPaginationLimit = $defaultPaginationLimit;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
     }
@@ -132,65 +135,15 @@ class SearchController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $limit = $data->getLimit();
-            $page = $data->getPage();
-            $queryString = $data->getQuery();
-            $section = $data->getSection();
-            $contentTypes = $data->getContentTypes();
-            $lastModified = $data->getLastModified();
-            $created = $data->getCreated();
-            $creator = $data->getCreator();
-            $subtree = $data->getSubtree();
-            $query = new Query();
-            $criteria = [];
-
-            if (null !== $queryString) {
-                $query->query = new Criterion\FullText($queryString);
-            }
-            if (null !== $section) {
-                $criteria[] = new Criterion\SectionId($section->id);
-            }
-            if (!empty($contentTypes)) {
-                $criteria[] = new Criterion\ContentTypeId(array_column($contentTypes, 'id'));
-            }
-            if (!empty($lastModified)) {
-                $criteria[] = new Criterion\DateMetadata(
-                    Criterion\DateMetadata::MODIFIED,
-                    Criterion\Operator::BETWEEN,
-                    [$lastModified['start_date'], $lastModified['end_date']]
-                );
-            }
-            if (!empty($created)) {
-                $criteria[] = new Criterion\DateMetadata(
-                    Criterion\DateMetadata::CREATED,
-                    Criterion\Operator::BETWEEN,
-                    [$created['start_date'], $created['end_date']]
-                );
-            }
-            if ($creator instanceof User) {
-                $criteria[] = new Criterion\UserMetadata(
-                    Criterion\UserMetadata::OWNER,
-                    Criterion\Operator::EQ,
-                    $creator->id
-                );
-            }
-            if (null !== $subtree) {
-                $criteria[] = new Criterion\Subtree($subtree);
-            }
-            if (!empty($criteria)) {
-                $query->filter = new Criterion\LogicalAnd($criteria);
-            }
-
-            if (!$this->searchService->supports(SearchService::CAPABILITY_SCORING)) {
-                $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
-            }
 
             $pagerfanta = new Pagerfanta(
-                new ContentSearchAdapter($query, $this->searchService)
+                new ContentSearchAdapter(
+                    $this->searchQueryType->getQuery(['search_data' => $data]),
+                    $this->searchService
+                )
             );
-
-            $pagerfanta->setMaxPerPage($limit);
-            $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
+            $pagerfanta->setMaxPerPage($data->getLimit());
+            $pagerfanta->setCurrentPage(min($data->getPage(), $pagerfanta->getNbPages()));
 
             $editForm = $this->formFactory->contentEdit(
                 new ContentEditData()

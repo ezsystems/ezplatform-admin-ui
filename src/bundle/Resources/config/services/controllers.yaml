@@ -47,6 +47,7 @@ services:
         autowire: true
         lazy: true
         arguments:
+            $searchQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\SearchQueryType'
             $defaultPaginationLimit: '$pagination.search_limit$'
             $userContentTypeIdentifier: '$user_content_type_identifier$'
         tags:
