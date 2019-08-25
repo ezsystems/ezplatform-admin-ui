@@ -34,7 +34,7 @@
                     </svg>
                 </div>
                 <div class="ez-notifications-modal__results">
-                    {{ render(controller('EzPlatformAdminUiBundle:Notification:renderNotificationsPage', {
+                    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\NotificationController::renderNotificationsPageAction', {
                         'page': 1,
                     })) }}
                 </div>
