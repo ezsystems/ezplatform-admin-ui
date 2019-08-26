@@ -93,7 +93,7 @@ class ContentItemPage extends Page
     public function navigateToPath(string $path): void
     {
         $pathArray = explode('/', $path);
-        $menuTab = ($pathArray[0] === EzEnvironmentConstants::get('ROOT_CONTENT_NAME')) ? 'Content structure' : $pathArray[0];
+        $menuTab = $pathArray[0] === EzEnvironmentConstants::get('ROOT_CONTENT_NAME') ? 'Content structure' : $pathArray[0];
 
         $upperMenu = ElementFactory::createElement($this->context, UpperMenu::ELEMENT_NAME);
         $upperMenu->goToTab('Content');

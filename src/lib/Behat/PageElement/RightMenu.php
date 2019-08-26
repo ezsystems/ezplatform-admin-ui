@@ -32,6 +32,16 @@ class RightMenu extends Element
         $this->context->getElementByText($buttonName, $this->fields['menuButton'])->click();
     }
 
+    public function isButtonActive(string $buttonName): bool
+    {
+        return !$this->context->getElementByText($buttonName, $this->fields['menuButton'])->hasAttribute('disabled');
+    }
+
+    public function isButtonVisible(string $buttonName): bool
+    {
+        return $this->context->getElementByText($buttonName, $this->fields['menuButton']) !== null;
+    }
+
     public function verifyVisibility(): void
     {
         $this->context->waitUntilElementIsVisible($this->fields['menuButton']);

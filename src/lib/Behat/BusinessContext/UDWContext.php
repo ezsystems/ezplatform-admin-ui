@@ -6,12 +6,23 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
+use EzSystems\BehatBundle\Helper\ArgumentParser;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 
 class UDWContext extends BusinessContext
 {
+    private $argumentParser;
+
+    /**
+     * @injectService $argumentParser @EzSystems\BehatBundle\Helper\ArgumentParser
+     */
+    public function __construct(ArgumentParser $argumentParser)
+    {
+        $this->argumentParser = $argumentParser;
+    }
+
     /**
      * @When I select content :pathToContent through UDW
      */
@@ -19,6 +30,7 @@ class UDWContext extends BusinessContext
     {
         $udw = ElementFactory::createElement($this->utilityContext, UniversalDiscoveryWidget::ELEMENT_NAME);
         $udw->verifyVisibility();
+        $pathToContent = $this->argumentParser->replaceRootKeyword($pathToContent);
         $udw->selectContent($pathToContent);
     }
 

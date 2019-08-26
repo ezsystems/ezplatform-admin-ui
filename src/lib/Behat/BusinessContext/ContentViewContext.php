@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
+use EzSystems\BehatBundle\Helper\ArgumentParser;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Breadcrumb;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
@@ -22,6 +23,16 @@ use PHPUnit\Framework\Assert;
 
 class ContentViewContext extends BusinessContext
 {
+    private $argumentParser;
+
+    /**
+     * @injectService $argumentParser @EzSystems\BehatBundle\Helper\ArgumentParser
+     */
+    public function __construct(ArgumentParser $argumentParser)
+    {
+        $this->argumentParser = $argumentParser;
+    }
+
     /**
      * @Given I start creating a new content :contentType
      */
@@ -60,7 +71,7 @@ class ContentViewContext extends BusinessContext
 
         $udw = ElementFactory::createElement($this->utilityContext, UniversalDiscoveryWidget::ELEMENT_NAME);
         $udw->verifyVisibility();
-        $udw->selectContent($itemPath);
+        $udw->selectContent($this->argumentParser->replaceRootKeyword($itemPath));
         $udw->confirm();
     }
 
@@ -124,6 +135,7 @@ class ContentViewContext extends BusinessContext
     public function verifyImOnContentItemPage(string $contentName, string $contentType, ?string $path = null)
     {
         $path = !$path ? $contentName : $path . '/' . $contentName;
+        $path = $this->argumentParser->replaceRootKeyword($path);
         $spacedPath = str_replace('/', ' ', $path);
 
         $contentPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName);
