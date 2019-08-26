@@ -63,6 +63,11 @@ final class SearchQueryType extends OptionsResolverBasedQueryType
         return 'EzPlatformAdminUi:SearchQuery';
     }
 
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData $searchData
+     *
+     * @return \eZ\Publish\API\Repository\Values\Content\Query\Criterion[]
+     */
     protected function buildCriteria(SearchData $searchData): array
     {
         $criteria = [];
