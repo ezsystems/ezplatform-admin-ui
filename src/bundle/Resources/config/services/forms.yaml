@@ -37,18 +37,6 @@ services:
         arguments:
             $siteAccessLanguages: '$languages$'
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\PermissionAwareContentTypeChoiceLoader:
-        arguments:
-            $decorated: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader'
-            $module: 'content'
-            $function: 'create'
-
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\PermissionAwareLanguageChoiceLoader:
-        arguments:
-            $decorated: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader'
-            $module: 'content'
-            $function: 'create'
-
     EzSystems\EzPlatformAdminUi\Form\Extension\RichTextTypeExtension:
         public: true
         tags:
