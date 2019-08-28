@@ -86,17 +86,6 @@
         U: 'X',
     };
 
-    moment.fn.formatPHP = function(format) {
-        console.warn('[DEPRECATED] formatPHP function is deprecated');
-        console.warn('[DEPRECATED] it will be removed from ezplatform-admin-ui 2.0');
-        console.warn('[DEPRECATED] use formatICU instead');
-        return this.format(
-            format.replace(formatPHPEx, (phpStr) => {
-                return typeof formatPHPMap[phpStr] === 'function' ? formatPHPMap[phpStr].call(this) : formatPHPMap[phpStr];
-            })
-        );
-    };
-
     moment.fn.formatICU = function(format) {
         const form = format.replace(formatICUEx, (icuStr) => {
             return typeof formatICUMap[icuStr] === 'function' ? formatICUMap[icuStr].call(this) : formatICUMap[icuStr];
