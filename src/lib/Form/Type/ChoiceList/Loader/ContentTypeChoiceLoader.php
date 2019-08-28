@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
@@ -36,14 +37,19 @@ class ContentTypeChoiceLoader implements ChoiceLoaderInterface
      */
     public function getChoiceList(): array
     {
-        $contentTypes = [];
+        $contentTypesList = [];
         $preferredLanguages = $this->userLanguagePreferenceProvider->getPreferredLanguages();
         $contentTypeGroups = $this->contentTypeService->loadContentTypeGroups($preferredLanguages);
         foreach ($contentTypeGroups as $contentTypeGroup) {
-            $contentTypes[$contentTypeGroup->identifier] = $this->contentTypeService->loadContentTypes($contentTypeGroup, $preferredLanguages);
+            $contentTypes = $this->contentTypeService->loadContentTypes($contentTypeGroup, $preferredLanguages);
+            usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
+                return strcasecmp($contentType1->getName(), $contentType2->getName());
+            });
+
+            $contentTypesList[$contentTypeGroup->identifier] = $contentTypes;
         }
 
-        return $contentTypes;
+        return $contentTypesList;
     }
 
     /**
