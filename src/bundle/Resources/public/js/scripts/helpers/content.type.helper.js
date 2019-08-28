@@ -45,14 +45,15 @@
      * @returns {String|null} contentType name
      */
     const getContentTypeName = (contentTypeIdentifier) => {
-        let contentType;
-        for (var sectionContentTypes of Object.values(eZ.adminUiConfig.contentTypes)) {
-            contentType = sectionContentTypes.find(({ identifier }) => identifier === contentTypeIdentifier);
-            if (contentType) {
-                break;
-            }
+        if (!contentTypesDataMap) {
+            contentTypesDataMap = createContentTypeDataMap();
         }
-        return contentType.name || null;
+
+        if (!contentTypeIdentifier || !contentTypesDataMap[contentTypeIdentifier]) {
+            return null;
+        }
+
+        return contentTypesDataMap[contentTypeIdentifier].name;
     };
 
     eZ.addConfig('helpers.contentType', {
