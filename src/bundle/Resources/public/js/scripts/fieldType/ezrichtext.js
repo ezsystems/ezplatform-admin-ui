@@ -25,7 +25,7 @@
         ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, mergedConfig), udwContainer);
     };
 
-    eZ.addConfig('alloyEditor.callbacks.selectContent', selectContent);
+    eZ.addConfig('richText.alloyEditor.callbacks.selectContent', selectContent);
 
     class EzRichTextValidator extends eZ.BaseFieldValidator {
         constructor(config) {
