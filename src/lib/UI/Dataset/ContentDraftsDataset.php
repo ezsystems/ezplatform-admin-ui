@@ -17,6 +17,9 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\User\User;
 use EzSystems\EzPlatformAdminUi\UI\Value\Content\VersionId;
 
+/**
+ * @deprecated Please move to use ContentDraftListDataset to get a paginated list of content drafts
+ */
 class ContentDraftsDataset
 {
     /** @var \eZ\Publish\API\Repository\ContentService */
