@@ -1,6 +1,31 @@
-(function(global, doc, eZ) {
+(function(global, doc, eZ, React, ReactDOM) {
     const SELECTOR_FIELD = '.ez-field-edit--ezrichtext';
     const SELECTOR_INPUT = '.ez-data-source__richtext';
+    const selectContent = (config) => {
+        const udwContainer = document.querySelector('#react-udw');
+        const confirmHandler = (items) => {
+            if (typeof config.onConfirm === 'function') {
+                config.onConfirm(items);
+            }
+
+            ReactDOM.unmountComponentAtNode(udwContainer);
+        };
+        const cancelHandler = () => {
+            if (typeof config.onCancel === 'function') {
+                config.onCancel();
+            }
+
+            ReactDOM.unmountComponentAtNode(udwContainer);
+        };
+        const mergedConfig = Object.assign({}, config, {
+            onConfirm: confirmHandler,
+            onCancel: cancelHandler,
+        });
+
+        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, mergedConfig), udwContainer);
+    };
+
+    eZ.addConfig('richText.alloyEditor.callbacks.selectContent', selectContent);
 
     class EzRichTextValidator extends eZ.BaseFieldValidator {
         constructor(config) {
@@ -60,4 +85,4 @@
 
         eZ.addConfig('fieldTypeValidators', [validator], true);
     });
-})(window, window.document, window.eZ);
+})(window, window.document, window.eZ, window.React, window.ReactDOM);

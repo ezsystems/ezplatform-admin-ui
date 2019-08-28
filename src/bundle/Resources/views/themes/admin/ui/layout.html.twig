@@ -58,6 +58,7 @@
         {% endblock %}
         <script>
             window.eZ.addConfig('adminUiConfig', {{ ez_admin_ui_config|json_encode|raw }});
+            window.eZ.addConfig('richText', {{ ez_richtext_config|json_encode|raw }});
             window.eZ.addConfig('errors', {
                 emailRegexp: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 emptyField: '{{ 'js.error.empty.field'|trans({}, 'validators')|desc('{fieldName} field is required') }}',

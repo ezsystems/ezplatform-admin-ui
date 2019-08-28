@@ -99,26 +99,6 @@
     }
 }
 
-.ez-btn-ae {
-    &:hover {
-        .ez-icon {
-            fill: $ez-alloyeditor-color-hover;
-        }
-    }
-
-    .ez-icon {
-        width: calculateRem(24px);
-        height: calculateRem(24px);
-        fill: $ez-black;
-    }
-
-    &.ae-button-pressed {
-        .ez-icon {
-            fill: $ez-white;
-        }
-    }
-}
-
 .ez-icon--logo {
     width: 10rem;
     height: 7rem;
