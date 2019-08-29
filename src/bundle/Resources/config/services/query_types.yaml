@@ -7,3 +7,7 @@ services:
     EzSystems\EzPlatformAdminUi\QueryType\ContentSubtreeQueryType: ~
 
     EzSystems\EzPlatformAdminUi\QueryType\MediaSubtreeQueryType: ~
+
+    EzSystems\EzPlatformAdminUi\QueryType\SearchQueryType:
+        arguments:
+            $searchService: '@ezpublish.api.service.search'
