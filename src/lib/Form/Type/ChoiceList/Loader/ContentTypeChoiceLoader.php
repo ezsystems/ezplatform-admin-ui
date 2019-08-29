@@ -43,7 +43,7 @@ class ContentTypeChoiceLoader implements ChoiceLoaderInterface
         foreach ($contentTypeGroups as $contentTypeGroup) {
             $contentTypes = $this->contentTypeService->loadContentTypes($contentTypeGroup, $preferredLanguages);
             usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
-                return strcasecmp($contentType1->getName(), $contentType2->getName());
+                return strnatcasecmp($contentType1->getName(), $contentType2->getName());
             });
 
             $contentTypesList[$contentTypeGroup->identifier] = $contentTypes;
