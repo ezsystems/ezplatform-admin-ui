@@ -25,10 +25,6 @@
     }
 }
 
-.ez-btn--wide {
-    padding: 0.5rem 3rem;
-}
-
 .ez-btn--add-translation {
     .ez-icon {
         margin-right: 0;
@@ -185,4 +181,9 @@
     background: $ez-white;
     border-color: $ez-white;
     color: $ez-black;
+}
+
+.ez-btn--wide,
+.ez-btn.ez-btn--wide {
+    padding: calculateRem(8px) calculateRem(48px);
 }

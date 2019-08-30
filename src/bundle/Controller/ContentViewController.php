@@ -468,23 +468,38 @@ class ContentViewController extends Controller
      */
     private function supplyContentTreeParameters(ContentView $view): void
     {
-        $location = $view->getLocation();
+        $view->addParameters([
+            'content_tree_module_root' => $this->resolveTreeRootLocationId($view->getLocation()),
+        ]);
+    }
 
-        $contentTreeRootLocationId = $this->configResolver->getParameter('content_tree_module.tree_root_location_id');
-        $contextualContentTreeRootLocationIds = $this->configResolver->getParameter('content_tree_module.contextual_tree_root_location_ids');
-
-        $possibleContentTreeRoots = array_intersect($location->path, $contextualContentTreeRootLocationIds);
-        if (
-            null !== $location
-            && !empty($possibleContentTreeRoots)
-        ) {
-            // use the outermost ancestor
-            $contentTreeRootLocationId = reset($possibleContentTreeRoots);
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
+     *
+     * @return int
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    private function resolveTreeRootLocationId(?Location $location): int
+    {
+        if (null === $location) {
+            return $this->configResolver->getParameter('content_tree_module.tree_root_location_id');
         }
 
-        $view->addParameters([
-            'content_tree_module_root' => $contentTreeRootLocationId,
-        ]);
+        $contextualContentTreeRootLocationIds = $this->configResolver->getParameter('content_tree_module.contextual_tree_root_location_ids');
+        $possibleContentTreeRoots = array_intersect($location->path, $contextualContentTreeRootLocationIds);
+        if (\is_array($this->permissionResolver->hasAccess('content', 'read'))) {
+            $accessibleLocations = $this->locationService->loadLocationList($possibleContentTreeRoots);
+            $possibleContentTreeRoots = array_column($accessibleLocations, 'id');
+        }
+
+        if (empty($possibleContentTreeRoots)) {
+            // if a user has no access to any tree root than current location id is set
+            return $location->id;
+        }
+
+        // use the outermost ancestor
+        return (int)reset($possibleContentTreeRoots);
     }
 
     /**
@@ -525,7 +540,7 @@ class ContentViewController extends Controller
             $this->repository
         );
 
-        $view->addParameters(['content_has_reverse_relations' => count($relations) > 0]);
+        $view->addParameters(['content_has_reverse_relations' => \count($relations) > 0]);
     }
 
     /**

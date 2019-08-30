@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\View;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -36,14 +37,22 @@ class ViewParametersListener implements EventSubscriberInterface
     /** @var \eZ\Publish\API\Repository\UserService */
     protected $userService;
 
+    /** @var \eZ\Publish\API\Repository\Repository */
+    private $repository;
+
     /**
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \eZ\Publish\API\Repository\Repository $repository
      */
-    public function __construct(LocationService $locationService, UserService $userService)
-    {
+    public function __construct(
+        LocationService $locationService,
+        UserService $userService,
+        Repository $repository
+    ) {
         $this->locationService = $locationService;
         $this->userService = $userService;
+        $this->repository = $repository;
     }
 
     /**
@@ -203,7 +212,11 @@ class ViewParametersListener implements EventSubscriberInterface
     private function resolveParentLocation(Content $content, ?Location $location, bool $isPublished): Location
     {
         if (!$isPublished) {
-            $parentLocations = $this->locationService->loadParentLocationsForDraftContent($content->getVersionInfo());
+            $parentLocations = $this->repository->sudo(
+                function (Repository $repository) use ($content) {
+                    return $repository->getLocationService()->loadParentLocationsForDraftContent($content->getVersionInfo());
+                }
+            );
 
             return reset($parentLocations);
         }
@@ -212,6 +225,10 @@ class ViewParametersListener implements EventSubscriberInterface
             throw new InvalidArgumentException('$location', 'Location for published content has to be provided');
         }
 
-        return $this->locationService->loadLocation($location->parentLocationId);
+        return $this->repository->sudo(
+            function (Repository $repository) use ($location) {
+                return $repository->getLocationService()->loadLocation($location->parentLocationId);
+            }
+        );
     }
 }
