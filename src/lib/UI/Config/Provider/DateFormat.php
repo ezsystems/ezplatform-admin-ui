@@ -52,10 +52,6 @@ class DateFormat implements ProviderInterface
             'shortDateTime' => (string)$shortDateTimeFormat,
             'shortDate' => $shortDateTimeFormat->getDateFormat(),
             'shortTime' => $shortDateTimeFormat->getTimeFormat(),
-            /** @deprecated  */
-            'full' => (string)$fullDateTimeFormat,
-            /** @deprecated  */
-            'short' => (string)$shortDateTimeFormat,
         ];
     }
 }

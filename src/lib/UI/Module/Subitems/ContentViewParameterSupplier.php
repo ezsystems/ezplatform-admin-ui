@@ -145,8 +145,6 @@ class ContentViewParameterSupplier
         $view->addParameters([
             'subitems_module' => [
                 'items' => $subitemsListJson,
-                /* @deprecated since version 2.2, to be removed in 3.0 */
-                'limit' => $subitemsLimit,
                 'content_type_info_list' => $contentTypeInfoListJson,
                 'content_create_permissions_for_mfu' => $this->getContentCreatePermissionsForMFU($view->getLocation(), $view->getContent()),
             ],
