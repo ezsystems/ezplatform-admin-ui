@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Menu;
+namespace EzSystems\EzPlatformAdminUi\Menu\Listener;
 
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 
-class ReorderByOrderNumberListener
+final class ReorderByOrderNumberListener
 {
     /**
      * @param \EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent $event
