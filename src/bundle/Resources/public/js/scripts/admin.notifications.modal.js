@@ -1,6 +1,7 @@
 (function(global, doc, eZ, Translator) {
     let currentPageLink = null;
     let getNotificationsStatusErrorShowed = false;
+    let lastFailedCountFetchNotificationNode = null;
     const SELECTOR_MODAL_ITEM = '.ez-notifications-modal__item';
     const SELECTOR_MODAL_RESULTS = '.ez-notifications-modal__results';
     const SELECTOR_MODAL_TITLE = '.modal-title';
@@ -79,14 +80,20 @@
      * @method onGetNotificationsStatusFailure
      */
     const onGetNotificationsStatusFailure = (error) => {
-        const message = Translator.trans(
-            /* @Desc("Cannot update notifications count") */ 'notifications.modal.message.error',
-            { error: error.message },
-            'notifications'
-        );
+        if (lastFailedCountFetchNotificationNode && doc.contains(lastFailedCountFetchNotificationNode)) {
+            return;
+        }
 
         if (!getNotificationsStatusErrorShowed) {
-            showWarningNotification(message);
+            const message = Translator.trans(
+                /* @Desc("Cannot update notifications count") */ 'notifications.modal.message.error',
+                { error: error.message },
+                'notifications'
+            );
+
+            showWarningNotification(message, (notificationNode) => {
+                lastFailedCountFetchNotificationNode = notificationNode;
+            });
         }
 
         getNotificationsStatusErrorShowed = true;
