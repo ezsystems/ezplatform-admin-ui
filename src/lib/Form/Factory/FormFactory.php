@@ -168,7 +168,6 @@ class FormFactory
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      */
     public function __construct(
         FormFactoryInterface $formFactory,
