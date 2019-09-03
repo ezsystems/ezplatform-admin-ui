@@ -10,9 +10,9 @@
             padding: 0.5rem 2rem 0.5rem 0.5rem;
             user-select: none;
 
-            .ez-user-menu__name {
-                font-size: calculateRem(12px);
-            }
+            display: flex;
+            justify-content: flex-end;
+            padding: 0.5rem 1.5rem 0.5rem 0.5rem;
 
             &:before,
             &:after {
@@ -21,7 +21,7 @@
                 width: 2px;
                 position: absolute;
                 top: 50%;
-                right: 1rem;
+                right: 0.7rem;
                 background-color: $ez-black;
             }
 
@@ -38,6 +38,18 @@
             }
 
             transition: background-color 0.5s $ez-admin-transition;
+        }
+
+        &__name {
+            display: flex;
+            align-items: center;
+            text-align: right;
+            font-size: calculateRem(12px);
+        }
+
+        &__avatar-wrapper {
+            margin-left: 6px;
+            flex-shrink: 0;
         }
 
         &__avatar {
@@ -84,7 +96,6 @@
 
                 color: $ez-black;
                 font-size: calculateRem(14px);
-                // padding: 0.25rem 0.5rem;
 
                 .ez-icon--small-medium {
                     width: calculateRem(20px);

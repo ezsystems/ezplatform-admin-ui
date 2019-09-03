@@ -13,6 +13,7 @@ use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
+use Knp\Menu\Util\MenuManipulator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -24,7 +25,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInterface
 {
     const ITEM_LOGOUT = 'user__content';
-    const ITEM_CHANGE_PASSWORD = 'user__change_password';
     const ITEM_USER_SETTINGS = 'user__settings';
     const ITEM_BOOKMARK = 'user__bookmark';
     const ITEM_DRAFTS = 'user__drafts';
@@ -106,17 +106,13 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                 );
             }
 
-            $menu->addChild(self::ITEM_NOTIFICATION, [
-                'attributes' => [
-                    'class' => 'ez-user-menu__item--notifications',
-                    'data-toggle' => 'modal',
-                    'data-target' => '#view-notifications',
-                ],
-                'extras' => [
-                    'translation_domain' => 'notifications',
-                    'template' => '@ezdesign/account/notifications/modal.html.twig',
-                ],
-            ]);
+            $menu->addChild(
+                $this->createMenuItem(self::ITEM_USER_SETTINGS, [
+                    'route' => 'ezplatform.user_settings.list',
+                    'extras' => [
+                        'icon' => 'user',
+                    ]])
+            );
 
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout', 'extras' => [
