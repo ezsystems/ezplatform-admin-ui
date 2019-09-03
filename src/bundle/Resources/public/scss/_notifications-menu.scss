@@ -22,14 +22,16 @@
             
             &--notifications {
                 position: relative;
+                padding-left: 32px;
 
                 &:before {
                     content: attr(data-count);
                     position: absolute;
-                    left: .35rem;
+                    left: 1rem;
                     top: 48%;
                     transform: translateY(-50%);
                     font-size: calculateRem(14px);
+                    font-weight: bold;
                     color: $ez-black;
                 }
 

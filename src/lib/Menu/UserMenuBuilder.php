@@ -75,22 +75,33 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 
         $token = $this->tokenStorage->getToken();
         if (null !== $token && is_object($token->getUser())) {
-            $menu->addChild(
-                $this->createMenuItem(self::ITEM_CHANGE_PASSWORD, ['route' => 'ezplatform.user_profile.change_password'])
-            );
+            $menu->addChild(self::ITEM_NOTIFICATION, [
+                'attributes' => [
+                    'class' => 'ez-user-menu__item--notifications',
+                    'data-toggle' => 'modal',
+                    'data-target' => '#view-notifications',
+                ],
+                'extras' => [
+                    'translation_domain' => 'notifications',
+                    'template' => '@EzPlatformAdminUi/notifications/notifications_modal.html.twig',
+                ],
+            ]);
 
             $menu->addChild(
-                $this->createMenuItem(self::ITEM_USER_SETTINGS, ['route' => 'ezplatform.user_settings.list'])
-            );
-
-            $menu->addChild(
-                $this->createMenuItem(self::ITEM_BOOKMARK, ['route' => 'ezplatform.bookmark.list'])
+                $this->createMenuItem(self::ITEM_BOOKMARK, [
+                    'route' => 'ezplatform.bookmark.list',
+                    'extras' => [
+                        'icon' => 'bookmark-manager',
+                    ]])
             );
 
             if ($this->permissionResolver->hasAccess('content', 'versionread') !== false) {
                 $menu->addChild(
                     $this->createMenuItem(self::ITEM_DRAFTS, [
                         'route' => 'ezplatform.content_draft.list',
+                        'extras' => [
+                            'icon' => 'content-draft',
+                        ]
                     ])
                 );
             }
@@ -108,7 +119,9 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             ]);
 
             $menu->addChild(
-                $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout'])
+                $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout', 'extras' => [
+                    'icon' => 'logout',
+                ]])
             );
         }
 
