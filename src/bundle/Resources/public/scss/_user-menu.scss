@@ -5,23 +5,21 @@
         z-index: 1050;
 
         &__name-wrapper {
-            height: 58px;
-            width: 200px;
-            padding: 0.5rem 2rem 0.5rem 0.5rem;
-            user-select: none;
-
             display: flex;
+            height: calculateRem(58px);
+            width: calculateRem(200px);
+            padding: calculateRem(8px) calculateRem(24px) calculateRem(8px) calculateRem(8px);
+            user-select: none;
             justify-content: flex-end;
-            padding: 0.5rem 1.5rem 0.5rem 0.5rem;
 
             &:before,
             &:after {
                 content: '';
-                height: 10px;
-                width: 2px;
+                height: calculateRem(10px);
+                width: calculateRem(2px);
                 position: absolute;
                 top: 50%;
-                right: 0.7rem;
+                right: calculateRem(11px);
                 background-color: $ez-black;
             }
 
@@ -48,28 +46,26 @@
         }
 
         &__avatar-wrapper {
-            margin-left: 6px;
+            margin-left: calculateRem(6px);
             flex-shrink: 0;
         }
 
         &__avatar {
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: calculateRem(40px);
+            height: calculateRem(40px);
         }
 
         &__items {
             width: 100%;
             display: block;
             position: absolute;
-            padding-top: 6px;
-            top: calc(100% - 6px);
+            padding-top: calculateRem(6px);
+            top: calc(100% - #{calculateRem(6px)});
             right: 0;
             background-color: $ez-white;
-            box-shadow: 0 6px 6px 0 rgba(51, 51, 51, 0.3);
-            height: auto;
+            box-shadow: 0 calculateRem(6px) calculateRem(6px) 0 rgba(51, 51, 51, 0.3);
             transform-origin: top center;
-            transition: height 0.2s $ez-admin-transition;
             white-space: nowrap;
 
             background-clip: content-box;
@@ -90,9 +86,9 @@
             .nav-link {
                 display: grid;
                 grid-template-columns: 1.25rem 1fr;
-                grid-column-gap: 4px;
+                grid-column-gap: calculateRem(4px);
                 grid-template-areas: 'icon label';
-                padding: 0.25rem 0.5rem;
+                padding: calculateRem(4px) calculateRem(4px);
 
                 color: $ez-black;
                 font-size: calculateRem(14px);
@@ -113,7 +109,7 @@
             }
 
             &:last-child {
-                margin-bottom: 4px;
+                margin-bottom: calculateRem(4px);
             }
         }
 
