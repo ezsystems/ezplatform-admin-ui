@@ -136,9 +136,14 @@ class ContentTypeController extends Controller
     public function listAction(ContentTypeGroup $group, string $routeName, int $page): Response
     {
         $deletableTypes = [];
+        $contentTypes = $this->contentTypeService->loadContentTypes($group, $this->languages);
+
+        usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
+            return strnatcasecmp($contentType1->getName(), $contentType2->getName());
+        });
 
         $pagerfanta = new Pagerfanta(
-            new ArrayAdapter($this->contentTypeService->loadContentTypes($group, $this->languages))
+            new ArrayAdapter($contentTypes)
         );
 
         $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
