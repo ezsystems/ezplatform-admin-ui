@@ -165,7 +165,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\Menu\Admin\ReorderMenuListener:
         tags:
-        - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: moveAdminToLast, priority: -50 }
+            - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: moveAdminToLast, priority: -50 }
 
     EzSystems\EzPlatformAdminUi\Menu\ContentTypeRightSidebarBuilder:
         public: true
