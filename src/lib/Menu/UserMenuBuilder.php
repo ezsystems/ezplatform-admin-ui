@@ -13,7 +13,6 @@ use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
-use Knp\Menu\Util\MenuManipulator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -92,7 +91,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'route' => 'ezplatform.bookmark.list',
                     'extras' => [
                         'icon' => 'bookmark-manager',
-                    ]])
+                    ], ])
             );
 
             if ($this->permissionResolver->hasAccess('content', 'versionread') !== false) {
@@ -101,7 +100,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                         'route' => 'ezplatform.content_draft.list',
                         'extras' => [
                             'icon' => 'content-draft',
-                        ]
+                        ],
                     ])
                 );
             }
@@ -111,7 +110,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'route' => 'ezplatform.user_settings.list',
                     'extras' => [
                         'icon' => 'user',
-                    ]])
+                    ], ])
             );
 
             $menu->addChild(
