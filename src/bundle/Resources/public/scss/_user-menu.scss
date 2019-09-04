@@ -35,7 +35,7 @@
                 background-color: $ez-white;
             }
 
-            transition: background-color 0.5s $ez-admin-transition;
+            transition: background-color 0.3s $ez-admin-transition;
         }
 
         &__name {
@@ -81,12 +81,12 @@
         &__item {
             width: 100%;
             cursor: pointer;
-            padding: 0 0.5rem;
+            padding: 0 calculateRem(16px);
 
             .nav-link {
                 display: grid;
-                grid-template-columns: 1.25rem 1fr;
-                grid-column-gap: calculateRem(4px);
+                grid-template-columns: calculateRem(20px) 1fr;
+                grid-column-gap: calculateRem(8px);
                 grid-template-areas: 'icon label';
                 padding: calculateRem(4px) calculateRem(4px);
 

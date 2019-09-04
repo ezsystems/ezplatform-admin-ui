@@ -20,12 +20,12 @@
         &__item {
             &--notifications {
                 position: relative;
-                padding-left: 32px;
+                padding-left: calculateRem(44px);
 
                 &:before {
                     content: attr(data-count);
                     position: absolute;
-                    left: calculateRem(16px);
+                    left: calculateRem(20px);
                     top: 48%;
                     transform: translateY(-50%);
                     font-size: calculateRem(14px);
