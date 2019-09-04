@@ -14,7 +14,7 @@
     };
 
     toggleForms.forEach((toggleForm) => {
-        const checkboxInputs = toggleForm.querySelectorAll('input[type="checkbox"]');
+        const checkboxInputs = [...toggleForm.querySelectorAll('input[type="checkbox"]')];
         const button = doc.querySelector(toggleForm.dataset.toggleButtonId);
         const toggleMode = toggleForm.dataset.toggleMode || ANY_CHECKED;
         const validateCheckboxStatus = () =>
