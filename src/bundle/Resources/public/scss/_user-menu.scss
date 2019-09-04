@@ -119,6 +119,8 @@
 
         &__item-label {
             grid-area: label;
+            white-space: normal;
+            word-break: break-word;
         }
     }
 }
