@@ -37,7 +37,27 @@
         return iconUrl;
     };
 
+    /**
+     * Returns contentType name from contentType identifier
+     *
+     * @function getContentTypeName
+     * @param {String} contentTypeIdentifier
+     * @returns {String|null} contentType name
+     */
+    const getContentTypeName = (contentTypeIdentifier) => {
+        if (!contentTypesDataMap) {
+            contentTypesDataMap = createContentTypeDataMap();
+        }
+
+        if (!contentTypeIdentifier || !contentTypesDataMap[contentTypeIdentifier]) {
+            return null;
+        }
+
+        return contentTypesDataMap[contentTypeIdentifier].name;
+    };
+
     eZ.addConfig('helpers.contentType', {
         getContentTypeIconUrl,
+        getContentTypeName
     });
 })(window, window.document, window.eZ);
