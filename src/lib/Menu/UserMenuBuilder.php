@@ -113,14 +113,14 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'route' => 'ezplatform.user_settings.list',
                     'extras' => [
                         'icon' => 'user',
-                        'orderNumber' => 40,
+                        'orderNumber' => 50,
                     ], ])
             );
 
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout', 'extras' => [
                     'icon' => 'logout',
-                    'orderNumber' => 50,
+                    'orderNumber' => 60,
                 ]])
             );
         }
