@@ -83,6 +83,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                 'extras' => [
                     'translation_domain' => 'notifications',
                     'template' => '@ezdesign/account/notifications/modal.html.twig',
+                    'orderNumber' => 10,
                 ],
             ]);
 
@@ -91,6 +92,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'route' => 'ezplatform.bookmark.list',
                     'extras' => [
                         'icon' => 'bookmark-manager',
+                        'orderNumber' => 20,
                     ], ])
             );
 
@@ -100,6 +102,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                         'route' => 'ezplatform.content_draft.list',
                         'extras' => [
                             'icon' => 'content-draft',
+                            'orderNumber' => 30,
                         ],
                     ])
                 );
@@ -110,12 +113,14 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'route' => 'ezplatform.user_settings.list',
                     'extras' => [
                         'icon' => 'user',
+                        'orderNumber' => 40,
                     ], ])
             );
 
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout', 'extras' => [
                     'icon' => 'logout',
+                    'orderNumber' => 50,
                 ]])
             );
         }
