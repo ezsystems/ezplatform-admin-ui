@@ -205,3 +205,11 @@
         justify-content: center;
     }
 }
+
+.ez-modal--content-hide-confirmation {
+    .modal-body {
+        .ez-modal-body__main {
+            padding: 0 calculateRem(16px);
+        }
+    }
+}
