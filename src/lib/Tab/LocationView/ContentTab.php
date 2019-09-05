@@ -93,8 +93,6 @@ class ContentTab extends AbstractEventDispatchingTab implements OrderedTabInterf
 
         return array_replace($contextParameters, [
             'content' => $content,
-            /* @deprecated since version 2.2, to be removed in 3.0 */
-            'fieldDefinitionsByGroup' => $fieldDefinitionsByGroup,
             'field_definitions_by_group' => $fieldDefinitionsByGroup,
             'languages' => $languages,
             'location' => $contextParameters['location'],

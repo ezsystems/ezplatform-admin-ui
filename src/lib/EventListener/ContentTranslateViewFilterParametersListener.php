@@ -52,19 +52,15 @@ class ContentTranslateViewFilterParametersListener implements EventSubscriberInt
             return;
         }
 
-        $contentInfo = $view->getContent()->contentInfo;
         $contentType = $view->getContent()->getContentType();
 
         $event->getParameterBag()->add([
             'form' => $view->getFormView(),
             'location' => $view->getLocation(),
             'language' => $view->getLanguage(),
-            'baseLanguage' => $view->getBaseLanguage(), /** @deprecated In 2.2, will be removed in 3.0. Use `base_language` instead. */
             'base_language' => $view->getBaseLanguage(),
             'content' => $view->getContent(),
-            'contentType' => $contentType, /** @deprecated In 2.2, will be removed in 3.0. Use `content_type` instead. */
             'content_type' => $contentType,
-            'isPublished' => $contentInfo->isPublished(),  /** @deprecated In 2.2, will be removed in 3.0. Use `ContentInfo::isPublished` in Twig directly. */
         ]);
     }
 }
