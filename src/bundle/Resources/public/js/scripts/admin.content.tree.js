@@ -1,4 +1,45 @@
 (function(global, doc, React, ReactDOM, eZ, localStorage) {
+    // const initializeAdaptiveTabs = () => {
+    //     const primaryTabsList = doc.querySelector('.ez-tabs');
+    //     const primaryTabs = [...primaryTabsList.querySelectorAll('.ez-tabs__tab--primary')];
+    //     // const moreTab = primaryTabsList.querySelector('.ez-tabs__tab--more');
+    //     const secondaryTabsList = doc.querySelector('.ez-tabs__secondary');
+
+    //     primaryTabs.forEach((tab) => {
+    //         secondaryTabsList.insertAdjacentHTML('beforeend', tab.outerHTML);
+    //     });
+    // };
+    const adaptTabs = () => {
+        const tabsList = doc.querySelector('.ez-tabs');
+        const primaryTabs = [...tabsList.querySelectorAll('.ez-tabs__tab--primary:not(.ez-tabs__tab--more)')];
+        const secondaryTabsList = doc.querySelector('.ez-tabs--secondary');
+        const secondaryTabs = [...secondaryTabsList.querySelectorAll('.ez-tabs__tab--secondary')];
+        const moreTab = doc.querySelector('.ez-tabs__tab--more');
+
+        primaryTabs.forEach((tab) => tab.classList.remove('ez-tabs__tab--hidden'));
+        moreTab.classList.remove('ez-tabs__tab--hidden');
+
+        const maxTotalWidth = tabsList.offsetWidth + 1; // TODO: change 1 to 0.5
+        let currentWidth = moreTab.offsetWidth + 1; // rethink assigning moreTab.affWi...
+        const hiddenPrimaryTabs = [];
+
+        primaryTabs.forEach((tab, index) => {
+            if (currentWidth + tab.offsetWidth + 1 > maxTotalWidth) {
+                hiddenPrimaryTabs.push(index);
+            }
+
+            currentWidth += tab.offsetWidth + 1;
+        });
+
+        moreTab.classList.toggle('ez-tabs__tab--hidden', !hiddenPrimaryTabs.length);
+        primaryTabs.forEach((tab, index) => {
+            tab.classList.toggle('ez-tabs__tab--hidden', hiddenPrimaryTabs.includes(index));
+        });
+        secondaryTabs.forEach((tab, index) => {
+            tab.classList.toggle('ez-tabs__tab--hidden', !hiddenPrimaryTabs.includes(index));
+        });
+    };
+
     const KEY_CONTENT_TREE_EXPANDED = 'ez-content-tree-expanded';
     const CLASS_CONTENT_TREE_EXPANDED = 'ez-content-tree-container--expanded';
     const CLASS_BTN_CONTENT_TREE_EXPANDED = 'ez-btn--content-tree-expanded';
@@ -68,4 +109,60 @@
 
     doc.addEventListener('scroll', handleViewportChange, { capture: false, passive: true });
     window.addEventListener('resize', handleViewportChange, { capture: false, passive: true });
+
+    adaptTabs();
+    // initializeAdaptiveTabs();
+    const moreTab = doc.querySelector('.ez-tabs__tab--more');
+    const moreTabLink = doc.querySelector('.ez-tabs__tab--more .nav-link');
+    const tabsList = doc.querySelector('.ez-tabs');
+    const allTabs = tabsList.querySelectorAll('.ez-tabs__tab');
+    const secondaryTabsList = doc.querySelector('.ez-tabs--secondary');
+    const handleClickOutsideSecondaryMenu = (event) => {
+        const isClickInsideMoreTab = event.target.closest('.ez-tabs__tab--more');
+        const isSecondaryMenuExpanded = moreTab.classList.contains('ez-tabs__tab--expanded');
+
+        if (isClickInsideMoreTab || !isSecondaryMenuExpanded) {
+            return;
+        }
+
+        // const isClickInsideMenu = event.target.closest('.ez-tabs--secondary');
+
+        // if (!isClickInsideMenu) {
+        moreTab.classList.remove('ez-tabs__tab--expanded');
+        secondaryTabsList.classList.add('ez-tabs--hidden');
+        // doc.removeEventListener('click', handleClickOutsideSecondaryMenu);
+        // }
+    };
+    const handleTabClick = (event) => {
+        const activeNavLink = event.currentTarget.querySelector('.nav-link');
+        const navLinks = tabsList.querySelectorAll('.nav-link');
+
+        if (!activeNavLink.href) {
+            return;
+        }
+
+        navLinks.forEach((navLink) => {
+            if (navLink === activeNavLink) {
+                return;
+            }
+
+            navLink.classList.toggle('active', navLink.href === activeNavLink.href);
+        });
+    };
+    doc.addEventListener('click', handleClickOutsideSecondaryMenu);
+    moreTabLink.addEventListener('click', () => {
+        // const isSecondaryMenuExpanded = moreTab.classList.contains('ez-tabs__tab--expanded');
+        moreTab.classList.toggle('ez-tabs__tab--expanded');
+        secondaryTabsList.classList.toggle('ez-tabs--hidden');
+    });
+    document.body.addEventListener('ez-content-tree-resized', () => {
+        adaptTabs();
+    });
+    window.addEventListener('resize', () => {
+        adaptTabs();
+    });
+    allTabs.forEach((tab) => {
+        tab.addEventListener('click', handleTabClick);
+    });
+    
 })(window, window.document, window.React, window.ReactDOM, window.eZ, window.localStorage);

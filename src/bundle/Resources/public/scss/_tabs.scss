@@ -39,12 +39,90 @@
 }
 
 .ez-content-view {
+    .ez-header .container {
+        overflow: initial;
+    }
+
     .nav-tabs {
         border-bottom: 2px solid $ez-ground-base-dark;
 
         &.ez-tabs {
             .nav-item {
                 margin-bottom: -2px;
+            }
+        }
+
+        .ez-tabs {
+            &__tab {
+                &--hidden {
+                    display: none;
+                }
+
+                &--more {
+                    cursor: pointer;
+
+                    > .nav-link {
+                        position: relative;
+                        padding-right: 2rem;
+
+                        &:before,
+                        &:after {
+                            content: '';
+                            height: 10px;
+                            width: 2px;
+                            position: absolute;
+                            top: 50%;
+                            right: 1rem;
+                            background-color: $ez-black;
+                        }
+
+                        &:before {
+                            transform: translate(3px, -50%) rotate(-135deg);
+                        }
+
+                        &:after {
+                            transform: translate(-3px, -50%) rotate(135deg);
+                        }
+                    }
+                }
+
+                &--expanded {
+                    .nav-link {
+                        background-color: #f5f5f5;
+                        border-color: #f5f5f5;
+                        color: #333;
+                    }
+                }
+            }
+
+            &--hidden {
+                display: none;
+            }
+
+            &--secondary {
+                flex-direction: column;
+                position: absolute;
+
+                &.nav-tabs {
+                    z-index: 100;
+                    box-shadow: 0 calculateRem(6px) calculateRem(16px) 0 rgba(51, 51, 51, 0.3);
+
+                    .nav-item {
+                    }
+
+                    .nav-link {
+                        border-radius: 0;
+                        border: 0;
+
+                        &.active {
+                            background-color: #e5e3e3;
+                        }
+
+                        &:hover {
+                            background-color: #dbdbdb;
+                        }
+                    }
+                }
             }
         }
     }
