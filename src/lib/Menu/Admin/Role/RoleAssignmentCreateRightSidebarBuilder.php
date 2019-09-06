@@ -59,7 +59,7 @@ class RoleAssignmentCreateRightSidebarBuilder extends AbstractBuilder implements
                         'class' => 'btn--trigger',
                         'data-click' => '#role_assignment_create_save',
                     ],
-                    'extras' => ['icon' => 'publish'],
+                    'extras' => ['icon' => 'save'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
