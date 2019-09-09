@@ -88,8 +88,16 @@
 
                 &--expanded {
                     .nav-link {
-                        background-color: #f5f5f5;
-                        border-color: #f5f5f5;
+                        background-color: $ez-color-base-pale;
+                        border-color: $ez-color-base-pale;
+                        color: $ez-black;
+                    }
+                }
+
+                &--highlighted {
+                    .nav-link {
+                        background-color: $ez-ground-base-light;
+                        border-color: $ez-ground-base-light;
                         color: #333;
                     }
                 }
@@ -111,6 +119,8 @@
                     }
 
                     .nav-link {
+                        background-color: $ez-ground-base-light;
+                        border-color: $ez-ground-base-light;
                         border-radius: 0;
                         border: 0;
 
