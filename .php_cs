@@ -22,6 +22,7 @@ return PhpCsFixer\Config::create()
         'phpdoc_types_order' => [
             'null_adjustment' => 'always_last',
         ],
+        'php_unit_mock_short_will_return' => false,
         'header_comment' => [
             'commentType' => 'PHPDoc',
             'header' => $header,
