@@ -143,31 +143,31 @@
             return contentTypeDataMap;
         }, {});
 
-        // ReactDOM.render(
-        //     React.createElement(eZ.modules.SubItems, {
-        //         handleEditItem,
-        //         generateLink,
-        //         parentLocationId: parseInt(container.dataset.location, 10),
-        //         sortClauses: { [sortField]: sortOrder },
-        //         restInfo: { token, siteaccess },
-        //         extraActions: [
-        //             {
-        //                 component: eZ.modules.MultiFileUpload,
-        //                 attrs: {
-        //                     ...mfuAttrs,
-        //                     onPopupClose: (itemsUploaded) => itemsUploaded.length && global.location.reload(true),
-        //                     contentCreatePermissionsConfig: JSON.parse(container.dataset.mfuCreatePermissionsConfig),
-        //                     contentTypesMap: mfuContentTypesMap,
-        //                 },
-        //             },
-        //         ],
-        //         items,
-        //         contentTypesMap,
-        //         totalCount: subItemsList.ChildrenCount,
-        //         udwConfigBulkMoveItems,
-        //         showBulkActionFailedModal,
-        //     }),
-        //     container
-        // );
+        ReactDOM.render(
+            React.createElement(eZ.modules.SubItems, {
+                handleEditItem,
+                generateLink,
+                parentLocationId: parseInt(container.dataset.location, 10),
+                sortClauses: { [sortField]: sortOrder },
+                restInfo: { token, siteaccess },
+                extraActions: [
+                    {
+                        component: eZ.modules.MultiFileUpload,
+                        attrs: {
+                            ...mfuAttrs,
+                            onPopupClose: (itemsUploaded) => itemsUploaded.length && global.location.reload(true),
+                            contentCreatePermissionsConfig: JSON.parse(container.dataset.mfuCreatePermissionsConfig),
+                            contentTypesMap: mfuContentTypesMap,
+                        },
+                    },
+                ],
+                items,
+                contentTypesMap,
+                totalCount: subItemsList.ChildrenCount,
+                udwConfigBulkMoveItems,
+                showBulkActionFailedModal,
+            }),
+            container
+        );
     });
 })(window, window.document, window.jQuery, window.React, window.ReactDOM, window.eZ, window.Routing, window.Translator);
