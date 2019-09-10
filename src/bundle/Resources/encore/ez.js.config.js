@@ -105,6 +105,7 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-location-view-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.location.change.language.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.content.tree.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.location.adaptive.tabs.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.view.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.visibility.js'),
