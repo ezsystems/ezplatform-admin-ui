@@ -1,4 +1,5 @@
-.ez-modal--send-to-trash {
+.ez-modal--send-to-trash,
+.ez-modal--trash-container {
     .modal-dialog {
         background-color: $ez-ground-base-medium;
         border-radius: calculateRem(4px);
@@ -23,6 +24,13 @@
 
     .modal-footer {
         border-top: none;
+
+        .btn {
+            padding: calculateRem(6px) calculateRem(12px);
+            font-size: calculateRem(16px);
+            border-radius: calculateRem(4px);
+            line-height: 1.5;
+        }
     }
 }
 
@@ -158,8 +166,7 @@
 }
 
 .ez-modal--bulk-action-failed,
-.ez-modal--trash-with-asset,
-.ez-modal--trash-container {
+.ez-modal--trash-with-asset {
     .modal-dialog {
         max-width: calculateRem(800px);
     }
