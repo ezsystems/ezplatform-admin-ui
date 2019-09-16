@@ -3,10 +3,42 @@ Feature: Content fields setting and editing
   In order to manage content on my site
   I want to set, edit, copy and move content items.
 
+  @common
+  Scenario Outline: Create Content Types for other Scenarios to use
+    Given a Content Type "<fieldName> CT" with an "<fieldInternalName>" field definition
+
+    Examples:
+      | fieldInternalName    | fieldName                    |
+      | ezselection          | Selection                    |
+      | ezgmaplocation       | Map location                 |
+      | ezauthor             | Authors                      |
+      | ezboolean            | Checkbox                     |
+      | ezobjectrelation     | Content relation (single)    |
+      | ezobjectrelationlist | Content relations (multiple) |
+      | ezcountry            | Country                      |
+      | ezdate               | Date                         |
+      | ezdatetime           | Date and time                |
+      | ezemail              | Email address                |
+      | ezfloat              | Float                        |
+      | ezisbn               | ISBN                         |
+      | ezinteger            | Integer                      |
+      | ezkeyword            | Keywords                     |
+      | ezrichtext           | Rich text                    |
+      | eztext               | Text block                   |
+      | ezstring             | Text line                    |
+      | eztime               | Time                         |
+      | ezurl                | URL                          |
+      | ezmedia              | Media                        |
+      | ezimage              | Image                        |
+      | ezbinaryfile         | File                         |
+
+  @common
+  Scenario: Regenrate GraphQL schema
+    Given I regenerate GraphQL schema
+
   @javascript @common
   Scenario Outline: Create content item with given field
-    Given a Content Type "<fieldName> CT" with an "<fieldInternalName>" field definition
-      And I am logged as "admin"
+      Given I am logged as "admin"
       And I go to "Content structure" in "Content" tab
     When I start creating a new content "<fieldName> CT"
       And I set content fields
@@ -20,29 +52,29 @@ Feature: Content fields setting and editing
         | Field    | <value1> | <value2> | <value3> |
 
     Examples:
-      | fieldInternalName    | fieldName                    | label1    | value1                    | label2     | value2                | label3  | value3   | contentItemName           |
-      | ezselection          | Selection                    | value     | Test-value                |            |                       |         |          | Test-value                |
-      | ezgmaplocation       | Map location                 | latitude  | 32                        | longitude  | 132                   | address | Acapulco | Acapulco                  |
-      | ezauthor             | Authors                      | name      | Test Name                 | email      | email@example.com     |         |          | Test Name                 |
-      | ezboolean            | Checkbox                     | value     | true                      |            |                       |         |          | 1                         |
-      | ezobjectrelation     | Content relation (single)    | value     | Media/Images              |            |                       |         |          | Images                    |
-      | ezobjectrelationlist | Content relations (multiple) | firstItem | Media/Images              | secondItem | Media/Files           |         |          | Images Files              |
-      | ezcountry            | Country                      | value     | Poland                    |            |                       |         |          | Poland                    |
-      | ezdate               | Date                         | value     | 11/23/2019                |            |                       |         |          | Saturday 23 November 2019 |
-      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 14:45                 |         |          | Sat 2019-23-11 14:45:00   |
-      | ezemail              | Email address                | value     | email@example.com         |            |                       |         |          | email@example.com         |
-      | ezfloat              | Float                        | value     | 11.11                     |            |                       |         |          | 11.11                     |
-      | ezisbn               | ISBN                         | value     | 978-3-16-148410-0         |            |                       |         |          | 978-3-16-148410-0         |
-      | ezinteger            | Integer                      | value     | 1111                      |            |                       |         |          | 1111                      |
-      | ezkeyword            | Keywords                     | value     | first keyword, second     |            |                       |         |          | first keyword, second     |
-      | ezrichtext           | Rich text                    | value     | Lorem ipsum dolor sit     |            |                       |         |          | Lorem ipsum dolor sit     |
-      | eztext               | Text block                   | value     | Lorem ipsum dolor         |            |                       |         |          | Lorem ipsum dolor         |
-      | ezstring             | Text line                    | value     | Lorem ipsum               |            |                       |         |          | Lorem ipsum               |
-      | eztime               | Time                         | value     | 14:45                     |            |                       |         |          | 2:45:00 pm                |
-      | ezurl                | URL                          | text      | Test URL                  | url        | http://www.google.com |         |          | Test URL                  |
-      | ezmedia              | Media                        | value     | video1.mp4.zip            |            |                       |         |          | video1.mp4                |
-      | ezimage              | Image                        | value     | image1.png.zip            |            |                       |         |          | image1.png                |
-      | ezbinaryfile         | File                         | value     | binary1.txt.zip           |            |                       |         |          | binary1.txt               |
+      | fieldName                    | label1    | value1                    | label2     | value2                | label3  | value3   | contentItemName           |
+      | Selection                    | value     | Test-value                |            |                       |         |          | Test-value                |
+      | Map location                 | latitude  | 32                        | longitude  | 132                   | address | Acapulco | Acapulco                  |
+      | Authors                      | name      | Test Name                 | email      | email@example.com     |         |          | Test Name                 |
+      | Checkbox                     | value     | true                      |            |                       |         |          | 1                         |
+      | Content relation (single)    | value     | Media/Images              |            |                       |         |          | Images                    |
+      | Content relations (multiple) | firstItem | Media/Images              | secondItem | Media/Files           |         |          | Images Files              |
+      | Country                      | value     | Poland                    |            |                       |         |          | Poland                    |
+      | Date                         | value     | 11/23/2019                |            |                       |         |          | Saturday 23 November 2019 |
+      | Date and time                | date      | 11/23/2019                | time       | 14:45                 |         |          | Sat 2019-23-11 14:45:00   |
+      | Email address                | value     | email@example.com         |            |                       |         |          | email@example.com         |
+      | Float                        | value     | 11.11                     |            |                       |         |          | 11.11                     |
+      | ISBN                         | value     | 978-3-16-148410-0         |            |                       |         |          | 978-3-16-148410-0         |
+      | Integer                      | value     | 1111                      |            |                       |         |          | 1111                      |
+      | Keywords                     | value     | first keyword, second     |            |                       |         |          | first keyword, second     |
+      | Rich text                    | value     | Lorem ipsum dolor sit     |            |                       |         |          | Lorem ipsum dolor sit     |
+      | Text block                   | value     | Lorem ipsum dolor         |            |                       |         |          | Lorem ipsum dolor         |
+      | Text line                    | value     | Lorem ipsum               |            |                       |         |          | Lorem ipsum               |
+      | Time                         | value     | 14:45                     |            |                       |         |          | 2:45:00 pm                |
+      | URL                          | text      | Test URL                  | url        | http://www.google.com |         |          | Test URL                  |
+      | Media                        | value     | video1.mp4.zip            |            |                       |         |          | video1.mp4                |
+      | Image                        | value     | image1.png.zip            |            |                       |         |          | image1.png                |
+      | File                         | value     | binary1.txt.zip           |            |                       |         |          | binary1.txt               |
 
   @javascript @common
   Scenario Outline: Edit content item with given field

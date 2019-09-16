@@ -9,6 +9,9 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\LoginPage;
 use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 use OutOfBoundsException;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 /** Context for authentication actions */
 class AuthenticationContext extends BusinessContext
@@ -44,5 +47,17 @@ class AuthenticationContext extends BusinessContext
 
         $password = $this->userCredentials[$username];
         $loginPage->login($username, $password);
+    }
+
+    /** 
+     * @Given I regenerate GraphQL schema
+     */
+    public function test(): void
+    {
+        $application = new Application($this->kernel);
+        $application->setAutoExit(false);
+        $input = new ArrayInput(['command' => "ezplatform:graphql:generate-schema", '--env' => 'behat']);
+        $output = new BufferedOutput();
+        $application->run($input, $output);
     }
 }
