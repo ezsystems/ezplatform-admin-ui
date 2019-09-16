@@ -80,29 +80,6 @@ class NotificationController extends Controller
     }
 
     /**
-     * @deprecated Deprecated in 1.2 and will be removed in 3.0. Please use NotificationController::renderNotificationsPageAction instead.
-     *
-     * @param int $offset
-     * @param int $limit
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function renderNotificationsAction(int $offset, int $limit): Response
-    {
-        $notifications = $this->notificationService->loadNotifications($offset, $limit);
-
-        $html = '';
-        foreach ($notifications as $notification) {
-            if ($this->registry->hasRenderer($notification->type)) {
-                $renderer = $this->registry->getRenderer($notification->type);
-                $html .= $renderer->render($notification);
-            }
-        }
-
-        return new Response($html);
-    }
-
-    /**
      * @param int $page
      *
      * @return \Symfony\Component\HttpFoundation\Response
