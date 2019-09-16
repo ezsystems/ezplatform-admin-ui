@@ -12,10 +12,13 @@ use OutOfBoundsException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Behat\Symfony2Extension\Context\KernelDictionary;
 
 /** Context for authentication actions */
 class AuthenticationContext extends BusinessContext
 {
+    use KernelDictionary;
+
     /** @var array Dictionary of known user logins and their passwords */
     private $userCredentials = [
         'admin' => 'publish',
@@ -54,7 +57,7 @@ class AuthenticationContext extends BusinessContext
      */
     public function test(): void
     {
-        $application = new Application($this->kernel);
+        $application = new Application($this->getKernel());
         $application->setAutoExit(false);
         $input = new ArrayInput(['command' => "ezplatform:graphql:generate-schema", '--env' => 'behat']);
         $output = new BufferedOutput();
