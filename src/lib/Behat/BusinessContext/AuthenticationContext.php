@@ -65,12 +65,12 @@ class AuthenticationContext extends BusinessContext
         $content = $output->fetch();
         var_dump($content);
 
-        // $application = new Application($this->getKernel());
-        // $application->setAutoExit(false);
-        // $input = new ArrayInput(['command' => "cache:clear"]);
-        // $output = new BufferedOutput();
-        // $application->run($input, $output);
-        // $content = $output->fetch();
-        // var_dump($content);
+        $application = new Application($this->getKernel());
+        $application->setAutoExit(false);
+        $input = new ArrayInput(['command' => "cache:clear"]);
+        $output = new BufferedOutput();
+        $application->run($input, $output);
+        $content = $output->fetch();
+        var_dump($content);
     }
 }
