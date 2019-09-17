@@ -62,5 +62,7 @@ class AuthenticationContext extends BusinessContext
         $input = new ArrayInput(['command' => "ezplatform:graphql:generate-schema", '--env' => 'behat']);
         $output = new BufferedOutput();
         $application->run($input, $output);
+        $content = $output->fetch();
+        var_dump($content);
     }
 }
