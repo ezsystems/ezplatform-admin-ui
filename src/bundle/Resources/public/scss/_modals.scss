@@ -34,6 +34,12 @@
     }
 }
 
+.ez-modal--trash-container {
+    .ez-toggle-btn-state-checkbox {
+        margin-left: calculateRem(30px);
+    }
+}
+
 .ez-trash-list-view {
     .ez-modal--send-to-trash {
         .modal-body {
