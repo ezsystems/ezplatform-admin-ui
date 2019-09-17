@@ -52,15 +52,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            {% if pager.count is same as(0) %}
-                                <tr>
-                                    <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
-                                        <span class="mb-0 py-1 pl-0">
-                                            {{ 'drafts.list.empty'|trans|desc('The draft list is empty. Any Content draft you create will end up here.') }}
-                                        </span>
-                                    </td>
-                                </tr>
-                            {% else %}
                                 {% for row in pager.currentPageResults %}
                                     {% if row.isAccessible %}
                                         {% set content_draft_edit_url = content_is_user|default(false) ? 'ez_user_update' : 'ez_content_draft_edit' %}
@@ -112,8 +103,15 @@
                                             </td>
                                         </tr>
                                     {% endif %}
+                                {% else %}
+                                    <tr>
+                                        <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
+                                        <span class="mb-0 py-1 pl-0">
+                                            {{ 'drafts.list.empty'|trans|desc('The draft list is empty. Any Content draft you create will end up here.') }}
+                                        </span>
+                                        </td>
+                                    </tr>
                                 {% endfor %}
-                            {% endif %}
                             </tbody>
                         </table>
                     </div>

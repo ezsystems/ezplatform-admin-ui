@@ -25,7 +25,7 @@ class ContentDraftListDataset
     /** @var \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory */
     private $valueFactory;
 
-    /** @var array */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Value\Content\ContentDraftInterface[] */
     private $data = [];
 
     /**
@@ -83,7 +83,7 @@ class ContentDraftListDataset
     }
 
     /**
-     * @return array
+     * @return \EzSystems\EzPlatformAdminUi\UI\Value\Content\ContentDraftInterface[]
      */
     public function getContentDrafts(): array
     {
