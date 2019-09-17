@@ -29,6 +29,10 @@ matrix:
       env:
       - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
       - BEHAT_OPTS="--profile=adminui --suite=adminui"
+    - name: "Admin-UI tests on Clean P"
+      env:
+      - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
+      - BEHAT_OPTS="--profile=adminui --suite=adminui --mode=behat"
 
 notifications:
   slack:

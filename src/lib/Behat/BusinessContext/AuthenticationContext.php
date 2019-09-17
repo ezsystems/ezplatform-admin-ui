@@ -59,18 +59,18 @@ class AuthenticationContext extends BusinessContext
     {
         $application = new Application($this->getKernel());
         $application->setAutoExit(false);
-        $input = new ArrayInput(['command' => "ezplatform:graphql:generate-schema", '--env' => 'behat']);
+        $input = new ArrayInput(['command' => "ezplatform:graphql:generate-schema"]);
         $output = new BufferedOutput();
         $application->run($input, $output);
         $content = $output->fetch();
         var_dump($content);
 
-        $application = new Application($this->getKernel());
-        $application->setAutoExit(false);
-        $input = new ArrayInput(['command' => "cache:clear"]);
-        $output = new BufferedOutput();
-        $application->run($input, $output);
-        $content = $output->fetch();
-        var_dump($content);
+        // $application = new Application($this->getKernel());
+        // $application->setAutoExit(false);
+        // $input = new ArrayInput(['command' => "cache:clear"]);
+        // $output = new BufferedOutput();
+        // $application->run($input, $output);
+        // $content = $output->fetch();
+        // var_dump($content);
     }
 }
