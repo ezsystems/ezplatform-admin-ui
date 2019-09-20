@@ -107,8 +107,8 @@
         <note>key: content.hide.modal.title</note>
       </trans-unit>
       <trans-unit id="0f260745fb36618170e86bd6407bb2facd3a05a1" resname="content.hide.modal.warning_content_used_by_other_content">
-        <source>This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</source>
-        <target state="new">This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</target>
+        <source>This item is being used by other content item(s). To avoid errors, please update or remove all related objects listed in the Relations tab.</source>
+        <target state="new">This item is being used by other content item(s). To avoid errors, please update or remove all related objects listed in the Relations tab.</target>
         <note>key: content.hide.modal.warning_content_used_by_other_content</note>
       </trans-unit>
       <trans-unit id="fb19ae886e63bac3aa3b851ac00aae8a3b777992" resname="content.in_trash">
