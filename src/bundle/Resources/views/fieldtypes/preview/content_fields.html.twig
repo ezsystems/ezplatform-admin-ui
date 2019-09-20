@@ -208,6 +208,25 @@
             </tr>
         </tbody>
     </table>
+
+    {% if parameters['password_expires_at'] %}
+        <p class="mt-2 mb-0">
+            {% if parameters['is_password_expired'] %}
+                {{ 'ezuser.password_already_expired'|trans|desc('Password has expired') }}
+            {% else %}
+                {% set password_expire_in = parameters['password_expires_in'] %}
+
+                {% if password_expire_in.d > 0 %}
+                    {{ 'ezuser.password_expires_in'|trans({
+                        '%count%': password_expire_in.d + (password_expire_in.h >= 12 ? 1 : 0)
+                    })|desc('Current password <b>expires in %count% days</b>')|raw }}
+                {% else %}
+                    {{ 'ezuser.password_expires_today'|trans({
+                    })|desc('Current password <b>expires today</b>')|raw }}
+                {% endif %}
+            {% endif %}
+        </p>
+    {% endif %}
 </div>
 {% endapply %}
 {% endblock %}
