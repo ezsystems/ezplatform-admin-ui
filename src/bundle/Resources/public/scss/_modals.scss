@@ -1,5 +1,6 @@
 .ez-modal--send-to-trash,
-.ez-modal--trash-container {
+.ez-modal--trash-container,
+.ez-modal--trash-with-asset {
     .modal-dialog {
         background-color: $ez-ground-base-medium;
         border-radius: calculateRem(4px);
@@ -36,6 +37,12 @@
 
 .ez-modal--trash-container {
     .ez-toggle-btn-state-checkbox {
+        margin-left: calculateRem(30px);
+    }
+}
+
+.ez-modal--trash-with-asset {
+    .ez-trash-with-asset-checkbox-list {
         margin-left: calculateRem(30px);
     }
 }
@@ -171,8 +178,7 @@
     }
 }
 
-.ez-modal--bulk-action-failed,
-.ez-modal--trash-with-asset {
+.ez-modal--bulk-action-failed {
     .modal-dialog {
         max-width: calculateRem(800px);
     }
