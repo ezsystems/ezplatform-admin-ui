@@ -344,11 +344,6 @@
         <target state="new">You are about to delete a content that has one or several asset(s) field(s) used by other content items. These assets will remain available in system.</target>
         <note>key: trash_asset.modal.message_header</note>
       </trans-unit>
-      <trans-unit id="0d57f9b91203aa4d9920e63d793b8e62c0bb242c" resname="trash_asset_single.modal.header">
-        <source>Deleting content</source>
-        <target state="new">Deleting content</target>
-        <note>key: trash_asset_single.modal.header</note>
-      </trans-unit>
       <trans-unit id="e81a14f38ebe272cb11ef90e2948a8c6602307ca" resname="trash_asset_single.modal.message">
         <source>You have the option to delete %content_name% (%content_type%) only or to also delete the assets it is using. Make your choice:</source>
         <target state="new">You have the option to delete %content_name% (%content_type%) only or to also delete the assets it is using. Make your choice:</target>
@@ -358,11 +353,6 @@
         <source>You are about to delete a content with one or several asset(s) field(s).</source>
         <target state="new">You are about to delete a content with one or several asset(s) field(s).</target>
         <note>key: trash_asset_single.modal.message_main</note>
-      </trans-unit>
-      <trans-unit id="a70d984d62d43229009fefdbfdc740199ede75ca" resname="trash_container.modal.header">
-        <source>Deleting content</source>
-        <target state="new">Deleting content</target>
-        <note>key: trash_container.modal.header</note>
       </trans-unit>
       <trans-unit id="1e6a1d97cca01a288e47d2d14479274b90e6c6c1" resname="trash_container.modal.message_main">
         <source>Deleting %content_name% will also delete its sub-items, under its location(s). To confirm, please check below</source>
