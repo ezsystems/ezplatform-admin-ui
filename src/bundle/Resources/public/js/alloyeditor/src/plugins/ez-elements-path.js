@@ -60,13 +60,16 @@
             return;
         }
 
-        editor.fire('editorInteraction', {
-            nativeEvent: {
-                editor: editor,
-                target: element.$,
-            },
-            selectionData: editor.getSelectionData(),
-        });
+        const selectionData = editor.getSelectionData();
+        if (selectionData) {
+            editor.fire('editorInteraction', {
+                nativeEvent: {
+                    editor: editor,
+                    target: element.$,
+                },
+                selectionData: selectionData,
+            });
+        }
     };
     const getElementLabel = (editor, element) => {
         const widgetIdentifier = getWidgetIdentifier(editor, element);

@@ -39,7 +39,7 @@ export default class EzCustomTagConfig extends EzConfigBase {
      * @return {Boolean}
      */
     test(payload) {
-        const element = payload.data.selectionData.element;
+        const element = payload.data.selectionData && payload.data.selectionData.element;
 
         return !!(element && element.$.dataset.ezname === this.name);
     }
