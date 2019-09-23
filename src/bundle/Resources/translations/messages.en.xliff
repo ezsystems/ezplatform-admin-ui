@@ -11,6 +11,31 @@
         <target state="new">Close</target>
         <note>key: alert.close</note>
       </trans-unit>
+      <trans-unit id="8ace6daf300d4e12a28054d996c185db9ce7fe91" resname="authentication.credentials_expire_in.warning">
+        <source>Your password will expire in %days% days. Consider updating it in User Settings/My Account Settings.</source>
+        <target state="new">Your password will expire in %days% days. Consider updating it in User Settings/My Account Settings.</target>
+        <note>key: authentication.credentials_expire_in.warning</note>
+      </trans-unit>
+      <trans-unit id="e524fb7941a99d5c26d355dbf015226241e807a7" resname="authentication.credentials_expire_today.warning">
+        <source>Your password will expire today. Consider updating it in User Settings/My Account Settings.</source>
+        <target state="new">Your password will expire today. Consider updating it in User Settings/My Account Settings.</target>
+        <note>key: authentication.credentials_expire_today.warning</note>
+      </trans-unit>
+      <trans-unit id="c9a7a0dd7518550634ea6873dcc815d4ec30c1e2" resname="authentication.credentials_expired">
+        <source>Your password has expired</source>
+        <target state="new">Your password has expired</target>
+        <note>key: authentication.credentials_expired</note>
+      </trans-unit>
+      <trans-unit id="be4c13cda3e93a1e8cb05145c0dc6c3780c40c66" resname="authentication.credentials_expired.message">
+        <source>For security reasons, your password has expired and needs to be changed. An email has been sent to you with instructions.</source>
+        <target state="new">For security reasons, your password has expired and needs to be changed. An email has been sent to you with instructions.</target>
+        <note>key: authentication.credentials_expired.message</note>
+      </trans-unit>
+      <trans-unit id="2b3f00f63c14c6dc9300d54b42159218f6b5f260" resname="authentication.credentials_expired.reset_password">
+        <source>Reset password</source>
+        <target state="new">Reset password</target>
+        <note>key: authentication.credentials_expired.reset_password</note>
+      </trans-unit>
       <trans-unit id="d2293b387ecddbc6173fd579abd37873fcbc5e97" resname="authentication.forgot_password">
         <source>Forgot password?</source>
         <target state="new">Forgot password?</target>
@@ -82,8 +107,8 @@
         <note>key: content.hide.modal.title</note>
       </trans-unit>
       <trans-unit id="0f260745fb36618170e86bd6407bb2facd3a05a1" resname="content.hide.modal.warning_content_used_by_other_content">
-        <source>This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</source>
-        <target state="new">This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</target>
+        <source>This item is being used by other content item(s). To avoid errors, please update or remove all related objects listed in the Relations tab.</source>
+        <target state="new">This item is being used by other content item(s). To avoid errors, please update or remove all related objects listed in the Relations tab.</target>
         <note>key: content.hide.modal.warning_content_used_by_other_content</note>
       </trans-unit>
       <trans-unit id="fb19ae886e63bac3aa3b851ac00aae8a3b777992" resname="content.in_trash">
