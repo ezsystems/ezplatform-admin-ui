@@ -19,7 +19,7 @@
         let currentWidth = moreTabWidth + toBeActiveTabWidth;
         const hiddenPrimaryTabs = [];
 
-        for (let i = 0; i < primaryTabs.length; ++i) {
+        for (let i = 0; i < primaryTabs.length; i++) {
             const tab = primaryTabs[i];
             const navLink = tab.querySelector('.nav-link');
             const isLastTab = i === primaryTabs.length - 1;
@@ -89,10 +89,7 @@
         moreTab.classList.toggle('ez-tabs__tab--highlighted', !!activeTabFromSecondaryMenu);
     };
 
-    const tabIdMatch = global.location.hash.match(/^#(.*)#tab/i);
-    const tabId = tabIdMatch ? tabIdMatch[1] : null;
-    const activeNavLink = tabId ? tabsList.querySelector(`.ez-tabs__tab--primary a[href="#${tabId}"]`) : null;
-    adaptTabs(activeNavLink);
+    adaptTabs();
 
     doc.addEventListener('click', handleClickOutsideSecondaryMenu);
     moreTabLink.addEventListener('click', () => {
