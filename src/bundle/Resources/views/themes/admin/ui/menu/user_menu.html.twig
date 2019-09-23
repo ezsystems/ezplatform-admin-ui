@@ -23,9 +23,9 @@
 {% block linkElement %}
     {% import _self as knp_menu %}
     <a href="{{ item.uri }}"{{ knp_menu.attributes(item.linkAttributes) }}>
-        {% if item.getExtra('icon') is not null %}
+        {% if item.getExtra('icon_url') is not null %}
             <svg class="ez-icon ez-icon--small-medium ez-user-menu__item-icon" aria-hidden="true">
-                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ item.getExtra('icon') }}"></use>
+                <use xlink:href="{{ item.getExtra('icon_url') }}"></use>
             </svg>
         {% endif %}
         <span class="ez-user-menu__item-label">
