@@ -67,7 +67,6 @@
             box-shadow: 0 calculateRem(6px) calculateRem(6px) 0 rgba(51, 51, 51, 0.3);
             transform-origin: top center;
             white-space: nowrap;
-
             background-clip: content-box;
             z-index: -1;
 
@@ -89,14 +88,8 @@
                 grid-column-gap: calculateRem(8px);
                 grid-template-areas: 'icon label';
                 padding: calculateRem(4px) calculateRem(4px);
-
                 color: $ez-black;
                 font-size: calculateRem(14px);
-
-                .ez-icon--small-medium {
-                    width: calculateRem(20px);
-                    height: calculateRem(20px);
-                }
             }
 
             &:hover {
