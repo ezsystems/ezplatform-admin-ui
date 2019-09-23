@@ -38,15 +38,10 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashWithAssetData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStatesDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PoliciesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
@@ -104,15 +99,10 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashWithAssetType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateCreateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupsDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupUpdateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStatesDeleteType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PoliciesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateWithLimitationType;
@@ -1131,98 +1121,6 @@ class FormFactory
         $name = $name ?: sprintf('update-object-state-group-%d', $data->getObjectStateGroup()->id);
 
         return $this->formFactory->createNamed($name, ObjectStateGroupUpdateType::class, $data);
-    }
-
-    /**
-     * @param ObjectStateCreateData|null $data
-     * @param string|null $name
-     *
-     * @return FormInterface
-     *
-     * @deprecated since version 2.2, to be removed in 3.0. Use Use \Symfony\Component\Form\FormFactoryInterface::create directly instead.
-     */
-    public function createObjectState(
-        ?ObjectStateCreateData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(ObjectStateCreateType::class);
-
-        return $this->formFactory->createNamed(
-            $name,
-            ObjectStateCreateType::class,
-            $data ?? new ObjectStateCreateData()
-        );
-    }
-
-    /**
-     * @param ObjectStateDeleteData|null $data
-     * @param string|null $name
-     *
-     * @return FormInterface
-     *
-     * @deprecated since version 2.2, to be removed in 3.0. Use Use \Symfony\Component\Form\FormFactoryInterface::create directly instead.
-     */
-    public function deleteObjectState(
-        ObjectStateDeleteData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: sprintf('delete-object-state-%d', $data->getObjectState()->id);
-
-        return $this->formFactory->createNamed($name, ObjectStateDeleteType::class, $data);
-    }
-
-    /**
-     * @param ObjectStatesDeleteData|null $data
-     * @param string|null $name
-     *
-     * @return FormInterface
-     *
-     * @throws InvalidOptionsException
-     *
-     * @deprecated since version 2.2, to be removed in 3.0. Use Use \Symfony\Component\Form\FormFactoryInterface::create directly instead.
-     */
-    public function deleteObjectStates(
-        ObjectStatesDeleteData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(ObjectStatesDeleteType::class);
-
-        return $this->formFactory->createNamed($name, ObjectStatesDeleteType::class, $data);
-    }
-
-    /**
-     * @param ObjectStateUpdateData|null $data
-     * @param string|null $name
-     *
-     * @return FormInterface
-     *
-     * @deprecated since version 2.2, to be removed in 3.0. Use Use \Symfony\Component\Form\FormFactoryInterface::create directly instead.
-     */
-    public function updateObjectState(
-        ObjectStateUpdateData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: sprintf('update-object-state-%d', $data->getObjectState()->id);
-
-        return $this->formFactory->createNamed($name, ObjectStateUpdateType::class, $data);
-    }
-
-    /**
-     * @param ContentObjectStateUpdateData|null $data
-     * @param string|null $name
-     *
-     * @return FormInterface
-     *
-     * @deprecated since version 2.2, to be removed in 3.0. Use Use \Symfony\Component\Form\FormFactoryInterface::create directly instead.
-     */
-    public function updateContentObjectState(
-        ContentObjectStateUpdateData $data,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: sprintf('update-content-%d-object-state-group-%d', $data->getContentInfo()->id,
-            $data->getObjectStateGroup()->id);
-
-        return $this->formFactory->createNamed($name, ContentObjectStateUpdateType::class, $data);
     }
 
     /**
