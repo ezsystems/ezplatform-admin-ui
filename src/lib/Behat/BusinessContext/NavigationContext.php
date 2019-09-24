@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use EzSystems\Behat\Core\Environment\EnvironmentConstants;
+use EzSystems\Behat\Core\Behat\ArgumentParser;
 use EzSystems\EzPlatformPageBuilder\Tests\Behat\PageObject\PageBuilderEditor;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Breadcrumb;
 use EzSystems\Behat\Browser\Factory\ElementFactory;
@@ -18,6 +19,16 @@ use PHPUnit\Framework\Assert;
 /** Context for general navigation actions */
 class NavigationContext extends BusinessContext
 {
+    private $argumentParser;
+
+    /**
+     * @injectService $argumentParser @EzSystems\Behat\Core\Behat\ArgumentParser
+     */
+    public function __construct(ArgumentParser $argumentParser)
+    {
+        $this->argumentParser = $argumentParser;
+    }
+
     /**
      * @Given I open :pageName page
      */
@@ -87,6 +98,7 @@ class NavigationContext extends BusinessContext
     {
         $contentPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $contentName);
         if ($path !== null) {
+            $path = $this->argumentParser->replaceRootKeyword($path);
             $contentPage->navigateToPath($path);
         }
         $contentPage->goToSubItem($contentName, $contentType);

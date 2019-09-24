@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
 use EzSystems\Behat\Core\Environment\EnvironmentConstants;
+use EzSystems\Behat\Core\Behat\ArgumentParser;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Breadcrumb;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Dialog;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\DraftConflictDialog;
@@ -22,6 +23,16 @@ use PHPUnit\Framework\Assert;
 
 class ContentViewContext extends BusinessContext
 {
+    private $argumentParser;
+
+    /**
+     * @injectService $argumentParser @EzSystems\Behat\Core\Behat\ArgumentParser
+     */
+    public function __construct(ArgumentParser $argumentParser)
+    {
+        $this->argumentParser = $argumentParser;
+    }
+
     /**
      * @Given I start creating a new content :contentType
      */
@@ -60,7 +71,7 @@ class ContentViewContext extends BusinessContext
 
         $udw = ElementFactory::createElement($this->browserContext, UniversalDiscoveryWidget::ELEMENT_NAME);
         $udw->verifyVisibility();
-        $udw->selectContent($itemPath);
+        $udw->selectContent($this->argumentParser->replaceRootKeyword($itemPath));
         $udw->confirm();
     }
 
@@ -124,6 +135,7 @@ class ContentViewContext extends BusinessContext
     public function verifyImOnContentItemPage(string $contentName, string $contentType, ?string $path = null)
     {
         $path = !$path ? $contentName : $path . '/' . $contentName;
+        $path = $this->argumentParser->replaceRootKeyword($path);
         $spacedPath = str_replace('/', ' ', $path);
 
         $contentPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $contentName);

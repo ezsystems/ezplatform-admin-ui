@@ -52,6 +52,10 @@ class UpperMenu extends Element
      */
     public function goToSubTab(string $tabName): void
     {
+        $this->context->waitUntil(5, function () use ($tabName) {
+            return $this->context->getElementByText($tabName, $this->fields['submenuButton']) !== null;
+        });
+
         $this->context->getElementByText($tabName, $this->fields['submenuButton'])->click();
     }
 
