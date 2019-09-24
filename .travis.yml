@@ -29,6 +29,11 @@ matrix:
       env:
       - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
       - BEHAT_OPTS="--profile=adminui --suite=adminui"
+    - name: "Admin UI tests using different personas"
+      env:
+        - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
+        - SETUP_BEHAT_OPTS="--profile=setup --suite=personas"
+        - BEHAT_OPTS="--profile=adminui --suite=personas"
 
 notifications:
   slack:
@@ -51,6 +56,9 @@ install:
   - if [ "${CHECK_CS}" == "1" -o "${PHPUNIT_CONFIG}" != "" ]; then travis_retry composer install --prefer-dist --no-interaction --no-suggest ; fi
   # Prepare whole environment if needed
   - if [ "${BEHAT_OPTS}" != "" ]; then ./.travis/prepare_ezplatform.sh ${INSTALL_EZ_INSTALL_TYPE}; fi
+
+before_script:
+   - if [ "${SETUP_BEHAT_OPTS}" != "" ] ; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "bin/ezbehat $SETUP_BEHAT_OPTS" ; fi
 
 script:
   - if [ "${CHECK_CS}" == "1" ] ; then ./vendor/bin/php-cs-fixer fix -v --dry-run --show-progress=estimating ; fi

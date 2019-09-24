@@ -73,3 +73,20 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\TrashContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\DashboardContext
+
+        personas:
+            paths:
+                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/personas'
+            contexts:
+                - EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext
+                - EzSystems\EzPlatformAdminUi\Behat\Helper\Hooks
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AuthenticationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NavigationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentViewContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentUpdateContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentPreviewContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RightMenuContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\LeftMenuContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\TrashContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
