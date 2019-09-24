@@ -161,6 +161,11 @@
         <target state="new">%children_count% content items under location %content_name%</target>
         <note>key: location_trash_form.trash_container</note>
       </trans-unit>
+      <trans-unit id="f75f244896962e9bc1bbb30a1bbaf3e5914b95f2" resname="location_trash_form.trash_when_relation">
+        <source>Content '%content_name%' will no longer be avaialble under %reverse_relations% other content</source>
+        <target state="new">Content '%content_name%' will no longer be available under %reverse_relations% other content</target>
+        <note>key: location_trash_form.trash_when_relation</note>
+      </trans-unit>
       <trans-unit id="2598fe0050f38f3c02014a404ed14aee248e27d1" resname="location_trash_form.trash_with_asset">
         <source>Delete %content_name% (%content_type%) and its related image assets</source>
         <target state="new">Delete %content_name% (%content_type%) and its related image assets</target>

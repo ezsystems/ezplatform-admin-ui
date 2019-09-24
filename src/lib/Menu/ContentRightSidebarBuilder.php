@@ -201,15 +201,15 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $this->searchService
         ))->and((new IsRoot())->not())->isSatisfiedBy($location);
 
-        if ((new ContentHaveAssetRelation($this->contentService))->isSatisfiedBy($content)) {
-            $sendToTrashAttributes['data-target'] = '#trash-with-asset-modal';
-        }
-
-        $hasChildren = (new HasChildren($this->locationService))->isSatisfiedBy($location);
-
-        if ($contentType->isContainer && $hasChildren) {
-            $sendToTrashAttributes['data-target'] = '#trash-container-modal';
-        }
+//        if ((new ContentHaveAssetRelation($this->contentService))->isSatisfiedBy($content)) {
+//            $sendToTrashAttributes['data-target'] = '#trash-with-asset-modal';
+//        }
+//
+//        $hasChildren = (new HasChildren($this->locationService))->isSatisfiedBy($location);
+//
+//        if ($contentType->isContainer && $hasChildren) {
+//            $sendToTrashAttributes['data-target'] = '#trash-container-modal';
+//        }
 
         $contentIsUser = (new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType);
         $contentIsUserGroup = (new ContentTypeIsUserGroup($this->userGroupContentTypeIdentifier))->isSatisfiedBy($contentType);

@@ -11,6 +11,7 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ComponentPass
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SecurityLoginPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TwigFormThemesPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ViewBuilderRegistryPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser;

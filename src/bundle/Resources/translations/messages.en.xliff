@@ -359,6 +359,11 @@
         <target state="new">Deleting %content_name% will also delete its sub-items, under its location(s). To confirm, please check below</target>
         <note>key: trash_container.modal.message_main</note>
       </trans-unit>
+      <trans-unit id="ef4df0dede01e561e75568aa128a8092cbbee66a" resname="trash_container.modal.message_relations">
+        <source>Content '%content_name%' have '%relations%' relation and is used in '%reverse_relations%' other content.</source>
+        <target state="new">Content '%content_name%' have '%relations%' and is used in '%reverse_relations%' other content.</target>
+        <note>key: trash_container.modal.message_relations</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

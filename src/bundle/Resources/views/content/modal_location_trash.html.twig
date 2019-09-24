@@ -10,13 +10,14 @@
                     </svg>
                 </button>
             </div>
+            {{ form_start(form, {'action': path('ezplatform.location.trash')}) }}
             <div class="modal-body">
                 <p class="ez-modal-body__main">
-                    {{ 'trash.modal.message'|trans|desc('Are you sure you want to send this content item to trash?') }}
+                    {{ form_widget(form.info_text) }}
                 </p>
+                {{ form_widget(form.trash_options) }}
             </div>
             <div class="modal-footer">
-                {{ form_start(form, {'action': path('ezplatform.location.trash')}) }}
                 <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">
                     {{ 'trash.form.cancel'|trans|desc('Cancel') }}
                 </button>

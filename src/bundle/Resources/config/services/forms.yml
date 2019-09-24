@@ -4,6 +4,11 @@ services:
         autoconfigure: true
         public: false
 
+    _instanceof:
+        # services whose classes are instances of CustomInterface will be tagged automatically
+        EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\TrashLocationStrategy:
+            tags: ['form.trash_location_strategy']
+
     EzSystems\EzPlatformAdminUi\Form\SubmitHandler: ~
 
     EzSystems\EzPlatformAdminUi\Form\Factory\:
@@ -17,6 +22,12 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\EventListener\:
         resource: '../../../lib/Form/EventListener'
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\:
+        resource: '../../../lib/Form/TrashLocationStrategy'
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\OptionsFactory:
+        arguments: [!tagged form.trash_location_strategy]
 
     EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
         tags:
