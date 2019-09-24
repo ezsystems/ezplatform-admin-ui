@@ -1,55 +1,77 @@
-.ez-main-nav {    
+.ez-main-nav {
     .ez-user-menu {
         position: relative;
         cursor: pointer;
         z-index: 1050;
 
         &__name-wrapper {
-            padding: .5rem 2rem .5rem 0;
-
-            .ez-user-menu__name {
-                font-size: calculateRem(12px);
-            }
+            display: flex;
+            height: calculateRem(58px);
+            width: calculateRem(200px);
+            padding: calculateRem(8px) calculateRem(24px) calculateRem(8px) calculateRem(8px);
+            user-select: none;
+            justify-content: flex-end;
 
             &:before,
             &:after {
-                content: "";
-                height: 10px;
-                width: 2px;
+                content: '';
+                height: calculateRem(10px);
+                width: calculateRem(2px);
                 position: absolute;
                 top: 50%;
-                right: 1rem;
+                right: calculateRem(11px);
                 background-color: $ez-black;
             }
 
             &:before {
-                transform: translate(3px, -50%)  rotate(-135deg);
+                transform: translate(3px, -50%) rotate(-135deg);
             }
 
             &:after {
-                transform: translate(-3px, -50%)  rotate(135deg);
+                transform: translate(-3px, -50%) rotate(135deg);
             }
+
+            &--active {
+                background-color: $ez-white;
+            }
+
+            transition: background-color 0.3s $ez-admin-transition;
+        }
+
+        &__name {
+            display: flex;
+            align-items: center;
+            text-align: right;
+            font-size: calculateRem(12px);
+        }
+
+        &__avatar-wrapper {
+            margin-left: calculateRem(6px);
+            flex-shrink: 0;
         }
 
         &__avatar {
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: calculateRem(40px);
+            height: calculateRem(40px);
         }
 
         &__items {
+            width: 100%;
             display: block;
             position: absolute;
-            top: 100%;
+            padding-top: calculateRem(6px);
+            top: calc(100% - #{calculateRem(6px)});
             right: 0;
             background-color: $ez-white;
-            box-shadow: 0 2px 4px 0 rgba(0,0,0,.45);
-            height: auto;
+            box-shadow: 0 calculateRem(6px) calculateRem(6px) 0 rgba(51, 51, 51, 0.3);
             transform-origin: top center;
-            transition: all .2s $ez-admin-transition;
             white-space: nowrap;
+            background-clip: content-box;
+            z-index: -1;
 
             &--hidden {
+                padding-top: 0;
                 height: 0;
                 overflow: hidden;
             }
@@ -58,15 +80,16 @@
         &__item {
             width: 100%;
             cursor: pointer;
-            padding: 0 1.5rem;
+            padding: 0 calculateRem(16px);
 
             .nav-link {
+                display: grid;
+                grid-template-columns: calculateRem(20px) 1fr;
+                grid-column-gap: calculateRem(8px);
+                grid-template-areas: 'icon label';
+                padding: calculateRem(4px) calculateRem(4px);
                 color: $ez-black;
                 font-size: calculateRem(14px);
-            }
-
-            &:not(:last-child) {
-                border-bottom: 1px solid $ez-ground-base-dark;
             }
 
             &:hover {
@@ -77,6 +100,20 @@
                     color: $ez-black;
                 }
             }
+
+            &:last-child {
+                margin-bottom: calculateRem(4px);
+            }
+        }
+
+        &__item-icon {
+            grid-area: icon;
+        }
+
+        &__item-label {
+            grid-area: label;
+            white-space: normal;
+            word-break: break-word;
         }
     }
 }

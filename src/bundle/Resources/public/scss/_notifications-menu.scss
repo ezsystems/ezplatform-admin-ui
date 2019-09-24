@@ -1,12 +1,11 @@
-.ez-main-nav {    
+.ez-main-nav {
     .ez-user-menu {
-
         &__name-wrapper {
             .n-pending-notifications {
                 &:before {
                     content: attr(data-count);
-                    width: 1rem;
-                    height: 1rem;
+                    width: calculateRem(16px);
+                    height: calculateRem(16px);
                     border-radius: 50%;
                     background: $ez-color-danger;
                     position: absolute;
@@ -19,22 +18,22 @@
         }
 
         &__item {
-            
             &--notifications {
                 position: relative;
+                padding-left: calculateRem(44px);
 
                 &:before {
                     content: attr(data-count);
                     position: absolute;
-                    left: .35rem;
+                    left: calculateRem(20px);
                     top: 48%;
                     transform: translateY(-50%);
                     font-size: calculateRem(14px);
+                    font-weight: bold;
                     color: $ez-black;
                 }
 
                 &:hover {
-
                     &:before {
                         color: $ez-black;
                     }

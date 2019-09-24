@@ -24,7 +24,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInterface
 {
     const ITEM_LOGOUT = 'user__content';
-    const ITEM_CHANGE_PASSWORD = 'user__change_password';
     const ITEM_USER_SETTINGS = 'user__settings';
     const ITEM_BOOKMARK = 'user__bookmark';
     const ITEM_DRAFTS = 'user__drafts';
@@ -75,26 +74,6 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 
         $token = $this->tokenStorage->getToken();
         if (null !== $token && is_object($token->getUser())) {
-            $menu->addChild(
-                $this->createMenuItem(self::ITEM_CHANGE_PASSWORD, ['route' => 'ezplatform.user_profile.change_password'])
-            );
-
-            $menu->addChild(
-                $this->createMenuItem(self::ITEM_USER_SETTINGS, ['route' => 'ezplatform.user_settings.list'])
-            );
-
-            $menu->addChild(
-                $this->createMenuItem(self::ITEM_BOOKMARK, ['route' => 'ezplatform.bookmark.list'])
-            );
-
-            if ($this->permissionResolver->hasAccess('content', 'versionread') !== false) {
-                $menu->addChild(
-                    $this->createMenuItem(self::ITEM_DRAFTS, [
-                        'route' => 'ezplatform.content_draft.list',
-                    ])
-                );
-            }
-
             $menu->addChild(self::ITEM_NOTIFICATION, [
                 'attributes' => [
                     'class' => 'ez-user-menu__item--notifications',
@@ -104,11 +83,45 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                 'extras' => [
                     'translation_domain' => 'notifications',
                     'template' => '@ezdesign/account/notifications/modal.html.twig',
+                    'orderNumber' => 10,
                 ],
             ]);
 
             $menu->addChild(
-                $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout'])
+                $this->createMenuItem(self::ITEM_BOOKMARK, [
+                    'route' => 'ezplatform.bookmark.list',
+                    'extras' => [
+                        'icon_url' => '/bundles/ezplatformadminui/img/ez-icons.svg#bookmark-manager',
+                        'orderNumber' => 20,
+                    ], ])
+            );
+
+            if ($this->permissionResolver->hasAccess('content', 'versionread') !== false) {
+                $menu->addChild(
+                    $this->createMenuItem(self::ITEM_DRAFTS, [
+                        'route' => 'ezplatform.content_draft.list',
+                        'extras' => [
+                            'icon_url' => '/bundles/ezplatformadminui/img/ez-icons.svg#content-draft',
+                            'orderNumber' => 30,
+                        ],
+                    ])
+                );
+            }
+
+            $menu->addChild(
+                $this->createMenuItem(self::ITEM_USER_SETTINGS, [
+                    'route' => 'ezplatform.user_settings.list',
+                    'extras' => [
+                        'icon_url' => '/bundles/ezplatformadminui/img/ez-icons.svg#user',
+                        'orderNumber' => 50,
+                    ], ])
+            );
+
+            $menu->addChild(
+                $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout', 'extras' => [
+                    'icon_url' => '/bundles/ezplatformadminui/img/ez-icons.svg#logout',
+                    'orderNumber' => 60,
+                ]])
             );
         }
 
