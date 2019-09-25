@@ -1,6 +1,7 @@
 imports:
     - { resource: tabs/locationview.yaml }
     - { resource: tabs/content_type.yaml }
+    - { resource: tabs/systeminfo.yaml }
 
 services:
     _defaults:
@@ -8,18 +9,8 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\TabExtension:
-        arguments:
-            $defaultTemplate: '%ezplatform.content_view.tabs.default_template%'
-
-    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ClassTwigExtension: ~
-
     EzSystems\EzPlatformAdminUi\Tab\TabRegistry:
         lazy: true
-
-    EzSystems\EzPlatformAdminUi\Tab\SystemInfo\TabFactory:
-        arguments:
-            $httpKernelRuntime: '@twig.runtime.httpkernel'
 
     EzSystems\EzPlatformAdminUi\Tab\Event\Subscriber\:
         resource: "../../../lib/Tab/Event/Subscriber/*"

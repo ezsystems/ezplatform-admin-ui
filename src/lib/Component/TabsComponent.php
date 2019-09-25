@@ -6,74 +6,50 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
+namespace EzSystems\EzPlatformAdminUi\Component;
 
-use EzSystems\EzPlatformAdminUi\UI\Service\TabService;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvent;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;
 use EzSystems\EzPlatformAdminUi\Tab\TabGroup;
 use EzSystems\EzPlatformAdminUi\Tab\TabInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
-class TabExtension extends AbstractExtension
+class TabsComponent implements Renderable
 {
     /** @var Environment */
     protected $twig;
-
-    /** @var TabService */
-    protected $tabService;
 
     /** @var EventDispatcherInterface */
     protected $eventDispatcher;
 
     /** @var string */
-    protected $defaultTemplate;
+    protected $template;
 
-    /**
-     * @param Environment $twig
-     * @param TabService $tabService
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param string $defaultTemplate
-     */
+    /** @var string */
+    protected $groupIdentifier;
+
+    /** @var array */
+    protected $parameters;
+
     public function __construct(
         Environment $twig,
-        TabService $tabService,
         EventDispatcherInterface $eventDispatcher,
-        string $defaultTemplate
+        string $template,
+        string $groupIdentifier,
+        array $parameters = []
     ) {
         $this->twig = $twig;
-        $this->tabService = $tabService;
         $this->eventDispatcher = $eventDispatcher;
-        $this->defaultTemplate = $defaultTemplate;
+        $this->template = $template;
+        $this->groupIdentifier = $groupIdentifier;
+        $this->parameters = $parameters;
     }
 
-    public function getFunctions()
+    public function render(array $parameters = []): string
     {
-        return [
-            new TwigFunction(
-                'ez_render_tab_group',
-                [$this, 'renderTabGroup'],
-                ['is_safe' => ['html']]
-            ),
-        ];
-    }
-
-    /**
-     * @param string $groupIdentifier
-     * @param array $parameters
-     * @param string|null $template
-     *
-     * @return string
-     */
-    public function renderTabGroup(string $groupIdentifier, array $parameters = [], ?string $template = null): string
-    {
-        $template = $template ?? $this->defaultTemplate;
-
-        $tabGroup = new TabGroup($groupIdentifier);
+        $tabGroup = new TabGroup($this->groupIdentifier);
 
         $tabGroupEvent = new TabGroupEvent();
         $tabGroupEvent->setData($tabGroup);
@@ -91,17 +67,11 @@ class TabExtension extends AbstractExtension
         }
 
         return $this->twig->render(
-            $template,
-            array_merge(['tabs' => $tabs, 'group' => $groupIdentifier], $parameters)
+            $this->template,
+            array_merge($this->parameters, $parameters, ['tabs' => $tabs, 'group' => $this->groupIdentifier])
         );
     }
 
-    /**
-     * @param TabInterface $tab
-     * @param array $parameters
-     *
-     * @return TabEvent
-     */
     private function dispatchTabPreRenderEvent(TabInterface $tab, array $parameters): TabEvent
     {
         $tabEvent = new TabEvent();
@@ -113,12 +83,6 @@ class TabExtension extends AbstractExtension
         return $tabEvent;
     }
 
-    /**
-     * @param TabInterface $tab
-     * @param array $parameters
-     *
-     * @return array
-     */
     private function composeTabParameters(TabInterface $tab, array $parameters): array
     {
         return [

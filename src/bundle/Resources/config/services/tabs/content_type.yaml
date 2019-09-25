@@ -5,3 +5,11 @@ services:
         public: true
         tags:
             - { name: ezplatform.tab, group: content-type }
+
+    ezplatform.adminui.content_type.tab_groups:
+        parent: EzSystems\EzPlatformAdminUi\Component\TabsComponent
+        arguments:
+            $template: '@@ezdesign/ui/tab/content_type.html.twig'
+            $groupIdentifier: 'content-type'
+        tags:
+            - { name: ezplatform.admin_ui.component, group: 'content-type-tab-groups' }
