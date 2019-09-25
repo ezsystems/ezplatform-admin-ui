@@ -21,7 +21,6 @@ services:
         lazy: true
         arguments:
             $template: '@@ezdesign/ui/tab/default.html.twig'
-            $parameters: []
 
     EzSystems\EzPlatformAdminUi\Component\ScriptComponent:
         abstract: true
