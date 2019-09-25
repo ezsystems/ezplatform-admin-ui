@@ -38,25 +38,17 @@ class PoliciesTab extends AbstractEventDispatchingTab implements OrderedTabInter
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
-     * @param array $userContentTypeIdentifier
-     * @param array $userGroupContentTypeIdentifier
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         DatasetFactory $datasetFactory,
         array $userContentTypeIdentifier,
         array $userGroupContentTypeIdentifier,
         PermissionResolver $permissionResolver,
         EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator, $eventDispatcher);
+        parent::__construct($twig, $translator, $order, $eventDispatcher);
 
         $this->datasetFactory = $datasetFactory;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
@@ -81,14 +73,6 @@ class PoliciesTab extends AbstractEventDispatchingTab implements OrderedTabInter
     {
         /** @Desc("Policies") */
         return $this->translator->trans('tab.name.policies', [], 'locationview');
-    }
-
-    /**
-     * @return int
-     */
-    public function getOrder(): int
-    {
-        return 900;
     }
 
     /**
@@ -117,17 +101,11 @@ class PoliciesTab extends AbstractEventDispatchingTab implements OrderedTabInter
         return $isUserOrUserGroup;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplate(): string
     {
         return '@ezdesign/content/tab/policies/tab.html.twig';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */

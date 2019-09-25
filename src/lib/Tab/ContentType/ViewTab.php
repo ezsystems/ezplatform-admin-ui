@@ -33,14 +33,6 @@ class ViewTab extends AbstractEventDispatchingTab implements OrderedTabInterface
     }
 
     /**
-     * @return int
-     */
-    public function getOrder(): int
-    {
-        return 100;
-    }
-
-    /**
      * @return string
      */
     public function getTemplate(): string

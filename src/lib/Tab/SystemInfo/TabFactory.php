@@ -23,11 +23,6 @@ class TabFactory
     /** @var TranslatorInterface */
     protected $translator;
 
-    /**
-     * @param Environment $twig
-     * @param TranslatorInterface $translator
-     * @param HttpKernelRuntime $httpKernelRuntime
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
@@ -38,19 +33,14 @@ class TabFactory
         $this->httpKernelRuntime = $httpKernelRuntime;
     }
 
-    /**
-     * @param string $collectorIdentifier
-     * @param string|null $tabIdentifier
-     *
-     * @return SystemInfoTab
-     */
-    public function createTab(string $collectorIdentifier, ?string $tabIdentifier = null): SystemInfoTab
+    public function createTab(string $collectorIdentifier, ?string $tabIdentifier = null, int $order = 0): SystemInfoTab
     {
         $tabIdentifier = $tabIdentifier ?? $collectorIdentifier;
 
         return new SystemInfoTab(
             $this->twig,
             $this->translator,
+            $order,
             $this->httpKernelRuntime,
             $tabIdentifier,
             $collectorIdentifier

@@ -28,21 +28,15 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
     /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory */
     protected $formFactory;
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory $formFactory
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         EventDispatcherInterface $eventDispatcher,
         DatasetFactory $datasetFactory,
         ContentTypeFormFactory $formFactory
     ) {
-        parent::__construct($twig, $translator, $eventDispatcher);
+        parent::__construct($twig, $translator, $order, $eventDispatcher);
 
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
@@ -63,14 +57,6 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
     {
         /** @Desc("Translations") */
         return $this->translator->trans('tab.name.translations', [], 'content_type');
-    }
-
-    /**
-     * @return int
-     */
-    public function getOrder(): int
-    {
-        return 200;
     }
 
     /**

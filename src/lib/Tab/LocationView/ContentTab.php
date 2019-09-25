@@ -30,23 +30,16 @@ class ContentTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     /** @var array */
     private $siteAccessLanguages;
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \EzSystems\EzPlatformAdminUi\Util\FieldDefinitionGroupsUtil $fieldDefinitionGroupsUtil
-     * @param \eZ\Publish\API\Repository\LanguageService $languageService
-     * @param array $siteAccessLanguages
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         FieldDefinitionGroupsUtil $fieldDefinitionGroupsUtil,
         LanguageService $languageService,
         array $siteAccessLanguages,
         EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator, $eventDispatcher);
+        parent::__construct($twig, $translator, $order, $eventDispatcher);
 
         $this->fieldDefinitionGroupsUtil = $fieldDefinitionGroupsUtil;
         $this->languageService = $languageService;
@@ -64,22 +57,11 @@ class ContentTab extends AbstractEventDispatchingTab implements OrderedTabInterf
         return $this->translator->trans('tab.name.view', [], 'locationview');
     }
 
-    public function getOrder(): int
-    {
-        return 100;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplate(): string
     {
         return '@ezdesign/content/tab/content.html.twig';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var Content $content */

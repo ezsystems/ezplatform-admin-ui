@@ -4,6 +4,7 @@ services:
         public: false
         arguments:
             $defaultPaginationLimit: '$pagination.content_draft_limit$'
+            $order: 100
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 
@@ -12,6 +13,7 @@ services:
         public: false
         arguments:
             $contentSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\ContentSubtreeQueryType'
+            $order: 200
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 
@@ -19,6 +21,7 @@ services:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         public: false
         arguments:
+            $order: 300
             $mediaSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\MediaSubtreeQueryType'
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
@@ -28,6 +31,7 @@ services:
         public: false
         arguments:
             $mediaSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\MediaSubtreeQueryType'
+            $order: 200
         tags:
             - { name: ezplatform.tab, group: dashboard-everyone }
 
@@ -36,6 +40,7 @@ services:
         public: false
         arguments:
             $contentSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\ContentSubtreeQueryType'
+            $order: 100
         tags:
             - { name: ezplatform.tab, group: dashboard-everyone }
 

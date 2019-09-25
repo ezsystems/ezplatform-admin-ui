@@ -30,23 +30,16 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         PermissionResolver $permissionResolver,
         DatasetFactory $datasetFactory,
         ContentTypeService $contentTypeService,
         EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator, $eventDispatcher);
+        parent::__construct($twig, $translator, $order, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
         $this->datasetFactory = $datasetFactory;
@@ -71,14 +64,6 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     }
 
     /**
-     * @return int
-     */
-    public function getOrder(): int
-    {
-        return 500;
-    }
-
-    /**
      * Get information about tab presence.
      *
      * @param array $parameters
@@ -93,17 +78,11 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         return $this->permissionResolver->canUser('content', 'reverserelatedlist', $parameters['content']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplate(): string
     {
         return '@ezdesign/content/tab/relations/tab.html.twig';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var Content $content */

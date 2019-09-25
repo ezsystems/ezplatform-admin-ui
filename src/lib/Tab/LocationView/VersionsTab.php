@@ -48,19 +48,10 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
-     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \eZ\Publish\API\Repository\UserService $userService
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         DatasetFactory $datasetFactory,
         FormFactory $formFactory,
         UrlGeneratorInterface $urlGenerator,
@@ -68,7 +59,7 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
         UserService $userService,
         EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator, $eventDispatcher);
+        parent::__construct($twig, $translator, $order, $eventDispatcher);
 
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
@@ -77,17 +68,11 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
         $this->userService = $userService;
     }
 
-    /**
-     * @return string
-     */
     public function getIdentifier(): string
     {
         return 'versions';
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         /** @Desc("Versions") */
@@ -95,20 +80,6 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
     }
 
     /**
-     * @return int
-     */
-    public function getOrder(): int
-    {
-        return 300;
-    }
-
-    /**
-     * Get information about tab presence.
-     *
-     * @param array $parameters
-     *
-     * @return bool
-     *
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
@@ -117,17 +88,11 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
         return $this->permissionResolver->canUser('content', 'versionread', $parameters['content']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplate(): string
     {
         return '@ezdesign/content/tab/versions/tab.html.twig';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
@@ -187,7 +152,7 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo[] $versions
      *
-     * @return array
+     * @return int[]
      */
     private function getVersionNumbers(array $versions): array
     {
@@ -197,10 +162,6 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
-     * @param array $versions
-     * @param bool $isDraftForm
-     *
      * @return \Symfony\Component\Form\FormInterface
      */
     private function createVersionRemoveForm(Location $location, array $versions, bool $isDraftForm): FormInterface

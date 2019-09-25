@@ -45,19 +45,10 @@ class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\API\Repository\URLAliasService $urlAliasService
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
-     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
-     * @param \eZ\Publish\API\Repository\LocationService $locationService
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         URLAliasService $urlAliasService,
         FormFactory $formFactory,
         DatasetFactory $datasetFactory,
@@ -65,7 +56,7 @@ class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
         PermissionResolver $permissionResolver,
         EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator, $eventDispatcher);
+        parent::__construct($twig, $translator, $order, $eventDispatcher);
 
         $this->urlAliasService = $urlAliasService;
         $this->formFactory = $formFactory;
@@ -91,25 +82,11 @@ class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
         return $this->translator->trans('tab.name.urls', [], 'locationview');
     }
 
-    /**
-     * @return int
-     */
-    public function getOrder(): int
-    {
-        return 700;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplate(): string
     {
         return '@ezdesign/content/tab/urls.html.twig';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */

@@ -47,20 +47,10 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
     /** @var int */
     private $defaultPaginationLimit;
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\API\Repository\ContentService $contentService
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \eZ\Publish\API\Repository\LocationService $locationService
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
-     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-     * @param int $defaultPaginationLimit
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         ContentService $contentService,
         ContentTypeService $contentTypeService,
         LocationService $locationService,
@@ -69,7 +59,7 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
         RequestStack $requestStack,
         int $defaultPaginationLimit
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $order);
 
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
@@ -80,17 +70,11 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
         $this->defaultPaginationLimit = $defaultPaginationLimit;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIdentifier(): string
     {
         return 'my-drafts';
-    }
 
-    /**
-     * {@inheritdoc}
-     */
+    }
     public function getName(): string
     {
         return /** @Desc("Drafts") */
@@ -98,20 +82,6 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getOrder(): int
-    {
-        return 100;
-    }
-
-    /**
-     * Get information about tab presence.
-     *
-     * @param array $parameters
-     *
-     * @return bool
-     *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function evaluate(array $parameters): bool
@@ -121,10 +91,6 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
     }
 
     /**
-     * @param array $parameters
-     *
-     * @return string
-     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

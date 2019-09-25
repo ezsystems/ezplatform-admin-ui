@@ -15,7 +15,7 @@ use Twig\Environment;
  * Base class representing Tab. Most use cases should use this abstract
  * as a parent class as it comes with translator and templating services.
  */
-abstract class AbstractTab implements TabInterface
+abstract class AbstractTab implements TabInterface, OrderedTabInterface
 {
     /** @var Environment */
     protected $twig;
@@ -23,13 +23,21 @@ abstract class AbstractTab implements TabInterface
     /** @var TranslatorInterface */
     protected $translator;
 
-    /**
-     * @param Environment $twig
-     * @param TranslatorInterface $translator
-     */
-    public function __construct(Environment $twig, TranslatorInterface $translator)
-    {
+    /** @var int */
+    protected $order;
+
+    public function __construct(
+        Environment $twig,
+        TranslatorInterface $translator,
+        int $order
+    ) {
         $this->twig = $twig;
         $this->translator = $translator;
+        $this->order = $order;
+    }
+
+    public function getOrder(): int
+    {
+        return $this->order;
     }
 }

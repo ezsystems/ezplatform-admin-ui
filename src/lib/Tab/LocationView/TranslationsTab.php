@@ -49,18 +49,10 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
     /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
-    /**
-     * @param Environment $twig
-     * @param TranslatorInterface $translator
-     * @param DatasetFactory $datasetFactory
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         DatasetFactory $datasetFactory,
         UrlGeneratorInterface $urlGenerator,
         EventDispatcherInterface $eventDispatcher,
@@ -68,7 +60,7 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
         PermissionResolver $permissionResolver,
         LanguageService $languageService
     ) {
-        parent::__construct($twig, $translator, $eventDispatcher);
+        parent::__construct($twig, $translator, $order, $eventDispatcher);
 
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
@@ -88,22 +80,11 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
         return $this->translator->trans('tab.name.translations', [], 'locationview');
     }
 
-    public function getOrder(): int
-    {
-        return 600;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplate(): string
     {
         return '@ezdesign/content/tab/translations/tab.html.twig';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var Location $location */

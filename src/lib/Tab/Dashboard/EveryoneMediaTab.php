@@ -28,21 +28,15 @@ class EveryoneMediaTab extends AbstractTab implements OrderedTabInterface
     /** @var \eZ\Publish\Core\QueryType\QueryType */
     private $mediaSubtreeQueryType;
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper $pagerContentToDataMapper
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param \eZ\Publish\Core\QueryType\QueryType $mediaSubtreeQueryType
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         PagerContentToDataMapper $pagerContentToDataMapper,
         SearchService $searchService,
         QueryType $mediaSubtreeQueryType
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $order);
 
         $this->pagerContentToDataMapper = $pagerContentToDataMapper;
         $this->searchService = $searchService;
@@ -58,11 +52,6 @@ class EveryoneMediaTab extends AbstractTab implements OrderedTabInterface
     {
         return /** @Desc("Media") */
             $this->translator->trans('tab.name.everyone_media', [], 'dashboard');
-    }
-
-    public function getOrder(): int
-    {
-        return 200;
     }
 
     public function renderView(array $parameters): string

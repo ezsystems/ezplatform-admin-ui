@@ -22,21 +22,15 @@ class SystemInfoTab extends AbstractControllerBasedTab
     /** @var string */
     protected $collectorIdentifier;
 
-    /**
-     * @param Environment $twig
-     * @param TranslatorInterface $translator
-     * @param HttpKernelRuntime $httpKernelRuntime
-     * @param string $tabIdentifier
-     * @param string $collectorIdentifier
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         HttpKernelRuntime $httpKernelRuntime,
         string $tabIdentifier,
         string $collectorIdentifier
     ) {
-        parent::__construct($twig, $translator, $httpKernelRuntime);
+        parent::__construct($twig, $translator, $order, $httpKernelRuntime);
 
         $this->tabIdentifier = $tabIdentifier;
         $this->collectorIdentifier = $collectorIdentifier;

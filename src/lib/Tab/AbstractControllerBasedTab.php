@@ -21,17 +21,13 @@ abstract class AbstractControllerBasedTab extends AbstractTab
     /** @var HttpKernelRuntime */
     protected $httpKernelRuntime;
 
-    /**
-     * @param Environment $twig
-     * @param TranslatorInterface $translator
-     * @param HttpKernelRuntime $httpKernelRuntime
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         HttpKernelRuntime $httpKernelRuntime
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $order);
 
         $this->httpKernelRuntime = $httpKernelRuntime;
     }
@@ -41,12 +37,5 @@ abstract class AbstractControllerBasedTab extends AbstractTab
         return $this->httpKernelRuntime->renderFragment($this->getControllerReference($parameters));
     }
 
-    /**
-     * Returns ControllerReference used to render the tab.
-     *
-     * @param array $parameters
-     *
-     * @return ControllerReference
-     */
     abstract public function getControllerReference(array $parameters): ControllerReference;
 }

@@ -1,31 +1,78 @@
 services:
-    EzSystems\EzPlatformAdminUi\Tab\LocationView\:
-        resource: "../../../lib/Tab/LocationView/*"
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
-        public: true
-        tags:
-            - { name: ezplatform.tab, group: location-view }
-
-    EzSystems\EzPlatformAdminUi\Tab\LocationView\RolesTab:
-        autowire: true
-        arguments:
-            $userContentTypeIdentifier: '$user_content_type_identifier$'
-            $userGroupContentTypeIdentifier: '$user_group_content_type_identifier$'
-        tags:
-            - { name: ezplatform.tab, group: location-view }
-
-    EzSystems\EzPlatformAdminUi\Tab\LocationView\PoliciesTab:
-        autowire: true
-        arguments:
-            $userContentTypeIdentifier: '$user_content_type_identifier$'
-            $userGroupContentTypeIdentifier: '$user_group_content_type_identifier$'
-        tags:
-            - { name: ezplatform.tab, group: location-view }
-
     EzSystems\EzPlatformAdminUi\Tab\LocationView\ContentTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab
         public: true
         autowire: true
         arguments:
             $siteAccessLanguages: '$languages$'
+            $order: 100
+        tags:
+            - { name: ezplatform.tab, group: location-view }
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\DetailsTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        public: true
+        arguments:
+            $order: 200
+        tags:
+            - { name: ezplatform.tab, group: location-view }
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\VersionsTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        public: true
+        arguments:
+            $order: 300
+        tags:
+            - { name: ezplatform.tab, group: location-view }
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\LocationsTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        public: true
+        arguments:
+            $order: 400
+        tags:
+            - { name: ezplatform.tab, group: location-view }
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\RelationsTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        public: true
+        arguments:
+            $order: 500
+        tags:
+            - { name: ezplatform.tab, group: location-view }
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\TranslationsTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        public: true
+        arguments:
+            $order: 600
+        tags:
+            - { name: ezplatform.tab, group: location-view }
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\UrlsTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        public: true
+        arguments:
+            $order: 700
+        tags:
+            - { name: ezplatform.tab, group: location-view }
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\RolesTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab
+        autowire: true
+        arguments:
+            $userContentTypeIdentifier: '$user_content_type_identifier$'
+            $userGroupContentTypeIdentifier: '$user_group_content_type_identifier$'
+            $order: 800
+        tags:
+            - { name: ezplatform.tab, group: location-view }
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\PoliciesTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab
+        autowire: true
+        arguments:
+            $userContentTypeIdentifier: '$user_content_type_identifier$'
+            $userGroupContentTypeIdentifier: '$user_group_content_type_identifier$'
+            $order: 900
         tags:
             - { name: ezplatform.tab, group: location-view }

@@ -52,19 +52,10 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\API\Repository\SectionService $sectionService
-     * @param \eZ\Publish\API\Repository\UserService $userService
-     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
-     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         SectionService $sectionService,
         UserService $userService,
         DatasetFactory $datasetFactory,
@@ -72,7 +63,7 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
         PermissionResolver $permissionResolver,
         EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($twig, $translator, $eventDispatcher);
+        parent::__construct($twig, $translator, $order, $eventDispatcher);
 
         $this->sectionService = $sectionService;
         $this->userService = $userService;
@@ -98,25 +89,11 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
         return $this->translator->trans('tab.name.details', [], 'locationview');
     }
 
-    /**
-     * @return int
-     */
-    public function getOrder(): int
-    {
-        return 200;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplate(): string
     {
         return '@ezdesign/content/tab/details.html.twig';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplateParameters(array $contextParameters = []): array
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */

@@ -28,21 +28,15 @@ class MyContentTab extends AbstractTab implements OrderedTabInterface
     /** @var \eZ\Publish\Core\QueryType\QueryType */
     private $contentSubtreeQueryType;
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper $pagerContentToDataMapper
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param \eZ\Publish\Core\QueryType\QueryType $contentSubtreeQueryType
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
+        int $order,
         PagerContentToDataMapper $pagerContentToDataMapper,
         SearchService $searchService,
         QueryType $contentSubtreeQueryType
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $order);
 
         $this->pagerContentToDataMapper = $pagerContentToDataMapper;
         $this->searchService = $searchService;
@@ -58,11 +52,6 @@ class MyContentTab extends AbstractTab implements OrderedTabInterface
     {
         return /** @Desc("Content") */
             $this->translator->trans('tab.name.my_content', [], 'dashboard');
-    }
-
-    public function getOrder(): int
-    {
-        return 200;
     }
 
     public function renderView(array $parameters): string

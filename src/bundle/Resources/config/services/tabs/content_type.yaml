@@ -1,7 +1,16 @@
 services:
-    EzSystems\EzPlatformAdminUi\Tab\ContentType\:
-        resource: "../../../lib/Tab/ContentType/*"
+    EzSystems\EzPlatformAdminUi\Tab\ContentType\ViewTab:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab
         public: true
+        arguments:
+            $order: 100
+        tags:
+            - { name: ezplatform.tab, group: content-type }
+
+    EzSystems\EzPlatformAdminUi\Tab\ContentType\TranslationsTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab
+        public: true
+        arguments:
+            $order: 200
         tags:
             - { name: ezplatform.tab, group: content-type }
