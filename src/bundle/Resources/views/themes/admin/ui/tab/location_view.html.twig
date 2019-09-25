@@ -10,20 +10,6 @@
                         aria-expanded="{{ active }}">{{ tab.name }}</a>
                 </li>
             {% endfor %}
-                <li class="nav-item ez-tabs__tab ez-tabs__tab--more">
-                    <a class="nav-link" id="ez-tab-label--more" role="tab"></a>
-                    <ul class="nav nav-tabs ez-tabs ez-tabs--hidden ez-tabs--secondary" role="tablist">
-                        {% for tab in tabs %}
-                            {% set id = group ~ '-' ~ tab.identifier %}
-                            {% set active = loop.first %}
-                            <li class="nav-item ez-tabs__tab ez-tabs__tab--secondary">
-                                <a class="nav-link{% if active %} active{% endif %}" id="ez-tab-secondary-label-{{ group }}"
-                                    data-toggle="tab" href="#ez-tab-{{ id }}" role="tab" aria-controls="ez-tab-{{ id }}"
-                                    aria-expanded="{{ active }}">{{ tab.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </li>
         </ul>
     </div>
 </div>

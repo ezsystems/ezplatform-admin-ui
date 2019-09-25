@@ -1,34 +1,56 @@
-(function(global, doc, eZ) {
+(function(global, doc, $) {
     const OFFSET_ROUNDING_COMPENSATOR = 0.5;
-    const moreTab = doc.querySelector('.ez-tabs__tab--more');
-    const moreTabLink = doc.querySelector('.ez-tabs__tab--more .nav-link');
-    const tabsList = doc.querySelector('.ez-tabs');
-    const allTabs = tabsList.querySelectorAll('.ez-tabs__tab');
-    const secondaryTabsList = doc.querySelector('.ez-tabs--secondary');
-    const primaryTabs = [...tabsList.querySelectorAll('.ez-tabs__tab--primary')];
-    const secondaryTabs = [...secondaryTabsList.querySelectorAll('.ez-tabs__tab--secondary')];
-    const adaptTabs = (toBeActiveNavLink = tabsList.querySelector('.ez-tabs__tab--primary .active')) => {
+    const copyTabs = () => {
+        const primaryTabs = doc.querySelector('.ez-tabs');
+
+        primaryTabs.insertAdjacentHTML(
+            'beforeend',
+            `<li class="nav-item ez-tabs__tab ez-tabs__tab--more">
+                <a class="nav-link" id="ez-tab-label--more" role="tab"></a>
+                <ul class="nav nav-tabs ez-tabs ez-tabs--hidden ez-tabs--secondary" role="tablist">
+                    ${primaryTabs.innerHTML}
+                </ul>
+            </li>`
+        );
+    };
+
+    const primaryTabsList = doc.querySelector('.ez-tabs');
+    const primaryTabs = [...primaryTabsList.querySelectorAll('.ez-tabs__tab')];
+    const primaryTabsLinks = [...primaryTabsList.querySelectorAll('.ez-tabs__tab .nav-link')];
+
+    copyTabs();
+
+    const moreTab = primaryTabsList.querySelector('.ez-tabs__tab--more');
+    const moreTabLink = primaryTabsList.querySelector('.ez-tabs__tab--more .nav-link');
+    const secondaryTabsList = moreTab.querySelector('.ez-tabs--secondary');
+    const secondaryTabs = [...moreTab.querySelectorAll('.ez-tabs__tab')];
+    const secondaryTabsLinks = [...secondaryTabsList.querySelectorAll('.ez-tabs__tab .nav-link')];
+
+    const adaptTabs = () => {
         primaryTabs.forEach((tab) => tab.classList.remove('ez-tabs__tab--hidden'));
         moreTab.classList.remove('ez-tabs__tab--hidden');
 
-        const toBeActiveTab = toBeActiveNavLink ? toBeActiveNavLink.closest('.ez-tabs__tab') : null;
-        const toBeActiveTabWidth = toBeActiveTab ? toBeActiveTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR : 0;
+        const activePrimaryTabLink = primaryTabsLinks.find((tabLink) => tabLink.classList.contains('active'));
+        const activePrimaryTab = activePrimaryTabLink ? activePrimaryTabLink.closest('.ez-tabs__tab') : null;
+
+        const activePrimaryTabWidth = activePrimaryTab ? activePrimaryTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR : 0;
         const moreTabWidth = moreTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
 
-        const maxTotalWidth = tabsList.offsetWidth - OFFSET_ROUNDING_COMPENSATOR;
-        let currentWidth = moreTabWidth + toBeActiveTabWidth;
+        const maxTotalWidth = primaryTabsList.offsetWidth - OFFSET_ROUNDING_COMPENSATOR;
+        let currentWidth = moreTabWidth + activePrimaryTabWidth;
         const hiddenPrimaryTabs = [];
 
         for (let i = 0; i < primaryTabs.length; i++) {
             const tab = primaryTabs[i];
-            const navLink = tab.querySelector('.nav-link');
+            const tabLink = tab.querySelector('.nav-link');
+
+            if (tabLink === activePrimaryTabLink) {
+                continue;
+            }
+
             const isLastTab = i === primaryTabs.length - 1;
             const allPreviousTabsVisible = hiddenPrimaryTabs.length === 0;
             const isTabNarrowerThanMoreTab = tab.offsetWidth < moreTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
-
-            if (toBeActiveNavLink && toBeActiveNavLink.href === navLink.href) {
-                continue;
-            }
 
             if (isLastTab && allPreviousTabsVisible && isTabNarrowerThanMoreTab) {
                 break;
@@ -60,33 +82,16 @@
         moreTab.classList.remove('ez-tabs__tab--expanded');
         secondaryTabsList.classList.add('ez-tabs--hidden');
     };
-    const handleTabClick = (event) => {
-        const activeNavLink = event.currentTarget.querySelector('.nav-link');
-        const navLinks = tabsList.querySelectorAll('.nav-link');
-        const isMoreTab = !activeNavLink.href; // TODO: maybe check CSS class ???
+    const handleTabClick = (event, otherTabsLinks) => {
+        const clickedTabLink = event.currentTarget;
+        const otherTabLinkToShow = otherTabsLinks.find((otherTabLink) => otherTabLink.href === clickedTabLink.href);
 
-        if (isMoreTab) {
+        if (!otherTabLinkToShow) {
             return;
         }
 
-        navLinks.forEach((navLink) => {
-            if (navLink === activeNavLink) {
-                return;
-            }
-
-            navLink.classList.toggle('active', navLink.href === activeNavLink.href);
-        });
-
-        const primaryActiveNavLink = tabsList.querySelector(`.ez-tabs__tab--primary a[href="${activeNavLink.getAttribute('href')}"]`);
-        adaptTabs(primaryActiveNavLink);
-
-        moreTab.classList.toggle('ez-tabs__tab--expanded', false);
-        secondaryTabsList.classList.toggle('ez-tabs--hidden', true);
-    };
-    const highlightMoreTab = () => {
-        const activeTabFromSecondaryMenu = secondaryTabsList.querySelector('.ez-tabs__tab--secondary:not(.ez-tabs__tab--hidden) .active'); // TODO: check selector
-
-        moreTab.classList.toggle('ez-tabs__tab--highlighted', !!activeTabFromSecondaryMenu);
+        $(otherTabLinkToShow).tab('show');
+        adaptTabs();
     };
 
     adaptTabs();
@@ -95,18 +100,24 @@
     moreTabLink.addEventListener('click', () => {
         moreTab.classList.toggle('ez-tabs__tab--expanded');
         secondaryTabsList.classList.toggle('ez-tabs--hidden');
-        highlightMoreTab();
+    });
+    primaryTabsLinks.forEach((tabLink) => {
+        $(tabLink).on('shown.bs.tab', (event) => {
+            handleTabClick(event, secondaryTabsLinks);
+        });
+    });
+    secondaryTabsLinks.forEach((tabLink) => {
+        tabLink.addEventListener('click', (event) => {
+            handleTabClick(event, primaryTabsLinks);
+
+            moreTab.classList.toggle('ez-tabs__tab--expanded', false);
+            secondaryTabsList.classList.toggle('ez-tabs--hidden', true);
+        });
     });
     document.body.addEventListener('ez-content-tree-resized', () => {
         adaptTabs();
-        highlightMoreTab();
     });
     window.addEventListener('resize', () => {
         adaptTabs();
-        highlightMoreTab();
     });
-    allTabs.forEach((tab) => {
-        tab.addEventListener('click', handleTabClick);
-        highlightMoreTab();
-    });
-})(window, window.document, window.eZ);
+})(window, window.document, window.jQuery);
