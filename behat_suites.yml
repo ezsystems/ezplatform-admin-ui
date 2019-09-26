@@ -9,7 +9,7 @@ adminui:
     suites:
         adminui:
             paths:
-              - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features'
+              - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard'
             filters:
                 tags: "@common"
             contexts:
@@ -38,7 +38,7 @@ adminui:
 
         adminuimodules:
             paths:
-                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/ContentTypeFields.feature'
+                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/ContentTypeFields.feature'
             filters:
                 tags: "@common"
             contexts:
@@ -56,8 +56,8 @@ adminui:
 
         richtext:
             paths:
-                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/ContentCreation.feature'
-                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/ContentDraft.feature'
+                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/ContentCreation.feature'
+                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/ContentDraft.feature'
             filters:
                 tags: "@common"
             contexts:
