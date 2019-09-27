@@ -20,6 +20,8 @@ use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Relation;
+use eZ\Publish\API\Repository\Values\Content\RelationList\Item\RelationListItem;
+use eZ\Publish\API\Repository\Values\Content\RelationList\Item\UnauthorizedRelationListItem;
 use eZ\Publish\API\Repository\Values\Content\URLAlias;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
@@ -145,6 +147,8 @@ class ValueFactory
     }
 
     /**
+     * @deprecated since version 2.5, to be removed in 3.0. Please use ValueFactory::createRelationItem instead.
+     *
      * @param Relation $relation
      * @param Content $content
      *
@@ -164,6 +168,40 @@ class ValueFactory
             'relationLocation' => $this->locationService->loadLocation($content->contentInfo->mainLocationId),
             'relationName' => $content->getName(),
         ]);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\RelationList\Item\RelationListItem $relationListItem
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
+     *
+     * @return UIValue\Content\Relation
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    public function createRelationItem(RelationListItem $relationListItem, Content $content): UIValue\Content\Relation
+    {
+        $contentType = $content->getContentType();
+        $relation = $relationListItem->getRelation();
+        $fieldDefinition = $contentType->getFieldDefinition($relation->sourceFieldDefinitionIdentifier);
+
+        return new UIValue\Content\Relation($relation, [
+            'relationFieldDefinitionName' => $fieldDefinition ? $fieldDefinition->getName() : '',
+            'relationContentTypeName' => $contentType->getName(),
+            'relationLocation' => $this->locationService->loadLocation($content->contentInfo->mainLocationId),
+            'relationName' => $content->getName(),
+        ]);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\RelationList\Item\UnauthorizedRelationListItem $relationListItem
+     *
+     * @return \EzSystems\EzPlatformAdminUi\UI\Value\Content\RelationInterface
+     */
+    public function createUnauthorizedRelationItem(
+        UnauthorizedRelationListItem $relationListItem
+    ): UIValue\Content\RelationInterface {
+        return new UIValue\Content\UnauthorizedRelation($relationListItem);
     }
 
     /**
