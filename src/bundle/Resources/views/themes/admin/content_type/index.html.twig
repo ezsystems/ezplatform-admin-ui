@@ -7,7 +7,7 @@
 {% set language_code = content_type.mainLanguageCode %}
 
 {% block content %}
-    {{ ez_render_tab_group('content-type', {
+    {{ ez_render_component_group('content-type-tab-groups', {
         'content_type': content_type,
         'content_type_group': content_type_group,
         'field_definitions_by_group': field_definitions_by_group,
@@ -15,7 +15,7 @@
         'can_update': can_update,
         'languages': languages,
         'form_content_type_edit': form_content_type_edit
-    }, '@ezdesign/ui/tab/content_type.html.twig') }}
+    }) }}
 {% endblock %}
 
 {% block javascripts %}

@@ -29,3 +29,11 @@ services:
             $siteAccessLanguages: '$languages$'
         tags:
             - { name: ezplatform.tab, group: location-view }
+
+    ezplatform.adminui.location_view.tab_groups:
+        parent: EzSystems\EzPlatformAdminUi\Component\TabsComponent
+        arguments:
+            $template: '@@ezdesign/ui/tab/location_view.html.twig'
+            $groupIdentifier: 'location-view'
+        tags:
+            - { name: ezplatform.admin_ui.component, group: 'location-view-tab-groups' }

@@ -61,7 +61,7 @@
                 </div>
                 <div class="panel panel-primary">
                     <div class="panel-body">
-                        {{ ez_render_tab_group('location-view', {
+                        {{ ez_render_component_group('location-view-tab-groups', {
                             'content': content,
                             'location': location,
                             'contentType': content_type,
@@ -71,7 +71,7 @@
                             'roles_pagination_params': roles_pagination_params,
                             'policies_pagination_params': policies_pagination_params,
                             'is_location_visible': is_location_visible,
-                        }, '@ezdesign/ui/tab/location_view.html.twig') }}
+                        }) }}
 
                         {% if content_type.isContainer %}
                         {{ form_start(form_subitems_content_edit, { 'action': path('ezplatform.content.edit'), 'attr': { 'hidden': 'hidden' }}) }}

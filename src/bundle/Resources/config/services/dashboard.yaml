@@ -56,3 +56,17 @@ services:
             $template: '@@ezdesign/ui/dashboard/block/all.html.twig'
         tags:
             - { name: ezplatform.admin_ui.component, group: 'dashboard-blocks' }
+
+    ezplatform.adminui.dashboard.my.tab_groups:
+        parent: EzSystems\EzPlatformAdminUi\Component\TabsComponent
+        arguments:
+            $groupIdentifier: 'dashboard-my'
+        tags:
+            - { name: ezplatform.admin_ui.component, group: 'dashboard-my-tab-groups' }
+
+    ezplatform.adminui.dashboard.all.tab_groups:
+        parent: EzSystems\EzPlatformAdminUi\Component\TabsComponent
+        arguments:
+            $groupIdentifier: 'dashboard-everyone'
+        tags:
+            - { name: ezplatform.admin_ui.component, group: 'dashboard-all-tab-groups' }
