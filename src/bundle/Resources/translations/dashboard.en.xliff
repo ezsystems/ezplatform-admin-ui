@@ -71,6 +71,11 @@
         <target state="new">Edit Draft</target>
         <note>key: dashboard.table.draft.edit</note>
       </trans-unit>
+      <trans-unit id="5c6a58e397b164610db6371fe26b4e79aa3962f8" resname="dashboard.table.draft.unauthorized">
+        <source>User does not have access to '%function%' '%module%' with content ID: %contentId%</source>
+        <target state="new">User does not have access to '%function%' '%module%' with content ID: %contentId%</target>
+        <note>key: dashboard.table.draft.unauthorized</note>
+      </trans-unit>
       <trans-unit id="3a857cc58c009830e22845ef1edbd43794206aed" resname="dashboard.table.last_saved">
         <source>Last Saved</source>
         <target state="new">Last Saved</target>

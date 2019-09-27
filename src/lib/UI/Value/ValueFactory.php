@@ -16,10 +16,12 @@ use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\Content\DraftList\Item\ContentDraftListItem;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Relation;
+use eZ\Publish\API\Repository\Values\Content\DraftList\Item\UnauthorizedContentDraftListItem;
 use eZ\Publish\API\Repository\Values\Content\URLAlias;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
@@ -285,5 +287,40 @@ class ValueFactory
             'userCanRemove' => $this->permissionResolver->canUser('class', 'update', $contentType),
             'main' => $language->languageCode === $contentType->mainLanguageCode,
         ]);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\DraftList\Item\ContentDraftListItem $contentDraftListItem
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     *
+     * @return \EzSystems\EzPlatformAdminUi\UI\Value\Content\ContentDraftInterface
+     */
+    public function createContentDraft(
+        ContentDraftListItem $contentDraftListItem,
+        ContentType $contentType
+    ): UIValue\Content\ContentDraftInterface {
+        $versionInfo = $contentDraftListItem->getVersionInfo();
+        $contentInfo = $versionInfo->contentInfo;
+        $versionId = new UIValue\Content\VersionId(
+            $contentInfo->id,
+            $versionInfo->versionNo
+        );
+
+        return new UIValue\Content\ContentDraft(
+            $versionInfo,
+            $versionId,
+            $contentType
+        );
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\DraftList\Item\UnauthorizedContentDraftListItem $contentDraftListItem
+     *
+     * @return \EzSystems\EzPlatformAdminUi\UI\Value\Content\ContentDraftInterface
+     */
+    public function createUnauthorizedContentDraft(
+        UnauthorizedContentDraftListItem $contentDraftListItem
+    ): UIValue\Content\ContentDraftInterface {
+        return new UIValue\Content\UnauthorizedContentDraft($contentDraftListItem);
     }
 }
