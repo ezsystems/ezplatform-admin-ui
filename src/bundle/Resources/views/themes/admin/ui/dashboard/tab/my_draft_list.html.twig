@@ -1,0 +1,87 @@
+{% trans_default_domain 'dashboard' %}
+
+{% if data|length %}
+    <table class="ez-table table">
+        <thead>
+            <tr>
+                <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
+                <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'dashboard.table.name'|trans|desc('Name') }}</th>
+                <th class="ez-table__header-cell">{{ 'dashboard.table.content_type'|trans|desc('Content Type') }}</th>
+                <th class="ez-table__header-cell">{{ 'dashboard.table.modified_language'|trans|desc('Modified Language') }}</th>
+                <th class="ez-table__header-cell">{{ 'dashboard.table.version'|trans|desc('Version') }}</th>
+                <th class="ez-table__header-cell">{{ 'dashboard.table.last_saved'|trans|desc('Last Saved') }}</th>
+                <th class="ez-table__header-cell"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in data %}
+            {% set content_draft_edit_url = content_is_user|default(false) ? 'ez_user_update' : 'ez_content_draft_edit' %}
+            {% if row.isAccessible %}
+                <tr>
+                    <td class="ez-table__cell ez-table__cell--has-icon">
+                        <svg class="ez-icon ez-icon--small">
+                            <use xlink:href="{{ ez_content_type_icon(row.contentType.identifier) }}"></use>
+                        </svg>
+                    </td>
+                    <td class="ez-table__cell ez-table__cell--after-icon">{{ row.versionInfo.name }}</td>
+                    <td class="ez-table__cell">{{ row.contentType.name }}</td>
+                    <td class="ez-table__cell">{{ ez_admin_ui_config.languages.mappings[row.versionInfo.initialLanguageCode].name }}</td>
+                    <td class="ez-table__cell">{{ row.versionInfo.versionNo }}</td>
+                    <td class="ez-table__cell">{{ row.versionInfo.modificationDate|ez_full_datetime }}</td>
+                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                        <button class="btn btn-icon mx-2 ez-btn--content-draft-edit"
+                                title="{{ 'dashboard.table.draft.edit'|trans|desc('Edit Draft') }}"
+                                data-content-draft-edit-url="{{ path(content_draft_edit_url, {
+                                    'contentId': row.versionInfo.contentInfo.id,
+                                    'versionNo': row.versionInfo.versionNo,
+                                    'language': row.versionInfo.initialLanguageCode
+                                }) }}"
+                                data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
+                                    'contentId': row.versionInfo.contentInfo.id,
+                                    'versionNo': row.versionInfo.versionNo,
+                                    'languageCode': row.versionInfo.initialLanguageCode
+                                }) }}"
+                                data-content-id="{{ row.versionInfo.contentInfo.id }}"
+                                data-language-code="{{ row.versionInfo.initialLanguageCode }}">
+                            <svg class="ez-icon ez-icon-edit">
+                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td class="table__cell ez-table__cell--has-text-info" colspan="8">
+                        {{
+                            'dashboard.table.draft.unauthorized'|trans({
+                                '%module%': row.unauthorizedContentDraft.module,
+                                '%function%': row.unauthorizedContentDraft.function,
+                                '%contentId%': row.unauthorizedContentDraft.payload.contentId,
+                            })|desc('User does not have access to \'%function%\' \'%module%\' with content ID: %contentId%')
+                        }}
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if pager.haveToPaginate %}
+        <div class="row justify-content-center align-items-center mb-2 mt-2 ez-pagination__spacing">
+            <span class="ez-pagination__text">
+                {{ 'pagination.viewing'|trans({
+                    '%viewing%': pager.currentPageResults|length,
+                    '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+            </span>
+        </div>
+        <div class="row justify-content-center align-items-center ez-pagination__btn">
+            {{ pagerfanta(pager, 'ez', pager_options|merge({
+                'routeParams': {
+                    '_fragment': 'ez-tab-dashboard-my-my-drafts'
+                }
+            })) }}
+        </div>
+    {% endif %}
+{% else %}
+    <p class="ez-table-no-content mb-0 py-0">{{ 'dashboard.tab.my_drafts.empty'|trans|desc('No content items. Draft items you create will appear here') }}</p>
+{% endif %}

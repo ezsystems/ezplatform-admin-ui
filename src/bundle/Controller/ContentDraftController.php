@@ -12,9 +12,9 @@ use eZ\Publish\API\Repository\ContentService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\ContentDraftAdapter;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use EzSystems\EzPlatformAdminUi\UI\Value\Content\VersionId;
-use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,11 +68,8 @@ class ContentDraftController extends Controller
     {
         $currentPage = $request->query->getInt(self::PAGINATION_PARAM_NAME, 1);
 
-        $contentDraftsDataset = $this->datasetFactory->contentDrafts();
-        $contentDraftsDataset->load();
-
         $pagination = new Pagerfanta(
-            new ArrayAdapter($contentDraftsDataset->getContentDrafts())
+            new ContentDraftAdapter($this->contentService, $this->datasetFactory)
         );
         $pagination->setMaxPerPage($this->defaultPaginationLimit);
         $pagination->setCurrentPage(min($currentPage, $pagination->getNbPages()));
@@ -81,7 +78,7 @@ class ContentDraftController extends Controller
             $this->createContentRemoveData($pagination)
         );
 
-        return $this->render('@ezdesign/content/draft/list.html.twig', [
+        return $this->render('@ezdesign/content/draft/draft_list.html.twig', [
             'pager' => $pagination,
             'form_remove' => $removeContentDraftForm->createView(),
         ]);
@@ -128,7 +125,13 @@ class ContentDraftController extends Controller
      */
     private function createContentRemoveData(Pagerfanta $pagerfanta): ContentRemoveData
     {
-        $versions = array_column($pagerfanta->getCurrentPageResults(), 'id');
+        $versions = [];
+        /** @var \EzSystems\EzPlatformAdminUi\UI\Value\Content\ContentDraftInterface $contentDraft */
+        foreach ($pagerfanta->getCurrentPageResults() as $contentDraft) {
+            if ($contentDraft->isAccessible()) {
+                $versions[] = $contentDraft->getVersionId();
+            }
+        }
 
         return new ContentRemoveData(
             array_combine($versions, array_fill_keys($versions, false))

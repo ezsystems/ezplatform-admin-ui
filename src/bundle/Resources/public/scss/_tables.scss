@@ -35,6 +35,11 @@
             padding-right: calculateRem(20px);
         }
 
+        .table &--has-text-info {
+            padding: calculateRem(16px) calculateRem(8px);
+            text-align: center;
+        }
+
         &--has-checkbox {
             width: 5%;
         }
