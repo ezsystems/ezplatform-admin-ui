@@ -13,16 +13,16 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Relation;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 
-class RelationListDataset
+final class RelationListDataset
 {
     /** @var \eZ\Publish\API\Repository\ContentService */
-    protected $contentService;
+    private $contentService;
 
     /** @var \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory */
-    protected $valueFactory;
+    private $valueFactory;
 
     /** @var \EzSystems\EzPlatformAdminUi\UI\Value\Content\RelationInterface[] */
-    protected $relations;
+    private $relations;
 
     /**
      * @param \eZ\Publish\API\Repository\ContentService $contentService

@@ -13,16 +13,16 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\RelationList\RelationListItemInterface;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 
-class ReverseRelationListDataset
+final class ReverseRelationListDataset
 {
     /** @var \eZ\Publish\API\Repository\ContentService */
-    protected $contentService;
+    private $contentService;
 
     /** @var \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory */
-    protected $valueFactory;
+    private $valueFactory;
 
     /** @var \EzSystems\EzPlatformAdminUi\UI\Value\Content\RelationInterface[] */
-    protected $reverseRelations;
+    private $reverseRelations;
 
     /**
      * @param \eZ\Publish\API\Repository\ContentService $contentService

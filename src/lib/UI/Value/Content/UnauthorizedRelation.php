@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
 
 use eZ\Publish\API\Repository\Values\Content\RelationList\Item\UnauthorizedRelationListItem;
 
-class UnauthorizedRelation implements RelationInterface
+final class UnauthorizedRelation implements RelationInterface
 {
     /** @var \eZ\Publish\API\Repository\Values\Content\RelationList\Item\UnauthorizedRelationListItem */
     private $unauthorizedRelation;
