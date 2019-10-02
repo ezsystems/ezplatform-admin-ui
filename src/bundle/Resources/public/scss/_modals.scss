@@ -4,6 +4,7 @@
     .modal-dialog {
         background-color: $ez-ground-base-medium;
         border-radius: calculateRem(4px);
+        max-width: calculateRem(800px);
     }
 
     .modal-header {
@@ -13,9 +14,17 @@
         min-height: calculateRem(40px);
     }
 
-    .modal-body {
+    .option-modal-body {
         padding: calculateRem(15px) calculateRem(30px);
 
+        &.trash-option-disabled {
+            color: $ez-color-disabled;
+            cursor: not-allowed;
+
+            .ez-modal-body__main {
+                color: $ez-color-disabled;
+            }
+        }
         .ez-modal-body__main,
         .ez-modal-body__explanation {
             margin-bottom: 0;
