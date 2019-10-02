@@ -271,6 +271,17 @@ class ContentViewController extends Controller
             )
         );
 
+        $locationTrashType = $this->formFactory->trashLocation(
+            new LocationTrashData($location)
+        );
+
+        $contentEditType = $this->createContentEditForm(
+            $content->contentInfo,
+            $versionInfo,
+            null,
+            $location
+        );
+
         $view->addParameters([
             'form_location_copy' => $locationCopyType->createView(),
             'form_location_move' => $locationMoveType->createView(),
@@ -278,68 +289,61 @@ class ContentViewController extends Controller
             'form_content_visibility_update' => $contentVisibilityUpdateForm->createView(),
             'form_subitems_content_edit' => $subitemsContentEdit->createView(),
             'form_location_copy_subtree' => $locationCopySubtreeType->createView(),
+            'form_location_trash' => $locationTrashType->createView(),
+            'form_content_edit' => $contentEditType->createView(),
         ]);
 
         $contentHaveAssetRelation = new ContentHaveAssetRelation($this->contentService);
 
-//        if ($contentHaveAssetRelation
-//            ->and(new ContentHaveUniqueRelation($this->contentService))
-//            ->isSatisfiedBy($content)
-//        ) {
-//            $trashWithAssetType = $this->formFactory->trashLocationWithAsset(
-//                new LocationTrashWithAssetData($location)
-//            );
-//            $contentEditType = $this->createContentEditForm($content->contentInfo, $versionInfo, null, $location);
-//
-//            $view->addParameters([
-//                'form_location_trash_with_single_asset' => $trashWithAssetType->createView(),
-//                'form_content_edit' => $contentEditType->createView(),
-//            ]);
-//        } elseif ($contentHaveAssetRelation->isSatisfiedBy($content)) {
-//            $locationTrashType = $this->formFactory->trashLocation(
-//                new LocationTrashData($location)
-//            );
-//            $contentEditType = $this->createContentEditForm($content->contentInfo, $versionInfo, null, $location);
-//
-//            $view->addParameters([
-//                'form_location_trash_with_asset' => $locationTrashType->createView(),
-//                'form_content_edit' => $contentEditType->createView(),
-//            ]);
-//        } elseif ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
-//            $userDeleteType = $this->formFactory->deleteUser(
-//                new UserDeleteData($content->contentInfo)
-//            );
-//            $userEditType = $this->formFactory->editUser(
-//                new UserEditData($content->contentInfo, $versionInfo, null, $location)
-//            );
-//
-//            $view->addParameters([
-//                'form_user_delete' => $userDeleteType->createView(),
-//                'form_user_edit' => $userEditType->createView(),
-//            ]);
-//        } else {
+        if ($contentHaveAssetRelation
+            ->and(new ContentHaveUniqueRelation($this->contentService))
+            ->isSatisfiedBy($content)
+        ) {
+            $trashWithAssetType = $this->formFactory->trashLocationWithAsset(
+                new LocationTrashWithAssetData($location)
+            );
+
+            $view->addParameters([
+                /** @deprecated since 2.5, to be removed in 3.0 */
+                'form_location_trash_with_single_asset' => $trashWithAssetType->createView(),
+            ]);
+        } elseif ($contentHaveAssetRelation->isSatisfiedBy($content)) {
             $locationTrashType = $this->formFactory->trashLocation(
                 new LocationTrashData($location)
             );
-            $contentEditType = $this->createContentEditForm($content->contentInfo, $versionInfo, null, $location);
 
             $view->addParameters([
-                'form_location_trash' => $locationTrashType->createView(),
-                'form_content_edit' => $contentEditType->createView(),
+                /** @deprecated since 2.5, to be removed in 3.0 */
+                'form_location_trash_with_asset' => $locationTrashType->createView(),
             ]);
-//        }
+        }
 
-//        $isContainer = new IsContainer();
-//        $hasChildren = new HasChildren($this->locationService);
-//
-//        if ($isContainer->and($hasChildren)->isSatisfiedBy($location)) {
-//            $trashLocationContainerForm = $this->formFactory->trashContainerLocation(
-//                new LocationTrashContainerData($location)
-//            );
-//            $view->addParameters([
-//                'form_location_trash_container' => $trashLocationContainerForm->createView(),
-//            ]);
-//        }
+        if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
+            $userDeleteType = $this->formFactory->deleteUser(
+                new UserDeleteData($content->contentInfo)
+            );
+            $userEditType = $this->formFactory->editUser(
+                new UserEditData($content->contentInfo, $versionInfo, null, $location)
+            );
+
+            $view->addParameters([
+                'form_user_delete' => $userDeleteType->createView(),
+                'form_user_edit' => $userEditType->createView(),
+            ]);
+        }
+
+        $isContainer = new IsContainer();
+        $hasChildren = new HasChildren($this->locationService);
+
+        if ($isContainer->and($hasChildren)->isSatisfiedBy($location)) {
+            $trashLocationContainerForm = $this->formFactory->trashContainerLocation(
+                new LocationTrashContainerData($location)
+            );
+            $view->addParameters([
+                /** @deprecated since 2.5, to be removed in 3.0 */
+                'form_location_trash_container' => $trashLocationContainerForm->createView(),
+            ]);
+        }
     }
 
     /**

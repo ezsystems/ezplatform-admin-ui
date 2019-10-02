@@ -6,29 +6,28 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type;
+namespace EzSystems\EzPlatformAdminUi\Form\Extension;
 
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class InfoTextType extends AbstractType
+class HelpMultilineMessageExtension extends AbstractTypeExtension
 {
+    public function getExtendedType()
+    {
+        return FormType::class;
+    }
+
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['text_list'] = $options['text_list'];
+        $view->vars['help_multiline'] = $options['help_multiline'] ?? '';
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'text_list' => [],
-            'mapped' => false,
-        ]);
-        $resolver->setAllowedTypes(
-            'text_list',
-            'array'
-        );
+        $resolver->setDefaults(['help_multiline' => null]);
     }
 }

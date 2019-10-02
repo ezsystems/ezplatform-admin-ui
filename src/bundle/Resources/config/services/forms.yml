@@ -5,7 +5,6 @@ services:
         public: false
 
     _instanceof:
-        # services whose classes are instances of CustomInterface will be tagged automatically
         EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\TrashLocationStrategy:
             tags: ['form.trash_location_strategy']
 
@@ -64,3 +63,23 @@ services:
         public: true
         tags:
             - { name: form.type_extension, extended_type: EzSystems\EzPlatformRichText\Form\Type\RichTextType }
+
+    EzSystems\EzPlatformAdminUi\Form\Extension\HelpMultilineMessageExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\HasReverseRelations:
+        tags:
+            - { name: 'form.trash_location_strategy', priority: 100 }
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\HasChildren:
+        tags:
+            - { name: 'form.trash_location_strategy', priority: 80 }
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\HasUniqueAssetRelation:
+        tags:
+            - { name: 'form.trash_location_strategy', priority: 60 }
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\HasAssetRelation:
+        tags:
+            - { name: 'form.trash_location_strategy', priority: 40 }

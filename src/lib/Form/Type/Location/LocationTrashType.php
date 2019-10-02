@@ -13,8 +13,10 @@ use EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\OptionsFactory;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use EzSystems\EzPlatformAdminUi\Form\Type\InfoTextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -41,22 +43,14 @@ class LocationTrashType extends AbstractType
     {
         $builder
             ->add(
-                'info_text',
-                InfoTextType::class,
-                ['text_list' => [
-                    /** @Desc("Are you sure you want to send this content item to trash?") */
-                    $this->translator->trans('trash.modal.message'),
-                ]]
-            )
-            ->add(
                 'location',
                 LocationType::class,
                 ['label' => false]
             )
-            ->add('trash_options', ChoiceType::class, [
-                'expanded' => true,
-                'multiple' => true,
-                'choices' => [],
+            ->add('trash_options', CollectionType::class, [
+                'entry_type' => ChoiceType::class,
+                'allow_add' => true,
+                'label' => false,
             ])
             ->add(
                 'trash',
@@ -64,17 +58,17 @@ class LocationTrashType extends AbstractType
                 ['label' => /** @Desc("Send to Trash") */ 'location_trash_form.trash']
             );
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        $builder->get('trash_options')->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $this->trashTypeStrategy->addOptions(
                 $event->getForm(),
-                $event->getData()->getLocation()
+                $event->getForm()->getParent()->getData()->getLocation()
             );
         });
 
         $builder->get('location')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $this->trashTypeStrategy->addOptions(
-                $event->getForm(),
-                $event->getData()->getLocation()
+                $event->getForm()->getParent()->get('trash_options'),
+                $event->getForm()->getData()
             );
         });
     }

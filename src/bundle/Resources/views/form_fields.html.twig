@@ -1,13 +1,5 @@
 {% extends 'bootstrap_4_layout.html.twig' %}
 
-{%- block info_text_widget -%}
-    {%- for info_text in text_list -%}
-        <p>
-            {{ translation_domain is same as(false) ? info_text : info_text|trans({}, translation_domain) }}
-        </p>
-    {%- endfor -%}
-{%- endblock -%}
-
 {% block form_label -%}
     {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' ez-label')|trim}) -%}
     {{ parent() }}

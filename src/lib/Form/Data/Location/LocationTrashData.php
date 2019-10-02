@@ -21,9 +21,12 @@ class LocationTrashData
     /**
      * @param Location|null $location
      * @param array|null $trashOptions
+     * @param string|null $trashAssets
      */
-    public function __construct(?Location $location = null, ?array $trashOptions = null)
-    {
+    public function __construct(
+        ?Location $location = null,
+        ?array $trashOptions = null
+    ) {
         $this->location = $location;
         $this->trashOptions = $trashOptions;
     }

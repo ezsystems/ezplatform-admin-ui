@@ -21,8 +21,12 @@ class OptionsFactory
         $this->strategies = $strategies;
     }
 
-    public function addOptions(FormInterface $form, Location $location)
+    public function addOptions(FormInterface $form, ?Location $location = null)
     {
+        if (!$location) {
+            return;
+        }
+
         foreach ($this->strategies as $strategy) {
             if ($strategy->supports($location)) {
                 $strategy->addOptions($form, $location);

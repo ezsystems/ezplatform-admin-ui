@@ -10,7 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzSystems\EzPlatformAdminUi\Form\Type\InfoTextType;
 use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren as HasChildrenSpec;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
@@ -46,31 +45,20 @@ class HasChildren implements TrashLocationStrategy
             '%content_name%' => $location->getContent()->getName(),
         ];
 
-        $infoText = $form->get('info_text');
-        $currentInfoText = $infoText->getConfig()->getOption('text_list');
-        array_push(
-            $currentInfoText,
-            /** @Desc("Deleting %content_name% will also delete its sub-items, under its location(s). To confirm, please check below") */
-            $this->translator->trans('trash_container.modal.message_main', $translatorParameters, 'messages')
-        );
         $form
-            ->add('info_text', InfoTextType::class, [
-                'text_list' => $currentInfoText,
-            ]);
-
-        $trashOptions = $form->get('trash_options');
-        $currentChoices = $trashOptions->getConfig()->getOption('choices');
-        array_push(
-            $currentChoices,
-            /** @Desc("%children_count% content items under location %content_name%") */
-            [$this->translator->trans('location_trash_form.trash_container', $translatorParameters, 'forms') => self::TRASH_WITH_CHILDREN]
-        );
-
-        $form
-            ->add('trash_options', ChoiceType::class, [
+            ->add('has_children', ChoiceType::class, [
                 'expanded' => true,
                 'multiple' => true,
-                'choices' => $currentChoices,
+                'label' =>
+                    /** @Desc("Sub-Items") */
+                    $this->translator->trans('form.has_children.label', [], 'forms'),
+                'choices' =>
+                    /** @Desc(Send to trash %children_count% content item(s) under this location") */
+                    [$this->translator->trans('location_trash_form.trash_container', $translatorParameters, 'forms') => self::TRASH_WITH_CHILDREN],
+                'help_multiline' => [
+                    /** @Desc("Sending '%content_name%' to trash will also send the sub-items at this location to trash. To confirm, please check below:") */
+                    $this->translator->trans('trash_container.modal.message_main', $translatorParameters, 'messages'),
+                ],
             ]);
     }
 }

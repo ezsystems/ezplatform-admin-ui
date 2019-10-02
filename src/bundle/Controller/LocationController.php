@@ -15,6 +15,7 @@ use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\TrashService;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\LocationUpdateStruct;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
@@ -29,6 +30,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\HasUniqueAssetRelation;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationAssignSectionType;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\DetailsTab;
@@ -335,6 +337,11 @@ class LocationController extends Controller
 
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (LocationTrashData $data) {
+                if (isset($data->getTrashOptions()[HasUniqueAssetRelation::TRASH_ASSETS])
+                    && HasUniqueAssetRelation::RADIO_SELECT_TRASH_WITH_ASSETS === $data->getTrashOptions()[HasUniqueAssetRelation::TRASH_ASSETS]
+                ) {
+                    $this->trashRelatedAsset($data->getLocation()->getContentInfo());
+                }
                 return $this->handleTrashLocationForm($data);
             });
 
@@ -346,7 +353,15 @@ class LocationController extends Controller
         return $this->redirect($this->generateUrl('ezplatform.trash.list'));
     }
 
+    private function trashRelatedAsset(ContentInfo $contentInfo): void
+    {
+        $content = $this->contentService->loadContentByContentInfo($contentInfo);
+        $relations = $this->contentService->loadRelations($content->versionInfo);
+        $imageLocation = $this->locationService->loadLocation($relations[0]->destinationContentInfo->mainLocationId);
+        $this->trashService->trash($imageLocation);
+    }
     /**
+     * @deprecated since 2.5, to be removed in 3.0.
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response

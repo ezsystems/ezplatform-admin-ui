@@ -355,13 +355,13 @@
         <note>key: trash_asset_single.modal.message_main</note>
       </trans-unit>
       <trans-unit id="1e6a1d97cca01a288e47d2d14479274b90e6c6c1" resname="trash_container.modal.message_main">
-        <source>Deleting %content_name% will also delete its sub-items, under its location(s). To confirm, please check below</source>
-        <target state="new">Deleting %content_name% will also delete its sub-items, under its location(s). To confirm, please check below</target>
+        <source>Sending '%content_name%' to trash will also send the sub-items at this location to trash. To confirm, please check below:</source>
+        <target state="new">Sending '%content_name%' to trash will also send the sub-items at this location to trash. To confirm, please check below:</target>
         <note>key: trash_container.modal.message_main</note>
       </trans-unit>
       <trans-unit id="ef4df0dede01e561e75568aa128a8092cbbee66a" resname="trash_container.modal.message_relations">
-        <source>Content '%content_name%' have '%relations%' relation and is used in '%reverse_relations%' other content.</source>
-        <target state="new">Content '%content_name%' have '%relations%' and is used in '%reverse_relations%' other content.</target>
+        <source>'%content_name%' is in use by %reverse_relations% content item(s). It is recommended to remove all instances of reverse relation before deleting the content item.</source>
+        <target state="new">'%content_name%' is in use by %reverse_relations% content item(s). It is recommended to remove all instances of reverse relation before deleting the content item.</target>
         <note>key: trash_container.modal.message_relations</note>
       </trans-unit>
     </body>
