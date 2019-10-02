@@ -13,7 +13,7 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Adapter\AdapterInterface;
 
-class ReverseRelationAdapter implements AdapterInterface
+final class ReverseRelationAdapter implements AdapterInterface
 {
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
