@@ -50,13 +50,13 @@ class HasChildren implements TrashLocationStrategy
                 'expanded' => true,
                 'multiple' => true,
                 'label' =>
-                    /** @Desc("Sub-Items") */
+                    /** @Desc("Sub-items") */
                     $this->translator->trans('form.has_children.label', [], 'forms'),
                 'choices' =>
-                    /** @Desc(Send to trash %children_count% content item(s) under this location") */
+                    /** @Desc("Send to trash %children_count% content item(s) of this location") */
                     [$this->translator->trans('location_trash_form.trash_container', $translatorParameters, 'forms') => self::TRASH_WITH_CHILDREN],
                 'help_multiline' => [
-                    /** @Desc("Sending '%content_name%' to trash will also send the sub-items at this location to trash. To confirm, please check below:") */
+                    /** @Desc("Sending '%content_name%' to trash will also send its sub-items to trash. To confirm, check below:") */
                     $this->translator->trans('trash_container.modal.message_main', $translatorParameters, 'messages'),
                 ],
             ]);

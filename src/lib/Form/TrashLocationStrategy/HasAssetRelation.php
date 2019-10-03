@@ -45,12 +45,12 @@ class HasAssetRelation implements TrashLocationStrategy
             'expanded' => true,
             'multiple' => false,
             'label' =>
-                /** @Desc("Asset fields(s)") */
+                /** @Desc("Asset Fields(s)") */
                 $this->translator->trans('form.trash_assets_non_unique.label', [], 'forms'),
             'help_multiline' => [
-                /** @Desc("You are about to delete a content that has one or several asset(s) field(s) used by other content items. These assets will remain available in system.") */
+                /** @Desc("You are about to delete a content item that has one or more asset Field(s) used by other content items. These assets will remain available in system.") */
                 $this->translator->trans('trash_asset.modal.message_header'),
-                /** @Desc("If you wish to delete this(/these) asset(s) too, first make sure they are not used by other content. You can check these content going to the asset(s) and looking at their content relations in the Relation tab.") */
+                /** @Desc("If you wish to delete these assets too, first make sure they are not used by other content. To check, go to the asset preview and look at its content relations in the Relations tab.") */
                 $this->translator->trans('trash_asset.modal.message_body'),
             ],
         ]);

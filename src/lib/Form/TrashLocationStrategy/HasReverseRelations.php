@@ -59,7 +59,7 @@ class HasReverseRelations implements TrashLocationStrategy
                     /** @Desc("'%content_name%' will not be available for its reverse relation(s)") */
                     [$this->translator->trans('location_trash_form.trash_when_relation', $translatorParameters, 'forms') => self::TRASH_WHEN_RELATION],
                 'help_multiline' => [
-                    /** @Desc("'%content_name%' is in use by %reverse_relations% content item(s). It is recommended to remove all instances of reverse relation before deleting the content item.") */
+                    /** @Desc("'%content_name%' is in use by %reverse_relations% content item(s). It is recommended to remove all reverse relations before deleting the content item.") */
                     $this->translator->trans('trash_container.modal.message_relations', $translatorParameters),
                 ],
             ]);

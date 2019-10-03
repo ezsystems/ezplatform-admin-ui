@@ -53,10 +53,10 @@ class HasUniqueAssetRelation implements TrashLocationStrategy
             'expanded' => true,
             'multiple' => false,
             'label' =>
-                /** @Desc("Asset fields(s)") */
+                /** @Desc("Asset Fields(s)") */
                 $this->translator->trans('form.trash_assets.label', [], 'forms'),
             'choices' => [
-                /** @Desc("Send to trash only the content item") */
+                /** @Desc("Send only this content item to trash") */
                 $this->translator->trans('location_trash_form.default_trash', $translatorParameters, 'forms') => self::RADIO_SELECT_DEFAULT_TRASH,
                 /** @Desc("Send to trash the content item and its related assets") */
                 $this->translator->trans('location_trash_form.trash_with_asset', $translatorParameters, 'forms') => self::RADIO_SELECT_TRASH_WITH_ASSETS,

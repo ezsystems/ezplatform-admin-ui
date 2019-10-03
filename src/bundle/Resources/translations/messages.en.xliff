@@ -335,13 +335,13 @@
         <note>key: trash.modal.message</note>
       </trans-unit>
       <trans-unit id="bd97a738137e75de44544db1104bab3a46222791" resname="trash_asset.modal.message_body">
-        <source>If you wish to delete this(/these) asset(s) too, first make sure they are not used by other content. You can check these content going to the asset(s) and looking at their content relations in the Relation tab.</source>
-        <target state="new">If you wish to delete this(/these) asset(s) too, first make sure they are not used by other content. You can check these content going to the asset(s) and looking at their content relations in the Relation tab.</target>
+        <source>If you wish to delete these assets too, first make sure they are not used by other content. To check, go to the asset preview and look at its content relations in the Relations tab.</source>
+        <target state="new">If you wish to delete these assets too, first make sure they are not used by other content. To check, go to the asset preview and look at its content relations in the Relations tab.</target>
         <note>key: trash_asset.modal.message_body</note>
       </trans-unit>
       <trans-unit id="17c7abad79d72d771a25b064e0de38b72fc6c926" resname="trash_asset.modal.message_header">
-        <source>You are about to delete a content that has one or several asset(s) field(s) used by other content items. These assets will remain available in system.</source>
-        <target state="new">You are about to delete a content that has one or several asset(s) field(s) used by other content items. These assets will remain available in system.</target>
+        <source>You are about to delete a content item that has one or more asset Field(s) used by other content items. These assets will remain available in system.</source>
+        <target state="new">You are about to delete a content item that has one or more asset Field(s) used by other content items. These assets will remain available in system.</target>
         <note>key: trash_asset.modal.message_header</note>
       </trans-unit>
       <trans-unit id="e81a14f38ebe272cb11ef90e2948a8c6602307ca" resname="trash_asset_single.modal.message">
@@ -355,13 +355,13 @@
         <note>key: trash_asset_single.modal.message_main</note>
       </trans-unit>
       <trans-unit id="1e6a1d97cca01a288e47d2d14479274b90e6c6c1" resname="trash_container.modal.message_main">
-        <source>Sending '%content_name%' to trash will also send the sub-items at this location to trash. To confirm, please check below:</source>
-        <target state="new">Sending '%content_name%' to trash will also send the sub-items at this location to trash. To confirm, please check below:</target>
+        <source>Sending '%content_name%' to trash will also send its sub-items to trash. To confirm, check below:</source>
+        <target state="new">Sending '%content_name%' to trash will also send its sub-items to trash. To confirm, check below:</target>
         <note>key: trash_container.modal.message_main</note>
       </trans-unit>
       <trans-unit id="ef4df0dede01e561e75568aa128a8092cbbee66a" resname="trash_container.modal.message_relations">
-        <source>'%content_name%' is in use by %reverse_relations% content item(s). It is recommended to remove all instances of reverse relation before deleting the content item.</source>
-        <target state="new">'%content_name%' is in use by %reverse_relations% content item(s). It is recommended to remove all instances of reverse relation before deleting the content item.</target>
+        <source>'%content_name%' is in use by %reverse_relations% content item(s). It is recommended to remove all reverse relations before deleting the content item.</source>
+        <target state="new">'%content_name%' is in use by %reverse_relations% content item(s). It is recommended to remove all reverse relations before deleting the content item.</target>
         <note>key: trash_container.modal.message_relations</note>
       </trans-unit>
     </body>
