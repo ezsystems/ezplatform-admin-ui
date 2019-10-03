@@ -8,19 +8,24 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
+use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Content;
+use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\ReverseRelationAdapter;
 use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInterface, ConditionalTabInterface
 {
+    public const URI_FRAGMENT = 'ez-tab-location-view-relations';
+
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;
 
@@ -30,6 +35,9 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
+
     /**
      * @param \Twig\Environment $twig
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
@@ -37,6 +45,7 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
      */
     public function __construct(
         Environment $twig,
@@ -44,13 +53,15 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         PermissionResolver $permissionResolver,
         DatasetFactory $datasetFactory,
         ContentTypeService $contentTypeService,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        ContentService $contentService
     ) {
         parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
         $this->datasetFactory = $datasetFactory;
         $this->contentTypeService = $contentTypeService;
+        $this->contentService = $contentService;
     }
 
     /**
@@ -108,29 +119,45 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     {
         /** @var Content $content */
         $content = $contextParameters['content'];
-        $relationsDataset = $this->datasetFactory->relations();
-        $relationsDataset->load($content);
+        $reverseRelationPaginationParams = $contextParameters['reverse_relation_pagination_params'];
+        $reverseRelationPagination = new Pagerfanta(
+            new ReverseRelationAdapter($this->contentService, $this->datasetFactory, $content)
+        );
+        $reverseRelationPagination->setMaxPerPage($reverseRelationPaginationParams['limit']);
+        $reverseRelationPagination->setCurrentPage(min(
+            max($reverseRelationPaginationParams['page'], 1),
+            $reverseRelationPagination->getNbPages()
+        ));
 
         $contentTypeIds = [];
 
-        $relations = $relationsDataset->getRelations();
+        $relationListDataset = $this->datasetFactory->relationList();
+        $relationListDataset->load($content);
+        $relations = $relationListDataset->getRelations();
 
         $viewParameters = [];
 
         foreach ($relations as $relation) {
-            $contentTypeIds[] = $relation->getDestinationContentInfo()->contentTypeId;
+            if ($relation->isAccessible()) {
+                /** @var \eZ\Publish\API\Repository\Values\Content\Relation $relation */
+                $contentTypeIds[] = $relation->getDestinationContentInfo()->contentTypeId;
+            }
         }
 
         $viewParameters['relations'] = $relations;
 
         if (true === $this->permissionResolver->hasAccess('content', 'reverserelatedlist')) {
-            $reverseRelations = $relationsDataset->getReverseRelations();
+            $reverseRelations = $reverseRelationPagination->getCurrentPageResults();
 
             foreach ($reverseRelations as $relation) {
-                $contentTypeIds[] = $relation->getSourceContentInfo()->contentTypeId;
+                if ($relation->isAccessible()) {
+                    /** @var \eZ\Publish\API\Repository\Values\Content\Relation $relation */
+                    $contentTypeIds[] = $relation->getSourceContentInfo()->contentTypeId;
+                }
             }
 
-            $viewParameters['reverse_relations'] = $reverseRelations;
+            $viewParameters['reverse_relation_pager'] = $reverseRelationPagination;
+            $viewParameters['reverse_relation_pagination_params'] = $reverseRelationPaginationParams;
         }
 
         if (!empty($contentTypeIds)) {
