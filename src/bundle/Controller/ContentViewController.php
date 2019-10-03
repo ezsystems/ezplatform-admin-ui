@@ -175,6 +175,7 @@ class ContentViewController extends Controller
 
         $this->supplyContentType($view);
         $this->supplyDraftPagination($view, $request);
+        $this->supplyReverseRelationPagination($view, $request);
         $this->supplyCustomUrlPagination($view, $request);
         $this->supplySystemUrlPagination($view, $request);
         $this->supplyRolePagination($view, $request);
@@ -387,6 +388,25 @@ class ContentViewController extends Controller
                 'page' => $page['version_draft'] ?? 1,
                 'pages_map' => $page,
                 'limit' => $this->configResolver->getParameter('pagination.version_draft_limit'),
+            ],
+        ]);
+    }
+
+    /**
+     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    private function supplyReverseRelationPagination(ContentView $view, Request $request): void
+    {
+        $page = $request->query->get('page');
+
+        $view->addParameters([
+            'reverse_relation_pagination_params' => [
+                'route_name' => $request->get('_route'),
+                'route_params' => $request->get('_route_params'),
+                'page' => $page['reverse_relation'] ?? 1,
+                'pages_map' => $page,
+                'limit' => $this->configResolver->getParameter('pagination.reverse_relation_limit'),
             ],
         ]);
     }

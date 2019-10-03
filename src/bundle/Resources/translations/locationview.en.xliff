@@ -51,6 +51,11 @@
         <target state="new">Limited user permissions</target>
         <note>key: content.view.subitems.bulk_action.limited_permissions</note>
       </trans-unit>
+      <trans-unit id="1141888f8212e6140ea4bac1a5fba11c02e94d13" resname="dashboard.table.relation.unauthorized">
+        <source>User does not have access to '%function%' '%module%' with content ID: %contentId%</source>
+        <target state="new">User does not have access to '%function%' '%module%' with content ID: %contentId%</target>
+        <note>key: dashboard.table.relation.unauthorized</note>
+      </trans-unit>
       <trans-unit id="eeb49235f0e3b40e651725430b85a2885174bd2b" resname="location.bookmark.add">
         <source>Add to Bookmarks</source>
         <target state="new">Add to Bookmarks</target>

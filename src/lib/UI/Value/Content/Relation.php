@@ -15,7 +15,7 @@ use eZ\Publish\API\Repository\Values\Content\Relation as APIRelation;
 /**
  * Extends original value object in order to provide additional fields.
  */
-class Relation extends CoreRelation
+class Relation extends CoreRelation implements RelationInterface
 {
     /**
      * Field definition name for the relation.
@@ -56,5 +56,13 @@ class Relation extends CoreRelation
     public function __construct(APIRelation $relation, array $properties = [])
     {
         parent::__construct(get_object_vars($relation) + $properties);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAccessible(): bool
+    {
+        return true;
     }
 }
