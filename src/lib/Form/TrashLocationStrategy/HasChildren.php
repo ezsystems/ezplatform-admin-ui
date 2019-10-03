@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class HasChildren implements TrashLocationStrategy
+final class HasChildren implements TrashLocationOptionProvider
 {
     const TRASH_WITH_CHILDREN = 'trash_with_children';
 

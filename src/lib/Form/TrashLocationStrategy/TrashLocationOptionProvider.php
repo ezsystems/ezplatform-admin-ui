@@ -11,7 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use Symfony\Component\Form\FormInterface;
 
-interface TrashLocationStrategy
+interface TrashLocationOptionProvider
 {
     public function supports(Location $location): bool;
 

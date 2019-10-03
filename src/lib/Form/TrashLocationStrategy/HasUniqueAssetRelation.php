@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class HasUniqueAssetRelation implements TrashLocationStrategy
+final class HasUniqueAssetRelation implements TrashLocationOptionProvider
 {
     public const TRASH_ASSETS = 'trash_assets';
     public const RADIO_SELECT_TRASH_WITH_ASSETS = 'trash_with_assets';

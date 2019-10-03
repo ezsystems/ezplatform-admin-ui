@@ -11,9 +11,9 @@ namespace EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use Symfony\Component\Form\FormInterface;
 
-class OptionsFactory
+final class OptionsFactory
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\TrashLocationStrategy[] */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\TrashLocationOptionProvider[] */
     private $strategies;
 
     public function __construct(iterable $strategies)

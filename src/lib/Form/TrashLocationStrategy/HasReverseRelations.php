@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class HasReverseRelations implements TrashLocationStrategy
+final class HasReverseRelations implements TrashLocationOptionProvider
 {
     const TRASH_WHEN_RELATION = 'trash_with_children';
 

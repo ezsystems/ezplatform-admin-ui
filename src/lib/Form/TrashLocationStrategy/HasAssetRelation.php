@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class HasAssetRelation implements TrashLocationStrategy
+final class HasAssetRelation implements TrashLocationOptionProvider
 {
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
