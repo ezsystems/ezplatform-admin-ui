@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy;
+namespace EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\Location;

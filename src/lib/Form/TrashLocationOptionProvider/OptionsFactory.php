@@ -6,19 +6,19 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy;
+namespace EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use Symfony\Component\Form\FormInterface;
 
 final class OptionsFactory
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\TrashLocationOptionProvider[] */
-    private $strategies;
+    /** @var \EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\TrashLocationOptionProvider[] */
+    private $providers;
 
-    public function __construct(iterable $strategies)
+    public function __construct(iterable $providers)
     {
-        $this->strategies = $strategies;
+        $this->providers = $providers;
     }
 
     public function addOptions(FormInterface $form, ?Location $location = null)
@@ -27,7 +27,7 @@ final class OptionsFactory
             return;
         }
 
-        foreach ($this->strategies as $strategy) {
+        foreach ($this->providers as $strategy) {
             if ($strategy->supports($location)) {
                 $strategy->addOptions($form, $location);
             }

@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Location;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
-use EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\OptionsFactory;
+use EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\OptionsFactory;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -23,7 +23,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class LocationTrashType extends AbstractType
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\OptionsFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\OptionsFactory */
     private $trashTypeStrategy;
 
     /** @var \Symfony\Component\Translation\TranslatorInterface */

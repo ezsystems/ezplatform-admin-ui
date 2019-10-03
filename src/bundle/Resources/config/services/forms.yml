@@ -5,8 +5,8 @@ services:
         public: false
 
     _instanceof:
-        EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\TrashLocationStrategy:
-            tags: ['form.trash_location_strategy']
+        EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\TrashLocationOptionProvider:
+            tags: ['ezplatform.form.trash_location_option']
 
     EzSystems\EzPlatformAdminUi\Form\SubmitHandler: ~
 
@@ -22,11 +22,11 @@ services:
     EzSystems\EzPlatformAdminUi\Form\EventListener\:
         resource: '../../../lib/Form/EventListener'
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\:
-        resource: '../../../lib/Form/TrashLocationStrategy'
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\:
+        resource: '../../../lib/Form/TrashLocationOptionProvider'
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\OptionsFactory:
-        arguments: [!tagged form.trash_location_strategy]
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\OptionsFactory:
+        arguments: [!tagged ezplatform.form.trash_location_option]
 
     EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
         tags:
@@ -68,18 +68,18 @@ services:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\HasReverseRelations:
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasReverseRelations:
         tags:
-            - { name: 'form.trash_location_strategy', priority: 100 }
+            - { name: 'ezplatform.form.trash_location_option', priority: 100 }
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\HasChildren:
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasChildren:
         tags:
-            - { name: 'form.trash_location_strategy', priority: 80 }
+            - { name: 'ezplatform.form.trash_location_option', priority: 80 }
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\HasUniqueAssetRelation:
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation:
         tags:
-            - { name: 'form.trash_location_strategy', priority: 60 }
+            - { name: 'ezplatform.form.trash_location_option', priority: 60 }
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\HasAssetRelation:
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasAssetRelation:
         tags:
-            - { name: 'form.trash_location_strategy', priority: 40 }
+            - { name: 'ezplatform.form.trash_location_option', priority: 40 }

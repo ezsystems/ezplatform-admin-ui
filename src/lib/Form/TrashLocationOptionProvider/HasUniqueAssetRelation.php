@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy;
+namespace EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -16,8 +16,12 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-final class HasAssetRelation implements TrashLocationOptionProvider
+final class HasUniqueAssetRelation implements TrashLocationOptionProvider
 {
+    public const TRASH_ASSETS = 'trash_assets';
+    public const RADIO_SELECT_TRASH_WITH_ASSETS = 'trash_with_assets';
+    public const RADIO_SELECT_DEFAULT_TRASH = 'trash_default';
+
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
@@ -35,23 +39,31 @@ final class HasAssetRelation implements TrashLocationOptionProvider
     public function supports(Location $location): bool
     {
         return (new ContentHaveAssetRelation($this->contentService))
-            ->and((new ContentHaveUniqueRelation($this->contentService))->not())
+            ->and((new ContentHaveUniqueRelation($this->contentService)))
             ->isSatisfiedBy($location->getContent());
     }
 
     public function addOptions(FormInterface $form, Location $location): void
     {
-        $form->add('trash_assets_non_unique', ChoiceType::class, [
+        $translatorParameters = [
+            '%content_name%' => $location->getContent()->getName(),
+        ];
+
+        $form->add(self::TRASH_ASSETS, ChoiceType::class, [
             'expanded' => true,
             'multiple' => false,
             'label' =>
                 /** @Desc("Asset Fields(s)") */
-                $this->translator->trans('form.trash_assets_non_unique.label', [], 'forms'),
+                $this->translator->trans('form.trash_assets.label', [], 'forms'),
+            'choices' => [
+                /** @Desc("Send only this content item to trash") */
+                $this->translator->trans('location_trash_form.default_trash', $translatorParameters, 'forms') => self::RADIO_SELECT_DEFAULT_TRASH,
+                /** @Desc("Send to trash the content item and its related assets") */
+                $this->translator->trans('location_trash_form.trash_with_asset', $translatorParameters, 'forms') => self::RADIO_SELECT_TRASH_WITH_ASSETS,
+            ],
             'help_multiline' => [
-                /** @Desc("You are about to delete a content item that has one or more asset Field(s) used by other content items. These assets will remain available in system.") */
-                $this->translator->trans('trash_asset.modal.message_header'),
-                /** @Desc("If you wish to delete these assets too, first make sure they are not used by other content. To check, go to the asset preview and look at its content relations in the Relations tab.") */
-                $this->translator->trans('trash_asset.modal.message_body'),
+                /** @Desc("'%content_name%' has 1 or more asset field(s). You have an option to send the content item only to trash or send the content item and its assets to trash. Please select your option:") */
+                $this->translator->trans('trash_asset_single.modal.message_main', $translatorParameters),
             ],
         ]);
     }
