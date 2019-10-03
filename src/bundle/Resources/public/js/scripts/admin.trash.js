@@ -1,13 +1,11 @@
-(function (global, doc) {
+(function(global, doc) {
     const form = doc.querySelector('form[name="location_trash"]');
     const submitButton = form.querySelector('button[type="submit"]');
-    const firstOptions = form.querySelector('.trash-option-first input');
-
+    const firstOptions = form.querySelector('.ez-modal__trash-option--first input');
     const enableButton = (button) => {
         button.disabled = false;
         button.classList.remove('disabled');
     };
-
     const disableButton = (button) => {
         button.disabled = true;
         button.classList.add('disabled');
@@ -15,38 +13,30 @@
 
     if (!firstOptions) {
         enableButton(submitButton);
+
         return;
     }
 
-    const enableAllOptions = (event) => {
-        const optionsContainers = [...form.querySelectorAll('.trash-option-disabled')];
+    const allOptions = form.querySelectorAll('.ez-modal__trash-option');
+    const enableAllOptions = () => {
+        const disabledOptions = [...form.querySelectorAll('.ez-modal__trash-option--disabled')];
 
-        optionsContainers.forEach((optionContainer) => {
-            optionContainer.classList.remove('trash-option-disabled');
-            let inputs = [...optionContainer.getElementsByTagName('input')];
+        disabledOptions.forEach((disabledOption) => {
+            const inputs = [...disabledOption.querySelectorAll('input')];
+
+            disabledOption.classList.remove('ez-modal__trash-option--disabled');
 
             inputs.forEach((input) => {
                 input.disabled = false;
-            })
+            });
         });
     };
+    const toggleSubmitButton = () => {
+        const areAllOptionsChecked = [...allOptions].every((option) => {
+            const inputs = [...option.querySelectorAll('input')];
+            const isInputChecked = (input) => input.checked;
 
-    const allOptionsContainers = form.querySelectorAll('.option-modal-body');
-
-    const toggleSubmitButton = (event) => {
-        const isOptionChecked = [...allOptionsContainers].map((container) => {
-            let inputs = [...container.getElementsByTagName('input')];
-            if (inputs.length === 0) {
-                return true;
-            }
-            const anyChecked = (input) => {
-                return input.checked
-            };
-            return inputs.some(anyChecked)
-        });
-
-        let areAllOptionsChecked = isOptionChecked.every((optionIsSelected) => {
-            return optionIsSelected
+            return inputs.length === 0 || inputs.some(isInputChecked);
         });
 
         areAllOptionsChecked ? enableButton(submitButton) : disableButton(submitButton);
@@ -54,5 +44,4 @@
 
     firstOptions.addEventListener('change', enableAllOptions, false);
     form.addEventListener('change', toggleSubmitButton, false);
-
 })(window, document);
