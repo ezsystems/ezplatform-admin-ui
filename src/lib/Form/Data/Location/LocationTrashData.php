@@ -12,16 +12,15 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 
 class LocationTrashData
 {
-    /** @var Location|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
     private $location;
 
     /** @var array|null */
     private $trashOptions;
 
     /**
-     * @param Location|null $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
      * @param array|null $trashOptions
-     * @param string|null $trashAssets
      */
     public function __construct(
         ?Location $location = null,
@@ -32,7 +31,7 @@ class LocationTrashData
     }
 
     /**
-     * @return Location|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
      */
     public function getLocation(): ?Location
     {
@@ -40,7 +39,7 @@ class LocationTrashData
     }
 
     /**
-     * @param Location|null $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
      */
     public function setLocation(?Location $location): void
     {

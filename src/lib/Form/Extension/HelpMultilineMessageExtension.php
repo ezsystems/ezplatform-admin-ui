@@ -14,19 +14,19 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class HelpMultilineMessageExtension extends AbstractTypeExtension
+final class HelpMultilineMessageExtension extends AbstractTypeExtension
 {
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return FormType::class;
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['help_multiline'] = $options['help_multiline'] ?? '';
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(['help_multiline' => null]);
     }

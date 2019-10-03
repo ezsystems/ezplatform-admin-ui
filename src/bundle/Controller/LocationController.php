@@ -362,8 +362,10 @@ class LocationController extends Controller
         $imageLocation = $this->locationService->loadLocation($relations[0]->destinationContentInfo->mainLocationId);
         $this->trashService->trash($imageLocation);
     }
+
     /**
      * @deprecated since 2.5, to be removed in 3.0.
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
