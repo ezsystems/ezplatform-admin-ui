@@ -13,6 +13,7 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException as APIRepositoryUnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
@@ -74,6 +75,9 @@ class LocationController extends Controller
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
+    /** @var \eZ\Publish\API\Repository\Repository */
+    private $repository;
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
@@ -85,6 +89,7 @@ class LocationController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \eZ\Publish\API\Repository\Repository $repository
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -96,7 +101,8 @@ class LocationController extends Controller
         SectionService $sectionService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        Repository $repository
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -108,6 +114,7 @@ class LocationController extends Controller
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
         $this->permissionResolver = $permissionResolver;
+        $this->repository = $repository;
     }
 
     /**
@@ -337,12 +344,7 @@ class LocationController extends Controller
 
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (LocationTrashData $data) {
-                if (isset($data->getTrashOptions()[HasUniqueAssetRelation::TRASH_ASSETS])
-                    && HasUniqueAssetRelation::RADIO_SELECT_TRASH_WITH_ASSETS === $data->getTrashOptions()[HasUniqueAssetRelation::TRASH_ASSETS]
-                ) {
-                    $this->trashRelatedAsset($data->getLocation()->getContentInfo());
-                }
-                return $this->handleTrashLocationForm($data);
+                return $this->handleTrashLocation($data);
             });
 
             if ($result instanceof Response) {
@@ -390,6 +392,48 @@ class LocationController extends Controller
 
         // in case of error when processing form ($result === null) redirect to the same Location
         return $this->redirectToLocation($form->getData()->getLocation());
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData|\EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData $data
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    private function handleTrashLocation(LocationTrashData $data): RedirectResponse
+    {
+        $location = $data->getLocation();
+        $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
+        $trashOptions = $data->getTrashOptions();
+
+        $this->repository->beginTransaction();
+        try {
+            if (isset($trashOptions[HasUniqueAssetRelation::TRASH_ASSETS])
+                && HasUniqueAssetRelation::RADIO_SELECT_TRASH_WITH_ASSETS === $trashOptions[HasUniqueAssetRelation::TRASH_ASSETS]
+            ) {
+                $this->trashRelatedAsset($location->getContentInfo());
+            }
+            $this->trashService->trash($location);
+            $this->repository->commit();
+        } catch (\Exception $exception) {
+            $this->repository->rollback();
+            throw $exception;
+        }
+
+        $this->notificationHandler->success(
+            $this->translator->trans(
+                /** @Desc("Location '%name%' moved to trash.") */
+                'location.trash.success',
+                ['%name%' => $location->getContentInfo()->name],
+                'location'
+            )
+        );
+
+        return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $parentLocation->id,
+        ]));
     }
 
     /**
