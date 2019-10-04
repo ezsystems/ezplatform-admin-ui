@@ -8,7 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Tests\EventListener;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use PHPUnit\Framework\TestCase;
@@ -24,7 +24,7 @@ class RequestListenerTest extends TestCase
     /** @var Request */
     private $request;
 
-    /** @var GetResponseEvent */
+    /** @var RequestEvent */
     private $event;
 
     /** @var HttpKernelInterface|MockObject */
@@ -43,7 +43,7 @@ class RequestListenerTest extends TestCase
 
         $this->httpKernel = $this->createMock(HttpKernelInterface::class);
 
-        $this->event = new GetResponseEvent(
+        $this->event = new RequestEvent(
             $this->httpKernel,
             $this->request,
             HttpKernelInterface::MASTER_REQUEST
@@ -63,7 +63,7 @@ class RequestListenerTest extends TestCase
 
     public function testOnKernelRequestAllowAccessWithSubRequest()
     {
-        $this->event = new GetResponseEvent(
+        $this->event = new RequestEvent(
             $this->httpKernel,
             $this->request,
             HttpKernelInterface::SUB_REQUEST

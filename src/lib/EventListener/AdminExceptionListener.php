@@ -14,7 +14,7 @@ use EzSystems\EzPlatformAdminUiBundle\EzPlatformAdminUiBundle;
 use SplFileInfo;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface;
 use Symfony\WebpackEncoreBundle\Asset\TagRenderer;
@@ -73,9 +73,9 @@ class AdminExceptionListener
     }
 
     /**
-     * @param GetResponseForExceptionEvent $event
+     * @param ExceptionEvent $event
      */
-    public function onKernelException(GetResponseForExceptionEvent $event)
+    public function onKernelException(ExceptionEvent $event)
     {
         if ($this->kernelEnvironment !== 'prod') {
             return;
@@ -125,11 +125,11 @@ class AdminExceptionListener
     }
 
     /**
-     * @param GetResponseForExceptionEvent $event
+     * @param ExceptionEvent $event
      *
      * @return bool
      */
-    private function isAdminException(GetResponseForExceptionEvent $event): bool
+    private function isAdminException(ExceptionEvent $event): bool
     {
         $request = $event->getRequest();
 

@@ -14,7 +14,7 @@ use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\EventListener\RequestLocaleListener;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use PHPUnit\Framework\TestCase;
@@ -76,7 +76,7 @@ class RequestLocaleListenerTest extends TestCase
 
         $request->attributes->set('siteaccess', new SiteAccess(self::NON_ADMIN_SITEACCESS));
 
-        $event = new GetResponseEvent(
+        $event = new RequestEvent(
             $this->httpKernel,
             $request,
             HttpKernelInterface::MASTER_REQUEST
@@ -101,7 +101,7 @@ class RequestLocaleListenerTest extends TestCase
 
         $request->attributes->set('siteaccess', new SiteAccess(self::ADMIN_SITEACCESS));
 
-        $event = new GetResponseEvent(
+        $event = new RequestEvent(
             $this->httpKernel,
             $request,
             HttpKernelInterface::SUB_REQUEST
@@ -130,7 +130,7 @@ class RequestLocaleListenerTest extends TestCase
             ->method('setLocale')
             ->with('en_US');
 
-        $event = new GetResponseEvent(
+        $event = new RequestEvent(
             $this->httpKernel,
             $this->request,
             HttpKernelInterface::MASTER_REQUEST
@@ -163,7 +163,7 @@ class RequestLocaleListenerTest extends TestCase
             ->method('setLocale')
             ->with('en_US');
 
-        $event = new GetResponseEvent(
+        $event = new RequestEvent(
             $this->httpKernel,
             $this->request,
             HttpKernelInterface::MASTER_REQUEST
@@ -204,7 +204,7 @@ class RequestLocaleListenerTest extends TestCase
 
         $this->request->attributes->set('siteaccess', new Attribute());
 
-        $event = new GetResponseEvent(
+        $event = new RequestEvent(
             $this->httpKernel,
             $this->request,
             HttpKernelInterface::MASTER_REQUEST
