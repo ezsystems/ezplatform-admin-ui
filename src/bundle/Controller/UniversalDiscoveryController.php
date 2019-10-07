@@ -23,6 +23,7 @@ use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformRest\Output\Visitor;
 use EzSystems\EzPlatformRest\Server\Values\Version;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class UniversalDiscoveryController extends Controller
 {
@@ -84,52 +85,46 @@ class UniversalDiscoveryController extends Controller
     }
 
     public function locationAction(
-        Location $location,
-        int $offset,
-        int $limit,
-        string $sortClause,
-        string $sortOrder
+        Request $request,
+        Location $location
     ): JsonResponse {
-        $sortClauseClass = $this->sortClauseClassMap[$sortClause] ?? $this->sortClauseClassMap[self::SORT_CLAUSE_DATE_PUBLISHED];
-        $sortOrder = !in_array($sortOrder, $this->availableSortOrder)
-            ? $this->availableSortOrder[0]
-            : $sortOrder;
+        $offset = $request->query->getInt('offset', 0);
+        $limit = $request->query->getInt('limit', 25);
+        $sortClauseName = $request->query->getAlpha('sortClause', self::SORT_CLAUSE_DATE_PUBLISHED);
+        $sortOrder = $request->query->getAlpha('sortOrder', Query::SORT_ASC);
+
+        $sortClause = $this->getSortClause($sortClauseName, $sortOrder);
 
         return new JsonResponse(
-            $this->getLocationData($location, $offset, $limit, new $sortClauseClass($sortOrder))
+            $this->getLocationData($location, $offset, $limit, $sortClause)
         );
     }
 
     public function locationGridViewAction(
-        Location $location,
-        int $offset,
-        int $limit,
-        string $sortClause,
-        string $sortOrder
+        Request $request,
+        Location $location
     ): JsonResponse {
-        $sortClauseClass = $this->sortClauseClassMap[$sortClause] ?? $this->sortClauseClassMap[self::SORT_CLAUSE_DATE_PUBLISHED];
-        $sortOrder = !in_array($sortOrder, $this->availableSortOrder)
-            ? $this->availableSortOrder[0]
-            : $sortOrder;
+        $offset = $request->query->getInt('offset', 0);
+        $limit = $request->query->getInt('limit', 25);
+        $sortClauseName = $request->query->getAlpha('sortClause', self::SORT_CLAUSE_DATE_PUBLISHED);
+        $sortOrder = $request->query->getAlpha('sortOrder', Query::SORT_ASC);
+
+        $sortClause = $this->getSortClause($sortClauseName, $sortOrder);
 
         return new JsonResponse(
-            $this->getLocationGridViewData($location, $offset, $limit, new $sortClauseClass($sortOrder))
+            $this->getLocationGridViewData($location, $offset, $limit, $sortClause)
         );
     }
 
     public function accordionAction(
-        Location $location,
-        int $offset,
-        int $limit,
-        string $sortClause,
-        string $sortOrder
+        Request $request,
+        Location $location
     ): JsonResponse {
-        $sortClauseClass = $this->sortClauseClassMap[$sortClause] ?? $this->sortClauseClassMap[self::SORT_CLAUSE_DATE_PUBLISHED];
-        $sortOrder = !in_array($sortOrder, $this->availableSortOrder)
-            ? $this->availableSortOrder[0]
-            : $sortOrder;
+        $limit = $request->query->getInt('limit', 25);
+        $sortClauseName = $request->query->getAlpha('sortClause', self::SORT_CLAUSE_DATE_PUBLISHED);
+        $sortOrder = $request->query->getAlpha('sortOrder', Query::SORT_ASC);
 
-        $sortClauseObject = new $sortClauseClass($sortOrder);
+        $sortClause = $this->getSortClause($sortClauseName, $sortOrder);
 
         $breadcrumbLocations = $this->getBreadcrumbLocations($location);
         $breadcrumbLocationsLast = count($breadcrumbLocations) - 1;
@@ -147,13 +142,13 @@ class UniversalDiscoveryController extends Controller
                 $columns[$columnLocation->id] = [
                     'location' => $this->getRestFormat($columnLocation),
                     'subitems' => [
-                        'locations' => $this->getSubitemLocations($columnLocation, $offset, $limit, $sortClauseObject),
+                        'locations' => $this->getSubitemLocations($columnLocation, 0, $limit, $sortClause),
                     ],
                 ];
             }
         }
 
-        $columns[$location->id] = $this->getLocationData($location, $offset, $limit, $sortClauseObject);
+        $columns[$location->id] = $this->getLocationData($location, 0, $limit, $sortClause);
 
         return new JsonResponse([
             'breadcrumb' => array_map(
@@ -167,16 +162,14 @@ class UniversalDiscoveryController extends Controller
     }
 
     public function accordionGridViewAction(
-        Location $location,
-        int $offset,
-        int $limit,
-        string $sortClause,
-        string $sortOrder
+        Request $request,
+        Location $location
     ): JsonResponse {
-        $sortClauseClass = $this->sortClauseClassMap[$sortClause] ?? $this->sortClauseClassMap[self::SORT_CLAUSE_DATE_PUBLISHED];
-        $sortOrder = !in_array($sortOrder, $this->availableSortOrder)
-            ? $this->availableSortOrder[0]
-            : $sortOrder;
+        $limit = $request->query->getInt('limit', 25);
+        $sortClauseName = $request->query->getAlpha('sortClause', self::SORT_CLAUSE_DATE_PUBLISHED);
+        $sortOrder = $request->query->getAlpha('sortOrder', Query::SORT_ASC);
+
+        $sortClause = $this->getSortClause($sortClauseName, $sortOrder);
 
         return new JsonResponse([
             'breadcrumb' => array_map(
@@ -186,7 +179,7 @@ class UniversalDiscoveryController extends Controller
                 $this->getBreadcrumbLocations($location)
             ),
             'columns' => [
-                $location->id => $this->getLocationGridViewData($location, $offset, $limit, new $sortClauseClass[$sortOrder]),
+                $location->id => $this->getLocationGridViewData($location, 0, $limit, $sortClause),
             ],
         ]);
     }
@@ -327,6 +320,16 @@ class UniversalDiscoveryController extends Controller
             $this->visitor->visit($valueObject)->getContent(),
             true
         );
+    }
+
+    private function getSortClause(string $sortClauseName, string $sortOrder): Query\SortClause
+    {
+        $sortClauseClass = $this->sortClauseClassMap[$sortClauseName] ?? $this->sortClauseClassMap[self::SORT_CLAUSE_DATE_PUBLISHED];
+        $sortOrder = !in_array($sortOrder, $this->availableSortOrder)
+            ? $this->availableSortOrder[0]
+            : $sortOrder;
+
+        return new $sortClauseClass($sortOrder);
     }
 }
 
