@@ -50,7 +50,7 @@ class ObjectStateGroupTransformer implements DataTransformerInterface
         }
 
         try {
-            return $this->objectStateService->loadObjectStateGroup($value);
+            return $this->objectStateService->loadObjectStateGroup((int)$value);
         } catch (NotFoundException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
