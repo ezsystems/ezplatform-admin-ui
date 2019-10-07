@@ -26,17 +26,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UniversalDiscoveryController extends Controller
 {
+    private const SORT_CLAUSE_DATE_PUBLISHED = 'DatePublished';
+    private const SORT_CLAUSE_CONTENT_NAME = 'ContentName';
+
     /** @var \eZ\Publish\API\Repository\LocationService */
-    protected $locationService;
+    private $locationService;
 
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    protected $contentTypeService;
+    private $contentTypeService;
 
     /** @var \eZ\Publish\API\Repository\SearchService */
-    protected $searchService;
+    private $searchService;
 
     /** @var \EzSystems\EzPlatformRest\Output\Visitor */
-    protected $visitor;
+    private $visitor;
 
     /** @var \eZ\Publish\API\Repository\BookmarkService */
     private $bookmarkService;
@@ -49,6 +52,16 @@ class UniversalDiscoveryController extends Controller
 
     /** @var \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer */
     private $lookupLimitationsTransformer;
+
+    private $sortClauseClassMap = [
+        self::SORT_CLAUSE_DATE_PUBLISHED => Query\SortClause\DatePublished::class,
+        self::SORT_CLAUSE_CONTENT_NAME => Query\SortClause\ContentName::class,
+    ];
+
+    private $availableSortOrder = [
+        Query::SORT_ASC,
+        Query::SORT_DESC,
+    ];
 
     public function __construct(
         LocationService $locationService,
@@ -71,52 +84,76 @@ class UniversalDiscoveryController extends Controller
     }
 
     public function locationAction(
-        Location $location
+        Location $location,
+        int $offset,
+        int $limit,
+        string $sortClause,
+        string $sortOrder
     ): JsonResponse {
+        $sortClauseClass = $this->sortClauseClassMap[$sortClause] ?? $this->sortClauseClassMap[self::SORT_CLAUSE_DATE_PUBLISHED];
+        $sortOrder = !in_array($sortOrder, $this->availableSortOrder)
+            ? $this->availableSortOrder[0]
+            : $sortOrder;
+
         return new JsonResponse(
-            $this->getLocationData($location)
+            $this->getLocationData($location, $offset, $limit, new $sortClauseClass($sortOrder))
         );
     }
 
     public function locationGridViewAction(
-        Location $location
+        Location $location,
+        int $offset,
+        int $limit,
+        string $sortClause,
+        string $sortOrder
     ): JsonResponse {
+        $sortClauseClass = $this->sortClauseClassMap[$sortClause] ?? $this->sortClauseClassMap[self::SORT_CLAUSE_DATE_PUBLISHED];
+        $sortOrder = !in_array($sortOrder, $this->availableSortOrder)
+            ? $this->availableSortOrder[0]
+            : $sortOrder;
+
         return new JsonResponse(
-            $this->getLocationGridViewData($location)
+            $this->getLocationGridViewData($location, $offset, $limit, new $sortClauseClass($sortOrder))
         );
     }
 
-    public function getParentLocationPath(Location $location): array
-    {
-        $parentPath = array_slice($location->path, 0, -1);
-
-        return array_map(static function ($locationId) {
-            return (int)$locationId;
-        }, $parentPath);
-    }
-
     public function accordionAction(
-        Location $location
+        Location $location,
+        int $offset,
+        int $limit,
+        string $sortClause,
+        string $sortOrder
     ): JsonResponse {
-        $breadcrumbLocations = $this->getBreadcrumbLocations($location);
+        $sortClauseClass = $this->sortClauseClassMap[$sortClause] ?? $this->sortClauseClassMap[self::SORT_CLAUSE_DATE_PUBLISHED];
+        $sortOrder = !in_array($sortOrder, $this->availableSortOrder)
+            ? $this->availableSortOrder[0]
+            : $sortOrder;
 
-        $columnLocations = array_filter([
-            reset($breadcrumbLocations),
-            end($breadcrumbLocations),
-        ]);
+        $sortClauseObject = new $sortClauseClass($sortOrder);
+
+        $breadcrumbLocations = $this->getBreadcrumbLocations($location);
+        $breadcrumbLocationsLast = count($breadcrumbLocations) - 1;
+
+        $columnLocations = $breadcrumbLocationsLast < 2
+            ? $breadcrumbLocations
+            : [
+                $breadcrumbLocations[0], // First
+                $breadcrumbLocations[$breadcrumbLocationsLast - 1], // Before last
+                $breadcrumbLocations[$breadcrumbLocationsLast], // Last
+            ];
 
         foreach ($columnLocations as $columnLocation) {
             if (!isset($columns[$columnLocation->id])) {
                 $columns[$columnLocation->id] = [
                     'location' => $this->getRestFormat($columnLocation),
                     'subitems' => [
-                        'locations' => $this->getSubitemLocations($columnLocation),
+                        'locations' => $this->getSubitemLocations($columnLocation, $offset, $limit, $sortClauseObject),
                     ],
                 ];
             }
         }
 
-        $columns[$location->id] = $this->getLocationData($location);
+        $columns[$location->id] = $this->getLocationData($location, $offset, $limit, $sortClauseObject);
 
         return new JsonResponse([
             'breadcrumb' => array_map(
@@ -130,8 +167,17 @@ class UniversalDiscoveryController extends Controller
     }
 
     public function accordionGridViewAction(
-        Location $location
+        Location $location,
+        int $offset,
+        int $limit,
+        string $sortClause,
+        string $sortOrder
     ): JsonResponse {
+        $sortClauseClass = $this->sortClauseClassMap[$sortClause] ?? $this->sortClauseClassMap[self::SORT_CLAUSE_DATE_PUBLISHED];
+        $sortOrder = !in_array($sortOrder, $this->availableSortOrder)
+            ? $this->availableSortOrder[0]
+            : $sortOrder;
+
         return new JsonResponse([
             'breadcrumb' => array_map(
                 function (Location $location) {
@@ -140,9 +186,18 @@ class UniversalDiscoveryController extends Controller
                 $this->getBreadcrumbLocations($location)
             ),
             'columns' => [
-                $location->id => $this->getLocationGridViewData($location),
+                $location->id => $this->getLocationGridViewData($location, $offset, $limit, new $sortClauseClass[$sortOrder]),
             ],
         ]);
+    }
+
+    private function getParentLocationPath(Location $location): array
+    {
+        $parentPath = array_slice($location->path, 0, -1);
+
+        return array_map(static function ($locationId) {
+            return (int)$locationId;
+        }, $parentPath);
     }
 
     private function getBreadcrumbLocations(Location $location): array
@@ -175,11 +230,18 @@ class UniversalDiscoveryController extends Controller
         ];
     }
 
-    private function getSubitemContents(Location $location): array
-    {
+    private function getSubitemContents(
+        Location $location,
+        int $offset,
+        int $limit,
+        Query\SortClause $sortClause
+    ): array {
         $searchResult = $this->searchService->findContent(
             new LocationQuery([
                 'filter' => new Query\Criterion\ParentLocationId($location->id),
+                'sortClauses' => [$sortClause],
+                'offset' => $offset,
+                'limit' => $limit,
             ])
         );
 
@@ -195,11 +257,18 @@ class UniversalDiscoveryController extends Controller
         );
     }
 
-    private function getSubitemLocations(Location $location): array
-    {
+    private function getSubitemLocations(
+        Location $location,
+        int $offset,
+        int $limit,
+        Query\SortClause $sortClause
+    ): array {
         $searchResult = $this->searchService->findLocations(
             new LocationQuery([
                 'filter' => new Query\Criterion\ParentLocationId($location->id),
+                'sortClauses' => [$sortClause],
+                'offset' => $offset,
+                'limit' => $limit,
             ])
         );
 
@@ -211,8 +280,12 @@ class UniversalDiscoveryController extends Controller
         );
     }
 
-    private function getLocationData(Location $location): array
-    {
+    private function getLocationData(
+        Location $location,
+        int $offset,
+        int $limit,
+        Query\SortClause $sortClause
+    ): array {
         $content = $this->contentService->loadContentByContentInfo($location->getContentInfo());
         $contentType = $this->contentTypeService->loadContentType($location->getContentInfo()->contentTypeId);
 
@@ -222,13 +295,17 @@ class UniversalDiscoveryController extends Controller
             'permissions' => $this->getLocationPermissionRestrictions($location),
             'version' => $this->getRestFormat(new Version($content, $contentType, [])),
             'subitems' => [
-                'locations' => $this->getSubitemLocations($location),
+                'locations' => $this->getSubitemLocations($location, $offset, $limit, $sortClause),
             ],
         ];
     }
 
-    private function getLocationGridViewData(Location $location): array
-    {
+    private function getLocationGridViewData(
+        Location $location,
+        int $offset,
+        int $limit,
+        Query\SortClause $sortClause
+    ): array {
         $content = $this->contentService->loadContentByContentInfo($location->getContentInfo());
         $contentType = $this->contentTypeService->loadContentType($location->getContentInfo()->contentTypeId);
 
@@ -238,8 +315,8 @@ class UniversalDiscoveryController extends Controller
             'permissions' => $this->getLocationPermissionRestrictions($location),
             'version' => $this->getRestFormat(new Version($content, $contentType, [])),
             'subitems' => [
-                'locations' => $this->getSubitemLocations($location),
-                'versions' => $this->getSubitemContents($location),
+                'locations' => $this->getSubitemLocations($location, $offset, $limit, $sortClause),
+                'versions' => $this->getSubitemContents($location, $offset, $limit, $sortClause),
             ],
         ];
     }
@@ -252,3 +329,4 @@ class UniversalDiscoveryController extends Controller
         );
     }
 }
+
