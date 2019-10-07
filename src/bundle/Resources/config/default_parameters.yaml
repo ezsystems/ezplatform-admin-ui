@@ -1,5 +1,4 @@
 parameters:
-    ezsettings.admin_group.content_edit.templates.create_draft: '@@ezdesign/content/create.html.twig'
     ezsettings.admin_group.user_edit.templates.update: '@@ezdesign/user/edit.html.twig'
     ezsettings.admin_group.user_edit.templates.create: '@@ezdesign/user/create.html.twig'
 

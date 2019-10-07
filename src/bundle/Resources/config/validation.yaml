@@ -1,0 +1,164 @@
+EzSystems\EzPlatformAdminUi\RepositoryForms\Data\ContentTypeData:
+    constraints:
+        - EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueContentTypeIdentifier: ~
+    properties:
+        identifier:
+            - NotBlank: ~
+            - Length:
+                max: 50
+            - Regex:
+                pattern: "/^[[:alnum:]_]+$/"
+                message: "ez.content_type.identifier.pattern"
+        urlAliasSchema:
+            - Length:
+                max: 255
+        nameSchema:
+            - Length:
+                max: 255
+        defaultSortField:
+            - Choice:
+                # See eZ\Publish\API\Repository\Values\Content\Location::SORT_FIELD_*
+                choices: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        defaultSortOrder:
+            - Choice:
+                # See eZ\Publish\API\Repository\Values\Content\Location::SORT_ORDER_*
+                choices: [0, 1]
+        names:
+            - Expression:
+                expression: "value and value[this.languageCode] matches '/^.{1,255}$/'"
+                message: "ez.content_type.names"
+        descriptions:
+            - Expression:
+                expression: "!value or value[this.languageCode] matches '/^.{0,255}$/'"
+                message: "ez.content_type.descriptions"
+        fieldDefinitionsData:
+            - Valid: ~
+
+EzSystems\EzPlatformAdminUi\RepositoryForms\Data\FieldDefinitionData:
+    constraints:
+        - EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueFieldDefinitionIdentifier: ~
+        - EzSystems\EzPlatformAdminUi\Validator\Constraints\ValidatorConfiguration: ~
+        - EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldSettings: ~
+        - EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldDefinitionDefaultValue: ~
+    properties:
+        identifier:
+            - NotBlank: ~
+            - Length:
+                max: 50
+            - Regex:
+                pattern: "/^[[:alnum:]_]+$/"
+                message: "ez.content_type.identifier.pattern"
+        names:
+            - Expression:
+                expression: "value and value[this.contentTypeData.languageCode] matches '/^.{1,255}$/'"
+                message: "ez.field_definition.names"
+        descriptions:
+            - Expression:
+                expression: "!value or value[this.contentTypeData.languageCode] matches '/^.{0,255}$/'"
+                message: "ez.field_definition.descriptions"
+        position:
+            - Type:
+                type: integer
+
+EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Role\RoleData:
+    constraints:
+        - EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueRoleIdentifier: ~
+    properties:
+        identifier:
+            - NotBlank: ~
+            - Length:
+                max: 255
+
+eZ\Publish\API\Repository\Values\Content\SectionStruct:
+    constraints:
+        - EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueSectionIdentifier: ~
+    properties:
+        identifier:
+            - NotBlank: ~
+            - Regex:
+                pattern: "/^[[:alnum:]_]+$/"
+                message: "ez.section.identifier.format"
+        name:
+            - NotBlank: ~
+
+eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroupStruct:
+    properties:
+        identifier:
+            - NotBlank: ~
+
+EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\ContentCreateData:
+    properties:
+        fieldsData:
+            - Valid: ~
+
+EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\ContentUpdateData:
+    properties:
+        fieldsData:
+            - Valid: ~
+
+EzSystems\EzPlatformAdminUi\RepositoryForms\Data\User\UserCreateData:
+    properties:
+        login:
+            - NotBlank: ~
+        email:
+            - NotBlank: ~
+        password:
+            - NotBlank: ~
+        fieldsData:
+            - Valid: ~
+
+EzSystems\EzPlatformAdminUi\RepositoryForms\Data\User\UserUpdateData:
+    properties:
+        fieldsData:
+            - Valid: ~
+
+EzSystems\EzPlatformAdminUi\RepositoryForms\Data\User\UserAccountFieldData:
+    properties:
+        username:
+            - Valid: ~
+            - NotBlank: ~
+
+EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\FieldData:
+    constraints:
+        - EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldValue: ~
+
+EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Language\LanguageCreateData:
+    constraints:
+        - EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueLanguageCode: ~
+    properties:
+        languageCode:
+            - NotBlank: ~
+            - Length:
+                max: 20
+        name:
+            - NotBlank: ~
+            - Length:
+                max: 255
+
+EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Language\LanguageUpdateData:
+    constraints:
+        - EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueLanguageCode: ~
+    properties:
+        languageCode:
+            - NotBlank: ~
+            - Length:
+                max: 20
+        name:
+            - NotBlank: ~
+            - Length:
+                max: 255
+
+EzSystems\EzPlatformAdminUi\RepositoryForms\Data\URLListData:
+    properties:
+        url:
+            searchQuery:
+                - Length:
+                    min: 3
+                    max: 255
+
+eZ\Publish\API\Repository\Values\URL\URLUpdateStruct:
+    constraints:
+        - EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueURL: ~
+    properties:
+        url:
+            - NotBlank: ~

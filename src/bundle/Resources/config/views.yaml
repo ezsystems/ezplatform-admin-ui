@@ -51,5 +51,6 @@ system:
                     match:
                         Identifier: [full_datetime_format, short_datetime_format]
 
+    default:
         fielddefinition_edit_templates:
-            - { template: '@ezdesign/content_type/field_types.html.twig', priority: 10 }
+            - { template: '@ezdesign/content_type/field_types.html.twig', priority: 0 }

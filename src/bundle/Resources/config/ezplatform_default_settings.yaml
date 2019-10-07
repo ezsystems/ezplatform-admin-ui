@@ -48,6 +48,14 @@ parameters:
 
     # Views
     ezsettings.default.content_translate_view: {}
+    ezsettings.default.content_edit_view: {}
+    ezsettings.default.content_create_view: {}
+    ezsettings.default.content_edit.templates.edit: '@@ezdesign/content/edit/edit.html.twig'
+    ezsettings.default.content_edit.templates.create: '@@ezdesign/content/edit/edit.html.twig'
+    ezsettings.default.user_edit.templates.update: '@@ezdesign/content/edit/edit.html.twig'
+    ezsettings.default.user_edit.templates.create: '@@ezdesign/content/edit/edit.html.twig'
+    ezsettings.default.limitation_value_templates:
+        - { template: '@@ezdesign/limitation/limitation_values.html.twig', priority: 0 }
     ezsettings.admin_group.user_settings.templates.list: "@@ezdesign/account/settings/list.html.twig"
     ezsettings.admin_group.user_settings.templates.update: "@@ezdesign/account/settings/update.html.twig"
     ezsettings.admin_group.user_change_password.templates.form: "@@ezdesign/account/change_password/index.html.twig"
