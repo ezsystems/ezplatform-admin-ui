@@ -8,7 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Tests\RepositoryForms\Data;
 
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\ContentTranslationData;
 use PHPUnit\Framework\TestCase;
-use EzSystems\RepositoryForms\Data\Content\FieldData;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\FieldData;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 
 class ContentTranslationDataTest extends TestCase

@@ -17,7 +17,7 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Field;
-use EzSystems\RepositoryForms\Data\Content\FieldData;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\FieldData;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 

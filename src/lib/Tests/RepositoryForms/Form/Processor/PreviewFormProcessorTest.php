@@ -11,13 +11,13 @@ namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
-use EzSystems\RepositoryForms\Data\Content\FieldData;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\FieldData;
 use PHPUnit\Framework\TestCase;
 use eZ\Publish\API\Repository\ContentService;
 use EzSystems\EzPlatformAdminUi\Form\Event\ContentEditEvents;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\RepositoryForms\Data\Content\ContentCreateData;
-use EzSystems\RepositoryForms\Event\FormActionEvent;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\ContentCreateData;
+use EzSystems\EzPlatformAdminUi\Event\FormActionEvent;
 use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -257,7 +257,7 @@ class PreviewFormProcessorTest extends TestCase
         $urlGenerator
             ->expects(self::once())
             ->method('generate')
-            ->with('ez_content_create_no_draft', [
+            ->with('ezplatform.content.create_no_draft', [
                 'parentLocationId' => '234',
                 'contentTypeIdentifier' => $contentDraft->id,
                 'language' => $languageCode,

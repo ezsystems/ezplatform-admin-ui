@@ -19,8 +19,8 @@ use eZ\Publish\Core\MVC\Symfony\View\View;
 use eZ\Publish\Core\Repository\Values\Content as Core;
 use eZ\Publish\Core\Repository\Values\User\User as CoreUser;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\View\ViewParametersListener;
-use EzSystems\RepositoryForms\Content\View\ContentEditView;
-use EzSystems\RepositoryForms\User\View\UserUpdateView;
+use EzSystems\EzPlatformAdminUi\View\ContentEditView;
+use EzSystems\EzPlatformAdminUi\View\UserUpdateView;
 use PHPUnit\Framework\TestCase;
 
 class ViewParametersListenerTest extends TestCase
