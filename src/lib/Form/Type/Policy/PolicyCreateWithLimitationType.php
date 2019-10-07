@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use EzSystems\RepositoryForms\Form\Type\Role\LimitationType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType;
 
 class PolicyCreateWithLimitationType extends AbstractType
 {
