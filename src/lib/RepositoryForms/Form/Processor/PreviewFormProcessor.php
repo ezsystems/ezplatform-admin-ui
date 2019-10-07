@@ -21,11 +21,11 @@ use eZ\Publish\API\Repository\Values\Content\ContentStruct;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Event\ContentEditEvents;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\RepositoryForms\Data\Content\ContentCreateData;
-use EzSystems\RepositoryForms\Data\Content\ContentUpdateData;
-use EzSystems\RepositoryForms\Data\NewnessCheckable;
-use EzSystems\RepositoryForms\Data\NewnessChecker;
-use EzSystems\RepositoryForms\Event\FormActionEvent;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\ContentCreateData;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\ContentUpdateData;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\NewnessCheckable;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\NewnessChecker;
+use EzSystems\EzPlatformAdminUi\Event\FormActionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
@@ -165,12 +165,12 @@ class PreviewFormProcessor implements EventSubscriberInterface
     private function getContentEditUrl($data, string $languageCode): string
     {
         return $data->isNew()
-            ? $this->urlGenerator->generate('ez_content_create_no_draft', [
+            ? $this->urlGenerator->generate('ezplatform.content.create_no_draft', [
                 'parentLocationId' => $data->getLocationStructs()[0]->parentLocationId,
                 'contentTypeIdentifier' => $data->contentType->identifier,
                 'language' => $languageCode,
             ])
-            : $this->urlGenerator->generate('ez_content_draft_edit', [
+            : $this->urlGenerator->generate('ezplatform.content.draft.edit', [
                 'contentId' => $data->contentDraft->id,
                 'versionNo' => $data->contentDraft->getVersionInfo()->versionNo,
                 'language' => $languageCode,
@@ -192,7 +192,7 @@ class PreviewFormProcessor implements EventSubscriberInterface
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      * @param \eZ\Publish\API\Repository\Values\Content\Location|null $referrerLocation
-     * @param \EzSystems\RepositoryForms\Data\NewnessCheckable $data
+     * @param \EzSystems\EzPlatformAdminUi\RepositoryForms\Data\NewnessCheckable $data
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Location|null
      */

@@ -12,8 +12,7 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\ContentTranslationData;
-use EzSystems\RepositoryForms\Data\Content\FieldData;
-use EzSystems\RepositoryForms\Data\Mapper\FormDataMapperInterface;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\FieldData;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContentTranslationMapper implements FormDataMapperInterface

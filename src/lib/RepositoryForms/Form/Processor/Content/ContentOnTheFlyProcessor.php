@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content;
 
 use eZ\Publish\API\Repository\ContentService;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\ContentOnTheFlyDispatcher;
-use EzSystems\RepositoryForms\Event\FormActionEvent;
+use EzSystems\EzPlatformAdminUi\Event\FormActionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -46,7 +46,7 @@ class ContentOnTheFlyProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
+     * @param \EzSystems\EzPlatformAdminUi\Event\FormActionEvent $event
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime

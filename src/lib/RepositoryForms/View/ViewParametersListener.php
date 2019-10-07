@@ -21,9 +21,9 @@ use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use eZ\Publish\Core\MVC\Symfony\View\View;
 use EzSystems\EzPlatformAdminUi\View\ContentTranslateView;
-use EzSystems\RepositoryForms\Content\View\ContentCreateView;
-use EzSystems\RepositoryForms\Content\View\ContentEditView;
-use EzSystems\RepositoryForms\User\View\UserUpdateView;
+use EzSystems\EzPlatformAdminUi\View\ContentCreateView;
+use EzSystems\EzPlatformAdminUi\View\ContentEditView;
+use EzSystems\EzPlatformAdminUi\View\UserUpdateView;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

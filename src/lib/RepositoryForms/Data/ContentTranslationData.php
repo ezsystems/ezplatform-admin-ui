@@ -4,35 +4,33 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Data;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
-use EzSystems\RepositoryForms\Data\Content\FieldData;
-use EzSystems\RepositoryForms\Data\ContentTranslationData as BaseContentTranslationData;
-use EzSystems\RepositoryForms\Data\NewnessCheckable;
+use eZ\Publish\Core\Repository\Values\Content\ContentUpdateStruct;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\FieldData;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @property FieldData[] $fieldsData
- * @property Content $content
- */
-class ContentTranslationData extends BaseContentTranslationData implements NewnessCheckable
+class ContentTranslationData extends ContentUpdateStruct implements NewnessCheckable
 {
     /**
-     * @var \EzSystems\RepositoryForms\Data\Content\FieldData[]
+     * @var \EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\FieldData[]
      *
      * @Assert\Valid()
      */
     protected $fieldsData;
 
-    public function addFieldData(FieldData $fieldData)
+    /** @var \eZ\Publish\API\Repository\Values\Content\Content */
+    protected $content;
+
+    /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType */
+    protected $contentType;
+
+    public function addFieldData(FieldData $fieldData): void
     {
         $this->fieldsData[$fieldData->fieldDefinition->identifier] = $fieldData;
     }
-
-    protected $content;
-
-    protected $contentType;
 
     public function isNew(): bool
     {

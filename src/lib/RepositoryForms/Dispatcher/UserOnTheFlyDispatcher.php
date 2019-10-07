@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher;
 
-use EzSystems\RepositoryForms\Form\ActionDispatcher\AbstractActionDispatcher;
+use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\AbstractActionDispatcher;
 
 class UserOnTheFlyDispatcher extends AbstractActionDispatcher
 {

@@ -10,8 +10,8 @@ namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\User;
 
 use eZ\Publish\API\Repository\UserService;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\UserOnTheFlyDispatcher;
-use EzSystems\RepositoryForms\Data\User\UserCreateData;
-use EzSystems\RepositoryForms\Event\FormActionEvent;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\User\UserCreateData;
+use EzSystems\EzPlatformAdminUi\Event\FormActionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -47,7 +47,7 @@ class UserOnTheFlyProcessor implements EventSubscriberInterface
     }
 
     /**d
-     * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
+     * @param \EzSystems\EzPlatformAdminUi\Event\FormActionEvent $event
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -80,7 +80,7 @@ class UserOnTheFlyProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param \EzSystems\RepositoryForms\Data\User\UserCreateData $data
+     * @param \EzSystems\EzPlatformAdminUi\RepositoryForms\Data\User\UserCreateData $data
      * @param string $languageCode
      */
     private function setContentFields(UserCreateData $data, string $languageCode): void

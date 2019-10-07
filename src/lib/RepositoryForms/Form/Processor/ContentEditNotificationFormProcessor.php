@@ -10,8 +10,8 @@ namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor;
 
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\RepositoryForms\Event\FormActionEvent;
-use EzSystems\RepositoryForms\Event\RepositoryFormEvents;
+use EzSystems\EzPlatformAdminUi\Event\FormActionEvent;
+use EzSystems\EzPlatformAdminUi\Event\RepositoryFormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -54,7 +54,7 @@ class ContentEditNotificationFormProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
+     * @param \EzSystems\EzPlatformAdminUi\Event\FormActionEvent $event
      *
      * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
@@ -72,7 +72,7 @@ class ContentEditNotificationFormProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
+     * @param \EzSystems\EzPlatformAdminUi\Event\FormActionEvent $event
      *
      * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */

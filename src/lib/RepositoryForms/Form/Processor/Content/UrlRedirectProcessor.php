@@ -10,9 +10,9 @@ namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
-use EzSystems\RepositoryForms\Event\FormActionEvent;
-use EzSystems\RepositoryForms\Event\RepositoryFormEvents;
-use EzSystems\RepositoryForms\Form\Processor\SystemUrlRedirectProcessor;
+use EzSystems\EzPlatformAdminUi\Event\FormActionEvent;
+use EzSystems\EzPlatformAdminUi\Event\RepositoryFormEvents;
+use EzSystems\EzPlatformAdminUi\Form\Processor\SystemUrlRedirectProcessor;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class UrlRedirectProcessor implements EventSubscriberInterface
@@ -20,7 +20,7 @@ class UrlRedirectProcessor implements EventSubscriberInterface
     /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess */
     private $siteaccess;
 
-    /** @var \EzSystems\RepositoryForms\Form\Processor\SystemUrlRedirectProcessor */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Processor\SystemUrlRedirectProcessor */
     private $systemUrlRedirectProcessor;
 
     /** @var array */
@@ -28,7 +28,7 @@ class UrlRedirectProcessor implements EventSubscriberInterface
 
     /**
      * @param \eZ\Publish\Core\MVC\Symfony\SiteAccess $siteaccess
-     * @param \EzSystems\RepositoryForms\Form\Processor\SystemUrlRedirectProcessor $systemUrlRedirectProcessor
+     * @param \EzSystems\EzPlatformAdminUi\Form\Processor\SystemUrlRedirectProcessor $systemUrlRedirectProcessor
      * @param array $siteaccessGroups
      */
     public function __construct(
@@ -53,7 +53,7 @@ class UrlRedirectProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
+     * @param \EzSystems\EzPlatformAdminUi\Event\FormActionEvent $event
      *
      * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
@@ -73,7 +73,7 @@ class UrlRedirectProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
+     * @param \EzSystems\EzPlatformAdminUi\Event\FormActionEvent $event
      *
      * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException

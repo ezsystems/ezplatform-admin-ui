@@ -8,10 +8,10 @@ namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor;
 
 use eZ\Publish\API\Repository\ContentService;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\ContentTranslationData;
-use EzSystems\RepositoryForms\Data\Content\ContentUpdateData;
-use EzSystems\RepositoryForms\Data\Content\FieldData;
-use EzSystems\RepositoryForms\Event\FormActionEvent;
-use EzSystems\RepositoryForms\Event\RepositoryFormEvents;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\ContentUpdateData;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Content\FieldData;
+use EzSystems\EzPlatformAdminUi\Event\FormActionEvent;
+use EzSystems\EzPlatformAdminUi\Event\RepositoryFormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
