@@ -23,9 +23,9 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\ContentType\TranslationsTab;
-use EzSystems\RepositoryForms\Data\Mapper\ContentTypeDraftMapper;
-use EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface;
-use EzSystems\RepositoryForms\Form\Type\ContentType\ContentTypeUpdateType;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Mapper\ContentTypeDraftMapper;
+use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ActionDispatcherInterface;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeUpdateType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use eZ\Publish\API\Repository\Exceptions\BadStateException;
@@ -51,7 +51,7 @@ class ContentTypeController extends Controller
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var \EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ActionDispatcherInterface */
     private $contentTypeActionDispatcher;
 
     /** @var array */
@@ -75,14 +75,14 @@ class ContentTypeController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory */
     private $contentTypeFormFactory;
 
-    /** @var \EzSystems\RepositoryForms\Data\Mapper\ContentTypeDraftMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Mapper\ContentTypeDraftMapper */
     private $contentTypeDraftMapper;
 
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
      * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface $contentTypeActionDispatcher
+     * @param \EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ActionDispatcherInterface $contentTypeActionDispatcher
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param array $languages

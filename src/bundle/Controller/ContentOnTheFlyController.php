@@ -19,10 +19,10 @@ use EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\ContentOnTheFlyDispat
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\UserOnTheFlyDispatcher;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\View\ContentCreateOnTheFlyView;
-use EzSystems\RepositoryForms\Data\Mapper\ContentCreateMapper;
-use EzSystems\RepositoryForms\Data\Mapper\UserCreateMapper;
-use EzSystems\RepositoryForms\Form\Type\Content\ContentEditType;
-use EzSystems\RepositoryForms\Form\Type\User\UserCreateType;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Mapper\ContentCreateMapper;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Mapper\UserCreateMapper;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentEditType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserCreateType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -43,7 +43,7 @@ class ContentOnTheFlyController extends Controller
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
-    /** @var \EzSystems\RepositoryForms\Form\ActionDispatcher\UserDispatcher */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\UserDispatcher */
     private $userActionDispatcher;
 
     /** @var array */
