@@ -1,12 +1,12 @@
 {# Template blocks to be used for fieldDefinition edition #}
 {# Block naming convention is <fieldTypeIdentifier>_field_definition_edit #}
 {# Following variables are passed:
- # - \EzSystems\RepositoryForms\Data\FieldDefinitionData data Data object for current fieldDefinition.
+ # - \EzSystems\EzPlatformAdminUi\RepositoryForms\Data\FieldDefinitionData data Data object for current fieldDefinition.
  # - \Symfony\Component\Form\FormView form Field definition form.
  # - string languageCode
  #}
 
-{# @var data \EzSystems\RepositoryForms\Data\FieldDefinitionData #}
+{# @var data \EzSystems\EzPlatformAdminUi\RepositoryForms\Data\FieldDefinitionData #}
 {# @var form \Symfony\Component\Form\FormView #}
 {% block ezauthor_field_definition_edit %}
     <div class="ezauthor-settings default-type{% if group_class is not empty %} {{ group_class }}{% endif %}">
