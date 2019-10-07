@@ -12,13 +12,14 @@ use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\View\Builder\ViewBuilder;
 use eZ\Publish\Core\MVC\Symfony\View\Configurator;
 use eZ\Publish\Core\MVC\Symfony\View\ParametersInjector;
-use EzSystems\EzPlatformAdminUi\View\ContentTranslateSuccessView;
-use EzSystems\EzPlatformAdminUi\View\ContentTranslateView;
+use EzSystems\EzPlatformAdminUi\View\ContentEditSuccessView;
+use EzSystems\EzPlatformAdminUi\View\ContentEditView;
 use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ActionDispatcherInterface;
 
 /**
@@ -26,7 +27,7 @@ use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ActionDispatcherInterface;
  *
  * @internal
  */
-class ContentTranslateViewBuilder implements ViewBuilder
+class ContentEditViewBuilder implements ViewBuilder
 {
     /** @var \eZ\Publish\API\Repository\Repository */
     private $repository;
@@ -36,6 +37,9 @@ class ContentTranslateViewBuilder implements ViewBuilder
 
     /** @var \eZ\Publish\Core\MVC\Symfony\View\ParametersInjector */
     private $viewParametersInjector;
+
+    /** @var string */
+    private $defaultTemplate;
 
     /** @var \EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ActionDispatcherInterface */
     private $contentActionDispatcher;
@@ -47,6 +51,7 @@ class ContentTranslateViewBuilder implements ViewBuilder
      * @param \eZ\Publish\API\Repository\Repository $repository
      * @param \eZ\Publish\Core\MVC\Symfony\View\Configurator $viewConfigurator
      * @param \eZ\Publish\Core\MVC\Symfony\View\ParametersInjector $viewParametersInjector
+     * @param string $defaultTemplate
      * @param \EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ActionDispatcherInterface $contentActionDispatcher
      * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $languagePreferenceProvider
      */
@@ -54,31 +59,28 @@ class ContentTranslateViewBuilder implements ViewBuilder
         Repository $repository,
         Configurator $viewConfigurator,
         ParametersInjector $viewParametersInjector,
+        string $defaultTemplate,
         ActionDispatcherInterface $contentActionDispatcher,
         UserLanguagePreferenceProviderInterface $languagePreferenceProvider
     ) {
         $this->repository = $repository;
         $this->viewConfigurator = $viewConfigurator;
         $this->viewParametersInjector = $viewParametersInjector;
+        $this->defaultTemplate = $defaultTemplate;
         $this->contentActionDispatcher = $contentActionDispatcher;
         $this->languagePreferenceProvider = $languagePreferenceProvider;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function matches($argument)
     {
-        return 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::translateAction' === $argument;
+        return 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::editVersionDraftAction' === $argument;
     }
 
     /**
      * @param array $parameters
      *
-     * @return \EzSystems\EzPlatformAdminUi\View\ContentTranslateSuccessView|\EzSystems\EzPlatformAdminUi\View\ContentTranslateView
+     * @return \eZ\Publish\Core\MVC\Symfony\View\ContentView|\eZ\Publish\Core\MVC\Symfony\View\View
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
@@ -87,23 +89,28 @@ class ContentTranslateViewBuilder implements ViewBuilder
      */
     public function buildView(array $parameters)
     {
-        $view = new ContentTranslateView();
+        // @todo improve default templates injection
+        $view = new ContentEditView($this->defaultTemplate);
 
-        $fromLanguage = $this->resolveFromLanguage($parameters);
-        $toLanguage = $this->resolveToLanguage($parameters);
-        $location = $this->resolveLocation($parameters, $fromLanguage);
-        $content = $this->resolveContent($parameters, $location, $fromLanguage);
+        $language = $this->resolveLanguage($parameters);
+        $location = $this->resolveLocation($parameters);
+        $content = $this->resolveContent($parameters, $location, $language);
         $contentInfo = $content->contentInfo;
-        $contentType = $this->repository->getContentTypeService()->loadContentType(
-            $content->getContentType()->id,
-            $this->languagePreferenceProvider->getPreferredLanguages()
-        );
-        /** @var \Symfony\Component\Form\FormInterface $form */
+        $contentType = $this->loadContentType((int) $contentInfo->contentTypeId, $this->languagePreferenceProvider->getPreferredLanguages());
         $form = $parameters['form'];
+        $isPublished = null !== $contentInfo->mainLocationId && $contentInfo->published;
 
-        if (null === $location && $contentInfo->isPublished()) {
+        if (!$content->getVersionInfo()->isDraft()) {
+            throw new InvalidArgumentException('Version', 'status is not draft');
+        }
+
+        if (null === $location && $isPublished) {
             // assume main location if no location was provided
             $location = $this->loadLocation((int) $contentInfo->mainLocationId);
+        }
+
+        if (null !== $location && $location->contentId !== $content->id) {
+            throw new InvalidArgumentException('Location', 'Provided location does not belong to selected content');
         }
 
         if ($form->isSubmitted() && $form->isValid() && null !== $form->getClickedButton()) {
@@ -115,19 +122,25 @@ class ContentTranslateViewBuilder implements ViewBuilder
             );
 
             if ($response = $this->contentActionDispatcher->getResponse()) {
-                return new ContentTranslateSuccessView($response);
+                $view = new ContentEditSuccessView($response);
+                $view->setLocation($location);
+
+                return $view;
             }
         }
 
-        $formView = $form->createView();
-
         $view->setContent($content);
-        $view->setContentType($contentType);
-        $view->setLanguage($toLanguage);
-        $view->setBaseLanguage($fromLanguage);
+        $view->setLanguage($language);
         $view->setLocation($location);
         $view->setForm($parameters['form']);
-        $view->setFormView($formView);
+
+        $view->addParameters([
+            'content' => $content,
+            'location' => $location,
+            'language' => $language,
+            'content_type' => $contentType,
+            'form' => $form->createView(),
+        ]);
 
         $this->viewParametersInjector->injectViewParameters($view, $parameters);
         $this->viewConfigurator->configure($view);
@@ -156,16 +169,14 @@ class ContentTranslateViewBuilder implements ViewBuilder
      * Loads a visible Location.
      *
      * @param int $locationId
-     * @param array|null $languages
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Location
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    private function loadLocation(int $locationId, array $languages = null): Location
+    private function loadLocation(int $locationId): Location
     {
-        return $this->repository->getLocationService()->loadLocation($locationId, $languages);
+        return $this->repository->getLocationService()->loadLocation($locationId);
     }
 
     /**
@@ -183,24 +194,18 @@ class ContentTranslateViewBuilder implements ViewBuilder
     }
 
     /**
-     * @param array $parameters
+     * Loads ContentType with id $contentTypeId.
      *
-     * @return \eZ\Publish\API\Repository\Values\Content\Language|null
+     * @param int $contentTypeId
+     * @param string[] $languageCodes
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException
+     * @return \eZ\Publish\API\Repository\Values\ContentType\ContentType
+     *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    private function resolveFromLanguage(array $parameters): ?Language
+    private function loadContentType(int $contentTypeId, array $languageCodes): ContentType
     {
-        if (isset($parameters['fromLanguage'])) {
-            return $parameters['fromLanguage'];
-        }
-
-        if (isset($parameters['fromLanguageCode'])) {
-            return $this->loadLanguage($parameters['fromLanguageCode']);
-        }
-
-        return null;
+        return $this->repository->getContentTypeService()->loadContentType($contentTypeId, $languageCodes);
     }
 
     /**
@@ -208,46 +213,47 @@ class ContentTranslateViewBuilder implements ViewBuilder
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Language
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    private function resolveToLanguage(array $parameters): Language
+    private function resolveLanguage(array $parameters): Language
     {
-        if (isset($parameters['toLanguage'])) {
-            return $parameters['toLanguage'];
+        if (isset($parameters['languageCode'])) {
+            return $this->loadLanguage($parameters['languageCode']);
         }
 
-        if (isset($parameters['toLanguageCode'])) {
-            return $this->loadLanguage($parameters['toLanguageCode']);
+        if (isset($parameters['language'])) {
+            if (is_string($parameters['language'])) {
+                // @todo BC: route parameter should be called languageCode but it won't happen until 3.0
+                return $this->loadLanguage($parameters['language']);
+            }
+
+            return $parameters['language'];
         }
 
-        throw new InvalidArgumentException(
-            'Language',
-            'No language information provided. Are you missing \'toLanguage\' or \'toLanguageCode\' parameters'
-        );
+        throw new InvalidArgumentException('Language',
+            'No language information provided. Are you missing language or languageCode parameters');
     }
 
     /**
      * @param array $parameters
      * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
-     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Content
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    private function resolveContent(array $parameters, ?Location $location, ?Language $language): Content
+    private function resolveContent(array $parameters, ?Location $location, Language $language): Content
     {
         if (isset($parameters['content'])) {
             return $parameters['content'];
-        } elseif (null !== $location) {
-            return $location->getContent();
         }
 
-        if (!isset($parameters['contentId'])) {
+        if (isset($parameters['contentId'])) {
+            $contentId = $parameters['contentId'];
+        } elseif (null !== $location) {
+            $contentId = $location->contentId;
+        } else {
             throw new InvalidArgumentException(
                 'Content',
                 'No content could be loaded from parameters'
@@ -255,31 +261,25 @@ class ContentTranslateViewBuilder implements ViewBuilder
         }
 
         return $this->loadContent(
-            (int) $parameters['contentId'],
-            null !== $language ? [$language->languageCode] : []
+            (int) $contentId,
+            null !== $language ? [$language->languageCode] : [],
+            (int) $parameters['versionNo'] ?: null
         );
     }
 
     /**
      * @param array $parameters
-     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Location|null
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    private function resolveLocation(array $parameters, ?Language $language): ?Location
+    private function resolveLocation(array $parameters): ?Location
     {
-        if (isset($parameters['location'])) {
-            return $parameters['location'];
+        if (isset($parameters['locationId'])) {
+            return $this->loadLocation((int) $parameters['locationId']);
         }
 
-        if (isset($parameters['locationId'])) {
-            return $this->loadLocation(
-                (int) $parameters['locationId'],
-                null !== $language ? [$language->languageCode] : null
-            );
+        if (isset($parameters['location'])) {
+            return $parameters['location'];
         }
 
         return null;

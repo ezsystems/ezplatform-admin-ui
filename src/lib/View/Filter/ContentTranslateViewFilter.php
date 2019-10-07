@@ -19,7 +19,7 @@ use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewBuilderParametersEvent;
 use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\ContentTranslationData;
 use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Mapper\ContentTranslationMapper;
-use EzSystems\RepositoryForms\Form\Type\Content\ContentEditType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentEditType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;

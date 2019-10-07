@@ -11,21 +11,15 @@ namespace EzSystems\EzPlatformAdminUi\View;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
+use eZ\Publish\Core\MVC\Symfony\View\ContentValueView;
+use eZ\Publish\Core\MVC\Symfony\View\LocationValueView;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 
-/**
- * {@inheritdoc}
- */
-class ContentTranslateView extends BaseView implements ContentTypeValueView
+class ContentEditView extends BaseView implements ContentValueView, LocationValueView
 {
     /** @var \eZ\Publish\API\Repository\Values\Content\Content */
     private $content;
-
-    /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType */
-    private $contentType;
 
     /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
     private $location;
@@ -33,14 +27,8 @@ class ContentTranslateView extends BaseView implements ContentTypeValueView
     /** @var \eZ\Publish\API\Repository\Values\Content\Language */
     private $language;
 
-    /** @var \eZ\Publish\API\Repository\Values\Content\Language|null */
-    private $baseLanguage;
-
     /** @var \Symfony\Component\Form\FormInterface */
     private $form;
-
-    /** @var \Symfony\Component\Form\FormView */
-    private $formView;
 
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\Content $content
@@ -51,6 +39,8 @@ class ContentTranslateView extends BaseView implements ContentTypeValueView
     }
 
     /**
+     * Returns the Content.
+     *
      * @return \eZ\Publish\API\Repository\Values\Content\Content
      */
     public function getContent(): Content
@@ -91,22 +81,6 @@ class ContentTranslateView extends BaseView implements ContentTypeValueView
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\Content\Language|null
-     */
-    public function getBaseLanguage(): ?Language
-    {
-        return $this->baseLanguage;
-    }
-
-    /**
-     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $baseLanguage
-     */
-    public function setBaseLanguage($baseLanguage)
-    {
-        $this->baseLanguage = $baseLanguage;
-    }
-
-    /**
      * @return \Symfony\Component\Form\FormInterface
      */
     public function getForm(): FormInterface
@@ -120,37 +94,5 @@ class ContentTranslateView extends BaseView implements ContentTypeValueView
     public function setForm(FormInterface $form)
     {
         $this->form = $form;
-    }
-
-    /**
-     * @return \Symfony\Component\Form\FormView
-     */
-    public function getFormView(): FormView
-    {
-        return $this->formView;
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormView $formView
-     */
-    public function setFormView(FormView $formView)
-    {
-        $this->formView = $formView;
-    }
-
-    /**
-     * @return \eZ\Publish\API\Repository\Values\ContentType\ContentType
-     */
-    public function getContentType(): ContentType
-    {
-        return $this->contentType;
-    }
-
-    /**
-     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
-     */
-    public function setContentType(ContentType $contentType)
-    {
-        $this->contentType = $contentType;
     }
 }
