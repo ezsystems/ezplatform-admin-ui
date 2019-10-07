@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        public: false
+        autowire: true
+        autoconfigure: true
+
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FieldEditRenderingExtension:
+        arguments: ["@ezpublish.templating.field_block_renderer"]
+        tags:
+            - { name: twig.extension }
+
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\LimitationValueRenderingExtension:
+        arguments:
+            - '@EzSystems\EzPlatformAdminUi\Limitation\Templating\LimitationBlockRenderer'
+        tags:
+            - { name: twig.extension }

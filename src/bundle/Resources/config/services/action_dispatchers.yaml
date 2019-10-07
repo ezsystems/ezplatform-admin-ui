@@ -1,0 +1,63 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+
+    ezrepoforms.action_dispatcher.base:
+        class: EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\AbstractActionDispatcher
+        abstract: true
+        calls:
+            - [setEventDispatcher, ["@event_dispatcher"]]
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentDispatcher:
+        parent: ezrepoforms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false
+
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentTypeDispatcher:
+        parent: ezrepoforms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false
+
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentTypeGroupDispatcher:
+        parent: ezrepoforms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false
+
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\UserDispatcher:
+        parent: ezrepoforms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\RoleDispatcher:
+        parent: ezrepoforms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\PolicyDispatcher:
+        parent: ezrepoforms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\SectionDispatcher:
+        parent: ezrepoforms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\LanguageDispatcher:
+        parent: ezrepoforms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false

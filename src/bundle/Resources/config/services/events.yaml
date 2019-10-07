@@ -1,0 +1,53 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    EzSystems\EzPlatformAdminUi\EventListener\:
+        resource: "../../../lib/EventListener/*"
+        public: true
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\EventListener\RequestListener:
+        arguments:
+            - '%ezpublish.siteaccess.groups_by_siteaccess%'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\EventListener\RequestLocaleListener:
+        arguments:
+            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+            $availableTranslations: '%available_translations%'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\EventListener\RequestAttributesListener:
+        arguments:
+            - '%ezpublish.siteaccess.groups%'
+        tags:
+            - {name: kernel.event_subscriber}
+
+
+    EzSystems\EzPlatformAdminUi\EventListener\AdminExceptionListener:
+        arguments:
+            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+            $kernelRootDir: '%kernel.root_dir%'
+            $kernelEnvironment: '%kernel.environment%'
+            $encoreTagRenderer: '@webpack_encore.tag_renderer'
+            $entrypointLookupCollection: '@webpack_encore.entrypoint_lookup_collection'
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
+    EzSystems\EzPlatformAdminUi\EventListener\MenuPermissionsListener:
+        tags:
+            - {name: kernel.event_subscriber, priority: -250}
+
+    EzSystems\EzPlatformAdminUi\EventListener\ViewTemplatesListener:
+        tags:
+            - { name: kernel.event_subscriber }
+        calls:
+            - [setViewTemplate, ['EzSystems\EzPlatformAdminUi\View\UserCreateView', "$user_edit.templates.create$"]]
+            - [setViewTemplate, ['EzSystems\EzPlatformAdminUi\View\UserUpdateView', "$user_edit.templates.update$"]]
+            - [setPagelayout, ["$pagelayout$"]]

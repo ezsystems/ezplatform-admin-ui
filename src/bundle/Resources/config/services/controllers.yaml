@@ -16,6 +16,27 @@ services:
         tags:
             - controller.service_arguments
 
+    EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController:
+        parent: ezpublish.controller.base
+        arguments:
+            - "@ezpublish.api.service.content_type"
+            - "@ezpublish.api.service.content"
+            - '@EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentDispatcher'
+        tags:
+            - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserController:
+        parent: ezpublish.controller.base
+        arguments:
+            - "@ezpublish.api.service.content_type"
+            - "@ezpublish.api.service.user"
+            - "@ezpublish.api.service.location"
+            - "@ezpublish.api.service.language"
+            - '@EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\UserDispatcher'
+            - '@eZ\Publish\API\Repository\PermissionResolver'
+        tags:
+            - controller.service_arguments
+
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentOnTheFlyController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
@@ -28,7 +49,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $contentTypeActionDispatcher: '@ezrepoforms.action_dispatcher.content_type'
+            $contentTypeActionDispatcher: '@EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentTypeDispatcher'
             $languages: '$languages$'
             $defaultPaginationLimit: '$pagination.content_type_limit$'
         tags:

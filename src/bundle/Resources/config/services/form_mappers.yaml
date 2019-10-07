@@ -1,0 +1,364 @@
+parameters:
+    #
+    # Role/Policy Limitation
+    #
+    ezrepoforms.limitation_form_mapper.registry.class: EzSystems\EzPlatformAdminUi\Limitation\LimitationFormMapperRegistry
+    ezrepoforms.limitation_value_mapper.registry.class: EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistry
+    ezrepoforms.limitation.form_mapper.null.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\NullLimitationMapper
+    ezrepoforms.limitation.form_mapper.siteaccess.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\SiteAccessLimitationMapper
+    ezrepoforms.limitation.form_mapper.content_type.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\ContentTypeLimitationMapper
+    ezrepoforms.limitation.form_mapper.section.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\SectionLimitationMapper
+    ezrepoforms.limitation.form_mapper.object_state.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\ObjectStateLimitationMapper
+    ezrepoforms.limitation.form_mapper.language.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\LanguageLimitationMapper
+    ezrepoforms.limitation.form_mapper.owner.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\OwnerLimitationMapper
+    ezrepoforms.limitation.form_mapper.group.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\GroupLimitationMapper
+    ezrepoforms.limitation.form_mapper.parent_depth.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\ParentDepthLimitationMapper
+    ezrepoforms.limitation.form_mapper.parent_depth.max_depth: 20
+    ezrepoforms.limitation.form_mapper.subtree.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\SubtreeLimitationMapper
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    #
+    # Content Edit
+    #
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\AuthorFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezauthor }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezauthor }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\BinaryFileFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezbinaryfile }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezbinaryfile }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\CheckboxFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezboolean }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezboolean }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\SelectionFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezselection }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezselection }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\CountryFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezcountry }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezcountry }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\DateFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezdate }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezdate }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\DateTimeFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezdatetime }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezdatetime }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\FloatFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezfloat }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezfloat }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\ImageFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezimage }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezimage }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\IntegerFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezinteger }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezinteger }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\ISBNFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezisbn }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezisbn }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\MediaFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezmedia }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezmedia }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\AbstractRelationFormMapper:
+        abstract: true
+        arguments:
+            $contentTypeService: '@ezpublish.api.service.content_type'
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\RelationFormMapper:
+        parent: EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\AbstractRelationFormMapper
+        autowire: true
+        autoconfigure: false
+        public: false
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezobjectrelation }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezobjectrelation }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\RelationListFormMapper:
+        parent: EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\AbstractRelationFormMapper
+        autowire: true
+        autoconfigure: false
+        public: false
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezobjectrelationlist }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezobjectrelationlist }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\TextLineFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezstring }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezstring }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\TextBlockFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: eztext }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: eztext }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\TimeFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: eztime }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: eztime }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\FormTypeBasedFieldValueFormMapper:
+        abstract: true
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\UserAccountFieldValueFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezuser }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezuser }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\UrlFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezurl }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\MapLocationFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezgmaplocation }
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\KeywordFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezkeyword }
+
+    ezrepoforms.field_type.form_mapper.ezemail:
+        parent: EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\FormTypeBasedFieldValueFormMapper
+        autowire: true
+        autoconfigure: false
+        public: false
+        tags:
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezemail }
+        calls:
+            - [setFormType, ['Symfony\Component\Form\Extension\Core\Type\EmailType']]
+
+    EzSystems\EzPlatformAdminUi\Form\FieldTypeMapper\ImageAssetFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: ezimageasset }
+
+    #
+    # Role/Policy
+    #
+    ezrepoforms.limitation_form_mapper.registry:
+        class: EzSystems\EzPlatformAdminUi\Limitation\LimitationFormMapperRegistry
+
+    ezrepoforms.limitation_value_mapper.registry:
+        class: EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistry
+
+    ezrepoforms.limitation.form_mapper.multiple_selection:
+        class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\MultipleSelectionBasedMapper
+        abstract: true
+        calls:
+            - [setFormTemplate, ["%ezrepoforms.limitation.multiple_selection.template%"]]
+
+    ezrepoforms.limitation.form_mapper.siteaccess:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.siteaccess.class%"
+        arguments: ["%ezpublish.siteaccess.list%"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: SiteAccess }
+            - { name: ez.limitation.valueMapper, limitationType: SiteAccess }
+
+    ezrepoforms.limitation.form_mapper.null:
+        class: "%ezrepoforms.limitation.form_mapper.null.class%"
+        arguments: ["%ezrepoforms.limitation.null.template%"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: "Null" }
+            - { name: ez.limitation.valueMapper, limitationType: "Null" }
+
+    ezrepoforms.limitation.form_mapper.content_type:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.content_type.class%"
+        arguments: ["@ezpublish.api.service.content_type"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Class }
+            - { name: ez.limitation.valueMapper, limitationType: Class }
+
+    ezrepoforms.limitation.form_mapper.parent_content_type:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.content_type.class%"
+        arguments: ["@ezpublish.api.service.content_type"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: ParentClass }
+            - { name: ez.limitation.valueMapper, limitationType: ParentClass }
+
+    ezrepoforms.limitation.form_mapper.section:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.section.class%"
+        arguments: ["@ezpublish.api.service.section"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Section }
+            - { name: ez.limitation.valueMapper, limitationType: Section }
+
+    ezrepoforms.limitation.form_mapper.new_section:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.section.class%"
+        arguments: ["@ezpublish.api.service.section"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: NewSection }
+            - { name: ez.limitation.valueMapper, limitationType: NewSection }
+
+    ezrepoforms.limitation.form_mapper.object_state:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.object_state.class%"
+        arguments: ["@ezpublish.api.service.object_state"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: State }
+            - { name: ez.limitation.valueMapper, limitationType: State }
+
+    ezrepoforms.limitation.form_mapper.new_object_state:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.object_state.class%"
+        arguments: ["@ezpublish.api.service.object_state"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: NewState }
+            - { name: ez.limitation.valueMapper, limitationType: NewState }
+
+    ezrepoforms.limitation.form_mapper.language:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.language.class%"
+        arguments: ["@ezpublish.api.service.language"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Language }
+            - { name: ez.limitation.valueMapper, limitationType: Language }
+
+    ezrepoforms.limitation.form_mapper.owner:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.owner.class%"
+        arguments: ["@translator"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Owner }
+            - { name: ez.limitation.valueMapper, limitationType: Owner }
+
+    ezrepoforms.limitation.form_mapper.parent_owner:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.owner.class%"
+        arguments: ["@translator"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: ParentOwner }
+            - { name: ez.limitation.valueMapper, limitationType: ParentOwner }
+
+    ezrepoforms.limitation.form_mapper.group:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.group.class%"
+        arguments: ["@translator"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Group }
+            - { name: ez.limitation.valueMapper, limitationType: Group }
+
+    ezrepoforms.limitation.form_mapper.parent_group:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.group.class%"
+        arguments: ["@translator"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: ParentGroup }
+            - { name: ez.limitation.valueMapper, limitationType: ParentGroup }
+
+    ezrepoforms.limitation.form_mapper.parent_depth:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.parent_depth.class%"
+        arguments: ["%ezrepoforms.limitation.form_mapper.parent_depth.max_depth%"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: ParentDepth }
+            - { name: ez.limitation.valueMapper, limitationType: ParentDepth }
+
+    ezrepoforms.limitation.form_mapper.udw_based:
+        class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\UDWBasedMapper
+        arguments:
+            - "@ezpublish.api.service.location"
+            - "@ezpublish.api.service.search"
+        calls:
+            - [setFormTemplate, ["%ezrepoforms.limitation.udw.template%"]]
+
+    ezrepoforms.limitation.form_mapper.location:
+        parent: ezrepoforms.limitation.form_mapper.udw_based
+        autowire: true
+        autoconfigure: false
+        public: false
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Node }
+            - { name: ez.limitation.valueMapper, limitationType: Node }
+
+    ezrepoforms.limitation.form_mapper.subtree:
+        parent: ezrepoforms.limitation.form_mapper.udw_based
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezrepoforms.limitation.form_mapper.subtree.class%"
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Subtree }
+            - { name: ez.limitation.valueMapper, limitationType: Subtree }

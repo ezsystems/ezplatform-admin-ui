@@ -1,4 +1,8 @@
 parameters:
+    ezrepoforms.form_processor.content_type.options.redirect_route_after_publish: ~
+    ezrepoforms.form_processor.content_type.options:
+        redirectRouteAfterPublish: "%ezrepoforms.form_processor.content_type.options.redirect_route_after_publish%"
+    ezrepoforms.form_processor.user_cancel.class: EzSystems\EzPlatformAdminUi\Form\Processor\User\UserCancelFormProcessor
 
 services:
     _defaults:
@@ -19,7 +23,73 @@ services:
 
     EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content\UrlRedirectProcessor:
         public: true
-        decorates: EzSystems\RepositoryForms\Form\Processor\SystemUrlRedirectProcessor
+        decorates: EzSystems\EzPlatformAdminUi\Form\Processor\SystemUrlRedirectProcessor
         arguments:
             $siteaccessGroups: '%ezpublish.siteaccess.groups%'
             $systemUrlRedirectProcessor: '@EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content\UrlRedirectProcessor.inner'
+
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\ContentTypeFormProcessor:
+        arguments: ["@ezpublish.api.service.content_type", "@router", "%ezrepoforms.form_processor.content_type.options%"]
+        calls:
+            - [setGroupsList, ["@ezpublish.fields_groups.list"]]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\ContentFormProcessor:
+        arguments:
+            - '@ezpublish.api.service.content'
+            - '@ezpublish.api.service.location'
+            - '@router'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\User\UserCreateFormProcessor:
+        arguments:
+            - '@ezpublish.api.service.user'
+            - '@router'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\User\UserUpdateFormProcessor:
+        arguments:
+            - '@ezpublish.api.service.user'
+            - '@ezpublish.api.service.content'
+            - '@router'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\User\UserCancelFormProcessor:
+        arguments:
+            - '@router'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\ContentTypeGroupFormProcessor:
+        arguments: ["@ezpublish.api.service.content_type"]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\SystemUrlRedirectProcessor:
+        autowire: true
+        autoconfigure: true
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\RoleFormProcessor:
+        arguments: ["@ezpublish.api.service.role"]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\PolicyFormProcessor:
+        arguments: ["@ezpublish.api.service.role"]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\SectionFormProcessor:
+        arguments: ["@ezpublish.api.service.section"]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\LanguageFormProcessor:
+        arguments: ["@ezpublish.api.service.language"]
+        tags:
+            - { name: kernel.event_subscriber }
