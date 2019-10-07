@@ -33,7 +33,6 @@
         "symfony/yaml": "^4.3",
         "jms/translation-bundle": "^1.4",
         "ezsystems/ezpublish-kernel": "^8.0@dev",
-        "ezsystems/repository-forms": "^3.0@dev",
         "ezsystems/ezplatform-admin-ui-modules": "^2.0@dev",
         "ezsystems/ez-support-tools": "^2.0@dev",
         "ezsystems/ezplatform-design-engine": "^3.0@dev",
