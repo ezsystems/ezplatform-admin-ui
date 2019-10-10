@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-    {{ render(controller('EzPlatformAdminUiBundle:ContentType:list', {
+    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentTypeController::listAction', {
         contentTypeGroupId: content_type_group.id,
         page: page,
         routeName: route_name

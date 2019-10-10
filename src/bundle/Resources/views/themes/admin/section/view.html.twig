@@ -72,7 +72,7 @@
         </table>
     </section>
 
-    {{ render(controller('EzPlatformAdminUiBundle:Section:viewSectionContent', {
+    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\SectionController::viewSectionContentAction', {
         'section': section,
         'page': app.request.query.getInt('page', 1)
     })) }}

@@ -55,5 +55,5 @@
             </tbody>
         </table>
     </section>
-    {{ render( controller( "EzPlatformAdminUiBundle:ObjectState:list", { "objectStateGroupId": object_state_group.id } ) ) }}
+    {{ render( controller( 'EzSystems\\EzPlatformAdminUiBundle\\Controller\\ObjectStateController::listAction', { 'objectStateGroupId': object_state_group.id } ) ) }}
 {% endblock %}
