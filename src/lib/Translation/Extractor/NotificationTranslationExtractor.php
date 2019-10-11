@@ -24,6 +24,7 @@ use PhpParser\NodeVisitor;
 use PhpParser\Node\Scalar\String_;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Twig\Node\Node as TwigNode;
 
 /**
  * Extracts translations from TranslatableNotificationHandler::{info,success,warning,error} method calls.
@@ -171,7 +172,7 @@ class NotificationTranslationExtractor implements LoggerAwareInterface, FileVisi
     {
     }
 
-    public function visitTwigFile(\SplFileInfo $file, MessageCatalogue $catalogue, \Twig_Node $ast)
+    public function visitTwigFile(\SplFileInfo $file, MessageCatalogue $catalogue, TwigNode $ast)
     {
     }
 

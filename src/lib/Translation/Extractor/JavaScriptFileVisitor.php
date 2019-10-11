@@ -21,6 +21,7 @@ use Peast\Syntax\Node;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use SplFileInfo;
+use Twig\Node\Node as TwigNode;
 
 class JavaScriptFileVisitor implements FileVisitorInterface, LoggerAwareInterface
 {
@@ -103,7 +104,7 @@ class JavaScriptFileVisitor implements FileVisitorInterface, LoggerAwareInterfac
     {
     }
 
-    public function visitTwigFile(SplFileInfo $file, MessageCatalogue $catalogue, \Twig_Node $ast)
+    public function visitTwigFile(SplFileInfo $file, MessageCatalogue $catalogue, TwigNode $ast)
     {
     }
 

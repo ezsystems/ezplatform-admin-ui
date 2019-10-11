@@ -109,9 +109,9 @@ services:
 
     # @todo 3.0: Remove this service once all twig |truncate calls are removed from link_manager/* templates
     #            composer.json doesn't have dependency on twig/extensions which is required for this service
-    Twig_Extensions_Extension_Text:
+    Twig\Extensions\TextExtension:
         public: true
-        class: \Twig_Extensions_Extension_Text
+        class: Twig\Extensions\TextExtension
         tags:
             - { name: twig.extension }
 

@@ -125,9 +125,9 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
      *
      * @return string
      *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function renderView(array $parameters): string
     {
