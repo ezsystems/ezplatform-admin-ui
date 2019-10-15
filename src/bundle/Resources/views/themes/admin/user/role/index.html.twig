@@ -35,14 +35,14 @@
 {% block content %}
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="policies">
-            {{ render(controller('EzPlatformAdminUiBundle:Policy:list', {
+            {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\PolicyController::listAction', {
                 roleId: role.id,
                 policyPage: policy_page,
                 routeName: route_name
             })) }}
         </div>
         <div role="tabpanel" class="tab-pane" id="users-and-groups">
-            {{ render(controller('EzPlatformAdminUiBundle:RoleAssignment:list', {
+            {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\RoleAssignmentController::listAction', {
                 roleId: role.id,
                 assignmentPage: assignment_page,
                 routeName: route_name

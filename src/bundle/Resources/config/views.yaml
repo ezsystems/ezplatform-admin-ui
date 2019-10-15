@@ -6,17 +6,17 @@ system:
         content_view:
             full:
                 default:
-                    controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
+                    controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentViewController::locationViewAction'
                     template: '@ezdesign/content/location_view.html.twig'
                     match: true
             preview_ezobjectrelationlist_row:
                 default:
-                    controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
+                    controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentViewController::locationViewAction'
                     template: '@ezdesign\ui\field_type\preview\ezobjectrelationlist_row.html.twig'
                     match: true
             preview_ezimageasset:
                 default:
-                    controller: 'EzPlatformAdminUiBundle:ContentView:locationView'
+                    controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentViewController::locationViewAction'
                     template: '@ezdesign\ui\field_type\preview\ezimageasset.html.twig'
                     match: true
 
