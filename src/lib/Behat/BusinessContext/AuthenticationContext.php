@@ -22,7 +22,7 @@ class AuthenticationContext extends BusinessContext
     ];
 
     /**
-     * @When I login as :username with password :password
+     * @When I log in as :username with password :password
      */
     public function iLoginAs(string $username, string $password): void
     {

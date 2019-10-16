@@ -3,7 +3,7 @@ Feature: Verify that an Editor with Subtree limitations can perform all his task
 
   Background:
     Given I open Login page
-    And I login as "SubtreeEditor" with password "Passw0rd-42"
+    And I log in as "SubtreeEditor" with password "Passw0rd-42"
     And I go to "Content structure" in "Content" tab
 
   Scenario Outline: I can create and publish Content in locations I'm allowed
