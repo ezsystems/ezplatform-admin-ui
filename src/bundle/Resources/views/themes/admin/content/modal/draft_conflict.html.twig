@@ -17,9 +17,11 @@
                 <div class="ez-modal-body__main">
                     <p class="ez-modal-body__main-content">
                         {% set number = conflicted_drafts|length %}
-                        {{ 'draft.conflict.number'|transchoice(number, {'%number%': number })|desc(
-                        '{1}There are %number% draft for this content item.|]1,Inf[ There are %number% drafts for this content item'
-                        ) }}
+                        {% if number == 1 %}
+                            {{ 'draft.conflict.number.one'|trans|desc('There is one draft for this content item.') }}
+                        {% else %}
+                            {{ 'draft.conflict.number.multiple'|trans({ '%number%': number })|desc('There are %number% drafts for this content item.') }}
+                        {% endif %}
                     </p>
                     <p class="ez-modal-body__main-content">
                         {% if content_is_user %}

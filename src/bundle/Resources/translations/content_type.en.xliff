@@ -51,10 +51,15 @@
         <target state="new">Default availability in primary language, if translation is absent</target>
         <note>key: content_type.default_availability.help</note>
       </trans-unit>
-      <trans-unit id="d14799b2ac8854ab3f0bb9976258c3db39213d09" resname="content_type.default_availability.value">
-        <source>{0} Not available|{1} Available</source>
-        <target state="new">{0} Not available|{1} Available</target>
-        <note>key: content_type.default_availability.value</note>
+      <trans-unit id="944e509cd754c05d24aea116e6b307a350da42ea" resname="content_type.default_availability.available">
+        <source>Available</source>
+        <target state="new">Available</target>
+        <note>key: content_type.default_availability.available</note>
+      </trans-unit>
+      <trans-unit id="da6afb475bbd2efbe3929af770d0fc17e6e86132" resname="content_type.default_availability.not_available">
+        <source>Not available</source>
+        <target state="new">Not available</target>
+        <note>key: content_type.default_availability.not_available</note>
       </trans-unit>
       <trans-unit id="5ebf6515da27060877064931a5ac1d5a8540e28d" resname="content_type.default_children_sorting">
         <source>Default field for sorting children</source>
@@ -411,10 +416,15 @@
         <target state="new">View</target>
         <note>key: tab.name.view</note>
       </trans-unit>
-      <trans-unit id="3e9deeb426f08a404990a6926d70558955272593" resname="yes_no">
-        <source>{0}No|{1}Yes</source>
-        <target state="new">{0}No|{1}Yes</target>
-        <note>key: yes_no</note>
+      <trans-unit id="fb360f9c09ac8c5edb2f18be5de4e80ea4c430d0" resname="yes">
+        <source>Yes</source>
+        <target state="new">Yes</target>
+        <note>key: yes</note>
+      </trans-unit>
+      <trans-unit id="fd1286353570c5703799ba76999323b7c7447b06" resname="no">
+        <source>No</source>
+        <target state="new">No</target>
+        <note>key: no</note>
       </trans-unit>
     </body>
   </file>
