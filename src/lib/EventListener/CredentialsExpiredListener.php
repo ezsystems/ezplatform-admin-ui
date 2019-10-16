@@ -54,7 +54,7 @@ final class CredentialsExpiredListener implements EventSubscriberInterface
         }
 
         if ($view->getLastAuthenticationException() instanceof CredentialsExpiredException) {
-            $view->setTemplateIdentifier('@ezdesign/Security/error/credentials_expired.html.twig');
+            $view->setTemplateIdentifier('@ezdesign/account/error/credentials_expired.html.twig');
         }
     }
 
