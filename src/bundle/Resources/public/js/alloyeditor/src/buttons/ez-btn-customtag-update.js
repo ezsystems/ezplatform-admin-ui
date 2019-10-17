@@ -121,6 +121,19 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
     }
 
     /**
+     * Renders the link.
+     *
+     * @method renderLink
+     * @param {Object} config
+     * @param {String} attrName
+     * @return {Object} The rendered link.
+     */
+    renderLink(config, attrName) {
+        // @todo provide dedicated support for link attribute type
+        return this.renderString(config, attrName);
+    }
+
+    /**
      * Renders the option.
      *
      * @method renderChoice
@@ -253,6 +266,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
             boolean: 'renderCheckbox',
             number: 'renderNumber',
             choice: 'renderSelect',
+            link: 'renderLink',
         };
     }
 }
