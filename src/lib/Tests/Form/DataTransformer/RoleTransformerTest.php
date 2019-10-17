@@ -80,8 +80,6 @@ class RoleTransformerTest extends TestCase
 
     /**
      * @dataProvider reverseTransformWithInvalidInputDataProvider
-     *
-     * @param $value
      */
     public function testReverseTransformWithInvalidInput($value)
     {
@@ -137,9 +135,6 @@ class RoleTransformerTest extends TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
     public function reverseTransformWithInvalidInputDataProvider(): array
     {
         return [
