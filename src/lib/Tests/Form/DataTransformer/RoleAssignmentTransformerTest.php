@@ -41,8 +41,8 @@ class RoleAssignmentTransformerTest extends TestCase
      */
     public function testTransformWithInvalidInput($value)
     {
-        $languageService = $this->createMock(RoleService::class);
-        $transformer = new RoleAssignmentTransformer($languageService);
+        $roleService = $this->createMock(RoleService::class);
+        $transformer = new RoleAssignmentTransformer($roleService);
 
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('Expected a ' . APIRoleAsignment::class . ' object.');
@@ -78,17 +78,34 @@ class RoleAssignmentTransformerTest extends TestCase
         $this->assertNull($result);
     }
 
+    /**
+     * @dataProvider reverseTransformWithInvalidInputDataProvider
+     *
+     * @param $value
+     */
+    public function testReverseTransformWithInvalidInput($value)
+    {
+        $service = $this->createMock(RoleService::class);
+
+        $transformer = new RoleAssignmentTransformer($service);
+
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('Expected a numeric string.');
+
+        $transformer->reverseTransform($value);
+    }
+
     public function testReverseTransformWithNotFoundException()
     {
-        $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Location not found');
-
         $service = $this->createMock(RoleService::class);
         $service->method('loadRoleAssignment')
             ->will($this->throwException(new class('Location not found') extends NotFoundException {
             }));
 
         $transformer = new RoleAssignmentTransformer($service);
+
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('Location not found');
 
         $transformer->reverseTransform(654321);
     }
@@ -118,6 +135,22 @@ class RoleAssignmentTransformerTest extends TestCase
             'float' => [12.34],
             'array' => [[]],
             'object' => [new \stdClass()],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function reverseTransformWithInvalidInputDataProvider(): array
+    {
+        return [
+            'string' => ['string'],
+            'bool' => [true],
+            'float' => [12.34],
+            'array' => [[1]],
+            'object' => [new \stdClass()],
+            'scientific_notation' => ['1337e0'],
+            'hexadecimal' => ['0x539'],
         ];
     }
 }
