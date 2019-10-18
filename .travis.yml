@@ -44,6 +44,9 @@ notifications:
     on_pull_requests: false
 
 before_install:
+  # Decrypt SSH key to Allure report server
+  - openssl aes-256-cbc -K $encrypted_81b575a03d43_key -iv $encrypted_81b575a03d43_iv -in .travis/rsa_allure.enc -out $HOME/rsa_allure -d
+  - chmod 400 $HOME/rsa_allure
   # Disable XDebug for performance
   - phpenv config-rm xdebug.ini
   # Get latest composer build
@@ -64,3 +67,14 @@ script:
   - if [ "${CHECK_CS}" == "1" ] ; then ./vendor/bin/php-cs-fixer fix -v --dry-run --show-progress=estimating ; fi
   - if [ "${PHPUNIT_CONFIG}" != '' ]; then ./vendor/bin/phpunit -c "${PHPUNIT_CONFIG}"; fi
   - if [ "${BEHAT_OPTS}" != "" ]; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "bin/ezbehat ${BEHAT_OPTS}" ; fi
+
+after_failure:
+  # Will show us the last bit of the log of container's main processes
+  # (not counting shell process above running php and behat)
+  # NOTE: errors during docker setup of travis build won't show up here (can't output all as it is too much in debug/verbose mode)
+  - docker-compose logs -t --tail=15
+  # Will show us what is up, and how long it's been up
+  - docker ps -s
+
+after_script:
+  - if [ "${BEHAT_OPTS}" != "" ] ; then bin/ezreport ; fi
