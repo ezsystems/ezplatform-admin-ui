@@ -69,8 +69,12 @@ class RoleTransformer implements DataTransformerInterface
             return null;
         }
 
+        if (!ctype_digit($value)) {
+            throw new TransformationFailedException('Expected a numeric string.');
+        }
+
         try {
-            return $this->roleService->loadRole($value);
+            return $this->roleService->loadRole((int)$value);
         } catch (NotFoundException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }

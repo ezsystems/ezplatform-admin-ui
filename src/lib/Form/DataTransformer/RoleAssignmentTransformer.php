@@ -69,8 +69,12 @@ class RoleAssignmentTransformer implements DataTransformerInterface
             return null;
         }
 
+        if (!ctype_digit($value)) {
+            throw new TransformationFailedException('Expected a numeric string.');
+        }
+
         try {
-            return $this->roleService->loadRoleAssignment($value);
+            return $this->roleService->loadRoleAssignment((int)$value);
         } catch (NotFoundException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }

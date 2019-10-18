@@ -41,8 +41,8 @@ class RoleTransformerTest extends TestCase
      */
     public function testTransformWithInvalidInput($value)
     {
-        $languageService = $this->createMock(RoleService::class);
-        $transformer = new RoleTransformer($languageService);
+        $roleService = $this->createMock(RoleService::class);
+        $transformer = new RoleTransformer($roleService);
 
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('Expected a ' . APIRole::class . ' object.');
@@ -76,6 +76,20 @@ class RoleTransformerTest extends TestCase
         $result = $transformer->reverseTransform(null);
 
         $this->assertNull($result);
+    }
+
+    /**
+     * @dataProvider reverseTransformWithInvalidInputDataProvider
+     */
+    public function testReverseTransformWithInvalidInput($value)
+    {
+        $roleService = $this->createMock(RoleService::class);
+        $transformer = new RoleTransformer($roleService);
+
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('Expected a numeric string.');
+
+        $transformer->reverseTransform($value);
     }
 
     public function testReverseTransformWithNotFoundException()
@@ -118,6 +132,19 @@ class RoleTransformerTest extends TestCase
             'float' => [12.34],
             'array' => [[]],
             'object' => [new \stdClass()],
+        ];
+    }
+
+    public function reverseTransformWithInvalidInputDataProvider(): array
+    {
+        return [
+            'string' => ['string'],
+            'bool' => [true],
+            'float' => [12.34],
+            'array' => [[1]],
+            'object' => [new \stdClass()],
+            'scientific_notation' => ['1337e0'],
+            'hexadecimal' => ['0x539'],
         ];
     }
 }
