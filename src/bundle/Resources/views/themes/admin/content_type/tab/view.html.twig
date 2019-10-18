@@ -85,7 +85,13 @@
                     {{ "content_type.default_availability.help"|trans|desc("Default availability in primary language, if translation is absent") }}
                 </p>
             </td>
-            <td class="ez-table__cell">{{ content_type.defaultAlwaysAvailable ? 'content_type.default_availability.available'|trans|desc("Available") : 'content_type.default_availability.not_available'|trans|desc("Not available") }}</td>
+            <td class="ez-table__cell">
+                {% if content_type.defaultAlwaysAvailable %}
+                    {{ 'content_type.default_availability.available'|trans|desc("Available") }}
+                {% else %}
+                    {{ 'content_type.default_availability.not_available'|trans|desc("Not available") }}
+                {% endif %}
+            </td>
         </tr>
         </tbody>
     </table>
