@@ -67,6 +67,11 @@ export default class EzBtnLinkEdit extends Component {
         ReactDOM.unmountComponentAtNode(udwContainer);
     }
 
+    udwOnCancel(udwContainer) {
+        ReactDOM.unmountComponentAtNode(udwContainer);
+        this.removeLink();
+    }
+
     /**
      * Runs the Universal Discovery Widget so that the user can pick a
      * Content.
@@ -85,7 +90,7 @@ export default class EzBtnLinkEdit extends Component {
             const mergedConfig = Object.assign(
                 {
                     onConfirm: this.udwOnConfirm.bind(this, udwContainer),
-                    onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
+                    onCancel: this.udwOnCancel.bind(this, udwContainer),
                     title,
                     multiple: false,
                     startingLocationId: window.eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
