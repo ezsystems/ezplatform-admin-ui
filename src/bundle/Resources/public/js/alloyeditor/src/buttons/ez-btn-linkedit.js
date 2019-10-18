@@ -69,7 +69,7 @@ export default class EzBtnLinkEdit extends Component {
 
     udwOnCancel(udwContainer) {
         ReactDOM.unmountComponentAtNode(udwContainer);
-        this.removeLink();
+        this.showUI();
     }
 
     /**
