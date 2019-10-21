@@ -68,8 +68,11 @@ export default class EzBtnLinkEdit extends Component {
     }
 
     udwOnCancel(udwContainer) {
+        this.invokeWithFixedScrollbar(() => {
+            this.focusEditedLink();
+        });
+
         ReactDOM.unmountComponentAtNode(udwContainer);
-        this.showUI();
     }
 
     /**
