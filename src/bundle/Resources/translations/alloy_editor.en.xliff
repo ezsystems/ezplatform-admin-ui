@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="a31bc2d766bef988d3d4e2e0892c79b64d2aadd9" resname="anchor_btn.error.unique">
-        <source>This anchor already exists on the page. Anchor name must be unique.</source>
-        <target state="new">This anchor already exists on the page. Anchor name must be unique.</target>
+        <source>This anchor already exists in this Content item. Anchor name must be unique.</source>
+        <target state="new">This anchor already exists in this Content item. Anchor name must be unique.</target>
         <note>key: anchor_btn.error.unique</note>
       </trans-unit>
       <trans-unit id="2fec67b71cd77563c4e494477e691ba9661d95fe" resname="anchor_btn.label">
@@ -82,18 +82,18 @@
         <note>key: embed_btn.label</note>
       </trans-unit>
       <trans-unit id="8527fe7f41af8879f558034d2b2cf316d20eb5e3" resname="embed_btn.udw.title">
-        <source>Select a content to embed</source>
-        <target state="new">Select a content to embed</target>
+        <source>Select content to embed</source>
+        <target state="new">Select content to embed</target>
         <note>key: embed_btn.udw.title</note>
       </trans-unit>
       <trans-unit id="f646efa9564da382019a8267461d76231bb688e2" resname="embed_update_btn.label">
-        <source>Select another content item</source>
-        <target state="new">Select another content item</target>
+        <source>Select another Content item</source>
+        <target state="new">Select another Content item</target>
         <note>key: embed_update_btn.label</note>
       </trans-unit>
       <trans-unit id="e7a9e3844a638a4ee009a878206b96c9d0af681e" resname="embed_update_btn.udw.title">
-        <source>Select a content to embed</source>
-        <target state="new">Select a content to embed</target>
+        <source>Select content to embed</source>
+        <target state="new">Select content to embed</target>
         <note>key: embed_update_btn.udw.title</note>
       </trans-unit>
       <trans-unit id="841a18570b88796e700e0d0cd2f8d4e99f9e13bd" resname="heading_btn.label">
@@ -112,8 +112,8 @@
         <note>key: image_btn.udw.label</note>
       </trans-unit>
       <trans-unit id="85da4c4b98bb2f13b880845e1f5850134ace276d" resname="image_update_btn.label">
-        <source>Select another image item</source>
-        <target state="new">Select another image item</target>
+        <source>Select another image</source>
+        <target state="new">Select another image</target>
         <note>key: image_update_btn.label</note>
       </trans-unit>
       <trans-unit id="d8edff94c5ba9f6148382057d71339ba75bc3903" resname="image_update_btn.udw.title">
@@ -182,13 +182,13 @@
         <note>key: link_edit_btn.udw.title</note>
       </trans-unit>
       <trans-unit id="082d2d34dd20fe267d5693d3f6a2c8be105c490c" resname="move_down_btn.title">
-        <source>Move Down</source>
-        <target state="new">Move Down</target>
+        <source>Move down</source>
+        <target state="new">Move down</target>
         <note>key: move_down_btn.title</note>
       </trans-unit>
       <trans-unit id="c2a6d468674bfb33d708531dc64ac512a8e9c87a" resname="move_up_btn.title">
-        <source>Move Up</source>
-        <target state="new">Move Up</target>
+        <source>Move up</source>
+        <target state="new">Move up</target>
         <note>key: move_up_btn.title</note>
       </trans-unit>
       <trans-unit id="37870b74e43bad51e49f69d41625b29a5ef65458" resname="ordered_list_btn.label">

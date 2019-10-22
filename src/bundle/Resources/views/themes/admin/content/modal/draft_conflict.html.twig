@@ -6,7 +6,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ 'draft.conflict.header'|trans|desc('Draft conflict when editing') }}</h5>
+                <h5 class="modal-title">{{ 'draft.conflict.header'|trans|desc('Draft conflict') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg class="ez-icon ez-icon--medium" aria-hidden="true">
                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
@@ -18,9 +18,9 @@
                     <p class="ez-modal-body__main-content">
                         {% set number = conflicted_drafts|length %}
                         {% if number == 1 %}
-                            {{ 'draft.conflict.number.one'|trans|desc('There is one draft for this content item.') }}
+                            {{ 'draft.conflict.number.one'|trans|desc('There is already one draft for this Content item.') }}
                         {% else %}
-                            {{ 'draft.conflict.number.multiple'|trans({ '%number%': number })|desc('There are %number% drafts for this content item.') }}
+                            {{ 'draft.conflict.number.multiple'|trans({ '%number%': number })|desc('There are already %number% drafts for this Content item.') }}
                         {% endif %}
                     </p>
                     <p class="ez-modal-body__main-content">
@@ -51,7 +51,7 @@
 {% macro table_header_tools(show_add_button) %}
     {% if show_add_button %}
         <button type="button" class="btn btn-primary ez-btn--add-draft"
-                title="{{ 'tab.versions.action.delete'|trans|desc('Add draft') }}">
+                title="{{ 'tab.versions.action.delete'|trans|desc('Create a draft') }}">
             <svg class="ez-icon ez-icon-create">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
             </svg>

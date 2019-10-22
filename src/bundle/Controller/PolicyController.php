@@ -157,7 +157,7 @@ class PolicyController extends Controller
 
                 if ($isEditable) {
                     $this->notificationHandler->success(
-                        /** @Desc("Now you can set limitations for the policy.") */
+                        /** @Desc("Now you can set Limitations for the Policy.") */
                         'policy.add.set_limitation',
                         ['%role%' => $role->identifier],
                         'role'
@@ -180,7 +180,7 @@ class PolicyController extends Controller
                 $this->roleService->publishRoleDraft($roleDraft);
 
                 $this->notificationHandler->success(
-                    /** @Desc("New policies in role '%role%' created.") */
+                    /** @Desc("Created new Policies in Role '%role%'.") */
                     'policy.add.success',
                     ['%role%' => $role->identifier],
                     'role'
@@ -224,7 +224,7 @@ class PolicyController extends Controller
 
         if (!$isEditable) {
             $this->notificationHandler->error(
-                /** @Desc("Policy type '%policy%' does not contain limitations.") */
+                /** @Desc("Policy type '%policy%' does not contain Limitations.") */
                 'policy.edit.no_limitations',
                 ['%policy%' => $policy->module . '/' . $policy->function],
                 'role'
@@ -255,7 +255,7 @@ class PolicyController extends Controller
                 }
 
                 $this->notificationHandler->success(
-                    /** @Desc("Policies in role '%role%' updated.") */
+                    /** @Desc("Updated Policies in Role '%role%'.") */
                     'policy.update.success',
                     ['%role%' => $role->identifier],
                     'role'
@@ -305,7 +305,7 @@ class PolicyController extends Controller
                 $this->roleService->publishRoleDraft($roleDraft);
 
                 $this->notificationHandler->success(
-                    /** @Desc("New policies in role '%role%' created.") */
+                    /** @Desc("Created new Policies in Role '%role%'.") */
                     'policy.add.success',
                     ['%role%' => $role->identifier],
                     'role'
@@ -357,7 +357,7 @@ class PolicyController extends Controller
                 }
 
                 $this->notificationHandler->success(
-                    /** @Desc("Policies in role '%role%' removed.") */
+                    /** @Desc("Removed Policies from Role '%role%'.") */
                     'policy.delete.success',
                     ['%role%' => $role->identifier],
                     'role'
@@ -413,7 +413,7 @@ class PolicyController extends Controller
                 $this->roleService->publishRoleDraft($roleDraft);
 
                 $this->notificationHandler->success(
-                    /** @Desc("Policies in role '%role%' removed.") */
+                    /** @Desc("Removed Policies from Role '%role%'.") */
                     'policy.delete.success',
                     ['%role%' => $role->identifier],
                     'role'

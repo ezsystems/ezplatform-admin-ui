@@ -52,7 +52,7 @@
                     </button>
                     {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
                         'id': modal_data_target,
-                        'message': 'section.modal.message'|trans|desc('Do you want to delete Section?'),
+                        'message': 'section.modal.message'|trans|desc('Do you want to delete the Section(s)?'),
                         'data_click': '#sections_delete_delete',
                     }%}
                 {% endif %}
@@ -70,7 +70,7 @@
                     <th>{{ 'section.name'|trans|desc('Name') }}</th>
                     <th>{{ 'section.identifier'|trans|desc('Identifier') }}</th>
                     <th>{{ 'section.id'|trans|desc('ID') }}</th>
-                    <th>{{ 'section.assigned.content'|trans|desc('Assignments count') }}</th>
+                    <th>{{ 'section.assigned.content'|trans|desc('Assigned content') }}</th>
                     <th></th>
                 </tr>
             </thead>

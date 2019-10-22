@@ -8,7 +8,7 @@
             {{ 'section.assigned_content.header'|trans({
                 '%name%': section.name,
                 '%count%': pagerfanta.nbResults
-            } )|desc('Content items in %name% (%count%)') }}
+            } )|desc('Content items in \'%name%\' (%count%)') }}
         </div>
         {% if can_assign %}
             {{ form_start(form_section_content_assign, {
@@ -59,8 +59,8 @@
             <tr>
                 <td colspan="3">
                     <p class="ez-table-no-content mb-0 pl-0 py-1">
-                        {{ 'section.assigned_content.empty'|trans|desc('No content items.') }}
-                        {{ 'section.assigned_content.empty_desc'|trans|desc('Content items you assign to this section will appear here.') }}
+                        {{ 'section.assigned_content.empty'|trans|desc('No Content items.') }}
+                        {{ 'section.assigned_content.empty_desc'|trans|desc('Content items you assign to this Section will show up here.') }}
                     </p>
                 </td>
             </tr>

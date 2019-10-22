@@ -17,7 +17,7 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const title = Translator.trans(/*@Desc("Select location")*/ 'copy.title', {}, 'universal_discovery_widget');
+        const title = Translator.trans(/*@Desc("Select Location")*/ 'copy.title', {}, 'universal_discovery_widget');
 
         ReactDOM.render(
             React.createElement(eZ.modules.UniversalDiscovery, {

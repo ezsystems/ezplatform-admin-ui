@@ -30,7 +30,7 @@ class ContentTypesDeleteType extends AbstractType
             ])
             ->add('delete', SubmitType::class, [
                 'attr' => ['hidden' => true],
-                'label' => /** @Desc("Delete content types") */ 'content_types_delete_form.delete',
+                'label' => /** @Desc("Delete Content Types") */ 'content_types_delete_form.delete',
             ]);
     }
 

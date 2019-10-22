@@ -113,7 +113,7 @@
         {% endif %}
 
         {% if fieldtype_is_not_translatable %}
-            <p class="ez-field-edit__nontranslatable text-secondary">{{ 'fieldtype.translation_is_disabled'|trans({'%fieldName%': label})|desc('Translation for %fieldName% is disabled') }}</p>
+            <p class="ez-field-edit__nontranslatable text-secondary">{{ 'fieldtype.translation_is_disabled'|trans({'%fieldName%': label})|desc('Translating the %fieldName% Field is disabled. See Content Type definition for details.') }}</p>
         {% endif %}
     </div>
 {% endblock %}

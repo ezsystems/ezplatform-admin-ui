@@ -31,7 +31,7 @@ class RoleAssignmentsDeleteType extends AbstractType
             ])
             ->add('delete', SubmitType::class, [
                 'attr' => ['hidden' => true],
-                'label' => /** @Desc("Delete role assignments") */ 'role_assignments_delete_form.delete',
+                'label' => /** @Desc("Delete Role assignments") */ 'role_assignments_delete_form.delete',
             ]);
     }
 

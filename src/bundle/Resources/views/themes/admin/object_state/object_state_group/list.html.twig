@@ -25,11 +25,11 @@
 {% block content %}
     <section class="container mt-4 px-5">
         <div class="ez-table-header">
-            <div class="ez-table-header__headline">{{ 'object_state_group.view.list.title'|trans|desc('Object State Groups') }}</div>
+            <div class="ez-table-header__headline">{{ 'object_state_group.view.list.title'|trans|desc('Object state groups') }}</div>
             <div>
                 {% if can_administrate %}
                     <a
-                        title="{{ 'object_state_group.new'|trans|desc('Create a new Object State Group') }}"
+                        title="{{ 'object_state_group.new'|trans|desc('Create a new Object state group') }}"
                         href="{{ path('ezplatform.object_state.group.add') }}"
                         class="btn btn-primary">
                         <svg class="ez-icon ez-icon-create">
@@ -44,14 +44,14 @@
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
-                        title="{{ 'object_state_group.delete.bulk_delete.submit'|trans|desc('Delete Object State Group') }}">
+                        title="{{ 'object_state_group.delete.bulk_delete.submit'|trans|desc('Delete Object state group') }}">
                         <svg class="ez-icon ez-icon-trash">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
                     </button>
                     {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
                         'id': modal_data_target,
-                        'message': 'object_state_group.modal.message'|trans|desc('Do you want to delete Object State Group?'),
+                        'message': 'object_state_group.modal.message'|trans|desc('Do you want to delete the Object state group(s)?'),
                         'data_click': '#object_state_groups_delete_delete',
                     }%}
                 {% endif %}
@@ -76,7 +76,7 @@
             {% if object_state_groups is empty %}
                 <tr>
                     <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
-                        <span class="mb-0 py-1 pl-0">{{ 'object_state_group.list.empty'|trans|desc('No Object State Group configured. Object State Groups you\'ll create will appear here.') }}</span>
+                        <span class="mb-0 py-1 pl-0">{{ 'object_state_group.list.empty'|trans|desc('There are no Object state groups yet. Object state groups you create will show up here.') }}</span>
                     </td>
                 </tr>
             {% else %}

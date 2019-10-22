@@ -42,7 +42,7 @@
                             {% if pager.count is same as(0) %}
                             <tr>
                                 <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
-                                    <span class="mb-0 py-1 pl-0">{{ 'bookmark.list.empty'|trans|desc('The bookmark list is empty. Any Content item you bookmark will end up here.') }}</span>
+                                    <span class="mb-0 py-1 pl-0">{{ 'bookmark.list.empty'|trans|desc('You have no bookmarks yet. Your bookmarks will show up here.') }}</span>
                                 </td>
                             </tr>
                             {% else %}
@@ -74,7 +74,7 @@
                                         {% if bookmark.userCanEdit %}
                                         <button
                                             class="btn btn-icon mx-2 ez-btn--content-edit"
-                                            title="{{ 'bookmark.list.content.edit'|trans|desc('Edit Content') }}"
+                                            title="{{ 'bookmark.list.content.edit'|trans|desc('Edit content') }}"
                                             data-content-id="{{ bookmark.contentInfo.id }}"
                                             data-version-no="{{ bookmark.contentInfo.currentVersionNo }}"
                                             data-language-code="{{ bookmark.contentInfo.mainLanguageCode }}">

@@ -23,7 +23,7 @@ class LocationIsNotRoot extends Constraint implements TranslationContainerInterf
     {
         return [
             Message::create('ezplatform.copy_subtree.is_root', 'validators')
-                ->setDesc('Selected Location can not be root Location.'),
+                ->setDesc('Selected Location cannot be root Location.'),
         ];
     }
 }

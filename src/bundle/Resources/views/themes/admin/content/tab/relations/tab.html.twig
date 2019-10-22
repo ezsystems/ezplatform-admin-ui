@@ -4,12 +4,12 @@
     {% include '@ezdesign/ui/table_header.html.twig' with {
         header_text: 'tab.relations.related_content'|trans({
             '%contentName%' : ez_content_name(content)
-        })|desc('Related content (content items used by %contentName%)') } %}
+        })|desc('Related content (Content items used by %contentName%)') } %}
     {% if relations is not empty %}
         {{ include('@ezdesign/content/tab/relations/table_relations.html.twig', {'relations': relations}) }}
     {% else %}
         <p class="ez-table-no-content">
-            {{ 'tab.relations.no_relations'|trans()|desc('This content item has no related content.') }}
+            {{ 'tab.relations.no_relations'|trans()|desc('This Content item has no related content.') }}
         </p>
     {% endif %}
 
@@ -17,7 +17,7 @@
         {% include '@ezdesign/ui/table_header.html.twig' with {
             header_text: 'tab.relations.reverse_relations'|trans({
                 '%contentName%' : ez_content_name(content)
-            })|desc('Reverse relations (content items using %contentName%)')
+            })|desc('Reverse relations (Content items using %contentName%)')
         } %}
         {% if reverse_relation_pager.currentPageResults is not empty %}
             {{ include('@ezdesign/content/tab/relations/table_relations_reverse.html.twig', {
@@ -25,7 +25,7 @@
             }) }}
         {% else %}
             <p class="ez-table-no-content">
-                {{ 'tab.relations.no_reverse_relations'|trans()|desc('This content item has no reverse relations.') }}
+                {{ 'tab.relations.no_reverse_relations'|trans()|desc('This Content item has no reverse Relations.') }}
             </p>
         {% endif %}
         {% if reverse_relation_pager.haveToPaginate %}

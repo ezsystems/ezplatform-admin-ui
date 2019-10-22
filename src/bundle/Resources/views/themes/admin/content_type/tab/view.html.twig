@@ -67,22 +67,22 @@
             <td class="ez-table__cell">{{ content_type.isContainer ? 'yes'|trans|desc("Yes") : 'no'|trans|desc("No") }}</td>
         </tr>
         <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ "content_type.default_children_sorting"|trans|desc("Default field for sorting children") }}</td>
+            <td class="ez-table__cell">{{ "content_type.default_children_sorting"|trans|desc("Sort children by default by:") }}</td>
             <td class="ez-table__cell">
                 {{ ("content_type.sort_field." ~ content_type.defaultSortField)|trans(domain="content_type") }} / {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="content_type") }}
             </td>
         </tr>
         <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ "content_type.default_sort"|trans|desc("Default sort order") }}</td>
+            <td class="ez-table__cell">{{ "content_type.default_sort"|trans|desc("Sort children by default in order:") }}</td>
             <td class="ez-table__cell">
                 {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="content_type") }}
             </td>
         </tr>
         <tr class="ez-table__row">
             <td class="ez-table__cell">
-                {{ "content_type.default_availability"|trans|desc('Default content availability') }}
+                {{ "content_type.default_availability"|trans|desc('Make content available even with missing translations') }}
                 <p class="text-secondary small">
-                    {{ "content_type.default_availability.help"|trans|desc("Default availability in primary language, if translation is absent") }}
+                    {{ "content_type.default_availability.help"|trans|desc("Content of this Content Type will be avalable in the main language even if there is no translation.") }}
                 </p>
             </td>
             <td class="ez-table__cell">
@@ -99,7 +99,7 @@
 
 <div class="container mt-4 px-4">
     <section class="ez-fieldgroup">
-        <h2 class="ez-fieldgroup__name">{{ "content_type.content_field_definitions"|trans|desc("Content field definitions") }}</h2>
+        <h2 class="ez-fieldgroup__name">{{ "content_type.content_field_definitions"|trans|desc("Content Field definitions") }}</h2>
     </section>
 </div>
 <section class="container mt-4 px-5">
@@ -128,5 +128,3 @@
         </table>
     {% endfor %}
 </section>
-
-

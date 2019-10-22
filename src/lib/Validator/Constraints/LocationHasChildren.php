@@ -23,7 +23,7 @@ class LocationHasChildren extends Constraint implements TranslationContainerInte
     {
         return [
             Message::create('ezplatform.trash.location_has_no_children', 'validators')
-                ->setDesc('Selected Location has no children locations.'),
+                ->setDesc('Selected Location has no children.'),
         ];
     }
 }

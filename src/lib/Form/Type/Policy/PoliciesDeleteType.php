@@ -32,7 +32,7 @@ class PoliciesDeleteType extends AbstractType
             ])
             ->add('delete', SubmitType::class, [
                 'attr' => ['hidden' => true],
-                'label' => /** @Desc("Delete policies") */ 'policies_delete_form.delete',
+                'label' => /** @Desc("Delete Policies") */ 'policies_delete_form.delete',
             ]);
     }
 

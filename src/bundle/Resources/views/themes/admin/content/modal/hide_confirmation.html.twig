@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ 'content.hide.modal.title'|trans()|desc('Conflict when hiding content item') }}</h5>
+                <h5 class="modal-title">{{ 'content.hide.modal.title'|trans()|desc('Content hide conflict') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg class="ez-icon ez-icon--medium" aria-hidden="true">
                         <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
@@ -11,8 +11,8 @@
             </div>
             <div class="modal-body">
                 <div class="ez-modal-body__main">
-                    {{ 'content.hide.modal.warning_content_used_by_other_content'|trans()|desc('This item is being used by other content item(s). To avoid errors, please update or remove all related objects listed in the Relations tab.') }}<br/>
-                    {{ 'content.hide.modal.please_confirm_to_continue'|trans()|desc('If you wish to continue, please click on Confirm.') }}
+                    {{ 'content.hide.modal.warning_content_used_by_other_content'|trans()|desc('This content is used by other Content item(s). To avoid errors, update or remove all related content listed in the Relations tab.') }}<br/>
+                    {{ 'content.hide.modal.please_confirm_to_continue'|trans()|desc('To hide the Content item anyway, click Confirm.') }}
                 </div>
             </div>
             <div class="modal-footer justify-content-center" data-backdrop="true">

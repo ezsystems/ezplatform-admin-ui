@@ -23,7 +23,7 @@ class LocationIsNotSubLocation extends AbstractComparison implements Translation
     {
         return [
             Message::create('ezplatform.copy_subtree.is_sub_location', 'validators')
-                ->setDesc('Target parent location is a sub location of the source subtree'),
+                ->setDesc('Cannot copy subtree to its own descendant Location'),
         ];
     }
 }

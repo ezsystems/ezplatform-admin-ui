@@ -5,7 +5,7 @@
 {%- block breadcrumbs -%}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
         { value: 'url.list'|trans, url: path('ezplatform.link_manager.list') },
-        { value: 'url.detail'|trans|desc('Link detail')}
+        { value: 'url.detail'|trans|desc('Link details')}
     ]} %}
 {%- endblock -%}
 
@@ -103,7 +103,7 @@
                         <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                             {% if can_edit %}
                                 <button class="btn btn-icon btn-link mx-2 ez-btn--content-edit"
-                                        title="{{ 'url.action.item.edit'|trans|desc('Edit Item') }}"
+                                        title="{{ 'url.action.item.edit'|trans|desc('Edit content') }}"
                                         data-content-id="{{ content.id }}"
                                         data-version-no="{{ content.currentVersionNo }}"
                                         data-language-code="{{ content.mainLanguageCode }}">

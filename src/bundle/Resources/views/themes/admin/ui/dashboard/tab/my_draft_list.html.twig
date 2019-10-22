@@ -57,7 +57,7 @@
                                 '%module%': row.unauthorizedContentDraft.module,
                                 '%function%': row.unauthorizedContentDraft.function,
                                 '%contentId%': row.unauthorizedContentDraft.payload.contentId,
-                            })|desc('User does not have access to \'%function%\' \'%module%\' with content ID: %contentId%')
+                            })|desc('You do not have permissions for \'%function%\' \'%module%\' for content ID: %contentId%')
                         }}
                     </td>
                 </tr>
@@ -83,5 +83,5 @@
         </div>
     {% endif %}
 {% else %}
-    <p class="ez-table-no-content mb-0 py-0">{{ 'dashboard.tab.my_drafts.empty'|trans|desc('No content items. Draft items you create will appear here') }}</p>
+    <p class="ez-table-no-content mb-0 py-0">{{ 'dashboard.tab.my_drafts.empty'|trans|desc('No content. Drafts you create will appear here') }}</p>
 {% endif %}

@@ -35,7 +35,7 @@
 
 {% block ezplatform_fieldtype_ezimageasset_widget %}
     <div class="ez-data-source__message--main">
-        {{ 'fieldtype.binary_base.drag_drop'|trans|desc('Drag and drop your files on browser window or upload them') }}
+        {{ 'fieldtype.binary_base.drag_drop'|trans|desc('Drag your files to the browser window or select them') }}
     </div>
     <div class="ez-data-source__btn-add">
         <svg class="ez-icon">
@@ -51,7 +51,7 @@
             <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#browse"></use>
         </svg>
         <span class="ez-data-source__btn-label">
-            {{ 'fieldtype.ezimageasset.select.label'|trans|desc('Select from your repository') }}
+            {{ 'fieldtype.ezimageasset.select.label'|trans|desc('Select from your Repository') }}
         </span>
     </div>
 
@@ -93,7 +93,7 @@
                 <img
                     class="ez-field-edit-preview__media {{ image_uri ? '' : 'd-none' }}"
                     src="{{ image_uri|default('//:0') }}"
-                    alt="{{ 'content.field_type.ezimageasset.img_alt'|trans({'%label%': form.vars.label})|desc("Image stored in field '%label%'") }}"/>
+                    alt="{{ 'content.field_type.ezimageasset.img_alt'|trans({'%label%': form.vars.label})|desc("Image stored in Field '%label%'") }}"/>
             </div>
             <div class="ez-field-edit-preview__details">
                 <span class="ez-field-edit-preview__asset-name">

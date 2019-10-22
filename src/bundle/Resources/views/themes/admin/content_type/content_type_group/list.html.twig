@@ -15,7 +15,7 @@
 
 {% block page_title %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
-        title: 'content_type_group.view.list.title'|trans|desc('Content Type Groups'),
+        title: 'content_type_group.view.list.title'|trans|desc('Content Type groups'),
         icon_name: 'content-type'
     } %}
 {% endblock %}
@@ -23,11 +23,11 @@
 {% block content %}
     <section class="container mt-4 px-5">
         <div class="ez-table-header">
-            <div class="ez-table-header__headline">{{ 'content_type_group.view.list.title'|trans|desc('Content Type Groups') }}</div>
+            <div class="ez-table-header__headline">{{ 'content_type_group.view.list.title'|trans|desc('Content Type groups') }}</div>
             <div>
                 {% if can_create %}
                     <a
-                        title="{{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type Group') }}"
+                        title="{{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type group') }}"
                         href="{{ path('ezplatform.content_type_group.create') }}"
                         class="btn btn-primary">
                         <svg class="ez-icon ez-icon-create">
@@ -44,14 +44,14 @@
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
-                        title="{{ 'content_type_group.view.list.action.delete'|trans|desc('Delete Content Type Group') }}">
+                        title="{{ 'content_type_group.view.list.action.delete'|trans|desc('Delete Content Type group(s)') }}">
                         <svg class="ez-icon ez-icon-trash">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
                     </button>
                     {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
                         'id': modal_data_target,
-                        'message': 'content_type_group.modal.message'|trans|desc('Do you want to delete Content Type Group?'),
+                        'message': 'content_type_group.modal.message'|trans|desc('Do you want to delete the Content Type group?'),
                         'data_click': '#content_type_groups_delete_delete',
                     }%}
                 {% endif %}
@@ -68,7 +68,7 @@
                     <th></th>
                     <th>{{ 'content_type_group.view.list.column.identifier'|trans|desc('Name') }}</th>
                     <th>{{ 'content_type_group.view.list.column.id'|trans|desc('ID') }}</th>
-                    <th>{{ 'content_type_group.view.list.column.content_types_count'|trans|desc('Content Types count') }}</th>
+                    <th>{{ 'content_type_group.view.list.column.content_types_count'|trans|desc('Number of Content Types') }}</th>
                     <th></th>
                 </tr>
             </thead>

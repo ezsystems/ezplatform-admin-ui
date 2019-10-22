@@ -55,7 +55,7 @@
                     </button>
                     {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
                         'id': modal_data_target,
-                        'message': 'role.modal.message'|trans|desc('Do you want to delete Role?'),
+                        'message': 'role.modal.message'|trans|desc('Do you want to delete the Role(s)?'),
                         'data_click': '#delete-roles_delete',
                     }%}
                 {% endif %}

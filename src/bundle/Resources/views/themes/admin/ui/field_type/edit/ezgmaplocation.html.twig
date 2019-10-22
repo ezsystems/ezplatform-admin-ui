@@ -3,7 +3,7 @@
 {%- block ezplatform_fieldtype_ezgmaplocation_widget -%}
     <div class="ez-data-source__map"></div>
     <div class="ez-data-source__locate-me">
-        <div class="form-control-label">{{ 'content.field_type.ezgmaplocation.set_current_location'|trans|desc('Set current location') }}</div>
+        <div class="form-control-label">{{ 'content.field_type.ezgmaplocation.set_current_location'|trans|desc('Use current location') }}</div>
         <button type="button" class="btn btn-secondary">{{ 'content.field_type.ezgmaplocation.locate_me'|trans|desc('Locate me') }}</button>
     </div>
     {{ form_row(form.latitude, { 'attr': { 'data-value': form.latitude.vars.value }}) }}

@@ -30,7 +30,7 @@ class LocationAssignSectionType extends AbstractType
             ])
             ->add('location', LocationType::class)
             ->add('assign', SubmitType::class, [
-                'label' => /** @Desc("Change section") */ 'section_subtree_assign_form.assign',
+                'label' => /** @Desc("Change Section") */ 'section_subtree_assign_form.assign',
             ]);
     }
 

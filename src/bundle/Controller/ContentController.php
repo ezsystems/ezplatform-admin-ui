@@ -212,7 +212,7 @@ class ContentController extends Controller
                     $versionNo = $contentDraft->getVersionInfo()->versionNo;
 
                     $this->notificationHandler->success(
-                        /** @Desc("New Version Draft for '%name%' created.") */
+                        /** @Desc("Created a new draft for '%name%'.") */
                         'content.create_draft.success',
                         ['%name%' => $contentInfo->name],
                         'content'
@@ -273,7 +273,7 @@ class ContentController extends Controller
                 $this->contentService->updateContentMetadata($contentInfo, $contentMetadataUpdateStruct);
 
                 $this->notificationHandler->success(
-                    /** @Desc("Main location for '%name%' updated.") */
+                    /** @Desc("Main Location for '%name%' updated.") */
                     'content.main_location_update.success',
                     ['%name%' => $contentInfo->name],
                     'content'
@@ -417,7 +417,7 @@ class ContentController extends Controller
 
                 if ($contentInfo->isHidden && $desiredVisibility === false) {
                     $this->notificationHandler->success(
-                        /** @Desc("Content '%name%' was already hidden.") */
+                        /** @Desc("Content item '%name%' is already hidden.") */
                         'content.hide.already_hidden',
                         ['%name%' => $contentInfo->name],
                         'content'
@@ -426,7 +426,7 @@ class ContentController extends Controller
 
                 if (!$contentInfo->isHidden && $desiredVisibility === true) {
                     $this->notificationHandler->success(
-                        /** @Desc("Content '%name%' was already visible.") */
+                        /** @Desc("Content item '%name%' is already visible.") */
                         'content.reveal.already_visible',
                         ['%name%' => $contentInfo->name],
                         'content'
@@ -437,7 +437,7 @@ class ContentController extends Controller
                     $this->contentService->hideContent($contentInfo);
 
                     $this->notificationHandler->success(
-                        /** @Desc("Content '%name%' has been hidden.") */
+                        /** @Desc("Content item '%name%' hidden.") */
                         'content.hide.success',
                         ['%name%' => $contentInfo->name],
                         'content'
@@ -448,7 +448,7 @@ class ContentController extends Controller
                     $this->contentService->revealContent($contentInfo);
 
                     $this->notificationHandler->success(
-                        /** @Desc("Content '%name%' has been revealed.") */
+                        /** @Desc("Content item '%name%' revealed.") */
                         'content.reveal.success',
                         ['%name%' => $contentInfo->name],
                         'content'

@@ -35,7 +35,7 @@
 
                     <button type="button" data-universaldiscovery-title="{{ "role_assignment.view.add.panel.users_and_groups.users.udw_title"
                         |trans({}, "role")
-                        |desc("Select users for role assignment") }}"
+                        |desc("Select Users to assign to the Role") }}"
                         data-tag-template="{{ include('@ezdesign/user/role_assignment/create_tag_list_item.html.twig', {
                             'content_name': '{{ content_name }}',
                             'content_id': '{{ content_id }}'
@@ -45,7 +45,7 @@
                         data-input-selector="#{{ form.users.vars.id }}"
                         data-selected-content-list-selector="#{{ form.users.vars.id }}-selected-content"
                         data-udw-config="{{ ez_udw_config('multiple_user', {}) }}">
-                        {{ 'role_assignment.view.add.panel.users_and_groups.select_users_btn.label'|trans|desc('Select users') }}
+                        {{ 'role_assignment.view.add.panel.users_and_groups.select_users_btn.label'|trans|desc('Select Users') }}
                     </button>
 
                     <ul class="list-unstyled" id="{{ form.users.vars.id }}-selected-content">
@@ -65,7 +65,7 @@
 
                     <button type="button" data-universaldiscovery-title="{{ "role_assignment.view.add.panel.users_and_groups.groups.udw_title"
                         |trans({}, "role")
-                        |desc("Select groups for role assignment") }}"
+                        |desc("Select groups to assign to the Role") }}"
                         data-tag-template="{{ include('@ezdesign/user/role_assignment/create_tag_list_item.html.twig', {
                             'content_name': '{{ content_name }}',
                             'content_id': '{{ content_id }}'
@@ -75,7 +75,7 @@
                         data-input-selector="#{{ form.groups.vars.id }}"
                         data-selected-content-list-selector="#{{ form.groups.vars.id }}-selected-content"
                         data-udw-config="{{ ez_udw_config('multiple_user_group', {}) }}">
-                        {{ 'role_assignment.view.add.panel.users_and_groups.select_groups_btn.label'|trans|desc('Select groups') }}
+                        {{ 'role_assignment.view.add.panel.users_and_groups.select_groups_btn.label'|trans|desc('Select Groups') }}
                     </button>
 
                     <ul class="list-unstyled" id="{{ form.groups.vars.id }}-selected-content">
@@ -99,7 +99,7 @@
                     {{ 'role_assignment.view.add.panel.limitations.title'|trans|desc('Limitations') }}
                 </div>
                 <div class="card-body ez-limitations">
-                    {{ form_widget(form.limitation_type.none, {'label': 'limitation_type.none'|trans|desc('No limitations'), 'attr': {'class': 'ez-limitations__radio'}, 'label_attr': {'class': 'ez-limitations__label radio-inline'}}) }}
+                    {{ form_widget(form.limitation_type.none, {'label': 'limitation_type.none'|trans|desc('No Limitations'), 'attr': {'class': 'ez-limitations__radio'}, 'label_attr': {'class': 'ez-limitations__label radio-inline'}}) }}
                     <div class="ez-limitations__item">
                         {% if not form.limitation_type.section.vars.checked %}
                             {% set sections_attr = {'attr': {'disabled': 'disabled'}} %}

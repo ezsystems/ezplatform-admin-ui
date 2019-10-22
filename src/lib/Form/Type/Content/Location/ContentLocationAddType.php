@@ -36,7 +36,7 @@ class ContentLocationAddType extends AbstractType
                 SubmitType::class,
                 [
                     'attr' => ['hidden' => true],
-                    'label' => /** @Desc("Add location") */
+                    'label' => /** @Desc("Add Location") */
                         'content_location_add_type.add',
                 ]
             );

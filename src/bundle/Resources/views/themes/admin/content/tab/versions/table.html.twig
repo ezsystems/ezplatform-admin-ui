@@ -55,7 +55,7 @@
                     {% if version.author is not empty %}
                         {{ ez_content_name(version.author) }}
                     {% else %}
-                        {{ 'tab.versions.table.author.not_found'|trans|desc('Can’t fetch contributor') }}
+                        {{ 'tab.versions.table.author.not_found'|trans|desc('Can\'t fetch contributor') }}
                     {% endif %}
                 </td>
                 {% if not is_draft_conflict %}
@@ -71,7 +71,7 @@
                         {% set edit_draft_disabled = version.author.id != ez_admin_ui_config.user.user.id %}
                         <a href="{{ edit_url }}"
                             class="btn btn-icon {% if edit_draft_disabled %}ez-btn--prevented{% endif %}"
-                            title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}"
+                            title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit draft') }}"
                             {% if edit_draft_disabled %}disabled{% endif %}>
                             <svg class="ez-icon ez-icon-edit">
                                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
@@ -90,7 +90,7 @@
                             data-content-id="{{ version.contentInfo.id }}"
                             data-language-code="{{ version.initialLanguageCode }}"
                             class="btn btn-icon mx-2 ez-btn--content-draft-edit"
-                            title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit Draft') }}">
+                            title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit draft') }}">
                             <svg class="ez-icon ez-icon-edit">
                                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                             </svg>
@@ -100,7 +100,7 @@
                 {% if is_archived %}
                     <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                         <button class="btn btn-icon mx-2 ez-btn--content-edit"
-                                title="{{ 'tab.versions.table.action.archived.edit'|trans|desc('Restore Archived Version') }}"
+                                title="{{ 'tab.versions.table.action.archived.edit'|trans|desc('Restore archived version') }}"
                                 data-content-id="{{ version.contentInfo.id }}"
                                 data-version-no="{{ version.versionNo }}"
                                 data-language-code="{{ version.initialLanguageCode }}">

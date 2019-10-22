@@ -30,7 +30,7 @@ class ObjectStatesDeleteType extends AbstractType
             ])
             ->add('delete', SubmitType::class, [
                 'attr' => ['hidden' => true],
-                'label' => /** @Desc("Delete Object State ") */ 'object_state.bulk_delete.delete',
+                'label' => /** @Desc("Delete Object state ") */ 'object_state.bulk_delete.delete',
             ]);
     }
 

@@ -8,7 +8,7 @@
 
 {% block details %}
     <div class="container mt-5 px-5">
-        <h2 class="ez-content-item-status">{{ 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing - %contentName% in %languageName%') }}</h2>
+        <h2 class="ez-content-item-status">{{ 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing %contentName% in %languageName%') }}</h2>
         <h1>
             <svg class="ez-icon ez-icon-{{ content_type.identifier }}">
                 <use xlink:href="{{ ez_content_type_icon(content_type.identifier) }}"></use>
@@ -28,7 +28,7 @@
             {% endif %}
         </div>
         <div class="ez-content-item__errors-wrapper" hidden>
-            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Looks like something went wrong. Please check for required fields or errors and correct them') }}
+            {{ 'errors.in.the.form'|trans({},'content_edit')|desc(Cannot save the form. Check required Fields or validation errors.') }}
         </div>
         {# @todo remove if statement once getDescription() bug is resolved in kernel #}
         {% if content_type.descriptions is not empty %}

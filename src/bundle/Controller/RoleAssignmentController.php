@@ -128,7 +128,7 @@ class RoleAssignmentController extends Controller
                 }
 
                 $this->notificationHandler->success(
-                    /** @Desc("Assignments on role '%role%' created.") */
+                    /** @Desc("Assigned Users/Groups to Role '%role%'.") */
                     'role.assignment_create.success',
                     ['%role%' => $role->identifier],
                     'role'
@@ -171,7 +171,7 @@ class RoleAssignmentController extends Controller
                 $this->roleService->removeRoleAssignment($roleAssignment);
 
                 $this->notificationHandler->success(
-                    /** @Desc("Assignment on role '%role%' removed.") */
+                    /** @Desc("Unassigned Users/Groups from Role '%role%'.") */
                     'role.assignment_delete.success',
                     ['%role%' => $role->identifier],
                     'role'
@@ -216,7 +216,7 @@ class RoleAssignmentController extends Controller
                 }
 
                 $this->notificationHandler->success(
-                    /** @Desc("Assignment on role '%role%' removed.") */
+                    /** @Desc("Unassigned Users/Groups from Role '%role%'.") */
                     'role.assignment_delete.success',
                     ['%role%' => $role->identifier],
                     'role'

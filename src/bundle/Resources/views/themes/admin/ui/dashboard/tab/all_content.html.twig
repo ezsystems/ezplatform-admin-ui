@@ -28,7 +28,7 @@
                     {% if row.contributor is not null %}
                         {{ row.contributor.name }}
                     {% else %}
-                        {{ 'dashboard.table.contributor.not_found'|trans|desc('Can’t fetch contributor') }}
+                        {{ 'dashboard.table.contributor.not_found'|trans|desc('Can\'t fetch contributor') }}
                     {% endif %}
                 </td>
                 <td class="ez-table__cell">{{ row.modified|ez_full_datetime }}</td>
@@ -40,5 +40,5 @@
         </tbody>
     </table>
 {% else %}
-    <p class="ez-table-no-content mb-0 py-0">{{ 'dashboard.tab.all_content.empty'|trans|desc('No content items. Content items you create will appear here') }}</p>
+    <p class="ez-table-no-content mb-0 py-0">{{ 'dashboard.tab.all_content.empty'|trans|desc('No content. Content items you create will appear here') }}</p>
 {% endif %}
