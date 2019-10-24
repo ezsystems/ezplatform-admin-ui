@@ -1,0 +1,18 @@
+--TEST--
+"ez_render_limitation_value" function
+--TEMPLATE--
+{{ ez_render_limitation_value(foo) }}
+{{ ez_render_limitation_value(bar) }}
+{{ ez_render_limitation_value(foo, { 'template': 'templates/limitation_value_overriden.html.twig'}) }}
+{{ ez_render_limitation_value(custom_param, { 'param_a': 'A', 'param_b': 'B'}) }}
+--DATA--
+return [
+    'foo' => $this->getLimitation('foo', [1,2,3]),
+    'bar' => $this->getLimitation('bar', ['A','B','C']),
+    'custom_param' => $this->getLimitation('custom_param', ['A','B','C'])
+];
+--EXPECT--
+foo: 1,2,3
+bar: A|B|C
+FOO: 1|2|3
+custom_param: A,B,C PARAM A:A PARAM B:B

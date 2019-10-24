@@ -13,7 +13,6 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
-use EzSystems\RepositoryForms\Content\View\ContentTypeValueView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 

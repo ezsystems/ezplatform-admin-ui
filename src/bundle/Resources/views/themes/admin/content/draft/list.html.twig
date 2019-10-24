@@ -63,7 +63,7 @@
                                 </tr>
                             {% else %}
                                 {% for row in pager.currentPageResults %}
-                                    {% set content_draft_edit_url = content_is_user|default(false) ? 'ez_user_update' : 'ez_content_draft_edit' %}
+                                    {% set content_draft_edit_url = content_is_user|default(false) ? 'ezplatform.user.update' : 'ezplatform.content.draft.edit' %}
                                     <tr>
                                         <td class="ez-table__cell ez-table__cell--has-checkbox">
                                             {{ form_widget(form_remove.versions[row.id ~ '']) }}

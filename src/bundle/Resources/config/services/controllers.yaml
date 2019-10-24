@@ -28,7 +28,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $contentTypeActionDispatcher: '@ezrepoforms.action_dispatcher.content_type'
+            $contentTypeActionDispatcher: '@EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentTypeDispatcher'
             $languages: '$languages$'
             $defaultPaginationLimit: '$pagination.content_type_limit$'
         tags:

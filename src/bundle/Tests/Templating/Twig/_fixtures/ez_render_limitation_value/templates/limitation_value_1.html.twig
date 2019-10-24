@@ -1,0 +1,5 @@
+{% block ez_limitation_foo_value %}foo: {{ values|join(',') }}{% endblock %}
+
+{% block ez_limitation_bar_value %}bar: {{ values|join(',') }}{% endblock %}
+
+{% block ez_limitation_custom_param_value %}custom_param: {{ values|join(',') }} PARAM A:{{ param_a }} PARAM B:{{ param_b }}{% endblock %}

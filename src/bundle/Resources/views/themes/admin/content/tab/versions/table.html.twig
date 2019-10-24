@@ -28,11 +28,11 @@
         {% for version in versions %}
 
             {% set edit_url = content_is_user is defined and content_is_user ?
-                path('ez_user_update', {
+                path('ezplatform.user.update', {
                 'contentId': version.contentInfo.id,
                 'versionNo': version.versionNo,
                 'language': version.initialLanguageCode,
-            }) : path('ez_content_draft_edit', {
+            }) : path('ezplatform.content.draft.edit', {
                 'contentId': version.contentInfo.id,
                 'versionNo': version.versionNo,
                 'language': version.initialLanguageCode,

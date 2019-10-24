@@ -1,4 +1,7 @@
 parameters:
+    ezrepoforms.form_processor.content_type.options.redirect_route_after_publish: ~
+    ezrepoforms.form_processor.content_type.options:
+        redirectRouteAfterPublish: "%ezrepoforms.form_processor.content_type.options.redirect_route_after_publish%"
 
 services:
     _defaults:
@@ -6,20 +9,28 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\:
-        resource: "../../../lib/RepositoryForms/Form/Processor/*"
+    EzSystems\EzPlatformAdminUi\Form\Processor\:
+        resource: "../../../lib/Form/Processor/*"
         public: true
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\ContentEditNotificationFormProcessor:
+    EzSystems\EzPlatformAdminUi\Form\Processor\ContentEditNotificationFormProcessor:
         public: true
         arguments:
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
 
-    EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content\UrlRedirectProcessor:
+    EzSystems\EzPlatformAdminUi\Form\Processor\Content\UrlRedirectProcessor:
         public: true
-        decorates: EzSystems\RepositoryForms\Form\Processor\SystemUrlRedirectProcessor
+        decorates: EzSystems\EzPlatformContentForms\Form\Processor\SystemUrlRedirectProcessor
         arguments:
             $siteaccessGroups: '%ezpublish.siteaccess.groups%'
-            $systemUrlRedirectProcessor: '@EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\Content\UrlRedirectProcessor.inner'
+            $systemUrlRedirectProcessor: '@EzSystems\EzPlatformAdminUi\Form\Processor\Content\UrlRedirectProcessor.inner'
+
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\ContentType\ContentTypeFormProcessor:
+        arguments: ["@ezpublish.api.service.content_type", "@router", "%ezrepoforms.form_processor.content_type.options%"]
+        calls:
+            - [setGroupsList, ["@ezpublish.fields_groups.list"]]
+        tags:
+            - { name: kernel.event_subscriber }

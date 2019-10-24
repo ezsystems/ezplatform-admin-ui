@@ -4,12 +4,15 @@ services:
         autowire: true
         autoconfigure: true
 
+    #
+    # ContentTranslateView
+    #
     EzSystems\EzPlatformAdminUi\View\Builder\ContentTranslateViewBuilder:
         arguments:
             $repository: '@ezpublish.api.repository'
             $viewConfigurator: '@ezpublish.view.configurator'
             $viewParametersInjector: '@ezpublish.view.view_parameters.injector.dispatcher'
-            $contentActionDispatcher: '@ezrepoforms.action_dispatcher.content'
+            $contentActionDispatcher: '@ezplatform.content_forms.action_dispatcher.content'
 
     EzSystems\EzPlatformAdminUi\View\Provider\ContentTranslateView\Configured:
         arguments:
@@ -29,3 +32,10 @@ services:
     EzSystems\EzPlatformAdminUi\View\Filter\ContentTranslateViewFilter:
         tags:
             - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\Limitation\Templating\LimitationBlockRenderer:
+        arguments:
+            - '@ezrepoforms.limitation_value_mapper.registry'
+            - '@twig'
+        calls:
+            - ['setLimitationValueResources', [ '$limitation_value_templates$' ]]
