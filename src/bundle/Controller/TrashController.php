@@ -248,7 +248,7 @@ class TrashController extends Controller
 
                 if (null === $newParentLocation) {
                     $this->notificationHandler->success(
-                        /** @Desc("Restored content in its original Location.") */
+                        /** @Desc("Restored content to its original Location.") */
                         'trash.restore_original_location.success',
                         [],
                         'trash'

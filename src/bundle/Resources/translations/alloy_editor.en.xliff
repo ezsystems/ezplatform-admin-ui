@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="a31bc2d766bef988d3d4e2e0892c79b64d2aadd9" resname="anchor_btn.error.unique">
-        <source>This anchor already exists in this Content item. Anchor name must be unique.</source>
-        <target state="new">This anchor already exists in this Content item. Anchor name must be unique.</target>
+        <source>This anchor already exists in the Content item. The anchor name must be unique.</source>
+        <target state="new">This anchor already exists in the Content item. The anchor name must be unique.</target>
         <note>key: anchor_btn.error.unique</note>
       </trans-unit>
       <trans-unit id="2fec67b71cd77563c4e494477e691ba9661d95fe" resname="anchor_btn.label">

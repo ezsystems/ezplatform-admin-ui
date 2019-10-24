@@ -111,7 +111,7 @@ class TranslationController extends Controller
                     $this->contentService->deleteTranslation($contentInfo, $languageCode);
 
                     $this->notificationHandler->success(
-                        /** @Desc("Translation to '%languageCode%' removed from '%name%'.") */
+                        /** @Desc("Removed '%languageCode%' translation from '%name%'.") */
                         'translation.remove.success',
                         ['%languageCode%' => $languageCode, '%name%' => $contentInfo->name],
                         'translation'

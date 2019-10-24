@@ -16,7 +16,7 @@
             {{ content_type.name }} / {{ 'group_id'|trans({'%groupId%': parent_group.id})|desc('Group ID: %groupId%') }}
         </div>
         <div class="ez-content-item__errors-wrapper" hidden>
-            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
+            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields and validation errors.') }}
         </div>
         {# @todo remove if statement once getDescription() bug is resolved in kernel #}
         {% if content_type.descriptions is not empty %}

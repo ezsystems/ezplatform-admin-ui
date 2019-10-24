@@ -212,7 +212,7 @@ class ContentTypeGroupController extends Controller
                 $this->contentTypeService->deleteContentTypeGroup($group);
 
                 $this->notificationHandler->success(
-                    /** @Desc("Deleted Content type group '%name%'.") */
+                    /** @Desc("Deleted Content Type group '%name%'.") */
                     'content_type_group.delete.success',
                     ['%name%' => $group->identifier],
                     'content_type'
@@ -249,7 +249,7 @@ class ContentTypeGroupController extends Controller
                     $this->contentTypeService->deleteContentTypeGroup($group);
 
                     $this->notificationHandler->success(
-                        /** @Desc("Deleted Content type group '%name%'.") */
+                        /** @Desc("Deleted Content Type group '%name%'.") */
                         'content_type_group.delete.success',
                         ['%name%' => $group->identifier],
                         'content_type'

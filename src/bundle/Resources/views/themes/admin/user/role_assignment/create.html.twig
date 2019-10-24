@@ -65,7 +65,7 @@
 
                     <button type="button" data-universaldiscovery-title="{{ "role_assignment.view.add.panel.users_and_groups.groups.udw_title"
                         |trans({}, "role")
-                        |desc("Select groups to assign to the Role") }}"
+                        |desc("Select User Groups to assign to the Role") }}"
                         data-tag-template="{{ include('@ezdesign/user/role_assignment/create_tag_list_item.html.twig', {
                             'content_name': '{{ content_name }}',
                             'content_id': '{{ content_id }}'
@@ -75,7 +75,7 @@
                         data-input-selector="#{{ form.groups.vars.id }}"
                         data-selected-content-list-selector="#{{ form.groups.vars.id }}-selected-content"
                         data-udw-config="{{ ez_udw_config('multiple_user_group', {}) }}">
-                        {{ 'role_assignment.view.add.panel.users_and_groups.select_groups_btn.label'|trans|desc('Select Groups') }}
+                        {{ 'role_assignment.view.add.panel.users_and_groups.select_groups_btn.label'|trans|desc('Select User Groups') }}
                     </button>
 
                     <ul class="list-unstyled" id="{{ form.groups.vars.id }}-selected-content">
