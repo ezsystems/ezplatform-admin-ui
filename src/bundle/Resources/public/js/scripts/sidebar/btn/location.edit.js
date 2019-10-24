@@ -15,7 +15,7 @@
     const redirectToUserEdit = (languageCode) => {
         const versionNo = form.querySelector('#user_edit_version_info_version_no').value;
 
-        window.location.href = Routing.generate('ez_user_update', { contentId, versionNo, language: languageCode });
+        window.location.href = Routing.generate('ezplatform.user.update', { contentId, versionNo, language: languageCode });
     };
     const onModalHidden = () => {
         resetRadioButtons();

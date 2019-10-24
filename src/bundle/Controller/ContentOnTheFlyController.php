@@ -15,14 +15,14 @@ use eZ\Publish\API\Repository\Values\Content\ContentCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
-use EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\ContentOnTheFlyDispatcher;
-use EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\UserOnTheFlyDispatcher;
+use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentOnTheFlyDispatcher;
+use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\UserOnTheFlyDispatcher;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
-use EzSystems\EzPlatformAdminUi\RepositoryForms\View\ContentCreateOnTheFlyView;
-use EzSystems\RepositoryForms\Data\Mapper\ContentCreateMapper;
-use EzSystems\RepositoryForms\Data\Mapper\UserCreateMapper;
-use EzSystems\RepositoryForms\Form\Type\Content\ContentEditType;
-use EzSystems\RepositoryForms\Form\Type\User\UserCreateType;
+use EzSystems\EzPlatformAdminUi\View\ContentCreateOnTheFlyView;
+use EzSystems\EzPlatformContentForms\Data\Mapper\ContentCreateMapper;
+use EzSystems\EzPlatformContentForms\Data\Mapper\UserCreateMapper;
+use EzSystems\EzPlatformContentForms\Form\Type\Content\ContentEditType;
+use EzSystems\EzPlatformContentForms\Form\Type\User\UserCreateType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -43,7 +43,7 @@ class ContentOnTheFlyController extends Controller
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
-    /** @var \EzSystems\RepositoryForms\Form\ActionDispatcher\UserDispatcher */
+    /** @var \EzSystems\EzPlatformContentForms\Form\ActionDispatcher\UserDispatcher */
     private $userActionDispatcher;
 
     /** @var array */
@@ -54,8 +54,8 @@ class ContentOnTheFlyController extends Controller
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\UserService $userService
-     * @param \EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\ContentOnTheFlyDispatcher $contentActionDispatcher
-     * @param \EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\UserOnTheFlyDispatcher $userActionDispatcher
+     * @param \EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentOnTheFlyDispatcher $contentActionDispatcher
+     * @param \EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\UserOnTheFlyDispatcher $userActionDispatcher
      * @param string[] $userContentTypeIdentifier
      */
     public function __construct(
@@ -82,7 +82,7 @@ class ContentOnTheFlyController extends Controller
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
      * @param \eZ\Publish\API\Repository\Values\Content\Location $parentLocation
      *
-     * @return \EzSystems\EzPlatformAdminUi\RepositoryForms\View\ContentCreateOnTheFlyView|\Symfony\Component\HttpFoundation\Response|null
+     * @return \EzSystems\EzPlatformAdminUi\View\ContentCreateOnTheFlyView|\Symfony\Component\HttpFoundation\Response|null
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType

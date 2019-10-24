@@ -17,9 +17,9 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewBuilderParametersEvent;
 use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
-use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\ContentTranslationData;
-use EzSystems\EzPlatformAdminUi\RepositoryForms\Data\Mapper\ContentTranslationMapper;
-use EzSystems\RepositoryForms\Form\Type\Content\ContentEditType;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData;
+use EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTranslationMapper;
+use EzSystems\EzPlatformContentForms\Form\Type\Content\ContentEditType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -127,7 +127,7 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
      * @param \eZ\Publish\API\Repository\Values\Content\Language|null $fromLanguage
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
      *
-     * @return \EzSystems\EzPlatformAdminUi\RepositoryForms\Data\ContentTranslationData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException
      * @throws \Symfony\Component\OptionsResolver\Exception\OptionDefinitionException
@@ -155,7 +155,7 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
     }
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\RepositoryForms\Data\ContentTranslationData $contentUpdate
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData $contentUpdate
      * @param \eZ\Publish\API\Repository\Values\Content\Language $toLanguage
      * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      *

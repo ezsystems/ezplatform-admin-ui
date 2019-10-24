@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use EzSystems\RepositoryForms\Validator\Constraints\Password as NewPassword;
+use EzSystems\EzPlatformAdminUi\Validator\Constraints\Password as NewPassword;
 
 class UserPasswordResetType extends AbstractType
 {

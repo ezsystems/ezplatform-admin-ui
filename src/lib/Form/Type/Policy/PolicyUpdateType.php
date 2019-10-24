@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
 
 use eZ\Publish\API\Repository\RoleService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
-use EzSystems\RepositoryForms\Form\Type\Role\LimitationType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

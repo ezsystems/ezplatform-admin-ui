@@ -23,6 +23,11 @@ imports:
     - { resource: services/forms.yaml }
     - { resource: services/strategies.yaml }
     - { resource: services/query_types.yaml }
+    - { resource: services/role_form_mappers.yaml }
+    - { resource: services/fieldtype_form_mappers.yaml }
+    - { resource: services/action_dispatchers.yaml }
+    - { resource: services/events.yaml }
+    - { resource: services/twig.yaml }
 
 services:
     _defaults:
@@ -47,31 +52,6 @@ services:
         tags:
             - { name: 'request.param_converter' }
 
-    EzSystems\EzPlatformAdminUi\EventListener\:
-        resource: "../../../lib/EventListener/*"
-        public: true
-        tags:
-            - { name: kernel.event_subscriber }
-
-    EzSystems\EzPlatformAdminUi\EventListener\RequestListener:
-        arguments:
-            - '%ezpublish.siteaccess.groups_by_siteaccess%'
-        tags:
-            - { name: kernel.event_subscriber }
-
-    EzSystems\EzPlatformAdminUi\EventListener\RequestLocaleListener:
-        arguments:
-            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
-            $availableTranslations: '%available_translations%'
-        tags:
-            - { name: kernel.event_subscriber }
-
-    EzSystems\EzPlatformAdminUi\EventListener\RequestAttributesListener:
-        arguments:
-            - '%ezpublish.siteaccess.groups%'
-        tags:
-            - {name: kernel.event_subscriber}
-
     EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory:
         lazy: true
         arguments:
@@ -92,21 +72,6 @@ services:
     EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler'
     EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandler'
 
-    EzSystems\EzPlatformAdminUi\RepositoryForms\View\ViewParametersListener:
-        public: true
-        tags:
-            - { name: kernel.event_subscriber }
-
-    EzSystems\EzPlatformAdminUi\EventListener\AdminExceptionListener:
-        arguments:
-            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
-            $kernelRootDir: '%kernel.root_dir%'
-            $kernelEnvironment: '%kernel.environment%'
-            $encoreTagRenderer: '@webpack_encore.tag_renderer'
-            $entrypointLookupCollection: '@webpack_encore.entrypoint_lookup_collection'
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception }
-
     # @todo 3.0: Remove this service once all twig |truncate calls are removed from link_manager/* templates
     #            composer.json doesn't have dependency on twig/extensions which is required for this service
     Twig\Extensions\TextExtension:
@@ -120,11 +85,11 @@ services:
         tags:
             - { name: knp_menu.voter }
 
-    EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\ContentOnTheFlyDispatcher:
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentOnTheFlyDispatcher:
         calls:
             - [setEventDispatcher, ["@event_dispatcher"]]
 
-    EzSystems\EzPlatformAdminUi\RepositoryForms\Dispatcher\UserOnTheFlyDispatcher:
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\UserOnTheFlyDispatcher:
         calls:
             - [setEventDispatcher, ["@event_dispatcher"]]
 
@@ -148,3 +113,7 @@ services:
         lazy: true
 
     EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver: ~
+
+    EzSystems\EzPlatformContentForms\ConfigResolver\MaxUploadSize: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper: ~

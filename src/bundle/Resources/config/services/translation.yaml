@@ -21,3 +21,13 @@ services:
         public: false
         tags:
             - { name: jms_translation.file_visitor }
+
+    EzSystems\EzPlatformAdminUi\Translation\Extractor\SortingTranslationExtractor:
+        tags:
+            - { name: jms_translation.extractor, alias: ez_location_sorting }
+
+    EzSystems\EzPlatformAdminUi\Translation\Extractor\LimitationTranslationExtractor:
+        arguments:
+            - '%ezpublish.api.role.policy_map%'
+        tags:
+            - { name: jms_translation.extractor, alias: ez_policy_limitation }

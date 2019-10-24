@@ -1,0 +1,21 @@
+--TEST--
+"ez_render_field_definition_edit" function
+--TEMPLATE--
+{{ ez_render_field_definition_edit(nooverride) }}
+{{ ez_render_field_definition_edit(overrides) }}
+{{ ez_render_field_definition_edit(notdefault) }}
+{{ ez_render_field_definition_edit(withdata, {"foo": "bar", "some": "thing"}) }}
+{{ ez_render_field_definition_edit(noblock) }}
+--DATA--
+return [
+    'nooverride' => $this->getFieldDefinitionData('eznooverride'),
+    'overrides' => $this->getFieldDefinitionData('ezoverride'),
+    'notdefault' => $this->getFieldDefinitionData('eznotdefaulttemplate'),
+    'withdata' => $this->getFieldDefinitionData('ezwithdata'),
+    'noblock' => $this->getFieldDefinitionData('eznoblock'),
+];
+--EXPECT--
+default (no override) / eznooverride
+override2 / ezoverride
+not default / eznotdefaulttemplate
+ezwithdata / bar thing

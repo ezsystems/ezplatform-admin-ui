@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentTypeDispatcher:
+        parent: ezplatform.content_forms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false

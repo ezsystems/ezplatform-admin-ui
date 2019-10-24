@@ -33,8 +33,8 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SectionsContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ObjectStatesContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\DashboardContext
-                - EzSystems\RepositoryForms\Behat\Context\ContentTypeContext
-                - EzSystems\RepositoryForms\Behat\Context\FieldTypeFormContext
+                - EzSystems\EzPlatformContentForms\Behat\Context\ContentTypeContext
+                - EzSystems\EzPlatformContentForms\Behat\Context\FieldTypeFormContext
 
         adminuimodules:
             paths:
@@ -51,8 +51,8 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RightMenuContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
-                - EzSystems\RepositoryForms\Behat\Context\ContentTypeContext
-                - EzSystems\RepositoryForms\Behat\Context\FieldTypeFormContext
+                - EzSystems\EzPlatformContentForms\Behat\Context\ContentTypeContext
+                - EzSystems\EzPlatformContentForms\Behat\Context\FieldTypeFormContext
 
         richtext:
             paths:

@@ -14,3 +14,48 @@ services:
     EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationIsWithinCopySubtreeLimitValidator:
         arguments:
             $copySubtreeLimit: '$subtree_operations.copy_subtree.limit$'
+
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueContentTypeIdentifierValidator:
+        arguments: ["@ezpublish.api.service.content_type"]
+        tags:
+            - { name: validator.constraint_validator, alias: ezrepoforms.validator.unique_content_type_identifier }
+
+    ezrepoforms.validator.field_type.abstract:
+        class: EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldTypeValidator
+        arguments: ["@ezpublish.api.service.field_type"]
+        abstract: true
+        autoconfigure: false
+
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\ValidatorConfigurationValidator:
+        parent: ezrepoforms.validator.field_type.abstract
+        autowire: true
+        autoconfigure: false
+        public: false
+        tags:
+            - { name: validator.constraint_validator, alias: ezrepoforms.validator.validator_configuration }
+
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldSettingsValidator:
+        parent: ezrepoforms.validator.field_type.abstract
+        autowire: true
+        autoconfigure: false
+        public: false
+        tags:
+            - { name: validator.constraint_validator, alias: ezrepoforms.validator.field_settings }
+
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueURLValidator:
+        arguments:
+            - '@ezpublish.api.service.url'
+        tags:
+            - { name: validator.constraint_validator, alias: ezrepoforms.validator.unique_url }
+
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\PasswordValidator:
+        arguments:
+            $userService: '@ezpublish.api.service.user'
+        tags:
+            - { name: validator.constraint_validator }
+
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\UserAccountPasswordValidator:
+        arguments:
+            $userService: '@ezpublish.api.service.user'
+        tags:
+            - { name: validator.constraint_validator }
