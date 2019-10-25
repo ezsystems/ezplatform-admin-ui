@@ -22,6 +22,9 @@ class UpperMenu extends Element
             'menuButton' => '.ez-main-nav .nav-link',
             'submenuButton' => '.ez-main-sub-nav .nav-link',
             'dashboardLink' => '.navbar-brand',
+            'pendingNotificationsCount' => '.ez-user-menu__avatar-wrapper.n-pending-notifications',
+            'userSettingsToggle' => '.ez-user-menu__name-wrapper',
+            'userSettingsItem' => '.ez-user-menu__item',
         ];
     }
 
@@ -62,5 +65,16 @@ class UpperMenu extends Element
     public function verifyVisibility(): void
     {
         $this->context->waitUntilElementIsVisible($this->fields['menuButton']);
+    }
+
+    public function getNotificationsCount(): int
+    {
+        return (int) $this->context->findElement($this->fields['pendingNotificationsCount'])->getAttribute('data-count');
+    }
+
+    public function chooseFromUserDropdown(string $option): void
+    {
+        $this->context->findElement($this->fields['userSettingsToggle'])->click();
+        $this->context->getElementByText($option, $this->fields['userSettingsItem'])->click();
     }
 }

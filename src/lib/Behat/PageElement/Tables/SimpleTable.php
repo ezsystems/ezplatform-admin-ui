@@ -17,7 +17,7 @@ class SimpleTable extends Table
     public function __construct(BrowserContext $context, $containerLocator)
     {
         parent::__construct($context, $containerLocator);
-        $this->fields['horizontalHeaders'] = sprintf('%1$s .ez-table__header + .table thead th, %1$s .ez-table-header + .table thead th, .ez-table-header + form thead th', $this->fields['list']);
+        $this->fields['horizontalHeaders'] = sprintf('%1$s .ez-table__header + .table thead th, %1$s .ez-table-header + .table thead th, %1$s.ez-table-header + .table thead th, .ez-table-header + form thead th', $this->fields['list']);
         $this->fields['listElement'] = $this->fields['list'] . ' td:nth-child(1)';
     }
 
@@ -38,6 +38,11 @@ class SimpleTable extends Table
     public function clickEditButton(string $listItemName): void
     {
         $this->clickEditButtonByElementLocator($listItemName, $this->fields['listElement']);
+    }
+
+    public function clickListElement($listItemName)
+    {
+        $this->context->getElementByText($listItemName, sprintf('%s a', $this->fields['listElement']))->click();
     }
 
     /**

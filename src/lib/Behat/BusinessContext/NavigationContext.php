@@ -136,6 +136,15 @@ class NavigationContext extends BusinessContext
     }
 
     /**
+     * @Given I go to user notifications
+     */
+    public function iGoToUserNotifications()
+    {
+        $upperMenu = ElementFactory::createElement($this->utilityContext, UpperMenu::ELEMENT_NAME);
+        $upperMenu->chooseFromUserDropdown('View Notifications');
+    }
+
+    /**
      * @Then I should be redirected to root in default view
      */
     public function iShouldBeRedirectedToRootInDefaultView(): void
