@@ -22,11 +22,12 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/admin.location.add.translation.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.form.autosubmit.js'),
 ];
+const translations = [];
 const fieldTypes = [];
 
 fs.readdirSync(translationsPath).forEach((file) => {
     if (file !== 'config.js' && path.extname(file) === '.js') {
-        layout.push(path.resolve(translationsPath, file));
+        translations.push(path.resolve(translationsPath, file));
     }
 });
 
@@ -38,6 +39,7 @@ fs.readdirSync(fieldTypesPath).forEach((file) => {
 
 module.exports = (Encore) => {
     Encore.addEntry('ezplatform-admin-ui-layout-js', layout)
+        .addEntry('ezplatform-admin-ui-translations-js', translations)
         .addEntry('ezplatform-admin-ui-bookmark-list-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
             path.resolve(__dirname, '../public/js/scripts/button.content.edit.js'),

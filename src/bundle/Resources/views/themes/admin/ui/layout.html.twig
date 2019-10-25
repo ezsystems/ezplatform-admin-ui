@@ -94,6 +94,11 @@
         {{ encore_entry_link_tags('ezplatform-admin-ui-layout-css', null, 'ezplatform') }}
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/img/favicon.ico') }}" />
+
+        <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+        <script src="{{ asset('assets/translations/config.js') }}"></script>
+        {{ encore_entry_script_tags('ezplatform-admin-ui-translations-js', null, 'ezplatform') }}
+
         {{ ez_render_component_group('stylesheet-head') }}
         {{ ez_render_component_group('script-head') }}
 
@@ -107,8 +112,6 @@
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/flatpickr/dist/flatpickr.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/moment/min/moment.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/moment-timezone/builds/moment-timezone-with-data.min.js') }}"></script>
-        <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
-        <script src="{{ asset('assets/translations/config.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/alloy-editor-no-react-min.js') }}"></script>
     </head>
     <body class="{% block body_class %}{% endblock %}">
