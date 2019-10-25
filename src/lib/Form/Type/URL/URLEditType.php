@@ -32,7 +32,7 @@ class URLEditType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => URLUpdateData::class,
-            'translation_domain' => 'ezrepoforms_url',
+            'translation_domain' => 'ezplatform_content_forms_url',
         ]);
     }
 
@@ -49,6 +49,6 @@ class URLEditType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'ezrepoforms_url_edit';
+        return 'ezplatform_content_forms_url_edit';
     }
 }

@@ -38,7 +38,7 @@
                             {%- for limitation in policy.limitations -%}
                                 <li>
                                     <span class="font-weight-bold" title="{{ 'policy.limitation.identifier_tooltip'|trans({'%identifier%': limitation.identifier})|desc('"%identifier%" Limitation') }}">
-                                        {{ ('policy.limitation.identifier.' ~ limitation.identifier|lower)|trans({'%identifier%': limitation.identifier}, 'ezrepoforms_policies')|desc('%identifier%') }}:
+                                        {{ ('policy.limitation.identifier.' ~ limitation.identifier|lower)|trans({'%identifier%': limitation.identifier}, 'ezplatform_content_forms_policies')|desc('%identifier%') }}:
                                     </span>
                                     {{ ez_render_limitation_value(limitation, {'template': '@ezdesign/content/tab/policies/limitation_values.html.twig'}) }}
                                 </li>

@@ -57,7 +57,7 @@ class FieldDefinitionType extends AbstractType
         $resolver
             ->setDefaults([
                 'data_class' => FieldDefinitionData::class,
-                'translation_domain' => 'ezrepoforms_content_type',
+                'translation_domain' => 'ezplatform_content_forms_content_type',
                 'mainLanguageCode' => null,
             ])
             ->setDefined(['mainLanguageCode'])
@@ -156,6 +156,6 @@ class FieldDefinitionType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'ezrepoforms_fielddefinition_update';
+        return 'ezplatform_content_forms_fielddefinition_update';
     }
 }

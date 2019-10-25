@@ -62,7 +62,7 @@ class UserAccountFieldType extends AbstractType
         $resolver
             ->setDefaults([
                 'data_class' => UserAccountFieldData::class,
-                'translation_domain' => 'ezrepoforms_content',
+                'translation_domain' => 'ezplatform_content_forms_content',
             ])
             ->setRequired(['intent'])
             ->setAllowedValues('intent', ['register', 'create', 'update']);

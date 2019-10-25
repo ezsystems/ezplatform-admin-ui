@@ -52,7 +52,7 @@ class UserCreateRightSidebarBuilder extends AbstractBuilder implements Translati
                 [
                     'attributes' => [
                         'class' => 'btn--trigger',
-                        'data-click' => '#ezrepoforms_user_create_create',
+                        'data-click' => '#ezplatform_content_forms_user_create_create',
                     ],
                     'extras' => ['icon' => 'publish'],
                 ]
@@ -62,7 +62,7 @@ class UserCreateRightSidebarBuilder extends AbstractBuilder implements Translati
                 [
                     'attributes' => [
                         'class' => 'btn--trigger',
-                        'data-click' => '#ezrepoforms_user_create_cancel',
+                        'data-click' => '#ezplatform_content_forms_user_create_cancel',
                     ],
                     'extras' => ['icon' => 'circle-close'],
                 ]

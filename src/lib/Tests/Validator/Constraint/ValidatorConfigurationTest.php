@@ -22,7 +22,7 @@ class ValidatorConfigurationTest extends TestCase
     public function testValidatedBy()
     {
         $constraint = new ValidatorConfiguration();
-        self::assertSame('ezrepoforms.validator.validator_configuration', $constraint->validatedBy());
+        self::assertSame('ezplatform.content_forms.validator.validator_configuration', $constraint->validatedBy());
     }
 
     public function testGetTargets()

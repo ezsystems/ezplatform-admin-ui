@@ -26,14 +26,14 @@ class OwnerLimitationMapper extends MultipleSelectionBasedMapper implements Limi
     {
         // 2: "Session" is not supported yet, see OwnerLimitationType
         return [
-            1 => $this->translator->trans('policy.limitation.owner.self', [], 'ezrepoforms_role'),
+            1 => $this->translator->trans('policy.limitation.owner.self', [], 'ezplatform_content_forms_role'),
         ];
     }
 
     public function mapLimitationValue(Limitation $limitation)
     {
         return [
-            $this->translator->trans('policy.limitation.owner.self', [], 'ezrepoforms_role'),
+            $this->translator->trans('policy.limitation.owner.self', [], 'ezplatform_content_forms_role'),
         ];
     }
 }

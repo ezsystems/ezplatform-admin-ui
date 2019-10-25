@@ -21,7 +21,7 @@ class ContentTypeGroupDeleteType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'ezrepoforms_content_type_group_delete';
+        return 'ezplatform_content_forms_content_type_group_delete';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -33,6 +33,6 @@ class ContentTypeGroupDeleteType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['translation_domain' => 'ezrepoforms_content_type']);
+        $resolver->setDefaults(['translation_domain' => 'ezplatform_content_forms_content_type']);
     }
 }

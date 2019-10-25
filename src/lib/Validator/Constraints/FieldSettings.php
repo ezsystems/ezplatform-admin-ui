@@ -23,6 +23,6 @@ class FieldSettings extends Constraint
 
     public function validatedBy()
     {
-        return 'ezrepoforms.validator.field_settings';
+        return 'ezplatform.content_forms.validator.field_settings';
     }
 }

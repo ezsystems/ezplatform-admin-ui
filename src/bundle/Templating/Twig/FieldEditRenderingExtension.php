@@ -29,7 +29,7 @@ class FieldEditRenderingExtension extends AbstractExtension
 
     public function getName(): string
     {
-        return 'ezrepoforms.field_edit_rendering';
+        return 'ezplatform.content_forms.field_edit_rendering';
     }
 
     /**

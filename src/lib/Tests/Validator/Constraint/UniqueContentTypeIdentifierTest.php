@@ -21,7 +21,7 @@ class UniqueContentTypeIdentifierTest extends TestCase
     public function testValidatedBy()
     {
         $constraint = new UniqueContentTypeIdentifier();
-        self::assertSame('ezrepoforms.validator.unique_content_type_identifier', $constraint->validatedBy());
+        self::assertSame('ezplatform.content_forms.validator.unique_content_type_identifier', $constraint->validatedBy());
     }
 
     public function testGetTargets()

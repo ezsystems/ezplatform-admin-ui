@@ -21,14 +21,14 @@ class ContentTypeDeleteType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'ezrepoforms_contenttype_delete';
+        return 'ezplatform_content_forms_contenttype_delete';
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezrepoforms_content_type',
+                'translation_domain' => 'ezplatform_content_forms_content_type',
             ]);
     }
 

@@ -19,11 +19,11 @@ class LimitationFormMapperPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('ezrepoforms.limitation_form_mapper.registry')) {
+        if (!$container->hasDefinition('ezplatform.content_forms.limitation_form_mapper.registry')) {
             return;
         }
 
-        $registry = $container->findDefinition('ezrepoforms.limitation_form_mapper.registry');
+        $registry = $container->findDefinition('ezplatform.content_forms.limitation_form_mapper.registry');
 
         foreach ($container->findTaggedServiceIds('ez.limitation.formMapper') as $id => $attributes) {
             foreach ($attributes as $attribute) {

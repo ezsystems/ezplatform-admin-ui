@@ -90,7 +90,7 @@ final class UserAccountFieldValueFormMapper implements FieldDefinitionFormMapper
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezrepoforms_content_type',
+                'translation_domain' => 'ezplatform_content_forms_content_type',
             ]);
     }
 

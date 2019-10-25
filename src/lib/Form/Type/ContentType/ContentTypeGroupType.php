@@ -28,14 +28,14 @@ class ContentTypeGroupType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'ezrepoforms_content_type_group_edit';
+        return 'ezplatform_content_forms_content_type_group_edit';
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => '\eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroupStruct',
-            'translation_domain' => 'ezrepoforms_content_type',
+            'translation_domain' => 'ezplatform_content_forms_content_type',
         ]);
     }
 }

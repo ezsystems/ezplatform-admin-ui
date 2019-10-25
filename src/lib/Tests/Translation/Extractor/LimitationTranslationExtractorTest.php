@@ -47,7 +47,7 @@ class LimitationTranslationExtractorTest extends TestCase
             $id = "policy.limitation.identifier.limitation{$i}";
             $translated = "Limitation{$i}";
 
-            $message = new Message\XliffMessage($id, 'ezrepoforms_policies');
+            $message = new Message\XliffMessage($id, 'ezplatform_content_forms_policies');
             $message->setNew(false);
             $message->setMeaning($translated);
             $message->setDesc($translated);

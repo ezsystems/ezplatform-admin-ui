@@ -66,7 +66,7 @@ class PolicyUpdateType extends AbstractType
 
                 $form->add('limitations', CollectionType::class, [
                     'label' => false,
-                    'translation_domain' => 'ezrepoforms_role',
+                    'translation_domain' => 'ezplatform_content_forms_role',
                     'entry_type' => LimitationType::class,
                     'data' => $this->generateLimitationList(
                         $data->getLimitations(),
@@ -83,7 +83,7 @@ class PolicyUpdateType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'translation_domain' => 'ezrepoforms_role',
+            'translation_domain' => 'ezplatform_content_forms_role',
             'data_class' => PolicyUpdateData::class,
         ]);
     }

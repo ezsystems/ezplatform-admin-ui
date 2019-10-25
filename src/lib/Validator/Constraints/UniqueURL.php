@@ -26,7 +26,7 @@ class UniqueURL extends Constraint
      */
     public function validatedBy()
     {
-        return 'ezrepoforms.validator.unique_url';
+        return 'ezplatform.content_forms.validator.unique_url';
     }
 
     /**

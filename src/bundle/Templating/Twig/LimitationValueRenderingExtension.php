@@ -42,6 +42,6 @@ class LimitationValueRenderingExtension extends AbstractExtension
 
     public function getName(): string
     {
-        return 'ezrepoforms.limitation_value_rendering';
+        return 'ezplatform.content_forms.limitation_value_rendering';
     }
 }

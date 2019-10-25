@@ -23,6 +23,6 @@ class ValidatorConfiguration extends Constraint
 
     public function validatedBy()
     {
-        return 'ezrepoforms.validator.validator_configuration';
+        return 'ezplatform.content_forms.validator.validator_configuration';
     }
 }

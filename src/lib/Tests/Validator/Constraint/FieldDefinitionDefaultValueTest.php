@@ -22,7 +22,7 @@ class FieldDefinitionDefaultValueTest extends TestCase
     public function testValidatedBy()
     {
         $constraint = new FieldDefinitionDefaultValue();
-        self::assertSame('ezrepoforms.validator.default_field_value', $constraint->validatedBy());
+        self::assertSame('ezplatform.content_forms.validator.default_field_value', $constraint->validatedBy());
     }
 
     public function testGetTargets()

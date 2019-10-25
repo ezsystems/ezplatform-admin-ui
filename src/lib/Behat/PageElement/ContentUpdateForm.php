@@ -24,7 +24,7 @@ class ContentUpdateForm extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'formElement' => '[name=ezrepoforms_content_edit]',
+            'formElement' => '[name=ezplatform_content_forms_content_edit]',
             'closeButton' => '.ez-content-edit-container__close',
             'fieldLabel' => '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend',
             'nthField' => '.ez-field-edit:nth-child(%s)',

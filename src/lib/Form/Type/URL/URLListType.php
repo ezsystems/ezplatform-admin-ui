@@ -42,10 +42,10 @@ class URLListType extends AbstractType
     {
         $builder->add('status', ChoiceType::class, [
             'choices' => [
-                $this->translator->trans('url.status.invalid', [], 'ezrepoforms_url') => false,
-                $this->translator->trans('url.status.valid', [], 'ezrepoforms_url') => true,
+                $this->translator->trans('url.status.invalid', [], 'ezplatform_content_forms_url') => false,
+                $this->translator->trans('url.status.valid', [], 'ezplatform_content_forms_url') => true,
             ],
-            'placeholder' => $this->translator->trans('url.status.all', [], 'ezrepoforms_url'),
+            'placeholder' => $this->translator->trans('url.status.all', [], 'ezplatform_content_forms_url'),
             'required' => false,
         ]);
 
@@ -64,7 +64,7 @@ class URLListType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => URLListData::class,
-            'translation_domain' => 'ezrepoforms_url',
+            'translation_domain' => 'ezplatform_content_forms_url',
         ]);
     }
 
@@ -81,6 +81,6 @@ class URLListType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'ezrepoforms_url_list';
+        return 'ezplatform_content_forms_url_list';
     }
 }

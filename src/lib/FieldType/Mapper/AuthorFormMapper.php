@@ -42,7 +42,7 @@ class AuthorFormMapper implements FieldDefinitionFormMapperInterface, FieldValue
                     'required' => true,
                     'property_path' => 'fieldSettings[defaultAuthor]',
                     'label' => 'field_definition.ezauthor.default_author',
-                    'translation_domain' => 'ezrepoforms_content_type',
+                    'translation_domain' => 'ezplatform_content_forms_content_type',
                     'disabled' => $isTranslation,
                 ]
             );
@@ -80,7 +80,7 @@ class AuthorFormMapper implements FieldDefinitionFormMapperInterface, FieldValue
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezrepoforms_content_type',
+                'translation_domain' => 'ezplatform_content_forms_content_type',
             ]);
     }
 }
