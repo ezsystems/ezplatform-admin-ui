@@ -44,9 +44,6 @@ notifications:
     on_pull_requests: false
 
 before_install:
-  # Decrypt SSH key to Allure report server
-  - openssl aes-256-cbc -K $encrypted_81b575a03d43_key -iv $encrypted_81b575a03d43_iv -in .travis/rsa_allure.enc -out $HOME/rsa_allure -d
-  - chmod 400 $HOME/rsa_allure
   # Disable XDebug for performance
   - phpenv config-rm xdebug.ini
   # Get latest composer build
