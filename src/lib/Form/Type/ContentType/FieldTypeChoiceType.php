@@ -35,7 +35,7 @@ class FieldTypeChoiceType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'ezrepoforms_contenttype_field_type_choice';
+        return 'ezplatform_content_forms_contenttype_field_type_choice';
     }
 
     public function configureOptions(OptionsResolver $resolver)

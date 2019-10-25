@@ -17,7 +17,7 @@ use JMS\TranslationBundle\Translation\ExtractorInterface;
  */
 class LimitationTranslationExtractor implements ExtractorInterface
 {
-    const MESSAGE_DOMAIN = 'ezrepoforms_policies';
+    const MESSAGE_DOMAIN = 'ezplatform_content_forms_policies';
     const MESSAGE_ID_PREFIX = 'policy.limitation.identifier.';
 
     /**

@@ -36,7 +36,7 @@ class BinaryFileFormMapper implements FieldDefinitionFormMapperInterface
                 'required' => false,
                 'property_path' => 'validatorConfiguration[FileSizeValidator][maxFileSize]',
                 'label' => 'field_definition.ezbinaryfile.max_file_size',
-                'translation_domain' => 'ezrepoforms_content_type',
+                'translation_domain' => 'ezplatform_content_forms_content_type',
                 'constraints' => [
                     new Range([
                         'min' => 0,

@@ -22,7 +22,7 @@ class FieldValueTest extends TestCase
     public function testValidatedBy()
     {
         $constraint = new FieldValue();
-        self::assertSame('ezrepoforms.validator.field_value', $constraint->validatedBy());
+        self::assertSame('ezplatform.content_forms.validator.field_value', $constraint->validatedBy());
     }
 
     public function testGetTargets()

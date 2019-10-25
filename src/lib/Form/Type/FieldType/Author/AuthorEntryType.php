@@ -73,7 +73,7 @@ class AuthorEntryType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Author::class,
-            'translation_domain' => 'ezrepoforms_content',
+            'translation_domain' => 'ezplatform_content_forms_content',
         ]);
     }
 }

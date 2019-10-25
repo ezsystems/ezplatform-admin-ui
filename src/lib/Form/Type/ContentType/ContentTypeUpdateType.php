@@ -29,7 +29,7 @@ class ContentTypeUpdateType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'ezrepoforms_contenttype_update';
+        return 'ezplatform_content_forms_contenttype_update';
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -37,7 +37,7 @@ class ContentTypeUpdateType extends AbstractType
         $resolver
             ->setDefaults([
                 'data_class' => ContentTypeData::class,
-                'translation_domain' => 'ezrepoforms_content_type',
+                'translation_domain' => 'ezplatform_content_forms_content_type',
                 'mainLanguageCode' => null,
             ])
             ->setDefined(['mainLanguageCode'])

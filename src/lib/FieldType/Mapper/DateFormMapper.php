@@ -35,7 +35,7 @@ class DateFormMapper implements FieldDefinitionFormMapperInterface
                     'required' => true,
                     'property_path' => 'fieldSettings[defaultType]',
                     'label' => 'field_definition.ezdate.default_type',
-                    'translation_domain' => 'ezrepoforms_content_type',
+                    'translation_domain' => 'ezplatform_content_forms_content_type',
                     'disabled' => $isTranslation,
                 ]
             );
@@ -45,7 +45,7 @@ class DateFormMapper implements FieldDefinitionFormMapperInterface
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezrepoforms_content_type',
+                'translation_domain' => 'ezplatform_content_forms_content_type',
             ]);
     }
 }

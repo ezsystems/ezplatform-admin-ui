@@ -43,9 +43,9 @@ services:
             - { name: form.type_extension }
 
     EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType:
-        arguments: ["@ezrepoforms.limitation_form_mapper.registry", "@ezrepoforms.limitation.form_mapper.null"]
+        arguments: ["@ezplatform.content_forms.limitation_form_mapper.registry", "@ezplatform.content_forms.limitation.form_mapper.null"]
         tags:
-            - { name: form.type, alias: ezrepoforms_policy_limitation_edit }
+            - { name: form.type, alias: ezplatform_content_forms_policy_limitation_edit }
 
     EzSystems\EzPlatformAdminUi\Form\Type\SwitcherType: ~
 
@@ -56,26 +56,26 @@ services:
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeCreateType:
         arguments: ["@ezpublish.api.service.content_type"]
         tags:
-            - {name: form.type, alias: ezrepoforms_contenttype_create}
+            - {name: form.type, alias: ezplatform_content_forms_contenttype_create}
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeUpdateType:
         tags:
-            - {name: form.type, alias: ezrepoforms_contenttype_update}
+            - {name: form.type, alias: ezplatform_content_forms_contenttype_update}
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\FieldTypeChoiceType:
         arguments: ['@eZ\Publish\Core\FieldType\FieldTypeRegistry', '@translator']
         tags:
-            - { name: form.type, alias: ezrepoforms_contenttype_field_type_choice }
+            - { name: form.type, alias: ezplatform_content_forms_contenttype_field_type_choice }
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortFieldChoiceType:
         arguments: ["@translator"]
         tags:
-            - { name: form.type, alias: ezrepoforms_contenttype_sort_field_choice }
+            - { name: form.type, alias: ezplatform_content_forms_contenttype_sort_field_choice }
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortOrderChoiceType:
         arguments: ["@translator"]
         tags:
-            - { name: form.type, alias: ezrepoforms_contenttype_sort_order_choice }
+            - { name: form.type, alias: ezplatform_content_forms_contenttype_sort_order_choice }
 
     EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition\FieldDefinitionType:
         arguments:
@@ -83,22 +83,22 @@ services:
         calls:
             - [setGroupsList, ["@ezpublish.fields_groups.list"]]
         tags:
-            - { name: form.type, alias: ezrepoforms_fielddefinition_update }
+            - { name: form.type, alias: ezplatform_content_forms_fielddefinition_update }
 
     EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentFieldType:
         arguments: ["@ezplatform.content_forms.field_type_form_mapper.dispatcher"]
         tags:
-            - { name: form.type, alias: ezrepoforms_content_field }
+            - { name: form.type, alias: ezplatform_content_forms_content_field }
 
     EzSystems\EzPlatformAdminUi\Form\Type\URL\URLListType:
         arguments:
             - '@translator'
         tags:
-            - { name: form.type, alias: ezrepoforms_url_list }
+            - { name: form.type, alias: ezplatform_content_forms_url_list }
 
     EzSystems\EzPlatformAdminUi\Form\Type\URL\URLEditType:
         tags:
-            - { name: form.type, alias: ezrepoforms_url_edit }
+            - { name: form.type, alias: ezplatform_content_forms_url_edit }
 
     #
     # FieldTypes

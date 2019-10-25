@@ -27,7 +27,7 @@ class UniqueURLTest extends TestCase
 
     public function testValidatedBy()
     {
-        $this->assertSame('ezrepoforms.validator.unique_url', $this->constraint->validatedBy());
+        $this->assertSame('ezplatform.content_forms.validator.unique_url', $this->constraint->validatedBy());
     }
 
     public function testGetTargets()

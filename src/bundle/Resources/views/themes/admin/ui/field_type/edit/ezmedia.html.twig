@@ -1,4 +1,4 @@
-{% trans_default_domain 'ezrepoforms_content' %}
+{% trans_default_domain 'ezplatform_content_forms_content' %}
 
 {% use '@ezdesign/ui/field_type/edit/binary_base.html.twig' %}
 
@@ -29,7 +29,7 @@
                 <span class="ez-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</span>
             </div>
             <div class="ez-field-edit-preview__settings">
-                <div class="ez-field-edit-preview__section-title form-control-label">{{ 'content.field_type.ezmedia.player_settings'|trans({}, 'ezrepoforms_content')|desc('Player settings') }}</div>
+                <div class="ez-field-edit-preview__section-title form-control-label">{{ 'content.field_type.ezmedia.player_settings'|trans({}, 'ezplatform_content_forms_content')|desc('Player settings') }}</div>
                 <div class="ez-field-edit-preview__toggles">
                     {{ form_row(form.hasController, {'label_attr': {'class': 'checkbox-inline'}}) }}
                     {{ form_row(form.autoplay, {'label_attr': {'class': 'checkbox-inline'}}) }}

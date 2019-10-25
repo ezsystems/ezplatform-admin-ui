@@ -76,7 +76,7 @@ class LimitationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => '\eZ\Publish\API\Repository\Values\User\Limitation',
-            'translation_domain' => 'ezrepoforms_policies',
+            'translation_domain' => 'ezplatform_content_forms_policies',
         ]);
     }
 
@@ -87,6 +87,6 @@ class LimitationType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'ezrepoforms_policy_limitation_edit';
+        return 'ezplatform_content_forms_policy_limitation_edit';
     }
 }

@@ -22,7 +22,7 @@ class UniqueSectionIdentifier extends Constraint
 
     public function validatedBy()
     {
-        return 'ezrepoforms.validator.unique_section_identifier';
+        return 'ezplatform.content_forms.validator.unique_section_identifier';
     }
 
     public function getTargets()

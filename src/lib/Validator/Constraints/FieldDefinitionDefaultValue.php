@@ -23,6 +23,6 @@ class FieldDefinitionDefaultValue extends Constraint
 
     public function validatedBy()
     {
-        return 'ezrepoforms.validator.default_field_value';
+        return 'ezplatform.content_forms.validator.default_field_value';
     }
 }

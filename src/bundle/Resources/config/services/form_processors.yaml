@@ -1,7 +1,7 @@
 parameters:
-    ezrepoforms.form_processor.content_type.options.redirect_route_after_publish: ~
-    ezrepoforms.form_processor.content_type.options:
-        redirectRouteAfterPublish: "%ezrepoforms.form_processor.content_type.options.redirect_route_after_publish%"
+    ezplatform.content_forms.form_processor.content_type.options.redirect_route_after_publish: ~
+    ezplatform.content_forms.form_processor.content_type.options:
+        redirectRouteAfterPublish: "%ezplatform.content_forms.form_processor.content_type.options.redirect_route_after_publish%"
 
 services:
     _defaults:
@@ -29,7 +29,7 @@ services:
 
 
     EzSystems\EzPlatformAdminUi\Form\Processor\ContentType\ContentTypeFormProcessor:
-        arguments: ["@ezpublish.api.service.content_type", "@router", "%ezrepoforms.form_processor.content_type.options%"]
+        arguments: ["@ezpublish.api.service.content_type", "@router", "%ezplatform.content_forms.form_processor.content_type.options%"]
         calls:
             - [setGroupsList, ["@ezpublish.fields_groups.list"]]
         tags:

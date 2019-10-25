@@ -17,10 +17,10 @@ class UserAccount extends EzFieldElement
     public function __construct(BrowserContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
-        $this->fields['username'] = '#ezrepoforms_user_create_fieldsData_field_value_username';
-        $this->fields['password'] = '#ezrepoforms_user_create_fieldsData_field_value_password_first';
-        $this->fields['confirmPassword'] = '#ezrepoforms_user_create_fieldsData_field_value_password_second';
-        $this->fields['email'] = '#ezrepoforms_user_create_fieldsData_field_value_email';
+        $this->fields['username'] = '#ezplatform_content_forms_user_create_fieldsData_field_value_username';
+        $this->fields['password'] = '#ezplatform_content_forms_user_create_fieldsData_field_value_password_first';
+        $this->fields['confirmPassword'] = '#ezplatform_content_forms_user_create_fieldsData_field_value_password_second';
+        $this->fields['email'] = '#ezplatform_content_forms_user_create_fieldsData_field_value_email';
     }
 
     public function setValue(array $parameters): void
