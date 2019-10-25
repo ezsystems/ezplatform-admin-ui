@@ -441,9 +441,12 @@ const customTagBaseDefinition = {
         let content = [...this.element.getChildren().$].find((child) => child.dataset && child.dataset.ezelement === 'ezcontent');
 
         if (!content) {
+            const para = new CKEDITOR.dom.element('p');
+
             content = new CKEDITOR.dom.element('div');
             content.data('ezelement', 'ezcontent');
-            this.element.append(content);
+            content.append(para);
+            this.element.append(content, true);
         } else {
             content = new CKEDITOR.dom.element(content);
         }
