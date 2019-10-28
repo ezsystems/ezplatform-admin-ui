@@ -92,41 +92,4 @@ final class UserAccountFieldValueFormMapper implements FieldDefinitionFormMapper
                 'translation_domain' => 'ezplatform_content_forms_content_type',
             ]);
     }
-
-    /**
-     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
-     *
-     * @return \Symfony\Component\Form\CallbackTransformer
-     */
-    public function getModelTransformerForTranslation(FieldDefinition $fieldDefinition): CallbackTransformer
-    {
-        return new CallbackTransformer(
-            function (ApiUserValue $data) {
-                return new UserAccountFieldData($data->login, null, $data->email, $data->enabled);
-            },
-            function (UserAccountFieldData $submittedData) use ($fieldDefinition) {
-                $userValue = clone $fieldDefinition->defaultValue;
-                $userValue->login = $submittedData->username;
-                $userValue->email = $submittedData->email;
-                $userValue->enabled = $submittedData->enabled;
-
-                return $userValue;
-            }
-        );
-    }
-
-    /**
-     * @return \Symfony\Component\Form\CallbackTransformer
-     */
-    public function getModelTransformer(): CallbackTransformer
-    {
-        return new CallbackTransformer(
-            function (ApiUserValue $data) {
-                return new UserAccountFieldData($data->login, null, $data->email, $data->enabled);
-            },
-            function (UserAccountFieldData $submittedData) {
-                return $submittedData;
-            }
-        );
-    }
 }

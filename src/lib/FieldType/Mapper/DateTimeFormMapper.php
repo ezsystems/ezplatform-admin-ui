@@ -9,7 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\FieldType\Mapper;
 use eZ\Publish\Core\FieldType\DateAndTime\Type;
 use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
 use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
-use EzSystems\EzPlatformContentForms\Form\Type\DateTimeIntervalType;
+use EzSystems\EzPlatformAdminUi\Form\Type\DateTimeIntervalType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
