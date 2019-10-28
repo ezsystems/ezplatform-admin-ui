@@ -6,7 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UpperMenu;
 use Behat\Gherkin\Node\TableNode;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UserNotificationPopup;
@@ -19,7 +19,7 @@ class UserNotificationContext extends BusinessContext
      */
     public function thereIsNotificationForCurrentUser()
     {
-        $upperMenu = ElementFactory::createElement($this->utilityContext, UpperMenu::ELEMENT_NAME);
+        $upperMenu = ElementFactory::createElement($this->browserContext, UpperMenu::ELEMENT_NAME);
         Assert::assertGreaterThan(0, $upperMenu->getNotificationsCount());
     }
 
@@ -28,7 +28,7 @@ class UserNotificationContext extends BusinessContext
      */
     public function iGoToUserNotificationWithDetails(TableNode $notificationDetails)
     {
-        $notificationsPopup = ElementFactory::createElement($this->utilityContext, UserNotificationPopup::ELEMENT_NAME);
+        $notificationsPopup = ElementFactory::createElement($this->browserContext, UserNotificationPopup::ELEMENT_NAME);
         $notificationsPopup->verifyVisibility();
 
         $type = $notificationDetails->getHash()[0]['Type'];
