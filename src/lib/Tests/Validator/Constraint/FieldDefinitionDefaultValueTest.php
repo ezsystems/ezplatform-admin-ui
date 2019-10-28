@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Tests\Validator\Constraint;
 
 use EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldDefinitionDefaultValue;
+use EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldDefinitionDefaultValueValidator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Constraint;
 
@@ -21,7 +22,7 @@ class FieldDefinitionDefaultValueTest extends TestCase
     public function testValidatedBy()
     {
         $constraint = new FieldDefinitionDefaultValue();
-        self::assertSame('ezplatform.content_forms.validator.default_field_value', $constraint->validatedBy());
+        self::assertSame(FieldDefinitionDefaultValueValidator::class, $constraint->validatedBy());
     }
 
     public function testGetTargets()
