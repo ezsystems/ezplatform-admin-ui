@@ -53,9 +53,3 @@ services:
             $userService: '@ezpublish.api.service.user'
         tags:
             - { name: validator.constraint_validator }
-
-    EzSystems\EzPlatformAdminUi\Validator\Constraints\UserAccountPasswordValidator:
-        arguments:
-            $userService: '@ezpublish.api.service.user'
-        tags:
-            - { name: validator.constraint_validator }

@@ -49,8 +49,6 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\Type\SwitcherType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\FieldType\BinaryBaseFieldType: ~
-
     EzSystems\EzPlatformAdminUi\Form\Type\LocationType: ~
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeCreateType:
