@@ -7,14 +7,15 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use Exception;
-use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
+use EzSystems\Behat\Browser\Context\BrowserContext;
+use EzSystems\Behat\Browser\Element\Element;
 use PHPUnit\Framework\Assert;
 
 class UserNotificationPopup extends Element
 {
     public const ELEMENT_NAME = 'UserNotificationPopup';
 
-    public function __construct(UtilityContext $context)
+    public function __construct(BrowserContext $context)
     {
         parent::__construct($context);
         $this->fields = [

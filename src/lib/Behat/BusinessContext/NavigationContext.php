@@ -140,7 +140,7 @@ class NavigationContext extends BusinessContext
      */
     public function iGoToUserNotifications()
     {
-        $upperMenu = ElementFactory::createElement($this->utilityContext, UpperMenu::ELEMENT_NAME);
+        $upperMenu = ElementFactory::createElement($this->browserContext, UpperMenu::ELEMENT_NAME);
         $upperMenu->chooseFromUserDropdown('View Notifications');
     }
 
