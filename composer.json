@@ -83,5 +83,8 @@
             "dev-master": "2.0.x-dev",
             "dev-content_forms": "2.0.x-dev"
         }
+    },
+    "config": {
+        "github-protocols": ["https"]
     }
 }
