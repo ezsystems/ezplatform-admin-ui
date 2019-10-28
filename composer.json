@@ -55,6 +55,7 @@
         "symfony/yaml": "^4.3",
         "jms/translation-bundle": "^1.4",
         "ezsystems/ezpublish-kernel": "^8.0@dev",
+        "ezsystems/ezplatform-admin-ui": "dev-content_forms as 2.0.x-dev",
         "ezsystems/ezplatform-content-forms": "dev-content_forms as 1.0.x-dev",
         "ezsystems/ezplatform-admin-ui-modules": "^2.0@dev",
         "ezsystems/ez-support-tools": "dev-repoforms as 2.0.x-dev",
