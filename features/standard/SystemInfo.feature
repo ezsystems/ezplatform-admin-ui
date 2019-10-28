@@ -18,10 +18,10 @@ Feature: System info verification
         | ezsystems/ezplatform-admin-ui-assets    |
         | ezsystems/ezplatform-admin-ui-modules   |
         | ezsystems/ezplatform-design-engine      |
-#        | ezsystems/ezplatform-http-cache         | # @todo Uncomment once this package is supported in eZ Platform 3
+        | ezsystems/ezplatform-http-cache         |
         | ezsystems/ezplatform-solr-search-engine |
         | ezsystems/ezpublish-kernel              |
-        | ezsystems/repository-forms              |
+        | ezsystems/ezplatform-content-forms      |
 
   @javascript @common
   Scenario: Check Database System Information
@@ -54,6 +54,6 @@ Feature: System info verification
         | EzPlatformRestBundle                      |
         | EzSystemsEzPlatformSolrSearchEngineBundle |
         | EzSystemsEzSupportToolsBundle             |
-#        | EzSystemsPlatformHttpCacheBundle          | # @todo Uncomment once this bundle is supported in eZ Platform 3
+        | EzSystemsPlatformHttpCacheBundle          |
         | EzSystemsPlatformInstallerBundle          |
-        | EzSystemsRepositoryFormsBundle            |
+        | EzPlatformContentFormsBundle              |
