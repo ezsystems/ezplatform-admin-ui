@@ -12,6 +12,28 @@
     "autoload-dev": {
         "psr-4": { "EzSystems\\EzPlatformAdminUi\\Tests\\": "src/lib/Tests" }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/webhdx/ezplatform-content-forms.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/webhdx/ezplatform-user.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/webhdx/ezplatform-richtext.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/webhdx/ez-support-tools.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/webhdx/ezplatform-admin-ui.git"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
@@ -33,12 +55,12 @@
         "symfony/yaml": "^4.3",
         "jms/translation-bundle": "^1.4",
         "ezsystems/ezpublish-kernel": "^8.0@dev",
-        "ezsystems/ezplatform-content-forms": "^1.0@dev",
+        "ezsystems/ezplatform-content-forms": "dev-content_forms as ^1.0@dev",
         "ezsystems/ezplatform-admin-ui-modules": "^2.0@dev",
-        "ezsystems/ez-support-tools": "^2.0@dev",
+        "ezsystems/ez-support-tools": "dev-repoforms as ^2.0@dev",
         "ezsystems/ezplatform-design-engine": "^3.0@dev",
-        "ezsystems/ezplatform-user": "^2.0@dev",
-        "ezsystems/ezplatform-richtext": "^2.0@dev",
+        "ezsystems/ezplatform-user": "dev-repoforms as ^2.0@dev",
+        "ezsystems/ezplatform-richtext": "dev-repoforms as ^2.0@dev",
         "ezsystems/ezplatform-rest": "^1.0@dev",
         "white-october/pagerfanta-bundle": "^1.2",
         "knplabs/knp-menu-bundle": "^2.2",
