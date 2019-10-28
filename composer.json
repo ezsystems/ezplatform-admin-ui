@@ -55,12 +55,12 @@
         "symfony/yaml": "^4.3",
         "jms/translation-bundle": "^1.4",
         "ezsystems/ezpublish-kernel": "^8.0@dev",
-        "ezsystems/ezplatform-content-forms": "dev-content_forms as ^1.0@dev",
+        "ezsystems/ezplatform-content-forms": "dev-content_forms as 1.0.x-dev",
         "ezsystems/ezplatform-admin-ui-modules": "^2.0@dev",
-        "ezsystems/ez-support-tools": "dev-repoforms as ^2.0@dev",
+        "ezsystems/ez-support-tools": "dev-repoforms as 2.0.x-dev",
         "ezsystems/ezplatform-design-engine": "^3.0@dev",
-        "ezsystems/ezplatform-user": "dev-repoforms as ^2.0@dev",
-        "ezsystems/ezplatform-richtext": "dev-repoforms as ^2.0@dev",
+        "ezsystems/ezplatform-user": "dev-repoforms as 2.0.x-dev",
+        "ezsystems/ezplatform-richtext": "dev-repoforms as 2.0.x-dev",
         "ezsystems/ezplatform-rest": "^1.0@dev",
         "white-october/pagerfanta-bundle": "^1.2",
         "knplabs/knp-menu-bundle": "^2.2",
@@ -80,7 +80,8 @@
         "_ezplatform_branch_for_behat_tests": "master",
         "branch-alias": {
             "dev-tmp_ci_branch": "2.0.x-dev",
-            "dev-master": "2.0.x-dev"
+            "dev-master": "2.0.x-dev",
+            "dev-content_forms": "2.0.x-dev"
         }
     }
 }
