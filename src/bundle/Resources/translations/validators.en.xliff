@@ -6,9 +6,34 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="facbff93edf91393ba1bb60212f504d35beae555" resname="ez.content_type.descriptions">
+        <source>Content type description cannot exceed 255 characters.</source>
+        <target>Content type description cannot exceed 255 characters.</target>
+        <note>key: ez.content_type.descriptions</note>
+      </trans-unit>
+      <trans-unit id="73aad2fb9c8f9a2103bf60d6e9221a619f261f9c" resname="ez.content_type.identifier.pattern">
+        <source>Content type identifier may only contain letters from "a" to "z", numbers and underscores.</source>
+        <target>Content type identifier may only contain letters from "a" to "z", numbers and underscores.</target>
+        <note>key: ez.content_type.identifier.pattern</note>
+      </trans-unit>
+      <trans-unit id="7ecfa6bd2c1993d18d067f3abe3acebeb9c2458c" resname="ez.content_type.names">
+        <source>Content type name cannot be blank and cannot exceed 255 characters.</source>
+        <target>Content type name cannot be blank and cannot exceed 255 characters.</target>
+        <note>key: ez.content_type.names</note>
+      </trans-unit>
+      <trans-unit id="95f7490a739fd599a8d1d8f2ddec862744a71faa" resname="ez.field_definition.descriptions">
+        <source>Field definition description cannot exceed 255 characters.</source>
+        <target>Field definition description cannot exceed 255 characters.</target>
+        <note>key: ez.field_definition.descriptions</note>
+      </trans-unit>
+      <trans-unit id="0f7d936836760a506042c4d25cd38c5a30c3d9de" resname="ez.field_definition.names">
+        <source>Field definition name cannot be blank cannot exceed 255 characters.</source>
+        <target>Field definition name cannot be blank cannot exceed 255 characters.</target>
+        <note>key: ez.field_definition.names</note>
+      </trans-unit>
       <trans-unit id="924826be1015d20c1f4524754c690e10935abaac" resname="ez.section.identifier.format">
-        <source>ez.section.identifier.format</source>
-        <target state="new">ez.section.identifier.format</target>
+        <source>Section identifier may only contain letters from "a" to "z", numbers and underscores.</source>
+        <target>Section identifier may only contain letters from "a" to "z", numbers and underscores.</target>
         <note>key: ez.section.identifier.format</note>
       </trans-unit>
       <trans-unit id="0727f822c8bebb99cd8a75ec16d4008c74d30b24" resname="ezplatform.change_user_password.not_match">

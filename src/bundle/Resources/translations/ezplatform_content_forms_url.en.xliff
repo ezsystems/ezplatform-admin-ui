@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="bce60197735a1f604ba70517b0f1b4b0d838d56a" resname="url.status.all">
+        <source>All</source>
+        <target state="new">All</target>
+        <note>key: url.status.all</note>
+      </trans-unit>
+      <trans-unit id="3e0d8fcb74e476fcae45da9c4c7b0b261118c7a3" resname="url.status.invalid">
+        <source>Invalid</source>
+        <target state="new">Invalid</target>
+        <note>key: url.status.invalid</note>
+      </trans-unit>
+      <trans-unit id="8907a4f74219ceff2ee07437ec1657f1ee75a830" resname="url.status.valid">
+        <source>Valid</source>
+        <target state="new">Valid</target>
+        <note>key: url.status.valid</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

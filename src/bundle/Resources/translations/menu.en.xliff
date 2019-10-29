@@ -371,11 +371,6 @@
         <target state="new">Bookmarks</target>
         <note>key: user__bookmark</note>
       </trans-unit>
-      <trans-unit id="da5c7f4f526c2dd5b1e1f51ab5238ef4ba86d421" resname="user__change_password">
-        <source>Change password</source>
-        <target state="new">Change password</target>
-        <note>key: user__change_password</note>
-      </trans-unit>
       <trans-unit id="06accb26fbb1b72012942af2b3e03f7c138e28c3" resname="user__content">
         <source>Logout</source>
         <target state="new">Logout</target>
