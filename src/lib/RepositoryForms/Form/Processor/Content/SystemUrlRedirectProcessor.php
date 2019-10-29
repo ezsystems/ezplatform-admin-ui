@@ -12,32 +12,33 @@ use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 use EzSystems\RepositoryForms\Event\FormActionEvent;
 use EzSystems\RepositoryForms\Event\RepositoryFormEvents;
-use EzSystems\RepositoryForms\Form\Processor\SystemUrlRedirectProcessor;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\RouterInterface;
 
-class UrlRedirectProcessor implements EventSubscriberInterface
+class SystemUrlRedirectProcessor implements EventSubscriberInterface
 {
     /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess */
     private $siteaccess;
 
-    /** @var \EzSystems\RepositoryForms\Form\Processor\SystemUrlRedirectProcessor */
-    private $systemUrlRedirectProcessor;
+    /** @var \Symfony\Component\Routing\RouterInterface */
+    private $router;
 
     /** @var array */
     private $siteaccessGroups;
 
     /**
      * @param \eZ\Publish\Core\MVC\Symfony\SiteAccess $siteaccess
-     * @param \EzSystems\RepositoryForms\Form\Processor\SystemUrlRedirectProcessor $systemUrlRedirectProcessor
+     * @param \Symfony\Component\Routing\RouterInterface $router
      * @param array $siteaccessGroups
      */
     public function __construct(
         SiteAccess $siteaccess,
-        SystemUrlRedirectProcessor $systemUrlRedirectProcessor,
+        RouterInterface $router,
         array $siteaccessGroups
     ) {
         $this->siteaccess = $siteaccess;
-        $this->systemUrlRedirectProcessor = $systemUrlRedirectProcessor;
+        $this->router = $router;
         $this->siteaccessGroups = $siteaccessGroups;
     }
 
@@ -65,11 +66,11 @@ class UrlRedirectProcessor implements EventSubscriberInterface
             return;
         }
 
-        if ($this->isAdminSiteaccess()) {
+        if (!$this->isAdminSiteaccess()) {
             return;
         }
 
-        $this->systemUrlRedirectProcessor->processRedirectAfterPublish($event);
+        $this->resolveSystemUrlRedirect($event);
     }
 
     /**
@@ -81,11 +82,11 @@ class UrlRedirectProcessor implements EventSubscriberInterface
      */
     public function processRedirectAfterCancel(FormActionEvent $event): void
     {
-        if ($this->isAdminSiteaccess()) {
+        if (!$this->isAdminSiteaccess()) {
             return;
         }
-
-        $this->systemUrlRedirectProcessor->processRedirectAfterCancel($event);
+        
+        $this->resolveSystemUrlRedirect($event);
     }
 
     /**
@@ -97,4 +98,33 @@ class UrlRedirectProcessor implements EventSubscriberInterface
     {
         return (new IsAdmin($this->siteaccessGroups))->isSatisfiedBy($this->siteaccess);
     }
+
+    /**
+     * @param \EzSystems\RepositoryForms\Event\FormActionEvent $event
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    private function resolveSystemUrlRedirect(FormActionEvent $event): void
+    {
+        /** @var \Symfony\Component\HttpFoundation\RedirectResponse $response */
+        $response = $event->getResponse();
+
+        if (!$response instanceof RedirectResponse) {
+            return;
+        }
+
+        $params = $this->router->match($response->getTargetUrl());
+
+        if (!in_array('locationId', $params)) {
+            return;
+        }
+
+        $url = $this->router->generate(
+            '_ezpublishLocation', ['locationId' => $params['locationId']]
+        );
+
+        $event->setResponse(new RedirectResponse($url));
+    }
 }
+
