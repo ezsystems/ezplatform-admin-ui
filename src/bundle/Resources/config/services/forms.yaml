@@ -97,12 +97,3 @@ services:
     EzSystems\EzPlatformAdminUi\Form\Type\URL\URLEditType:
         tags:
             - { name: form.type, alias: ezplatform_content_forms_url_edit }
-
-    #
-    # FieldTypes
-    #
-
-    EzSystems\EzPlatformAdminUi\Form\Type\FieldType\CountryFieldType:
-        arguments:
-            $countriesInfo: '%ezpublish.fieldType.ezcountry.data%'
-
