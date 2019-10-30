@@ -1,19 +1,19 @@
-(function(global, doc, $) {
+(function(global, doc, $, Translator) {
     const OFFSET_ROUNDING_COMPENSATOR = 0.5;
     const copyTabs = () => {
         const primaryTabs = doc.querySelector('.ez-tabs');
+        const moreLabel = Translator.trans(/*@Desc("More")*/ 'content.view.more.label', {}, 'content');
 
         primaryTabs.insertAdjacentHTML(
             'beforeend',
             `<li class="nav-item ez-tabs__tab ez-tabs__tab--more">
-                <a class="nav-link" id="ez-tab-label--more" role="tab"></a>
+                <a class="nav-link" id="ez-tab-label--more" role="tab">${moreLabel}</a>
                 <ul class="nav nav-tabs ez-tabs ez-tabs--hidden ez-tabs--secondary" role="tablist">
                     ${primaryTabs.innerHTML}
                 </ul>
             </li>`
         );
     };
-
     const primaryTabsList = doc.querySelector('.ez-tabs');
     const primaryTabs = [...primaryTabsList.querySelectorAll('.ez-tabs__tab')];
     const primaryTabsLinks = [...primaryTabsList.querySelectorAll('.ez-tabs__tab .nav-link')];
@@ -25,7 +25,6 @@
     const secondaryTabsList = moreTab.querySelector('.ez-tabs--secondary');
     const secondaryTabs = [...moreTab.querySelectorAll('.ez-tabs__tab')];
     const secondaryTabsLinks = [...secondaryTabsList.querySelectorAll('.ez-tabs__tab .nav-link')];
-
     const adaptTabs = () => {
         primaryTabs.forEach((tab) => tab.classList.remove('ez-tabs__tab--hidden'));
         moreTab.classList.remove('ez-tabs__tab--hidden');
@@ -114,10 +113,6 @@
             secondaryTabsList.classList.toggle('ez-tabs--hidden', true);
         });
     });
-    document.body.addEventListener('ez-content-tree-resized', () => {
-        adaptTabs();
-    });
-    window.addEventListener('resize', () => {
-        adaptTabs();
-    });
-})(window, window.document, window.jQuery);
+    document.body.addEventListener('ez-content-tree-resized', adaptTabs);
+    window.addEventListener('resize', adaptTabs);
+})(window, window.document, window.jQuery, window.Translator);

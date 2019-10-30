@@ -1,5 +1,5 @@
 .nav-tabs {
-    border-bottom: 2px solid $ez-ground-base-dark;
+    border-bottom: calculateRem(2px) solid $ez-ground-base-dark;
     background-color: $ez-ground-base-dark;
 
     .nav-item {
@@ -24,9 +24,9 @@
 
 .ez-dashboard {
     .nav-tabs {
-        border-bottom: 2px solid $ez-ground-primary-inverted;
+        border-bottom: calculateRem(2px) solid $ez-ground-primary-inverted;
         background-color: $white;
-        margin-bottom: 1rem;
+        margin-bottom: calculateRem(16px);
 
         .nav-link {
             &.active {
@@ -44,7 +44,7 @@
     }
 
     .nav-tabs {
-        border-bottom: 2px solid $ez-ground-base-dark;
+        border-bottom: calculateRem(2px) solid $ez-ground-base-dark;
 
         &.ez-tabs {
             .nav-item {
@@ -64,16 +64,16 @@
                     > .nav-link {
                         position: relative;
                         height: 100%;
-                        padding-right: 1.25rem;
+                        padding-right: calculateRem(32px);
 
                         &:before,
                         &:after {
                             content: '';
-                            height: 10px;
-                            width: 2px;
+                            height: calculateRem(10px);
+                            width: calculateRem(2px);
                             position: absolute;
                             top: 50%;
-                            right: 1rem;
+                            right: calculateRem(16px);
                             background-color: $ez-black;
                         }
 
@@ -99,7 +99,7 @@
                     .nav-link {
                         background-color: $ez-ground-base-light;
                         border-color: $ez-ground-base-light;
-                        color: #333;
+                        color: $ez-black;
                     }
                 }
             }
@@ -126,11 +126,11 @@
                         border: 0;
 
                         &.active {
-                            background-color: #e5e3e3;
+                            background-color: $ez-ground-base-dark;
                         }
 
                         &:hover {
-                            background-color: #dbdbdb;
+                            background-color: $ez-color-base-pale;
                         }
                     }
                 }
