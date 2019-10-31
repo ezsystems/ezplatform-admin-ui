@@ -21,10 +21,15 @@
         <target state="new">Draft conflict when editing</target>
         <note>key: draft.conflict.header</note>
       </trans-unit>
-      <trans-unit id="d5fdbb680e6950e955c933e05f15f861c2020517" resname="draft.conflict.number">
-        <source>{1}There are %number% draft for this content item.|]1,Inf[ There are %number% drafts for this content item</source>
-        <target state="new">{1}There are %number% draft for this content item.|]1,Inf[ There are %number% drafts for this content item</target>
-        <note>key: draft.conflict.number</note>
+      <trans-unit id="b72a86589e4df8c7b1ff60e24b71971ef2c6bb86" resname="draft.conflict.number.one">
+        <source>There is 1 draft for this content item.</source>
+        <target state="new">There is 1 draft for this content item.</target>
+        <note>key: draft.conflict.number.one</note>
+      </trans-unit>
+      <trans-unit id="88dbada59962180257d8fec8c842c86c2feb934d" resname="draft.conflict.number.multiple">
+        <source>There are %number% drafts for this content item.</source>
+        <target state="new">There are %number% drafts for this content item.</target>
+        <note>key: draft.conflict.number.multiple</note>
       </trans-unit>
       <trans-unit id="a4297fe31e8eb3307caa2cf855328056c3b98962" resname="tab.versions.action.delete">
         <source>Add draft</source>
