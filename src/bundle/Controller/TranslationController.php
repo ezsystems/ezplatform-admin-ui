@@ -113,6 +113,7 @@ class TranslationController extends Controller
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (TranslationDeleteData $data) {
                 $contentInfo = $data->getContentInfo();
+                $content = $this->contentService->loadContentByContentInfo($contentInfo);
 
                 foreach ($data->getLanguageCodes() as $languageCode => $selected) {
                     $this->contentService->deleteTranslation($contentInfo, $languageCode);
@@ -121,7 +122,7 @@ class TranslationController extends Controller
                         $this->translator->trans(
                             /** @Desc("Translation '%languageCode%' removed from content '%name%'.") */
                             'translation.remove.success',
-                            ['%languageCode%' => $languageCode, '%name%' => $contentInfo->name],
+                            ['%languageCode%' => $languageCode, '%name%' => $content->getName()],
                             'translation'
                         )
                     );

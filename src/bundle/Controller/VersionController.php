@@ -94,6 +94,7 @@ class VersionController extends Controller
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (VersionRemoveData $data) {
                 $contentInfo = $data->getContentInfo();
+                $content = $this->contentService->loadContentByContentInfo($contentInfo);
 
                 foreach ($data->getVersions() as $versionNo => $selected) {
                     $versionInfo = $this->contentService->loadVersionInfo($contentInfo, $versionNo);
@@ -104,7 +105,7 @@ class VersionController extends Controller
                     $this->translator->trans(
                         /** @Desc("Versions removed from '%name%' content.") */
                         'version.delete.success',
-                        ['%name%' => $contentInfo->name],
+                        ['%name%' => $content->getName()],
                         'version'
                     )
                 );

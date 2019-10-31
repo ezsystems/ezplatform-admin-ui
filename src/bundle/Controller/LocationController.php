@@ -587,15 +587,15 @@ class LocationController extends Controller
             $hidden = $data->getHidden();
 
             try {
-                /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo */
-                $contentInfo = $location->getContentInfo();
+                /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
+                $content = $location->getContent();
 
                 if ($hidden) {
                     $this->locationService->hideLocation($location);
                     $message = $this->translator->trans(
                         /** @Desc("Location '%name%' hidden.") */
                         'location.update_success.success.hidden',
-                        ['%name%' => $contentInfo->name],
+                        ['%name%' => $content->getName()],
                         'location'
                     );
                 } else {
@@ -603,7 +603,7 @@ class LocationController extends Controller
                     $message = $this->translator->trans(
                         /** @Desc("Location '%name%' unhidden.") */
                         'location.update_success.success.unhidden',
-                        ['%name%' => $contentInfo->name],
+                        ['%name%' => $content->getName()],
                         'location'
                     );
                 }

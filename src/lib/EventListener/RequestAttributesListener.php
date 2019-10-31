@@ -71,7 +71,7 @@ class RequestAttributesListener implements EventSubscriberInterface
             /** @var Location $location */
             $location = $parameterBag->get('location');
 
-            $languageCode = $parameterBag->get('languageCode') ?? $location->contentInfo->mainLanguageCode;
+            $languageCode = $parameterBag->get('languageCode');
 
             $content = $this->loadContent($location->contentInfo->id, $languageCode);
             $parameterBag->set('content', $content);
@@ -114,9 +114,9 @@ class RequestAttributesListener implements EventSubscriberInterface
      * @throws UnauthorizedException
      * @throws NotFoundException
      */
-    private function loadContent(int $contentId, string $language): Content
+    private function loadContent(int $contentId, ?string $language): Content
     {
-        return $this->repository->getContentService()->loadContent($contentId, [$language]);
+        return $this->repository->getContentService()->loadContent($contentId, $language ? [$language] : null);
     }
 
     private function isAdmin(Request $request): bool

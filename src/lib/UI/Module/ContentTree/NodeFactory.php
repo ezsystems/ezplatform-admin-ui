@@ -83,7 +83,6 @@ final class NodeFactory
         int $depth = 0
     ): Node {
         $content = $location->getContent();
-        $contentInfo = $location->getContentInfo();
 
         // Top Level Location (id = 1) does not have a Content Type
         $contentType = $location->depth > 0
@@ -121,7 +120,7 @@ final class NodeFactory
             $depth,
             $location->id,
             $location->contentId,
-            $contentInfo->name,
+            $content->getName(),
             $contentType ? $contentType->identifier : '',
             $contentType ? $contentType->isContainer : true,
             $location->invisible || $location->hidden,

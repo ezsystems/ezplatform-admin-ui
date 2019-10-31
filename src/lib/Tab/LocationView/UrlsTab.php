@@ -16,6 +16,7 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Specification\Location\IsRoot;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
@@ -151,13 +152,15 @@ class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
             'system_urls_pager' => $systemUrlPagerfanta,
             'system_urls_pagination_params' => $systemUrlsPaginationParams,
             'can_edit_custom_url' => $canEditCustomUrl,
+            'parent_name' => null,
         ];
 
         try {
             $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
-            $viewParameters['parent_name'] = $parentLocation->contentInfo->name;
+            if (!(new IsRoot())->isSatisfiedBy($location)) {
+                $viewParameters['parent_name'] = $parentLocation->getContent()->getName();
+            }
         } catch (UnauthorizedException $exception) {
-            $viewParameters['parent_name'] = null;
         }
 
         return array_replace($contextParameters, $viewParameters);
