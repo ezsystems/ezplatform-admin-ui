@@ -72,7 +72,7 @@ class PagerContentToDataMapper
                 'content' => $content,
                 'contentTypeId' => $contentInfo->contentTypeId,
                 'contentId' => $content->id,
-                'name' => $contentInfo->name,
+                'name' => $content->getName(),
                 'language' => $contentInfo->mainLanguageCode,
                 'contributor' => $contributor,
                 'version' => $content->versionInfo->versionNo,

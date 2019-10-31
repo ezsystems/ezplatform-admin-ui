@@ -84,6 +84,7 @@ class ContentTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     {
         /** @var Content $content */
         $content = $contextParameters['content'];
+
         /** @var ContentType $contentType */
         $contentType = $contextParameters['contentType'];
         $fieldDefinitions = $contentType->getFieldDefinitions();

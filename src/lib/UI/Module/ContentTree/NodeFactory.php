@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Module\ContentTree;
 
+use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -82,8 +83,8 @@ final class NodeFactory
         bool $loadChildren = false,
         int $depth = 0
     ): Node {
+        // FIXME:
         $content = $location->getContent();
-        $contentInfo = $location->getContentInfo();
 
         // Top Level Location (id = 1) does not have a Content Type
         $contentType = $location->depth > 0
@@ -121,7 +122,7 @@ final class NodeFactory
             $depth,
             $location->id,
             $location->contentId,
-            $contentInfo->name,
+            $content->getName(),
             $contentType ? $contentType->identifier : '',
             $contentType ? $contentType->isContainer : true,
             $location->invisible || $location->hidden,

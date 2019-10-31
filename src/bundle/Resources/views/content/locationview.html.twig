@@ -34,8 +34,9 @@
                         {% set items = [] %}
                         {% for pathLocation in pathLocations %}
                             {% if not loop.last %}
+                                {# FIXME: pathLocation.contentInfo.name => pathLocation.content.name  #}
                                 {% set items = items|merge([{
-                                    'value': pathLocation.contentInfo.name,
+                                    'value': pathLocation.content.name,
                                     'url': path('_ezpublishLocation', {'locationId': pathLocation.id})
                                 }]) %}
                             {% endif %}

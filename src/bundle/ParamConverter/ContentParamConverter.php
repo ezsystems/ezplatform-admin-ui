@@ -52,6 +52,7 @@ class ContentParamConverter implements ParamConverterInterface
             return false;
         }
 
+        // FIXME:
         $content = $this->contentService->loadContent($contentId, (array) $languageCode, $versionNo);
 
         $request->attributes->set($configuration->getName(), $content);
