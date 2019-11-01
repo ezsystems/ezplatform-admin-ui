@@ -60,7 +60,7 @@
             this.alloyEditorExtraPlugins = global.eZ.adminUiConfig.alloyEditor.extraPlugins;
             this.customStyleSelections = window.eZ.ezAlloyEditor.CustomSelections
                 ? Object.values(window.eZ.ezAlloyEditor.CustomSelections)
-                : {};
+                : [];
 
             this.xhtmlify = this.xhtmlify.bind(this);
         }
