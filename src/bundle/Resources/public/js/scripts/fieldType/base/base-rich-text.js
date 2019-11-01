@@ -58,6 +58,9 @@
                 }
             );
             this.alloyEditorExtraPlugins = global.eZ.adminUiConfig.alloyEditor.extraPlugins;
+            this.customStyleSelections = window.eZ.ezAlloyEditor.CustomSelections
+                ? Object.values(window.eZ.ezAlloyEditor.CustomSelections)
+                : {};
 
             this.xhtmlify = this.xhtmlify.bind(this);
         }
@@ -192,6 +195,9 @@
 
         init(container) {
             const toolbarProps = { extraButtons: this.alloyEditorExtraButtons, attributes: this.attributes, classes: this.classes };
+            const customSelections = this.customStyleSelections.map((selection) => {
+                return new selection(toolbarProps);
+            });
             const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
                 toolbars: {
                     ezadd: {
@@ -250,6 +256,7 @@
                             new window.eZ.ezAlloyEditor.ezEmbedImageLinkConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezEmbedImageConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezEmbedConfig(toolbarProps),
+                            ...customSelections,
                         ],
                         tabIndex: 1,
                     },
