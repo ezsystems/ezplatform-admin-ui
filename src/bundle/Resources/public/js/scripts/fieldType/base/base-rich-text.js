@@ -2,6 +2,7 @@
     const eZ = (global.eZ = global.eZ || {});
     const HTML_NODE = 1;
     const TEXT_NODE = 3;
+    const notInitializeElements = ['strong', 'em', 'u', 'sup', 'sub', 's'];
 
     const BaseRichText = class BaseRichText {
         constructor() {
@@ -320,7 +321,7 @@
         }
 
         setNodeInitializedState(node) {
-            if (node.nodeType === HTML_NODE) {
+            if (node.nodeType === HTML_NODE && !notInitializeElements.includes(node.nodeName.toLowerCase())) {
                 node.setAttribute('data-ez-node-initialized', true);
             }
         }
