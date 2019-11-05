@@ -58,8 +58,8 @@
                 }
             );
             this.alloyEditorExtraPlugins = global.eZ.adminUiConfig.alloyEditor.extraPlugins;
-            this.customStyleSelections = window.eZ.ezAlloyEditor.CustomSelections
-                ? Object.values(window.eZ.ezAlloyEditor.CustomSelections)
+            this.customStyleSelections = global.eZ.ezAlloyEditor.customSelections
+                ? Object.values(global.eZ.ezAlloyEditor.customSelections)
                 : [];
 
             this.xhtmlify = this.xhtmlify.bind(this);
@@ -195,8 +195,8 @@
 
         init(container) {
             const toolbarProps = { extraButtons: this.alloyEditorExtraButtons, attributes: this.attributes, classes: this.classes };
-            const customSelections = this.customStyleSelections.map((selection) => {
-                return new selection(toolbarProps);
+            const customSelections = this.customStyleSelections.map((Selection) => {
+                return new Selection(toolbarProps);
             });
             const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
                 toolbars: {
