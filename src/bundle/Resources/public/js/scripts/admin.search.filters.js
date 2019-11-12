@@ -188,7 +188,7 @@
                     SortClauses: {},
                     Query: {
                         FullTextCriterion: `${value}*`,
-                        ContentTypeIdentifierCriterion: creatorInput.dataset.contentTypeIdentifiers,
+                        ContentTypeIdentifierCriterion: creatorInput.dataset.contentTypeIdentifiers.split(','),
                     },
                     limit: 50,
                     offset: 0,
