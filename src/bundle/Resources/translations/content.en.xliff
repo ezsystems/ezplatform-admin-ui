@@ -51,6 +51,11 @@
         <target state="new">Content '%name%' has been revealed.</target>
         <note>key: content.reveal.success</note>
       </trans-unit>
+      <trans-unit id="c078d68107501c81ef81e99437b4285ff012e0bd" resname="content.view.more.label">
+        <source>More</source>
+        <target state="new">More</target>
+        <note>key: content.view.more.label</note>
+      </trans-unit>
       <trans-unit id="4492a79e25635e7612f98971e02b4d0e6a408394" resname="user.delete.success">
         <source>User with login '%login%' deleted.</source>
         <target state="new">User with login '%login%' deleted.</target>

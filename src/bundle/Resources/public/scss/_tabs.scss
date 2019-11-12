@@ -1,5 +1,5 @@
 .nav-tabs {
-    border-bottom: 2px solid $ez-ground-base-dark;
+    border-bottom: calculateRem(2px) solid $ez-ground-base-dark;
     background-color: $ez-ground-base-dark;
 
     .nav-item {
@@ -24,9 +24,9 @@
 
 .ez-dashboard {
     .nav-tabs {
-        border-bottom: 2px solid $ez-ground-primary-inverted;
+        border-bottom: calculateRem(2px) solid $ez-ground-primary-inverted;
         background-color: $white;
-        margin-bottom: 1rem;
+        margin-bottom: calculateRem(16px);
 
         .nav-link {
             &.active {
@@ -39,12 +39,101 @@
 }
 
 .ez-content-view {
+    .ez-header .container {
+        overflow: initial;
+    }
+
     .nav-tabs {
-        border-bottom: 2px solid $ez-ground-base-dark;
+        border-bottom: calculateRem(2px) solid $ez-ground-base-dark;
 
         &.ez-tabs {
             .nav-item {
                 margin-bottom: -2px;
+            }
+        }
+
+        .ez-tabs {
+            &__tab {
+                &--hidden {
+                    display: none;
+                }
+
+                &--more {
+                    cursor: pointer;
+
+                    > .nav-link {
+                        position: relative;
+                        height: 100%;
+                        padding-right: calculateRem(32px);
+
+                        &:before,
+                        &:after {
+                            content: '';
+                            height: calculateRem(10px);
+                            width: calculateRem(2px);
+                            position: absolute;
+                            top: 50%;
+                            right: calculateRem(16px);
+                            background-color: $ez-black;
+                        }
+
+                        &:before {
+                            transform: translate(3px, -50%) rotate(-135deg);
+                        }
+
+                        &:after {
+                            transform: translate(-3px, -50%) rotate(135deg);
+                        }
+                    }
+                }
+
+                &--expanded {
+                    .nav-link {
+                        background-color: $ez-color-base-pale;
+                        border-color: $ez-color-base-pale;
+                        color: $ez-black;
+                    }
+                }
+
+                &--highlighted {
+                    .nav-link {
+                        background-color: $ez-ground-base-light;
+                        border-color: $ez-ground-base-light;
+                        color: $ez-black;
+                    }
+                }
+            }
+
+            &--hidden {
+                display: none;
+            }
+
+            &--secondary {
+                flex-direction: column;
+                position: absolute;
+
+                &.nav-tabs {
+                    z-index: 100;
+                    box-shadow: 0 calculateRem(6px) calculateRem(16px) 0 rgba(51, 51, 51, 0.3);
+
+                    .nav-item {
+                    }
+
+                    .nav-link {
+                        background-color: $ez-ground-base-light;
+                        border-color: $ez-ground-base-light;
+                        border-radius: 0;
+                        border: 0;
+
+                        &.active {
+                            background-color: $ez-ground-base-dark;
+                        }
+
+                        &:hover {
+                            background-color: $ez-color-base-pale;
+                        }
+                    }
+                }
             }
         }
     }
