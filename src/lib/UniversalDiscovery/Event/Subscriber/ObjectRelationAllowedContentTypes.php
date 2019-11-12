@@ -42,9 +42,9 @@ class ObjectRelationAllowedContentTypes implements EventSubscriberInterface
             return;
         }
 
-        $config['content_on_the_fly']['allowed_content_types'] = array_unique(
+        $config['allowed_content_types'] = array_unique(
             array_merge(
-                $config['content_on_the_fly']['allowed_content_types'],
+                $config['allowed_content_types'],
                 $context['allowed_content_types']
             )
         );

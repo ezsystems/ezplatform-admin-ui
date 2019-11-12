@@ -50,24 +50,29 @@ class UniversalDiscoveryExtension extends AbstractExtension
     {
         $config = $this->udwConfigResolver->getConfig($configName, $context);
 
-        $udwConfig = [
-            'multiple' => $config['multiple'],
-            'activeTab' => $config['active_tab'],
-            'visibleTabs' => $config['visible_tabs'],
-            'selectedItemsLimit' => $config['selected_items_limit'],
-            'startingLocationId' => $config['starting_location_id'],
-            'searchResultsPerPage' => $config['search']['results_per_page'],
-            'searchResultsLimit' => $config['search']['limit'],
-            'allowContainersOnly' => $config['containers_only'],
-            'cotfPreselectedLanguage' => $config['content_on_the_fly']['preselected_language'],
-            'cotfAllowedLanguages' => $config['content_on_the_fly']['allowed_languages'],
-            'cotfPreselectedContentType' => $config['content_on_the_fly']['preselected_content_type'],
-            'cotfAllowedContentTypes' => $config['content_on_the_fly']['allowed_content_types'],
-            'cotfPreselectedLocation' => $config['content_on_the_fly']['preselected_location'],
-            'cotfAllowedLocations' => $config['content_on_the_fly']['allowed_locations'],
-            'allowedContentTypes' => $config['allowed_content_types'],
-        ];
+        $normalized = $this->recursiveConfigurationArrayNormalize($config);
 
-        return json_encode($udwConfig);
+        return json_encode($normalized);
+    }
+
+    private function recursiveConfigurationArrayNormalize(array $config): array
+    {
+        $normalized = [];
+
+        foreach ($config as $key => $value) {
+            $normalizedKey = !is_numeric($key) ? $this->toCamelCase($key) : $key;
+            $normalizedValue = is_array($value) ? $this->recursiveConfigurationArrayNormalize($value) : $value;
+
+            $normalized[$normalizedKey] = $normalizedValue;
+        }
+
+        return $normalized;
+    }
+
+    private function toCamelCase(string $input, string $delimiter = '_'): string
+    {
+        $words = explode($delimiter, ucwords($input, $delimiter));
+
+        return lcfirst(implode('', $words));
     }
 }

@@ -68,12 +68,8 @@ class ContentCreate implements EventSubscriberInterface
     {
         $config = $event->getConfig();
 
-        if (!$this->hasCreateTab($config)) {
-            return;
-        }
-
         if ($this->hasContentTypeRestrictions()) {
-            $config['content_on_the_fly']['allowed_content_types'] = $this->restrictedContentTypesIdentifiers;
+            $config['allowed_content_types'] = $this->restrictedContentTypesIdentifiers;
             $event->setConfig($config);
         }
 
@@ -81,16 +77,6 @@ class ContentCreate implements EventSubscriberInterface
             $config['content_on_the_fly']['allowed_languages'] = $this->restrictedLanguagesCodes;
             $event->setConfig($config);
         }
-    }
-
-    /**
-     * @param array $config
-     *
-     * @return bool
-     */
-    private function hasCreateTab(array $config): bool
-    {
-        return empty($config['visible_tabs']) || \in_array('create', $config['visible_tabs'], true);
     }
 
     /**

@@ -74,7 +74,7 @@ class SectionAssign implements EventSubscriberInterface
 
         if ($this->hasContentTypeRestrictions()) {
             $config = $event->getConfig();
-            $config['content_on_the_fly']['allowed_content_types'] = $this->restrictedContentTypes;
+            $config['allowed_content_types'] = $this->restrictedContentTypes;
             $event->setConfig($config);
         }
     }

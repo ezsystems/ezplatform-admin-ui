@@ -2,29 +2,45 @@ system:
     default:
         universal_discovery_widget_module:
             configuration:
-                default:
+                # Default UDW Configuration
+                _default:
                     multiple: true
-                    active_tab: 'browse'
+                    multiple_items_limit: 0
+                    root_location_id: 1
                     starting_location_id: 1
-                    visible_tabs: []
-                    selected_items_limit: 0
                     containers_only: false
                     allowed_content_types: []
+                    active_sort_clause: ''
+                    active_sort_order: ''
+                    active_tab: 'browse'
+                    active_view: 'finder'
                     content_on_the_fly:
                         allowed_languages: []
-                        allowed_content_types: []
                         allowed_locations: []
                         preselected_language: null
                         preselected_content_type: null
-                        preselected_location: null
-                    search:
-                        results_per_page: 10
-                        limit: 50
+                        hidden: false
+                    tabs:
+                        search:
+                            items_per_page: 50
+                            priority: 10
+                            hidden: false
+                        bookmarks:
+                            items_per_page: 50
+                            priority: 20
+                            hidden: false
+                        browse:
+                            items_per_page: 50
+                            priority: 30
+
+                # These inherit _default configuration
                 create:
-                    active_tab: 'create'
-                    visible_tabs: ['create']
+                    tabs:
+                        search:
+                            hidden: true
+                        bookmarks:
+                            hidden: true
                     multiple: false
-                    starting_location_id: 1
                 single:
                     multiple: false
                 multiple:
@@ -36,18 +52,16 @@ system:
                     multiple: false
                 richtext_embed_image:
                     multiple: false
-                    content_on_the_fly:
-                        allowed_content_types: ['image']
+                    allowed_content_types: ['image']
                 image_asset:
                     multiple: false
-                    visible_tabs: ['browse', 'search', 'bookmarks']
                 single_user:
                     multiple: false
                 multiple_user:
                     multiple: true
                 single_user_group:
-                    allowed_content_types: ['user_group']
                     multiple: false
-                multiple_user_group:
                     allowed_content_types: ['user_group']
+                multiple_user_group:
                     multiple: true
+                    allowed_content_types: ['user_group']

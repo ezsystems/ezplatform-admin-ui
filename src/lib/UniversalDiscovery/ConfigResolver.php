@@ -16,6 +16,8 @@ class ConfigResolver
 {
     private const UDW_CONFIG_PARAM_NAME = 'universal_discovery_widget_module.configuration';
 
+    public const DEFAULT_CONFIGURATION_KEY = '_default';
+
     /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface */
     protected $eventDispatcher;
 
@@ -43,7 +45,7 @@ class ConfigResolver
     public function getConfig(string $configName, array $context = []): array
     {
         $config = $this->getUDWConfiguration($configName);
-        $defaults = $this->getUDWConfiguration('default');
+        $defaults = $this->getUDWConfiguration(self::DEFAULT_CONFIGURATION_KEY);
 
         $config = $this->mergeConfiguration($defaults, $config);
 
