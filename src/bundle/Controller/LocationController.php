@@ -31,7 +31,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Form\TrashLocationStrategy\HasUniqueAssetRelation;
+use EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationAssignSectionType;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\DetailsTab;

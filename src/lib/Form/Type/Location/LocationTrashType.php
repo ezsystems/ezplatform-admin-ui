@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -28,6 +29,8 @@ class LocationTrashType extends AbstractType
 
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
+
+    public const CONFIRM_SEND_TO_TRASH = 'confirm_send_to_trash';
 
     public function __construct(
         OptionsFactory $trashTypeStrategy,
@@ -57,18 +60,47 @@ class LocationTrashType extends AbstractType
             );
 
         $builder->get('trash_options')->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $form = $event->getForm();
             $this->trashTypeStrategy->addOptions(
-                $event->getForm(),
-                $event->getForm()->getParent()->getData()->getLocation()
+                $form,
+                $form->getParent()->getData()->getLocation()
             );
+
+            if (!empty($form->getParent()->get('trash_options')->all())) {
+                $this->addConfirmCheckbox($form->getParent());
+            }
         });
 
         $builder->get('location')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            $form = $event->getForm()->getParent();
             $this->trashTypeStrategy->addOptions(
-                $event->getForm()->getParent()->get('trash_options'),
+                $form->get('trash_options'),
                 $event->getForm()->getData()
             );
+
+            if (!empty($form->get('trash_options')->all())) {
+                $this->addConfirmCheckbox($form);
+            }
         });
+    }
+
+    protected function addConfirmCheckbox(FormInterface $form): void
+    {
+        $form->add(
+            'confirm',
+                ChoiceType::class,
+            [
+                'expanded' => true,
+                'multiple' => true,
+                'required' => true,
+                'mapped' => false,
+                'label' => false,
+                'choices' => [
+                    /** @Desc("I understand the consequences of this action.") */
+                    $this->translator->trans('location_trash_form.confirm_label') => self::CONFIRM_SEND_TO_TRASH,
+                ],
+            ]
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)

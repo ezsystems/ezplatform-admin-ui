@@ -47,16 +47,11 @@ final class HasChildren implements TrashLocationOptionProvider
 
         $form
             ->add('has_children', ChoiceType::class, [
-                'expanded' => true,
-                'multiple' => true,
                 'label' =>
                     /** @Desc("Sub-items") */
                     $this->translator->trans('form.has_children.label', [], 'forms'),
-                'choices' =>
-                    /** @Desc("Send to trash %children_count% content item(s) of this location") */
-                    [$this->translator->trans('location_trash_form.trash_container', $translatorParameters, 'forms') => self::TRASH_WITH_CHILDREN],
                 'help_multiline' => [
-                    /** @Desc("Sending '%content_name%' to trash will also send its sub-items to trash. To confirm, check below:") */
+                    /** @Desc("Sending '%content_name%' and its %children_count% content item(s) to trash will also send the sub-items at this location to trash.") */
                     $this->translator->trans('trash_container.modal.message_main', $translatorParameters, 'messages'),
                 ],
             ]);

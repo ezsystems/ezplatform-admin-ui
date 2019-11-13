@@ -264,6 +264,11 @@
         <target state="new">Cancel</target>
         <note>key: form.cancel</note>
       </trans-unit>
+      <trans-unit id="1ada7c495c1592fd70ef48759574e764787bf969" resname="location_trash_form.confirm_label">
+        <source>I understand the consequences of this action.</source>
+        <target state="new">I understand the consequences of this action.</target>
+        <note>key: location_trash_form.confirm_label</note>
+      </trans-unit>
       <trans-unit id="7fe072f41348fb097b6bb018eec4f1b1bc9cffc3" resname="modal.cancel">
         <source>Cancel</source>
         <target state="new">Cancel</target>
@@ -355,8 +360,8 @@
         <note>key: trash_asset_single.modal.message_main</note>
       </trans-unit>
       <trans-unit id="1e6a1d97cca01a288e47d2d14479274b90e6c6c1" resname="trash_container.modal.message_main">
-        <source>Sending '%content_name%' to trash will also send its sub-items to trash. To confirm, check below:</source>
-        <target state="new">Sending '%content_name%' to trash will also send its sub-items to trash. To confirm, check below:</target>
+        <source>Sending '%content_name%' and its %children_count% content item(s) to trash will also send the sub-items at this location to trash.</source>
+        <target state="new">Sending '%content_name%' and its %children_count% content item(s) to trash will also send the sub-items at this location to trash.</target>
         <note>key: trash_container.modal.message_main</note>
       </trans-unit>
       <trans-unit id="ef4df0dede01e561e75568aa128a8092cbbee66a" resname="trash_container.modal.message_relations">

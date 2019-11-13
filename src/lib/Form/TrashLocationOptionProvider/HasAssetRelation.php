@@ -42,8 +42,6 @@ final class HasAssetRelation implements TrashLocationOptionProvider
     public function addOptions(FormInterface $form, Location $location): void
     {
         $form->add('trash_assets_non_unique', ChoiceType::class, [
-            'expanded' => true,
-            'multiple' => false,
             'label' =>
                 /** @Desc("Asset Fields(s)") */
                 $this->translator->trans('form.trash_assets_non_unique.label', [], 'forms'),
