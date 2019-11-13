@@ -6,47 +6,60 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
 
-use eZ\Publish\API\Repository\Values\ValueObject;
+use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\SPI\FieldType\Value;
 use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
-use EzSystems\EzPlatformContentForms\Validator\Constraints\FieldValueValidator;
+use EzSystems\EzPlatformContentForms\Validator\Constraints\FieldTypeValidator;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Validator for default value from FieldDefinitionData.
  */
-class FieldDefinitionDefaultValueValidator extends FieldValueValidator
+class FieldDefinitionDefaultValueValidator extends FieldTypeValidator
 {
-    protected function canValidate($value)
+    public function validate($value, Constraint $constraint)
     {
-        return $value instanceof FieldDefinitionData;
+        if (!$value instanceof FieldDefinitionData) {
+            return;
+        }
+
+        $fieldValue = $this->getFieldValue($value);
+        if (!$fieldValue) {
+            return;
+        }
+
+        $fieldTypeIdentifier = $this->getFieldTypeIdentifier($value);
+        $fieldDefinition = $this->getFieldDefinition($value);
+        $fieldType = $this->fieldTypeService->getFieldType($fieldTypeIdentifier);
+
+        $validationErrors = $fieldType->validateValue($fieldDefinition, $fieldValue);
+
+        $this->processValidationErrors($validationErrors);
     }
 
-    /**
-     * Returns the field value to validate.
-     *
-     * @param FieldDefinitionData|ValueObject $value ValueObject holding the field value to validate, e.g. FieldDefinitionData.
-     *
-     * @throws \InvalidArgumentException if field value cannot be retrieved
-     *
-     * @return \eZ\Publish\SPI\FieldType\Value
-     */
-    protected function getFieldValue(ValueObject $value)
+    protected function getFieldValue(FieldDefinitionData $value): ?Value
     {
         return $value->defaultValue;
     }
 
     /**
-     * Returns the fieldTypeIdentifier for the field value to validate.
-     *
-     * @param FieldDefinitionData|ValueObject $value ValueObject holding the field value to validate, e.g. FieldDefinitionData.
-     *
-     * @return string
+     * Returns the field definition $value refers to.
+     * FieldDefinition object is needed to validate field value against field settings.
      */
-    protected function getFieldTypeIdentifier(ValueObject $value)
+    protected function getFieldDefinition(FieldDefinitionData $value): FieldDefinition
+    {
+        return $value->fieldDefinition;
+    }
+
+    /**
+     * Returns the fieldTypeIdentifier for the field value to validate.
+     */
+    protected function getFieldTypeIdentifier(FieldDefinitionData $value): string
     {
         return $value->getFieldTypeIdentifier();
     }
 
-    protected function generatePropertyPath($errorIndex, $errorTarget)
+    protected function generatePropertyPath($errorIndex, $errorTarget): string
     {
         return 'defaultValue';
     }
