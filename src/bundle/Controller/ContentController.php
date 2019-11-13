@@ -192,12 +192,12 @@ class ContentController extends Controller
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentEditData $data) {
                 $contentInfo = $data->getContentInfo();
-                $versionInfo = $data->getVersionInfo();
                 $language = $data->getLanguage();
-                $versionNo = $versionInfo->versionNo;
                 $location = $data->getLocation();
-
                 $content = $this->contentService->loadContent($contentInfo->id);
+                $versionInfo = $content->getVersionInfo();
+                $versionNo = $versionInfo->versionNo;
+
                 if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
                     return $this->redirectToRoute('ez_user_update', [
                         'contentId' => $contentInfo->id,

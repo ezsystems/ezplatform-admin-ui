@@ -13,7 +13,6 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\VersionInfoType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
@@ -53,11 +52,6 @@ class ContentEditType extends AbstractType
                 'content_info',
                 ContentInfoType::class,
                 ['label' => false, 'attr' => ['hidden' => true]]
-            )
-            ->add(
-                'version_info',
-                VersionInfoType::class,
-                ['label' => false]
             )
             ->add(
                 'language',
