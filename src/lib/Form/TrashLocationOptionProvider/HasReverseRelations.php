@@ -16,8 +16,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 final class HasReverseRelations implements TrashLocationOptionProvider
 {
-    const TRASH_WHEN_RELATION = 'trash_with_children';
-
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 

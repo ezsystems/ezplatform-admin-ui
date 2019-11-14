@@ -17,8 +17,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 final class HasChildren implements TrashLocationOptionProvider
 {
-    const TRASH_WITH_CHILDREN = 'trash_with_children';
-
     /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
