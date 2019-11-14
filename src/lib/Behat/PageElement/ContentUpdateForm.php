@@ -39,7 +39,7 @@ class ContentUpdateForm extends Element
      *
      * @param string $fieldName
      * @param array $value
-     * @param null|string $containerLocator for update form
+     * @param string|null $containerLocator for update form
      *
      * @throws \Exception
      */
@@ -72,7 +72,7 @@ class ContentUpdateForm extends Element
      *
      * @param string $fieldName
      * @param string $value
-     * @param null|string $containerName for fields that defines new field type in content type
+     * @param string|null $containerName for fields that defines new field type in content type
      *
      * @throws \Exception
      */

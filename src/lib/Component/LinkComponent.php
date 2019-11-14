@@ -24,10 +24,10 @@ class LinkComponent implements Renderable
     /** @var string */
     protected $rel;
 
-    /** @var null|string */
+    /** @var string|null */
     protected $crossorigin;
 
-    /** @var null|string */
+    /** @var string|null */
     protected $integrity;
 
     /**
