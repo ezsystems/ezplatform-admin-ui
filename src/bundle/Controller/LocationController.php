@@ -433,9 +433,7 @@ class LocationController extends Controller
             )
         );
 
-        return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
-            'locationId' => $parentLocation->id,
-        ]));
+        return $this->redirectToLocation($parentLocation);
     }
 
     /**

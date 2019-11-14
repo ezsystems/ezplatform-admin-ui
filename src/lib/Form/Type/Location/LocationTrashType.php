@@ -24,13 +24,13 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class LocationTrashType extends AbstractType
 {
+    public const CONFIRM_SEND_TO_TRASH = 'confirm_send_to_trash';
+
     /** @var \EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\OptionsFactory */
     private $trashTypeStrategy;
 
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
-
-    public const CONFIRM_SEND_TO_TRASH = 'confirm_send_to_trash';
 
     public function __construct(
         OptionsFactory $trashTypeStrategy,

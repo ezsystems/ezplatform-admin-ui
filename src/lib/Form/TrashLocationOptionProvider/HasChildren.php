@@ -36,10 +36,10 @@ final class HasChildren implements TrashLocationOptionProvider
 
     public function addOptions(FormInterface $form, Location $location): void
     {
-        $locationChildren = $this->locationService->loadLocationChildren($location);
+        $childCount = $this->locationService->getLocationChildCount($location);
 
         $translatorParameters = [
-            '%children_count%' => $locationChildren->totalCount,
+            '%children_count%' => $childCount,
             '%content_name%' => $location->getContent()->getName(),
         ];
 

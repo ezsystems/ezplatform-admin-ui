@@ -31,8 +31,8 @@ class HasChildren extends AbstractSpecification
      */
     public function isSatisfiedBy($item): bool
     {
-        $children = $this->locationService->loadLocationChildren($item);
+        $childCount = $this->locationService->getLocationChildCount($item);
 
-        return 0 < $children->totalCount;
+        return 0 < $childCount;
     }
 }

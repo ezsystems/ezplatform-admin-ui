@@ -32,18 +32,18 @@ final class HasReverseRelations implements TrashLocationOptionProvider
 
     public function supports(Location $location): bool
     {
-        $reverseRelations = $this->contentService->loadReverseRelations($location->contentInfo);
+        $reverseRelationsCount = $this->contentService->countReverseRelations($location->contentInfo);
 
-        return !empty($reverseRelations);
+        return $reverseRelationsCount > 0;
     }
 
     public function addOptions(FormInterface $form, Location $location): void
     {
-        $reverseRelations = $this->contentService->loadReverseRelations($location->contentInfo);
+        $reverseRelationsCount = $this->contentService->countReverseRelations($location->contentInfo);
 
         $translatorParameters = [
             '%content_name%' => $location->getContent()->getName(),
-            '%reverse_relations%' => \count($reverseRelations),
+            '%reverse_relations%' => $reverseRelationsCount,
         ];
 
         $form
