@@ -200,7 +200,7 @@ class RequestLocaleListenerTest extends TestCase
     public function testNonSiteaccessInRequest(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage(sprintf('Must be instance of %s', SiteAccess::class));
+        $this->expectExceptionMessage(sprintf('Must be an instance of %s', SiteAccess::class));
 
         $this->request->attributes->set('siteaccess', new Attribute());
 

@@ -46,7 +46,7 @@ class VersionInfoTransformer implements DataTransformerInterface
 
         if (!$value instanceof VersionInfo) {
             throw new TransformationFailedException(
-                'Value cannot be transformed because passed value is not an VersionInfo object'
+                'Value cannot be transformed because the passed value is not a VersionInfo object'
             );
         }
 

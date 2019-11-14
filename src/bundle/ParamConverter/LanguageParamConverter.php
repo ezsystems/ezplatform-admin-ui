@@ -47,7 +47,7 @@ class LanguageParamConverter implements ParamConverterInterface
             try {
                 $language = $this->languageService->loadLanguageById($id);
             } catch (NotFoundException $e) {
-                throw new NotFoundHttpException("Language $id not found!");
+                throw new NotFoundHttpException("Language $id not found.");
             }
         } elseif ($request->get(self::PARAMETER_LANGUAGE_CODE)) {
             $languageCode = $request->get(self::PARAMETER_LANGUAGE_CODE);
@@ -55,7 +55,7 @@ class LanguageParamConverter implements ParamConverterInterface
             try {
                 $language = $this->languageService->loadLanguage($languageCode);
             } catch (NotFoundException $e) {
-                throw new NotFoundHttpException("Language $languageCode not found!");
+                throw new NotFoundHttpException("Language $languageCode not found.");
             }
         }
 

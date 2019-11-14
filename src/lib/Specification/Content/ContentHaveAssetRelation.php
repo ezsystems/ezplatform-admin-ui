@@ -38,7 +38,7 @@ class ContentHaveAssetRelation extends AbstractSpecification
     public function isSatisfiedBy($item): bool
     {
         if (!$item instanceof Content) {
-            throw new InvalidArgumentException($item, sprintf('Must be instance of %s', Content::class));
+            throw new InvalidArgumentException($item, sprintf('Must be an instance of %s', Content::class));
         }
 
         $relations = $this->contentService->loadRelations($item->versionInfo);

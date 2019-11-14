@@ -48,7 +48,7 @@ class SectionParamConverter implements ParamConverterInterface
         $section = $this->sectionService->loadSection($id);
 
         if (!$section) {
-            throw new NotFoundHttpException("Section $id not found!");
+            throw new NotFoundHttpException("Section $id not found.");
         }
 
         $request->attributes->set($configuration->getName(), $section);

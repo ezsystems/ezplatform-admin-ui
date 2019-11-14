@@ -223,7 +223,7 @@ class ContentTranslateViewBuilder implements ViewBuilder
 
         throw new InvalidArgumentException(
             'Language',
-            'No language information provided. Are you missing \'toLanguage\' or \'toLanguageCode\' parameters'
+            'No language information provided. Check the \'toLanguage\' and \'toLanguageCode\' parameters'
         );
     }
 
@@ -250,7 +250,7 @@ class ContentTranslateViewBuilder implements ViewBuilder
         if (!isset($parameters['contentId'])) {
             throw new InvalidArgumentException(
                 'Content',
-                'No content could be loaded from parameters'
+                'No content could be loaded from the parameters'
             );
         }
 

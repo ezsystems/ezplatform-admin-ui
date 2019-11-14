@@ -76,7 +76,7 @@ class SectionParamConverterTest extends AbstractParamConverterTest
         $sectionId = 42;
 
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage(sprintf('Section %s not found!', $sectionId));
+        $this->expectExceptionMessage(sprintf('Section %s not found.', $sectionId));
 
         $this->serviceMock
             ->expects($this->once())

@@ -76,7 +76,7 @@ class RoleAssignmentParamConverterTest extends AbstractParamConverterTest
         $roleAssignmentId = 42;
 
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage(sprintf('Role assignment %s not found!', $roleAssignmentId));
+        $this->expectExceptionMessage(sprintf('Role assignment %s not found.', $roleAssignmentId));
 
         $this->serviceMock
             ->expects($this->once())

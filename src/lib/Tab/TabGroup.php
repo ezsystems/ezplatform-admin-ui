@@ -72,7 +72,7 @@ class TabGroup
     public function removeTab(string $identifier)
     {
         if (!isset($this->tabs[$identifier])) {
-            throw new \InvalidArgumentException(sprintf('Tab identified as "%s" is not found.', $identifier));
+            throw new \InvalidArgumentException(sprintf('Could not find a tab identified as "%s".', $identifier));
         }
 
         unset($this->tabs[$identifier]);

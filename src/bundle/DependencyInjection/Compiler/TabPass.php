@@ -42,7 +42,7 @@ class TabPass implements CompilerPassInterface
 
             foreach ($tags as $tag) {
                 if (!isset($tag['group'])) {
-                    throw new InvalidArgumentException($id, 'Tag ' . self::TAG_TAB . ' must contain "group" argument.');
+                    throw new InvalidArgumentException($id, 'Tag ' . self::TAG_TAB . ' must contain a "group" argument.');
                 }
                 $tabRegistryDefinition->addMethodCall('addTab', [$serviceReference, $tag['group']]);
             }

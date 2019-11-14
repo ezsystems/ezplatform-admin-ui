@@ -106,7 +106,7 @@ class LanguageParamConverterTest extends AbstractParamConverterTest
         $languageId = 42;
 
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage(sprintf('Language %s not found!', $languageId));
+        $this->expectExceptionMessage(sprintf('Language %s not found.', $languageId));
 
         $this->serviceMock
             ->expects($this->once())

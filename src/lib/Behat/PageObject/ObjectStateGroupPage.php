@@ -42,7 +42,7 @@ class ObjectStateGroupPage extends Page
         $this->adminLists['Object State Group Information'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Object State Group Information', SimpleTable::ELEMENT_NAME);
         $this->adminLists['Object States'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Object States', LinkedListTable::ELEMENT_NAME, $this->secondListContainerLocator);
         $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, '', SimpleTable::ELEMENT_NAME);
-        $this->pageTitle = sprintf('Object State Group: %s', $objectStateGroupName);
+        $this->pageTitle = sprintf('Object state group: %s', $objectStateGroupName);
         $this->pageTitleLocator = '.ez-header h1';
     }
 
