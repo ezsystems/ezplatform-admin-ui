@@ -454,6 +454,7 @@ class LocationController extends Controller
 
         $this->notificationHandler->success(
             $this->translator->trans(
+                /** @Desc("Location '%name%' moved to trash.") */
                 'location.trash.success',
                 ['%name%' => $location->getContentInfo()->name],
                 'location'

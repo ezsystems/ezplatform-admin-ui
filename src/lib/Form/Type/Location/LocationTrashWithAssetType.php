@@ -128,7 +128,9 @@ class LocationTrashWithAssetType extends AbstractType
             'expanded' => true,
             'multiple' => false,
             'choices' => [
+                /** @Desc("Send only this Content item to Trash") */
                 $this->translator->trans('location_trash_form.default_trash', $translatorParameters, 'forms') => LocationTrashWithAssetType::RADIO_SELECT_DEFAULT_TRASH,
+                /** @Desc("Send the Content item and its related assets to Trash") */
                 $this->translator->trans('location_trash_form.trash_with_asset', $translatorParameters, 'forms') => LocationTrashWithAssetType::RADIO_SELECT_TRASH_WITH_ASSETS,
             ],
         ]);

@@ -13,7 +13,7 @@
             </div>
             <div class="modal-body">
                 <p class="ez-modal-body__main mb-2">
-                    {{ 'trash_asset_single.modal.message_main'|trans({'%content_name%': content_name, '%content_type%': content_type}) }}
+                    {{ 'trash_asset_single.modal.message_main'|trans({'%content_name%': content_name, '%content_type%': content_type})|desc("'%content_name%' has 1 or more asset Field(s). You have an option to send only the Content item to Trash, or to send the Content item and its assets to Trash. Please select your option:") }}
                 </p>
                 {{ form_start(form, {
                     'action': path('ezplatform.location.trash_with_asset'),

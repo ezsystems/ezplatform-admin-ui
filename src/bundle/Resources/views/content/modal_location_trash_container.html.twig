@@ -12,7 +12,7 @@
             </div>
             <div class="modal-body">
                 <p class="ez-modal-body__main mb-2">
-                    {{ 'trash_container.modal.message_main'|trans({'%content_name%': content_name}) }}
+                    {{ 'trash_container.modal.message_main'|trans({'%content_name%': content_name})|desc("Sending '%content_name%' and its %children_count% Content item(s) to Trash will also send the sub-items of this Location to Trash.") }}
                 </p>
                 {{ form_start(form, {
                     'action': path('ezplatform.location.trash_container'),

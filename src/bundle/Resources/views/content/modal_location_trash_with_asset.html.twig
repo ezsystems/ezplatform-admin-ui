@@ -13,10 +13,10 @@
             </div>
             <div class="modal-body">
                 <p class="ez-modal-body__main mb-2">
-                    {{ 'trash_asset.modal.message_header'|trans }}
+                    {{ 'trash_asset.modal.message_header'|trans|desc('You are about to delete a Content item that has one or more asset Field(s) used by other Content items. These assets will remain available in system.') }}
                 </p>
                 <p>
-                    {{ 'trash_asset.modal.message_body'|trans }}
+                    {{ 'trash_asset.modal.message_body'|trans|desc('If you wish to delete these assets too, first make sure they are not used by other content. To check, go to the asset preview and look at its content Relations in the Relations tab.') }}
                 </p>
             </div>
             <div class="modal-footer">

@@ -139,6 +139,7 @@ class LocationTrashContainerType extends AbstractType
             'expanded' => true,
             'multiple' => true,
             'choices' => [
+                /** @Desc("Send %children_count% Content item(s) of this Location to Trash") */
                 $this->translator->trans('location_trash_form.trash_container', $translatorParameters, 'forms') => self::TRASH_WITH_CHILDREN,
             ],
         ]);
