@@ -137,8 +137,8 @@
         <note>key: form.has_children.label</note>
       </trans-unit>
       <trans-unit id="80d979ff2734a875fcd38a2178e4d28c8bf0afb5" resname="form.has_reverse_relation.label">
-        <source>Conflict with Reverse Relations</source>
-        <target state="new">Conflict with Reverse Relations</target>
+        <source>Conflict with reverse Relations</source>
+        <target state="new">Conflict with reverse Relations</target>
         <note>key: form.has_reverse_relation.label</note>
       </trans-unit>
       <trans-unit id="4a2eb58572364b0fa04e67a800e0fbb09df205be" resname="form.trash_assets.label">
@@ -167,8 +167,8 @@
         <note>key: location_move.move</note>
       </trans-unit>
       <trans-unit id="4b7b2b4de853db0d1fb1851e07f3ccc51e5713fc" resname="location_trash_form.default_trash">
-        <source>Send only this content item to trash</source>
-        <target state="new">Send only this content item to trash</target>
+        <source>Send only this Content item to Trash</source>
+        <target state="new">Send only this Content item to Trash</target>
         <note>key: location_trash_form.default_trash</note>
       </trans-unit>
       <trans-unit id="796f8196b2bc086fe788e6689a6189c79b8e047e" resname="location_trash_form.trash">
@@ -177,18 +177,18 @@
         <note>key: location_trash_form.trash</note>
       </trans-unit>
       <trans-unit id="f9887d04de58202b07207b1521880373c00c8201" resname="location_trash_form.trash_container">
-        <source>Send to trash %children_count% content item(s) of this location</source>
-        <target state="new">Send to trash %children_count% content item(s) of this location</target>
+        <source>Send %children_count% Content item(s) of this Location to Trash</source>
+        <target state="new">Send %children_count% Content item(s) of this Location to Trash</target>
         <note>key: location_trash_form.trash_container</note>
       </trans-unit>
       <trans-unit id="f75f244896962e9bc1bbb30a1bbaf3e5914b95f2" resname="location_trash_form.trash_when_relation">
-        <source>'%content_name%' will not be available for its reverse relation(s)</source>
-        <target state="new">'%content_name%' will not be available for its reverse relation(s)</target>
+        <source>'%content_name%' will not be available for its reverse Relation(s)</source>
+        <target state="new">'%content_name%' will not be available for its reverse Relation(s)</target>
         <note>key: location_trash_form.trash_when_relation</note>
       </trans-unit>
       <trans-unit id="2598fe0050f38f3c02014a404ed14aee248e27d1" resname="location_trash_form.trash_with_asset">
-        <source>Send to trash the content item and its related assets</source>
-        <target state="new">Send to trash the content item and its related assets</target>
+        <source>Send the Content item and its related assets to Trash</source>
+        <target state="new">Send the Content item and its related assets to Trash</target>
         <note>key: location_trash_form.trash_with_asset</note>
       </trans-unit>
       <trans-unit id="f86cd366867d370b0706e250355f605e2b783229" resname="policies_delete_form.delete">

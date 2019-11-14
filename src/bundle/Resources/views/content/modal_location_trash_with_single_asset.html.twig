@@ -13,10 +13,7 @@
             </div>
             <div class="modal-body">
                 <p class="ez-modal-body__main mb-2">
-                    {{ 'trash_asset_single.modal.message_main'|trans|desc('You are about to delete a content with one or several asset(s) field(s).') }}
-                </p>
-                <p class="ez-modal-body__main mb-2">
-                    {{ 'trash_asset_single.modal.message'|trans({'%content_name%': content_name, '%content_type%': content_type})|desc('You have the option to delete %content_name% (%content_type%) only or to also delete the assets it is using. Make your choice:') }}
+                    {{ 'trash_asset_single.modal.message_main'|trans({'%content_name%': content_name, '%content_type%': content_type}) }}
                 </p>
                 {{ form_start(form, {
                     'action': path('ezplatform.location.trash_with_asset'),

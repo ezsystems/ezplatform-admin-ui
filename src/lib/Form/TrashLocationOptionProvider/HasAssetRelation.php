@@ -46,9 +46,9 @@ final class HasAssetRelation implements TrashLocationOptionProvider
                 /** @Desc("Asset Fields(s)") */
                 $this->translator->trans('form.trash_assets_non_unique.label', [], 'forms'),
             'help_multiline' => [
-                /** @Desc("You are about to delete a content item that has one or more asset Field(s) used by other content items. These assets will remain available in system.") */
+                /** @Desc("You are about to delete a Content item that has one or more asset Field(s) used by other Content items. These assets will remain available in system.") */
                 $this->translator->trans('trash_asset.modal.message_header'),
-                /** @Desc("If you wish to delete these assets too, first make sure they are not used by other content. To check, go to the asset preview and look at its content relations in the Relations tab.") */
+                /** @Desc("If you wish to delete these assets too, first make sure they are not used by other content. To check, go to the asset preview and look at its content Relations in the Relations tab.") */
                 $this->translator->trans('trash_asset.modal.message_body'),
             ],
         ]);

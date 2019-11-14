@@ -51,10 +51,10 @@ final class HasReverseRelations implements TrashLocationOptionProvider
         $form
             ->add('has_reverse_relation', ChoiceType::class, [
                 'label' =>
-                    /** @Desc("Conflict with Reverse Relations") */
+                    /** @Desc("Conflict with reverse Relations") */
                     $this->translator->trans('form.has_reverse_relation.label', [], 'forms'),
                 'help_multiline' => [
-                    /** @Desc("'%content_name%' is in use by %reverse_relations% content item(s). It is recommended to remove all reverse relations before deleting the content item.") */
+                    /** @Desc("'%content_name%' is in use by %reverse_relations% Content item(s). You should remove all reverse Relations before deleting the Content item.") */
                     $this->translator->trans('trash_container.modal.message_relations', $translatorParameters),
                 ],
             ]);

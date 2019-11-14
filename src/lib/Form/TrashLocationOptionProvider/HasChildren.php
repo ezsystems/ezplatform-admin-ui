@@ -51,7 +51,7 @@ final class HasChildren implements TrashLocationOptionProvider
                     /** @Desc("Sub-items") */
                     $this->translator->trans('form.has_children.label', [], 'forms'),
                 'help_multiline' => [
-                    /** @Desc("Sending '%content_name%' and its %children_count% content item(s) to trash will also send the sub-items at this location to trash.") */
+                    /** @Desc("Sending '%content_name%' and its %children_count% Content item(s) to Trash will also send the sub-items of this Location to Trash.") */
                     $this->translator->trans('trash_container.modal.message_main', $translatorParameters, 'messages'),
                 ],
             ]);
