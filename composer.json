@@ -30,9 +30,10 @@
     },
     "require-dev": {
         "behat/behat": "^3.5.0",
-        "friendsofphp/php-cs-fixer": "~2.15.3",
+        "friendsofphp/php-cs-fixer": "^2.16.0",
         "phpunit/phpunit": "^6.4",
-        "matthiasnoback/symfony-dependency-injection-test": "^2.3"
+        "matthiasnoback/symfony-dependency-injection-test": "^2.3",
+        "ezsystems/ezplatform-code-style": "^0.1.0"
     },
     "scripts": {
         "fix-cs": "@php ./vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
