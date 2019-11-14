@@ -11,7 +11,6 @@ namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\API\Repository\Values\Content\Location;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 

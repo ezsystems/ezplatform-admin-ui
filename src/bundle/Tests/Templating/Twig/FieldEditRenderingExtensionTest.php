@@ -15,7 +15,7 @@ use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FieldEditRenderingExtensio
 class FieldEditRenderingExtensionTest extends FileSystemTwigIntegrationTestCase
 {
     /**
-     * @return \Twig\Extension\ExtensionInterface[] 
+     * @return \Twig\Extension\ExtensionInterface[]
      */
     public function getExtensions(): array
     {

@@ -4,7 +4,6 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-
 namespace EzSystems\EzPlatformAdminUiBundle\Tests\Templating\Twig;
 
 use Exception;
@@ -18,7 +17,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionProperty;
 use Twig\Environment;
 use Twig\Error\Error;
-use Twig\Extension\ExtensionInterface;
 use Twig\Loader\ArrayLoader;
 use Twig\Loader\ChainLoader;
 use Twig\Loader\FilesystemLoader;

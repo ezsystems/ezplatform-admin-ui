@@ -6,13 +6,9 @@
  */
 namespace EzSystems\EzPlatformAdminUi\FieldType\Mapper;
 
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\FieldType\User\Value as ApiUserValue;
 use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
-use EzSystems\EzPlatformContentForms\Data\User\UserAccountFieldData;
 use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
 use EzSystems\EzPlatformContentForms\Form\Type\FieldDefinition\User\PasswordConstraintCheckboxType;
-use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
