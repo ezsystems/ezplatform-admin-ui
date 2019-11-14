@@ -49,7 +49,7 @@ class AdminUpdateForm extends Element
      *
      * @param string $fieldName
      * @param string $value
-     * @param null|string $containerName for fields that defines new field type in content type
+     * @param string|null $containerName for fields that defines new field type in content type
      *
      * @throws \Exception
      */
@@ -65,7 +65,7 @@ class AdminUpdateForm extends Element
      *
      * @param string $fieldName
      * @param string $value
-     * @param null|string $containerName for fields that defines new field type in content type
+     * @param string|null $containerName for fields that defines new field type in content type
      *
      * @throws \Exception
      */

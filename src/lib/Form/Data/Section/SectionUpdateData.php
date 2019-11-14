@@ -51,7 +51,7 @@ class SectionUpdateData
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getIdentifier(): ?string
     {
@@ -59,7 +59,7 @@ class SectionUpdateData
     }
 
     /**
-     * @param null|string $identifier
+     * @param string|null $identifier
      */
     public function setIdentifier(?string $identifier)
     {
@@ -67,7 +67,7 @@ class SectionUpdateData
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getName(): ?string
     {
@@ -75,7 +75,7 @@ class SectionUpdateData
     }
 
     /**
-     * @param null|string $name
+     * @param string|null $name
      */
     public function setName(?string $name)
     {
