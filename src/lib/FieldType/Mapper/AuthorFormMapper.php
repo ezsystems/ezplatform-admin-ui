@@ -21,10 +21,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class AuthorFormMapper implements FieldDefinitionFormMapperInterface, FieldValueFormMapperInterface
 {
-    /**
-     * @param \Symfony\Component\Form\FormInterface $fieldDefinitionForm
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData $data
-     */
     public function mapFieldDefinitionForm(FormInterface $fieldDefinitionForm, FieldDefinitionData $data): void
     {
         $isTranslation = $data->contentTypeData->languageCode !== $data->contentTypeData->mainLanguageCode;
@@ -47,10 +43,6 @@ class AuthorFormMapper implements FieldDefinitionFormMapperInterface, FieldValue
             );
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormInterface $fieldForm
-     * @param \EzSystems\EzPlatformContentForms\Data\Content\FieldData $data
-     */
     public function mapFieldValueForm(FormInterface $fieldForm, FieldData $data)
     {
         $fieldDefinition = $data->fieldDefinition;
@@ -72,10 +64,8 @@ class AuthorFormMapper implements FieldDefinitionFormMapperInterface, FieldValue
 
     /**
      * Fake method to set the translation domain for the extractor.
-     *
-     * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([

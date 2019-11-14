@@ -16,8 +16,6 @@ trait NewnessChecker
     /**
      * Whether the Data object is considered new, based on the identifier
      * If it isn't new, one can e.g. use the identifier from the underlying value object.
-     *
-     * @return bool
      */
     public function isNew(): bool
     {
@@ -26,8 +24,6 @@ trait NewnessChecker
 
     /**
      * Returns the value of the property which can be considered as the value object identifier.
-     *
-     * @return string
      */
-    abstract protected function getIdentifierValue();
+    abstract protected function getIdentifierValue(): string;
 }

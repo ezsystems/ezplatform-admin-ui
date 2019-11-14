@@ -17,9 +17,7 @@ use Twig\TwigFunction;
 
 class FieldEditRenderingExtension extends AbstractExtension
 {
-    /**
-     * @var \eZ\Publish\Core\MVC\Symfony\Templating\FieldBlockRendererInterface|\eZ\Publish\Core\MVC\Symfony\Templating\Twig\FieldBlockRenderer
-     */
+    /** @var \eZ\Publish\Core\MVC\Symfony\Templating\FieldBlockRendererInterface|\eZ\Publish\Core\MVC\Symfony\Templating\Twig\FieldBlockRenderer */
     private $fieldBlockRenderer;
 
     public function __construct(FieldBlockRendererInterface $fieldBlockRenderer)

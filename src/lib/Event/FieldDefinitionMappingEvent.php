@@ -29,11 +29,6 @@ class FieldDefinitionMappingEvent extends Event
     /** @var \eZ\Publish\API\Repository\Values\Content\Language|null */
     private $targetLanguage;
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData $fieldDefinitionData
-     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $baseLanguage
-     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $targetLanguage
-     */
     public function __construct(
         FieldDefinitionData $fieldDefinitionData,
         ?Language $baseLanguage,
@@ -44,41 +39,26 @@ class FieldDefinitionMappingEvent extends Event
         $this->fieldDefinitionData = $fieldDefinitionData;
     }
 
-    /**
-     * @return \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition
-     */
     public function getFieldDefinition(): FieldDefinition
     {
         return $this->fieldDefinitionData->fieldDefinition;
     }
 
-    /**
-     * @return \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData
-     */
     public function getFieldDefinitionData(): FieldDefinitionData
     {
         return $this->fieldDefinitionData;
     }
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData $fieldDefinitionData
-     */
     public function setFieldDefinitionData(FieldDefinitionData $fieldDefinitionData): void
     {
         $this->fieldDefinitionData = $fieldDefinitionData;
     }
 
-    /**
-     * @return \eZ\Publish\API\Repository\Values\Content\Language|null
-     */
     public function getBaseLanguage(): ?Language
     {
         return $this->baseLanguage;
     }
 
-    /**
-     * @return \eZ\Publish\API\Repository\Values\Content\Language|null
-     */
     public function getTargetLanguage(): ?Language
     {
         return $this->targetLanguage;

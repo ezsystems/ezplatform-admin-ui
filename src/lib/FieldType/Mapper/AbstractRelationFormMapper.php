@@ -16,20 +16,12 @@ use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
 
 abstract class AbstractRelationFormMapper implements FieldDefinitionFormMapperInterface
 {
-    /**
-     * @var \eZ\Publish\API\Repository\ContentTypeService Used to fetch list of available content types
-     */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
-    /**
-     * @var \eZ\Publish\API\Repository\LocationService Used to fetch selection root
-     */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     protected $locationService;
 
-    /**
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \eZ\Publish\API\Repository\LocationService $locationService
-     */
     public function __construct(ContentTypeService $contentTypeService, LocationService $locationService)
     {
         $this->contentTypeService = $contentTypeService;
@@ -39,9 +31,9 @@ abstract class AbstractRelationFormMapper implements FieldDefinitionFormMapperIn
     /**
      * Fill a hash with all content types and their ids.
      *
-     * @return array
+     * @return string[]
      */
-    protected function getContentTypesHash()
+    protected function getContentTypesHash(): array
     {
         $contentTypeHash = [];
         foreach ($this->contentTypeService->loadContentTypeGroups() as $contentTypeGroup) {
@@ -52,24 +44,5 @@ abstract class AbstractRelationFormMapper implements FieldDefinitionFormMapperIn
         ksort($contentTypeHash);
 
         return $contentTypeHash;
-    }
-
-    /**
-     * Loads location which is starting point for selecting destination content object.
-     *
-     * @param null $defaultLocationId
-     *
-     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
-     */
-    protected function loadDefaultLocationForSelection($defaultLocationId = null): ?Location
-    {
-        if (!empty($defaultLocationId)) {
-            try {
-                return $this->locationService->loadLocation((int)$defaultLocationId);
-            } catch (NotFoundException | UnauthorizedException $e) {
-            }
-        }
-
-        return null;
     }
 }

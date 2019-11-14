@@ -26,7 +26,7 @@ class LimitationValueMapperPassTest extends AbstractCompilerPassTestCase
         $container->addCompilerPass(new LimitationValueMapperPass());
     }
 
-    public function testRegisterMappers()
+    public function testRegisterMappers(): void
     {
         $limitationValueMapperServiceId = 'limitationvalue_mapper';
 

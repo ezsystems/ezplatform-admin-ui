@@ -45,10 +45,8 @@ class RelationListFormMapper extends AbstractRelationFormMapper
 
     /**
      * Fake method to set the translation domain for the extractor.
-     *
-     * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([

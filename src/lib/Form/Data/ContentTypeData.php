@@ -23,14 +23,10 @@ class ContentTypeData extends ContentTypeUpdateStruct implements NewnessCheckabl
      */
     use NewnessChecker;
 
-    /**
-     * @var \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft
-     */
+    /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft */
     protected $contentTypeDraft;
 
-    /**
-     * @var \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData[]
-     */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData[] */
     protected $fieldDefinitionsData = [];
 
     /**
@@ -40,17 +36,17 @@ class ContentTypeData extends ContentTypeUpdateStruct implements NewnessCheckabl
      */
     public $languageCode = null;
 
-    protected function getIdentifierValue()
+    protected function getIdentifierValue(): string
     {
         return $this->contentTypeDraft->identifier;
     }
 
-    public function addFieldDefinitionData(FieldDefinitionData $fieldDefinitionData)
+    public function addFieldDefinitionData(FieldDefinitionData $fieldDefinitionData): void
     {
         $this->fieldDefinitionsData[] = $fieldDefinitionData;
     }
 
-    public function replaceFieldDefinitionData(string $fieldDefinitionIdentifier, FieldDefinitionData $fieldDefinitionData)
+    public function replaceFieldDefinitionData(string $fieldDefinitionIdentifier, FieldDefinitionData $fieldDefinitionData): void
     {
         $currentFieldDefinition = array_filter(
             $this->fieldDefinitionsData,
@@ -65,7 +61,7 @@ class ContentTypeData extends ContentTypeUpdateStruct implements NewnessCheckabl
     /**
      * Sort $this->fieldDefinitionsData first by position, then by identifier.
      */
-    public function sortFieldDefinitions()
+    public function sortFieldDefinitions(): void
     {
         usort(
             $this->fieldDefinitionsData,

@@ -14,7 +14,10 @@ use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FieldEditRenderingExtensio
 
 class FieldEditRenderingExtensionTest extends FileSystemTwigIntegrationTestCase
 {
-    public function getExtensions()
+    /**
+     * @return \Twig\Extension\ExtensionInterface[] 
+     */
+    public function getExtensions(): array
     {
         $fieldBlockRenderer = new FieldBlockRenderer();
         $fieldBlockRenderer->setBaseTemplate($this->getTemplatePath('base.html.twig'));
@@ -36,12 +39,12 @@ class FieldEditRenderingExtensionTest extends FileSystemTwigIntegrationTestCase
         return [new FieldEditRenderingExtension($fieldBlockRenderer)];
     }
 
-    public function getFixturesDir()
+    public function getFixturesDir(): string
     {
         return __DIR__ . '/_fixtures/field_edit_rendering_functions/';
     }
 
-    public function getFieldDefinitionData($typeIdentifier, $id = null, $settings = [])
+    public function getFieldDefinitionData($typeIdentifier, $id = null, $settings = []): FieldDefinitionData
     {
         return new FieldDefinitionData([
             'fieldDefinition' => new FieldDefinition([
@@ -52,7 +55,7 @@ class FieldEditRenderingExtensionTest extends FileSystemTwigIntegrationTestCase
         ]);
     }
 
-    private function getTemplatePath($tpl)
+    private function getTemplatePath(string $tpl): string
     {
         return 'templates/' . $tpl;
     }

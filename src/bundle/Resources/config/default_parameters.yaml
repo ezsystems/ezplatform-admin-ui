@@ -1,7 +1,4 @@
 parameters:
-    ezsettings.admin_group.user_edit.templates.update: '@@ezdesign/user/edit.html.twig'
-    ezsettings.admin_group.user_edit.templates.create: '@@ezdesign/user/create.html.twig'
-
     ezsettings.global.system_info_view:
         pjax_tab:
             composer:

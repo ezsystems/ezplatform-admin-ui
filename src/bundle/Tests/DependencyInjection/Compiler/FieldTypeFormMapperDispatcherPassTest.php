@@ -28,7 +28,7 @@ class FieldTypeFormMapperDispatcherPassTest extends AbstractCompilerPassTestCase
     /**
      * @dataProvider tagsProvider
      */
-    public function testRegisterMappers(string $tag)
+    public function testRegisterMappers(string $tag): void
     {
         $fieldTypeIdentifier = 'field_type_identifier';
         $serviceId = 'service_id';

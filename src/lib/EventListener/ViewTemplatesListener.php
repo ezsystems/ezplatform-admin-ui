@@ -24,33 +24,20 @@ class ViewTemplatesListener implements EventSubscriberInterface
      */
     protected $viewTemplates;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $pagelayout;
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [MVCEvents::PRE_CONTENT_VIEW => 'setViewTemplates'];
     }
 
-    /**
-     * Sets the $template to use for objects of class $viewClass.
-     *
-     * @param string $viewClass FQN of a View class
-     * @param string $template
-     */
-    public function setViewTemplate($viewClass, $template)
+    public function setViewTemplate(string $viewClass, string $template): void
     {
         $this->viewTemplates[$viewClass] = $template;
     }
 
-    /**
-     * Sets the pagelayout template to assign to views.
-     *
-     * @param string $pagelayout
-     */
-    public function setPagelayout($pagelayout)
+    public function setPagelayout(string $pagelayout): void
     {
         $this->pagelayout = $pagelayout;
     }
@@ -58,10 +45,8 @@ class ViewTemplatesListener implements EventSubscriberInterface
     /**
      * If the event's view has a defined template, sets the view's template identifier,
      * and the 'pagelayout' parameter.
-     *
-     * @param PreContentViewEvent $event
      */
-    public function setViewTemplates(PreContentViewEvent $event)
+    public function setViewTemplates(PreContentViewEvent $event): void
     {
         $view = $event->getContentView();
 

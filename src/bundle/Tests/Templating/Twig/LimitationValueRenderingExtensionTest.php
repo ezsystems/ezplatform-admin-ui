@@ -14,16 +14,18 @@ use EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperInterface;
 use EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistryInterface;
 use EzSystems\EzPlatformAdminUi\Limitation\Templating\LimitationBlockRenderer;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\LimitationValueRenderingExtension;
+use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionProperty;
 use Twig\Environment;
 use Twig\Error\Error;
+use Twig\Extension\ExtensionInterface;
 use Twig\Loader\ArrayLoader;
 use Twig\Loader\ChainLoader;
 use Twig\Loader\FilesystemLoader;
 
 class LimitationValueRenderingExtensionTest extends FileSystemTwigIntegrationTestCase
 {
-    public function getExtensions(Environment $twig = null)
+    public function getExtensions(Environment $twig = null): array
     {
         $limitationBlockRenderer = new LimitationBlockRenderer(
             $this->createLimitationValueMapperRegistryMock(),
@@ -50,7 +52,7 @@ class LimitationValueRenderingExtensionTest extends FileSystemTwigIntegrationTes
         ];
     }
 
-    private function createLimitationValueMapperRegistryMock()
+    private function createLimitationValueMapperRegistryMock(): MockObject
     {
         $mapperMock = $this->createMock(LimitationValueMapperInterface::class);
         $mapperMock
@@ -69,7 +71,7 @@ class LimitationValueRenderingExtensionTest extends FileSystemTwigIntegrationTes
         return $registryMock;
     }
 
-    public function getLimitation($identifier, array $values)
+    public function getLimitation($identifier, array $values): LimitationMock
     {
         return new LimitationMock($identifier, $values);
     }
@@ -77,7 +79,7 @@ class LimitationValueRenderingExtensionTest extends FileSystemTwigIntegrationTes
     /**
      * @see \eZ\Publish\Core\MVC\Symfony\Templating\Tests\Twig\Extension\FileSystemTwigIntegrationTestCase::doIntegrationTest
      */
-    protected function doIntegrationTest($file, $message, $condition, $templates, $exception, $outputs, $deprecation = '')
+    protected function doIntegrationTest($file, $message, $condition, $templates, $exception, $outputs, $deprecation = ''): void
     {
         if (!$outputs) {
             $this->markTestSkipped('no legacy tests to run');

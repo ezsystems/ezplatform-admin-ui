@@ -60,6 +60,9 @@ parameters:
     ezsettings.admin_group.user_reset_password.templates.form: "@@ezdesign/account/reset_password/index.html.twig"
     ezsettings.admin_group.user_reset_password.templates.invalid_link: "@@ezdesign/account/reset_password/invalid_link_page.html.twig"
     ezsettings.admin_group.user_reset_password.templates.success: "@@ezdesign/account/reset_password/confirmation_page.html.twig"
+    ezsettings.admin_group.user_edit.templates.update: '@@ezdesign/user/edit.html.twig'
+    ezsettings.admin_group.user_edit.templates.create: '@@ezdesign/user/create.html.twig'
+
 
     # Content Tree Module
     ezsettings.admin_group.content_tree_module.load_more_limit: 30

@@ -5,7 +5,8 @@ services:
         autoconfigure: true
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FieldEditRenderingExtension:
-        arguments: ["@ezpublish.templating.field_block_renderer"]
+        arguments:
+            - '@ezpublish.templating.field_block_renderer'
         tags:
             - { name: twig.extension }
 

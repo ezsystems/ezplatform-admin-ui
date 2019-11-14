@@ -63,11 +63,6 @@ class UserCreateMapper
         return $data;
     }
 
-    /**
-     * @param OptionsResolver $optionsResolver
-     *
-     * @throws AccessException
-     */
     private function configureOptions(OptionsResolver $optionsResolver): void
     {
         $optionsResolver->setRequired('mainLanguageCode');

@@ -12,8 +12,6 @@ interface NewnessCheckable
 {
     /**
      * Whether the Data object can be considered new.
-     *
-     * @return bool
      */
     public function isNew(): bool;
 }
