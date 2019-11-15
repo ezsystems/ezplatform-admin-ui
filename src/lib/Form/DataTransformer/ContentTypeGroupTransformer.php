@@ -9,35 +9,51 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * Translates ContentTypeGroup's ID to domain specific ContentTypeGroup object.
  */
-class ContentTypeGroupTransformer implements DataTransformerInterface
+final class ContentTypeGroupTransformer implements DataTransformerInterface
 {
-    /** @var ContentTypeService */
-    protected $contentTypeService;
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    private $contentTypeService;
 
-    /**
-     * @param ContentTypeService $contentTypeService
-     */
     public function __construct(ContentTypeService $contentTypeService)
     {
         $this->contentTypeService = $contentTypeService;
     }
 
-    public function transform($value)
+    public function transform($value): ?int
     {
-        return null !== $value
-            ? $value->id
-            : null;
+        if (null === $value) {
+            return null;
+        }
+
+        if (!$value instanceof ContentTypeGroup) {
+            throw new TransformationFailedException('Expected a ' . ContentTypeGroup::class . ' object.');
+        }
+
+        return $value->id;
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform($value): ?ContentTypeGroup
     {
-        return null !== $value
-            ? $this->contentTypeService->loadContentTypeGroup($value)
-            : null;
+        if (empty($value)) {
+            return null;
+        }
+
+        if (!is_int($value) && !ctype_digit($value)) {
+            throw new TransformationFailedException('Expected a numeric string.');
+        }
+
+        try {
+            return $this->contentTypeService->loadContentTypeGroup((int)$value);
+        } catch (NotFoundException $e) {
+            throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }
