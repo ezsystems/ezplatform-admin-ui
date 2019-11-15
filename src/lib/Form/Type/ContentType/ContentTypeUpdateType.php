@@ -37,7 +37,7 @@ class ContentTypeUpdateType extends AbstractType
         $resolver
             ->setDefaults([
                 'data_class' => ContentTypeData::class,
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
                 'mainLanguageCode' => null,
             ])
             ->setDefined(['mainLanguageCode'])
@@ -56,12 +56,12 @@ class ContentTypeUpdateType extends AbstractType
                 $builder
                     ->create('name', TextType::class, [
                         'property_path' => 'names',
-                        'label' => 'content_type.name',
+                        'label' => /** @Desc("Name") */ 'content_type.name',
                     ])
                     ->addModelTransformer($translatablePropertyTransformer)
             )
             ->add('identifier', TextType::class, [
-                'label' => 'content_type.identifier',
+                'label' => /** @Desc("Identifier") */ 'content_type.identifier',
                 'disabled' => $isTranslation,
             ])
             ->add(
@@ -69,61 +69,61 @@ class ContentTypeUpdateType extends AbstractType
                     ->create('description', TextType::class, [
                         'property_path' => 'descriptions',
                         'required' => false,
-                        'label' => 'content_type.description',
+                        'label' => /** @Desc("Description") */ 'content_type.description',
                     ])
                     ->addModelTransformer($translatablePropertyTransformer)
             )
             ->add('nameSchema', TextType::class, [
                 'required' => false,
-                'label' => 'content_type.name_schema',
+                'label' => /** @Desc("Content name pattern") */ 'content_type.name_schema',
                 'disabled' => $isTranslation,
             ])
             ->add('urlAliasSchema', TextType::class, [
                 'required' => false,
-                'label' => 'content_type.url_alias_schema',
+                'label' => /** @Desc("URL alias name pattern") */ 'content_type.url_alias_schema',
                 'empty_data' => false,
                 'disabled' => $isTranslation,
             ])
             ->add('isContainer', CheckboxType::class, [
                 'required' => false,
-                'label' => 'content_type.is_container',
+                'label' => /** @Desc("Container") */ 'content_type.is_container',
                 'disabled' => $isTranslation,
             ])
             ->add('defaultSortField', SortFieldChoiceType::class, [
-                'label' => 'content_type.default_sort_field',
+                'label' => /** @Desc("Default field for sorting children") */ 'content_type.default_sort_field',
                 'disabled' => $isTranslation,
             ])
             ->add('defaultSortOrder', SortOrderChoiceType::class, [
-                'label' => 'content_type.default_sort_order',
+                'label' => /** @Desc("Default sort order") */ 'content_type.default_sort_order',
                 'disabled' => $isTranslation,
             ])
             ->add('defaultAlwaysAvailable', CheckboxType::class, [
                 'required' => false,
-                'label' => 'content_type.default_always_available',
+                'label' => /** @Desc("Default content availability") */ 'content_type.default_always_available',
                 'disabled' => $isTranslation,
             ])
             ->add('fieldDefinitionsData', CollectionType::class, [
                 'entry_type' => FieldDefinitionType::class,
                 'entry_options' => ['languageCode' => $options['languageCode'], 'mainLanguageCode' => $options['mainLanguageCode']],
-                'label' => 'content_type.field_definitions_data',
+                'label' => /** @Desc("Content field definitions") */ 'content_type.field_definitions_data',
             ])
             ->add('fieldTypeSelection', FieldTypeChoiceType::class, [
                 'mapped' => false,
-                'label' => 'content_type.field_type_selection',
+                'label' => /** @Desc("Field type selection") */ 'content_type.field_type_selection',
                 'disabled' => $isTranslation,
             ])
             ->add('addFieldDefinition', SubmitType::class, [
-                'label' => 'content_type.add_field_definition',
+                'label' => /** @Desc("Add field definition") */ 'content_type.add_field_definition',
                 'disabled' => $isTranslation,
             ])
             ->add('removeFieldDefinition', SubmitType::class, [
-                'label' => 'content_type.remove_field_definitions',
+                'label' => /** @Desc("Remove selected field definitions") */ 'content_type.remove_field_definitions',
                 'disabled' => !$hasFieldDefinition || $isTranslation,
             ])
-            ->add('saveContentType', SubmitType::class, ['label' => 'content_type.save'])
-            ->add('removeDraft', SubmitType::class, ['label' => 'content_type.remove_draft', 'validation_groups' => false])
+            ->add('saveContentType', SubmitType::class, ['label' => /** @Desc("Apply") */ 'content_type.save'])
+            ->add('removeDraft', SubmitType::class, ['label' => /** @Desc("Cancel") */ 'content_type.remove_draft', 'validation_groups' => false])
             ->add('publishContentType', SubmitType::class, [
-                'label' => 'content_type.publish',
+                'label' => /** @Desc("OK") */ 'content_type.publish',
                 'disabled' => !$hasFieldDefinition,
             ])
         ;

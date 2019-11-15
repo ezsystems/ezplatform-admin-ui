@@ -25,7 +25,7 @@ class TextBlockFormMapper implements FieldDefinitionFormMapperInterface
                 'textRows', IntegerType::class, [
                     'required' => false,
                     'property_path' => 'fieldSettings[textRows]',
-                    'label' => 'field_definition.eztext.text_rows',
+                    'label' => /** @Desc("Number of text rows") */ 'field_definition.eztext.text_rows',
                     'disabled' => $isTranslation,
                 ]
             );
@@ -35,7 +35,7 @@ class TextBlockFormMapper implements FieldDefinitionFormMapperInterface
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

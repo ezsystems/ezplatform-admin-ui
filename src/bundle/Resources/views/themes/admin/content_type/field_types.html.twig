@@ -127,7 +127,7 @@
         <div class="mt-1">
             <button
                 data-universaldiscovery-title="{{ "field_definition.ezobjectrelation.selection_root_udw_title"
-                |trans({}, "ezplatform_content_forms_content_type")
+                |trans({}, "content_type")
                 |desc("Select a starting location for browsing for relation") }}"
                 class="ez-button-tree pure-button ez-font-icon ez-button ez-relation-pick-root-button btn btn-secondary btn--udw-relation-default-location"
                 data-relation-root-input-selector="#{{ form.selectionRoot.vars.id }}"
@@ -136,7 +136,7 @@
                 data-udw-config="{{ ez_udw_config('single', {}) }}"
                 {{ is_translation ? 'disabled' : '' }}
             >{{ "field_definition.ezobjectrelation.selection_root_udw_button"
-                |trans({}, "ezplatform_content_forms_content_type")
+                |trans({}, "content_type")
                 |desc("Select item") }}</button>
         </div>
         <div id="{{ form.selectionRoot.vars.id }}-selected-root-name">
@@ -159,7 +159,7 @@
         <div class="mt-1">
             <button
                 data-universaldiscovery-title="{{ "field_definition.ezobjectrelationlist.selection_root_udw_title"
-                |trans({}, "ezplatform_content_forms_content_type")
+                |trans({}, "content_type")
                 |desc("Select a starting location for browsing for relations") }}"
                 class="ez-button-tree pure-button ez-font-icon ez-button ez-relation-pick-root-button btn btn-secondary btn--udw-relation-default-location"
                 data-relation-root-input-selector="#{{ form.selectionDefaultLocation.vars.id }}"
@@ -168,7 +168,7 @@
                 data-udw-config="{{ ez_udw_config('single_container', {}) }}"
                 {{ is_translation ? 'disabled' : '' }}
             >{{ "field_definition.ezobjectrelationlist.selection_root_udw_button"
-                |trans({}, "ezplatform_content_forms_content_type")
+                |trans({}, "content_type")
                 |desc("Select location") }}</button>
         </div>
         <div id="{{ form.selectionDefaultLocation.vars.id }}-selected-root-name">
@@ -229,13 +229,13 @@
             <button
                 type="button"
                 class="ezselection-settings-option-add ez-font-icon ez-button btn btn-secondary ez-button-add pure-button">
-                {{ "field_definition.ezselection.add_option"|trans({}, "ezplatform_content_forms_content_type")|desc("Add an option") }}
+                {{ "field_definition.ezselection.add_option"|trans({}, "content_type")|desc("Add an option") }}
             </button>
             <button
                 type="button"
                 class="ezselection-settings-option-remove ez-font-icon ez-button btn btn-danger ez-button-delete pure-button"
                 disabled>
-                {{ "field_definition.ezselection.remove_selected_options"|trans({}, "ezplatform_content_forms_content_type")|desc("Remove selected options") }}
+                {{ "field_definition.ezselection.remove_selected_options"|trans({}, "content_type")|desc("Remove selected options") }}
             </button>
         </div>
     </div>

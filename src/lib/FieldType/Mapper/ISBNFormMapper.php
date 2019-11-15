@@ -24,7 +24,7 @@ class ISBNFormMapper implements FieldDefinitionFormMapperInterface
             ->createBuilder()
             ->create('defaultValue', ISBNFieldType::class, [
                 'required' => false,
-                'label' => 'field_definition.ezisbn.default_value',
+                'label' => /** @Desc("Default value") */ 'field_definition.ezisbn.default_value',
                 'disabled' => $isTranslation,
             ])
             ->setAutoInitialize(false)
@@ -35,7 +35,7 @@ class ISBNFormMapper implements FieldDefinitionFormMapperInterface
                 'isISBN13', CheckboxType::class, [
                     'required' => false,
                     'property_path' => 'fieldSettings[isISBN13]',
-                    'label' => 'field_definition.ezisbn.is_isbn13',
+                    'label' => /** @Desc("ISBN-13 format") */ 'field_definition.ezisbn.is_isbn13',
                     'disabled' => $isTranslation,
                 ]
             )
@@ -49,7 +49,7 @@ class ISBNFormMapper implements FieldDefinitionFormMapperInterface
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

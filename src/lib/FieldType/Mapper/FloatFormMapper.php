@@ -27,7 +27,7 @@ class FloatFormMapper implements FieldDefinitionFormMapperInterface
             ->createBuilder()
             ->create('defaultValue', FloatFieldType::class, [
                 'required' => false,
-                'label' => 'field_definition.ezfloat.default_value',
+                'label' => /** @Desc("Default value") */ 'field_definition.ezfloat.default_value',
                 'disabled' => $isTranslation,
             ])
             ->setAutoInitialize(false)
@@ -38,7 +38,7 @@ class FloatFormMapper implements FieldDefinitionFormMapperInterface
                 'minValue', NumberType::class, [
                     'required' => false,
                     'property_path' => 'validatorConfiguration[FloatValueValidator][minFloatValue]',
-                    'label' => 'field_definition.ezfloat.min_value',
+                    'label' => /** @Desc("Minimum value") */ 'field_definition.ezfloat.min_value',
                     'disabled' => $isTranslation,
                 ]
             )
@@ -46,7 +46,7 @@ class FloatFormMapper implements FieldDefinitionFormMapperInterface
                 'maxValue', NumberType::class, [
                     'required' => false,
                     'property_path' => 'validatorConfiguration[FloatValueValidator][maxFloatValue]',
-                    'label' => 'field_definition.ezfloat.max_value',
+                    'label' => /** @Desc("Maximum value") */ 'field_definition.ezfloat.max_value',
                     'disabled' => $isTranslation,
                 ]
             )
@@ -57,7 +57,7 @@ class FloatFormMapper implements FieldDefinitionFormMapperInterface
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

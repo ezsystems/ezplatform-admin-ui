@@ -27,7 +27,7 @@ class IntegerFormMapper implements FieldDefinitionFormMapperInterface
             ->createBuilder()
             ->create('defaultValue', IntegerFieldType::class, [
                 'required' => false,
-                'label' => 'field_definition.ezinteger.default_value',
+                'label' => /** @Desc("Default value") */ 'field_definition.ezinteger.default_value',
             ])
             ->setAutoInitialize(false)
             ->getForm();
@@ -56,7 +56,7 @@ class IntegerFormMapper implements FieldDefinitionFormMapperInterface
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

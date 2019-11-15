@@ -25,14 +25,14 @@ class TextLineFormMapper implements FieldDefinitionFormMapperInterface
             ->add('minLength', IntegerType::class, [
                 'required' => false,
                 'property_path' => 'validatorConfiguration[StringLengthValidator][minStringLength]',
-                'label' => 'field_definition.ezstring.min_length',
+                'label' => /** @Desc("Minimum length") */ 'field_definition.ezstring.min_length',
                 'attr' => ['min' => 0],
                 'disabled' => $isTranslation,
             ])
             ->add('maxLength', IntegerType::class, [
                 'required' => false,
                 'property_path' => 'validatorConfiguration[StringLengthValidator][maxStringLength]',
-                'label' => 'field_definition.ezstring.max_length',
+                'label' => /** @Desc("Maximum length") */ 'field_definition.ezstring.max_length',
                 'attr' => ['min' => 0],
                 'disabled' => $isTranslation,
             ])
@@ -41,7 +41,7 @@ class TextLineFormMapper implements FieldDefinitionFormMapperInterface
                     ->getConfig()->getFormFactory()->createBuilder()
                     ->create('defaultValue', TextLineFieldType::class, [
                         'required' => false,
-                        'label' => 'field_definition.ezstring.default_value',
+                        'label' => /** @Desc("Default value") */ 'field_definition.ezstring.default_value',
                         'disabled' => $isTranslation,
                     ])
                     ->setAutoInitialize(false)
@@ -53,7 +53,7 @@ class TextLineFormMapper implements FieldDefinitionFormMapperInterface
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

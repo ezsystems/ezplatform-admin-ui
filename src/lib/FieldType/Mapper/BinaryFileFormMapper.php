@@ -16,15 +16,11 @@ use Symfony\Component\Validator\Constraints\Range;
 
 class BinaryFileFormMapper implements FieldDefinitionFormMapperInterface
 {
-    /** @var FieldTypeService */
-    private $fieldTypeService;
-
     /** @var MaxUploadSize */
     private $maxUploadSize;
 
     public function __construct(FieldTypeService $fieldTypeService, MaxUploadSize $maxUploadSize)
     {
-        $this->fieldTypeService = $fieldTypeService;
         $this->maxUploadSize = $maxUploadSize;
     }
 
@@ -35,8 +31,8 @@ class BinaryFileFormMapper implements FieldDefinitionFormMapperInterface
             ->add('maxSize', IntegerType::class, [
                 'required' => false,
                 'property_path' => 'validatorConfiguration[FileSizeValidator][maxFileSize]',
-                'label' => 'field_definition.ezbinaryfile.max_file_size',
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'label' => /** @Desc("Maximum file size (MB)") */ 'field_definition.ezbinaryfile.max_file_size',
+                'translation_domain' => 'content_type',
                 'constraints' => [
                     new Range([
                         'min' => 0,

@@ -17,8 +17,8 @@ class ContentTypeGroupType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('identifier', TextType::class, ['label' => 'content_type.group.identifier'])
-            ->add('save', SubmitType::class, ['label' => 'content_type.group.save']);
+            ->add('identifier', TextType::class, ['label' => /** @Desc("Name") */ 'content_type.group.identifier'])
+            ->add('save', SubmitType::class, ['label' => /** @Desc("Save") */ 'content_type.group.save']);
     }
 
     public function getName()
@@ -28,14 +28,14 @@ class ContentTypeGroupType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'ezplatform_content_forms_content_type_group_edit';
+        return 'content_type_group_edit';
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => '\eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroupStruct',
-            'translation_domain' => 'ezplatform_content_forms_content_type',
+            'translation_domain' => 'content_type',
         ]);
     }
 }

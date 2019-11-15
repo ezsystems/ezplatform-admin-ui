@@ -18,15 +18,11 @@ use Symfony\Component\Validator\Constraints\Range;
 
 class ImageFormMapper implements FieldDefinitionFormMapperInterface
 {
-    /** @var FieldTypeService */
-    private $fieldTypeService;
-
     /** @var MaxUploadSize */
     private $maxUploadSize;
 
     public function __construct(FieldTypeService $fieldTypeService, MaxUploadSize $maxUploadSize)
     {
-        $this->fieldTypeService = $fieldTypeService;
         $this->maxUploadSize = $maxUploadSize;
     }
 
@@ -61,7 +57,7 @@ class ImageFormMapper implements FieldDefinitionFormMapperInterface
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

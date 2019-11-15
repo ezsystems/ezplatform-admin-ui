@@ -31,7 +31,7 @@ class SortingTranslationExtractor implements ExtractorInterface
         9 => 'Content name',
     ];
 
-    private $domain = 'ezplatform_content_forms_content_type';
+    private $domain = 'content_type';
 
     public function extract()
     {

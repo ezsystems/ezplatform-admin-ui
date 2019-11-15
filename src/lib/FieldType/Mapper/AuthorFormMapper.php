@@ -30,14 +30,14 @@ class AuthorFormMapper implements FieldDefinitionFormMapperInterface, FieldValue
                 ChoiceType::class,
                 [
                     'choices' => [
-                        'field_definition.ezauthor.default_user_empty' => Type::DEFAULT_VALUE_EMPTY,
-                        'field_definition.ezauthor.default_user_current' => Type::DEFAULT_CURRENT_USER,
+                        /** @Desc("Empty") */ 'field_definition.ezauthor.default_user_empty' => Type::DEFAULT_VALUE_EMPTY,
+                        /** @Desc("Current User") */ 'field_definition.ezauthor.default_user_current' => Type::DEFAULT_CURRENT_USER,
                     ],
                     'expanded' => true,
                     'required' => true,
                     'property_path' => 'fieldSettings[defaultAuthor]',
-                    'label' => 'field_definition.ezauthor.default_author',
-                    'translation_domain' => 'ezplatform_content_forms_content_type',
+                    'label' => /** @Desc("Default value") */ 'field_definition.ezauthor.default_author',
+                    'translation_domain' => 'content_type',
                     'disabled' => $isTranslation,
                 ]
             );
@@ -69,7 +69,7 @@ class AuthorFormMapper implements FieldDefinitionFormMapperInterface, FieldValue
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

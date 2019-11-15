@@ -28,7 +28,7 @@ class ContentTypeDeleteType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 
@@ -36,6 +36,6 @@ class ContentTypeDeleteType extends AbstractType
     {
         $builder
             ->add('contentTypeId', HiddenType::class)
-            ->add('delete', SubmitType::class, ['label' => 'content_type.delete']);
+            ->add('delete', SubmitType::class, ['label' => /** @Desc("Delete") */ 'content_type.delete']);
     }
 }

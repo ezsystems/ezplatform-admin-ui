@@ -27,25 +27,25 @@ class DateTimeFormMapper implements FieldDefinitionFormMapperInterface
             ->add('useSeconds', CheckboxType::class, [
                 'required' => false,
                 'property_path' => 'fieldSettings[useSeconds]',
-                'label' => 'field_definition.ezdatetime.use_seconds',
+                'label' => /** @Desc("Use seconds") */ 'field_definition.ezdatetime.use_seconds',
                 'disabled' => $isTranslation,
             ])
             ->add('defaultType', ChoiceType::class, [
                 'choices' => [
-                    'field_definition.ezdatetime.default_type_empty' => Type::DEFAULT_EMPTY,
-                    'field_definition.ezdatetime.default_type_current' => Type::DEFAULT_CURRENT_DATE,
-                    'field_definition.ezdatetime.default_type_adjusted' => Type::DEFAULT_CURRENT_DATE_ADJUSTED,
+                    /** @Desc("Empty") */ 'field_definition.ezdatetime.default_type_empty' => Type::DEFAULT_EMPTY,
+                    /** @Desc("Current datetime") */ 'field_definition.ezdatetime.default_type_current' => Type::DEFAULT_CURRENT_DATE,
+                    /** @Desc("Adjusted current datetime") */ 'field_definition.ezdatetime.default_type_adjusted' => Type::DEFAULT_CURRENT_DATE_ADJUSTED,
                 ],
                 'expanded' => true,
                 'required' => true,
                 'property_path' => 'fieldSettings[defaultType]',
-                'label' => 'field_definition.ezdatetime.default_type',
+                'label' => /** @Desc("Default value") */ 'field_definition.ezdatetime.default_type',
                 'disabled' => $isTranslation,
             ])
             ->add('dateInterval', DateTimeIntervalType::class, [
                 'required' => false,
                 'property_path' => 'fieldSettings[dateInterval]',
-                'label' => 'field_definition.ezdatetime.date_interval',
+                'label' => /** @Desc("Current date and time adjusted by") */ 'field_definition.ezdatetime.date_interval',
                 'disabled' => $isTranslation,
             ]);
     }
@@ -54,7 +54,7 @@ class DateTimeFormMapper implements FieldDefinitionFormMapperInterface
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

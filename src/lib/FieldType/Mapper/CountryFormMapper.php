@@ -24,7 +24,7 @@ class CountryFormMapper implements FieldDefinitionFormMapperInterface
                 CheckboxType::class, [
                     'required' => false,
                     'property_path' => 'fieldSettings[isMultiple]',
-                    'label' => 'field_definition.ezcountry.is_multiple',
+                    'label' => /** @Desc("Multiple choice") */ 'field_definition.ezcountry.is_multiple',
                     'disabled' => $isTranslation,
                 ]
             )
@@ -37,7 +37,7 @@ class CountryFormMapper implements FieldDefinitionFormMapperInterface
                             'multiple' => true,
                             'expanded' => false,
                             'required' => false,
-                            'label' => 'field_definition.ezcountry.default_value',
+                            'label' => /** @Desc("Multiple choice") */ 'field_definition.ezcountry.default_value',
                             'disabled' => $isTranslation,
                         ]
                     )
@@ -53,7 +53,7 @@ class CountryFormMapper implements FieldDefinitionFormMapperInterface
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

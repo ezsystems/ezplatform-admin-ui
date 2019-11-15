@@ -57,7 +57,7 @@ class FieldDefinitionType extends AbstractType
         $resolver
             ->setDefaults([
                 'data_class' => FieldDefinitionData::class,
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
                 'mainLanguageCode' => null,
             ])
             ->setDefined(['mainLanguageCode'])
@@ -81,7 +81,7 @@ class FieldDefinitionType extends AbstractType
                     TextType::class,
                     [
                         'property_path' => 'names',
-                        'label' => 'field_definition.name',
+                        'label' => /** @Desc("Name") */ 'field_definition.name',
                     ])
                     ->addModelTransformer($translatablePropertyTransformer)
             )
@@ -89,7 +89,7 @@ class FieldDefinitionType extends AbstractType
                 'identifier',
                 TextType::class,
                 [
-                    'label' => 'field_definition.identifier',
+                    'label' => /** @Desc("Identifier") */ 'field_definition.identifier',
                     'disabled' => $isTranslation,
                 ]
             )
@@ -97,30 +97,30 @@ class FieldDefinitionType extends AbstractType
                 $builder->create('description', TextType::class, [
                     'property_path' => 'descriptions',
                     'required' => false,
-                    'label' => 'field_definition.description',
+                    'label' => /** @Desc("Description") */ 'field_definition.description',
                 ])
                     ->addModelTransformer($translatablePropertyTransformer)
             )
             ->add('isRequired', CheckboxType::class, [
                 'required' => false,
-                'label' => 'field_definition.is_required',
+                'label' => /** @Desc("Required") */ 'field_definition.is_required',
                 'disabled' => $isTranslation,
             ])
             ->add('isTranslatable', CheckboxType::class, [
                 'required' => false,
-                'label' => 'field_definition.is_translatable',
+                'label' => /** @Desc("Translatable") */ 'field_definition.is_translatable',
                 'disabled' => $isTranslation,
             ])
             ->add(
                 'fieldGroup', ChoiceType::class, [
                     'choices' => $fieldsGroups,
                     'required' => false,
-                    'label' => 'field_definition.field_group',
+                    'label' => /** @Desc("Category") */ 'field_definition.field_group',
                     'disabled' => $isTranslation,
                 ]
             )
             ->add('position', IntegerType::class, [
-                'label' => 'field_definition.position',
+                'label' => /** @Desc("Position") */ 'field_definition.position',
                 'disabled' => $isTranslation,
             ])
             ->add('selected', CheckboxType::class, [
@@ -141,7 +141,7 @@ class FieldDefinitionType extends AbstractType
             $form->add('isSearchable', CheckboxType::class, [
                 'required' => false,
                 'disabled' => !$fieldType->isSearchable() || $isTranslation,
-                'label' => 'field_definition.is_searchable',
+                'label' => /** @Desc("Searchable") */ 'field_definition.is_searchable',
             ]);
 
             // Let fieldType mappers do their jobs to complete the form.

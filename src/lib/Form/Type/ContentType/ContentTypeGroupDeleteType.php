@@ -21,18 +21,18 @@ class ContentTypeGroupDeleteType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'ezplatform_content_forms_content_type_group_delete';
+        return 'content_type_group_delete';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('contentTypeGroupId', HiddenType::class)
-            ->add('delete', SubmitType::class, ['label' => 'content_type.group.delete']);
+            ->add('delete', SubmitType::class, ['label' => /** @Desc("Delete") */ 'content_type.group.delete']);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['translation_domain' => 'ezplatform_content_forms_content_type']);
+        $resolver->setDefaults(['translation_domain' => 'content_type']);
     }
 }

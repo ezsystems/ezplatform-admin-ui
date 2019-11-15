@@ -27,14 +27,14 @@ class DateFormMapper implements FieldDefinitionFormMapperInterface
                 ChoiceType::class,
                 [
                     'choices' => [
-                        'field_definition.ezdate.default_type_empty' => Type::DEFAULT_EMPTY,
-                        'field_definition.ezdate.default_type_current' => Type::DEFAULT_CURRENT_DATE,
+                        /** @Desc("Empty") */ 'field_definition.ezdate.default_type_empty' => Type::DEFAULT_EMPTY,
+                        /** @Desc("Current date") */ 'field_definition.ezdate.default_type_current' => Type::DEFAULT_CURRENT_DATE,
                     ],
                     'expanded' => true,
                     'required' => true,
                     'property_path' => 'fieldSettings[defaultType]',
-                    'label' => 'field_definition.ezdate.default_type',
-                    'translation_domain' => 'ezplatform_content_forms_content_type',
+                    'label' => /** @Desc("Default value") */ 'field_definition.ezdate.default_type',
+                    'translation_domain' => 'content_type',
                     'disabled' => $isTranslation,
                 ]
             );
@@ -44,7 +44,7 @@ class DateFormMapper implements FieldDefinitionFormMapperInterface
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

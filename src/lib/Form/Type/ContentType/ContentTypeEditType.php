@@ -26,26 +26,13 @@ class ContentTypeEditType extends AbstractType
     /** @var \eZ\Publish\API\Repository\LanguageService */
     protected $languageService;
 
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    private $contentTypeService;
-
-    /**
-     * @param \eZ\Publish\API\Repository\LanguageService $languageService
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     */
     public function __construct(
-        LanguageService $languageService,
-        ContentTypeService $contentTypeService
+        LanguageService $languageService
     ) {
         $this->languageService = $languageService;
-        $this->contentTypeService = $contentTypeService;
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $options['contentType'];

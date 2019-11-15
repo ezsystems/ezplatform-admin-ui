@@ -133,7 +133,7 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
                     'output_dir' => __DIR__ . '/../Resources/translations/',
                     'output_format' => 'xliff',
                     'excluded_dirs' => ['Behat', 'Tests', 'node_modules'],
-                    'extractors' => ['ez_policy'],
+                    'extractors' => ['ez_policy', 'ez_policy_limitation', 'ez_location_sorting'],
                 ],
             ],
         ]);

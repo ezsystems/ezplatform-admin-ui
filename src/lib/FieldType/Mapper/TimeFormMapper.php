@@ -29,7 +29,7 @@ class TimeFormMapper implements FieldDefinitionFormMapperInterface
                 [
                     'required' => false,
                     'property_path' => 'fieldSettings[useSeconds]',
-                    'label' => 'field_definition.eztime.use_seconds',
+                    'label' => /** @Desc("Use seconds") */ 'field_definition.eztime.use_seconds',
                     'disabled' => $isTranslation,
                 ]
             )
@@ -38,13 +38,13 @@ class TimeFormMapper implements FieldDefinitionFormMapperInterface
                 ChoiceType::class,
                 [
                     'choices' => [
-                        'field_definition.eztime.default_type_empty' => Type::DEFAULT_EMPTY,
-                        'field_definition.eztime.default_type_current' => Type::DEFAULT_CURRENT_TIME,
+                        /** @Desc("Empty") */ 'field_definition.eztime.default_type_empty' => Type::DEFAULT_EMPTY,
+                        /** @Desc("Current time") */ 'field_definition.eztime.default_type_current' => Type::DEFAULT_CURRENT_TIME,
                     ],
                     'expanded' => true,
                     'required' => true,
                     'property_path' => 'fieldSettings[defaultType]',
-                    'label' => 'field_definition.eztime.default_type',
+                    'label' => /** @Desc("Default value") */ 'field_definition.eztime.default_type',
                     'disabled' => $isTranslation,
                 ]
             );
@@ -54,7 +54,7 @@ class TimeFormMapper implements FieldDefinitionFormMapperInterface
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

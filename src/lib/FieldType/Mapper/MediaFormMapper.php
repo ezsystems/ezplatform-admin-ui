@@ -19,9 +19,6 @@ use Symfony\Component\Validator\Constraints\Range;
 
 class MediaFormMapper implements FieldDefinitionFormMapperInterface
 {
-    /** @var FieldTypeService */
-    private $fieldTypeService;
-
     /** @var MaxUploadSize */
     private $maxUploadSize;
 
@@ -30,7 +27,6 @@ class MediaFormMapper implements FieldDefinitionFormMapperInterface
 
     public function __construct(FieldTypeService $fieldTypeService, MaxUploadSize $maxUploadSize)
     {
-        $this->fieldTypeService = $fieldTypeService;
         $this->maxUploadSize = $maxUploadSize;
     }
 
@@ -41,7 +37,7 @@ class MediaFormMapper implements FieldDefinitionFormMapperInterface
             ->add('maxSize', IntegerType::class, [
                 'required' => false,
                 'property_path' => 'validatorConfiguration[FileSizeValidator][maxFileSize]',
-                'label' => 'field_definition.ezmedia.max_file_size',
+                'label' => /** @Desc("Maximum file size (MB)") */ 'field_definition.ezmedia.max_file_size',
                 'constraints' => [
                     new Range([
                         'min' => 0,
@@ -56,17 +52,17 @@ class MediaFormMapper implements FieldDefinitionFormMapperInterface
             ])
             ->add('mediaType', ChoiceType::class, [
                 'choices' => [
-                    'field_definition.ezmedia.type_html5_video' => Type::TYPE_HTML5_VIDEO,
-                    'field_definition.ezmedia.type_flash' => Type::TYPE_FLASH,
-                    'field_definition.ezmedia.type_quick_time' => Type::TYPE_QUICKTIME,
-                    'field_definition.ezmedia.type_real_player' => Type::TYPE_REALPLAYER,
-                    'field_definition.ezmedia.type_silverlight' => Type::TYPE_SILVERLIGHT,
-                    'field_definition.ezmedia.type_windows_media_player' => Type::TYPE_WINDOWSMEDIA,
-                    'field_definition.ezmedia.type_html5_audio' => Type::TYPE_HTML5_AUDIO,
+                    /** @Desc("Flash") */ 'field_definition.ezmedia.type_flash' => Type::TYPE_FLASH,
+                    /** @Desc("HTML5 video") */ 'field_definition.ezmedia.type_html5_video' => Type::TYPE_HTML5_VIDEO,
+                    /** @Desc("QuickTime") */ 'field_definition.ezmedia.type_quick_time' => Type::TYPE_QUICKTIME,
+                    /** @Desc("RealPlayer") */ 'field_definition.ezmedia.type_real_player' => Type::TYPE_REALPLAYER,
+                    /** @Desc("Silverlight") */ 'field_definition.ezmedia.type_silverlight' => Type::TYPE_SILVERLIGHT,
+                    /** @Desc("Windows Media Player") */ 'field_definition.ezmedia.type_windows_media_player' => Type::TYPE_WINDOWSMEDIA,
+                    /** @Desc("HTML5 audio") */ 'field_definition.ezmedia.type_html5_audio' => Type::TYPE_HTML5_AUDIO,
                 ],
                 'required' => true,
                 'property_path' => 'fieldSettings[mediaType]',
-                'label' => 'field_definition.ezmedia.media_type',
+                'label' => /** @Desc("Media type") */ 'field_definition.ezmedia.media_type',
                 'disabled' => $isTranslation,
             ]);
     }
@@ -78,7 +74,7 @@ class MediaFormMapper implements FieldDefinitionFormMapperInterface
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

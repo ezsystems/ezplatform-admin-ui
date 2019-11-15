@@ -69,13 +69,13 @@
         <tr class="ez-table__row">
             <td class="ez-table__cell">{{ "content_type.default_children_sorting"|trans|desc("Default field for sorting children") }}</td>
             <td class="ez-table__cell">
-                {{ ("content_type.sort_field." ~ content_type.defaultSortField)|trans(domain="ezplatform_content_forms_content_type") }} / {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="ezplatform_content_forms_content_type") }}
+                {{ ("content_type.sort_field." ~ content_type.defaultSortField)|trans(domain="content_type") }} / {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="content_type") }}
             </td>
         </tr>
         <tr class="ez-table__row">
             <td class="ez-table__cell">{{ "content_type.default_sort"|trans|desc("Default sort order") }}</td>
             <td class="ez-table__cell">
-                {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="ezplatform_content_forms_content_type") }}
+                {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="content_type") }}
             </td>
         </tr>
         <tr class="ez-table__row">

@@ -42,7 +42,7 @@ class ContentTypeCreateType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 
@@ -63,6 +63,6 @@ class ContentTypeCreateType extends AbstractType
                     }
                 ),
             ])
-            ->add('create', SubmitType::class, ['label' => 'content_type.create']);
+            ->add('create', SubmitType::class, ['label' => /** @Desc("Create a content type") */ 'content_type.create']);
     }
 }

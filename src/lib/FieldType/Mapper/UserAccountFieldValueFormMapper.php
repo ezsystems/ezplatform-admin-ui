@@ -49,7 +49,7 @@ final class UserAccountFieldValueFormMapper implements FieldDefinitionFormMapper
         $fieldDefinitionForm->add('minLength', IntegerType::class, [
             'required' => false,
             'property_path' => $validatorPropertyPathPrefix . '[minLength]',
-            'label' => 'field_definition.ezuser.min_length',
+            'label' => /** @Desc("Minimum password length") */ 'field_definition.ezuser.min_length',
             'constraints' => [
                 new Range(['min' => 0, 'max' => 255]),
             ],
@@ -58,7 +58,7 @@ final class UserAccountFieldValueFormMapper implements FieldDefinitionFormMapper
         $fieldDefinitionForm->add('passwordTTL', IntegerType::class, [
             'required' => false,
             'property_path' => 'fieldSettings[PasswordTTL]',
-            'label' => 'field_definition.ezuser.password_ttl',
+            'label' => /** @Desc("Days before password expires") */ 'field_definition.ezuser.password_ttl',
             'constraints' => [
                 new Range(['min' => 0, 'max' => null]),
             ],
@@ -67,7 +67,7 @@ final class UserAccountFieldValueFormMapper implements FieldDefinitionFormMapper
         $fieldDefinitionForm->add('passwordTTLWarning', IntegerType::class, [
             'required' => false,
             'property_path' => 'fieldSettings[PasswordTTLWarning]',
-            'label' => 'field_definition.ezuser.password_ttl_warning',
+            'label' => /** @Desc("Days before a user is notified about expiration") */ 'field_definition.ezuser.password_ttl_warning',
             'constraints' => [
                 new Range(['min' => 0, 'max' => null]),
             ],
@@ -85,7 +85,7 @@ final class UserAccountFieldValueFormMapper implements FieldDefinitionFormMapper
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }

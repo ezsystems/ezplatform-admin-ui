@@ -22,7 +22,7 @@ class RelationListFormMapper extends AbstractRelationFormMapper
             ->add('selectionDefaultLocation', LocationType::class, [
                 'required' => false,
                 'property_path' => 'fieldSettings[selectionDefaultLocation]',
-                'label' => 'field_definition.ezobjectrelationlist.selection_default_location',
+                'label' => /** @Desc("Default location") */ 'field_definition.ezobjectrelationlist.selection_default_location',
                 'disabled' => $isTranslation,
             ])
             ->add('selectionContentTypes', ChoiceType::class, [
@@ -31,7 +31,7 @@ class RelationListFormMapper extends AbstractRelationFormMapper
                 'multiple' => true,
                 'required' => false,
                 'property_path' => 'fieldSettings[selectionContentTypes]',
-                'label' => 'field_definition.ezobjectrelationlist.selection_content_types',
+                'label' => /** @Desc("Allowed content types") */ 'field_definition.ezobjectrelationlist.selection_content_types',
                 'disabled' => $isTranslation,
             ])
             ->add('selectionLimit', IntegerType::class, [
@@ -50,7 +50,7 @@ class RelationListFormMapper extends AbstractRelationFormMapper
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'ezplatform_content_forms_content_type',
+                'translation_domain' => 'content_type',
             ]);
     }
 }
