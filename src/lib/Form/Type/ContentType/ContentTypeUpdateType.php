@@ -90,26 +90,26 @@ class ContentTypeUpdateType extends AbstractType
                 'disabled' => $isTranslation,
             ])
             ->add('defaultSortField', SortFieldChoiceType::class, [
-                'label' => /** @Desc("Default field for sorting children") */ 'content_type.default_sort_field',
+                'label' => /** @Desc("Sort children by default by:") */ 'content_type.default_sort_field',
                 'disabled' => $isTranslation,
             ])
             ->add('defaultSortOrder', SortOrderChoiceType::class, [
-                'label' => /** @Desc("Default sort order") */ 'content_type.default_sort_order',
+                'label' => /** @Desc("Sort children by default in order:") */ 'content_type.default_sort_order',
                 'disabled' => $isTranslation,
             ])
             ->add('defaultAlwaysAvailable', CheckboxType::class, [
                 'required' => false,
-                'label' => /** @Desc("Default content availability") */ 'content_type.default_always_available',
+                'label' => /** @Desc("Make content available even with missing translations") */ 'content_type.default_always_available',
                 'disabled' => $isTranslation,
             ])
             ->add('fieldDefinitionsData', CollectionType::class, [
                 'entry_type' => FieldDefinitionType::class,
                 'entry_options' => ['languageCode' => $options['languageCode'], 'mainLanguageCode' => $options['mainLanguageCode']],
-                'label' => /** @Desc("Content field definitions") */ 'content_type.field_definitions_data',
+                'label' => /** @Desc("Content Field definitions") */ 'content_type.field_definitions_data',
             ])
             ->add('fieldTypeSelection', FieldTypeChoiceType::class, [
                 'mapped' => false,
-                'label' => /** @Desc("Field type selection") */ 'content_type.field_type_selection',
+                'label' => /** @Desc("Field Type selection") */ 'content_type.field_type_selection',
                 'disabled' => $isTranslation,
             ])
             ->add('addFieldDefinition', SubmitType::class, [
@@ -117,7 +117,7 @@ class ContentTypeUpdateType extends AbstractType
                 'disabled' => $isTranslation,
             ])
             ->add('removeFieldDefinition', SubmitType::class, [
-                'label' => /** @Desc("Remove selected field definitions") */ 'content_type.remove_field_definitions',
+                'label' => /** @Desc("Remove selected Field definitions") */ 'content_type.remove_field_definitions',
                 'disabled' => !$hasFieldDefinition || $isTranslation,
             ])
             ->add('saveContentType', SubmitType::class, ['label' => /** @Desc("Apply") */ 'content_type.save'])

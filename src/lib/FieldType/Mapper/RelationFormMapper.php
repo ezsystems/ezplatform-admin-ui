@@ -21,7 +21,7 @@ class RelationFormMapper extends AbstractRelationFormMapper
             ->add('selectionRoot', LocationType::class, [
                 'required' => false,
                 'property_path' => 'fieldSettings[selectionRoot]',
-                'label' => /** @Desc("Add field definition") */ 'field_definition.ezobjectrelation.selection_root',
+                'label' => /** @Desc("Starting Location") */ 'field_definition.ezobjectrelation.selection_root',
             ])
             ->add('selectionContentTypes', ChoiceType::class, [
                 'choices' => $this->getContentTypesHash(),
@@ -29,7 +29,7 @@ class RelationFormMapper extends AbstractRelationFormMapper
                 'multiple' => true,
                 'required' => false,
                 'property_path' => 'fieldSettings[selectionContentTypes]',
-                'label' => /** @Desc("Allowed content types") */ 'field_definition.ezobjectrelation.selection_content_types',
+                'label' => /** @Desc("Allowed Content Types") */ 'field_definition.ezobjectrelation.selection_content_types',
                 'disabled' => $isTranslation,
             ]);
     }

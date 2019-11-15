@@ -37,7 +37,7 @@ class CountryFormMapper implements FieldDefinitionFormMapperInterface
                             'multiple' => true,
                             'expanded' => false,
                             'required' => false,
-                            'label' => /** @Desc("Multiple choice") */ 'field_definition.ezcountry.default_value',
+                            'label' => /** @Desc("Default country") */ 'field_definition.ezcountry.default_value',
                             'disabled' => $isTranslation,
                         ]
                     )

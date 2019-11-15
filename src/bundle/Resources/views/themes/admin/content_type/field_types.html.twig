@@ -128,7 +128,7 @@
             <button
                 data-universaldiscovery-title="{{ "field_definition.ezobjectrelation.selection_root_udw_title"
                 |trans({}, "content_type")
-                |desc("Select a starting location for browsing for relation") }}"
+                |desc("Select where to start browsing for a Relation") }}"
                 class="ez-button-tree pure-button ez-font-icon ez-button ez-relation-pick-root-button btn btn-secondary btn--udw-relation-default-location"
                 data-relation-root-input-selector="#{{ form.selectionRoot.vars.id }}"
                 data-relation-selected-root-name-selector="#{{ form.selectionRoot.vars.id }}-selected-root-name"
@@ -137,7 +137,7 @@
                 {{ is_translation ? 'disabled' : '' }}
             >{{ "field_definition.ezobjectrelation.selection_root_udw_button"
                 |trans({}, "content_type")
-                |desc("Select item") }}</button>
+                |desc("Select starting Location") }}</button>
         </div>
         <div id="{{ form.selectionRoot.vars.id }}-selected-root-name">
             {% if form.selectionRoot.vars.destination_location is not null %}
@@ -160,7 +160,7 @@
             <button
                 data-universaldiscovery-title="{{ "field_definition.ezobjectrelationlist.selection_root_udw_title"
                 |trans({}, "content_type")
-                |desc("Select a starting location for browsing for relations") }}"
+                |desc("Select where to start browsing for Relations") }}"
                 class="ez-button-tree pure-button ez-font-icon ez-button ez-relation-pick-root-button btn btn-secondary btn--udw-relation-default-location"
                 data-relation-root-input-selector="#{{ form.selectionDefaultLocation.vars.id }}"
                 data-relation-selected-root-name-selector="#{{ form.selectionDefaultLocation.vars.id }}-selected-root-name"
@@ -169,7 +169,7 @@
                 {{ is_translation ? 'disabled' : '' }}
             >{{ "field_definition.ezobjectrelationlist.selection_root_udw_button"
                 |trans({}, "content_type")
-                |desc("Select location") }}</button>
+                |desc("Select Location") }}</button>
         </div>
         <div id="{{ form.selectionDefaultLocation.vars.id }}-selected-root-name">
             {% if form.selectionDefaultLocation.vars.destination_location is not null %}

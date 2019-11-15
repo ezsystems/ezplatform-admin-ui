@@ -22,7 +22,7 @@ class RelationListFormMapper extends AbstractRelationFormMapper
             ->add('selectionDefaultLocation', LocationType::class, [
                 'required' => false,
                 'property_path' => 'fieldSettings[selectionDefaultLocation]',
-                'label' => /** @Desc("Default location") */ 'field_definition.ezobjectrelationlist.selection_default_location',
+                'label' => /** @Desc("Default Location") */ 'field_definition.ezobjectrelationlist.selection_default_location',
                 'disabled' => $isTranslation,
             ])
             ->add('selectionContentTypes', ChoiceType::class, [
@@ -31,7 +31,7 @@ class RelationListFormMapper extends AbstractRelationFormMapper
                 'multiple' => true,
                 'required' => false,
                 'property_path' => 'fieldSettings[selectionContentTypes]',
-                'label' => /** @Desc("Allowed content types") */ 'field_definition.ezobjectrelationlist.selection_content_types',
+                'label' => /** @Desc("Allowed Content Types") */ 'field_definition.ezobjectrelationlist.selection_content_types',
                 'disabled' => $isTranslation,
             ])
             ->add('selectionLimit', IntegerType::class, [

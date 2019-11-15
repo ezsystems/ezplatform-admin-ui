@@ -25,8 +25,8 @@ class SortingTranslationExtractor implements ExtractorInterface
         3 => 'Modification date',
         4 => 'Section',
         5 => 'Location depth',
-        6 => 'ContentType identifier',
-        7 => 'ContentType name',
+        6 => 'Content Type identifier',
+        7 => 'Content Type name',
         8 => 'Location priority',
         9 => 'Content name',
     ];
