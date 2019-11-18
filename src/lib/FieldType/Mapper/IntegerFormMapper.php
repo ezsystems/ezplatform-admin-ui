@@ -37,7 +37,7 @@ class IntegerFormMapper implements FieldDefinitionFormMapperInterface
                 'minValue', IntegerType::class, [
                     'required' => false,
                     'property_path' => 'validatorConfiguration[IntegerValueValidator][minIntegerValue]',
-                    'label' => 'field_definition.ezinteger.min_value',
+                    'label' => /** @Desc("Minimum value") */ 'field_definition.ezinteger.min_value',
                     'disabled' => $isTranslation,
                 ]
             )
@@ -45,7 +45,7 @@ class IntegerFormMapper implements FieldDefinitionFormMapperInterface
                 'maxValue', IntegerType::class, [
                     'required' => false,
                     'property_path' => 'validatorConfiguration[IntegerValueValidator][maxIntegerValue]',
-                    'label' => 'field_definition.ezinteger.max_value',
+                    'label' => /** @Desc("Maximum value") */ 'field_definition.ezinteger.max_value',
                     'disabled' => $isTranslation,
                 ]
             )

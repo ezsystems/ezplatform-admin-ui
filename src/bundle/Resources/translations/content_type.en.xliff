@@ -47,13 +47,13 @@
         <note>key: content_type.content_type</note>
       </trans-unit>
       <trans-unit id="529a1012c7fe5ca6fafdb5d070ac8ececfe94af6" resname="content_type.create">
-        <source>Create a content type</source>
-        <target state="new">Create a content type</target>
+        <source>Create a Content Type</source>
+        <target state="new">Create a Content Type</target>
         <note>key: content_type.create</note>
       </trans-unit>
       <trans-unit id="7b64ebcf792d888de957eaee1c3734c97c80db98" resname="content_type.default_always_available">
-        <source>Default content availability</source>
-        <target state="new">Default content availability</target>
+        <source>Make content available even with missing translations</source>
+        <target state="new">Make content available even with missing translations</target>
         <note>key: content_type.default_always_available</note>
       </trans-unit>
       <trans-unit id="693f9ade0c2bb6a7c19b6f9b818d96aa23f1e013" resname="content_type.default_availability">
@@ -87,13 +87,13 @@
         <note>key: content_type.default_sort</note>
       </trans-unit>
       <trans-unit id="b29f5d9c32e10776ec9fd36c35c4aefc96732cb2" resname="content_type.default_sort_field">
-        <source>Default field for sorting children</source>
-        <target state="new">Default field for sorting children</target>
+        <source>Sort children by default by:</source>
+        <target state="new">Sort children by default by:</target>
         <note>key: content_type.default_sort_field</note>
       </trans-unit>
       <trans-unit id="7a67ffefca1339a9e4c5224d773378c2e5f6f378" resname="content_type.default_sort_order">
-        <source>Default sort order</source>
-        <target state="new">Default sort order</target>
+        <source>Sort children by default in order:</source>
+        <target state="new">Sort children by default in order:</target>
         <note>key: content_type.default_sort_order</note>
       </trans-unit>
       <trans-unit id="be2f64eb4557a3af16a2f32f5e0185c591d3ca8f" resname="content_type.delete">
@@ -127,13 +127,13 @@
         <note>key: content_type.field_definitions.modal.message</note>
       </trans-unit>
       <trans-unit id="2aecf6f88fd1ee89037907b8743d5873879a0590" resname="content_type.field_definitions_data">
-        <source>Content field definitions</source>
-        <target state="new">Content field definitions</target>
+        <source>Content Field definitions</source>
+        <target state="new">Content Field definitions</target>
         <note>key: content_type.field_definitions_data</note>
       </trans-unit>
       <trans-unit id="a43bfd2651eb1f3357e3398286afd5b6e17c101e" resname="content_type.field_type_selection">
-        <source>Field type selection</source>
-        <target state="new">Field type selection</target>
+        <source>Field Type selection</source>
+        <target state="new">Field Type selection</target>
         <note>key: content_type.field_type_selection</note>
       </trans-unit>
       <trans-unit id="8bf6d91a6b0731a38103e04e03f3f9e8bf4459a1" resname="content_type.global_properties">
@@ -192,8 +192,8 @@
         <note>key: content_type.remove_draft</note>
       </trans-unit>
       <trans-unit id="5fa42f2a0ef1fee12efaa4cdb1c35bbed35e9b7e" resname="content_type.remove_field_definitions">
-        <source>Remove selected field definitions</source>
-        <target state="new">Remove selected field definitions</target>
+        <source>Remove selected Field definitions</source>
+        <target state="new">Remove selected Field definitions</target>
         <note>key: content_type.remove_field_definitions</note>
       </trans-unit>
       <trans-unit id="946ba9e49beabdacd143e10e343f852736c081d8" resname="content_type.save">
@@ -227,13 +227,13 @@
         <note>key: content_type.sort_field.5</note>
       </trans-unit>
       <trans-unit id="f75919a228809d6de255e3fd535c4eaaf8789241" resname="content_type.sort_field.6">
-        <source>ContentType identifier</source>
-        <target state="new">ContentType identifier</target>
+        <source>Content Type identifier</source>
+        <target state="new">Content Type identifier</target>
         <note>key: content_type.sort_field.6</note>
       </trans-unit>
       <trans-unit id="f4bd88a45172f3cf7e268c40cfc27b0c5336bc9b" resname="content_type.sort_field.7">
-        <source>ContentType name</source>
-        <target state="new">ContentType name</target>
+        <source>Content Type name</source>
+        <target state="new">Content Type name</target>
         <note>key: content_type.sort_field.7</note>
       </trans-unit>
       <trans-unit id="d605ada5b53c58b7d08df3379cdc8c9ffc619a3f" resname="content_type.sort_field.8">
@@ -547,8 +547,8 @@
         <note>key: field_definition.ezboolean.default_value</note>
       </trans-unit>
       <trans-unit id="3ef6598f8cd7d60095784845bb24852ac531e47c" resname="field_definition.ezcountry.default_value">
-        <source>Multiple choice</source>
-        <target state="new">Multiple choice</target>
+        <source>Default country</source>
+        <target state="new">Default country</target>
         <note>key: field_definition.ezcountry.default_value</note>
       </trans-unit>
       <trans-unit id="027f35cf66e5ea571cc7b600dad0ab5ceea20cd6" resname="field_definition.ezcountry.is_multiple">
@@ -627,13 +627,13 @@
         <note>key: field_definition.ezinteger.default_value</note>
       </trans-unit>
       <trans-unit id="7529d0af266c6893ae1886faf5578cf4d6d768aa" resname="field_definition.ezinteger.max_value">
-        <source>field_definition.ezinteger.max_value</source>
-        <target state="new">field_definition.ezinteger.max_value</target>
+        <source>Maximum value</source>
+        <target state="new">Maximum value</target>
         <note>key: field_definition.ezinteger.max_value</note>
       </trans-unit>
       <trans-unit id="9b1e51f5ebbb28c403c7707252c6ca47e6a0a82c" resname="field_definition.ezinteger.min_value">
-        <source>field_definition.ezinteger.min_value</source>
-        <target state="new">field_definition.ezinteger.min_value</target>
+        <source>Minimum value</source>
+        <target state="new">Minimum value</target>
         <note>key: field_definition.ezinteger.min_value</note>
       </trans-unit>
       <trans-unit id="4afaf19544597331fbc0eb01e75556a312d657ec" resname="field_definition.ezisbn.default_value">
@@ -692,33 +692,33 @@
         <note>key: field_definition.ezmedia.type_windows_media_player</note>
       </trans-unit>
       <trans-unit id="fabc9be57b82439dac2f612b9c2a171eb7ce6e04" resname="field_definition.ezobjectrelation.selection_content_types">
-        <source>Allowed content types</source>
-        <target state="new">Allowed content types</target>
+        <source>Allowed Content Types</source>
+        <target state="new">Allowed Content Types</target>
         <note>key: field_definition.ezobjectrelation.selection_content_types</note>
       </trans-unit>
       <trans-unit id="440d8fe80bb8a07b62f17d843721285b2cf8a4d5" resname="field_definition.ezobjectrelation.selection_root">
-        <source>Add field definition</source>
-        <target state="new">Add field definition</target>
+        <source>Starting Location</source>
+        <target state="new">Starting Location</target>
         <note>key: field_definition.ezobjectrelation.selection_root</note>
       </trans-unit>
       <trans-unit id="e03e262fad0802fdee49aac136644b35450e1eab" resname="field_definition.ezobjectrelation.selection_root_udw_button">
-        <source>Select item</source>
-        <target state="new">Select item</target>
+        <source>Select starting Location</source>
+        <target state="new">Select starting Location</target>
         <note>key: field_definition.ezobjectrelation.selection_root_udw_button</note>
       </trans-unit>
       <trans-unit id="d892163a41d816c03db3c4a04e35550f02169c11" resname="field_definition.ezobjectrelation.selection_root_udw_title">
-        <source>Select a starting location for browsing for relation</source>
-        <target state="new">Select a starting location for browsing for relation</target>
+        <source>Select where to start browsing for a Relation</source>
+        <target state="new">Select where to start browsing for a Relation</target>
         <note>key: field_definition.ezobjectrelation.selection_root_udw_title</note>
       </trans-unit>
       <trans-unit id="7e061dc7c88fe38c11714695d4034f935788efb3" resname="field_definition.ezobjectrelationlist.selection_content_types">
-        <source>Allowed content types</source>
-        <target state="new">Allowed content types</target>
+        <source>Allowed Content Types</source>
+        <target state="new">Allowed Content Types</target>
         <note>key: field_definition.ezobjectrelationlist.selection_content_types</note>
       </trans-unit>
       <trans-unit id="b08d97ea9175eef7352c7e9c5c8ee0516798bdfa" resname="field_definition.ezobjectrelationlist.selection_default_location">
-        <source>Default location</source>
-        <target state="new">Default location</target>
+        <source>Default Location</source>
+        <target state="new">Default Location</target>
         <note>key: field_definition.ezobjectrelationlist.selection_default_location</note>
       </trans-unit>
       <trans-unit id="14274feead6c1e1a98261c8df42d6e2e2210cb6f" resname="field_definition.ezobjectrelationlist.selection_limit">
@@ -727,13 +727,13 @@
         <note>key: field_definition.ezobjectrelationlist.selection_limit</note>
       </trans-unit>
       <trans-unit id="1592c36df8d445c3154d1f639027f97a90739856" resname="field_definition.ezobjectrelationlist.selection_root_udw_button">
-        <source>Select location</source>
-        <target state="new">Select location</target>
+        <source>Select Location</source>
+        <target state="new">Select Location</target>
         <note>key: field_definition.ezobjectrelationlist.selection_root_udw_button</note>
       </trans-unit>
       <trans-unit id="17d8f3e8bbd5b5f0f5b4b02ddaeaf2af82b0d222" resname="field_definition.ezobjectrelationlist.selection_root_udw_title">
-        <source>Select a starting location for browsing for relations</source>
-        <target state="new">Select a starting location for browsing for relations</target>
+        <source>Select where to start browsing for Relations</source>
+        <target state="new">Select where to start browsing for Relations</target>
         <note>key: field_definition.ezobjectrelationlist.selection_root_udw_title</note>
       </trans-unit>
       <trans-unit id="14a95e986cd6b94301e0f44fd5ef2d5e7cdf90a4" resname="field_definition.ezselection.add_option">

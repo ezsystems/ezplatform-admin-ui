@@ -24,8 +24,8 @@ class ContentEditTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(/** @Desc("Preview") */'preview', SubmitType::class, [
-            'label' => 'preview',
+        $builder->add('preview', SubmitType::class, [
+            'label' => /** @Desc("Preview") */ 'preview',
             'attr' => ['hidden' => true],
             'translation_domain' => 'content_preview',
         ]);
