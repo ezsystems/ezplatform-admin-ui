@@ -15,6 +15,7 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use EzSystems\EzPlatformContentForms\Content\View\ContentTypeValueView;
 
 /**
  * {@inheritdoc}
