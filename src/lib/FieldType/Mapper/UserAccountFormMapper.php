@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints\Range;
 /**
  * Maps a user FieldType.
  */
-final class UserAccountFieldValueFormMapper implements FieldDefinitionFormMapperInterface
+final class UserAccountFormMapper implements FieldDefinitionFormMapperInterface
 {
     /**
      * {@inheritdoc}
@@ -28,22 +28,27 @@ final class UserAccountFieldValueFormMapper implements FieldDefinitionFormMapper
 
         $fieldDefinitionForm->add('requireAtLeastOneUpperCaseCharacter', PasswordConstraintCheckboxType::class, [
             'property_path' => $validatorPropertyPathPrefix . '[requireAtLeastOneUpperCaseCharacter]',
+            'label' => /** @Desc("Password must contain at least one uppercase letter") */ 'field_definition.ezuser.require_at_least_one_upper_case_character',
         ]);
 
         $fieldDefinitionForm->add('requireAtLeastOneLowerCaseCharacter', PasswordConstraintCheckboxType::class, [
             'property_path' => $validatorPropertyPathPrefix . '[requireAtLeastOneLowerCaseCharacter]',
+            'label' => /** @Desc("Password must contain at least one lowercase letter") */ 'field_definition.ezuser.require_at_least_one_lower_case_character',
         ]);
 
         $fieldDefinitionForm->add('requireAtLeastOneNumericCharacter', PasswordConstraintCheckboxType::class, [
             'property_path' => $validatorPropertyPathPrefix . '[requireAtLeastOneNumericCharacter]',
+            'label' => /** @Desc("Password must contain at least one number") */ 'field_definition.ezuser.require_at_least_one_numeric_character',
         ]);
 
         $fieldDefinitionForm->add('requireAtLeastOneNonAlphanumericCharacter', PasswordConstraintCheckboxType::class, [
             'property_path' => $validatorPropertyPathPrefix . '[requireAtLeastOneNonAlphanumericCharacter]',
+            'label' => /** @Desc("Password must contain at least one non-alphanumeric character") */ 'field_definition.ezuser.require_at_least_one_non_alphanumeric_character',
         ]);
 
         $fieldDefinitionForm->add('requireNewPassword', PasswordConstraintCheckboxType::class, [
             'property_path' => $validatorPropertyPathPrefix . '[requireNewPassword]',
+            'label' => /** @Desc("Prevent reusing old password") */ 'field_definition.ezuser.require_new_password',
         ]);
 
         $fieldDefinitionForm->add('minLength', IntegerType::class, [

@@ -89,6 +89,6 @@ services:
         tags:
             - { name: ezplatform.field_type.form_mapper.definition, fieldType: eztime }
 
-    EzSystems\EzPlatformAdminUi\FieldType\Mapper\UserAccountFieldValueFormMapper:
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\UserAccountFormMapper:
         tags:
             - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezuser }

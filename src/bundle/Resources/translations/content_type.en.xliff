@@ -811,6 +811,31 @@
         <target state="new">Days before a user is notified about expiration</target>
         <note>key: field_definition.ezuser.password_ttl_warning</note>
       </trans-unit>
+      <trans-unit id="98c42f6735c213cd7c7580fdcc918aeec57920da" resname="field_definition.ezuser.require_at_least_one_lower_case_character">
+        <source>Password must contain at least one lowercase letter</source>
+        <target state="new">Password must contain at least one lowercase letter</target>
+        <note>key: field_definition.ezuser.require_at_least_one_lower_case_character</note>
+      </trans-unit>
+      <trans-unit id="d694dab8e90b1f2b1a633c0f6ba200e66c18ce02" resname="field_definition.ezuser.require_at_least_one_non_alphanumeric_character">
+        <source>Password must contain at least one non-alphanumeric character</source>
+        <target state="new">Password must contain at least one non-alphanumeric character</target>
+        <note>key: field_definition.ezuser.require_at_least_one_non_alphanumeric_character</note>
+      </trans-unit>
+      <trans-unit id="26cb6ab7ae7e190a9d8d8b0411512b531c8c42ff" resname="field_definition.ezuser.require_at_least_one_numeric_character">
+        <source>Password must contain at least one number</source>
+        <target state="new">Password must contain at least one number</target>
+        <note>key: field_definition.ezuser.require_at_least_one_numeric_character</note>
+      </trans-unit>
+      <trans-unit id="5bac176749950e52e2499c099cc6fd83333b60df" resname="field_definition.ezuser.require_at_least_one_upper_case_character">
+        <source>Password must contain at least one uppercase letter</source>
+        <target state="new">Password must contain at least one uppercase letter</target>
+        <note>key: field_definition.ezuser.require_at_least_one_upper_case_character</note>
+      </trans-unit>
+      <trans-unit id="fdf4c879ef3e13c5cba9292d388a846fd07d6fc5" resname="field_definition.ezuser.require_new_password">
+        <source>Prevent reusing old password</source>
+        <target state="new">Prevent reusing old password</target>
+        <note>key: field_definition.ezuser.require_new_password</note>
+      </trans-unit>
       <trans-unit id="92d9243bb9fac540233dc376b41a3bcd41615ccc" resname="field_definition.field_group">
         <source>Category</source>
         <target state="new">Category</target>
