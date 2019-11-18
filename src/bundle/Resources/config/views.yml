@@ -44,6 +44,18 @@ system:
                     params:
                         viewbaseLayout: '@ezdesign/layout.html.twig'
 
+        relation_view:
+            full:
+                unauthorized_exception:
+                    controller: 'EzPlatformAdminUiBundle:ContentView:relationView'
+                    template: '@ezdesign/content/relation_unauthorized.html.twig'
+                    match:
+                        \EzSystems\EzPlatformAdminUi\View\Matcher\APIException: 'eZ\Publish\API\Repository\Exceptions\UnauthorizedException'
+                default:
+                    controller: 'EzPlatformAdminUiBundle:ContentView:relationView'
+                    template: '@ezdesign/content/relation.html.twig'
+                    match: true
+
         user_settings_update_view:
             full:
                 ezplatform_admin_ui_datetime_format:

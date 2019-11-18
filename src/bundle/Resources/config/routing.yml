@@ -445,6 +445,14 @@ ezplatform.location.trash_with_asset:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location\TrashLocationWithAsset:trash'
 
+# LocationView
+
+ezplatform.relation:
+    path: /relation/{contentId}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentView:relationView'
+
 # LocationView / Translation tab
 
 ezplatform.translation.add:

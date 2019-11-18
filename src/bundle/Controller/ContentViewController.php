@@ -45,6 +45,7 @@ use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsContainer;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
+use EzSystems\EzPlatformAdminUi\View\RelationView;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -181,6 +182,22 @@ class ContentViewController extends Controller
         $this->supplyRolePagination($view, $request);
         $this->supplyPolicyPagination($view, $request);
         $this->supplyIsLocationBookmarked($view);
+
+        return $view;
+    }
+
+    public function relationViewAction(RelationView $view): RelationView
+    {
+        // We should not cache ContentView because we use forms with CSRF tokens in template
+        // JIRA ref: https://jira.ez.no/browse/EZP-28190
+        $view->setCacheEnabled(false);
+
+        $view->addParameters([
+            'content' => $view->getContent(),
+            'location' => $view->getLocation(),
+            'contentType' => $view->getContentType(),
+            'contentId' => $view->getContentId(),
+        ]);
 
         return $view;
     }

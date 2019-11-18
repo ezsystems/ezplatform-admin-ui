@@ -55,13 +55,19 @@
             </thead>
             <tbody class="ez-relations__list" data-limit="{{ limit }}" data-default-location="{{ default_location }}" data-allowed-content-types="{{ allowed_content_type_identifiers|join(',') }}">
             {% for relation in relations %}
-                <tr class="ez-relations__item" data-content-id="{{ relation.contentInfo.id }}">
-                    <td><input type="checkbox" value="{{ relation.contentInfo.id }}" /></td>
-                    <td class="ez-relations__item-name">{{ relation.contentInfo.name }}</td>
-                    <td>{{ relation.contentType.name }}</td>
-                    <td>{{ relation.contentInfo.publishedDate|ez_short_datetime }}</td>
-                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="{{ loop.index }}" /></td>
-                </tr>
+                {% if relation.contentInfo is not null and relation.contentType is not null %}
+                    <tr class="ez-relations__item" data-content-id="{{ relation.contentInfo.id }}">
+                        <td><input type="checkbox" value="{{ relation.contentInfo.id }}" /></td>
+                        <td class="ez-relations__item-name">{{ relation.contentInfo.name }}</td>
+                        <td>{{ relation.contentType.name }}</td>
+                        <td>{{ relation.contentInfo.publishedDate|ez_short_datetime }}</td>
+                        <td colspan="2"><input class="ez-relations__order-input" type="number" value="{{ loop.index }}" /></td>
+                    </tr>
+                {% elseif relation.unauthorized %}
+                    {% include '@ezdesign/content/relation_unauthorized.html.twig' with {
+                        contentId: relation.contentId
+                    } %}
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>

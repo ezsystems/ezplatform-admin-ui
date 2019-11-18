@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
 
 use EzSystems\EzPlatformAdminUi\View\Builder\ContentTranslateViewBuilder;
+use EzSystems\EzPlatformAdminUi\View\Builder\RelationViewBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -19,6 +20,7 @@ class ViewBuilderRegistryPass implements CompilerPassInterface
 {
     public const VIEW_BUILDER_REGISTRY = 'ezpublish.view_builder.registry';
     public const VIEW_BUILDER_CONTENT_TRANSLATE = ContentTranslateViewBuilder::class;
+    public const VIEW_BUILDER_RELATION = RelationViewBuilder::class;
 
     /**
      * {@inheritdoc}
@@ -28,19 +30,21 @@ class ViewBuilderRegistryPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (
-            !$container->hasDefinition(self::VIEW_BUILDER_REGISTRY)
-            || !$container->hasDefinition(self::VIEW_BUILDER_CONTENT_TRANSLATE)
-        ) {
+        if (!$container->hasDefinition(self::VIEW_BUILDER_REGISTRY)) {
             return;
         }
 
-        $registry = $container->findDefinition(self::VIEW_BUILDER_REGISTRY);
+        $viewBuilders = [];
+        if ($container->hasDefinition(self::VIEW_BUILDER_CONTENT_TRANSLATE)) {
+            $viewBuilders[] = $container->getDefinition(self::VIEW_BUILDER_CONTENT_TRANSLATE);
+        }
+        if ($container->hasDefinition(self::VIEW_BUILDER_RELATION)) {
+            $viewBuilders[] = $container->getDefinition(self::VIEW_BUILDER_RELATION);
+        }
 
-        $viewBuilders = [
-            $container->getDefinition(self::VIEW_BUILDER_CONTENT_TRANSLATE),
-        ];
-
-        $registry->addMethodCall('addToRegistry', [$viewBuilders]);
+        if ($viewBuilders) {
+            $registry = $container->findDefinition(self::VIEW_BUILDER_REGISTRY);
+            $registry->addMethodCall('addToRegistry', [$viewBuilders]);
+        }
     }
 }
