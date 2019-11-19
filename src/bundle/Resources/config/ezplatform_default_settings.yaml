@@ -48,6 +48,8 @@ parameters:
 
     # Views
     ezsettings.default.content_translate_view: {}
+    ezsettings.default.limitation_value_templates:
+        - { template: '@@ezdesign/limitation/limitation_values.html.twig', priority: 0 }
     ezsettings.admin_group.user_settings.templates.list: "@@ezdesign/account/settings/list.html.twig"
     ezsettings.admin_group.user_settings.templates.update: "@@ezdesign/account/settings/update.html.twig"
     ezsettings.admin_group.user_change_password.templates.form: "@@ezdesign/account/change_password/index.html.twig"
@@ -58,6 +60,9 @@ parameters:
     ezsettings.admin_group.user_reset_password.templates.form: "@@ezdesign/account/reset_password/index.html.twig"
     ezsettings.admin_group.user_reset_password.templates.invalid_link: "@@ezdesign/account/reset_password/invalid_link_page.html.twig"
     ezsettings.admin_group.user_reset_password.templates.success: "@@ezdesign/account/reset_password/confirmation_page.html.twig"
+    ezsettings.admin_group.user_edit.templates.update: '@@ezdesign/user/edit.html.twig'
+    ezsettings.admin_group.user_edit.templates.create: '@@ezdesign/user/create.html.twig'
+
 
     # Content Tree Module
     ezsettings.admin_group.content_tree_module.load_more_limit: 30

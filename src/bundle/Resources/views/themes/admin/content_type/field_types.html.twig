@@ -1,12 +1,12 @@
 {# Template blocks to be used for fieldDefinition edition #}
 {# Block naming convention is <fieldTypeIdentifier>_field_definition_edit #}
 {# Following variables are passed:
- # - \EzSystems\RepositoryForms\Data\FieldDefinitionData data Data object for current fieldDefinition.
+ # - \EzSystems\EzPlatformContentForms\Data\FieldDefinitionData data Data object for current fieldDefinition.
  # - \Symfony\Component\Form\FormView form Field definition form.
  # - string languageCode
  #}
 
-{# @var data \EzSystems\RepositoryForms\Data\FieldDefinitionData #}
+{# @var data \EzSystems\EzPlatformContentForms\Data\FieldDefinitionData #}
 {# @var form \Symfony\Component\Form\FormView #}
 {% block ezauthor_field_definition_edit %}
     <div class="ezauthor-settings default-type{% if group_class is not empty %} {{ group_class }}{% endif %}">
@@ -127,8 +127,8 @@
         <div class="mt-1">
             <button
                 data-universaldiscovery-title="{{ "field_definition.ezobjectrelation.selection_root_udw_title"
-                |trans({}, "ezrepoforms_content_type")
-                |desc("Select a starting location for browsing for relation") }}"
+                |trans({}, "content_type")
+                |desc("Select where to start browsing for a Relation") }}"
                 class="ez-button-tree pure-button ez-font-icon ez-button ez-relation-pick-root-button btn btn-secondary btn--udw-relation-default-location"
                 data-relation-root-input-selector="#{{ form.selectionRoot.vars.id }}"
                 data-relation-selected-root-name-selector="#{{ form.selectionRoot.vars.id }}-selected-root-name"
@@ -136,8 +136,8 @@
                 data-udw-config="{{ ez_udw_config('single', {}) }}"
                 {{ is_translation ? 'disabled' : '' }}
             >{{ "field_definition.ezobjectrelation.selection_root_udw_button"
-                |trans({}, "ezrepoforms_content_type")
-                |desc("Select item") }}</button>
+                |trans({}, "content_type")
+                |desc("Select starting Location") }}</button>
         </div>
         <div id="{{ form.selectionRoot.vars.id }}-selected-root-name">
             {% if form.selectionRoot.vars.destination_location is not null %}
@@ -159,8 +159,8 @@
         <div class="mt-1">
             <button
                 data-universaldiscovery-title="{{ "field_definition.ezobjectrelationlist.selection_root_udw_title"
-                |trans({}, "ezrepoforms_content_type")
-                |desc("Select a starting location for browsing for relations") }}"
+                |trans({}, "content_type")
+                |desc("Select where to start browsing for Relations") }}"
                 class="ez-button-tree pure-button ez-font-icon ez-button ez-relation-pick-root-button btn btn-secondary btn--udw-relation-default-location"
                 data-relation-root-input-selector="#{{ form.selectionDefaultLocation.vars.id }}"
                 data-relation-selected-root-name-selector="#{{ form.selectionDefaultLocation.vars.id }}-selected-root-name"
@@ -168,8 +168,8 @@
                 data-udw-config="{{ ez_udw_config('single_container', {}) }}"
                 {{ is_translation ? 'disabled' : '' }}
             >{{ "field_definition.ezobjectrelationlist.selection_root_udw_button"
-                |trans({}, "ezrepoforms_content_type")
-                |desc("Select location") }}</button>
+                |trans({}, "content_type")
+                |desc("Select Location") }}</button>
         </div>
         <div id="{{ form.selectionDefaultLocation.vars.id }}-selected-root-name">
             {% if form.selectionDefaultLocation.vars.destination_location is not null %}
@@ -229,13 +229,13 @@
             <button
                 type="button"
                 class="ezselection-settings-option-add ez-font-icon ez-button btn btn-secondary ez-button-add pure-button">
-                {{ "field_definition.ezselection.add_option"|trans({}, "ezrepoforms_content_type")|desc("Add an option") }}
+                {{ "field_definition.ezselection.add_option"|trans({}, "content_type")|desc("Add an option") }}
             </button>
             <button
                 type="button"
                 class="ezselection-settings-option-remove ez-font-icon ez-button btn btn-danger ez-button-delete pure-button"
                 disabled>
-                {{ "field_definition.ezselection.remove_selected_options"|trans({}, "ezrepoforms_content_type")|desc("Remove selected options") }}
+                {{ "field_definition.ezselection.remove_selected_options"|trans({}, "content_type")|desc("Remove selected options") }}
             </button>
         </div>
     </div>

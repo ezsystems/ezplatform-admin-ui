@@ -14,3 +14,42 @@ services:
     EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationIsWithinCopySubtreeLimitValidator:
         arguments:
             $copySubtreeLimit: '$subtree_operations.copy_subtree.limit$'
+
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueContentTypeIdentifierValidator:
+        arguments: ["@ezpublish.api.service.content_type"]
+        tags:
+            - { name: validator.constraint_validator, alias: ezplatform.content_forms.validator.unique_content_type_identifier }
+
+    ezplatform.content_forms.validator.field_type.abstract:
+        class: EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldTypeValidator
+        arguments: ["@ezpublish.api.service.field_type"]
+        abstract: true
+        autoconfigure: false
+
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\ValidatorConfigurationValidator:
+        parent: ezplatform.content_forms.validator.field_type.abstract
+        autowire: true
+        autoconfigure: false
+        public: false
+        tags:
+            - { name: validator.constraint_validator, alias: ezplatform.content_forms.validator.validator_configuration }
+
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldSettingsValidator:
+        parent: ezplatform.content_forms.validator.field_type.abstract
+        autowire: true
+        autoconfigure: false
+        public: false
+        tags:
+            - { name: validator.constraint_validator, alias: ezplatform.content_forms.validator.field_settings }
+
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueURLValidator:
+        arguments:
+            - '@ezpublish.api.service.url'
+        tags:
+            - { name: validator.constraint_validator, alias: ezplatform.content_forms.validator.unique_url }
+
+    EzSystems\EzPlatformAdminUi\Validator\Constraints\PasswordValidator:
+        arguments:
+            $userService: '@ezpublish.api.service.user'
+        tags:
+            - { name: validator.constraint_validator }

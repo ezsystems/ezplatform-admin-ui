@@ -17,11 +17,11 @@ services:
     eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList: '@ezpublish.fields_groups.list'
     eZ\Publish\Core\MVC\ConfigResolverInterface: '@ezpublish.config.resolver'
     eZ\Publish\Core\MVC\Symfony\SiteAccess: '@ezpublish.siteaccess'
+    eZ\Publish\API\Repository\FieldTypeService: '@ezpublish.api.service.field_type'
+
 
     # Repository Forms
-    EzSystems\RepositoryForms\Form\Type\Role\LimitationType: '@ezrepoforms.policy.limitation.form'
-    EzSystems\RepositoryForms\EventListener\ViewTemplatesListener: '@ezrepoforms.view_templates_listener'
-    EzSystems\RepositoryForms\Form\ActionDispatcher\ContentDispatcher: '@ezrepoforms.action_dispatcher.content'
+    EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType: '@ezplatform.content_forms.policy.limitation.form'
 
     # Support Tools
     EzSystems\EzSupportToolsBundle\SystemInfo\SystemInfoCollectorRegistry: '@support_tools.system_info.collector_registry'

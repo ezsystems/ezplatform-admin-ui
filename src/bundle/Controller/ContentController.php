@@ -142,14 +142,14 @@ class ContentController extends Controller
                 $parentLocation = $data->getParentLocation();
 
                 if ((new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType)) {
-                    return $this->redirectToRoute('ez_user_create', [
+                    return $this->redirectToRoute('ezplatform.user.create', [
                         'contentTypeIdentifier' => $contentType->identifier,
                         'language' => $language->languageCode,
                         'parentLocationId' => $parentLocation->id,
                     ]);
                 }
 
-                return $this->redirectToRoute('ez_content_create_no_draft', [
+                return $this->redirectToRoute('ezplatform.content.create_no_draft', [
                     'contentTypeIdentifier' => $contentType->identifier,
                     'language' => $language->languageCode,
                     'parentLocationId' => $parentLocation->id,
@@ -192,7 +192,7 @@ class ContentController extends Controller
 
                 $content = $this->contentService->loadContent($contentInfo->id);
                 if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
-                    return $this->redirectToRoute('ez_user_update', [
+                    return $this->redirectToRoute('ezplatform.user.update', [
                         'contentId' => $contentInfo->id,
                         'versionNo' => $versionNo,
                         'language' => $language->languageCode,
@@ -212,7 +212,7 @@ class ContentController extends Controller
                     );
                 }
 
-                return $this->redirectToRoute('ez_content_draft_edit', [
+                return $this->redirectToRoute('ezplatform.content.draft.edit', [
                     'contentId' => $contentInfo->id,
                     'versionNo' => $versionNo,
                     'language' => $language->languageCode,

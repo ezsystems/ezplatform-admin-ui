@@ -40,7 +40,7 @@ class PolicyDeleteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'translation_domain' => 'ezrepoforms_role',
+            'translation_domain' => 'ezplatform_content_forms_role',
             'data_class' => PolicyDeleteData::class,
         ]);
     }

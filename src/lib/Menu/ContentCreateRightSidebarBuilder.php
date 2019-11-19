@@ -110,15 +110,15 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
 
         $publishAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,
-            'data-click' => '#ezrepoforms_content_edit_publish',
+            'data-click' => '#ezplatform_content_forms_content_edit_publish',
         ];
         $createAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,
-            'data-click' => '#ezrepoforms_content_edit_saveDraft',
+            'data-click' => '#ezplatform_content_forms_content_edit_saveDraft',
         ];
         $previewAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,
-            'data-click' => '#ezrepoforms_content_edit_preview',
+            'data-click' => '#ezplatform_content_forms_content_edit_preview',
         ];
 
         $menu->setChildren([
@@ -163,7 +163,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                 [
                     'attributes' => [
                         'class' => self::BTN_TRIGGER_CLASS,
-                        'data-click' => '#ezrepoforms_content_edit_cancel',
+                        'data-click' => '#ezplatform_content_forms_content_edit_cancel',
                     ],
                     'extras' => [
                         'icon' => 'circle-close',

@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use EzSystems\RepositoryForms\Form\Type\Role\LimitationType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType;
 
 class PolicyCreateWithLimitationType extends AbstractType
 {
@@ -64,7 +64,7 @@ class PolicyCreateWithLimitationType extends AbstractType
 
                 $form->add('limitations', CollectionType::class, [
                     'label' => false,
-                    'translation_domain' => 'ezrepoforms_role',
+                    'translation_domain' => 'ezplatform_content_forms_role',
                     'entry_type' => LimitationType::class,
                     'data' => $this->generateLimitationList(
                         $data->getLimitations(),
@@ -81,7 +81,7 @@ class PolicyCreateWithLimitationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'translation_domain' => 'ezrepoforms_role',
+            'translation_domain' => 'ezplatform_content_forms_role',
             'data_class' => PolicyCreateData::class,
         ]);
     }

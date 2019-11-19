@@ -569,6 +569,34 @@ ezplatform.content.check_edit_permission:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentController::checkEditPermissionAction'
         languageCode: ~
 
+ezplatform.content.create_no_draft:
+    path: /content/create/nodraft/{contentTypeIdentifier}/{language}/{parentLocationId}
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::createWithoutDraftAction'
+    options:
+        expose: true
+    # @todo rename language to languageCode in 3.0
+
+ezplatform.content.draft.edit:
+    path: /content/edit/draft/{contentId}/{versionNo}/{language}/{locationId}
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::editVersionDraftAction'
+        language: ~ # @todo rename to languageCode in 3.0
+        locationId: ~
+    options:
+        expose: true
+
+ezplatform.content.draft.create:
+    path: /content/create/draft/{contentId}/{fromVersionNo}/{fromLanguage}/{toLanguage}
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::createContentDraftAction'
+        contentId: null
+        fromVersionNo: null
+        fromLanguage: null
+        toLanguage: null
+    options:
+        expose: true
+
 #
 # Search
 #
@@ -611,6 +639,18 @@ ezplatform.user.delete:
     methods: ['POST']
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\User\UserDeleteController::userDeleteAction'
+
+ezplatform.user.create:
+    path: /user/create/{contentTypeIdentifier}/{language}/{parentLocationId}
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\User\UserController::createAction'
+
+ezplatform.user.update:
+    path: /user/update/{contentId}/{versionNo}/{language}
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\User\UserController::editAction'
+    options:
+        expose: true
 
 #
 # Custom URL alias

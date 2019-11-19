@@ -1,0 +1,94 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcherInterface: '@EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcher'
+
+    EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcher: ~
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\AbstractRelationFormMapper:
+        abstract: true
+        arguments:
+            $contentTypeService: '@ezpublish.api.service.content_type'
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\AuthorFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezauthor }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\BinaryFileFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezbinaryfile }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\CheckboxFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezboolean }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\SelectionFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezselection }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\CountryFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezcountry }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\DateFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezdate }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\DateTimeFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezdatetime }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\FloatFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezfloat }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\ImageFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezimage }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\IntegerFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezinteger }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\ISBNFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezisbn }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\MediaFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezmedia }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\RelationFormMapper:
+        parent: EzSystems\EzPlatformAdminUi\FieldType\Mapper\AbstractRelationFormMapper
+        autowire: true
+        autoconfigure: false
+        public: false
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezobjectrelation }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\RelationListFormMapper:
+        parent: EzSystems\EzPlatformAdminUi\FieldType\Mapper\AbstractRelationFormMapper
+        autowire: true
+        autoconfigure: false
+        public: false
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezobjectrelationlist }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\TextLineFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezstring }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\TextBlockFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: eztext }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\TimeFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: eztime }
+
+    EzSystems\EzPlatformAdminUi\FieldType\Mapper\UserAccountFormMapper:
+        tags:
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: ezuser }

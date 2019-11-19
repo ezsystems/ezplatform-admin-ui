@@ -14,6 +14,16 @@ services:
         tags:
             - { name: jms_translation.extractor, alias: ez_policy }
 
+    EzSystems\EzPlatformAdminUi\Translation\Extractor\SortingTranslationExtractor:
+        tags:
+            - { name: jms_translation.extractor, alias: ez_location_sorting }
+
+    EzSystems\EzPlatformAdminUi\Translation\Extractor\LimitationTranslationExtractor:
+        arguments:
+            - '%ezpublish.api.role.policy_map%'
+        tags:
+            - { name: jms_translation.extractor, alias: ez_policy_limitation }
+
     EzSystems\EzPlatformAdminUi\Translation\Extractor\NotificationTranslationExtractor:
         parent: jms_translation.extractor.file.default_php_extractor
         autowire: false

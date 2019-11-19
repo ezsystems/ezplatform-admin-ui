@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content;
 
-use EzSystems\RepositoryForms\Form\Type\Content\ContentEditType;
+use EzSystems\EzPlatformContentForms\Form\Type\Content\ContentEditType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,8 +24,8 @@ class ContentEditTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(/** @Desc("Preview") */'preview', SubmitType::class, [
-            'label' => 'preview',
+        $builder->add('preview', SubmitType::class, [
+            'label' => /** @Desc("Preview") */ 'preview',
             'attr' => ['hidden' => true],
             'translation_domain' => 'content_preview',
         ]);

@@ -52,7 +52,7 @@ class UserEditRightSidebarBuilder extends AbstractBuilder implements Translation
                 [
                     'attributes' => [
                         'class' => 'btn--trigger',
-                        'data-click' => '#ezrepoforms_user_update_update',
+                        'data-click' => '#ezplatform_content_forms_user_update_update',
                     ],
                     'extras' => ['icon' => 'publish'],
                 ]
@@ -62,7 +62,7 @@ class UserEditRightSidebarBuilder extends AbstractBuilder implements Translation
                 [
                     'attributes' => [
                         'class' => 'btn--trigger',
-                        'data-click' => '#ezrepoforms_user_update_cancel',
+                        'data-click' => '#ezplatform_content_forms_user_update_cancel',
                     ],
                     'extras' => ['icon' => 'circle-close'],
                 ]

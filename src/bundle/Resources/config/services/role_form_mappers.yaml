@@ -1,0 +1,223 @@
+parameters:
+    ezplatform.content_forms.limitation_form_mapper.registry.class: EzSystems\EzPlatformAdminUi\Limitation\LimitationFormMapperRegistry
+    ezplatform.content_forms.limitation_value_mapper.registry.class: EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistry
+    ezplatform.content_forms.limitation.form_mapper.null.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\NullLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.siteaccess.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\SiteAccessLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.content_type.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\ContentTypeLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.section.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\SectionLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.object_state.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\ObjectStateLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.language.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\LanguageLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.owner.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\OwnerLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.group.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\GroupLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.parent_depth.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\ParentDepthLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.parent_depth.max_depth: 20
+    ezplatform.content_forms.limitation.form_mapper.subtree.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\SubtreeLimitationMapper
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    ezplatform.content_forms.limitation_form_mapper.registry:
+        class: EzSystems\EzPlatformAdminUi\Limitation\LimitationFormMapperRegistry
+
+    ezplatform.content_forms.limitation_value_mapper.registry:
+        class: EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistry
+
+    ezplatform.content_forms.limitation.form_mapper.multiple_selection:
+        class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\MultipleSelectionBasedMapper
+        abstract: true
+        calls:
+            - [setFormTemplate, ["%ezplatform.content_forms.limitation.multiple_selection.template%"]]
+
+    ezplatform.content_forms.limitation.form_mapper.siteaccess:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.siteaccess.class%"
+        arguments: ["%ezpublish.siteaccess.list%"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: SiteAccess }
+            - { name: ez.limitation.valueMapper, limitationType: SiteAccess }
+
+    ezplatform.content_forms.limitation.form_mapper.null:
+        class: "%ezplatform.content_forms.limitation.form_mapper.null.class%"
+        arguments: ["%ezplatform.content_forms.limitation.null.template%"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: "Null" }
+            - { name: ez.limitation.valueMapper, limitationType: "Null" }
+
+    ezplatform.content_forms.limitation.form_mapper.content_type:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.content_type.class%"
+        arguments: ["@ezpublish.api.service.content_type"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Class }
+            - { name: ez.limitation.valueMapper, limitationType: Class }
+
+    ezplatform.content_forms.limitation.form_mapper.parent_content_type:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.content_type.class%"
+        arguments: ["@ezpublish.api.service.content_type"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: ParentClass }
+            - { name: ez.limitation.valueMapper, limitationType: ParentClass }
+
+    ezplatform.content_forms.limitation.form_mapper.section:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.section.class%"
+        arguments: ["@ezpublish.api.service.section"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Section }
+            - { name: ez.limitation.valueMapper, limitationType: Section }
+
+    ezplatform.content_forms.limitation.form_mapper.new_section:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.section.class%"
+        arguments: ["@ezpublish.api.service.section"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: NewSection }
+            - { name: ez.limitation.valueMapper, limitationType: NewSection }
+
+    ezplatform.content_forms.limitation.form_mapper.object_state:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.object_state.class%"
+        arguments: ["@ezpublish.api.service.object_state"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: State }
+            - { name: ez.limitation.valueMapper, limitationType: State }
+
+    ezplatform.content_forms.limitation.form_mapper.new_object_state:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.object_state.class%"
+        arguments: ["@ezpublish.api.service.object_state"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: NewState }
+            - { name: ez.limitation.valueMapper, limitationType: NewState }
+
+    ezplatform.content_forms.limitation.form_mapper.language:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.language.class%"
+        arguments: ["@ezpublish.api.service.language"]
+        calls:
+            - [setLogger, ['@?logger']]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Language }
+            - { name: ez.limitation.valueMapper, limitationType: Language }
+
+    ezplatform.content_forms.limitation.form_mapper.owner:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.owner.class%"
+        arguments: ["@translator"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Owner }
+            - { name: ez.limitation.valueMapper, limitationType: Owner }
+
+    ezplatform.content_forms.limitation.form_mapper.parent_owner:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.owner.class%"
+        arguments: ["@translator"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: ParentOwner }
+            - { name: ez.limitation.valueMapper, limitationType: ParentOwner }
+
+    ezplatform.content_forms.limitation.form_mapper.group:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.group.class%"
+        arguments: ["@translator"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Group }
+            - { name: ez.limitation.valueMapper, limitationType: Group }
+
+    ezplatform.content_forms.limitation.form_mapper.parent_group:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.group.class%"
+        arguments: ["@translator"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: ParentGroup }
+            - { name: ez.limitation.valueMapper, limitationType: ParentGroup }
+
+    ezplatform.content_forms.limitation.form_mapper.parent_depth:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.parent_depth.class%"
+        arguments: ["%ezplatform.content_forms.limitation.form_mapper.parent_depth.max_depth%"]
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: ParentDepth }
+            - { name: ez.limitation.valueMapper, limitationType: ParentDepth }
+
+    ezplatform.content_forms.limitation.form_mapper.udw_based:
+        class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\UDWBasedMapper
+        arguments:
+            - "@ezpublish.api.service.location"
+            - "@ezpublish.api.service.search"
+        calls:
+            - [setFormTemplate, ["%ezplatform.content_forms.limitation.udw.template%"]]
+
+    ezplatform.content_forms.limitation.form_mapper.location:
+        parent: ezplatform.content_forms.limitation.form_mapper.udw_based
+        autowire: true
+        autoconfigure: false
+        public: false
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Node }
+            - { name: ez.limitation.valueMapper, limitationType: Node }
+
+    ezplatform.content_forms.limitation.form_mapper.subtree:
+        parent: ezplatform.content_forms.limitation.form_mapper.udw_based
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: "%ezplatform.content_forms.limitation.form_mapper.subtree.class%"
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Subtree }
+            - { name: ez.limitation.valueMapper, limitationType: Subtree }
