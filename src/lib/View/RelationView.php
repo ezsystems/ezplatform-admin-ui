@@ -12,6 +12,7 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
+use Exception;
 
 /**
  * {@inheritdoc}
@@ -27,7 +28,7 @@ class RelationView extends BaseView
     /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType|null */
     private $contentType;
 
-    /** @var string|null */
+    /** @var \Exception */
     private $apiException;
 
     /** @var int */
@@ -63,12 +64,12 @@ class RelationView extends BaseView
         return $this->location;
     }
 
-    public function getApiException(): ?string
+    public function getApiException(): ?Exception
     {
         return $this->apiException;
     }
 
-    public function setApiException(?string $apiException): void
+    public function setApiException(?Exception $apiException): void
     {
         $this->apiException = $apiException;
     }

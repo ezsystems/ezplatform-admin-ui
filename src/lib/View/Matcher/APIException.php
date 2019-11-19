@@ -17,15 +17,15 @@ use EzSystems\EzPlatformAdminUi\View\RelationView;
  */
 class APIException implements ViewMatcherInterface
 {
-    /** @var string */
-    private $apiException;
+    /** @var \Exception */
+    private $matchingException;
 
     /**
      * {@inheritdoc}
      */
     public function setMatchingConfig($matchingConfig): void
     {
-        $this->apiException = $matchingConfig;
+        $this->matchingException = $matchingConfig;
     }
 
     /**
@@ -37,6 +37,6 @@ class APIException implements ViewMatcherInterface
             return false;
         }
 
-        return $view->getApiException() === $this->apiException;
+        return get_class($view->getApiException()) === $this->matchingException;
     }
 }

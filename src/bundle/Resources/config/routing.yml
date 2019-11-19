@@ -445,7 +445,7 @@ ezplatform.location.trash_with_asset:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location\TrashLocationWithAsset:trash'
 
-# LocationView
+# RelationView
 
 ezplatform.relation:
     path: /relation/{contentId}
