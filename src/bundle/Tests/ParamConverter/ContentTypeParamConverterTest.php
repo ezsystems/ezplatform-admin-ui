@@ -137,7 +137,7 @@ class ContentTypeParamConverterTest extends AbstractParamConverterTest
         $contentTypeIdentifier = 'test_identifier';
 
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage(sprintf('ContentType %s not found!', $contentTypeIdentifier));
+        $this->expectExceptionMessage(sprintf('Content Type %s not found.', $contentTypeIdentifier));
 
         $this->serviceMock
             ->expects($this->once())

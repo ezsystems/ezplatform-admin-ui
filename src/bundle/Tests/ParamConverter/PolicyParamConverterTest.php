@@ -119,7 +119,7 @@ class PolicyParamConverterTest extends AbstractParamConverterTest
         $policyId = 53;
 
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage(sprintf('Policy %s not found!', $policyId));
+        $this->expectExceptionMessage(sprintf('Policy %s not found.', $policyId));
 
         $valueObject = $this->createMock(Role::class);
         $valueObject->expects(self::once())
