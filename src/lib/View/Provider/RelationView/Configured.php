@@ -14,28 +14,20 @@ use eZ\Publish\Core\MVC\Symfony\View\ViewProvider;
 use EzSystems\EzPlatformAdminUi\View\RelationView;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
 
-/**
- * View provider based on configuration.
- */
 class Configured implements ViewProvider
 {
     /** @var \eZ\Publish\Core\MVC\Symfony\Matcher\MatcherFactoryInterface */
     protected $matcherFactory;
 
-    /**
-     * @param \eZ\Publish\Core\MVC\Symfony\Matcher\MatcherFactoryInterface $matcherFactory
-     */
     public function __construct(MatcherFactoryInterface $matcherFactory)
     {
         $this->matcherFactory = $matcherFactory;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
      */
-    public function getView(View $view)
+    public function getView(View $view): View
     {
         if (($configHash = $this->matcherFactory->match($view)) === null) {
             return null;
@@ -45,12 +37,6 @@ class Configured implements ViewProvider
     }
 
     /**
-     * Builds a RelationView object from $viewConfig.
-     *
-     * @param array $viewConfig
-     *
-     * @return \EzSystems\EzPlatformAdminUi\View\RelationView
-     *
      * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
      */
     protected function buildRelationView(array $viewConfig): RelationView

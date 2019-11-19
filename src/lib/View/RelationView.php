@@ -12,7 +12,6 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
-use Exception;
 
 /**
  * {@inheritdoc}
@@ -27,9 +26,6 @@ class RelationView extends BaseView
 
     /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType|null */
     private $contentType;
-
-    /** @var \Exception */
-    private $apiException;
 
     /** @var int */
     private $contentId;
@@ -62,16 +58,6 @@ class RelationView extends BaseView
     public function getLocation(): ?Location
     {
         return $this->location;
-    }
-
-    public function getApiException(): ?Exception
-    {
-        return $this->apiException;
-    }
-
-    public function setApiException(?Exception $apiException): void
-    {
-        $this->apiException = $apiException;
     }
 
     public function getContentType(): ?ContentType

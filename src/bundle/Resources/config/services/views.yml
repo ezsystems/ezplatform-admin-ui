@@ -32,7 +32,6 @@ services:
     # Relation view
     EzSystems\EzPlatformAdminUi\View\Builder\RelationViewBuilder:
         arguments:
-            $repository: '@ezpublish.api.repository'
             $viewConfigurator: '@ezpublish.view.configurator'
             $viewParametersInjector: '@ezpublish.view.view_parameters.injector.dispatcher'
 
@@ -49,3 +48,7 @@ services:
         calls:
             - [setContainer, ['@service_container']]
             - [setMatchConfig, ['$relation_view$']]
+
+    EzSystems\EzPlatformAdminUi\View\Filter\RelationViewFilter:
+        tags:
+            - { name: kernel.event_subscriber }
