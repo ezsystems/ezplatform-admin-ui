@@ -46,7 +46,7 @@ class RelationViewBuilder implements ViewBuilder
     {
         if (!isset($parameters['contentId'])) {
             throw new InvalidArgumentException(
-                'Content',
+                'ContentId',
                 'No content could be loaded from parameters'
             );
         }
