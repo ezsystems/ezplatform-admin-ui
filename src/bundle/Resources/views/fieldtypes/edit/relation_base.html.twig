@@ -64,9 +64,11 @@
                         <td colspan="2"><input class="ez-relations__order-input" type="number" value="{{ loop.index }}" /></td>
                     </tr>
                 {% elseif relation.unauthorized %}
-                    {% include '@ezdesign/content/relation_unauthorized.html.twig' with {
-                        contentId: relation.contentId
-                    } %}
+                    <tr>
+                        {% include '@ezdesign/content/relation_unauthorized.html.twig' with {
+                            contentId: relation.contentId
+                        } %}
+                    </tr>
                 {% endif %}
             {% endfor %}
             </tbody>

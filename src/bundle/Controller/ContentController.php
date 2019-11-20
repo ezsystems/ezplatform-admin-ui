@@ -537,7 +537,6 @@ class ContentController extends Controller
     {
         try {
             $content = $this->contentService->loadContent($contentId);
-            $contentType = $this->contentTypeService->loadContentType($content->contentInfo->contentTypeId);
         } catch (UnauthorizedException $exception) {
             return $this->render('@ezdesign/content/relation_unauthorized.html.twig', [
                 'contentId' => $contentId,
@@ -546,7 +545,7 @@ class ContentController extends Controller
 
         return $this->render('@ezdesign/content/relation.html.twig', [
             'content' => $content,
-            'contentType' => $contentType,
+            'contentType' => $content->getContentType(),
         ]);
     }
 
