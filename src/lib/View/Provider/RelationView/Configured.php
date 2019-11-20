@@ -27,7 +27,7 @@ class Configured implements ViewProvider
     /**
      * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
      */
-    public function getView(View $view): View
+    public function getView(View $view): ?View
     {
         if (($configHash = $this->matcherFactory->match($view)) === null) {
             return null;
