@@ -19,8 +19,6 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
-use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUserGroup;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsRoot;
@@ -206,16 +204,6 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $copyLimit,
             $this->searchService
         ))->and((new IsRoot())->not())->isSatisfiedBy($location);
-
-        if ((new ContentHaveAssetRelation($this->contentService))->isSatisfiedBy($content)) {
-            $sendToTrashAttributes['data-target'] = '#trash-with-asset-modal';
-        }
-
-        $hasChildren = (new HasChildren($this->locationService))->isSatisfiedBy($location);
-
-        if ($contentType->isContainer && $hasChildren) {
-            $sendToTrashAttributes['data-target'] = '#trash-container-modal';
-        }
 
         $contentIsUser = (new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType);
         $contentIsUserGroup = (new ContentTypeIsUserGroup($this->userGroupContentTypeIdentifier))->isSatisfiedBy($contentType);

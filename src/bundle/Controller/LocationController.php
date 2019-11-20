@@ -13,8 +13,10 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException as APIRepositoryUnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\TrashService;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\LocationUpdateStruct;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
@@ -29,6 +31,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationAssignSectionType;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\LocationView\DetailsTab;
@@ -72,6 +75,9 @@ class LocationController extends Controller
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
+    /** @var \eZ\Publish\API\Repository\Repository */
+    private $repository;
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
      * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
@@ -83,6 +89,7 @@ class LocationController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \eZ\Publish\API\Repository\Repository $repository
      */
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
@@ -94,7 +101,8 @@ class LocationController extends Controller
         SectionService $sectionService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        Repository $repository
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -106,6 +114,7 @@ class LocationController extends Controller
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
         $this->permissionResolver = $permissionResolver;
+        $this->repository = $repository;
     }
 
     /**
@@ -328,7 +337,7 @@ class LocationController extends Controller
 
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (LocationTrashData $data) {
-                return $this->handleTrashLocationForm($data);
+                return $this->handleTrashLocation($data);
             });
 
             if ($result instanceof Response) {
@@ -339,7 +348,17 @@ class LocationController extends Controller
         return $this->redirect($this->generateUrl('ezplatform.trash.list'));
     }
 
+    private function trashRelatedAsset(ContentInfo $contentInfo): void
+    {
+        $content = $this->contentService->loadContentByContentInfo($contentInfo);
+        $relations = $this->contentService->loadRelations($content->versionInfo);
+        $imageLocation = $this->locationService->loadLocation($relations[0]->destinationContentInfo->mainLocationId);
+        $this->trashService->trash($imageLocation);
+    }
+
     /**
+     * @deprecated since 2.5, to be removed in 3.0.
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -372,6 +391,46 @@ class LocationController extends Controller
 
     /**
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData|\EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData $data
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    private function handleTrashLocation(LocationTrashData $data): RedirectResponse
+    {
+        $location = $data->getLocation();
+        $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
+        $trashOptions = $data->getTrashOptions();
+
+        $this->repository->beginTransaction();
+        try {
+            if (isset($trashOptions[HasUniqueAssetRelation::TRASH_ASSETS])
+                && HasUniqueAssetRelation::RADIO_SELECT_TRASH_WITH_ASSETS === $trashOptions[HasUniqueAssetRelation::TRASH_ASSETS]
+            ) {
+                $this->trashRelatedAsset($location->getContentInfo());
+            }
+            $this->trashService->trash($location);
+            $this->repository->commit();
+        } catch (\Exception $exception) {
+            $this->repository->rollback();
+            throw $exception;
+        }
+
+        $this->notificationHandler->success(
+            $this->translator->trans(
+                /** @Desc("Location '%name%' moved to Trash.") */
+                'location.trash.success',
+                ['%name%' => $location->getContentInfo()->name],
+                'location'
+            )
+        );
+
+        return $this->redirectToLocation($parentLocation);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData|\EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData $data
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *

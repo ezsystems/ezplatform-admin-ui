@@ -16,6 +16,28 @@
     .modal-body {
         padding: calculateRem(15px) calculateRem(30px);
 
+        .ez-modal__trash-option {
+            padding: calculateRem(20px) calculateRem(20px) 0;
+
+            &--disabled {
+                cursor: not-allowed;
+                opacity: 0.3;
+            }
+
+            .form-check {
+                margin-left: calculateRem(20px);
+
+                .form-check-label {
+                    color: inherit;
+                }
+            }
+        }
+
+        .ez-modal__option-label,
+        .ez-modal__option-description {
+            margin-bottom: 0;
+        }
+
         .ez-modal-body__main,
         .ez-modal-body__explanation {
             margin-bottom: 0;
@@ -230,5 +252,11 @@
         .ez-modal-body__main {
             padding: 0 calculateRem(16px);
         }
+    }
+}
+
+.ez-modal--trash-location {
+    .modal-dialog {
+        max-width: calculateRem(800px);
     }
 }

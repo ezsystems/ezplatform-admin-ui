@@ -25,6 +25,9 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * @deprecated since 2.5, to be removed in 3.0.
+ */
 class LocationTrashContainerType extends AbstractType
 {
     const TRASH_WITH_CHILDREN = 'trash_with_children';
@@ -136,7 +139,7 @@ class LocationTrashContainerType extends AbstractType
             'expanded' => true,
             'multiple' => true,
             'choices' => [
-                /** @Desc("%children_count% content items under location %content_name%") */
+                /** @Desc("Send %children_count% Content item(s) of this Location to Trash") */
                 $this->translator->trans('location_trash_form.trash_container', $translatorParameters, 'forms') => self::TRASH_WITH_CHILDREN,
             ],
         ]);

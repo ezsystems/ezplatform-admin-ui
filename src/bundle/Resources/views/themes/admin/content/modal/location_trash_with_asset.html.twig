@@ -1,4 +1,5 @@
 {% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
+{# @deprecated since 2.5, to be removed in 3.0 #}
 
 <div class="modal fade ez-modal ez-modal--trash-with-asset" id="trash-with-asset-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -12,10 +13,10 @@
             </div>
             <div class="modal-body">
                 <p class="ez-modal-body__main mb-2">
-                    {{ 'trash_asset.modal.message_header'|trans|desc('You are about to delete a content that has one or several asset(s) field(s) used by other content items. These assets will remain available in system.') }}
+                    {{ 'trash_asset.modal.message_header'|trans|desc('You are about to delete a Content item that has one or more asset Field(s) used by other Content items. These assets will remain available in system.') }}
                 </p>
                 <p>
-                    {{ 'trash_asset.modal.message_body'|trans|desc('If you wish to delete this(/these) asset(s) too, first make sure they are not used by other content. You can check these content going to the asset(s) and looking at their content relations in the Relation tab.') }}
+                    {{ 'trash_asset.modal.message_body'|trans|desc('If you wish to delete these assets too, first make sure they are not used by other content. To check, go to the asset preview and look at its content Relations in the Relations tab.') }}
                 </p>
             </div>
             <div class="modal-footer">

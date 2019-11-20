@@ -42,8 +42,8 @@
         <note>key: location.swap.success</note>
       </trans-unit>
       <trans-unit id="48699e3e0320623a7ac78df3b808f6341dd7d4c3" resname="location.trash.success">
-        <source>Location '%name%' moved to trash.</source>
-        <target state="new">Location '%name%' moved to trash.</target>
+        <source>Location '%name%' moved to Trash.</source>
+        <target state="new">Location '%name%' moved to Trash.</target>
         <note>key: location.trash.success</note>
       </trans-unit>
       <trans-unit id="d42824d95700bfdb3f95a6c408be1cab227988f5" resname="location.update.success">
