@@ -51,7 +51,6 @@ parameters:
 
     # Views
     ezsettings.default.content_translate_view: {}
-    ezsettings.default.relation_view: {}
     ezsettings.admin_group.user_settings.templates.list: "EzPlatformAdminUiBundle:user/settings:list.html.twig"
     ezsettings.admin_group.user_settings.templates.update: "EzPlatformAdminUiBundle:user/settings:update.html.twig"
     ezsettings.admin_group.user_change_password.templates.form: "EzPlatformAdminUiBundle:user-profile:change_user_password.html.twig"

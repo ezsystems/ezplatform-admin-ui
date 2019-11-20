@@ -44,13 +44,6 @@ system:
                     params:
                         viewbaseLayout: '@ezdesign/layout.html.twig'
 
-        relation_view:
-            full:
-                default:
-                    controller: 'EzPlatformAdminUiBundle:ContentView:relationView'
-                    template: '@ezdesign/content/relation.html.twig'
-                    match: true
-
         user_settings_update_view:
             full:
                 ezplatform_admin_ui_datetime_format:

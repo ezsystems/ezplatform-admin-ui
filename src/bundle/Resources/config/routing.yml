@@ -451,7 +451,7 @@ ezplatform.relation:
     path: /relation/{contentId}
     methods: ['GET', 'POST']
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:ContentView:relationView'
+        _controller: 'EzPlatformAdminUiBundle:Content:relationView'
 
 # LocationView / Translation tab
 

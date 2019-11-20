@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions as ApiException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
@@ -83,6 +84,9 @@ class ContentController extends Controller
     /** @var array */
     private $userContentTypeIdentifier;
 
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    private $contentTypeService;
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
      * @param \eZ\Publish\API\Repository\ContentService $contentService
@@ -95,6 +99,7 @@ class ContentController extends Controller
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer $lookupLimitationsTransformer
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param array $userContentTypeIdentifier
      */
     public function __construct(
@@ -109,6 +114,7 @@ class ContentController extends Controller
         UserService $userService,
         PermissionResolver $permissionResolver,
         LookupLimitationsTransformer $lookupLimitationsTransformer,
+        ContentTypeService $contentTypeService,
         array $userContentTypeIdentifier
     ) {
         $this->notificationHandler = $notificationHandler;
@@ -123,6 +129,7 @@ class ContentController extends Controller
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
         $this->permissionResolver = $permissionResolver;
         $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
+        $this->contentTypeService = $contentTypeService;
     }
 
     /**
@@ -524,6 +531,23 @@ class ContentController extends Controller
         $response->headers->addCacheControlDirective('no-store', true);
 
         return $response;
+    }
+
+    public function relationViewAction(int $contentId): Response
+    {
+        try {
+            $content = $this->contentService->loadContent($contentId);
+            $contentType = $this->contentTypeService->loadContentType($content->contentInfo->contentTypeId);
+        } catch (UnauthorizedException $exception) {
+            return $this->render('@ezdesign/content/relation_unauthorized.html.twig', [
+                'contentId' => $contentId,
+            ]);
+        }
+
+        return $this->render('@ezdesign/content/relation.html.twig', [
+            'content' => $content,
+            'contentType' => $contentType,
+        ]);
     }
 
     /**

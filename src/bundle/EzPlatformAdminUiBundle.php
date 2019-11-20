@@ -71,7 +71,6 @@ class EzPlatformAdminUiBundle extends Bundle
             new Parser\SubtreeOperations(),
             new Parser\Notifications(),
             new Parser\ContentTranslateView(),
-            new Parser\RelationView(),
             new Parser\AdminUiForms(),
             new Parser\ContentType(),
             new Parser\SubtreePath(),
