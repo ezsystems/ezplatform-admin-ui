@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
 
-use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData;

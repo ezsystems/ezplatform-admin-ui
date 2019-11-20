@@ -52,13 +52,20 @@ class MediaFormMapper implements FieldDefinitionFormMapperInterface
             ])
             ->add('mediaType', ChoiceType::class, [
                 'choices' => [
-                    /** @Desc("Flash") */ 'field_definition.ezmedia.type_flash' => Type::TYPE_FLASH,
-                    /** @Desc("HTML5 video") */ 'field_definition.ezmedia.type_html5_video' => Type::TYPE_HTML5_VIDEO,
-                    /** @Desc("QuickTime") */ 'field_definition.ezmedia.type_quick_time' => Type::TYPE_QUICKTIME,
-                    /** @Desc("RealPlayer") */ 'field_definition.ezmedia.type_real_player' => Type::TYPE_REALPLAYER,
-                    /** @Desc("Silverlight") */ 'field_definition.ezmedia.type_silverlight' => Type::TYPE_SILVERLIGHT,
-                    /** @Desc("Windows Media Player") */ 'field_definition.ezmedia.type_windows_media_player' => Type::TYPE_WINDOWSMEDIA,
-                    /** @Desc("HTML5 audio") */ 'field_definition.ezmedia.type_html5_audio' => Type::TYPE_HTML5_AUDIO,
+                    /** @Desc("Flash") */
+                    'field_definition.ezmedia.type_flash' => Type::TYPE_FLASH,
+                    /** @Desc("HTML5 video") */
+                    'field_definition.ezmedia.type_html5_video' => Type::TYPE_HTML5_VIDEO,
+                    /** @Desc("QuickTime") */
+                    'field_definition.ezmedia.type_quick_time' => Type::TYPE_QUICKTIME,
+                    /** @Desc("RealPlayer") */
+                    'field_definition.ezmedia.type_real_player' => Type::TYPE_REALPLAYER,
+                    /** @Desc("Silverlight") */
+                    'field_definition.ezmedia.type_silverlight' => Type::TYPE_SILVERLIGHT,
+                    /** @Desc("Windows Media Player") */
+                    'field_definition.ezmedia.type_windows_media_player' => Type::TYPE_WINDOWSMEDIA,
+                    /** @Desc("HTML5 audio") */
+                    'field_definition.ezmedia.type_html5_audio' => Type::TYPE_HTML5_AUDIO,
                 ],
                 'required' => true,
                 'property_path' => 'fieldSettings[mediaType]',
