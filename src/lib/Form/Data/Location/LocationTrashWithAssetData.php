@@ -12,6 +12,9 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints as AdminUiAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @deprecated since 2.5, to be removed in 3.0.
+ */
 class LocationTrashWithAssetData
 {
     /**

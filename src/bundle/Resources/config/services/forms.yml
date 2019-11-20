@@ -4,6 +4,10 @@ services:
         autoconfigure: true
         public: false
 
+    _instanceof:
+        EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\TrashLocationOptionProvider:
+            tags: ['ezplatform.form.trash_location_option']
+
     EzSystems\EzPlatformAdminUi\Form\SubmitHandler: ~
 
     EzSystems\EzPlatformAdminUi\Form\Factory\:
@@ -17,6 +21,12 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\EventListener\:
         resource: '../../../lib/Form/EventListener'
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\:
+        resource: '../../../lib/Form/TrashLocationOptionProvider'
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\OptionsFactory:
+        arguments: [!tagged ezplatform.form.trash_location_option]
 
     EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
         tags:
@@ -53,3 +63,23 @@ services:
         public: true
         tags:
             - { name: form.type_extension, extended_type: EzSystems\EzPlatformRichText\Form\Type\RichTextType }
+
+    EzSystems\EzPlatformAdminUi\Form\Extension\HelpMultilineMessageExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasReverseRelations:
+        tags:
+            - { name: 'ezplatform.form.trash_location_option', priority: 100 }
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasChildren:
+        tags:
+            - { name: 'ezplatform.form.trash_location_option', priority: 80 }
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation:
+        tags:
+            - { name: 'ezplatform.form.trash_location_option', priority: 60 }
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasAssetRelation:
+        tags:
+            - { name: 'ezplatform.form.trash_location_option', priority: 40 }

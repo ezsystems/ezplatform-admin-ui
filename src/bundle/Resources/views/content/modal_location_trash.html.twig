@@ -1,6 +1,6 @@
 {% form_theme form '@ezdesign/form_fields.html.twig' %}
 
-<div class="modal fade ez-modal ez-modal--send-to-trash" id="trash-location-modal" tabindex="-1" role="dialog">
+<div class="modal fade ez-modal ez-modal--send-to-trash ez-modal--trash-location" id="trash-location-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,19 +10,48 @@
                     </svg>
                 </button>
             </div>
+            {{ form_start(form, {'action': path('ezplatform.location.trash')}) }}
             <div class="modal-body">
-                <p class="ez-modal-body__main">
-                    {{ 'trash.modal.message'|trans|desc('Are you sure you want to send this content item to trash?') }}
-                </p>
+                {{ 'trash.modal.message'|trans|desc('Are you sure you want to send this Content item to Trash?') }}
+
+                {% for option in form.trash_options %}
+                    <div class="ez-modal__trash-option">
+                        <p class="ez-modal__option-label">
+                            {{ form_label(option) }}
+                        </p>
+                        {% if option.vars.help_multiline ?? false %}
+                            {% for help in option.vars.help_multiline %}
+                                <p class="ez-modal__option-description">
+                                    {{ help }}
+                                </p>
+                            {% endfor %}
+                        {% endif %}
+                        {% for input in option %}
+                            {{ form_widget(input) }}
+                        {% endfor %}
+                    {# Do not render label if no options input #}
+                        {% do option.setRendered() %}
+                    </div>
+                {% endfor %}
+                {% if form.trash_options is not empty %}
+                    <p>
+                        {{ form_widget(form.confirm) }}
+                    </p>
+                {% endif %}
             </div>
             <div class="modal-footer">
-                {{ form_start(form, {'action': path('ezplatform.location.trash')}) }}
                 <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">
                     {{ 'trash.form.cancel'|trans|desc('Cancel') }}
                 </button>
-                {{ form_widget(form.trash, {'attr': {'class': 'btn-danger font-weight-bold'}}) }}
-                {{ form_end(form) }}
+                {{ form_widget(form.trash,
+                    {'attr': {'class': 'btn-danger font-weight-bold disabled', 'disabled': true}})
+                }}
             </div>
+            {{ form_end(form) }}
         </div>
     </div>
 </div>
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-modal-location-trash-js', null, 'ezplatform') }}
+{% endblock %}

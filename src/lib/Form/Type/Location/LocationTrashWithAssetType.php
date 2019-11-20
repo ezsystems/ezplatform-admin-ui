@@ -22,6 +22,9 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
 
+/**
+ * @deprecated since 2.5, to be removed in 3.0.
+ */
 class LocationTrashWithAssetType extends AbstractType
 {
     const RADIO_SELECT_TRASH_WITH_ASSETS = 'trash_with_assets';
@@ -125,9 +128,9 @@ class LocationTrashWithAssetType extends AbstractType
             'expanded' => true,
             'multiple' => false,
             'choices' => [
-                /** @Desc("Delete only %content_name% (%content_type%)") */
+                /** @Desc("Send only this Content item to Trash") */
                 $this->translator->trans('location_trash_form.default_trash', $translatorParameters, 'forms') => LocationTrashWithAssetType::RADIO_SELECT_DEFAULT_TRASH,
-                /** @Desc("Delete %content_name% (%content_type%) and its related image assets") */
+                /** @Desc("Send the Content item and its related assets to Trash") */
                 $this->translator->trans('location_trash_form.trash_with_asset', $translatorParameters, 'forms') => LocationTrashWithAssetType::RADIO_SELECT_TRASH_WITH_ASSETS,
             ],
         ]);

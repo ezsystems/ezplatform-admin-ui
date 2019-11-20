@@ -131,6 +131,26 @@
         <target state="new">Update</target>
         <note>key: ezplatform.reset_user_password.update</note>
       </trans-unit>
+      <trans-unit id="1a2cc7b7518a1267208aafa8aa96d1dba950eeb1" resname="form.has_children.label">
+        <source>Sub-items</source>
+        <target state="new">Sub-items</target>
+        <note>key: form.has_children.label</note>
+      </trans-unit>
+      <trans-unit id="80d979ff2734a875fcd38a2178e4d28c8bf0afb5" resname="form.has_reverse_relation.label">
+        <source>Conflict with reverse Relations</source>
+        <target state="new">Conflict with reverse Relations</target>
+        <note>key: form.has_reverse_relation.label</note>
+      </trans-unit>
+      <trans-unit id="4a2eb58572364b0fa04e67a800e0fbb09df205be" resname="form.trash_assets.label">
+        <source>Asset Field(s)</source>
+        <target state="new">Asset Field(s)</target>
+        <note>key: form.trash_assets.label</note>
+      </trans-unit>
+      <trans-unit id="6bc8ac1fbf981deec94bd4a2b8aa877d60eee651" resname="form.trash_assets_non_unique.label">
+        <source>Asset Field(s)</source>
+        <target state="new">Asset Field(s)</target>
+        <note>key: form.trash_assets_non_unique.label</note>
+      </trans-unit>
       <trans-unit id="a1e42d4c649f7fbb614729978fea692be51d1485" resname="languages_delete_form.delete">
         <source>Delete languages</source>
         <target state="new">Delete languages</target>
@@ -147,8 +167,8 @@
         <note>key: location_move.move</note>
       </trans-unit>
       <trans-unit id="4b7b2b4de853db0d1fb1851e07f3ccc51e5713fc" resname="location_trash_form.default_trash">
-        <source>Delete only %content_name% (%content_type%)</source>
-        <target state="new">Delete only %content_name% (%content_type%)</target>
+        <source>Send only this Content item to Trash</source>
+        <target state="new">Send only this Content item to Trash</target>
         <note>key: location_trash_form.default_trash</note>
       </trans-unit>
       <trans-unit id="796f8196b2bc086fe788e6689a6189c79b8e047e" resname="location_trash_form.trash">
@@ -157,13 +177,18 @@
         <note>key: location_trash_form.trash</note>
       </trans-unit>
       <trans-unit id="f9887d04de58202b07207b1521880373c00c8201" resname="location_trash_form.trash_container">
-        <source>%children_count% content items under location %content_name%</source>
-        <target state="new">%children_count% content items under location %content_name%</target>
+        <source>Send %children_count% Content item(s) of this Location to Trash</source>
+        <target state="new">Send %children_count% Content item(s) of this Location to Trash</target>
         <note>key: location_trash_form.trash_container</note>
       </trans-unit>
+      <trans-unit id="f75f244896962e9bc1bbb30a1bbaf3e5914b95f2" resname="location_trash_form.trash_when_relation">
+        <source>'%content_name%' will not be available for its reverse Relation(s)</source>
+        <target state="new">'%content_name%' will not be available for its reverse Relation(s)</target>
+        <note>key: location_trash_form.trash_when_relation</note>
+      </trans-unit>
       <trans-unit id="2598fe0050f38f3c02014a404ed14aee248e27d1" resname="location_trash_form.trash_with_asset">
-        <source>Delete %content_name% (%content_type%) and its related image assets</source>
-        <target state="new">Delete %content_name% (%content_type%) and its related image assets</target>
+        <source>Send the Content item and its related assets to Trash</source>
+        <target state="new">Send the Content item and its related assets to Trash</target>
         <note>key: location_trash_form.trash_with_asset</note>
       </trans-unit>
       <trans-unit id="f86cd366867d370b0706e250355f605e2b783229" resname="policies_delete_form.delete">

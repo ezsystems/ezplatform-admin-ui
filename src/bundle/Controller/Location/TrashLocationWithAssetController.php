@@ -19,6 +19,9 @@ use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @deprecated since 2.5, to be removed in 3.0.
+ */
 class TrashLocationWithAssetController extends Controller
 {
     /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
