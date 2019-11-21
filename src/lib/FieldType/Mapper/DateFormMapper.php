@@ -27,8 +27,10 @@ class DateFormMapper implements FieldDefinitionFormMapperInterface
                 ChoiceType::class,
                 [
                     'choices' => [
-                        /** @Desc("Empty") */ 'field_definition.ezdate.default_type_empty' => Type::DEFAULT_EMPTY,
-                        /** @Desc("Current date") */ 'field_definition.ezdate.default_type_current' => Type::DEFAULT_CURRENT_DATE,
+                        /** @Desc("Empty") */
+                        'field_definition.ezdate.default_type_empty' => Type::DEFAULT_EMPTY,
+                        /** @Desc("Current date") */
+                        'field_definition.ezdate.default_type_current' => Type::DEFAULT_CURRENT_DATE,
                     ],
                     'expanded' => true,
                     'required' => true,
