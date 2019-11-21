@@ -421,12 +421,6 @@ ezplatform.location.trash:
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\LocationController::trashAction'
 
-ezplatform.location.trash_container:
-    path: /location/trash_container
-    methods: ['POST']
-    defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\LocationController::trashContainerAction'
-
 ezplatform.location.update:
     path: /location/update
     methods: ['POST']
@@ -438,12 +432,6 @@ ezplatform.location.copy_subtree:
     methods: ['POST']
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\LocationController::copySubtreeAction'
-
-ezplatform.location.trash_with_asset:
-    path: /location/trash-with-asset
-    methods: ['POST']
-    defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\Location\TrashLocationWithAssetController::trashAction'
 
 # LocationView / Translation tab
 

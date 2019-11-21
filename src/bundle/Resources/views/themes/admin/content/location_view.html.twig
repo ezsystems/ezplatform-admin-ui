@@ -118,14 +118,6 @@
             {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}
             {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}
             {{ form(form_location_copy_subtree, {'action': path('ezplatform.location.copy_subtree')}) }}
-            {%  if form_location_trash_container is defined %}
-                {% include '@ezdesign/content/modal/location_trash_container.html.twig' with {
-                    'form': form_location_trash_container,
-                    'content_name': content.name,
-                    'has_asset': form_location_trash_with_asset is defined,
-                    'has_unique_asset': form_location_trash_with_single_asset is defined
-                } only %}
-            {% endif %}
             {{ form(form_content_visibility_update, {'action': path('ezplatform.content.update_visibility')}) }}
         </div>
     </div>

@@ -33,9 +33,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashWithAssetData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupCreateData;
@@ -94,9 +92,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopySubtreeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashContainerType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashWithAssetType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupCreateType;
@@ -1195,23 +1191,6 @@ class FormFactory
     }
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashWithAssetData|null $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     */
-    public function trashLocationWithAsset(
-        LocationTrashWithAssetData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationTrashWithAssetType::class);
-
-        return $this->formFactory->createNamed($name, LocationTrashWithAssetType::class, $data);
-    }
-
-    /**
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentRemoveData|null $data
      * @param string|null $name
      *
@@ -1224,20 +1203,5 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentRemoveType::class);
 
         return $this->formFactory->createNamed($name, ContentRemoveType::class, $data);
-    }
-
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData|null $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function trashContainerLocation(
-        LocationTrashContainerData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationTrashContainerType::class);
-
-        return $this->formFactory->createNamed($name, LocationTrashContainerType::class, $data);
     }
 }
