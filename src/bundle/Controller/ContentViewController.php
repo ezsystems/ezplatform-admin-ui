@@ -30,19 +30,13 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashWithAssetData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentEditTranslationChoiceLoader;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentVisibilityUpdateType;
 use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
-use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
-use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveUniqueRelation;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
-use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
-use EzSystems\EzPlatformAdminUi\Specification\Location\IsContainer;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -293,31 +287,6 @@ class ContentViewController extends Controller
             'form_content_edit' => $contentEditType->createView(),
         ]);
 
-        $contentHaveAssetRelation = new ContentHaveAssetRelation($this->contentService);
-
-        if ($contentHaveAssetRelation
-            ->and(new ContentHaveUniqueRelation($this->contentService))
-            ->isSatisfiedBy($content)
-        ) {
-            $trashWithAssetType = $this->formFactory->trashLocationWithAsset(
-                new LocationTrashWithAssetData($location)
-            );
-
-            $view->addParameters([
-                /** @deprecated since 2.5, to be removed in 3.0 */
-                'form_location_trash_with_single_asset' => $trashWithAssetType->createView(),
-            ]);
-        } elseif ($contentHaveAssetRelation->isSatisfiedBy($content)) {
-            $locationTrashType = $this->formFactory->trashLocation(
-                new LocationTrashData($location)
-            );
-
-            $view->addParameters([
-                /** @deprecated since 2.5, to be removed in 3.0 */
-                'form_location_trash_with_asset' => $locationTrashType->createView(),
-            ]);
-        }
-
         if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
             $userDeleteType = $this->formFactory->deleteUser(
                 new UserDeleteData($content->contentInfo)
@@ -329,19 +298,6 @@ class ContentViewController extends Controller
             $view->addParameters([
                 'form_user_delete' => $userDeleteType->createView(),
                 'form_user_edit' => $userEditType->createView(),
-            ]);
-        }
-
-        $isContainer = new IsContainer();
-        $hasChildren = new HasChildren($this->locationService);
-
-        if ($isContainer->and($hasChildren)->isSatisfiedBy($location)) {
-            $trashLocationContainerForm = $this->formFactory->trashContainerLocation(
-                new LocationTrashContainerData($location)
-            );
-            $view->addParameters([
-                /** @deprecated since 2.5, to be removed in 3.0 */
-                'form_location_trash_container' => $trashLocationContainerForm->createView(),
             ]);
         }
     }

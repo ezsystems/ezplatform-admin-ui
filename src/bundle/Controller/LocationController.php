@@ -25,7 +25,6 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
@@ -40,7 +39,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LocationController extends Controller
@@ -357,40 +355,7 @@ class LocationController extends Controller
     }
 
     /**
-     * @deprecated since 2.5, to be removed in 3.0.
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function trashContainerAction(Request $request): Response
-    {
-        $form = $this->formFactory->trashContainerLocation(
-            new LocationTrashContainerData()
-        );
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (LocationTrashContainerData $data) {
-                return $this->handleTrashLocationForm($data);
-            });
-
-            if ($result instanceof Response) {
-                return $result;
-            }
-        }
-
-        if (empty($form->getData()->getLocation())) {
-            throw new BadRequestHttpException();
-        }
-
-        // in case of error when processing form ($result === null) redirect to the same Location
-        return $this->redirectToLocation($form->getData()->getLocation());
-    }
-
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData|\EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData $data
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
@@ -427,32 +392,6 @@ class LocationController extends Controller
         );
 
         return $this->redirectToLocation($parentLocation);
-    }
-
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData|\EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData $data
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
-    private function handleTrashLocationForm($data): RedirectResponse
-    {
-        $location = $data->getLocation();
-        $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
-        $this->trashService->trash($location);
-
-        $this->notificationHandler->success(
-            /** @Desc("Location '%name%' moved to trash.") */
-            'location.trash.success',
-            ['%name%' => $location->getContentInfo()->name],
-            'location'
-        );
-
-        return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
-            'locationId' => $parentLocation->id,
-        ]));
     }
 
     /**
