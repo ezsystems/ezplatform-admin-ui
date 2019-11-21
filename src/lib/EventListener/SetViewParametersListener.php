@@ -222,7 +222,7 @@ class SetViewParametersListener implements EventSubscriberInterface
         }
 
         if (null === $location) {
-            throw new InvalidArgumentException('$location', 'you must provide a Location for the published Content item');
+            throw new InvalidArgumentException('$location', 'You must provide a Location for the published Content item');
         }
 
         return $this->repository->sudo(
