@@ -46,6 +46,7 @@ CKEDITOR.dtd.$editable.span = 1;
                     this.getEzConfigElement();
                     this.cancelEditEvents();
                     this.renderIcon();
+                    this.initEnterHandler();
                 },
 
                 getIdentifier() {
