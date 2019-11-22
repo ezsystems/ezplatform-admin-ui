@@ -8,39 +8,26 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\SectionService;
-use Symfony\Component\Form\DataTransformerInterface;
 use eZ\Publish\API\Repository\Values\Content\Section as APISection;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * Transforms between a Section's ID and a domain specific object.
  */
-class SectionTransformer implements DataTransformerInterface
+final class SectionTransformer implements DataTransformerInterface
 {
-    /** @var SectionService */
-    protected $sectionService;
+    /** @var \eZ\Publish\API\Repository\SectionService */
+    private $sectionService;
 
-    /**
-     * @param SectionService $sectionService
-     */
     public function __construct(SectionService $sectionService)
     {
         $this->sectionService = $sectionService;
     }
 
-    /**
-     * Transforms a domain specific Section object into a Section identifier.
-     *
-     * @param mixed $value
-     *
-     * @return mixed|null
-     *
-     * @throws TransformationFailedException
-     */
-    public function transform($value)
+    public function transform($value): ?int
     {
         if (null === $value) {
             return null;
@@ -53,24 +40,18 @@ class SectionTransformer implements DataTransformerInterface
         return $value->id;
     }
 
-    /**
-     * Transforms a Section identifier into a domain specific Section object.
-     *
-     * @param mixed $value
-     *
-     * @return APISection|null
-     *
-     * @throws TransformationFailedException
-     * @throws UnauthorizedException
-     */
     public function reverseTransform($value): ?APISection
     {
         if (empty($value)) {
             return null;
         }
 
+        if (!is_int($value) && !ctype_digit($value)) {
+            throw new TransformationFailedException('Expected a numeric string.');
+        }
+
         try {
-            return $this->sectionService->loadSection($value);
+            return $this->sectionService->loadSection((int)$value);
         } catch (NotFoundException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }

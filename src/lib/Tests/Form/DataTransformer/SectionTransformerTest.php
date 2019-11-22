@@ -80,16 +80,28 @@ class SectionTransformerTest extends TestCase
     public function testReverseTransformWithNotFoundException()
     {
         $this->expectException(TransformationFailedException::class);
-        $this->expectExceptionMessage('Location not found');
+        $this->expectExceptionMessage('Section not found');
 
         $service = $this->createMock(SectionService::class);
         $service->method('loadSection')
-            ->will($this->throwException(new class('Location not found') extends NotFoundException {
+            ->will($this->throwException(new class('Section not found') extends NotFoundException {
             }));
 
         $transformer = new SectionTransformer($service);
 
         $transformer->reverseTransform(654321);
+    }
+
+    public function testReverseTransformWithNonNumericString(): void
+    {
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('Expected a numeric string.');
+
+        $service = $this->createMock(SectionService::class);
+        $service->expects(self::never())->method('loadSection');
+
+        $transformer = new SectionTransformer($service);
+        $transformer->reverseTransform('XYZ');
     }
 
     /**
