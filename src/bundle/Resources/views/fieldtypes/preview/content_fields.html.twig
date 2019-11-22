@@ -337,7 +337,9 @@
                 </thead>
                 {% for contentId in field.value.destinationContentIds %}
                 <tr>
-                    {{ render(controller('ez_content:viewAction', {'contentId': contentId, 'viewType': 'preview_ezobjectrelationlist_row', 'layout': false})) }}
+                    {{ render(controller('EzPlatformAdminUiBundle:Content:relationView', {
+                            'contentId': contentId,
+                    } )) }}
                 </tr>
                 {% endfor %}
             </table>
@@ -480,7 +482,9 @@
                     </tr>
                 </thead>
                 <tr>
-                    {{ render(controller('ez_content:viewAction', {'contentId': field.value.destinationContentId, 'viewType': 'preview_ezobjectrelationlist_row', 'layout': false})) }}
+                    {{ render(controller('EzPlatformAdminUiBundle:Content:relationView', {
+                        'contentId': field.value.destinationContentId,
+                    })) }}
                 </tr>
             </table>
         </div>

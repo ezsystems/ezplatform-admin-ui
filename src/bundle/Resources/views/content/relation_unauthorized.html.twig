@@ -1,0 +1,10 @@
+<td colspan="100%">
+    <div class="ez-alert ez-alert--info">
+        <svg class="ez-icon ez-icon--small">
+            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#lock"></use>
+        </svg>
+        {{ 'content.hidden.message'|trans({
+            '%contentId%' : contentId
+        })|desc('You don\'t have permissions to view this Content item (contentID: %contentId%).') }}
+    </div>
+</td>

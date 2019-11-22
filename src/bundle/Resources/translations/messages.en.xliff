@@ -86,6 +86,11 @@
         <target state="new">words</target>
         <note>key: character_counter.words</note>
       </trans-unit>
+      <trans-unit id="e136be672df8eb27dc4eb2f1ce0650096090bf81" resname="content.hidden.message">
+        <source>You don't have permissions to view this Content item (contentID: %contentId%).</source>
+        <target state="new">You don't have permissions to view this Content item (contentID: %contentId%).</target>
+        <note>key: content.hidden.message</note>
+      </trans-unit>
       <trans-unit id="22d5072ec8766c24df085f05aaeda403f02ec585" resname="content.hide.modal.cancel">
         <source>Cancel</source>
         <target state="new">Cancel</target>

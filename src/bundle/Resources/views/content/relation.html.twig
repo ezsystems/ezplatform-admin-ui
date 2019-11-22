@@ -1,0 +1,16 @@
+<td>
+    <a {% if not content.contentInfo.trashed %}
+        href="{{ path('_ezpublishLocation', { 'locationId': content.contentInfo.mainLocationId } ) }}"
+    {% endif %}>
+        {{ content.getName() }}
+        {% if content.contentInfo.trashed %}
+            <em>({{ 'content.in_trash'|trans(domain='content')|desc('In Trash') }})</em>
+        {% endif %}
+    </a>
+</td>
+<td>
+    {{ contentType.getName() }}
+</td>
+<td>
+    {{ content.versionInfo.creationDate|ez_short_datetime }}
+</td>
