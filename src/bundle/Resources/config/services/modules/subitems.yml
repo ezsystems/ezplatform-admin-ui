@@ -21,6 +21,6 @@ services:
             - { name: ezpublish_rest.output.value_object_visitor, type: EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsList }
 
     EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier:
-        $outputVisitor: '@ezplatform.adminui.rest.output.visitor.json'
-        $outputGenerator: '@ezplatform.adminui.rest.output.generator.json'
+        $outputVisitor: '@ezpublish_rest.output.visitor.json'
+        $outputGenerator: '@ezpublish_rest.output.generator.json'
         $contentTypeInfoListValueObjectVisitor: '@ezpublish_rest.output.value_object_visitor.ContentTypeInfoList'

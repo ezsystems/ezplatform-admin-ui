@@ -1,76 +1,39 @@
-parameters:
-    ezplatform.admin_ui.rest.output.visitor.json.regexps:
-        - '(^application/vnd\.ez\.adminui\.api\.[A-Za-z]+\+json$)'
-    ezplatform.admin_ui.rest.generator.json.vendor: 'ez.adminui.api'
-
 services:
-    EzSystems\EzPlatformAdminUi\REST\Input\Parser\BulkOperation:
-        parent: ezpublish_rest.input.parser
-        tags:
-            - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.BulkOperation }
+  EzSystems\EzPlatformAdminUi\REST\Input\Parser\BulkOperation:
+      parent: ezpublish_rest.input.parser
+      tags:
+        - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.BulkOperation }
 
-    EzSystems\EzPlatformAdminUi\REST\Input\Parser\Operation:
-        parent: ezpublish_rest.input.parser
-        tags:
-            - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.internal.Operation }
+  EzSystems\EzPlatformAdminUi\REST\Input\Parser\Operation:
+      parent: ezpublish_rest.input.parser
+      tags:
+        - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.internal.Operation }
 
-    EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\BulkOperationResponse:
-        parent: ezpublish_rest.output.value_object_visitor.base
-        tags:
-            - { name: ezpublish_rest.output.value_object_visitor, type: EzSystems\EzPlatformAdminUi\REST\Value\BulkOperationResponse }
+  EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\BulkOperationResponse:
+      parent: ezpublish_rest.output.value_object_visitor.base
+      tags:
+        - { name: ezpublish_rest.output.value_object_visitor, type: EzSystems\EzPlatformAdminUi\REST\Value\BulkOperationResponse }
 
-    #
-    # Content Tree
-    #
+  #
+  # Content Tree
+  #
 
-    EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree\LoadSubtreeRequestNode:
-        parent: ezpublish_rest.input.parser
-        tags:
-            - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTreeLoadSubtreeRequestNode }
+  EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree\LoadSubtreeRequestNode:
+    parent: ezpublish_rest.input.parser
+    tags:
+      - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTreeLoadSubtreeRequestNode }
 
-    EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree\LoadSubtreeRequest:
-        parent: ezpublish_rest.input.parser
-        tags:
-            - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTreeLoadSubtreeRequest }
+  EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree\LoadSubtreeRequest:
+    parent: ezpublish_rest.input.parser
+    tags:
+      - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTreeLoadSubtreeRequest }
 
-    EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\ContentTree\Node:
-        parent: ezpublish_rest.output.value_object_visitor.base
-        tags:
-            - { name: ezpublish_rest.output.value_object_visitor, type: EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node }
+  EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\ContentTree\Node:
+      parent: ezpublish_rest.output.value_object_visitor.base
+      tags:
+          - { name: ezpublish_rest.output.value_object_visitor, type: EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node }
 
-    EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\ContentTree\Root:
-        parent: ezpublish_rest.output.value_object_visitor.base
-        tags:
-            - { name: ezpublish_rest.output.value_object_visitor, type: EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Root }
-
-    #
-    # Customized responses
-    #
-
-    ezplatform.adminui.rest.output.generator.json:
-        class: eZ\Publish\Core\REST\Common\Output\Generator\Json
-        arguments:
-            - '@ezpublish_rest.output.generator.json.field_type_hash_generator'
-            - '%ezplatform.admin_ui.rest.generator.json.vendor%'
-        calls:
-            - [ setFormatOutput, [ '%kernel.debug%' ] ]
-
-    ezplatform.adminui.rest.output.visitor.json:
-        class: '%ezpublish_rest.output.visitor.class%'
-        arguments:
-            - '@ezplatform.adminui.rest.output.generator.json'
-            - '@ezplatform.adminui.rest.output.value_object_visitor.dispatcher'
-        tags:
-            - { name: ezpublish_rest.output.visitor, regexps: ezplatform.admin_ui.rest.output.visitor.json.regexps, priority: 200 }
-
-    ezplatform.adminui.rest.output.value_object_visitor.dispatcher:
-        class: EzSystems\EzPlatformAdminUi\REST\ValueObjectVisitorDispatcher
-        arguments:
-            - '@ezpublish_rest.output.value_object_visitor.dispatcher'
-
-    EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\RestContent:
-        parent: ezpublish_rest.output.value_object_visitor.base
-        arguments:
-            - "@ezpublish.api.service.content"
-        tags:
-            - { name: ezplatform.admin_ui.rest.value_object_visitor, type: eZ\Publish\Core\REST\Server\Values\RestContent }
+  EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\ContentTree\Root:
+      parent: ezpublish_rest.output.value_object_visitor.base
+      tags:
+          - { name: ezpublish_rest.output.value_object_visitor, type: EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Root }

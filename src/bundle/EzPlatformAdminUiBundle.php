@@ -12,7 +12,6 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SecurityLogin
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ValueObjectVisitorPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ViewBuilderRegistryPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
@@ -52,7 +51,6 @@ class EzPlatformAdminUiBundle extends Bundle
         $container->addCompilerPass(new ComponentPass());
         $container->addCompilerPass(new SecurityLoginPass());
         $container->addCompilerPass(new ViewBuilderRegistryPass());
-        $container->addCompilerPass(new ValueObjectVisitorPass());
         $container->addCompilerPass(new AdminThemePathPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1);
     }
 
