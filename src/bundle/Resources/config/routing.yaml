@@ -433,6 +433,14 @@ ezplatform.location.copy_subtree:
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\LocationController::copySubtreeAction'
 
+# RelationView
+
+ezplatform.relation:
+    path: /relation/{contentId}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Content:relationView'
+
 # LocationView / Translation tab
 
 ezplatform.translation.add:
