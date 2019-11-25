@@ -19,6 +19,7 @@ use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\LocationUpdateStruct;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
@@ -78,6 +79,9 @@ class LocationController extends Controller
     /** @var \eZ\Publish\API\Repository\Repository */
     private $repository;
 
+    /** @var \eZ\Publish\Core\Helper\TranslationHelper */
+    private $translationHelper;
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
@@ -90,6 +94,7 @@ class LocationController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \eZ\Publish\API\Repository\Repository $repository
+     * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
@@ -102,7 +107,8 @@ class LocationController extends Controller
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
         PermissionResolver $permissionResolver,
-        Repository $repository
+        Repository $repository,
+        TranslationHelper $translationHelper
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -115,6 +121,7 @@ class LocationController extends Controller
         $this->submitHandler = $submitHandler;
         $this->permissionResolver = $permissionResolver;
         $this->repository = $repository;
+        $this->translationHelper = $translationHelper;
     }
 
     /**
@@ -587,15 +594,14 @@ class LocationController extends Controller
             $hidden = $data->getHidden();
 
             try {
-                /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
-                $content = $location->getContent();
+                $contentName = $this->translationHelper->getTranslatedContentNameByContentInfo($location->getContentInfo());
 
                 if ($hidden) {
                     $this->locationService->hideLocation($location);
                     $message = $this->translator->trans(
                         /** @Desc("Location '%name%' hidden.") */
                         'location.update_success.success.hidden',
-                        ['%name%' => $content->getName()],
+                        ['%name%' => $contentName],
                         'location'
                     );
                 } else {
@@ -603,7 +609,7 @@ class LocationController extends Controller
                     $message = $this->translator->trans(
                         /** @Desc("Location '%name%' unhidden.") */
                         'location.update_success.success.unhidden',
-                        ['%name%' => $content->getName()],
+                        ['%name%' => $contentName],
                         'location'
                     );
                 }

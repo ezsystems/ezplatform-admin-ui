@@ -18,6 +18,7 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\SPI\Limitation\Target;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
@@ -81,6 +82,9 @@ class ContentController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer */
     private $lookupLimitationsTransformer;
 
+    /** @var \eZ\Publish\Core\Helper\TranslationHelper */
+    private $translationHelper;
+
     /** @var array */
     private $userContentTypeIdentifier;
 
@@ -114,6 +118,7 @@ class ContentController extends Controller
         UserService $userService,
         PermissionResolver $permissionResolver,
         LookupLimitationsTransformer $lookupLimitationsTransformer,
+        TranslationHelper $translationHelper,
         ContentTypeService $contentTypeService,
         array $userContentTypeIdentifier
     ) {
@@ -128,6 +133,7 @@ class ContentController extends Controller
         $this->userService = $userService;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
         $this->permissionResolver = $permissionResolver;
+        $this->translationHelper = $translationHelper;
         $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
         $this->contentTypeService = $contentTypeService;
     }
@@ -221,7 +227,7 @@ class ContentController extends Controller
                         $this->translator->trans(
                             /** @Desc("New Version Draft for '%name%' created.") */
                             'content.create_draft.success',
-                            ['%name%' => $content->getName()],
+                            ['%name%' => $this->translationHelper->getTranslatedContentName($content)],
                             'content'
                         )
                     );
@@ -383,7 +389,7 @@ class ContentController extends Controller
                     $this->translator->trans(
                         /** @Desc("Main language for '%name%' updated.") */
                         'content.main_language_update.success',
-                        ['%name%' => $content->getName()],
+                        ['%name%' => $this->translationHelper->getTranslatedContentName($content)],
                         'content'
                     )
                 );
@@ -424,7 +430,7 @@ class ContentController extends Controller
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentVisibilityUpdateData $data) {
                 $contentInfo = $data->getContentInfo();
-                $content = $this->contentService->loadContentByContentInfo($contentInfo);
+                $contentName = $this->translationHelper->getTranslatedContentNameByContentInfo($contentInfo);
                 $desiredVisibility = $data->getVisible();
                 $location = $data->getLocation();
 
@@ -433,7 +439,7 @@ class ContentController extends Controller
                         $this->translator->trans(
                             /** @Desc("Content '%name%' was already hidden.") */
                             'content.hide.already_hidden',
-                            ['%name%' => $content->getName()],
+                            ['%name%' => $contentName],
                             'content'
                         )
                     );
@@ -444,7 +450,7 @@ class ContentController extends Controller
                         $this->translator->trans(
                             /** @Desc("Content '%name%' was already visible.") */
                             'content.reveal.already_visible',
-                            ['%name%' => $content->getName()],
+                            ['%name%' => $contentName],
                             'content'
                         )
                     );
@@ -457,7 +463,7 @@ class ContentController extends Controller
                         $this->translator->trans(
                             /** @Desc("Content '%name%' has been hidden.") */
                             'content.hide.success',
-                            ['%name%' => $content->getName()],
+                            ['%name%' => $contentName],
                             'content'
                         )
                     );
@@ -470,7 +476,7 @@ class ContentController extends Controller
                         $this->translator->trans(
                             /** @Desc("Content '%name%' has been revealed.") */
                             'content.reveal.success',
-                            ['%name%' => $content->getName()],
+                            ['%name%' => $contentName],
                             'content'
                         )
                     );

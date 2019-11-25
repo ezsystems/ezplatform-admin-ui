@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -36,6 +37,9 @@ class TranslationController extends Controller
     /** @var SubmitHandler */
     private $submitHandler;
 
+    /** @var \eZ\Publish\Core\Helper\TranslationHelper */
+    private $translationHelper;
+
     /**
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
@@ -48,13 +52,15 @@ class TranslationController extends Controller
         TranslatorInterface $translator,
         ContentService $contentService,
         FormFactory $formFactory,
-        SubmitHandler $submitHandler
+        SubmitHandler $submitHandler,
+        TranslationHelper $translationHelper
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
         $this->contentService = $contentService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
+        $this->translationHelper = $translationHelper;
     }
 
     /**
@@ -113,7 +119,6 @@ class TranslationController extends Controller
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (TranslationDeleteData $data) {
                 $contentInfo = $data->getContentInfo();
-                $content = $this->contentService->loadContentByContentInfo($contentInfo);
 
                 foreach ($data->getLanguageCodes() as $languageCode => $selected) {
                     $this->contentService->deleteTranslation($contentInfo, $languageCode);
@@ -122,7 +127,10 @@ class TranslationController extends Controller
                         $this->translator->trans(
                             /** @Desc("Translation '%languageCode%' removed from content '%name%'.") */
                             'translation.remove.success',
-                            ['%languageCode%' => $languageCode, '%name%' => $content->getName()],
+                            [
+                                '%languageCode%' => $languageCode,
+                                '%name%' => $this->translationHelper->getTranslatedContentNameByContentInfo($contentInfo),
+                            ],
                             'translation'
                         )
                     );

@@ -58,7 +58,7 @@
                 {% if relation.contentInfo is not null and relation.contentType is not null %}
                     <tr class="ez-relations__item" data-content-id="{{ relation.contentInfo.id }}">
                         <td><input type="checkbox" value="{{ relation.contentInfo.id }}" /></td>
-                        <td class="ez-relations__item-name">{{ relation.contentInfo.name }}</td>
+                        <td class="ez-relations__item-name">{{ ez_content_name(relation.contentInfo) }}</td>
                         <td>{{ relation.contentType.name }}</td>
                         <td>{{ relation.contentInfo.publishedDate|ez_short_datetime }}</td>
                         <td colspan="2"><input class="ez-relations__order-input" type="number" value="{{ loop.index }}" /></td>

@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
@@ -30,22 +31,28 @@ class PagerContentToDataMapper
     /** @var UserLanguagePreferenceProviderInterface */
     private $userLanguagePreferenceProvider;
 
+    /** @var \eZ\Publish\Core\Helper\TranslationHelper */
+    private $translationHelper;
+
     /**
      * @param ContentService $contentService
      * @param ContentTypeService $contentTypeService
      * @param UserService $userService
      * @param UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
+     * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
      */
     public function __construct(
         ContentService $contentService,
         ContentTypeService $contentTypeService,
         UserService $userService,
-        UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
+        UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
+        TranslationHelper $translationHelper
     ) {
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->userService = $userService;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
+        $this->translationHelper = $translationHelper;
     }
 
     /**
@@ -72,7 +79,7 @@ class PagerContentToDataMapper
                 'content' => $content,
                 'contentTypeId' => $contentInfo->contentTypeId,
                 'contentId' => $content->id,
-                'name' => $content->getName(),
+                'name' => $this->translationHelper->getTranslatedContentName($content),
                 'language' => $contentInfo->mainLanguageCode,
                 'contributor' => $contributor,
                 'version' => $content->versionInfo->versionNo,

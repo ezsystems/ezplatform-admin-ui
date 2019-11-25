@@ -13,6 +13,7 @@ use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\URLAliasService;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -46,6 +47,9 @@ class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;
 
+    /** @var \eZ\Publish\Core\Helper\TranslationHelper */
+    protected $translationHelper;
+
     /**
      * @param \Twig\Environment $twig
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
@@ -55,6 +59,7 @@ class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
      */
     public function __construct(
         Environment $twig,
@@ -64,7 +69,8 @@ class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
         DatasetFactory $datasetFactory,
         LocationService $locationService,
         PermissionResolver $permissionResolver,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        TranslationHelper $translationHelper
     ) {
         parent::__construct($twig, $translator, $eventDispatcher);
 
@@ -73,6 +79,7 @@ class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
         $this->datasetFactory = $datasetFactory;
         $this->locationService = $locationService;
         $this->permissionResolver = $permissionResolver;
+        $this->translationHelper = $translationHelper;
     }
 
     /**
@@ -158,7 +165,9 @@ class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
         try {
             $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
             if (!(new IsRoot())->isSatisfiedBy($location)) {
-                $viewParameters['parent_name'] = $parentLocation->getContent()->getName();
+                $viewParameters['parent_name'] = $this->translationHelper->getTranslatedContentName(
+                    $parentLocation->getContent()
+                );
             }
         } catch (UnauthorizedException $exception) {
         }

@@ -51,9 +51,8 @@
                     <ul class="list-unstyled" id="{{ form.users.vars.id }}-selected-content">
                         {% for user in form.users.vars.data %}
                             {% if user is not empty %}
-                                {% set content_name = user.content.name %}
-                                {{ include('@ezdesign/admin/role_assignment/create_tag_list_item.html.twig', { 
-                                    'content_name': content_name,
+                                {{ include('@ezdesign/admin/role_assignment/create_tag_list_item.html.twig', {
+                                    'content_name': ez_content_name(user),
                                     'content_id': user.content.versionInfo.contentInfo.id
                                 }) }}
                             {% endif %}

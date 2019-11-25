@@ -35,16 +35,18 @@
                         {% for pathLocation in pathLocations %}
                             {% if not loop.last %}
                                 {% set items = items|merge([{
-                                    'value': pathLocation.content.name,
+                                    'value': ez_content_name(pathLocation.contentInfo),
                                     'url': path('_ezpublishLocation', {'locationId': pathLocation.id})
                                 }]) %}
                             {% endif %}
                         {% endfor %}
-                        {% set items = items|merge([{ 'value': content.name }]) %}
+
+                        {% set items = items|merge([{ 'value': ez_content_name(content) }]) %}
+
                         {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: items } %}
 
                         {% include '@ezdesign/parts/page_title.html.twig' with {
-                            title: content.name,
+                            title: ez_content_name(content),
                             iconName: contentType.identifier,
                             contentTypeName: contentType.name
                         } %}
@@ -121,7 +123,7 @@
             {%  if form_location_trash_container is defined %}
                 {% include '@ezdesign/content/modal_location_trash_container.html.twig' with {
                     'form': form_location_trash_container,
-                    'content_name': content.name,
+                    'content_name': ez_content_name(content),
                     'has_asset': form_location_trash_with_asset is defined,
                     'has_unique_asset': form_location_trash_with_single_asset is defined
                 } only %}

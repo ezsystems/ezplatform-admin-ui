@@ -14,6 +14,7 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node;
 
@@ -24,6 +25,9 @@ final class NodeFactory
 {
     /** @var \eZ\Publish\API\Repository\SearchService */
     private $searchService;
+
+    /** @var \eZ\Publish\Core\Helper\TranslationHelper */
+    private $translationHelper;
 
     /** @var int */
     private $displayLimit;
@@ -42,6 +46,7 @@ final class NodeFactory
 
     /**
      * @param \eZ\Publish\API\Repository\SearchService $searchService
+     * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
      * @param int $displayLimit
      * @param int $childrenLoadMaxLimit
      * @param int $maxDepth
@@ -50,6 +55,7 @@ final class NodeFactory
      */
     public function __construct(
         SearchService $searchService,
+        TranslationHelper $translationHelper,
         int $displayLimit = 20,
         int $childrenLoadMaxLimit = 100,
         int $maxDepth = 10,
@@ -57,6 +63,7 @@ final class NodeFactory
         array $ignoredContentTypes = []
     ) {
         $this->searchService = $searchService;
+        $this->translationHelper = $translationHelper;
         $this->displayLimit = $displayLimit;
         $this->childrenLoadMaxLimit = $childrenLoadMaxLimit;
         $this->maxDepth = $maxDepth;
@@ -120,7 +127,7 @@ final class NodeFactory
             $depth,
             $location->id,
             $location->contentId,
-            $content->getName(),
+            $this->translationHelper->getTranslatedContentName($content),
             $contentType ? $contentType->identifier : '',
             $contentType ? $contentType->isContainer : true,
             $location->invisible || $location->hidden,
