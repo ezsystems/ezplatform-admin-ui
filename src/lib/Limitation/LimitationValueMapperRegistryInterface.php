@@ -48,3 +48,8 @@ interface LimitationValueMapperRegistryInterface
      */
     public function addMapper(LimitationValueMapperInterface $mapper, $limitationType);
 }
+
+class_alias(
+    LimitationValueMapperRegistryInterface::class,
+    \EzSystems\RepositoryForms\Limitation\LimitationValueMapperRegistryInterface::class
+);
