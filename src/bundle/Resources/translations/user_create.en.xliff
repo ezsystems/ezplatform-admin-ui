@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="ad4e9a4e42b99d945f972bab5a2eff694d283793" resname="creating">
-        <source>Creating - %contentType%</source>
-        <target state="new">Creating - %contentType%</target>
+        <source>Creating a(n) %contentType%</source>
+        <target state="new">Creating a(n) %contentType%</target>
         <note>key: creating</note>
       </trans-unit>
       <trans-unit id="256aa0fda9b1de1a73ee0b7106b95efada81b5d6" resname="group_id">

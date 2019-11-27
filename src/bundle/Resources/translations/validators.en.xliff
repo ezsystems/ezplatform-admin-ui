@@ -7,58 +7,58 @@
     </header>
     <body>
       <trans-unit id="facbff93edf91393ba1bb60212f504d35beae555" resname="ez.content_type.descriptions">
-        <source>Content Type description cannot be longer than 255 characters.</source>
-        <target>Content Type description cannot be longer than 255 characters.</target>
+        <source>ez.content_type.descriptions</source>
+        <target state="new">ez.content_type.descriptions</target>
         <note>key: ez.content_type.descriptions</note>
       </trans-unit>
       <trans-unit id="73aad2fb9c8f9a2103bf60d6e9221a619f261f9c" resname="ez.content_type.identifier.pattern">
-        <source>Content Type identifier may only contain letters from "a" to "z", numbers and underscores.</source>
-        <target>Content Type identifier may only contain letters from "a" to "z", numbers and underscores.</target>
+        <source>ez.content_type.identifier.pattern</source>
+        <target state="new">ez.content_type.identifier.pattern</target>
         <note>key: ez.content_type.identifier.pattern</note>
       </trans-unit>
       <trans-unit id="7ecfa6bd2c1993d18d067f3abe3acebeb9c2458c" resname="ez.content_type.names">
-        <source>Content Type name cannot be blank and cannot be longer than 255 characters.</source>
-        <target>Content Type name cannot be blank and cannot be longer than 255 characters.</target>
+        <source>ez.content_type.names</source>
+        <target state="new">ez.content_type.names</target>
         <note>key: ez.content_type.names</note>
       </trans-unit>
       <trans-unit id="95f7490a739fd599a8d1d8f2ddec862744a71faa" resname="ez.field_definition.descriptions">
-        <source>Field definition description cannot be longer than 255 characters.</source>
-        <target>Field definition description cannot be longer than 255 characters.</target>
+        <source>ez.field_definition.descriptions</source>
+        <target state="new">ez.field_definition.descriptions</target>
         <note>key: ez.field_definition.descriptions</note>
       </trans-unit>
       <trans-unit id="0f7d936836760a506042c4d25cd38c5a30c3d9de" resname="ez.field_definition.names">
-        <source>Field definition name cannot be blank cannot be longer than 255 characters.</source>
-        <target>Field definition name cannot be blank cannot be longer than longer thaneed 255 characters.</target>
+        <source>ez.field_definition.names</source>
+        <target state="new">ez.field_definition.names</target>
         <note>key: ez.field_definition.names</note>
       </trans-unit>
       <trans-unit id="924826be1015d20c1f4524754c690e10935abaac" resname="ez.section.identifier.format">
-        <source>Section identifier may only contain letters from "a" to "z", numbers and underscores.</source>
-        <target>Section identifier may only contain letters from "a" to "z", numbers and underscores.</target>
+        <source>ez.section.identifier.format</source>
+        <target state="new">ez.section.identifier.format</target>
         <note>key: ez.section.identifier.format</note>
       </trans-unit>
       <trans-unit id="0727f822c8bebb99cd8a75ec16d4008c74d30b24" resname="ezplatform.change_user_password.not_match">
-        <source>Old password does not match.</source>
-        <target state="new">Old password does not match.</target>
+        <source>Incorrect current password.</source>
+        <target state="new">Incorrect current password.</target>
         <note>key: ezplatform.change_user_password.not_match</note>
       </trans-unit>
       <trans-unit id="54d912b0089483cfd533714e50262851b6d1421a" resname="ezplatform.change_user_password.passwords_must_match">
-        <source>The password fields must match.</source>
-        <target state="new">The password fields must match.</target>
+        <source>Passwords do not match.</source>
+        <target state="new">Passwords do not match.</target>
         <note>key: ezplatform.change_user_password.passwords_must_match</note>
       </trans-unit>
       <trans-unit id="1235bb9d75f7a324d6b06742720ab9c18775ddce" resname="ezplatform.copy_subtree.is_not_container">
-        <source>Selected Location is not container.</source>
-        <target state="new">Selected Location is not container.</target>
+        <source>Selected Location cannot contain children.</source>
+        <target state="new">Selected Location cannot contain children.</target>
         <note>key: ezplatform.copy_subtree.is_not_container</note>
       </trans-unit>
       <trans-unit id="f8f63f1b19c0003727cfed4fa1bbeba18b1d9265" resname="ezplatform.copy_subtree.is_root">
-        <source>Selected Location can not be root Location.</source>
-        <target state="new">Selected Location can not be root Location.</target>
+        <source>Selected Location cannot be root Location.</source>
+        <target state="new">Selected Location cannot be root Location.</target>
         <note>key: ezplatform.copy_subtree.is_root</note>
       </trans-unit>
       <trans-unit id="fc7e56b8b26344ec7393604951e1fb2199069e18" resname="ezplatform.copy_subtree.is_sub_location">
-        <source>Target parent location is a sub location of the source subtree</source>
-        <target state="new">Target parent location is a sub location of the source subtree</target>
+        <source>Cannot copy subtree to its own descendant Location</source>
+        <target state="new">Cannot copy subtree to its own descendant Location</target>
         <note>key: ezplatform.copy_subtree.is_sub_location</note>
       </trans-unit>
       <trans-unit id="631da4c4fb5b000ee7f5c0c422e830ca192341a6" resname="ezplatform.copy_subtree.limit_exceeded">
@@ -67,18 +67,18 @@
         <note>key: ezplatform.copy_subtree.limit_exceeded</note>
       </trans-unit>
       <trans-unit id="58f9ad2e8a8df010fb8abb25e39b46f2ccf92294" resname="ezplatform.reset_user_password.passwords_must_match">
-        <source>The password fields must match.</source>
-        <target state="new">The password fields must match.</target>
+        <source>Passwords do not match.</source>
+        <target state="new">Passwords do not match.</target>
         <note>key: ezplatform.reset_user_password.passwords_must_match</note>
       </trans-unit>
       <trans-unit id="dcdb0ac04fad96ebe26ca71df1c731e6228ff14f" resname="ezplatform.trash.have_used_assets">
-        <source>Selected Location have assets that can't be removed.</source>
-        <target state="new">Selected Location have assets that can't be removed.</target>
+        <source>Selected Location has assets that cannot be removed.</source>
+        <target state="new">Selected Location has assets that cannot be removed.</target>
         <note>key: ezplatform.trash.have_used_assets</note>
       </trans-unit>
       <trans-unit id="50f88ff616406e9f9474c6f78937aadb1303868e" resname="ezplatform.trash.location_has_no_children">
-        <source>Selected Location has no children locations.</source>
-        <target state="new">Selected Location has no children locations.</target>
+        <source>Selected Location has no children.</source>
+        <target state="new">Selected Location has no children.</target>
         <note>key: ezplatform.trash.location_has_no_children</note>
       </trans-unit>
       <trans-unit id="cf558f546b83d94f1272929f81c64bd33d2997bc" resname="js.error.address_not_found">
@@ -87,8 +87,8 @@
         <note>key: js.error.address_not_found</note>
       </trans-unit>
       <trans-unit id="74dc0c29a623eb80ca8f6460f0176503c7785904" resname="js.error.empty.field">
-        <source>{fieldName} field is required</source>
-        <target state="new">{fieldName} field is required</target>
+        <source>{fieldName} Field is required</source>
+        <target state="new">{fieldName} Field is required</target>
         <note>key: js.error.empty.field</note>
       </trans-unit>
       <trans-unit id="3ff026ea6e244dbbf70509ebf0a71c5f46cef0e0" resname="js.error.invalid_email">
@@ -107,28 +107,28 @@
         <note>key: js.error.invalid_url</note>
       </trans-unit>
       <trans-unit id="7baf32f4dc7e29e693c448b770eb34e9a614bbfe" resname="js.error.invalid_value">
-        <source>{fieldName} field has invalid values</source>
-        <target state="new">{fieldName} field has invalid values</target>
+        <source>{fieldName} Field has invalid values</source>
+        <target state="new">{fieldName} Field has invalid values</target>
         <note>key: js.error.invalid_value</note>
       </trans-unit>
       <trans-unit id="615db469cfe0c995622a179cc4e7402299acd607" resname="js.error.is_greater">
-        <source>{fieldName} value should be less than or equal to {maxValue}</source>
-        <target state="new">{fieldName} value should be less than or equal to {maxValue}</target>
+        <source>{fieldName} value must be less than or equal to {maxValue}</source>
+        <target state="new">{fieldName} value must be less than or equal to {maxValue}</target>
         <note>key: js.error.is_greater</note>
       </trans-unit>
       <trans-unit id="183ac24611110626431660e39c7b66a408796e22" resname="js.error.is_less">
-        <source>{fieldName} value should be greater than or equal to {minValue}</source>
-        <target state="new">{fieldName} value should be greater than or equal to {minValue}</target>
+        <source>{fieldName} value must be greater than or equal to {minValue}</source>
+        <target state="new">{fieldName} value must be greater than or equal to {minValue}</target>
         <note>key: js.error.is_less</note>
       </trans-unit>
       <trans-unit id="4fb6689be5f8ff74f3f86c7af72bdeb92c74bd53" resname="js.error.is_not_float">
-        <source>{fieldName} value should be a float number</source>
-        <target state="new">{fieldName} value should be a float number</target>
+        <source>{fieldName} value must be a float number</source>
+        <target state="new">{fieldName} value must be a float number</target>
         <note>key: js.error.is_not_float</note>
       </trans-unit>
       <trans-unit id="f9cf14c56aca4bc1c2bccd9cae839ff0d3f3cd36" resname="js.error.is_not_integer">
-        <source>{fieldName} value should be an integer</source>
-        <target state="new">{fieldName} value should be an integer</target>
+        <source>{fieldName} value must be an integer</source>
+        <target state="new">{fieldName} value must be an integer</target>
         <note>key: js.error.is_not_integer</note>
       </trans-unit>
       <trans-unit id="3923eef870a213df547b7792f8ae52af887fd165" resname="js.error.not_same_passwords">
@@ -137,8 +137,8 @@
         <note>key: js.error.not_same_passwords</note>
       </trans-unit>
       <trans-unit id="0d56229ac397e8c67aca29ec21ce771a67e04a9c" resname="js.error.out_of_range_value">
-        <source>{fieldName} field value is out of range. The value has to be between {min} and {max}</source>
-        <target state="new">{fieldName} field value is out of range. The value has to be between {min} and {max}</target>
+        <source>{fieldName} value is out of range. The value must be between {min} and {max}</source>
+        <target state="new">{fieldName} value is out of range. The value must be between {min} and {max}</target>
         <note>key: js.error.out_of_range_value</note>
       </trans-unit>
       <trans-unit id="fff2e4db98c86a312a0a3fd9861781e511d24d79" resname="js.error.provide_latitude_value">
@@ -152,13 +152,13 @@
         <note>key: js.error.provide_longitude_value</note>
       </trans-unit>
       <trans-unit id="4486bc31f8e72bc3452052da1b3e7b1f6ccd7f6b" resname="js.error.too_long">
-        <source>{fieldName} value should be less than or equal to {maxLength} characters</source>
-        <target state="new">{fieldName} value should be less than or equal to {maxLength} characters</target>
+        <source>{fieldName} value must be less than or equal to {maxLength} characters</source>
+        <target state="new">{fieldName} value must be less than or equal to {maxLength} characters</target>
         <note>key: js.error.too_long</note>
       </trans-unit>
       <trans-unit id="dc794513d2664b4f9ea5335d347c97a2183f398f" resname="js.error.too_short">
-        <source>{fieldName} value should be greater than or equal to {minLength} characters</source>
-        <target state="new">{fieldName} value should be greater than or equal to {minLength} characters</target>
+        <source>{fieldName} value must be greater than or equal to {minLength} characters</source>
+        <target state="new">{fieldName} value must be greater than or equal to {minLength} characters</target>
         <note>key: js.error.too_short</note>
       </trans-unit>
       <trans-unit id="f52d0870dd7bdbff2c2728c2b6ec708aa5cb240b" resname="validator.define_subtree_or_section_limitation">

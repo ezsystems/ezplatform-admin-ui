@@ -12,28 +12,28 @@
         <note>key: dashboard.create</note>
       </trans-unit>
       <trans-unit id="8f2d000c044a9f04c457499e57f6fbbb8360e23f" resname="dashboard.tab.all_content.empty">
-        <source>No content items. Content items you create will appear here</source>
-        <target state="new">No content items. Content items you create will appear here</target>
+        <source>No content. Content items you create will show up here</source>
+        <target state="new">No content. Content items you create will show up here</target>
         <note>key: dashboard.tab.all_content.empty</note>
       </trans-unit>
       <trans-unit id="50e7fa5609748dabc694245d5a54a77e9d5c7c1f" resname="dashboard.tab.all_media.empty">
-        <source>No content items. Media items you create will appear here</source>
-        <target state="new">No content items. Media items you create will appear here</target>
+        <source>No content. Media you create will show up here</source>
+        <target state="new">No content. Media you create will show up here</target>
         <note>key: dashboard.tab.all_media.empty</note>
       </trans-unit>
       <trans-unit id="9c6f10545440752bc7bc2e8142cbea5d265403cd" resname="dashboard.tab.my_content.empty">
-        <source>No content items. Content items you create will appear here</source>
-        <target state="new">No content items. Content items you create will appear here</target>
+        <source>No content. Content items you create will show up here</source>
+        <target state="new">No content. Content items you create will show up here</target>
         <note>key: dashboard.tab.my_content.empty</note>
       </trans-unit>
       <trans-unit id="cf10aced822b4dfb2cb519a82ed0adabaa4e480e" resname="dashboard.tab.my_drafts.empty">
-        <source>No content items. Draft items you create will appear here</source>
-        <target state="new">No content items. Draft items you create will appear here</target>
+        <source>No content. Drafts you create will show up here</source>
+        <target state="new">No content. Drafts you create will show up here</target>
         <note>key: dashboard.tab.my_drafts.empty</note>
       </trans-unit>
       <trans-unit id="9ef83b3497fae569ba56b6a8ab96004f359ae918" resname="dashboard.tab.my_media.empty">
-        <source>No content items. Media items you create will appear here</source>
-        <target state="new">No content items. Media items you create will appear here</target>
+        <source>No content. Media you create will show up here</source>
+        <target state="new">No content. Media you create will show up here</target>
         <note>key: dashboard.tab.my_media.empty</note>
       </trans-unit>
       <trans-unit id="749d4759e304735bcec6ef6ec10af43e70f1f289" resname="dashboard.table.all.content.edit">
@@ -62,8 +62,8 @@
         <note>key: dashboard.table.contributor</note>
       </trans-unit>
       <trans-unit id="e7790665f417ad7d9479f8b7c0920d212e4e24f6" resname="dashboard.table.contributor.not_found">
-        <source>Can’t fetch contributor</source>
-        <target state="new">Can’t fetch contributor</target>
+        <source>Can't fetch contributor</source>
+        <target state="new">Can't fetch contributor</target>
         <note>key: dashboard.table.contributor.not_found</note>
       </trans-unit>
       <trans-unit id="93a5fc53032106ea0ae1658261fd187e5c9c6a94" resname="dashboard.table.draft.edit">
@@ -72,8 +72,8 @@
         <note>key: dashboard.table.draft.edit</note>
       </trans-unit>
       <trans-unit id="5c6a58e397b164610db6371fe26b4e79aa3962f8" resname="dashboard.table.draft.unauthorized">
-        <source>User does not have access to '%function%' '%module%' with content ID: %contentId%</source>
-        <target state="new">User does not have access to '%function%' '%module%' with content ID: %contentId%</target>
+        <source>You do not have the '%function%' '%module%' permission for content ID: %contentId%</source>
+        <target state="new">You do not have the '%function%' '%module%' permission for content ID: %contentId%</target>
         <note>key: dashboard.table.draft.unauthorized</note>
       </trans-unit>
       <trans-unit id="3a857cc58c009830e22845ef1edbd43794206aed" resname="dashboard.table.last_saved">
@@ -102,13 +102,13 @@
         <note>key: dashboard.table.version</note>
       </trans-unit>
       <trans-unit id="a49a78f944bf1f73f3f7ff9672463bb1abd4a402" resname="everyone">
-        <source>Everyone</source>
-        <target state="new">Everyone</target>
+        <source>Common content</source>
+        <target state="new">Common content</target>
         <note>key: everyone</note>
       </trans-unit>
       <trans-unit id="b1c1d8736f20db3fb6c1c66bb1455ed43909f0d8" resname="me">
-        <source>Me</source>
-        <target state="new">Me</target>
+        <source>My content</source>
+        <target state="new">My content</target>
         <note>key: me</note>
       </trans-unit>
       <trans-unit id="013cb5f0c7391fd9db25ef277f72bd0d3b62a0e3" resname="my.dashboard">

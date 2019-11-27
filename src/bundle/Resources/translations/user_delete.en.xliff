@@ -12,8 +12,8 @@
         <note>key: delete.form.cancel</note>
       </trans-unit>
       <trans-unit id="bd2693d22f74954ebfeec334da5b3a4816ea6c11" resname="delete.modal.message">
-        <source>Are you sure you want to delete this user?</source>
-        <target state="new">Are you sure you want to delete this user?</target>
+        <source>Are you sure you want to delete this User?</source>
+        <target state="new">Are you sure you want to delete this User?</target>
         <note>key: delete.modal.message</note>
       </trans-unit>
     </body>

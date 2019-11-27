@@ -22,8 +22,8 @@
         <note>key: search</note>
       </trans-unit>
       <trans-unit id="2c0d71c1688c1f04ff156bb9dff167ca5ae663b6" resname="search.any.content.type">
-        <source>Any content type</source>
-        <target state="new">Any content type</target>
+        <source>Any Content Type</source>
+        <target state="new">Any Content Type</target>
         <note>key: search.any.content.type</note>
       </trans-unit>
       <trans-unit id="8605c5030193beebc7097a652f6c9dcb648cccec" resname="search.apply">
@@ -52,8 +52,8 @@
         <note>key: search.creator</note>
       </trans-unit>
       <trans-unit id="3d9f547776de4846ff54fcd1cd173ac5937e5a46" resname="search.creator_input.placeholder">
-        <source>Type creator</source>
-        <target state="new">Type creator</target>
+        <source>Type creator's name</source>
+        <target state="new">Type creator's name</target>
         <note>key: search.creator_input.placeholder</note>
       </trans-unit>
       <trans-unit id="a18d7835f5b4a97ac94331f82e729abcb698be41" resname="search.custom_range">
@@ -127,8 +127,8 @@
         <note>key: search.name</note>
       </trans-unit>
       <trans-unit id="8c11cc36acf58db9ff898f3a4cf02fd0fc293f67" resname="search.no_result">
-        <source>Sorry, no results were found for "%query%".</source>
-        <target state="new">Sorry, no results were found for "%query%".</target>
+        <source>No results found for "%query%".</source>
+        <target state="new">No results found for "%query%".</target>
         <note>key: search.no_result</note>
       </trans-unit>
       <trans-unit id="6fa93ef4dfbce97076a254427bb30bf7c5819c5d" resname="search.perform">
@@ -152,8 +152,8 @@
         <note>key: search.subtree</note>
       </trans-unit>
       <trans-unit id="777cc1ef279096d5a978aa3553e9434d828f8248" resname="search.tips.check_spelling">
-        <source>Check spelling of keywords.</source>
-        <target state="new">Check spelling of keywords.</target>
+        <source>Check the spelling of keywords.</source>
+        <target state="new">Check the spelling of keywords.</target>
         <note>key: search.tips.check_spelling</note>
       </trans-unit>
       <trans-unit id="d89a8ff5c4b03f1dd7bd1ce3e3306862e1855751" resname="search.tips.different_keywords">
@@ -162,8 +162,8 @@
         <note>key: search.tips.different_keywords</note>
       </trans-unit>
       <trans-unit id="013ced9a3284ecebf5a5356397dc9a79eaf76496" resname="search.tips.fewer_keywords">
-        <source>Try fewer keywords. Reducing keywords result in more matches.</source>
-        <target state="new">Try fewer keywords. Reducing keywords result in more matches.</target>
+        <source>Try fewer keywords. Reducing keywords results in more matches.</source>
+        <target state="new">Try fewer keywords. Reducing keywords results in more matches.</target>
         <note>key: search.tips.fewer_keywords</note>
       </trans-unit>
       <trans-unit id="4af1e76946070e5f61320621d12a171f4206e06c" resname="search.tips.headline">

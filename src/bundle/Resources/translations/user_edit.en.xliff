@@ -17,8 +17,8 @@
         <note>key: created_by</note>
       </trans-unit>
       <trans-unit id="f34946beab1da2af6535a8e4a88145e9557de0aa" resname="editing">
-        <source>Editing - %contentType%</source>
-        <target state="new">Editing - %contentType%</target>
+        <source>Editing a(n) %contentType%</source>
+        <target state="new">Editing a(n) %contentType%</target>
         <note>key: editing</note>
       </trans-unit>
       <trans-unit id="876d7bdba03c72251ec4c2dc827fc54af7889091" resname="location_id">

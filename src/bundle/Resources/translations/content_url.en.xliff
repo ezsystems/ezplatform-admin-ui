@@ -7,13 +7,13 @@
     </header>
     <body>
       <trans-unit id="5c48ac36c2a46c2dc2a89fd4c91a2a3d684eb5d8" resname="tab.urls.action.add">
-        <source>Add Custom URL</source>
-        <target state="new">Add Custom URL</target>
+        <source>Add a custom URL alias</source>
+        <target state="new">Add a custom URL alias</target>
         <note>key: tab.urls.action.add</note>
       </trans-unit>
       <trans-unit id="9b4504fd2e75dffb2c22283be3e9816e8142538a" resname="tab.urls.action.delete">
-        <source>Delete Custom URL</source>
-        <target state="new">Delete Custom URL</target>
+        <source>Delete custom URL alias</source>
+        <target state="new">Delete custom URL alias</target>
         <note>key: tab.urls.action.delete</note>
       </trans-unit>
       <trans-unit id="2398a15c604fd353b25fc8f558e2d099a6afeb33" resname="tab.urls.add.cancel">
@@ -32,43 +32,43 @@
         <note>key: tab.urls.add.path</note>
       </trans-unit>
       <trans-unit id="89135eef0092aa6e6609d38d013230705894f219" resname="tab.urls.add.redirect">
-        <source>Alias should redirect to its destination</source>
-        <target state="new">Alias should redirect to its destination</target>
+        <source>Redirect to alias destination</source>
+        <target state="new">Redirect to alias destination</target>
         <note>key: tab.urls.add.redirect</note>
       </trans-unit>
       <trans-unit id="e84da49f6798548a0e09f5f7d5095788257f0119" resname="tab.urls.add.redirect.helper.checked">
-        <source>Checked will redirect to the destination using an HTTP 301 response.</source>
-        <target state="new">Checked will redirect to the destination using an HTTP 301 response.</target>
+        <source>When checked, the alias will redirect to the destination using an HTTP 301 response.</source>
+        <target state="new">When checked, the alias will redirect to the destination using an HTTP 301 response.</target>
         <note>key: tab.urls.add.redirect.helper.checked</note>
       </trans-unit>
       <trans-unit id="bccfa7be40c2932ae04a50767aee2184bd5ca4d5" resname="tab.urls.add.redirect.helper.unchecked">
-        <source>Unchecked will not redirect to the destination and the URL will stay the same.</source>
-        <target state="new">Unchecked will not redirect to the destination and the URL will stay the same.</target>
+        <source>When unchecked, the alias will not redirect to the destination and the URL will stay the same.</source>
+        <target state="new">When unchecked, the alias will not redirect to the destination and the URL will stay the same.</target>
         <note>key: tab.urls.add.redirect.helper.unchecked</note>
       </trans-unit>
       <trans-unit id="9ef990fca45f612ab2d3af7b21968803d76d5d77" resname="tab.urls.add.site_root">
-        <source>Place alias at the site root</source>
-        <target state="new">Place alias at the site root</target>
+        <source>Place at the site root</source>
+        <target state="new">Place at the site root</target>
         <note>key: tab.urls.add.site_root</note>
       </trans-unit>
       <trans-unit id="9fc6fbd86b58ee883321610dd1726551772edaf1" resname="tab.urls.add.site_root.helper.checked">
-        <source>Checked will create the alias at the site root.</source>
-        <target state="new">Checked will create the alias at the site root.</target>
+        <source>When checked, the alias will be placed at the site root.</source>
+        <target state="new">When checked, the alias will be placed at the site root.</target>
         <note>key: tab.urls.add.site_root.helper.checked</note>
       </trans-unit>
       <trans-unit id="cf65d6c865f18c51e3edcd90c6779079b994595c" resname="tab.urls.add.site_root.helper.no_parent_name">
-        <source>Unchecked will create the new alias under the parent of this location</source>
-        <target state="new">Unchecked will create the new alias under the parent of this location</target>
+        <source>When unchecked, the alias will be placed under the parent of this Location</source>
+        <target state="new">When unchecked, the alias will be placed under the parent of this Location</target>
         <note>key: tab.urls.add.site_root.helper.no_parent_name</note>
       </trans-unit>
       <trans-unit id="db531fb5f993263b5ea57393101781b9d731a738" resname="tab.urls.add.site_root.helper.unchecked">
-        <source>Unchecked will create the new alias under %parent_name%</source>
-        <target state="new">Unchecked will create the new alias under %parent_name%</target>
+        <source>When unchecked, the alias will be placed under %parent_name%</source>
+        <target state="new">When unchecked, the alias will be placed under %parent_name%</target>
         <note>key: tab.urls.add.site_root.helper.unchecked</note>
       </trans-unit>
       <trans-unit id="25badd959ce69714e8eb349ebddbbbe126c14458" resname="tab.urls.add.title">
-        <source>Create new URL alias</source>
-        <target state="new">Create new URL alias</target>
+        <source>Create a new URL alias</source>
+        <target state="new">Create a new URL alias</target>
         <note>key: tab.urls.add.title</note>
       </trans-unit>
       <trans-unit id="d244966cab8b41f92fd5553d8f33f0e1ca8bf85f" resname="tab.urls.custom_url_aliases">
@@ -82,8 +82,8 @@
         <note>key: tab.urls.language</note>
       </trans-unit>
       <trans-unit id="0d3138c0198569f427ab4568fffa5d9d894db72a" resname="tab.urls.modal.message">
-        <source>Do you want to delete selected Custom URLs?</source>
-        <target state="new">Do you want to delete selected Custom URLs?</target>
+        <source>Do you want to delete the selected custom URL alias(es)?</source>
+        <target state="new">Do you want to delete the selected custom URL alias(es)?</target>
         <note>key: tab.urls.modal.message</note>
       </trans-unit>
       <trans-unit id="777d1a83ab6a6c4644dd31409906e48a0a7a4a51" resname="tab.urls.modal_close">
@@ -92,13 +92,13 @@
         <note>key: tab.urls.modal_close</note>
       </trans-unit>
       <trans-unit id="56d218db883ed4cc59dbbca53364dc2e725013e4" resname="tab.urls.no_custom_urls">
-        <source>This content item has no custom url aliases.</source>
-        <target state="new">This content item has no custom url aliases.</target>
+        <source>This Content item has no custom URL aliases.</source>
+        <target state="new">This Content item has no custom URL aliases.</target>
         <note>key: tab.urls.no_custom_urls</note>
       </trans-unit>
       <trans-unit id="c9fdd1434b44a4592626e8fe493c19141aab24d5" resname="tab.urls.no_system_urls">
-        <source>This content item has no system urls.</source>
-        <target state="new">This content item has no system urls.</target>
+        <source>This Content item has no system URLs.</source>
+        <target state="new">This Content item has no system URLs.</target>
         <note>key: tab.urls.no_system_urls</note>
       </trans-unit>
       <trans-unit id="902beb4ac170382cb95bd554cb1e763d8fdd413c" resname="tab.urls.system.title">

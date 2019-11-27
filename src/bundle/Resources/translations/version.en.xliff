@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="885ec7aab950e05f729031321cddbb6d7f9c3246" resname="version.delete.success">
-        <source>Versions removed from '%name%' content.</source>
-        <target state="new">Versions removed from '%name%' content.</target>
+        <source>Removed version(s) from '%name%'.</source>
+        <target state="new">Removed version(s) from '%name%'.</target>
         <note>key: version.delete.success</note>
       </trans-unit>
     </body>

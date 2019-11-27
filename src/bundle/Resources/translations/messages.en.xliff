@@ -12,23 +12,23 @@
         <note>key: alert.close</note>
       </trans-unit>
       <trans-unit id="8ace6daf300d4e12a28054d996c185db9ce7fe91" resname="authentication.credentials_expire_in.warning">
-        <source>Your password will expire in %days% days. Consider updating it in User Settings/My Account Settings.</source>
-        <target state="new">Your password will expire in %days% days. Consider updating it in User Settings/My Account Settings.</target>
+        <source>Your current password will expire in %days% day(s). You can change it in User Settings/My Account Settings.</source>
+        <target state="new">Your current password will expire in %days% day(s). You can change it in User Settings/My Account Settings.</target>
         <note>key: authentication.credentials_expire_in.warning</note>
       </trans-unit>
       <trans-unit id="e524fb7941a99d5c26d355dbf015226241e807a7" resname="authentication.credentials_expire_today.warning">
-        <source>Your password will expire today. Consider updating it in User Settings/My Account Settings.</source>
-        <target state="new">Your password will expire today. Consider updating it in User Settings/My Account Settings.</target>
+        <source>Your current password will expire today. You can change it in User Settings/My Account Settings.</source>
+        <target state="new">Your current password will expire today. You can change it in User Settings/My Account Settings.</target>
         <note>key: authentication.credentials_expire_today.warning</note>
       </trans-unit>
       <trans-unit id="c9a7a0dd7518550634ea6873dcc815d4ec30c1e2" resname="authentication.credentials_expired">
-        <source>Your password has expired</source>
-        <target state="new">Your password has expired</target>
+        <source>Your password has expired.</source>
+        <target state="new">Your password has expired.</target>
         <note>key: authentication.credentials_expired</note>
       </trans-unit>
       <trans-unit id="be4c13cda3e93a1e8cb05145c0dc6c3780c40c66" resname="authentication.credentials_expired.message">
-        <source>For security reasons, your password has expired and needs to be changed. An email has been sent to you with instructions.</source>
-        <target state="new">For security reasons, your password has expired and needs to be changed. An email has been sent to you with instructions.</target>
+        <source>Your password has expired and must be changed. You will receive an email with instructions how to reset your password.</source>
+        <target state="new">Your password has expired and must be changed. You will receive an email with instructions how to reset your password.</target>
         <note>key: authentication.credentials_expired.message</note>
       </trans-unit>
       <trans-unit id="2b3f00f63c14c6dc9300d54b42159218f6b5f260" resname="authentication.credentials_expired.reset_password">
@@ -102,18 +102,18 @@
         <note>key: content.hide.modal.confirm</note>
       </trans-unit>
       <trans-unit id="5c48055acad8df653edc1f8f65130d784fed3d88" resname="content.hide.modal.please_confirm_to_continue">
-        <source>If you wish to continue, please click on Confirm.</source>
-        <target state="new">If you wish to continue, please click on Confirm.</target>
+        <source>To hide the Content item anyway, click Confirm.</source>
+        <target state="new">To hide the Content item anyway, click Confirm.</target>
         <note>key: content.hide.modal.please_confirm_to_continue</note>
       </trans-unit>
       <trans-unit id="7932e7fd6d6b90a8264cf5805586cab3294290ed" resname="content.hide.modal.title">
-        <source>Conflict when hiding content item</source>
-        <target state="new">Conflict when hiding content item</target>
+        <source>Content hide conflict</source>
+        <target state="new">Content hide conflict</target>
         <note>key: content.hide.modal.title</note>
       </trans-unit>
       <trans-unit id="0f260745fb36618170e86bd6407bb2facd3a05a1" resname="content.hide.modal.warning_content_used_by_other_content">
-        <source>This item is being used by other content item(s). To avoid errors, please update or remove all related objects listed in the Relations tab.</source>
-        <target state="new">This item is being used by other content item(s). To avoid errors, please update or remove all related objects listed in the Relations tab.</target>
+        <source>This content is used by other Content item(s). To avoid errors, update or remove all related content listed in the Relations tab.</source>
+        <target state="new">This content is used by other Content item(s). To avoid errors, update or remove all related content listed in the Relations tab.</target>
         <note>key: content.hide.modal.warning_content_used_by_other_content</note>
       </trans-unit>
       <trans-unit id="fb19ae886e63bac3aa3b851ac00aae8a3b777992" resname="content.in_trash">
@@ -152,43 +152,43 @@
         <note>key: custom_url_alias_add_form.remove</note>
       </trans-unit>
       <trans-unit id="7cb40cbc703336ab1285e81ebf100b82b05a0e27" resname="error.page.403.actions">
-        <source><![CDATA[You can also go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> here or <a class="error-page__link" href="%search%">search</a> for other content.]]></source>
-        <target state="new"><![CDATA[You can also go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> here or <a class="error-page__link" href="%search%">search</a> for other content.]]></target>
+        <source><![CDATA[To continue, go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.]]></source>
+        <target state="new"><![CDATA[To continue, go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.]]></target>
         <note>key: error.page.403.actions</note>
       </trans-unit>
       <trans-unit id="2532cb9ce6fdf46258c107f3d20888c506115ef6" resname="error.page.403.message">
-        <source><![CDATA[It’s an error 403. You don’t have permission to retrieve or access this page.<br/>Please contact your eZ Platform Administrator to request access to<br/>this content or modify your profile.]]></source>
-        <target state="new"><![CDATA[It’s an error 403. You don’t have permission to retrieve or access this page.<br/>Please contact your eZ Platform Administrator to request access to<br/>this content or modify your profile.]]></target>
+        <source><![CDATA[Error 403: you don't have permissions to access this page.<br/>Contact your Administrator to request access to this content.]]></source>
+        <target state="new"><![CDATA[Error 403: you don't have permissions to access this page.<br/>Contact your Administrator to request access to this content.]]></target>
         <note>key: error.page.403.message</note>
       </trans-unit>
       <trans-unit id="b1712cfa4c13874debdcc0f1f4a3b9fa4af3c966" resname="error.page.403.title">
-        <source>You don’t have permission for this page. Sorry!</source>
-        <target state="new">You don’t have permission for this page. Sorry!</target>
+        <source>You don't have permission for this page.</source>
+        <target state="new">You don't have permission for this page.</target>
         <note>key: error.page.403.title</note>
       </trans-unit>
       <trans-unit id="638be721c063eee72e70484fe99a25b2a990bb18" resname="error.page.404.actions">
-        <source><![CDATA[Check the URL, in case there would be an error in there.<br/>If not, go to the <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for specific content.]]></source>
-        <target state="new"><![CDATA[Check the URL, in case there would be an error in there.<br/>If not, go to the <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for specific content.]]></target>
+        <source><![CDATA[Check the URL for a typo and try again.<br/>Otherwise, go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.]]></source>
+        <target state="new"><![CDATA[Check the URL for a typo and try again.<br/>Otherwise, go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.]]></target>
         <note>key: error.page.404.actions</note>
       </trans-unit>
       <trans-unit id="7027b2adcf028b82111334763e40823cd85a52fa" resname="error.page.404.message">
-        <source><![CDATA[It’s an error 404. The page you requested was not found.<br/>It might have been deleted or might be temporarily unavailable.]]></source>
-        <target state="new"><![CDATA[It’s an error 404. The page you requested was not found.<br/>It might have been deleted or might be temporarily unavailable.]]></target>
+        <source><![CDATA[Error 404: the page you requested was not found.<br/>It might have been deleted or it is temporarily unavailable.]]></source>
+        <target state="new"><![CDATA[Error 404: the page you requested was not found.<br/>It might have been deleted or it is temporarily unavailable.]]></target>
         <note>key: error.page.404.message</note>
       </trans-unit>
       <trans-unit id="156b8a7f797412e60bdba432064e2dade6d4a7af" resname="error.page.404.title">
-        <source>Something went wrong. Sorry!</source>
-        <target state="new">Something went wrong. Sorry!</target>
+        <source>Page not found.</source>
+        <target state="new">Page not found.</target>
         <note>key: error.page.404.title</note>
       </trans-unit>
       <trans-unit id="a599d59a63814826906caa9842f0b3c33db24d09" resname="error.page.default.actions">
-        <source><![CDATA[Please contact your eZ Platform Administrator and inform her/him about the time the error occurred, the URL in your browser window and anything related you think may have caused the error.<br/>You can also go back or try to reload the application.]]></source>
-        <target state="new"><![CDATA[Please contact your eZ Platform Administrator and inform her/him about the time the error occurred, the URL in your browser window and anything related you think may have caused the error.<br/>You can also go back or try to reload the application.]]></target>
+        <source><![CDATA[Contact your Administrator and inform them about the time the error occurred, the URL in your browser window, and anything related that you think may have caused the error.<br/>You can also go back or try to reload the application.]]></source>
+        <target state="new"><![CDATA[Contact your Administrator and inform them about the time the error occurred, the URL in your browser window, and anything related that you think may have caused the error.<br/>You can also go back or try to reload the application.]]></target>
         <note>key: error.page.default.actions</note>
       </trans-unit>
       <trans-unit id="8338c190462d420926edf71e8d4cddcae710d361" resname="error.page.default.message">
-        <source>It's an error 500, an internal server error. The server was unable to complete your request and it's not your fault.</source>
-        <target state="new">It's an error 500, an internal server error. The server was unable to complete your request and it's not your fault.</target>
+        <source>Error 500: internal server error. The server was unable to complete your request because of an internal problem.</source>
+        <target state="new">Error 500: internal server error. The server was unable to complete your request because of an internal problem.</target>
         <note>key: error.page.default.message</note>
       </trans-unit>
       <trans-unit id="889ba15bcc2f87bfac9b80282f659eaeb7c175d4" resname="error.page.default.title">
@@ -207,28 +207,28 @@
         <note>key: ezauthor.action.delete</note>
       </trans-unit>
       <trans-unit id="f73d03811ba3033d6b44986d55ca728c5a88b168" resname="ezplatform.forgot_user_password.contact_administrator">
-        <source>If you do not remember your login, please contact the site administrator.</source>
-        <target state="new">If you do not remember your login, please contact the site administrator.</target>
+        <source>If you do not remember your login, contact your Administrator.</source>
+        <target state="new">If you do not remember your login, contact your Administrator.</target>
         <note>key: ezplatform.forgot_user_password.contact_administrator</note>
       </trans-unit>
       <trans-unit id="ffb6990d5e75fe6dc86e94166b77e40a79e4e2a3" resname="ezplatform.forgot_user_password.login">
-        <source>This email is connected with several accounts. Please enter your login.</source>
-        <target state="new">This email is connected with several accounts. Please enter your login.</target>
+        <source>This email is connected with several accounts. Enter your login instead.</source>
+        <target state="new">This email is connected with several accounts. Enter your login instead.</target>
         <note>key: ezplatform.forgot_user_password.login</note>
       </trans-unit>
       <trans-unit id="db6dd97ed4776bb0e9843554c48e3962327e8f50" resname="ezplatform.forgot_user_password.message">
         <source><![CDATA[Hi,
         <br /><br />
-        We have received a request to reset the password for your account on site. Click “reset password” below to choose a new password:
+        We have received a request to reset the password for your eZ Platform account. Click “reset password” below to choose a new password:
         <br /><br />
-        <a href="%reset_password%">Reset password<a/>
+        <a href="%reset_password%">Reset password</a>
         <br /><br />
         If you did not request a password reset, please ignore this email, and your password will remain the same.]]></source>
         <target state="new"><![CDATA[Hi,
         <br /><br />
-        We have received a request to reset the password for your account on site. Click “reset password” below to choose a new password:
+        We have received a request to reset the password for your eZ Platform account. Click “reset password” below to choose a new password:
         <br /><br />
-        <a href="%reset_password%">Reset password<a/>
+        <a href="%reset_password%">Reset password</a>
         <br /><br />
         If you did not request a password reset, please ignore this email, and your password will remain the same.]]></target>
         <note>key: ezplatform.forgot_user_password.message</note>
@@ -239,14 +239,14 @@
         <note>key: ezplatform.forgot_user_password.reset_your_password</note>
       </trans-unit>
       <trans-unit id="36aa6723300a41ba80ee0096c0d2bcf34fd48aca" resname="ezplatform.forgot_user_password.success">
-        <source><![CDATA[<p>We have sent an email to the email address of your account. You should receive the email shortly.</p>
+        <source><![CDATA[<p>An email has been sent to the address you provided with instructions on how to reset your password.</p>
             <p>If the email is slow to arrive, check your spam folders.</p>
-            <p>If you receive no email, it’s that your username or email is unknown to us, so please double check.</p>
-            <p>If you reset your password multiple times, only the most recent email link will be valid</p>]]></source>
-        <target state="new"><![CDATA[<p>We have sent an email to the email address of your account. You should receive the email shortly.</p>
+            <p>If you don't receive an email, make sure you've entered the address you registered with, and check your spam folder.</p>
+            <p>If you reset your password multiple times, only the most recent email link will be valid.</p>]]></source>
+        <target state="new"><![CDATA[<p>An email has been sent to the address you provided with instructions on how to reset your password.</p>
             <p>If the email is slow to arrive, check your spam folders.</p>
-            <p>If you receive no email, it’s that your username or email is unknown to us, so please double check.</p>
-            <p>If you reset your password multiple times, only the most recent email link will be valid</p>]]></target>
+            <p>If you don't receive an email, make sure you've entered the address you registered with, and check your spam folder.</p>
+            <p>If you reset your password multiple times, only the most recent email link will be valid.</p>]]></target>
         <note>key: ezplatform.forgot_user_password.success</note>
       </trans-unit>
       <trans-unit id="40dd2934190789b016771a0fc3b41dcdfe0bb920" resname="ezplatform.reset_user_password.change_password">
@@ -260,8 +260,8 @@
         <note>key: ezplatform.reset_user_password.link_is_not_valid</note>
       </trans-unit>
       <trans-unit id="5149c594d64197e519d38a1a2e7368140716bb81" resname="ezplatform.reset_user_password.success">
-        <source><![CDATA[Congrats, your password has been changed, you can now <a href="%login%">login</a> to eZ Platform.]]></source>
-        <target state="new"><![CDATA[Congrats, your password has been changed, you can now <a href="%login%">login</a> to eZ Platform.]]></target>
+        <source><![CDATA[Your password has been changed. You can <a href="%login%">log in</a> to eZ Platform.]]></source>
+        <target state="new"><![CDATA[Your password has been changed. You can <a href="%login%">log in</a> to eZ Platform.]]></target>
         <note>key: ezplatform.reset_user_password.success</note>
       </trans-unit>
       <trans-unit id="5cf420af18fd4a8d856fd30bc13aea5039369f9b" resname="form.cancel">
@@ -300,18 +300,18 @@
         <note>key: section.assign,content</note>
       </trans-unit>
       <trans-unit id="6a17e9f4ed416563fc8c3e188509b8eec8a6f7c0" resname="section.modal.message">
-        <source>Do you want to delete section?</source>
-        <target state="new">Do you want to delete section?</target>
+        <source>Do you want to delete the Section(s)?</source>
+        <target state="new">Do you want to delete the Section(s)?</target>
         <note>key: section.modal.message</note>
       </trans-unit>
       <trans-unit id="1152c93462d8bed85642b961f01ed63a6f2525ab" resname="tab.locations.location_content_swap">
-        <source>Location Content Swap</source>
-        <target state="new">Location Content Swap</target>
+        <source>Swap Locations</source>
+        <target state="new">Swap Locations</target>
         <note>key: tab.locations.location_content_swap</note>
       </trans-unit>
       <trans-unit id="27d429c3dcff70494c4080957b05a9db5255f854" resname="tab.locations.swap_with_another">
-        <source>Swap the content item at this location with another</source>
-        <target state="new">Swap the content item at this location with another</target>
+        <source>Swap the Content item at this Location with another</source>
+        <target state="new">Swap the Content item at this Location with another</target>
         <note>key: tab.locations.swap_with_another</note>
       </trans-unit>
       <trans-unit id="1246bcf8752e249bdec2067d43cfae2a5103bc5f" resname="tab.view.preview">
@@ -353,11 +353,6 @@
         <source>You are about to delete a Content item that has one or more asset Field(s) used by other Content items. These assets will remain available in system.</source>
         <target state="new">You are about to delete a Content item that has one or more asset Field(s) used by other Content items. These assets will remain available in system.</target>
         <note>key: trash_asset.modal.message_header</note>
-      </trans-unit>
-      <trans-unit id="e81a14f38ebe272cb11ef90e2948a8c6602307ca" resname="trash_asset_single.modal.message">
-        <source>You have the option to delete %content_name% (%content_type%) only or to also delete the assets it is using. Make your choice:</source>
-        <target state="new">You have the option to delete %content_name% (%content_type%) only or to also delete the assets it is using. Make your choice:</target>
-        <note>key: trash_asset_single.modal.message</note>
       </trans-unit>
       <trans-unit id="ff537a1e092270edf7497dc13ce051cdb458958b" resname="trash_asset_single.modal.message_main">
         <source>'%content_name%' has 1 or more asset Field(s). You have an option to send only the Content item to Trash, or to send the Content item and its assets to Trash. Please select your option:</source>

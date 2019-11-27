@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="f3902e2cf1dc7593d56db51492f2c93763e17550" resname="add_location.title">
-        <source>Select location</source>
-        <target state="new">Select location</target>
+        <source>Select Location</source>
+        <target state="new">Select Location</target>
         <note>key: add_location.title</note>
       </trans-unit>
       <trans-unit id="b03000247ec164f0aca90e64643bd510dce50cfa" resname="browse.title">
@@ -17,13 +17,13 @@
         <note>key: browse.title</note>
       </trans-unit>
       <trans-unit id="2833f6d1654708301ec537add9ff0b14744c24a3" resname="copy.title">
-        <source>Select location</source>
-        <target state="new">Select location</target>
+        <source>Select Location</source>
+        <target state="new">Select Location</target>
         <note>key: copy.title</note>
       </trans-unit>
       <trans-unit id="b449a59d74243753a504665c352d161371545f15" resname="dashboard.create.title">
-        <source>Create your content</source>
-        <target state="new">Create your content</target>
+        <source>Create content</source>
+        <target state="new">Create content</target>
         <note>key: dashboard.create.title</note>
       </trans-unit>
       <trans-unit id="bc4850e9ccff0c6effc58a089fe148c16689d8ee" resname="ezimageasset.title">
@@ -37,8 +37,8 @@
         <note>key: ezobjectrelationlist.title</note>
       </trans-unit>
       <trans-unit id="2d4febe56a341671c069ff47b6e6adfd2bba005c" resname="limitation.pick.error">
-        <source>Failed to fetch content names</source>
-        <target state="new">Failed to fetch content names</target>
+        <source>Could not fetch content names</source>
+        <target state="new">Could not fetch content names</target>
         <note>key: limitation.pick.error</note>
       </trans-unit>
       <trans-unit id="56faf4ff9f2deaae1d34c1abcecae0413dc24a78" resname="move.title">
@@ -47,28 +47,28 @@
         <note>key: move.title</note>
       </trans-unit>
       <trans-unit id="0a2b01d9e287d0669cdd89b8067e119bbf749550" resname="restore_under_new_location.title">
-        <source>Select a location to restore you content item(s)</source>
-        <target state="new">Select a location to restore you content item(s)</target>
+        <source>Select a Location to restore the Content item(s)</source>
+        <target state="new">Select a Location to restore the Content item(s)</target>
         <note>key: restore_under_new_location.title</note>
       </trans-unit>
       <trans-unit id="5b8a9a5fceb4991b77b50983c34df8a18a900a09" resname="select_location.error">
-        <source>Cannot find children locations with given id - %idList%</source>
-        <target state="new">Cannot find children locations with given id - %idList%</target>
+        <source>Cannot find children Locations with ID %idList%</source>
+        <target state="new">Cannot find children Locations with ID %idList%</target>
         <note>key: select_location.error</note>
       </trans-unit>
       <trans-unit id="987330c357d2475b80942e5c449e4215b623a459" resname="subtree.title">
-        <source>Select location</source>
-        <target state="new">Select location</target>
+        <source>Select Location</source>
+        <target state="new">Select Location</target>
         <note>key: subtree.title</note>
       </trans-unit>
       <trans-unit id="5a3a6e5c6a88da5a26a9638e8a796974bd3c8dd7" resname="subtree_limitation.title">
-        <source>Choose locations</source>
-        <target state="new">Choose locations</target>
+        <source>Choose Locations</source>
+        <target state="new">Choose Locations</target>
         <note>key: subtree_limitation.title</note>
       </trans-unit>
       <trans-unit id="7dad0dfeafd90e145f0e9efff5313d2a6040ba4c" resname="swap.title">
-        <source>Select location to be swapped with</source>
-        <target state="new">Select location to be swapped with</target>
+        <source>Select Location to swap with</source>
+        <target state="new">Select Location to swap with</target>
         <note>key: swap.title</note>
       </trans-unit>
     </body>

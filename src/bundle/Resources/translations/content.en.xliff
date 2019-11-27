@@ -7,28 +7,28 @@
     </header>
     <body>
       <trans-unit id="8343cec7024fb459d738278aca82b39710b89c50" resname="content.create_draft.success">
-        <source>New Version Draft for '%name%' created.</source>
-        <target state="new">New Version Draft for '%name%' created.</target>
+        <source>Created a new draft for '%name%'.</source>
+        <target state="new">Created a new draft for '%name%'.</target>
         <note>key: content.create_draft.success</note>
       </trans-unit>
       <trans-unit id="1ea2690f8ebd8fc99115a6f94ac56b8b93e46afe" resname="content.draft.conflict.error">
-        <source>Cannot check if the draft has no conflict with other drafts. %error%. </source>
-        <target state="new">Cannot check if the draft has no conflict with other drafts. %error%. </target>
+        <source>Cannot check if the draft has conflicts with other drafts. %error%.</source>
+        <target state="new">Cannot check if the draft has conflicts with other drafts. %error%.</target>
         <note>key: content.draft.conflict.error</note>
       </trans-unit>
       <trans-unit id="7b7f768e446eae09c01c831807e246e293f65349" resname="content.edit.permission.error">
-        <source>You don't have permission to edit the content</source>
-        <target state="new">You don't have permission to edit the content</target>
+        <source>You don't have permission to edit this Content item</source>
+        <target state="new">You don't have permission to edit this Content item</target>
         <note>key: content.edit.permission.error</note>
       </trans-unit>
       <trans-unit id="fbc24757e92f52997d730762e004765425845995" resname="content.hide.already_hidden">
-        <source>Content '%name%' was already hidden.</source>
-        <target state="new">Content '%name%' was already hidden.</target>
+        <source>Content item '%name%' is already hidden.</source>
+        <target state="new">Content item '%name%' is already hidden.</target>
         <note>key: content.hide.already_hidden</note>
       </trans-unit>
       <trans-unit id="7a80db58ea3f3bef5b9f07c4565d715efdacda99" resname="content.hide.success">
-        <source>Content '%name%' has been hidden.</source>
-        <target state="new">Content '%name%' has been hidden.</target>
+        <source>Content item '%name%' hidden.</source>
+        <target state="new">Content item '%name%' hidden.</target>
         <note>key: content.hide.success</note>
       </trans-unit>
       <trans-unit id="d773dd487e4e5467fd20fc4fc4987eba33eaf1b7" resname="content.main_language_update.success">
@@ -37,18 +37,18 @@
         <note>key: content.main_language_update.success</note>
       </trans-unit>
       <trans-unit id="5f36fd5bb4e6938a731079f403467900e0396ed2" resname="content.main_location_update.success">
-        <source>Main location for '%name%' updated.</source>
-        <target state="new">Main location for '%name%' updated.</target>
+        <source>Main Location for '%name%' updated.</source>
+        <target state="new">Main Location for '%name%' updated.</target>
         <note>key: content.main_location_update.success</note>
       </trans-unit>
       <trans-unit id="d906dd66ce60bd64f6ba3ccc4ecf3fa443ff9e83" resname="content.reveal.already_visible">
-        <source>Content '%name%' was already visible.</source>
-        <target state="new">Content '%name%' was already visible.</target>
+        <source>Content item '%name%' is already visible.</source>
+        <target state="new">Content item '%name%' is already visible.</target>
         <note>key: content.reveal.already_visible</note>
       </trans-unit>
       <trans-unit id="56c081f0ee65c4b44e231b9e616e9613e93e4f97" resname="content.reveal.success">
-        <source>Content '%name%' has been revealed.</source>
-        <target state="new">Content '%name%' has been revealed.</target>
+        <source>Content item '%name%' revealed.</source>
+        <target state="new">Content item '%name%' revealed.</target>
         <note>key: content.reveal.success</note>
       </trans-unit>
       <trans-unit id="c078d68107501c81ef81e99437b4285ff012e0bd" resname="content.view.more.label">

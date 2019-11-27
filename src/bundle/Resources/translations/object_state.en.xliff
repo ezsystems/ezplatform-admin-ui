@@ -7,28 +7,28 @@
     </header>
     <body>
       <trans-unit id="a6cf9ca3d83b39f13cb571316b79b4b95200a631" resname="content_object_state.update.success">
-        <source>Content object state '%name%' updated.</source>
-        <target state="new">Content object state '%name%' updated.</target>
+        <source>Content item's Object state changed to '%name%'.</source>
+        <target state="new">Content item's Object state changed to '%name%'.</target>
         <note>key: content_object_state.update.success</note>
       </trans-unit>
       <trans-unit id="bd73283563c378ed123d629e000e2f45dc85811f" resname="object_state.breadcrumb.add">
-        <source>Creating a new Object State</source>
-        <target state="new">Creating a new Object State</target>
+        <source>Creating a new Object state</source>
+        <target state="new">Creating a new Object state</target>
         <note>key: object_state.breadcrumb.add</note>
       </trans-unit>
       <trans-unit id="9277526e17b01de899c93f0fdbb5ab6515e5399f" resname="object_state.breadcrumb.edit">
-        <source>Editing Object State: %name%</source>
-        <target state="new">Editing Object State: %name%</target>
+        <source>Editing Object state '%name%'</source>
+        <target state="new">Editing Object state '%name%'</target>
         <note>key: object_state.breadcrumb.edit</note>
       </trans-unit>
       <trans-unit id="3709ccf61e98d295b77b9f1472af9d197c202dab" resname="object_state.breadcrumb.view">
-        <source>Object State: %name%</source>
-        <target state="new">Object State: %name%</target>
+        <source>Object state: %name%</source>
+        <target state="new">Object state: %name%</target>
         <note>key: object_state.breadcrumb.view</note>
       </trans-unit>
       <trans-unit id="c57bed7c172c50ab41d70434d7846bb97375895f" resname="object_state.bulk_delete.delete">
-        <source>Delete Object State </source>
-        <target state="new">Delete Object State </target>
+        <source>Delete Object state </source>
+        <target state="new">Delete Object state </target>
         <note>key: object_state.bulk_delete.delete</note>
       </trans-unit>
       <trans-unit id="3f83af98ac201931eaf0055972d467c386ab72ef" resname="object_state.button.set">
@@ -57,8 +57,8 @@
         <note>key: object_state.create.success</note>
       </trans-unit>
       <trans-unit id="0480844e257807b48dbf75fa7a374ceb7649ec5c" resname="object_state.delete.bulk_delete.submit">
-        <source>Delete Object State</source>
-        <target state="new">Delete Object State</target>
+        <source>Delete Object state</source>
+        <target state="new">Delete Object state</target>
         <note>key: object_state.delete.bulk_delete.submit</note>
       </trans-unit>
       <trans-unit id="cd20ab0806780f115ec08655d9e44e0c31d0fecd" resname="object_state.delete.success">
@@ -77,13 +77,13 @@
         <note>key: object_state.identifier</note>
       </trans-unit>
       <trans-unit id="9fc13c2d1fd12500855a381a919451e75a693858" resname="object_state.list.empty">
-        <source>No Object State configured. Object States you'll create will appear here.</source>
-        <target state="new">No Object State configured. Object States you'll create will appear here.</target>
+        <source>There are no Object states yet. Object states you create will show up here.</source>
+        <target state="new">There are no Object states yet. Object states you create will show up here.</target>
         <note>key: object_state.list.empty</note>
       </trans-unit>
       <trans-unit id="2331731a1072a77f20ceef81614545768fc1d446" resname="object_state.modal.message">
-        <source>Do you want to delete Object State?</source>
-        <target state="new">Do you want to delete Object State?</target>
+        <source>Do you want to delete the Object state(s)?</source>
+        <target state="new">Do you want to delete the Object state(s)?</target>
         <note>key: object_state.modal.message</note>
       </trans-unit>
       <trans-unit id="43f30c3071d6d33cf13e43c9cee1cda16e87200a" resname="object_state.name">
@@ -92,8 +92,8 @@
         <note>key: object_state.name</note>
       </trans-unit>
       <trans-unit id="85cbd870cb6255f3d3d481ece6c23e6e2117e91e" resname="object_state.new">
-        <source>Create a new Object State </source>
-        <target state="new">Create a new Object State </target>
+        <source>Create a new Object state</source>
+        <target state="new">Create a new Object state</target>
         <note>key: object_state.new</note>
       </trans-unit>
       <trans-unit id="fabfbcda1358cae555b0b005a386cf6b20ade908" resname="object_state.update.identifier">
@@ -117,13 +117,13 @@
         <note>key: object_state.update.success</note>
       </trans-unit>
       <trans-unit id="7172cbdbf92234b6ce26b14d79080f0fdaf87b76" resname="object_state.view.add.title">
-        <source>Creating a new Object State</source>
-        <target state="new">Creating a new Object State</target>
+        <source>Creating a new Object state</source>
+        <target state="new">Creating a new Object state</target>
         <note>key: object_state.view.add.title</note>
       </trans-unit>
       <trans-unit id="be3b8c4b5129a345fc2aafb9ff970dbe7669fa45" resname="object_state.view.edit.title">
-        <source>Editing Object State: %name%</source>
-        <target state="new">Editing Object State: %name%</target>
+        <source>Editing Object state '%name%'</source>
+        <target state="new">Editing Object state '%name%'</target>
         <note>key: object_state.view.edit.title</note>
       </trans-unit>
       <trans-unit id="58983da8ad1a5982e81ddd1bb0ab9cc3e50d6a73" resname="object_state.view.information.title">
@@ -142,8 +142,8 @@
         <note>key: object_state.view.list.title</note>
       </trans-unit>
       <trans-unit id="dc3b85ca7a255f5f7b961727623f0fc11a3678f0" resname="object_state.view.title">
-        <source>Object State: %name%</source>
-        <target state="new">Object State: %name%</target>
+        <source>Object state: %name%</source>
+        <target state="new">Object state: %name%</target>
         <note>key: object_state.view.title</note>
       </trans-unit>
       <trans-unit id="07ac5094606572ca7304175bb3af30e0a78662aa" resname="object_state_.delete.submit">
@@ -152,18 +152,18 @@
         <note>key: object_state_.delete.submit</note>
       </trans-unit>
       <trans-unit id="d4fdfff8e5488615f97f63a01c811b80d346be2e" resname="object_state_group.breadcrumb.add">
-        <source>Creating a new Object State Group</source>
-        <target state="new">Creating a new Object State Group</target>
+        <source>Creating a new Object state group</source>
+        <target state="new">Creating a new Object state group</target>
         <note>key: object_state_group.breadcrumb.add</note>
       </trans-unit>
       <trans-unit id="e0710939fade4e106062c2ea356338ab305e3f35" resname="object_state_group.breadcrumb.edit">
-        <source>Editing Object State Group: %name%</source>
-        <target state="new">Editing Object State Group: %name%</target>
+        <source>Editing Object state group '%name%'</source>
+        <target state="new">Editing Object state group '%name%'</target>
         <note>key: object_state_group.breadcrumb.edit</note>
       </trans-unit>
       <trans-unit id="089afe4fc7c6c1b22bcc1b7cb702282d983133f6" resname="object_state_group.breadcrumb.list">
-        <source>Object States</source>
-        <target state="new">Object States</target>
+        <source>Object states</source>
+        <target state="new">Object states</target>
         <note>key: object_state_group.breadcrumb.list</note>
       </trans-unit>
       <trans-unit id="a6579fbae938d0bba558288987b50aa6a6aa8372" resname="object_state_group.breadcrumb.view">
@@ -172,8 +172,8 @@
         <note>key: object_state_group.breadcrumb.view</note>
       </trans-unit>
       <trans-unit id="8e72c01409fbfb837c2a6ddb1a9455baada03057" resname="object_state_group.bulk_delete.delete">
-        <source>Delete Object State Group</source>
-        <target state="new">Delete Object State Group</target>
+        <source>Delete Object state group</source>
+        <target state="new">Delete Object state group</target>
         <note>key: object_state_group.bulk_delete.delete</note>
       </trans-unit>
       <trans-unit id="f87d9f18a93e3ce9f164386ee0255d53d4c5227e" resname="object_state_group.create.identifier">
@@ -197,8 +197,8 @@
         <note>key: object_state_group.create.success</note>
       </trans-unit>
       <trans-unit id="0f857d4dff9c8232ede300a39010d289d31c2937" resname="object_state_group.delete.bulk_delete.submit">
-        <source>Delete Object State Group</source>
-        <target state="new">Delete Object State Group</target>
+        <source>Delete Object state group</source>
+        <target state="new">Delete Object state group</target>
         <note>key: object_state_group.delete.bulk_delete.submit</note>
       </trans-unit>
       <trans-unit id="0f40fde6bdaed4741d571b9ffdcc04e3be8ec3c9" resname="object_state_group.delete.submit">
@@ -222,13 +222,13 @@
         <note>key: object_state_group.identifier</note>
       </trans-unit>
       <trans-unit id="2a4bd8ce0453d59cfbc12c0b4f06668db088ebce" resname="object_state_group.list.empty">
-        <source>No Object State Group configured. Object State Groups you'll create will appear here.</source>
-        <target state="new">No Object State Group configured. Object State Groups you'll create will appear here.</target>
+        <source>There are no Object state groups yet. Object state groups you create will show up here.</source>
+        <target state="new">There are no Object state groups yet. Object state groups you create will show up here.</target>
         <note>key: object_state_group.list.empty</note>
       </trans-unit>
       <trans-unit id="5696f8cad271e56ef0e2661b314fa31b70a81bb3" resname="object_state_group.modal.message">
-        <source>Do you want to delete Object State Group?</source>
-        <target state="new">Do you want to delete Object State Group?</target>
+        <source>Do you want to delete the Object state group(s)?</source>
+        <target state="new">Do you want to delete the Object state group(s)?</target>
         <note>key: object_state_group.modal.message</note>
       </trans-unit>
       <trans-unit id="4964317987d129f6c5beeebca699f8fd62867216" resname="object_state_group.name">
@@ -237,8 +237,8 @@
         <note>key: object_state_group.name</note>
       </trans-unit>
       <trans-unit id="1cbfb4528f41be4d8de98fa4f81c26b41f8ffad9" resname="object_state_group.new">
-        <source>Create a new Object State Group</source>
-        <target state="new">Create a new Object State Group</target>
+        <source>Create a new Object state group</source>
+        <target state="new">Create a new Object state group</target>
         <note>key: object_state_group.new</note>
       </trans-unit>
       <trans-unit id="2db8c3e77568f759b118b23aec8cfacaca3d96c0" resname="object_state_group.update.identifier">
@@ -262,13 +262,13 @@
         <note>key: object_state_group.update.success</note>
       </trans-unit>
       <trans-unit id="440027deff8a9e2b55c3813b104fed4345d8c246" resname="object_state_group.view.add.title">
-        <source>Creating a new Object State Group</source>
-        <target state="new">Creating a new Object State Group</target>
+        <source>Creating a new Object state group</source>
+        <target state="new">Creating a new Object state group</target>
         <note>key: object_state_group.view.add.title</note>
       </trans-unit>
       <trans-unit id="9f653b0046e2ba91b0b23afdf440596d2d99bbc3" resname="object_state_group.view.edit.title">
-        <source>Editing Object State Group: %name%</source>
-        <target state="new">Editing Object State Group: %name%</target>
+        <source>Editing Object state group '%name%'</source>
+        <target state="new">Editing Object state group '%name%'</target>
         <note>key: object_state_group.view.edit.title</note>
       </trans-unit>
       <trans-unit id="c6deef75890178093bf878dd71ad8c7f2baff283" resname="object_state_group.view.information.title">
@@ -282,8 +282,8 @@
         <note>key: object_state_group.view.list.action.edit</note>
       </trans-unit>
       <trans-unit id="3c3517b187620f232ad40b3fe46da9e3bb66866a" resname="object_state_group.view.list.title">
-        <source>Object State Groups</source>
-        <target state="new">Object State Groups</target>
+        <source>Object state groups</source>
+        <target state="new">Object state groups</target>
         <note>key: object_state_group.view.list.title</note>
       </trans-unit>
       <trans-unit id="f242d2aa82647529a4d5c7c314719fb4276a4e51" resname="object_state_group.view.title">

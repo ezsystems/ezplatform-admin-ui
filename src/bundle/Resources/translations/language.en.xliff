@@ -22,8 +22,8 @@
         <note>key: language.create.success</note>
       </trans-unit>
       <trans-unit id="8390c7c1adbff8a264583f6f060256c993023787" resname="language.delete">
-        <source>Delete Language</source>
-        <target state="new">Delete Language</target>
+        <source>Delete language</source>
+        <target state="new">Delete language</target>
         <note>key: language.delete</note>
       </trans-unit>
       <trans-unit id="7c8fcdc1c11d3c1cf2a4380f440ef3d157b68c12" resname="language.delete.success">
@@ -42,8 +42,8 @@
         <note>key: language.edit</note>
       </trans-unit>
       <trans-unit id="a11e2bfe5281d9163ca46f0e051832659104287f" resname="language.edit.identifier">
-        <source>Editing Language "%language%"</source>
-        <target state="new">Editing Language "%language%"</target>
+        <source>Editing language '%language%'</source>
+        <target state="new">Editing language '%language%'</target>
         <note>key: language.edit.identifier</note>
       </trans-unit>
       <trans-unit id="065fdff561c25266ec49bbdaf8c5d0bdd6e9dd7f" resname="language.enabled">
@@ -82,8 +82,8 @@
         <note>key: language.list</note>
       </trans-unit>
       <trans-unit id="2a52961302ce7dfa4a21c5e0bcc239f5a9a36cfe" resname="language.modal.message">
-        <source>Do you want to delete language?</source>
-        <target state="new">Do you want to delete language?</target>
+        <source>Do you want to delete the language(s)?</source>
+        <target state="new">Do you want to delete the language(s)?</target>
         <note>key: language.modal.message</note>
       </trans-unit>
       <trans-unit id="c0ccfb7e7bc6d434ca93e998637fe775ba4a2de0" resname="language.name">
@@ -97,13 +97,13 @@
         <note>key: language.name.label</note>
       </trans-unit>
       <trans-unit id="8e4642a0c879921e8bf31752abc577c4bf8d098b" resname="language.new">
-        <source>Create a new Language</source>
-        <target state="new">Create a new Language</target>
+        <source>Create a new language</source>
+        <target state="new">Create a new language</target>
         <note>key: language.new</note>
       </trans-unit>
       <trans-unit id="ed7e6b485737184b494f399ea010f537c9a741f5" resname="language.new.title">
-        <source>Creating a new Language</source>
-        <target state="new">Creating a new Language</target>
+        <source>Creating a new language</source>
+        <target state="new">Creating a new language</target>
         <note>key: language.new.title</note>
       </trans-unit>
       <trans-unit id="fba43c054072899f63d3e09cfd9f0a07d8768234" resname="language.update.success">
