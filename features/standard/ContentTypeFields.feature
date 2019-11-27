@@ -61,7 +61,7 @@ Feature: Content fields setting and editing
 
     Examples:
       | fieldName                    | label1    | value1                       | label2     | value2                   | label3  | value3   | oldContentItemName        | newContentItemName           |
-      | Selection                    | value     | Bielefeld                    |            |                          |         |          | Test-value                | Bielefeld                    |
+      | Selecttion                    | value     | Bielefeld                    |            |                          |         |          | Test-value                | Bielefeld                    |
       | Map location                 | latitude  | 56                           | longitude  | 101                      | address | Ohio     | Acapulco                  | Ohio                         |
       | Authors                      | name      | Test Name Edited             | email      | edited.email@example.com |         |          | Test Name                 | Test Name Edited             |
       | Checkbox                     | value     | false                        |            |                          |         |          | 1                         | 0                            |
