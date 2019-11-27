@@ -19,7 +19,7 @@
             {{ 'content_id'|trans({'%contentId%': user.id})|desc('Content ID: %contentId%') }}{% if user.versionInfo.contentInfo.mainLocationId %}, {{ 'location_id'|trans({'%locationId%': user.versionInfo.contentInfo.mainLocationId})|desc('Location ID: %locationId%') }}{% endif %}
         </div>
         <div class="ez-content-item__errors-wrapper" hidden>
-            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields and validation errors.') }}
+            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
         </div>
         {# @todo remove if statement once getDescription() bug is resolved in kernel #}
         {% if content_type.descriptions is not empty %}
