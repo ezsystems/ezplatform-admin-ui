@@ -49,6 +49,13 @@ class ObjectRelationAllowedContentTypes implements EventSubscriberInterface
             )
         );
 
+        $config['allowed_content_types'] = array_unique(
+            array_merge(
+                $config['allowed_content_types'],
+                $context['allowed_content_types']
+            )
+        );
+
         $event->setConfig($config);
     }
 }
