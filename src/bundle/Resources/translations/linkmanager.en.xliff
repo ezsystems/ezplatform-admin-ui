@@ -22,28 +22,28 @@
         <note>key: url.detail</note>
       </trans-unit>
       <trans-unit id="23bfb0e222eeac1bfa481ba09c5b4aea1d0295da" resname="url.edit">
-        <source>url.edit</source>
-        <target state="new">url.edit</target>
+        <source>Edit</source>
+        <target state="new">Edit</target>
         <note>key: url.edit</note>
       </trans-unit>
       <trans-unit id="e890168e1ef7753c250affa3fcdfb21074c35c6f" resname="url.editing">
-        <source>url.editing</source>
-        <target state="new">url.editing</target>
+        <source>Editing URL: %url%</source>
+        <target state="new">Editing URL: %url%</target>
         <note>key: url.editing</note>
       </trans-unit>
       <trans-unit id="8c27173bd289fbab90a41c921e3a0d742acd9042" resname="url.label.address">
-        <source>url.label.address</source>
-        <target state="new">url.label.address</target>
+        <source>Address</source>
+        <target state="new">Address</target>
         <note>key: url.label.address</note>
       </trans-unit>
       <trans-unit id="ed6ebb919604a265c372578f297370881bfe4220" resname="url.label.created">
-        <source>url.label.created</source>
-        <target state="new">url.label.created</target>
+        <source>Created</source>
+        <target state="new">Created</target>
         <note>key: url.label.created</note>
       </trans-unit>
       <trans-unit id="9f504bd4b4d9667acd04b788b3b0dbb4d7d9500f" resname="url.label.last_checked">
-        <source>url.label.last_checked</source>
-        <target state="new">url.label.last_checked</target>
+        <source>Last checked</source>
+        <target state="new">Last checked</target>
         <note>key: url.label.last_checked</note>
       </trans-unit>
       <trans-unit id="e676ac2f04711e7a31e0f547a57e674f7cad4661" resname="url.label.last_checked.never">
@@ -52,13 +52,13 @@
         <note>key: url.label.last_checked.never</note>
       </trans-unit>
       <trans-unit id="d23c2f190381df7d8a1ac3c3de0df4631c161818" resname="url.label.modified">
-        <source>url.label.modified</source>
-        <target state="new">url.label.modified</target>
+        <source>Modified</source>
+        <target state="new">Modified</target>
         <note>key: url.label.modified</note>
       </trans-unit>
       <trans-unit id="323936a3e831f2a2db95bbf5f9a857b56ddc9c8a" resname="url.label.status">
-        <source>url.label.status</source>
-        <target state="new">url.label.status</target>
+        <source>Status</source>
+        <target state="new">Status</target>
         <note>key: url.label.status</note>
       </trans-unit>
       <trans-unit id="d2c96c077eb7c3751d39ec3a861b17e60b210a1a" resname="url.list">
@@ -67,8 +67,8 @@
         <note>key: url.list</note>
       </trans-unit>
       <trans-unit id="fd026c688f943eb5d0cb4dadf54c0dac101a9b8b" resname="url.list.no_urls">
-        <source>url.list.no_urls</source>
-        <target state="new">url.list.no_urls</target>
+        <source>No URLs</source>
+        <target state="new">No URLs</target>
         <note>key: url.list.no_urls</note>
       </trans-unit>
       <trans-unit id="24a0b301998be73b299ac86967952ef729264dec" resname="url.list.title">
@@ -77,28 +77,28 @@
         <note>key: url.list.title</note>
       </trans-unit>
       <trans-unit id="126d1ac5ef68809c1a2bfdd3872470d7aafaacc3" resname="url.open">
-        <source>url.open</source>
-        <target state="new">url.open</target>
+        <source>Open</source>
+        <target state="new">Open</target>
         <note>key: url.open</note>
       </trans-unit>
       <trans-unit id="226d3de8d2685074e329b9eca1657c96d9c89ead" resname="url.search">
-        <source>url.search</source>
-        <target state="new">url.search</target>
+        <source>Search</source>
+        <target state="new">Search</target>
         <note>key: url.search</note>
       </trans-unit>
       <trans-unit id="960c2d7573696185d28d8e385eabe01dbe9dacf3" resname="url.search.placeholder">
-        <source>url.search.placeholder</source>
-        <target state="new">url.search.placeholder</target>
+        <source>Search for URLs</source>
+        <target state="new">Search for URLs</target>
         <note>key: url.search.placeholder</note>
       </trans-unit>
       <trans-unit id="3e0d8fcb74e476fcae45da9c4c7b0b261118c7a3" resname="url.status.invalid">
-        <source>url.status.invalid</source>
-        <target state="new">url.status.invalid</target>
+        <source>Invalid</source>
+        <target state="new">Invalid</target>
         <note>key: url.status.invalid</note>
       </trans-unit>
       <trans-unit id="8907a4f74219ceff2ee07437ec1657f1ee75a830" resname="url.status.valid">
-        <source>url.status.valid</source>
-        <target state="new">url.status.valid</target>
+        <source>Valid</source>
+        <target state="new">Valid</target>
         <note>key: url.status.valid</note>
       </trans-unit>
       <trans-unit id="ab21b5c3a570d491adc4ab793f2ce4f13f0f2ca7" resname="url.tab.information">
@@ -137,8 +137,8 @@
         <note>key: url.usages.content_status.published</note>
       </trans-unit>
       <trans-unit id="dce98314e5ba27c161d28c789d2b970180ea852c" resname="url.view">
-        <source>url.view</source>
-        <target state="new">url.view</target>
+        <source>Link %url%</source>
+        <target state="new">Link %url%</target>
         <note>key: url.view</note>
       </trans-unit>
     </body>
