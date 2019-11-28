@@ -76,7 +76,7 @@ class TabGroupTest extends TestCase
         $tabIdentifier = 'tab_identifier';
 
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(sprintf('Tab identified as "%s" is not found.', $tabIdentifier));
+        $this->expectExceptionMessage(sprintf('Could not find a tab identified as "%s".', $tabIdentifier));
 
         $tab = $this->createMock(TabInterface::class);
         $tab->expects(self::never())->method(self::anything());

@@ -74,7 +74,7 @@ class SectionPage extends Page
         !($this->adminLists['Content items']->table->getItemCount() === 1 &&
             strpos($firstRowValue, 'No content items.') !== false)
         ) {
-            throw new \Exception('"Content items" list is not empty.');
+            throw new \Exception('The "Content items" list is not empty.');
         }
     }
 
@@ -117,7 +117,7 @@ class SectionPage extends Page
                 sprintf('Content item "%s" has wrong "Path".', $name)
             );
         } else {
-            Assert::fail(sprintf('There is no "%s" content item on the list.', $name));
+            Assert::fail(sprintf('There is no "%s" Content item on the list.', $name));
         }
     }
 }

@@ -43,7 +43,7 @@ class RoleAssignmentParamConverter implements ParamConverterInterface
 
         $roleAssigment = $this->roleService->loadRoleAssignment($roleAssigmentId);
         if (!$roleAssigment) {
-            throw new NotFoundHttpException("Role assignment $roleAssigmentId not found!");
+            throw new NotFoundHttpException("Role assignment $roleAssigmentId not found.");
         }
 
         $request->attributes->set($configuration->getName(), $roleAssigment);

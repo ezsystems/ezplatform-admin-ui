@@ -31,7 +31,7 @@ class DateTimePickerTransformer implements DataTransformerInterface
 
         if (!$value instanceof DateTime) {
             throw new TransformationFailedException(
-                sprintf('Expected a %s, got %s instead', DateTime::class, gettype($value))
+                sprintf('Found %s instead of %s', gettype($value), DateTime::class)
             );
         }
 
@@ -56,7 +56,7 @@ class DateTimePickerTransformer implements DataTransformerInterface
 
         if (!is_numeric($value)) {
             throw new TransformationFailedException(
-                sprintf('Expected a numeric, got %s instead', gettype($value))
+                sprintf('Found %s instead of a numeric value', gettype($value))
             );
         }
 

@@ -42,7 +42,7 @@ class ComponentPass implements CompilerPassInterface
 
             foreach ($tags as $tag) {
                 if (!isset($tag['group'])) {
-                    throw new InvalidArgumentException($id, 'Tag ' . self::TAG_NAME . ' must contain "group" argument.');
+                    throw new InvalidArgumentException($id, 'Tag ' . self::TAG_NAME . ' must contain a "group" argument.');
                 }
                 $registryDefinition->addMethodCall('addComponent', [$tag['group'], $id, $serviceReference]);
             }

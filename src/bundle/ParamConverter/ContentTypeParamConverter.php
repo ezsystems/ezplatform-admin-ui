@@ -59,7 +59,7 @@ class ContentTypeParamConverter implements ParamConverterInterface
         }
 
         if (!$contentType) {
-            throw new NotFoundHttpException('ContentType ' . ($id ?? $identifier) . ' not found!');
+            throw new NotFoundHttpException('Content Type ' . ($id ?? $identifier) . ' not found.');
         }
 
         $request->attributes->set($configuration->getName(), $contentType);

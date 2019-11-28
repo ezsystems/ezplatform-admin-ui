@@ -52,7 +52,7 @@ class NonAdminSiteaccessResolver implements SiteaccessResolverInterface
         if (!array_key_exists('admin_group', $this->siteAccessGroups)) {
             throw new BadStateException(
                 'siteaccess',
-                'Siteaccess group `admin_group` not found.'
+                'SiteAccess group `admin_group` not found.'
             );
         }
 

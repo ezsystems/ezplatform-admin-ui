@@ -44,7 +44,7 @@ class ObjectStateGroupParamConverter implements ParamConverterInterface
         $objectStateGroup = $this->objectStateService->loadObjectStateGroup($id);
 
         if (!$objectStateGroup) {
-            throw new NotFoundHttpException("Object State Group $id not found!");
+            throw new NotFoundHttpException("Object state group $id not found.");
         }
 
         $request->attributes->set($configuration->getName(), $objectStateGroup);

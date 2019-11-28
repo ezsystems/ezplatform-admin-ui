@@ -56,7 +56,7 @@ class TrashPage extends Page
 
         Assert::assertTrue(
             ($isElementInTrash == $elementShouldExist),
-            sprintf('Item %s %s is%s in trash', $itemType, $itemName, $elementShouldExistString)
+            sprintf('Item %s %s is%s in Trash', $itemType, $itemName, $elementShouldExistString)
         );
     }
 

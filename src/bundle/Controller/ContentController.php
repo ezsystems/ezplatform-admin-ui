@@ -338,7 +338,7 @@ class ContentController extends Controller
         if (empty($siteaccesses)) {
             throw new BadStateException(
                 'siteaccess',
-                'There is no siteaccesses available for particular content'
+                'There is no SiteAccess available for this Content item'
             );
         }
 

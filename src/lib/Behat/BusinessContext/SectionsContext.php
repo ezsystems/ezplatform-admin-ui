@@ -43,7 +43,7 @@ class SectionsContext extends BusinessContext
             ->adminList->table->getTableCellValue($sectionName, 'Assignments count');
 
         if (($contentsCount !== $emptyContainerCellValue)) {
-            Assert::fail(sprintf('There\'s no empty %s on the "Section" list.', $sectionName));
+            Assert::fail(sprintf('There is no empty %s on the "Section" list.', $sectionName));
         }
     }
 }

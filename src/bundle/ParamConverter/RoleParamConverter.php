@@ -45,7 +45,7 @@ class RoleParamConverter implements ParamConverterInterface
 
         $role = $this->roleService->loadRole($id);
         if (!$role) {
-            throw new NotFoundHttpException("Role $id not found!");
+            throw new NotFoundHttpException("Role $id not found.");
         }
 
         $request->attributes->set($configuration->getName(), $role);

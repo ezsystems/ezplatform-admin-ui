@@ -71,7 +71,7 @@ class SystemInfoPage extends Page
                 }
             }
             if (!$found) {
-                Assert::fail(sprintf('Desired record [%s] not found in "%s" list.', $desiredRecord['Name'], $tableName));
+                Assert::fail(sprintf('Could not find requested record [%s] on the "%s" list.', $desiredRecord['Name'], $tableName));
             }
         }
     }

@@ -31,7 +31,7 @@ class TabRegistry
     public function getTabGroup(string $group): TabGroup
     {
         if (!isset($this->tabGroups[$group])) {
-            throw new \InvalidArgumentException(sprintf('Requested group named "%s" is not found. Did you forget to tag the service?', $group));
+            throw new \InvalidArgumentException(sprintf('Could not find the requested group named "%s". Did you tag the service?', $group));
         }
 
         return $this->tabGroups[$group];
@@ -46,7 +46,7 @@ class TabRegistry
     public function getTabFromGroup(string $name, string $group): TabInterface
     {
         if (!isset($this->tabGroups[$group])) {
-            throw new \InvalidArgumentException(sprintf('Requested group named "%s" is not found. Did you forget to tag the service?', $group));
+            throw new \InvalidArgumentException(sprintf('Could not find the requested group named "%s". Did you tag the service?', $group));
         }
 
         foreach ($this->tabGroups[$group]->getTabs() as $tab) {
@@ -55,7 +55,7 @@ class TabRegistry
             }
         }
 
-        throw new \InvalidArgumentException(sprintf('Requested tab "%s" from group "%s" is not found. Did you forget to tag the service?', $name, $group));
+        throw new \InvalidArgumentException(sprintf('Could not find the requested tab "%s" from group "%s". Did you tag the service?', $name, $group));
     }
 
     /**

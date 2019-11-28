@@ -26,7 +26,7 @@ class ObjectStatesContext extends BusinessContext
 
         Assert::assertTrue(
             $objectStateExists,
-            sprintf('Element "%s" is not on the "%s" object states list.', $objectStateName, $objectStateGroupName)
+            sprintf('Element "%s" is not on the "%s" Object state list.', $objectStateName, $objectStateGroupName)
         );
     }
 
@@ -42,7 +42,7 @@ class ObjectStatesContext extends BusinessContext
 
             Assert::assertFalse(
                 $objectStateExists,
-                sprintf('Element "%s" is on the "%s" object states list.', $objectStateName, $objectStateGroupName)
+                sprintf('Element "%s" is on the "%s" Object state list.', $objectStateName, $objectStateGroupName)
             );
         }
     }

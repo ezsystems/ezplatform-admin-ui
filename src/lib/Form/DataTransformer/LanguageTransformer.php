@@ -70,7 +70,7 @@ class LanguageTransformer implements DataTransformerInterface
 
         if (!is_string($value)) {
             throw new TransformationFailedException(
-                'Invalid data, expected value type is string'
+                'Invalid data, expected a string value'
             );
         }
 

@@ -117,7 +117,7 @@ class RoleService
             }
         }
 
-        throw new \RuntimeException("Policy {$policy->id} not found!");
+        throw new \RuntimeException("Policy {$policy->id} not found.");
     }
 
     public function updatePolicy(Role $role, Policy $policy, PolicyData $data): Role
@@ -139,7 +139,7 @@ class RoleService
             }
         }
 
-        throw new \RuntimeException("Policy {$policy->id} not found!");
+        throw new \RuntimeException("Policy {$policy->id} not found.");
     }
 
     public function getRoleAssignments(Role $role)
