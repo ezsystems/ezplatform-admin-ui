@@ -5,7 +5,7 @@
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const selectSubtreeConfirm = (data) => {
-        const selectedItems = data.reduce((total, item) => total + `<li>${item.ContentInfo.Content.Name}</li>`, '');
+        const selectedItems = data.reduce((total, item) => total + `<li>${item.ContentInfo.Content.TranslatedName}</li>`, '');
 
         doc.querySelector('#role_assignment_create_locations').value = data.map((item) => item.id).join();
         doc.querySelector('.ez-limitations__selected-subtree').innerHTML = selectedItems;
