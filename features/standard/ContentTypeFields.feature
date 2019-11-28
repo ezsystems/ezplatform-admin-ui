@@ -7,6 +7,7 @@ Feature: Content fields setting and editing
   Scenario: Should be redirected to Dashboard after successful login
     Given I open Login page
     When I am logged as "admin"
+    Then I should be on Dashboard page
 
   @javascript @common
   Scenario Outline: Create content item with given field
