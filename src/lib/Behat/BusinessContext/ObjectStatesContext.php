@@ -22,7 +22,7 @@ class ObjectStatesContext extends BusinessContext
     {
         $objectStateGroupPage = PageObjectFactory::createPage($this->browserContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
         $objectStateGroupPage->verifyIsLoaded();
-        $objectStateExists = $objectStateGroupPage->adminLists['Object States']->table->isElementOnCurrentPage($objectStateName);
+        $objectStateExists = $objectStateGroupPage->adminLists['Object states']->table->isElementOnCurrentPage($objectStateName);
 
         Assert::assertTrue(
             $objectStateExists,
@@ -37,8 +37,8 @@ class ObjectStatesContext extends BusinessContext
     {
         $objectStateGroupPage = PageObjectFactory::createPage($this->browserContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
         $objectStateGroupPage->verifyIsLoaded();
-        if (!$objectStateGroupPage->isListEmpty('Object States')) {
-            $objectStateExists = $objectStateGroupPage->adminLists['Object States']->table->isElementOnCurrentPage($objectStateName);
+        if (!$objectStateGroupPage->isListEmpty('Object states')) {
+            $objectStateExists = $objectStateGroupPage->adminLists['Object states']->table->isElementOnCurrentPage($objectStateName);
 
             Assert::assertFalse(
                 $objectStateExists,
@@ -54,7 +54,7 @@ class ObjectStatesContext extends BusinessContext
     {
         $objectStateGroupPage = PageObjectFactory::createPage($this->browserContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
         $objectStateGroupPage->verifyIsLoaded();
-        $objectStateGroupPage->adminLists['Object States']->table->clickListElement($objectStateName);
+        $objectStateGroupPage->adminLists['Object states']->table->clickListElement($objectStateName);
     }
 
     /**
@@ -65,10 +65,10 @@ class ObjectStatesContext extends BusinessContext
         $hash = $settings->getHash();
         $objectStateGroupPage = PageObjectFactory::createPage($this->browserContext, ObjectStateGroupPage::PAGE_NAME, $objectStateGroupName);
         foreach ($hash as $setting) {
-            $objectStateGroupPage->adminLists['Object States']->table->selectListElement($setting['item']);
+            $objectStateGroupPage->adminLists['Object states']->table->selectListElement($setting['item']);
         }
 
-        $objectStateGroupPage->adminLists['Object States']->clickTrashButton();
+        $objectStateGroupPage->adminLists['Object states']->clickTrashButton();
         $dialog = ElementFactory::createElement($this->browserContext, Dialog::ELEMENT_NAME);
         $dialog->verifyVisibility();
         $dialog->confirm();

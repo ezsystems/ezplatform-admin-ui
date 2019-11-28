@@ -72,7 +72,7 @@ class SectionPage extends Page
 
         if (
         !($this->adminLists['Content items']->table->getItemCount() === 1 &&
-            strpos($firstRowValue, 'No content items.') !== false)
+            strpos($firstRowValue, 'No Content items.') !== false)
         ) {
             throw new \Exception('"Content items" list is not empty.');
         }

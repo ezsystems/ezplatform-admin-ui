@@ -15,7 +15,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\IconLinkedListTable;
 class ContentTypeGroupPage extends Page
 {
     /** @var string Name by which Page is recognised */
-    public const PAGE_NAME = 'Content Type Group';
+    public const PAGE_NAME = 'Content Type group';
     /** @var string Name of actual group */
     public $groupName;
 
@@ -29,7 +29,7 @@ class ContentTypeGroupPage extends Page
         parent::__construct($context);
         $this->route = '/admin/contenttypegroup/';
         $this->groupName = $groupName;
-        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, sprintf('Content Types in %s', $this->groupName), IconLinkedListTable::ELEMENT_NAME);
+        $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, sprintf('Content Types in \'%s\'', $this->groupName), IconLinkedListTable::ELEMENT_NAME);
         $this->pageTitle = $groupName;
         $this->pageTitleLocator = '.ez-header h1';
     }

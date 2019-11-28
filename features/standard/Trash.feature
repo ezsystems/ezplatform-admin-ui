@@ -34,7 +34,7 @@ Scenario: Element in trash can be deleted
   When I delete item from trash list
     | item       |
     | Folder1    |
-  Then success notification that "Deleted selected trash items." appears
+  Then success notification that "Deleted selected item(s) from Trash." appears
     And there is no "Folder" "Folder1" on trash list
 
 @javascript @common
@@ -44,7 +44,7 @@ Scenario: Element in trash can be restored
   When I restore item from trash
     | item       |
     | Folder2    |
-  Then success notification that "Items restored under their original location." appears
+  Then success notification that "Restored content to its original Location." appears
     And there is no "Folder" "Folder2" on trash list
     And going to root path there is "Folder2" "Folder" on Sub-items list
 
@@ -55,7 +55,7 @@ Scenario: Element in trash can be restored under new location
   When I restore item from trash under new location "Media/Files"
     | item       |
     | Folder3    |
-  Then success notification that "Items restored under 'Files' location." appears
+  Then success notification that "Restored content under Location 'Files'." appears
     And there is no "Folder" "Folder3" on trash list
     And going to "Media/Files" there is a "Folder3" "Folder" on Sub-items list
 

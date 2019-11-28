@@ -127,8 +127,8 @@
         <note>key: object_state.view.edit.title</note>
       </trans-unit>
       <trans-unit id="58983da8ad1a5982e81ddd1bb0ab9cc3e50d6a73" resname="object_state.view.information.title">
-        <source>Object State Information</source>
-        <target state="new">Object State Information</target>
+        <source>Object state information</source>
+        <target state="new">Object state information</target>
         <note>key: object_state.view.information.title</note>
       </trans-unit>
       <trans-unit id="8cf30d6244f713b936c76e01f5bf70b1f5d62332" resname="object_state.view.list.action.edit">
@@ -137,8 +137,8 @@
         <note>key: object_state.view.list.action.edit</note>
       </trans-unit>
       <trans-unit id="9af39e306536772c1d7cd402ab587fee66b0231b" resname="object_state.view.list.title">
-        <source>Object States (%count%)</source>
-        <target state="new">Object States (%count%)</target>
+        <source>Object states (%count%)</source>
+        <target state="new">Object states (%count%)</target>
         <note>key: object_state.view.list.title</note>
       </trans-unit>
       <trans-unit id="dc3b85ca7a255f5f7b961727623f0fc11a3678f0" resname="object_state.view.title">
@@ -167,8 +167,8 @@
         <note>key: object_state_group.breadcrumb.list</note>
       </trans-unit>
       <trans-unit id="a6579fbae938d0bba558288987b50aa6a6aa8372" resname="object_state_group.breadcrumb.view">
-        <source>Object State Group: %name%</source>
-        <target state="new">Object State Group: %name%</target>
+        <source>Object state group: %name%</source>
+        <target state="new">Object state group: %name%</target>
         <note>key: object_state_group.breadcrumb.view</note>
       </trans-unit>
       <trans-unit id="8e72c01409fbfb837c2a6ddb1a9455baada03057" resname="object_state_group.bulk_delete.delete">
@@ -272,8 +272,8 @@
         <note>key: object_state_group.view.edit.title</note>
       </trans-unit>
       <trans-unit id="c6deef75890178093bf878dd71ad8c7f2baff283" resname="object_state_group.view.information.title">
-        <source>Object State Group Information</source>
-        <target state="new">Object State Group Information</target>
+        <source>Object state group information</source>
+        <target state="new">Object state group information</target>
         <note>key: object_state_group.view.information.title</note>
       </trans-unit>
       <trans-unit id="81633efc089f97dcad3f815855683cb4edb553d4" resname="object_state_group.view.list.action.edit">
@@ -287,8 +287,8 @@
         <note>key: object_state_group.view.list.title</note>
       </trans-unit>
       <trans-unit id="f242d2aa82647529a4d5c7c314719fb4276a4e51" resname="object_state_group.view.title">
-        <source>Object State Group: %name%</source>
-        <target state="new">Object State Group: %name%</target>
+        <source>Object state group: %name%</source>
+        <target state="new">Object state group: %name%</target>
         <note>key: object_state_group.view.title</note>
       </trans-unit>
     </body>

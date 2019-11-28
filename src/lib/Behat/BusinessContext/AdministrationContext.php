@@ -26,20 +26,20 @@ use PHPUnit\Framework\Assert;
 class AdministrationContext extends BusinessContext
 {
     private $itemCreateMapping = [
-        'Content Type Group' => ContentTypeGroupsPage::PAGE_NAME,
+        'Content Type group' => ContentTypeGroupsPage::PAGE_NAME,
         'Content Type' => ContentTypeGroupPage::PAGE_NAME,
         'Language' => LanguagesPage::PAGE_NAME,
         'Role' => RolesPage::PAGE_NAME,
         'Limitation' => RolePage::PAGE_NAME,
         'Policy' => RolePage::PAGE_NAME,
         'Section' => SectionsPage::PAGE_NAME,
-        'Object State Group' => ObjectStateGroupsPage::PAGE_NAME,
-        'Object State' => ObjectStateGroupPage::PAGE_NAME,
+        'Object state group' => ObjectStateGroupsPage::PAGE_NAME,
+        'Object state' => ObjectStateGroupPage::PAGE_NAME,
         'User' => '',
     ];
     private $emptyHeaderMapping = [
-        'Content Type Groups' => 'Content Types count',
-        'Sections' => 'Assignments count',
+        'Content Type groups' => 'Number of Content Types',
+        'Sections' => 'Assigned content',
     ];
 
     /**

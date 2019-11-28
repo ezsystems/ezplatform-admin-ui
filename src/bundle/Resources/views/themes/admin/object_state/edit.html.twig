@@ -8,7 +8,7 @@
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.object_state.groups.list'), value: 'object_state_group.breadcrumb.list'|trans|desc('Object states') },
-        { url: path('ezplatform.object_state.group.view', { 'objectStateGroupId': object_state_group.id }), value: 'object_state_group.breadcrumb.view'|trans({ '%name%': object_state_group.name })|desc('Object State Group: %name%') },
+        { url: path('ezplatform.object_state.group.view', { 'objectStateGroupId': object_state_group.id }), value: 'object_state_group.breadcrumb.view'|trans({ '%name%': object_state_group.name })|desc('Object state group: %name%') },
         { value: 'object_state.breadcrumb.edit'|trans({ '%name%': object_state.name })|desc('Editing Object state \'%name%\'') }
     ]} %}
 {% endblock %}

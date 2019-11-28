@@ -41,7 +41,7 @@ Feature: Languages management
         | Name          | Deutsch Second |
         | Language code | de-DE          |
       And I click on the edit action bar button "Create"
-    Then error notification that "language with specified language code already exists" appears
+    Then error notification that "language with the specified language code already exists" appears
 
   @javascript @common
   Scenario: I can navigate to Admin / Languages through breadcrumb

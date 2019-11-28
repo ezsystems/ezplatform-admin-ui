@@ -54,7 +54,7 @@ Feature: Sections management
     When I start assigning to "Test Section" from "Sections" page
       And I select content "Media/Images" through UDW
       And I confirm the selection in UDW
-    Then success notification that "1 content items were assigned to 'Test Section'" appears
+    Then success notification that "1 Content items assigned to 'Test Section'" appears
       And I should be on "Section" "Test Section" page
       And content items list in section "Test Section" contains items
         | Name   | Content Type | Path  |
@@ -117,7 +117,7 @@ Feature: Sections management
     When I start assigning to "Media" from "Section" page
       And I select content "Media/Images" through UDW
       And I confirm the selection in UDW
-    Then success notification that "1 content items were assigned to 'Media'" appears
+    Then success notification that "1 Content items assigned to 'Media'" appears
       And I should be on "Section" "Media" page
       And content items list in section "Media" contains items
         | Name   | Content Type | Path  |

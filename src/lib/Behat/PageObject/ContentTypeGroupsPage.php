@@ -15,7 +15,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\LinkedListTable;
 class ContentTypeGroupsPage extends Page
 {
     /** @var string Name by which Page is recognised */
-    public const PAGE_NAME = 'Content Type Groups';
+    public const PAGE_NAME = 'Content Type groups';
 
     /**
      * @var \EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList

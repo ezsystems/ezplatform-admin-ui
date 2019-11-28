@@ -402,8 +402,8 @@
         <note>key: content_type.view.list.title</note>
       </trans-unit>
       <trans-unit id="d74d01091280ceabfb457980ddd459dc841ad957" resname="content_type_group.breadcrumb.add">
-        <source>Creating a new Content Type Group</source>
-        <target state="new">Creating a new Content Type Group</target>
+        <source>Creating a new Content Type group</source>
+        <target state="new">Creating a new Content Type group</target>
         <note>key: content_type_group.breadcrumb.add</note>
       </trans-unit>
       <trans-unit id="20ee2fba1b6d560dd296bbe696975e92b78ce578" resname="content_type_group.breadcrumb.edit">

@@ -17,7 +17,7 @@ use PHPUnit\Framework\Assert;
 class ObjectStateGroupPage extends Page
 {
     /** @var string Name by which Page is recognised */
-    public const PAGE_NAME = 'Object State Group';
+    public const PAGE_NAME = 'Object state group';
     /** @var string Name of actual group */
     public $objectStateGroupName;
 
@@ -39,10 +39,10 @@ class ObjectStateGroupPage extends Page
         parent::__construct($context);
         $this->route = '/admin/state/group/';
         $this->objectStateGroupName = $objectStateGroupName;
-        $this->adminLists['Object State Group Information'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Object State Group Information', SimpleTable::ELEMENT_NAME);
-        $this->adminLists['Object States'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Object States', LinkedListTable::ELEMENT_NAME, $this->secondListContainerLocator);
+        $this->adminLists['Object state group information'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Object state group information', SimpleTable::ELEMENT_NAME);
+        $this->adminLists['Object states'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Object states', LinkedListTable::ELEMENT_NAME, $this->secondListContainerLocator);
         $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, '', SimpleTable::ELEMENT_NAME);
-        $this->pageTitle = sprintf('Object State Group: %s', $objectStateGroupName);
+        $this->pageTitle = sprintf('Object state group: %s', $objectStateGroupName);
         $this->pageTitleLocator = '.ez-header h1';
     }
 
@@ -51,8 +51,8 @@ class ObjectStateGroupPage extends Page
      */
     public function verifyElements(): void
     {
-        $this->adminLists['Object State Group Information']->verifyVisibility();
-        $this->adminLists['Object States']->verifyVisibility();
+        $this->adminLists['Object state group information']->verifyVisibility();
+        $this->adminLists['Object states']->verifyVisibility();
     }
 
     /**
@@ -73,29 +73,29 @@ class ObjectStateGroupPage extends Page
         $firstRowValue = $this->adminLists[$listName]->table->getCellValue(1, 1);
 
         return $this->adminLists[$listName]->table->getItemCount() === 1 &&
-            strpos($firstRowValue, 'No Object State configured.') !== false;
+            strpos($firstRowValue, 'There are no Object states yet.') !== false;
     }
 
     public function startEditingItem(string $itemName): void
     {
-        $this->adminLists['Object States']->table->clickEditButton($itemName);
+        $this->adminLists['Object states']->table->clickEditButton($itemName);
     }
 
     public function startEditingSelf(string $itemName): void
     {
-        $this->adminLists['Object State Group Information']->table->clickEditButton($itemName);
+        $this->adminLists['Object state group information']->table->clickEditButton($itemName);
     }
 
     public function startCreatingItem(): void
     {
-        $this->adminLists['Object States']->clickPlusButton();
+        $this->adminLists['Object states']->clickPlusButton();
     }
 
     public function verifyItemAttribute(string $label, string $value): void
     {
         Assert::assertEquals(
             $value,
-            $this->adminLists['Object State Group Information']->table->getTableCellValue($label),
+            $this->adminLists['Object state group information']->table->getTableCellValue($label),
             sprintf('Attribute "%s" has wrong value.', $label)
         );
     }

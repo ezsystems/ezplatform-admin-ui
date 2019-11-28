@@ -84,7 +84,7 @@ Scenario: Subtree can be copied
   When I click on the edit action bar button "Copy Subtree"
     And I select content "Media/Images" through UDW
     And I confirm the selection in UDW
-  Then success notification that "Subtree 'Files' copied to location 'Images'" appears
+  Then success notification that "Subtree 'Files' copied to Location 'Images'" appears
     And I should be on content container page "Files" of type "Folder" in "Media/Images"
     And there's "Test Article Manage" "Article" on "Files" Sub-items list
 
