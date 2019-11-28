@@ -16,9 +16,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class HelpMultilineMessageExtension extends AbstractTypeExtension
 {
-    public function getExtendedType(): string
+    public function getExtendedTypes(): iterable
     {
-        return FormType::class;
+        return [FormType::class];
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options): void
