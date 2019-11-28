@@ -4,6 +4,11 @@ Feature: Content fields setting and editing
   I want to set, edit, copy and move content items.
 
   @javascript @common
+  Scenario: Should be redirected to Dashboard after successful login
+    Given I open Login page
+    When I am logged as "admin"
+
+  @javascript @common
   Scenario Outline: Create content item with given field
     Given a Content Type "<fieldName> CT" with an "<fieldInternalName>" field definition
       And I am logged as "admin"
