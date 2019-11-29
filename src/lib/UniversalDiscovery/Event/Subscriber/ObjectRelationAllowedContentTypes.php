@@ -49,12 +49,21 @@ class ObjectRelationAllowedContentTypes implements EventSubscriberInterface
             )
         );
 
-        $config['allowed_content_types'] = array_unique(
-            array_merge(
-                $config['allowed_content_types'],
-                $context['allowed_content_types']
-            )
-        );
+        if (!empty($config['allowed_content_types'])) {
+            $config['allowed_content_types'] = array_values(
+                array_intersect(
+                    $config['allowed_content_types'],
+                    $context['allowed_content_types']
+                )
+            );
+
+            // To avoid BC breaks, we're forced to use [null] as empty allowed content types list
+            if (empty($config['allowed_content_types'])) {
+                $config['allowed_content_types'] = [null];
+            }
+        } else {
+            $config['allowed_content_types'] = $context['allowed_content_types'];
+        }
 
         $event->setConfig($config);
     }
