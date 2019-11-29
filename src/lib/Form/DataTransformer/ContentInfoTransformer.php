@@ -9,38 +9,25 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
-use Symfony\Component\Form\DataTransformerInterface;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * Transforms between a Content's ID and a domain specific ContentInfo object.
  */
-class ContentInfoTransformer implements DataTransformerInterface
+final class ContentInfoTransformer implements DataTransformerInterface
 {
-    /** @var ContentService */
-    protected $contentService;
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
 
-    /**
-     * @param ContentService $contentService
-     */
     public function __construct(ContentService $contentService)
     {
         $this->contentService = $contentService;
     }
 
-    /**
-     * Transforms a domain specific ContentInfo object into a Content's ID.
-     *
-     * @param ContentInfo|null $value
-     *
-     * @return mixed|null
-     *
-     * @throws TransformationFailedException
-     */
-    public function transform($value)
+    public function transform($value): ?int
     {
         if (null === $value) {
             return null;
@@ -53,29 +40,18 @@ class ContentInfoTransformer implements DataTransformerInterface
         return $value->id;
     }
 
-    /**
-     * Transforms a Content's ID integer into a domain specific ContentInfo object.
-     *
-     * @param mixed|null $value
-     *
-     * @return ContentInfo|null
-     *
-     * @throws UnauthorizedException
-     * @throws TransformationFailedException if the given value is not an integer
-     *                                       or if the value can not be transformed
-     */
     public function reverseTransform($value): ?ContentInfo
     {
         if (empty($value)) {
             return null;
         }
 
-        if (!is_numeric($value)) {
+        if (!is_int($value) && !ctype_digit($value)) {
             throw new TransformationFailedException('Expected a numeric string.');
         }
 
         try {
-            return $this->contentService->loadContentInfo($value);
+            return $this->contentService->loadContentInfo((int)$value);
         } catch (NotFoundException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
