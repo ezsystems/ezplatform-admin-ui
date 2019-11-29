@@ -134,7 +134,7 @@ class AdminExceptionListener
         $request = $event->getRequest();
 
         /** @var SiteAccess $siteAccess */
-        $siteAccess = $request->get('siteaccess', new SiteAccess());
+        $siteAccess = $request->get('siteaccess', new SiteAccess('default'));
 
         return \in_array($siteAccess->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME]);
     }
