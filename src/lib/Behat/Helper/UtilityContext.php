@@ -12,9 +12,41 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\MinkExtension\Context\MinkContext;
 use Exception;
 use WebDriver\Exception\ElementNotVisible;
+use eZ\Publish\Core\MVC\Symfony\SiteAccess;
+use eZ\Publish\Core\MVC\Symfony\Routing\SimplifiedRequest;
 
 class UtilityContext extends MinkContext
 {
+    /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess\Router */
+    private $router;
+
+    /**
+     * @injectService $router @ezpublish.siteaccess_router
+     */
+    public function __construct(Router $router)
+    {
+        $this->router = $router;
+    }
+
+    /**
+     * Return the full web address of a page, based on SiteAccess, page route and hosts configuration.
+     *
+     * @param string $siteAccessName name of SiteAccess the page is on
+     * @param string $route page address route
+     *
+     * @return string web address of the page
+     */
+    public function reverseMatchRoute(string $siteAccessName, string $route): string
+    {
+        $matcher = $this->router->matchByName($siteAccessName)->matcher;
+        $matcher->setRequest(new SimplifiedRequest(['scheme' => 'http', 'host' => $this->getMinkParameter('base_url'), 'pathinfo' => $route]));
+        $request = $matcher->reverseMatch($siteAccessName)->getRequest();
+        $explodedHost = explode('//', $request->host);
+        $actualHost = $explodedHost[count($explodedHost) - 1];
+
+        return sprintf('%s://%s%s', $request->scheme, $actualHost, $request->pathinfo);
+    }
+
     /**
      * Waits until element is visible. If it does not appear throws exception.
      *
