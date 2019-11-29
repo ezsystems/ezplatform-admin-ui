@@ -9,8 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -18,27 +17,17 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 /**
  * Translates Content's ID to domain specific VersionInfo object.
  */
-class VersionInfoTransformer implements DataTransformerInterface
+final class VersionInfoTransformer implements DataTransformerInterface
 {
-    /** @var ContentService */
-    protected $contentService;
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
 
-    /**
-     * @param ContentService $contentService
-     */
     public function __construct(ContentService $contentService)
     {
         $this->contentService = $contentService;
     }
 
-    /**
-     * @param VersionInfo|null $value
-     *
-     * @return array|null
-     *
-     * @throws TransformationFailedException
-     */
-    public function transform($value)
+    public function transform($value): ?array
     {
         if (null === $value) {
             return null;
@@ -50,19 +39,13 @@ class VersionInfoTransformer implements DataTransformerInterface
             );
         }
 
-        return ['content_info' => $value->getContentInfo(), 'version_no' => $value->versionNo];
+        return [
+            'content_info' => $value->getContentInfo(),
+            'version_no' => $value->versionNo,
+        ];
     }
 
-    /**
-     * @param array|null $value
-     *
-     * @return VersionInfo|null
-     *
-     * @throws TransformationFailedException
-     * @throws UnauthorizedException
-     * @throws NotFoundException
-     */
-    public function reverseTransform($value)
+    public function reverseTransform($value): ?VersionInfo
     {
         if (null === $value || !is_array($value)) {
             return null;
@@ -74,10 +57,10 @@ class VersionInfoTransformer implements DataTransformerInterface
             );
         }
 
-        if (null === $value['content_info'] || null === $value['version_no']) {
+        if (!($value['content_info'] instanceof ContentInfo) || null === $value['version_no']) {
             return null;
         }
 
-        return $this->contentService->loadVersionInfo($value['content_info'], $value['version_no']);
+        return $this->contentService->loadVersionInfo($value['content_info'], (int)$value['version_no']);
     }
 }
