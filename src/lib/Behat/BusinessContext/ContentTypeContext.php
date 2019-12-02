@@ -32,7 +32,7 @@ class ContentTypeContext extends BusinessContext
             Assert::assertEquals(
                 $row['value'],
                 $actualValue,
-                sprintf('Content Type has wrong %s - actual: %s, expected: %s.', $row['label'], $actualValue, $row['value'])
+                sprintf('Content Type\'s %s is %s instead of %s.', $row['label'], $actualValue, $row['value'])
             );
         }
     }
@@ -48,7 +48,7 @@ class ContentTypeContext extends BusinessContext
         if ($actualFieldType !== $fieldType) {
             throw new \Exception(
                 sprintf(
-                    'Content Type field %s has wrong type - actual: %s, expected: %s.',
+                    'Content Type Field %s is of type %s instead of %s.',
                     $fieldName,
                     $actualFieldType,
                     $fieldType

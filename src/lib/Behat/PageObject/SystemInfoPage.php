@@ -41,7 +41,8 @@ class SystemInfoPage extends Page
         $this->adminLists['Bundles'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Bundles', SimpleTable::ELEMENT_NAME, '.ez-main-container .tab-pane.active');
         $this->systemInfoTable = ElementFactory::createElement($context, SystemInfoTable::ELEMENT_NAME, '.ez-main-container .tab-pane.active .ez-table--list');
         $this->navLinkTabs = ElementFactory::createElement($context, NavLinkTabs::ELEMENT_NAME);
-        $this->route = '/admin/systeminfo';
+        $this->siteAccess = 'admin';
+        $this->route = '/systeminfo';
         $this->pageTitle = self::PAGE_NAME;
         $this->pageTitleLocator = '.ez-header h1';
     }
@@ -71,7 +72,7 @@ class SystemInfoPage extends Page
                 }
             }
             if (!$found) {
-                Assert::fail(sprintf('Desired record [%s] not found in "%s" list.', $desiredRecord['Name'], $tableName));
+                Assert::fail(sprintf('Could not find requested record [%s] on the "%s" list.', $desiredRecord['Name'], $tableName));
             }
         }
     }

@@ -36,7 +36,7 @@ class IsAdmin extends AbstractSpecification
     public function isSatisfiedBy($item): bool
     {
         if (!$item instanceof SiteAccess) {
-            throw new InvalidArgumentException($item, sprintf('Must be instance of %s', SiteAccess::class));
+            throw new InvalidArgumentException($item, sprintf('Must be an instance of %s', SiteAccess::class));
         }
 
         return in_array($item->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME], true);

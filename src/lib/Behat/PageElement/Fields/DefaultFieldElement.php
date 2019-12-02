@@ -42,7 +42,7 @@ class DefaultFieldElement extends Element
                 }
                 break;
             default:
-                throw new \Exception(sprintf('Field type "%s" not defined as behat field element.', $this->fieldNode->getAttribute('type')));
+                throw new \Exception(sprintf('Field Type "%s" not defined as behat field element.', $this->fieldNode->getAttribute('type')));
         }
     }
 
@@ -58,7 +58,7 @@ class DefaultFieldElement extends Element
                 return $this->fieldNode->isChecked() ? 'true' : 'false';
                 break;
             default:
-                throw new \Exception(sprintf('Field type "%s" not defined as behat field element.', $this->fieldNode->getAttribute('type')));
+                throw new \Exception(sprintf('Field Type "%s" not defined as behat field element.', $this->fieldNode->getAttribute('type')));
         }
     }
 }

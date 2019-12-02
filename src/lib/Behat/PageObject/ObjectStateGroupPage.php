@@ -37,7 +37,8 @@ class ObjectStateGroupPage extends Page
     public function __construct(BrowserContext $context, string $objectStateGroupName)
     {
         parent::__construct($context);
-        $this->route = '/admin/state/group/';
+        $this->siteAccess = 'admin';
+        $this->route = '/state/group/';
         $this->objectStateGroupName = $objectStateGroupName;
         $this->adminLists['Object state group information'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Object state group information', SimpleTable::ELEMENT_NAME);
         $this->adminLists['Object states'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Object states', LinkedListTable::ELEMENT_NAME, $this->secondListContainerLocator);

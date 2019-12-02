@@ -96,7 +96,7 @@ class RolesContext extends BusinessContext
         $rolePage = PageObjectFactory::createPage($this->browserContext, RolePage::PAGE_NAME, $roleName);
 
         if (!$rolePage->isRoleWithLimitationPresent($this->tabMapping['policy'], $moduleAndFunction, $limitation)) {
-            throw new Exception(sprintf('Policy "%s" with limitation "%s" not found on the "%s" policies list.', $moduleAndFunction, $limitation, $roleName));
+            throw new Exception(sprintf('Policy "%s" with Limitation "%s" not found on the "%s" Policies list.', $moduleAndFunction, $limitation, $roleName));
         }
     }
 
@@ -108,7 +108,7 @@ class RolesContext extends BusinessContext
         $rolePage = PageObjectFactory::createPage($this->browserContext, RolePage::PAGE_NAME, $roleName);
 
         if ($rolePage->isRoleWithLimitationPresent($this->tabMapping['policy'], $moduleAndFunction, $limitation)) {
-            throw new Exception(sprintf('Policy "%s" with limitation "%s" found on the "%s" policies list.', $moduleAndFunction, $limitation, $roleName));
+            throw new Exception(sprintf('Policy "%s" with Limitation "%s" found on the "%s" Policies list.', $moduleAndFunction, $limitation, $roleName));
         }
     }
 
@@ -129,7 +129,7 @@ class RolesContext extends BusinessContext
         }
 
         if (!$assignmentExists) {
-            throw new Exception(sprintf('Assignment to "%s" with limitation "%s" not found.', $userOrGroup, $limitation));
+            throw new Exception(sprintf('Assignment to "%s" with Limitation "%s" not found.', $userOrGroup, $limitation));
         }
     }
 

@@ -72,7 +72,7 @@ class PlatformPageObjectFactory extends PageObjectFactory
             case FolderPreview::CONTENT_TYPE:
                 return FolderPreview::PAGE_NAME;
             default:
-                throw new \InvalidArgumentException(sprintf('Unrecognised preview for content type: %s', $contentType));
+                throw new \InvalidArgumentException(sprintf('Unrecognized preview for Content Type: %s', $contentType));
         }
     }
 }

@@ -74,6 +74,6 @@ class RequestListener implements EventSubscriberInterface
             }
         }
 
-        throw new NotFoundHttpException('Route is not allowed in current siteaccess');
+        throw new NotFoundHttpException('The route is not allowed in the current SiteAccess');
     }
 }

@@ -30,7 +30,8 @@ class DashboardPage extends Page
     public function __construct(BrowserContext $context)
     {
         parent::__construct($context);
-        $this->route = '/admin/dashboard';
+        $this->siteAccess = 'admin';
+        $this->route = '/dashboard';
         $this->fields = [
             'tableSelector' => '.card-body',
             'tableTitle' => '.mb-3',

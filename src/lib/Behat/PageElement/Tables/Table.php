@@ -55,7 +55,7 @@ abstract class Table extends Element
             return $cell->getText();
         }
 
-        throw new \Exception('Cell coordinates not valid - row %d, column %d', $row, $column);
+        throw new \Exception('Cell coordinates not valid: row %d, column %d', $row, $column);
     }
 
     protected function selectElement(string $name, string $selector): void

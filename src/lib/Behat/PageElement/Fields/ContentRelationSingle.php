@@ -45,7 +45,7 @@ class ContentRelationSingle extends EzFieldElement
             sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['selectContent'])
         );
 
-        Assert::assertNotNull($selectContent, sprintf('Select content button for field %s not found.', $this->label));
+        Assert::assertNotNull($selectContent, sprintf('Select content button for Field %s not found.', $this->label));
 
         $selectContent->click();
 

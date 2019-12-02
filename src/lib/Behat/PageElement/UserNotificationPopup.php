@@ -50,6 +50,6 @@ class UserNotificationPopup extends Element
             }
         }
 
-        throw new Exception(sprintf('Notification with type: %s and description: %d not found', $type, $description));
+        throw new Exception(sprintf('Notification of type: %s with description: %d not found', $type, $description));
     }
 }

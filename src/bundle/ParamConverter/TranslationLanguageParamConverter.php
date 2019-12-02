@@ -68,7 +68,7 @@ class TranslationLanguageParamConverter implements ParamConverterInterface
         try {
             $language = $this->languageService->loadLanguage($languageCode);
         } catch (NotFoundException $e) {
-            throw new NotFoundHttpException("Language $languageCode not found!");
+            throw new NotFoundHttpException("Language $languageCode not found.");
         }
 
         return $language;

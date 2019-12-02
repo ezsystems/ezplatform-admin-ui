@@ -58,7 +58,7 @@ class SubItemsTable extends Table
             $isElementInTable = (bool) $elementPositionInTable;
         }
 
-        Assert::assertTrue($isElementInTable, sprintf('There\'s no subitem %s on Sub-item list', $name));
+        Assert::assertTrue($isElementInTable, sprintf('There is no sub-item %s on the Sub-item list', $name));
 
         $this->context->findElement(sprintf($this->fields['nthListElement'], $elementPositionInTable))->click();
     }

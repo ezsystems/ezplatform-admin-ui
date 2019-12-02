@@ -53,7 +53,7 @@ class RequestListenerTest extends TestCase
     public function testOnKernelRequestDeniedAccess()
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Route is not allowed in current siteaccess');
+        $this->expectExceptionMessage('The route is not allowed in the current SiteAccess');
 
         $this->request->attributes->set('siteaccess', new SiteAccess('some_name'));
         $this->request->attributes->set('siteaccess_group_whitelist', ['group_2', 'group_3']);

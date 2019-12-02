@@ -46,7 +46,8 @@ class RolePage extends Page
     public function __construct(BrowserContext $context, string $roleName)
     {
         parent::__construct($context);
-        $this->route = '/admin/role/';
+        $this->siteAccess = 'admin';
+        $this->route = '/role/';
         $this->roleName = $roleName;
         $this->adminLists['Policies'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Policies', SimpleListTable::ELEMENT_NAME, $this->activeAdminListContainerLocator);
         $this->adminLists['Assignments'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Users and Groups', SimpleListTable::ELEMENT_NAME, $this->activeAdminListContainerLocator);

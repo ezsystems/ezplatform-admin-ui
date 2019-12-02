@@ -49,7 +49,7 @@ class VersionConflictController extends Controller
         $versionInfo = $this->contentService->loadVersionInfoById($contentId, $versionNo);
 
         if (!$versionInfo->isDraft()) {
-            throw new BadStateException('Version status', 'status is not draft');
+            throw new BadStateException('Version status', 'the status is not draft');
         }
 
         if ((new VersionHasConflict($this->contentService, $languageCode))->isSatisfiedBy($versionInfo)) {

@@ -19,7 +19,7 @@ class DashboardContext extends BusinessContext
     {
         Assert::assertTrue(
             $this->goToDashboardAndCheckIfDraftIsOnList($draftName),
-            sprintf('There\'s no draft %s on list', $draftName)
+            sprintf('There is no draft %s on the list', $draftName)
         );
     }
 
@@ -30,7 +30,7 @@ class DashboardContext extends BusinessContext
     {
         Assert::assertFalse(
             $this->goToDashboardAndCheckIfDraftIsOnList($draftName),
-            sprintf('There\'s draft %s on list', $draftName)
+            sprintf('There is draft %s on the list', $draftName)
         );
     }
 

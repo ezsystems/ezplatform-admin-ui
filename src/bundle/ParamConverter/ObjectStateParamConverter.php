@@ -44,7 +44,7 @@ class ObjectStateParamConverter implements ParamConverterInterface
         $objectState = $this->objectStateService->loadObjectState($id);
 
         if (!$objectState) {
-            throw new NotFoundHttpException("Object State $id not found!");
+            throw new NotFoundHttpException("Object state $id not found.");
         }
 
         $request->attributes->set($configuration->getName(), $objectState);

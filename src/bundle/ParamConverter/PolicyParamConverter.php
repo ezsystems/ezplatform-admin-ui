@@ -46,7 +46,7 @@ class PolicyParamConverter implements ParamConverterInterface
 
         $role = $this->roleService->loadRole($roleId);
         if (!$role) {
-            throw new NotFoundHttpException("Role $roleId not found!");
+            throw new NotFoundHttpException("Role $roleId not found.");
         }
 
         $policyId = (int)$request->get(self::PARAMETER_POLICY_ID);
@@ -59,7 +59,7 @@ class PolicyParamConverter implements ParamConverterInterface
             }
         }
 
-        throw new NotFoundHttpException("Policy $policyId not found!");
+        throw new NotFoundHttpException("Policy $policyId not found.");
     }
 
     /**
