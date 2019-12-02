@@ -24,7 +24,8 @@ class ContentTypeGroupsPage extends Page
     public function __construct(UtilityContext $context)
     {
         parent::__construct($context);
-        $this->route = '/admin/contenttypegroup/list';
+        $this->siteAccess = 'admin';
+        $this->route = '/contenttypegroup/list';
         $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME, LinkedListTable::ELEMENT_NAME);
         $this->pageTitle = self::PAGE_NAME;
         $this->pageTitleLocator = '.ez-header h1';
