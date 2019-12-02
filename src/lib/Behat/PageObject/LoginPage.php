@@ -7,12 +7,10 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
 use EzSystems\Behat\Browser\Page\Page;
+use EzSystems\Behat\Browser\Context\BrowserContext;
 
 class LoginPage extends Page
 {
-    /** @var string Route under which the Page is available */
-    protected $route = '/admin/login';
-
     /** @var string Name by which Page is recognised */
     public const PAGE_NAME = 'Login';
 
@@ -20,6 +18,13 @@ class LoginPage extends Page
         'username' => '#username',
         'password' => '#password',
     ];
+
+    public function __construct(BrowserContext $context)
+    {
+        parent::__construct($context);
+        $this->siteAccess = 'admin';
+        $this->route = '/login';
+    }
 
     /**
      * Performs login action.
