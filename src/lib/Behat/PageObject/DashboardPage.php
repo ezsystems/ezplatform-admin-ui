@@ -45,16 +45,16 @@ class DashboardPage extends Page
 
     public function switchTab(string $tableName, string $tabName)
     {
-        $table = $this->context->getElementByText('Me', $this->fields['tableSelector'], $this->fields['tableTitle']);
+        $table = $this->context->getElementByText('My content', $this->fields['tableSelector'], $this->fields['tableTitle']);
         $this->context->getElementByText($tabName, $this->fields['tableTabSelector'], null, $table)->click();
     }
 
     /**
-     * Verifies that the Dashboard has the "Me" section.
+     * Verifies that the Dashboard has the "My content" section.
      */
     public function verifyElements(): void
     {
-        Assert::assertNotNull($this->context->getElementByText('Me', $this->fields['tableSelector'], $this->fields['tableTitle']));
+        Assert::assertNotNull($this->context->getElementByText('My content', $this->fields['tableSelector'], $this->fields['tableTitle']));
         $this->navLinkTabs->verifyVisibility();
         $this->dashboardTable->verifyVisibility();
     }
@@ -63,6 +63,6 @@ class DashboardPage extends Page
     {
         $tableValue = $this->context->findElement($this::TABLE_CONTAINER)->getText();
 
-        return strpos($tableValue, 'No content items.') !== false;
+        return strpos($tableValue, 'No content.') !== false;
     }
 }

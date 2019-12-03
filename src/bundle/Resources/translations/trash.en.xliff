@@ -17,8 +17,8 @@
         <note>key: trash.button.restore</note>
       </trans-unit>
       <trans-unit id="5424e0925328bb62806b43b2a65cc86fef6ad7d9" resname="trash.button.restore_new_location">
-        <source>Restore under new parent location</source>
-        <target state="new">Restore under new parent location</target>
+        <source>Restore in a new Location</source>
+        <target state="new">Restore in a new Location</target>
         <note>key: trash.button.restore_new_location</note>
       </trans-unit>
       <trans-unit id="7ffaa1444a83e959f8de3c2410bb65acdd3e3ff0" resname="trash.delete">
@@ -27,18 +27,18 @@
         <note>key: trash.delete</note>
       </trans-unit>
       <trans-unit id="45548aed8adb5019c3b806992e903965699c7e08" resname="trash.deleted.success">
-        <source>Deleted selected trash items.</source>
-        <target state="new">Deleted selected trash items.</target>
+        <source>Deleted selected item(s) from Trash.</source>
+        <target state="new">Deleted selected item(s) from Trash.</target>
         <note>key: trash.deleted.success</note>
       </trans-unit>
       <trans-unit id="7883128cdfb813826271abe90b3a1f3190833ce6" resname="trash.empty">
-        <source>Trash is empty. Any content item you send to trash will end up here.</source>
-        <target state="new">Trash is empty. Any content item you send to trash will end up here.</target>
+        <source>Trash is empty. Content you send to Trash will show up here.</source>
+        <target state="new">Trash is empty. Content you send to Trash will show up here.</target>
         <note>key: trash.empty</note>
       </trans-unit>
       <trans-unit id="17b503b33de4f7e60958b7824dd959dd0144ae13" resname="trash.empty.success">
-        <source>Trash empty.</source>
-        <target state="new">Trash empty.</target>
+        <source>Trash emptied.</source>
+        <target state="new">Trash emptied.</target>
         <note>key: trash.empty.success</note>
       </trans-unit>
       <trans-unit id="eb7cd78bb919141f66cabfea95a60e0e6b02e9f4" resname="trash.headline">
@@ -52,8 +52,8 @@
         <note>key: trash.item.ancesor_in_trash</note>
       </trans-unit>
       <trans-unit id="2720e3018fc8b1158cb728b1d5dc377ef7293b57" resname="trash.modal.message">
-        <source>Do you want to delete selected item(s) from Trash?</source>
-        <target state="new">Do you want to delete selected item(s) from Trash?</target>
+        <source>Do you want to delete the selected item(s) from Trash?</source>
+        <target state="new">Do you want to delete the selected item(s) from Trash?</target>
         <note>key: trash.modal.message</note>
       </trans-unit>
       <trans-unit id="34525fc5da381111c2104d20a55021eb8b698c7c" resname="trash.name">
@@ -62,18 +62,18 @@
         <note>key: trash.name</note>
       </trans-unit>
       <trans-unit id="c28510c675be753842996980b0e5d175cec4a8d8" resname="trash.original_location">
-        <source>Original location</source>
-        <target state="new">Original location</target>
+        <source>Original Location</source>
+        <target state="new">Original Location</target>
         <note>key: trash.original_location</note>
       </trans-unit>
       <trans-unit id="a8c2da925faa48def8e407037a6115f1340070c7" resname="trash.restore_new_location.success">
-        <source>Items restored under '%location%' location.</source>
-        <target state="new">Items restored under '%location%' location.</target>
+        <source>Restored content under Location '%location%'.</source>
+        <target state="new">Restored content under Location '%location%'.</target>
         <note>key: trash.restore_new_location.success</note>
       </trans-unit>
       <trans-unit id="d4e8ddb6a84d9ca3a3b39485e9b7c5ef2860d879" resname="trash.restore_original_location.success">
-        <source>Items restored under their original location.</source>
-        <target state="new">Items restored under their original location.</target>
+        <source>Restored content to its original Location.</source>
+        <target state="new">Restored content to its original Location.</target>
         <note>key: trash.restore_original_location.success</note>
       </trans-unit>
       <trans-unit id="06b530d8c8b3d7af7b3f2df9f5102927e7275de4" resname="trash.table.header">

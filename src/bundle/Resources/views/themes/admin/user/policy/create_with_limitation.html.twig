@@ -9,13 +9,13 @@
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { url: path('ezplatform.role.list'), value: 'role.breadcrumb.list'|trans|desc('Roles') },
         { url: path('ezplatform.role.view', {roleId: role.id}), value: 'role.breadcrumb.view.identifier'|trans({ '%identifier%': role.identifier })|desc('Role "%identifier%"') },
-        { value: 'policy.breadcrumb.edit'|trans()|desc('Edit limitations') }
+        { value: 'policy.breadcrumb.edit'|trans()|desc('Edit Limitations') }
     ]} %}
 {% endblock %}
 
 {% block page_title_admin %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
-        title: 'policy.view.edit.title'|trans()|desc('Edit limitations'),
+        title: 'policy.view.edit.title'|trans()|desc('Edit Limitations'),
         icon_name: 'roles'
     } %}
 {% endblock %}
@@ -25,7 +25,7 @@
     <section class="container mt-4 px-5">
         <div class="card ez-card">
             <div class="ez-card__header">
-                <h5>{{ 'policy.add.policy.title'|trans|desc('Adding - Policy type') }}</h5>
+                <h5>{{ 'policy.add.policy.title'|trans|desc('Adding Policy of type:') }}</h5>
             </div>
             <div class="ez-card__body">
                 {{ form.vars.value.module|capitalize ~ ' / ' ~ form.vars.value.function|capitalize }}
@@ -35,7 +35,7 @@
 
         <div class="card ez-adminsection-edit mt-4 ez-card">
             <div class="card-header">
-                <h2>{{ 'policy.view.limitations.title'|trans|desc('Edit limitations') }}</h2>
+                <h2>{{ 'policy.view.limitations.title'|trans|desc('Edit Limitations') }}</h2>
             </div>
             <div class="card-body">
                 {% for limitation_form in form.limitations %}

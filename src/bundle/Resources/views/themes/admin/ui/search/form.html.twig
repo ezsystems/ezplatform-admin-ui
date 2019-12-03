@@ -24,7 +24,7 @@
         <div class="ez-filters__item ez-filters__item--content-type">
             <label class="ez-filters__item-label">{{ 'search.content.type'|trans|desc('Content Type:') }}</label>
             <select class="form-control ez-filters__select ez-filters__select--content-type" hidden>
-                <option class="ez-filters__option ez-filters__option--hidden" data-default="{{ 'search.any.content.type'|trans|desc('Any content type') }}" value="">{{ 'search.any.content.type'|trans|desc('Any content type') }}</option>
+                <option class="ez-filters__option ez-filters__option--hidden" data-default="{{ 'search.any.content.type'|trans|desc('Any Content Type') }}" value="">{{ 'search.any.content.type'|trans|desc('Any Content Type') }}</option>
             </select>
             {{ form_widget(form.content_types, {'attr': {'class': 'ez-filters__select'}}) }}
         </div>
@@ -89,7 +89,7 @@
                 class="form-control ez-filters__input"
                 data-content-type-identifiers="{{ user_content_type_identifier|join(',') }}"
                 value="{{ creator is not empty ? ez_content_name(creator) }}"
-                placeholder="{{ 'search.creator_input.placeholder'|trans|desc('Type creator') }}"
+                placeholder="{{ 'search.creator_input.placeholder'|trans|desc('Type creator\'s name') }}"
                 {{ creator is not empty ? 'disabled'  }}
             >
             <svg class="ez-icon ez-icon--light ez-icon--medium ez-icon--reset">

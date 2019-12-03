@@ -338,7 +338,7 @@ class ObjectStateController extends Controller
                 $this->objectStateService->setContentState($contentInfo, $objectStateGroup, $objectState);
 
                 $this->notificationHandler->success(
-                    /** @Desc("Content object state '%name%' updated.") */
+                    /** @Desc("Content item's Object state changed to '%name%'.") */
                     'content_object_state.update.success',
                     ['%name%' => $objectState->getName()],
                     'object_state'

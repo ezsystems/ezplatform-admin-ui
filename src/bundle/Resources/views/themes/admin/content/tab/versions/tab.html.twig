@@ -18,7 +18,7 @@
                 }) }}
                 {% block table_drafts %}
                     {% include '@ezdesign/ui/table_header.html.twig' with {
-                        'header_text': 'tab.versions.draft_under_edit'|trans()|desc('Draft under edit'),
+                        'header_text': 'tab.versions.draft_under_edit'|trans()|desc('Open drafts'),
                         'tools': tab.table_header_tools(form_version_remove_draft)
                     } %}
                     {% include table_template_path with {
@@ -101,14 +101,14 @@
 {% macro table_header_tools(form) %}
     {% set modal_data_target = 'modal-' ~ form.remove.vars.id %}
     <button id="delete-translations-{{ form.remove.vars.id }}" type="button" class="btn btn-danger" disabled data-toggle="modal"
-            data-target="#{{ modal_data_target }}" title="{{ 'tab.versions.action.delete'|trans|desc('Delete Version') }}">
+            data-target="#{{ modal_data_target }}" title="{{ 'tab.versions.action.delete'|trans|desc('Delete version') }}">
         <svg class="ez-icon ez-icon-trash">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>
     {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
     'id': modal_data_target,
-    'message': 'tab.versions.modal.message'|trans|desc('Do you want to delete Versions?'),
+    'message': 'tab.versions.modal.message'|trans|desc('Do you want to delete the version(s)?'),
     'data_click': '#' ~ form.remove.vars.id,
     } %}
 {% endmacro %}

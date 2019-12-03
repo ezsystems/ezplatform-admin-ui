@@ -13,7 +13,7 @@
     }) }}
 {% else %}
     <p class="ez-table-no-content">
-        {{ 'tab.urls.no_custom_urls'|trans|desc('This content item has no custom url aliases.') }}
+        {{ 'tab.urls.no_custom_urls'|trans|desc('This Content item has no custom URL aliases.') }}
     </p>
 {% endif %}
 
@@ -39,7 +39,7 @@
     }) }}
 {% else %}
     <p class="ez-table-no-content">
-        {{ 'tab.urls.no_system_urls'|trans|desc('This content item has no system urls.') }}
+        {{ 'tab.urls.no_system_urls'|trans|desc('This Content item has no system URLs.') }}
     </p>
 {% endif %}
 
@@ -70,7 +70,7 @@
             class="btn btn-primary ez-btn--prevented"
             data-toggle="modal"
             data-target="#ez-modal--custom-url-alias"
-            title="{{ 'tab.urls.action.add'|trans|desc('Add Custom URL') }}">
+            title="{{ 'tab.urls.action.add'|trans|desc('Add a custom URL alias') }}">
             <svg class="ez-icon ez-icon-create">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
             </svg>
@@ -84,14 +84,14 @@
             disabled
             data-toggle="modal"
             data-target="#{{ modal_data_target }}"
-            title="{{ 'tab.urls.action.delete'|trans|desc('Delete Custom URL') }}">
+            title="{{ 'tab.urls.action.delete'|trans|desc('Delete custom URL alias') }}">
             <svg class="ez-icon ez-icon-trash">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
             </svg>
         </button>
         {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
             'id': modal_data_target,
-            'message': 'tab.urls.modal.message'|trans|desc('Do you want to delete selected Custom URLs?'),
+            'message': 'tab.urls.modal.message'|trans|desc('Do you want to delete the selected custom URL alias(es)?'),
             'data_click': '#' ~ form_custom_url_remove.remove.vars.id,
         }%}
     {% endif %}

@@ -33,7 +33,7 @@ class LocationSwapType extends AbstractType
             ->add(
                 'swap',
                 SubmitType::class,
-                ['label' => /** @Desc("Select content item") */ 'swap_location_form.swap']
+                ['label' => /** @Desc("Select Content item") */ 'swap_location_form.swap']
             );
     }
 

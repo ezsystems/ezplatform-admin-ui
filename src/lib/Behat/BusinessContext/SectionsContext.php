@@ -40,7 +40,7 @@ class SectionsContext extends BusinessContext
         $upperMenu->goToSubTab('Sections');
 
         $contentsCount = PageObjectFactory::createPage($this->browserContext, SectionsPage::PAGE_NAME)
-            ->adminList->table->getTableCellValue($sectionName, 'Assignments count');
+            ->adminList->table->getTableCellValue($sectionName, 'Assigned content');
 
         if (($contentsCount !== $emptyContainerCellValue)) {
             Assert::fail(sprintf('There is no empty %s on the "Section" list.', $sectionName));

@@ -6,13 +6,13 @@
 
 {% block notification_type %}
     <span class="type__text type__text--permanently-deleted">
-        {{ 'notification.permanently_deleted'|trans|desc('Publication permanently deleted')}}
+        {{ 'notification.permanently_deleted'|trans|desc('Deleted')}}
     </span>
 {% endblock %}
 
 {% block message %}
     <td class="ez-notifications-modal__description">
         <p class="description__title">{{ 'notification.title'|trans|desc('Title:') }} <span class="description__title__item">{{ title }}</span></p>
-        <p class="description__text description__text--permanently-deleted">{{ 'notification.no_longer_available'|trans|desc('Content not available any more')}}</p>
+        <p class="description__text description__text--permanently-deleted">{{ 'notification.no_longer_available'|trans|desc('The Content item is no longer available')}}</p>
     </td>
 {% endblock %}

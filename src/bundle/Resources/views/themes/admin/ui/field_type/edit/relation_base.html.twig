@@ -12,7 +12,7 @@
                 <th colspan="5">
                     {{ 'ezobjectrelationlist.relations'|trans|desc('Relations') }}:
                     {% if limit != 0 %}
-                        <small>{{ 'ezobjectrelationlist.limit'|trans({'%limit%': limit})|desc('Limit %limit% max') }}</small>
+                        <small>{{ 'ezobjectrelationlist.limit'|trans({'%limit%': limit})|desc('(max. %limit%)') }}</small>
                     {% endif %}
                 </th>
                 <th class="ez-relations__table-actions">
@@ -80,7 +80,7 @@
     <div class="ez-relations__cta" {% if has_relations %}hidden="true"{% endif %}>
         <p class="ez-relations__cta-text">
         {% if limit != 0 %}
-            {{ 'ezobjectrelationlist.cta.limit'|trans({'%limit%': limit})|desc('Set up multiple relations with up to %limit% content items') }}
+            {{ 'ezobjectrelationlist.cta.limit'|trans({'%limit%': limit})|desc('Set up relations with up to %limit% Content item(s)') }}
         {% endif %}
         </p>
         <button

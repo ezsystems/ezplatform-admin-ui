@@ -196,7 +196,7 @@ class ContentTypeController extends Controller
             $contentTypeDraft = $this->contentTypeService->createContentType($createStruct, [$group]);
         } catch (NotFoundException $e) {
             $this->notificationHandler->error(
-                /** @Desc("Cannot create Content Type. Could not find 'Language' with identifier '%languageCode%'") */
+                /** @Desc("Cannot create Content Type. Could not find language with identifier '%languageCode%'") */
                 'content_type.add.missing_language',
                 ['%languageCode%' => $mainLanguageCode],
                 'content_type'
@@ -245,7 +245,7 @@ class ContentTypeController extends Controller
                 } catch (BadStateException $e) {
                     $userId = $contentType->modifierId;
                     $this->notificationHandler->error(
-                        /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
+                        /** @Desc("Draft of Content Type '%name%' already exists and is locked by '%userContentName%'") */
                         'content_type.edit.error.already_exists',
                         ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($userId)],
                         'content_type'
@@ -303,7 +303,7 @@ class ContentTypeController extends Controller
                 } catch (BadStateException $e) {
                     $userId = $contentType->modifierId;
                     $this->notificationHandler->error(
-                        /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
+                        /** @Desc("Draft of Content Type '%name%' already exists and is locked by '%userContentName%'") */
                         'content_type.edit.error.already_exists',
                         ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($userId)],
                         'content_type'
@@ -358,7 +358,7 @@ class ContentTypeController extends Controller
         if ($contentTypeDraft->modifierId !== $this->getUser()->getAPIUser()->getUserId()) {
             $this->notificationHandler->error(
                 $this->translator->trans(
-                    /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
+                    /** @Desc("Draft of Content Type '%name%' already exists and is locked by '%userContentName%'") */
                     'content_type.edit.error.already_exists',
                     ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($contentTypeDraft->modifierId)],
                     'content_type'

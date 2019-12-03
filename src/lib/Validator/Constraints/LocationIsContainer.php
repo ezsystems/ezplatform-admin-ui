@@ -23,7 +23,7 @@ class LocationIsContainer extends Constraint implements TranslationContainerInte
     {
         return [
             Message::create('ezplatform.copy_subtree.is_not_container', 'validators')
-                ->setDesc('Selected Location is not container.'),
+                ->setDesc('Selected Location cannot contain children.'),
         ];
     }
 }

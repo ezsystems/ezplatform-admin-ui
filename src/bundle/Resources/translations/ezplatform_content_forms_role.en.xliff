@@ -32,18 +32,18 @@
         <note>key: policy_delete.delete</note>
       </trans-unit>
       <trans-unit id="0eda0d605bd42eb8989a82e546d09ace8bc1b4d9" resname="role.policy.limitation.location.udw_button">
-        <source>Select locations</source>
-        <target state="new">Select locations</target>
+        <source>Select Locations</source>
+        <target state="new">Select Locations</target>
         <note>key: role.policy.limitation.location.udw_button</note>
       </trans-unit>
       <trans-unit id="73a82ac42476a68fb0216ebecd04f01f11bf44b2" resname="role.policy.limitation.location.udw_title">
-        <source>Select locations to use as policy limitation</source>
-        <target state="new">Select locations to use as policy limitation</target>
+        <source>Select Location(s) to use as Limitation</source>
+        <target state="new">Select Location(s) to use as Limitation</target>
         <note>key: role.policy.limitation.location.udw_title</note>
       </trans-unit>
       <trans-unit id="be8159ab7985797bd281cb0f7f58bb4d2c925159" resname="role.policy.limitation.not_implemented">
-        <source>Editing limitations for '%limitationTypeIdentifier%' is not implemented yet.</source>
-        <target state="new">Editing limitations for '%limitationTypeIdentifier%' is not implemented yet.</target>
+        <source>Editing Limitations for '%limitationTypeIdentifier%' is not available.</source>
+        <target state="new">Editing Limitations for '%limitationTypeIdentifier%' is not available.</target>
         <note>key: role.policy.limitation.not_implemented</note>
       </trans-unit>
       <trans-unit id="d3c70d265ab037db5ade02a8b738b5981353c7ac" resname="role.policy.type">

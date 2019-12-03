@@ -5,7 +5,7 @@
 
     <button type="button" data-universaldiscovery-title="{{ "role.policy.limitation.location.udw_title"
         |trans({}, "ezplatform_content_forms_role")
-        |desc("Select locations to use as policy limitation") }}"
+        |desc("Select Location(s) to use as Limitation") }}"
         class="btn btn-secondary d-block ez-pick-location-limitation-button"
         data-location-input-selector="#{{ form.limitationValues.vars.id }}"
         data-selected-location-list-selector="#{{ form.limitationValues.vars.id }}-selected-location"
@@ -15,7 +15,7 @@
             'location_id': '{{ location_id }}',
             'is_loading_state': true
         })|e('html_attr') }}">
-        {{ "role.policy.limitation.location.udw_button"|trans({}, "ezplatform_content_forms_role")|desc("Select locations") }}
+        {{ "role.policy.limitation.location.udw_button"|trans({}, "ezplatform_content_forms_role")|desc("Select Locations") }}
     </button>
 
     <ul class="list-unstyled" id="{{ form.limitationValues.vars.id }}-selected-location">

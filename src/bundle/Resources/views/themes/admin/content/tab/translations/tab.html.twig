@@ -68,7 +68,7 @@
 {% macro table_header_tools(form_translation_remove, can_translate) %}
     {% if can_translate %}
         <button type="button" class="btn btn-primary ez-btn--prevented ez-btn--add-translation" data-toggle="modal" data-target="#add-translation-modal"
-                title="{{ 'tab.translations.action.add'|trans|desc('Add Translation') }}">
+                title="{{ 'tab.translations.action.add'|trans|desc('Add translation') }}">
             <svg class="ez-icon ez-icon-create">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
             </svg>
@@ -83,7 +83,7 @@
         </button>
         {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
             'id': modal_data_target,
-            'message': 'tab.translations.modal.message'|trans|desc('Do you want to delete Translation?'),
+            'message': 'tab.translations.modal.message'|trans|desc('Do you want to delete the translation?'),
             'data_click': '#' ~ form_translation_remove.remove.vars.id,
         }%}
     {% endif %}

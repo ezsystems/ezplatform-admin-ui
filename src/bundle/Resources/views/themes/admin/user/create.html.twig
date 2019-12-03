@@ -4,7 +4,7 @@
 
 {% block details %}
     <div class="container mt-5 px-5">
-        <h4 class="ez-content-item-status">{{ 'creating'|trans({'%contentType%': content_type.name})|desc('Creating - %contentType%') }}</h4>
+        <h4 class="ez-content-item-status">{{ 'creating'|trans({'%contentType%': content_type.name})|desc('Creating a(n) %contentType%') }}</h4>
         <h1>
             <svg class="ez-icon ez-icon-{{ content_type.identifier }}">
                 <use xlink:href="{{ ez_content_type_icon(content_type.identifier) }}"></use>
@@ -16,7 +16,7 @@
             {{ content_type.name }} / {{ 'group_id'|trans({'%groupId%': parent_group.id})|desc('Group ID: %groupId%') }}
         </div>
         <div class="ez-content-item__errors-wrapper" hidden>
-            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Looks like something went wrong. Please check for required fields or errors and correct them') }}
+            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
         </div>
         {# @todo remove if statement once getDescription() bug is resolved in kernel #}
         {% if content_type.descriptions is not empty %}
@@ -45,4 +45,3 @@
 {% block close_button %}
     <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': parent_group.content.versionInfo.contentInfo.mainLocationId}) }}"></a>
 {% endblock %}
-

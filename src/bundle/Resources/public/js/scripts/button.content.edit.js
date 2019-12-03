@@ -16,7 +16,7 @@
         const checkVersionDraftLink = Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode });
         const checkEditPermissionLink = Routing.generate('ezplatform.content.check_edit_permission', { contentId, languageCode });
         const errorMessage = Translator.trans(
-            /*@Desc("You don't have permission to edit the content")*/ 'content.edit.permission.error',
+            /*@Desc("You don't have permission to edit this Content item")*/ 'content.edit.permission.error',
             {},
             'content'
         );

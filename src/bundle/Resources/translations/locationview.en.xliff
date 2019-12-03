@@ -17,8 +17,8 @@
         <note>key: bulk_action.failed.modal.content_type_name</note>
       </trans-unit>
       <trans-unit id="a4b9e9b4898dd285237fc60130970ce7ed988871" resname="content.create.choose_content_type">
-        <source>Create your content</source>
-        <target state="new">Create your content</target>
+        <source>Create content</source>
+        <target state="new">Create content</target>
         <note>key: content.create.choose_content_type</note>
       </trans-unit>
       <trans-unit id="f599001c1ab9442f20e23d535e1dad8f3b75c337" resname="content.create.select_content_type">
@@ -37,8 +37,8 @@
         <note>key: content.edit.select_language</note>
       </trans-unit>
       <trans-unit id="e136be672df8eb27dc4eb2f1ce0650096090bf81" resname="content.hidden.message">
-        <source>The content item or its location is hidden. It will no longer be publicly available.</source>
-        <target state="new">The content item or its location is hidden. It will no longer be publicly available.</target>
+        <source>This Content item or its Location is hidden.</source>
+        <target state="new">This Content item or its Location is hidden.</target>
         <note>key: content.hidden.message</note>
       </trans-unit>
       <trans-unit id="9c91d85bc7658ec7dc6bbb07b720979177c0846a" resname="content.view.subitems">
@@ -52,8 +52,8 @@
         <note>key: content.view.subitems.bulk_action.limited_permissions</note>
       </trans-unit>
       <trans-unit id="1141888f8212e6140ea4bac1a5fba11c02e94d13" resname="dashboard.table.relation.unauthorized">
-        <source>User does not have access to '%function%' '%module%' with content ID: %contentId%</source>
-        <target state="new">User does not have access to '%function%' '%module%' with content ID: %contentId%</target>
+        <source>You do not have the '%function%' '%module%' permission for content ID: %contentId%</source>
+        <target state="new">You do not have the '%function%' '%module%' permission for content ID: %contentId%</target>
         <note>key: dashboard.table.relation.unauthorized</note>
       </trans-unit>
       <trans-unit id="eeb49235f0e3b40e651725430b85a2885174bd2b" resname="location.bookmark.add">
@@ -67,13 +67,13 @@
         <note>key: location.bookmark.remove</note>
       </trans-unit>
       <trans-unit id="4fd9a40170cf4bc5acff719c14eaf2d15fc9942d" resname="tab.details.change_section ">
-        <source>Change section</source>
-        <target state="new">Change section</target>
+        <source>Change Section</source>
+        <target state="new">Change Section</target>
         <note>key: tab.details.change_section </note>
       </trans-unit>
       <trans-unit id="5c08278a7b80c4aae97e5683688b5b55b5f5b37e" resname="tab.details.change_state">
-        <source>Change state</source>
-        <target state="new">Change state</target>
+        <source>Change Object state</source>
+        <target state="new">Change Object state</target>
         <note>key: tab.details.change_state</note>
       </trans-unit>
       <trans-unit id="c0b36efcf0ebbe2ac0f9861cae35e12e668cbcc0" resname="tab.details.content_details">
@@ -97,8 +97,8 @@
         <note>key: tab.details.creator</note>
       </trans-unit>
       <trans-unit id="91b45af4dd219651dc8b1a7d050822b71f03fad3" resname="tab.details.creator.not_found">
-        <source>Can’t fetch creator</source>
-        <target state="new">Can’t fetch creator</target>
+        <source>Can't fetch creator</source>
+        <target state="new">Can't fetch creator</target>
         <note>key: tab.details.creator.not_found</note>
       </trans-unit>
       <trans-unit id="acc17a8db8d00036233faa9948ad9a496cd621b3" resname="tab.details.last_contributor">
@@ -107,8 +107,8 @@
         <note>key: tab.details.last_contributor</note>
       </trans-unit>
       <trans-unit id="ba5ca8a7f923f6ee3a0e6bf9aca428403d0158fd" resname="tab.details.last_contributor.not_found">
-        <source>Can’t fetch last contributor</source>
-        <target state="new">Can’t fetch last contributor</target>
+        <source>Can't fetch last contributor</source>
+        <target state="new">Can't fetch last contributor</target>
         <note>key: tab.details.last_contributor.not_found</note>
       </trans-unit>
       <trans-unit id="671c2d4e91244548b29e8f293cd8d4d97a3c23bd" resname="tab.details.location_id">
@@ -137,8 +137,8 @@
         <note>key: tab.details.section_name</note>
       </trans-unit>
       <trans-unit id="6ba61ac8194e021eb1515cc2d3d33ff006e2d55d" resname="tab.details.state_details">
-        <source>State details</source>
-        <target state="new">State details</target>
+        <source>Object state details</source>
+        <target state="new">Object state details</target>
         <note>key: tab.details.state_details</note>
       </trans-unit>
       <trans-unit id="131730e5ecef276336a53300cdd891e0689023f4" resname="tab.details.state_group_name">
@@ -147,8 +147,8 @@
         <note>key: tab.details.state_group_name</note>
       </trans-unit>
       <trans-unit id="69dea878e2926e6a40b3d4e79b1f723d0aa801c7" resname="tab.details.state_name">
-        <source>Current object state</source>
-        <target state="new">Current object state</target>
+        <source>Current Object state</source>
+        <target state="new">Current Object state</target>
         <note>key: tab.details.state_name</note>
       </trans-unit>
       <trans-unit id="8ddd1c9e60bd352b4395e1753ede6534db2aac8b" resname="tab.details.sub_items_listing_by.in">
@@ -162,8 +162,8 @@
         <note>key: tab.details.sub_items_listing_by.order_by</note>
       </trans-unit>
       <trans-unit id="03aa9832291905ed83ba60081ebffe5786d92418" resname="tab.details.sub_items_sorting_order">
-        <source>Sub-items sorting order</source>
-        <target state="new">Sub-items sorting order</target>
+        <source>Sub-item sorting order</source>
+        <target state="new">Sub-item sorting order</target>
         <note>key: tab.details.sub_items_sorting_order</note>
       </trans-unit>
       <trans-unit id="09fcd5ad39b9c2b778be171f88559f6c117ff48b" resname="tab.details.technical_details">
@@ -187,13 +187,13 @@
         <note>key: tab.locations.action.delete</note>
       </trans-unit>
       <trans-unit id="7ac57e88d1f970747986392b6689075ba64cf270" resname="tab.locations.content_locations">
-        <source>Content locations</source>
-        <target state="new">Content locations</target>
+        <source>Content Locations</source>
+        <target state="new">Content Locations</target>
         <note>key: tab.locations.content_locations</note>
       </trans-unit>
       <trans-unit id="c663ca1446263b6964290f8df3c409d33601d21b" resname="tab.locations.hidden_content_or_superior">
-        <source>Content or superior is hidden</source>
-        <target state="new">Content or superior is hidden</target>
+        <source>Content or its ancestor is hidden</source>
+        <target state="new">Content or its ancestor is hidden</target>
         <note>key: tab.locations.hidden_content_or_superior</note>
       </trans-unit>
       <trans-unit id="64554d66c71f33e7d3ac52c75b17717c334ef9dd" resname="tab.locations.main">
@@ -202,8 +202,8 @@
         <note>key: tab.locations.main</note>
       </trans-unit>
       <trans-unit id="e704444c07d73c053f58f427ebcc0b6b2042c63d" resname="tab.locations.modal.message">
-        <source>Do you want to delete Location?</source>
-        <target state="new">Do you want to delete Location?</target>
+        <source>Do you want to delete the Location?</source>
+        <target state="new">Do you want to delete the Location?</target>
         <note>key: tab.locations.modal.message</note>
       </trans-unit>
       <trans-unit id="7514a2a1e82c82fa3a197dc3da8be56a9c68f136" resname="tab.locations.path">
@@ -267,23 +267,23 @@
         <note>key: tab.name.view</note>
       </trans-unit>
       <trans-unit id="373c6d223e1f346d71cf6cfd85f0fbc3d76ca1d5" resname="tab.relations.no_relations">
-        <source>This content item has no related content.</source>
-        <target state="new">This content item has no related content.</target>
+        <source>This Content item has no related content.</source>
+        <target state="new">This Content item has no related content.</target>
         <note>key: tab.relations.no_relations</note>
       </trans-unit>
       <trans-unit id="1c95181a07cb4d7b83aa9b003eb4e8df95c8bfd9" resname="tab.relations.no_reverse_relations">
-        <source>This content item has no reverse relations.</source>
-        <target state="new">This content item has no reverse relations.</target>
+        <source>This Content item has no reverse Relations.</source>
+        <target state="new">This Content item has no reverse Relations.</target>
         <note>key: tab.relations.no_reverse_relations</note>
       </trans-unit>
       <trans-unit id="853cb6f02ff64af4dc6016318eff1c30bd16cc70" resname="tab.relations.related_content">
-        <source>Related content (content items used by %contentName%)</source>
-        <target state="new">Related content (content items used by %contentName%)</target>
+        <source>Related content (Content items used by %contentName%)</source>
+        <target state="new">Related content (Content items used by %contentName%)</target>
         <note>key: tab.relations.related_content</note>
       </trans-unit>
       <trans-unit id="797eb29381132df5a71378b71b3237cf9a063b5c" resname="tab.relations.reverse_relations">
-        <source>Reverse relations (content items using %contentName%)</source>
-        <target state="new">Reverse relations (content items using %contentName%)</target>
+        <source>Reverse relations (Content items using %contentName%)</source>
+        <target state="new">Reverse relations (Content items using %contentName%)</target>
         <note>key: tab.relations.reverse_relations</note>
       </trans-unit>
       <trans-unit id="d667f9ef2cf04ce8966bc908b8930be596925561" resname="tab.relations.table.content_type">
@@ -322,8 +322,8 @@
         <note>key: tab.relations.table.relation_type.link</note>
       </trans-unit>
       <trans-unit id="492cea0fd67c4af8e41d21710668239c9db66cfc" resname="tab.translations.action.add">
-        <source>Add Translation</source>
-        <target state="new">Add Translation</target>
+        <source>Add translation</source>
+        <target state="new">Add translation</target>
         <note>key: tab.translations.action.add</note>
       </trans-unit>
       <trans-unit id="8c29b038407b67badc381aca362d4770d299df8b" resname="tab.translations.action.delete">
@@ -342,13 +342,13 @@
         <note>key: tab.translations.add.cancel</note>
       </trans-unit>
       <trans-unit id="fe6c962e1d0766f59a66d3766c56edffdce6735d" resname="tab.translations.add.language">
-        <source>Select a language for your new translation</source>
-        <target state="new">Select a language for your new translation</target>
+        <source>Select a language for the new translation</source>
+        <target state="new">Select a language for the new translation</target>
         <note>key: tab.translations.add.language</note>
       </trans-unit>
       <trans-unit id="2d1ceec2bfb85db323e21e358b6be6aad547e1d0" resname="tab.translations.add.title">
-        <source>Create new translation</source>
-        <target state="new">Create new translation</target>
+        <source>Create a new translation</source>
+        <target state="new">Create a new translation</target>
         <note>key: tab.translations.add.title</note>
       </trans-unit>
       <trans-unit id="d494d753de03a08f7a10792b727ec88ca74d4913" resname="tab.translations.language_code">
@@ -367,8 +367,8 @@
         <note>key: tab.translations.main_language</note>
       </trans-unit>
       <trans-unit id="e8d52c9e980661178d301e925ac8c74661b4350d" resname="tab.translations.modal.message">
-        <source>Do you want to delete Translation?</source>
-        <target state="new">Do you want to delete Translation?</target>
+        <source>Do you want to delete the translation?</source>
+        <target state="new">Do you want to delete the translation?</target>
         <note>key: tab.translations.modal.message</note>
       </trans-unit>
       <trans-unit id="852ca97b78e55e9b7734ff3e5a6c1b3fde6eca6f" resname="tab.translations.translation_manger">
@@ -377,8 +377,8 @@
         <note>key: tab.translations.translation_manger</note>
       </trans-unit>
       <trans-unit id="a4297fe31e8eb3307caa2cf855328056c3b98962" resname="tab.versions.action.delete">
-        <source>Delete Version</source>
-        <target state="new">Delete Version</target>
+        <source>Delete version</source>
+        <target state="new">Delete version</target>
         <note>key: tab.versions.action.delete</note>
       </trans-unit>
       <trans-unit id="699b5bf627b908f8d270984ab9a4734a48b28abe" resname="tab.versions.archived_versions">
@@ -387,13 +387,13 @@
         <note>key: tab.versions.archived_versions</note>
       </trans-unit>
       <trans-unit id="b098881c168c540aaa9e23417fa38934a70300d6" resname="tab.versions.draft_under_edit">
-        <source>Draft under edit</source>
-        <target state="new">Draft under edit</target>
+        <source>Open drafts</source>
+        <target state="new">Open drafts</target>
         <note>key: tab.versions.draft_under_edit</note>
       </trans-unit>
       <trans-unit id="134ac8f9b086171dcda7931b3bb7acc0042bb1c9" resname="tab.versions.modal.message">
-        <source>Do you want to delete Versions?</source>
-        <target state="new">Do you want to delete Versions?</target>
+        <source>Do you want to delete the version(s)?</source>
+        <target state="new">Do you want to delete the version(s)?</target>
         <note>key: tab.versions.modal.message</note>
       </trans-unit>
       <trans-unit id="f6c48627db1d026d9f3fbc3b5b1cb1b3c60af4b3" resname="tab.versions.published_version">
@@ -402,18 +402,18 @@
         <note>key: tab.versions.published_version</note>
       </trans-unit>
       <trans-unit id="d2e707023baa6830915c5d12b915974d627522e4" resname="tab.versions.table.action.archived.edit">
-        <source>Restore Archived Version</source>
-        <target state="new">Restore Archived Version</target>
+        <source>Restore archived version</source>
+        <target state="new">Restore archived version</target>
         <note>key: tab.versions.table.action.archived.edit</note>
       </trans-unit>
       <trans-unit id="97721a4a6c33834bb6421c29ef72e8654f39a4ab" resname="tab.versions.table.action.draft.edit">
-        <source>Edit Draft</source>
-        <target state="new">Edit Draft</target>
+        <source>Edit draft</source>
+        <target state="new">Edit draft</target>
         <note>key: tab.versions.table.action.draft.edit</note>
       </trans-unit>
       <trans-unit id="a602612589c6e902caaf8acf1fd51fcd215955f1" resname="tab.versions.table.author.not_found">
-        <source>Can’t fetch contributor</source>
-        <target state="new">Can’t fetch contributor</target>
+        <source>Can't fetch contributor</source>
+        <target state="new">Can't fetch contributor</target>
         <note>key: tab.versions.table.author.not_found</note>
       </trans-unit>
       <trans-unit id="4c27637d649c221e58c6a9629f14a2f75aeed151" resname="tab.versions.table.contributor">

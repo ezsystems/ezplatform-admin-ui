@@ -57,7 +57,7 @@
                                 <tr>
                                     <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
                                         <span class="mb-0 py-1 pl-0">
-                                            {{ 'drafts.list.empty'|trans|desc('The draft list is empty. Any Content draft you create will end up here.') }}
+                                            {{ 'drafts.list.empty'|trans|desc('You have no drafts yet. Your drafts will show up here.') }}
                                         </span>
                                     </td>
                                 </tr>
@@ -80,7 +80,7 @@
                                         <td class="ez-table__cell">{{ row.modified|ez_full_datetime }}</td>
                                         <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                                             <button class="btn btn-icon mx-2 ez-btn--content-draft-edit"
-                                                    title="{{ 'drafts.list.action.edit'|trans|desc('Edit Draft') }}"
+                                                    title="{{ 'drafts.list.action.edit'|trans|desc('Edit draft') }}"
                                                     data-content-id="{{ row.contentId }}"
                                                     data-language-code="{{ row.language }}"
                                                     data-content-draft-edit-url="{{ path(content_draft_edit_url, {
@@ -150,7 +150,7 @@
         disabled
         data-toggle="modal"
         data-target="#{{ modal_data_target }}"
-        title="{{ 'drafts.list.action.remove.confirmation.title'|trans|desc('Delete selected drafts') }}"
+        title="{{ 'drafts.list.action.remove.confirmation.title'|trans|desc('Delete selected draft(s)') }}"
     >
         <svg class="ez-icon ez-icon-trash">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
@@ -163,4 +163,3 @@
         'data_click': '#' ~ form.remove.vars.id,
     } %}
 {% endmacro %}
-

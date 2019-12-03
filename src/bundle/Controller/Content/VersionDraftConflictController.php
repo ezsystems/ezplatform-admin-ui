@@ -76,7 +76,7 @@ class VersionDraftConflictController extends Controller
             $contentDraftHasConflict = (new ContentDraftHasConflict($this->contentService, $languageCode))->isSatisfiedBy($contentInfo);
         } catch (UnauthorizedException $e) {
             $error = $this->translator->trans(
-                /** @Desc("Cannot check if the draft has no conflict with other drafts. %error%. ") */
+                /** @Desc("Cannot check if the draft has conflicts with other drafts. %error%.") */
                 'content.draft.conflict.error',
                 ['%error%' => $e->getMessage()],
                 'content'

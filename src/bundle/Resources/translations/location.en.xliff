@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="80667bf788ad872d935d0f450ea556ad631010f4" resname="location.assign_section.success">
-        <source>Section '%name%' has been assigned to subtree</source>
-        <target state="new">Section '%name%' has been assigned to subtree</target>
+        <source>Subtree assigned to Section '%name%'</source>
+        <target state="new">Subtree assigned to Section '%name%'</target>
         <note>key: location.assign_section.success</note>
       </trans-unit>
       <trans-unit id="7f616359fa64ad9a44aba2d7eeebfde7aac7f16f" resname="location.copy.success">
@@ -17,8 +17,8 @@
         <note>key: location.copy.success</note>
       </trans-unit>
       <trans-unit id="656c4be212bdf722670400927051cb39593938a5" resname="location.copy_subtree.success">
-        <source>Subtree '%name%' copied to location '%location%'</source>
-        <target state="new">Subtree '%name%' copied to location '%location%'</target>
+        <source>Subtree '%name%' copied to Location '%location%'</source>
+        <target state="new">Subtree '%name%' copied to Location '%location%'</target>
         <note>key: location.copy_subtree.success</note>
       </trans-unit>
       <trans-unit id="a9e3a80cf0b00f8a6b7d4e6ba0fa3ace6fe3f1f3" resname="location.create.success">
@@ -37,8 +37,8 @@
         <note>key: location.move.success</note>
       </trans-unit>
       <trans-unit id="20dae8cf8c7cf8972d802224728554706e2b4699" resname="location.swap.success">
-        <source>Location '%name%' swaped with location '%location%'</source>
-        <target state="new">Location '%name%' swaped with location '%location%'</target>
+        <source>Location '%name%' swapped with Location '%location%'</source>
+        <target state="new">Location '%name%' swapped with Location '%location%'</target>
         <note>key: location.swap.success</note>
       </trans-unit>
       <trans-unit id="48699e3e0320623a7ac78df3b808f6341dd7d4c3" resname="location.trash.success">
@@ -57,8 +57,8 @@
         <note>key: location.update_success.success.hidden</note>
       </trans-unit>
       <trans-unit id="687bb78ae5d6531f6a5dbaaa91b90db7a0700f6e" resname="location.update_success.success.unhidden">
-        <source>Location '%name%' unhidden.</source>
-        <target state="new">Location '%name%' unhidden.</target>
+        <source>Location '%name%' revealed.</source>
+        <target state="new">Location '%name%' revealed.</target>
         <note>key: location.update_success.success.unhidden</note>
       </trans-unit>
     </body>

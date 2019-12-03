@@ -59,7 +59,7 @@
 
             showSuccessNotification(
                 Translator.trans(
-                    /* @Desc("Image has been published and can now be reused") */ 'ezimageasset.create.message.success',
+                    /* @Desc("The image has been published and can now be reused") */ 'ezimageasset.create.message.success',
                     {},
                     'fieldtypes_edit'
                 )
@@ -73,7 +73,7 @@
          */
         onAssetCreateFailure(error) {
             const message = Translator.trans(
-                /* @Desc("Error while creating image asset: %error%") */ 'ezimageasset.create.message.error',
+                /* @Desc("Error while creating Image Asset: %error%") */ 'ezimageasset.create.message.error',
                 { error: error.message },
                 'fieldtypes_edit'
             );

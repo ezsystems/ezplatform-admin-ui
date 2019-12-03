@@ -30,11 +30,11 @@ class UserPasswordChangeType extends AbstractType
         $builder
             ->add('oldPassword', PasswordType::class, [
                 'required' => true,
-                'label' => /** @Desc("Old password") */ 'ezplatform.change_user_password.old_password',
+                'label' => /** @Desc("Current password") */ 'ezplatform.change_user_password.old_password',
             ])
             ->add('newPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => /** @Desc("The password fields must match.") */ 'ezplatform.change_user_password.passwords_must_match',
+                'invalid_message' => /** @Desc("Passwords do not match.") */ 'ezplatform.change_user_password.passwords_must_match',
                 'required' => true,
                 'constraints' => [
                     new Password([

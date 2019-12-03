@@ -36,7 +36,7 @@ class RolesDeleteType extends AbstractType
                 SubmitType::class,
                 [
                     'attr' => ['hidden' => true],
-                    'label' => /** @Desc("Delete role") */ 'roles_delete_form.delete',
+                    'label' => /** @Desc("Delete Role") */ 'roles_delete_form.delete',
                 ]
             );
     }

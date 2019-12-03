@@ -22,8 +22,8 @@ class RolesContext extends BusinessContext
     ];
 
     private $itemTypeToLabelMapping = [
-        'users' => 'Select users',
-        'groups' => 'Select groups',
+        'users' => 'Select Users',
+        'groups' => 'Select User Groups',
     ];
 
     private $fields = [
@@ -47,7 +47,7 @@ class RolesContext extends BusinessContext
      */
     public function iSelectSubtreeLimitationThroughUDW(string $itemPath, string $tabName, ?string $kind = null): void
     {
-        $buttonLabel = 'Select locations';
+        $buttonLabel = 'Select Locations';
         $buttonNo = 0;
 
         if ('assignment' === $tabName) {

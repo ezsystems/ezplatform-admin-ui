@@ -12,13 +12,13 @@
         <note>key: ezboolean.no</note>
       </trans-unit>
       <trans-unit id="dfb5fd4a5dec38539847d92bb5e8417c5b82b96a" resname="ezboolean.yes">
-        <source>yes</source>
-        <target state="new">yes</target>
+        <source>Yes</source>
+        <target state="new">Yes</target>
         <note>key: ezboolean.yes</note>
       </trans-unit>
       <trans-unit id="a871dec7f18c06b9061bc2aae9af1aafe1ad1600" resname="ezdatetime.useseconds.enabled">
-        <source>`The date format is based on your user preferences and does not include seconds even if the field allows it`</source>
-        <target state="new">`The date format is based on your user preferences and does not include seconds even if the field allows it`</target>
+        <source>`The date format is based on your user preferences and does not include seconds even if the Field allows it`</source>
+        <target state="new">`The date format is based on your user preferences and does not include seconds even if the Field allows it`</target>
         <note>key: ezdatetime.useseconds.enabled</note>
       </trans-unit>
       <trans-unit id="bf1525899659fa5ea6c18aa4bf63d596fecbf97e" resname="ezgmaplocation.address">
@@ -72,8 +72,8 @@
         <note>key: ezimage.size</note>
       </trans-unit>
       <trans-unit id="d34002f3e81ae0592b02f40872388e0adea41279" resname="ezimage.width_and_height">
-        <source>%width%px Width - %height%px Height</source>
-        <target state="new">%width%px Width - %height%px Height</target>
+        <source>Width: %width%px height: %height%px</source>
+        <target state="new">Width: %width%px height: %height%px</target>
         <note>key: ezimage.width_and_height</note>
       </trans-unit>
       <trans-unit id="85038ddf9e38bbf3da26c38adff609012d65a53a" resname="ezimageasset.alternative_text">
@@ -97,8 +97,8 @@
         <note>key: ezimageasset.master_dimensions</note>
       </trans-unit>
       <trans-unit id="c63a925d645b5365654bfaa2e5ac129280388bc0" resname="ezimageasset.not_available">
-        <source>Image asset is not available (related content has been deleted or insufficient permissions)</source>
-        <target>Image asset is not available (related content has been deleted or insufficient permissions)</target>
+        <source>Image asset is not available (related content has been deleted or you have insufficient permissions)</source>
+        <target state="new">Image asset is not available (related content has been deleted or you have insufficient permissions)</target>
         <note>key: ezimageasset.not_available</note>
       </trans-unit>
       <trans-unit id="9d8611731543740ff64e9e1a69f9c18812301879" resname="ezimageasset.ratio">
@@ -112,13 +112,13 @@
         <note>key: ezimageasset.size</note>
       </trans-unit>
       <trans-unit id="06c54d9e5476af34defb52323b7b1ebacce6a38c" resname="ezimageasset.width_and_height">
-        <source>%width%px Width - %height%px Height</source>
-        <target state="new">%width%px Width - %height%px Height</target>
+        <source>Width: %width%px height: %height%px</source>
+        <target state="new">Width: %width%px height: %height%px</target>
         <note>key: ezimageasset.width_and_height</note>
       </trans-unit>
       <trans-unit id="e371d4573dda857ef4a58cebd2420f87992b8864" resname="ezmedia.auto_play">
-        <source>Auto play</source>
-        <target state="new">Auto play</target>
+        <source>Autoplay</source>
+        <target state="new">Autoplay</target>
         <note>key: ezmedia.auto_play</note>
       </trans-unit>
       <trans-unit id="84c1e46564bf281d22c3b554a0af412a8bbbdacc" resname="ezmedia.browser_does_not_support_html5_video">

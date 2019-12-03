@@ -5,7 +5,7 @@
 {%- block content -%}
     <h2 class="ez-login__header">{{ 'authentication.reset_your_password'|trans|desc('Reset your password') }}</h2>
     <p>
-        {{ 'ezplatform.forgot_user_password.login'|trans|desc('This email is connected with several accounts. Please enter your login.') }}
+        {{ 'ezplatform.forgot_user_password.login'|trans|desc('This email is connected with several accounts. Enter your login instead.') }}
     </p>
     {% if form_forgot_user_password_with_login is defined %}
         {{ form_start(form_forgot_user_password_with_login, {'attr': {'class': 'ez-form-validate'}}) }}
@@ -17,6 +17,6 @@
         {{ form_end(form_forgot_user_password_with_login) }}
     {% endif %}
     <p class="mt-5">
-    {{ 'ezplatform.forgot_user_password.contact_administrator'|trans|desc('If you do not remember your login, please contact the site administrator.') }}
+    {{ 'ezplatform.forgot_user_password.contact_administrator'|trans|desc('If you do not remember your login, contact your Administrator.') }}
     </p>
 {%- endblock content -%}

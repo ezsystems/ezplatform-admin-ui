@@ -16,7 +16,7 @@
     const openUDW = (event) => {
         event.preventDefault();
 
-        const title = Translator.trans(/*@Desc("Select location")*/ 'subtree.title', {}, 'universal_discovery_widget');
+        const title = Translator.trans(/*@Desc("Select Location")*/ 'subtree.title', {}, 'universal_discovery_widget');
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
 
         ReactDOM.render(

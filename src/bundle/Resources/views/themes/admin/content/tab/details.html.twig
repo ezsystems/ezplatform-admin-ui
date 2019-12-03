@@ -20,7 +20,7 @@
                 {% if creator is not empty %}
                     {{ ez_content_name(creator) }}
                 {% else %}
-                    {{ 'tab.details.creator.not_found'|trans|desc('Can’t fetch creator') }}
+                    {{ 'tab.details.creator.not_found'|trans|desc('Can\'t fetch creator') }}
                 {% endif %}
                 ({{ content_info.publishedDate|ez_full_datetime }})
             </td>
@@ -28,7 +28,7 @@
                 {% if last_contributor is not empty %}
                     {{ ez_content_name(last_contributor) }}
                 {% else %}
-                    {{ 'tab.details.last_contributor.not_found'|trans|desc('Can’t fetch last contributor') }}
+                    {{ 'tab.details.last_contributor.not_found'|trans|desc('Can\'t fetch last contributor') }}
                 {% endif %}
                 ({{ version_info.modificationDate|ez_full_datetime }})
             </td>
@@ -74,7 +74,7 @@
             <thead>
             <tr>
                 <th>{{ 'tab.details.section_name'|trans()|desc('Section name') }}</th>
-                <th>{{ 'tab.details.change_section '|trans()|desc('Change section') }}</th>
+                <th>{{ 'tab.details.change_section '|trans()|desc('Change Section') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -101,15 +101,15 @@
     </div>
 {% endif %}
 
-{% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.details.state_details'|trans()|desc('State details') } %}
+{% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.details.state_details'|trans()|desc('Object state details') } %}
 
 <div class="ez-scrollable-table-wrapper">
     <table class="table">
         <thead>
         <tr>
             <th>{{ 'tab.details.state_group_name'|trans()|desc('Group name') }}</th>
-            <th>{{ 'tab.details.state_name'|trans()|desc('Current object state') }}</th>
-            <th>{{ 'tab.details.change_state'|trans()|desc('Change state') }}</th>
+            <th>{{ 'tab.details.state_name'|trans()|desc('Current Object state') }}</th>
+            <th>{{ 'tab.details.change_state'|trans()|desc('Change Object state') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -142,7 +142,7 @@
 </div>
 
 {% include '@ezdesign/ui/table_header.html.twig' with {
-    header_text: 'tab.details.sub_items_sorting_order'|trans|desc('Sub-items sorting order'),
+    header_text: 'tab.details.sub_items_sorting_order'|trans|desc('Sub-item sorting order'),
     ground: 'ground-base'
 } %}
 

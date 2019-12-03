@@ -126,7 +126,7 @@ class ContentTypeGroupController extends Controller
                 $group = $this->contentTypeService->createContentTypeGroup($createStruct);
 
                 $this->notificationHandler->success(
-                    /** @Desc("Content type group '%name%' created.") */
+                    /** @Desc("Created Content Type group '%name%'.") */
                     'content_type_group.create.success',
                     ['%name%' => $data->getIdentifier()],
                     'content_type'
@@ -170,7 +170,7 @@ class ContentTypeGroupController extends Controller
                 $this->contentTypeService->updateContentTypeGroup($group, $updateStruct);
 
                 $this->notificationHandler->success(
-                    /** @Desc("Content type group '%name%' updated.") */
+                    /** @Desc("Updated Content Type group '%name%'.") */
                     'content_type_group.update.success',
                     ['%name%' => $group->identifier],
                     'content_type'
@@ -212,7 +212,7 @@ class ContentTypeGroupController extends Controller
                 $this->contentTypeService->deleteContentTypeGroup($group);
 
                 $this->notificationHandler->success(
-                    /** @Desc("Content type group '%name%' deleted.") */
+                    /** @Desc("Deleted Content Type group '%name%'.") */
                     'content_type_group.delete.success',
                     ['%name%' => $group->identifier],
                     'content_type'
@@ -249,7 +249,7 @@ class ContentTypeGroupController extends Controller
                     $this->contentTypeService->deleteContentTypeGroup($group);
 
                     $this->notificationHandler->success(
-                        /** @Desc("Content type group '%name%' deleted.") */
+                        /** @Desc("Deleted Content Type group '%name%'.") */
                         'content_type_group.delete.success',
                         ['%name%' => $group->identifier],
                         'content_type'

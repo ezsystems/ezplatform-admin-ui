@@ -12,18 +12,18 @@
         <note>key: content.field_type.ezgmaplocation.locate_me</note>
       </trans-unit>
       <trans-unit id="aad076367e603aee68bb8577f35436abfb369136" resname="content.field_type.ezgmaplocation.set_current_location">
-        <source>Set current location</source>
-        <target state="new">Set current location</target>
+        <source>Use current location</source>
+        <target state="new">Use current location</target>
         <note>key: content.field_type.ezgmaplocation.set_current_location</note>
       </trans-unit>
       <trans-unit id="9cadbe380acedd355a84784a1c98cc7aca8897c6" resname="content.field_type.ezimage.img_alt">
-        <source>Image stored in field '%label%'</source>
-        <target state="new">Image stored in field '%label%'</target>
+        <source>Image stored in Field '%label%'</source>
+        <target state="new">Image stored in Field '%label%'</target>
         <note>key: content.field_type.ezimage.img_alt</note>
       </trans-unit>
       <trans-unit id="03ebd0d1e50c8323be782f1095d9d4d7f9edffa4" resname="content.field_type.ezimageasset.img_alt">
-        <source>Image stored in field '%label%'</source>
-        <target state="new">Image stored in field '%label%'</target>
+        <source>Image stored in Field '%label%'</source>
+        <target state="new">Image stored in Field '%label%'</target>
         <note>key: content.field_type.ezimageasset.img_alt</note>
       </trans-unit>
       <trans-unit id="093c498e82bd382a4732e4bb8356c7d88b671f25" resname="content.field_type.ezmedia.player_settings">
@@ -47,8 +47,8 @@
         <note>key: ezgmaplocation.action.search</note>
       </trans-unit>
       <trans-unit id="f95e95b9cb063f060b0e8ea74c0e11409643316d" resname="ezobjectrelationlist.cta.limit">
-        <source>Set up multiple relations with up to %limit% content items</source>
-        <target state="new">Set up multiple relations with up to %limit% content items</target>
+        <source>Set up relations with up to %limit% Content item(s)</source>
+        <target state="new">Set up relations with up to %limit% Content item(s)</target>
         <note>key: ezobjectrelationlist.cta.limit</note>
       </trans-unit>
       <trans-unit id="df33d5cc8c00514b2c50d4949b872cc3cd99284c" resname="ezobjectrelationlist.cta.select">
@@ -57,8 +57,8 @@
         <note>key: ezobjectrelationlist.cta.select</note>
       </trans-unit>
       <trans-unit id="91cee9d11eeed40768d4e5270d91cd5165f4562f" resname="ezobjectrelationlist.limit">
-        <source>Limit %limit% max</source>
-        <target state="new">Limit %limit% max</target>
+        <source>(max. %limit%)</source>
+        <target state="new">(max. %limit%)</target>
         <note>key: ezobjectrelationlist.limit</note>
       </trans-unit>
       <trans-unit id="4ab30b13084b6d6bff3b8fd7dc9ab5879b35097c" resname="ezobjectrelationlist.relations">
@@ -87,8 +87,8 @@
         <note>key: ezobjectrelationlist.table.row.order</note>
       </trans-unit>
       <trans-unit id="1a3bc0622c5d839ed1a8ef9f32bd5dd9e5cfb479" resname="fieldtype.binary_base.drag_drop">
-        <source>Drag and drop your files on browser window or upload them</source>
-        <target state="new">Drag and drop your files on browser window or upload them</target>
+        <source>Drag your files to the browser window or select them</source>
+        <target state="new">Drag your files to the browser window or select them</target>
         <note>key: fieldtype.binary_base.drag_drop</note>
       </trans-unit>
       <trans-unit id="858c986173f1ef87d7acda017535b86f01bca87d" resname="fieldtype.binary_base.max_file_size">
@@ -102,8 +102,8 @@
         <note>key: fieldtype.binary_base.upload_file</note>
       </trans-unit>
       <trans-unit id="dcf8a820f28bd6b955d76c6d3b95a2661d2b7540" resname="fieldtype.ezimageasset.select.label">
-        <source>Select from your repository</source>
-        <target state="new">Select from your repository</target>
+        <source>Select from your Repository</source>
+        <target state="new">Select from your Repository</target>
         <note>key: fieldtype.ezimageasset.select.label</note>
       </trans-unit>
       <trans-unit id="bf1b649ad290a62f1192ee5b4fb58f7bdfc8e50d" resname="fieldtype.ezimageasset.upload.label">

@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="5c6a58e397b164610db6371fe26b4e79aa3962f8" resname="dashboard.table.draft.unauthorized">
-        <source>User does not have access to '%function%' '%module%' with content ID: %contentId%</source>
-        <target state="new">User does not have access to '%function%' '%module%' with content ID: %contentId%</target>
+        <source>You do not have permissions for '%function%' '%module%' for content ID: %contentId%</source>
+        <target state="new">You do not have permissions for '%function%' '%module%' for content ID: %contentId%</target>
         <note>key: dashboard.table.draft.unauthorized</note>
       </trans-unit>
       <trans-unit id="f261167093447f7940efd1484b40e362028a728c" resname="drafts.list">
@@ -17,8 +17,8 @@
         <note>key: drafts.list</note>
       </trans-unit>
       <trans-unit id="7a00fa1045089ab6b05a30314644f3f53477ecbf" resname="drafts.list.action.edit">
-        <source>Edit Draft</source>
-        <target state="new">Edit Draft</target>
+        <source>Edit draft</source>
+        <target state="new">Edit draft</target>
         <note>key: drafts.list.action.edit</note>
       </trans-unit>
       <trans-unit id="887b9056de68ebd1c33c43af14093c2cafb38c5d" resname="drafts.list.action.remove">
@@ -32,8 +32,8 @@
         <note>key: drafts.list.action.remove.confirmation.text</note>
       </trans-unit>
       <trans-unit id="61be4cf21a9d454b832543ae2ecb5b2b10f94583" resname="drafts.list.action.remove.confirmation.title">
-        <source>Delete selected drafts</source>
-        <target state="new">Delete selected drafts</target>
+        <source>Delete selected draft(s)</source>
+        <target state="new">Delete selected draft(s)</target>
         <note>key: drafts.list.action.remove.confirmation.title</note>
       </trans-unit>
       <trans-unit id="b62c11ec52c71a7923851340a98932ed8ac8704b" resname="drafts.list.content_type">
@@ -42,8 +42,8 @@
         <note>key: drafts.list.content_type</note>
       </trans-unit>
       <trans-unit id="1b21c0ebc62c6a9d0c320a08a9ca807231fab739" resname="drafts.list.empty">
-        <source>The draft list is empty. Any Content draft you create will end up here.</source>
-        <target state="new">The draft list is empty. Any Content draft you create will end up here.</target>
+        <source>You have no drafts yet. Your drafts will show up here.</source>
+        <target state="new">You have no drafts yet. Your drafts will show up here.</target>
         <note>key: drafts.list.empty</note>
       </trans-unit>
       <trans-unit id="3cdd0ca8cb41c22f9120de646cc5734f7cad7ffb" resname="drafts.list.last_saved">

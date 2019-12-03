@@ -12,8 +12,8 @@
         <note>key: content_draft_create_type.create</note>
       </trans-unit>
       <trans-unit id="c5edf119facebac72a105963da8db6be47549180" resname="content_location_add_type.add">
-        <source>Add location</source>
-        <target state="new">Add location</target>
+        <source>Add Location</source>
+        <target state="new">Add Location</target>
         <note>key: content_location_add_type.add</note>
       </trans-unit>
       <trans-unit id="9e3c743fb052b12d69896a30ee9a6e1bb0c41427" resname="content_location_remove_form.remove">
@@ -32,13 +32,13 @@
         <note>key: content_translation_remove_form.remove</note>
       </trans-unit>
       <trans-unit id="4c29e9392116163c51f0e3d4d0c08ff96717f695" resname="content_type_groups_delete_form.delete">
-        <source>Delete content type groups</source>
-        <target state="new">Delete content type groups</target>
+        <source>Delete Content Type groups</source>
+        <target state="new">Delete Content Type groups</target>
         <note>key: content_type_groups_delete_form.delete</note>
       </trans-unit>
       <trans-unit id="5f7545e2c370cd0511521d95d0309d264b5d16e5" resname="content_types_delete_form.delete">
-        <source>Delete content types</source>
-        <target state="new">Delete content types</target>
+        <source>Delete Content Types</source>
+        <target state="new">Delete Content Types</target>
         <note>key: content_types_delete_form.delete</note>
       </trans-unit>
       <trans-unit id="56281d5c292a4fe95f9b1af5ae0b1deaebab7342" resname="ezplatform.change_user_password.change">
@@ -57,8 +57,8 @@
         <note>key: ezplatform.change_user_password.new_password</note>
       </trans-unit>
       <trans-unit id="7d2421be11a5351c12c952611c7a1a7f00f51cd9" resname="ezplatform.change_user_password.old_password">
-        <source>Old password</source>
-        <target state="new">Old password</target>
+        <source>Current password</source>
+        <target state="new">Current password</target>
         <note>key: ezplatform.change_user_password.old_password</note>
       </trans-unit>
       <trans-unit id="859bfc3d21113eecb4a19d4a9305f2519eb4b331" resname="ezplatform.forgot_user_password.email">
@@ -142,13 +142,13 @@
         <note>key: form.has_reverse_relation.label</note>
       </trans-unit>
       <trans-unit id="4a2eb58572364b0fa04e67a800e0fbb09df205be" resname="form.trash_assets.label">
-        <source>Asset Field(s)</source>
-        <target state="new">Asset Field(s)</target>
+        <source>Asset Fields(s)</source>
+        <target state="new">Asset Fields(s)</target>
         <note>key: form.trash_assets.label</note>
       </trans-unit>
       <trans-unit id="6bc8ac1fbf981deec94bd4a2b8aa877d60eee651" resname="form.trash_assets_non_unique.label">
-        <source>Asset Field(s)</source>
-        <target state="new">Asset Field(s)</target>
+        <source>Asset Fields(s)</source>
+        <target state="new">Asset Fields(s)</target>
         <note>key: form.trash_assets_non_unique.label</note>
       </trans-unit>
       <trans-unit id="a1e42d4c649f7fbb614729978fea692be51d1485" resname="languages_delete_form.delete">
@@ -176,24 +176,14 @@
         <target state="new">Send to Trash</target>
         <note>key: location_trash_form.trash</note>
       </trans-unit>
-      <trans-unit id="f9887d04de58202b07207b1521880373c00c8201" resname="location_trash_form.trash_container">
-        <source>Send %children_count% Content item(s) of this Location to Trash</source>
-        <target state="new">Send %children_count% Content item(s) of this Location to Trash</target>
-        <note>key: location_trash_form.trash_container</note>
-      </trans-unit>
-      <trans-unit id="f75f244896962e9bc1bbb30a1bbaf3e5914b95f2" resname="location_trash_form.trash_when_relation">
-        <source>'%content_name%' will not be available for its reverse Relation(s)</source>
-        <target state="new">'%content_name%' will not be available for its reverse Relation(s)</target>
-        <note>key: location_trash_form.trash_when_relation</note>
-      </trans-unit>
       <trans-unit id="2598fe0050f38f3c02014a404ed14aee248e27d1" resname="location_trash_form.trash_with_asset">
         <source>Send the Content item and its related assets to Trash</source>
         <target state="new">Send the Content item and its related assets to Trash</target>
         <note>key: location_trash_form.trash_with_asset</note>
       </trans-unit>
       <trans-unit id="f86cd366867d370b0706e250355f605e2b783229" resname="policies_delete_form.delete">
-        <source>Delete policies</source>
-        <target state="new">Delete policies</target>
+        <source>Delete Policies</source>
+        <target state="new">Delete Policies</target>
         <note>key: policies_delete_form.delete</note>
       </trans-unit>
       <trans-unit id="34ba9078fe178bd49df6ada9d8357455ee8ff7b3" resname="policy_create.save">
@@ -447,13 +437,13 @@
         <note>key: role.policy.state.assign</note>
       </trans-unit>
       <trans-unit id="d3c70d265ab037db5ade02a8b738b5981353c7ac" resname="role.policy.type">
-        <source>Type</source>
-        <target state="new">Type</target>
+        <source>Policy</source>
+        <target state="new">Policy</target>
         <note>key: role.policy.type</note>
       </trans-unit>
       <trans-unit id="ca6964415cb051927cf1d4092e4a6f49de0748c0" resname="role.policy.type.choose">
-        <source>Choose a type</source>
-        <target state="new">Choose a type</target>
+        <source>Choose a Policy</source>
+        <target state="new">Choose a Policy</target>
         <note>key: role.policy.type.choose</note>
       </trans-unit>
       <trans-unit id="73c3d3a21c7264a991abf4e6ffe68751a1dbdb58" resname="role.policy.url">
@@ -542,8 +532,8 @@
         <note>key: role_assignment.groups</note>
       </trans-unit>
       <trans-unit id="710f8e6ab682db07141d71bc6df5246988a0560f" resname="role_assignment.locations">
-        <source>Choose Locations</source>
-        <target state="new">Choose Locations</target>
+        <source>Select subtree</source>
+        <target state="new">Select subtree</target>
         <note>key: role_assignment.locations</note>
       </trans-unit>
       <trans-unit id="90266f1e47b42712e761c7fea00fb8e8c949f37e" resname="role_assignment.save">
@@ -562,8 +552,8 @@
         <note>key: role_assignment.users</note>
       </trans-unit>
       <trans-unit id="5f9be66217c70fdbd734a1ccb5968aae96bbdcd0" resname="role_assignments_delete_form.delete">
-        <source>Delete role assignments</source>
-        <target state="new">Delete role assignments</target>
+        <source>Delete Role assignments</source>
+        <target state="new">Delete Role assignments</target>
         <note>key: role_assignments_delete_form.delete</note>
       </trans-unit>
       <trans-unit id="e36e86d3568ccc02a097560444b35c69c469c531" resname="role_create.name">
@@ -592,8 +582,8 @@
         <note>key: role_update.save</note>
       </trans-unit>
       <trans-unit id="2b8a62034311f415eba9826996495c2ddd076745" resname="roles_delete_form.delete">
-        <source>Delete role</source>
-        <target state="new">Delete role</target>
+        <source>Delete Role</source>
+        <target state="new">Delete Role</target>
         <note>key: roles_delete_form.delete</note>
       </trans-unit>
       <trans-unit id="f3a2d2ec4f587435900fdec3f0fb973592b57147" resname="section_content_assign_form.assign">
@@ -627,8 +617,8 @@
         <note>key: section_form.name</note>
       </trans-unit>
       <trans-unit id="c33da889af5b91c7a19b0b6e522757d65b81a40d" resname="section_subtree_assign_form.assign">
-        <source>Change section</source>
-        <target state="new">Change section</target>
+        <source>Change Section</source>
+        <target state="new">Change Section</target>
         <note>key: section_subtree_assign_form.assign</note>
       </trans-unit>
       <trans-unit id="ecaa9ee7b46159c99796726b8e14693d821e5500" resname="section_update_form.update">
@@ -637,13 +627,13 @@
         <note>key: section_update_form.update</note>
       </trans-unit>
       <trans-unit id="1076fdadc49ac9198c278970f355457c26075975" resname="sections_delete_form.delete">
-        <source>Delete sections</source>
-        <target state="new">Delete sections</target>
+        <source>Delete Sections</source>
+        <target state="new">Delete Sections</target>
         <note>key: sections_delete_form.delete</note>
       </trans-unit>
       <trans-unit id="6880a88558bf821ff5ca3266f2f4f42b6d911283" resname="swap_location_form.swap">
-        <source>Select content item</source>
-        <target state="new">Select content item</target>
+        <source>Select Content item</source>
+        <target state="new">Select Content item</target>
         <note>key: swap_location_form.swap</note>
       </trans-unit>
       <trans-unit id="30b0c3c3e5e096a078005be2cc34bca6227ae381" resname="trash_empty_form.empty">

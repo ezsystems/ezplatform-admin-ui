@@ -6,7 +6,7 @@
 <section>
     {{ form(form_content_location_add, {'action': path('ezplatform.location.add')}) }}
     {% include '@ezdesign/ui/table_header.html.twig' with {
-        header_text: 'tab.locations.content_locations'|trans()|desc('Content locations'),
+        header_text: 'tab.locations.content_locations'|trans()|desc('Content Locations'),
         tools: tab.table_header_tools(form_content_location_add, form_content_location_remove, can_add)
     } %}
     {{ form_start(form_content_location_remove, {
@@ -53,7 +53,7 @@
                             </label>
                             {% if location.contentInfo.isHidden or not is_location_visible %}
                                 <span class="ml-2">
-                                    {{ 'tab.locations.hidden_content_or_superior'|trans()|desc('Content or superior is hidden') }}
+                                    {{ 'tab.locations.hidden_content_or_superior'|trans()|desc('Content or its ancestor is hidden') }}
                                 </span>
                             {% endif %}
                         </td>
@@ -110,7 +110,7 @@
     </button>
     {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
         'id': modal_data_target,
-        'message': 'tab.locations.modal.message'|trans|desc('Do you want to delete Location?'),
+        'message': 'tab.locations.modal.message'|trans|desc('Do you want to delete the Location?'),
         'data_click': '#' ~ form_remove.remove.vars.id,
     } %}
 {% endmacro %}

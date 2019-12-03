@@ -247,7 +247,7 @@ class LocationController extends Controller
                 $newLocation = $this->locationService->loadLocation($copiedContent->contentInfo->mainLocationId);
 
                 $this->notificationHandler->success(
-                    /** @Desc("Subtree '%name%' copied to location '%location%'") */
+                    /** @Desc("Subtree '%name%' copied to Location '%location%'") */
                     'location.copy_subtree.success',
                     [
                         '%name%' => $location->getContentInfo()->name,
@@ -297,7 +297,7 @@ class LocationController extends Controller
                 $this->locationService->swapLocation($currentLocation, $newLocation);
 
                 $this->notificationHandler->success(
-                    /** @Desc("Location '%name%' swaped with location '%location%'") */
+                    /** @Desc("Location '%name%' swapped with Location '%location%'") */
                     'location.swap.success',
                     ['%name%' => $currentLocation->getContentInfo()->name, '%location%' => $newLocation->getContentInfo()->name],
                     'location'
@@ -527,7 +527,7 @@ class LocationController extends Controller
                 } else {
                     $this->locationService->unhideLocation($location);
                     $message = $this->translator->trans(
-                        /** @Desc("Location '%name%' unhidden.") */
+                        /** @Desc("Location '%name%' revealed.") */
                         'location.update_success.success.unhidden',
                         ['%name%' => $contentInfo->name],
                         'location'
@@ -613,7 +613,7 @@ class LocationController extends Controller
                 $this->sectionService->assignSectionToSubtree($location, $section);
 
                 $this->notificationHandler->success(
-                    /** @Desc("Section '%name%' has been assigned to subtree") */
+                    /** @Desc("Subtree assigned to Section '%name%'") */
                     'location.assign_section.success',
                     ['%name%' => $section->name],
                     'location'

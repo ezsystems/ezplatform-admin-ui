@@ -14,7 +14,7 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-        const title = Translator.trans(/*@Desc("Create your content")*/ 'dashboard.create.title', {}, 'universal_discovery_widget');
+        const title = Translator.trans(/*@Desc("Create content")*/ 'dashboard.create.title', {}, 'universal_discovery_widget');
 
         ReactDOM.render(
             React.createElement(eZ.modules.UniversalDiscovery, {

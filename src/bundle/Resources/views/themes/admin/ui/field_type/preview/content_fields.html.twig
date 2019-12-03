@@ -59,7 +59,7 @@
 
 {% block ezboolean_field %}
 {% apply spaceless %}
-    {% set field_value = field.value.bool ? 'ezboolean.yes'|trans|desc('yes') : 'ezboolean.no'|trans|desc('No') %}
+    {% set field_value = field.value.bool ? 'ezboolean.yes'|trans|desc('Yes') : 'ezboolean.no'|trans|desc('No') %}
     {{ block( 'simple_inline_field' ) }}
 {% endapply %}
 {% endblock %}
@@ -71,7 +71,7 @@
         {{ block( 'simple_block_field' ) }}
         {% if fieldSettings.useSeconds %}
             <div class="ez-alert ez-alert--info mt-2">
-                {{ 'ezdatetime.useseconds.enabled'|trans()|desc('`The date format is based on your user preferences and does not include seconds even if the field allows it`') }}
+                {{ 'ezdatetime.useseconds.enabled'|trans()|desc('`The date format is based on your user preferences and does not include seconds even if the Field allows it`') }}
             </div>
         {% endif %}
     {% endif %}
@@ -94,7 +94,7 @@
         {{ block( 'simple_block_field' ) }}
         {% if fieldSettings.useSeconds %}
             <div class="ez-alert ez-alert--info mt-2">
-                {{ 'ezdatetime.useseconds.enabled'|trans()|desc('`The date format is based on your user preferences and does not include seconds even if the field allows it`') }}
+                {{ 'ezdatetime.useseconds.enabled'|trans()|desc('`The date format is based on your user preferences and does not include seconds even if the Field allows it`') }}
             </div>
         {% endif %}
     {% endif %}
@@ -301,7 +301,7 @@
                         <td>{{hasController}}</td>
                     </tr>
                     <tr>
-                        <td>{{ 'ezmedia.auto_play'|trans|desc('Auto play') }}:</td>
+                        <td>{{ 'ezmedia.auto_play'|trans|desc('Autoplay') }}:</td>
                         <td>{{autoplay}}</td>
                     </tr>
                     <tr>
@@ -422,7 +422,7 @@
                     </tr>
                     <tr>
                         <td>{{ 'ezimage.master_dimensions'|trans|desc('Master dimensions') }}:</td>
-                        <td>{{ 'ezimage.width_and_height'|trans({'%width%': field.value.width, '%height%': field.value.height})|desc('%width%px Width - %height%px Height') }}</td>
+                        <td>{{ 'ezimage.width_and_height'|trans({'%width%': field.value.width, '%height%': field.value.height})|desc('Width: %width%px height: %height%px') }}</td>
                     </tr>
                     <tr>
                         <td>{{ 'ezimage.ratio'|trans|desc('Ratio') }}:</td>
@@ -459,7 +459,7 @@
         }))}}
     </div>
 {% else %}
-    <em>{{ 'ezimageasset.not_available'|trans|desc('Image asset is not available (related content has been deleted or insufficient permissions)') }}</em>
+    <em>{{ 'ezimageasset.not_available'|trans|desc('Image asset is not available (related content has been deleted or you have insufficient permissions)') }}</em>
 {% endif %}
 {% endapply %}
 {% endblock %}

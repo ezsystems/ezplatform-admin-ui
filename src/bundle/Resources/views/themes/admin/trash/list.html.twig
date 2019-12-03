@@ -56,7 +56,7 @@
                                 </button>
                                 {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
                                     'id': modal_data_target,
-                                    'message': 'trash.modal.message'|trans|desc('Do you want to delete selected item(s) from Trash?'),
+                                    'message': 'trash.modal.message'|trans|desc('Do you want to delete the selected item(s) from Trash?'),
                                     'data_click': '#trash_item_delete_delete',
                                 }%}
                             {% endif %}
@@ -70,7 +70,7 @@
                                 <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
                                 <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'trash.name'|trans|desc('Name') }}</th>
                                 <th class="ez-table__header-cell">{{ 'trash.type'|trans|desc('Type') }}</th>
-                                <th class="ez-table__header-cell">{{ 'trash.original_location'|trans|desc('Original location') }}</th>
+                                <th class="ez-table__header-cell">{{ 'trash.original_location'|trans|desc('Original Location') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -78,7 +78,7 @@
                                 <tr>
                                     <td class="ez-table__cell ez-table__cell--no-content" colspan="4">
                                         <span class="mb-0 py-1 pl-0">
-                                            {{ 'trash.empty'|trans|desc('Trash is empty. Any content item you send to trash will end up here.') }}
+                                            {{ 'trash.empty'|trans|desc('Trash is empty. Content you send to Trash will show up here.') }}
                                         </span>
                                     </td>
                                 </tr>

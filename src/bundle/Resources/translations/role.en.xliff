@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="50fbff4724e8543718a7a0fe08fc1f134bbeb7d6" resname="limitation_type.none">
-        <source>No limitations</source>
-        <target state="new">No limitations</target>
+        <source>No Limitations</source>
+        <target state="new">No Limitations</target>
         <note>key: limitation_type.none</note>
       </trans-unit>
       <trans-unit id="e4eb27643d4149122e8009b8ca930678eadcd713" resname="limitation_type.section">
@@ -27,18 +27,18 @@
         <note>key: locations.select_subtree</note>
       </trans-unit>
       <trans-unit id="8e8d15bb05038bded496a7dfcdf6374b9449bc51" resname="policy.add.policy.title">
-        <source>Adding - Policy type</source>
-        <target state="new">Adding - Policy type</target>
+        <source>Adding Policy of type:</source>
+        <target state="new">Adding Policy of type:</target>
         <note>key: policy.add.policy.title</note>
       </trans-unit>
       <trans-unit id="df3bafbf431f3c222cebeaec45da0a089cf63736" resname="policy.add.set_limitation">
-        <source>Now you can set limitations for the policy.</source>
-        <target state="new">Now you can set limitations for the policy.</target>
+        <source>Now you can set Limitations for the Policy.</source>
+        <target state="new">Now you can set Limitations for the Policy.</target>
         <note>key: policy.add.set_limitation</note>
       </trans-unit>
       <trans-unit id="d92993cb4cb3690f06c599b5f500a29fa23421c9" resname="policy.add.success">
-        <source>New policies in role '%role%' created.</source>
-        <target state="new">New policies in role '%role%' created.</target>
+        <source>Created new Policies in Role '%role%'.</source>
+        <target state="new">Created new Policies in Role '%role%'.</target>
         <note>key: policy.add.success</note>
       </trans-unit>
       <trans-unit id="196c8d4eec96ca42ccdd3605621d51e2b34b6d85" resname="policy.breadcrumb.add">
@@ -47,18 +47,18 @@
         <note>key: policy.breadcrumb.add</note>
       </trans-unit>
       <trans-unit id="8a7079c136f19a37dc42a6192fb94a11d19105ad" resname="policy.breadcrumb.edit">
-        <source>Edit limitations</source>
-        <target state="new">Edit limitations</target>
+        <source>Edit Limitations</source>
+        <target state="new">Edit Limitations</target>
         <note>key: policy.breadcrumb.edit</note>
       </trans-unit>
       <trans-unit id="8a22274ebbfba3c96c4015fa64112db95d060525" resname="policy.delete.success">
-        <source>Policies in role '%role%' removed.</source>
-        <target state="new">Policies in role '%role%' removed.</target>
+        <source>Removed Policies from Role '%role%'.</source>
+        <target state="new">Removed Policies from Role '%role%'.</target>
         <note>key: policy.delete.success</note>
       </trans-unit>
       <trans-unit id="9c322357fb302e5b708bc1c11c287d8a4e4859ec" resname="policy.edit.no_limitations">
-        <source>Policy type '%policy%' does not contain limitations.</source>
-        <target state="new">Policy type '%policy%' does not contain limitations.</target>
+        <source>Policy type '%policy%' does not contain Limitations.</source>
+        <target state="new">Policy type '%policy%' does not contain Limitations.</target>
         <note>key: policy.edit.no_limitations</note>
       </trans-unit>
       <trans-unit id="41bcfef149f877e1abb0ce2cd2aa5afb713ea1de" resname="policy.limitation.identifier_tooltip">
@@ -72,13 +72,13 @@
         <note>key: policy.limitation.none</note>
       </trans-unit>
       <trans-unit id="fda44832f6a675807e1bcd01460231f7117d9e1e" resname="policy.modal.message">
-        <source>Do you want to delete Policy?</source>
-        <target state="new">Do you want to delete Policy?</target>
+        <source>Do you want to delete the Policy?</source>
+        <target state="new">Do you want to delete the Policy?</target>
         <note>key: policy.modal.message</note>
       </trans-unit>
       <trans-unit id="bb8f2aa78c28aa25b5eade0c7f40c37110110ec5" resname="policy.update.success">
-        <source>Policies in role '%role%' updated.</source>
-        <target state="new">Policies in role '%role%' updated.</target>
+        <source>Updated Policies in Role '%role%'.</source>
+        <target state="new">Updated Policies in Role '%role%'.</target>
         <note>key: policy.update.success</note>
       </trans-unit>
       <trans-unit id="1ac24fa007363b4280663fba53f7a3b436ed4c8f" resname="policy.view.add.title">
@@ -87,13 +87,13 @@
         <note>key: policy.view.add.title</note>
       </trans-unit>
       <trans-unit id="aefaf3a17b8493e63c82678611eb6eacbcc45d19" resname="policy.view.edit.title">
-        <source>Edit limitations</source>
-        <target state="new">Edit limitations</target>
+        <source>Edit Limitations</source>
+        <target state="new">Edit Limitations</target>
         <note>key: policy.view.edit.title</note>
       </trans-unit>
       <trans-unit id="e182986ba1f94484d60ea6b1db7cc2707478f2a1" resname="policy.view.limitations.title">
-        <source>Edit limitations</source>
-        <target state="new">Edit limitations</target>
+        <source>Edit Limitations</source>
+        <target state="new">Edit Limitations</target>
         <note>key: policy.view.limitations.title</note>
       </trans-unit>
       <trans-unit id="84d0c2844a996fbfdc23872405533f92b6e6e2f6" resname="policy.view.list.action.add">
@@ -132,18 +132,18 @@
         <note>key: policy.view.list.title.count</note>
       </trans-unit>
       <trans-unit id="9b1c2c53df24e9d0d141037860eb87d2878bdb05" resname="policy.view.policy.title">
-        <source>Editing - Policy type</source>
-        <target state="new">Editing - Policy type</target>
+        <source>Editing Policy of type:</source>
+        <target state="new">Editing Policy of type:</target>
         <note>key: policy.view.policy.title</note>
       </trans-unit>
       <trans-unit id="e2b7ae0acb75f99dc7943574a63b36abbb6c42bf" resname="role.assignment_create.success">
-        <source>Assignments on role '%role%' created.</source>
-        <target state="new">Assignments on role '%role%' created.</target>
+        <source>Assigned Users/Groups to Role '%role%'.</source>
+        <target state="new">Assigned Users/Groups to Role '%role%'.</target>
         <note>key: role.assignment_create.success</note>
       </trans-unit>
       <trans-unit id="f684c343da285bc7273d4671a257d2731ccc83a2" resname="role.assignment_delete.success">
-        <source>Assignment on role '%role%' removed.</source>
-        <target state="new">Assignment on role '%role%' removed.</target>
+        <source>Unassigned Users/Groups from Role '%role%'.</source>
+        <target state="new">Unassigned Users/Groups from Role '%role%'.</target>
         <note>key: role.assignment_delete.success</note>
       </trans-unit>
       <trans-unit id="43008c999ece1587436507732b3c1166c393f05c" resname="role.breadcrumb.add">
@@ -152,8 +152,8 @@
         <note>key: role.breadcrumb.add</note>
       </trans-unit>
       <trans-unit id="9cdc3dd417b63308f19cadbe01f74c21565b9947" resname="role.breadcrumb.edit">
-        <source>Editing Role: %identifier%</source>
-        <target state="new">Editing Role: %identifier%</target>
+        <source>Editing Role '%identifier%'</source>
+        <target state="new">Editing Role '%identifier%'</target>
         <note>key: role.breadcrumb.edit</note>
       </trans-unit>
       <trans-unit id="03e72944d22126b885a65f885ebf8f1b8e2f8579" resname="role.breadcrumb.list">
@@ -182,8 +182,8 @@
         <note>key: role.delete.success</note>
       </trans-unit>
       <trans-unit id="b8faa90fed74479d8cdb01dc2c0e1af8a79cf9b1" resname="role.modal.message">
-        <source>Do you want to delete Role?</source>
-        <target state="new">Do you want to delete Role?</target>
+        <source>Do you want to delete the Role(s)?</source>
+        <target state="new">Do you want to delete the Role(s)?</target>
         <note>key: role.modal.message</note>
       </trans-unit>
       <trans-unit id="75637482fd2563256da5423615ecfb241fc03a57" resname="role.update.success">
@@ -197,8 +197,8 @@
         <note>key: role.view.add.title</note>
       </trans-unit>
       <trans-unit id="d3938c40d50b4d6e972248900f2d43cda1fe02a3" resname="role.view.edit.title">
-        <source>Editing Role: %identifier%</source>
-        <target state="new">Editing Role: %identifier%</target>
+        <source>Editing Role '%identifier%'</source>
+        <target state="new">Editing Role '%identifier%'</target>
         <note>key: role.view.edit.title</note>
       </trans-unit>
       <trans-unit id="88d7426f344cc9d85b90903dad013d5806b82faa" resname="role.view.list.action.add">
@@ -252,18 +252,18 @@
         <note>key: role_assignment.view.add.panel.limitations.title</note>
       </trans-unit>
       <trans-unit id="049589ee01907c1397c6a43f2743b040573debad" resname="role_assignment.view.add.panel.users_and_groups.groups.udw_title">
-        <source>Select groups for role assignment</source>
-        <target state="new">Select groups for role assignment</target>
+        <source>Select User Groups to assign to the Role</source>
+        <target state="new">Select User Groups to assign to the Role</target>
         <note>key: role_assignment.view.add.panel.users_and_groups.groups.udw_title</note>
       </trans-unit>
       <trans-unit id="1ee375a8da2c2fe9b5b0a9c6b12bba981dfdb895" resname="role_assignment.view.add.panel.users_and_groups.select_groups_btn.label">
-        <source>Select groups</source>
-        <target state="new">Select groups</target>
+        <source>Select User Groups</source>
+        <target state="new">Select User Groups</target>
         <note>key: role_assignment.view.add.panel.users_and_groups.select_groups_btn.label</note>
       </trans-unit>
       <trans-unit id="f26210f27528dbbea87cf71c5479a0afd713bece" resname="role_assignment.view.add.panel.users_and_groups.select_users_btn.label">
-        <source>Select users</source>
-        <target state="new">Select users</target>
+        <source>Select Users</source>
+        <target state="new">Select Users</target>
         <note>key: role_assignment.view.add.panel.users_and_groups.select_users_btn.label</note>
       </trans-unit>
       <trans-unit id="f9465b09774c22747e887ffe9e6300fd02420546" resname="role_assignment.view.add.panel.users_and_groups.title">
@@ -272,23 +272,23 @@
         <note>key: role_assignment.view.add.panel.users_and_groups.title</note>
       </trans-unit>
       <trans-unit id="9328ffe3a5dcac34b985d43cf691f1c790d2ba28" resname="role_assignment.view.add.panel.users_and_groups.users.udw_title">
-        <source>Select users for role assignment</source>
-        <target state="new">Select users for role assignment</target>
+        <source>Select Users to assign to the Role</source>
+        <target state="new">Select Users to assign to the Role</target>
         <note>key: role_assignment.view.add.panel.users_and_groups.users.udw_title</note>
       </trans-unit>
       <trans-unit id="61a5ec154d3f0620ec619d196611b011996128ff" resname="role_assignment.view.add.title">
-        <source>Assigning to Users/Groups</source>
-        <target state="new">Assigning to Users/Groups</target>
+        <source>Assigning users and groups</source>
+        <target state="new">Assigning users and groups</target>
         <note>key: role_assignment.view.add.title</note>
       </trans-unit>
       <trans-unit id="a21a7a13956cadf2256095fbdd062f1b33dd05a8" resname="role_assignment.view.list.action.add">
-        <source>Assign users/groups</source>
-        <target state="new">Assign users/groups</target>
+        <source>Assign to Users/Groups</source>
+        <target state="new">Assign to Users/Groups</target>
         <note>key: role_assignment.view.list.action.add</note>
       </trans-unit>
       <trans-unit id="76361d414c957ff63dcfdaf4490b3e9a2c632750" resname="role_assignment.view.list.action.delete">
-        <source>Delete Assignment</source>
-        <target state="new">Delete Assignment</target>
+        <source>Unassign</source>
+        <target state="new">Unassign</target>
         <note>key: role_assignment.view.list.action.delete</note>
       </trans-unit>
       <trans-unit id="5111796ffacfccc152f157c56a6e7219d35c3fd8" resname="role_assignment.view.list.header">
@@ -317,8 +317,8 @@
         <note>key: role_assignment.view.list.title.count</note>
       </trans-unit>
       <trans-unit id="304836ca19b0d01940431c18b955ae028a6110f9" resname="role_assignments.modal.message">
-        <source>Do you want to delete Role Assignments?</source>
-        <target state="new">Do you want to delete Role Assignments?</target>
+        <source>Do you want to unassign the Users/Groups?</source>
+        <target state="new">Do you want to unassign the Users/Groups?</target>
         <note>key: role_assignments.modal.message</note>
       </trans-unit>
       <trans-unit id="e9f659f5717d317c994c7950c14bcb4be644062c" resname="tab.roles.limitation">
@@ -332,8 +332,8 @@
         <note>key: tab.roles.name</note>
       </trans-unit>
       <trans-unit id="9e3fbe7cbb68fbe5996471da829e0fab59c3fc8b" resname="tab.roles.no_roles">
-        <source>This content item has no roles.</source>
-        <target state="new">This content item has no roles.</target>
+        <source>This Content item has no Roles.</source>
+        <target state="new">This Content item has no Roles.</target>
         <note>key: tab.roles.no_roles</note>
       </trans-unit>
       <trans-unit id="cfba356470eba180c21d9a43e9bebbfe5e2d427b" resname="tab.roles.roles">

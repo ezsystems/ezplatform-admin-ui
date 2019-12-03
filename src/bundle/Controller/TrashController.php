@@ -203,7 +203,7 @@ class TrashController extends Controller
                 $this->trashService->emptyTrash();
 
                 $this->notificationHandler->success(
-                    /** @Desc("Trash empty.") */
+                    /** @Desc("Trash emptied.") */
                     'trash.empty.success',
                     [],
                     'trash'
@@ -248,14 +248,14 @@ class TrashController extends Controller
 
                 if (null === $newParentLocation) {
                     $this->notificationHandler->success(
-                        /** @Desc("Items restored under their original location.") */
+                        /** @Desc("Restored content to its original Location.") */
                         'trash.restore_original_location.success',
                         [],
                         'trash'
                     );
                 } else {
                     $this->notificationHandler->success(
-                        /** @Desc("Items restored under '%location%' location.") */
+                        /** @Desc("Restored content under Location '%location%'.") */
                         'trash.restore_new_location.success',
                         ['%location%' => $newParentLocation->getContentInfo()->name],
                         'trash'
@@ -299,7 +299,7 @@ class TrashController extends Controller
                 }
 
                 $this->notificationHandler->success(
-                    /** @Desc("Deleted selected trash items.") */
+                    /** @Desc("Deleted selected item(s) from Trash.") */
                     'trash.deleted.success',
                     [],
                     'trash'

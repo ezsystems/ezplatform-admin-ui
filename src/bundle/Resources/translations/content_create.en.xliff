@@ -7,8 +7,8 @@
     </header>
     <body>
       <trans-unit id="109ad031477c8e3c904a45089ea26883d00d264e" resname="creating_in_language">
-        <source>Creating - %contentTypeName% in %languageName%</source>
-        <target state="new">Creating - %contentTypeName% in %languageName%</target>
+        <source>Creating a(n) %contentTypeName% in %languageName%</source>
+        <target state="new">Creating a(n) %contentTypeName% in %languageName%</target>
         <note>key: creating_in_language</note>
       </trans-unit>
       <trans-unit id="32d50c07b2eacd6fa72742ff1c1f5963c26a251d" resname="new_content_item">

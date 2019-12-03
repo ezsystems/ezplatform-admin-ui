@@ -55,7 +55,7 @@
             languageCode: content.mainLanguageCode,
         });
         const errorMessage = Translator.trans(
-            /*@Desc("You don't have permission to edit the content")*/ 'content.edit.permission.error',
+            /*@Desc("You don't have permission to edit this Content item")*/ 'content.edit.permission.error',
             {},
             'content'
         );

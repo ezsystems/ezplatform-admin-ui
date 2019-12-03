@@ -105,7 +105,7 @@
             {% set label = name|humanize %}
         {%- endif -%}
     {%- endif -%}
-    <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore_new_location'|trans({},'trash')|desc("Restore under new parent location") }}">
+    <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore_new_location'|trans({},'trash')|desc("Restore in a new Location") }}">
         <svg class="ez-icon">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#restore-parent"></use>
         </svg>
@@ -138,7 +138,7 @@
 {%- endblock table_header_tool_btn -%}
 
 {%- block _bookmark_remove_remove_widget -%}
-    {%- set title = 'bookmark.button.remove'|trans({},'bookmark')|desc('Remove') -%}
+    {%- set title = 'bookmark.button.remove'|trans({},'bookmark')|desc('Remove from bookmarks') -%}
     {%- set icon = 'trash' -%}
     {{ block('table_header_tool_btn') }}
 {%- endblock -%}

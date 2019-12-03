@@ -7,13 +7,13 @@
     </header>
     <body>
       <trans-unit id="dc2dfb4a937fee7119e733e0b6715a09320d5078" resname="ezimageasset.create.message.error">
-        <source>Error while creating image asset: %error%</source>
-        <target state="new">Error while creating image asset: %error%</target>
+        <source>Error while creating Image Asset: %error%</source>
+        <target state="new">Error while creating Image Asset: %error%</target>
         <note>key: ezimageasset.create.message.error</note>
       </trans-unit>
       <trans-unit id="56d1cc1d279fa173f9f73ab42a61df985aeb5b0c" resname="ezimageasset.create.message.success">
-        <source>Image has been published and can now be reused</source>
-        <target state="new">Image has been published and can now be reused</target>
+        <source>The image has been published and can now be reused</source>
+        <target state="new">The image has been published and can now be reused</target>
         <note>key: ezimageasset.create.message.success</note>
       </trans-unit>
     </body>

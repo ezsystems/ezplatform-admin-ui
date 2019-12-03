@@ -23,7 +23,7 @@ class LocationHaveUniqueAssetRelation extends Constraint implements TranslationC
     {
         return [
             Message::create('ezplatform.trash.have_used_assets', 'validators')
-                ->setDesc('Selected Location have assets that can\'t be removed.'),
+                ->setDesc('Selected Location has assets that cannot be removed.'),
         ];
     }
 }

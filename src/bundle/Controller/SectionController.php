@@ -386,7 +386,7 @@ class SectionController extends Controller
                 }
 
                 $this->notificationHandler->success(
-                    /** @Desc("%contentItemsCount% content items were assigned to '%name%'") */
+                    /** @Desc("%contentItemsCount% Content items assigned to '%name%'") */
                     'section.assign_content.success',
                     ['%name%' => $section->name, '%contentItemsCount%' => \count($contentInfos)],
                     'section'

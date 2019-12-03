@@ -30,7 +30,7 @@ class UserPasswordResetType extends AbstractType
         $builder
             ->add('new_password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => /** @Desc("The password fields must match.") */ 'ezplatform.reset_user_password.passwords_must_match',
+                'invalid_message' => /** @Desc("Passwords do not match.") */ 'ezplatform.reset_user_password.passwords_must_match',
                 'required' => true,
                 'first_options' => [
                     'label' => /** @Desc("New password") */ 'ezplatform.reset_user_password.new_password',

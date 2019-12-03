@@ -6,7 +6,7 @@
 
 <section class="container mt-4 px-5">
     <div class="ez-table-header">
-        <div class="ez-table-header__headline">{{ 'content_type.view.list.title'|trans({ '%identifier%': content_type_group.identifier })|desc('Content Types in %identifier%') }}</div>
+        <div class="ez-table-header__headline">{{ 'content_type.view.list.title'|trans({ '%identifier%': content_type_group.identifier })|desc('Content Types in \'%identifier%\'') }}</div>
         <div>
             {% if can_create %}
                 <a
@@ -34,7 +34,7 @@
                 </button>
                 {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
                     'id': modal_data_target,
-                    'message': 'content_type.modal.message'|trans|desc('Do you want to delete Content Type?'),
+                    'message': 'content_type.modal.message'|trans|desc('Do you want to delete the Content Type?'),
                     'data_click': '#content_types_delete_delete',
                 }%}
             {% endif %}

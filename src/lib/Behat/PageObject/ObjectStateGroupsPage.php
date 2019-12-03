@@ -16,7 +16,7 @@ use PHPUnit\Framework\Assert;
 class ObjectStateGroupsPage extends Page
 {
     /** @var string Name by which Page is recognised */
-    public const PAGE_NAME = 'Object State Groups';
+    public const PAGE_NAME = 'Object state groups';
 
     /**
      * @var \EzSystems\EzPlatformAdminUi\Behat\PageElement\AdminList
