@@ -45,7 +45,7 @@ class SectionLimitationMapper extends MultipleSelectionBasedMapper implements Li
             try {
                 $values[] = $this->sectionService->loadSection($sectionId);
             } catch (NotFoundException $e) {
-                $this->logger->error(sprintf('Could not map limitation value: Section with id = %s not found', $sectionId));
+                $this->logger->error(sprintf('Could not map the Limitation value: could not find a Section with ID %s', $sectionId));
             }
         }
 

@@ -96,7 +96,7 @@ class ContentTypeFormProcessor implements EventSubscriberInterface
         if ($contentTypeDraft->mainLanguageCode !== $targetLanguageCode) {
             throw new InvalidArgumentException(
                 'languageCode',
-                'FieldDefinitions can be only added to main language translation'
+                'Field definitions can only be added to the main language translation'
             );
         }
 

@@ -33,7 +33,7 @@ class FieldTypeFormMapperDispatcherPass implements CompilerPassInterface
             foreach ($tags as $tag) {
                 if (!isset($tag['fieldType'])) {
                     throw new LogicException(
-                        '`ezplatform.field_type.form_mapper` or deprecated `ez.fieldFormMapper` service tags need a "fieldType" attribute to identify which field type the mapper is for. None given.'
+                        '`ezplatform.field_type.form_mapper` or deprecated `ez.fieldFormMapper` service tags need a "fieldType" attribute to identify which Field Type the mapper is for.'
                     );
                 }
 
@@ -61,7 +61,7 @@ class FieldTypeFormMapperDispatcherPass implements CompilerPassInterface
         foreach ($deprecatedFieldFormMapperDefinitionTags as $ezFieldFormMapperValueTag) {
             @trigger_error(
                 sprintf(
-                    '`%s` service tag is deprecated and will be removed in eZ Platform 4.0. Please use `%s` instead.',
+                    'The `%s` service tag is deprecated and will be removed in eZ Platform 4.0. Use `%s` instead.',
                     self::DEPRECATED_FIELD_TYPE_FORM_MAPPER_DEFINITION_SERVICE_TAG,
                     self::FIELD_TYPE_FORM_MAPPER_DEFINITION_SERVICE_TAG
                 ),

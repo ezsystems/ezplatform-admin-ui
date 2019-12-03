@@ -46,7 +46,7 @@ class LanguageLimitationMapper extends MultipleSelectionBasedMapper implements L
             try {
                 $values[] = $this->languageService->loadLanguage($languageCode);
             } catch (NotFoundException $e) {
-                $this->logger->error(sprintf('Could not map limitation value: Language with code = %s not found', $languageCode));
+                $this->logger->error(sprintf('Could not map the Limitation value: could not find a language with code %s', $languageCode));
             }
         }
 

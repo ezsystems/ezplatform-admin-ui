@@ -85,7 +85,7 @@ class DateIntervalToArrayTransformer implements DataTransformerInterface
 
         if (count($emptyFields) > 0) {
             throw new TransformationFailedException(
-                sprintf('The fields "%s" should not be empty', implode('", "', $emptyFields))
+                sprintf('Fields "%s" should not be empty', implode('", "', $emptyFields))
             );
         }
 

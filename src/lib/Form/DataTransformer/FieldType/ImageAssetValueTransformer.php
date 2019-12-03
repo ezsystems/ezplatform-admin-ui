@@ -29,7 +29,7 @@ class ImageAssetValueTransformer extends AbstractBinaryBaseTransformer implement
 
         if (!$value instanceof Value) {
             throw new TransformationFailedException(
-                sprintf('Expected a %s, got %s instead', Value::class, gettype($value))
+                sprintf('Received %s instead of %s', gettype($value), Value::class)
             );
         }
 
@@ -57,7 +57,7 @@ class ImageAssetValueTransformer extends AbstractBinaryBaseTransformer implement
 
         if (!is_array($value)) {
             throw new TransformationFailedException(
-                sprintf('Expected a array, got %s instead', gettype($value))
+                sprintf('Received %s instead of an array', gettype($value))
             );
         }
 

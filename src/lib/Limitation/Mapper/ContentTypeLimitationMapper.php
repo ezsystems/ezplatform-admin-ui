@@ -47,7 +47,7 @@ class ContentTypeLimitationMapper extends MultipleSelectionBasedMapper implement
             try {
                 $values[] = $this->contentTypeService->loadContentType($contentTypeId);
             } catch (NotFoundException $e) {
-                $this->logger->error(sprintf('Could not map limitation value: Content Type with id = %s not found', $contentTypeId));
+                $this->logger->error(sprintf('Could not map the Limitation value: could not find a Content Type with ID %s', $contentTypeId));
             }
         }
 
