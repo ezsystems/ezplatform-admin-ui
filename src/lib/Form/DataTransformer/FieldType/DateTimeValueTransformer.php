@@ -30,7 +30,7 @@ class DateTimeValueTransformer implements DataTransformerInterface
 
         if (!$value instanceof Value) {
             throw new TransformationFailedException(
-                sprintf('Expected a %s, got %s instead', Value::class, gettype($value))
+                sprintf('Received %s instead of %s', gettype($value), Value::class)
             );
         }
 
@@ -56,7 +56,7 @@ class DateTimeValueTransformer implements DataTransformerInterface
 
         if (!is_numeric($value)) {
             throw new TransformationFailedException(
-                sprintf('Expected a numeric, got %s instead', gettype($value))
+                sprintf('Received %s instead of a numeric value', gettype($value))
             );
         }
 

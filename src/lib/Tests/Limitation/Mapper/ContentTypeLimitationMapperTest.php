@@ -66,7 +66,7 @@ class ContentTypeLimitationMapperTest extends TestCase
         $this->logger
             ->expects($this->once())
             ->method('error')
-            ->with('Could not map limitation value: Content Type with id = foo not found');
+            ->with('Could not map the Limitation value: could not find a Content Type with ID foo');
 
         $actual = $this->mapper->mapLimitationValue(new ContentTypeLimitation([
             'limitationValues' => $values,

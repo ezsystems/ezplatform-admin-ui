@@ -71,7 +71,7 @@ class ObjectStateLimitationMapperTest extends TestCase
         $this->logger
             ->expects($this->once())
             ->method('error')
-            ->with('Could not map limitation value: ObjectState with id = foo not found');
+            ->with('Could not map the Limitation value: could not find an Object state with ID foo');
 
         $actual = $this->mapper->mapLimitationValue(new ObjectStateLimitation([
             'limitationValues' => $values,

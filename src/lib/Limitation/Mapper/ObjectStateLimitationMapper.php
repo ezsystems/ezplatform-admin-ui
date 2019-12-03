@@ -51,7 +51,7 @@ class ObjectStateLimitationMapper extends MultipleSelectionBasedMapper implement
                     $this->objectStateService->loadObjectState($stateId)
                 );
             } catch (NotFoundException $e) {
-                $this->logger->error(sprintf('Could not map limitation value: ObjectState with id = %s not found', $stateId));
+                $this->logger->error(sprintf('Could not map the Limitation value: could not find an Object state with ID %s', $stateId));
             }
         }
 

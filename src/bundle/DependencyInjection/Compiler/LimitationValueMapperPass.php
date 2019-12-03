@@ -31,7 +31,7 @@ class LimitationValueMapperPass implements CompilerPassInterface
             foreach ($attributes as $attribute) {
                 if (!isset($attribute['limitationType'])) {
                     throw new LogicException(sprintf(
-                        '%s service tag needs a "limitationType" attribute to identify which LimitationType the mapper is for. None given.',
+                        'The %s service tag needs a "limitationType" attribute to identify which LimitationType the mapper is for.',
                         self::LIMITATION_VALUE_MAPPER_TAG
                     ));
                 }

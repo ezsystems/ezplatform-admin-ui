@@ -28,7 +28,7 @@ class LimitationFormMapperPass implements CompilerPassInterface
             foreach ($attributes as $attribute) {
                 if (!isset($attribute['limitationType'])) {
                     throw new LogicException(
-                        'ez.limitation.formMapper service tag needs a "limitationType" attribute to identify which LimitationType the mapper is for. None given.'
+                        'ez.limitation.formMapper service tag needs a "limitationType" attribute to identify which LimitationType the mapper is for.'
                     );
                 }
 
