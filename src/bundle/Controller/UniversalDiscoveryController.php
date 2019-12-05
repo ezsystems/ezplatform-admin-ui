@@ -13,11 +13,14 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\SearchService;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
 use eZ\Publish\API\Repository\Values\User\Limitation;
+use eZ\Publish\Core\Repository\Values\Content\Content as CoreContent;
+use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformRest\Output\Visitor;
@@ -195,9 +198,13 @@ class UniversalDiscoveryController extends Controller
 
     private function getBreadcrumbLocations(Location $location): array
     {
+        $filter = $location->id === 1
+            ? new Query\Criterion\ParentLocationId($location->path)
+            : new Query\Criterion\LocationId($this->getParentLocationPath($location));
+
         $searchResult = $this->searchService->findLocations(
             new LocationQuery([
-                'filter' => new Query\Criterion\LocationId($this->getParentLocationPath($location)),
+                'filter' => $filter,
             ])
         );
 
@@ -279,7 +286,9 @@ class UniversalDiscoveryController extends Controller
         int $limit,
         Query\SortClause $sortClause
     ): array {
-        $content = $this->contentService->loadContentByContentInfo($location->getContentInfo());
+        $content = $location->id === 1
+            ? $this->getRootContent($location)
+            : $this->contentService->loadContentByContentInfo($location->getContentInfo());
         $contentType = $this->contentTypeService->loadContentType($location->getContentInfo()->contentTypeId);
 
         return [
@@ -299,7 +308,9 @@ class UniversalDiscoveryController extends Controller
         int $limit,
         Query\SortClause $sortClause
     ): array {
-        $content = $this->contentService->loadContentByContentInfo($location->getContentInfo());
+        $content = $location->id === 1
+            ? $this->getRootContent($location)
+            : $this->contentService->loadContentByContentInfo($location->getContentInfo());
         $contentType = $this->contentTypeService->loadContentType($location->getContentInfo()->contentTypeId);
 
         return [
@@ -330,6 +341,24 @@ class UniversalDiscoveryController extends Controller
             : $sortOrder;
 
         return new $sortClauseClass($sortOrder);
+    }
+
+    private function getRootContent(Location $location): Content
+    {
+        $contentInfo = $location->getContentInfo();
+
+        return new CoreContent([
+            'versionInfo' => new VersionInfo([
+                'names' => [
+                    $contentInfo->mainLanguageCode => $contentInfo->name,
+                ],
+                'contentInfo' => $contentInfo,
+                'versionNo' => $contentInfo->currentVersionNo,
+                'modificationDate' => $contentInfo->modificationDate,
+                'creationDate' => $contentInfo->modificationDate,
+                'creatorId' => $contentInfo->ownerId,
+            ])
+        ]);
     }
 }
 
