@@ -48,7 +48,7 @@ class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
     protected $permissionResolver;
 
     /** @var \eZ\Publish\Core\Helper\TranslationHelper */
-    protected $translationHelper;
+    private $translationHelper;
 
     /**
      * @param \Twig\Environment $twig
