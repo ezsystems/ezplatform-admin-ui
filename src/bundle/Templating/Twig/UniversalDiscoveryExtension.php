@@ -62,12 +62,24 @@ class UniversalDiscoveryExtension extends AbstractExtension
             'cotfPreselectedLanguage' => $config['content_on_the_fly']['preselected_language'],
             'cotfAllowedLanguages' => $config['content_on_the_fly']['allowed_languages'],
             'cotfPreselectedContentType' => $config['content_on_the_fly']['preselected_content_type'],
-            'cotfAllowedContentTypes' => $config['content_on_the_fly']['allowed_content_types'],
+            'cotfAllowedContentTypes' => $this->getAllowedContentTypes($config['content_on_the_fly']['allowed_content_types']),
             'cotfPreselectedLocation' => $config['content_on_the_fly']['preselected_location'],
             'cotfAllowedLocations' => $config['content_on_the_fly']['allowed_locations'],
-            'allowedContentTypes' => $config['allowed_content_types'],
+            'allowedContentTypes' => $this->getAllowedContentTypes($config['allowed_content_types']),
         ];
 
         return json_encode($udwConfig);
+    }
+
+    private function getAllowedContentTypes(array $config): array
+    {
+        // To avoid BC breaks, we're forced to use [null] as empty allowed content types list
+        // It will be handled by frontend component
+        if (count($config) === 1 && $config[0] === null) {
+            return $config;
+        }
+
+        // Remove any false-castable elements (like null)
+        return array_filter($config);
     }
 }
