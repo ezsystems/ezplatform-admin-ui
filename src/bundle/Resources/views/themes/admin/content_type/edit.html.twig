@@ -115,14 +115,7 @@
 
                             {# Default rendering #}
                             {% for child in field_definition %}
-                                {# Iterable children means collections, they are handled in field_types.html.twig #}
-                                {% if not child.rendered and child is not iterable %}
-                                    <div{% if group_class is not empty %} class="{{ group_class }}"{% endif %}>
-                                        {{- form_label(child) -}}
-                                        {{- form_errors(child) -}}
-                                        {{- form_widget(child) -}}
-                                    </div>
-                                {% endif %}
+                                {{ form_row(child) }}
                             {% endfor %}
                         </div>
                     </div>
