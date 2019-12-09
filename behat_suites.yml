@@ -9,7 +9,7 @@ adminui:
     suites:
         adminui:
             paths:
-              - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard'
+                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/Authentication.feature'
             filters:
                 tags: "@common"
             contexts:
