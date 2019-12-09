@@ -20,7 +20,13 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $siteaccessResolver: '@EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver'
+            $translationHelper: '@ezpublish.translation_helper'
             $userContentTypeIdentifier: '$user_content_type_identifier$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\LocationController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $translationHelper: '@ezpublish.translation_helper'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentOnTheFlyController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
@@ -112,6 +118,16 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $defaultPaginationLimit: '$pagination.content_draft_limit$'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\TranslationController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $translationHelper: '@ezpublish.translation_helper'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\VersionController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $translationHelper: '@ezpublish.translation_helper'
 
     #
     # REST
