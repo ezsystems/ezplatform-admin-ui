@@ -37,6 +37,7 @@ class RichText extends EzFieldElement
         $this->fields['styleDropdown'] = '.ae-toolbar-element';
         $this->fields['blockStyle'] = '.ae-listbox li %s';
         $this->fields['moveButton'] = '.ez-btn-ae--move-%s';
+        $this->fields['toolbarButton'] = '.ae-toolbar .ez-btn-ae';
     }
 
     public function setValue(array $parameters): void
@@ -64,6 +65,7 @@ class RichText extends EzFieldElement
     public function openElementsToolbar(): void
     {
         $this->context->findElement($this->fields['addButton'])->click();
+        $this->context->waitUntilElementIsVisible($this->fields['toolbarButton']);
     }
 
     public function changeStyle(string $style): void
