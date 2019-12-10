@@ -21,6 +21,7 @@
                 table: [],
                 tr: [],
                 td: [],
+                th: [],
                 ...global.eZ.adminUiConfig.alloyEditor.extraButtons,
             };
             this.attributes = global.eZ.adminUiConfig.alloyEditor.attributes;
