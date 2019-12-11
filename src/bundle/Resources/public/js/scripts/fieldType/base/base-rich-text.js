@@ -21,6 +21,7 @@
                 table: [],
                 tr: [],
                 td: [],
+                th: [],
                 ...global.eZ.adminUiConfig.alloyEditor.extraButtons,
             };
             this.attributes = global.eZ.adminUiConfig.alloyEditor.attributes;
@@ -254,6 +255,7 @@
                             new window.eZ.ezAlloyEditor.ezTableConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezTableRowConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezTableCellConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezTableHeaderConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezEmbedImageLinkConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezEmbedImageConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezEmbedConfig(toolbarProps),
