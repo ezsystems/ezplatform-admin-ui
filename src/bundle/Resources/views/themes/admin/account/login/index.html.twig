@@ -20,5 +20,5 @@
             <button type="submit" class="btn btn-primary ez-btn ez-btn--login">{{ 'authentication.submit'|trans|desc('Login') }}</button>
         </fieldset>
     </form>
-    <a class="mt-3 text-right" href="{{ path('ezplatform.user.forgot_password') }}">{{ 'authentication.forgot_password'|trans|desc('Forgot password?') }}</a>
+    <a class="mt-3 text-right ez-login__hyperlink" href="{{ path('ezplatform.user.forgot_password') }}">{{ 'authentication.forgot_password'|trans|desc('Forgot password?') }}</a>
 {%- endblock content -%}

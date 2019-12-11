@@ -13,19 +13,16 @@
                 <div class="col-6 ez-login__form">
                     <div class="{%- block login_wrapper -%}ez-login__form-wrapper{%- endblock -%}">
                         <svg class="ez-icon ez-icon--logo">
-                            <use xlink:href="/bundles/ezplatformadminui/img/ez-logo.svg#logo-white"></use>
+                            <use xlink:href="/bundles/ezplatformadminui/img/ez-logo.svg#logo-orange"></use>
                         </svg>
-                        {%- block content -%}
-
-                        {%- endblock content -%}
+                        {%- block content -%} {%- endblock content -%}
                     </div>
                     <div class="ez-login__footer">
-                        <span>{{ 'base.footer_copyright'|trans({
-                                '%ez_link_open%': '<a href="http://ez.no">',
-                                '%ez_link_close%': '</a>',
-                                '%current_year%': "now"|date("Y")
-                            })
-                            |desc('eZ Platform ©1999-%current_year% %ez_link_open%eZ Systems AS%ez_link_close% and others.')|raw }}
+                        <span>{{ 'base.footer_copyright'|trans({ 
+                                    '%ez_link_open%': '<a class="ez-login__hyperlink" href="http://ez.no">', 
+                                    '%ez_link_close%': '</a>', 
+                                    '%current_year%': "now"|date("Y") 
+                              }) |desc('eZ Platform ©1999-%current_year% %ez_link_open%eZ Systems AS%ez_link_close% and others.')|raw }}
                         </span>
                     </div>
                 </div>
