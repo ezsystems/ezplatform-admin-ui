@@ -26,31 +26,6 @@
         }
     }
 
-    &::after {
-        width: 2.25rem;
-        height: 2.25rem;
-        position: absolute;
-        display: block;
-        margin-top: 1px;
-        border-radius: 50%;
-        content: '';
-        transition: all 0.25s ease-in;
-        animation: background-to-transparent 0.25s ease-in;
-        animation-direction: normal;
-        animation-iteration-count: 1;
-        animation-play-state: running;
-    }
-
-    &--checked {
-        &::after {
-            background-color: #fff;
-            animation: background-to-white 0.25s ease-in;
-            animation-direction: normal;
-            animation-iteration-count: 1;
-            animation-play-state: running;
-        }
-    }
-
     &--checked &__icon-wrapper.ez-add-to-bookmarks__icon-wrapper--add,
     &:not(.ez-add-to-bookmarks--checked) &__icon-wrapper.ez-add-to-bookmarks__icon-wrapper--remove {
         opacity: 0;
