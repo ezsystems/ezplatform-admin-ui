@@ -9,22 +9,11 @@
         attachCustomEventHandlersToItem: () => {},
     };
 
-    const attachEventHandlersToItem = Symbol('attachEventHandlersToItem');
-    const onDragStart = Symbol('onDragStart');
-    const onDragOver = Symbol('onDragOver');
-    const onDrop = Symbol('onDrop');
-    const addPlaceholder = Symbol('addPlaceholder');
-    const removePlaceholder = Symbol('removePlaceholder');
-    const removePlaceholderAfterTimeout = Symbol('removePlaceholderAfterTimeout');
-    const draggedItem = Symbol('draggedItem');
-    const placeholder = Symbol('placeholder');
-    const onDragOverTimeout = Symbol('onDragOverTimeout');
-
     class Draggable {
         constructor(config) {
-            this[draggedItem] = null;
-            this[placeholder] = null;
-            this[onDragOverTimeout] = null;
+            this.draggedItem = null;
+            this.placeholder = null;
+            this.onDragOverTimeout = null;
             this.itemsContainer = config.itemsContainer;
             this.selectorItem = config.selectorItem;
             this.selectorPlaceholder = config.selectorPlaceholder || SELECTOR_PLACEHOLDER;
@@ -34,49 +23,58 @@
             this.afterDrop = config.afterDrop || DEFAULTS.afterDrop;
             this.attachCustomEventHandlersToItem = config.attachCustomEventHandlersToItem || DEFAULTS.attachCustomEventHandlersToItem;
 
-            this[onDragStart] = this[onDragStart].bind(this);
-            this[onDragOver] = this[onDragOver].bind(this);
-            this[onDrop] = this[onDrop].bind(this);
-            this[addPlaceholder] = this[addPlaceholder].bind(this);
-            this[removePlaceholder] = this[removePlaceholder].bind(this);
-            this[removePlaceholderAfterTimeout] = this[removePlaceholderAfterTimeout].bind(this);
-            this[attachEventHandlersToItem] = this[attachEventHandlersToItem].bind(this);
+            this.onDragStart = this.onDragStart.bind(this);
+            this.onDragEnd = this.onDragEnd.bind(this);
+            this.onDragOver = this.onDragOver.bind(this);
+            this.onDrop = this.onDrop.bind(this);
+            this.addPlaceholder = this.addPlaceholder.bind(this);
+            this.removePlaceholder = this.removePlaceholder.bind(this);
+            this.removePlaceholderAfterTimeout = this.removePlaceholderAfterTimeout.bind(this);
+            this.attachEventHandlersToItem = this.attachEventHandlersToItem.bind(this);
         }
 
-        [attachEventHandlersToItem](item) {
-            item.ondragstart = this[onDragStart];
-            item.ondrag = this[removePlaceholderAfterTimeout];
+        attachEventHandlersToItem(item) {
+            item.ondragstart = this.onDragStart;
+            item.ondragend = this.onDragEnd;
+            item.ondrag = this.removePlaceholderAfterTimeout;
 
             this.attachCustomEventHandlersToItem(item);
         }
 
-        [onDragStart](event) {
+        onDragStart(event) {
             event.dataTransfer.dropEffect = 'move';
             event.dataTransfer.setData('text/html', event.currentTarget);
 
-            this[draggedItem] = event.currentTarget;
-            this.afterDragStart(this[draggedItem]);
+            setTimeout(() => {
+                event.target.style.setProperty('display', 'none');
+            }, 0);
+            this.draggedItem = event.currentTarget;
+            this.afterDragStart(this.draggedItem);
         }
 
-        [onDragOver](event) {
+        onDragEnd() {
+            this.draggedItem.style.removeProperty('display');
+        }
+
+        onDragOver(event) {
             const item = event.target.closest(`${this.selectorItem}:not(${this.selectorPlaceholder})`);
 
             if (!item) {
                 return false;
             }
 
-            this[removePlaceholder]();
-            this[addPlaceholder](item, event.clientY);
+            this.removePlaceholder();
+            this.addPlaceholder(item, event.clientY);
             this.afterDragOver();
         }
 
-        [onDrop]() {
-            this.itemsContainer.insertBefore(this[draggedItem], this.itemsContainer.querySelector(this.selectorPlaceholder));
-            this[removePlaceholder]();
-            this.afterDrop(this[draggedItem]);
+        onDrop() {
+            this.itemsContainer.insertBefore(this.draggedItem, this.itemsContainer.querySelector(this.selectorPlaceholder));
+            this.removePlaceholder();
+            this.afterDrop(this.draggedItem);
         }
 
-        [addPlaceholder](element, positionY) {
+        addPlaceholder(element, positionY) {
             const container = doc.createElement('div');
             const rect = element.getBoundingClientRect();
             const middlePositionY = rect.top + rect.height / 2;
@@ -84,35 +82,35 @@
 
             container.insertAdjacentHTML('beforeend', this.itemsContainer.dataset.placeholder);
 
-            this[placeholder] = container.querySelector(this.selectorPlaceholder);
+            this.placeholder = container.querySelector(this.selectorPlaceholder);
 
-            this.itemsContainer.insertBefore(this[placeholder], where);
-            this[removePlaceholderAfterTimeout]();
+            this.itemsContainer.insertBefore(this.placeholder, where);
+            this.removePlaceholderAfterTimeout();
         }
 
-        [removePlaceholder]() {
-            if (this[placeholder]) {
-                this[placeholder].remove();
+        removePlaceholder() {
+            if (this.placeholder) {
+                this.placeholder.remove();
             }
         }
 
-        [removePlaceholderAfterTimeout]() {
-            global.clearTimeout(this[onDragOverTimeout]);
+        removePlaceholderAfterTimeout() {
+            global.clearTimeout(this.onDragOverTimeout);
 
-            this[onDragOverTimeout] = global.setTimeout(() => this[removePlaceholder](), TIMEOUT_REMOVE_PLACEHOLDERS);
+            this.onDragOverTimeout = global.setTimeout(() => this.removePlaceholder(), TIMEOUT_REMOVE_PLACEHOLDERS);
         }
 
         init() {
-            this.itemsContainer.ondragover = this[onDragOver];
-            this.itemsContainer.addEventListener('drop', this[onDrop], false);
+            this.itemsContainer.ondragover = this.onDragOver;
+            this.itemsContainer.addEventListener('drop', this.onDrop, false);
 
-            this.itemsContainer.querySelectorAll(this.selectorItem).forEach(this[attachEventHandlersToItem]);
+            this.itemsContainer.querySelectorAll(this.selectorItem).forEach(this.attachEventHandlersToItem);
 
             this.afterInit();
         }
 
         reinit() {
-            this.itemsContainer.removeEventListener('drop', this[onDrop]);
+            this.itemsContainer.removeEventListener('drop', this.onDrop);
 
             this.init();
         }
