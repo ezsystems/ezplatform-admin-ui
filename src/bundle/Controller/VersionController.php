@@ -11,6 +11,7 @@ use eZ\Publish\API\Repository\Exceptions\BadStateException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
@@ -40,25 +41,31 @@ class VersionController extends Controller
     /** @var SubmitHandler */
     private $submitHandler;
 
+    /** @var \eZ\Publish\Core\Helper\TranslationHelper */
+    private $translationHelper;
+
     /**
      * @param NotificationHandlerInterface $notificationHandler
      * @param TranslatorInterface $translator
      * @param ContentService $contentService
      * @param FormFactory $formFactory
      * @param SubmitHandler $submitHandler
+     * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
      */
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
         ContentService $contentService,
         FormFactory $formFactory,
-        SubmitHandler $submitHandler
+        SubmitHandler $submitHandler,
+        TranslationHelper $translationHelper
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
         $this->contentService = $contentService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
+        $this->translationHelper = $translationHelper;
     }
 
     /**
@@ -104,7 +111,9 @@ class VersionController extends Controller
                     $this->translator->trans(
                         /** @Desc("Versions removed from '%name%' content.") */
                         'version.delete.success',
-                        ['%name%' => $contentInfo->name],
+                        [
+                            '%name%' => $this->translationHelper->getTranslatedContentNameByContentInfo($contentInfo),
+                        ],
                         'version'
                     )
                 );

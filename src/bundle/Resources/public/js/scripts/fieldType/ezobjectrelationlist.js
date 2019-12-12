@@ -154,7 +154,7 @@
         const renderRow = (item, index) => {
             const { escapeHTML } = eZ.helpers.text;
             const contentTypeName = eZ.adminUiConfig.contentTypeNames[item.ContentInfo.Content.ContentTypeInfo.identifier];
-            const contentName = escapeHTML(item.ContentInfo.Content.Name);
+            const contentName = escapeHTML(item.ContentInfo.Content.TranslatedName);
             const contentId = escapeHTML(item.ContentInfo.Content._id);
 
             return `

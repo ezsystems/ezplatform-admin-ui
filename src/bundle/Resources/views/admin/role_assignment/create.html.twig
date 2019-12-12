@@ -51,9 +51,8 @@
                     <ul class="list-unstyled" id="{{ form.users.vars.id }}-selected-content">
                         {% for user in form.users.vars.data %}
                             {% if user is not empty %}
-                                {% set content_name = user.content.versionInfo.contentInfo.name %}
-                                {{ include('@ezdesign/admin/role_assignment/create_tag_list_item.html.twig', { 
-                                    'content_name': content_name,
+                                {{ include('@ezdesign/admin/role_assignment/create_tag_list_item.html.twig', {
+                                    'content_name': ez_content_name(user),
                                     'content_id': user.content.versionInfo.contentInfo.id
                                 }) }}
                             {% endif %}
@@ -81,7 +80,7 @@
                     <ul class="list-unstyled" id="{{ form.groups.vars.id }}-selected-content">
                         {% for group in form.groups.vars.data %}
                             {% if group is not empty %}
-                                {% set content_name = group.content.versionInfo.contentInfo.name %}
+                                {% set content_name = ez_content_name(group.content) %}
                                 {{ include('@ezdesign/admin/role_assignment/create_tag_list_item.html.twig', { 
                                     'content_name': content_name,
                                     'content_id': group.content.versionInfo.contentInfo.id
@@ -121,7 +120,7 @@
                             </button>
                             <ul class="ez-limitations__selected-subtree mt-4">
                                 {% for location in form.locations.vars.data %}
-                                    <li>{{ location.contentInfo.name }}</li>
+                                    <li>{{ ez_content_name(location.content) }}</li>
                                 {% endfor %}
                             </ul>
                         </div>
