@@ -14,7 +14,6 @@ use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
@@ -198,12 +197,13 @@ class ContentController extends Controller
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentEditData $data) {
                 $contentInfo = $data->getContentInfo();
-                $versionInfo = $data->getVersionInfo();
                 $language = $data->getLanguage();
-                $versionNo = $versionInfo->versionNo;
                 $location = $data->getLocation();
 
                 $content = $this->contentService->loadContent($contentInfo->id);
+                $versionInfo = $data->getVersionInfo() ?? $content->getVersionInfo();
+                $versionNo = $versionInfo->versionNo;
+
                 if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
                     return $this->redirectToRoute('ezplatform.user.update', [
                         'contentId' => $contentInfo->id,

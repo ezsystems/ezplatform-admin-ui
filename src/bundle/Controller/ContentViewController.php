@@ -319,7 +319,7 @@ class ContentViewController extends Controller
         $languageCodes = $versionInfo->languageCodes ?? [];
 
         return $this->formFactory->contentEdit(
-            new ContentEditData($contentInfo, $versionInfo, $language, $location),
+            new ContentEditData($contentInfo, null, $language, $location),
             null,
             [
                 'choice_loader' => new ContentEditTranslationChoiceLoader(

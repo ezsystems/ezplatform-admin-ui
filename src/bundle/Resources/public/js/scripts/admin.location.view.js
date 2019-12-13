@@ -27,9 +27,6 @@
         const checkVersionDraftLink = Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode });
         const submitVersionEditForm = () => {
             doc.querySelector('#form_subitems_content_edit_content_info').value = contentId;
-            doc.querySelector('#form_subitems_content_edit_version_info_content_info').value = contentId;
-            doc.querySelector('#form_subitems_content_edit_version_info_version_no').value =
-                content.CurrentVersion.Version.VersionInfo.versionNo;
             doc.querySelector(`#form_subitems_content_edit_language_${languageCode}`).checked = true;
             doc.querySelector('#form_subitems_content_edit_create').click();
         };
