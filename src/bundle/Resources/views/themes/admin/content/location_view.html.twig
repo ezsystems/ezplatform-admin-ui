@@ -35,16 +35,18 @@
                         {% for path_location in path_locations %}
                             {% if not loop.last %}
                                 {% set items = items|merge([{
-                                    'value': path_location.contentInfo.name,
+                                    'value': ez_content_name(path_location.contentInfo),
                                     'url': path('_ezpublishLocation', {'locationId': path_location.id})
                                 }]) %}
                             {% endif %}
                         {% endfor %}
-                        {% set items = items|merge([{ 'value': content.name }]) %}
+
+                        {% set items = items|merge([{ 'value': ez_content_name(content) }]) %}
+
                         {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: items } %}
 
                         {% include '@ezdesign/ui/page_title.html.twig' with {
-                            title: content.name,
+                            title: ez_content_name(content),
                             icon_name: content_type.identifier,
                             content_type_name: content_type.name
                         } %}

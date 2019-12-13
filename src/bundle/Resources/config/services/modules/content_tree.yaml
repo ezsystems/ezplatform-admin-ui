@@ -6,6 +6,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\UI\Module\ContentTree\NodeFactory:
         arguments:
+            $translationHelper: '@ezpublish.translation_helper'
             $displayLimit: '$content_tree_module.load_more_limit$'
             $childrenLoadMaxLimit: '$content_tree_module.children_load_max_limit$'
             $maxDepth: '$content_tree_module.tree_max_depth$'

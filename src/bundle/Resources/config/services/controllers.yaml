@@ -12,9 +12,15 @@ services:
         autowire: true
         arguments:
             $siteaccessResolver: '@EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver'
+            $translationHelper: '@ezpublish.translation_helper'
             $userContentTypeIdentifier: '$user_content_type_identifier$'
         tags:
             - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\LocationController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $translationHelper: '@ezpublish.translation_helper'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentOnTheFlyController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
@@ -160,6 +166,16 @@ services:
             $defaultPaginationLimit: '$pagination.content_draft_limit$'
         tags:
             - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\TranslationController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $translationHelper: '@ezpublish.translation_helper'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\VersionController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $translationHelper: '@ezpublish.translation_helper'
 
     #
     # REST

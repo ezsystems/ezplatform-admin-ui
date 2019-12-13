@@ -18,6 +18,7 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\SPI\Limitation\Target;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
@@ -77,6 +78,9 @@ class ContentController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer */
     private $lookupLimitationsTransformer;
 
+    /** @var \eZ\Publish\Core\Helper\TranslationHelper */
+    private $translationHelper;
+
     /** @var array */
     private $userContentTypeIdentifier;
 
@@ -108,6 +112,7 @@ class ContentController extends Controller
         UserService $userService,
         PermissionResolver $permissionResolver,
         LookupLimitationsTransformer $lookupLimitationsTransformer,
+        TranslationHelper $translationHelper,
         ContentTypeService $contentTypeService,
         array $userContentTypeIdentifier
     ) {
@@ -121,6 +126,7 @@ class ContentController extends Controller
         $this->userService = $userService;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
         $this->permissionResolver = $permissionResolver;
+        $this->translationHelper = $translationHelper;
         $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
         $this->contentTypeService = $contentTypeService;
     }
@@ -213,7 +219,7 @@ class ContentController extends Controller
                     $this->notificationHandler->success(
                         /** @Desc("Created a new draft for '%name%'.") */
                         'content.create_draft.success',
-                        ['%name%' => $contentInfo->name],
+                        ['%name%' => $this->translationHelper->getTranslatedContentName($content)],
                         'content'
                     );
                 }
@@ -371,7 +377,7 @@ class ContentController extends Controller
                 $this->notificationHandler->success(
                     /** @Desc("Main language for '%name%' updated.") */
                     'content.main_language_update.success',
-                    ['%name%' => $contentInfo->name],
+                    ['%name%' => $this->translationHelper->getTranslatedContentName($content)],
                     'content'
                 );
 
@@ -411,6 +417,7 @@ class ContentController extends Controller
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentVisibilityUpdateData $data) {
                 $contentInfo = $data->getContentInfo();
+                $contentName = $this->translationHelper->getTranslatedContentNameByContentInfo($contentInfo);
                 $desiredVisibility = $data->getVisible();
                 $location = $data->getLocation();
 
@@ -418,7 +425,7 @@ class ContentController extends Controller
                     $this->notificationHandler->success(
                         /** @Desc("Content item '%name%' is already hidden.") */
                         'content.hide.already_hidden',
-                        ['%name%' => $contentInfo->name],
+                        ['%name%' => $contentName],
                         'content'
                     );
                 }
@@ -427,7 +434,7 @@ class ContentController extends Controller
                     $this->notificationHandler->success(
                         /** @Desc("Content item '%name%' is already visible.") */
                         'content.reveal.already_visible',
-                        ['%name%' => $contentInfo->name],
+                        ['%name%' => $contentName],
                         'content'
                     );
                 }
@@ -438,7 +445,7 @@ class ContentController extends Controller
                     $this->notificationHandler->success(
                         /** @Desc("Content item '%name%' hidden.") */
                         'content.hide.success',
-                        ['%name%' => $contentInfo->name],
+                        ['%name%' => $contentName],
                         'content'
                     );
                 }
@@ -449,7 +456,7 @@ class ContentController extends Controller
                     $this->notificationHandler->success(
                         /** @Desc("Content item '%name%' revealed.") */
                         'content.reveal.success',
-                        ['%name%' => $contentInfo->name],
+                        ['%name%' => $contentName],
                         'content'
                     );
                 }

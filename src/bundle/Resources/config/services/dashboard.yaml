@@ -42,6 +42,8 @@ services:
     EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper:
         autowire: true
         public: false
+        arguments:
+            $translationHelper: '@ezpublish.translation_helper'
 
     ezplatform.adminui.dashboard.me:
         parent: EzSystems\EzPlatformAdminUi\Component\TwigComponent

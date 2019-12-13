@@ -37,3 +37,10 @@ services:
             $groupIdentifier: 'location-view'
         tags:
             - { name: ezplatform.admin_ui.component, group: 'location-view-tab-groups' }
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\UrlsTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab
+        arguments:
+            $translationHelper: '@ezpublish.translation_helper'
+        tags:
+            - { name: ezplatform.tab, group: location-view }

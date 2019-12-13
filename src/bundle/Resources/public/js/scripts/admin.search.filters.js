@@ -213,7 +213,7 @@
             .then(showUsersList);
     };
     const createUsersListItem = (user) =>
-        `<li data-id="${user._id}" data-name="${user.Name}" class="ez-filters__user-item">${user.Name}</li>`;
+        `<li data-id="${user._id}" data-name="${user.TranslatedName}" class="ez-filters__user-item">${user.TranslatedName}</li>`;
     const showUsersList = (data) => {
         const hits = data.View.Result.searchHits.searchHit;
         const users = hits.reduce((total, hit) => total + createUsersListItem(hit.value.Content), '');

@@ -8,7 +8,7 @@
         closeUDW();
 
         const locationId = items[0].id;
-        const locationName = items[0].ContentInfo.Content.Name;
+        const locationName = items[0].ContentInfo.Content.TranslatedName;
         const objectRelationListSettingsWrapper = btn.closest('.ezobjectrelationlist-settings');
         const objectRelationSettingsWrapper = btn.closest('.ezobjectrelation-settings');
 

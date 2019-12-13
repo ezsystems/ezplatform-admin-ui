@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -32,6 +33,9 @@ class TranslationController extends Controller
     /** @var SubmitHandler */
     private $submitHandler;
 
+    /** @var \eZ\Publish\Core\Helper\TranslationHelper */
+    private $translationHelper;
+
     /**
      * @param TranslatableNotificationHandlerInterface $notificationHandler
      * @param ContentService $contentService
@@ -42,12 +46,14 @@ class TranslationController extends Controller
         TranslatableNotificationHandlerInterface $notificationHandler,
         ContentService $contentService,
         FormFactory $formFactory,
-        SubmitHandler $submitHandler
+        SubmitHandler $submitHandler,
+        TranslationHelper $translationHelper
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->contentService = $contentService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
+        $this->translationHelper = $translationHelper;
     }
 
     /**
@@ -113,7 +119,10 @@ class TranslationController extends Controller
                     $this->notificationHandler->success(
                         /** @Desc("Removed '%languageCode%' translation from '%name%'.") */
                         'translation.remove.success',
-                        ['%languageCode%' => $languageCode, '%name%' => $contentInfo->name],
+                        [
+                            '%languageCode%' => $languageCode,
+                            '%name%' => $this->translationHelper->getTranslatedContentNameByContentInfo($contentInfo),
+                        ],
                         'translation'
                     );
                 }

@@ -93,7 +93,7 @@
                 return field.fieldDefinitionIdentifier === imageAssetMapping['contentFieldIdentifier'];
             });
 
-            this.updateData(response.ContentInfo.Content._id, response.ContentInfo.Content.Name, response.id, imageField.fieldValue);
+            this.updateData(response.ContentInfo.Content._id, response.ContentInfo.Content.TranslatedName, response.id, imageField.fieldValue);
         }
 
         /**
