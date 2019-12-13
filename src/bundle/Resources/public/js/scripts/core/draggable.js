@@ -1,13 +1,6 @@
 (function(global, doc, eZ) {
     const SELECTOR_PLACEHOLDER = '.ez-draggable__placeholder';
     const TIMEOUT_REMOVE_PLACEHOLDERS = 500;
-    const DEFAULTS = {
-        afterInit: () => {},
-        afterDragStart: () => {},
-        afterDragOver: () => {},
-        afterDrop: () => {},
-        attachCustomEventHandlersToItem: () => {},
-    };
 
     class Draggable {
         constructor(config) {
@@ -17,11 +10,6 @@
             this.itemsContainer = config.itemsContainer;
             this.selectorItem = config.selectorItem;
             this.selectorPlaceholder = config.selectorPlaceholder || SELECTOR_PLACEHOLDER;
-            this.afterInit = config.afterInit || DEFAULTS.afterInit;
-            this.afterDragStart = config.afterDragStart || DEFAULTS.afterDragStart;
-            this.afterDragOver = config.afterDragOver || DEFAULTS.afterDragOver;
-            this.afterDrop = config.afterDrop || DEFAULTS.afterDrop;
-            this.attachCustomEventHandlersToItem = config.attachCustomEventHandlersToItem || DEFAULTS.attachCustomEventHandlersToItem;
 
             this.onDragStart = this.onDragStart.bind(this);
             this.onDragEnd = this.onDragEnd.bind(this);
@@ -37,8 +25,6 @@
             item.ondragstart = this.onDragStart;
             item.ondragend = this.onDragEnd;
             item.ondrag = this.removePlaceholderAfterTimeout;
-
-            this.attachCustomEventHandlersToItem(item);
         }
 
         onDragStart(event) {
@@ -49,7 +35,6 @@
                 event.target.style.setProperty('display', 'none');
             }, 0);
             this.draggedItem = event.currentTarget;
-            this.afterDragStart(this.draggedItem);
         }
 
         onDragEnd() {
@@ -65,13 +50,11 @@
 
             this.removePlaceholder();
             this.addPlaceholder(item, event.clientY);
-            this.afterDragOver();
         }
 
         onDrop() {
             this.itemsContainer.insertBefore(this.draggedItem, this.itemsContainer.querySelector(this.selectorPlaceholder));
             this.removePlaceholder();
-            this.afterDrop(this.draggedItem);
         }
 
         addPlaceholder(element, positionY) {
@@ -105,8 +88,6 @@
             this.itemsContainer.addEventListener('drop', this.onDrop, false);
 
             this.itemsContainer.querySelectorAll(this.selectorItem).forEach(this.attachEventHandlersToItem);
-
-            this.afterInit();
         }
 
         reinit() {
