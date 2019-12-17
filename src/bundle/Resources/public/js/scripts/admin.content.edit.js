@@ -54,6 +54,12 @@
     };
 
     form.setAttribute('novalidate', true);
+    form.onkeypress = (e) => {
+        let key = e.charCode || e.keyCode || 0;
+        if (key == 13) {
+            e.preventDefault();
+        }
+    };
 
     submitBtns.forEach((btn) => {
         btn.dataset.isFormValid = 0;
