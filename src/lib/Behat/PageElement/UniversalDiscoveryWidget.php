@@ -14,25 +14,29 @@ use PHPUnit\Framework\Assert;
 class UniversalDiscoveryWidget extends Element
 {
     public const ELEMENT_NAME = 'UDW';
-    private const UDW_LONG_TIMEOUT = 20;
-    private const UDW_SHORT_TIMEOUT = 2;
-    private const UDW_BRANCH_LOADING_TIMEOUT = 10;
+    private const LONG_TIMEOUT = 20;
+    private const SHORT_TIMEOUT = 2;
 
     public function __construct(BrowserContext $context)
     {
         parent::__construct($context);
         $this->fields = [
-            'tabSelector' => '.c-tab-nav-item',
+            // general selectors
+            'confirmButton' => '.c-selected-locations__confirm-button',
+            'categoryTabSelector' => '.c-tab-selector__item',
+            'cancelButton' => '.c-top-menu__cancel-btn',
             'mainWindow' => '.m-ud',
-            'confirmButton' => '.m-ud__action--confirm',
-            'cancelButton' => '.m-ud__action--cancel',
-            'selectContentButton' => '.c-select-content-button',
-            'genericElementSelector' => '.c-finder-tree-branch:nth-of-type(%d) .c-finder-tree-leaf',
-            'specificElementSelector' => '.c-finder-tree-branch:nth-of-type(%d) .c-finder-tree-leaf:nth-of-type(%d)',
-            'branchLoadingSelector' => '.c-finder-tree-leaf--loading',
-            'previewName' => '.c-meta-preview__name',
-            'treeBranch' => '.c-finder-tree-branch:nth-child(%d)',
+            'selectedLocationsTab' => '.c-selected-locations',
+            // selectors for path traversal
+            'treeLevelFormat' => '.c-finder-branch:nth-child(%d)',
+            'treeLevelElementsFormat' => '.c-finder-branch:nth-of-type(%d) .c-finder-leaf',
+            'treeLevelSelectedFormat' => '.c-finder-branch:nth-of-type(%d) .c-finder-leaf--marked',
+            // selectors for multiitem selection
+            'multiSelectAddButon' => '.c-toggle-selection-button',
         ];
+        // selectors for multiitem selection
+        $this->fields['currentlySelectedItemAddedFormat'] = sprintf('%s %s.c-toggle-selection-button--selected', $this->fields['treeLevelSelectedFormat'], $this->fields['multiSelectAddButon']);
+        $this->fields['currentlySelectedAddItemButtonFormat'] = sprintf('%s %s', $this->fields['treeLevelSelectedFormat'], $this->fields['multiSelectAddButon']);
     }
 
     /**
@@ -41,54 +45,32 @@ class UniversalDiscoveryWidget extends Element
     public function selectContent(string $itemPath): void
     {
         $pathParts = explode('/', $itemPath);
-        $depth = 0;
-        foreach ($pathParts as $part) {
-            ++$depth;
+        $level = 1;
 
-            $this->context->waitUntilElementIsVisible(sprintf($this->fields['treeBranch'], $depth), self::UDW_LONG_TIMEOUT);
-            $this->context->getElementByText($part, sprintf($this->fields['genericElementSelector'], $depth))->click();
-            $this->context->waitUntilElementDisappears($this->fields['branchLoadingSelector'], self::UDW_BRANCH_LOADING_TIMEOUT);
+        foreach ($pathParts as $itemName) {
+            $this->selectTreeBranch($itemName, $level);
+            $level++;
         }
-        $expectedContentName = $pathParts[count($pathParts) - 1];
-        $this->context->waitUntil(
-            self::UDW_LONG_TIMEOUT,
-            function () use ($expectedContentName) {
-                return $this->context->findElement($this->fields['previewName'])->getText() === $expectedContentName;
-            });
+
+        $itemName = $pathParts[count($pathParts) - 1];
 
         if ($this->isMultiSelect()) {
-            for ($i = 0; $i < 3; ++$i) {
-                try {
-                    $itemToSelectIndex = $this->context->getElementPositionByText($expectedContentName, sprintf($this->fields['genericElementSelector'], $depth));
-                    $itemToSelectLocator = sprintf($this->fields['specificElementSelector'], $depth, $itemToSelectIndex);
-                    $itemsSelectButtonLocator = sprintf('%s %s', $itemToSelectLocator, $this->fields['selectContentButton']);
-
-                    $this->context->findElement($this->fields['tabSelector'])->mouseOver();
-                    $this->context->findElement($itemToSelectLocator)->mouseOver();
-                    $this->context->waitUntilElementIsVisible($itemsSelectButtonLocator, $this->defaultTimeout);
-                    $this->context->findElement($itemsSelectButtonLocator, $this->defaultTimeout)->click();
-                    break;
-                } catch (\Exception $e) {
-                    if ($i === 2) {
-                        throw $e;
-                    }
-                }
-            }
+            $this->addItemToMultiselection($itemName, count($pathParts));
         }
     }
 
     public function confirm(): void
     {
-        $this->context->getElementByText('Confirm', $this->fields['confirmButton'])->click();
-        $this->context->waitUntil(self::UDW_SHORT_TIMEOUT, function () {
+        $this->context->findElement($this->fields['confirmButton'])->click();
+        $this->context->waitUntil(self::SHORT_TIMEOUT, function () {
             return !$this->isVisible();
         });
     }
 
     public function cancel(): void
     {
-        $this->context->getElementByText('Cancel', $this->fields['cancelButton'])->click();
-        $this->context->waitUntil(self::UDW_SHORT_TIMEOUT, function () {
+        $this->context->findElement($this->fields['cancelButton'])->click();
+        $this->context->waitUntil(self::SHORT_TIMEOUT, function () {
             return !$this->isVisible();
         });
     }
@@ -98,12 +80,12 @@ class UniversalDiscoveryWidget extends Element
         $this->assertExpectedTabsExist();
     }
 
-    private function assertExpectedTabsExist(): void
+    protected function assertExpectedTabsExist(): void
     {
-        $expectedTabTitles = ['Browse', 'Search'];
+        $expectedTabTitles = ['Browse', 'Bookmarks', 'Search'];
 
         $actualTabTitles = [];
-        $tabs = $this->context->findAllElements($this->fields['tabSelector']);
+        $tabs = $this->context->findAllElements($this->fields['categoryTabSelector']);
         foreach ($tabs as $tab) {
             $actualTabTitles[] = $tab->getText();
         }
@@ -113,15 +95,36 @@ class UniversalDiscoveryWidget extends Element
 
     protected function isVisible(): bool
     {
-        return $this->context->isElementVisible($this->fields['mainWindow'], self::UDW_SHORT_TIMEOUT);
+        return $this->context->isElementVisible($this->fields['mainWindow'], self::SHORT_TIMEOUT);
     }
 
     protected function isMultiSelect(): bool
     {
         try {
-            return $this->context->findElement($this->fields['selectContentButton'], self::UDW_SHORT_TIMEOUT) !== null;
-        } catch (ElementNotFoundException $e) {
+            $this->context->findElement($this->fields['multiSelectAddButon'], self::SHORT_TIMEOUT);
+            return true;
+        }
+        catch (ElementNotFoundException $e) {
             return false;
         }
+    }
+
+    protected function addItemToMultiSelection(string $itemName, int $level)
+    {
+        $currentSelectedItemSelector = sprintf($this->fields['treeLevelSelectedFormat'], $level);
+        $currentSelectedItem = $this->context->getElementByText($itemName, $currentSelectedItemSelector);
+        Assert::assertEquals($itemName, $currentSelectedItem->getText());
+
+        $currentSelectedItem->mouseOver();
+        $this->context->waitUntilElementIsVisible(sprintf($this->fields['currentlySelectedAddItemButtonFormat'], $level));
+        $this->context->findElement(sprintf($this->fields['currentlySelectedAddItemButtonFormat'], $level))->click();
+        Assert::assertTrue($this->context->findElement(sprintf($this->fields['currentlySelectedItemAddedFormat'], $level))->isVisible());
+    }
+
+    protected function selectTreeBranch(string $itemName, int $level)
+    {
+        $this->context->waitUntilElementIsVisible(sprintf($this->fields['treeLevelFormat'], $level), self::LONG_TIMEOUT);
+        $this->context->getElementByText($itemName, sprintf($this->fields['treeLevelElementsFormat'], $level))->click();
+        Assert::assertTrue($this->context->getElementByText($itemName, sprintf($this->fields['treeLevelSelectedFormat'], $level))->isVisible());
     }
 }
