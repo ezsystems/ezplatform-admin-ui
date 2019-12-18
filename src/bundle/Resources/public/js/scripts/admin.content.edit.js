@@ -56,10 +56,11 @@
     form.setAttribute('novalidate', true);
     form.onkeypress = (event) => {
         const enterKeyCode = 13;
+        const tagsToPreventSubmit = ['input'];
         const keyCode = event.charCode || event.keyCode || 0;
-        const activeElement = document.activeElement;
+        const activeElementTagName = document.activeElement.tagName.toLowerCase();
 
-        if (keyCode === enterKeyCode && activeElement.tagName.toLowerCase() !== 'textarea') {
+        if (keyCode === enterKeyCode && tagsToPreventSubmit.includes(activeElementTagName)) {
             event.preventDefault();
         }
     };
