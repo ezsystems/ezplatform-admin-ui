@@ -38,11 +38,13 @@
             window.setTimeout(() => btn.click(), 0);
         } else {
             btn.dataset.validatorsWithErrors = Array.from(
-                validationResults.filter((result) => !result.isValid).reduce((total, result) => {
-                    total.add(result.validatorName);
+                validationResults
+                    .filter((result) => !result.isValid)
+                    .reduce((total, result) => {
+                        total.add(result.validatorName);
 
-                    return total;
-                }, new Set())
+                        return total;
+                    }, new Set())
             ).join();
 
             fields.forEach((field) => field.removeAttribute('id'));
@@ -52,6 +54,15 @@
     };
 
     form.setAttribute('novalidate', true);
+    form.onkeypress = (event) => {
+        const enterKeyCode = 13;
+        const keyCode = event.charCode || event.keyCode || 0;
+        const activeElement = document.activeElement;
+
+        if (keyCode === enterKeyCode && activeElement.tagName.toLowerCase() !== 'textarea') {
+            event.preventDefault();
+        }
+    };
 
     submitBtns.forEach((btn) => {
         btn.dataset.isFormValid = 0;
