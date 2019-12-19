@@ -18,10 +18,11 @@
     background-color: transparent;
     margin-top: 1rem;
 
-    &:hover {
+    &:hover,
+    &:not(:disabled):not(.disabled):active {
         background-color: $ez-white;
-        border-color: $ez-color-primary;
-        color: $ez-color-primary;
+        border-color: transparent;
+        color: #007DBE;
     }
 }
 

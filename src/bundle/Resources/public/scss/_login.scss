@@ -11,7 +11,8 @@
         color: $ez-color-warning-dark;
     }
 
-    &__hyperlink {
+    &__hyperlink,
+    &__hyperlink:hover {
         color: #0005a6;
     }
 
