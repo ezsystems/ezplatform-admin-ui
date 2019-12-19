@@ -56,11 +56,30 @@
     form.setAttribute('novalidate', true);
     form.onkeypress = (event) => {
         const enterKeyCode = 13;
-        const tagsToPreventSubmit = ['input'];
+        const inputTypeToPreventSubmit = [
+            'checkbox',
+            'color',
+            'date',
+            'datetime-local',
+            'email',
+            'file',
+            'image',
+            'month',
+            'number',
+            'radio',
+            'range',
+            'reset',
+            'search',
+            'select-one',
+            'tel',
+            'text',
+            'time',
+            'url',
+        ];
         const keyCode = event.charCode || event.keyCode || 0;
-        const activeElementTagName = document.activeElement.tagName.toLowerCase();
+        const activeElementType = typeof doc.activeElement.type !== 'undefined' ? doc.activeElement.type.toLowerCase() : '';
 
-        if (keyCode === enterKeyCode && tagsToPreventSubmit.includes(activeElementTagName)) {
+        if (keyCode === enterKeyCode && inputTypeToPreventSubmit.includes(activeElementType)) {
             event.preventDefault();
         }
     };
