@@ -132,6 +132,7 @@
             return total;
         }, {});
         const udwConfigBulkMoveItems = JSON.parse(container.dataset.udwConfigBulkMoveItems);
+        const udwConfigBulkAddLocation = JSON.parse(container.dataset.udwConfigBulkAddLocation);
         const mfuContentTypesMap = Object.values(eZ.adminUiConfig.contentTypes).reduce((contentTypeDataMap, contentTypeGroup) => {
             for (const contentTypeData of contentTypeGroup) {
                 contentTypeDataMap[contentTypeData.href] = contentTypeData;
@@ -162,6 +163,7 @@
                 contentTypesMap,
                 totalCount: subItemsList.ChildrenCount,
                 udwConfigBulkMoveItems,
+                udwConfigBulkAddLocation,
                 showBulkActionFailedModal,
             }),
             container
