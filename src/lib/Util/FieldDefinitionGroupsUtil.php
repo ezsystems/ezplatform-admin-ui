@@ -28,7 +28,7 @@ class FieldDefinitionGroupsUtil
      *
      * @return array
      */
-    public function groupFieldDefinitions(array $fieldDefinitions): array
+    public function groupFieldDefinitions(iterable $fieldDefinitions): array
     {
         $fieldDefinitionsByGroup = [];
         foreach ($this->fieldsGroupsListHelper->getGroups() as $groupId => $groupName) {
