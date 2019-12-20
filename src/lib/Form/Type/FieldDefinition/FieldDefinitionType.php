@@ -30,7 +30,7 @@ class FieldDefinitionType extends AbstractType
     /** @var \EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcherInterface */
     private $fieldTypeMapperDispatcher;
 
-    /** @var FieldTypeService */
+    /** @var \eZ\Publish\API\Repository\FieldTypeService */
     private $fieldTypeService;
 
     /** @var \eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList */
