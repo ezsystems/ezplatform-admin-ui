@@ -71,6 +71,7 @@
             'reset',
             'search',
             'select-one',
+            'select-multiple',
             'tel',
             'text',
             'time',
