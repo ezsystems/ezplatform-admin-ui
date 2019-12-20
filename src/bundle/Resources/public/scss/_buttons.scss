@@ -20,6 +20,7 @@
 
     &:hover,
     &:focus,
+    &:not(:disabled):not(.disabled):active,
     &:not(:disabled):not(.disabled):active:focus {
         box-shadow: none;
         background-color: $ez-white;
