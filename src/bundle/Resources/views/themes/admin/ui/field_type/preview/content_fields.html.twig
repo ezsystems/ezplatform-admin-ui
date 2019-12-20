@@ -122,7 +122,7 @@
 {% block ezfloat_field %}
 {% apply spaceless %}
     {% if not ez_field_is_empty( content, field ) %}
-        {% set field_value = field.value.value %}
+        {% set field_value = field.value.value|localizednumber %}
         {{ block( 'simple_inline_field' ) }}
     {% endif %}
 {% endapply %}
