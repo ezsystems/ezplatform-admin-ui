@@ -2,7 +2,6 @@
     const udwContainer = doc.getElementById('react-udw');
     const limitationsRadio = doc.querySelectorAll('.ez-limitations__radio');
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
-    let selectedLocationsIds = [];
     const selectSubtreeConfirm = (data) => {
         const selectedItems = data.reduce((total, item) => `${total}<li>${item.ContentInfo.Content.TranslatedName}</li>`, '');
 
@@ -89,7 +88,7 @@
         if (selectedItems.length) {
             addContentToInput(selectBtn, selectedItems);
             addContentTags(selectBtn, selectedItems);
-            selectedLocationsIds = selectedItems.map((item) => item.id);
+            selectBtn.setAttribute('data-selected-locations', selectedItems.map((item) => item.id).join());
         }
 
         closeUDW();
@@ -98,8 +97,8 @@
         event.preventDefault();
 
         const selectBtn = event.currentTarget;
-        const input = doc.querySelector(selectBtn.dataset.inputSelector);
-        const selectedContentIds = input.value.split(',').map((idString) => parseInt(idString, 10));
+        const { selectedLocations } = selectBtn.dataset;
+        const selectedLocationsIds = selectedLocations ? selectedLocations.split(',') : [];
         const config = JSON.parse(selectBtn.dataset.udwConfig);
 
         ReactDOM.render(
