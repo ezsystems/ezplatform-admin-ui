@@ -33,7 +33,7 @@ class FieldDefinitionType extends AbstractType
     /** @var FieldTypeService */
     private $fieldTypeService;
 
-    /** @var FieldsGroupsList */
+    /** @var \eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList */
     private $groupsList;
 
     /** @var \eZ\Publish\SPI\Repository\Strategy\ContentThumbnail\Field\ThumbnailStrategy */
