@@ -1,4 +1,26 @@
 (function(global, doc, eZ) {
+    const enterKeyCode = 13;
+    const inputTypeToPreventSubmit = [
+        'checkbox',
+        'color',
+        'date',
+        'datetime-local',
+        'email',
+        'file',
+        'image',
+        'month',
+        'number',
+        'radio',
+        'range',
+        'reset',
+        'search',
+        'select-one',
+        'select-multiple',
+        'tel',
+        'text',
+        'time',
+        'url',
+    ];
     const form = doc.querySelector('.ez-form-validate');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
     const getValidationResults = (validator) => {
@@ -55,28 +77,6 @@
 
     form.setAttribute('novalidate', true);
     form.onkeypress = (event) => {
-        const enterKeyCode = 13;
-        const inputTypeToPreventSubmit = [
-            'checkbox',
-            'color',
-            'date',
-            'datetime-local',
-            'email',
-            'file',
-            'image',
-            'month',
-            'number',
-            'radio',
-            'range',
-            'reset',
-            'search',
-            'select-one',
-            'select-multiple',
-            'tel',
-            'text',
-            'time',
-            'url',
-        ];
         const keyCode = event.charCode || event.keyCode || 0;
         const activeElementType = typeof doc.activeElement.type !== 'undefined' ? doc.activeElement.type.toLowerCase() : '';
 
