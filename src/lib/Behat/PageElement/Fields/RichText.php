@@ -65,6 +65,7 @@ class RichText extends EzFieldElement
     public function openElementsToolbar(): void
     {
         $this->context->findElement($this->fields['addButton'])->click();
+        usleep(200 * 1000); // wait until the transition animations ends
         $this->context->waitUntilElementIsVisible($this->fields['toolbarButton']);
     }
 
