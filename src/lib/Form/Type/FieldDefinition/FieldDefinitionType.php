@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition;
 
 use eZ\Publish\API\Repository\FieldTypeService;
 use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
+use eZ\Publish\SPI\Repository\Strategy\ContentThumbnail\Field\ThumbnailStrategy;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\TranslatablePropertyTransformer;
 use EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
@@ -26,25 +27,23 @@ use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
  */
 class FieldDefinitionType extends AbstractType
 {
-    /**
-     * @var \EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcherInterface
-     */
+    /** @var \EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcherInterface */
     private $fieldTypeMapperDispatcher;
 
-    /**
-     * @var FieldTypeService
-     */
+    /** @var \eZ\Publish\API\Repository\FieldTypeService */
     private $fieldTypeService;
 
-    /**
-     * @var FieldsGroupsList
-     */
+    /** @var \eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList */
     private $groupsList;
 
-    public function __construct(FieldTypeDefinitionFormMapperDispatcherInterface $fieldTypeMapperDispatcher, FieldTypeService $fieldTypeService)
+    /** @var \eZ\Publish\SPI\Repository\Strategy\ContentThumbnail\Field\ThumbnailStrategy */
+    private $thumbnailStrategy;
+
+    public function __construct(FieldTypeDefinitionFormMapperDispatcherInterface $fieldTypeMapperDispatcher, FieldTypeService $fieldTypeService, ThumbnailStrategy $thumbnailStrategy)
     {
         $this->fieldTypeMapperDispatcher = $fieldTypeMapperDispatcher;
         $this->fieldTypeService = $fieldTypeService;
+        $this->thumbnailStrategy = $thumbnailStrategy;
     }
 
     public function setGroupsList(FieldsGroupsList $groupsList)
@@ -142,6 +141,12 @@ class FieldDefinitionType extends AbstractType
                 'required' => false,
                 'disabled' => !$fieldType->isSearchable() || $isTranslation,
                 'label' => /** @Desc("Searchable") */ 'field_definition.is_searchable',
+            ]);
+
+            $form->add('isThumbnail', CheckboxType::class, [
+                'required' => false,
+                'label' => 'field_definition.is_thumbnail',
+                'disabled' => $isTranslation || !$this->thumbnailStrategy->hasStrategy($fieldTypeIdentifier),
             ]);
 
             // Let fieldType mappers do their jobs to complete the form.

@@ -861,6 +861,11 @@
         <target state="new">Translatable</target>
         <note>key: field_definition.is_translatable</note>
       </trans-unit>
+      <trans-unit id="ccaba8c0c4c654da81c4520feb7ae789fbc64cca" resname="field_definition.is_thumbnail">
+        <source>Can be a thumbnail</source>
+        <target>Can be a thumbnail</target>
+        <note>key: field_definition.is_thumbnail</note>
+      </trans-unit>
       <trans-unit id="9a02e329edf4c1e41c97c8be922137c284c249c4" resname="field_definition.name">
         <source>Name</source>
         <target state="new">Name</target>

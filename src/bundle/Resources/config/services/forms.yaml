@@ -88,6 +88,7 @@ services:
     EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition\FieldDefinitionType:
         arguments:
             $fieldTypeService: "@ezpublish.api.service.field_type"
+            $thumbnailStrategy: '@eZ\Publish\Core\Repository\Strategy\ContentThumbnail\Field\ContentFieldStrategy'
         calls:
             - [setGroupsList, ["@ezpublish.fields_groups.list"]]
         tags:
