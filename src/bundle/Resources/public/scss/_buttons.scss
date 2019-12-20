@@ -19,7 +19,9 @@
     margin-top: 1rem;
 
     &:hover,
-    &:not(:disabled):not(.disabled):active {
+    &:focus,
+    &:not(:disabled):not(.disabled):active:focus {
+        box-shadow: none;
         background-color: $ez-white;
         border-color: transparent;
         color: #007DBE;
