@@ -176,9 +176,11 @@ class ContentTypeFormProcessor implements EventSubscriberInterface
         int $startIndex,
         string $fieldTypeIdentifier
     ): string {
-        $fieldDefinitionIdentifiers = array_map(function (FieldDefinition $fieldDefinition) {
-            return $fieldDefinition->identifier;
-        }, $contentTypeDraft->getFieldDefinitions());
+        $fieldDefinitionIdentifiers = $contentTypeDraft
+            ->getFieldDefinitions()
+            ->map(static function (FieldDefinition $fieldDefinition): string {
+                return $fieldDefinition->identifier;
+            });
 
         do {
             $fieldDefinitionIdentifier = sprintf('new_%s_%d', $fieldTypeIdentifier, ++$startIndex);

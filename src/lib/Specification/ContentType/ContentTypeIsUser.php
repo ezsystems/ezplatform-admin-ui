@@ -46,12 +46,6 @@ class ContentTypeIsUser extends AbstractSpecification
             return true;
         }
 
-        foreach ($contentType->getFieldDefinitions() as $fieldDefinition) {
-            if ($fieldDefinition->fieldTypeIdentifier === self::EZUSER_FIELD_TYPE_IDENTIFIER) {
-                return true;
-            }
-        }
-
-        return false;
+        return $contentType->hasFieldDefinitionOfType(self::EZUSER_FIELD_TYPE_IDENTIFIER);
     }
 }
