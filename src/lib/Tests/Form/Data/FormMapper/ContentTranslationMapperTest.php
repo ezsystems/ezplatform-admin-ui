@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Tests\Form\Data\FormMapper;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType as ApiContentType;
 use eZ\Publish\Core\Repository\Values\Content\Content;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData;
 use EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTranslationMapper;
 use PHPUnit\Framework\TestCase;
@@ -262,7 +263,7 @@ class ContentTranslationMapperTest extends TestCase
     private function getContentType(array $fieldDefs = []): ContentType
     {
         return new ContentType([
-            'fieldDefinitions' => $fieldDefs,
+            'fieldDefinitions' => new FieldDefinitionCollection($fieldDefs),
         ]);
     }
 
