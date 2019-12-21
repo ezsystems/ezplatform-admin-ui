@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Tests\ParamConverter;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\Values\Content\Section;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\SectionParamConverter;
@@ -82,7 +83,7 @@ class SectionParamConverterTest extends AbstractParamConverterTest
             ->expects($this->once())
             ->method('loadSection')
             ->with($sectionId)
-            ->willReturn(null);
+            ->willThrowException($this->createMock(NotFoundException::class));
 
         $requestAttributes = [
             SectionParamConverter::PARAMETER_SECTION_ID => $sectionId,

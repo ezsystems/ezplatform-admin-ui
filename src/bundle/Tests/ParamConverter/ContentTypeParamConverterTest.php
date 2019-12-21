@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUiBundle\Tests\ParamConverter;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\ContentTypeParamConverter;
@@ -84,7 +85,7 @@ class ContentTypeParamConverterTest extends AbstractParamConverterTest
             ->expects($this->once())
             ->method('loadContentType')
             ->with($contentTypeId)
-            ->willReturn(null);
+            ->willThrowException($this->createMock(NotFoundException::class));
 
         $requestAttributes = [
             ContentTypeParamConverter::PARAMETER_CONTENT_TYPE_ID => $contentTypeId,
@@ -143,7 +144,7 @@ class ContentTypeParamConverterTest extends AbstractParamConverterTest
             ->expects($this->once())
             ->method('loadContentTypeByIdentifier')
             ->with($contentTypeIdentifier)
-            ->willReturn(null);
+            ->willThrowException($this->createMock(NotFoundException::class));
 
         $requestAttributes = [
             ContentTypeParamConverter::PARAMETER_CONTENT_TYPE_IDENTIFIER => $contentTypeIdentifier,

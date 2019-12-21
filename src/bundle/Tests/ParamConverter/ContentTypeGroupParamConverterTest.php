@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUiBundle\Tests\ParamConverter;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\ContentTypeGroupParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -76,13 +77,17 @@ class ContentTypeGroupParamConverterTest extends AbstractParamConverterTest
         $contentTypeGroupId = 42;
 
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage(sprintf('Content Type group %s not found.', $contentTypeGroupId));
+        $this->expectExceptionMessage(
+            sprintf('Content Type group %s not found.', $contentTypeGroupId)
+        );
 
         $this->serviceMock
             ->expects($this->once())
             ->method('loadContentTypeGroup')
             ->with($contentTypeGroupId)
-            ->willReturn(null);
+            ->willThrowException(
+                $this->createMock(NotFoundException::class)
+            );
 
         $requestAttributes = [
             ContentTypeGroupParamConverter::PARAMETER_CONTENT_TYPE_GROUP_ID => $contentTypeGroupId,

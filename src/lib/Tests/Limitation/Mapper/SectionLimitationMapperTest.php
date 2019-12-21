@@ -16,6 +16,8 @@ use Psr\Log\LoggerInterface;
 
 class SectionLimitationMapperTest extends TestCase
 {
+    private const EXAMPLE_SECTION_ID = 0xFF;
+
     /** @var \PHPUnit\Framework\MockObject\MockObject|SectionService */
     private $sectionServiceMock;
 
@@ -60,7 +62,7 @@ class SectionLimitationMapperTest extends TestCase
 
     public function testMapLimitationValueWithNotExistingContentType()
     {
-        $values = ['foo'];
+        $values = [self::EXAMPLE_SECTION_ID];
 
         $this->sectionServiceMock
             ->expects($this->once())
@@ -71,7 +73,7 @@ class SectionLimitationMapperTest extends TestCase
         $this->logger
             ->expects($this->once())
             ->method('error')
-            ->with('Could not map the Limitation value: could not find a Section with ID foo');
+            ->with('Could not map the Limitation value: could not find a Section with ID ' . $values[0]);
 
         $actual = $this->mapper->mapLimitationValue(new SectionLimitation([
             'limitationValues' => $values,

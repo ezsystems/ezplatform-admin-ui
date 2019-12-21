@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Tests\ParamConverter;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\Core\Repository\Values\User\Policy as UserPolicy;
@@ -100,7 +101,7 @@ class PolicyParamConverterTest extends AbstractParamConverterTest
             ->expects($this->once())
             ->method('loadRole')
             ->with($roleId)
-            ->willReturn(null);
+            ->willThrowException($this->createMock(NotFoundException::class));
 
         $requestAttributes = [
             PolicyParamConverter::PARAMETER_ROLE_ID => $roleId,

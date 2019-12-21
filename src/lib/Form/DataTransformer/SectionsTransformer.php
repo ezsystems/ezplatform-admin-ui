@@ -68,7 +68,9 @@ class SectionsTransformer implements DataTransformerInterface
         $value = explode(',', $value);
 
         try {
-            return array_map([$this->sectionService, 'loadSection'], $value);
+            return array_map(function (string $id) {
+                return $this->sectionService->loadSection((int)$id);
+            }, $value);
         } catch (NotFoundException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }

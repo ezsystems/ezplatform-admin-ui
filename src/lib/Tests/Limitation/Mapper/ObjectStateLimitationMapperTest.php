@@ -17,6 +17,10 @@ use Psr\Log\LoggerInterface;
 
 class ObjectStateLimitationMapperTest extends TestCase
 {
+    private const EXAMPLE_OBJECT_STATE_ID_A = 1;
+    private const EXAMPLE_OBJECT_STATE_ID_B = 2;
+    private const EXAMPLE_OBJECT_STATE_ID_C = 3;
+
     /** @var ObjectStateService|\PHPUnit\Framework\MockObject\MockObject */
     private $objectStateService;
 
@@ -37,16 +41,24 @@ class ObjectStateLimitationMapperTest extends TestCase
 
     public function testMapLimitationValue()
     {
-        $values = ['foo', 'bar', 'baz'];
+        $values = [
+            self::EXAMPLE_OBJECT_STATE_ID_A,
+            self::EXAMPLE_OBJECT_STATE_ID_B,
+            self::EXAMPLE_OBJECT_STATE_ID_C,
+        ];
+
+        $expected = [
+            $this->createStateMock('foo'),
+            $this->createStateMock('bar'),
+            $this->createStateMock('baz'),
+        ];
 
         foreach ($values as $i => $value) {
-            $stateMock = $this->createStateMock($value);
-
             $this->objectStateService
                 ->expects($this->at($i))
                 ->method('loadObjectState')
                 ->with($value)
-                ->willReturn($stateMock);
+                ->willReturn($expected[$i]);
         }
 
         $result = $this->mapper->mapLimitationValue(new ObjectStateLimitation([
@@ -60,21 +72,19 @@ class ObjectStateLimitationMapperTest extends TestCase
 
     public function testMapLimitationValueWithNotExistingObjectState()
     {
-        $values = ['foo'];
-
         $this->objectStateService
             ->expects($this->once())
             ->method('loadObjectState')
-            ->with($values[0])
+            ->with(self::EXAMPLE_OBJECT_STATE_ID_A)
             ->willThrowException($this->createMock(NotFoundException::class));
 
         $this->logger
             ->expects($this->once())
             ->method('error')
-            ->with('Could not map the Limitation value: could not find an Object state with ID foo');
+            ->with('Could not map the Limitation value: could not find an Object state with ID ' . self::EXAMPLE_OBJECT_STATE_ID_A);
 
         $actual = $this->mapper->mapLimitationValue(new ObjectStateLimitation([
-            'limitationValues' => $values,
+            'limitationValues' => [self::EXAMPLE_OBJECT_STATE_ID_A],
         ]));
 
         $this->assertEmpty($actual);

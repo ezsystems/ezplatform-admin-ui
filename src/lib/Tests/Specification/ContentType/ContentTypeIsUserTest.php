@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\Specification\ContentType;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\API\Repository\Values\ContentType\ContentType as APIContentType;
+use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use PHPUnit\Framework\TestCase;
@@ -49,10 +49,9 @@ class ContentTypeIsUserTest extends TestCase
     {
         $specification = new ContentTypeIsUser([]);
 
-        $contentTypeWithEzUserField = $this->createContentType('ezuser', [
-            $this->createFieldDefinition('ezstring'),
-            $this->createFieldDefinition('ezuser'),
-        ]);
+        $contentTypeWithEzUserField = $this->createContentType(
+            'ezuser', ['ezstring', 'ezuser']
+        );
 
         $this->assertTrue($specification->isSatisfiedBy($contentTypeWithEzUserField));
     }
@@ -66,42 +65,20 @@ class ContentTypeIsUserTest extends TestCase
             'content_type_a', 'content_type_b', 'content_type_c',
         ]);
 
-        $articleContentType = $this->createContentType('article', [
-            $this->createFieldDefinition('ezstring'),
-            $this->createFieldDefinition('ezrichtext'),
-        ]);
+        $articleContentType = $this->createContentType('article', ['ezstring', 'ezrichtext']);
 
         $this->assertFalse($specification->isSatisfiedBy($articleContentType));
-    }
-
-    /**
-     * Creates Field Definition mock with given field type identifier.
-     *
-     * @param string $fieldTypeIdentifier
-     *
-     * @return \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition
-     */
-    private function createFieldDefinition(string $fieldTypeIdentifier): FieldDefinition
-    {
-        $fieldDefinition = $this->createMock(FieldDefinition::class);
-        $fieldDefinition
-            ->method('__get')
-            ->willReturnMap([
-                ['fieldTypeIdentifier', $fieldTypeIdentifier],
-            ]);
-
-        return $fieldDefinition;
     }
 
     /**
      * Creates Content Type mock with given identifier and field definitions.
      *
      * @param string $identifier
-     * @param array $fields
+     * @param array $fieldsType
      *
      * @return \eZ\Publish\API\Repository\Values\ContentType\ContentType
      */
-    private function createContentType(string $identifier, array $fields = []): ContentType
+    private function createContentType(string $identifier, array $fieldsType = []): APIContentType
     {
         $contentType = $this->createMock(ContentType::class);
         $contentType
@@ -111,8 +88,10 @@ class ContentTypeIsUserTest extends TestCase
             ]);
 
         $contentType
-            ->method('getFieldDefinitions')
-            ->willReturn($fields);
+            ->method('hasFieldDefinitionOfType')
+            ->willReturnCallback(function (string $fieldTypeIdentifier) use ($fieldsType) {
+                return in_array($fieldTypeIdentifier, $fieldsType);
+            });
 
         return $contentType;
     }

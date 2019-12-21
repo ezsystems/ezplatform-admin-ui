@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -50,15 +51,15 @@ class ContentTypeParamConverter implements ParamConverterInterface
 
         $prioritizedLanguages = $this->languagePreferenceProvider->getPreferredLanguages();
 
-        if ($request->get(self::PARAMETER_CONTENT_TYPE_ID)) {
-            $id = (int)$request->get(self::PARAMETER_CONTENT_TYPE_ID);
-            $contentType = $this->contentTypeService->loadContentType($id, $prioritizedLanguages);
-        } elseif ($request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER)) {
-            $identifier = $request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER);
-            $contentType = $this->contentTypeService->loadContentTypeByIdentifier($identifier, $prioritizedLanguages);
-        }
-
-        if (!$contentType) {
+        try {
+            if ($request->get(self::PARAMETER_CONTENT_TYPE_ID)) {
+                $id = (int)$request->get(self::PARAMETER_CONTENT_TYPE_ID);
+                $contentType = $this->contentTypeService->loadContentType($id, $prioritizedLanguages);
+            } elseif ($request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER)) {
+                $identifier = $request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER);
+                $contentType = $this->contentTypeService->loadContentTypeByIdentifier($identifier, $prioritizedLanguages);
+            }
+        } catch (NotFoundException $e) {
             throw new NotFoundHttpException('Content Type ' . ($id ?? $identifier) . ' not found.');
         }
 
