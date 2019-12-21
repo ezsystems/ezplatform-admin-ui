@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\Values\Content\Section;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -45,9 +46,9 @@ class SectionParamConverter implements ParamConverterInterface
 
         $id = (int)$request->get(self::PARAMETER_SECTION_ID);
 
-        $section = $this->sectionService->loadSection($id);
-
-        if (!$section) {
+        try {
+            $section = $this->sectionService->loadSection($id);
+        } catch (NotFoundException $e) {
             throw new NotFoundHttpException("Section $id not found.");
         }
 
