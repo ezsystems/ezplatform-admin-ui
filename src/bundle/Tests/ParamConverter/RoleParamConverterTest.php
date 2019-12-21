@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Tests\ParamConverter;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Role;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\RoleParamConverter;
@@ -82,7 +83,7 @@ class RoleParamConverterTest extends AbstractParamConverterTest
             ->expects($this->once())
             ->method('loadRole')
             ->with($roleId)
-            ->willReturn(null);
+            ->willThrowException($this->createMock(NotFoundException::class));
 
         $requestAttributes = [
             RoleParamConverter::PARAMETER_ROLE_ID => $roleId,
