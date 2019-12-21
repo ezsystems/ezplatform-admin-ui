@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
@@ -43,8 +44,9 @@ class ContentTypeGroupParamConverter implements ParamConverterInterface
 
         $id = (int)$request->get(self::PARAMETER_CONTENT_TYPE_GROUP_ID);
 
-        $group = $this->contentTypeService->loadContentTypeGroup($id);
-        if (!$group) {
+        try {
+            $group = $this->contentTypeService->loadContentTypeGroup($id);
+        } catch (NotFoundException $e) {
             throw new NotFoundHttpException("Content Type group $id not found.");
         }
 
