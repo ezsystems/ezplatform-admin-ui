@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -41,8 +42,9 @@ class RoleAssignmentParamConverter implements ParamConverterInterface
 
         $roleAssigmentId = (int)$request->get(self::PRAMETER_ROLE_ASSIGNMENT_ID);
 
-        $roleAssigment = $this->roleService->loadRoleAssignment($roleAssigmentId);
-        if (!$roleAssigment) {
+        try {
+            $roleAssigment = $this->roleService->loadRoleAssignment($roleAssigmentId);
+        } catch (NotFoundException $e) {
             throw new NotFoundHttpException("Role assignment $roleAssigmentId not found.");
         }
 
