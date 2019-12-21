@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Tests\Limitation\Mapper;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\User\Limitation\LanguageLimitation;
 use EzSystems\EzPlatformAdminUi\Limitation\Mapper\LanguageLimitationMapper;
 use PHPUnit\Framework\TestCase;
@@ -37,19 +38,25 @@ class LanguageTypeLimitationMapperTest extends TestCase
     {
         $values = ['en_GB', 'en_US', 'pl_PL'];
 
+        $expected = [
+            $this->createMock(Language::class),
+            $this->createMock(Language::class),
+            $this->createMock(Language::class),
+        ];
+
         foreach ($values as $i => $value) {
             $this->languageService
                 ->expects($this->at($i))
                 ->method('loadLanguage')
                 ->with($value)
-                ->willReturnArgument(0);
+                ->willReturn($expected[$i]);
         }
 
         $result = $this->mapper->mapLimitationValue(new LanguageLimitation([
             'limitationValues' => $values,
         ]));
 
-        $this->assertEquals($values, $result);
+        $this->assertEquals($expected, $result);
     }
 
     public function testMapLimitationValueWithNotExistingContentType()
