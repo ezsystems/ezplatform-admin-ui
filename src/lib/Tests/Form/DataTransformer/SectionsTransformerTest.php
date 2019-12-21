@@ -38,8 +38,8 @@ class SectionsTransformerTest extends TestCase
         $service->expects(self::exactly(2))
             ->method('loadSection')
             ->willReturnMap([
-                ['123456', new APISection(['id' => 123456])],
-                ['456789', new APISection(['id' => 456789])],
+                [123456, new APISection(['id' => 123456])],
+                [456789, new APISection(['id' => 456789])],
             ]);
 
         $transformer = new SectionsTransformer($service);
