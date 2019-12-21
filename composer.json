@@ -12,8 +12,6 @@
     "autoload-dev": {
         "psr-4": { "EzSystems\\EzPlatformAdminUi\\Tests\\": "src/lib/Tests" }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
         "php": "^7.3",
         "symfony/http-foundation": "^4.3",
@@ -47,6 +45,7 @@
     },
     "require-dev": {
         "behat/behat": "^3.5",
+        "ezsystems/doctrine-dbal-schema": "^1.0@dev",
         "friendsofphp/php-cs-fixer": "^2.16.0",
         "phpunit/phpunit": "^8.1",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
