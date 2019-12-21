@@ -12,6 +12,7 @@ use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use EzSystems\EzPlatformAdminUi\Event\FormEvents;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
@@ -25,6 +26,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ContentTypeFormProcessorTest extends TestCase
 {
+    private const EXAMPLE_CONTENT_TYPE_ID = 1;
+
     /**
      * @var \eZ\Publish\API\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
      */
@@ -99,7 +102,7 @@ class ContentTypeFormProcessorTest extends TestCase
     {
         $fieldTypeIdentifier = 'ezstring';
         $languageCode = 'fre-FR';
-        $existingFieldDefinitions = [
+        $existingFieldDefinitions = new FieldDefinitionCollection([
             new FieldDefinition([
                 'fieldTypeIdentifier' => $fieldTypeIdentifier,
                 'identifier' => sprintf('new_%s_%d', $fieldTypeIdentifier, 1),
@@ -108,9 +111,10 @@ class ContentTypeFormProcessorTest extends TestCase
                 'fieldTypeIdentifier' => $fieldTypeIdentifier,
                 'identifier' => sprintf('new_%s_%d', $fieldTypeIdentifier, 2),
             ]),
-        ];
+        ]);
         $contentTypeDraft = new ContentTypeDraft([
             'innerContentType' => new ContentType([
+                'id' => self::EXAMPLE_CONTENT_TYPE_ID,
                 'fieldDefinitions' => $existingFieldDefinitions,
                 'mainLanguageCode' => $languageCode,
             ]),
@@ -171,6 +175,7 @@ class ContentTypeFormProcessorTest extends TestCase
             'addFieldDefinition',
             ['languageCode' => $languageCode]
         );
+
         $this->formProcessor->processAddFieldDefinition($event);
     }
 
