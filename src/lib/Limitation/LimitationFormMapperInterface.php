@@ -44,3 +44,8 @@ interface LimitationFormMapperInterface
      */
     public function filterLimitationValues(Limitation $limitation);
 }
+
+class_alias(
+    LimitationFormMapperInterface::class,
+    \EzSystems\RepositoryForms\Limitation\LimitationFormMapperInterface::class
+);

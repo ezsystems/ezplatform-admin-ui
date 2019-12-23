@@ -36,3 +36,8 @@ class FieldDefinitionData extends FieldDefinitionUpdateStruct
         return $this->fieldDefinition->fieldTypeIdentifier;
     }
 }
+
+class_alias(
+    FieldDefinitionData::class,
+    \EzSystems\RepositoryForms\Data\FieldDefinitionData::class
+);
