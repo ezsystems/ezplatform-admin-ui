@@ -12,6 +12,7 @@ use eZ\Publish\API\Repository\BookmarkService;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -30,8 +31,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UniversalDiscoveryController extends Controller
 {
+    private const ROOT_LOCATION_ID = 1;
+
     private const SORT_CLAUSE_DATE_PUBLISHED = 'DatePublished';
     private const SORT_CLAUSE_CONTENT_NAME = 'ContentName';
+
+    /** @var \eZ\Publish\API\Repository\Repository */
+    private $repository;
 
     /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
@@ -68,6 +74,7 @@ class UniversalDiscoveryController extends Controller
     ];
 
     public function __construct(
+        Repository $repository,
         LocationService $locationService,
         ContentTypeService $contentTypeService,
         SearchService $searchService,
@@ -77,6 +84,7 @@ class UniversalDiscoveryController extends Controller
         PermissionCheckerInterface $permissionChecker,
         LookupLimitationsTransformer $lookupLimitationsTransformer
     ) {
+        $this->repository = $repository;
         $this->searchService = $searchService;
         $this->contentTypeService = $contentTypeService;
         $this->locationService = $locationService;
@@ -89,8 +97,10 @@ class UniversalDiscoveryController extends Controller
 
     public function locationAction(
         Request $request,
-        Location $location
+        int $locationId
     ): JsonResponse {
+        $location = $this->loadLocation($locationId);
+
         $offset = $request->query->getInt('offset', 0);
         $limit = $request->query->getInt('limit', 25);
         $sortClauseName = $request->query->getAlpha('sortClause', self::SORT_CLAUSE_DATE_PUBLISHED);
@@ -105,8 +115,10 @@ class UniversalDiscoveryController extends Controller
 
     public function locationGridViewAction(
         Request $request,
-        Location $location
+        int $locationId
     ): JsonResponse {
+        $location = $this->loadLocation($locationId);
+
         $offset = $request->query->getInt('offset', 0);
         $limit = $request->query->getInt('limit', 25);
         $sortClauseName = $request->query->getAlpha('sortClause', self::SORT_CLAUSE_DATE_PUBLISHED);
@@ -121,8 +133,10 @@ class UniversalDiscoveryController extends Controller
 
     public function accordionAction(
         Request $request,
-        Location $location
+        int $locationId
     ): JsonResponse {
+        $location = $this->loadLocation($locationId);
+
         $limit = $request->query->getInt('limit', 25);
         $sortClauseName = $request->query->getAlpha('sortClause', self::SORT_CLAUSE_DATE_PUBLISHED);
         $sortOrder = $request->query->getAlpha('sortOrder', Query::SORT_ASC);
@@ -145,8 +159,10 @@ class UniversalDiscoveryController extends Controller
 
     public function accordionGridViewAction(
         Request $request,
-        Location $location
+        int $locationId
     ): JsonResponse {
+        $location = $this->loadLocation($locationId);
+
         $limit = $request->query->getInt('limit', 25);
         $sortClauseName = $request->query->getAlpha('sortClause', self::SORT_CLAUSE_DATE_PUBLISHED);
         $sortOrder = $request->query->getAlpha('sortOrder', Query::SORT_ASC);
@@ -374,5 +390,16 @@ class UniversalDiscoveryController extends Controller
                 'creatorId' => $contentInfo->ownerId,
             ]),
         ]);
+    }
+
+    private function loadLocation(int $locationId): Location
+    {
+        if ($locationId === self::ROOT_LOCATION_ID) {
+            return $this->repository->sudo(function (Repository $repository) use ($locationId) {
+                return $repository->getLocationService()->loadLocation($locationId);
+            });
+        }
+
+        return $this->locationService->loadLocation($locationId);
     }
 }
