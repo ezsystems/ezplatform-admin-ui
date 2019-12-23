@@ -53,7 +53,6 @@ class ContentCreateTest extends TestCase
 
         $addedConfig = [
             'content_on_the_fly' => [
-                'allowed_content_types' => [self::ALLOWED_CONTENT_TYPE_IDENTIFIER],
                 'allowed_languages' => [self::ALLOWED_LANGUAGE_CODE],
             ],
         ];
@@ -83,11 +82,17 @@ class ContentCreateTest extends TestCase
             'all_tabs' => [
                 [
                     'visible_tabs' => [],
+                    'allowed_content_types' => [
+                        self::ALLOWED_CONTENT_TYPE_IDENTIFIER,
+                    ],
                 ],
             ],
             'explicit_create_tab' => [
                 [
                     'visible_tabs' => ['tab', 'create'],
+                    'allowed_content_types' => [
+                        self::ALLOWED_CONTENT_TYPE_IDENTIFIER,
+                    ],
                 ],
             ],
         ];
@@ -99,11 +104,23 @@ class ContentCreateTest extends TestCase
             'one_tab' => [
                 [
                     'visible_tabs' => ['tab'],
+                    'content_on_the_fly' => [
+                        'allowed_languages' => [self::ALLOWED_LANGUAGE_CODE],
+                    ],
+                    'allowed_content_types' => [
+                        self::ALLOWED_CONTENT_TYPE_IDENTIFIER,
+                    ],
                 ],
             ],
             'many_tabs' => [
                 [
                     'visible_tabs' => ['tab', 'other_tab'],
+                    'content_on_the_fly' => [
+                        'allowed_languages' => [self::ALLOWED_LANGUAGE_CODE],
+                    ],
+                    'allowed_content_types' => [
+                        self::ALLOWED_CONTENT_TYPE_IDENTIFIER,
+                    ],
                 ],
             ],
         ];

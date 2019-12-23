@@ -67,12 +67,8 @@ final class ContentTypeIconResolver
             $config = $this->configResolver->getParameter($parameterName);
         }
 
-        if (empty($config) && $this->configResolver->hasParameter($defaultParameterName)) {
+        if ((empty($config) || empty($config[self::ICON_KEY])) && $this->configResolver->hasParameter($defaultParameterName)) {
             $config = $this->configResolver->getParameter($defaultParameterName);
-        }
-
-        if (empty($config[self::ICON_KEY])) {
-            throw new ContentTypeIconNotFoundException($identifier);
         }
 
         return $config[self::ICON_KEY];
