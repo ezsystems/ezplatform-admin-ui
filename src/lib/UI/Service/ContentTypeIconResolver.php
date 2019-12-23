@@ -71,7 +71,7 @@ final class ContentTypeIconResolver
             $config = $this->configResolver->getParameter($defaultParameterName);
         }
 
-        return $config[self::ICON_KEY];
+        return $config[self::ICON_KEY] ?? '';
     }
 
     /**
