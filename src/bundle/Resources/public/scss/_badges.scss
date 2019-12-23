@@ -1,0 +1,13 @@
+.ez-badge {
+    padding: calculateRem(4px);
+    font-weight: 400;
+
+    &--small {
+        font-size: calculateRem(12px);
+    }
+    
+    &--big {
+        font-size: calculateRem(13px);
+        font-weight: 700;
+    }
+}
