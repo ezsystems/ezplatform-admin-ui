@@ -11,13 +11,18 @@
         color: $ez-color-warning-dark;
     }
 
+    &__hyperlink,
+    &__hyperlink:hover {
+        color: #0005a6;
+    }
+
     &__image {
         background: url('/bundles/ezplatformadminui/img/login-background.jpg');
         background-size: cover;
     }
 
     &__form {
-        background: #ff7b1e;
+        background: linear-gradient(135deg, #007dbe 0%, #0097d1 100%);
         display: flex;
         justify-content: center;
         align-items: center;
