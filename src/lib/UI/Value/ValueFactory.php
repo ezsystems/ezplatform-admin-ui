@@ -163,15 +163,8 @@ class ValueFactory
     {
         $contentType = $content->getContentType();
 
-        $relationFieldDefinitionName = '';
-        if ($relation->sourceFieldDefinitionIdentifier !== null) {
-            $relationFieldDefinitionName = $contentType->getFieldDefinition(
-                $relation->sourceFieldDefinitionIdentifier
-            )->getName();
-        }
-
         return new UIValue\Content\Relation($relation, [
-            'relationFieldDefinitionName' => $relationFieldDefinitionName,
+            'relationFieldDefinitionName' => $this->getRelationFieldDefinitionName($relation, $contentType),
             'relationContentTypeName' => $contentType->getName(),
             'relationLocation' => $this->locationService->loadLocation($content->contentInfo->mainLocationId),
             'relationName' => $content->getName(),
@@ -192,15 +185,8 @@ class ValueFactory
         $contentType = $content->getContentType();
         $relation = $relationListItem->getRelation();
 
-        $relationFieldDefinitionName = '';
-        if ($relation->sourceFieldDefinitionIdentifier !== null) {
-            $relationFieldDefinitionName = $contentType->getFieldDefinition(
-                $relation->sourceFieldDefinitionIdentifier
-            )->getName();
-        }
-
         return new UIValue\Content\Relation($relation, [
-            'relationFieldDefinitionName' => $relationFieldDefinitionName,
+            'relationFieldDefinitionName' => $this->getRelationFieldDefinitionName($relation, $contentType),
             'relationContentTypeName' => $contentType->getName(),
             'relationLocation' => $this->locationService->loadLocation($content->contentInfo->mainLocationId),
             'relationName' => $content->getName(),
@@ -372,5 +358,20 @@ class ValueFactory
         UnauthorizedContentDraftListItem $contentDraftListItem
     ): UIValue\Content\ContentDraftInterface {
         return new UIValue\Content\UnauthorizedContentDraft($contentDraftListItem);
+    }
+
+    private function getRelationFieldDefinitionName(?Relation $relation, ContentType $contentType): string
+    {
+        if ($relation !== null && $relation->sourceFieldDefinitionIdentifier !== null) {
+            $fieldDefinition = $contentType->getFieldDefinition(
+                $relation->sourceFieldDefinitionIdentifier
+            );
+
+            if ($fieldDefinition !== null) {
+                return $fieldDefinition->getName();
+            }
+        }
+
+        return '';
     }
 }
