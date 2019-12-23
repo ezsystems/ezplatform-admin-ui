@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UI\Service;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\Exception\ContentTypeIconNotFoundException;
 use Symfony\Component\Asset\Packages;
 
 final class ContentTypeIconResolver
