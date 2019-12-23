@@ -263,6 +263,7 @@ class UniversalDiscoveryController extends Controller
             function (SearchHit $searchHit) {
                 /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
                 $content = $searchHit->valueObject;
+
                 return $this->getRestFormat(
                     new Version($content, $content->getContentType(), [])
                 );
@@ -371,8 +372,7 @@ class UniversalDiscoveryController extends Controller
                 'modificationDate' => $contentInfo->modificationDate,
                 'creationDate' => $contentInfo->modificationDate,
                 'creatorId' => $contentInfo->ownerId,
-            ])
+            ]),
         ]);
     }
 }
-

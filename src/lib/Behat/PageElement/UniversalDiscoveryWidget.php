@@ -49,7 +49,7 @@ class UniversalDiscoveryWidget extends Element
 
         foreach ($pathParts as $itemName) {
             $this->selectTreeBranch($itemName, $level);
-            $level++;
+            ++$level;
         }
 
         $itemName = $pathParts[count($pathParts) - 1];
@@ -102,9 +102,9 @@ class UniversalDiscoveryWidget extends Element
     {
         try {
             $this->context->findElement($this->fields['multiSelectAddButon'], self::SHORT_TIMEOUT);
+
             return true;
-        }
-        catch (ElementNotFoundException $e) {
+        } catch (ElementNotFoundException $e) {
             return false;
         }
     }
