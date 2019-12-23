@@ -162,10 +162,16 @@ class ValueFactory
     public function createRelation(Relation $relation, Content $content): UIValue\Content\Relation
     {
         $contentType = $content->getContentType();
-        $fieldDefinition = $contentType->getFieldDefinition($relation->sourceFieldDefinitionIdentifier);
+
+        $relationFieldDefinitionName = '';
+        if ($relation->sourceFieldDefinitionIdentifier !== null) {
+            $relationFieldDefinitionName = $contentType->getFieldDefinition(
+                $relation->sourceFieldDefinitionIdentifier
+            )->getName();
+        }
 
         return new UIValue\Content\Relation($relation, [
-            'relationFieldDefinitionName' => $fieldDefinition ? $fieldDefinition->getName() : '',
+            'relationFieldDefinitionName' => $relationFieldDefinitionName,
             'relationContentTypeName' => $contentType->getName(),
             'relationLocation' => $this->locationService->loadLocation($content->contentInfo->mainLocationId),
             'relationName' => $content->getName(),
@@ -185,10 +191,16 @@ class ValueFactory
     {
         $contentType = $content->getContentType();
         $relation = $relationListItem->getRelation();
-        $fieldDefinition = $contentType->getFieldDefinition($relation->sourceFieldDefinitionIdentifier);
+
+        $relationFieldDefinitionName = '';
+        if ($relation->sourceFieldDefinitionIdentifier !== null) {
+            $relationFieldDefinitionName = $contentType->getFieldDefinition(
+                $relation->sourceFieldDefinitionIdentifier
+            )->getName();
+        }
 
         return new UIValue\Content\Relation($relation, [
-            'relationFieldDefinitionName' => $fieldDefinition ? $fieldDefinition->getName() : '',
+            'relationFieldDefinitionName' => $relationFieldDefinitionName,
             'relationContentTypeName' => $contentType->getName(),
             'relationLocation' => $this->locationService->loadLocation($content->contentInfo->mainLocationId),
             'relationName' => $content->getName(),
