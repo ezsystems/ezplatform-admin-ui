@@ -1,4 +1,26 @@
 (function(global, doc, eZ) {
+    const enterKeyCode = 13;
+    const inputTypeToPreventSubmit = [
+        'checkbox',
+        'color',
+        'date',
+        'datetime-local',
+        'email',
+        'file',
+        'image',
+        'month',
+        'number',
+        'radio',
+        'range',
+        'reset',
+        'search',
+        'select-one',
+        'select-multiple',
+        'tel',
+        'text',
+        'time',
+        'url',
+    ];
     const form = doc.querySelector('.ez-form-validate');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
     const getValidationResults = (validator) => {
@@ -38,11 +60,13 @@
             window.setTimeout(() => btn.click(), 0);
         } else {
             btn.dataset.validatorsWithErrors = Array.from(
-                validationResults.filter((result) => !result.isValid).reduce((total, result) => {
-                    total.add(result.validatorName);
+                validationResults
+                    .filter((result) => !result.isValid)
+                    .reduce((total, result) => {
+                        total.add(result.validatorName);
 
-                    return total;
-                }, new Set())
+                        return total;
+                    }, new Set())
             ).join();
 
             fields.forEach((field) => field.removeAttribute('id'));
@@ -52,6 +76,14 @@
     };
 
     form.setAttribute('novalidate', true);
+    form.onkeypress = (event) => {
+        const keyCode = event.charCode || event.keyCode || 0;
+        const activeElementType = typeof doc.activeElement.type !== 'undefined' ? doc.activeElement.type.toLowerCase() : '';
+
+        if (keyCode === enterKeyCode && inputTypeToPreventSubmit.includes(activeElementType)) {
+            event.preventDefault();
+        }
+    };
 
     submitBtns.forEach((btn) => {
         btn.dataset.isFormValid = 0;
