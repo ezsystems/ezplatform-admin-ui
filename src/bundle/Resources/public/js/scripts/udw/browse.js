@@ -1,8 +1,6 @@
 (function(global, doc, eZ, React, ReactDOM, Translator, Routing) {
     const btns = doc.querySelectorAll('.btn--udw-browse');
     const udwContainer = doc.getElementById('react-udw');
-    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (items) => {
         closeUDW();
@@ -22,8 +20,6 @@
                 onCancel,
                 title,
                 multiple: false,
-                startingLocationId: parseInt(event.currentTarget.dataset.startingLocationId, 10),
-                restInfo: { token, siteaccess },
                 ...config,
             }),
             udwContainer

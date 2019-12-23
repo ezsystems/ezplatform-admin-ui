@@ -752,13 +752,33 @@ ezplatform.object_state.contentstate.update:
 # Universal Discovery Widget
 #
 
-ezplatform.udw.preselected_location.data:
-    path: /udw/preselected-location/data/{startingLocationId}/{locationId}/{limit}
+ezplatform.udw.location.data:
+    path: /module/universal-discovery/location/{locationId}
     options:
         expose: true
     defaults:
-        limit: 50
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController::preselectedLocationDataAction'
+        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:location'
+
+ezplatform.udw.location_gridview.data:
+    path: /module/universal-discovery/location/{locationId}/gridview
+    options:
+        expose: true
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:locationGridView'
+
+ezplatform.udw.accordion.data:
+    path: /module/universal-discovery/accordion/{locationId}
+    options:
+        expose: true
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:accordion'
+
+ezplatform.udw.accordion_gridview.data:
+    path: /module/universal-discovery/accordion/{locationId}/gridview
+    options:
+        expose: true
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:accordionGridView'
 
 #
 # Bookmark manager

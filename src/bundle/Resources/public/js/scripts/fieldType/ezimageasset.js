@@ -4,7 +4,6 @@
     const SELECTOR_INPUT_DESTINATION_CONTENT_ID = '.ez-data-source__destination-content-id';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const showErrorNotification = eZ.helpers.notification.showErrorNotification;
     const showSuccessNotification = eZ.helpers.notification.showSuccessNotification;
     const getJsonFromResponse = eZ.helpers.request.getJsonFromResponse;
@@ -155,20 +154,13 @@
                 closeUDW();
                 this.loadAsset(items[0]);
             };
-            const canSelectContent = ({ item }, callback) => {
-                const itemContentType = item.ContentInfo.Content.ContentTypeInfo.identifier;
-                const isAllowedContentType = itemContentType === imageAssetMapping['contentTypeIdentifier'];
-
-                callback(isAllowedContentType);
-            };
 
             ReactDOM.render(
                 React.createElement(eZ.modules.UniversalDiscovery, {
                     onConfirm,
                     onCancel,
-                    canSelectContent,
                     title,
-                    restInfo: { token, siteaccess },
+                    allowedContentTypes: [imageAssetMapping['contentTypeIdentifier']],
                     ...config,
                 }),
                 udwContainer

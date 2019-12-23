@@ -3,8 +3,6 @@
     const form = doc.querySelector('form[name="location_swap"]');
     const input = form.querySelector('#location_swap_new_location');
     const udwContainer = doc.getElementById('react-udw');
-    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (items) => {
         closeUDW();
@@ -25,8 +23,6 @@
                 onCancel,
                 title,
                 multiple: false,
-                startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-                restInfo: { token, siteaccess },
                 ...config,
             }),
             udwContainer

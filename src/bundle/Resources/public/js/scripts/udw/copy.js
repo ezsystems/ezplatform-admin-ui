@@ -3,8 +3,6 @@
     const form = doc.querySelector('form[name="location_copy"]');
     const input = form.querySelector('#location_copy_new_parent_location');
     const udwContainer = doc.getElementById('react-udw');
-    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (items) => {
         closeUDW();
@@ -25,9 +23,7 @@
                 onCancel,
                 title,
                 multiple: false,
-                startingLocationId: parseInt(event.currentTarget.dataset.rootLocation, 10),
-                restInfo: { token, siteaccess },
-                allowContainersOnly: true,
+                containersOnly: true,
                 ...config,
             }),
             udwContainer

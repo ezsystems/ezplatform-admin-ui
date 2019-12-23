@@ -1,8 +1,6 @@
 (function(global, doc, eZ, React, ReactDOM, Translator) {
     const btns = doc.querySelectorAll('.btn--open-udw');
     const udwContainer = doc.getElementById('react-udw');
-    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
-    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (form, content) => {
         const field = form.querySelector('#trash_item_restore_location_location');
@@ -29,9 +27,7 @@
                 onConfirm: onConfirm.bind(this, form),
                 onCancel,
                 title,
-                startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-                allowContainersOnly: true,
-                restInfo: { token, siteaccess },
+                containersOnly: true,
                 multiple: false,
                 ...config,
             }),

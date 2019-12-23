@@ -64,8 +64,6 @@
             ],
         });
         const udwContainer = doc.getElementById('react-udw');
-        const token = doc.querySelector('meta[name="CSRF-Token"]').content;
-        const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
         const sourceInput = fieldContainer.querySelector(SELECTOR_INPUT);
         const relationsContainer = fieldContainer.querySelector('.ez-relations__list');
         const relationsWrapper = fieldContainer.querySelector('.ez-relations__wrapper');
@@ -75,9 +73,7 @@
         const isSingle = fieldContainer.classList.contains(CLASS_FIELD_SINGLE);
         const selectedItemsLimit = isSingle ? 1 : parseInt(relationsContainer.dataset.limit, 10);
         const startingLocationId =
-            relationsContainer.dataset.defaultLocation !== '0'
-                ? parseInt(relationsContainer.dataset.defaultLocation, 10)
-                : eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId;
+            relationsContainer.dataset.defaultLocation !== '0' ? parseInt(relationsContainer.dataset.defaultLocation, 10) : null;
         const allowedContentTypes = relationsContainer.dataset.allowedContentTypes.split(',').filter((item) => item.length);
         const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
         const renderRows = (items) => items.forEach((...args) => relationsContainer.insertAdjacentHTML('beforeend', renderRow(...args)));
@@ -129,9 +125,8 @@
                     onCancel: closeUDW,
                     title,
                     multiple: isSingle ? false : selectedItemsLimit !== 1,
-                    selectedItemsLimit,
+                    multipleItemsLimit: selectedItemsLimit,
                     startingLocationId,
-                    restInfo: { token, siteaccess },
                     canSelectContent,
                     ...config,
                 }),

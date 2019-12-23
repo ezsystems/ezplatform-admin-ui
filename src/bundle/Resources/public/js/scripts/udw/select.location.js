@@ -107,8 +107,6 @@
                 onCancel,
                 title: event.currentTarget.dataset.universalDiscoveryTitle,
                 multiple: false,
-                startingLocationId: eZ.adminUiConfig.universalDiscoveryWidget.startingLocationId,
-                restInfo: { token, siteaccess },
                 ...config,
             }),
             udwContainer
