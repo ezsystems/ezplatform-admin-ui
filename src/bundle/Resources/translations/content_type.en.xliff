@@ -856,15 +856,15 @@
         <target state="new">Searchable</target>
         <note>key: field_definition.is_searchable</note>
       </trans-unit>
+      <trans-unit id="84eed8c69d2ed1727569c36cda88c9781d37dd92" resname="field_definition.is_thumbnail">
+        <source>Can be a thumbnail</source>
+        <target>Can be a thumbnail</target>
+        <note>key: field_definition.is_thumbnail</note>
+      </trans-unit>
       <trans-unit id="83aba8c0c4c654d481c4520feb76e789fbc64c22" resname="field_definition.is_translatable">
         <source>Translatable</source>
         <target state="new">Translatable</target>
         <note>key: field_definition.is_translatable</note>
-      </trans-unit>
-      <trans-unit id="ccaba8c0c4c654da81c4520feb7ae789fbc64cca" resname="field_definition.is_thumbnail">
-        <source>Can be a thumbnail</source>
-        <target>Can be a thumbnail</target>
-        <note>key: field_definition.is_thumbnail</note>
       </trans-unit>
       <trans-unit id="9a02e329edf4c1e41c97c8be922137c284c249c4" resname="field_definition.name">
         <source>Name</source>
