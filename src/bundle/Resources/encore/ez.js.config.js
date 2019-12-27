@@ -12,6 +12,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/admin.format.date.js'),
     path.resolve(__dirname, '../public/js/scripts/core/draggable.js'),
     path.resolve(__dirname, '../public/js/scripts/core/custom.dropdown.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/custom.tooltip.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.notifications.js'),
     path.resolve(__dirname, '../public/js/scripts/button.trigger.js'),
     path.resolve(__dirname, '../public/js/scripts/button.prevent.default.js'),
