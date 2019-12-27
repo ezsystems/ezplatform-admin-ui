@@ -43,7 +43,7 @@
         color: $ez-black;
         font-weight: 700;
         text-align: left;
-        box-shadow: 0 4px 6px rgba(135,135,135,0.35);
+        box-shadow: 0 calculateRem(4px) calculateRem(6px) rgba(135,135,135,0.35);
     }
 
     &--small &__inner {
