@@ -1,9 +1,10 @@
 .ez-extra-actions {
     $block: '.ez-extra-actions';
 
-    border-radius: calculateRem(8px);
-    border: calculateRem(6px) solid $ez-color-secondary;
-    width: calculateRem(300px);
+    background-color: $ez-white;
+    border: calculateRem(16px) solid $ez-white;
+    width: calculateRem(360px);
+    box-shadow: calculateRem(-4px) calculateRem(4px) calculateRem(6px) 0 rgba($ez-color-base-light, 0.35);
 
     &__action {
         display: block;
@@ -42,10 +43,11 @@
     }
 
     &__header {
-        line-height: calculateRem(45px);
-        color: $ez-white;
+        line-height: calculateRem(50px);
+        color: $ez-color-secondary;
         padding: 0 calculateRem(8px);
-        font-weight: 700;
+        font-weight: 600;
+        border-bottom: 1px solid $ez-color-secondary;
     }
 
     &__content {
@@ -174,33 +176,35 @@
             }
         }
     }
-
-    &::after {
-        content: '';
-        position: absolute;
-        height: calculateRem(40px);
-        width: calculateRem(10px);
-        top: calculateRem(30px);
-        right: calculateRem(-6px);
-        transform: translate(100%, -50%);
-        z-index: 0;
-        background: $ez-color-secondary;
-    }
 }
 
 .ez-extra-actions-container {
     .ez-extra-actions {
         position: absolute;
+        top: calculateRem(-24px);
+        bottom: 0;
         left: 0;
         z-index: 2;
         opacity: 1;
-        transform: translate(calc(-100% - #{calculateRem(10px)}), 0) scaleX(1);
+        transform: translate(calc(-100%), 0) scaleX(1);
         transform-origin: right center;
         transition: all 0.2s $ez-admin-transition;
 
         &--hidden {
             opacity: 0;
-            transform: translate(calc(-100% - #{calculateRem(15px)}), 0) scaleX(0);
+            transform: translate(calc(-100%), 0) scaleX(0);
+        }
+    }
+}
+
+.ez-btn {
+    &--active-button {
+        background-color: $ez-white;
+        color: $ez-color-secondary;
+        border-color: $ez-white;
+
+        .ez-icon {
+            fill: $ez-color-secondary;
         }
     }
 }

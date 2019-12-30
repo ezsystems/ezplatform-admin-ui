@@ -137,6 +137,7 @@ select {
     position: -webkit-sticky;
     position: sticky;
     top: calculateRem(16px);
+    height: 100vh;
 
     .ez-icon {
         margin-bottom: calculateRem(3px);
