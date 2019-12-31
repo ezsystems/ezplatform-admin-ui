@@ -29,19 +29,7 @@
                 btn.classList[methodNameButton](CLASS_ACTIVE_BUTTON);
                 actions.classList[methodNameContainer](CLASS_HIDDEN);
 
-                const actionsRect = actions.getBoundingClientRect();
-
                 actions.style.opacity = 0;
-
-                const fitsViewport = actionsRect.height + btn.offsetTop <= global.innerHeight;
-
-                // if (!fitsViewport) {
-                //     actions.style.bottom = `0px`;
-                //     actions.style.top = 'auto';
-                // } else {
-                //     actions.style.top = `${btn.offsetTop}px`;
-                //     actions.style.bottom = 'auto';
-                // }
 
                 if (!actions.classList.contains(CLASS_HIDDEN)) {
                     doc.body.addEventListener('click', detectClickOutside, false);
