@@ -46,15 +46,12 @@
         line-height: calculateRem(50px);
         color: $ez-color-secondary;
         padding: 0 calculateRem(8px);
+        margin-bottom: calculateRem(20px);
         font-weight: 600;
         border-bottom: 1px solid $ez-color-secondary;
     }
 
     &__content {
-        background: $ez-ground-base-dark;
-        max-height: calculateRem(300px);
-        overflow: auto;
-
         .form-group {
             margin-bottom: 0;
         }
@@ -62,10 +59,6 @@
 
     &--edit-user,
     &--edit {
-        #{$block}__content {
-            padding: calculateRem(8px);
-        }
-
         #{$block}__form-values {
             max-height: calculateRem(150px);
             overflow: auto;
@@ -84,22 +77,20 @@
             text-decoration: none;
             cursor: pointer;
             transition: all 0.2s $ez-admin-transition;
-            margin-bottom: 0;
+            margin-bottom: calculateRem(10px);
             font-size: calculateRem(15px);
+            box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba($ez-black, 0.1);
 
             &:hover,
             &:focus {
                 background: $ez-secondary-ground-pale;
+                font-weight: 700;
                 text-decoration: none;
             }
 
             &:active {
                 background: $ez-secondary-ground;
                 color: $ez-white;
-            }
-
-            &:not(:last-child) {
-                margin-bottom: calculateRem(8px);
             }
 
             &-label {
