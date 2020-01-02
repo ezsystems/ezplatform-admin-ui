@@ -22,6 +22,8 @@
         'url',
     ];
     const form = doc.querySelector('.ez-form-validate');
+    const itemAuthor = doc.querySelector('.ez-details-items__author-breadcrumbs');
+    const itemAuthorToggler = doc.querySelector('.ez-details-items__toggler');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
@@ -89,4 +91,13 @@
         btn.dataset.isFormValid = 0;
         btn.addEventListener('click', clickHandler, false);
     });
+
+    if (itemAuthorToggler) {
+        itemAuthorToggler.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            itemAuthorToggler.classList.toggle('ez-details-items__toggler--gray');
+            itemAuthor.classList.toggle('ez-details-items--collapsed');
+        });
+    }
 })(window, window.document, window.eZ);

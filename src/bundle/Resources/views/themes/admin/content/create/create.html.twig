@@ -3,22 +3,40 @@
 {% trans_default_domain 'content_create' %}
 
 {% block meta %}
-    <meta name="LanguageCode" content="{{ language.languageCode }}" />
+    <meta name="LanguageCode" content="{{ language.languageCode }}"/>
 {% endblock %}
 
 {% block details %}
-    <div class="container mt-5 px-5">
-        <h2 class="ez-content-item-status">{{ 'creating_in_language'|trans({'%contentTypeName%': content_type.name, '%languageName%': language.name})|desc('Creating a(n) %contentTypeName% in %languageName%') }}</h2>
-        <h1>
-            <svg class="ez-icon ez-icon-{{ content_type.identifier }}">
-                <use xlink:href="{{ ez_content_type_icon(content_type.identifier) }}"></use>
-            </svg>
-            {{ 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') }}
-        </h1>
-
-        <div class="small">
-            {{ content_type.name }} / Parent Location ID: {{ parent_location.id }}
+    <div class="ez-edit-header">
+        <div class="ez-edit-header__content-type-name">
+            <div class="container px-5">
+                {{ 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') }}
+            </div>
         </div>
+        <div class="ez-edit-header__details">
+            <div class="container ez-details-items">
+                {{ 'creating_details'|trans({
+                    '%icon%': ez_content_type_icon(content_type.identifier), 
+                    '%content_type_name%': content_type.name, 
+                    '%language_name%': language.name, 
+                    '%location_name%': parent_location.contentInfo.name})
+                    |desc('
+                        <span class="ez-details-items__connector">Creating:</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--content-type">
+                        <svg class="ez-icon ez-icon--small ez-icon-%identifier%">
+                            <use xlink:href="%icon%"></use>
+                        </svg>
+                        %content_type_name%
+                        </span>
+                        <span class="ez-details-items__connector ez-details-items__connector--small">in</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--language">%language_name%</span>
+                        <span class="ez-details-items__connector ez-details-items__connector--small">under</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--location">%location_name%</span>')
+                    |raw 
+                }}
+            </div>
+        </div>
+
         <div class="ez-content-item__errors-wrapper" hidden>
             {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
         </div>
@@ -39,7 +57,6 @@
                 {{ form_widget(form.cancel, {'attr': {'hidden': 'hidden'}}) }}
             </div>
         </div>
-
     </section>
 {% endblock %}
 
@@ -54,7 +71,11 @@
 {% endblock %}
 
 {% block close_button %}
-    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': parent_location.id}) }}"></a>
+    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': parent_location.id}) }}">
+        <svg class="ez-icon ez-icon--small-medium">
+            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
+        </svg>
+    </a>
 {% endblock %}
 
 {% block form_before %}
