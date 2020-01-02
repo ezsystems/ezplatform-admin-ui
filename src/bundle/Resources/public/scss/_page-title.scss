@@ -9,11 +9,15 @@
         "content-type-name .";
 
     &__content-item {
+        max-width: 100%;
         margin-bottom: 0;
         padding-left: 2.25rem;
         text-indent: -2.4rem;
         grid-area: content-item;
         justify-self: start;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__content-type-name {

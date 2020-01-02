@@ -4,6 +4,9 @@
 
 .breadcrumb-item {
     cursor: not-allowed;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     
     + .breadcrumb-item::before,
     &.active {
