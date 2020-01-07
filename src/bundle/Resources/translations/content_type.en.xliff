@@ -117,8 +117,8 @@
         <note>key: content_type.edit.error.already_exists</note>
       </trans-unit>
       <trans-unit id="f0338ef34826caa021c41ff85413e48601af30b7" resname="content_type.edit.select_language">
-        <source>Select language</source>
-        <target state="new">Select language</target>
+        <source>Select a language:</source>
+        <target state="new">Select a language:</target>
         <note>key: content_type.edit.select_language</note>
       </trans-unit>
       <trans-unit id="9eb89a2f51954babc5ff51f9060cbcda91dcf408" resname="content_type.field_definitions.modal.message">

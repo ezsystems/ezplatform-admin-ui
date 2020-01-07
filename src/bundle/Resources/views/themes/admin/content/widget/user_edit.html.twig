@@ -3,7 +3,7 @@
 <div class="ez-extra-actions ez-extra-actions--edit-user ez-extra-actions--hidden
     {% if form.language.vars.choices|length == 1 %} ez-extra-actions--prevent-show {% endif %}"
     data-actions="edit-user">
-    <div class="ez-extra-actions__header">{{ 'user.edit.select_language'|trans|desc('Select language') }}</div>
+    <div class="ez-extra-actions__header">{{ 'user.edit.select_language'|trans|desc('Select a language:') }}</div>
     <div class="ez-extra-actions__content">
         {{ form_start(form) }}
         {{ form_widget(form.content_info) }}

@@ -4,7 +4,7 @@
     <div class="ez-extra-actions__header">{{ 'content.create.choose_content_type'|trans|desc('Create your content') }}</div>
     <div class="ez-extra-actions__content">
         {{ form_start(form, { 'action': path('ezplatform.content.create'), 'attr': { 'autocomplete': 'off' } }) }}
-            <div class="ez-extra-actions__section-header">{{ 'content.create.select_language'|trans|desc('Select language:') }}</div>
+            <div class="ez-extra-actions__section-header">{{ 'content.create.select_language'|trans|desc('Select a language:') }}</div>
             <div class="ez-extra-actions__section-content">
                 {% if form.language.vars.choices|length == 1 %}
                     {{ form_widget(form.language, {'attr': {'class': 'ez-content-create', 'readonly': true}}) }}

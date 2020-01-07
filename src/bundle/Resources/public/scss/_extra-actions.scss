@@ -44,6 +44,7 @@
 
     &__header {
         line-height: calculateRem(50px);
+        font-size: calculateRem(17px);
         color: $ez-color-secondary;
         margin-bottom: calculateRem(15px);
         font-weight: 600;
@@ -58,11 +59,6 @@
 
     &--edit-user,
     &--edit {
-        #{$block}__form-values {
-            max-height: calculateRem(150px);
-            overflow: auto;
-        }
-
         .form-check {
             display: block;
             background: none;

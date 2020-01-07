@@ -27,8 +27,8 @@
         <note>key: content.create.select_content_type</note>
       </trans-unit>
       <trans-unit id="8b5180d90c79245ed3e491e6f682842daaa0bec5" resname="content.create.select_language">
-        <source>Select language:</source>
-        <target state="new">Select language:</target>
+        <source>Select a language:</source>
+        <target state="new">Select a language:</target>
         <note>key: content.create.select_language</note>
       </trans-unit>
       <trans-unit id="5e8851497aae3ba774d163d5fd191fd69ac871c0" resname="content.edit.select_language">
@@ -447,8 +447,8 @@
         <note>key: translation.modal_close</note>
       </trans-unit>
       <trans-unit id="c285bc654712e44ed56cd6f18262a2d6485f4fb9" resname="user.edit.select_language">
-        <source>Select language</source>
-        <target state="new">Select language</target>
+        <source>Select a language:</source>
+        <target state="new">Select a language:</target>
         <note>key: user.edit.select_language</note>
       </trans-unit>
     </body>
