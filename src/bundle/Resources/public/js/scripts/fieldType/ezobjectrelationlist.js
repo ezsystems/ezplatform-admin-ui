@@ -221,7 +221,7 @@
             });
         };
         const focusOnElement = (event) => {
-            if(doc.activeElement !== event.target) {
+            if (doc.activeElement !== event.target) {
                 event.target.focus();
             }
         };
@@ -264,9 +264,10 @@
         updateAddBtnState();
         attachRowsEventHandlers();
 
-        [...fieldContainer.querySelectorAll(SELECTOR_BTN_ADD), ...fieldContainer.querySelectorAll('.ez-relations__cta-btn')].forEach(
-            (btn) => btn.addEventListener('click', openUDW, false)
-        );
+        [
+            ...fieldContainer.querySelectorAll(SELECTOR_BTN_ADD),
+            ...fieldContainer.querySelectorAll('.ez-relations__cta-btn'),
+        ].forEach((btn) => btn.addEventListener('click', openUDW, false));
 
         trashBtn.addEventListener('click', removeItem, false);
         relationsContainer.addEventListener('change', updateTrashBtnState, false);
