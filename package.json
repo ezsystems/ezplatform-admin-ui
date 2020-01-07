@@ -20,7 +20,6 @@
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.5",
     "eslint-plugin-react": "^7.3.0",
-    "prettier": "^1.19.1",
     "prop-types": "^15.5.10",
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^0.4.6",
