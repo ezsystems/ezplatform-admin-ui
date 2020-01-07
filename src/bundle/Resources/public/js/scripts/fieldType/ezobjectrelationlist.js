@@ -219,6 +219,7 @@
             
             findOrderInputs().forEach((item) => {
                 item.addEventListener('blur', updateSelectedItemsOrder, false);
+
                 if (isFirefox) {
                     item.addEventListener('change', focusOnElement, false);
                 }
