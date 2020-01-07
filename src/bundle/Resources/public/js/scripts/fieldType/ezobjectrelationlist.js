@@ -216,8 +216,10 @@
         };
         const attachRowsEventHandlers = () => {
             const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+            
             findOrderInputs().forEach((item) => {
                 item.addEventListener('blur', updateSelectedItemsOrder, false);
+
                 if (isFirefox) {
                     item.addEventListener('change', focusOnElement, false);
                 }
