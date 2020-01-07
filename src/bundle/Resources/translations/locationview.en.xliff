@@ -33,7 +33,7 @@
       </trans-unit>
       <trans-unit id="5e8851497aae3ba774d163d5fd191fd69ac871c0" resname="content.edit.select_language">
         <source>Select language</source>
-        <target state="new">Select language</target>
+        <target state="new">Select translation</target>
         <note>key: content.edit.select_language</note>
       </trans-unit>
       <trans-unit id="e136be672df8eb27dc4eb2f1ce0650096090bf81" resname="content.hidden.message">
