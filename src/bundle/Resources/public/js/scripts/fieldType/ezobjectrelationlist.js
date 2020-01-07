@@ -215,7 +215,15 @@
             return [...relationsContainer.querySelectorAll('[type="checkbox"]')];
         };
         const attachRowsEventHandlers = () => {
-            findOrderInputs().forEach((item) => item.addEventListener('blur', updateSelectedItemsOrder, false));
+            findOrderInputs().forEach((item) => {
+                item.addEventListener('blur', updateSelectedItemsOrder, false);
+                item.addEventListener('change', focusOnElement, false);
+            });
+        };
+        const focusOnElement = (event) => {
+            if(doc.activeElement !== event.target) {
+                event.target.focus();
+            }
         };
         const emptyRelationsContainer = () => {
             while (relationsContainer.lastChild) {
