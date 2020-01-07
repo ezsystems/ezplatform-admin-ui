@@ -215,9 +215,12 @@
             return [...relationsContainer.querySelectorAll('[type="checkbox"]')];
         };
         const attachRowsEventHandlers = () => {
+            const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
             findOrderInputs().forEach((item) => {
                 item.addEventListener('blur', updateSelectedItemsOrder, false);
-                item.addEventListener('change', focusOnElement, false);
+                if (isFirefox) {
+                    item.addEventListener('change', focusOnElement, false);
+                }
             });
         };
         const focusOnElement = (event) => {
