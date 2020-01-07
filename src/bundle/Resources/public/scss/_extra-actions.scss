@@ -45,8 +45,7 @@
     &__header {
         line-height: calculateRem(50px);
         color: $ez-color-secondary;
-        padding: 0 calculateRem(8px);
-        margin-bottom: calculateRem(20px);
+        margin-bottom: calculateRem(15px);
         font-weight: 600;
         border-bottom: 1px solid $ez-color-secondary;
     }
@@ -107,16 +106,16 @@
     }
 
     &__section-header {
-        background: $ez-ground-base-dark;
-        padding: calculateRem(4px) 0 calculateRem(4px) calculateRem(8px);
-        font-size: calculateRem(15px);
+        padding: calculateRem(4px) 0;
+        font-size: calculateRem(16px);
+        line-height: calculateRem(22px);
         font-weight: 700;
     }
 
     &__section-content {
         background: $ez-white;
-        padding: 1rem calculateRem(8px);
-        font-size: calculateRem(15px);
+        font-size: calculateRem(16px);
+        line-height: calculateRem(22px);
 
         select {
             display: inline-block;
