@@ -182,7 +182,7 @@
             addBtn[methodName]('disabled', true);
         };
         const updateTrashBtnState = (event) => {
-            if (!event.target.hasAttribute('type') || event.target.type !== 'checkbox') {
+            if ((!event.target.hasAttribute('type') || event.target.type !== 'checkbox') && event.currentTarget !== trashBtn) {
                 return;
             }
 
@@ -261,6 +261,7 @@
         );
 
         trashBtn.addEventListener('click', removeItem, false);
+        trashBtn.addEventListener('click', updateTrashBtnState, false);
         relationsContainer.addEventListener('change', updateTrashBtnState, false);
 
         validator.init();
