@@ -13,58 +13,70 @@
         'action': path('ezplatform.location.remove'),
         'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-locations' }
     }) }}
-        <div class="ez-scrollable-table-wrapper">
-            <table class="ez-table table">
-                <thead>
+    <div class="ez-scrollable-table-wrapper">
+        <table class="ez-table table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>{{ 'tab.locations.path'|trans()|desc('Path') }}</th>
+                <th>{{ 'tab.locations.subitems'|trans()|desc('Sub-items') }}</th>
+                <th colspan="2">{{ 'tab.locations.visibility'|trans()|desc('Visibility') }}</th>
+                <th>{{ 'tab.locations.main'|trans()|desc('Main') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if locations is not empty %}
+                {% for location in locations %}
                     <tr>
-                        <th></th>
-                        <th>{{ 'tab.locations.path'|trans()|desc('Path') }}</th>
-                        <th>{{ 'tab.locations.subitems'|trans()|desc('Sub-items') }}</th>
-                        <th colspan="2">{{ 'tab.locations.visibility'|trans()|desc('Visibility') }}</th>
-                        <th>{{ 'tab.locations.main'|trans()|desc('Main') }}</th>
+                        <td class="ez-table__cell ez-table__cell--has-checkbox">
+                            {{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'disabled': not location.canDelete}}) }}
+                        </td>
+                        <td class="ez-table__cell">
+                            {% include '@ezdesign/ui/location_path.html.twig' with {'locations': location.pathLocations} %}
+                        </td>
+                        <td class="ez-table__cell">{{ location.childCount }}</td>
+                        <td class="ez-table__cell">
+                            <label class="ez-checkbox-icon {{ not location.explicitlyHidden ? 'is-checked' }}{% if not can_hide[location.id] %} disabled{% endif %}">
+                                <svg class="ez-icon ez-icon-view">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#view"></use>
+                                </svg>
+                                <svg class="ez-icon ez-icon-view-hide">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#view-hide"></use>
+                                </svg>
+                                <input
+                                    class="ez-checkbox-icon__checkbox"
+                                    {{ not location.explicitlyHidden ? 'checked' }}
+                                    type="checkbox"
+                                    name="updateVisibility"
+                                    {% if not can_hide[location.id] %} disabled="disabled"{% endif %}
+                                    value="{{ location.id }}"/>
+                            </label>
+                            {% if location.contentInfo.isHidden or not is_location_visible %}
+                                <span class="ml-2">
+                                    {{ 'tab.locations.hidden_content_or_superior'|trans()|desc('Content or its ancestor is hidden') }}
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td class="ez-table__cell"></td>
+                        <td class="ez-table__cell">
+                            <input
+                                type="radio"
+                                {{ location.main ? 'checked' }}
+                                {{ not location.canEdit ? 'disabled' }}
+                                name="updateMainLocation"
+                                value="{{ location.id }}"/>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    {% if locations is not empty %}
-                        {% for location in locations %}
-                            <tr>
-                                <td class="ez-table__cell ez-table__cell--has-checkbox">
-                                    {{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'disabled': not location.canDelete}}) }}
-                                </td>
-                                <td class="ez-table__cell">
-                                    {% include '@ezdesign/ui/location_path.html.twig' with {'locations': location.pathLocations} %}
-                                </td>
-                                <td class="ez-table__cell">{{ location.childCount }}</td>
-                                <td class="ez-table__cell">
-                                    <label class="ez-checkbox-icon {{ not location.explicitlyHidden ? 'is-checked' }}{% if not can_hide[location.id] %} disabled{% endif %}">
-                                        <svg class="ez-icon ez-icon-view">
-                                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#view"></use>
-                                        </svg>
-                                        <svg class="ez-icon ez-icon-view-hide">
-                                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#view-hide"></use>
-                                        </svg>
-                                        <input class="ez-checkbox-icon__checkbox" {{ not location.explicitlyHidden ? 'checked' }} type="checkbox" name="updateVisibility" {% if not can_hide[location.id] %} disabled="disabled" {% endif %} value="{{ location.id }}"/>
-                                    </label>
-                                    {% if location.contentInfo.isHidden or not is_location_visible %}
-                                        <span class="ml-2">
-                                            {{ 'tab.locations.hidden_content_or_superior'|trans()|desc('Content or its ancestor is hidden') }}
-                                        </span>
-                                    {% endif %}
-                                </td>
-                                <td class="ez-table__cell"></td>
-                                <td class="ez-table__cell">
-                                    <input type="radio" {{ location.main ? 'checked' }} {{ not location.canEdit ? 'disabled' }} name="updateMainLocation" value="{{ location.id }}"/>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    {% endif %}
-                </tbody>
-            </table>
-        </div>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
     {{ form_end(form_content_location_remove) }}
 
     {{ form(form_content_location_update_visibility, {'action': path('ezplatform.location.update_visibility')}) }}
     {{ form(form_content_location_main_update, {'action': path('ezplatform.content.update_main_location')}) }}
+
 </section>
 
 {% include '@ezdesign/content/tab/locations/panel_swap.html.twig' with {
@@ -73,14 +85,25 @@
 } %}
 
 {% macro table_header_tools(form_add, form_remove, can_add) %}
-    <button data-udw-config="{{ ez_udw_config('single', {}) }}" class="btn btn-primary btn--udw-add" title="{{ 'tab.locations.action.add'|trans|desc('Add Location') }}" {{ not can_add ? 'disabled' }}>
+    <button
+            data-udw-config="{{ ez_udw_config('single', {}) }}"
+            class="btn btn-primary btn--udw-add"
+            title="{{ 'tab.locations.action.add'|trans|desc('Add Location') }}"
+            {{ not can_add ? 'disabled' }}>
         <svg class="ez-icon ez-icon-create">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
         </svg>
     </button>
 
     {% set modal_data_target = 'delete-content-types-modal' %}
-    <button id="delete-locations" type="button" class="btn btn-danger" disabled data-toggle="modal" data-target="#{{ modal_data_target }}" title="{{ 'tab.locations.action.delete'|trans|desc('Delete Location') }}">
+    <button
+            id="delete-locations"
+            type="button"
+            class="btn btn-danger"
+            disabled
+            data-toggle="modal"
+            data-target="#{{ modal_data_target }}"
+            title="{{ 'tab.locations.action.delete'|trans|desc('Delete Location') }}">
         <svg class="ez-icon ez-icon-trash">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
