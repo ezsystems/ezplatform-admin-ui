@@ -1,6 +1,16 @@
+.ez-content-item {
+    &__title {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+}
+
 .ez-content-item-status {
     font-size: calculateRem(18px);
     color: $ez-color-base-light;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .ez-content-edit-container {

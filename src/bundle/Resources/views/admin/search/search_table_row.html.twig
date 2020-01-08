@@ -4,8 +4,10 @@
             <use xlink:href="{{ ez_content_type_icon(row.content_type.identifier) }}"></use>
         </svg>
     </td>   
-    <td class="ez-table__cell ez-table__cell--after-icon">
-        <a href="{{ url('_ez_content_view', { 'contentId': row.contentId }) }}">{{ row.name }}</a>
+    <td class="ez-table__cell ez-table__cell--name ez-table__cell--after-icon">
+        <a href="{{ url('_ez_content_view', { 'contentId': row.contentId }) }}" title="{{ row.name }}">
+            {{ row.name }}
+        </a>
     </td>
     <td class="ez-table__cell">{{ row.modified|ez_full_datetime }}</td>
     <td class="ez-table__cell">{{ row.type }}</td>

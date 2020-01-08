@@ -56,6 +56,12 @@
             padding-left: 0;
         }
 
+        .table &--name {
+            max-width: calculateRem(350px);
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
         &--no-content {
             margin-bottom: calculateRem(48px);
             padding: calculateRem(12px) calculateRem(16px);
