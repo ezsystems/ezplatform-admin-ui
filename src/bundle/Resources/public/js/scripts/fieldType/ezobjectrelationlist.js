@@ -202,7 +202,20 @@
             return [...relationsContainer.querySelectorAll('[type="checkbox"]')];
         };
         const attachRowsEventHandlers = () => {
-            findOrderInputs().forEach((item) => item.addEventListener('blur', updateSelectedItemsOrder, false));
+            const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+            
+            findOrderInputs().forEach((item) => {
+                item.addEventListener('blur', updateSelectedItemsOrder, false);
+
+                if (isFirefox) {
+                    item.addEventListener('change', focusOnElement, false);
+                }
+            });
+        };
+        const focusOnElement = (event) => {
+            if (doc.activeElement !== event.target) {
+                event.target.focus();
+            }
         };
         const emptyRelationsContainer = () => {
             while (relationsContainer.lastChild) {
@@ -243,9 +256,10 @@
         updateAddBtnState();
         attachRowsEventHandlers();
 
-        [...fieldContainer.querySelectorAll(SELECTOR_BTN_ADD), ...fieldContainer.querySelectorAll('.ez-relations__cta-btn')].forEach(
-            (btn) => btn.addEventListener('click', openUDW, false)
-        );
+        [
+            ...fieldContainer.querySelectorAll(SELECTOR_BTN_ADD),
+            ...fieldContainer.querySelectorAll('.ez-relations__cta-btn'),
+        ].forEach((btn) => btn.addEventListener('click', openUDW, false));
 
         trashBtn.addEventListener('click', removeItem, false);
         relationsContainer.addEventListener('change', updateTrashBtnState, false);
