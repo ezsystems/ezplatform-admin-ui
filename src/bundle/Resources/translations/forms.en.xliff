@@ -181,11 +181,6 @@
         <target state="new">Send %children_count% Content item(s) of this Location to Trash</target>
         <note>key: location_trash_form.trash_container</note>
       </trans-unit>
-      <trans-unit id="f75f244896962e9bc1bbb30a1bbaf3e5914b95f2" resname="location_trash_form.trash_when_relation">
-        <source>'%content_name%' will not be available for its reverse Relation(s)</source>
-        <target state="new">'%content_name%' will not be available for its reverse Relation(s)</target>
-        <note>key: location_trash_form.trash_when_relation</note>
-      </trans-unit>
       <trans-unit id="2598fe0050f38f3c02014a404ed14aee248e27d1" resname="location_trash_form.trash_with_asset">
         <source>Send the Content item and its related assets to Trash</source>
         <target state="new">Send the Content item and its related assets to Trash</target>

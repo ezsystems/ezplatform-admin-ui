@@ -81,9 +81,9 @@
     <div class="ez-relations__cta" {% if has_relations %}hidden="true"{% endif %}>
         <p class="ez-relations__cta-text">
         {% if limit != 1 %}
-            {{ 'ezobjectrelationlist.cta.limit.multi'|trans|desc('Set up multiple relations with one or several content items') }}
+            {{ 'ezobjectrelationlist.cta.limit.multi'|trans|desc('Set up multiple Relations with one or several Content items') }}
         {% else %}
-            {{ 'ezobjectrelationlist.cta.limit.single'|trans|desc('Set up a relation with one content item') }}
+            {{ 'ezobjectrelationlist.cta.limit.single'|trans|desc('Set up a Relation with one Content item') }}
         {% endif %}
         </p>
         <button
@@ -112,5 +112,5 @@
     </div>
     {% set attr = attr|merge({'hidden': 'hidden'}) %}
     {{ block('form_widget') }}
-    <div class="ez-relations__helper">{{ helper }}</div>
+    <div class="ez-relations__helper-text">{{ helper }}</div>
 {% endblock %}
