@@ -94,8 +94,9 @@
 
         if (sourceInput.value) {
             defaultDate = new Date(sourceInput.value * 1000);
+            const timezoneOffset = sourceInput.dataset.timezone_offset ? sourceInput.dataset.timezone_offset : defaultDate.getTimezoneOffset();
 
-            defaultDate.setTime(defaultDate.getTime() + defaultDate.getTimezoneOffset() * 60 * 1000);
+            defaultDate.setTime(defaultDate.getTime() + timezoneOffset * 1000);
         }
 
         const flatpickrInstance = flatpickr(
