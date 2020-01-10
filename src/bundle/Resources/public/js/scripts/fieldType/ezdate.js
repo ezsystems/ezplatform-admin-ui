@@ -94,7 +94,9 @@
 
         if (sourceInput.value) {
             defaultDate = new Date(sourceInput.value * 1000);
-            const timezoneOffset = sourceInput.dataset.timezone_offset ? sourceInput.dataset.timezone_offset : defaultDate.getTimezoneOffset();
+            const timezoneOffset = sourceInput.dataset.timezoneOffset
+                ? sourceInput.dataset.timezoneOffset
+                : defaultDate.getTimezoneOffset() * 60;
 
             defaultDate.setTime(defaultDate.getTime() + timezoneOffset * 1000);
         }
