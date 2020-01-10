@@ -7,6 +7,7 @@
             </svg>
         </button>
     </div>
-    {% set attr = attr|merge({'class': 'ez-data-source__input', 'hidden': 'hidden'}) %}
+    {% set attr = attr|merge({'class': 'ez-data-source__input', 'hidden': 'hidden',
+        'data-timezone-offset': form.parent.vars.value.value.date.offset}) %}
     {{ block('form_widget') }}
 {% endblock %}
