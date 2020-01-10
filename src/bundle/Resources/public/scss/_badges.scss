@@ -1,13 +1,14 @@
 .ez-badge {
     padding: calculateRem(4px);
-    font-weight: 400;
+    font-size: calculateRem(13px);
+    font-weight: 700;
 
     &--small {
         font-size: calculateRem(12px);
+        font-weight: 400;
     }
 
-    &--big {
-        font-size: calculateRem(13px);
-        font-weight: 700;
+    .ez-icon {
+        margin-right: calculateRem(4px);
     }
 }
