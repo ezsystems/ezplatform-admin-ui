@@ -27,6 +27,8 @@
     }
 
     &__cell {
+        vertical-align: top;
+
         &--field-definitions-head {
             width: calc(100% / 3);
         }
