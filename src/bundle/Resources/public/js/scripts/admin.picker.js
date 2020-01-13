@@ -8,10 +8,7 @@
     const pickerConfig = {
         enableTime: true,
         time_24hr: true,
-        formatDate: (date) => {
-            console.log(date)
-            return formatShortDateTime(convertDateToTimezone(new Date(date), userPreferedTimezone, true))
-        },
+        formatDate: (date) => formatShortDateTime(convertDateToTimezone(new Date(date), userPreferedTimezone, true)),
     };
     const updateInputValue = (formInput, date) => {
         if (!date.length) {
