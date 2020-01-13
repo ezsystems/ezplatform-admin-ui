@@ -4,10 +4,14 @@
     const SELECTOR_FORM_INPUT = '.ez-picker__form-input';
     const SELECTOR_CLEAR_BTN = '.ez-picker__btn--clear-input';
     const pickers = [...doc.querySelectorAll(SELECTOR_PICKER)];
+    const { convertDateToTimezone, formatShortDateTime, userPreferedTimezone } = eZ.helpers.timezone;
     const pickerConfig = {
         enableTime: true,
         time_24hr: true,
-        formatDate: (date) => new Date(date).toLocaleString(),
+        formatDate: (date) => {
+            console.log(date)
+            return formatShortDateTime(convertDateToTimezone(new Date(date), userPreferedTimezone, true))
+        },
     };
     const updateInputValue = (formInput, date) => {
         if (!date.length) {
@@ -39,7 +43,7 @@
             Object.assign({}, pickerConfig, {
                 onChange: updateInputValue.bind(null, formInput),
                 defaultDate,
-            })
+            }),
         );
 
         btnClear.addEventListener('click', onClearBtnClick.bind(null, flatpickrInstance), false);
