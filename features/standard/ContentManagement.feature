@@ -97,7 +97,7 @@ Scenario: Content can be moved to trash from non-root location
 
 @javascript @common
 Scenario: Content can be moved to trash from root location
-  Given I navigate to content "Test Article Manage" of type "Article" in root path
+  Given I open UDW and go to "root/Test Article Manage"
   When I send content to trash
   Then I should be redirected to root in default view
     And going to trash there is "Article" "Test Article Manage" on list
