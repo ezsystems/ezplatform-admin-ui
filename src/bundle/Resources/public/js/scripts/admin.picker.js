@@ -4,11 +4,11 @@
     const SELECTOR_FORM_INPUT = '.ez-picker__form-input';
     const SELECTOR_CLEAR_BTN = '.ez-picker__btn--clear-input';
     const pickers = [...doc.querySelectorAll(SELECTOR_PICKER)];
-    const { convertDateToTimezone, formatShortDateTime, userPreferedTimezone } = eZ.helpers.timezone;
+    const { formatShortDateTime } = eZ.helpers.timezone;
     const pickerConfig = {
         enableTime: true,
         time_24hr: true,
-        formatDate: (date) => formatShortDateTime(convertDateToTimezone(new Date(date), userPreferedTimezone, true)),
+        formatDate: (date) => formatShortDateTime(date, null),
     };
     const updateInputValue = (formInput, date) => {
         if (!date.length) {
