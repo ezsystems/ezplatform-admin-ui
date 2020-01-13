@@ -30,6 +30,7 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Location View contextual sidebar menu.
@@ -82,21 +83,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var array */
     private $userGroupContentTypeIdentifier;
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver $udwConfigResolver
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension $udwExtension
-     * @param \eZ\Publish\API\Repository\ContentService $contentService
-     * @param \eZ\Publish\API\Repository\LocationService $locationService
-     * @param \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface $permissionChecker
-     * @param array $userContentTypeIdentifier
-     * @param array $userGroupContentTypeIdentifier
-     */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    private $translator;
+
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
@@ -109,6 +98,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         ContentService $contentService,
         LocationService $locationService,
         PermissionCheckerInterface $permissionChecker,
+        TranslatorInterface $translator,
         array $userContentTypeIdentifier,
         array $userGroupContentTypeIdentifier
     ) {
@@ -123,6 +113,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $this->contentService = $contentService;
         $this->locationService = $locationService;
         $this->permissionChecker = $permissionChecker;
+        $this->translator = $translator;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
         $this->userGroupContentTypeIdentifier = $userGroupContentTypeIdentifier;
     }
@@ -184,17 +175,38 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
         $createAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--create',
+            'title' => $this->translator->trans(
+                self::ITEM__CREATE,
+                [],
+                'menu'
+            ),
             'data-actions' => 'create',
             'data-focus-element' => '.ez-instant-filter__input',
+            'data-extra-classes' => 'ez-tooltip--medium',
+            'data-placement' => 'left',
         ];
         $sendToTrashAttributes = [
+            'title' => $this->translator->trans(
+                self::ITEM__SEND_TO_TRASH,
+                [],
+                'menu'
+            ),
             'data-toggle' => 'modal',
             'data-target' => '#trash-location-modal',
+            'data-extra-classes' => 'ez-tooltip--medium',
+            'data-placement' => 'left',
         ];
         $copySubtreeAttributes = [
             'class' => 'ez-btn--udw-copy-subtree',
+            'title' => $this->translator->trans(
+                self::ITEM__COPY_SUBTREE,
+                [],
+                'menu'
+            ),
             'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
             'data-root-location' => $startingLocationId,
+            'data-extra-classes' => 'ez-tooltip--medium',
+            'data-placement' => 'left',
         ];
 
         $copyLimit = $this->configResolver->getParameter(
@@ -229,8 +241,15 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'extras' => ['icon' => 'move'],
                     'attributes' => [
                         'class' => 'btn--udw-move',
+                        'title' => $this->translator->trans(
+                            self::ITEM__MOVE,
+                            [],
+                            'menu'
+                        ),
                         'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
                         'data-root-location' => $startingLocationId,
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
                     ],
                 ]
             )
@@ -245,6 +264,13 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                             'class' => 'btn--udw-copy',
                             'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
                             'data-root-location' => $startingLocationId,
+                            'data-extra-classes' => 'ez-tooltip--medium',
+                            'data-placement' => 'left',
+                            'title' => $this->translator->trans(
+                                self::ITEM__COPY,
+                                [],
+                                'menu'
+                            ),
                         ],
                     ]
                 )
@@ -330,7 +356,14 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     {
         $editAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--edit',
+            'title' => $this->translator->trans(
+                self::ITEM__EDIT,
+                [],
+                'menu'
+            ),
             'data-actions' => 'edit',
+            'data-extra-classes' => 'ez-tooltip--medium',
+            'data-placement' => 'left',
         ];
         $editUserAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--edit-user',
@@ -394,8 +427,15 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 [
                     'extras' => ['icon' => 'hide'],
                     'attributes' => [
-                        'data-actions' => 'hide',
                         'class' => 'ez-btn--hide',
+                        'title' => $this->translator->trans(
+                            self::ITEM__HIDE,
+                            [],
+                            'menu'
+                        ),
+                        'data-actions' => 'hide',
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
                     ],
                 ]
             )
