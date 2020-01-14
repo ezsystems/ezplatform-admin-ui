@@ -19,9 +19,7 @@
                                 <div class="ez-content-field">
                                     <p class="ez-content-field-name">{{ fieldDefinition.name }}:</p>
                                     <div class="ez-content-field-value">
-                                        {% if ez_is_field_empty(content, fieldDefinition.identifier) and fieldDefinition.fieldTypeIdentifier is same as('ezboolean') %}
-                                            <em>{{ 'ezboolean.no'|trans|desc('No') }}</em>
-                                        {% elseif ez_is_field_empty(content, fieldDefinition.identifier) %}
+                                        {% if ez_is_field_empty(content, fieldDefinition.identifier) and fieldDefinition.fieldTypeIdentifier is not same as('ezboolean') %}
                                             <em>{{ 'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty') }}</em>
                                         {% else %}
                                             {{ ez_render_field(content, fieldDefinition.identifier, {
