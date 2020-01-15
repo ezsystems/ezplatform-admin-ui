@@ -5,10 +5,10 @@
         for (tooltipNode of tooltipsNode) {
             if (tooltipNode.title.length) {
                 const delay = {
-                    show: tooltipNode.getAttribute('data-delay-show') || 150,
-                    hide: tooltipNode.getAttribute('data-delay-hide') || 75,
+                    show: tooltipNode.dataset.delayShow || 150,
+                    hide: tooltipNode.dataset.delayHide || 75,
                 };
-                const extraClasses = tooltipNode.getAttribute('data-extra-classes') || '';
+                const extraClasses = tooltipNode.dataset.extraClasses || '';
 
                 $(tooltipNode).tooltip({
                     delay,

@@ -93,7 +93,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                             [],
                             'menu'
                         ),
-                    ]
+                    ],
                 ]
             ),
             self::ITEM__BROWSE => $this->createMenuItem(
@@ -147,7 +147,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                             [],
                             'menu'
                         ),
-                    ]
+                    ],
                 ]
             ),
         ];
@@ -166,7 +166,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                             [],
                             'menu'
                         ),
-                    ]
+                    ],
                 ]
             );
         }

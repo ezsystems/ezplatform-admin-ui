@@ -49,7 +49,6 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
-
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
