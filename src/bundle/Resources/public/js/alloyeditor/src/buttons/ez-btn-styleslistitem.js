@@ -12,6 +12,7 @@ export default class EzBtnStylesListItem extends AlloyEditor.ButtonStylesListIte
      */
     render() {
         const className = this.props.name === this.props.activeStyle ? 'ae-toolbar-element active' : 'ae-toolbar-element';
+
         return (
             <button
                 className={className}
