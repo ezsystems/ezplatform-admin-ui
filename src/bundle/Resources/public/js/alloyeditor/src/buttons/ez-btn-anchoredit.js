@@ -71,9 +71,18 @@ export default class EzBtnAnchorEdit extends Component {
 
     updateValue({ nativeEvent }) {
         const value = nativeEvent.target.value;
-        const isValueUnique = this.isValueUnique(value);
 
-        this.setState(() => ({ value, isValueUnique }));
+        if (this.isValueValid(value)) {
+            const isValueUnique = this.isValueUnique(value);
+
+            this.setState(() => ({ value, isValueUnique }));
+        }
+    }
+
+    isValueValid(value) {
+        const acceptablePattern = new RegExp('^[A-Za-z][A-Za-z0-9]*$');
+
+        return acceptablePattern.test(value);
     }
 
     isValueUnique(value) {
