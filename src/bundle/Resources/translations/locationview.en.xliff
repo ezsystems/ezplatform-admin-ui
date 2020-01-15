@@ -18,7 +18,7 @@
       </trans-unit>
       <trans-unit id="a4b9e9b4898dd285237fc60130970ce7ed988871" resname="content.create.choose_content_type">
         <source>Create content</source>
-        <target state="new">Create your content</target>
+        <target state="new">Create content</target>
         <note>key: content.create.choose_content_type</note>
       </trans-unit>
       <trans-unit id="f599001c1ab9442f20e23d535e1dad8f3b75c337" resname="content.create.select_content_type">
