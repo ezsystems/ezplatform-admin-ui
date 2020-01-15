@@ -47,10 +47,9 @@
         }
 
         .table &--has-icon {
-            padding: 0 calculateRem(8px);
+            padding: calculateRem(11px) calculateRem(8px) 0 calculateRem(8px);
             width: calculateRem(24px);
             text-align: right;
-            vertical-align: middle;
             line-height: 0;
         }
 
