@@ -1,5 +1,5 @@
 (function(moment) {
-    const formatICUEx = /[GdayLqDeEc]+/g;
+    const formatICUEx = /[GdayLqDeEc]\1*/g;
     const formatICUMap = {
         dd: 'DD',
         d: 'D',
