@@ -6,5 +6,6 @@
     {% set limit = 1 %}
     {% set default_location = form.vars.default_location ? form.vars.default_location.id : null %}
     {% set allowed_content_type_identifiers = form.parent.vars.value.fieldDefinition.fieldSettings.selectionContentTypes %}
+    {% set helper = 'ezobjectrelation.helper'|trans|desc('Stores a Relation to a Content item.') %}
     {{ block('ezobjectrelation_base_widget') }}
 {% endblock %}

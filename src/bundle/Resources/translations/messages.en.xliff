@@ -354,11 +354,6 @@
         <target state="new">You are about to delete a Content item that has one or more asset Field(s) used by other Content items. These assets will remain available in system.</target>
         <note>key: trash_asset.modal.message_header</note>
       </trans-unit>
-      <trans-unit id="e81a14f38ebe272cb11ef90e2948a8c6602307ca" resname="trash_asset_single.modal.message">
-        <source>You have the option to delete %content_name% (%content_type%) only or to also delete the assets it is using. Make your choice:</source>
-        <target state="new">You have the option to delete %content_name% (%content_type%) only or to also delete the assets it is using. Make your choice:</target>
-        <note>key: trash_asset_single.modal.message</note>
-      </trans-unit>
       <trans-unit id="ff537a1e092270edf7497dc13ce051cdb458958b" resname="trash_asset_single.modal.message_main">
         <source>'%content_name%' has 1 or more asset Field(s). You have an option to send only the Content item to Trash, or to send the Content item and its assets to Trash. Please select your option:</source>
         <target state="new">'%content_name%' has 1 or more asset Field(s). You have an option to send only the Content item to Trash, or to send the Content item and its assets to Trash. Please select your option:</target>
