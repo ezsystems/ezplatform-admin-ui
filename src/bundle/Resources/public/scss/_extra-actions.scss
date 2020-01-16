@@ -48,7 +48,7 @@
         color: $ez-color-secondary;
         margin-bottom: calculateRem(15px);
         font-weight: 600;
-        border-bottom: 1px solid $ez-color-secondary;
+        border-bottom: calculateRem(1px) solid $ez-color-secondary;
     }
 
     &__content {
@@ -225,18 +225,6 @@
                     transform: translate(calc(-100% - #{calculateRem(15px)}), 0) scaleX(0);
                 }
             }
-        }
-    }
-}
-
-.ez-btn {
-    &--active-button {
-        background-color: $ez-white;
-        color: $ez-color-secondary;
-        border-color: $ez-white;
-
-        .ez-icon {
-            fill: $ez-color-secondary;
         }
     }
 }
