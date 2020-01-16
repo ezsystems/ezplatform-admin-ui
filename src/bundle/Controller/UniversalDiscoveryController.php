@@ -14,14 +14,11 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\SearchService;
-use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
 use eZ\Publish\API\Repository\Values\User\Limitation;
-use eZ\Publish\Core\Repository\Values\Content\Content as CoreContent;
-use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformRest\Output\Visitor;
@@ -99,8 +96,6 @@ class UniversalDiscoveryController extends Controller
         Request $request,
         int $locationId
     ): JsonResponse {
-        $location = $this->loadLocation($locationId);
-
         $offset = $request->query->getInt('offset', 0);
         $limit = $request->query->getInt('limit', 25);
         $sortClauseName = $request->query->getAlpha('sortClause', self::SORT_CLAUSE_DATE_PUBLISHED);
@@ -109,7 +104,7 @@ class UniversalDiscoveryController extends Controller
         $sortClause = $this->getSortClause($sortClauseName, $sortOrder);
 
         return new JsonResponse(
-            $this->getLocationData($location, $offset, $limit, $sortClause)
+            $this->getLocationData($locationId, $offset, $limit, $sortClause)
         );
     }
 
@@ -117,8 +112,6 @@ class UniversalDiscoveryController extends Controller
         Request $request,
         int $locationId
     ): JsonResponse {
-        $location = $this->loadLocation($locationId);
-
         $offset = $request->query->getInt('offset', 0);
         $limit = $request->query->getInt('limit', 25);
         $sortClauseName = $request->query->getAlpha('sortClause', self::SORT_CLAUSE_DATE_PUBLISHED);
@@ -127,7 +120,7 @@ class UniversalDiscoveryController extends Controller
         $sortClause = $this->getSortClause($sortClauseName, $sortOrder);
 
         return new JsonResponse(
-            $this->getLocationGridViewData($location, $offset, $limit, $sortClause)
+            $this->getLocationGridViewData($locationId, $offset, $limit, $sortClause)
         );
     }
 
@@ -135,16 +128,15 @@ class UniversalDiscoveryController extends Controller
         Request $request,
         int $locationId
     ): JsonResponse {
-        $location = $this->loadLocation($locationId);
-
         $limit = $request->query->getInt('limit', 25);
         $sortClauseName = $request->query->getAlpha('sortClause', self::SORT_CLAUSE_DATE_PUBLISHED);
         $sortOrder = $request->query->getAlpha('sortOrder', Query::SORT_ASC);
+        $rootLocationId = $request->query->getInt('rootLocationId', self::ROOT_LOCATION_ID);
 
         $sortClause = $this->getSortClause($sortClauseName, $sortOrder);
-        $breadcrumbLocations = $this->getBreadcrumbLocations($location);
+        $breadcrumbLocations = $this->getBreadcrumbLocations($locationId);
 
-        $columns = $this->getColumns($location, $limit, $sortClause);
+        $columns = $this->getColumns($locationId, $limit, $sortClause, false, $rootLocationId);
 
         return new JsonResponse([
             'breadcrumb' => array_map(
@@ -161,58 +153,67 @@ class UniversalDiscoveryController extends Controller
         Request $request,
         int $locationId
     ): JsonResponse {
-        $location = $this->loadLocation($locationId);
-
         $limit = $request->query->getInt('limit', 25);
         $sortClauseName = $request->query->getAlpha('sortClause', self::SORT_CLAUSE_DATE_PUBLISHED);
         $sortOrder = $request->query->getAlpha('sortOrder', Query::SORT_ASC);
+        $rootLocationId = $request->query->getInt('rootLocationId', self::ROOT_LOCATION_ID);
 
         $sortClause = $this->getSortClause($sortClauseName, $sortOrder);
 
-        $columns = $this->getColumns($location, $limit, $sortClause, true);
+        $columns = $this->getColumns($locationId, $limit, $sortClause, true, $rootLocationId);
 
         return new JsonResponse([
             'breadcrumb' => array_map(
                 function (Location $location) {
                     return $this->getRestFormat($location);
                 },
-                $this->getBreadcrumbLocations($location)
+                $this->getBreadcrumbLocations($locationId)
             ),
             'columns' => $columns,
         ]);
     }
 
     private function getColumns(
-        Location $location,
+        int $locationId,
         int $limit,
         Query\SortClause $sortClause,
-        bool $gridView = false
+        bool $gridView = false,
+        int $rootLocationId = self::ROOT_LOCATION_ID
     ): array {
-        $breadcrumbLocations = $this->getBreadcrumbLocations($location);
-        $breadcrumbLocationsLast = count($breadcrumbLocations) - 1;
+        $location = $this->locationService->loadLocation($locationId);
 
-        $columnLocations = $breadcrumbLocationsLast < 2
-            ? $breadcrumbLocations
+        $locationPath = $this->getRelativeLocationPath($rootLocationId, $location->path);
+        $locationPathLast = count($locationPath) - 1;
+
+        $columnLocations = $locationPathLast < 4
+            ? $locationPath
             : [
-                $breadcrumbLocations[0], // First
-                $breadcrumbLocations[$breadcrumbLocationsLast - 1], // Before last
-                $breadcrumbLocations[$breadcrumbLocationsLast], // Last
+                $locationPath[0], // First
+                $locationPath[$locationPathLast - 2],
+                $locationPath[$locationPathLast - 1],
+                $locationPath[$locationPathLast], // Last
             ];
 
-        foreach ($columnLocations as $columnLocation) {
-            if (!isset($columns[$columnLocation->id])) {
-                $columns[$columnLocation->id] = [
-                    'location' => $this->getRestFormat($columnLocation),
-                    'subitems' => [
-                        'locations' => $this->getSubitemLocations($columnLocation, 0, $limit, $sortClause),
-                    ],
-                ];
-            }
+        $columnLocations = array_map(function ($id) {
+            return (int)$id;
+        }, $columnLocations);
+
+        $columns = [];
+
+        foreach ($columnLocations as $columnLocationId) {
+            $columnLocation = ($columnLocationId !== self::ROOT_LOCATION_ID)
+                ? $this->getRestFormat($this->locationService->loadLocation($columnLocationId))
+                : null;
+
+            $columns[$columnLocationId] = [
+                'location' => $columnLocation,
+                'subitems' => $this->getSubitemLocations($columnLocationId, 0, $limit, $sortClause),
+            ];
         }
 
-        $columns[$location->id] = $gridView
-            ? $this->getLocationGridViewData($location, 0, $limit, $sortClause)
-            : $this->getLocationData($location, 0, $limit, $sortClause);
+        $columns[$locationId] = $gridView
+            ? $this->getLocationGridViewData($locationId, 0, $limit, $sortClause)
+            : $this->getLocationData($locationId, 0, $limit, $sortClause);
 
         return $columns;
     }
@@ -226,11 +227,15 @@ class UniversalDiscoveryController extends Controller
         }, $parentPath);
     }
 
-    private function getBreadcrumbLocations(Location $location): array
-    {
-        $filter = $location->id === 1
-            ? new Query\Criterion\ParentLocationId($location->path)
-            : new Query\Criterion\LocationId($this->getParentLocationPath($location));
+    private function getBreadcrumbLocations(
+        int $locationId,
+        int $rootLocationId = self::ROOT_LOCATION_ID
+    ): array {
+        $filter = $locationId === $rootLocationId
+            ? new Query\Criterion\ParentLocationId($rootLocationId)
+            : new Query\Criterion\LocationId($this->getParentLocationPath(
+                $this->locationService->loadLocation($locationId)
+            ));
 
         $searchResult = $this->searchService->findLocations(
             new LocationQuery([
@@ -261,14 +266,14 @@ class UniversalDiscoveryController extends Controller
     }
 
     private function getSubitemContents(
-        Location $location,
+        int $locationId,
         int $offset,
         int $limit,
         Query\SortClause $sortClause
     ): array {
         $searchResult = $this->searchService->findContent(
             new LocationQuery([
-                'filter' => new Query\Criterion\ParentLocationId($location->id),
+                'filter' => new Query\Criterion\ParentLocationId($locationId),
                 'sortClauses' => [$sortClause],
                 'offset' => $offset,
                 'limit' => $limit,
@@ -289,69 +294,91 @@ class UniversalDiscoveryController extends Controller
     }
 
     private function getSubitemLocations(
-        Location $location,
+        int $locationId,
         int $offset,
         int $limit,
         Query\SortClause $sortClause
     ): array {
         $searchResult = $this->searchService->findLocations(
             new LocationQuery([
-                'filter' => new Query\Criterion\ParentLocationId($location->id),
+                'filter' => new Query\Criterion\ParentLocationId($locationId),
                 'sortClauses' => [$sortClause],
                 'offset' => $offset,
                 'limit' => $limit,
             ])
         );
 
-        return array_map(
-            function (SearchHit $searchHit) {
-                return $this->getRestFormat($searchHit->valueObject);
-            },
-            $searchResult->searchHits
-        );
+        return [
+            'locations' => array_map(
+                function (SearchHit $searchHit) {
+                    return $this->getRestFormat($searchHit->valueObject);
+                },
+                $searchResult->searchHits
+            ),
+            'totalCount' => $searchResult->totalCount,
+        ];
     }
 
     private function getLocationData(
-        Location $location,
+        int $locationId,
         int $offset,
         int $limit,
         Query\SortClause $sortClause
     ): array {
-        $content = $location->id === 1
-            ? $this->getRootContent($location)
-            : $this->contentService->loadContentByContentInfo($location->getContentInfo());
+        if ($locationId === self::ROOT_LOCATION_ID) {
+            return [
+                'subitems' => $this->getSubitemLocations($locationId, $offset, $limit, $sortClause),
+            ];
+        }
+
+        $location = $this->locationService->loadLocation($locationId);
+        $content = $this->contentService->loadContentByContentInfo($location->getContentInfo());
         $contentType = $this->contentTypeService->loadContentType($location->getContentInfo()->contentTypeId);
 
         return [
             'location' => $this->getRestFormat($location),
-            'bookmark' => $this->bookmarkService->isBookmarked($location),
+            'bookmarked' => $this->bookmarkService->isBookmarked($location),
             'permissions' => $this->getLocationPermissionRestrictions($location),
             'version' => $this->getRestFormat(new Version($content, $contentType, [])),
-            'subitems' => [
-                'locations' => $this->getSubitemLocations($location, $offset, $limit, $sortClause),
-            ],
+            'subitems' => $this->getSubitemLocations($locationId, $offset, $limit, $sortClause),
         ];
     }
 
     private function getLocationGridViewData(
-        Location $location,
+        int $locationId,
         int $offset,
         int $limit,
         Query\SortClause $sortClause
     ): array {
-        $content = $location->id === 1
-            ? $this->getRootContent($location)
-            : $this->contentService->loadContentByContentInfo($location->getContentInfo());
+        if ($locationId === self::ROOT_LOCATION_ID) {
+            $locations = $this->getSubitemLocations($locationId, $offset, $limit, $sortClause);
+            $versions = $this->getSubitemContents($locationId, $offset, $limit, $sortClause);
+
+            return [
+                'subitems' => [
+                    'locations' => $locations['locations'],
+                    'totalCount' => $locations['totalCount'],
+                    'versions' => $versions,
+                ],
+            ];
+        }
+
+        $location = $this->locationService->loadLocation($locationId);
+        $content = $this->contentService->loadContentByContentInfo($location->getContentInfo());
         $contentType = $this->contentTypeService->loadContentType($location->getContentInfo()->contentTypeId);
+
+        $locations = $this->getSubitemLocations($locationId, $offset, $limit, $sortClause);
+        $versions = $this->getSubitemContents($locationId, $offset, $limit, $sortClause);
 
         return [
             'location' => $this->getRestFormat($location),
-            'bookmark' => $this->bookmarkService->isBookmarked($location),
+            'bookmarked' => $this->bookmarkService->isBookmarked($location),
             'permissions' => $this->getLocationPermissionRestrictions($location),
             'version' => $this->getRestFormat(new Version($content, $contentType, [])),
             'subitems' => [
-                'locations' => $this->getSubitemLocations($location, $offset, $limit, $sortClause),
-                'versions' => $this->getSubitemContents($location, $offset, $limit, $sortClause),
+                'locations' => $locations['locations'],
+                'totalCount' => $locations['totalCount'],
+                'versions' => $versions,
             ],
         ];
     }
@@ -374,32 +401,17 @@ class UniversalDiscoveryController extends Controller
         return new $sortClauseClass($sortOrder);
     }
 
-    private function getRootContent(Location $location): Content
+    private function getRelativeLocationPath(int $locationId, array $locationPath): array
     {
-        $contentInfo = $location->getContentInfo();
+        $locationIds = array_values($locationPath);
 
-        return new CoreContent([
-            'versionInfo' => new VersionInfo([
-                'names' => [
-                    $contentInfo->mainLanguageCode => $contentInfo->name,
-                ],
-                'contentInfo' => $contentInfo,
-                'versionNo' => $contentInfo->currentVersionNo,
-                'modificationDate' => $contentInfo->modificationDate,
-                'creationDate' => $contentInfo->modificationDate,
-                'creatorId' => $contentInfo->ownerId,
-            ]),
-        ]);
-    }
+        $index = array_search($locationId, $locationIds);
 
-    private function loadLocation(int $locationId): Location
-    {
-        if ($locationId === self::ROOT_LOCATION_ID) {
-            return $this->repository->sudo(function (Repository $repository) use ($locationId) {
-                return $repository->getLocationService()->loadLocation($locationId);
-            });
+        // Location is not part of path
+        if ($index === false) {
+            return [];
         }
 
-        return $this->locationService->loadLocation($locationId);
+        return array_slice($locationIds, $index);
     }
 }
