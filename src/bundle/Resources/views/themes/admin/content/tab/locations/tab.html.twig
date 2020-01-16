@@ -28,13 +28,13 @@
             {% if locations is not empty %}
                 {% for location in locations %}
                     <tr>
-                        <td class="ez-table__cell ez-table__cell--has-checkbox align-middle">
+                        <td class="ez-table__cell ez-table__cell--has-checkbox">
                             {{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'disabled': not location.canDelete}}) }}
                         </td>
-                        <td class="ez-table__cell align-middle">
+                        <td class="ez-table__cell">
                             {% include '@ezdesign/ui/location_path.html.twig' with {'locations': location.pathLocations} %}
                         </td>
-                        <td class="ez-table__cell align-middle">{{ location.childCount }}</td>
+                        <td class="ez-table__cell">{{ location.childCount }}</td>
                         <td class="ez-table__cell">
                             <label class="ez-checkbox-icon {{ not location.explicitlyHidden ? 'is-checked' }}{% if not can_hide[location.id] %} disabled{% endif %}">
                                 <svg class="ez-icon ez-icon-view">
@@ -57,8 +57,8 @@
                                 </span>
                             {% endif %}
                         </td>
-                        <td class="ez-table__cell align-middle"></td>
-                        <td class="ez-table__cell align-middle">
+                        <td class="ez-table__cell"></td>
+                        <td class="ez-table__cell">
                             <input
                                 type="radio"
                                 {{ location.main ? 'checked' }}

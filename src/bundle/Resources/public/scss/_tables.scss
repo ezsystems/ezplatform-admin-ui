@@ -27,6 +27,8 @@
     }
 
     &__cell {
+        vertical-align: top;
+
         &--field-definitions-head {
             width: calc(100% / 3);
         }
@@ -45,10 +47,9 @@
         }
 
         .table &--has-icon {
-            padding: 0 calculateRem(8px);
+            padding: calculateRem(11px) calculateRem(8px) 0 calculateRem(8px);
             width: calculateRem(24px);
             text-align: right;
-            vertical-align: middle;
             line-height: 0;
         }
 
@@ -107,7 +108,7 @@
 
     td {
         font-size: calculateRem(14px);
-        vertical-align: middle;
+        vertical-align: top;
 
         .checkbox label {
             margin-bottom: 0;
