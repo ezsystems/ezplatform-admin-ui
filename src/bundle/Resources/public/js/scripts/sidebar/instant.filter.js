@@ -31,7 +31,7 @@
             (total, item) => [
                 ...total,
                 {
-                    label: item.innerHTML.toLowerCase(),
+                    label: item.textContent.toLowerCase(),
                     element: item,
                 },
             ],
