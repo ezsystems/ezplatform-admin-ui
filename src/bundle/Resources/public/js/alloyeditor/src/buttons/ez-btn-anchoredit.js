@@ -85,6 +85,10 @@ export default class EzBtnAnchorEdit extends Component {
 
             container.insertAdjacentHTML('afterbegin', data);
 
+            /*
+                Using [id="value"] instead of just #value in querySelectorAll because with the latter this function
+                accepts only CSS valid id instead of valid HTML id selector
+            */
             return (
                 value &&
                 [...container.querySelectorAll(`[id="${value}"`)].every((element) => {
