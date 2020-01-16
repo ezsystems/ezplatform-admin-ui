@@ -87,7 +87,8 @@ export default class EzBtnAnchorEdit extends Component {
 
             /*
                 Using [id="value"] instead of just #value in querySelectorAll because with the latter this function
-                accepts only CSS valid id instead of valid HTML id selector
+                accepts only CSS valid id instead of valid HTML id selector.
+                JIRA ref: https://jira.ez.no/browse/EZP-30485
             */
             return (
                 value &&
