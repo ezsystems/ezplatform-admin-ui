@@ -71,18 +71,9 @@ export default class EzBtnAnchorEdit extends Component {
 
     updateValue({ nativeEvent }) {
         const value = nativeEvent.target.value;
+        const isValueUnique = this.isValueUnique(value);
 
-        if (this.isValueValid(value)) {
-            const isValueUnique = this.isValueUnique(value);
-
-            this.setState(() => ({ value, isValueUnique }));
-        }
-    }
-
-    isValueValid(value) {
-        const acceptablePattern = new RegExp('^[A-Za-z][A-Za-z0-9]*$');
-
-        return acceptablePattern.test(value);
+        this.setState(() => ({ value, isValueUnique }));
     }
 
     isValueUnique(value) {
@@ -96,7 +87,7 @@ export default class EzBtnAnchorEdit extends Component {
 
             return (
                 value &&
-                [...container.querySelectorAll(`#${value}`)].every((element) => {
+                [...container.querySelectorAll(`[id="${value}"`)].every((element) => {
                     const ckeditorElement = new CKEDITOR.dom.element(element);
 
                     block.removeClass('is-block-focused');
