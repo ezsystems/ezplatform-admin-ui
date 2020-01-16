@@ -46,15 +46,30 @@
         <target state="new">Search</target>
         <note>key: ezgmaplocation.action.search</note>
       </trans-unit>
-      <trans-unit id="f95e95b9cb063f060b0e8ea74c0e11409643316d" resname="ezobjectrelationlist.cta.limit">
-        <source>Set up relations with up to %limit% Content item(s)</source>
-        <target state="new">Set up relations with up to %limit% Content item(s)</target>
-        <note>key: ezobjectrelationlist.cta.limit</note>
+      <trans-unit id="8743253091e5a5798966bae8d2dc65682bffa0de" resname="ezobjectrelation.helper">
+        <source>Stores a Relation to a Content item.</source>
+        <target state="new">Stores a Relation to a Content item.</target>
+        <note>key: ezobjectrelation.helper</note>
+      </trans-unit>
+      <trans-unit id="9a8153d976ff4a6805e00fa7945d153f01bc61a8" resname="ezobjectrelationlist.cta.limit.multi">
+        <source>Set up multiple Relations with one or several Content items</source>
+        <target state="new">Set up multiple Relations with one or several Content items</target>
+        <note>key: ezobjectrelationlist.cta.limit.multi</note>
+      </trans-unit>
+      <trans-unit id="6589b9cece0e96f6430a994e1b4e9db1ee5f8139" resname="ezobjectrelationlist.cta.limit.single">
+        <source>Set up a Relation with one Content item</source>
+        <target state="new">Set up a Relation with one Content item</target>
+        <note>key: ezobjectrelationlist.cta.limit.single</note>
       </trans-unit>
       <trans-unit id="df33d5cc8c00514b2c50d4949b872cc3cd99284c" resname="ezobjectrelationlist.cta.select">
         <source>Select content</source>
         <target state="new">Select content</target>
         <note>key: ezobjectrelationlist.cta.select</note>
+      </trans-unit>
+      <trans-unit id="52005ae63462da5d58857a144007d81cd7375fc2" resname="ezobjectrelationlist.helper">
+        <source>Stores Relations to other Content items.</source>
+        <target state="new">Stores Relations to other Content items.</target>
+        <note>key: ezobjectrelationlist.helper</note>
       </trans-unit>
       <trans-unit id="91cee9d11eeed40768d4e5270d91cd5165f4562f" resname="ezobjectrelationlist.limit">
         <source>(max. %limit%)</source>

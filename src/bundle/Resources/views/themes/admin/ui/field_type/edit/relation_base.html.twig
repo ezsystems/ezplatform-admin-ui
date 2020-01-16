@@ -5,6 +5,7 @@
     {% set default_location = default_location|default(1) %}
     {% set has_relations = relations|length > 0 %}
     {% set allowed_content_types = form.parent.vars.value.fieldDefinition.fieldSettings.selectionContentTypes %}
+    {% set helper = helper|default('') %}
     <div class="ez-relations__wrapper" {% if not has_relations %}hidden="true"{% endif %}>
         <table class="table ez-relations__table">
             <thead>
@@ -79,8 +80,10 @@
     </div>
     <div class="ez-relations__cta" {% if has_relations %}hidden="true"{% endif %}>
         <p class="ez-relations__cta-text">
-        {% if limit != 0 %}
-            {{ 'ezobjectrelationlist.cta.limit'|trans({'%limit%': limit})|desc('Set up relations with up to %limit% Content item(s)') }}
+        {% if limit != 1 %}
+            {{ 'ezobjectrelationlist.cta.limit.multi'|trans|desc('Set up multiple Relations with one or several Content items') }}
+        {% else %}
+            {{ 'ezobjectrelationlist.cta.limit.single'|trans|desc('Set up a Relation with one Content item') }}
         {% endif %}
         </p>
         <button
@@ -109,4 +112,5 @@
     </div>
     {% set attr = attr|merge({'hidden': 'hidden'}) %}
     {{ block('form_widget') }}
+    <div class="ez-relations__helper-text">{{ helper }}</div>
 {% endblock %}

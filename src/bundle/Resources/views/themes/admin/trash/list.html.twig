@@ -40,7 +40,7 @@
                                 {% do form_trash_item_restore.location.setRendered %}
                                 {% do form_trash_item_restore.restore.setRendered %}
                             {% endif %}
-                            {% if can_delete and form_trash_item_restore.trash_items|length > 0 %}
+                            {% if can_delete %}
                                 {% set modal_data_target = 'delete-trash-items-modal' %}
                                 <button
                                     id="delete-trash-items"

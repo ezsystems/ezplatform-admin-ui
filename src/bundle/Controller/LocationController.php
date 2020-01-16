@@ -402,6 +402,34 @@ class LocationController extends Controller
     }
 
     /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData|\EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashContainerData $data
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    private function handleTrashLocationForm($data): RedirectResponse
+    {
+        $location = $data->getLocation();
+        $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
+        $this->trashService->trash($location);
+
+        $this->notificationHandler->success(
+            $this->translator->trans(
+                /** @Desc("Location '%name%' moved to Trash.") */
+                'location.trash.success',
+                ['%name%' => $location->getContentInfo()->name],
+                'location'
+            )
+        );
+
+        return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+            'locationId' => $parentLocation->id,
+        ]));
+    }
+
+    /**
      * Handles removing locations assigned to content item based on submitted form.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
