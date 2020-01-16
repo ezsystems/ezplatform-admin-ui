@@ -144,7 +144,8 @@ export default class EzBtnAttributesUpdate extends EzWidgetButton {
         }
 
         const classList = block.$.classList;
-        this.classes.choices.forEach(className => {
+
+        this.classes.choices.forEach((className) => {
             if (classList.contains(className)) {
                 classList.remove(className);
             }
