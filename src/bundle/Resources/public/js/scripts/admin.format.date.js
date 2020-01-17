@@ -1,5 +1,5 @@
 (function(moment) {
-    const formatICUEx = /[GdayLqDeEc]\1*/g;
+    const formatICUEx = /([GdayLqDeEc])\1*/g;
     const formatICUMap = {
         dd: 'DD',
         d: 'D',
@@ -108,18 +108,17 @@
             Splitting format by ' character in order to cut strings between ' ' as these strings should be escaped
             according to ICU documentation: https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classSimpleDateFormat.html#details
             At the end changing them to [ ] brackets for Moment.js
+            If there is [] without text inside, change it to '
         */
         const form = format
             .split('\'')
             .map((partialStr, key) => {
                 // Substrings on even positions are the ones that were inside ' ' quotes (that shouldn't be replaced)
-                if (key % 2) {
-                    return partialStr;
-                }
-                return replaceFormat(partialStr);
+                return key % 2 ? partialStr : replaceFormat(partialStr);
             })
             .join('\'')
-            .replace(/\'(.*?)\'/g, '[$1]');
+            .replace(/\'(.*?)\'/g, '[$1]')
+            .replace(/\[\]/g, '\\\'');
 
         return this.format(form);
     };
