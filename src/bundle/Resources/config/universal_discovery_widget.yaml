@@ -21,7 +21,7 @@ system:
                         preselected_language: null
                         preselected_content_type: null
                         hidden: false
-                        auto_confirm_after_publish: false
+                        auto_confirm_after_publish: true
                     tabs_config:
                         search:
                             items_per_page: 50
@@ -43,8 +43,6 @@ system:
                         bookmarks:
                             hidden: true
                     multiple: false
-                    content_on_the_fly:
-                        auto_confirm_after_publish: true
                 browse:
                     allow_content_edit: true
                 single:
