@@ -62,6 +62,7 @@ export default class EzBtnImageLinkEdit extends EzBtnLinkEdit {
 
     removeLink() {
         const link = this.widget.getEzLinkElement();
+        const editor = this.props.editor.get('nativeEditor');
 
         link.remove();
 
@@ -70,6 +71,8 @@ export default class EzBtnImageLinkEdit extends EzBtnLinkEdit {
         this.widget.setFocused(true);
 
         this.props.cancelExclusive();
+
+        editor.fire('customUpdate');
     }
 
     updateLink() {

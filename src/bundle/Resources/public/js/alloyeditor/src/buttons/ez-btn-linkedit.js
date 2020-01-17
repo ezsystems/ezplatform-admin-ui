@@ -439,6 +439,8 @@ export default class EzBtnLinkEdit extends Component {
         this.invokeWithFixedScrollbar(() => {
             editor.fire('actionPerformed', this);
         });
+
+        editor.fire('customUpdate');
     }
 
     /**
