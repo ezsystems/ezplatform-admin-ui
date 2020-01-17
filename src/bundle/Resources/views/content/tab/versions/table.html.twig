@@ -26,16 +26,16 @@
         </thead>
         <tbody>
         {% for version in versions %}
-
+            {% set versionLanguageCode = version.initialLanguageCode|default(version.translations[0].languageCode) %}
             {% set edit_url = content_is_user is defined and content_is_user ?
                 path('ez_user_update', {
                 'contentId': version.contentInfo.id,
                 'versionNo': version.versionNo,
-                'language': version.initialLanguageCode,
+                'language': versionLanguageCode,
             }) : path('ez_content_draft_edit', {
                 'contentId': version.contentInfo.id,
                 'versionNo': version.versionNo,
-                'language': version.initialLanguageCode,
+                'language': versionLanguageCode,
                 'locationId': location.id
             })
             %}
