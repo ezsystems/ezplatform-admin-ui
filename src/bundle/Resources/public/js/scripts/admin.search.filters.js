@@ -121,7 +121,7 @@
         toggleDisabledStateOnApplyBtn();
     };
     const dateConfig = {
-        formatDate: (date) => new Date(date).toLocaleDateString(),
+        formatDate: (date) => eZ.helpers.timezone.formatShortDateTime(date, null),
     };
     const checkSelectFieldsFilled = (modal) => {
         const inputs = [...modal.querySelectorAll('.ez-date-select')];
