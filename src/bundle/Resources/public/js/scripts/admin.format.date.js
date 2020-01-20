@@ -1,5 +1,10 @@
 (function(moment) {
-    const formatICUEx = /([GdayLqDeEc])\1*/g;
+    /*
+        ([GdayLqDeEc])\1* -> find any pattern of one or repeated one of these characters
+        or
+        \'([^\']|(\'\'))*\' -> find any string in ' ' quotes
+    */
+    const formatICUEx = /([GdayLqDeEc])\1*|\'([^\']|(\'\'))*\'/g;
     const formatICUMap = {
         dd: 'DD',
         d: 'D',
@@ -97,28 +102,22 @@
         );
     };
 
-    const replaceFormat = function(format) {
-        return format.replace(formatICUEx, (icuStr) => {
-            return typeof formatICUMap[icuStr] === 'function' ? formatICUMap[icuStr].call(this) : formatICUMap[icuStr];
-        });
+    const formatEscapedString = function(icuStr) {
+        if (icuStr === '\'\'') {
+            return '[\']';
+        }
+
+        return icuStr.replace(/\'(.*)\'/g, '[$1]').replace(/\'\'/g, '\'');
     }
 
     moment.fn.formatICU = function(format) {
-        /*
-            Splitting format by ' character in order to cut strings between ' ' as these strings should be escaped
-            according to ICU documentation: https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classSimpleDateFormat.html#details
-            At the end changing them to [ ] brackets for Moment.js
-            If there is [] without text inside, change it to '
-        */
-        const form = format
-            .split('\'')
-            .map((partialStr, key) => {
-                // Substrings on even positions are the ones that were inside ' ' quotes (that shouldn't be replaced)
-                return key % 2 ? partialStr : replaceFormat(partialStr);
-            })
-            .join('\'')
-            .replace(/\'(.*?)\'/g, '[$1]')
-            .replace(/\[\]/g, '\\\'');
+        const form = format.replace(formatICUEx, (icuStr) => {
+            if (icuStr[0] === '\'') {
+                return formatEscapedString(icuStr);
+            }
+
+            return typeof formatICUMap[icuStr] === 'function' ? formatICUMap[icuStr].call(this) : formatICUMap[icuStr];
+        });
 
         return this.format(form);
     };
