@@ -1,8 +1,13 @@
 .ez-content-item {
     &__title {
+        display: flex;
+    }
+
+    &__name {
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-left: calculateRem(2px);
     }
 }
 

@@ -1,8 +1,8 @@
 .ez-page-title {
-    padding-bottom: 1rem;
+    padding-bottom: calculateRem(16px);
     display: grid;
-    grid-template-columns: 1fr 40px;
-    grid-column-gap: 10px;
+    grid-template-columns: calc(100% - #{calculateRem(50px)}) calculateRem(50px);
+    grid-column-gap: calculateRem(10px);
     grid-template-rows: auto;
     grid-template-areas:
         "content-item bookmark"
@@ -11,18 +11,22 @@
     &__content-item {
         width: 100%;
         margin-bottom: 0;
-        padding-left: 2.25rem;
-        text-indent: -2.4rem;
         grid-area: content-item;
         justify-self: start;
+        display: flex;
+    }
+
+    &__content-name {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        width: calc(100% - #{calculateRem(36px)});
+        padding-left: calculateRem(2px);
     }
 
     &__content-type-name {
-        padding-left: 2.25rem;
-        font-size: 1.125rem;
+        padding-left: calculateRem(38px);
+        font-size: calculateRem(18px);
         font-weight: 400;
         color: $ez-color-base-light;
         grid-area: content-type-name;
