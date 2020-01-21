@@ -99,6 +99,8 @@
                 : defaultDate.getTimezoneOffset() * 60;
 
             defaultDate.setTime(defaultDate.getTime() + timezoneOffset * 1000);
+
+            updateInputValue(sourceInput, [defaultDate]);
         }
 
         const flatpickrInstance = flatpickr(
