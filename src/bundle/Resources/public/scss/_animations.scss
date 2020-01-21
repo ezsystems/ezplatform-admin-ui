@@ -2,7 +2,7 @@
     0% {
         transform: scale(1);
         box-shadow: none;
-        background-color: #fff;
+        background-color: $ez-white;
     }
     25% {
         box-shadow: inset 10px 10px 10px 4px rgba(237, 237, 237, 0.1),
@@ -17,6 +17,7 @@
     100% {
         transform: scale(1);
         box-shadow: none;
+        background-color: transparent;
     }
 }
 
@@ -35,6 +36,6 @@
     }
     100% {
         transform: scale(1);
-        background-color: #fff;
+        background-color: $ez-white;
     }
 }
