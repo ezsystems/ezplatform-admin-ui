@@ -66,6 +66,10 @@ img {
     .align-right {
         float: right;
     }
+
+    blockquote {
+        margin: calculateRem(16px) calculateRem(40px);
+    }
 }
 
 .ez-login-view {
