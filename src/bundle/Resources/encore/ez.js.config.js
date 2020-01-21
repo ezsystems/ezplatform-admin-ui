@@ -46,6 +46,7 @@ const alloyEditor = [
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-underline.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-subscript.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-superscript.js'),
+    path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-styleslistitem.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-quote.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-strike.js'),
     path.resolve(__dirname, '../public/js/alloyeditor/src/buttons/ez-btn-link.js'),
