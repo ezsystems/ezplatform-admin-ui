@@ -183,16 +183,20 @@ class UniversalDiscoveryController extends Controller
         $location = $this->locationService->loadLocation($locationId);
 
         $locationPath = $this->getRelativeLocationPath($rootLocationId, $location->path);
-        $locationPathLast = count($locationPath) - 1;
+        $locationPathCount = count($locationPath);
 
-        $columnLocations = $locationPathLast < 4
-            ? $locationPath
-            : [
+        if ($locationPathCount > 4) {
+            $locationPathLast = $locationPathCount - 1;
+
+            $columnLocations = [
                 $locationPath[0], // First
                 $locationPath[$locationPathLast - 2],
                 $locationPath[$locationPathLast - 1],
                 $locationPath[$locationPathLast], // Last
             ];
+        } else {
+            $columnLocations = $locationPath;
+        }
 
         $columnLocations = array_map(function ($id) {
             return (int)$id;
