@@ -29,6 +29,7 @@ use Symfony\Component\HttpFoundation\Request;
 class UniversalDiscoveryController extends Controller
 {
     private const ROOT_LOCATION_ID = 1;
+    private const COLUMNS_NUMBER = 4;
 
     private const SORT_CLAUSE_DATE_PUBLISHED = 'DatePublished';
     private const SORT_CLAUSE_CONTENT_NAME = 'ContentName';
@@ -185,7 +186,7 @@ class UniversalDiscoveryController extends Controller
         $locationPath = $this->getRelativeLocationPath($rootLocationId, $location->path);
         $locationPathCount = count($locationPath);
 
-        if ($locationPathCount > 4) {
+        if ($locationPathCount > self::COLUMNS_NUMBER) {
             $locationPathLast = $locationPathCount - 1;
 
             $columnLocations = [
