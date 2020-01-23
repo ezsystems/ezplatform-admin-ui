@@ -162,8 +162,30 @@
             }
         }
     }
+}
 
-    &--dropdown {
+.ez-extra-actions-container {
+    .ez-extra-actions {
+        position: absolute;
+        top: calculateRem(-24px);
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        opacity: 1;
+        transform: translate(calc(-100%), 0) scaleX(1);
+        transform-origin: right center;
+        transition: all 0.4s ease-in;
+
+        &--hidden {
+            opacity: 0;
+            transform: translate(calc(-100%), 0) scaleX(0);
+            transition: all 0.2s ease-out;
+        }
+    }
+}
+
+.ez-dropdown {
+    .ez-extra-actions {
         border-radius: calculateRem(8px);
         border: calculateRem(6px) solid $ez-color-secondary;
         box-shadow: none;
@@ -195,34 +217,18 @@
             background: $ez-color-secondary;
         }
     }
-}
 
-.ez-extra-actions-container {
-    .ez-extra-actions {
-        position: absolute;
-        top: calculateRem(-24px);
-        bottom: 0;
-        left: 0;
-        z-index: 2;
-        opacity: 1;
-        transform: translate(calc(-100%), 0) scaleX(1);
-        transform-origin: right center;
-        transition: all 0.4s ease-in;
-
-        &--hidden {
-            opacity: 0;
-            transform: translate(calc(-100%), 0) scaleX(0);
-            transition: all 0.2s ease-out;
-        }
-
-        &--dropdown {
-            top: initial;
-            bottom: initial;
-            transform: translate(calc(-100% - #{calculateRem(10px)}), 0) scaleX(1);
-
-            .ez-extra-actions {
-                &--hidden {
-                    transform: translate(calc(-100% - #{calculateRem(15px)}), 0) scaleX(0);
+    .ez-extra-actions-container {
+        .ez-extra-actions {
+            &--dropdown {
+                top: initial;
+                bottom: initial;
+                transform: translate(calc(-100% - #{calculateRem(10px)}), 0) scaleX(1);
+    
+                .ez-extra-actions {
+                    &--hidden {
+                        transform: translate(calc(-100% - #{calculateRem(15px)}), 0) scaleX(0);
+                    }
                 }
             }
         }
