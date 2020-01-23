@@ -1,6 +1,6 @@
-<div class="ez-header px-4">
+<div class="ez-header">
     <div class="container">
-        <ul class="nav nav-tabs ez-tabs" role="tablist" id="ez-tab-list-{{ group }}">
+        <ul class="nav nav-tabs ez-tabs px-4" role="tablist" id="ez-tab-list-{{ group }}">
             {% for tab in tabs %}
                 {% set id = group ~ '-' ~ tab.identifier %}
                 {% set active = loop.first %}
