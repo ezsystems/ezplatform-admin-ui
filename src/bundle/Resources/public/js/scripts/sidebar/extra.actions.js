@@ -29,8 +29,6 @@
                 btn.classList[methodNameButton](CLASS_ACTIVE_BUTTON);
                 actions.classList[methodNameContainer](CLASS_HIDDEN);
 
-                actions.style.opacity = 0;
-
                 if (!actions.classList.contains(CLASS_HIDDEN)) {
                     doc.body.addEventListener('click', detectClickOutside, false);
                 } else {
@@ -40,8 +38,6 @@
                 if (focusElement) {
                     focusElement.focus();
                 }
-
-                actions.style.opacity = 1;
             },
             false
         );
