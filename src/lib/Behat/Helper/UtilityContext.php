@@ -333,22 +333,11 @@ class UtilityContext extends MinkContext
 
     public function moveWithHover(string $startExpression, string $hoverExpression, string $placeholderExpression): void
     {
-        $this->loadDraggingLibrary();
+        if (!$this->isDraggingLibraryLoaded()) {
+            throw new \Exception('drag-mock library has to be added to the page in order to use this method. Refer to README in BehatBundle for more information.');
+        }
 
         $movingScript = sprintf('dragMock.dragStart(%s).dragOver(%s).delay(100).drop(%s);', $startExpression, $hoverExpression, $placeholderExpression);
         $this->getSession()->getDriver()->executeScript($movingScript);
-    }
-
-    private function loadDraggingLibrary(): void
-    {
-        if ($this->isDraggingLibraryLoaded()) {
-            return;
-        }
-
-        $script = file_get_contents(__DIR__ . '/../lib/drag-mock.js');
-        $this->getSession()->getDriver()->executeScript($script);
-        $this->waitUntil(10, function () {
-            return $this->isDraggingLibraryLoaded();
-        });
     }
 }
