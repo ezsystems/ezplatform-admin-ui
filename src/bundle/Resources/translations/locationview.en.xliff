@@ -22,18 +22,18 @@
         <note>key: content.create.choose_content_type</note>
       </trans-unit>
       <trans-unit id="f599001c1ab9442f20e23d535e1dad8f3b75c337" resname="content.create.select_content_type">
-        <source>Select Content Type</source>
-        <target state="new">Select Content Type</target>
+        <source>Select a Content Type:</source>
+        <target state="new">Select a Content Type:</target>
         <note>key: content.create.select_content_type</note>
       </trans-unit>
       <trans-unit id="8b5180d90c79245ed3e491e6f682842daaa0bec5" resname="content.create.select_language">
-        <source>Select language</source>
-        <target state="new">Select language</target>
+        <source>Select a language:</source>
+        <target state="new">Select a language:</target>
         <note>key: content.create.select_language</note>
       </trans-unit>
       <trans-unit id="5e8851497aae3ba774d163d5fd191fd69ac871c0" resname="content.edit.select_language">
-        <source>Select language</source>
-        <target state="new">Select language</target>
+        <source>Select translation</source>
+        <target state="new">Select translation</target>
         <note>key: content.edit.select_language</note>
       </trans-unit>
       <trans-unit id="e136be672df8eb27dc4eb2f1ce0650096090bf81" resname="content.hidden.message">
@@ -447,8 +447,8 @@
         <note>key: translation.modal_close</note>
       </trans-unit>
       <trans-unit id="c285bc654712e44ed56cd6f18262a2d6485f4fb9" resname="user.edit.select_language">
-        <source>Select language</source>
-        <target state="new">Select language</target>
+        <source>Select a language:</source>
+        <target state="new">Select a language:</target>
         <note>key: user.edit.select_language</note>
       </trans-unit>
     </body>

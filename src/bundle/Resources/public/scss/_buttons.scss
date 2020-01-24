@@ -191,3 +191,13 @@
 .ez-btn.ez-btn--wide {
     padding: calculateRem(8px) calculateRem(48px);
 }
+
+.ez-btn--active-button {
+    background-color: $ez-white;
+    color: $ez-color-secondary;
+    border-color: $ez-white;
+
+    .ez-icon {
+        fill: $ez-color-secondary;
+    }
+}

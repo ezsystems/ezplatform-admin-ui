@@ -11,10 +11,6 @@
             padding-left: calculateRem(8px);
         }
 
-        &__input-wrapper {
-            padding: calculateRem(16px) calculateRem(8px);
-        }
-
         &__group-item {
             position: relative;
 
@@ -34,8 +30,7 @@
         }
 
         &__items {
-            max-height: calculateRem(200px);
-            overflow: auto;
+            padding-top: calculateRem(6px);
         }
     }
 }
