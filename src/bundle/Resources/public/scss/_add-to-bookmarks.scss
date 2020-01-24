@@ -38,16 +38,15 @@
         animation: background-to-transparent 0.25s ease-in;
         animation-direction: normal;
         animation-iteration-count: 1;
-        animation-play-state: running;
+        animation-fill-mode: forwards;
     }
 
     &--checked {
         &::after {
-            background-color: #fff;
             animation: background-to-white 0.25s ease-in;
             animation-direction: normal;
             animation-iteration-count: 1;
-            animation-play-state: running;
+            animation-fill-mode: forwards;
         }
     }
 
