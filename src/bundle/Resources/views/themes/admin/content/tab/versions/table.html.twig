@@ -4,6 +4,7 @@
 {% set is_archived = is_archived is defined and is_archived %}
 {% set is_draft_conflict = is_draft_conflict is defined and is_draft_conflict %}
 {% set custom_actions = custom_actions|default(false) %}
+{% set have_actions = (is_draft or is_archived) or custom_actions %}
 
 <div class="ez-scrollable-table-wrapper">
     <table class="table {% if is_draft and have_to_paginate %} mb-3 {% endif %} {% if is_draft_conflict %} ez-table__draft-conflict {% endif %}">
@@ -21,7 +22,7 @@
             {% endif %}
             <th>{{ 'tab.versions.table.last_saved'|trans()|desc('Last saved') }}</th>
             {% block custom_actions_column_headers %}{% endblock %}
-            {% if (is_draft or is_archived) or custom_actions %}
+            {% if have_actions %}
                 <th></th>
             {% endif %}
         </tr>
@@ -68,7 +69,7 @@
                 <td class="ez-table__cell">
                     {{ version.modificationDate|ez_full_datetime }}
                 </td>
-                {% if (is_draft or is_archived) or custom_actions %}
+                {% if have_actions %}
                     <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                         {% block custom_actions_column %}
                         {% endblock %}
