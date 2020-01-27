@@ -1,4 +1,4 @@
-(function(global, doc, $) {
+(function(global, doc, eZ, $) {
     let getUsersTimeout;
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
@@ -121,7 +121,7 @@
         toggleDisabledStateOnApplyBtn();
     };
     const dateConfig = {
-        formatDate: (date) => new Date(date).toLocaleDateString(),
+        formatDate: (date) => eZ.helpers.timezone.formatShortDateTime(date, null),
     };
     const checkSelectFieldsFilled = (modal) => {
         const inputs = [...modal.querySelectorAll('.ez-date-select')];
@@ -289,4 +289,4 @@
     listGroupsTitle.forEach((group) => group.addEventListener('click', toggleGroupState, false));
     contentTypeCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', filterByContentType, false));
     selectBtns.forEach((btn) => btn.addEventListener('click', setSelectedDateRange, false));
-})(window, document, window.jQuery);
+})(window, document, window.eZ, window.jQuery);
