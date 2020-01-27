@@ -176,7 +176,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $createAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--create',
             'title' => $this->translator->trans(
-                self::ITEM__CREATE,
+                /** @Ignore */ self::ITEM__CREATE,
                 [],
                 'menu'
             ),
@@ -187,7 +187,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         ];
         $sendToTrashAttributes = [
             'title' => $this->translator->trans(
-                self::ITEM__SEND_TO_TRASH,
+                /** @Ignore */ self::ITEM__SEND_TO_TRASH,
                 [],
                 'menu'
             ),
@@ -199,7 +199,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $copySubtreeAttributes = [
             'class' => 'ez-btn--udw-copy-subtree',
             'title' => $this->translator->trans(
-                self::ITEM__COPY_SUBTREE,
+                /** @Ignore */ self::ITEM__COPY_SUBTREE,
                 [],
                 'menu'
             ),
@@ -242,7 +242,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'attributes' => [
                         'class' => 'btn--udw-move',
                         'title' => $this->translator->trans(
-                            self::ITEM__MOVE,
+                            /** @Ignore */ self::ITEM__MOVE,
                             [],
                             'menu'
                         ),
@@ -267,7 +267,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                             'data-extra-classes' => 'ez-tooltip--medium',
                             'data-placement' => 'left',
                             'title' => $this->translator->trans(
-                                self::ITEM__COPY,
+                                /** @Ignore */ self::ITEM__COPY,
                                 [],
                                 'menu'
                             ),
@@ -357,7 +357,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $editAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--edit',
             'title' => $this->translator->trans(
-                self::ITEM__EDIT,
+                /** @Ignore */ self::ITEM__EDIT,
                 [],
                 'menu'
             ),
@@ -408,14 +408,21 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 [
                     'extras' => ['icon' => 'reveal'],
                     'attributes' => [
-                        'data-actions' => 'reveal',
                         'class' => 'ez-btn--reveal',
+                        'data-actions' => 'reveal',
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
+                        'title' => $this->translator->trans(
+                            /** @Ignore */ self::ITEM__REVEAL,
+                            [],
+                            'menu'
+                        ),
                     ],
                 ]
             )
         );
     }
-
+   
     /**
      * @param \Knp\Menu\ItemInterface $menu
      */
@@ -429,7 +436,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'attributes' => [
                         'class' => 'ez-btn--hide',
                         'title' => $this->translator->trans(
-                            self::ITEM__HIDE,
+                            /** @Ignore */ self::ITEM__HIDE,
                             [],
                             'menu'
                         ),

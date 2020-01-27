@@ -37,7 +37,8 @@
     <div class="ez-data-source__message--main">
         {{ 'fieldtype.binary_base.drag_drop'|trans|desc('Drag your files to the browser window or select them') }}
     </div>
-    <div class="ez-data-source__btn-add">
+    <div class="ez-data-source__btn-add" 
+         title="{{ 'fieldtype.ezimageasset.upload.label'|trans|desc('Upload image') }}">
         <svg class="ez-icon">
             <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#upload"></use>
         </svg>
@@ -46,7 +47,8 @@
         </span>
     </div>
     <div class="ez-data-source__btn-select"
-         data-udw-config="{{ ez_udw_config('image_asset', {}) }}">
+         data-udw-config="{{ ez_udw_config('image_asset', {}) }}"
+         title="{{ 'fieldtype.ezimageasset.select.label'|trans|desc('Select from your Repository') }}">
         <svg class="ez-icon">
             <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#browse"></use>
         </svg>

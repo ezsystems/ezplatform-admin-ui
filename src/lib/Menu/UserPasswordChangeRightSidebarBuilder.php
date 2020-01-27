@@ -10,10 +10,13 @@ namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI change password contextual sidebar menu.
@@ -25,6 +28,19 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
     /* Menu items */
     const ITEM__UPDATE = 'user_password_change__sidebar_right__update';
     const ITEM__CANCEL = 'user_password_change__sidebar_right__cancel';
+
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    private $translator;
+
+    public function __construct(
+        MenuItemFactory $factory,
+        EventDispatcherInterface $eventDispatcher,
+        TranslatorInterface $translator
+    ) {
+        parent::__construct($factory, $eventDispatcher);
+
+        $this->translator = $translator;
+    }
 
     /**
      * @return string
@@ -55,6 +71,13 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => '#user_password_change_change',
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
+                        'title' => $this->translator->trans(
+                            /** @Ignore */ self::ITEM__UPDATE,
+                            [],
+                            'menu'
+                        ),
                     ],
                     'extras' => ['icon' => 'publish'],
                 ]
@@ -63,6 +86,15 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
                 self::ITEM__CANCEL,
                 [
                     'route' => 'ezplatform.dashboard',
+                    'attributes' => [
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
+                        'title' => $this->translator->trans(
+                            /** @Ignore */ self::ITEM__CANCEL,
+                            [],
+                            'menu'
+                        ),
+                    ],
                     'extras' => ['icon' => 'circle-close'],
                 ]
             ),

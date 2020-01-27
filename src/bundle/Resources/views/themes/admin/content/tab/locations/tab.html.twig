@@ -36,7 +36,8 @@
                         </td>
                         <td class="ez-table__cell">{{ location.childCount }}</td>
                         <td class="ez-table__cell">
-                            <label class="ez-checkbox-icon {{ not location.explicitlyHidden ? 'is-checked' }}{% if not can_hide[location.id] %} disabled{% endif %}">
+                            <label class="ez-checkbox-icon {{ not location.explicitlyHidden ? 'is-checked' }}{% if not can_hide[location.id] %} disabled{% endif %}"
+                                   title="{{ 'tab.locations.visibility'|trans()|desc('Visibility') }}">
                                 <svg class="ez-icon ez-icon-view">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#view"></use>
                                 </svg>

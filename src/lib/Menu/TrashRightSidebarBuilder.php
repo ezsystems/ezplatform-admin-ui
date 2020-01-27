@@ -16,6 +16,7 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Trash contextual sidebar menu.
@@ -33,22 +34,21 @@ class TrashRightSidebarBuilder extends AbstractBuilder implements TranslationCon
     /** @var TrashService */
     private $trashService;
 
-    /**
-     * @param MenuItemFactory $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param PermissionResolver $permissionResolver
-     * @param TrashService $trashService
-     */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    private $translator;
+
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
         PermissionResolver $permissionResolver,
-        TrashService $trashService
+        TrashService $trashService,
+        TranslatorInterface $translator
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
         $this->trashService = $trashService;
+        $this->translator = $translator;
     }
 
     /**
@@ -77,11 +77,23 @@ class TrashRightSidebarBuilder extends AbstractBuilder implements TranslationCon
         /** @var ItemInterface|ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
+        $trashEmptyAttributes = [
+            'data-extra-classes' => 'ez-tooltip--medium',
+            'data-target' => '#confirmEmptyTrash',
+            'data-placement' => 'left',
+            'data-toggle' => 'modal',
+            'title' => $this->translator->trans(
+                /** @Ignore */ self::ITEM__EMPTY,
+                [],
+                'menu'
+            ),
+        ];
+
         $menu->addChild(
             $this->createMenuItem(self::ITEM__EMPTY, [
                 'extras' => ['icon' => 'trash-empty'],
                 'attributes' => $canDelete > 0 && $trashItemsCount > 0
-                    ? ['data-toggle' => 'modal', 'data-target' => '#confirmEmptyTrash']
+                    ? $trashEmptyAttributes
                     : ['class' => 'disabled'],
             ])
         );

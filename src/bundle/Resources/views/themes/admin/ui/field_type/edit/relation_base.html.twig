@@ -87,6 +87,7 @@
         {% endif %}
         </p>
         <button
+                title="{{ 'ezobjectrelationlist.cta.select'|trans|desc('Select content') }}"
                 {% if limit == 1 %}
                     data-udw-config="{{ ez_udw_config('single', {
                         'type': 'object_relation',

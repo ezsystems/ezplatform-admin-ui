@@ -89,7 +89,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'right',
                         'title' => $this->translator->trans(
-                            self::ITEM__SEARCH,
+                            /** @Ignore */ self::ITEM__SEARCH,
                             [],
                             'menu'
                         ),
@@ -110,7 +110,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                         ]),
                         'data-starting-location-id' => $this->configResolver->getConfig('default')['starting_location_id'],
                         'title' => $this->translator->trans(
-                            self::ITEM__BROWSE,
+                            /** @Ignore */ self::ITEM__BROWSE,
                             [],
                             'menu'
                         ),
@@ -127,7 +127,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'right',
                         'title' => $this->translator->trans(
-                            self::ITEM__TREE,
+                            /** @Ignore */ self::ITEM__TREE,
                             [],
                             'menu'
                         ),
@@ -143,7 +143,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'right',
                         'title' => $this->translator->trans(
-                            self::ITEM__BOOKMARK,
+                            /** @Ignore */ self::ITEM__BOOKMARK,
                             [],
                             'menu'
                         ),
@@ -162,7 +162,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'right',
                         'title' => $this->translator->trans(
-                            self::ITEM__TRASH,
+                            /** @Ignore */ self::ITEM__TRASH,
                             [],
                             'menu'
                         ),

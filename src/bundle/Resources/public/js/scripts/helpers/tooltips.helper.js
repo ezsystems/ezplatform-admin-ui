@@ -1,9 +1,10 @@
 (function(global, doc, eZ, $) {
+    const DISABLED_NODE_CLASS = 'c-action-btn--disabled';
     const parse = () => {
         const tooltipsNode = doc.querySelectorAll('[title]');
 
         for (tooltipNode of tooltipsNode) {
-            if (tooltipNode.title.length) {
+            if (tooltipNode.title && !tooltipNode.classList.contains(DISABLED_NODE_CLASS)) {
                 const delay = {
                     show: tooltipNode.dataset.delayShow || 150,
                     hide: tooltipNode.dataset.delayHide || 75,

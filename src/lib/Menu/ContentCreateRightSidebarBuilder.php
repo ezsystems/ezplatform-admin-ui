@@ -109,7 +109,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
             'data-extra-classes' => 'ez-tooltip--medium',
             'data-placement' => 'left',
             'title' => $this->translator->trans(
-                self::ITEM__PUBLISH,
+                /** @Ignore */ self::ITEM__PUBLISH,
                 [],
                 'menu'
             ),
@@ -120,7 +120,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
             'data-extra-classes' => 'ez-tooltip--medium',
             'data-placement' => 'left',
             'title' => $this->translator->trans(
-                self::ITEM__SAVE_DRAFT,
+                /** @Ignore */ self::ITEM__SAVE_DRAFT,
                 [],
                 'menu'
             ),
@@ -131,7 +131,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
             'data-extra-classes' => 'ez-tooltip--medium',
             'data-placement' => 'left',
             'title' => $this->translator->trans(
-                self::ITEM__PREVIEW,
+                /** @Ignore */ self::ITEM__PREVIEW,
                 [],
                 'menu'
             ),
@@ -183,7 +183,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                            self::ITEM__CANCEL,
+                            /** @Ignore */ self::ITEM__CANCEL,
                             [],
                             'menu'
                         ),
