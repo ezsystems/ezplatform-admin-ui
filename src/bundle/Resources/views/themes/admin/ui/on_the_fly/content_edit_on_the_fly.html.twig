@@ -1,0 +1,8 @@
+{% extends '@ezdesign/ui/on_the_fly/edit_on_the_fly.html.twig' %}
+
+{% block form_fields %}
+    {{ parent() }}
+    {{ form_widget(form.publish, {'attr': {'hidden': 'hidden', 'data-action': 'publish'}}) }}
+    {% if form.saveDraft is defined %}{{ form_widget(form.saveDraft, {'attr': {'hidden': 'hidden'}}) }}{% endif %}
+    {% if form.cancel is defined %}{{ form_widget(form.cancel, {'attr': {'hidden': 'hidden'}}) }}{% endif %}
+{% endblock %}

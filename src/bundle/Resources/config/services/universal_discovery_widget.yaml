@@ -20,3 +20,9 @@ services:
             $userContentTypeIdentifier: '$user_content_type_identifier$'
         tags:
             - { name: kernel.event_subscriber }
+
+    EzSystems\EzPlatformAdminUi\UniversalDiscovery\UniversalDiscoveryProvider:
+        arguments:
+            $visitor: '@ezpublish_rest.output.visitor.json'
+
+    EzSystems\EzPlatformAdminUi\UniversalDiscovery\Provider: '@EzSystems\EzPlatformAdminUi\UniversalDiscovery\UniversalDiscoveryProvider'
