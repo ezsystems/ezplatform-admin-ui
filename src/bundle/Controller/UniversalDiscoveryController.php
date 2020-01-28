@@ -199,13 +199,9 @@ class UniversalDiscoveryController extends Controller
             $columnLocations = $locationPath;
         }
 
-        $columnLocations = array_map(function ($id) {
-            return (int)$id;
-        }, $columnLocations);
-
         $columns = [];
-
         foreach ($columnLocations as $columnLocationId) {
+            $columnLocationId = (int)$columnLocationId;
             $columnLocation = ($columnLocationId !== self::ROOT_LOCATION_ID)
                 ? $this->getRestFormat($this->locationService->loadLocation($columnLocationId))
                 : null;
