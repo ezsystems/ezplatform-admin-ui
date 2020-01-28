@@ -10,7 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
@@ -74,7 +73,7 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                            /** @Ignore */ self::ITEM__UPDATE,
+/** @Ignore */ self::ITEM__UPDATE,
                             [],
                             'menu'
                         ),
@@ -90,7 +89,7 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                            /** @Ignore */ self::ITEM__CANCEL,
+/** @Ignore */ self::ITEM__CANCEL,
                             [],
                             'menu'
                         ),

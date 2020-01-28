@@ -9,7 +9,6 @@ namespace EzSystems\EzPlatformAdminUi\Menu;
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use eZ\Publish\API\Repository\Values\Content\Section;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
@@ -76,7 +75,7 @@ class SectionEditRightSidebarBuilder extends AbstractBuilder implements Translat
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                            /** @Ignore */ self::ITEM__SAVE,
+/** @Ignore */ self::ITEM__SAVE,
                             [],
                             'menu'
                         ),
@@ -91,7 +90,7 @@ class SectionEditRightSidebarBuilder extends AbstractBuilder implements Translat
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                            /** @Ignore */ self::ITEM__CANCEL,
+/** @Ignore */ self::ITEM__CANCEL,
                             [],
                             'menu'
                         ),

@@ -83,7 +83,7 @@ class TrashRightSidebarBuilder extends AbstractBuilder implements TranslationCon
             'data-placement' => 'left',
             'data-toggle' => 'modal',
             'title' => $this->translator->trans(
-                /** @Ignore */ self::ITEM__EMPTY,
+/** @Ignore */ self::ITEM__EMPTY,
                 [],
                 'menu'
             ),

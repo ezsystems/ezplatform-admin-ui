@@ -41,7 +41,7 @@ class ObjectStateGroupCreateRightSidebarBuilder extends AbstractBuilder implemen
         parent::__construct($factory, $eventDispatcher);
 
         $this->translator = $translator;
-    }   
+    }
 
     /**
      * @return string
@@ -75,7 +75,7 @@ class ObjectStateGroupCreateRightSidebarBuilder extends AbstractBuilder implemen
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                            /** @Ignore */ self::ITEM__CREATE,
+/** @Ignore */ self::ITEM__CREATE,
                             [],
                             'menu'
                         ),
@@ -90,7 +90,7 @@ class ObjectStateGroupCreateRightSidebarBuilder extends AbstractBuilder implemen
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                            /** @Ignore */ self::ITEM__CANCEL,
+/** @Ignore */ self::ITEM__CANCEL,
                             [],
                             'menu'
                         ),

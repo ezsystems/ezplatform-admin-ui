@@ -29,18 +29,18 @@ class LanguageEditRightSidebarBuilder extends AbstractBuilder implements Transla
     const ITEM__SAVE = 'language_edit__sidebar_right__save';
     const ITEM__CANCEL = 'language_edit__sidebar_right__cancel';
 
-     /** @var \Symfony\Contracts\Translation\TranslatorInterface */
-     private $translator;
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    private $translator;
 
-     public function __construct(
+    public function __construct(
          MenuItemFactory $factory,
          EventDispatcherInterface $eventDispatcher,
          TranslatorInterface $translator
      ) {
-         parent::__construct($factory, $eventDispatcher);
- 
-         $this->translator = $translator;
-     }
+        parent::__construct($factory, $eventDispatcher);
+
+        $this->translator = $translator;
+    }
 
     /**
      * @return string
@@ -77,7 +77,7 @@ class LanguageEditRightSidebarBuilder extends AbstractBuilder implements Transla
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                            /** @Ignore */ self::ITEM__SAVE,
+/** @Ignore */ self::ITEM__SAVE,
                             [],
                             'menu'
                         ),
@@ -92,7 +92,7 @@ class LanguageEditRightSidebarBuilder extends AbstractBuilder implements Transla
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                            /** @Ignore */ self::ITEM__CANCEL,
+/** @Ignore */ self::ITEM__CANCEL,
                             [],
                             'menu'
                         ),

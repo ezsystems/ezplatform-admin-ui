@@ -77,7 +77,7 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                            /** @Ignore */ self::ITEM__SAVE,
+/** @Ignore */ self::ITEM__SAVE,
                             [],
                             'menu'
                         ),
@@ -94,7 +94,7 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                            /** @Ignore */ self::ITEM__CANCEL,
+/** @Ignore */ self::ITEM__CANCEL,
                             [],
                             'menu'
                         ),
