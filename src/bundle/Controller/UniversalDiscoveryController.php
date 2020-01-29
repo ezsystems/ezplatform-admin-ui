@@ -21,6 +21,7 @@ use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
+use EzSystems\EzPlatformAdminUi\QueryType\LocationPathQueryType;
 use EzSystems\EzPlatformRest\Output\Visitor;
 use EzSystems\EzPlatformRest\Server\Values\Version;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -61,6 +62,9 @@ class UniversalDiscoveryController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer */
     private $lookupLimitationsTransformer;
 
+    /** @var \EzSystems\EzPlatformAdminUi\QueryType\LocationPathQueryType */
+    private $locationPathQueryType;
+
     private $sortClauseClassMap = [
         self::SORT_CLAUSE_DATE_PUBLISHED => Query\SortClause\DatePublished::class,
         self::SORT_CLAUSE_CONTENT_NAME => Query\SortClause\ContentName::class,
@@ -80,7 +84,8 @@ class UniversalDiscoveryController extends Controller
         ContentService $contentService,
         Visitor $visitor,
         PermissionCheckerInterface $permissionChecker,
-        LookupLimitationsTransformer $lookupLimitationsTransformer
+        LookupLimitationsTransformer $lookupLimitationsTransformer,
+        LocationPathQueryType $locationPathQueryType
     ) {
         $this->repository = $repository;
         $this->searchService = $searchService;
@@ -91,6 +96,7 @@ class UniversalDiscoveryController extends Controller
         $this->contentService = $contentService;
         $this->permissionChecker = $permissionChecker;
         $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
+        $this->locationPathQueryType = $locationPathQueryType;
     }
 
     public function locationAction(
@@ -219,28 +225,14 @@ class UniversalDiscoveryController extends Controller
         return $columns;
     }
 
-    private function getParentLocationPath(Location $location): array
-    {
-        $parentPath = array_slice($location->path, 0, -1);
-
-        return array_map(static function ($locationId) {
-            return (int)$locationId;
-        }, $parentPath);
-    }
-
     private function getBreadcrumbLocations(
         int $locationId,
         int $rootLocationId = self::ROOT_LOCATION_ID
     ): array {
-        $filter = $locationId === $rootLocationId
-            ? new Query\Criterion\ParentLocationId($rootLocationId)
-            : new Query\Criterion\LocationId($this->getParentLocationPath(
-                $this->locationService->loadLocation($locationId)
-            ));
-
         $searchResult = $this->searchService->findLocations(
-            new LocationQuery([
-                'filter' => $filter,
+            $this->locationPathQueryType->getQuery([
+                'location' => $this->locationService->loadLocation($locationId),
+                'rootLocationId' => $rootLocationId,
             ])
         );
 

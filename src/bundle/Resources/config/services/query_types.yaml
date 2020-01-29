@@ -4,6 +4,8 @@ services:
         autoconfigure: true
         public: false
 
+    EzSystems\EzPlatformAdminUi\QueryType\LocationPathQueryType: ~
+
     EzSystems\EzPlatformAdminUi\QueryType\ContentSubtreeQueryType: ~
 
     EzSystems\EzPlatformAdminUi\QueryType\MediaSubtreeQueryType: ~
