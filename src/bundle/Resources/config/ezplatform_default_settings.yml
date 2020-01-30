@@ -69,4 +69,5 @@ parameters:
     ezsettings.default.content_tree_module.allowed_content_types: []
     ezsettings.default.content_tree_module.ignored_content_types: []
     ezsettings.default.content_tree_module.tree_root_location_id: ~
+    ezsettings.default.content_tree_module.contextual_tree_root_location_ids: []
 
