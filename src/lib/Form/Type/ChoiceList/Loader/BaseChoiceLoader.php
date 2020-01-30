@@ -41,11 +41,6 @@ abstract class BaseChoiceLoader implements ChoiceLoaderInterface
             return [];
         }
 
-        // If no callable is set, values are the same as choices
-        if (null === $value) {
-            return $values;
-        }
-
         return $this->loadChoiceList($value)->getChoicesForValues($values);
     }
 
@@ -58,11 +53,6 @@ abstract class BaseChoiceLoader implements ChoiceLoaderInterface
         $choices = array_filter($choices);
         if (empty($choices)) {
             return [];
-        }
-
-        // If no callable is set, choices are the same as values
-        if (null === $value) {
-            return $choices;
         }
 
         return $this->loadChoiceList($value)->getValuesForChoices($choices);
