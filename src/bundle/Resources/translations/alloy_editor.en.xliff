@@ -56,10 +56,30 @@
         <target state="new">Save</target>
         <note>key: custom_attributes_update_btn.save_btn.label</note>
       </trans-unit>
+      <trans-unit id="f9b73d66d0cd09ce93493532aa7d94b55cd0f62c" resname="custom_tag_update_btn.link_to.label">
+        <source>Link to:</source>
+        <target state="new">Link to:</target>
+        <note>key: custom_tag_update_btn.link_to.label</note>
+      </trans-unit>
       <trans-unit id="3b4cdbba9b4d4209e8c826b072589dab7497fa46" resname="custom_tag_update_btn.save_btn.label">
         <source>Save</source>
         <target state="new">Save</target>
         <note>key: custom_tag_update_btn.save_btn.label</note>
+      </trans-unit>
+      <trans-unit id="c4c2c99078eb6232a3bd9527584d13ca1e1d727a" resname="custom_tag_update_btn.select_btn.label">
+        <source>Select:</source>
+        <target state="new">Select:</target>
+        <note>key: custom_tag_update_btn.select_btn.label</note>
+      </trans-unit>
+      <trans-unit id="38676d4b01bb1c3dcc77c02511080a4805897a48" resname="custom_tag_update_btn.separator.label">
+        <source>or</source>
+        <target state="new">or</target>
+        <note>key: custom_tag_update_btn.separator.label</note>
+      </trans-unit>
+      <trans-unit id="6ce6e1e3a22843a14687412bd15ebe062b1059eb" resname="discover_content.button.label">
+        <source>Select Content</source>
+        <target state="new">Select Content</target>
+        <note>key: discover_content.button.label</note>
       </trans-unit>
       <trans-unit id="ac0f20994b177772319ac51d8f9b3389ea74de7c" resname="embed_align_center_btn.label">
         <source>Center</source>

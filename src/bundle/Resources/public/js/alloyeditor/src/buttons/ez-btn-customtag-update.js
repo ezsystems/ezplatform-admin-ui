@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AlloyEditor from 'alloyeditor';
 import EzWidgetButton from '../base/ez-widgetbutton';
+import EzDiscoverContent from './parts/ez-discover-content';
 
 export default class EzBtnCustomTagUpdate extends EzWidgetButton {
     constructor(props) {
@@ -129,8 +130,41 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      * @return {Object} The rendered link.
      */
     renderLink(config, attrName) {
-        // @todo provide dedicated support for link attribute type
-        return this.renderString(config, attrName);
+        const selectLabel = Translator.trans(/*@Desc("Select:")*/ 'custom_tag_update_btn.select_btn.label', {}, 'alloy_editor');
+        const separatorLabel = Translator.trans(/*@Desc("or")*/ 'custom_tag_update_btn.separator.label', {}, 'alloy_editor');
+        const linkLabel = Translator.trans(/*@Desc("Link to:")*/ 'custom_tag_update_btn.link_to.label', {}, 'alloy_editor');
+
+        return (
+            <div className="attribute__wrapper ez-ae-custom-tag__attribute-link">
+                <label className="attribute__label form-control-label">{config.label}</label>
+                <div className="ez-ae-custom-tag__attribute-link-wrapper">
+                    <div className="ez-ae-custom-tag__attribute-link-block">
+                        <label className="attribute__label form-control-label">{selectLabel}</label>
+                        <EzDiscoverContent
+                            editor={this.props.editor}
+                            udwConfigName="richtext_custom_tag_link"
+                            confirmSelectedItems={this.setLinkFromUDW.bind(this, attrName)}
+                        />
+                    </div>
+                    <div className="ez-ae-custom-tag__attribute-link-block ez-ae-custom-tag__attribute-link-block--separator">
+                        {separatorLabel}
+                    </div>
+                    <div className="ez-ae-custom-tag__attribute-link-block">
+                        <label className="attribute__label form-control-label">{linkLabel}</label>
+                        <input
+                            type="text"
+                            defaultValue={config.defaultValue}
+                            required={config.required}
+                            className="attribute__input form-control"
+                            value={this.state.values[attrName].value}
+                            onChange={this.updateValues.bind(this)}
+                            data-attr-name={attrName}
+                            placeholder="Type or paste link here"
+                        />
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     /**
@@ -235,6 +269,16 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
             (total, attr) => `${total}<p>${this.attributes[attr].label}: ${this.state.values[attr].value}</p>`,
             ''
         );
+    }
+
+    setLinkFromUDW(attrName, item) {
+        const values = Object.assign({}, this.state.values);
+
+        values[attrName].value = `ezlocation://${item[0].id}`;
+
+        this.setState({
+            values,
+        });
     }
 
     /**
