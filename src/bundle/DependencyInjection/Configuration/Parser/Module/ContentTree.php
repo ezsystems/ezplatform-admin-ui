@@ -39,7 +39,6 @@ class ContentTree extends AbstractParser
         $nodeBuilder
             ->arrayNode('content_tree_module')
                 ->info('Content Tree module configuration')
-                ->addDefaultsIfNotSet()
                 ->children()
                     ->integerNode('load_more_limit')
                         ->info('Number of children to load in expand and load more operations')
@@ -73,6 +72,7 @@ class ContentTree extends AbstractParser
                             '5 # Users',
                             '43 # Media',
                         ])
+                        ->defaultValue([])
                         ->integerPrototype()->end()
                     ->end()
                     ->arrayNode('allowed_content_types')
