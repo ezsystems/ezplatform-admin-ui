@@ -9,6 +9,8 @@ export default class EzDiscoverContent extends EzEmbedDiscoverContentButton {
 
         this.originalSetUIHidden = null;
         this.buttonRef = createRef(null);
+
+        this.chooseContent = this.chooseContent.bind(this);
     }
 
     confirmSelection() {
@@ -46,7 +48,7 @@ export default class EzDiscoverContent extends EzEmbedDiscoverContentButton {
 
         return (
             <div>
-                <button className="btn btn-secondary ez-btn-ae" ref={this.buttonRef} onClick={this.chooseContent.bind(this)}>
+                <button className="btn btn-secondary ez-btn-ae" ref={this.buttonRef} onClick={this.chooseContent}>
                     {buttonLabel}
                 </button>
             </div>

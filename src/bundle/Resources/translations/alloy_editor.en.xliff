@@ -56,6 +56,11 @@
         <target state="new">Save</target>
         <note>key: custom_attributes_update_btn.save_btn.label</note>
       </trans-unit>
+      <trans-unit id="a27218fa2885191b6e62ae06e4245811ab15f47d" resname="custom_tag_update_btn.link_input.placeholder">
+        <source>Type or paste link here</source>
+        <target state="new">Type or paste link here</target>
+        <note>key: custom_tag_update_btn.link_input.placeholder</note>
+      </trans-unit>
       <trans-unit id="f9b73d66d0cd09ce93493532aa7d94b55cd0f62c" resname="custom_tag_update_btn.link_to.label">
         <source>Link to:</source>
         <target state="new">Link to:</target>

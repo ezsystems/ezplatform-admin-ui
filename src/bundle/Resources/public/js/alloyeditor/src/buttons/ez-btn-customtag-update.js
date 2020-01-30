@@ -133,6 +133,11 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
         const selectLabel = Translator.trans(/*@Desc("Select:")*/ 'custom_tag_update_btn.select_btn.label', {}, 'alloy_editor');
         const separatorLabel = Translator.trans(/*@Desc("or")*/ 'custom_tag_update_btn.separator.label', {}, 'alloy_editor');
         const linkLabel = Translator.trans(/*@Desc("Link to:")*/ 'custom_tag_update_btn.link_to.label', {}, 'alloy_editor');
+        const placeholder = Translator.trans(
+            /*@Desc("Type or paste link here")*/ 'custom_tag_update_btn.link_input.placeholder',
+            {},
+            'alloy_editor'
+        );
 
         return (
             <div className="attribute__wrapper ez-ae-custom-tag__attribute-link">
@@ -159,7 +164,7 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
                             value={this.state.values[attrName].value}
                             onChange={this.updateValues.bind(this)}
                             data-attr-name={attrName}
-                            placeholder="Type or paste link here"
+                            placeholder={placeholder}
                         />
                     </div>
                 </div>
@@ -272,12 +277,12 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
     }
 
     setLinkFromUDW(attrName, item) {
-        const values = Object.assign({}, this.state.values);
+        this.setState((prevState) => {
+            const values = Object.assign({}, prevState.values);
 
-        values[attrName].value = `ezlocation://${item[0].id}`;
+            values[attrName].value = `ezlocation://${item[0].id}`;
 
-        this.setState({
-            values,
+            return { values };
         });
     }
 
