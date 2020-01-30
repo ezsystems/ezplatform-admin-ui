@@ -11,12 +11,15 @@
         position: relative;
         flex: 0 0 auto;
         max-width: 0;
-        overflow-x: hidden;
         background: $ez-white;
         color: inherit;
+        transform: scaleX(0);
+        transform-origin: top left;
         transition: all 0.2s ease-out;
 
         &--expanded {
+            transform-origin: top left;
+            transform: scaleX(1);
             transition: all 0.4s ease-in;
             display: initial;
             max-width: 33vw;
