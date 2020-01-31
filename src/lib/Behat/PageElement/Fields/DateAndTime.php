@@ -16,11 +16,11 @@ class DateAndTime extends EzFieldElement
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Date and time';
 
-    private const DATE_FORMAT = 'm/d/Y';
-    private const TIME_FORMAT = 'G:i';
     private const VIEW_DATE_TIME_FORMAT = 'n/j/y, g:i A';
 
-    public function __construct(BrowserContext $context, string $locator, string $label)
+    private const FIELD_DISPLAY_FORMAT = 'd/m/Y G:i';
+
+    public function __construct(UtilityContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
         $this->fields['fieldInput'] = '.flatpickr-input.ez-data-source__input';
@@ -42,7 +42,8 @@ class DateAndTime extends EzFieldElement
         $this->context->findElement($this->fields['fieldContainer'])->click();
 
         $expectedDateAndTimeValue = date_format(date_create(sprintf('%s, %s', $parameters['date'], $parameters['time'])), self::VIEW_DATE_TIME_FORMAT);
-        $actualTimeValue = date_format(date_create($this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']))->getValue()), self::VIEW_DATE_TIME_FORMAT);
+        $currentFieldValue = $this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['fieldInput']))->getValue();
+        $actualTimeValue = date_format(date_create_from_format(self::FIELD_DISPLAY_FORMAT, $currentFieldValue), self::VIEW_DATE_TIME_FORMAT);
 
         Assert::assertEquals($expectedDateAndTimeValue, $actualTimeValue);
     }

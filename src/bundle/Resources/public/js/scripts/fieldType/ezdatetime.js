@@ -4,7 +4,7 @@
     const SELECTOR_FLATPICKR_INPUT = '.flatpickr-input';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const EVENT_VALUE_CHANGED = 'valueChanged';
-    const { convertDateToTimezone } = eZ.helpers.timezone;
+    const { convertDateToTimezone, formatShortDateTime } = eZ.helpers.timezone;
     const userTimezone = eZ.adminUiConfig.timezone;
 
     class EzDateTimeValidator extends eZ.BaseFieldValidator {
@@ -65,7 +65,7 @@
     const datetimeConfig = {
         enableTime: true,
         time_24hr: true,
-        formatDate: (date) => eZ.helpers.timezone.formatFullDateTime(date, null),
+        formatDate: (date) => formatShortDateTime(date, null),
     };
     const updateInputValue = (sourceInput, dates) => {
         const event = new CustomEvent(EVENT_VALUE_CHANGED);
