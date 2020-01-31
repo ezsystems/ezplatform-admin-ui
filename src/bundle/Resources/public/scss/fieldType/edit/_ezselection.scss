@@ -8,6 +8,8 @@
             &__items {
                 border: none;
                 box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba(0, 0, 0, 0.45);
+                max-height: calculateRem(300px);
+                overflow-y: scroll;
             }
 
             &__item {

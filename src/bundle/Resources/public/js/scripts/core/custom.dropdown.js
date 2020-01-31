@@ -2,6 +2,7 @@
     const CLASS_CUSTOM_DROPDOWN = 'ez-custom-dropdown';
     const CLASS_CUSTOM_DROPDOWN_ITEM = 'ez-custom-dropdown__item';
     const CLASS_ITEMS_HIDDEN = 'ez-custom-dropdown__items--hidden';
+    const CLASS_ITEMS_POSITION_TOP = 'ez-custom-dropdown__items--position-top';
     const CLASS_REMOVE_SELECTION = 'ez-custom-dropdown__remove-selection';
     const CLASS_ITEM_SELECTED_IN_LIST = 'ez-custom-dropdown__item--selected';
     const SELECTOR_ITEM = '.ez-custom-dropdown__item';
@@ -10,6 +11,7 @@
     const SELECTOR_SELECTION_INFO = '.ez-custom-dropdown__selection-info';
     const SELECTOR_PLACEHOLDER = '[data-value=""]';
     const EVENT_VALUE_CHANGED = 'valueChanged';
+    const ITEMS_LIST_MAX_HEIGHT = 300;
 
     class CustomDropdown {
         constructor(config) {
@@ -131,10 +133,20 @@
                 return;
             }
 
-            const methodName = this.itemsContainer.classList.contains(CLASS_ITEMS_HIDDEN) ? 'addEventListener' : 'removeEventListener';
+            const isListHidden = this.itemsContainer.classList.contains(CLASS_ITEMS_HIDDEN);
+
+            if (isListHidden) {
+                const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                const { top } = this.itemsContainer.getBoundingClientRect();
+
+                const itemsListMethodName = top + ITEMS_LIST_MAX_HEIGHT > viewportHeight ? 'add' : 'remove';
+                this.itemsContainer.classList[itemsListMethodName](CLASS_ITEMS_POSITION_TOP);
+            }
 
             this.itemsContainer.classList.toggle(CLASS_ITEMS_HIDDEN);
-            doc.body[methodName]('click', this.onClickOutside, false);
+
+            const bodyMethodName = isListHidden ? 'addEventListener' : 'removeEventListener';
+            doc.body[bodyMethodName]('click', this.onClickOutside, false);
         }
 
         onOptionClick({ target }) {
