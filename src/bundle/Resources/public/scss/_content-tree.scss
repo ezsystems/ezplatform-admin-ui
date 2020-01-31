@@ -8,17 +8,20 @@
     }
 
     .ez-content-tree-container {
-        display: none;
+        position: relative;
         flex: 0 0 auto;
         max-width: 0;
-        position: relative;
         background: $ez-white;
         color: inherit;
-        transition: max-width 0.2s $ez-admin-transition;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: all 0.2s ease-out;
 
         &--expanded {
+            transform-origin: left;
+            transform: scaleX(1);
+            transition: all 0.4s ease-in;
             display: initial;
-            min-width: calculateRem(250px);
             max-width: 33vw;
         }
 
