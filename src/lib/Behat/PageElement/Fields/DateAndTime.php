@@ -20,7 +20,7 @@ class DateAndTime extends EzFieldElement
 
     private const FIELD_DISPLAY_FORMAT = 'd/m/Y G:i';
 
-    public function __construct(UtilityContext $context, string $locator, string $label)
+    public function __construct(BrowserContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
         $this->fields['fieldInput'] = '.flatpickr-input.ez-data-source__input';
