@@ -39,15 +39,23 @@ class ContentField extends Element
         );
 
         $fieldClass = $this->context->findElement(sprintf('%s %s', $fieldLocator, $this->fields['fieldValueContainer']))->getAttribute('class');
-
-        if (!$fieldClass) {
-            $fieldType = 'ezboolean';
-        } else {
-            preg_match($this::FIELD_TYPE_CLASS_REGEX, $fieldClass, $matches);
-
-            $fieldType = explode('-', $matches[0])[0];
-        }
+        $fieldType = $this->getFieldType($fieldClass);
         $fieldElement = ElementFactory::createElement($this->context, FieldTypeNameConverter::getFieldTypeNameByIdentifier($fieldType), $fieldLocator, $label);
         $fieldElement->verifyValueInItemView($value);
+    }
+
+    private function getFieldType(string $fieldClass): string
+    {
+        if (strpos($fieldClass, 'ez-table') !== false) {
+            return 'ezmatrix';
+        }
+
+        if (!$fieldClass) {
+            return 'ezboolean';
+        }
+
+        preg_match($this::FIELD_TYPE_CLASS_REGEX, $fieldClass, $matches);
+
+        return explode('-', $matches[0])[0];
     }
 }

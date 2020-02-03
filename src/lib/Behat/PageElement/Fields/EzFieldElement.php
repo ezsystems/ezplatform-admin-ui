@@ -29,6 +29,8 @@ abstract class EzFieldElement extends Element
 
     abstract public function getValue(): array;
 
+    abstract public function verifyValueInItemView(array $values): void;
+
     public function verifyValue(array $value): void
     {
         Assert::assertEquals(

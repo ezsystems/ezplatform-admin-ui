@@ -20,10 +20,12 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\EmailAddress;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\File;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\FloatField;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Image;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\ImageAsset;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Integer;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\ISBN;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Keywords;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\MapLocation;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Matrix;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Media;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\RichText;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Selection;
@@ -141,6 +143,8 @@ class PlatformElementFactory extends ElementFactory
                 return new MapLocation($context, $parameters[0], $parameters[1]);
             case Selection::ELEMENT_NAME:
                 return new Selection($context, $parameters[0], $parameters[1]);
+            case Matrix::ELEMENT_NAME:
+                return new Matrix($context, $parameters[0], $parameters[1]);
             case Time::ELEMENT_NAME:
                 return new Time($context, $parameters[0], $parameters[1]);
             case URL::ELEMENT_NAME:
@@ -149,6 +153,8 @@ class PlatformElementFactory extends ElementFactory
                 return new Media($context, $parameters[0], $parameters[1]);
             case Image::ELEMENT_NAME:
                 return new Image($context, $parameters[0], $parameters[1]);
+            case ImageAsset::ELEMENT_NAME:
+                return new ImageAsset($context, $parameters[0], $parameters[1]);
             case File::ELEMENT_NAME:
                 return new File($context, $parameters[0], $parameters[1]);
             case ContentRelationSingle::ELEMENT_NAME:

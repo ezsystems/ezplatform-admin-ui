@@ -28,8 +28,9 @@ class TextLine extends EzFieldElement
 
         Assert::assertNotNull($fieldInput, sprintf('Input for field %s not found.', $this->label));
 
+        $values = array_values($parameters);
         $fieldInput->setValue('');
-        $fieldInput->setValue($parameters['value']);
+        $fieldInput->setValue($values[0]);
     }
 
     public function getValue(): array
