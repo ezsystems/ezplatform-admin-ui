@@ -17,13 +17,11 @@
         transform-origin: left;
 
         &--animate {
-            &--expanded {
+            transition: all 0.2s ease-out;
+            
+            &.ez-content-tree-container--expanded {
                 transition: all 0.4s ease-in;
             }
-        }
-
-        &--animate {
-            transition: all 0.2s ease-out;
         }
 
         &--expanded {
