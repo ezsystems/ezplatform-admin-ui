@@ -134,18 +134,17 @@
             }
 
             const isListHidden = this.itemsContainer.classList.contains(CLASS_ITEMS_HIDDEN);
+            const bodyMethodName = isListHidden ? 'addEventListener' : 'removeEventListener';
 
             if (isListHidden) {
                 const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
                 const { top } = this.itemsContainer.getBoundingClientRect();
-
                 const itemsListMethodName = top + ITEMS_LIST_MAX_HEIGHT > viewportHeight ? 'add' : 'remove';
+
                 this.itemsContainer.classList[itemsListMethodName](CLASS_ITEMS_POSITION_TOP);
             }
 
             this.itemsContainer.classList.toggle(CLASS_ITEMS_HIDDEN);
-
-            const bodyMethodName = isListHidden ? 'addEventListener' : 'removeEventListener';
             doc.body[bodyMethodName]('click', this.onClickOutside, false);
         }
 
