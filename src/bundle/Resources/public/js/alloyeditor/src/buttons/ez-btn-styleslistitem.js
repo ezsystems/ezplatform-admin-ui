@@ -18,12 +18,23 @@ export default class EzBtnStylesListItem extends AlloyEditor.ButtonStylesListIte
                 className={className}
                 dangerouslySetInnerHTML={{ __html: this._preview }}
                 onClick={() => {
+                    this.clearEzAttributes();
                     this._onClick();
                     this.fireCustomUpdateEvent();
                 }}
                 tabIndex={this.props.tabIndex}
             />
         );
+    }
+
+    clearEzAttributes() {
+        const nativeEditor = this.props.editor.get('nativeEditor');
+        const block = nativeEditor.elementPath().block;
+        const attrsToRemove = ['ezelement', 'eztype', 'ezname'];
+
+        if (block.$.dataset.eztype === 'style') {
+            attrsToRemove.forEach(attr => block.$.removeAttribute('data-' + attr));
+        }
     }
 
     fireCustomUpdateEvent() {
