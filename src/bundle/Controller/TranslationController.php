@@ -90,7 +90,10 @@ class TranslationController extends Controller
         }
 
         $redirectionUrl = null !== $location
-            ? $this->generateUrl('_ezpublishLocation', ['locationId' => $location->id])
+            ? $this->generateUrl('_ez_content_view', [
+                'contentId' => $location->contentId,
+                'locationId' => $location->id,
+            ])
             : $this->generateUrl('ezplatform.dashboard');
 
         return $this->redirect($redirectionUrl);
@@ -127,7 +130,8 @@ class TranslationController extends Controller
                     );
                 }
 
-                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                return new RedirectResponse($this->generateUrl('_ez_content_view', [
+                    'contentId' => $contentInfo->id,
                     'locationId' => $contentInfo->mainLocationId,
                     '_fragment' => TranslationsTab::URI_FRAGMENT,
                 ]));
@@ -138,7 +142,8 @@ class TranslationController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+        return $this->redirect($this->generateUrl('_ez_content_view', [
+            'contentId' => $contentInfo->id,
             'locationId' => $contentInfo->mainLocationId,
             '_fragment' => TranslationsTab::URI_FRAGMENT,
         ]));

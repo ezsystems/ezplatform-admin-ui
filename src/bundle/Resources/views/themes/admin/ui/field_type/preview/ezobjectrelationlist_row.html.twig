@@ -1,6 +1,6 @@
 <td>
     <a {% if not content.contentInfo.trashed %}
-        href="{{ path('_ezpublishLocation', { 'locationId': locationId } ) }}"
+        href="{{ path('_ez_content_view', { 'contentId': content.id, 'locationId': locationId } ) }}"
     {% endif %}>
         {{ content.getName() }}
         {% if content.contentInfo.trashed %}

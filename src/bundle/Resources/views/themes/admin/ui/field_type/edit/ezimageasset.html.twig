@@ -82,8 +82,9 @@
 
     {% if destination_content %}
         {% set destination_content_name = ez_content_name(destination_content) %}
-        {% set destination_content_url = path('_ezpublishLocation', {
-            locationId: destination_content.contentInfo.mainLocationId
+        {% set destination_content_url = path('_ez_content_view', {
+            contentId: destination_content.id,
+            locationId: destination_content.contentInfo.mainLocationId,
         }) %}
 
         {% set image_uri = ez_field_value(destination_content, ez_content_field_identifier_image_asset()).uri %}

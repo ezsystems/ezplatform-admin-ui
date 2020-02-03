@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class LocationVoter implements VoterInterface
 {
-    private const EZ_PUBLISH_LOCATION_ROUTE_NAME = '_ezpublishLocation';
+    private const CONTENT_VIEW_ROUTE_NAME = '_ez_content_view';
 
     /**
      * @var RequestStack
@@ -38,7 +38,7 @@ class LocationVoter implements VoterInterface
         $routes = $item->getExtra('routes', []);
 
         foreach ($routes as $route) {
-            if (isset($route['route']) && $route['route'] === self::EZ_PUBLISH_LOCATION_ROUTE_NAME) {
+            if (isset($route['route']) && $route['route'] === self::CONTENT_VIEW_ROUTE_NAME) {
                 $request = $this->requestStack->getCurrentRequest();
                 $contentView = $request->attributes->get('view');
                 $locationId = $route['parameters']['locationId'];

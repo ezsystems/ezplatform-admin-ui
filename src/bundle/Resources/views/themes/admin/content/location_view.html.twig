@@ -36,7 +36,10 @@
                             {% if not loop.last %}
                                 {% set items = items|merge([{
                                     'value': ez_content_name(path_location.contentInfo),
-                                    'url': path('_ezpublishLocation', {'locationId': path_location.id})
+                                    'url': path('_ez_content_view', {
+                                        'contentId': path_location.contentId,
+                                        'locationId': path_location.id
+                                    })
                                 }]) %}
                             {% endif %}
                         {% endfor %}

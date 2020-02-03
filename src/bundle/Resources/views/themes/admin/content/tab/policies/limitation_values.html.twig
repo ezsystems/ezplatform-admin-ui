@@ -4,7 +4,7 @@
     {% apply spaceless %}
         {% for path in values %}
             {% for value in path %}
-                <a href="{{ path('_ezpublishLocation', {'locationId': value.mainLocationId}) }}" >{{ value.name }}</a>
+                <a href="{{ path('_ez_content_view', {'contentId': value.id, 'locationId': value.mainLocationId}) }}" >{{ value.name }}</a>
                 {% if not loop.last %} / {% endif %}
             {% endfor %}
             {% if not loop.last %}, {% endif %}
@@ -16,7 +16,7 @@
     {% apply spaceless %}
         {% for path in values %}
             {% for value in path %}
-                <a href="{{ path('_ezpublishLocation', {'locationId': value.mainLocationId}) }}" >{{ value.name }}</a>
+                <a href="{{ path('_ez_content_view', {'contentId': value.id, 'locationId': value.mainLocationId}) }}" >{{ value.name }}</a>
                 {% if not loop.last %} / {% endif %}
             {% endfor %}
             {% if not loop.last %}, {% endif %}

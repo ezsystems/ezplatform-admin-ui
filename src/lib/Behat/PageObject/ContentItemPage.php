@@ -39,7 +39,7 @@ class ContentItemPage extends Page
     {
         parent::__construct($context);
         $this->siteAccess = 'admin';
-        $this->route = '/content/location';
+        $this->route = '/view/content';
         $this->rightMenu = ElementFactory::createElement($context, RightMenu::ELEMENT_NAME);
         $this->subItemList = ElementFactory::createElement($context, SubItemsList::ELEMENT_NAME);
         $this->contentField = ElementFactory::createElement($context, ContentField::ELEMENT_NAME);

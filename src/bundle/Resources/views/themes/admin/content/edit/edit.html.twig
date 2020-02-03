@@ -11,7 +11,7 @@
         <div class="ez-edit-header__content-type-name">
             {% block close_button %}
                 {% set referrer_location = is_published ? location : parent_location %}
-                <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': referrer_location.id }) }}">
+                <a class="ez-content-edit-container__close" href="{{ path('_ez_content_view', { 'contentId': referrer_location.contentId, 'locationId': referrer_location.id }) }}">
                     <svg class="ez-icon ez-icon--small-medium">
                         <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
                     </svg>
@@ -93,6 +93,7 @@
     }) %}
     {{ knp_menu_render(content_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
+
 {% block form_before %}
     {{ ez_render_component_group('content-edit-form-before', {
         'content': content,

@@ -4,7 +4,7 @@
 
 {% block details %}
     {% block close_button %}
-        <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': parent_group.content.versionInfo.contentInfo.mainLocationId}) }}">
+        <a class="ez-content-edit-container__close" href="{{ path('_ez_content_view', {'contentId': parent_group.content.id, 'locationId': parent_group.content.versionInfo.contentInfo.mainLocationId}) }}">
             <svg class="ez-icon ez-icon--small-medium">
                 <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
             </svg>

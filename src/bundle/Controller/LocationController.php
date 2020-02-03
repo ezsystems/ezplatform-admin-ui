@@ -157,7 +157,8 @@ class LocationController extends Controller
                     'location'
                 );
 
-                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                return new RedirectResponse($this->generateUrl('_ez_content_view', [
+                    'contentId' => $location->contentId,
                     'locationId' => $location->id,
                 ]));
             });
@@ -167,7 +168,8 @@ class LocationController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+        return $this->redirect($this->generateUrl('_ez_content_view', [
+            'contentId' => $location->contentId,
             'locationId' => $location->id,
         ]));
     }
@@ -213,7 +215,8 @@ class LocationController extends Controller
                     'location'
                 );
 
-                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                return new RedirectResponse($this->generateUrl('_ez_content_view', [
+                    'contentId' => $newLocation->contentId,
                     'locationId' => $newLocation->id,
                 ]));
             });
@@ -223,7 +226,8 @@ class LocationController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+        return $this->redirect($this->generateUrl('_ez_content_view', [
+            'contentId' => $location->contentId,
             'locationId' => $location->id,
         ]));
     }
@@ -310,7 +314,8 @@ class LocationController extends Controller
                     'location'
                 );
 
-                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                return new RedirectResponse($this->generateUrl('_ez_content_view', [
+                    'contentId' => $currentLocation->contentId,
                     'locationId' => $newLocation->id,
                     '_fragment' => LocationsTab::URI_FRAGMENT,
                 ]));
@@ -321,7 +326,8 @@ class LocationController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+        return $this->redirect($this->generateUrl('_ez_content_view', [
+            'contentId' => $location->contentId,
             'locationId' => $location->id,
             '_fragment' => LocationsTab::URI_FRAGMENT,
         ]));
@@ -424,7 +430,8 @@ class LocationController extends Controller
             )
         );
 
-        return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+        return new RedirectResponse($this->generateUrl('_ez_content_view', [
+            'contentId' => $parentLocation->contentId,
             'locationId' => $parentLocation->id,
         ]));
     }
@@ -462,7 +469,8 @@ class LocationController extends Controller
                     );
                 }
 
-                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                return new RedirectResponse($this->generateUrl('_ez_content_view', [
+                    'contentId' => $contentInfo->id,
                     'locationId' => $contentInfo->mainLocationId,
                     '_fragment' => LocationsTab::URI_FRAGMENT,
                 ]));
@@ -473,7 +481,8 @@ class LocationController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+        return $this->redirect($this->generateUrl('_ez_content_view', [
+            'contentId' => $contentInfo->id,
             'locationId' => $contentInfo->mainLocationId,
             '_fragment' => LocationsTab::URI_FRAGMENT,
         ]));
@@ -511,7 +520,8 @@ class LocationController extends Controller
                     );
                 }
 
-                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                return new RedirectResponse($this->generateUrl('_ez_content_view', [
+                    'contentId' => $contentInfo->id,
                     'locationId' => $contentInfo->mainLocationId,
                     '_fragment' => LocationsTab::URI_FRAGMENT,
                 ]));
@@ -522,7 +532,8 @@ class LocationController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('_ezpublishLocation', [
+        return $this->redirect($this->generateUrl('_ez_content_view', [
+            'contentId' => $contentInfo->id,
             'locationId' => $contentInfo->mainLocationId,
             '_fragment' => LocationsTab::URI_FRAGMENT,
         ]));
@@ -610,10 +621,11 @@ class LocationController extends Controller
                     'location'
                 );
 
-                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
-                        'locationId' => $location->getContentInfo()->mainLocationId,
-                        '_fragment' => DetailsTab::URI_FRAGMENT,
-                    ]));
+                return new RedirectResponse($this->generateUrl('_ez_content_view', [
+                    'contentId' => $location->contentId,
+                    'locationId' => $location->getContentInfo()->mainLocationId,
+                    '_fragment' => DetailsTab::URI_FRAGMENT,
+                ]));
             });
 
             if ($result instanceof Response) {
@@ -621,8 +633,11 @@ class LocationController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('_ezpublishLocation', [
-            'locationId' => $location->getContentInfo()->mainLocationId,
+        $contentInfo = $location->getContentInfo();
+
+        return $this->redirect($this->generateUrl('_ez_content_view', [
+            'contentId' => $contentInfo->id,
+            'locationId' => $contentInfo->mainLocationId,
             '_fragment' => DetailsTab::URI_FRAGMENT,
         ]));
     }
