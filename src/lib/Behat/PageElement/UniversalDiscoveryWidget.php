@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use EzSystems\Behat\Browser\Context\BrowserContext;
 use EzSystems\Behat\Browser\Element\Element;
@@ -124,7 +125,52 @@ class UniversalDiscoveryWidget extends Element
     protected function selectTreeBranch(string $itemName, int $level)
     {
         $this->context->waitUntilElementIsVisible(sprintf($this->fields['treeLevelFormat'], $level), self::LONG_TIMEOUT);
+
+        $alreadySelectedItemName = $this->getCurrentlySelectedItemName($level);
+
+        if ($itemName === $alreadySelectedItemName) {
+            // don't do anything, this level is already selected
+
+            return;
+        }
+
+        // when the tree is loaded further for the already selected item we need to make sure it's reloaded properly
+        $willNextLevelBeReloaded = $alreadySelectedItemName !== null && $this->isNextLevelDisplayed($level);
+
+        if ($willNextLevelBeReloaded) {
+            $currentItems = $this->getItemsFromLevel($level + 1);
+        }
+
         $this->context->getElementByText($itemName, sprintf($this->fields['treeLevelElementsFormat'], $level))->click();
         Assert::assertTrue($this->context->getElementByText($itemName, sprintf($this->fields['treeLevelSelectedFormat'], $level))->isVisible());
+
+        if ($willNextLevelBeReloaded) {
+            // wait until the items displayed previously change
+            $this->context->waitUntil($this->defaultTimeout, function () use ($currentItems, $level) {
+                return $this->getItemsFromLevel($level + 1) !== $currentItems;
+            });
+        }
+    }
+
+    protected function getItemsFromLevel(int $level): array
+    {
+        return array_map(function (NodeElement $element) {
+            return $element->getText();
+        }, $this->context->findAllElements(sprintf($this->fields['treeLevelElementsFormat'], $level)));
+    }
+
+    private function getCurrentlySelectedItemName(int $level): ?string
+    {
+        $selectedElementSelector = sprintf($this->fields['treeLevelSelectedFormat'], $level);
+        if (!$this->context->isElementVisible($selectedElementSelector)) {
+            return null;
+        }
+
+        return $this->context->findElement($selectedElementSelector)->getText();
+    }
+
+    private function isNextLevelDisplayed(int $currentLevel): bool
+    {
+        return $this->context->isElementVisible(sprintf($this->fields['treeLevelElementsFormat'], $currentLevel + 1));
     }
 }
