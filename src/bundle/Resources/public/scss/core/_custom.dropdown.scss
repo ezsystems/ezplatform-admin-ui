@@ -110,7 +110,7 @@
         top: 100%;
         transform: scaleY(1);
         transform-origin: top center;
-        transition: all 0.2s $ez-admin-transition;
+        transition: transform 0.2s $ez-admin-transition;
         width: 50%;
         border: calculateRem(1px) solid $ez-ground-primary;
         background: $ez-white;
@@ -120,6 +120,12 @@
 
         &--hidden {
             transform: scaleY(0);
+        }
+
+        &--position-top {
+            top: initial;
+            bottom: 100%;
+            transform-origin: bottom center;
         }
     }
 
