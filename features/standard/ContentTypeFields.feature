@@ -3,15 +3,19 @@ Feature: Content fields setting and editing
   In order to manage content on my site
   I want to set, edit, copy and move content items.
 
-  @javascript @common
+  @javascript @common @admin
   Scenario Outline: Create content item with given field
-    Given a Content Type "<fieldName> CT" with an "<fieldInternalName>" field definition
-      And I am logged as "admin"
+    Given I create a "<fieldName> CT" Content Type in "Content" with "<fieldInternalName>" identifier
+      | Field Type  | Name        | Identifier          | Required | Searchable | Translatable | Settings       |
+      | <fieldName> | Field       | <fieldInternalName> | no      | no	      | yes          | <fieldSettings>  |
+      | Text line   | Name         | name	           | no      | yes	       | yes          |                 |
+    And I am logged as "admin"
       And I go to "Content structure" in "Content" tab
     When I start creating a new content "<fieldName> CT"
       And I set content fields
-        | label    | <label1> | <label2> | <label3> |
-        | Field    | <value1> | <value2> | <value3> |
+        | label    | <label1>    | <label2> | <label3> |
+        | Field    | <value1>    | <value2> | <value3> |
+        | Name     | <fieldName> |          |          |
       And I click on the edit action bar button "Publish"
     Then success notification that "Content published." appears
       And I should be on content item page "<contentItemName>" of type "<fieldName> CT" in root path
@@ -20,29 +24,31 @@ Feature: Content fields setting and editing
         | Field    | <value1> | <value2> | <value3> |
 
     Examples:
-      | fieldInternalName    | fieldName                    | label1    | value1                    | label2     | value2                | label3  | value3   | contentItemName           |
-      | ezselection          | Selection                    | value     | Test-value                |            |                       |         |          | Test-value                |
-      | ezgmaplocation       | Map location                 | latitude  | 32                        | longitude  | 132                   | address | Acapulco | Acapulco                  |
-      | ezauthor             | Authors                      | name      | Test Name                 | email      | email@example.com     |         |          | Test Name                 |
-      | ezboolean            | Checkbox                     | value     | true                      |            |                       |         |          | 1                         |
-      | ezobjectrelation     | Content relation (single)    | value     | Media/Images              |            |                       |         |          | Images                    |
-      | ezobjectrelationlist | Content relations (multiple) | firstItem | Media/Images              | secondItem | Media/Files           |         |          | Images Files              |
-      | ezcountry            | Country                      | value     | Poland                    |            |                       |         |          | Poland                    |
-      | ezdate               | Date                         | value     | 11/23/2019                |            |                       |         |          | Saturday 23 November 2019 |
-      | ezdatetime           | Date and time                | date      | 11/23/2019                | time       | 14:45                 |         |          | Sat 2019-23-11 14:45:00   |
-      | ezemail              | Email address                | value     | email@example.com         |            |                       |         |          | email@example.com         |
-      | ezfloat              | Float                        | value     | 11.11                     |            |                       |         |          | 11.11                     |
-      | ezisbn               | ISBN                         | value     | 978-3-16-148410-0         |            |                       |         |          | 978-3-16-148410-0         |
-      | ezinteger            | Integer                      | value     | 1111                      |            |                       |         |          | 1111                      |
-      | ezkeyword            | Keywords                     | value     | first keyword, second     |            |                       |         |          | first keyword, second     |
-      | ezrichtext           | Rich text                    | value     | Lorem ipsum dolor sit     |            |                       |         |          | Lorem ipsum dolor sit     |
-      | eztext               | Text block                   | value     | Lorem ipsum dolor         |            |                       |         |          | Lorem ipsum dolor         |
-      | ezstring             | Text line                    | value     | Lorem ipsum               |            |                       |         |          | Lorem ipsum               |
-      | eztime               | Time                         | value     | 14:45                     |            |                       |         |          | 2:45:00 pm                |
-      | ezurl                | URL                          | text      | Test URL                  | url        | http://www.google.com |         |          | Test URL                  |
-      | ezmedia              | Media                        | value     | video1.mp4.zip            |            |                       |         |          | video1.mp4                |
-      | ezimage              | Image                        | value     | image1.png.zip            |            |                       |         |          | image1.png                |
-      | ezbinaryfile         | File                         | value     | binary1.txt.zip           |            |                       |         |          | binary1.txt               |
+      | fieldInternalName    | fieldName                    | fieldSettings                                                         |  label1   | value1                                                                    | label2     | value2                | label3  | value3   | contentItemName           |
+      | ezselection          | Selection                    | is_multiple:false,options:A first-Bielefeld-TestValue-Turtles-Zombies | value     | TestValue                                                                 |            |                       |         |          | TestValue                 |
+      | ezgmaplocation       | Map location                 |                                                                       | latitude  | 32                                                                        | longitude  | 132                   | address | Acapulco | Acapulco                  |
+      | ezauthor             | Authors                      |                                                                       | name      | Test Name                                                                 | email      | email@example.com     |         |          | Test Name                 |
+      | ezboolean            | Checkbox                     |                                                                       | value     | true                                                                      |            |                       |         |          | 1                         |
+      | ezobjectrelation     | Content relation (single)    |                                                                       | value     | Media/Images                                                              |            |                       |         |          | Images                    |
+      | ezobjectrelationlist | Content relations (multiple) |                                                                       | firstItem | Media/Images                                                              | secondItem | Media/Files           |         |          | Images Files              |
+      | ezcountry            | Country                      |                                                                       | value     | Poland                                                                    |            |                       |         |          | Poland                    |
+      | ezdate               | Date                         |                                                                       | value     | 11/23/2019                                                                |            |                       |         |          | Saturday 23 November 2019 |
+      | ezdatetime           | Date and time                |                                                                       | date      | 11/23/2019                                                                | time       | 14:45                 |         |          | Sat 2019-23-11 14:45:00   |
+      | ezemail              | Email address                |                                                                       | value     | email@example.com                                                         |            |                       |         |          | email@example.com         |
+      | ezfloat              | Float                        |                                                                       | value     | 11.11                                                                     |            |                       |         |          | 11.11                     |
+      | ezisbn               | ISBN                         |                                                                       | value     | 978-3-16-148410-0                                                         |            |                       |         |          | 978-3-16-148410-0         |
+      | ezinteger            | Integer                      |                                                                       | value     | 1111                                                                      |            |                       |         |          | 1111                      |
+      | ezkeyword            | Keywords                     |                                                                       | value     | first keyword, second                                                     |            |                       |         |          | first keyword, second     |
+      | ezrichtext           | Rich text                    |                                                                       | value     | Lorem ipsum dolor sit                                                     |            |                       |         |          | Lorem ipsum dolor sit     |
+      | eztext               | Text block                   |                                                                       | value     | Lorem ipsum dolor                                                         |            |                       |         |          | Lorem ipsum dolor         |
+      | ezstring             | Text line                    |                                                                       | value     | Lorem ipsum                                                               |            |                       |         |          | Lorem ipsum               |
+      | eztime               | Time                         |                                                                       | value     | 14:45                                                                     |            |                       |         |          | 2:45:00 pm                |
+      | ezurl                | URL                          |                                                                       | text      | Test URL                                                                  | url        | http://www.google.com |         |          | Test URL                  |
+      | ezmedia              | Media                        |                                                                       | value     | video1.mp4.zip                                                            |            |                       |         |          | video1.mp4                |
+      | ezimage              | Image                        |                                                                       | value     | image1.png.zip                                                            |            |                       |         |          | image1.png                |
+      | ezbinaryfile         | File                         |                                                                       | value     | binary1.txt.zip                                                           |            |                       |         |          | binary1.txt               |
+      | ezmatrix             | Matrix                       | Min_rows:2,Columns:col1-col2-col3                                     | value     | col1:col2:col3,Ala:miała:kota,Szpak:dziobał:bociana,Bociana:dziobał:szpak |            |                       |         |          | Matrix                    |
+      | ezimageasset         | Image Asset                  |                                                                       | value     |  imageasset1.png.zip                                                      |            |                       |         |          | imageasset1.png           |
 
   @javascript @common
   Scenario Outline: Edit content item with given field
@@ -61,7 +67,7 @@ Feature: Content fields setting and editing
 
     Examples:
       | fieldName                    | label1    | value1                       | label2     | value2                   | label3  | value3   | oldContentItemName        | newContentItemName           |
-      | Selection                    | value     | Bielefeld                    |            |                          |         |          | Test-value                | Bielefeld                    |
+      | Selection                    | value     | Bielefeld                    |            |                          |         |          | TestValue                 | Bielefeld                    |
       | Map location                 | latitude  | 56                           | longitude  | 101                      | address | Ohio     | Acapulco                  | Ohio                         |
       | Authors                      | name      | Test Name Edited             | email      | edited.email@example.com |         |          | Test Name                 | Test Name Edited             |
       | Checkbox                     | value     | false                        |            |                          |         |          | 1                         | 0                            |
@@ -83,3 +89,5 @@ Feature: Content fields setting and editing
       | Media                        | value     | video2.mp4.zip               |            |                          |         |          | video1.mp4                | video2.mp4                   |
       | Image                        | value     | image2.png.zip               |            |                          |         |          | image1.png                | image2.png                   |
       | File                         | value     | binary2.txt.zip              |            |                          |         |          | binary1.txt               | binary2.txt                  |
+      | Matrix                       | value     | col1:col2:col3,11:12:13,21:22:23,31:32:33 |                         ||         |          | Matrix                    | Matrix                       |
+      | Image Asset                  | value     | imageasset2.png.zip          |            |                          |         |          | imageasset1.png           | imageasset2.png              |
