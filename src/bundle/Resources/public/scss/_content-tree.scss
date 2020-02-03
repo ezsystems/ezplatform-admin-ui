@@ -15,12 +15,18 @@
         color: inherit;
         transform: scaleX(0);
         transform-origin: left;
-        transition: all 0.2s ease-out;
+
+        &--animate {
+            transition: all 0.2s ease-out;
+            
+            &--expanded {
+                transition: all 0.4s ease-in;
+            }
+        }
 
         &--expanded {
             transform-origin: left;
             transform: scaleX(1);
-            transition: all 0.4s ease-in;
             display: initial;
             max-width: 33vw;
         }
