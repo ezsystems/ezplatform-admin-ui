@@ -145,9 +145,9 @@ class UniversalDiscoveryWidget extends Element
         Assert::assertTrue($this->context->getElementByText($itemName, sprintf($this->fields['treeLevelSelectedFormat'], $level))->isVisible());
 
         if ($willNextLevelBeReloaded) {
-            // wait until the items displayed previously change
+            // Wait until the items displayed previously disappear or change
             $this->context->waitUntil($this->defaultTimeout, function () use ($currentItems, $level) {
-                return $this->getItemsFromLevel($level + 1) !== $currentItems;
+                return !$this->isNextLevelDisplayed($level) || $this->getItemsFromLevel($level + 1) !== $currentItems;
             });
         }
     }
