@@ -17,9 +17,9 @@ class MapLocation extends EzFieldElement
     public function __construct(BrowserContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
-        $this->fields['latitude'] = '#ezplatform_content_forms_content_edit_fieldsData_field_value_latitude';
-        $this->fields['longitude'] = '#ezplatform_content_forms_content_edit_fieldsData_field_value_longitude';
-        $this->fields['address'] = '#ezplatform_content_forms_content_edit_fieldsData_field_value_address';
+        $this->fields['latitude'] = '#ezplatform_content_forms_content_edit_fieldsData_ezgmaplocation_value_latitude';
+        $this->fields['longitude'] = '#ezplatform_content_forms_content_edit_fieldsData_ezgmaplocation_value_longitude';
+        $this->fields['address'] = '#ezplatform_content_forms_content_edit_fieldsData_ezgmaplocation_value_address';
     }
 
     public function setValue(array $parameters): void
