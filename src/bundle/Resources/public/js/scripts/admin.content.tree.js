@@ -1,6 +1,7 @@
 (function(global, doc, React, ReactDOM, eZ, localStorage) {
     const KEY_CONTENT_TREE_EXPANDED = 'ez-content-tree-expanded';
     const CLASS_CONTENT_TREE_EXPANDED = 'ez-content-tree-container--expanded';
+    const CLASS_CONTENT_TREE_ANIMATE = 'ez-content-tree-container--animate';
     const CLASS_BTN_CONTENT_TREE_EXPANDED = 'ez-btn--content-tree-expanded';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
@@ -11,6 +12,7 @@
     let frame = null;
     const toggleContentTreePanel = () => {
         contentTreeContainer.classList.toggle(CLASS_CONTENT_TREE_EXPANDED);
+        contentTreeContainer.classList.add(CLASS_CONTENT_TREE_ANIMATE);
         btn.classList.toggle(CLASS_BTN_CONTENT_TREE_EXPANDED);
         updateContentTreeWrapperHeight();
 
