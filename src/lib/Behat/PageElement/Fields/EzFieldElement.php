@@ -27,11 +27,13 @@ abstract class EzFieldElement extends Element
         'ezfloat' => 'Float',
         'ezisbn' => 'ISBN',
         'ezimage' => 'Image',
+        'ezimageasset' => 'Image Asset',
         'ezinteger' => 'Integer',
         'ezkeyword' => 'Keywords',
         'ezlandingpage' => 'Landing Page',
         'ezpage' => 'Layout',
         'ezgmaplocation' => 'Map location',
+        'ezmatrix' => 'Matrix',
         'ezmedia' => 'Media',
         'ezsrrating' => 'Rating',
         'ezrichtext' => 'Rich text',
@@ -67,6 +69,8 @@ abstract class EzFieldElement extends Element
     abstract public function setValue(array $parameters): void;
 
     abstract public function getValue(): array;
+
+    abstract public function verifyValueInItemView(array $values): void;
 
     public function verifyValue(array $value): void
     {

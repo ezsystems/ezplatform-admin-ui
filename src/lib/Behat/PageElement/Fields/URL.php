@@ -17,8 +17,8 @@ class URL extends EzFieldElement
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
-        $this->fields['url'] = '#ezrepoforms_content_edit_fieldsData_field_value_link';
-        $this->fields['text'] = '#ezrepoforms_content_edit_fieldsData_field_value_text';
+        $this->fields['url'] = '#ezrepoforms_content_edit_fieldsData_ezurl_value_link';
+        $this->fields['text'] = '#ezrepoforms_content_edit_fieldsData_ezurl_value_text';
     }
 
     public function setValue(array $parameters): void
