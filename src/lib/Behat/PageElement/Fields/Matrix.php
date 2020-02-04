@@ -18,7 +18,7 @@ class Matrix extends EzFieldElement
     public function __construct(BrowserContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
-        $this->fields['matrixCellSelectorFormat'] = '[name="ezrepoforms_content_edit[fieldsData][ezmatrix][value][entries][%d][%s]"]';
+        $this->fields['matrixCellSelectorFormat'] = '[name="ezplatform_content_forms_content_edit[fieldsData][ezmatrix][value][entries][%d][%s]"]';
         $this->fields['row'] = '.ez-table__matrix-entry';
         $this->fields['addRowButton'] = '.ez-btn--add-matrix-entry';
         $this->fields['viewModeTableHeaders'] = '.ez-content-field-value thead th';
