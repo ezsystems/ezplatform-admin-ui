@@ -289,6 +289,16 @@
         <target state="new">Any time</target>
         <note>key: search.any_time</note>
       </trans-unit>
+      <trans-unit id="8175175f658c09a5d87b63e96e792c05b7c37ce7" resname="search.include_main_language_when_no_translation">
+        <source>Include main language when no translation</source>
+        <target state="new">Include main language when no translation</target>
+        <note>key: search.include_main_language_when_no_translation</note>
+      </trans-unit>
+      <trans-unit id="e0ea05704fd0ddf5dbf4409f1227a3f38463870d" resname="search.main_content_language">
+        <source>Main content language</source>
+        <target state="new">Main content language</target>
+        <note>key: search.main_content_language</note>
+      </trans-unit>
       <trans-unit id="03d6d5922fd2012e155e50306eaf98e2dfeb21c6" resname="search.section.any">
         <source>Any section</source>
         <target state="new">Any section</target>

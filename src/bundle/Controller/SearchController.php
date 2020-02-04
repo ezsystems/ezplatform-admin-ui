@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
@@ -109,6 +110,8 @@ class SearchController extends Controller
         $lastModified = $search['last_modified'] ?? [];
         $created = $search['created'] ?? [];
         $subtree = $search['subtree'] ?? null;
+        $searchLanguage = null;
+        $useAlwaysAvailable = $search['use_always_available'] ? (bool) $search['use_always_available'] : null;
 
         if (!empty($search['section'])) {
             $section = $this->sectionService->loadSection($search['section']);
@@ -120,7 +123,19 @@ class SearchController extends Controller
         }
 
         $form = $this->formFactory->createSearchForm(
-            new SearchData($limit, $page, $query, $section, $contentTypes, $lastModified, $created, $creator, $subtree),
+            new SearchData(
+                $limit,
+                $page,
+                $query,
+                $section,
+                $contentTypes,
+                $lastModified,
+                $created,
+                $creator,
+                $subtree,
+                $searchLanguage,
+                $useAlwaysAvailable
+            ),
             'search',
             [
                 'method' => Request::METHOD_GET,
@@ -141,6 +156,11 @@ class SearchController extends Controller
             $created = $data->getCreated();
             $creator = $data->getCreator();
             $subtree = $data->getSubtree();
+            $searchLanguageCode = ($data->getSearchLanguage() instanceof Language)
+                ? $data->getSearchLanguage()->languageCode
+                : null;
+            $useAlwaysAvailable = $data->getUseAlwaysAvailable();
+
             $query = new Query();
             $criteria = [];
 
@@ -185,8 +205,10 @@ class SearchController extends Controller
                 $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
             }
 
+            $languageFilter = $this->getSearchLanguageFilter($searchLanguageCode, $useAlwaysAvailable);
+
             $pagerfanta = new Pagerfanta(
-                new ContentSearchAdapter($query, $this->searchService)
+                new ContentSearchAdapter($query, $this->searchService, $languageFilter, $searchLanguageCode)
             );
 
             $pagerfanta->setMaxPerPage($limit);
@@ -211,5 +233,23 @@ class SearchController extends Controller
             'filters_expanded' => $form->isSubmitted() && !$form->isValid(),
             'user_content_type_identifier' => $this->userContentTypeIdentifier,
         ]);
+    }
+
+    /**
+     * @param string|null $languageCode
+     * @param bool|null $useAlwaysAvailable
+     *
+     * @return array
+     */
+    private function getSearchLanguageFilter(?string $languageCode, ?bool $useAlwaysAvailable): array
+    {
+        if (empty($languageCode) && null === $useAlwaysAvailable) {
+            return [];
+        }
+
+        return [
+            'languages' => $languageCode ? [$languageCode] : [],
+            'useAlwaysAvailable' => $useAlwaysAvailable,
+        ];
     }
 }

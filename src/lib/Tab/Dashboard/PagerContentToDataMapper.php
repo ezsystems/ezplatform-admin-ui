@@ -66,6 +66,8 @@ class PagerContentToDataMapper
     {
         $data = [];
         $contentTypeIds = [];
+        /** @var \eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchHitAdapter $pagerAdapter */
+        $contentSearchHitAdapter = $pager->getAdapter();
 
         foreach ($pager as $content) {
             /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
@@ -79,7 +81,10 @@ class PagerContentToDataMapper
                 'content' => $content,
                 'contentTypeId' => $contentInfo->contentTypeId,
                 'contentId' => $content->id,
-                'name' => $this->translationHelper->getTranslatedContentName($content),
+                'name' => $this->translationHelper->getTranslatedContentName(
+                    $content,
+                    $contentSearchHitAdapter->getDisplayLanguage()
+                ),
                 'language' => $contentInfo->mainLanguageCode,
                 'contributor' => $contributor,
                 'version' => $content->versionInfo->versionNo,

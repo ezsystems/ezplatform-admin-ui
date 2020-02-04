@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Search;
 
+use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Section;
 use eZ\Publish\API\Repository\Values\User\User;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -47,6 +48,12 @@ class SearchData
     /** @var string|null */
     private $subtree;
 
+    /** @var \eZ\Publish\API\Repository\Values\Content\Language|null */
+    private $searchLanguage;
+
+    /** @var bool|null */
+    private $useAlwaysAvailable;
+
     /**
      * SimpleSearchData constructor.
      *
@@ -59,6 +66,8 @@ class SearchData
      * @param array $created
      * @param \eZ\Publish\API\Repository\Values\User\User|null $creator
      * @param string|null $subtree
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $searchLanguage
+     * @param bool|null $useAlwaysAvailable
      */
     public function __construct(
         int $limit = 10,
@@ -69,7 +78,9 @@ class SearchData
         array $lastModified = [],
         array $created = [],
         ?User $creator = null,
-        ?string $subtree = null
+        ?string $subtree = null,
+        ?Language $searchLanguage = null,
+        ?bool $useAlwaysAvailable = null
     ) {
         $this->limit = $limit;
         $this->page = $page;
@@ -80,6 +91,8 @@ class SearchData
         $this->created = $created;
         $this->creator = $creator;
         $this->subtree = $subtree;
+        $this->searchLanguage = $searchLanguage;
+        $this->useAlwaysAvailable = $useAlwaysAvailable;
     }
 
     /**
@@ -163,6 +176,30 @@ class SearchData
     }
 
     /**
+     * @param string|null $subtree
+     */
+    public function setSubtree(?string $subtree): void
+    {
+        $this->subtree = $subtree;
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $searchLanguage
+     */
+    public function setSearchLanguage(?Language $searchLanguage): void
+    {
+        $this->searchLanguage = $searchLanguage;
+    }
+
+    /**
+     * @param bool|null $useAlwaysAvailable
+     */
+    public function setUseAlwaysAvailable(?bool $useAlwaysAvailable): void
+    {
+        $this->useAlwaysAvailable = $useAlwaysAvailable;
+    }
+
+    /**
      * @return int
      */
     public function getLimit(): int
@@ -235,11 +272,19 @@ class SearchData
     }
 
     /**
-     * @param string|null $subtree
+     * @return \eZ\Publish\API\Repository\Values\Content\Language|null
      */
-    public function setSubtree(?string $subtree): void
+    public function getSearchLanguage(): ?Language
     {
-        $this->subtree = $subtree;
+        return $this->searchLanguage;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getUseAlwaysAvailable(): ?bool
+    {
+        return $this->useAlwaysAvailable;
     }
 
     /**
@@ -253,6 +298,8 @@ class SearchData
         $created = $this->getCreated();
         $creator = $this->getCreator();
         $subtree = $this->getSubtree();
+        $searchLanguage = $this->getSearchLanguage();
+        $useAlwaysAvailable = $this->getUseAlwaysAvailable();
 
         return
             !empty($contentTypes) ||
@@ -260,6 +307,8 @@ class SearchData
             !empty($lastModified) ||
             !empty($created) ||
             !empty($creator) ||
-            null !== $subtree;
+            null !== $subtree ||
+            null !== $searchLanguage ||
+            null !== $useAlwaysAvailable;
     }
 }

@@ -98,6 +98,16 @@
             <ul class="ez-filters__user-list ez-filters__user-list--hidden"></ul>
         </div>
     </div>
+    <div class="ez-filters__row">
+        <div class="ez-filters__item ez-filters__item--search-language">
+            <label class="ez-filters__item-label">{{ 'search.language'|trans|desc('Search language') }}:</label>
+            {{ form_widget(form.search_language, {'attr': {'class': 'ez-filters__select'}}) }}
+        </div>
+        <div class="ez-filters__item ez-filters__item--always-available">
+            <label class="ez-filters__item-label">{{ 'search.use_always_available'|trans|desc('Use always available') }}:</label>
+            {{ form_widget(form.use_always_available, {'attr': {'class': 'ez-filters__select'}}) }}
+        </div>
+    </div>
     <div class="ez-filters__btns">
         <button class="btn btn-dark ez-btn-clear">
             {{ 'search.clear'|trans|desc('Clear') }}</button>
