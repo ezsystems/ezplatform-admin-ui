@@ -21,11 +21,11 @@
         overflow: hidden;
         text-overflow: ellipsis;
         width: calc(100% - #{calculateRem(36px)});
-        padding-left: calculateRem(2px);
+        padding-left: calculateRem(8px);
     }
 
     &__content-type-name {
-        padding-left: calculateRem(38px);
+        padding-left: calculateRem(44px);
         font-size: calculateRem(18px);
         font-weight: 400;
         color: $ez-color-base-light;
