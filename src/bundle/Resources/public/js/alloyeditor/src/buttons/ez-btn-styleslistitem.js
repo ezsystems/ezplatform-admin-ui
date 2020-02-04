@@ -28,12 +28,14 @@ export default class EzBtnStylesListItem extends AlloyEditor.ButtonStylesListIte
     }
 
     clearEzAttributes() {
+
         const nativeEditor = this.props.editor.get('nativeEditor');
         const block = nativeEditor.elementPath().block;
         const attrsToRemove = ['ezelement', 'eztype', 'ezname'];
+        const targetName = this.props.style.attributes ? this.props.style.attributes['data-ezname'] : '';
 
-        if (block.$.dataset.eztype === 'style') {
-            attrsToRemove.forEach(attr => block.$.removeAttribute('data-' + attr));
+        if (block.$.dataset.eztype === 'style' && block.$.dataset.ezname !== targetName) {
+            attrsToRemove.forEach(attr => block.$.removeAttribute(`data-${attr}`));
         }
     }
 
