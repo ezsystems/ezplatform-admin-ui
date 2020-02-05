@@ -60,8 +60,20 @@
                         {% do form_policies_delete.policies.setRendered %}
                     {% endif %}
                 </td>
-                <td class="ez-table__cell">{{ ('role.policy.' ~ policy.module)|trans({}, 'forms') }}</td>
-                <td class="ez-table__cell">{{ policy.function|capitalize }}</td>
+                <td class="ez-table__cell">
+                    {% if policy.module == '*' %}
+                        {{ ('role.policy.all_modules')|trans({}, 'forms')|desc('All modules') }}
+                    {% else %}
+                        {{ ('role.policy.' ~ policy.module)|trans({}, 'forms') }}
+                    {% endif %}
+                </td>
+                <td class="ez-table__cell">
+                    {% if policy.function == '*' %}
+                        {{ ('role.policy.all_functions')|trans({}, 'forms')|desc('All functions') }}
+                    {% else %}
+                        {{ policy.function|capitalize }}
+                    {% endif %}
+                </td>
                 <td class="ez-table__cell">
                     {%- if policy.limitations is not empty -%}
                         <ul class="list-unstyled">

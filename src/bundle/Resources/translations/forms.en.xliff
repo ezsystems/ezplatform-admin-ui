@@ -196,6 +196,11 @@
         <target state="new">Create</target>
         <note>key: policy_create.save</note>
       </trans-unit>
+      <trans-unit id="deab5c91a76488732d0405e72c36702ed2aea3d6" resname="role.policy.all_functions">
+        <source>All functions</source>
+        <target state="new">All functions</target>
+        <note>key: role.policy.all_functions</note>
+      </trans-unit>
       <trans-unit id="d29c07272fff793138cbb6f7dbb41b08a16ff815" resname="role.policy.all_modules">
         <source>All modules</source>
         <target>All modules</target>
