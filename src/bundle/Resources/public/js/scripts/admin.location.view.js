@@ -35,18 +35,26 @@
             submitVersionEditForm();
             $('#version-draft-conflict-modal').modal('hide');
         };
+        const attachModalListeners = (wrapper) => {
+            const addDraftButton = wrapper.querySelector('.ez-btn--add-draft');
+
+            if (addDraftButton) {
+                addDraftButton.addEventListener('click', addDraft, false);
+            }
+
+            wrapper
+                .querySelectorAll('.ez-btn--prevented')
+                .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
+
+            $('#version-draft-conflict-modal')
+                .modal('show')
+                .on('shown.bs.modal', () => eZ.helpers.tooltips.parse());
+        };
         const showModal = (modalHtml) => {
             const wrapper = doc.querySelector('.ez-modal-wrapper');
 
             wrapper.innerHTML = modalHtml;
-            const addDraftButton = wrapper.querySelector('.ez-btn--add-draft');
-            if (addDraftButton) {
-                addDraftButton.addEventListener('click', addDraft, false);
-            }
-            wrapper
-                .querySelectorAll('.ez-btn--prevented')
-                .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
-            $('#version-draft-conflict-modal').modal('show');
+            attachModalListeners(wrapper);
         };
         const checkEditPermissionLink = Routing.generate('ezplatform.content.check_edit_permission', {
             contentId,

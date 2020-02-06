@@ -33,12 +33,18 @@
                         {% endif %}
                         type="button"
                         class="ez-relations__table-action--create btn btn-primary"
+                        title="{{ 'ezobjectrelationlist.add_relation'|trans|desc('Add relations') }}"
                         disabled>
                         <svg class="ez-icon ez-icon--medium ez-icon--light">
                             <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#create"></use>
                         </svg>
                     </button>
-                    <button type="button" class="ez-relations__table-action--remove btn btn-danger" disabled>
+                    <button 
+                        type="button" 
+                        class="ez-relations__table-action--remove btn btn-danger" 
+                        title="{{ 'ezobjectrelationlist.delete_selected_relations'|trans|desc('Delete selected relation(s)') }}" 
+                        disabled
+                    >
                         <svg class="ez-icon ez-icon--medium ez-icon--light">
                             <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
                         </svg>

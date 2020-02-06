@@ -1,6 +1,8 @@
 (function(global, doc, eZ, $) {
+    const TOOLTIPS_SELECTOR = '[title]';
+
     const parse = () => {
-        const tooltipsNode = doc.querySelectorAll('[title]');
+        const tooltipsNode = doc.querySelectorAll(TOOLTIPS_SELECTOR);
 
         for (tooltipNode of tooltipsNode) {
             if (tooltipNode.title) {
@@ -21,7 +23,16 @@
         }
     };
 
+    const hideAll = () => {
+        const tooltipsNode = doc.querySelectorAll(TOOLTIPS_SELECTOR);
+
+        for (tooltipNode of tooltipsNode) {
+            $(tooltipNode).tooltip('hide');
+        }
+    };
+
     eZ.addConfig('helpers.tooltips', {
         parse,
+        hideAll,
     });
 })(window, window.document, window.eZ, window.jQuery);

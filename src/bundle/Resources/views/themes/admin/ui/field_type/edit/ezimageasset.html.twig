@@ -109,12 +109,21 @@
             </div>
         </div>
         <div class="ez-field-edit-preview__actions">
-            <button type="button" class="ez-field-edit-preview__action--remove">
+            <button 
+                type="button" 
+                class="ez-field-edit-preview__action--remove"
+                title="{{ 'fieldtype.ezimageasset.delete'|trans|desc('Delete image') }}"
+            >
                 <svg class="ez-icon">
                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
                 </svg>
             </button>
-            <a class="ez-field-edit-preview__action--preview" href="{{ destination_content_url }}" target="_blank">
+            <a 
+                class="ez-field-edit-preview__action--preview" 
+                href="{{ destination_content_url }}"
+                title="{{ 'fieldtype.ezimageasset.open'|trans|desc('Open') }}"
+                target="_blank"
+            >
                 <svg class="ez-icon">
                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab"></use>
                 </svg>

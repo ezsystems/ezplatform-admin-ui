@@ -1,4 +1,4 @@
-(function(global, doc, $, Routing) {
+(function(global, doc, eZ, $, Routing) {
     const editActions = doc.querySelector('.ez-extra-actions--edit') || doc.querySelector('.ez-extra-actions--edit-user');
     const btns = [...editActions.querySelectorAll('.form-check [type="radio"]')];
     const form = editActions.querySelector('form');
@@ -39,7 +39,8 @@
 
         $('#version-draft-conflict-modal')
             .modal('show')
-            .on('hidden.bs.modal', onModalHidden);
+            .on('hidden.bs.modal', onModalHidden)
+            .on('shown.bs.modal', () => eZ.helpers.tooltips.parse());
     };
     const showModal = (modalHtml) => {
         const wrapper = doc.querySelector('.ez-modal-wrapper');
@@ -73,4 +74,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('change', changeHandler, false));
-})(window, window.document, window.jQuery, window.Routing);
+})(window, window.document, window.eZ, window.jQuery, window.Routing);

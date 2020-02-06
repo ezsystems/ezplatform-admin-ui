@@ -16,15 +16,35 @@
         <target state="new">Use current location</target>
         <note>key: content.field_type.ezgmaplocation.set_current_location</note>
       </trans-unit>
+      <trans-unit id="6a6094a8406a207e85ac5523d0fa582b0e62b45e" resname="content.field_type.ezimage.delete">
+        <source>Delete image</source>
+        <target state="new">Delete image</target>
+        <note>key: content.field_type.ezimage.delete</note>
+      </trans-unit>
       <trans-unit id="9cadbe380acedd355a84784a1c98cc7aca8897c6" resname="content.field_type.ezimage.img_alt">
         <source>Image stored in Field '%label%'</source>
         <target state="new">Image stored in Field '%label%'</target>
         <note>key: content.field_type.ezimage.img_alt</note>
       </trans-unit>
+      <trans-unit id="c8a4bdb275beb9d4f81c8d89ae3241d23205e059" resname="content.field_type.ezimage.preview">
+        <source>Preview</source>
+        <target state="new">Preview</target>
+        <note>key: content.field_type.ezimage.preview</note>
+      </trans-unit>
       <trans-unit id="03ebd0d1e50c8323be782f1095d9d4d7f9edffa4" resname="content.field_type.ezimageasset.img_alt">
         <source>Image stored in Field '%label%'</source>
         <target state="new">Image stored in Field '%label%'</target>
         <note>key: content.field_type.ezimageasset.img_alt</note>
+      </trans-unit>
+      <trans-unit id="bdf413a5b83f6299a56d72a472afd24ab790bab1" resname="content.field_type.ezmedia.delete">
+        <source>Delete media</source>
+        <target state="new">Delete media</target>
+        <note>key: content.field_type.ezmedia.delete</note>
+      </trans-unit>
+      <trans-unit id="b08e08e950b34f4bc8438fe4198b099434d91d16" resname="content.field_type.ezmedia.download">
+        <source>Download media</source>
+        <target state="new">Download media</target>
+        <note>key: content.field_type.ezmedia.download</note>
       </trans-unit>
       <trans-unit id="093c498e82bd382a4732e4bb8356c7d88b671f25" resname="content.field_type.ezmedia.player_settings">
         <source>Player settings</source>
@@ -115,6 +135,16 @@
         <source>Upload file</source>
         <target state="new">Upload file</target>
         <note>key: fieldtype.binary_base.upload_file</note>
+      </trans-unit>
+      <trans-unit id="c91345901123a50c2a42dcf9f70966192a9d76ca" resname="fieldtype.ezimageasset.delete">
+        <source>Delete image</source>
+        <target state="new">Delete image</target>
+        <note>key: fieldtype.ezimageasset.delete</note>
+      </trans-unit>
+      <trans-unit id="44b5dc8270a7494f1c46883bc7fbc31f45789027" resname="fieldtype.ezimageasset.open">
+        <source>Open</source>
+        <target state="new">Open</target>
+        <note>key: fieldtype.ezimageasset.open</note>
       </trans-unit>
       <trans-unit id="dcf8a820f28bd6b955d76c6d3b95a2661d2b7540" resname="fieldtype.ezimageasset.select.label">
         <source>Select from your Repository</source>

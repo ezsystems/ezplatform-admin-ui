@@ -10,9 +10,12 @@ namespace EzSystems\EzPlatformAdminUi\Menu\UserSetting;
 
 use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for User Setting Edit contextual sidebar menu.
@@ -24,6 +27,19 @@ class UserSettingUpdateRightSidebarBuilder extends AbstractBuilder implements Tr
     /* Menu items */
     const ITEM__SAVE = 'object_state_edit__sidebar_right__save';
     const ITEM__CANCEL = 'object_state_edit__sidebar_right__cancel';
+
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    private $translator;
+
+    public function __construct(
+        MenuItemFactory $factory,
+        EventDispatcherInterface $eventDispatcher,
+        TranslatorInterface $translator)
+    {
+        parent::__construct($factory, $eventDispatcher);
+
+        $this->translator = $translator;
+    }
 
     /**
      * @return string
@@ -52,6 +68,13 @@ class UserSettingUpdateRightSidebarBuilder extends AbstractBuilder implements Tr
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => '#user_setting_update_update',
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
+                        'title' => $this->translator->trans(
+/** @Ignore */ self::ITEM__SAVE,
+                            [],
+                            'menu'
+                        ),
                     ],
                     'extras' => ['icon' => 'save'],
                 ]
@@ -59,8 +82,17 @@ class UserSettingUpdateRightSidebarBuilder extends AbstractBuilder implements Tr
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'route' => 'ezplatform.user_settings.list',
+                    'attributes' => [
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
+                        'title' => $this->translator->trans(
+/** @Ignore */ self::ITEM__CANCEL,
+                            [],
+                            'menu'
+                        ),
+                    ],
                     'extras' => ['icon' => 'circle-close'],
+                    'route' => 'ezplatform.user_settings.list',
                 ]
             ),
         ]);
