@@ -13,6 +13,7 @@ export default class EzBtnAnchorEdit extends Component {
         this.saveAnchor = this.saveAnchor.bind(this);
         this.removeAnchor = this.removeAnchor.bind(this);
         this.fireCustomUpdateEvent = this.fireCustomUpdateEvent.bind(this);
+        this.hasError = this.hasError.bind(this);
 
         this.getStateClasses = AlloyEditor.ButtonStateClasses.getStateClasses;
 
@@ -21,6 +22,7 @@ export default class EzBtnAnchorEdit extends Component {
         this.state = {
             value: '',
             isValueUnique: false,
+            isValueValid: false,
         };
     }
 
@@ -28,8 +30,9 @@ export default class EzBtnAnchorEdit extends Component {
         const block = this.findBlock();
         const value = block.getId();
         const isValueUnique = this.isValueUnique(value);
+        const isValueValid = this.isValueValid(value);
 
-        this.setState(() => ({ value, isValueUnique }));
+        this.setState(() => ({ value, isValueUnique, isValueValid }));
     }
 
     static get key() {
@@ -72,8 +75,9 @@ export default class EzBtnAnchorEdit extends Component {
     updateValue({ nativeEvent }) {
         const value = nativeEvent.target.value;
         const isValueUnique = this.isValueUnique(value);
+        const isValueValid = this.isValueValid(value);
 
-        this.setState(() => ({ value, isValueUnique }));
+        this.setState(() => ({ value, isValueUnique, isValueValid }));
     }
 
     isValueUnique(value) {
@@ -101,6 +105,16 @@ export default class EzBtnAnchorEdit extends Component {
                 })
             );
         });
+    }
+
+    isValueValid(value) {
+        const pattern = /^[A-Za-z][A-Za-z0-9\-_:\.]*$/;
+
+        return pattern.test(value);
+    }
+
+    hasError() {
+        return this.state.value && (!this.state.isValueUnique || !this.state.isValueValid);
     }
 
     fireCustomUpdateEvent() {
@@ -162,17 +176,26 @@ export default class EzBtnAnchorEdit extends Component {
     }
 
     renderError() {
-        const { value, isValueUnique } = this.state;
-
-        if (!value || isValueUnique) {
+        if (!this.hasError()) {
             return null;
         }
 
-        const errorMessage = Translator.trans(
-            /*@Desc("This anchor already exists on the page. Anchor name must be unique.")*/ 'anchor_btn.error.unique',
-            {},
-            'alloy_editor'
-        );
+        const { value, isValueUnique, isValueValid } = this.state;
+        let errorMessage;
+
+        if (value && !isValueUnique) {
+            errorMessage = Translator.trans(
+                /*@Desc("Anchor name must be unique.")*/ 'anchor_btn.error.unique',
+                {},
+                'alloy_editor'
+            );
+        } else if (value && !isValueValid) {
+            errorMessage = Translator.trans(
+                /*@Desc("A valid anchor link is needed.")*/ 'anchor_btn.error.valid',
+                {},
+                'alloy_editor'
+            );
+        }
 
         return <em className="ez-ae-anchor-edit__error">{errorMessage}</em>;
     }
@@ -187,14 +210,18 @@ export default class EzBtnAnchorEdit extends Component {
         const nameLabel = Translator.trans(/*@Desc("Name:")*/ 'anchor_edit.input.label', {}, 'alloy_editor');
         const removeBtnTitle = Translator.trans(/*@Desc("Remove")*/ 'anchor_edit.btn.remove.title', {}, 'alloy_editor');
         const saveBtnTitle = Translator.trans(/*@Desc("Save")*/ 'anchor_edit.btn.save.title', {}, 'alloy_editor');
-        const { value, isValueUnique } = this.state;
+        const { value } = this.state;
+        const hasError = this.hasError();
         const isRemoveBtnDisabled = !value;
-        const isSaveBtnDisabled = !value || !isValueUnique;
+        const isSaveBtnDisabled = !value || hasError;
 
         return (
-            <div className="ez-ae-anchor-edit">
+            <div className={`ez-ae-anchor-edit ${hasError ? 'is-invalid' : ''}`}>
                 <div className="ez-ae-anchor-edit__input-wrapper">
-                    <label className="ez-ae-anchor-edit__input-label">{nameLabel}</label>
+                    <label className="ez-ae-anchor-edit__input-label">
+                        {nameLabel}
+                        {this.renderError()}
+                    </label>
                     <input type="text" className="ez-ae-anchor-edit__input form-control" onChange={this.updateValue} value={value} />
                 </div>
                 <div className="ez-ae-anchor-edit__actions">
@@ -219,7 +246,6 @@ export default class EzBtnAnchorEdit extends Component {
                         </svg>
                     </button>
                 </div>
-                {this.renderError()}
             </div>
         );
     }
