@@ -4,6 +4,7 @@ import AlloyEditor from 'alloyeditor';
 
 const CLASS_HAS_ANCHOR = 'ez-has-anchor';
 const CLASS_ICON_ANCHOR = 'ez-icon--anchor';
+const ANCHOR_PATTERN = /^[A-Za-z][A-Za-z0-9\-_:\.]*$/;
 
 export default class EzBtnAnchorEdit extends Component {
     constructor(props) {
@@ -108,9 +109,7 @@ export default class EzBtnAnchorEdit extends Component {
     }
 
     isValueValid(value) {
-        const pattern = /^[A-Za-z][A-Za-z0-9\-_:\.]*$/;
-
-        return pattern.test(value);
+        return ANCHOR_PATTERN.test(value);
     }
 
     hasError() {
