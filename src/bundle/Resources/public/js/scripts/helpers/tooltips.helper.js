@@ -1,6 +1,5 @@
 (function(global, doc, eZ, $) {
     const TOOLTIPS_SELECTOR = '[title]';
-
     const parse = () => {
         const tooltipsNode = doc.querySelectorAll(TOOLTIPS_SELECTOR);
 
@@ -22,7 +21,6 @@
             }
         }
     };
-
     const hideAll = () => {
         const tooltipsNode = doc.querySelectorAll(TOOLTIPS_SELECTOR);
 
