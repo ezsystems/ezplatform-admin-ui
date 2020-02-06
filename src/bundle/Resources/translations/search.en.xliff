@@ -91,11 +91,6 @@
         <target state="new">Search</target>
         <note>key: search.headline</note>
       </trans-unit>
-      <trans-unit id="90fa144118285f5076416f9e92a89dd94c9406e4" resname="search.language">
-        <source>Search language</source>
-        <target state="new">Search language</target>
-        <note>key: search.language</note>
-      </trans-unit>
       <trans-unit id="c2e9df867c114a94918c00f775d3a54d24358dfa" resname="search.last.modified">
         <source>Last modified:</source>
         <target state="new">Last modified:</target>
@@ -181,6 +176,11 @@
         <target state="new">Try more general keywords.</target>
         <note>key: search.tips.more_general_keywords</note>
       </trans-unit>
+      <trans-unit id="e477a87ca96bb3e22e8eed710e54e9a6bffefc52" resname="search.translations">
+        <source>Translations</source>
+        <target state="new">Translations</target>
+        <note>key: search.translations</note>
+      </trans-unit>
       <trans-unit id="0c9866a19fd5d3074bdb05b339df05b7c05a5661" resname="search.type">
         <source>Content Type</source>
         <target state="new">Content Type</target>
@@ -190,11 +190,6 @@
         <source>Select Content</source>
         <target state="new">Select Content</target>
         <note>key: search.udw.select_content</note>
-      </trans-unit>
-      <trans-unit id="b02a80a2ea286c4918938b70beb9ef2204aa6fa1" resname="search.use_always_available">
-        <source>Use always available</source>
-        <target state="new">Use always available</target>
-        <note>key: search.use_always_available</note>
       </trans-unit>
       <trans-unit id="fe647ff0e12d67501403559464217be468dba3d8" resname="search.viewing">
         <source>Viewing %viewing% out of %total% sub-items</source>

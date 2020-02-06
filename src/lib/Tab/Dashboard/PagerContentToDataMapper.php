@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
@@ -34,40 +35,45 @@ class PagerContentToDataMapper
     /** @var \eZ\Publish\Core\Helper\TranslationHelper */
     private $translationHelper;
 
+    /** @var \eZ\Publish\API\Repository\LanguageService */
+    private $languageService;
+
     /**
      * @param ContentService $contentService
      * @param ContentTypeService $contentTypeService
      * @param UserService $userService
      * @param UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
      */
     public function __construct(
         ContentService $contentService,
         ContentTypeService $contentTypeService,
         UserService $userService,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
-        TranslationHelper $translationHelper
+        TranslationHelper $translationHelper,
+        LanguageService $languageService
     ) {
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->userService = $userService;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
         $this->translationHelper = $translationHelper;
+        $this->languageService = $languageService;
     }
 
     /**
      * @param Pagerfanta $pager
+     * @param string|null $forcedLanguage
      *
      * @return array
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    public function map(Pagerfanta $pager): array
+    public function map(Pagerfanta $pager, ?string $forcedLanguage = null): array
     {
         $data = [];
         $contentTypeIds = [];
-        /** @var \eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchHitAdapter $pagerAdapter */
-        $contentSearchHitAdapter = $pager->getAdapter();
 
         foreach ($pager as $content) {
             /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
@@ -83,7 +89,7 @@ class PagerContentToDataMapper
                 'contentId' => $content->id,
                 'name' => $this->translationHelper->getTranslatedContentName(
                     $content,
-                    $contentSearchHitAdapter->getDisplayLanguage()
+                    $forcedLanguage
                 ),
                 'language' => $contentInfo->mainLanguageCode,
                 'contributor' => $contributor,
@@ -92,6 +98,7 @@ class PagerContentToDataMapper
                 'modified' => $content->versionInfo->modificationDate,
                 'initialLanguageCode' => $content->versionInfo->initialLanguageCode,
                 'content_is_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content),
+                'available_translations' => $this->languageService->loadLanguageListByCode($content->versionInfo->languageCodes),
             ];
         }
 

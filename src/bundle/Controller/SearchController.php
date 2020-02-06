@@ -205,7 +205,7 @@ class SearchController extends Controller
             $languageFilter = $this->getSearchLanguageFilter($searchLanguageCode);
 
             $pagerfanta = new Pagerfanta(
-                new ContentSearchAdapter($query, $this->searchService, $languageFilter, $searchLanguageCode)
+                new ContentSearchAdapter($query, $this->searchService, $languageFilter)
             );
 
             $pagerfanta->setMaxPerPage($limit);
@@ -216,7 +216,7 @@ class SearchController extends Controller
             );
 
             return $this->render('@ezdesign/admin/search/search.html.twig', [
-                'results' => $this->pagerContentToDataMapper->map($pagerfanta),
+                'results' => $this->pagerContentToDataMapper->map($pagerfanta, $searchLanguageCode),
                 'form' => $form->createView(),
                 'pager' => $pagerfanta,
                 'form_edit' => $editForm->createView(),
