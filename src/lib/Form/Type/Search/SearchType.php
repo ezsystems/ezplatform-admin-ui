@@ -73,14 +73,7 @@ class SearchType extends AbstractType
                     'required' => false,
                     'multiple' => false,
                     'expanded' => false,
-                    'placeholder' => /** @Desc("Main content language") */ 'search.main_content_language',
-                ]
-            )
-            ->add('use_always_available',
-                CheckboxType::class,
-                [
-                    'required' => false,
-                    'label' => /** @Desc("Include main language when no translation") */ 'search.include_main_language_when_no_translation',
+                    'placeholder' => false,
                 ]
             )
             ->add('subtree', HiddenType::class, [

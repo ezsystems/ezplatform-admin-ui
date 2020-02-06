@@ -1,4 +1,4 @@
-{% form_theme form '@ezdesign/form_fields.html.twig'  %}
+{% form_theme form '@ezdesign/form_fields.html.twig' %}
 
 {% trans_default_domain 'search' %}
 
@@ -12,6 +12,13 @@
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
             </svg>
             <span class="ez-btn ez-btn--search-label">{{ 'search.perform'|trans|desc('Search') }}</span></button>
+        <span>
+            {% if form.search_language.vars.choices|length > 1 %}
+                {{ form_widget(form.search_language, {'attr': {'class': 'ez-filters__select'}}) }}
+            {% else %}
+                    {{ form_widget(form.search_language, {'attr': {'hidden': 'hidden'}}) }}
+            {% endif %}
+        </span>
         <button type="button" class="btn btn-dark ez-btn--filter ml-4">
             <svg class="ez-icon ez-icon--medium ez-icon--light ez-icon-filters">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#filters"></use>
@@ -59,7 +66,7 @@
                     {% endfor %}
                 {% endif %}
 
-                {{ include('@ezdesign/parts/tag.html.twig', { 
+                {{ include('@ezdesign/parts/tag.html.twig', {
                     'content': content_breadcrumbs,
                     'is_loading_state': false,
                     'tag_attributes': {
@@ -96,16 +103,6 @@
                 <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#circle-close"></use>
             </svg>
             <ul class="ez-filters__user-list ez-filters__user-list--hidden"></ul>
-        </div>
-    </div>
-    <div class="ez-filters__row">
-        <div class="ez-filters__item ez-filters__item--search-language">
-            <label class="ez-filters__item-label">{{ 'search.language'|trans|desc('Search language') }}:</label>
-            {{ form_widget(form.search_language, {'attr': {'class': 'ez-filters__select'}}) }}
-        </div>
-        <div class="ez-filters__item ez-filters__item--always-available">
-            <label class="ez-filters__item-label">{{ 'search.use_always_available'|trans|desc('Use always available') }}:</label>
-            {{ form_widget(form.use_always_available, {'attr': {'class': 'ez-filters__select'}}) }}
         </div>
     </div>
     <div class="ez-filters__btns">

@@ -51,9 +51,6 @@ class SearchData
     /** @var \eZ\Publish\API\Repository\Values\Content\Language|null */
     private $searchLanguage;
 
-    /** @var bool|null */
-    private $useAlwaysAvailable;
-
     /**
      * SimpleSearchData constructor.
      *
@@ -67,7 +64,6 @@ class SearchData
      * @param \eZ\Publish\API\Repository\Values\User\User|null $creator
      * @param string|null $subtree
      * @param \eZ\Publish\API\Repository\Values\Content\Language|null $searchLanguage
-     * @param bool|null $useAlwaysAvailable
      */
     public function __construct(
         int $limit = 10,
@@ -79,8 +75,7 @@ class SearchData
         array $created = [],
         ?User $creator = null,
         ?string $subtree = null,
-        ?Language $searchLanguage = null,
-        ?bool $useAlwaysAvailable = null
+        ?Language $searchLanguage = null
     ) {
         $this->limit = $limit;
         $this->page = $page;
@@ -92,7 +87,6 @@ class SearchData
         $this->creator = $creator;
         $this->subtree = $subtree;
         $this->searchLanguage = $searchLanguage;
-        $this->useAlwaysAvailable = $useAlwaysAvailable;
     }
 
     /**
@@ -192,14 +186,6 @@ class SearchData
     }
 
     /**
-     * @param bool|null $useAlwaysAvailable
-     */
-    public function setUseAlwaysAvailable(?bool $useAlwaysAvailable): void
-    {
-        $this->useAlwaysAvailable = $useAlwaysAvailable;
-    }
-
-    /**
      * @return int
      */
     public function getLimit(): int
@@ -280,14 +266,6 @@ class SearchData
     }
 
     /**
-     * @return bool|null
-     */
-    public function getUseAlwaysAvailable(): ?bool
-    {
-        return $this->useAlwaysAvailable;
-    }
-
-    /**
      * @return bool
      */
     public function isFiltered(): bool
@@ -298,8 +276,6 @@ class SearchData
         $created = $this->getCreated();
         $creator = $this->getCreator();
         $subtree = $this->getSubtree();
-        $searchLanguage = $this->getSearchLanguage();
-        $useAlwaysAvailable = $this->getUseAlwaysAvailable();
 
         return
             !empty($contentTypes) ||
@@ -307,8 +283,6 @@ class SearchData
             !empty($lastModified) ||
             !empty($created) ||
             !empty($creator) ||
-            null !== $subtree ||
-            null !== $searchLanguage ||
-            null !== $useAlwaysAvailable;
+            null !== $subtree;
     }
 }

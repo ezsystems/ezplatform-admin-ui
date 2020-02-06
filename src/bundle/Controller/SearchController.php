@@ -111,7 +111,6 @@ class SearchController extends Controller
         $created = $search['created'] ?? [];
         $subtree = $search['subtree'] ?? null;
         $searchLanguage = null;
-        $useAlwaysAvailable = $search['use_always_available'] ? (bool) $search['use_always_available'] : null;
 
         if (!empty($search['section'])) {
             $section = $this->sectionService->loadSection($search['section']);
@@ -133,8 +132,7 @@ class SearchController extends Controller
                 $created,
                 $creator,
                 $subtree,
-                $searchLanguage,
-                $useAlwaysAvailable
+                $searchLanguage
             ),
             'search',
             [
@@ -159,7 +157,6 @@ class SearchController extends Controller
             $searchLanguageCode = ($data->getSearchLanguage() instanceof Language)
                 ? $data->getSearchLanguage()->languageCode
                 : null;
-            $useAlwaysAvailable = $data->getUseAlwaysAvailable();
 
             $query = new Query();
             $criteria = [];
@@ -205,7 +202,7 @@ class SearchController extends Controller
                 $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
             }
 
-            $languageFilter = $this->getSearchLanguageFilter($searchLanguageCode, $useAlwaysAvailable);
+            $languageFilter = $this->getSearchLanguageFilter($searchLanguageCode);
 
             $pagerfanta = new Pagerfanta(
                 new ContentSearchAdapter($query, $this->searchService, $languageFilter, $searchLanguageCode)
@@ -237,19 +234,14 @@ class SearchController extends Controller
 
     /**
      * @param string|null $languageCode
-     * @param bool|null $useAlwaysAvailable
      *
      * @return array
      */
-    private function getSearchLanguageFilter(?string $languageCode, ?bool $useAlwaysAvailable): array
+    private function getSearchLanguageFilter(?string $languageCode): array
     {
-        if (empty($languageCode) && null === $useAlwaysAvailable) {
-            return [];
-        }
-
         return [
             'languages' => $languageCode ? [$languageCode] : [],
-            'useAlwaysAvailable' => $useAlwaysAvailable,
+            'useAlwaysAvailable' => true,
         ];
     }
 }
