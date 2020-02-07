@@ -26,7 +26,26 @@
                     }
                 };
 
-                btn.classList[methodNameButton](CLASS_ACTIVE_BUTTON);
+                if (actions.classList.contains('ez-extra-actions--dropdown')) {
+                    const actionsRect = actions.getBoundingClientRect();
+
+                    actions.style.opacity = 0;
+
+                    const fitsViewport = actionsRect.height + btn.offsetTop <= global.innerHeight;
+
+                    if (!fitsViewport) {
+                        actions.style.bottom = `0px`;
+                        actions.style.top = 'auto';
+                    } else {
+                        actions.style.top = `${btn.offsetTop}px`;
+                        actions.style.bottom = 'auto';
+                    }
+
+                    actions.style.opacity = 1;
+                } else {
+                    btn.classList[methodNameButton](CLASS_ACTIVE_BUTTON);
+                }
+
                 actions.classList[methodNameContainer](CLASS_HIDDEN);
 
                 if (!actions.classList.contains(CLASS_HIDDEN)) {
