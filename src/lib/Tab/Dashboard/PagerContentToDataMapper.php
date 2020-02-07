@@ -82,11 +82,16 @@ class PagerContentToDataMapper
             $contributor = (new UserExists($this->userService))->isSatisfiedBy($contentInfo->ownerId)
                 ? $this->userService->loadUser($contentInfo->ownerId) : null;
 
+            $availableLanguagesCodes = $content->versionInfo->languageCodes;
+            $translationLanguageCode = ($forcedLanguage && in_array($forcedLanguage, $availableLanguagesCodes))
+                ? $forcedLanguage : $contentInfo->mainLanguageCode;
+
             $contentTypeIds[] = $contentInfo->contentTypeId;
             $data[] = [
                 'content' => $content,
                 'contentTypeId' => $contentInfo->contentTypeId,
                 'contentId' => $content->id,
+                'mainLocationId' => $contentInfo->mainLocationId,
                 'name' => $this->translationHelper->getTranslatedContentName(
                     $content,
                     $forcedLanguage
@@ -98,7 +103,10 @@ class PagerContentToDataMapper
                 'modified' => $content->versionInfo->modificationDate,
                 'initialLanguageCode' => $content->versionInfo->initialLanguageCode,
                 'content_is_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content),
-                'available_translations' => $this->languageService->loadLanguageListByCode($content->versionInfo->languageCodes),
+                'available_translations' => $this->languageService->loadLanguageListByCode(
+                    $availableLanguagesCodes
+                ),
+                'translation_language_code' => $translationLanguageCode,
             ];
         }
 

@@ -16,7 +16,7 @@
             {% if form.search_language.vars.choices|length > 1 %}
                 {{ form_widget(form.search_language, {'attr': {'class': 'ez-filters__select'}}) }}
             {% else %}
-                    {{ form_widget(form.search_language, {'attr': {'hidden': 'hidden'}}) }}
+                {{ form_widget(form.search_language, {'attr': {'hidden': 'hidden'}}) }}
             {% endif %}
         </span>
         <button type="button" class="btn btn-dark ez-btn--filter ml-4">

@@ -7,11 +7,10 @@
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Search;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\ConfiguredLanguagesChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType as CoreSearchType;
@@ -68,7 +67,7 @@ class SearchType extends AbstractType
             ])
             ->add(
                 'search_language',
-                LanguageChoiceType::class,
+                ConfiguredLanguagesChoiceType::class,
                 [
                     'required' => false,
                     'multiple' => false,

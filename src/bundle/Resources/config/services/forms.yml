@@ -47,6 +47,10 @@ services:
         arguments:
             $siteAccessLanguages: '$languages$'
 
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesChoiceLoader:
+        arguments:
+            $siteAccessLanguages: '$languages$'
+
     EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\PermissionAwareContentTypeChoiceLoader:
         arguments:
             $decorated: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader'

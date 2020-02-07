@@ -5,7 +5,11 @@
         </svg>
     </td>   
     <td class="ez-table__cell ez-table__cell--after-icon">
-        <a href="{{ url('_ez_content_view', { 'contentId': row.contentId }) }}">{{ row.name }}</a>
+        <a href="{{ path('_ezpublishLocation', {
+            'locationId': row.mainLocationId,
+            'languageCode': row.translation_language_code,
+        }) }}">{{ row.name }}</a>
+
     </td>
     <td class="ez-table__cell">{{ row.modified|ez_full_datetime }}</td>
     <td class="ez-table__cell">{{ row.type }}</td>
@@ -19,7 +23,7 @@
     <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
         <button class="btn btn-icon mx-2 ez-btn--content-edit"
                 data-content-id="{{ row.contentId }}"
-                data-language-code="{{ row.initialLanguageCode }}">
+                data-language-code="{{ row.translation_language_code }}">
             <svg class="ez-icon ez-icon-edit">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
             </svg>
