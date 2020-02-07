@@ -56,6 +56,12 @@
             padding-left: 0;
         }
 
+        .table &--name {
+            max-width: calculateRem(350px);
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
         &--no-content {
             margin-bottom: calculateRem(48px);
             padding: calculateRem(12px) calculateRem(16px);
@@ -84,6 +90,13 @@
         margin-bottom: 0;
         font-weight: bold;
         color: $ez-black;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__tools {
+        white-space: nowrap;
     }
 }
 
