@@ -190,8 +190,8 @@ class ContentViewContext extends BusinessContext
     {
         $hash = $parameters->getHash();
         $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, '');
-        foreach ($hash as $field) {
-            $contentItemPage->contentField->verifyFieldHasValue($field['label'], $field);
+        foreach ($hash as $fieldData) {
+            $contentItemPage->contentField->verifyFieldHasValue($fieldData['label'], $fieldData);
         }
     }
 

@@ -8,8 +8,10 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
 use EzSystems\Behat\Core\Environment\EnvironmentConstants;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\NonEditableField;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentUpdateItemPage;
 use EzSystems\Behat\Browser\Factory\PageObjectFactory;
+use PHPUnit\Framework\Assert;
 
 class ContentUpdateContext extends BusinessContext
 {
@@ -24,6 +26,16 @@ class ContentUpdateContext extends BusinessContext
             $values = $this->filterOutNonEmptyValues($row);
             $updateItemPage->contentUpdateForm->fillFieldWithValue($row['label'], $values);
         }
+    }
+
+    /**
+     * @Given the :fieldName field is noneditable
+     */
+    public function verifyFieldIsNotEditable(string $fieldName): void
+    {
+        $updateItemPage = PageObjectFactory::createPage($this->browserContext, ContentUpdateItemPage::PAGE_NAME, '');
+        $field = $updateItemPage->contentUpdateForm->getField($fieldName);
+        Assert::assertEquals(NonEditableField::EXPECTED_NON_EDITABLE_TEXT, $field->getValue()[0]);
     }
 
     private function filterOutNonEmptyValues(array $parameters): array
