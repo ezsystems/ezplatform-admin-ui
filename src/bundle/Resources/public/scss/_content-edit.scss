@@ -1,6 +1,21 @@
+.ez-content-item {
+    &__title {
+        display: flex;
+    }
+
+    &__name {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        padding-left: calculateRem(2px);
+    }
+}
+
 .ez-content-item-status {
     font-size: calculateRem(18px);
     color: $ez-color-base-light;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .ez-content-edit-container {

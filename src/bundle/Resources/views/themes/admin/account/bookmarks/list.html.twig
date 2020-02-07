@@ -47,6 +47,7 @@
                             </tr>
                             {% else %}
                             {% for bookmark in pager.currentPageResults %}
+                                {% set content_name = ez_content_name(bookmark.contentInfo) %}
                                 <tr>
                                     <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form_remove.bookmarks[bookmark.id]) }}</td>
                                     <td class="ez-table__cell ez-table__cell--has-icon">
@@ -54,7 +55,11 @@
                                             <use xlink:href="{{ ez_content_type_icon(bookmark.contentType.identifier) }}"></use>
                                         </svg>
                                     </td>
-                                    <td class="ez-table__cell ez-table__cell--after-icon"><a href="{{ path('_ezpublishLocation', { 'locationId': bookmark.id }) }}">{{ ez_content_name(bookmark.contentInfo) }}</a></td>
+                                    <td class="ez-table__cell ez-table__cell--name ez-table__cell--after-icon">
+                                        <a href="{{ path('_ezpublishLocation', { 'locationId': bookmark.id }) }}" title="{{ content_name }}">
+                                            {{ content_name }}
+                                        </a>
+                                    </td>
                                     <td class="ez-table__cell">{{ bookmark.contentType.name }}</td>
                                     <td class="ez-table__cell">
                                         {% if bookmark.pathLocations|length > 1 %}

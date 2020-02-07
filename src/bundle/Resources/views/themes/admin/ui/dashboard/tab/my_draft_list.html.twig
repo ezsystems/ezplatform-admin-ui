@@ -23,7 +23,11 @@
                             <use xlink:href="{{ ez_content_type_icon(row.contentType.identifier) }}"></use>
                         </svg>
                     </td>
-                    <td class="ez-table__cell ez-table__cell--after-icon">{{ row.versionInfo.name }}</td>
+                    <td class="ez-table__cell ez-table__cell--name ez-table__cell--after-icon">
+                        <span title="{{ row.versionInfo.name }}">
+                            {{ row.versionInfo.name }}
+                        </span>
+                    </td>
                     <td class="ez-table__cell">{{ row.contentType.name }}</td>
                     <td class="ez-table__cell">{{ ez_admin_ui_config.languages.mappings[row.versionInfo.initialLanguageCode].name }}</td>
                     <td class="ez-table__cell">{{ row.versionInfo.versionNo }}</td>

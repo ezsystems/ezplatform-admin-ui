@@ -8,14 +8,16 @@
 
 {% block details %}
     <div class="container mt-5 px-5">
-        <h2 class="ez-content-item-status">{{ 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing %contentName% in %languageName%') }}</h2>
-        <h1>
+        {% set title = 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing %contentName% in %languageName%') %}
+        <h2 class="ez-content-item-status" title="{{ title }}">{{ title }}</h2>
+        <h1 class="ez-content-item__title">
             <svg class="ez-icon ez-icon-{{ content_type.identifier }}">
                 <use xlink:href="{{ ez_content_type_icon(content_type.identifier) }}"></use>
             </svg>
-            {{ content.name }}
+            <div class="ez-content-item__name" title="{{ content.name }}">
+                {{ content.name }}
+            </div>
         </h1>
-
         <div class="small">
             {{ content_type.name }} /
             {% if creator is not null %}{{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }} /{% endif %}

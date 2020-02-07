@@ -86,6 +86,7 @@
                                 {% for key, form in form_trash_item_restore.trash_items %}
                                     {% set trash_item = trash_items[key] %}
                                     {% set is_parent_in_trash = trash_item.parentInTrash %}
+                                    {% set trash_item_name = ez_content_name(trash_item.location.contentInfo) %}
                                     <tr>
                                         <td class="ez-table__cell">
                                             {{ form_widget(form, {attr: {
@@ -97,7 +98,11 @@
                                                 <use xlink:href="{{ ez_content_type_icon(trash_item.contentType.identifier) }}"></use>
                                             </svg>
                                         </td>
-                                        <td class="ez-table__cell ez-table__cell--after-icon">{{ ez_content_name(trash_item.location.contentInfo) }}</td>
+                                        <td class="ez-table__cell ez-table__cell--name ez-table__cell--after-icon">
+                                            <span title="{{ trash_item_name }}">
+                                                {{ trash_item_name }}
+                                            </span>
+                                        </td>
                                         <td class="ez-table__cell">{{ trash_item.contentType.name }}</td>
                                         <td class="ez-table__cell">
                                             {% if not is_parent_in_trash %}

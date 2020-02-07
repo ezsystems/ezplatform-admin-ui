@@ -93,6 +93,13 @@
             background-color: $ez-white;
             padding: calculateRem(16px) calculateRem(24px);
             border-radius: 0 0 calculateRem(5px) calculateRem(5px);
+
+            .ezstring-field {
+                display: inline-block;
+                max-width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
     }
 

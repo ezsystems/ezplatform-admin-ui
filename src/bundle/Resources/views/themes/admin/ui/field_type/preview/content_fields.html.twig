@@ -523,7 +523,7 @@
     {% if field_value is not defined %}
         {% set field_value = field.value %}
     {% endif %}
-    <span {{ block( 'field_attributes' ) }}>{{ field_value }}</span>
+    <span {{ block( 'field_attributes' ) }} title="{{ field_value }}">{{ field_value }}</span>
 {% endapply %}
 {% endblock %}
 
