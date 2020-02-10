@@ -2,7 +2,7 @@
 
 {% trans_default_domain 'search' %}
 
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class': 'ez-search-form'}}) }}
 <div class="input-group px-4">
     {{ form_widget(form.query) }}
 
@@ -12,12 +12,8 @@
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
             </svg>
             <span class="ez-btn ez-btn--search-label">{{ 'search.perform'|trans|desc('Search') }}</span></button>
-        <span>
-            {% if form.search_language.vars.choices|length > 1 %}
-                {{ form_widget(form.search_language, {'attr': {'class': 'ez-filters__select'}}) }}
-            {% else %}
-                {{ form_widget(form.search_language, {'attr': {'hidden': 'hidden'}}) }}
-            {% endif %}
+        <span class="ml-4" {% if form.search_language.vars.choices|length == 1 %}hidden{% endif %}>
+            {{ form_widget(form.search_language, {'attr': {'class': 'ez-search-form__language-selector'}}) }}
         </span>
         <button type="button" class="btn btn-dark ez-btn--filter ml-4">
             <svg class="ez-icon ez-icon--medium ez-icon--light ez-icon-filters">
