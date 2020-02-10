@@ -28,10 +28,9 @@
 
                 if (actions.classList.contains('ez-extra-actions--dropdown')) {
                     const actionsRect = actions.getBoundingClientRect();
+                    const fitsViewport = actionsRect.height + btn.offsetTop <= global.innerHeight;
 
                     actions.style.opacity = 0;
-
-                    const fitsViewport = actionsRect.height + btn.offsetTop <= global.innerHeight;
 
                     if (!fitsViewport) {
                         actions.style.bottom = `0px`;
