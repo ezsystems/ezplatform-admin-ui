@@ -23,11 +23,6 @@
         width: calculateRem(110px);
     }
 
-    & &__error {
-        color: $ez-color-warning-dark;
-        margin-top: calculateRem(8px);
-    }
-
     &__btn {
         border: none;
 
@@ -54,6 +49,25 @@
         &[disabled] {
             opacity: 0.3;
             cursor: not-allowed;
+        }
+    }
+
+    &.is-invalid {
+        .ez-ae-anchor-edit {
+            &__input-label {
+                color: $ez-color-warning-dark;
+            }
+
+            &__error {
+                font-weight: 400;
+                display: inline-block;
+                margin-left: calculateRem(8px);
+            }
+
+            &__input {
+                border-color: $ez-color-danger;
+                background: $ez-color-warning-pale;
+            }
         }
     }
 }
