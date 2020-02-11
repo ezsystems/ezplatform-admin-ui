@@ -127,7 +127,7 @@ final class NodeFactory
             $depth,
             $location->id,
             $location->contentId,
-            $this->getNodeName($location),
+            $this->translationHelper->getTranslatedContentName($content),
             $contentType ? $contentType->identifier : '',
             $contentType ? $contentType->isContainer : true,
             $location->invisible || $location->hidden,
@@ -244,15 +244,5 @@ final class NodeFactory
         $searchQuery->performCount = true;
 
         return $this->searchService->findLocations($searchQuery)->totalCount;
-    }
-
-    private function getNodeName(Location $location): string
-    {
-        $content = $location->getContent();
-
-        // Location ID 1 (no VersionInfo) needs special handling
-        return null === $content->getVersionInfo()
-            ? $location->getContentInfo()->name
-            : $this->translationHelper->getTranslatedContentName($content);
     }
 }
