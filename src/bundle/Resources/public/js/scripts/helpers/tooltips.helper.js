@@ -10,9 +10,11 @@
                     hide: tooltipNode.dataset.delayHide || 75,
                 };
                 const extraClasses = tooltipNode.dataset.extraClasses || '';
+                const placement = tooltipNode.dataset.placement || 'bottom';
 
                 $(tooltipNode).tooltip({
                     delay,
+                    placement,
                     template: `<div class="tooltip ez-tooltip ${extraClasses}">
                                     <div class="arrow ez-tooltip__arrow"></div>
                                     <div class="tooltip-inner ez-tooltip__inner"></div>
