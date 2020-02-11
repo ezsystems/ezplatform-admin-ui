@@ -6,6 +6,33 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="0f727a5b08f9dd958453e3fe685f22bb9a55a877" resname="creating_details">
+        <source><![CDATA[
+                        <span class="ez-details-items__connector">Creating:</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--content-type">
+                        <svg class="ez-icon ez-icon--small ez-icon-%identifier%">
+                            <use xlink:href="%icon%"></use>
+                        </svg>
+                        %content_type_name%
+                        </span>
+                        <span class="ez-details-items__connector ez-details-items__connector--small">in</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--language">%language_name%</span>
+                        <span class="ez-details-items__connector ez-details-items__connector--small">under</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--location">%location_name%</span>]]></source>
+        <target state="new"><![CDATA[
+                        <span class="ez-details-items__connector">Creating:</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--content-type">
+                        <svg class="ez-icon ez-icon--small ez-icon-%identifier%">
+                            <use xlink:href="%icon%"></use>
+                        </svg>
+                        %content_type_name%
+                        </span>
+                        <span class="ez-details-items__connector ez-details-items__connector--small">in</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--language">%language_name%</span>
+                        <span class="ez-details-items__connector ez-details-items__connector--small">under</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--location">%location_name%</span>]]></target>
+        <note>key: creating_details</note>
+      </trans-unit>
       <trans-unit id="109ad031477c8e3c904a45089ea26883d00d264e" resname="creating_in_language">
         <source>Creating a(n) %contentTypeName% in %languageName%</source>
         <target state="new">Creating a(n) %contentTypeName% in %languageName%</target>

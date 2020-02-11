@@ -4,6 +4,8 @@
 
     .ez-side-menu,
     .ez-context-menu {
+        position: relative;
+        z-index: 3;
         flex: 0 0 calculateRem(80px);
     }
 

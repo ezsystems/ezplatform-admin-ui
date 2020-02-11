@@ -31,10 +31,32 @@
         <target state="new">Created by %name%</target>
         <note>key: created_by</note>
       </trans-unit>
-      <trans-unit id="0474be007e2cbb859dcec4d70ced364af71ba119" resname="editing_in_language">
-        <source>Editing %contentName% in %languageName%</source>
-        <target state="new">Editing %contentName% in %languageName%</target>
-        <note>key: editing_in_language</note>
+      <trans-unit id="750bead6705b295c7b7d66c27b2768c1b9329ed5" resname="editing_details">
+        <source><![CDATA[
+                        <span class="ez-details-items__connector">Editing:</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--content-type">
+                        <svg class="ez-icon ez-icon--small ez-icon-%identifier%">
+                            <use xlink:href="%icon%"></use>
+                        </svg>
+                        %content_type_name%
+                        </span>
+                        <span class="ez-details-items__connector ez-details-items__connector--small">in</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--language">%language_name%</span>
+                        <span class="ez-details-items__connector ez-details-items__connector--small">under</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--location">%location_name%</span>]]></source>
+        <target state="new"><![CDATA[
+                        <span class="ez-details-items__connector">Editing:</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--content-type">
+                        <svg class="ez-icon ez-icon--small ez-icon-%identifier%">
+                            <use xlink:href="%icon%"></use>
+                        </svg>
+                        %content_type_name%
+                        </span>
+                        <span class="ez-details-items__connector ez-details-items__connector--small">in</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--language">%language_name%</span>
+                        <span class="ez-details-items__connector ez-details-items__connector--small">under</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--location">%location_name%</span>]]></target>
+        <note>key: editing_details</note>
       </trans-unit>
       <trans-unit id="669edeb37bec7cf4ec99288b90b02ba65e84b4cf" resname="errors.in.the.form">
         <source>Cannot save the form. Check required Fields or validation errors.</source>
@@ -50,6 +72,11 @@
         <source>Location ID: %locationId%</source>
         <target state="new">Location ID: %locationId%</target>
         <note>key: location_id</note>
+      </trans-unit>
+      <trans-unit id="32d50c07b2eacd6fa72742ff1c1f5963c26a251d" resname="new_content_item">
+        <source>New %contentType%</source>
+        <target state="new">New %contentType%</target>
+        <note>key: new_content_item</note>
       </trans-unit>
       <trans-unit id="cce4ced380a283ffdecf364aeb5312ee001e6601" resname="parent_location_id">
         <source>Parent Location ID: %locationId%</source>

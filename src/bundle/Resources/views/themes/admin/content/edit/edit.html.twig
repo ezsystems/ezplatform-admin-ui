@@ -3,31 +3,55 @@
 {% trans_default_domain 'content_edit' %}
 
 {% block meta %}
-    <meta name="LanguageCode" content="{{ language.languageCode }}" />
+    <meta name="LanguageCode" content="{{ language.languageCode }}"/>
 {% endblock %}
 
 {% block details %}
-    <div class="container mt-5 px-5">
-        {% set title = 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing %contentName% in %languageName%') %}
-        <h2 class="ez-content-item-status" title="{{ title }}">{{ title }}</h2>
-        <h1 class="ez-content-item__title">
-            <svg class="ez-icon ez-icon-{{ content_type.identifier }}">
-                <use xlink:href="{{ ez_content_type_icon(content_type.identifier) }}"></use>
-            </svg>
-            <div class="ez-content-item__name" title="{{ content.name }}">
-                {{ content.name }}
+    <div class="ez-edit-header">
+        <div class="ez-edit-header__content-type-name">
+            <div class="container px-5">
+                {% set content_name = content ? content.name : 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') %}
+                <div class="ez-content-item__name" title="{{ content_name }}">
+                    {{ content_name }}
+                </div>
             </div>
-        </h1>
-        <div class="small">
-            {{ content_type.name }} /
-            {% if creator is not null %}{{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }} /{% endif %}
-            {{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }} /
-            {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }},
-            {% if is_published == false %}
-                {{ 'parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
-            {% else %}
-                {{ 'location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
-            {% endif %}
+        </div>
+        <div class="ez-edit-header__details">
+            <div class="container ez-details-items">
+                {{ 'editing_details'|trans({
+                    '%icon%': ez_content_type_icon(content_type.identifier), 
+                    '%content_type_name%': content_type.name, 
+                    '%language_name%': language.name, 
+                    '%location_name%': parent_location.contentInfo.name})
+                    |desc('
+                        <span class="ez-details-items__connector">Editing:</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--content-type">
+                        <svg class="ez-icon ez-icon--small ez-icon-%identifier%">
+                            <use xlink:href="%icon%"></use>
+                        </svg>
+                        %content_type_name%
+                        </span>
+                        <span class="ez-details-items__connector ez-details-items__connector--small">in</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--language">%language_name%</span>
+                        <span class="ez-details-items__connector ez-details-items__connector--small">under</span>
+                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--location">%location_name%</span>')
+                    |raw 
+                }}
+                <a class="ez-details-items__toggler ez-details-items__toggler--gray" href="#">?</a>
+            </div>
+            <div class="container ez-details-items ez-details-items--collapsed ez-details-items__author-breadcrumbs">
+                {{ content_type.name }}/
+                {% if creator is not null %}
+                    {{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }}/
+                {% endif %}
+                {{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }}/
+                {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }},
+                {% if is_published == false %}
+                    {{ 'parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
+                {% else %}
+                    {{ 'location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
+                {% endif %}
+            </div>
         </div>
         <div class="ez-content-item__errors-wrapper" hidden>
             {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
@@ -51,7 +75,6 @@
         </div>
     </section>
 {% endblock %}
-
 {% block right_sidebar %}
     {% set content_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_edit.sidebar_right', [], {
         'content': content,
@@ -62,12 +85,14 @@
     }) %}
     {{ knp_menu_render(content_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
-
 {% block close_button %}
     {% set referrer_location = is_published ? location : parent_location %}
-    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': referrer_location.id }) }}"></a>
+    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': referrer_location.id }) }}">
+        <svg class="ez-icon ez-icon--small-medium">
+            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
+        </svg>
+    </a>
 {% endblock %}
-
 {% block form_before %}
     {{ ez_render_component_group('content-edit-form-before', {
         'content': content,
@@ -77,7 +102,6 @@
         'language': language
     }) }}
 {% endblock %}
-
 {% block form_after %}
     {{ ez_render_component_group('content-edit-form-after', {
         'content': content,

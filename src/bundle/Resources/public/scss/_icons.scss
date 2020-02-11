@@ -18,6 +18,11 @@
         height: calculateRem(24px);
     }
 
+    &--medium-large {
+        width: calculateRem(38px);
+        height: calculateRem(38px);
+    }
+
     &--large {
         width: calculateRem(48px);
         height: calculateRem(48px);

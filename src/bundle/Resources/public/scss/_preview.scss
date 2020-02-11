@@ -1,9 +1,9 @@
 .ez-preview {
     .ez-preview__nav {
         display: flex;
-        align-items: center;
+        height: calculateRem(55px);
         justify-content: space-between;
-        background-color: $ez-ground-primary;
+        background-color: $ez-color-base-pale;
         padding: calculateRem(4px) calculateRem(16px);
 
         .ez-preview__item {
@@ -14,7 +14,24 @@
                 align-items: center;
                 justify-content: space-between;
                 line-height: 0;
-                flex-basis: 10%;
+                flex-basis: 3%;
+
+                .ez-preview__link {
+                    display: block;
+                    width: calculateRem(40px);
+                    height: calculateRem(40px);
+                    line-height: calculateRem(38px);
+                    text-align: center;
+                    
+                    &:hover{
+                        background: $ez-color-base-light;
+                        border-radius: 50%;
+            
+                        .ez-icon {
+                            fill: $ez-white;
+                        }
+                    }
+                }
             }
 
             &--actions {
@@ -31,7 +48,7 @@
             }
 
             &--description {
-                flex-basis: 70.5%;
+                flex-basis: 80%;
                 display: flex;
                 align-items: center;
             }
@@ -43,7 +60,8 @@
             &-label {
                 display: inline-block;
                 margin-right: calculateRem(8px);
-                font-size: calculateRem(13px);
+                color: $ez-color-base-medium;
+                font-size: calculateRem(14px);
             }
 
             &-text {
@@ -53,6 +71,7 @@
                 display: inline-block;
                 white-space: nowrap;
                 font-weight: 700;
+                font-size: calculateRem(20px);
             }
 
             .ez-preview__action {

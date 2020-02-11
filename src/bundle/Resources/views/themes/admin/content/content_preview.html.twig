@@ -7,13 +7,13 @@
 {% block body_class %}ez-content-preview{% endblock %}
 
 {% block navigation %}{% endblock %}
-    {% block content %}
+{% block content %}
     <div class="ez-preview">
         <div class="ez-preview__nav">
             <div class="ez-preview__item ez-preview__item--back">
-                <a href="{{ url('ezplatform.content.draft.edit', {'contentId': content.id, 'versionNo': version_no, 'language': language_code, 'locationId': is_published ? location.id : null}) }}" >
-                    <svg class="ez-icon ez-icon-back">
-                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#caret-back"></use>
+                <a class="ez-preview__link" href="{{ url('ezplatform.content.draft.edit', {'contentId': content.id, 'versionNo': version_no, 'language': language_code, 'locationId': is_published ? location.id : null}) }}">
+                    <svg class="ez-icon ez-icon--small-medium">
+                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
                     </svg>
                 </a>
             </div>
