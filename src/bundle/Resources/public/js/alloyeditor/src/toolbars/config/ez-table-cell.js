@@ -1,6 +1,8 @@
-export default class EzTableCellConfig {
+import EzConfigTableBase from './base-table';
+
+export default class EzTableCellConfig extends EzConfigTableBase {
     constructor(config) {
-        this.name = 'td';
+        super(config);
 
         const editAttributesButton = config.attributes[this.name] || config.classes[this.name] ? `${this.name}edit` : '';
 
@@ -17,9 +19,10 @@ export default class EzTableCellConfig {
             'eztableremove',
             ...config.extraButtons[this.name],
         ];
+    }
 
-        this.getArrowBoxClasses = AlloyEditor.SelectionGetArrowBoxClasses.table;
-        this.setPosition = AlloyEditor.SelectionSetPosition.table;
+    getConfigName() {
+        return 'td';
     }
 
     test(payload) {
