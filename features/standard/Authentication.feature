@@ -16,3 +16,8 @@ Feature: Verify that Admin Panel is available only for authenticated users
     Given I open Login page
     When I log in as admin with password notpublish
     Then I should be on Login page
+
+  @javascript @common
+  Scenario: I can log in and go to content structure
+    Given I am logged as "admin"
+    And I go to "Content structure" in "Content" tab
