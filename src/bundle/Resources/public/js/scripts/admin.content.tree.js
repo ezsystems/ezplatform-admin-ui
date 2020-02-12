@@ -5,10 +5,11 @@
     const CLASS_BTN_CONTENT_TREE_EXPANDED = 'ez-btn--content-tree-expanded';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
+    const userId = doc.querySelector('meta[name="UserId"]').content;
     const contentTreeContainer = doc.querySelector('.ez-content-tree-container');
     const contentTreeWrapper = doc.querySelector('.ez-content-tree-container__wrapper');
     const btn = doc.querySelector('.ez-btn--toggle-content-tree');
-    const { currentLocationPath, userId, treeRootLocationId } = contentTreeContainer.dataset;
+    const { currentLocationPath, treeRootLocationId } = contentTreeContainer.dataset;
     let frame = null;
     const toggleContentTreePanel = () => {
         contentTreeContainer.classList.toggle(CLASS_CONTENT_TREE_EXPANDED);
