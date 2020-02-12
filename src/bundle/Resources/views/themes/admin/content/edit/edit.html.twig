@@ -9,6 +9,12 @@
 {% block details %}
     <div class="ez-edit-header">
         <div class="ez-edit-header__content-type-name">
+            {% set referrer_location = is_published ? location : parent_location %}
+            <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': referrer_location.id }) }}">
+                <svg class="ez-icon ez-icon--small-medium">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
+                </svg>
+            </a>
             <div class="container px-5">
                 {% set content_name = content ? content.name : 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') %}
                 <div class="ez-content-item__name" title="{{ content_name }}">
@@ -84,14 +90,6 @@
         'language': language
     }) %}
     {{ knp_menu_render(content_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
-{% endblock %}
-{% block close_button %}
-    {% set referrer_location = is_published ? location : parent_location %}
-    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': referrer_location.id }) }}">
-        <svg class="ez-icon ez-icon--small-medium">
-            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
-        </svg>
-    </a>
 {% endblock %}
 {% block form_before %}
     {{ ez_render_component_group('content-edit-form-before', {

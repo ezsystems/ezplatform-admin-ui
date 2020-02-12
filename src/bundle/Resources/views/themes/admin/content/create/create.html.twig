@@ -9,6 +9,11 @@
 {% block details %}
     <div class="ez-edit-header">
         <div class="ez-edit-header__content-type-name">
+            <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': parent_location.id}) }}">
+                <svg class="ez-icon ez-icon--small-medium">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
+                </svg>
+            </a>
             <div class="container px-5">
                 {{ 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') }}
             </div>
@@ -68,14 +73,6 @@
         'content_create_struct': content_create_struct
     }) %}
     {{ knp_menu_render(content_create_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
-{% endblock %}
-
-{% block close_button %}
-    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': parent_location.id}) }}">
-        <svg class="ez-icon ez-icon--small-medium">
-            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
-        </svg>
-    </a>
 {% endblock %}
 
 {% block form_before %}
