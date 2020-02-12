@@ -11,11 +11,7 @@
         <div class="ez-edit-header__content-type-name">
             {% block close_button %}
                 {% set referrer_location = is_published ? location : parent_location %}
-                <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': referrer_location.id }) }}">
-                    <svg class="ez-icon ez-icon--small-medium">
-                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
-                    </svg>
-                </a>
+                <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': referrer_location.id }) }}"></a>
             {% endblock %}
             <div class="container px-5">
                 {% set content_name = content ? content.name : 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') %}
