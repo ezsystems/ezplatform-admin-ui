@@ -25,7 +25,6 @@
 
     &__close {
         position: fixed;
-        z-index: 3;
         top: calculateRem(6px);
         left: calculateRem(16px);
         width: calculateRem(40px);
@@ -47,7 +46,7 @@
     .ez-edit-header {
         &__content-type-name {
             position: fixed;
-            z-index: 2;
+            z-index: 1;
             top: 0;
             left: 0;
             width: calc(100% - #{calculateRem(80px)});
