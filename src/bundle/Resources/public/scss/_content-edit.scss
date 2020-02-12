@@ -25,6 +25,7 @@
 
     &__close {
         position: fixed;
+        z-index: 3;
         top: calculateRem(6px);
         left: calculateRem(16px);
         width: calculateRem(40px);
