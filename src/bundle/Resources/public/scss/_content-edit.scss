@@ -21,7 +21,6 @@
 .ez-content-edit-container {
     position: relative;
     width: 100%;
-    padding-top: calculateRem(55px);
 
     &__close {
         position: fixed;
@@ -33,7 +32,7 @@
         text-align: center;
         line-height: calculateRem(38px);
 
-        &:hover{
+        &:hover {
             background: $ez-color-base-light;
             border-radius: 50%;
 
@@ -41,9 +40,37 @@
                 fill: $ez-white;
             }
         }
+
+        &:hover {
+            &:before,
+            &:after {
+                background-color: $ez-white;
+            }
+        }
+
+        &:before,
+        &:after {
+            content: '';
+            width: calculateRem(24px);
+            height: calculateRem(2px);
+            position: absolute;
+            background-color: $ez-black;
+            top: 50%;
+            left: calculateRem(8px);
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
     }
 
     .ez-edit-header {
+        margin-top: calculateRem(55px);
+
         &__content-type-name {
             position: fixed;
             z-index: 1;
