@@ -40,32 +40,6 @@
                 fill: $ez-white;
             }
         }
-
-        &:hover {
-            &:before,
-            &:after {
-                background-color: $ez-white;
-            }
-        }
-
-        &:before,
-        &:after {
-            content: '';
-            width: calculateRem(24px);
-            height: calculateRem(2px);
-            position: absolute;
-            background-color: $ez-black;
-            top: 50%;
-            left: calculateRem(8px);
-        }
-
-        &:before {
-            transform: rotate(45deg);
-        }
-
-        &:after {
-            transform: rotate(-45deg);
-        }
     }
 
     .ez-edit-header {
