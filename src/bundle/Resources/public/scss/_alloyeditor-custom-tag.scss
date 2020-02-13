@@ -6,15 +6,31 @@
             padding: 1rem;
 
             .attribute__wrapper {
-                margin-bottom: .5rem;
+                margin-bottom: 0.5rem;
             }
 
             .attribute__label {
-                margin: .5rem 0;
+                margin: 0.5rem 0;
             }
 
             .ez-btn-ae--custom-tag {
                 color: $ez-white;
+            }
+
+            &__attribute-link-wrapper {
+                display: flex;
+                align-items: flex-end;
+            }
+
+            &__attribute-link-block {
+                .ez-btn-ae {
+                    color: $ez-white;
+                }
+
+                &--separator {
+                    padding: 0 calculateRem(16px);
+                    line-height: calculateRem(36px);
+                }
             }
         }
     }
