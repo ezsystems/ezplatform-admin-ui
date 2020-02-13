@@ -55,6 +55,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RolesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
@@ -121,6 +122,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentsDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCopyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RolesDeleteType;
@@ -711,6 +713,21 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(RoleCreateType::class);
 
         return $this->formFactory->createNamed($name, RoleCreateType::class, $data);
+    }
+
+    /**
+     * @param RoleCopyData $data
+     * @param string|null $name
+     *
+     * @return FormInterface
+     */
+    public function copyRole(
+        RoleCopyData $data,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: sprintf('copy-role-%d', $data->getClonedRole()->id);
+
+        return $this->formFactory->createNamed($name, RoleCopyType::class, $data);
     }
 
     /**

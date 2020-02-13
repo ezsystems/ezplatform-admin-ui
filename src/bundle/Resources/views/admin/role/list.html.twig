@@ -98,6 +98,16 @@
                                 </svg>
                             </a>
                         {% endif %}
+                        {% if can_create %}
+                            <a
+                                title="{{ 'role.view.list.action.copy'|trans|desc('Copy') }}"
+                                href="{{ path('ezplatform.role.copy', { roleId: role.id }) }}"
+                                class="btn btn-icon mx-3">
+                                <svg class="ez-icon ez-icon-copy">
+                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#copy"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
                         {% if can_update %}
                             <a
                                 title="{{ 'role.view.list.action.edit'|trans|desc('Edit') }}"
