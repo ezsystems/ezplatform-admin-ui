@@ -59,6 +59,12 @@
             background: $ez-color-base-pale;
         }
 
+        &--create-on-the-fly {
+            .ez-edit-header__content-type-name {
+                width: 100%;
+            }
+        }
+
         &__details {
             color: $ez-black;
             font-size: calculateRem(12px);
@@ -132,7 +138,7 @@
                 }
 
                 &__author-breadcrumbs {
-                    height: calculateRem(30px); 
+                    height: calculateRem(30px);
                     line-height: calculateRem(30px);
                     color: $ez-color-base-medium;
                     font-size: calculateRem(12px);
