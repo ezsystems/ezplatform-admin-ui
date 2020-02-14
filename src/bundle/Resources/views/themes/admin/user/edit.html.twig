@@ -3,6 +3,14 @@
 {% trans_default_domain 'user_edit' %}
 
 {% block details %}
+    {% block close_button %}
+        <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': user.versionInfo.contentInfo.mainLocationId}) }}">
+            <svg class="ez-icon ez-icon--small-medium">
+                <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
+            </svg>
+        </a>
+    {% endblock %}
+
     <div class="container mt-5 px-5">
         <h4 class="ez-content-item-status">{{ 'editing'|trans({'%contentType%': content_type.name})|desc('Editing a(n) %contentType%') }}</h4>
         <h1>
@@ -43,8 +51,4 @@
 {% block right_sidebar %}
     {% set user_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.user_edit.sidebar_right', [], {'user': user, 'content_type': content_type}) %}
     {{ knp_menu_render(user_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
-{% endblock %}
-
-{% block close_button %}
-    <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': user.versionInfo.contentInfo.mainLocationId}) }}"></a>
 {% endblock %}
