@@ -71,7 +71,7 @@ class VersionDraftConflictController extends Controller
     public function draftHasNoConflictAction(
         int $contentId,
         string $languageCode,
-        ?int $locationId
+        ?int $locationId = null
     ): Response {
         $content = $this->contentService->loadContent($contentId);
         $contentInfo = $content->contentInfo;
