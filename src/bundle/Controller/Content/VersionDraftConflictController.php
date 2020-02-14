@@ -97,6 +97,7 @@ class VersionDraftConflictController extends Controller
             try {
                 $location = $this->locationService->loadLocation($locationId);
             } catch (UnauthorizedException $e) {
+                // Will return list of locations user has *read* access to, or empty array if none
                 $availableLocations = $this->locationService->loadLocations($contentInfo);
                 // will return null if array of availableLocations is empty
                 $location = array_shift($availableLocations);
