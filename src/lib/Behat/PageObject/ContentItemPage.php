@@ -58,6 +58,7 @@ class ContentItemPage extends Page
         $this->rightMenu->clickButton('Create');
 
         $contentTypePicker = ElementFactory::createElement($this->context, ContentTypePicker::ELEMENT_NAME);
+        $contentTypePicker->verifyVisibility();
         $contentTypePicker->select($contentType);
 
         $contentUpdatePage = PageObjectFactory::createPage($this->context, ContentUpdateItemPage::PAGE_NAME, $contentType);

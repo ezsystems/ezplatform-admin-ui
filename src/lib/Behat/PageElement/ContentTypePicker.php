@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
 use EzSystems\Behat\Browser\Context\BrowserContext;
 use EzSystems\Behat\Browser\Element\Element;
+use PHPUnit\Framework\Assert;
 
 class ContentTypePicker extends Element
 {
@@ -19,11 +20,21 @@ class ContentTypePicker extends Element
         parent::__construct($context);
         $this->fields = [
             'contentTypeSelector' => '.form-check-label',
+            'headerSelector' => '.ez-extra-actions--create .ez-extra-actions__header',
         ];
     }
 
     public function select(string $contentType): void
     {
         $this->context->getElementByText($contentType, $this->fields['contentTypeSelector'])->click();
+    }
+
+    public function verifyVisibility(): void
+    {
+        $this->context->waitUntil($this->defaultTimeout, function () {
+            return $this->context->findElement($this->fields['headerSelector'])->getText() !== '';
+        });
+
+        Assert::assertEquals('Create content', $this->context->findElement($this->fields['headerSelector'])->getText());
     }
 }
