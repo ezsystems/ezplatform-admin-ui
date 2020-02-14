@@ -4,6 +4,10 @@
 
 .breadcrumb-item {
     cursor: not-allowed;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calculateRem(300px);
     
     + .breadcrumb-item::before,
     &.active {
