@@ -8,6 +8,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/helpers/notification.helper.js'),
     path.resolve(__dirname, '../public/js/scripts/helpers/timezone.helper.js'),
     path.resolve(__dirname, '../public/js/scripts/helpers/content.type.helper.js'),
+    path.resolve(__dirname, '../public/js/scripts/helpers/user.helper.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.format.date.js'),
     path.resolve(__dirname, '../public/js/scripts/core/draggable.js'),
     path.resolve(__dirname, '../public/js/scripts/core/custom.dropdown.js'),
