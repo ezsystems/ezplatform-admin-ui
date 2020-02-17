@@ -126,6 +126,14 @@ ezplatform.role.create:
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\RoleController::createAction'
 
+ezplatform.role.copy:
+    path: /role/{roleId}/copy
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\RoleController::copyAction'
+    requirements:
+        roleId: \d+
+
 ezplatform.role.update:
     path: /role/{roleId}/update
     methods: ['GET', 'POST']

@@ -83,6 +83,11 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.role_create.sidebar_right }
 
+    EzSystems\EzPlatformAdminUi\Menu\Admin\Role\RoleCopyRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.role_copy.sidebar_right }
+
     EzSystems\EzPlatformAdminUi\Menu\UserCreateRightSidebarBuilder:
         public: true
         tags:
