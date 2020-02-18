@@ -77,7 +77,7 @@ class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
     }
 
     /**
-     * Sort languages based on siteaccess languages order
+     * Sort languages based on siteaccess languages order.
      *
      * @return array
      */
