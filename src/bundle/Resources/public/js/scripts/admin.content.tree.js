@@ -8,7 +8,8 @@
     const contentTreeContainer = doc.querySelector('.ez-content-tree-container');
     const contentTreeWrapper = doc.querySelector('.ez-content-tree-container__wrapper');
     const btn = doc.querySelector('.ez-btn--toggle-content-tree');
-    const { currentLocationPath, userId, treeRootLocationId } = contentTreeContainer.dataset;
+    const { currentLocationPath, treeRootLocationId } = contentTreeContainer.dataset;
+    const userId = window.eZ.helpers.user.getId();
     let frame = null;
     const toggleContentTreePanel = () => {
         contentTreeContainer.classList.toggle(CLASS_CONTENT_TREE_EXPANDED);

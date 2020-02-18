@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="CSRF-Token" content="{{ csrf_token('authenticate') }}" />
         <meta name="SiteAccess" content="{{ app.request.get('siteaccess').name }}" />
+        <meta name="UserId" content="{{ ez_admin_ui_config.user.user.id }}" />
         <script>
             const userAgent = navigator.userAgent.toLowerCase();
 
@@ -135,7 +136,6 @@
                         </div>
                     </div>
                     <div class="ez-content-tree-container"
-                        data-user-id="{{ ez_admin_ui_config.user.user.id }}"
                         data-tree-root-location-id="{{ content_tree_module_root|default(ez_admin_ui_config['contentTree']['treeRootLocationId']) }}"
                         data-current-location-path="{{ location_path|default('') }}">
                         <div class="ez-content-tree-container__wrapper"></div>
