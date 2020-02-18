@@ -13,9 +13,6 @@ export default class EzConfigTableBase {
             'tableHeading',
             'ezembedinline',
             'ezanchor',
-            'eztablerow',
-            'eztablecolumn',
-            'eztablecell',
             'eztableremove',
             ...config.extraButtons[this.name],
         ];
