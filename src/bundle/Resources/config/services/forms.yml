@@ -45,11 +45,11 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader:
         arguments:
-            $siteAccessLanguages: '$languages$'
+            $configResolver: "@ezpublish.config.resolver"
 
     EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesChoiceLoader:
         arguments:
-            $siteAccessLanguages: '$languages$'
+            $configResolver: "@ezpublish.config.resolver"
 
     EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\PermissionAwareContentTypeChoiceLoader:
         arguments:

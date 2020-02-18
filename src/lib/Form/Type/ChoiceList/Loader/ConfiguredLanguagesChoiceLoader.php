@@ -9,25 +9,26 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
 
 use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 
 class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
 {
     /** @var \eZ\Publish\API\Repository\LanguageService */
-    protected $languageService;
+    private $languageService;
 
     /** @var string[] */
-    protected $siteAccessLanguages;
+    private $siteAccessLanguages;
 
     /**
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
-     * @param array $siteAccessLanguages
+     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      */
-    public function __construct(LanguageService $languageService, array $siteAccessLanguages)
+    public function __construct(LanguageService $languageService, ConfigResolverInterface $configResolver)
     {
         $this->languageService = $languageService;
-        $this->siteAccessLanguages = $siteAccessLanguages;
+        $this->siteAccessLanguages = $configResolver->getParameter('languages');
     }
 
     /**
