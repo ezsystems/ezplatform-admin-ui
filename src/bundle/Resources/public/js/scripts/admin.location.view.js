@@ -20,10 +20,11 @@
         },
         currentLanguage: mfuContainer.dataset.currentLanguage,
     };
-    const handleEditItem = (content) => {
+    const handleEditItem = (content, location) => {
         const contentId = content._id;
+        const locationId = location._id;
         const languageCode = content.mainLanguageCode;
-        const checkVersionDraftLink = Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode });
+        const checkVersionDraftLink = Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode, locationId });
         const submitVersionEditForm = () => {
             doc.querySelector('#form_subitems_content_edit_content_info').value = contentId;
             doc.querySelector(`#form_subitems_content_edit_language_${languageCode}`).checked = true;

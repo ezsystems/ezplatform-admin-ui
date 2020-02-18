@@ -494,11 +494,12 @@ ezplatform.version.has_no_conflict:
         languageCode: ~
 
 ezplatform.version_draft.has_no_conflict:
-    path: /version-draft/has-no-conflict/{contentId}/{languageCode}
+    path: /version-draft/has-no-conflict/{contentId}/{languageCode}/{locationId}
     options:
         expose: true
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Content\VersionDraftConflict:draftHasNoConflict'
+        locationId: ~
 
 # LocationView / Locations tab
 
