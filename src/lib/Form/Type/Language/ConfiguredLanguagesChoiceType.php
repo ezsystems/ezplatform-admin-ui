@@ -20,6 +20,6 @@ class ConfiguredLanguagesChoiceType extends LanguageChoiceTypeAbstract
      */
     public function __construct(ConfiguredLanguagesChoiceLoader $languageChoiceLoader)
     {
-        $this->languageChoiceLoader = $languageChoiceLoader;
+        parent::__construct($languageChoiceLoader);
     }
 }

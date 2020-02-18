@@ -79,7 +79,7 @@ class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
     /**
      * Sort languages based on siteaccess languages order.
      *
-     * @return array
+     * @return \eZ\Publish\API\Repository\Values\Content\Language[]
      */
     private function getPriorityOrderedLanguages(): array
     {
@@ -95,9 +95,10 @@ class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
         foreach ($this->siteAccessLanguages as $saLanguageCode) {
             if (isset($languagesAssoc[$saLanguageCode])) {
                 $orderedLanguages[] = $languagesAssoc[$saLanguageCode];
+                unset($languagesAssoc[$saLanguageCode]);
             }
         }
 
-        return $orderedLanguages;
+        return array_merge($orderedLanguages, array_values($languagesAssoc));
     }
 }

@@ -22,6 +22,6 @@ class LanguageChoiceType extends LanguageChoiceTypeAbstract
      */
     public function __construct(LanguageChoiceLoader $languageChoiceLoader)
     {
-        $this->languageChoiceLoader = $languageChoiceLoader;
+        parent::__construct($languageChoiceLoader);
     }
 }
