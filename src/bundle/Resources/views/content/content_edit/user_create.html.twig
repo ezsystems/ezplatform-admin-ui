@@ -46,3 +46,18 @@
     <a class="ez-content-edit-container__close" href="{{ path('_ezpublishLocation', {'locationId': parentGroup.content.versionInfo.contentInfo.mainLocationId}) }}"></a>
 {% endblock %}
 
+
+{% block form_before %}
+    {{ ezplatform_admin_ui_component_group('content-create-form-before', {
+        'contentType': contentType,
+        'language': language
+    }) }}
+{% endblock %}
+
+{% block form_after %}
+    {{ ezplatform_admin_ui_component_group('content-create-form-after', {
+        'contentType': contentType,
+        'language': language
+    }) }}
+{% endblock %}
+
