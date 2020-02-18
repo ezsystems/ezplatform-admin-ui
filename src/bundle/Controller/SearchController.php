@@ -240,7 +240,7 @@ class SearchController extends Controller
     private function getSearchLanguageFilter(?string $languageCode): array
     {
         return [
-            'languages' => $languageCode ? [$languageCode] : [],
+            'languages' => !empty($languageCode) ? [$languageCode] : [],
             'useAlwaysAvailable' => true,
         ];
     }
