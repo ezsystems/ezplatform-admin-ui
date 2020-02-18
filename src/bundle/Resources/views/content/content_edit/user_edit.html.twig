@@ -50,16 +50,21 @@
 {% endblock %}
 
 {% block form_before %}
-    {{ ezplatform_admin_ui_component_group('content-create-form-before', {
+    {{ ezplatform_admin_ui_component_group('content-edit-form-before', {
+        'content': user,
         'contentType': contentType,
+        'location': location,
+        'parent_location': user.versionInfo.contentInfo.mainLocationId,
         'language': language
     }) }}
 {% endblock %}
 
 {% block form_after %}
-    {{ ezplatform_admin_ui_component_group('content-create-form-after', {
+    {{ ezplatform_admin_ui_component_group('content-edit-form-after', {
+        'content': user,
         'contentType': contentType,
+        'location': location,
+        'parent_location': user.versionInfo.contentInfo.mainLocationId,
         'language': language
     }) }}
 {% endblock %}
-
