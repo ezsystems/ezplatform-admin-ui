@@ -32,15 +32,27 @@ class MapLocation extends EzFieldElement
         $this->setSpecificCoordinate('address', $parameters['address']);
         $this->context->findElement($this->fields['searchButton'])->click();
 
-        // wait until OpenStreetMap respondes with data
         $expectedLongitude = $parameters['longitude'];
         $expectedLatitude = $parameters['latitude'];
 
+        // wait until OpenStreetMap responds with data
         $this->context->waitUntil(self::OPEN_STREET_MAP_TIMEOUT, function () use ($expectedLatitude, $expectedLongitude) {
             $currentValue = $this->getValue();
 
             return $currentValue['latitude'] === $expectedLatitude && $currentValue['longitude'] === $expectedLongitude;
         });
+    }
+
+    private function setSpecificCoordinate(string $coordinateName, string $value): void
+    {
+        $fieldInput = $this->context->findElement(
+            sprintf('%s %s', $this->fields['fieldContainer'], $this->fields[$coordinateName])
+        );
+
+        Assert::assertNotNull($fieldInput, sprintf('Input %s for field %s not found.', $coordinateName, $this->label));
+
+        $fieldInput->setValue('');
+        $fieldInput->setValue($value);
     }
 
     public function getValue(): array
@@ -84,23 +96,18 @@ class MapLocation extends EzFieldElement
 
     public function verifyValueInItemView(array $values): void
     {
-        Assert::assertStringEndsWith(
-            sprintf('Address: %s Latitude: %s Longitude: %s', $values['address'], $values['latitude'], $values['longitude']),
-            $this->context->findElement($this->fields['fieldContainer'])->getText(),
-            'Field has wrong value'
-        );
-    }
+        $mapText = $this->context->findElement($this->fields['fieldContainer'])->getText();
 
-    private function setSpecificCoordinate(string $coordinateName, string $value): void
-    {
-        $fieldInput = $this->context->findElement(
-            sprintf('%s %s', $this->fields['fieldContainer'], $this->fields[$coordinateName])
-        );
+        $matches = [];
+        preg_match('/Address: (.*) Latitude: (.*) Longitude: (.*)/', $mapText, $matches);
 
-        Assert::assertNotNull($fieldInput, sprintf('Input %s for field %s not found.', $coordinateName, $this->label));
+        $actualAddress = $matches[1];
+        $actualLatitude = $this->formatToOneDecimalPlace($matches[2]);
+        $actualLongitude = $this->formatToOneDecimalPlace($matches[3]);
 
-        $fieldInput->setValue('');
-        $fieldInput->setValue($value);
+        Assert::assertEquals($values['address'], $actualAddress);
+        Assert::assertEquals($values['latitude'], $actualLatitude);
+        Assert::assertEquals($values['longitude'], $actualLongitude);
     }
 
     private function formatToOneDecimalPlace(string $value): string
@@ -108,6 +115,6 @@ class MapLocation extends EzFieldElement
         $number = (float) $value;
         $formattedNumber = number_format($number, 1);
 
-        return sprintf('%f', $formattedNumber);
+        return sprintf('%.1f', $formattedNumber);
     }
 }
