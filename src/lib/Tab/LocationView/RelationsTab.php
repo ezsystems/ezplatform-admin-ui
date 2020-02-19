@@ -146,7 +146,7 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
 
         $viewParameters['relations'] = $relations;
 
-        if (true === $this->permissionResolver->hasAccess('content', 'reverserelatedlist')) {
+        if ($this->permissionResolver->hasAccess('content', 'reverserelatedlist')) {
             $reverseRelations = $reverseRelationPagination->getCurrentPageResults();
 
             foreach ($reverseRelations as $relation) {
