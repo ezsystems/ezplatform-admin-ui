@@ -10,6 +10,7 @@ use EzSystems\Behat\Browser\Context\BrowserContext;
 use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Authors;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Checkbox;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\ContentQuery;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\ContentRelationMultiple;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\ContentRelationSingle;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\Country;
@@ -155,6 +156,8 @@ class PlatformElementFactory extends ElementFactory
                 return new Image($context, $parameters[0], $parameters[1]);
             case ImageAsset::ELEMENT_NAME:
                 return new ImageAsset($context, $parameters[0], $parameters[1]);
+            case ContentQuery::ELEMENT_NAME:
+                return new ContentQuery($context, $parameters[0], $parameters[1]);
             case File::ELEMENT_NAME:
                 return new File($context, $parameters[0], $parameters[1]);
             case ContentRelationSingle::ELEMENT_NAME:

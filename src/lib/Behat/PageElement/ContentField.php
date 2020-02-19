@@ -29,7 +29,7 @@ class ContentField extends Element
         ];
     }
 
-    public function verifyFieldHasValue(string $label, array $value): void
+    public function verifyFieldHasValue(string $label, array $fieldData): void
     {
         $fieldIndex = $this->context->getElementPositionByText(sprintf('%s:', $label), $this->fields['fieldName']);
         $fieldLocator = sprintf(
@@ -38,24 +38,31 @@ class ContentField extends Element
             $this->fields['fieldValue']
         );
 
-        $fieldClass = $this->context->findElement(sprintf('%s %s', $fieldLocator, $this->fields['fieldValueContainer']))->getAttribute('class');
-        $fieldType = $this->getFieldType($fieldClass);
-        $fieldElement = ElementFactory::createElement($this->context, FieldTypeNameConverter::getFieldTypeNameByIdentifier($fieldType), $fieldLocator, $label);
-        $fieldElement->verifyValueInItemView($value);
+        if (array_key_exists('fieldType', $fieldData)) {
+            $fieldType = $fieldData['fieldType'];
+        } else {
+            $fieldClass = $this->context->findElement(sprintf('%s %s', $fieldLocator, $this->fields['fieldValueContainer']))->getAttribute('class');
+            $fieldTypeIdentifier = $this->getFieldTypeIdentifier($fieldClass);
+            $fieldType = FieldTypeNameConverter::getFieldTypeNameByIdentifier($fieldTypeIdentifier);
+        }
+
+        $fieldElement = ElementFactory::createElement($this->context, $fieldType, $fieldLocator, $label);
+        $fieldElement->verifyValueInItemView($fieldData);
     }
 
-    private function getFieldType(string $fieldClass): string
+    private function getFieldTypeIdentifier(string $fieldClass): string
     {
         if (strpos($fieldClass, 'ez-table') !== false) {
             return 'ezmatrix';
         }
 
-        if (!$fieldClass) {
+        if ($fieldClass === '') {
             return 'ezboolean';
         }
 
         preg_match($this::FIELD_TYPE_CLASS_REGEX, $fieldClass, $matches);
+        $matchedValue = explode('-', $matches[0])[0];
 
-        return explode('-', $matches[0])[0];
+        return $matchedValue;
     }
 }
