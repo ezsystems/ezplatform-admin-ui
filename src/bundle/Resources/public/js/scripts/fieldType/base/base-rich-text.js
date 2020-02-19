@@ -325,6 +325,9 @@
             nativeEditor.on('change', saveRichText);
             nativeEditor.on('customUpdate', saveRichText);
             nativeEditor.on('editorInteraction', saveRichText);
+            nativeEditor.on('afterPaste', () => {
+                this.setLinksProtocol(container);
+            });
 
             return alloyEditor;
         }
@@ -389,6 +392,24 @@
 
         splitIntoWords(text) {
             return text.split(' ').filter((word) => word.trim());
+        }
+
+        setLinksProtocol(container) {
+            const links = container.querySelectorAll('a');
+            const anchorPrefix = '#';
+            const protocolPrefix = 'http://';
+
+            links.forEach((link) => {
+                const href = link.getAttribute('href');
+                const protocolPattern = /^https?:\/\//i;
+
+                if (href && href.indexOf(anchorPrefix) !== 0 && !protocolPattern.test(href)) {
+                    const protocolHref = protocolPrefix.concat(href);
+
+                    link.setAttribute('href', protocolHref);
+                    link.setAttribute('data-cke-saved-href', protocolHref);
+                }
+            });
         }
     };
 
