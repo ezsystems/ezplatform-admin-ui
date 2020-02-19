@@ -325,10 +325,8 @@
             nativeEditor.on('change', saveRichText);
             nativeEditor.on('customUpdate', saveRichText);
             nativeEditor.on('editorInteraction', saveRichText);
-            nativeEditor.on('paste', () => {
-                setTimeout(() => {
-                    this.setLinksProtocol(container);
-                });
+            nativeEditor.on('afterPaste', () => {
+                this.setLinksProtocol(container);
             });
 
             return alloyEditor;
