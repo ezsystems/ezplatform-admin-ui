@@ -19,6 +19,7 @@
         <div class="ez-translation-selector__list-wrapper ez-translation-selector__list-wrapper--hidden ez-translation-selector__list-wrapper--visible-hidden">
             <div class="ez-translation-selector__title">{{ 'edit_translation.list.title'|trans|desc('Select language') }}:</div>
             <div class="ez-translation-selector__list">
+                <div class="ez-translation-selector__list-triangle"></div>
                 {% for language in translations %}
                     <button class="btn btn-icon ez-btn--content-edit"
                         data-content-id="{{ contentId }}"
@@ -26,7 +27,6 @@
                         {{ language.name }}
                     </button>
                 {% endfor %}
-                <div class="ez-translation-selector__list-triangle"></div>
             </div>
         </div>
     </div>
