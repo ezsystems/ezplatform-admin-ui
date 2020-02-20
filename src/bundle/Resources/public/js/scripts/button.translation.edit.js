@@ -69,10 +69,6 @@
 
     const translationSelectors = doc.querySelectorAll('.ez-translation-selector');
 
-    if (!translationSelectors.length) {
-        return;
-    }
-
     translationSelectors.forEach((translationSelector) => {
         const editTranslation = new EditTranslation({ container: translationSelector });
 
