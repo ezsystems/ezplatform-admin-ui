@@ -3,13 +3,12 @@
         <svg class="ez-icon ez-icon--small">
             <use xlink:href="{{ ez_content_type_icon(row.content_type.identifier) }}"></use>
         </svg>
-    </td>   
+    </td>
     <td class="ez-table__cell ez-table__cell--after-icon">
         <a href="{{ path('_ezpublishLocation', {
             'locationId': row.mainLocationId,
             'languageCode': row.translation_language_code,
         }) }}">{{ row.name }}</a>
-
     </td>
     <td class="ez-table__cell">{{ row.modified|ez_full_datetime }}</td>
     <td class="ez-table__cell">{{ row.type }}</td>
@@ -21,12 +20,9 @@
         </td>
     {% endif %}
     <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
-        <button class="btn btn-icon mx-2 ez-btn--content-edit"
-                data-content-id="{{ row.contentId }}"
-                data-language-code="{{ row.translation_language_code }}">
-            <svg class="ez-icon ez-icon-edit">
-                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-            </svg>
-        </button>
+        {% include '@ezdesign/parts/edit_translation_button.html.twig' with {
+            'contentId': row.contentId,
+            'translations': row.available_translations
+        }%}
     </td>
 </tr>

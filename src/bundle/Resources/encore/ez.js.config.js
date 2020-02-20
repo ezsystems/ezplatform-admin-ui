@@ -170,6 +170,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.search.js'),
             path.resolve(__dirname, '../public/js/scripts/udw/select.location.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.content.tree.js'),
+            path.resolve(__dirname, '../public/js/scripts/button.translation.edit.js'),
         ])
         .addEntry('ezplatform-admin-ui-section-list-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.section.list.js'),
