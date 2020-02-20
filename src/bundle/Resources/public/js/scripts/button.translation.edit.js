@@ -1,50 +1,81 @@
 (function(global, doc) {
-    const togglerButtons = doc.querySelectorAll('.ez-btn--translations-list-toggler');
-    let setPositionCallback = null;
-    let hideTranslationsListCallback = null;
-    const hideTranslationsList = (translationsList, event) => {
-        const clickedOnTranslationsList = event.target.closest('.ez-translation-selector');
-        const clickedOnDraftConflictModal = event.target.closest('.ez-modal--version-draft-conflict');
+    class EditTranslation {
+        constructor(config) {
+            this.container = config.container;
+            this.toggler = config.container.querySelector('.ez-btn--translations-list-toggler');
+            this.translationsList = config.container.querySelector('.ez-translation-selector__list-wrapper');
+            this.listTriangle = config.container.querySelector('.ez-translation-selector__list-triangle');
 
-        if (clickedOnTranslationsList || clickedOnDraftConflictModal) {
-            return;
+            this.hideTranslationsList = this.hideTranslationsList.bind(this);
+            this.showTranslationsList = this.showTranslationsList.bind(this);
+            this.setPosition = this.setPosition.bind(this);
         }
 
-        translationsList.classList.add('ez-translation-selector__list-wrapper--hidden');
-        translationsList.classList.add('ez-translation-selector__list-wrapper--visually-hidden');
+        setPosition() {
+            const togglerRect = this.toggler.getBoundingClientRect();
+            const translationsListRect = this.translationsList.getBoundingClientRect();
+            const topPosition = togglerRect.top + togglerRect.height / 2 - translationsListRect.height / 2;
+            const leftPosition = togglerRect.left - translationsListRect.width - 10;
 
-        global.removeEventListener('scroll', setPositionCallback, false);
-        doc.removeEventListener('click', hideTranslationsListCallback, false);
-    };
-    const showTranslationsList = (event) => {
-        const translationSelector = event.currentTarget.closest('.ez-translation-selector');
-        const translationsList = translationSelector.querySelector('.ez-translation-selector__list-wrapper');
+            if (topPosition + translationsListRect.height > window.innerHeight) {
+                this.translationsList.style.bottom = 0;
+                this.translationsList.style.top = 'auto';
 
-        translationsList.classList.remove('ez-translation-selector__list-wrapper--hidden');
+                const translationsListRect = this.translationsList.getBoundingClientRect();
+                const listTriangleTopPosition =
+                    ((togglerRect.top + togglerRect.height / 2 - translationsListRect.top) / translationsListRect.height) * 100;
 
-        setPosition(translationsList, event.currentTarget);
+                this.listTriangle.style.top = listTriangleTopPosition < 90 ? `${listTriangleTopPosition}%` : '%';
+            } else {
+                this.translationsList.style.top = `${topPosition}px`;
+                this.translationsList.style.bottom = 'auto';
+                this.listTriangle.style.top = '50%';
+            }
 
-        setPositionCallback = setPosition.bind(this, translationsList, event.currentTarget);
-        hideTranslationsListCallback = hideTranslationsList.bind(this, translationsList);
+            this.translationsList.style.left = `${leftPosition}px`;
 
-        global.addEventListener('scroll', setPositionCallback, false);
-        doc.addEventListener('click', hideTranslationsListCallback, false);
-    };
-    const setPosition = (translationsList, button) => {
-        const buttonRect = button.getBoundingClientRect();
-        const translationsListRect = translationsList.getBoundingClientRect();
-        const topPosition = buttonRect.top + buttonRect.height / 2 - translationsListRect.height / 2;
-        const leftPosition = buttonRect.left - translationsListRect.width - 10;
+            this.translationsList.classList.remove('ez-translation-selector__list-wrapper--visually-hidden');
+        }
 
-        translationsList.style.top = topPosition + 'px';
-        translationsList.style.left = leftPosition + 'px';
+        hideTranslationsList(event) {
+            const closestTranslationSelector = event.target.closest('.ez-translation-selector');
+            const clickedOnTranslationsList = closestTranslationSelector && closestTranslationSelector.isSameNode(this.container);
+            const clickedOnDraftConflictModal = event.target.closest('.ez-modal--version-draft-conflict');
 
-        translationsList.classList.remove('ez-translation-selector__list-wrapper--visually-hidden');
-    };
+            if (clickedOnTranslationsList || clickedOnDraftConflictModal) {
+                return;
+            }
 
-    if (!togglerButtons.length) {
+            this.translationsList.classList.add('ez-translation-selector__list-wrapper--hidden');
+            this.translationsList.classList.add('ez-translation-selector__list-wrapper--visually-hidden');
+
+            global.removeEventListener('scroll', this.setPosition, false);
+            doc.removeEventListener('click', this.hideTranslationsList, false);
+        }
+
+        showTranslationsList() {
+            this.translationsList.classList.remove('ez-translation-selector__list-wrapper--hidden');
+
+            this.setPosition();
+
+            global.addEventListener('scroll', this.setPosition, false);
+            doc.addEventListener('click', this.hideTranslationsList, false);
+        }
+
+        init() {
+            this.toggler.addEventListener('click', this.showTranslationsList, false);
+        }
+    }
+
+    const translationSelectors = doc.querySelectorAll('.ez-translation-selector');
+
+    if (!translationSelectors.length) {
         return;
     }
 
-    togglerButtons.forEach((button) => button.addEventListener('click', showTranslationsList, false));
+    translationSelectors.forEach((translationSelector) => {
+        const editTranslation = new EditTranslation({ container: translationSelector });
+
+        editTranslation.init();
+    });
 })(window, document);

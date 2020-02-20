@@ -15,6 +15,13 @@
         &--visually-hidden {
             opacity: 0;
         }
+    }
+
+    &__list-triangle {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(100%, -50%);
 
         &:after {
             content: '';
@@ -25,9 +32,6 @@
             border-color: transparent transparent transparent $ez-color-secondary;
             position: absolute;
             z-index: 1;
-            right: 0;
-            top: 50%;
-            transform: translate(100%, -50%);
         }
     }
 
@@ -53,7 +57,7 @@
             text-align: left;
 
             &:not(:last-child) {
-                margin-bottom: 6px;
+                margin-bottom: calculateRem(8px);
             }
         }
     }
