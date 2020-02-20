@@ -225,6 +225,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/cotf/create.js'),
             path.resolve(__dirname, '../public/js/scripts/button.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),
+            path.resolve(__dirname, '../public/js/scripts/button.translation.edit.js'),
         ])
         .addEntry('ezplatform-admin-ui-link-manager-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.linkmanager.list.js')])
         .addEntry('ezplatform-admin-ui-link-manager-view-js', [path.resolve(__dirname, '../public/js/scripts/button.content.edit.js')])
