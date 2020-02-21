@@ -16,6 +16,8 @@ class MapLocation extends EzFieldElement
     /** @var string Name by which Element is recognised */
     public const ELEMENT_NAME = 'Map location';
 
+    private const OPEN_STREET_MAP_TIMEOUT = 20;
+
     public function __construct(BrowserContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
