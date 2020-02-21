@@ -25,7 +25,7 @@
                 const listTriangleTopPosition =
                     ((togglerRect.top + togglerRect.height / 2 - translationsListRect.top) / translationsListRect.height) * 100;
 
-                this.listTriangle.style.top = listTriangleTopPosition < 90 ? `${listTriangleTopPosition}%` : '%';
+                this.listTriangle.style.top = listTriangleTopPosition < 90 ? `${listTriangleTopPosition}%` : '90%';
             } else {
                 this.translationsList.style.top = `${topPosition}px`;
                 this.translationsList.style.bottom = 'auto';
@@ -68,10 +68,6 @@
     }
 
     const translationSelectors = doc.querySelectorAll('.ez-translation-selector');
-
-    if (!translationSelectors.length) {
-        return;
-    }
 
     translationSelectors.forEach((translationSelector) => {
         const editTranslation = new EditTranslation({ container: translationSelector });

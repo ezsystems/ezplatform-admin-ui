@@ -1,8 +1,11 @@
 {% trans_default_domain 'edit_translation_button' %}
 
+{% set title = title ?? 'edit_translation.edit.title'|trans|desc('Edit Content') %}
+
 {% if translations|length == 1 %}
     {% set language = translations|first %}
     <button class="btn btn-icon mx-2 ez-btn--content-edit"
+            title="{{ title }}"
             data-content-id="{{ contentId }}"
             data-language-code="{{ language.languageCode }}">
         <svg class="ez-icon ez-icon-edit">
@@ -11,7 +14,7 @@
     </button>
 {% else %}
     <div class="ez-translation-selector">
-        <button class="btn btn-icon mx-2 ez-btn ez-btn--translations-list-toggler">
+        <button class="btn btn-icon mx-2 ez-btn ez-btn--translations-list-toggler" title="{{ title }}">
             <svg class="ez-icon ez-icon-edit">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
             </svg>
@@ -19,6 +22,7 @@
         <div class="ez-translation-selector__list-wrapper ez-translation-selector__list-wrapper--hidden ez-translation-selector__list-wrapper--visible-hidden">
             <div class="ez-translation-selector__title">{{ 'edit_translation.list.title'|trans|desc('Select language') }}:</div>
             <div class="ez-translation-selector__list">
+                <div class="ez-translation-selector__list-triangle"></div>
                 {% for language in translations %}
                     <button class="btn btn-icon ez-btn--content-edit"
                         data-content-id="{{ contentId }}"
@@ -26,7 +30,6 @@
                         {{ language.name }}
                     </button>
                 {% endfor %}
-                <div class="ez-translation-selector__list-triangle"></div>
             </div>
         </div>
     </div>
