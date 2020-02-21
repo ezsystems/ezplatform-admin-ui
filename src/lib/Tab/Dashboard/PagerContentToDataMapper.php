@@ -107,7 +107,7 @@ class PagerContentToDataMapper
                 'available_translations' => $availableTranslations,
                 'available_enabled_translations' => array_filter(
                     $availableTranslations,
-                    (function(\eZ\Publish\API\Repository\Values\Content\Language $translation) {
+                    (function (\eZ\Publish\API\Repository\Values\Content\Language $translation) {
                         return $translation->enabled;
                     })
                 ),
