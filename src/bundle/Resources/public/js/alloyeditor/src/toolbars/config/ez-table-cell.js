@@ -1,6 +1,26 @@
 import EzConfigTableBase from './base-table';
 
 export default class EzTableCellConfig extends EzConfigTableBase {
+    constructor(config) {
+        super(config);
+
+        const editAttributesButton = config.attributes[this.name] || config.classes[this.name] ? `${this.name}edit` : '';
+
+        this.buttons = [
+            'ezmoveup',
+            'ezmovedown',
+            editAttributesButton,
+            'tableHeading',
+            'ezembedinline',
+            'ezanchor',
+            'eztablerow',
+            'eztablecolumn',
+            'eztablecell',
+            'eztableremove',
+            ...config.extraButtons[this.name],
+        ];
+    }
+
     getConfigName() {
         return 'td';
     }

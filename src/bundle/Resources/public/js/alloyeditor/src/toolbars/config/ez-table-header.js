@@ -1,6 +1,6 @@
-import EzConfigTableBase from './base-table';
+import EzTableCellConfig from './ez-table-cell';
 
-export default class EzTableHeaderConfig extends EzConfigTableBase {
+export default class EzTableHeaderConfig extends EzTableCellConfig {
     getConfigName() {
         return 'th';
     }

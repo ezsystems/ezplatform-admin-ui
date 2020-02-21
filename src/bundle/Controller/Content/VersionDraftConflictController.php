@@ -60,16 +60,20 @@ class VersionDraftConflictController extends Controller
     /**
      * @param int $contentId
      * @param string $languageCode
+     * @param int|null $locationId
      *
      * @return Response
      *
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
-    public function draftHasNoConflictAction(int $contentId, string $languageCode): Response
-    {
+    public function draftHasNoConflictAction(
+        int $contentId,
+        string $languageCode,
+        ?int $locationId = null
+    ): Response {
         $content = $this->contentService->loadContent($contentId);
-        $location = $this->locationService->loadLocation($content->contentInfo->mainLocationId);
         $contentInfo = $content->contentInfo;
 
         try {
@@ -89,6 +93,15 @@ class VersionDraftConflictController extends Controller
             $versionsDataset = $this->datasetFactory->versions();
             $versionsDataset->load($contentInfo);
             $conflictedDrafts = $versionsDataset->getConflictedDraftVersions($contentInfo->currentVersionNo, $languageCode);
+            $locationId = $locationId ?? $contentInfo->mainLocationId;
+            try {
+                $location = $this->locationService->loadLocation($locationId);
+            } catch (UnauthorizedException $e) {
+                // Will return list of locations user has *read* access to, or empty array if none
+                $availableLocations = $this->locationService->loadLocations($contentInfo);
+                // will return null if array of availableLocations is empty
+                $location = array_shift($availableLocations);
+            }
 
             $modalContent = $this->renderView('@ezdesign/content/modal_draft_conflict.html.twig', [
                 'conflicted_drafts' => $conflictedDrafts,
