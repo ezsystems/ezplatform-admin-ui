@@ -48,7 +48,7 @@
 
 {% block form_before %}
     {{ ezplatform_admin_ui_component_group('content-create-form-before', {
-        'parentLocation': parentGroup.content.versionInfo.contentInfo.mainLocationId,
+        'parentLocation': parentLocation,
         'contentType': contentType,
         'language': language
     }) }}
@@ -56,7 +56,7 @@
 
 {% block form_after %}
     {{ ezplatform_admin_ui_component_group('content-create-form-after', {
-        'parentLocation': parentGroup.content.versionInfo.contentInfo.mainLocationId,
+        'parentLocation': parentLocation,
         'contentType': contentType,
         'language': language
     }) }}
