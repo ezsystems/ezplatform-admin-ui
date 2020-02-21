@@ -202,7 +202,7 @@ class SearchController extends Controller
                 $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
             }
 
-            $languageFilter = $this->getSearchLanguageFilter($searchLanguageCode);
+            $languageFilter = $this->getSearchLanguageFilter($searchLanguageCode, $queryString);
 
             $pagerfanta = new Pagerfanta(
                 new ContentSearchHitAdapter($query, $this->searchService, $languageFilter)
@@ -234,14 +234,21 @@ class SearchController extends Controller
 
     /**
      * @param string|null $languageCode
+     * @param string|null $queryString
      *
      * @return array
      */
-    private function getSearchLanguageFilter(?string $languageCode): array
+    private function getSearchLanguageFilter(?string $languageCode, ?string $queryString): array
     {
-        return [
+        $filter = [
             'languages' => !empty($languageCode) ? [$languageCode] : [],
             'useAlwaysAvailable' => true,
         ];
+
+        if (!empty($queryString)) {
+            $filter['excludeTranslationsFromAlwaysAvailable'] = false;
+        }
+
+        return $filter;
     }
 }
