@@ -64,27 +64,28 @@ class PagerContentToDataMapper
 
     /**
      * @param Pagerfanta $pager
-     * @param string|null $forcedLanguage
      *
      * @return array
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
-    public function map(Pagerfanta $pager, ?string $forcedLanguage = null): array
+    public function map(Pagerfanta $pager): array
     {
         $data = [];
         $contentTypeIds = [];
 
-        foreach ($pager as $content) {
+        /** @var \eZ\Publish\API\Repository\Values\Content\Search\SearchHit $searchHit */
+        foreach ($pager as $searchHit) {
             /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
+            $content = $searchHit->valueObject;
             $contentInfo = $content->getVersionInfo()->getContentInfo();
 
             $contributor = (new UserExists($this->userService))->isSatisfiedBy($contentInfo->ownerId)
                 ? $this->userService->loadUser($contentInfo->ownerId) : null;
 
-            $availableLanguagesCodes = $content->versionInfo->languageCodes;
-            $translationLanguageCode = ($forcedLanguage && in_array($forcedLanguage, $availableLanguagesCodes))
-                ? $forcedLanguage : $contentInfo->mainLanguageCode;
+            $availableTranslations = $this->languageService->loadLanguageListByCode(
+                $content->versionInfo->languageCodes
+            );
 
             $contentTypeIds[] = $contentInfo->contentTypeId;
             $data[] = [
@@ -94,7 +95,7 @@ class PagerContentToDataMapper
                 'mainLocationId' => $contentInfo->mainLocationId,
                 'name' => $this->translationHelper->getTranslatedContentName(
                     $content,
-                    $forcedLanguage
+                    $searchHit->matchedTranslation
                 ),
                 'language' => $contentInfo->mainLanguageCode,
                 'contributor' => $contributor,
@@ -103,10 +104,14 @@ class PagerContentToDataMapper
                 'modified' => $content->versionInfo->modificationDate,
                 'initialLanguageCode' => $content->versionInfo->initialLanguageCode,
                 'content_is_user' => (new ContentIsUser($this->userService))->isSatisfiedBy($content),
-                'available_translations' => $this->languageService->loadLanguageListByCode(
-                    $availableLanguagesCodes
+                'available_translations' => $availableTranslations,
+                'available_enabled_translations' => array_filter(
+                    $availableTranslations,
+                    (function(\eZ\Publish\API\Repository\Values\Content\Language $translation) {
+                        return $translation->enabled;
+                    })
                 ),
-                'translation_language_code' => $translationLanguageCode,
+                'translation_language_code' => $searchHit->matchedTranslation,
             ];
         }
 

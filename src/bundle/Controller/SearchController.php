@@ -11,10 +11,10 @@ use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\User\User;
-use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchHitAdapter;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
@@ -205,7 +205,7 @@ class SearchController extends Controller
             $languageFilter = $this->getSearchLanguageFilter($searchLanguageCode);
 
             $pagerfanta = new Pagerfanta(
-                new ContentSearchAdapter($query, $this->searchService, $languageFilter)
+                new ContentSearchHitAdapter($query, $this->searchService, $languageFilter)
             );
 
             $pagerfanta->setMaxPerPage($limit);
@@ -216,7 +216,7 @@ class SearchController extends Controller
             );
 
             return $this->render('@ezdesign/admin/search/search.html.twig', [
-                'results' => $this->pagerContentToDataMapper->map($pagerfanta, $searchLanguageCode),
+                'results' => $this->pagerContentToDataMapper->map($pagerfanta),
                 'form' => $form->createView(),
                 'pager' => $pagerfanta,
                 'form_edit' => $editForm->createView(),

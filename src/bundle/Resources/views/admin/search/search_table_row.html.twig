@@ -22,7 +22,7 @@
     <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
         {% include '@ezdesign/parts/edit_translation_button.html.twig' with {
             'contentId': row.contentId,
-            'translations': row.available_translations
+            'translations': row.available_enabled_translations
         }%}
     </td>
 </tr>
