@@ -13,7 +13,7 @@ use Pagerfanta\Pagerfanta;
 class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
 {
     /**
-     * @param Pagerfanta $pager
+     * @param \Pagerfanta\Pagerfanta $pager
      *
      * @return array
      */
@@ -24,7 +24,7 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
 
         foreach ($pager as $content) {
             /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
-            $contentInfo = $content->getVersionInfo()->getContentInfo();
+            $contentInfo = $content->contentInfo;
 
             $contentTypeIds[] = $contentInfo->contentTypeId;
             $data[] = [

@@ -18,8 +18,8 @@ class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
     /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
-    /** @var string[] */
-    private $siteAccessLanguages;
+    /** @var ConfigResolverInterface */
+    private $configResolver;
 
     /**
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
@@ -28,7 +28,7 @@ class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
     public function __construct(LanguageService $languageService, ConfigResolverInterface $configResolver)
     {
         $this->languageService = $languageService;
-        $this->siteAccessLanguages = $configResolver->getParameter('languages');
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -92,8 +92,9 @@ class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
         }
 
         $orderedLanguages = [];
+        $saLanguagesCodes = $this->configResolver->getParameter('languages');
 
-        foreach ($this->siteAccessLanguages as $saLanguageCode) {
+        foreach ($saLanguagesCodes as $saLanguageCode) {
             if (isset($languagesAssoc[$saLanguageCode])) {
                 $orderedLanguages[] = $languagesAssoc[$saLanguageCode];
                 unset($languagesAssoc[$saLanguageCode]);

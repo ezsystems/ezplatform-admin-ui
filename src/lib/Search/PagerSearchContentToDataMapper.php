@@ -13,7 +13,7 @@ use Pagerfanta\Pagerfanta;
 class PagerSearchContentToDataMapper extends AbstractPagerContentToDataMapper
 {
     /**
-     * @param Pagerfanta $pager
+     * @param \Pagerfanta\Pagerfanta $pager
      *
      * @return array
      *
@@ -28,7 +28,7 @@ class PagerSearchContentToDataMapper extends AbstractPagerContentToDataMapper
         foreach ($pager as $searchHit) {
             /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
             $content = $searchHit->valueObject;
-            $contentInfo = $content->getVersionInfo()->getContentInfo();
+            $contentInfo = $content->contentInfo;
 
             $contentTypeIds[] = $contentInfo->contentTypeId;
             $data[] = [

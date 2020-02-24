@@ -20,7 +20,7 @@ use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 
-class AbstractPagerContentToDataMapper
+abstract class AbstractPagerContentToDataMapper
 {
     /** @var \eZ\Publish\Core\Helper\TranslationHelper */
     protected $translationHelper;
@@ -112,7 +112,7 @@ class AbstractPagerContentToDataMapper
 
     /**
      * @param array $data
-     * @param array $contentTypeIds
+     * @param int[] $contentTypeIds
      */
     protected function setTranslatedContentTypesNames(array &$data, array $contentTypeIds): void
     {
@@ -123,11 +123,10 @@ class AbstractPagerContentToDataMapper
         );
 
         foreach ($data as $idx => $item) {
-            /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
             // get content type from bulk-loaded list or fallback to lazy loaded one if not present
-            $contentType = isset($contentTypes[$item['contentTypeId']])
-                ? $contentTypes[$item['contentTypeId']]
-                : $item['content']->getContentType();
+            $contentTypeId = $item['contentTypeId'];
+            /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
+            $contentType = $contentTypes[$contentTypeId] ?? $item['content']->getContentType();
 
             $data[$idx]['type'] = $contentType->getName();
             unset($data[$idx]['content'], $data[$idx]['contentTypeId']);
