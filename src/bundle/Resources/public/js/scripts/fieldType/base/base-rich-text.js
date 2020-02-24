@@ -84,6 +84,7 @@
                         for (i = 0; i !== element.attributes.length; i++) {
                             importChildNodes(newElement, element.attributes[i], false);
                         }
+
                         if (element.localName === 'a' && parent.dataset.ezelement === 'ezembed') {
                             element.setAttribute('data-cke-survive', '1');
                         }
