@@ -9,10 +9,13 @@ namespace EzSystems\EzPlatformAdminUi\Menu\Admin\Role;
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Section Edit contextual sidebar menu.
@@ -24,6 +27,19 @@ class RoleCreateRightSidebarBuilder extends AbstractBuilder implements Translati
     /* Menu items */
     const ITEM__CREATE = 'role_create__sidebar_right__create';
     const ITEM__CANCEL = 'role_create__sidebar_right__cancel';
+
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    private $translator;
+
+    public function __construct(
+        MenuItemFactory $factory,
+        EventDispatcherInterface $eventDispatcher,
+        TranslatorInterface $translator
+    ) {
+        parent::__construct($factory, $eventDispatcher);
+
+        $this->translator = $translator;
+    }
 
     /**
      * @return string
@@ -54,6 +70,13 @@ class RoleCreateRightSidebarBuilder extends AbstractBuilder implements Translati
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => '#role_create_save',
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
+                        'title' => $this->translator->trans(
+/** @Ignore */ self::ITEM__CREATE,
+                            [],
+                            'menu'
+                        ),
                     ],
                     'extras' => ['icon' => 'publish'],
                 ]
@@ -61,8 +84,17 @@ class RoleCreateRightSidebarBuilder extends AbstractBuilder implements Translati
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'route' => 'ezplatform.role.list',
+                    'attributes' => [
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
+                        'title' => $this->translator->trans(
+/** @Ignore */ self::ITEM__CANCEL,
+                            [],
+                            'menu'
+                        ),
+                    ],
                     'extras' => ['icon' => 'circle-close'],
+                    'route' => 'ezplatform.role.list',
                 ]
             ),
         ]);

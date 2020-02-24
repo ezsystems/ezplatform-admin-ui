@@ -7,12 +7,12 @@
     {{ form_widget(form.query) }}
 
     <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary font-weight-bold ez-btn--search">
+        <button type="submit" class="btn btn-primary font-weight-bold ez-btn--search" title="{{ 'search.perform'|trans|desc('Search') }}">
             <svg class="ez-icon ez-icon--medium ez-icon--light">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
             </svg>
             <span class="ez-btn ez-btn--search-label">{{ 'search.perform'|trans|desc('Search') }}</span></button>
-        <button type="button" class="btn btn-dark ez-btn--filter ml-4">
+        <button type="button" class="btn btn-dark ez-btn--filter ml-4" title="{{ 'search.filters'|trans|desc('Filters') }}">
             <svg class="ez-icon ez-icon--medium ez-icon--light ez-icon-filters">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#filters"></use>
             </svg>
@@ -41,6 +41,7 @@
             <div>
                 <button class="btn btn-secondary ez-btn--udw-select-location"
                     type="button"
+                    title="{{'search.select_content'|trans|desc('Select Content')}}"
                     {% if form.subtree.vars.value is not empty %} hidden {% endif %}
                     data-universal-discovery-title="{{'search.udw.select_content'|trans|desc('Select Content')}}"
                     data-location-path-input-selector="#{{form.subtree.vars.id}}"
@@ -99,9 +100,9 @@
         </div>
     </div>
     <div class="ez-filters__btns">
-        <button class="btn btn-dark ez-btn-clear">
+        <button class="btn btn-dark ez-btn-clear" title="{{ 'search.clear'|trans|desc('Clear') }}">
             {{ 'search.clear'|trans|desc('Clear') }}</button>
-        <button type="submit" class="btn btn-secondary ez-btn-apply font-weight-bold" disabled>
+        <button type="submit" class="btn btn-secondary ez-btn-apply font-weight-bold" title="{{ 'search.apply'|trans|desc('Apply') }}" disabled>
             {{ 'search.apply'|trans|desc('Apply') }}</button>
     </div>
 </div>

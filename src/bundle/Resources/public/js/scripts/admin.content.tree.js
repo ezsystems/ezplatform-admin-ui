@@ -20,6 +20,7 @@
         const isContentTreeExpanded = contentTreeContainer.classList.contains(CLASS_CONTENT_TREE_EXPANDED);
 
         saveContentTreeExpandedState(userId, isContentTreeExpanded);
+        eZ.helpers.tooltips.hideAll();
     };
     const updateContentTreeWrapperHeight = () => {
         const height = Math.min(window.innerHeight - contentTreeContainer.getBoundingClientRect().top, window.innerHeight);

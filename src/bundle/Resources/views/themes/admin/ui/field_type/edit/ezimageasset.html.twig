@@ -37,7 +37,8 @@
     <div class="ez-data-source__message--main">
         {{ 'fieldtype.binary_base.drag_drop'|trans|desc('Drag your files to the browser window or select them') }}
     </div>
-    <div class="ez-data-source__btn-add">
+    <div class="ez-data-source__btn-add" 
+         title="{{ 'fieldtype.ezimageasset.upload.label'|trans|desc('Upload image') }}">
         <svg class="ez-icon">
             <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#upload"></use>
         </svg>
@@ -46,7 +47,8 @@
         </span>
     </div>
     <div class="ez-data-source__btn-select"
-         data-udw-config="{{ ez_udw_config('image_asset', {}) }}">
+         data-udw-config="{{ ez_udw_config('image_asset', {}) }}"
+         title="{{ 'fieldtype.ezimageasset.select.label'|trans|desc('Select from your Repository') }}">
         <svg class="ez-icon">
             <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#browse"></use>
         </svg>
@@ -107,12 +109,21 @@
             </div>
         </div>
         <div class="ez-field-edit-preview__actions">
-            <button type="button" class="ez-field-edit-preview__action--remove">
+            <button 
+                type="button" 
+                class="ez-field-edit-preview__action--remove"
+                title="{{ 'fieldtype.ezimageasset.delete'|trans|desc('Delete image') }}"
+            >
                 <svg class="ez-icon">
                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
                 </svg>
             </button>
-            <a class="ez-field-edit-preview__action--preview" href="{{ destination_content_url }}" target="_blank">
+            <a 
+                class="ez-field-edit-preview__action--preview" 
+                href="{{ destination_content_url }}"
+                title="{{ 'fieldtype.ezimageasset.open'|trans|desc('Open') }}"
+                target="_blank"
+            >
                 <svg class="ez-icon">
                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab"></use>
                 </svg>

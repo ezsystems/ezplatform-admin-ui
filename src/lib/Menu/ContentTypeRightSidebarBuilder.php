@@ -14,6 +14,7 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Content Type View contextual sidebar menu.
@@ -28,6 +29,9 @@ class ContentTypeRightSidebarBuilder extends AbstractBuilder implements Translat
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    private $translator;
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $factory
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
@@ -36,11 +40,13 @@ class ContentTypeRightSidebarBuilder extends AbstractBuilder implements Translat
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        TranslatorInterface $translator
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
+        $this->translator = $translator;
     }
 
     /**
@@ -70,6 +76,13 @@ class ContentTypeRightSidebarBuilder extends AbstractBuilder implements Translat
         $editAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--edit',
             'data-actions' => 'edit',
+            'data-extra-classes' => 'ez-tooltip--medium',
+            'data-placement' => 'left',
+            'title' => $this->translator->trans(
+/** @Ignore */ self::ITEM__EDIT,
+                [],
+                'menu'
+            ),
         ];
         $canEdit = $this->permissionResolver->canUser(
             'class',

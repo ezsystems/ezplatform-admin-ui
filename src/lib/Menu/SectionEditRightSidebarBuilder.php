@@ -13,6 +13,8 @@ use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Section Edit contextual sidebar menu.
@@ -24,6 +26,19 @@ class SectionEditRightSidebarBuilder extends AbstractBuilder implements Translat
     /* Menu items */
     const ITEM__SAVE = 'section_edit__sidebar_right__save';
     const ITEM__CANCEL = 'section_edit__sidebar_right__cancel';
+
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    private $translator;
+
+    public function __construct(
+        MenuItemFactory $factory,
+        EventDispatcherInterface $eventDispatcher,
+        TranslatorInterface $translator
+    ) {
+        parent::__construct($factory, $eventDispatcher);
+
+        $this->translator = $translator;
+    }
 
     /**
      * @return string
@@ -57,6 +72,13 @@ class SectionEditRightSidebarBuilder extends AbstractBuilder implements Translat
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#update-section-%d_update', $section->id),
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
+                        'title' => $this->translator->trans(
+/** @Ignore */ self::ITEM__SAVE,
+                            [],
+                            'menu'
+                        ),
                     ],
                     'extras' => ['icon' => 'save'],
                 ]
@@ -64,8 +86,17 @@ class SectionEditRightSidebarBuilder extends AbstractBuilder implements Translat
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'route' => 'ezplatform.section.list',
+                    'attributes' => [
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
+                        'title' => $this->translator->trans(
+/** @Ignore */ self::ITEM__CANCEL,
+                            [],
+                            'menu'
+                        ),
+                    ],
                     'extras' => ['icon' => 'circle-close'],
+                    'route' => 'ezplatform.section.list',
                 ]
             ),
         ]);

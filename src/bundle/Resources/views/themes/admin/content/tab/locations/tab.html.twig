@@ -6,7 +6,7 @@
 <section>
     {{ form(form_content_location_add, {'action': path('ezplatform.location.add')}) }}
     {% include '@ezdesign/ui/table_header.html.twig' with {
-        header_text: 'tab.locations.content_locations'|trans()|desc('Content Locations'),
+        header_text: 'tab.locations.content_locations'|trans|desc('Content Locations'),
         tools: tab.table_header_tools(form_content_location_add, form_content_location_remove, can_add)
     } %}
     {{ form_start(form_content_location_remove, {
@@ -18,10 +18,10 @@
             <thead>
             <tr>
                 <th></th>
-                <th>{{ 'tab.locations.path'|trans()|desc('Path') }}</th>
-                <th>{{ 'tab.locations.subitems'|trans()|desc('Sub-items') }}</th>
-                <th colspan="2">{{ 'tab.locations.visibility'|trans()|desc('Visibility') }}</th>
-                <th>{{ 'tab.locations.main'|trans()|desc('Main') }}</th>
+                <th>{{ 'tab.locations.path'|trans|desc('Path') }}</th>
+                <th>{{ 'tab.locations.subitems'|trans|desc('Sub-items') }}</th>
+                <th colspan="2">{{ 'tab.locations.visibility'|trans|desc('Visibility') }}</th>
+                <th>{{ 'tab.locations.main'|trans|desc('Main') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -36,7 +36,8 @@
                         </td>
                         <td class="ez-table__cell">{{ location.childCount }}</td>
                         <td class="ez-table__cell">
-                            <label class="ez-checkbox-icon {{ not location.explicitlyHidden ? 'is-checked' }}{% if not can_hide[location.id] %} disabled{% endif %}">
+                            <label class="ez-checkbox-icon {{ not location.explicitlyHidden ? 'is-checked' }}{% if not can_hide[location.id] %} disabled{% endif %}"
+                                   title="{{ 'tab.locations.visibility'|trans|desc('Visibility') }}">
                                 <svg class="ez-icon ez-icon-view">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#view"></use>
                                 </svg>
@@ -53,7 +54,7 @@
                             </label>
                             {% if location.contentInfo.isHidden or not is_location_visible %}
                                 <span class="ml-2">
-                                    {{ 'tab.locations.hidden_content_or_superior'|trans()|desc('Content or its ancestor is hidden') }}
+                                    {{ 'tab.locations.hidden_content_or_superior'|trans|desc('Content or its ancestor is hidden') }}
                                 </span>
                             {% endif %}
                         </td>

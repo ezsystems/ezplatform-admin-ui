@@ -33,8 +33,8 @@ class AdminList extends Element
             'list' => $containerLocator,
             'listHeader' => '.ez-table-header .ez-table-header__headline, header .ez-table__headline, header h5',
             'plusButton' => '.ez-icon-create',
-            'trashButton' => '.ez-icon-trash,button[title^="Delete"]',
-            'mainAssignButton' => '.ez-table-header [title^=Assign]',
+            'trashButton' => '.ez-icon-trash,button[data-original-title^="Delete"]',
+            'mainAssignButton' => '.ez-table-header [data-original-title^=Assign]',
             'paginationNextButton' => '.ez-pagination a.page-link[rel="next"]',
         ];
         $this->listContainer = $this->context->findElement($containerLocator);

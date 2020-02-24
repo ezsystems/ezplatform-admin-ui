@@ -29,12 +29,21 @@
             </div>
         </div>
         <div class="ez-field-edit-preview__actions">
-            <button type="button" class="ez-field-edit-preview__action--remove">
+            <button 
+                type="button" 
+                class="ez-field-edit-preview__action--remove" 
+                title="{{ 'content.field_type.ezimage.delete'|trans|desc('Delete image') }}"
+            >
                 <svg class="ez-icon">
                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
                 </svg>
             </button>
-            <a class="ez-field-edit-preview__action--preview" href="{{ form.parent.vars.value.value.uri }}" target="_blank">
+            <a 
+                class="ez-field-edit-preview__action--preview" 
+                href="{{ form.parent.vars.value.value.uri }}"
+                title="{{ 'content.field_type.ezimage.preview'|trans|desc('Preview') }}" 
+                target="_blank" 
+            >
                 <svg class="ez-icon">
                     <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab"></use>
                 </svg>

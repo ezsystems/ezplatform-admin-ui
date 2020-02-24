@@ -92,9 +92,6 @@
     {% set wrapper_attr = wrapper_attr|default({})|merge({'class': (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
 
     {% set field_type_descriptions = fieldtype.vars.value.fieldDefinition.descriptions %}
-    {% if field_type_descriptions[fieldtype.vars.languageCode] is defined %}
-        {% set wrapper_attr = wrapper_attr|merge({'title': field_type_descriptions[fieldtype.vars.languageCode]}) %}
-    {% endif %}
 
     <div {% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
         <div{% with { attr: label_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
@@ -106,7 +103,11 @@
             {{ widget_container_block|raw }}
         {% else %}
             <div{% with { attr: widget_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
-                <div class="ez-data-source">
+                <div class="ez-data-source"
+                    {% if field_type_descriptions[fieldtype.vars.languageCode] is defined %}
+                        title="{{ field_type_descriptions[fieldtype.vars.languageCode] }}"
+                    {% endif %}
+                >
                     {{- form_widget(form, {'attr': attr}) -}}
                 </div>
             </div>

@@ -9,11 +9,14 @@ namespace EzSystems\EzPlatformAdminUi\Menu\Admin\ContentType;
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Section Edit contextual sidebar menu.
@@ -25,6 +28,19 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
     /* Menu items */
     const ITEM__SAVE = 'content_type_edit__sidebar_right__save';
     const ITEM__CANCEL = 'content_type_edit__sidebar_right__cancel';
+
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    private $translator;
+
+    public function __construct(
+        MenuItemFactory $factory,
+        EventDispatcherInterface $eventDispatcher,
+        TranslatorInterface $translator
+    ) {
+        parent::__construct($factory, $eventDispatcher);
+
+        $this->translator = $translator;
+    }
 
     /**
      * @return string
@@ -58,6 +74,13 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#%s', $contentTypeEditFormView['publishContentType']->vars['id']),
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
+                        'title' => $this->translator->trans(
+/** @Ignore */ self::ITEM__SAVE,
+                            [],
+                            'menu'
+                        ),
                     ],
                     'extras' => ['icon' => 'save'],
                 ]
@@ -68,6 +91,13 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#%s', $contentTypeEditFormView['removeDraft']->vars['id']),
+                        'data-extra-classes' => 'ez-tooltip--medium',
+                        'data-placement' => 'left',
+                        'title' => $this->translator->trans(
+/** @Ignore */ self::ITEM__CANCEL,
+                            [],
+                            'menu'
+                        ),
                     ],
                     'extras' => ['icon' => 'circle-close'],
                 ]

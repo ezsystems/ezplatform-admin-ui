@@ -201,51 +201,6 @@
         <target state="new">Apply</target>
         <note>key: content_type.save</note>
       </trans-unit>
-      <trans-unit id="c625b80940dd9f13842e38446a97391248d0f709" resname="content_type.sort_field.1">
-        <source>Location path</source>
-        <target state="new">Location path</target>
-        <note>key: content_type.sort_field.1</note>
-      </trans-unit>
-      <trans-unit id="4cdfd30bdc30f263b30713d22f714ad46beb120b" resname="content_type.sort_field.2">
-        <source>Publication date</source>
-        <target state="new">Publication date</target>
-        <note>key: content_type.sort_field.2</note>
-      </trans-unit>
-      <trans-unit id="3b367aa1610d6332d66b2113a1b1ed287e0310a6" resname="content_type.sort_field.3">
-        <source>Modification date</source>
-        <target state="new">Modification date</target>
-        <note>key: content_type.sort_field.3</note>
-      </trans-unit>
-      <trans-unit id="f0dba52962ff2fceb7ab0de72427b4deb55ffbbc" resname="content_type.sort_field.4">
-        <source>Section</source>
-        <target state="new">Section</target>
-        <note>key: content_type.sort_field.4</note>
-      </trans-unit>
-      <trans-unit id="08c573b0f90eddd499911819f24a58632ceec79b" resname="content_type.sort_field.5">
-        <source>Location depth</source>
-        <target state="new">Location depth</target>
-        <note>key: content_type.sort_field.5</note>
-      </trans-unit>
-      <trans-unit id="f75919a228809d6de255e3fd535c4eaaf8789241" resname="content_type.sort_field.6">
-        <source>Content Type identifier</source>
-        <target state="new">Content Type identifier</target>
-        <note>key: content_type.sort_field.6</note>
-      </trans-unit>
-      <trans-unit id="f4bd88a45172f3cf7e268c40cfc27b0c5336bc9b" resname="content_type.sort_field.7">
-        <source>Content Type name</source>
-        <target state="new">Content Type name</target>
-        <note>key: content_type.sort_field.7</note>
-      </trans-unit>
-      <trans-unit id="d605ada5b53c58b7d08df3379cdc8c9ffc619a3f" resname="content_type.sort_field.8">
-        <source>Location priority</source>
-        <target state="new">Location priority</target>
-        <note>key: content_type.sort_field.8</note>
-      </trans-unit>
-      <trans-unit id="d24f4fdc1a193e1526c297e5e30b61bdb396b3bb" resname="content_type.sort_field.9">
-        <source>Content name</source>
-        <target state="new">Content name</target>
-        <note>key: content_type.sort_field.9</note>
-      </trans-unit>
       <trans-unit id="da59e6ae77cae375a30d7285970b1b2d9690049e" resname="content_type.sort_field.ascending">
         <source>Ascending</source>
         <target state="new">Ascending</target>
@@ -300,16 +255,6 @@
         <source>Section identifier</source>
         <target state="new">Section identifier</target>
         <note>key: content_type.sort_field.section_identifier</note>
-      </trans-unit>
-      <trans-unit id="18f4f0dcdd6a1f1a9f7a5c301cc378167f403836" resname="content_type.sort_order.0">
-        <source>Descending</source>
-        <target state="new">Descending</target>
-        <note>key: content_type.sort_order.0</note>
-      </trans-unit>
-      <trans-unit id="b411f25ded028ccb2ef56a55d69bd2e3f1da4cd5" resname="content_type.sort_order.1">
-        <source>Ascending</source>
-        <target state="new">Ascending</target>
-        <note>key: content_type.sort_order.1</note>
       </trans-unit>
       <trans-unit id="48d3eb66c0f8928777189eab11eae254866852b2" resname="content_type.update.success">
         <source>Content Type '%name%' updated.</source>

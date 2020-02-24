@@ -19,7 +19,7 @@ class LinkedListTable extends Table
         $this->fields['horizontalHeaders'] = $this->fields['list'] . ' .ez-table-header + .table thead th, .ez-table-header + form thead th';
         $this->fields['listElement'] = $this->fields['list'] . ' .ez-table__cell--has-checkbox+ td.ez-table__cell a';
         $this->fields['checkboxInput'] = ' .form-check-input';
-        $this->fields['assignButton'] = $this->fields['list'] . ' tr:nth-child(%s) a[title*=Assign]';
+        $this->fields['assignButton'] = $this->fields['list'] . ' tr:nth-child(%s) a[data-original-title*=Assign]';
     }
 
     public function getTableCellValue(string $header, ?string $secondHeader = null): string
