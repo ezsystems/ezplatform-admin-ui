@@ -3,6 +3,8 @@ const IS_LINKED_CLASS = 'is-linked';
 const SHOW_EDIT_LINK_TOOLBAR_ATTR = 'data-show-edit-link-toolbar';
 const DATA_ALIGNMENT_ATTR = 'ezalign';
 const ENTER_KEY_CODE = 13;
+const MAX_ACTIVE_CONTENT_LOAD_REQUESTS = 20;
+let activeContentLoadRequestsCount = 0;
 
 const embedBaseDefinition = {
     defaults: {
@@ -107,6 +109,12 @@ const embedBaseDefinition = {
             return;
         }
 
+        if (activeContentLoadRequestsCount >= MAX_ACTIVE_CONTENT_LOAD_REQUESTS) {
+            setTimeout(this.initEditMode.bind(this), 1000);
+            return;
+        }
+
+        activeContentLoadRequestsCount++;
         this.loadContent(contentId);
     },
 
@@ -147,6 +155,10 @@ const embedBaseDefinition = {
         });
 
         fetch(request)
+            .then((response) => {
+                activeContentLoadRequestsCount--;
+                return response;
+            })
             .then((response) => response.json())
             .then(this.handleContentLoaded.bind(this))
             .catch((error) => window.eZ.helpers.notification.showErrorNotification(error));
