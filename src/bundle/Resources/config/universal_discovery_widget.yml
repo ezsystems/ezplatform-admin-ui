@@ -37,6 +37,7 @@ system:
                     multiple: false
                 richtext_embed_image:
                     multiple: false
+                    allowed_content_types: ['image']
                     content_on_the_fly:
                         allowed_content_types: ['image']
                 image_asset:
