@@ -20,7 +20,7 @@ use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 
-class PagerContentToDataMapperAbstract
+class AbstractPagerContentToDataMapper
 {
     /** @var \eZ\Publish\Core\Helper\TranslationHelper */
     protected $translationHelper;

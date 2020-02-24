@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Search;
 
 use Pagerfanta\Pagerfanta;
 
-class PagerContentToDataMapper extends PagerContentToDataMapperAbstract
+class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
 {
     /**
      * @param Pagerfanta $pager

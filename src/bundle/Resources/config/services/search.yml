@@ -1,0 +1,15 @@
+services:
+  EzSystems\EzPlatformAdminUi\Search\AbstractPagerContentToDataMapper:
+    abstract: true
+    autowire: true
+    public: false
+
+  EzSystems\EzPlatformAdminUi\Search\PagerContentToDataMapper:
+    parent: EzSystems\EzPlatformAdminUi\Search\AbstractPagerContentToDataMapper
+    autowire: true
+    public: false
+
+  EzSystems\EzPlatformAdminUi\Search\PagerSearchContentToDataMapper:
+    parent: EzSystems\EzPlatformAdminUi\Search\AbstractPagerContentToDataMapper
+    autowire: true
+    public: false

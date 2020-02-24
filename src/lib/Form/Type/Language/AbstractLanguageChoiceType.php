@@ -13,7 +13,7 @@ use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-abstract class LanguageChoiceTypeAbstract extends AbstractType
+abstract class AbstractLanguageChoiceType extends AbstractType
 {
     /** @var \Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface */
     private $languageChoiceLoader;

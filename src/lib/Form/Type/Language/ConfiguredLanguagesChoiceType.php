@@ -13,7 +13,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesC
 /**
  * Form Type allowing to select from all configured (also not enabled) Languages.
  */
-class ConfiguredLanguagesChoiceType extends LanguageChoiceTypeAbstract
+class ConfiguredLanguagesChoiceType extends AbstractLanguageChoiceType
 {
     /**
      * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesChoiceLoader $languageChoiceLoader

@@ -15,7 +15,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader
  *
  * @todo: This can replace LanguageType in the future but it'd require some changes in the frontend as well.
  */
-class LanguageChoiceType extends LanguageChoiceTypeAbstract
+class LanguageChoiceType extends AbstractLanguageChoiceType
 {
     /**
      * @param \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader $languageChoiceLoader
