@@ -1,7 +1,7 @@
 {% macro edit_content_button(content, title) %}
     {% include '@ezdesign/parts/edit_translation_button.html.twig' with {
         'contentId': content.contentId,
-        'translations': content.available_translations,
+        'translations': content.available_enabled_translations,
         'title': title
     }%}
 {% endmacro %}

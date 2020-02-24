@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use eZ\Publish\Core\QueryType\QueryType;
+use EzSystems\EzPlatformAdminUi\Search\PagerContentToDataMapper;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use Pagerfanta\Pagerfanta;
@@ -19,7 +20,7 @@ use Twig\Environment;
 
 class EveryoneContentTab extends AbstractTab implements OrderedTabInterface
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Search\PagerContentToDataMapper */
     protected $pagerContentToDataMapper;
 
     /** @var \eZ\Publish\API\Repository\SearchService */
@@ -31,7 +32,7 @@ class EveryoneContentTab extends AbstractTab implements OrderedTabInterface
     /**
      * @param \Twig\Environment $twig
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper $pagerContentToDataMapper
+     * @param \EzSystems\EzPlatformAdminUi\Search\PagerContentToDataMapper $pagerContentToDataMapper
      * @param \eZ\Publish\API\Repository\SearchService $searchService
      * @param \eZ\Publish\Core\QueryType\QueryType $contentSubtreeQueryType
      */
