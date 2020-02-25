@@ -6,16 +6,6 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="7fe072f41348fb097b6bb018eec4f1b1bc9cffc3" resname="modal.cancel">
-        <source>Cancel</source>
-        <target state="new">Cancel</target>
-        <note>key: modal.cancel</note>
-      </trans-unit>
-      <trans-unit id="ef88894d37b21eeb205ece403d77ab05ccea52cf" resname="modal.select">
-        <source>Select</source>
-        <target state="new">Select</target>
-        <note>key: modal.select</note>
-      </trans-unit>
       <trans-unit id="3559d7accf00360971961ca18989adc0614089c0" resname="search">
         <source>Search</source>
         <target state="new">Search</target>
@@ -61,20 +51,10 @@
         <target state="new">Custom range</target>
         <note>key: search.custom_range</note>
       </trans-unit>
-      <trans-unit id="9cef4cf2cb67458460a2a01c0adc1b4238320459" resname="search.date.from">
-        <source>From:</source>
-        <target state="new">From:</target>
-        <note>key: search.date.from</note>
-      </trans-unit>
       <trans-unit id="f32993c555744e5c203137f3ee0e380d27e9cfef" resname="search.date.range">
-        <source>Select date range</source>
-        <target state="new">Select date range</target>
+        <source>From date - to date</source>
+        <target state="new">From date - to date</target>
         <note>key: search.date.range</note>
-      </trans-unit>
-      <trans-unit id="ec2194ad5a5851c9bb326a091c6985adedcd42b2" resname="search.date.to">
-        <source>To:</source>
-        <target state="new">To:</target>
-        <note>key: search.date.to</note>
       </trans-unit>
       <trans-unit id="bf24ae2c9083c948931ad1b4d4405b6261eb9bc6" resname="search.filters">
         <source>Filters</source>

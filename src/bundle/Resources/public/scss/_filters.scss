@@ -133,4 +133,24 @@
         padding: calculateRem(8px) calculateRem(16px);
         cursor: pointer;
     }
+
+    &__range-wrapper {
+        height: 0;
+        opacity: 0;
+        margin-top: calculateRem(8px);
+        background: $ez-white;
+        border: calculateRem(1px) solid $ez-ground-base-medium;
+        border-radius: calculateRem(4px);
+        transition: all 0.2s ease-in;
+    
+        &--visible {
+            height: calculateRem(40px);
+            opacity: 1;
+        }
+    }
+
+    &__range-select {
+        border: none;
+        outline: none;
+    }
 }
