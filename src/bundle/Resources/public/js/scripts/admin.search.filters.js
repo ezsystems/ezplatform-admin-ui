@@ -28,7 +28,11 @@
         locale: {
             rangeSeparator: ' - ',
         },
+<<<<<<< HEAD
         formatDate: (date) => eZ.helpers.timezone.formatShortDateTime(date, null, eZ.adminUiConfig.dateFormat.shortDate),
+=======
+        formatDate: (date) => eZ.helpers.timezone.formatShortDateTime(date, null),
+>>>>>>> EZP-29948: Improved date range select for search screen
     };
     const clearFilters = (event) => {
         event.preventDefault();
@@ -156,6 +160,7 @@
     };
     const setSelectedDateRange = (selectedDates, dateString, instance) => {
         const dateRange = instance.input.closest('.ez-filters__range-wrapper');
+<<<<<<< HEAD
 
         if (selectedDates.length === 2) {
             const startDate = getUnixTimestampUTC(selectedDates[0]);
@@ -163,6 +168,15 @@
             const secondsInDay = 86400;
             const days = (endDate - startDate) / secondsInDay;
 
+=======
+
+        if (selectedDates.length === 2) {
+            const startDate = getUnixTimestampUTC(selectedDates[0]);
+            const endDate = getUnixTimestampUTC(selectedDates[1]);
+            const secondsInDay = 86400;
+            const days = (endDate - startDate) / secondsInDay;
+
+>>>>>>> EZP-29948: Improved date range select for search screen
             doc.querySelector(dateRange.dataset.periodSelector).value = `P0Y0M${days}D`;
             doc.querySelector(dateRange.dataset.endSelector).value = endDate;
         }
