@@ -56,7 +56,7 @@ class SearchController extends Controller
 
     /**
      * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param \EzSystems\EzPlatformAdminUi\Search\PagerContentToDataMapper $pagerSearchContentToDataMapper
+     * @param \EzSystems\EzPlatformAdminUi\Search\PagerSearchContentToDataMapper $pagerSearchContentToDataMapper
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
