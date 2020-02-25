@@ -61,9 +61,7 @@ class UserPasswordValidator extends ConstraintValidator
             throw new ConstraintDefinitionException('The User object must implement the UserReference interface.');
         }
 
-        try {
-            $this->userService->loadUserByCredentials($user->login, $password);
-        } catch (NotFoundException | InvalidArgumentException $e) {
+        if (!$this->userService->checkUserCredentials($user, $password)) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }
