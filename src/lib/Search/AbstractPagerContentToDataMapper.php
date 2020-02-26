@@ -22,9 +22,6 @@ use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 
 abstract class AbstractPagerContentToDataMapper
 {
-    /** @var \eZ\Publish\Core\Helper\TranslationHelper */
-    protected $translationHelper;
-
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
@@ -33,6 +30,9 @@ abstract class AbstractPagerContentToDataMapper
 
     /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
     private $userLanguagePreferenceProvider;
+
+    /** @var \eZ\Publish\Core\Helper\TranslationHelper */
+    protected $translationHelper;
 
     /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
@@ -45,10 +45,10 @@ abstract class AbstractPagerContentToDataMapper
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
      */
     public function __construct(
-        TranslationHelper $translationHelper,
         ContentTypeService $contentTypeService,
         UserService $userService,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
+        TranslationHelper $translationHelper,
         LanguageService $languageService
     ) {
         $this->contentTypeService = $contentTypeService;

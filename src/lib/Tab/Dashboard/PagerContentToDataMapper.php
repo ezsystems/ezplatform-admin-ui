@@ -8,11 +8,55 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
+use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\Core\Helper\TranslationHelper;
+use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\Search\AbstractPagerContentToDataMapper;
 use Pagerfanta\Pagerfanta;
 
 class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
 {
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    protected $contentService;
+
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    protected $contentTypeService;
+
+    /** @var \eZ\Publish\API\Repository\UserService */
+    protected $userService;
+
+    /**
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
+     * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
+     */
+    public function __construct(
+        ContentService $contentService,
+        ContentTypeService $contentTypeService,
+        UserService $userService,
+        UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
+        TranslationHelper $translationHelper,
+        LanguageService $languageService
+    ) {
+        $this->contentService = $contentService;
+        $this->contentTypeService = $contentTypeService;
+        $this->userService = $userService;
+
+        parent::__construct(
+            $contentTypeService,
+            $userService,
+            $userLanguagePreferenceProvider,
+            $translationHelper,
+            $languageService
+        );
+    }
+
     /**
      * @param \Pagerfanta\Pagerfanta $pager
      *
