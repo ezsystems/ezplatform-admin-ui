@@ -18,7 +18,7 @@ class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
     /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
-    /** @var ConfigResolverInterface */
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     /**
