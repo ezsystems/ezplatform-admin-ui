@@ -3,6 +3,10 @@ import AlloyEditor from 'alloyeditor';
 import EzButtonDropdown from './ez-btn-dropdown';
 
 export default class EzButtonStylesList extends AlloyEditor.ButtonStylesList {
+    static get key() {
+        return 'ezbtnstyleslist';
+    }
+
     /**
      * Lifecycle. Renders the UI of the list.
      *
@@ -35,9 +39,5 @@ export default class EzButtonStylesList extends AlloyEditor.ButtonStylesList {
     }
 }
 
-AlloyEditor.ButtonStylesList = AlloyEditor.EzButtonStylesList = EzButtonStylesList;
-
-const eZ = (window.eZ = window.eZ || {});
-
-eZ.ezAlloyEditor = eZ.ezAlloyEditor || {};
-eZ.ezAlloyEditor.EzButtonStylesList = EzButtonStylesList;
+AlloyEditor.Buttons[EzButtonStylesList.key] = AlloyEditor.ButtonStylesList = EzButtonStylesList;
+eZ.addConfig('ezAlloyEditor.ezButtonStylesList', EzButtonStylesList);

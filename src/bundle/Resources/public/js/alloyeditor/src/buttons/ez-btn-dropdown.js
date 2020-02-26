@@ -1,7 +1,12 @@
 import React from 'react';
 import AlloyEditor from 'alloyeditor';
+import EzBtnImage from "./ez-btn-image";
 
 export default class EzBtnDropdown extends AlloyEditor.ButtonDropdown {
+    static get key() {
+        return 'ezbtndropdown';
+    }
+
     /**
      * Lifecycle. Renders the UI of the button.
      *
@@ -21,7 +26,5 @@ export default class EzBtnDropdown extends AlloyEditor.ButtonDropdown {
     }
 }
 
-const eZ = (window.eZ = window.eZ || {});
-
-eZ.ezAlloyEditor = eZ.ezAlloyEditor || {};
-eZ.ezAlloyEditor.EzBtnDropdown = EzBtnDropdown;
+AlloyEditor.Buttons[EzBtnDropdown.key] = AlloyEditor.EzBtnDropdown = EzBtnDropdown;
+eZ.addConfig('ezAlloyEditor.ezBtnDropdown', EzBtnDropdown);
