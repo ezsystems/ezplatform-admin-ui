@@ -57,8 +57,9 @@ class MenuItemFactory implements FactoryInterface
         }
 
         $defaults = [
-            'route' => '_ezpublishLocation',
+            'route' => '_ez_content_view',
             'routeParameters' => [
+                'contentId' => $contentInfo->id,
                 'locationId' => $locationId,
             ],
         ];

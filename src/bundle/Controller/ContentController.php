@@ -244,7 +244,8 @@ class ContentController extends Controller
         $contentInfo = $data->getContentInfo();
 
         if (null !== $contentInfo) {
-            return $this->redirectToRoute('_ezpublishLocation', [
+            return $this->redirectToRoute('_ez_content_view', [
+                'contentId' => $contentInfo->id,
                 'locationId' => $contentInfo->mainLocationId,
             ]);
         }
@@ -284,7 +285,8 @@ class ContentController extends Controller
                     'content'
                 );
 
-                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                return new RedirectResponse($this->generateUrl('_ez_content_view', [
+                    'contentId' => $contentInfo->id,
                     'locationId' => $contentInfo->mainLocationId,
                     '_fragment' => 'ez-tab-location-view-locations',
                 ]));
@@ -300,7 +302,8 @@ class ContentController extends Controller
         $contentInfo = $data->getContentInfo();
 
         if (null !== $contentInfo) {
-            return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+            return new RedirectResponse($this->generateUrl('_ez_content_view', [
+                'contentId' => $contentInfo->id,
                 'locationId' => $contentInfo->mainLocationId,
                 '_fragment' => 'ez-tab-location-view-locations',
             ]));
@@ -381,7 +384,8 @@ class ContentController extends Controller
                     'content'
                 );
 
-                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                return new RedirectResponse($this->generateUrl('_ez_content_view', [
+                    'contentId' => $contentInfo->id,
                     'locationId' => $contentInfo->mainLocationId,
                     '_fragment' => 'ez-tab-location-view-translations',
                 ]));
@@ -394,7 +398,8 @@ class ContentController extends Controller
         $data = $form->getData();
         $contentInfo = $data->getContentInfo();
         if (null !== $contentInfo) {
-            return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+            return new RedirectResponse($this->generateUrl('_ez_content_view', [
+                'contentId' => $contentInfo->id,
                 'locationId' => $contentInfo->mainLocationId,
                 '_fragment' => 'ez-tab-location-view-translations',
             ]));

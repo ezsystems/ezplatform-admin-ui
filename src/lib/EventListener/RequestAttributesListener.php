@@ -23,6 +23,8 @@ use eZ\Publish\API\Repository\Repository;
  */
 class RequestAttributesListener implements EventSubscriberInterface
 {
+    private const CONTENT_VIEW_ROUTE_NAME = '_ez_content_view';
+
     /** @var Repository */
     private $repository;
 
@@ -86,7 +88,7 @@ class RequestAttributesListener implements EventSubscriberInterface
      */
     private function hasContentLanguage(Request $request, ParameterBag $parameterBag): bool
     {
-        return $parameterBag->has('languageCode') && $parameterBag->has('location') && $request->get('_route') === '_ezpublishLocation';
+        return $parameterBag->has('languageCode') && $parameterBag->has('location') && $request->get('_route') === self::CONTENT_VIEW_ROUTE_NAME;
     }
 
     /**

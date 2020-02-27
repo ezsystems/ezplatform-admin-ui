@@ -91,7 +91,8 @@ class UserDeleteController extends Controller
                     'content'
                 );
 
-                return new RedirectResponse($this->generateUrl('_ezpublishLocation', [
+                return new RedirectResponse($this->generateUrl('_ez_content_view', [
+                    'contentId' => $location->contentId,
                     'locationId' => $location->parentLocationId,
                 ]));
             });

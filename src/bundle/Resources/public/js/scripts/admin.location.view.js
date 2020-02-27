@@ -87,7 +87,7 @@
             })
             .catch(eZ.helpers.notification.showErrorNotification);
     };
-    const generateLink = (locationId) => Routing.generate('_ezpublishLocation', { locationId });
+    const generateLink = (locationId, contentId) => Routing.generate('_ez_content_view', { contentId, locationId });
     const setModalTableTitle = (title) => {
         const modalTableTitleNode = doc.querySelector(`${SELECTOR_MODAL_BULK_ACTION_FAIL} .ez-table-header__headline`);
 

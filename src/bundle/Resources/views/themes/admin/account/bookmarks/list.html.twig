@@ -55,8 +55,8 @@
                                             <use xlink:href="{{ ez_content_type_icon(bookmark.contentType.identifier) }}"></use>
                                         </svg>
                                     </td>
-                                    <td class="ez-table__cell ez-table__cell--name ez-table__cell--after-icon">
-                                        <a href="{{ path('_ezpublishLocation', { 'locationId': bookmark.id }) }}" title="{{ content_name }}">
+                                    <td class="ez-table__cell ez-table__cell--after-icon">
+                                        <a href="{{ path('_ez_content_view', { 'contentId': bookmark.contentInfo.id, 'locationId': bookmark.id }) }}">
                                             {{ content_name }}
                                         </a>
                                     </td>
@@ -65,7 +65,7 @@
                                         {% if bookmark.pathLocations|length > 1 %}
                                             {% for location in bookmark.pathLocations %}
                                                 {% if loop.revindex > 1 %}
-                                                    <a href="{{ path('_ezpublishLocation', {'locationId': location.id}) }}">
+                                                    <a href="{{ path('_ez_content_view', { 'contentId': location.contentId, 'locationId': location.id}) }}">
                                                         {{ ez_content_name(location.contentInfo) }}
                                                     </a>
                                                     {% if loop.revindex > 2 %}/{% endif %}

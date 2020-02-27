@@ -17,7 +17,7 @@
                 {% set source = relation.sourceContentInfo %}
                 <tr>
                     <td>
-                        <a href="{{ path('_ezpublishLocation', { 'locationId': source.mainLocationId }) }}">
+                        <a href="{{ path('_ez_content_view', { 'contentId': source.id, 'locationId': source.mainLocationId }) }}">
                             {{ ez_content_name(source) }}
                         </a>
                     </td>

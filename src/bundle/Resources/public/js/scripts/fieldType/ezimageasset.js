@@ -120,7 +120,8 @@
             const previewAlt = preview.querySelector('.ez-field-edit-preview__image-alt input');
             const previewActionPreview = preview.querySelector('.ez-field-edit-preview__action--preview');
             const assetNameContainer = preview.querySelector('.ez-field-edit-preview__asset-name a');
-            const destinationLocationUrl = Routing.generate('_ezpublishLocation', {
+            const destinationLocationUrl = Routing.generate('_ez_content_view', {
+                contentId: destinationContentId,
                 locationId: destinationLocationId,
             });
 
