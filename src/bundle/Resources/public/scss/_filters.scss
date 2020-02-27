@@ -55,8 +55,8 @@
 
                 &:disabled {
                     cursor: auto;
-                    background-color: $ez-color-base-dark;
-                    color: $ez-white;
+                    background-color: $ez-color-base-pale;
+                    color: $ez-black;
                     padding-right: calculateRem(32px);
                     text-overflow: ellipsis;
 
