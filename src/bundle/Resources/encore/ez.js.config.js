@@ -169,8 +169,10 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-search-js', [
             path.resolve(__dirname, '../public/js/scripts/button.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.search.filters.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.search.js'),
             path.resolve(__dirname, '../public/js/scripts/udw/select.location.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.content.tree.js'),
+            path.resolve(__dirname, '../public/js/scripts/button.translation.edit.js'),
         ])
         .addEntry('ezplatform-admin-ui-section-list-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.section.list.js'),
@@ -212,9 +214,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.location.bookmark.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.main.translation.update.js'),
         ])
-        .addEntry('ezplatform-admin-ui-modal-location-trash-js', [
-            path.resolve(__dirname, '../public/js/scripts/admin.trash.js'),
-        ])
+        .addEntry('ezplatform-admin-ui-modal-location-trash-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.js')])
         .addEntry('ezplatform-admin-ui-modal-location-trash-container-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.checkbox.toggle.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.trash.container.js'),
@@ -227,6 +227,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/cotf/create.js'),
             path.resolve(__dirname, '../public/js/scripts/button.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),
+            path.resolve(__dirname, '../public/js/scripts/button.translation.edit.js'),
         ])
         .addEntry('ezplatform-admin-ui-link-manager-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.linkmanager.list.js')])
         .addEntry('ezplatform-admin-ui-link-manager-view-js', [path.resolve(__dirname, '../public/js/scripts/button.content.edit.js')])

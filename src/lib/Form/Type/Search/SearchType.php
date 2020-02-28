@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Search;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\ConfiguredLanguagesChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
@@ -64,6 +65,16 @@ class SearchType extends AbstractType
                 'placeholder' => /** @Desc("Any time") */ 'search.any_time',
                 'mapped' => false,
             ])
+            ->add(
+                'search_language',
+                ConfiguredLanguagesChoiceType::class,
+                [
+                    'required' => false,
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => false,
+                ]
+            )
             ->add('subtree', HiddenType::class, [
                 'required' => false,
             ])
