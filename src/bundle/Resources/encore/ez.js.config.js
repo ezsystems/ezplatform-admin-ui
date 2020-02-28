@@ -55,11 +55,11 @@ module.exports = (Encore) => {
         ])
         .addEntry('ezplatform-admin-ui-content-type-create-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.selection.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.contenttype.fieldtype.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-edit-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.selection.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.contenttype.fieldtype.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.relation.default.location.js'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-list-js', [path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js')])

@@ -3,7 +3,7 @@
     const toggleFieldTypeView = (event) => {
         event.preventDefault();
 
-        event.currentTarget.closest('.ez-card--fieldtype-container').classList.toggle('ez-card--collapsed');
+        event.currentTarget.closest('.ez-card--toggle-group').classList.toggle('ez-card--collapsed');
     };
 
     togglers.forEach((btn) => btn.addEventListener('click', toggleFieldTypeView, false));
