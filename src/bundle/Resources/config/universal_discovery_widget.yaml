@@ -14,7 +14,8 @@ system:
                     active_sort_order: 'ascending'
                     active_tab: 'browse'
                     active_view: 'finder'
-                    allow_content_edit: false
+                    allow_redirects: false
+                    allow_confirmation: true
                     content_on_the_fly:
                         allowed_languages: null
                         allowed_locations: null
@@ -44,7 +45,8 @@ system:
                             hidden: true
                     multiple: false
                 browse:
-                    allow_content_edit: true
+                    allow_redirects: true
+                    allow_confirmation: false
                 single:
                     multiple: false
                 multiple:
