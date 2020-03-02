@@ -88,11 +88,16 @@
          * @param {Object} response
          */
         loadAsset(response) {
-            const imageField = response.CurrentVersion.Version.Fields.field.find((field) => {
+            const imageField = response.ContentInfo.Content.CurrentVersion.Version.Fields.field.find((field) => {
                 return field.fieldDefinitionIdentifier === imageAssetMapping['contentFieldIdentifier'];
             });
 
-            this.updateData(response.ContentInfo.Content._id, response.ContentInfo.Content.TranslatedName, response.id, imageField.fieldValue);
+            this.updateData(
+                response.ContentInfo.Content._id,
+                response.ContentInfo.Content.TranslatedName,
+                response.id,
+                imageField.fieldValue
+            );
         }
 
         /**
