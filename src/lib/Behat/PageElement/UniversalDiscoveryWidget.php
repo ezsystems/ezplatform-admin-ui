@@ -34,6 +34,8 @@ class UniversalDiscoveryWidget extends Element
             'treeLevelSelectedFormat' => '.c-finder-branch:nth-of-type(%d) .c-finder-leaf--marked',
             // selectors for multiitem selection
             'multiSelectAddButon' => '.c-toggle-selection-button',
+            // itemActions
+            'previewButton' => '.c-content-meta-preview__preview-button',
         ];
         // selectors for multiitem selection
         $this->fields['currentlySelectedItemAddedFormat'] = sprintf('%s %s.c-toggle-selection-button--selected', $this->fields['treeLevelSelectedFormat'], $this->fields['multiSelectAddButon']);
@@ -150,6 +152,11 @@ class UniversalDiscoveryWidget extends Element
                 return !$this->isNextLevelDisplayed($level) || $this->getItemsFromLevel($level + 1) !== $currentItems;
             });
         }
+    }
+
+    public function openPreview(): void
+    {
+        $this->context->findElement($this->fields['previewButton'])->click();
     }
 
     protected function getItemsFromLevel(int $level): array

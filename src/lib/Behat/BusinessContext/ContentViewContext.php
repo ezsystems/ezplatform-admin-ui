@@ -72,7 +72,7 @@ class ContentViewContext extends BusinessContext
         $udw = ElementFactory::createElement($this->browserContext, UniversalDiscoveryWidget::ELEMENT_NAME);
         $udw->verifyVisibility();
         $udw->selectContent($this->argumentParser->replaceRootKeyword($itemPath));
-        $udw->confirm();
+        $udw->openPreview();
     }
 
     /**
