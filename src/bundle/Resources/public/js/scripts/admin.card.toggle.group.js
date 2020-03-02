@@ -5,6 +5,9 @@
 
         event.currentTarget.closest('.ez-card--toggle-group').classList.toggle('ez-card--collapsed');
     };
+    const attachToggleField = (btn) => btn.addEventListener('click', toggleFieldTypeView);
 
-    togglers.forEach((btn) => btn.addEventListener('click', toggleFieldTypeView, false));
+    togglers.forEach((btn) => attachToggleField(btn));
+
+    doc.body.addEventListener('initialize-card-toggle-group', (event) => attachToggleField(event.detail.button));
 })(window, window.document);
