@@ -69,7 +69,7 @@
                 {% for field_definition in form.fieldDefinitionsData %}
                     {% set value = field_definition.vars.value %}
 
-                    <div class="card ez-card ez-card--fieldtype-container mb-3 ez-card--collapsed">
+                    <div class="card ez-card ez-card--toggle-group mb-3 ez-card--collapsed">
                         <div id="field-definition-{{ value.identifier }}" class="ez-card__header ez-card__header--secondary">
                             {{ form_widget(field_definition.selected, {
                                 'label': '%s (%s)' | format(value.names[language_code], value.fieldTypeIdentifier),
