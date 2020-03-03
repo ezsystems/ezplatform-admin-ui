@@ -2,6 +2,8 @@
     let getUsersTimeout;
     const CLASS_DATE_RANGE = 'ez-filters__range-wrapper';
     const CLASS_VISIBLE_DATE_RANGE = 'ez-filters__range-wrapper--visible';
+    const SEARCH_TAG_SELECTOR = '.ez-tag';
+    const CLEAR_BTN_SELECTOR = '.ez-tag__remove-btn';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const filterBtn = doc.querySelector('.ez-btn--filter');
@@ -34,6 +36,10 @@
         formatDate: (date) => eZ.helpers.timezone.formatShortDateTime(date, null),
 >>>>>>> EZP-29948: Improved date range select for search screen
     };
+    const clearContentTypesBtns = doc.querySelectorAll('.ez-tag__remove-btn--content-types');
+    const clearSectionBtn = doc.querySelector('.ez-tag__remove-btn--section');
+    const clearSubtreeBtn = doc.querySelector('.ez-tag__remove-btn--subtree');
+    const clearLastModifiedBtn = doc.querySelector('.ez-tag__remove-btn--last-modified');
     const clearFilters = (event) => {
         event.preventDefault();
 
@@ -288,6 +294,32 @@
             defaultDate,
         });
     };
+    const removeSearchTag = (event) => {
+        const btn = event.target.closest(CLEAR_BTN_SELECTOR);
+        const tag = btn.closest(SEARCH_TAG_SELECTOR);
+
+        tag.remove();
+    };
+    const clearContentType = (event) => {
+        const checkbox = doc.querySelector(`#${btn.dataset.reletedFiledId}`);
+
+        checkbox.checked = false;
+        removeSearchTag(event);
+    };
+    const clearSection = (event) => {
+        sectionSelect[0].selected = true;
+        removeSearchTag(event);
+    };
+    const clearSubtree = (event) => {
+        subtreeInput.value = '';
+
+        removeSearchTag(event);
+    };
+    const clearLastModified = (event) => {
+        lastModifiedSelect[0].selected = true;
+        removeSearchTag(event);
+    };
+    dateFields.forEach(initFlatPickr);
 
     dateFields.forEach(initFlatPickr);
     filterByContentType();
@@ -308,4 +340,9 @@
     resetCreatorBtn.addEventListener('click', handleResetUser, false);
     listGroupsTitle.forEach((group) => group.addEventListener('click', toggleGroupState, false));
     contentTypeCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', filterByContentType, false));
+    selectBtns.forEach((btn) => btn.addEventListener('click', setSelectedDateRange, false));
+    if (clearContentTypesBtns) clearContentTypesBtns.forEach((btn) => btn.addEventListener('click', clearContentType, false));
+    if (clearSectionBtn) clearSectionBtn.addEventListener('click', clearSection, false);
+    if (clearSubtreeBtn) clearSubtreeBtn.addEventListener('click', clearSubtree, false);
+    if (clearLastModifiedBtn) clearLastModifiedBtn.addEventListener('click', clearLastModified, false);
 })(window, window.document, window.eZ, window.jQuery, window.flatpickr);

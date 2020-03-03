@@ -1,0 +1,20 @@
+{% set btnClass = btnClass|default('') %}
+{% set content = content|default('') %}
+{% set reletedFiledId = reletedFiledId|default('') %}
+{% set title = title|default('') %}
+
+
+<div class="ez-tag" {% if title %} title="{{ title }} {% endif %}">
+    <div class="ez-tag__content">
+        {{ content }}
+    </div>
+    <button 
+        type="button" 
+        class="ez-tag__remove-btn {{ btnClass }}"
+        data-releted-filed-id="{{ reletedFiledId }}"
+    >
+        <svg class="ez-icon ez-icon--medium ez-icon--dark">
+            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#circle-close"></use>
+        </svg>
+    </button>
+</div>
