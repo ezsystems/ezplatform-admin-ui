@@ -23,28 +23,23 @@
     </span>
 </div>
 
-<div class="ez-search-criteria-tags">
+<div class="ez-search-criteria-tags ml-4 {% if filters_expanded %} ez-search-criteria-tags--collapsed{% endif %}">
     {% if form.content_types.vars.data is not empty %}
         {% for contentType in form.content_types.vars.data %}
-            {% set title = "#{'search.content.type'|trans|desc('Content Type:')} #{contentType.name}" %}
-            {% set reletedFiledId = "search_content_types_#{contentType.identifier}" %}
-
             {{ include('@ezdesign/ui/search_tag.html.twig', {
                 'content': contentType.name,
-                'title': title,
-                'reletedFiledId': reletedFiledId,
-                'btnClass': 'ez-tag__remove-btn--content-types'
+                'title': "#{'search.content.type'|trans|desc('Content Type:')} #{contentType.name}",
+                'reletedFiledId': "search_content_types_#{contentType.identifier}",
+                'btnClass': "ez-tag__remove-btn--content-types",
             }) }}
         {% endfor %}
     {% endif %}
 
     {% if form.section.vars.data is not empty %}
-        {% set title = "#{'search.section'|trans|desc('Section:')} #{form.section.vars.data.name}" %}
-
         {{ include('@ezdesign/ui/search_tag.html.twig', {
             'content': form.section.vars.data.name,
-            'title': title,
-            'btnClass': 'ez-tag__remove-btn--section'
+            'title': "#{'search.section'|trans|desc('Section:')} #{form.section.vars.data.name}",
+            'btnClass': "ez-tag__remove-btn--section",
         }) }} 
     {% endif %}
 
@@ -58,25 +53,39 @@
                 {% endif %}
             {% endfor %}
         {% endif %}
-        {% set title = "#{'search.subtree'|trans|desc('Subtree:')} #{content_breadcrumbs}" %}
 
         {{ include('@ezdesign/ui/search_tag.html.twig', {
             'content': content_breadcrumbs,
-            'title': title,
-            'btnClass': 'ez-tag__remove-btn--subtree'
+            'title':  "#{'search.subtree'|trans|desc('Subtree:')} #{content_breadcrumbs}",
+            'btnClass': "ez-tag__remove-btn--subtree",
         }) }}
     {% endif %}
-
-    {{ dump(form) }}
 
     {% if form.vars.value.lastModified is not empty %}
         {% set startDate = form.vars.value.lastModified.start_date|ez_short_datetime %}
         {% set endDate = form.vars.value.lastModified.end_date|ez_short_datetime %}
-        {% set content = "#{'search.last.modified'|trans|desc('Last modified:')} #{startDate} - #{endDate}" %}
 
         {{ include('@ezdesign/ui/search_tag.html.twig', {
-            'content': content,
-            'btnClass': 'ez-tag__remove-btn--last-modified'
+            'content': "#{'search.last.modified'|trans|desc('Last modified:')} #{startDate} - #{endDate}",
+            'btnClass': "ez-tag__remove-btn--last-modified",
+        }) }}
+    {% endif %}
+
+    {% if form.vars.value.created is not empty %}
+        {% set startDate = form.vars.value.created.start_date|ez_short_datetime %}
+        {% set endDate = form.vars.value.created.end_date|ez_short_datetime %}
+
+        {{ include('@ezdesign/ui/search_tag.html.twig', {
+            'content': "#{'search.created'|trans|desc('Created:')} #{startDate} - #{endDate}",
+            'btnClass': "ez-tag__remove-btn--last-created",
+        }) }}
+    {% endif %}
+
+    {% if form.creator.vars.data is not empty %}
+        {{ include('@ezdesign/ui/search_tag.html.twig', {
+            'content': form.creator.vars.data.name,
+            'title': "#{'search.creator'|trans|desc('Creator:')} #{form.creator.vars.data.name}",
+            'btnClass': "ez-tag__remove-btn--creator",
         }) }}
     {% endif %}
 </div>

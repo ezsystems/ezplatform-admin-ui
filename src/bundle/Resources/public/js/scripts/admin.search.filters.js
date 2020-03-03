@@ -8,6 +8,7 @@
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const filterBtn = doc.querySelector('.ez-btn--filter');
     const filters = doc.querySelector('.ez-filters');
+    const searchCriteriaTags = doc.querySelector('.ez-search-criteria-tags');
     const clearBtn = filters.querySelector('.ez-btn-clear');
     const applyBtn = filters.querySelector('.ez-btn-apply');
     const dateFields = doc.querySelectorAll('.ez-filters__range-select');
@@ -40,6 +41,8 @@
     const clearSectionBtn = doc.querySelector('.ez-tag__remove-btn--section');
     const clearSubtreeBtn = doc.querySelector('.ez-tag__remove-btn--subtree');
     const clearLastModifiedBtn = doc.querySelector('.ez-tag__remove-btn--last-modified');
+    const clearLastCreatedBtn = doc.querySelector('.ez-tag__remove-btn--last-created');
+    const clearCreatorBtn = doc.querySelector('.ez-tag__remove-btn--creator');
     const clearFilters = (event) => {
         event.preventDefault();
 
@@ -116,6 +119,7 @@
         event.preventDefault();
 
         filters.classList.toggle('ez-filters--collapsed');
+        searchCriteriaTags.classList.toggle('ez-search-criteria-tags--collapsed');
     };
     const handleClickOutside = (event) => {
         if (event.target.closest('.ez-content-type-selector') || event.target.closest('.ez-filters__select--content-type')) {
@@ -298,10 +302,12 @@
         const btn = event.target.closest(CLEAR_BTN_SELECTOR);
         const tag = btn.closest(SEARCH_TAG_SELECTOR);
 
+        eZ.helpers.tooltips.hideAll();
+        event.target.closest('form').submit();
         tag.remove();
     };
     const clearContentType = (event) => {
-        const checkbox = doc.querySelector(`#${btn.dataset.reletedFiledId}`);
+        const checkbox = doc.querySelector(`#${event.target.closest(CLEAR_BTN_SELECTOR).dataset.reletedFiledId}`);
 
         checkbox.checked = false;
         removeSearchTag(event);
@@ -311,14 +317,38 @@
         removeSearchTag(event);
     };
     const clearSubtree = (event) => {
+        doc.querySelector('#search_subtree-content-breadcrumbs').hidden = true;
+        doc.querySelector('.ez-btn--udw-select-location').hidden = false;
         subtreeInput.value = '';
-
         removeSearchTag(event);
     };
     const clearLastModified = (event) => {
+        const lastModifiedDataRange = doc.querySelector(lastModifiedSelect.dataset.targetSelector);
+        const lastModifiedPeriod = doc.querySelector(lastModifiedDataRange.dataset.periodSelector);
+        const lastModifiedEnd = doc.querySelector(lastModifiedDataRange.dataset.endSelector);
+
+        lastModifiedDataRange.classList.remove(CLASS_VISIBLE_DATE_RANGE);
         lastModifiedSelect[0].selected = true;
+        lastModifiedPeriod.value = '';
+        lastModifiedEnd.value = '';
         removeSearchTag(event);
     };
+    const clearLastCreated = (event) => {
+        const lastCreatedDataRange = doc.querySelector(lastCreatedSelect.dataset.targetSelector);
+        const lastCreatedPeriod = doc.querySelector(lastCreatedDataRange.dataset.periodSelector);
+        const lastCreatedEnd = doc.querySelector(lastCreatedDataRange.dataset.endSelector);
+
+        lastCreatedDataRange.classList.remove(CLASS_VISIBLE_DATE_RANGE);
+        lastCreatedSelect[0].selected = true;
+        lastCreatedPeriod.value = '';
+        lastCreatedEnd.value = '';
+        removeSearchTag(event);
+    };
+    const clearCreator = (event) => {
+        handleResetUser();
+        removeSearchTag(event);
+    };
+
     dateFields.forEach(initFlatPickr);
 
     dateFields.forEach(initFlatPickr);
@@ -340,9 +370,10 @@
     resetCreatorBtn.addEventListener('click', handleResetUser, false);
     listGroupsTitle.forEach((group) => group.addEventListener('click', toggleGroupState, false));
     contentTypeCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', filterByContentType, false));
-    selectBtns.forEach((btn) => btn.addEventListener('click', setSelectedDateRange, false));
     if (clearContentTypesBtns) clearContentTypesBtns.forEach((btn) => btn.addEventListener('click', clearContentType, false));
     if (clearSectionBtn) clearSectionBtn.addEventListener('click', clearSection, false);
     if (clearSubtreeBtn) clearSubtreeBtn.addEventListener('click', clearSubtree, false);
     if (clearLastModifiedBtn) clearLastModifiedBtn.addEventListener('click', clearLastModified, false);
+    if (clearLastCreatedBtn) clearLastCreatedBtn.addEventListener('click', clearLastCreated, false);
+    if (clearCreatorBtn) clearCreatorBtn.addEventListener('click', clearCreator, false);
 })(window, window.document, window.eZ, window.jQuery, window.flatpickr);

@@ -3,8 +3,7 @@
 {% set reletedFiledId = reletedFiledId|default('') %}
 {% set title = title|default('') %}
 
-
-<div class="ez-tag" {% if title %} title="{{ title }} {% endif %}">
+<div class="ez-tag ez-search-criteria-tags__tag" {% if title %} title="{{ title }} {% endif %}">
     <div class="ez-tag__content">
         {{ content }}
     </div>
