@@ -62,8 +62,8 @@
     {% endif %}
 
     {% if form.vars.value.lastModified is not empty %}
-        {% set startDate = form.vars.value.lastModified.start_date|ez_short_datetime %}
-        {% set endDate = form.vars.value.lastModified.end_date|ez_short_datetime %}
+        {% set startDate = form.vars.value.lastModified.start_date|ez_short_date %}
+        {% set endDate = form.vars.value.lastModified.end_date|ez_short_date %}
 
         {{ include('@ezdesign/ui/search_tag.html.twig', {
             'content': "#{'search.last.modified'|trans|desc('Last modified:')} #{startDate} - #{endDate}",
@@ -72,8 +72,8 @@
     {% endif %}
 
     {% if form.vars.value.created is not empty %}
-        {% set startDate = form.vars.value.created.start_date|ez_short_datetime %}
-        {% set endDate = form.vars.value.created.end_date|ez_short_datetime %}
+        {% set startDate = form.vars.value.created.start_date|ez_short_date %}
+        {% set endDate = form.vars.value.created.end_date|ez_short_date %}
 
         {{ include('@ezdesign/ui/search_tag.html.twig', {
             'content': "#{'search.created'|trans|desc('Created:')} #{startDate} - #{endDate}",
