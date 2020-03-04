@@ -340,9 +340,7 @@
     for (const tagType in clearSearchTagBtnMethods) {
         const tagBtns = doc.querySelectorAll(`.ez-tag__remove-btn--${tagType}`);
 
-        if (tagBtns.length) {
-            tagBtns.forEach((btn) => btn.addEventListener('click', clearSearchTagBtnMethods[tagType], false));
-        }
+        tagBtns.forEach((btn) => btn.addEventListener('click', clearSearchTagBtnMethods[tagType], false));
     }
 
     subtreeInput.addEventListener('change', toggleDisabledStateOnApplyBtn, false);
