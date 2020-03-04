@@ -28,7 +28,7 @@
         locale: {
             rangeSeparator: ' - ',
         },
-        formatDate: (date) => eZ.helpers.timezone.formatShortDateTime(date, null),
+        formatDate: (date) => eZ.helpers.timezone.formatShortDateTime(date, null, eZ.adminUiConfig.dateFormat.shortDate),
     };
     const clearFilters = (event) => {
         event.preventDefault();
