@@ -3,7 +3,6 @@
     const CLASS_DATE_RANGE = 'ez-filters__range-wrapper';
     const CLASS_VISIBLE_DATE_RANGE = 'ez-filters__range-wrapper--visible';
     const SELECTOR_TAG = '.ez-tag';
-    const SELECTOR_REMOVE_TAG = '.ez-tag__remove-btn';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const filterBtn = doc.querySelector('.ez-btn--filter');
@@ -279,14 +278,15 @@
         });
     };
     const removeSearchTag = (event) => {
-        const tag = event.target.closest(SELECTOR_TAG);
+        const tag = event.currentTarget.closest(SELECTOR_TAG);
+        const form = event.currentTarget.closest('form');
 
         eZ.helpers.tooltips.hideAll();
-        event.target.closest('form').submit();
         tag.remove();
+        form.submit();
     };
     const clearContentType = (event) => {
-        const checkbox = doc.querySelector(event.target.closest(SELECTOR_REMOVE_TAG).dataset.targetSelector);
+        const checkbox = doc.querySelector(event.currentTarget.dataset.targetSelector);
 
         checkbox.checked = false;
         removeSearchTag(event);
