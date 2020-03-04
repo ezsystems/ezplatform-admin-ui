@@ -279,8 +279,7 @@
         });
     };
     const removeSearchTag = (event) => {
-        const btn = event.target.closest(SELECTOR_REMOVE_TAG);
-        const tag = btn.closest(SELECTOR_TAG);
+        const tag = event.target.closest(SELECTOR_TAG);
 
         eZ.helpers.tooltips.hideAll();
         event.target.closest('form').submit();
@@ -328,8 +327,6 @@
     };
 
     dateFields.forEach(initFlatPickr);
-
-    dateFields.forEach(initFlatPickr);
     filterByContentType();
 
     clearBtn.addEventListener('click', clearFilters, false);
@@ -340,11 +337,11 @@
         sectionSelect.addEventListener('change', toggleDisabledStateOnApplyBtn, false);
     }
 
-    for (let tagType in clearSearchTagBtnMethods) {
-        let listenerTarget = doc.querySelectorAll(`.ez-tag__remove-btn--${tagType}`);
+    for (const tagType in clearSearchTagBtnMethods) {
+        const tagBtns = doc.querySelectorAll(`.ez-tag__remove-btn--${tagType}`);
 
-        if (listenerTarget) {
-            listenerTarget.forEach((btn) => btn.addEventListener('click', clearSearchTagBtnMethods[tagType], false));
+        if (tagBtns.length) {
+            tagBtns.forEach((btn) => btn.addEventListener('click', clearSearchTagBtnMethods[tagType], false));
         }
     }
 
