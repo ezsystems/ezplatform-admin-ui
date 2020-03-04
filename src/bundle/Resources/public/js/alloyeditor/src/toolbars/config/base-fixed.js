@@ -1,20 +1,23 @@
 import EzConfigBase from './base';
 
 const TOOLBAR_OFFSET = 10;
+
 let isScrollEventAdded = false;
 let originalComponentWillUnmount = null;
 
-export default class EzConfgiFixedBase extends EzConfigBase {
+export default class EzConfigFixedBase extends EzConfigBase {
     static getTopPosition(block, editor) {
         const toolbar = document.querySelector('.ae-toolbar-floating');
         const editorRect = editor.element.getClientRect();
-        const toolbarHeight = toolbar.getBoundingClientRect().height;
+        const toolbarHeight = toolbar ? toolbar.getBoundingClientRect().height : 0;
         const shouldBeFixed = editorRect.top - toolbarHeight - 2 * TOOLBAR_OFFSET < 0;
         const top = shouldBeFixed
             ? TOOLBAR_OFFSET
             : editorRect.top + editor.element.getWindow().getScrollPosition().y - toolbarHeight - TOOLBAR_OFFSET;
 
-        toolbar.classList.toggle('ae-toolbar-floating--fixed', shouldBeFixed);
+        if (toolbar) {
+            toolbar.classList.toggle('ae-toolbar-floating--fixed', shouldBeFixed);
+        }
 
         return top;
     }
@@ -35,17 +38,17 @@ export default class EzConfgiFixedBase extends EzConfigBase {
 
     setPosition(payload) {
         const editor = payload.editor.get('nativeEditor');
-        const block = EzConfgiFixedBase.getBlockElement(payload);
+        const block = EzConfigFixedBase.getBlockElement(payload);
 
         if (!isScrollEventAdded) {
             originalComponentWillUnmount = this.componentWillUnmount.bind(this);
-            this.componentWillUnmount = EzConfgiFixedBase.componentWillUnmount.bind(this);
+            this.componentWillUnmount = EzConfigFixedBase.componentWillUnmount.bind(this);
 
             isScrollEventAdded = true;
 
             window.addEventListener('scroll', this._updatePosition, false);
         }
 
-        return EzConfgiFixedBase.setPositionFor.call(this, block, editor, EzConfgiFixedBase.getTopPosition.bind(this));
+        return EzConfigFixedBase.setPositionFor.call(this, block, editor, EzConfigFixedBase.getTopPosition.bind(this));
     }
 }
