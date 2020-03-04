@@ -2,8 +2,8 @@
     let getUsersTimeout;
     const CLASS_DATE_RANGE = 'ez-filters__range-wrapper';
     const CLASS_VISIBLE_DATE_RANGE = 'ez-filters__range-wrapper--visible';
-    const SEARCH_TAG_SELECTOR = '.ez-tag';
-    const CLEAR_BTN_SELECTOR = '.ez-tag__remove-btn';
+    const SELECTOR_TAG = '.ez-tag';
+    const SELECTOR_REMOVE_TAG = '.ez-tag__remove-btn';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const filterBtn = doc.querySelector('.ez-btn--filter');
@@ -33,12 +33,6 @@
         },
         formatDate: (date) => eZ.helpers.timezone.formatShortDateTime(date, null, eZ.adminUiConfig.dateFormat.shortDate),
     };
-    const clearContentTypesBtns = doc.querySelectorAll('.ez-tag__remove-btn--content-types');
-    const clearSectionBtn = doc.querySelector('.ez-tag__remove-btn--section');
-    const clearSubtreeBtn = doc.querySelector('.ez-tag__remove-btn--subtree');
-    const clearLastModifiedBtn = doc.querySelector('.ez-tag__remove-btn--last-modified');
-    const clearLastCreatedBtn = doc.querySelector('.ez-tag__remove-btn--last-created');
-    const clearCreatorBtn = doc.querySelector('.ez-tag__remove-btn--creator');
     const clearFilters = (event) => {
         event.preventDefault();
 
@@ -285,15 +279,15 @@
         });
     };
     const removeSearchTag = (event) => {
-        const btn = event.target.closest(CLEAR_BTN_SELECTOR);
-        const tag = btn.closest(SEARCH_TAG_SELECTOR);
+        const btn = event.target.closest(SELECTOR_REMOVE_TAG);
+        const tag = btn.closest(SELECTOR_TAG);
 
         eZ.helpers.tooltips.hideAll();
         event.target.closest('form').submit();
         tag.remove();
     };
     const clearContentType = (event) => {
-        const checkbox = doc.querySelector(`#${event.target.closest(CLEAR_BTN_SELECTOR).dataset.reletedFiledId}`);
+        const checkbox = doc.querySelector(event.target.closest(SELECTOR_REMOVE_TAG).dataset.targetSelector);
 
         checkbox.checked = false;
         removeSearchTag(event);
@@ -308,31 +302,29 @@
         subtreeInput.value = '';
         removeSearchTag(event);
     };
-    const clearLastModified = (event) => {
-        const lastModifiedDataRange = doc.querySelector(lastModifiedSelect.dataset.targetSelector);
-        const lastModifiedPeriod = doc.querySelector(lastModifiedDataRange.dataset.periodSelector);
-        const lastModifiedEnd = doc.querySelector(lastModifiedDataRange.dataset.endSelector);
+    const clearDataRange = (event, selector) => {
+        const dataRange = doc.querySelector(selector);
+        const rangeSelect = dataRange.parentNode.querySelector('.ez-filters__select');
+        const periodInput = doc.querySelector(dataRange.dataset.periodSelector);
+        const endDateInput = doc.querySelector(dataRange.dataset.endSelector);
 
-        lastModifiedDataRange.classList.remove(CLASS_VISIBLE_DATE_RANGE);
-        lastModifiedSelect[0].selected = true;
-        lastModifiedPeriod.value = '';
-        lastModifiedEnd.value = '';
-        removeSearchTag(event);
-    };
-    const clearLastCreated = (event) => {
-        const lastCreatedDataRange = doc.querySelector(lastCreatedSelect.dataset.targetSelector);
-        const lastCreatedPeriod = doc.querySelector(lastCreatedDataRange.dataset.periodSelector);
-        const lastCreatedEnd = doc.querySelector(lastCreatedDataRange.dataset.endSelector);
-
-        lastCreatedDataRange.classList.remove(CLASS_VISIBLE_DATE_RANGE);
-        lastCreatedSelect[0].selected = true;
-        lastCreatedPeriod.value = '';
-        lastCreatedEnd.value = '';
+        rangeSelect[0].selected = true;
+        periodInput.value = '';
+        endDateInput.vaue = '';
+        dataRange.classList.remove(CLASS_VISIBLE_DATE_RANGE);
         removeSearchTag(event);
     };
     const clearCreator = (event) => {
         handleResetUser();
         removeSearchTag(event);
+    };
+    const clearSearchTagBtnMethods = {
+        section: (event) => clearSection(event),
+        subtree: (event) => clearSubtree(event),
+        creator: (event) => clearCreator(event),
+        'content-types': (event) => clearContentType(event),
+        'last-modified': (event) => clearDataRange(event, lastModifiedSelect.dataset.targetSelector),
+        'last-created': (event) => clearDataRange(event, lastCreatedSelect.dataset.targetSelector),
     };
 
     dateFields.forEach(initFlatPickr);
@@ -348,6 +340,14 @@
         sectionSelect.addEventListener('change', toggleDisabledStateOnApplyBtn, false);
     }
 
+    for (let tagType in clearSearchTagBtnMethods) {
+        let listenerTarget = doc.querySelectorAll(`.ez-tag__remove-btn--${tagType}`);
+
+        if (listenerTarget) {
+            listenerTarget.forEach((btn) => btn.addEventListener('click', clearSearchTagBtnMethods[tagType], false));
+        }
+    }
+
     subtreeInput.addEventListener('change', toggleDisabledStateOnApplyBtn, false);
     lastModifiedSelect.addEventListener('change', toggleDatesSelectVisibility, false);
     lastCreatedSelect.addEventListener('change', toggleDatesSelectVisibility, false);
@@ -356,10 +356,4 @@
     resetCreatorBtn.addEventListener('click', handleResetUser, false);
     listGroupsTitle.forEach((group) => group.addEventListener('click', toggleGroupState, false));
     contentTypeCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', filterByContentType, false));
-    if (clearContentTypesBtns) clearContentTypesBtns.forEach((btn) => btn.addEventListener('click', clearContentType, false));
-    if (clearSectionBtn) clearSectionBtn.addEventListener('click', clearSection, false);
-    if (clearSubtreeBtn) clearSubtreeBtn.addEventListener('click', clearSubtree, false);
-    if (clearLastModifiedBtn) clearLastModifiedBtn.addEventListener('click', clearLastModified, false);
-    if (clearLastCreatedBtn) clearLastCreatedBtn.addEventListener('click', clearLastCreated, false);
-    if (clearCreatorBtn) clearCreatorBtn.addEventListener('click', clearCreator, false);
 })(window, window.document, window.eZ, window.jQuery, window.flatpickr);

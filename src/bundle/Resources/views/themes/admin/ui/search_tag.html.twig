@@ -1,6 +1,6 @@
 {% set btnClass = btnClass|default('') %}
 {% set content = content|default('') %}
-{% set reletedFiledId = reletedFiledId|default('') %}
+{% set targetSelector = targetSelector|default('') %}
 {% set title = title|default('') %}
 
 <div class="ez-tag ez-search-criteria-tags__tag" {% if title %} title="{{ title }} {% endif %}">
@@ -10,7 +10,7 @@
     <button 
         type="button" 
         class="ez-tag__remove-btn {{ btnClass }}"
-        data-releted-filed-id="{{ reletedFiledId }}"
+        data-target-selector="{{ targetSelector }}"
     >
         <svg class="ez-icon ez-icon--medium ez-icon--dark">
             <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#circle-close"></use>

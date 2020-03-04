@@ -29,7 +29,7 @@
             {{ include('@ezdesign/ui/search_tag.html.twig', {
                 'content': contentType.name,
                 'title': "#{'search.content.type'|trans|desc('Content Type:')} #{contentType.name}",
-                'reletedFiledId': "search_content_types_#{contentType.identifier}",
+                'targetSelector': "#search_content_types_#{contentType.identifier}",
                 'btnClass': "ez-tag__remove-btn--content-types",
             }) }}
         {% endfor %}
