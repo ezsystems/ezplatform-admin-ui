@@ -154,14 +154,12 @@ class SearchController extends Controller
                 'form' => $form->createView(),
                 'pager' => $pagerfanta,
                 'form_edit' => $editForm->createView(),
-                'filters_expanded' => $data->isFiltered(),
                 'user_content_type_identifier' => $this->userContentTypeIdentifier,
             ]);
         }
 
         return $this->render('@ezdesign/ui/search/index.html.twig', [
             'form' => $form->createView(),
-            'filters_expanded' => $form->isSubmitted() && !$form->isValid(),
             'user_content_type_identifier' => $this->userContentTypeIdentifier,
         ]);
     }

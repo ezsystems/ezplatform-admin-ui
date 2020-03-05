@@ -23,7 +23,7 @@
     </span>
 </div>
 
-<div class="ez-search-criteria-tags ml-4 {% if filters_expanded %} ez-search-criteria-tags--collapsed{% endif %}">
+<div class="ez-search-criteria-tags ml-4">
     {% if form.content_types.vars.data is not empty %}
         {% for contentType in form.content_types.vars.data %}
             {{ include('@ezdesign/ui/search_tag.html.twig', {
@@ -90,7 +90,7 @@
     {% endif %}
 </div>
 
-<div class="ez-filters mt-4 ml-4 pt-2 {% if not filters_expanded %} ez-filters--collapsed{% endif %}">
+<div class="ez-filters mt-4 ml-4 pt-2 ez-filters--collapsed">
     <div class="ez-filters__row">
         <div class="ez-filters__item ez-filters__item--content-type">
             <label class="ez-filters__item-label">{{ 'search.content.type'|trans|desc('Content Type:') }}</label>
