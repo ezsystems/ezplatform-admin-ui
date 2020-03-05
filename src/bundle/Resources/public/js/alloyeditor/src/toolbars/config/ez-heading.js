@@ -1,6 +1,6 @@
-import EzConfigFixedBase from './base-fixed';
+import EzConfgiFixedBase from './base-fixed';
 
-export default class EzHeadingConfig extends EzConfigFixedBase {
+export default class EzHeadingConfig extends EzConfgiFixedBase {
     constructor(config) {
         super(config);
 

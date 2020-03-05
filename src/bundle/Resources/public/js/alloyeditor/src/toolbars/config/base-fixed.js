@@ -1,11 +1,10 @@
 import EzConfigBase from './base';
 
 const TOOLBAR_OFFSET = 10;
-
 let isScrollEventAdded = false;
 let originalComponentWillUnmount = null;
 
-export default class EzConfigFixedBase extends EzConfigBase {
+export default class EzConfgiFixedBase extends EzConfigBase {
     static getTopPosition(block, editor) {
         const toolbar = document.querySelector('.ae-toolbar-floating');
         const editorRect = editor.element.getClientRect();
@@ -38,17 +37,17 @@ export default class EzConfigFixedBase extends EzConfigBase {
 
     setPosition(payload) {
         const editor = payload.editor.get('nativeEditor');
-        const block = EzConfigFixedBase.getBlockElement(payload);
+        const block = EzConfgiFixedBase.getBlockElement(payload);
 
         if (!isScrollEventAdded) {
             originalComponentWillUnmount = this.componentWillUnmount.bind(this);
-            this.componentWillUnmount = EzConfigFixedBase.componentWillUnmount.bind(this);
+            this.componentWillUnmount = EzConfgiFixedBase.componentWillUnmount.bind(this);
 
             isScrollEventAdded = true;
 
             window.addEventListener('scroll', this._updatePosition, false);
         }
 
-        return EzConfigFixedBase.setPositionFor.call(this, block, editor, EzConfigFixedBase.getTopPosition.bind(this));
+        return EzConfgiFixedBase.setPositionFor.call(this, block, editor, EzConfgiFixedBase.getTopPosition.bind(this));
     }
 }
