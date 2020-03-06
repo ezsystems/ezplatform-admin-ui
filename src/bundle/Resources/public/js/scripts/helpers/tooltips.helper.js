@@ -1,8 +1,7 @@
 (function(global, doc, eZ, $) {
     const TOOLTIPS_SELECTOR = '[title]';
-    const parse = (domNode) => {
-        const searchIn = domNode ? domNode : doc;
-        const tooltipNodes = searchIn.querySelectorAll(TOOLTIPS_SELECTOR);
+    const parse = (baseElement = doc) => {
+        const tooltipNodes = baseElement.querySelectorAll(TOOLTIPS_SELECTOR);
 
         for (tooltipNode of tooltipNodes) {
             if (tooltipNode.title) {
