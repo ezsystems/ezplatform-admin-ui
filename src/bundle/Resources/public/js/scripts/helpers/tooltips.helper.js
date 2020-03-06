@@ -1,9 +1,10 @@
 (function(global, doc, eZ, $) {
     const TOOLTIPS_SELECTOR = '[title]';
-    const parse = () => {
-        const tooltipsNode = doc.querySelectorAll(TOOLTIPS_SELECTOR);
+    const parse = (domNode) => {
+        const searchIn = domNode ? domNode : doc;
+        const tooltipNodes = searchIn.querySelectorAll(TOOLTIPS_SELECTOR);
 
-        for (tooltipNode of tooltipsNode) {
+        for (tooltipNode of tooltipNodes) {
             if (tooltipNode.title) {
                 const delay = {
                     show: tooltipNode.dataset.delayShow || 150,
@@ -11,10 +12,12 @@
                 };
                 const extraClasses = tooltipNode.dataset.extraClasses || '';
                 const placement = tooltipNode.dataset.placement || 'bottom';
+                const container = tooltipNode.dataset.tooltipContainer || 'body';
 
                 $(tooltipNode).tooltip({
                     delay,
                     placement,
+                    container,
                     template: `<div class="tooltip ez-tooltip ${extraClasses}">
                                     <div class="arrow ez-tooltip__arrow"></div>
                                     <div class="tooltip-inner ez-tooltip__inner"></div>
