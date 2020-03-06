@@ -1,16 +1,16 @@
-{% set btnClass = btnClass|default('') %}
+{% set btn_class = btn_class|default('') %}
 {% set content = content|default('') %}
-{% set targetSelector = targetSelector|default('') %}
+{% set target_selector = target_selector|default('') %}
 {% set title = title|default('') %}
 
-<div class="ez-tag ez-search-criteria-tags__tag" {% if title %} title="{{ title }} {% endif %}">
+<div class="ez-tag ez-search-criteria-tags__tag"{% if title %} title="{{ title }}{% endif %}">
     <div class="ez-tag__content">
         {{ content }}
     </div>
     <button 
         type="button" 
-        class="ez-tag__remove-btn {{ btnClass }}"
-        data-target-selector="{{ targetSelector }}"
+        class="ez-tag__remove-btn {{ btn_class }}"
+        data-target-selector="{{ target_selector }}"
     >
         <svg class="ez-icon ez-icon--medium ez-icon--dark">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#circle-close"></use>
