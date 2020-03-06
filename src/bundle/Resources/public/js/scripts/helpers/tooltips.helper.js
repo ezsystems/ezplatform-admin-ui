@@ -11,7 +11,7 @@
                 };
                 const extraClasses = tooltipNode.dataset.extraClasses || '';
                 const placement = tooltipNode.dataset.placement || 'bottom';
-                const container = tooltipNode.dataset.tooltipContainer || 'body';
+                const container = tooltipNode.dataset.tooltipContainerSelector || 'body';
 
                 $(tooltipNode).tooltip({
                     delay,
