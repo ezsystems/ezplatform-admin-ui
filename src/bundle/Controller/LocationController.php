@@ -542,9 +542,10 @@ class LocationController extends Controller
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentLocationAddData $data) {
                 $contentInfo = $data->getContentInfo();
+                $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);
 
                 foreach ($data->getNewLocations() as $newLocation) {
-                    $locationCreateStruct = $this->locationService->newLocationCreateStruct($newLocation->id);
+                    $locationCreateStruct = $this->locationService->newLocationCreateStruct($newLocation->id, $contentType);
                     $this->locationService->createLocation($contentInfo, $locationCreateStruct);
 
                     $this->notificationHandler->success(
