@@ -40,10 +40,9 @@ services:
             - { name: ezplatform.tab, group: dashboard-everyone }
 
     EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper:
+        parent: EzSystems\EzPlatformAdminUi\Search\AbstractPagerContentToDataMapper
         autowire: true
         public: false
-        arguments:
-            $translationHelper: '@ezpublish.translation_helper'
 
     ezplatform.adminui.dashboard.me:
         parent: EzSystems\EzPlatformAdminUi\Component\TwigComponent

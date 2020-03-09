@@ -23,6 +23,7 @@ imports:
     - { resource: services/forms.yaml }
     - { resource: services/strategies.yaml }
     - { resource: services/query_types.yaml }
+    - { resource: services/search.yaml }
     - { resource: services/role_form_mappers.yaml }
     - { resource: services/fieldtype_form_mappers.yaml }
     - { resource: services/action_dispatchers.yaml }

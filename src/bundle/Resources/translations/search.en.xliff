@@ -156,6 +156,11 @@
         <target state="new">Try more general keywords.</target>
         <note>key: search.tips.more_general_keywords</note>
       </trans-unit>
+      <trans-unit id="e477a87ca96bb3e22e8eed710e54e9a6bffefc52" resname="search.translations">
+        <source>Translations</source>
+        <target state="new">Translations</target>
+        <note>key: search.translations</note>
+      </trans-unit>
       <trans-unit id="0c9866a19fd5d3074bdb05b339df05b7c05a5661" resname="search.type">
         <source>Content Type</source>
         <target state="new">Content Type</target>

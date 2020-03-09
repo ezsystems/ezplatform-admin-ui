@@ -1,10 +1,7 @@
 {% macro edit_content_button(content, title) %}
-    <button class="btn btn-icon mx-2 ez-btn--content-edit"
-            title="{{ title }}"
-            data-content-id="{{ content.contentId }}"
-            data-language-code="{{ content.language }}">
-        <svg class="ez-icon ez-icon-edit">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-        </svg>
-    </button>
+    {% include '@ezdesign/ui/edit_translation_button.html.twig' with {
+        'contentId': content.contentId,
+        'translations': content.available_enabled_translations,
+        'title': title
+    }%}
 {% endmacro %}

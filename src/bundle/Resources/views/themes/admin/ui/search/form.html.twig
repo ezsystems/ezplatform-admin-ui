@@ -1,11 +1,11 @@
-{% form_theme form '@ezdesign/ui/form_fields.html.twig'  %}
+{% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
 
 {% trans_default_domain 'search' %}
 
 {% set content_breadcrumbs = '' %}
 {% set subtree_selected = form.subtree.vars.value is not empty %}
 
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class': 'ez-search-form'}}) }}
 <div class="input-group px-4">
     {{ form_widget(form.query) }}
 
@@ -14,12 +14,17 @@
             <svg class="ez-icon ez-icon--medium ez-icon--light">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
             </svg>
-            <span class="ez-btn ez-btn--search-label">{{ 'search.perform'|trans|desc('Search') }}</span></button>
+            <span class="ez-btn ez-btn--search-label">{{ 'search.perform'|trans|desc('Search') }}</span>
+        </button>
+        <span class="ml-4" {% if form.search_language.vars.choices|length == 1 %}hidden{% endif %}>
+            {{ form_widget(form.search_language, {'attr': {'class': 'ez-search-form__language-selector'}}) }}
+        </span>
         <button type="button" class="btn btn-dark ez-btn--filter ml-4" title="{{ 'search.filters'|trans|desc('Filters') }}">
             <svg class="ez-icon ez-icon--medium ez-icon--light ez-icon-filters">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#filters"></use>
             </svg>
-            <span class="ez-btn ez-btn--filter-label">{{ 'search.filters'|trans|desc('Filters') }}</span></button>
+            <span class="ez-btn ez-btn--filter-label">{{ 'search.filters'|trans|desc('Filters') }}</span>
+        </button>
     </span>
 </div>
 
@@ -40,7 +45,7 @@
             'content': form.section.vars.data.name,
             'title': "#{'search.section'|trans|desc('Section:')} #{form.section.vars.data.name}",
             'btn_class': "ez-tag__remove-btn--section",
-        }) }} 
+        }) }}
     {% endif %}
 
     {% if form.subtree.vars.value is not empty %}

@@ -3,22 +3,26 @@
         <svg class="ez-icon ez-icon--small">
             <use xlink:href="{{ ez_content_type_icon(row.content_type.identifier) }}"></use>
         </svg>
-    </td>   
-    <td class="ez-table__cell ez-table__cell--name ez-table__cell--after-icon">
-        <a href="{{ url('_ez_content_view', { 'contentId': row.contentId }) }}" title="{{ row.name }}">
-            {{ row.name }}
-        </a>
+    </td>
+    <td class="ez-table__cell ez-table__cell--after-icon">
+        <a href="{{ path('_ez_content_view', {
+            'contentId': row.contentId,
+            'languageCode': row.translation_language_code,
+        }) }}">{{ row.name }}</a>
     </td>
     <td class="ez-table__cell">{{ row.modified|ez_full_datetime }}</td>
     <td class="ez-table__cell">{{ row.type }}</td>
+    {% if form.search_language.vars.choices|length > 1 %}
+        <td class="ez-table__cell">
+            {% for language in row.available_translations %}
+                {{ language.name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </td>
+    {% endif %}
     <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
-        <button class="btn btn-icon mx-2 ez-btn--content-edit"
-                title="{{ 'list.action.edit'|trans|desc('Edit') }}"
-                data-content-id="{{ row.contentId }}"
-                data-language-code="{{ row.initialLanguageCode }}">
-            <svg class="ez-icon ez-icon-edit">
-                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
-            </svg>
-        </button>
+        {% include '@ezdesign/ui/edit_translation_button.html.twig' with {
+            'contentId': row.contentId,
+            'translations': row.available_enabled_translations
+        }%}
     </td>
 </tr>
