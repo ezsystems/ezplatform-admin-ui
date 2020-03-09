@@ -132,8 +132,6 @@ services:
     EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
-        arguments:
-            $visitor: '@ezpublish_rest.output.visitor.json'
         tags:
             - controller.service_arguments
 

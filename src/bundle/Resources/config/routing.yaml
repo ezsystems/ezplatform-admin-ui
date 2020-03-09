@@ -746,6 +746,13 @@ ezplatform.udw.location.data:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:location'
 
+ezplatform.udw.locations.data:
+    path: /module/universal-discovery/locations
+    options:
+        expose: true
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:locations'
+
 ezplatform.udw.location_gridview.data:
     path: /module/universal-discovery/location/{locationId}/gridview
     options:
