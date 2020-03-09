@@ -1,0 +1,16 @@
+.ez-search-criteria-tags {
+    transform: scaleY(1);
+    transform-origin: top center;
+    transition: all 0.2s $ez-admin-transition;
+
+    &--collapsed {
+        transform: scaleY(0);
+        height: 0;
+        opacity: 0;
+    }
+
+    &__tag {
+        margin-top: calculateRem(10px);
+        margin-right: calculateRem(10px);
+    }
+}

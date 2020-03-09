@@ -2,6 +2,9 @@
 
 {% trans_default_domain 'search' %}
 
+{% set content_breadcrumbs = '' %}
+{% set subtree_selected = form.subtree.vars.value is not empty %}
+
 {{ form_start(form) }}
 <div class="input-group px-4">
     {{ form_widget(form.query) }}
@@ -19,7 +22,75 @@
             <span class="ez-btn ez-btn--filter-label">{{ 'search.filters'|trans|desc('Filters') }}</span></button>
     </span>
 </div>
-<div class="ez-filters mt-4 ml-4 pt-2 {% if not filters_expanded %} ez-filters--collapsed{% endif %}">
+
+<div class="ez-search-criteria-tags ml-4">
+    {% if form.content_types.vars.data is not empty %}
+        {% for content_type in form.content_types.vars.data %}
+            {{ include('@ezdesign/ui/search_tag.html.twig', {
+                'content': content_type.name,
+                'title': "#{'search.content.type'|trans|desc('Content Type:')} #{content_type.name}",
+                'target_selector': "#search_content_types_#{content_type.identifier}",
+                'btn_class': "ez-tag__remove-btn--content-types",
+            }) }}
+        {% endfor %}
+    {% endif %}
+
+    {% if form.section.vars.data is not empty %}
+        {{ include('@ezdesign/ui/search_tag.html.twig', {
+            'content': form.section.vars.data.name,
+            'title': "#{'search.section'|trans|desc('Section:')} #{form.section.vars.data.name}",
+            'btn_class': "ez-tag__remove-btn--section",
+        }) }} 
+    {% endif %}
+
+    {% if form.subtree.vars.value is not empty %}
+        {% if subtree_selected %}
+            {% set path_locations = ez_path_to_locations(form.subtree.vars.value) %}
+            {% for location in path_locations %}
+                {% set content_breadcrumbs = content_breadcrumbs ~ ez_content_name(location.contentInfo) %}
+                {% if not loop.last %}
+                    {% set content_breadcrumbs = content_breadcrumbs ~ ' / ' %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {{ include('@ezdesign/ui/search_tag.html.twig', {
+            'content': content_breadcrumbs,
+            'title':  "#{'search.subtree'|trans|desc('Subtree:')} #{content_breadcrumbs}",
+            'btn_class': "ez-tag__remove-btn--subtree",
+        }) }}
+    {% endif %}
+
+    {% if form.vars.value.lastModified is not empty %}
+        {% set start_date = form.vars.value.lastModified.start_date|ez_short_date %}
+        {% set end_date = form.vars.value.lastModified.end_date|ez_short_date %}
+
+        {{ include('@ezdesign/ui/search_tag.html.twig', {
+            'content': "#{'search.last.modified'|trans|desc('Last modified:')} #{start_date} - #{end_date}",
+            'btn_class': "ez-tag__remove-btn--last-modified",
+        }) }}
+    {% endif %}
+
+    {% if form.vars.value.created is not empty %}
+        {% set start_date = form.vars.value.created.start_date|ez_short_date %}
+        {% set end_date = form.vars.value.created.end_date|ez_short_date %}
+
+        {{ include('@ezdesign/ui/search_tag.html.twig', {
+            'content': "#{'search.created'|trans|desc('Created:')} #{start_date} - #{end_date}",
+            'btn_class': "ez-tag__remove-btn--last-created",
+        }) }}
+    {% endif %}
+
+    {% if form.creator.vars.data is not empty %}
+        {{ include('@ezdesign/ui/search_tag.html.twig', {
+            'content': form.creator.vars.data.name,
+            'title': "#{'search.creator'|trans|desc('Creator:')} #{form.creator.vars.data.name}",
+            'btn_class': "ez-tag__remove-btn--creator",
+        }) }}
+    {% endif %}
+</div>
+
+<div class="ez-filters mt-4 ml-4 pt-2 ez-filters--collapsed">
     <div class="ez-filters__row">
         <div class="ez-filters__item ez-filters__item--content-type">
             <label class="ez-filters__item-label">{{ 'search.content.type'|trans|desc('Content Type:') }}</label>
@@ -48,17 +119,6 @@
                     data-content-breadcrumbs-selector="#{{form.subtree.vars.id}}-content-breadcrumbs"
                     data-udw-config="{{ ez_udw_config('single_container', {}) }}"
                     >{{'search.select_content'|trans|desc('Select Content')}}</button>
-                {% set content_breadcrumbs = '' %}
-                {% set subtree_selected = form.subtree.vars.value is not empty %}
-                {% if subtree_selected %}
-                    {% set path_locations = ez_path_to_locations(form.subtree.vars.value) %}
-                    {% for location in path_locations %}
-                        {% set content_breadcrumbs = content_breadcrumbs ~ ez_content_name(location.contentInfo) %}
-                        {% if not loop.last %}
-                            {% set content_breadcrumbs = content_breadcrumbs ~ ' / ' %}
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
 
                 {{ include('@ezdesign/ui/tag.html.twig', {
                     'content': content_breadcrumbs,

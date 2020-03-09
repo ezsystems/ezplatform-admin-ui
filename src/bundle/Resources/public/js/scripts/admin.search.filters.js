@@ -2,10 +2,12 @@
     let getUsersTimeout;
     const CLASS_DATE_RANGE = 'ez-filters__range-wrapper';
     const CLASS_VISIBLE_DATE_RANGE = 'ez-filters__range-wrapper--visible';
+    const SELECTOR_TAG = '.ez-tag';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const filterBtn = doc.querySelector('.ez-btn--filter');
     const filters = doc.querySelector('.ez-filters');
+    const searchCriteriaTags = doc.querySelector('.ez-search-criteria-tags');
     const clearBtn = filters.querySelector('.ez-btn-clear');
     const applyBtn = filters.querySelector('.ez-btn-apply');
     const dateFields = doc.querySelectorAll('.ez-filters__range-select');
@@ -106,6 +108,7 @@
         event.preventDefault();
 
         filters.classList.toggle('ez-filters--collapsed');
+        searchCriteriaTags.classList.toggle('ez-search-criteria-tags--collapsed');
     };
     const handleClickOutside = (event) => {
         if (event.target.closest('.ez-content-type-selector') || event.target.closest('.ez-filters__select--content-type')) {
@@ -274,6 +277,54 @@
             defaultDate,
         });
     };
+    const removeSearchTag = (event) => {
+        const tag = event.currentTarget.closest(SELECTOR_TAG);
+        const form = event.currentTarget.closest('form');
+
+        eZ.helpers.tooltips.hideAll();
+        tag.remove();
+        form.submit();
+    };
+    const clearContentType = (event) => {
+        const checkbox = doc.querySelector(event.currentTarget.dataset.targetSelector);
+
+        checkbox.checked = false;
+        removeSearchTag(event);
+    };
+    const clearSection = (event) => {
+        sectionSelect[0].selected = true;
+        removeSearchTag(event);
+    };
+    const clearSubtree = (event) => {
+        doc.querySelector('#search_subtree-content-breadcrumbs').hidden = true;
+        doc.querySelector('.ez-btn--udw-select-location').hidden = false;
+        subtreeInput.value = '';
+        removeSearchTag(event);
+    };
+    const clearDataRange = (event, selector) => {
+        const dataRange = doc.querySelector(selector);
+        const rangeSelect = dataRange.parentNode.querySelector('.ez-filters__select');
+        const periodInput = doc.querySelector(dataRange.dataset.periodSelector);
+        const endDateInput = doc.querySelector(dataRange.dataset.endSelector);
+
+        rangeSelect[0].selected = true;
+        periodInput.value = '';
+        endDateInput.vaue = '';
+        dataRange.classList.remove(CLASS_VISIBLE_DATE_RANGE);
+        removeSearchTag(event);
+    };
+    const clearCreator = (event) => {
+        handleResetUser();
+        removeSearchTag(event);
+    };
+    const clearSearchTagBtnMethods = {
+        section: (event) => clearSection(event),
+        subtree: (event) => clearSubtree(event),
+        creator: (event) => clearCreator(event),
+        'content-types': (event) => clearContentType(event),
+        'last-modified': (event) => clearDataRange(event, lastModifiedSelect.dataset.targetSelector),
+        'last-created': (event) => clearDataRange(event, lastCreatedSelect.dataset.targetSelector),
+    };
 
     dateFields.forEach(initFlatPickr);
     filterByContentType();
@@ -284,6 +335,12 @@
 
     if (sectionSelect) {
         sectionSelect.addEventListener('change', toggleDisabledStateOnApplyBtn, false);
+    }
+
+    for (const tagType in clearSearchTagBtnMethods) {
+        const tagBtns = doc.querySelectorAll(`.ez-tag__remove-btn--${tagType}`);
+
+        tagBtns.forEach((btn) => btn.addEventListener('click', clearSearchTagBtnMethods[tagType], false));
     }
 
     subtreeInput.addEventListener('change', toggleDisabledStateOnApplyBtn, false);
