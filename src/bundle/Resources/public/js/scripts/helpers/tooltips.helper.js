@@ -25,8 +25,8 @@
             }
         }
     };
-    const hideAll = () => {
-        const tooltipsNode = doc.querySelectorAll(TOOLTIPS_SELECTOR);
+    const hideAll = (baseElement = doc) => {
+        const tooltipsNode = baseElement.querySelectorAll(TOOLTIPS_SELECTOR);
 
         for (tooltipNode of tooltipsNode) {
             $(tooltipNode).tooltip('hide');
