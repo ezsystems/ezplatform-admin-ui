@@ -6,19 +6,20 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\User\User;
-use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchHitAdapter;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper;
+use EzSystems\EzPlatformAdminUi\Search\PagerSearchContentToDataMapper;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,8 +30,8 @@ class SearchController extends Controller
     /** @var \eZ\Publish\API\Repository\SearchService */
     private $searchService;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper */
-    private $pagerContentToDataMapper;
+    /** @var \EzSystems\EzPlatformAdminUi\Search\PagerSearchContentToDataMapper */
+    private $pagerSearchContentToDataMapper;
 
     /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     private $urlGenerator;
@@ -55,7 +56,7 @@ class SearchController extends Controller
 
     /**
      * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper $pagerContentToDataMapper
+     * @param \EzSystems\EzPlatformAdminUi\Search\PagerSearchContentToDataMapper $pagerSearchContentToDataMapper
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
@@ -66,7 +67,7 @@ class SearchController extends Controller
      */
     public function __construct(
         SearchService $searchService,
-        PagerContentToDataMapper $pagerContentToDataMapper,
+        PagerSearchContentToDataMapper $pagerSearchContentToDataMapper,
         UrlGeneratorInterface $urlGenerator,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
@@ -76,7 +77,7 @@ class SearchController extends Controller
         array $userContentTypeIdentifier
     ) {
         $this->searchService = $searchService;
-        $this->pagerContentToDataMapper = $pagerContentToDataMapper;
+        $this->pagerSearchContentToDataMapper = $pagerSearchContentToDataMapper;
         $this->urlGenerator = $urlGenerator;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
@@ -109,6 +110,7 @@ class SearchController extends Controller
         $lastModified = $search['last_modified'] ?? [];
         $created = $search['created'] ?? [];
         $subtree = $search['subtree'] ?? null;
+        $searchLanguage = null;
 
         if (!empty($search['section'])) {
             $section = $this->sectionService->loadSection($search['section']);
@@ -120,7 +122,18 @@ class SearchController extends Controller
         }
 
         $form = $this->formFactory->createSearchForm(
-            new SearchData($limit, $page, $query, $section, $contentTypes, $lastModified, $created, $creator, $subtree),
+            new SearchData(
+                $limit,
+                $page,
+                $query,
+                $section,
+                $contentTypes,
+                $lastModified,
+                $created,
+                $creator,
+                $subtree,
+                $searchLanguage
+            ),
             'search',
             [
                 'method' => Request::METHOD_GET,
@@ -130,91 +143,112 @@ class SearchController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (SearchData $data) use ($form) {
-                $limit = $data->getLimit();
-                $page = $data->getPage();
-                $queryString = $data->getQuery();
-                $section = $data->getSection();
-                $contentTypes = $data->getContentTypes();
-                $lastModified = $data->getLastModified();
-                $created = $data->getCreated();
-                $creator = $data->getCreator();
-                $subtree = $data->getSubtree();
-                $query = new Query();
-                $criteria = [];
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $limit = $data->getLimit();
+            $page = $data->getPage();
+            $queryString = $data->getQuery();
+            $section = $data->getSection();
+            $contentTypes = $data->getContentTypes();
+            $lastModified = $data->getLastModified();
+            $created = $data->getCreated();
+            $creator = $data->getCreator();
+            $subtree = $data->getSubtree();
+            $searchLanguageCode = ($data->getSearchLanguage() instanceof Language)
+                ? $data->getSearchLanguage()->languageCode
+                : null;
 
-                if (null !== $queryString) {
-                    $query->query = new Criterion\FullText($queryString);
-                }
-                if (null !== $section) {
-                    $criteria[] = new Criterion\SectionId($section->id);
-                }
-                if (!empty($contentTypes)) {
-                    $criteria[] = new Criterion\ContentTypeId(array_column($contentTypes, 'id'));
-                }
-                if (!empty($lastModified)) {
-                    $criteria[] = new Criterion\DateMetadata(
-                        Criterion\DateMetadata::MODIFIED,
-                        Criterion\Operator::BETWEEN,
-                        [$lastModified['start_date'], $lastModified['end_date']]
-                    );
-                }
-                if (!empty($created)) {
-                    $criteria[] = new Criterion\DateMetadata(
-                        Criterion\DateMetadata::CREATED,
-                        Criterion\Operator::BETWEEN,
-                        [$created['start_date'], $created['end_date']]
-                    );
-                }
-                if ($creator instanceof User) {
-                    $criteria[] = new Criterion\UserMetadata(
-                        Criterion\UserMetadata::OWNER,
-                        Criterion\Operator::EQ,
-                        $creator->id
-                    );
-                }
-                if (null !== $subtree) {
-                    $criteria[] = new Criterion\Subtree($subtree);
-                }
-                if (!empty($criteria)) {
-                    $query->filter = new Criterion\LogicalAnd($criteria);
-                }
+            $query = new Query();
+            $criteria = [];
 
-                if (!$this->searchService->supports(SearchService::CAPABILITY_SCORING)) {
-                    $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
-                }
-
-                $pagerfanta = new Pagerfanta(
-                    new ContentSearchAdapter($query, $this->searchService)
-                );
-
-                $pagerfanta->setMaxPerPage($limit);
-                $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
-
-                $editForm = $this->formFactory->contentEdit(
-                    new ContentEditData()
-                );
-
-                return $this->render('@ezdesign/admin/search/search.html.twig', [
-                    'results' => $this->pagerContentToDataMapper->map($pagerfanta),
-                    'form' => $form->createView(),
-                    'pager' => $pagerfanta,
-                    'form_edit' => $editForm->createView(),
-                    'filters_expanded' => $data->isFiltered(),
-                    'user_content_type_identifier' => $this->userContentTypeIdentifier,
-                ]);
-            });
-
-            if ($result instanceof Response) {
-                return $result;
+            if (null !== $queryString) {
+                $query->query = new Criterion\FullText($queryString);
             }
+            if (null !== $section) {
+                $criteria[] = new Criterion\SectionId($section->id);
+            }
+            if (!empty($contentTypes)) {
+                $criteria[] = new Criterion\ContentTypeId(array_column($contentTypes, 'id'));
+            }
+            if (!empty($lastModified)) {
+                $criteria[] = new Criterion\DateMetadata(
+                    Criterion\DateMetadata::MODIFIED,
+                    Criterion\Operator::BETWEEN,
+                    [$lastModified['start_date'], $lastModified['end_date']]
+                );
+            }
+            if (!empty($created)) {
+                $criteria[] = new Criterion\DateMetadata(
+                    Criterion\DateMetadata::CREATED,
+                    Criterion\Operator::BETWEEN,
+                    [$created['start_date'], $created['end_date']]
+                );
+            }
+            if ($creator instanceof User) {
+                $criteria[] = new Criterion\UserMetadata(
+                    Criterion\UserMetadata::OWNER,
+                    Criterion\Operator::EQ,
+                    $creator->id
+                );
+            }
+            if (null !== $subtree) {
+                $criteria[] = new Criterion\Subtree($subtree);
+            }
+            if (!empty($criteria)) {
+                $query->filter = new Criterion\LogicalAnd($criteria);
+            }
+
+            if (!$this->searchService->supports(SearchService::CAPABILITY_SCORING)) {
+                $query->sortClauses[] = new SortClause\DateModified(Query::SORT_ASC);
+            }
+
+            $languageFilter = $this->getSearchLanguageFilter($searchLanguageCode, $queryString);
+
+            $pagerfanta = new Pagerfanta(
+                new ContentSearchHitAdapter($query, $this->searchService, $languageFilter)
+            );
+
+            $pagerfanta->setMaxPerPage($limit);
+            $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
+
+            $editForm = $this->formFactory->contentEdit(
+                new ContentEditData()
+            );
+
+            return $this->render('@ezdesign/admin/search/search.html.twig', [
+                'results' => $this->pagerSearchContentToDataMapper->map($pagerfanta),
+                'form' => $form->createView(),
+                'pager' => $pagerfanta,
+                'form_edit' => $editForm->createView(),
+                'filters_expanded' => $data->isFiltered(),
+                'user_content_type_identifier' => $this->userContentTypeIdentifier,
+            ]);
         }
 
         return $this->render('@ezdesign/admin/search/search.html.twig', [
             'form' => $form->createView(),
-            'filters_expanded' => false,
+            'filters_expanded' => $form->isSubmitted() && !$form->isValid(),
             'user_content_type_identifier' => $this->userContentTypeIdentifier,
         ]);
+    }
+
+    /**
+     * @param string|null $languageCode
+     * @param string|null $queryString
+     *
+     * @return array
+     */
+    private function getSearchLanguageFilter(?string $languageCode, ?string $queryString): array
+    {
+        $filter = [
+            'languages' => !empty($languageCode) ? [$languageCode] : [],
+            'useAlwaysAvailable' => true,
+        ];
+
+        if (!empty($queryString)) {
+            $filter['excludeTranslationsFromAlwaysAvailable'] = false;
+        }
+
+        return $filter;
     }
 }

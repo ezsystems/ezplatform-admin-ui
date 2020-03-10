@@ -27,6 +27,7 @@ module.exports = {
         ezBtnUnderline: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-underline.js',
         ezBtnSubscript: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-subscript.js',
         ezBtnSuperscript: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-superscript.js',
+        ezBtnStylesListItem: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-styleslistitem.js',
         ezBtnQuote: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-quote.js',
         ezBtnStrike: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-strike.js',
         ezBtnLink: './src/bundle/Resources/public/js/alloyeditor/src/buttons/ez-btn-link.js',

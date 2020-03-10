@@ -29,6 +29,11 @@ matrix:
       env:
       - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
       - BEHAT_OPTS="--profile=adminui --suite=adminui"
+    - name: "Admin UI tests using different personas"
+      env:
+        - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
+        - SETUP_BEHAT_OPTS="--profile=setup --suite=personas"
+        - BEHAT_OPTS="--profile=adminui --suite=personas"
 
 notifications:
   slack:
@@ -52,7 +57,21 @@ install:
   # Prepare whole environment if needed
   - if [ "${BEHAT_OPTS}" != "" ]; then ./.travis/prepare_ezplatform.sh ${INSTALL_EZ_INSTALL_TYPE}; fi
 
+before_script:
+   - if [ "${SETUP_BEHAT_OPTS}" != "" ] ; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "bin/ezbehat $SETUP_BEHAT_OPTS" ; fi
+
 script:
   - if [ "${CHECK_CS}" == "1" ] ; then ./vendor/bin/php-cs-fixer fix -v --dry-run --show-progress=estimating ; fi
   - if [ "${PHPUNIT_CONFIG}" != '' ]; then ./vendor/bin/phpunit -c "${PHPUNIT_CONFIG}"; fi
   - if [ "${BEHAT_OPTS}" != "" ]; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "bin/ezbehat ${BEHAT_OPTS}" ; fi
+
+after_failure:
+  # Will show us the last bit of the log of container's main processes
+  # (not counting shell process above running php and behat)
+  # NOTE: errors during docker setup of travis build won't show up here (can't output all as it is too much in debug/verbose mode)
+  - docker-compose logs -t --tail=15
+  # Will show us what is up, and how long it's been up
+  - docker ps -s
+
+after_script:
+  - if [ "${BEHAT_OPTS}" != "" ] ; then bin/ezreport ; fi

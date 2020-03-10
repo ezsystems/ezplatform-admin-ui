@@ -1,8 +1,8 @@
-{% form_theme form '@ezdesign/form_fields.html.twig'  %}
+{% form_theme form '@ezdesign/form_fields.html.twig' %}
 
 {% trans_default_domain 'search' %}
 
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class': 'ez-search-form'}}) }}
 <div class="input-group px-4">
     {{ form_widget(form.query) }}
 
@@ -12,6 +12,9 @@
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
             </svg>
             <span class="ez-btn ez-btn--search-label">{{ 'search.perform'|trans|desc('Search') }}</span></button>
+        <span class="ml-4" {% if form.search_language.vars.choices|length == 1 %}hidden{% endif %}>
+            {{ form_widget(form.search_language, {'attr': {'class': 'ez-search-form__language-selector'}}) }}
+        </span>
         <button type="button" class="btn btn-dark ez-btn--filter ml-4">
             <svg class="ez-icon ez-icon--medium ez-icon--light ez-icon-filters">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#filters"></use>
@@ -59,7 +62,7 @@
                     {% endfor %}
                 {% endif %}
 
-                {{ include('@ezdesign/parts/tag.html.twig', { 
+                {{ include('@ezdesign/parts/tag.html.twig', {
                     'content': content_breadcrumbs,
                     'is_loading_state': false,
                     'tag_attributes': {
@@ -75,10 +78,12 @@
         <div class="ez-filters__item ez-filters__item--modified">
             <label class="ez-filters__item-label">{{ 'search.last.modified'|trans|desc('Last modified:') }}</label>
             {{ form_widget(form.last_modified_select, {'attr': {'class': 'ez-filters__select', 'data-target-selector': '.ez-modal--select-modified-range'}}) }}
+            {{ form_errors(form.last_modified_select) }}
         </div>
         <div class="ez-filters__item ez-filters__item--created">
             <label class="ez-filters__item-label">{{ 'search.created'|trans|desc('Created:') }}</label>
             {{ form_widget(form.created_select, {'attr': {'class': 'ez-filters__select', 'data-target-selector': '.ez-modal--select-created-range'}}) }}
+            {{ form_errors(form.created_select) }}
         </div>
         <div class="ez-filters__item ez-filters__item--creator">
             <label class="ez-filters__item-label">{{ 'search.creator'|trans|desc('Creator:') }}</label>

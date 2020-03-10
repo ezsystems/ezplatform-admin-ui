@@ -53,7 +53,7 @@ class UserSettingUpdateRightSidebarBuilder extends AbstractBuilder implements Tr
                         'class' => 'btn--trigger',
                         'data-click' => '#user_setting_update_update',
                     ],
-                    'extras' => ['icon' => 'publish'],
+                    'extras' => ['icon' => 'save'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(

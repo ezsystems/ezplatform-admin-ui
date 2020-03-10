@@ -46,6 +46,15 @@
         &__item-name {
             max-width: 25vw;
         }
+
+        &__hidden-column {
+            display: none;
+        }
+
+        &__helper-text {
+            color: $ez-color-base-medium;
+            font-size: calculateRem(12px);
+        }
     }
 
     .btn {

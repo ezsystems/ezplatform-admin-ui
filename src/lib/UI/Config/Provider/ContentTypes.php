@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 use EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver;
@@ -60,6 +61,11 @@ class ContentTypes implements ProviderInterface
                 $contentTypeGroup,
                 $preferredLanguages
             );
+
+            usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
+                return strnatcasecmp($contentType1->getName(), $contentType2->getName());
+            });
+
             foreach ($contentTypes as $contentType) {
                 $contentTypeGroups[$contentTypeGroup->identifier][] = [
                     'identifier' => $contentType->identifier,

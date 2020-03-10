@@ -22,6 +22,7 @@ imports:
     - { resource: services/permissions.yml }
     - { resource: services/forms.yml }
     - { resource: services/query_types.yaml }
+    - { resource: services/search.yml }
 
 services:
     _defaults:
@@ -99,6 +100,8 @@ services:
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
             $kernelRootDir: '%kernel.root_dir%'
             $kernelEnvironment: '%kernel.environment%'
+            $encoreTagRenderer: '@webpack_encore.tag_renderer'
+            $entrypointLookupCollection: '@webpack_encore.entrypoint_lookup_collection'
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
@@ -124,6 +127,18 @@ services:
     EzSystems\EzPlatformAdminUi\EventListener\MenuPermissionsListener:
         tags:
             - {name: kernel.event_subscriber, priority: -250}
+
+    EzSystems\EzPlatformAdminUi\EventListener\CredentialsExpiredListener:
+        arguments:
+            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+        tags:
+            - {name: kernel.event_subscriber}
+
+    EzSystems\EzPlatformAdminUi\EventListener\CredentialsExpirationWarningListener:
+        arguments:
+            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+        tags:
+            - {name: kernel.event_subscriber}
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UserPreferencesGlobalExtension:
         lazy: true

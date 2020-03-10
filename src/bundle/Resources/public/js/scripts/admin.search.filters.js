@@ -1,4 +1,4 @@
-(function(global, doc, $) {
+(function(global, doc, eZ, $) {
     let getUsersTimeout;
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
@@ -63,7 +63,8 @@
         const isCreatedSelected = !!lastCreatedSelect.value;
         const isCreatorSelected = !!searchCreatorInput.value;
         const isSubtreeSelected = !!subtreeInput.value.trim().length;
-        const isEnabled = isContentTypeSelected || isSectionSelected || isModifiedSelected || isCreatedSelected || isCreatorSelected || isSubtreeSelected;
+        const isEnabled =
+            isContentTypeSelected || isSectionSelected || isModifiedSelected || isCreatedSelected || isCreatorSelected || isSubtreeSelected;
         const methodName = isEnabled ? 'removeAttribute' : 'setAttribute';
 
         applyBtn[methodName]('disabled', !isEnabled);
@@ -120,7 +121,7 @@
         toggleDisabledStateOnApplyBtn();
     };
     const dateConfig = {
-        formatDate: (date) => new Date(date).toLocaleDateString(),
+        formatDate: (date) => eZ.helpers.timezone.formatShortDateTime(date, null),
     };
     const checkSelectFieldsFilled = (modal) => {
         const inputs = [...modal.querySelectorAll('.ez-date-select')];
@@ -189,7 +190,7 @@
                     SortClauses: {},
                     Query: {
                         FullTextCriterion: `${value}*`,
-                        ContentTypeIdentifierCriterion: creatorInput.dataset.contentTypeIdentifiers,
+                        ContentTypeIdentifierCriterion: creatorInput.dataset.contentTypeIdentifiers.split(','),
                     },
                     limit: 50,
                     offset: 0,
@@ -214,7 +215,7 @@
             .then(showUsersList);
     };
     const createUsersListItem = (user) =>
-        `<li data-id="${user._id}" data-name="${user.Name}" class="ez-filters__user-item">${user.Name}</li>`;
+        `<li data-id="${user._id}" data-name="${user.TranslatedName}" class="ez-filters__user-item">${user.TranslatedName}</li>`;
     const showUsersList = (data) => {
         const hits = data.View.Result.searchHits.searchHit;
         const users = hits.reduce((total, hit) => total + createUsersListItem(hit.value.Content), '');
@@ -288,4 +289,4 @@
     listGroupsTitle.forEach((group) => group.addEventListener('click', toggleGroupState, false));
     contentTypeCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', filterByContentType, false));
     selectBtns.forEach((btn) => btn.addEventListener('click', setSelectedDateRange, false));
-})(window, document, window.jQuery);
+})(window, document, window.eZ, window.jQuery);

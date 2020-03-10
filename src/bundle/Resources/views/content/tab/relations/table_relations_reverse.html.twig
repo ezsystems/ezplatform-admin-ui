@@ -13,17 +13,35 @@
         </thead>
         <tbody>
         {% for relation in relations %}
-            {% set source = relation.sourceContentInfo %}
-            <tr>
-                <td><a href="{{ path('_ezpublishLocation', { 'locationId': source.mainLocationId }) }}">{{ source.name }}</a></td>
-                <td>{{ contentTypes[source.contentTypeId].name }}</td>
-                <td>
-                    {{ macros.relation_type(relation) }}
-                    {% if (relation.relationFieldDefinitionName) %}
-                        ({{ relation.relationFieldDefinitionName }})
-                    {% endif %}
-                </td>
-            </tr>
+            {% if relation.isAccessible %}
+                {% set source = relation.sourceContentInfo %}
+                <tr>
+                    <td>
+                        <a href="{{ path('_ezpublishLocation', { 'locationId': source.mainLocationId }) }}">
+                            {{ ez_content_name(source) }}
+                        </a>
+                    </td>
+                    <td>{{ contentTypes[source.contentTypeId].name }}</td>
+                    <td>
+                        {{ macros.relation_type(relation) }}
+                        {% if (relation.relationFieldDefinitionName) %}
+                            ({{ relation.relationFieldDefinitionName }})
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td class="table__cell ez-table__cell--has-text-info" colspan="8">
+                        {{
+                            'dashboard.table.relation.unauthorized'|trans({
+                                '%module%': relation.unauthorizedRelation.module,
+                                '%function%': relation.unauthorizedRelation.function,
+                                '%contentId%': relation.unauthorizedRelation.payload.contentId,
+                            })|desc('User does not have access to \'%function%\' \'%module%\' with content ID: %contentId%')
+                        }}
+                    </td>
+                </tr>
+            {% endif %}
         {% endfor %}
         </tbody>
     </table>

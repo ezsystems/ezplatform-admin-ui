@@ -9,17 +9,19 @@
 {% block details %}
     <div class="container mt-5 px-5">
         {% if baseLanguage is defined and baseLanguage is not null %}
-            <h2 class="ez-content-item-status">{{ 'editing_in_language_based_on'|trans({'%contentName%': content.name, '%languageName%': language.name, '%baseLanguageName%': baseLanguage.name})|desc('Editing - %contentName% in %languageName% based on %baseLanguageName%') }}</h2>
+            {% set title = 'editing_in_language_based_on'|trans({'%contentName%': content.name, '%languageName%': language.name, '%baseLanguageName%': baseLanguage.name})|desc('Editing - %contentName% in %languageName% based on %baseLanguageName%') %}
         {% else %}
-            <h2 class="ez-content-item-status">{{ 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing - %contentName% in %languageName%') }}</h2>
+            {% set title = 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing - %contentName% in %languageName%') %}
         {% endif %}
-        <h1>
+        <h2 class="ez-content-item-status" title="{{ title }}">{{ title }}</h2>
+        <h1 class="ez-content-item__title">
             <svg class="ez-icon ez-icon-{{ contentType.identifier }}">
                 <use xlink:href="{{ ez_content_type_icon(contentType.identifier) }}"></use>
             </svg>
-            {{ content.name }}
+            <div class="ez-content-item__name" title="{{ content.name }}">
+                {{ content.name }}
+            </div>
         </h1>
-
         <div class="small">
             {{ contentType.name }} /
             {% if creator is not null %}{{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }} /{% endif %}

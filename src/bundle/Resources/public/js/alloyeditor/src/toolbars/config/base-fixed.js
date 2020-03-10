@@ -8,13 +8,15 @@ export default class EzConfgiFixedBase extends EzConfigBase {
     static getTopPosition(block, editor) {
         const toolbar = document.querySelector('.ae-toolbar-floating');
         const editorRect = editor.element.getClientRect();
-        const toolbarHeight = toolbar.getBoundingClientRect().height;
+        const toolbarHeight = toolbar ? toolbar.getBoundingClientRect().height : 0;
         const shouldBeFixed = editorRect.top - toolbarHeight - 2 * TOOLBAR_OFFSET < 0;
         const top = shouldBeFixed
             ? TOOLBAR_OFFSET
             : editorRect.top + editor.element.getWindow().getScrollPosition().y - toolbarHeight - TOOLBAR_OFFSET;
 
-        toolbar.classList.toggle('ae-toolbar-floating--fixed', shouldBeFixed);
+        if (toolbar) {
+            toolbar.classList.toggle('ae-toolbar-floating--fixed', shouldBeFixed);
+        }
 
         return top;
     }

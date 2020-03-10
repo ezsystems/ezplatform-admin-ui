@@ -282,5 +282,17 @@
         <div class="ez-user__settings text-rows{% if group_class is not empty %} {{ group_class }}{% endif %}">
             {{- form_row(form.minLength, {'label_attr': {'class': 'ez-label'}}) -}}
         </div>
+
+        <div class="ez-user__settings text-rows{% if group_class is not empty %} {{ group_class }}{% endif %}">
+            {{- form_row(form.passwordTTL, {'label_attr': {'class': 'ez-label'}}) -}}
+        </div>
+
+        <div class="ez-user__settings text-rows{% if group_class is not empty %} {{ group_class }}{% endif %}">
+            {{- form_row(form.passwordTTLWarning, {'label_attr': {'class': 'ez-label'}}) -}}
+        </div>
+
+        <div class="ez-user__settings {% if group_class is not empty %} {{ group_class }}{% endif %}">
+            {{- form_row(form.requireNewPassword, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+        </div>
     </div>
 {% endblock %}

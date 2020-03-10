@@ -168,7 +168,6 @@ class FormFactory
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      */
     public function __construct(
         FormFactoryInterface $formFactory,
@@ -229,7 +228,7 @@ class FormFactory
 
     /**
      * @param ContentTypesDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -246,7 +245,7 @@ class FormFactory
 
     /**
      * @param ContentTypeGroupCreateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -265,7 +264,7 @@ class FormFactory
 
     /**
      * @param ContentTypeGroupUpdateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -280,7 +279,7 @@ class FormFactory
 
     /**
      * @param ContentTypeGroupDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -295,7 +294,7 @@ class FormFactory
 
     /**
      * @param ContentTypeGroupsDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -312,7 +311,7 @@ class FormFactory
 
     /**
      * @param TranslationAddData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -329,7 +328,7 @@ class FormFactory
 
     /**
      * @param TranslationDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -346,7 +345,7 @@ class FormFactory
 
     /**
      * @param VersionRemoveData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -363,7 +362,7 @@ class FormFactory
 
     /**
      * @param ContentLocationAddData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -378,7 +377,7 @@ class FormFactory
 
     /**
      * @param ContentLocationRemoveData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -393,7 +392,7 @@ class FormFactory
 
     /**
      * @param LocationSwapData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -430,7 +429,7 @@ class FormFactory
 
     /**
      * @param LocationTrashData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -445,7 +444,7 @@ class FormFactory
 
     /**
      * @param LocationMoveData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -460,7 +459,7 @@ class FormFactory
 
     /**
      * @param LocationCopyData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -475,7 +474,7 @@ class FormFactory
 
     /**
      * @param LocationUpdateVisibilityData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -492,7 +491,7 @@ class FormFactory
 
     /**
      * @param LocationUpdateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -507,7 +506,7 @@ class FormFactory
 
     /**
      * @param TrashItemRestoreData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -539,7 +538,7 @@ class FormFactory
 
     /**
      * @param TrashEmptyData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -554,7 +553,7 @@ class FormFactory
 
     /**
      * @param SectionContentAssignData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -569,7 +568,7 @@ class FormFactory
 
     /**
      * @param SectionDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -584,7 +583,7 @@ class FormFactory
 
     /**
      * @param SectionsDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -601,7 +600,7 @@ class FormFactory
 
     /**
      * @param SectionCreateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -620,7 +619,7 @@ class FormFactory
 
     /**
      * @param SectionUpdateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -635,7 +634,7 @@ class FormFactory
 
     /**
      * @param LanguageCreateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -654,7 +653,7 @@ class FormFactory
 
     /**
      * @param LanguageUpdateData $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -669,7 +668,7 @@ class FormFactory
 
     /**
      * @param LanguageDeleteData $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -684,7 +683,7 @@ class FormFactory
 
     /**
      * @param LanguagesDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -701,7 +700,7 @@ class FormFactory
 
     /**
      * @param RoleCreateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -716,7 +715,7 @@ class FormFactory
 
     /**
      * @param RoleUpdateData $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -731,7 +730,7 @@ class FormFactory
 
     /**
      * @param RoleDeleteData $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -746,7 +745,7 @@ class FormFactory
 
     /**
      * @param RolesDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -763,7 +762,7 @@ class FormFactory
 
     /**
      * @param RoleAssignmentCreateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -782,7 +781,7 @@ class FormFactory
 
     /**
      * @param RoleAssignmentDeleteData $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -804,7 +803,7 @@ class FormFactory
 
     /**
      * @param RoleAssignmentsDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -851,7 +850,7 @@ class FormFactory
 
     /**
      * @param PolicyUpdateData $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -866,7 +865,7 @@ class FormFactory
 
     /**
      * @param PolicyDeleteData $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -881,7 +880,7 @@ class FormFactory
 
     /**
      * @param PoliciesDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -898,7 +897,7 @@ class FormFactory
 
     /**
      * @param SearchData|null $data
-     * @param null|string $name
+     * @param string|null $name
      * @param array $options
      *
      * @return FormInterface
@@ -915,7 +914,7 @@ class FormFactory
 
     /**
      * @param URLListData|null $data
-     * @param null|string $name
+     * @param string|null $name
      * @param array $options
      *
      * @return FormInterface
@@ -932,7 +931,7 @@ class FormFactory
 
     /**
      * @param URLUpdateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      * @param array $options
      *
      * @return FormInterface
@@ -949,7 +948,7 @@ class FormFactory
 
     /**
      * @param UserDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -1070,7 +1069,7 @@ class FormFactory
 
     /**
      * @param ObjectStateGroupCreateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -1089,7 +1088,7 @@ class FormFactory
 
     /**
      * @param ObjectStateGroupDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -1104,7 +1103,7 @@ class FormFactory
 
     /**
      * @param ObjectStateGroupsDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -1121,7 +1120,7 @@ class FormFactory
 
     /**
      * @param ObjectStateGroupUpdateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      */
@@ -1136,7 +1135,7 @@ class FormFactory
 
     /**
      * @param ObjectStateCreateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -1157,7 +1156,7 @@ class FormFactory
 
     /**
      * @param ObjectStateDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -1174,7 +1173,7 @@ class FormFactory
 
     /**
      * @param ObjectStatesDeleteData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -1193,7 +1192,7 @@ class FormFactory
 
     /**
      * @param ObjectStateUpdateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *
@@ -1210,7 +1209,7 @@ class FormFactory
 
     /**
      * @param ContentObjectStateUpdateData|null $data
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return FormInterface
      *

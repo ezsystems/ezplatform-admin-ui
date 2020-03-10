@@ -1,7 +1,5 @@
 import customTagBaseDefinition from '../widgets/ez-custom-tag-base';
 
-const ZERO_WIDTH_SPACE = '&#8203;';
-
 CKEDITOR.dtd.$editable.span = 1;
 
 (function(global) {
@@ -46,6 +44,7 @@ CKEDITOR.dtd.$editable.span = 1;
                     this.getEzConfigElement();
                     this.cancelEditEvents();
                     this.renderIcon();
+                    this.initEnterHandler();
                 },
 
                 getIdentifier() {

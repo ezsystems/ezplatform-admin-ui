@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
+use EzSystems\BehatBundle\Helper\ArgumentParser;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
 use EzSystems\EzPlatformPageBuilder\Tests\Behat\PageObject\PageBuilderEditor;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Breadcrumb;
@@ -18,6 +19,16 @@ use PHPUnit\Framework\Assert;
 /** Context for general navigation actions */
 class NavigationContext extends BusinessContext
 {
+    private $argumentParser;
+
+    /**
+     * @injectService $argumentParser @EzSystems\BehatBundle\Helper\ArgumentParser
+     */
+    public function __construct(ArgumentParser $argumentParser)
+    {
+        $this->argumentParser = $argumentParser;
+    }
+
     /**
      * @Given I open :pageName page
      */
@@ -87,6 +98,7 @@ class NavigationContext extends BusinessContext
     {
         $contentPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $contentName);
         if ($path !== null) {
+            $path = $this->argumentParser->replaceRootKeyword($path);
             $contentPage->navigateToPath($path);
         }
         $contentPage->goToSubItem($contentName, $contentType);
@@ -121,6 +133,15 @@ class NavigationContext extends BusinessContext
     {
         $path = sprintf('%s/%s', EzEnvironmentConstants::get('ROOT_CONTENT_NAME'), $path);
         $this->verifyIfBreadcrumbShowsPath($path);
+    }
+
+    /**
+     * @Given I go to user notifications
+     */
+    public function iGoToUserNotifications()
+    {
+        $upperMenu = ElementFactory::createElement($this->utilityContext, UpperMenu::ELEMENT_NAME);
+        $upperMenu->chooseFromUserDropdown('View Notifications');
     }
 
     /**

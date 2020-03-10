@@ -7,16 +7,17 @@
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions as ApiException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\SPI\Limitation\Target;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
@@ -80,8 +81,14 @@ class ContentController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer */
     private $lookupLimitationsTransformer;
 
+    /** @var \eZ\Publish\Core\Helper\TranslationHelper */
+    private $translationHelper;
+
     /** @var array */
     private $userContentTypeIdentifier;
+
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    private $contentTypeService;
 
     /**
      * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
@@ -95,6 +102,7 @@ class ContentController extends Controller
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer $lookupLimitationsTransformer
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param array $userContentTypeIdentifier
      */
     public function __construct(
@@ -109,6 +117,8 @@ class ContentController extends Controller
         UserService $userService,
         PermissionResolver $permissionResolver,
         LookupLimitationsTransformer $lookupLimitationsTransformer,
+        TranslationHelper $translationHelper,
+        ContentTypeService $contentTypeService,
         array $userContentTypeIdentifier
     ) {
         $this->notificationHandler = $notificationHandler;
@@ -122,7 +132,9 @@ class ContentController extends Controller
         $this->userService = $userService;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
         $this->permissionResolver = $permissionResolver;
+        $this->translationHelper = $translationHelper;
         $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
+        $this->contentTypeService = $contentTypeService;
     }
 
     /**
@@ -192,12 +204,13 @@ class ContentController extends Controller
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentEditData $data) {
                 $contentInfo = $data->getContentInfo();
-                $versionInfo = $data->getVersionInfo();
                 $language = $data->getLanguage();
-                $versionNo = $versionInfo->versionNo;
                 $location = $data->getLocation();
 
                 $content = $this->contentService->loadContent($contentInfo->id);
+                $versionInfo = $data->getVersionInfo() ?? $content->getVersionInfo();
+                $versionNo = $versionInfo->versionNo;
+
                 if ((new ContentIsUser($this->userService))->isSatisfiedBy($content)) {
                     return $this->redirectToRoute('ez_user_update', [
                         'contentId' => $contentInfo->id,
@@ -207,15 +220,14 @@ class ContentController extends Controller
                 }
 
                 if (!$versionInfo->isDraft()) {
-                    $contentDraft = $this->contentService->createContentDraft($contentInfo, $versionInfo);
-                    $this->updateDraftInitialLanguage($contentDraft, $language);
+                    $contentDraft = $this->contentService->createContentDraft($contentInfo, $versionInfo, null, $language);
                     $versionNo = $contentDraft->getVersionInfo()->versionNo;
 
                     $this->notificationHandler->success(
                         $this->translator->trans(
                             /** @Desc("New Version Draft for '%name%' created.") */
                             'content.create_draft.success',
-                            ['%name%' => $contentInfo->name],
+                            ['%name%' => $this->translationHelper->getTranslatedContentName($content)],
                             'content'
                         )
                     );
@@ -377,7 +389,7 @@ class ContentController extends Controller
                     $this->translator->trans(
                         /** @Desc("Main language for '%name%' updated.") */
                         'content.main_language_update.success',
-                        ['%name%' => $contentInfo->name],
+                        ['%name%' => $this->translationHelper->getTranslatedContentName($content)],
                         'content'
                     )
                 );
@@ -418,6 +430,7 @@ class ContentController extends Controller
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentVisibilityUpdateData $data) {
                 $contentInfo = $data->getContentInfo();
+                $contentName = $this->translationHelper->getTranslatedContentNameByContentInfo($contentInfo);
                 $desiredVisibility = $data->getVisible();
                 $location = $data->getLocation();
 
@@ -426,7 +439,7 @@ class ContentController extends Controller
                         $this->translator->trans(
                             /** @Desc("Content '%name%' was already hidden.") */
                             'content.hide.already_hidden',
-                            ['%name%' => $contentInfo->name],
+                            ['%name%' => $contentName],
                             'content'
                         )
                     );
@@ -437,7 +450,7 @@ class ContentController extends Controller
                         $this->translator->trans(
                             /** @Desc("Content '%name%' was already visible.") */
                             'content.reveal.already_visible',
-                            ['%name%' => $contentInfo->name],
+                            ['%name%' => $contentName],
                             'content'
                         )
                     );
@@ -450,7 +463,7 @@ class ContentController extends Controller
                         $this->translator->trans(
                             /** @Desc("Content '%name%' has been hidden.") */
                             'content.hide.success',
-                            ['%name%' => $contentInfo->name],
+                            ['%name%' => $contentName],
                             'content'
                         )
                     );
@@ -463,7 +476,7 @@ class ContentController extends Controller
                         $this->translator->trans(
                             /** @Desc("Content '%name%' has been revealed.") */
                             'content.reveal.success',
-                            ['%name%' => $contentInfo->name],
+                            ['%name%' => $contentName],
                             'content'
                         )
                     );
@@ -526,29 +539,19 @@ class ContentController extends Controller
         return $response;
     }
 
-    /**
-     * @param \eZ\Publish\API\Repository\Values\Content\Content $contentDraft
-     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
-     * @throws \eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException
-     * @throws \eZ\Publish\API\Repository\Exceptions\ContentValidationException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
-    private function updateDraftInitialLanguage(
-        Content $contentDraft,
-        Language $language
-    ): void {
-        if ($language->languageCode === $contentDraft->versionInfo->initialLanguageCode) {
-            return;
+    public function relationViewAction(int $contentId): Response
+    {
+        try {
+            $content = $this->contentService->loadContent($contentId);
+        } catch (UnauthorizedException $exception) {
+            return $this->render('@ezdesign/content/relation_unauthorized.html.twig', [
+                'contentId' => $contentId,
+            ]);
         }
 
-        $contentUpdateStruct = $this->contentService->newContentUpdateStruct();
-
-        $contentUpdateStruct->initialLanguageCode = $language->languageCode;
-        $contentUpdateStruct->creatorId = $contentDraft->versionInfo->creatorId;
-
-        $this->contentService->updateContent($contentDraft->versionInfo, $contentUpdateStruct);
+        return $this->render('@ezdesign/content/relation.html.twig', [
+            'content' => $content,
+            'contentType' => $content->getContentType(),
+        ]);
     }
 }

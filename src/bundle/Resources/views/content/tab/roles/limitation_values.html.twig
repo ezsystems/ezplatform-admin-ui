@@ -1,7 +1,7 @@
 {% extends '@EzSystemsRepositoryForms/limitation_values.html.twig' %}
 
 {% block ez_limitation_subtree_value %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% for path in values %}
             {% for value in path %}
                 <a href="{{ path('_ezpublishLocation', {'locationId': value.mainLocationId}) }}" >{{ value.name }}</a>
@@ -9,5 +9,5 @@
             {% endfor %}
             {% if not loop.last %}, {% endif %}
         {% endfor %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}

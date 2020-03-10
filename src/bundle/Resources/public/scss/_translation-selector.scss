@@ -1,0 +1,64 @@
+.ez-translation-selector {
+    &__list-wrapper {
+        display: block;
+        position: fixed;
+        opacity: 1;
+        text-align: left;
+        background-color: $ez-color-secondary;
+        padding: calculateRem(9px);
+        border-radius: calculateRem(4px);
+
+        &--hidden {
+            display: none;
+        }
+
+        &--visually-hidden {
+            opacity: 0;
+        }
+    }
+
+    &__list-triangle {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(100%, -50%);
+
+        &:after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: calculateRem(5px) 0 calculateRem(5px) calculateRem(5px);
+            border-color: transparent transparent transparent $ez-color-secondary;
+            position: absolute;
+            z-index: 1;
+        }
+    }
+
+    &__title {
+        color: $ez-white;
+        font-size: calculateRem(16px);
+        line-height: 2;
+        font-weight: bold;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        background-color: $ez-ground-base;
+        padding: calculateRem(8px);
+        max-height: calculateRem(300px);
+        overflow: auto;
+
+        .ez-btn--content-edit {
+            background-color: $ez-white;
+            color: $ez-color-secondary;
+            padding: calculateRem(9px) calculateRem(24px);
+            text-align: left;
+
+            &:not(:last-child) {
+                margin-bottom: calculateRem(8px);
+            }
+        }
+    }
+}

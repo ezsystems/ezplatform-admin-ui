@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="5c6a58e397b164610db6371fe26b4e79aa3962f8" resname="dashboard.table.draft.unauthorized">
+        <source>User does not have access to '%function%' '%module%' with content ID: %contentId%</source>
+        <target state="new">User does not have access to '%function%' '%module%' with content ID: %contentId%</target>
+        <note>key: dashboard.table.draft.unauthorized</note>
+      </trans-unit>
       <trans-unit id="f261167093447f7940efd1484b40e362028a728c" resname="drafts.list">
         <source>Drafts</source>
         <target state="new">Drafts</target>

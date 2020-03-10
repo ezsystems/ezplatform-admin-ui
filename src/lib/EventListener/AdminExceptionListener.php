@@ -16,19 +16,28 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface;
+use Symfony\WebpackEncoreBundle\Asset\TagRenderer;
 use Twig\Environment;
 use Throwable;
+use Twig\Error\RuntimeError;
 
 class AdminExceptionListener
 {
-    /** @var NotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     protected $notificationHandler;
+
+    /** @var \Twig\Environment */
+    protected $twig;
+
+    /** @var \Symfony\WebpackEncoreBundle\Asset\TagRenderer */
+    protected $encoreTagRenderer;
+
+    /** @var \Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface */
+    private $entrypointLookupCollection;
 
     /** @var array */
     protected $siteAccessGroups;
-
-    /** @var Environment */
-    protected $twig;
 
     /** @var string */
     protected $rootDir;
@@ -37,8 +46,10 @@ class AdminExceptionListener
     protected $kernelEnvironment;
 
     /**
-     * @param Environment $twig
-     * @param NotificationHandlerInterface $notificationHandler
+     * @param \Twig\Environment $twig
+     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
+     * @param \Symfony\WebpackEncoreBundle\Asset\TagRenderer $encoreTagRenderer
+     * @param \Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface $entrypointLookupCollection
      * @param array $siteAccessGroups
      * @param string $kernelRootDir
      * @param string $kernelEnvironment
@@ -46,15 +57,19 @@ class AdminExceptionListener
     public function __construct(
         Environment $twig,
         NotificationHandlerInterface $notificationHandler,
+        TagRenderer $encoreTagRenderer,
+        EntrypointLookupCollectionInterface $entrypointLookupCollection,
         array $siteAccessGroups,
         string $kernelRootDir,
         string $kernelEnvironment
     ) {
         $this->twig = $twig;
         $this->notificationHandler = $notificationHandler;
+        $this->encoreTagRenderer = $encoreTagRenderer;
+        $this->entrypointLookupCollection = $entrypointLookupCollection;
         $this->siteAccessGroups = $siteAccessGroups;
-        $this->kernelEnvironment = $kernelEnvironment;
         $this->rootDir = $kernelRootDir . '/..';
+        $this->kernelEnvironment = $kernelEnvironment;
     }
 
     /**
@@ -82,7 +97,16 @@ class AdminExceptionListener
 
         $code = $response->getStatusCode();
 
+        // map exception to UI notification
         $this->notificationHandler->error($this->getNotificationMessage($exception));
+
+        if ($exception instanceof RuntimeError) {
+            // If exception is coming from the template where encore already
+            // rendered resources it would result in no CSS/JS on error page.
+            // Thus we reset TagRenderer to prevent it from breaking error page.
+            $this->encoreTagRenderer->reset();
+            $this->entrypointLookupCollection->getEntrypointLookup('ezplatform')->reset();
+        }
 
         switch ($code) {
             case 404:
@@ -112,7 +136,7 @@ class AdminExceptionListener
         /** @var SiteAccess $siteAccess */
         $siteAccess = $request->get('siteaccess', new SiteAccess());
 
-        return in_array($siteAccess->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME]);
+        return \in_array($siteAccess->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME]);
     }
 
     /**

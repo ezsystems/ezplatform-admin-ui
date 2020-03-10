@@ -2,6 +2,7 @@
     const eZ = (global.eZ = global.eZ || {});
     const HTML_NODE = 1;
     const TEXT_NODE = 3;
+    const notInitializeElements = ['strong', 'em', 'u', 'sup', 'sub', 's'];
 
     const BaseRichText = class BaseRichText {
         constructor() {
@@ -20,6 +21,7 @@
                 table: [],
                 tr: [],
                 td: [],
+                th: [],
                 ...global.eZ.adminUiConfig.alloyEditor.extraButtons,
             };
             this.attributes = global.eZ.adminUiConfig.alloyEditor.attributes;
@@ -58,6 +60,9 @@
                 }
             );
             this.alloyEditorExtraPlugins = global.eZ.adminUiConfig.alloyEditor.extraPlugins;
+            this.customStyleSelections = global.eZ.ezAlloyEditor.customSelections
+                ? Object.values(global.eZ.ezAlloyEditor.customSelections)
+                : [];
 
             this.xhtmlify = this.xhtmlify.bind(this);
         }
@@ -192,6 +197,9 @@
 
         init(container) {
             const toolbarProps = { extraButtons: this.alloyEditorExtraButtons, attributes: this.attributes, classes: this.classes };
+            const customSelections = this.customStyleSelections.map((Selection) => {
+                return new Selection(toolbarProps);
+            });
             const alloyEditor = global.AlloyEditor.editable(container.getAttribute('id'), {
                 toolbars: {
                     ezadd: {
@@ -247,9 +255,11 @@
                             new window.eZ.ezAlloyEditor.ezTableConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezTableRowConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezTableCellConfig(toolbarProps),
+                            new window.eZ.ezAlloyEditor.ezTableHeaderConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezEmbedImageLinkConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezEmbedImageConfig(toolbarProps),
                             new window.eZ.ezAlloyEditor.ezEmbedConfig(toolbarProps),
+                            ...customSelections,
                         ],
                         tabIndex: 1,
                     },
@@ -315,12 +325,15 @@
             nativeEditor.on('change', saveRichText);
             nativeEditor.on('customUpdate', saveRichText);
             nativeEditor.on('editorInteraction', saveRichText);
+            nativeEditor.on('afterPaste', () => {
+                this.setLinksProtocol(container);
+            });
 
             return alloyEditor;
         }
 
         setNodeInitializedState(node) {
-            if (node.nodeType === HTML_NODE) {
+            if (node.nodeType === HTML_NODE && !notInitializeElements.includes(node.nodeName.toLowerCase())) {
                 node.setAttribute('data-ez-node-initialized', true);
             }
         }
@@ -379,6 +392,24 @@
 
         splitIntoWords(text) {
             return text.split(' ').filter((word) => word.trim());
+        }
+
+        setLinksProtocol(container) {
+            const links = container.querySelectorAll('a');
+            const anchorPrefix = '#';
+            const protocolPrefix = 'http://';
+
+            links.forEach((link) => {
+                const href = link.getAttribute('href');
+                const protocolPattern = /^https?:\/\//i;
+
+                if (href && href.indexOf(anchorPrefix) !== 0 && !protocolPattern.test(href)) {
+                    const protocolHref = protocolPrefix.concat(href);
+
+                    link.setAttribute('href', protocolHref);
+                    link.setAttribute('data-cke-saved-href', protocolHref);
+                }
+            });
         }
     };
 

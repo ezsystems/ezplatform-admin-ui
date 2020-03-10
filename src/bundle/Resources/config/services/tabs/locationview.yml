@@ -29,3 +29,10 @@ services:
             $siteAccessLanguages: '$languages$'
         tags:
             - { name: ezplatform.tab, group: location-view }
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\UrlsTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab
+        arguments:
+            $translationHelper: '@ezpublish.translation_helper'
+        tags:
+            - { name: ezplatform.tab, group: location-view }

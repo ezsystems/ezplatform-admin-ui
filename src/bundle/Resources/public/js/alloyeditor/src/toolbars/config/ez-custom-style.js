@@ -20,16 +20,6 @@ export default class EzCustomStyleConfig extends EzConfigBase {
         this.addExtraButtons(config.extraButtons);
     }
 
-    getStyles(customStyles = []) {
-        return {
-            name: 'styles',
-            cfg: {
-                showRemoveStylesItem: false,
-                styles: [...customStyles],
-            },
-        };
-    }
-
     /**
      * Tests whether the `custom style` toolbar should be visible. It is
      * visible when an existing custom style gets the focus.

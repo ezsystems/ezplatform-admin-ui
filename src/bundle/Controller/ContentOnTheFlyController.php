@@ -82,7 +82,7 @@ class ContentOnTheFlyController extends Controller
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
      * @param \eZ\Publish\API\Repository\Values\Content\Location $parentLocation
      *
-     * @return \EzSystems\EzPlatformAdminUi\RepositoryForms\View\ContentCreateOnTheFlyView|null|\Symfony\Component\HttpFoundation\Response
+     * @return \EzSystems\EzPlatformAdminUi\RepositoryForms\View\ContentCreateOnTheFlyView|\Symfony\Component\HttpFoundation\Response|null
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType

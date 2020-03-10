@@ -12,11 +12,11 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
+use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\ContentDraftAdapter;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
-use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -135,16 +135,13 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
             self::PAGINATION_PARAM_NAME, 1
         );
 
-        $contentDraftsDataset = $this->datasetFactory->contentDrafts();
-        $contentDraftsDataset->load();
-
         $pagination = new Pagerfanta(
-            new ArrayAdapter($contentDraftsDataset->getContentDrafts())
+            new ContentDraftAdapter($this->contentService, $this->datasetFactory)
         );
         $pagination->setMaxPerPage($this->defaultPaginationLimit);
         $pagination->setCurrentPage(min(max($currentPage, 1), $pagination->getNbPages()));
 
-        return $this->twig->render('@ezdesign/dashboard/tab/my_drafts.html.twig', [
+        return $this->twig->render('@ezdesign/dashboard/tab/my_draft_list.html.twig', [
             'data' => $pagination->getCurrentPageResults(),
             'pager' => $pagination,
             'pager_options' => [

@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Search;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Language\ConfiguredLanguagesChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
@@ -64,12 +65,22 @@ class SearchType extends AbstractType
                 'placeholder' => /** @Desc("Any time") */ 'search.any_time',
                 'mapped' => false,
             ])
+            ->add(
+                'search_language',
+                ConfiguredLanguagesChoiceType::class,
+                [
+                    'required' => false,
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => false,
+                ]
+            )
             ->add('subtree', HiddenType::class, [
                 'required' => false,
             ])
         ;
 
-        if ($this->permissionResolver->hasAccess('section', 'view')) {
+        if ($this->permissionResolver->hasAccess('section', 'view') !== false) {
             $builder->add('section', SectionChoiceType::class, [
                 'required' => false,
                 'multiple' => false,
@@ -87,6 +98,10 @@ class SearchType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SearchData::class,
+            'error_mapping' => [
+                'created' => 'created_select',
+                'last_modified' => 'last_modified_select',
+            ],
         ]);
     }
 

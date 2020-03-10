@@ -41,7 +41,8 @@ class SectionPage extends Page
     public function __construct(UtilityContext $context, string $sectionName)
     {
         parent::__construct($context);
-        $this->route = '/admin/section/view/';
+        $this->siteAccess = 'admin';
+        $this->route = '/section/view/';
         $this->sectionName = $sectionName;
         $this->adminLists['Section information'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Section information', SimpleTable::ELEMENT_NAME);
         $this->adminLists['Content items'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Content items', SimpleTable::ELEMENT_NAME, $this->secondListContainerLocator);

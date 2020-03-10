@@ -1,4 +1,5 @@
 const DATA_ALIGNMENT_ATTR = 'ezalign';
+const ENTER_KEY_CODE = 13;
 
 const customTagBaseDefinition = {
     defaults: {
@@ -79,6 +80,27 @@ const customTagBaseDefinition = {
                 },
             },
         });
+        this.initEnterHandler();
+    },
+
+    initEnterHandler() {
+        const enterNewLine = this.enterNewLine.bind(this);
+
+        this.editor.on('selectionChange', (event) => {
+            const isCustomTag = event.data.path.lastElement.$.classList.contains('cke_widget_wrapper_ez-custom-tag');
+            const methodName = isCustomTag ? 'addEventListener' : 'removeEventListener';
+
+            document.body[methodName]('keyup', enterNewLine, false);
+        });
+    },
+
+    enterNewLine(event) {
+        if (event.keyCode === ENTER_KEY_CODE) {
+            this.editor.execCommand('eZAddContent', {
+                tagName: 'p',
+                content: '<br>',
+            });
+        }
     },
 
     getIdentifier() {
@@ -441,9 +463,12 @@ const customTagBaseDefinition = {
         let content = [...this.element.getChildren().$].find((child) => child.dataset && child.dataset.ezelement === 'ezcontent');
 
         if (!content) {
+            const para = new CKEDITOR.dom.element('p');
+
             content = new CKEDITOR.dom.element('div');
             content.data('ezelement', 'ezcontent');
-            this.element.append(content);
+            content.append(para);
+            this.element.append(content, true);
         } else {
             content = new CKEDITOR.dom.element(content);
         }

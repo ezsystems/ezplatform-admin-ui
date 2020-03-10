@@ -1,3 +1,5 @@
+{# This template is deprecated since 2.5 and will be removed in 3.0. Please use src/bundle/Resources/views/dashboard/tab/my_draft_list.html.twig instead. #}
+
 {% trans_default_domain 'dashboard' %}
 
 {% if data|length %}
@@ -22,7 +24,11 @@
                         <use xlink:href="{{ ez_content_type_icon(row.content_type.identifier) }}"></use>
                     </svg>
                 </td>
-                <td class="ez-table__cell ez-table__cell--after-icon">{{ row.name }}</td>
+                <td class="ez-table__cell ez-table__cell--name ez-table__cell--after-icon">
+                    <span title="{{ row.name }}">
+                        {{ row.name }}
+                    </span>
+                </td>
                 <td class="ez-table__cell">{{ row.content_type.name }}</td>
                 <td class="ez-table__cell">{{ admin_ui_config.languages.mappings[row.language].name }}</td>
                 <td class="ez-table__cell">{{ row.version }}</td>

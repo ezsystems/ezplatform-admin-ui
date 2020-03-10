@@ -7,9 +7,14 @@
     </header>
     <body>
       <trans-unit id="a31bc2d766bef988d3d4e2e0892c79b64d2aadd9" resname="anchor_btn.error.unique">
-        <source>This anchor already exists on the page. Anchor name must be unique.</source>
-        <target state="new">This anchor already exists on the page. Anchor name must be unique.</target>
+        <source>Anchor name must be unique.</source>
+        <target state="new">Anchor name must be unique.</target>
         <note>key: anchor_btn.error.unique</note>
+      </trans-unit>
+      <trans-unit id="88d893050d5eea476d9559abba8b7cdda519154a" resname="anchor_btn.error.valid">
+        <source>A valid anchor link is needed.</source>
+        <target state="new">A valid anchor link is needed.</target>
+        <note>key: anchor_btn.error.valid</note>
       </trans-unit>
       <trans-unit id="2fec67b71cd77563c4e494477e691ba9661d95fe" resname="anchor_btn.label">
         <source>Anchor</source>
@@ -205,6 +210,11 @@
         <source>Remove block</source>
         <target state="new">Remove block</target>
         <note>key: remove_block_btn.title</note>
+      </trans-unit>
+      <trans-unit id="b54e4890869a4f4e1ec7065a38f1e9c8b9e8cf3d" resname="removed_content.label">
+        <source>Removed</source>
+        <target state="new">Removed</target>
+        <note>key: removed_content.label</note>
       </trans-unit>
       <trans-unit id="e51c80180acbd8d90c95344dbdfb0f6a3ada456e" resname="table_btn.label">
         <source>Table</source>

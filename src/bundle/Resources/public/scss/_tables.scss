@@ -35,6 +35,11 @@
             padding-right: calculateRem(20px);
         }
 
+        .table &--has-text-info {
+            padding: calculateRem(16px) calculateRem(8px);
+            text-align: center;
+        }
+
         &--has-checkbox {
             width: 5%;
         }
@@ -49,6 +54,12 @@
 
         .table &--after-icon {
             padding-left: 0;
+        }
+
+        .table &--name {
+            max-width: calculateRem(350px);
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
         &--no-content {
@@ -79,6 +90,13 @@
         margin-bottom: 0;
         font-weight: bold;
         color: $ez-black;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__tools {
+        white-space: nowrap;
     }
 }
 

@@ -154,7 +154,7 @@
         const renderRow = (item, index) => {
             const { escapeHTML } = eZ.helpers.text;
             const contentTypeName = eZ.adminUiConfig.contentTypeNames[item.ContentInfo.Content.ContentTypeInfo.identifier];
-            const contentName = escapeHTML(item.ContentInfo.Content.Name);
+            const contentName = escapeHTML(item.ContentInfo.Content.TranslatedName);
             const contentId = escapeHTML(item.ContentInfo.Content._id);
 
             return `
@@ -182,7 +182,7 @@
             addBtn[methodName]('disabled', true);
         };
         const updateTrashBtnState = (event) => {
-            if (!event.target.hasAttribute('type') || event.target.type !== 'checkbox') {
+            if ((!event.target.hasAttribute('type') || event.target.type !== 'checkbox') && event.currentTarget !== trashBtn) {
                 return;
             }
 
@@ -215,7 +215,20 @@
             return [...relationsContainer.querySelectorAll('[type="checkbox"]')];
         };
         const attachRowsEventHandlers = () => {
-            findOrderInputs().forEach((item) => item.addEventListener('blur', updateSelectedItemsOrder, false));
+            const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+            
+            findOrderInputs().forEach((item) => {
+                item.addEventListener('blur', updateSelectedItemsOrder, false);
+
+                if (isFirefox) {
+                    item.addEventListener('change', focusOnElement, false);
+                }
+            });
+        };
+        const focusOnElement = (event) => {
+            if (doc.activeElement !== event.target) {
+                event.target.focus();
+            }
         };
         const emptyRelationsContainer = () => {
             while (relationsContainer.lastChild) {
@@ -256,11 +269,13 @@
         updateAddBtnState();
         attachRowsEventHandlers();
 
-        [...fieldContainer.querySelectorAll(SELECTOR_BTN_ADD), ...fieldContainer.querySelectorAll('.ez-relations__cta-btn')].forEach(
-            (btn) => btn.addEventListener('click', openUDW, false)
-        );
+        [
+            ...fieldContainer.querySelectorAll(SELECTOR_BTN_ADD),
+            ...fieldContainer.querySelectorAll('.ez-relations__cta-btn'),
+        ].forEach((btn) => btn.addEventListener('click', openUDW, false));
 
         trashBtn.addEventListener('click', removeItem, false);
+        trashBtn.addEventListener('click', updateTrashBtnState, false);
         relationsContainer.addEventListener('change', updateTrashBtnState, false);
 
         validator.init();

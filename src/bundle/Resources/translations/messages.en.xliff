@@ -11,6 +11,31 @@
         <target state="new">Close</target>
         <note>key: alert.close</note>
       </trans-unit>
+      <trans-unit id="8ace6daf300d4e12a28054d996c185db9ce7fe91" resname="authentication.credentials_expire_in.warning">
+        <source>Your password will expire in %days% days. Consider updating it in User Settings/My Account Settings.</source>
+        <target state="new">Your password will expire in %days% days. Consider updating it in User Settings/My Account Settings.</target>
+        <note>key: authentication.credentials_expire_in.warning</note>
+      </trans-unit>
+      <trans-unit id="e524fb7941a99d5c26d355dbf015226241e807a7" resname="authentication.credentials_expire_today.warning">
+        <source>Your password will expire today. Consider updating it in User Settings/My Account Settings.</source>
+        <target state="new">Your password will expire today. Consider updating it in User Settings/My Account Settings.</target>
+        <note>key: authentication.credentials_expire_today.warning</note>
+      </trans-unit>
+      <trans-unit id="c9a7a0dd7518550634ea6873dcc815d4ec30c1e2" resname="authentication.credentials_expired">
+        <source>Your password has expired</source>
+        <target state="new">Your password has expired</target>
+        <note>key: authentication.credentials_expired</note>
+      </trans-unit>
+      <trans-unit id="be4c13cda3e93a1e8cb05145c0dc6c3780c40c66" resname="authentication.credentials_expired.message">
+        <source>For security reasons, your password has expired and needs to be changed. An email has been sent to you with instructions.</source>
+        <target state="new">For security reasons, your password has expired and needs to be changed. An email has been sent to you with instructions.</target>
+        <note>key: authentication.credentials_expired.message</note>
+      </trans-unit>
+      <trans-unit id="2b3f00f63c14c6dc9300d54b42159218f6b5f260" resname="authentication.credentials_expired.reset_password">
+        <source>Reset password</source>
+        <target state="new">Reset password</target>
+        <note>key: authentication.credentials_expired.reset_password</note>
+      </trans-unit>
       <trans-unit id="d2293b387ecddbc6173fd579abd37873fcbc5e97" resname="authentication.forgot_password">
         <source>Forgot password?</source>
         <target state="new">Forgot password?</target>
@@ -61,6 +86,11 @@
         <target state="new">words</target>
         <note>key: character_counter.words</note>
       </trans-unit>
+      <trans-unit id="e136be672df8eb27dc4eb2f1ce0650096090bf81" resname="content.hidden.message">
+        <source>You don't have permissions to view this Content item (contentID: %contentId%).</source>
+        <target state="new">You don't have permissions to view this Content item (contentID: %contentId%).</target>
+        <note>key: content.hidden.message</note>
+      </trans-unit>
       <trans-unit id="22d5072ec8766c24df085f05aaeda403f02ec585" resname="content.hide.modal.cancel">
         <source>Cancel</source>
         <target state="new">Cancel</target>
@@ -82,8 +112,8 @@
         <note>key: content.hide.modal.title</note>
       </trans-unit>
       <trans-unit id="0f260745fb36618170e86bd6407bb2facd3a05a1" resname="content.hide.modal.warning_content_used_by_other_content">
-        <source>This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</source>
-        <target state="new">This item is being used by other content item(s). Please remove all instance(s) to avoid a 404 error.</target>
+        <source>This item is being used by other content item(s). To avoid errors, please update or remove all related objects listed in the Relations tab.</source>
+        <target state="new">This item is being used by other content item(s). To avoid errors, please update or remove all related objects listed in the Relations tab.</target>
         <note>key: content.hide.modal.warning_content_used_by_other_content</note>
       </trans-unit>
       <trans-unit id="fb19ae886e63bac3aa3b851ac00aae8a3b777992" resname="content.in_trash">
@@ -239,6 +269,11 @@
         <target state="new">Cancel</target>
         <note>key: form.cancel</note>
       </trans-unit>
+      <trans-unit id="1ada7c495c1592fd70ef48759574e764787bf969" resname="location_trash_form.confirm_label">
+        <source>I understand the consequences of this action.</source>
+        <target state="new">I understand the consequences of this action.</target>
+        <note>key: location_trash_form.confirm_label</note>
+      </trans-unit>
       <trans-unit id="7fe072f41348fb097b6bb018eec4f1b1bc9cffc3" resname="modal.cancel">
         <source>Cancel</source>
         <target state="new">Cancel</target>
@@ -305,44 +340,34 @@
         <note>key: trash.form.cancel</note>
       </trans-unit>
       <trans-unit id="2720e3018fc8b1158cb728b1d5dc377ef7293b57" resname="trash.modal.message">
-        <source>Are you sure you want to send this content item to trash?</source>
-        <target state="new">Are you sure you want to send this content item to trash?</target>
+        <source>Are you sure you want to send this Content item to Trash?</source>
+        <target state="new">Are you sure you want to send this Content item to Trash?</target>
         <note>key: trash.modal.message</note>
       </trans-unit>
       <trans-unit id="bd97a738137e75de44544db1104bab3a46222791" resname="trash_asset.modal.message_body">
-        <source>If you wish to delete this(/these) asset(s) too, first make sure they are not used by other content. You can check these content going to the asset(s) and looking at their content relations in the Relation tab.</source>
-        <target state="new">If you wish to delete this(/these) asset(s) too, first make sure they are not used by other content. You can check these content going to the asset(s) and looking at their content relations in the Relation tab.</target>
+        <source>If you wish to delete these assets too, first make sure they are not used by other content. To check, go to the asset preview and look at its content Relations in the Relations tab.</source>
+        <target state="new">If you wish to delete these assets too, first make sure they are not used by other content. To check, go to the asset preview and look at its content Relations in the Relations tab.</target>
         <note>key: trash_asset.modal.message_body</note>
       </trans-unit>
       <trans-unit id="17c7abad79d72d771a25b064e0de38b72fc6c926" resname="trash_asset.modal.message_header">
-        <source>You are about to delete a content that has one or several asset(s) field(s) used by other content items. These assets will remain available in system.</source>
-        <target state="new">You are about to delete a content that has one or several asset(s) field(s) used by other content items. These assets will remain available in system.</target>
+        <source>You are about to delete a Content item that has one or more asset Field(s) used by other Content items. These assets will remain available in system.</source>
+        <target state="new">You are about to delete a Content item that has one or more asset Field(s) used by other Content items. These assets will remain available in system.</target>
         <note>key: trash_asset.modal.message_header</note>
       </trans-unit>
-      <trans-unit id="0d57f9b91203aa4d9920e63d793b8e62c0bb242c" resname="trash_asset_single.modal.header">
-        <source>Deleting content</source>
-        <target state="new">Deleting content</target>
-        <note>key: trash_asset_single.modal.header</note>
-      </trans-unit>
-      <trans-unit id="e81a14f38ebe272cb11ef90e2948a8c6602307ca" resname="trash_asset_single.modal.message">
-        <source>You have the option to delete %content_name% (%content_type%) only or to also delete the assets it is using. Make your choice:</source>
-        <target state="new">You have the option to delete %content_name% (%content_type%) only or to also delete the assets it is using. Make your choice:</target>
-        <note>key: trash_asset_single.modal.message</note>
-      </trans-unit>
       <trans-unit id="ff537a1e092270edf7497dc13ce051cdb458958b" resname="trash_asset_single.modal.message_main">
-        <source>You are about to delete a content with one or several asset(s) field(s).</source>
-        <target state="new">You are about to delete a content with one or several asset(s) field(s).</target>
+        <source>'%content_name%' has 1 or more asset Field(s). You have an option to send only the Content item to Trash, or to send the Content item and its assets to Trash. Please select your option:</source>
+        <target state="new">'%content_name%' has 1 or more asset Field(s). You have an option to send only the Content item to Trash, or to send the Content item and its assets to Trash. Please select your option:</target>
         <note>key: trash_asset_single.modal.message_main</note>
       </trans-unit>
-      <trans-unit id="a70d984d62d43229009fefdbfdc740199ede75ca" resname="trash_container.modal.header">
-        <source>Deleting content</source>
-        <target state="new">Deleting content</target>
-        <note>key: trash_container.modal.header</note>
-      </trans-unit>
       <trans-unit id="1e6a1d97cca01a288e47d2d14479274b90e6c6c1" resname="trash_container.modal.message_main">
-        <source>Deleting %content_name% will also delete its sub-items, under its location(s). To confirm, please check below</source>
-        <target state="new">Deleting %content_name% will also delete its sub-items, under its location(s). To confirm, please check below</target>
+        <source>Sending '%content_name%' and its %children_count% Content item(s) to Trash will also send the sub-items of this Location to Trash.</source>
+        <target state="new">Sending '%content_name%' and its %children_count% Content item(s) to Trash will also send the sub-items of this Location to Trash.</target>
         <note>key: trash_container.modal.message_main</note>
+      </trans-unit>
+      <trans-unit id="ef4df0dede01e561e75568aa128a8092cbbee66a" resname="trash_container.modal.message_relations">
+        <source>'%content_name%' is in use by %reverse_relations% Content item(s). You should remove all reverse Relations before deleting the Content item.</source>
+        <target state="new">'%content_name%' is in use by %reverse_relations% Content item(s). You should remove all reverse Relations before deleting the Content item.</target>
+        <note>key: trash_container.modal.message_relations</note>
       </trans-unit>
     </body>
   </file>

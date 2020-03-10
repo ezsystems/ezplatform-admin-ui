@@ -53,8 +53,16 @@ export default class EzBtnImageLinkEdit extends EzBtnLinkEdit {
         ReactDOM.unmountComponentAtNode(udwContainer);
     }
 
+    udwOnCancel(udwContainer, items) {
+        this.widget.setLinkEditState();
+        this.widget.setFocused(true);
+
+        ReactDOM.unmountComponentAtNode(udwContainer);
+    }
+
     removeLink() {
         const link = this.widget.getEzLinkElement();
+        const editor = this.props.editor.get('nativeEditor');
 
         link.remove();
 
@@ -63,6 +71,8 @@ export default class EzBtnImageLinkEdit extends EzBtnLinkEdit {
         this.widget.setFocused(true);
 
         this.props.cancelExclusive();
+
+        editor.fire('customUpdate');
     }
 
     updateLink() {

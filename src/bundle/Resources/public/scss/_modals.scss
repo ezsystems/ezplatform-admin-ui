@@ -1,4 +1,6 @@
-.ez-modal--send-to-trash {
+.ez-modal--send-to-trash,
+.ez-modal--trash-container,
+.ez-modal--trash-with-asset {
     .modal-dialog {
         background-color: $ez-ground-base-medium;
         border-radius: calculateRem(4px);
@@ -14,6 +16,28 @@
     .modal-body {
         padding: calculateRem(15px) calculateRem(30px);
 
+        .ez-modal__trash-option {
+            padding: calculateRem(20px) calculateRem(20px) 0;
+
+            &--disabled {
+                cursor: not-allowed;
+                opacity: 0.3;
+            }
+
+            .form-check {
+                margin-left: calculateRem(20px);
+
+                .form-check-label {
+                    color: inherit;
+                }
+            }
+        }
+
+        .ez-modal__option-label,
+        .ez-modal__option-description {
+            margin-bottom: 0;
+        }
+
         .ez-modal-body__main,
         .ez-modal-body__explanation {
             margin-bottom: 0;
@@ -23,6 +47,25 @@
 
     .modal-footer {
         border-top: none;
+
+        .btn {
+            padding: calculateRem(6px) calculateRem(12px);
+            font-size: calculateRem(16px);
+            border-radius: calculateRem(4px);
+            line-height: 1.5;
+        }
+    }
+}
+
+.ez-modal--trash-container {
+    .ez-toggle-btn-state-checkbox {
+        margin-left: calculateRem(30px);
+    }
+}
+
+.ez-modal--trash-with-asset {
+    .ez-trash-with-asset-checkbox-list {
+        margin-left: calculateRem(30px);
     }
 }
 
@@ -157,9 +200,7 @@
     }
 }
 
-.ez-modal--bulk-action-failed,
-.ez-modal--trash-with-asset,
-.ez-modal--trash-container {
+.ez-modal--bulk-action-failed {
     .modal-dialog {
         max-width: calculateRem(800px);
     }
@@ -203,5 +244,19 @@
 
     .modal-footer {
         justify-content: center;
+    }
+}
+
+.ez-modal--content-hide-confirmation {
+    .modal-body {
+        .ez-modal-body__main {
+            padding: 0 calculateRem(16px);
+        }
+    }
+}
+
+.ez-modal--trash-location {
+    .modal-dialog {
+        max-width: calculateRem(800px);
     }
 }

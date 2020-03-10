@@ -116,11 +116,35 @@ class DatasetFactory
     }
 
     /**
+     * @deprecated since version 2.5, to be removed in 3.0. Please use DatasetFactory::relationList and DatasetFactory::reverseRelationList instead.
+     *
      * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\RelationsDataset
      */
     public function relations(): RelationsDataset
     {
         return new RelationsDataset($this->contentService, $this->valueFactory);
+    }
+
+    /**
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\RelationListDataset
+     */
+    public function relationList(): RelationListDataset
+    {
+        return new RelationListDataset(
+            $this->contentService,
+            $this->valueFactory
+        );
+    }
+
+    /**
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\ReverseRelationListDataset
+     */
+    public function reverseRelationList(): ReverseRelationListDataset
+    {
+        return new ReverseRelationListDataset(
+            $this->contentService,
+            $this->valueFactory
+        );
     }
 
     /**
@@ -191,6 +215,8 @@ class DatasetFactory
     }
 
     /**
+     * @deprecated since version 2.5, to be removed in 3.0. Please use DatasetFactory::contentDraftList instead.
+     *
      * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\ContentDraftsDataset
      */
     public function contentDrafts(): ContentDraftsDataset
@@ -199,6 +225,18 @@ class DatasetFactory
             $this->contentService,
             $this->contentTypeService,
             $this->locationService
+        );
+    }
+
+    /**
+     * @return \EzSystems\EzPlatformAdminUi\UI\Dataset\ContentDraftListDataset
+     */
+    public function contentDraftList(): ContentDraftListDataset
+    {
+        return new ContentDraftListDataset(
+            $this->contentService,
+            $this->contentTypeService,
+            $this->valueFactory
         );
     }
 }

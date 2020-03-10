@@ -136,9 +136,14 @@ class ContentTypeController extends Controller
     public function listAction(ContentTypeGroup $group, string $routeName, int $page): Response
     {
         $deletableTypes = [];
+        $contentTypes = $this->contentTypeService->loadContentTypes($group, $this->languages);
+
+        usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
+            return strnatcasecmp($contentType1->getName(), $contentType2->getName());
+        });
 
         $pagerfanta = new Pagerfanta(
-            new ArrayAdapter($this->contentTypeService->loadContentTypes($group, $this->languages))
+            new ArrayAdapter($contentTypes)
         );
 
         $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
@@ -349,31 +354,26 @@ class ContentTypeController extends Controller
     public function editAction(Request $request, ContentTypeGroup $group, ContentType $contentType): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('class', 'update'));
-        // Kernel does not allow editing the same Content Type simultaneously by more than one user.
-        // So we need to catch 'BadStateException' and inform user about another user editing the Content Type
         try {
-            $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentType->id);
-            $this->contentTypeService->deleteContentType($contentTypeDraft);
-            $contentTypeDraft = $this->contentTypeService->createContentTypeDraft($contentType);
+            $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentType->id, true);
         } catch (NotFoundException $e) {
-            try {
-                $contentTypeDraft = $this->contentTypeService->createContentTypeDraft($contentType);
-            } catch (BadStateException $e) {
-                $userId = $contentType->modifierId;
-                $this->notificationHandler->error(
-                    $this->translator->trans(
-                        /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
-                        'content_type.edit.error.already_exists',
-                        ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($userId)],
-                        'content_type'
-                    )
-                );
+            $contentTypeDraft = $this->contentTypeService->createContentTypeDraft($contentType);
+        }
 
-                return $this->redirectToRoute('ezplatform.content_type.view', [
-                    'contentTypeGroupId' => $group->id,
-                    'contentTypeId' => $contentType->id,
-                ]);
-            }
+        if ($contentTypeDraft->modifierId !== $this->getUser()->getAPIUser()->getUserId()) {
+            $this->notificationHandler->error(
+                $this->translator->trans(
+                    /** @Desc("Draft of the Content Type '%name%' already exists and is locked by '%userContentName%'") */
+                    'content_type.edit.error.already_exists',
+                    ['%name%' => $contentType->getName(), '%userContentName%' => $this->getUserNameById($contentTypeDraft->modifierId)],
+                    'content_type'
+                )
+            );
+
+            return $this->redirectToRoute('ezplatform.content_type.view', [
+                'contentTypeGroupId' => $group->id,
+                'contentTypeId' => $contentType->id,
+            ]);
         }
 
         $form = $this->contentTypeFormFactory->contentTypeEdit(

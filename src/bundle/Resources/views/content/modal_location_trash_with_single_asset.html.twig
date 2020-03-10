@@ -1,10 +1,10 @@
 {% form_theme form '@ezdesign/form_fields.html.twig' %}
+{# @deprecated since 2.5, to be removed in 3.0 #}
 
 <div class="modal fade ez-modal ez-modal--trash-with-asset" id="trash-with-asset-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ 'trash_asset_single.modal.header'|trans|desc('Deleting content') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg class="ez-icon ez-icon--medium" aria-hidden="true">
                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
@@ -12,11 +12,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p class="ez-modal-body__main">
-                    {{ 'trash_asset_single.modal.message_main'|trans|desc('You are about to delete a content with one or several asset(s) field(s).') }}
-                </p>
-                <p class="ez-modal-body__main">
-                    {{ 'trash_asset_single.modal.message'|trans({'%content_name%': content_name, '%content_type%': content_type})|desc('You have the option to delete %content_name% (%content_type%) only or to also delete the assets it is using. Make your choice:') }}
+                <p class="ez-modal-body__main mb-2">
+                    {{ 'trash_asset_single.modal.message_main'|trans({'%content_name%': content_name, '%content_type%': content_type})|desc("'%content_name%' has 1 or more asset Field(s). You have an option to send only the Content item to Trash, or to send the Content item and its assets to Trash. Please select your option:") }}
                 </p>
                 {{ form_start(form, {
                     'action': path('ezplatform.location.trash_with_asset'),
@@ -28,12 +25,12 @@
                 {{ form_widget(form.trashAssets, {'attr' : {'class': 'ez-trash-with-asset-checkbox-list'} }) }}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">
                     {{ 'trash.form.cancel'|trans|desc('Cancel') }}
                 </button>
                 {{ form_widget(form.trash, {
                     'attr': {
-                        'class': 'btn-danger',
+                        'class': 'btn-danger font-weight-bold',
                         'disabled' : 'disabled'
                     }
                 }) }}

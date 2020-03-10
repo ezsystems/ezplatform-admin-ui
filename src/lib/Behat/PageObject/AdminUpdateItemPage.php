@@ -14,9 +14,6 @@ use PHPUnit\Framework\Assert;
 
 class AdminUpdateItemPage extends Page
 {
-    /** @var string Route under which the Page is available */
-    protected $route = '/admin/contenttypegroup';
-
     /** @var string Name by which Page is recognised */
     public const PAGE_NAME = 'Admin Item Update';
 
@@ -33,6 +30,8 @@ class AdminUpdateItemPage extends Page
     public function __construct(UtilityContext $context)
     {
         parent::__construct($context);
+        $this->siteAccess = 'admin';
+        $this->route = '/contenttypegroup';
         $this->adminUpdateForm = ElementFactory::createElement($this->context, AdminUpdateForm::ELEMENT_NAME);
         $this->rightMenu = ElementFactory::createElement($this->context, RightMenu::ELEMENT_NAME);
         $this->pageTitle = 'Editing';

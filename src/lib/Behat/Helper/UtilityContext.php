@@ -12,9 +12,41 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\MinkExtension\Context\MinkContext;
 use Exception;
 use WebDriver\Exception\ElementNotVisible;
+use eZ\Publish\Core\MVC\Symfony\SiteAccess\Router;
+use eZ\Publish\Core\MVC\Symfony\Routing\SimplifiedRequest;
 
 class UtilityContext extends MinkContext
 {
+    /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess\Router */
+    private $router;
+
+    /**
+     * @injectService $router @ezpublish.siteaccess_router
+     */
+    public function __construct(Router $router)
+    {
+        $this->router = $router;
+    }
+
+    /**
+     * Return the full web address of a page, based on SiteAccess, page route and hosts configuration.
+     *
+     * @param string $siteAccessName name of SiteAccess the page is on
+     * @param string $route page address route
+     *
+     * @return string web address of the page
+     */
+    public function reverseMatchRoute(string $siteAccessName, string $route): string
+    {
+        $matcher = $this->router->matchByName($siteAccessName)->matcher;
+        $matcher->setRequest(new SimplifiedRequest(['scheme' => 'http', 'host' => $this->getMinkParameter('base_url'), 'pathinfo' => $route]));
+        $request = $matcher->reverseMatch($siteAccessName)->getRequest();
+        $explodedHost = explode('//', $request->host);
+        $actualHost = $explodedHost[count($explodedHost) - 1];
+
+        return sprintf('%s://%s%s', $request->scheme, $actualHost, $request->pathinfo);
+    }
+
     /**
      * Waits until element is visible. If it does not appear throws exception.
      *
@@ -301,22 +333,11 @@ class UtilityContext extends MinkContext
 
     public function moveWithHover(string $startExpression, string $hoverExpression, string $placeholderExpression): void
     {
-        $this->loadDraggingLibrary();
+        if (!$this->isDraggingLibraryLoaded()) {
+            throw new \Exception('drag-mock library has to be added to the page in order to use this method. Refer to README in BehatBundle for more information.');
+        }
 
         $movingScript = sprintf('dragMock.dragStart(%s).dragOver(%s).delay(100).drop(%s);', $startExpression, $hoverExpression, $placeholderExpression);
         $this->getSession()->getDriver()->executeScript($movingScript);
-    }
-
-    private function loadDraggingLibrary(): void
-    {
-        if ($this->isDraggingLibraryLoaded()) {
-            return;
-        }
-
-        $script = file_get_contents(__DIR__ . '/../lib/drag-mock.js');
-        $this->getSession()->getDriver()->executeScript($script);
-        $this->waitUntil(10, function () {
-            return $this->isDraggingLibraryLoaded();
-        });
     }
 }

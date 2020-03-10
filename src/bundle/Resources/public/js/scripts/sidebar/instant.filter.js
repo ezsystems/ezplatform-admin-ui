@@ -28,7 +28,7 @@
         const groups = [...filter.querySelectorAll('.ez-instant-filter__group')];
         const items = [...filter.querySelectorAll(SELECTOR_ITEM)];
         const itemsMap = items.reduce((total, item) => [...total, {
-            label: item.innerHTML.toLowerCase(),
+            label: item.textContent.toLowerCase(),
             element: item
         }], []);
 

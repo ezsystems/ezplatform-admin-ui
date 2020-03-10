@@ -97,3 +97,26 @@
         }
     }
 }
+
+.ez-field-edit--ezrichtext {
+    .cke_widget_ezcustomtag,
+    .ez-custom-tag {
+        &[data-ezalign='right'] {
+            float: none;
+            margin-left: auto;
+            margin-right: 0;
+        }
+    
+        &[data-ezalign='left'] {
+            float: none;
+            margin-left: 0;
+            margin-right: auto;
+        }
+    
+        &[data-ezalign='center'] {
+            text-align: inherit;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}

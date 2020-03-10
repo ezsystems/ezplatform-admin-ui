@@ -445,6 +445,14 @@ ezplatform.location.trash_with_asset:
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Location\TrashLocationWithAsset:trash'
 
+# RelationView
+
+ezplatform.relation:
+    path: /relation/{contentId}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:Content:relationView'
+
 # LocationView / Translation tab
 
 ezplatform.translation.add:
@@ -486,11 +494,12 @@ ezplatform.version.has_no_conflict:
         languageCode: ~
 
 ezplatform.version_draft.has_no_conflict:
-    path: /version-draft/has-no-conflict/{contentId}/{languageCode}
+    path: /version-draft/has-no-conflict/{contentId}/{languageCode}/{locationId}
     options:
         expose: true
     defaults:
         _controller: 'EzPlatformAdminUiBundle:Content\VersionDraftConflict:draftHasNoConflict'
+        locationId: ~
 
 # LocationView / Locations tab
 

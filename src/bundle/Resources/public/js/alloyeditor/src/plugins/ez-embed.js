@@ -1,7 +1,5 @@
 import embedBaseDefinition from '../widgets/ez-embed-base';
 
-const ZERO_WIDTH_SPACE = '&#8203;';
-
 (function(global) {
     if (CKEDITOR.plugins.get('ezembed') && CKEDITOR.plugins.get('ezembedinline')) {
         return;

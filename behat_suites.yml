@@ -9,7 +9,7 @@ adminui:
     suites:
         adminui:
             paths:
-              - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features'
+              - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard'
             filters:
                 tags: "@common"
             contexts:
@@ -33,12 +33,12 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SectionsContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ObjectStatesContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\DashboardContext
-                - EzSystems\RepositoryForms\Behat\Context\ContentTypeContext
-                - EzSystems\RepositoryForms\Behat\Context\FieldTypeFormContext
+                - EzSystems\BehatBundle\Context\Object\ContentTypeContext
+                - EzSystems\BehatBundle\Context\Api\TestContext
 
         adminuimodules:
             paths:
-                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/ContentTypeFields.feature'
+                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/ContentTypeFields.feature'
             filters:
                 tags: "@common"
             contexts:
@@ -51,13 +51,13 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RightMenuContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
-                - EzSystems\RepositoryForms\Behat\Context\ContentTypeContext
-                - EzSystems\RepositoryForms\Behat\Context\FieldTypeFormContext
+                - EzSystems\BehatBundle\Context\Object\ContentTypeContext
+                - EzSystems\BehatBundle\Context\Api\TestContext
 
         richtext:
             paths:
-                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/ContentCreation.feature'
-                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/ContentDraft.feature'
+                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/ContentCreation.feature'
+                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/ContentDraft.feature'
             filters:
                 tags: "@common"
             contexts:
@@ -73,3 +73,20 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\TrashContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\DashboardContext
+
+        personas:
+            paths:
+                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/personas'
+            contexts:
+                - EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext
+                - EzSystems\EzPlatformAdminUi\Behat\Helper\Hooks
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AuthenticationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NavigationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentViewContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentUpdateContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentPreviewContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RightMenuContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\LeftMenuContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\TrashContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext

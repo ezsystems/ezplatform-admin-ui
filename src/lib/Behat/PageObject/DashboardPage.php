@@ -10,6 +10,7 @@ use EzSystems\EzPlatformAdminUi\Behat\Helper\UtilityContext;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\NavLinkTabs;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\DashboardTable;
+use PHPUnit\Framework\Assert;
 
 class DashboardPage extends Page
 {
@@ -28,12 +29,23 @@ class DashboardPage extends Page
     public function __construct(UtilityContext $context)
     {
         parent::__construct($context);
-        $this->route = '/admin/dashboard';
-        $this->fields = ['meSection' => '.card-body'];
+        $this->siteAccess = 'admin';
+        $this->route = '/dashboard';
+        $this->fields = [
+            'tableSelector' => '.card-body',
+            'tableTitle' => '.mb-3',
+            'tableTabSelector' => '.ez-tabs .nav-item',
+        ];
         $this->pageTitle = 'My dashboard';
         $this->pageTitleLocator = '.ez-header h1';
         $this->navLinkTabs = ElementFactory::createElement($context, NavLinkTabs::ELEMENT_NAME);
         $this->dashboardTable = ElementFactory::createElement($context, DashboardTable::ELEMENT_NAME, $this::TABLE_CONTAINER);
+    }
+
+    public function switchTab(string $tableName, string $tabName)
+    {
+        $table = $this->context->getElementByText('Me', $this->fields['tableSelector'], $this->fields['tableTitle']);
+        $this->context->getElementByText($tabName, $this->fields['tableTabSelector'], null, $table)->click();
     }
 
     /**
@@ -41,7 +53,7 @@ class DashboardPage extends Page
      */
     public function verifyElements(): void
     {
-        $this->context->waitUntilElementIsVisible($this->fields['meSection']);
+        Assert::assertNotNull($this->context->getElementByText('Me', $this->fields['tableSelector'], $this->fields['tableTitle']));
         $this->navLinkTabs->verifyVisibility();
         $this->dashboardTable->verifyVisibility();
     }

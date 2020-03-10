@@ -143,7 +143,13 @@ export default class EzBtnAttributesUpdate extends EzWidgetButton {
             return;
         }
 
-        block.$.classList.remove(...this.classes.choices);
+        const classList = block.$.classList;
+
+        this.classes.choices.forEach((className) => {
+            if (classList.contains(className)) {
+                classList.remove(className);
+            }
+        });
     }
 
     saveValues() {

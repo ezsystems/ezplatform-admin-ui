@@ -70,7 +70,7 @@
     const buildContentBreadcrumbs = (viewData) => {
         const searchHitList = viewData.View.Result.searchHits.searchHit;
 
-        return searchHitList.map((searchHit) => searchHit.value.Location.ContentInfo.Content.Name).join(' / ');
+        return searchHitList.map((searchHit) => searchHit.value.Location.ContentInfo.Content.TranslatedName).join(' / ');
     };
     const addLocationsToInput = (limitationBtn, newlySelectedItems) => {
         const input = doc.querySelector(limitationBtn.dataset.locationInputSelector);
