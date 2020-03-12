@@ -27,6 +27,9 @@ final class ContentInfoTransformer implements DataTransformerInterface
         $this->contentService = $contentService;
     }
 
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $value
+     */
     public function transform($value): ?int
     {
         if (null === $value) {
@@ -40,6 +43,9 @@ final class ContentInfoTransformer implements DataTransformerInterface
         return $value->id;
     }
 
+    /**
+     * @param int|string|null $value
+     */
     public function reverseTransform($value): ?ContentInfo
     {
         if (empty($value)) {

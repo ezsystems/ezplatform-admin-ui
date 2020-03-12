@@ -9,6 +9,8 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -27,6 +29,9 @@ final class VersionInfoTransformer implements DataTransformerInterface
         $this->contentService = $contentService;
     }
 
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo|null $value
+     */
     public function transform($value): ?array
     {
         if (null === $value) {
@@ -45,6 +50,9 @@ final class VersionInfoTransformer implements DataTransformerInterface
         ];
     }
 
+    /**
+     * @param array|null $value
+     */
     public function reverseTransform($value): ?VersionInfo
     {
         if (null === $value || !is_array($value)) {
@@ -61,6 +69,10 @@ final class VersionInfoTransformer implements DataTransformerInterface
             return null;
         }
 
-        return $this->contentService->loadVersionInfo($value['content_info'], (int)$value['version_no']);
+        try {
+            return $this->contentService->loadVersionInfo($value['content_info'], (int)$value['version_no']);
+        } catch (NotFoundException | UnauthorizedException $e) {
+            throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }

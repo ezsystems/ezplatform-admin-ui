@@ -43,7 +43,7 @@ final class ContentInfoTransformerTest extends TestCase
     /**
      * @dataProvider transformDataProvider
      */
-    public function testTransform($value, $expected): void
+    public function testTransform(?ContentInfo $value, ?int $expected): void
     {
         $result = $this->contentInfoTransformer->transform($value);
 
@@ -64,7 +64,7 @@ final class ContentInfoTransformerTest extends TestCase
     /**
      * @dataProvider reverseTransformDataProvider
      */
-    public function testReverseTransform($value, $expected): void
+    public function testReverseTransform($value, ?ContentInfo $expected): void
     {
         $result = $this->contentInfoTransformer->reverseTransform($value);
 

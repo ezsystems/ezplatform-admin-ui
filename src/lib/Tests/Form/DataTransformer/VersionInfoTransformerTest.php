@@ -9,6 +9,8 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\VersionInfoTransformer;
@@ -167,6 +169,56 @@ final class VersionInfoTransformerTest extends TestCase
                 [],
             ],
         ];
+    }
+
+    public function testReverseTransformForNonExistingVersionInfo(): void
+    {
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('VersionInfo not found');
+
+        $contentInfo = new ContentInfo([
+            'id' => self::EXAMPLE_CONTENT_ID,
+        ]);
+
+        $value = [
+            'content_info' => $contentInfo,
+            'version_no' => self::EXAMPLE_VERSION_NO,
+        ];
+
+        $exception = new class('VersionInfo not found') extends NotFoundException {
+        };
+
+        $this->contentService
+            ->method('loadVersionInfo')
+            ->with($contentInfo, self::EXAMPLE_VERSION_NO)
+            ->willThrowException($exception);
+
+        $this->transformer->reverseTransform($value);
+    }
+
+    public function testReverseTransformForUnauthorizedVersionInfo(): void
+    {
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('Unauthorized VersionInfo');
+
+        $contentInfo = new ContentInfo([
+            'id' => self::EXAMPLE_CONTENT_ID,
+        ]);
+
+        $value = [
+            'content_info' => $contentInfo,
+            'version_no' => self::EXAMPLE_VERSION_NO,
+        ];
+
+        $exception = new class('Unauthorized VersionInfo') extends UnauthorizedException {
+        };
+
+        $this->contentService
+            ->method('loadVersionInfo')
+            ->with($contentInfo, self::EXAMPLE_VERSION_NO)
+            ->willThrowException($exception);
+
+        $this->transformer->reverseTransform($value);
     }
 
     private function createVersionInfoMock(ContentInfo $contentInfo, int $versionNo): VersionInfo
