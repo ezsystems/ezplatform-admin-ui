@@ -9,7 +9,8 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Processor\User;
 
 use eZ\Publish\API\Repository\UserService;
-use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\UserOnTheFlyDispatcher;
+use EzSystems\EzPlatformAdminUi\Event\UserOnTheFlyEvents;
+use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateUserOnTheFlyDispatcher;
 use EzSystems\EzPlatformContentForms\Data\User\UserCreateData;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -42,7 +43,7 @@ class UserOnTheFlyProcessor implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            UserOnTheFlyDispatcher::EVENT_BASE_NAME . '.create' => ['processCreate', 10],
+            UserOnTheFlyEvents::USER_CREATE_PUBLISH => ['processCreate', 10],
         ];
     }
 
@@ -72,7 +73,7 @@ class UserOnTheFlyProcessor implements EventSubscriberInterface
 
         $event->setResponse(
             new Response(
-                $this->twig->render('@ezdesign/ui/on_the_fly/content_create_response.html.twig', [
+                $this->twig->render('@ezdesign/ui/on_the_fly/user_create_on_the_fly.html.twig', [
                     'locationId' => $user->contentInfo->mainLocationId,
                 ])
             )

@@ -85,13 +85,29 @@ services:
         tags:
             - { name: knp_menu.voter }
 
-    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentOnTheFlyDispatcher:
-        calls:
-            - [setEventDispatcher, ["@event_dispatcher"]]
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher:
+        parent: ezplatform.content_forms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false
 
-    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\UserOnTheFlyDispatcher:
-        calls:
-            - [setEventDispatcher, ["@event_dispatcher"]]
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateUserOnTheFlyDispatcher:
+        parent: ezplatform.content_forms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\EditContentOnTheFlyDispatcher:
+        parent: ezplatform.content_forms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\EditUserOnTheFlyDispatcher:
+        parent: ezplatform.content_forms.action_dispatcher.base
+        autowire: true
+        autoconfigure: false
+        public: false
 
     EzSystems\EzPlatformAdminUi\EventListener\MenuPermissionsListener:
         tags:

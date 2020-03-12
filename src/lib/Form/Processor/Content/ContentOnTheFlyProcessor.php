@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Processor\Content;
 
 use eZ\Publish\API\Repository\ContentService;
+use EzSystems\EzPlatformAdminUi\Event\ContentOnTheFlyEvents;
 use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentOnTheFlyDispatcher;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -41,7 +42,8 @@ class ContentOnTheFlyProcessor implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            ContentOnTheFlyDispatcher::EVENT_BASE_NAME . '.publish' => ['processPublish', 10],
+            ContentOnTheFlyEvents::CONTENT_CREATE_PUBLISH => ['processPublish', 10],
+            ContentOnTheFlyEvents::CONTENT_EDIT_PUBLISH => ['processPublish', 10],
         ];
     }
 

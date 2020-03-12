@@ -1,0 +1,63 @@
+{% extends '@ezdesign/content/edit/base.html.twig' %}
+
+{% trans_default_domain 'content_edit' %}
+
+{% block meta %}
+    <meta name="LanguageCode" content="{{ language.languageCode }}" />
+{% endblock %}
+
+{% block details %}
+    <div class="container mt-5 px-5">
+        <h2 class="ez-content-item-status">{{ 'editing_in_language'|trans({'%contentName%': content.name, '%languageName%': language.name})|desc('Editing %contentName% in %languageName%') }}</h2>
+        <h1>
+            <svg class="ez-icon ez-icon-{{ content_type.identifier }}">
+                <use xlink:href="{{ ez_content_type_icon(content_type.identifier) }}"></use>
+            </svg>
+            {{ content.name }}
+        </h1>
+
+        <div class="small">
+            {{ content_type.name }} /
+            {% if creator is not null %}{{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }} /{% endif %}
+            {{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }} /
+            {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }},
+            {% if is_published == false %}
+                {{ 'parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
+            {% else %}
+                {{ 'location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
+            {% endif %}
+        </div>
+        <div class="ez-content-item__errors-wrapper" hidden>
+            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
+        </div>
+        {# @todo remove if statement once getDescription() bug is resolved in kernel #}
+        {% if content_type.descriptions is not empty %}
+            <div class="small text-muted">{{ content_type.description }}</div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+{% block right_sidebar_wrapper %}{% endblock %}
+
+{% block close_button %}{% endblock %}
+
+{% block form_before %}
+    {{ ez_render_component_group('content-edit-form-before', {
+        'content': content,
+        'content_type': content_type,
+        'location': location,
+        'parent_location': parent_location,
+        'language': language
+    }) }}
+{% endblock %}
+
+{% block form_after %}
+    {{ ez_render_component_group('content-edit-form-after', {
+        'content': content,
+        'content_type': content_type,
+        'location': location,
+        'parent_location': parent_location,
+        'language': language
+    }) }}
+{% endblock %}
