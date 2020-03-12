@@ -680,6 +680,34 @@ ezplatform.content_on_the_fly.has_access:
         expose: true
 
 #
+# User on the Fly
+#
+
+ezplatform.user_on_the_fly.create:
+    path: /user/create/on-the-fly/{contentTypeIdentifier}/{languageCode}/{locationId}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\UserOnTheFlyController::createUserAction'
+    options:
+        expose: true
+
+ezplatform.user_on_the_fly.edit:
+    path: /user/edit/on-the-fly/{contentId}/{versionNo}/{languageCode}/{locationId}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\UserOnTheFlyController::editUserAction'
+    options:
+        expose: true
+
+ezplatform.user_on_the_fly.has_access:
+    path: /user/create/on-the-fly/{contentTypeIdentifier}/{languageCode}/{locationId}/has-access
+    methods: ['GET']
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\UserOnTheFlyController::hasCreateAccessAction'
+    options:
+        expose: true
+
+#
 # Object States
 #
 
