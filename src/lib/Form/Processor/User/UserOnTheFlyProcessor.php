@@ -10,9 +10,9 @@ namespace EzSystems\EzPlatformAdminUi\Form\Processor\User;
 
 use eZ\Publish\API\Repository\UserService;
 use EzSystems\EzPlatformAdminUi\Event\UserOnTheFlyEvents;
-use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateUserOnTheFlyDispatcher;
 use EzSystems\EzPlatformContentForms\Data\User\UserCreateData;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
+use EzSystems\EzPlatformContentForms\Form\Processor\User\UserUpdateFormProcessor;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -22,17 +22,20 @@ class UserOnTheFlyProcessor implements EventSubscriberInterface
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
-    /** @var Environment */
+    /** @var \Twig\Environment */
     private $twig;
 
-    /**
-     * @param \eZ\Publish\API\Repository\UserService $userService
-     * @param \Twig\Environment $twig
-     */
-    public function __construct(UserService $userService, Environment $twig)
-    {
+    /** @var \EzSystems\EzPlatformContentForms\Form\Processor\User\UserUpdateFormProcessor */
+    private $innerUserUpdateFormProcessor;
+
+    public function __construct(
+        UserService $userService,
+        Environment $twig,
+        UserUpdateFormProcessor $innerUserUpdateFormProcessor
+    ) {
         $this->userService = $userService;
         $this->twig = $twig;
+        $this->innerUserUpdateFormProcessor = $innerUserUpdateFormProcessor;
     }
 
     /**
@@ -44,19 +47,10 @@ class UserOnTheFlyProcessor implements EventSubscriberInterface
     {
         return [
             UserOnTheFlyEvents::USER_CREATE_PUBLISH => ['processCreate', 10],
+            UserOnTheFlyEvents::USER_EDIT_PUBLISH => ['processEdit', 10],
         ];
     }
 
-    /**d
-     * @param \EzSystems\EzPlatformContentForms\Event\FormActionEvent $event
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     * @throws \eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException
-     * @throws \eZ\Publish\API\Repository\Exceptions\ContentValidationException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
     public function processCreate(FormActionEvent $event)
     {
         $data = $data = $event->getData();
@@ -73,8 +67,25 @@ class UserOnTheFlyProcessor implements EventSubscriberInterface
 
         $event->setResponse(
             new Response(
-                $this->twig->render('@ezdesign/ui/on_the_fly/user_create_on_the_fly.html.twig', [
+                $this->twig->render('@ezdesign/ui/on_the_fly/user_create_response.html.twig', [
                     'locationId' => $user->contentInfo->mainLocationId,
+                ])
+            )
+        );
+    }
+
+    public function processEdit(FormActionEvent $event): void
+    {
+        // Rely on User Form Processor from ContentForms to avoid unncessary code duplication
+        $this->innerUserUpdateFormProcessor->processUpdate($event);
+
+        $referrerLocation = $event->getOption('referrerLocation');
+
+        // We only need to change the response so it's compatible with UDW
+        $event->setResponse(
+            new Response(
+                $this->twig->render('@ezdesign/ui/on_the_fly/user_edit_response.html.twig', [
+                    'locationId' => $referrerLocation->id,
                 ])
             )
         );

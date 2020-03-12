@@ -12,7 +12,6 @@ use eZ\Publish\API\Repository\Exceptions as ApiException;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\Language;
@@ -24,8 +23,10 @@ use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher;
 use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\EditContentOnTheFlyDispatcher;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
+use EzSystems\EzPlatformAdminUi\View\CreateContentOnTheFlyView;
 use EzSystems\EzPlatformAdminUi\View\EditContentOnTheFlyView;
 use EzSystems\EzPlatformAdminUi\View\EditContentOnTheFlySuccessView;
+use EzSystems\EzPlatformContentForms\Data\Mapper\ContentCreateMapper;
 use EzSystems\EzPlatformContentForms\Data\Mapper\ContentUpdateMapper;
 use EzSystems\EzPlatformContentForms\Form\Type\Content\ContentEditType;
 use Symfony\Component\Form\FormInterface;
@@ -42,9 +43,6 @@ class ContentOnTheFlyController extends Controller
 
     /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
-
-    /** @var \eZ\Publish\API\Repository\UserService */
-    private $userService;
 
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
@@ -71,7 +69,6 @@ class ContentOnTheFlyController extends Controller
         ContentService $contentService,
         LanguageService $languageService,
         LocationService $locationService,
-        UserService $userService,
         ContentTypeService $contentTypeService,
         PermissionResolver $permissionResolver,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
@@ -82,7 +79,6 @@ class ContentOnTheFlyController extends Controller
         $this->contentService = $contentService;
         $this->locationService = $locationService;
         $this->languageService = $languageService;
-        $this->userService = $userService;
         $this->contentTypeService = $contentTypeService;
         $this->permissionResolver = $permissionResolver;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
@@ -143,6 +139,51 @@ class ContentOnTheFlyController extends Controller
         return $response;
     }
 
+    public function createContentAction(
+        Request $request,
+        string $languageCode,
+        ContentType $contentType,
+        Location $parentLocation
+    ) {
+        if ((new ContentTypeIsUser($this->userContentTypeIdentifiers))->isSatisfiedBy($contentType)) {
+            return $this->forward('EzPlatformAdminUiBundle:UserOnTheFly:createUser', [
+                'languageCode' => $languageCode,
+                'contentType' => $contentType,
+                'parentLocation' => $parentLocation,
+            ]);
+        }
+
+        $language = $this->languageService->loadLanguage($languageCode);
+
+        $data = (new ContentCreateMapper())->mapToFormData($contentType, [
+            'mainLanguageCode' => $language->languageCode,
+            'parentLocation' => $this->locationService->newLocationCreateStruct($parentLocation->id),
+        ]);
+
+        $form = $this->createForm(ContentEditType::class, $data, [
+            'languageCode' => $language->languageCode,
+            'mainLanguageCode' => $language->languageCode,
+            'drafts_enabled' => false,
+            'intent' => 'create',
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid() && $form->getClickedButton()) {
+            $this->createContentActionDispatcher->dispatchFormAction($form, $data, $form->getClickedButton()->getName());
+            if ($response = $this->createContentActionDispatcher->getResponse()) {
+                return $response;
+            }
+        }
+
+        return new CreateContentOnTheFlyView('@ezdesign/ui/on_the_fly/content_create_on_the_fly.html.twig', [
+            'form' => $form->createView(),
+            'language' => $language,
+            'content_type' => $contentType,
+            'parent_location' => $parentLocation,
+        ]);
+    }
+
     /**
      * @return \eZ\Publish\Core\MVC\Symfony\View\BaseView|\Symfony\Component\HttpFoundation\Response|null
      *
@@ -167,7 +208,12 @@ class ContentOnTheFlyController extends Controller
         );
 
         if ((new ContentTypeIsUser($this->userContentTypeIdentifiers))->isSatisfiedBy($contentType)) {
-            return $this->forward('EzPlatformAdminUiBundle:UserOnTheFly:editUser');
+            return $this->forward('EzPlatformAdminUiBundle:UserOnTheFly:editUser', [
+                'languageCode' => $languageCode,
+                'contentId' => $contentId,
+                'versionNo' => $versionNo,
+                'locationId' => $locationId,
+            ]);
         }
 
         $language = $this->languageService->loadLanguage($languageCode);
@@ -211,7 +257,7 @@ class ContentOnTheFlyController extends Controller
             );
 
             if ($response = $this->createContentActionDispatcher->getResponse()) {
-                $view = new EditContentOnTheFlySuccessView('@EzPlatformPageBuilder/on_the_fly/content_edit_response.html.twig');
+                $view = new EditContentOnTheFlySuccessView('@ezdesign/ui/on_the_fly/content_edit_response.html.twig');
                 $view->addParameters([
                     'locationId' => $location->id,
                 ]);
@@ -248,7 +294,7 @@ class ContentOnTheFlyController extends Controller
         FormInterface $form,
         ContentType $contentType
     ): EditContentOnTheFlyView {
-        $view = new EditContentOnTheFlyView('@EzPlatformPageBuilder/on_the_fly/content_edit_on_the_fly.html.twig');
+        $view = new EditContentOnTheFlyView('@ezdesign/ui/on_the_fly/content_edit_on_the_fly.html.twig');
 
         $view->setContent($content);
         $view->setLanguage($language);

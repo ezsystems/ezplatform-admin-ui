@@ -8,30 +8,27 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Processor\Content;
 
-use eZ\Publish\API\Repository\ContentService;
 use EzSystems\EzPlatformAdminUi\Event\ContentOnTheFlyEvents;
-use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentOnTheFlyDispatcher;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
+use EzSystems\EzPlatformContentForms\Form\Processor\ContentFormProcessor;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
 class ContentOnTheFlyProcessor implements EventSubscriberInterface
 {
-    /** @var ContentService */
-    private $contentService;
-
-    /** @var Environment */
+    /** @var \Twig\Environment */
     private $twig;
 
-    /**
-     * @param \eZ\Publish\API\Repository\ContentService $contentService
-     * @param \Twig\Environment $twig
-     */
-    public function __construct(ContentService $contentService, Environment $twig)
-    {
-        $this->contentService = $contentService;
+    /** @var \EzSystems\EzPlatformContentForms\Form\Processor\ContentFormProcessor */
+    private $innerContentFormProcessor;
+
+    public function __construct(
+        Environment $twig,
+        ContentFormProcessor $innerContentFormProcessor
+    ) {
         $this->twig = $twig;
+        $this->innerContentFormProcessor = $innerContentFormProcessor;
     }
 
     /**
@@ -42,8 +39,8 @@ class ContentOnTheFlyProcessor implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            ContentOnTheFlyEvents::CONTENT_CREATE_PUBLISH => ['processPublish', 10],
-            ContentOnTheFlyEvents::CONTENT_EDIT_PUBLISH => ['processPublish', 10],
+            ContentOnTheFlyEvents::CONTENT_CREATE_PUBLISH => ['processCreatePublish', 10],
+            ContentOnTheFlyEvents::CONTENT_EDIT_PUBLISH => ['processEditPublish', 10],
         ];
     }
 
@@ -59,30 +56,35 @@ class ContentOnTheFlyProcessor implements EventSubscriberInterface
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
-    public function processPublish(FormActionEvent $event)
+    public function processCreatePublish(FormActionEvent $event)
     {
-        $data = $event->getData();
-        $form = $event->getForm();
+        // Rely on Content Form Processor from ContentForms to avoid unncessary code duplication
+        $this->innerContentFormProcessor->processPublish($event);
 
-        $languageCode = $form->getConfig()->getOption('languageCode');
-        $mainLanguageCode = $data->mainLanguageCode;
+        $referrerLocation = $event->getOption('referrerLocation');
 
-        foreach ($data->fieldsData as $fieldDefIdentifier => $fieldData) {
-            if ($mainLanguageCode != $languageCode && !$fieldData->fieldDefinition->isTranslatable) {
-                continue;
-            }
-
-            $data->setField($fieldDefIdentifier, $fieldData->value, $languageCode);
-        }
-
-        $draft = $this->contentService->createContent($data, $data->getLocationStructs());
-        $versionInfo = $draft->versionInfo;
-        $content = $this->contentService->publishVersion($versionInfo, [$versionInfo->initialLanguageCode]);
-
+        // We only need to change the response so it's compatible with UDW
         $event->setResponse(
             new Response(
                 $this->twig->render('@ezdesign/ui/on_the_fly/content_create_response.html.twig', [
-                    'locationId' => $content->contentInfo->mainLocationId,
+                    'locationId' => $referrerLocation->id,
+                ])
+            )
+        );
+    }
+
+    public function processEditPublish(FormActionEvent $event): void
+    {
+        // Rely on Content Form Processor from ContentForms to avoid unncessary code duplication
+        $this->innerContentFormProcessor->processPublish($event);
+
+        $referrerLocation = $event->getOption('referrerLocation');
+
+        // We only need to change the response so it's compatible with UDW
+        $event->setResponse(
+            new Response(
+                $this->twig->render('@ezdesign/ui/on_the_fly/content_edit_response.html.twig', [
+                    'locationId' => $referrerLocation->id,
                 ])
             )
         );

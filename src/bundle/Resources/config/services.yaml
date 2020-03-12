@@ -28,6 +28,7 @@ imports:
     - { resource: services/action_dispatchers.yaml }
     - { resource: services/events.yaml }
     - { resource: services/twig.yaml }
+    - { resource: services/on_the_fly.yaml }
 
 services:
     _defaults:
