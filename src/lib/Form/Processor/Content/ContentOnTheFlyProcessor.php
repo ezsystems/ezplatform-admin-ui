@@ -61,13 +61,16 @@ class ContentOnTheFlyProcessor implements EventSubscriberInterface
         // Rely on Content Form Processor from ContentForms to avoid unncessary code duplication
         $this->innerContentFormProcessor->processPublish($event);
 
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
+        $content = $event->getPayload('content');
         $referrerLocation = $event->getOption('referrerLocation');
+        $locationId = $referrerLocation ? $referrerLocation->id : $content->contentInfo->mainLocationId;
 
         // We only need to change the response so it's compatible with UDW
         $event->setResponse(
             new Response(
                 $this->twig->render('@ezdesign/ui/on_the_fly/content_create_response.html.twig', [
-                    'locationId' => $referrerLocation->id,
+                    'locationId' => $locationId,
                 ])
             )
         );
@@ -78,13 +81,16 @@ class ContentOnTheFlyProcessor implements EventSubscriberInterface
         // Rely on Content Form Processor from ContentForms to avoid unncessary code duplication
         $this->innerContentFormProcessor->processPublish($event);
 
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
+        $content = $event->getPayload('content');
         $referrerLocation = $event->getOption('referrerLocation');
+        $locationId = $referrerLocation ? $referrerLocation->id : $content->contentInfo->mainLocationId;
 
         // We only need to change the response so it's compatible with UDW
         $event->setResponse(
             new Response(
                 $this->twig->render('@ezdesign/ui/on_the_fly/content_edit_response.html.twig', [
-                    'locationId' => $referrerLocation->id,
+                    'locationId' => $locationId,
                 ])
             )
         );
