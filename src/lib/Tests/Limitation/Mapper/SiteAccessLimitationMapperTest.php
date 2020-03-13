@@ -23,7 +23,7 @@ class SiteAccessLimitationMapperTest extends TestCase
         ];
 
         $siteAccesses = array_map(
-            static function ($siteAccessName) {
+            static function (string $siteAccessName): SiteAccess {
                 return new SiteAccess($siteAccessName);
             },
             $siteAccessList
