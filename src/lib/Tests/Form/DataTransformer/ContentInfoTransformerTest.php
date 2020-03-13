@@ -41,16 +41,8 @@ final class ContentInfoTransformerTest extends TestCase
     }
 
     /**
-     * @dataProvider transformDataProvider
-     */
-    public function testTransform(?ContentInfo $value, ?int $expected): void
-    {
-        $result = $this->contentInfoTransformer->transform($value);
-
-        $this->assertEquals($expected, $result);
-    }
-
-    /**
+     * @param mixed $value
+     *
      * @dataProvider transformWithInvalidInputDataProvider
      */
     public function testTransformWithInvalidInput($value): void
@@ -59,6 +51,16 @@ final class ContentInfoTransformerTest extends TestCase
         $this->expectExceptionMessage('Expected a ' . ContentInfo::class . ' object.');
 
         $this->contentInfoTransformer->transform($value);
+    }
+
+    /**
+     * @dataProvider transformDataProvider
+     */
+    public function testTransform(?ContentInfo $value, ?int $expected): void
+    {
+        $result = $this->contentInfoTransformer->transform($value);
+
+        $this->assertEquals($expected, $result);
     }
 
     /**
@@ -72,6 +74,8 @@ final class ContentInfoTransformerTest extends TestCase
     }
 
     /**
+     * @param mixed $value
+     *
      * @dataProvider reverseTransformWithInvalidInputDataProvider
      */
     public function testReverseTransformWithInvalidInput($value): void
