@@ -15,6 +15,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
+        {"type": "vcs", "url": "https://github.com/webhdx/ez-support-tools.git"},
+        {"type": "vcs", "url": "https://github.com/webhdx/ezplatform-design-engine.git"},
         {"type": "vcs", "url": "https://github.com/webhdx/ezplatform-user.git"},
         {"type": "vcs", "url": "https://github.com/webhdx/ezplatform-richtext.git"},
         {"type": "vcs", "url": "https://github.com/webhdx/ezplatform-admin-ui-modules.git"},
@@ -28,7 +30,8 @@
     "require": {
         "php": "^7.3",
         "symfony/http-foundation": "^5.0",
-        "symfony/security": "^5.0",
+        "symfony/security-core": "^5.0",
+        "symfony/security-http": "^5.0",
         "symfony/translation": "^5.0",
         "symfony/validator": "^5.0",
         "symfony/form": "^5.0",
@@ -46,7 +49,7 @@
         "ezsystems/ezpublish-kernel": "dev-symfony5 as 8.0.x-dev",
         "ezsystems/ezplatform-content-forms": "dev-symfony5 as 1.0.x-dev",
         "ezsystems/ezplatform-admin-ui-modules": "dev-symfony4 as 2.0.x-dev",
-        "ezsystems/ez-support-tools": "^2.0@dev",
+        "ezsystems/ez-support-tools": "dev-symfony5 as 2.0.x-dev",
         "ezsystems/ezplatform-design-engine": "dev-symfony5 as 3.0.x-dev",
         "ezsystems/ezplatform-user": "dev-symfony5 as 2.0.x-dev",
         "ezsystems/ezplatform-richtext": "dev-symfony5 as 2.0.x-dev",
