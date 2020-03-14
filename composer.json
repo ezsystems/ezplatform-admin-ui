@@ -15,16 +15,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
-        {"type": "vcs", "url": "https://github.com/webhdx/ez-support-tools.git"},
-        {"type": "vcs", "url": "https://github.com/webhdx/ezplatform-design-engine.git"},
-        {"type": "vcs", "url": "https://github.com/webhdx/ezplatform-user.git"},
-        {"type": "vcs", "url": "https://github.com/webhdx/ezplatform-admin-ui.git"},
-        {"type": "vcs", "url": "https://github.com/webhdx/ezplatform-richtext.git"},
-        {"type": "vcs", "url": "https://github.com/webhdx/ezplatform-admin-ui-modules.git"},
-        {"type": "vcs", "url": "https://github.com/webhdx/ezplatform-content-forms.git"},
-        {"type": "vcs", "url": "https://github.com/webhdx/ezpublish-kernel.git"},
-        {"type": "vcs", "url": "https://github.com/webhdx/ezplatform-rest.git"},
-        {"type": "vcs", "url": "https://github.com/ezsystems/doctrine-dbal-schema.git"},
         {"type": "vcs", "url": "https://github.com/webhdx/JMSTranslationBundle.git"},
         {"type": "vcs", "url": "https://github.com/webhdx/Routing.git"}
     ],
