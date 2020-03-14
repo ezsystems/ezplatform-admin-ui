@@ -39,7 +39,7 @@
         "jms/translation-bundle": "dev-symfony5 as 1.4.x-dev",
         "ezsystems/ezpublish-kernel": "dev-symfony5 as 8.0.x-dev",
         "ezsystems/ezplatform-content-forms": "dev-symfony5 as 1.0.x-dev",
-        "ezsystems/ezplatform-admin-ui-modules": "dev-symfony4 as 2.0.x-dev",
+        "ezsystems/ezplatform-admin-ui-modules": "dev-symfony5 as 2.0.x-dev",
         "ezsystems/ez-support-tools": "dev-symfony5 as 2.0.x-dev",
         "ezsystems/ezplatform-design-engine": "dev-symfony5 as 3.0.x-dev",
         "ezsystems/ezplatform-user": "dev-symfony5 as 2.0.x-dev",
