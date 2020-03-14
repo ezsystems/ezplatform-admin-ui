@@ -71,3 +71,12 @@ services:
             $groupIdentifier: 'dashboard-everyone'
         tags:
             - { name: ezplatform.admin_ui.component, group: 'dashboard-all-tab-groups' }
+
+    EzSystems\EzPlatformAdminUi\Component\Dashboard\EzInfoTwigComponent:
+        autowire: true
+        arguments:
+            $template: '@@ezdesign/ui/dashboard/block/ez.html.twig'
+            $ezSystemInfo: "@=service('support_tools.system_info.collector.system.ez').collect()"
+            $urlList: '%support_tools.ez_url_list%'
+        tags:
+            - { name: ezplatform.admin_ui.component, group: 'dashboard-blocks', priority: 200 }
