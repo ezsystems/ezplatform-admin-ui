@@ -60,7 +60,7 @@ class AdminExceptionListener
         TagRenderer $encoreTagRenderer,
         EntrypointLookupCollectionInterface $entrypointLookupCollection,
         array $siteAccessGroups,
-        string $kernelRootDir,
+        string $kernelProjectDir,
         string $kernelEnvironment
     ) {
         $this->twig = $twig;
@@ -68,7 +68,7 @@ class AdminExceptionListener
         $this->encoreTagRenderer = $encoreTagRenderer;
         $this->entrypointLookupCollection = $entrypointLookupCollection;
         $this->siteAccessGroups = $siteAccessGroups;
-        $this->rootDir = $kernelRootDir . '/..';
+        $this->rootDir = $kernelProjectDir;
         $this->kernelEnvironment = $kernelEnvironment;
     }
 
