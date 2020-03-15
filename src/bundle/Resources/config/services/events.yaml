@@ -33,7 +33,7 @@ services:
     EzSystems\EzPlatformAdminUi\EventListener\AdminExceptionListener:
         arguments:
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
-            $kernelRootDir: '%kernel.root_dir%'
+            $kernelProjectDir: '%kernel.project_dir%'
             $kernelEnvironment: '%kernel.environment%'
             $encoreTagRenderer: '@webpack_encore.tag_renderer'
             $entrypointLookupCollection: '@webpack_encore.entrypoint_lookup_collection'
