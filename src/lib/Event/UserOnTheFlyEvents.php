@@ -14,11 +14,11 @@ final class UserOnTheFlyEvents
     public const USER_CREATE = 'ezplatform.user_on_the_fly.create';
 
     /** @var string */
-    public const USER_CREATE_PUBLISH = self::USER_CREATE . '.create';
+    public const USER_CREATE_PUBLISH = 'ezplatform.user_on_the_fly.create.create';
 
     /** @var string */
     public const USER_EDIT = 'ezplatform.user_on_the_fly.edit';
 
     /** @var string */
-    public const USER_EDIT_PUBLISH = self::USER_EDIT . '.update';
+    public const USER_EDIT_PUBLISH = 'ezplatform.user_on_the_fly.edit.update';
 }

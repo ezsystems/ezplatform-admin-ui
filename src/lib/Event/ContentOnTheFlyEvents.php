@@ -14,11 +14,11 @@ final class ContentOnTheFlyEvents
     public const CONTENT_CREATE = 'ezplatform.content_on_the_fly.create';
 
     /** @var string */
-    public const CONTENT_CREATE_PUBLISH = self::CONTENT_CREATE . '.publish';
+    public const CONTENT_CREATE_PUBLISH = 'ezplatform.content_on_the_fly.create.publish';
 
     /** @var string */
     public const CONTENT_EDIT = 'ezplatform.content_on_the_fly.edit';
 
     /** @var string */
-    public const CONTENT_EDIT_PUBLISH = self::CONTENT_EDIT . '.publish';
+    public const CONTENT_EDIT_PUBLISH = 'ezplatform.content_on_the_fly.edit.publish';
 }
