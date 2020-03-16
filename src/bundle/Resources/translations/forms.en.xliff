@@ -421,6 +421,21 @@
         <target>Setup / System info</target>
         <note>key: role.policy.setup.system_info</note>
       </trans-unit>
+      <trans-unit id="2e2e751bf3201fb6c68307c683a3ac384b9ec0cf" resname="role.policy.site">
+        <source>Site</source>
+        <target>Site</target>
+        <note>key: role.policy.site</note>
+      </trans-unit>
+      <trans-unit id="8a7be79652e042c41e49671038f309291c780c78" resname="role.policy.site.all_functions">
+        <source>Site / All functions</source>
+        <target>Site / All functions</target>
+        <note>key: role.policy.site.all_functions</note>
+      </trans-unit>
+      <trans-unit id="7974d9702481b771e623dd447d3df7d8e7350e7b" resname="role.policy.site.create">
+        <source>Site / Create</source>
+        <target>Site / Create</target>
+        <note>key: role.policy.site.create</note>
+      </trans-unit>
       <trans-unit id="012dce76ef569ba377ffe98ddbee8d3c3d270e15" resname="role.policy.state">
         <source>State</source>
         <target>State</target>
