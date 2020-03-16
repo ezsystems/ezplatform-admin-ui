@@ -25,9 +25,6 @@ class ContentViewContext extends BusinessContext
 {
     private $argumentParser;
 
-    /**
-     * @injectService $argumentParser @EzSystems\Behat\Core\Behat\ArgumentParser
-     */
     public function __construct(ArgumentParser $argumentParser)
     {
         $this->argumentParser = $argumentParser;
