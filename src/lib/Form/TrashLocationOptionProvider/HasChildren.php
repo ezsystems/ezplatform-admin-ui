@@ -13,14 +13,14 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren as HasChildrenSpec;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class HasChildren implements TrashLocationOptionProvider
 {
     /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     public function __construct(LocationService $locationService, TranslatorInterface $translator)

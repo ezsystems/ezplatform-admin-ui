@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LocationTrashType extends AbstractType
 {
@@ -29,7 +29,7 @@ class LocationTrashType extends AbstractType
     /** @var \EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\OptionsFactory */
     private $trashTypeStrategy;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     public function __construct(
