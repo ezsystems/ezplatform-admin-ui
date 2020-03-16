@@ -147,7 +147,7 @@ class TranslationAddType extends AbstractType
 
         if (isset($data['location'])) {
             try {
-                $location = $this->locationService->loadLocation($data['location']);
+                $location = $this->locationService->loadLocation((int)$data['location']);
             } catch (NotFoundException $e) {
                 $location = null;
             }
