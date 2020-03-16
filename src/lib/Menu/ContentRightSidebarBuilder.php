@@ -224,7 +224,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             self::ITEM__CREATE => $this->createMenuItem(
                 self::ITEM__CREATE,
                 [
-                    'extras' => ['icon' => 'create'],
+                    'extras' => ['icon' => 'create', 'orderNumber' => 10],
                     'attributes' => $canCreate
                         ? $createAttributes
                         : array_merge($createAttributes, ['disabled' => 'disabled']),
@@ -238,7 +238,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $this->createMenuItem(
                 self::ITEM__MOVE,
                 [
-                    'extras' => ['icon' => 'move'],
+                    'extras' => ['icon' => 'move', 'orderNumber' => 30],
                     'attributes' => [
                         'class' => 'btn--udw-move',
                         'title' => $this->translator->trans(
@@ -259,7 +259,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 $this->createMenuItem(
                     self::ITEM__COPY,
                     [
-                        'extras' => ['icon' => 'copy'],
+                        'extras' => ['icon' => 'copy', 'orderNumber' => 40],
                         'attributes' => [
                             'class' => 'btn--udw-copy',
                             'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
@@ -280,7 +280,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 $this->createMenuItem(
                     self::ITEM__COPY_SUBTREE,
                     [
-                        'extras' => ['icon' => 'copy-subtree'],
+                        'extras' => ['icon' => 'copy-subtree', 'orderNumber' => 50],
                         'attributes' => $canCopySubtree
                             ? $copySubtreeAttributes
                             : array_merge($copySubtreeAttributes, ['disabled' => 'disabled']),
@@ -300,7 +300,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 $this->createMenuItem(
                     self::ITEM__DELETE,
                     [
-                        'extras' => ['icon' => 'trash'],
+                        'extras' => ['icon' => 'trash', 'orderNumber' => 70],
                         'attributes' => [
                             'data-toggle' => 'modal',
                             'data-target' => '#delete-user-modal',
@@ -315,7 +315,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 $this->createMenuItem(
                     self::ITEM__SEND_TO_TRASH,
                     [
-                        'extras' => ['icon' => 'trash-send'],
+                        'extras' => ['icon' => 'trash-send', 'orderNumber' => 80],
                         'attributes' => $sendToTrashAttributes,
                     ]
                 )
@@ -375,7 +375,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 $this->createMenuItem(
                     self::ITEM__EDIT,
                     [
-                        'extras' => ['icon' => 'edit'],
+                        'extras' => ['icon' => 'edit', 'orderNumber' => 20],
                         'attributes' => $canEdit
                             ? $editUserAttributes
                             : array_merge($editUserAttributes, ['disabled' => 'disabled']),
@@ -387,7 +387,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 $this->createMenuItem(
                     self::ITEM__EDIT,
                     [
-                        'extras' => ['icon' => 'edit'],
+                        'extras' => ['icon' => 'edit', 'orderNumber' => 20],
                         'attributes' => $canEdit
                             ? $editAttributes
                             : array_merge($editAttributes, ['disabled' => 'disabled']),
@@ -406,7 +406,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $this->createMenuItem(
                 self::ITEM__REVEAL,
                 [
-                    'extras' => ['icon' => 'reveal'],
+                    'extras' => ['icon' => 'reveal', 'orderNumber' => 60],
                     'attributes' => [
                         'class' => 'ez-btn--reveal',
                         'data-actions' => 'reveal',
@@ -432,7 +432,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $this->createMenuItem(
                 self::ITEM__HIDE,
                 [
-                    'extras' => ['icon' => 'hide'],
+                    'extras' => ['icon' => 'hide', 'orderNumber' => 60],
                     'attributes' => [
                         'class' => 'ez-btn--hide',
                         'title' => $this->translator->trans(

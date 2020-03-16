@@ -64,6 +64,13 @@
                                 </div>
                             </div>
                         {% endif %}
+                        {{ ez_render_component_group(
+                            'location-view-content-alerts',
+                            {
+                                'versionInfo': content.versionInfo,
+                                'location': location,
+                            }
+                        ) }}
                     </div>
                 </div>
                 <div class="panel panel-primary">
