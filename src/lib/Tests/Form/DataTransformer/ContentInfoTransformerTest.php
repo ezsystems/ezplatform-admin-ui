@@ -16,42 +16,36 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class ContentInfoTransformerTest extends TestCase
+final class ContentInfoTransformerTest extends TestCase
 {
-    /** @var ContentInfoTransformer */
+    private const EXAMPLE_CONTENT_ID = 123456;
+
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataTransformer\ContentInfoTransformer */
     private $contentInfoTransformer;
 
     protected function setUp(): void
     {
-        /** @var ContentService|MockObject $contentService */
+        /** @var \eZ\Publish\API\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject $contentService */
         $contentService = $this->createMock(ContentService::class);
-        $contentService->expects(self::any())
+        $contentService
             ->method('loadContentInfo')
-            ->with(123456)
-            ->willReturn(new ContentInfo(['id' => 123456]));
+            ->with($this->logicalAnd(
+                $this->equalTo(self::EXAMPLE_CONTENT_ID),
+                $this->isType('int')
+            ))
+            ->willReturn(new ContentInfo([
+                'id' => self::EXAMPLE_CONTENT_ID,
+            ]));
 
         $this->contentInfoTransformer = new ContentInfoTransformer($contentService);
     }
 
     /**
-     * @dataProvider transformDataProvider
+     * @param mixed $value
      *
-     * @param $value
-     * @param $expected
-     */
-    public function testTransform($value, $expected)
-    {
-        $result = $this->contentInfoTransformer->transform($value);
-
-        $this->assertEquals($expected, $result);
-    }
-
-    /**
      * @dataProvider transformWithInvalidInputDataProvider
-     *
-     * @param $value
      */
-    public function testTransformWithInvalidInput($value)
+    public function testTransformWithInvalidInput($value): void
     {
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('Expected a ' . ContentInfo::class . ' object.');
@@ -60,12 +54,19 @@ class ContentInfoTransformerTest extends TestCase
     }
 
     /**
-     * @dataProvider reverseTransformDataProvider
-     *
-     * @param $value
-     * @param $expected
+     * @dataProvider transformDataProvider
      */
-    public function testReverseTransform($value, $expected)
+    public function testTransform(?ContentInfo $value, ?int $expected): void
+    {
+        $result = $this->contentInfoTransformer->transform($value);
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @dataProvider reverseTransformDataProvider
+     */
+    public function testReverseTransform($value, ?ContentInfo $expected): void
     {
         $result = $this->contentInfoTransformer->reverseTransform($value);
 
@@ -73,11 +74,11 @@ class ContentInfoTransformerTest extends TestCase
     }
 
     /**
-     * @dataProvider reverseTransformWithInvalidInputDataProvider
+     * @param mixed $value
      *
-     * @param $value
+     * @dataProvider reverseTransformWithInvalidInputDataProvider
      */
-    public function testReverseTransformWithInvalidInput($value)
+    public function testReverseTransformWithInvalidInput($value): void
     {
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('Expected a numeric string.');
@@ -85,7 +86,7 @@ class ContentInfoTransformerTest extends TestCase
         $this->contentInfoTransformer->reverseTransform($value);
     }
 
-    public function testReverseTransformWithNotFoundException()
+    public function testReverseTransformWithNotFoundException(): void
     {
         $this->expectException(TransformationFailedException::class);
         $this->expectExceptionMessage('ContentInfo not found');
@@ -101,35 +102,31 @@ class ContentInfoTransformerTest extends TestCase
         $transformer->reverseTransform(654321);
     }
 
-    /**
-     * @return array
-     */
     public function transformDataProvider(): array
     {
-        $contentInfo = new ContentInfo(['id' => 123456]);
+        $contentInfo = new ContentInfo([
+            'id' => self::EXAMPLE_CONTENT_ID,
+        ]);
 
         return [
-            'content_info_with_id' => [$contentInfo, 123456],
+            'content_info_with_id' => [$contentInfo, self::EXAMPLE_CONTENT_ID],
             'null' => [null, null],
         ];
     }
 
-    /**
-     * @return array
-     */
     public function reverseTransformDataProvider(): array
     {
-        $contentInfo = new ContentInfo(['id' => 123456]);
+        $contentInfo = new ContentInfo([
+            'id' => self::EXAMPLE_CONTENT_ID,
+        ]);
 
         return [
-            'integer' => [123456, $contentInfo],
+            'integer' => [self::EXAMPLE_CONTENT_ID, $contentInfo],
+            'string' => [(string)self::EXAMPLE_CONTENT_ID, $contentInfo],
             'null' => [null, null],
         ];
     }
 
-    /**
-     * @return array
-     */
     public function transformWithInvalidInputDataProvider(): array
     {
         return [
@@ -142,9 +139,6 @@ class ContentInfoTransformerTest extends TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
     public function reverseTransformWithInvalidInputDataProvider(): array
     {
         return [

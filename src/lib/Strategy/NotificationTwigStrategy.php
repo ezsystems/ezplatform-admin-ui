@@ -53,6 +53,8 @@ class NotificationTwigStrategy
      */
     public function decide($contentId): string
     {
+        $contentId = (int)$contentId;
+
         if ($this->isContentPermanentlyDeleted($contentId)) {
             return '@ezdesign/account/notifications/list_item_deleted.html.twig';
         }
