@@ -260,3 +260,13 @@
         max-width: calculateRem(800px);
     }
 }
+
+.ez-modal--content-reveal-confirmation {
+    .modal-header {
+        border-bottom: none;
+    }
+
+    .modal-footer {
+        border-top: none;
+    }
+}

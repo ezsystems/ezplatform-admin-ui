@@ -1,0 +1,25 @@
+{% trans_default_domain 'locationview' %}
+
+<div class="ez-extra-actions ez-extra-actions--schedule-hide ez-extra-actions--hidden" data-actions="hide">
+    <div class="ez-extra-actions__header">{{ 'schedule_hide.title'|trans|desc('Schedule hide') }}</div>
+    <div class="ez-extra-actions__content">
+        <form>
+            <label class="ez-label">{{ 'schedule_hide.date_and_time'|trans|desc('Date and time') }}</label>
+            <div class="form-check">
+                <input type="radio" id="now-id" name="hide" class="form-check-input" value="now" checked="checked">
+                <label class="form-check-label" for="now-id">Hide now</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="later-id" name="hide" class="form-check-input" value="later">
+                <label class="form-check-label" for="later-id">Hide later</label>
+            </div>
+            <div class="ez-picker">
+                    <input type="text" class="ez-picker__input form-control flatpickr-input active" readonly="readonly" disabled>
+                    <input type="text" id="block_configuration_since_custom_date" name="block_configuration[since][custom_date]" data-seconds="1" hidden="hidden" class="ez-picker__form-input form-control">
+            </div>
+            <div class="ez-extra-actions__buttons">
+                <button type="button" class="btn btn-primary ez-btn ez-btn--wide ez-btn--hide-confirm">Confirm</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -162,6 +162,17 @@
             }
         }
     }
+
+    &__buttons {
+        display: flex;
+        justify-content: center;
+        padding-top: calculateRem(16px);
+
+        .ez-btn.ez-btn--wide {
+            font-size: calculateRem(14px);
+            border-radius: calculateRem(4px);
+        }
+    }
 }
 
 .ez-extra-actions-container {

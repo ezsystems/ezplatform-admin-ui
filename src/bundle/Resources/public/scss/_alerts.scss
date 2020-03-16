@@ -8,4 +8,14 @@
         fill: currentColor;
         vertical-align: middle;
     }
+
+    &--location-hidden {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .ez-btn {
+        padding: calculateRem(2px) calculateRem(10px);
+        font-size: calculateRem(13px);
+    }
 }

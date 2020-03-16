@@ -289,11 +289,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             );
         }
 
-        if ($content->getVersionInfo()->getContentInfo()->isHidden) {
-            $this->addRevealMenuItem($menu);
-        } else {
-            $this->addHideMenuItem($menu);
-        }
+        $this->addHideMenuItem($menu);
 
         if ($contentIsUser && $canDelete) {
             $menu->addChild(
@@ -400,32 +396,6 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /**
      * @param \Knp\Menu\ItemInterface $menu
      */
-    private function addRevealMenuItem(ItemInterface $menu): void
-    {
-        $menu->addChild(
-            $this->createMenuItem(
-                self::ITEM__REVEAL,
-                [
-                    'extras' => ['icon' => 'reveal'],
-                    'attributes' => [
-                        'class' => 'ez-btn--reveal',
-                        'data-actions' => 'reveal',
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__REVEAL,
-                            [],
-                            'menu'
-                        ),
-                    ],
-                ]
-            )
-        );
-    }
-
-    /**
-     * @param \Knp\Menu\ItemInterface $menu
-     */
     private function addHideMenuItem(ItemInterface $menu): void
     {
         $menu->addChild(
@@ -434,7 +404,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 [
                     'extras' => ['icon' => 'hide'],
                     'attributes' => [
-                        'class' => 'ez-btn--hide',
+                        'class' => 'ez-btn--hide ez-btn--extra-actions',
                         'title' => $this->translator->trans(
 /** @Ignore */ self::ITEM__HIDE,
                             [],
@@ -443,6 +413,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                         'data-actions' => 'hide',
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
+                        'data-focus-element' => '.form-check-input',
                     ],
                 ]
             )
