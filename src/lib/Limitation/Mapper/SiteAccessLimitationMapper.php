@@ -7,25 +7,25 @@
 namespace EzSystems\EzPlatformAdminUi\Limitation\Mapper;
 
 use eZ\Publish\API\Repository\Values\User\Limitation;
+use eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
 use EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperInterface;
 
 class SiteAccessLimitationMapper extends MultipleSelectionBasedMapper implements LimitationValueMapperInterface
 {
-    /**
-     * @var array
-     */
-    private $siteAccessList;
+    /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface */
+    private $siteAccessService;
 
-    public function __construct(array $siteAccessList)
-    {
-        $this->siteAccessList = $siteAccessList;
+    public function __construct(
+        SiteAccessServiceInterface $siteAccessService
+    ) {
+        $this->siteAccessService = $siteAccessService;
     }
 
     protected function getSelectionChoices()
     {
         $siteAccesses = [];
-        foreach ($this->siteAccessList as $sa) {
-            $siteAccesses[$this->getSiteAccessKey($sa)] = $sa;
+        foreach ($this->siteAccessService->getAll() as $sa) {
+            $siteAccesses[$this->getSiteAccessKey($sa->name)] = $sa->name;
         }
 
         return $siteAccesses;
@@ -34,9 +34,9 @@ class SiteAccessLimitationMapper extends MultipleSelectionBasedMapper implements
     public function mapLimitationValue(Limitation $limitation)
     {
         $values = [];
-        foreach ($this->siteAccessList as $sa) {
-            if (in_array($this->getSiteAccessKey($sa), $limitation->limitationValues)) {
-                $values[] = $sa;
+        foreach ($this->siteAccessService->getAll() as $sa) {
+            if (in_array($this->getSiteAccessKey($sa->name), $limitation->limitationValues)) {
+                $values[] = $sa->name;
             }
         }
 
