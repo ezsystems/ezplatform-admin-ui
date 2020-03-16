@@ -231,6 +231,21 @@
         <target>Content Type / Update</target>
         <note>key: role.policy.class.update</note>
       </trans-unit>
+      <trans-unit id="504ce9f80e074eeb880d5ae5f54d4811e2ab6862" resname="role.policy.comparison">
+        <source>Comparison</source>
+        <target>Comparison</target>
+        <note>key: role.policy.comparison</note>
+      </trans-unit>
+      <trans-unit id="aa75e405b40b2c0fb249bbcc690de4e409191dd4" resname="role.policy.comparison.all_functions">
+        <source>Comparison / All functions</source>
+        <target>Comparison / All functions</target>
+        <note>key: role.policy.comparison.all_functions</note>
+      </trans-unit>
+      <trans-unit id="0a08a017bb100a4d45400bc82e83c84a89252586" resname="role.policy.comparison.view">
+        <source>Comparison / View</source>
+        <target>Comparison / View</target>
+        <note>key: role.policy.comparison.view</note>
+      </trans-unit>
       <trans-unit id="ffe83a713e8b33558df040efa1eeadd0b1cc18e0" resname="role.policy.content">
         <source>Content</source>
         <target>Content</target>
