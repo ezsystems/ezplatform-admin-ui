@@ -40,7 +40,7 @@ class Policy extends APIPolicy
     /**
      * @return \eZ\Publish\API\Repository\Values\User\Limitation[]
      */
-    public function getLimitations()
+    public function getLimitations(): iterable
     {
         return $this->limitations;
     }
