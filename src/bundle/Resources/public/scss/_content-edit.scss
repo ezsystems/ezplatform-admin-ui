@@ -59,7 +59,8 @@
             background: $ez-color-base-pale;
         }
 
-        &--create-on-the-fly {
+        &--create-on-the-fly,
+        &--edit-on-the-fly {
             .ez-edit-header__content-type-name {
                 width: 100%;
             }

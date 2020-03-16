@@ -71,6 +71,11 @@
         <target state="new">Stores a Relation to a Content item.</target>
         <note>key: ezobjectrelation.helper</note>
       </trans-unit>
+      <trans-unit id="7df0c551bbd003f5a7d37ebe3434bce08ade074c" resname="ezobjectrelationlist.add_relation">
+        <source>Add relations</source>
+        <target state="new">Add relations</target>
+        <note>key: ezobjectrelationlist.add_relation</note>
+      </trans-unit>
       <trans-unit id="9a8153d976ff4a6805e00fa7945d153f01bc61a8" resname="ezobjectrelationlist.cta.limit.multi">
         <source>Set up multiple Relations with one or several Content items</source>
         <target state="new">Set up multiple Relations with one or several Content items</target>
@@ -85,6 +90,11 @@
         <source>Select content</source>
         <target state="new">Select content</target>
         <note>key: ezobjectrelationlist.cta.select</note>
+      </trans-unit>
+      <trans-unit id="85874e8811087f9c2169915345cdf71d5243182e" resname="ezobjectrelationlist.delete_selected_relations">
+        <source>Delete selected relation(s)</source>
+        <target state="new">Delete selected relation(s)</target>
+        <note>key: ezobjectrelationlist.delete_selected_relations</note>
       </trans-unit>
       <trans-unit id="52005ae63462da5d58857a144007d81cd7375fc2" resname="ezobjectrelationlist.helper">
         <source>Stores Relations to other Content items.</source>

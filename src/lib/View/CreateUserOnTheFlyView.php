@@ -10,6 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\View;
 
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
 
-class ContentCreateOnTheFlyView extends BaseView
+class CreateUserOnTheFlyView extends BaseView
 {
 }
