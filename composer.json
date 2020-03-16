@@ -15,7 +15,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
-        {"type": "vcs", "url": "https://github.com/webhdx/Routing.git"}
+        {"type": "vcs", "url": "https://github.com/ezsystems/Routing.git"}
     ],
     "require": {
         "php": "^7.3",
