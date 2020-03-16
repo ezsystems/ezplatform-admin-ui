@@ -47,7 +47,10 @@
         "babdev/pagerfanta-bundle": "^2.1",
         "knplabs/knp-menu-bundle": "^3.0",
         "mck89/peast": "^1.9",
-        "willdurand/js-translation-bundle": "^3.0"
+        "willdurand/js-translation-bundle": "^3.0",
+        "twig/twig": "^3.0",
+        "twig/intl-extra": "^3.0",
+        "twig/string-extra": "^3.0"
     },
     "require-dev": {
         "behat/behat": "^3.5",
