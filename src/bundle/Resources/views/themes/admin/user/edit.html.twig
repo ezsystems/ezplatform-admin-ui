@@ -52,3 +52,23 @@
     {% set user_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.user_edit.sidebar_right', [], {'user': user, 'content_type': content_type}) %}
     {{ knp_menu_render(user_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
+
+{% block form_before %}
+    {{ ezplatform_admin_ui_component_group('content-edit-form-before', {
+        'content': user,
+        'contentType': contentType,
+        'location': location,
+        'parent_location': parentLocation,
+        'language': language
+    }) }}
+{% endblock %}
+
+{% block form_after %}
+    {{ ezplatform_admin_ui_component_group('content-edit-form-after', {
+        'content': user,
+        'contentType': contentType,
+        'location': location,
+        'parent_location': parentLocation,
+        'language': language
+    }) }}
+{% endblock %}

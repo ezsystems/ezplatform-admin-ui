@@ -49,3 +49,19 @@
     {% set user_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.user_create.sidebar_right', [], {'parent_group': parent_group, 'content_type': content_type}) %}
     {{ knp_menu_render(user_create_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
+
+{% block form_before %}
+    {{ ezplatform_admin_ui_component_group('content-create-form-before', {
+        'parentLocation': parentLocation,
+        'contentType': contentType,
+        'language': language
+    }) }}
+{% endblock %}
+
+{% block form_after %}
+    {{ ezplatform_admin_ui_component_group('content-create-form-after', {
+        'parentLocation': parentLocation,
+        'contentType': contentType,
+        'language': language
+    }) }}
+{% endblock %}
