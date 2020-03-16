@@ -70,7 +70,7 @@ class LocationTransformer implements DataTransformerInterface
 
         try {
             return $this->locationService->loadLocation((int)$value);
-        } catch (NotFoundException|UnauthorizedException $e) {
+        } catch (NotFoundException | UnauthorizedException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
     }
