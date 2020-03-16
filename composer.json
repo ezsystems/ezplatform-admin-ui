@@ -32,7 +32,7 @@
         "symfony/options-resolver": "^5.0",
         "symfony/asset": "^5.0",
         "symfony/yaml": "^5.0",
-        "jms/translation-bundle": "dev-symfony5 as 1.4.x-dev",
+        "jms/translation-bundle": "^1.5",
         "ezsystems/ezpublish-kernel": "dev-symfony5 as 8.0.x-dev",
         "ezsystems/ezplatform-content-forms": "dev-symfony5 as 1.0.x-dev",
         "ezsystems/ezplatform-admin-ui-modules": "dev-symfony5 as 2.0.x-dev",
