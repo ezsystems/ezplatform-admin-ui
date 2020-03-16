@@ -14,7 +14,7 @@ use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation;
 use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveUniqueRelation;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class HasUniqueAssetRelation implements TrashLocationOptionProvider
 {
@@ -25,7 +25,7 @@ final class HasUniqueAssetRelation implements TrashLocationOptionProvider
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     public function __construct(
