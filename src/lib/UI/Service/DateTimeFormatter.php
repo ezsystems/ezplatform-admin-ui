@@ -57,7 +57,7 @@ final class DateTimeFormatter implements DateTimeFormatterInterface, Translation
     private function getDiffMessage(int $count, bool $invert, string $unit): string
     {
         $id = sprintf('diff.%s.%s', $invert ? 'ago' : 'in', $unit);
-
+        /** @Ignore */
         return $this->translator->trans($id, ['%count%' => $count], 'time');
     }
 
