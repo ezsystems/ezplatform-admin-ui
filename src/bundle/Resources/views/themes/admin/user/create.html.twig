@@ -51,17 +51,17 @@
 {% endblock %}
 
 {% block form_before %}
-    {{ ezplatform_admin_ui_component_group('content-create-form-before', {
-        'parentLocation': parentLocation,
-        'contentType': contentType,
+    {{ ez_render_component_group('content-create-form-before', {
+        'parent_location': parent_location,
+        'content_type': content_type,
         'language': language
     }) }}
 {% endblock %}
 
 {% block form_after %}
-    {{ ezplatform_admin_ui_component_group('content-create-form-after', {
-        'parentLocation': parentLocation,
-        'contentType': contentType,
+    {{ ez_render_component_group('content-create-form-after', {
+        'parent_location': parent_location,
+        'content_type': content_type,
         'language': language
     }) }}
 {% endblock %}
