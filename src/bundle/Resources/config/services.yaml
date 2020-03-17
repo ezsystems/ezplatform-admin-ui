@@ -127,3 +127,6 @@ services:
     EzSystems\EzPlatformContentForms\ConfigResolver\MaxUploadSize: ~
 
     EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper: ~
+
+    EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatter: ~
+    EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatterInterface: '@EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatter'
