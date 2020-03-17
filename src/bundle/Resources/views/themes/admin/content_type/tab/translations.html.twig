@@ -1,9 +1,9 @@
-{% block modal_add_translation %}
-    {% include '@ezdesign/content_type/modal/add_translation.html.twig' with {'form': form_translation_add} only %}
-{% endblock %}
-
-{% include '@ezdesign/content/tab/translations/tab.html.twig' with {
+{% embed '@ezdesign/content/tab/translations/tab.html.twig' with {
     can_translate : can_translate,
     form_translation_remove_action: path('ezplatform.content_type.remove_translation')
 } %}
+    {% block modal_add_translation %}
+        {% include '@ezdesign/content_type/modal/add_translation.html.twig' with {'form': form_translation_add} only %}
+    {% endblock %}
+{% endembed %}
 
