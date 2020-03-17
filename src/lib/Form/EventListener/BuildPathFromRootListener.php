@@ -40,7 +40,7 @@ class BuildPathFromRootListener
     {
         $data = $event->getData();
         if (!array_key_exists('site_root', $data) || false === (bool)$data['site_root']) {
-            $location = $this->locationService->loadLocation($data['location']);
+            $location = $this->locationService->loadLocation((int)$data['location']);
             if (1 >= $location->depth) {
                 return;
             }
