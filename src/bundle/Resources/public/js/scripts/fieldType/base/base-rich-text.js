@@ -417,7 +417,7 @@
                     return;
                 }
 
-                if (restrictedKeywords.some(keyword => href.includes(keyword))) {
+                if (restrictedKeywords.some((keyword) => href.includes(keyword))) {
                     return;
                 }
 
