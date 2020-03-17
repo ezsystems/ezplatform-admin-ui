@@ -22,6 +22,23 @@
     </div>
 {% endblock %}
 
+{% block label %}
+    {% set icon_path = null %}
+    {% set icon_class = (item_class|default('ez-icon ') ~ item.extras.icon_size|default('ez-icon--small-medium ') ~ item.extras.icon_class|default(''))|trim %}
+    {% if item.extras.icon_path|default %}
+        {% set icon_path = item.extras.icon_path %}
+    {% elseif item.extras.icon is defined and item.extras.icon is not empty %}
+        {% set icon_path = asset('bundles/ezplatformadminui/img/ez-icons.svg') ~ '#' ~ item.extras.icon %}
+        {% set icon_class = (icon_class ~ ' ez-icon-' ~ item.extras.icon)|trim %}
+    {% endif %}
+    {% if icon_path is not empty %}
+        <svg class="{{ icon_class }}">
+            <use xlink:href="{{ icon_path }}"></use>
+        </svg>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
 {% block linkElement %}
     {% import 'knp_menu.html.twig' as knp_menu %}
     {% set link_attributes = item.linkAttributes|merge({
