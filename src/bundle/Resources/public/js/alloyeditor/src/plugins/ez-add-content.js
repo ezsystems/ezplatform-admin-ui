@@ -61,7 +61,8 @@
             const elements = elementPath.elements;
             const insideTableCell = elementPath.blockLimit && elementPath.blockLimit.getName() === 'td';
             const insideCustomTag = elementPath.contains(isCustomTag, true);
-            let insertIndex = insideTableCell || insideCustomTag ? 0 : elements.length - 2;
+            const insideListItem = elementPath.lastElement.getName() == 'li';
+            let insertIndex = insideTableCell || insideCustomTag || insideListItem ? 0 : elements.length - 2;
 
             if (elementPath.lastElement.getName() == 'li') {
                 insertIndex++;
