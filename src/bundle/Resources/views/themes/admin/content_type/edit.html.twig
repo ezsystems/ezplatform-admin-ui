@@ -115,7 +115,7 @@
                             }) }}
 
                             {# Default rendering #}
-                            {% for child in field_definition %}
+                            {% for child in field_definition|filter(child => child.isRendered() == false) %}
                                 {{ form_row(child) }}
                             {% endfor %}
                         </div>
