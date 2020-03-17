@@ -405,7 +405,11 @@
                 const protocolPattern = /^https?:\/\//i;
                 const protocolHref = protocolPrefix.concat(href);
 
-                if (!href && href.indexOf(anchorPrefix) === 0) {
+                if (!href) {
+                    return;
+                }
+
+                if (href.indexOf(anchorPrefix) === 0) {
                     return;
                 }
 
@@ -413,25 +417,13 @@
                     return;
                 }
 
-                if (this.containsAny(href, restrictedKeywords)) {
+                if (restrictedKeywords.some(keyword => href.includes(keyword))) {
                     return;
                 }
 
                 link.setAttribute('href', protocolHref);
                 link.setAttribute('data-cke-saved-href', protocolHref);
             });
-        }
-
-        containsAny(string, substrings) {
-            let isSubstringPresent = false;
-
-            substrings.forEach((substring) => {
-                if (string.includes(substring)) {
-                    isSubstringPresent = true;
-                }
-            });
-
-            return isSubstringPresent;
         }
     };
 
