@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="614b91c467f0ca438989a4e49e78652a1f4565f3" resname="diff.ago.day">
+        <source>1 day ago|%count% days ago</source>
+        <target state="new">1 day ago|%count% days ago</target>
+        <note>key: diff.ago.day</note>
+      </trans-unit>
+      <trans-unit id="b3caf2127ff7fb3fd977af365ec4f104d6ab7687" resname="diff.ago.hour">
+        <source>1 hour ago|%count% hours ago</source>
+        <target state="new">1 hour ago|%count% hours ago</target>
+        <note>key: diff.ago.hour</note>
+      </trans-unit>
+      <trans-unit id="0f2fbc7aab2cdee45a9a33d5a240469b3c18bfdc" resname="diff.ago.minute">
+        <source>1 minute ago|%count% minutes ago</source>
+        <target state="new">1 minute ago|%count% minutes ago</target>
+        <note>key: diff.ago.minute</note>
+      </trans-unit>
+      <trans-unit id="4423772b70e920742bdbd9e1d0af26584ad78a9f" resname="diff.ago.month">
+        <source>1 month ago|%count% months ago</source>
+        <target state="new">1 month ago|%count% months ago</target>
+        <note>key: diff.ago.month</note>
+      </trans-unit>
+      <trans-unit id="c975933018445b92dca8aff134de3b3fb93faad3" resname="diff.ago.second">
+        <source>1 second ago|%count% seconds ago</source>
+        <target state="new">1 second ago|%count% seconds ago</target>
+        <note>key: diff.ago.second</note>
+      </trans-unit>
+      <trans-unit id="082fd9b2eb27ef4e774a9c0e4b88d2c3b65ea39d" resname="diff.ago.year">
+        <source>1 year ago|%count% years ago</source>
+        <target state="new">1 year ago|%count% years ago</target>
+        <note>key: diff.ago.year</note>
+      </trans-unit>
+      <trans-unit id="bd18289c52fecba36c08dfd086cee6366ae2f943" resname="diff.empty">
+        <source>now</source>
+        <target state="new">now</target>
+        <note>key: diff.empty</note>
+      </trans-unit>
+      <trans-unit id="76830d7696db77e898e6a7c8cfa7cfba6c0073ba" resname="diff.in.day">
+        <source>in 1 minute|in %count% minutes</source>
+        <target state="new">in 1 minute|in %count% minutes</target>
+        <note>key: diff.in.day</note>
+      </trans-unit>
+      <trans-unit id="560ea5a89a4328043b9e851bc7d2682f7ac2ff98" resname="diff.in.hour">
+        <source>in 1 day|in %count% days</source>
+        <target state="new">in 1 day|in %count% days</target>
+        <note>key: diff.in.hour</note>
+      </trans-unit>
+      <trans-unit id="ee4c327d284cf0a84994eafa7e851c16cc338ca0" resname="diff.in.minute">
+        <source>in 1 month|in %count% months</source>
+        <target state="new">in 1 month|in %count% months</target>
+        <note>key: diff.in.minute</note>
+      </trans-unit>
+      <trans-unit id="40d2bbb78c324de12e084dba2266b4faf43325ee" resname="diff.in.month">
+        <source>in 1 hour|in %count% hours</source>
+        <target state="new">in 1 hour|in %count% hours</target>
+        <note>key: diff.in.month</note>
+      </trans-unit>
+      <trans-unit id="15b5427458b3b746bfc0934d6fb25f021fd15f47" resname="diff.in.second">
+        <source>in 1 year|in %count% years</source>
+        <target state="new">in 1 year|in %count% years</target>
+        <note>key: diff.in.second</note>
+      </trans-unit>
+      <trans-unit id="8d5947aadf04f3a3bc9fbb77a3322a7c51252b92" resname="diff.in.year">
+        <source>in 1 second|in %count% seconds</source>
+        <target state="new">in 1 second|in %count% seconds</target>
+        <note>key: diff.in.year</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
