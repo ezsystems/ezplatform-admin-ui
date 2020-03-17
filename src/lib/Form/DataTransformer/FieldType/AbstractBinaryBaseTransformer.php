@@ -74,7 +74,7 @@ abstract class AbstractBinaryBaseTransformer
         $properties = [
             'inputUri' => $value['file']->getRealPath(),
             'fileName' => $value['file']->getClientOriginalName(),
-            'fileSize' => $value['file']->getClientSize(),
+            'fileSize' => $value['file']->getSize(),
         ];
 
         return new $this->valueClass($properties);
