@@ -242,7 +242,7 @@
             </svg>
             {{ field.value.fileName }}
             {{ field.value.fileSize|ez_file_size( 1 ) }}
-            <a download href="{{ path( route_reference ) }}">
+            <a download href="{{ path( route_reference.getRoute(), route_reference.getParams() ) }}">
                 <svg class="ez-icon ez-icon--download ez-icon--light">
                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#download"></use>
                 </svg>
@@ -259,7 +259,7 @@
     {% set type = fieldSettings.mediaType %}
     {% set value = field.value %}
     {% set route_reference = ez_route( 'ez_content_download', {'content': content, 'fieldIdentifier': field.fieldDefIdentifier} ) %}
-    {% set download = path( route_reference ) %}
+    {% set download = path( route_reference.getRoute(), route_reference.getParams() ) %}
     {% set hasController = value.hasController ? 'ezmedia.yes'|trans|desc('Yes') : 'ezmedia.no'|trans|desc('No') %}
     {% set autoplay = value.autoplay ? 'ezmedia.yes'|trans|desc('Yes') : 'ezmedia.no'|trans|desc('No') %}
     {% set loop = value.loop ? 'ezmedia.yes'|trans|desc('Yes') : 'ezmedia.no'|trans|desc('No') %}
