@@ -86,7 +86,7 @@ class AdminExceptionListener
         }
 
         $response = new Response();
-        $exception = $event->getException();
+        $exception = $event->getThrowable();
 
         if ($exception instanceof HttpExceptionInterface) {
             $response->setStatusCode($exception->getStatusCode());
