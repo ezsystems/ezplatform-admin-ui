@@ -787,7 +787,7 @@ ezplatform.udw.locations.data:
     options:
         expose: true
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:locations'
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController::locationsAction'
 
 ezplatform.udw.location_gridview.data:
     path: /module/universal-discovery/location/{locationId}/gridview
