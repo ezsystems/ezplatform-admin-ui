@@ -11,6 +11,7 @@ export default class EzTableCellConfig extends EzConfigTableBase {
             'ezmovedown',
             editAttributesButton,
             'tableHeading',
+            'ezparagraph-tablecell',
             'ezembedinline',
             'ezanchor',
             'eztablerow',
