@@ -4,6 +4,8 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\Data\FormMapper;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType as ApiContentType;
@@ -11,7 +13,7 @@ use eZ\Publish\Core\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData;
 use EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTranslationMapper;
-use PHPUnit\Framework\TestCase;
+use eZ\Publish\SPI\FieldType\Value;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
@@ -19,10 +21,11 @@ use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Field;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
-class ContentTranslationMapperTest extends TestCase
+final class ContentTranslationMapperTest extends TestCase
 {
     public const LANGUAGE_CODE = 'cyb-CY';
 
@@ -36,10 +39,6 @@ class ContentTranslationMapperTest extends TestCase
 
     /**
      * @dataProvider paramsProvider
-     *
-     * @param $content
-     * @param array $params
-     * @param $expectedData
      */
     public function testMapToFormData(Content $content, array $params, ContentTranslationData $expectedData)
     {
@@ -86,7 +85,7 @@ class ContentTranslationMapperTest extends TestCase
                         $field1->fieldDefIdentifier => new FieldData([
                             'field' => $field1,
                             'fieldDefinition' => $this->getFieldDefinition($field1->fieldDefIdentifier, true),
-                            'value' => 'default_value',
+                            'value' => $this->createMock(Value::class),
                         ]),
                     ],
                     'contentType' => $contentTypeTranslatable,
@@ -106,7 +105,7 @@ class ContentTranslationMapperTest extends TestCase
                         $field1->fieldDefIdentifier => new FieldData([
                             'field' => $field1,
                             'fieldDefinition' => $this->getFieldDefinition(),
-                            'value' => 'string_value',
+                            'value' => $this->createMock(Value::class),
                         ]),
                     ],
                     'contentType' => $contentType,
@@ -126,17 +125,17 @@ class ContentTranslationMapperTest extends TestCase
                         $field1->fieldDefIdentifier => new FieldData([
                             'field' => $field1,
                             'fieldDefinition' => $this->getFieldDefinition($field1->fieldDefIdentifier),
-                            'value' => 'string_value',
+                            'value' => $this->createMock(Value::class),
                         ]),
                         $field2->fieldDefIdentifier => new FieldData([
                             'field' => $field2,
                             'fieldDefinition' => $this->getFieldDefinition($field2->fieldDefIdentifier),
-                            'value' => 'string_value',
+                            'value' => $this->createMock(Value::class),
                         ]),
                         $field3->fieldDefIdentifier => new FieldData([
                             'field' => $field3,
                             'fieldDefinition' => $this->getFieldDefinition($field3->fieldDefIdentifier),
-                            'value' => 'string_value',
+                            'value' => $this->createMock(Value::class),
                         ]),
                     ],
                     'contentType' => $contentTypeThreeFields,
@@ -147,10 +146,6 @@ class ContentTranslationMapperTest extends TestCase
 
     /**
      * @dataProvider wrongParamsProvider
-     *
-     * @param $content
-     * @param array $params
-     * @param array $exception
      */
     public function testMapToFormDataWithoutRequiredParameter($content, array $params, array $exception)
     {
@@ -224,11 +219,6 @@ class ContentTranslationMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @param Field[] $fields
-     *
-     * @return Content
-     */
     private function getCompleteContent(array $fields = []): Content
     {
         return new Content([
@@ -239,27 +229,15 @@ class ContentTranslationMapperTest extends TestCase
         ]);
     }
 
-    /**
-     * @param string $fieldDefIdentifier
-     * @param string $languageCode
-     * @param string $value
-     *
-     * @return Field
-     */
     private function getField($fieldDefIdentifier = 'identifier', $languageCode = self::LANGUAGE_CODE, $value = 'string_value'): Field
     {
         return new Field([
             'fieldDefIdentifier' => $fieldDefIdentifier,
             'languageCode' => $languageCode,
-            'value' => $value,
+            'value' => $this->createMock(Value::class),
         ]);
     }
 
-    /**
-     * @param FieldDefinition[] $fieldDefs
-     *
-     * @return ContentType
-     */
     private function getContentType(array $fieldDefs = []): ContentType
     {
         return new ContentType([
@@ -267,17 +245,11 @@ class ContentTranslationMapperTest extends TestCase
         ]);
     }
 
-    /**
-     * @param string $identifier
-     * @param bool $isTranslatable
-     *
-     * @return FieldDefinition
-     */
     private function getFieldDefinition(string $identifier = 'identifier', bool $isTranslatable = false): FieldDefinition
     {
         return new FieldDefinition([
             'identifier' => $identifier,
-            'defaultValue' => 'default_value',
+            'defaultValue' => $this->createMock(Value::class),
             'isTranslatable' => $isTranslatable,
         ]);
     }

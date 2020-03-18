@@ -38,8 +38,8 @@ class LocationsTransformerTest extends TestCase
         $service->expects(self::exactly(2))
             ->method('loadLocation')
             ->willReturnMap([
-                ['123456', null, null, new Location(['id' => 123456])],
-                ['456789', null, null, new Location(['id' => 456789])],
+                [123456, null, null, new Location(['id' => 123456])],
+                [456789, null, null, new Location(['id' => 456789])],
             ]);
 
         $transformer = new LocationsTransformer($service);
