@@ -153,7 +153,7 @@ class ContentOnTheFlyController extends Controller
         Location $parentLocation
     ) {
         if ((new ContentTypeIsUser($this->userContentTypeIdentifiers))->isSatisfiedBy($contentType)) {
-            return $this->forward('EzPlatformAdminUiBundle:UserOnTheFly:createUser', [
+            return $this->forward('EzSystems\EzPlatformAdminUiBundle\Controller\UserOnTheFlyController::createUserAction', [
                 'languageCode' => $languageCode,
                 'contentType' => $contentType,
                 'parentLocation' => $parentLocation,
@@ -217,7 +217,7 @@ class ContentOnTheFlyController extends Controller
         );
 
         if ((new ContentTypeIsUser($this->userContentTypeIdentifiers))->isSatisfiedBy($contentType)) {
-            return $this->forward('EzPlatformAdminUiBundle:UserOnTheFly:editUser', [
+            return $this->forward('EzSystems\EzPlatformAdminUiBundle\Controller\UserOnTheFlyController::editUserAction', [
                 'languageCode' => $languageCode,
                 'contentId' => $contentId,
                 'versionNo' => $versionNo,
