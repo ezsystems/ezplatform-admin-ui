@@ -781,6 +781,16 @@
         <target state="new">Prevent reusing old password</target>
         <note>key: field_definition.ezuser.require_new_password</note>
       </trans-unit>
+      <trans-unit id="100096c9b93ce532e7bf2f184d8e3f43374ae921" resname="field_definition.ezuser.require_unique_email">
+        <source>Email must be unique</source>
+        <target state="new">Email must be unique</target>
+        <note>key: field_definition.ezuser.require_unique_email</note>
+      </trans-unit>
+      <trans-unit id="8e511c53eccc10ed0f41aa2c1b2fccd9184d9e47" resname="field_definition.ezuser.username_pattern">
+        <source>Username pattern</source>
+        <target state="new">Username pattern</target>
+        <note>key: field_definition.ezuser.username_pattern</note>
+      </trans-unit>
       <trans-unit id="92d9243bb9fac540233dc376b41a3bcd41615ccc" resname="field_definition.field_group">
         <source>Category</source>
         <target state="new">Category</target>
