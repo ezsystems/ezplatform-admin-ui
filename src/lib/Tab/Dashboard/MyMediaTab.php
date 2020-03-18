@@ -30,7 +30,7 @@ class MyMediaTab extends AbstractTab implements OrderedTabInterface
 
     /**
      * @param \Twig\Environment $twig
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper $pagerContentToDataMapper
      * @param \eZ\Publish\API\Repository\SearchService $searchService
      * @param \eZ\Publish\Core\QueryType\QueryType $mediaSubtreeQueryType

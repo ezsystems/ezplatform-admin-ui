@@ -74,14 +74,6 @@ services:
     EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler'
     EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandler'
 
-    # @todo 3.0: Remove this service once all twig |truncate calls are removed from link_manager/* templates
-    #            composer.json doesn't have dependency on twig/extensions which is required for this service
-    Twig\Extensions\TextExtension:
-        public: true
-        class: Twig\Extensions\TextExtension
-        tags:
-            - { name: twig.extension }
-
     EzSystems\EzPlatformAdminUi\Menu\Voter\LocationVoter:
         arguments: [ '@request_stack' ]
         tags:
@@ -135,3 +127,6 @@ services:
     EzSystems\EzPlatformContentForms\ConfigResolver\MaxUploadSize: ~
 
     EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper: ~
+
+    EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatter: ~
+    EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatterInterface: '@EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatter'

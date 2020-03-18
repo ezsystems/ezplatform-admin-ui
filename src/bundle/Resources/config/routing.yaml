@@ -425,7 +425,7 @@ ezplatform.relation:
     path: /relation/{contentId}
     methods: ['GET', 'POST']
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:Content:relationView'
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentController::relationViewAction'
 
 # LocationView / Translation tab
 
@@ -780,35 +780,35 @@ ezplatform.udw.location.data:
     options:
         expose: true
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:location'
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController::locationAction'
 
 ezplatform.udw.locations.data:
     path: /module/universal-discovery/locations
     options:
         expose: true
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:locations'
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController::locationsAction'
 
 ezplatform.udw.location_gridview.data:
     path: /module/universal-discovery/location/{locationId}/gridview
     options:
         expose: true
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:locationGridView'
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController::locationGridViewAction'
 
 ezplatform.udw.accordion.data:
     path: /module/universal-discovery/accordion/{locationId}
     options:
         expose: true
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:accordion'
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController::accordionAction'
 
 ezplatform.udw.accordion_gridview.data:
     path: /module/universal-discovery/accordion/{locationId}/gridview
     options:
         expose: true
     defaults:
-        _controller: 'EzPlatformAdminUiBundle:UniversalDiscovery:accordionGridView'
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController::accordionGridViewAction'
 
 #
 # Bookmark manager

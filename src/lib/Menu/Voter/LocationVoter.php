@@ -33,7 +33,7 @@ class LocationVoter implements VoterInterface
     /**
      * {@inheritdoc}
      */
-    public function matchItem(ItemInterface $item)
+    public function matchItem(ItemInterface $item): ?bool
     {
         $routes = $item->getExtra('routes', []);
 
