@@ -70,15 +70,16 @@ class UDWBasedValueModelTransformer implements DataTransformerInterface
 
     /**
      * Extracts and returns an item id from a path, e.g. /1/2/58/ => 58.
-     *
-     * @param string $path
-     *
-     * @return string|null
      */
-    private function extractLocationIdFromPath(string $path): ?string
+    private function extractLocationIdFromPath(string $path): int
     {
         $pathParts = explode('/', trim($path, '/'));
 
-        return array_pop($pathParts);
+        $locationId = array_pop($pathParts);
+        if ($locationId === null) {
+            throw new TransformationFailedException("Path '{$path}' does not contain Location ID");
+        }
+
+        return (int)$locationId;
     }
 }
