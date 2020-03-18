@@ -4,6 +4,8 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace EzSystems\EzPlatformAdminUiBundle\Tests\Templating\Twig;
 
 use eZ\Publish\API\Repository\Values\User\Limitation;
@@ -22,7 +24,7 @@ class LimitationMock extends Limitation
         $this->identifier = $identifier;
     }
 
-    public function getIdentifier()
+    public function getIdentifier(): string
     {
         return $this->identifier;
     }

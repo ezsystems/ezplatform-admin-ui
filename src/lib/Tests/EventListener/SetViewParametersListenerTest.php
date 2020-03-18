@@ -23,8 +23,12 @@ use EzSystems\EzPlatformContentForms\Content\View\ContentEditView;
 use EzSystems\EzPlatformContentForms\User\View\UserUpdateView;
 use PHPUnit\Framework\TestCase;
 
-class SetViewParametersListenerTest extends TestCase
+final class SetViewParametersListenerTest extends TestCase
 {
+    private const EXAMPLE_LOCATION_A_ID = 1;
+    private const EXAMPLE_LOCATION_B_ID = 2;
+    private const EXAMPLE_OWNER_ID = 14;
+
     /** @var \eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent */
     private $event;
 
@@ -64,8 +68,8 @@ class SetViewParametersListenerTest extends TestCase
 
     public function testSetViewTemplateParameters()
     {
-        $locationA = new Core\Location();
-        $locationB = new Core\Location();
+        $locationA = new Core\Location(['id' => self::EXAMPLE_LOCATION_A_ID]);
+        $locationB = new Core\Location(['id' => self::EXAMPLE_LOCATION_B_ID]);
         $locations = [$locationA, $locationB];
 
         $contentInfo = $this->generateContentInfo();
@@ -101,7 +105,7 @@ class SetViewParametersListenerTest extends TestCase
      */
     private function generateLocation(int $parentLocationId = null): API\Location
     {
-        return new Core\Location(['parentLocationId' => $parentLocationId]);
+        return new Core\Location(['id' => 3, 'parentLocationId' => $parentLocationId]);
     }
 
     public function testSetViewTemplateParametersWithMainLocationId()
@@ -223,7 +227,11 @@ class SetViewParametersListenerTest extends TestCase
      */
     private function generateContentInfo(int $mainLocationId = null, bool $published = false): API\ContentInfo
     {
-        return new API\ContentInfo(['mainLocationId' => $mainLocationId, 'published' => $published]);
+        return new API\ContentInfo([
+            'mainLocationId' => $mainLocationId,
+            'ownerId' => self::EXAMPLE_OWNER_ID,
+            'published' => $published,
+        ]);
     }
 
     /**
