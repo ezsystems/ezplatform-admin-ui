@@ -36,23 +36,16 @@ class PathStringExtension extends AbstractExtension
     }
 
     /**
-     * @param string $pathString
-     *
-     * @return array
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @return \eZ\Publish\API\Repository\Values\Content\Location[]
      */
     public function getLocationList(string $pathString): array
     {
-        $pathStringParts = explode('/', trim($pathString, '/'));
-        array_shift($pathStringParts);
+        $locationIds = array_map(
+            'intval',
+            explode('/', trim($pathString, '/'))
+        );
+        array_shift($locationIds);
 
-        $locationList = [];
-        foreach ($pathStringParts as $locationId) {
-            $locationList[] = $this->locationService->loadLocation($locationId);
-        }
-
-        return $locationList;
+        return $this->locationService->loadLocationList($locationIds);
     }
 }
