@@ -40,7 +40,7 @@
         {% endfor %}
     {% endif %}
 
-    {% if form.section.vars.data is not empty %}
+    {% if form.section is defined and form.section.vars.data is not empty %}
         {{ include('@ezdesign/ui/search_tag.html.twig', {
             'content': form.section.vars.data.name,
             'title': "#{'search.section'|trans|desc('Section:')} #{form.section.vars.data.name}",
