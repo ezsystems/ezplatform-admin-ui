@@ -20,11 +20,11 @@ use eZ\Publish\API\Repository\Exceptions\NotFoundException;
  */
 class LocationTransformer implements DataTransformerInterface
 {
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     protected $locationService;
 
     /**
-     * @param LocationService $locationService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
      */
     public function __construct(LocationService $locationService)
     {
@@ -36,11 +36,11 @@ class LocationTransformer implements DataTransformerInterface
      *
      * @param mixed $value
      *
-     * @return mixed|null
+     * @return int|null
      *
-     * @throws TransformationFailedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
-    public function transform($value)
+    public function transform($value): ?int
     {
         if (null === $value) {
             return null;
@@ -58,10 +58,9 @@ class LocationTransformer implements DataTransformerInterface
      *
      * @param mixed $value
      *
-     * @return APILocation|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
      *
-     * @throws TransformationFailedException
-     * @throws UnauthorizedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function reverseTransform($value): ?APILocation
     {
@@ -70,8 +69,8 @@ class LocationTransformer implements DataTransformerInterface
         }
 
         try {
-            return $this->locationService->loadLocation($value);
-        } catch (NotFoundException $e) {
+            return $this->locationService->loadLocation((int)$value);
+        } catch (NotFoundException | UnauthorizedException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
     }
