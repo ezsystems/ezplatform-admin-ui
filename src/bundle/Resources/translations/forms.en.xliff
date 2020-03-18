@@ -231,21 +231,6 @@
         <target>Content Type / Update</target>
         <note>key: role.policy.class.update</note>
       </trans-unit>
-      <trans-unit id="504ce9f80e074eeb880d5ae5f54d4811e2ab6862" resname="role.policy.comparison">
-        <source>Comparison</source>
-        <target>Comparison</target>
-        <note>key: role.policy.comparison</note>
-      </trans-unit>
-      <trans-unit id="aa75e405b40b2c0fb249bbcc690de4e409191dd4" resname="role.policy.comparison.all_functions">
-        <source>Comparison / All functions</source>
-        <target>Comparison / All functions</target>
-        <note>key: role.policy.comparison.all_functions</note>
-      </trans-unit>
-      <trans-unit id="0a08a017bb100a4d45400bc82e83c84a89252586" resname="role.policy.comparison.view">
-        <source>Comparison / View</source>
-        <target>Comparison / View</target>
-        <note>key: role.policy.comparison.view</note>
-      </trans-unit>
       <trans-unit id="ffe83a713e8b33558df040efa1eeadd0b1cc18e0" resname="role.policy.content">
         <source>Content</source>
         <target>Content</target>
@@ -436,21 +421,6 @@
         <target>Setup / System info</target>
         <note>key: role.policy.setup.system_info</note>
       </trans-unit>
-      <trans-unit id="2e2e751bf3201fb6c68307c683a3ac384b9ec0cf" resname="role.policy.site">
-        <source>Site</source>
-        <target>Site</target>
-        <note>key: role.policy.site</note>
-      </trans-unit>
-      <trans-unit id="8a7be79652e042c41e49671038f309291c780c78" resname="role.policy.site.all_functions">
-        <source>Site / All functions</source>
-        <target>Site / All functions</target>
-        <note>key: role.policy.site.all_functions</note>
-      </trans-unit>
-      <trans-unit id="7974d9702481b771e623dd447d3df7d8e7350e7b" resname="role.policy.site.create">
-        <source>Site / Create</source>
-        <target>Site / Create</target>
-        <note>key: role.policy.site.create</note>
-      </trans-unit>
       <trans-unit id="012dce76ef569ba377ffe98ddbee8d3c3d270e15" resname="role.policy.state">
         <source>State</source>
         <target>State</target>
@@ -540,21 +510,6 @@
         <source>User / Selfedit</source>
         <target>User / Selfedit</target>
         <note>key: role.policy.user.selfedit</note>
-      </trans-unit>
-      <trans-unit id="30c5e1c11a520e499ad68130a2c7b844c2243888" resname="role.policy.workflow">
-        <source>Workflow</source>
-        <target>Workflow</target>
-        <note>key: role.policy.workflow</note>
-      </trans-unit>
-      <trans-unit id="2b2742373d60445d02b866c30e21db99f0755ae6" resname="role.policy.workflow.all_functions">
-        <source>Workflow / All functions</source>
-        <target>Workflow / All functions</target>
-        <note>key: role.policy.workflow.all_functions</note>
-      </trans-unit>
-      <trans-unit id="4ec99016d9af53130aaf043f9b6bce7ced2a1739" resname="role.policy.workflow.change_stage">
-        <source>Workflow / Change stage</source>
-        <target>Workflow / Change stage</target>
-        <note>key: role.policy.workflow.change_stage</note>
       </trans-unit>
       <trans-unit id="f11a379ba38d1a4e5fb7de3bc3a2fb76b72fe9dd" resname="role_assignment.delete">
         <source>Delete</source>

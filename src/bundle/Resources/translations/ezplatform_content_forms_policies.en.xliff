@@ -86,16 +86,6 @@
         <target>Subtree</target>
         <note>key: policy.limitation.identifier.subtree</note>
       </trans-unit>
-      <trans-unit id="920f6a0525d6ba93ff83f46e22baa981ff0b483c" resname="policy.limitation.identifier.workflowstage">
-        <source>WorkflowStage</source>
-        <target>WorkflowStage</target>
-        <note>key: policy.limitation.identifier.workflowstage</note>
-      </trans-unit>
-      <trans-unit id="017b3370e919f545dbf4e889252c00419fde6fde" resname="policy.limitation.identifier.workflowtransition">
-        <source>WorkflowTransition</source>
-        <target>WorkflowTransition</target>
-        <note>key: policy.limitation.identifier.workflowtransition</note>
-      </trans-unit>
     </body>
   </file>
 </xliff>

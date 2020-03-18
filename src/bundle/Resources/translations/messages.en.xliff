@@ -269,11 +269,6 @@
         <target state="new">Cancel</target>
         <note>key: form.cancel</note>
       </trans-unit>
-      <trans-unit id="fb1d64fdeabb5f2fe1671d4f3fb72ccca7722ed3" resname="list.action.edit">
-        <source>Edit</source>
-        <target state="new">Edit</target>
-        <note>key: list.action.edit</note>
-      </trans-unit>
       <trans-unit id="1ada7c495c1592fd70ef48759574e764787bf969" resname="location_trash_form.confirm_label">
         <source>I understand the consequences of this action.</source>
         <target state="new">I understand the consequences of this action.</target>
@@ -293,6 +288,11 @@
         <source>Any time</source>
         <target state="new">Any time</target>
         <note>key: search.any_time</note>
+      </trans-unit>
+      <trans-unit id="f32993c555744e5c203137f3ee0e380d27e9cfef" resname="search.date.range">
+        <source>From date - to date</source>
+        <target state="new">From date - to date</target>
+        <note>key: search.date.range</note>
       </trans-unit>
       <trans-unit id="03d6d5922fd2012e155e50306eaf98e2dfeb21c6" resname="search.section.any">
         <source>Any section</source>
