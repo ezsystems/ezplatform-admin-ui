@@ -398,17 +398,31 @@
             const links = container.querySelectorAll('a');
             const anchorPrefix = '#';
             const protocolPrefix = 'http://';
+            const restrictedKeywords = ['ezcontent', 'ezlocation'];
 
             links.forEach((link) => {
                 const href = link.getAttribute('href');
                 const protocolPattern = /^https?:\/\//i;
+                const protocolHref = protocolPrefix.concat(href);
 
-                if (href && href.indexOf(anchorPrefix) !== 0 && !protocolPattern.test(href)) {
-                    const protocolHref = protocolPrefix.concat(href);
-
-                    link.setAttribute('href', protocolHref);
-                    link.setAttribute('data-cke-saved-href', protocolHref);
+                if (!href) {
+                    return;
                 }
+
+                if (href.indexOf(anchorPrefix) === 0) {
+                    return;
+                }
+
+                if (protocolPattern.test(href)) {
+                    return;
+                }
+
+                if (restrictedKeywords.some((keyword) => href.includes(keyword))) {
+                    return;
+                }
+
+                link.setAttribute('href', protocolHref);
+                link.setAttribute('data-cke-saved-href', protocolHref);
             });
         }
     };
