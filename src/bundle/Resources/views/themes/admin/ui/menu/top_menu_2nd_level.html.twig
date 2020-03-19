@@ -24,7 +24,7 @@
 
 {% block label %}
     {% set icon_path = null %}
-    {% set icon_class = (item_class|default('ez-icon ') ~ item.extras.icon_size|default('ez-icon--small-medium ') ~ item.extras.icon_class|default(''))|trim %}
+    {% set icon_class = (item_class|default('ez-icon ') ~ item.extras.icon_size|default('ez-icon--small ') ~ item.extras.icon_class|default(''))|trim %}
     {% if item.extras.icon_path|default %}
         {% set icon_path = item.extras.icon_path %}
     {% elseif item.extras.icon is defined and item.extras.icon is not empty %}
