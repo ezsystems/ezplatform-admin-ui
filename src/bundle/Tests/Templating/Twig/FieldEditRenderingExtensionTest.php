@@ -55,6 +55,31 @@ class FieldEditRenderingExtensionTest extends FileSystemTwigIntegrationTestCase
         ]);
     }
 
+    /**
+     * @dataProvider getLegacyTests
+     * @group legacy
+     *
+     * @param string $file
+     * @param string $message
+     * @param string $condition
+     * @param array $templates
+     * @param string $exception
+     * @param array $outputs
+     * @param string $deprecation
+     */
+    public function testLegacyIntegration(
+        $file,
+        $message,
+        $condition,
+        $templates,
+        $exception,
+        $outputs,
+        $deprecation = ''
+    ): void {
+        // disable Twig legacy integration test to avoid producing risky warning
+        self::markTestSkipped('This package does not contain Twig legacy integration test cases');
+    }
+
     private function getTemplatePath(string $tpl): string
     {
         return 'templates/' . $tpl;
