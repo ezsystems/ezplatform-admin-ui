@@ -20,7 +20,7 @@ Feature: System info verification
         | ezsystems/ezplatform-design-engine      |
         | ezsystems/ezplatform-http-cache         |
         | ezsystems/ezplatform-solr-search-engine |
-        | ezsystems/ezpublish-kernel              |
+        | ezsystems/ezplatform-kernel             |
         | ezsystems/ezplatform-content-forms      |
 
   @javascript @common
