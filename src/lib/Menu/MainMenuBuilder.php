@@ -39,6 +39,74 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     const ITEM_ADMIN__USERS = 'main__admin__users';
     const ITEM_ADMIN__OBJECT_STATES = 'main__admin__object_states';
 
+    public const ITEM_ADMIN_OPTIONS = [
+        self::ITEM_ADMIN__SYSTEMINFO => ['route' => 'ezplatform.systeminfo'],
+        self::ITEM_ADMIN__SECTIONS => [
+            [
+                'route' => 'ezplatform.section.list',
+                'extras' => [
+                    'routes' => [
+                        'update' => 'ezplatform.section.update',
+                        'view' => 'ezplatform.section.view',
+                        'create' => 'ezplatform.section.create',
+                    ],
+                ],
+            ],
+        ],
+        self::ITEM_ADMIN__ROLES => [
+            'route' => 'ezplatform.role.list',
+            'extras' => [
+                'routes' => [
+                    'update' => 'ezplatform.role.update',
+                    'view' => 'ezplatform.role.view',
+                    'create' => 'ezplatform.role.create',
+                    'policy_update' => 'ezplatform.policy.update',
+                    'policy_list' => 'ezplatform.policy.list',
+                    'policy_create' => 'ezplatform.policy.create',
+                    'policy_create_with_limitation' => 'ezplatform.policy.create_with_limitation',
+                ],
+            ],
+        ],
+        self::ITEM_ADMIN__LANGUAGES => [
+            'route' => 'ezplatform.language.list',
+            'extras' => [
+                'routes' => [
+                    'edit' => 'ezplatform.language.edit',
+                    'view' => 'ezplatform.language.view',
+                    'create' => 'ezplatform.language.create',
+                ],
+            ],
+        ],
+        self::ITEM_ADMIN__CONTENT_TYPES => [
+            'route' => 'ezplatform.content_type_group.list',
+            'extras' => [
+                'routes' => [
+                    'update' => 'ezplatform.content_type_group.update',
+                    'view' => 'ezplatform.content_type_group.view',
+                    'create' => 'ezplatform.content_type_group.create',
+                    'content_type_add' => 'ezplatform.content_type.add',
+                    'content_type_view' => 'ezplatform.content_type.view',
+                    'content_type_edit' => 'ezplatform.content_type.edit',
+                    'content_type_update' => 'ezplatform.content_type.update',
+                ],
+            ],
+        ],
+        self::ITEM_ADMIN__OBJECT_STATES => [
+            'route' => 'ezplatform.object_state.groups.list',
+            'extras' => [
+                'routes' => [
+                    'group_list' => 'ezplatform.object_state.groups.list',
+                    'group_create' => 'ezplatform.object_state.group.add',
+                    'group_edit' => 'ezplatform.object_state.group.update',
+                    'group_view' => 'ezplatform.object_state.group.view',
+                    'state_create' => 'ezplatform.object_state.state.add',
+                    'state_view' => 'ezplatform.object_state.state.view',
+                    'state_edit' => 'ezplatform.object_state.state.update',
+                ],
+            ],
+        ],
+    ];
+
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
@@ -151,65 +219,33 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         if ($this->permissionResolver->hasAccess('setup', 'system_info')) {
             $menuItems[self::ITEM_ADMIN__SYSTEMINFO] = $this->createMenuItem(
                 self::ITEM_ADMIN__SYSTEMINFO,
-                ['route' => 'ezplatform.systeminfo']
+                self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__SYSTEMINFO]
             );
         }
 
         if ($this->permissionResolver->hasAccess('section', 'view') !== false) {
             $menuItems[self::ITEM_ADMIN__SECTIONS] = $this->createMenuItem(
                 self::ITEM_ADMIN__SECTIONS,
-                ['route' => 'ezplatform.section.list', 'extras' => [
-                    'routes' => [
-                        'update' => 'ezplatform.section.update',
-                        'view' => 'ezplatform.section.view',
-                        'create' => 'ezplatform.section.create',
-                    ],
-                ]]
+                self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__SECTIONS]
             );
         }
 
         if ($this->permissionResolver->hasAccess('role', 'read')) {
             $menuItems[self::ITEM_ADMIN__ROLES] = $this->createMenuItem(
                 self::ITEM_ADMIN__ROLES,
-                ['route' => 'ezplatform.role.list', 'extras' => [
-                    'routes' => [
-                        'update' => 'ezplatform.role.update',
-                        'view' => 'ezplatform.role.view',
-                        'create' => 'ezplatform.role.create',
-                        'policy_update' => 'ezplatform.policy.update',
-                        'policy_list' => 'ezplatform.policy.list',
-                        'policy_create' => 'ezplatform.policy.create',
-                        'policy_create_with_limitation' => 'ezplatform.policy.create_with_limitation',
-                    ],
-                ]]
+                self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__ROLES]
             );
         }
         if ($this->permissionResolver->hasAccess('setup', 'administrate')) {
             $menuItems[self::ITEM_ADMIN__LANGUAGES] = $this->createMenuItem(
                 self::ITEM_ADMIN__LANGUAGES,
-                ['route' => 'ezplatform.language.list', 'extras' => [
-                    'routes' => [
-                        'edit' => 'ezplatform.language.edit',
-                        'view' => 'ezplatform.language.view',
-                        'create' => 'ezplatform.language.create',
-                    ],
-                ]]
+                self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__LANGUAGES]
             );
         }
 
         $menuItems[self::ITEM_ADMIN__CONTENT_TYPES] = $this->createMenuItem(
             self::ITEM_ADMIN__CONTENT_TYPES,
-            ['route' => 'ezplatform.content_type_group.list', 'extras' => [
-                'routes' => [
-                    'update' => 'ezplatform.content_type_group.update',
-                    'view' => 'ezplatform.content_type_group.view',
-                    'create' => 'ezplatform.content_type_group.create',
-                    'content_type_add' => 'ezplatform.content_type.add',
-                    'content_type_view' => 'ezplatform.content_type.view',
-                    'content_type_edit' => 'ezplatform.content_type.edit',
-                    'content_type_update' => 'ezplatform.content_type.update',
-                ],
-            ]]
+            self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__CONTENT_TYPES]
         );
 
         $rootUsersId = $this->configResolver->getParameter('location_ids.users');
@@ -226,17 +262,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         if ($this->permissionResolver->hasAccess('state', 'administrate')) {
             $menuItems[self::ITEM_ADMIN__OBJECT_STATES] = $this->createMenuItem(
                 self::ITEM_ADMIN__OBJECT_STATES,
-                ['route' => 'ezplatform.object_state.groups.list', 'extras' => [
-                    'routes' => [
-                        'group_list' => 'ezplatform.object_state.groups.list',
-                        'group_create' => 'ezplatform.object_state.group.add',
-                        'group_edit' => 'ezplatform.object_state.group.update',
-                        'group_view' => 'ezplatform.object_state.group.view',
-                        'state_create' => 'ezplatform.object_state.state.add',
-                        'state_view' => 'ezplatform.object_state.state.view',
-                        'state_edit' => 'ezplatform.object_state.state.update',
-                    ],
-                ]]
+                self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__OBJECT_STATES]
             );
         }
 
