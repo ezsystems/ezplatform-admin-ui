@@ -42,14 +42,12 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     public const ITEM_ADMIN_OPTIONS = [
         self::ITEM_ADMIN__SYSTEMINFO => ['route' => 'ezplatform.systeminfo'],
         self::ITEM_ADMIN__SECTIONS => [
-            [
-                'route' => 'ezplatform.section.list',
-                'extras' => [
-                    'routes' => [
-                        'update' => 'ezplatform.section.update',
-                        'view' => 'ezplatform.section.view',
-                        'create' => 'ezplatform.section.create',
-                    ],
+            'route' => 'ezplatform.section.list',
+            'extras' => [
+                'routes' => [
+                    'update' => 'ezplatform.section.update',
+                    'view' => 'ezplatform.section.view',
+                    'create' => 'ezplatform.section.create',
                 ],
             ],
         ],
