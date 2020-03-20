@@ -52,6 +52,7 @@
         "friendsofphp/php-cs-fixer": "^2.16.0",
         "phpunit/phpunit": "^8.1",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
+        "ezsystems/doctrine-dbal-schema": "^1.0@dev",
         "ezsystems/ezplatform-code-style": "^0.1.0"
     },
     "scripts": {
