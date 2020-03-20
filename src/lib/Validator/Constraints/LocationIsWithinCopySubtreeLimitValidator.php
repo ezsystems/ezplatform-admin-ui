@@ -52,7 +52,7 @@ class LocationIsWithinCopySubtreeLimitValidator extends ConstraintValidator
                 $this
                     ->context
                     ->buildViolation($constraint->message)
-                    ->setParameter('%currentLimit%', $this->copySubtreeLimit)
+                    ->setParameter('%currentLimit%', (string)$this->copySubtreeLimit)
                     ->addViolation();
             }
         } catch (InvalidArgumentException $e) {

@@ -45,6 +45,13 @@ class MainMenuBuilerTest extends TestCase
             [MainMenuBuilder::ITEM_CONTENT, [], new MenuItem(MainMenuBuilder::ITEM_CONTENT, $knpFactory)],
             [MainMenuBuilder::ITEM_ADMIN, [], new MenuItem(MainMenuBuilder::ITEM_ADMIN, $knpFactory)],
         ];
+        foreach (MainMenuBuilder::ITEM_ADMIN_OPTIONS as $id => $options) {
+            $itemMap[] = [
+                $id,
+                $options,
+                new MenuItem($id, $knpFactory),
+            ];
+        }
 
         $this->factory = $this->createMock(MenuItemFactory::class);
         $this->factory->method('createItem')->willReturnMap($itemMap);
