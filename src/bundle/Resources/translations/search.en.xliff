@@ -51,11 +51,6 @@
         <target state="new">Custom range</target>
         <note>key: search.custom_range</note>
       </trans-unit>
-      <trans-unit id="f32993c555744e5c203137f3ee0e380d27e9cfef" resname="search.date.range">
-        <source>From date - to date</source>
-        <target state="new">From date - to date</target>
-        <note>key: search.date.range</note>
-      </trans-unit>
       <trans-unit id="bf24ae2c9083c948931ad1b4d4405b6261eb9bc6" resname="search.filters">
         <source>Filters</source>
         <target state="new">Filters</target>
@@ -90,11 +85,6 @@
         <source>Last year</source>
         <target state="new">Last year</target>
         <note>key: search.last_year</note>
-      </trans-unit>
-      <trans-unit id="6ceaf9887c3974130781c3dadfcb129926496770" resname="search.list">
-        <source>search.list</source>
-        <target state="new">search.list</target>
-        <note>key: search.list</note>
       </trans-unit>
       <trans-unit id="0ea91510ce49731de30d4d412dc62c83c91b359d" resname="search.modified">
         <source>Modified</source>
@@ -170,11 +160,6 @@
         <source>Select Content</source>
         <target state="new">Select Content</target>
         <note>key: search.udw.select_content</note>
-      </trans-unit>
-      <trans-unit id="fe647ff0e12d67501403559464217be468dba3d8" resname="search.viewing">
-        <source>Viewing %viewing% out of %total% sub-items</source>
-        <target state="new">Viewing %viewing% out of %total% sub-items</target>
-        <note>key: search.viewing</note>
       </trans-unit>
     </body>
   </file>
