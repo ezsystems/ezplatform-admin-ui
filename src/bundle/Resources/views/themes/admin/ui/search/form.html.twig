@@ -151,16 +151,18 @@
         <div class="ez-filters__item ez-filters__item--creator">
             <label class="ez-filters__item-label">{{ 'search.creator'|trans|desc('Creator:') }}</label>
             {% set creator = form.vars.data.creator %}
-            <input type="text"
-                class="form-control ez-filters__input"
-                data-content-type-identifiers="{{ user_content_type_identifier|join(',') }}"
-                value="{{ creator is not empty ? ez_content_name(creator) }}"
-                placeholder="{{ 'search.creator_input.placeholder'|trans|desc('Type creator\'s name') }}"
-                {{ creator is not empty ? 'disabled'  }}
-            >
-            <svg class="ez-icon ez-icon--dark ez-icon--medium ez-icon--reset">
-                <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#circle-close"></use>
-            </svg>
+            <div class="ez-filters__input-wrapper">
+                <input type="text"
+                    class="form-control ez-filters__input"
+                    data-content-type-identifiers="{{ user_content_type_identifier|join(',') }}"
+                    value="{{ creator is not empty ? ez_content_name(creator) }}"
+                    placeholder="{{ 'search.creator_input.placeholder'|trans|desc('Type creator\'s name') }}"
+                    {{ creator is not empty ? 'disabled'  }}
+                >
+                <svg class="ez-icon ez-icon--dark ez-icon--medium ez-icon--reset">
+                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#circle-close"></use>
+                </svg>
+            </div>
             <ul class="ez-filters__user-list ez-filters__user-list--hidden"></ul>
         </div>
     </div>

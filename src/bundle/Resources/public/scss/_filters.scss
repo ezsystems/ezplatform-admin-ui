@@ -48,24 +48,30 @@
         &--creator {
             position: relative;
 
-            .ez-filters__input {
-                + .ez-icon {
-                    display: none;
+            .ez-filters {
+                &__input-wrapper {
+                    position: relative;
                 }
 
-                &:disabled {
-                    cursor: auto;
-                    background-color: $ez-color-base-pale;
-                    color: $ez-black;
-                    padding-right: calculateRem(32px);
-                    text-overflow: ellipsis;
+                &__input {
+                    + .ez-icon {
+                        display: none;
+                    }
 
-                    & + .ez-icon {
-                        display: block;
-                        position: absolute;
-                        bottom: calculateRem(7px);
-                        right: calculateRem(6px);
-                        cursor: pointer;
+                    &:disabled {
+                        cursor: auto;
+                        background-color: $ez-color-base-pale;
+                        color: $ez-black;
+                        padding-right: calculateRem(32px);
+                        text-overflow: ellipsis;
+
+                        & + .ez-icon {
+                            display: block;
+                            position: absolute;
+                            bottom: calculateRem(7px);
+                            right: calculateRem(6px);
+                            cursor: pointer;
+                        }
                     }
                 }
             }
