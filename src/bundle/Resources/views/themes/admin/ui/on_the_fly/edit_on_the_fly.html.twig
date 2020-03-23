@@ -15,13 +15,13 @@
         </div>
         <div class="ez-edit-header__details">
             <div class="container ez-details-items">
-                {{ 'creating_details'|trans({
+                {{ 'editing_details'|trans({
                     '%icon%': ez_content_type_icon(content_type.identifier),
                     '%content_type_name%': content_type.name,
                     '%language_name%': language.name,
                     '%location_name%': parent_location.contentInfo.name})
                     |desc('
-                        <span class="ez-details-items__connector">Creating:</span>
+                        <span class="ez-details-items__connector">Editing:</span>
                         <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--content-type">
                         <svg class="ez-icon ez-icon--small ez-icon-%identifier%">
                             <use xlink:href="%icon%"></use>
