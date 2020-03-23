@@ -9,19 +9,23 @@
 {% block details %}
     <div class="ez-edit-header ez-edit-header--edit-on-the-fly">
         <div class="ez-edit-header__content-type-name">
+            {% block close_button %}{% endblock %}
             <div class="container px-5">
-                {{ 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') }}
+                {% set content_name = content ? content.name : 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') %}
+                <div class="ez-content-item__name" title="{{ content_name }}">
+                    {{ content_name }}
+                </div>
             </div>
         </div>
         <div class="ez-edit-header__details">
             <div class="container ez-details-items">
-                {{ 'creating_details'|trans({
+                {{ 'editing_details'|trans({
                     '%icon%': ez_content_type_icon(content_type.identifier),
                     '%content_type_name%': content_type.name,
                     '%language_name%': language.name,
                     '%location_name%': parent_location.contentInfo.name})
                     |desc('
-                        <span class="ez-details-items__connector">Creating:</span>
+                        <span class="ez-details-items__connector">Editing:</span>
                         <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--content-type">
                         <svg class="ez-icon ez-icon--small ez-icon-%identifier%">
                             <use xlink:href="%icon%"></use>
@@ -34,6 +38,20 @@
                         <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--location">%location_name%</span>')
                     |raw
                 }}
+                <a class="ez-details-items__toggler ez-details-items__toggler--gray" href="#">?</a>
+            </div>
+            <div class="container ez-details-items ez-details-items--collapsed ez-details-items__author-breadcrumbs">
+                {{ content_type.name }}/
+                {% if creator is not null %}
+                    {{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }}/
+                {% endif %}
+                {{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }}/
+                {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }},
+                {% if is_published == false %}
+                    {{ 'parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
+                {% else %}
+                    {{ 'location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
+                {% endif %}
             </div>
         </div>
         <div class="ez-content-item__errors-wrapper" hidden>
