@@ -79,6 +79,7 @@ class UserDeleteController extends Controller
                 $contentInfo = $data->getContentInfo();
 
                 $location = $this->locationService->loadLocation($contentInfo->mainLocationId);
+                $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
 
                 $user = $this->userService->loadUser($contentInfo->id);
 
@@ -92,7 +93,7 @@ class UserDeleteController extends Controller
                 );
 
                 return new RedirectResponse($this->generateUrl('_ez_content_view', [
-                    'contentId' => $location->contentId,
+                    'contentId' => $parentLocation->contentId,
                     'locationId' => $location->parentLocationId,
                 ]));
             });
