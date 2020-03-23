@@ -25,6 +25,8 @@ class RequestAttributesListener implements EventSubscriberInterface
 {
     private const CONTENT_VIEW_ROUTE_NAME = '_ez_content_view';
 
+    private const MULTILINGUAL_CONTENT_VIEW_ROUTE_NAME = '_ez_multilingual_content_view';
+
     /** @var Repository */
     private $repository;
 
@@ -65,7 +67,7 @@ class RequestAttributesListener implements EventSubscriberInterface
         $parameterBag = $event->getParameters();
 
         if ($parameterBag->has('locationId') && null !== $parameterBag->get('locationId')) {
-            $location = $this->loadLocation($parameterBag->get('locationId'));
+            $location = $this->loadLocation((int)$parameterBag->get('locationId'));
             $parameterBag->set('location', $location);
         }
 
@@ -88,15 +90,15 @@ class RequestAttributesListener implements EventSubscriberInterface
      */
     private function hasContentLanguage(Request $request, ParameterBag $parameterBag): bool
     {
-        return $parameterBag->has('languageCode') && $parameterBag->has('location') && $request->get('_route') === self::CONTENT_VIEW_ROUTE_NAME;
+        return $parameterBag->has('languageCode') && $parameterBag->has('location') && $request->get('_route') === self::MULTILINGUAL_CONTENT_VIEW_ROUTE_NAME;
     }
 
     /**
-     * @param $locationId
+     * @param int $locationId
      *
      * @return Location
      */
-    private function loadLocation($locationId): Location
+    private function loadLocation(int $locationId): Location
     {
         $location = $this->repository->sudo(
             function (Repository $repository) use ($locationId) {

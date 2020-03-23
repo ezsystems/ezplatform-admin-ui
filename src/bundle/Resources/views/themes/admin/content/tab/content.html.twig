@@ -7,7 +7,7 @@
     <form class="form-inline ez-content-preview-collapse collapse show">
         <select class="form-control ez-location-language-change">
             {% for language in languages %}
-                <option value="{{ path('_ez_content_view', { 'contentId': location.contentId, 'locationId': location.id, 'languageCode': language.languageCode}) }}"
+                <option value="{{ path('_ez_multilingual_content_view', { 'contentId': location.contentId, 'locationId': location.id, 'languageCode': language.languageCode}) }}"
                     {% if current_language == language.languageCode %} selected="selected" {% endif %}
                 >{{ language.name }}</option>
             {% endfor %}
