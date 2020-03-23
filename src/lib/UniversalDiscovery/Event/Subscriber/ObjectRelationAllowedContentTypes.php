@@ -54,7 +54,9 @@ class ObjectRelationAllowedContentTypes implements EventSubscriberInterface
                 ? null
                 : $intersection;
         } else {
-            $config['allowed_content_types'] = $context['allowed_content_types'];
+            $config['allowed_content_types'] = empty($context['allowed_content_types'])
+                ? null
+                : $context['allowed_content_types'];
         }
 
         $event->setConfig($config);
