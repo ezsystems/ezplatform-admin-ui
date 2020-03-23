@@ -16,6 +16,11 @@
         <target state="new">You can edit any of your existing draft(s)</target>
         <note>key: draft.conflict.choice_content_is_user</note>
       </trans-unit>
+      <trans-unit id="fef7e84ac6fda81cb700fa5519940989c34dd9c7" resname="draft.conflict.close">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note>key: draft.conflict.close</note>
+      </trans-unit>
       <trans-unit id="57ae8e493adef8a884a3f0c5e9e4501b7f2ec395" resname="draft.conflict.header">
         <source>Draft conflict</source>
         <target state="new">Draft conflict</target>
