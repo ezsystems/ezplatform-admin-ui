@@ -74,7 +74,7 @@ class UserTransformer implements DataTransformerInterface
         }
 
         try {
-            return $this->userService->loadUser($value);
+            return $this->userService->loadUser((int)$value);
         } catch (NotFoundException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
