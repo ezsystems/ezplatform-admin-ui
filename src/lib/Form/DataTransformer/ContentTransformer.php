@@ -67,7 +67,7 @@ class ContentTransformer implements DataTransformerInterface
         }
 
         try {
-            return $this->contentService->loadContent($value);
+            return $this->contentService->loadContent((int)$value);
         } catch (NotFoundException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
