@@ -192,7 +192,7 @@
         <input 
             type="text"
             class="ez-filters__range-select form-control"
-            placeholder="{{ 'search.date.range'|trans|desc('From date - to date') }}"
+            placeholder="{{ 'search.date.range'|trans(domain='search')|desc('From date - to date') }}"
             data-start="{{ form.parent.vars.data.lastModified.start_date is defined ? form.parent.vars.data.lastModified.start_date|date("Y-m-d") : '' }}"
             data-end="{{ form.parent.vars.data.lastModified.end_date is defined ? form.parent.vars.data.lastModified.end_date|date("Y-m-d") : '' }}"
         />
@@ -209,7 +209,7 @@
         <input 
             type="text"
             class="ez-filters__range-select form-control"
-            placeholder="{{ 'search.date.range'|trans|desc('From date - to date') }}" 
+            placeholder="{{ 'search.date.range'|trans(domain='search')|desc('From date - to date') }}"
             data-start="{{ form.parent.vars.data.created.start_date is defined ? form.parent.vars.data.created.start_date|date("Y-m-d") : '' }}"
             data-end="{{ form.parent.vars.data.created.end_date is defined ? form.parent.vars.data.created.end_date|date("Y-m-d") : '' }}"
         />

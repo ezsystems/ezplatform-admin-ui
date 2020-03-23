@@ -91,11 +91,6 @@
         <target state="new">Last year</target>
         <note>key: search.last_year</note>
       </trans-unit>
-      <trans-unit id="6ceaf9887c3974130781c3dadfcb129926496770" resname="search.list">
-        <source>search.list</source>
-        <target state="new">search.list</target>
-        <note>key: search.list</note>
-      </trans-unit>
       <trans-unit id="0ea91510ce49731de30d4d412dc62c83c91b359d" resname="search.modified">
         <source>Modified</source>
         <target state="new">Modified</target>
@@ -170,11 +165,6 @@
         <source>Select Content</source>
         <target state="new">Select Content</target>
         <note>key: search.udw.select_content</note>
-      </trans-unit>
-      <trans-unit id="fe647ff0e12d67501403559464217be468dba3d8" resname="search.viewing">
-        <source>Viewing %viewing% out of %total% sub-items</source>
-        <target state="new">Viewing %viewing% out of %total% sub-items</target>
-        <note>key: search.viewing</note>
       </trans-unit>
     </body>
   </file>

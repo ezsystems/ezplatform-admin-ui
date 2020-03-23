@@ -269,11 +269,6 @@
         <target state="new">Cancel</target>
         <note>key: form.cancel</note>
       </trans-unit>
-      <trans-unit id="fb1d64fdeabb5f2fe1671d4f3fb72ccca7722ed3" resname="list.action.edit">
-        <source>Edit</source>
-        <target state="new">Edit</target>
-        <note>key: list.action.edit</note>
-      </trans-unit>
       <trans-unit id="1ada7c495c1592fd70ef48759574e764787bf969" resname="location_trash_form.confirm_label">
         <source>I understand the consequences of this action.</source>
         <target state="new">I understand the consequences of this action.</target>
