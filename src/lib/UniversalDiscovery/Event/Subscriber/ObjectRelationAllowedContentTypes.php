@@ -36,7 +36,7 @@ class ObjectRelationAllowedContentTypes implements EventSubscriberInterface
         }
 
         if (
-            !isset($context['type'], $context['allowed_content_types'], $config['allowed_content_types'])
+            !isset($context['type'], $context['allowed_content_types'])
             || 'object_relation' !== $context['type']
         ) {
             return;
