@@ -9,7 +9,9 @@ namespace EzSystems\EzPlatformAdminUi\FieldType\Mapper;
 use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
 use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
 use EzSystems\EzPlatformContentForms\Form\Type\FieldDefinition\User\PasswordConstraintCheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Range;
@@ -76,6 +78,17 @@ final class UserAccountFormMapper implements FieldDefinitionFormMapperInterface
             'constraints' => [
                 new Range(['min' => 0, 'max' => null]),
             ],
+        ]);
+
+        $fieldDefinitionForm->add('RequireUniqueEmail', CheckboxType::class, [
+            'required' => false,
+            'property_path' => 'fieldSettings[RequireUniqueEmail]',
+            'label' => /** @Desc("Email must be unique") */ 'field_definition.ezuser.require_unique_email',
+        ]);
+
+        $fieldDefinitionForm->add('UsernamePattern', TextType::class, [
+            'property_path' => 'fieldSettings[UsernamePattern]',
+            'label' => /** @Desc("Username pattern") */ 'field_definition.ezuser.username_pattern',
         ]);
     }
 
