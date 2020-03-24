@@ -23,9 +23,7 @@ use eZ\Publish\API\Repository\Repository;
  */
 class RequestAttributesListener implements EventSubscriberInterface
 {
-    private const CONTENT_VIEW_ROUTE_NAME = '_ez_content_view';
-
-    private const MULTILINGUAL_CONTENT_VIEW_ROUTE_NAME = '_ez_multilingual_content_view';
+    private const TRANSLATED_CONTENT_VIEW_ROUTE_NAME = '_ez_content_translation_view';
 
     /** @var Repository */
     private $repository;
@@ -90,7 +88,9 @@ class RequestAttributesListener implements EventSubscriberInterface
      */
     private function hasContentLanguage(Request $request, ParameterBag $parameterBag): bool
     {
-        return $parameterBag->has('languageCode') && $parameterBag->has('location') && $request->get('_route') === self::MULTILINGUAL_CONTENT_VIEW_ROUTE_NAME;
+        return $parameterBag->has('languageCode')
+            && $parameterBag->has('location')
+            && $request->get('_route') === self::TRANSLATED_CONTENT_VIEW_ROUTE_NAME;
     }
 
     /**
@@ -127,6 +127,6 @@ class RequestAttributesListener implements EventSubscriberInterface
     {
         $siteAccess = $request->attributes->get('siteaccess');
 
-        return in_array($siteAccess->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME], true);
+        return \in_array($siteAccess->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME], true);
     }
 }
