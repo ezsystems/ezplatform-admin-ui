@@ -1,6 +1,10 @@
 .ez-picker {
     position: relative;
 
+    &__input[readonly][disabled] {
+        cursor: not-allowed;
+    }
+
     &__btn--clear-input {
         position: absolute;
         z-index: 2;

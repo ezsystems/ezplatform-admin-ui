@@ -1,4 +1,4 @@
-(function(global, doc, flatpickr) {
+(function(global, doc, eZ, flatpickr) {
     const SELECTOR_PICKER = '.ez-picker';
     const SELECTOR_PICKER_INPUT = '.ez-picker__input';
     const SELECTOR_FORM_INPUT = '.ez-picker__form-input';
@@ -41,8 +41,10 @@
             defaultDate,
         });
 
-        btnClear.addEventListener('click', onClearBtnClick.bind(null, flatpickrInstance), false);
+        if (btnClear) {
+            btnClear.addEventListener('click', onClearBtnClick.bind(null, flatpickrInstance), false);
+        }
     };
 
     pickers.forEach(initFlatPickr);
-})(window, window.document, window.flatpickr);
+})(window, window.document, window.eZ, window.flatpickr);
