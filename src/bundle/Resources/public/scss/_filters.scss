@@ -148,10 +148,12 @@
         border: calculateRem(1px) solid $ez-ground-base-medium;
         border-radius: calculateRem(4px);
         transition: all 0.2s ease-in;
+        pointer-events: none;
     
         &--visible {
             height: calculateRem(40px);
             opacity: 1;
+            pointer-events: auto;
         }
     }
 
