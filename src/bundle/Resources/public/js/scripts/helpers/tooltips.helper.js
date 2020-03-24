@@ -1,6 +1,10 @@
 (function(global, doc, eZ, $) {
     const TOOLTIPS_SELECTOR = '[title]';
     const parse = (baseElement = doc) => {
+        if (!baseElement) {
+            return;
+        }
+
         const tooltipNodes = baseElement.querySelectorAll(TOOLTIPS_SELECTOR);
 
         for (tooltipNode of tooltipNodes) {
@@ -26,6 +30,10 @@
         }
     };
     const hideAll = (baseElement = doc) => {
+        if (!baseElement) {
+            return;
+        }
+
         const tooltipsNode = baseElement.querySelectorAll(TOOLTIPS_SELECTOR);
 
         for (tooltipNode of tooltipsNode) {
