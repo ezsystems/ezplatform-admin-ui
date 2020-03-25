@@ -140,6 +140,7 @@
         };
         const renderRow = (item, index) => {
             const { escapeHTML } = eZ.helpers.text;
+            const { formatShortDateTime } = eZ.helpers.timezone;
             const contentTypeName = eZ.helpers.contentType.getContentTypeName(item.ContentInfo.Content.ContentTypeInfo.identifier);
             const contentName = escapeHTML(item.ContentInfo.Content.TranslatedName);
             const contentId = escapeHTML(item.ContentInfo.Content._id);
@@ -149,7 +150,7 @@
                     <td><input type="checkbox" value="${contentId}" /></td>
                     <td class="ez-relations__item-name">${contentName}</td>
                     <td>${contentTypeName}</td>
-                    <td>${new Date(item.ContentInfo.Content.publishedDate).toLocaleString()}</td>
+                    <td>${formatShortDateTime(item.ContentInfo.Content.publishedDate)}</td>
                     <td colspan="2"><input class="ez-relations__order-input" type="number" value="${selectedItems.length +
                         index +
                         1}" /></td>
