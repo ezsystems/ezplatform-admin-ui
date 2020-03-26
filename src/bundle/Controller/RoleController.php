@@ -216,12 +216,10 @@ class RoleController extends Controller
                 $role = $this->roleService->copyRole($data->getClonedRole(), $roleCopyStruct);
 
                 $this->notificationHandler->success(
-                    $this->translator->trans(
-                        /** @Desc("Role '%role%' copied.") */
-                        'role.copy.success',
-                        ['%role%' => $role->identifier],
-                        'role'
-                    )
+                    /** @Desc("Role '%role%' copied.") */
+                    'role.copy.success',
+                    ['%role%' => $role->identifier],
+                    'role'
                 );
 
                 return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
