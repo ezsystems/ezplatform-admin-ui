@@ -1,0 +1,38 @@
+.m-content-create {
+    height: 100%;
+
+    &__iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    &__actions {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        height: calculateRem(50px);
+    }
+
+    &__cancel-button {
+        background-color: $ez-color-base-medium;
+        color: $ez-white;
+        margin-right: calculateRem(16px);
+
+        &:hover {
+            color: $ez-white;
+        }
+    }
+
+    &--footer-visible {
+        .m-content-create {
+            &__iframe {
+                height: calc(100% - #{calculateRem(60px)});
+            }
+
+            &__actions {
+                display: flex;
+            }
+        }
+    }
+}

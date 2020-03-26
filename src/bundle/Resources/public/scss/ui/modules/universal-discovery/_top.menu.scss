@@ -1,0 +1,23 @@
+.c-top-menu {
+    display: flex;
+    align-items: center;
+    height: calculateRem(50px);
+
+    &__cancel-btn {
+        border: none;
+
+        .ez-icon {
+            fill: $ez-color-base-medium;
+        }
+    }
+
+    &__title-wrapper {
+        min-width: calculateRem(500px);
+        font-size: calculateRem(18px);
+        font-weight: bold;
+    }
+
+    &__actions-wrapper {
+        display: flex;
+    }
+}

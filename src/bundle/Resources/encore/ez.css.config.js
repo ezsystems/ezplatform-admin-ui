@@ -4,7 +4,7 @@ module.exports = (Encore) => {
     Encore.addEntry('ezplatform-admin-ui-layout-css', [
         path.resolve(__dirname, '../public/scss/ezplatform-bootstrap.scss'),
         path.resolve(__dirname, '../public/scss/ezplatform.scss'),
-        path.resolve('./vendor/ezsystems/ezplatform-admin-ui-modules/Resources/public/scss/ezplatform-modules.scss'),
+        path.resolve(__dirname, '../public/scss/ui/ezplatform-modules.scss'),
         path.resolve('./vendor/ezsystems/ezplatform-admin-ui-assets/Resources/public/vendors/flatpickr/dist/flatpickr.min.css'),
     ])
         .addEntry('ezplatform-admin-ui-content-edit-parts-css', [

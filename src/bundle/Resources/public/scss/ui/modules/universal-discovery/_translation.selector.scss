@@ -1,0 +1,47 @@
+.c-translation-selector {
+    position: absolute;
+    right: 100%;
+    top: 0;
+    height: 100%;
+    width: calculateRem(360px);
+    box-shadow: calculateRem(-2px) calculateRem(4px) calculateRem(6px) 0 rgba(135, 135, 135, 0.35);
+    background-color: $ez-ground-base-pale;
+    transform: scaleX(1);
+    transform-origin: right center;
+    opacity: 1;
+    transition: all 0.4s ease-in;
+
+    &--hidden {
+        transform: scaleX(0);
+        opacity: 0;
+        transition: all 0.2s ease-out;
+    }
+
+    &__header {
+        background-color: $ez-ground-primary;
+        height: calculateRem(50px);
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+    }
+
+    &__close-button {
+        line-height: 0.5;
+        margin: 0 calculateRem(4px);
+    }
+
+    &__languages-wrapper {
+        padding: calculateRem(15px) calculateRem(50px);
+        max-height: calc(100% - #{calculateRem(50px)});
+        overflow: auto;
+    }
+
+    &__language {
+        padding: calculateRem(15px);
+        background-color: $ez-white;
+        margin-bottom: calculateRem(10px);
+        border-radius: calculateRem(4px);
+        box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba(51, 51, 51, 0.1);
+        cursor: pointer;
+    }
+}

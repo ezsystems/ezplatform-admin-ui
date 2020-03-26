@@ -1,0 +1,38 @@
+.c-progress-bar {
+    background: #d8d8d8;
+    height: calculateRem(6px);
+    width: 100%;
+    border-radius: calculateRem(4px);
+    position: relative;
+
+    &__value {
+        height: 100%;
+        background: $ez-color-primary;
+        border-radius: calculateRem(4px);
+        transition: width 0.2s linear;
+    }
+
+    &__label,
+    &__uploaded {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        font-weight: bold;
+        font-size: calculateRem(12px);
+        padding: 0 calculateRem(6px);
+        line-height: 1;
+        text-align: center;
+        width: 100%;
+    }
+
+    &__label {
+        transform: translate(-50%, -100%);
+    }
+
+    &__uploaded {
+        margin-top: calculateRem(-7px);
+        transform: translate(-50%, 150%);
+        font-weight: normal;
+        font-size: calculateRem(10px);
+    }
+}

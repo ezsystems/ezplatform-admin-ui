@@ -1,0 +1,24 @@
+.c-tab-selector {
+    &__item {
+        min-height: calculateRem(40px);
+        display: flex;
+        align-items: center;
+        padding-left: calculateRem(16px);
+        cursor: pointer;
+        font-size: calculateRem(14px);
+
+        .ez-icon {
+            margin-right: calculateRem(4px);
+            fill: $ez-color-base-medium;
+        }
+
+        &--selected {
+            background-color: $ez-color-base-medium;
+            color: $ez-white;
+
+            .ez-icon {
+                fill: $ez-white;
+            }
+        }
+    }
+}

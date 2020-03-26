@@ -1,0 +1,106 @@
+.c-upload-list-item {
+    display: flex;
+    background: $ez-white;
+    padding: calculateRem(8px) calculateRem(16px);
+    align-items: center;
+    height: calculateRem(60px);
+
+    &__icon-wrapper {
+        flex: 0 0 calculateRem(20px);
+        display: flex;
+        align-items: center;
+    }
+
+    &__meta {
+        padding: 0 calculateRem(16px);
+        line-height: 1.4;
+        max-width: 25vw;
+    }
+
+    &__name {
+        font-size: calculateRem(14px);
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    &__size {
+        font-size: calculateRem(10px);
+    }
+
+    &__info {
+        flex: 1 1 auto;
+    }
+
+    &__message {
+        font-style: italic;
+        font-size: calculateRem(12px);
+
+        &--error {
+            padding-top: calculateRem(3px);
+            color: $ez-color-warning-dark;
+            font-weight: bold;
+        }
+
+        &--success {
+            color: $ez-color-positive;
+        }
+    }
+
+    &__actions {
+        flex: 1 1 calculateRem(44px);
+        max-width: calculateRem(88px);
+        padding-top: calculateRem(8px);
+        text-align: right;
+    }
+
+    &__action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: calculateRem(15px);
+        width: calculateRem(44px);
+        height: calculateRem(44px);
+        cursor: pointer;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &--edit {
+            fill: $ez-color-primary;
+            transition: all 0.3s $ez-admin-transition;
+            width: calculateRem(20px);
+            height: calculateRem(20px);
+        }
+
+        &--edit:hover,
+        &--edit:focus {
+            fill: $ez-color-primary-hover;
+        }
+
+        &--delete {
+            fill: $ez-color-danger;
+        }
+
+        &--delete:hover,
+        &--delete:focus {
+            fill: $ez-color-danger-hover;
+        }
+
+        &--abort {
+            fill: $ez-color-base-light;
+        }
+
+        &--abort:hover,
+        &--abort:focus {
+            fill: $ez-color-base-light-hover;
+        }
+    }
+
+    .c-progress-bar {
+        max-width: calculateRem(200px);
+        float: right;
+    }
+}

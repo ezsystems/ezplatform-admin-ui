@@ -11,15 +11,105 @@
         <target state="new">Select Location</target>
         <note>key: add_location.title</note>
       </trans-unit>
+      <trans-unit id="c88355e5be31353761adbfb5bd8dd3f4c6a61a27" resname="bookmarks.label">
+        <source>Bookmarks</source>
+        <target state="new">Bookmarks</target>
+        <note>key: bookmarks.label</note>
+      </trans-unit>
+      <trans-unit id="2467591f8170f453c7e896466beb7bb255078cb7" resname="breadcrumbs.root_location">
+        <source>Root Location</source>
+        <target state="new">Root Location</target>
+        <note>key: breadcrumbs.root_location</note>
+      </trans-unit>
+      <trans-unit id="d88e188b21fc4c65a6d8bdf170e0e23dfe0712a3" resname="browse.label">
+        <source>Browse</source>
+        <target state="new">Browse</target>
+        <note>key: browse.label</note>
+      </trans-unit>
       <trans-unit id="b03000247ec164f0aca90e64643bd510dce50cfa" resname="browse.title">
         <source>Browse content</source>
         <target state="new">Browse content</target>
         <note>key: browse.title</note>
       </trans-unit>
+      <trans-unit id="a35f9da1e68c9f811d1a0093f434bc32fd0d2b78" resname="browser.add">
+        <source>Add</source>
+        <target state="new">Add</target>
+        <note>key: browser.add</note>
+      </trans-unit>
+      <trans-unit id="ddff3bc3b7838c0c1e752a37cd40b4a6d537dcdd" resname="browser.selected">
+        <source>Selected</source>
+        <target state="new">Selected</target>
+        <note>key: browser.selected</note>
+      </trans-unit>
+      <trans-unit id="1713d0deb6344882cf915babb2df574556a3f82c" resname="content_create.cancel.label">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: content_create.cancel.label</note>
+      </trans-unit>
+      <trans-unit id="43ff5dfcebc0d3daabe0eb72f8b0c7564e6d4218" resname="content_create.confirm.label">
+        <source>Confirm</source>
+        <target state="new">Confirm</target>
+        <note>key: content_create.confirm.label</note>
+      </trans-unit>
+      <trans-unit id="6597ed9c77295271a62deaf86cddcab2a332af8d" resname="content_create.label">
+        <source>Content create</source>
+        <target state="new">Content create</target>
+        <note>key: content_create.label</note>
+      </trans-unit>
+      <trans-unit id="9e0bf845dd4ce60013f7ee92eaac76a2d0a5253a" resname="content_edit.cancel.label">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: content_edit.cancel.label</note>
+      </trans-unit>
+      <trans-unit id="76a56a144f633df99b3a2d7eb1da3ef0c555fe74" resname="content_edit.confirm.label">
+        <source>Confirm</source>
+        <target state="new">Confirm</target>
+        <note>key: content_edit.confirm.label</note>
+      </trans-unit>
+      <trans-unit id="cb13371418234a9257a76bcc2a55768d5e5e58d8" resname="content_edit.label">
+        <source>Content edit</source>
+        <target state="new">Content edit</target>
+        <note>key: content_edit.label</note>
+      </trans-unit>
+      <trans-unit id="e1846286e48b0f692a8f01be6ae81a95ebb68595" resname="content_table.content_type">
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
+        <note>key: content_table.content_type</note>
+      </trans-unit>
+      <trans-unit id="d32da00d9a92ccbbe0c7e5c9ae7fb8a68491929a" resname="content_table.modified">
+        <source>Modified</source>
+        <target state="new">Modified</target>
+        <note>key: content_table.modified</note>
+      </trans-unit>
+      <trans-unit id="0e9a03ed22a841aba266eea024921b38ccc22688" resname="content_table.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: content_table.name</note>
+      </trans-unit>
       <trans-unit id="2833f6d1654708301ec537add9ff0b14744c24a3" resname="copy.title">
         <source>Select Location</source>
         <target state="new">Select Location</target>
         <note>key: copy.title</note>
+      </trans-unit>
+      <trans-unit id="a7d7c06aff739180272f50e51f2100e7b5d9cfbf" resname="create_content.create">
+        <source>Create</source>
+        <target state="new">Create</target>
+        <note>key: create_content.create</note>
+      </trans-unit>
+      <trans-unit id="23fa7d97ea65916659849b0ed9b1e148df62fd08" resname="create_content.label">
+        <source>Create new content</source>
+        <target state="new">Create new content</target>
+        <note>key: create_content.label</note>
+      </trans-unit>
+      <trans-unit id="61059b2a945e7873b9ff9a72bd164d8ae001ccd4" resname="create_content.select_content_type">
+        <source>Select a Content Type</source>
+        <target state="new">Select a Content Type</target>
+        <note>key: create_content.select_content_type</note>
+      </trans-unit>
+      <trans-unit id="620f985461da78639f600259b95ebd3cdf2d9ed2" resname="create_content.select_language">
+        <source>Select a language</source>
+        <target state="new">Select a language</target>
+        <note>key: create_content.select_language</note>
       </trans-unit>
       <trans-unit id="b449a59d74243753a504665c352d161371545f15" resname="dashboard.create.title">
         <source>Create content</source>
@@ -36,25 +126,195 @@
         <target state="new">Select content</target>
         <note>key: ezobjectrelationlist.title</note>
       </trans-unit>
+      <trans-unit id="8616b7656ef9370ffa5e42c399e615eaccccb00c" resname="filters.any_section">
+        <source>Any section</source>
+        <target state="new">Any section</target>
+        <note>key: filters.any_section</note>
+      </trans-unit>
+      <trans-unit id="b01a58cb9736974403f9f94ecce5180fb95a9627" resname="filters.apply">
+        <source>Apply</source>
+        <target state="new">Apply</target>
+        <note>key: filters.apply</note>
+      </trans-unit>
+      <trans-unit id="561bc96ad77fbf519000d0fa5e170d01b10c3de9" resname="filters.clear">
+        <source>Clear</source>
+        <target state="new">Clear</target>
+        <note>key: filters.clear</note>
+      </trans-unit>
+      <trans-unit id="906871e66216a97a8033d2e86819150c141cb92a" resname="filters.content_type">
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
+        <note>key: filters.content_type</note>
+      </trans-unit>
+      <trans-unit id="15135a98864ffb3f0f889577ad962bf3817fea6f" resname="filters.section">
+        <source>Section</source>
+        <target state="new">Section</target>
+        <note>key: filters.section</note>
+      </trans-unit>
+      <trans-unit id="27c9036e2e5a73db48d6638af9920950fd76b419" resname="filters.subtree">
+        <source>Subtree</source>
+        <target state="new">Subtree</target>
+        <note>key: filters.subtree</note>
+      </trans-unit>
       <trans-unit id="2d4febe56a341671c069ff47b6e6adfd2bba005c" resname="limitation.pick.error">
         <source>Could not fetch content names</source>
         <target state="new">Could not fetch content names</target>
         <note>key: limitation.pick.error</note>
+      </trans-unit>
+      <trans-unit id="87994bd9606f86f5999597107b8782ae5018a5ea" resname="meta_preview.bookmark">
+        <source>Bookmark</source>
+        <target state="new">Bookmark</target>
+        <note>key: meta_preview.bookmark</note>
+      </trans-unit>
+      <trans-unit id="5e42fe3d48d64c1c9a735ac6286d3b0c06a008a0" resname="meta_preview.creation_date">
+        <source>Creation Date</source>
+        <target state="new">Creation Date</target>
+        <note>key: meta_preview.creation_date</note>
+      </trans-unit>
+      <trans-unit id="2e0757eac91bd5a5cd89bd2811a0126bf8bd8194" resname="meta_preview.edit">
+        <source>Edit</source>
+        <target state="new">Edit</target>
+        <note>key: meta_preview.edit</note>
+      </trans-unit>
+      <trans-unit id="4828dcbcd9cf2ad9c2b69a9b9420c94eccbe5dcc" resname="meta_preview.edit_translation">
+        <source>Edit translation</source>
+        <target state="new">Edit translation</target>
+        <note>key: meta_preview.edit_translation</note>
+      </trans-unit>
+      <trans-unit id="954055c80d86d18a4b101c2060e4dd63dd10971f" resname="meta_preview.last_modified">
+        <source>Last Modified</source>
+        <target state="new">Last Modified</target>
+        <note>key: meta_preview.last_modified</note>
+      </trans-unit>
+      <trans-unit id="7035b652193ea7af439a17d02ff8eda8013318ea" resname="meta_preview.preview">
+        <source>Preview</source>
+        <target state="new">Preview</target>
+        <note>key: meta_preview.preview</note>
+      </trans-unit>
+      <trans-unit id="18595eab7f455b6e3267de1bd018011b8126ab97" resname="meta_preview.translations">
+        <source>Translations</source>
+        <target state="new">Translations</target>
+        <note>key: meta_preview.translations</note>
       </trans-unit>
       <trans-unit id="56faf4ff9f2deaae1d34c1abcecae0413dc24a78" resname="move.title">
         <source>Select destination</source>
         <target state="new">Select destination</target>
         <note>key: move.title</note>
       </trans-unit>
+      <trans-unit id="fde645e6790429ce2f904099b7aa2712224be9aa" resname="popup.close.label">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note>key: popup.close.label</note>
+      </trans-unit>
       <trans-unit id="0a2b01d9e287d0669cdd89b8067e119bbf749550" resname="restore_under_new_location.title">
         <source>Select a Location to restore the Content item(s)</source>
         <target state="new">Select a Location to restore the Content item(s)</target>
         <note>key: restore_under_new_location.title</note>
       </trans-unit>
+      <trans-unit id="007b9245e1a34e3ea3515ebe69767f07379edcae" resname="search.check_spelling">
+        <source>Check spelling of keywords.</source>
+        <target state="new">Check spelling of keywords.</target>
+        <note>key: search.check_spelling</note>
+      </trans-unit>
+      <trans-unit id="536d54d0a1d9dffd70df6d5d9e1b32d6e99fdbb3" resname="search.different_keywords">
+        <source>Try different keywords.</source>
+        <target state="new">Try different keywords.</target>
+        <note>key: search.different_keywords</note>
+      </trans-unit>
+      <trans-unit id="fa40054e85b4179a9351672f51d70044a0de2741" resname="search.fewer_keywords">
+        <source>Try fewer keywords. Reducing keywords result in more matches.</source>
+        <target state="new">Try fewer keywords. Reducing keywords result in more matches.</target>
+        <note>key: search.fewer_keywords</note>
+      </trans-unit>
+      <trans-unit id="5ab8b9fc463113f18cb6826034b6ef21342bb73d" resname="search.label">
+        <source>Search</source>
+        <target state="new">Search</target>
+        <note>key: search.label</note>
+      </trans-unit>
+      <trans-unit id="9fade0c452653d162e3689cd888c984ac34b3b2b" resname="search.more_general">
+        <source>Try more general keywords.</source>
+        <target state="new">Try more general keywords.</target>
+        <note>key: search.more_general</note>
+      </trans-unit>
+      <trans-unit id="8a3a6b538d81237dcb9533496c691a7685e456de" resname="search.no_results">
+        <source>Sorry, no results were found for</source>
+        <target state="new">Sorry, no results were found for</target>
+        <note>key: search.no_results</note>
+      </trans-unit>
+      <trans-unit id="69f8e58ee01f604b377aaa638cabe3f245b45a73" resname="search.search_results">
+        <source>Search results</source>
+        <target state="new">Search results</target>
+        <note>key: search.search_results</note>
+      </trans-unit>
+      <trans-unit id="3d38ca81487735c8b506fb4523e02256fd8821b1" resname="search.tips">
+        <source>Some helpful search tips</source>
+        <target state="new">Some helpful search tips</target>
+        <note>key: search.tips</note>
+      </trans-unit>
       <trans-unit id="5b8a9a5fceb4991b77b50983c34df8a18a900a09" resname="select_location.error">
         <source>Cannot find children Locations with ID %idList%</source>
         <target state="new">Cannot find children Locations with ID %idList%</target>
         <note>key: select_location.error</note>
+      </trans-unit>
+      <trans-unit id="1e503a68093242d42791b3ce4572f246b994d303" resname="selected_locations.clear_all">
+        <source>Clear all</source>
+        <target state="new">Clear all</target>
+        <note>key: selected_locations.clear_all</note>
+      </trans-unit>
+      <trans-unit id="f57171aaa260d58b75c085d5606779e75a97751f" resname="selected_locations.clear_selection">
+        <source>Clear selection</source>
+        <target state="new">Clear selection</target>
+        <note>key: selected_locations.clear_selection</note>
+      </trans-unit>
+      <trans-unit id="7b84163c8a4215667a4a05bd8f44f25aa5ddc198" resname="selected_locations.collapse.sidebar">
+        <source>Collapse sidebar</source>
+        <target state="new">Collapse sidebar</target>
+        <note>key: selected_locations.collapse.sidebar</note>
+      </trans-unit>
+      <trans-unit id="6e6722ce3ff968c64d765d570209299cd6628024" resname="selected_locations.confirm_selection">
+        <source>Confirm selection</source>
+        <target state="new">Confirm selection</target>
+        <note>key: selected_locations.confirm_selection</note>
+      </trans-unit>
+      <trans-unit id="19700661da70137e52d0009660c9a87f5bcb99bd" resname="selected_locations.expand.sidebar">
+        <source>Expand sidebar</source>
+        <target state="new">Expand sidebar</target>
+        <note>key: selected_locations.expand.sidebar</note>
+      </trans-unit>
+      <trans-unit id="49f1cbcf4bdd5ba51b7f17dc8dfe93d95cbd4795" resname="selected_locations.selected">
+        <source>selected</source>
+        <target state="new">selected</target>
+        <note>key: selected_locations.selected</note>
+      </trans-unit>
+      <trans-unit id="6b02292efbef3c6800f618acb3c41f968d9ea305" resname="sorting.date.label">
+        <source>Date</source>
+        <target state="new">Date</target>
+        <note>key: sorting.date.label</note>
+      </trans-unit>
+      <trans-unit id="a3253454c09869d111cc52367a11b7d419819a8a" resname="sorting.date.tooltip">
+        <source>Sort by Date</source>
+        <target state="new">Sort by Date</target>
+        <note>key: sorting.date.tooltip</note>
+      </trans-unit>
+      <trans-unit id="7e978afd229113429d273612c01318f09e3f3e5e" resname="sorting.grid.view">
+        <source>Grid view</source>
+        <target state="new">Grid view</target>
+        <note>key: sorting.grid.view</note>
+      </trans-unit>
+      <trans-unit id="c06c6d1c4592ee395e16fc267b514ee167146886" resname="sorting.name.label">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: sorting.name.label</note>
+      </trans-unit>
+      <trans-unit id="2ef6e531e02791b42911cf5f7279f9bedebb3fb2" resname="sorting.name.tooltip">
+        <source>Sort by Name</source>
+        <target state="new">Sort by Name</target>
+        <note>key: sorting.name.tooltip</note>
+      </trans-unit>
+      <trans-unit id="27c00b5da502fe6afe6b76e59ddeb951bbbf2c6f" resname="sorting.panels.view">
+        <source>Panels view</source>
+        <target state="new">Panels view</target>
+        <note>key: sorting.panels.view</note>
       </trans-unit>
       <trans-unit id="987330c357d2475b80942e5c449e4215b623a459" resname="subtree.title">
         <source>Select Location</source>

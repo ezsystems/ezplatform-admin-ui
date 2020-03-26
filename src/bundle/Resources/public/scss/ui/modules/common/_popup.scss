@@ -1,0 +1,65 @@
+.c-popup {
+    &__content {
+        width: 100%;
+        height: 100%;
+    }
+
+    &__btn--close {
+        position: absolute;
+        top: calculateRem(16px);
+        right: calculateRem(16px);
+        z-index: 2;
+        width: calculateRem(56px);
+        height: calculateRem(56px);
+    }
+
+    &__header {
+        display: block;
+        background: #dbdbdb;
+        padding: calculateRem(8px) calculateRem(16px);
+    }
+
+    &__body {
+        padding: calculateRem(16px) 0 0;
+
+        .modal-body {
+            padding: 0;
+        }
+    }
+
+    &__headline {
+        max-width: calc(100% - #{calculateRem(56px)});
+    }
+
+    &__title {
+        line-height: 1;
+        display: block;
+        font-size: calculateRem(24px);
+    }
+
+    &__subtitle {
+        display: inline-block;
+        color: #646464;
+        font-size: calculateRem(14px);
+        font-weight: 400;
+        position: relative;
+        top: -calculateRem(4px);
+        left: calculateRem(1px);
+    }
+
+    &--no-header {
+        .c-popup {
+            &__header {
+                border-bottom: none;
+                padding: calculateRem(15px) calculateRem(15px) 0 calculateRem(15px);
+                position: relative;
+                min-height: 2.5rem;
+                background: #ededed;
+            }
+
+            &__footer {
+                border-top: none;
+            }
+        }
+    }
+}

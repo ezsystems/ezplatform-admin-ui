@@ -1,0 +1,100 @@
+.c-breadcrumbs {
+    display: flex;
+    align-items: center;
+    padding: 0 calculateRem(16px);
+    height: calculateRem(30px);
+
+    &__hidden-list-wrapper {
+        margin-right: 8px;
+        position: relative;
+    }
+
+    &__hidden-list {
+        display: none;
+
+        &--visible {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1;
+            margin-bottom: 0;
+            padding-left: 0;
+            display: block;
+            list-style: none;
+            background-color: $ez-white;
+            box-shadow: 0 calculateRem(4px) calculateRem(6px) 0 rgba(135, 135, 135, 0.35);
+            color: $ez-color-hyperlink;
+            padding: calculateRem(16px);
+        }
+    }
+
+    &__hidden-list-item {
+        padding: calculateRem(4px) 0;
+        white-space: nowrap;
+        max-width: calculateRem(500px);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    &__hidden-list-toggler {
+        height: calculateRem(20px);
+        width: calculateRem(26px);
+        border: calculateRem(1px) solid $ez-color-base-medium;
+        border-radius: calculateRem(2px);
+        display: flex;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+
+        .ez-icon {
+            transform: rotate(90deg);
+            transform-origin: center center;
+            fill: $ez-color-base-medium;
+        }
+
+        &--active {
+            background-color: $ez-color-base-medium;
+
+            .ez-icon {
+                fill: $ez-white;
+            }
+        }
+    }
+
+    &__list-wrapper {
+        width: calc(100% - #{calculateRem(34px)});
+    }
+
+    &__list {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin-bottom: 0;
+    }
+
+    &__list-item-text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        color: $ez-color-hyperlink;
+    }
+
+    &__list-item {
+        max-width: calc(100% / 3);
+        display: flex;
+        font-size: calculateRem(12px);
+
+        &--last {
+            .c-breadcrumbs__list-item-text {
+                cursor: not-allowed;
+                color: $ez-color-base-medium;
+            }
+        }
+    }
+
+    &__list-item-separator {
+        margin: 0 calculateRem(8px);
+    }
+}

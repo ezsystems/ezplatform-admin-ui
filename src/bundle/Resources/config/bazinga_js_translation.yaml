@@ -5,3 +5,6 @@ active_domains:
     - 'notifications'
     - 'search'
     - 'content'
+    - 'multi_file_upload'
+    - 'sub_items'
+    - 'content_tree'
