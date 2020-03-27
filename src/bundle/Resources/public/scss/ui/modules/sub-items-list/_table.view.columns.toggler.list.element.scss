@@ -1,0 +1,19 @@
+.c-table-view-columns-toggler-list-element {
+    cursor: pointer;
+
+    .form-check-inline {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: calculateRem(12px) calculateRem(4px);
+        margin-right: calculateRem(12px);
+        line-height: 0;
+    }
+
+    &__label {
+        white-space: nowrap;
+        user-select: none;
+        font-size: calculateRem(14px);
+        cursor: pointer;
+    }
+}

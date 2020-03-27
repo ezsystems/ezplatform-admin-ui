@@ -1,0 +1,43 @@
+.c-bookmarks-list {
+    width: calculateRem(215px);
+    background-color: $ez-ground-base-medium;
+    overflow: auto;
+    flex-shrink: 0;
+    margin-left: calculateRem(1px);
+
+    &__item {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: calculateRem(2px) calculateRem(5px);
+        font-size: calculateRem(13px);
+
+        &--not-selectable {
+            background-color: $ez-ground-base-dark;
+            cursor: not-allowed;
+        }
+
+        &--marked {
+            background-color: $ez-color-base-medium;
+            color: $ez-white;
+
+            .ez-icon {
+                fill: $ez-white;
+            }
+        }
+    }
+
+    &__item-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: calculateRem(185px);
+        margin-left: calculateRem(5px);
+    }
+
+    &__spinner-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -1,0 +1,25 @@
+.c-toggle-selection-button {
+    border: none;
+    border-radius: 50%;
+    background: $ez-color-base-pale;
+    height: calculateRem(20px);
+    width: calculateRem(20px);
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+
+    .ez-icon {
+        fill: $ez-color-base-medium;
+    }
+
+    &--selected {
+        background-color: $ez-color-positive;
+        opacity: 1;
+
+        .ez-icon {
+            fill: $ez-white;
+        }
+    }
+}

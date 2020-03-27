@@ -1,0 +1,15 @@
+.c-udw-view-switcher {
+    border: calculateRem(2px) solid $ez-color-base-medium;
+    border-radius: calculateRem(4px);
+    display: flex;
+    padding: calculateRem(2px);
+    margin-right: calculateRem(10px);
+
+    .c-menu-button {
+        padding: calculateRem(3px);
+    }
+
+    &--disabled {
+        opacity: 0.3;
+    }
+}

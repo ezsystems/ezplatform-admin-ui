@@ -1,0 +1,59 @@
+.c-finder-branch {
+    display: flex;
+    position: relative;
+    border-right: calculateRem(1px) solid $ez-color-base-pale;
+
+    &--collapsed {
+        flex: 0 0 calculateRem(30px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background-color: $ez-secondary-ground;
+        color: $ez-white;
+        cursor: pointer;
+        display: block;
+
+        .c-finder-branch__name {
+            font-size: calculateRem(13px);
+        }
+    }
+
+    &__info-wrapper {
+        transform: translate(calculateRem(30px)) rotate(90deg);
+        width: calculateRem(500px);
+        transform-origin: left top;
+        height: calculateRem(30px);
+        display: flex;
+        align-items: center;
+        padding-left: calculateRem(4px);
+    }
+
+    &__icon-wrapper {
+        position: relative;
+        margin-right: calculateRem(16px);
+
+        .ez-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+    }
+
+    &__name {
+        margin-left: calculateRem(6px);
+    }
+
+    &__items-wrapper {
+        overflow: auto;
+        width: calculateRem(190px);
+    }
+
+    &__resize-handler {
+        height: 100%;
+        width: calculateRem(3px);
+        background-color: transparent;
+        cursor: col-resize;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}

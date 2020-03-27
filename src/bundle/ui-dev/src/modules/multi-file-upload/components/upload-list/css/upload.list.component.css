@@ -1,0 +1,11 @@
+.c-upload-list__title {
+    background: #a8c8d5;
+    font-weight: 700;
+    line-height: 50px;
+    padding: 0 16px;
+    border-radius: 4px 4px 0 0;
+}
+
+.c-upload-list .c-upload-list-item + .c-upload-list-item {
+    border-top: 1px solid #a8c8d5;
+}

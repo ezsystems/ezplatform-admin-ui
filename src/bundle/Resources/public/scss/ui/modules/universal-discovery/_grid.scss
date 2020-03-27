@@ -1,0 +1,13 @@
+.c-grid {
+    height: 100%;
+
+    &__items-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        padding: calculateRem(16px);
+        align-items: flex-start;
+        overflow: auto;
+        max-height: calc(100% - #{calculateRem(30px)});
+        align-items: stretch;
+    }
+}

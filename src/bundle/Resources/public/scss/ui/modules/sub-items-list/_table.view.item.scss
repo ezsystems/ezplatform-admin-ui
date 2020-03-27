@@ -1,0 +1,207 @@
+.c-table-view-item {
+    &__tooltip {
+        top: calculateRem(-5px) !important;
+        left: calculateRem(40px) !important;
+
+        .ez-tooltip__arrow {
+            left: calc(50% - 0.4rem) !important;
+        }
+    }
+
+    &__translation {
+        display: block;
+    }
+
+    &__text-wrapper {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    &__cell {
+        border-top: calculateRem(1px) solid $ez-ground-primary;
+        padding-left: calculateRem(16px);
+        padding-top: calculateRem(13px);
+        font-size: calculateRem(14px);
+        line-height: calculateRem(20px);
+        vertical-align: top;
+
+        &--content-type {
+            min-width: calculateRem(130px);
+        }
+
+        &--name .c-table-view-item__text-wrapper {
+            max-width: calculateRem(260px);
+        }
+
+        &--modified .c-table-view-item__text-wrapper {
+            max-width: calculateRem(190px);
+        }
+
+        &--checkbox {
+            position: absolute;
+            left: 0;
+            width: calculateRem(30px);
+            border-top: calculateRem(1px) solid $ez-ground-primary;
+            line-height: 0;
+            padding-top: calculateRem(16px);
+            margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
+        }
+
+        &--icon {
+            padding-right: calculateRem(8px);
+            width: calculateRem(24px);
+            text-align: right;
+            line-height: 0;
+            height: calculateRem(47px);
+            padding-top: calculateRem(14px);
+
+            .ez-icon {
+                fill: $ez-color-base-medium;
+            }
+        }
+
+        &--name {
+            padding-left: 0;
+        }
+
+        &--priority {
+            padding-top: 0;
+            width: calculateRem(80px);
+        }
+
+        &--actions {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            right: 0;
+            height: calculateRem(47px);
+            width: calculateRem(70px);
+            padding: 0;
+            margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
+        }
+    }
+
+    &__inner-wrapper {
+        cursor: pointer;
+
+        &--input {
+            width: 7ch;
+        }
+    }
+
+    &__priority-wrapper {
+        position: relative;
+    }
+
+    &__priority-actions {
+        position: absolute;
+        left: calculateRem(-84px);
+        top: calculateRem(2px);
+        width: calculateRem(84px);
+    }
+
+    &__priority-value {
+        max-width: 100%;
+        height: calculateRem(40px);
+        border: calculateRem(1px) solid $ez-color-secondary;
+        margin: calculateRem(2px) 0;
+        padding: 0 calculateRem(10px);
+
+        &[readonly] {
+            border-color: $ez-ground-base-dark;
+            background-color: $ez-white;
+            color: $ez-black;
+            cursor: pointer;
+        }
+
+        &[readonly]::-webkit-outer-spin-button,
+        &[readonly]::-webkit-inner-spin-button {
+            opacity: 0;
+        }
+
+        &[readonly]:hover::-webkit-outer-spin-button,
+        &[readonly]:hover::-webkit-inner-spin-button {
+            opacity: 1;
+        }
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            opacity: 1;
+        }
+
+        &[readonly] {
+            -webkit-appearance: textfield;
+        }
+        &[readonly]:hover {
+            -webkit-appearance: number-input;
+        }
+    }
+
+    &__btn {
+        color: $ez-white;
+        border: calculateRem(1px) solid transparent;
+        height: calculateRem(40px);
+        min-width: calculateRem(40px);
+        padding: calculateRem(7px) calculateRem(8px);
+        transition: background 0.3s $ez-admin-transition;
+        cursor: pointer;
+
+        &--submit {
+            background: $ez-color-secondary;
+        }
+
+        &--submit:hover,
+        &--submit:focus {
+            background: $ez-color-secondary-hover;
+        }
+
+        &--cancel {
+            background: $ez-color-base-medium;
+        }
+
+        &--cancel:hover,
+        &--cancel:focus {
+            background: $ez-color-base-medium-hover;
+        }
+
+        &--edit {
+            text-align: center;
+            cursor: pointer;
+            color: $ez-white;
+            display: inline-block;
+
+            .c-table-view-item__btn-inner {
+                padding: calculateRem(7px) calculateRem(14px);
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
+
+            .ez-icon {
+                fill: $ez-color-primary;
+            }
+
+            &:hover,
+            &:focus {
+                .ez-icon {
+                    fill: $ez-color-primary-hover;
+                }
+            }
+        }
+    }
+
+    &__link {
+        display: inline-block;
+        color: $ez-color-hyperlink;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.3s $ez-admin-transition;
+
+        &:hover,
+        &:focus {
+            color: $ez-color-hyperlink-hover;
+            text-decoration: underline;
+        }
+    }
+}

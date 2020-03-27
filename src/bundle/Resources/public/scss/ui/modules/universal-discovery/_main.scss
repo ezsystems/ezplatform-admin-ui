@@ -1,0 +1,22 @@
+.m-ud {
+    background-color: $ez-color-base-pale;
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+
+    .c-thumbnail {
+        .ez-icon {
+            fill: $ez-color-base-medium;
+        }
+    }
+}
+
+.ez-is-branch-resizing {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

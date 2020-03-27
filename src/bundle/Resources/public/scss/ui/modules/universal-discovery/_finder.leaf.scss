@@ -1,0 +1,99 @@
+.c-finder-leaf {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calculateRem(2px) calculateRem(20px) calculateRem(2px) calculateRem(5px);
+    position: relative;
+
+    &:hover {
+        background-color: $ez-secondary-ground-pale;
+
+        .c-toggle-selection-button {
+            opacity: 1;
+        }
+    }
+
+    &--has-children:after {
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: calculateRem(5px) solid transparent;
+        border-left: calculateRem(8px) solid $ez-color-base-medium;
+        border-bottom: calculateRem(5px) solid transparent;
+        position: absolute;
+        right: calculateRem(5px);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &--marked {
+        background-color: $ez-secondary-ground;
+        color: $ez-white;
+
+        &:hover {
+            background-color: $ez-secondary-ground;
+        }
+
+        &.c-finder-leaf--not-selectable {
+            background-color: $ez-secondary-ground;
+
+            &:hover {
+                background-color: $ez-secondary-ground;
+            }
+        }
+
+        .c-toggle-selection-button {
+            &--selected {
+                background-color: $ez-white;
+
+                .ez-icon {
+                    fill: $ez-color-secondary;
+                }
+            }
+        }
+
+        &.c-finder-leaf--has-children:after {
+            border-left-color: $ez-white;
+        }
+
+        .c-finder-leaf__name {
+            .ez-icon {
+                fill: $ez-white;
+            }
+        }
+    }
+
+    &--not-selectable {
+        background-color: $ez-ground-base-dark;
+        cursor: not-allowed;
+
+        &:hover {
+            background-color: $ez-ground-base-dark;
+        }
+    }
+
+    &__name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: calculateRem(13px);
+
+        .ez-icon {
+            margin-right: calculateRem(5px);
+        }
+    }
+
+    &__icon-wrapper {
+        position: relative;
+        margin-right: calculateRem(20px);
+        text-align: center;
+
+        .ez-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-top: calculateRem(-1px);
+        }
+    }
+}

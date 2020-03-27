@@ -1,0 +1,91 @@
+.c-selected-locations {
+    background-color: $ez-white;
+    position: fixed;
+    top: calculateRem(50px);
+    right: 0;
+    height: 100%;
+    width: calculateRem(60px);
+    box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba(0, 0, 0, 0.45);
+    z-index: 1;
+    transition: all 0.2s ease-out;
+
+    &--expanded {
+        transition: all 0.4s ease-in;
+        width: calculateRem(300px);
+        box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(4px) 0 rgba(0, 0, 0, 0.45);
+
+        .c-selected-locations {
+            &__actions-wrapper {
+                display: flex;
+            }
+
+            &__clear-selection-button,
+            &__confirm-button {
+                margin-top: 0;
+                margin-right: calculateRem(10px);
+            }
+
+            &__selection-counter {
+                height: auto;
+                width: calculateRem(140px);
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+
+            &__selection-count {
+                margin-bottom: calculateRem(2px);
+                margin-right: calculateRem(2px);
+            }
+
+            &__selection-count-label {
+                line-height: calculateRem(16px);
+            }
+        }
+    }
+
+    &__items-wrapper {
+        overflow: auto;
+        max-height: calc(100% - #{calculateRem(60px)});
+    }
+
+    &__actions-wrapper {
+        background-color: $ez-ground-primary;
+        padding: calculateRem(10px);
+    }
+
+    &__toggle-button,
+    &__clear-selection-button,
+    &__confirm-button {
+        width: calculateRem(40px);
+        height: calculateRem(40px);
+        border: none;
+        border-radius: calculateRem(4px);
+    }
+
+    &__clear-selection-button {
+        background-color: $ez-color-base-medium;
+        margin-top: calculateRem(10px);
+    }
+
+    &__confirm-button {
+        background-color: $ez-color-primary;
+        margin-top: calculateRem(10px);
+    }
+
+    &__selection-counter {
+        font-size: calculateRem(10px);
+        text-align: center;
+        height: calculateRem(60px);
+        width: calculateRem(60px);
+        border-bottom: calculateRem(1px) solid $ez-ground-primary;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    &__selection-count {
+        font-weight: bold;
+        font-size: calculateRem(16px);
+    }
+}

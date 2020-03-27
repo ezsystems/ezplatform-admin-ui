@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="46330ebd50f5a7b4c3d0d8b179955c23759e1587" resname="abort.label">
+        <source>Abort</source>
+        <target state="new">Abort</target>
+        <note>key: abort.label</note>
+      </trans-unit>
+      <trans-unit id="235e57ee5665f61ea5873be5e2f6cd15b05a51c0" resname="cannot_upload.message">
+        <source>Cannot upload file</source>
+        <target state="new">Cannot upload file</target>
+        <note>key: cannot_upload.message</note>
+      </trans-unit>
+      <trans-unit id="9914d81081499df395d9a54e9d5208be234d4367" resname="delete.label">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note>key: delete.label</note>
+      </trans-unit>
+      <trans-unit id="2b1c547a8eeb8b7c83a9580901c66193cbcb0eb9" resname="disallowed_content_type.message">
+        <source>You do not have permission to create this Content item</source>
+        <target state="new">You do not have permission to create this Content item</target>
+        <note>key: disallowed_content_type.message</note>
+      </trans-unit>
+      <trans-unit id="f2a2dab7435a694af5f4e9d2393e3cfb9c9c79f0" resname="disallowed_size.message">
+        <source>File size is not allowed</source>
+        <target state="new">File size is not allowed</target>
+        <note>key: disallowed_size.message</note>
+      </trans-unit>
+      <trans-unit id="4d6c4f42038f6ef1049e6f2243e57fdc2605ead2" resname="disallowed_type.message">
+        <source>File type is not allowed</source>
+        <target state="new">File type is not allowed</target>
+        <note>key: disallowed_type.message</note>
+      </trans-unit>
+      <trans-unit id="694f61c4eb35d09307bcf40e14159061c6ba1f35" resname="drop_action.message">
+        <source>Drag your files to the browser window or select them</source>
+        <target state="new">Drag your files to the browser window or select them</target>
+        <note>key: drop_action.message</note>
+      </trans-unit>
+      <trans-unit id="ec408ab37730af3a79d49ee278f3b215ce89057c" resname="edit.label">
+        <source>Edit</source>
+        <target state="new">Edit</target>
+        <note>key: edit.label</note>
+      </trans-unit>
+      <trans-unit id="0cd9663c2a0626f9d1556efe30c151196af02e8e" resname="max_file_size.message">
+        <source>Max file size:</source>
+        <target state="new">Max file size:</target>
+        <note>key: max_file_size.message</note>
+      </trans-unit>
+      <trans-unit id="412c9936722fbbcd34664fdbfe33880fad7ef998" resname="multi_file_upload_open_btn.label">
+        <source>Upload sub-items</source>
+        <target state="new">Upload sub-items</target>
+        <note>key: multi_file_upload_open_btn.label</note>
+      </trans-unit>
+      <trans-unit id="76d7ffabd7e8c5d27a9b732dd5f15d1da68ff00c" resname="upload.success.message">
+        <source>Uploaded</source>
+        <target state="new">Uploaded</target>
+        <note>key: upload.success.message</note>
+      </trans-unit>
+      <trans-unit id="13ad49603f42b4ec5f9328d94f90e4f6d7ba6203" resname="upload_btn.label">
+        <source>Upload sub-items</source>
+        <target state="new">Upload sub-items</target>
+        <note>key: upload_btn.label</note>
+      </trans-unit>
+      <trans-unit id="f0af4c073e35f18370b9eb10fe995a6f5de9ac9d" resname="upload_popup.title">
+        <source>Multi-file upload</source>
+        <target state="new">Multi-file upload</target>
+        <note>key: upload_popup.title</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

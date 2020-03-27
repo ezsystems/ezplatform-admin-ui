@@ -1,0 +1,32 @@
+.c-content-edit {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    background-color: $ez-color-base-pale;
+
+    &__iframe {
+        width: 100%;
+        height: calc(100% - #{calculateRem(60px)});
+        border: none;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calculateRem(50px);
+    }
+
+    &__cancel-button {
+        background-color: $ez-color-base-medium;
+        color: $ez-white;
+        margin-right: calculateRem(16px);
+
+        &:hover {
+            color: $ez-white;
+        }
+    }
+}

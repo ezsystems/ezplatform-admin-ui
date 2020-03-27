@@ -1,0 +1,45 @@
+.c-selected-locations-item {
+    display: flex;
+    align-items: center;
+    padding: calculateRem(10px);
+    border-bottom: calculateRem(1px) solid $ez-ground-primary;
+
+    &__image-wrapper {
+        width: calculateRem(75px);
+        height: calculateRem(75px);
+        background-color: $ez-color-base-pale;
+        border-radius: calculateRem(4px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        width: calculateRem(160px);
+        padding: calculateRem(10px);
+    }
+
+    &__info-name {
+        font-size: calculateRem(13px);
+        font-weight: bold;
+    }
+
+    &__info-description {
+        font-size: calculateRem(12px);
+        color: $ez-color-base-light;
+    }
+
+    &__actions-wrapper {
+        display: flex;
+    }
+
+    &__remove-button {
+        border: none;
+
+        .ez-icon {
+            fill: $ez-color-base-pale;
+        }
+    }
+}

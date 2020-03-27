@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="75cce764c5cf98a1b20b2daa756c7ef90077677c" resname="collapse_all">
+        <source>Collapse all</source>
+        <target state="new">Collapse all</target>
+        <note>key: collapse_all</note>
+      </trans-unit>
+      <trans-unit id="0cba8ae8f7a758a11886b6be4e7ce7e570063f8f" resname="expand_item.limit.message">
+        <source>Cannot load sub-items for this Location because you reached max tree depth.</source>
+        <target state="new">Cannot load sub-items for this Location because you reached max tree depth.</target>
+        <note>key: expand_item.limit.message</note>
+      </trans-unit>
+      <trans-unit id="9042dc6dc12016a1ffce82c61781eb8df00d3a66" resname="loading_more">
+        <source>Loading more...</source>
+        <target state="new">Loading more...</target>
+        <note>key: loading_more</note>
+      </trans-unit>
+      <trans-unit id="493d808c2fef6e72becec01dd34b5157a2fc3b51" resname="no_subitems">
+        <source>This Location has no sub-items</source>
+        <target state="new">This Location has no sub-items</target>
+        <note>key: no_subitems</note>
+      </trans-unit>
+      <trans-unit id="2be9699b658299055002412aa53431dc89281fcf" resname="show_more">
+        <source>Show more</source>
+        <target state="new">Show more</target>
+        <note>key: show_more</note>
+      </trans-unit>
+      <trans-unit id="fa32f3cd5131d17d3c18b13089f0c93216a1e85c" resname="show_more.limit_reached">
+        <source>Loading limit reached</source>
+        <target state="new">Loading limit reached</target>
+        <note>key: show_more.limit_reached</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

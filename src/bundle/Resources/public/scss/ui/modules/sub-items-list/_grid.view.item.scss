@@ -1,0 +1,67 @@
+.c-grid-view-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: calculateRem(4px);
+    margin-bottom: calculateRem(20px);
+    cursor: pointer;
+    color: $ez-black;
+    text-decoration: none;
+    transition: background 0.3s $ez-admin-transition;
+    background: $ez-white;
+    border: calculateRem(1px) solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 calculateRem(2px) calculateRem(10px) calculateRem(0px) rgba(0, 0, 0, 0.15);
+
+    &:hover,
+    &:focus {
+        color: $ez-white;
+        text-decoration: none;
+        background: $ez-secondary-ground;
+        border: calculateRem(1px) solid $ez-secondary-ground;
+    }
+
+    &__content-type {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        width: calculateRem(30px);
+        height: calculateRem(30px);
+        background: $ez-white;
+    }
+
+    &__content-type .ez-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__image {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: calculateRem(165px);
+        max-height: calculateRem(165px);
+    }
+
+    &__image-wrapper {
+        height: calculateRem(165px);
+        width: calculateRem(165px);
+        border-radius: calculateRem(4px) calculateRem(4px) 0 0;
+        background: $ez-ground-base-dark;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__title {
+        height: calculateRem(33px);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: calculateRem(15px);
+        font-size: calculateRem(12px);
+        margin: calculateRem(8px) calculateRem(5px);
+    }
+}

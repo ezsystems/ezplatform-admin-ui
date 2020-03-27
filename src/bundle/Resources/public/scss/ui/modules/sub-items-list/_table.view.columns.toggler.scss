@@ -1,0 +1,38 @@
+.c-table-view-columns-toggler {
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__btn {
+        display: flex;
+        justify-content: center;
+        padding: calculateRem(5px);
+        height: calculateRem(32px);
+        width: calculateRem(32px);
+    }
+
+    &__panel {
+        border-radius: calculateRem(4px);
+        background: $ez-white;
+        position: absolute;
+        z-index: 10;
+        padding: calculateRem(4px) calculateRem(14px);
+        top: calculateRem(36px);
+        right: calculateRem(17px);
+        font-weight: normal;
+        box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba($ez-black, 0.45);
+
+        &--above-btn {
+            bottom: calculateRem(36px);
+            top: auto;
+        }
+    }
+
+    &__list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+}
