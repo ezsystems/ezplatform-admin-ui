@@ -16,7 +16,6 @@ Feature: System info verification
         | ezsystems/ez-support-tools              |
         | ezsystems/ezplatform-admin-ui           |
         | ezsystems/ezplatform-admin-ui-assets    |
-        | ezsystems/ezplatform-admin-ui-modules   |
         | ezsystems/ezplatform-design-engine      |
         | ezsystems/ezplatform-http-cache         |
         | ezsystems/ezplatform-solr-search-engine |
@@ -46,7 +45,6 @@ Feature: System info verification
         | Name                                      |
         | EzPlatformAdminUiAssetsBundle             |
         | EzPlatformAdminUiBundle                   |
-        | EzPlatformAdminUiModulesBundle            |
         | EzPlatformDesignEngineBundle              |
         | EzPublishCoreBundle                       |
         | EzPublishIOBundle                         |
