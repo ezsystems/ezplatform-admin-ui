@@ -21,7 +21,7 @@ class RoleCopyMapper implements DataMapperInterface
      *
      * @param ValueObject|RoleCopyStruct $value
      *
-     * @return RoleCopyData
+     * @return EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCopyData
      *
      * @throws InvalidArgumentException
      */
@@ -37,7 +37,7 @@ class RoleCopyMapper implements DataMapperInterface
     /**
      * Maps given RoleCopyData object to a RoleCopyStruct object.
      *
-     * @param RoleCopyData $data
+     * @param EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCopyData $data
      *
      * @return RoleCopyStruct
      *

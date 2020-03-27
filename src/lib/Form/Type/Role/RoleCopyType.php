@@ -26,9 +26,9 @@ class RoleCopyType extends AbstractType
                 ['label' => /** @Desc("Name of a new role") */ 'role_copy.name']
             )
             ->add(
-                'save',
+                'copy',
                 SubmitType::class,
-                ['label' => /** @Desc("Copy") */ 'role_copy.save']
+                ['label' => /** @Desc("Copy") */ 'role_copy.copy']
             );
     }
 

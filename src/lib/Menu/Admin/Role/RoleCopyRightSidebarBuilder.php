@@ -7,7 +7,6 @@
 namespace EzSystems\EzPlatformAdminUi\Menu\Admin\Role;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
-use eZ\Publish\API\Repository\Values\User\Role;
 use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
@@ -61,7 +60,7 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var Role $role */
+        /** @var eZ\Publish\API\Repository\Values\User\Role $role */
         $role = $options['role'];
 
         /** @var ItemInterface|ItemInterface[] $menu */

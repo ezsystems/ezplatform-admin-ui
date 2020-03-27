@@ -205,6 +205,7 @@ class RoleController extends Controller
     public function copyAction(Request $request, Role $role): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('role', 'create'));
+
         $form = $this->formFactory->copyRole(
             new RoleCopyData($role)
         );
@@ -213,7 +214,7 @@ class RoleController extends Controller
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (RoleCopyData $data) {
                 $roleCopyStruct = $this->roleCopyMapper->reverseMap($data);
-                $role = $this->roleService->copyRole($data->getClonedRole(), $roleCopyStruct);
+                $role = $this->roleService->copyRole($data->getCopiedRole(), $roleCopyStruct);
 
                 $this->notificationHandler->success(
                     /** @Desc("Role '%role%' copied.") */

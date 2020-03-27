@@ -12,8 +12,8 @@ use eZ\Publish\API\Repository\Values\User\Role;
 
 class RoleCopyData
 {
-    /** @var Role */
-    private $clonedRole;
+    /** @var eZ\Publish\API\Repository\Values\User\Role */
+    private $copiedRole;
 
     /** @var string */
     private $newIdentifier;
@@ -24,16 +24,16 @@ class RoleCopyData
      */
     public function __construct(Role $role, ?string $identifier = null)
     {
-        $this->clonedRole = $role;
+        $this->copiedRole = $role;
         $this->newIdentifier = $identifier;
     }
 
     /**
      * @return Role
      */
-    public function getClonedRole(): ?Role
+    public function getCopiedRole(): ?Role
     {
-        return $this->clonedRole;
+        return $this->copiedRole;
     }
 
     /**
@@ -41,9 +41,9 @@ class RoleCopyData
      *
      * @return RoleCopyData
      */
-    public function setClonedRole(Role $role): self
+    public function setCopiedRole(Role $role): self
     {
-        $this->clonedRole = $role;
+        $this->copiedRole = $role;
 
         return $this;
     }

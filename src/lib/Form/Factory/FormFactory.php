@@ -711,7 +711,7 @@ class FormFactory
         RoleCopyData $data,
         ?string $name = null
     ): FormInterface {
-        $name = $name ?: sprintf('copy-role-%d', $data->getClonedRole()->id);
+        $name = $name ?: sprintf('copy-role-%d', $data->getCopiedRole()->id);
 
         return $this->formFactory->createNamed($name, RoleCopyType::class, $data);
     }
