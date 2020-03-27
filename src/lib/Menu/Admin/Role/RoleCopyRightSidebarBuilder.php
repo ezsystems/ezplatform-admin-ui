@@ -60,9 +60,6 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var eZ\Publish\API\Repository\Values\User\Role $role */
-        $role = $options['role'];
-
         /** @var ItemInterface|ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
@@ -72,11 +69,11 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
                 [
                     'attributes' => [
                         'class' => 'btn--trigger',
-                        'data-click' => sprintf('#copy-role-%d_copy', $role->id),
+                        'data-click' => '#role_copy_copy',
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                        /** @Ignore */ self::ITEM__SAVE,
+/** @Ignore */ self::ITEM__SAVE,
                             [],
                             'menu'
                         ),
@@ -91,7 +88,7 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
                         'title' => $this->translator->trans(
-                        /** @Ignore */ self::ITEM__CANCEL,
+/** @Ignore */ self::ITEM__CANCEL,
                             [],
                             'menu'
                         ),

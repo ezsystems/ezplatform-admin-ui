@@ -702,21 +702,6 @@ class FormFactory
     }
 
     /**
-     * @param RoleCopyData $data
-     * @param string|null $name
-     *
-     * @return FormInterface
-     */
-    public function copyRole(
-        RoleCopyData $data,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: sprintf('copy-role-%d', $data->getCopiedRole()->id);
-
-        return $this->formFactory->createNamed($name, RoleCopyType::class, $data);
-    }
-
-    /**
      * @param RoleUpdateData $data
      * @param string|null $name
      *

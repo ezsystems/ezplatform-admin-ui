@@ -21,6 +21,7 @@ use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCopyMapper;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCopyType;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
@@ -206,9 +207,7 @@ class RoleController extends Controller
     {
         $this->denyAccessUnlessGranted(new Attribute('role', 'create'));
 
-        $form = $this->formFactory->copyRole(
-            new RoleCopyData($role)
-        );
+        $form = $this->createForm(RoleCopyType::class, new RoleCopyData($role));
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
