@@ -25,7 +25,7 @@ final class ReorderByOrderNumberListener
         $menuItemList = [];
         $unorderedMenuItemsList = [];
 
-        foreach ($menuItem->getChildren() as $key => $nestedMenuItem) {
+        foreach ($menuItem->getChildren() as $nestedMenuItem) {
             if ($nestedMenuItem->hasChildren()) {
                 $this->recursiveReorderMenuItems($nestedMenuItem);
             }
