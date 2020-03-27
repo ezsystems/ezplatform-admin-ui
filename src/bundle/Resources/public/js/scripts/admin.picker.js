@@ -29,6 +29,7 @@
         const formInput = field.querySelector(SELECTOR_FORM_INPUT);
         const pickerInput = field.querySelector(SELECTOR_PICKER_INPUT);
         const btnClear = field.querySelector(SELECTOR_CLEAR_BTN);
+        const customConfig = JSON.parse(pickerInput.dataset.flatpickrConfig || '{}');
         let defaultDate;
 
         if (formInput.value) {
@@ -39,6 +40,7 @@
             ...pickerConfig,
             onChange: updateInputValue.bind(null, formInput),
             defaultDate,
+            ...customConfig,
         });
 
         if (btnClear) {
