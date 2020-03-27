@@ -4,13 +4,14 @@
         height: 100%;
     }
 
-    &__btn--close {
+    & &__btn--close {
         position: absolute;
         top: calculateRem(16px);
         right: calculateRem(16px);
         z-index: 2;
         width: calculateRem(56px);
-        height: calculateRem(56px);
+        height: calculateRem(40px);
+        padding: calculateRem(8px) calculateRem(16px);
     }
 
     &__header {
@@ -55,6 +56,10 @@
                 position: relative;
                 min-height: 2.5rem;
                 background: #ededed;
+            }
+
+            &__btn--close {
+                height: calculateRem(56px);
             }
 
             &__footer {
