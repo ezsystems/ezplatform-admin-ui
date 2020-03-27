@@ -1,6 +1,6 @@
 {% extends '@ezdesign/user/role/base.html.twig' %}
 
-{% form_theme form '@ezdesign/ui/form_fields.html.twig'  %}
+{% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
 
 {% trans_default_domain 'role' %}
 
@@ -30,7 +30,7 @@
         </div>
     </section>
 
-    {{ form_widget(form.save, { 'attr': { 'hidden': 'hidden' } }) }}
+    {{ form_widget(form.copy, { 'attr': { 'hidden': 'hidden' } }) }}
 
     {{ form_end(form) }}
 {% endblock %}

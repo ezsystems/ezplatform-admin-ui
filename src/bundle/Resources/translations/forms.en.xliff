@@ -591,6 +591,11 @@
         <target state="new">Delete Role assignments</target>
         <note>key: role_assignments_delete_form.delete</note>
       </trans-unit>
+      <trans-unit id="6c0384498e37f0a821ff9155da7b6c2cb94d0a95" resname="role_copy.copy">
+        <source>Copy</source>
+        <target state="new">Copy</target>
+        <note>key: role_copy.copy</note>
+      </trans-unit>
       <trans-unit id="ff0696ea021d81a9898e8c7f19f41e092cb5bb42" resname="role_copy.name">
         <source>Name of a new role</source>
         <target state="new">Name of a new role</target>
