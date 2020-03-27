@@ -5,6 +5,10 @@
     .ez-side-menu,
     .ez-context-menu {
         flex: 0 0 calculateRem(80px);
+
+        &--expanded {
+            z-index: 2;
+        }
     }
 
     .ez-content-container {
