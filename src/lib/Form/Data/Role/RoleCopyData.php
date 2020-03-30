@@ -18,29 +18,17 @@ class RoleCopyData
     /** @var string */
     private $newIdentifier;
 
-    /**
-     * @param Role $role
-     * @param string|null $identifier
-     */
     public function __construct(Role $role, ?string $identifier = null)
     {
         $this->copiedRole = $role;
         $this->newIdentifier = $identifier;
     }
 
-    /**
-     * @return Role
-     */
     public function getCopiedRole(): ?Role
     {
         return $this->copiedRole;
     }
 
-    /**
-     * @param Role $role
-     *
-     * @return RoleCopyData
-     */
     public function setCopiedRole(Role $role): self
     {
         $this->copiedRole = $role;
@@ -48,19 +36,11 @@ class RoleCopyData
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getNewIdentifier(): ?string
     {
         return $this->newIdentifier;
     }
 
-    /**
-     * @param string|null $identifier
-     *
-     * @return RoleCopyData
-     */
     public function setNewIdentifier(?string $identifier): self
     {
         $this->newIdentifier = $identifier;

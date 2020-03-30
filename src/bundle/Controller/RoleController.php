@@ -197,12 +197,6 @@ class RoleController extends Controller
         ]);
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \eZ\Publish\API\Repository\Values\User\Role $role
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
     public function copyAction(Request $request, Role $role): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('role', 'create'));

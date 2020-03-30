@@ -6,7 +6,6 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Menu\Admin\Role;
 
-use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
@@ -41,21 +40,12 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
         $this->translator = $translator;
     }
 
-    /**
-     * @return string
-     */
     protected function getConfigureEventName(): string
     {
         return ConfigureMenuEvent::ROLE_COPY_SIDEBAR_RIGHT;
     }
 
     /**
-     * @param array $options
-     *
-     * @return ItemInterface
-     *
-     * @throws ApiExceptions\InvalidArgumentException
-     * @throws ApiExceptions\BadStateException
      * @throws InvalidArgumentException
      */
     public function createStructure(array $options): ItemInterface
