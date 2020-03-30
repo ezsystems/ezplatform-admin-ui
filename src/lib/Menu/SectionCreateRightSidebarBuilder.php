@@ -68,13 +68,6 @@ class SectionCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => '#section_create_create',
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__CREATE,
-                            [],
-                            'menu'
-                        ),
                     ],
                     'extras' => ['icon' => 'publish'],
                 ]
@@ -82,15 +75,6 @@ class SectionCreateRightSidebarBuilder extends AbstractBuilder implements Transl
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'attributes' => [
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__CANCEL,
-                            [],
-                            'menu'
-                        ),
-                    ],
                     'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.section.list',
                 ]

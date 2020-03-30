@@ -70,13 +70,6 @@ class LanguageCreateRightSidebarBuilder extends AbstractBuilder implements Trans
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => '#language_create_save',
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__CREATE,
-                            [],
-                            'menu'
-                        ),
                     ],
                     'extras' => ['icon' => 'publish'],
                 ]
@@ -84,15 +77,6 @@ class LanguageCreateRightSidebarBuilder extends AbstractBuilder implements Trans
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'attributes' => [
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__CANCEL,
-                            [],
-                            'menu'
-                        ),
-                    ],
                     'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.language.list',
                 ]

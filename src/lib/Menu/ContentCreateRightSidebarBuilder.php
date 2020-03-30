@@ -106,35 +106,14 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
         $publishAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezplatform_content_forms_content_edit_publish',
-            'data-extra-classes' => 'ez-tooltip--medium',
-            'data-placement' => 'left',
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__PUBLISH,
-                [],
-                'menu'
-            ),
         ];
         $createAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezplatform_content_forms_content_edit_saveDraft',
-            'data-extra-classes' => 'ez-tooltip--medium',
-            'data-placement' => 'left',
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__SAVE_DRAFT,
-                [],
-                'menu'
-            ),
         ];
         $previewAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezplatform_content_forms_content_edit_preview',
-            'data-extra-classes' => 'ez-tooltip--medium',
-            'data-placement' => 'left',
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__PREVIEW,
-                [],
-                'menu'
-            ),
         ];
 
         $menu->setChildren([
@@ -180,13 +159,6 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                     'attributes' => [
                         'class' => self::BTN_TRIGGER_CLASS,
                         'data-click' => '#ezplatform_content_forms_content_edit_cancel',
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__CANCEL,
-                            [],
-                            'menu'
-                        ),
                     ],
                     'extras' => [
                         'icon' => 'circle-close',

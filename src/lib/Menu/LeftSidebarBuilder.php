@@ -85,15 +85,6 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                 [
                     'route' => 'ezplatform.search',
                     'extras' => ['icon' => 'search'],
-                    'attributes' => [
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'right',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__SEARCH,
-                            [],
-                            'menu'
-                        ),
-                    ],
                 ]
             ),
             self::ITEM__BROWSE => $this->createMenuItem(
@@ -103,17 +94,10 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                     'attributes' => [
                         'type' => 'button',
                         'class' => 'btn--udw-browse',
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'right',
                         'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('browse', [
                             'type' => 'content_create',
                         ]),
                         'data-starting-location-id' => $this->configResolver->getConfig('default')['starting_location_id'],
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__BROWSE,
-                            [],
-                            'menu'
-                        ),
                     ],
                 ]
             ),
@@ -124,13 +108,6 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                     'attributes' => [
                         'type' => 'button',
                         'class' => 'ez-btn ez-btn--toggle-content-tree',
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'right',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__TREE,
-                            [],
-                            'menu'
-                        ),
                     ],
                 ]
             ),
@@ -139,15 +116,6 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                 [
                     'route' => 'ezplatform.bookmark.list',
                     'extras' => ['icon' => 'bookmark-manager'],
-                    'attributes' => [
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'right',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__BOOKMARK,
-                            [],
-                            'menu'
-                        ),
-                    ],
                 ]
             ),
         ];
@@ -158,15 +126,6 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                 [
                     'route' => 'ezplatform.trash.list',
                     'extras' => ['icon' => 'trash'],
-                    'attributes' => [
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'right',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__TRASH,
-                            [],
-                            'menu'
-                        ),
-                    ],
                 ]
             );
         }

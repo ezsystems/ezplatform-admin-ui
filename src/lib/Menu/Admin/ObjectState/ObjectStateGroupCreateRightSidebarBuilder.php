@@ -72,13 +72,6 @@ class ObjectStateGroupCreateRightSidebarBuilder extends AbstractBuilder implemen
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => '#object_state_group_create_create',
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__CREATE,
-                            [],
-                            'menu'
-                        ),
                     ],
                     'extras' => ['icon' => 'publish'],
                 ]
@@ -86,15 +79,6 @@ class ObjectStateGroupCreateRightSidebarBuilder extends AbstractBuilder implemen
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'attributes' => [
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__CANCEL,
-                            [],
-                            'menu'
-                        ),
-                    ],
                     'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.object_state.groups.list',
                 ]
