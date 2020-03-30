@@ -4,60 +4,54 @@
         position: fixed;
         opacity: 1;
         text-align: left;
-        background-color: $ez-color-secondary;
+        background-color: $ez-white;
+        border: calculateRem(16px) solid $ez-white;
+        width: calculateRem(360px);
         padding: calculateRem(9px);
+        box-shadow: calculateRem(-4px) calculateRem(4px) calculateRem(6px) 0 rgba($ez-color-base-light, 0.35);
         border-radius: calculateRem(4px);
+        top: calculateRem(100px);
+        right: 0;
+        height: calc(100vh - 100px);
+        opacity: 1;
+        transform: scaleX(1);
+        transform-origin: right center;
+        transition: transform 0.4s ease-in, opacity 0.4s ease-in;
 
         &--hidden {
-            display: none;
-        }
-
-        &--visually-hidden {
             opacity: 0;
-        }
-    }
-
-    &__list-triangle {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translate(100%, -50%);
-
-        &:after {
-            content: '';
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: calculateRem(5px) 0 calculateRem(5px) calculateRem(5px);
-            border-color: transparent transparent transparent $ez-color-secondary;
-            position: absolute;
-            z-index: 1;
+            transform: scaleX(0);
+            transition: transform 0.2s ease-out, opacity 0.2s ease-out;
         }
     }
 
     &__title {
-        color: $ez-white;
+        color: $ez-color-secondary;
         font-size: calculateRem(16px);
         line-height: 2;
         font-weight: bold;
+        border-bottom: calculateRem(1px) solid $ez-color-secondary;
+        margin-bottom: calculateRem(15px);
     }
 
     &__list {
         display: flex;
         flex-direction: column;
-        background-color: $ez-ground-base;
-        padding: calculateRem(8px);
         max-height: calculateRem(300px);
         overflow: auto;
 
         .ez-btn--content-edit {
             background-color: $ez-white;
-            color: $ez-color-secondary;
             padding: calculateRem(9px) calculateRem(24px);
             text-align: left;
+            box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba($ez-black, 0.1);
+            margin-bottom: calculateRem(8px);
 
-            &:not(:last-child) {
-                margin-bottom: calculateRem(8px);
+            &:hover,
+            &:focus {
+                background: $ez-secondary-ground-pale;
+                font-weight: 700;
+                text-decoration: none;
             }
         }
     }
