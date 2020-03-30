@@ -105,35 +105,14 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         $publishAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezplatform_content_forms_content_edit_publish',
-            'data-extra-classes' => 'ez-tooltip--medium',
-            'data-placement' => 'left',
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__PUBLISH,
-                [],
-                'menu'
-            ),
         ];
         $editAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezplatform_content_forms_content_edit_saveDraft',
-            'data-extra-classes' => 'ez-tooltip--medium',
-            'data-placement' => 'left',
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__SAVE_DRAFT,
-                [],
-                'menu'
-            ),
         ];
         $deleteAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezplatform_content_forms_content_edit_cancel',
-            'data-extra-classes' => 'ez-tooltip--medium',
-            'data-placement' => 'left',
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__CANCEL,
-                [],
-                'menu'
-            ),
         ];
 
         $items = [
@@ -242,13 +221,6 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         $previewAttributes = [
             'class' => self::BTN_TRIGGER_CLASS,
             'data-click' => '#ezplatform_content_forms_content_edit_preview',
-            'data-extra-classes' => 'ez-tooltip--medium',
-            'data-placement' => 'left',
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__PREVIEW,
-                [],
-                'menu'
-            ),
         ];
 
         return $this->createMenuItem(

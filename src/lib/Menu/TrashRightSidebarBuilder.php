@@ -78,15 +78,8 @@ class TrashRightSidebarBuilder extends AbstractBuilder implements TranslationCon
         $menu = $this->factory->createItem('root');
 
         $trashEmptyAttributes = [
-            'data-extra-classes' => 'ez-tooltip--medium',
             'data-target' => '#confirmEmptyTrash',
-            'data-placement' => 'left',
             'data-toggle' => 'modal',
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__EMPTY,
-                [],
-                'menu'
-            ),
         ];
 
         $menu->addChild(

@@ -76,13 +76,6 @@ class ContentTypeRightSidebarBuilder extends AbstractBuilder implements Translat
         $editAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--edit',
             'data-actions' => 'edit',
-            'data-extra-classes' => 'ez-tooltip--medium',
-            'data-placement' => 'left',
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__EDIT,
-                [],
-                'menu'
-            ),
         ];
         $canEdit = $this->permissionResolver->canUser(
             'class',

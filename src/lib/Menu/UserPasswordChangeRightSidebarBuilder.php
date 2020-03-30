@@ -70,13 +70,6 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => '#user_password_change_change',
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__UPDATE,
-                            [],
-                            'menu'
-                        ),
                     ],
                     'extras' => ['icon' => 'publish'],
                 ]
@@ -85,15 +78,6 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
                 self::ITEM__CANCEL,
                 [
                     'route' => 'ezplatform.dashboard',
-                    'attributes' => [
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__CANCEL,
-                            [],
-                            'menu'
-                        ),
-                    ],
                     'extras' => ['icon' => 'circle-close'],
                 ]
             ),

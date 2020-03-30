@@ -74,13 +74,6 @@ class ObjectStateGroupEditRightSidebarBuilder extends AbstractBuilder implements
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#%s', $saveId),
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__SAVE,
-                            [],
-                            'menu'
-                        ),
                     ],
                     'extras' => ['icon' => 'save'],
                 ]
@@ -88,15 +81,6 @@ class ObjectStateGroupEditRightSidebarBuilder extends AbstractBuilder implements
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'attributes' => [
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__CANCEL,
-                            [],
-                            'menu'
-                        ),
-                    ],
                     'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.object_state.groups.list',
                 ]

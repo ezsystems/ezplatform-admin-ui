@@ -175,38 +175,17 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
         $createAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--create',
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__CREATE,
-                [],
-                'menu'
-            ),
             'data-actions' => 'create',
             'data-focus-element' => '.ez-instant-filter__input',
-            'data-extra-classes' => 'ez-tooltip--medium',
-            'data-placement' => 'left',
         ];
         $sendToTrashAttributes = [
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__SEND_TO_TRASH,
-                [],
-                'menu'
-            ),
             'data-toggle' => 'modal',
             'data-target' => '#trash-location-modal',
-            'data-extra-classes' => 'ez-tooltip--medium',
-            'data-placement' => 'left',
         ];
         $copySubtreeAttributes = [
             'class' => 'ez-btn--udw-copy-subtree',
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__COPY_SUBTREE,
-                [],
-                'menu'
-            ),
             'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
             'data-root-location' => $startingLocationId,
-            'data-extra-classes' => 'ez-tooltip--medium',
-            'data-placement' => 'left',
         ];
 
         $copyLimit = $this->configResolver->getParameter(
@@ -241,15 +220,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'extras' => ['icon' => 'move', 'orderNumber' => 30],
                     'attributes' => [
                         'class' => 'btn--udw-move',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__MOVE,
-                            [],
-                            'menu'
-                        ),
                         'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
                         'data-root-location' => $startingLocationId,
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
                     ],
                 ]
             )
@@ -264,13 +236,6 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                             'class' => 'btn--udw-copy',
                             'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
                             'data-root-location' => $startingLocationId,
-                            'data-extra-classes' => 'ez-tooltip--medium',
-                            'data-placement' => 'left',
-                            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__COPY,
-                                [],
-                                'menu'
-                            ),
                         ],
                     ]
                 )
@@ -356,14 +321,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     {
         $editAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--edit',
-            'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__EDIT,
-                [],
-                'menu'
-            ),
             'data-actions' => 'edit',
-            'data-extra-classes' => 'ez-tooltip--medium',
-            'data-placement' => 'left',
         ];
         $editUserAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--edit-user',
@@ -410,13 +368,6 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'attributes' => [
                         'class' => 'ez-btn--reveal',
                         'data-actions' => 'reveal',
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__REVEAL,
-                            [],
-                            'menu'
-                        ),
                     ],
                 ]
             )
@@ -435,14 +386,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     'extras' => ['icon' => 'hide', 'orderNumber' => 60],
                     'attributes' => [
                         'class' => 'ez-btn--hide',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__HIDE,
-                            [],
-                            'menu'
-                        ),
                         'data-actions' => 'hide',
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
                     ],
                 ]
             )

@@ -74,13 +74,6 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#%s', $contentTypeEditFormView['publishContentType']->vars['id']),
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__SAVE,
-                            [],
-                            'menu'
-                        ),
                     ],
                     'extras' => ['icon' => 'save'],
                 ]
@@ -91,13 +84,6 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
                     'attributes' => [
                         'class' => 'btn--trigger',
                         'data-click' => sprintf('#%s', $contentTypeEditFormView['removeDraft']->vars['id']),
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
-                        'title' => $this->translator->trans(
-/** @Ignore */ self::ITEM__CANCEL,
-                            [],
-                            'menu'
-                        ),
                     ],
                     'extras' => ['icon' => 'circle-close'],
                 ]
