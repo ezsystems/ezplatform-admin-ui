@@ -13,7 +13,10 @@ export default class EzBtnTableRemove extends AlloyEditor.ButtonTableRemove {
                 aria-label={AlloyEditor.Strings.deleteTable}
                 className="ae-button ez-btn-ae"
                 data-type="button-table-remove"
-                onClick={this._removeTable}
+                onClick={() => {
+                    this._removeTable();
+                    this.fireCustomUpdateEvent();
+                }}
                 tabIndex={this.props.tabIndex}
                 title={AlloyEditor.Strings.deleteTable}>
                 <svg className="ez-icon ez-btn-ae__icon">
@@ -21,6 +24,12 @@ export default class EzBtnTableRemove extends AlloyEditor.ButtonTableRemove {
                 </svg>
             </button>
         );
+    }
+
+    fireCustomUpdateEvent() {
+        const nativeEditor = this.props.editor.get('nativeEditor');
+
+        nativeEditor.fire('customUpdate');
     }
 }
 
