@@ -12,7 +12,7 @@
         border-radius: calculateRem(4px);
         top: calculateRem(100px);
         right: 0;
-        height: calc(100vh - 100px);
+        height: calc(100vh - #{calculateRem(100px)});
         opacity: 1;
         transform: scaleX(1);
         transform-origin: right center;
