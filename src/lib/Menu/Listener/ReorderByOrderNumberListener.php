@@ -9,63 +9,44 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Menu\Listener;
 
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use Knp\Menu\ItemInterface;
 
 final class ReorderByOrderNumberListener
 {
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent $event
-     */
     public function reorderMenuItems(ConfigureMenuEvent $event): void
     {
         $menu = $event->getMenu();
-        $menuOrderArray = [];
-        $addLast = [];
-        $alreadyTaken = [];
 
-        foreach ($menu->getChildren() as $key => $menuItem) {
-            if ($menuItem->hasChildren()) {
-                $this->reorderMenuItems($menuItem);
+        $this->recursiveReorderMenuItems($menu);
+    }
+
+    private function recursiveReorderMenuItems(ItemInterface $menuItem): void
+    {
+        $menuItemList = [];
+        $unorderedMenuItemsList = [];
+
+        foreach ($menuItem->getChildren() as $nestedMenuItem) {
+            if ($nestedMenuItem->hasChildren()) {
+                $this->recursiveReorderMenuItems($nestedMenuItem);
             }
-            $orderNumber = $menuItem->getExtra('orderNumber');
 
-            if ($orderNumber != null) {
-                if (!isset($menuOrderArray[$orderNumber])) {
-                    $menuOrderArray[$orderNumber] = $menuItem->getName();
-                } else {
-                    $alreadyTaken[$orderNumber] = $menuItem->getName();
-                }
+            $orderNumber = $nestedMenuItem->getExtra('orderNumber');
+
+            if ($orderNumber === null) {
+                $unorderedMenuItemsList[] = $nestedMenuItem;
             } else {
-                $addLast[] = $menuItem->getName();
-            }
-        }
-        ksort($menuOrderArray);
-
-        if (count($alreadyTaken)) {
-            foreach ($alreadyTaken as $key => $value) {
-                $keysArray = array_keys($menuOrderArray);
-                $position = array_search($key, $keysArray);
-
-                if ($position === false) {
-                    continue;
-                }
-
-                $menuOrderArray = array_merge(
-                    array_slice($menuOrderArray, 0, $position),
-                    [$value],
-                    array_slice($menuOrderArray, $position)
-                );
-            }
-        }
-        ksort($menuOrderArray);
-
-        if (count($addLast)) {
-            foreach ($addLast as $key => $value) {
-                $menuOrderArray[] = $value;
+                $menuItemList[$orderNumber][] = $nestedMenuItem;
             }
         }
 
-        if (count($menuOrderArray)) {
-            $menu->reorderChildren($menuOrderArray);
-        }
+        ksort($menuItemList);
+
+        $menuItemList[] = $unorderedMenuItemsList;
+
+        $menuItem->reorderChildren(
+            array_map(static function (ItemInterface $item): string {
+                return $item->getName();
+            }, array_merge(...$menuItemList))
+        );
     }
 }
