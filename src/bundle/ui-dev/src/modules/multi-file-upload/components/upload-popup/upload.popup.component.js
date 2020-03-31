@@ -12,12 +12,13 @@ export default class UploadPopupModule extends Component {
         super(props);
 
         this.uploadFiles = this.uploadFiles.bind(this);
-
+        this.refTooltip = React.createRef();
         this.state = { itemsToUpload: props.itemsToUpload };
     }
 
     componentDidMount() {
         window.document.body.classList.add(CLASS_SCROLL_DISABLED);
+        window.eZ.helpers.tooltips.parse(this.refTooltip.current);
     }
 
     componentWillUnmount() {
@@ -51,10 +52,10 @@ export default class UploadPopupModule extends Component {
             ...tooltipAttrs,
             itemsToUpload: this.state.itemsToUpload,
         };
-        const title = Translator.trans(/*@Desc("Multi-file upload")*/ 'upload_popup.title', {}, 'multi_file_upload');
+        const title = Translator.trans(/*@Desc("Multi-file upload")*/ 'upload_popup.close', {}, 'multi_file_upload');
 
         return (
-            <div className="c-upload-popup">
+            <div className="c-upload-popup" ref={this.refTooltip}>
                 <TooltipPopup title={title} {...tooltipAttrs}>
                     <DropAreaComponent
                         onDrop={this.uploadFiles}

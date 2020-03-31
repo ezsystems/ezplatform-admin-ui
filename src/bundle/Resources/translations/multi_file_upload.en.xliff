@@ -66,10 +66,10 @@
         <target state="new">Upload sub-items</target>
         <note>key: upload_btn.label</note>
       </trans-unit>
-      <trans-unit id="f0af4c073e35f18370b9eb10fe995a6f5de9ac9d" resname="upload_popup.title">
+      <trans-unit id="6b2bc429ffc374b49b5de9e3563d3d5a7668e4b2" resname="upload_popup.close">
         <source>Multi-file upload</source>
         <target state="new">Multi-file upload</target>
-        <note>key: upload_popup.title</note>
+        <note>key: upload_popup.close</note>
       </trans-unit>
     </body>
   </file>
