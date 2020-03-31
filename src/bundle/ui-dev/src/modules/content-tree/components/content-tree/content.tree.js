@@ -67,19 +67,6 @@ export default class ContentTree extends Component {
         window.document.body.classList.remove(CLASS_IS_TREE_RESIZING);
     }
 
-    renderNoSubitemMessage() {
-        const { items } = this.props;
-        const rootLocation = items[0];
-        const isRootLoaded = rootLocation;
-        const noSubitemsMessage = Translator.trans(/*@Desc("This Location has no sub-items")*/ 'no_subitems', {}, 'content_tree');
-
-        if (!isRootLoaded || (rootLocation.subitems && rootLocation.subitems.length)) {
-            return;
-        }
-
-        return <div className="m-tree__no-items-message">{noSubitemsMessage}</div>;
-    }
-
     renderCollapseAllBtn() {
         const collapseAllLabel = Translator.trans(/*@Desc("Collapse all")*/ 'collapse_all', {}, 'content_tree');
 
@@ -143,7 +130,6 @@ export default class ContentTree extends Component {
 
         return (
             <div {...containerAttrs}>
-                {this.renderNoSubitemMessage()}
                 {this.renderList()}
                 {this.renderLoadingSpinner()}
                 {this.renderCollapseAllBtn()}
