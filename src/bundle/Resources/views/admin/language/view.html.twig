@@ -26,8 +26,9 @@
 {% block content %}
     <section class="container mt-4 px-5">
         <header class="ez-table-header round">
-            <h5>{{ 'language.information.header'|trans|desc('Language information') }}</h5>
-
+            <div class="ez-table-header__headline">
+                {{ 'language.information.header'|trans|desc('Language information') }}
+            </div>
             <div>
                 {% if can_administrate %}
                     {{ form_start(deleteForm, {"action": path("ezplatform.language.delete", {"languageId": language.id, "redirectErrorsTo": "view"})}) }}
