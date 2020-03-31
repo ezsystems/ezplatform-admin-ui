@@ -12,13 +12,16 @@ use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Role;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RolesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper;
+use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCopyMapper;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCopyType;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
@@ -40,6 +43,9 @@ class RoleController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper */
     private $roleCreateMapper;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCopyMapper */
+    private $roleCopyMapper;
+
     /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper */
     private $roleUpdateMapper;
 
@@ -56,6 +62,7 @@ class RoleController extends Controller
      * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
      * @param \eZ\Publish\API\Repository\RoleService $roleService
      * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper $roleCreateMapper
+     * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCopyMapper $roleCopyMapper
      * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper $roleUpdateMapper
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
@@ -65,6 +72,7 @@ class RoleController extends Controller
         TranslatableNotificationHandlerInterface $notificationHandler,
         RoleService $roleService,
         RoleCreateMapper $roleCreateMapper,
+        RoleCopyMapper $roleCopyMapper,
         RoleUpdateMapper $roleUpdateMapper,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
@@ -73,6 +81,7 @@ class RoleController extends Controller
         $this->notificationHandler = $notificationHandler;
         $this->roleService = $roleService;
         $this->roleCreateMapper = $roleCreateMapper;
+        $this->roleCopyMapper = $roleCopyMapper;
         $this->roleUpdateMapper = $roleUpdateMapper;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
@@ -184,6 +193,41 @@ class RoleController extends Controller
         }
 
         return $this->render('@ezdesign/user/role/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    public function copyAction(Request $request, Role $role): Response
+    {
+        $this->denyAccessUnlessGranted(new Attribute('role', 'create'));
+
+        $form = $this->createForm(RoleCopyType::class, new RoleCopyData($role));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (RoleCopyData $data) {
+                $roleCopyStruct = $this->roleCopyMapper->reverseMap($data);
+                $role = $this->roleService->copyRole($data->getCopiedRole(), $roleCopyStruct);
+
+                $this->notificationHandler->success(
+                    /** @Desc("Role '%role%' copied.") */
+                    'role.copy.success',
+                    ['%role%' => $role->identifier],
+                    'role'
+                );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.role.view', [
+                    'roleId' => $role->id,
+                ]));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->render('@ezdesign/user/role/copy.html.twig', [
+            'role' => $role,
             'form' => $form->createView(),
         ]);
     }

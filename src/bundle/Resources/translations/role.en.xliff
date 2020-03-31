@@ -151,6 +151,11 @@
         <target state="new">Creating a new Role</target>
         <note>key: role.breadcrumb.add</note>
       </trans-unit>
+      <trans-unit id="6d6d3ca79dd8c306ac2fcd89725ccbe5f8ee9f4e" resname="role.breadcrumb.copy">
+        <source>Copying Role: %identifier%</source>
+        <target state="new">Copying Role: %identifier%</target>
+        <note>key: role.breadcrumb.copy</note>
+      </trans-unit>
       <trans-unit id="9cdc3dd417b63308f19cadbe01f74c21565b9947" resname="role.breadcrumb.edit">
         <source>Editing Role '%identifier%'</source>
         <target state="new">Editing Role '%identifier%'</target>
@@ -170,6 +175,11 @@
         <source>Role "%identifier%"</source>
         <target state="new">Role "%identifier%"</target>
         <note>key: role.breadcrumb.view.identifier</note>
+      </trans-unit>
+      <trans-unit id="8b6bc2aae1a109d9409a20ad4516e0eaf6ca72d4" resname="role.copy.success">
+        <source>Role '%role%' copied.</source>
+        <target state="new">Role '%role%' copied.</target>
+        <note>key: role.copy.success</note>
       </trans-unit>
       <trans-unit id="59754dcca61db396ef9de8abd3aa63645bd50f65" resname="role.create.success">
         <source>Role '%role%' created.</source>
@@ -196,6 +206,11 @@
         <target state="new">Creating a new Role</target>
         <note>key: role.view.add.title</note>
       </trans-unit>
+      <trans-unit id="6f6e274dd8d21241d5bb3d647b1089c939e84313" resname="role.view.copy.title">
+        <source>Copying Role: %identifier%</source>
+        <target state="new">Copying Role: %identifier%</target>
+        <note>key: role.view.copy.title</note>
+      </trans-unit>
       <trans-unit id="d3938c40d50b4d6e972248900f2d43cda1fe02a3" resname="role.view.edit.title">
         <source>Editing Role '%identifier%'</source>
         <target state="new">Editing Role '%identifier%'</target>
@@ -210,6 +225,11 @@
         <source>Assign to Users/Groups</source>
         <target state="new">Assign to Users/Groups</target>
         <note>key: role.view.list.action.assign_to_users_or_groups</note>
+      </trans-unit>
+      <trans-unit id="84487981aba4c7a0717b3f1b0ffed88209072df7" resname="role.view.list.action.copy">
+        <source>Copy</source>
+        <target state="new">Copy</target>
+        <note>key: role.view.list.action.copy</note>
       </trans-unit>
       <trans-unit id="e0b49df6c6b235f7eb4d03019d1f9505dd77a135" resname="role.view.list.action.delete">
         <source>Delete Role</source>
