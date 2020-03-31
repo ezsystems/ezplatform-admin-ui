@@ -1,10 +1,9 @@
-(function(global, doc) {
+(function(global, doc, eZ) {
     class EditTranslation {
         constructor(config) {
             this.container = config.container;
             this.toggler = config.container.querySelector('.ez-btn--translations-list-toggler');
             this.translationsList = config.container.querySelector('.ez-translation-selector__list-wrapper');
-            this.listTriangle = config.container.querySelector('.ez-translation-selector__list-triangle');
 
             this.hideTranslationsList = this.hideTranslationsList.bind(this);
             this.showTranslationsList = this.showTranslationsList.bind(this);
@@ -12,29 +11,12 @@
         }
 
         setPosition() {
-            const togglerRect = this.toggler.getBoundingClientRect();
-            const translationsListRect = this.translationsList.getBoundingClientRect();
-            const topPosition = togglerRect.top + togglerRect.height / 2 - translationsListRect.height / 2;
-            const leftPosition = togglerRect.left - translationsListRect.width - 10;
+            const topOffset = parseInt(this.translationsList.dataset.topOffset, 10);
+            const topPosition = window.scrollY > topOffset ? 0 : topOffset - window.scrollY;
+            const height = window.scrollY > topOffset ? window.innerHeight : window.innerHeight + window.scrollY - topOffset;
 
-            if (topPosition + translationsListRect.height > window.innerHeight) {
-                this.translationsList.style.bottom = 0;
-                this.translationsList.style.top = 'auto';
-
-                const translationsListRect = this.translationsList.getBoundingClientRect();
-                const listTriangleTopPosition =
-                    ((togglerRect.top + togglerRect.height / 2 - translationsListRect.top) / translationsListRect.height) * 100;
-
-                this.listTriangle.style.top = listTriangleTopPosition < 90 ? `${listTriangleTopPosition}%` : '90%';
-            } else {
-                this.translationsList.style.top = `${topPosition}px`;
-                this.translationsList.style.bottom = 'auto';
-                this.listTriangle.style.top = '50%';
-            }
-
-            this.translationsList.style.left = `${leftPosition}px`;
-
-            this.translationsList.classList.remove('ez-translation-selector__list-wrapper--visually-hidden');
+            this.translationsList.style.top = `${topPosition}px`;
+            this.translationsList.style.height = `${height}px`;
         }
 
         hideTranslationsList(event) {
@@ -47,7 +29,6 @@
             }
 
             this.translationsList.classList.add('ez-translation-selector__list-wrapper--hidden');
-            this.translationsList.classList.add('ez-translation-selector__list-wrapper--visually-hidden');
 
             global.removeEventListener('scroll', this.setPosition, false);
             doc.removeEventListener('click', this.hideTranslationsList, false);
@@ -60,6 +41,8 @@
 
             global.addEventListener('scroll', this.setPosition, false);
             doc.addEventListener('click', this.hideTranslationsList, false);
+
+            eZ.helpers.tooltips.hideAll();
         }
 
         init() {
@@ -74,4 +57,4 @@
 
         editTranslation.init();
     });
-})(window, document);
+})(window, document, window.eZ);
