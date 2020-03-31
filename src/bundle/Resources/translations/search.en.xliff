@@ -51,11 +51,6 @@
         <target state="new">Custom range</target>
         <note>key: search.custom_range</note>
       </trans-unit>
-      <trans-unit id="f32993c555744e5c203137f3ee0e380d27e9cfef" resname="search.date.range">
-        <source>From date - to date</source>
-        <target state="new">From date - to date</target>
-        <note>key: search.date.range</note>
-      </trans-unit>
       <trans-unit id="bf24ae2c9083c948931ad1b4d4405b6261eb9bc6" resname="search.filters">
         <source>Filters</source>
         <target state="new">Filters</target>

@@ -24,22 +24,30 @@ const TooltipPopupComponent = (props) => {
         className: 'c-tooltip-popup',
         hidden: !props.visible,
     };
-    const contentStyle = maxHeight === INITIAL_HEIGHT
-        ? {}
-        : {
-            maxHeight,
-            overflowY: 'scroll',
-        };
-
+    const contentStyle =
+        maxHeight === INITIAL_HEIGHT
+            ? {}
+            : {
+                  maxHeight,
+                  overflowY: 'scroll',
+              };
+    const closeLabel = Translator.trans(/*@Desc("Close")*/ 'tooltip.close_label', {}, 'content');
     return (
         <div {...attrs}>
             <div className="c-tooltip-popup__header">
                 <div className="c-tooltip-popup__title">{props.title}</div>
-                <div className="c-tooltip-popup__close" onClick={props.onClose} tabIndex="-1">
+                <div
+                    className="c-tooltip-popup__close"
+                    title={closeLabel}
+                    onClick={props.onClose}
+                    tabIndex="-1"
+                    data-tooltip-container-selector=".c-tooltip-popup__header">
                     <Icon name="discard" extraClasses="ez-icon--medium" />
                 </div>
             </div>
-            <div className="c-tooltip-popup__content" ref={contentRef} style={contentStyle}>{props.children}</div>
+            <div className="c-tooltip-popup__content" ref={contentRef} style={contentStyle}>
+                {props.children}
+            </div>
         </div>
     );
 };

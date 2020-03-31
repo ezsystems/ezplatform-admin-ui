@@ -10,7 +10,7 @@
     {{ form_widget(form.query) }}
 
     <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary font-weight-bold ez-btn--search" title="{{ 'search.perform'|trans|desc('Search') }}">
+        <button type="submit" class="btn btn-primary font-weight-bold ez-btn--search">
             <svg class="ez-icon ez-icon--medium ez-icon--light">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
             </svg>
@@ -19,7 +19,7 @@
         <span class="ml-4" {% if form.search_language.vars.choices|length == 1 %}hidden{% endif %}>
             {{ form_widget(form.search_language, {'attr': {'class': 'ez-search-form__language-selector'}}) }}
         </span>
-        <button type="button" class="btn btn-dark ez-btn--filter ml-4" title="{{ 'search.filters'|trans|desc('Filters') }}">
+        <button type="button" class="btn btn-dark ez-btn--filter ml-4">
             <svg class="ez-icon ez-icon--medium ez-icon--light ez-icon-filters">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#filters"></use>
             </svg>
@@ -117,7 +117,6 @@
             <div>
                 <button class="btn btn-secondary ez-btn--udw-select-location"
                     type="button"
-                    title="{{'search.select_content'|trans|desc('Select Content')}}"
                     {% if form.subtree.vars.value is not empty %} hidden {% endif %}
                     data-universal-discovery-title="{{'search.udw.select_content'|trans|desc('Select Content')}}"
                     data-location-path-input-selector="#{{form.subtree.vars.id}}"
@@ -167,9 +166,9 @@
         </div>
     </div>
     <div class="ez-filters__btns">
-        <button class="btn btn-dark ez-btn-clear" title="{{ 'search.clear'|trans|desc('Clear') }}">
+        <button class="btn btn-dark ez-btn-clear">
             {{ 'search.clear'|trans|desc('Clear') }}</button>
-        <button type="submit" class="btn btn-secondary ez-btn-apply font-weight-bold" title="{{ 'search.apply'|trans|desc('Apply') }}" disabled>
+        <button type="submit" class="btn btn-secondary ez-btn-apply font-weight-bold" disabled>
             {{ 'search.apply'|trans|desc('Apply') }}</button>
     </div>
 </div>
