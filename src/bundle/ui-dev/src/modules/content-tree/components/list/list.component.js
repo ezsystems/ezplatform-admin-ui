@@ -2,10 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ListItem from '../list-item/list.item.component';
 
-const List = ({ items, loadMoreSubitems, currentLocationId, path, subitemsLoadLimit, subitemsLimit, treeMaxDepth, afterItemToggle, isRoot }) => {
+const List = ({
+    items,
+    loadMoreSubitems,
+    currentLocationId,
+    path,
+    subitemsLoadLimit,
+    subitemsLimit,
+    treeMaxDepth,
+    afterItemToggle,
+    isRoot,
+}) => {
     const commonAttrs = { loadMoreSubitems, subitemsLoadLimit, subitemsLimit, treeMaxDepth, afterItemToggle };
     const listAttrs = { ...commonAttrs, currentLocationId };
     const listItemAttrs = commonAttrs;
+    const renderNoSubitemMessage = () => {
+        const rootLocation = items[0];
+        const isRootLoaded = rootLocation;
+        const noSubitemsMessage = Translator.trans(/*@Desc("This Location has no sub-items")*/ 'no_subitems', {}, 'content_tree');
+
+        if (!isRoot || !isRootLoaded || (rootLocation.subitems && rootLocation.subitems.length)) {
+            return;
+        }
+
+        return <div className="c-list__no-items-message">{noSubitemsMessage}</div>;
+    };
 
     return (
         <ul className="c-list">
@@ -27,7 +48,11 @@ const List = ({ items, loadMoreSubitems, currentLocationId, path, subitemsLoadLi
                         href={locationHref}
                         isRootItem={isRoot}
                         path={itemPath}>
-                        {subitems.length ? <List path={itemPath} items={subitems} isRoot={false} {...listAttrs} /> : null}
+                        {subitems.length ? (
+                            <List path={itemPath} items={subitems} isRoot={false} {...listAttrs} />
+                        ) : (
+                            renderNoSubitemMessage()
+                        )}
                     </ListItem>
                 );
             })}
