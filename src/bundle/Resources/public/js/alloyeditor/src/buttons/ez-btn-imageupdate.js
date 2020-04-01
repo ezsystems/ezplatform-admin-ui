@@ -26,6 +26,18 @@ export default class EzBtnImageUpdate extends EzEmbedImageButton {
         widget.loadImagePreviewFromCurrentVersion(content.CurrentVersion._href, content.Name);
 
         ReactDOM.unmountComponentAtNode(document.querySelector('#react-udw'));
+        this.fireCustomUpdateEvent();
+    }
+
+    /**
+     * Fires a custom event to reflect changes in the RichText field.
+     *
+     * @method fireCustomUpdateEvent
+     */
+    fireCustomUpdateEvent() {
+        const nativeEditor = this.props.editor.get('nativeEditor');
+
+        nativeEditor.fire('customUpdate');
     }
 
     /**
