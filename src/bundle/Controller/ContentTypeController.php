@@ -14,6 +14,7 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
@@ -54,17 +55,11 @@ class ContentTypeController extends Controller
     /** @var \EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface */
     private $contentTypeActionDispatcher;
 
-    /** @var array */
-    private $languages;
-
     /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
     /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
-
-    /** @var int */
-    private $defaultPaginationLimit;
 
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
@@ -77,21 +72,11 @@ class ContentTypeController extends Controller
 
     /** @var \EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper */
     private $contentTypeDraftMapper;
-
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface $contentTypeActionDispatcher
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
-     * @param array $languages
-     * @param int $defaultPaginationLimit
-     * @param \eZ\Publish\API\Repository\UserService $userService
-     * @param \eZ\Publish\API\Repository\LanguageService $languageService
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory $contentTypeFormFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper $contentTypeDraftMapper
+     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
      */
+    private $configResolver;
+
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
@@ -99,12 +84,11 @@ class ContentTypeController extends Controller
         ActionDispatcherInterface $contentTypeActionDispatcher,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        array $languages,
-        int $defaultPaginationLimit,
         UserService $userService,
         LanguageService $languageService,
         ContentTypeFormFactory $contentTypeFormFactory,
-        ContentTypeDraftMapper $contentTypeDraftMapper
+        ContentTypeDraftMapper $contentTypeDraftMapper,
+        ConfigResolverInterface $configResolver
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -112,12 +96,11 @@ class ContentTypeController extends Controller
         $this->contentTypeActionDispatcher = $contentTypeActionDispatcher;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
-        $this->languages = $languages;
-        $this->defaultPaginationLimit = $defaultPaginationLimit;
         $this->userService = $userService;
         $this->languageService = $languageService;
         $this->contentTypeFormFactory = $contentTypeFormFactory;
         $this->contentTypeDraftMapper = $contentTypeDraftMapper;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -137,7 +120,7 @@ class ContentTypeController extends Controller
     public function listAction(ContentTypeGroup $group, string $routeName, int $page): Response
     {
         $deletableTypes = [];
-        $contentTypes = $this->contentTypeService->loadContentTypes($group, $this->languages);
+        $contentTypes = $this->contentTypeService->loadContentTypes($group, $this->configResolver->getParameter('languages'));
 
         usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
             return strnatcasecmp($contentType1->getName(), $contentType2->getName());
@@ -147,7 +130,7 @@ class ContentTypeController extends Controller
             new ArrayAdapter($contentTypes)
         );
 
-        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setMaxPerPage($this->configResolver->getParameter('pagination.content_type_limit'));
         $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
         /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup[] $contentTypeGroupList */
@@ -186,7 +169,8 @@ class ContentTypeController extends Controller
     public function addAction(ContentTypeGroup $group): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('class', 'create'));
-        $mainLanguageCode = reset($this->languages);
+        $languages = $this->configResolver->getParameter('languages');
+        $mainLanguageCode = reset($languages);
 
         $createStruct = $this->contentTypeService->newContentTypeCreateStruct('__new__' . md5((string)microtime(true)));
         $createStruct->mainLanguageCode = $mainLanguageCode;
@@ -701,9 +685,10 @@ class ContentTypeController extends Controller
      */
     private function getDefaultLanguage(ContentTypeDraft $contentTypeDraft): Language
     {
-        $languageCode = reset($this->languages);
+        $languages = $this->configResolver->getParameter('languages');
+        $languageCode = reset($languages);
 
-        foreach ($this->languages as $prioritizedLanguage) {
+        foreach ($languages as $prioritizedLanguage) {
             if (isset($contentTypeDraft->names[$prioritizedLanguage])) {
                 $languageCode = $prioritizedLanguage;
                 break;

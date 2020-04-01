@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
@@ -45,31 +46,23 @@ class LanguageController extends Controller
     /** @var FormFactory */
     private $formFactory;
 
-    /** @var int */
-    private $defaultPaginationLimit;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /**
-     * @param TranslatableNotificationHandlerInterface $notificationHandler
-     * @param LanguageService $languageService
-     * @param LanguageCreateMapper $languageCreateMapper
-     * @param SubmitHandler $submitHandler
-     * @param FormFactory $formFactory
-     * @param int $defaultPaginationLimit
-     */
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         LanguageService $languageService,
         LanguageCreateMapper $languageCreateMapper,
         SubmitHandler $submitHandler,
         FormFactory $formFactory,
-        int $defaultPaginationLimit
+        ConfigResolverInterface $configResolver
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->languageService = $languageService;
         $this->languageCreateMapper = $languageCreateMapper;
         $this->submitHandler = $submitHandler;
         $this->formFactory = $formFactory;
-        $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -87,7 +80,7 @@ class LanguageController extends Controller
             new ArrayAdapter($this->languageService->loadLanguages())
         );
 
-        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setMaxPerPage($this->configResolver->getParameter('pagination.language_limit'));
         $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
         /** @var Language[] $languageList */

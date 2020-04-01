@@ -8,11 +8,10 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
-use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\API\Repository\Values\Content\Query;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
@@ -27,7 +26,6 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService as UiPathService;
 
 class TrashController extends Controller
@@ -37,12 +35,6 @@ class TrashController extends Controller
 
     /** @var \eZ\Publish\API\Repository\TrashService */
     private $trashService;
-
-    /** @var \eZ\Publish\API\Repository\LocationService */
-    private $locationService;
-
-    /** @var \eZ\Publish\API\Repository\ContentService */
-    private $contentService;
 
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
@@ -56,52 +48,30 @@ class TrashController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\UI\Service\PathService */
     private $uiPathService;
 
-    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
-    private $urlGenerator;
-
     /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
     private $userLanguagePreferenceProvider;
 
-    /** @var int */
-    private $defaultPaginationLimit;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
-     * @param \eZ\Publish\API\Repository\TrashService $trashService
-     * @param \eZ\Publish\API\Repository\LocationService $locationService
-     * @param \eZ\Publish\API\Repository\ContentService $contentService
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \EzSystems\EzPlatformAdminUi\UI\Service\PathService $uiPathService
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
-     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
-     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
-     * @param int $defaultPaginationLimit
-     */
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         TrashService $trashService,
-        LocationService $locationService,
-        ContentService $contentService,
         ContentTypeService $contentTypeService,
         UiPathService $uiPathService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        UrlGeneratorInterface $urlGenerator,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
-        int $defaultPaginationLimit
+        ConfigResolverInterface $configResolver
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->trashService = $trashService;
-        $this->locationService = $locationService;
-        $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->uiPathService = $uiPathService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
-        $this->urlGenerator = $urlGenerator;
-        $this->defaultPaginationLimit = $defaultPaginationLimit;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
+        $this->configResolver = $configResolver;
     }
 
     public function performAccessCheck(): void
@@ -140,7 +110,7 @@ class TrashController extends Controller
             new TrashItemAdapter($query, $this->trashService)
         );
 
-        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setMaxPerPage($this->configResolver->getParameter('pagination.trash_limit'));
         $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
         /** @var \eZ\Publish\API\Repository\Values\Content\TrashItem $item */

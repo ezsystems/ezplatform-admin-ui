@@ -20,9 +20,9 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher;
-use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\EditContentOnTheFlyDispatcher;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use EzSystems\EzPlatformAdminUi\View\CreateContentOnTheFlyView;
 use EzSystems\EzPlatformAdminUi\View\EditContentOnTheFlyView;
@@ -57,15 +57,9 @@ class ContentOnTheFlyController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher */
     private $createContentActionDispatcher;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\EditContentOnTheFlyDispatcher */
-    private $editContentActionDispatcher;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /** @var string[] */
-    private $userContentTypeIdentifiers;
-
-    /**
-     * @param string[] $userContentTypeIdentifiers
-     */
     public function __construct(
         ContentService $contentService,
         LanguageService $languageService,
@@ -74,8 +68,7 @@ class ContentOnTheFlyController extends Controller
         PermissionResolver $permissionResolver,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
         CreateContentOnTheFlyDispatcher $createContentActionDispatcher,
-        EditContentOnTheFlyDispatcher $editContentActionDispatcher,
-        array $userContentTypeIdentifiers
+        ConfigResolverInterface $configResolver
     ) {
         $this->contentService = $contentService;
         $this->locationService = $locationService;
@@ -84,8 +77,7 @@ class ContentOnTheFlyController extends Controller
         $this->permissionResolver = $permissionResolver;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
         $this->createContentActionDispatcher = $createContentActionDispatcher;
-        $this->editContentActionDispatcher = $editContentActionDispatcher;
-        $this->userContentTypeIdentifiers = $userContentTypeIdentifiers;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -152,7 +144,7 @@ class ContentOnTheFlyController extends Controller
         ContentType $contentType,
         Location $parentLocation
     ) {
-        if ((new ContentTypeIsUser($this->userContentTypeIdentifiers))->isSatisfiedBy($contentType)) {
+        if ((new ContentTypeIsUser($this->configResolver->getParameter('user_content_type_identifier')))->isSatisfiedBy($contentType)) {
             return $this->forward('EzSystems\EzPlatformAdminUiBundle\Controller\UserOnTheFlyController::createUserAction', [
                 'languageCode' => $languageCode,
                 'contentType' => $contentType,
@@ -216,7 +208,7 @@ class ContentOnTheFlyController extends Controller
             $this->userLanguagePreferenceProvider->getPreferredLanguages()
         );
 
-        if ((new ContentTypeIsUser($this->userContentTypeIdentifiers))->isSatisfiedBy($contentType)) {
+        if ((new ContentTypeIsUser($this->configResolver->getParameter('user_content_type_identifier')))->isSatisfiedBy($contentType)) {
             return $this->forward('EzSystems\EzPlatformAdminUiBundle\Controller\UserOnTheFlyController::editUserAction', [
                 'languageCode' => $languageCode,
                 'contentId' => $contentId,

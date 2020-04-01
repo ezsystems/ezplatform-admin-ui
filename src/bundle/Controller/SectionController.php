@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use Exception;
-use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
@@ -18,6 +17,7 @@ use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\Content\Section;
 use eZ\Publish\API\Repository\Values\User\Limitation\NewSectionLimitation;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
@@ -67,9 +67,6 @@ class SectionController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    private $contentTypeService;
-
     /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
@@ -82,25 +79,9 @@ class SectionController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
     private $permissionChecker;
 
-    /** @var int */
-    private $defaultPaginationLimit;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\API\Repository\SectionService $sectionService
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionCreateMapper $sectionCreateMapper
-     * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper $sectionUpdateMapper
-     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \eZ\Publish\API\Repository\LocationService $locationService
-     * @param \EzSystems\EzPlatformAdminUi\UI\Service\PathService $pathService
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface $permissionChecker
-     * @param int $defaultPaginationLimit
-     */
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
@@ -110,12 +91,11 @@ class SectionController extends Controller
         SectionCreateMapper $sectionCreateMapper,
         SectionUpdateMapper $sectionUpdateMapper,
         SubmitHandler $submitHandler,
-        ContentTypeService $contentTypeService,
         LocationService $locationService,
         PathService $pathService,
         PermissionResolver $permissionResolver,
         PermissionCheckerInterface $permissionChecker,
-        int $defaultPaginationLimit
+        ConfigResolverInterface $configResolver
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -125,12 +105,11 @@ class SectionController extends Controller
         $this->sectionCreateMapper = $sectionCreateMapper;
         $this->sectionUpdateMapper = $sectionUpdateMapper;
         $this->submitHandler = $submitHandler;
-        $this->contentTypeService = $contentTypeService;
         $this->locationService = $locationService;
         $this->pathService = $pathService;
-        $this->defaultPaginationLimit = $defaultPaginationLimit;
         $this->permissionResolver = $permissionResolver;
         $this->permissionChecker = $permissionChecker;
+        $this->configResolver = $configResolver;
     }
 
     public function performAccessCheck(): void
@@ -155,7 +134,7 @@ class SectionController extends Controller
             new ArrayAdapter($this->sectionService->loadSections())
         );
 
-        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setMaxPerPage($this->configResolver->getParameter('pagination.section_limit'));
         $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
         /** @var \eZ\Publish\API\Repository\Values\Content\Section[] $sectionList */
