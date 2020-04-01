@@ -7,11 +7,7 @@ services:
     EzSystems\EzPlatformAdminUi\UI\Module\ContentTree\NodeFactory:
         arguments:
             $translationHelper: '@ezpublish.translation_helper'
-            $displayLimit: '$content_tree_module.load_more_limit$'
-            $childrenLoadMaxLimit: '$content_tree_module.children_load_max_limit$'
-            $maxDepth: '$content_tree_module.tree_max_depth$'
-            $allowedContentTypes: '$content_tree_module.allowed_content_types$'
-            $ignoredContentTypes: '$content_tree_module.ignored_content_types$'
+            $configResolver: '@ezpublish.config.resolver'
 
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module\ContentTree:
         tags:
