@@ -13,7 +13,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationIsWithinCopySubtreeLimitValidator:
         arguments:
-            $copySubtreeLimit: '$subtree_operations.copy_subtree.limit$'
+            $configResolver: '@ezpublish.config.resolver'
 
     EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueContentTypeIdentifierValidator:
         arguments: ["@ezpublish.api.service.content_type"]

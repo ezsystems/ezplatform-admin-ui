@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
 
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use eZ\Publish\API\Repository\SearchService;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsWithinCopySubtreeLimit;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -19,19 +20,15 @@ class LocationIsWithinCopySubtreeLimitValidator extends ConstraintValidator
     /** @var \eZ\Publish\API\Repository\SearchService */
     private $searchService;
 
-    /** @var int */
-    private $copySubtreeLimit;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /**
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param int $copySubtreeLimit
-     */
     public function __construct(
         SearchService $searchService,
-        int $copySubtreeLimit
+        ConfigResolverInterface $configResolver
     ) {
         $this->searchService = $searchService;
-        $this->copySubtreeLimit = $copySubtreeLimit;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -46,13 +43,19 @@ class LocationIsWithinCopySubtreeLimitValidator extends ConstraintValidator
             return;
         }
 
-        $isWithinCopySubtreeLimit = new IsWithinCopySubtreeLimit($this->copySubtreeLimit, $this->searchService);
+        $isWithinCopySubtreeLimit = new IsWithinCopySubtreeLimit(
+            $this->configResolver->getParameter('subtree_operations.copy_subtree.limit'),
+            $this->searchService
+        );
         try {
             if (!$isWithinCopySubtreeLimit->isSatisfiedBy($location)) {
                 $this
                     ->context
                     ->buildViolation($constraint->message)
-                    ->setParameter('%currentLimit%', (string)$this->copySubtreeLimit)
+                    ->setParameter(
+                        '%currentLimit%',
+                        (string)$this->configResolver->getParameter('subtree_operations.copy_subtree.limit')
+                    )
                     ->addViolation();
             }
         } catch (InvalidArgumentException $e) {
