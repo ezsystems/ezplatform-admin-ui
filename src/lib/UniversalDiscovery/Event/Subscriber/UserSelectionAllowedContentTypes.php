@@ -8,20 +8,18 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber;
 
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class UserSelectionAllowedContentTypes implements EventSubscriberInterface
 {
-    /** @var array */
-    private $userContentTypeIdentifier;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    protected $configResolver;
 
-    /**
-     * @param array $userContentTypeIdentifier
-     */
-    public function __construct(array $userContentTypeIdentifier)
+    public function __construct(ConfigResolverInterface $configResolver)
     {
-        $this->userContentTypeIdentifier = $userContentTypeIdentifier;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -45,7 +43,7 @@ class UserSelectionAllowedContentTypes implements EventSubscriberInterface
             return;
         }
 
-        $config['allowed_content_types'] = $this->userContentTypeIdentifier;
+        $config['allowed_content_types'] = $this->configResolver->getParameter('user_content_type_identifier');
 
         $event->setConfig($config);
     }
