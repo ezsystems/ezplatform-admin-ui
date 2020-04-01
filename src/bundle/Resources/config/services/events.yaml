@@ -47,7 +47,3 @@ services:
     EzSystems\EzPlatformAdminUi\EventListener\ViewTemplatesListener:
         tags:
             - { name: kernel.event_subscriber }
-        calls:
-            - [setViewTemplate, ['EzSystems\EzPlatformContentForms\User\View\UserCreateView', "$user_edit.templates.create$"]]
-            - [setViewTemplate, ['EzSystems\EzPlatformContentForms\User\View\UserUpdateView', "$user_edit.templates.update$"]]
-            - [setPagelayout, ["$pagelayout$"]]

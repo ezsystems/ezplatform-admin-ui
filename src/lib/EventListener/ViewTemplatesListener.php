@@ -8,8 +8,11 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\EventListener;
 
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
+use EzSystems\EzPlatformContentForms\User\View\UserCreateView;
+use EzSystems\EzPlatformContentForms\User\View\UserUpdateView;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -17,29 +20,17 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class ViewTemplatesListener implements EventSubscriberInterface
 {
-    /**
-     * Hash of [View type FQN] => template.
-     *
-     * @var array
-     */
-    protected $viewTemplates;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /** @var string */
-    protected $pagelayout;
+    public function __construct(ConfigResolverInterface $configResolver)
+    {
+        $this->configResolver = $configResolver;
+    }
 
     public static function getSubscribedEvents(): array
     {
         return [MVCEvents::PRE_CONTENT_VIEW => 'setViewTemplates'];
-    }
-
-    public function setViewTemplate(string $viewClass, string $template): void
-    {
-        $this->viewTemplates[$viewClass] = $template;
-    }
-
-    public function setPagelayout(string $pagelayout): void
-    {
-        $this->pagelayout = $pagelayout;
     }
 
     /**
@@ -49,13 +40,25 @@ class ViewTemplatesListener implements EventSubscriberInterface
     public function setViewTemplates(PreContentViewEvent $event): void
     {
         $view = $event->getContentView();
+        $pagelayout = $this->configResolver->getParameter('pagelayout');
 
-        foreach ($this->viewTemplates as $viewClass => $template) {
+        foreach ($this->getTemplatesMap() as $viewClass => $template) {
             if ($view instanceof $viewClass) {
                 $view->setTemplateIdentifier($template);
-                $view->addParameters(['pagelayout' => $this->pagelayout]);
-                $view->addParameters(['page_layout' => $this->pagelayout]);
+                $view->addParameters(['pagelayout' => $pagelayout]);
+                $view->addParameters(['page_layout' => $pagelayout]);
             }
         }
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getTemplatesMap(): array
+    {
+        return [
+            UserCreateView::class => $this->configResolver->getParameter('user_edit.templates.create'),
+            UserUpdateView::class => $this->configResolver->getParameter('user_edit.templates.update'),
+        ];
     }
 }
