@@ -26,8 +26,14 @@ services:
             - '@eZ\Bundle\EzPublishCoreBundle\Matcher\ViewMatcherRegistry'
             - '@ezpublish.api.repository'
             - 'eZ\Publish\Core\MVC\Symfony\Matcher\ContentBased'
-        calls:
-            - [setMatchConfig, ['$content_translate_view$']]
+
+    ezpublish.content_translate.matcher_factory.dynamically_configured:
+        class: eZ\Publish\Core\MVC\Symfony\Matcher\DynamicallyConfiguredMatcherFactoryDecorator
+        decorates: ezplatform.admin_ui.view.content_translate.matcher_factory
+        arguments:
+            $innerConfigurableMatcherFactory: '@ezpublish.content_view.matcher_factory.dynamically_configured.inner'
+            $configResolver: '@ezpublish.config.resolver'
+            $parameterName: content_translate_view
 
     EzSystems\EzPlatformAdminUi\View\Filter\ContentTranslateViewFilter:
         tags:
