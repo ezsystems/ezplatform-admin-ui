@@ -27,8 +27,8 @@
         <note>key: authentication.credentials_expired</note>
       </trans-unit>
       <trans-unit id="be4c13cda3e93a1e8cb05145c0dc6c3780c40c66" resname="authentication.credentials_expired.message">
-        <source>For security reasons, your password has expired and needs to be changed. An email has been sent to you with instructions.</source>
-        <target state="new">For security reasons, your password has expired and needs to be changed. An email has been sent to you with instructions.</target>
+        <source>Your password has expired and must be changed. You will receive an email with instructions how to reset your password.</source>
+        <target state="new">Your password has expired and must be changed. You will receive an email with instructions how to reset your password.</target>
         <note>key: authentication.credentials_expired.message</note>
       </trans-unit>
       <trans-unit id="2b3f00f63c14c6dc9300d54b42159218f6b5f260" resname="authentication.credentials_expired.reset_password">
