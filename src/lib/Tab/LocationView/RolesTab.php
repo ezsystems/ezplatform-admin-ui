@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUserGroup;
 use EzSystems\EzPlatformAdminUi\Specification\OrSpecification;
@@ -29,39 +30,25 @@ class RolesTab extends AbstractEventDispatchingTab implements OrderedTabInterfac
     /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
     protected $datasetFactory;
 
-    /** @var array */
-    private $userContentTypeIdentifier;
-
-    /** @var array */
-    private $userGroupContentTypeIdentifier;
-
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
-     * @param array $userContentTypeIdentifier
-     * @param array $userGroupContentTypeIdentifier
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     */
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    protected $configResolver;
+
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         DatasetFactory $datasetFactory,
-        array $userContentTypeIdentifier,
-        array $userGroupContentTypeIdentifier,
         PermissionResolver $permissionResolver,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        ConfigResolverInterface $configResolver
     ) {
         parent::__construct($twig, $translator, $eventDispatcher);
 
         $this->datasetFactory = $datasetFactory;
-        $this->userContentTypeIdentifier = $userContentTypeIdentifier;
-        $this->userGroupContentTypeIdentifier = $userGroupContentTypeIdentifier;
         $this->permissionResolver = $permissionResolver;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -110,8 +97,8 @@ class RolesTab extends AbstractEventDispatchingTab implements OrderedTabInterfac
         /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $parameters['contentType'];
 
-        $isUser = new ContentTypeIsUser($this->userContentTypeIdentifier);
-        $isUserGroup = new ContentTypeIsUserGroup($this->userGroupContentTypeIdentifier);
+        $isUser = new ContentTypeIsUser($this->configResolver->getParameter('user_content_type_identifier'));
+        $isUserGroup = new ContentTypeIsUserGroup($this->configResolver->getParameter('user_group_content_type_identifier'));
         $isUserOrUserGroup = (new OrSpecification($isUser, $isUserGroup))->isSatisfiedBy($contentType);
 
         return $isUserOrUserGroup;

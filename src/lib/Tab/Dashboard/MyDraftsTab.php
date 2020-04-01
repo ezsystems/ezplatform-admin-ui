@@ -10,8 +10,8 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\ContentDraftAdapter;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
@@ -32,9 +32,6 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
-    /** @var \eZ\Publish\API\Repository\LocationService */
-    private $locationService;
-
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;
 
@@ -44,40 +41,27 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
     /** @var \Symfony\Component\HttpFoundation\RequestStack */
     private $requestStack;
 
-    /** @var int */
-    private $defaultPaginationLimit;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\API\Repository\ContentService $contentService
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \eZ\Publish\API\Repository\LocationService $locationService
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
-     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-     * @param int $defaultPaginationLimit
-     */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         ContentService $contentService,
         ContentTypeService $contentTypeService,
-        LocationService $locationService,
         PermissionResolver $permissionResolver,
         DatasetFactory $datasetFactory,
         RequestStack $requestStack,
-        int $defaultPaginationLimit
+        ConfigResolverInterface $configResolver
     ) {
         parent::__construct($twig, $translator);
 
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
-        $this->locationService = $locationService;
         $this->permissionResolver = $permissionResolver;
         $this->datasetFactory = $datasetFactory;
         $this->requestStack = $requestStack;
-        $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -138,7 +122,7 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
         $pagination = new Pagerfanta(
             new ContentDraftAdapter($this->contentService, $this->datasetFactory)
         );
-        $pagination->setMaxPerPage($this->defaultPaginationLimit);
+        $pagination->setMaxPerPage($this->configResolver->getParameter('pagination.content_draft_limit'));
         $pagination->setCurrentPage(min(max($currentPage, 1), $pagination->getNbPages()));
 
         return $this->twig->render('@ezdesign/ui/dashboard/tab/my_draft_list.html.twig', [
