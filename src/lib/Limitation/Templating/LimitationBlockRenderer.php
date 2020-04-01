@@ -4,9 +4,12 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace EzSystems\EzPlatformAdminUi\Limitation\Templating;
 
 use eZ\Publish\API\Repository\Values\User\Limitation;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Exception\MissingLimitationBlockException;
 use EzSystems\EzPlatformAdminUi\Exception\ValueMapperNotFoundException;
 use EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistryInterface;
@@ -17,29 +20,23 @@ class LimitationBlockRenderer implements LimitationBlockRendererInterface
     const LIMITATION_VALUE_BLOCK_NAME = 'ez_limitation_%s_value';
     const LIMITATION_VALUE_BLOCK_NAME_FALLBACK = 'ez_limitation_value_fallback';
 
-    /**
-     * @var LimitationValueMapperRegistryInterface
-     */
+    /** @var LimitationValueMapperRegistryInterface */
     private $valueMapperRegistry;
 
-    /**
-     * @var \Twig\Environment
-     */
+    /** @var \Twig\Environment */
     private $twig;
 
-    /**
-     * @var array
-     */
-    private $limitationValueResources = [];
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /**
-     * @param LimitationValueMapperRegistryInterface $valueMapperRegistry
-     * @param \Twig\Environment $twig
-     */
-    public function __construct(LimitationValueMapperRegistryInterface $valueMapperRegistry, Environment $twig)
-    {
+    public function __construct(
+        LimitationValueMapperRegistryInterface $valueMapperRegistry,
+        Environment $twig,
+        ConfigResolverInterface $configResolver
+    ) {
         $this->valueMapperRegistry = $valueMapperRegistry;
         $this->twig = $twig;
+        $this->configResolver = $configResolver;
     }
 
     public function renderLimitationValue(Limitation $limitation, array $parameters = [])
@@ -64,15 +61,6 @@ class LimitationBlockRenderer implements LimitationBlockRendererInterface
         }
 
         return $template->renderBlock($blockName, $parameters);
-    }
-
-    public function setLimitationValueResources(array $resources)
-    {
-        usort($resources, function ($a, $b) {
-            return $b['priority'] - $a['priority'];
-        });
-
-        $this->limitationValueResources = array_column($resources, 'template');
     }
 
     /**
@@ -107,7 +95,7 @@ class LimitationBlockRenderer implements LimitationBlockRendererInterface
             }
         }
 
-        foreach ($this->limitationValueResources as &$template) {
+        foreach ($this->getLimitationValueResources() as &$template) {
             if (is_string($template)) {
                 // Load the template if it is necessary
                 $template = $this->twig->load($template);
@@ -159,5 +147,16 @@ class LimitationBlockRenderer implements LimitationBlockRendererInterface
         ];
 
         return $parameters;
+    }
+
+    private function getLimitationValueResources(): array
+    {
+        $resources = $this->configResolver->getParameter('limitation_value_templates');
+
+        usort($resources, function ($a, $b) {
+            return $b['priority'] - $a['priority'];
+        });
+
+        return array_column($resources, 'template');
     }
 }

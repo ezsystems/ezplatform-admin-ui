@@ -35,7 +35,6 @@ services:
 
     EzSystems\EzPlatformAdminUi\Limitation\Templating\LimitationBlockRenderer:
         arguments:
-            - '@ezplatform.content_forms.limitation_value_mapper.registry'
-            - '@twig'
-        calls:
-            - ['setLimitationValueResources', [ '$limitation_value_templates$' ]]
+            $valueMapperRegistry: '@ezplatform.content_forms.limitation_value_mapper.registry'
+            $twig: '@twig'
+            $configResolver: '@ezpublish.config.resolver'
