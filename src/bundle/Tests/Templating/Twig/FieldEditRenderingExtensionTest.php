@@ -8,9 +8,11 @@ namespace EzSystems\EzPlatformAdminUiBundle\Tests\Templating\Twig;
 
 use eZ\Publish\Core\MVC\Symfony\Templating\Tests\Twig\Extension\FileSystemTwigIntegrationTestCase;
 use eZ\Publish\Core\MVC\Symfony\Templating\Twig\FieldBlockRenderer;
+use eZ\Publish\Core\MVC\Symfony\Templating\Twig\ResourceProvider;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FieldEditRenderingExtension;
+use Twig\Environment;
 
 class FieldEditRenderingExtensionTest extends FileSystemTwigIntegrationTestCase
 {
@@ -19,9 +21,8 @@ class FieldEditRenderingExtensionTest extends FileSystemTwigIntegrationTestCase
      */
     public function getExtensions(): array
     {
-        $fieldBlockRenderer = new FieldBlockRenderer();
-        $fieldBlockRenderer->setBaseTemplate($this->getTemplatePath('base.html.twig'));
-        $fieldBlockRenderer->setFieldDefinitionEditResources([
+        $resourceProvider = $this->createMock(ResourceProvider::class);
+        $resourceProvider->method('getFieldDefinitionEditResources')->willReturn([
             [
                 'template' => $this->getTemplatePath('fields_override1.html.twig'),
                 'priority' => 10,
@@ -35,6 +36,12 @@ class FieldEditRenderingExtensionTest extends FileSystemTwigIntegrationTestCase
                 'priority' => 20,
             ],
         ]);
+
+        $fieldBlockRenderer = new FieldBlockRenderer(
+            $this->createMock(Environment::class),
+            $resourceProvider,
+            $this->getTemplatePath('base.html.twig')
+        );
 
         return [new FieldEditRenderingExtension($fieldBlockRenderer)];
     }

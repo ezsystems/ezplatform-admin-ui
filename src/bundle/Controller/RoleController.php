@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Role;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCopyData;
@@ -55,19 +56,9 @@ class RoleController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
-    /** @var int */
-    private $defaultPaginationLimit;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
-     * @param \eZ\Publish\API\Repository\RoleService $roleService
-     * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper $roleCreateMapper
-     * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCopyMapper $roleCopyMapper
-     * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper $roleUpdateMapper
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
-     * @param int $defaultPaginationLimit
-     */
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         RoleService $roleService,
@@ -76,7 +67,7 @@ class RoleController extends Controller
         RoleUpdateMapper $roleUpdateMapper,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        int $defaultPaginationLimit
+        ConfigResolverInterface $configResolver
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->roleService = $roleService;
@@ -85,7 +76,7 @@ class RoleController extends Controller
         $this->roleUpdateMapper = $roleUpdateMapper;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
-        $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -103,7 +94,7 @@ class RoleController extends Controller
             new ArrayAdapter($this->roleService->loadRoles())
         );
 
-        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setMaxPerPage($this->configResolver->getParameter('pagination.role_limit'));
         $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
         /** @var \eZ\Publish\API\Repository\Values\User\Role[] $sectionList */

@@ -9,16 +9,14 @@ services:
     EzSystems\EzPlatformAdminUi\Tab\LocationView\RolesTab:
         autowire: true
         arguments:
-            $userContentTypeIdentifier: '$user_content_type_identifier$'
-            $userGroupContentTypeIdentifier: '$user_group_content_type_identifier$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - { name: ezplatform.tab, group: location-view }
 
     EzSystems\EzPlatformAdminUi\Tab\LocationView\PoliciesTab:
         autowire: true
         arguments:
-            $userContentTypeIdentifier: '$user_content_type_identifier$'
-            $userGroupContentTypeIdentifier: '$user_group_content_type_identifier$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - { name: ezplatform.tab, group: location-view }
 
@@ -26,7 +24,7 @@ services:
         public: true
         autowire: true
         arguments:
-            $siteAccessLanguages: '$languages$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - { name: ezplatform.tab, group: location-view }
 

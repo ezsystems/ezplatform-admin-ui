@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
@@ -35,28 +36,21 @@ class ContentDraftController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
-    /** @var int */
-    private $defaultPaginationLimit;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /**
-     * @param \eZ\Publish\API\Repository\ContentService $contentService
-     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
-     * @param int $defaultPaginationLimit
-     */
     public function __construct(
         ContentService $contentService,
         DatasetFactory $datasetFactory,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        int $defaultPaginationLimit
+        ConfigResolverInterface $configResolver
     ) {
         $this->contentService = $contentService;
         $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
-        $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -71,7 +65,7 @@ class ContentDraftController extends Controller
         $pagination = new Pagerfanta(
             new ContentDraftAdapter($this->contentService, $this->datasetFactory)
         );
-        $pagination->setMaxPerPage($this->defaultPaginationLimit);
+        $pagination->setMaxPerPage($this->configResolver->getParameter('pagination.content_draft_limit'));
         $pagination->setCurrentPage(min($currentPage, $pagination->getNbPages()));
 
         $removeContentDraftForm = $this->formFactory->removeContentDraft(

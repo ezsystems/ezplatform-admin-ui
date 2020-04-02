@@ -7,7 +7,6 @@
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions as ApiException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
@@ -18,6 +17,7 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
 use eZ\Publish\Core\Helper\TranslationHelper;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Limitation\Target;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
@@ -80,26 +80,9 @@ class ContentController extends Controller
     /** @var \eZ\Publish\Core\Helper\TranslationHelper */
     private $translationHelper;
 
-    /** @var array */
-    private $userContentTypeIdentifier;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    private $contentTypeService;
-
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
-     * @param \eZ\Publish\API\Repository\ContentService $contentService
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
-     * @param \EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper $contentMetadataUpdateMapper
-     * @param \EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface $siteaccessResolver
-     * @param \eZ\Publish\API\Repository\LocationService $locationService
-     * @param \eZ\Publish\API\Repository\UserService $userService
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer $lookupLimitationsTransformer
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param array $userContentTypeIdentifier
-     */
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         ContentService $contentService,
@@ -112,8 +95,7 @@ class ContentController extends Controller
         PermissionResolver $permissionResolver,
         LookupLimitationsTransformer $lookupLimitationsTransformer,
         TranslationHelper $translationHelper,
-        ContentTypeService $contentTypeService,
-        array $userContentTypeIdentifier
+        ConfigResolverInterface $configResolver
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->contentService = $contentService;
@@ -123,11 +105,10 @@ class ContentController extends Controller
         $this->siteaccessResolver = $siteaccessResolver;
         $this->locationService = $locationService;
         $this->userService = $userService;
-        $this->userContentTypeIdentifier = $userContentTypeIdentifier;
         $this->permissionResolver = $permissionResolver;
         $this->translationHelper = $translationHelper;
         $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
-        $this->contentTypeService = $contentTypeService;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -153,7 +134,7 @@ class ContentController extends Controller
                 $language = $data->getLanguage();
                 $parentLocation = $data->getParentLocation();
 
-                if ((new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType)) {
+                if ((new ContentTypeIsUser($this->configResolver->getParameter('user_content_type_identifier')))->isSatisfiedBy($contentType)) {
                     return $this->redirectToRoute('ezplatform.user.create', [
                         'contentTypeIdentifier' => $contentType->identifier,
                         'language' => $language->languageCode,

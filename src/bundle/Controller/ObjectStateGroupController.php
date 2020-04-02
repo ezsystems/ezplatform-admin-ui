@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ObjectStateService;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupDeleteData;
@@ -35,28 +36,21 @@ class ObjectStateGroupController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
-    /** @var array */
-    private $languages;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
-     * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
-     * @param array $languages
-     */
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         ObjectStateService $objectStateService,
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
-        array $languages
+        ConfigResolverInterface $configResolver
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->objectStateService = $objectStateService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
-        $this->languages = $languages;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -110,7 +104,8 @@ class ObjectStateGroupController extends Controller
     public function addAction(Request $request): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
-        $defaultLanguageCode = reset($this->languages);
+        $languages = $this->configResolver->getParameter('languages');
+        $defaultLanguageCode = reset($languages);
 
         $form = $this->formFactory->createObjectStateGroup(
             new ObjectStateGroupCreateData()

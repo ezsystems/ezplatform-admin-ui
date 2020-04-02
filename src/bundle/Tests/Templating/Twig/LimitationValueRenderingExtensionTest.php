@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Tests\Templating\Twig;
 
 use Exception;
 use eZ\Publish\API\Repository\Values\User\Limitation;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Templating\Tests\Twig\Extension\FileSystemTwigIntegrationTestCase;
 use EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperInterface;
 use EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistryInterface;
@@ -27,23 +28,9 @@ class LimitationValueRenderingExtensionTest extends FileSystemTwigIntegrationTes
     {
         $limitationBlockRenderer = new LimitationBlockRenderer(
             $this->createLimitationValueMapperRegistryMock(),
-            $twig
+            $twig,
+            $this->createConfigResolverMock()
         );
-
-        $limitationBlockRenderer->setLimitationValueResources([
-            [
-                'template' => 'templates/limitation_value_1.html.twig',
-                'priority' => 10,
-            ],
-            [
-                'template' => 'templates/limitation_value_2.html.twig',
-                'priority' => 0,
-            ],
-            [
-                'template' => 'templates/limitation_value_3.html.twig',
-                'priority' => 20,
-            ],
-        ]);
 
         return [
             new LimitationValueRenderingExtension($limitationBlockRenderer),
@@ -177,5 +164,29 @@ class LimitationValueRenderingExtensionTest extends FileSystemTwigIntegrationTes
     protected function getFixturesDir()
     {
         return __DIR__ . '/_fixtures/ez_render_limitation_value/';
+    }
+
+    private function createConfigResolverMock(): ConfigResolverInterface
+    {
+        $mock = $this->createMock(ConfigResolverInterface::class);
+        $mock
+            ->method('getParameter')
+            ->willReturn([
+                [
+                    'template' => 'templates/limitation_value_1.html.twig',
+                    'priority' => 10,
+                ],
+                [
+                    'template' => 'templates/limitation_value_2.html.twig',
+                    'priority' => 0,
+                ],
+                [
+                    'template' => 'templates/limitation_value_3.html.twig',
+                    'priority' => 20,
+                ],
+            ])
+        ;
+
+        return $mock;
     }
 }

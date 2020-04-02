@@ -17,7 +17,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber\UserSelectionAllowedContentTypes:
         arguments:
-            $userContentTypeIdentifier: '$user_content_type_identifier$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - { name: kernel.event_subscriber }
 

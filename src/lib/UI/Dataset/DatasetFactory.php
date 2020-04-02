@@ -17,6 +17,7 @@ use eZ\Publish\API\Repository\ObjectStateService;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\URLAliasService;
 use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 
 class DatasetFactory
@@ -51,26 +52,9 @@ class DatasetFactory
     /** @var \eZ\Publish\API\Repository\BookmarkService */
     private $bookmarkService;
 
-    /** @var array */
-    private $userContentTypeIdentifier;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /** @var array */
-    private $userGroupContentTypeIdentifier;
-
-    /**
-     * @param \eZ\Publish\API\Repository\ContentService $contentService
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \eZ\Publish\API\Repository\LanguageService $languageService
-     * @param \eZ\Publish\API\Repository\LocationService $locationService
-     * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
-     * @param \eZ\Publish\API\Repository\URLAliasService $urlAliasService
-     * @param \eZ\Publish\API\Repository\RoleService $roleService
-     * @param \eZ\Publish\API\Repository\UserService $userService
-     * @param \eZ\Publish\API\Repository\BookmarkService $bookmarkService
-     * @param \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory $valueFactory
-     * @param array $userContentTypeIdentifier
-     * @param array $userGroupContentTypeIdentifier
-     */
     public function __construct(
         ContentService $contentService,
         ContentTypeService $contentTypeService,
@@ -82,8 +66,7 @@ class DatasetFactory
         UserService $userService,
         BookmarkService $bookmarkService,
         ValueFactory $valueFactory,
-        array $userContentTypeIdentifier,
-        array $userGroupContentTypeIdentifier
+        ConfigResolverInterface $configResolver
     ) {
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
@@ -95,8 +78,7 @@ class DatasetFactory
         $this->userService = $userService;
         $this->bookmarkService = $bookmarkService;
         $this->valueFactory = $valueFactory;
-        $this->userContentTypeIdentifier = $userContentTypeIdentifier;
-        $this->userGroupContentTypeIdentifier = $userGroupContentTypeIdentifier;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -182,8 +164,8 @@ class DatasetFactory
             $this->contentTypeService,
             $this->userService,
             $this->valueFactory,
-            $this->userContentTypeIdentifier,
-            $this->userGroupContentTypeIdentifier
+            $this->configResolver->getParameter('user_content_type_identifier'),
+            $this->configResolver->getParameter('user_group_content_type_identifier')
         );
     }
 
@@ -198,8 +180,8 @@ class DatasetFactory
             $this->contentTypeService,
             $this->userService,
             $this->valueFactory,
-            $this->userContentTypeIdentifier,
-            $this->userGroupContentTypeIdentifier
+            $this->configResolver->getParameter('user_content_type_identifier'),
+            $this->configResolver->getParameter('user_group_content_type_identifier')
         );
     }
 

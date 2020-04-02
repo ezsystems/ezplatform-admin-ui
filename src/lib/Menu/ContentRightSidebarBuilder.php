@@ -8,9 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
-use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -30,7 +27,6 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Location View contextual sidebar menu.
@@ -59,32 +55,14 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var \EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver */
     private $udwConfigResolver;
 
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    private $contentTypeService;
-
     /** @var \eZ\Publish\API\Repository\SearchService */
     private $searchService;
 
     /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
     private $udwExtension;
 
-    /** @var \eZ\Publish\API\Repository\ContentService */
-    private $contentService;
-
-    /** @var \eZ\Publish\API\Repository\LocationService */
-    private $locationService;
-
     /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
     private $permissionChecker;
-
-    /** @var array */
-    private $userContentTypeIdentifier;
-
-    /** @var array */
-    private $userGroupContentTypeIdentifier;
-
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
-    private $translator;
 
     public function __construct(
         MenuItemFactory $factory,
@@ -92,30 +70,18 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         PermissionResolver $permissionResolver,
         ConfigResolver $udwConfigResolver,
         ConfigResolverInterface $configResolver,
-        ContentTypeService $contentTypeService,
         SearchService $searchService,
         UniversalDiscoveryExtension $udwExtension,
-        ContentService $contentService,
-        LocationService $locationService,
-        PermissionCheckerInterface $permissionChecker,
-        TranslatorInterface $translator,
-        array $userContentTypeIdentifier,
-        array $userGroupContentTypeIdentifier
+        PermissionCheckerInterface $permissionChecker
     ) {
         parent::__construct($factory, $eventDispatcher);
 
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
         $this->udwConfigResolver = $udwConfigResolver;
-        $this->contentTypeService = $contentTypeService;
         $this->searchService = $searchService;
         $this->udwExtension = $udwExtension;
-        $this->contentService = $contentService;
-        $this->locationService = $locationService;
         $this->permissionChecker = $permissionChecker;
-        $this->translator = $translator;
-        $this->userContentTypeIdentifier = $userContentTypeIdentifier;
-        $this->userGroupContentTypeIdentifier = $userGroupContentTypeIdentifier;
     }
 
     /**
@@ -196,8 +162,10 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $this->searchService
         ))->and((new IsRoot())->not())->isSatisfiedBy($location);
 
-        $contentIsUser = (new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType);
-        $contentIsUserGroup = (new ContentTypeIsUserGroup($this->userGroupContentTypeIdentifier))->isSatisfiedBy($contentType);
+        $contentIsUser = (new ContentTypeIsUser($this->configResolver->getParameter('user_content_type_identifier')))
+            ->isSatisfiedBy($contentType);
+        $contentIsUserGroup = (new ContentTypeIsUserGroup($this->configResolver->getParameter('user_group_content_type_identifier')))
+            ->isSatisfiedBy($contentType);
 
         $menu->setChildren([
             self::ITEM__CREATE => $this->createMenuItem(

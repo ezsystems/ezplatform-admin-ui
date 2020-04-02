@@ -10,17 +10,16 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchHitAdapter;
 use eZ\Publish\Core\QueryType\QueryType;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Search\PagerSearchContentToDataMapper;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SearchController extends Controller
 {
@@ -30,14 +29,8 @@ class SearchController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\Search\PagerSearchContentToDataMapper */
     private $pagerSearchContentToDataMapper;
 
-    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
-    private $urlGenerator;
-
     /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
-
-    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
-    private $submitHandler;
 
     /** @var \eZ\Publish\API\Repository\SectionService */
     private $sectionService;
@@ -48,46 +41,25 @@ class SearchController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\QueryType\SearchQueryType */
     private $searchQueryType;
 
-    /** @var int */
-    private $defaultPaginationLimit;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /** @var array */
-    private $userContentTypeIdentifier;
-
-    /**
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param \EzSystems\EzPlatformAdminUi\Search\PagerSearchContentToDataMapper $pagerSearchContentToDataMapper
-     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
-     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
-     * @param \eZ\Publish\API\Repository\SectionService $sectionService
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \eZ\Publish\Core\QueryType\QueryType $searchQueryType
-     * @param int $defaultPaginationLimit
-     * @param array $userContentTypeIdentifier
-     */
     public function __construct(
         SearchService $searchService,
         PagerSearchContentToDataMapper $pagerSearchContentToDataMapper,
-        UrlGeneratorInterface $urlGenerator,
         FormFactory $formFactory,
-        SubmitHandler $submitHandler,
         SectionService $sectionService,
         ContentTypeService $contentTypeService,
         QueryType $searchQueryType,
-        int $defaultPaginationLimit,
-        array $userContentTypeIdentifier
+        ConfigResolverInterface $configResolver
     ) {
         $this->searchService = $searchService;
         $this->pagerSearchContentToDataMapper = $pagerSearchContentToDataMapper;
-        $this->urlGenerator = $urlGenerator;
         $this->formFactory = $formFactory;
-        $this->submitHandler = $submitHandler;
         $this->sectionService = $sectionService;
         $this->contentTypeService = $contentTypeService;
         $this->searchQueryType = $searchQueryType;
-        $this->defaultPaginationLimit = $defaultPaginationLimit;
-        $this->userContentTypeIdentifier = $userContentTypeIdentifier;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -104,7 +76,7 @@ class SearchController extends Controller
     public function searchAction(Request $request): Response
     {
         $search = $request->query->get('search');
-        $limit = $search['limit'] ?? $this->defaultPaginationLimit;
+        $limit = $search['limit'] ?? $this->configResolver->getParameter('pagination.search_limit');
         $page = $search['page'] ?? 1;
         $query = $search['query'];
         $section = null;
@@ -173,13 +145,13 @@ class SearchController extends Controller
                 'form' => $form->createView(),
                 'pager' => $pagerfanta,
                 'form_edit' => $editForm->createView(),
-                'user_content_type_identifier' => $this->userContentTypeIdentifier,
+                'user_content_type_identifier' => $this->configResolver->getParameter('user_content_type_identifier'),
             ]);
         }
 
         return $this->render('@ezdesign/ui/search/index.html.twig', [
             'form' => $form->createView(),
-            'user_content_type_identifier' => $this->userContentTypeIdentifier,
+            'user_content_type_identifier' => $this->configResolver->getParameter('user_content_type_identifier'),
         ]);
     }
 

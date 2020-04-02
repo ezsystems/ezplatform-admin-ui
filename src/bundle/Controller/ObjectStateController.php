@@ -13,6 +13,7 @@ use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateCreateData;
@@ -47,32 +48,23 @@ class ObjectStateController extends Controller
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /** @var array */
-    private $languages;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
-     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
-     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param array $languages
-     */
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         ObjectStateService $objectStateService,
         FormFactoryInterface $formFactory,
         SubmitHandler $submitHandler,
         PermissionResolver $permissionResolver,
-        array $languages
+        ConfigResolverInterface $configResolver
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->objectStateService = $objectStateService;
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
         $this->permissionResolver = $permissionResolver;
-        $this->languages = $languages;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -134,7 +126,8 @@ class ObjectStateController extends Controller
     public function addAction(Request $request, ObjectStateGroup $objectStateGroup): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('state', 'administrate'));
-        $defaultLanguageCode = reset($this->languages);
+        $languages = $this->configResolver->getParameter('languages');
+        $defaultLanguageCode = reset($languages);
 
         $form = $this->formFactory->create(
             ObjectStateCreateType::class,

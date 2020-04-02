@@ -3,7 +3,7 @@ services:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         public: false
         arguments:
-            $defaultPaginationLimit: '$pagination.content_draft_limit$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 

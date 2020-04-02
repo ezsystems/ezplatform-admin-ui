@@ -15,6 +15,7 @@ use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
 use eZ\Publish\Core\Helper\TranslationHelper;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node;
 
@@ -29,46 +30,17 @@ final class NodeFactory
     /** @var \eZ\Publish\Core\Helper\TranslationHelper */
     private $translationHelper;
 
-    /** @var int */
-    private $displayLimit;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
-    /** @var int */
-    private $childrenLoadMaxLimit;
-
-    /** @var int */
-    private $maxDepth;
-
-    /** @var string[] */
-    private $allowedContentTypes;
-
-    /** @var string[] */
-    private $ignoredContentTypes;
-
-    /**
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
-     * @param int $displayLimit
-     * @param int $childrenLoadMaxLimit
-     * @param int $maxDepth
-     * @param array $allowedContentTypes
-     * @param array $ignoredContentTypes
-     */
     public function __construct(
         SearchService $searchService,
         TranslationHelper $translationHelper,
-        int $displayLimit = 20,
-        int $childrenLoadMaxLimit = 100,
-        int $maxDepth = 10,
-        array $allowedContentTypes = [],
-        array $ignoredContentTypes = []
+        ConfigResolverInterface $configResolver
     ) {
         $this->searchService = $searchService;
         $this->translationHelper = $translationHelper;
-        $this->displayLimit = $displayLimit;
-        $this->childrenLoadMaxLimit = $childrenLoadMaxLimit;
-        $this->maxDepth = $maxDepth;
-        $this->allowedContentTypes = $allowedContentTypes;
-        $this->ignoredContentTypes = $ignoredContentTypes;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -102,7 +74,7 @@ final class NodeFactory
             : 0;
 
         $children = [];
-        if ($depth < $this->maxDepth && $loadChildren) {
+        if ($depth < $this->getSetting('tree_max_depth') && $loadChildren) {
             $searchResult = $this->findSubitems($location, $limit, $offset);
             $totalChildrenCount = $searchResult->totalCount;
 
@@ -144,14 +116,14 @@ final class NodeFactory
      */
     private function resolveLoadLimit(?LoadSubtreeRequestNode $loadSubtreeRequestNode): int
     {
-        $limit = $this->displayLimit;
+        $limit = $this->getSetting('load_more_limit');
 
         if (null !== $loadSubtreeRequestNode) {
             $limit = $loadSubtreeRequestNode->limit;
         }
 
-        if ($limit > $this->childrenLoadMaxLimit) {
-            $limit = $this->childrenLoadMaxLimit;
+        if ($limit > $this->getSetting('children_load_max_limit')) {
+            $limit = $this->getSetting('children_load_max_limit');
         }
 
         return $limit;
@@ -194,13 +166,13 @@ final class NodeFactory
 
         $contentTypeCriterion = null;
 
-        if (!empty($this->allowedContentTypes)) {
-            $contentTypeCriterion = new Criterion\ContentTypeIdentifier($this->allowedContentTypes);
+        if (!empty($this->getSetting('allowed_content_types'))) {
+            $contentTypeCriterion = new Criterion\ContentTypeIdentifier($this->getSetting('allowed_content_types'));
         }
 
-        if (empty($this->allowedContentTypes) && !empty($this->ignoredContentTypes)) {
+        if (empty($this->allowedContentTypes) && !empty($this->getSetting('ignored_content_types'))) {
             $contentTypeCriterion = new Criterion\LogicalNot(
-                new Criterion\ContentTypeIdentifier($this->ignoredContentTypes)
+                new Criterion\ContentTypeIdentifier($this->getSetting('ignored_content_types'))
             );
         }
 
@@ -244,5 +216,10 @@ final class NodeFactory
         $searchQuery->performCount = true;
 
         return $this->searchService->findLocations($searchQuery)->totalCount;
+    }
+
+    private function getSetting(string $name)
+    {
+        return $this->configResolver->getParameter("content_tree_module.$name");
     }
 }

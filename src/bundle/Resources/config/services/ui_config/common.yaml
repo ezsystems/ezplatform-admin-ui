@@ -29,18 +29,20 @@ services:
             - { name: ezplatform.admin_ui.config_provider, key: 'sortOrderMappings' }
 
     ezsystems.ezplatform_admin_ui.ui.config.provider.image_variations:
-        class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\Value
+        class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\ScopeParameterBasedValue
         lazy: true
         arguments:
-            $value: '$image_variations$'
+            $configResolver: '@ezpublish.config.resolver'
+            $parameterName: 'image_variations'
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'imageVariations' }
 
     ezsystems.ezplatform_admin_ui.ui.config.provider.content_edit_form_templates:
-        class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\Value
+        class: EzSystems\EzPlatformAdminUi\UI\Config\Provider\ScopeParameterBasedValue
         lazy: true
         arguments:
-            $value: '$admin_ui_forms.content_edit_form_templates$'
+            $configResolver: '@ezpublish.config.resolver'
+            $parameterName: 'admin_ui_forms.content_edit_form_templates'
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'contentEditFormTemplates' }
 

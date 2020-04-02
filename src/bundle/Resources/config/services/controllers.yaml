@@ -13,7 +13,7 @@ services:
         arguments:
             $siteaccessResolver: '@EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver'
             $translationHelper: '@ezpublish.translation_helper'
-            $userContentTypeIdentifier: '$user_content_type_identifier$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -26,7 +26,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $userContentTypeIdentifiers: '$user_content_type_identifier$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -41,8 +41,7 @@ services:
         autowire: true
         arguments:
             $contentTypeActionDispatcher: '@EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentTypeDispatcher'
-            $languages: '$languages$'
-            $defaultPaginationLimit: '$pagination.content_type_limit$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -50,7 +49,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $defaultPaginationLimit: '$pagination.content_type_group_limit$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -60,8 +59,7 @@ services:
         lazy: true
         arguments:
             $searchQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\SearchQueryType'
-            $defaultPaginationLimit: '$pagination.search_limit$'
-            $userContentTypeIdentifier: '$user_content_type_identifier$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -75,7 +73,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $defaultPaginationLimit: '$pagination.trash_limit$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -83,7 +81,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $defaultPaginationLimit: '$pagination.section_limit$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -91,7 +89,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $defaultPaginationLimit: '$pagination.language_limit$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -99,7 +97,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $defaultPaginationLimit: '$pagination.role_limit$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -107,7 +105,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $defaultPaginationLimit: '$pagination.role_assignment_limit$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -115,7 +113,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $defaultPaginationLimit: '$pagination.policy_limit$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -123,7 +121,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $languages: '$languages$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -131,7 +129,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $languages: '$languages$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -145,7 +143,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $defaultPaginationLimit: '$pagination.bookmark_limit$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -159,7 +157,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $notificationPaginationLimit: '$pagination.notification_limit$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
@@ -167,7 +165,7 @@ services:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
-            $defaultPaginationLimit: '$pagination.content_draft_limit$'
+            $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
