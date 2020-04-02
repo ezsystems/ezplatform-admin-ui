@@ -153,8 +153,8 @@ class LimitationBlockRenderer implements LimitationBlockRendererInterface
     {
         $resources = $this->configResolver->getParameter('limitation_value_templates');
 
-        usort($resources, function ($a, $b) {
-            return $b['priority'] - $a['priority'];
+        usort($resources, static function ($a, $b): int {
+            return $b['priority'] <=> $a['priority'];
         });
 
         return array_column($resources, 'template');
