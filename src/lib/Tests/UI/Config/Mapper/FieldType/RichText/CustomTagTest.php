@@ -32,6 +32,7 @@ class CustomTagTest extends TestCase
         $mapper = new CustomTag(
             $customTagsConfiguration,
             $this->getTranslatorMock(),
+            $this->getTranslatorMock(),
             'custom_tags',
             $this->getPackagesMock(),
             new ArrayObject([
