@@ -173,7 +173,8 @@
         toggleDisabledStateOnApplyBtn();
     };
     const getUnixTimestampUTC = (dateObject) => {
-        date = new Date(Date.UTC(dateObject.getFullYear(), dateObject.getMonth(), dateObject.getDate()));
+        let date = new Date(Date.UTC(dateObject.getFullYear(), dateObject.getMonth(), dateObject.getDate()));
+
         date = Math.floor(date.getTime() / 1000);
 
         return date;
@@ -184,7 +185,6 @@
                 identifier: `find-user-by-name-${value}`,
                 public: false,
                 ContentQuery: {
-                    Criteria: {},
                     FacetBuilders: {},
                     SortClauses: {},
                     Query: {

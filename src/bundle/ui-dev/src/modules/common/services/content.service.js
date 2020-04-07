@@ -7,7 +7,6 @@ export const loadContentInfo = (contentIds, callback) => {
             identifier: `subitems-load-content-info-${ids}`,
             public: false,
             ContentQuery: {
-                Criteria: {},
                 FacetBuilders: {},
                 SortClauses: {},
                 Filter: { ContentIdCriterion: `${ids}` },
@@ -36,7 +35,6 @@ export const findContentBySearchQuery = (query, callback) => {
             identifier: `udw-locations-by-search-query-${query}`,
             public: false,
             LocationQuery: {
-                Criteria: {},
                 FacetBuilders: {},
                 SortClauses: {},
                 Filter: { FullTextCriterion: query },

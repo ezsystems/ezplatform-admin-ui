@@ -6,7 +6,6 @@ export const loadLocation = (locationId = 2, limit = 10, offset = 0, callback) =
             identifier: `subitems-load-location-${locationId}`,
             public: false,
             LocationQuery: {
-                Criteria: {},
                 FacetBuilders: {},
                 SortClauses: { LocationPriority: 'ascending' },
                 Filter: { ParentLocationIdCriterion: locationId },
@@ -36,7 +35,6 @@ export const findLocationsByParentLocationId = (parentLocationId, callback) => {
             identifier: `udw-locations-by-parent-location-id-${parentLocationId}`,
             public: false,
             LocationQuery: {
-                Criteria: {},
                 FacetBuilders: {},
                 SortClauses: { SectionIdentifier: 'ascending' },
                 Filter: { ParentLocationIdCriterion: parentLocationId },
