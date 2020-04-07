@@ -3,7 +3,7 @@
     const CLASS_EXPANDED = 'ez-context-menu--expanded';
     const CLASS_ACTIVE_BUTTON = 'ez-btn--active-button';
     const CLASS_PREVENT_SHOW = 'ez-extra-actions--prevent-show';
-    const btns = doc.querySelectorAll('.ez-btn--extra-actions');
+    const btns = [...doc.querySelectorAll('.ez-btn--extra-actions')];
     const menu = doc.querySelector('.bg-secondary.ez-context-menu');
     const haveHiddenPart = (element) => element.classList.contains(CLASS_HIDDEN) && !element.classList.contains(CLASS_PREVENT_SHOW);
 
@@ -20,13 +20,18 @@
                 const focusElement = actions.querySelector(btn.dataset.focusElement);
                 const detectClickOutside = (event) => {
                     const isNotButton = event.target !== btn || !btn.contains(event.target);
+                    const isNotButtons = !btns.includes(event.target);
                     const isNotExtraActions = !event.target.closest('.ez-extra-actions');
                     const isNotCalendar = !event.target.closest('.flatpickr-calendar');
 
                     if (isNotButton && isNotExtraActions && isNotCalendar) {
                         btn.classList.remove(CLASS_ACTIVE_BUTTON);
                         actions.classList.add(CLASS_HIDDEN);
-                        menu.classList.remove(CLASS_EXPANDED);
+
+                        if (isNotButtons) {
+                            menu.classList.remove(CLASS_EXPANDED);
+                        }
+
                         doc.body.removeEventListener('click', detectClickOutside, false);
                     }
                 };
