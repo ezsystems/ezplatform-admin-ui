@@ -136,7 +136,6 @@ export const findLocationsBySearchQuery = ({ token, siteaccess, query, limit = Q
             identifier: `udw-locations-by-search-query-${query.FullTextCriterion}`,
             public: false,
             LocationQuery: {
-                Criteria: {},
                 FacetBuilders: {},
                 SortClauses: {},
                 Query: query,
@@ -173,7 +172,6 @@ export const findLocationsById = ({ token, siteaccess, id, limit = QUERY_LIMIT, 
             identifier: `udw-locations-by-id-${id}`,
             public: false,
             LocationQuery: {
-                Criteria: {},
                 FacetBuilders: {},
                 SortClauses: { SectionIdentifier: 'ascending' },
                 Filter: { LocationIdCriterion: id },
@@ -206,7 +204,6 @@ export const findContentInfo = ({ token, siteaccess, contentId, limit = QUERY_LI
             identifier: `udw-load-content-info-${contentId}`,
             public: false,
             ContentQuery: {
-                Criteria: {},
                 FacetBuilders: {},
                 SortClauses: {},
                 Filter: { ContentIdCriterion: `${contentId}` },
@@ -323,7 +320,6 @@ export const loadContentInfo = ({ token, siteaccess, contentId, limit = QUERY_LI
             identifier: `udw-load-content-info-${contentId}`,
             public: false,
             ContentQuery: {
-                Criteria: {},
                 FacetBuilders: {},
                 SortClauses: {},
                 Filter: { ContentIdCriterion: `${contentId}` },

@@ -9,7 +9,6 @@
                 identifier: `udw-locations-by-path-string-${idList.join('-')}`,
                 public: false,
                 LocationQuery: {
-                    Criteria: {},
                     FacetBuilders: {},
                     SortClauses: { SectionIdentifier: 'ascending' },
                     Filter: { LocationIdCriterion: idList.join(',') },

@@ -52,7 +52,6 @@
                         identifier: `udw-locations-by-path-string-${pathArray.join('-')}`,
                         public: false,
                         LocationQuery: {
-                            Criteria: {},
                             FacetBuilders: {},
                             SortClauses: { SectionIdentifier: 'ascending' },
                             Filter: { LocationIdCriterion: pathArray.join(IDS_SEPARATOR) },
