@@ -401,7 +401,7 @@
 
             links.forEach((link) => {
                 const href = link.getAttribute('href');
-                const schemaPattern = /^[a-z0-9]+:\/\//i;
+                const schemaPattern = /^[a-z0-9]+:\/?\/?/i;
                 const protocolHref = protocolPrefix.concat(href);
 
                 if (!href) {
