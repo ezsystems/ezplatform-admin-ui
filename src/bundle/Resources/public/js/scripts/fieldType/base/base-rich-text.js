@@ -398,11 +398,10 @@
             const links = container.querySelectorAll('a');
             const anchorPrefix = '#';
             const protocolPrefix = 'http://';
-            const restrictedKeywords = ['ezcontent', 'ezlocation'];
 
             links.forEach((link) => {
                 const href = link.getAttribute('href');
-                const protocolPattern = /^https?:\/\//i;
+                const schemaPattern = /^[a-z0-9]+:\/\//i;
                 const protocolHref = protocolPrefix.concat(href);
 
                 if (!href) {
@@ -413,11 +412,7 @@
                     return;
                 }
 
-                if (protocolPattern.test(href)) {
-                    return;
-                }
-
-                if (restrictedKeywords.some((keyword) => href.includes(keyword))) {
+                if (schemaPattern.test(href)) {
                     return;
                 }
 
