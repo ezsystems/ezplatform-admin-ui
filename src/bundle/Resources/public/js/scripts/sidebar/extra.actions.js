@@ -20,7 +20,7 @@
                 const focusElement = actions.querySelector(btn.dataset.focusElement);
                 const detectClickOutside = (event) => {
                     const isNotButton = event.target !== btn || !btn.contains(event.target);
-                    const isNotButtons = !btns.includes(event.target);
+                    const shouldCollapseMenu = !btns.includes(event.target);
                     const isNotExtraActions = !event.target.closest('.ez-extra-actions');
                     const isNotCalendar = !event.target.closest('.flatpickr-calendar');
 
@@ -28,7 +28,7 @@
                         btn.classList.remove(CLASS_ACTIVE_BUTTON);
                         actions.classList.add(CLASS_HIDDEN);
 
-                        if (isNotButtons) {
+                        if (shouldCollapseMenu) {
                             menu.classList.remove(CLASS_EXPANDED);
                         }
 
