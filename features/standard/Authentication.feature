@@ -4,7 +4,9 @@ Feature: Verify that Admin Panel is available only for authenticated users
   Scenario: Should be redirected to Dashboard after successful login
     Given I open Login page
     When I log in as admin with password publish
-    Then I should be on Dashboard page
+    And I go to "Content structure" in "Content" tab
+    And I click on the left menu bar button "Browse"
+    Then I select content root node through UDW
 
   @javascript @common
   Scenario: Should be redirected to Login page from Dashboard when not logged in
