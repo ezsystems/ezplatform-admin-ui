@@ -13,7 +13,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Translation\MessageCatalogueInterface;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorBagInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * UI Config Mapper test for RichText Custom Tags configuration.
@@ -31,8 +32,8 @@ class CustomTagTest extends TestCase
     {
         $mapper = new CustomTag(
             $customTagsConfiguration,
-            $this->getTranslatorMock(),
-            $this->getTranslatorMock(),
+            $this->getTranslatorInterfaceMock(),
+            $this->getTranslatorBagInterfaceMock(),
             'custom_tags',
             $this->getPackagesMock(),
             new ArrayObject([
@@ -164,7 +165,22 @@ class CustomTagTest extends TestCase
     /**
      * @return \Symfony\Component\Translation\TranslatorInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    private function getTranslatorMock(): MockObject
+    private function getTranslatorInterfaceMock(): MockObject
+    {
+        $translatorInterfaceMock = $this->createMock(TranslatorInterface::class);
+        $translatorInterfaceMock
+            ->expects($this->any())
+            ->method('trans')
+            ->withAnyParameters()
+            ->willReturnArgument(0);
+
+        return $translatorInterfaceMock;
+    }
+
+    /**
+     * @return \Symfony\Component\Translation\TranslatorBagInterface|\PHPUnit\Framework\MockObject\MockObject
+     */
+    private function getTranslatorBagInterfaceMock(): MockObject
     {
         $catalogueMock = $this->createMock(MessageCatalogueInterface::class);
         $catalogueMock
@@ -173,21 +189,15 @@ class CustomTagTest extends TestCase
             ->withAnyParameters()
             ->willReturn(false);
 
-        $translatorMock = $this->createMock(Translator::class);
-        $translatorMock
+        $translatorBagMock = $this->createMock(TranslatorBagInterface::class);
+        $translatorBagMock
             ->expects($this->any())
             ->method('getCatalogue')
             ->willReturn(
                 $catalogueMock
             );
 
-        $translatorMock
-            ->expects($this->any())
-            ->method('trans')
-            ->withAnyParameters()
-            ->willReturnArgument(0);
-
-        return $translatorMock;
+        return $translatorBagMock;
     }
 
     /**
