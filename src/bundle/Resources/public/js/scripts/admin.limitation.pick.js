@@ -158,7 +158,10 @@
 
         const limitationBtn = event.currentTarget;
         const input = doc.querySelector(limitationBtn.dataset.locationInputSelector);
-        const selectedLocationsIds = input.value.split(IDS_SEPARATOR).map((idString) => parseInt(idString, 10));
+        const selectedLocationsIds = input.value
+            .split(IDS_SEPARATOR)
+            .filter((idString) => !!idString)
+            .map((idString) => parseInt(idString, 10));
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
         const title = Translator.trans(/*@Desc("Choose Locations")*/ 'subtree_limitation.title', {}, 'universal_discovery_widget');
 
