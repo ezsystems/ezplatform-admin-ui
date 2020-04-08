@@ -446,10 +446,30 @@
         <target>Site / All functions</target>
         <note>key: role.policy.site.all_functions</note>
       </trans-unit>
+      <trans-unit id="fa041654ee2bd9a54a870675fc96399dac830b73" resname="role.policy.site.change_status">
+        <source>Site / Change status</source>
+        <target>Site / Change status</target>
+        <note>key: role.policy.site.change_status</note>
+      </trans-unit>
       <trans-unit id="7974d9702481b771e623dd447d3df7d8e7350e7b" resname="role.policy.site.create">
         <source>Site / Create</source>
         <target>Site / Create</target>
         <note>key: role.policy.site.create</note>
+      </trans-unit>
+      <trans-unit id="45e0983429e1df736d0c26b5b9c62a8f522c5c00" resname="role.policy.site.delete">
+        <source>Site / Delete</source>
+        <target>Site / Delete</target>
+        <note>key: role.policy.site.delete</note>
+      </trans-unit>
+      <trans-unit id="f473815a92d4ec35eeaa54464164aa98119594df" resname="role.policy.site.edit">
+        <source>Site / Edit</source>
+        <target>Site / Edit</target>
+        <note>key: role.policy.site.edit</note>
+      </trans-unit>
+      <trans-unit id="34b7e317be37673c466c03c644176ffb618295a8" resname="role.policy.site.view">
+        <source>Site / View</source>
+        <target>Site / View</target>
+        <note>key: role.policy.site.view</note>
       </trans-unit>
       <trans-unit id="012dce76ef569ba377ffe98ddbee8d3c3d270e15" resname="role.policy.state">
         <source>State</source>
