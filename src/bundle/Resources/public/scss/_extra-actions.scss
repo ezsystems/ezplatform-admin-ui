@@ -121,7 +121,7 @@
 
     &--create {
         #{$block}__content {
-            max-height: 90%;
+            max-height: calc(100% - #{calculateRem(60px)});
             overflow: auto;
         }
 
