@@ -34,11 +34,15 @@ matrix:
       env:
         - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
         - BEHAT_OPTS="--profile=adminui --suite=adminui"
+        - PHP_IMAGE=ezsystems/php:7.1-v1
+        - PHP_IMAGE_DEV=ezsystems/php:7.1-v1-dev
       php: 7.1
     - name: "Admin-UI tests on Clean P (PHP 7.4)"
       env:
         - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
         - BEHAT_OPTS="--profile=adminui --suite=adminui"
+        - PHP_IMAGE=ezsystems/php:7.4-v1
+        - PHP_IMAGE_DEV=ezsystems/php:7.4-v1-dev
       php: 7.4
     - name: "Admin UI tests using different personas"
       env:
