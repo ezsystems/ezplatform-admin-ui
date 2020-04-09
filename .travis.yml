@@ -48,13 +48,6 @@ matrix:
         - BEHAT_OPTS="--profile=adminui --suite=personas"
         - PHP_IMAGE=ezsystems/php:7.3-v1
       php: 7.3
-    - name: "Admin UI tests using different personas (PHP 7.4)"
-      env:
-        - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
-        - SETUP_BEHAT_OPTS="--profile=setup --suite=personas"
-        - BEHAT_OPTS="--profile=adminui --suite=personas"
-        - PHP_IMAGE=ezsystems/php:7.4-v1
-      php: 7.4
 
 notifications:
   slack:
