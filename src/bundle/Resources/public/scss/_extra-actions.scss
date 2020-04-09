@@ -121,7 +121,8 @@
 
     &--create {
         #{$block}__content {
-            max-height: initial;
+            max-height: 90%;
+            overflow: auto;
         }
 
         #{$block}__section-content--content-type {
