@@ -121,7 +121,8 @@
 
     &--create {
         #{$block}__content {
-            max-height: initial;
+            max-height: calc(100% - #{calculateRem(60px)});
+            overflow: auto;
         }
 
         #{$block}__section-content--content-type {
