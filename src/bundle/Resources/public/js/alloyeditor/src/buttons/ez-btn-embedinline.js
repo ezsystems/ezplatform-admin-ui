@@ -34,7 +34,7 @@ eZ.addConfig('ezAlloyEditor.ezBtnEmbedInline', EzBtnEmbedInline);
 EzBtnEmbedInline.defaultProps = {
     command: 'ezembedinline',
     modifiesSelection: true,
-    udwTitle: Translator.trans(/*@Desc("Select a content to embed")*/ 'embed_btn.udw.title', {}, 'alloy_editor'),
+    udwTitle: Translator.trans(/*@Desc("Select a Content item to embed")*/ 'embed_btn.udw.title', {}, 'alloy_editor'),
     udwContentDiscoveredMethod: 'addEmbed',
     udwConfigName: 'richtext_embed',
 };

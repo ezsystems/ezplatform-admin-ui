@@ -121,7 +121,10 @@
             event.preventDefault();
 
             const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-            const title = Translator.trans(/*@Desc("Select content")*/ 'ezobjectrelationlist.title', {}, 'universal_discovery_widget');
+            const limit = parseInt(event.currentTarget.dataset.limit);
+            const title = limit === 1
+                ? Translator.trans(/*@Desc("Select a Content item")*/ 'ezobjectrelationlist.title.single', {}, 'universal_discovery_widget')
+                : Translator.trans(/*@Desc("Select Content item(s)")*/ 'ezobjectrelationlist.title.multi', {}, 'universal_discovery_widget');
 
             ReactDOM.render(
                 React.createElement(
