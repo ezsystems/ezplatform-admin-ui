@@ -36,7 +36,7 @@ class ObjectRelationAllowedContentTypes implements EventSubscriberInterface
         }
 
         if (
-            !isset($context['type'], $context['allowed_content_types'], $config['allowed_content_types'])
+            !isset($context['type'], $context['allowed_content_types'])
             || 'object_relation' !== $context['type']
         ) {
             return;
@@ -54,7 +54,9 @@ class ObjectRelationAllowedContentTypes implements EventSubscriberInterface
                 ? null
                 : $intersection;
         } else {
-            $config['allowed_content_types'] = $context['allowed_content_types'];
+            $config['allowed_content_types'] = empty($context['allowed_content_types'])
+                ? null
+                : $context['allowed_content_types'];
         }
 
         $event->setConfig($config);
