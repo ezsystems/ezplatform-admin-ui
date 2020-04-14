@@ -18,6 +18,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints\Password as NewPassword;
 
+/**
+ * @deprecated use \EzSystems\EzPlatformUser\Form\Type\UserPasswordResetType.
+ */
 class UserPasswordResetType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

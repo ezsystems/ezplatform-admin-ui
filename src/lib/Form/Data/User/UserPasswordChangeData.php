@@ -11,6 +11,10 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data\User;
 use Symfony\Component\Validator\Constraints as Assert;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints as AdminUiAssert;
 
+/**
+ * @deprecated
+ * Use \EzSystems\EzPlatformUser\Form\Data\UserPasswordChangeData.
+ */
 class UserPasswordChangeData
 {
     /**

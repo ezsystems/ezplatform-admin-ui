@@ -10,6 +10,10 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data\User;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @deprecated
+ * Use \EzSystems\EzPlatformUser\Form\Data\UserPasswordForgotWithLoginData.
+ */
 class UserPasswordForgotWithLoginData
 {
     /**

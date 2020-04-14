@@ -8,22 +8,13 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
 
-use Symfony\Component\Validator\Constraint;
-use JMS\TranslationBundle\Model\Message;
-use JMS\TranslationBundle\Translation\TranslationContainerInterface;
+use EzSystems\EzPlatformUser\Validator\Constraints\UserPassword as BaseUserPassword;
 
 /**
  * @Annotation
+ *
+ * @deprecated Use EzSystems\EzPlatformUser\Validator\Constraints\UserPassword instead.
  */
-class UserPassword extends Constraint implements TranslationContainerInterface
+class UserPassword extends BaseUserPassword
 {
-    public $message = 'ezplatform.change_user_password.not_match';
-
-    public static function getTranslationMessages()
-    {
-        return [
-            Message::create('ezplatform.change_user_password.not_match', 'validators')
-                ->setDesc('Incorrect current password.'),
-        ];
-    }
 }

@@ -18,6 +18,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints\Password;
 
+/**
+ * @deprecated use \EzSystems\EzPlatformUser\Form\Type\UserPasswordChangeType.
+ */
 class UserPasswordChangeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

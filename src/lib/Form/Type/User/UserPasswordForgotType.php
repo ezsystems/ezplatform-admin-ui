@@ -15,6 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @deprecated use \EzSystems\EzPlatformUser\Form\Type\UserPasswordForgotType.
+ */
 class UserPasswordForgotType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
