@@ -13,7 +13,7 @@ use EzSystems\EzPlatformUser\Validator\Constraints\UserPassword as BaseUserPassw
 /**
  * @Annotation
  *
- * @deprecated Since eZ Platform 3.0 class moved to EzPlatformUser Bundle. Use it instead.
+ * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformUser Bundle. Use it instead.
  *
  * @see \EzSystems\EzPlatformUser\Validator\Constraints\UserPassword.
  */

@@ -13,7 +13,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator as BasePasswordValidator;
 
 /**
- * @deprecated Since eZ Platform 3.0 class moved to EzPlatformUser Bundle. Use it instead.
+ * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformUser Bundle. Use it instead.
  *
  * @see \EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator.
  */

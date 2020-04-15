@@ -13,7 +13,7 @@ use EzSystems\EzPlatformContentForms\Validator\ValidationErrorsProcessor as Base
 /**
  * @internal
  *
- * @deprecated Since eZ Platform 3.0 class moved to EzPlatformContentForms Bundle.
+ * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformContentForms Bundle.
  *
  * @see \EzSystems\EzPlatformContentForms\Validator\ValidationErrorsProcessor.
  */
