@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import Tab from './components/tab/tab';
 import GridView from './components/grid-view/grid.view';
 import Finder from './components/finder/finder';
+import TreeView from './components/tree-view/tree.view';
 
 import { CurrentViewContext, TabsConfigContext } from './universal.discovery.module';
 
@@ -12,6 +13,7 @@ const BrowseTabModule = () => {
     const views = {
         grid: <GridView itemsPerPage={tabsConfig.browse.itemsPerPage} />,
         finder: <Finder itemsPerPage={tabsConfig.browse.itemsPerPage} />,
+        tree: <TreeView />,
     };
 
     return (

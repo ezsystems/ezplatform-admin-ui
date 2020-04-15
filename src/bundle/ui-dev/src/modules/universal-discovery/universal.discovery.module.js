@@ -38,6 +38,11 @@ export const VIEWS = [
         icon: 'panels',
         tooltipLabel: Translator.trans(/*@Desc("Panels view")*/ 'sorting.panels.view', {}, 'universal_discovery_widget'),
     },
+    {
+        id: 'tree',
+        icon: 'content-tree',
+        tooltipLabel: Translator.trans(/*@Desc("Tree view")*/ 'sorting.tree.view', {}, 'universal_discovery_widget'),
+    },
 ];
 
 const restInfo = {
@@ -384,7 +389,7 @@ UniversalDiscoveryModule.defaultProps = {
     containersOnly: false,
     activeSortClause: 'date',
     activeSortOrder: 'ascending',
-    activeView: 'finder',
+    activeView: 'tree',
     tabs: window.eZ.adminUiConfig.universalDiscoveryWidget.tabs,
     selectedLocations: [],
 };
