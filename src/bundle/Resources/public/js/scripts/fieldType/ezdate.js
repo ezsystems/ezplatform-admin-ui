@@ -94,11 +94,12 @@
 
         if (sourceInput.value) {
             defaultDate = new Date(sourceInput.value * 1000);
-            const timezoneOffset = sourceInput.dataset.timezoneOffset
-                ? sourceInput.dataset.timezoneOffset
-                : defaultDate.getTimezoneOffset() * 60;
 
-            defaultDate.setTime(defaultDate.getTime() + timezoneOffset * 1000);
+            // during update the Content's date is in UTC timestamp - in order to instantiate flatPickr widget properly
+            // additional timezone time must be added to prevent setting an invalid date
+            if (sourceInput.dataset.contentId.length) {
+                defaultDate.setTime(defaultDate.getTime() + defaultDate.getTimezoneOffset() * 60 * 1000);
+            }
 
             updateInputValue(sourceInput, [defaultDate]);
         }

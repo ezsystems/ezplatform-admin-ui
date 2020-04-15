@@ -7,8 +7,8 @@
             </svg>
         </button>
     </div>
-    {% set offset =  form.parent.vars.value.value.date|length ? form.parent.vars.value.value.date.offset : null %}
+    {% set contentId = app.request.attributes.get('contentId') %}
     {% set attr = attr|merge({'class': 'ez-data-source__input', 'hidden': 'hidden',
-        'data-timezone-offset': offset}) %}
+        'data-content-id': contentId}) %}
     {{ block('form_widget') }}
 {% endblock %}
