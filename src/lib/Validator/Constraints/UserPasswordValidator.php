@@ -16,8 +16,9 @@ use EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator as Base
 /**
  * Will check if logged user and password are match.
  *
- * @deprecated
- * Use EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator instead.
+ * @deprecated Since eZ Platform 3.0 class moved to EzPlatformUser Bundle. Use it instead.
+ *
+ * @see \EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator.
  */
 class UserPasswordValidator extends ConstraintValidator
 {

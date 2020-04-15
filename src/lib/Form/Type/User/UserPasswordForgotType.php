@@ -16,7 +16,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @deprecated use \EzSystems\EzPlatformUser\Form\Type\UserPasswordForgotType.
+ * @deprecated Since eZ Platform 3.0 class moved to EzPlatformUser Bundle. Use it instead.
+ *
+ * @see \EzSystems\EzPlatformUser\Form\Type\UserPasswordForgotType.
  */
 class UserPasswordForgotType extends AbstractType
 {

@@ -948,7 +948,9 @@ class FormFactory
     }
 
     /**
-     * @deprecated use \EzSystems\EzPlatformUser\Form\Factory\FormFactory::changeUserPassword.
+     * @deprecated Since eZ Platform 3.0 method moved to EzPlatformUser Bundle. Use it instead.
+     *
+     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::changeUserPassword.
      *
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData $data
      * @param string|null $name
@@ -971,7 +973,9 @@ class FormFactory
     }
 
     /**
-     * @deprecated use \EzSystems\EzPlatformUser\Form\Factory\FormFactory::forgotUserPassword.
+     * @deprecated Since eZ Platform 3.0 method moved to EzPlatformUser Bundle. Use it instead.
+     *
+     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::forgotUserPassword.
      *
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotData $data
      * @param string|null $name
@@ -990,7 +994,9 @@ class FormFactory
     }
 
     /**
-     * @deprecated use \EzSystems\EzPlatformUser\Form\Factory\FormFactory::forgotUserPasswordWithLogin.
+     * @deprecated Since eZ Platform 3.0 method moved to EzPlatformUser Bundle. Use it instead.
+     *
+     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::forgotUserPassword.
      *
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotWithLoginData $data
      * @param string|null $name
@@ -1009,7 +1015,9 @@ class FormFactory
     }
 
     /**
-     * @deprecated use \EzSystems\EzPlatformUser\Form\Factory\FormFactory::forgotUserPasswordWithLogin.
+     * @deprecated Since eZ Platform 3.0 method moved to EzPlatformUser Bundle. Use it instead.
+     *
+     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::resetUserPassword.
      *
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData $data
      * @param string|null $name
@@ -1158,7 +1166,9 @@ class FormFactory
     }
 
     /**
-     * @deprecated use \EzSystems\EzPlatformUser\Form\Factory\FormFactory::updateUserSetting.
+     * @deprecated Since eZ Platform 3.0 method moved to EzPlatformUser Bundle. Use it instead.
+     *
+     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::updateUserSetting.
      *
      * @param string $userSettingIdentifier
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\Setting\UserSettingUpdateData $data

@@ -48,9 +48,3 @@ services:
         tags:
             - { name: validator.constraint_validator, alias: ezplatform.content_forms.validator.unique_url }
 
-    EzSystems\EzPlatformAdminUi\Validator\Constraints\PasswordValidator:
-        autowire: true
-        autoconfigure: false
-        public: false
-        tags:
-            - { name: validator.constraint_validator }

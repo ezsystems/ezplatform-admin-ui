@@ -19,7 +19,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints\Password;
 
 /**
- * @deprecated use \EzSystems\EzPlatformUser\Form\Type\UserPasswordChangeType.
+ * @deprecated Since eZ Platform 3.0 class moved to EzPlatformUser Bundle. Use it instead.
+ *
+ * @see \EzSystems\EzPlatformUser\Form\Type\UserPasswordChangeType.
  */
 class UserPasswordChangeType extends AbstractType
 {

@@ -19,7 +19,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints\Password as NewPassword;
 
 /**
- * @deprecated use \EzSystems\EzPlatformUser\Form\Type\UserPasswordResetType.
+ * @deprecated Since eZ Platform 3.0 class moved to EzPlatformUser Bundle. Use it instead.
+ *
+ * @see \EzSystems\EzPlatformUser\Form\Type\UserPasswordResetType.
  */
 class UserPasswordResetType extends AbstractType
 {
