@@ -32,16 +32,16 @@ use EzSystems\EzPlatformAdminUi\Form\Processor\PreviewFormProcessor;
 
 class PreviewFormProcessorTest extends TestCase
 {
-    /** @var ContentService $contentService */
+    /** @var ContentService */
     private $contentService;
 
-    /** @var UrlGeneratorInterface $urlGenerator */
+    /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var TranslatableNotificationHandlerInterface $notificationHandler */
+    /** @var TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var LocationService $locationService */
+    /** @var LocationService */
     private $locationService;
 
     protected function setUp(): void

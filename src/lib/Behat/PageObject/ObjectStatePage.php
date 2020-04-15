@@ -17,7 +17,7 @@ class ObjectStatePage extends Page
 {
     /** @var string Name by which Page is recognised */
     public const PAGE_NAME = 'Object state';
-    /** @var string $languageName */
+    /** @var string */
     private $objectStateName;
 
     /**

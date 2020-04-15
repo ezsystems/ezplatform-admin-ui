@@ -22,7 +22,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NotificationController extends Controller
 {
-    /** @var \eZ\Publish\API\Repository\NotificationService $notificationService */
+    /** @var \eZ\Publish\API\Repository\NotificationService */
     protected $notificationService;
 
     /** @var \eZ\Publish\Core\Notification\Renderer\Registry */

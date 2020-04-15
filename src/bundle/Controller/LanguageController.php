@@ -40,7 +40,7 @@ class LanguageController extends Controller
     /** @var LanguageCreateMapper */
     private $languageCreateMapper;
 
-    /** @var SubmitHandler $submitHandler */
+    /** @var SubmitHandler */
     private $submitHandler;
 
     /** @var FormFactory */
