@@ -121,7 +121,7 @@
             event.preventDefault();
 
             const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-            const limit = parseInt(event.currentTarget.dataset.limit);
+            const limit = parseInt(event.currentTarget.dataset.limit, 10);
             const title =
                 limit === 1
                     ? Translator.trans(
