@@ -13,7 +13,7 @@ const BrowseTabModule = () => {
     const views = {
         grid: <GridView itemsPerPage={tabsConfig.browse.itemsPerPage} />,
         finder: <Finder itemsPerPage={tabsConfig.browse.itemsPerPage} />,
-        tree: <TreeView />,
+        tree: <TreeView itemsPerPage={tabsConfig.browse.itemsPerPage} />,
     };
 
     return (

@@ -11,10 +11,21 @@ class ListItem extends Component {
         this.loadMoreSubitems = this.loadMoreSubitems.bind(this);
         this.handleAfterExpandedStateChange = this.handleAfterExpandedStateChange.bind(this);
 
+        this.sortedActions = this.getSortedActions();
+
         this.state = {
             isExpanded: !!props.subitems.length,
             isLoading: false,
         };
+    }
+
+    getSortedActions() {
+        const { itemActions } = window.eZ.adminUiConfig.contentTreeWidget;
+        const actions = itemActions  ? [...itemActions   ] : [];
+
+        return actions.sort((actionA, actionB) => {
+            return actionB.priority - actionA.priority;
+        });
     }
 
     cancelLoadingState() {
@@ -182,6 +193,14 @@ class ListItem extends Component {
                 <a className="c-list-item__link" href={href}>
                     {this.renderIcon()} {name}
                 </a>
+                {this.sortedActions.map((action) => {
+                    const Component = action.component;
+                    const location = {
+                        locationId,
+                    };
+
+                    return <Component key={action.id} location={location} />;
+                })}
             </div>
         );
     }

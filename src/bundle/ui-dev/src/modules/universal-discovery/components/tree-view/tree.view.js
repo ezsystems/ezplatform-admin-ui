@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import ContentTreeModule from '../../../content-tree/content.tree.module';
-import { 
+import {
     RootLocationIdContext, 
-    RestInfoContext 
+    RestInfoContext, 
 } from '../../universal.discovery.module';
+
+const flattenTree = (tree) => tree.reduce((output, branch) => [...output, branch.locationId, ...flattenTree(branch.subitems)], []);
 
 const TreeView = () => {
     const rootLocationId = useContext(RootLocationIdContext);

@@ -4,5 +4,17 @@
     .m-tree {
         width: initial;
         max-width: initial;
+
+        .c-list-item {
+            &__label {
+                padding-right: calculateRem(8px);
+
+                &:hover {
+                    .c-toggle-selection-button {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
     }
 }
