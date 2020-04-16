@@ -59,12 +59,8 @@ class RequestLocaleListenerTest extends TestCase
 
         $this->httpKernel = $this->createMock(HttpKernelInterface::class);
 
-        $requestStack = new RequestStack();
-        $requestStack->push($this->request);
-
         $this->userLanguagePreferenceProvider = $this
             ->getMockBuilder(UserLanguagePreferenceProviderInterface::class)
-            ->setConstructorArgs([$requestStack])
             ->getMock();
 
         $this->configResolver = $this->createMock(ConfigResolverInterface::class);
