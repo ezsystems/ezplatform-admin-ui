@@ -32,19 +32,19 @@ use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 
 class PreviewFormProcessorTest extends TestCase
 {
-    /** @var ContentService $contentService */
+    /** @var ContentService */
     private $contentService;
 
-    /** @var UrlGeneratorInterface $urlGenerator */
+    /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var NotificationHandlerInterface $notificationHandler */
+    /** @var NotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var TranslatorInterface $translator */
+    /** @var TranslatorInterface */
     private $translator;
 
-    /** @var LocationService $locationService */
+    /** @var LocationService */
     private $locationService;
 
     public function setUp()

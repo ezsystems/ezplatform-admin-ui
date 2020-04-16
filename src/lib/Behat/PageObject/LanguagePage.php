@@ -16,7 +16,7 @@ class LanguagePage extends Page
 {
     /** @var string Name by which Page is recognised */
     public const PAGE_NAME = 'Language';
-    /** @var string $languageName */
+    /** @var string */
     private $languageName;
 
     /**
