@@ -31,7 +31,6 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
-use eZ\Publish\Core\Base\Exceptions\NotFoundException;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
@@ -175,7 +174,7 @@ class ValueFactory
             // try different locations if main location is not accessible for the user
             $relationLocations = $this->locationService->loadLocations($contentInfo);
             if (!empty($relationLocations)) {
-                throw new NotFoundException('Locations related to main location', $contentInfo->mainLocationId);
+                throw $e;
             }
             $relationLocation = reset($relationLocations);
         }
@@ -212,7 +211,7 @@ class ValueFactory
             // try different locations if main location is not accessible for the user
             $relationLocations = $this->locationService->loadLocations($contentInfo);
             if (empty($relationLocations)) {
-                throw new NotFoundException('Locations related to main location', $contentInfo->mainLocationId);
+                throw $e;
             }
             $relationLocation = reset($relationLocations);
         }
