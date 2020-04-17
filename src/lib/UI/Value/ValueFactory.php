@@ -173,7 +173,7 @@ class ValueFactory
         } catch (UnauthorizedException $e) {
             // try different locations if main location is not accessible for the user
             $relationLocations = $this->locationService->loadLocations($contentInfo);
-            if (!empty($relationLocations)) {
+            if (empty($relationLocations)) {
                 throw $e;
             }
             $relationLocation = reset($relationLocations);
