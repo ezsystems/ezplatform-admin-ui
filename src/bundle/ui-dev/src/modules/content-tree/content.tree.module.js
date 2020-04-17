@@ -326,7 +326,7 @@ export default class ContentTreeModule extends Component {
     }
 
     render() {
-        const { subitemsLimit, subitemsLoadLimit, treeMaxDepth } = this.props;
+        const { onClickItem, subitemsLimit, subitemsLoadLimit, treeMaxDepth } = this.props;
         const attrs = {
             items: this.items,
             currentLocationId: this.getCurrentLocationId(),
@@ -336,6 +336,7 @@ export default class ContentTreeModule extends Component {
             loadMoreSubitems: this.loadMoreSubitems,
             afterItemToggle: this.updateSubtreeAfterItemToggle,
             onCollapseAllItems: this.handleCollapseAllItems,
+            onClickItem,
         };
 
         return <ContentTree {...attrs} />;
@@ -356,6 +357,7 @@ ContentTreeModule.propTypes = {
         token: PropTypes.string.isRequired,
         siteaccess: PropTypes.string.isRequired,
     }).isRequired,
+    onClickItem: PropTypes.func,
 };
 
 ContentTreeModule.defaultProps = {

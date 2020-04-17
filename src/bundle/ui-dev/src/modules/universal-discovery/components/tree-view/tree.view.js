@@ -9,6 +9,12 @@ import {
 
 const flattenTree = (tree) => tree.reduce((output, branch) => [...output, branch.locationId, ...flattenTree(branch.subitems)], []);
 
+const onClickTreeItem = (event) => {
+    event.preventDefault();
+
+    event.currentTarget.closest('.c-list-item__label').querySelector('.c-toggle-selection-button').click();
+}
+
 const TreeView = () => {
     const rootLocationId = useContext(RootLocationIdContext);
     const restInfo = useContext(RestInfoContext);
@@ -20,6 +26,7 @@ const TreeView = () => {
                 currentLocationPath="/1/2/"
                 rootLocationId={rootLocationId}
                 restInfo={restInfo}
+                onClickItem={onClickTreeItem}
             />
         </div>
     );

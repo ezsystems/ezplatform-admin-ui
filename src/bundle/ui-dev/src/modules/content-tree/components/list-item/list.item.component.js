@@ -169,7 +169,7 @@ class ListItem extends Component {
     }
 
     renderItemLabel() {
-        const { totalSubitemsCount, href, name, selected, locationId } = this.props;
+        const { totalSubitemsCount, href, name, selected, locationId, onClick } = this.props;
 
         if (locationId === 1) {
             return null;
@@ -190,7 +190,7 @@ class ListItem extends Component {
         return (
             <div className="c-list-item__label">
                 <span {...togglerAttrs} />
-                <a className="c-list-item__link" href={href}>
+                <a className="c-list-item__link" href={href} onClick={onClick}>
                     {this.renderIcon()} {name}
                 </a>
                 {this.sortedActions.map((action) => {
@@ -264,11 +264,13 @@ ListItem.propTypes = {
     treeMaxDepth: PropTypes.number.isRequired,
     afterItemToggle: PropTypes.func.isRequired,
     isRootItem: PropTypes.bool.isRequired,
+    onClick: PropTypes.func,
 };
 
 ListItem.defaultProps = {
     hidden: false,
     isRootItem: false,
+    onClick: () => {},
 };
 
 export default ListItem;
