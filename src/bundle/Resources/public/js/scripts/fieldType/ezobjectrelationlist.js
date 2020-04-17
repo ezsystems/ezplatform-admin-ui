@@ -1,4 +1,4 @@
-(function(global, doc, eZ, React, ReactDOM, Translator) {
+(function (global, doc, eZ, React, ReactDOM, Translator) {
     const CLASS_FIELD_SINGLE = 'ez-field-edit--ezobjectrelation';
     const SELECTOR_FIELD_MULTIPLE = '.ez-field-edit--ezobjectrelationlist';
     const SELECTOR_FIELD_SINGLE = '.ez-field-edit--ezobjectrelation';
@@ -117,7 +117,19 @@
             event.preventDefault();
 
             const config = JSON.parse(event.currentTarget.dataset.udwConfig);
-            const title = Translator.trans(/*@Desc("Select content")*/ 'ezobjectrelationlist.title', {}, 'universal_discovery_widget');
+            const limit = parseInt(event.currentTarget.dataset.limit, 10);
+            const title =
+                limit === 1
+                    ? Translator.trans(
+                          /*@Desc("Select a Content item")*/ 'ezobjectrelationlist.title.single',
+                          {},
+                          'universal_discovery_widget'
+                      )
+                    : Translator.trans(
+                          /*@Desc("Select Content item(s)")*/ 'ezobjectrelationlist.title.multi',
+                          {},
+                          'universal_discovery_widget'
+                      );
 
             ReactDOM.render(
                 React.createElement(eZ.modules.UniversalDiscovery, {
@@ -151,9 +163,9 @@
                     <td class="ez-relations__item-name">${contentName}</td>
                     <td>${contentTypeName}</td>
                     <td>${formatShortDateTime(item.ContentInfo.Content.publishedDate)}</td>
-                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="${selectedItems.length +
-                        index +
-                        1}" /></td>
+                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="${
+                        selectedItems.length + index + 1
+                    }" /></td>
                 </tr>
             `;
         };
@@ -204,7 +216,7 @@
         };
         const attachRowsEventHandlers = () => {
             const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-            
+
             findOrderInputs().forEach((item) => {
                 item.addEventListener('blur', updateSelectedItemsOrder, false);
 
