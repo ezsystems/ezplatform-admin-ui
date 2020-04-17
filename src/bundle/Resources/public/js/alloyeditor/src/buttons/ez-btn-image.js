@@ -81,7 +81,7 @@ eZ.addConfig('ezAlloyEditor.ezBtnImage', EzBtnImage);
 EzBtnImage.defaultProps = {
     command: 'ezembed',
     modifiesSelection: true,
-    udwTitle: Translator.trans(/*@Desc("Select an image to embed")*/ 'image_btn.udw.label', {}, 'alloy_editor'),
+    udwTitle: Translator.trans(/*@Desc("Select an image")*/ 'image_btn.udw.label', {}, 'alloy_editor'),
     udwContentDiscoveredMethod: 'addImage',
     udwConfigName: 'richtext_embed_image',
     udwLoadContent: true,

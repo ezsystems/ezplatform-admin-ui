@@ -87,8 +87,8 @@
         <note>key: embed_btn.label</note>
       </trans-unit>
       <trans-unit id="8527fe7f41af8879f558034d2b2cf316d20eb5e3" resname="embed_btn.udw.title">
-        <source>Select a content to embed</source>
-        <target state="new">Select a content to embed</target>
+        <source>Select a Content item to embed</source>
+        <target state="new">Select a Content item to embed</target>
         <note>key: embed_btn.udw.title</note>
       </trans-unit>
       <trans-unit id="f646efa9564da382019a8267461d76231bb688e2" resname="embed_update_btn.label">
@@ -97,8 +97,8 @@
         <note>key: embed_update_btn.label</note>
       </trans-unit>
       <trans-unit id="e7a9e3844a638a4ee009a878206b96c9d0af681e" resname="embed_update_btn.udw.title">
-        <source>Select a content to embed</source>
-        <target state="new">Select a content to embed</target>
+        <source>Select a Content item to embed</source>
+        <target state="new">Select a Content item to embed</target>
         <note>key: embed_update_btn.udw.title</note>
       </trans-unit>
       <trans-unit id="841a18570b88796e700e0d0cd2f8d4e99f9e13bd" resname="heading_btn.label">
@@ -112,8 +112,8 @@
         <note>key: image_btn.label</note>
       </trans-unit>
       <trans-unit id="392f9d82a172655fbfe702c584ca3e5880fac25e" resname="image_btn.udw.label">
-        <source>Select an image to embed</source>
-        <target state="new">Select an image to embed</target>
+        <source>Select an image</source>
+        <target state="new">Select an image</target>
         <note>key: image_btn.udw.label</note>
       </trans-unit>
       <trans-unit id="85da4c4b98bb2f13b880845e1f5850134ace276d" resname="image_update_btn.label">
@@ -122,8 +122,8 @@
         <note>key: image_update_btn.label</note>
       </trans-unit>
       <trans-unit id="d8edff94c5ba9f6148382057d71339ba75bc3903" resname="image_update_btn.udw.title">
-        <source>Select an image to embed</source>
-        <target state="new">Select an image to embed</target>
+        <source>Select an image</source>
+        <target state="new">Select an image</target>
         <note>key: image_update_btn.udw.title</note>
       </trans-unit>
       <trans-unit id="15e27e2548df7ace117c1dd3b119db5798d34e9a" resname="link_edit_btn.action_row.remove">

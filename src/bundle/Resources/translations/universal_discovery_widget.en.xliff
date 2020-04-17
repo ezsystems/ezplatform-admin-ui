@@ -31,10 +31,15 @@
         <target state="new">Select Image Asset</target>
         <note>key: ezimageasset.title</note>
       </trans-unit>
-      <trans-unit id="005c6256355de38d3f5cb90b08945053ac28cf9e" resname="ezobjectrelationlist.title">
-        <source>Select content</source>
-        <target state="new">Select content</target>
-        <note>key: ezobjectrelationlist.title</note>
+      <trans-unit id="a46e5fdf25ad5fc5725b6db78274102983e65ef2" resname="ezobjectrelationlist.title.multi">
+        <source>Select Content item(s)</source>
+        <target state="new">Select Content item(s)</target>
+        <note>key: ezobjectrelationlist.title.multi</note>
+      </trans-unit>
+      <trans-unit id="af2bf80ec528976a55efeb36753db6ca6ca652e5" resname="ezobjectrelationlist.title.single">
+        <source>Select a Content item</source>
+        <target state="new">Select a Content item</target>
+        <note>key: ezobjectrelationlist.title.single</note>
       </trans-unit>
       <trans-unit id="2d4febe56a341671c069ff47b6e6adfd2bba005c" resname="limitation.pick.error">
         <source>Failed to fetch content names</source>
