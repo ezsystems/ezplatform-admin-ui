@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UI\Value;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\ObjectStateService;
@@ -30,6 +31,7 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
+use eZ\Publish\Core\Base\Exceptions\NotFoundException;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
@@ -158,16 +160,30 @@ class ValueFactory
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function createRelation(Relation $relation, Content $content): UIValue\Content\Relation
     {
         $contentType = $content->getContentType();
         $fieldDefinition = $contentType->getFieldDefinition($relation->sourceFieldDefinitionIdentifier);
 
+        $contentInfo = $content->contentInfo;
+
+        try {
+            $relationLocation = $this->locationService->loadLocation($contentInfo->mainLocationId);
+        } catch (UnauthorizedException $e) {
+            // try different locations if main location is not accessible for the user
+            $relationLocations = $this->locationService->loadLocations($contentInfo);
+            if (!empty($relationLocations)) {
+                throw new NotFoundException('Locations related to main location', $contentInfo->mainLocationId);
+            }
+            $relationLocation = reset($relationLocations);
+        }
+
         return new UIValue\Content\Relation($relation, [
             'relationFieldDefinitionName' => $fieldDefinition ? $fieldDefinition->getName() : '',
             'relationContentTypeName' => $contentType->getName(),
-            'relationLocation' => $this->locationService->loadLocation($content->contentInfo->mainLocationId),
+            'relationLocation' => $relationLocation,
             'relationName' => $content->getName(),
         ]);
     }
@@ -180,6 +196,7 @@ class ValueFactory
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function createRelationItem(RelationListItem $relationListItem, Content $content): UIValue\Content\Relation
     {
@@ -187,10 +204,23 @@ class ValueFactory
         $relation = $relationListItem->getRelation();
         $fieldDefinition = $contentType->getFieldDefinition($relation->sourceFieldDefinitionIdentifier);
 
+        $contentInfo = $content->contentInfo;
+
+        try {
+            $relationLocation = $this->locationService->loadLocation($contentInfo->mainLocationId);
+        } catch (UnauthorizedException $e) {
+            // try different locations if main location is not accessible for the user
+            $relationLocations = $this->locationService->loadLocations($contentInfo);
+            if (empty($relationLocations)) {
+                throw new NotFoundException('Locations related to main location', $contentInfo->mainLocationId);
+            }
+            $relationLocation = reset($relationLocations);
+        }
+
         return new UIValue\Content\Relation($relation, [
             'relationFieldDefinitionName' => $fieldDefinition ? $fieldDefinition->getName() : '',
             'relationContentTypeName' => $contentType->getName(),
-            'relationLocation' => $this->locationService->loadLocation($content->contentInfo->mainLocationId),
+            'relationLocation' => $relationLocation,
             'relationName' => $content->getName(),
         ]);
     }
