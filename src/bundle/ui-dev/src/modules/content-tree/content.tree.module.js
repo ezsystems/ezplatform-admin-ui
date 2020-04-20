@@ -106,6 +106,7 @@ export default class ContentTreeModule extends Component {
         }
 
         this.saveSubtree();
+        this.props.afterItemToggle(item, isExpanded);
     }
 
     addItemToSubtree(subtree, item, path) {
@@ -365,6 +366,7 @@ ContentTreeModule.propTypes = {
     }).isRequired,
     onClickItem: PropTypes.func,
     readSubtree: PropTypes.func,
+    afterItemToggle: PropTypes.func,
 };
 
 ContentTreeModule.defaultProps = {
@@ -373,4 +375,5 @@ ContentTreeModule.defaultProps = {
     subitemsLimit: window.eZ.adminUiConfig.contentTree.childrenLoadMaxLimit,
     subitemsLoadLimit: window.eZ.adminUiConfig.contentTree.loadMoreLimit,
     treeMaxDepth: window.eZ.adminUiConfig.contentTree.treeMaxDepth,
+    afterItemToggle: () => {},
 };

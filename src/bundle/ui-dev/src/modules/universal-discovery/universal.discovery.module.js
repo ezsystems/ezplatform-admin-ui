@@ -225,7 +225,7 @@ const UniversalDiscoveryModule = (props) => {
 
             dispatchLoadedLocationsAction({ type: 'SET_LOCATIONS', data: loadedLocationsMap });
         } else if (
-            currentView === 'finder' &&
+            (currentView === 'finder' || currentView === 'tree') &&
             !!markedLocationId &&
             markedLocationId !== loadedLocationsMap[loadedLocationsMap.length - 1].parentLocationId &&
             loadedLocationsMap[loadedLocationsMap.length - 1].subitems.find((subitem) => subitem.location.id === markedLocationId)
