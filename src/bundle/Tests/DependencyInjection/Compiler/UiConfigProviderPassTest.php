@@ -6,9 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
+namespace EzSystems\EzPlatformAdminUiBundle\Tests\DependencyInjection\Compiler;
 
 use EzSystems\EzPlatformAdminUi\UI\Config\Aggregator;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

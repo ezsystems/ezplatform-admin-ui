@@ -6,6 +6,8 @@
  */
 declare(strict_types=1);
 
+namespace EzSystems\EzPlatformAdminUi\Tests\Validator\Constraint;
+
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\Symfony\Security\ReferenceUserInterface;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints\UserPassword;
