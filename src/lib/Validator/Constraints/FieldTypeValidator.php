@@ -12,7 +12,6 @@ use EzSystems\EzPlatformContentForms\Validator\ValidationErrorsProcessor as Base
 
 /**
  * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformContentForms Bundle. Use it instead.
- *
  * @see \EzSystems\EzPlatformContentForms\Validator\Constraints\FieldTypeValidator.
  */
 abstract class FieldTypeValidator extends BaseFieldTypeValidator

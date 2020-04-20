@@ -20,7 +20,6 @@ use EzSystems\EzPlatformAdminUi\Validator\Constraints\Password as NewPassword;
 
 /**
  * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformUser Bundle. Use it instead.
- *
  * @see \EzSystems\EzPlatformUser\Form\Type\UserPasswordResetType.
  */
 class UserPasswordResetType extends AbstractType

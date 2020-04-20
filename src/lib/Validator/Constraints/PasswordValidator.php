@@ -14,7 +14,6 @@ use EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator as BasePass
 
 /**
  * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformUser Bundle. Use it instead.
- *
  * @see \EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator.
  */
 class PasswordValidator extends ConstraintValidator

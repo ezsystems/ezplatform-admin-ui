@@ -13,7 +13,6 @@ use EzSystems\EzPlatformAdminUi\Validator\Constraints as AdminUiAssert;
 
 /**
  * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformUser Bundle. Use it instead.
- *
  * @see \EzSystems\EzPlatformUser\Form\Data\UserPasswordChangeData.
  */
 class UserPasswordChangeData

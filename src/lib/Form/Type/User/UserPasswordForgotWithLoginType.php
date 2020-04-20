@@ -17,7 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformUser Bundle. Use it instead.
- *
  * @see \EzSystems\EzPlatformUser\Form\Type\UserPasswordForgotWithLoginType.
  */
 class UserPasswordForgotWithLoginType extends AbstractType
