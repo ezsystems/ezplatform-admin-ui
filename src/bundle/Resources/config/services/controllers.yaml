@@ -169,6 +169,18 @@ services:
         tags:
             - controller.service_arguments
 
+    EzSystems\EzPlatformAdminUiBundle\Controller\URLManagementController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
+        tags:
+            - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\URLWildcardController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
+        tags:
+            - controller.service_arguments
+
     EzSystems\EzPlatformAdminUiBundle\Controller\TranslationController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:

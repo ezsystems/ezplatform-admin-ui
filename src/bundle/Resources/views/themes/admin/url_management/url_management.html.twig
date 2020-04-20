@@ -1,0 +1,33 @@
+{% extends "@ezdesign/ui/layout.html.twig" %}
+
+{% trans_default_domain 'ezplatform_url_management' %}
+
+{% block body_class %}ez-url-management{% endblock %}
+
+{% block breadcrumbs %}
+    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { value: 'url_management.breadcrumb.list'|trans|desc('URL Management') },
+    ]} %}
+{% endblock %}
+
+{% block title %}
+    {{ 'url_management.view.list.title'|trans|desc('URL Management') }}
+{% endblock %}
+
+{% block page_title %}
+    {% include '@ezdesign/ui/page_title.html.twig' with {
+        title: 'url_management.view.list.title'|trans|desc('URL Management'),
+        icon_name: 'link'
+    } %}
+{% endblock %}
+
+{% block content %}
+    <div>
+        {{ ez_render_component_group('link-manager-block') }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-url-management-js', null, 'ezplatform') }}
+{% endblock %}

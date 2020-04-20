@@ -90,7 +90,8 @@
     }
 }
 
-.ez-modal--custom-url-alias {
+.ez-modal--custom-url-alias,
+.ez-modal--url-wildcards {
     width: 100%;
 
     &.modal {
@@ -114,17 +115,25 @@
         padding: calculateRem(32px);
     }
 
-    &__label {
-        font-size: calculateRem(14px);
-        font-weight: 700;
-        display: block;
-        margin-top: calculateRem(24px);
+    &, .ez-modal {
+        &__label {
+            font-size: calculateRem(14px);
+            font-weight: 700;
+            display: block;
+            margin-top: calculateRem(24px);
 
-        @include label-required();
+            @include label-required();
+        }
+
+        &__info-text {
+            font-size: calculateRem(14px);
+        }
     }
+}
 
-    &__info-text {
-        font-size: calculateRem(14px);
+.ez-modal--url-wildcards.modal {
+    .modal-dialog {
+        max-width: calculateRem(580px);
     }
 }
 

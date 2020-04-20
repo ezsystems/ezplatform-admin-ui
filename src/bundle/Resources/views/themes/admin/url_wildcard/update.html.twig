@@ -1,0 +1,67 @@
+{% extends '@ezdesign/ui/layout.html.twig' %}
+
+{% trans_default_domain 'ezplatform_url_wildcard' %}
+{% form_theme form '@ezdesign/content/form_fields.html.twig' '@ezdesign/content/tab/url/checkbox.html.twig' %}
+
+{%- block content -%}
+    <div class="row align-items-stretch ez-main-row">
+        <div class="px-0 pb-4 ez-content-container">
+            <div class="ez-header">
+                <div class="container">
+                    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
+                        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+                        { value: 'url_wildcard.breadcrumb.list'|trans|desc('URL Management'), url: path('ezplatform.url_management', {
+                            '_fragment': 'ez-tab-link-manager-url-wildcards',
+                        }) },
+                        { value: 'url_wildcard.breadcrumb.edit'|trans|desc('Edit') }
+                    ]} %}
+
+                    {% include '@ezdesign/ui/page_title.html.twig' with {
+                        title: 'url_wildcard.editing'|trans({'%url%': urlWildcard.sourceUrl|u.truncate(50) })|desc('Editing URL wildcard: %url%'),
+                        icon_name: 'link'
+                    } %}
+                </div>
+            </div>
+
+            <div class="container px-0 pb-4 mt-5">
+                {{ form_start(form, {'action': actionUrl}) }}
+                    {{ form_errors(form) }}
+
+                    <section class="container mt-4">
+                        <div class="card ez-card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <span class="ez-label required">{{ 'url_wildcard.modal.create.url.wildcard'|trans|desc('URL wildcard') }}</span>
+                                    {{ form_widget(form.source_url) }}
+                                </div>
+                                <div class="form-group">
+                                    <span class="ez-label required">{{ 'url_wildcard.modal.create.url.destintion'|trans|desc('Destination') }}</span>
+                                    {{ form_widget(form.destination_url) }}
+                                </div>
+                                <div class="form-group">
+                                    <span class="ez-label">{{ 'url_wildcard.modal.create.redirect'|trans|desc('Redirect to wildcard destination') }}</span>
+                                    {{ form_widget(form.forward) }}
+                                    <div>{{ 'url_wildcard.modal.create.redirect.helper'|trans|desc('When checked, the url displayed will be the URL of the destination. When unchecked, the wildcard will not redirect to the destination and the URL will stay the same.') }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <button id="url-update" type="submit" hidden></button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <div class="pt-4 px-0 bg-secondary ez-context-menu">
+            {% set url_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu_configure.url_wildcard_edit_sidebar_right', [], {
+                'submit_selector': '#url-update',
+            }) %}
+
+            {{ knp_menu_render(url_create_sidebar_right, {
+                'template': '@ezdesign/ui/menu/sidebar_right.html.twig'
+            }) }}
+        </div>
+    </div>
+{%- endblock -%}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-url-management-update-js', null, 'ezplatform') }}
+{% endblock %}

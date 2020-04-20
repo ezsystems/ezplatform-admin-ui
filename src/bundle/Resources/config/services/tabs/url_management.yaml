@@ -1,0 +1,20 @@
+services:
+    app.my_tabs.custom_group:
+        parent: EzSystems\EzPlatformAdminUi\Component\TabsComponent
+        arguments:
+            $template: '@@ezdesign/ui/tab/url_management.html.twig'
+            $groupIdentifier: 'link-manager'
+        tags:
+            - { name: ezplatform.admin_ui.component, group: 'link-manager-block' }
+
+    EzSystems\EzPlatformAdminUi\Tab\URLManagement\URLWildcardsTab:
+        class: EzSystems\EzPlatformAdminUi\Tab\URLManagement\URLWildcardsTab
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        tags:
+            - { name: ezplatform.tab, group: 'link-manager' }
+
+    EzSystems\EzPlatformAdminUi\Tab\URLManagement\LinkManagerTab:
+        class: EzSystems\EzPlatformAdminUi\Tab\URLManagement\LinkManagerTab
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        tags:
+            - { name: ezplatform.tab, group: 'link-manager' }

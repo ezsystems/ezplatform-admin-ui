@@ -1,23 +1,6 @@
-{% extends '@ezdesign/ui/layout.html.twig' %}
-
 {% form_theme form '@ezdesign/ui/form_fields.html.twig'  %}
 
 {% trans_default_domain "linkmanager" %}
-
-{% block title %}{{ 'url.list'|trans }}{% endblock %}
-
-{%- block breadcrumbs -%}
-    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
-        { value: 'url.list'|trans|desc('Link manager') }
-    ]} %}
-{%- endblock -%}
-
-{%- block page_title -%}
-    {% include '@ezdesign/ui/page_title.html.twig' with {
-        title: 'url.list'|trans|desc('Link manager'),
-        icon_name: 'link'
-    } %}
-{%- endblock -%}
 
 {%- block content -%}
     <section class="container mt-4">

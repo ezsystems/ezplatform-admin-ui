@@ -1,0 +1,123 @@
+{% trans_default_domain "ezplatform_url_wildcard" %}
+
+{%
+    set wildcard_types = {
+        0: 'url_wildcard.type.forward'|trans|desc('Forward'),
+        1: 'url_wildcard.type.direct'|trans|desc('Direct'),
+    }
+%}
+
+<section class="container mt-4">
+    {% if not url_wildcards_enabled %}
+        <div class="ez-alert ez-alert--info mb-4">
+            <svg class="ez-icon ez-icon--small">
+                <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#warning"></use>
+            </svg>
+            {{ 'url_wildcard.disabled'|trans|desc('URL wildcards are disabled. Contact your Administrator.') }}
+        </div>
+    {% endif %}
+    <div class="ez-table-header">
+        <div class="ez-table-header__headline">
+            {{ 'url_wildcard.list.title'|trans|desc('URL wildcards') }}
+        </div>
+        <div>
+            {% set modal_create_data_target = 'create-wildcards-modal' %}
+            <button
+                id="create-wildcards"
+                type="button"
+                class="btn btn-primary"
+                {% if not can_manage %}disabled{% endif %}
+                data-toggle="modal"
+                data-target="#{{ modal_create_data_target }}"
+                title="{{ 'url_wildcard.list.action.create'|trans|desc('Create a URL wildcard') }}">
+                <svg class="ez-icon ez-icon-create">
+                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                </svg>
+            </button>
+            {% set modal_delete_data_target = 'delete-wildcards-modal' %}
+            <button
+                id="delete-wildcards"
+                type="button"
+                class="btn btn-danger"
+                disabled
+                data-toggle="modal"
+                data-target="#{{ modal_delete_data_target }}"
+                title="{{ 'url_wildcard.list.action.delete'|trans|desc('Delete URL wildcards') }}">
+                <svg class="ez-icon ez-icon-trash">
+                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+    {% include '@ezdesign/url_wildcard/modal_create.html.twig' with {
+        'id': modal_create_data_target,
+        'form': form_add,
+    }%}
+    {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
+        'id': modal_delete_data_target,
+        'message': 'url_wildcard.modal.message'|trans|desc('Are you sure you want to delete selected URL wildcard(s)?'),
+        'data_click': '#url_wildcard_delete_delete',
+    }%}
+    {{ form_start(form, {
+        'action': path('ezplatform.url_wildcard.bulk_delete'),
+        'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-wildcards' }
+    }) }}
+        <table class="ez-table table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>{{ 'url_wildcard.label.alias'|trans|desc('URL alias wildcard') }}</th>
+                    <th>{{ 'url_wildcard.label.destination'|trans|desc('Destination') }}</th>
+                    <th>{{ 'url_wildcard.label.type'|trans|desc('Type') }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if url_wildcards|length %}
+                    {% for url_wildcard in url_wildcards %}
+                        {% set edit_url = path('ezplatform.url_wildcard.update', {urlWildcardId: url_wildcard.id}) %}
+                        <tr>
+                            <td class="ez-table__cell ez-table__cell--has-checkbox">
+                                {{ form_widget(form.URLWildcardsChoices.children[url_wildcard.id], {
+                                    disabled: not can_manage
+                                }) }}
+                            </td>
+                            <td class="ez-table__cell">
+                                {{ url_wildcard.sourceUrl }}
+                            </td>
+                            <td class="ez-table__cell">
+                                {{ url_wildcard.destinationUrl }}
+                            </td>
+                            <td class="ez-table__cell">
+                                {{ wildcard_types[url_wildcard.forward] }}
+                            </td>
+                            <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                                {% if can_manage %}
+                                    <a href="{{ edit_url }}" class="btn btn-icon mx-2" title="{{ 'url_wildcard.action.edit'|trans|desc('Edit URL wildcard') }}">
+                                        <svg class="ez-icon ez-icon-edit">
+                                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                        </svg>
+                                    </a>
+                                {% else %}
+                                    <span class="btn btn-icon mx-2" disabled>
+                                        <svg class="ez-icon ez-icon-edit">
+                                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                        </svg>
+                                    </span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
+                            <p class="ez-table-no-content mb-0 py-0">
+                                {{ 'url_wildcard.empty'|trans|desc('No URL wildcards.') }}
+                            </p>
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    {{ form_end(form) }}
+</section>

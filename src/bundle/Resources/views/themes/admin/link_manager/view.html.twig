@@ -4,8 +4,8 @@
 
 {%- block breadcrumbs -%}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
-        { value: 'url.list'|trans, url: path('ezplatform.link_manager.list') },
-        { value: 'url.detail'|trans|desc('Link details')}
+        { value: 'url.breadcrumb.list'|trans|desc('URL management'), url: path('ezplatform.url_management') },
+        { value: 'url.breadcrumb.detail'|trans|desc('Link details') }
     ]} %}
 {%- endblock -%}
 
@@ -15,6 +15,10 @@
         icon_name: 'link'
     } %}
 {%- endblock -%}
+
+{% block title %}
+    {{ 'url.view'|trans({ '%url%': url.url|u.truncate(60) })|desc('Link %url%') }}
+{% endblock %}
 
 {% block body_class %}ez-link-manager-view{% endblock %}
 
@@ -130,8 +134,6 @@
         {{ form_end(form_edit) }}
     </section>
 {%- endblock -%}
-
-{% block title %}{{ 'url.view'|trans({ '%url%': url.url|u.truncate(60) }) }}{% endblock %}
 
 {% block javascripts %}
     {{ encore_entry_script_tags('ezplatform-admin-ui-link-manager-view-js', null, 'ezplatform') }}

@@ -6,47 +6,39 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use eZ\Publish\API\Repository\URLService;
+use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
+use EzSystems\EzPlatformAdminUi\Form\Data\URL\URLUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use eZ\Publish\API\Repository\URLService;
-use eZ\Publish\API\Repository\Values\URL\Query\Criterion;
-use eZ\Publish\API\Repository\Values\URL\Query\SortClause;
-use eZ\Publish\API\Repository\Values\URL\URLQuery;
-use EzSystems\EzPlatformAdminUi\Form\Data\URL\URLListData;
-use EzSystems\EzPlatformAdminUi\Form\Data\URL\URLUpdateData;
-use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\URLSearchAdapter;
 use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\URLUsagesAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class LinkManagerController extends Controller
+final class LinkManagerController extends Controller
 {
     const DEFAULT_MAX_PER_PAGE = 10;
 
-    /** @var URLService */
+    /** @var \eZ\Publish\API\Repository\URLService */
     private $urlService;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
-    /** @var TranslatableNotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
     /**
-     * EzPlatformLinkManagerController constructor.
-     *
-     * @param URLService $urlService
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
-     * @param TranslatableNotificationHandlerInterface $notificationHandler
+     * @param \eZ\Publish\API\Repository\URLService $urlService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
      */
     public function __construct(
         URLService $urlService,
@@ -61,46 +53,13 @@ class LinkManagerController extends Controller
     }
 
     /**
-     * Renders the URLs list.
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param int $urlId
      *
-     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @return Response
-     */
-    public function listAction(Request $request): Response
-    {
-        $data = new URLListData();
-
-        $form = $this->formFactory->createUrlListForm($data, '', [
-            'method' => Request::METHOD_GET,
-            'csrf_protection' => false,
-        ]);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && !$form->isValid()) {
-            throw new BadRequestHttpException();
-        }
-
-        $urls = new Pagerfanta(new URLSearchAdapter(
-            $this->buildListQuery($data),
-            $this->urlService
-        ));
-
-        $urls->setCurrentPage($data->page);
-        $urls->setMaxPerPage($data->limit ? $data->limit : self::DEFAULT_MAX_PER_PAGE);
-
-        return $this->render('@ezdesign/link_manager/list.html.twig', [
-            'form' => $form->createView(),
-            'can_edit' => $this->isGranted(new Attribute('url', 'update')),
-            'urls' => $urls,
-        ]);
-    }
-
-    /**
-     * Displays the edit form and processes it once submitted.
-     *
-     * @param int $urlId ID of URL
-     *
-     * @return Response
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function editAction(Request $request, int $urlId): Response
     {
@@ -112,6 +71,7 @@ class LinkManagerController extends Controller
         ]));
 
         $form->handleRequest($request);
+
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (URLUpdateData $data) use ($url) {
                 $this->urlService->updateUrl($url, $data);
@@ -122,7 +82,7 @@ class LinkManagerController extends Controller
                     'linkmanager'
                 );
 
-                return $this->redirectToRoute('ezplatform.link_manager.list');
+                return $this->redirectToRoute('ezplatform.url_management');
             });
 
             if ($result instanceof Response) {
@@ -137,12 +97,13 @@ class LinkManagerController extends Controller
     }
 
     /**
-     * Renders the view of a URL.
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param int $urlId
      *
-     * @param Request $request
-     * @param int $urlId ID of URL
+     * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @return Response
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function viewAction(Request $request, int $urlId): Response
     {
@@ -162,36 +123,5 @@ class LinkManagerController extends Controller
             'usages' => $usages,
             'form_edit' => $editForm->createView(),
         ]);
-    }
-
-    /**
-     * Builds URL criteria from list data.
-     *
-     * @param URLListData $data
-     *
-     * @return URLQuery
-     */
-    private function buildListQuery(URLListData $data): URLQuery
-    {
-        $query = new URLQuery();
-        $query->sortClauses = [
-            new SortClause\URL(),
-        ];
-
-        $criteria = [
-            new Criterion\VisibleOnly(),
-        ];
-
-        if ($data->searchQuery !== null) {
-            $criteria[] = new Criterion\Pattern($data->searchQuery);
-        }
-
-        if ($data->status !== null) {
-            $criteria[] = new Criterion\Validity($data->status);
-        }
-
-        $query->filter = new Criterion\LogicalAnd($criteria);
-
-        return $query;
     }
 }
