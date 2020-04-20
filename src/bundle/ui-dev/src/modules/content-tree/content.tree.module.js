@@ -161,7 +161,7 @@ export default class ContentTreeModule extends Component {
         if (readSubtree) {
             return readSubtree();
         }
-        
+
         const { rootLocationId, userId } = this.props;
         const savedSubtrees = localStorage.getItem(KEY_CONTENT_TREE_SUBTREE);
         const subtrees = savedSubtrees ? JSON.parse(savedSubtrees) : null;

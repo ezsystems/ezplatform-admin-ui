@@ -29,7 +29,7 @@ export const useFindLocationsByParentLocationIdFetch = (locationData, { sortClau
         if (
             !locationData.parentLocationId ||
             locationData.collapsed ||
-            (locationData.subitems.length >= locationData.totalCount || locationData.subitems.length >= limit + offset)
+            locationData.subitems.length >= locationData.totalCount || locationData.subitems.length >= limit + offset
         ) {
             dispatch({ type: 'FETCH_END', data: {} });
 

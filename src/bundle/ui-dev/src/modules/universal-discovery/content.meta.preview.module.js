@@ -14,11 +14,10 @@ import {
     AllowRedirectsContext,
 } from './universal.discovery.module';
 
-export const getLocationData = (loadedLocationsMap, markedLocationId) => (
+export const getLocationData = (loadedLocationsMap, markedLocationId) =>
     loadedLocationsMap.find((loadedLocation) => loadedLocation.parentLocationId === markedLocationId) ||
     (loadedLocationsMap.length &&
-        loadedLocationsMap[loadedLocationsMap.length - 1].subitems.find((subitem) => subitem.location.id === markedLocationId))
-)
+        loadedLocationsMap[loadedLocationsMap.length - 1].subitems.find((subitem) => subitem.location.id === markedLocationId));
 
 const ContentMetaPreview = () => {
     const refContentMetaPreview = useRef(null);

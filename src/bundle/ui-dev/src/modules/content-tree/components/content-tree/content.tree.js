@@ -84,7 +84,15 @@ export default class ContentTree extends Component {
             return;
         }
 
-        const { loadMoreSubitems, currentLocationId, onClickItem, subitemsLoadLimit, subitemsLimit, treeMaxDepth, afterItemToggle } = this.props;
+        const {
+            loadMoreSubitems,
+            currentLocationId,
+            onClickItem,
+            subitemsLoadLimit,
+            subitemsLimit,
+            treeMaxDepth,
+            afterItemToggle,
+        } = this.props;
 
         const attrs = {
             items,

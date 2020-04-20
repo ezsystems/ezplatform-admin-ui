@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import ContentTreeModule from '../../../content-tree/content.tree.module';
 import { findLocationsById } from '../../services/universal.discovery.service';
 import { getLocationData } from '../../content.meta.preview.module';
-import { 
+import {
     AllowedContentTypesContext,
     ContainersOnlyContext,
     ContentTypesMapContext,
-    LoadedLocationsMapContext, 
-    MarkedLocationIdContext, 
+    LoadedLocationsMapContext,
+    MarkedLocationIdContext,
     MultipleConfigContext,
-    RestInfoContext, 
-    RootLocationIdContext, 
+    RestInfoContext,
+    RootLocationIdContext,
 } from '../../universal.discovery.module';
 
 const flattenTree = (tree) => tree.reduce((output, branch) => [...output, branch.locationId, ...flattenTree(branch.subitems)], []);
@@ -36,7 +36,7 @@ const TreeView = () => {
         if (locationId === markedLocationId) {
             return;
         }
-    
+
         setMarkedLocationId(locationId);
         dispatchLoadedLocationsAction({ type: 'CUT_LOCATIONS', locationId: markedLocationId });
         dispatchLoadedLocationsAction({ type: 'UPDATE_LOCATIONS', data: { parentLocationId: locationId, subitems: [] } });
@@ -49,14 +49,14 @@ const TreeView = () => {
             const isContainer = contentTypeInfo.isContainer;
             const isNotSelectable =
                 (containersOnly && !isContainer) || (allowedContentTypes && !allowedContentTypes.includes(contentTypeInfo.identifier));
-            
+
             // if (!multiple && !isNotSelectable) {
-                dispatchSelectedLocationsAction({ type: 'CLEAR_SELECTED_LOCATIONS' });
-                dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location });
+            dispatchSelectedLocationsAction({ type: 'CLEAR_SELECTED_LOCATIONS' });
+            dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location });
             // }
         });
-    }
-    const readSubtree = () => {        
+    };
+    const readSubtree = () => {
         const tree = [];
         let leafs = tree;
 
@@ -72,12 +72,12 @@ const TreeView = () => {
         });
 
         return tree;
-    }
+    };
     const currentLocationPath = locationData ? locationData.location.pathString : '/1/2/'; // TODO: Get default path
 
     return (
         <div className="c-tree">
-            <ContentTreeModule 
+            <ContentTreeModule
                 userId={14}
                 currentLocationPath={currentLocationPath}
                 rootLocationId={rootLocationId}

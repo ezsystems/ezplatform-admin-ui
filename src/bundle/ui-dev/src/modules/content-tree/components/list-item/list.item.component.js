@@ -21,7 +21,7 @@ class ListItem extends Component {
 
     getSortedActions() {
         const { itemActions } = window.eZ.adminUiConfig.contentTreeWidget;
-        const actions = itemActions  ? [...itemActions   ] : [];
+        const actions = itemActions ? [...itemActions] : [];
 
         return actions.sort((actionA, actionB) => {
             return actionB.priority - actionA.priority;

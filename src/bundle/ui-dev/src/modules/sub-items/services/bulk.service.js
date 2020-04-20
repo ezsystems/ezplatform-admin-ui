@@ -85,7 +85,7 @@ const getBulkAddLocationRequestOperation = (contentId, destination) => ({
     content: JSON.stringify({
         LocationCreate: {
             ParentLocation: {
-                '_href': destination,
+                _href: destination,
             },
             sortField: 'PATH',
             sortOrder: 'ASC',
@@ -156,7 +156,9 @@ const makeBulkRequest = ({ token, siteaccess }, requestBodyOperations, callback)
         .catch(() => {
             const message = Translator.trans(
                 /*@Desc("An unexpected error occurred while processing the Content item(s). Please try again later.")*/
-                'bulk_request.error.message', {}, 'sub_items'
+                'bulk_request.error.message',
+                {},
+                'sub_items'
             );
 
             window.eZ.helpers.notification.showErrorNotification(message);
