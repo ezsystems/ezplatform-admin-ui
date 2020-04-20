@@ -195,11 +195,8 @@ class ListItem extends Component {
                 </a>
                 {this.sortedActions.map((action) => {
                     const Component = action.component;
-                    const location = {
-                        locationId,
-                    };
 
-                    return <Component key={action.id} location={location} />;
+                    return <Component key={action.id} {...this.props} />;
                 })}
             </div>
         );

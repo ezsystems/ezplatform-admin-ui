@@ -156,6 +156,12 @@ export default class ContentTreeModule extends Component {
     }
 
     readSubtree() {
+        const { readSubtree } = this.props;
+
+        if (readSubtree) {
+            return readSubtree();
+        }
+        
         const { rootLocationId, userId } = this.props;
         const savedSubtrees = localStorage.getItem(KEY_CONTENT_TREE_SUBTREE);
         const subtrees = savedSubtrees ? JSON.parse(savedSubtrees) : null;
@@ -358,6 +364,7 @@ ContentTreeModule.propTypes = {
         siteaccess: PropTypes.string.isRequired,
     }).isRequired,
     onClickItem: PropTypes.func,
+    readSubtree: PropTypes.func,
 };
 
 ContentTreeModule.defaultProps = {
