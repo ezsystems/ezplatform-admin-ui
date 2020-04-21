@@ -1,13 +1,24 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { SelectedLocationsContext, RestInfoContext } from '../../universal.discovery.module';
+import {
+    SelectedLocationsContext,
+    RestInfoContext,
+    MultipleConfigContext,
+    ContainersOnlyContext,
+    AllowedContentTypesContext,
+} from '../../universal.discovery.module';
 import { findLocationsById } from '../../services/universal.discovery.service';
 import PureToggleSelectionButton from '../pure-toggle-selection-button/pure.toggle.selection.button';
 
-const TreeItemToggleSelectionButton = ({ locationId }) => {
+const TreeItemToggleSelectionButton = ({ locationId, isContainer, contentTypeIdentifier }) => {
     const [selectedLocations, dispatchSelectedLocationsAction] = useContext(SelectedLocationsContext);
+    const [multiple, multipleItemsLimit] = useContext(MultipleConfigContext);
+    const containersOnly = useContext(ContainersOnlyContext);
+    const allowedContentTypes = useContext(AllowedContentTypesContext);
     const restInfo = useContext(RestInfoContext);
+    const isNotSelectable =
+        (containersOnly && !isContainer) || (allowedContentTypes && !allowedContentTypes.includes(contentTypeIdentifier));
     const isSelected = selectedLocations.some((selectedItem) => selectedItem.location.id === locationId);
     const toggleSelection = () => {
         if (isSelected) {
@@ -22,6 +33,10 @@ const TreeItemToggleSelectionButton = ({ locationId }) => {
     useEffect(() => {
         window.eZ.helpers.tooltips.parse(window.document.querySelector('.c-list'));
     }, []);
+
+    if (!multiple || isNotSelectable) {
+        return null;
+    }
 
     return <PureToggleSelectionButton isSelected={isSelected} toggleSelection={toggleSelection} />;
 };
@@ -40,6 +55,8 @@ eZ.addConfig(
 
 TreeItemToggleSelectionButton.propTypes = {
     locationId: PropTypes.number.isRequired,
+    isContainer: PropTypes.bool.isRequired,
+    contentTypeIdentifier: PropTypes.string.isRequired,
 };
 
 export default TreeItemToggleSelectionButton;
