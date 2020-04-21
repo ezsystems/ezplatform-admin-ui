@@ -8,28 +8,22 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Validator;
 
-use eZ\Publish\API\Repository\Values\Translation\Plural;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use EzSystems\EzPlatformContentForms\Validator\ValidationErrorsProcessor as BaseValidationErrorProcessor;
 
 /**
  * @internal
+ *
+ * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformContentForms Bundle.
+ * @see \EzSystems\EzPlatformContentForms\Validator\ValidationErrorsProcessor.
  */
 final class ValidationErrorsProcessor
 {
-    /** @var \Symfony\Component\Validator\Context\ExecutionContextInterface */
-    private $context;
+    /** @var \EzSystems\EzPlatformContentForms\Validator\ValidationErrorsProcessor */
+    private $validationErrorsProcessor;
 
-    /** @var callable|null */
-    private $propertyPathGenerator;
-
-    /**
-     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
-     * @param callable|null $propertyPathGenerator
-     */
-    public function __construct(ExecutionContextInterface $context, callable $propertyPathGenerator = null)
+    public function __construct(BaseValidationErrorProcessor $validationErrorsProcessor)
     {
-        $this->context = $context;
-        $this->propertyPathGenerator = $propertyPathGenerator;
+        $this->validationErrorsProcessor = $validationErrorsProcessor;
     }
 
     /**
@@ -39,25 +33,6 @@ final class ValidationErrorsProcessor
      */
     public function processValidationErrors(array $validationErrors): void
     {
-        if (empty($validationErrors)) {
-            return;
-        }
-
-        $propertyPathGenerator = $this->propertyPathGenerator;
-        foreach ($validationErrors as $i => $error) {
-            $message = $error->getTranslatableMessage();
-            /** @var \Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface $violationBuilder */
-            $violationBuilder = $this->context->buildViolation($message instanceof Plural ? $message->plural : $message->message);
-            $violationBuilder->setParameters($message->values);
-
-            if ($propertyPathGenerator !== null) {
-                $propertyPath = $propertyPathGenerator($i, $error->getTarget());
-                if ($propertyPath) {
-                    $violationBuilder->atPath($propertyPath);
-                }
-            }
-
-            $violationBuilder->addViolation();
-        }
+        $this->validationErrorsProcessor->processValidationErrors($validationErrors);
     }
 }

@@ -8,50 +8,26 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
 
-use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\API\Repository\Values\User\PasswordValidationContext;
-use EzSystems\EzPlatformAdminUi\Validator\ValidationErrorsProcessor;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator as BasePasswordValidator;
 
+/**
+ * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformUser Bundle. Use it instead.
+ * @see \EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator.
+ */
 class PasswordValidator extends ConstraintValidator
 {
-    /** @var \eZ\Publish\API\Repository\UserService */
-    private $userService;
+    /** @var \EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator */
+    private $passwordValidator;
 
-    /**
-     * @param \eZ\Publish\API\Repository\UserService $userService
-     */
-    public function __construct(UserService $userService)
+    public function __construct(BasePasswordValidator $passwordValidator)
     {
-        $this->userService = $userService;
+        $this->passwordValidator = $passwordValidator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint): void
     {
-        if (!\is_string($value) || empty($value)) {
-            return;
-        }
-
-        $passwordValidationContext = new PasswordValidationContext([
-            'contentType' => $constraint->contentType,
-        ]);
-
-        $validationErrors = $this->userService->validatePassword($value, $passwordValidationContext);
-        if (!empty($validationErrors)) {
-            $validationErrorsProcessor = $this->createValidationErrorsProcessor();
-            $validationErrorsProcessor->processValidationErrors($validationErrors);
-        }
-    }
-
-    /**
-     * @return \EzSystems\EzPlatformAdminUi\Validator\ValidationErrorsProcessor
-     */
-    protected function createValidationErrorsProcessor(): ValidationErrorsProcessor
-    {
-        return new ValidationErrorsProcessor($this->context);
+        $this->passwordValidator->validate($value, $constraint);
     }
 }

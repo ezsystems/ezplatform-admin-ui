@@ -48,8 +48,3 @@ services:
         tags:
             - { name: validator.constraint_validator, alias: ezplatform.content_forms.validator.unique_url }
 
-    EzSystems\EzPlatformAdminUi\Validator\Constraints\PasswordValidator:
-        arguments:
-            $userService: '@ezpublish.api.service.user'
-        tags:
-            - { name: validator.constraint_validator }
