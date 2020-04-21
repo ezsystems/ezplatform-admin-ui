@@ -17,6 +17,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use eZ\Publish\API\Repository\Values\User\User as APIUser;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator as BaseUserPasswordValidator;
 
 final class UserPasswordValidatorTest extends TestCase
 {
@@ -45,7 +46,9 @@ final class UserPasswordValidatorTest extends TestCase
         $this->userService = $this->createMock(UserService::class);
         $this->tokenStorage = $this->createMock(TokenStorageInterface::class);
         $this->executionContext = $this->createMock(ExecutionContextInterface::class);
-        $this->validator = new UserPasswordValidator($this->userService, $this->tokenStorage);
+        $this->validator = new UserPasswordValidator(
+            new BaseUserPasswordValidator($this->userService, $this->tokenStorage)
+        );
         $this->validator->initialize($this->executionContext);
     }
 

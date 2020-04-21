@@ -8,7 +8,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Tests\Templating\Twig;
 
 use eZ\Publish\Core\MVC\Symfony\Templating\Tests\Twig\Extension\FileSystemTwigIntegrationTestCase;
 use eZ\Publish\Core\MVC\Symfony\Templating\Twig\FieldBlockRenderer;
-use eZ\Publish\Core\MVC\Symfony\Templating\Twig\ResourceProvider;
+use eZ\Publish\Core\MVC\Symfony\Templating\Twig\ResourceProviderInterface;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
 use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FieldEditRenderingExtension;
@@ -21,7 +21,7 @@ class FieldEditRenderingExtensionTest extends FileSystemTwigIntegrationTestCase
      */
     public function getExtensions(): array
     {
-        $resourceProvider = $this->createMock(ResourceProvider::class);
+        $resourceProvider = $this->createMock(ResourceProviderInterface::class);
         $resourceProvider->method('getFieldDefinitionEditResources')->willReturn([
             [
                 'template' => $this->getTemplatePath('fields_override1.html.twig'),
