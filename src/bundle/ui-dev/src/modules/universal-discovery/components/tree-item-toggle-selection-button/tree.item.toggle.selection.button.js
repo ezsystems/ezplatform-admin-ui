@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import {
+    UDWContext,
     SelectedLocationsContext,
     RestInfoContext,
     MultipleConfigContext,
@@ -12,6 +13,12 @@ import { findLocationsById } from '../../services/universal.discovery.service';
 import PureToggleSelectionButton from '../pure-toggle-selection-button/pure.toggle.selection.button';
 
 const TreeItemToggleSelectionButton = ({ locationId, isContainer, contentTypeIdentifier }) => {
+    const isUDW = useContext(UDWContext);
+
+    if (!isUDW) {
+        return null;
+    }
+
     const [selectedLocations, dispatchSelectedLocationsAction] = useContext(SelectedLocationsContext);
     const [multiple, multipleItemsLimit] = useContext(MultipleConfigContext);
     const containersOnly = useContext(ContainersOnlyContext);
