@@ -17,6 +17,7 @@ use EzSystems\EzPlatformAdminUi\Validator\Constraints\PasswordValidator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator as BasePasswordValidator;
 
 class PasswordValidatorTest extends TestCase
 {
@@ -33,7 +34,7 @@ class PasswordValidatorTest extends TestCase
     {
         $this->userService = $this->createMock(UserService::class);
         $this->executionContext = $this->createMock(ExecutionContextInterface::class);
-        $this->validator = new PasswordValidator($this->userService);
+        $this->validator = new PasswordValidator(new BasePasswordValidator($this->userService));
         $this->validator->initialize($this->executionContext);
     }
 

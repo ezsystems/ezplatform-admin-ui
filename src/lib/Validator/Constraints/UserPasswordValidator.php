@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException as ValidatorConstraintDefinitionException;
 use EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator as BaseUserPasswordValidator;
 
@@ -27,6 +28,11 @@ class UserPasswordValidator extends ConstraintValidator
     public function __construct(BaseUserPasswordValidator $passwordValidator)
     {
         $this->passwordValidator = $passwordValidator;
+    }
+
+    public function initialize(ExecutionContextInterface $context)
+    {
+        $this->passwordValidator->initialize($context);
     }
 
     /**
