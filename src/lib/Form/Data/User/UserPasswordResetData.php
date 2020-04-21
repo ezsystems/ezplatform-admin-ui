@@ -10,6 +10,10 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data\User;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformUser Bundle. Use it instead.
+ * @see \EzSystems\EzPlatformUser\Form\Data\UserPasswordResetData.
+ */
 class UserPasswordResetData
 {
     /**

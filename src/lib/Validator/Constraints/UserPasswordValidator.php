@@ -8,33 +8,25 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
 
-use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\API\Repository\Values\User\User;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException as ValidatorConstraintDefinitionException;
+use EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator as BaseUserPasswordValidator;
 
 /**
  * Will check if logged user and password are match.
+ *
+ * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformUser Bundle. Use it instead.
+ * @see \EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator.
  */
 class UserPasswordValidator extends ConstraintValidator
 {
-    /** @var UserService */
-    private $userService;
+    /** @var \EzSystems\EzPlatformAdminUi\Validator\Constraints\UserPasswordValidator */
+    private $passwordValidator;
 
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
-
-    /**
-     * @param UserService $userService
-     * @param TokenStorageInterface $tokenStorage
-     */
-    public function __construct(UserService $userService, TokenStorageInterface $tokenStorage)
+    public function __construct(BaseUserPasswordValidator $passwordValidator)
     {
-        $this->userService = $userService;
-        $this->tokenStorage = $tokenStorage;
+        $this->passwordValidator = $passwordValidator;
     }
 
     /**
@@ -47,20 +39,6 @@ class UserPasswordValidator extends ConstraintValidator
      */
     public function validate($password, Constraint $constraint)
     {
-        if (null === $password || '' === $password) {
-            $this->context->addViolation($constraint->message);
-
-            return;
-        }
-
-        $user = $this->tokenStorage->getToken()->getUser()->getAPIUser();
-
-        if (!$user instanceof User) {
-            throw new ConstraintDefinitionException('The User object must implement the UserReference interface.');
-        }
-
-        if (!$this->userService->checkUserCredentials($user, $password)) {
-            $this->context->buildViolation($constraint->message)->addViolation();
-        }
+        $this->passwordValidator->validate($password, $constraint);
     }
 }

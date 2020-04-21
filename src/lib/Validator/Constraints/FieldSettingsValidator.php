@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
 use Symfony\Component\Validator\Constraint;
+use EzSystems\EzPlatformContentForms\Validator\Constraints\FieldTypeValidator;
 
 /**
  * Will check if field settings for FieldDefinition are valid.

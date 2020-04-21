@@ -120,7 +120,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\Setting\UserSettingUpdateType;
+use EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserEditType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordChangeType;
@@ -948,6 +948,9 @@ class FormFactory
     }
 
     /**
+     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
+     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::changeUserPassword.
+     *
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData $data
      * @param string|null $name
      * @param \eZ\Publish\API\Repository\Values\User\User|null $user
@@ -969,6 +972,9 @@ class FormFactory
     }
 
     /**
+     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
+     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::forgotUserPassword.
+     *
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotData $data
      * @param string|null $name
      *
@@ -986,6 +992,9 @@ class FormFactory
     }
 
     /**
+     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
+     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::forgotUserPassword.
+     *
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotWithLoginData $data
      * @param string|null $name
      *
@@ -1003,6 +1012,9 @@ class FormFactory
     }
 
     /**
+     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
+     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::resetUserPassword.
+     *
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData $data
      * @param string|null $name
      * @param \eZ\Publish\API\Repository\Values\User\User|null $user
@@ -1150,6 +1162,9 @@ class FormFactory
     }
 
     /**
+     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
+     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::updateUserSetting.
+     *
      * @param string $userSettingIdentifier
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\Setting\UserSettingUpdateData $data
      * @param string|null $name
