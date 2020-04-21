@@ -77,6 +77,7 @@ List.propTypes = {
 
 List.defaultProps = {
     isRoot: false,
+    onClickItem: () => {},
 };
 
 export default List;

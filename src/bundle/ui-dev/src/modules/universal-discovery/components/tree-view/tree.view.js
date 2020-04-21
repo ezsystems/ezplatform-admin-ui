@@ -12,8 +12,9 @@ import {
     MultipleConfigContext,
     RestInfoContext,
     RootLocationIdContext,
-    SortingContext,
+    SelectedLocationsContext,
     SortOrderContext,
+    SortingContext,
 } from '../../universal.discovery.module';
 
 const flattenTree = (tree) => tree.reduce((output, branch) => [...output, branch.locationId, ...flattenTree(branch.subitems)], []);
@@ -22,8 +23,9 @@ const TreeView = () => {
     const [loadedLocationsMap, dispatchLoadedLocationsAction] = useContext(LoadedLocationsMapContext);
     const [markedLocationId, setMarkedLocationId] = useContext(MarkedLocationIdContext);
     const [multiple, multipleItemsLimit] = useContext(MultipleConfigContext);
-    const [sorting, setSorting] = useContext(SortingContext);
+    const [selectedLocations, dispatchSelectedLocationsAction] = useContext(SelectedLocationsContext);
     const [sortOrder, setSortOrder] = useContext(SortOrderContext);
+    const [sorting, setSorting] = useContext(SortingContext);
     const allowedContentTypes = useContext(AllowedContentTypesContext);
     const containersOnly = useContext(ContainersOnlyContext);
     const contentTypesMap = useContext(ContentTypesMapContext);
