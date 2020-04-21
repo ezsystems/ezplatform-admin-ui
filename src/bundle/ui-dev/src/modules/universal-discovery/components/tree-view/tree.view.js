@@ -1,8 +1,7 @@
 import React, { useContext, useMemo } from 'react';
-import PropTypes from 'prop-types';
 
 import ContentTreeModule from '../../../content-tree/content.tree.module';
-import { findLocationsByParentLocationId, loadAccordionData } from '../../services/universal.discovery.service';
+import { loadAccordionData } from '../../services/universal.discovery.service';
 import { getLocationData } from '../../content.meta.preview.module';
 import {
     AllowedContentTypesContext,
@@ -15,12 +14,11 @@ import {
     RootLocationIdContext,
     SortingContext,
     SortOrderContext,
-    SORTING_OPTIONS,
 } from '../../universal.discovery.module';
 
 const flattenTree = (tree) => tree.reduce((output, branch) => [...output, branch.locationId, ...flattenTree(branch.subitems)], []);
 
-const TreeView = ({ itemsPerPage }) => {
+const TreeView = () => {
     const [loadedLocationsMap, dispatchLoadedLocationsAction] = useContext(LoadedLocationsMapContext);
     const [markedLocationId, setMarkedLocationId] = useContext(MarkedLocationIdContext);
     const [multiple, multipleItemsLimit] = useContext(MultipleConfigContext);
@@ -32,7 +30,6 @@ const TreeView = ({ itemsPerPage }) => {
     const restInfo = useContext(RestInfoContext);
     const rootLocationId = useContext(RootLocationIdContext);
     const locationData = useMemo(() => getLocationData(loadedLocationsMap, markedLocationId), [markedLocationId, loadedLocationsMap]);
-    const sortingOptions = SORTING_OPTIONS.find((option) => option.sortClause === sorting);
     const expandItem = (item, event) => {
         event.preventDefault();
         event.currentTarget
@@ -40,24 +37,23 @@ const TreeView = ({ itemsPerPage }) => {
             .querySelector('.c-list-item__toggler')
             .click();
     };
-    const markLocation = (item, isExpanded) => {
+    const markLocation = (item) => {
         const { locationId } = item;
 
         if (locationId === markedLocationId) {
             return;
         }
 
-        findLocationsByParentLocationId(
+        loadAccordionData(
             {
                 ...restInfo,
                 parentLocationId: locationId,
-                sortClause: sortingOptions.sortClause,
-                sortOrder,
-                limit: itemsPerPage,
-                offset: 0,
+                sortClause: sorting,
+                sortOrder: sortOrder,
+                rootLocationId,
             },
-            (response) => {
-                const { location } = response;
+            (locationsMap) => {
+                const { location } = locationsMap[locationsMap.length - 1];
                 const contentTypeInfo = contentTypesMap[location.ContentInfo.Content.ContentType._href];
                 const isContainer = contentTypeInfo.isContainer;
                 const isNotSelectable =
@@ -65,7 +61,7 @@ const TreeView = ({ itemsPerPage }) => {
 
                 setMarkedLocationId(locationId);
                 dispatchLoadedLocationsAction({ type: 'CUT_LOCATIONS', locationId: markedLocationId });
-                dispatchLoadedLocationsAction({ type: 'UPDATE_LOCATIONS', data: { ...response } });
+                dispatchLoadedLocationsAction({ type: 'SET_LOCATIONS', data: locationsMap });
 
                 if (!multiple && !isNotSelectable) {
                     dispatchSelectedLocationsAction({ type: 'CLEAR_SELECTED_LOCATIONS' });
@@ -95,8 +91,6 @@ const TreeView = ({ itemsPerPage }) => {
     const locationsLoaded = loadedLocationsMap.length > 1 || loadedLocationsMap[0].subitems.length > 0;
     const contentTreeVisible = (markedLocationId !== null && locationsLoaded) || markedLocationId === null;
 
-    console.log(loadedLocationsMap);
-
     return (
         <div className="c-tree">
             {contentTreeVisible && (
@@ -112,14 +106,6 @@ const TreeView = ({ itemsPerPage }) => {
             )}
         </div>
     );
-};
-
-TreeView.propTypes = {
-    itemsPerPage: PropTypes.number,
-};
-
-TreeView.defaultProps = {
-    itemsPerPage: 50,
 };
 
 export default TreeView;
