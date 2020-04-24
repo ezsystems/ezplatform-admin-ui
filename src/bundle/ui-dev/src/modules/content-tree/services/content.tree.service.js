@@ -28,8 +28,13 @@ export const loadLocationItems = ({ siteaccess }, parentLocationId, callback, li
         .catch(showErrorNotification);
 };
 
-export const loadSubtree = ({ token, siteaccess }, subtree, callback) => {
-    const request = new Request(`${ENDPOINT_LOAD_SUBTREE}`, {
+export const loadSubtree = ({ restInfo: { token, siteaccess }, subtree, sortClause, sortOrder }, callback) => {
+    let path = ENDPOINT_LOAD_SUBTREE;
+    if (sortClause && sortOrder) {
+        path += `?sortClause=${sortClause}&sortOrder=${sortOrder}`;
+    }
+
+    const request = new Request(path, {
         method: 'POST',
         mode: 'same-origin',
         credentials: 'same-origin',

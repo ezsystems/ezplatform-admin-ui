@@ -104,6 +104,10 @@ const TreeView = () => {
                     onClickItem={expandItem}
                     readSubtree={readSubtree}
                     afterItemToggle={markLocation}
+                    sort={{
+                        sortClause: sorting,
+                        sortOrder,
+                    }}
                 />
             )}
         </div>
