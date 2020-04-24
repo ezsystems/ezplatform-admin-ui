@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Limitation\Mapper;
 
 use eZ\Publish\API\Repository\Values\User\Limitation;
+use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
 use EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperInterface;
 
@@ -25,7 +26,7 @@ class SiteAccessLimitationMapper extends MultipleSelectionBasedMapper implements
     {
         $siteAccesses = [];
         foreach ($this->siteAccessService->getAll() as $sa) {
-            $siteAccesses[$this->getSiteAccessKey($sa->name)] = $sa->name;
+            $siteAccesses[$this->getSiteAccessKey($sa->name)] = $this->getSiteAccessName($sa);
         }
 
         return $siteAccesses;
@@ -36,7 +37,7 @@ class SiteAccessLimitationMapper extends MultipleSelectionBasedMapper implements
         $values = [];
         foreach ($this->siteAccessService->getAll() as $sa) {
             if (in_array($this->getSiteAccessKey($sa->name), $limitation->limitationValues)) {
-                $values[] = $sa->name;
+                $values[] = $this->getSiteAccessName($sa);
             }
         }
 
@@ -46,5 +47,14 @@ class SiteAccessLimitationMapper extends MultipleSelectionBasedMapper implements
     private function getSiteAccessKey($sa)
     {
         return sprintf('%u', crc32($sa));
+    }
+
+    private function getSiteAccessName(SiteAccess $sa)
+    {
+        if (empty($sa->siteFactoryName)) {
+            return $sa->name;
+        } else {
+            return $sa->siteFactoryName;
+        }
     }
 }
