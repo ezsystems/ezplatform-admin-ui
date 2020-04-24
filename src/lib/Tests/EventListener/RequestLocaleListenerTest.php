@@ -14,7 +14,6 @@ use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\EventListener\RequestLocaleListener;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -59,12 +58,8 @@ class RequestLocaleListenerTest extends TestCase
 
         $this->httpKernel = $this->createMock(HttpKernelInterface::class);
 
-        $requestStack = new RequestStack();
-        $requestStack->push($this->request);
-
         $this->userLanguagePreferenceProvider = $this
             ->getMockBuilder(UserLanguagePreferenceProviderInterface::class)
-            ->setConstructorArgs([$requestStack])
             ->getMock();
 
         $this->configResolver = $this->createMock(ConfigResolverInterface::class);

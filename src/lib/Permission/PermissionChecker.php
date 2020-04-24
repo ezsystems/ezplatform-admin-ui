@@ -27,6 +27,7 @@ use eZ\Publish\API\Repository\Values\User\Limitation\SubtreeLimitation;
 use eZ\Publish\API\Repository\Values\User\LookupLimitationResult;
 use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
+use function is_array;
 
 class PermissionChecker implements PermissionCheckerInterface
 {
@@ -223,7 +224,7 @@ class PermissionChecker implements PermissionCheckerInterface
     {
         $currentUserId = $this->permissionResolver->getCurrentUserReference()->getUserId();
 
-        if (\is_array($this->flattenArrayOfLimitations[$currentUserId])) {
+        if ($this->flattenArrayOfLimitations !== null && is_array($this->flattenArrayOfLimitations[$currentUserId])) {
             return $this->flattenArrayOfLimitations[$currentUserId];
         }
 
