@@ -249,18 +249,15 @@ export default class TableViewItemComponent extends PureComponent {
     }
 
     renderCreatorCell() {
-        return <div className="c-table-view-item__text-wrapper">{this.props.item.content._info.owner.name}</div>;
+        return <div className="c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.owner)}</div>;
     }
 
     renderContributorCell() {
-        return <div className="c-table-view-item__text-wrapper">{this.props.item.content._info.currentVersion.creator.name}</div>;
+        return <div className="c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.currentVersion.creator)}</div>;
     }
 
     renderSectionCell() {
-        const section = this.props.item.content._info.section;
-        const sectionName = section ? section.name : '';
-
-        return <div className="c-table-view-item__text-wrapper">{sectionName}</div>;
+        return <div className="c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.section)}</div>;
     }
 
     renderLocationIdCell() {
@@ -297,6 +294,10 @@ export default class TableViewItemComponent extends PureComponent {
                 </td>
             );
         });
+    }
+
+    getName(item) {
+        return item ? item.name : '';
     }
 
     /**
