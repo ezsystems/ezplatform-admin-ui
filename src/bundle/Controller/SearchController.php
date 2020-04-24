@@ -103,7 +103,7 @@ class SearchController extends Controller
         $search = $request->query->get('search');
         $limit = $search['limit'] ?? $this->defaultPaginationLimit;
         $page = $search['page'] ?? 1;
-        $query = $search['query'];
+        $query = $search['query'] ?? '';
         $section = null;
         $creator = null;
         $contentTypes = [];
