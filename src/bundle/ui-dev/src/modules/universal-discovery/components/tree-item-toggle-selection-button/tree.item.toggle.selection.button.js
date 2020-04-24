@@ -15,6 +15,10 @@ import PureToggleSelectionButton from '../pure-toggle-selection-button/pure.togg
 const TreeItemToggleSelectionButton = ({ locationId, isContainer, contentTypeIdentifier }) => {
     const isUDW = useContext(UDWContext);
 
+    useEffect(() => {
+        window.eZ.helpers.tooltips.parse(window.document.querySelector('.c-list'));
+    }, []);
+
     if (!isUDW) {
         return null;
     }
@@ -36,10 +40,6 @@ const TreeItemToggleSelectionButton = ({ locationId, isContainer, contentTypeIde
             });
         }
     };
-
-    useEffect(() => {
-        window.eZ.helpers.tooltips.parse(window.document.querySelector('.c-list'));
-    }, []);
 
     if (!multiple || isNotSelectable) {
         return null;

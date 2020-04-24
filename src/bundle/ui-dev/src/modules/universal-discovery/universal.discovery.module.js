@@ -394,7 +394,7 @@ UniversalDiscoveryModule.defaultProps = {
     containersOnly: false,
     activeSortClause: 'date',
     activeSortOrder: 'ascending',
-    activeView: 'tree',
+    activeView: 'finder',
     tabs: window.eZ.adminUiConfig.universalDiscoveryWidget.tabs,
     selectedLocations: [],
 };

@@ -13,7 +13,7 @@ system:
                     active_sort_clause: 'DatePublished'
                     active_sort_order: 'ascending'
                     active_tab: 'browse'
-                    active_view: 'tree' # TODO: back to finder
+                    active_view: 'finder'
                     allow_redirects: false
                     allow_confirmation: true
                     content_on_the_fly:
