@@ -4,6 +4,7 @@ import Tab from './components/tab/tab';
 import BookmarksList from './components/bookmarks-list/bookmarks.list';
 import GridView from './components/grid-view/grid.view';
 import Finder from './components/finder/finder';
+import TreeView from './components/tree-view/tree.view';
 
 import {
     CurrentViewContext,
@@ -30,6 +31,7 @@ const BookmarksTabModule = () => {
     const views = {
         grid: <GridView itemsPerPage={tabsConfig.bookmarks.itemsPerPage} />,
         finder: <Finder itemsPerPage={tabsConfig.bookmarks.itemsPerPage} />,
+        tree: <TreeView itemsPerPage={tabsConfig.browse.itemsPerPage} />,
     };
     const renderBrowseLocations = () => {
         if (!markedLocationId) {

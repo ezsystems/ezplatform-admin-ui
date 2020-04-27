@@ -90,7 +90,7 @@ const TreeView = () => {
         return tree;
     };
     const currentLocationPath = locationData && locationData.location ? locationData.location.pathString : '/1/';
-    const locationsLoaded = loadedLocationsMap.length > 1 || loadedLocationsMap[0].subitems.length > 0;
+    const locationsLoaded = loadedLocationsMap.length > 1 || (loadedLocationsMap.length === 1 && loadedLocationsMap[0].subitems.length > 0);
     const contentTreeVisible = (markedLocationId !== null && locationsLoaded) || markedLocationId === null;
 
     return (
