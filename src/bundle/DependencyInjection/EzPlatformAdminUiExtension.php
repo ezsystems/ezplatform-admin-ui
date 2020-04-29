@@ -36,7 +36,7 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $loader->load('role.yaml');
 
         $environment = $container->getParameter('kernel.environment');
-        if (in_array($environment, ['behat', 'test'])) {
+        if ($environment === 'behat') {
             $loader->load('services/feature_contexts.yaml');
         }
     }
