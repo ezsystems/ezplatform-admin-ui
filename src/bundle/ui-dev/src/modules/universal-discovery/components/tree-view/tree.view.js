@@ -1,4 +1,5 @@
 import React, { useContext, useMemo } from 'react';
+import PropTypes from 'prop-types';
 
 import ContentTreeModule from '../../../content-tree/content.tree.module';
 import { loadAccordionData } from '../../services/universal.discovery.service';
@@ -19,7 +20,7 @@ import {
 
 const flattenTree = (tree) => tree.reduce((output, branch) => [...output, branch.locationId, ...flattenTree(branch.subitems)], []);
 
-const TreeView = () => {
+const TreeView = ({ itemsPerPage }) => {
     const [loadedLocationsMap, dispatchLoadedLocationsAction] = useContext(LoadedLocationsMapContext);
     const [markedLocationId, setMarkedLocationId] = useContext(MarkedLocationIdContext);
     const [multiple, multipleItemsLimit] = useContext(MultipleConfigContext);
@@ -32,6 +33,7 @@ const TreeView = () => {
     const restInfo = useContext(RestInfoContext);
     const rootLocationId = useContext(RootLocationIdContext);
     const locationData = useMemo(() => getLocationData(loadedLocationsMap, markedLocationId), [markedLocationId, loadedLocationsMap]);
+    const userId = window.eZ.helpers.user.getId();
     const expandItem = (item, event) => {
         event.preventDefault();
         event.currentTarget
@@ -62,33 +64,30 @@ const TreeView = () => {
                     (containersOnly && !isContainer) || (allowedContentTypes && !allowedContentTypes.includes(contentTypeInfo.identifier));
 
                 setMarkedLocationId(locationId);
-                dispatchLoadedLocationsAction({ type: 'CUT_LOCATIONS', locationId: markedLocationId });
                 dispatchLoadedLocationsAction({ type: 'SET_LOCATIONS', data: locationsMap });
 
                 if (!multiple && !isNotSelectable) {
-                    dispatchSelectedLocationsAction({ type: 'CLEAR_SELECTED_LOCATIONS' });
-                    dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location });
+                    dispatchSelectedLocationsAction({ type: 'REPLACE_SELECTED_LOCATIONS', locations: [{ location }] });
                 }
             }
         );
     };
-    const readSubtree = () => {
-        const tree = [];
-        let leafs = tree;
+    const readSubtreeRecursive = (tree) => {
+        if (tree.length === 0) {
+            return [];
+        }
 
-        loadedLocationsMap.forEach((location) => {
-            leafs.push({
-                children: [],
-                limit: 30,
-                locationId: location.parentLocationId,
-                offset: 0,
-                '_media-type': 'application/vnd.ez.api.ContentTreeLoadSubtreeRequestNode',
-            });
-            leafs = leafs[0].children;
-        });
+        const location = tree.shift();
 
-        return tree;
-    };
+        return [{
+            children: readSubtreeRecursive(tree),
+            limit: itemsPerPage,
+            locationId: location.parentLocationId,
+            offset: 0,
+            '_media-type': 'application/vnd.ez.api.ContentTreeLoadSubtreeRequestNode',
+        }];
+    }
+    const readSubtree = () => readSubtreeRecursive([...loadedLocationsMap]);
     const currentLocationPath = locationData && locationData.location ? locationData.location.pathString : '/1/';
     const locationsLoaded = loadedLocationsMap.length > 1 || (loadedLocationsMap.length === 1 && loadedLocationsMap[0].subitems.length > 0);
     const contentTreeVisible = (markedLocationId !== null && locationsLoaded) || markedLocationId === null;
@@ -97,7 +96,7 @@ const TreeView = () => {
         <div className="c-tree">
             {contentTreeVisible && (
                 <ContentTreeModule
-                    userId={14}
+                    userId={userId}
                     currentLocationPath={currentLocationPath}
                     rootLocationId={rootLocationId}
                     restInfo={restInfo}
@@ -112,6 +111,14 @@ const TreeView = () => {
             )}
         </div>
     );
+};
+
+TreeView.propTypes = {
+    itemsPerPage: PropTypes.number,
+};
+
+TreeView.defaultProps = {
+    itemsPerPage: 50,
 };
 
 export default TreeView;

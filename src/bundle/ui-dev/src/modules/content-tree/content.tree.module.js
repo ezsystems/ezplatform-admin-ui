@@ -168,7 +168,7 @@ export default class ContentTreeModule extends Component {
     readSubtree() {
         const { readSubtree } = this.props;
 
-        if (readSubtree) {
+        if (typeof readSubtree === 'function') {
             return readSubtree();
         }
 
@@ -343,7 +343,8 @@ export default class ContentTreeModule extends Component {
 
     getLoadSubtreeParams() {
         return {
-            restInfo: this.props.restInfo,
+            token: this.props.restInfo.token,
+            siteaccess: this.props.restInfo.siteaccess,
             subtree: this.subtree,
             sortClause: this.props.sort.sortClause,
             sortOrder: this.props.sort.sortOrder,
@@ -397,6 +398,6 @@ ContentTreeModule.defaultProps = {
     subitemsLimit: window.eZ.adminUiConfig.contentTree.childrenLoadMaxLimit,
     subitemsLoadLimit: window.eZ.adminUiConfig.contentTree.loadMoreLimit,
     treeMaxDepth: window.eZ.adminUiConfig.contentTree.treeMaxDepth,
-    afterItemToggle: () => {},
+    afterItemToggle: () => { },
     sort: {},
 };
