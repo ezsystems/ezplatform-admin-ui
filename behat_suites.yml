@@ -33,6 +33,8 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SectionsContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ObjectStatesContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\DashboardContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SearchContext
+                - EzSystems\BehatBundle\Context\Object\ContentContext
                 - EzSystems\BehatBundle\Context\Object\ContentTypeContext
                 - EzSystems\BehatBundle\Context\Api\TestContext
 

@@ -28,6 +28,8 @@ abstract class Page
     /** @var string locator for page title */
     protected $pageTitleLocator;
 
+    protected $fields;
+
     // @var UpperMenu
     public $upperMenu;
 
