@@ -31,7 +31,7 @@ const BookmarksTabModule = () => {
     const views = {
         grid: <GridView itemsPerPage={tabsConfig.bookmarks.itemsPerPage} />,
         finder: <Finder itemsPerPage={tabsConfig.bookmarks.itemsPerPage} />,
-        tree: <TreeView itemsPerPage={tabsConfig.browse.itemsPerPage} />,
+        tree: <TreeView itemsPerPage={tabsConfig.bookmarks.itemsPerPage} />,
     };
     const renderBrowseLocations = () => {
         if (!markedLocationId) {
