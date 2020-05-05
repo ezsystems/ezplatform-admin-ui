@@ -69,6 +69,7 @@
         &__details {
             color: $ez-black;
             font-size: calculateRem(12px);
+            padding: calculateRem(2px) 0;
             background: $ez-ground-base-medium;
             transition: max-height 0.3s;
             overflow: hidden;
