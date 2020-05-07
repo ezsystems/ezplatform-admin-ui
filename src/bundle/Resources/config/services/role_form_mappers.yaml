@@ -37,7 +37,9 @@ services:
         autoconfigure: false
         public: false
         class: "%ezplatform.content_forms.limitation.form_mapper.siteaccess.class%"
-        arguments: ['@ezpublish.siteaccess_service', '@EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessKeyGenerator']
+        arguments:
+            - '@ezpublish.siteaccess_service'
+            - '@EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessKeyGenerator'
         tags:
             - { name: ez.limitation.formMapper, limitationType: SiteAccess }
             - { name: ez.limitation.valueMapper, limitationType: SiteAccess }
