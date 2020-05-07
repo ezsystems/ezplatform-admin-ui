@@ -14,6 +14,7 @@ adminui:
                 tags: "@common"
             contexts:
                 - EzSystems\Behat\API\Context\ContentTypeContext
+                - EzSystems\Behat\API\Context\ContentContext
                 - EzSystems\Behat\API\Context\TestContext
                 - EzSystems\Behat\Browser\Context\BrowserContext
                 - EzSystems\Behat\Browser\Context\Hooks
@@ -35,6 +36,7 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SectionsContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ObjectStatesContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\DashboardContext
+                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SearchContext
 
         adminuimodules:
             paths:
