@@ -61,6 +61,8 @@ class PlatformPageObjectFactory extends PageObjectFactory
                 return new TrashPage($context);
             case FolderPreview::PAGE_NAME:
                 return new FolderPreview($context);
+            case SearchPage::PAGE_NAME:
+                return new SearchPage($context);
             default:
                 throw new \InvalidArgumentException(sprintf('Unrecognised page name: %s', $pageName));
         }
