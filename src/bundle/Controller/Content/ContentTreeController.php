@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Controller\Content;
 
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\Values\Content\Query;
 use EzSystems\EzPlatformRest\Message;
 use EzSystems\EzPlatformRest\Server\Controller as RestController;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
@@ -38,23 +39,30 @@ class ContentTreeController extends RestController
     }
 
     /**
-     * @param int $parentLocationId
-     * @param int $limit
-     * @param int $offset
-     *
-     * @return \EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node
-     *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    public function loadChildrenAction(int $parentLocationId, int $limit, int $offset): Node
-    {
+    public function loadChildrenAction(
+        Request $request,
+        int $parentLocationId,
+        int $limit,
+        int $offset
+    ): Node {
         $location = $this->locationService->loadLocation($parentLocationId);
-
         $loadSubtreeRequestNode = new LoadSubtreeRequestNode($parentLocationId, $limit, $offset);
 
-        return $this->contentTreeNodeFactory->createNode($location, $loadSubtreeRequestNode, true);
+        $sortClause = $request->query->get('sortClause', null);
+        $sortOrder = $request->query->getAlpha('sortOrder', Query::SORT_ASC);
+
+        return $this->contentTreeNodeFactory->createNode(
+            $location,
+            $loadSubtreeRequestNode,
+            true,
+            0,
+            $sortClause,
+            $sortOrder
+        );
     }
 
     /**
@@ -76,6 +84,9 @@ class ContentTreeController extends RestController
             )
         );
 
+        $sortClause = $request->query->get('sortClause', null);
+        $sortOrder = $request->query->getAlpha('sortOrder', Query::SORT_ASC);
+
         $locationIdList = array_column($loadSubtreeRequest->nodes, 'locationId');
         $locations = $this->locationService->loadLocationList($locationIdList);
 
@@ -90,7 +101,10 @@ class ContentTreeController extends RestController
             $elements[] = $this->contentTreeNodeFactory->createNode(
                 $location,
                 $childLoadSubtreeRequestNode,
-                true
+                true,
+                0,
+                $sortClause,
+                $sortOrder
             );
         }
 

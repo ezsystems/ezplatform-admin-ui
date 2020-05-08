@@ -12,8 +12,9 @@ const List = ({
     treeMaxDepth,
     afterItemToggle,
     isRoot,
+    onClickItem,
 }) => {
-    const commonAttrs = { loadMoreSubitems, subitemsLoadLimit, subitemsLimit, treeMaxDepth, afterItemToggle };
+    const commonAttrs = { loadMoreSubitems, subitemsLoadLimit, subitemsLimit, treeMaxDepth, afterItemToggle, onClickItem };
     const listAttrs = { ...commonAttrs, currentLocationId };
     const listItemAttrs = commonAttrs;
     const renderNoSubitemMessage = () => {
@@ -47,6 +48,7 @@ const List = ({
                         selected={item.locationId === currentLocationId}
                         href={locationHref}
                         isRootItem={isRoot}
+                        onClick={onClickItem.bind(null, item)}
                         path={itemPath}>
                         {subitems.length ? (
                             <List path={itemPath} items={subitems} isRoot={false} {...listAttrs} />
@@ -70,10 +72,12 @@ List.propTypes = {
     treeMaxDepth: PropTypes.number.isRequired,
     afterItemToggle: PropTypes.func.isRequired,
     isRoot: PropTypes.bool.isRequired,
+    onClickItem: PropTypes.func,
 };
 
 List.defaultProps = {
     isRoot: false,
+    onClickItem: () => {},
 };
 
 export default List;

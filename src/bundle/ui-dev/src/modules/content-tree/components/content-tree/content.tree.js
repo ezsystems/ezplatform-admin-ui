@@ -84,7 +84,15 @@ export default class ContentTree extends Component {
             return;
         }
 
-        const { loadMoreSubitems, currentLocationId, subitemsLoadLimit, subitemsLimit, treeMaxDepth, afterItemToggle } = this.props;
+        const {
+            loadMoreSubitems,
+            currentLocationId,
+            onClickItem,
+            subitemsLoadLimit,
+            subitemsLimit,
+            treeMaxDepth,
+            afterItemToggle,
+        } = this.props;
 
         const attrs = {
             items,
@@ -96,6 +104,7 @@ export default class ContentTree extends Component {
             treeMaxDepth,
             afterItemToggle,
             isRoot: true,
+            onClickItem,
         };
 
         return (
@@ -148,4 +157,5 @@ ContentTree.propTypes = {
     treeMaxDepth: PropTypes.number.isRequired,
     afterItemToggle: PropTypes.func.isRequired,
     onCollapseAllItems: PropTypes.func.isRequired,
+    onClickItem: PropTypes.func,
 };

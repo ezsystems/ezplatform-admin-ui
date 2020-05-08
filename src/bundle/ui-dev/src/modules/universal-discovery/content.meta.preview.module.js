@@ -14,6 +14,11 @@ import {
     AllowRedirectsContext,
 } from './universal.discovery.module';
 
+export const getLocationData = (loadedLocationsMap, markedLocationId) =>
+    loadedLocationsMap.find((loadedLocation) => loadedLocation.parentLocationId === markedLocationId) ||
+    (loadedLocationsMap.length &&
+        loadedLocationsMap[loadedLocationsMap.length - 1].subitems.find((subitem) => subitem.location.id === markedLocationId));
+
 const ContentMetaPreview = () => {
     const refContentMetaPreview = useRef(null);
     const [markedLocationId, setMarkedLocationId] = useContext(MarkedLocationIdContext);
@@ -22,13 +27,7 @@ const ContentMetaPreview = () => {
     const restInfo = useContext(RestInfoContext);
     const allowRedirects = useContext(AllowRedirectsContext);
     const { formatShortDateTime } = window.eZ.helpers.timezone;
-    const locationData = useMemo(() => {
-        return (
-            loadedLocationsMap.find((loadedLocation) => loadedLocation.parentLocationId === markedLocationId) ||
-            (loadedLocationsMap.length &&
-                loadedLocationsMap[loadedLocationsMap.length - 1].subitems.find((subitem) => subitem.location.id === markedLocationId))
-        );
-    }, [markedLocationId, loadedLocationsMap]);
+    const locationData = useMemo(() => getLocationData(loadedLocationsMap, markedLocationId), [markedLocationId, loadedLocationsMap]);
 
     const bookmarkLabel = Translator.trans(/*@Desc("Bookmark")*/ 'meta_preview.bookmark', {}, 'universal_discovery_widget');
     const previewLabel = Translator.trans(/*@Desc("Preview")*/ 'meta_preview.preview', {}, 'universal_discovery_widget');

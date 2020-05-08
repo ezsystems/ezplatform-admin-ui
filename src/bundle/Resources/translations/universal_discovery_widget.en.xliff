@@ -321,6 +321,11 @@
         <target state="new">Panels view</target>
         <note>key: sorting.panels.view</note>
       </trans-unit>
+      <trans-unit id="ab9d717b161673fc155f8f08fec3bc1818fb7e43" resname="sorting.tree.view">
+        <source>Tree view</source>
+        <target state="new">Tree view</target>
+        <note>key: sorting.tree.view</note>
+      </trans-unit>
       <trans-unit id="987330c357d2475b80942e5c449e4215b623a459" resname="subtree.title">
         <source>Select Location</source>
         <target state="new">Select Location</target>

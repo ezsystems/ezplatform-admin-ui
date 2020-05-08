@@ -15,6 +15,7 @@ export default class ContentTreeModule extends Component {
         this.handleCollapseAllItems = this.handleCollapseAllItems.bind(this);
         this.limitSubitemsInSubtree = this.limitSubitemsInSubtree.bind(this);
         this.refreshContentTree = this.refreshContentTree.bind(this);
+        this.getLoadSubtreeParams = this.getLoadSubtreeParams.bind(this);
 
         try {
             const savedSubtree = this.readSubtree();
@@ -43,9 +44,17 @@ export default class ContentTreeModule extends Component {
             return;
         }
 
-        loadSubtree(this.props.restInfo, this.subtree, (loadedSubtree) => {
+        loadSubtree(this.getLoadSubtreeParams(), (loadedSubtree) => {
             this.setInitialItemsState(loadedSubtree[0]);
         });
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.sort.sortClause !== this.props.sort.sortClause || prevProps.sort.sortOrder !== this.props.sort.sortOrder) {
+            loadSubtree(this.getLoadSubtreeParams(), (loadedSubtree) => {
+                this.setInitialItemsState(loadedSubtree[0]);
+            });
+        }
     }
 
     setInitialItemsState(location) {
@@ -70,7 +79,7 @@ export default class ContentTreeModule extends Component {
         this.items = [];
         this.forceUpdate();
 
-        loadSubtree(this.props.restInfo, this.subtree, (loadedSubtree) => {
+        loadSubtree(this.getLoadSubtreeParams(), (loadedSubtree) => {
             this.setInitialItemsState(loadedSubtree[0]);
         });
     }
@@ -106,6 +115,7 @@ export default class ContentTreeModule extends Component {
         }
 
         this.saveSubtree();
+        this.props.afterItemToggle(item, isExpanded);
     }
 
     addItemToSubtree(subtree, item, path) {
@@ -156,6 +166,12 @@ export default class ContentTreeModule extends Component {
     }
 
     readSubtree() {
+        const { readSubtree } = this.props;
+
+        if (typeof readSubtree === 'function') {
+            return readSubtree();
+        }
+
         const { rootLocationId, userId } = this.props;
         const savedSubtrees = localStorage.getItem(KEY_CONTENT_TREE_SUBTREE);
         const subtrees = savedSubtrees ? JSON.parse(savedSubtrees) : null;
@@ -320,13 +336,23 @@ export default class ContentTreeModule extends Component {
         this.subtree = this.generateInitialSubtree();
         this.saveSubtree();
 
-        loadSubtree(this.props.restInfo, this.subtree, (loadedSubtree) => {
+        loadSubtree(this.getLoadSubtreeParams(), (loadedSubtree) => {
             this.setInitialItemsState(loadedSubtree[0]);
         });
     }
 
+    getLoadSubtreeParams() {
+        return {
+            token: this.props.restInfo.token,
+            siteaccess: this.props.restInfo.siteaccess,
+            subtree: this.subtree,
+            sortClause: this.props.sort.sortClause,
+            sortOrder: this.props.sort.sortOrder,
+        };
+    }
+
     render() {
-        const { subitemsLimit, subitemsLoadLimit, treeMaxDepth } = this.props;
+        const { onClickItem, subitemsLimit, subitemsLoadLimit, treeMaxDepth } = this.props;
         const attrs = {
             items: this.items,
             currentLocationId: this.getCurrentLocationId(),
@@ -336,6 +362,7 @@ export default class ContentTreeModule extends Component {
             loadMoreSubitems: this.loadMoreSubitems,
             afterItemToggle: this.updateSubtreeAfterItemToggle,
             onCollapseAllItems: this.handleCollapseAllItems,
+            onClickItem,
         };
 
         return <ContentTree {...attrs} />;
@@ -356,6 +383,13 @@ ContentTreeModule.propTypes = {
         token: PropTypes.string.isRequired,
         siteaccess: PropTypes.string.isRequired,
     }).isRequired,
+    onClickItem: PropTypes.func,
+    readSubtree: PropTypes.func,
+    afterItemToggle: PropTypes.func,
+    sort: PropTypes.shape({
+        sortClause: PropTypes.string,
+        sortOrder: PropTypes.string,
+    }),
 };
 
 ContentTreeModule.defaultProps = {
@@ -364,4 +398,6 @@ ContentTreeModule.defaultProps = {
     subitemsLimit: window.eZ.adminUiConfig.contentTree.childrenLoadMaxLimit,
     subitemsLoadLimit: window.eZ.adminUiConfig.contentTree.loadMoreLimit,
     treeMaxDepth: window.eZ.adminUiConfig.contentTree.treeMaxDepth,
+    afterItemToggle: () => { },
+    sort: {},
 };

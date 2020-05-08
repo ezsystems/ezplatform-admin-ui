@@ -11,10 +11,21 @@ class ListItem extends Component {
         this.loadMoreSubitems = this.loadMoreSubitems.bind(this);
         this.handleAfterExpandedStateChange = this.handleAfterExpandedStateChange.bind(this);
 
+        this.sortedActions = this.getSortedActions();
+
         this.state = {
             isExpanded: !!props.subitems.length,
             isLoading: false,
         };
+    }
+
+    getSortedActions() {
+        const { itemActions } = window.eZ.adminUiConfig.contentTreeWidget;
+        const actions = itemActions ? [...itemActions] : [];
+
+        return actions.sort((actionA, actionB) => {
+            return actionB.priority - actionA.priority;
+        });
     }
 
     cancelLoadingState() {
@@ -158,7 +169,7 @@ class ListItem extends Component {
     }
 
     renderItemLabel() {
-        const { totalSubitemsCount, href, name, selected, locationId } = this.props;
+        const { totalSubitemsCount, href, name, selected, locationId, onClick } = this.props;
 
         if (locationId === 1) {
             return null;
@@ -179,9 +190,14 @@ class ListItem extends Component {
         return (
             <div className="c-list-item__label">
                 <span {...togglerAttrs} />
-                <a className="c-list-item__link" href={href}>
+                <a className="c-list-item__link" href={href} onClick={onClick}>
                     {this.renderIcon()} {name}
                 </a>
+                {this.sortedActions.map((action) => {
+                    const Component = action.component;
+
+                    return <Component key={action.id} {...this.props} />;
+                })}
             </div>
         );
     }
@@ -245,11 +261,13 @@ ListItem.propTypes = {
     treeMaxDepth: PropTypes.number.isRequired,
     afterItemToggle: PropTypes.func.isRequired,
     isRootItem: PropTypes.bool.isRequired,
+    onClick: PropTypes.func,
 };
 
 ListItem.defaultProps = {
     hidden: false,
     isRootItem: false,
+    onClick: () => {},
 };
 
 export default ListItem;

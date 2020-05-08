@@ -190,6 +190,10 @@ module.exports = (Encore) => {
             ),
             path.resolve(__dirname, '../../ui-dev/src/modules/universal-discovery/components/sort-switcher/sort.switcher.js'),
             path.resolve(__dirname, '../../ui-dev/src/modules/universal-discovery/components/view-switcher/view.switcher.js'),
+            path.resolve(
+                __dirname, 
+                '../../ui-dev/src/modules/universal-discovery/components/tree-item-toggle-selection-button/tree.item.toggle.selection.button.js'
+            ),
         ])
         .addEntry('ezplatform-admin-ui-mfu-js', [
             path.resolve(__dirname, '../../ui-dev/src/modules/multi-file-upload/multi.file.upload.module.js'),

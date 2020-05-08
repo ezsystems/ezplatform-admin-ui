@@ -1,0 +1,21 @@
+.c-tree {
+    width: 100%;
+    height: 100%;
+
+    .m-tree {
+        width: initial;
+        max-width: initial;
+
+        .c-list-item {
+            &__label {
+                padding-right: calculateRem(8px);
+
+                &:hover {
+                    .c-toggle-selection-button {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}

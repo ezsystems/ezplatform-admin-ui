@@ -12,8 +12,11 @@ use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
+use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
+use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
+use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
@@ -24,6 +27,11 @@ use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node;
  */
 final class NodeFactory
 {
+    private const SORT_CLAUSE_MAP = [
+        'DatePublished' => SortClause\DatePublished::class,
+        'ContentName' => SortClause\ContentName::class,
+    ];
+
     /** @var \eZ\Publish\API\Repository\SearchService */
     private $searchService;
 
@@ -44,13 +52,6 @@ final class NodeFactory
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
-     * @param \EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode $loadSubtreeRequestNode
-     * @param bool $loadChildren
-     * @param int $depth
-     *
-     * @return \EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node
-     *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
@@ -59,7 +60,9 @@ final class NodeFactory
         Location $location,
         ?LoadSubtreeRequestNode $loadSubtreeRequestNode = null,
         bool $loadChildren = false,
-        int $depth = 0
+        int $depth = 0,
+        ?string $sortClause = null,
+        string $sortOrder = Query::SORT_ASC
     ): Node {
         $content = $location->getContent();
 
@@ -75,7 +78,7 @@ final class NodeFactory
 
         $children = [];
         if ($depth < $this->getSetting('tree_max_depth') && $loadChildren) {
-            $searchResult = $this->findSubitems($location, $limit, $offset);
+            $searchResult = $this->findSubitems($location, $limit, $offset, $sortClause, $sortOrder);
             $totalChildrenCount = $searchResult->totalCount;
 
             /** @var \eZ\Publish\API\Repository\Values\Content\Location $childLocation */
@@ -129,27 +132,18 @@ final class NodeFactory
         return $limit;
     }
 
-    /**
-     * @param \eZ\Publish\API\Repository\Values\Content\Location $parentLocation
-     * @param int $limit
-     * @param int $offset
-     *
-     * @return \eZ\Publish\API\Repository\Values\Content\Search\SearchResult
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     */
-    private function findSubitems(Location $parentLocation, int $limit = 10, int $offset = 0): SearchResult
-    {
+    private function findSubitems(
+        Location $parentLocation,
+        int $limit = 10,
+        int $offset = 0,
+        ?string $sortClause = null,
+        string $sortOrder = Query::SORT_ASC
+    ): SearchResult {
         $searchQuery = $this->getSearchQuery($parentLocation);
 
         $searchQuery->limit = $limit;
         $searchQuery->offset = $offset;
-
-        try {
-            $searchQuery->sortClauses = $parentLocation->getSortClauses();
-        } catch (NotImplementedException $e) {
-            $searchQuery->sortClauses = []; // rely on storage engine default sorting
-        }
+        $searchQuery->sortClauses = $this->getSortClauses($sortClause, $sortOrder, $parentLocation);
 
         return $this->searchService->findLocations($searchQuery);
     }
@@ -221,5 +215,44 @@ final class NodeFactory
     private function getSetting(string $name)
     {
         return $this->configResolver->getParameter("content_tree_module.$name");
+    }
+
+    /**
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    private function buildSortClause(string $sortClause, string $sortOrder): SortClause
+    {
+        if (!isset(static::SORT_CLAUSE_MAP[$sortClause])) {
+            throw new InvalidArgumentException('$sortClause', 'Invalid sort clause');
+        }
+
+        $map = static::SORT_CLAUSE_MAP;
+
+        /** @var \eZ\Publish\API\Repository\Values\Content\Query\SortClause $sortClauseInstance */
+        $sortClauseInstance = new $map[$sortClause]();
+        $sortClauseInstance->direction = $sortOrder;
+
+        return $sortClauseInstance;
+    }
+
+    /**
+     * @return \eZ\Publish\API\Repository\Values\Content\Query\SortClause[]
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    private function getSortClauses(
+        ?string $sortClause,
+        string $sortOrder,
+        Location $parentLocation
+    ): array {
+        if ($sortClause) {
+            return [$this->buildSortClause($sortClause, $sortOrder)];
+        }
+
+        try {
+            return $parentLocation->getSortClauses();
+        } catch (NotImplementedException $e) {
+            return []; // rely on storage engine default sorting
+        }
     }
 }
