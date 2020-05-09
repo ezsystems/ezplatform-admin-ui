@@ -140,7 +140,7 @@ class TrashController extends Controller
         $trashItemsList = [];
 
         $query = new Query([
-            'sortClauses' => [new Query\SortClause\Location\Priority(Query::SORT_ASC)],
+            'sortClauses' => [new Query\SortClause\Trash\DateTrashed(Query::SORT_DESC)],
         ]);
 
         $pagerfanta = new Pagerfanta(
