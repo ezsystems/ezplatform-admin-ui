@@ -1,15 +1,13 @@
 <td>
     {% if content.contentInfo.mainLocationId is not null %}
-        <a {% if not content.contentInfo.trashed %}
-            href="{{ path('_ezpublishLocation', { 'locationId': content.contentInfo.mainLocationId } ) }}"
-                {% endif %}>
+        <a href="{{ path('_ezpublishLocation', { 'locationId': content.contentInfo.mainLocationId } ) }}">
             {{ content.getName() }}
-            {% if content.contentInfo.trashed %}
-                <em>({{ 'content.in_trash'|trans(domain='content')|desc('In Trash') }})</em>
-            {% endif %}
         </a>
     {% else %}
         {{ content.getName() }}
+        {% if content.contentInfo.trashed %}
+            <em>({{ 'content.in_trash'|trans(domain='content')|desc('In Trash') }})</em>
+        {% endif %}
     {% endif %}
 </td>
 <td>
