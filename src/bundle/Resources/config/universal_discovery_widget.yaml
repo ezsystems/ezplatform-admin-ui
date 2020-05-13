@@ -44,6 +44,7 @@ system:
                         bookmarks:
                             hidden: true
                     multiple: false
+                    allow_confirmation: false
                 browse:
                     allow_redirects: true
                     allow_confirmation: false
