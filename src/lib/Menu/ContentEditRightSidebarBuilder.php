@@ -156,7 +156,7 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
                     ? $deleteAttributes
                     : array_merge($deleteAttributes, self::BTN_DISABLED_ATTR),
                 'extras' => [
-                    'icon' => 'circle-close',
+                    'icon' => 'trash-empty',
                     'orderNumber' => 70,
                 ],
             ]
