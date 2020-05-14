@@ -101,7 +101,21 @@ const embedBaseDefinition = {
      * @method initEditMode
      */
     initEditMode: function() {
-        const contentId = this.getHref().replace('ezcontent://', '');
+        const href = this.getHref();
+        const hasEzLocation = href.includes('ezlocation://');
+        const contentId = href.replace('ezcontent://', '');
+
+        if (hasEzLocation) {
+            const ezLocationError = Translator.trans(
+                /*@Desc("This embedded item relies on 'ezlocation' imported from Legacy. It isn't supported by Online Editor yet.")*/ 'embed.ezlocation.error',
+                {},
+                'alloy_editor'
+            );
+
+            this.renderEmbedPreview(ezLocationError);
+
+            return;
+        }
 
         if (!contentId) {
             return;
