@@ -67,8 +67,8 @@
         <note>key: custom_tag_update_btn.save_btn.label</note>
       </trans-unit>
       <trans-unit id="5a25d3a19c8addc868947381a4eb1a699d01cf22" resname="embed.ezlocation.error">
-        <source>This embedded item relies on 'ezlocation' imported from Legacy. It's not supported by Online Editor yet.</source>
-        <target state="new">This embedded item relies on 'ezlocation' imported from Legacy. It's not supported by Online Editor yet.</target>
+        <source>This embedded item relies on 'ezlocation' imported from Legacy. It isn't supported by Online Editor yet.</source>
+        <target state="new">This embedded item relies on 'ezlocation' imported from Legacy. It isn't supported by Online Editor yet.</target>
         <note>key: embed.ezlocation.error</note>
       </trans-unit>
       <trans-unit id="ac0f20994b177772319ac51d8f9b3389ea74de7c" resname="embed_align_center_btn.label">

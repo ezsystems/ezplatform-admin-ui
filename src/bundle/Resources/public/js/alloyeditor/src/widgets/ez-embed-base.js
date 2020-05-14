@@ -107,7 +107,7 @@ const embedBaseDefinition = {
 
         if (hasEzLocation) {
             const ezLocationError = Translator.trans(
-                /*@Desc("This embedded item relies on 'ezlocation' imported from Legacy. It's not supported by Online Editor yet.")*/ 'embed.ezlocation.error',
+                /*@Desc("This embedded item relies on 'ezlocation' imported from Legacy. It isn't supported by Online Editor yet.")*/ 'embed.ezlocation.error',
                 {},
                 'alloy_editor'
             );
