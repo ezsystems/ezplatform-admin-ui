@@ -6,6 +6,8 @@
  */
 declare(strict_types=1);
 
+namespace EzSystems\EzPlatformAdminUi\Tests\Validator\Constraint;
+
 use EzSystems\EzPlatformAdminUi\Validator\Constraints\UserPassword;
 use PHPUnit\Framework\TestCase;
 
