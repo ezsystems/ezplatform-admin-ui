@@ -21,6 +21,11 @@ const ContentEditTabModule = () => {
     const cancelLabel = Translator.trans(/*@Desc("Cancel")*/ 'content_edit.cancel.label', {}, 'universal_discovery_widget');
     const confirmLabel = Translator.trans(/*@Desc("Confirm")*/ 'content_edit.confirm.label', {}, 'universal_discovery_widget');
     const iframeRef = useRef();
+    const showParentFooter = () => {
+        if (window.parent) {
+            window.parent.document.body.dispatchEvent(new CustomEvent('ez-udw-show-footer'));
+        }
+    }
     const publishContent = () => {
         const submitButton = iframeRef.current.contentWindow.document.body.querySelector('[data-action="publish"]');
 
@@ -31,6 +36,7 @@ const ContentEditTabModule = () => {
     const cancelContentEdit = () => {
         setActiveTab(tabs[0].id);
         setEditOnTheFlyData({});
+        showParentFooter();
     };
     const handleContentPublished = (locationId) => {
         const clonedLocationsMap = deepClone(loadedLocationsMap);
