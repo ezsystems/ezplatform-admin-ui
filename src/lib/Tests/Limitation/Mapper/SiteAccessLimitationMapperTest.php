@@ -10,6 +10,8 @@ use eZ\Publish\API\Repository\Values\User\Limitation\SiteAccessLimitation;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
 use EzSystems\EzPlatformAdminUi\Limitation\Mapper\SiteAccessLimitationMapper;
+use EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessKeyGenerator;
+use EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessKeyGeneratorInterface;
 use PHPUnit\Framework\TestCase;
 
 class SiteAccessLimitationMapperTest extends TestCase
@@ -29,14 +31,21 @@ class SiteAccessLimitationMapperTest extends TestCase
             $siteAccessList
         );
 
-        $limitation = new SiteAccessLimitation([
-            'limitationValues' => array_keys($siteAccessList),
-        ]);
+        $limitation = new SiteAccessLimitation(
+            [
+                'limitationValues' => array_keys($siteAccessList),
+            ]
+        );
+
+        $siteAccessesGenerator = $this->createMock(SiteAccessKeyGeneratorInterface::class);
+        $siteAccessesGenerator
+            ->method('generate')
+            ->will($this->returnValue(new SiteAccessKeyGenerator()));
 
         $siteAccessService = $this->createMock(SiteAccessServiceInterface::class);
         $siteAccessService->method('getAll')->willReturn($siteAccesses);
 
-        $mapper = new SiteAccessLimitationMapper($siteAccessService);
+        $mapper = new SiteAccessLimitationMapper($siteAccessService, $siteAccessesGenerator);
         $result = $mapper->mapLimitationValue($limitation);
 
         $this->assertEquals(array_values($siteAccessList), $result);
