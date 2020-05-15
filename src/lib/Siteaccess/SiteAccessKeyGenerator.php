@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Siteaccess;
 
-class SiteAccessKeyGenerator implements SiteAccessKeyGeneratorInterface
+final class SiteAccessKeyGenerator implements SiteAccessKeyGeneratorInterface
 {
     public function generate(string $siteAccessIdentifier): string
     {
