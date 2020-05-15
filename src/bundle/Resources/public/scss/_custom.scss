@@ -1,5 +1,7 @@
 // eZ transition function
 $ez-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
+$ez-admin-widget-open-transition: all 0.3s ease-in;
+$ez-admin-widget-close-transition: all 0.3s ease-out;
 
 /* eZ colors */
 $ez-color-primary: #f15a10;
