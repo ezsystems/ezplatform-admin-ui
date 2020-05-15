@@ -4,6 +4,8 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+namespace EzSystems\EzPlatformAdminUi\Tests\Behat;
+
 use Behat\Gherkin\Node\TableNode;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\TableNodeExtension;
 use PHPUnit\Framework\Assert;

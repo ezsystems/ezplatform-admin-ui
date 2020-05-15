@@ -6,11 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor;
+namespace EzSystems\EzPlatformAdminUi\Tests\RepositoryForms\Form\Processor;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
+use EzSystems\EzPlatformAdminUi\RepositoryForms\Form\Processor\PreviewFormProcessor;
 use EzSystems\RepositoryForms\Data\Content\FieldData;
 use PHPUnit\Framework\TestCase;
 use eZ\Publish\API\Repository\ContentService;

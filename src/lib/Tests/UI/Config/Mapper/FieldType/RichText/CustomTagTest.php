@@ -6,9 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText;
+namespace EzSystems\EzPlatformAdminUi\Tests\UI\Config\Mapper\FieldType\RichText;
 
 use ArrayObject;
+use EzSystems\EzPlatformAdminUi\UI\Config\Mapper\FieldType\RichText\CustomTag;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Asset\Packages;
