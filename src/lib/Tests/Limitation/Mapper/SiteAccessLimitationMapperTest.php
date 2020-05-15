@@ -37,15 +37,15 @@ class SiteAccessLimitationMapperTest extends TestCase
             ]
         );
 
-        $siteAccessesGenerator = $this->createMock(SiteAccessKeyGeneratorInterface::class);
-        $siteAccessesGenerator
+        $siteAccessesGeneratorInterface = $this->createMock(SiteAccessKeyGeneratorInterface::class);
+        $siteAccessesGeneratorInterface
             ->method('generate')
-            ->will($this->returnValue(new SiteAccessKeyGenerator()));
+            ->willReturn(new SiteAccessKeyGenerator());
 
         $siteAccessService = $this->createMock(SiteAccessServiceInterface::class);
         $siteAccessService->method('getAll')->willReturn($siteAccesses);
 
-        $mapper = new SiteAccessLimitationMapper($siteAccessService, $siteAccessesGenerator);
+        $mapper = new SiteAccessLimitationMapper($siteAccessService, $siteAccessesGeneratorInterface);
         $result = $mapper->mapLimitationValue($limitation);
 
         $this->assertEquals(array_values($siteAccessList), $result);
