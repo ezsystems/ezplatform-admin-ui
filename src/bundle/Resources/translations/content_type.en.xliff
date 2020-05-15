@@ -236,6 +236,11 @@
         <target state="new">Delete Content Type</target>
         <note>key: content_type.view.list.action.delete</note>
       </trans-unit>
+      <trans-unit id="dc81a90ec5471fee7ddb38a888009f8d44b92416" resname="content_type.view.list.action.delete_drafts">
+        <source>Delete draft Content Types</source>
+        <target state="new">Delete draft Content Types</target>
+        <note>key: content_type.view.list.action.delete_drafts</note>
+      </trans-unit>
       <trans-unit id="bef02fc3d41e74bf002af93b413a2a203a04db1a" resname="content_type.view.list.column.id">
         <source>ID</source>
         <target state="new">ID</target>
@@ -255,6 +260,11 @@
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: content_type.view.list.column.name</note>
+      </trans-unit>
+      <trans-unit id="31383de3bbd4d838088dc29ceb8a653e897d32a6" resname="content_type.view.list.drafts_title">
+        <source>Draft Content Types in %identifier%</source>
+        <target state="new">Draft Content Types in %identifier%</target>
+        <note>key: content_type.view.list.drafts_title</note>
       </trans-unit>
       <trans-unit id="7c8c43d61131312dbeeeac5dc536a4f95154f33d" resname="content_type.view.list.title">
         <source>Content Types in %identifier%</source>
@@ -375,6 +385,11 @@
         <source>%identifier%</source>
         <target state="new">%identifier%</target>
         <note>key: content_type_group.view.view.title</note>
+      </trans-unit>
+      <trans-unit id="5ae05a3f43e0d104e61174cc27f76e7764fc9f0c" resname="draft_content_type.modal.message">
+        <source>Do you want to delete draft Content Types?</source>
+        <target state="new">Do you want to delete draft Content Types?</target>
+        <note>key: draft_content_type.modal.message</note>
       </trans-unit>
       <trans-unit id="62ac918fce5389cd868b988e65b4ab96477a1344" resname="location_update_form.sort_field">
         <source>Sort field</source>

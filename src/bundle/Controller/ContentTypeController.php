@@ -123,6 +123,7 @@ class ContentTypeController extends Controller
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
      * @param string $routeName
      * @param int $page
+     * @param bool $draftsOnly
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -133,10 +134,13 @@ class ContentTypeController extends Controller
      * @throws \Pagerfanta\Exception\LessThan1CurrentPageException
      * @throws \Pagerfanta\Exception\LessThan1MaxPerPageException
      */
-    public function listAction(ContentTypeGroup $group, string $routeName, int $page): Response
+    public function listAction(ContentTypeGroup $group, string $routeName, int $page, bool $draftsOnly = false): Response
     {
         $deletableTypes = [];
-        $contentTypes = $this->contentTypeService->loadContentTypes($group, $this->languages);
+        $contentTypes = $this->contentTypeService->loadContentTypes(
+            $group,
+            $this->languages,
+            $draftsOnly ? ContentType::STATUS_DRAFT : ContentType::STATUS_DEFINED);
 
         usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
             return strnatcasecmp($contentType1->getName(), $contentType2->getName());
@@ -153,7 +157,8 @@ class ContentTypeController extends Controller
         $types = $pagerfanta->getCurrentPageResults();
 
         $deleteContentTypesForm = $this->formFactory->deleteContentTypes(
-            new ContentTypesDeleteData($this->getContentTypesNumbers($types))
+            new ContentTypesDeleteData($this->getContentTypesNumbers($types)),
+            $draftsOnly ? 'draft_content_types_delete' : null
         );
 
         foreach ($types as $type) {
@@ -170,6 +175,7 @@ class ContentTypeController extends Controller
             'can_create' => $this->isGranted(new Attribute('class', 'create')),
             'can_update' => $this->isGranted(new Attribute('class', 'update')),
             'can_delete' => $this->isGranted(new Attribute('class', 'delete')),
+            'draftsOnly' => $draftsOnly,
         ]);
     }
 
@@ -542,15 +548,21 @@ class ContentTypeController extends Controller
     public function bulkDeleteAction(Request $request, ContentTypeGroup $group): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('class', 'delete'));
+
+        $isDraftRequest = !empty($request->get('draft_content_types_delete'));
+
         $form = $this->formFactory->deleteContentTypes(
-            new ContentTypesDeleteData()
+            new ContentTypesDeleteData(),
+            $isDraftRequest ? 'draft_content_types_delete' : null
         );
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (ContentTypesDeleteData $data) {
+            $result = $this->submitHandler->handle($form, function (ContentTypesDeleteData $data) use ($isDraftRequest) {
                 foreach ($data->getContentTypes() as $contentTypeId => $selected) {
-                    $contentType = $this->contentTypeService->loadContentType($contentTypeId);
+                    $contentType = !$isDraftRequest
+                        ? $this->contentTypeService->loadContentType($contentTypeId)
+                        : $this->contentTypeService->loadContentTypeDraft($contentTypeId);
 
                     $this->contentTypeService->deleteContentType($contentType);
 
