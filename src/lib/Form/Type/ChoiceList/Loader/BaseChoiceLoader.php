@@ -55,6 +55,11 @@ abstract class BaseChoiceLoader implements ChoiceLoaderInterface
             return [];
         }
 
+        // If no callable is set, choices are the same as values
+        if (null === $value) {
+            return $choices;
+        }
+
         return $this->loadChoiceList($value)->getValuesForChoices($choices);
     }
 }
