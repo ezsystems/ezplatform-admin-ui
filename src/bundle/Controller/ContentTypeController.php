@@ -175,7 +175,7 @@ class ContentTypeController extends Controller
             'can_create' => $this->isGranted(new Attribute('class', 'create')),
             'can_update' => $this->isGranted(new Attribute('class', 'update')),
             'can_delete' => $this->isGranted(new Attribute('class', 'delete')),
-            'draftsOnly' => $draftsOnly,
+            'drafts_only' => $draftsOnly,
         ]);
     }
 

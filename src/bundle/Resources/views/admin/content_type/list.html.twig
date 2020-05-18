@@ -4,17 +4,17 @@
 
 {% form_theme form_content_types_delete '@ezdesign/form_fields.html.twig'  %}
 
-{% if pager.nbResults or not draftsOnly %}
+{% if pager.nbResults or not drafts_only %}
 <section class="container mt-4 px-5">
     <div class="ez-table-header">
         <div class="ez-table-header__headline">
-            {% if not draftsOnly %}
+            {% if not drafts_only %}
                 {{ 'content_type.view.list.title'|trans({ '%identifier%': content_type_group.identifier })|desc('Content Types in %identifier%') }}</div>
             {% else %}
                 {{ 'content_type.view.list.drafts_title'|trans({ '%identifier%': content_type_group.identifier })|desc('Draft Content Types in %identifier%') }}</div>
             {% endif %}
         <div>
-            {% if can_create and not draftsOnly %}
+            {% if can_create and not drafts_only %}
                 <a
                     href="{{ path('ezplatform.content_type.add', {contentTypeGroupId: content_type_group.id}) }}"
                     title="{{ 'content_type.view.list.action.add'|trans|desc('Create a Content Type') }}"
@@ -25,7 +25,7 @@
                 </a>
             {% endif %}
             {% if can_delete %}
-                {% if not draftsOnly %}
+                {% if not drafts_only %}
                     {% set modal_data_target = 'delete-content-types-modal' %}
                     <button
                         id="delete-content-types"
@@ -55,10 +55,10 @@
                 {% endif %}
                 {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
                     'id': modal_data_target,
-                    'message': draftsOnly
+                    'message': drafts_only
                         ? 'draft_content_type.modal.message'|trans|desc('Do you want to delete draft Content Types?')
                         : 'content_type.modal.message'|trans|desc('Do you want to delete Content Type?'),
-                    'data_click': draftsOnly ? '#draft_content_types_delete_delete' : '#content_types_delete_delete',
+                    'data_click': drafts_only ? '#draft_content_types_delete_delete' : '#content_types_delete_delete',
                 }%}
             {% endif %}
         </div>
@@ -66,7 +66,7 @@
 
     {{ form_start(form_content_types_delete, {
         'action': path('ezplatform.content_type.bulk_delete', {"contentTypeGroupId": group.id} ),
-        'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': draftsOnly ? '#delete-draft-content-types' : '#delete-content-types' }
+        'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': drafts_only ? '#delete-draft-content-types' : '#delete-content-types' }
     }) }}
     <table class="ez-table table">
         <thead>
@@ -77,7 +77,7 @@
                 <th class="ez-table__header-cell">{{ 'content_type.view.list.column.identifier'|trans|desc('Identifier') }}</th>
                 <th class="ez-table__header-cell">{{ 'content_type.view.list.column.id'|trans|desc('ID') }}</th>
                 <th class="ez-table__header-cell">{{ 'content_type.view.list.column.modification_date'|trans|desc('Modification date') }}</th>
-                {% if not draftsOnly %}
+                {% if not drafts_only %}
                     <th class="ez-table__header-cell"></th>
                 {% endif %}
             </tr>
@@ -88,7 +88,7 @@
                 <td class="ez-table__cell ez-table__cell--has-checkbox">
                     {% if can_delete %}
                         {{ form_widget(form_content_types_delete.content_types[content_type.id],
-                            {"disabled": not deletable[content_type.id], "checked": draftsOnly ? true : false}) }}
+                            {"disabled": not deletable[content_type.id], "checked": drafts_only}) }}
                     {% else %}
                         {% do form_content_types_delete.content_types.setRendered %}
                     {% endif %}
@@ -99,7 +99,7 @@
                     </svg>
                 </td>
                 <td class="ez-table__cell ez-table__cell--name ez-table__cell--after-icon">
-                    {% if not draftsOnly %}
+                    {% if not drafts_only %}
                         {% set view_url = path('ezplatform.content_type.view', {
                                 'contentTypeGroupId': content_type_group.id,
                                 'contentTypeId': content_type.id
@@ -112,7 +112,7 @@
                 <td class="ez-table__cell">{{ content_type.identifier }}</td>
                 <td class="ez-table__cell">{{ content_type.id }}</td>
                 <td class="ez-table__cell">{{ content_type.modificationDate|ez_full_datetime }}</td>
-                {% if not draftsOnly %}
+                {% if not drafts_only %}
                     <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                         {% if can_update %}
                             {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-2') }}
