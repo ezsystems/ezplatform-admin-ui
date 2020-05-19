@@ -19,7 +19,7 @@
             {% endblock %}
             <div class="container px-5">
                 {% set content_name = content ? content.name : 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') %}
-                <div class="ez-content-item__name" title="{{ content_name }}">
+                <div class="ez-content-item__name">
                     {{ content_name }}
                 </div>
             </div>
@@ -45,7 +45,7 @@
                         <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--location">%location_name%</span>')
                     |raw 
                 }}
-                <a class="ez-details-items__toggler ez-details-items__toggler--gray" href="#">?</a>
+                <a class="ez-details-items__toggler ez-details-items__toggler--gray" href="#" title="{{ 'more_info'|trans|desc('More info') }}">?</a>
             </div>
             <div class="container ez-details-items ez-details-items--collapsed ez-details-items__author-breadcrumbs">
                 {{ content_type.name }}/

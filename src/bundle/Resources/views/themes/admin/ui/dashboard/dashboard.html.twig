@@ -14,8 +14,6 @@
                     <div class="ez-dashboard__create">
                         <button
                             class="btn btn-primary ez-btn--cotf-create"
-                            title="{{ 'dashboard.create'|trans|desc('Create') }}"
-                            data-placement="left"
                             data-udw-config="{{ ez_udw_config('create', {'type': 'content_create'}) }}"
                             {% if not can_create_content %}disabled{% endif %}>
                             <svg class="ez-icon ez-icon--medium ez-icon--light ez-icon-create">
