@@ -24,6 +24,7 @@ abstract class EzFieldElement extends Element
         'ezdatetime' => 'Date and time',
         'ezemail' => 'Email address',
         'ezbinaryfile' => 'File',
+        'ezform' => 'Form',
         'ezfloat' => 'Float',
         'ezisbn' => 'ISBN',
         'ezimage' => 'Image',
