@@ -234,7 +234,12 @@
 {% block ezbinaryfile_field %}
 {% apply spaceless %}
     {% if not ez_field_is_empty( content, field ) %}
-        {% set route_reference = ez_route( 'ez_content_download', { 'content': content, 'fieldIdentifier': field.fieldDefIdentifier, 'inLanguage': content.prioritizedFieldLanguageCode } ) %}
+        {% set route_reference = ez_route( 'ez_content_download', {
+            'content': content,
+            'fieldIdentifier': field.fieldDefIdentifier,
+            'inLanguage': content.prioritizedFieldLanguageCode,
+            'version': versionInfo.versionNo
+        } ) %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezbinaryfile')|trim}) %}
         <div {{ block( 'field_attributes' ) }}>
             <svg class="ez-icon ez-icon--file">
@@ -258,7 +263,11 @@
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezmedia')|trim}) %}
     {% set type = fieldSettings.mediaType %}
     {% set value = field.value %}
-    {% set route_reference = ez_route( 'ez_content_download', {'content': content, 'fieldIdentifier': field.fieldDefIdentifier} ) %}
+    {% set route_reference = ez_route( 'ez_content_download', {
+        'content': content,
+        'fieldIdentifier': field.fieldDefIdentifier,
+        'version': versionInfo.versionNo
+    } ) %}
     {% set download = path( route_reference.getRoute(), route_reference.getParams() ) %}
     {% set hasController = value.hasController ? 'ezmedia.yes'|trans|desc('Yes') : 'ezmedia.no'|trans|desc('No') %}
     {% set autoplay = value.autoplay ? 'ezmedia.yes'|trans|desc('Yes') : 'ezmedia.no'|trans|desc('No') %}
