@@ -1,5 +1,18 @@
-(function(global, doc, eZ, $) {
+(function (global, doc, eZ, $) {
     const TOOLTIPS_SELECTOR = '[title]';
+    const observerConfig = {
+        childList: true,
+        subtree: true,
+    };
+    const observer = new MutationObserver((mutationsList) => {
+        mutationsList.forEach((mutation) => {
+            const showedTooltipNode = doc.querySelector('.ez-tooltip.show');
+
+            if (mutation.removedNodes.length && showedTooltipNode) {
+                showedTooltipNode.remove();
+            }
+        });
+    });
     const parse = (baseElement = doc) => {
         if (!baseElement) {
             return;
@@ -40,6 +53,8 @@
             $(tooltipNode).tooltip('hide');
         }
     };
+
+    observer.observe(doc.querySelector('body'), observerConfig);
 
     eZ.addConfig('helpers.tooltips', {
         parse,
