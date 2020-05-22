@@ -176,7 +176,7 @@ class ValueFactory
         return new UIValue\Content\Relation($relation, [
             'relationFieldDefinitionName' => $fieldDefinition ? $fieldDefinition->getName() : '',
             'relationContentTypeName' => $contentType->getName(),
-            'relationLocation' => $this->locationService->resolveLocation($content->contentInfo),
+            'relationLocation' => $this->locationResolver->resolveLocation($content->contentInfo),
             'relationName' => $content->getName(),
         ]);
     }
