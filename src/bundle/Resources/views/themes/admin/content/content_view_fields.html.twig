@@ -1,35 +1,35 @@
 <section class="ez-view-rawcontentview">
-    <div class="ez-raw-content-title d-flex justify-content-between mb-3">
-        <h2>
-            <a data-toggle="collapse" href=".ez-content-preview-collapse" class="ez-content-preview-toggle">
-                {{ 'tab.view.preview'|trans()|desc('Preview') }}
-            </a>
-        </h2>
+    <div class="ez-raw-content-title d-flex">
+        <h2>{{ 'tab.view.preview'|trans()|desc('Preview') }}</h2>
         {% block extras %}{% endblock %}
     </div>
 
     {% block fields %}
-        <div class="ez-content-preview-collapse collapse show">
+        <div class="ez-content-preview">
             {% for group in field_definitions_by_group %}
                 {% if group.fieldDefinitions|length > 0 %}
                     <section class="ez-fieldgroup container">
-                        <h3 class="ez-fieldgroup__name">{{ group.name|capitalize }}</h3>
-                        {% for field_definition in group.fieldDefinitions %}
-                            {% block field %}
-                                <div class="ez-content-field">
-                                    <p class="ez-content-field-name">{{ field_definition.name }}:</p>
-                                    <div class="ez-content-field-value">
-                                        {% if ez_field_is_empty(content, field_definition.identifier) and field_definition.fieldTypeIdentifier is not same as('ezboolean') %}
-                                            <em>{{ 'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty') }}</em>
-                                        {% else %}
-                                            {{ ez_render_field(content, field_definition.identifier, {
-                                                'template': '@ezdesign/ui/field_type/preview/content_fields.html.twig'
-                                            }) }}
-                                        {% endif %}
+                        <a data-toggle="collapse" href=".ez-content-fields-{{ group.name|replace({' ': ''}) }}-collapse" class="ez-fieldgroup__toggler">
+                            {{ group.name|capitalize }}
+                        </a>
+                        <div class="ez-content-fields-{{ group.name|replace({' ': ''}) }}-collapse show">
+                            {% for field_definition in group.fieldDefinitions %}
+                                {% block field %}
+                                    <div class="ez-content-field">
+                                        <p class="ez-content-field-name">{{ field_definition.name }}:</p>
+                                        <div class="ez-content-field-value">
+                                            {% if ez_field_is_empty(content, field_definition.identifier) and field_definition.fieldTypeIdentifier is not same as('ezboolean') %}
+                                                <em>{{ 'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty') }}</em>
+                                            {% else %}
+                                                {{ ez_render_field(content, field_definition.identifier, {
+                                                    'template': '@ezdesign/ui/field_type/preview/content_fields.html.twig'
+                                                }) }}
+                                            {% endif %}
+                                        </div>
                                     </div>
-                                </div>
-                            {% endblock %}
-                        {% endfor %}
+                                {% endblock %}
+                            {% endfor %}
+                        </div>
                     </section>
                 {% endif %}
             {% endfor %}

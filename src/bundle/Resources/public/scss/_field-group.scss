@@ -1,60 +1,21 @@
 .ez-view-rawcontentview {
+    margin-bottom: calculateRem(25px);
+    border: calculateRem(1px) solid $ez-ground-base-dark;
+
     .ez-raw-content-title {
-        border-bottom: calculateRem(1px) solid $ez-color-secondary;
+        min-height: calculateRem(44px);
+        padding: calculateRem(3px) calculateRem(15px);
+        background: $ez-ground-base-dark;
         color: $ez-color-secondary;
+        align-items: center;
 
         h2 {
-            margin-top: calculateRem(16px);
-            margin-bottom: 0;
-            padding-bottom: calculateRem(8px);
+            margin: 0 calculateRem(10px) 0 0;
             font-size: calculateRem(18px);
             font-weight: 400;
         }
 
-        .ez-content-preview-toggle {
-            color: $ez-color-secondary;
-            position: relative;
-            padding-right: calculateRem(24px);
-            display: inline-block;
-
-            &:hover {
-                text-decoration: none;
-            }
-
-            &:before,
-            &:after {
-                content: '';
-                width: calculateRem(1px);
-                height: calculateRem(7px);
-                background-color: $ez-color-secondary;
-                position: absolute;
-                top: 50%;
-                right: calculateRem(-16px);
-                transition: all 0.2s $ez-admin-transition;
-            }
-
-            &:before {
-                transform: translate(calculateRem(-27px), -50%) rotate(135deg);
-            }
-
-            &:after {
-                transform: translate(calculateRem(-22px), -50%) rotate(45deg);
-            }
-
-            &.collapsed {
-                &:before {
-                    transform: translate(calculateRem(-27px), -20%) rotate(45deg);
-                }
-
-                &:after {
-                    transform: translate(calculateRem(-27px), -80%) rotate(-45deg);
-                }
-            }
-        }
-
         .form-inline {
-            padding-bottom: calculateRem(4px);
-
             &.collapsing {
                 -webkit-transition: none;
                 transition: none;
@@ -73,12 +34,49 @@
         font-size: calculateRem(18px);
     }
 
+    &__toggler {
+        position: relative;
+        display: block;
+        width: 100%;
+        margin-bottom: calculateRem(10px);
+        padding: calculateRem(5px) 0;
+        font-size: calculateRem(17px);
+        font-weight: 400;
+        color: $ez-color-secondary;
+        border-bottom: calculateRem(1px) solid;
+
+        &:hover {
+            color: $ez-color-secondary;
+            text-decoration: none;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: calculateRem(20px);
+            right: calculateRem(5px);
+            display: inline-block;
+            width: calculateRem(7px);
+            height: calculateRem(7px);
+            border-right: calculateRem(2px) solid $ez-color-secondary;
+            border-bottom: calculateRem(2px) solid $ez-color-secondary;
+            transition: all 0.2s $ez-admin-transition;
+            transform: rotate(-135deg);
+        }
+
+        &.collapsed {
+            &:after {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+
     .ez-content-field-name {
         background-color: $ez-color-base-pale;
     }
 
     .ez-content-field {
-        padding: 0 calculateRem(16px);
+        padding: 0;
         margin-bottom: calculateRem(24px);
 
         .ez-content-field-name {
