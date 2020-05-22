@@ -144,3 +144,9 @@ services:
         lazy: true
 
     EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver: ~
+
+    EzSystems\EzPlatformAdminUi\Service\PermissionAwareLocationResolver: ~
+
+    EzSystems\EzPlatformAdminUi\Service\LocationResolver:
+        alias: EzSystems\EzPlatformAdminUi\Service\PermissionAwareLocationResolver
+
