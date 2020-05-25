@@ -15,7 +15,7 @@ use EzSystems\EzPlatformAdminUi\Service\PermissionAwareLocationResolver;
 use PHPUnit\Framework\TestCase;
 use eZ\Publish\API\Repository\LocationService;
 
-class PermissionAwareLocationResolverTest extends TestCase
+final class PermissionAwareLocationResolverTest extends TestCase
 {
     /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
@@ -23,7 +23,7 @@ class PermissionAwareLocationResolverTest extends TestCase
     /** @var \EzSystems\EzPlatformAdminUi\Service\LocationResolver */
     private $locationResolver;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->locationService = $this->createMock(LocationService::class);
 
@@ -33,18 +33,17 @@ class PermissionAwareLocationResolverTest extends TestCase
     /**
      * Test for the resolveLocation() method.
      *
-     * @see \EzSystems\EzPlatformAdminUi\Service\PermissionAwareLocationResolver::resolveLocation()
+     * @covers \EzSystems\EzPlatformAdminUi\Service\PermissionAwareLocationResolver::resolveLocation()
      */
-    public function testResolveMainLocation()
+    public function testResolveMainLocation(): void
     {
         $contentInfo = new ContentInfo(['mainLocationId' => 42]);
         $location = new Location(['id' => 42]);
 
         // User has access to the main Location
         $this->locationService
-            ->expects($this->once())
             ->method('loadLocation')
-            ->will($this->returnValue($location));
+            ->willReturn($location);
 
         $this->assertSame($location, $this->locationResolver->resolveLocation($contentInfo));
     }
@@ -52,9 +51,9 @@ class PermissionAwareLocationResolverTest extends TestCase
     /**
      * Test for the resolveLocation() method.
      *
-     * @see \EzSystems\EzPlatformAdminUi\Service\PermissionAwareLocationResolver::resolveLocation()
+     * @covers \EzSystems\EzPlatformAdminUi\Service\PermissionAwareLocationResolver::resolveLocation()
      */
-    public function testResolveSecondaryLocation()
+    public function testResolveSecondaryLocation(): void
     {
         $contentInfo = new ContentInfo(['mainLocationId' => 42]);
         $location1 = new Location(['id' => 43]);
@@ -62,14 +61,12 @@ class PermissionAwareLocationResolverTest extends TestCase
 
         // User doesn't have access to main location but to the third Content's location
         $this->locationService
-            ->expects($this->once())
             ->method('loadLocation')
             ->willThrowException($this->createMock(UnauthorizedException::class));
 
         $this->locationService
-            ->expects($this->once())
             ->method('loadLocations')
-            ->will($this->returnValue([$location1, $location2]));
+            ->willReturn([$location1, $location2]);
 
         $this->assertSame($location1, $this->locationResolver->resolveLocation($contentInfo));
     }
