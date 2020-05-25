@@ -129,7 +129,7 @@
     };
 
     listContainers.forEach((container) => {
-        const activeView = container.dataset.location == 43 ? 'grid' : 'table';
+        const activeView = container.dataset.location == eZ.adminUiConfig.locations.media ? 'grid' : 'table';
         const subItemsList = JSON.parse(container.dataset.items).SubitemsList;
         const items = subItemsList.SubitemsRow.map((item) => ({
             content: item.Content,
@@ -150,8 +150,6 @@
 
             return contentTypeDataMap;
         }, {});
-
-        console.log(container.dataset);
 
         ReactDOM.render(
             React.createElement(eZ.modules.SubItems, {
