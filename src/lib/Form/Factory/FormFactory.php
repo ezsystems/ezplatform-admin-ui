@@ -21,6 +21,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUp
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\DraftContentTypesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupsDeleteData;
@@ -87,6 +88,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentMainLocationUp
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationAddType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypesDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\DraftContentTypesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupsDeleteType;
@@ -241,6 +243,18 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentTypesDeleteType::class);
 
         return $this->formFactory->createNamed($name, ContentTypesDeleteType::class, $data);
+    }
+
+    /**
+     * @throws InvalidOptionsException
+     */
+    public function deleteDraftContentTypes(
+        DraftContentTypesDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(DraftContentTypesDeleteType::class);
+
+        return $this->formFactory->createNamed($name, DraftContentTypesDeleteType::class, $data);
     }
 
     /**

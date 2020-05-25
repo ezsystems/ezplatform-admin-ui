@@ -41,6 +41,11 @@
         <target state="new">Delete content types</target>
         <note>key: content_types_delete_form.delete</note>
       </trans-unit>
+      <trans-unit id="c7830205c6d6a0cdc461fb448fa271f31450f6e8" resname="draft_content_types_delete_form.delete">
+        <source>Delete draft content types</source>
+        <target state="new">Delete draft content types</target>
+        <note>key: draft_content_types_delete_form.delete</note>
+      </trans-unit>
       <trans-unit id="56281d5c292a4fe95f9b1af5ae0b1deaebab7342" resname="ezplatform.change_user_password.change">
         <source>Change</source>
         <target state="new">Change</target>

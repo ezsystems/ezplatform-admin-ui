@@ -26,11 +26,10 @@
         routeName: route_name
     })) }}
 
-    {{ render(controller('EzPlatformAdminUiBundle:ContentType:list', {
+    {{ render(controller('EzPlatformAdminUiBundle:ContentType:draftList', {
         contentTypeGroupId: content_type_group.id,
         page: page,
-        routeName: route_name,
-        draftsOnly: true
+        routeName: route_name
     })) }}
 
 {% endblock %}

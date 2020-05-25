@@ -1,0 +1,92 @@
+{% trans_default_domain 'content_type' %}
+
+{% import "@ezdesign/admin/content_type/macros.html.twig" as macros %}
+
+{% form_theme form_draft_content_types_delete '@ezdesign/form_fields.html.twig' %}
+
+{% if pager.nbResults %}
+    <section class="container mt-4 px-5">
+        <div class="ez-table-header">
+            <div class="ez-table-header__headline">
+                {{ 'content_type.view.draft_list.title'|trans({ '%identifier%': content_type_group.identifier })|desc('Draft Content Types in %identifier%') }}
+            </div>
+            <div>
+                {% if can_delete %}
+                    {% set modal_data_target = 'delete-draft-content-types-modal' %}
+                    <button
+                            id="draft-delete-content-types"
+                            type="button"
+                            class="btn btn-danger"
+                            data-toggle="modal"
+                            data-target="#{{ modal_data_target }}"
+                            title="{{ 'content_type.view.draft_list.action.delete'|trans|desc('Delete Draft Content Type') }}">
+                        <svg class="ez-icon ez-icon-trash">
+                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        </svg>
+                    </button>
+                    {% include '@ezdesign/admin/bulk_delete_confirmation_modal.html.twig' with {
+                        'id': modal_data_target,
+                        'message': 'draft_content_type.modal.message'|trans|desc('Do you want to delete draft Content Types?'),
+                        'data_click': '#draft_content_types_delete_delete',
+                    } %}
+                {% endif %}
+            </div>
+        </div>
+
+        {{ form_start(form_draft_content_types_delete, {
+            'action': path('ezplatform.content_type.bulk_draft_delete', {"contentTypeGroupId": group.id} ),
+            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-draft-content-types' }
+        }) }}
+        <table class="ez-table table">
+            <thead>
+            <tr>
+                <th class="ez-table__header-cell"></th>
+                <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
+                <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'content_type.view.list.column.name'|trans|desc('Name') }}</th>
+                <th class="ez-table__header-cell">{{ 'content_type.view.list.column.identifier'|trans|desc('Identifier') }}</th>
+                <th class="ez-table__header-cell">{{ 'content_type.view.list.column.id'|trans|desc('ID') }}</th>
+                <th class="ez-table__header-cell">{{ 'content_type.view.list.column.modification_date'|trans|desc('Modification date') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for content_type in pager.currentPageResults %}
+                <tr>
+                    <td class="ez-table__cell ez-table__cell--has-checkbox">
+                        {% if can_delete %}
+                            {{ form_widget(form_draft_content_types_delete.content_types[content_type.id], {"checked": true}) }}
+                        {% else %}
+                            {% do form_draft_content_types_delete.content_types.setRendered %}
+                        {% endif %}
+                    </td>
+                    <td class="ez-table__cell ez-table__cell--has-icon">
+                        <svg class="ez-icon ez-icon--small">
+                            <use xlink:href="{{ ez_content_type_icon(content_type.identifier) }}"></use>
+                        </svg>
+                    </td>
+                    <td class="ez-table__cell ez-table__cell--name ez-table__cell--after-icon">{{ content_type.name }}</td>
+                    <td class="ez-table__cell">{{ content_type.identifier }}</td>
+                    <td class="ez-table__cell">{{ content_type.id }}</td>
+                    <td class="ez-table__cell">{{ content_type.modificationDate|ez_full_datetime }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ form_end(form_draft_content_types_delete) }}
+
+        {% if pager.haveToPaginate %}
+            <div class="row justify-content-center align-items-center mb-2 ez-pagination__spacing">
+                <span class="ez-pagination__text">
+                    {{ 'pagination.viewing'|trans({
+                        '%viewing%': pager.currentPageResults|length,
+                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                </span>
+            </div>
+            <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
+                {{ pagerfanta(pager, 'ez', {
+                    'routeName': route_name,
+                    'routeParams': {'contentTypeGroupId': group.id}
+                }) }}
+            </div>
+        {% endif %}
+    </section>
+{% endif %}

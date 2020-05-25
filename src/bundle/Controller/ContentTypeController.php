@@ -16,6 +16,7 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\DraftContentTypesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory;
@@ -123,7 +124,6 @@ class ContentTypeController extends Controller
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
      * @param string $routeName
      * @param int $page
-     * @param bool $draftsOnly
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -134,13 +134,10 @@ class ContentTypeController extends Controller
      * @throws \Pagerfanta\Exception\LessThan1CurrentPageException
      * @throws \Pagerfanta\Exception\LessThan1MaxPerPageException
      */
-    public function listAction(ContentTypeGroup $group, string $routeName, int $page, bool $draftsOnly = false): Response
+    public function listAction(ContentTypeGroup $group, string $routeName, int $page): Response
     {
         $deletableTypes = [];
-        $contentTypes = $this->contentTypeService->loadContentTypes(
-            $group,
-            $this->languages,
-            $draftsOnly ? ContentType::STATUS_DRAFT : ContentType::STATUS_DEFINED);
+        $contentTypes = $this->contentTypeService->loadContentTypes($group, $this->languages);
 
         usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
             return strnatcasecmp($contentType1->getName(), $contentType2->getName());
@@ -157,8 +154,7 @@ class ContentTypeController extends Controller
         $types = $pagerfanta->getCurrentPageResults();
 
         $deleteContentTypesForm = $this->formFactory->deleteContentTypes(
-            new ContentTypesDeleteData($this->getContentTypesNumbers($types)),
-            $draftsOnly ? 'draft_content_types_delete' : null
+            new ContentTypesDeleteData($this->getContentTypesNumbers($types))
         );
 
         foreach ($types as $type) {
@@ -175,7 +171,52 @@ class ContentTypeController extends Controller
             'can_create' => $this->isGranted(new Attribute('class', 'create')),
             'can_update' => $this->isGranted(new Attribute('class', 'update')),
             'can_delete' => $this->isGranted(new Attribute('class', 'delete')),
-            'drafts_only' => $draftsOnly,
+        ]);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     * @param string $routeName
+     * @param int $page
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws \Pagerfanta\Exception\OutOfRangeCurrentPageException
+     * @throws \Pagerfanta\Exception\NotIntegerCurrentPageException
+     * @throws \Pagerfanta\Exception\NotIntegerMaxPerPageException
+     * @throws \Pagerfanta\Exception\LessThan1CurrentPageException
+     * @throws \Pagerfanta\Exception\LessThan1MaxPerPageException
+     */
+    public function draftListAction(ContentTypeGroup $group, string $routeName, int $page): Response
+    {
+        $contentTypes = $this->contentTypeService->loadContentTypes($group, $this->languages, ContentType::STATUS_DRAFT);
+
+        usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
+            return strnatcasecmp($contentType1->getName(), $contentType2->getName());
+        });
+
+        $pagerfanta = new Pagerfanta(
+            new ArrayAdapter($contentTypes)
+        );
+
+        $pagerfanta->setMaxPerPage($this->defaultPaginationLimit);
+        $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
+
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup[] $contentTypeGroupList */
+        $types = $pagerfanta->getCurrentPageResults();
+
+        $deleteDraftContentTypesForm = $this->formFactory->deleteDraftContentTypes(
+            new DraftContentTypesDeleteData($this->getContentTypesNumbers($types))
+        );
+
+        return $this->render('@ezdesign/admin/content_type/draft_list.html.twig', [
+            'content_type_group' => $group,
+            'pager' => $pagerfanta,
+            'form_draft_content_types_delete' => $deleteDraftContentTypesForm->createView(),
+            'group' => $group,
+            'route_name' => $routeName,
+            'can_delete' => $this->isGranted(new Attribute('class', 'delete')),
         ]);
     }
 
@@ -548,21 +589,15 @@ class ContentTypeController extends Controller
     public function bulkDeleteAction(Request $request, ContentTypeGroup $group): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('class', 'delete'));
-
-        $isDraftRequest = !empty($request->get('draft_content_types_delete'));
-
         $form = $this->formFactory->deleteContentTypes(
-            new ContentTypesDeleteData(),
-            $isDraftRequest ? 'draft_content_types_delete' : null
+            new ContentTypesDeleteData()
         );
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (ContentTypesDeleteData $data) use ($isDraftRequest) {
+            $result = $this->submitHandler->handle($form, function (ContentTypesDeleteData $data) {
                 foreach ($data->getContentTypes() as $contentTypeId => $selected) {
-                    $contentType = !$isDraftRequest
-                        ? $this->contentTypeService->loadContentType($contentTypeId)
-                        : $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+                    $contentType = $this->contentTypeService->loadContentType($contentTypeId);
 
                     $this->contentTypeService->deleteContentType($contentType);
 
@@ -570,6 +605,47 @@ class ContentTypeController extends Controller
                         $this->translator->trans(
                             /** @Desc("Content Type '%name%' deleted.") */
                             'content_type.delete.success',
+                            ['%name%' => $contentType->getName()],
+                            'content_type'
+                        )
+                    );
+                }
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirect($this->generateUrl('ezplatform.content_type_group.view', ['contentTypeGroupId' => $group->id]));
+    }
+
+    /**
+     * Handles removing draft content types based on submitted form.
+     *
+     * @throws TranslationInvalidArgumentException
+     * @throws InvalidOptionsException
+     * @throws \InvalidArgumentException
+     */
+    public function bulkDraftDeleteAction(Request $request, ContentTypeGroup $group): Response
+    {
+        $this->denyAccessUnlessGranted(new Attribute('class', 'delete'));
+        $form = $this->formFactory->deleteDraftContentTypes(
+            new DraftContentTypesDeleteData()
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (DraftContentTypesDeleteData $data) {
+                foreach ($data->getContentTypes() as $contentTypeId => $selected) {
+                    $contentType = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+
+                    $this->contentTypeService->deleteContentType($contentType);
+
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            /** @Desc("Draft Content Type '%name%' deleted.") */
+                            'draft_content_type.delete.success',
                             ['%name%' => $contentType->getName()],
                             'content_type'
                         )

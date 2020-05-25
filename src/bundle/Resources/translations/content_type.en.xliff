@@ -201,6 +201,16 @@
         <target state="new">Creating a new Content Type</target>
         <note>key: content_type.view.create.title</note>
       </trans-unit>
+      <trans-unit id="55ae9368c9511a78e86cdac2f80973a6c731d217" resname="content_type.view.draft_list.action.delete">
+        <source>Delete Draft Content Type</source>
+        <target state="new">Delete Draft Content Type</target>
+        <note>key: content_type.view.draft_list.action.delete</note>
+      </trans-unit>
+      <trans-unit id="f59460be0003dd238d5262b33413f42d09bd5e55" resname="content_type.view.draft_list.title">
+        <source>Draft Content Types in %identifier%</source>
+        <target state="new">Draft Content Types in %identifier%</target>
+        <note>key: content_type.view.draft_list.title</note>
+      </trans-unit>
       <trans-unit id="621f64c5f4acef41bca216c9d712860e3438f742" resname="content_type.view.edit.content_field_definition.delete">
         <source>Delete Content field definition</source>
         <target state="new">Delete Content field definition</target>
@@ -385,6 +395,11 @@
         <source>%identifier%</source>
         <target state="new">%identifier%</target>
         <note>key: content_type_group.view.view.title</note>
+      </trans-unit>
+      <trans-unit id="efc09333aab98099bb89e4d20011aee033eb55d7" resname="draft_content_type.delete.success">
+        <source>Draft Content Type '%name%' deleted.</source>
+        <target state="new">Draft Content Type '%name%' deleted.</target>
+        <note>key: draft_content_type.delete.success</note>
       </trans-unit>
       <trans-unit id="5ae05a3f43e0d104e61174cc27f76e7764fc9f0c" resname="draft_content_type.modal.message">
         <source>Do you want to delete draft Content Types?</source>

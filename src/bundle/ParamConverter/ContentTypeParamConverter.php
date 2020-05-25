@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
 
 use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -53,11 +52,7 @@ class ContentTypeParamConverter implements ParamConverterInterface
 
         if ($request->get(self::PARAMETER_CONTENT_TYPE_ID)) {
             $id = (int)$request->get(self::PARAMETER_CONTENT_TYPE_ID);
-            try {
-                $contentType = $this->contentTypeService->loadContentType($id, $prioritizedLanguages);
-            } catch (NotFoundException $e) {
-                $contentType = $this->contentTypeService->loadContentTypeDraft($id);
-            }
+            $contentType = $this->contentTypeService->loadContentType($id, $prioritizedLanguages);
         } elseif ($request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER)) {
             $identifier = $request->get(self::PARAMETER_CONTENT_TYPE_IDENTIFIER);
             $contentType = $this->contentTypeService->loadContentTypeByIdentifier($identifier, $prioritizedLanguages);

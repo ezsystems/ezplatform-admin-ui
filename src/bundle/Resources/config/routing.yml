@@ -336,6 +336,14 @@ ezplatform.content_type.list:
     requirements:
         contentTypeGroupId: \d+
 
+ezplatform.content_type.draft_list:
+    path: /contenttypegroup/{contentTypeGroupId}/contenttype/draftlist
+    methods: ['GET']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentType:draftList'
+    requirements:
+        contentTypeGroupId: \d+
+
 ezplatform.content_type.add:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/add
     methods: ['GET', 'POST']
@@ -375,6 +383,14 @@ ezplatform.content_type.bulk_delete:
     methods: ['POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentType:bulkDelete'
+    requirements:
+        contentTypeGroupId: \d+
+
+ezplatform.content_type.bulk_draft_delete:
+    path: /content_type/{contentTypeGroupId}/bulk-draft-delete
+    methods: ['POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentType:bulkDraftDelete'
     requirements:
         contentTypeGroupId: \d+
 
