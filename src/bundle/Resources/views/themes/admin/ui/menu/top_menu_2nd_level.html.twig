@@ -41,11 +41,19 @@
 
 {% block linkElement %}
     {% import 'knp_menu.html.twig' as knp_menu %}
-    {% set link_attributes = item.linkAttributes|merge({
+    {% set params = {
         'href': item.uri,
         'aria-controls': item.name,
         'class': ('nav-link' ~ (matcher.isCurrent(item) ? ' ' ~ options.currentClass|trim)) ~ (item.linkAttributes.class is defined ?  ' ' ~ item.linkAttributes.class|trim)
-    }) %}
+    } %}
+
+    {% if item.extras.title is defined %}
+        {% set params = params|merge({
+            'title': item.extras.title
+        })  %}
+    {% endif %}
+
+    {% set link_attributes = item.linkAttributes|merge(params) %}
     <a{{ knp_menu.attributes(link_attributes) }}>
         {{ block('label') }}
     </a>
