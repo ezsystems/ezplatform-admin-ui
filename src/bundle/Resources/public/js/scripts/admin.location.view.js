@@ -129,7 +129,8 @@
     };
 
     listContainers.forEach((container) => {
-        const activeView = container.dataset.location == eZ.adminUiConfig.locations.media ? 'grid' : 'table';
+        const parentLocationId = parseInt(container.dataset.location, 10);
+        const activeView = parentLocationId === eZ.adminUiConfig.locations.media ? 'grid' : 'table';
         const subItemsList = JSON.parse(container.dataset.items).SubitemsList;
         const items = subItemsList.SubitemsRow.map((item) => ({
             content: item.Content,
@@ -156,7 +157,7 @@
                 handleEditItem,
                 generateLink,
                 activeView,
-                parentLocationId: parseInt(container.dataset.location, 10),
+                parentLocationId: parentLocationId,
                 sortClauses: { [sortField]: sortOrder },
                 restInfo: { token, siteaccess },
                 extraActions: [
