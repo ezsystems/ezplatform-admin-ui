@@ -1,4 +1,4 @@
-(function(global, doc, $, React, ReactDOM, eZ, Routing, Translator) {
+(function (global, doc, $, React, ReactDOM, eZ, Routing, Translator) {
     const SELECTOR_MODAL_BULK_ACTION_FAIL = '#bulk-action-failed-modal';
     const listContainers = doc.querySelectorAll('.ez-sil');
     const mfuContainer = doc.querySelector('#ez-mfu');
@@ -129,6 +129,7 @@
     };
 
     listContainers.forEach((container) => {
+        const activeView = container.dataset.location == 43 ? 'grid' : 'table';
         const subItemsList = JSON.parse(container.dataset.items).SubitemsList;
         const items = subItemsList.SubitemsRow.map((item) => ({
             content: item.Content,
@@ -150,10 +151,13 @@
             return contentTypeDataMap;
         }, {});
 
+        console.log(container.dataset);
+
         ReactDOM.render(
             React.createElement(eZ.modules.SubItems, {
                 handleEditItem,
                 generateLink,
+                activeView,
                 parentLocationId: parseInt(container.dataset.location, 10),
                 sortClauses: { [sortField]: sortOrder },
                 restInfo: { token, siteaccess },
