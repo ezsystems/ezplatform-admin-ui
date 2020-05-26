@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Service;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -31,7 +33,7 @@ final class PermissionAwareLocationResolver implements LocationResolver
     {
         try {
             $location = $this->locationService->loadLocation($contentInfo->mainLocationId);
-        } catch (\Exception $e) {
+        } catch (NotFoundException | UnauthorizedException $e) {
             // try different locations if main location is not accessible for the user
             $locations = $this->locationService->loadLocations($contentInfo);
             if (empty($locations)) {
