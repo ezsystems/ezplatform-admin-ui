@@ -157,7 +157,7 @@
                 handleEditItem,
                 generateLink,
                 activeView,
-                parentLocationId: parentLocationId,
+                parentLocationId,
                 sortClauses: { [sortField]: sortOrder },
                 restInfo: { token, siteaccess },
                 extraActions: [
