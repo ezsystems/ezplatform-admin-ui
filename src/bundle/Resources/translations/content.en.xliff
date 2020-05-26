@@ -61,6 +61,11 @@
         <target state="new">Close</target>
         <note>key: tooltip.close_label</note>
       </trans-unit>
+      <trans-unit id="f46c619c6bc5f16699d112b74f64b236898ff787" resname="tooltip.exit_label">
+        <source>Exit</source>
+        <target state="new">Exit</target>
+        <note>key: tooltip.exit_label</note>
+      </trans-unit>
       <trans-unit id="4492a79e25635e7612f98971e02b4d0e6a408394" resname="user.delete.success">
         <source>User with login '%login%' deleted.</source>
         <target state="new">User with login '%login%' deleted.</target>
