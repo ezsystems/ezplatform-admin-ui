@@ -16,6 +16,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Ensures that download urls generated in ezplatform-admin-ui are in the scope of admin siteaccess.
+ *
+ * @internal for internal use by AdminUI
  */
 final class ContentDownloadRouteReferenceListener implements EventSubscriberInterface
 {
