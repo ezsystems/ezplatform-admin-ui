@@ -31,6 +31,7 @@ use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
+use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
@@ -141,8 +142,10 @@ class ValueFactory
      */
     public function createLanguage(Language $language, VersionInfo $versionInfo): UIValue\Content\Language
     {
+        $target = (new VersionBuilder())->translateToAnyLanguageOf([$language->languageCode])->build();
+
         return new UIValue\Content\Language($language, [
-            'userCanRemove' => $this->permissionResolver->canUser('content', 'remove', $versionInfo),
+            'userCanRemove' => $this->permissionResolver->canUser('content', 'remove', $versionInfo, [$target]),
             'userCanEdit' => $this->permissionResolver->canUser('content', 'edit', $versionInfo),
             'main' => $language->languageCode === $versionInfo->getContentInfo()->mainLanguageCode,
         ]);
