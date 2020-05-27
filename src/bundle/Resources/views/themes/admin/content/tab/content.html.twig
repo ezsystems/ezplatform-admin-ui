@@ -4,7 +4,7 @@
     {% set current_language = app.request.get('languageCode') ?: content.prioritizedFieldLanguageCode %}
 
     {% if languages|length > 1  %}
-    <form class="form-inline ez-content-preview-collapse collapse show">
+    <form class="form-inline">
         <select class="form-control ez-location-language-change">
             {% for language in languages %}
                 <option value="{{ path('_ez_content_translation_view', {

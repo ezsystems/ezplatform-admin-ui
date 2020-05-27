@@ -8,11 +8,13 @@
         <div class="ez-content-preview">
             {% for group in field_definitions_by_group %}
                 {% if group.fieldDefinitions|length > 0 %}
+                    {% set collapse_state_key = 'ez-content-preview-collapse__' ~ group.name|lower|replace({' ': ''}) %}
+
                     <section class="ez-fieldgroup container">
-                        <a data-toggle="collapse" href=".ez-content-fields-{{ group.name|replace({' ': ''}) }}-collapse" class="ez-fieldgroup__toggler">
+                        <a data-toggle="collapse" href=".{{ collapse_state_key }}" class="ez-fieldgroup__toggler">
                             {{ group.name|capitalize }}
                         </a>
-                        <div class="ez-content-fields-{{ group.name|replace({' ': ''}) }}-collapse show">
+                        <div class="{{ collapse_state_key }} ez-content-preview-collapse collapse show" data-collapse-state-key="{{ collapse_state_key }}">
                             {% for field_definition in group.fieldDefinitions %}
                                 {% block field %}
                                     <div class="ez-content-field">
