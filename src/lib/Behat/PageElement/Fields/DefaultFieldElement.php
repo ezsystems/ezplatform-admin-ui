@@ -30,7 +30,6 @@ class DefaultFieldElement extends Element
         switch ($this->fieldNode->getAttribute('type')) {
             case 'text':
             case 'email':
-                $this->fieldNode->setValue('');
                 $this->fieldNode->setValue($value);
                 break;
             case 'checkbox':
